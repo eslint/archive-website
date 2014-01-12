@@ -1,4 +1,4 @@
-eslint.github.io
-================
+# ESLint Web Site
 
-ESLint web site
+This contains the code running on eslint.org.
+
