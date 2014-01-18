@@ -25,7 +25,7 @@ Options:
   -h, --help    Show help.
   -c, --config  Load configuration data from this file.
   --rulesdir    Load additional rules from this directory.
-  -f, --format  Use a specific output format.               [default: "compact"]
+  -f, --format  Use a specific output format.               [default: "stylish"]
   -v, --version  Outputs the version number.
 ```
 
@@ -45,7 +45,7 @@ This example uses the configuration file at `~/my-eslint.json` instead of the de
 
 ### `-f`, `--format`
 
-This options specifies the output format for the console. At the moment, there is only `compact`, but more will be added soon.
+This options specifies the output format for the console. Possible formats are "stylish" (the default), "compact", "checkstyle", "jslint-xml", and "junit".
 
 Example:
 
@@ -74,3 +74,14 @@ This option outputs the current ESLint version onto the console. All other optio
 Example:
 
     eslint -v
+
+## Ignoring files from linting
+
+ESLint supports `.eslintignore` files to exclude files from the linting process when eslint operates on a directory. Files given as individual CLI arguments will be exempt from exclusion. The `.eslintignore` file is a JSON file that contains an array of globs. It can be located in any of the target directory's ancestors; it will affect files in its containing directory as well as all sub-directories. Here's a simple example of a `.eslintignore` file:
+
+```json
+[
+  "node-modules/*",
+  "**/vendor/*.js"
+]
+```
