@@ -1,0 +1,421 @@
+// BOOTSTRAP COMPONENTS //
+
+// Core variables and mixins
+@import "bootstrap_variables.less";
+@import "../../bower_components/bootstrap/less/mixins.less";
+
+// Reset
+@import "../../bower_components/bootstrap/less/normalize.less";
+@import "../../bower_components/bootstrap/less/print.less";
+
+// Core CSS
+@import "../../bower_components/bootstrap/less/scaffolding.less";
+@import "../../bower_components/bootstrap/less/type.less";
+@import "../../bower_components/bootstrap/less/code.less";
+@import "../../bower_components/bootstrap/less/grid.less";
+@import "../../bower_components/bootstrap/less/tables.less";
+@import "../../bower_components/bootstrap/less/forms.less";
+@import "buttons.less";
+
+// Components
+@import "../../bower_components/bootstrap/less/component-animations.less";
+@import "../../bower_components/bootstrap/less/glyphicons.less";
+@import "../../bower_components/bootstrap/less/dropdowns.less";
+// @import "../../bower_components/bootstrap/less/button-groups.less";
+// @import "../../bower_components/bootstrap/less/input-groups.less";
+@import "../../bower_components/bootstrap/less/navs.less";
+@import "../../bower_components/bootstrap/less/navbar.less";
+// @import "../../bower_components/bootstrap/less/breadcrumbs.less";
+// @import "../../bower_components/bootstrap/less/pagination.less";
+// @import "../../bower_components/bootstrap/less/pager.less";
+@import "../../bower_components/bootstrap/less/labels.less";
+@import "../../bower_components/bootstrap/less/badges.less";
+@import "../../bower_components/bootstrap/less/jumbotron.less";
+// @import "../../bower_components/bootstrap/less/thumbnails.less";
+@import "../../bower_components/bootstrap/less/alerts.less";
+// @import "../../bower_components/bootstrap/less/progress-bars.less";
+// @import "../../bower_components/bootstrap/less/media.less";
+// @import "../../bower_components/bootstrap/less/list-group.less";
+// @import "../../bower_components/bootstrap/less/panels.less";
+// @import "../../bower_components/bootstrap/less/wells.less";
+@import "../../bower_components/bootstrap/less/close.less";
+
+// Components w/ JavaScript
+// @import "../../bower_components/bootstrap/less/modals.less";
+// @import "../../bower_components/bootstrap/less/tooltip.less";
+// @import "../../bower_components/bootstrap/less/popovers.less";
+// @import "../../bower_components/bootstrap/less/carousel.less";
+
+// Utility classes
+@import "../../bower_components/bootstrap/less/utilities.less";
+@import "../../bower_components/bootstrap/less/responsive-utilities.less";
+
+
+// BOOTSTRAP THEME //
+
+//
+// Buttons
+// --------------------------------------------------
+
+// Common styles
+.btn-default,
+.btn-primary,
+.btn-success,
+.btn-info,
+.btn-warning,
+.btn-danger {
+  text-shadow: 0 -1px 0 rgba(0,0,0,.2);
+  @shadow: inset 0 1px 0 rgba(255,255,255,.15), 0 1px 1px rgba(0,0,0,.075);
+  .box-shadow(@shadow);
+
+  // Reset the shadow
+  &:active,
+  &.active {
+    .box-shadow(inset 0 3px 5px rgba(0,0,0,.125));
+  }
+}
+
+// Mixin for generating new styles
+.btn-styles(@btn-color: #555) {
+  border-color: darken(@btn-color, 11%);
+
+  &:hover,
+  &:focus  {
+    background-color: darken(@btn-color, 8%);
+    background-position: 0 -15px;
+  }
+
+  &:active,
+  &.active {
+    background-color: darken(@btn-color, 9%);
+    border-color: darken(@btn-color, 9%);
+  }
+}
+
+// Common styles
+.btn {
+  // Remove the gradient for the pressed/active state
+  &:active,
+  &.active {
+    background-image: none;
+  }
+}
+
+// Apply the mixin to the buttons
+.btn-default { .btn-styles(@btn-default-bg); text-shadow: 0 1px 0 #fff; border-color: #ccc; }
+.btn-primary { .btn-styles(@btn-primary-bg); }
+.btn-success { .btn-styles(@btn-success-bg); }
+.btn-warning { .btn-styles(@btn-warning-bg); }
+.btn-danger  { .btn-styles(@btn-danger-bg); }
+.btn-info    { .btn-styles(@btn-info-bg); }
+
+
+
+//
+// Images
+// --------------------------------------------------
+
+.thumbnail,
+.img-thumbnail {
+  .box-shadow(0 1px 2px rgba(0,0,0,.075));
+}
+
+
+
+//
+// Dropdowns
+// --------------------------------------------------
+
+.dropdown-menu > li > a:hover,
+.dropdown-menu > li > a:focus {
+  #gradient > .vertical(@start-color: @dropdown-link-hover-bg; @end-color: darken(@dropdown-link-hover-bg, 5%));
+  background-color: darken(@dropdown-link-hover-bg, 5%);
+}
+.dropdown-menu > .active > a,
+.dropdown-menu > .active > a:hover,
+.dropdown-menu > .active > a:focus {
+  #gradient > .vertical(@start-color: @dropdown-link-active-bg; @end-color: darken(@dropdown-link-active-bg, 5%));
+  background-color: darken(@dropdown-link-active-bg, 5%);
+}
+
+
+
+//
+// Navbar
+// --------------------------------------------------
+
+.navbar-default {
+  border-bottom: none;
+  border-radius: 0;
+}
+
+.navbar-brand {
+  float: left;
+  padding: @navbar-padding-vertical @navbar-padding-horizontal;
+  letter-spacing: -0.05em;
+  color: @brand-primary;
+  font-size: @font-size-h2;
+  line-height: @line-height-computed;
+
+  &:hover,
+  &:focus {
+    text-decoration: none;
+  }
+
+  span { color: @gray; }
+
+  img {
+    float: left;
+    margin-top: -11px;
+    margin-left: -8px;
+    width: 51px;
+    height: 39px;
+  }
+}
+
+// Undo rounded corners in static and fixed navbars
+.navbar-static-top,
+.navbar-fixed-top,
+.navbar-fixed-bottom {
+  border-radius: 0;
+}
+
+
+
+//
+// Alerts
+// --------------------------------------------------
+
+// Common styles
+.alert {
+  // text-shadow: 0 1px 0 rgba(255,255,255,.2);
+  // @shadow: inset 0 1px 0 rgba(255,255,255,.25), 0 1px 2px rgba(0,0,0,.05);
+  // .box-shadow(@shadow);
+}
+
+// Mixin for generating new styles
+.alert-styles(@color) {
+  // #gradient > .vertical(@start-color: @color; @end-color: darken(@color, 7.5%));
+  // border-color: darken(@color, 15%);
+  border-color: darken(spin(@color, -8), 4%)
+}
+
+// Apply the mixin to the alerts
+.alert-success    { .alert-styles(@alert-success-bg); }
+.alert-info       { .alert-styles(@alert-info-bg); }
+.alert-warning    { .alert-styles(@alert-warning-bg); }
+.alert-danger     { .alert-styles(@alert-danger-bg); }
+
+
+//
+// List groups
+// --------------------------------------------------
+
+.list-group {
+  border-radius: @border-radius-small;
+  .box-shadow(0 1px 2px rgba(0,0,0,.075));
+}
+.list-group-item.active,
+.list-group-item.active:hover,
+.list-group-item.active:focus {
+  text-shadow: 0 -1px 0 darken(@list-group-active-bg, 10%);
+  #gradient > .vertical(@start-color: @list-group-active-bg; @end-color: darken(@list-group-active-bg, 7.5%));
+  border-color: darken(@list-group-active-border, 7.5%);
+}
+
+
+
+//
+// Panels
+// --------------------------------------------------
+
+// Common styles
+.panel {
+  .box-shadow(0 1px 2px rgba(0,0,0,.05));
+}
+
+// Mixin for generating new styles
+.panel-heading-styles(@color) {
+  #gradient > .vertical(@start-color: @color; @end-color: darken(@color, 5%));
+}
+
+// Apply the mixin to the panel headings only
+.panel-default > .panel-heading   { .panel-heading-styles(@panel-default-heading-bg); }
+.panel-primary > .panel-heading   { .panel-heading-styles(@panel-primary-heading-bg); }
+.panel-success > .panel-heading   { .panel-heading-styles(@panel-success-heading-bg); }
+.panel-info > .panel-heading      { .panel-heading-styles(@panel-info-heading-bg); }
+.panel-warning > .panel-heading   { .panel-heading-styles(@panel-warning-heading-bg); }
+.panel-danger > .panel-heading    { .panel-heading-styles(@panel-danger-heading-bg); }
+
+
+
+//
+// Wells
+// --------------------------------------------------
+
+.well {
+  #gradient > .vertical(@start-color: darken(@well-bg, 5%); @end-color: @well-bg);
+  border-color: darken(@well-bg, 10%);
+  @shadow: inset 0 1px 3px rgba(0,0,0,.05), 0 1px 0 rgba(255,255,255,.1);
+  .box-shadow(@shadow);
+}
+
+
+
+//
+// Prototyping overrides
+// refactor when prototyping is finished
+// --------------------------------------------------
+
+// Mixin for generating badge styles
+.badge-styles(@color) {
+  background-color: lighten(@color, 8%)
+}
+
+// Apply the mixin to the badges
+.badge-success    { .badge-styles(darken(@brand-success, 7%)); }
+.badge-info       { .badge-styles(@state-info-bg); }
+.badge-warning    { .badge-styles(@state-warning-bg); }
+.badge-danger     { .badge-styles(darken(spin(@brand-danger, -2), 5%)); }
+
+.badge {
+  min-width: 10px;
+  padding: 5px 7px 3px 7px;
+  text-shadow: none;
+}
+
+.badge > a {
+  color: #fff;
+}
+
+.alert {
+  margin-bottom: floor((@line-height-computed) / 2);
+
+  > .badge {
+    float: right;
+    top: 1px;
+  }
+  > .badge + .badge {
+    margin-right: 5px;
+  }
+}
+
+.thedocs code {
+  color: desaturate(darken(@brand-info, 7%), 39%);
+  background-color: desaturate(lighten(@state-info-bg, 2%), 29%);
+}
+
+.code-warning {
+  color: darken(@brand-warning, 2%);
+  background-color: darken(@state-warning-bg, 5%);
+}
+
+.code-info {
+  color: darken(@brand-info, 2%);
+  background-color: darken(@state-info-bg, 5%);
+}
+
+.code-danger {
+  color: darken(@brand-danger, 2%);
+  background-color: darken(@state-danger-bg, 5%);
+}
+
+body.demo {
+  background-color: #f9f9f9;
+}
+
+.navbar-demo {
+  background-color: lighten(@gray-lighter, 5%);
+  border-bottom: 2px solid lighten(@gray-lighter, 2%);
+}
+
+textarea {
+  font-family: @font-family-monospace;
+  font-size: @font-size-small;
+  line-height: inherit;
+  width: 100%;
+  height: 390px;
+  border-radius: @border-radius-small;
+  border: 1px solid lighten(@brand-primary, 42%);
+  padding: 9px;
+  background: #fff;
+}
+
+.section-intro {
+    background: url('../img/background.svg') no-repeat scroll 100% 10% @brand-primary-light;
+    color: #fff;
+    padding: 30px 0 40px;
+
+    h1 {
+      font-size: floor(@font-size-base * 4);
+      letter-spacing: -0.05em;
+      line-height: floor(@font-size-base * 2.8);
+    }
+
+    h2 {
+      font-weight: 300;
+    }
+}
+
+
+.i2 {
+
+  @media (min-width: @screen-sm-min) {
+    min-height: 190px;
+    padding-top: 8px;
+  }
+  @media (min-width: @screen-md-min) {
+    min-height: 220px;
+    padding-top: 18px;
+  }
+  @media (min-width: @screen-lg-min) {
+    min-height: 250px;
+    padding-top: 28px;
+  }
+}
+
+a.alert {
+  &:hover,
+  &:focus {
+    text-decoration: none;
+    color: darken(@brand-warning, 34%);
+    // background-color: lighten(@brand-info, 5%);
+  }
+}
+
+.hr-near-above {
+  margin-bottom: 3px;
+}
+
+.hr-near-below {
+  margin-top: 19px;
+}
+
+.list-docs ul {
+  margin-bottom: 20px;
+  line-height: 28px;
+}
+
+h6 {
+  margin-top: 25px;
+  margin-bottom: 6px;
+  text-transform: uppercase;
+}
+
+.navbar-toggle {
+  position: relative;
+  float: right;
+  margin-right: @navbar-padding-horizontal;
+  padding: 9px 10px;
+  .navbar-vertical-align(34px);
+  border: 1px solid transparent;
+  border-radius: @border-radius-small;
+
+  // Bars
+  .icon-bar {
+    display: block;
+    width: 22px;
+    height: 2px;
+    border-radius: 1px;
+  }
+}

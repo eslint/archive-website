@@ -1,6 +1,6 @@
 ---
 title: ESLint
-layout: default
+layout: doc
 ---
 # Disallow Use of __proto__
 

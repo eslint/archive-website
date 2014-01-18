@@ -1,6 +1,6 @@
 ---
 title: ESLint
-layout: default
+layout: doc
 ---
 # Disallow new For Side Effects
 

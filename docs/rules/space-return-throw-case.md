@@ -1,6 +1,6 @@
 ---
 title: ESLint
-layout: default
+layout: doc
 ---
 # Require spaces following `return`, `throw`, and `case`
 
