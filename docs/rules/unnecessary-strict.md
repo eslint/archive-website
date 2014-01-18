@@ -8,6 +8,10 @@ layout: doc
 ---
 ---
 title: ESLint
+layout: doc
+---
+---
+title: ESLint
 layout: default
 ---
 ---

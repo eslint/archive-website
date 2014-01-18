@@ -107,7 +107,7 @@ These rules are purely matters of style and are quite subjective.
 * [sort-vars](sort-vars.html) - sort variables within the same declaration block
 * [space-infix-ops](space-infix-ops.html) - require spaces around operators
 * [space-return-throw-case](space-return-throw-case.html) - require a space after `return`, `throw`, and `case`
-* [space-unary-word-ops](space-unary-word.ops) - require a space around word operators such as `typeof`
+* [space-unary-word-ops](space-unary-word-ops.html) - require a space around word operators such as `typeof`
 * [max-nested-callbacks](max-nested-callbacks.html) - specify the maximum depth callbacks can be nested
 * [one-var](one-var.html) - allow just one var statement per function
 * [wrap-regex](wrap-regex.html) - require regex literals to be wrapped in parentheses
