@@ -1,5 +1,6 @@
 name: "ESLint"
 description: "A tool for identifying and reporting on patterns in JavaScript."
-
-pygments: true
+url: http://eslint.org
 markdown: redcarpet
+permalink: /blog/:year/:month/:title
+paginate: 25
