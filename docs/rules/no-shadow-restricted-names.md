@@ -21,7 +21,7 @@ function NaN(){}
 ```
 
 ```js
-!funtion(Infinity){};
+!function(Infinity){};
 ```
 
 ```js
