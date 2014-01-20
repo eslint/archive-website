@@ -25,7 +25,7 @@ module.exports = {
 };
 ```
 
-The capability to use JavaScript files as configuration files is being removed in version 0.2.1. All configuration files must be in JSON format from now on.
+The capability to use JavaScript files as configuration files is being removed in version 0.3.0. All configuration files must be in JSON format from now on.
 
 ## Why the change?
 
