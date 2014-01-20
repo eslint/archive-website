@@ -2,6 +2,7 @@
 title: ESLint
 layout: doc
 ---
+<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 # Disallow Parens Around Functions
 
 Although it's possible to wrap functions in parentheses, this can be confusing when the code also contains immediately-invoked function expressions (IIFEs) since parentheses are often used to make this distinction. For example:

@@ -2,6 +2,7 @@
 title: ESLint
 layout: doc
 ---
+<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 # Disallow Shadowing of Variables Inside of catch
 
 In IE 8 and earlier, the catch clause parameter can overwrite the value of a variable in the outer scope, if that variable has the same name as the catch clause parameter.

@@ -2,6 +2,7 @@
 title: ESLint
 layout: doc
 ---
+<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 # Enforce Quote Style
 
 Enforces coding style that string literals are delimited with single or double quotes.

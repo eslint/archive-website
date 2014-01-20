@@ -2,6 +2,7 @@
 title: ESLint
 layout: doc
 ---
+<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 # Disallow Dangling Commas
 
 Trailing commas in object literals are valid according to the ECMAScript 5 (and ECMAScript 3!) spec, however IE8 (when not in IE8 document mode) and below will throw an error when it encounters trailing commas in JavaScript.

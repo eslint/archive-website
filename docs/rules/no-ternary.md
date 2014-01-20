@@ -2,6 +2,7 @@
 title: ESLint
 layout: doc
 ---
+<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 # Disallow Ternary Operators
 
 The ternary operator is used to conditionally assign a value to a variable. Some believe that the use of ternary operators leads to unclear code. 

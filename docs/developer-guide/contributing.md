@@ -2,6 +2,7 @@
 title: ESLint
 layout: doc
 ---
+<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 # Contributing
 
 One of the great things about open source projects is that anyone can contribute code. To help you in that process, there are several things that you should keep in mind.

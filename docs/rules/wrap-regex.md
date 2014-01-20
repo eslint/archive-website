@@ -2,6 +2,7 @@
 title: ESLint
 layout: doc
 ---
+<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 # Require Regex Literals to be Wrapped
 
 When a regular expression is used in certain situation, it can end up looking like a divison operator. For example:

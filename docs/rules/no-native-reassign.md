@@ -2,6 +2,7 @@
 title: ESLint
 layout: doc
 ---
+<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 # Disallow Reassignment of Native Objects
 
 Reports an error when they encounter an attempt to assign a value to built-in native object.

@@ -2,6 +2,7 @@
 title: ESLint
 layout: doc
 ---
+<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 ## [About](about/)
 
 Learn more about ESLint and why it came about and the general philosophy behind it.

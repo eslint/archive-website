@@ -2,6 +2,7 @@
 title: ESLint
 layout: doc
 ---
+<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 # Configuration Files
 
 ESLint is fully configurable using configuration files. The configuration files are in JSON format and are used to specify exactly how you want ESLint to behave.

@@ -2,6 +2,7 @@
 title: ESLint
 layout: doc
 ---
+<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 # About
 
 ESLint is an open source project originally created by Nicholas C. Zakas in June 2013. The goal of ESLint is to provide a pluggable linting utility for JavaScript. While [JSHint](http://jshint.com/) and [JSLint](http://jslint.com/) dominate JavaScript linting, neither one provides an API for plugging in your own rules. This means that if you need a new rule, you need to write it and get it accepted into the released product. That's lousy if you need to quickly add something to your build system or even if you need company-specific rules.

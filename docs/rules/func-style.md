@@ -2,6 +2,7 @@
 title: ESLint
 layout: doc
 ---
+<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 # Enforce Function Style
 
 There are two ways of defining functions in JavaScript: function declarations and function expressions. Declarations have the `function` keyword first, followed by a name, followed by its arguments and the function body, such as:

@@ -2,6 +2,7 @@
 title: ESLint
 layout: doc
 ---
+<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 # Disallow Assignment of the Exception Parameter
 
 When an error is thrown an caught using a `catch` block, it's possible to accidentally (or purposely) overwrite the reference to the error. Such as:

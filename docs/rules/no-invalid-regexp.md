@@ -2,6 +2,7 @@
 title: ESLint
 layout: doc
 ---
+<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 # Disallow Invalid Regular Expressions
 
 This rule validates string arguments passed to the `RegExp` constructor.

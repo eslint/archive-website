@@ -2,6 +2,7 @@
 title: ESLint
 layout: doc
 ---
+<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 # Disallow Assignment in Conditional Expressions
 
 It is uncommon to use an assignment operator inside of a conditional statement, such as:

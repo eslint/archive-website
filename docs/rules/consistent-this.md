@@ -2,6 +2,7 @@
 title: ESLint
 layout: doc
 ---
+<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 # Require Consistent This
 
 It is often necessary to capture the current execution context in order to make it available subsequently. A prominent example of this are jQuery callbacks:

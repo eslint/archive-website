@@ -2,6 +2,7 @@
 title: ESLint
 layout: doc
 ---
+<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 # Require IFFEs to be Wrapped
 
 Require immediate function invocation to be wrapped in parentheses.

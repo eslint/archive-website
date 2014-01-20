@@ -2,6 +2,7 @@
 title: ESLint
 layout: doc
 ---
+<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 # Development Environment
 
 ESLint has a very lightweight development environment that makes updating code fast and easy. If you've checked out the code already, then the next step is to make sure you have all of the required utilities. Node.js and npm are the two things you'll need.

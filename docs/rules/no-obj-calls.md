@@ -2,6 +2,7 @@
 title: ESLint
 layout: doc
 ---
+<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 # Disallow Global Object Function Calls
 
 This rule prevents the use of object properties of the global object (`Math` and `JSON`) as functions:

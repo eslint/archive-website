@@ -2,6 +2,7 @@
 title: ESLint
 layout: doc
 ---
+<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 # Limit Maximum Number of Statements
 
 The `max-statements` rule allows you to specify the maximum number statements allow in a function.

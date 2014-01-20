@@ -2,6 +2,7 @@
 title: ESLint
 layout: doc
 ---
+<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 # Require One True Brace Style
 
 One true brace style is a common coding style in JavaScript, in which the opening curly brace of a block is placed on the same line as its corresponding statement or declaration.

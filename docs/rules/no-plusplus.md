@@ -2,6 +2,7 @@
 title: ESLint
 layout: doc
 ---
+<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 # Disallow ++ and --
 
 The `no-plusplus` rule flags the use of unary operators, `++` and `--`.
