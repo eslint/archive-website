@@ -32,6 +32,8 @@ var foo = function() {
     // code
 };
 
+```
+
 ## When Not To Use It
 
 If you intentionally use extra semicolons then you can disable this rule.

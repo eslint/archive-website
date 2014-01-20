@@ -24,7 +24,7 @@ The following rules point out areas where you might have made mistakes.
 * [no-extra-semi](no-extra-semi.html) - disallow unnecessary semicolons
 * [no-func-assign](no-func-assign.html) - disallow overwriting functions written as function declarations
 * [no-invalid-regexp](no-invalid-regexp.html) - disallow invalid regular expression strings in the `RegExp` constructor
-* [no-negated-in-lhs](no-negated-in-lhs.html) - disallow negation in the lefthand side of a comparison
+* [no-negated-in-lhs](no-negated-in-lhs.html) - disallow negation of the left operand of an `in` expression
 * [no-obj-calls](no-obj-calls.html) - disallow the use of object properties of the global object (`Math` and `JSON`) as functions
 * [no-unreachable](no-unreachable.html) - disallow unreachable statements after a return, throw, continue, or break statement
 * [use-isnan](use-isnan.html) - disallow comparisons with the value `NaN`
@@ -33,7 +33,7 @@ The following rules point out areas where you might have made mistakes.
 
 These are rules designed to prevent you from making mistakes. They either prescribe a better way of doing something or help you avoid footguns.
 
-* [block-scoped-var](block-scope-var.html) - treat `var` statements as if they were block scoped
+* [block-scoped-var](block-scoped-var.html) - treat `var` statements as if they were block scoped
 * [complexity](complexity.html) - specify the maximum cyclomatic complexity allowed in a program
 * [curly](curly.html) - require curly brace for all control statements
 * [dot-notation](dot-notation.html) - encourages use of dot notation whenever possible
@@ -41,28 +41,33 @@ These are rules designed to prevent you from making mistakes. They either prescr
 * [guard-for-in](guard-for-in.html) - make sure `for-in` loops have an `if` statement (off by default)
 * [no-alert](no-alert.html) - disallow the use of `alert`, `confirm`, and `prompt`
 * [no-caller](no-caller.html) - disallow use of `arguments.caller` or `arguments.callee`
+* [no-div-regex](no-div-regex.html) - disallow division operators explicitly at beginning of regular expression
+* [no-else-return](no-else-return.html) - disallow `else` after a `return` in an `if`.
+* [no-empty-label](no-empty-label.html) - disallow use of labels for anything other then loops and switches
+* [no-eq-null](no-eq-null.html) - disallow comparisons to null without a type-checking operator
 * [no-eval](no-eval.html) - disallow use of `eval()`
 * [no-extend-native](no-extend-native.html) - disallow adding to native types
-* [no-floating-decimal](no-floating-decimal) - disallow the use of leading or trailing decimal points in numeric literals
+* [no-fallthrough](no-fallthrough.html) - disallow fallthrough of `case` statements
+* [no-floating-decimal] - disallow the use of leading or trailing decimal points in numeric literals
+* [no-implied-eval] - disallow use of `eval()`-like methods
+* [no-iterator](no-iterator.html) - disallow usage of `__iterator__` property
+* [no-loop-func](no-loop-func.html) - disallow creation of functions within loops
+* [no-multi-str](no-multi-str.html) - disallow use of multiline strings
 * [no-native-reassign](no-native-reassign.html) - disallow reassignments of native objects
 * [no-new](no-new.html) - disallow use of new operator when not part of the assignment or comparison
 * [no-new-func](no-new-func.html) - disallow use of new operator for `Function` object
-* [no-octal](no-octal.html) - disallow use of octal literals
+* [no-new-wrappers] - disallows creating new instances of `String`,`Number`, and `Boolean`
+* [no-octal] - disallow use of octal literals
 * [no-octal-escape](no-octal-escape) - disallow use of octal escape sequences in string literals, such as `var foo = "Copyright \251";`
-* [no-with](no-with.html) - disallow use of the `with` statement
-* [no-return-assign](no-return-assign.html) - disallow use of assignment in return statement
-* [no-self-compare](no-self-compare.html) - disallow comparisons where both sides are exactly the same
-* [no-eq-null](no-eq-null.html) - disallow comparisons to null without a type-checking operator
-* [no-multi-str](no-multi-str.html) - disallow use of multiline strings
-* [no-loop-func](no-loop-func.html) - disallow creation of functions within loops
-* [no-empty-label](no-empty-label.html) - disallow use of labels for anything other then loops and switches
-* [no-unused-expressions](no-unused-expressions.html) - disallow usage of expressions in statement position
-* [no-script-url](no-script-url.html) - disallow use of javascript: urls.
 * [no-proto](no-proto.html) - disallow usage of `__proto__` property
-* [no-iterator](no-iterator.html) - disallow usage of `__iterator__` property
-* [no-else-return](no-else-return.html) - disallow `else` after a `return` in an `if`.
 * [no-redeclare](no-redeclare.html) - disallow declaring the same variable more then once
-* [no-div-regex](no-div-regex.html) - disallow division operators explicitly at beginning of regular expression
+* [no-return-assign] - disallow use of assignment in `return` statement
+* [no-script-url](no-script-url.html) - disallow use of javascript: urls.
+* [no-self-compare](no-self-compare.html) - disallow comparisons where both sides are exactly the same
+* [no-unused-expressions](no-unused-expressions.html) - disallow usage of expressions in statement position
+* [no-with](no-with.html) - disallow use of the `with` statement
+* [radix] - require use of the second argument for `parseInt()`
+* [regex-spaces] - disallow multiple spaces in a regular expression
 * [wrap-iife](wrap-iife.html) - require immediate function invocation to be wrapped in parentheses
 
 ## Strict Mode
@@ -83,9 +88,15 @@ These rules have to do with variable declarations.
 * [no-shadow](no-shadow.html) - disallow declaration of variables already declared in the outer scope
 * [no-shadow-restricted-names](no-shadow-restricted-names.html) - disallow shadowing of names such as `arguments`
 * [no-undef](no-undef.html) - disallow use of undeclared variables unless mentioned in a `/*global */` block
-* [no-undef-init](no-undef-init.html) - disallow use of undefined when initializing variables
+* [no-undef-init] - disallow use of undefined when initializing variables
 * [no-unused-vars](no-unused-vars.html) - disallow declaration of variables that are not used in the code
 * [no-use-before-define](no-use-before-define.html) - disallow use of variables before they are defined
+
+## Node.js
+
+These rules are specific to JavaScript running on Node.js.
+
+* [no-sync] - disallow use of synchronous methods
 
 ## Stylistic Issues
 
@@ -99,12 +110,15 @@ These rules are purely matters of style and are quite subjective.
 * [new-parens](new-parens.html) - disallow the omission of parentheses when invoking a contructor with no arguments
 * [no-mixed-requires](no-mixed-requires.html) - disallow mixing regular variable and require declarations
 * [no-nested-ternary](no-nested-ternary.html) - disallow nested ternary expressions
+* [no-new-array] - disallow use of the `Array` constructor
+* [no-new-object] - disallow use of the `Object` constructor
 * [no-spaced-func](no-spaced-func.html) - disallow space between function identifier and application
 * [no-ternary](no-ternary.html) - disallow the use of ternary operators
+* [no-underscore-dangle] - disallow dangling underscores in identifiers
 * [no-wrap-func](no-wrap-func.html) - disallow wrapping of none IIFE statements in parents
 * [quotes](quotes.html) - specify whether double or single quotes should be used
 * [quote-props](quote-props.html) - require quotes around object literal property names
-* [semi](semi.html) - require use of semicolons instead of relying on ASI
+* [semi](semi.html)- require use of semicolons instead of relying on ASI
 * [sort-vars](sort-vars.html) - sort variables within the same declaration block
 * [space-infix-ops](space-infix-ops.html) - require spaces around operators
 * [space-return-throw-case](space-return-throw-case.html) - require a space after `return`, `throw`, and `case`

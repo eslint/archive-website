@@ -5,7 +5,7 @@ layout: doc
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 # Disallow new For Side Effects
 
-Calling contructors with the `new` keyword, without assigning the resulting object to a variable does is equivalent to simply calling the constructor without the `new` keyword. Thus, the constructor can be avoided and the the function can be called directly.
+Calling contructors with the `new` keyword, without assigning the resulting object to a variable does is equivalent to simply calling the constructor without the `new` keyword. Thus, the constructor can be avoided and the function can be called directly.
 
 ```js
 new Person();
