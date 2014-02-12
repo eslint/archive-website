@@ -15,14 +15,18 @@ The following rules point out areas where you might have made mistakes.
 * [no-empty](no-empty.md) - disallow empty statements
 * [no-empty-class](no-empty-class.md) - disallow the use of empty character classes in regular expressions
 * [no-ex-assign](no-ex-assign.md) - disallow assigning to the exception in a `catch` block
+* [no-extra-boolean-cast](no-extra-boolean-cast.md) - disallow double-negation boolean casts in a boolean context
 * [no-extra-parens](no-extra-parens.md) - disallow unnecessary parentheses
 * [no-extra-semi](no-extra-semi.md) - disallow unnecessary semicolons
 * [no-func-assign](no-func-assign.md) - disallow overwriting functions written as function declarations
 * [no-invalid-regexp](no-invalid-regexp.md) - disallow invalid regular expression strings in the `RegExp` constructor
 * [no-negated-in-lhs](no-negated-in-lhs.md) - disallow negation of the left operand of an `in` expression
 * [no-obj-calls](no-obj-calls.md) - disallow the use of object properties of the global object (`Math` and `JSON`) as functions
+* [no-regex-spaces](no-regex-spaces.md) - disallow multiple spaces in a regular expression literal
+* [no-spare-arrays](no-sparse-arrays.md) - disallow sparse arrays
 * [no-unreachable](no-unreachable.md) - disallow unreachable statements after a return, throw, continue, or break statement
 * [use-isnan](use-isnan.md) - disallow comparisons with the value `NaN`
+* [valid-jsdoc](valid-jsdoc.md) - Ensure JSDoc comments are valid (off by default)
 
 ## Best Practices
 
@@ -30,7 +34,8 @@ These are rules designed to prevent you from making mistakes. They either prescr
 
 * [block-scoped-var](block-scoped-var.md) - treat `var` statements as if they were block scoped
 * [complexity](complexity.md) - specify the maximum cyclomatic complexity allowed in a program
-* [curly](curly.md) - require curly brace for all control statements
+* [consistent-return](consistent-return.md) - require `return` statements to either always or never specify values
+* [curly](curly.md) - specify curly brace conventions for all control statements
 * [dot-notation](dot-notation.md) - encourages use of dot notation whenever possible
 * [eqeqeq](eqeqeq.md) - require the use of `===` and `!==`
 * [guard-for-in](guard-for-in.md) - make sure `for-in` loops have an `if` statement (off by default)
@@ -43,26 +48,28 @@ These are rules designed to prevent you from making mistakes. They either prescr
 * [no-eval](no-eval.md) - disallow use of `eval()`
 * [no-extend-native](no-extend-native.md) - disallow adding to native types
 * [no-fallthrough](no-fallthrough.md) - disallow fallthrough of `case` statements
-* [no-floating-decimal] - disallow the use of leading or trailing decimal points in numeric literals
-* [no-implied-eval] - disallow use of `eval()`-like methods
+* [no-floating-decimal](no-floating-decimal.md) - disallow the use of leading or trailing decimal points in numeric literals
+* [no-implied-eval](no-implied-eval.md) - disallow use of `eval()`-like methods
+* [no-labels](no-labels.md) - disallow use of labeled statements
 * [no-iterator](no-iterator.md) - disallow usage of `__iterator__` property
+* [no-lone-blocks](no-lone-blocks.md) - disallow unnecessary nested blocks
 * [no-loop-func](no-loop-func.md) - disallow creation of functions within loops
 * [no-multi-str](no-multi-str.md) - disallow use of multiline strings
 * [no-native-reassign](no-native-reassign.md) - disallow reassignments of native objects
 * [no-new](no-new.md) - disallow use of new operator when not part of the assignment or comparison
 * [no-new-func](no-new-func.md) - disallow use of new operator for `Function` object
-* [no-new-wrappers] - disallows creating new instances of `String`,`Number`, and `Boolean`
-* [no-octal] - disallow use of octal literals
-* [no-octal-escape](no-octal-escape) - disallow use of octal escape sequences in string literals, such as `var foo = "Copyright \251";`
+* [no-new-wrappers](no-new-wrappers.md) - disallows creating new instances of `String`,`Number`, and `Boolean`
+* [no-octal](no-octal.md) - disallow use of octal literals
+* [no-octal-escape](no-octal-escape.md) - disallow use of octal escape sequences in string literals, such as `var foo = "Copyright \251";`
 * [no-proto](no-proto.md) - disallow usage of `__proto__` property
 * [no-redeclare](no-redeclare.md) - disallow declaring the same variable more then once
-* [no-return-assign] - disallow use of assignment in `return` statement
+* [no-return-assign](no-return-assign.md) - disallow use of assignment in `return` statement
 * [no-script-url](no-script-url.md) - disallow use of javascript: urls.
 * [no-self-compare](no-self-compare.md) - disallow comparisons where both sides are exactly the same
 * [no-unused-expressions](no-unused-expressions.md) - disallow usage of expressions in statement position
 * [no-with](no-with.md) - disallow use of the `with` statement
-* [radix] - require use of the second argument for `parseInt()`
-* [regex-spaces] - disallow multiple spaces in a regular expression
+* [no-yoda](no-yoda.md) - disallow Yoda conditions
+* [radix](radix.md) - require use of the second argument for `parseInt()`
 * [wrap-iife](wrap-iife.md) - require immediate function invocation to be wrapped in parentheses
 
 ## Strict Mode
@@ -83,7 +90,7 @@ These rules have to do with variable declarations.
 * [no-shadow](no-shadow.md) - disallow declaration of variables already declared in the outer scope
 * [no-shadow-restricted-names](no-shadow-restricted-names.md) - disallow shadowing of names such as `arguments`
 * [no-undef](no-undef.md) - disallow use of undeclared variables unless mentioned in a `/*global */` block
-* [no-undef-init] - disallow use of undefined when initializing variables
+* [no-undef-init](no-undef-init.md) - disallow use of undefined when initializing variables
 * [no-unused-vars](no-unused-vars.md) - disallow declaration of variables that are not used in the code
 * [no-use-before-define](no-use-before-define.md) - disallow use of variables before they are defined
 
@@ -91,7 +98,10 @@ These rules have to do with variable declarations.
 
 These rules are specific to JavaScript running on Node.js.
 
-* [no-sync] - disallow use of synchronous methods
+* [no-mixed-requires](no-mixed-requires.md) - disallow mixing regular variable and require declarations
+* [no-path-concat](no-path-concat.md) - disallow string concatenation with `__dirname` and `__filename`
+* [no-process-exit](no-process-exit.md) - disallow `process.exit()`
+* [no-sync](no-sync.md) - disallow use of synchronous methods (off by default)
 
 ## Stylistic Issues
 
@@ -99,17 +109,17 @@ These rules are purely matters of style and are quite subjective.
 
 * [brace-style](brace-style.md) - enforce one true brace style
 * [camelcase](camelcase.md) - require camel case names
-* [consistent-this](consistent-this.md) - enforces consistent naming when capturing the current execution context (off by default).
+* [consistent-this](consistent-this.md) - enforces consistent naming when capturing the current execution context (off by default)
+* [func-names](func-names.md) - require function expressions to have a name
 * [func-style](func-style.md) - enforces use of function declarations or expressions
 * [new-cap](new-cap.md) - require a capital letter for constructors
 * [new-parens](new-parens.md) - disallow the omission of parentheses when invoking a contructor with no arguments
-* [no-mixed-requires](no-mixed-requires.md) - disallow mixing regular variable and require declarations
 * [no-nested-ternary](no-nested-ternary.md) - disallow nested ternary expressions
-* [no-new-array] - disallow use of the `Array` constructor
-* [no-new-object] - disallow use of the `Object` constructor
+* [no-array-constructor](no-array-constructor.md) - disallow use of the `Array` constructor
+* [no-new-object](no-new-object.md) - disallow use of the `Object` constructor
 * [no-spaced-func](no-spaced-func.md) - disallow space between function identifier and application
 * [no-ternary](no-ternary.md) - disallow the use of ternary operators
-* [no-underscore-dangle] - disallow dangling underscores in identifiers
+* [no-underscore-dangle](no-underscore-dangle.md) - disallow dangling underscores in identifiers
 * [no-wrap-func](no-wrap-func.md) - disallow wrapping of none IIFE statements in parents
 * [quotes](quotes.md) - specify whether double or single quotes should be used
 * [quote-props](quote-props.md) - require quotes around object literal property names

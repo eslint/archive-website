@@ -46,6 +46,23 @@ module.exports = function(context) {
 
 Each method that matches a node in the AST will be passed the corresponding node. You can then evaluate the node and it's surrounding tree to determine whether or not an issue needs reporting.
 
+By default, the method matching a node name is called during the traversal when the node is first encountered, on the way down the AST. You can also specify to visit the node on the other side of the traversal, as it comes back up the tree, but adding `:exit` to the end of the node type, such as:
+
+```js
+module.exports = function(context) {
+
+    return {
+
+        "Identifier:exit": function(node) {
+            // do something with node
+        }
+    };
+
+};
+```
+
+In this code, `"Identifier:exit"` is called on the way up the AST. This capability allows you to keep track as the traversal enters and exits specific parts of the AST.
+
 The main method you'll use is `context.report()`, which publishes a warning or error (depending on the configuration being used). This method accepts three arguments: the AST node that caused the report, a message to display, and an optional object literal which is used to interpolate. For example:
 
     context.report(node, "This is unexpected!");
@@ -78,13 +95,6 @@ var nodeSourceWithFollowing = context.getSource(node, 0, 2);
 In this way, you can look for patterns in the JavaScript text itself when the AST isn't providing the appropriate data (such as location of commas, semicolons, parentheses, etc.).
 
 ### Accessing comments
-
-To get a list of all comments simply call `context.getAllComments()`:
-
-```js
-// get all comments for the program
-var allComments = context.getAllComments();
-```
 
 If you need to access comments for a specific node you can use `context.getComments(node)`:
 
@@ -120,13 +130,13 @@ The basic pattern for a rule unit test file is:
 // Requirements
 //------------------------------------------------------------------------------
 
-var eslintTester = require("../../../lib/tests/eslintTester");
+var eslintTester = require("eslint-tester");
 
 //------------------------------------------------------------------------------
 // Tests
 //------------------------------------------------------------------------------
 
-eslintTester.addRuleTest("block-scoped-var", {
+eslintTester.addRuleTest("lib/rules/block-scoped-var", {
 
     // Examples of code that should not trigger the rule
     valid: [
