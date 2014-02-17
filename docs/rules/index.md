@@ -28,7 +28,7 @@ The following rules point out areas where you might have made mistakes.
 * [no-negated-in-lhs](no-negated-in-lhs.html) - disallow negation of the left operand of an `in` expression
 * [no-obj-calls](no-obj-calls.html) - disallow the use of object properties of the global object (`Math` and `JSON`) as functions
 * [no-regex-spaces](no-regex-spaces.html) - disallow multiple spaces in a regular expression literal
-* [no-spare-arrays](no-sparse-arrays.html) - disallow sparse arrays
+* [no-sparse-arrays](no-sparse-arrays.html) - disallow sparse arrays
 * [no-unreachable](no-unreachable.html) - disallow unreachable statements after a return, throw, continue, or break statement
 * [use-isnan](use-isnan.html) - disallow comparisons with the value `NaN`
 * [valid-jsdoc](valid-jsdoc.html) - Ensure JSDoc comments are valid (off by default)
