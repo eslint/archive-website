@@ -82,7 +82,7 @@ These are rules designed to prevent you from making mistakes. They either prescr
 These rules relate to using strict mode.
 
 * [no-global-strict](no-global-strict.html) - disallow the `"use strict"` pragma in the global scope
-* [no-extract-strict](no-extra-strict.html) - disallow unnecessary use of `"use strict";` when already in strict mode
+* [no-extra-strict](no-extra-strict.html) - disallow unnecessary use of `"use strict";` when already in strict mode
 * [strict](strict.html) - require that all functions are run in strict mode
 
 ## Variables
