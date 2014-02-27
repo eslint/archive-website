@@ -13,6 +13,7 @@ The following rules point out areas where you might have made mistakes.
 
 * [no-cond-assign](no-cond-assign.html) - disallow assignment in conditional expressions
 * [no-console](no-console.html) - disallow use of `console`
+* [no-constant-condition](no-constant-condition.html) - disallow use of constant expressions in conditions
 * [no-comma-dangle](no-comma-dangle.html) - disallow trailing commas in object literals
 * [no-control-regex](no-control-regex.html) - disallow control characters in regular expressions
 * [no-debugger](no-debugger.html) - disallow use of `debugger`
@@ -28,7 +29,7 @@ The following rules point out areas where you might have made mistakes.
 * [no-negated-in-lhs](no-negated-in-lhs.html) - disallow negation of the left operand of an `in` expression
 * [no-obj-calls](no-obj-calls.html) - disallow the use of object properties of the global object (`Math` and `JSON`) as functions
 * [no-regex-spaces](no-regex-spaces.html) - disallow multiple spaces in a regular expression literal
-* [no-spare-arrays](no-sparse-arrays.html) - disallow sparse arrays
+* [no-sparse-arrays](no-sparse-arrays.html) - disallow sparse arrays
 * [no-unreachable](no-unreachable.html) - disallow unreachable statements after a return, throw, continue, or break statement
 * [use-isnan](use-isnan.html) - disallow comparisons with the value `NaN`
 * [valid-jsdoc](valid-jsdoc.html) - Ensure JSDoc comments are valid (off by default)
@@ -82,7 +83,7 @@ These are rules designed to prevent you from making mistakes. They either prescr
 These rules relate to using strict mode.
 
 * [no-global-strict](no-global-strict.html) - disallow the `"use strict"` pragma in the global scope
-* [no-extract-strict](no-extra-strict.html) - disallow unnecessary use of `"use strict";` when already in strict mode
+* [no-extra-strict](no-extra-strict.html) - disallow unnecessary use of `"use strict";` when already in strict mode
 * [strict](strict.html) - require that all functions are run in strict mode
 
 ## Variables
@@ -128,8 +129,9 @@ These rules are purely matters of style and are quite subjective.
 * [no-wrap-func](no-wrap-func.html) - disallow wrapping of none IIFE statements in parents
 * [quotes](quotes.html) - specify whether double or single quotes should be used
 * [quote-props](quote-props.html) - require quotes around object literal property names
-* [semi](semi.html)- require use of semicolons instead of relying on ASI
+* [semi](semi.html)- require or disallow use of semicolons instead of ASI
 * [sort-vars](sort-vars.html) - sort variables within the same declaration block
+* [space-in-brackets](space-in-brackets.html) - require or disallow spaces between brackets
 * [space-infix-ops](space-infix-ops.html) - require spaces around operators
 * [space-return-throw-case](space-return-throw-case.html) - require a space after `return`, `throw`, and `case`
 * [space-unary-word-ops](space-unary-word-ops.html) - require a space around word operators such as `typeof`

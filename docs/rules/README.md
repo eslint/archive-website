@@ -8,6 +8,7 @@ The following rules point out areas where you might have made mistakes.
 
 * [no-cond-assign](no-cond-assign.md) - disallow assignment in conditional expressions
 * [no-console](no-console.md) - disallow use of `console`
+* [no-constant-condition](no-constant-condition.md) - disallow use of constant expressions in conditions
 * [no-comma-dangle](no-comma-dangle.md) - disallow trailing commas in object literals
 * [no-control-regex](no-control-regex.md) - disallow control characters in regular expressions
 * [no-debugger](no-debugger.md) - disallow use of `debugger`
@@ -23,7 +24,7 @@ The following rules point out areas where you might have made mistakes.
 * [no-negated-in-lhs](no-negated-in-lhs.md) - disallow negation of the left operand of an `in` expression
 * [no-obj-calls](no-obj-calls.md) - disallow the use of object properties of the global object (`Math` and `JSON`) as functions
 * [no-regex-spaces](no-regex-spaces.md) - disallow multiple spaces in a regular expression literal
-* [no-spare-arrays](no-sparse-arrays.md) - disallow sparse arrays
+* [no-sparse-arrays](no-sparse-arrays.md) - disallow sparse arrays
 * [no-unreachable](no-unreachable.md) - disallow unreachable statements after a return, throw, continue, or break statement
 * [use-isnan](use-isnan.md) - disallow comparisons with the value `NaN`
 * [valid-jsdoc](valid-jsdoc.md) - Ensure JSDoc comments are valid (off by default)
@@ -77,7 +78,7 @@ These are rules designed to prevent you from making mistakes. They either prescr
 These rules relate to using strict mode.
 
 * [no-global-strict](no-global-strict.md) - disallow the `"use strict"` pragma in the global scope
-* [no-extract-strict](no-extra-strict.md) - disallow unnecessary use of `"use strict";` when already in strict mode
+* [no-extra-strict](no-extra-strict.md) - disallow unnecessary use of `"use strict";` when already in strict mode
 * [strict](strict.md) - require that all functions are run in strict mode
 
 ## Variables
@@ -123,8 +124,9 @@ These rules are purely matters of style and are quite subjective.
 * [no-wrap-func](no-wrap-func.md) - disallow wrapping of none IIFE statements in parents
 * [quotes](quotes.md) - specify whether double or single quotes should be used
 * [quote-props](quote-props.md) - require quotes around object literal property names
-* [semi](semi.md)- require use of semicolons instead of relying on ASI
+* [semi](semi.md)- require or disallow use of semicolons instead of ASI
 * [sort-vars](sort-vars.md) - sort variables within the same declaration block
+* [space-in-brackets](space-in-brackets.md) - require or disallow spaces between brackets
 * [space-infix-ops](space-infix-ops.md) - require spaces around operators
 * [space-return-throw-case](space-return-throw-case.md) - require a space after `return`, `throw`, and `case`
 * [space-unary-word-ops](space-unary-word-ops.md) - require a space around word operators such as `typeof`
