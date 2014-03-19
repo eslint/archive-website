@@ -124,6 +124,7 @@ These rules are purely matters of style and are quite subjective.
 * [no-array-constructor](no-array-constructor.html) - disallow use of the `Array` constructor
 * [no-new-object](no-new-object.html) - disallow use of the `Object` constructor
 * [no-spaced-func](no-spaced-func.html) - disallow space between function identifier and application
+* [no-space-before-semi](no-space-before-semi.html) - disallow space before semicolon
 * [no-ternary](no-ternary.html) - disallow the use of ternary operators
 * [no-underscore-dangle](no-underscore-dangle.html) - disallow dangling underscores in identifiers
 * [no-wrap-func](no-wrap-func.html) - disallow wrapping of none IIFE statements in parents

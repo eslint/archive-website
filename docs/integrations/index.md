@@ -11,6 +11,7 @@ layout: doc
 * [Vim](https://github.com/scrooloose/syntastic/tree/master/syntax_checkers/javascript)
 * Emacs: [Flycheck](http://flycheck.readthedocs.org/en/latest/) supports ESLint in recent versions.
 * Eclipse Orion: ESLint is the [default linter](http://dev.eclipse.org/mhonarc/lists/orion-dev/msg02718.html)
+* [TextMate 2](https://github.com/natesilva/javascript-eslint.tmbundle)
 
 
 ## Build Systems
