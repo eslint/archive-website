@@ -29,7 +29,7 @@ The following patterns are not considered warnings:
 
 ```js
 for (key in foo) {
-    if (foo.hasOwnProperty(key)) {
+    if ({}.hasOwnProperty.call(foo, key)) {
         doSomething(key);
     }
 }

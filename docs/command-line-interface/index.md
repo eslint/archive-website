@@ -86,7 +86,7 @@ ESLint supports `.eslintignore` files to exclude files from the linting process 
 
 ```json
 [
-  "node-modules/*",
+  "node_modules/*",
   "**/vendor/*.js"
 ]
 ```
