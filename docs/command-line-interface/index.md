@@ -31,6 +31,8 @@ Options:
   -c, --config path::String  load configuration data from this file
   --rulesdir path::String    load additional rules from this directory
   -f, --format String        use a specific output format - default: stylish
+  --reset                    set all default rules to off
+  --eslintrc                 enable loading .eslintrc configuration. - default: true
   -v, --version              outputs the version number
 ```
 
@@ -70,7 +72,23 @@ Example:
 
     eslint --rulesdir my-rules/ file.js
 
-The rules in your custom rules directory must following the same format as bundled rules to work properly.
+The rules in your custom rules directory must follow the same format as bundled rules to work properly.
+
+### `--reset`
+
+This option turns off all rules enabled in ESLint's default configuration file located at `conf/eslint.json`. ESLint will still report syntax errors.
+
+Example:
+
+    eslint --reset file.js
+
+### `--eslintrc`
+
+This option, on by default, enables automatically loading `.eslintrc` configuration files. Use as `--no-eslintrc` to disable.
+
+Example
+
+    eslint --no-eslintrc file.js
 
 ### `-v`, `--version`
 

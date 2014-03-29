@@ -105,6 +105,7 @@ These rules have to do with variable declarations.
 
 These rules are specific to JavaScript running on Node.js.
 
+* [handle-callback-err](handle-callback-err.html) - enforces error handling in callbacks
 * [no-mixed-requires](no-mixed-requires.html) - disallow mixing regular variable and require declarations
 * [no-path-concat](no-path-concat.html) - disallow string concatenation with `__dirname` and `__filename`
 * [no-process-exit](no-process-exit.html) - disallow `process.exit()`
