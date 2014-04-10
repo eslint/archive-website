@@ -27,13 +27,15 @@ The command line utility has several options. You can view the options by runnin
 eslint [options] file.js [file.js] [dir]
 
 Options:
-  -h, --help                 show help
-  -c, --config path::String  load configuration data from this file
-  --rulesdir path::String    load additional rules from this directory
-  -f, --format String        use a specific output format - default: stylish
-  --reset                    set all default rules to off
-  --eslintrc                 enable loading .eslintrc configuration. - default: true
-  -v, --version              outputs the version number
+  -h, --help                 Show help.
+  -c, --config path::String  Load configuration data from this file.
+  --rulesdir path::String    Load additional rules from this directory.
+  -f, --format String        Use a specific output format. - default: stylish
+  -v, --version              Outputs the version number.
+  --reset                    Set all default rules to off.
+  --eslintrc                 Enable loading .eslintrc configuration. - default: true
+  --env [String]             Specify environments.
+  --global [String]          Define global variables.
 ```
 
 ### `-h`, `--help`
@@ -52,7 +54,7 @@ This example uses the configuration file at `~/my-eslint.json` instead of the de
 
 ### `-f`, `--format`
 
-This options specifies the output format for the console. Possible formats are "stylish" (the default), "compact", "checkstyle", "jslint-xml", "junit" and "tap".
+This option specifies the output format for the console. Possible formats are "stylish" (the default), "compact", "checkstyle", "jslint-xml", "junit" and "tap".
 
 Example:
 
@@ -89,6 +91,24 @@ This option, on by default, enables automatically loading `.eslintrc` configurat
 Example
 
     eslint --no-eslintrc file.js
+
+### `--env`
+
+This option enables specific environments. Details about the global variables defined by each environment are available on the [configuration](../configuring) documentation. This flag only enables environments; it does not disable environments set in other configuration files. To specify multiple environments, separate them using commas, or use the flag multiple times.
+
+Example
+
+    eslint --env browser,node file.js
+    eslint --env browser --env node file.js
+
+### `--global`
+
+This option defines global variables so that they will not be flagged as undefined by the `no-undef` rule. Global variables are read-only by default, but appending `:true` to a variable's name makes it writable. To define multiple variables, separate them using commas, or use the flag multiple times.
+
+Example:
+
+    eslint --global require,exports:true file.js
+    eslint --global require --global exports:true
 
 ### `-v`, `--version`
 

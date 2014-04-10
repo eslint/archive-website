@@ -33,6 +33,7 @@ The following rules point out areas where you might have made mistakes.
 * [no-unreachable](no-unreachable.html) - disallow unreachable statements after a return, throw, continue, or break statement
 * [use-isnan](use-isnan.html) - disallow comparisons with the value `NaN`
 * [valid-jsdoc](valid-jsdoc.html) - Ensure JSDoc comments are valid (off by default)
+* [valid-typeof](valid-typeof.html) - Ensure that the results of typeof are compared against a valid string
 
 ## Best Practices
 
