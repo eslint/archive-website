@@ -73,6 +73,7 @@ These are rules designed to prevent you from making mistakes. They either prescr
 * [no-return-assign](no-return-assign.html) - disallow use of assignment in `return` statement
 * [no-script-url](no-script-url.html) - disallow use of javascript: urls.
 * [no-self-compare](no-self-compare.html) - disallow comparisons where both sides are exactly the same
+* [no-sequences](no-sequences.html) - disallow use of comma operator
 * [no-unused-expressions](no-unused-expressions.html) - disallow usage of expressions in statement position
 * [no-warning-comments](no-warning-comments.html) - disallow usage of configurable warning terms in comments - e.g. `TODO` or `FIXME`
 * [no-with](no-with.html) - disallow use of the `with` statement
