@@ -3,7 +3,7 @@ title: ESLint
 layout: doc
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
-# Disallow Spaces in Function Calls
+# Disallow Spaces in Function Calls (no-spaced-func)
 
 While it's possible to have whitespace between the name of a function and the parentheses that execute it, such patterns tend to look more like errors.
 

@@ -3,7 +3,7 @@ title: ESLint
 layout: doc
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
-# Disallow Null Comparisons
+# Disallow Null Comparisons (no-eq-null)
 
 Comparing to `null` without a type-checking operator (`==` or `!=`), can have unintended results as the comparison will evaluate to true when comparing to not just a `null`, but also an `undefined` value.
 

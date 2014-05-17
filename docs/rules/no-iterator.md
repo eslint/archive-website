@@ -3,7 +3,7 @@ title: ESLint
 layout: doc
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
-# Disallow Iterator
+# Disallow Iterator (no-iterator)
 
 The `__iterator__` property can used to create custom iterators that are compatible with JavaScript's `for in` and `for each` constructs. However, this property is not supported in many browsers, so it should be used with caution.
 

@@ -103,7 +103,7 @@ ESLint comes with a large number of rules, some of which are on by default and s
 
 * 0 - turn the rule off
 * 1 - turn the rule on as a warning (doesn't affect exit code)
-* 2 - turn the rule on as a warning (exit code is 1 when triggered)
+* 2 - turn the rule on as an error (exit code is 1 when triggered)
 
 To configure rules inside of a file using configuration comments, use a comment in the following format:
 
@@ -111,13 +111,13 @@ To configure rules inside of a file using configuration comments, use a comment 
 /*eslint eqeqeq:0, curly: 2*/
 ```
 
-In this example, `eqeqeq` is turned off and `curly` is turned on as an error. If a rule has additional options, you can specify them using array literal syntax, such as:
+In this example, [`eqeqeq`](../rules/eqeqeq.html) is turned off and [`curly`](../rules/curly.html) is turned on as an error. If a rule has additional options, you can specify them using array literal syntax, such as:
 
 ```js
 /*eslint quotes: [2, "double"], curly: 2*/
 ```
 
-This comment specifies the "double" option for the `[quotes](../rules/quotes.html)` rule.
+This comment specifies the "double" option for the [`quotes`](../rules/quotes.html) rule.
 
 To configure rules inside of a configuration file, use the `rules` key along with an error level and any options you want to use. For example:
 
@@ -147,6 +147,26 @@ And in YAML:
 There's no need to specify every single rule - you will automatically get the default setting for every rule. You only need to override the rules that you want to change.
 
 **Note:** All rules that are enabled by default are set to 2, so they will cause a non-zero exit code when encountered. You can lower these rule to a warning by setting them to 1, which has the effect of outputting the message onto the console but doesn't affect the exit code.
+
+To temporary disable warnings in your file use the following format
+```js
+/*eslint-disable */
+
+//supress all warnings between comments
+alert('foo');
+
+/*eslint-enable */
+```
+
+You can also disable and enable back warnings of specific rules
+```js
+/*eslint-disable no-alert, no-console */
+
+alert('foo');
+console.log('bar');
+
+/*eslint-enable no-alert */
+```
 
 ## Using Configuration Files
 

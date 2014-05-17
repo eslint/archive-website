@@ -24,13 +24,15 @@ eslint [options] file.js [file.js] [dir]
 Options:
   -h, --help                 Show help.
   -c, --config path::String  Load configuration data from this file.
-  --rulesdir path::String    Load additional rules from this directory.
+  --rulesdir [path::String]  Load additional rules from this directory.
   -f, --format String        Use a specific output format. - default: stylish
   -v, --version              Outputs the version number.
   --reset                    Set all default rules to off.
   --eslintrc                 Enable loading .eslintrc configuration. - default: true
   --env [String]             Specify environments.
+  --force                    Allow linting of otherwise ignored files.
   --global [String]          Define global variables.
+  --rule Object              Specify rules.
 ```
 
 ### `-h`, `--help`
@@ -69,7 +71,9 @@ Example:
 
     eslint --rulesdir my-rules/ file.js
 
-The rules in your custom rules directory must follow the same format as bundled rules to work properly.
+The rules in your custom rules directory must follow the same format as bundled rules to work properly. You can also specify multiple locations for custom rules by including multiple `--rulesdir` flags:
+
+    eslint --rulesdir my-rules/ --rulesdir my-other-rules/ file.js
 
 ### `--reset`
 
@@ -96,6 +100,14 @@ Example
     eslint --env browser,node file.js
     eslint --env browser --env node file.js
 
+### `--force`
+
+This option allows you to override the ignore rules defined in `.eslintignore` files and always lint each file passed to eslint. Without this option enabled, ignored files will not be linted even if specifically listed in the list of files.
+
+Example
+
+    eslint --force an-ignored-file.js
+
 ### `--global`
 
 This option defines global variables so that they will not be flagged as undefined by the `no-undef` rule. Global variables are read-only by default, but appending `:true` to a variable's name makes it writable. To define multiple variables, separate them using commas, or use the flag multiple times.
@@ -104,6 +116,15 @@ Example:
 
     eslint --global require,exports:true file.js
     eslint --global require --global exports:true
+
+### `--rule`
+
+This option specifies rules to be used. They will be merged into any previously defined rules. To start fresh, simply combine with the `--reset` flag. To define multiple rules, separate them using commas, or use the flag multiple times. The [levn](https://github.com/gkz/levn#levn--) format is used for specifying the rules.
+
+Example:
+
+    eslint --rule 'quotes: [2, double]'
+    eslint --rule 'guard-for-in: 2' --rule 'brace-style: [2, 1tbs]'
 
 ### `-v`, `--version`
 

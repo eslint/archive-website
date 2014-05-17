@@ -3,7 +3,7 @@ title: ESLint
 layout: doc
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
-# Disallow Labels That Are Variables Names
+# Disallow Labels That Are Variables Names (no-label-var)
 
 ## Rule Details
 

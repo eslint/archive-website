@@ -3,7 +3,7 @@ title: ESLint
 layout: doc
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
-# Disallow Sparse Arrays
+# Disallow Sparse Arrays (no-sparse-arrays)
 
 Sparse arrays contain empty slots, most frequently due to multiple commas being used in an array literal, such as:
 

@@ -3,7 +3,7 @@ title: ESLint
 layout: doc
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
-# Ensures Callback Error Handling
+# Ensures Callback Error Handling (handle-callback-err)
 
 In node, a common pattern for dealing with asynchronous behavior is called the callback pattern.
 This pattern expects as the first argument of the callback an `Error` object, which may be `null`.

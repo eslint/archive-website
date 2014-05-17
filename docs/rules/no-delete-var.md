@@ -3,7 +3,7 @@ title: ESLint
 layout: doc
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
-# Disallow Variables Deletion
+# Disallow Variables Deletion (no-delete-var)
 
 This rule prevents the use of `delete` operator on variables:
 

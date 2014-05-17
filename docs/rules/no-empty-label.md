@@ -3,7 +3,7 @@ title: ESLint
 layout: doc
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
-# No empty labels
+# No empty labels (no-empty-label)
 
 Labeled statements are only used in conjunction with labeled break and continue statements. ECMAScript has no goto statement.
 

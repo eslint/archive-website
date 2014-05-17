@@ -3,7 +3,7 @@ title: ESLint
 layout: doc
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
-# Disallow Implied eval()
+# Disallow Implied eval() (no-implied-eval)
 
 It's considered a good practice to avoid using `eval()` in JavaScript. There are security and performance implications involved with doing so, which is why many linters (including ESLint) disallow `eval()` by default. However, there are some other ways to pass a string and have it interpreted as JavaScript code that have similar concerns.
 

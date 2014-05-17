@@ -3,7 +3,7 @@ title: ESLint
 layout: doc
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
-# Enforce Quote Style
+# Enforce Quote Style (quotes)
 
 Enforces coding style that string literals are delimited with single or double quotes.
 
@@ -54,4 +54,3 @@ var single = 'a string containing "double" quotes';
 // When [1, "single", "avoid-escape"]
 var double = "a string containing 'single' quotes";
 ```
-

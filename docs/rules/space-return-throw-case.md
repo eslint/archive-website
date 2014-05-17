@@ -3,7 +3,7 @@ title: ESLint
 layout: doc
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
-# Require spaces following `return`, `throw`, and `case`
+# Require spaces following `return`, `throw`, and `case` (space-return-throw-case)
 
 Require spaces following `return`, `throw`, and `case`.
 

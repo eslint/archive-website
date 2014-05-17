@@ -3,9 +3,9 @@ title: ESLint
 layout: doc
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
-# Disallow Ternary Operators
+# Disallow Ternary Operators (no-ternary)
 
-The ternary operator is used to conditionally assign a value to a variable. Some believe that the use of ternary operators leads to unclear code. 
+The ternary operator is used to conditionally assign a value to a variable. Some believe that the use of ternary operators leads to unclear code.
 
 ```js
 var foo = isBar ? baz : qux;

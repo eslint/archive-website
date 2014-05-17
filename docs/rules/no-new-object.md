@@ -3,7 +3,7 @@ title: ESLint
 layout: doc
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
-# Disallow new Object
+# Disallow new Object (no-new-object)
 
 The `Object` constructor is used to create new generic objects in JavaScript, such as:
 

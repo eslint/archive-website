@@ -3,7 +3,7 @@ title: ESLint
 layout: doc
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
-# Disallow Undeclared Variables
+# Disallow Undeclared Variables (no-undef)
 
 Any reference to an undeclared variable causes a warning, unless the variable is explicitly mentioned in a `/*global ...*/` comment. This rule provides compatibility with [JSHint](http://www.jshint.com)'s and [JSLint](http://www.jslint.com)'s treatment of global variables.
 

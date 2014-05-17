@@ -3,7 +3,7 @@ title: ESLint
 layout: doc
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
-# Disallow Spaces Before Semicolon
+# Disallow Spaces Before Semicolon (no-space-before-semi)
 
 JavaScript allows for placing unnecessary spaces between an expression and the closing semicolon.
 

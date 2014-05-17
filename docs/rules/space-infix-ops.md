@@ -3,7 +3,7 @@ title: ESLint
 layout: doc
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
-# Require Spaces Around Infix Operators
+# Require Spaces Around Infix Operators (space-infix-ops)
 
 While formatting preferences are very personal, a number of style guides require spaces around operators, such as:
 

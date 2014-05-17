@@ -3,7 +3,7 @@ title: ESLint
 layout: doc
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
-# Disallow Extra Parens
+# Disallow Extra Parens (no-extra-parens)
 
 This rule restricts the use of parentheses to only where they are necessary.
 
@@ -30,8 +30,15 @@ The following patterns are not considered warnings:
 ```
 
 ```js
-(function(){}())
+({}.toString.call())
 ```
+
+```js
+(function(){} ? a() : b())
+```
+
+IIFEs are excluded from this requirement, so the `(function(){}())` pattern is allowed in any position.
+
 
 ## Further Reading
 

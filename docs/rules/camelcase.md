@@ -3,7 +3,7 @@ title: ESLint
 layout: doc
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
-# Require Camelcase
+# Require Camelcase (camelcase)
 
 When it comes to naming variables, styleguides generally fall into one of two camps: camelcased (`variableName`) and underscores(`variable_name`). This rule focuses on using the camelcase approach. If your styleguide calls for camelcasing your variable names, then this rule is for you!
 

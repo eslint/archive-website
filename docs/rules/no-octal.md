@@ -3,7 +3,7 @@ title: ESLint
 layout: doc
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
-# Disallow Octal Literals
+# Disallow Octal Literals (no-octal)
 
 Octal literals are numerals that begin with a leading zero, such as:
 

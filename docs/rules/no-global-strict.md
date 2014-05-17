@@ -3,7 +3,7 @@ title: ESLint
 layout: doc
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
-# Disallow Global Strict Mode
+# Disallow Global Strict Mode (no-global-strict)
 
 Strict mode is enabled by using the following pragma in your code:
 

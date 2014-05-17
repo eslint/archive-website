@@ -3,7 +3,7 @@ title: ESLint
 layout: doc
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
-# Require Function Expressions to have a Name
+# Require Function Expressions to have a Name (func-names)
 
 A pattern that's becoming more common is to give function expressions names to aid in debugging, such as:
 

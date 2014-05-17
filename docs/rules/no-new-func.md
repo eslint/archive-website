@@ -3,7 +3,7 @@ title: ESLint
 layout: doc
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
-# Disallow Function Constructor
+# Disallow Function Constructor (no-new-func)
 
 It's possible to create functions in JavaScript using the `Function` constructor, such as:
 

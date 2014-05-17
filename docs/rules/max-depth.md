@@ -3,7 +3,7 @@ title: ESLint
 layout: doc
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
-# Limit Maximum Depth
+# Limit Maximum Depth (max-depth)
 
 The `max-depth` rule allows you to specify the maximum depth blocks can be nested.
 

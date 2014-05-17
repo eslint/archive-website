@@ -3,7 +3,7 @@ title: ESLint
 layout: doc
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
-# Disallow Empty Block Statements
+# Disallow Empty Block Statements (no-empty)
 
 Empty statements usually occur due to refactoring that wasn't completed, such as:
 

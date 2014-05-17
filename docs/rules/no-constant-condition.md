@@ -3,7 +3,7 @@ title: ESLint
 layout: doc
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
-# Disallow use of constant expressions in conditions
+# Disallow use of constant expressions in conditions (no-constant-condition)
 
 Comparing a literal expression in a condition is usually a typo or development trigger for a specific behavior.
 
