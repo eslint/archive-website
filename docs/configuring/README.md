@@ -144,6 +144,7 @@ There's no need to specify every single rule - you will automatically get the de
 **Note:** All rules that are enabled by default are set to 2, so they will cause a non-zero exit code when encountered. You can lower these rule to a warning by setting them to 1, which has the effect of outputting the message onto the console but doesn't affect the exit code.
 
 To temporary disable warnings in your file use the following format
+
 ```js
 /*eslint-disable */
 
@@ -154,6 +155,7 @@ alert('foo');
 ```
 
 You can also disable and enable back warnings of specific rules
+
 ```js
 /*eslint-disable no-alert, no-console */
 
@@ -171,7 +173,7 @@ There are two ways to use configuration files. The first is to save the file whe
 
 Passing in the configuration file in this manner will override any default settings.
 
-The second way to use configuration files is via `.eslintrc` files. These files you place directly into your project directory and ESLint will automatically find them and read configuration information from them. This option is useful when you want different configurations for different parts of a project or when you want others to be able to use ESLint directly without needing to remember to pass in the configuration file.
+The second way to use configuration files is via `.eslintrc` files. Place these files in any directory and ESLint will automatically find them when invoked there or in any subdirectories. This option is useful when you want different configurations for different parts of a project or when you want others to be able to use ESLint directly without needing to remember to pass in the configuration file.
 
 In either case, the settings in the configuration file override default settings.
 
