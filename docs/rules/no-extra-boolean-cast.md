@@ -60,3 +60,8 @@ function foo() {
 
 var foo = bar ? !!baz : !!bat;
 ```
+
+## Resources
+
+* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/no-extra-boolean-cast.js)
+* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/no-extra-boolean-cast.md)

@@ -65,3 +65,8 @@ confident that some other form of monitoring will help you catch the problem.
 - [The Art Of Node: Callbacks](https://github.com/maxogden/art-of-node#callbacks)
 - [Nodejitsu: What are the error conventions?](http://docs.nodejitsu.com/articles/errors/what-are-the-error-conventions)
 - [Node Tuts: The Callback Pattern](http://nodetuts.com/02-callback-pattern.html)
+
+## Resources
+
+* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/handle-callback-err.js)
+* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/handle-callback-err.md)

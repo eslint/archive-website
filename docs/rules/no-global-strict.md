@@ -48,3 +48,8 @@ function foo() {
 ## When Not To Use It
 
 If you're using Node.js, you may not mind having strict mode turned on globally. Files are typically not concatenated together in Node.js projects and therefore the risk of applying strict mode accidentally is minimal. Further, since every file in Node.js has its own scope, global strict mode only effects the single file in which it is placed. In this case, it is safe to turn off this rule.
+
+## Resources
+
+* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/no-global-strict.js)
+* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/no-global-strict.md)

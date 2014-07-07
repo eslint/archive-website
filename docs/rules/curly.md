@@ -106,3 +106,8 @@ curly: [2, "all"]
 ## When Not To Use It
 
 If you have no strict conventions about when to use block statements and when not to, you can safely disable this rule.
+
+## Resources
+
+* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/curly.js)
+* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/curly.md)

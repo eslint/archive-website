@@ -32,3 +32,8 @@ function a() {
     return (/foo/).test("bar");
 }
 ```
+
+## Resources
+
+* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/wrap-regex.js)
+* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/wrap-regex.md)

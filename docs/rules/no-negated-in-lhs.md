@@ -32,3 +32,8 @@ Never.
 ## Further Reading
 
 None.
+
+## Resources
+
+* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/no-negated-in-lhs.js)
+* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/no-negated-in-lhs.md)

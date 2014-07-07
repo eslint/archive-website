@@ -140,3 +140,8 @@ If you aren't using JSDoc, then you can safely turn this rule off.
 ## Further Reading
 
 * [JSDoc](http://usejsdoc.org)
+
+## Resources
+
+* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/valid-jsdoc.js)
+* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/valid-jsdoc.md)

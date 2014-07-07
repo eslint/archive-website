@@ -73,3 +73,8 @@ So even though there is assignment ambiguity in the conditional expression, the 
 
 * [JSLint -- Expected a conditional expression and instead saw an assignment.](http://jslinterrors.com/expected-a-conditional-expression-and-saw-an-assignment/)
 * [JSLint -- Unexpected assignment expression](http://jslinterrors.com/unexpected-assignment-expression/)
+
+## Resources
+
+* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/no-cond-assign.js)
+* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/no-cond-assign.md)

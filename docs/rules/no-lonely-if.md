@@ -65,3 +65,8 @@ if (condition) {
 ## When Not To Use It
 
 Disable this rule if the code is clearer without requiring the `else if` form.
+
+## Resources
+
+* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/no-lonely-if.js)
+* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/no-lonely-if.md)

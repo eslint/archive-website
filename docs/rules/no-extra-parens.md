@@ -43,3 +43,8 @@ IIFEs are excluded from this requirement, so the `(function(){}())` pattern is a
 ## Further Reading
 
 * [MDN: Operator Precedence](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Operator_Precedence)
+
+## Resources
+
+* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/no-extra-parens.js)
+* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/no-extra-parens.md)

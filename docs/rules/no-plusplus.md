@@ -35,3 +35,8 @@ foo += 1;
 var bar = 42;
 bar -= 1;
 ```
+
+## Resources
+
+* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/no-plusplus.js)
+* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/no-plusplus.md)

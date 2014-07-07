@@ -44,3 +44,12 @@ It *does not* check for any of the following less obvious approaches:
 ## When Not To Use It
 
 You may want to disable this rule when working with polyfills that try to patch older versions of JavaScript with the latest spec, such as those that might `Function.prototype.bind` or `Array.prototype.forEach` in a future-friendly way.
+
+## Related Rules
+
+* [no-native-reassign](no-native-reassign.html)
+
+## Resources
+
+* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/no-extend-native.js)
+* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/no-extend-native.md)

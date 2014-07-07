@@ -51,3 +51,8 @@ This configures the rule to enforce wrapping always the function expression.
 ```
 
 This allows any wrapping style.
+
+## Resources
+
+* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/wrap-iife.js)
+* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/wrap-iife.md)

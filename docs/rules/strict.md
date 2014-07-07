@@ -58,3 +58,8 @@ function foo() {
 ## When Not To Use It
 
 If you have functions that you specifically want to run in non-strict mode (due to use of strict mode prohibited properties such as `arguments.callee`), then you should turn this rule off.
+
+## Resources
+
+* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/strict.js)
+* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/strict.md)

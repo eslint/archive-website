@@ -32,3 +32,8 @@ async(function() {
 ## When Not To Use It
 
 If you want to allow synchronous operations in your script.
+
+## Resources
+
+* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/no-sync.js)
+* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/no-sync.md)

@@ -100,7 +100,7 @@ try {
 #### "stroustrup"
 
 
-This is the default setting for this rule and enforces Stroustrup style. While using this setting, the following patterns are considered warnings:
+This enforces Stroustrup style. While using this setting, the following patterns are considered warnings:
 
 ```js
 function foo()
@@ -161,3 +161,8 @@ If your project will not be using the one true brace style, turn this rule off.
 ## Further Reading
 
 * [Indent style](http://en.wikipedia.org/wiki/Indent_style)
+
+## Resources
+
+* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/brace-style.js)
+* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/brace-style.md)

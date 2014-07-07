@@ -53,3 +53,8 @@ functin bar() {
     baz();
 }
 ```
+
+## Resources
+
+* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/no-lone-blocks.js)
+* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/no-lone-blocks.md)

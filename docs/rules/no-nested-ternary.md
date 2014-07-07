@@ -36,3 +36,8 @@ if (foo) {
   thing = foobar;
 }
 ```
+
+## Resources
+
+* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/no-nested-ternary.js)
+* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/no-nested-ternary.md)

@@ -65,3 +65,8 @@ with ((doSomething(), val)) {}
 ## When Not To Use It
 
 Disable this rule if sequence expressions with the comma operator are acceptable.
+
+## Resources
+
+* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/no-sequences.js)
+* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/no-sequences.md)

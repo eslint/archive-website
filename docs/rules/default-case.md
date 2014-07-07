@@ -91,3 +91,11 @@ switch (a) {
 
 If you don't want to enforce a `default` case for `switch` statements, you can safely disable this rule.
 
+## Related Rules
+
+* [no-fallthrough](no-fallthrough.html)
+
+## Resources
+
+* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/default-case.js)
+* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/default-case.md)

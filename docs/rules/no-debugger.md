@@ -22,3 +22,13 @@ If your code is still very much in development and don't want to worry about str
 ## Further Reading
 
 * [Debugger](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/debugger)
+
+## Related Rules
+
+* [no-alert](no-alert.html)
+* [no-console](no-console.html)
+
+## Resources
+
+* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/no-debugger.js)
+* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/no-debugger.md)

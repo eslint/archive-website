@@ -26,3 +26,8 @@ The following patterns are not considered warnings:
 ```js
 var person = new Person();
 ```
+
+## Resources
+
+* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/new-parens.js)
+* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/new-parens.md)

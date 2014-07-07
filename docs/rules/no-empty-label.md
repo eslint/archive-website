@@ -29,3 +29,8 @@ labeled:
         ...
     }
 };
+
+## Resources
+
+* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/no-empty-label.js)
+* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/no-empty-label.md)

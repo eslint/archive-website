@@ -22,3 +22,8 @@ location.href = "javascript:void(0)";
 ## Further Reading
 
 * [What is the matter with script-targeted URLs?](http://stackoverflow.com/questions/13497971/what-is-the-matter-with-script-targeted-urls)
+
+## Resources
+
+* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/no-script-url.js)
+* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/no-script-url.md)

@@ -70,3 +70,8 @@ try {
 ## When Not To Use It
 
 If you do not need to support IE 8 and earlier, you should turn this rule off.
+
+## Resources
+
+* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/no-catch-shadow.js)
+* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/no-catch-shadow.md)

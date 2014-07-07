@@ -38,3 +38,16 @@ function foo (bar, baz, qux) {
     doSomething();
 }
 ```
+
+## Related Rules
+
+* [complexity](complexity.html)
+* [max-depth](max-depth.html)
+* [max-len](max-len.html)
+* [max-nested-callbacks](max-nested-callbacks.html)
+* [max-statements](max-statements.html)
+
+## Resources
+
+* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/max-params.js)
+* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/max-params.md)

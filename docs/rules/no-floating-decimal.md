@@ -45,3 +45,8 @@ If you aren't concerned about misinterpreting floating decimal point values, the
 ## Further Reading
 
 * [A leading decimal point can be confused with a dot](http://jslinterrors.com/a-leading-decimal-point-can-be-confused-with-a-dot-a/)
+
+## Resources
+
+* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/no-floating-decimal.js)
+* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/no-floating-decimal.md)

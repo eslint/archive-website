@@ -43,3 +43,8 @@ let bar;
 
 If you want to allow initialization of variables with `undefined`, then you can safely turn this rule off.
 
+
+## Resources
+
+* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/no-undef-init.js)
+* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/no-undef-init.md)

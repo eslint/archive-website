@@ -79,9 +79,9 @@ These are rules designed to prevent you from making mistakes. They either prescr
 * [no-unused-expressions](no-unused-expressions.html) - disallow usage of expressions in statement position
 * [no-warning-comments](no-warning-comments.html) - disallow usage of configurable warning terms in comments - e.g. `TODO` or `FIXME` (off by default)
 * [no-with](no-with.html) - disallow use of the `with` statement
-* [no-yoda](no-yoda.html) - disallow Yoda conditions
 * [radix](radix.html) - require use of the second argument for `parseInt()` (off by default)
 * [wrap-iife](wrap-iife.html) - require immediate function invocation to be wrapped in parentheses (off by default)
+* [yoda](yoda.html) - require or disallow Yoda conditions
 
 ## Strict Mode
 
@@ -101,6 +101,7 @@ These rules have to do with variable declarations.
 * [no-shadow](no-shadow.html) - disallow declaration of variables already declared in the outer scope
 * [no-shadow-restricted-names](no-shadow-restricted-names.html) - disallow shadowing of names such as `arguments`
 * [no-undef](no-undef.html) - disallow use of undeclared variables unless mentioned in a `/*global */` block
+* [no-undefined](no-undefined.html) - disallow use of `undefined` variable (off by default)
 * [no-undef-init](no-undef-init.html) - disallow use of undefined when initializing variables
 * [no-unused-vars](no-unused-vars.html) - disallow declaration of variables that are not used in the code
 * [no-use-before-define](no-use-before-define.html) - disallow use of variables before they are defined
@@ -124,6 +125,7 @@ These rules are purely matters of style and are quite subjective.
 * [brace-style](brace-style.html) - enforce one true brace style (off by default)
 * [camelcase](camelcase.html) - require camel case names
 * [consistent-this](consistent-this.html) - enforces consistent naming when capturing the current execution context (off by default)
+* [eol-last](eol-last.html) - enforce newline at the end of file, with no multiple empty lines
 * [func-names](func-names.html) - require function expressions to have a name (off by default)
 * [func-style](func-style.html) - enforces use of function declarations or expressions (off by default)
 * [new-cap](new-cap.html) - require a capital letter for constructors
@@ -135,11 +137,13 @@ These rules are purely matters of style and are quite subjective.
 * [no-spaced-func](no-spaced-func.html) - disallow space between function identifier and application
 * [no-space-before-semi](no-space-before-semi.html) - disallow space before semicolon
 * [no-ternary](no-ternary.html) - disallow the use of ternary operators (off by default)
+* [no-trailing-spaces](no-trailing-spaces.html) - disallow trailing whitespace at the end of lines (off by default)
 * [no-underscore-dangle](no-underscore-dangle.html) - disallow dangling underscores in identifiers
-* [no-wrap-func](no-wrap-func.html) - disallow wrapping of none IIFE statements in parents
+* [no-wrap-func](no-wrap-func.html) - disallow wrapping of non-IIFE statements in parens
+* [no-mixed-spaces-and-tabs](no-mixed-spaces-and-tabs.html) - disallow mixed spaces and tabs for indentation
 * [quotes](quotes.html) - specify whether double or single quotes should be used
 * [quote-props](quote-props.html) - require quotes around object literal property names (off by default)
-* [semi](semi.html)- require or disallow use of semicolons instead of ASI
+* [semi](semi.html) - require or disallow use of semicolons instead of ASI
 * [sort-vars](sort-vars.html) - sort variables within the same declaration block (off by default)
 * [space-after-keywords](space-after-keywords.html) - require a space after certain keywords (off by default)
 * [space-in-brackets](space-in-brackets.html) - require or disallow spaces between brackets (off by default)
@@ -161,3 +165,8 @@ The following rules are included for compatibility with [JSHint](http://jshint.c
 * [no-bitwise](no-bitwise.html) - disallow use of bitwise operators (off by default)
 * [no-plusplus](no-plusplus.html) - disallow use of unary operators, `++` and `--` (off by default)
 
+
+## Resources
+
+* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/README.js)
+* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/README.md)

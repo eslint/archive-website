@@ -50,3 +50,8 @@ var fullPath = dirname + "/foo.js";
 ## When Not To Use It
 
 If you want to allow string concatenation of path names.
+
+## Resources
+
+* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/no-path-concat.js)
+* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/no-path-concat.md)

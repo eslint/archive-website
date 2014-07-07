@@ -55,3 +55,12 @@ If you want to allow `setTimeout()` and `setInterval()` with string arguments, t
 ## Further Reading
 
 * [Implied eval is evil. Pass a function instead of a string.](http://jslinterrors.com/implied-eval-is-evil-pass-a-function-instead-of-a-string/)
+
+## Related Rules
+
+* [no-eval](no-eval.html)
+
+## Resources
+
+* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/no-implied-eval.js)
+* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/no-implied-eval.md)

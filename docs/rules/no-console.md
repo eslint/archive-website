@@ -38,3 +38,13 @@ If you're using Node.js, however, `console` is used to output information to the
 ## Further Reading
 
 * [Use Uglify to automatically strip debug messages from your JavaScript](http://jstarrdewar.com/blog/2013/02/28/use-uglify-to-automatically-strip-debug-messages-from-your-javascript)
+
+## Related Rules
+
+* [no-alert](no-alert.html)
+* [no-debugger](no-debugger.html)
+
+## Resources
+
+* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/no-console.js)
+* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/no-console.md)

@@ -34,3 +34,8 @@ typeof bar === typeof qux
 ## When Not To Use It
 
 You may want to turn this rule off if you will be using the `typeof` operator on host objects.
+
+## Resources
+
+* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/valid-typeof.js)
+* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/valid-typeof.md)

@@ -23,3 +23,8 @@ if (x === x) {
 ## Further Reading
 
 * [Weird Relation](http://jslinterrors.com/weird-relation/)
+
+## Resources
+
+* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/no-self-compare.js)
+* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/no-self-compare.md)

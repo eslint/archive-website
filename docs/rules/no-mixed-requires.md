@@ -96,3 +96,8 @@ The implementation is not aware of any local functions with the name `require` t
 [2]: http://nodejs.org/api/modules.html#modules_file_modules
 [3]: http://nodejs.org/api/modules.html#modules_loading_from_node_modules_folders
 [4]: https://github.com/umdjs/umd
+
+## Resources
+
+* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/no-mixed-requires.js)
+* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/no-mixed-requires.md)

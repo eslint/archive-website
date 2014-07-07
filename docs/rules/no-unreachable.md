@@ -59,3 +59,8 @@ switch (foo) {
         var x;
 }
 ```
+
+## Resources
+
+* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/no-unreachable.js)
+* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/no-unreachable.md)

@@ -35,3 +35,16 @@ var foo = {
     "difficult": "to read"
 };
 ```
+
+## Related Rules
+
+* [complexity](complexity.html)
+* [max-depth](max-depth.html)
+* [max-nested-callbacks](max-nested-callbacks.html)
+* [max-params](max-params.html)
+* [max-statements](max-statements.html)
+
+## Resources
+
+* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/max-len.js)
+* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/max-len.md)

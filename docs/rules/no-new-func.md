@@ -36,3 +36,8 @@ In more advanced cases where you really need to use the `Function` constructor.
 ## Further Reading
 
 * [The Function constructor is eval](http://jslinterrors.com/the-function-constructor-is-eval/)
+
+## Resources
+
+* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/no-new-func.js)
+* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/no-new-func.md)

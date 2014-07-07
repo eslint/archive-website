@@ -62,3 +62,8 @@ a ? b : c
 ```js
 a, b // sequences need only be spaced on the right
 ```
+
+## Resources
+
+* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/space-infix-ops.js)
+* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/space-infix-ops.md)

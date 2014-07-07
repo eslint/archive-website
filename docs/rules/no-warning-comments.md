@@ -111,3 +111,8 @@ As mentationed above, patterns are matched when they match exactly to one of the
    "no-warning-comments": [1, { "terms": ["any really", "interesting", "or even not", "term", "can be matched"] }]
    ...
    ```
+
+## Resources
+
+* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/no-warning-comments.js)
+* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/no-warning-comments.md)

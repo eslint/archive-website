@@ -31,3 +31,8 @@ If you need to support legacy browsers, you might want to turn this rule of, sin
 ## Further Reading
 
 * [Object.getPrototypeOf](http://ejohn.org/blog/objectgetprototypeof/)
+
+## Resources
+
+* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/no-proto.js)
+* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/no-proto.md)

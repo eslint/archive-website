@@ -63,3 +63,8 @@ do {
     something();
 } while (x)
 ```
+
+## Resources
+
+* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/no-constant-condition.js)
+* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/no-constant-condition.md)

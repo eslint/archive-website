@@ -3,7 +3,7 @@ title: ESLint
 layout: doc
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
-# Disallow Yoda Conditions (no-yoda)
+# Require or disallow Yoda Conditions (yoda)
 
 Yoda conditions are so named because the literal value of the condition comes first while the variable comes second. For example, the following is a Yoda condition:
 
@@ -29,7 +29,7 @@ Opponents of Yoda conditions point out that tooling has made us better programme
 
 ## Rule Details
 
-This rule is aimed at disallowing Yoda conditions in JavaScript.
+This rule takes one argument. If it is `"never"` then comparisons must never be a Yoda condition. If `"always"`, then the literal must always come first. The default is `"never"`.
 
 The following patterns are considered warnings:
 
@@ -37,13 +37,24 @@ The following patterns are considered warnings:
 if ("red" === color) {
     // ...
 }
+```
 
+```js
 if (true == flag) {
     // ...
 }
+```
 
+```js
 if (5 > count) {
     // ...
+}
+```
+
+```js
+// When ["always"]
+if (color == "blue") {
+	// ...
 }
 ```
 
@@ -53,8 +64,17 @@ The following patterns are not considered warnings:
 if (5 & value) {
     // ...
 }
+```
 
+```js
 if (value === "red") {
+    // ...
+}
+```
+
+```js
+// When ["always"]
+if ("blue" == value) {
     // ...
 }
 ```
@@ -64,3 +84,8 @@ if (value === "red") {
 
 * [Yoda Conditions](http://en.wikipedia.org/wiki/Yoda_conditions)
 * [Yoda Notation and Safe Switching](http://thomas.tuerke.net/on/design/?with=1249091668#msg1146181680)
+
+## Resources
+
+* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/yoda.js)
+* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/yoda.md)

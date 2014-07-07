@@ -34,3 +34,13 @@ customConfirm("Are you sure?");
 
 customPrompt("Who are you?");
 ```
+
+## Related Rules
+
+* [no-console](no-console.html)
+* [no-debugger](no-debugger.html)
+
+## Resources
+
+* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/no-alert.js)
+* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/no-alert.md)

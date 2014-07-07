@@ -40,3 +40,8 @@ var c, d, a, e;
 ## When not to use
 
 This rule is a formatting preference and not following it won't negatively affect the quality of your code. If you alphabetizing variables isn't a part of your coding standards, then you can leave this rule off.
+
+## Resources
+
+* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/sort-vars.js)
+* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/sort-vars.md)

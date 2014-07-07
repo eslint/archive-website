@@ -38,3 +38,8 @@ if (isNaN(NaN)) {
 ## Further reading
 
  - [Use the isNaN function to compare with NaN](http://jslinterrors.com/use-the-isnan-function-to-compare-with-nan/)
+
+## Resources
+
+* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/use-isnan.js)
+* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/use-isnan.md)

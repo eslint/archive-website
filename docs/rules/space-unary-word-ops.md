@@ -40,3 +40,8 @@ new C
 ```js
 void 0
 ```
+
+## Resources
+
+* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/space-unary-word-ops.js)
+* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/space-unary-word-ops.md)

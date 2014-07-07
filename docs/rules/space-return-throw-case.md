@@ -36,3 +36,8 @@ function f(){ return -a; }
 ```js
 function f(){ return; }
 ```
+
+## Resources
+
+* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/space-return-throw-case.js)
+* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/space-return-throw-case.md)

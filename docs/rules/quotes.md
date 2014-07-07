@@ -54,3 +54,8 @@ var single = 'a string containing "double" quotes';
 // When [1, "single", "avoid-escape"]
 var double = "a string containing 'single' quotes";
 ```
+
+## Resources
+
+* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/quotes.js)
+* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/quotes.md)

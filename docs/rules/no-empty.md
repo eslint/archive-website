@@ -61,3 +61,8 @@ Since you must always have at least a `catch` or a `finally` block for any `try`
 
 If you intentionally use empty statements then you can disable this rule.
 
+
+## Resources
+
+* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/no-empty.js)
+* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/no-empty.md)

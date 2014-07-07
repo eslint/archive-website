@@ -112,3 +112,12 @@ Note that the last `case` statement in these examples does not cause a warning b
 ## When Not To Use It
 
 If you don't want to enforce that each `case` statement should end with a `throw`, `return`, `break`, or comment, then you can safely turn this rule off.
+
+## Related Rules
+
+* [default-case](default-case.html)
+
+## Resources
+
+* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/no-fallthrough.js)
+* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/no-fallthrough.md)

@@ -42,3 +42,8 @@ b(a);
 ## Further Reading
 
 * [Variable Shadowing](http://en.wikipedia.org/wiki/Variable_shadowing)
+
+## Resources
+
+* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/no-shadow.js)
+* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/no-shadow.md)

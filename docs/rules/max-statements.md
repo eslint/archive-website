@@ -50,3 +50,16 @@ function foo() {
 
 }
 ```
+
+## Related Rules
+
+* [complexity](complexity.html)
+* [max-depth](max-depth.html)
+* [max-len](max-len.html)
+* [max-nested-callbacks](max-nested-callbacks.html)
+* [max-params](max-params.html)
+
+## Resources
+
+* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/max-statements.js)
+* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/max-statements.md)

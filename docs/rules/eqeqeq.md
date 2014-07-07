@@ -99,3 +99,8 @@ foo == undefined
 ## When Not To Use It
 
 If you don't want to enforce a style for using equality operators, then it's safe to disable this rule.
+
+## Resources
+
+* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/eqeqeq.js)
+* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/eqeqeq.md)

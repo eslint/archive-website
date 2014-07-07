@@ -61,3 +61,12 @@ var String;
 ## When Not To Use It
 
 If you are trying to override one of the native objects.
+
+## Related Rules
+
+* [no-extend-native](no-extend-native.html)
+
+## Resources
+
+* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/no-native-reassign.js)
+* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/no-native-reassign.md)

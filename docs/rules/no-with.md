@@ -26,3 +26,8 @@ If you intentionally use `with` statements then you can disable this rule.
 ## Further Reading
 
 * [with Statement Considered Harmful](http://www.yuiblog.com/blog/2006/04/11/with-statement-considered-harmful/)
+
+## Resources
+
+* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/no-with.js)
+* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/no-with.md)

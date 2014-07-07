@@ -194,3 +194,86 @@ Both the JSON and YAML configuration file formats support comments. You can use 
 }
 ```
 
+## Ignoring Files and Directories
+
+You can tell ESLint to ignore specific files and directories by creating an `.eslintignore` file in your project's root directory. The `.eslintignore` file is a plain text file where each line is a glob pattern indicating which paths should be omitted from linting. For example, the following will omit all JavaScript files:
+
+```
+**/*.js
+```
+
+When ESLint is run, it looks in the current working directory to find an `.eslintignore` file before determining which files to lint. If this file is found, then those preferences are applied when traversing directories.
+
+**Note:** You can only use one `.eslintignore` file at a time.
+
+### Using an Alternate File
+
+If you'd prefer to use a different file than `.eslintignore`, you can specify it on the command line using the `--ignore-path` option. For example, you can use `.jshintignore` file because it has the same format:
+
+    eslint --ignore-path .jshintignore file.js
+
+You can also use your `.gitignore` file:
+
+    eslint --ignore-path .gitignore file.js
+
+Any file that follows the standard ignore file format can be used. Keep in mind that specifying `--ignore-path` means that any existing `.eslintignore` file will not be used.
+
+### Ignored File Warnings
+
+When you pass directories to ESLint, files and directories are silently ignored. If you pass a specific file to ESLint, then you will see a warning indicating that the file was skipped. For example, suppose you have an `.eslintignore` file that looks like this:
+
+```
+foo.js
+```
+
+And then you run:
+
+    eslint foo.js
+
+You'll see this warning:
+
+```
+foo.js
+  0:0  warning  File ignored because of your .eslintignore file. Use --no-eslintignore to override.
+
+✖ 1 problem
+```
+
+This message occurs because ESLint is unsure if you wanted to actually lint the file or not. As the message indicates, you can use `--no-eslintignore` to omit using the ignore rules.
+
+## Configuration Cascading and Hierarchy
+
+When you use `.eslintrc` files for configuration, you can take advantage of configuration cascading. For instance, suppose you have the following structure:
+
+```
+your-project
+├── .eslintrc
+├── lib
+│ └── source.js
+└─┬ tests
+  └─┬ .eslintrc
+    └── test.js
+```
+
+The configuration cascade works by using the closest `.eslintrc` file to the file being linted as the highest priority, then any configuration files in the parent directory, and so on. When you run ESLint on this project, all files in `lib/` will use the `.eslintrc` file at the root of the project as their configuration, so `your-project/lib/source.js` is only affected by `your-project/.eslintrc`. When ESLint traverses into the `tests/` directory, it will then use `your-project/tests/.eslintrc` in addition to `your-project/.eslintrc`. So `your-project/tests/test.js` is linted based on the combination of the two `.eslintrc` files in its directory hierarchy, with the closest one taking priority. In this way, you can have project-level ESLint settings and also have directory-specific overrides.
+
+The complete configuration hierarchy, from highest priority to lowest priority, is as follows:
+
+1. Inline configuration
+    a. `/*eslint-disable*/`
+    b. `/*global*/`
+    c. `/*eslint*/`
+    b. `/*eslint-env*/`
+2. Command line options:
+    -. `--global`
+    a. `--rule`
+    b. `--env`
+    c. `-c`, `--config`
+3. Project-level configuration:
+    a. `.eslintrc` file in same directory as linted file
+    b. Continue searching for `.eslintrc` in ancestor directories (parent has highest priority, then grandparent, etc.), up to and including the root directory.
+    c. XOR, in the absence of any defined `.eslintrc` rules in (a) and (b), fall back to `~/.eslintrc` - personal default configuration
+4. ESLint default configuration:
+    a. `environments.json`
+    b. `eslint.json`
+    c. Blank (no config)

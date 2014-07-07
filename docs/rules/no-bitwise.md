@@ -44,3 +44,8 @@ var x = y > z;
 
 var x = y < z;
 ```
+
+## Resources
+
+* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/no-bitwise.js)
+* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/no-bitwise.md)

@@ -61,3 +61,8 @@ function doSomething() {
 
 * [JavaScript Scoping and Hoisting](http://www.adequatelygood.com/JavaScript-Scoping-and-Hoisting.html)
 * [var Hoisting](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/var#var_hoisting)
+
+## Resources
+
+* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/block-scoped-var.js)
+* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/block-scoped-var.md)

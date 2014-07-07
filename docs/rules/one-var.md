@@ -60,3 +60,8 @@ function foo() {
 ## Further Reading
 
 [JSLint Errors - Combine this with the previous 'var' statement](http://jslinterrors.com/combine-this-with-the-previous-var-statement/)
+
+## Resources
+
+* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/one-var.js)
+* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/one-var.md)

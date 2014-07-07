@@ -72,3 +72,13 @@ If you want to allow the use of primitive wrapper objects, then you can safely d
 ## Further Reading
 
 * [Wrapper objects](https://www.inkling.com/read/javascript-definitive-guide-david-flanagan-6th/chapter-3/wrapper-objects)
+
+## Related Rules
+
+* [no-array-constructor](no-array-constructor.html)
+* [no-new-object](no-new-object.html)
+
+## Resources
+
+* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/no-new-wrappers.js)
+* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/no-new-wrappers.md)

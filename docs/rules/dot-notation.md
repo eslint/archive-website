@@ -31,3 +31,8 @@ var x = foo[bar];    // Property name is a variable, square-bracket notation req
 var foo = { "class": "CS 101" }
 var x = foo["class"]; // Property name is a reserved word, square-bracket notation required
 ```
+
+## Resources
+
+* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/dot-notation.js)
+* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/dot-notation.md)

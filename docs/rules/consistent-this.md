@@ -55,3 +55,8 @@ This rule is disabled by default. You can configure the designated `this` variab
 ## When Not To Use It
 
 If you need to capture nested context, `consistent-this` is going to be problematic. Code of that nature is usually difficult to read and maintain and you should consider refactoring it.
+
+## Resources
+
+* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/consistent-this.js)
+* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/consistent-this.md)

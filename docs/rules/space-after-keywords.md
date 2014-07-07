@@ -61,3 +61,8 @@ if (a) {} else {}
 // When ["never"]
 if(a) {}
 ```
+
+## Resources
+
+* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/space-after-keywords.js)
+* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/space-after-keywords.md)

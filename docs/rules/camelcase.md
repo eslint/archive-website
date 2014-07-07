@@ -41,3 +41,8 @@ obj.do_something();
 ## When Not To Use It
 
 If you have established coding standards using a different naming convention (separating words with underscores), turn this rule off.
+
+## Resources
+
+* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/camelcase.js)
+* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/camelcase.md)

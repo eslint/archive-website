@@ -40,3 +40,8 @@ while (qux !== null) {
   baz();
 }
 ```
+
+## Resources
+
+* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/no-eq-null.js)
+* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/no-eq-null.md)

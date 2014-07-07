@@ -38,3 +38,8 @@ Foo.prototype.bar = function bar() {};
 ## Further Reading
 
 * [Functions Explained](http://markdaggett.com/blog/2013/02/15/functions-explained/)
+
+## Resources
+
+* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/func-names.js)
+* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/func-names.md)

@@ -40,3 +40,8 @@ The following patterns are not warnings:
 var foo = "bar";
 ```
 
+
+## Resources
+
+* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/no-space-before-semi.js)
+* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/no-space-before-semi.md)

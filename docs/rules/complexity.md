@@ -60,3 +60,16 @@ If you can't determine an appropriate complexity limit for your code, then it's 
 
 * [About Complexity](http://jscomplexity.org/complexity)
 * [Complexity Analysis of JavaScript Code](http://ariya.ofilabs.com/2012/12/complexity-analysis-of-javascript-code.html)
+
+## Related Rules
+
+* [max-depth](max-depth.html)
+* [max-len](max-len.html)
+* [max-nested-callbacks](max-nested-callbacks.html)
+* [max-params](max-params.html)
+* [max-statements](max-statements.html)
+
+## Resources
+
+* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/complexity.js)
+* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/complexity.md)

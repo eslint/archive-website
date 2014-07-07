@@ -41,3 +41,8 @@ q:
 ## Further Reading
 
 * ['{a}' is a statement label](http://jslinterrors.com/a-is-a-statement-label/)
+
+## Resources
+
+* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/no-label-var.js)
+* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/no-label-var.md)

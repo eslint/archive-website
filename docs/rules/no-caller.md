@@ -48,3 +48,8 @@ function foo(n) {
     return !(n > 1) ? 1 : factorial(n - 1) * n;
 });
 ```
+
+## Resources
+
+* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/no-caller.js)
+* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/no-caller.md)

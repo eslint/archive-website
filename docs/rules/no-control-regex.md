@@ -29,3 +29,14 @@ var pattern2 = new RegExp("\x20");
 ## When Not To Use It
 
 If you need to use control character pattern matching, then you should turn this rule off.
+
+## Related Rules
+
+* [no-div-regex](no-div-regex.html)
+* [no-regex-spaces](no-regex-spaces.html)
+
+
+## Resources
+
+* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/no-control-regex.js)
+* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/no-control-regex.md)

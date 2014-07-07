@@ -72,3 +72,8 @@ If explicit declaration of global variables is not to your taste.
 ## Further Reading
 
 * ['{a}' is not defined](http://jslinterrors.com/a-is-not-defined/)
+
+## Resources
+
+* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/no-undef.js)
+* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/no-undef.md)

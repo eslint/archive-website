@@ -64,3 +64,8 @@ while (true) {
 ## When Not To Use It
 
 If you need to use labeled statements, then you can safely disable this rule.
+
+## Resources
+
+* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/no-labels.js)
+* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/no-labels.md)

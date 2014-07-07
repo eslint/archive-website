@@ -43,3 +43,8 @@ var a = 10; alert(a);
 
 function f() {} f();
 ```
+
+## Resources
+
+* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/no-use-before-define.js)
+* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/no-use-before-define.md)

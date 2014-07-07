@@ -42,3 +42,13 @@ If you want to allow multiple spaces in a regular expression, then you can safel
 ## Further Reading
 
 * [Spaces are hard to count](http://jslinterrors.com/spaces-are-hard-to-count-use-a/)
+
+## Related Rules
+
+* [no-div-regex](no-div-regex.html)
+* [no-control-regex](no-control-regex.html)
+
+## Resources
+
+* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/no-regex-spaces.js)
+* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/no-regex-spaces.md)

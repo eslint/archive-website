@@ -64,3 +64,8 @@ function doSomething(condition) {
 ## When Not To Use It
 
 If you want to allow functions to have different `return` behavior depending on code branching, then it is safe to disable this rule.
+
+## Resources
+
+* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/consistent-return.js)
+* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/consistent-return.md)

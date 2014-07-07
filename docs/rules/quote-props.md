@@ -81,3 +81,8 @@ var object = {
 ## When Not To Use It
 
 If you don’t care if property names are consistently wrapped in quotes or not, turn this rule off.
+
+## Resources
+
+* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/quote-props.js)
+* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/quote-props.md)

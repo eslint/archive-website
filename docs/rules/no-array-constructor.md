@@ -37,3 +37,13 @@ new Array(someOtherArray.length)
 
 This rule enforces a nearly universal stylistic concern. That being said, this
 rule may be disabled if the constructor style is preferred.
+
+## Related Rules
+
+* [no-new-object](no-new-object.html)
+* [no-new-wrappers](no-new-wrappers.html)
+
+## Resources
+
+* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/no-array-constructor.js)
+* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/no-array-constructor.md)

@@ -28,3 +28,8 @@ var foo = "Copyright \u00A9";   // unicode
 
 var foo = "Copyright \xA9";     // hexadecimal
 ```
+
+## Resources
+
+* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/no-octal-escape.js)
+* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/no-octal-escape.md)

@@ -40,3 +40,8 @@ var __iterator__ = foo; // Not using the `__iterator__` property.
 
 * [MDN - Iterators and Generators](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Iterators_and_Generators)
 * [ECMAScript 6 compatibility table - Iterators](http://kangax.github.io/es5-compat-table/es6/#Iterators)
+
+## Resources
+
+* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/no-iterator.js)
+* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/no-iterator.md)

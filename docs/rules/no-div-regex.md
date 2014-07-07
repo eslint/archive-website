@@ -26,3 +26,13 @@ The following patterns adhere to this rule:
 ```js
 function() { return /\=foo/; }
 ```
+
+## Related Rules
+
+* [no-control-regex](no-control-regex.html)
+* [no-regex-spaces](no-regex-spaces.html)
+
+## Resources
+
+* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/no-div-regex.js)
+* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/no-div-regex.md)

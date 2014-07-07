@@ -52,3 +52,8 @@ for (var i=10; i; i--) {
 ## Further Reading
 
 * [Don't make functions within a loop](http://jslinterrors.com/dont-make-functions-within-a-loop/)
+
+## Resources
+
+* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/no-loop-func.js)
+* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/no-loop-func.md)

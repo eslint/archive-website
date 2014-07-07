@@ -63,3 +63,8 @@ function foo() {
     }
 }
 ```
+
+## Resources
+
+* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/no-else-return.js)
+* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/no-else-return.md)

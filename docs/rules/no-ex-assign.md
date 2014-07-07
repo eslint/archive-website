@@ -50,3 +50,8 @@ Related aside: there are some interesting caveats in IE 6-8 where the exception 
 
 * [Do not assign to the exception parameter](http://jslinterrors.com/do-not-assign-to-the-exception-parameter/)
 * [The "catch" with try...catch -- Ben Alman](http://weblog.bocoup.com/the-catch-with-try-catch/)
+
+## Resources
+
+* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/no-ex-assign.js)
+* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/no-ex-assign.md)

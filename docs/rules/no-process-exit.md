@@ -45,3 +45,8 @@ var exit = process.exit;
 ## When Not To Use It
 
 There may be a part of a Node.js application that is responsible for determining the correct exit code to return upon exiting. In that case, you should turn this rule off to allow proper handling of the exit code.
+
+## Resources
+
+* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/no-process-exit.js)
+* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/no-process-exit.md)

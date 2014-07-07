@@ -32,3 +32,8 @@ The following patterns are not warnings:
 fn()
 ```
 
+
+## Resources
+
+* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/no-spaced-func.js)
+* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/no-spaced-func.md)

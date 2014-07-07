@@ -45,3 +45,8 @@ var foo = {
     quxx: "qux"
 };
 ```
+
+## Resources
+
+* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/no-dupe-keys.js)
+* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/no-dupe-keys.md)

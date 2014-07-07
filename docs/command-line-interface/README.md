@@ -22,17 +22,21 @@ The command line utility has several options. You can view the options by runnin
 eslint [options] file.js [file.js] [dir]
 
 Options:
-  -h, --help                 Show help.
-  -c, --config path::String  Load configuration data from this file.
-  --rulesdir [path::String]  Load additional rules from this directory.
-  -f, --format String        Use a specific output format. - default: stylish
-  -v, --version              Outputs the version number.
-  --reset                    Set all default rules to off.
-  --eslintrc                 Enable loading .eslintrc configuration. - default: true
-  --env [String]             Specify environments.
-  --force                    Allow linting of otherwise ignored files.
-  --global [String]          Define global variables.
-  --rule Object              Specify rules.
+  -h, --help                  Show help.
+  -c, --config path::String   Load configuration data from this file.
+  --rulesdir [path::String]   Load additional rules from this directory.
+  -f, --format String         Use a specific output format. - default: stylish
+  -o, --output-file           Outputs the output into a file.
+  -v, --version               Outputs the version number.
+  --reset                     Set all default rules to off.
+  --eslintrc                  Enable loading .eslintrc configuration. -
+                              default: true
+  --env [String]              Specify environments.
+  --global [String]           Define global variables.
+  --rule Object               Specify rules.
+  --ignore-path path::String  Specify the file that contains patterns of files
+                              to ignore.
+  --ignore                    Enable loading of .eslintignore. - default: true
 ```
 
 ### `-h`, `--help`
@@ -62,6 +66,16 @@ When specified, the given format is output to the console. If you'd like to save
     eslint -f compact file.js > results.txt
 
 This saves the output into the `results.txt` file.
+
+### `-o`
+
+This option specifies the output file name which can be passes for the output of the task to be put into
+
+Example:
+
+    eslint -o ./test/test.html
+
+When specified, the given format is output into the provided file name.
 
 ### `--rulesdir`
 
@@ -100,14 +114,6 @@ Example
     eslint --env browser,node file.js
     eslint --env browser --env node file.js
 
-### `--force`
-
-This option allows you to override the ignore rules defined in `.eslintignore` files and always lint each file passed to eslint. Without this option enabled, ignored files will not be linted even if specifically listed in the list of files.
-
-Example
-
-    eslint --force an-ignored-file.js
-
 ### `--global`
 
 This option defines global variables so that they will not be flagged as undefined by the `no-undef` rule. Global variables are read-only by default, but appending `:true` to a variable's name makes it writable. To define multiple variables, separate them using commas, or use the flag multiple times.
@@ -126,6 +132,23 @@ Example:
     eslint --rule 'quotes: [2, double]'
     eslint --rule 'guard-for-in: 2' --rule 'brace-style: [2, 1tbs]'
 
+### `--ignore-path`
+
+This option allows you to specify the file to use as your `.eslintignore`. By default, ESLint looks in the current working directory for `.eslintignore`. You can override this behavior by providing a path to a different file.
+
+Example:
+
+  eslint --ignore-path tmp/.eslintignore file.js
+
+### `--ignore`, `--no-ignore`
+
+This options tells ESLint whether it should automatically load an `.eslintignore` file from the current working directory. When set to `false`, or when using `--no-ignore`, no files or directories will be ignored.
+
+Example:
+
+  eslint --ignore false file.js
+  eslint --no-ignore file.js
+
 ### `-v`, `--version`
 
 This option outputs the current ESLint version onto the console. All other options are ignored when present.
@@ -142,5 +165,3 @@ ESLint supports `.eslintignore` files to exclude files from the linting process 
 node_modules/*
 **/vendor/*.js
 ```
-
-**Deprecation notice**: The `.eslintignore` file can also be a JSON file that contains an array of globs. This works identically to the plain text version, but the JSON format is deprecated and will be removed in a future release.

@@ -25,3 +25,8 @@ var a = 3;
 ...
 a = 10;
 ```
+
+## Resources
+
+* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/no-redeclare.js)
+* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/no-redeclare.md)

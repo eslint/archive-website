@@ -49,3 +49,8 @@ If you are certain of the first argument's format, then the second argument is u
 
 * [parseInt and radix](http://davidwalsh.name/parseint-radix)
 * [Missing radix parameter](http://jslinterrors.com/missing-radix-parameter/)
+
+## Resources
+
+* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/radix.js)
+* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/radix.md)

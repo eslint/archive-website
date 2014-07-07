@@ -59,3 +59,16 @@ You can configure the depth as an option by using the second argument in your co
 ```json
 "max-depth": [2, 10]
 ```
+
+## Related Rules
+
+* [complexity](complexity.html)
+* [max-len](max-len.html)
+* [max-nested-callbacks](max-nested-callbacks.html)
+* [max-params](max-params.html)
+* [max-statements](max-statements.html)
+
+## Resources
+
+* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/max-depth.js)
+* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/max-depth.md)

@@ -39,3 +39,8 @@ var num  = "071";
 ## Further Reading
 
 * [Octal literals not allowed in strict mode](http://jslinterrors.com/octal-literals-are-not-allowed-in-strict-mode/)
+
+## Resources
+
+* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/no-octal.js)
+* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/no-octal.md)

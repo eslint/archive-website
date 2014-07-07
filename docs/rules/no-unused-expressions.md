@@ -64,3 +64,8 @@ delete a.b
 ```js
 void a
 ```
+
+## Resources
+
+* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/no-unused-expressions.js)
+* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/no-unused-expressions.md)

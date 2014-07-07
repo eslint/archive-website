@@ -45,3 +45,12 @@ var myObject = {};
 
 If you wish to allow the use of the `Object` constructor, you can safely turn this rule off.
 
+## Related Rules
+
+* [no-array-constructor](no-array-constructor.html)
+* [no-new-wrappers](no-new-wrappers.html)
+
+## Resources
+
+* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/no-new-object.js)
+* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/no-new-object.md)
