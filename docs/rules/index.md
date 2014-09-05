@@ -30,6 +30,7 @@ The following rules point out areas where you might have made mistakes.
 * [no-negated-in-lhs](no-negated-in-lhs.html) - disallow negation of the left operand of an `in` expression
 * [no-obj-calls](no-obj-calls.html) - disallow the use of object properties of the global object (`Math` and `JSON`) as functions
 * [no-regex-spaces](no-regex-spaces.html) - disallow multiple spaces in a regular expression literal
+* [no-reserved-keys](no-reserved-keys.html) - disallow reserved words being used as object literal keys (off by default)
 * [no-sparse-arrays](no-sparse-arrays.html) - disallow sparse arrays
 * [no-unreachable](no-unreachable.html) - disallow unreachable statements after a return, throw, continue, or break statement
 * [use-isnan](use-isnan.html) - disallow comparisons with the value `NaN`
@@ -56,6 +57,7 @@ These are rules designed to prevent you from making mistakes. They either prescr
 * [no-eq-null](no-eq-null.html) - disallow comparisons to null without a type-checking operator (off by default)
 * [no-eval](no-eval.html) - disallow use of `eval()`
 * [no-extend-native](no-extend-native.html) - disallow adding to native types
+* [no-extra-bind](no-extra-bind.html) - disallow unnecessary function binding
 * [no-fallthrough](no-fallthrough.html) - disallow fallthrough of `case` statements
 * [no-floating-decimal](no-floating-decimal.html) - disallow the use of leading or trailing decimal points in numeric literals (off by default)
 * [no-implied-eval](no-implied-eval.html) - disallow use of `eval()`-like methods
@@ -77,9 +79,11 @@ These are rules designed to prevent you from making mistakes. They either prescr
 * [no-self-compare](no-self-compare.html) - disallow comparisons where both sides are exactly the same (off by default)
 * [no-sequences](no-sequences.html) - disallow use of comma operator
 * [no-unused-expressions](no-unused-expressions.html) - disallow usage of expressions in statement position
+* [no-void](no-void.html) - disallow use of `void` operator (off by default)
 * [no-warning-comments](no-warning-comments.html) - disallow usage of configurable warning terms in comments - e.g. `TODO` or `FIXME` (off by default)
 * [no-with](no-with.html) - disallow use of the `with` statement
 * [radix](radix.html) - require use of the second argument for `parseInt()` (off by default)
+* [vars-on-top](vars-on-top.html) - requires to declare all the vars on top of function scope (off by default)
 * [wrap-iife](wrap-iife.html) - require immediate function invocation to be wrapped in parentheses (off by default)
 * [yoda](yoda.html) - require or disallow Yoda conditions
 
@@ -87,7 +91,7 @@ These are rules designed to prevent you from making mistakes. They either prescr
 
 These rules relate to using strict mode.
 
-* [no-global-strict](no-global-strict.html) - disallow the `"use strict"` pragma in the global scope (off by default in the node environment)
+* [global-strict](global-strict.html) - require or disallow the `"use strict"` pragma in the global scope (off by default in the node environment)
 * [no-extra-strict](no-extra-strict.html) - disallow unnecessary use of `"use strict";` when already in strict mode
 * [strict](strict.html) - require that all functions are run in strict mode
 
@@ -129,7 +133,7 @@ These rules are purely matters of style and are quite subjective.
 * [func-names](func-names.html) - require function expressions to have a name (off by default)
 * [func-style](func-style.html) - enforces use of function declarations or expressions (off by default)
 * [new-cap](new-cap.html) - require a capital letter for constructors
-* [new-parens](new-parens.html) - disallow the omission of parentheses when invoking a contructor with no arguments
+* [new-parens](new-parens.html) - disallow the omission of parentheses when invoking a constructor with no arguments
 * [no-nested-ternary](no-nested-ternary.html) - disallow nested ternary expressions (off by default)
 * [no-array-constructor](no-array-constructor.html) - disallow use of the `Array` constructor
 * [no-lonely-if](no-lonely-if.html) - disallow if as the only statement in an else block (off by default)
@@ -137,7 +141,7 @@ These rules are purely matters of style and are quite subjective.
 * [no-spaced-func](no-spaced-func.html) - disallow space between function identifier and application
 * [no-space-before-semi](no-space-before-semi.html) - disallow space before semicolon
 * [no-ternary](no-ternary.html) - disallow the use of ternary operators (off by default)
-* [no-trailing-spaces](no-trailing-spaces.html) - disallow trailing whitespace at the end of lines (off by default)
+* [no-trailing-spaces](no-trailing-spaces.html) - disallow trailing whitespace at the end of lines
 * [no-underscore-dangle](no-underscore-dangle.html) - disallow dangling underscores in identifiers
 * [no-wrap-func](no-wrap-func.html) - disallow wrapping of non-IIFE statements in parens
 * [no-mixed-spaces-and-tabs](no-mixed-spaces-and-tabs.html) - disallow mixed spaces and tabs for indentation
@@ -146,7 +150,8 @@ These rules are purely matters of style and are quite subjective.
 * [semi](semi.html) - require or disallow use of semicolons instead of ASI
 * [sort-vars](sort-vars.html) - sort variables within the same declaration block (off by default)
 * [space-after-keywords](space-after-keywords.html) - require a space after certain keywords (off by default)
-* [space-in-brackets](space-in-brackets.html) - require or disallow spaces between brackets (off by default)
+* [space-in-brackets](space-in-brackets.html) - require or disallow spaces inside brackets (off by default)
+* [space-in-parens](space-in-parens.html) - require or disallow spaces inside parentheses (off by default)
 * [space-infix-ops](space-infix-ops.html) - require spaces around operators
 * [space-return-throw-case](space-return-throw-case.html) - require a space after `return`, `throw`, and `case`
 * [space-unary-word-ops](space-unary-word-ops.html) - require a space around word operators such as `typeof` (off by default)
@@ -165,8 +170,3 @@ The following rules are included for compatibility with [JSHint](http://jshint.c
 * [no-bitwise](no-bitwise.html) - disallow use of bitwise operators (off by default)
 * [no-plusplus](no-plusplus.html) - disallow use of unary operators, `++` and `--` (off by default)
 
-
-## Resources
-
-* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/README.js)
-* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/README.md)

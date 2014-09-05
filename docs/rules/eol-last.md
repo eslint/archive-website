@@ -15,29 +15,36 @@ empty or whitespace-only lines.
 
 The following patterns are considered warnings:
 
-```js
+<pre>
 function doSmth() {
   ...
 }
-```
+</pre>
 
-```js
+<pre>
 function doSmth() {
   ...
 }
 
 
 
-```
+</pre>
+
+<pre>
+function doSmth() {
+  ...
+}
+// spaces here
+</pre>
 
 The following patterns are not warnings:
 
-```js
+<pre>
 function doSmth() {
   ...
 }
 
-```
+</pre>
 
 ## Resources
 

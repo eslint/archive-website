@@ -5,7 +5,7 @@ layout: doc
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 # Disallow return in else (no-else-return)
 
-If a an `if` block contains a `return` statement, the `else` block becomes unnecessary. Its contents can be placed outside of the block.
+If an `if` block contains a `return` statement, the `else` block becomes unnecessary. Its contents can be placed outside of the block.
 
 ```js
 function foo() {

@@ -160,6 +160,10 @@ Note that `"always"` has a special case where `{}` and `[]` are not considered w
 
 You can turn this rule off if you are not concerned with the consistency of spacing between brackets.
 
+## Related Rules
+
+* [space-in-parens](space-in-parens.html)
+
 ## Resources
 
 * [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/space-in-brackets.js)

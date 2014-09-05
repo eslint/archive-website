@@ -9,6 +9,7 @@
 * Emacs: [Flycheck](http://flycheck.readthedocs.org/en/latest/) supports ESLint in recent versions.
 * Eclipse Orion: ESLint is the [default linter](http://dev.eclipse.org/mhonarc/lists/orion-dev/msg02718.html)
 * [TextMate 2](https://github.com/natesilva/javascript-eslint.tmbundle)
+* Atom: [linter-eslint](https://atom.io/packages/linter-eslint)
 
 
 ## Build Systems
@@ -16,6 +17,7 @@
 * **Grunt:**
     * [eslint-grunt](https://npmjs.org/package/eslint-grunt)
     * [grunt-eslint](https://npmjs.org/package/grunt-eslint)
+    * [grunt-contrib-eslint](https://www.npmjs.org/package/grunt-contrib-eslint)
 * **Gulp:**
     * [gulp-eslint](https://npmjs.org/package/gulp-eslint)
 * **Mimosa:**

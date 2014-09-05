@@ -47,8 +47,6 @@ function foo() {
     return 42;
   };
 }
-
-}
 ```
 
 ## Related Rules

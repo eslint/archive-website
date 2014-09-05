@@ -25,6 +25,7 @@ The following rules point out areas where you might have made mistakes.
 * [no-negated-in-lhs](no-negated-in-lhs.md) - disallow negation of the left operand of an `in` expression
 * [no-obj-calls](no-obj-calls.md) - disallow the use of object properties of the global object (`Math` and `JSON`) as functions
 * [no-regex-spaces](no-regex-spaces.md) - disallow multiple spaces in a regular expression literal
+* [no-reserved-keys](no-reserved-keys.md) - disallow reserved words being used as object literal keys (off by default)
 * [no-sparse-arrays](no-sparse-arrays.md) - disallow sparse arrays
 * [no-unreachable](no-unreachable.md) - disallow unreachable statements after a return, throw, continue, or break statement
 * [use-isnan](use-isnan.md) - disallow comparisons with the value `NaN`
@@ -51,6 +52,7 @@ These are rules designed to prevent you from making mistakes. They either prescr
 * [no-eq-null](no-eq-null.md) - disallow comparisons to null without a type-checking operator (off by default)
 * [no-eval](no-eval.md) - disallow use of `eval()`
 * [no-extend-native](no-extend-native.md) - disallow adding to native types
+* [no-extra-bind](no-extra-bind.md) - disallow unnecessary function binding
 * [no-fallthrough](no-fallthrough.md) - disallow fallthrough of `case` statements
 * [no-floating-decimal](no-floating-decimal.md) - disallow the use of leading or trailing decimal points in numeric literals (off by default)
 * [no-implied-eval](no-implied-eval.md) - disallow use of `eval()`-like methods
@@ -72,9 +74,11 @@ These are rules designed to prevent you from making mistakes. They either prescr
 * [no-self-compare](no-self-compare.md) - disallow comparisons where both sides are exactly the same (off by default)
 * [no-sequences](no-sequences.md) - disallow use of comma operator
 * [no-unused-expressions](no-unused-expressions.md) - disallow usage of expressions in statement position
+* [no-void](no-void.md) - disallow use of `void` operator (off by default)
 * [no-warning-comments](no-warning-comments.md) - disallow usage of configurable warning terms in comments - e.g. `TODO` or `FIXME` (off by default)
 * [no-with](no-with.md) - disallow use of the `with` statement
 * [radix](radix.md) - require use of the second argument for `parseInt()` (off by default)
+* [vars-on-top](vars-on-top.md) - requires to declare all the vars on top of function scope (off by default)
 * [wrap-iife](wrap-iife.md) - require immediate function invocation to be wrapped in parentheses (off by default)
 * [yoda](yoda.md) - require or disallow Yoda conditions
 
@@ -82,7 +86,7 @@ These are rules designed to prevent you from making mistakes. They either prescr
 
 These rules relate to using strict mode.
 
-* [no-global-strict](no-global-strict.md) - disallow the `"use strict"` pragma in the global scope (off by default in the node environment)
+* [global-strict](global-strict.md) - require or disallow the `"use strict"` pragma in the global scope (off by default in the node environment)
 * [no-extra-strict](no-extra-strict.md) - disallow unnecessary use of `"use strict";` when already in strict mode
 * [strict](strict.md) - require that all functions are run in strict mode
 
@@ -124,7 +128,7 @@ These rules are purely matters of style and are quite subjective.
 * [func-names](func-names.md) - require function expressions to have a name (off by default)
 * [func-style](func-style.md) - enforces use of function declarations or expressions (off by default)
 * [new-cap](new-cap.md) - require a capital letter for constructors
-* [new-parens](new-parens.md) - disallow the omission of parentheses when invoking a contructor with no arguments
+* [new-parens](new-parens.md) - disallow the omission of parentheses when invoking a constructor with no arguments
 * [no-nested-ternary](no-nested-ternary.md) - disallow nested ternary expressions (off by default)
 * [no-array-constructor](no-array-constructor.md) - disallow use of the `Array` constructor
 * [no-lonely-if](no-lonely-if.md) - disallow if as the only statement in an else block (off by default)
@@ -132,7 +136,7 @@ These rules are purely matters of style and are quite subjective.
 * [no-spaced-func](no-spaced-func.md) - disallow space between function identifier and application
 * [no-space-before-semi](no-space-before-semi.md) - disallow space before semicolon
 * [no-ternary](no-ternary.md) - disallow the use of ternary operators (off by default)
-* [no-trailing-spaces](no-trailing-spaces.md) - disallow trailing whitespace at the end of lines (off by default)
+* [no-trailing-spaces](no-trailing-spaces.md) - disallow trailing whitespace at the end of lines
 * [no-underscore-dangle](no-underscore-dangle.md) - disallow dangling underscores in identifiers
 * [no-wrap-func](no-wrap-func.md) - disallow wrapping of non-IIFE statements in parens
 * [no-mixed-spaces-and-tabs](no-mixed-spaces-and-tabs.md) - disallow mixed spaces and tabs for indentation
@@ -141,7 +145,8 @@ These rules are purely matters of style and are quite subjective.
 * [semi](semi.md) - require or disallow use of semicolons instead of ASI
 * [sort-vars](sort-vars.md) - sort variables within the same declaration block (off by default)
 * [space-after-keywords](space-after-keywords.md) - require a space after certain keywords (off by default)
-* [space-in-brackets](space-in-brackets.md) - require or disallow spaces between brackets (off by default)
+* [space-in-brackets](space-in-brackets.md) - require or disallow spaces inside brackets (off by default)
+* [space-in-parens](space-in-parens.md) - require or disallow spaces inside parentheses (off by default)
 * [space-infix-ops](space-infix-ops.md) - require spaces around operators
 * [space-return-throw-case](space-return-throw-case.md) - require a space after `return`, `throw`, and `case`
 * [space-unary-word-ops](space-unary-word-ops.md) - require a space around word operators such as `typeof` (off by default)
