@@ -3,7 +3,7 @@ title: ESLint
 layout: doc
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
-# Require var Statements to be at the Top of Functions (vars-on-top)
+# Require Variable Declarations to be at the Top (vars-on-top)
 
 The `vars-on-top` rule generates warnings when variable declarations are not used serially at the top of a function scope or the top of a program.
 By default variable declarations are always moved (“hoisted”) invisibly to the top of their containing scope by the JavaScript interpreter.
@@ -29,7 +29,7 @@ function doSomething() {
 // GOOD
 function doSomething() {
     var first;
-    var second; //multiple declarations are allowed at thet op
+    var second; //multiple declarations are allowed at the top
     if (true) {
         first = true;
     }
