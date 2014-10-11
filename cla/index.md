@@ -1,6 +1,6 @@
 ---
 title: ESLint Contributor License Agreement
-layout: post
+layout: doc
 ---
 
 # Contributor License Agreement (CLA)
