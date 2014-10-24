@@ -37,6 +37,14 @@ if (foo) {
 }
 ```
 
+## Related Rules
+
+* [no-ternary](no-ternary.html)
+
+## Version
+
+This rule was introduced in ESLint 0.2.0.
+
 ## Resources
 
 * [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/no-nested-ternary.js)

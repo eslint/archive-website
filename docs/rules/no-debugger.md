@@ -28,6 +28,10 @@ If your code is still very much in development and don't want to worry about str
 * [no-alert](no-alert.html)
 * [no-console](no-console.html)
 
+## Version
+
+This rule was introduced in ESLint 0.0.2.
+
 ## Resources
 
 * [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/no-debugger.js)

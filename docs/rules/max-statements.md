@@ -57,6 +57,10 @@ function foo() {
 * [max-nested-callbacks](max-nested-callbacks.html)
 * [max-params](max-params.html)
 
+## Version
+
+This rule was introduced in ESLint 0.0.9.
+
 ## Resources
 
 * [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/max-statements.js)

@@ -16,6 +16,7 @@ The following patterns are considered warnings:
 ```js
 var x = 10;
 ```
+
 ```js
 var x = 10; x = 5;
 ```
@@ -86,6 +87,10 @@ The following code:
 ## When Not to Use It
 
 If you don't want to be notified about unused variables or function arguments, you can safely turn this rule off.
+
+## Version
+
+This rule was introduced in ESLint 0.0.9.
 
 ## Resources
 

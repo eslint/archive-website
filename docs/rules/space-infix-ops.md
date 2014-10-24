@@ -41,10 +41,6 @@ a +b
 a?b:c
 ```
 
-```js
-a,b
-```
-
 The following patterns are not considered warnings:
 
 ```js
@@ -58,10 +54,9 @@ a       + b
 ```js
 a ? b : c
 ```
+## Version
 
-```js
-a, b // sequences need only be spaced on the right
-```
+This rule was introduced in ESLint 0.2.0.
 
 ## Resources
 

@@ -55,6 +55,10 @@ If your code is only going to be executed in an ECMAScript 5 or higher environme
 
 * [Reserved words as property names](http://kangax.github.io/compat-table/es5/#Reserved_words_as_property_names)
 
+## Version
+
+This rule was introduced in ESLint 0.8.0.
+
 ## Resources
 
 * [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/no-reserved-keys.js)

@@ -66,6 +66,10 @@ if (condition) {
 
 Disable this rule if the code is clearer without requiring the `else if` form.
 
+## Version
+
+This rule was introduced in ESLint 0.6.0.
+
 ## Resources
 
 * [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/no-lonely-if.js)

@@ -100,6 +100,10 @@ foo == undefined
 
 If you don't want to enforce a style for using equality operators, then it's safe to disable this rule.
 
+## Version
+
+This rule was introduced in ESLint 0.0.2.
+
 ## Resources
 
 * [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/eqeqeq.js)

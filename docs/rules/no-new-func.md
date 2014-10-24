@@ -37,6 +37,10 @@ In more advanced cases where you really need to use the `Function` constructor.
 
 * [The Function constructor is eval](http://jslinterrors.com/the-function-constructor-is-eval/)
 
+## Version
+
+This rule was introduced in ESLint 0.0.7.
+
 ## Resources
 
 * [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/no-new-func.js)

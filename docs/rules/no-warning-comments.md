@@ -12,6 +12,7 @@ Often code is marked during development process for later work on it or with add
 This rule can be used to help finding these `warning-comments`. It can be configured with an array of terms you don't want to exist in your code. It will raise a warning when one or more of the configured `warning-comments` are present in the checked files.
 
 The default configuration has this rule disabled and looks like this:
+
 ```js
 ...
 "no-warning-comments": [0, { "terms": ["todo", "fixme", "xxx"], "location": "start" }]
@@ -33,6 +34,7 @@ configures it to check the complete comment, not only the start:
 ```
 
 The following patterns are considered warnings with the example configuration from above:
+
 ```js
 // TODO: this
 // todo: this too
@@ -46,6 +48,7 @@ The following patterns are considered warnings with the example configuration fr
 ```
 
 These patterns would not be considered warnings with the same example configuration:
+
 ```js
 // This is to do
 // even not any other    term
@@ -60,11 +63,13 @@ These patterns would not be considered warnings with the same example configurat
 As mentioned above, patterns are matched when they match exactly to one of the terms specified (ignoring the case).
 
 ## Rule Options
+
 ```js
 ...
 "no-warning-comments": [<enabled>, { "terms": <terms>, "location": <location> }]
 ...
 ```
+
 * `enabled`: for enabling the rule. 0=off, 1=warn, 2=error. Defaults to `0`.
 * `terms`: optional array of terms to match. Terms are matched ignoring the case. Defaults to `["todo", "fixme", "xxx"]`.
 * `location`: optional string that configures where in your comments to check for matches. Defaults to `"start"`.
@@ -78,6 +83,7 @@ As mentioned above, patterns are matched when they match exactly to one of the t
 
 ### More examples of valid configurations
 1. Rule configured to warn on matches and search the complete comment, not only the start of it. Note that the `term` configuration is omitted to use the defaults terms.
+
    ```js
    ...
    "no-warning-comments": [1, { "location": "anywhere" }]
@@ -85,6 +91,7 @@ As mentioned above, patterns are matched when they match exactly to one of the t
    ```
 
 2. Rule configured to warn on matches of the term `bad string` at the start of comments. Note that the `location` configuration is omitted to use the default location.
+
    ```js
    ...
    "no-warning-comments": [1, { "terms": ["bad string"] }]
@@ -92,6 +99,7 @@ As mentioned above, patterns are matched when they match exactly to one of the t
    ```
 
 3. Rule configured to warn with error on matches of the default terms at the start of comments. Note that the complete configuration object (that normally holds `terms` and/or `location`) can be omitted for simplicity.
+
    ```js
    ...
    "no-warning-comments": [2]
@@ -99,6 +107,7 @@ As mentioned above, patterns are matched when they match exactly to one of the t
    ```
 
 4. Rule configured to warn on matches of the default terms at the start of comments. Note that the complete configuration object (as already seen in the example above) and even the square brackets can be omitted for simplicity.
+
    ```js
    ...
    "no-warning-comments": 1
@@ -106,11 +115,16 @@ As mentioned above, patterns are matched when they match exactly to one of the t
    ```
 
 5. Rule configured to warn on matches of the specified terms at the start of comments. Note that you can use as many terms as you want.
+
    ```js
    ...
    "no-warning-comments": [1, { "terms": ["any really", "interesting", "or even not", "term", "can be matched"] }]
    ...
    ```
+
+## Version
+
+This rule was introduced in ESLint 0.4.4.
 
 ## Resources
 

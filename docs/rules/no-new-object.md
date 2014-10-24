@@ -50,6 +50,10 @@ If you wish to allow the use of the `Object` constructor, you can safely turn th
 * [no-array-constructor](no-array-constructor.html)
 * [no-new-wrappers](no-new-wrappers.html)
 
+## Version
+
+This rule was introduced in ESLint 0.0.9.
+
 ## Resources
 
 * [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/no-new-object.js)

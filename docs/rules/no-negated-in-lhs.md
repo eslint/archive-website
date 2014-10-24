@@ -33,6 +33,10 @@ Never.
 
 None.
 
+## Version
+
+This rule was introduced in ESLint 0.1.2.
+
 ## Resources
 
 * [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/no-negated-in-lhs.js)

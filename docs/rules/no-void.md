@@ -69,6 +69,15 @@ If you intentionally use `void` operator then you can disable this rule.
 * [Mozilla Developer Network](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/void)
 * [Bad Parts: Appendix B - JavaScript: The Good Parts by Douglas Crockford](http://oreilly.com/javascript/excerpts/javascript-good-parts/bad-parts.html)
 
+## Related Rules
+
+* [no-undef-init](no-undef-init.html)
+* [no-undefined](no-undefined.html)
+
+## Version
+
+This rule was introduced in ESLint 0.8.0.
+
 ## Resources
 
 * [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/no-void.js)

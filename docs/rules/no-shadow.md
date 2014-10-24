@@ -29,6 +29,13 @@ function b() {
 }
 ```
 
+```js
+var a = 3;
+var b = function () {
+    var a = 10;
+}
+```
+
 The following patterns are considered okay and do not cause warnings:
 
 ```js
@@ -42,6 +49,10 @@ b(a);
 ## Further Reading
 
 * [Variable Shadowing](http://en.wikipedia.org/wiki/Variable_shadowing)
+
+## Version
+
+This rule was introduced in ESLint 0.0.9.
 
 ## Resources
 

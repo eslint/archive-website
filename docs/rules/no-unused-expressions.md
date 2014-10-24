@@ -65,6 +65,10 @@ delete a.b
 void a
 ```
 
+## Version
+
+This rule was introduced in ESLint 0.1.0.
+
 ## Resources
 
 * [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/no-unused-expressions.js)

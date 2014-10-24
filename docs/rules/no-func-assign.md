@@ -28,6 +28,7 @@ function foo {
 ```
 
 Unlike the same rule in JSHint, the following pattern is also considered a warning:
+
 ```js
 foo = bar;
 function foo() {}
@@ -47,6 +48,10 @@ function foo() {
     var foo = bar;  // `foo` is shadowed.
 }
 ```
+
+## Version
+
+This rule was introduced in ESLint 0.0.9.
 
 ## Resources
 

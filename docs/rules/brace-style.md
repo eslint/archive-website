@@ -193,6 +193,10 @@ If your project will not be using the one true brace style, turn this rule off.
 
 * [Indent style](http://en.wikipedia.org/wiki/Indent_style)
 
+## Version
+
+This rule was introduced in ESLint 0.0.7.
+
 ## Resources
 
 * [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/brace-style.js)

@@ -50,6 +50,10 @@ function doSomething() {
 If you want to allow the use of assignment operators in a `return` statement, then you can safely disable this rule.
 
 
+## Version
+
+This rule was introduced in ESLint 0.0.9.
+
 ## Resources
 
 * [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/no-return-assign.js)

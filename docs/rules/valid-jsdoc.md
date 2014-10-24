@@ -141,6 +141,10 @@ If you aren't using JSDoc, then you can safely turn this rule off.
 
 * [JSDoc](http://usejsdoc.org)
 
+## Version
+
+This rule was introduced in ESLint 0.4.0.
+
 ## Resources
 
 * [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/valid-jsdoc.js)

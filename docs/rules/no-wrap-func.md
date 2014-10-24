@@ -39,6 +39,10 @@ var a = function() {...};
 
 * [Wrapping non-IIFE function literals in parens is unnecessary](http://jslinterrors.com/wrapping-non-iife-function-literals-in-parens/)
 
+## Version
+
+This rule was introduced in ESLint 0.0.9.
+
 ## Resources
 
 * [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/no-wrap-func.js)

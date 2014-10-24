@@ -26,6 +26,10 @@ var foo = 0;
 var baz = 5;
 ```
 
+## Version
+
+This rule was introduced in ESLint 0.7.1.
+
 ## Resources
 
 * [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/no-trailing-spaces.js)

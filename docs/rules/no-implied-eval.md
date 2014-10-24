@@ -60,6 +60,10 @@ If you want to allow `setTimeout()` and `setInterval()` with string arguments, t
 
 * [no-eval](no-eval.html)
 
+## Version
+
+This rule was introduced in ESLint 0.0.7.
+
 ## Resources
 
 * [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/no-implied-eval.js)

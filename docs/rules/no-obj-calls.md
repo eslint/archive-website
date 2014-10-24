@@ -34,6 +34,10 @@ var y = json();
 * [The Math Object](http://es5.github.io/#x15.8)
 * ['{a}' is not a function](http://jslinterrors.com/a-is-not-a-function/)
 
+## Version
+
+This rule was introduced in ESLint 0.0.9.
+
 ## Resources
 
 * [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/no-obj-calls.js)

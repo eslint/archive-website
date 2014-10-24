@@ -45,6 +45,10 @@ var x = y > z;
 var x = y < z;
 ```
 
+## Version
+
+This rule was introduced in ESLint 0.0.2.
+
 ## Resources
 
 * [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/no-bitwise.js)

@@ -41,6 +41,10 @@ this.RegExp('[')
 
 * [Annotated ES5 §7.8.5 - Regular Expression Literals](http://es5.github.io/#x7.8.5)
 
+## Version
+
+This rule was introduced in ESLint 0.1.4.
+
 ## Resources
 
 * [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/no-invalid-regexp.js)

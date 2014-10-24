@@ -54,6 +54,7 @@ The following patterns are considered warnings:
 ```js
 String = new Object();
 ```
+
 ```js
 var String;
 ```
@@ -65,6 +66,10 @@ If you are trying to override one of the native objects.
 ## Related Rules
 
 * [no-extend-native](no-extend-native.html)
+
+## Version
+
+This rule was introduced in ESLint 0.0.9.
 
 ## Resources
 

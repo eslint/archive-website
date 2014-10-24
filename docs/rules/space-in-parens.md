@@ -88,6 +88,10 @@ You can turn this rule off if you are not concerned with the consistency of spac
 
 * [space-in-brackets](space-in-brackets.html)
 
+## Version
+
+This rule was introduced in ESLint 0.8.0.
+
 ## Resources
 
 * [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/space-in-parens.js)

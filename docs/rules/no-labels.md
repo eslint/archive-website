@@ -65,6 +65,10 @@ while (true) {
 
 If you need to use labeled statements, then you can safely disable this rule.
 
+## Version
+
+This rule was introduced in ESLint 0.4.0.
+
 ## Resources
 
 * [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/no-labels.js)

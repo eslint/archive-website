@@ -50,6 +50,10 @@ If you want to use sparse arrays, then it is safe to disable this rule.
 
 * [Inconsistent array literals](http://www.nczonline.net/blog/2007/09/09/inconsistent-array-literals/)
 
+## Version
+
+This rule was introduced in ESLint 0.4.0.
+
 ## Resources
 
 * [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/no-sparse-arrays.js)

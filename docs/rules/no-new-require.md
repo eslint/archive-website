@@ -46,6 +46,10 @@ var AppHeader = require('app-header');
 If you are using a custom implementation of `require` and your code will never be used in projects where a standard `require` (CommonJS, Node.js, AMD) is expected, you can safely turn this rule off.
 
 
+## Version
+
+This rule was introduced in ESLint 0.6.0.
+
 ## Resources
 
 * [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/no-new-require.js)

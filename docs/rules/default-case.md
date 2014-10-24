@@ -95,6 +95,10 @@ If you don't want to enforce a `default` case for `switch` statements, you can s
 
 * [no-fallthrough](no-fallthrough.html)
 
+## Version
+
+This rule was introduced in ESLint 0.6.0.
+
 ## Resources
 
 * [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/default-case.js)

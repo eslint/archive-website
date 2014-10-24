@@ -78,6 +78,10 @@ If you want to allow the use of primitive wrapper objects, then you can safely d
 * [no-array-constructor](no-array-constructor.html)
 * [no-new-object](no-new-object.html)
 
+## Version
+
+This rule was introduced in ESLint 0.0.6.
+
 ## Resources
 
 * [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/no-new-wrappers.js)

@@ -39,6 +39,10 @@ Foo.prototype.bar = function bar() {};
 
 * [Functions Explained](http://markdaggett.com/blog/2013/02/15/functions-explained/)
 
+## Version
+
+This rule was introduced in ESLint 0.4.0.
+
 ## Resources
 
 * [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/func-names.js)

@@ -54,6 +54,10 @@ function(a) {
 }.bind(foo, bar);
 ```
 
+## Version
+
+This rule was introduced in ESLint 0.8.0.
+
 ## Resources
 
 * [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/no-extra-bind.js)

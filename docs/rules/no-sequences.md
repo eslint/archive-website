@@ -66,6 +66,10 @@ with ((doSomething(), val)) {}
 
 Disable this rule if sequence expressions with the comma operator are acceptable.
 
+## Version
+
+This rule was introduced in ESLint 0.5.1.
+
 ## Resources
 
 * [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/no-sequences.js)

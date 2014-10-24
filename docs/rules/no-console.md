@@ -44,6 +44,10 @@ If you're using Node.js, however, `console` is used to output information to the
 * [no-alert](no-alert.html)
 * [no-debugger](no-debugger.html)
 
+## Version
+
+This rule was introduced in ESLint 0.0.2.
+
 ## Resources
 
 * [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/no-console.js)

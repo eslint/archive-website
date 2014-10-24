@@ -97,8 +97,7 @@ These examples allow `var1` to be overwritten in your code, but disallow it for 
 
 ESLint supports the use of third-party plugins. Before using the plugin you have to install it using npm.
 
-To configure plugins inside of a configuration file, use the `plugins` key, which contains a list of plugin names.
-The `eslint-plugin-` prefix can be omitted from the plugin name.
+To configure plugins inside of a configuration file, use the `plugins` key, which contains a list of plugin names. The `eslint-plugin-` prefix can be omitted from the plugin name.
 
 ```json
 {
@@ -113,10 +112,12 @@ And in YAML:
 
 ```yaml
 ---
-  plugins: 
+  plugins:
     - plugin1
     - eslint-plugin-plugin2
 ```
+
+**Note:** A globally-installed instance of ESLint can only use globally-installed ESLint plugins. A locally-installed ESLint can make sure of both locally- and globally- installed ESLint plugins.
 
 ## Configuring Rules
 
@@ -181,7 +182,7 @@ To temporary disable warnings in your file use the following format
 ```js
 /*eslint-disable */
 
-//supress all warnings between comments
+//suppress all warnings between comments
 alert('foo');
 
 /*eslint-enable */
@@ -203,6 +204,7 @@ console.log('bar');
 ESLint supports adding shared settings into configuration file. You can add `settings` object to ESLint configuration file and it will be supplied to every rule that will be executed. This may be useful if you are adding custom rules and want them to have access to the same information and be easily configurable.
 
 In JSON:
+
 ```json
 {
     "settings": {
@@ -212,6 +214,7 @@ In JSON:
 ```
 
 And in YAML:
+
 ```yaml
 ---
   settings:

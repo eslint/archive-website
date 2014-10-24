@@ -96,6 +96,10 @@ If you want to allow developers to each decide how they want to write functions 
 
 * [JavaScript Scoping and Hoisting](http://www.adequatelygood.com/JavaScript-Scoping-and-Hoisting.html)
 
+## Version
+
+This rule was introduced in ESLint 0.2.0.
+
 ## Resources
 
 * [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/func-style.js)

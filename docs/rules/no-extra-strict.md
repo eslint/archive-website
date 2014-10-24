@@ -54,6 +54,10 @@ The following patterns are not considered warnings:
 
 * [The ECMAScript 5 Annotated Specification - Strict Mode](http://es5.github.io/#C)
 
+## Version
+
+This rule was introduced in ESLint 0.3.0.
+
 ## Resources
 
 * [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/no-extra-strict.js)

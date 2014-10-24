@@ -36,6 +36,10 @@ If you need to use control character pattern matching, then you should turn this
 * [no-regex-spaces](no-regex-spaces.html)
 
 
+## Version
+
+This rule was introduced in ESLint 0.1.0.
+
 ## Resources
 
 * [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/no-control-regex.js)

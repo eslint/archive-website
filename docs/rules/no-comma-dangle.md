@@ -54,6 +54,10 @@ foo({
 
 If your code will not be run in IE8 or below (a NodeJS application, for example) and you'd prefer to allow trailing commas, turn this rule off.
 
+## Version
+
+This rule was introduced in ESLint 0.0.9.
+
 ## Resources
 
 * [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/no-comma-dangle.js)

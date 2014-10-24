@@ -65,6 +65,10 @@ setInterval(function() {
 
 * [no-implied-eval](no-implied-eval.html)
 
+## Version
+
+This rule was introduced in ESLint 0.0.2.
+
 ## Resources
 
 * [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/no-eval.js)

@@ -40,6 +40,14 @@ The following patterns are not warnings:
 var foo = "bar";
 ```
 
+## Related Rules
+
+* [semi](semi.html)
+* [no-extra-semi](no-extra-semi.html)
+
+## Version
+
+This rule was introduced in ESLint 0.4.3.
 
 ## Resources
 

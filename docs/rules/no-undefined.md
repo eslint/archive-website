@@ -81,6 +81,15 @@ If you want to allow the use of `undefined` in your code, then you can safely tu
 * [Understanding JavaScript’s ‘undefined’ | JavaScript, JavaScript...](http://javascriptweblog.wordpress.com/2010/08/16/understanding-undefined-and-preventing-referenceerrors/)
 * [ECMA262 edition 5.1 &sect;15.1.1.3: undefined](https://es5.github.io/#x15.1.1.3)
 
+## Related Rules
+
+* [no-undef-init](no-undef-init.html)
+* [no-void](no-void.html)
+
+## Version
+
+This rule was introduced in ESLint 0.7.1.
+
 ## Resources
 
 * [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/no-undefined.js)

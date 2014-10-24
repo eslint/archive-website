@@ -40,6 +40,10 @@ for (key in foo) {
 * [Exploring JavaScript for-in loops](http://javascriptweblog.wordpress.com/2011/01/04/exploring-javascript-for-in-loops/)
 * [The pitfalls of using objects as maps in JavaScript](http://www.2ality.com/2012/01/objects-as-maps.html)
 
+## Version
+
+This rule was introduced in ESLint 0.0.6.
+
 ## Resources
 
 * [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/guard-for-in.js)

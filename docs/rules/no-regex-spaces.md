@@ -48,6 +48,10 @@ If you want to allow multiple spaces in a regular expression, then you can safel
 * [no-div-regex](no-div-regex.html)
 * [no-control-regex](no-control-regex.html)
 
+## Version
+
+This rule was introduced in ESLint 0.4.0.
+
 ## Resources
 
 * [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/no-regex-spaces.js)

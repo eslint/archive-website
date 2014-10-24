@@ -49,6 +49,10 @@ You may want to disable this rule when working with polyfills that try to patch 
 
 * [no-native-reassign](no-native-reassign.html)
 
+## Version
+
+This rule was introduced in ESLint 0.1.4.
+
 ## Resources
 
 * [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/no-extend-native.js)

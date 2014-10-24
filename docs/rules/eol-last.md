@@ -46,6 +46,10 @@ function doSmth() {
 
 </pre>
 
+## Version
+
+This rule was introduced in ESLint 0.7.1.
+
 ## Resources
 
 * [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/eol-last.js)

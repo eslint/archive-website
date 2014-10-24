@@ -39,6 +39,10 @@ if (isNaN(NaN)) {
 
  - [Use the isNaN function to compare with NaN](http://jslinterrors.com/use-the-isnan-function-to-compare-with-nan/)
 
+## Version
+
+This rule was introduced in ESLint 0.0.6.
+
 ## Resources
 
 * [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/use-isnan.js)

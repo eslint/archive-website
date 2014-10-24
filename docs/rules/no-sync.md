@@ -33,6 +33,10 @@ async(function() {
 
 If you want to allow synchronous operations in your script.
 
+## Version
+
+This rule was introduced in ESLint 0.0.9.
+
 ## Resources
 
 * [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/no-sync.js)

@@ -6,10 +6,10 @@ Rules in ESLint are divided into several categories to help you better understan
 
 The following rules point out areas where you might have made mistakes.
 
+* [no-comma-dangle](no-comma-dangle.md) - disallow trailing commas in object literals
 * [no-cond-assign](no-cond-assign.md) - disallow assignment in conditional expressions
 * [no-console](no-console.md) - disallow use of `console` (off by default in the node environment)
 * [no-constant-condition](no-constant-condition.md) - disallow use of constant expressions in conditions
-* [no-comma-dangle](no-comma-dangle.md) - disallow trailing commas in object literals
 * [no-control-regex](no-control-regex.md) - disallow control characters in regular expressions
 * [no-debugger](no-debugger.md) - disallow use of `debugger`
 * [no-dupe-keys](no-dupe-keys.md) - disallow duplicate keys when creating object literals
@@ -22,6 +22,7 @@ The following rules point out areas where you might have made mistakes.
 * [no-func-assign](no-func-assign.md) - disallow overwriting functions written as function declarations
 * [no-inner-declarations](no-inner-declarations.md) - disallow function or variable declarations in nested blocks
 * [no-invalid-regexp](no-invalid-regexp.md) - disallow invalid regular expression strings in the `RegExp` constructor
+* [no-irregular-whitespace](no-irregular-whitespace.md) - disallow irregular whitespace outside of strings and comments
 * [no-negated-in-lhs](no-negated-in-lhs.md) - disallow negation of the left operand of an `in` expression
 * [no-obj-calls](no-obj-calls.md) - disallow the use of object properties of the global object (`Math` and `JSON`) as functions
 * [no-regex-spaces](no-regex-spaces.md) - disallow multiple spaces in a regular expression literal
@@ -56,10 +57,11 @@ These are rules designed to prevent you from making mistakes. They either prescr
 * [no-fallthrough](no-fallthrough.md) - disallow fallthrough of `case` statements
 * [no-floating-decimal](no-floating-decimal.md) - disallow the use of leading or trailing decimal points in numeric literals (off by default)
 * [no-implied-eval](no-implied-eval.md) - disallow use of `eval()`-like methods
-* [no-labels](no-labels.md) - disallow use of labeled statements
 * [no-iterator](no-iterator.md) - disallow usage of `__iterator__` property
+* [no-labels](no-labels.md) - disallow use of labeled statements
 * [no-lone-blocks](no-lone-blocks.md) - disallow unnecessary nested blocks
 * [no-loop-func](no-loop-func.md) - disallow creation of functions within loops
+* [no-multi-spaces](no-multi-spaces.md) - disallow use of multiple spaces
 * [no-multi-str](no-multi-str.md) - disallow use of multiline strings
 * [no-native-reassign](no-native-reassign.md) - disallow reassignments of native objects
 * [no-new](no-new.md) - disallow use of new operator when not part of the assignment or comparison
@@ -67,6 +69,7 @@ These are rules designed to prevent you from making mistakes. They either prescr
 * [no-new-wrappers](no-new-wrappers.md) - disallows creating new instances of `String`,`Number`, and `Boolean`
 * [no-octal](no-octal.md) - disallow use of octal literals
 * [no-octal-escape](no-octal-escape.md) - disallow use of octal escape sequences in string literals, such as `var foo = "Copyright \251";`
+* [no-process-env](no-process-env.md) - disallow use of `process.env` (off by default)
 * [no-proto](no-proto.md) - disallow usage of `__proto__` property
 * [no-redeclare](no-redeclare.md) - disallow declaring the same variable more then once
 * [no-return-assign](no-return-assign.md) - disallow use of assignment in `return` statement
@@ -100,8 +103,8 @@ These rules have to do with variable declarations.
 * [no-shadow](no-shadow.md) - disallow declaration of variables already declared in the outer scope
 * [no-shadow-restricted-names](no-shadow-restricted-names.md) - disallow shadowing of names such as `arguments`
 * [no-undef](no-undef.md) - disallow use of undeclared variables unless mentioned in a `/*global */` block
-* [no-undefined](no-undefined.md) - disallow use of `undefined` variable (off by default)
 * [no-undef-init](no-undef-init.md) - disallow use of undefined when initializing variables
+* [no-undefined](no-undefined.md) - disallow use of `undefined` variable (off by default)
 * [no-unused-vars](no-unused-vars.md) - disallow declaration of variables that are not used in the code
 * [no-use-before-define](no-use-before-define.md) - disallow use of variables before they are defined
 
@@ -123,35 +126,42 @@ These rules are purely matters of style and are quite subjective.
 
 * [brace-style](brace-style.md) - enforce one true brace style (off by default)
 * [camelcase](camelcase.md) - require camel case names
+* [comma-spacing](comma-spacing.md) - enforce spacing before and after comma
+* [comma-style](comma-style.md) - enforce one true comma style (off by default)
 * [consistent-this](consistent-this.md) - enforces consistent naming when capturing the current execution context (off by default)
 * [eol-last](eol-last.md) - enforce newline at the end of file, with no multiple empty lines
 * [func-names](func-names.md) - require function expressions to have a name (off by default)
 * [func-style](func-style.md) - enforces use of function declarations or expressions (off by default)
+* [key-spacing](key-spacing.md) - enforces spacing between keys and values in object literal properties
+* [max-nested-callbacks](max-nested-callbacks.md) - specify the maximum depth callbacks can be nested (off by default)
 * [new-cap](new-cap.md) - require a capital letter for constructors
 * [new-parens](new-parens.md) - disallow the omission of parentheses when invoking a constructor with no arguments
-* [no-nested-ternary](no-nested-ternary.md) - disallow nested ternary expressions (off by default)
 * [no-array-constructor](no-array-constructor.md) - disallow use of the `Array` constructor
 * [no-lonely-if](no-lonely-if.md) - disallow if as the only statement in an else block (off by default)
+* [no-mixed-spaces-and-tabs](no-mixed-spaces-and-tabs.md) - disallow mixed spaces and tabs for indentation
+* [no-nested-ternary](no-nested-ternary.md) - disallow nested ternary expressions (off by default)
 * [no-new-object](no-new-object.md) - disallow use of the `Object` constructor
-* [no-spaced-func](no-spaced-func.md) - disallow space between function identifier and application
 * [no-space-before-semi](no-space-before-semi.md) - disallow space before semicolon
+* [no-spaced-func](no-spaced-func.md) - disallow space between function identifier and application
 * [no-ternary](no-ternary.md) - disallow the use of ternary operators (off by default)
 * [no-trailing-spaces](no-trailing-spaces.md) - disallow trailing whitespace at the end of lines
+* [no-multiple-empty-lines](no-multiple-empty-lines.md) - disallow multiple empty lines (off by default)
 * [no-underscore-dangle](no-underscore-dangle.md) - disallow dangling underscores in identifiers
 * [no-wrap-func](no-wrap-func.md) - disallow wrapping of non-IIFE statements in parens
-* [no-mixed-spaces-and-tabs](no-mixed-spaces-and-tabs.md) - disallow mixed spaces and tabs for indentation
+* [one-var](one-var.md) - allow just one var statement per function (off by default)
+* [padded-blocks](padded-blocks.md) - enforce padding within blocks (off by default)
 * [quotes](quotes.md) - specify whether double or single quotes should be used
 * [quote-props](quote-props.md) - require quotes around object literal property names (off by default)
 * [semi](semi.md) - require or disallow use of semicolons instead of ASI
 * [sort-vars](sort-vars.md) - sort variables within the same declaration block (off by default)
 * [space-after-keywords](space-after-keywords.md) - require a space after certain keywords (off by default)
+* [space-before-blocks](space-before-blocks.md) - require or disallow space before blocks (off by default)
 * [space-in-brackets](space-in-brackets.md) - require or disallow spaces inside brackets (off by default)
 * [space-in-parens](space-in-parens.md) - require or disallow spaces inside parentheses (off by default)
 * [space-infix-ops](space-infix-ops.md) - require spaces around operators
 * [space-return-throw-case](space-return-throw-case.md) - require a space after `return`, `throw`, and `case`
 * [space-unary-word-ops](space-unary-word-ops.md) - require a space around word operators such as `typeof` (off by default)
-* [max-nested-callbacks](max-nested-callbacks.md) - specify the maximum depth callbacks can be nested (off by default)
-* [one-var](one-var.md) - allow just one var statement per function (off by default)
+* [spaced-line-comment](spaced-line-comment.md) - require or disallow a space immediately following the `//` in a line comment (off by default)
 * [wrap-regex](wrap-regex.md) - require regex literals to be wrapped in parentheses (off by default)
 
 ## Legacy

@@ -45,6 +45,10 @@ When `true`, rule checks if all uppercase-started functions are called only with
 
 If you have conventions that don't require an uppercase letter for constructors, turn this rule off.
 
+## Version
+
+This rule was introduced in ESLint 0.0.3-0.
+
 ## Resources
 
 * [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/new-cap.js)

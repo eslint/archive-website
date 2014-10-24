@@ -69,6 +69,10 @@ If you can't determine an appropriate complexity limit for your code, then it's 
 * [max-params](max-params.html)
 * [max-statements](max-statements.html)
 
+## Version
+
+This rule was introduced in ESLint 0.0.9.
+
 ## Resources
 
 * [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/complexity.js)

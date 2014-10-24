@@ -49,6 +49,10 @@ function foo(n) {
 });
 ```
 
+## Version
+
+This rule was introduced in ESLint 0.0.6.
+
 ## Resources
 
 * [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/no-caller.js)

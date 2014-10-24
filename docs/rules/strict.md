@@ -59,6 +59,10 @@ function foo() {
 
 If you have functions that you specifically want to run in non-strict mode (due to use of strict mode prohibited properties such as `arguments.callee`), then you should turn this rule off.
 
+## Version
+
+This rule was introduced in ESLint 0.1.0.
+
 ## Resources
 
 * [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/strict.js)

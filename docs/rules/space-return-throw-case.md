@@ -37,6 +37,10 @@ function f(){ return -a; }
 function f(){ return; }
 ```
 
+## Version
+
+This rule was introduced in ESLint 0.1.4.
+
 ## Resources
 
 * [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/space-return-throw-case.js)

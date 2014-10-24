@@ -57,6 +57,10 @@ __Restrict usage of all Node.js core modules__
     ],
 ```
 
+## Version
+
+This rule was introduced in ESLint 0.6.0.
+
 ## Resources
 
 * [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/no-restricted-modules.js)

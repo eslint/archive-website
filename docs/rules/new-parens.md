@@ -27,6 +27,10 @@ The following patterns are not considered warnings:
 var person = new Person();
 ```
 
+## Version
+
+This rule was introduced in ESLint 0.0.6.
+
 ## Resources
 
 * [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/new-parens.js)

@@ -43,6 +43,10 @@ rule may be disabled if the constructor style is preferred.
 * [no-new-object](no-new-object.html)
 * [no-new-wrappers](no-new-wrappers.html)
 
+## Version
+
+This rule was introduced in ESLint 0.4.0.
+
 ## Resources
 
 * [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/no-array-constructor.js)

@@ -57,6 +57,7 @@ setTimeout(function() {
 
 ### node
 Defines globals for Node.js development.
+
 ```js
 /*jshint node:true*/
 var fs = require("fs");
@@ -72,6 +73,10 @@ If explicit declaration of global variables is not to your taste.
 ## Further Reading
 
 * ['{a}' is not defined](http://jslinterrors.com/a-is-not-defined/)
+
+## Version
+
+This rule was introduced in ESLint 0.0.9.
 
 ## Resources
 

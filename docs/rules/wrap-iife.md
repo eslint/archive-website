@@ -52,6 +52,10 @@ This configures the rule to enforce wrapping always the function expression.
 
 This allows any wrapping style.
 
+## Version
+
+This rule was introduced in ESLint 0.0.9.
+
 ## Resources
 
 * [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/wrap-iife.js)

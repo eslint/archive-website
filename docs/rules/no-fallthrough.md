@@ -117,6 +117,10 @@ If you don't want to enforce that each `case` statement should end with a `throw
 
 * [default-case](default-case.html)
 
+## Version
+
+This rule was introduced in ESLint 0.0.7.
+
 ## Resources
 
 * [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/no-fallthrough.js)

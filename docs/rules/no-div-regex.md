@@ -32,6 +32,10 @@ function() { return /\=foo/; }
 * [no-control-regex](no-control-regex.html)
 * [no-regex-spaces](no-regex-spaces.html)
 
+## Version
+
+This rule was introduced in ESLint 0.1.0.
+
 ## Resources
 
 * [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/no-div-regex.js)

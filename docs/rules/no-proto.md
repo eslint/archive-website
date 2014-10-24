@@ -24,6 +24,7 @@ The following patterns are considered okay and could be used alternatively:
 ```js
 var a = Object.getPrototypeOf(obj);
 ```
+
 ## When not to use
 
 If you need to support legacy browsers, you might want to turn this rule off, since support for `getPrototypeOf` is not yet universal.
@@ -31,6 +32,10 @@ If you need to support legacy browsers, you might want to turn this rule off, si
 ## Further Reading
 
 * [Object.getPrototypeOf](http://ejohn.org/blog/objectgetprototypeof/)
+
+## Version
+
+This rule was introduced in ESLint 0.0.9.
 
 ## Resources
 

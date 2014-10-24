@@ -23,6 +23,7 @@ This rule comes with one boolean option called `grouping` which is turned off by
     "no-mixed-requires": [1, true]
 }
 ```
+
 If enabled, violations will be reported whenever a single `var` statement contains require declarations of mixed types (see the examples below).
 
 #### Nomenclature
@@ -37,6 +38,7 @@ This rule distinguishes between six kinds of variable declaration types:
 In this document, the first four types are summed up under the term *require declaration*.
 
 ###### Example
+
 ```javascript
 var fs = require('fs'),        // "core"     \
     async = require('async'),  // "module"   |- these are "require declaration"s
@@ -96,6 +98,10 @@ The implementation is not aware of any local functions with the name `require` t
 [2]: http://nodejs.org/api/modules.html#modules_file_modules
 [3]: http://nodejs.org/api/modules.html#modules_loading_from_node_modules_folders
 [4]: https://github.com/umdjs/umd
+
+## Version
+
+This rule was introduced in ESLint 0.0.9.
 
 ## Resources
 

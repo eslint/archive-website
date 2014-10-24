@@ -41,6 +41,10 @@ var file = __filename;
 If you want to allow dangling underscores in identifiers, then you can safely turn this rule off.
 
 
+## Version
+
+This rule was introduced in ESLint 0.0.9.
+
 ## Resources
 
 * [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/no-underscore-dangle.js)

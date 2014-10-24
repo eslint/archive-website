@@ -15,6 +15,7 @@ var single = 'single';
 ```
 
 The third parameter enables an exception to the rule to avoid escaping quotes. For example, when `"single"` is the standard, this option allows the use of double quotes to avoid escaping single quotes. This option can have the value `"avoid-escape"` and is off by default.
+
 ```js
 [2, "single", "avoid-escape"]
 ```
@@ -54,6 +55,10 @@ var single = 'a string containing "double" quotes';
 // When [1, "single", "avoid-escape"]
 var double = "a string containing 'single' quotes";
 ```
+
+## Version
+
+This rule was introduced in ESLint 0.0.7.
 
 ## Resources
 

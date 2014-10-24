@@ -38,6 +38,14 @@ var foo = function() {
 
 If you intentionally use extra semicolons then you can disable this rule.
 
+## Related Rules
+
+* [semi](semi.html)
+* [no-space-before-semi](no-space-before-semi.html)
+
+## Version
+
+This rule was introduced in ESLint 0.0.9.
 
 ## Resources
 

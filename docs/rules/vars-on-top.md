@@ -36,7 +36,7 @@ function doSomething() {
 }
 ```
 
-No variable declarations in for initialiser.
+No variable declarations in for initializer.
 
 ```js
 // BAD
@@ -96,6 +96,10 @@ function doSomething() {
 * [var Hoisting](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/var#var_hoisting)
 * [A criticism of the Single Var Pattern in JavaScript, and a simple alternative](http://danielhough.co.uk/blog/single-var-pattern-rant/)
 * [Multiple var statements in JavaScript, not superfluous](http://benalman.com/news/2012/05/multiple-var-statements-javascript/)
+
+## Version
+
+This rule was introduced in ESLint 0.8.0.
 
 ## Resources
 

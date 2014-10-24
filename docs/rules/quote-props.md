@@ -3,9 +3,9 @@ title: ESLint
 layout: doc
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
-# Require Quotes for Property Names (quote-props)
+# Quoting Style for Property Names (quote-props)
 
-Some believe that ensuring property names in object literals are always wrapped in quotes is generally a good idea, since [depending on the property name you may need to quote them anyway](https://mathiasbynens.be/notes/javascript-properties). Consider this example:
+When configured with `"always"` as the first option (the default), quoting for all properties will be enforced. Some believe that ensuring property names in object literals are always wrapped in quotes is generally a good idea, since [depending on the property name you may need to quote them anyway](https://mathiasbynens.be/notes/javascript-properties). Consider this example:
 
 ```js
 var object = {
@@ -25,7 +25,7 @@ var object = {
 };
 ```
 
-…or, if you prefer single quotes:
+or, if you prefer single quotes:
 
 ```js
 var object = {
@@ -46,11 +46,11 @@ var object = {
 
 This may look alright on first sight, but this code in fact throws a syntax error in strict mode. This happens because `1e2` and `100` are coerced into strings before getting used as the property name. Both `String(1e2)` and `String(100)` happen to be equal to `"100"`, which causes the “Duplicate data property in object literal not allowed in strict mode” error. Issues like that can be tricky to debug. Yet, they can easily be avoided, by simply always quoting property names in object literals.
 
+When configured with `"as-needed"` as the first option, quoting is disallowed except when necessary.
+
 ## Rule Details
 
-This rule helps you enforce consistent quoting of property names.
-
-The following patterns are considered warnings:
+When configured with `"always"` as the first option (the default), the following patterns are considered warnings:
 
 ```js
 var object = {
@@ -78,9 +78,42 @@ var object = {
 };
 ```
 
+When configured with `"as-needed"` as the first option (the default), the following patterns are considered warnings:
+
+```js
+var object = {
+    "a": 0,
+    "0": 0,
+    "true": 0,
+    "null": 0
+};
+```
+
+The following patterns are considered okay and do not cause warnings:
+
+```js
+var object = {
+    "a-b": 0,
+    "0x0": 0
+};
+```
+
+```js
+var object = {
+    'foo': 'bar',
+    'baz': 42,
+    'qux-lorem': true
+};
+```
+
+
 ## When Not To Use It
 
 If you don’t care if property names are consistently wrapped in quotes or not, turn this rule off.
+
+## Version
+
+This rule was introduced in ESLint 0.0.6.
 
 ## Resources
 

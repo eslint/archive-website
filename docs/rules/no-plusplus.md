@@ -36,6 +36,10 @@ var bar = 42;
 bar -= 1;
 ```
 
+## Version
+
+This rule was introduced in ESLint 0.0.9.
+
 ## Resources
 
 * [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/no-plusplus.js)

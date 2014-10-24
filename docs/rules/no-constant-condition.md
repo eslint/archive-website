@@ -64,6 +64,10 @@ do {
 } while (x)
 ```
 
+## Version
+
+This rule was introduced in ESLint 0.4.1.
+
 ## Resources
 
 * [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/no-constant-condition.js)

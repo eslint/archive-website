@@ -54,6 +54,10 @@ function bar() {
 }
 ```
 
+## Version
+
+This rule was introduced in ESLint 0.4.0.
+
 ## Resources
 
 * [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/no-lone-blocks.js)

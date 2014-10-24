@@ -48,6 +48,10 @@ function f(a, b){}
 * [Annotated ES5 - §15.1.1](http://es5.github.io/#x15.1.1)
 * [Annotated ES5 - Annex C](http://es5.github.io/#C)
 
+## Version
+
+This rule was introduced in ESLint 0.1.4.
+
 ## Resources
 
 * [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/no-shadow-restricted-names.js)

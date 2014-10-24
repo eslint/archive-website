@@ -57,6 +57,10 @@ You can enable this option by using the following configuration:
 
 * [Smart Tabs](http://www.emacswiki.org/emacs/SmartTabs)
 
+## Version
+
+This rule was introduced in ESLint 0.7.1.
+
 ## Resources
 
 * [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/no-mixed-spaces-and-tabs.js)
