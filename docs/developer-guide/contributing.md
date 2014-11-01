@@ -144,7 +144,7 @@ We want to accept your contribution. Following these guidelines helps to create 
 * All changes must work on the following Node.js versions:
     * 0.10.x
 * Only *one commit* is allowed per pull request. If you have multiple commits, you'll be asked to squash them.
-* Follow the [Code Conventions](code-conventions.html).
+* Follow the [Code Conventions](code-conventions.md).
 
 ### Step 1: Create a new branch
 

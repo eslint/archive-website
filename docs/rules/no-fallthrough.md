@@ -115,7 +115,7 @@ If you don't want to enforce that each `case` statement should end with a `throw
 
 ## Related Rules
 
-* [default-case](default-case.html)
+* [default-case](default-case.md)
 
 ## Version
 

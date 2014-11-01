@@ -52,11 +52,11 @@ For example, to specify a maximum line length of 80 characters with each tab cou
 
 ## Related Rules
 
-* [complexity](complexity.html)
-* [max-depth](max-depth.html)
-* [max-nested-callbacks](max-nested-callbacks.html)
-* [max-params](max-params.html)
-* [max-statements](max-statements.html)
+* [complexity](complexity.md)
+* [max-depth](max-depth.md)
+* [max-nested-callbacks](max-nested-callbacks.md)
+* [max-params](max-params.md)
+* [max-statements](max-statements.md)
 
 ## Version
 

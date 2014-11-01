@@ -83,8 +83,8 @@ If you want to allow the use of `undefined` in your code, then you can safely tu
 
 ## Related Rules
 
-* [no-undef-init](no-undef-init.html)
-* [no-void](no-void.html)
+* [no-undef-init](no-undef-init.md)
+* [no-void](no-void.md)
 
 ## Version
 

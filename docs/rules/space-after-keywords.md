@@ -73,7 +73,7 @@ after the `function` keyword you can enable the `checkFunctionKeyword` configura
 
     ```js
     // ...
-    "space-after-keyword": [1, "always", { "checkFunctionKeyword": true } ]
+    "space-after-keywords": [1, "always", { "checkFunctionKeyword": true } ]
     // ...
     ```
 
@@ -81,7 +81,7 @@ after the `function` keyword you can enable the `checkFunctionKeyword` configura
 
     ```js
     // ...
-    "space-after-keyword": [1, "never", { "checkFunctionKeyword": true } ]
+    "space-after-keywords": [1, "never", { "checkFunctionKeyword": true } ]
     // ...
     ```
 

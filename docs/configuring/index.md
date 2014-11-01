@@ -24,7 +24,7 @@ An environment defines both global variables that are predefined as well as whic
 
 * `browser` - browser global variables.
 * `node` - Node.js global variables and Node.js-specific rules.
-* `amd` - defines `require()` and `define()` as global variables as per the [amd](https://github.com/amdjs/amdjs-api/wiki/AMD) spec.
+* `amd` - defines `require()` and `define()` as global variables as per the [amd](https://github.com/amdjs/.htmljs-api/wiki/AMD) spec.
 * `mocha` - adds all of the Mocha testing global variables.
 * `jasmine` - adds all of the Jasmine testing global variables for version 1.3 and 2.0.
 
@@ -138,13 +138,13 @@ To configure rules inside of a file using configuration comments, use a comment 
 /*eslint eqeqeq:0, curly: 2*/
 ```
 
-In this example, [`eqeqeq`](../rules/eqeqeq.html) is turned off and [`curly`](../rules/curly.html) is turned on as an error. If a rule has additional options, you can specify them using array literal syntax, such as:
+In this example, [`eqeqeq`](../rules/eqeqeq.html) is turned off and [`curly`](../rules/curly.md) is turned on as an error. If a rule has additional options, you can specify them using array literal syntax, such as:
 
 ```js
 /*eslint quotes: [2, "double"], curly: 2*/
 ```
 
-This comment specifies the "double" option for the [`quotes`](../rules/quotes.html) rule.
+This comment specifies the "double" option for the [`quotes`](../rules/quotes.md) rule.
 
 To configure rules inside of a configuration file, use the `rules` key along with an error level and any options you want to use. For example:
 

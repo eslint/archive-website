@@ -29,8 +29,8 @@ function() { return /\=foo/; }
 
 ## Related Rules
 
-* [no-control-regex](no-control-regex.html)
-* [no-regex-spaces](no-regex-spaces.html)
+* [no-control-regex](no-control-regex.md)
+* [no-regex-spaces](no-regex-spaces.md)
 
 ## Version
 

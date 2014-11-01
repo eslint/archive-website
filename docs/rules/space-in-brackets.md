@@ -298,7 +298,7 @@ You can turn this rule off if you are not concerned with the consistency of spac
 
 ## Related Rules
 
-* [space-in-parens](space-in-parens.html)
+* [space-in-parens](space-in-parens.md)
 
 ## Version
 
