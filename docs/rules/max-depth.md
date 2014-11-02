@@ -62,11 +62,11 @@ You can configure the depth as an option by using the second argument in your co
 
 ## Related Rules
 
-* [complexity](complexity.md)
-* [max-len](max-len.md)
-* [max-nested-callbacks](max-nested-callbacks.md)
-* [max-params](max-params.md)
-* [max-statements](max-statements.md)
+* [complexity](complexity.html)
+* [max-len](max-len.html)
+* [max-nested-callbacks](max-nested-callbacks.html)
+* [max-params](max-params.html)
+* [max-statements](max-statements.html)
 
 ## Version
 

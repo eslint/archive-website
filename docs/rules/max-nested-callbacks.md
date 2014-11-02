@@ -74,11 +74,11 @@ You can configure the depth as an option by using the second argument in your co
 
 ## Related Rules
 
-* [complexity](complexity.md)
-* [max-depth](max-depth.md)
-* [max-len](max-len.md)
-* [max-params](max-params.md)
-* [max-statements](max-statements.md)
+* [complexity](complexity.html)
+* [max-depth](max-depth.html)
+* [max-len](max-len.html)
+* [max-params](max-params.html)
+* [max-statements](max-statements.html)
 
 ## Version
 

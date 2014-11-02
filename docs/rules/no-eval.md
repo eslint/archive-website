@@ -63,7 +63,7 @@ setInterval(function() {
 
 ## Related Rules
 
-* [no-implied-eval](no-implied-eval.md)
+* [no-implied-eval](no-implied-eval.html)
 
 ## Version
 

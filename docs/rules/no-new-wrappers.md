@@ -75,8 +75,8 @@ If you want to allow the use of primitive wrapper objects, then you can safely d
 
 ## Related Rules
 
-* [no-array-constructor](no-array-constructor.md)
-* [no-new-object](no-new-object.md)
+* [no-array-constructor](no-array-constructor.html)
+* [no-new-object](no-new-object.html)
 
 ## Version
 

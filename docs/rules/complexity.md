@@ -63,11 +63,11 @@ If you can't determine an appropriate complexity limit for your code, then it's 
 
 ## Related Rules
 
-* [max-depth](max-depth.md)
-* [max-len](max-len.md)
-* [max-nested-callbacks](max-nested-callbacks.md)
-* [max-params](max-params.md)
-* [max-statements](max-statements.md)
+* [max-depth](max-depth.html)
+* [max-len](max-len.html)
+* [max-nested-callbacks](max-nested-callbacks.html)
+* [max-params](max-params.html)
+* [max-statements](max-statements.html)
 
 ## Version
 
