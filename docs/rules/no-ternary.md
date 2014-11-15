@@ -55,7 +55,7 @@ function quux() {
 
 ## Related Rules
 
-* [no-nested-ternary](no-nested-ternary.md)
+* [no-nested-ternary](no-nested-ternary.html)
 
 ## Version
 

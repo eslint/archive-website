@@ -93,7 +93,7 @@ If you don't want to enforce a `default` case for `switch` statements, you can s
 
 ## Related Rules
 
-* [no-fallthrough](no-fallthrough.md)
+* [no-fallthrough](no-fallthrough.html)
 
 ## Version
 

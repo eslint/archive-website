@@ -86,7 +86,7 @@ You can turn this rule off if you are not concerned with the consistency of spac
 
 ## Related Rules
 
-* [space-in-brackets](space-in-brackets.md)
+* [space-in-brackets](space-in-brackets.html)
 
 ## Version
 
