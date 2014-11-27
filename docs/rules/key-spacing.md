@@ -5,7 +5,7 @@ layout: doc
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 # Enforce Property Spacing (key-spacing)
 
-Enforces spacing around the colon in object literal properties. It can verify each property individually, or it can ensure vertical alignment of all of the properties in an object literal.
+Enforces spacing around the colon in object literal properties. It can verify each property individually, or it can ensure vertical alignment of groups of properties in an object literal.
 
 ## Rule Details
 
@@ -33,7 +33,6 @@ call({
     foobar :42,
     bat :(2 * 2)
 };
-```
 
 // "key-spacing": [2, {
 //     "beforeColon": false,
@@ -43,7 +42,7 @@ foo = { thisLineWouldBeTooLong:
     soUseAnotherLine };
 ```
 
-The follow patterns are considered warnings:
+The following patterns are considered warnings:
 
 ```js
 // "key-spacing": [2, {
@@ -73,7 +72,7 @@ foo = { thisLineWouldBeTooLong:
 
 ### 2. Vertically align values `"align": "value"`
 
-Use the `align` option to enforce vertical alignment of all values in an object literal. This mode still respects `beforeColon` and `afterColon` where possible, but it will pad with spaces after the colon where necessary.
+Use the `align` option to enforce vertical alignment of values in an object literal. This mode still respects `beforeColon` and `afterColon` where possible, but it will pad with spaces after the colon where necessary. Groups of properties separated by blank lines are considered distinct and can have different alignment than other groups.
 
 The following patterns are considered valid:
 
@@ -83,7 +82,9 @@ The following patterns are considered valid:
 var obj = {
     a:    value,
     bcde: 42,
-    fg:   foo()
+    fg:   foo(),
+
+    h: 121
 };
 
 // "key-spacing": [2, {
@@ -111,16 +112,20 @@ var obj = {
 
 ### 3. Vertically align colons `"align": "colon"`
 
-The `align` option can also vertically align colons and values together. Whereas with `"value"` alignment, padding belongs right of the colon, with `"colon"` alignment, padding goes to the left of the colon. Except in the case of padding, it still respects `beforeColon` and `afterColon`.
+The `align` option can also vertically align colons and values together. Whereas with `"value"` alignment, padding belongs right of the colon, with `"colon"` alignment, padding goes to the left of the colon. Except in the case of padding, it still respects `beforeColon` and `afterColon`. As with `"value"` alignment, groups of properties separated by blank lines are considered distinct and can have different alignment than other groups.
 
 The following patterns are considered valid:
+
 ```js
 // "key-spacing": [2, { "align": "colon" }]
 // beforeColon and afterColon default to false and true, respectively
 var obj = {
     foobar   : 42,
     bat      : (2 * 2),
-    "default": fn()
+    "default": fn(),
+
+    fn : function() {},
+    abc: value
 };
 
 // "key-spacing": [2, {

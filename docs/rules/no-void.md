@@ -71,8 +71,8 @@ If you intentionally use `void` operator then you can disable this rule.
 
 ## Related Rules
 
-* [no-undef-init](no-undef-init.html)
-* [no-undefined](no-undefined.html)
+* [no-undef-init](no-undef-init.html
+* [no-undefined](no-undefined.html
 
 ## Version
 

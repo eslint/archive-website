@@ -38,6 +38,8 @@ The following patterns are considered warnings:
     var foo = 1 ,bar = 2;
     var arr = [1 , 2];
     var obj = {"foo": "bar" ,"baz": "qur"};
+    foo(a ,b);
+    new Foo(a ,b);
     function foo(a ,b){}
     a ,b
 ```
@@ -49,6 +51,8 @@ The following patterns are not warnings:
     var foo = 1, bar = 2;
     var arr = [1, 2];
     var obj = {"foo": "bar", "baz": "qur"};
+    foo(a, b);
+    new Foo(a, b);
     function foo(a, b){}
     a, b
 ```
@@ -64,6 +68,7 @@ The following patterns are considered warnings:
     var foo = 1, bar = 2;
     var arr = [1 , 2];
     var obj = {"foo": "bar", "baz": "qur"};
+    new Foo(a,b);
     function foo(a,b){}
     a, b
 ```
@@ -75,6 +80,8 @@ The following patterns are not warnings:
     var foo = 1 ,bar = 2;
     var arr = [1 ,2];
     var obj = {"foo": "bar" ,"baz": "qur"};
+    foo(a ,b);
+    new Foo(a ,b);
     function foo(a ,b){}
     a ,b
 ```
@@ -92,13 +99,14 @@ If your project will not be following a consistent comma-spacing pattern, turn t
 
 ## Related Rules
 
-* [comma-style](comma-style.html)
-* [space-in-brackets](space-in-brackets.html)
-* [space-in-parens](space-in-parens.html)
-* [space-infix-ops](space-infix-ops.html)
+* [comma-style](comma-style.html
+* [space-in-brackets](space-in-brackets.html
+* [space-in-parens](space-in-parens.html
+* [space-infix-ops](space-infix-ops.html
 * [space-after-keywords](space-after-keywords)
-* [space-unary-word-ops](space-unary-word-ops)
+* [space-unary-ops](space-unary-ops)
 * [space-return-throw-case](space-return-throw-case)
+
 ## Version
 
 This rule was introduced in ESLint 0.9.0.

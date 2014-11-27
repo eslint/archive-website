@@ -50,6 +50,7 @@ With this rule enabled the following characters will cause warnings outside of s
 
 
 The following examples are considered warnings:
+
 ```js
 function thing()<NBSP>{
   return 'test';
@@ -77,6 +78,7 @@ function thing() {
 ```
 
 The following patterns are not considered warnings:
+
 ```js
 function thing() {
   return '<NBSP>thing';

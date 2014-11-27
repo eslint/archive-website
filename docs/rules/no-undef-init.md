@@ -45,8 +45,8 @@ If you want to allow initialization of variables with `undefined`, then you can 
 
 ## Related Rules
 
-* [no-undefined](no-undefined.html)
-* [no-void](no-void.html)
+* [no-undefined](no-undefined.html
+* [no-void](no-void.html
 
 ## Version
 

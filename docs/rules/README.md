@@ -137,6 +137,7 @@ These rules are purely matters of style and are quite subjective.
 * [new-cap](new-cap.md) - require a capital letter for constructors
 * [new-parens](new-parens.md) - disallow the omission of parentheses when invoking a constructor with no arguments
 * [no-array-constructor](no-array-constructor.md) - disallow use of the `Array` constructor
+* [no-inline-comments](no-inline-comments.md) - disallow comments inline after code (off by default)
 * [no-lonely-if](no-lonely-if.md) - disallow if as the only statement in an else block (off by default)
 * [no-mixed-spaces-and-tabs](no-mixed-spaces-and-tabs.md) - disallow mixed spaces and tabs for indentation
 * [no-nested-ternary](no-nested-ternary.md) - disallow nested ternary expressions (off by default)
@@ -149,6 +150,7 @@ These rules are purely matters of style and are quite subjective.
 * [no-underscore-dangle](no-underscore-dangle.md) - disallow dangling underscores in identifiers
 * [no-wrap-func](no-wrap-func.md) - disallow wrapping of non-IIFE statements in parens
 * [one-var](one-var.md) - allow just one var statement per function (off by default)
+* [operator-assignment](operator-assignment.md) - require assignment operator shorthand where possible or prohibit it entirely (off by default)
 * [padded-blocks](padded-blocks.md) - enforce padding within blocks (off by default)
 * [quotes](quotes.md) - specify whether double or single quotes should be used
 * [quote-props](quote-props.md) - require quotes around object literal property names (off by default)
@@ -160,7 +162,7 @@ These rules are purely matters of style and are quite subjective.
 * [space-in-parens](space-in-parens.md) - require or disallow spaces inside parentheses (off by default)
 * [space-infix-ops](space-infix-ops.md) - require spaces around operators
 * [space-return-throw-case](space-return-throw-case.md) - require a space after `return`, `throw`, and `case`
-* [space-unary-word-ops](space-unary-word-ops.md) - require a space around word operators such as `typeof` (off by default)
+* [space-unary-ops](space-unary-ops.md) - Require or disallow spaces before/after unary operators (words on by default, nonwords off by default)
 * [spaced-line-comment](spaced-line-comment.md) - require or disallow a space immediately following the `//` in a line comment (off by default)
 * [wrap-regex](wrap-regex.md) - require regex literals to be wrapped in parentheses (off by default)
 
@@ -174,4 +176,3 @@ The following rules are included for compatibility with [JSHint](http://jshint.c
 * [max-statements](max-statements.md) - specify the maximum number of statement allowed in a function (off by default)
 * [no-bitwise](no-bitwise.md) - disallow use of bitwise operators (off by default)
 * [no-plusplus](no-plusplus.md) - disallow use of unary operators, `++` and `--` (off by default)
-
