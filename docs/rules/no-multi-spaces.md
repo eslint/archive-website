@@ -75,9 +75,9 @@ If you don't want to check and disallow multiple spaces, then you should turn th
 
 ## Related Rules
 
-* [space-infix-ops](space-infix-ops.html
-* [space-in-brackets](space-in-brackets.html
-* [space-in-parens](space-in-parens.html
+* [space-infix-ops](space-infix-ops.html)
+* [space-in-brackets](space-in-brackets.html)
+* [space-in-parens](space-in-parens.html)
 * [space-after-keywords](space-after-keywords)
 * [space-unary-ops](space-unary-ops)
 * [space-return-throw-case](space-return-throw-case)

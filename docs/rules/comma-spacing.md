@@ -99,10 +99,10 @@ If your project will not be following a consistent comma-spacing pattern, turn t
 
 ## Related Rules
 
-* [comma-style](comma-style.html
-* [space-in-brackets](space-in-brackets.html
-* [space-in-parens](space-in-parens.html
-* [space-infix-ops](space-infix-ops.html
+* [comma-style](comma-style.html)
+* [space-in-brackets](space-in-brackets.html)
+* [space-in-parens](space-in-parens.html)
+* [space-infix-ops](space-infix-ops.html)
 * [space-after-keywords](space-after-keywords)
 * [space-unary-ops](space-unary-ops)
 * [space-return-throw-case](space-return-throw-case)

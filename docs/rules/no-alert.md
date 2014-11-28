@@ -37,8 +37,8 @@ customPrompt("Who are you?");
 
 ## Related Rules
 
-* [no-console](no-console.html
-* [no-debugger](no-debugger.html
+* [no-console](no-console.html)
+* [no-debugger](no-debugger.html)
 
 ## Version
 

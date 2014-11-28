@@ -40,8 +40,8 @@ If you intentionally use extra semicolons then you can disable this rule.
 
 ## Related Rules
 
-* [semi](semi.html
-* [no-space-before-semi](no-space-before-semi.html
+* [semi](semi.html)
+* [no-space-before-semi](no-space-before-semi.html)
 
 ## Version
 

@@ -51,11 +51,11 @@ function foo() {
 
 ## Related Rules
 
-* [complexity](complexity.html
-* [max-depth](max-depth.html
-* [max-len](max-len.html
-* [max-nested-callbacks](max-nested-callbacks.html
-* [max-params](max-params.html
+* [complexity](complexity.html)
+* [max-depth](max-depth.html)
+* [max-len](max-len.html)
+* [max-nested-callbacks](max-nested-callbacks.html)
+* [max-params](max-params.html)
 
 ## Version
 

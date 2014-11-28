@@ -121,8 +121,8 @@ If you do want to enforce semicolon usage (or omission) in any particular way, t
 
 ## Related Rules
 
-* [no-extra-semi](no-extra-semi.html
-* [no-space-before-semi](no-space-before-semi.html
+* [no-extra-semi](no-extra-semi.html)
+* [no-space-before-semi](no-space-before-semi.html)
 
 ## Version
 
