@@ -145,20 +145,20 @@ These rules are purely matters of style and are quite subjective.
 * [no-inline-comments](no-inline-comments.html) - disallow comments inline after code (off by default)
 * [no-lonely-if](no-lonely-if.html) - disallow if as the only statement in an else block (off by default)
 * [no-mixed-spaces-and-tabs](no-mixed-spaces-and-tabs.html) - disallow mixed spaces and tabs for indentation
+* [no-multiple-empty-lines](no-multiple-empty-lines.html) - disallow multiple empty lines (off by default)
 * [no-nested-ternary](no-nested-ternary.html) - disallow nested ternary expressions (off by default)
 * [no-new-object](no-new-object.html) - disallow use of the `Object` constructor
 * [no-space-before-semi](no-space-before-semi.html) - disallow space before semicolon
 * [no-spaced-func](no-spaced-func.html) - disallow space between function identifier and application
 * [no-ternary](no-ternary.html) - disallow the use of ternary operators (off by default)
 * [no-trailing-spaces](no-trailing-spaces.html) - disallow trailing whitespace at the end of lines
-* [no-multiple-empty-lines](no-multiple-empty-lines.html) - disallow multiple empty lines (off by default)
 * [no-underscore-dangle](no-underscore-dangle.html) - disallow dangling underscores in identifiers
 * [no-wrap-func](no-wrap-func.html) - disallow wrapping of non-IIFE statements in parens
 * [one-var](one-var.html) - allow just one var statement per function (off by default)
 * [operator-assignment](operator-assignment.html) - require assignment operator shorthand where possible or prohibit it entirely (off by default)
 * [padded-blocks](padded-blocks.html) - enforce padding within blocks (off by default)
-* [quotes](quotes.html) - specify whether double or single quotes should be used
 * [quote-props](quote-props.html) - require quotes around object literal property names (off by default)
+* [quotes](quotes.html) - specify whether double or single quotes should be used
 * [semi](semi.html) - require or disallow use of semicolons instead of ASI
 * [sort-vars](sort-vars.html) - sort variables within the same declaration block (off by default)
 * [space-after-keywords](space-after-keywords.html) - require a space after certain keywords (off by default)
