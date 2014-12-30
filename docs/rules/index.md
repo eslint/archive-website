@@ -161,6 +161,7 @@ These rules are purely matters of style and are quite subjective.
 * [quotes](quotes.html) - specify whether double or single quotes should be used
 * [semi](semi.html) - require or disallow use of semicolons instead of ASI
 * [sort-vars](sort-vars.html) - sort variables within the same declaration block (off by default)
+* [space-after-function-name](space-after-function-name.html) - require a space after function names (off by default)
 * [space-after-keywords](space-after-keywords.html) - require a space after certain keywords (off by default)
 * [space-before-blocks](space-before-blocks.html) - require or disallow space before blocks (off by default)
 * [space-in-brackets](space-in-brackets.html) - require or disallow spaces inside brackets (off by default)
