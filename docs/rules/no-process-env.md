@@ -24,21 +24,22 @@ The following patterns are considered okay and do not cause warnings:
 
 ```js
 var config = require("./config");
-  
-if(config.env === "development") {    
+
+if(config.env === "development") {
     //...
 }
 ```
 
 ## When Not To Use It
 
-It should be not used in your configuration/settings file where `process.env` is used to assign values to parameters to be accessed throughout the project. 
+It should be not used in your configuration/settings file where `process.env` is used to assign values to parameters to be accessed throughout the project.
 
 
 ## Further Reading
 
 * [How to store Node.js deployment settings/configuration files? - Stack Overflow](http://stackoverflow.com/questions/5869216/how-to-store-node-js-deployment-settings-configuration-files)
 * [Storing Node.js application config data - Ben Hall's blog](http://blog.benhall.me.uk/2012/02/storing-application-config-data-in/)
+
 ## Version
 
 This rule was introduced in ESLint 0.9.0.

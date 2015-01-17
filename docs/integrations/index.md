@@ -32,3 +32,7 @@ layout: doc
 ## Source Control
 
 * [Git Precommit Hook](https://coderwall.com/p/zq8jlq)
+
+## Source Control
+
+* [Git Precommit Hook](https://coderwall.com/p/zq8jlq)
