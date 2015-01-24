@@ -2,5 +2,7 @@ name: "ESLint"
 description: "A tool for identifying and reporting on patterns in JavaScript."
 url: http://eslint.org
 markdown: redcarpet
+redcarpet:
+    extensions: [with_toc_data]
 permalink: /blog/:year/:month/:title
 paginate: 25
