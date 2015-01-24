@@ -94,9 +94,9 @@ These are rules designed to prevent you from making mistakes. They either prescr
 
 These rules relate to using strict mode.
 
-* [global-strict](global-strict.html) - require or disallow the `"use strict"` pragma in the global scope (off by default in the node environment)
-* [no-extra-strict](no-extra-strict.html) - disallow unnecessary use of `"use strict";` when already in strict mode
-* [strict](strict.html) - require that all functions are run in strict mode
+* [global-strict](global-strict.html) - **(deprecated)** require or disallow the `"use strict"` pragma in the global scope (off by default in the node environment)
+* [no-extra-strict](no-extra-strict.html) - **(deprecated)** disallow unnecessary use of `"use strict";` when already in strict mode
+* [strict](strict.html) - controls location of Use Strict Directives
 
 ## Variables
 

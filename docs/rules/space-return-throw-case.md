@@ -34,7 +34,7 @@ function f(){ return -a; }
 ```
 
 ```js
-function f(){ return; }
+switch(a){ case 'a': break; }
 ```
 
 ## Version

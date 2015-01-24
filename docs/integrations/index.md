@@ -33,6 +33,9 @@ layout: doc
 
 * [Git Precommit Hook](https://coderwall.com/p/zq8jlq)
 
-## Source Control
+## External ESLint rules
 
-* [Git Precommit Hook](https://coderwall.com/p/zq8jlq)
+* [AngularJS](https://github.com/Gillespie59/angularjs-eslint)
+* [Jasmine](https://github.com/tlvince/eslint-plugin-jasmine)
+
+… and many more published on npm with the [eslintplugin](https://www.npmjs.com/search?q=eslintplugin) tag.
