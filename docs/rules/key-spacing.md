@@ -20,8 +20,8 @@ The following patterns are considered valid:
 ```js
 // DEFAULT
 // "key-spacing": [2, {
-//     beforeColon: false,
-//     afterColon: true
+//     "beforeColon": false,
+//     "afterColon": true
 // }]
 var obj = { "foo": (42) };
 
@@ -46,14 +46,14 @@ The following patterns are considered warnings:
 
 ```js
 // "key-spacing": [2, {
-//     beforeColon: false,
-//     afterColon: false
+//     "beforeColon": false,
+//     "afterColon": false
 // }]
 var obj = { foo : 42 }; // Extra space on both sides
 
 // "key-spacing": [2, {
-//     beforeColon: true,
-//     afterColon: true
+//     "beforeColon": true,
+//     "afterColon": true
 // }]
 function foo() {
     return {

@@ -77,19 +77,22 @@ The `context` object contains additional functionality that is helpful for rules
 
 Additionally, the `context` object has the following methods:
 
+* `getAllComments()` - returns an array of all comments in the source.
 * `getAncestors()` - returns an array of ancestor nodes based on the current traversal.
-* `getComments()` - returns an array of all comments in the source.
+* `getComments(node)` - returns the leading and trailing comments arrays for the given node.
 * `getFilename()` - returns the filename associated with the source.
 * `getFirstToken(node)` - returns the first token representing the given node.
 * `getFirstTokens(node, count)` - returns the first `count` tokens representing the given node.
 * `getJSDocComment(node)` - returns the JSDoc comment for a given node or `null` if there is none.
 * `getLastToken(node)` - returns the last token representing the given node.
 * `getLastTokens(node, count)` - returns the last `count` tokens representing the given node.
+* `getNodeByRangeIndex(index)` - returns the deepest node in the AST containing the given source index.
 * `getScope()` - returns the current scope.
 * `getSource(node)` - returns the source code for the given node. Omit `node` to get the whole source.
 * `getSourceLines()` - returns the entire source code split into an array of string lines.
 * `getTokenAfter(node)` - returns the first token after the given node.
 * `getTokenBefore(node)` - returns the first token before the given node.
+* `getTokenByRangeStart(index)` - returns the token whose range starts at the given index in the source.
 * `getTokens(node)` - returns all tokens for the given node.
 * `getTokensAfter(node, count)` - returns `count` tokens after the given node.
 * `getTokensBefore(node, count)` - returns `count` tokens before the given node.

@@ -22,7 +22,7 @@ The following patterns are considered warnings:
 function foo() {}
 foo = bar;
 
-function foo {
+function foo() {
     foo = bar;
 }
 ```

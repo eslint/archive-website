@@ -56,9 +56,10 @@ The information available for each linting message is:
 * `fatal` - usually omitted, but will be set to true if there's a parsing error (not related to a rule).
 * `line` - the line on which the error occurred.
 * `message` - the message that should be output.
+* `nodeType` - the node or token type that was reported with the problem.
 * `ruleId` - the ID of the rule that triggered the messages (or null if `fatal` is true).
 * `severity` - either 1 or 2, depending on your configuration.
-
+* `source` - the line of code where the problem is (or empty string if it can't be found).
 
 ## CLIEngine
 
@@ -135,13 +136,17 @@ The return value is an object containing the results of the linting operation. H
                     column: 23,
                     message: "Expected a semicolon."
                 }
-            ]
+            ],
+            errorCount: 1,
+            warningCount: 0
         }
-    ]
+    ],
+    errorCount: 1,
+    warningCount: 0
 }
 ```
 
-The top-level report object has a `results` array containing all linting results for files that had warnings or errors (any files that did not product a warning or error are omitted). Each file result includes the `filePath` and a `messages` array. The `messages` array contains the result of calling `linter.verify()` on the given file.
+The top-level report object has a `results` array containing all linting results for files that had warnings or errors (any files that did not produce a warning or error are omitted). Each file result includes the `filePath`, a `messages` array, `errorCount` and `warningCount`. The `messages` array contains the result of calling `linter.verify()` on the given file. The `errorCount` and `warningCount` give the exact number of errors and warnings respectively on the given file. The top-level report object also has `errorCount` and `warningCount` which give the exact number of errors and warnings respectively on all the files.
 
 Once you get a report object, it's up to you to determine how to output the results.
 
@@ -217,6 +222,37 @@ var cli = new CLIEngine({
 
 var isIgnored = cli.isPathIgnored("foo/bar.js");
 ```
+
+### getFormatter()
+
+Retrieves a formatter, which you can then use to format a report object. The argument is either the name of a built-in formatter ("stylish" (the default), "compact", "checkstyle", "jslint-xml", "junit" and "tap") or the full path to a JavaScript file containing a custom formatter. You can also omit the argument to retrieve the default formatter.
+
+```js
+var CLIEngine = require("eslint").CLIEngine;
+
+var cli = new CLIEngine({
+    envs: ["browser", "mocha"],
+    useEslintrc: false,
+    rules: {
+        semi: 2
+    }
+});
+
+// lint myfile.js and all files in lib/
+var report = cli.executeOnFiles(["myfile.js", "lib/"]);
+
+// get the default formatter
+var formatter = cli.getFormatter();
+
+// Also could do...
+// var formatter = cli.getFormatter("compact");
+// var formatter = cli.getFormatter("./my/formatter.js");
+
+// output to console
+console.log(formatter(report.results));
+```
+
+**Important:** You must pass in the `results` property of the report. Passing in `report` directly will result in an error.
 
 ## Deprecated APIs
 

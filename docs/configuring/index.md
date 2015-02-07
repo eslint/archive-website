@@ -24,6 +24,7 @@ ESLint allows you to specify the JavaScript language options you want to support
 
 Configuration settings are set in your `.eslintrc` file by using the `ecmaFeatures` property. The available options are:
 
+* `arrowFunctions` - enable [arrow functions](https://leanpub.com/understandinges6/read#leanpub-auto-arrow-functions)
 * `binaryLiterals` - enable [binary literals](https://leanpub.com/understandinges6/read#leanpub-auto-octal-and-binary-literals)
 * `blockBindings` - enable `let` and `const` (aka [block bindings](https://leanpub.com/understandinges6/read#leanpub-auto-block-bindings))
 * `defaultParams` - enable [default function parameters](https://leanpub.com/understandinges6/read/#leanpub-auto-default-parameters)
@@ -36,8 +37,10 @@ Configuration settings are set in your `.eslintrc` file by using the `ecmaFeatur
 * `octalLiterals` - enable [octal literals](https://leanpub.com/understandinges6/read#leanpub-auto-octal-and-binary-literals)
 * `regexUFlag` - enable the [regular expression `u` flag](https://leanpub.com/understandinges6/read#leanpub-auto-the-regular-expression-u-flag)
 * `regexYFlag` - enable the [regular expression `y` flag](https://leanpub.com/understandinges6/read#leanpub-auto-the-regular-expression-y-flag)
+* `superInFunctions` - enable `super` references inside of functions
 * `templateStrings` - enable [template strings](https://leanpub.com/understandinges6/read/#leanpub-auto-template-strings)
 * `unicodeCodePointEscapes` - enable [code point escapes](https://leanpub.com/understandinges6/read/#leanpub-auto-escaping-non-bmp-characters)
+* `globalReturn` - allow `return` statements in the global scope
 * `jsx` - enable [JSX](http://facebook.github.io/jsx/)
 
 Here's an example `.eslintrc` file:
@@ -56,6 +59,27 @@ Here's an example `.eslintrc` file:
 ```
 
 Setting language options helps ESLint determine what is a parsing error. All language options are `false` by default.
+
+## Specifying Parser
+
+By default, ESLint uses [Espree](https://github.com/eslint/espree) as its parser. You can optionally specify that a different parser should be used in your configuration file so long as the parser meets the following requirements:
+
+1. It must be an npm module installed locally.
+1. It must have an Esprima-compatible interface (it must exports a `parse()` method).
+1. It must produce Esprima-compatible AST and token objects.
+
+Note that even with these compatibilities, there are no guarantees that an external parser will work correctly with ESLint and ESLint will not fix bugs related to incompatibilities with other parsers.
+
+To indicate the npm module to use as your parser, specify it using the `parser` option in your `.eslintrc` file. For example, the following specifies to use Esprima instead of Espree:
+
+```json
+{
+    "parser": "esprima",
+    "rules": {
+        "semi": 2
+    }
+}
+```
 
 ## Specifying Environments
 
@@ -328,7 +352,7 @@ If there is an `.eslintrc` and a `package.json` file found in the same directory
 The complete configuration hierarchy, from highest precedence to lowest precedence, is as follows:
 
 1. Inline configuration
-    1. `/*eslint-disable*/`
+    1. `/*eslint-disable*/` and `/*eslint-enable*/`
     1. `/*global*/`
     1. `/*eslint*/`
     1. `/*eslint-env*/`

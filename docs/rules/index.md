@@ -129,6 +129,7 @@ These rules are specific to JavaScript running on Node.js.
 
 These rules are purely matters of style and are quite subjective.
 
+* [indent](indent.html) - this option sets a specific tab width for your code (off by default)
 * [brace-style](brace-style.html) - enforce one true brace style (off by default)
 * [camelcase](camelcase.html) - require camel case names
 * [comma-spacing](comma-spacing.html) - enforce spacing before and after comma
