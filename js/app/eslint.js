@@ -18352,7 +18352,7 @@ module.exports = function (context) {
     /**
      * Mark line to be checked
      * @param {Number} line - line number
-     * @returns {void} (no description)
+     * @returns {void}
      */
     function markCheckLine(line) {
         linesToCheck[line].check = true;
@@ -18361,7 +18361,7 @@ module.exports = function (context) {
     /**
      * Mark line with targeted node to be checked
      * @param {ASTNode} checkNode - targeted node
-     * @returns {void} (no description)
+     * @returns {void}
      */
     function markCheck(checkNode) {
         markCheckLine(checkNode.loc.start.line - 1);
@@ -18371,7 +18371,7 @@ module.exports = function (context) {
      * Sets pushing indent of current node
      * @param {ASTNode} node - targeted node
      * @param {Number} indents - indents count to push
-     * @returns {void} (no description)
+     * @returns {void}
      */
     function markPush(node, indents) {
         linesToCheck[node.loc.start.line - 1].push.push(indents);
@@ -18381,7 +18381,7 @@ module.exports = function (context) {
      * Marks line as outdent, end of block statement for example
      * @param {ASTNode} node - targeted node
      * @param {Number} outdents - count of outedents in targeted line
-     * @returns {void} (no description)
+     * @returns {void}
      */
     function markPop(node, outdents) {
         linesToCheck[node.loc.end.line - 1].pop.push(outdents);
@@ -18390,7 +18390,7 @@ module.exports = function (context) {
     /**
      * Set alt push for current node
      * @param {ASTNode} node - targeted node
-     * @returns {void} (no description)
+     * @returns {void}
      */
     function markPushAlt(node) {
         linesToCheck[node.loc.start.line - 1].pushAltLine.push(node.loc.end.line - 1);
@@ -18401,7 +18401,7 @@ module.exports = function (context) {
      * and marks targeted node as indent pushing
      * @param {ASTNode} pushNode - targeted node
      * @param {Number} indents - indent count to push
-     * @returns {void} (no description)
+     * @returns {void}
      */
     function markPushAndEndCheck(pushNode, indents) {
         markPush(pushNode, indents);
@@ -18413,7 +18413,7 @@ module.exports = function (context) {
      * and set push\pop indentation changes
      * @param {ASTNode} caseNode - targeted node
      * @param {ASTNode[]} children - consequent child nodes of case node
-     * @returns {void} (no description)
+     * @returns {void}
      */
     function markCase(caseNode, children) {
         var outdentNode = getCaseOutdent(children);
@@ -18435,11 +18435,11 @@ module.exports = function (context) {
      * only if child node not in same line as targeted one
      * (if child and parent nodes wrote in single line)
      * @param {ASTNode} node - targeted node
-     * @returns {void} (no description)
+     * @returns {void}
      */
     function markChildren(node) {
         getChildren(node).forEach(function(childNode) {
-            if (childNode.loc.start.line !== node.loc.start.line) {
+            if (childNode.loc.start.line !== node.loc.start.line || node.type === "Program") {
                 markCheck(childNode);
             }
         });
@@ -18449,7 +18449,7 @@ module.exports = function (context) {
      * Mark child block as scope pushing and mark to check
      * @param {ASTNode} node - target node
      * @param {String} property - target node property containing child
-     * @returns {void} (no description)
+     * @returns {void}
      */
     function markAlternateBlockStatement(node, property) {
         var child = node[property];
@@ -18542,7 +18542,7 @@ module.exports = function (context) {
      * Compares expected and actual indentation
      * and reports any violations
      * @param {ASTNode} node - node used only for reporting
-     * @returns {void} (no description)
+     * @returns {void}
      */
     function checkIndentations(node) {
         linesToCheck.forEach(function(line, i) {
@@ -18550,6 +18550,7 @@ module.exports = function (context) {
             var expectedIndentation = getExpectedIndentation(line, actualIndentation);
 
             if (line.check) {
+
                 if (actualIndentation !== expectedIndentation) {
                     context.report(node,
                         {line: i + 1, column: expectedIndentation},
@@ -18607,7 +18608,7 @@ module.exports = function (context) {
      * Store in stack expected indentations
      * @param {Number} line - current line
      * @param {Number} actualIndentation - actual indentation at current line
-     * @returns {void} (no description)
+     * @returns {void}
      */
     function pushExpectedIndentations(line, actualIndentation) {
         var indents = Math.max.apply(null, line.push);
@@ -21016,19 +21017,22 @@ module.exports = function(context) {
     function directives(block) {
         var ds = [], body = block.body, e, i, l;
 
-        for (i = 0, l = body.length; i < l; ++i) {
-            e = body[i];
+        if (body) {
+            for (i = 0, l = body.length; i < l; ++i) {
+                e = body[i];
 
-            if (
-                e.type === "ExpressionStatement" &&
-                e.expression.type === "Literal" &&
-                typeof e.expression.value === "string"
-            ) {
-                ds.push(e.expression);
-            } else {
-                break;
+                if (
+                    e.type === "ExpressionStatement" &&
+                    e.expression.type === "Literal" &&
+                    typeof e.expression.value === "string"
+                ) {
+                    ds.push(e.expression);
+                } else {
+                    break;
+                }
             }
         }
+
         return ds;
     }
 
@@ -26038,7 +26042,7 @@ module.exports = function(context) {
         if (isProgram) {
             isStrict = isStrictPragma(node.body[0]) || isParentStrict;
         } else {
-            isStrict = isStrictPragma(node.body.body[0]) || isParentStrict;
+            isStrict = node.body.body && isStrictPragma(node.body.body[0]) || isParentStrict;
         }
 
         scopes.push(isStrict);
