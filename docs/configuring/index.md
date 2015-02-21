@@ -28,6 +28,7 @@ Configuration settings are set in your `.eslintrc` file by using the `ecmaFeatur
 * `binaryLiterals` - enable [binary literals](https://leanpub.com/understandinges6/read#leanpub-auto-octal-and-binary-literals)
 * `blockBindings` - enable `let` and `const` (aka [block bindings](https://leanpub.com/understandinges6/read#leanpub-auto-block-bindings))
 * `defaultParams` - enable [default function parameters](https://leanpub.com/understandinges6/read/#leanpub-auto-default-parameters)
+* `destructuring` - enable [destructuring](https://leanpub.com/understandinges6/read#leanpub-auto-destructuring-assignment)
 * `forOf` - enable [`for-of` loops](https://leanpub.com/understandinges6/read#leanpub-auto-for-of)
 * `generators` - enable [generators](https://leanpub.com/understandinges6/read#leanpub-auto-generators)
 * `objectLiteralComputedProperties` - enable [computed object literal property names](https://leanpub.com/understandinges6/read#leanpub-auto-computed-property-names)
@@ -37,6 +38,8 @@ Configuration settings are set in your `.eslintrc` file by using the `ecmaFeatur
 * `octalLiterals` - enable [octal literals](https://leanpub.com/understandinges6/read#leanpub-auto-octal-and-binary-literals)
 * `regexUFlag` - enable the [regular expression `u` flag](https://leanpub.com/understandinges6/read#leanpub-auto-the-regular-expression-u-flag)
 * `regexYFlag` - enable the [regular expression `y` flag](https://leanpub.com/understandinges6/read#leanpub-auto-the-regular-expression-y-flag)
+* `restParams` - enable [rest parameters](https://leanpub.com/understandinges6/read#leanpub-auto-rest-parameters)
+* `spread` - enable the [spread operator](https://leanpub.com/understandinges6/read#leanpub-auto-the-spread-operator)
 * `superInFunctions` - enable `super` references inside of functions
 * `templateStrings` - enable [template strings](https://leanpub.com/understandinges6/read/#leanpub-auto-template-strings)
 * `unicodeCodePointEscapes` - enable [code point escapes](https://leanpub.com/understandinges6/read/#leanpub-auto-escaping-non-bmp-characters)
