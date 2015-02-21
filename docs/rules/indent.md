@@ -18,6 +18,7 @@ function hello(indentSize, type) {
 ```
 
 This is the most common scenarios recommended in different style guides:
+
 * Two spaces, not longer and no tabs: Google, npm, Node.js, Idiomatic, Felix
 * Tabs: jQuery
 * Four spaces: Crockford

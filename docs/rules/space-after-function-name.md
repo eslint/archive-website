@@ -5,6 +5,8 @@ layout: doc
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 # Require or disallow spaces following function names (space-after-function-name)
 
+**Deprecation notice**: This rule is deprecated and has been superseded by the [space-before-function-parentheses](space-before-function-parentheses.html) rule. It will be removed in ESLint v1.0.
+
 Whitespace between a function name and its parameter list is optional.
 
 ```js

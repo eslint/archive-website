@@ -81,6 +81,7 @@ These are rules designed to prevent you from making mistakes. They either prescr
 * [no-script-url](no-script-url.html) - disallow use of javascript: urls.
 * [no-self-compare](no-self-compare.html) - disallow comparisons where both sides are exactly the same (off by default)
 * [no-sequences](no-sequences.html) - disallow use of comma operator
+* [no-throw-literal](no-throw-literal.html) - restrict what can be thrown as an exception (off by default)
 * [no-unused-expressions](no-unused-expressions.html) - disallow usage of expressions in statement position
 * [no-void](no-void.html) - disallow use of `void` operator (off by default)
 * [no-warning-comments](no-warning-comments.html) - disallow usage of configurable warning terms in comments - e.g. `TODO` or `FIXME` (off by default)
@@ -162,9 +163,10 @@ These rules are purely matters of style and are quite subjective.
 * [quotes](quotes.html) - specify whether double or single quotes should be used
 * [semi](semi.html) - require or disallow use of semicolons instead of ASI
 * [sort-vars](sort-vars.html) - sort variables within the same declaration block (off by default)
-* [space-after-function-name](space-after-function-name.html) - require a space after function names (off by default)
+* [space-after-function-name](space-after-function-name.html) - **(deprecated)** require a space after function names (off by default)
 * [space-after-keywords](space-after-keywords.html) - require a space after certain keywords (off by default)
 * [space-before-blocks](space-before-blocks.html) - require or disallow space before blocks (off by default)
+* [space-before-function-parentheses](space-before-function-parentheses.html) - require or disallow space before function parentheses (off by default)
 * [space-in-brackets](space-in-brackets.html) - require or disallow spaces inside brackets (off by default)
 * [space-in-parens](space-in-parens.html) - require or disallow spaces inside parentheses (off by default)
 * [space-infix-ops](space-infix-ops.html) - require spaces around operators
