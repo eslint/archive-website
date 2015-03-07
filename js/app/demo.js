@@ -85,7 +85,77 @@ require([
         }
     }
 
+    function populateConfiguration(rules, environments) {
+        for (var env in environments) {
+            var checkbox = $('<div class="checkbox"><label><input type="checkbox" />' + env +'</label></div>');
+            $('input', checkbox).attr('id', env).prop('checked', environments[env]);
+            $('.environments .list').append(checkbox);
+        }
+
+        var i = 0, limit = Math.ceil(Object.keys(rules).length / 3), parent;
+
+        for (var rule in rules) {
+            if (i === 0) {
+                parent = $('<div class="col-md-4"></div>');
+                $('.rules').append(parent);
+            }
+            var checkbox = $('<div class="checkbox"><label><input type="checkbox" />' + rule +'</label></div>');
+            checkbox.popover({
+                title: rule,
+                content: function() {
+                    var me = $(this);
+                    if (me.data('content')) {
+                        return me.data('content');
+                    } else {
+                        $.ajax({
+                            url: '/docs/rules/' + me.text() + '.html',
+                            method: 'GET',
+                            success: function (data) {
+                                var html = $(data);
+                                $('.popover-content').html(html.find('p:first'));
+                                me.data('content', html.find('p:first'));
+                            }
+                        });
+                        return 'Loading...';
+                    }
+                },
+                placement: 'left'
+            });
+            checkbox.on('mouseenter', function() {
+                $(this).popover('show');
+            });
+            checkbox.on('mouseleave', function() {
+                $(this).popover('hide');
+            });
+            $('input', checkbox).attr('id', rule).prop('checked', rules[rule] !== 0);
+            parent.append(checkbox);
+            i++;
+            if (i === limit) {
+                i = 0;
+            }
+            $('#configuration .btn').click(function() {
+                var environments = {}, rules = {};
+                $('.environments input').each(function() {
+                    var name = $(this).attr('id');
+                    var value = $(this).is(':checked');
+                    environments[name] = value;
+                });
+                $('.rules input').each(function() {
+                    var name = $(this).attr('id');
+                    var value = $(this).is(':checked') ? 1 : 0;
+                    rules[name] = value;
+                });
+
+                OPTIONS.rules = rules;
+                OPTIONS.env = environments;
+                verify();
+                $("html, body").animate({ scrollTop: 0 }, 'slow');
+            });
+        }
+    }
+
     var OPTIONS = JSON.parse(config);
+    populateConfiguration(OPTIONS.rules, OPTIONS.env);
 
     var editor = edit(document.getElementById('editor'));
 

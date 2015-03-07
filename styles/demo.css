@@ -1,0 +1,19 @@
+.editorRow {
+    padding-top: 30px;
+}
+
+@media(min-width: 992px) {
+    .results {
+        max-height: 350px;
+        overflow-y: auto;
+    }
+}
+
+.environments .list>div {
+    display: inline-block;
+    margin-right: 20px;
+}
+
+.rules .popover {
+    min-width: 250px;
+}
