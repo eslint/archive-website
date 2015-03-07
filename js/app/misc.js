@@ -1,1 +1,0 @@
-console.log('misc.js source has loaded');
