@@ -11,12 +11,14 @@ Rules in ESLint are divided into several categories to help you better understan
 
 The following rules point out areas where you might have made mistakes.
 
-* [no-comma-dangle](no-comma-dangle.html) - disallow trailing commas in object literals
+* [comma-dangle](comma-dangle.html) - disallow or enforce trailing commas
+* [no-comma-dangle](no-comma-dangle.html) - **(deprecated)** disallow trailing commas in object literals (off by default)
 * [no-cond-assign](no-cond-assign.html) - disallow assignment in conditional expressions
 * [no-console](no-console.html) - disallow use of `console` (off by default in the node environment)
 * [no-constant-condition](no-constant-condition.html) - disallow use of constant expressions in conditions
 * [no-control-regex](no-control-regex.html) - disallow control characters in regular expressions
 * [no-debugger](no-debugger.html) - disallow use of `debugger`
+* [no-dupe-args](no-dupe-args.html) - disallow duplicate arguments in functions
 * [no-dupe-keys](no-dupe-keys.html) - disallow duplicate keys when creating object literals
 * [no-empty](no-empty.html) - disallow empty statements
 * [no-empty-class](no-empty-class.html) - disallow the use of empty character classes in regular expressions
@@ -150,7 +152,7 @@ These rules are purely matters of style and are quite subjective.
 * [no-multiple-empty-lines](no-multiple-empty-lines.html) - disallow multiple empty lines (off by default)
 * [no-nested-ternary](no-nested-ternary.html) - disallow nested ternary expressions (off by default)
 * [no-new-object](no-new-object.html) - disallow use of the `Object` constructor
-* [no-space-before-semi](no-space-before-semi.html) - disallow space before semicolon
+* [no-space-before-semi](no-space-before-semi.html) - **(deprecated)** disallow space before semicolon (off by default)
 * [no-spaced-func](no-spaced-func.html) - disallow space between function identifier and application
 * [no-ternary](no-ternary.html) - disallow the use of ternary operators (off by default)
 * [no-trailing-spaces](no-trailing-spaces.html) - disallow trailing whitespace at the end of lines
@@ -162,6 +164,7 @@ These rules are purely matters of style and are quite subjective.
 * [quote-props](quote-props.html) - require quotes around object literal property names (off by default)
 * [quotes](quotes.html) - specify whether double or single quotes should be used
 * [semi](semi.html) - require or disallow use of semicolons instead of ASI
+* [semi-spacing](semi-spacing.html) - enforce spacing before and after semicolons
 * [sort-vars](sort-vars.html) - sort variables within the same declaration block (off by default)
 * [space-after-function-name](space-after-function-name.html) - **(deprecated)** require a space after function names (off by default)
 * [space-after-keywords](space-after-keywords.html) - require a space after certain keywords (off by default)

@@ -27,9 +27,12 @@ Configuration settings are set in your `.eslintrc` file by using the `ecmaFeatur
 * `arrowFunctions` - enable [arrow functions](https://leanpub.com/understandinges6/read#leanpub-auto-arrow-functions)
 * `binaryLiterals` - enable [binary literals](https://leanpub.com/understandinges6/read#leanpub-auto-octal-and-binary-literals)
 * `blockBindings` - enable `let` and `const` (aka [block bindings](https://leanpub.com/understandinges6/read#leanpub-auto-block-bindings))
+* `classes` - enable classes
 * `defaultParams` - enable [default function parameters](https://leanpub.com/understandinges6/read/#leanpub-auto-default-parameters)
+* `destructuring` - enable [destructuring](https://leanpub.com/understandinges6/read#leanpub-auto-destructuring-assignment)
 * `forOf` - enable [`for-of` loops](https://leanpub.com/understandinges6/read#leanpub-auto-for-of)
 * `generators` - enable [generators](https://leanpub.com/understandinges6/read#leanpub-auto-generators)
+* `modules` - enable modules and global strict mode
 * `objectLiteralComputedProperties` - enable [computed object literal property names](https://leanpub.com/understandinges6/read#leanpub-auto-computed-property-names)
 * `objectLiteralDuplicateProperties` - enable [duplicate object literal properties](https://leanpub.com/understandinges6/read#leanpub-auto-duplicate-object-literal-properties) in strict mode
 * `objectLiteralShorthandMethods` - enable [object literal shorthand methods](https://leanpub.com/understandinges6/read#leanpub-auto-method-initializer-shorthand)
@@ -81,6 +84,14 @@ To indicate the npm module to use as your parser, specify it using the `parser` 
 }
 ```
 
+The following parsers are compatible with ESLint:
+
+* [Esprima](https://npmjs.com/package/esprima)
+* [Esprima-FB](https://npmjs.com/package/esprima-fb) - Facebook's fork of Esprima that includes their proprietary syntax additions.
+* [Babel-ESLint](https://npmjs.com/package/babel-eslint) - A wrapper around the [Babel](http://babeljs.io) parser that makes it compatible with ESLint.
+
+Note when using a custom parser, the `ecmaFeatures` configuration property is ignored unless otherwise specified by the parser.
+
 ## Specifying Environments
 
 An environment defines both global variables that are predefined as well as which rules should be on or off by default. The available environments are:
@@ -94,7 +105,7 @@ An environment defines both global variables that are predefined as well as whic
 * `jquery` - jquery global variables.
 * `prototypejs` - prototypejs global variables.
 * `shelljs` - shelljs global variables.
-
+* `es6` - enable all ECMAScript 6 features except for modules.
 
 These environments are not mutually exclusive, so you can define more than one at a time.
 
@@ -285,6 +296,18 @@ alert('foo');
 console.log('bar');
 
 /*eslint-enable no-alert */
+```
+
+To disable warnings on a specific line
+
+```js
+alert('foo'); // eslint-disable-line
+```
+
+To disable a specific rule on a specific line
+
+```js
+alert('foo'); // eslint-disable-line no-alert
 ```
 
 ## Adding Shared Settings

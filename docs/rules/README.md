@@ -6,12 +6,14 @@ Rules in ESLint are divided into several categories to help you better understan
 
 The following rules point out areas where you might have made mistakes.
 
-* [no-comma-dangle](no-comma-dangle.md) - disallow trailing commas in object literals
+* [comma-dangle](comma-dangle.md) - disallow or enforce trailing commas
+* [no-comma-dangle](no-comma-dangle.md) - **(deprecated)** disallow trailing commas in object literals (off by default)
 * [no-cond-assign](no-cond-assign.md) - disallow assignment in conditional expressions
 * [no-console](no-console.md) - disallow use of `console` (off by default in the node environment)
 * [no-constant-condition](no-constant-condition.md) - disallow use of constant expressions in conditions
 * [no-control-regex](no-control-regex.md) - disallow control characters in regular expressions
 * [no-debugger](no-debugger.md) - disallow use of `debugger`
+* [no-dupe-args](no-dupe-args.md) - disallow duplicate arguments in functions
 * [no-dupe-keys](no-dupe-keys.md) - disallow duplicate keys when creating object literals
 * [no-empty](no-empty.md) - disallow empty statements
 * [no-empty-class](no-empty-class.md) - disallow the use of empty character classes in regular expressions
@@ -145,7 +147,7 @@ These rules are purely matters of style and are quite subjective.
 * [no-multiple-empty-lines](no-multiple-empty-lines.md) - disallow multiple empty lines (off by default)
 * [no-nested-ternary](no-nested-ternary.md) - disallow nested ternary expressions (off by default)
 * [no-new-object](no-new-object.md) - disallow use of the `Object` constructor
-* [no-space-before-semi](no-space-before-semi.md) - disallow space before semicolon
+* [no-space-before-semi](no-space-before-semi.md) - **(deprecated)** disallow space before semicolon (off by default)
 * [no-spaced-func](no-spaced-func.md) - disallow space between function identifier and application
 * [no-ternary](no-ternary.md) - disallow the use of ternary operators (off by default)
 * [no-trailing-spaces](no-trailing-spaces.md) - disallow trailing whitespace at the end of lines
@@ -157,6 +159,7 @@ These rules are purely matters of style and are quite subjective.
 * [quote-props](quote-props.md) - require quotes around object literal property names (off by default)
 * [quotes](quotes.md) - specify whether double or single quotes should be used
 * [semi](semi.md) - require or disallow use of semicolons instead of ASI
+* [semi-spacing](semi-spacing.md) - enforce spacing before and after semicolons
 * [sort-vars](sort-vars.md) - sort variables within the same declaration block (off by default)
 * [space-after-function-name](space-after-function-name.md) - **(deprecated)** require a space after function names (off by default)
 * [space-after-keywords](space-after-keywords.md) - require a space after certain keywords (off by default)
