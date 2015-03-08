@@ -16297,8 +16297,14 @@ estraverse.VisitorKeys.TryStatement = ["block", "handlers", "finalizer"];
 
 // TODO: Remove when estraverse is updated
 estraverse.Syntax.ExportNamedDeclaration = "ExportNamedDeclaration";
+estraverse.Syntax.ExportDefaultDeclaration = "ExportDefaultDeclaration";
+estraverse.Syntax.ExportAllDeclaration = "ExportAllDeclaration";
+estraverse.Syntax.ExportSpecifier = "ExportSpecifier";
 estraverse.VisitorKeys.ExportNamedDeclaration = ["declaration", "specifies", "source"];
-
+estraverse.VisitorKeys.ExportAllDeclaration = ["source"];
+estraverse.VisitorKeys.ExportDefaultDeclaration = ["declaration"];
+estraverse.VisitorKeys.ExportNamedDeclaration = ["declaration", "specifiers", "source"];
+estraverse.VisitorKeys.ExportSpecifier = ["exported", "local"];
 /**
  * Parses a list of "name:boolean_value" or/and "name" options divided by comma or
  * whitespace.
@@ -16845,7 +16851,9 @@ module.exports = (function() {
     api.verify = function(text, config, filename, saveState) {
 
         var ast,
-            shebang;
+            shebang,
+            ecmaFeatures,
+            ecmaVersion;
 
         // set the current parsed filename
         currentFilename = filename;
@@ -16915,12 +16923,17 @@ module.exports = (function() {
             currentText = text;
             controller = new estraverse.Controller();
 
+            ecmaFeatures = currentConfig.ecmaFeatures;
+            ecmaVersion = (ecmaFeatures.blockBindings || ecmaFeatures.classes ||
+                    ecmaFeatures.modules || ecmaFeatures.defaultParams ||
+                    ecmaFeatures.destructuring) ? 6 : 5;
+
             // gather data that may be needed by the rules
             scopeManager = escope.analyze(ast, {
                 ignoreEval: true,
-                nodejsScope: currentConfig.ecmaFeatures.globalReturn,
-                ecmaVersion: currentConfig.ecmaFeatures.blockBindings ? 6 : 5,
-                sourceType: currentConfig.ecmaFeatures.module ? "module" : "script"
+                nodejsScope: ecmaFeatures.globalReturn,
+                ecmaVersion: ecmaVersion,
+                sourceType: ecmaFeatures.modules ? "module" : "script"
             });
             currentScopes = scopeManager.scopes;
 
@@ -17759,9 +17772,18 @@ module.exports = function(context) {
 
     return {
         "Program": function() {
-            scopeStack = [context.getScope().variables.map(function(v) {
+            var scope = context.getScope();
+            scopeStack = [scope.variables.map(function(v) {
                 return v.name;
             })];
+
+            // global return creates another scope
+            if (context.ecmaFeatures.globalReturn) {
+                scope = scope.childScopes[0];
+                scopeStack.push(scope.variables.map(function(v) {
+                    return v.name;
+                }));
+            }
         },
 
         "BlockStatement": function(node) {
@@ -25518,6 +25540,7 @@ module.exports = function(context) {
                 var unresolvedRefs = globalScope.through.filter(isReadRef).map(function(ref) {
                     return ref.identifier.name;
                 });
+
                 for (i = 0, l = globalScope.variables.length; i < l; ++i) {
                     if (unresolvedRefs.indexOf(globalScope.variables[i].name) < 0 &&
                             !globalScope.variables[i].eslintJSXUsed && !isExported(globalScope.variables[i])) {
@@ -25530,6 +25553,12 @@ module.exports = function(context) {
                 if (unused[i].eslintExplicitGlobal) {
                     context.report(programNode, MESSAGE, unused[i]);
                 } else if (unused[i].defs.length > 0) {
+
+                    // TODO: Remove when https://github.com/estools/escope/issues/49 is resolved
+                    if (unused[i].defs[0].type === "ClassName") {
+                        continue;
+                    }
+
                     context.report(unused[i].identifiers[0], MESSAGE, unused[i]);
                 }
             }
