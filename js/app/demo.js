@@ -87,7 +87,7 @@ require([
 
     function populateConfiguration(rules, environments) {
         for (var env in environments) {
-            var checkbox = $('<div class="checkbox"><label><input type="checkbox" />' + env +'</label></div>');
+            var checkbox = $('<div class="checkbox-inline"><label><input type="checkbox" />' + env +'</label></div>');
             $('input', checkbox).attr('id', env).prop('checked', environments[env]);
             $('.environments .list').append(checkbox);
         }
@@ -119,7 +119,8 @@ require([
                         return 'Loading...';
                     }
                 },
-                placement: 'left'
+                placement: 'left',
+                html: true
             });
             checkbox.on('mouseenter', function() {
                 $(this).popover('show');
@@ -142,14 +143,14 @@ require([
                 });
                 $('.rules input').each(function() {
                     var name = $(this).attr('id');
-                    var value = $(this).is(':checked') ? 1 : 0;
+                    var value = $(this).is(':checked') ? 2 : 0;
                     rules[name] = value;
                 });
 
                 OPTIONS.rules = rules;
                 OPTIONS.env = environments;
                 verify();
-                $("html, body").animate({ scrollTop: 0 }, 'slow');
+                $("#configuration").collapse('hide');
             });
         }
     }

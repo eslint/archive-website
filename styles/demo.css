@@ -9,11 +9,14 @@
     }
 }
 
-.environments .list>div {
-    display: inline-block;
-    margin-right: 20px;
+.environments .list label {
+    font-weight: 400;
 }
 
 .rules .popover {
     min-width: 250px;
+}
+
+.rules .popover-content {
+    font-size: 12px;
 }
