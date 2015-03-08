@@ -2,7 +2,9 @@
 title: ESLint Demo
 layout: demo
 ---
-<div class="container" style="padding-top: 30px">
+<link rel="stylesheet" href="../styles/demo.css"/>
+
+<div class="container editorRow">
     <div class="row">
         <div class="col-md-7">
             <pre id="editor" data-editor-lang="js" style="height:350px">var foo = bar;</pre>
@@ -13,6 +15,37 @@ layout: demo
             </div>
         </div>
     </div>
+    <div class="row">
+        <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+            <div class="panel panel-default">
+                <div class="panel-heading" role="tab" id="headingOne">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#configuration" aria-expanded="true" aria-controls="configuration">
+                            Rules Configuration
+                        </a>
+                    </h4>
+                </div>
+                <div id="configuration" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+                    <div class="panel-body">
+                        <div class="row environments">
+                            <div class="col-md-12 list">
+
+                            </div>
+                        </div>
+                        <div class="row rules">
+
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12 text-right">
+                                <button class="btn btn-primary">Ok</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/require.js/2.1.15/require.min.js"></script>
+<script type="text/javascript" src="../js/vendor/jquery-1.10.2.min.js"></script>
 <script type="text/javascript" src="../js/app/demo.js"></script>
