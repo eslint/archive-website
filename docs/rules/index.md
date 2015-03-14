@@ -20,6 +20,7 @@ The following rules point out areas where you might have made mistakes.
 * [no-debugger](no-debugger.html) - disallow use of `debugger`
 * [no-dupe-args](no-dupe-args.html) - disallow duplicate arguments in functions
 * [no-dupe-keys](no-dupe-keys.html) - disallow duplicate keys when creating object literals
+* [no-duplicate-case](no-duplicate-case.html) - disallow a duplicate case label.
 * [no-empty](no-empty.html) - disallow empty statements
 * [no-empty-class](no-empty-class.html) - disallow the use of empty character classes in regular expressions
 * [no-ex-assign](no-ex-assign.html) - disallow assigning to the exception in a `catch` block
@@ -183,7 +184,8 @@ These rules are purely matters of style and are quite subjective.
 These rules are only relevant to ES6 environments and are off by default.
 
 * [no-var](no-var.html) - require `let` or `const` instead of `var` (off by default)
-* [generator-star](generator-star.html) - enforce the position of the `*` in generator functions (off by default)
+* [generator-star](generator-star.html) - **(deprecated)** enforce the position of the `*` in generator functions (off by default)
+* [generator-star-spacing](generator-star-spacing.html) - enforce the spacing around the `*` in generator functions (off by default)
 
 ## Legacy
 
