@@ -20,3 +20,7 @@
 .rules .popover-content {
     font-size: 12px;
 }
+
+.rules .radio+.radio, .rules .checkbox+.checkbox {
+    margin-top: inherit;
+}
