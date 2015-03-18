@@ -112,14 +112,17 @@ require([
                             method: 'GET',
                             success: function (data) {
                                 var html = $(data);
-                                $('.popover-content').html(html.find('p:first'));
-                                me.data('content', html.find('p:first'));
+                                var firstParagraph = html.find('p:first');
+                                $('.popover-content').html(firstParagraph);
+                                me.data('content', firstParagraph);
                             }
                         });
                         return 'Loading...';
                     }
                 },
-                placement: 'left',
+                placement: function(popover, checkbox) {
+                    return $(checkbox).offset().left < 270 ? 'right' : 'left';
+                },
                 html: true
             });
             checkbox.on('mouseenter', function() {
