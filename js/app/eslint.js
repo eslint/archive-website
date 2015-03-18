@@ -17879,31 +17879,74 @@ module.exports = function(context) {
     // Public API
     //--------------------------------------------------------------------------
 
+    /**
+     * Declares all relevant identifiers for classes.
+     * @param {ASTNode} node The AST node representing a class.
+     * @returns {void}
+     * @private
+     */
+    function declareClass(node) {
+        pushScope();
+
+        if (node.id) {
+            declare([node.id.name]);
+        }
+    }
+
+    /**
+     * Declares all relevant identifiers for classes.
+     * @param {ASTNode} node The AST node representing a class.
+     * @returns {void}
+     * @private
+     */
+    function declareClassMethod(node) {
+        pushScope();
+
+        declare([node.key.name]);
+    }
+
+    /**
+     * Add declarations based on the type of node being passed.
+     * @param {ASTNode} node The node containing declarations.
+     * @returns {void}
+     * @private
+     */
+    function declareByNodeType(node) {
+
+        var declarations = [];
+
+        switch (node.type) {
+            case "Identifier":
+                declarations.push(node.name);
+                break;
+
+            case "ObjectPattern":
+                node.properties.forEach(function(property) {
+                    declarations.push(property.key.name);
+                    if (property.value) {
+                        declarations.push(property.value.name);
+                    }
+                });
+                break;
+
+            case "ArrayPattern":
+                node.elements.forEach(function(element) {
+                    declarations.push(element.name);
+                });
+                break;
+
+            // no default
+        }
+
+        declare(declarations);
+
+    }
+
     function functionHandler(node) {
         pushScope();
 
         node.params.forEach(function(param) {
-
-            switch (param.type) {
-                case "Identifier":
-                    declare([param.name]);
-                    break;
-
-                case "ObjectPattern":
-                    declare(param.properties.map(function(property) {
-                        return property.key.name;
-                    }));
-                    break;
-
-                case "ArrayPattern":
-                    declare(param.elements.map(function(element) {
-                        return element.name;
-                    }));
-                    break;
-
-                // no default
-            }
-
+            declareByNodeType(param);
         });
 
         declare(node.id ? [node.id.name] : []);
@@ -17913,27 +17956,7 @@ module.exports = function(context) {
 
     function variableDeclarationHandler(node) {
         node.declarations.forEach(function(declaration) {
-
-            switch (declaration.id.type) {
-                case "Identifier":
-                    declare([declaration.id.name]);
-                    break;
-
-                case "ObjectPattern":
-                    declare(declaration.id.properties.map(function(property) {
-                        return property.key.name;
-                    }));
-                    break;
-
-                case "ArrayPattern":
-                    declare(declaration.id.elements.map(function(element) {
-                        return element.name;
-                    }));
-                    break;
-
-                // no default
-            }
-
+            declareByNodeType(declaration.id);
         });
 
     }
@@ -17980,6 +18003,15 @@ module.exports = function(context) {
 
         "FunctionDeclaration": functionHandler,
         "FunctionDeclaration:exit": popScope,
+
+        "ClassDeclaration": declareClass,
+        "ClassDeclaration:exit": popScope,
+
+        "ClassExpression": declareClass,
+        "ClassExpression:exit": popScope,
+
+        "MethodDefinition": declareClassMethod,
+        "MethodDefinition:exit": popScope,
 
         "FunctionExpression": functionHandler,
         "FunctionExpression:exit": popScope,
@@ -18731,11 +18763,15 @@ module.exports = function(context) {
     }
 
     function endFunction(node) {
-        var complexity = fns.pop(), name = "anonymous";
+        var complexity = fns.pop(),
+            name = "anonymous";
 
         if (node.id) {
             name = node.id.name;
+        } else if (node.parent.type === "MethodDefinition") {
+            name = node.parent.key.name;
         }
+
         if (complexity > THRESHOLD) {
             context.report(node, "Function '{{name}}' has a complexity of {{complexity}}.", { name: name, complexity: complexity });
         }
@@ -19164,7 +19200,6 @@ var keywords = [
     "else",
     "for",
     "new",
-    "arguments",
     "in",
     "typeof",
     "while",
@@ -19183,7 +19218,6 @@ var keywords = [
     "finally",
     "with",
     "debugger",
-    "eval",
     "implements",
     "interface",
     "package",
@@ -19191,8 +19225,6 @@ var keywords = [
     "protected",
     "public",
     "static",
-    "yield",
-    "let",
     "class",
     "enum",
     "export",
@@ -21793,16 +21825,18 @@ module.exports = function(context) {
 module.exports = function(context) {
 
     /**
-     * Get a hash value for the test
-     * @param {ASTNode} test The "test" node.
-     * @returns {string} A hash value for the test.
+     * Get a hash value for the node
+     * @param {ASTNode} node The node.
+     * @returns {string} A hash value for the node.
      * @private
      */
-    function getHash(test) {
-        if (test.type === "Literal") {
-            return test.type + typeof test.value + test.value;
-        } else if (test.type === "Identifier") {
-            return test.type + typeof test.name + test.name;
+    function getHash(node) {
+        if (node.type === "Literal") {
+            return node.type + typeof node.value + node.value;
+        } else if (node.type === "Identifier") {
+            return node.type + typeof node.name + node.name;
+        } else if (node.type === "MemberExpression") {
+            return node.type + getHash(node.object) + getHash(node.property);
         }
     }
 
@@ -21824,7 +21858,7 @@ module.exports = function(context) {
 
             if (node.test) {
                 hashValue = getHash(node.test);
-                if (currentSwitch.hasOwnProperty(hashValue)) {
+                if (typeof hashValue !== "undefined" && currentSwitch.hasOwnProperty(hashValue)) {
                     context.report(node, "Duplicate case label.");
                 } else {
                     currentSwitch[hashValue] = true;
@@ -22978,13 +23012,13 @@ module.exports = function(context) {
                 def = variable.defs[j];
 
                 // Identifier is a function and was declared in this scope
-                if (def.name.name === name && def.type === "FunctionName") {
+                if (def.type === "FunctionName" && def.name.name === name) {
                     return true;
                 }
 
                 // Identifier is a variable and was declared in this scope. This
                 // is a legitimate shadow variable.
-                if (def.name.name === name) {
+                if (def.name && def.name.name === name) {
                     return false;
                 }
             }
@@ -24312,13 +24346,18 @@ module.exports = function(context) {
             if (typeof node.value !== "string") {
                 return;
             }
-            var match = node.raw.match(/^([^\\]|\\[^0-7])*\\([0-7])/),
+
+            var match = node.raw.match(/^([^\\]|\\[^0-7])*\\([0-3][0-7]{1,2}|[4-7][0-7]|[0-7])/),
                 octalDigit;
 
             if (match) {
                 octalDigit = match[2];
-                context.report(node, "Don't use octal: '\\{{octalDigit}}'. Use '\\u....' instead.",
-                        { octalDigit: octalDigit });
+
+                // \0 is actually not considered an octal
+                if (match[2] !== "0" || typeof match[3] !== "undefined") {
+                    context.report(node, "Don't use octal: '\\{{octalDigit}}'. Use '\\u....' instead.",
+                            { octalDigit: octalDigit });
+                }
             }
         }
 
@@ -24519,10 +24558,15 @@ module.exports = function(context) {
 
 module.exports = function(context) {
 
-    function findVariables() {
-        var scope = context.getScope();
-
+    /**
+     * Find variables in a given scope and flag redeclared ones.
+     * @param {Scope} scope An escope scope object.
+     * @returns {void}
+     * @private
+     */
+    function findVariablesInScope(scope) {
         scope.variables.forEach(function(variable) {
+
             if (variable.identifiers && variable.identifiers.length > 1) {
                 variable.identifiers.sort(function(a, b) {
                     return a.range[1] - b.range[1];
@@ -24533,6 +24577,24 @@ module.exports = function(context) {
                 }
             }
         });
+
+    }
+
+    /**
+     * Find variables in a given node's associated scope.
+     * @param {ASTNode} node The node to check.
+     * @returns {void}
+     * @private
+     */
+    function findVariables(node) {
+        var scope = context.getScope();
+
+        findVariablesInScope(scope);
+
+        // globalReturn means one extra scope to check
+        if (node.type === "Program" && context.ecmaFeatures.globalReturn) {
+            findVariablesInScope(scope.childScopes[0]);
+        }
     }
 
     return {
@@ -25416,6 +25478,9 @@ module.exports = function(context) {
     var NOT_DEFINED_MESSAGE = "'{{name}}' is not defined.",
         READ_ONLY_MESSAGE = "'{{name}}' is read only.";
 
+    // TODO: Remove once escope is updated
+    var hackedImports = [];
+
     /**
      * Compare an identifier with the variables declared in the scope
      * @param {ASTNode} node - Identifier or JSXIdentifier node
@@ -25454,6 +25519,7 @@ module.exports = function(context) {
             variable = new escope.Variable(node.local.name, scope);
         variable.defs.push(node);
         scope.variables.push(variable);
+        hackedImports.push(variable);
     }
 
     return {
@@ -25485,6 +25551,11 @@ module.exports = function(context) {
                 } else if (ref.isWrite() && variable.writeable === false) {
                     context.report(ref.identifier, READ_ONLY_MESSAGE, { name: name });
                 }
+            });
+
+            // TODO: Remove once escope is updated
+            globalScope.variables = globalScope.variables.filter(function (variable) {
+                return hackedImports.indexOf(variable) < 0;
             });
         },
 
@@ -27236,8 +27307,14 @@ module.exports = function(context) {
         tokens = context.getTokens(node);
 
         if (node.generator) {
-            leftToken = tokens[2];
-            rightToken = tokens[3];
+            if (node.id) {
+                leftToken = tokens[2];
+                rightToken = tokens[3];
+            } else {
+                // Object methods are named but don't have an id
+                leftToken = context.getTokenBefore(node);
+                rightToken = tokens[0];
+            }
         } else if (isNamed) {
             if (node.id) {
                 leftToken = tokens[1];
@@ -28844,6 +28921,8 @@ function same(a, b) {
             // x[y] = x[y]
             // x.y = x.y
             return same(a.object, b.object) && same(a.property, b.property);
+        case "ThisExpression":
+            return true;
         default:
             return false;
     }
