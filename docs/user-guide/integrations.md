@@ -1,3 +1,8 @@
+---
+title: Integrations
+layout: doc
+---
+
 # Integrations
 
 ## Editors
