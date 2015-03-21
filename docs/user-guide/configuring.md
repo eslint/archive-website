@@ -3,6 +3,7 @@ title: ESLint
 layout: doc
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
+
 # Configuring ESLint
 
 ESLint is designed to be completely configurable, meaning you can turn off every rule and run only with basic syntax validation, or mix and match the bundled rules and your custom rules to make ESLint perfect for your project. There are two primary ways to configure ESLint:
@@ -233,13 +234,13 @@ To configure rules inside of a file using configuration comments, use a comment 
 /*eslint eqeqeq:0, curly: 2*/
 ```
 
-In this example, [`eqeqeq`](../rules/eqeqeq.html) is turned off and [`curly`](../rules/curly.md) is turned on as an error. If a rule has additional options, you can specify them using array literal syntax, such as:
+In this example, [`eqeqeq`](../rules/eqeqeq.md) is turned off and [`curly`](../rules/curly.md) is turned on as an error. If a rule has additional options, you can specify them using array literal syntax, such as:
 
 ```js
 /*eslint quotes: [2, "double"], curly: 2*/
 ```
 
-This comment specifies the "double" option for the [`quotes`](../rules/quotes.html) rule.
+This comment specifies the "double" option for the [`quotes`](../rules/quotes.md) rule.
 
 To configure rules inside of a configuration file, use the `rules` key along with an error level and any options you want to use. For example:
 

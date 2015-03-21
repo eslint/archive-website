@@ -1,8 +1,8 @@
 ---
-title: ESLint
+title: About
 layout: doc
 ---
-<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
+
 # About
 
 ESLint is an open source JavaScript linting utility originally created by Nicholas C. Zakas in June 2013. Code [linting][] is a type of static analysis that is frequently use to find problematic patterns or code that doesn't adhere to certain style guidelines. There are code linters for most programming languages, and compilers sometimes incorporate linting into the compilation process.
