@@ -2,11 +2,16 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="keywords" content="JavaScript, Linter, Linting, Pluggable, Configurable, Code Quality">
   <meta name="description" content="{{ site.description }}">
 {% if page.title != site.name %}
-  <title>{{ page.title }} - {{ site.name }}</title>
+    {% if page.title != "ESLint" %}
+        <title>{{ page.title }} - {{ site.name }}</title>
+    {% else %}
+        <title>{{ site.name }}</title>
+    {% endif %}
 {% else %}
   <title>{{ site.name }}</title>
 {% endif %}
@@ -37,32 +42,32 @@
             <span class="icon-bar"></span>
           </button>
           <a href="/" class="navbar-brand">
-            <img alt="" src="/img/logo.svg">
-            <span>ES</span>Lint</a>
+            <img alt="ESLint" src="/img/logo.svg">
+            ESLint</a>
         </div>
         <div class="collapse navbar-collapse">
           <ul class="nav navbar-nav navbar-right">
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">User guide<span class="caret"></span></a>
               <ul class="dropdown-menu" role="menu">
-                <li><a href="/docs/user-guide/configuring.html">Configuring ESLint</a></li>
-                <li><a href="/docs/user-guide/command-line-interface.html">Command Line Interface</a></li>
+                <li><a href="/docs/user-guide/configuring">Configuring ESLint</a></li>
+                <li><a href="/docs/user-guide/command-line-interface">Command Line Interface</a></li>
                 <li><a href="/docs/rules/">Rules</a></li>
                 <li class="divider"></li>
-                <li><a href="/docs/user-guide/integrations.html">Integrations</a></li>
+                <li><a href="/docs/user-guide/integrations">Integrations</a></li>
               </ul>
             </li>
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Developer guide<span class="caret"></span></a>
               <ul class="dropdown-menu" role="menu">
-                <li><a href="/docs/developer-guide/contributing.html">Contributing</a></li>
-                <li><a href="/docs/developer-guide/source-code.html">Get the Source Code</a></li>
-                <li><a href="/docs/developer-guide/development-environment.html">Setup a Development Environment</a></li>
-                <li><a href="/docs/developer-guide/unit-tests.html">Run the Unit Tests</a></li>
-                <li><a href="/docs/developer-guide/working-with-rules.html">Working with Rules</a></li>
-                <li><a href="/docs/developer-guide/working-with-plugins.html">Working with Plugins</a></li>
-                <li><a href="/docs/developer-guide/nodejs-api.html">Node.js API</a></li>
-                <li><a href="/docs/developer-guide/governance.html">Governance Model</a></li>
+                <li><a href="/docs/developer-guide/contributing">Contributing</a></li>
+                <li><a href="/docs/developer-guide/source-code">Get the Source Code</a></li>
+                <li><a href="/docs/developer-guide/development-environment">Setup a Development Environment</a></li>
+                <li><a href="/docs/developer-guide/unit-tests">Run the Unit Tests</a></li>
+                <li><a href="/docs/developer-guide/working-with-rules">Working with Rules</a></li>
+                <li><a href="/docs/developer-guide/working-with-plugins">Working with Plugins</a></li>
+                <li><a href="/docs/developer-guide/nodejs-api">Node.js API</a></li>
+                <li><a href="/docs/developer-guide/governance">Governance Model</a></li>
               </ul>
             </li>
             <li><a href="/blog">Blog</a></li>
