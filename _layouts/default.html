@@ -1,6 +1,9 @@
 {% include header.html %}
-{% include jumbotron.html %}
-<div class="container">
-{{ content }}
+<div itemscope itemtype="http://schema.org/SoftwareApplication">
+{% include menu.html %}
+    {% include jumbotron.html %}
+    <div class="container">
+    {{ content }}
+    </div>
 </div>
 {% include footer.html %}
