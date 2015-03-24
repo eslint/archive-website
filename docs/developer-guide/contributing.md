@@ -97,7 +97,7 @@ If you want to help, please check the [site issues]() to see where your help is 
 
 ### Integrations
 
-Part of what makes ESLint useful is the way it integrates into other systems. We have an [integrations](https://github.com/eslint/eslint/tree/master/docs/integrations) page that lists out all known integrations. If you have created an integration, please add your information to that page.
+Part of what makes ESLint useful is the way it integrates into other systems. We have an [integrations](https://github.com/eslint/eslint.github.io/blob/master/docs/user-guide/integrations.md) page that lists out all known integrations. If you have created an integration, please add your information to that page.
 
 Additionally, we are always looking for official integrations to host under the ESLint organization on GitHub. Official integrations are tools that have a high-level quality and are managed by responsible maintainers who are committed to keeping the tool up-to-date and bettering the tool for the good of the ESLint community. If you think your integration qualifies, please contact the [mailing list](https://groups.google.com/group/eslint) with your information.
 
