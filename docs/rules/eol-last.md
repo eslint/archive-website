@@ -1,5 +1,5 @@
 ---
-title: ESLint
+title: Rule eol-last
 layout: doc
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
@@ -12,8 +12,8 @@ rule enforces newlines for all non-empty programs.
 
 Prior to v0.16.0 this rule also enforced that there was only a single line at
 the end of the file. If you still want this behaviour, consider enabling
-[no-multiple-empty-lines](no-multiple-empty-lines.html) and/or
-[no-trailing-spaces](no-trailing-spaces.html).
+[no-multiple-empty-lines](no-multiple-empty-lines and/or
+[no-trailing-spaces](no-trailing-spaces.
 
 ## Rule Details
 

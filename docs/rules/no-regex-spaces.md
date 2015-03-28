@@ -1,5 +1,5 @@
 ---
-title: ESLint
+title: Rule no-regex-spaces
 layout: doc
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
@@ -45,8 +45,8 @@ If you want to allow multiple spaces in a regular expression, then you can safel
 
 ## Related Rules
 
-* [no-div-regex](no-div-regex.html)
-* [no-control-regex](no-control-regex.html)
+* [no-div-regex](no-div-regex
+* [no-control-regex](no-control-regex
 
 ## Version
 

@@ -1,5 +1,5 @@
 ---
-title: ESLint
+title: Rule no-nested-ternary
 layout: doc
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
@@ -39,7 +39,7 @@ if (foo) {
 
 ## Related Rules
 
-* [no-ternary](no-ternary.html)
+* [no-ternary](no-ternary
 
 ## Version
 

@@ -1,5 +1,5 @@
 ---
-title: ESLint
+title: Rule complexity
 layout: doc
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
@@ -63,11 +63,11 @@ If you can't determine an appropriate complexity limit for your code, then it's 
 
 ## Related Rules
 
-* [max-depth](max-depth.html)
-* [max-len](max-len.html)
-* [max-nested-callbacks](max-nested-callbacks.html)
-* [max-params](max-params.html)
-* [max-statements](max-statements.html)
+* [max-depth](max-depth
+* [max-len](max-len
+* [max-nested-callbacks](max-nested-callbacks
+* [max-params](max-params
+* [max-statements](max-statements
 
 ## Version
 

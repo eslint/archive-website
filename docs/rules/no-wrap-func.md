@@ -1,5 +1,5 @@
 ---
-title: ESLint
+title: Rule no-wrap-func
 layout: doc
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
@@ -37,7 +37,7 @@ var a = function() {...};
 
 ## Further Reading
 
-* [Wrapping non-IIFE function literals in parens is unnecessary](http://jslinterrors.com/wrapping-non-iife-function-literals-in-parens/)
+* [Wrapping non-IIFE function literals in parens is unnecessary](http://jslinterrors.com/wrapping-non-iife-function-literals-in-parens)
 
 ## Version
 

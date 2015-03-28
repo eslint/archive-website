@@ -1,5 +1,5 @@
 ---
-title: ESLint
+title: Rule no-fallthrough
 layout: doc
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
@@ -115,7 +115,7 @@ If you don't want to enforce that each `case` statement should end with a `throw
 
 ## Related Rules
 
-* [default-case](default-case.html)
+* [default-case](default-case
 
 ## Version
 

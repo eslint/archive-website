@@ -1,5 +1,5 @@
 ---
-title: ESLint
+title: Rule handle-callback-err
 layout: doc
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
@@ -97,7 +97,6 @@ confident that some other form of monitoring will help you catch the problem.
 
 - [The Art Of Node: Callbacks](https://github.com/maxogden/art-of-node#callbacks)
 - [Nodejitsu: What are the error conventions?](http://docs.nodejitsu.com/articles/errors/what-are-the-error-conventions)
-- [Node Tuts: The Callback Pattern](http://nodetuts.com/02-callback-pattern.html)
 
 ## Version
 

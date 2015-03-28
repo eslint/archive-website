@@ -72,6 +72,7 @@ These are rules designed to prevent you from making mistakes. They either prescr
 * [no-new-wrappers](no-new-wrappers.md) - disallows creating new instances of `String`,`Number`, and `Boolean`
 * [no-octal](no-octal.md) - disallow use of octal literals
 * [no-octal-escape](no-octal-escape.md) - disallow use of octal escape sequences in string literals, such as `var foo = "Copyright \251";`
+* [no-param-reassign](no-param-reassign.md) - disallow reassignment of function parameters (off by default)
 * [no-process-env](no-process-env.md) - disallow use of `process.env` (off by default)
 * [no-proto](no-proto.md) - disallow usage of `__proto__` property
 * [no-redeclare](no-redeclare.md) - disallow declaring the same variable more then once
@@ -141,6 +142,7 @@ These rules are purely matters of style and are quite subjective.
 * [max-nested-callbacks](max-nested-callbacks.md) - specify the maximum depth callbacks can be nested (off by default)
 * [new-cap](new-cap.md) - require a capital letter for constructors
 * [new-parens](new-parens.md) - disallow the omission of parentheses when invoking a constructor with no arguments
+* [newline-after-var](newline-after-var.md) - allow/disallow an empty newline after `var` statement (off by default)
 * [no-array-constructor](no-array-constructor.md) - disallow use of the `Array` constructor
 * [no-inline-comments](no-inline-comments.md) - disallow comments inline after code (off by default)
 * [no-lonely-if](no-lonely-if.md) - disallow if as the only statement in an else block (off by default)
@@ -165,12 +167,14 @@ These rules are purely matters of style and are quite subjective.
 * [space-after-function-name](space-after-function-name.md) - **(deprecated)** require a space after function names (off by default)
 * [space-after-keywords](space-after-keywords.md) - require a space after certain keywords (off by default)
 * [space-before-blocks](space-before-blocks.md) - require or disallow space before blocks (off by default)
-* [space-before-function-parentheses](space-before-function-parentheses.md) - require or disallow space before function parentheses (off by default)
+* [space-before-function-paren](space-before-function-paren.md) - require or disallow space before function opening parenthesis (off by default)
+* [space-before-function-parentheses](space-before-function-parentheses.md) - **(deprecated)** require or disallow space before function parentheses (off by default)
 * [space-in-brackets](space-in-brackets.md) - require or disallow spaces inside brackets (off by default)
 * [space-in-parens](space-in-parens.md) - require or disallow spaces inside parentheses (off by default)
 * [space-infix-ops](space-infix-ops.md) - require spaces around operators
 * [space-return-throw-case](space-return-throw-case.md) - require a space after `return`, `throw`, and `case`
 * [space-unary-ops](space-unary-ops.md) - Require or disallow spaces before/after unary operators (words on by default, nonwords off by default)
+* [space-unary-word-ops](space-unary-word-ops.md) - **(deprecated)** Require or disallow spaces before/after unary operators (words on by default, nonwords off by default)
 * [spaced-line-comment](spaced-line-comment.md) - require or disallow a space immediately following the `//` in a line comment (off by default)
 * [wrap-regex](wrap-regex.md) - require regex literals to be wrapped in parentheses (off by default)
 

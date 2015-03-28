@@ -1,5 +1,5 @@
 ---
-title: ESLint
+title: Rule no-native-reassign
 layout: doc
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
@@ -65,7 +65,7 @@ If you are trying to override one of the native objects.
 
 ## Related Rules
 
-* [no-extend-native](no-extend-native.html)
+* [no-extend-native](no-extend-native
 
 ## Version
 

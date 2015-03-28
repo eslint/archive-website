@@ -1,5 +1,5 @@
 ---
-title: ESLint
+title: Rule spaced-line-comment
 layout: doc
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->

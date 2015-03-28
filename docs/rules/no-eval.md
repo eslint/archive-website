@@ -1,5 +1,5 @@
 ---
-title: ESLint
+title: Rule no-eval
 layout: doc
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
@@ -40,7 +40,7 @@ var obj = { x: "foo" },
 
 ## Related Rules
 
-* [no-implied-eval](no-implied-eval.html)
+* [no-implied-eval](no-implied-eval
 
 ## Version
 

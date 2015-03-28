@@ -1,5 +1,5 @@
 ---
-title: ESLint
+title: Rule space-infix-ops
 layout: doc
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
@@ -54,6 +54,23 @@ a       + b
 ```js
 a ? b : c
 ```
+
+### Options
+
+This rule accepts a single options argument with the following defaults:
+
+```json
+"space-infix-ops": [2, {"int32Hint": false}]
+```
+
+### `int32Hint`
+
+Set the `int32Hint` option to `true` (default is `false`) to allow write `a|0` without space.
+
+```js
+var foo = bar|0; // `foo` is forced to be signed 32 bit integer
+```
+
 ## Version
 
 This rule was introduced in ESLint 0.2.0.

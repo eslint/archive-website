@@ -1,5 +1,5 @@
 ---
-title: ESLint
+title: Rule space-in-brackets
 layout: doc
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
@@ -300,7 +300,7 @@ You can turn this rule off if you are not concerned with the consistency of spac
 
 ## Related Rules
 
-* [space-in-parens](space-in-parens.html)
+* [space-in-parens](space-in-parens
 
 ## Version
 

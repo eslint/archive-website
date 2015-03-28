@@ -1,5 +1,5 @@
 ---
-title: ESLint
+title: Rule no-inner-declarations
 layout: doc
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
@@ -122,7 +122,7 @@ This rule takes a single option to specify whether it should check just function
 
 ## When Not To Use It
 
-The function declaration portion rule will be rendered obsolete when [block-scoped functions](https://bugzilla.mozilla.org/show_bug.cgi?id=585536) land in ES6, but until then, it should be left on to enforce valid constructions. Disable checking variable declarations when using [block-scoped-var](block-scoped-var.html) or if declaring variables in nested blocks is acceptable despite hoisting.
+The function declaration portion rule will be rendered obsolete when [block-scoped functions](https://bugzilla.mozilla.org/show_bug.cgi?id=585536) land in ES6, but until then, it should be left on to enforce valid constructions. Disable checking variable declarations when using [block-scoped-var](block-scoped-var or if declaring variables in nested blocks is acceptable despite hoisting.
 
 ## Version
 

@@ -1,5 +1,5 @@
 ---
-title: ESLint
+title: Rule semi
 layout: doc
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
@@ -121,8 +121,8 @@ If you do want to enforce semicolon usage (or omission) in any particular way, t
 
 ## Related Rules
 
-* [no-extra-semi](no-extra-semi.html)
-* [no-space-before-semi](no-space-before-semi.html)
+* [no-extra-semi](no-extra-semi
+* [no-space-before-semi](no-space-before-semi
 
 ## Version
 

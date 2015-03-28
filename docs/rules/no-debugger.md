@@ -1,5 +1,5 @@
 ---
-title: ESLint
+title: Rule no-debugger
 layout: doc
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
@@ -25,8 +25,8 @@ If your code is still very much in development and don't want to worry about str
 
 ## Related Rules
 
-* [no-alert](no-alert.html)
-* [no-console](no-console.html)
+* [no-alert](no-alert
+* [no-console](no-console
 
 ## Version
 

@@ -1,5 +1,5 @@
 ---
-title: ESLint
+title: Rule no-undef-init
 layout: doc
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
@@ -45,8 +45,8 @@ If you want to allow initialization of variables with `undefined`, then you can 
 
 ## Related Rules
 
-* [no-undefined](no-undefined.html)
-* [no-void](no-void.html)
+* [no-undefined](no-undefined
+* [no-void](no-void
 
 ## Version
 

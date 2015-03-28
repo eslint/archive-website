@@ -1,5 +1,5 @@
 ---
-title: ESLint
+title: Rule no-control-regex
 layout: doc
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
@@ -32,8 +32,8 @@ If you need to use control character pattern matching, then you should turn this
 
 ## Related Rules
 
-* [no-div-regex](no-div-regex.html)
-* [no-regex-spaces](no-regex-spaces.html)
+* [no-div-regex](no-div-regex
+* [no-regex-spaces](no-regex-spaces
 
 
 ## Version

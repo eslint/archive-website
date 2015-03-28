@@ -1,5 +1,5 @@
 ---
-title: ESLint
+title: Rule no-new-object
 layout: doc
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
@@ -47,8 +47,8 @@ If you wish to allow the use of the `Object` constructor, you can safely turn th
 
 ## Related Rules
 
-* [no-array-constructor](no-array-constructor.html)
-* [no-new-wrappers](no-new-wrappers.html)
+* [no-array-constructor](no-array-constructor
+* [no-new-wrappers](no-new-wrappers
 
 ## Version
 

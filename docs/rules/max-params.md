@@ -1,5 +1,5 @@
 ---
-title: ESLint
+title: Rule max-params
 layout: doc
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
@@ -41,11 +41,11 @@ function foo (bar, baz, qux) {
 
 ## Related Rules
 
-* [complexity](complexity.html)
-* [max-depth](max-depth.html)
-* [max-len](max-len.html)
-* [max-nested-callbacks](max-nested-callbacks.html)
-* [max-statements](max-statements.html)
+* [complexity](complexity
+* [max-depth](max-depth
+* [max-len](max-len
+* [max-nested-callbacks](max-nested-callbacks
+* [max-statements](max-statements
 
 ## Version
 

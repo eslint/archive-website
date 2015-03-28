@@ -1,5 +1,5 @@
 ---
-title: ESLint
+title: Rule no-multi-spaces
 layout: doc
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
@@ -106,10 +106,10 @@ If you don't want to check and disallow multiple spaces, then you should turn th
 
 ## Related Rules
 
-* [key-spacing](key-spacing.html)
-* [space-infix-ops](space-infix-ops.html)
-* [space-in-brackets](space-in-brackets.html)
-* [space-in-parens](space-in-parens.html)
+* [key-spacing](key-spacing
+* [space-infix-ops](space-infix-ops
+* [space-in-brackets](space-in-brackets
+* [space-in-parens](space-in-parens
 * [space-after-keywords](space-after-keywords)
 * [space-unary-ops](space-unary-ops)
 * [space-return-throw-case](space-return-throw-case)

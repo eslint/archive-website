@@ -1,5 +1,5 @@
 ---
-title: ESLint
+title: Rule new-cap
 layout: doc
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
@@ -51,15 +51,16 @@ If provided, it must be an `Array`.
 Array of uppercase-starting function names that are permitted to be used without the `new` operator.
 If not provided, `capIsNewExceptions` defaults to the following:
 
- - `Object`
- - `Function`
- - `Number`
- - `String`
+ - `Array`
  - `Boolean`
  - `Date`
- - `Array`
- - `Symbol`
+ - `Error`
+ - `Function`
+ - `Number`
+ - `Object`
  - `RegExp`
+ - `String`
+ - `Symbol`
 
 If provided, it must be an `Array`. The default values will continue to be excluded when `capIsNewExceptions` is provided.
 

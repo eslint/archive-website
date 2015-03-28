@@ -1,5 +1,5 @@
 ---
-title: ESLint
+title: Rule no-undefined
 layout: doc
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
@@ -83,8 +83,8 @@ If you want to allow the use of `undefined` in your code, then you can safely tu
 
 ## Related Rules
 
-* [no-undef-init](no-undef-init.html)
-* [no-void](no-void.html)
+* [no-undef-init](no-undef-init
+* [no-void](no-void
 
 ## Version
 

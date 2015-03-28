@@ -1,5 +1,5 @@
 ---
-title: ESLint
+title: Rule no-new-wrappers
 layout: doc
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
@@ -75,8 +75,8 @@ If you want to allow the use of primitive wrapper objects, then you can safely d
 
 ## Related Rules
 
-* [no-array-constructor](no-array-constructor.html)
-* [no-new-object](no-new-object.html)
+* [no-array-constructor](no-array-constructor
+* [no-new-object](no-new-object
 
 ## Version
 

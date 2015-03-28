@@ -1,5 +1,5 @@
 ---
-title: ESLint
+title: Rule no-octal
 layout: doc
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
@@ -38,7 +38,7 @@ var num  = "071";
 
 ## Further Reading
 
-* [Octal literals not allowed in strict mode](http://jslinterrors.com/octal-literals-are-not-allowed-in-strict-mode/)
+* [Octal literals not allowed in strict mode](http://jslinterrors.com/octal-literals-are-not-allowed-in-strict-mode)
 
 ## Version
 

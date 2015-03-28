@@ -1,5 +1,5 @@
 ---
-title: ESLint
+title: Rule semi-spacing
 layout: doc
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
@@ -88,9 +88,9 @@ You can turn this rule off if you are not concerned with the consistency of spac
 
 ## Related Rules
 
-* [semi](semi.html)
-* [no-extra-semi](no-extra-semi.html)
-* [comma-spacing](comma-spacing.html)
+* [semi](semi
+* [no-extra-semi](no-extra-semi
+* [comma-spacing](comma-spacing
 
 ## Version
 

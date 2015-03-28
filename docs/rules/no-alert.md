@@ -1,5 +1,5 @@
 ---
-title: ESLint
+title: Rule no-alert
 layout: doc
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
@@ -37,8 +37,8 @@ customPrompt("Who are you?");
 
 ## Related Rules
 
-* [no-console](no-console.html)
-* [no-debugger](no-debugger.html)
+* [no-console](no-console
+* [no-debugger](no-debugger
 
 ## Version
 

@@ -1,5 +1,5 @@
 ---
-title: ESLint
+title: Documentation
 layout: doc
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
@@ -86,7 +86,7 @@ The plugin support was introduced in ESLint version `0.8.0`. Ensure the `peerDep
 
 ### Testing
 
-You can test the rules of your plugin [the same way as bundled ESLint rules](working-with-rules.html#rule-unit-tests) using [`ESLintTester`](https://github.com/eslint/eslint-tester).
+You can test the rules of your plugin [the same way as bundled ESLint rules](working-with-rules.
 
 Example:
 

@@ -1,11 +1,11 @@
 ---
-title: ESLint
+title: Rule no-extra-strict
 layout: doc
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 # Disallow Unnecessary Strict Pragma (no-extra-strict)
 
-**Deprecation notice**: This rule is deprecated and has been superseded by the [strict](strict.html) rule. It will be removed in ESLint v1.0. Both `"global"` and `"function"` mode in the strict rule implement this rule's behavior.
+**Deprecation notice**: This rule is deprecated and has been superseded by the [strict](strict rule. It will be removed in ESLint v1.0. Both `"global"` and `"function"` mode in the strict rule implement this rule's behavior.
 
 The `"use strict";` directive applies to the scope in which it appears and all inner scopes contained within that scope. Therefore, using the `"use strict";` directive in one of these inner scopes is unnecessary.
 

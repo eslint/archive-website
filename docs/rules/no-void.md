@@ -1,5 +1,5 @@
 ---
-title: ESLint
+title: Rule no-void
 layout: doc
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
@@ -71,8 +71,8 @@ If you intentionally use `void` operator then you can disable this rule.
 
 ## Related Rules
 
-* [no-undef-init](no-undef-init.html)
-* [no-undefined](no-undefined.html)
+* [no-undef-init](no-undef-init
+* [no-undefined](no-undefined
 
 ## Version
 

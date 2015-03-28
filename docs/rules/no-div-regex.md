@@ -1,5 +1,5 @@
 ---
-title: ESLint
+title: Rule no-div-regex
 layout: doc
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
@@ -29,8 +29,8 @@ function() { return /\=foo/; }
 
 ## Related Rules
 
-* [no-control-regex](no-control-regex.html)
-* [no-regex-spaces](no-regex-spaces.html)
+* [no-control-regex](no-control-regex
+* [no-regex-spaces](no-regex-spaces
 
 ## Version
 

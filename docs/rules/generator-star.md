@@ -1,11 +1,11 @@
 ---
-title: ESLint
+title: Rule generator-star
 layout: doc
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 # Enforce the position of the * in generators (generator-star)
 
-**Deprecation notice**: This rule is deprecated and has been superseded by the [generator-star-spacing](generator-star-spacing.html) rule. It will be removed in ESLint v1.0.
+**Deprecation notice**: This rule is deprecated and has been superseded by the [generator-star-spacing](generator-star-spacing rule. It will be removed in ESLint v1.0.
 
 Generators are a new type of function in ECMAScript 6 that can return multiple values over time.
 These special functions are indicated by placing an `*` after the `function` keyword.

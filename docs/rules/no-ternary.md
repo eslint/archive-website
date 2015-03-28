@@ -1,5 +1,5 @@
 ---
-title: ESLint
+title: Rule no-ternary
 layout: doc
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
@@ -55,7 +55,7 @@ function quux() {
 
 ## Related Rules
 
-* [no-nested-ternary](no-nested-ternary.html)
+* [no-nested-ternary](no-nested-ternary
 
 ## Version
 

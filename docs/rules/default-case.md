@@ -1,5 +1,5 @@
 ---
-title: ESLint
+title: Rule default-case
 layout: doc
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
@@ -93,7 +93,7 @@ If you don't want to enforce a `default` case for `switch` statements, you can s
 
 ## Related Rules
 
-* [no-fallthrough](no-fallthrough.html)
+* [no-fallthrough](no-fallthrough
 
 ## Version
 

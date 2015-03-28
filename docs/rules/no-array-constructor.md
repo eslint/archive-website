@@ -1,5 +1,5 @@
 ---
-title: ESLint
+title: Rule no-array-constructor
 layout: doc
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
@@ -40,8 +40,8 @@ rule may be disabled if the constructor style is preferred.
 
 ## Related Rules
 
-* [no-new-object](no-new-object.html)
-* [no-new-wrappers](no-new-wrappers.html)
+* [no-new-object](no-new-object
+* [no-new-wrappers](no-new-wrappers
 
 ## Version
 
