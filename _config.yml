@@ -8,3 +8,4 @@ permalink: /blog/:year/:month/:title
 paginate: 25
 gems:
     - jekyll-sitemap
+    - jekyll-redirect-from
