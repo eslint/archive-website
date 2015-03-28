@@ -93,8 +93,8 @@ You can turn this rule off if you are not concerned with the consistency of spac
 
 ## Related Rules
 
-* [space-after-keywords](space-after-keywords
-* [brace-style](brace-style
+* [space-after-keywords](space-after-keywords)
+* [brace-style](brace-style)
 
 ## Version
 

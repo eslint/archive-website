@@ -12,8 +12,8 @@ rule enforces newlines for all non-empty programs.
 
 Prior to v0.16.0 this rule also enforced that there was only a single line at
 the end of the file. If you still want this behaviour, consider enabling
-[no-multiple-empty-lines](no-multiple-empty-lines and/or
-[no-trailing-spaces](no-trailing-spaces.
+[no-multiple-empty-lines](no-multiple-empty-lines) and/or
+[no-trailing-spaces](no-trailing-spaces).
 
 ## Rule Details
 

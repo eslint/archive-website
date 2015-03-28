@@ -40,8 +40,8 @@ rule may be disabled if the constructor style is preferred.
 
 ## Related Rules
 
-* [no-new-object](no-new-object
-* [no-new-wrappers](no-new-wrappers
+* [no-new-object](no-new-object)
+* [no-new-wrappers](no-new-wrappers)
 
 ## Version
 

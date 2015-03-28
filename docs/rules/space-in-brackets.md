@@ -300,7 +300,7 @@ You can turn this rule off if you are not concerned with the consistency of spac
 
 ## Related Rules
 
-* [space-in-parens](space-in-parens
+* [space-in-parens](space-in-parens)
 
 ## Version
 

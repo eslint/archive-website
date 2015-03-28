@@ -88,9 +88,9 @@ You can turn this rule off if you are not concerned with the consistency of spac
 
 ## Related Rules
 
-* [semi](semi
-* [no-extra-semi](no-extra-semi
-* [comma-spacing](comma-spacing
+* [semi](semi)
+* [no-extra-semi](no-extra-semi)
+* [comma-spacing](comma-spacing)
 
 ## Version
 

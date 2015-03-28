@@ -573,14 +573,12 @@ module.exports = {
     /**
      * Create an ASTNode representation of an entire program
      * @param {ASTNode} body The program body
-     * @param {string} sourceType Either "module" or "script".
      * @returns {ASTNode} An ASTNode representing an entire program
      */
-    createProgram: function (body, sourceType) {
+    createProgram: function (body) {
         return {
             type: astNodeTypes.Program,
-            body: body,
-            sourceType: sourceType
+            body: body
         };
     },
 
@@ -1383,7 +1381,6 @@ module.exports = {
     StrictVarName: "Variable name may not be eval or arguments in strict mode",
     StrictParamName: "Parameter name eval or arguments is not allowed in strict mode",
     StrictParamDupe: "Strict mode function may not have duplicate parameter names",
-    TemplateOctalLiteral: "Octal literals are not allowed in template strings.",
     ParameterAfterRestParameter: "Rest parameter must be final parameter of an argument list",
     DefaultRestParameter: "Rest parameter can not have a default value",
     ElementAfterSpreadElement: "Spread must be the final element of an element list",
@@ -2060,7 +2057,7 @@ module.exports={
     "esparse": "./bin/esparse.js",
     "esvalidate": "./bin/esvalidate.js"
   },
-  "version": "1.12.2",
+  "version": "1.11.0",
   "files": [
     "bin",
     "lib",
@@ -2132,12 +2129,27 @@ module.exports={
     "benchmark-quick": "node test/benchmarks.js quick"
   },
   "dependencies": {},
-  "gitHead": "2d91bb6627944c9e6c4ffc54ecc3d5d9582bdd93",
-  "readme": "# Espree\n\nEspree is an actively-maintained fork Esprima, a high performance,\nstandard-compliant [ECMAScript](http://www.ecma-international.org/publications/standards/Ecma-262.htm)\nparser written in ECMAScript (also popularly known as\n[JavaScript](http://en.wikipedia.org/wiki/JavaScript)).\n\n## Features\n\n- Full support for ECMAScript 5.1 ([ECMA-262](http://www.ecma-international.org/publications/standards/Ecma-262.htm))\n- Sensible syntax tree format compatible with Mozilla\n[Parser AST](https://developer.mozilla.org/en/SpiderMonkey/Parser_API)\n- Optional tracking of syntax node location (index-based and line-column)\n- Heavily tested (> 650 unit tests) with full code coverage\n\n## Usage\n\nInstall:\n\n```\nnpm i espree --save\n```\n\nAnd in your Node.js code:\n\n```javascript\nvar espree = require(\"espree\");\n\nvar ast = espree.parse(code);\n```\n\nThere is a second argument to `parse()` that allows you to specify various options:\n\n```javascript\nvar espree = require(\"espree\");\n\nvar ast = espree.parse(code, {\n\n    // attach range information to each node\n    range: true,\n\n    // attach line/column location information to each node\n    loc: true,\n\n    // create a top-level comments array containing all comments\n    comments: true,\n\n    // attach comments to the closest relevant node as leadingComments and\n    // trailingComments\n    attachComment: true,\n\n    // create a top-level tokens array containing all tokens\n    tokens: true,\n\n    // try to continue parsing if an error is encountered, store errors in a\n    // top-level errors array\n    tolerant: true,\n\n    // specify parsing features (default only has blockBindings: true)\n    ecmaFeatures: {\n\n        // enable parsing of arrow functions\n        arrowFunctions: true,\n\n        // enable parsing of let/const\n        blockBindings: true,\n\n        // enable parsing of destructured arrays and objects\n        destructuring: true,\n\n        // enable parsing of regular expression y flag\n        regexYFlag: true,\n\n        // enable parsing of regular expression u flag\n        regexUFlag: true,\n\n        // enable parsing of template strings\n        templateStrings: true,\n\n        // enable parsing of binary literals\n        binaryLiterals: true,\n\n        // enable parsing of ES6 octal literals\n        octalLiterals: true,\n\n        // enable parsing unicode code point escape sequences\n        unicodeCodePointEscapes: true,\n\n        // enable parsing of default parameters\n        defaultParams: true,\n\n        // enable parsing of rest parameters\n        restParams: true,\n\n        // enable parsing of for-of statement\n        forOf: true,\n\n        // enable parsing computed object literal properties\n        objectLiteralComputedProperties: true,\n\n        // enable parsing of shorthand object literal methods\n        objectLiteralShorthandMethods: true,\n\n        // enable parsing of shorthand object literal properties\n        objectLiteralShorthandProperties: true,\n\n        // Allow duplicate object literal properties (except '__proto__')\n        objectLiteralDuplicateProperties: true,\n\n        // enable parsing of generators/yield\n        generators: true,\n\n        // enable parsing spread operator\n        spread: true,\n\n        // enable parsing classes\n        classes: true,\n\n        // enable parsing of modules\n        modules: true,\n\n        // enable React JSX parsing\n        jsx: true,\n\n        // enable return in global scope\n        globalReturn: true\n    }\n});\n```\n\n## Plans\n\nEspree starts as a fork of Esprima v1.2.2, the last stable published released of Esprima before work on ECMAScript 6 began. Espree's first version is therefore v1.2.2 and is 100% compatible with Esprima v1.2.2 as a drop-in replacement. The version number will be incremented based on [semantic versioning](http://semver.org/) as features and bug fixes are added.\n\nThe immediate plans are:\n\n1. Move away from giant files and move towards small, modular files that are easier to manage.\n1. Move towards CommonJS for all files and use browserify to create browser bundles.\n1. Support ECMAScript version filtering, allowing users to specify which version the parser should work in (similar to Acorn's `ecmaVersion` property).\n1. Add tests to track comment attachment.\n1. Add well-thought-out features that are useful for tools developers.\n1. Add full support for ECMAScript 6.\n1. Add optional parsing of JSX.\n\n## Esprima Compatibility Going Forward\n\nThe primary goal is to produce the exact same AST structure as Esprima and Acorn, and that takes precedence over anything else. (The AST structure being the SpiderMonkey Parser API with JSX extensions.) Separate from that, Espree may deviate from what Esprima outputs in terms of where and how comments are attached, as well as what additional information is available on AST nodes. That is to say, Espree may add more things to the AST nodes than Esprima does but the overall AST structure produced will be the same.\n\nEspree may also deviate from Esprima in the interface it exposes.\n\n## Frequent and Incremental Releases\n\nEspree will not do giant releases. Releases will happen periodically as changes are made and incremental releases will be made towards larger goals. For instance, we will not have one big release for ECMAScript 6 support. Instead, we will implement ECMAScript 6, piece-by-piece, hiding those pieces behind an `ecmaFeatures` property that allows you to opt-in to use those features.\n\n## Contributing\n\nIssues and pull requests will be triaged and responded to as quickly as possible. We operate under the [ESLint Contributor Guidelines](http://eslint.org/docs/developer-guide/contributing.html), so please be sure to read them before contributing. If you're not sure where to dig in, check out the [issues](https://github.com/eslint/espree/issues).\n\nEspree is licensed under a permissive BSD 3-clause license.\n\n## Build Commands\n\n* `npm test` - run all linting and tests\n* `npm run lint` - run all linting\n* `npm run browserify` - creates a version of Espree that is usable in a browser\n\n## Known Incompatibilities\n\nIn an effort to help those wanting to transition from other parsers to Espree, the following is a list of noteworthy incompatibilities with other parsers. These are known differences that we do not intend to change.\n\n### Esprima 1.2.2\n\n* None.\n\n### Esprima/Harmony Branch\n\n* Esprima/Harmony uses a different comment attachment algorithm that results in some comments being added in different places than Espree. The algorithm Espree uses is the same one used in Esprima 1.2.2.\n* Template tokens have a `head` property in addition to `tail`. Esprima has only `tail`.\n\n### Esprima-FB\n\n* All Esprima/Harmony incompatibilities.\n\n## Frequently Asked Questions\n\n### Why are you forking Esprima?\n\n[ESLint](http://eslint.org) has been relying on Esprima as its parser from the beginning. While that was fine when the JavaScript language was evolving slowly, the pace of development has increased dramatically and Esprima has fallen behind. ESLint, like many other tools reliant on Esprima, has been stuck in using new JavaScript language features until Esprima updates, and that has caused our users frustration.\n\nWe decided the only way for us to move forward was to create our own parser, bringing us inline with JSHint and JSLint, and allowing us to keep implementing new features as we need them. We chose to fork Esprima instead of starting from scratch in order to move as quickly as possible with a compatible API.\n\n### Have you tried working with Esprima?\n\nYes. Since the start of ESLint, we've regularly filed bugs and feature requests with Esprima. Unfortunately, we've been unable to make much progress towards getting our needs addressed.\n\n### Why don't you just use Facebook's Esprima fork?\n\n`esprima-fb` is Facebook's Esprima fork that features JSX and Flow type annotations. We tried working with `esprima-fb` in our evaluation of how to support ECMAScript 6 and JSX in ESLint. Unfortunately, we were hampered by bugs that were part of Esprima (not necessarily Facebook's code). Since `esprima-fb` tracks the Esprima Harmony branch, that means we still were unable to get fixes or features we needed in a timely manner.\n\n### Why don't you just use Acorn?\n\nAcorn is a great JavaScript parser that produces an AST that is compatible with Esprima. Unfortunately, ESLint relies on more than just the AST to do its job. It relies on Esprima's tokens and comment attachment features to get a complete picture of the source code. We investigated switching to Acorn, but the inconsistencies between Esprima and Acorn created too much work for a project like ESLint.\n\nWe expect there are other tools like ESLint that rely on more than just the AST produced by Esprima, and so a drop-in replacement will help those projects as well as ESLint.\n\n### What ECMAScript 6 features do you support?\n\nPlease see the [tracking issue](https://github.com/eslint/espree/issues/10) for the most up-to-date information.\n\n### Why use Espree instead of Esprima?\n\n* Faster turnaround time on bug fixes\n* More frequent releases\n* Better communication and responsiveness to issues\n* Ongoing development\n\n### Why use Espree instead of Esprima-FB?\n\n* Opt-in to just the ECMAScript 6 features you want\n* JSX support is off by default, so you're not forced to use it to use ECMAScript 6\n* Stricter ECMAScript 6 support\n",
-  "readmeFilename": "README.md",
-  "_id": "espree@1.12.2",
-  "_shasum": "83a510ad9447e3cd7e1a18bc5f1cf7b06ffb7368",
-  "_from": "espree@^1.12.0"
+  "gitHead": "06fdcd69a6a6006a635910c8c80baaab931cb0cd",
+  "_id": "espree@1.11.0",
+  "_shasum": "862c3033fad49ea1f3c5446fbab7650d7759186b",
+  "_from": "espree@>=1.11.0 <2.0.0",
+  "_npmVersion": "1.4.28",
+  "_npmUser": {
+    "name": "nzakas",
+    "email": "nicholas@nczconsulting.com"
+  },
+  "maintainers": [
+    {
+      "name": "nzakas",
+      "email": "nicholas@nczconsulting.com"
+    }
+  ],
+  "dist": {
+    "shasum": "862c3033fad49ea1f3c5446fbab7650d7759186b",
+    "tarball": "http://registry.npmjs.org/espree/-/espree-1.11.0.tgz"
+  },
+  "directories": {},
+  "_resolved": "https://registry.npmjs.org/espree/-/espree-1.11.0.tgz"
 }
 
 },{}],"espree":[function(require,module,exports){
@@ -2570,45 +2582,21 @@ function scanPunctuator() {
         case 41:   // ) close bracket
         case 59:   // ; semicolon
         case 44:   // , comma
+        case 123:  // { open curly brace
+        case 125:  // } close curly brace
         case 91:   // [
         case 93:   // ]
         case 58:   // :
         case 63:   // ?
         case 126:  // ~
             ++index;
-
-            if (extra.tokenize && code === 40) {
-                extra.openParenToken = extra.tokens.length;
-            }
-
-            return {
-                type: Token.Punctuator,
-                value: String.fromCharCode(code),
-                lineNumber: lineNumber,
-                lineStart: lineStart,
-                range: [start, index]
-            };
-
-        case 123:  // { open curly brace
-        case 125:  // } close curly brace
-            ++index;
-
-            if (extra.tokenize && code === 123) {
-                extra.openCurlyToken = extra.tokens.length;
-            }
-
-            // lookahead2 function can cause tokens to be scanned twice and in doing so
-            // would wreck the curly stack by pushing the same token onto the stack twice.
-            // curlyLastIndex ensures each token is pushed or popped exactly once
-            if (index > state.curlyLastIndex) {
-                state.curlyLastIndex = index;
-                if (code === 123) {
-                    state.curlyStack.push("{");
-                } else {
-                    state.curlyStack.pop();
+            if (extra.tokenize) {
+                if (code === 40) {
+                    extra.openParenToken = extra.tokens.length;
+                } else if (code === 123) {
+                    extra.openCurlyToken = extra.tokens.length;
                 }
             }
-
             return {
                 type: Token.Punctuator,
                 value: String.fromCharCode(code),
@@ -3117,6 +3105,7 @@ function scanTemplate() {
     var cooked = "",
         ch,
         escapedSequence,
+        octal = false,
         start = index,
         terminated = false,
         tail = false,
@@ -3141,13 +3130,8 @@ function scanTemplate() {
         } else if (ch === "\\") {
             ch = source[index++];
             escapedSequence = scanEscapeSequence(ch);
-
-            if (escapedSequence.octal) {
-                throwError({}, Messages.TemplateOctalLiteral);
-            }
-
             cooked += escapedSequence.ch;
-
+            octal = escapedSequence.octal || octal;
         } else if (syntax.isLineTerminator(ch.charCodeAt(0))) {
             ++lineNumber;
             if (ch === "\r" && source[index] === "\n") {
@@ -3164,18 +3148,6 @@ function scanTemplate() {
         throwError({}, Messages.UnexpectedToken, "ILLEGAL");
     }
 
-    if (index > state.curlyLastIndex) {
-        state.curlyLastIndex = index;
-
-        if (!tail) {
-            state.curlyStack.push("template");
-        }
-
-        if (!head) {
-            state.curlyStack.pop();
-        }
-    }
-
     return {
         type: Token.Template,
         value: {
@@ -3184,10 +3156,42 @@ function scanTemplate() {
         },
         head: head,
         tail: tail,
+        octal: octal,
         lineNumber: lineNumber,
         lineStart: lineStart,
         range: [start, index]
     };
+}
+
+/**
+ * Scan a template string element and return a ASTNode representation
+ * @param {Object} options Scan options
+ * @param {Object} options.head True if this element is the first in the
+ *                               template string, false otherwise.
+ * @returns {ASTNode} The template element node
+ * @private
+ */
+function scanTemplateElement(options) {
+    var startsWith, template;
+
+    lookahead = null;
+    skipComment();
+
+    startsWith = (options.head) ? "`" : "}";
+
+    if (source[index] !== startsWith) {
+        throwError({}, Messages.UnexpectedToken, "ILLEGAL");
+    }
+
+    template = scanTemplate();
+
+    if (!template.tail) {
+        extra.curlies.push("template");
+    }
+
+    peek();
+
+    return template;
 }
 
 function testRegExp(pattern, flags) {
@@ -3536,7 +3540,8 @@ function advance() {
 
         // template strings start with backtick (96) or open curly (125) but only if the open
         // curly closes a previously opened curly from a template.
-        if (ch === 96 || (ch === 125 && state.curlyStack[state.curlyStack.length - 1] === "template")) {
+        if (ch === 96 || (ch === 125 && extra.curlies[extra.curlies.length - 1] === "template")) {
+            extra.curlies.pop();
             return scanTemplate();
         }
     }
@@ -3622,6 +3627,22 @@ function lex() {
     index = token.range[1];
     lineNumber = token.lineNumber;
     lineStart = token.lineStart;
+
+    if (token.type === Token.Template) {
+        if (token.tail) {
+            extra.curlies.pop();
+        } else {
+            extra.curlies.push("template");
+        }
+    }
+
+    if (token.value === "{") {
+        extra.curlies.push("{");
+    }
+
+    if (token.value === "}") {
+        extra.curlies.pop();
+    }
 
     return token;
 }
@@ -4091,7 +4112,7 @@ function parseJSXElement() {
  * Applies location information to the given node by using the given marker.
  * The marker indicates the point at which the node is said to have to begun
  * in the source code.
- * @param {Object} marker The marker to use for the node.
+ * @param {Object} marker The market to use for the node.
  * @param {ASTNode} node The AST node to apply location information to.
  * @returns {ASTNode} The node that was passed in.
  * @private
@@ -4379,7 +4400,11 @@ function parseArrayInitialiser() {
         } else {
             tmp = parseSpreadOrAssignmentExpression();
             elements.push(tmp);
-            if (!(match("]"))) {
+            if (tmp && tmp.type === astNodeTypes.SpreadElement) {
+                if (!match("]")) {
+                    throwError({}, Messages.ElementAfterSpreadElement);
+                }
+            } else if (!(match("]"))) {
                 expect(","); // handles the common case of comma-separated values
             }
         }
@@ -4558,7 +4583,7 @@ function tryParseMethodDefinition(token, key, computed, marker) {
                 rest: null
             };
             if (match(")")) {
-                throwErrorTolerant(lookahead, Messages.UnexpectedToken, lookahead.value);
+                throwErrorTolerant(lookahead, Messages.UnexpectedToken);
             } else {
                 parseParam(options);
                 if (options.defaultCount === 0) {
@@ -4579,33 +4604,6 @@ function tryParseMethodDefinition(token, key, computed, marker) {
 
     // Not a MethodDefinition.
     return null;
-}
-
-/**
- * Parses Generator Properties
- * @param {ASTNode} key The property key (usually an identifier).
- * @param {Object} marker The marker to use for the node.
- * @returns {ASTNode} The generator property node.
- */
-function parseGeneratorProperty(key, marker) {
-
-    var computed = (lookahead.type === Token.Punctuator && lookahead.value === "[");
-
-    if (!match("(")) {
-        throwUnexpected(lex());
-    }
-
-    return markerApply(
-        marker,
-        astNodeFactory.createProperty(
-            "init",
-            key,
-            parsePropertyMethodFunction({ generator: true }),
-            true,
-            false,
-            computed
-        )
-    );
 }
 
 // TODO(nzakas): Update to match Esprima
@@ -4629,8 +4627,7 @@ function parseObjectProperty() {
          * Check for getters and setters. Be careful! "get" and "set" are legal
          * method names. It's only a getter or setter if followed by a space.
          */
-        if (token.value === "get" &&
-                !(match(":") || match("(") || match(",") || match("}"))) {
+        if (token.value === "get" && !(match(":") || match("("))) {
             computed = (lookahead.value === "[");
             key = parseObjectPropertyKey();
             methodMarker = markerCreate();
@@ -4654,8 +4651,7 @@ function parseObjectProperty() {
             );
         }
 
-        if (token.value === "set" &&
-                !(match(":") || match("(") || match(",") || match("}"))) {
+        if (token.value === "set" && !(match(":") || match("("))) {
             computed = (lookahead.value === "[");
             key = parseObjectPropertyKey();
             methodMarker = markerCreate();
@@ -4769,17 +4765,32 @@ function parseObjectProperty() {
         );
     }
 
-    // only possibility in this branch is a shorthand generator
+    // only possibility in this branch is a generator
     if (token.type === Token.EOF || token.type === Token.Punctuator) {
-        if (!allowGenerators || !match("*") || !allowMethod) {
+        if (!allowGenerators || !match("*")) {
             throwUnexpected(token);
         }
-
         lex();
+
+        computed = (lookahead.type === Token.Punctuator && lookahead.value === "[");
 
         id = parseObjectPropertyKey();
 
-        return parseGeneratorProperty(id, marker);
+        if (!match("(")) {
+            throwUnexpected(lex());
+        }
+
+        return markerApply(
+            marker,
+            astNodeFactory.createProperty(
+                "init",
+                id,
+                parsePropertyMethodFunction({ generator: true }),
+                true,
+                false,
+                computed
+            )
+        );
 
     }
 
@@ -4842,7 +4853,6 @@ function parseObjectInitialiser() {
         propertyFn,
         kind,
         storedKind,
-        previousInObjectLiteral = state.inObjectLiteral,
         kindMap = new StringMap();
 
     state.inObjectLiteral = true;
@@ -4893,39 +4903,26 @@ function parseObjectInitialiser() {
 
     expect("}");
 
-    state.inObjectLiteral = previousInObjectLiteral;
+    state.inObjectLiteral = false;
 
     return markerApply(marker, astNodeFactory.createObjectExpression(properties));
 }
 
 /**
  * Parse a template string element and return its ASTNode representation
- * @param {Object} option Parsing & scanning options
- * @param {Object} option.head True if this element is the first in the
+ * @param {Object} options Parsing & scanning options
+ * @param {Object} options.head True if this element is the first in the
  *                               template string, false otherwise.
  * @returns {ASTNode} The template element node with marker info applied
  * @private
  */
-function parseTemplateElement(option) {
-    var marker, token;
-
-    if (lookahead.type !== Token.Template || (option.head && !lookahead.head)) {
-        throwError({}, Messages.UnexpectedToken, "ILLEGAL");
+function parseTemplateElement(options) {
+    var marker = markerCreate(),
+        token = scanTemplateElement(options);
+    if (strict && token.octal) {
+        throwError(token, Messages.StrictOctalLiteral);
     }
-
-    marker = markerCreate();
-    token = lex();
-
-    return markerApply(
-        marker,
-        astNodeFactory.createTemplateElement(
-            {
-                raw: token.value.raw,
-                cooked: token.value.cooked
-            },
-            token.tail
-        )
-    );
+    return markerApply(marker, astNodeFactory.createTemplateElement({ raw: token.value.raw, cooked: token.value.cooked }, token.tail));
 }
 
 /**
@@ -4972,8 +4969,8 @@ function parsePrimaryExpression() {
     var type, token, expr,
         marker,
         allowJSX = extra.ecmaFeatures.jsx,
-        allowClasses = extra.ecmaFeatures.classes,
-        allowSuper = allowClasses || extra.ecmaFeatures.superInFunctions;
+        allowSuper = extra.ecmaFeatures.superInFunctions,
+        allowClasses = extra.ecmaFeatures.classes;
 
     if (match("(")) {
         return parseGroupExpression();
@@ -5061,6 +5058,8 @@ function parseArguments() {
 
             if (match(")")) {
                 break;
+            } else if (arg.type === astNodeTypes.SpreadElement) {
+                throwError({}, Messages.ElementAfterSpreadElement);
             }
 
             expect(",");
@@ -6275,11 +6274,7 @@ function parseThrowStatement() {
 
 function parseCatchClause() {
     var param, body,
-        marker = markerCreate(),
-        allowDestructuring = extra.ecmaFeatures.destructuring,
-        options = {
-            paramSet: new StringMap()
-        };
+        marker = markerCreate();
 
     expectKeyword("catch");
 
@@ -6288,25 +6283,9 @@ function parseCatchClause() {
         throwUnexpected(lookahead);
     }
 
-    if (match("[")) {
-        if (!allowDestructuring) {
-            throwUnexpected(lookahead);
-        }
-        param = parseArrayInitialiser();
-        reinterpretAsDestructuredParameter(options, param);
-    } else if (match("{")) {
-
-        if (!allowDestructuring) {
-            throwUnexpected(lookahead);
-        }
-        param = parseObjectInitialiser();
-        reinterpretAsDestructuredParameter(options, param);
-    } else {
-        param = parseVariableIdentifier();
-    }
-
+    param = parseVariableIdentifier();
     // 12.14.1
-    if (strict && param.name && syntax.isRestrictedWord(param.name)) {
+    if (strict && syntax.isRestrictedWord(param.name)) {
         throwErrorTolerant({}, Messages.StrictCatchVariable);
     }
 
@@ -7084,9 +7063,7 @@ function parseImportDeclaration() {
 // 14.5 Class Definitions
 
 function parseClassBody() {
-    var hasConstructor = false, generator = false,
-        allowGenerators = extra.ecmaFeatures.generators,
-        token, isStatic, body = [], method, computed, key;
+    var token, isStatic, hasConstructor = false, body = [], method, computed, key;
 
     var existingProps = {},
         topMarker = markerCreate(),
@@ -7107,27 +7084,9 @@ function parseClassBody() {
 
         token = lookahead;
         isStatic = false;
-        generator = match("*");
         computed = match("[");
         marker = markerCreate();
-
-        if (generator) {
-            if (!allowGenerators) {
-                throwUnexpected(lookahead);
-            }
-            lex();
-        }
-
         key = parseObjectPropertyKey();
-
-        // static generator methods
-        if (key.name === "static" && match("*")) {
-            if (!allowGenerators) {
-                throwUnexpected(lookahead);
-            }
-            generator = true;
-            lex();
-        }
 
         if (key.name === "static" && lookaheadPropertyName()) {
             token = lookahead;
@@ -7136,11 +7095,7 @@ function parseClassBody() {
             key = parseObjectPropertyKey();
         }
 
-        if (generator) {
-            method = parseGeneratorProperty(key, marker);
-        } else {
-            method = tryParseMethodDefinition(token, key, computed, marker, generator);
-        }
+        method = tryParseMethodDefinition(token, key, computed, marker);
 
         if (method) {
             method.static = isStatic;
@@ -7310,16 +7265,15 @@ function parseSourceElements() {
 
 function parseProgram() {
     var body,
-        marker,
-        isModule = !!extra.ecmaFeatures.modules;
+        marker;
 
     skipComment();
     peek();
     marker = markerCreate();
-    strict = isModule;
+    strict = extra.ecmaFeatures.modules;
 
     body = parseSourceElements();
-    return markerApply(marker, astNodeFactory.createProgram(body, isModule ? "module" : "script"));
+    return markerApply(marker, astNodeFactory.createProgram(body));
 }
 
 function filterTokenLocation() {
@@ -7377,8 +7331,6 @@ function tokenize(code, options) {
         inSwitch: false,
         lastCommentStart: -1,
         yieldAllowed: false,
-        curlyStack: [],
-        curlyLastIndex: 0,
         inJSXSpreadAttribute: false,
         inJSXChild: false,
         inJSXTag: false
@@ -7399,6 +7351,9 @@ function tokenize(code, options) {
     // The following two fields are necessary to compute the Regex tokens.
     extra.openParenToken = -1;
     extra.openCurlyToken = -1;
+
+    // Needed when using template string tokenization
+    extra.curlies = [];
 
     extra.range = (typeof options.range === "boolean") && options.range;
     extra.loc = (typeof options.loc === "boolean") && options.loc;
@@ -7481,8 +7436,6 @@ function parse(code, options) {
         inSwitch: false,
         lastCommentStart: -1,
         yieldAllowed: false,
-        curlyStack: [],
-        curlyLastIndex: 0,
         inJSXSpreadAttribute: false,
         inJSXChild: false,
         inJSXTag: false
@@ -7493,7 +7446,7 @@ function parse(code, options) {
     };
 
     // for template strings
-    state.curlyStack = [];
+    extra.curlies = [];
 
     if (typeof options !== "undefined") {
         extra.range = (typeof options.range === "boolean") && options.range;
@@ -7694,7 +7647,7 @@ module.exports = {
     }
 };
 
-},{"globals":126}],2:[function(require,module,exports){
+},{"globals":130}],2:[function(require,module,exports){
 module.exports={
     "ecmaFeatures": {},
     "parser": "espree",
@@ -7866,6 +7819,367 @@ module.exports={
 }
 
 },{}],3:[function(require,module,exports){
+// http://wiki.commonjs.org/wiki/Unit_Testing/1.0
+//
+// THIS IS NOT TESTED NOR LIKELY TO WORK OUTSIDE V8!
+//
+// Originally from narwhal.js (http://narwhaljs.org)
+// Copyright (c) 2009 Thomas Robinson <280north.com>
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the 'Software'), to
+// deal in the Software without restriction, including without limitation the
+// rights to use, copy, modify, merge, publish, distribute, sublicense, and/or
+// sell copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in
+// all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED 'AS IS', WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN
+// ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
+// WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+// when used in node, this will actually load the util module we depend on
+// versus loading the builtin util module as happens otherwise
+// this is a bug in node module loading as far as I am concerned
+var util = require('util/');
+
+var pSlice = Array.prototype.slice;
+var hasOwn = Object.prototype.hasOwnProperty;
+
+// 1. The assert module provides functions that throw
+// AssertionError's when particular conditions are not met. The
+// assert module must conform to the following interface.
+
+var assert = module.exports = ok;
+
+// 2. The AssertionError is defined in assert.
+// new assert.AssertionError({ message: message,
+//                             actual: actual,
+//                             expected: expected })
+
+assert.AssertionError = function AssertionError(options) {
+  this.name = 'AssertionError';
+  this.actual = options.actual;
+  this.expected = options.expected;
+  this.operator = options.operator;
+  if (options.message) {
+    this.message = options.message;
+    this.generatedMessage = false;
+  } else {
+    this.message = getMessage(this);
+    this.generatedMessage = true;
+  }
+  var stackStartFunction = options.stackStartFunction || fail;
+
+  if (Error.captureStackTrace) {
+    Error.captureStackTrace(this, stackStartFunction);
+  }
+  else {
+    // non v8 browsers so we can have a stacktrace
+    var err = new Error();
+    if (err.stack) {
+      var out = err.stack;
+
+      // try to strip useless frames
+      var fn_name = stackStartFunction.name;
+      var idx = out.indexOf('\n' + fn_name);
+      if (idx >= 0) {
+        // once we have located the function frame
+        // we need to strip out everything before it (and its line)
+        var next_line = out.indexOf('\n', idx + 1);
+        out = out.substring(next_line + 1);
+      }
+
+      this.stack = out;
+    }
+  }
+};
+
+// assert.AssertionError instanceof Error
+util.inherits(assert.AssertionError, Error);
+
+function replacer(key, value) {
+  if (util.isUndefined(value)) {
+    return '' + value;
+  }
+  if (util.isNumber(value) && !isFinite(value)) {
+    return value.toString();
+  }
+  if (util.isFunction(value) || util.isRegExp(value)) {
+    return value.toString();
+  }
+  return value;
+}
+
+function truncate(s, n) {
+  if (util.isString(s)) {
+    return s.length < n ? s : s.slice(0, n);
+  } else {
+    return s;
+  }
+}
+
+function getMessage(self) {
+  return truncate(JSON.stringify(self.actual, replacer), 128) + ' ' +
+         self.operator + ' ' +
+         truncate(JSON.stringify(self.expected, replacer), 128);
+}
+
+// At present only the three keys mentioned above are used and
+// understood by the spec. Implementations or sub modules can pass
+// other keys to the AssertionError's constructor - they will be
+// ignored.
+
+// 3. All of the following functions must throw an AssertionError
+// when a corresponding condition is not met, with a message that
+// may be undefined if not provided.  All assertion methods provide
+// both the actual and expected values to the assertion error for
+// display purposes.
+
+function fail(actual, expected, message, operator, stackStartFunction) {
+  throw new assert.AssertionError({
+    message: message,
+    actual: actual,
+    expected: expected,
+    operator: operator,
+    stackStartFunction: stackStartFunction
+  });
+}
+
+// EXTENSION! allows for well behaved errors defined elsewhere.
+assert.fail = fail;
+
+// 4. Pure assertion tests whether a value is truthy, as determined
+// by !!guard.
+// assert.ok(guard, message_opt);
+// This statement is equivalent to assert.equal(true, !!guard,
+// message_opt);. To test strictly for the value true, use
+// assert.strictEqual(true, guard, message_opt);.
+
+function ok(value, message) {
+  if (!value) fail(value, true, message, '==', assert.ok);
+}
+assert.ok = ok;
+
+// 5. The equality assertion tests shallow, coercive equality with
+// ==.
+// assert.equal(actual, expected, message_opt);
+
+assert.equal = function equal(actual, expected, message) {
+  if (actual != expected) fail(actual, expected, message, '==', assert.equal);
+};
+
+// 6. The non-equality assertion tests for whether two objects are not equal
+// with != assert.notEqual(actual, expected, message_opt);
+
+assert.notEqual = function notEqual(actual, expected, message) {
+  if (actual == expected) {
+    fail(actual, expected, message, '!=', assert.notEqual);
+  }
+};
+
+// 7. The equivalence assertion tests a deep equality relation.
+// assert.deepEqual(actual, expected, message_opt);
+
+assert.deepEqual = function deepEqual(actual, expected, message) {
+  if (!_deepEqual(actual, expected)) {
+    fail(actual, expected, message, 'deepEqual', assert.deepEqual);
+  }
+};
+
+function _deepEqual(actual, expected) {
+  // 7.1. All identical values are equivalent, as determined by ===.
+  if (actual === expected) {
+    return true;
+
+  } else if (util.isBuffer(actual) && util.isBuffer(expected)) {
+    if (actual.length != expected.length) return false;
+
+    for (var i = 0; i < actual.length; i++) {
+      if (actual[i] !== expected[i]) return false;
+    }
+
+    return true;
+
+  // 7.2. If the expected value is a Date object, the actual value is
+  // equivalent if it is also a Date object that refers to the same time.
+  } else if (util.isDate(actual) && util.isDate(expected)) {
+    return actual.getTime() === expected.getTime();
+
+  // 7.3 If the expected value is a RegExp object, the actual value is
+  // equivalent if it is also a RegExp object with the same source and
+  // properties (`global`, `multiline`, `lastIndex`, `ignoreCase`).
+  } else if (util.isRegExp(actual) && util.isRegExp(expected)) {
+    return actual.source === expected.source &&
+           actual.global === expected.global &&
+           actual.multiline === expected.multiline &&
+           actual.lastIndex === expected.lastIndex &&
+           actual.ignoreCase === expected.ignoreCase;
+
+  // 7.4. Other pairs that do not both pass typeof value == 'object',
+  // equivalence is determined by ==.
+  } else if (!util.isObject(actual) && !util.isObject(expected)) {
+    return actual == expected;
+
+  // 7.5 For all other Object pairs, including Array objects, equivalence is
+  // determined by having the same number of owned properties (as verified
+  // with Object.prototype.hasOwnProperty.call), the same set of keys
+  // (although not necessarily the same order), equivalent values for every
+  // corresponding key, and an identical 'prototype' property. Note: this
+  // accounts for both named and indexed properties on Arrays.
+  } else {
+    return objEquiv(actual, expected);
+  }
+}
+
+function isArguments(object) {
+  return Object.prototype.toString.call(object) == '[object Arguments]';
+}
+
+function objEquiv(a, b) {
+  if (util.isNullOrUndefined(a) || util.isNullOrUndefined(b))
+    return false;
+  // an identical 'prototype' property.
+  if (a.prototype !== b.prototype) return false;
+  // if one is a primitive, the other must be same
+  if (util.isPrimitive(a) || util.isPrimitive(b)) {
+    return a === b;
+  }
+  var aIsArgs = isArguments(a),
+      bIsArgs = isArguments(b);
+  if ((aIsArgs && !bIsArgs) || (!aIsArgs && bIsArgs))
+    return false;
+  if (aIsArgs) {
+    a = pSlice.call(a);
+    b = pSlice.call(b);
+    return _deepEqual(a, b);
+  }
+  var ka = objectKeys(a),
+      kb = objectKeys(b),
+      key, i;
+  // having the same number of owned properties (keys incorporates
+  // hasOwnProperty)
+  if (ka.length != kb.length)
+    return false;
+  //the same set of keys (although not necessarily the same order),
+  ka.sort();
+  kb.sort();
+  //~~~cheap key test
+  for (i = ka.length - 1; i >= 0; i--) {
+    if (ka[i] != kb[i])
+      return false;
+  }
+  //equivalent values for every corresponding key, and
+  //~~~possibly expensive deep test
+  for (i = ka.length - 1; i >= 0; i--) {
+    key = ka[i];
+    if (!_deepEqual(a[key], b[key])) return false;
+  }
+  return true;
+}
+
+// 8. The non-equivalence assertion tests for any deep inequality.
+// assert.notDeepEqual(actual, expected, message_opt);
+
+assert.notDeepEqual = function notDeepEqual(actual, expected, message) {
+  if (_deepEqual(actual, expected)) {
+    fail(actual, expected, message, 'notDeepEqual', assert.notDeepEqual);
+  }
+};
+
+// 9. The strict equality assertion tests strict equality, as determined by ===.
+// assert.strictEqual(actual, expected, message_opt);
+
+assert.strictEqual = function strictEqual(actual, expected, message) {
+  if (actual !== expected) {
+    fail(actual, expected, message, '===', assert.strictEqual);
+  }
+};
+
+// 10. The strict non-equality assertion tests for strict inequality, as
+// determined by !==.  assert.notStrictEqual(actual, expected, message_opt);
+
+assert.notStrictEqual = function notStrictEqual(actual, expected, message) {
+  if (actual === expected) {
+    fail(actual, expected, message, '!==', assert.notStrictEqual);
+  }
+};
+
+function expectedException(actual, expected) {
+  if (!actual || !expected) {
+    return false;
+  }
+
+  if (Object.prototype.toString.call(expected) == '[object RegExp]') {
+    return expected.test(actual);
+  } else if (actual instanceof expected) {
+    return true;
+  } else if (expected.call({}, actual) === true) {
+    return true;
+  }
+
+  return false;
+}
+
+function _throws(shouldThrow, block, expected, message) {
+  var actual;
+
+  if (util.isString(expected)) {
+    message = expected;
+    expected = null;
+  }
+
+  try {
+    block();
+  } catch (e) {
+    actual = e;
+  }
+
+  message = (expected && expected.name ? ' (' + expected.name + ').' : '.') +
+            (message ? ' ' + message : '.');
+
+  if (shouldThrow && !actual) {
+    fail(actual, expected, 'Missing expected exception' + message);
+  }
+
+  if (!shouldThrow && expectedException(actual, expected)) {
+    fail(actual, expected, 'Got unwanted exception' + message);
+  }
+
+  if ((shouldThrow && actual && expected &&
+      !expectedException(actual, expected)) || (!shouldThrow && actual)) {
+    throw actual;
+  }
+}
+
+// 11. Expected to throw an error:
+// assert.throws(block, Error_opt, message_opt);
+
+assert.throws = function(block, /*optional*/error, /*optional*/message) {
+  _throws.apply(this, [true].concat(pSlice.call(arguments)));
+};
+
+// EXTENSION! This is annoying to write outside this module.
+assert.doesNotThrow = function(block, /*optional*/message) {
+  _throws.apply(this, [false].concat(pSlice.call(arguments)));
+};
+
+assert.ifError = function(err) { if (err) {throw err;}};
+
+var objectKeys = Object.keys || function (obj) {
+  var keys = [];
+  for (var key in obj) {
+    if (hasOwn.call(obj, key)) keys.push(key);
+  }
+  return keys;
+};
+
+},{"util/":8}],4:[function(require,module,exports){
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -8168,7 +8482,7 @@ function isUndefined(arg) {
   return arg === void 0;
 }
 
-},{}],4:[function(require,module,exports){
+},{}],5:[function(require,module,exports){
 if (typeof Object.create === 'function') {
   // implementation from standard node.js 'util' module
   module.exports = function inherits(ctor, superCtor) {
@@ -8193,7 +8507,7 @@ if (typeof Object.create === 'function') {
   }
 }
 
-},{}],5:[function(require,module,exports){
+},{}],6:[function(require,module,exports){
 // shim for using process in browser
 
 var process = module.exports = {};
@@ -8230,6 +8544,7 @@ process.browser = true;
 process.env = {};
 process.argv = [];
 process.version = ''; // empty string to avoid regexp issues
+process.versions = {};
 
 function noop() {}
 
@@ -8252,14 +8567,14 @@ process.chdir = function (dir) {
 };
 process.umask = function() { return 0; };
 
-},{}],6:[function(require,module,exports){
+},{}],7:[function(require,module,exports){
 module.exports = function isBuffer(arg) {
   return arg && typeof arg === 'object'
     && typeof arg.copy === 'function'
     && typeof arg.fill === 'function'
     && typeof arg.readUInt8 === 'function';
 }
-},{}],7:[function(require,module,exports){
+},{}],8:[function(require,module,exports){
 (function (process,global){
 // Copyright Joyent, Inc. and other Node contributors.
 //
@@ -8849,7 +9164,7 @@ function hasOwnProperty(obj, prop) {
 }
 
 }).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"./support/isBuffer":6,"_process":5,"inherits":4}],8:[function(require,module,exports){
+},{"./support/isBuffer":7,"_process":6,"inherits":5}],9:[function(require,module,exports){
 /*
   Copyright (C) 2012-2014 Yusuke Suzuki <utatane.tea@gmail.com>
   Copyright (C) 2014 Dan Tao <daniel.tao@gmail.com>
@@ -8879,27 +9194,20 @@ function hasOwnProperty(obj, prop) {
 (function () {
     'use strict';
 
-    var VERSION,
-        typed,
+    var typed,
+        utility,
+        isArray,
         jsdoc,
         esutils,
-        isArray,
         hasOwnProperty;
 
-    // Sync with package.json.
-    VERSION = require('./package.json').version;
-
     esutils = require('esutils');
+    isArray = require('isarray');
+    typed = require('./typed');
+    utility = require('./utility');
 
     function sliceSource(source, index, last) {
         return source.slice(index, last);
-    }
-
-    isArray = Array.isArray;
-    if (!isArray) {
-        isArray = function isArray(ary) {
-            return Object.prototype.toString.call(ary) === '[object Array]';
-        };
     }
 
     hasOwnProperty = (function () {
@@ -8923,10 +9231,6 @@ function hasOwnProperty(obj, prop) {
         return (ch >= 0x61  /* 'a' */ && ch <= 0x7A  /* 'z' */) ||
             (ch >= 0x41  /* 'A' */ && ch <= 0x5A  /* 'Z' */) ||
             (ch >= 0x30  /* '0' */ && ch <= 0x39  /* '9' */);
-    }
-
-    function isTypeName(ch) {
-        return '><(){}[],:*|?!='.indexOf(String.fromCharCode(ch)) === -1 && !esutils.code.isWhiteSpace(ch) && !esutils.code.isLineTerminator(ch);
     }
 
     function isParamTitle(title) {
@@ -8964,29 +9268,6 @@ function hasOwnProperty(obj, prop) {
             title === 'namespace' || title === 'member' || title === 'var' || title === 'module' ||
             title === 'constructor' || title === 'class' || title === 'extends' || title === 'augments' ||
             title === 'public' || title === 'private' || title === 'protected';
-    }
-
-    function DoctrineError(message) {
-        this.name = 'DoctrineError';
-        this.message = message;
-    }
-    DoctrineError.prototype = (function () {
-        var Middle = function () { };
-        Middle.prototype = Error.prototype;
-        return new Middle();
-    }());
-    DoctrineError.prototype.constructor = DoctrineError;
-
-    function throwError(message) {
-        throw new DoctrineError(message);
-    }
-
-    function assert(cond, text) {
-        if (VERSION.slice(-3) === 'dev') {
-            if (!cond) {
-                throwError(text);
-            }
-        }
     }
 
     function trim(str) {
@@ -9047,1213 +9328,6 @@ function hasOwnProperty(obj, prop) {
 
         return result;
     }
-
-    // Type Expression Parser
-
-    (function (exports) {
-        var Syntax,
-            Token,
-            source,
-            length,
-            index,
-            previous,
-            token,
-            value;
-
-        Syntax = {
-            NullableLiteral: 'NullableLiteral',
-            AllLiteral: 'AllLiteral',
-            NullLiteral: 'NullLiteral',
-            UndefinedLiteral: 'UndefinedLiteral',
-            VoidLiteral: 'VoidLiteral',
-            UnionType: 'UnionType',
-            ArrayType: 'ArrayType',
-            RecordType: 'RecordType',
-            FieldType: 'FieldType',
-            FunctionType: 'FunctionType',
-            ParameterType: 'ParameterType',
-            RestType: 'RestType',
-            NonNullableType: 'NonNullableType',
-            OptionalType: 'OptionalType',
-            NullableType: 'NullableType',
-            NameExpression: 'NameExpression',
-            TypeApplication: 'TypeApplication'
-        };
-
-        Token = {
-            ILLEGAL: 0,    // ILLEGAL
-            DOT_LT: 1,     // .<
-            REST: 2,       // ...
-            LT: 3,         // <
-            GT: 4,         // >
-            LPAREN: 5,     // (
-            RPAREN: 6,     // )
-            LBRACE: 7,     // {
-            RBRACE: 8,     // }
-            LBRACK: 9,    // [
-            RBRACK: 10,    // ]
-            COMMA: 11,     // ,
-            COLON: 12,     // :
-            STAR: 13,      // *
-            PIPE: 14,      // |
-            QUESTION: 15,  // ?
-            BANG: 16,      // !
-            EQUAL: 17,     // =
-            NAME: 18,      // name token
-            STRING: 19,    // string
-            NUMBER: 20,    // number
-            EOF: 21
-        };
-
-        function Context(previous, index, token, value) {
-            this._previous = previous;
-            this._index = index;
-            this._token = token;
-            this._value = value;
-        }
-
-        Context.prototype.restore = function () {
-            previous = this._previous;
-            index = this._index;
-            token = this._token;
-            value = this._value;
-        };
-
-        Context.save = function () {
-            return new Context(previous, index, token, value);
-        };
-
-        function advance() {
-            var ch = source.charAt(index);
-            index += 1;
-            return ch;
-        }
-
-        function scanHexEscape(prefix) {
-            var i, len, ch, code = 0;
-
-            len = (prefix === 'u') ? 4 : 2;
-            for (i = 0; i < len; ++i) {
-                if (index < length && esutils.code.isHexDigit(source.charCodeAt(index))) {
-                    ch = advance();
-                    code = code * 16 + '0123456789abcdef'.indexOf(ch.toLowerCase());
-                } else {
-                    return '';
-                }
-            }
-            return String.fromCharCode(code);
-        }
-
-        function scanString() {
-            var str = '', quote, ch, code, unescaped, restore; //TODO review removal octal = false
-            quote = source.charAt(index);
-            ++index;
-
-            while (index < length) {
-                ch = advance();
-
-                if (ch === quote) {
-                    quote = '';
-                    break;
-                } else if (ch === '\\') {
-                    ch = advance();
-                    if (!esutils.code.isLineTerminator(ch.charCodeAt(0))) {
-                        switch (ch) {
-                        case 'n':
-                            str += '\n';
-                            break;
-                        case 'r':
-                            str += '\r';
-                            break;
-                        case 't':
-                            str += '\t';
-                            break;
-                        case 'u':
-                        case 'x':
-                            restore = index;
-                            unescaped = scanHexEscape(ch);
-                            if (unescaped) {
-                                str += unescaped;
-                            } else {
-                                index = restore;
-                                str += ch;
-                            }
-                            break;
-                        case 'b':
-                            str += '\b';
-                            break;
-                        case 'f':
-                            str += '\f';
-                            break;
-                        case 'v':
-                            str += '\v';
-                            break;
-
-                        default:
-                            if (esutils.code.isOctalDigit(ch.charCodeAt(0))) {
-                                code = '01234567'.indexOf(ch);
-
-                                // \0 is not octal escape sequence
-                                // Deprecating unused code. TODO review removal
-                                //if (code !== 0) {
-                                //    octal = true;
-                                //}
-
-                                if (index < length && esutils.code.isOctalDigit(source.charCodeAt(index))) {
-                                    //TODO Review Removal octal = true;
-                                    code = code * 8 + '01234567'.indexOf(advance());
-
-                                    // 3 digits are only allowed when string starts
-                                    // with 0, 1, 2, 3
-                                    if ('0123'.indexOf(ch) >= 0 &&
-                                            index < length &&
-                                            esutils.code.isOctalDigit(source.charCodeAt(index))) {
-                                        code = code * 8 + '01234567'.indexOf(advance());
-                                    }
-                                }
-                                str += String.fromCharCode(code);
-                            } else {
-                                str += ch;
-                            }
-                            break;
-                        }
-                    } else {
-                        if (ch ===  '\r' && source.charCodeAt(index) === 0x0A  /* '\n' */) {
-                            ++index;
-                        }
-                    }
-                } else if (esutils.code.isLineTerminator(ch.charCodeAt(0))) {
-                    break;
-                } else {
-                    str += ch;
-                }
-            }
-
-            if (quote !== '') {
-                throwError('unexpected quote');
-            }
-
-            value = str;
-            return Token.STRING;
-        }
-
-        function scanNumber() {
-            var number, ch;
-
-            number = '';
-            ch = source.charCodeAt(index);
-
-            if (ch !== 0x2E  /* '.' */) {
-                number = advance();
-                ch = source.charCodeAt(index);
-
-                if (number === '0') {
-                    if (ch === 0x78  /* 'x' */ || ch === 0x58  /* 'X' */) {
-                        number += advance();
-                        while (index < length) {
-                            ch = source.charCodeAt(index);
-                            if (!esutils.code.isHexDigit(ch)) {
-                                break;
-                            }
-                            number += advance();
-                        }
-
-                        if (number.length <= 2) {
-                            // only 0x
-                            throwError('unexpected token');
-                        }
-
-                        if (index < length) {
-                            ch = source.charCodeAt(index);
-                            if (esutils.code.isIdentifierStart(ch)) {
-                                throwError('unexpected token');
-                            }
-                        }
-                        value = parseInt(number, 16);
-                        return Token.NUMBER;
-                    }
-
-                    if (esutils.code.isOctalDigit(ch)) {
-                        number += advance();
-                        while (index < length) {
-                            ch = source.charCodeAt(index);
-                            if (!esutils.code.isOctalDigit(ch)) {
-                                break;
-                            }
-                            number += advance();
-                        }
-
-                        if (index < length) {
-                            ch = source.charCodeAt(index);
-                            if (esutils.code.isIdentifierStart(ch) || esutils.code.isDecimalDigit(ch)) {
-                                throwError('unexpected token');
-                            }
-                        }
-                        value = parseInt(number, 8);
-                        return Token.NUMBER;
-                    }
-
-                    if (esutils.code.isDecimalDigit(ch)) {
-                        throwError('unexpected token');
-                    }
-                }
-
-                while (index < length) {
-                    ch = source.charCodeAt(index);
-                    if (!esutils.code.isDecimalDigit(ch)) {
-                        break;
-                    }
-                    number += advance();
-                }
-            }
-
-            if (ch === 0x2E  /* '.' */) {
-                number += advance();
-                while (index < length) {
-                    ch = source.charCodeAt(index);
-                    if (!esutils.code.isDecimalDigit(ch)) {
-                        break;
-                    }
-                    number += advance();
-                }
-            }
-
-            if (ch === 0x65  /* 'e' */ || ch === 0x45  /* 'E' */) {
-                number += advance();
-
-                ch = source.charCodeAt(index);
-                if (ch === 0x2B  /* '+' */ || ch === 0x2D  /* '-' */) {
-                    number += advance();
-                }
-
-                ch = source.charCodeAt(index);
-                if (esutils.code.isDecimalDigit(ch)) {
-                    number += advance();
-                    while (index < length) {
-                        ch = source.charCodeAt(index);
-                        if (!esutils.code.isDecimalDigit(ch)) {
-                            break;
-                        }
-                        number += advance();
-                    }
-                } else {
-                    throwError('unexpected token');
-                }
-            }
-
-            if (index < length) {
-                ch = source.charCodeAt(index);
-                if (esutils.code.isIdentifierStart(ch)) {
-                    throwError('unexpected token');
-                }
-            }
-
-            value = parseFloat(number);
-            return Token.NUMBER;
-        }
-
-
-        function scanTypeName() {
-            var ch, ch2;
-
-            value = advance();
-            while (index < length && isTypeName(source.charCodeAt(index))) {
-                ch = source.charCodeAt(index);
-                if (ch === 0x2E  /* '.' */) {
-                    if ((index + 1) >= length) {
-                        return Token.ILLEGAL;
-                    }
-                    ch2 = source.charCodeAt(index + 1);
-                    if (ch2 === 0x3C  /* '<' */) {
-                        break;
-                    }
-                }
-                value += advance();
-            }
-            return Token.NAME;
-        }
-
-        function next() {
-            var ch;
-
-            previous = index;
-
-            while (index < length && esutils.code.isWhiteSpace(source.charCodeAt(index))) {
-                advance();
-            }
-            if (index >= length) {
-                token = Token.EOF;
-                return token;
-            }
-
-            ch = source.charCodeAt(index);
-            switch (ch) {
-            case 0x27:  /* ''' */
-            case 0x22:  /* '"' */
-                token = scanString();
-                return token;
-
-            case 0x3A:  /* ':' */
-                advance();
-                token = Token.COLON;
-                return token;
-
-            case 0x2C:  /* ',' */
-                advance();
-                token = Token.COMMA;
-                return token;
-
-            case 0x28:  /* '(' */
-                advance();
-                token = Token.LPAREN;
-                return token;
-
-            case 0x29:  /* ')' */
-                advance();
-                token = Token.RPAREN;
-                return token;
-
-            case 0x5B:  /* '[' */
-                advance();
-                token = Token.LBRACK;
-                return token;
-
-            case 0x5D:  /* ']' */
-                advance();
-                token = Token.RBRACK;
-                return token;
-
-            case 0x7B:  /* '{' */
-                advance();
-                token = Token.LBRACE;
-                return token;
-
-            case 0x7D:  /* '}' */
-                advance();
-                token = Token.RBRACE;
-                return token;
-
-            case 0x2E:  /* '.' */
-                if (index + 1 < length) {
-                    ch = source.charCodeAt(index + 1);
-                    if (ch === 0x3C  /* '<' */) {
-                        advance();  // '.'
-                        advance();  // '<'
-                        token = Token.DOT_LT;
-                        return token;
-                    }
-
-                    if (ch === 0x2E  /* '.' */ && index + 2 < length && source.charCodeAt(index + 2) === 0x2E  /* '.' */) {
-                        advance();  // '.'
-                        advance();  // '.'
-                        advance();  // '.'
-                        token = Token.REST;
-                        return token;
-                    }
-
-                    if (esutils.code.isDecimalDigit(ch)) {
-                        token = scanNumber();
-                        return token;
-                    }
-                }
-                token = Token.ILLEGAL;
-                return token;
-
-            case 0x3C:  /* '<' */
-                advance();
-                token = Token.LT;
-                return token;
-
-            case 0x3E:  /* '>' */
-                advance();
-                token = Token.GT;
-                return token;
-
-            case 0x2A:  /* '*' */
-                advance();
-                token = Token.STAR;
-                return token;
-
-            case 0x7C:  /* '|' */
-                advance();
-                token = Token.PIPE;
-                return token;
-
-            case 0x3F:  /* '?' */
-                advance();
-                token = Token.QUESTION;
-                return token;
-
-            case 0x21:  /* '!' */
-                advance();
-                token = Token.BANG;
-                return token;
-
-            case 0x3D:  /* '=' */
-                advance();
-                token = Token.EQUAL;
-                return token;
-
-            default:
-                if (esutils.code.isDecimalDigit(ch)) {
-                    token = scanNumber();
-                    return token;
-                }
-
-                // type string permits following case,
-                //
-                // namespace.module.MyClass
-                //
-                // this reduced 1 token TK_NAME
-                assert(isTypeName(ch));
-                token = scanTypeName();
-                return token;
-            }
-        }
-
-        function consume(target, text) {
-            assert(token === target, text || 'consumed token not matched');
-            next();
-        }
-
-        function expect(target) {
-            if (token !== target) {
-                throwError('unexpected token');
-            }
-            next();
-        }
-
-        // UnionType := '(' TypeUnionList ')'
-        //
-        // TypeUnionList :=
-        //     <<empty>>
-        //   | NonemptyTypeUnionList
-        //
-        // NonemptyTypeUnionList :=
-        //     TypeExpression
-        //   | TypeExpression '|' NonemptyTypeUnionList
-        function parseUnionType() {
-            var elements;
-            consume(Token.LPAREN, 'UnionType should start with (');
-            elements = [];
-            if (token !== Token.RPAREN) {
-                while (true) {
-                    elements.push(parseTypeExpression());
-                    if (token === Token.RPAREN) {
-                        break;
-                    }
-                    expect(Token.PIPE);
-                }
-            }
-            consume(Token.RPAREN, 'UnionType should end with )');
-            return {
-                type: Syntax.UnionType,
-                elements: elements
-            };
-        }
-
-        // ArrayType := '[' ElementTypeList ']'
-        //
-        // ElementTypeList :=
-        //     <<empty>>
-        //  | TypeExpression
-        //  | '...' TypeExpression
-        //  | TypeExpression ',' ElementTypeList
-        function parseArrayType() {
-            var elements;
-            consume(Token.LBRACK, 'ArrayType should start with [');
-            elements = [];
-            while (token !== Token.RBRACK) {
-                if (token === Token.REST) {
-                    consume(Token.REST);
-                    elements.push({
-                        type: Syntax.RestType,
-                        expression: parseTypeExpression()
-                    });
-                    break;
-                } else {
-                    elements.push(parseTypeExpression());
-                }
-                if (token !== Token.RBRACK) {
-                    expect(Token.COMMA);
-                }
-            }
-            expect(Token.RBRACK);
-            return {
-                type: Syntax.ArrayType,
-                elements: elements
-            };
-        }
-
-        function parseFieldName() {
-            var v = value;
-            if (token === Token.NAME || token === Token.STRING) {
-                next();
-                return v;
-            }
-
-            if (token === Token.NUMBER) {
-                consume(Token.NUMBER);
-                return String(v);
-            }
-
-            throwError('unexpected token');
-        }
-
-        // FieldType :=
-        //     FieldName
-        //   | FieldName ':' TypeExpression
-        //
-        // FieldName :=
-        //     NameExpression
-        //   | StringLiteral
-        //   | NumberLiteral
-        //   | ReservedIdentifier
-        function parseFieldType() {
-            var key;
-
-            key = parseFieldName();
-            if (token === Token.COLON) {
-                consume(Token.COLON);
-                return {
-                    type: Syntax.FieldType,
-                    key: key,
-                    value: parseTypeExpression()
-                };
-            }
-            return {
-                type: Syntax.FieldType,
-                key: key,
-                value: null
-            };
-        }
-
-        // RecordType := '{' FieldTypeList '}'
-        //
-        // FieldTypeList :=
-        //     <<empty>>
-        //   | FieldType
-        //   | FieldType ',' FieldTypeList
-        function parseRecordType() {
-            var fields;
-
-            consume(Token.LBRACE, 'RecordType should start with {');
-            fields = [];
-            if (token === Token.COMMA) {
-                consume(Token.COMMA);
-            } else {
-                while (token !== Token.RBRACE) {
-                    fields.push(parseFieldType());
-                    if (token !== Token.RBRACE) {
-                        expect(Token.COMMA);
-                    }
-                }
-            }
-            expect(Token.RBRACE);
-            return {
-                type: Syntax.RecordType,
-                fields: fields
-            };
-        }
-
-        function parseNameExpression() {
-            var name = value;
-            expect(Token.NAME);
-            return {
-                type: Syntax.NameExpression,
-                name: name
-            };
-        }
-
-        // TypeExpressionList :=
-        //     TopLevelTypeExpression
-        //   | TopLevelTypeExpression ',' TypeExpressionList
-        function parseTypeExpressionList() {
-            var elements = [];
-
-            elements.push(parseTop());
-            while (token === Token.COMMA) {
-                consume(Token.COMMA);
-                elements.push(parseTop());
-            }
-            return elements;
-        }
-
-        // TypeName :=
-        //     NameExpression
-        //   | NameExpression TypeApplication
-        //
-        // TypeApplication :=
-        //     '.<' TypeExpressionList '>'
-        //   | '<' TypeExpressionList '>'   // this is extension of doctrine
-        function parseTypeName() {
-            var expr, applications;
-
-            expr = parseNameExpression();
-            if (token === Token.DOT_LT || token === Token.LT) {
-                next();
-                applications = parseTypeExpressionList();
-                expect(Token.GT);
-                return {
-                    type: Syntax.TypeApplication,
-                    expression: expr,
-                    applications: applications
-                };
-            }
-            return expr;
-        }
-
-        // ResultType :=
-        //     <<empty>>
-        //   | ':' void
-        //   | ':' TypeExpression
-        //
-        // BNF is above
-        // but, we remove <<empty>> pattern, so token is always TypeToken::COLON
-        function parseResultType() {
-            consume(Token.COLON, 'ResultType should start with :');
-            if (token === Token.NAME && value === 'void') {
-                consume(Token.NAME);
-                return {
-                    type: Syntax.VoidLiteral
-                };
-            }
-            return parseTypeExpression();
-        }
-
-        // ParametersType :=
-        //     RestParameterType
-        //   | NonRestParametersType
-        //   | NonRestParametersType ',' RestParameterType
-        //
-        // RestParameterType :=
-        //     '...'
-        //     '...' Identifier
-        //
-        // NonRestParametersType :=
-        //     ParameterType ',' NonRestParametersType
-        //   | ParameterType
-        //   | OptionalParametersType
-        //
-        // OptionalParametersType :=
-        //     OptionalParameterType
-        //   | OptionalParameterType, OptionalParametersType
-        //
-        // OptionalParameterType := ParameterType=
-        //
-        // ParameterType := TypeExpression | Identifier ':' TypeExpression
-        //
-        // Identifier is "new" or "this"
-        function parseParametersType() {
-            var params = [], optionalSequence = false, expr, rest = false;
-
-            while (token !== Token.RPAREN) {
-                if (token === Token.REST) {
-                    // RestParameterType
-                    consume(Token.REST);
-                    rest = true;
-                }
-
-                expr = parseTypeExpression();
-                if (expr.type === Syntax.NameExpression && token === Token.COLON) {
-                    // Identifier ':' TypeExpression
-                    consume(Token.COLON);
-                    expr = {
-                        type: Syntax.ParameterType,
-                        name: expr.name,
-                        expression: parseTypeExpression()
-                    };
-                }
-                if (token === Token.EQUAL) {
-                    consume(Token.EQUAL);
-                    expr = {
-                        type: Syntax.OptionalType,
-                        expression: expr
-                    };
-                    optionalSequence = true;
-                } else {
-                    if (optionalSequence) {
-                        throwError('unexpected token');
-                    }
-                }
-                if (rest) {
-                    expr = {
-                        type: Syntax.RestType,
-                        expression: expr
-                    };
-                }
-                params.push(expr);
-                if (token !== Token.RPAREN) {
-                    expect(Token.COMMA);
-                }
-            }
-            return params;
-        }
-
-        // FunctionType := 'function' FunctionSignatureType
-        //
-        // FunctionSignatureType :=
-        //   | TypeParameters '(' ')' ResultType
-        //   | TypeParameters '(' ParametersType ')' ResultType
-        //   | TypeParameters '(' 'this' ':' TypeName ')' ResultType
-        //   | TypeParameters '(' 'this' ':' TypeName ',' ParametersType ')' ResultType
-        function parseFunctionType() {
-            var isNew, thisBinding, params, result, fnType;
-            assert(token === Token.NAME && value === 'function', 'FunctionType should start with \'function\'');
-            consume(Token.NAME);
-
-            // Google Closure Compiler is not implementing TypeParameters.
-            // So we do not. if we don't get '(', we see it as error.
-            expect(Token.LPAREN);
-
-            isNew = false;
-            params = [];
-            thisBinding = null;
-            if (token !== Token.RPAREN) {
-                // ParametersType or 'this'
-                if (token === Token.NAME &&
-                        (value === 'this' || value === 'new')) {
-                    // 'this' or 'new'
-                    // 'new' is Closure Compiler extension
-                    isNew = value === 'new';
-                    consume(Token.NAME);
-                    expect(Token.COLON);
-                    thisBinding = parseTypeName();
-                    if (token === Token.COMMA) {
-                        consume(Token.COMMA);
-                        params = parseParametersType();
-                    }
-                } else {
-                    params = parseParametersType();
-                }
-            }
-
-            expect(Token.RPAREN);
-
-            result = null;
-            if (token === Token.COLON) {
-                result = parseResultType();
-            }
-
-            fnType = {
-                type: Syntax.FunctionType,
-                params: params,
-                result: result
-            };
-            if (thisBinding) {
-                // avoid adding null 'new' and 'this' properties
-                fnType['this'] = thisBinding;
-                if (isNew) {
-                    fnType['new'] = true;
-                }
-            }
-            return fnType;
-        }
-
-        // BasicTypeExpression :=
-        //     '*'
-        //   | 'null'
-        //   | 'undefined'
-        //   | TypeName
-        //   | FunctionType
-        //   | UnionType
-        //   | RecordType
-        //   | ArrayType
-        function parseBasicTypeExpression() {
-            var context;
-            switch (token) {
-            case Token.STAR:
-                consume(Token.STAR);
-                return {
-                    type: Syntax.AllLiteral
-                };
-
-            case Token.LPAREN:
-                return parseUnionType();
-
-            case Token.LBRACK:
-                return parseArrayType();
-
-            case Token.LBRACE:
-                return parseRecordType();
-
-            case Token.NAME:
-                if (value === 'null') {
-                    consume(Token.NAME);
-                    return {
-                        type: Syntax.NullLiteral
-                    };
-                }
-
-                if (value === 'undefined') {
-                    consume(Token.NAME);
-                    return {
-                        type: Syntax.UndefinedLiteral
-                    };
-                }
-
-                context = Context.save();
-                if (value === 'function') {
-                    try {
-                        return parseFunctionType();
-                    } catch (e) {
-                        context.restore();
-                    }
-                }
-
-                return parseTypeName();
-
-            default:
-                throwError('unexpected token');
-            }
-        }
-
-        // TypeExpression :=
-        //     BasicTypeExpression
-        //   | '?' BasicTypeExpression
-        //   | '!' BasicTypeExpression
-        //   | BasicTypeExpression '?'
-        //   | BasicTypeExpression '!'
-        //   | '?'
-        //   | BasicTypeExpression '[]'
-        function parseTypeExpression() {
-            var expr;
-
-            if (token === Token.QUESTION) {
-                consume(Token.QUESTION);
-                if (token === Token.COMMA || token === Token.EQUAL || token === Token.RBRACE ||
-                        token === Token.RPAREN || token === Token.PIPE || token === Token.EOF ||
-                        token === Token.RBRACK) {
-                    return {
-                        type: Syntax.NullableLiteral
-                    };
-                }
-                return {
-                    type: Syntax.NullableType,
-                    expression: parseBasicTypeExpression(),
-                    prefix: true
-                };
-            }
-
-            if (token === Token.BANG) {
-                consume(Token.BANG);
-                return {
-                    type: Syntax.NonNullableType,
-                    expression: parseBasicTypeExpression(),
-                    prefix: true
-                };
-            }
-
-            expr = parseBasicTypeExpression();
-            if (token === Token.BANG) {
-                consume(Token.BANG);
-                return {
-                    type: Syntax.NonNullableType,
-                    expression: expr,
-                    prefix: false
-                };
-            }
-
-            if (token === Token.QUESTION) {
-                consume(Token.QUESTION);
-                return {
-                    type: Syntax.NullableType,
-                    expression: expr,
-                    prefix: false
-                };
-            }
-
-            if (token === Token.LBRACK) {
-                consume(Token.LBRACK);
-                consume(Token.RBRACK, 'expected an array-style type declaration (' + value + '[])');
-                return {
-                    type: Syntax.TypeApplication,
-                    expression: {
-                        type: Syntax.NameExpression,
-                        name: 'Array'
-                    },
-                    applications: [expr]
-                };
-            }
-
-            return expr;
-        }
-
-        // TopLevelTypeExpression :=
-        //      TypeExpression
-        //    | TypeUnionList
-        //
-        // This rule is Google Closure Compiler extension, not ES4
-        // like,
-        //   { number | string }
-        // If strict to ES4, we should write it as
-        //   { (number|string) }
-        function parseTop() {
-            var expr, elements;
-
-            expr = parseTypeExpression();
-            if (token !== Token.PIPE) {
-                return expr;
-            }
-
-            elements = [ expr ];
-            consume(Token.PIPE);
-            while (true) {
-                elements.push(parseTypeExpression());
-                if (token !== Token.PIPE) {
-                    break;
-                }
-                consume(Token.PIPE);
-            }
-
-            return {
-                type: Syntax.UnionType,
-                elements: elements
-            };
-        }
-
-        function parseTopParamType() {
-            var expr;
-
-            if (token === Token.REST) {
-                consume(Token.REST);
-                return {
-                    type: Syntax.RestType,
-                    expression: parseTop()
-                };
-            }
-
-            expr = parseTop();
-            if (token === Token.EQUAL) {
-                consume(Token.EQUAL);
-                return {
-                    type: Syntax.OptionalType,
-                    expression: expr
-                };
-            }
-
-            return expr;
-        }
-
-        function parseType(src, opt) {
-            var expr;
-
-            source = src;
-            length = source.length;
-            index = 0;
-            previous = 0;
-
-            next();
-            expr = parseTop();
-
-            if (opt && opt.midstream) {
-                return {
-                    expression: expr,
-                    index: previous
-                };
-            }
-
-            if (token !== Token.EOF) {
-                throwError('not reach to EOF');
-            }
-
-            return expr;
-        }
-
-        function parseParamType(src, opt) {
-            var expr;
-
-            source = src;
-            length = source.length;
-            index = 0;
-            previous = 0;
-
-            next();
-            expr = parseTopParamType();
-
-            if (opt && opt.midstream) {
-                return {
-                    expression: expr,
-                    index: previous
-                };
-            }
-
-            if (token !== Token.EOF) {
-                throwError('not reach to EOF');
-            }
-
-            return expr;
-        }
-
-        function stringifyImpl(node, compact, topLevel) {
-            var result, i, iz;
-
-            switch (node.type) {
-            case Syntax.NullableLiteral:
-                result = '?';
-                break;
-
-            case Syntax.AllLiteral:
-                result = '*';
-                break;
-
-            case Syntax.NullLiteral:
-                result = 'null';
-                break;
-
-            case Syntax.UndefinedLiteral:
-                result = 'undefined';
-                break;
-
-            case Syntax.VoidLiteral:
-                result = 'void';
-                break;
-
-            case Syntax.UnionType:
-                if (!topLevel) {
-                    result = '(';
-                } else {
-                    result = '';
-                }
-
-                for (i = 0, iz = node.elements.length; i < iz; ++i) {
-                    result += stringifyImpl(node.elements[i], compact);
-                    if ((i + 1) !== iz) {
-                        result += '|';
-                    }
-                }
-
-                if (!topLevel) {
-                    result += ')';
-                }
-                break;
-
-            case Syntax.ArrayType:
-                result = '[';
-                for (i = 0, iz = node.elements.length; i < iz; ++i) {
-                    result += stringifyImpl(node.elements[i], compact);
-                    if ((i + 1) !== iz) {
-                        result += compact ? ',' : ', ';
-                    }
-                }
-                result += ']';
-                break;
-
-            case Syntax.RecordType:
-                result = '{';
-                for (i = 0, iz = node.fields.length; i < iz; ++i) {
-                    result += stringifyImpl(node.fields[i], compact);
-                    if ((i + 1) !== iz) {
-                        result += compact ? ',' : ', ';
-                    }
-                }
-                result += '}';
-                break;
-
-            case Syntax.FieldType:
-                if (node.value) {
-                    result = node.key + (compact ? ':' : ': ') + stringifyImpl(node.value, compact);
-                } else {
-                    result = node.key;
-                }
-                break;
-
-            case Syntax.FunctionType:
-                result = compact ? 'function(' : 'function (';
-
-                if (node['this']) {
-                    if (node['new']) {
-                        result += (compact ? 'new:' : 'new: ');
-                    } else {
-                        result += (compact ? 'this:' : 'this: ');
-                    }
-
-                    result += stringifyImpl(node['this'], compact);
-
-                    if (node.params.length !== 0) {
-                        result += compact ? ',' : ', ';
-                    }
-                }
-
-                for (i = 0, iz = node.params.length; i < iz; ++i) {
-                    result += stringifyImpl(node.params[i], compact);
-                    if ((i + 1) !== iz) {
-                        result += compact ? ',' : ', ';
-                    }
-                }
-
-                result += ')';
-
-                if (node.result) {
-                    result += (compact ? ':' : ': ') + stringifyImpl(node.result, compact);
-                }
-                break;
-
-            case Syntax.ParameterType:
-                result = node.name + (compact ? ':' : ': ') + stringifyImpl(node.expression, compact);
-                break;
-
-            case Syntax.RestType:
-                result = '...';
-                if (node.expression) {
-                    result += stringifyImpl(node.expression, compact);
-                }
-                break;
-
-            case Syntax.NonNullableType:
-                if (node.prefix) {
-                    result = '!' + stringifyImpl(node.expression, compact);
-                } else {
-                    result = stringifyImpl(node.expression, compact) + '!';
-                }
-                break;
-
-            case Syntax.OptionalType:
-                result = stringifyImpl(node.expression, compact) + '=';
-                break;
-
-            case Syntax.NullableType:
-                if (node.prefix) {
-                    result = '?' + stringifyImpl(node.expression, compact);
-                } else {
-                    result = stringifyImpl(node.expression, compact) + '?';
-                }
-                break;
-
-            case Syntax.NameExpression:
-                result = node.name;
-                break;
-
-            case Syntax.TypeApplication:
-                result = stringifyImpl(node.expression, compact) + '.<';
-                for (i = 0, iz = node.applications.length; i < iz; ++i) {
-                    result += stringifyImpl(node.applications[i], compact);
-                    if ((i + 1) !== iz) {
-                        result += compact ? ',' : ', ';
-                    }
-                }
-                result += '>';
-                break;
-
-            default:
-                throwError('Unknown type ' + node.type);
-            }
-
-            return result;
-        }
-
-        function stringify(node, options) {
-            if (options == null) {
-                options = {};
-            }
-            return stringifyImpl(node, options.compact, options.topLevel);
-        }
-
-        exports.parseType = parseType;
-        exports.parseParamType = parseParamType;
-        exports.stringify = stringify;
-        exports.Syntax = Syntax;
-    }(typed = {}));
 
     // JSDoc Tag Parser
 
@@ -10361,7 +9435,7 @@ function hasOwnProperty(obj, prop) {
 
             if (brace !== 0) {
                 // braces is not balanced
-                return throwError('Braces are not balanced');
+                return utility.throwError('Braces are not balanced');
             }
 
             if (isParamTitle(title)) {
@@ -10409,6 +9483,14 @@ function hasOwnProperty(obj, prop) {
             name += scanIdentifier(last);
 
             if (allowNestedParams) {
+                if (source.charCodeAt(index) === 0x3A /* ':' */ && (
+                        name === 'module' ||
+                        name === 'external' ||
+                        name === 'event')) {
+                    name += advance();
+                    name += scanIdentifier(last);
+
+                }
                 while (source.charCodeAt(index) === 0x2E  /* '.' */ ||
                         source.charCodeAt(index) === 0x23  /* '#' */ ||
                         source.charCodeAt(index) === 0x7E  /* '~' */) {
@@ -10448,7 +9530,7 @@ function hasOwnProperty(obj, prop) {
             if (index >= length) {
                 return false;
             }
-            assert(source.charCodeAt(index) === 0x40  /* '@' */);
+            utility.assert(source.charCodeAt(index) === 0x40  /* '@' */);
             return true;
         }
 
@@ -10473,7 +9555,7 @@ function hasOwnProperty(obj, prop) {
                 msg = errorText.replace(
                     /%(\d)/g,
                     function (whole, index) {
-                        assert(index < args.length, 'Message reference must be in range');
+                        utility.assert(index < args.length, 'Message reference must be in range');
                         return args[index];
                     }
                 );
@@ -10482,7 +9564,7 @@ function hasOwnProperty(obj, prop) {
                 this._tag.errors = [];
             }
             if (strict) {
-                throwError(msg);
+                utility.throwError(msg);
             }
             this._tag.errors.push(msg);
             return recoverable;
@@ -10842,11 +9924,11 @@ function hasOwnProperty(obj, prop) {
                         if (typeof options.tags[i] === 'string') {
                             interestingTags[options.tags[i]] = true;
                         } else {
-                            throwError('Invalid "tags" parameter: ' + options.tags);
+                            utility.throwError('Invalid "tags" parameter: ' + options.tags);
                         }
                     }
                 } else {
-                    throwError('Invalid "tags" parameter: ' + options.tags);
+                    utility.throwError('Invalid "tags" parameter: ' + options.tags);
                 }
             }
 
@@ -10877,13 +9959,13 @@ function hasOwnProperty(obj, prop) {
         exports.parse = parse;
     }(jsdoc = {}));
 
-    exports.version = VERSION;
+    exports.version = utility.VERSION;
     exports.parse = jsdoc.parse;
     exports.parseType = typed.parseType;
     exports.parseParamType = typed.parseParamType;
     exports.unwrapComment = unwrapComment;
     exports.Syntax = shallowCopy(typed.Syntax);
-    exports.Error = DoctrineError;
+    exports.Error = utility.DoctrineError;
     exports.type = {
         Syntax: exports.Syntax,
         parseType: typed.parseType,
@@ -10893,7 +9975,1326 @@ function hasOwnProperty(obj, prop) {
 }());
 /* vim: set sw=4 ts=4 et tw=80 : */
 
-},{"./package.json":13,"esutils":12}],9:[function(require,module,exports){
+},{"./typed":10,"./utility":11,"esutils":15,"isarray":16}],10:[function(require,module,exports){
+/*
+  Copyright (C) 2012-2014 Yusuke Suzuki <utatane.tea@gmail.com>
+  Copyright (C) 2014 Dan Tao <daniel.tao@gmail.com>
+  Copyright (C) 2013 Andrew Eisenberg <andrew@eisenberg.as>
+
+  Redistribution and use in source and binary forms, with or without
+  modification, are permitted provided that the following conditions are met:
+
+    * Redistributions of source code must retain the above copyright
+      notice, this list of conditions and the following disclaimer.
+    * Redistributions in binary form must reproduce the above copyright
+      notice, this list of conditions and the following disclaimer in the
+      documentation and/or other materials provided with the distribution.
+
+  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+  AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+  IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+  ARE DISCLAIMED. IN NO EVENT SHALL <COPYRIGHT HOLDER> BE LIABLE FOR ANY
+  DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
+  (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+  LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+  ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+  (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF
+  THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+*/
+
+// "typed", the Type Expression Parser for doctrine.
+
+(function () {
+    'use strict';
+
+    var Syntax,
+        Token,
+        source,
+        length,
+        index,
+        previous,
+        token,
+        value,
+        esutils,
+        utility;
+
+    esutils = require('esutils');
+    utility = require('./utility');
+
+    Syntax = {
+        NullableLiteral: 'NullableLiteral',
+        AllLiteral: 'AllLiteral',
+        NullLiteral: 'NullLiteral',
+        UndefinedLiteral: 'UndefinedLiteral',
+        VoidLiteral: 'VoidLiteral',
+        UnionType: 'UnionType',
+        ArrayType: 'ArrayType',
+        RecordType: 'RecordType',
+        FieldType: 'FieldType',
+        FunctionType: 'FunctionType',
+        ParameterType: 'ParameterType',
+        RestType: 'RestType',
+        NonNullableType: 'NonNullableType',
+        OptionalType: 'OptionalType',
+        NullableType: 'NullableType',
+        NameExpression: 'NameExpression',
+        TypeApplication: 'TypeApplication'
+    };
+
+    Token = {
+        ILLEGAL: 0,    // ILLEGAL
+        DOT_LT: 1,     // .<
+        REST: 2,       // ...
+        LT: 3,         // <
+        GT: 4,         // >
+        LPAREN: 5,     // (
+        RPAREN: 6,     // )
+        LBRACE: 7,     // {
+        RBRACE: 8,     // }
+        LBRACK: 9,    // [
+        RBRACK: 10,    // ]
+        COMMA: 11,     // ,
+        COLON: 12,     // :
+        STAR: 13,      // *
+        PIPE: 14,      // |
+        QUESTION: 15,  // ?
+        BANG: 16,      // !
+        EQUAL: 17,     // =
+        NAME: 18,      // name token
+        STRING: 19,    // string
+        NUMBER: 20,    // number
+        EOF: 21
+    };
+
+    function isTypeName(ch) {
+        return '><(){}[],:*|?!='.indexOf(String.fromCharCode(ch)) === -1 && !esutils.code.isWhiteSpace(ch) && !esutils.code.isLineTerminator(ch);
+    }
+
+    function Context(previous, index, token, value) {
+        this._previous = previous;
+        this._index = index;
+        this._token = token;
+        this._value = value;
+    }
+
+    Context.prototype.restore = function () {
+        previous = this._previous;
+        index = this._index;
+        token = this._token;
+        value = this._value;
+    };
+
+    Context.save = function () {
+        return new Context(previous, index, token, value);
+    };
+
+    function advance() {
+        var ch = source.charAt(index);
+        index += 1;
+        return ch;
+    }
+
+    function scanHexEscape(prefix) {
+        var i, len, ch, code = 0;
+
+        len = (prefix === 'u') ? 4 : 2;
+        for (i = 0; i < len; ++i) {
+            if (index < length && esutils.code.isHexDigit(source.charCodeAt(index))) {
+                ch = advance();
+                code = code * 16 + '0123456789abcdef'.indexOf(ch.toLowerCase());
+            } else {
+                return '';
+            }
+        }
+        return String.fromCharCode(code);
+    }
+
+    function scanString() {
+        var str = '', quote, ch, code, unescaped, restore; //TODO review removal octal = false
+        quote = source.charAt(index);
+        ++index;
+
+        while (index < length) {
+            ch = advance();
+
+            if (ch === quote) {
+                quote = '';
+                break;
+            } else if (ch === '\\') {
+                ch = advance();
+                if (!esutils.code.isLineTerminator(ch.charCodeAt(0))) {
+                    switch (ch) {
+                    case 'n':
+                        str += '\n';
+                        break;
+                    case 'r':
+                        str += '\r';
+                        break;
+                    case 't':
+                        str += '\t';
+                        break;
+                    case 'u':
+                    case 'x':
+                        restore = index;
+                        unescaped = scanHexEscape(ch);
+                        if (unescaped) {
+                            str += unescaped;
+                        } else {
+                            index = restore;
+                            str += ch;
+                        }
+                        break;
+                    case 'b':
+                        str += '\b';
+                        break;
+                    case 'f':
+                        str += '\f';
+                        break;
+                    case 'v':
+                        str += '\v';
+                        break;
+
+                    default:
+                        if (esutils.code.isOctalDigit(ch.charCodeAt(0))) {
+                            code = '01234567'.indexOf(ch);
+
+                            // \0 is not octal escape sequence
+                            // Deprecating unused code. TODO review removal
+                            //if (code !== 0) {
+                            //    octal = true;
+                            //}
+
+                            if (index < length && esutils.code.isOctalDigit(source.charCodeAt(index))) {
+                                //TODO Review Removal octal = true;
+                                code = code * 8 + '01234567'.indexOf(advance());
+
+                                // 3 digits are only allowed when string starts
+                                // with 0, 1, 2, 3
+                                if ('0123'.indexOf(ch) >= 0 &&
+                                        index < length &&
+                                        esutils.code.isOctalDigit(source.charCodeAt(index))) {
+                                    code = code * 8 + '01234567'.indexOf(advance());
+                                }
+                            }
+                            str += String.fromCharCode(code);
+                        } else {
+                            str += ch;
+                        }
+                        break;
+                    }
+                } else {
+                    if (ch ===  '\r' && source.charCodeAt(index) === 0x0A  /* '\n' */) {
+                        ++index;
+                    }
+                }
+            } else if (esutils.code.isLineTerminator(ch.charCodeAt(0))) {
+                break;
+            } else {
+                str += ch;
+            }
+        }
+
+        if (quote !== '') {
+            utility.throwError('unexpected quote');
+        }
+
+        value = str;
+        return Token.STRING;
+    }
+
+    function scanNumber() {
+        var number, ch;
+
+        number = '';
+        ch = source.charCodeAt(index);
+
+        if (ch !== 0x2E  /* '.' */) {
+            number = advance();
+            ch = source.charCodeAt(index);
+
+            if (number === '0') {
+                if (ch === 0x78  /* 'x' */ || ch === 0x58  /* 'X' */) {
+                    number += advance();
+                    while (index < length) {
+                        ch = source.charCodeAt(index);
+                        if (!esutils.code.isHexDigit(ch)) {
+                            break;
+                        }
+                        number += advance();
+                    }
+
+                    if (number.length <= 2) {
+                        // only 0x
+                        utility.throwError('unexpected token');
+                    }
+
+                    if (index < length) {
+                        ch = source.charCodeAt(index);
+                        if (esutils.code.isIdentifierStart(ch)) {
+                            utility.throwError('unexpected token');
+                        }
+                    }
+                    value = parseInt(number, 16);
+                    return Token.NUMBER;
+                }
+
+                if (esutils.code.isOctalDigit(ch)) {
+                    number += advance();
+                    while (index < length) {
+                        ch = source.charCodeAt(index);
+                        if (!esutils.code.isOctalDigit(ch)) {
+                            break;
+                        }
+                        number += advance();
+                    }
+
+                    if (index < length) {
+                        ch = source.charCodeAt(index);
+                        if (esutils.code.isIdentifierStart(ch) || esutils.code.isDecimalDigit(ch)) {
+                            utility.throwError('unexpected token');
+                        }
+                    }
+                    value = parseInt(number, 8);
+                    return Token.NUMBER;
+                }
+
+                if (esutils.code.isDecimalDigit(ch)) {
+                    utility.throwError('unexpected token');
+                }
+            }
+
+            while (index < length) {
+                ch = source.charCodeAt(index);
+                if (!esutils.code.isDecimalDigit(ch)) {
+                    break;
+                }
+                number += advance();
+            }
+        }
+
+        if (ch === 0x2E  /* '.' */) {
+            number += advance();
+            while (index < length) {
+                ch = source.charCodeAt(index);
+                if (!esutils.code.isDecimalDigit(ch)) {
+                    break;
+                }
+                number += advance();
+            }
+        }
+
+        if (ch === 0x65  /* 'e' */ || ch === 0x45  /* 'E' */) {
+            number += advance();
+
+            ch = source.charCodeAt(index);
+            if (ch === 0x2B  /* '+' */ || ch === 0x2D  /* '-' */) {
+                number += advance();
+            }
+
+            ch = source.charCodeAt(index);
+            if (esutils.code.isDecimalDigit(ch)) {
+                number += advance();
+                while (index < length) {
+                    ch = source.charCodeAt(index);
+                    if (!esutils.code.isDecimalDigit(ch)) {
+                        break;
+                    }
+                    number += advance();
+                }
+            } else {
+                utility.throwError('unexpected token');
+            }
+        }
+
+        if (index < length) {
+            ch = source.charCodeAt(index);
+            if (esutils.code.isIdentifierStart(ch)) {
+                utility.throwError('unexpected token');
+            }
+        }
+
+        value = parseFloat(number);
+        return Token.NUMBER;
+    }
+
+
+    function scanTypeName() {
+        var ch, ch2;
+
+        value = advance();
+        while (index < length && isTypeName(source.charCodeAt(index))) {
+            ch = source.charCodeAt(index);
+            if (ch === 0x2E  /* '.' */) {
+                if ((index + 1) >= length) {
+                    return Token.ILLEGAL;
+                }
+                ch2 = source.charCodeAt(index + 1);
+                if (ch2 === 0x3C  /* '<' */) {
+                    break;
+                }
+            }
+            value += advance();
+        }
+        return Token.NAME;
+    }
+
+    function next() {
+        var ch;
+
+        previous = index;
+
+        while (index < length && esutils.code.isWhiteSpace(source.charCodeAt(index))) {
+            advance();
+        }
+        if (index >= length) {
+            token = Token.EOF;
+            return token;
+        }
+
+        ch = source.charCodeAt(index);
+        switch (ch) {
+        case 0x27:  /* ''' */
+        case 0x22:  /* '"' */
+            token = scanString();
+            return token;
+
+        case 0x3A:  /* ':' */
+            advance();
+            token = Token.COLON;
+            return token;
+
+        case 0x2C:  /* ',' */
+            advance();
+            token = Token.COMMA;
+            return token;
+
+        case 0x28:  /* '(' */
+            advance();
+            token = Token.LPAREN;
+            return token;
+
+        case 0x29:  /* ')' */
+            advance();
+            token = Token.RPAREN;
+            return token;
+
+        case 0x5B:  /* '[' */
+            advance();
+            token = Token.LBRACK;
+            return token;
+
+        case 0x5D:  /* ']' */
+            advance();
+            token = Token.RBRACK;
+            return token;
+
+        case 0x7B:  /* '{' */
+            advance();
+            token = Token.LBRACE;
+            return token;
+
+        case 0x7D:  /* '}' */
+            advance();
+            token = Token.RBRACE;
+            return token;
+
+        case 0x2E:  /* '.' */
+            if (index + 1 < length) {
+                ch = source.charCodeAt(index + 1);
+                if (ch === 0x3C  /* '<' */) {
+                    advance();  // '.'
+                    advance();  // '<'
+                    token = Token.DOT_LT;
+                    return token;
+                }
+
+                if (ch === 0x2E  /* '.' */ && index + 2 < length && source.charCodeAt(index + 2) === 0x2E  /* '.' */) {
+                    advance();  // '.'
+                    advance();  // '.'
+                    advance();  // '.'
+                    token = Token.REST;
+                    return token;
+                }
+
+                if (esutils.code.isDecimalDigit(ch)) {
+                    token = scanNumber();
+                    return token;
+                }
+            }
+            token = Token.ILLEGAL;
+            return token;
+
+        case 0x3C:  /* '<' */
+            advance();
+            token = Token.LT;
+            return token;
+
+        case 0x3E:  /* '>' */
+            advance();
+            token = Token.GT;
+            return token;
+
+        case 0x2A:  /* '*' */
+            advance();
+            token = Token.STAR;
+            return token;
+
+        case 0x7C:  /* '|' */
+            advance();
+            token = Token.PIPE;
+            return token;
+
+        case 0x3F:  /* '?' */
+            advance();
+            token = Token.QUESTION;
+            return token;
+
+        case 0x21:  /* '!' */
+            advance();
+            token = Token.BANG;
+            return token;
+
+        case 0x3D:  /* '=' */
+            advance();
+            token = Token.EQUAL;
+            return token;
+
+        default:
+            if (esutils.code.isDecimalDigit(ch)) {
+                token = scanNumber();
+                return token;
+            }
+
+            // type string permits following case,
+            //
+            // namespace.module.MyClass
+            //
+            // this reduced 1 token TK_NAME
+            utility.assert(isTypeName(ch));
+            token = scanTypeName();
+            return token;
+        }
+    }
+
+    function consume(target, text) {
+        utility.assert(token === target, text || 'consumed token not matched');
+        next();
+    }
+
+    function expect(target, message) {
+        if (token !== target) {
+            utility.throwError(message || 'unexpected token');
+        }
+        next();
+    }
+
+    // UnionType := '(' TypeUnionList ')'
+    //
+    // TypeUnionList :=
+    //     <<empty>>
+    //   | NonemptyTypeUnionList
+    //
+    // NonemptyTypeUnionList :=
+    //     TypeExpression
+    //   | TypeExpression '|' NonemptyTypeUnionList
+    function parseUnionType() {
+        var elements;
+        consume(Token.LPAREN, 'UnionType should start with (');
+        elements = [];
+        if (token !== Token.RPAREN) {
+            while (true) {
+                elements.push(parseTypeExpression());
+                if (token === Token.RPAREN) {
+                    break;
+                }
+                expect(Token.PIPE);
+            }
+        }
+        consume(Token.RPAREN, 'UnionType should end with )');
+        return {
+            type: Syntax.UnionType,
+            elements: elements
+        };
+    }
+
+    // ArrayType := '[' ElementTypeList ']'
+    //
+    // ElementTypeList :=
+    //     <<empty>>
+    //  | TypeExpression
+    //  | '...' TypeExpression
+    //  | TypeExpression ',' ElementTypeList
+    function parseArrayType() {
+        var elements;
+        consume(Token.LBRACK, 'ArrayType should start with [');
+        elements = [];
+        while (token !== Token.RBRACK) {
+            if (token === Token.REST) {
+                consume(Token.REST);
+                elements.push({
+                    type: Syntax.RestType,
+                    expression: parseTypeExpression()
+                });
+                break;
+            } else {
+                elements.push(parseTypeExpression());
+            }
+            if (token !== Token.RBRACK) {
+                expect(Token.COMMA);
+            }
+        }
+        expect(Token.RBRACK);
+        return {
+            type: Syntax.ArrayType,
+            elements: elements
+        };
+    }
+
+    function parseFieldName() {
+        var v = value;
+        if (token === Token.NAME || token === Token.STRING) {
+            next();
+            return v;
+        }
+
+        if (token === Token.NUMBER) {
+            consume(Token.NUMBER);
+            return String(v);
+        }
+
+        utility.throwError('unexpected token');
+    }
+
+    // FieldType :=
+    //     FieldName
+    //   | FieldName ':' TypeExpression
+    //
+    // FieldName :=
+    //     NameExpression
+    //   | StringLiteral
+    //   | NumberLiteral
+    //   | ReservedIdentifier
+    function parseFieldType() {
+        var key;
+
+        key = parseFieldName();
+        if (token === Token.COLON) {
+            consume(Token.COLON);
+            return {
+                type: Syntax.FieldType,
+                key: key,
+                value: parseTypeExpression()
+            };
+        }
+        return {
+            type: Syntax.FieldType,
+            key: key,
+            value: null
+        };
+    }
+
+    // RecordType := '{' FieldTypeList '}'
+    //
+    // FieldTypeList :=
+    //     <<empty>>
+    //   | FieldType
+    //   | FieldType ',' FieldTypeList
+    function parseRecordType() {
+        var fields;
+
+        consume(Token.LBRACE, 'RecordType should start with {');
+        fields = [];
+        if (token === Token.COMMA) {
+            consume(Token.COMMA);
+        } else {
+            while (token !== Token.RBRACE) {
+                fields.push(parseFieldType());
+                if (token !== Token.RBRACE) {
+                    expect(Token.COMMA);
+                }
+            }
+        }
+        expect(Token.RBRACE);
+        return {
+            type: Syntax.RecordType,
+            fields: fields
+        };
+    }
+
+    // NameExpression :=
+    //    Identifier
+    //  | TagIdentifier ':' Identifier
+    //
+    // Tag identifier is one of "module", "external" or "event"
+    // Identifier is the same as Token.NAME, including any dots, something like
+    // namespace.module.MyClass
+    function parseNameExpression() {
+        var name = value;
+        expect(Token.NAME);
+
+        if (token === Token.COLON && (
+                name === 'module' ||
+                name === 'external' ||
+                name === 'event')) {
+            consume(Token.COLON);
+            name += ':' + value;
+            expect(Token.NAME);
+        }
+
+        return {
+            type: Syntax.NameExpression,
+            name: name
+        };
+    }
+
+    // TypeExpressionList :=
+    //     TopLevelTypeExpression
+    //   | TopLevelTypeExpression ',' TypeExpressionList
+    function parseTypeExpressionList() {
+        var elements = [];
+
+        elements.push(parseTop());
+        while (token === Token.COMMA) {
+            consume(Token.COMMA);
+            elements.push(parseTop());
+        }
+        return elements;
+    }
+
+    // TypeName :=
+    //     NameExpression
+    //   | NameExpression TypeApplication
+    //
+    // TypeApplication :=
+    //     '.<' TypeExpressionList '>'
+    //   | '<' TypeExpressionList '>'   // this is extension of doctrine
+    function parseTypeName() {
+        var expr, applications;
+
+        expr = parseNameExpression();
+        if (token === Token.DOT_LT || token === Token.LT) {
+            next();
+            applications = parseTypeExpressionList();
+            expect(Token.GT);
+            return {
+                type: Syntax.TypeApplication,
+                expression: expr,
+                applications: applications
+            };
+        }
+        return expr;
+    }
+
+    // ResultType :=
+    //     <<empty>>
+    //   | ':' void
+    //   | ':' TypeExpression
+    //
+    // BNF is above
+    // but, we remove <<empty>> pattern, so token is always TypeToken::COLON
+    function parseResultType() {
+        consume(Token.COLON, 'ResultType should start with :');
+        if (token === Token.NAME && value === 'void') {
+            consume(Token.NAME);
+            return {
+                type: Syntax.VoidLiteral
+            };
+        }
+        return parseTypeExpression();
+    }
+
+    // ParametersType :=
+    //     RestParameterType
+    //   | NonRestParametersType
+    //   | NonRestParametersType ',' RestParameterType
+    //
+    // RestParameterType :=
+    //     '...'
+    //     '...' Identifier
+    //
+    // NonRestParametersType :=
+    //     ParameterType ',' NonRestParametersType
+    //   | ParameterType
+    //   | OptionalParametersType
+    //
+    // OptionalParametersType :=
+    //     OptionalParameterType
+    //   | OptionalParameterType, OptionalParametersType
+    //
+    // OptionalParameterType := ParameterType=
+    //
+    // ParameterType := TypeExpression | Identifier ':' TypeExpression
+    //
+    // Identifier is "new" or "this"
+    function parseParametersType() {
+        var params = [], optionalSequence = false, expr, rest = false;
+
+        while (token !== Token.RPAREN) {
+            if (token === Token.REST) {
+                // RestParameterType
+                consume(Token.REST);
+                rest = true;
+            }
+
+            expr = parseTypeExpression();
+            if (expr.type === Syntax.NameExpression && token === Token.COLON) {
+                // Identifier ':' TypeExpression
+                consume(Token.COLON);
+                expr = {
+                    type: Syntax.ParameterType,
+                    name: expr.name,
+                    expression: parseTypeExpression()
+                };
+            }
+            if (token === Token.EQUAL) {
+                consume(Token.EQUAL);
+                expr = {
+                    type: Syntax.OptionalType,
+                    expression: expr
+                };
+                optionalSequence = true;
+            } else {
+                if (optionalSequence) {
+                    utility.throwError('unexpected token');
+                }
+            }
+            if (rest) {
+                expr = {
+                    type: Syntax.RestType,
+                    expression: expr
+                };
+            }
+            params.push(expr);
+            if (token !== Token.RPAREN) {
+                expect(Token.COMMA);
+            }
+        }
+        return params;
+    }
+
+    // FunctionType := 'function' FunctionSignatureType
+    //
+    // FunctionSignatureType :=
+    //   | TypeParameters '(' ')' ResultType
+    //   | TypeParameters '(' ParametersType ')' ResultType
+    //   | TypeParameters '(' 'this' ':' TypeName ')' ResultType
+    //   | TypeParameters '(' 'this' ':' TypeName ',' ParametersType ')' ResultType
+    function parseFunctionType() {
+        var isNew, thisBinding, params, result, fnType;
+        utility.assert(token === Token.NAME && value === 'function', 'FunctionType should start with \'function\'');
+        consume(Token.NAME);
+
+        // Google Closure Compiler is not implementing TypeParameters.
+        // So we do not. if we don't get '(', we see it as error.
+        expect(Token.LPAREN);
+
+        isNew = false;
+        params = [];
+        thisBinding = null;
+        if (token !== Token.RPAREN) {
+            // ParametersType or 'this'
+            if (token === Token.NAME &&
+                    (value === 'this' || value === 'new')) {
+                // 'this' or 'new'
+                // 'new' is Closure Compiler extension
+                isNew = value === 'new';
+                consume(Token.NAME);
+                expect(Token.COLON);
+                thisBinding = parseTypeName();
+                if (token === Token.COMMA) {
+                    consume(Token.COMMA);
+                    params = parseParametersType();
+                }
+            } else {
+                params = parseParametersType();
+            }
+        }
+
+        expect(Token.RPAREN);
+
+        result = null;
+        if (token === Token.COLON) {
+            result = parseResultType();
+        }
+
+        fnType = {
+            type: Syntax.FunctionType,
+            params: params,
+            result: result
+        };
+        if (thisBinding) {
+            // avoid adding null 'new' and 'this' properties
+            fnType['this'] = thisBinding;
+            if (isNew) {
+                fnType['new'] = true;
+            }
+        }
+        return fnType;
+    }
+
+    // BasicTypeExpression :=
+    //     '*'
+    //   | 'null'
+    //   | 'undefined'
+    //   | TypeName
+    //   | FunctionType
+    //   | UnionType
+    //   | RecordType
+    //   | ArrayType
+    function parseBasicTypeExpression() {
+        var context;
+        switch (token) {
+        case Token.STAR:
+            consume(Token.STAR);
+            return {
+                type: Syntax.AllLiteral
+            };
+
+        case Token.LPAREN:
+            return parseUnionType();
+
+        case Token.LBRACK:
+            return parseArrayType();
+
+        case Token.LBRACE:
+            return parseRecordType();
+
+        case Token.NAME:
+            if (value === 'null') {
+                consume(Token.NAME);
+                return {
+                    type: Syntax.NullLiteral
+                };
+            }
+
+            if (value === 'undefined') {
+                consume(Token.NAME);
+                return {
+                    type: Syntax.UndefinedLiteral
+                };
+            }
+
+            context = Context.save();
+            if (value === 'function') {
+                try {
+                    return parseFunctionType();
+                } catch (e) {
+                    context.restore();
+                }
+            }
+
+            return parseTypeName();
+
+        default:
+            utility.throwError('unexpected token');
+        }
+    }
+
+    // TypeExpression :=
+    //     BasicTypeExpression
+    //   | '?' BasicTypeExpression
+    //   | '!' BasicTypeExpression
+    //   | BasicTypeExpression '?'
+    //   | BasicTypeExpression '!'
+    //   | '?'
+    //   | BasicTypeExpression '[]'
+    function parseTypeExpression() {
+        var expr;
+
+        if (token === Token.QUESTION) {
+            consume(Token.QUESTION);
+            if (token === Token.COMMA || token === Token.EQUAL || token === Token.RBRACE ||
+                    token === Token.RPAREN || token === Token.PIPE || token === Token.EOF ||
+                    token === Token.RBRACK || token === Token.GT) {
+                return {
+                    type: Syntax.NullableLiteral
+                };
+            }
+            return {
+                type: Syntax.NullableType,
+                expression: parseBasicTypeExpression(),
+                prefix: true
+            };
+        }
+
+        if (token === Token.BANG) {
+            consume(Token.BANG);
+            return {
+                type: Syntax.NonNullableType,
+                expression: parseBasicTypeExpression(),
+                prefix: true
+            };
+        }
+
+        expr = parseBasicTypeExpression();
+        if (token === Token.BANG) {
+            consume(Token.BANG);
+            return {
+                type: Syntax.NonNullableType,
+                expression: expr,
+                prefix: false
+            };
+        }
+
+        if (token === Token.QUESTION) {
+            consume(Token.QUESTION);
+            return {
+                type: Syntax.NullableType,
+                expression: expr,
+                prefix: false
+            };
+        }
+
+        if (token === Token.LBRACK) {
+            consume(Token.LBRACK);
+            expect(Token.RBRACK, 'expected an array-style type declaration (' + value + '[])');
+            return {
+                type: Syntax.TypeApplication,
+                expression: {
+                    type: Syntax.NameExpression,
+                    name: 'Array'
+                },
+                applications: [expr]
+            };
+        }
+
+        return expr;
+    }
+
+    // TopLevelTypeExpression :=
+    //      TypeExpression
+    //    | TypeUnionList
+    //
+    // This rule is Google Closure Compiler extension, not ES4
+    // like,
+    //   { number | string }
+    // If strict to ES4, we should write it as
+    //   { (number|string) }
+    function parseTop() {
+        var expr, elements;
+
+        expr = parseTypeExpression();
+        if (token !== Token.PIPE) {
+            return expr;
+        }
+
+        elements = [ expr ];
+        consume(Token.PIPE);
+        while (true) {
+            elements.push(parseTypeExpression());
+            if (token !== Token.PIPE) {
+                break;
+            }
+            consume(Token.PIPE);
+        }
+
+        return {
+            type: Syntax.UnionType,
+            elements: elements
+        };
+    }
+
+    function parseTopParamType() {
+        var expr;
+
+        if (token === Token.REST) {
+            consume(Token.REST);
+            return {
+                type: Syntax.RestType,
+                expression: parseTop()
+            };
+        }
+
+        expr = parseTop();
+        if (token === Token.EQUAL) {
+            consume(Token.EQUAL);
+            return {
+                type: Syntax.OptionalType,
+                expression: expr
+            };
+        }
+
+        return expr;
+    }
+
+    function parseType(src, opt) {
+        var expr;
+
+        source = src;
+        length = source.length;
+        index = 0;
+        previous = 0;
+
+        next();
+        expr = parseTop();
+
+        if (opt && opt.midstream) {
+            return {
+                expression: expr,
+                index: previous
+            };
+        }
+
+        if (token !== Token.EOF) {
+            utility.throwError('not reach to EOF');
+        }
+
+        return expr;
+    }
+
+    function parseParamType(src, opt) {
+        var expr;
+
+        source = src;
+        length = source.length;
+        index = 0;
+        previous = 0;
+
+        next();
+        expr = parseTopParamType();
+
+        if (opt && opt.midstream) {
+            return {
+                expression: expr,
+                index: previous
+            };
+        }
+
+        if (token !== Token.EOF) {
+            utility.throwError('not reach to EOF');
+        }
+
+        return expr;
+    }
+
+    function stringifyImpl(node, compact, topLevel) {
+        var result, i, iz;
+
+        switch (node.type) {
+        case Syntax.NullableLiteral:
+            result = '?';
+            break;
+
+        case Syntax.AllLiteral:
+            result = '*';
+            break;
+
+        case Syntax.NullLiteral:
+            result = 'null';
+            break;
+
+        case Syntax.UndefinedLiteral:
+            result = 'undefined';
+            break;
+
+        case Syntax.VoidLiteral:
+            result = 'void';
+            break;
+
+        case Syntax.UnionType:
+            if (!topLevel) {
+                result = '(';
+            } else {
+                result = '';
+            }
+
+            for (i = 0, iz = node.elements.length; i < iz; ++i) {
+                result += stringifyImpl(node.elements[i], compact);
+                if ((i + 1) !== iz) {
+                    result += '|';
+                }
+            }
+
+            if (!topLevel) {
+                result += ')';
+            }
+            break;
+
+        case Syntax.ArrayType:
+            result = '[';
+            for (i = 0, iz = node.elements.length; i < iz; ++i) {
+                result += stringifyImpl(node.elements[i], compact);
+                if ((i + 1) !== iz) {
+                    result += compact ? ',' : ', ';
+                }
+            }
+            result += ']';
+            break;
+
+        case Syntax.RecordType:
+            result = '{';
+            for (i = 0, iz = node.fields.length; i < iz; ++i) {
+                result += stringifyImpl(node.fields[i], compact);
+                if ((i + 1) !== iz) {
+                    result += compact ? ',' : ', ';
+                }
+            }
+            result += '}';
+            break;
+
+        case Syntax.FieldType:
+            if (node.value) {
+                result = node.key + (compact ? ':' : ': ') + stringifyImpl(node.value, compact);
+            } else {
+                result = node.key;
+            }
+            break;
+
+        case Syntax.FunctionType:
+            result = compact ? 'function(' : 'function (';
+
+            if (node['this']) {
+                if (node['new']) {
+                    result += (compact ? 'new:' : 'new: ');
+                } else {
+                    result += (compact ? 'this:' : 'this: ');
+                }
+
+                result += stringifyImpl(node['this'], compact);
+
+                if (node.params.length !== 0) {
+                    result += compact ? ',' : ', ';
+                }
+            }
+
+            for (i = 0, iz = node.params.length; i < iz; ++i) {
+                result += stringifyImpl(node.params[i], compact);
+                if ((i + 1) !== iz) {
+                    result += compact ? ',' : ', ';
+                }
+            }
+
+            result += ')';
+
+            if (node.result) {
+                result += (compact ? ':' : ': ') + stringifyImpl(node.result, compact);
+            }
+            break;
+
+        case Syntax.ParameterType:
+            result = node.name + (compact ? ':' : ': ') + stringifyImpl(node.expression, compact);
+            break;
+
+        case Syntax.RestType:
+            result = '...';
+            if (node.expression) {
+                result += stringifyImpl(node.expression, compact);
+            }
+            break;
+
+        case Syntax.NonNullableType:
+            if (node.prefix) {
+                result = '!' + stringifyImpl(node.expression, compact);
+            } else {
+                result = stringifyImpl(node.expression, compact) + '!';
+            }
+            break;
+
+        case Syntax.OptionalType:
+            result = stringifyImpl(node.expression, compact) + '=';
+            break;
+
+        case Syntax.NullableType:
+            if (node.prefix) {
+                result = '?' + stringifyImpl(node.expression, compact);
+            } else {
+                result = stringifyImpl(node.expression, compact) + '?';
+            }
+            break;
+
+        case Syntax.NameExpression:
+            result = node.name;
+            break;
+
+        case Syntax.TypeApplication:
+            result = stringifyImpl(node.expression, compact) + '.<';
+            for (i = 0, iz = node.applications.length; i < iz; ++i) {
+                result += stringifyImpl(node.applications[i], compact);
+                if ((i + 1) !== iz) {
+                    result += compact ? ',' : ', ';
+                }
+            }
+            result += '>';
+            break;
+
+        default:
+            utility.throwError('Unknown type ' + node.type);
+        }
+
+        return result;
+    }
+
+    function stringify(node, options) {
+        if (options == null) {
+            options = {};
+        }
+        return stringifyImpl(node, options.compact, options.topLevel);
+    }
+
+    exports.parseType = parseType;
+    exports.parseParamType = parseParamType;
+    exports.stringify = stringify;
+    exports.Syntax = Syntax;
+}());
+/* vim: set sw=4 ts=4 et tw=80 : */
+
+},{"./utility":11,"esutils":15}],11:[function(require,module,exports){
+/*
+  Copyright (C) 2014 Yusuke Suzuki <utatane.tea@gmail.com>
+
+  Redistribution and use in source and binary forms, with or without
+  modification, are permitted provided that the following conditions are met:
+
+    * Redistributions of source code must retain the above copyright
+      notice, this list of conditions and the following disclaimer.
+    * Redistributions in binary form must reproduce the above copyright
+      notice, this list of conditions and the following disclaimer in the
+      documentation and/or other materials provided with the distribution.
+
+  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+  AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+  IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+  ARE DISCLAIMED. IN NO EVENT SHALL <COPYRIGHT HOLDER> BE LIABLE FOR ANY
+  DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
+  (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+  LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+  ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+  (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF
+  THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+*/
+
+
+(function () {
+    'use strict';
+
+    var VERSION;
+
+    VERSION = require('../package.json').version;
+    exports.VERSION = VERSION;
+
+    function DoctrineError(message) {
+        this.name = 'DoctrineError';
+        this.message = message;
+    }
+    DoctrineError.prototype = (function () {
+        var Middle = function () { };
+        Middle.prototype = Error.prototype;
+        return new Middle();
+    }());
+    DoctrineError.prototype.constructor = DoctrineError;
+    exports.DoctrineError = DoctrineError;
+
+    function throwError(message) {
+        throw new DoctrineError(message);
+    }
+    exports.throwError = throwError;
+
+    exports.assert = require('assert');
+}());
+
+/* vim: set sw=4 ts=4 et tw=80 : */
+
+},{"../package.json":17,"assert":3}],12:[function(require,module,exports){
 /*
   Copyright (C) 2013 Yusuke Suzuki <utatane.tea@gmail.com>
 
@@ -11039,7 +11440,7 @@ function hasOwnProperty(obj, prop) {
 }());
 /* vim: set sw=4 ts=4 et tw=80 : */
 
-},{}],10:[function(require,module,exports){
+},{}],13:[function(require,module,exports){
 /*
   Copyright (C) 2013-2014 Yusuke Suzuki <utatane.tea@gmail.com>
   Copyright (C) 2014 Ivan Nikulin <ifaaan@gmail.com>
@@ -11142,7 +11543,7 @@ function hasOwnProperty(obj, prop) {
 }());
 /* vim: set sw=4 ts=4 et tw=80 : */
 
-},{}],11:[function(require,module,exports){
+},{}],14:[function(require,module,exports){
 /*
   Copyright (C) 2013 Yusuke Suzuki <utatane.tea@gmail.com>
 
@@ -11281,7 +11682,7 @@ function hasOwnProperty(obj, prop) {
 }());
 /* vim: set sw=4 ts=4 et tw=80 : */
 
-},{"./code":10}],12:[function(require,module,exports){
+},{"./code":13}],15:[function(require,module,exports){
 /*
   Copyright (C) 2013 Yusuke Suzuki <utatane.tea@gmail.com>
 
@@ -11316,15 +11717,23 @@ function hasOwnProperty(obj, prop) {
 }());
 /* vim: set sw=4 ts=4 et tw=80 : */
 
-},{"./ast":9,"./code":10,"./keyword":11}],13:[function(require,module,exports){
+},{"./ast":12,"./code":13,"./keyword":14}],16:[function(require,module,exports){
+module.exports = Array.isArray || function (arr) {
+  return Object.prototype.toString.call(arr) == '[object Array]';
+};
+
+},{}],17:[function(require,module,exports){
 module.exports={
   "name": "doctrine",
   "description": "JSDoc parser",
   "homepage": "http://github.com/Constellation/doctrine.html",
-  "main": "doctrine.js",
-  "version": "0.6.2",
+  "main": "lib/doctrine.js",
+  "version": "0.6.4",
   "engines": {
     "node": ">=0.10.0"
+  },
+  "directories": {
+    "lib": "./lib"
   },
   "maintainers": [
     {
@@ -11337,13 +11746,18 @@ module.exports={
     "url": "http://github.com/Constellation/doctrine.git"
   },
   "devDependencies": {
+    "coveralls": "^2.11.2",
     "gulp": "^3.8.10",
-    "gulp-eslint": "^0.1.8",
-    "gulp-istanbul": "^0.3.1",
+    "gulp-bump": "^0.1.13",
+    "gulp-eslint": "^0.5.0",
+    "gulp-filter": "^2.0.2",
+    "gulp-git": "^1.0.0",
+    "gulp-istanbul": "^0.6.0",
     "gulp-jshint": "^1.9.0",
-    "gulp-mocha": "^1.1.1",
+    "gulp-mocha": "^2.0.0",
+    "gulp-tag-version": "^1.2.1",
     "jshint-stylish": "^1.0.0",
-    "should": "^4.1.0"
+    "should": "^5.0.1"
   },
   "licenses": [
     {
@@ -11354,33 +11768,34 @@ module.exports={
   "scripts": {
     "test": "gulp",
     "unit-test": "gulp test",
-    "lint": "gulp lint"
+    "lint": "gulp lint",
+    "coveralls": "cat ./coverage/lcov.info | coveralls && rm -rf ./coverage"
   },
   "dependencies": {
-    "esutils": "^1.1.4"
+    "esutils": "^1.1.6",
+    "isarray": "0.0.1"
   },
-  "gitHead": "fc47c185f8003e932986460b7f08aa4535ed9a43",
+  "gitHead": "0835299b485ecdfa908d20628d6c8900144590ff",
   "bugs": {
     "url": "https://github.com/Constellation/doctrine/issues"
   },
-  "_id": "doctrine@0.6.2",
-  "_shasum": "a7f3ddbf8ce79d1cd230388ee21035e2fd4ce394",
-  "_from": "doctrine@latest",
-  "_npmVersion": "2.0.0-alpha-5",
+  "_id": "doctrine@0.6.4",
+  "_shasum": "81428491a942ef18b0492056eda3800eee57d61d",
+  "_from": "doctrine@>=0.6.2 <0.7.0",
+  "_npmVersion": "1.4.28",
   "_npmUser": {
     "name": "constellation",
     "email": "utatane.tea@gmail.com"
   },
   "dist": {
-    "shasum": "a7f3ddbf8ce79d1cd230388ee21035e2fd4ce394",
-    "tarball": "http://registry.npmjs.org/doctrine/-/doctrine-0.6.2.tgz"
+    "shasum": "81428491a942ef18b0492056eda3800eee57d61d",
+    "tarball": "http://registry.npmjs.org/doctrine/-/doctrine-0.6.4.tgz"
   },
-  "directories": {},
-  "_resolved": "https://registry.npmjs.org/doctrine/-/doctrine-0.6.2.tgz",
+  "_resolved": "https://registry.npmjs.org/doctrine/-/doctrine-0.6.4.tgz",
   "readme": "ERROR: No README data found!"
 }
 
-},{}],14:[function(require,module,exports){
+},{}],18:[function(require,module,exports){
 'use strict';
 
 var matchOperatorsRe = /[|\\{}()[\]^$+*?.]/g;
@@ -11393,7 +11808,7 @@ module.exports = function (str) {
 	return str.replace(matchOperatorsRe,  '\\$&');
 };
 
-},{}],15:[function(require,module,exports){
+},{}],19:[function(require,module,exports){
 /*
   Copyright (C) 2012-2014 Yusuke Suzuki <utatane.tea@gmail.com>
   Copyright (C) 2013 Alex Seville <hi@alexanderseville.com>
@@ -12845,12 +13260,12 @@ module.exports = function (str) {
 }());
 /* vim: set sw=4 ts=4 et tw=80 : */
 
-},{"./package.json":120,"es6-map":16,"es6-weak-map":71,"esrecurse":117,"estraverse":123,"util":7,"util-extend":119}],16:[function(require,module,exports){
+},{"./package.json":124,"es6-map":20,"es6-weak-map":75,"esrecurse":121,"estraverse":127,"util":8,"util-extend":123}],20:[function(require,module,exports){
 'use strict';
 
 module.exports = require('./is-implemented')() ? Map : require('./polyfill');
 
-},{"./is-implemented":17,"./polyfill":70}],17:[function(require,module,exports){
+},{"./is-implemented":21,"./polyfill":74}],21:[function(require,module,exports){
 'use strict';
 
 module.exports = function () {
@@ -12882,7 +13297,7 @@ module.exports = function () {
 	return true;
 };
 
-},{}],18:[function(require,module,exports){
+},{}],22:[function(require,module,exports){
 // Exports true if environment provides native `Map` implementation,
 // whatever that is.
 
@@ -12893,13 +13308,13 @@ module.exports = (function () {
 	return (Object.prototype.toString.call(Map.prototype) === '[object Map]');
 }());
 
-},{}],19:[function(require,module,exports){
+},{}],23:[function(require,module,exports){
 'use strict';
 
 module.exports = require('es5-ext/object/primitive-set')('key',
 	'value', 'key+value');
 
-},{"es5-ext/object/primitive-set":44}],20:[function(require,module,exports){
+},{"es5-ext/object/primitive-set":48}],24:[function(require,module,exports){
 'use strict';
 
 var setPrototypeOf    = require('es5-ext/object/set-prototype-of')
@@ -12939,7 +13354,7 @@ MapIterator.prototype = Object.create(Iterator.prototype, {
 Object.defineProperty(MapIterator.prototype, toStringTagSymbol,
 	d('c', 'Map Iterator'));
 
-},{"./iterator-kinds":19,"d":22,"es5-ext/object/set-prototype-of":45,"es6-iterator":57,"es6-symbol":66}],21:[function(require,module,exports){
+},{"./iterator-kinds":23,"d":26,"es5-ext/object/set-prototype-of":49,"es6-iterator":61,"es6-symbol":70}],25:[function(require,module,exports){
 'use strict';
 
 var copy       = require('es5-ext/object/copy')
@@ -12972,7 +13387,7 @@ module.exports = function (props/*, bindTo*/) {
 	});
 };
 
-},{"es5-ext/object/copy":34,"es5-ext/object/map":42,"es5-ext/object/valid-callable":48,"es5-ext/object/valid-value":49}],22:[function(require,module,exports){
+},{"es5-ext/object/copy":38,"es5-ext/object/map":46,"es5-ext/object/valid-callable":52,"es5-ext/object/valid-value":53}],26:[function(require,module,exports){
 'use strict';
 
 var assign        = require('es5-ext/object/assign')
@@ -13037,7 +13452,7 @@ d.gs = function (dscr, get, set/*, options*/) {
 	return !options ? desc : assign(normalizeOpts(options), desc);
 };
 
-},{"es5-ext/object/assign":31,"es5-ext/object/is-callable":37,"es5-ext/object/normalize-options":43,"es5-ext/string/#/contains":50}],23:[function(require,module,exports){
+},{"es5-ext/object/assign":35,"es5-ext/object/is-callable":41,"es5-ext/object/normalize-options":47,"es5-ext/string/#/contains":54}],27:[function(require,module,exports){
 // Inspired by Google Closure:
 // http://closure-library.googlecode.com/svn/docs/
 // closure_goog_array_array.js.html#goog.array.clear
@@ -13051,7 +13466,7 @@ module.exports = function () {
 	return this;
 };
 
-},{"../../object/valid-value":49}],24:[function(require,module,exports){
+},{"../../object/valid-value":53}],28:[function(require,module,exports){
 'use strict';
 
 var toPosInt = require('../../number/to-pos-integer')
@@ -13082,14 +13497,14 @@ module.exports = function (searchElement/*, fromIndex*/) {
 	return -1;
 };
 
-},{"../../number/to-pos-integer":29,"../../object/valid-value":49}],25:[function(require,module,exports){
+},{"../../number/to-pos-integer":33,"../../object/valid-value":53}],29:[function(require,module,exports){
 'use strict';
 
 module.exports = require('./is-implemented')()
 	? Math.sign
 	: require('./shim');
 
-},{"./is-implemented":26,"./shim":27}],26:[function(require,module,exports){
+},{"./is-implemented":30,"./shim":31}],30:[function(require,module,exports){
 'use strict';
 
 module.exports = function () {
@@ -13098,7 +13513,7 @@ module.exports = function () {
 	return ((sign(10) === 1) && (sign(-20) === -1));
 };
 
-},{}],27:[function(require,module,exports){
+},{}],31:[function(require,module,exports){
 'use strict';
 
 module.exports = function (value) {
@@ -13107,7 +13522,7 @@ module.exports = function (value) {
 	return (value > 0) ? 1 : -1;
 };
 
-},{}],28:[function(require,module,exports){
+},{}],32:[function(require,module,exports){
 'use strict';
 
 var sign = require('../math/sign')
@@ -13121,7 +13536,7 @@ module.exports = function (value) {
 	return sign(value) * floor(abs(value));
 };
 
-},{"../math/sign":25}],29:[function(require,module,exports){
+},{"../math/sign":29}],33:[function(require,module,exports){
 'use strict';
 
 var toInteger = require('./to-integer')
@@ -13130,7 +13545,7 @@ var toInteger = require('./to-integer')
 
 module.exports = function (value) { return max(0, toInteger(value)); };
 
-},{"./to-integer":28}],30:[function(require,module,exports){
+},{"./to-integer":32}],34:[function(require,module,exports){
 // Internal method, used by iteration functions.
 // Calls a function for each key-value pair found in object
 // Optionally takes compareFn to iterate object in specific order
@@ -13161,14 +13576,14 @@ module.exports = function (method, defVal) {
 	};
 };
 
-},{"./is-callable":37,"./valid-callable":48,"./valid-value":49}],31:[function(require,module,exports){
+},{"./is-callable":41,"./valid-callable":52,"./valid-value":53}],35:[function(require,module,exports){
 'use strict';
 
 module.exports = require('./is-implemented')()
 	? Object.assign
 	: require('./shim');
 
-},{"./is-implemented":32,"./shim":33}],32:[function(require,module,exports){
+},{"./is-implemented":36,"./shim":37}],36:[function(require,module,exports){
 'use strict';
 
 module.exports = function () {
@@ -13179,7 +13594,7 @@ module.exports = function () {
 	return (obj.foo + obj.bar + obj.trzy) === 'razdwatrzy';
 };
 
-},{}],33:[function(require,module,exports){
+},{}],37:[function(require,module,exports){
 'use strict';
 
 var keys  = require('../keys')
@@ -13203,7 +13618,7 @@ module.exports = function (dest, src/*, …srcn*/) {
 	return dest;
 };
 
-},{"../keys":39,"../valid-value":49}],34:[function(require,module,exports){
+},{"../keys":43,"../valid-value":53}],38:[function(require,module,exports){
 'use strict';
 
 var assign = require('./assign')
@@ -13215,7 +13630,7 @@ module.exports = function (obj) {
 	return assign({}, obj);
 };
 
-},{"./assign":31,"./valid-value":49}],35:[function(require,module,exports){
+},{"./assign":35,"./valid-value":53}],39:[function(require,module,exports){
 // Workaround for http://code.google.com/p/v8/issues/detail?id=2804
 
 'use strict';
@@ -13253,19 +13668,19 @@ module.exports = (function () {
 	};
 }());
 
-},{"./set-prototype-of/is-implemented":46,"./set-prototype-of/shim":47}],36:[function(require,module,exports){
+},{"./set-prototype-of/is-implemented":50,"./set-prototype-of/shim":51}],40:[function(require,module,exports){
 'use strict';
 
 module.exports = require('./_iterate')('forEach');
 
-},{"./_iterate":30}],37:[function(require,module,exports){
+},{"./_iterate":34}],41:[function(require,module,exports){
 // Deprecated
 
 'use strict';
 
 module.exports = function (obj) { return typeof obj === 'function'; };
 
-},{}],38:[function(require,module,exports){
+},{}],42:[function(require,module,exports){
 'use strict';
 
 var map = { function: true, object: true };
@@ -13274,14 +13689,14 @@ module.exports = function (x) {
 	return ((x != null) && map[typeof x]) || false;
 };
 
-},{}],39:[function(require,module,exports){
+},{}],43:[function(require,module,exports){
 'use strict';
 
 module.exports = require('./is-implemented')()
 	? Object.keys
 	: require('./shim');
 
-},{"./is-implemented":40,"./shim":41}],40:[function(require,module,exports){
+},{"./is-implemented":44,"./shim":45}],44:[function(require,module,exports){
 'use strict';
 
 module.exports = function () {
@@ -13291,7 +13706,7 @@ module.exports = function () {
 	} catch (e) { return false; }
 };
 
-},{}],41:[function(require,module,exports){
+},{}],45:[function(require,module,exports){
 'use strict';
 
 var keys = Object.keys;
@@ -13300,7 +13715,7 @@ module.exports = function (object) {
 	return keys(object == null ? object : Object(object));
 };
 
-},{}],42:[function(require,module,exports){
+},{}],46:[function(require,module,exports){
 'use strict';
 
 var callable = require('./valid-callable')
@@ -13317,7 +13732,7 @@ module.exports = function (obj, cb/*, thisArg*/) {
 	return o;
 };
 
-},{"./for-each":36,"./valid-callable":48}],43:[function(require,module,exports){
+},{"./for-each":40,"./valid-callable":52}],47:[function(require,module,exports){
 'use strict';
 
 var forEach = Array.prototype.forEach, create = Object.create;
@@ -13336,7 +13751,7 @@ module.exports = function (options/*, …options*/) {
 	return result;
 };
 
-},{}],44:[function(require,module,exports){
+},{}],48:[function(require,module,exports){
 'use strict';
 
 var forEach = Array.prototype.forEach, create = Object.create;
@@ -13347,14 +13762,14 @@ module.exports = function (arg/*, …args*/) {
 	return set;
 };
 
-},{}],45:[function(require,module,exports){
+},{}],49:[function(require,module,exports){
 'use strict';
 
 module.exports = require('./is-implemented')()
 	? Object.setPrototypeOf
 	: require('./shim');
 
-},{"./is-implemented":46,"./shim":47}],46:[function(require,module,exports){
+},{"./is-implemented":50,"./shim":51}],50:[function(require,module,exports){
 'use strict';
 
 var create = Object.create, getPrototypeOf = Object.getPrototypeOf
@@ -13367,7 +13782,7 @@ module.exports = function (/*customCreate*/) {
 	return getPrototypeOf(setPrototypeOf(customCreate(null), x)) === x;
 };
 
-},{}],47:[function(require,module,exports){
+},{}],51:[function(require,module,exports){
 // Big thanks to @WebReflection for sorting this out
 // https://gist.github.com/WebReflection/5593554
 
@@ -13442,7 +13857,7 @@ module.exports = (function (status) {
 
 require('../create');
 
-},{"../create":35,"../is-object":38,"../valid-value":49}],48:[function(require,module,exports){
+},{"../create":39,"../is-object":42,"../valid-value":53}],52:[function(require,module,exports){
 'use strict';
 
 module.exports = function (fn) {
@@ -13450,7 +13865,7 @@ module.exports = function (fn) {
 	return fn;
 };
 
-},{}],49:[function(require,module,exports){
+},{}],53:[function(require,module,exports){
 'use strict';
 
 module.exports = function (value) {
@@ -13458,14 +13873,14 @@ module.exports = function (value) {
 	return value;
 };
 
-},{}],50:[function(require,module,exports){
+},{}],54:[function(require,module,exports){
 'use strict';
 
 module.exports = require('./is-implemented')()
 	? String.prototype.contains
 	: require('./shim');
 
-},{"./is-implemented":51,"./shim":52}],51:[function(require,module,exports){
+},{"./is-implemented":55,"./shim":56}],55:[function(require,module,exports){
 'use strict';
 
 var str = 'razdwatrzy';
@@ -13475,7 +13890,7 @@ module.exports = function () {
 	return ((str.contains('dwa') === true) && (str.contains('foo') === false));
 };
 
-},{}],52:[function(require,module,exports){
+},{}],56:[function(require,module,exports){
 'use strict';
 
 var indexOf = String.prototype.indexOf;
@@ -13484,7 +13899,7 @@ module.exports = function (searchString/*, position*/) {
 	return indexOf.call(this, searchString, arguments[1]) > -1;
 };
 
-},{}],53:[function(require,module,exports){
+},{}],57:[function(require,module,exports){
 'use strict';
 
 var toString = Object.prototype.toString
@@ -13496,7 +13911,7 @@ module.exports = function (x) {
 		((x instanceof String) || (toString.call(x) === id))) || false;
 };
 
-},{}],54:[function(require,module,exports){
+},{}],58:[function(require,module,exports){
 'use strict';
 
 var setPrototypeOf = require('es5-ext/object/set-prototype-of')
@@ -13528,7 +13943,7 @@ ArrayIterator.prototype = Object.create(Iterator.prototype, {
 	toString: d(function () { return '[object Array Iterator]'; })
 });
 
-},{"./":57,"d":22,"es5-ext/object/set-prototype-of":45,"es5-ext/string/#/contains":50}],55:[function(require,module,exports){
+},{"./":61,"d":26,"es5-ext/object/set-prototype-of":49,"es5-ext/string/#/contains":54}],59:[function(require,module,exports){
 'use strict';
 
 var callable = require('es5-ext/object/valid-callable')
@@ -13574,7 +13989,7 @@ module.exports = function (iterable, cb/*, thisArg*/) {
 	}
 };
 
-},{"./get":56,"es5-ext/object/valid-callable":48,"es5-ext/string/is-string":53}],56:[function(require,module,exports){
+},{"./get":60,"es5-ext/object/valid-callable":52,"es5-ext/string/is-string":57}],60:[function(require,module,exports){
 'use strict';
 
 var isString = require('es5-ext/string/is-string')
@@ -13589,7 +14004,7 @@ module.exports = function (obj) {
 	return new ArrayIterator(obj);
 };
 
-},{"./array":54,"./string":64,"./valid-iterable":65,"es5-ext/string/is-string":53,"es6-symbol":59}],57:[function(require,module,exports){
+},{"./array":58,"./string":68,"./valid-iterable":69,"es5-ext/string/is-string":57,"es6-symbol":63}],61:[function(require,module,exports){
 'use strict';
 
 var clear    = require('es5-ext/array/#/clear')
@@ -13681,7 +14096,7 @@ defineProperty(Iterator.prototype, Symbol.iterator, d(function () {
 }));
 defineProperty(Iterator.prototype, Symbol.toStringTag, d('', 'Iterator'));
 
-},{"d":22,"d/auto-bind":21,"es5-ext/array/#/clear":23,"es5-ext/object/assign":31,"es5-ext/object/valid-callable":48,"es5-ext/object/valid-value":49,"es6-symbol":59}],58:[function(require,module,exports){
+},{"d":26,"d/auto-bind":25,"es5-ext/array/#/clear":27,"es5-ext/object/assign":35,"es5-ext/object/valid-callable":52,"es5-ext/object/valid-value":53,"es6-symbol":63}],62:[function(require,module,exports){
 'use strict';
 
 var isString       = require('es5-ext/string/is-string')
@@ -13696,12 +14111,12 @@ module.exports = function (value) {
 	return (typeof value[iteratorSymbol] === 'function');
 };
 
-},{"es5-ext/string/is-string":53,"es6-symbol":59}],59:[function(require,module,exports){
+},{"es5-ext/string/is-string":57,"es6-symbol":63}],63:[function(require,module,exports){
 'use strict';
 
 module.exports = require('./is-implemented')() ? Symbol : require('./polyfill');
 
-},{"./is-implemented":60,"./polyfill":62}],60:[function(require,module,exports){
+},{"./is-implemented":64,"./polyfill":66}],64:[function(require,module,exports){
 'use strict';
 
 module.exports = function () {
@@ -13721,14 +14136,14 @@ module.exports = function () {
 	return true;
 };
 
-},{}],61:[function(require,module,exports){
+},{}],65:[function(require,module,exports){
 'use strict';
 
 module.exports = function (x) {
 	return (x && ((typeof x === 'symbol') || (x['@@toStringTag'] === 'Symbol'))) || false;
 };
 
-},{}],62:[function(require,module,exports){
+},{}],66:[function(require,module,exports){
 'use strict';
 
 var d              = require('d')
@@ -13807,7 +14222,7 @@ defineProperty(HiddenSymbol.prototype, Symbol.toPrimitive,
 defineProperty(HiddenSymbol.prototype, Symbol.toStringTag,
 	d('c', Symbol.prototype[Symbol.toStringTag]));
 
-},{"./validate-symbol":63,"d":22}],63:[function(require,module,exports){
+},{"./validate-symbol":67,"d":26}],67:[function(require,module,exports){
 'use strict';
 
 var isSymbol = require('./is-symbol');
@@ -13817,7 +14232,7 @@ module.exports = function (value) {
 	return value;
 };
 
-},{"./is-symbol":61}],64:[function(require,module,exports){
+},{"./is-symbol":65}],68:[function(require,module,exports){
 // Thanks @mathiasbynens
 // http://mathiasbynens.be/notes/javascript-unicode#iterating-over-symbols
 
@@ -13856,7 +14271,7 @@ StringIterator.prototype = Object.create(Iterator.prototype, {
 	toString: d(function () { return '[object String Iterator]'; })
 });
 
-},{"./":57,"d":22,"es5-ext/object/set-prototype-of":45}],65:[function(require,module,exports){
+},{"./":61,"d":26,"es5-ext/object/set-prototype-of":49}],69:[function(require,module,exports){
 'use strict';
 
 var isIterable = require('./is-iterable');
@@ -13866,9 +14281,9 @@ module.exports = function (value) {
 	return value;
 };
 
-},{"./is-iterable":58}],66:[function(require,module,exports){
-arguments[4][59][0].apply(exports,arguments)
-},{"./is-implemented":67,"./polyfill":68,"dup":59}],67:[function(require,module,exports){
+},{"./is-iterable":62}],70:[function(require,module,exports){
+arguments[4][63][0].apply(exports,arguments)
+},{"./is-implemented":71,"./polyfill":72,"dup":63}],71:[function(require,module,exports){
 'use strict';
 
 module.exports = function () {
@@ -13889,7 +14304,7 @@ module.exports = function () {
 	return true;
 };
 
-},{}],68:[function(require,module,exports){
+},{}],72:[function(require,module,exports){
 'use strict';
 
 var d = require('d')
@@ -13944,7 +14359,7 @@ Object.defineProperty(Symbol.prototype, Symbol.toPrimitive, d('',
 	}));
 Object.defineProperty(Symbol.prototype, Symbol.toStringTag, d('c', 'Symbol'));
 
-},{"d":22}],69:[function(require,module,exports){
+},{"d":26}],73:[function(require,module,exports){
 'use strict';
 
 var d        = require('d')
@@ -14078,7 +14493,7 @@ module.exports = exports = function (o) {
 };
 exports.methods = methods;
 
-},{"d":22,"es5-ext/object/valid-callable":48}],70:[function(require,module,exports){
+},{"d":26,"es5-ext/object/valid-callable":52}],74:[function(require,module,exports){
 'use strict';
 
 var clear          = require('es5-ext/array/#/clear')
@@ -14180,13 +14595,13 @@ Object.defineProperty(MapPoly.prototype, Symbol.iterator, d(function () {
 }));
 Object.defineProperty(MapPoly.prototype, Symbol.toStringTag, d('c', 'Map'));
 
-},{"./is-native-implemented":18,"./lib/iterator":20,"d":22,"es5-ext/array/#/clear":23,"es5-ext/array/#/e-index-of":24,"es5-ext/object/set-prototype-of":45,"es5-ext/object/valid-callable":48,"es5-ext/object/valid-value":49,"es6-iterator/for-of":55,"es6-iterator/valid-iterable":65,"es6-symbol":66,"event-emitter":69}],71:[function(require,module,exports){
+},{"./is-native-implemented":22,"./lib/iterator":24,"d":26,"es5-ext/array/#/clear":27,"es5-ext/array/#/e-index-of":28,"es5-ext/object/set-prototype-of":49,"es5-ext/object/valid-callable":52,"es5-ext/object/valid-value":53,"es6-iterator/for-of":59,"es6-iterator/valid-iterable":69,"es6-symbol":70,"event-emitter":73}],75:[function(require,module,exports){
 'use strict';
 
 module.exports = require('./is-implemented')() ?
 		WeakMap : require('./polyfill');
 
-},{"./is-implemented":72,"./polyfill":116}],72:[function(require,module,exports){
+},{"./is-implemented":76,"./polyfill":120}],76:[function(require,module,exports){
 'use strict';
 
 module.exports = function () {
@@ -14202,7 +14617,7 @@ module.exports = function () {
 	return true;
 };
 
-},{}],73:[function(require,module,exports){
+},{}],77:[function(require,module,exports){
 // Exports true if environment provides native `WeakMap` implementation,
 // whatever that is.
 
@@ -14214,49 +14629,49 @@ module.exports = (function () {
 			'[object WeakMap]');
 }());
 
-},{}],74:[function(require,module,exports){
-arguments[4][21][0].apply(exports,arguments)
-},{"dup":21,"es5-ext/object/copy":81,"es5-ext/object/map":89,"es5-ext/object/valid-callable":94,"es5-ext/object/valid-value":96}],75:[function(require,module,exports){
-arguments[4][22][0].apply(exports,arguments)
-},{"dup":22,"es5-ext/object/assign":78,"es5-ext/object/is-callable":84,"es5-ext/object/normalize-options":90,"es5-ext/string/#/contains":97}],76:[function(require,module,exports){
-arguments[4][23][0].apply(exports,arguments)
-},{"../../object/valid-value":96,"dup":23}],77:[function(require,module,exports){
-arguments[4][30][0].apply(exports,arguments)
-},{"./is-callable":84,"./valid-callable":94,"./valid-value":96,"dup":30}],78:[function(require,module,exports){
-arguments[4][31][0].apply(exports,arguments)
-},{"./is-implemented":79,"./shim":80,"dup":31}],79:[function(require,module,exports){
-arguments[4][32][0].apply(exports,arguments)
-},{"dup":32}],80:[function(require,module,exports){
-arguments[4][33][0].apply(exports,arguments)
-},{"../keys":86,"../valid-value":96,"dup":33}],81:[function(require,module,exports){
+},{}],78:[function(require,module,exports){
+arguments[4][25][0].apply(exports,arguments)
+},{"dup":25,"es5-ext/object/copy":85,"es5-ext/object/map":93,"es5-ext/object/valid-callable":98,"es5-ext/object/valid-value":100}],79:[function(require,module,exports){
+arguments[4][26][0].apply(exports,arguments)
+},{"dup":26,"es5-ext/object/assign":82,"es5-ext/object/is-callable":88,"es5-ext/object/normalize-options":94,"es5-ext/string/#/contains":101}],80:[function(require,module,exports){
+arguments[4][27][0].apply(exports,arguments)
+},{"../../object/valid-value":100,"dup":27}],81:[function(require,module,exports){
 arguments[4][34][0].apply(exports,arguments)
-},{"./assign":78,"./valid-value":96,"dup":34}],82:[function(require,module,exports){
+},{"./is-callable":88,"./valid-callable":98,"./valid-value":100,"dup":34}],82:[function(require,module,exports){
 arguments[4][35][0].apply(exports,arguments)
-},{"./set-prototype-of/is-implemented":92,"./set-prototype-of/shim":93,"dup":35}],83:[function(require,module,exports){
+},{"./is-implemented":83,"./shim":84,"dup":35}],83:[function(require,module,exports){
 arguments[4][36][0].apply(exports,arguments)
-},{"./_iterate":77,"dup":36}],84:[function(require,module,exports){
+},{"dup":36}],84:[function(require,module,exports){
 arguments[4][37][0].apply(exports,arguments)
-},{"dup":37}],85:[function(require,module,exports){
+},{"../keys":90,"../valid-value":100,"dup":37}],85:[function(require,module,exports){
 arguments[4][38][0].apply(exports,arguments)
-},{"dup":38}],86:[function(require,module,exports){
+},{"./assign":82,"./valid-value":100,"dup":38}],86:[function(require,module,exports){
 arguments[4][39][0].apply(exports,arguments)
-},{"./is-implemented":87,"./shim":88,"dup":39}],87:[function(require,module,exports){
+},{"./set-prototype-of/is-implemented":96,"./set-prototype-of/shim":97,"dup":39}],87:[function(require,module,exports){
 arguments[4][40][0].apply(exports,arguments)
-},{"dup":40}],88:[function(require,module,exports){
+},{"./_iterate":81,"dup":40}],88:[function(require,module,exports){
 arguments[4][41][0].apply(exports,arguments)
 },{"dup":41}],89:[function(require,module,exports){
 arguments[4][42][0].apply(exports,arguments)
-},{"./for-each":83,"./valid-callable":94,"dup":42}],90:[function(require,module,exports){
+},{"dup":42}],90:[function(require,module,exports){
 arguments[4][43][0].apply(exports,arguments)
-},{"dup":43}],91:[function(require,module,exports){
+},{"./is-implemented":91,"./shim":92,"dup":43}],91:[function(require,module,exports){
+arguments[4][44][0].apply(exports,arguments)
+},{"dup":44}],92:[function(require,module,exports){
 arguments[4][45][0].apply(exports,arguments)
-},{"./is-implemented":92,"./shim":93,"dup":45}],92:[function(require,module,exports){
+},{"dup":45}],93:[function(require,module,exports){
 arguments[4][46][0].apply(exports,arguments)
-},{"dup":46}],93:[function(require,module,exports){
+},{"./for-each":87,"./valid-callable":98,"dup":46}],94:[function(require,module,exports){
 arguments[4][47][0].apply(exports,arguments)
-},{"../create":82,"../is-object":85,"../valid-value":96,"dup":47}],94:[function(require,module,exports){
-arguments[4][48][0].apply(exports,arguments)
-},{"dup":48}],95:[function(require,module,exports){
+},{"dup":47}],95:[function(require,module,exports){
+arguments[4][49][0].apply(exports,arguments)
+},{"./is-implemented":96,"./shim":97,"dup":49}],96:[function(require,module,exports){
+arguments[4][50][0].apply(exports,arguments)
+},{"dup":50}],97:[function(require,module,exports){
+arguments[4][51][0].apply(exports,arguments)
+},{"../create":86,"../is-object":89,"../valid-value":100,"dup":51}],98:[function(require,module,exports){
+arguments[4][52][0].apply(exports,arguments)
+},{"dup":52}],99:[function(require,module,exports){
 'use strict';
 
 var isObject = require('./is-object');
@@ -14266,47 +14681,47 @@ module.exports = function (value) {
 	return value;
 };
 
-},{"./is-object":85}],96:[function(require,module,exports){
-arguments[4][49][0].apply(exports,arguments)
-},{"dup":49}],97:[function(require,module,exports){
-arguments[4][50][0].apply(exports,arguments)
-},{"./is-implemented":98,"./shim":99,"dup":50}],98:[function(require,module,exports){
-arguments[4][51][0].apply(exports,arguments)
-},{"dup":51}],99:[function(require,module,exports){
-arguments[4][52][0].apply(exports,arguments)
-},{"dup":52}],100:[function(require,module,exports){
+},{"./is-object":89}],100:[function(require,module,exports){
 arguments[4][53][0].apply(exports,arguments)
 },{"dup":53}],101:[function(require,module,exports){
 arguments[4][54][0].apply(exports,arguments)
-},{"./":104,"d":75,"dup":54,"es5-ext/object/set-prototype-of":91,"es5-ext/string/#/contains":97}],102:[function(require,module,exports){
+},{"./is-implemented":102,"./shim":103,"dup":54}],102:[function(require,module,exports){
 arguments[4][55][0].apply(exports,arguments)
-},{"./get":103,"dup":55,"es5-ext/object/valid-callable":94,"es5-ext/string/is-string":100}],103:[function(require,module,exports){
+},{"dup":55}],103:[function(require,module,exports){
 arguments[4][56][0].apply(exports,arguments)
-},{"./array":101,"./string":111,"./valid-iterable":112,"dup":56,"es5-ext/string/is-string":100,"es6-symbol":106}],104:[function(require,module,exports){
+},{"dup":56}],104:[function(require,module,exports){
 arguments[4][57][0].apply(exports,arguments)
-},{"d":75,"d/auto-bind":74,"dup":57,"es5-ext/array/#/clear":76,"es5-ext/object/assign":78,"es5-ext/object/valid-callable":94,"es5-ext/object/valid-value":96,"es6-symbol":106}],105:[function(require,module,exports){
+},{"dup":57}],105:[function(require,module,exports){
 arguments[4][58][0].apply(exports,arguments)
-},{"dup":58,"es5-ext/string/is-string":100,"es6-symbol":106}],106:[function(require,module,exports){
+},{"./":108,"d":79,"dup":58,"es5-ext/object/set-prototype-of":95,"es5-ext/string/#/contains":101}],106:[function(require,module,exports){
 arguments[4][59][0].apply(exports,arguments)
-},{"./is-implemented":107,"./polyfill":109,"dup":59}],107:[function(require,module,exports){
+},{"./get":107,"dup":59,"es5-ext/object/valid-callable":98,"es5-ext/string/is-string":104}],107:[function(require,module,exports){
 arguments[4][60][0].apply(exports,arguments)
-},{"dup":60}],108:[function(require,module,exports){
+},{"./array":105,"./string":115,"./valid-iterable":116,"dup":60,"es5-ext/string/is-string":104,"es6-symbol":110}],108:[function(require,module,exports){
 arguments[4][61][0].apply(exports,arguments)
-},{"dup":61}],109:[function(require,module,exports){
+},{"d":79,"d/auto-bind":78,"dup":61,"es5-ext/array/#/clear":80,"es5-ext/object/assign":82,"es5-ext/object/valid-callable":98,"es5-ext/object/valid-value":100,"es6-symbol":110}],109:[function(require,module,exports){
 arguments[4][62][0].apply(exports,arguments)
-},{"./validate-symbol":110,"d":75,"dup":62}],110:[function(require,module,exports){
+},{"dup":62,"es5-ext/string/is-string":104,"es6-symbol":110}],110:[function(require,module,exports){
 arguments[4][63][0].apply(exports,arguments)
-},{"./is-symbol":108,"dup":63}],111:[function(require,module,exports){
+},{"./is-implemented":111,"./polyfill":113,"dup":63}],111:[function(require,module,exports){
 arguments[4][64][0].apply(exports,arguments)
-},{"./":104,"d":75,"dup":64,"es5-ext/object/set-prototype-of":91}],112:[function(require,module,exports){
+},{"dup":64}],112:[function(require,module,exports){
 arguments[4][65][0].apply(exports,arguments)
-},{"./is-iterable":105,"dup":65}],113:[function(require,module,exports){
-arguments[4][59][0].apply(exports,arguments)
-},{"./is-implemented":114,"./polyfill":115,"dup":59}],114:[function(require,module,exports){
+},{"dup":65}],113:[function(require,module,exports){
+arguments[4][66][0].apply(exports,arguments)
+},{"./validate-symbol":114,"d":79,"dup":66}],114:[function(require,module,exports){
 arguments[4][67][0].apply(exports,arguments)
-},{"dup":67}],115:[function(require,module,exports){
+},{"./is-symbol":112,"dup":67}],115:[function(require,module,exports){
 arguments[4][68][0].apply(exports,arguments)
-},{"d":75,"dup":68}],116:[function(require,module,exports){
+},{"./":108,"d":79,"dup":68,"es5-ext/object/set-prototype-of":95}],116:[function(require,module,exports){
+arguments[4][69][0].apply(exports,arguments)
+},{"./is-iterable":109,"dup":69}],117:[function(require,module,exports){
+arguments[4][63][0].apply(exports,arguments)
+},{"./is-implemented":118,"./polyfill":119,"dup":63}],118:[function(require,module,exports){
+arguments[4][71][0].apply(exports,arguments)
+},{"dup":71}],119:[function(require,module,exports){
+arguments[4][72][0].apply(exports,arguments)
+},{"d":79,"dup":72}],120:[function(require,module,exports){
 'use strict';
 
 var setPrototypeOf    = require('es5-ext/object/set-prototype-of')
@@ -14383,7 +14798,7 @@ Object.defineProperties(WeakMapPoly.prototype, {
 });
 defineProperty(WeakMapPoly.prototype, toStringTagSymbol, d('c', 'WeakMap'));
 
-},{"./is-native-implemented":73,"d":75,"es5-ext/object/set-prototype-of":91,"es5-ext/object/valid-object":95,"es5-ext/object/valid-value":96,"es6-iterator/for-of":102,"es6-iterator/get":103,"es6-symbol":113}],117:[function(require,module,exports){
+},{"./is-native-implemented":77,"d":79,"es5-ext/object/set-prototype-of":95,"es5-ext/object/valid-object":99,"es5-ext/object/valid-value":100,"es6-iterator/for-of":106,"es6-iterator/get":107,"es6-symbol":117}],121:[function(require,module,exports){
 /*
   Copyright (C) 2014 Yusuke Suzuki <utatane.tea@gmail.com>
 
@@ -14507,7 +14922,7 @@ defineProperty(WeakMapPoly.prototype, toStringTagSymbol, d('c', 'WeakMap'));
 }());
 /* vim: set sw=4 ts=4 et tw=80 : */
 
-},{"./package.json":118,"estraverse":123}],118:[function(require,module,exports){
+},{"./package.json":122,"estraverse":127}],122:[function(require,module,exports){
 module.exports={
   "name": "esrecurse",
   "description": "ECMAScript scope analyzer",
@@ -14557,7 +14972,7 @@ module.exports={
   },
   "_id": "esrecurse@1.2.0",
   "_shasum": "25e3b3ab76ad8a1da2d38e9393fd76b8456a706f",
-  "_from": "esrecurse@^1.2.0",
+  "_from": "esrecurse@>=1.2.0 <2.0.0",
   "_npmVersion": "2.0.0-alpha-5",
   "_npmUser": {
     "name": "constellation",
@@ -14572,7 +14987,7 @@ module.exports={
   "readme": "ERROR: No README data found!"
 }
 
-},{}],119:[function(require,module,exports){
+},{}],123:[function(require,module,exports){
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -14607,7 +15022,7 @@ function extend(origin, add) {
   return origin;
 }
 
-},{}],120:[function(require,module,exports){
+},{}],124:[function(require,module,exports){
 module.exports={
   "name": "escope",
   "description": "ECMAScript scope analyzer",
@@ -14675,11 +15090,10 @@ module.exports={
     "tarball": "http://registry.npmjs.org/escope/-/escope-2.0.6.tgz"
   },
   "directories": {},
-  "_resolved": "https://registry.npmjs.org/escope/-/escope-2.0.6.tgz",
-  "readme": "ERROR: No README data found!"
+  "_resolved": "https://registry.npmjs.org/escope/-/escope-2.0.6.tgz"
 }
 
-},{}],121:[function(require,module,exports){
+},{}],125:[function(require,module,exports){
 var estraverse = module.exports = require('estraverse');
 
 var VisitorKeys = require('./keys');
@@ -14693,7 +15107,7 @@ for (var nodeType in VisitorKeys) {
 		estraverse.VisitorKeys[nodeType] = keys;
 	}
 }
-},{"./keys":122,"estraverse":123}],122:[function(require,module,exports){
+},{"./keys":126,"estraverse":127}],126:[function(require,module,exports){
 var unprefixedKeys = {
 	Identifier: [],
 	NamespacedName: ['namespace', 'name'],
@@ -14751,7 +15165,7 @@ for (var key in unprefixedKeys) {
 for (var key in flowKeys) {
 	exports[key] = flowKeys[key];
 }
-},{}],123:[function(require,module,exports){
+},{}],127:[function(require,module,exports){
 /*
   Copyright (C) 2012-2013 Yusuke Suzuki <utatane.tea@gmail.com>
   Copyright (C) 2012 Ariya Hidayat <ariya.hidayat@gmail.com>
@@ -15592,7 +16006,7 @@ for (var key in flowKeys) {
 }(exports));
 /* vim: set sw=4 ts=4 et tw=80 : */
 
-},{"./package.json":124}],124:[function(require,module,exports){
+},{"./package.json":128}],128:[function(require,module,exports){
 module.exports={
   "name": "estraverse",
   "description": "ECMAScript JS AST traversal functions",
@@ -15641,7 +16055,7 @@ module.exports={
   },
   "_id": "estraverse@2.0.0",
   "_shasum": "5ae46963243600206674ccb24a09e16674fcdca1",
-  "_from": "estraverse@latest",
+  "_from": "estraverse@>=2.0.0 <3.0.0",
   "_npmVersion": "2.0.0-alpha-5",
   "_npmUser": {
     "name": "constellation",
@@ -15652,11 +16066,10 @@ module.exports={
     "tarball": "http://registry.npmjs.org/estraverse/-/estraverse-2.0.0.tgz"
   },
   "directories": {},
-  "_resolved": "https://registry.npmjs.org/estraverse/-/estraverse-2.0.0.tgz",
-  "readme": "ERROR: No README data found!"
+  "_resolved": "https://registry.npmjs.org/estraverse/-/estraverse-2.0.0.tgz"
 }
 
-},{}],125:[function(require,module,exports){
+},{}],129:[function(require,module,exports){
 module.exports={
 	"builtin": {
 		"Array": false,
@@ -16322,8 +16735,8 @@ module.exports={
 		"Try": false
 	},
 	"meteor": {
-		"_": false,
 		"$": false,
+		"_": false,
 		"Accounts": false,
 		"App": false,
 		"Assets": false,
@@ -16359,13 +16772,41 @@ module.exports={
 		"Utils": false,
 		"WebApp": false,
 		"WebAppInternals": false
+	},
+	"mongo": {
+		"_isWindows": false,
+		"_rand": false,
+		"BulkWriteResult": false,
+		"cat": false,
+		"cd": false,
+		"connect": false,
+		"db": false,
+		"getHostName": false,
+		"getMemInfo": false,
+		"hostname": false,
+		"listFiles": false,
+		"load": false,
+		"ls": false,
+		"md5sumFile": false,
+		"mkdir": false,
+		"Mongo": false,
+		"ObjectId": false,
+		"PlanCache": false,
+		"pwd": false,
+		"quit": false,
+		"removeFile": false,
+		"rs": false,
+		"sh": false,
+		"UUID": false,
+		"version": false,
+		"WriteResult": false
 	}
 }
 
-},{}],126:[function(require,module,exports){
+},{}],130:[function(require,module,exports){
 module.exports = require('./globals.json');
 
-},{"./globals.json":125}],127:[function(require,module,exports){
+},{"./globals.json":129}],131:[function(require,module,exports){
 'use strict';
 
 function ToObject(val) {
@@ -16393,7 +16834,7 @@ module.exports = Object.assign || function (target, source) {
 	return to;
 };
 
-},{}],128:[function(require,module,exports){
+},{}],132:[function(require,module,exports){
 /**
  * @fileoverview Main ESLint object.
  * @author Nicholas C. Zakas
@@ -17459,7 +17900,7 @@ module.exports = (function() {
 
 }());
 
-},{"../conf/environments":1,"../conf/eslint.json":2,"./rule-context":130,"./rules":131,"./timing":286,"./token-store.js":287,"./util":288,"escape-string-regexp":14,"escope":15,"estraverse-fb":121,"events":3,"object-assign":127}],129:[function(require,module,exports){
+},{"../conf/environments":1,"../conf/eslint.json":2,"./rule-context":134,"./rules":135,"./timing":290,"./token-store.js":291,"./util":292,"escape-string-regexp":18,"escope":19,"estraverse-fb":125,"events":4,"object-assign":131}],133:[function(require,module,exports){
 module.exports = function() {
     var rules = Object.create(null);
     rules["block-scoped-var"] = require("./rules/block-scoped-var");
@@ -17619,7 +18060,7 @@ module.exports = function() {
 
     return rules;
 };
-},{"./rules/block-scoped-var":132,"./rules/brace-style":133,"./rules/camelcase":134,"./rules/comma-dangle":135,"./rules/comma-spacing":136,"./rules/comma-style":137,"./rules/complexity":138,"./rules/consistent-return":139,"./rules/consistent-this":140,"./rules/curly":141,"./rules/default-case":142,"./rules/dot-notation":143,"./rules/eol-last":144,"./rules/eqeqeq":145,"./rules/func-names":146,"./rules/func-style":147,"./rules/generator-star":149,"./rules/generator-star-spacing":148,"./rules/global-strict":150,"./rules/guard-for-in":151,"./rules/handle-callback-err":152,"./rules/indent":153,"./rules/key-spacing":154,"./rules/max-depth":155,"./rules/max-len":156,"./rules/max-nested-callbacks":157,"./rules/max-params":158,"./rules/max-statements":159,"./rules/new-cap":160,"./rules/new-parens":161,"./rules/newline-after-var":162,"./rules/no-alert":163,"./rules/no-array-constructor":164,"./rules/no-bitwise":165,"./rules/no-caller":166,"./rules/no-catch-shadow":167,"./rules/no-comma-dangle":168,"./rules/no-cond-assign":169,"./rules/no-console":170,"./rules/no-constant-condition":171,"./rules/no-control-regex":172,"./rules/no-debugger":173,"./rules/no-delete-var":174,"./rules/no-div-regex":175,"./rules/no-dupe-args":176,"./rules/no-dupe-keys":177,"./rules/no-duplicate-case":178,"./rules/no-else-return":179,"./rules/no-empty":182,"./rules/no-empty-class":180,"./rules/no-empty-label":181,"./rules/no-eq-null":183,"./rules/no-eval":184,"./rules/no-ex-assign":185,"./rules/no-extend-native":186,"./rules/no-extra-bind":187,"./rules/no-extra-boolean-cast":188,"./rules/no-extra-parens":189,"./rules/no-extra-semi":190,"./rules/no-extra-strict":191,"./rules/no-fallthrough":192,"./rules/no-floating-decimal":193,"./rules/no-func-assign":194,"./rules/no-implied-eval":195,"./rules/no-inline-comments":196,"./rules/no-inner-declarations":197,"./rules/no-invalid-regexp":198,"./rules/no-irregular-whitespace":199,"./rules/no-iterator":200,"./rules/no-label-var":201,"./rules/no-labels":202,"./rules/no-lone-blocks":203,"./rules/no-lonely-if":204,"./rules/no-loop-func":205,"./rules/no-mixed-requires":206,"./rules/no-mixed-spaces-and-tabs":207,"./rules/no-multi-spaces":208,"./rules/no-multi-str":209,"./rules/no-multiple-empty-lines":210,"./rules/no-native-reassign":211,"./rules/no-negated-in-lhs":212,"./rules/no-nested-ternary":213,"./rules/no-new":218,"./rules/no-new-func":214,"./rules/no-new-object":215,"./rules/no-new-require":216,"./rules/no-new-wrappers":217,"./rules/no-obj-calls":219,"./rules/no-octal":221,"./rules/no-octal-escape":220,"./rules/no-param-reassign":222,"./rules/no-path-concat":223,"./rules/no-plusplus":224,"./rules/no-process-env":225,"./rules/no-process-exit":226,"./rules/no-proto":227,"./rules/no-redeclare":228,"./rules/no-regex-spaces":229,"./rules/no-reserved-keys":230,"./rules/no-restricted-modules":231,"./rules/no-return-assign":232,"./rules/no-script-url":233,"./rules/no-self-compare":234,"./rules/no-sequences":235,"./rules/no-shadow":237,"./rules/no-shadow-restricted-names":236,"./rules/no-space-before-semi":238,"./rules/no-spaced-func":239,"./rules/no-sparse-arrays":240,"./rules/no-sync":241,"./rules/no-ternary":242,"./rules/no-throw-literal":243,"./rules/no-trailing-spaces":244,"./rules/no-undef":246,"./rules/no-undef-init":245,"./rules/no-undefined":247,"./rules/no-underscore-dangle":248,"./rules/no-unreachable":249,"./rules/no-unused-expressions":250,"./rules/no-unused-vars":251,"./rules/no-use-before-define":252,"./rules/no-var":253,"./rules/no-void":254,"./rules/no-warning-comments":255,"./rules/no-with":256,"./rules/no-wrap-func":257,"./rules/one-var":258,"./rules/operator-assignment":259,"./rules/padded-blocks":260,"./rules/quote-props":261,"./rules/quotes":262,"./rules/radix":263,"./rules/semi":265,"./rules/semi-spacing":264,"./rules/sort-vars":266,"./rules/space-after-function-name":267,"./rules/space-after-keywords":268,"./rules/space-before-blocks":269,"./rules/space-before-function-paren":270,"./rules/space-before-function-parentheses":271,"./rules/space-in-brackets":272,"./rules/space-in-parens":273,"./rules/space-infix-ops":274,"./rules/space-return-throw-case":275,"./rules/space-unary-ops":276,"./rules/spaced-line-comment":277,"./rules/strict":278,"./rules/use-isnan":279,"./rules/valid-jsdoc":280,"./rules/valid-typeof":281,"./rules/vars-on-top":282,"./rules/wrap-iife":283,"./rules/wrap-regex":284,"./rules/yoda":285}],130:[function(require,module,exports){
+},{"./rules/block-scoped-var":136,"./rules/brace-style":137,"./rules/camelcase":138,"./rules/comma-dangle":139,"./rules/comma-spacing":140,"./rules/comma-style":141,"./rules/complexity":142,"./rules/consistent-return":143,"./rules/consistent-this":144,"./rules/curly":145,"./rules/default-case":146,"./rules/dot-notation":147,"./rules/eol-last":148,"./rules/eqeqeq":149,"./rules/func-names":150,"./rules/func-style":151,"./rules/generator-star":153,"./rules/generator-star-spacing":152,"./rules/global-strict":154,"./rules/guard-for-in":155,"./rules/handle-callback-err":156,"./rules/indent":157,"./rules/key-spacing":158,"./rules/max-depth":159,"./rules/max-len":160,"./rules/max-nested-callbacks":161,"./rules/max-params":162,"./rules/max-statements":163,"./rules/new-cap":164,"./rules/new-parens":165,"./rules/newline-after-var":166,"./rules/no-alert":167,"./rules/no-array-constructor":168,"./rules/no-bitwise":169,"./rules/no-caller":170,"./rules/no-catch-shadow":171,"./rules/no-comma-dangle":172,"./rules/no-cond-assign":173,"./rules/no-console":174,"./rules/no-constant-condition":175,"./rules/no-control-regex":176,"./rules/no-debugger":177,"./rules/no-delete-var":178,"./rules/no-div-regex":179,"./rules/no-dupe-args":180,"./rules/no-dupe-keys":181,"./rules/no-duplicate-case":182,"./rules/no-else-return":183,"./rules/no-empty":186,"./rules/no-empty-class":184,"./rules/no-empty-label":185,"./rules/no-eq-null":187,"./rules/no-eval":188,"./rules/no-ex-assign":189,"./rules/no-extend-native":190,"./rules/no-extra-bind":191,"./rules/no-extra-boolean-cast":192,"./rules/no-extra-parens":193,"./rules/no-extra-semi":194,"./rules/no-extra-strict":195,"./rules/no-fallthrough":196,"./rules/no-floating-decimal":197,"./rules/no-func-assign":198,"./rules/no-implied-eval":199,"./rules/no-inline-comments":200,"./rules/no-inner-declarations":201,"./rules/no-invalid-regexp":202,"./rules/no-irregular-whitespace":203,"./rules/no-iterator":204,"./rules/no-label-var":205,"./rules/no-labels":206,"./rules/no-lone-blocks":207,"./rules/no-lonely-if":208,"./rules/no-loop-func":209,"./rules/no-mixed-requires":210,"./rules/no-mixed-spaces-and-tabs":211,"./rules/no-multi-spaces":212,"./rules/no-multi-str":213,"./rules/no-multiple-empty-lines":214,"./rules/no-native-reassign":215,"./rules/no-negated-in-lhs":216,"./rules/no-nested-ternary":217,"./rules/no-new":222,"./rules/no-new-func":218,"./rules/no-new-object":219,"./rules/no-new-require":220,"./rules/no-new-wrappers":221,"./rules/no-obj-calls":223,"./rules/no-octal":225,"./rules/no-octal-escape":224,"./rules/no-param-reassign":226,"./rules/no-path-concat":227,"./rules/no-plusplus":228,"./rules/no-process-env":229,"./rules/no-process-exit":230,"./rules/no-proto":231,"./rules/no-redeclare":232,"./rules/no-regex-spaces":233,"./rules/no-reserved-keys":234,"./rules/no-restricted-modules":235,"./rules/no-return-assign":236,"./rules/no-script-url":237,"./rules/no-self-compare":238,"./rules/no-sequences":239,"./rules/no-shadow":241,"./rules/no-shadow-restricted-names":240,"./rules/no-space-before-semi":242,"./rules/no-spaced-func":243,"./rules/no-sparse-arrays":244,"./rules/no-sync":245,"./rules/no-ternary":246,"./rules/no-throw-literal":247,"./rules/no-trailing-spaces":248,"./rules/no-undef":250,"./rules/no-undef-init":249,"./rules/no-undefined":251,"./rules/no-underscore-dangle":252,"./rules/no-unreachable":253,"./rules/no-unused-expressions":254,"./rules/no-unused-vars":255,"./rules/no-use-before-define":256,"./rules/no-var":257,"./rules/no-void":258,"./rules/no-warning-comments":259,"./rules/no-with":260,"./rules/no-wrap-func":261,"./rules/one-var":262,"./rules/operator-assignment":263,"./rules/padded-blocks":264,"./rules/quote-props":265,"./rules/quotes":266,"./rules/radix":267,"./rules/semi":269,"./rules/semi-spacing":268,"./rules/sort-vars":270,"./rules/space-after-function-name":271,"./rules/space-after-keywords":272,"./rules/space-before-blocks":273,"./rules/space-before-function-paren":274,"./rules/space-before-function-parentheses":275,"./rules/space-in-brackets":276,"./rules/space-in-parens":277,"./rules/space-infix-ops":278,"./rules/space-return-throw-case":279,"./rules/space-unary-ops":280,"./rules/spaced-line-comment":281,"./rules/strict":282,"./rules/use-isnan":283,"./rules/valid-jsdoc":284,"./rules/valid-typeof":285,"./rules/vars-on-top":286,"./rules/wrap-iife":287,"./rules/wrap-regex":288,"./rules/yoda":289}],134:[function(require,module,exports){
 /**
  * @fileoverview RuleContext utility for rules
  * @author Nicholas C. Zakas
@@ -17728,7 +18169,7 @@ RuleContext.prototype = {
 
 module.exports = RuleContext;
 
-},{}],131:[function(require,module,exports){
+},{}],135:[function(require,module,exports){
 /**
  * @fileoverview Defines a storage for rules.
  * @author Nicholas C. Zakas
@@ -17818,7 +18259,7 @@ exports.testClear = function() {
 // loads built-in rules
 load();
 
-},{"./load-rules":129}],132:[function(require,module,exports){
+},{"./load-rules":133}],136:[function(require,module,exports){
 /**
  * @fileoverview Rule to check for "block scoped" variables by binding context
  * @author Matt DuVall <http://www.mattduvall.com>
@@ -18101,7 +18542,7 @@ module.exports = function(context) {
 
 };
 
-},{}],133:[function(require,module,exports){
+},{}],137:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag block statements that do not use the one true brace style
  * @author Ian Christian Myers
@@ -18307,7 +18748,7 @@ module.exports = function(context) {
 
 };
 
-},{}],134:[function(require,module,exports){
+},{}],138:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag non-camelcased identifiers
  * @author Nicholas C. Zakas
@@ -18403,7 +18844,7 @@ module.exports = function(context) {
 
 };
 
-},{}],135:[function(require,module,exports){
+},{}],139:[function(require,module,exports){
 /**
  * @fileoverview Rule to forbid or enforce dangling commas.
  * @author Ian Christian Myers
@@ -18463,7 +18904,7 @@ module.exports = function (context) {
     };
 };
 
-},{}],136:[function(require,module,exports){
+},{}],140:[function(require,module,exports){
 /**
  * @fileoverview Comma spacing - validates spacing before and after comma
  * @author Vignesh Anand aka vegetableman.
@@ -18624,7 +19065,7 @@ module.exports = function(context) {
 
 };
 
-},{}],137:[function(require,module,exports){
+},{}],141:[function(require,module,exports){
 /**
  * @fileoverview Comma style - enforces comma styles of two types: last and first
  * @author Vignesh Anand aka vegetableman
@@ -18803,7 +19244,7 @@ module.exports = function(context) {
     return nodes;
 };
 
-},{}],138:[function(require,module,exports){
+},{}],142:[function(require,module,exports){
 /**
  * @fileoverview Counts the cyclomatic complexity of each function of the script. See http://en.wikipedia.org/wiki/Cyclomatic_complexity.
  * Counts the number of if, conditional, for, whilte, try, switch/case,
@@ -18893,7 +19334,7 @@ module.exports = function(context) {
 
 };
 
-},{}],139:[function(require,module,exports){
+},{}],143:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag consistent return values
  * @author Nicholas C. Zakas
@@ -18968,7 +19409,7 @@ module.exports = function(context) {
 
 };
 
-},{}],140:[function(require,module,exports){
+},{}],144:[function(require,module,exports){
 /**
  * @fileoverview Rule to enforce consistent naming of "this" context variables
  * @author Raphael Pigulla
@@ -19078,7 +19519,7 @@ module.exports = function(context) {
 
 };
 
-},{}],141:[function(require,module,exports){
+},{}],145:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag statements without curly braces
  * @author Nicholas C. Zakas
@@ -19183,7 +19624,7 @@ module.exports = function(context) {
 
 };
 
-},{}],142:[function(require,module,exports){
+},{}],146:[function(require,module,exports){
 /**
  * @fileoverview require default case in switch statements
  * @author Aliaksei Shytkin
@@ -19249,7 +19690,7 @@ module.exports = function(context) {
     };
 };
 
-},{}],143:[function(require,module,exports){
+},{}],147:[function(require,module,exports){
 /**
  * @fileoverview Rule to warn about using dot notation instead of square bracket notation when possible.
  * @author Josh Perez
@@ -19355,7 +19796,7 @@ module.exports = function(context) {
     };
 };
 
-},{}],144:[function(require,module,exports){
+},{}],148:[function(require,module,exports){
 /**
  * @fileoverview Require file to end with single newline.
  * @author Nodeca Team <https://github.com/nodeca>
@@ -19393,7 +19834,7 @@ module.exports = function(context) {
 
 };
 
-},{}],145:[function(require,module,exports){
+},{}],149:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag statements that use != and == instead of !== and ===
  * @author Nicholas C. Zakas
@@ -19485,7 +19926,7 @@ module.exports = function(context) {
 
 };
 
-},{}],146:[function(require,module,exports){
+},{}],150:[function(require,module,exports){
 /**
  * @fileoverview Rule to warn when a function expression does not have a name.
  * @author Kyle T. Nunery
@@ -19530,7 +19971,7 @@ module.exports = function(context) {
     };
 };
 
-},{}],147:[function(require,module,exports){
+},{}],151:[function(require,module,exports){
 /**
  * @fileoverview Rule to enforce a particular function style
  * @author Nicholas C. Zakas
@@ -19575,7 +20016,7 @@ module.exports = function(context) {
 
 };
 
-},{}],148:[function(require,module,exports){
+},{}],152:[function(require,module,exports){
 /**
  * @fileoverview Rule to check the spacing around the * in generator functions.
  * @author Jamund Ferguson
@@ -19660,7 +20101,7 @@ module.exports = function(context) {
 
 };
 
-},{}],149:[function(require,module,exports){
+},{}],153:[function(require,module,exports){
 /**
  * @fileoverview Rule to check for the position of the * in your generator functions
  * @author Jamund Ferguson
@@ -19732,7 +20173,7 @@ module.exports = function(context) {
 
 };
 
-},{}],150:[function(require,module,exports){
+},{}],154:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag or require global strict mode.
  * @author Nicholas C. Zakas
@@ -19777,7 +20218,7 @@ module.exports = function(context) {
 
 };
 
-},{}],151:[function(require,module,exports){
+},{}],155:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag for-in loops without if statements inside
  * @author Nicholas C. Zakas
@@ -19809,7 +20250,7 @@ module.exports = function(context) {
 
 };
 
-},{}],152:[function(require,module,exports){
+},{}],156:[function(require,module,exports){
 /**
  * @fileoverview Ensure handling of errors when we know they exist.
  * @author Jamund Ferguson
@@ -19929,7 +20370,7 @@ module.exports = function(context) {
 
 };
 
-},{}],153:[function(require,module,exports){
+},{}],157:[function(require,module,exports){
 /**
  * @fileoverview This option sets a specific tab width for your code
  * This rule has been ported and modified from JSCS.
@@ -20395,7 +20836,7 @@ module.exports = function (context) {
 
 };
 
-},{}],154:[function(require,module,exports){
+},{}],158:[function(require,module,exports){
 /**
  * @fileoverview Rule to specify spacing of object literal keys and values
  * @author Brandon Mills
@@ -20643,7 +21084,7 @@ module.exports = function(context) {
 
 };
 
-},{}],155:[function(require,module,exports){
+},{}],159:[function(require,module,exports){
 /**
  * @fileoverview A rule to set the maximum depth block can be nested in a function.
  * @author Ian Christian Myers
@@ -20728,7 +21169,7 @@ module.exports = function(context) {
 
 };
 
-},{}],156:[function(require,module,exports){
+},{}],160:[function(require,module,exports){
 /**
  * @fileoverview Rule to check for max length on a line.
  * @author Matt DuVall <http://www.mattduvall.com>
@@ -20795,7 +21236,7 @@ module.exports = function(context) {
 
 };
 
-},{}],157:[function(require,module,exports){
+},{}],161:[function(require,module,exports){
 /**
  * @fileoverview Rule to enforce a maximum number of nested callbacks.
  * @author Ian Christian Myers
@@ -20864,7 +21305,7 @@ module.exports = function(context) {
 
 };
 
-},{}],158:[function(require,module,exports){
+},{}],162:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag when a function has too many parameters
  * @author Ilya Volodin
@@ -20905,7 +21346,7 @@ module.exports = function(context) {
 
 };
 
-},{}],159:[function(require,module,exports){
+},{}],163:[function(require,module,exports){
 /**
  * @fileoverview A rule to set the maximum number of statements in a function.
  * @author Ian Christian Myers
@@ -20962,7 +21403,7 @@ module.exports = function(context) {
 
 };
 
-},{}],160:[function(require,module,exports){
+},{}],164:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag use of constructors without capital letters
  * @author Nicholas C. Zakas
@@ -21161,7 +21602,7 @@ module.exports = function(context) {
     return listeners;
 };
 
-},{}],161:[function(require,module,exports){
+},{}],165:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag when using constructor without parentheses
  * @author Ilya Volodin
@@ -21190,7 +21631,7 @@ module.exports = function(context) {
 
 };
 
-},{}],162:[function(require,module,exports){
+},{}],166:[function(require,module,exports){
 /**
  * @fileoverview Rule to check empty newline after "var" statement
  * @author Gopal Venkatesan
@@ -21237,7 +21678,7 @@ module.exports = function(context) {
     };
 };
 
-},{}],163:[function(require,module,exports){
+},{}],167:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag use of alert, confirm, prompt
  * @author Nicholas C. Zakas
@@ -21293,7 +21734,7 @@ module.exports = function(context) {
 
 };
 
-},{}],164:[function(require,module,exports){
+},{}],168:[function(require,module,exports){
 /**
  * @fileoverview Disallow construction of dense arrays using the Array constructor
  * @author Matt DuVall <http://www.mattduvall.com/>
@@ -21324,7 +21765,7 @@ module.exports = function(context) {
 
 };
 
-},{}],165:[function(require,module,exports){
+},{}],169:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag bitwise identifiers
  * @author Nicholas C. Zakas
@@ -21381,7 +21822,7 @@ module.exports = function(context) {
 
 };
 
-},{}],166:[function(require,module,exports){
+},{}],170:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag use of arguments.callee and arguments.caller.
  * @author Nicholas C. Zakas
@@ -21410,7 +21851,7 @@ module.exports = function(context) {
 
 };
 
-},{}],167:[function(require,module,exports){
+},{}],171:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag variable leak in CatchClauses in IE 8 and earlier
  * @author Ian Christian Myers
@@ -21462,7 +21903,7 @@ module.exports = function(context) {
 
 };
 
-},{}],168:[function(require,module,exports){
+},{}],172:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag trailing commas in object literals.
  * @author Ian Christian Myers
@@ -21507,7 +21948,7 @@ module.exports = function(context) {
 
 };
 
-},{}],169:[function(require,module,exports){
+},{}],173:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag assignment in a conditional statement's test expression
  * @author Stephen Murray <spmurrayzzz>
@@ -21626,7 +22067,7 @@ module.exports = function(context) {
 
 };
 
-},{}],170:[function(require,module,exports){
+},{}],174:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag use of console object
  * @author Nicholas C. Zakas
@@ -21653,7 +22094,7 @@ module.exports = function(context) {
 
 };
 
-},{}],171:[function(require,module,exports){
+},{}],175:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag use constant conditions
  * @author Christian Schulz <http://rndm.de>
@@ -21726,7 +22167,7 @@ module.exports = function(context) {
 
 };
 
-},{}],172:[function(require,module,exports){
+},{}],176:[function(require,module,exports){
 /**
  * @fileoverview Rule to forbid control charactes from regular expressions.
  * @author Nicholas C. Zakas
@@ -21784,7 +22225,7 @@ module.exports = function(context) {
 
 };
 
-},{}],173:[function(require,module,exports){
+},{}],177:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag use of a debugger statement
  * @author Nicholas C. Zakas
@@ -21806,7 +22247,7 @@ module.exports = function(context) {
 
 };
 
-},{}],174:[function(require,module,exports){
+},{}],178:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag when deleting variables
  * @author Ilya Volodin
@@ -21831,7 +22272,7 @@ module.exports = function(context) {
 
 };
 
-},{}],175:[function(require,module,exports){
+},{}],179:[function(require,module,exports){
 /**
  * @fileoverview Rule to check for ambiguous div operator in regexes
  * @author Matt DuVall <http://www.mattduvall.com>
@@ -21858,7 +22299,7 @@ module.exports = function(context) {
 
 };
 
-},{}],176:[function(require,module,exports){
+},{}],180:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag duplicate arguments
  * @author Jamund Ferguson
@@ -21943,7 +22384,7 @@ module.exports = function(context) {
 
 };
 
-},{}],177:[function(require,module,exports){
+},{}],181:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag use of duplicate keys in an object.
  * @author Ian Christian Myers
@@ -21986,7 +22427,7 @@ module.exports = function(context) {
 
 };
 
-},{}],178:[function(require,module,exports){
+},{}],182:[function(require,module,exports){
 /**
  * @fileoverview Rule to disallow a duplicate case label.
  * @author Dieter Oberkofler
@@ -22047,7 +22488,7 @@ module.exports = function(context) {
 
 };
 
-},{}],179:[function(require,module,exports){
+},{}],183:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag `else` after a `return` in `if`
  * @author Ian Christian Myers
@@ -22172,7 +22613,7 @@ module.exports = function(context) {
 
 };
 
-},{}],180:[function(require,module,exports){
+},{}],184:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag the use of empty character classes in regular expressions
  * @author Ian Christian Myers
@@ -22217,7 +22658,7 @@ module.exports = function(context) {
 
 };
 
-},{}],181:[function(require,module,exports){
+},{}],185:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag when label is not used for a loop or switch
  * @author Ilya Volodin
@@ -22244,7 +22685,7 @@ module.exports = function(context) {
 
 };
 
-},{}],182:[function(require,module,exports){
+},{}],186:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag use of an empty block statement
  * @author Nicholas C. Zakas
@@ -22298,7 +22739,7 @@ module.exports = function(context) {
 
 };
 
-},{}],183:[function(require,module,exports){
+},{}],187:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag comparisons to null without a type-checking
  * operator.
@@ -22327,7 +22768,7 @@ module.exports = function(context) {
 
 };
 
-},{}],184:[function(require,module,exports){
+},{}],188:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag use of eval() statement
  * @author Nicholas C. Zakas
@@ -22353,7 +22794,7 @@ module.exports = function(context) {
 
 };
 
-},{}],185:[function(require,module,exports){
+},{}],189:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag assignment of the exception parameter
  * @author Stephen Murray <spmurrayzzz>
@@ -22395,7 +22836,7 @@ module.exports = function(context) {
 
 };
 
-},{}],186:[function(require,module,exports){
+},{}],190:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag adding properties to native object's prototypes.
  * @author David Nelson
@@ -22474,7 +22915,7 @@ module.exports = function(context) {
 
 };
 
-},{}],187:[function(require,module,exports){
+},{}],191:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag unnecessary bind calls
  * @author Bence Dányi <bence@danyi.me>
@@ -22555,7 +22996,7 @@ module.exports = function(context) {
 
 };
 
-},{}],188:[function(require,module,exports){
+},{}],192:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag unnecessary double negation in Boolean contexts
  * @author Brandon Mills
@@ -22626,7 +23067,7 @@ module.exports = function(context) {
 
 };
 
-},{}],189:[function(require,module,exports){
+},{}],193:[function(require,module,exports){
 /**
  * @fileoverview Disallow parenthesesisng higher precedence subexpressions.
  * @author Michael Ficarra
@@ -22921,7 +23362,7 @@ module.exports = function(context) {
 
 };
 
-},{}],190:[function(require,module,exports){
+},{}],194:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag use of unnecessary semicolons
  * @author Nicholas C. Zakas
@@ -22944,7 +23385,7 @@ module.exports = function(context) {
 
 };
 
-},{}],191:[function(require,module,exports){
+},{}],195:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag unnecessary strict directives.
  * @author Ian Christian Myers
@@ -23030,7 +23471,7 @@ module.exports = function(context) {
 
 };
 
-},{}],192:[function(require,module,exports){
+},{}],196:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag fall-through cases in switch statements.
  * @author Matt DuVall <http://mattduvall.com/>
@@ -23127,7 +23568,7 @@ module.exports = function(context) {
 
 };
 
-},{}],193:[function(require,module,exports){
+},{}],197:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag use of a leading/trailing decimal point in a numeric literal
  * @author James Allardice
@@ -23157,7 +23598,7 @@ module.exports = function(context) {
 
 };
 
-},{}],194:[function(require,module,exports){
+},{}],198:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag use of function declaration identifiers as variables.
  * @author Ian Christian Myers
@@ -23240,7 +23681,7 @@ module.exports = function(context) {
 
 };
 
-},{}],195:[function(require,module,exports){
+},{}],199:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag use of implied eval via setTimeout and setInterval
  * @author James Allardice
@@ -23316,7 +23757,7 @@ module.exports = function(context) {
 
 };
 
-},{}],196:[function(require,module,exports){
+},{}],200:[function(require,module,exports){
 /**
  * @fileoverview Enforces or disallows inline comments.
  * @author Greg Cochard
@@ -23365,7 +23806,7 @@ module.exports = function(context) {
     };
 };
 
-},{}],197:[function(require,module,exports){
+},{}],201:[function(require,module,exports){
 /**
  * @fileoverview Rule to enforce declarations in program or function body root.
  * @author Brandon Mills
@@ -23439,7 +23880,7 @@ module.exports = function(context) {
 
 };
 
-},{}],198:[function(require,module,exports){
+},{}],202:[function(require,module,exports){
 /**
  * @fileoverview Validate strings passed to the RegExp constructor
  * @author Michael Ficarra
@@ -23492,7 +23933,7 @@ module.exports = function(context) {
 
 };
 
-},{"espree":"espree"}],199:[function(require,module,exports){
+},{"espree":"espree"}],203:[function(require,module,exports){
 /**
  * @fileoverview Rule to disalow whitespace that is not a tab or space, whitespace inside strings and comments are allowed
  * @author Jonathan Kingston
@@ -23586,7 +24027,7 @@ module.exports = function(context) {
     };
 };
 
-},{}],200:[function(require,module,exports){
+},{}],204:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag usage of __iterator__ property
  * @author Ian Christian Myers
@@ -23614,7 +24055,7 @@ module.exports = function(context) {
 
 };
 
-},{}],201:[function(require,module,exports){
+},{}],205:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag labels that are the same as an identifier
  * @author Ian Christian Myers
@@ -23678,7 +24119,7 @@ module.exports = function(context) {
 
 };
 
-},{}],202:[function(require,module,exports){
+},{}],206:[function(require,module,exports){
 /**
  * @fileoverview Disallow Labeled Statements
  * @author Nicholas C. Zakas
@@ -23722,7 +24163,7 @@ module.exports = function(context) {
 
 };
 
-},{}],203:[function(require,module,exports){
+},{}],207:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag blocks with no reason to exist
  * @author Brandon Mills
@@ -23749,7 +24190,7 @@ module.exports = function(context) {
 
 };
 
-},{}],204:[function(require,module,exports){
+},{}],208:[function(require,module,exports){
 /**
  * @fileoverview Rule to disallow if as the only statmenet in an else block
  * @author Brandon Mills
@@ -23779,7 +24220,7 @@ module.exports = function(context) {
 
 };
 
-},{}],205:[function(require,module,exports){
+},{}],209:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag creation of function inside a loop
  * @author Ilya Volodin
@@ -23830,7 +24271,7 @@ module.exports = function(context) {
     };
 };
 
-},{}],206:[function(require,module,exports){
+},{}],210:[function(require,module,exports){
 /**
  * @fileoverview Rule to enforce grouped require statements for Node.JS
  * @author Raphael Pigulla
@@ -23991,7 +24432,7 @@ module.exports = function(context) {
 
 };
 
-},{}],207:[function(require,module,exports){
+},{}],211:[function(require,module,exports){
 /**
  * @fileoverview Disallow mixed spaces and tabs for indentation
  * @author Jary Niebur
@@ -24061,7 +24502,7 @@ module.exports = function(context) {
 
 };
 
-},{}],208:[function(require,module,exports){
+},{}],212:[function(require,module,exports){
 /**
  * @fileoverview Disallow use of multiple spaces.
  * @author Nicholas C. Zakas
@@ -24164,7 +24605,7 @@ module.exports = function(context) {
 
 };
 
-},{}],209:[function(require,module,exports){
+},{}],213:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag when using multiline strings
  * @author Ilya Volodin
@@ -24207,7 +24648,7 @@ module.exports = function(context) {
 
 };
 
-},{}],210:[function(require,module,exports){
+},{}],214:[function(require,module,exports){
 /**
  * @fileoverview Disallows multiple blank lines.
  * implementation adapted from the no-trailing-spaces rule.
@@ -24269,7 +24710,7 @@ module.exports = function(context) {
 
 };
 
-},{}],211:[function(require,module,exports){
+},{}],215:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag when re-assigning native objects
  * @author Ilya Volodin
@@ -24308,7 +24749,7 @@ module.exports = function(context) {
 
 };
 
-},{}],212:[function(require,module,exports){
+},{}],216:[function(require,module,exports){
 /**
  * @fileoverview A rule to disallow negated left operands of the `in` operator
  * @author Michael Ficarra
@@ -24333,7 +24774,7 @@ module.exports = function(context) {
 
 };
 
-},{}],213:[function(require,module,exports){
+},{}],217:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag nested ternary expressions
  * @author Ian Christian Myers
@@ -24357,7 +24798,7 @@ module.exports = function(context) {
     };
 };
 
-},{}],214:[function(require,module,exports){
+},{}],218:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag when using new Function
  * @author Ilya Volodin
@@ -24382,7 +24823,7 @@ module.exports = function(context) {
 
 };
 
-},{}],215:[function(require,module,exports){
+},{}],219:[function(require,module,exports){
 /**
  * @fileoverview A rule to disallow calls to the Object constructor
  * @author Matt DuVall <http://www.mattduvall.com/>
@@ -24407,7 +24848,7 @@ module.exports = function(context) {
 
 };
 
-},{}],216:[function(require,module,exports){
+},{}],220:[function(require,module,exports){
 /**
  * @fileoverview Rule to disallow use of new operator with the `require` function
  * @author Wil Moore III
@@ -24432,7 +24873,7 @@ module.exports = function(context) {
 
 };
 
-},{}],217:[function(require,module,exports){
+},{}],221:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag when using constructor for wrapper objects
  * @author Ilya Volodin
@@ -24458,7 +24899,7 @@ module.exports = function(context) {
 
 };
 
-},{}],218:[function(require,module,exports){
+},{}],222:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag statements with function invocation preceded by
  * "new" and not part of assignment
@@ -24485,7 +24926,7 @@ module.exports = function(context) {
 
 };
 
-},{}],219:[function(require,module,exports){
+},{}],223:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag use of an object property of the global object (Math and JSON) as a function
  * @author James Allardice
@@ -24513,7 +24954,7 @@ module.exports = function(context) {
 
 };
 
-},{}],220:[function(require,module,exports){
+},{}],224:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag octal escape sequences in string literals.
  * @author Ian Christian Myers
@@ -24552,7 +24993,7 @@ module.exports = function(context) {
 
 };
 
-},{}],221:[function(require,module,exports){
+},{}],225:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag when initializing octal literal
  * @author Ilya Volodin
@@ -24577,7 +25018,7 @@ module.exports = function(context) {
 
 };
 
-},{}],222:[function(require,module,exports){
+},{}],226:[function(require,module,exports){
 /**
  * @fileoverview Disallow reassignment of function parameters.
  * @author Nat Burns
@@ -24664,7 +25105,7 @@ module.exports = function(context) {
     };
 };
 
-},{}],223:[function(require,module,exports){
+},{}],227:[function(require,module,exports){
 /**
  * @fileoverview Disallow string concatenation when using __dirname and __filename
  * @author Nicholas C. Zakas
@@ -24703,7 +25144,7 @@ module.exports = function(context) {
 
 };
 
-},{}],224:[function(require,module,exports){
+},{}],228:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag use of unary increment and decrement operators.
  * @author Ian Christian Myers
@@ -24727,7 +25168,7 @@ module.exports = function(context) {
 
 };
 
-},{}],225:[function(require,module,exports){
+},{}],229:[function(require,module,exports){
 /**
  * @fileoverview Disallow the use of process.env()
  * @author Vignesh Anand
@@ -24757,7 +25198,7 @@ module.exports = function(context) {
 
 };
 
-},{}],226:[function(require,module,exports){
+},{}],230:[function(require,module,exports){
 /**
  * @fileoverview Disallow the use of process.exit()
  * @author Nicholas C. Zakas
@@ -24790,7 +25231,7 @@ module.exports = function(context) {
 
 };
 
-},{}],227:[function(require,module,exports){
+},{}],231:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag usage of __proto__ property
  * @author Ilya Volodin
@@ -24818,7 +25259,7 @@ module.exports = function(context) {
 
 };
 
-},{}],228:[function(require,module,exports){
+},{}],232:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag when the same variable is declared more then once.
  * @author Ilya Volodin
@@ -24878,7 +25319,7 @@ module.exports = function(context) {
     };
 };
 
-},{}],229:[function(require,module,exports){
+},{}],233:[function(require,module,exports){
 /**
  * @fileoverview Rule to count multiple spaces in regular expressions
  * @author Matt DuVall <http://www.mattduvall.com/>
@@ -24913,7 +25354,7 @@ module.exports = function(context) {
 
 };
 
-},{}],230:[function(require,module,exports){
+},{}],234:[function(require,module,exports){
 /**
  * @fileoverview Rule to disallow reserved words being used as keys
  * @author Emil Bay
@@ -24969,7 +25410,7 @@ module.exports = function(context) {
 
 };
 
-},{}],231:[function(require,module,exports){
+},{}],235:[function(require,module,exports){
 /**
  * @fileoverview Restrict usage of specified node modules.
  * @author Christian Schulz
@@ -25043,7 +25484,7 @@ module.exports = function (context) {
     };
 };
 
-},{}],232:[function(require,module,exports){
+},{}],236:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag when return statement contains assignment
  * @author Ilya Volodin
@@ -25067,7 +25508,7 @@ module.exports = function(context) {
 
 };
 
-},{}],233:[function(require,module,exports){
+},{}],237:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag when using javascript: urls
  * @author Ilya Volodin
@@ -25101,7 +25542,7 @@ module.exports = function(context) {
 
 };
 
-},{}],234:[function(require,module,exports){
+},{}],238:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag comparison where left part is the same as the right
  * part.
@@ -25130,7 +25571,7 @@ module.exports = function(context) {
 
 };
 
-},{}],235:[function(require,module,exports){
+},{}],239:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag use of comma operator
  * @author Brandon Mills
@@ -25224,7 +25665,7 @@ module.exports = function(context) {
 
 };
 
-},{}],236:[function(require,module,exports){
+},{}],240:[function(require,module,exports){
 /**
  * @fileoverview Disallow shadowing of NaN, undefined, and Infinity (ES5 section 15.1.1)
  * @author Michael Ficarra
@@ -25275,7 +25716,7 @@ module.exports = function(context) {
 
 };
 
-},{}],237:[function(require,module,exports){
+},{}],241:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag on declaring variables already declared in the outer scope
  * @author Ilya Volodin
@@ -25346,7 +25787,7 @@ module.exports = function(context) {
 
 };
 
-},{}],238:[function(require,module,exports){
+},{}],242:[function(require,module,exports){
 /**
  * @fileoverview Rule to disallow whitespace before the semicolon
  * @author Jonathan Kingston
@@ -25444,7 +25885,7 @@ module.exports = function(context) {
     };
 };
 
-},{}],239:[function(require,module,exports){
+},{}],243:[function(require,module,exports){
 /**
  * @fileoverview Rule to check that spaced function application
  * @author Matt DuVall <http://www.mattduvall.com>
@@ -25481,7 +25922,7 @@ module.exports = function(context) {
 
 };
 
-},{}],240:[function(require,module,exports){
+},{}],244:[function(require,module,exports){
 /**
  * @fileoverview Disallow sparse arrays
  * @author Nicholas C. Zakas
@@ -25514,7 +25955,7 @@ module.exports = function(context) {
 
 };
 
-},{}],241:[function(require,module,exports){
+},{}],245:[function(require,module,exports){
 /**
  * @fileoverview Rule to check for properties whose identifier ends with the string Sync
  * @author Matt DuVall<http://mattduvall.com/>
@@ -25544,7 +25985,7 @@ module.exports = function(context) {
 
 };
 
-},{}],242:[function(require,module,exports){
+},{}],246:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag use of ternary operators.
  * @author Ian Christian Myers
@@ -25568,7 +26009,7 @@ module.exports = function(context) {
 
 };
 
-},{}],243:[function(require,module,exports){
+},{}],247:[function(require,module,exports){
 /**
  * @fileoverview Rule to restrict what can be thrown as an exception.
  * @author Dieter Oberkofler
@@ -25601,7 +26042,7 @@ module.exports = function(context) {
 
 };
 
-},{}],244:[function(require,module,exports){
+},{}],248:[function(require,module,exports){
 /**
  * @fileoverview Disallow trailing spaces at the end of lines.
  * @author Nodeca Team <https://github.com/nodeca>
@@ -25649,7 +26090,7 @@ module.exports = function(context) {
     };
 };
 
-},{}],245:[function(require,module,exports){
+},{}],249:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag when initializing to undefined
  * @author Ilya Volodin
@@ -25677,7 +26118,7 @@ module.exports = function(context) {
 
 };
 
-},{}],246:[function(require,module,exports){
+},{}],250:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag references to undeclared variables.
  * @author Mark Macdonald
@@ -25801,7 +26242,7 @@ module.exports = function(context) {
 
 };
 
-},{"escope":15}],247:[function(require,module,exports){
+},{"escope":19}],251:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag references to the undefined variable.
  * @author Michael Ficarra
@@ -25828,7 +26269,7 @@ module.exports = function(context) {
 
 };
 
-},{}],248:[function(require,module,exports){
+},{}],252:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag trailing underscores in variable declarations.
  * @author Matt DuVall <http://www.mattduvall.com>
@@ -25901,7 +26342,7 @@ module.exports = function(context) {
 
 };
 
-},{}],249:[function(require,module,exports){
+},{}],253:[function(require,module,exports){
 /**
  * @fileoverview Checks for unreachable code due to return, throws, break, and continue.
  * @author Joel Feenstra
@@ -25999,7 +26440,7 @@ module.exports = function(context) {
 
 };
 
-},{}],250:[function(require,module,exports){
+},{}],254:[function(require,module,exports){
 /**
  * @fileoverview Flag expressions in statement position that do not side effect
  * @author Michael Ficarra
@@ -26075,7 +26516,7 @@ module.exports = function(context) {
 
 };
 
-},{}],251:[function(require,module,exports){
+},{}],255:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag declared but unused variables
  * @author Ilya Volodin
@@ -26257,7 +26698,7 @@ module.exports = function(context) {
 
 };
 
-},{}],252:[function(require,module,exports){
+},{}],256:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag use of variables before they are defined
  * @author Ilya Volodin
@@ -26326,7 +26767,7 @@ module.exports = function(context) {
     };
 };
 
-},{}],253:[function(require,module,exports){
+},{}],257:[function(require,module,exports){
 /**
  * @fileoverview Rule to check for the usage of var.
  * @author Jamund Ferguson
@@ -26352,7 +26793,7 @@ module.exports = function(context) {
 
 };
 
-},{}],254:[function(require,module,exports){
+},{}],258:[function(require,module,exports){
 /**
  * @fileoverview Rule to disallow use of void operator.
  * @author Mike Sidorov
@@ -26380,7 +26821,7 @@ module.exports = function(context) {
 
 };
 
-},{}],255:[function(require,module,exports){
+},{}],259:[function(require,module,exports){
 /**
  * @fileoverview Rule that warns about used warning comments
  * @author Alexander Schmidt <https://github.com/lxanders>
@@ -26466,7 +26907,7 @@ module.exports = function (context) {
     };
 };
 
-},{}],256:[function(require,module,exports){
+},{}],260:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag use of with statement
  * @author Nicholas C. Zakas
@@ -26488,7 +26929,7 @@ module.exports = function(context) {
 
 };
 
-},{}],257:[function(require,module,exports){
+},{}],261:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag wrapping non-iife in parens
  * @author Ilya Volodin
@@ -26534,7 +26975,7 @@ module.exports = function(context) {
 
 };
 
-},{}],258:[function(require,module,exports){
+},{}],262:[function(require,module,exports){
 /**
  * @fileoverview A rule to ensure the use of a single variable declaration.
  * @author Ian Christian Myers
@@ -26621,7 +27062,7 @@ module.exports = function(context) {
 
 };
 
-},{}],259:[function(require,module,exports){
+},{}],263:[function(require,module,exports){
 /**
  * @fileoverview Rule to replace assignment expressions with operator assignment
  * @author Brandon Mills
@@ -26735,7 +27176,7 @@ module.exports = function(context) {
 
 };
 
-},{}],260:[function(require,module,exports){
+},{}],264:[function(require,module,exports){
 /**
  * @fileoverview A rule to ensure blank lines within blocks.
  * @author Mathias Schreck <https://github.com/lo1tuma>
@@ -26832,7 +27273,7 @@ module.exports = function (context) {
 
 };
 
-},{}],261:[function(require,module,exports){
+},{}],265:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag non-quoted property names in object literals.
  * @author Mathias Bynens <http://mathiasbynens.be/>
@@ -26900,7 +27341,7 @@ module.exports = function(context) {
 
 };
 
-},{"espree":"espree"}],262:[function(require,module,exports){
+},{"espree":"espree"}],266:[function(require,module,exports){
 /**
  * @fileoverview A rule to choose between single and double quote marks
  * @author Matt DuVall <http://www.mattduvall.com/>, Brandon Payton
@@ -26980,7 +27421,7 @@ module.exports = function(context) {
 
 };
 
-},{}],263:[function(require,module,exports){
+},{}],267:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag use of parseInt without a radix argument
  * @author James Allardice
@@ -27021,7 +27462,7 @@ module.exports = function(context) {
 
 };
 
-},{}],264:[function(require,module,exports){
+},{}],268:[function(require,module,exports){
 /**
  * @fileoverview Validates spacing before and after semicolon
  * @author Mathias Schreck
@@ -27175,7 +27616,7 @@ module.exports = function (context) {
     };
 };
 
-},{}],265:[function(require,module,exports){
+},{}],269:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag missing semicolons.
  * @author Nicholas C. Zakas
@@ -27285,7 +27726,7 @@ module.exports = function(context) {
 
 };
 
-},{}],266:[function(require,module,exports){
+},{}],270:[function(require,module,exports){
 /**
  * @fileoverview Rule to require sorting of variables within a single Variable Declaration block
  * @author Ilya Volodin
@@ -27324,7 +27765,7 @@ module.exports = function(context) {
     };
 };
 
-},{}],267:[function(require,module,exports){
+},{}],271:[function(require,module,exports){
 /**
  * @fileoverview Rule to enforce consistent spacing after function names
  * @author Roberto Vidal
@@ -27369,7 +27810,7 @@ module.exports = function(context) {
 
 };
 
-},{}],268:[function(require,module,exports){
+},{}],272:[function(require,module,exports){
 /**
  * @fileoverview Rule to enforce the number of spaces after certain keywords
  * @author Nick Fisher
@@ -27447,7 +27888,7 @@ module.exports = function(context) {
     };
 };
 
-},{}],269:[function(require,module,exports){
+},{}],273:[function(require,module,exports){
 /**
  * @fileoverview A rule to ensure whitespace before blocks.
  * @author Mathias Schreck <https://github.com/lo1tuma>
@@ -27534,7 +27975,7 @@ module.exports = function (context) {
 
 };
 
-},{}],270:[function(require,module,exports){
+},{}],274:[function(require,module,exports){
 /**
  * @fileoverview Rule to validate spacing before function paren.
  * @author Mathias Schreck <https://github.com/lo1tuma>
@@ -27653,7 +28094,7 @@ module.exports = function(context) {
     };
 };
 
-},{}],271:[function(require,module,exports){
+},{}],275:[function(require,module,exports){
 /**
  * @fileoverview Rule to validate spacing before function parentheses.
  * @author Mathias Schreck <https://github.com/lo1tuma>
@@ -27772,7 +28213,7 @@ module.exports = function(context) {
     };
 };
 
-},{}],272:[function(require,module,exports){
+},{}],276:[function(require,module,exports){
 /**
  * @fileoverview Disallows or enforces spaces inside of brackets.
  * @author Ian Christian Myers
@@ -28003,7 +28444,7 @@ module.exports = function(context) {
 
 };
 
-},{}],273:[function(require,module,exports){
+},{}],277:[function(require,module,exports){
 /**
  * @fileoverview Disallows or enforces spaces inside of parentheses.
  * @author Jonathan Rajavuori
@@ -28267,7 +28708,7 @@ module.exports = function(context) {
 
 };
 
-},{}],274:[function(require,module,exports){
+},{}],278:[function(require,module,exports){
 /**
  * @fileoverview Require spaces around infix operators
  * @author Michael Ficarra
@@ -28337,7 +28778,7 @@ module.exports = function(context) {
 
 };
 
-},{}],275:[function(require,module,exports){
+},{}],279:[function(require,module,exports){
 /**
  * @fileoverview Require spaces following return, throw, and case
  * @author Michael Ficarra
@@ -28375,7 +28816,7 @@ module.exports = function(context) {
 
 };
 
-},{}],276:[function(require,module,exports){
+},{}],280:[function(require,module,exports){
 /**
  * @fileoverview This rule shoud require or disallow spaces before or after unary operations.
  * @author Marcin Kumorek
@@ -28495,7 +28936,7 @@ module.exports = function(context) {
 
 };
 
-},{}],277:[function(require,module,exports){
+},{}],281:[function(require,module,exports){
 /**
  * @fileoverview Enforces or disallows a space beginning a single-line comment.
  * @author Greg Cochard
@@ -28568,7 +29009,7 @@ module.exports = function(context) {
     };
 };
 
-},{}],278:[function(require,module,exports){
+},{}],282:[function(require,module,exports){
 /**
  * @fileoverview Rule to control usage of strict mode directives.
  * @author Brandon Mills
@@ -28806,7 +29247,7 @@ module.exports = function(context) {
 
 };
 
-},{}],279:[function(require,module,exports){
+},{}],283:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag comparisons to the value NaN
  * @author James Allardice
@@ -28832,7 +29273,7 @@ module.exports = function (context) {
 
 };
 
-},{}],280:[function(require,module,exports){
+},{}],284:[function(require,module,exports){
 /**
  * @fileoverview Validates JSDoc comments are syntactically correct
  * @author Nicholas C. Zakas
@@ -29025,7 +29466,7 @@ module.exports = function(context) {
 
 };
 
-},{"doctrine":8}],281:[function(require,module,exports){
+},{"doctrine":9}],285:[function(require,module,exports){
 /**
  * @fileoverview Ensures that the results of typeof are compared against a valid string
  * @author Ian Christian Myers
@@ -29067,7 +29508,7 @@ module.exports = function(context) {
 
 };
 
-},{}],282:[function(require,module,exports){
+},{}],286:[function(require,module,exports){
 /**
  * @fileoverview Rule to enforce var declarations are only at the top of a function.
  * @author Danny Fritz
@@ -29182,7 +29623,7 @@ module.exports = function (context) {
 
 };
 
-},{}],283:[function(require,module,exports){
+},{}],287:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag when IIFE is not wrapped in parens
  * @author Ilya Volodin
@@ -29226,7 +29667,7 @@ module.exports = function(context) {
 
 };
 
-},{}],284:[function(require,module,exports){
+},{}],288:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag when regex literals are not wrapped in parens
  * @author Matt DuVall <http://www.mattduvall.com>
@@ -29264,7 +29705,7 @@ module.exports = function(context) {
 
 };
 
-},{}],285:[function(require,module,exports){
+},{}],289:[function(require,module,exports){
 /**
  * @fileoverview Rule to require or disallow yoda comparisons
  * @author Nicholas C. Zakas
@@ -29476,7 +29917,7 @@ module.exports = function (context) {
 
 };
 
-},{}],286:[function(require,module,exports){
+},{}],290:[function(require,module,exports){
 (function (process){
 /**
  * @fileoverview Tracks performance of individual rules.
@@ -29589,7 +30030,7 @@ module.exports = (function() {
 }());
 
 }).call(this,require('_process'))
-},{"_process":5}],287:[function(require,module,exports){
+},{"_process":6}],291:[function(require,module,exports){
 /**
  * @fileoverview Object to handle access and retrieval of tokens.
  * @author Brandon Mills
@@ -29792,7 +30233,7 @@ module.exports = function(tokens) {
     return api;
 };
 
-},{}],288:[function(require,module,exports){
+},{}],292:[function(require,module,exports){
 /**
  * @fileoverview Common utilities.
  */
@@ -29872,5 +30313,5 @@ exports.removePluginPrefix = function removePluginPrefix(pluginName) {
 
 exports.PLUGIN_NAME_PREFIX = PLUGIN_NAME_PREFIX;
 
-},{}]},{},[128])(128)
+},{}]},{},[132])(132)
 });
