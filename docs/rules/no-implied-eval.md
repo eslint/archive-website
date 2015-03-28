@@ -62,7 +62,7 @@ If you want to allow `setTimeout()` and `setInterval()` with string arguments, t
 
 ## Related Rules
 
-* [no-eval](no-eval
+* [no-eval](no-eval)
 
 ## Version
 

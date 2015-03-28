@@ -32,8 +32,8 @@ If you need to use control character pattern matching, then you should turn this
 
 ## Related Rules
 
-* [no-div-regex](no-div-regex
-* [no-regex-spaces](no-regex-spaces
+* [no-div-regex](no-div-regex)
+* [no-regex-spaces](no-regex-spaces)
 
 
 ## Version

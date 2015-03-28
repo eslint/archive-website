@@ -39,7 +39,7 @@ if (foo) {
 
 ## Related Rules
 
-* [no-ternary](no-ternary
+* [no-ternary](no-ternary)
 
 ## Version
 

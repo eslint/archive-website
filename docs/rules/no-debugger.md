@@ -25,8 +25,8 @@ If your code is still very much in development and don't want to worry about str
 
 ## Related Rules
 
-* [no-alert](no-alert
-* [no-console](no-console
+* [no-alert](no-alert)
+* [no-console](no-console)
 
 ## Version
 

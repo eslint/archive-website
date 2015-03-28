@@ -37,8 +37,8 @@ If you're using Node.js, however, `console` is used to output information to the
 
 ## Related Rules
 
-* [no-alert](no-alert
-* [no-debugger](no-debugger
+* [no-alert](no-alert)
+* [no-debugger](no-debugger)
 
 ## Version
 

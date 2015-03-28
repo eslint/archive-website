@@ -40,7 +40,7 @@ var obj = { x: "foo" },
 
 ## Related Rules
 
-* [no-implied-eval](no-implied-eval
+* [no-implied-eval](no-implied-eval)
 
 ## Version
 

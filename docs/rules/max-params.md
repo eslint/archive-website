@@ -41,11 +41,11 @@ function foo (bar, baz, qux) {
 
 ## Related Rules
 
-* [complexity](complexity
-* [max-depth](max-depth
-* [max-len](max-len
-* [max-nested-callbacks](max-nested-callbacks
-* [max-statements](max-statements
+* [complexity](complexity)
+* [max-depth](max-depth)
+* [max-len](max-len)
+* [max-nested-callbacks](max-nested-callbacks)
+* [max-statements](max-statements)
 
 ## Version
 

@@ -5,7 +5,7 @@ layout: doc
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 # Global Strict Mode (global-strict)
 
-**Deprecation notice**: This rule is deprecated and has been superseded by the [strict](strict rule. It will be removed in ESLint v1.0. `"global"` mode in the strict rule is most similar to this rule.
+**Deprecation notice**: This rule is deprecated and has been superseded by the [strict](strict) rule. It will be removed in ESLint v1.0. `"global"` mode in the strict rule is most similar to this rule.
 
 Strict mode is enabled by using the following pragma in your code:
 

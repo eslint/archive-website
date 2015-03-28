@@ -47,8 +47,8 @@ If you wish to allow the use of the `Object` constructor, you can safely turn th
 
 ## Related Rules
 
-* [no-array-constructor](no-array-constructor
-* [no-new-wrappers](no-new-wrappers
+* [no-array-constructor](no-array-constructor)
+* [no-new-wrappers](no-new-wrappers)
 
 ## Version
 
