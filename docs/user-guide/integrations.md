@@ -38,7 +38,7 @@ redirect_from: "/docs/integrations/"
 
 ## External ESLint rules
 
-* [AngularJS](https://github.com/Gillespie59/angularjs-eslint)
+* [AngularJS](https://github.com/Gillespie59/eslint-plugin-angular)
 * [BackboneJS](https://github.com/ilyavolodin/eslint-plugin-backbone)
 * [Jasmine](https://github.com/tlvince/eslint-plugin-jasmine)
 
