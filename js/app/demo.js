@@ -83,6 +83,15 @@ require([
                 resultsNode.appendChild(resultNode);
             });
         }
+        editor.showProblems(results.map(function(error) {
+        	return {
+        		line: error.line,
+        		start: error.column + 1,
+        		end: error.column + 2,
+        		description: error.message + ' (' + error.ruleId + ')',
+        		severity: error.severity === 2 ? 'error' : 'warning'
+        	};
+        }));
     }
 
     function populateConfiguration(rules, environments) {
