@@ -31,10 +31,19 @@ redirect_from: "/docs/integrations/"
     * [broccoli-eslint](https://www.npmjs.org/package/broccoli-eslint)
 * **Webpack:**
     * [eslint-loader](https://www.npmjs.org/package/eslint-loader) 
+* **Ember-cli**
+    * [ember-cli-eslint](https://www.npmjs.com/package/ember-cli-eslint)
+* **Sails.js**
+    * [sails-hook-eslint](https://www.npmjs.com/package/sails-hook-eslint)
 
 ## Source Control
 
 * [Git Precommit Hook](https://coderwall.com/p/zq8jlq)
+
+## Testing
+
+ * **Mocha.js**
+    * [mocha-eslint](https://www.npmjs.com/package/mocha-eslint)
 
 ## External ESLint rules
 
