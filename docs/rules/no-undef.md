@@ -54,7 +54,7 @@ For convenience, JSHint and JSLint provide shortcuts that pre-define global vari
 
 ### browser
 
-Defines common browser globals. Globals that should not be used in production (such as `alert`, `console`, etc) are not included.
+Defines common browser globals. Globals that should not be used in production (such as `alert`, `console`, etc.) are not included.
 
 ```js
 /*jslint browser:true*/
@@ -64,6 +64,7 @@ setTimeout(function() {
 ```
 
 ### node
+
 Defines globals for Node.js development.
 
 ```js

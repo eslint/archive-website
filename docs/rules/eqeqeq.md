@@ -10,9 +10,9 @@ It is considered good practice to use the type-safe equality operators `===` and
 The reason for this is that `==` and `!=` do type coercion which follows the rather obscure [Abstract Equality Comparison Algorithm](http://www.ecma-international.org/ecma-262/5.1/#sec-11.9.3).
 For instance, the following statements are all considered `true`:
 
- - `[] == false`
- - `[] == ![]`
- - `3 == "03"`
+* `[] == false`
+* `[] == ![]`
+* `3 == "03"`
 
 If one of those occurs in an innocent-looking statement such as `a == b` the actual problem is very difficult to spot.
 
@@ -32,7 +32,7 @@ if (obj.getStuff() != undefined) { ... }
 
 ### Options
 
-- `"smart"`
+* `"smart"`
 
 This option enforces the use of `===` and `!==` except for these cases:
 
@@ -59,7 +59,6 @@ foo == null
 The following patterns are considered warnings with "smart":
 
 ```js
-
 // comparing two variables requires ===
 a == b
 
@@ -71,7 +70,7 @@ bananas != 1
 value == undefined
 ```
 
-- `"allow-null"`
+* `"allow-null"`
 
 This option will enforce `===` and `!==` in your code with one exception - it permits comparing to `null` to check for `null` or `undefined` in a single expression.
 

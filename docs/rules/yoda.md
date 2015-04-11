@@ -60,7 +60,7 @@ if (-1 < str.indexOf(substr)) {
 ```js
 // When ["always"]
 if (color == "blue") {
-	// ...
+    // ...
 }
 ```
 

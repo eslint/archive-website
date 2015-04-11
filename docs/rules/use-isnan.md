@@ -15,11 +15,11 @@ The following patterns are considered warnings:
 
 ```js
 if (foo == NaN) {
-	// ...
+    // ...
 }
 
 if (foo != NaN) {
-	// ...
+    // ...
 }
 ```
 
@@ -27,17 +27,17 @@ The following patterns are not warnings:
 
 ```js
 if (isNaN(foo)) {
-	// ...
+    // ...
 }
 
 if (isNaN(NaN)) {
-	// ...
+    // ...
 }
 ```
 
 ## Further reading
 
- - [Use the isNaN function to compare with NaN](http://jslinterrors.com/use-the-isnan-function-to-compare-with-nan/)
+* [Use the isNaN function to compare with NaN](http://jslinterrors.com/use-the-isnan-function-to-compare-with-nan/)
 
 ## Version
 

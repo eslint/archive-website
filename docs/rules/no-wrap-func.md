@@ -9,11 +9,11 @@ Although it's possible to wrap functions in parentheses, this can be confusing w
 
 ```js
 var foo = (function() {
-	// IIFE
+    // IIFE
 }());
 
 var bar = (function() {
-	// not an IIFE
+    // not an IIFE
 });
 ```
 
@@ -37,7 +37,7 @@ var a = function() {...};
 
 ## Further Reading
 
-* [Wrapping non-IIFE function literals in parens is unnecessary](http://jslinterrors.com/wrapping-non-iife-function-literals-in-parens)
+* [Do not wrap function literals in parens unless they are to be immediately invoked](http://jslinterrors.com/do-not-wrap-function-literals-in-parens)
 
 ## Version
 

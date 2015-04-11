@@ -14,14 +14,14 @@ Most likely the case block was copied from above and it was forgotten to change 
 var a = 1;
 
 switch (a) {
-	case 1:
-		break;
-	case 2:
-		break;
-	case 1:			// duplicate literal 1
-		break;
-	default:
-		break;
+    case 1:
+        break;
+    case 2:
+        break;
+    case 1:         // duplicate literal 1
+        break;
+    default:
+        break;
 }
 ```
 
@@ -33,39 +33,39 @@ The following patterns are considered warnings:
 
 ```js
 var a = 1,
-	one = 1;
+    one = 1;
 
 switch (a) {
-	case 1:
-		break;
-	case 1:
-		break;
-	case 2:
-		break;
-	default:
-		break;
+    case 1:
+        break;
+    case 1:
+        break;
+    case 2:
+        break;
+    default:
+        break;
 }
 
 switch (a) {
-	case "1":
-		break;
-	case "1":
-		break;
-	case "2":
-		break;
-	default:
-		break;
+    case "1":
+        break;
+    case "1":
+        break;
+    case "2":
+        break;
+    default:
+        break;
 }
 
 switch (a) {
-	case one:
-		break;
-	case one:
-		break;
-	case 2:
-		break;
-	default:
-		break;
+    case one:
+        break;
+    case one:
+        break;
+    case 2:
+        break;
+    default:
+        break;
 }
 ```
 
@@ -75,12 +75,12 @@ The following patterns are not considered warnings:
 var a = 1;
 
 switch (a) {
-	case 1:
-		break;
-	case 2:
-		break;
-	default:
-		break;
+    case 1:
+        break;
+    case 2:
+        break;
+    default:
+        break;
 }
 ```
 

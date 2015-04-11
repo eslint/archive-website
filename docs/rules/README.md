@@ -144,6 +144,7 @@ These rules are purely matters of style and are quite subjective.
 * [new-parens](new-parens.md) - disallow the omission of parentheses when invoking a constructor with no arguments
 * [newline-after-var](newline-after-var.md) - allow/disallow an empty newline after `var` statement (off by default)
 * [no-array-constructor](no-array-constructor.md) - disallow use of the `Array` constructor
+* [no-continue](no-continue.md) - disallow use of the `continue` statement (off by default)
 * [no-inline-comments](no-inline-comments.md) - disallow comments inline after code (off by default)
 * [no-lonely-if](no-lonely-if.md) - disallow if as the only statement in an else block (off by default)
 * [no-mixed-spaces-and-tabs](no-mixed-spaces-and-tabs.md) - disallow mixed spaces and tabs for indentation
@@ -156,8 +157,9 @@ These rules are purely matters of style and are quite subjective.
 * [no-trailing-spaces](no-trailing-spaces.md) - disallow trailing whitespace at the end of lines
 * [no-underscore-dangle](no-underscore-dangle.md) - disallow dangling underscores in identifiers
 * [no-wrap-func](no-wrap-func.md) - disallow wrapping of non-IIFE statements in parens
-* [one-var](one-var.md) - allow just one var statement per function (off by default)
+* [one-var](one-var.md) - allow or disallow one variable declaration per function (off by default)
 * [operator-assignment](operator-assignment.md) - require assignment operator shorthand where possible or prohibit it entirely (off by default)
+* [operator-linebreak](operator-linebreak.md) - enforce operators to be placed before or after line breaks (off by default)
 * [padded-blocks](padded-blocks.md) - enforce padding within blocks (off by default)
 * [quote-props](quote-props.md) - require quotes around object literal property names (off by default)
 * [quotes](quotes.md) - specify whether double or single quotes should be used

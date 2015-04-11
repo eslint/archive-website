@@ -25,7 +25,7 @@ This rule accepts a single options argument with the following defaults:
 
 `Properties` can have the following values:
 
-1. `always` is the default and checks all proprty names
+1. `always` is the default and checks all property names
 2. `never` does not check property names at all
 
 The following patterns are considered warnings:
@@ -42,7 +42,7 @@ obj.do_something = function() {
 };
 
 var obj = {
-	my_pref: 1
+    my_pref: 1
 };
 ```
 
@@ -60,7 +60,7 @@ obj.do_something();
 
 /*eslint camelcase: [2, {properties: "never"}]*/
 var obj = {
-	my_pref: 1
+    my_pref: 1
 };
 ```
 

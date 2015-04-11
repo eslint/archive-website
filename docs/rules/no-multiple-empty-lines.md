@@ -16,11 +16,11 @@ The following patterns are considered warnings:
 
 ```js
 // no-multiple-empty-lines: [1, {max: 2}]  // Maximum of 2 empty lines.
-var foo = 5;  
-  
-  
-  
-  
+var foo = 5;
+
+
+
+
 var bar = 3;
 
 ```
@@ -30,16 +30,16 @@ The following patterns are not warnings:
 ```js
 
 // no-multiple-empty-lines: [1, {max: 2}]  // Maximum of 2 empty lines.
-var foo = 5;  
-  
+var foo = 5;
+
 var bar = 3;
 
 // no-multiple-empty-lines: [1, {max: 4}]  // Maximum of 4 empty lines.
-var foo = 5;  
-  
-  
-  
-  
+var foo = 5;
+
+
+
+
 var bar = 3;
 
 ```

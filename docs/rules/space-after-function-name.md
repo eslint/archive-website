@@ -11,11 +11,11 @@ Whitespace between a function name and its parameter list is optional.
 
 ```js
 function withoutSpace(x) {
-	// ...
+    // ...
 }
 
 function withSpace (x) {
-	// ...
+    // ...
 }
 ```
 
@@ -30,14 +30,14 @@ The following patterns are considered warnings:
 
 ```js
 function foo (x) {
-	// ...
+    // ...
 }
 
 var x = function named (x) {};
 
 // When [1, "always"]
 function bar(x) {
-	// ...
+    // ...
 }
 ```
 
@@ -45,14 +45,14 @@ The following patterns are not warnings:
 
 ```js
 function foo(x) {
-	// ...
+    // ...
 }
 
 var x = function named(x) {};
 
 // When [1, "always"]
 function bar (x) {
-	// ...
+    // ...
 }
 ```
 

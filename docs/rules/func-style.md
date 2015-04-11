@@ -9,7 +9,7 @@ There are two ways of defining functions in JavaScript: function declarations an
 
 ```js
 function doSomething() {
-	// ...
+    // ...
 }
 ```
 
@@ -17,7 +17,7 @@ Equivalent function expressions begin with the `var` keyword, followed by a name
 
 ```js
 var doSomething = function() {
-	// ...
+    // ...
 };
 ```
 
@@ -27,7 +27,7 @@ The primary difference between function declarations and function expressions is
 doSomething();
 
 function doSomething() {
-	// ...
+    // ...
 }
 ```
 
@@ -36,14 +36,14 @@ Although this code might seem like an error, it actually works fine because Java
 For function expressions, you must define the function before it is used, otherwise it causes an error. Example:
 
 ```js
-doSomething();	// error!
+doSomething();  // error!
 
 var doSomething = function() {
-	// ...
+    // ...
 };
 ```
 
-In this case, `doSomething()` is undefined at the time of invocation and so causes a runtime error. 
+In this case, `doSomething()` is undefined at the time of invocation and so causes a runtime error.
 
 Due to these different behaviors, it's common to have guidelines as to which style of function should be used. There is really no correct or incorrect choice here, it's just a preference.
 
@@ -56,12 +56,12 @@ The following patterns are considered warnings:
 ```js
 // "func-style": [2, "declaration"]
 var foo = function() {
-	// ...
+    // ...
 } ;
 
 // "func-style": [2, "expression"]
 function foo() {
-	// ...
+    // ...
 }
 ```
 
@@ -70,7 +70,7 @@ The following patterns are not considered warnings:
 ```js
 // both styles
 SomeObject.foo = function() {
-	// ...
+    // ...
 };
 ```
 
