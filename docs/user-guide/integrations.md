@@ -39,6 +39,7 @@ redirect_from: "/docs/integrations/"
 ## Source Control
 
 * [Git Precommit Hook](https://coderwall.com/p/zq8jlq)
+* [overcommit Git hook manager](https://github.com/brigade/overcommit)
 
 ## Testing
 
