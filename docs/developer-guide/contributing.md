@@ -91,7 +91,7 @@ The ESLint project is committed to having great documentation as we believe that
 
 Our site, [eslint.org](http://eslint.org) is our public face. It was started by designers and developers who donated their time and energy to getting it off the ground, and in the spirit of open source, we have shared the code in a [separate repo](https://github.com/eslint/eslint.github.io).
 
-If you want to help, please check the [site issues]() to see where your help is most needed. In addition, we are always looking to improve our layout, design, and information architecture. Just as with the main ESLint project, you should feel free to file and work on issues.
+If you want to help, please check the [site issues](https://github.com/eslint/eslint.github.io/issues) to see where your help is most needed. In addition, we are always looking to improve our layout, design, and information architecture. Just as with the main ESLint project, you should feel free to file and work on issues.
 
 **Important:** The documentation (everything under http://eslint.org/docs/) actually resides in the [main repo](https://github.com/eslint/eslint/tree/master/docs). Changes to that content must be made there. These pages are auto-generated on [eslint.org](http://eslint.org) with each release.
 
