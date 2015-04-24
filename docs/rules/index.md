@@ -167,7 +167,7 @@ These rules are purely matters of style and are quite subjective.
 * [operator-linebreak](operator-linebreak) - enforce operators to be placed before or after line breaks (off by default)
 * [padded-blocks](padded-blocks) - enforce padding within blocks (off by default)
 * [quote-props](quote-props) - require quotes around object literal property names (off by default)
-* [quotes](quotes) - specify whether double or single quotes should be used
+* [quotes](quotes) - specify whether backticks, double or single quotes should be used
 * [semi](semi) - require or disallow use of semicolons instead of ASI
 * [semi-spacing](semi-spacing) - enforce spacing before and after semicolons
 * [sort-vars](sort-vars) - sort variables within the same declaration block (off by default)
@@ -192,6 +192,7 @@ These rules are only relevant to ES6 environments and are off by default.
 * [no-var](no-var) - require `let` or `const` instead of `var` (off by default)
 * [generator-star](generator-star) - **(deprecated)** enforce the position of the `*` in generator functions (off by default)
 * [generator-star-spacing](generator-star-spacing) - enforce the spacing around the `*` in generator functions (off by default)
+* [object-shorthand](object-shorthand) - require method and property shorthand syntax for object literals (off by default)
 
 ## Legacy
 

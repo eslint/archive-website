@@ -20,7 +20,7 @@ function loadData (err, data) {
 This rule expects that when you're using the callback pattern in node you'll handle the error and
 requires that you specify the name of your error object. The name of the argument will default to `err`.
 
-**The following are considered warnings:**
+The following are considered warnings:
 
 ```js
 function loadData (err, data) {
@@ -29,7 +29,7 @@ function loadData (err, data) {
 
 ```
 
-**The following are not considered warnings:**
+The following are not considered warnings:
 
 ```js
 function loadData (err, data) {
@@ -44,7 +44,7 @@ function generateError (err) {
 }
 ```
 
-**You can also customize the name of the error object:**
+You can also customize the name of the error object:
 
 ```js
 // missing-err: [2, "error"]
@@ -62,7 +62,7 @@ so you need a more flexible configuration to ensure all unhandled error getting 
 
 If the configured name of the error variable begins with a `^` it is considered to be a regexp pattern.
 
-**Examples for valid configurations:**
+Examples for valid configurations:
 
 1. Rule configured to warn if an unhandled error is detected where the name of the error variable can be `err`, `error` or `anySpecificError`.
 

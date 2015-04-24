@@ -106,6 +106,7 @@ An environment defines both global variables that are predefined as well as whic
 * `jquery` - jquery global variables.
 * `prototypejs` - prototypejs global variables.
 * `shelljs` - shelljs global variables.
+* `meteor` - meteor global variables.
 * `es6` - enable all ECMAScript 6 features except for modules.
 
 These environments are not mutually exclusive, so you can define more than one at a time.
@@ -233,13 +234,13 @@ To configure rules inside of a file using configuration comments, use a comment 
 /*eslint eqeqeq:0, curly: 2*/
 ```
 
-In this example, [`eqeqeq`](rules/eqeqeq) is turned off and [`curly`](rules/curly) is turned on as an error. If a rule has additional options, you can specify them using array literal syntax, such as:
+In this example, [`eqeqeq`](../rules/eqeqeq) is turned off and [`curly`](../rules/curly) is turned on as an error. If a rule has additional options, you can specify them using array literal syntax, such as:
 
 ```js
 /*eslint quotes: [2, "double"], curly: 2*/
 ```
 
-This comment specifies the "double" option for the [`quotes`](rules/quotes) rule.
+This comment specifies the "double" option for the [`quotes`](../rules/quotes) rule.
 
 To configure rules inside of a configuration file, use the `rules` key along with an error level and any options you want to use. For example:
 
