@@ -108,7 +108,7 @@ The main method you'll use is `context.report()`, which publishes a warning or e
 
 or
 
-    context.report(node, "`{{identifier}}` is unexpected!", { identifier: node.name });
+    context.report(node, "`&#x7B;&#x7B;identifier}}` is unexpected!", { identifier: node.name });
 
 The node contains all of the information necessary to figure out the line and column number of the offending text as well the source text representing the node.
 
@@ -352,7 +352,7 @@ semi                    |    19.359 |     2.3%
 
 To test one rule explicitly, combine the `--reset`, `--no-eslintrc`, and `--rule` options:
 
-```
+```bash
 $ TIMING=1 eslint --reset --no-eslintrc --rule "quotes: [2, 'double']" lib
 Rule   | Time (ms) | Relative
 :------|----------:|--------:

@@ -30,7 +30,7 @@ Configuration settings are set in your `.eslintrc` file by using the `ecmaFeatur
 * `classes` - enable classes
 * `defaultParams` - enable [default function parameters](https://leanpub.com/understandinges6/read/#leanpub-auto-default-parameters)
 * `destructuring` - enable [destructuring](https://leanpub.com/understandinges6/read#leanpub-auto-destructuring-assignment)
-* `forOf` - enable [`for-of` loops](https://leanpub.com/understandinges6/read#leanpub-auto-for-of)
+* `forOf` - enable [`for-of` loops](https://leanpub.com/understandinges6/read#leanpub-auto-iterables-and-for-of)
 * `generators` - enable [generators](https://leanpub.com/understandinges6/read#leanpub-auto-generators)
 * `modules` - enable modules and global strict mode
 * `objectLiteralComputedProperties` - enable [computed object literal property names](https://leanpub.com/understandinges6/read#leanpub-auto-computed-property-names)
@@ -40,6 +40,7 @@ Configuration settings are set in your `.eslintrc` file by using the `ecmaFeatur
 * `octalLiterals` - enable [octal literals](https://leanpub.com/understandinges6/read#leanpub-auto-octal-and-binary-literals)
 * `regexUFlag` - enable the [regular expression `u` flag](https://leanpub.com/understandinges6/read#leanpub-auto-the-regular-expression-u-flag)
 * `regexYFlag` - enable the [regular expression `y` flag](https://leanpub.com/understandinges6/read#leanpub-auto-the-regular-expression-y-flag)
+* `restParams` - enable the [rest parameters](https://leanpub.com/understandinges6/read#leanpub-auto-rest-parameters)
 * `spread` - enable the [spread operator](https://leanpub.com/understandinges6/read#leanpub-auto-the-spread-operator)
 * `superInFunctions` - enable `super` references inside of functions
 * `templateStrings` - enable [template strings](https://leanpub.com/understandinges6/read/#leanpub-auto-template-strings)
@@ -91,7 +92,7 @@ The following parsers are compatible with ESLint:
 * [Esprima-FB](https://npmjs.com/package/esprima-fb) - Facebook's fork of Esprima that includes their proprietary syntax additions.
 * [Babel-ESLint](https://npmjs.com/package/babel-eslint) - A wrapper around the [Babel](http://babeljs.io) parser that makes it compatible with ESLint.
 
-Note when using a custom parser, the `ecmaFeatures` configuration property is ignored unless otherwise specified by the parser.
+Note when using a custom parser, the `ecmaFeatures` configuration property is still required for ESLint to work properly with features not in ECMAScript 5 by default. Parsers may or may not also use `ecmaFeatures` to determine which features to enable.
 
 ## Specifying Environments
 
@@ -348,7 +349,7 @@ In each case, the settings in the configuration file override default settings.
 
 When using `.eslintrc` and `package.json` files for configuration, you can take advantage of configuration cascading. For instance, suppose you have the following structure:
 
-```
+```text
 your-project
 ├── .eslintrc
 ├── lib
@@ -362,7 +363,7 @@ The configuration cascade works by using the closest `.eslintrc` file to the fil
 
 In the same way, if there is a `package.json` file in the root directory with an `eslintConfig` field, the configuration it describes will apply to all subdirectories beneath it, but the configuration described by the `.eslintrc` file in the tests directory will override it where there are conflicting specifications.
 
-```
+```text
 your-project
 ├── package.json
 ├── lib
@@ -396,6 +397,42 @@ The complete configuration hierarchy, from highest precedence to lowest preceden
     1. `eslint.json`
     1. Blank (no config)
 
+## Extending Configuration Files
+
+If you want to extend a specific configuration file, you can use the `extends` property and specify the path to the file. The path can be either relative or absolute.
+
+The extended configuration provides base rules, which can be overriden by the configuration that references it. For example:
+
+```js
+{
+    "extends": "./node_modules/coding-standard/.eslintrc",
+
+    "rules": {
+        // Override any settings from the "parent" configuration
+        "eqeqeq": 1
+    }
+}
+```
+
+The extended configurations can also contain their own `extends`, resulting in recursive merging of the referenced configurations.
+
+You can also extend configurations using shareable configuration packages. To do so, be sure to install the configuration package you want from npm and then use the package name, such as:
+
+```js
+{
+    "extends": "eslint-config-myrules",
+
+    "rules": {
+        // Override any settings from the "parent" configuration
+        "eqeqeq": 1
+    }
+}
+```
+
+In this example, the `eslint-config-myrules` package will be loaded as an object and used as the parent of this configuration.
+
+**Note:** You can omit `eslint-config-` and ESLint will automatically insert it for you, similar to how plugins work. See [Shareable Configs](../developer-guide/shareable-configs) for more information.
+
 ## Comments in Configuration Files
 
 Both the JSON and YAML configuration file formats support comments (`package.json` files should not include them). You can use JavaScript-style comments or YAML-style comments in either type of file and ESLint will safely ignore them. This allows your configuration files to be more human-friendly. For example:
@@ -417,7 +454,7 @@ Both the JSON and YAML configuration file formats support comments (`package.jso
 
 You can tell ESLint to ignore specific files and directories by creating an `.eslintignore` file in your project's root directory. The `.eslintignore` file is a plain text file where each line is a glob pattern indicating which paths should be omitted from linting. For example, the following will omit all JavaScript files:
 
-```
+```text
 **/*.js
 ```
 
@@ -433,7 +470,7 @@ In addition to any patterns in a `.eslintignore` file, ESLint always ignores fil
 
 For example, placing the following `.eslintignore` file in the current working directory will ignore all of `node_modules`, any files with the extensions `.ts.js` or `.coffee.js` extension that might have been transpiled, and anything in the `build/` directory except `build/index.js`:
 
-```
+```text
 # node_modules ignored by default
 
 # Ignore files compiled from TypeScript and CoffeeScript
@@ -460,7 +497,7 @@ Any file that follows the standard ignore file format can be used. Keep in mind 
 
 When you pass directories to ESLint, files and directories are silently ignored. If you pass a specific file to ESLint, then you will see a warning indicating that the file was skipped. For example, suppose you have an `.eslintignore` file that looks like this:
 
-```
+```text
 foo.js
 ```
 
@@ -470,7 +507,7 @@ And then you run:
 
 You'll see this warning:
 
-```
+```text
 foo.js
   0:0  warning  File ignored because of your .eslintignore file. Use --no-ignore to override.
 

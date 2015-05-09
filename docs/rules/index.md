@@ -21,8 +21,8 @@ The following rules point out areas where you might have made mistakes.
 * [no-dupe-args](no-dupe-args) - disallow duplicate arguments in functions
 * [no-dupe-keys](no-dupe-keys) - disallow duplicate keys when creating object literals
 * [no-duplicate-case](no-duplicate-case) - disallow a duplicate case label.
-* [no-empty](no-empty) - disallow empty statements
 * [no-empty-class](no-empty-class) - disallow the use of empty character classes in regular expressions
+* [no-empty](no-empty) - disallow empty statements
 * [no-ex-assign](no-ex-assign) - disallow assigning to the exception in a `catch` block
 * [no-extra-boolean-cast](no-extra-boolean-cast) - disallow double-negation boolean casts in a boolean context
 * [no-extra-parens](no-extra-parens) - disallow unnecessary parentheses (off by default)
@@ -51,6 +51,7 @@ These are rules designed to prevent you from making mistakes. They either prescr
 * [curly](curly) - specify curly brace conventions for all control statements
 * [default-case](default-case) - require `default` case in `switch` statements (off by default)
 * [dot-notation](dot-notation) - encourages use of dot notation whenever possible
+* [dot-location](dot-location) - enforces consistent newlines before or after dots (off by default)
 * [eqeqeq](eqeqeq) - require the use of `===` and `!==`
 * [guard-for-in](guard-for-in) - make sure `for-in` loops have an `if` statement (off by default)
 * [no-alert](no-alert) - disallow the use of `alert`, `confirm`, and `prompt`
@@ -72,11 +73,11 @@ These are rules designed to prevent you from making mistakes. They either prescr
 * [no-multi-spaces](no-multi-spaces) - disallow use of multiple spaces
 * [no-multi-str](no-multi-str) - disallow use of multiline strings
 * [no-native-reassign](no-native-reassign) - disallow reassignments of native objects
-* [no-new](no-new) - disallow use of new operator when not part of the assignment or comparison
 * [no-new-func](no-new-func) - disallow use of new operator for `Function` object
 * [no-new-wrappers](no-new-wrappers) - disallows creating new instances of `String`,`Number`, and `Boolean`
-* [no-octal](no-octal) - disallow use of octal literals
+* [no-new](no-new) - disallow use of new operator when not part of the assignment or comparison
 * [no-octal-escape](no-octal-escape) - disallow use of octal escape sequences in string literals, such as `var foo = "Copyright \251";`
+* [no-octal](no-octal) - disallow use of octal literals
 * [no-param-reassign](no-param-reassign) - disallow reassignment of function parameters (off by default)
 * [no-process-env](no-process-env) - disallow use of `process.env` (off by default)
 * [no-proto](no-proto) - disallow usage of `__proto__` property
@@ -110,10 +111,10 @@ These rules have to do with variable declarations.
 * [no-catch-shadow](no-catch-shadow) - disallow the catch clause parameter name being the same as a variable in the outer scope (off by default in the node environment)
 * [no-delete-var](no-delete-var) - disallow deletion of variables
 * [no-label-var](no-label-var) - disallow labels that share a name with a variable
-* [no-shadow](no-shadow) - disallow declaration of variables already declared in the outer scope
 * [no-shadow-restricted-names](no-shadow-restricted-names) - disallow shadowing of names such as `arguments`
-* [no-undef](no-undef) - disallow use of undeclared variables unless mentioned in a `/*global */` block
+* [no-shadow](no-shadow) - disallow declaration of variables already declared in the outer scope
 * [no-undef-init](no-undef-init) - disallow use of undefined when initializing variables
+* [no-undef](no-undef) - disallow use of undeclared variables unless mentioned in a `/*global */` block
 * [no-undefined](no-undefined) - disallow use of `undefined` variable (off by default)
 * [no-unused-vars](no-unused-vars) - disallow declaration of variables that are not used in the code
 * [no-use-before-define](no-use-before-define) - disallow use of variables before they are defined
@@ -134,7 +135,6 @@ These rules are specific to JavaScript running on Node.js.
 
 These rules are purely matters of style and are quite subjective.
 
-* [indent](indent) - this option sets a specific tab width for your code (off by default)
 * [brace-style](brace-style) - enforce one true brace style (off by default)
 * [camelcase](camelcase) - require camel case names
 * [comma-spacing](comma-spacing) - enforce spacing before and after comma
@@ -143,7 +143,9 @@ These rules are purely matters of style and are quite subjective.
 * [eol-last](eol-last) - enforce newline at the end of file, with no multiple empty lines
 * [func-names](func-names) - require function expressions to have a name (off by default)
 * [func-style](func-style) - enforces use of function declarations or expressions (off by default)
+* [indent](indent) - this option sets a specific tab width for your code (off by default)
 * [key-spacing](key-spacing) - enforces spacing between keys and values in object literal properties
+* [linebreak-style](linebreak-style) - disallow mixed 'LF' and 'CRLF' as linebreaks (off by default)
 * [max-nested-callbacks](max-nested-callbacks) - specify the maximum depth callbacks can be nested (off by default)
 * [new-cap](new-cap) - require a capital letter for constructors
 * [new-parens](new-parens) - disallow the omission of parentheses when invoking a constructor with no arguments
@@ -161,6 +163,7 @@ These rules are purely matters of style and are quite subjective.
 * [no-ternary](no-ternary) - disallow the use of ternary operators (off by default)
 * [no-trailing-spaces](no-trailing-spaces) - disallow trailing whitespace at the end of lines
 * [no-underscore-dangle](no-underscore-dangle) - disallow dangling underscores in identifiers
+* [no-unneeded-ternary](no-unneeded-ternary) - disallow the use of `Boolean` literals in conditional expressions (off by default)
 * [no-wrap-func](no-wrap-func) - disallow wrapping of non-IIFE statements in parens
 * [one-var](one-var) - allow or disallow one variable declaration per function (off by default)
 * [operator-assignment](operator-assignment) - require assignment operator shorthand where possible or prohibit it entirely (off by default)
@@ -168,8 +171,8 @@ These rules are purely matters of style and are quite subjective.
 * [padded-blocks](padded-blocks) - enforce padding within blocks (off by default)
 * [quote-props](quote-props) - require quotes around object literal property names (off by default)
 * [quotes](quotes) - specify whether backticks, double or single quotes should be used
-* [semi](semi) - require or disallow use of semicolons instead of ASI
 * [semi-spacing](semi-spacing) - enforce spacing before and after semicolons
+* [semi](semi) - require or disallow use of semicolons instead of ASI
 * [sort-vars](sort-vars) - sort variables within the same declaration block (off by default)
 * [space-after-function-name](space-after-function-name) - **(deprecated)** require a space after function names (off by default)
 * [space-after-keywords](space-after-keywords) - require a space after certain keywords (off by default)
@@ -189,9 +192,9 @@ These rules are purely matters of style and are quite subjective.
 
 These rules are only relevant to ES6 environments and are off by default.
 
-* [no-var](no-var) - require `let` or `const` instead of `var` (off by default)
-* [generator-star](generator-star) - **(deprecated)** enforce the position of the `*` in generator functions (off by default)
 * [generator-star-spacing](generator-star-spacing) - enforce the spacing around the `*` in generator functions (off by default)
+* [generator-star](generator-star) - **(deprecated)** enforce the position of the `*` in generator functions (off by default)
+* [no-var](no-var) - require `let` or `const` instead of `var` (off by default)
 * [object-shorthand](object-shorthand) - require method and property shorthand syntax for object literals (off by default)
 
 ## Legacy

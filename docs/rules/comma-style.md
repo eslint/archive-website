@@ -129,7 +129,7 @@ function bar() {
 
 Exceptions of the following nodes may be passed in order to tell ESLint to ignore nodes of certain types.
 
-```
+```text
 ArrayExpression,
 ObjectExpression,
 VariableDeclaration
@@ -138,7 +138,7 @@ VariableDeclaration
 An example use case is if a user wanted to only enforce comma style in var statements.
 The following code would lint.
 
-```
+```js
 /* eslint comma-style: [2, "first", {exceptions: {ArrayExpression: true, ObjectExpression: true} }] */
 var o = {fst:1,
          snd: [1,
@@ -148,7 +148,7 @@ var o = {fst:1,
 
 Whereas the following would not.
 
-```
+```js
 /* eslint comma-style: [2, "first", {exceptions: {ArrayExpression: true, ObjectExpression: true} }] */
 var o = {},
     a = [];

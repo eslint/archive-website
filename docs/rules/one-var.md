@@ -31,15 +31,24 @@ The single-declaration school of thought is based in pre-ECMAScript 6 behaviors,
 
 ## Rule Details
 
-This rule is aimed at enforcing the use of either one variable declaration or multiple declarations per function. As such, it will warn when it encounters an unexpected number of variable declarations.
+This rule is aimed at enforcing the use of either one variable declaration or multiple declarations per function (for `var`) or block (for `let` and `const`) scope. As such, it will warn when it encounters an unexpected number of variable declarations.
 
 ### Options
 
-There are two ways to configure this rule. The first is with one string specified as `"always"` (the default) to enforce one variable declaration per function or `"never"` to enforce multiple variable declarations per function.
+There are two ways to configure this rule. The first is by using one string specified as `"always"` (the default) to enforce one variable declaration per scope or `"never"` to enforce multiple variable declarations per scope.  If you declare variables in your code with `let` and `const`, then `"always"` and `"never"` will apply to the block scope for those declarations, not the function scope.
 
-If you declare with `let` and `const`, `"always"` and `"never"` will only apply to the block scope, not the function scope.
+The second way to configure this rule is with an object. The keys are any of:
 
-An alternative is to configure with an object. The keys are any of `var`, `let`, or `const`, and the values are either `"always"` or `"never"`. This allows you to set behavior differently for each type of declaration.
+* `var`
+* `let`
+* `const`
+
+or:
+
+* `uninitialized`
+* `initialized`
+
+and the values are either `"always"` or `"never"`. This allows you to set behavior differently for each type of declaration, or whether variables are initialized during declaration.
 
 You can configure the rule as follows:
 
@@ -56,6 +65,12 @@ You can configure the rule as follows:
         "var": "always", // Exactly one var declaration per function
         "let": "always", // Exactly one let declaration per block
         "const", "never" // Exactly one declarator per const declaration per block
+    }]
+
+    // Configure uninitialized and initialized seperately. Defaults to "always" if key not present.
+    "one-var": [2, {
+        "uninitialized": "always", // Exactly one declaration for uninitialized variables per function (var) or block (let or const)
+        "initialized": "never" // Exactly one declarator per initialized variable declaration per function (var) or block (let or const)
     }]
 }
 ```
@@ -171,7 +186,9 @@ function foo() {
 }
 ```
 
-When configured with an object as the first option, you can individually control how `var`, `let`, and `const` are handled. The following patterns are not considered warnings when the first option is `{var: "always", let: "never", const: "never"}`
+When configured with an object as the first option, you can individually control how `var`, `let`, and `const` are handled, or alternatively how `uninitialized` and `initialized` variables are handled (which if used will override `var`, `let`, and `const`).
+
+The following patterns are not considered warnings when the first option is `{ var: "always", let: "never", const: "never" }`
 
 ```js
 function foo() {
@@ -189,9 +206,32 @@ function foo() {
 }
 ```
 
+The following patterns are not considered warnings when the first option is `{ uninitialized: "always", initialized: "never" }`
+
+```js
+function foo() {
+    var a, b, c;
+    var foo = true;
+    var bar = false;
+}
+```
+
+If you are configuring the rule with an object, by default, if you didn't specify declaration type it will not be checked. So the following patten is not considered warning when options are set to: `{ var: 'always', let: 'always }`
+
+```js
+function foo() {
+    var a, b;
+    const foo = true;
+    const bar = true;
+    let c, d;
+}
+```
+
+
 ## Compatibility
 
 * **JSHint** - This rule maps to the `onevar` JSHint rule, but allows `let` and `const` to be configured separately.
+* **JSCS** - This rule roughly maps to `"disallowMultipleVarDecl"`
 
 ## Further Reading
 
