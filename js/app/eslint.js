@@ -18690,11 +18690,10 @@ function modifyConfigsFromComments(ast, config, reportingConfig, messages) {
         }
     });
 
-    // apply environment rules before user rules
+    // apply environment configs
     Object.keys(commentConfig.env).forEach(function (name) {
-        var environmentRules = environments[name] && environments[name].rules;
-        if (commentConfig.env[name] && environmentRules) {
-            assign(commentConfig.rules, environmentRules);
+        if (environments[name]) {
+            util.mergeConfigs(commentConfig, environments[name]);
         }
     });
     assign(commentConfig.rules, commentRules);
@@ -20532,6 +20531,22 @@ module.exports = function(context) {
 
     // the index of the last comment that was checked
     var lastCommentIndex = 0;
+    var allComments;
+
+    /**
+     * Determines the length of comment between 2 tokens
+     * @param {Object} left - The left token object.
+     * @param {Object} right - The right token object.
+     * @returns {number} Length of comment in between tokens
+     */
+    function getCommentLengthBetweenTokens(left, right) {
+        return allComments.reduce(function(val, comment) {
+            if (left.range[1] <= comment.range[0] && comment.range[1] <= right.range[0]) {
+                val = val + comment.range[1] - comment.range[0];
+            }
+            return val;
+        }, 0);
+    }
 
     /**
      * Determines whether two adjacent tokens have whitespace between them.
@@ -20541,7 +20556,8 @@ module.exports = function(context) {
      */
     function isSpaced(left, right) {
         var punctuationLength = context.getTokensBetween(left, right).length; // the length of any parenthesis
-        return (left.range[1] + punctuationLength) < right.range[0];
+        var commentLenth = getCommentLengthBetweenTokens(left, right);
+        return (left.range[1] + punctuationLength + commentLenth) < right.range[0];
     }
 
     /**
@@ -20640,12 +20656,12 @@ module.exports = function(context) {
         "Program": function() {
 
             var source = context.getSource(),
-                allComments = context.getAllComments(),
                 pattern = /,/g,
                 commaToken,
                 previousToken,
                 nextToken;
 
+            allComments = context.getAllComments();
             while (pattern.test(source)) {
 
                 // do not flag anything inside of comments
@@ -21324,22 +21340,21 @@ module.exports = function (context) {
     }
 
     /**
-     * Reports if the given token has invalid spacing.
+     * Reports if the dot between object and property is on the correct loccation.
      * @param {ASTNode} obj The object owning the property.
      * @param {ASTNode} prop The property of the object.
      * @param {ASTNode} node The corresponding node of the token.
      * @returns {void}
      */
     function checkDotLocation(obj, prop, node) {
+        var dot = context.getTokenBefore(prop);
 
-        if (!isSameLine(obj, prop)) {
-            var dot = context.getTokensBetween(obj, prop)[0];
+        if (dot.type === "Punctuator" && dot.value === ".") {
             if (onObject) {
-                if (obj.loc.start.line !== dot.loc.start.line) {
+                if (!isSameLine(obj, dot)) {
                     context.report(node, dot.loc.start, "Expected dot to be on same line as object.");
                 }
-            } else if (prop.loc.start.line !== dot.loc.start.line) {
-            // if (afterNewline && prop.loc.line !== dot.loc.line) {
+            } else if (!isSameLine(dot, prop)) {
                 context.report(node, dot.loc.start, "Expected dot to be on same line as property.");
             }
         }
@@ -22816,6 +22831,8 @@ module.exports = function(context) {
 /**
  * @fileoverview Rule to forbid mixing LF and LFCR line breaks.
  * @author Erik Mueller
+ * @copyright 2015 Varun Verma. All rights reserverd.
+ * @copyright 2015 James Whitney. All rights reserved.
  * @copyright 2015 Erik Mueller. All rights reserved.
  */
 
@@ -22834,12 +22851,16 @@ module.exports = function (context) {
             var linebreakStyle = context.options[0] || "unix",
                 expectedLF = linebreakStyle === "unix",
                 linebreaks = context.getSource().match(/\r\n|\r|\n|\u2028|\u2029/g),
+                lineOfError = -1;
+
+            if (linebreaks !== null) {
                 lineOfError = linebreaks.indexOf(expectedLF ? "\r\n" : "\n");
+            }
 
             if (lineOfError !== -1) {
                 context.report(node, {
                     line: lineOfError + 1,
-                    col: context.getSourceLines()[lineOfError].length
+                    column: context.getSourceLines()[lineOfError].length
                 }, expectedLF ? EXPECTED_LF_MSG : EXPECTED_CRLF_MSG);
             }
         }
@@ -24316,6 +24337,12 @@ module.exports = function(context) {
             return node.type + typeof node.name + node.name;
         } else if (node.type === "MemberExpression") {
             return node.type + getHash(node.object) + getHash(node.property);
+        } else if (node.type === "CallExpression") {
+            return node.type + getHash(node.callee) + node.arguments.map(getHash).join("");
+        } else if (node.type === "BinaryExpression") {
+            return node.type + getHash(node.left) + node.operator + getHash(node.right);
+        } else if (node.type === "ConditionalExpression") {
+            return node.type + getHash(node.test) + getHash(node.consequent) + getHash(node.alternate);
         }
     }
 
@@ -27712,11 +27739,11 @@ module.exports = function(context) {
 
     /**
      * Checks the current context for shadowed variables.
+     * @param {Scope} scope - Fixme
      * @returns {void}
      */
-    function checkForShadows() {
-        var scope = context.getScope(),
-            variables = scope.variables;
+    function checkForShadows(scope) {
+        var variables = scope.variables;
 
         // iterate through the array of variables and find duplicates with the upper scope
         var upper = scope.upper;
@@ -27727,9 +27754,17 @@ module.exports = function(context) {
     }
 
     return {
-        "FunctionDeclaration": checkForShadows,
-        "FunctionExpression": checkForShadows,
-        "ArrowFunctionExpression": checkForShadows
+        "Program:exit": function () {
+            var globalScope = context.getScope(),
+                stack = globalScope.childScopes.slice(),
+                scope;
+
+            while (stack.length) {
+                scope = stack.pop();
+                stack.push.apply(stack, scope.childScopes);
+                checkForShadows(scope);
+            }
+        }
     };
 
 };

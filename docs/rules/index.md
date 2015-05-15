@@ -81,7 +81,7 @@ These are rules designed to prevent you from making mistakes. They either prescr
 * [no-param-reassign](no-param-reassign) - disallow reassignment of function parameters (off by default)
 * [no-process-env](no-process-env) - disallow use of `process.env` (off by default)
 * [no-proto](no-proto) - disallow usage of `__proto__` property
-* [no-redeclare](no-redeclare) - disallow declaring the same variable more then once
+* [no-redeclare](no-redeclare) - disallow declaring the same variable more than once
 * [no-return-assign](no-return-assign) - disallow use of assignment in `return` statement
 * [no-script-url](no-script-url) - disallow use of javascript: urls.
 * [no-self-compare](no-self-compare) - disallow comparisons where both sides are exactly the same (off by default)
