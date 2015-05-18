@@ -19275,9 +19275,24 @@ module.exports = (function() {
             return null;
         }
 
+        /**
+         * Check to see if its a ES6 export declaration
+         * @param {ASTNode} astNode - any node
+         * @returns {boolean} whether the given node represents a export declaration
+         */
+        function looksLikeExport(astNode) {
+            return astNode.type === "ExportDefaultDeclaration" || astNode.type === "ExportNamedDeclaration" ||
+                astNode.type === "ExportAllDeclaration" || astNode.type === "ExportSpecifier";
+        }
+
         switch (node.type) {
             case "FunctionDeclaration":
-                return findJSDocComment(node.leadingComments);
+                if (looksLikeExport(parent)) {
+                    return findJSDocComment(parent.leadingComments);
+                } else {
+                    return findJSDocComment(node.leadingComments);
+                }
+                break;
 
             case "ArrowFunctionExpression":
             case "FunctionExpression":
@@ -27729,8 +27744,8 @@ module.exports = function(context) {
                     // "arguments" is a special case that has no identifiers (#1759)
                     variable.identifiers.length > 0 &&
 
-                    // function names are exempt
-                    variable.defs.length && variable.defs[0].type !== "FunctionName"
+                    // function and class names are exempt
+                    variable.defs.length && variable.defs[0].type !== "FunctionName" && variable.defs[0].type !== "ClassName"
             ) {
                 context.report(variable.identifiers[0], "{{a}} is already declared in the upper scope.", {a: variable.name});
             }
@@ -29344,37 +29359,46 @@ module.exports = function(context) {
         "SwitchStatement": startBlock,
 
         "VariableDeclaration": function(node) {
-            var type = node.kind;
-            var declarations = node.declarations;
-            var declarationCounts = countDeclarations(declarations);
+            var parent = node.parent,
+                type, declarations, declarationCounts;
+
+            type = node.kind;
+            if (!options[type]) {
+                return;
+            }
+
+            declarations = node.declarations;
+            declarationCounts = countDeclarations(declarations);
 
             // always
             if (!hasOnlyOneStatement(type, declarations)) {
-                if (options[type] && options[type].initialized === MODE_ALWAYS && options[type].uninitialized === MODE_ALWAYS) {
+                if (options[type].initialized === MODE_ALWAYS && options[type].uninitialized === MODE_ALWAYS) {
                     context.report(node, "Combine this with the previous '" + type + "' statement.");
                 } else {
-                    if (options[type] && options[type].initialized === MODE_ALWAYS) {
+                    if (options[type].initialized === MODE_ALWAYS) {
                         context.report(node, "Combine this with the previous '" + type + "' statement with initialized variables.");
                     }
-                    if (options[type] && options[type].uninitialized === MODE_ALWAYS) {
+                    if (options[type].uninitialized === MODE_ALWAYS) {
                         context.report(node, "Combine this with the previous '" + type + "' statement with uninitialized variables.");
                     }
                 }
             }
             // never
-            if (options[type] && options[type].initialized === MODE_NEVER && options[type].uninitialized === MODE_NEVER) {
-                if ((declarationCounts.uninitialized + declarationCounts.initialized) > 1) {
-                    context.report(node, "Split '" + type + "' declarations into multiple statements.");
-                }
-            } else {
-                if (options[type] && options[type].initialized === MODE_NEVER) {
-                    if (declarationCounts.initialized > 1) {
-                        context.report(node, "Split initialized '" + type + "' declarations into multiple statements.");
+            if (parent.type !== "ForStatement" || parent.init !== node) {
+                if (options[type].initialized === MODE_NEVER && options[type].uninitialized === MODE_NEVER) {
+                    if ((declarationCounts.uninitialized + declarationCounts.initialized) > 1) {
+                        context.report(node, "Split '" + type + "' declarations into multiple statements.");
                     }
-                }
-                if (options[type] && options[type].uninitialized === MODE_NEVER) {
-                    if (declarationCounts.uninitialized > 1) {
-                        context.report(node, "Split uninitialized '" + type + "' declarations into multiple statements.");
+                } else {
+                    if (options[type].initialized === MODE_NEVER) {
+                        if (declarationCounts.initialized > 1) {
+                            context.report(node, "Split initialized '" + type + "' declarations into multiple statements.");
+                        }
+                    }
+                    if (options[type].uninitialized === MODE_NEVER) {
+                        if (declarationCounts.uninitialized > 1) {
+                            context.report(node, "Split uninitialized '" + type + "' declarations into multiple statements.");
+                        }
                     }
                 }
             }
