@@ -34,7 +34,7 @@ Committers:
 * May submit small changes (documentation updates, changes to tests or code comments, configuration changes) without pull requests.
 * Must submit pull requests for any non-trivial changes.
 * Have their work reviewed by Reviewers before acceptance into the repository.
-* Can label issues as they are submitted (but must not add the "accepted" label).
+* Can label issues as they are submitted ("accepted" label can only be added for verified bugs).
 
 To become a Committer:
 
@@ -55,9 +55,9 @@ Reviewers have additional responsibilities over and above those of a Committer. 
 Reviewers fulfill all requirements of Committers, and also:
 
 * Contributions can be reviewed by other Reviewers, but this is not explicitly required.
-* Are not required to submit pull requests for changes, however, they are strongly encouraged to do so when the change is non-trivial.
-* May merge their own pull requests once they have collected the feedback they deem necessary.
-* Can label issues as they are submitted (but must not add the "accepted" label).
+* May merge external pull requests for accepted issues upon reviewing and approving the changes.
+* May merge their own pull requests once they have collected the feedback they deem necessary. (No pull request should be merged without at least one Committer/Reviewer comment stating they've looked at the code.)
+
 
 To become a Reviewer:
 
