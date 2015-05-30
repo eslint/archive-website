@@ -1,11 +1,9 @@
 ---
-title: Rule no-empty-class
+title: Rule no-empty-character-class
 layout: doc
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
-# Disallow Empty Character Classes (no-empty-class)
-
-**Deprecation notice**: This rule is deprecated and has been superseded by the [no-empty-character-class](no-empty-character-class) rule. It will be removed in ESLint v1.0.
+# Disallow Empty Character Classes (no-empty-character-class)
 
 Empty character classes in regular expressions do not match anything and can result in code that may not work as intended.
 
@@ -37,11 +35,15 @@ var foo = /^abc[a-z]/;
 var bar = new RegExp("^abc[]");
 ```
 
+## Related Rules
+
+* [no-empty-class](no-empty-class) (deprecated)
+
 ## Version
 
-This rule was introduced in ESLint 0.0.9.
+This rule was introduced in ESLint 0.22.0.
 
 ## Resources
 
-* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/no-empty-class.js)
-* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/no-empty-class.md)
+* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/no-empty-character-class.js)
+* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/no-empty-character-class.md)

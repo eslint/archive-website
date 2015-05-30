@@ -21,7 +21,8 @@ The following rules point out areas where you might have made mistakes.
 * [no-dupe-args](no-dupe-args) - disallow duplicate arguments in functions
 * [no-dupe-keys](no-dupe-keys) - disallow duplicate keys when creating object literals
 * [no-duplicate-case](no-duplicate-case) - disallow a duplicate case label.
-* [no-empty-class](no-empty-class) - disallow the use of empty character classes in regular expressions
+* [no-empty-character-class](no-empty-character-class) - disallow the use of empty character classes in regular expressions
+* [no-empty-class](no-empty-class) - **(deprecated)** disallow the use of empty character classes in regular expressions (off by default)
 * [no-empty](no-empty) - disallow empty statements
 * [no-ex-assign](no-ex-assign) - disallow assigning to the exception in a `catch` block
 * [no-extra-boolean-cast](no-extra-boolean-cast) - disallow double-negation boolean casts in a boolean context
@@ -45,6 +46,7 @@ The following rules point out areas where you might have made mistakes.
 
 These are rules designed to prevent you from making mistakes. They either prescribe a better way of doing something or help you avoid footguns.
 
+* [accessor-pairs](accessor-pairs) - Enforces getter/setter pairs in objects (off by default)
 * [block-scoped-var](block-scoped-var) - treat `var` statements as if they were block scoped (off by default)
 * [complexity](complexity) - specify the maximum cyclomatic complexity allowed in a program (off by default)
 * [consistent-return](consistent-return) - require `return` statements to either always or never specify values
@@ -145,6 +147,7 @@ These rules are purely matters of style and are quite subjective.
 * [func-style](func-style) - enforces use of function declarations or expressions (off by default)
 * [indent](indent) - this option sets a specific tab width for your code (off by default)
 * [key-spacing](key-spacing) - enforces spacing between keys and values in object literal properties
+* [lines-around-comment](lines-around-comment) - enforces empty lines around comments (off by default)
 * [linebreak-style](linebreak-style) - disallow mixed 'LF' and 'CRLF' as linebreaks (off by default)
 * [max-nested-callbacks](max-nested-callbacks) - specify the maximum depth callbacks can be nested (off by default)
 * [new-cap](new-cap) - require a capital letter for constructors
@@ -165,6 +168,7 @@ These rules are purely matters of style and are quite subjective.
 * [no-underscore-dangle](no-underscore-dangle) - disallow dangling underscores in identifiers
 * [no-unneeded-ternary](no-unneeded-ternary) - disallow the use of `Boolean` literals in conditional expressions (off by default)
 * [no-wrap-func](no-wrap-func) - disallow wrapping of non-IIFE statements in parens
+* [object-curly-spacing](object-curly-spacing) - require or disallow padding inside curly braces (off by default)
 * [one-var](one-var) - allow or disallow one variable declaration per function (off by default)
 * [operator-assignment](operator-assignment) - require assignment operator shorthand where possible or prohibit it entirely (off by default)
 * [operator-linebreak](operator-linebreak) - enforce operators to be placed before or after line breaks (off by default)
