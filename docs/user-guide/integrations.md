@@ -36,6 +36,10 @@ redirect_from: "/docs/integrations/"
 * **Sails.js**
     * [sails-hook-eslint](https://www.npmjs.com/package/sails-hook-eslint)
 
+## Command Line Tools
+
+* [Eslint Watch](https://www.npmjs.com/package/eslint-watch)
+
 ## Source Control
 
 * [Git Precommit Hook](https://coderwall.com/p/zq8jlq)
