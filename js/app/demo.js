@@ -146,27 +146,27 @@ require([
             if (i === limit) {
                 i = 0;
             }
-            $('#configuration .btn').click(function() {
-                var environments = {}, rules = {};
-                $('.environments input').each(function() {
-                    var name = $(this).attr('id');
-                    var value = $(this).is(':checked');
-                    environments[name] = value;
-                });
-                $('.rules input').each(function() {
-                    var name = $(this).attr('id');
-                    var value = $(this).is(':checked') ? 2 : 0;
-                    rules[name] = value;
-                });
-
-                OPTIONS.rules = rules;
-                OPTIONS.env = environments;
-                localStorage.rules = JSON.stringify(rules);
-                localStorage.env = JSON.stringify(environments);
-                verify();
-                $("#configuration").collapse('hide');
-            });
         }
+        $('#configuration .btn').click(function() {
+            var environments = {}, rules = {};
+            $('.environments input').each(function() {
+                var name = $(this).attr('id');
+                var value = $(this).is(':checked');
+                environments[name] = value;
+            });
+            $('.rules input').each(function() {
+                var name = $(this).attr('id');
+                var value = $(this).is(':checked') ? 2 : 0;
+                rules[name] = value;
+            });
+
+            OPTIONS.rules = rules;
+            OPTIONS.env = environments;
+            localStorage.rules = JSON.stringify(rules);
+            localStorage.env = JSON.stringify(environments);
+            verify();
+            $("#configuration").collapse('hide');
+        });
     }
 
     var OPTIONS = JSON.parse(config);
