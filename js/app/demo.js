@@ -161,6 +161,8 @@ require([
 
                 OPTIONS.rules = rules;
                 OPTIONS.env = environments;
+                localStorage.rules = JSON.stringify(rules);
+                localStorage.env = JSON.stringify(environments);
                 verify();
                 $("#configuration").collapse('hide');
             });
@@ -168,6 +170,12 @@ require([
     }
 
     var OPTIONS = JSON.parse(config);
+    if (localStorage.rules) {
+        OPTIONS.rules = JSON.parse(localStorage.rules);
+    }
+    if (localStorage.env) {
+        OPTIONS.env = JSON.parse(localStorage.env);
+    }
     populateConfiguration(OPTIONS.rules, OPTIONS.env);
 
     var editor = edit(document.getElementById('editor'));
