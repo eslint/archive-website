@@ -34,22 +34,6 @@ function doSmth() {
 // spaces here
 ```
 
-```js
-function doSmth() {
-  ...
-}
-
-```
-
-```js
-function doSmth() {
-  ...
-}
-
-
-
-```
-
 ## Version
 
 This rule was introduced in ESLint 0.7.1.

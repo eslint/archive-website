@@ -60,7 +60,7 @@ These are rules designed to prevent you from making mistakes. They either prescr
 * [no-caller](no-caller) - disallow use of `arguments.caller` or `arguments.callee`
 * [no-div-regex](no-div-regex) - disallow division operators explicitly at beginning of regular expression (off by default)
 * [no-else-return](no-else-return) - disallow `else` after a `return` in an `if` (off by default)
-* [no-empty-label](no-empty-label) - disallow use of labels for anything other then loops and switches
+* [no-empty-label](no-empty-label) - disallow use of labels for anything other than loops and switches
 * [no-eq-null](no-eq-null) - disallow comparisons to null without a type-checking operator (off by default)
 * [no-eval](no-eval) - disallow use of `eval()`
 * [no-extend-native](no-extend-native) - disallow adding to native types
@@ -102,7 +102,7 @@ These are rules designed to prevent you from making mistakes. They either prescr
 
 These rules relate to using strict mode.
 
-* [global-strict](global-strict) - **(deprecated)** require or disallow the `"use strict"` pragma in the global scope (off by default in the node environment)
+* [global-strict](global-strict) - **(deprecated)** require or disallow the `"use strict"` pragma in the global scope (on by default)(off by default in the node environment)
 * [no-extra-strict](no-extra-strict) - **(deprecated)** disallow unnecessary use of `"use strict";` when already in strict mode
 * [strict](strict) - controls location of Use Strict Directives
 
@@ -141,6 +141,7 @@ These rules are purely matters of style and are quite subjective.
 * [camelcase](camelcase) - require camel case names
 * [comma-spacing](comma-spacing) - enforce spacing before and after comma
 * [comma-style](comma-style) - enforce one true comma style (off by default)
+* [computed-property-spacing](computed-property-spacing) - require or disallow padding inside computed properties (off by default)
 * [consistent-this](consistent-this) - enforces consistent naming when capturing the current execution context (off by default)
 * [eol-last](eol-last) - enforce newline at the end of file, with no multiple empty lines
 * [func-names](func-names) - require function expressions to have a name (off by default)
@@ -167,7 +168,7 @@ These rules are purely matters of style and are quite subjective.
 * [no-trailing-spaces](no-trailing-spaces) - disallow trailing whitespace at the end of lines
 * [no-underscore-dangle](no-underscore-dangle) - disallow dangling underscores in identifiers
 * [no-unneeded-ternary](no-unneeded-ternary) - disallow the use of `Boolean` literals in conditional expressions (off by default)
-* [no-wrap-func](no-wrap-func) - disallow wrapping of non-IIFE statements in parens
+* [no-wrap-func](no-wrap-func) - **(deprecated)** disallow wrapping of non-IIFE statements in parens
 * [object-curly-spacing](object-curly-spacing) - require or disallow padding inside curly braces (off by default)
 * [one-var](one-var) - allow or disallow one variable declaration per function (off by default)
 * [operator-assignment](operator-assignment) - require assignment operator shorthand where possible or prohibit it entirely (off by default)
@@ -183,13 +184,14 @@ These rules are purely matters of style and are quite subjective.
 * [space-before-blocks](space-before-blocks) - require or disallow space before blocks (off by default)
 * [space-before-function-paren](space-before-function-paren) - require or disallow space before function opening parenthesis (off by default)
 * [space-before-function-parentheses](space-before-function-parentheses) - **(deprecated)** require or disallow space before function parentheses (off by default)
-* [space-in-brackets](space-in-brackets) - require or disallow spaces inside brackets (off by default)
+* [space-in-brackets](space-in-brackets) - **(deprecated)** require or disallow spaces inside brackets (off by default)
 * [space-in-parens](space-in-parens) - require or disallow spaces inside parentheses (off by default)
 * [space-infix-ops](space-infix-ops) - require spaces around operators
 * [space-return-throw-case](space-return-throw-case) - require a space after `return`, `throw`, and `case`
 * [space-unary-ops](space-unary-ops) - Require or disallow spaces before/after unary operators (words on by default, nonwords off by default)
 * [space-unary-word-ops](space-unary-word-ops) - **(deprecated)** Require or disallow spaces before/after unary operators (words on by default, nonwords off by default)
-* [spaced-line-comment](spaced-line-comment) - require or disallow a space immediately following the `//` in a line comment (off by default)
+* [spaced-comment](spaced-comment) - require or disallow a space immediately following the `//` or `/*` in a comment (off by default)
+* [spaced-line-comment](spaced-line-comment) - **(deprecated)** require or disallow a space immediately following the `//` in a line comment (off by default)
 * [wrap-regex](wrap-regex) - require regex literals to be wrapped in parentheses (off by default)
 
 ## ECMAScript 6
@@ -200,6 +202,7 @@ These rules are only relevant to ES6 environments and are off by default.
 * [generator-star](generator-star) - **(deprecated)** enforce the position of the `*` in generator functions (off by default)
 * [no-var](no-var) - require `let` or `const` instead of `var` (off by default)
 * [object-shorthand](object-shorthand) - require method and property shorthand syntax for object literals (off by default)
+* [prefer-const](prefer-const) - suggest using of `const` declaration for variables that are never modified after declared (off by default)
 
 ## Legacy
 

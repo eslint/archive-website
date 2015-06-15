@@ -102,7 +102,7 @@ If your project will not be following a consistent comma-spacing pattern, turn t
 ## Related Rules
 
 * [comma-style](comma-style)
-* [space-in-brackets](space-in-brackets)
+* [space-in-brackets](space-in-brackets) (deprecated)
 * [space-in-parens](space-in-parens)
 * [space-infix-ops](space-infix-ops)
 * [space-after-keywords](space-after-keywords)

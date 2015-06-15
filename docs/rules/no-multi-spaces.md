@@ -108,7 +108,7 @@ If you don't want to check and disallow multiple spaces, then you should turn th
 
 * [key-spacing](key-spacing)
 * [space-infix-ops](space-infix-ops)
-* [space-in-brackets](space-in-brackets)
+* [space-in-brackets](space-in-brackets) (deprecated)
 * [space-in-parens](space-in-parens)
 * [space-after-keywords](space-after-keywords)
 * [space-unary-ops](space-unary-ops)

@@ -5,6 +5,9 @@ layout: doc
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 # Disallow Parens Around Functions (no-wrap-func)
 
+**Deprecation notice**: This rule is deprecated and has been superseded by the [no-extra-parens](no-extra-parens) rule, when configured in the `"functions"` mode. It will be removed in ESLint v1.0.
+
+
 Although it's possible to wrap functions in parentheses, this can be confusing when the code also contains immediately-invoked function expressions (IIFEs) since parentheses are often used to make this distinction. For example:
 
 ```js

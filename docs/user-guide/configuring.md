@@ -109,6 +109,8 @@ An environment defines both global variables that are predefined as well as whic
 * `prototypejs` - prototypejs global variables.
 * `shelljs` - shelljs global variables.
 * `meteor` - meteor global variables.
+* `mongo` - mongo global variables.
+* `applescript` - applescript global variables.
 * `es6` - enable all ECMAScript 6 features except for modules.
 
 These environments are not mutually exclusive, so you can define more than one at a time.
@@ -407,6 +409,25 @@ The extended configuration provides base rules, which can be overriden by the co
 ```js
 {
     "extends": "./node_modules/coding-standard/.eslintrc",
+
+    "rules": {
+        // Override any settings from the "parent" configuration
+        "eqeqeq": 1
+    }
+}
+```
+
+Configurations may also be provided as an array, with additional files overriding any properties provided in the previous file. For example:
+
+```js
+{
+    "extends": [
+        "./node_modules/coding-standard/.eslintrc-defaults",
+        // Override .eslintrc-defaults
+        "./node_modules/coding-standard/.eslintrc-es6",
+        // Override .eslintrc-es6
+        "./node_modules/coding-standard/.eslintrc-jsx",
+    ],
 
     "rules": {
         // Override any settings from the "parent" configuration
