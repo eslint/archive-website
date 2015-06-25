@@ -39,6 +39,7 @@ redirect_from: "/docs/integrations/"
 ## Command Line Tools
 
 * [Eslint Watch](https://www.npmjs.com/package/eslint-watch)
+* [Code Climate CLI](https://github.com/codeclimate/codeclimate)
 
 ## Source Control
 
