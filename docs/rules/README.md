@@ -36,6 +36,7 @@ The following rules point out areas where you might have made mistakes.
 * [use-isnan](use-isnan.md) - disallow comparisons with the value `NaN`
 * [valid-jsdoc](valid-jsdoc.md) - Ensure JSDoc comments are valid (off by default)
 * [valid-typeof](valid-typeof.md) - Ensure that the results of typeof are compared against a valid string
+* [no-unexpected-multiline](no-unexpected-multiline.md) - Avoid code that looks like two expressions but is actually one (off by default)
 
 ## Best Practices
 
@@ -132,6 +133,7 @@ These rules are specific to JavaScript running on Node.js.
 
 These rules are purely matters of style and are quite subjective.
 
+* [array-bracket-spacing](array-bracket-spacing.md) - enforce spacing inside array brackets (off by default)
 * [brace-style](brace-style.md) - enforce one true brace style (off by default)
 * [camelcase](camelcase.md) - require camel case names
 * [comma-spacing](comma-spacing.md) - enforce spacing before and after comma
@@ -193,8 +195,10 @@ These rules are purely matters of style and are quite subjective.
 
 These rules are only relevant to ES6 environments and are off by default.
 
+* [constructor-super](constructor-super.md) - verify `super()` callings in constructors (off by default)
 * [generator-star-spacing](generator-star-spacing.md) - enforce the spacing around the `*` in generator functions (off by default)
 * [generator-star](generator-star.md) - **(deprecated)** enforce the position of the `*` in generator functions (off by default)
+* [no-this-before-super](no-this-before-super.md) - disallow to use `this`/`super` before `super()` calling in constructors. (off by default)
 * [no-var](no-var.md) - require `let` or `const` instead of `var` (off by default)
 * [object-shorthand](object-shorthand.md) - require method and property shorthand syntax for object literals (off by default)
 * [prefer-const](prefer-const.md) - suggest using of `const` declaration for variables that are never modified after declared (off by default)

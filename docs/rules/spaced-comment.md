@@ -137,6 +137,21 @@ subsequent lines are ignored
 */
 ```
 
+```js
+// When ["always"]
+/**
+* I am jsdoc
+*/
+```
+
+```js
+// When ["never"]
+/**
+* I am jsdoc
+*/
+```
+
+
 ## Version
 
 This rule was introduced in ESLint 0.23.0.
