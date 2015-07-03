@@ -201,7 +201,8 @@ fall into that category this rule is not for you.
 ## Related Rules
 
 * [space-before-blocks](space-before-blocks)
-* [spaced-line-comment](spaced-line-comment)
+* [spaced-comment](spaced-comment)
+* [spaced-line-comment](spaced-line-comment) (deprecated)
 
 ## Version
 
