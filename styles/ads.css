@@ -1,0 +1,9 @@
+#carbonads {
+    float: right;
+    max-width: 130px;
+}
+
+.carbon-text {
+    display: block;
+    width: 130px;
+}
