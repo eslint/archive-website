@@ -56,5 +56,6 @@ redirect_from: "/docs/integrations/"
 * [AngularJS](https://github.com/Gillespie59/eslint-plugin-angular)
 * [BackboneJS](https://github.com/ilyavolodin/eslint-plugin-backbone)
 * [Jasmine](https://github.com/tlvince/eslint-plugin-jasmine)
+* [React](https://github.com/yannickcr/eslint-plugin-react)
 
 … and many more published on npm with the [eslintplugin](https://www.npmjs.com/browse/keyword/eslintplugin) keyword.
