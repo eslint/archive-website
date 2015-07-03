@@ -1610,7 +1610,7 @@ module.exports = {
         }
     },
 
-    isStrictModeReservedWord: function(id, ecmaFeatures) {
+    isStrictModeReservedWord: function(id) {
         switch (id) {
             case "implements":
             case "interface":
@@ -1622,8 +1622,6 @@ module.exports = {
             case "yield":
             case "let":
                 return true;
-            case "await":
-                return ecmaFeatures.modules;
             default:
                 return false;
         }
@@ -1637,7 +1635,7 @@ module.exports = {
 
     isKeyword: function(id, strict, ecmaFeatures) {
 
-        if (strict && this.isStrictModeReservedWord(id, ecmaFeatures)) {
+        if (strict && this.isStrictModeReservedWord(id)) {
             return true;
         }
 
@@ -2086,7 +2084,7 @@ module.exports={
     "esparse": "./bin/esparse.js",
     "esvalidate": "./bin/esvalidate.js"
   },
-  "version": "2.0.4",
+  "version": "2.0.3",
   "files": [
     "bin",
     "lib",
@@ -2158,27 +2156,12 @@ module.exports={
     "benchmark-quick": "node test/benchmarks.js quick"
   },
   "dependencies": {},
-  "gitHead": "21f73f3178c9c9709c9ee1474641bb8fdad2115c",
-  "_id": "espree@2.0.4",
-  "_shasum": "679289cc5aa99923540437905288a642f21b90e9",
-  "_from": "espree@>=2.0.1 <3.0.0",
-  "_npmVersion": "1.4.28",
-  "_npmUser": {
-    "name": "nzakas",
-    "email": "nicholas@nczconsulting.com"
-  },
-  "maintainers": [
-    {
-      "name": "nzakas",
-      "email": "nicholas@nczconsulting.com"
-    }
-  ],
-  "dist": {
-    "shasum": "679289cc5aa99923540437905288a642f21b90e9",
-    "tarball": "http://registry.npmjs.org/espree/-/espree-2.0.4.tgz"
-  },
-  "directories": {},
-  "_resolved": "https://registry.npmjs.org/espree/-/espree-2.0.4.tgz"
+  "gitHead": "b60b597cfe4834aacd16c90179ce73e22705c132",
+  "readme": "# Espree\n\nEspree is an actively-maintained fork Esprima, a high performance,\nstandard-compliant [ECMAScript](http://www.ecma-international.org/publications/standards/Ecma-262.htm)\nparser written in ECMAScript (also popularly known as\n[JavaScript](http://en.wikipedia.org/wiki/JavaScript)).\n\n## Features\n\n- Full support for ECMAScript 5.1 ([ECMA-262](http://www.ecma-international.org/publications/standards/Ecma-262.htm))\n- Implements [ESTree](https://github.com/estree/estree) (both ES5 and ES6 specs) as the AST format.\n- Optional tracking of syntax node location (index-based and line-column)\n- Heavily tested and battle-hardened by inclusion in [ESLint](http://eslint.org)\n\n## Usage\n\nInstall:\n\n```\nnpm i espree --save\n```\n\nAnd in your Node.js code:\n\n```javascript\nvar espree = require(\"espree\");\n\nvar ast = espree.parse(code);\n```\n\nThere is a second argument to `parse()` that allows you to specify various options:\n\n```javascript\nvar espree = require(\"espree\");\n\nvar ast = espree.parse(code, {\n\n    // attach range information to each node\n    range: true,\n\n    // attach line/column location information to each node\n    loc: true,\n\n    // create a top-level comments array containing all comments\n    comments: true,\n\n    // attach comments to the closest relevant node as leadingComments and\n    // trailingComments\n    attachComment: true,\n\n    // create a top-level tokens array containing all tokens\n    tokens: true,\n\n    // try to continue parsing if an error is encountered, store errors in a\n    // top-level errors array\n    tolerant: true,\n\n    // specify parsing features (default only has blockBindings: true)\n    // setting this option replaces the default values\n    ecmaFeatures: {\n\n        // enable parsing of arrow functions\n        arrowFunctions: true,\n\n        // enable parsing of let/const\n        blockBindings: true,\n\n        // enable parsing of destructured arrays and objects\n        destructuring: true,\n\n        // enable parsing of regular expression y flag\n        regexYFlag: true,\n\n        // enable parsing of regular expression u flag\n        regexUFlag: true,\n\n        // enable parsing of template strings\n        templateStrings: true,\n\n        // enable parsing of binary literals\n        binaryLiterals: true,\n\n        // enable parsing of ES6 octal literals\n        octalLiterals: true,\n\n        // enable parsing unicode code point escape sequences\n        unicodeCodePointEscapes: true,\n\n        // enable parsing of default parameters\n        defaultParams: true,\n\n        // enable parsing of rest parameters\n        restParams: true,\n\n        // enable parsing of for-of statement\n        forOf: true,\n\n        // enable parsing computed object literal properties\n        objectLiteralComputedProperties: true,\n\n        // enable parsing of shorthand object literal methods\n        objectLiteralShorthandMethods: true,\n\n        // enable parsing of shorthand object literal properties\n        objectLiteralShorthandProperties: true,\n\n        // Allow duplicate object literal properties (except '__proto__')\n        objectLiteralDuplicateProperties: true,\n\n        // enable parsing of generators/yield\n        generators: true,\n\n        // enable parsing spread operator\n        spread: true,\n\n        // enable parsing classes\n        classes: true,\n\n        // enable parsing of modules\n        modules: true,\n\n        // enable React JSX parsing\n        jsx: true,\n\n        // enable return in global scope\n        globalReturn: true\n    }\n});\n```\n\n## Plans\n\nEspree starts as a fork of Esprima v1.2.2, the last stable published released of Esprima before work on ECMAScript 6 began. Espree's first version is therefore v1.2.2 and is 100% compatible with Esprima v1.2.2 as a drop-in replacement. The version number will be incremented based on [semantic versioning](http://semver.org/) as features and bug fixes are added.\n\nThe immediate plans are:\n\n1. Move away from giant files and move towards small, modular files that are easier to manage.\n1. Move towards CommonJS for all files and use browserify to create browser bundles.\n1. Support ECMAScript version filtering, allowing users to specify which version the parser should work in (similar to Acorn's `ecmaVersion` property).\n1. Add tests to track comment attachment.\n1. Add well-thought-out features that are useful for tools developers.\n1. Add full support for ECMAScript 6.\n1. Add optional parsing of JSX.\n\n## Esprima Compatibility Going Forward\n\nThe primary goal is to produce the exact same AST structure as Esprima and Acorn, and that takes precedence over anything else. (The AST structure being the ESTree API with JSX extensions.) Separate from that, Espree may deviate from what Esprima outputs in terms of where and how comments are attached, as well as what additional information is available on AST nodes. That is to say, Espree may add more things to the AST nodes than Esprima does but the overall AST structure produced will be the same.\n\nEspree may also deviate from Esprima in the interface it exposes.\n\n## Frequent and Incremental Releases\n\nEspree will not do giant releases. Releases will happen periodically as changes are made and incremental releases will be made towards larger goals. For instance, we will not have one big release for ECMAScript 6 support. Instead, we will implement ECMAScript 6, piece-by-piece, hiding those pieces behind an `ecmaFeatures` property that allows you to opt-in to use those features.\n\n## Contributing\n\nIssues and pull requests will be triaged and responded to as quickly as possible. We operate under the [ESLint Contributor Guidelines](http://eslint.org/docs/developer-guide/contributing.html), so please be sure to read them before contributing. If you're not sure where to dig in, check out the [issues](https://github.com/eslint/espree/issues).\n\nEspree is licensed under a permissive BSD 2-clause license.\n\n## Build Commands\n\n* `npm test` - run all linting and tests\n* `npm run lint` - run all linting\n* `npm run browserify` - creates a version of Espree that is usable in a browser\n\n## Known Incompatibilities\n\nIn an effort to help those wanting to transition from other parsers to Espree, the following is a list of noteworthy incompatibilities with other parsers. These are known differences that we do not intend to change.\n\n### Esprima 1.2.2\n\n* None.\n\n### Esprima/Harmony Branch\n\n* Esprima/Harmony uses a different comment attachment algorithm that results in some comments being added in different places than Espree. The algorithm Espree uses is the same one used in Esprima 1.2.2.\n* Espree uses ESTree format for the AST nodes whereas Esprima/Harmony uses a nonstandard format.\n\n### Esprima-FB\n\n* All Esprima/Harmony incompatibilities.\n\n## Frequently Asked Questions\n\n### Why are you forking Esprima?\n\n[ESLint](http://eslint.org) has been relying on Esprima as its parser from the beginning. While that was fine when the JavaScript language was evolving slowly, the pace of development has increased dramatically and Esprima has fallen behind. ESLint, like many other tools reliant on Esprima, has been stuck in using new JavaScript language features until Esprima updates, and that has caused our users frustration.\n\nWe decided the only way for us to move forward was to create our own parser, bringing us inline with JSHint and JSLint, and allowing us to keep implementing new features as we need them. We chose to fork Esprima instead of starting from scratch in order to move as quickly as possible with a compatible API.\n\n### Have you tried working with Esprima?\n\nYes. Since the start of ESLint, we've regularly filed bugs and feature requests with Esprima. Unfortunately, we've been unable to make much progress towards getting our needs addressed.\n\nWe are actively working with Esprima as part of its adoption by the jQuery Foundation. We are hoping to reconcile Espree with Esprima at some point in the future, but there are some different philosophies around how the projects work that need to be worked through. We're committed to a goal of merging Espree back into Esprima, or at the very least, to have Espree track Esprima as an upstream target so there's no duplication of effort. In the meantime, we will continue to update and maintain Espree.\n\n### Why don't you just use Facebook's Esprima fork?\n\n`esprima-fb` is Facebook's Esprima fork that features JSX and Flow type annotations. We tried working with `esprima-fb` in our evaluation of how to support ECMAScript 6 and JSX in ESLint. Unfortunately, we were hampered by bugs that were part of Esprima (not necessarily Facebook's code). Since `esprima-fb` tracks the Esprima Harmony branch, that means we still were unable to get fixes or features we needed in a timely manner.\n\n### Why don't you just use Acorn?\n\nAcorn is a great JavaScript parser that produces an AST that is compatible with Esprima. Unfortunately, ESLint relies on more than just the AST to do its job. It relies on Esprima's tokens and comment attachment features to get a complete picture of the source code. We investigated switching to Acorn, but the inconsistencies between Esprima and Acorn created too much work for a project like ESLint.\n\nWe expect there are other tools like ESLint that rely on more than just the AST produced by Esprima, and so a drop-in replacement will help those projects as well as ESLint.\n\n### What ECMAScript 6 features do you support?\n\nAll of them.\n\n### Why use Espree instead of Esprima?\n\n* Faster turnaround time on bug fixes\n* More frequent releases\n* Better communication and responsiveness to issues\n* Ongoing development\n\n### Why use Espree instead of Esprima-FB?\n\n* Opt-in to just the ECMAScript 6 features you want\n* JSX support is off by default, so you're not forced to use it to use ECMAScript 6\n* Stricter ECMAScript 6 support\n",
+  "readmeFilename": "README.md",
+  "_id": "espree@2.0.3",
+  "_shasum": "1fbdff60a410bd0d416b1ab3d6230d34b7a450e1",
+  "_from": "espree@^2.0.1"
 }
 
 },{}],"espree":[function(require,module,exports){
@@ -4301,7 +4284,7 @@ function throwUnexpected(token) {
     if (token.type === Token.Keyword) {
         if (syntax.isFutureReservedWord(token.value)) {
             throwError(token, Messages.UnexpectedReserved);
-        } else if (strict && syntax.isStrictModeReservedWord(token.value, extra.ecmaFeatures)) {
+        } else if (strict && syntax.isStrictModeReservedWord(token.value)) {
             throwErrorTolerant(token, Messages.StrictReservedWord);
             return;
         }
@@ -5778,7 +5761,7 @@ function parseVariableIdentifier() {
     token = lex();
 
     if (token.type !== Token.Identifier) {
-        if (strict && token.type === Token.Keyword && syntax.isStrictModeReservedWord(token.value, extra.ecmaFeatures)) {
+        if (strict && token.type === Token.Keyword && syntax.isStrictModeReservedWord(token.value)) {
             throwErrorTolerant(token, Messages.StrictReservedWord);
         } else {
             throwUnexpected(token);
@@ -6586,7 +6569,7 @@ function validateParam(options, param, name) {
         if (syntax.isRestrictedWord(name)) {
             options.firstRestricted = param;
             options.message = Messages.StrictParamName;
-        } else if (syntax.isStrictModeReservedWord(name, extra.ecmaFeatures)) {
+        } else if (syntax.isStrictModeReservedWord(name)) {
             options.firstRestricted = param;
             options.message = Messages.StrictReservedWord;
         } else if (options.paramSet.has(name)) {
@@ -6716,7 +6699,7 @@ function parseFunctionDeclaration(identifierIsOptional) {
                 if (syntax.isRestrictedWord(token.value)) {
                     firstRestricted = token;
                     message = Messages.StrictFunctionName;
-                } else if (syntax.isStrictModeReservedWord(token.value, extra.ecmaFeatures)) {
+                } else if (syntax.isStrictModeReservedWord(token.value)) {
                     firstRestricted = token;
                     message = Messages.StrictReservedWord;
                 }
@@ -6781,7 +6764,7 @@ function parseFunctionExpression() {
             if (syntax.isRestrictedWord(token.value)) {
                 firstRestricted = token;
                 message = Messages.StrictFunctionName;
-            } else if (syntax.isStrictModeReservedWord(token.value, extra.ecmaFeatures)) {
+            } else if (syntax.isStrictModeReservedWord(token.value)) {
                 firstRestricted = token;
                 message = Messages.StrictReservedWord;
             }
@@ -11998,7 +11981,7 @@ module.exports={
   },
   "_id": "doctrine@0.6.4",
   "_shasum": "81428491a942ef18b0492056eda3800eee57d61d",
-  "_from": "doctrine@>=0.6.2 <0.7.0",
+  "_from": "doctrine@^0.6.2",
   "_npmVersion": "1.4.28",
   "_npmUser": {
     "name": "constellation",
@@ -16035,7 +16018,7 @@ module.exports={
   },
   "_id": "esrecurse@3.1.1",
   "_shasum": "8feb963699d4d1b2d65a576cd4b1296672a0f0e9",
-  "_from": "esrecurse@>=3.1.1 <4.0.0",
+  "_from": "esrecurse@^3.1.1",
   "_npmVersion": "2.0.0-alpha-5",
   "_npmUser": {
     "name": "constellation",
@@ -16946,7 +16929,7 @@ module.exports={
   },
   "_id": "estraverse@3.1.0",
   "_shasum": "15e28a446b8b82bc700ccc8b96c78af4da0d6cba",
-  "_from": "estraverse@>=3.1.0 <4.0.0",
+  "_from": "estraverse@^3.1.0",
   "_npmVersion": "2.0.0-alpha-5",
   "_npmUser": {
     "name": "constellation",
@@ -17029,7 +17012,7 @@ module.exports={
   },
   "_id": "escope@3.1.0",
   "_shasum": "92ca48f6286b380e4388e09188a904b0fa1d9b7e",
-  "_from": "escope@>=3.1.0 <4.0.0",
+  "_from": "escope@^3.1.0",
   "_npmVersion": "2.10.1",
   "_nodeVersion": "2.1.0",
   "_npmUser": {
@@ -18015,7 +17998,7 @@ module.exports={
   },
   "_id": "estraverse@4.1.0",
   "_shasum": "40f23a76092041be6467d7f235c933b670766e05",
-  "_from": "estraverse@>=4.1.0 <5.0.0",
+  "_from": "estraverse@^4.1.0",
   "_npmVersion": "2.8.3",
   "_nodeVersion": "1.8.1",
   "_npmUser": {
@@ -18027,8 +18010,7 @@ module.exports={
     "tarball": "http://registry.npmjs.org/estraverse/-/estraverse-4.1.0.tgz"
   },
   "directories": {},
-  "_resolved": "https://registry.npmjs.org/estraverse/-/estraverse-4.1.0.tgz",
-  "readme": "ERROR: No README data found!"
+  "_resolved": "https://registry.npmjs.org/estraverse/-/estraverse-4.1.0.tgz"
 }
 
 },{}],135:[function(require,module,exports){
@@ -18096,47 +18078,20 @@ module.exports={
 	"browser": {
 		"addEventListener": false,
 		"alert": false,
-		"AnalyserNode": false,
-		"AnimationEvent": false,
 		"applicationCache": false,
-		"ApplicationCache": false,
-		"ApplicationCacheErrorEvent": false,
 		"atob": false,
-		"Attr": false,
 		"Audio": false,
-		"AudioBuffer": false,
-		"AudioBufferSourceNode": false,
-		"AudioContext": false,
-		"AudioDestinationNode": false,
-		"AudioListener": false,
-		"AudioNode": false,
-		"AudioParam": false,
 		"AudioProcessingEvent": false,
-		"AutocompleteErrorEvent": false,
-		"BarProp": false,
-		"BatteryManager": false,
 		"BeforeUnloadEvent": false,
-		"BiquadFilterNode": false,
 		"Blob": false,
 		"blur": false,
 		"btoa": false,
-		"Cache": false,
-		"caches": false,
-		"CacheStorage": false,
 		"cancelAnimationFrame": false,
 		"CanvasGradient": false,
 		"CanvasPattern": false,
 		"CanvasRenderingContext2D": false,
-		"CDATASection": false,
-		"ChannelMergerNode": false,
-		"ChannelSplitterNode": false,
-		"CharacterData": false,
 		"clearInterval": false,
 		"clearTimeout": false,
-		"clientInformation": false,
-		"ClientRect": false,
-		"ClientRectList": false,
-		"ClipboardEvent": false,
 		"close": false,
 		"closed": false,
 		"CloseEvent": false,
@@ -18144,106 +18099,52 @@ module.exports={
 		"CompositionEvent": false,
 		"confirm": false,
 		"console": false,
-		"ConvolverNode": false,
 		"crypto": false,
-		"Crypto": false,
-		"CryptoKey": false,
 		"CSS": false,
-		"CSSFontFaceRule": false,
-		"CSSImportRule": false,
-		"CSSKeyframeRule": false,
-		"CSSKeyframesRule": false,
-		"CSSMediaRule": false,
-		"CSSPageRule": false,
-		"CSSRule": false,
-		"CSSRuleList": false,
-		"CSSStyleDeclaration": false,
-		"CSSStyleRule": false,
-		"CSSStyleSheet": false,
-		"CSSSupportsRule": false,
-		"CSSUnknownRule": false,
-		"CSSViewportRule": false,
 		"CustomEvent": false,
-		"DataTransfer": false,
-		"DataTransferItem": false,
-		"DataTransferItemList": false,
 		"Debug": false,
 		"defaultStatus": false,
-		"defaultstatus": false,
-		"DelayNode": false,
-		"DeviceMotionEvent": false,
-		"DeviceOrientationEvent": false,
 		"devicePixelRatio": false,
 		"dispatchEvent": false,
 		"document": false,
 		"Document": false,
 		"DocumentFragment": false,
-		"DocumentType": false,
-		"DOMError": false,
-		"DOMException": false,
-		"DOMImplementation": false,
 		"DOMParser": false,
-		"DOMSettableTokenList": false,
-		"DOMStringList": false,
-		"DOMStringMap": false,
-		"DOMTokenList": false,
 		"DragEvent": false,
-		"DynamicsCompressorNode": false,
 		"Element": false,
 		"ElementTimeControl": false,
 		"ErrorEvent": false,
 		"event": false,
 		"Event": false,
 		"EventSource": false,
-		"EventTarget": false,
-		"external": false,
-		"fetch": false,
-		"File": false,
-		"FileError": false,
 		"FileList": false,
 		"FileReader": false,
+		"fetch": false,
 		"find": false,
 		"focus": false,
 		"FocusEvent": false,
-		"FontFace": false,
 		"FormData": false,
 		"frameElement": false,
 		"frames": false,
-		"GainNode": false,
-		"Gamepad": false,
-		"GamepadButton": false,
 		"GamepadEvent": false,
 		"getComputedStyle": false,
 		"getSelection": false,
 		"HashChangeEvent": false,
 		"Headers": false,
 		"history": false,
-		"History": false,
-		"HTMLAllCollection": false,
 		"HTMLAnchorElement": false,
-		"HTMLAppletElement": false,
-		"HTMLAreaElement": false,
-		"HTMLAudioElement": false,
 		"HTMLBaseElement": false,
 		"HTMLBlockquoteElement": false,
 		"HTMLBodyElement": false,
 		"HTMLBRElement": false,
 		"HTMLButtonElement": false,
 		"HTMLCanvasElement": false,
-		"HTMLCollection": false,
-		"HTMLContentElement": false,
-		"HTMLDataListElement": false,
-		"HTMLDetailsElement": false,
-		"HTMLDialogElement": false,
 		"HTMLDirectoryElement": false,
 		"HTMLDivElement": false,
 		"HTMLDListElement": false,
-		"HTMLDocument": false,
 		"HTMLElement": false,
-		"HTMLEmbedElement": false,
 		"HTMLFieldSetElement": false,
 		"HTMLFontElement": false,
-		"HTMLFormControlsCollection": false,
 		"HTMLFormElement": false,
 		"HTMLFrameElement": false,
 		"HTMLFrameSetElement": false,
@@ -18255,36 +18156,25 @@ module.exports={
 		"HTMLImageElement": false,
 		"HTMLInputElement": false,
 		"HTMLIsIndexElement": false,
-		"HTMLKeygenElement": false,
 		"HTMLLabelElement": false,
 		"HTMLLayerElement": false,
 		"HTMLLegendElement": false,
 		"HTMLLIElement": false,
 		"HTMLLinkElement": false,
 		"HTMLMapElement": false,
-		"HTMLMarqueeElement": false,
-		"HTMLMediaElement": false,
 		"HTMLMenuElement": false,
 		"HTMLMetaElement": false,
-		"HTMLMeterElement": false,
 		"HTMLModElement": false,
 		"HTMLObjectElement": false,
 		"HTMLOListElement": false,
 		"HTMLOptGroupElement": false,
 		"HTMLOptionElement": false,
-		"HTMLOptionsCollection": false,
-		"HTMLOutputElement": false,
 		"HTMLParagraphElement": false,
 		"HTMLParamElement": false,
-		"HTMLPictureElement": false,
 		"HTMLPreElement": false,
-		"HTMLProgressElement": false,
 		"HTMLQuoteElement": false,
 		"HTMLScriptElement": false,
 		"HTMLSelectElement": false,
-		"HTMLShadowElement": false,
-		"HTMLSourceElement": false,
-		"HTMLSpanElement": false,
 		"HTMLStyleElement": false,
 		"HTMLTableCaptionElement": false,
 		"HTMLTableCellElement": false,
@@ -18292,12 +18182,9 @@ module.exports={
 		"HTMLTableElement": false,
 		"HTMLTableRowElement": false,
 		"HTMLTableSectionElement": false,
-		"HTMLTemplateElement": false,
 		"HTMLTextAreaElement": false,
 		"HTMLTitleElement": false,
-		"HTMLTrackElement": false,
 		"HTMLUListElement": false,
-		"HTMLUnknownElement": false,
 		"HTMLVideoElement": false,
 		"IDBCursor": false,
 		"IDBCursorWithValue": false,
@@ -18312,71 +18199,30 @@ module.exports={
 		"IDBTransaction": false,
 		"IDBVersionChangeEvent": false,
 		"Image": false,
-		"ImageBitmap": false,
-		"ImageData": false,
 		"indexedDB": false,
 		"innerHeight": false,
 		"innerWidth": false,
 		"InputEvent": false,
-		"InputMethodContext": false,
 		"Intl": false,
 		"KeyboardEvent": false,
 		"length": false,
 		"localStorage": false,
 		"location": false,
-		"Location": false,
-		"locationbar": false,
 		"matchMedia": false,
-		"MediaElementAudioSourceNode": false,
-		"MediaEncryptedEvent": false,
-		"MediaError": false,
-		"MediaKeyError": false,
-		"MediaKeyEvent": false,
-		"MediaKeyMessageEvent": false,
-		"MediaKeys": false,
-		"MediaKeySession": false,
-		"MediaKeyStatusMap": false,
-		"MediaKeySystemAccess": false,
-		"MediaList": false,
-		"MediaQueryList": false,
-		"MediaQueryListEvent": false,
-		"MediaSource": false,
-		"MediaStreamAudioDestinationNode": false,
-		"MediaStreamAudioSourceNode": false,
-		"MediaStreamEvent": false,
-		"MediaStreamTrack": false,
-		"menubar": false,
 		"MessageChannel": false,
 		"MessageEvent": false,
 		"MessagePort": false,
-		"MIDIAccess": false,
-		"MIDIConnectionEvent": false,
-		"MIDIInput": false,
-		"MIDIInputMap": false,
-		"MIDIMessageEvent": false,
-		"MIDIOutput": false,
-		"MIDIOutputMap": false,
-		"MIDIPort": false,
-		"MimeType": false,
-		"MimeTypeArray": false,
 		"MouseEvent": false,
 		"moveBy": false,
 		"moveTo": false,
-		"MutationEvent": false,
 		"MutationObserver": false,
-		"MutationRecord": false,
 		"name": false,
-		"NamedNodeMap": false,
 		"navigator": false,
-		"Navigator": false,
 		"Node": false,
 		"NodeFilter": false,
-		"NodeIterator": false,
 		"NodeList": false,
 		"Notification": false,
 		"OfflineAudioCompletionEvent": false,
-		"OfflineAudioContext": false,
-		"offscreenBuffering": false,
 		"onbeforeunload": true,
 		"onblur": true,
 		"onerror": true,
@@ -18389,86 +18235,42 @@ module.exports={
 		"opener": false,
 		"opera": false,
 		"Option": false,
-		"OscillatorNode": false,
 		"outerHeight": false,
 		"outerWidth": false,
 		"PageTransitionEvent": false,
 		"pageXOffset": false,
 		"pageYOffset": false,
 		"parent": false,
-		"Path2D": false,
-		"performance": false,
-		"Performance": false,
-		"PerformanceEntry": false,
-		"PerformanceMark": false,
-		"PerformanceMeasure": false,
-		"PerformanceNavigation": false,
-		"PerformanceResourceTiming": false,
-		"PerformanceTiming": false,
-		"PeriodicWave": false,
-		"Permissions": false,
-		"PermissionStatus": false,
-		"personalbar": false,
-		"Plugin": false,
-		"PluginArray": false,
 		"PopStateEvent": false,
 		"postMessage": false,
 		"print": false,
-		"ProcessingInstruction": false,
 		"ProgressEvent": false,
 		"prompt": false,
-		"PushManager": false,
-		"PushSubscription": false,
-		"RadioNodeList": false,
 		"Range": false,
-		"ReadableByteStream": false,
-		"ReadableStream": false,
-		"removeEventListener": false,
 		"Request": false,
+		"Response": false,
+		"removeEventListener": false,
 		"requestAnimationFrame": false,
 		"resizeBy": false,
 		"resizeTo": false,
-		"Response": false,
-		"RTCIceCandidate": false,
-		"RTCSessionDescription": false,
 		"screen": false,
-		"Screen": false,
-		"screenLeft": false,
-		"ScreenOrientation": false,
-		"screenTop": false,
 		"screenX": false,
 		"screenY": false,
-		"ScriptProcessorNode": false,
 		"scroll": false,
 		"scrollbars": false,
 		"scrollBy": false,
 		"scrollTo": false,
 		"scrollX": false,
 		"scrollY": false,
-		"SecurityPolicyViolationEvent": false,
-		"Selection": false,
 		"self": false,
-		"ServiceWorker": false,
-		"ServiceWorkerContainer": false,
-		"ServiceWorkerRegistration": false,
 		"sessionStorage": false,
 		"setInterval": false,
 		"setTimeout": false,
-		"ShadowRoot": false,
 		"SharedWorker": false,
 		"showModalDialog": false,
-		"speechSynthesis": false,
-		"SpeechSynthesisEvent": false,
-		"SpeechSynthesisUtterance": false,
 		"status": false,
-		"statusbar": false,
 		"stop": false,
-		"Storage": false,
 		"StorageEvent": false,
-		"styleMedia": false,
-		"StyleSheet": false,
-		"StyleSheetList": false,
-		"SubtleCrypto": false,
 		"SVGAElement": false,
 		"SVGAltGlyphDefElement": false,
 		"SVGAltGlyphElement": false,
@@ -18503,7 +18305,6 @@ module.exports={
 		"SVGCursorElement": false,
 		"SVGDefsElement": false,
 		"SVGDescElement": false,
-		"SVGDiscardElement": false,
 		"SVGDocument": false,
 		"SVGElement": false,
 		"SVGElementInstance": false,
@@ -18519,7 +18320,6 @@ module.exports={
 		"SVGFEDiffuseLightingElement": false,
 		"SVGFEDisplacementMapElement": false,
 		"SVGFEDistantLightElement": false,
-		"SVGFEDropShadowElement": false,
 		"SVGFEFloodElement": false,
 		"SVGFEFuncAElement": false,
 		"SVGFEFuncBElement": false,
@@ -18547,11 +18347,9 @@ module.exports={
 		"SVGFontFaceUriElement": false,
 		"SVGForeignObjectElement": false,
 		"SVGGElement": false,
-		"SVGGeometryElement": false,
 		"SVGGlyphElement": false,
 		"SVGGlyphRefElement": false,
 		"SVGGradientElement": false,
-		"SVGGraphicsElement": false,
 		"SVGHKernElement": false,
 		"SVGICCColor": false,
 		"SVGImageElement": false,
@@ -18629,31 +18427,14 @@ module.exports={
 		"SVGViewSpec": false,
 		"SVGVKernElement": false,
 		"SVGZoomAndPan": false,
-		"SVGZoomEvent": false,
 		"Text": false,
 		"TextDecoder": false,
 		"TextEncoder": false,
-		"TextEvent": false,
-		"TextMetrics": false,
-		"TextTrack": false,
-		"TextTrackCue": false,
-		"TextTrackCueList": false,
-		"TextTrackList": false,
 		"TimeEvent": false,
-		"TimeRanges": false,
-		"toolbar": false,
 		"top": false,
-		"Touch": false,
 		"TouchEvent": false,
-		"TouchList": false,
-		"TrackEvent": false,
-		"TransitionEvent": false,
-		"TreeWalker": false,
 		"UIEvent": false,
 		"URL": false,
-		"ValidityState": false,
-		"VTTCue": false,
-		"WaveShaperNode": false,
 		"WebGLActiveInfo": false,
 		"WebGLBuffer": false,
 		"WebGLContextEvent": false,
@@ -18671,19 +18452,14 @@ module.exports={
 		"Window": false,
 		"Worker": false,
 		"XDomainRequest": false,
-		"XMLDocument": false,
 		"XMLHttpRequest": false,
-		"XMLHttpRequestEventTarget": false,
-		"XMLHttpRequestProgressEvent": false,
-		"XMLHttpRequestUpload": false,
 		"XMLSerializer": false,
 		"XPathEvaluator": false,
 		"XPathException": false,
 		"XPathExpression": false,
 		"XPathNamespace": false,
 		"XPathNSResolver": false,
-		"XPathResult": false,
-		"XSLTProcessor": false
+		"XPathResult": false
 	},
 	"worker": {
 		"importScripts": true,
@@ -18986,24 +18762,6 @@ module.exports={
 		"Path": false,
 		"Progress": false,
 		"Ref": false
-	},
-	"serviceworker": {
-		"caches": false,
-		"Cache": false,
-		"CacheStorage": false,
-		"Client": false,
-		"Clients": false,
-		"ExtendableEvent": false,
-		"ExtendableMessageEvent": false,
-		"FetchEvent": false,
-		"importScripts": false,
-		"self": false,
-		"ServiceWorker": false,
-		"ServiceWorkerContainer": false,
-		"ServiceWorkerGlobalScope": false,
-		"ServiceWorkerMessageEvent": false,
-		"ServiceWorkerRegistration": false,
-		"WindowClient": false
 	}
 }
 
