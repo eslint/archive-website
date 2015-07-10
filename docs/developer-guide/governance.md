@@ -34,7 +34,8 @@ Committers:
 * May submit small changes (documentation updates, changes to tests or code comments, configuration changes) without pull requests.
 * Must submit pull requests for any non-trivial changes.
 * Have their work reviewed by Reviewers before acceptance into the repository.
-* Can label issues as they are submitted (but must not add the "accepted" label).
+* May label issues as they are submitted ("accepted" label should only be added for bugs, and only if the committer verified the bug as valid).
+* May close issues if they are duplicates of already resolved issues.
 
 To become a Committer:
 
@@ -55,9 +56,9 @@ Reviewers have additional responsibilities over and above those of a Committer. 
 Reviewers fulfill all requirements of Committers, and also:
 
 * Contributions can be reviewed by other Reviewers, but this is not explicitly required.
-* Are not required to submit pull requests for changes, however, they are strongly encouraged to do so when the change is non-trivial.
-* May merge their own pull requests once they have collected the feedback they deem necessary.
-* Can label issues as they are submitted (but must not add the "accepted" label).
+* May merge external pull requests for accepted issues upon reviewing and approving the changes.
+* May merge their own pull requests once they have collected the feedback they deem necessary. (No pull request should be merged without at least one Committer/Reviewer comment stating they've looked at the code.)
+
 
 To become a Reviewer:
 
@@ -69,7 +70,7 @@ A Committer is invited to become a Reviewer by existing Reviewers. A nomination 
 
 ### Project Lead
 
-Project Leads have additional responsibilities over and above those of a Reviewer. These responsibilities include administration of a GitHub repo, management and scheduling of releases, publish access to npm, issue and milestone tracking, and setting the direction for the project. Project Leads must also ensure the continued development of the project they oversee by nominating Committers and Reviewers for the project, contributing code, maintaining a roadmap, and being a community representative for the project.
+Project Leads have additional responsibilities over and above those of a Reviewer. These responsibilities include administration of a GitHub repo, management and scheduling of releases, publish access to npm, issue and milestone tracking (including closing of all issues for any reason), and setting the direction for the project. Project Leads must also ensure the continued development of the project they oversee by nominating Committers and Reviewers for the project, contributing code, maintaining a roadmap, and being a community representative for the project.
 
 There are two ways someone can become a Project Lead. First, when an outside project is accepted into the ESLint organization, the person who has been maintaining that project will be the Project Lead. Any community member can suggest a project be included in the ESLint organization.
 
