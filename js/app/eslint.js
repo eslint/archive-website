@@ -18078,20 +18078,47 @@ module.exports={
 	"browser": {
 		"addEventListener": false,
 		"alert": false,
+		"AnalyserNode": false,
+		"AnimationEvent": false,
 		"applicationCache": false,
+		"ApplicationCache": false,
+		"ApplicationCacheErrorEvent": false,
 		"atob": false,
+		"Attr": false,
 		"Audio": false,
+		"AudioBuffer": false,
+		"AudioBufferSourceNode": false,
+		"AudioContext": false,
+		"AudioDestinationNode": false,
+		"AudioListener": false,
+		"AudioNode": false,
+		"AudioParam": false,
 		"AudioProcessingEvent": false,
+		"AutocompleteErrorEvent": false,
+		"BarProp": false,
+		"BatteryManager": false,
 		"BeforeUnloadEvent": false,
+		"BiquadFilterNode": false,
 		"Blob": false,
 		"blur": false,
 		"btoa": false,
+		"Cache": false,
+		"caches": false,
+		"CacheStorage": false,
 		"cancelAnimationFrame": false,
 		"CanvasGradient": false,
 		"CanvasPattern": false,
 		"CanvasRenderingContext2D": false,
+		"CDATASection": false,
+		"ChannelMergerNode": false,
+		"ChannelSplitterNode": false,
+		"CharacterData": false,
 		"clearInterval": false,
 		"clearTimeout": false,
+		"clientInformation": false,
+		"ClientRect": false,
+		"ClientRectList": false,
+		"ClipboardEvent": false,
 		"close": false,
 		"closed": false,
 		"CloseEvent": false,
@@ -18099,52 +18126,106 @@ module.exports={
 		"CompositionEvent": false,
 		"confirm": false,
 		"console": false,
+		"ConvolverNode": false,
 		"crypto": false,
+		"Crypto": false,
+		"CryptoKey": false,
 		"CSS": false,
+		"CSSFontFaceRule": false,
+		"CSSImportRule": false,
+		"CSSKeyframeRule": false,
+		"CSSKeyframesRule": false,
+		"CSSMediaRule": false,
+		"CSSPageRule": false,
+		"CSSRule": false,
+		"CSSRuleList": false,
+		"CSSStyleDeclaration": false,
+		"CSSStyleRule": false,
+		"CSSStyleSheet": false,
+		"CSSSupportsRule": false,
+		"CSSUnknownRule": false,
+		"CSSViewportRule": false,
 		"CustomEvent": false,
+		"DataTransfer": false,
+		"DataTransferItem": false,
+		"DataTransferItemList": false,
 		"Debug": false,
 		"defaultStatus": false,
+		"defaultstatus": false,
+		"DelayNode": false,
+		"DeviceMotionEvent": false,
+		"DeviceOrientationEvent": false,
 		"devicePixelRatio": false,
 		"dispatchEvent": false,
 		"document": false,
 		"Document": false,
 		"DocumentFragment": false,
+		"DocumentType": false,
+		"DOMError": false,
+		"DOMException": false,
+		"DOMImplementation": false,
 		"DOMParser": false,
+		"DOMSettableTokenList": false,
+		"DOMStringList": false,
+		"DOMStringMap": false,
+		"DOMTokenList": false,
 		"DragEvent": false,
+		"DynamicsCompressorNode": false,
 		"Element": false,
 		"ElementTimeControl": false,
 		"ErrorEvent": false,
 		"event": false,
 		"Event": false,
 		"EventSource": false,
+		"EventTarget": false,
+		"external": false,
+		"fetch": false,
+		"File": false,
+		"FileError": false,
 		"FileList": false,
 		"FileReader": false,
-		"fetch": false,
 		"find": false,
 		"focus": false,
 		"FocusEvent": false,
+		"FontFace": false,
 		"FormData": false,
 		"frameElement": false,
 		"frames": false,
+		"GainNode": false,
+		"Gamepad": false,
+		"GamepadButton": false,
 		"GamepadEvent": false,
 		"getComputedStyle": false,
 		"getSelection": false,
 		"HashChangeEvent": false,
 		"Headers": false,
 		"history": false,
+		"History": false,
+		"HTMLAllCollection": false,
 		"HTMLAnchorElement": false,
+		"HTMLAppletElement": false,
+		"HTMLAreaElement": false,
+		"HTMLAudioElement": false,
 		"HTMLBaseElement": false,
 		"HTMLBlockquoteElement": false,
 		"HTMLBodyElement": false,
 		"HTMLBRElement": false,
 		"HTMLButtonElement": false,
 		"HTMLCanvasElement": false,
+		"HTMLCollection": false,
+		"HTMLContentElement": false,
+		"HTMLDataListElement": false,
+		"HTMLDetailsElement": false,
+		"HTMLDialogElement": false,
 		"HTMLDirectoryElement": false,
 		"HTMLDivElement": false,
 		"HTMLDListElement": false,
+		"HTMLDocument": false,
 		"HTMLElement": false,
+		"HTMLEmbedElement": false,
 		"HTMLFieldSetElement": false,
 		"HTMLFontElement": false,
+		"HTMLFormControlsCollection": false,
 		"HTMLFormElement": false,
 		"HTMLFrameElement": false,
 		"HTMLFrameSetElement": false,
@@ -18156,25 +18237,36 @@ module.exports={
 		"HTMLImageElement": false,
 		"HTMLInputElement": false,
 		"HTMLIsIndexElement": false,
+		"HTMLKeygenElement": false,
 		"HTMLLabelElement": false,
 		"HTMLLayerElement": false,
 		"HTMLLegendElement": false,
 		"HTMLLIElement": false,
 		"HTMLLinkElement": false,
 		"HTMLMapElement": false,
+		"HTMLMarqueeElement": false,
+		"HTMLMediaElement": false,
 		"HTMLMenuElement": false,
 		"HTMLMetaElement": false,
+		"HTMLMeterElement": false,
 		"HTMLModElement": false,
 		"HTMLObjectElement": false,
 		"HTMLOListElement": false,
 		"HTMLOptGroupElement": false,
 		"HTMLOptionElement": false,
+		"HTMLOptionsCollection": false,
+		"HTMLOutputElement": false,
 		"HTMLParagraphElement": false,
 		"HTMLParamElement": false,
+		"HTMLPictureElement": false,
 		"HTMLPreElement": false,
+		"HTMLProgressElement": false,
 		"HTMLQuoteElement": false,
 		"HTMLScriptElement": false,
 		"HTMLSelectElement": false,
+		"HTMLShadowElement": false,
+		"HTMLSourceElement": false,
+		"HTMLSpanElement": false,
 		"HTMLStyleElement": false,
 		"HTMLTableCaptionElement": false,
 		"HTMLTableCellElement": false,
@@ -18182,9 +18274,12 @@ module.exports={
 		"HTMLTableElement": false,
 		"HTMLTableRowElement": false,
 		"HTMLTableSectionElement": false,
+		"HTMLTemplateElement": false,
 		"HTMLTextAreaElement": false,
 		"HTMLTitleElement": false,
+		"HTMLTrackElement": false,
 		"HTMLUListElement": false,
+		"HTMLUnknownElement": false,
 		"HTMLVideoElement": false,
 		"IDBCursor": false,
 		"IDBCursorWithValue": false,
@@ -18199,30 +18294,71 @@ module.exports={
 		"IDBTransaction": false,
 		"IDBVersionChangeEvent": false,
 		"Image": false,
+		"ImageBitmap": false,
+		"ImageData": false,
 		"indexedDB": false,
 		"innerHeight": false,
 		"innerWidth": false,
 		"InputEvent": false,
+		"InputMethodContext": false,
 		"Intl": false,
 		"KeyboardEvent": false,
 		"length": false,
 		"localStorage": false,
 		"location": false,
+		"Location": false,
+		"locationbar": false,
 		"matchMedia": false,
+		"MediaElementAudioSourceNode": false,
+		"MediaEncryptedEvent": false,
+		"MediaError": false,
+		"MediaKeyError": false,
+		"MediaKeyEvent": false,
+		"MediaKeyMessageEvent": false,
+		"MediaKeys": false,
+		"MediaKeySession": false,
+		"MediaKeyStatusMap": false,
+		"MediaKeySystemAccess": false,
+		"MediaList": false,
+		"MediaQueryList": false,
+		"MediaQueryListEvent": false,
+		"MediaSource": false,
+		"MediaStreamAudioDestinationNode": false,
+		"MediaStreamAudioSourceNode": false,
+		"MediaStreamEvent": false,
+		"MediaStreamTrack": false,
+		"menubar": false,
 		"MessageChannel": false,
 		"MessageEvent": false,
 		"MessagePort": false,
+		"MIDIAccess": false,
+		"MIDIConnectionEvent": false,
+		"MIDIInput": false,
+		"MIDIInputMap": false,
+		"MIDIMessageEvent": false,
+		"MIDIOutput": false,
+		"MIDIOutputMap": false,
+		"MIDIPort": false,
+		"MimeType": false,
+		"MimeTypeArray": false,
 		"MouseEvent": false,
 		"moveBy": false,
 		"moveTo": false,
+		"MutationEvent": false,
 		"MutationObserver": false,
+		"MutationRecord": false,
 		"name": false,
+		"NamedNodeMap": false,
 		"navigator": false,
+		"Navigator": false,
 		"Node": false,
 		"NodeFilter": false,
+		"NodeIterator": false,
 		"NodeList": false,
 		"Notification": false,
 		"OfflineAudioCompletionEvent": false,
+		"OfflineAudioContext": false,
+		"offscreenBuffering": false,
 		"onbeforeunload": true,
 		"onblur": true,
 		"onerror": true,
@@ -18235,42 +18371,86 @@ module.exports={
 		"opener": false,
 		"opera": false,
 		"Option": false,
+		"OscillatorNode": false,
 		"outerHeight": false,
 		"outerWidth": false,
 		"PageTransitionEvent": false,
 		"pageXOffset": false,
 		"pageYOffset": false,
 		"parent": false,
+		"Path2D": false,
+		"performance": false,
+		"Performance": false,
+		"PerformanceEntry": false,
+		"PerformanceMark": false,
+		"PerformanceMeasure": false,
+		"PerformanceNavigation": false,
+		"PerformanceResourceTiming": false,
+		"PerformanceTiming": false,
+		"PeriodicWave": false,
+		"Permissions": false,
+		"PermissionStatus": false,
+		"personalbar": false,
+		"Plugin": false,
+		"PluginArray": false,
 		"PopStateEvent": false,
 		"postMessage": false,
 		"print": false,
+		"ProcessingInstruction": false,
 		"ProgressEvent": false,
 		"prompt": false,
+		"PushManager": false,
+		"PushSubscription": false,
+		"RadioNodeList": false,
 		"Range": false,
-		"Request": false,
-		"Response": false,
+		"ReadableByteStream": false,
+		"ReadableStream": false,
 		"removeEventListener": false,
+		"Request": false,
 		"requestAnimationFrame": false,
 		"resizeBy": false,
 		"resizeTo": false,
+		"Response": false,
+		"RTCIceCandidate": false,
+		"RTCSessionDescription": false,
 		"screen": false,
+		"Screen": false,
+		"screenLeft": false,
+		"ScreenOrientation": false,
+		"screenTop": false,
 		"screenX": false,
 		"screenY": false,
+		"ScriptProcessorNode": false,
 		"scroll": false,
 		"scrollbars": false,
 		"scrollBy": false,
 		"scrollTo": false,
 		"scrollX": false,
 		"scrollY": false,
+		"SecurityPolicyViolationEvent": false,
+		"Selection": false,
 		"self": false,
+		"ServiceWorker": false,
+		"ServiceWorkerContainer": false,
+		"ServiceWorkerRegistration": false,
 		"sessionStorage": false,
 		"setInterval": false,
 		"setTimeout": false,
+		"ShadowRoot": false,
 		"SharedWorker": false,
 		"showModalDialog": false,
+		"speechSynthesis": false,
+		"SpeechSynthesisEvent": false,
+		"SpeechSynthesisUtterance": false,
 		"status": false,
+		"statusbar": false,
 		"stop": false,
+		"Storage": false,
 		"StorageEvent": false,
+		"styleMedia": false,
+		"StyleSheet": false,
+		"StyleSheetList": false,
+		"SubtleCrypto": false,
 		"SVGAElement": false,
 		"SVGAltGlyphDefElement": false,
 		"SVGAltGlyphElement": false,
@@ -18305,6 +18485,7 @@ module.exports={
 		"SVGCursorElement": false,
 		"SVGDefsElement": false,
 		"SVGDescElement": false,
+		"SVGDiscardElement": false,
 		"SVGDocument": false,
 		"SVGElement": false,
 		"SVGElementInstance": false,
@@ -18320,6 +18501,7 @@ module.exports={
 		"SVGFEDiffuseLightingElement": false,
 		"SVGFEDisplacementMapElement": false,
 		"SVGFEDistantLightElement": false,
+		"SVGFEDropShadowElement": false,
 		"SVGFEFloodElement": false,
 		"SVGFEFuncAElement": false,
 		"SVGFEFuncBElement": false,
@@ -18347,9 +18529,11 @@ module.exports={
 		"SVGFontFaceUriElement": false,
 		"SVGForeignObjectElement": false,
 		"SVGGElement": false,
+		"SVGGeometryElement": false,
 		"SVGGlyphElement": false,
 		"SVGGlyphRefElement": false,
 		"SVGGradientElement": false,
+		"SVGGraphicsElement": false,
 		"SVGHKernElement": false,
 		"SVGICCColor": false,
 		"SVGImageElement": false,
@@ -18427,14 +18611,31 @@ module.exports={
 		"SVGViewSpec": false,
 		"SVGVKernElement": false,
 		"SVGZoomAndPan": false,
+		"SVGZoomEvent": false,
 		"Text": false,
 		"TextDecoder": false,
 		"TextEncoder": false,
+		"TextEvent": false,
+		"TextMetrics": false,
+		"TextTrack": false,
+		"TextTrackCue": false,
+		"TextTrackCueList": false,
+		"TextTrackList": false,
 		"TimeEvent": false,
+		"TimeRanges": false,
+		"toolbar": false,
 		"top": false,
+		"Touch": false,
 		"TouchEvent": false,
+		"TouchList": false,
+		"TrackEvent": false,
+		"TransitionEvent": false,
+		"TreeWalker": false,
 		"UIEvent": false,
 		"URL": false,
+		"ValidityState": false,
+		"VTTCue": false,
+		"WaveShaperNode": false,
 		"WebGLActiveInfo": false,
 		"WebGLBuffer": false,
 		"WebGLContextEvent": false,
@@ -18452,14 +18653,19 @@ module.exports={
 		"Window": false,
 		"Worker": false,
 		"XDomainRequest": false,
+		"XMLDocument": false,
 		"XMLHttpRequest": false,
+		"XMLHttpRequestEventTarget": false,
+		"XMLHttpRequestProgressEvent": false,
+		"XMLHttpRequestUpload": false,
 		"XMLSerializer": false,
 		"XPathEvaluator": false,
 		"XPathException": false,
 		"XPathExpression": false,
 		"XPathNamespace": false,
 		"XPathNSResolver": false,
-		"XPathResult": false
+		"XPathResult": false,
+		"XSLTProcessor": false
 	},
 	"worker": {
 		"importScripts": true,
@@ -18762,6 +18968,24 @@ module.exports={
 		"Path": false,
 		"Progress": false,
 		"Ref": false
+	},
+	"serviceworker": {
+		"caches": false,
+		"Cache": false,
+		"CacheStorage": false,
+		"Client": false,
+		"Clients": false,
+		"ExtendableEvent": false,
+		"ExtendableMessageEvent": false,
+		"FetchEvent": false,
+		"importScripts": false,
+		"self": false,
+		"ServiceWorker": false,
+		"ServiceWorkerContainer": false,
+		"ServiceWorkerGlobalScope": false,
+		"ServiceWorkerMessageEvent": false,
+		"ServiceWorkerRegistration": false,
+		"WindowClient": false
 	}
 }
 
@@ -19921,7 +20145,7 @@ function enableReporting(reportingConfig, start, rulesToEnable) {
  * @param {Object} config The existing configuration data.
  * @param {Object[]} reportingConfig The existing reporting configuration data.
  * @param {Object[]} messages The messages queue.
- * @returns {void}
+ * @returns {object} Modified config object
  */
 function modifyConfigsFromComments(filename, ast, config, reportingConfig, messages) {
 
@@ -19983,12 +20207,12 @@ function modifyConfigsFromComments(filename, ast, config, reportingConfig, messa
     // apply environment configs
     Object.keys(commentConfig.env).forEach(function (name) {
         if (environments[name]) {
-            util.mergeConfigs(commentConfig, environments[name]);
+            commentConfig = util.mergeConfigs(commentConfig, environments[name]);
         }
     });
     assign(commentConfig.rules, commentRules);
 
-    util.mergeConfigs(config, commentConfig);
+    return util.mergeConfigs(config, commentConfig);
 }
 
 /**
@@ -20292,7 +20516,7 @@ module.exports = (function() {
             currentAST = ast;
 
             // parse global comments and modify config
-            modifyConfigsFromComments(filename, ast, config, reportingConfig, messages);
+            config = modifyConfigsFromComments(filename, ast, config, reportingConfig, messages);
 
             // enable appropriate rules
             Object.keys(config.rules).filter(function(key) {
@@ -20589,7 +20813,7 @@ module.exports = (function() {
             case "ArrowFunctionExpression":
             case "FunctionExpression":
 
-                if (parent.type !== "CallExpression" || parent.callee !== node) {
+                if (parent.type !== "CallExpression") {
                     while (parent && !parent.leadingComments && !/Function/.test(parent.type)) {
                         parent = parent.parent;
                     }
@@ -21381,6 +21605,7 @@ module.exports.schema = [
 /**
  * @fileoverview Rule to check for "block scoped" variables by binding context
  * @author Matt DuVall <http://www.mattduvall.com>
+ * @copyright 2015 Mathieu M-Gosselin. All rights reserved.
  */
 "use strict";
 
@@ -21478,6 +21703,22 @@ module.exports = function(context) {
 
         if (node.imported && node.imported.name !== node.local.name) {
             declare([node.imported.name]);
+        }
+    }
+
+    /**
+     * Declares all relevant identifiers for module exports.
+     * @param {ASTNode} node The AST node representing an export.
+     * @returns {void}
+     * @private
+     */
+    function declareExports(node) {
+        if (node.exported && node.exported.name) {
+            declare([node.exported.name]);
+
+            if (node.local) {
+                declare([node.local.name]);
+            }
         }
     }
 
@@ -21620,6 +21861,8 @@ module.exports = function(context) {
         "ImportSpecifier": declareImports,
         "ImportDefaultSpecifier": declareImports,
         "ImportNamespaceSpecifier": declareImports,
+
+        "ExportSpecifier": declareExports,
 
         "BlockStatement": function(node) {
             var statements = node.body;
@@ -22099,7 +22342,9 @@ module.exports = function (context) {
 
     return {
         "ObjectExpression": checkForTrailingComma,
-        "ArrayExpression": checkForTrailingComma
+        "ObjectPattern": checkForTrailingComma,
+        "ArrayExpression": checkForTrailingComma,
+        "ArrayPattern": checkForTrailingComma
     };
 };
 
@@ -24867,7 +25112,9 @@ module.exports.schema = [
 /**
  * @fileoverview Enforces empty lines around comments.
  * @author Jamund Ferguson
+ * @copyright 2015 Mathieu M-Gosselin. All rights reserved.
  * @copyright 2015 Jamund Ferguson. All rights reserved.
+ * @copyright 2015 Gyandeep Singh. All rights reserved.
  */
 "use strict";
 
@@ -24963,7 +25210,8 @@ module.exports = function(context) {
         if (ancestors.length) {
             parent = ancestors.pop();
         }
-        return parent && (parent.type === "BlockStatement" || parent.body.type === "BlockStatement") &&
+
+        return parent && (parent.type === "ClassBody" || parent.type === "BlockStatement" || (parent.body && parent.body.type === "BlockStatement")) &&
                 node.loc.start.line - parent.loc.start.line === 1;
     }
 
@@ -24979,7 +25227,8 @@ module.exports = function(context) {
         if (ancestors.length) {
             parent = ancestors.pop();
         }
-        return parent && (parent.type === "BlockStatement" || parent.body.type === "BlockStatement") &&
+
+        return parent && (parent.type === "ClassBody" || parent.type === "BlockStatement" || (parent.body && parent.body.type === "BlockStatement")) &&
                 parent.loc.end.line - node.loc.end.line === 1;
     }
 
@@ -25231,7 +25480,7 @@ module.exports = function(context) {
         // Iterate
         lines.forEach(function(line, i) {
             if (line.replace(/\t/g, tabString).length > maxLength) {
-                context.report(node, { line: i + 1, col: 1 }, "Line " + (i + 1) + " exceeds the maximum line length of " + maxLength + ".");
+                context.report(node, { line: i + 1, column: 0 }, "Line " + (i + 1) + " exceeds the maximum line length of " + maxLength + ".");
             }
         });
     }
@@ -28231,7 +28480,7 @@ module.exports.schema = [];
 //------------------------------------------------------------------------------
 
 module.exports = function(context) {
-    var IMPLIED_EVAL = /set(?:Timeout|Interval)/;
+    var IMPLIED_EVAL = /set(?:Timeout|Interval)|execScript/;
 
     //--------------------------------------------------------------------------
     // Helpers
@@ -30121,7 +30370,7 @@ module.exports = function(context) {
         findVariablesInScope(scope);
 
         // globalReturn means one extra scope to check
-        if (node.type === "Program" && context.ecmaFeatures.globalReturn) {
+        if (node.type === "Program" && (context.ecmaFeatures.globalReturn || context.ecmaFeatures.modules)) {
             findVariablesInScope(scope.childScopes[0]);
         }
     }
@@ -32679,7 +32928,8 @@ module.exports = function(context) {
                 return;
             }
 
-            if (node.kind === "get" || node.kind === "set") {
+            // getters, setters and computed properties are ignored
+            if (node.kind === "get" || node.kind === "set" || node.computed) {
                 return;
             }
 
@@ -36568,6 +36818,7 @@ module.exports = function (context) {
             // Comparisons must always be yoda-style: if ("blue" === color)
             if (
                 (node.right.type === "Literal" || looksLikeLiteral(node.right)) &&
+                !(node.left.type === "Literal" || looksLikeLiteral(node.left)) &&
                 !(!isEqualityOperator(node.operator) && onlyEquality) &&
                 isComparisonOperator(node.operator) &&
                 !(exceptRange && isRangeTest(context.getAncestors().pop()))
@@ -36580,6 +36831,7 @@ module.exports = function (context) {
             // Comparisons must never be yoda-style (default)
             if (
                 (node.left.type === "Literal" || looksLikeLiteral(node.left)) &&
+                !(node.right.type === "Literal" || looksLikeLiteral(node.right)) &&
                 !(!isEqualityOperator(node.operator) && onlyEquality) &&
                 isComparisonOperator(node.operator) &&
                 !(exceptRange && isRangeTest(context.getAncestors().pop()))
@@ -36945,44 +37197,84 @@ var PLUGIN_NAME_PREFIX = "eslint-plugin-",
 
 /**
  * Merges two config objects. This will not only add missing keys, but will also modify values to match.
- * @param {Object} base config object
- * @param {Object} custom config object. Overrides in this config object will take priority over base.
+ * @param {Object} target config object
+ * @param {Object} src config object. Overrides in this config object will take priority over base.
+ * @param {boolean} [combine] Whether to combine arrays or not
  * @returns {Object} merged config object.
  */
-exports.mergeConfigs = function mergeConfigs(base, custom) {
+exports.mergeConfigs = function deepmerge(target, src, combine) {
+    /*
+     The MIT License (MIT)
 
-    Object.keys(custom).forEach(function (key) {
-        var property = custom[key];
+     Copyright (c) 2012 Nicholas Fisher
 
-        if (key === "plugins") {
-            if (!base[key]) {
-                base[key] = [];
-            }
+     Permission is hereby granted, free of charge, to any person obtaining a copy
+     of this software and associated documentation files (the "Software"), to deal
+     in the Software without restriction, including without limitation the rights
+     to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+     copies of the Software, and to permit persons to whom the Software is
+     furnished to do so, subject to the following conditions:
 
-            property.forEach(function (plugin) {
-                // skip duplicates
-                if (base[key].indexOf(plugin) === -1) {
-                    base[key].push(plugin);
+     The above copyright notice and this permission notice shall be included in
+     all copies or substantial portions of the Software.
+
+     THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+     IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+     FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+     AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+     LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+     OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+     THE SOFTWARE.
+     */
+    // This code is taken from deepmerge repo (https://github.com/KyleAMathews/deepmerge) and modified to meet our needs.
+    var array = Array.isArray(src) || Array.isArray(target);
+    var dst = array && [] || {};
+
+    combine = !!combine;
+    if (array) {
+        target = target || [];
+        dst = dst.concat(target);
+        if (typeof src !== "object" && !Array.isArray(src)) {
+            src = [src];
+        }
+        Object.keys(src).forEach(function(e, i) {
+            e = src[i];
+            if (typeof dst[i] === "undefined") {
+                dst[i] = e;
+            } else if (typeof e === "object") {
+                dst[i] = deepmerge(target[i], e);
+            } else {
+                if (!combine) {
+                    dst[i] = e;
+                } else {
+                    if (dst.indexOf(e) === -1) {
+                        dst.push(e);
+                    }
                 }
+            }
+        });
+    } else {
+        if (target && typeof target === "object") {
+            Object.keys(target).forEach(function (key) {
+                dst[key] = target[key];
             });
-            return;
         }
+        Object.keys(src).forEach(function (key) {
+            if (Array.isArray(src[key]) || Array.isArray(target[key])) {
+                dst[key] = deepmerge(target[key], src[key], key === "plugins");
+            } else if (typeof src[key] !== "object" || !src[key]) {
+                dst[key] = src[key];
+            } else {
+                if (!target[key]) {
+                    dst[key] = src[key];
+                } else {
+                    dst[key] = deepmerge(target[key], src[key]);
+                }
+            }
+        });
+    }
 
-        if (Array.isArray(base[key]) && !Array.isArray(property) && typeof property === "number") {
-            // assume that we are just overriding first attribute
-            base[key][0] = custom[key];
-            return;
-        }
-
-        if (typeof property === "object" && !Array.isArray(property) && property !== null) {
-            // base[key] might not exist, so be careful with recursion here
-            base[key] = mergeConfigs(base[key] || {}, custom[key]);
-        } else {
-            base[key] = custom[key];
-        }
-    });
-
-    return base;
+    return dst;
 };
 
 /**
