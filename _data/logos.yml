@@ -33,3 +33,7 @@
 - url: http://www.alianza.com
   src: /img/logos/alianza.png
   name: Alianza Inc.
+
+- url: http://www.millenium.org
+  src: /img/logos/millenium.svg
+  name: Millenium
