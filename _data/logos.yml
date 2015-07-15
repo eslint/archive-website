@@ -41,3 +41,7 @@
 - url: http://www.millenium.org
   src: /img/logos/millenium.svg
   name: Millenium
+
+- url: https://disqus.com
+  src: /img/logos/disqus.svg
+  name: Disqus
