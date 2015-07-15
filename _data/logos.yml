@@ -49,3 +49,7 @@
 - url: http://2gis.ru
   src: /img/logos/2gis.svg
   name: 2GIS
+
+- url: https://www.brigade.com
+  src: /img/logos/brigade.svg
+  name: Brigade
