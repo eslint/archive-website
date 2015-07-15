@@ -29,3 +29,7 @@
 - url: http://www.atlassian.com
   src: /img/logos/atlassian.svg
   name: Atlassian
+
+- url: http://www.alianza.com
+  src: /img/logos/alianza.png
+  name: Alianza Inc.
