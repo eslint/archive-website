@@ -45,3 +45,7 @@
 - url: https://disqus.com
   src: /img/logos/disqus.svg
   name: Disqus
+
+- url: http://2gis.ru
+  src: /img/logos/2gis.svg
+  name: 2GIS
