@@ -25,3 +25,7 @@
 - url: http://www.geekpark.net
   src: /img/logos/geekpark.png
   name: GeekPark
+
+- url: http://www.millenium.org
+  src: /img/logos/millenium.svg
+  name: Millenium
