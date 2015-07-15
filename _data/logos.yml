@@ -25,3 +25,7 @@
 - url: http://www.geekpark.net
   src: /img/logos/geekpark.png
   name: GeekPark
+
+- url: http://www.atlassian.com
+  src: /img/logos/atlassian.svg
+  name: Atlassian
