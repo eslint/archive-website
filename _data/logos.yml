@@ -53,3 +53,7 @@
 - url: https://www.brigade.com
   src: /img/logos/brigade.svg
   name: Brigade
+
+- url: https://github.com/valor-software
+  src: /img/logos/valor-software-sm.png
+  name: Valor Software
