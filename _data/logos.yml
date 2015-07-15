@@ -37,3 +37,7 @@
 - url: http://angular-formly.com
   src: /img/logos/angular-formly.png
   name: angular-formly
+
+- url: http://www.millenium.org
+  src: /img/logos/millenium.svg
+  name: Millenium
