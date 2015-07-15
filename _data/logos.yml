@@ -33,3 +33,7 @@
 - url: http://www.alianza.com
   src: /img/logos/alianza.png
   name: Alianza Inc.
+
+- url: http://angular-formly.com
+  src: /img/logos/angular-formly.png
+  name: angular-formly
