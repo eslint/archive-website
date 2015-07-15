@@ -1,6 +1,6 @@
-- url: http://domains.com.au
+- url: http://www.domain.com.au
   src: /img/logos/domain.svg
-  name: Domains
+  name: Domain
 
 - url: https://www.box.com
   src: /img/logos/box.png
