@@ -18,7 +18,35 @@
   <script src="/js/vendor/anchor.min.js"></script>
   <script>
     $(document).ready(function() {
-        anchors.add('.doc h2, .doc h3, .doc h4, .blog h2, .blog h3, .blog h4');
+      anchors.add('.doc h2, .doc h3, .doc h4, .blog h2, .blog h3, .blog h4');
+      {% if page.homepage %}
+      function shuffleArray(array) {
+        for (var i = array.length - 1; i > 0; i--) {
+          var j = Math.floor(Math.random() * (i + 1));
+          var temp = array[i];
+          array[i] = array[j];
+          array[j] = temp;
+        }
+        return array;
+      }
+
+      var logos = [{% for logo in site.data.logos %}{ url: '{{ logo.url }}', src: '{{ logo.src }}', name: '{{ logo.name }}' }{% unless forloop.last %},{% endunless %}{% endfor %}];
+      logos = shuffleArray(logos);
+      for (var i = 0, l = logos.length; i<l; i++) {
+        var logo = $('<div class="slide col-sm-4"><a href="' + logos[i].url + '"><img src="' + logos[i].src + '" alt="' + logos[i].name + '"></a></div>');
+        $('.logos').append(logo);
+      }
+
+      $('.expender').click(function() {
+        if ($('.logos').hasClass('expended')) {
+          $('.logos').removeClass('expended').css('max-height', '150px');
+          $('.expender').html('see more <span class="caret"/>');
+        } else {
+          $('.logos').addClass('expended').css('max-height', 5000);
+          $('.expender').html('see less <span class="dropup"><span class="caret"></span></span>');
+        }
+      });
+    {% endif %}
     });
   </script>
 </body>

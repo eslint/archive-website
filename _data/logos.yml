@@ -1,0 +1,19 @@
+- url: http://domains.com.au
+  src: /img/logos/domain.svg
+  name: Domains
+
+- url: https://www.box.com
+  src: /img/logos/box.png
+  name: Box
+
+- url: https://www.facebook.com
+  src: /img/logos/facebook.png
+  name: Facebook
+
+- url: https://www.paypal.com
+  src: /img/logos/paypal.svg
+  name: PayPal
+
+- url: http://www.thenativeweb.io
+  src: /img/logos/the-native-web.png
+  name: The Native Web
