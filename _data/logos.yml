@@ -61,3 +61,7 @@
 - url: https://getkahoot.com
   src: /img/logos/kahoot.png
   name: Kahoot!
+
+- url: http://www.cerner.com
+  src: /img/logos/cerner.png
+  name: Cerner
