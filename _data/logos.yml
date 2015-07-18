@@ -65,3 +65,7 @@
 - url: http://www.cerner.com
   src: /img/logos/cerner.png
   name: Cerner
+
+- url: https://codinum.com
+  src: /img/logos/codinum.png
+  name: Codinum
