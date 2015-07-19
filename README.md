@@ -4,9 +4,7 @@ This contains the code running on eslint.org.
 
 ## Pull Requests
 
-Please note that all HTML documentation (the `docs/` directory) is generated automatically from the docs checked into the [ESLint](https://github.com/eslint/eslint) repository. Pull requests for typos or to add documentation should be filed there.
-
-For this repo, only design-related pull requests will be considered.
+Please note that all HTML documentation is split between this repository and the main [ESLint repository](https://github.com/eslint/eslint). Documentation for rules and APIs is located in the core repository, the rest is located in this repository. You can easily determine if original documentation file is native to website repository by checking for `<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->` comment just below the header of the markdown file. If that header is present, this file is located in the core ESLint repository and any pull requests should be send there. Otherwise, file is native to this site repository and can be fixed by creating a pull request in this repository.
 
 ## How to add your company/project logo to the site
 
