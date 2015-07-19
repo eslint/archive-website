@@ -5,7 +5,7 @@ layout: doc
 
 # Contributing
 
-One of the great things about open source projects is that anyone can contribute in any number of meaningful ways. ESLint couldn't exist without the help of the many contributors its had since the project began, and we want you to feel like you can contribute and make a difference as well.
+One of the great things about open source projects is that anyone can contribute in any number of meaningful ways. ESLint couldn't exist without the help of the many contributors it's had since the project began, and we want you to feel like you can contribute and make a difference as well.
 
 This guide is intended for anyone who wants to contribute to an ESLint project. Please read it carefully as it answers a lot of the questions many newcomers have when first working with our projects.
 
@@ -55,10 +55,10 @@ Please include as much detail as possible to help us properly address your issue
 
 You are welcome to work on any open issue in the [issues list](https://github.com/eslint/eslint/issues). If it's open, that means we are planning on doing it in the future, and your help is appreciated. Some things to keep in mind:
 
-* **Beginner issues** - if you've never contributed to ESLint before, you make want to try on of our [beginner issues](https://github.com/eslint/eslint/issues?labels=beginner&milestone=&page=1&state=open). These are issues that tagged for beginners because they are small and self-contained.
+* **Beginner issues** - if you've never contributed to ESLint before, you may want to try one of our [beginner issues](https://github.com/eslint/eslint/issues?labels=beginner&milestone=&page=1&state=open). These are issues that tagged for beginners because they are small and self-contained.
 * **Accepted issues** - issues tagged with `accepted` are the ones that are scheduled to be completed. Please only submit pull requests for [accepted issues](https://github.com/eslint/eslint/issues?labels=accepted&milestone=&page=1&state=open).
 * **Bounty issues** - issues tagged with `bounty` mean that you can earn money for completing the issue. The [bounty issues](https://github.com/eslint/eslint/issues?labels=bounty&milestone=&page=1&state=open) specify the amount of money to be paid when the issue is completed. Note that bounty issues must be approved in order for payment to occur.
-* **Upcoming milestone issues** - if you're not sure what are the highest priority issues, then take a look at the issues assigned to the [next milestone](https://github.com/eslint/eslint/milestones). The top milestone in the list is the one we're working towards, and these issues have highest priority.
+* **Upcoming milestone issues** - if you're not sure what are the highest priority issues, then take a look at the issues assigned to the [next milestone](https://github.com/eslint/eslint/milestones). The top milestone in the list is the one we're working towards, and these issues have the highest priority.
 
 If you're going to work on an issue, please add a comment to that issue saying so and indicating when you think you will complete it. It will help us to avoid duplication of effort. Some examples of good comments are:
 
@@ -224,5 +224,5 @@ If you want to create a new rule, the first step is to file an issue. Make sure 
 
 To simplify creation of new rules, use [ESLint Yeoman generator](https://github.com/eslint/generator-eslint). It will automatically generate rule, documentation and test files to get you started faster.
 
-Keep in mind that not all rules will be accepted for the main distribution. You may also request that your rule by on by default but we may accept it as off by default.
+Keep in mind that not all rules will be accepted for the main distribution. You may also request that your rule be on by default but we may accept it as off by default.
 
