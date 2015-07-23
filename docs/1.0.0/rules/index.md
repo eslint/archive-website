@@ -13,7 +13,7 @@ The following rules point out areas where you might have made mistakes.
 
 * [comma-dangle](comma-dangle) - disallow or enforce trailing commas (recommended)
 * [no-cond-assign](no-cond-assign) - disallow assignment in conditional expressions (recommended)
-* [no-console](no-console) - disallow use of `console`the node environment) (recommended)
+* [no-console](no-console) - disallow use of `console` in the node environment (recommended)
 * [no-constant-condition](no-constant-condition) - disallow use of constant expressions in conditions (recommended)
 * [no-control-regex](no-control-regex) - disallow control characters in regular expressions (recommended)
 * [no-debugger](no-debugger) - disallow use of `debugger` (recommended)
@@ -66,7 +66,9 @@ These are rules designed to prevent you from making mistakes. They either prescr
 * [no-extra-bind](no-extra-bind) - disallow unnecessary function binding
 * [no-fallthrough](no-fallthrough) - disallow fallthrough of `case` statements (recommended)
 * [no-floating-decimal](no-floating-decimal) - disallow the use of leading or trailing decimal points in numeric literals
+* [no-implicit-coercion](no-implicit-coercion) - disallow the type conversions with shorter notations
 * [no-implied-eval](no-implied-eval) - disallow use of `eval()`-like methods
+* [no-invalid-this](no-invalid-this) - disallow `this` keywords outside of classes or class-like objects
 * [no-iterator](no-iterator) - disallow usage of `__iterator__` property
 * [no-labels](no-labels) - disallow use of labeled statements
 * [no-lone-blocks](no-lone-blocks) - disallow unnecessary nested blocks
@@ -76,7 +78,7 @@ These are rules designed to prevent you from making mistakes. They either prescr
 * [no-native-reassign](no-native-reassign) - disallow reassignments of native objects
 * [no-new-func](no-new-func) - disallow use of new operator for `Function` object
 * [no-new-wrappers](no-new-wrappers) - disallows creating new instances of `String`,`Number`, and `Boolean`
-* [no-new](no-new) - disallow use of new operator when not part of the assignment or comparison
+* [no-new](no-new) - disallow use of the `new` operator when not part of an assignment or comparison
 * [no-octal-escape](no-octal-escape) - disallow use of octal escape sequences in string literals, such as `var foo = "Copyright \251";`
 * [no-octal](no-octal) - disallow use of octal literals (recommended)
 * [no-param-reassign](no-param-reassign) - disallow reassignment of function parameters
@@ -84,17 +86,17 @@ These are rules designed to prevent you from making mistakes. They either prescr
 * [no-proto](no-proto) - disallow usage of `__proto__` property
 * [no-redeclare](no-redeclare) - disallow declaring the same variable more than once (recommended)
 * [no-return-assign](no-return-assign) - disallow use of assignment in `return` statement
-* [no-script-url](no-script-url) - disallow use of javascript: urls.
+* [no-script-url](no-script-url) - disallow use of `javascript:` urls.
 * [no-self-compare](no-self-compare) - disallow comparisons where both sides are exactly the same
-* [no-sequences](no-sequences) - disallow use of comma operator
+* [no-sequences](no-sequences) - disallow use of the comma operator
 * [no-throw-literal](no-throw-literal) - restrict what can be thrown as an exception
 * [no-unused-expressions](no-unused-expressions) - disallow usage of expressions in statement position
 * [no-useless-call](no-useless-call) - disallow unnecessary `.call()` and `.apply()`
-* [no-void](no-void) - disallow use of `void` operator
+* [no-void](no-void) - disallow use of the `void` operator
 * [no-warning-comments](no-warning-comments) - disallow usage of configurable warning terms in comments - e.g. `TODO` or `FIXME`
 * [no-with](no-with) - disallow use of the `with` statement
 * [radix](radix) - require use of the second argument for `parseInt()`
-* [vars-on-top](vars-on-top) - requires to declare all vars on top of their containing scope
+* [vars-on-top](vars-on-top) - require declaration of all vars at the top of their containing scope
 * [wrap-iife](wrap-iife) - require immediate function invocation to be wrapped in parentheses
 * [yoda](yoda) - require or disallow Yoda conditions
 
@@ -124,10 +126,10 @@ These rules have to do with variable declarations.
 
 These rules are specific to JavaScript running on Node.js.
 
-* [callback-return](callback-return) - enforce return after a callback
-* [handle-callback-err](handle-callback-err) - enforces error handling in callbacks
+* [callback-return](callback-return) - enforce `return` after a callback
+* [handle-callback-err](handle-callback-err) - enforce error handling in callbacks
 * [no-mixed-requires](no-mixed-requires) - disallow mixing regular variable and require declarations
-* [no-new-require](no-new-require) - disallow use of new operator with the `require` function
+* [no-new-require](no-new-require) - disallow use of `new` operator with the `require` function
 * [no-path-concat](no-path-concat) - disallow string concatenation with `__dirname` and `__filename`
 * [no-process-exit](no-process-exit) - disallow `process.exit()`
 * [no-restricted-modules](no-restricted-modules) - restrict usage of specified node modules
@@ -143,33 +145,33 @@ These rules are purely matters of style and are quite subjective.
 * [comma-spacing](comma-spacing) - enforce spacing before and after comma
 * [comma-style](comma-style) - enforce one true comma style
 * [computed-property-spacing](computed-property-spacing) - require or disallow padding inside computed properties
-* [consistent-this](consistent-this) - enforces consistent naming when capturing the current execution context
+* [consistent-this](consistent-this) - enforce consistent naming when capturing the current execution context
 * [eol-last](eol-last) - enforce newline at the end of file, with no multiple empty lines
 * [func-names](func-names) - require function expressions to have a name
-* [func-style](func-style) - enforces use of function declarations or expressions
-* [indent](indent) - this option sets a specific tab width for your code
-* [key-spacing](key-spacing) - enforces spacing between keys and values in object literal properties
-* [lines-around-comment](lines-around-comment) - enforces empty lines around comments
+* [func-style](func-style) - enforce use of function declarations or expressions
+* [indent](indent) - specify tab or space width for your code
+* [key-spacing](key-spacing) - enforce spacing between keys and values in object literal properties
+* [lines-around-comment](lines-around-comment) - enforce empty lines around comments
 * [linebreak-style](linebreak-style) - disallow mixed 'LF' and 'CRLF' as linebreaks
 * [max-nested-callbacks](max-nested-callbacks) - specify the maximum depth callbacks can be nested
 * [new-cap](new-cap) - require a capital letter for constructors
 * [new-parens](new-parens) - disallow the omission of parentheses when invoking a constructor with no arguments
-* [newline-after-var](newline-after-var) - allow/disallow an empty newline after `var` statement
+* [newline-after-var](newline-after-var) - require or disallow an empty newline after variable declarations
 * [no-array-constructor](no-array-constructor) - disallow use of the `Array` constructor
 * [no-continue](no-continue) - disallow use of the `continue` statement
 * [no-inline-comments](no-inline-comments) - disallow comments inline after code
-* [no-lonely-if](no-lonely-if) - disallow if as the only statement in an else block
+* [no-lonely-if](no-lonely-if) - disallow `if` as the only statement in an `else` block
 * [no-mixed-spaces-and-tabs](no-mixed-spaces-and-tabs) - disallow mixed spaces and tabs for indentation (recommended)
 * [no-multiple-empty-lines](no-multiple-empty-lines) - disallow multiple empty lines
 * [no-nested-ternary](no-nested-ternary) - disallow nested ternary expressions
-* [no-new-object](no-new-object) - disallow use of the `Object` constructor
+* [no-new-object](no-new-object) - disallow the use of the `Object` constructor
 * [no-spaced-func](no-spaced-func) - disallow space between function identifier and application
 * [no-ternary](no-ternary) - disallow the use of ternary operators
 * [no-trailing-spaces](no-trailing-spaces) - disallow trailing whitespace at the end of lines
 * [no-underscore-dangle](no-underscore-dangle) - disallow dangling underscores in identifiers
 * [no-unneeded-ternary](no-unneeded-ternary) - disallow the use of `Boolean` literals in conditional expressions
 * [object-curly-spacing](object-curly-spacing) - require or disallow padding inside curly braces
-* [one-var](one-var) - allow or disallow one variable declaration per function
+* [one-var](one-var) - require or disallow one variable declaration per function
 * [operator-assignment](operator-assignment) - require assignment operator shorthand where possible or prohibit it entirely
 * [operator-linebreak](operator-linebreak) - enforce operators to be placed before or after line breaks
 * [padded-blocks](padded-blocks) - enforce padding within blocks
@@ -179,8 +181,8 @@ These rules are purely matters of style and are quite subjective.
 * [semi](semi) - require or disallow use of semicolons instead of ASI
 * [sort-vars](sort-vars) - sort variables within the same declaration block
 * [space-after-keywords](space-after-keywords) - require a space after certain keywords
-* [space-before-blocks](space-before-blocks) - require or disallow space before blocks
-* [space-before-function-paren](space-before-function-paren) - require or disallow space before function opening parenthesis
+* [space-before-blocks](space-before-blocks) - require or disallow a space before blocks
+* [space-before-function-paren](space-before-function-paren) - require or disallow a space before function opening parenthesis
 * [space-in-parens](space-in-parens) - require or disallow spaces inside parentheses
 * [space-infix-ops](space-infix-ops) - require spaces around operators
 * [space-return-throw-case](space-return-throw-case) - require a space after `return`, `throw`, and `case`
@@ -192,18 +194,19 @@ These rules are purely matters of style and are quite subjective.
 
 These rules are only relevant to ES6 environments.
 
-* [arrow-parens](arrow-parens) - Require parens in arrow function arguments
-* [arrow-spacing](arrow-spacing) - Require space before/after arrow functions arrow
-* [constructor-super](constructor-super) - verify `super()` callings in constructors
-* [generator-star-spacing](generator-star-spacing) - enforce the spacing around the `*` in generator functions
+* [arrow-parens](arrow-parens) - require parens in arrow function arguments
+* [arrow-spacing](arrow-spacing) - require space before/after arrow function's arrow
+* [constructor-super](constructor-super) - verify calls of `super()` in constructors
+* [generator-star-spacing](generator-star-spacing) - enforce spacing around the `*` in generator functions
 * [no-class-assign](no-class-assign) - disallow modifying variables of class declarations
 * [no-const-assign](no-const-assign) - disallow modifying variables that are declared using `const`
-* [no-this-before-super](no-this-before-super) - disallow to use `this`/`super` before `super()` calling in constructors.
+* [no-this-before-super](no-this-before-super) - disallow use of `this`/`super` before calling `super()` in constructors.
 * [no-var](no-var) - require `let` or `const` instead of `var`
 * [object-shorthand](object-shorthand) - require method and property shorthand syntax for object literals
-* [prefer-const](prefer-const) - suggest using of `const` declaration for variables that are never modified after declared
-* [prefer-spread](prefer-spread) - suggest using of the spread operator instead of `.apply()`.
-* [require-yield](require-yield) - disallow generator functions that does not have `yield`
+* [prefer-const](prefer-const) - suggest using `const` declaration for variables that are never modified after declared
+* [prefer-spread](prefer-spread) - suggest using the spread operator instead of `.apply()`.
+* [prefer-reflect](prefer-reflect) - suggest using Reflect methods where applicable
+* [require-yield](require-yield) - disallow generator functions that do not have `yield`
 
 ## Legacy
 

@@ -3,16 +3,16 @@ title: Rule prefer-spread
 layout: doc
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
-# Suggest using of the spread operator instead of `.apply()`. (prefer-spread)
+# Suggest using the spread operator instead of `.apply()`. (prefer-spread)
 
-Up to now, we had been using `Function.prototype.apply()` callings for the variadic function.
+Before ES2015, one must use `Function.prototype.apply()` to call variadic functions.
 
 ```js
 var args = [1, 2, 3, 4];
 Math.max.apply(Math, args);
 ```
 
-Since ES2015, we can use the spread operator for the variadic function.
+In ES2015, one can use the spread operator to call variadic functions.
 
 ```js
 var args = [1, 2, 3, 4];
@@ -52,6 +52,19 @@ obj.foo.apply(otherObj, args);
 foo.apply(undefined, [1, 2, 3]);
 foo.apply(null, [1, 2, 3]);
 obj.foo.apply(obj, [1, 2, 3]);
+```
+
+Known limitations:
+
+This rule analyzes code statically to check whether or not the `this` argument is changed.
+So if the `this` argument is computed in a dynamic expression, this rule cannot detect a violation.
+
+```js
+// This warns.
+a[i++].foo.apply(a[i++], args);
+
+// This does not warn.
+a[++i].foo.apply(a[i], args);
 ```
 
 ## When Not to Use It

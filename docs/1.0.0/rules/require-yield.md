@@ -3,9 +3,9 @@ title: Rule require-yield
 layout: doc
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
-# Disallow generator functions that does not have `yield` (require-yield)
+# Disallow generator functions that do not have `yield` (require-yield)
 
-This rule catches generator functions that does not have `yield`, then warns those.
+This rule generates warnings for generator functions that do not have the `yield` keyword.
 
 ## Rule details
 
@@ -33,7 +33,7 @@ function foo() {
 ```
 
 ```js
-// This rule does not warn just empty generator functions.
+// This rule does not warn on empty generator functions.
 function* foo() { }
 ```
 

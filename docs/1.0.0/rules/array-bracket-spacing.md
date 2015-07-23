@@ -213,6 +213,7 @@ You can turn this rule off if you are not concerned with the consistency of spac
 
 * [space-in-parens](space-in-parens)
 * [object-curly-spacing](object-curly-spacing)
+* [computed-property-spacing](computed-property-spacing)
 
 ## Version
 

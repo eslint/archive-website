@@ -3,9 +3,9 @@ title: Rule arrow-spacing
 layout: doc
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
-# Require space before/after arrow functions arrow (arrow-spacing)
+# Require space before/after arrow function's arrow (arrow-spacing)
 
-This rule normalize style of spacing before/after of arrow functions arrow(`=>`).
+This rule normalize style of spacing before/after an arrow function's arrow(`=>`).
 
 ```js
 // { "before": true, "after": true }
@@ -17,12 +17,11 @@ This rule normalize style of spacing before/after of arrow functions arrow(`=>`)
 
 ## Rule Details
 
-this rules takes one arguments of structure contains `before` and `after` property
-and each property has bool value.
+This rule takes an object argument with `before` and `after` properties, each with a Boolean value.
 
 default configuration is `{ "before": true, "after": true }`.
 
-`true` means there should have **one space** and `false` means **no space**.
+`true` means there should be **one or more spaces** and `false` means **no spaces**.
 
 The following patterns are considered warnings if `{ "before": true, "after": true }`.
 

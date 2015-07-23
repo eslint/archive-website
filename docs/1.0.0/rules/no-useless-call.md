@@ -5,7 +5,7 @@ layout: doc
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 # Disallow unnecessary `.call()` and `.apply()`. (no-useless-call)
 
-The function invocation can be writen by `Function.prototype.call()` and `Function.prototype.apply()`.
+The function invocation can be written by `Function.prototype.call()` and `Function.prototype.apply()`.
 But `Function.prototype.call()` and `Function.prototype.apply()` are slower than the normal function invocation.
 
 ## Rule Details
@@ -45,6 +45,19 @@ obj.foo.apply(otherObj, [1, 2, 3]);
 foo.apply(undefined, args);
 foo.apply(null, args);
 obj.foo.apply(obj, args);
+```
+
+Known limitations:
+
+This rule compares code statically to check whether or not `thisArg` is changed.
+So if the code about `thisArg` is a dynamic expression, this rule cannot judge correctly.
+
+```js
+// This is warned.
+a[i++].foo.call(a[i++], 1, 2, 3);
+
+// This is not warned.
+a[++i].foo.call(a[i], 1, 2, 3);
 ```
 
 ## When Not to Use It
