@@ -9,7 +9,6 @@ Reports an error when they encounter an attempt to assign a value to built-in na
 
 ```js
 String = "hello world";
-var String;
 ```
 
 ## Rule Details
@@ -20,10 +19,6 @@ The following patterns are considered warnings:
 
 ```js
 String = new Object();
-```
-
-```js
-var String;
 ```
 
 ## Options
@@ -45,6 +40,8 @@ If you are trying to override one of the native objects.
 ## Related Rules
 
 * [no-extend-native](no-extend-native)
+* [no-redeclare](no-redeclare)
+* [no-shadow](no-shadow)
 
 ## Version
 
