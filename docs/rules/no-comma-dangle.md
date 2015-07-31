@@ -5,7 +5,7 @@ layout: doc
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 # Disallow Dangling Commas (no-comma-dangle)
 
-**Deprecation notice**: This rule is deprecated and has been superseded by the [comma-dangle](comma-dangle) rule. It will be removed in ESLint v1.0.
+**Replacement notice**: This rule was removed in ESLint v1.0 and replaced by the [comma-dangle](comma-dangle) rule.
 
 Trailing commas in object literals are valid according to the ECMAScript 5 (and ECMAScript 3!) spec, however IE8 (when not in IE8 document mode) and below will throw an error when it encounters trailing commas in JavaScript.
 
@@ -58,9 +58,8 @@ If your code will not be run in IE8 or below (a NodeJS application, for example)
 
 ## Version
 
-This rule was introduced in ESLint 0.0.9.
+This rule was introduced in ESLint 0.0.9 and removed in 1.0.0-rc-1.
 
 ## Resources
 
-* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/no-comma-dangle.js)
 * [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/no-comma-dangle.md)

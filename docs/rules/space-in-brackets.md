@@ -5,7 +5,7 @@ layout: doc
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 # Disallow or enforce spaces inside of brackets. (space-in-brackets)
 
-**Deprecation notice**: This rule is deprecated and has been superseded by the [object-curly-spacing](object-curly-spacing) and [array-bracket-spacing](array-bracket-spacing) rules. It will be removed in ESLint v1.0.
+**Replacement notice**: This rule was removed in ESLint v1.0 and replaced by the [object-curly-spacing](object-curly-spacing), [computed-property-spacing](computed-property-spacing) and [array-bracket-spacing](array-bracket-spacing) rules.
 
 While formatting preferences are very personal, a number of style guides require or disallow spaces between brackets:
 
@@ -305,12 +305,12 @@ You can turn this rule off if you are not concerned with the consistency of spac
 * [array-bracket-spacing](array-bracket-spacing)
 * [object-curly-spacing](object-curly-spacing)
 * [space-in-parens](space-in-parens)
+* [computed-property-spacing](computed-property-spacing)
 
 ## Version
 
-This rule was introduced in ESLint 0.4.1.
+This rule was introduced in ESLint 0.4.1 and removed in 1.0.0-rc-1.
 
 ## Resources
 
-* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/space-in-brackets.js)
 * [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/space-in-brackets.md)

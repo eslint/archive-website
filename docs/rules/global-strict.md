@@ -5,7 +5,7 @@ layout: doc
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 # Global Strict Mode (global-strict)
 
-**Deprecation notice**: This rule is deprecated and has been superseded by the [strict](strict) rule. It will be removed in ESLint v1.0. `"global"` mode in the strict rule is most similar to this rule.
+**Replacement notice**: This rule was removed in ESLint v1.0 and replaced by the [strict](strict) rule. `"global"` mode in the strict rule is most similar to this rule.
 
 Strict mode is enabled by using the following pragma in your code:
 
@@ -67,9 +67,8 @@ When a project may use non-strict-mode code side by side with strict-mode code a
 
 ## Version
 
-This rule was introduced in ESLint 0.8.0.
+This rule was introduced in ESLint 0.8.0 and removed in 1.0.0-rc-1.
 
 ## Resources
 
-* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/global-strict.js)
 * [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/global-strict.md)

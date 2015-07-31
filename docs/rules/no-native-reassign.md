@@ -9,45 +9,11 @@ Reports an error when they encounter an attempt to assign a value to built-in na
 
 ```js
 String = "hello world";
-var String;
 ```
 
 ## Rule Details
 
-The following objects are considered a native objects:
-
-* `Array`
-* `Boolean`
-* `Date`
-* `decodeURI`
-* `decodeURIComponent`
-* `encodeURI`
-* `encodeURIComponent`
-* `Error`
-* `eval`
-* `EvalError`
-* `Function`
-* `isFinite`
-* `isNaN`
-* `JSON`
-* `Math`
-* `Number`
-* `Object`
-* `parseInt`
-* `parseFloat`
-* `RangeError`
-* `ReferenceError`
-* `RegExp`
-* `String`
-* `SyntaxError`
-* `TypeError`
-* `URIError`
-* `Map`
-* `NaN`
-* `Set`
-* `WeakMap`
-* `Infinity`
-* `undefined`
+The native objects reported by this rule are the `builtin` variables from [globals](https://github.com/sindresorhus/globals/).
 
 The following patterns are considered warnings:
 
@@ -55,16 +21,9 @@ The following patterns are considered warnings:
 String = new Object();
 ```
 
-```js
-var String;
-```
-
 ## Options
 
-### exceptions
-
-Array of native object names that are permitted to be reassigned.
-If provided, it must be an `Array`.
+This rule accepts an `exceptions` option, which can be used to specify a list of builtins for which reassignments will be allowed:
 
 ```js
 {
@@ -81,6 +40,8 @@ If you are trying to override one of the native objects.
 ## Related Rules
 
 * [no-extend-native](no-extend-native)
+* [no-redeclare](no-redeclare)
+* [no-shadow](no-shadow)
 
 ## Version
 

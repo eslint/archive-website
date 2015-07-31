@@ -5,7 +5,7 @@ layout: doc
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 # Require spaces following unary word operators (space-unary-word-ops)
 
-**Deprecation notice**: This rule is deprecated and has been superseded by the [space-unary-ops](space-unary-ops) rule. It has be removed in ESLint v0.10.0.
+**Replacement notice**: This rule was removed and has been replaced by the [space-unary-ops](space-unary-ops) rule.
 
 Require spaces following unary word operators.
 
@@ -45,9 +45,8 @@ void 0
 
 ## Version
 
-This rule was introduced in ESLint 0.1.4.
+This rule was introduced in ESLint 0.1.4 and removed in 0.10.0.
 
 ## Resources
 
-* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/space-unary-word-ops.js)
 * [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/space-unary-word-ops.md)

@@ -5,7 +5,7 @@ layout: doc
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 # Requires or disallows a whitespace (space or tab) beginning a single-line comment (spaced-line-comment)
 
-**Deprecation notice**: This rule is deprecated and has been superseded by the [spaced-comment](spaced-comment) rule. It will be removed in ESLint v1.0.
+**Replacement notice**: This rule was removed in ESLint v1.0 and replaced by the [spaced-comment](spaced-comment) rule.
 
 Some style guides require or disallow a whitespace immediately after the initial `//` of a line comment.
 Whitespace after the `//` makes it easier to read text in comments.
@@ -79,9 +79,8 @@ var foo = 5;
 
 ## Version
 
-This rule was introduced in ESLint 0.9.0.
+This rule was introduced in ESLint 0.9.0 and removed in 1.0.0-rc-1.
 
 ## Resources
 
-* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/spaced-line-comment.js)
 * [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/spaced-line-comment.md)

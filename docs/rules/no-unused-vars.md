@@ -14,6 +14,10 @@ This rule is aimed at eliminating unused variables, functions and variables in p
 The following patterns are considered warnings:
 
 ```js
+
+//It checks variables you have defined as global
+/*global some_used_var */
+
 var x = 10;
 
 var y = 10;
@@ -46,6 +50,11 @@ myFunc(function foo() {
     return foo;
 })();
 ```
+
+### Exporting Variables
+
+In some environments you may use `var` to create a global variable that may be used by other scripts. You can
+ use the `/* exported variableName */` comment block to indicate that this variable may be used elsewhere.
 
 ### Options
 

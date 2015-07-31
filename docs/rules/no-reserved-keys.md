@@ -57,9 +57,8 @@ If your code is only going to be executed in an ECMAScript 5 or higher environme
 
 ## Version
 
-This rule was introduced in ESLint 0.8.0.
+This rule was introduced in ESLint 0.8.0 and removed in 1.0.0.
 
 ## Resources
 
-* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/no-reserved-keys.js)
 * [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/no-reserved-keys.md)

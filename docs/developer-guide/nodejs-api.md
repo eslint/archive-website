@@ -79,7 +79,6 @@ The `CLIEngine` is a constructor, and you can create a new instance by passing i
 * `globals` - An array of global variables to declare (default: empty array). Corresponds to `--global`.
 * `ignore` - False disables use of `.eslintignore` (default: true). Corresponds to `--no-ignore`.
 * `ignorePath` - The ignore file to use instead of `.eslintignore` (default: null). Corresponds to `--ignore-path`.
-* `reset` - True disables all default rules and environments (default: false). Corresponds to `--reset`.
 * `baseConfig` - Set to false to disable use of base config. Could be set to an object to override default base config as well.
 * `rulePaths` - An array of directories to load custom rules from (default: empty array). Corresponds to `--rulesdir`.
 * `rules` - An object of rules to use (default: null). Corresponds to `--rule`.
@@ -249,7 +248,7 @@ var isIgnored = cli.isPathIgnored("foo/bar.js");
 
 ### getFormatter()
 
-Retrieves a formatter, which you can then use to format a report object. The argument is either the name of a built-in formatter ("stylish" (the default), "compact", "checkstyle", "jslint-xml", "junit" and "tap") or the full path to a JavaScript file containing a custom formatter. You can also omit the argument to retrieve the default formatter.
+Retrieves a formatter, which you can then use to format a report object. The argument is either the name of a built-in formatter ("stylish" (the default), "compact", "checkstyle", "jslint-xml", "junit", "json" and "tap") or the full path to a JavaScript file containing a custom formatter. You can also omit the argument to retrieve the default formatter.
 
 ```js
 var CLIEngine = require("eslint").CLIEngine;
@@ -280,4 +279,4 @@ console.log(formatter(report.results));
 
 ## Deprecated APIs
 
-* `cli` - the `cli` object has been deprecated in favor of `CLIEngine`. It will be removed at some point in the future.
+* `cli` - the `cli` object has been deprecated in favor of `CLIEngine`. As of v1.0.0, `cli` is no longer exported and should not be used by external tools.

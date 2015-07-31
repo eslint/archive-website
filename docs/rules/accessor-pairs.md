@@ -5,7 +5,7 @@ layout: doc
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 # Enforces getter/setter pairs in objects (accessor-pairs)
 
-It's a common mistake in JavaScript to create an object with just setter but never have a getter defined for it. If you have a setter but no corresponding getter then you can never the get the value. So it ends up not getting used as you can only set the value and never get the value.
+It's a common mistake in JavaScript to create an object with just setter but never have a getter defined for it. If you have a setter but no corresponding getter then you can never get the value. So it ends up not getting used as you can only set the value and never get the value.
 Here are some examples:
 
 ```js

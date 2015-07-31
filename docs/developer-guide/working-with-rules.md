@@ -36,7 +36,7 @@ module.exports.schema = [
 
 ## Rule Basics
 
-Each rule is represented by a single object with several properties. The properties are equivalent to AST node types from [SpiderMonkey](https://developer.mozilla.org/en-US/docs/SpiderMonkey/Parser_API). For example, if your rule wants to know when an identifier is found in the AST, then add a method called "Identifier", such as:
+Each rule is represented by a single object with several properties. The properties are equivalent to AST node types from [ESTree](https://github.com/estree/estree). For example, if your rule wants to know when an identifier is found in the AST, then add a method called "Identifier", such as:
 
 ```js
 module.exports = function(context) {
@@ -53,7 +53,7 @@ module.exports = function(context) {
 
 Each method that matches a node in the AST will be passed the corresponding node. You can then evaluate the node and it's surrounding tree to determine whether or not an issue needs reporting.
 
-By default, the method matching a node name is called during the traversal when the node is first encountered, on the way down the AST. You can also specify to visit the node on the other side of the traversal, as it comes back up the tree, but adding `:exit` to the end of the node type, such as:
+By default, the method matching a node name is called during the traversal when the node is first encountered, on the way down the AST. You can also specify to visit the node on the other side of the traversal, as it comes back up the tree, by adding `:exit` to the end of the node type, such as:
 
 ```js
 module.exports = function(context) {
@@ -84,6 +84,7 @@ Additionally, the `context` object has the following methods:
 * `getAllComments()` - returns an array of all comments in the source.
 * `getAncestors()` - returns an array of ancestor nodes based on the current traversal.
 * `getComments(node)` - returns the leading and trailing comments arrays for the given node.
+* `getDeclaredVariables(node)` - returns the declared variables on the given node.
 * `getFilename()` - returns the filename associated with the source.
 * `getFirstToken(node)` - returns the first token representing the given node.
 * `getFirstTokens(node, count)` - returns the first `count` tokens representing the given node.
@@ -221,45 +222,29 @@ The basic pattern for a rule unit test file is:
  * @author Nicholas C. Zakas
  * @copyright 2014 Nicholas C. Zakas. All rights reserved.
  */
+
 "use strict";
 
 //------------------------------------------------------------------------------
 // Requirements
 //------------------------------------------------------------------------------
 
-var eslint = require("../../../lib/eslint"),
-    ESLintTester = require("eslint-tester");
+var rule = require("../../../lib/rules/no-with"),
+    RuleTester = require("../../../lib/testers/rule-tester");
 
 //------------------------------------------------------------------------------
 // Tests
 //------------------------------------------------------------------------------
 
-var eslintTester = new ESLintTester(eslint);
-eslintTester.addRuleTest("lib/rules/block-scoped-var", {
-
-    // Examples of code that should not trigger the rule
+var ruleTester = new RuleTester();
+ruleTester.run("no-with", rule, {
     valid: [
-        "function doSomething() { var build, f; if (true) { build = true; } f = build; }",
-        "var build; function doSomething() { var f = build; }",
-        "function doSomething(e) { }",
-        "function doSomething(e) { var f = e; }",
-        "function doSomething() { var f = doSomething; }",
-        "function foo() { } function doSomething() { var f = foo; }"
+        "foo.bar()"
     ],
-
-    // Examples of code that should trigger the rule
     invalid: [
         {
-            code: "function doSomething() { var f; if (true) { var build = true; } f = build; }",
-            errors: [
-                { message: "build used outside of binding context.", type: "Identifier" }
-            ]
-        },
-        {
-            code: "function doSomething() { try { var build = 1; } catch (e) { var f = build; } }",
-            errors: [
-                { message: "build used outside of binding context.", type: "Identifier" }
-            ]
+            code: "with(foo) { bar() }",
+            errors: [{ message: "Unexpected use of 'with' statement.", type: "WithStatement"}]
         }
     ]
 });
@@ -280,18 +265,18 @@ valid: [
 ]
 ```
 
-You can also pass arguments to the rule (if it accepts them). These arguments are equivalent to how people can configure rules in their `.eslintrc` file. For example:
+You can also pass options to the rule (if it accepts them). These arguments are equivalent to how people can configure rules in their `.eslintrc` file. For example:
 
 ```js
 valid: [
     {
         code: "var msg = 'Hello';",
-        args: [1, "single" ]
+        options: [ "single" ]
     }
 ]
 ```
 
-Your rule will then be passed the arguments as if they came from a configuration file.
+The `options` property must be an array of options. This gets passed through to `context.options` in the rule.
 
 ### Invalid Code
 
@@ -310,13 +295,13 @@ invalid: [
 
 In this case, the message is specific to the variable being used and the AST node type is `Identifier`.
 
-Similar to the valid cases, you can also specify `args` to be passed to the rule:
+Similar to the valid cases, you can also specify `options` to be passed to the rule:
 
 ```js
 invalid: [
     {
         code: "function doSomething() { var f; if (true) { var build = true; } f = build; }",
-        args: [ 1, "double" ],
+        options: [ "double" ],
         errors: [
             { message: "build used outside of binding context.", type: "Identifier" }
         ]
@@ -324,7 +309,7 @@ invalid: [
 ]
 ```
 
-### Write Many Tests
+### Write Several Tests
 
 You must have at least one valid and one invalid case for the rule tests to pass. Provide as many unit tests as possible. Your pull request will never be turned down for having too many tests submitted with it!
 
@@ -334,7 +319,7 @@ To keep the linting process efficient and unobtrusive, it is useful to verify th
 
 ### Overall Performance
 
-The `npm run perf` command gives a high-level overview of ESLint running time.
+The `npm run perf` command gives a high-level overview of ESLint running time with default rules (`eslint:recommended`) enabled.
 
 ```bash
 $ git checkout master
@@ -382,10 +367,10 @@ no-empty-class          |    21.976 |     2.6%
 semi                    |    19.359 |     2.3%
 ```
 
-To test one rule explicitly, combine the `--reset`, `--no-eslintrc`, and `--rule` options:
+To test one rule explicitly, combine the `--no-eslintrc`, and `--rule` options:
 
 ```bash
-$ TIMING=1 eslint --reset --no-eslintrc --rule "quotes: [2, 'double']" lib
+$ TIMING=1 eslint --no-eslintrc --rule "quotes: [2, 'double']" lib
 Rule   | Time (ms) | Relative
 :------|----------:|--------:
 quotes |    18.066 |   100.0%
@@ -402,14 +387,13 @@ The rule naming conventions for ESLint are fairly simple:
 
 ## Rule Acceptance Criteria
 
-Because rules are highly personal (and therefore very contentious), the following guidelines determine whether or not a rule is accepted and whether or not it is on by default:
+Because rules are highly personal (and therefore very contentious), accepted rules should:
 
-* If the same rule exists in JSHint and is turned on by default, it must have the same message and be enabled by default.
-* If the same rule exists in JSLint but not in JSHint, it must have the same message and be disabled by default.
-* If the rule doesn't exist in JSHint or JSLint, then it must:
-    * Not be library-specific.
-    * Demonstrate a possible issue that can be resolved by rewriting the code.
-    * Be general enough so as to apply for a large number of developers.
+* Not be library-specific.
+* Demonstrate a possible issue that can be resolved by rewriting the code.
+* Be general enough so as to apply for a large number of developers.
+* Not be the opposite of an existing rule.
+* Not overlap with an existing rule.
 
 ## Runtime Rules
 

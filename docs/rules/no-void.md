@@ -3,11 +3,11 @@ title: Rule no-void
 layout: doc
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
-# Disallow use of void operator. (no-void)
+# Disallow use of the void operator. (no-void)
 
-The `void` operator takes operand and returns `undefined`: `void expression` will evaluate `expression` and return `undefined`. It can be used to suppress any side effects `expression` may produce:
+The `void` operator takes an operand and returns `undefined`: `void expression` will evaluate `expression` and return `undefined`. It can be used to ignore any side effects `expression` may produce:
 
-The common case of using `void` operator is to get "pure" `undefined` value as prior to ES5 `undefined` variable was mutable:
+The common case of using `void` operator is to get a "pure" `undefined` value as prior to ES5 the `undefined` variable was mutable:
 
 ```js
 // will always return undefined
@@ -62,7 +62,7 @@ var foo = void bar();
 
 ## When Not To Use It
 
-If you intentionally use `void` operator then you can disable this rule.
+If you intentionally use the `void` operator then you can disable this rule.
 
 ## Further Reading
 

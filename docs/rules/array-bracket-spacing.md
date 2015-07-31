@@ -33,7 +33,7 @@ There are two options for this rule:
 Depending on your coding conventions, you can choose either option by specifying it in your configuration:
 
 ```json
-"arrays-bracket-spacing": [2, "always"]
+"array-bracket-spacing": [2, "always"]
 ```
 
 #### never
@@ -213,6 +213,7 @@ You can turn this rule off if you are not concerned with the consistency of spac
 
 * [space-in-parens](space-in-parens)
 * [object-curly-spacing](object-curly-spacing)
+* [computed-property-spacing](computed-property-spacing)
 
 ## Version
 
