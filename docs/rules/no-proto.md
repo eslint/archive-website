@@ -3,7 +3,7 @@ title: Rule no-proto
 layout: doc
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
-# Disallow Use of __proto__ (no-proto)
+# Disallow Use of `__proto__` (no-proto)
 
 `__proto__` property has been deprecated as of ECMAScript 3.1 and shouldn't be used in the code. Use `getPrototypeOf` method instead.
 

@@ -5,9 +5,12 @@ layout: doc
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 # Require parens in arrow function arguments (arrow-parens)
 
-Arrow function can omit parens if they are passed only one arguments,
-but you need to add parens if the argument count is different.
-This rule requires parens in arrow function arguments regardless of arity, for consistency.
+Arrow functions can omit parentheses when they have exactly one paramater. In all other cases the parameter(s) must
+be wrapped in parentheses. This rule enforces the consistent use of parentheses in arrow functions.
+
+## Rule Details
+
+This rule enforces parentheses around arrow function parameters regardless of arity. For example:
 
 ```js
 // Bad
@@ -17,8 +20,8 @@ a => {}
 (a) => {}
 ```
 
-
-It will also help to find arrow functions (`=>`) which may be mistakenly included in a condition when a comparison such as `>=` was the intent.
+Following this style will help you find arrow functions (`=>`) which may be mistakenly included in a condition
+when a comparison such as `>=` was the intent.
 
 
 ```js
@@ -31,10 +34,27 @@ if (a >= 2) {
 }
 ```
 
+The rule can also be configured to discourage the use of parens when they are not required:
 
-## Rule Details
+```js
+// Bad
+(a) => {}
 
-The following patterns are considered warnings:
+// Good
+a => {}
+```
+
+### Options
+
+The rule takes one option, a string, which could be either "always" or "as-needed". The default is "always".
+
+You can set the option in configuration like this:
+
+"arrow-parens": [2, "always"]
+
+#### "always"
+
+When the rule is set to `"always"` the following patterns are considered warnings:
 
 ```js
 a => {}
@@ -56,7 +76,9 @@ a.then((foo) => {});
 a.then((foo) => { if (true) {}; });
 ```
 
-this saves you from behavior like the following:
+##### If Statements
+
+One benefits of this option is that it prevents the incorrect use of arrow functions in conditionals:
 
 ```js
 var a = 1;
@@ -100,6 +122,32 @@ This should be rewritten like so:
 ```js
 var a = 1, b = 2, c = 3, d = 4;
 var f = (a) => b ? c: d;
+```
+
+
+#### "as-needed"
+
+When the rule is set to `"as-needed"` the following patterns are considered warnings:
+
+```js
+(a) => {}
+(a) => a
+(a) => {\n}
+a.then((foo) => {});
+a.then((foo) => a);
+a((foo) => { if (true) {}; });
+```
+
+The following patterns are not warnings:
+
+```js
+() => {}
+a => {}
+a => a
+a => {\n}
+a.then((foo) => {});
+a.then((foo) => { if (true) {}; });
+(a, b, c) => a
 ```
 
 ## Version

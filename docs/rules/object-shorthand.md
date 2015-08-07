@@ -61,7 +61,7 @@ In that case the expected syntax would have been:
 var foo = {
     x() {},
     *y() {},
-    y
+    z
 };
 ```
 

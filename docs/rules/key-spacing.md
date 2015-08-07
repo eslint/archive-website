@@ -100,7 +100,7 @@ call({
     b :  []
 });
 
-// "key-spacing": [2, { "align": "colon" }]
+// "key-spacing": [2, { "align": "value" }]
 // beforeColon and afterColon default to false and true, respectively
 var obj = { a: "foo", longPropertyName: "bar" };
 ```
@@ -136,7 +136,7 @@ var obj = {
 };
 
 // "key-spacing": [2, {
-//     "align": "value",
+//     "align": "colon",
 //     "beforeColon": true,
 //     "afterColon": false
 // }]
@@ -150,7 +150,7 @@ obj = {
 The following patterns are considered warnings:
 
 ```js
-// "key-spacing": [2, { "align": "value" }]
+// "key-spacing": [2, { "align": "colon" }]
 // beforeColon and afterColon default to false and true, respectively
 var obj = {
     one:   1, // Missing space before colon

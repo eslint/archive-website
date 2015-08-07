@@ -5,7 +5,7 @@ layout: doc
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 # Require IDs to match a pattern (id-match)
 
-> "There are only two hard things in Computer Science: cache invalidation and naming things." � Phil Karlton
+> "There are only two hard things in Computer Science: cache invalidation and naming things." — Phil Karlton
 
 Naming things consistently in a project is an often underestimated aspect of code creation.
 When done right, it can save your team hours of unnecessary head scratching and misdirections.

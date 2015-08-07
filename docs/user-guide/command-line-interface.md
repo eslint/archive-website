@@ -85,7 +85,7 @@ Examples:
 
 ### `-f`, `--format`
 
-This option specifies the output format for the console. Possible formats are "stylish" (the default), "compact", "checkstyle", "jslint-xml", "junit", "json" and "tap".
+This option specifies the output format for the console. Possible formats are "stylish" (the default), "compact", "checkstyle", "jslint-xml", "junit", "json", "tap" and "unix".
 
 Example:
 
@@ -224,7 +224,7 @@ Example:
 
     eslint -v
 
-### '--init'
+### `--init`
 
 This option will start config initialization wizard. It's designed to help new users quickly create .eslintrc file by answering a few questions. File will be created in current directory.
 
