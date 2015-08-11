@@ -24,7 +24,7 @@ This setting mimics some of the default behavior from 0.x, but not all. If you d
 **To address:** If you are currently using `--reset`, then you should stop passing `--reset` on the command line; no other changes are necessary. If you are not using `--reset`, then you should review your configuration to determine which rules should be on by default. You can partially restore some of the default behavior by adding the following to your configuration file:
 
 
-The `"eslint:recommended"` configuration contains many of the same default rule settings from 0.x, but not all. You should review your settings for the following rules to ensure they are still as you expect:
+The `"eslint:recommended"` configuration contains many of the same default rule settings from 0.x, but not all. These rules are no longer on by default, so you should review your settings to ensure they are still as you expect:
 
 * [no-alert](http://eslint.org/docs/rules/no-alert)
 * [no-array-constructor](http://eslint.org/docs/rules/no-array-constructor)
@@ -82,6 +82,8 @@ The `"eslint:recommended"` configuration contains many of the same default rule 
 * [space-unary-ops](http://eslint.org/docs/rules/space-unary-ops)
 * [strict](http://eslint.org/docs/rules/strict)
 * [yoda](http://eslint.org/docs/rules/yoda)
+
+See also: the [full diff](https://github.com/eslint/eslint/commit/e3e9dbd9876daf4bdeb4e15f8a76a9d5e6e03e39#diff-b01a5cfd9361ca9280a460fd6bb8edbbL1) where the defaults were changed.
 
 ## Removed Rules
 
