@@ -29,6 +29,8 @@ After that, you can run ESLint on any JavaScript file:
 
 ## Configuration
 
+**Note:** If you are coming from a version before 1.0.0 please see the [migration guide](http://eslint.org/docs/user-guide/migrating-to-1.0.0).
+
 After running `eslint --init`, you'll have a `.eslintrc` file in your directory. In it, you'll see some rules configured like this:
 
 ```json
