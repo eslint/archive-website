@@ -30,7 +30,7 @@ redirect_from: "/docs/integrations/"
 * **Broccoli:**
     * [broccoli-eslint](https://www.npmjs.org/package/broccoli-eslint)
 * **Webpack:**
-    * [eslint-loader](https://www.npmjs.org/package/eslint-loader) 
+    * [eslint-loader](https://www.npmjs.org/package/eslint-loader)
 * **Ember-cli**
     * [ember-cli-eslint](https://www.npmjs.com/package/ember-cli-eslint)
 * **Sails.js**
@@ -40,6 +40,7 @@ redirect_from: "/docs/integrations/"
 
 * [Eslint Watch](https://www.npmjs.com/package/eslint-watch)
 * [Code Climate CLI](https://github.com/codeclimate/codeclimate)
+* [ESLint Nibble](https://github.com/IanVS/eslint-nibble)
 
 ## Source Control
 
