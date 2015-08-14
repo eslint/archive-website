@@ -1,0 +1,45 @@
+.parserRow {
+    padding-top: 0px;
+}
+
+.parserPanel {
+    font-size: 12px;
+    margin-bottom: 2em;
+    height: 575px;
+    width: 48%;
+    display: inline-block;
+    vertical-align: top
+}
+
+.codePanel, .resultsPanel {
+    height: 100%;
+    overflow: auto;
+}
+
+.scrollable {
+    overflow: scroll;
+}
+
+.codePanel, .resultsPanel {
+     font-size: 12px;
+}
+
+.error {
+    color: red;
+}
+
+.txtRight {
+    text-align: right;
+}
+
+pre {
+    margin: 0;
+}
+
+label {
+    font-weight: normal;
+}
+
+main.container {
+    padding-top: 3em;
+}
