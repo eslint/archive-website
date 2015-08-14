@@ -94,9 +94,17 @@ require([
         }));
     }
 
-    function populateConfiguration(rules, environments) {
+    function populateConfiguration(rules, environments, ecmaFeatures) {
+        var checkbox;
+
+        for (var feature in ecmaFeatures) {
+            checkbox = $('<div class="checkbox-inline"><label><input class="feature" type="checkbox" />' + feature +'</label></div>');
+            $('input', checkbox).attr('id', feature).prop('checked', ecmaFeatures[feature]);
+            $('.ecmaFeatures .list').append(checkbox);
+        }
+
         for (var env in environments) {
-            var checkbox = $('<div class="checkbox-inline"><label><input type="checkbox" />' + env +'</label></div>');
+            checkbox = $('<div class="checkbox-inline"><label><input type="checkbox" />' + env +'</label></div>');
             $('input', checkbox).attr('id', env).prop('checked', environments[env]);
             $('.environments .list').append(checkbox);
         }
@@ -108,7 +116,7 @@ require([
                 parent = $('<div class="col-md-4"></div>');
                 $('.rules').append(parent);
             }
-            var checkbox = $('<div class="checkbox"><label><input type="checkbox" />' + rule +'</label></div>');
+            checkbox = $('<div class="checkbox"><label><input type="checkbox" />' + rule +'</label></div>');
             checkbox.popover({
                 title: rule,
                 content: function() {
@@ -147,8 +155,14 @@ require([
                 i = 0;
             }
         }
+
         $('#configuration .btn').click(function() {
-            var environments = {}, rules = {};
+            var environments = {}, rules = {}, ecmaFeatures = {};
+            $('.ecmaFeatures input').each(function() {
+                var name = $(this).attr('id');
+                var value = $(this).is(':checked');
+                ecmaFeatures[name] = value;
+            });
             $('.environments input').each(function() {
                 var name = $(this).attr('id');
                 var value = $(this).is(':checked');
@@ -162,7 +176,9 @@ require([
 
             OPTIONS.rules = rules;
             OPTIONS.env = environments;
+            OPTIONS.ecmaFeatures = ecmaFeatures;
             localStorage.rules = JSON.stringify(rules);
+            localStorage.ecmaFeatures = JSON.stringify(ecmaFeatures);
             localStorage.env = JSON.stringify(environments);
             verify();
             $("#configuration").collapse('hide');
@@ -176,7 +192,16 @@ require([
     if (localStorage.env) {
         OPTIONS.env = JSON.parse(localStorage.env);
     }
-    populateConfiguration(OPTIONS.rules, OPTIONS.env);
+    if (localStorage.ecmaFeatures) {
+        OPTIONS.ecmaFeatures = JSON.parse(localStorage.ecmaFeatures);
+    }
+
+    // make sure es6 env & modules features are available
+    OPTIONS.env.es6 = OPTIONS.env.es6 || false;
+    OPTIONS.ecmaFeatures = OPTIONS.ecmaFeatures || {};
+    OPTIONS.ecmaFeatures.modules = OPTIONS.ecmaFeatures.module || false;
+
+    populateConfiguration(OPTIONS.rules, OPTIONS.env, OPTIONS.ecmaFeatures);
 
     var editor = edit(document.getElementById('editor'));
 
