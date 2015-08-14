@@ -56,8 +56,8 @@ require([
                 editor.onGotoLine( options.line - 1, options.column, options.column );
             }).bind( null, editor, options );
 
-            result.textContent = options.line + ':' + options.column +
-            ' - ' + options.message;
+            result.innerHTML = options.line + ':' + options.column +
+            ' - ' + options.message + ' (<a href="http://eslint.org/docs/rules/' + options.ruleId + '">' + options.ruleId + '</a>)';
             result.setAttribute('title', options.message);
         } else if (options.hasOwnProperty('message')) {
             result.textContent = 'Lint-free!';
