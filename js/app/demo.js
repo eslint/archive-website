@@ -186,6 +186,9 @@ require([
     }
 
     var OPTIONS = JSON.parse(config);
+    if (!OPTIONS.env) {
+        OPTIONS.env = {};
+    }
     if (localStorage.rules) {
         OPTIONS.rules = JSON.parse(localStorage.rules);
     }
