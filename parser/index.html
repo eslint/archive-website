@@ -1,0 +1,45 @@
+---
+title: ESLint Parser Demo
+layout: demo
+---
+<link rel="stylesheet" property="stylesheet" href="../styles/parser.css"/>
+
+<div class="parserRow">
+    <div class="parserPanel parserPanel-editor">
+        <textarea id="editor" class="codePanel">var foo = bar;</textarea>
+    </div>
+    <div class="parserPanel parserPanel-results">
+        <pre id="results" class="resultsPanel">
+        </pre>
+    </div>
+</div>
+<div class="row">
+    <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+        <div class="panel panel-default">
+            <div class="panel-heading" role="tab" id="headingOne">
+                <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#configuration" aria-expanded="true" aria-controls="configuration">
+                        Parser Configuration
+                    </a>
+                </h4>
+            </div>
+            <div id="configuration" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h3>Options</h3>
+                        </div>
+                    </div>
+                    <div class="row options">
+                        <div class="col-md-12 list">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript" src="../js/app/eslint.js"></script>
+<script type="text/javascript" src="../js/app/parser/index.built.js"></script>
