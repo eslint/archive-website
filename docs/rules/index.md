@@ -139,6 +139,7 @@ These rules are specific to JavaScript running on Node.js.
 These rules are purely matters of style and are quite subjective.
 
 * [array-bracket-spacing](array-bracket-spacing) - enforce spacing inside array brackets
+* [block-spacing](block-spacing) - disallow or enforce spaces inside of single line blocks
 * [brace-style](brace-style) - enforce one true brace style
 * [camelcase](camelcase) - require camel case names
 * [comma-spacing](comma-spacing) - enforce spacing before and after comma
@@ -148,7 +149,7 @@ These rules are purely matters of style and are quite subjective.
 * [eol-last](eol-last) - enforce newline at the end of file, with no multiple empty lines
 * [func-names](func-names) - require function expressions to have a name
 * [func-style](func-style) - enforce use of function declarations or expressions
-* [id-length](id-length) - this option enforces minimum and maximum identifier lengths (variable names, property names etc.) (off by default)
+* [id-length](id-length) - this option enforces minimum and maximum identifier lengths (variable names, property names etc.)
 * [id-match](id-match) - require identifiers to match the provided regular expression
 * [indent](indent) - specify tab or space width for your code
 * [key-spacing](key-spacing) - enforce spacing between keys and values in object literal properties
@@ -201,12 +202,15 @@ These rules are only relevant to ES6 environments.
 * [generator-star-spacing](generator-star-spacing) - enforce spacing around the `*` in generator functions
 * [no-class-assign](no-class-assign) - disallow modifying variables of class declarations
 * [no-const-assign](no-const-assign) - disallow modifying variables that are declared using `const`
+* [no-dupe-class-members](no-dupe-class-members) - disallow duplicate name in class members
 * [no-this-before-super](no-this-before-super) - disallow use of `this`/`super` before calling `super()` in constructors.
 * [no-var](no-var) - require `let` or `const` instead of `var`
 * [object-shorthand](object-shorthand) - require method and property shorthand syntax for object literals
+* [prefer-arrow-callback](prefer-arrow-callback) - suggest using arrow functions as callbacks
 * [prefer-const](prefer-const) - suggest using `const` declaration for variables that are never modified after declared
 * [prefer-spread](prefer-spread) - suggest using the spread operator instead of `.apply()`.
 * [prefer-reflect](prefer-reflect) - suggest using Reflect methods where applicable
+* [prefer-template](prefer-template) - suggest using template literals instead of strings concatenation
 * [require-yield](require-yield) - disallow generator functions that do not have `yield`
 
 ## Legacy

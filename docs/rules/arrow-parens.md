@@ -5,7 +5,7 @@ layout: doc
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 # Require parens in arrow function arguments (arrow-parens)
 
-Arrow functions can omit parentheses when they have exactly one paramater. In all other cases the parameter(s) must
+Arrow functions can omit parentheses when they have exactly one parameter. In all other cases the parameter(s) must
 be wrapped in parentheses. This rule enforces the consistent use of parentheses in arrow functions.
 
 ## Rule Details
@@ -145,9 +145,12 @@ The following patterns are not warnings:
 a => {}
 a => a
 a => {\n}
-a.then((foo) => {});
-a.then((foo) => { if (true) {}; });
+a.then(foo => {});
+a.then(foo => { if (true) {}; });
 (a, b, c) => a
+(a = 10) => a
+([a, b]) => a
+({a, b}) => a
 ```
 
 ## Version
