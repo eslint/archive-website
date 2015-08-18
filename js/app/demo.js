@@ -186,9 +186,6 @@ require([
     }
 
     var OPTIONS = JSON.parse(config);
-    if (!OPTIONS.env) {
-        OPTIONS.env = {};
-    }
     if (localStorage.rules) {
         OPTIONS.rules = JSON.parse(localStorage.rules);
     }
@@ -199,8 +196,26 @@ require([
         OPTIONS.ecmaFeatures = JSON.parse(localStorage.ecmaFeatures);
     }
 
-    // make sure es6 env & modules features are available
+    // ensure certain environments are available
+    OPTIONS.env = OPTIONS.env || {};
+    OPTIONS.env.node = OPTIONS.env.node || false;
+    OPTIONS.env.browser = OPTIONS.env.browser || false;
+    OPTIONS.env.amd = OPTIONS.env.amd || false;
+    OPTIONS.env.mocha = OPTIONS.env.mocha || false;
+    OPTIONS.env.jasmine = OPTIONS.env.jasmine || false;
+    OPTIONS.env.phantomjs = OPTIONS.env.phantomjs || false;
+    OPTIONS.env.qunit = OPTIONS.env.qunit || false;
+    OPTIONS.env.jquery = OPTIONS.env.jquery || false;
+    OPTIONS.env.prototypejs = OPTIONS.env.prototypejs || false;
+    OPTIONS.env.shelljs = OPTIONS.env.shelljs || false;
+    OPTIONS.env.meteor = OPTIONS.env.meteor || false;
+    OPTIONS.env.mongo = OPTIONS.env.mongo || false;
+    OPTIONS.env.applescript = OPTIONS.env.applescript || false;
+    OPTIONS.env.serviceworker = OPTIONS.env.serviceworker || false;
+    OPTIONS.env.embertest = OPTIONS.env.embertest || false;
     OPTIONS.env.es6 = OPTIONS.env.es6 || false;
+
+    // include certain ecma features
     OPTIONS.ecmaFeatures = OPTIONS.ecmaFeatures || {};
     OPTIONS.ecmaFeatures.modules = OPTIONS.ecmaFeatures.module || false;
 
