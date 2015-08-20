@@ -8010,7 +8010,7 @@ module.exports={
         "newline-after-var": 0,
         "object-curly-spacing": [0, "never"],
         "object-shorthand": 0,
-        "one-var": 0,
+        "one-var": [0, "always"],
         "operator-assignment": [0, "always"],
         "operator-linebreak": 0,
         "padded-blocks": 0,
@@ -23079,6 +23079,9 @@ module.exports = function(context) {
     var lastCommentIndex = 0;
     var allComments;
 
+    // list of comma tokens to ignore for the check of leading whitespace
+    var commaTokensToIgnore = [];
+
     /**
      * Determines the length of comment between 2 tokens
      * @param {Object} left - The left token object.
@@ -23183,12 +23186,37 @@ module.exports = function(context) {
         return false;
     }
 
+    /**
+     * Adds null elements of the given ArrayExpression or ArrayPattern node to the ignore list.
+     * @param {ASTNode} node An ArrayExpression or ArrayPattern node.
+     * @returns {void}
+     */
+    function addNullElementsToIgnoreList(node) {
+        var previousToken = context.getFirstToken(node);
+
+        node.elements.forEach(function(element) {
+            var token;
+
+            if (element === null) {
+                token = context.getTokenAfter(previousToken);
+
+                if (isComma(token)) {
+                    commaTokensToIgnore.push(token);
+                }
+            } else {
+                token = context.getTokenAfter(element);
+            }
+
+            previousToken = token;
+        });
+    }
+
     //--------------------------------------------------------------------------
     // Public
     //--------------------------------------------------------------------------
 
     return {
-        "Program": function() {
+        "Program:exit": function() {
 
             var source = context.getSource(),
                 pattern = /,/g,
@@ -23208,13 +23236,16 @@ module.exports = function(context) {
                         nextToken = context.getTokenAfter(commaToken);
                         validateCommaItemSpacing({
                             comma: commaToken,
-                            left: isComma(previousToken) ? null : previousToken,
+                            left: isComma(previousToken) || commaTokensToIgnore.indexOf(commaToken) > -1 ? null : previousToken,
                             right: isComma(nextToken) ? null : nextToken
                         }, commaToken);
                     }
                 }
             }
-        }
+        },
+        "ArrayExpression": addNullElementsToIgnoreList,
+        "ArrayPattern": addNullElementsToIgnoreList
+
     };
 
 };
@@ -25812,7 +25843,7 @@ module.exports = function(context) {
     function getFirstNodeBeforeColon(node) {
         var prevNode;
 
-        while (node.type !== "Punctuator" || node.value !== ":") {
+        while (node && (node.type !== "Punctuator" || node.value !== ":")) {
             prevNode = node;
             node = context.getTokenAfter(node);
         }
@@ -28191,8 +28222,10 @@ module.exports.schema = [];
 },{}],213:[function(require,module,exports){
 /**
  * @fileoverview Rule to disallow a duplicate case label.
- * @author Dieter Oberkofler
+  * @author Dieter Oberkofler
+ * @author Burak Yigit Kaya
  * @copyright 2015 Dieter Oberkofler. All rights reserved.
+ * @copyright 2015 Burak Yigit Kaya. All rights reserved.
  */
 
 "use strict";
@@ -28203,62 +28236,20 @@ module.exports.schema = [];
 
 module.exports = function(context) {
 
-    /**
-     * Strips source code position informations from the node
-     * @param {ASTNode} node The node.
-     * @returns {ASTNode} a copy of the node with the position stripped away
-     * @private
-     */
-    function stripsPosition(node) {
-        var result = {};
-        for (var prop in node) {
-            if (!~["loc", "start", "end", "range"].indexOf(prop)) {
-                result[prop] = node[prop];
-                if (typeof result[prop] === "object") {
-                    result[prop] = stripsPosition(result[prop]);
-                }
-            }
-        }
-        return result;
-    }
-    /**
-     * Get a hash value for the node
-     * @param {ASTNode} node The node.
-     * @returns {string} A hash value for the node.
-     * @private
-     */
-    function getHash(node) {
-        return JSON.stringify(stripsPosition(node));
-    }
-
-    var switchStatement = [];
-
     return {
+        "SwitchStatement": function(node) {
+            var mapping = {};
 
-        "SwitchStatement": function(/* node */) {
-            switchStatement.push({});
-        },
-
-        "SwitchStatement:exit": function(/* node */) {
-            switchStatement.pop();
-        },
-
-        "SwitchCase": function(node) {
-            var currentSwitch = switchStatement[switchStatement.length - 1],
-                hashValue;
-
-            if (node.test) {
-                hashValue = getHash(node.test);
-                if (typeof hashValue !== "undefined" && currentSwitch.hasOwnProperty(hashValue)) {
-                    context.report(node, "Duplicate case label.");
+            node.cases.forEach(function(switchCase) {
+                var key = context.getSource(switchCase.test);
+                if (mapping[key]) {
+                    context.report(switchCase, "Duplicate case label.");
                 } else {
-                    currentSwitch[hashValue] = true;
+                    mapping[key] = switchCase;
                 }
-            }
+            });
         }
-
     };
-
 };
 
 module.exports.schema = [];
@@ -34479,7 +34470,7 @@ module.exports = function(context) {
     * @returns {void}
     */
     function reportNoBeginningSpace(node, token) {
-        context.report(node, token.loc.start,
+        context.report(node, token.loc.end,
             "There should be no space after '" + token.value + "'");
     }
 
@@ -34501,7 +34492,7 @@ module.exports = function(context) {
     * @returns {void}
     */
     function reportRequiredBeginningSpace(node, token) {
-        context.report(node, token.loc.start,
+        context.report(node, token.loc.end,
             "A space is required after '" + token.value + "'");
     }
 
@@ -34773,7 +34764,7 @@ module.exports = function(context) {
     var MODE_ALWAYS = "always",
         MODE_NEVER = "never";
 
-    var mode = context.options[0];
+    var mode = context.options[0] || MODE_ALWAYS;
 
     var options = {
     };
@@ -35437,6 +35428,15 @@ module.exports.schema = [
 //------------------------------------------------------------------------------
 
 /**
+ * Checks whether or not a given variable is a function name.
+ * @param {escope.Variable} variable - A variable to check.
+ * @returns {boolean} `true` if the variable is a function name.
+ */
+function isFunctionName(variable) {
+    return variable != null && variable.defs[0].type === "FunctionName";
+}
+
+/**
  * Checkes whether or not a given node is a callback.
  * @param {ASTNode} node - A node to check.
  * @returns {object}
@@ -35520,7 +35520,7 @@ module.exports = function(context) {
     }
 
     return {
-        "Program": function() {
+        Program: function() {
             stack = [];
         },
 
@@ -35534,12 +35534,21 @@ module.exports = function(context) {
         FunctionExpression: enterScope,
         "FunctionExpression:exit": function(node) {
             var hasThisKeyword = exitScope();
-            var info = getCallbackInfo(node);
 
-            if (!node.generator &&
-                info.isCallback &&
-                (!hasThisKeyword || info.isLexicalThis)
-            ) {
+            // Skip generators.
+            if (node.generator) {
+                return;
+            }
+
+            // Skip recursive functions.
+            var nameVar = context.getDeclaredVariables(node)[0];
+            if (isFunctionName(nameVar) && nameVar.references.length > 0) {
+                return;
+            }
+
+            // Reports if it's a callback.
+            var info = getCallbackInfo(node);
+            if (info.isCallback && (!hasThisKeyword || info.isLexicalThis)) {
                 context.report(node, "Unexpected function expression.");
             }
         }

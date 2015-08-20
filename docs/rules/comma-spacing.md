@@ -88,6 +88,19 @@ The following patterns are not warnings:
     a ,b
 ```
 
+### Handling of `null` elements in `ArrayExpression` or `ArrayPattern`
+
+If you have a `null` element within of an `ArrayExpression` or `ArrayPattern` this rule will not validate the spacing before the respective comma.
+
+The following both examples are valid when the rule is configured with `{"before": false, "after": true}`.
+
+```js
+var items = [, 2, 3 ]
+var items = [ , 2, 3 ]
+```
+
+This behavior avoids conflicts with the [`array-bracket-spacing`](array-bracket-spacing) rule.
+
 ## When Not To Use It
 
 If your project will not be following a consistent comma-spacing pattern, turn this rule off.
@@ -101,6 +114,7 @@ If your project will not be following a consistent comma-spacing pattern, turn t
 
 ## Related Rules
 
+* [array-bracket-spacing](array-bracket-spacing)
 * [comma-style](comma-style)
 * [space-in-brackets](space-in-brackets) (deprecated)
 * [space-in-parens](space-in-parens)
