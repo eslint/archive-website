@@ -7,6 +7,56 @@ layout: doc
 
 Programming language style guides are important for the long-term maintainability of software. This guide is based on the [Code Conventions for the Java Programming Language](http://java.sun.com/docs/codeconv/) and [Douglas Crockford's Code Conventions for the JavaScript Programming Language](http://javascript.crockford.com/code.html). Modifications have been made due to my personal experience and preferences.
 
+## File Format
+
+Each file has this same basic format:
+
+```js
+/**
+ * @fileoverview Description of the file
+ * @author Your Name
+ * @copyright 2015 Your Name. All rights reserved.
+ * See LICENSE file in root directory for full license.
+ */
+
+"use strict";
+
+//------------------------------------------------------------------------------
+// Requirements
+//------------------------------------------------------------------------------
+
+// require() statements
+
+//------------------------------------------------------------------------------
+// Helpers
+//------------------------------------------------------------------------------
+
+// private methods/data
+
+//------------------------------------------------------------------------------
+// Public Interface
+//------------------------------------------------------------------------------
+
+// exported objects/methods
+module.exports = {
+
+};
+```
+
+The `@author` field gives you credit for having created the file. The `@copyright` field indicates that you are the copyright holder for the file.
+
+Your submission may touch other parts of the ESLint code that you did not write. In that case, you are welcome to add a copyright notice to the top of the file if you have done any amount of significant work on the file (we leave it up to you to decide what "significant" means - if you aren't sure, just ask). You should never change the `@author` field, but you can add another `@copyright` field on top of the existing ones, such as:
+
+```js
+/**
+ * @fileoverview Description of the file
+ * @author Author's Name
+ * @copyright 2015 Your Name. All rights reserved.
+ * @copyright 2014 Author's Name. All rights reserved.
+ * See LICENSE file in root directory for full license.
+ */
+```
+
 ## Indentation
 
 Each indentation level is made up of four spaces. Do not use tabs.
