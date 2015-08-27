@@ -43,7 +43,7 @@ You should do all of your development for the issue in this branch.
 
 **Note:** Do not combine fixes for multiple issues into one branch. Use a separate branch for each issue you're working on.
 
-#### Step 2: Make your changes<a name="step2"></a>
+### Step 2: Make your changes<a name="step2"></a>
 
 Make the changes to the code and tests and then commit to your branch:
 

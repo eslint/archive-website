@@ -13,7 +13,7 @@ This guide is intended for anyone who wants to contribute to an ESLint project. 
 
 In order to submit code or documentation to an ESLint project, please electronically sign the [Contributor License Agreement](http://eslint.org/cla). The CLA is you giving us permission to use your contribution.
 
-## [Bug Reporting](bug-reporting)
+## [Bug Reporting](reporting-bugs)
 
 Think you found a problem? We'd love to hear about it. This section explains how to submit a bug, the type of information we need to properly verify it, and the overall process.
 
