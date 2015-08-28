@@ -119,7 +119,7 @@ With your code ready to go, this is a good time to double-check your submission 
 * All changes must be accompanied by tests, even if the feature you're working on previously had no tests.
 * All user-facing changes must be accompanied by appropriate documentation.
 * Only *one commit* is allowed per pull request. If you have multiple commits, you'll be asked to squash them.
-* Follow the [Code Conventions](code-conventions.html).
+* Follow the [Code Conventions](../code-conventions.html).
 
 ### Step 7: Send the pull request<a name="step7"></a>
 
