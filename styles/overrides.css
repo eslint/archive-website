@@ -1,3 +1,13 @@
 .btn-getting-started {
   margin-top: 30px;
 }
+
+/* Prevent long code from wrapping, scroll instead */
+code[data-lang] {
+  white-space: pre;
+}
+
+main.doc .highlight pre {
+  overflow-x: auto;
+  word-wrap: normal;
+}
