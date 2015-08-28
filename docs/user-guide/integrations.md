@@ -29,6 +29,8 @@ redirect_from: "/docs/integrations/"
     * [mimosa-eslint](https://npmjs.org/package/mimosa-eslint)
 * **Broccoli:**
     * [broccoli-eslint](https://www.npmjs.org/package/broccoli-eslint)
+* **Browserify**
+    * [eslintify](https://www.npmjs.com/package/eslintify)
 * **Webpack:**
     * [eslint-loader](https://www.npmjs.org/package/eslint-loader)
 * **Ember-cli**
