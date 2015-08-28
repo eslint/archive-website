@@ -46,6 +46,21 @@ The `"markers"` array will apply regardless of the value of the first argument, 
 The difference between a marker and an exception is that a marker only appears at the beginning of the comment whereas
 exceptions can occur anywhere in the comment string.
 
+You can also define separate exceptions and markers for block and line comments:
+
+```js
+"spaced-comment": [2, "always", {
+    "line": {
+        "markers": ["/"],
+        "exceptions": ["-", "+"]
+    },
+    "block": {
+        "markers": ["!"],
+        "exceptions": ["*"]
+    }
+}]
+```
+
 #### Examples
 
 The following patterns **are** considered warnings:
@@ -79,6 +94,13 @@ var foo = 5;
 ```
 
 ```js
+// When [2, "always", { "block": { "exceptions": ["-"] } }]
+//--------------
+// Comment block
+//--------------
+```
+
+```js
 // When [2, "always", { "exceptions": ["-", "+"] }]
 //------++++++++
 // Comment block
@@ -95,6 +117,13 @@ var foo = 5;
 /*------++++++++*/
 /* Comment block */
 /*------++++++++*/
+```
+
+```js
+// When [2, "always", { "line": { "exceptions": ["-+"] } }]
+/*-+-+-+-+-+-+-+*/
+// Comment block
+/*-+-+-+-+-+-+-+*/
 ```
 
 The following patterns **are not** warnings:
@@ -131,6 +160,13 @@ var foo = 5;
 ```
 
 ```js
+// When [2, "always", { "line": "exceptions": ["-"] } }]
+//--------------
+// Comment block
+//--------------
+```
+
+```js
 // When [2, "always", { "exceptions": ["-+"] }]
 //-+-+-+-+-+-+-+
 // Comment block
@@ -139,6 +175,13 @@ var foo = 5;
 
 ```js
 // When [2, "always", { "exceptions": ["-+"] }]
+/*-+-+-+-+-+-+-+*/
+// Comment block
+/*-+-+-+-+-+-+-+*/
+```
+
+```js
+// When [2, "always", { "block": { "exceptions": ["-+"] } }]
 /*-+-+-+-+-+-+-+*/
 // Comment block
 /*-+-+-+-+-+-+-+*/

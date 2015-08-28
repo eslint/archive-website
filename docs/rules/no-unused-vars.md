@@ -93,8 +93,8 @@ This option has three settings:
 
 The following code:
 
-* will throw `baz is defined but never used` when `args`: `after-used`
-* will throw `foo is defined but never used` and `baz is defined but never used` when `args`: `all`
+* will throw `"baz" is defined but never used` when `args`: `after-used`
+* will throw `"foo" is defined but never used` and `"baz" is defined but never used` when `args`: `all`
 * will throw nothing when `args`: `none`
 
 ```js
@@ -102,6 +102,51 @@ The following code:
     return bar;
 })();
 ```
+
+#### Ignore identifiers that match specific patterns
+
+* `varsIgnorePattern` - all variables that match this regexp pattern will not be checked.
+* `argsIgnorePattern` - all arguments that match this regexp pattern will not be checked.
+
+##### Examples
+
+* Ignore all unused function arguments with a leading underscore
+
+    ```json
+    {
+        "rules": {
+            "no-unused-vars": [2, {"args": "after-used", "argsIgnorePattern": "^_"}]
+        }
+    }
+    ```
+
+    With this configuration, this rule will not warn about the following code:
+
+    ```js
+    function foo(x, _y) {
+        return x + 1;
+    }
+    foo();
+    ```
+
+* Ignore all unused variables which contain the term `ignored` or `Ignored`:
+
+    ```json
+        {
+            "ecmaFeatures": { "destructuring": true },
+            "rules": {
+                "no-unused-vars": [2, {"vars": "all", "varsIgnorePattern": "[iI]gnored"}]
+            }
+        }
+    ```
+
+    With this configuration, this rule will not warn about the following code:
+
+    ```js
+    var [ firstItemIgnored, secondItem ] = items;
+    console.log(secondItem);
+    ```
+
 
 ## When Not to Use It
 

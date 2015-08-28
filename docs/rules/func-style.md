@@ -54,13 +54,17 @@ This error is aimed at enforcing a particular type of function style throughout 
 The following patterns are considered warnings:
 
 ```js
-// "func-style": [2, "declaration"]
-var foo = function() {
+/*eslint func-style: [2, "declaration"]*/
+
+var foo = function() {  /*error Expected a function declaration.*/
     // ...
 } ;
+```
 
-// "func-style": [2, "expression"]
-function foo() {
+```js
+/*eslint func-style: [2, "expression"]*/
+
+function foo() {  /*error Expected a function expression.*/
     // ...
 }
 ```
@@ -68,7 +72,17 @@ function foo() {
 The following patterns are not considered warnings:
 
 ```js
-// both styles
+/*eslint func-style: [2, "declaration"]*/
+
+SomeObject.foo = function() {
+    // ...
+};
+```
+
+
+```js
+/*eslint func-style: [2, "expression"]*/
+
 SomeObject.foo = function() {
     // ...
 };

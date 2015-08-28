@@ -49,8 +49,9 @@ This rule aims to require `default` case in `switch` statements. You may optiona
 The following pattern is considered a warning:
 
 ```js
+/*eslint default-case: 2*/
 
-switch (a) {
+switch (a) {       /*error Expected a default case.*/
     case 1:
         /* code */
         break;
@@ -61,6 +62,7 @@ switch (a) {
 The following patterns are not warnings:
 
 ```js
+/*eslint default-case: 2*/
 
 switch (a) {
     case 1:
@@ -72,9 +74,6 @@ switch (a) {
         break;
 }
 
-```
-
-```js
 
 switch (a) {
     case 1:

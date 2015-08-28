@@ -1,6 +1,6 @@
 # Rules
 
-Rules in ESLint are divided into several categories to help you better understand their value. Though none are enabled by default, some are specifically recommended by ESLint and may be turned on using [configuration](../user-guide/configuring.md).
+Rules in ESLint are divided into several categories to help you better understand their value. Though none are enabled by default, you can turn on rules that ESLint recommends by specifying your configuration to inherit from `eslint:recommended`. The rules that will be enabled when you inherit from `eslint:recommended` are indicated below as "(recommended)". For more information on how to configure rules and inherit from `eslint:recommended`, please see the [configuration documentation](../user-guide/configuring.md).
 
 ## Possible Errors
 
@@ -86,6 +86,7 @@ These are rules designed to prevent you from making mistakes. They either prescr
 * [no-throw-literal](no-throw-literal.md) - restrict what can be thrown as an exception
 * [no-unused-expressions](no-unused-expressions.md) - disallow usage of expressions in statement position
 * [no-useless-call](no-useless-call.md) - disallow unnecessary `.call()` and `.apply()`
+* [no-useless-concat](no-useless-concat.md) - disallow unnecessary concatenation of literals or template literals
 * [no-void](no-void.md) - disallow use of the `void` operator
 * [no-warning-comments](no-warning-comments.md) - disallow usage of configurable warning terms in comments - e.g. `TODO` or `FIXME`
 * [no-with](no-with.md) - disallow use of the `with` statement
@@ -116,9 +117,9 @@ These rules have to do with variable declarations.
 * [no-unused-vars](no-unused-vars.md) - disallow declaration of variables that are not used in the code (recommended)
 * [no-use-before-define](no-use-before-define.md) - disallow use of variables before they are defined
 
-## Node.js
+## Node.js and CommonJS
 
-These rules are specific to JavaScript running on Node.js.
+These rules are specific to JavaScript running on Node.js or using CommonJS in the browser.
 
 * [callback-return](callback-return.md) - enforce `return` after a callback
 * [handle-callback-err](handle-callback-err.md) - enforce error handling in callbacks

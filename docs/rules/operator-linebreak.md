@@ -27,15 +27,17 @@ The `operator-linebreak` rule is aimed at enforcing a particular operator line b
 
 ### Options
 
-The rule takes an option, a string, which could be "after", "before" or "none". The default is "after".
+The rule takes two options, a string, which could be "after", "before" or "none where the default is "after" and an object for more fine-grained configuration.
 
 You can set the style in configuration like this:
 
 ```json
-"operator-linebreak": [2, "before"]
+"operator-linebreak": [2, "before", { "overrides": { "?": "after" } }]
 ```
 
-#### "after"
+The default configuration is to enforce line breaks _after_ the operator except for the ternary operator `?` and `:` following that.
+
+#### `"after"`
 
 This is the default setting for this rule. This option requires the line break to be placed after the operator.
 
@@ -57,6 +59,11 @@ foo
 if (someCondition
     || otherCondition) {
 }
+
+answer = everything
+  ? 42
+  : foo;
+
 ```
 
 The following patterns are not warnings:
@@ -76,9 +83,13 @@ if (someCondition ||
     otherCondition) {
 }
 
+answer = everything ?
+  42 :
+  foo;
+
 ```
 
-#### "before"
+#### `"before"`
 
 This option requires the line break to be placed before the operator.
 
@@ -96,6 +107,10 @@ foo =
 if (someCondition ||
     otherCondition) {
 }
+
+answer = everything ?
+  42 :
+  foo;
 
 ```
 
@@ -115,9 +130,13 @@ if (someCondition
     || otherCondition) {
 }
 
+answer = everything
+  ? 42
+  : foo;
+
 ```
 
-#### "none"
+#### `"none"`
 
 This option disallows line breaks on either side of the operator.
 
@@ -139,6 +158,14 @@ if (someCondition
     || otherCondition) {
 }
 
+answer = everything
+  ? 42
+  : foo;
+
+answer = everything ?
+  42 :
+  foo;
+
 ```
 
 The following patterns are not warnings:
@@ -152,7 +179,19 @@ foo = 5;
 if (someCondition || otherCondition) {
 }
 
+answer = everything ? 42 : foo;
+
 ```
+
+#### Fine-grained control
+
+The rule allows you to have even finer-grained control over individual operators by specifying an `overrides` dictionary:
+
+```json
+"operator-linebreak": [2, "before", { "overrides": { "?": "after", "+=": "none" } }]
+```
+
+This would override the global setting for that specific operator.
 
 ## When Not To Use It
 
