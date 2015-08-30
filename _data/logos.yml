@@ -77,3 +77,7 @@
 - url: http://cocktailjs.github.io
   src: /img/logos/cocktailjs.png
   name: CocktailJS
+
+- url: http://www.schibsted.com/
+  src: /img/logos/schibsted.png
+  name: Schibsted
