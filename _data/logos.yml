@@ -93,3 +93,7 @@
 - url: https://github.com/fingerproof
   src: /img/logos/fingerproof.png
   name: fingerproof
+
+- url: http://www.schibsted.com/
+  src: /img/logos/schibsted.png
+  name: Schibsted
