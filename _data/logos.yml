@@ -85,3 +85,7 @@
 - url: http://www.schibsted.com/
   src: /img/logos/schibsted.png
   name: Schibsted
+
+- url: http://www.computerbase.de/
+  src: /img/logos/computerbase.svg
+  name: ComputerBase
