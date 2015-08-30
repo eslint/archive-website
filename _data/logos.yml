@@ -77,3 +77,7 @@
 - url: http://cocktailjs.github.io
   src: /img/logos/cocktailjs.png
   name: CocktailJS
+
+- url: https://github.com/fingerproof
+  src: /img/logos/fingerproof.png
+  name: fingerproof
