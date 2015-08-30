@@ -89,3 +89,7 @@
 - url: http://www.computerbase.de/
   src: /img/logos/computerbase.svg
   name: ComputerBase
+
+- url: https://github.com/fingerproof
+  src: /img/logos/fingerproof.png
+  name: fingerproof
