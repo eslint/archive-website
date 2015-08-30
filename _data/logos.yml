@@ -73,3 +73,7 @@
 - url: https://www.qualitybath.com
   src: /img/logos/qualitybath.png
   name: QualityBath.com
+
+- url: http://cocktailjs.github.io
+  src: /img/logos/cocktailjs.png
+  name: CocktailJS
