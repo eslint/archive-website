@@ -89,3 +89,7 @@
 - url: https://github.com/fingerproof
   src: /img/logos/fingerproof.png
   name: fingerproof
+
+- url: http://www.simplifield.com/
+  src: /img/logos/simplifield.png
+  name: SimpliField
