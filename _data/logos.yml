@@ -93,3 +93,7 @@
 - url: http://www.simplifield.com/
   src: /img/logos/simplifield.png
   name: SimpliField
+
+- url: https://www.getable.com/
+  src: /img/logos/getable.png
+  name: Getable
