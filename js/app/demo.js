@@ -53,7 +53,7 @@ require([
             options.hasOwnProperty('message')) {
 
             result.onclick = (function( editor, options ) {
-                editor.onGotoLine( options.line - 1, options.column, options.column );
+                editor.onGotoLine( options.line - 1, options.column - 1, options.column - 1 );
             }).bind( null, editor, options );
 
             result.innerHTML = options.line + ':' + options.column +
@@ -86,8 +86,8 @@ require([
         editor.showProblems(results.map(function(error) {
         	return {
         		line: error.line,
-        		start: error.column + 1,
-        		end: error.column + 2,
+        		start: error.column,
+        		end: error.column + 1,
         		description: error.message + ' (' + error.ruleId + ')',
         		severity: error.severity === 2 ? 'error' : 'warning'
         	};
