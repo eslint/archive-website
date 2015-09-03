@@ -43,7 +43,7 @@ You've developed library-specific rules for ESLint and you want to share it with
 
 If you're interested in writing a tool that uses ESLint, then you can use the Node.js API to get programmatic access to functionality.
 
-## Section 6: [Contributing](contributing.html)
+## Section 6: [Contributing](contributing/)
 
 Once you've made changes that you want to share with the community, the next step is to submit those changes back via a pull request.
 
