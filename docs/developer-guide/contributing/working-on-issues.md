@@ -16,6 +16,7 @@ We use labels to indicate the status of issues. The most important labels are:
 1. [`feature`](https://github.com/eslint/eslint/issues?labels=feature&milestone=&page=1&state=open) - Indicates that the issue is requesting a new feature. Features are functionality that doesn't already exist in the project. When submitting a pull request to work on this type of issue, be sure to prefix the commit message with "New:".
 1. [`enhancement`](https://github.com/eslint/eslint/issues?labels=enhancement&milestone=&page=1&state=open) - Indicates that the issue is requesting a change to existing functionality. When submitting a pull request to work on this type of issue, be sure to prefix the commit message with "Update:".
 1. [`beginner`](https://github.com/eslint/eslint/issues?labels=beginner&milestone=&page=1&state=open) - Indicates that the issue is simple enough that it would be a good first contribution for a new contributor. If you're looking to get started helping out with ESLint, take a look at the beginner issues.
+1. [`help wanted`](https://github.com/eslint/eslint/issues?labels=help%20wanted&milestone=&page=1&state=open) - Indicates that the core team won't be working on this issue, however, we will accept pull requests from contributors. This basically means the issue isn't on the formal roadmap but it will be accepted if a contributor wants to implement it.
 
 ## Bounty Issues
 
