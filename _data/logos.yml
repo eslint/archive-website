@@ -97,3 +97,7 @@
 - url: https://www.getable.com/
   src: /img/logos/getable.png
   name: Getable
+
+- url: https://www.algolia.com/
+  src: /img/logos/algolia.svg
+  name: Algolia
