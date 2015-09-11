@@ -28,25 +28,29 @@ This rule aims to eliminate the use of labeled statements in JavaScript. It will
 The following patterns are considered warnings:
 
 ```js
-label:
+/*eslint no-labels: 2*/
+
+label:                   /*error Unexpected labeled statement.*/
     while(true) {
         // ...
     }
 
-label:
+label:                   /*error Unexpected labeled statement.*/
     while(true) {
-        break label;
+        break label;     /*error Unexpected label in break statement.*/
     }
 
-label:
+label:                  /*error Unexpected labeled statement.*/
     while(true) {
-        continue label;
+        continue label; /*error Unexpected label in continue statement.*/
     }
 ```
 
 The following patterns are not warnings:
 
 ```js
+/*eslint no-labels: 2*/
+
 var f = {
     label: "foo"
 };
@@ -58,7 +62,6 @@ while (true) {
 while (true) {
     continue;
 }
-
 ```
 
 ## When Not To Use It

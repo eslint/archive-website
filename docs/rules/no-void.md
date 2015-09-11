@@ -19,7 +19,7 @@ The common case of using `void` operator is to get a "pure" `undefined` value as
 (function(){
     undefined = 1;
     return undefined;
-))();
+})();
 
 // will throw TypeError is ES5+
 (function(){
@@ -41,6 +41,9 @@ When used with IIFE (immediately-invoked function expression) `void` can be used
 var foo = 1;
 void function(){ foo = 1; }() // will assign foo a value of 1
 +function(){ foo = 1; }() // same as above
+```
+
+```
 function(){ foo = 1; }() // will throw SyntaxError
 ```
 
@@ -53,11 +56,11 @@ This rule aims to eliminate use of void operator.
 The following patterns are considered warnings:
 
 ```js
-void foo
-```
+/*eslint no-void: 2*/
 
-```js
-var foo = void bar();
+void foo              /*error Expected 'undefined' and instead saw 'void'.*/
+
+var foo = void bar(); /*error Expected 'undefined' and instead saw 'void'.*/
 ```
 
 ## When Not To Use It

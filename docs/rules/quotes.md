@@ -5,77 +5,122 @@ layout: doc
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 # Enforce Quote Style (quotes)
 
-Enforces coding style that string literals are delimited with backticks, single or double quotes.
-
-It takes an option as the second parameter which can be `"double"`, `"single"` or `"backtick"` for double-quotes, single-quotes or backticks respectively. There is no default.
+JavaScript allows you to define strings in one of three ways: double quotes, single quotes, and backticks (as of ECMAScript 6). For example:
 
 ```js
 var double = "double";
 var single = 'single';
-var backtick = `backtick`;
+var backtick = `backtick`;    // ES6 only
 ```
 
-The third parameter enables an exception to the rule to avoid escaping quotes. For example, when `"single"` is the standard, this option allows the use of double quotes to avoid escaping single quotes. This option can have the value `"avoid-escape"` and is off by default.
+Each of these lines creates a string and, in some cases, can be used interchangeably. The choice of how to define strings in a codebase is a stylistic one outside of template literals (which allow embedded of expressions to be interpreted).
+
+Many codebases require strings to be defined in a consistent manner.
+
+## Rule Details
+
+This rule is aimed at ensuring consistency of string quotes and as such will report a problem when an inconsistent style is found.
+
+**Fixable:** This rule is automatically fixable using the `--fix` flag on the command line.
+
+The rule configuration takes up to two options:
+
+1. The first option is `"double"`, `"single"` or `"backtick"` for double-quotes, single-quotes or backticks respectively. There is no default.
+1. The second option is the `"avoid-escape"` flag. When using `"avoid-escape"`, this rule will not report a problem when a string is using incorrect quotes so long as the string contains a quote that would have to be escaped. For example, if you specify `"double"` and `"avoid-escape"`, the string `'He said, "hi!"'` is not considered a problem because using double quotes for that string would require escaping the double quotes inside of the string. This option is off by default.
+
+Configuration looks like this:
 
 ```js
 [2, "single", "avoid-escape"]
 ```
 
-## Rule Details
-
-This rule will throw warnings when the wrong type of quote is used.
-
-The following patterns are considered warnings:
+The following patterns are considered problems:
 
 ```js
-// When [1, "double"]
-var single = 'single';
+/*eslint quotes: [2, "double"]*/
 
-// When [1, "single"]
-var double = "double";
-
-// When [1, "double", "avoid-escape"]
-var single = 'single';
-
-// When [1, "single", "avoid-escape"]
-var double = "double";
-
-// When [1, "backtick"]
-var single = 'single';
-var double = "double";
-
-// When [1, "backtick", "avoid-escape"]
-var single = 'single';
-var double = "double";
+var single = 'single';                                 /*error Strings must use doublequote.*/
+var unescaped = 'a string containing "double" quotes'; /*error Strings must use doublequote.*/
 ```
 
-The follow patterns are not considered warnings:
+```js
+/*eslint quotes: [2, "single"]*/
+
+var double = "double";                                 /*error Strings must use singlequote.*/
+var unescaped = "a string containing 'single' quotes"; /*error Strings must use singlequote.*/
+```
 
 ```js
-// When [1, "double"]
+/*eslint quotes: [2, "double", "avoid-escape"]*/
+
+var single = 'single'; /*error Strings must use doublequote.*/
+```
+
+```js
+/*eslint quotes: [2, "single", "avoid-escape"]*/
+
+var double = "double"; /*error Strings must use singlequote.*/
+```
+
+```js
+/*eslint quotes: [2, "backtick"]*/
+
+var single = 'single';                             /*error Strings must use backtick.*/
+var double = "double";                             /*error Strings must use backtick.*/
+var unescaped = 'a string containing `backticks`'; /*error Strings must use backtick.*/
+```
+
+```js
+/*eslint quotes: [2, "backtick", "avoid-escape"]*/
+
+var single = 'single'; /*error Strings must use backtick.*/
+var double = "double"; /*error Strings must use backtick.*/
+```
+
+The following patterns are not considered warnings:
+
+```js
+/*eslint quotes: [2, "double"]*/
+
 var double = "double";
+var backtick = `backtick`; // backticks are allowed
+```
 
-// When [1, "single"]
+```js
+/*eslint quotes: [2, "single"]*/
+
 var single = 'single';
+var backtick = `backtick`; // backticks are allowed
+```
 
-// When [1, "double", "avoid-escape"]
+```js
+/*eslint quotes: [2, "double", "avoid-escape"]*/
+
 var single = 'a string containing "double" quotes';
+```
 
-// When [1, "single", "avoid-escape"]
+```js
+/*eslint quotes: [2, "single", "avoid-escape"]*/
+
 var double = "a string containing 'single' quotes";
+```
 
-// When [1, "backtick"]
-var backtick = `backtick`;
+```js
+/*eslint quotes: [2, "backtick"]*/
 
-// When [1, "backtick", "avoid-escape"]
-var double = "a string containing `backtick` quotes"
-
-// When [1, "single"]
-var backtick = `backtick`;
-
-// When [1, "double"]
 var backtick = `backtick`;
 ```
+
+```js
+/*eslint quotes: [2, "backtick", "avoid-escape"]*/
+
+var double = "a string containing `backtick` quotes"
+```
+
+## When Not To Use It
+
+If you do not need consistency in your string styles, you can safely disable this rule.
+
 
 ## Version
 

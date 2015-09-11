@@ -60,8 +60,8 @@ The `preprocess` method takes the file contents and filename as arguments, and r
 The `postprocess` method takes a two-dimensional array of arrays of lint messages and the filename. Each item in the input
 array corresponds to the part that was returned from the `preprocess` method. The `postprocess` method must adjust the location of all errors and aggregate them into a single flat array and return it.
 
-You can have both rules and processor in a single plugin. You can also have multiple preprocessors in one plugin.
-To support multiple extensions add each one to `preprocessors` element and point them to the same object.
+You can have both rules and processors in a single plugin. You can also have multiple processors in one plugin.
+To support multiple extensions, add each one to the `processors` element and point them to the same object.
 
 ### Default Configuration for Plugins
 
@@ -135,4 +135,4 @@ Add these keywords into your `package.json` file to make it easy for others to f
 
 ## Further Reading
 
-* [npm Developer Guide](https://www.npmjs.org/doc/misc/npm-developers.html)
+* [npm Developer Guide](https://docs.npmjs.com/misc/developers)

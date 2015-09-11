@@ -58,7 +58,7 @@ The following patterns are considered warnings:
 
 var foo = function() {  /*error Expected a function declaration.*/
     // ...
-} ;
+};
 ```
 
 ```js
@@ -74,16 +74,20 @@ The following patterns are not considered warnings:
 ```js
 /*eslint func-style: [2, "declaration"]*/
 
+function foo() {
+    // ...
+}
+
+// Methods (functions assigned to objects) are not checked by this rule
 SomeObject.foo = function() {
     // ...
 };
 ```
 
-
 ```js
 /*eslint func-style: [2, "expression"]*/
 
-SomeObject.foo = function() {
+var foo = function() {
     // ...
 };
 ```

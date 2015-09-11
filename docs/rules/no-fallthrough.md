@@ -70,8 +70,10 @@ This rule is aimed at eliminating unintentional fallthrough of one case to the o
 The following patterns are considered warnings:
 
 ```js
+/*eslint no-fallthrough: 2*/
+
 switch(foo) {
-    case 1:
+    case 1:            /*error Expected a "break" statement before "case".*/
         doSomething();
 
     case 2:
@@ -82,6 +84,8 @@ switch(foo) {
 The following patterns are considered okay and do not cause warnings:
 
 ```js
+/*eslint no-fallthrough: 2*/
+
 switch(foo) {
     case 1:
         doSomething();
@@ -91,13 +95,15 @@ switch(foo) {
         doSomething();
 }
 
-switch(foo) {
-    case 1:
-        doSomething();
-        return;
+function bar(foo) {
+    switch(foo) {
+        case 1:
+            doSomething();
+            return;
 
-    case 2:
-        doSomething();
+        case 2:
+            doSomething();
+    }
 }
 
 switch(foo) {

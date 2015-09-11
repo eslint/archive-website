@@ -78,6 +78,14 @@ do {
 } while (x)
 ```
 
+```js
+/*eslint no-constant-condition: 2*/
+
+for (;;) {
+    something();
+}
+```
+
 ## Version
 
 This rule was introduced in ESLint 0.4.1.

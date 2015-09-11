@@ -36,6 +36,8 @@ This mode enforces use of operator assignment shorthand where possible.
 The following are examples of valid patterns:
 
 ```js
+/*eslint operator-assignment: [2, "always"]*/
+
 x = y;
 x += y;
 x = y * z;
@@ -48,10 +50,12 @@ x = y + x; // `+` is not always commutative (e.g. x = "abc")
 The following patterns are considered warnings and should be replaced by their shorthand equivalents:
 
 ```js
-x = x + y;
-x = y * x;
-x[0] = x[0] / y;
-x.y = x.y << z;
+/*eslint operator-assignment: [2, "always"]*/
+
+x = x + y;        /*error Assignment can be replaced with operator assignment.*/
+x = y * x;        /*error Assignment can be replaced with operator assignment.*/
+x[0] = x[0] / y;  /*error Assignment can be replaced with operator assignment.*/
+x.y = x.y << z;   /*error Assignment can be replaced with operator assignment.*/
 ```
 
 ### never
@@ -63,6 +67,8 @@ This mode warns on any use of operator assignment shorthand.
 The following are examples of valid patterns:
 
 ```js
+/*eslint operator-assignment: [2, "never"]*/
+
 x = x + y;
 x.y = x.y / a.b;
 ```
@@ -70,8 +76,10 @@ x.y = x.y / a.b;
 The following patterns are considered warnings and should be written out fully without the shorthand assignments:
 
 ```js
-x *= y;
-x ^= (y + z) / foo();
+/*eslint operator-assignment: [2, "never"]*/
+
+x *= y;               /*error Unexpected operator assignment shorthand.*/
+x ^= (y + z) / foo(); /*error Unexpected operator assignment shorthand.*/
 ```
 
 ## When Not To Use It

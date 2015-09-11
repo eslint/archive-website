@@ -2,6 +2,8 @@
 
 Rules in ESLint are divided into several categories to help you better understand their value. Though none are enabled by default, you can turn on rules that ESLint recommends by specifying your configuration to inherit from `eslint:recommended`. The rules that will be enabled when you inherit from `eslint:recommended` are indicated below as "(recommended)". For more information on how to configure rules and inherit from `eslint:recommended`, please see the [configuration documentation](../user-guide/configuring.md).
 
+Some rules are fixable using the `--fix` command line flag. Those rules are marked as "(fixable)" below.
+
 ## Possible Errors
 
 The following rules point out areas where you might have made mistakes.
@@ -47,7 +49,7 @@ These are rules designed to prevent you from making mistakes. They either prescr
 * [default-case](default-case.md) - require `default` case in `switch` statements
 * [dot-notation](dot-notation.md) - encourages use of dot notation whenever possible
 * [dot-location](dot-location.md) - enforces consistent newlines before or after dots
-* [eqeqeq](eqeqeq.md) - require the use of `===` and `!==`
+* [eqeqeq](eqeqeq.md) - require the use of `===` and `!==` (fixable)
 * [guard-for-in](guard-for-in.md) - make sure `for-in` loops have an `if` statement
 * [no-alert](no-alert.md) - disallow the use of `alert`, `confirm`, and `prompt`
 * [no-caller](no-caller.md) - disallow use of `arguments.caller` or `arguments.callee`
@@ -122,6 +124,7 @@ These rules have to do with variable declarations.
 These rules are specific to JavaScript running on Node.js or using CommonJS in the browser.
 
 * [callback-return](callback-return.md) - enforce `return` after a callback
+* [global-require](global-require.md) - disallow `require()` outside of the top-level module scope
 * [handle-callback-err](handle-callback-err.md) - enforce error handling in callbacks
 * [no-mixed-requires](no-mixed-requires.md) - disallow mixing regular variable and require declarations
 * [no-new-require](no-new-require.md) - disallow use of `new` operator with the `require` function
@@ -148,6 +151,7 @@ These rules are purely matters of style and are quite subjective.
 * [id-length](id-length.md) - this option enforces minimum and maximum identifier lengths (variable names, property names etc.)
 * [id-match](id-match.md) - require identifiers to match the provided regular expression
 * [indent](indent.md) - specify tab or space width for your code
+* [jsx-quotes](jsx-quotes.md) - specify whether double or single quotes should be used in JSX attributes
 * [key-spacing](key-spacing.md) - enforce spacing between keys and values in object literal properties
 * [lines-around-comment](lines-around-comment.md) - enforce empty lines around comments
 * [linebreak-style](linebreak-style.md) - disallow mixed 'LF' and 'CRLF' as linebreaks
@@ -163,22 +167,25 @@ These rules are purely matters of style and are quite subjective.
 * [no-multiple-empty-lines](no-multiple-empty-lines.md) - disallow multiple empty lines
 * [no-nested-ternary](no-nested-ternary.md) - disallow nested ternary expressions
 * [no-new-object](no-new-object.md) - disallow the use of the `Object` constructor
+* [no-restricted-syntax](no-restricted-syntax.md) - disallow use of certain syntax in code
 * [no-spaced-func](no-spaced-func.md) - disallow space between function identifier and application
 * [no-ternary](no-ternary.md) - disallow the use of ternary operators
 * [no-trailing-spaces](no-trailing-spaces.md) - disallow trailing whitespace at the end of lines
 * [no-underscore-dangle](no-underscore-dangle.md) - disallow dangling underscores in identifiers
-* [no-unneeded-ternary](no-unneeded-ternary.md) - disallow the use of `Boolean` literals in conditional expressions
+* [no-unneeded-ternary](no-unneeded-ternary.md) - disallow the use of ternary operators when a simpler alternative exists
 * [object-curly-spacing](object-curly-spacing.md) - require or disallow padding inside curly braces
 * [one-var](one-var.md) - require or disallow one variable declaration per function
 * [operator-assignment](operator-assignment.md) - require assignment operator shorthand where possible or prohibit it entirely
 * [operator-linebreak](operator-linebreak.md) - enforce operators to be placed before or after line breaks
 * [padded-blocks](padded-blocks.md) - enforce padding within blocks
 * [quote-props](quote-props.md) - require quotes around object literal property names
-* [quotes](quotes.md) - specify whether backticks, double or single quotes should be used
+* [quotes](quotes.md) - specify whether backticks, double or single quotes should be used (fixable)
+* [require-jsdoc](require-jsdoc.md) - Require JSDoc comment
 * [semi-spacing](semi-spacing.md) - enforce spacing before and after semicolons
-* [semi](semi.md) - require or disallow use of semicolons instead of ASI
+* [semi](semi.md) - require or disallow use of semicolons instead of ASI (fixable)
 * [sort-vars](sort-vars.md) - sort variables within the same declaration block
 * [space-after-keywords](space-after-keywords.md) - require a space after certain keywords
+* [space-before-keywords](space-before-keywords.md) - require a space before certain keywords
 * [space-before-blocks](space-before-blocks.md) - require or disallow a space before blocks
 * [space-before-function-paren](space-before-function-paren.md) - require or disallow a space before function opening parenthesis
 * [space-in-parens](space-in-parens.md) - require or disallow spaces inside parentheses

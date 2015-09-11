@@ -48,16 +48,20 @@ Each of the following properties would warn:
 
 
 ```js
+/*eslint object-shorthand: 2*/
+
 var foo = {
-    x: function() {},
-    y: function *() {},
-    z: z
+    x: function() {},   /*error Expected method shorthand.*/
+    y: function *() {}, /*error Expected method shorthand.*/
+    z: z                /*error Expected property shorthand.*/
 };
 ```
 
 In that case the expected syntax would have been:
 
 ```js
+/*eslint object-shorthand: 2*/
+
 var foo = {
     x() {},
     *y() {},
@@ -69,6 +73,8 @@ This rule does not flag arrow functions inside of object literals.
 The following will *not* warn:
 
 ```js
+/*eslint object-shorthand: 2*/
+
 var foo = {
     x: (y) => y
 };

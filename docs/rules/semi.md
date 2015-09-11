@@ -3,7 +3,7 @@ title: Rule semi
 layout: doc
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
-# Enforce Semicolons (semi)
+# Enforce or Disallow Semicolons (semi)
 
 JavaScript is unique amongst the C-like languages in that it doesn't require semicolons at the end of each statement. In many cases, the JavaScript engine can determine that a semicolon should be in a certain spot and will automatically add it. This feature is known as **automatic semicolon insertion (ASI)** and is considered one of the more controversial features of JavaScript. For example, the following lines are both valid:
 
@@ -16,7 +16,7 @@ On the first line, the JavaScript engine will automatically insert a semicolon, 
 
 In the debate over ASI, there are generally two schools of thought. The first is that we should treat ASI as if it didn't exist and always include semicolons manually. The rationale is that it's easier to always include semicolons than to try to remember when they are or are not required, and thus decreases the possibility of introducing an error. For example, consider this code:
 
-```js
+```
 return
 {
     name: "ESLint"
@@ -25,7 +25,7 @@ return
 
 This may look like a `return` statement that returns an object literal, however, the JavaScript engine will interpret this code as:
 
-```js
+```
 return;
 {
     name: "ESLint"
@@ -45,6 +45,8 @@ On the other side of the argument are those who say ASI isn't magic, it follows 
 
 This rule is aimed at ensuring consistent use of semicolons. You can decide whether or not to require semicolons at the end of statements.
 
+**Fixable:** This rule is automatically fixable using the `--fix` flag on the command line.
+
 ### Options
 
 By using the default option, semicolons must be used any place where they are valid.
@@ -56,16 +58,20 @@ semi: [2, "always"]
 The following patterns are considered warnings:
 
 ```js
-var name = "ESLint"
+/*eslint semi: 2*/
+
+var name = "ESLint"          /*error Missing semicolon.*/
 
 object.method = function() {
     // ...
-}
+}                            /*error Missing semicolon.*/
 ```
 
 The following patterns are not considered warnings:
 
 ```js
+/*eslint semi: 2*/
+
 var name = "ESLint";
 
 object.method = function() {
@@ -82,16 +88,20 @@ semi: [2, "never"]
 Then, the following patterns are considered warnings:
 
 ```js
-var name = "ESLint";
+/*eslint semi: [2, "never"]*/
+
+var name = "ESLint";         /*error Extra semicolon.*/
 
 object.method = function() {
     // ...
-};
+};                           /*error Extra semicolon.*/
 ```
 
 And the following patterns are not considered warnings:
 
 ```js
+/*eslint semi: [2, "never"]*/
+
 var name = "ESLint"
 
 object.method = function() {
@@ -102,6 +112,8 @@ object.method = function() {
 Even in "never" mode, semicolons are still allowed to disambiguate statements beginning with `[`, `(`, `/`, `+`, or `-`:
 
 ```js
+/*eslint semi: [2, "never"]*/
+
 var name = "ESLint"
 
 ;(function() {

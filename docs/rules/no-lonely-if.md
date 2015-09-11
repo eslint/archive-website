@@ -8,11 +8,11 @@ layout: doc
 If an `if` statement is the only statement in the `else` block of a parent `if` statement, it is often clearer to combine the two to using `else if` form.
 
 ```js
-if (...) {
-    ...
+if (foo) {
+    // ...
 } else {
-    if (...) {
-        ...
+    if (bar) {
+        // ...
     }
 }
 ```
@@ -20,10 +20,10 @@ if (...) {
 should be rewritten as
 
 ```js
-if (...) {
-    ...
-} else if (...) {
-    ...
+if (foo) {
+    // ...
+} else if (bar) {
+    // ...
 }
 ```
 
@@ -34,10 +34,12 @@ This rule warns when an `if` statement's `else` block contains only another `if`
 The following patterns are considered warnings:
 
 ```js
+/*eslint no-lonely-if: 2*/
+
 if (condition) {
     // ...
 } else {
-    if (anotherCondition) {
+    if (anotherCondition) { /*error Unexpected if as the only statement in an else block.*/
         // ...
     }
 }
@@ -46,6 +48,8 @@ if (condition) {
 The following patterns are not considered warnings:
 
 ```js
+/*eslint no-lonely-if: 2*/
+
 if (condition) {
     // ...
 } else if (anotherCondition) {

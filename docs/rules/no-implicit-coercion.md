@@ -53,13 +53,19 @@ This rule has three options.
 The following patterns are considered warnings:
 
 ```js
-var b = !!foo;
-var b = ~foo.indexOf("."); // only with `indexOf`/`lastIndexOf` method calling.
+/*eslint no-implicit-coercion: 2*/
+
+var b = !!foo;             /*error use `Boolean(foo)` instead.*/
+var b = ~foo.indexOf("."); /*error use `foo.indexOf(".") !== -1` instead.*/
+// only with `indexOf`/`lastIndexOf` method calling.
+
 ```
 
 The following patterns are not considered warnings:
 
 ```js
+/*eslint no-implicit-coercion: 2*/
+
 var b = Boolean(foo);
 var b = foo.indexOf(".") !== -1;
 
@@ -71,13 +77,17 @@ var n = ~foo; // This is a just binary negating.
 The following patterns are considered warnings:
 
 ```js
-var n = +foo;
-var n = 1 * foo;
+/*eslint no-implicit-coercion: 2*/
+
+var n = +foo;    /*error use `Number(foo)` instead.*/
+var n = 1 * foo; /*error use `Number(foo)` instead.*/
 ```
 
 The following patterns are not considered warnings:
 
 ```js
+/*eslint no-implicit-coercion: 2*/
+
 var b = Number(foo);
 var b = parseFloat(foo);
 var b = parseInt(foo, 10);
@@ -88,12 +98,16 @@ var b = parseInt(foo, 10);
 The following patterns are considered warnings:
 
 ```js
-var n = "" + foo;
+/*eslint no-implicit-coercion: 2*/
+
+var n = "" + foo; /*error use `String(foo)` instead.*/
 ```
 
 The following patterns are not considered warnings:
 
 ```js
+/*eslint no-implicit-coercion: 2*/
+
 var b = String(foo);
 ```
 

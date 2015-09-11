@@ -36,17 +36,17 @@ This mode forbids any occurrence of a Use Strict Directive.
 The following patterns are considered warnings:
 
 ```js
-// "strict": [2, "never"]
+/*eslint strict: [2, "never"]*/
 
-"use strict";
+"use strict";          /*error Strict mode is not permitted.*/
 
 function foo() {
-    "use strict";
+    "use strict";      /*error Strict mode is not permitted.*/
     return;
 }
 
 var bar = function() {
-    "use strict";
+    "use strict";      /*error Strict mode is not permitted.*/
     return;
 };
 
@@ -57,7 +57,7 @@ bar();
 The following patterns are considered valid:
 
 ```js
-// "strict": [2, "never"]
+/*eslint strict: [2, "never"]*/
 
 function foo() {
     return;
@@ -77,18 +77,18 @@ This mode ensures that all code is in strict mode and that there are no extraneo
 
 The following patterns are considered warnings:
 
-```js
-// "strict": [2, "global"]
+```
+/*eslint strict: [2, "global"]*/
 
 "use strict";
-"use strict"; // Multiple Use Strict Directives
+"use strict";           /*error Multiple "use strict" directives.*/
 
 function foo() {
-    "use strict"; // Unnecessary; already nested in strict mode code
+    "use strict";       /*error Use the global form of "use strict".*/
 
     return function() {
-        "use strict"; // Unnecessary; already nested in strict mode code
-        "use strict"; // Multiple Use Strict Directives
+        "use strict";   /*error Use the global form of "use strict".*/
+        "use strict";   /*error Use the global form of "use strict".*/
 
         return;
     };
@@ -99,8 +99,8 @@ foo();
 
 The following patterns are considered valid:
 
-```js
-// "strict": [2, "global"]
+```
+/*eslint strict: [2, "global"]*/
 
 "use strict";
 
@@ -119,17 +119,17 @@ This mode ensures that all function bodies are strict mode code, while global co
 
 The following patterns are considered warnings:
 
-```js
-// "strict": [2, "function"]
+```
+/*eslint strict: [2, "function"]*/
 
-"use strict"; // Use function form
+"use strict";           /*error Use the function form of "use strict".*/
 
-function foo() {
+function foo() {        /*error Use the function form of "use strict".*/
     // Missing Use Strict Directive
 
     return function() {
-        "use strict"; // Unnecessary; parent should contain a Strict Mode Directive
-        "use strict"; // Multiple Use Strict Directives
+        "use strict";   // Unnecessary; parent should contain a Strict Mode Directive
+        "use strict";   /*error Multiple "use strict" directives.*/
 
         return;
     };
@@ -140,8 +140,8 @@ foo();
 
 The following patterns are considered valid:
 
-```js
-// "strict": [2, "function"]
+```
+/*eslint strict: [2, "function"]*/
 
 function foo() {
     "use strict";

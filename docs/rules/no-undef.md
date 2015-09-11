@@ -14,14 +14,18 @@ This rule can help you locate potential ReferenceErrors resulting from misspelli
 The following code causes 2 warnings, as the globals `someFunction` and `b` have not been declared.
 
 ```js
-var a = someFunction();  // 'someFunction' is not defined.
-b = 10;                  // 'b' is not defined.
+/*eslint no-undef: 2*/
+
+var a = someFunction();  /*error "someFunction" is not defined.*/
+b = 10;                  /*error "b" is not defined.*/
 ```
 
 In this code, no warnings are generated, since the global variables have been properly declared in a `/*global */` block.
 
 ```js
 /*global someFunction b:true*/
+/*eslint no-undef: 2*/
+
 var a = someFunction();
 b = 10;
 ```
@@ -30,19 +34,26 @@ By default, variables declared in `/*global */` are considered read-only. Assign
 
 ```js
 /*global b*/
-b = 10;                  // 'b' is read only.
+/*eslint no-undef: 2*/
+
+
+b = 10;                  /*error "b" is read only.*/
 ```
 
 Use the `variable:true` syntax to indicate that a variable can be assigned to.
 
 ```js
 /*global b:true*/
+/*eslint no-undef: 2*/
+
 b = 10;
 ```
 
 Explicitly checking an undefined identifier with `typeof` causes no warning.
 
 ```js
+/*eslint no-undef: 2*/
+
 if (typeof UndefinedIdentifier === "undefined") {
     // do something ...
 }
@@ -50,14 +61,15 @@ if (typeof UndefinedIdentifier === "undefined") {
 
 ## Environments
 
-For convenience, JSHint and JSLint provide shortcuts that pre-define global variables exposed by popular libraries and runtime environments. This rule supports some of these environments, as listed below.
+For convenience, ESLint provides shortcuts that pre-define global variables exposed by popular libraries and runtime environments. This rule supports these environments, as listed in [Specifying Environments](http://eslint.org/docs/user-guide/configuring#specifying-environments).  A few examples are given below.
 
 ### browser
 
-Defines common browser globals. Globals that should not be used in production (such as `alert`, `console`, etc.) are not included.
+Defines common browser globals.
 
 ```js
-/*jslint browser:true*/
+/*eslint-env browser*/
+
 setTimeout(function() {
     alert("Hello");
 });
@@ -68,7 +80,8 @@ setTimeout(function() {
 Defines globals for Node.js development.
 
 ```js
-/*jshint node:true*/
+/*eslint-env node*/
+
 var fs = require("fs");
 module.exports = function() {
     console.log(fs);
