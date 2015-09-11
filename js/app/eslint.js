@@ -41134,7 +41134,7 @@ SourceCode.prototype = {
             case "ArrowFunctionExpression":
             case "FunctionExpression":
 
-                if (parent.type !== "CallExpression") {
+                if (parent.type !== "CallExpression" && parent.type !== "NewExpression") {
                     while (parent && !parent.leadingComments && !/Function/.test(parent.type)) {
                         parent = parent.parent;
                     }
