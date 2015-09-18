@@ -37,7 +37,7 @@ If unset, the default behavior is `"object"`.
 
 This is the default option. It requires the dot to be on the same line as the object.
 
-The following patterns are considered warnings:
+The following patterns are considered problems:
 
 ```js
 /*eslint dot-location: [2, "object"]*/
@@ -46,7 +46,7 @@ var foo = object
 .property;       /*error Expected dot to be on same line as object.*/
 ```
 
-The following patterns are not warnings:
+The following patterns are not considered problems:
 
 ```js
 /*eslint dot-location: [2, "object"]*/
@@ -60,7 +60,7 @@ var bar = object.property;
 
 This option requires the dot to be on the same line as the property.
 
-The following patterns are considered warnings:
+The following patterns are considered problems:
 
 ```js
 /*eslint dot-location: [2, "property"]*/
@@ -69,7 +69,7 @@ var foo = object. /*error Expected dot to be on same line as property.*/
 property;
 ```
 
-The following patterns are not warnings:
+The following patterns are not considered problems:
 
 ```js
 /*eslint dot-location: [2, "property"]*/

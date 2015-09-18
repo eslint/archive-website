@@ -28,7 +28,7 @@ This rule accepts a single options argument with the following defaults:
 1. `always` is the default and checks all property names
 2. `never` does not check property names at all
 
-The following patterns are considered warnings:
+The following patterns are considered problems:
 
 ```js
 /*eslint camelcase: 2*/
@@ -47,7 +47,7 @@ var obj = {
 };
 ```
 
-The following patterns are considered okay and do not cause warnings:
+The following patterns are not considered problems:
 
 ```js
 /*eslint camelcase: 2*/

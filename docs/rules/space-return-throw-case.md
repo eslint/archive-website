@@ -7,9 +7,11 @@ layout: doc
 
 Require spaces following `return`, `throw`, and `case`.
 
+**Fixable:** This rule is automatically fixable using the `--fix` flag on the command line.
+
 ## Rule Details
 
-The following patterns are considered warnings:
+The following patterns are considered problems:
 
 ```js
 /*eslint space-return-throw-case: 2*/
@@ -21,7 +23,7 @@ function f(){ return-a; }    /*error Keyword "return" must be followed by whites
 switch(a){ case'a': break; } /*error Keyword "case" must be followed by whitespace.*/
 ```
 
-The following patterns are not considered warnings:
+The following patterns are not considered problems:
 
 ```js
 /*eslint space-return-throw-case: 2*/

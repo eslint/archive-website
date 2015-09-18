@@ -18,7 +18,7 @@ But the modification is a mistake in most cases.
 
 This rule is aimed to flag modifying variables of class declarations.
 
-The following patterns are considered warnings:
+The following patterns are considered problems:
 
 ```js
 /*eslint no-class-assign: 2*/
@@ -55,7 +55,7 @@ let A = class A {
 }
 ```
 
-The following patterns are not considered warnings:
+The following patterns are not considered problems:
 
 ```js
 /*eslint no-class-assign: 2*/

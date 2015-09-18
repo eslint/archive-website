@@ -33,7 +33,7 @@ The rule takes one option, a string, which must contain one of the following val
 This is the default option.
 It disallows assignments unless they are enclosed in parentheses.
 
-The following patterns are considered warnings:
+The following patterns are considered problems:
 
 ```js
 /*eslint no-return-assign: 2*/
@@ -47,7 +47,7 @@ function doSomething() {
 }
 ```
 
-The following patterns are not warnings:
+The following patterns are not considered problems:
 
 ```js
 /*eslint no-return-assign: 2*/
@@ -68,9 +68,9 @@ function doSomething() {
 #### "always"
 
 This option disallows all assignments in `return` statements.
-All assignments are treated as warnings.
+All assignments are treated as problems.
 
-The following patterns are considered warnings:
+The following patterns are considered problems:
 
 ```js
 /*eslint no-return-assign: [2, "always"]*/
@@ -88,7 +88,7 @@ function doSomething() {
 }
 ```
 
-The following patterns are not warnings:
+The following patterns are not considered problems:
 
 ```js
 /*eslint no-return-assign: [2, "always"]*/
@@ -105,7 +105,6 @@ function doSomething() {
 ## When Not To Use It
 
 If you want to allow the use of assignment operators in a `return` statement, then you can safely disable this rule.
-
 
 ## Version
 

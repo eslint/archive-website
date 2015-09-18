@@ -38,7 +38,7 @@ Depending on your coding conventions, you can choose either option by specifying
 
 #### never
 
-When `"never"` is set, the following patterns are considered warnings:
+When `"never"` is set, the following patterns are considered problems:
 
 ```js
 foo[ 'bar' ];
@@ -58,7 +58,7 @@ var obj = { baz: {'foo': 'qux'}, bar};
 var obj = {baz: { 'foo': 'qux' }, bar};
 ```
 
-The following patterns are not warnings:
+The following patterns are not considered problems:
 
 ```js
 // When options are [2, "never"]
@@ -100,7 +100,7 @@ var obj = {};
 
 #### always
 
-When `"always"` is used, the following patterns are considered warnings:
+When `"always"` is used, the following patterns are considered problems:
 
 ```js
 foo['bar'];
@@ -129,7 +129,7 @@ var obj = {
   'foo':'bar'};
 ```
 
-The following patterns are not warnings:
+The following patterns are not considered problems:
 
 ```js
 foo[ 'bar' ];
@@ -155,7 +155,7 @@ var obj = {
 };
 ```
 
-Note that `"always"` has a special case where `{}` and `[]` are not considered warnings.
+Note that `"always"` has a special case where `{}` and `[]` are not considered problems.
 
 #### Exceptions
 
@@ -200,7 +200,7 @@ The following exceptions are available:
 
 In each of the following examples, the `"always"` option is assumed.
 
-When `"singleValue"` is set to `false`, the following patterns are considered warnings:
+When `"singleValue"` is set to `false`, the following patterns are considered problems:
 
 ```js
 var foo = [ 'foo' ];
@@ -213,7 +213,7 @@ var foo = [ [ 1, 2 ] ];
 var foo = [ { 'foo': 'bar' } ];
 ```
 
-The following patterns are not warnings:
+The following patterns are not considered problems:
 
 ```js
 var foo = ['foo'];
@@ -222,7 +222,7 @@ var foo = [[ 1, 1 ]];
 var foo = [{ 'foo': 'bar' }];
 ```
 
-When `"objectsInArrays"` is set to `false`, the following patterns are considered warnings:
+When `"objectsInArrays"` is set to `false`, the following patterns are considered problems:
 
 ```js
 var arr = [ { 'foo': 'bar' } ];
@@ -231,7 +231,7 @@ var arr = [ {
 } ]
 ```
 
-The following patterns are not warnings:
+The following patterns are not considered problems:
 
 ```js
 var arr = [{ 'foo': 'bar' }];
@@ -240,56 +240,56 @@ var arr = [{
 }];
 ```
 
-When `"arraysInArrays"` is set to `false`, the following patterns are considered warnings:
+When `"arraysInArrays"` is set to `false`, the following patterns are considered problems:
 
 ```js
 var arr = [ [ 1, 2 ], 2, 3, 4 ];
 var arr = [ [ 1, 2 ], 2, [ 3, 4 ] ];
 ```
 
-The following patterns are not warnings:
+The following patterns are not considered problems:
 
 ```js
 var arr = [[ 1, 2 ], 2, 3, 4 ];
 var arr = [[ 1, 2 ], 2, [ 3, 4 ]];
 ```
 
-When `"arraysInObjects"` is set to `false`, the following patterns are considered warnings:
+When `"arraysInObjects"` is set to `false`, the following patterns are considered problems:
 
 ```js
 var obj = { "foo": [ 1, 2 ] };
 var obj = { "foo": [ "baz", "bar" ] };
 ```
 
-The following patterns are not warnings:
+The following patterns are not considered problems:
 
 ```js
 var obj = { "foo": [ 1, 2 ]};
 var obj = { "foo": [ "baz", "bar" ]};
 ```
 
-When `"objectsInObjects"` is set to `false`, the following patterns are considered warnings:
+When `"objectsInObjects"` is set to `false`, the following patterns are considered problems:
 
 ```js
 var obj = { "foo": { "baz": 1, "bar": 2 } };
 var obj = { "foo": [ "baz", "bar" ], "qux": { "baz": 1, "bar": 2 } };
 ```
 
-The following patterns are not warnings:
+The following patterns are not considered problems:
 
 ```js
 var obj = { "foo": { "baz": 1, "bar": 2 }};
 var obj = { "foo": [ "baz", "bar" ], "qux": { "baz": 1, "bar": 2 }};
 ```
 
-When `"propertyName"` is set to `false`, the following patterns are considered warnings:
+When `"propertyName"` is set to `false`, the following patterns are considered problems:
 
 ```js
 var foo = obj[ 1 ];
 var foo = obj[ bar ];
 ```
 
-The following patterns are not warnings:
+The following patterns are not considered problems:
 
 ```js
 var foo = obj[bar];

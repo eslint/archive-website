@@ -36,7 +36,7 @@ These can be combined as much as you like. To make all methods exceptions (there
 
 ### Reflect.apply (Function.prototype.apply/Function.prototype.call)
 
-The following patterns are considered warnings:
+The following patterns are considered problems:
 
 ```js
 /*eslint prefer-reflect: 2*/
@@ -52,7 +52,7 @@ obj.foo.call(obj, arg);     /*error Avoid using Function.prototype.call, instead
 obj.foo.call(other, arg);   /*error Avoid using Function.prototype.call, instead use Reflect.apply*/
 ```
 
-The following patterns are not considered warnings:
+The following patterns are not considered problems:
 
 ```js
 /*eslint prefer-reflect: 2*/
@@ -95,7 +95,7 @@ Reflect.apply(obj.foo, other, [arg]);
 
 ### Reflect.defineProperty (Object.defineProperty)
 
-The following patterns are considered warnings:
+The following patterns are considered problems:
 
 ```js
 /*eslint prefer-reflect: 2*/
@@ -103,7 +103,7 @@ The following patterns are considered warnings:
 Object.defineProperty({}, 'foo', {value: 1}) /*error Avoid using Object.defineProperty, instead use Reflect.defineProperty*/
 ```
 
-The following patterns are not considered warnings:
+The following patterns are not considered problems:
 
 ```js
 /*eslint prefer-reflect: 2*/
@@ -120,7 +120,7 @@ Reflect.defineProperty({}, 'foo', {value: 1})
 
 ### Reflect.getOwnPropertyDescriptor (Object.getOwnPropertyDescriptor)
 
-The following patterns are considered warnings:
+The following patterns are considered problems:
 
 ```js
 /*eslint prefer-reflect: 2*/
@@ -128,7 +128,7 @@ The following patterns are considered warnings:
 Object.getOwnPropertyDescriptor({}, 'foo') /*error Avoid using Object.getOwnPropertyDescriptor, instead use Reflect.getOwnPropertyDescriptor*/
 ```
 
-The following patterns are not considered warnings:
+The following patterns are not considered problems:
 
 ```js
 /*eslint prefer-reflect: 2*/
@@ -147,7 +147,7 @@ Reflect.getOwnPropertyDescriptor({}, 'foo')
 
 ### Reflect.getPrototypeOf (Object.getPrototypeOf)
 
-The following patterns are considered warnings:
+The following patterns are considered problems:
 
 ```js
 /*eslint prefer-reflect: 2*/
@@ -155,7 +155,7 @@ The following patterns are considered warnings:
 Object.getPrototypeOf({}, 'foo') /*error Avoid using Object.getPrototypeOf, instead use Reflect.getPrototypeOf*/
 ```
 
-The following patterns are not considered warnings:
+The following patterns are not considered problems:
 
 ```js
 /*eslint prefer-reflect: 2*/
@@ -172,7 +172,7 @@ Reflect.getPrototypeOf({}, 'foo')
 
 ### Reflect.setPrototypeOf (Object.setPrototypeOf)
 
-The following patterns are considered warnings:
+The following patterns are considered problems:
 
 ```js
 /*eslint prefer-reflect: 2*/
@@ -180,7 +180,7 @@ The following patterns are considered warnings:
 Object.setPrototypeOf({}, Object.prototype) /*error Avoid using Object.setPrototypeOf, instead use Reflect.setPrototypeOf*/
 ```
 
-The following patterns are not considered warnings:
+The following patterns are not considered problems:
 
 ```js
 /*eslint prefer-reflect: 2*/
@@ -199,7 +199,7 @@ Reflect.setPrototypeOf({}, Object.prototype)
 
 ### Reflect.isExtensible (Object.isExtensible)
 
-The following patterns are considered warnings:
+The following patterns are considered problems:
 
 ```js
 /*eslint prefer-reflect: 2*/
@@ -207,7 +207,7 @@ The following patterns are considered warnings:
 Object.isExtensible({}) /*error Avoid using Object.isExtensible, instead use Reflect.isExtensible*/
 ```
 
-The following patterns are not considered warnings:
+The following patterns are not considered problems:
 
 ```js
 /*eslint prefer-reflect: 2*/
@@ -224,7 +224,7 @@ Reflect.isExtensible({})
 
 ### Reflect.getOwnPropertyNames (Object.getOwnPropertyNames)
 
-The following patterns are considered warnings:
+The following patterns are considered problems:
 
 ```js
 /*eslint prefer-reflect: 2*/
@@ -232,7 +232,7 @@ The following patterns are considered warnings:
 Object.getOwnPropertyNames({}) /*error Avoid using Object.getOwnPropertyNames, instead use Reflect.getOwnPropertyNames*/
 ```
 
-The following patterns are not considered warnings:
+The following patterns are not considered problems:
 
 ```js
 /*eslint prefer-reflect: 2*/
@@ -249,7 +249,7 @@ Reflect.getOwnPropertyNames({})
 
 ### Reflect.preventExtensions (Object.preventExtensions)
 
-The following patterns are considered warnings:
+The following patterns are considered problems:
 
 ```js
 /*eslint prefer-reflect: 2*/
@@ -257,7 +257,7 @@ The following patterns are considered warnings:
 Object.preventExtensions({}) /*error Avoid using Object.preventExtensions, instead use Reflect.preventExtensions*/
 ```
 
-The following patterns are not considered warnings:
+The following patterns are not considered problems:
 
 ```js
 /*eslint prefer-reflect: 2*/
@@ -274,7 +274,7 @@ Reflect.preventExtensions({})
 
 ### Reflect.deleteProperty (The `delete` keyword)
 
-The following patterns are considered warnings:
+The following patterns are considered problems:
 
 ```js
 /*eslint prefer-reflect: 2*/
@@ -282,7 +282,7 @@ The following patterns are considered warnings:
 delete foo.bar; /*error Avoid using the delete keyword, instead use Reflect.deleteProperty*/
 ```
 
-The following patterns are not considered warnings:
+The following patterns are not considered problems:
 
 ```
 /*eslint prefer-reflect: 2*/

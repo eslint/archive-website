@@ -15,7 +15,7 @@ foo["bar"];
 
 This rule is aimed at maintaining code consistency and improving code readability by encouraging use of the dot notation style whenever possible. As such, it will warn when it encounters an unnecessary use of square-bracket notation.
 
-The following patterns are considered warnings:
+The following patterns are considered problems:
 
 ```js
 /*eslint dot-notation: 2*/
@@ -23,7 +23,7 @@ The following patterns are considered warnings:
 var x = foo["bar"]; /*error ["bar"] is better written in dot notation.*/
 ```
 
-The following patterns are not considered warnings:
+The following patterns are not considered problems:
 
 ```js
 /*eslint dot-notation: 2*/
@@ -53,7 +53,7 @@ Set the `allowKeywords` option to `false` (default is `true`) to follow ECMAScri
   "dot-notation": [2, {"allowKeywords": false}],
 ```
 
-The following patterns are not considered warnings:
+The following patterns are not considered problems:
 
 ```js
 /*eslint dot-notation: [2, {"allowKeywords": false}]*/

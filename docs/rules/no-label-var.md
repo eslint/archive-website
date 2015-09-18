@@ -9,7 +9,7 @@ layout: doc
 
 This rule aims to create clearer code by disallowing the bad practice of creating a label that shares a name with a variable that is in scope.
 
-The following patterns are considered warnings:
+The following patterns are considered problems:
 
 ```js
 /*eslint no-label-var: 2*/
@@ -23,7 +23,7 @@ x:               /*error Found identifier with same name as label.*/
 }
 ```
 
-The following patterns are considered okay and do not cause warnings:
+The following patterns are not considered problems:
 
 ```js
 /*eslint no-label-var: 2*/

@@ -31,7 +31,7 @@ The following examples show two primary usages of this option.
 
 This is the default option. It enforces spacing after commas and disallows spacing before commas.
 
-The following patterns are considered warnings:
+The following patterns are considered problems:
 
 ```js
 /*eslint comma-spacing: [2, {"before": false, "after": true}]*/
@@ -45,7 +45,7 @@ function foo(a ,b){}                    /*error There should be no space before 
 a ,b                                    /*error There should be no space before ','.*/ /*error A space is required after ','.*/
 ```
 
-The following patterns are not warnings:
+The following patterns are not considered problems:
 
 ```js
 /*eslint comma-spacing: [2, {"before": false, "after": true}]*/
@@ -64,7 +64,7 @@ a, b
 
 This option enforces spacing before commas and disallows spacing after commas.
 
-The following patterns are considered warnings:
+The following patterns are considered problems:
 
 ```js
 /*eslint comma-spacing: [2, {"before": true, "after": false}]*/
@@ -77,7 +77,7 @@ function foo(a,b){}                     /*error A space is required before ','.*
 a, b                                    /*error A space is required before ','.*/ /*error There should be no space after ','.*/
 ```
 
-The following patterns are not warnings:
+The following patterns are not considered problems:
 
 ```js
 /*eslint comma-spacing: [2, {"before": true, "after": false}]*/

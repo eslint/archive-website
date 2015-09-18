@@ -12,7 +12,7 @@ When declaring multiple variables within the same block, some developers prefer 
 This rule checks all variable declaration blocks and verifies that all variables are sorted alphabetically.
 The default configuration of the rule is case-sensitive.
 
-The following patterns are considered warnings:
+The following patterns are considered problems:
 
 ```js
 /*eslint sort-vars: 2*/
@@ -24,7 +24,7 @@ var a, B, c; /*error Variables within the same declaration block should be sorte
 var a, A;    /*error Variables within the same declaration block should be sorted alphabetically*/
 ```
 
-The following patterns are considered okay and do not cause warnings:
+The following patterns are not considered problems:
 
 ```js
 /*eslint sort-vars: 2*/
@@ -39,7 +39,7 @@ var A, a;
 var B, a, c;
 ```
 
-Alphabetical list is maintained starting from the first variable and excluding any that are considered warnings. So the following code will produce two warnings:
+Alphabetical list is maintained starting from the first variable and excluding any that are considered problems. So the following code will produce two problems:
 
 ```js
 /*eslint sort-vars: 2*/
@@ -65,7 +65,7 @@ var c, d, a, e; /*error Variables within the same declaration block should be so
 
 When `true` the rule ignores the case-sensitivity of the variables order.
 
-The following patterns are considered okay and do not cause warnings:
+The following patterns are not considered problems:
 
 ```js
 /*eslint sort-vars: [2, { "ignoreCase": true }]*/

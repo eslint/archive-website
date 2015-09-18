@@ -29,7 +29,7 @@ switch (a) {
 
 This inspection reports any duplicated case labels on JavaScript switch statements.
 
-The following patterns are considered warnings:
+The following patterns are considered problems:
 
 ```js
 /*eslint no-duplicate-case: 2*/
@@ -71,7 +71,7 @@ switch (a) {
 }
 ```
 
-The following patterns are not considered warnings:
+The following patterns are not considered problems:
 
 ```js
 /*eslint no-duplicate-case: 2*/

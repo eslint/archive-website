@@ -26,7 +26,7 @@ span multiple lines, and warns if there is a trailing comma present on single li
 If `"never"` then it warns whenever an trailing comma is detected.
 The default value of this option is `"never"`.
 
-The following patterns are considered warnings when configured `"never"`:
+The following patterns are considered problems when configured `"never"`:
 
 ```js
 /*eslint comma-dangle: [2, "never"]*/
@@ -44,7 +44,7 @@ foo({
 });
 ```
 
-The following patterns are not considered warnings when configured `"never"`:
+The following patterns are not considered problems when configured `"never"`:
 
 ```js
 /*eslint comma-dangle: [2, "never"]*/
@@ -62,7 +62,7 @@ foo({
 });
 ```
 
-The following patterns are considered warnings when configured `"always"`:
+The following patterns are considered problems when configured `"always"`:
 
 ```js
 /*eslint comma-dangle: [2, "always"]*/
@@ -80,7 +80,7 @@ foo({
 });
 ```
 
-The following patterns are not considered warnings when configured `"always"`:
+The following patterns are not considered problems when configured `"always"`:
 
 ```js
 /*eslint comma-dangle: [2, "always"]*/
@@ -98,7 +98,7 @@ foo({
 });
 ```
 
-The following patterns are considered warnings when configured `"always-multiline"`:
+The following patterns are considered problems when configured `"always-multiline"`:
 
 ```js
 /*eslint comma-dangle: [1, "always-multiline"]*/
@@ -126,7 +126,7 @@ foo({
 });
 ```
 
-The following patterns are not considered warnings when configured `"always-multiline"`:
+The following patterns are not considered problems when configured `"always-multiline"`:
 
 ```js
 /*eslint comma-dangle: [2, "always-multiline"]*/

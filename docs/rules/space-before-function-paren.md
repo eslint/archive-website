@@ -23,6 +23,8 @@ var anonymousWithSpace = function () {};
 
 Style guides may require a space after the `function` keyword for anonymous functions, while others specify no whitespace. Similarly, the space after a function name may or may not be required.
 
+**Fixable:** This rule is automatically fixable using the `--fix` flag on the command line.
+
 ## Rule Details
 
 This rule aims to enforce consistent spacing before function parentheses and as such, will warn whenever whitespace doesn't match the preferences specified.
@@ -31,7 +33,9 @@ This rule takes one argument. If it is `"always"` then all named functions and a
 
 The default configuration is `"always"`.
 
-The following patterns are considered warnings when configured `"always"`:
+### `"always"`
+
+The following patterns are considered problems:
 
 ```js
 /*eslint space-before-function-paren: 2*/
@@ -61,7 +65,7 @@ var foo = {
 };
 ```
 
-The following patterns are not considered warnings when configured `"always"`:
+The following patterns are not considered problems:
 
 ```js
 /*eslint space-before-function-paren: 2*/
@@ -91,7 +95,9 @@ var foo = {
 };
 ```
 
-The following patterns are considered warnings when configured `"never"`:
+### `"never"`
+
+The following patterns are considered problems:
 
 ```js
 /*eslint space-before-function-paren: [2, "never"]*/
@@ -121,7 +127,7 @@ var foo = {
 };
 ```
 
-The following patterns are not considered warnings when configured `"never"`:
+The following patterns are not considered problems:
 
 ```js
 /*eslint space-before-function-paren: [2, "never"]*/
@@ -151,7 +157,9 @@ var foo = {
 };
 ```
 
-The following patterns are considered warnings when configured `{"anonymous": "always", "named": "never"}`:
+### `{"anonymous": "always", "named": "never"}`
+
+The following patterns are considered problems:
 
 ```js
 /*eslint space-before-function-paren: [2, { "anonymous": "always", "named": "never" }]*/
@@ -177,7 +185,7 @@ var foo = {
 };
 ```
 
-The following patterns are not considered warnings when configured `{"anonymous": "always", "named": "never"}`:
+The following patterns are not considered problems:
 
 ```js
 /*eslint space-before-function-paren: [2, { "anonymous": "always", "named": "never" }]*/
@@ -203,7 +211,9 @@ var foo = {
 };
 ```
 
-The following patterns are considered warnings when configured `{"anonymous": "never", "named": "always"}`:
+### `{"anonymous": "never", "named": "always"}`
+
+The following patterns are considered problems:
 
 ```js
 /*eslint space-before-function-paren: [2, { "anonymous": "never", "named": "always" }]*/
@@ -229,7 +239,7 @@ var foo = {
 };
 ```
 
-The following patterns are not considered warnings when configured `{"anonymous": "never", "named": "always"}`:
+The following patterns are not considered problems:
 
 ```js
 /*eslint space-before-function-paren: [2, { "anonymous": "never", "named": "always" }]*/

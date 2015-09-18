@@ -20106,17 +20106,6 @@ function isModifyingReference(reference, index, references) {
 module.exports = {
 
     /**
-     * Determines whether two adjacent tokens are have whitespace between them.
-     * @param {Object} left - The left token object.
-     * @param {Object} right - The right token object.
-     * @returns {boolean} Whether or not there is space between the tokens.
-     * @public
-     */
-    isTokenSpaced: function(left, right) {
-        return left.range[1] < right.range[0];
-    },
-
-    /**
      * Determines whether two adjacent tokens are on the same line.
      * @param {Object} left - The left token object.
      * @param {Object} right - The right token object.
@@ -20172,6 +20161,23 @@ module.exports = {
      */
     isSurroundedBy: function(val, character) {
         return val[0] === character && val[val.length - 1] === character;
+    },
+
+    /**
+     * Returns whether the provided node is an ESLint directive comment or not
+     * @param {LineComment|BlockComment} node The node to be checked
+     * @returns {boolean} `true` if the node is an ESLint directive comment
+     */
+    isDirectiveComment: function(node) {
+        var comment = node.value.trim();
+        return (
+            node.type === "Line" && comment.indexOf("eslint-") === 0 ||
+            node.type === "Block" && (
+                comment.indexOf("global ") === 0 ||
+                comment.indexOf("eslint ") === 0 ||
+                comment.indexOf("eslint-") === 0
+            )
+        );
     }
 };
 
@@ -20355,6 +20361,8 @@ var estraverse = require("estraverse-fb"),
     RuleContext = require("./rule-context"),
     timing = require("./timing"),
     SourceCode = require("./util/source-code"),
+    NodeEventGenerator = require("./util/node-event-generator"),
+    CommentEventGenerator = require("./util/comment-event-generator"),
     EventEmitter = require("events").EventEmitter,
     validator = require("./config-validator"),
     replacements = require("../conf/replacements.json");
@@ -20833,8 +20841,6 @@ module.exports = (function() {
         currentFilename = null,
         controller = null,
         reportingConfig = [],
-        commentLocsEnter = [],
-        commentLocsExit = [],
         sourceCode = null;
 
     /**
@@ -20900,46 +20906,6 @@ module.exports = (function() {
     }
 
     /**
-     * Check collection of comments to prevent double event for comment as
-     * leading and trailing, then emit event if passing
-     * @param {ASTNode[]} comments Collection of comment nodes
-     * @param {Object[]} locs List of locations of previous comment nodes
-     * @param {string} eventName Event name postfix
-     * @returns {void}
-     */
-    function emitComments(comments, locs, eventName) {
-
-        if (comments.length) {
-            comments.forEach(function(node) {
-                if (locs.indexOf(node.loc) >= 0) {
-                    locs.splice(locs.indexOf(node.loc), 1);
-                } else {
-                    locs.push(node.loc);
-                    api.emit(node.type + eventName, node);
-                }
-            });
-        }
-    }
-
-    /**
-     * Shortcut to check and emit enter of comment nodes
-     * @param {ASTNode[]} comments Collection of comment nodes
-     * @returns {void}
-     */
-    function emitCommentsEnter(comments) {
-        emitComments(comments, commentLocsEnter, "Comment");
-    }
-
-    /**
-     * Shortcut to check and emit exit of comment nodes
-     * @param {ASTNode[]} comments Collection of comment nodes
-     * @returns {void}
-     */
-    function emitCommentsExit(comments) {
-        emitComments(comments, commentLocsExit, "Comment:exit");
-    }
-
-    /**
      * Get the severity level of a rule (0 - none, 1 - warning, 2 - error)
      * Returns 0 if the rule config is not valid (an Array or a number)
      * @param {Array|number} ruleConfig rule configuration
@@ -20984,8 +20950,6 @@ module.exports = (function() {
         scopeManager = null;
         controller = null;
         reportingConfig = [];
-        commentLocsEnter = [];
-        commentLocsExit = [];
         sourceCode = null;
     };
 
@@ -21146,6 +21110,9 @@ module.exports = (function() {
                 }
             }
 
+            var eventGenerator = new NodeEventGenerator(api);
+            eventGenerator = new CommentEventGenerator(eventGenerator, sourceCode);
+
             /*
              * Each node has a type property. Whenever a particular type of node is found,
              * an event is fired. This allows any listeners to automatically be informed
@@ -21153,21 +21120,11 @@ module.exports = (function() {
              */
             controller.traverse(ast, {
                 enter: function(node, parent) {
-
-                    var comments = api.getComments(node);
-
-                    emitCommentsEnter(comments.leading);
                     node.parent = parent;
-                    api.emit(node.type, node);
-                    emitCommentsEnter(comments.trailing);
+                    eventGenerator.enterNode(node);
                 },
                 leave: function(node) {
-
-                    var comments = api.getComments(node);
-
-                    emitCommentsExit(comments.trailing);
-                    api.emit(node.type + ":exit", node);
-                    emitCommentsExit(comments.leading);
+                    eventGenerator.leaveNode(node);
                 }
             });
 
@@ -21428,7 +21385,7 @@ module.exports = (function() {
 
 }());
 
-},{"../conf/blank-script.json":1,"../conf/environments":2,"../conf/eslint.json":3,"../conf/replacements.json":4,"./config-validator":150,"./rule-context":153,"./rules":154,"./timing":338,"./util":340,"./util/source-code":343,"escope":24,"estraverse-fb":133,"events":8,"object-assign":146}],152:[function(require,module,exports){
+},{"../conf/blank-script.json":1,"../conf/environments":2,"../conf/eslint.json":3,"../conf/replacements.json":4,"./config-validator":150,"./rule-context":153,"./rules":154,"./timing":338,"./util":340,"./util/comment-event-generator":341,"./util/node-event-generator":343,"./util/source-code":345,"escope":24,"estraverse-fb":133,"events":8,"object-assign":146}],152:[function(require,module,exports){
 module.exports = function() {
     var rules = Object.create(null);
     rules["accessor-pairs"] = require("./rules/accessor-pairs");
@@ -21782,7 +21739,7 @@ RuleContext.prototype = {
 
 module.exports = RuleContext;
 
-},{"./util/rule-fixer":342}],154:[function(require,module,exports){
+},{"./util/rule-fixer":344}],154:[function(require,module,exports){
 /**
  * @fileoverview Defines a storage for rules.
  * @author Nicholas C. Zakas
@@ -22037,7 +21994,8 @@ var astUtils = require("../ast-utils");
 //------------------------------------------------------------------------------
 
 module.exports = function(context) {
-    var spaced = context.options[0] === "always";
+    var spaced = context.options[0] === "always",
+        sourceCode = context.getSourceCode();
 
     /**
      * Determines whether an option is set, relative to the spacing option.
@@ -22133,19 +22091,19 @@ module.exports = function(context) {
                 ? !options.spaced : options.spaced;
 
         if (astUtils.isTokenOnSameLine(first, second)) {
-            if (openingBracketMustBeSpaced && !astUtils.isTokenSpaced(first, second)) {
+            if (openingBracketMustBeSpaced && !sourceCode.isSpaceBetweenTokens(first, second)) {
                 reportRequiredBeginningSpace(node, first);
             }
-            if (!openingBracketMustBeSpaced && astUtils.isTokenSpaced(first, second)) {
+            if (!openingBracketMustBeSpaced && sourceCode.isSpaceBetweenTokens(first, second)) {
                 reportNoBeginningSpace(node, first);
             }
         }
 
         if (astUtils.isTokenOnSameLine(penultimate, last)) {
-            if (closingBracketMustBeSpaced && !astUtils.isTokenSpaced(penultimate, last)) {
+            if (closingBracketMustBeSpaced && !sourceCode.isSpaceBetweenTokens(penultimate, last)) {
                 reportRequiredEndingSpace(node, last);
             }
-            if (!closingBracketMustBeSpaced && astUtils.isTokenSpaced(penultimate, last)) {
+            if (!closingBracketMustBeSpaced && sourceCode.isSpaceBetweenTokens(penultimate, last)) {
                 reportNoEndingSpace(node, last);
             }
         }
@@ -22499,8 +22457,9 @@ var util = require("../ast-utils");
 //------------------------------------------------------------------------------
 
 module.exports = function(context) {
-    var always = (context.options[0] !== "never");
-    var message = always ? "Requires a space" : "Unexpected space(s)";
+    var always = (context.options[0] !== "never"),
+        message = always ? "Requires a space" : "Unexpected space(s)",
+        sourceCode = context.getSourceCode();
 
     /**
      * Gets the open brace token from a given node.
@@ -22531,7 +22490,7 @@ module.exports = function(context) {
     function isValid(left, right) {
         return (
             !util.isTokenOnSameLine(left, right) ||
-            util.isTokenSpaced(left, right) === always
+            sourceCode.isSpaceBetweenTokens(left, right) === always
         );
     }
 
@@ -23139,9 +23098,19 @@ module.exports = function(context) {
      * @returns {boolean} `true` if the node is multiline.
      */
     function isMultiline(node) {
+        var lastItem = getLast(node.properties || node.elements || node.specifiers);
+        if (!lastItem) {
+            return false;
+        }
+
         var sourceCode = context.getSourceCode();
-        var lastToken = sourceCode.getLastToken(node);
-        var penultimateToken = sourceCode.getLastToken(node, 1);
+        var penultimateToken = sourceCode.getLastToken(lastItem);
+        var lastToken = sourceCode.getTokenAfter(penultimateToken);
+
+        if (lastToken.value === ",") {
+            penultimateToken = lastToken;
+            lastToken = sourceCode.getTokenAfter(lastToken);
+        }
 
         return lastToken.loc.end.line !== penultimateToken.loc.end.line;
     }
@@ -23150,12 +23119,13 @@ module.exports = function(context) {
      * Reports a trailing comma if it exists.
      *
      * @param {ASTNode} node - A node to check. Its type is one of
-     *   ObjectExpression, ObjectPattern, ArrayExpression, and ArrayPattern.
+     *   ObjectExpression, ObjectPattern, ArrayExpression, ArrayPattern,
+     *   ImportDeclaration, and ExportNamedDeclaration.
      * @returns {void}
      */
     function forbidTrailingComma(node) {
-        var lastItem = getLast(node.properties || node.elements);
-        if (!lastItem) {
+        var lastItem = getLast(node.properties || node.elements || node.specifiers);
+        if (!lastItem || (node.type === "ImportDeclaration" && lastItem.type !== "ImportSpecifier")) {
             return;
         }
 
@@ -23177,12 +23147,13 @@ module.exports = function(context) {
      * comma is disallowed, so report if it exists.
      *
      * @param {ASTNode} node - A node to check. Its type is one of
-     *   ObjectExpression, ObjectPattern, ArrayExpression, and ArrayPattern.
+     *   ObjectExpression, ObjectPattern, ArrayExpression, ArrayPattern,
+     *   ImportDeclaration, and ExportNamedDeclaration.
      * @returns {void}
      */
     function forceTrailingComma(node) {
-        var lastItem = getLast(node.properties || node.elements);
-        if (!lastItem) {
+        var lastItem = getLast(node.properties || node.elements || node.specifiers);
+        if (!lastItem || (node.type === "ImportDeclaration" && lastItem.type !== "ImportSpecifier")) {
             return;
         }
         if (!isTrailingCommaAllowed(node, lastItem)) {
@@ -23206,7 +23177,8 @@ module.exports = function(context) {
      * Otherwise, reports a trailing comma if it exists.
      *
      * @param {ASTNode} node - A node to check. Its type is one of
-     *   ObjectExpression, ObjectPattern, ArrayExpression, and ArrayPattern.
+     *   ObjectExpression, ObjectPattern, ArrayExpression, ArrayPattern,
+     *   ImportDeclaration, and ExportNamedDeclaration.
      * @returns {void}
      */
     function forceTrailingCommaIfMultiline(node) {
@@ -23231,7 +23203,9 @@ module.exports = function(context) {
         "ObjectExpression": checkForTrailingComma,
         "ObjectPattern": checkForTrailingComma,
         "ArrayExpression": checkForTrailingComma,
-        "ArrayPattern": checkForTrailingComma
+        "ArrayPattern": checkForTrailingComma,
+        "ImportDeclaration": checkForTrailingComma,
+        "ExportNamedDeclaration": checkForTrailingComma
     };
 };
 
@@ -23257,6 +23231,8 @@ var astUtils = require("../ast-utils");
 
 module.exports = function(context) {
 
+    var sourceCode = context.getSourceCode();
+
     var options = {
         before: context.options[0] ? !!context.options[0].before : false,
         after: context.options[0] ? !!context.options[0].after : true
@@ -23272,33 +23248,6 @@ module.exports = function(context) {
 
     // list of comma tokens to ignore for the check of leading whitespace
     var commaTokensToIgnore = [];
-
-    /**
-     * Determines the length of comment between 2 tokens
-     * @param {Object} left - The left token object.
-     * @param {Object} right - The right token object.
-     * @returns {number} Length of comment in between tokens
-     */
-    function getCommentLengthBetweenTokens(left, right) {
-        return allComments.reduce(function(val, comment) {
-            if (left.range[1] <= comment.range[0] && comment.range[1] <= right.range[0]) {
-                val = val + comment.range[1] - comment.range[0];
-            }
-            return val;
-        }, 0);
-    }
-
-    /**
-     * Determines whether two adjacent tokens have whitespace between them.
-     * @param {Object} left - The left token object.
-     * @param {Object} right - The right token object.
-     * @returns {boolean} Whether or not there is space between the tokens.
-     */
-    function isSpaced(left, right) {
-        var punctuationLength = context.getTokensBetween(left, right).length; // the length of any parenthesis
-        var commentLenth = getCommentLengthBetweenTokens(left, right);
-        return (left.range[1] + punctuationLength + commentLenth) < right.range[0];
-    }
 
     /**
      * Determines if a given token is a comma operator.
@@ -23335,12 +23284,12 @@ module.exports = function(context) {
      */
     function validateCommaItemSpacing(tokens, reportItem) {
         if (tokens.left && astUtils.isTokenOnSameLine(tokens.left, tokens.comma) &&
-                (options.before !== isSpaced(tokens.left, tokens.comma))
+                (options.before !== sourceCode.isSpaceBetweenTokens(tokens.left, tokens.comma))
         ) {
             report(reportItem, "before");
         }
         if (tokens.right && astUtils.isTokenOnSameLine(tokens.comma, tokens.right) &&
-                (options.after !== isSpaced(tokens.comma, tokens.right))
+                (options.after !== sourceCode.isSpaceBetweenTokens(tokens.comma, tokens.right))
         ) {
             report(reportItem, "after");
         }
@@ -23782,6 +23731,7 @@ var astUtils = require("../ast-utils");
 //------------------------------------------------------------------------------
 
 module.exports = function(context) {
+    var sourceCode = context.getSourceCode();
     var propertyNameMustBeSpaced = context.options[0] === "always"; // default is "never"
 
     //--------------------------------------------------------------------------
@@ -23853,11 +23803,11 @@ module.exports = function(context) {
 
             if (astUtils.isTokenOnSameLine(before, first)) {
                 if (propertyNameMustBeSpaced) {
-                    if (!astUtils.isTokenSpaced(before, first) && astUtils.isTokenOnSameLine(before, first)) {
+                    if (!sourceCode.isSpaceBetweenTokens(before, first) && astUtils.isTokenOnSameLine(before, first)) {
                         reportRequiredBeginningSpace(node, before);
                     }
                 } else {
-                    if (astUtils.isTokenSpaced(before, first)) {
+                    if (sourceCode.isSpaceBetweenTokens(before, first)) {
                         reportNoBeginningSpace(node, before);
                     }
                 }
@@ -23865,11 +23815,11 @@ module.exports = function(context) {
 
             if (astUtils.isTokenOnSameLine(last, after)) {
                 if (propertyNameMustBeSpaced) {
-                    if (!astUtils.isTokenSpaced(last, after) && astUtils.isTokenOnSameLine(last, after)) {
+                    if (!sourceCode.isSpaceBetweenTokens(last, after) && astUtils.isTokenOnSameLine(last, after)) {
                         reportRequiredEndingSpace(node, after);
                     }
                 } else {
-                    if (astUtils.isTokenSpaced(last, after)) {
+                    if (sourceCode.isSpaceBetweenTokens(last, after)) {
                         reportNoEndingSpace(node, after);
                     }
                 }
@@ -24544,7 +24494,7 @@ module.exports.schema = [
     }
 ];
 
-},{"../util/keywords":341}],176:[function(require,module,exports){
+},{"../util/keywords":342}],176:[function(require,module,exports){
 /**
  * @fileoverview Require file to end with single newline.
  * @author Nodeca Team <https://github.com/nodeca>
@@ -24574,7 +24524,14 @@ module.exports = function(context) {
             if (src[src.length - 1] !== "\n") {
                 // file is not newline-terminated
                 location.line = src.split(/\n/g).length;
-                context.report(node, location, "Newline required at end of file but not found.");
+                context.report({
+                    node: node,
+                    loc: location,
+                    message: "Newline required at end of file but not found.",
+                    fix: function(fixer) {
+                        return fixer.insertTextAfterRange([0, src.length], "\n");
+                    }
+                });
             }
         }
 
@@ -25070,10 +25027,10 @@ module.exports = function(context) {
     var properties = options.properties !== "never";
     var exceptions = (options.exceptions ? options.exceptions : [])
         .reduce(function(obj, item) {
-        obj[item] = true;
+            obj[item] = true;
 
-        return obj;
-    }, {});
+            return obj;
+        }, {});
 
     var SUPPORTED_EXPRESSIONS = {
         "MemberExpression": function(parent) {
@@ -25359,20 +25316,78 @@ module.exports = function(context) {
      * @param {int} needed Expected indentation character count
      * @param {int} gotten Indentation character count in the actual node/code
      * @param {Object=} loc Error line and column location
+     * @param {boolean} isLastNodeCheck Is the error for last node check
      * @returns {void}
      */
-    function report(node, needed, gotten, loc) {
+    function report(node, needed, gotten, loc, isLastNodeCheck) {
         var msgContext = {
             needed: needed,
             type: indentType,
             characters: needed === 1 ? "character" : "characters",
             gotten: gotten
         };
+        var indentChar = indentType === "space" ? " " : "\t";
+
+        /**
+         * Responsible for fixing the indentation issue fix
+         * @returns {Function} function to be executed by the fixer
+         * @private
+         */
+        function getFixerFunction() {
+            var rangeToFix = [];
+
+            if (needed > gotten) {
+                var spaces = "" + new Array(needed - gotten + 1).join(indentChar);  // replace with repeat in future
+
+                if (isLastNodeCheck === true) {
+                    rangeToFix = [
+                        node.range[1] - 1,
+                        node.range[1] - 1
+                    ];
+                } else {
+                    rangeToFix = [
+                        node.range[0],
+                        node.range[0]
+                    ];
+                }
+
+                return function(fixer) {
+                    return fixer.insertTextBeforeRange(rangeToFix, spaces);
+                };
+            } else {
+                if (isLastNodeCheck === true) {
+                    rangeToFix = [
+                        node.range[1] - (gotten - needed) - 1,
+                        node.range[1] - 1
+                    ];
+                } else {
+                    rangeToFix = [
+                        node.range[0] - (gotten - needed),
+                        node.range[0]
+                    ];
+                }
+
+                return function(fixer) {
+                    return fixer.removeRange(rangeToFix);
+                };
+            }
+        }
 
         if (loc) {
-            context.report(node, loc, MESSAGE, msgContext);
+            context.report({
+                node: node,
+                loc: loc,
+                message: MESSAGE,
+                data: msgContext,
+                fix: getFixerFunction()
+            });
         } else {
-            context.report(node, MESSAGE, msgContext);
+            context.report({
+                node: node,
+                message: MESSAGE,
+                data: msgContext,
+                fix: getFixerFunction()
+            });
         }
     }
 
@@ -25448,7 +25463,8 @@ module.exports = function(context) {
                 node,
                 lastLineIndent,
                 endIndent,
-                { line: lastToken.loc.start.line, column: lastToken.loc.start.column }
+                { line: lastToken.loc.start.line, column: lastToken.loc.start.column },
+                true
             );
         }
     }
@@ -25469,86 +25485,6 @@ module.exports = function(context) {
                 { line: node.loc.start.line, column: node.loc.start.column }
             );
         }
-    }
-
-    /**
-     * Check indent for function block content
-     * @param {ASTNode} node node to examine
-     * @returns {void}
-     */
-    function checkIndentInFunctionBlock(node) {
-
-        // Search first caller in chain.
-        // Ex.:
-        //
-        // Models <- Identifier
-        //   .User
-        //   .find()
-        //   .exec(function() {
-        //   // function body
-        // });
-        //
-        // Looks for 'Models'
-        var calleeNode = node.parent; // FunctionExpression
-        while (calleeNode.parent &&
-        calleeNode.parent.type === "CallExpression") {
-            calleeNode = calleeNode.parent;
-        }
-
-        var indent;
-
-        if (calleeNode.parent &&
-            (calleeNode.parent.type === "Property" ||
-            calleeNode.parent.type === "ArrayExpression")) {
-            // If function is part of array or object, comma can be put at left
-            indent = getNodeIndent(calleeNode, false, true);
-        } else {
-            // If function is standalone, simple calculate indent
-            indent = getNodeIndent(calleeNode);
-        }
-
-        // If part of a multi-line chain call, indent one more to differentiate:
-        // var a = new P()
-        //     .done(function (result) {
-        //         doUsefulStuff(result);
-        //     });
-        var calleeLoc = calleeNode.type === "CallExpression" && calleeNode.callee.loc;
-        if (calleeLoc &&
-            calleeLoc.end.line - calleeLoc.start.line === 1 &&
-            calleeLoc.end.line < node.loc.start.line
-        ) {
-            indent += indentSize;
-        }
-
-        indent += indentSize;
-        // If function content is not empty
-        var bodyIndent;
-        if (node.body.length > 0) {
-            bodyIndent = getNodeIndent(node.body[0]);
-            // Calculate left shift position don't require strict indent
-            // allow function body align to (indentSize * X)
-            while (bodyIndent > indent) {
-                indent += indentSize;
-            }
-
-            checkNodesIndent(node.body, indent);
-        }
-
-        checkLastNodeLineIndent(node, indent - indentSize);
-    }
-
-
-    /**
-     * Checks if the given node starts and ends on the same line
-     * @param {ASTNode} node The node to check
-     * @returns {boolean} Whether or not the block starts and ends on the same line.
-     */
-    function isSingleLineNode(node) {
-        var lastToken = context.getLastToken(node),
-            startLine = node.loc.start.line,
-            endLine = lastToken.loc.end.line;
-
-        return startLine === endLine;
     }
 
     /**
@@ -25578,6 +25514,80 @@ module.exports = function(context) {
         return varNode &&
             varNode.parent.loc.start.line === node.loc.start.line &&
             varNode.parent.declarations.length > 1;
+    }
+
+    /**
+     * Check indent for function block content
+     * @param {ASTNode} node node to examine
+     * @returns {void}
+     */
+    function checkIndentInFunctionBlock(node) {
+
+        // Search first caller in chain.
+        // Ex.:
+        //
+        // Models <- Identifier
+        //   .User
+        //   .find()
+        //   .exec(function() {
+        //   // function body
+        // });
+        //
+        // Looks for 'Models'
+        var calleeNode = node.parent; // FunctionExpression
+        var indent;
+
+        if (calleeNode.parent &&
+            (calleeNode.parent.type === "Property" ||
+            calleeNode.parent.type === "ArrayExpression")) {
+            // If function is part of array or object, comma can be put at left
+            indent = getNodeIndent(calleeNode, false, true);
+        } else {
+            // If function is standalone, simple calculate indent
+            indent = getNodeIndent(calleeNode);
+        }
+
+        // If part of a multi-line chain call, indent one more to differentiate:
+        // var a = new P()
+        //     .done(function (result) {
+        //         doUsefulStuff(result);
+        //     });
+        var calleeLoc = calleeNode.type === "CallExpression" && calleeNode.callee.loc;
+        if (calleeLoc &&
+            calleeLoc.end.line - calleeLoc.start.line === 1 &&
+            calleeLoc.end.line < node.loc.start.line
+        ) {
+            indent += indentSize;
+        }
+
+        // function body indent should be indent + indent size
+        indent += indentSize;
+
+        // check if the node is inside a variable
+        var parentVarNode = getVariableDeclaratorNode(node);
+        if (parentVarNode && isNodeInVarOnTop(node, parentVarNode)) {
+            indent += indentSize * options.VariableDeclarator[parentVarNode.parent.kind];
+        }
+
+        if (node.body.length > 0) {
+            checkNodesIndent(node.body, indent);
+        }
+
+        checkLastNodeLineIndent(node, indent - indentSize);
+    }
+
+
+    /**
+     * Checks if the given node starts and ends on the same line
+     * @param {ASTNode} node The node to check
+     * @returns {boolean} Whether or not the block starts and ends on the same line.
+     */
+    function isSingleLineNode(node) {
+        var lastToken = context.getLastToken(node),
+            startLine = node.loc.start.line,
+            endLine = lastToken.loc.end.line;
+
+        return startLine === endLine;
     }
 
     /**
@@ -26047,7 +26057,7 @@ module.exports = function(context) {
         "JSXAttribute": function(node) {
             var attributeValue = node.value;
 
-            if (astUtils.isStringLiteral(attributeValue) && !usesExpectedQuotes(attributeValue)) {
+            if (attributeValue && astUtils.isStringLiteral(attributeValue) && !usesExpectedQuotes(attributeValue)) {
                 context.report(attributeValue, "Unexpected usage of {{description}}.", setting);
             }
         }
@@ -26157,6 +26167,7 @@ module.exports = function(context) {
 
     var options = context.options[0] || {},
         align = options.align,
+        mode = options.mode || "strict",
         beforeColon = +!!options.beforeColon, // Defaults to false
         afterColon = +!(options.afterColon === false); // Defaults to true
 
@@ -26225,7 +26236,9 @@ module.exports = function(context) {
             firstTokenAfterColon = context.getTokenAfter(key, 1),
             location = side === "key" ? key.loc.start : firstTokenAfterColon.loc.start;
 
-        if (diff && !(expected && containsLineTerminator(whitespace))) {
+        if ((diff && mode === "strict" || diff < 0 && mode === "minimum") &&
+            !(expected && containsLineTerminator(whitespace))
+        ) {
             context.report(property[side], location, messages[side], {
                 error: diff > 0 ? "Extra" : "Missing",
                 computed: property.computed ? "computed " : "",
@@ -26395,6 +26408,9 @@ module.exports.schema = [
         "properties": {
             "align": {
                 "enum": ["colon", "value"]
+            },
+            "mode": {
+                "enum": ["strict", "minimum"]
             },
             "beforeColon": {
                 "type": "boolean"
@@ -29819,7 +29835,13 @@ module.exports = function(context) {
      * @returns {void}
      */
     function report(nodeOrToken) {
-        context.report(nodeOrToken, "Unnecessary semicolon.");
+        context.report({
+            node: nodeOrToken,
+            message: "Unnecessary semicolon.",
+            fix: function(fixer) {
+                return fixer.remove(nodeOrToken);
+            }
+        });
     }
 
     /**
@@ -30454,6 +30476,8 @@ module.exports.schema = [];
  */
 "use strict";
 
+var astUtils = require("../ast-utils");
+
 //------------------------------------------------------------------------------
 // Rule Definition
 //------------------------------------------------------------------------------
@@ -30478,7 +30502,7 @@ module.exports = function(context) {
         var postamble = endLine.slice(node.loc.end.column).trim();
 
         // Check that this comment isn't an ESLint directive
-        var isDirective = node.value.trim().indexOf("eslint-") === 0;
+        var isDirective = astUtils.isDirectiveComment(node);
 
         // Should be empty if there was only whitespace around the comment
         if (!isDirective && (preamble || postamble)) {
@@ -30500,7 +30524,7 @@ module.exports = function(context) {
 
 module.exports.schema = [];
 
-},{}],237:[function(require,module,exports){
+},{"../ast-utils":149}],237:[function(require,module,exports){
 /**
  * @fileoverview Rule to enforce declarations in program or function body root.
  * @author Brandon Mills
@@ -33502,6 +33526,8 @@ module.exports.schema = [
 
 module.exports = function(context) {
 
+    var sourceCode = context.getSourceCode();
+
     /**
      * Check if open space is present in a function name
      * @param {ASTNode} node node to evaluate
@@ -33509,18 +33535,29 @@ module.exports = function(context) {
      * @private
      */
     function detectOpenSpaces(node) {
-        var lastCalleeToken = context.getLastToken(node.callee);
-        var tokens = context.getTokens(node);
-        var i = tokens.indexOf(lastCalleeToken), l = tokens.length;
+        var lastCalleeToken = sourceCode.getLastToken(node.callee),
+            tokens = sourceCode.getTokens(node),
+            i = tokens.indexOf(lastCalleeToken),
+            l = tokens.length;
+
         while (i < l && tokens[i].value !== "(") {
             ++i;
         }
+
         if (i >= l) {
             return;
         }
+
         // look for a space between the callee and the open paren
-        if (tokens[i - 1].range[1] !== tokens[i].range[0]) {
-            context.report(node, lastCalleeToken.loc.start, "Unexpected space between function name and paren.");
+        if (sourceCode.isSpaceBetweenTokens(tokens[i - 1], tokens[i])) {
+            context.report({
+                node: node,
+                loc: lastCalleeToken.loc.start,
+                message: "Unexpected space between function name and paren.",
+                fix: function(fixer) {
+                    return fixer.removeRange([tokens[i - 1].range[1], tokens[i].range[0]]);
+                }
+            });
         }
     }
 
@@ -33865,6 +33902,27 @@ module.exports = function(context) {
     var options = context.options[0] || {},
         skipBlankLines = options.skipBlankLines || false;
 
+    /**
+     * Report the error message
+     * @param {ASTNode} node node to report
+     * @param {int[]} location range information
+     * @param {int[]} fixRange Range based on the whole program
+     * @returns {void}
+     */
+    function report(node, location, fixRange) {
+        // Passing node is a bit dirty, because message data will contain
+        // big text in `source`. But... who cares :) ?
+        // One more kludge will not make worse the bloody wizardry of this plugin.
+        context.report({
+            node: node,
+            loc: location,
+            message: "Trailing spaces not allowed.",
+            fix: function(fixer) {
+                return fixer.removeRange(fixRange);
+            }
+        });
+    }
+
 
     //--------------------------------------------------------------------------
     // Public
@@ -33880,10 +33938,12 @@ module.exports = function(context) {
             var src = context.getSource(),
                 re = new RegExp(NONBLANK),
                 skipMatch = new RegExp(SKIP_BLANK),
-                matches, lines = src.split(/\r?\n/), location;
+                matches, lines = src.split(/\r?\n/),
+                location,
+                totalLength = 0,
+                fixRange = [];
 
             for (var i = 0, ii = lines.length; i < ii; i++) {
-
                 matches = re.exec(lines[i]);
                 if (matches) {
 
@@ -33897,11 +33957,16 @@ module.exports = function(context) {
                         column: matches.index
                     };
 
-                    // Passing node is a bit dirty, because message data will contain
-                    // big text in `source`. But... who cares :) ?
-                    // One more kludge will not make worse the bloody wizardry of this plugin.
-                    context.report(node, location, "Trailing spaces not allowed.");
+                    if (i === ii - 1) {
+                        fixRange = [totalLength + location.column + 1, totalLength + lines[i].length + 1];
+                    } else {
+                        fixRange = [totalLength + location.column, totalLength + lines[i].length];
+                    }
+
+                    report(node, location, fixRange);
                 }
+
+                totalLength += lines[i].length;
             }
         }
 
@@ -34643,10 +34708,10 @@ module.exports = function(context) {
      */
     function isUsedVariable(variable, references) {
         var functionNodes = variable.defs.filter(function(def) {
-            return def.type === "FunctionName";
-        }).map(function(def) {
-            return def.node;
-        }),
+                return def.type === "FunctionName";
+            }).map(function(def) {
+                return def.node;
+            }),
             isFunctionDefinition = functionNodes.length > 0;
 
         return references.some(function(ref) {
@@ -35242,6 +35307,8 @@ module.exports.schema = [];
 
 "use strict";
 
+var astUtils = require("../ast-utils");
+
 //------------------------------------------------------------------------------
 // Rule Definition
 //------------------------------------------------------------------------------
@@ -35251,6 +35318,7 @@ module.exports = function(context) {
     var configuration = context.options[0] || {},
         warningTerms = configuration.terms || ["todo", "fixme", "xxx"],
         location = configuration.location || "start",
+        selfConfigRegEx = /\bno-warning-comments\b/,
         warningRegExps;
 
     /**
@@ -35306,6 +35374,10 @@ module.exports = function(context) {
      * @returns {void} undefined.
      */
     function checkComment(node) {
+        if (astUtils.isDirectiveComment(node) && selfConfigRegEx.test(node.value)) {
+            return;
+        }
+
         var matches = commentContainsWarningTerm(node.value);
 
         matches.forEach(function(matchedTerm) {
@@ -35338,7 +35410,7 @@ module.exports.schema = [
     }
 ];
 
-},{}],301:[function(require,module,exports){
+},{"../ast-utils":149}],301:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag use of with statement
  * @author Nicholas C. Zakas
@@ -35382,7 +35454,8 @@ var astUtils = require("../ast-utils");
 //------------------------------------------------------------------------------
 
 module.exports = function(context) {
-    var spaced = context.options[0] === "always";
+    var spaced = context.options[0] === "always",
+        sourceCode = context.getSourceCode();
 
     /**
      * Determines whether an option is set, relative to the spacing option.
@@ -35466,7 +35539,7 @@ module.exports = function(context) {
             firstSpaced, lastSpaced;
 
         if (astUtils.isTokenOnSameLine(first, second)) {
-            firstSpaced = astUtils.isTokenSpaced(first, second);
+            firstSpaced = sourceCode.isSpaceBetweenTokens(first, second);
             if (options.spaced && !firstSpaced) {
                 reportRequiredBeginningSpace(node, first);
             }
@@ -35476,7 +35549,7 @@ module.exports = function(context) {
         }
 
         if (astUtils.isTokenOnSameLine(penultimate, last)) {
-            lastSpaced = astUtils.isTokenSpaced(penultimate, last);
+            lastSpaced = sourceCode.isSpaceBetweenTokens(penultimate, last);
             if (closingCurlyBraceMustBeSpaced && !lastSpaced) {
                 reportRequiredEndingSpace(node, last);
             }
@@ -35496,8 +35569,7 @@ module.exports = function(context) {
             return;
         }
 
-        var sourceCode = context.getSourceCode(),
-            first = sourceCode.getFirstToken(node),
+        var first = sourceCode.getFirstToken(node),
             last = sourceCode.getLastToken(node),
             second = sourceCode.getTokenAfter(first),
             penultimate = sourceCode.getTokenBefore(last);
@@ -35515,8 +35587,7 @@ module.exports = function(context) {
             return;
         }
 
-        var sourceCode = context.getSourceCode(),
-            firstSpecifier = node.specifiers[0],
+        var firstSpecifier = node.specifiers[0],
             lastSpecifier = node.specifiers[node.specifiers.length - 1];
 
         if (lastSpecifier.type !== "ImportSpecifier") {
@@ -35550,8 +35621,7 @@ module.exports = function(context) {
             return;
         }
 
-        var sourceCode = context.getSourceCode(),
-            firstSpecifier = node.specifiers[0],
+        var firstSpecifier = node.specifiers[0],
             lastSpecifier = node.specifiers[node.specifiers.length - 1],
             first = sourceCode.getTokenBefore(firstSpecifier),
             last = sourceCode.getTokenAfter(lastSpecifier);
@@ -37153,7 +37223,7 @@ module.exports.schema = {
     ]
 };
 
-},{"../util/keywords":341,"espree":"espree"}],314:[function(require,module,exports){
+},{"../util/keywords":342,"espree":"espree"}],314:[function(require,module,exports){
 /**
  * @fileoverview A rule to choose between single and double quote marks
  * @author Matt DuVall <http://www.mattduvall.com/>, Brandon Payton
@@ -37506,7 +37576,8 @@ module.exports = function(context) {
 
     var config = context.options[0],
         requireSpaceBefore = false,
-        requireSpaceAfter = true;
+        requireSpaceAfter = true,
+        sourceCode = context.getSourceCode();
 
     if (typeof config === "object") {
         if (config.hasOwnProperty("before")) {
@@ -37524,7 +37595,7 @@ module.exports = function(context) {
      */
     function hasLeadingSpace(token) {
         var tokenBefore = context.getTokenBefore(token);
-        return tokenBefore && astUtils.isTokenOnSameLine(tokenBefore, token) && astUtils.isTokenSpaced(tokenBefore, token);
+        return tokenBefore && astUtils.isTokenOnSameLine(tokenBefore, token) && sourceCode.isSpaceBetweenTokens(tokenBefore, token);
     }
 
     /**
@@ -37534,7 +37605,7 @@ module.exports = function(context) {
      */
     function hasTrailingSpace(token) {
         var tokenAfter = context.getTokenAfter(token);
-        return tokenAfter && astUtils.isTokenOnSameLine(token, tokenAfter) && astUtils.isTokenSpaced(token, tokenAfter);
+        return tokenAfter && astUtils.isTokenOnSameLine(token, tokenAfter) && sourceCode.isSpaceBetweenTokens(token, tokenAfter);
     }
 
     /**
@@ -37545,6 +37616,30 @@ module.exports = function(context) {
     function isLastTokenInCurrentLine(token) {
         var tokenAfter = context.getTokenAfter(token);
         return !(tokenAfter && astUtils.isTokenOnSameLine(token, tokenAfter));
+    }
+
+    /**
+     * Checks if the given token is the first token in its line
+     * @param {Token} token The token to check.
+     * @returns {boolean} Whether or not the token is the first in its line.
+     */
+    function isFirstTokenInCurrentLine(token) {
+        var tokenBefore = context.getTokenBefore(token);
+        return !(tokenBefore && astUtils.isTokenOnSameLine(token, tokenBefore));
+    }
+
+    /**
+     * Checks if the next token of a given token is a closing parenthesis.
+     * @param {Token} token The token to check.
+     * @returns {boolean} Whether or not the next token of a given token is a closing parenthesis.
+     */
+    function isBeforeClosingParen(token) {
+        var nextToken = context.getTokenAfter(token);
+        return (
+            nextToken &&
+            nextToken.type === "Punctuator" &&
+            (nextToken.value === "}" || nextToken.value === ")")
+        );
     }
 
     /**
@@ -37578,7 +37673,7 @@ module.exports = function(context) {
                 }
             }
 
-            if (!isLastTokenInCurrentLine(token)) {
+            if (!isFirstTokenInCurrentLine(token) && !isLastTokenInCurrentLine(token) && !isBeforeClosingParen(token)) {
                 if (hasTrailingSpace(token)) {
                     if (!requireSpaceAfter) {
                         context.report(node, location, "Unexpected whitespace after semicolon.");
@@ -37892,13 +37987,35 @@ module.exports = function(context) {
             value = left.value;
 
         if (hasSpace !== requiresSpace) {
-            context.report(node, "Keyword \"{{value}}\" must {{not}}be followed by whitespace.", {
-                value: value,
-                not: requiresSpace ? "" : "not "
+            context.report({
+                node: node,
+                message: "Keyword \"{{value}}\" must {{not}}be followed by whitespace.",
+                data: {
+                    value: value,
+                    not: requiresSpace ? "" : "not "
+                },
+                fix: function(fixer) {
+                    if (requiresSpace) {
+                        return fixer.insertTextAfter(left, " ");
+                    } else {
+                        return fixer.removeRange([left.range[1], right.range[0]]);
+                    }
+                }
             });
         } else if (left.loc.end.line !== right.loc.start.line) {
-            context.report(node, "Keyword \"{{value}}\" must not be followed by a newline.", {
-                value: value
+            context.report({
+                node: node,
+                message: "Keyword \"{{value}}\" must not be followed by a newline.",
+                data: {
+                    value: value
+                },
+                fix: function(fixer) {
+                    var text = "";
+                    if (requiresSpace) {
+                        text = " ";
+                    }
+                    return fixer.replaceTextRange([left.range[1], right.range[0]], text);
+                }
             });
         }
     }
@@ -37966,7 +38083,28 @@ var astUtils = require("../ast-utils");
 //------------------------------------------------------------------------------
 
 module.exports = function(context) {
-    var requireSpace = context.options[0] !== "never";
+    var config = context.options[0],
+        sourceCode = context.getSourceCode(),
+        checkFunctions = true,
+        checkKeywords = true;
+
+    if (typeof config === "object") {
+        checkFunctions = config.functions !== "never";
+        checkKeywords = config.keywords !== "never";
+    } else if (config === "never") {
+        checkFunctions = false;
+        checkKeywords = false;
+    }
+
+    /**
+     * Checks whether or not a given token is an arrow operator (=>).
+     *
+     * @param {Token} token - A token to check.
+     * @returns {boolean} `true` if the token is an arrow operator.
+     */
+    function isArrow(token) {
+        return token.type === "Punctuator" && token.value === "=>";
+    }
 
     /**
      * Checks the given BlockStatement node has a preceding space if it doesn’t start on a new line.
@@ -37975,18 +38113,38 @@ module.exports = function(context) {
      */
     function checkPrecedingSpace(node) {
         var precedingToken = context.getTokenBefore(node),
-            hasSpace;
+            hasSpace,
+            parent,
+            requireSpace;
 
-        if (precedingToken && astUtils.isTokenOnSameLine(precedingToken, node)) {
-            hasSpace = astUtils.isTokenSpaced(precedingToken, node);
+        if (precedingToken && !isArrow(precedingToken) && astUtils.isTokenOnSameLine(precedingToken, node)) {
+            hasSpace = sourceCode.isSpaceBetweenTokens(precedingToken, node);
+            parent = context.getAncestors().pop();
+            if (parent.type === "FunctionExpression" || parent.type === "FunctionDeclaration") {
+                requireSpace = checkFunctions;
+            } else {
+                requireSpace = checkKeywords;
+            }
 
             if (requireSpace) {
                 if (!hasSpace) {
-                    context.report(node, "Missing space before opening brace.");
+                    context.report({
+                        node: node,
+                        message: "Missing space before opening brace.",
+                        fix: function(fixer) {
+                            return fixer.insertTextBefore(node, " ");
+                        }
+                    });
                 }
             } else {
                 if (hasSpace) {
-                    context.report(node, "Unexpected space before opening brace.");
+                    context.report({
+                        node: node,
+                        message: "Unexpected space before opening brace.",
+                        fix: function(fixer) {
+                            return fixer.removeRange([precedingToken.range[1], node.range[0]]);
+                        }
+                    });
                 }
             }
         }
@@ -38022,7 +38180,23 @@ module.exports = function(context) {
 
 module.exports.schema = [
     {
-        "enum": ["always", "never"]
+        "oneOf": [
+            {
+                "enum": ["always", "never"]
+            },
+            {
+                "type": "object",
+                "properties": {
+                    "keywords": {
+                        "enum": ["always", "never"]
+                    },
+                    "functions": {
+                        "enum": ["always", "never"]
+                    }
+                },
+                "additionalProperties": false
+            }
+        ]
     }
 ];
 
@@ -38031,6 +38205,7 @@ module.exports.schema = [
  * @fileoverview Rule to validate spacing before function paren.
  * @author Mathias Schreck <https://github.com/lo1tuma>
  * @copyright 2015 Mathias Schreck
+ * See LICENSE in root directory for full license.
  */
 "use strict";
 
@@ -38041,6 +38216,7 @@ module.exports.schema = [
 module.exports = function(context) {
 
     var configuration = context.options[0],
+        sourceCode = context.getSourceCode(),
         requireAnonymousFunctionSpacing = true,
         requireNamedFunctionSpacing = true;
 
@@ -38050,16 +38226,6 @@ module.exports = function(context) {
     } else if (configuration === "never") {
         requireAnonymousFunctionSpacing = false;
         requireNamedFunctionSpacing = false;
-    }
-
-    /**
-     * Determines whether two adjacent tokens are have whitespace between them.
-     * @param {Object} left - The left token object.
-     * @param {Object} right - The right token object.
-     * @returns {boolean} Whether or not there is space between the tokens.
-     */
-    function isSpaced(left, right) {
-        return left.range[1] < right.range[0];
     }
 
     /**
@@ -38128,13 +38294,27 @@ module.exports = function(context) {
 
         location = leftToken.loc.end;
 
-        if (isSpaced(leftToken, rightToken)) {
+        if (sourceCode.isSpaceBetweenTokens(leftToken, rightToken)) {
             if ((isNamed && !requireNamedFunctionSpacing) || (!isNamed && !requireAnonymousFunctionSpacing)) {
-                context.report(node, location, "Unexpected space before function parentheses.");
+                context.report({
+                    node: node,
+                    loc: location,
+                    message: "Unexpected space before function parentheses.",
+                    fix: function(fixer) {
+                        return fixer.removeRange([leftToken.range[1], rightToken.range[0]]);
+                    }
+                });
             }
         } else {
             if ((isNamed && requireNamedFunctionSpacing) || (!isNamed && requireAnonymousFunctionSpacing)) {
-                context.report(node, location, "Missing space before function parentheses.");
+                context.report({
+                    node: node,
+                    loc: location,
+                    message: "Missing space before function parentheses.",
+                    fix: function(fixer) {
+                        return fixer.insertTextAfter(leftToken, " ");
+                    }
+                });
             }
         }
     }
@@ -38187,11 +38367,36 @@ var ERROR_MSG_NO_SPACE_EXPECTED = "Unexpected space before keyword \"{{keyword}}
 
 module.exports = function(context) {
 
+    var sourceCode = context.getSourceCode();
+
     var SPACE_REQUIRED = context.options[0] !== "never";
 
     //--------------------------------------------------------------------------
     // Helpers
     //--------------------------------------------------------------------------
+
+    /**
+     * Report the error message
+     * @param {ASTNode} node node to report
+     * @param {string} message Error message to be displayed
+     * @param {object} data Data object for the rule message
+     * @returns {void}
+     */
+    function report(node, message, data) {
+        context.report({
+            node: node,
+            message: message,
+            data: data,
+            fix: function(fixer) {
+                if (SPACE_REQUIRED) {
+                    return fixer.insertTextBefore(node, " ");
+                } else {
+                    var tokenBefore = context.getTokenBefore(node);
+                    return fixer.removeRange([tokenBefore.range[1], node.range[0]]);
+                }
+            }
+        });
+    }
 
     /**
      * Check if a token meets the criteria
@@ -38220,7 +38425,7 @@ module.exports = function(context) {
         options.allowedPrecedingChars = options.allowedPrecedingChars || [];
         options.requireSpace = typeof options.requireSpace === "undefined" ? SPACE_REQUIRED : options.requireSpace;
 
-        var hasSpace = astUtils.isTokenSpaced(left, right);
+        var hasSpace = sourceCode.isSpaceBetweenTokens(left, right);
         var spaceOk = hasSpace === options.requireSpace;
 
         if (spaceOk) {
@@ -38229,13 +38434,13 @@ module.exports = function(context) {
 
         if (!astUtils.isTokenOnSameLine(left, right)) {
             if (!options.requireSpace) {
-                context.report(node, ERROR_MSG_NO_SPACE_EXPECTED, { keyword: right.value });
+                report(node, ERROR_MSG_NO_SPACE_EXPECTED, { keyword: right.value });
             }
             return;
         }
 
         if (!options.requireSpace) {
-            context.report(node, ERROR_MSG_NO_SPACE_EXPECTED, { keyword: right.value });
+            report(node, ERROR_MSG_NO_SPACE_EXPECTED, { keyword: right.value });
             return;
         }
 
@@ -38243,7 +38448,7 @@ module.exports = function(context) {
             return;
         }
 
-        context.report(node, ERROR_MSG_SPACE_EXPECTED, { keyword: right.value });
+        report(node, ERROR_MSG_SPACE_EXPECTED, { keyword: right.value });
 
     }
 
@@ -38324,14 +38529,18 @@ module.exports = function(context) {
         "FunctionExpression": function(node) {
 
             var left = context.getTokenBefore(node);
-            var right = null;
 
-            if (left.type === "Identifier") {
-                right = left;
-                left = context.getTokenBefore(node, 1);
-            } else {
-                right = context.getFirstToken(node);
+            // Check to see if the function expression is a class method
+            if (node.parent && node.parent.type === "MethodDefinition") {
+                return;
             }
+
+            // Check to see if the function expression is an object literal shorthand method
+            if (node.parent && node.parent.method && node.parent.type === "Property") {
+                return;
+            }
+
+            var right = context.getFirstToken(node);
 
             checkTokens(node, left, right, { allowedPrecedingChars: [ "(" ] });
         },
@@ -38340,7 +38549,13 @@ module.exports = function(context) {
         },
         "ForOfStatement": check,
         "ClassBody": function(node) {
-            check(context.getTokenBefore(node, 1));
+
+            // Find the 'class' token
+            while (node.value !== "class") {
+                node = context.getTokenBefore(node);
+            }
+
+            check(node);
         },
         "Super": check
 
@@ -38697,7 +38912,28 @@ module.exports = function(context) {
      * @private
      */
     function report(mainNode, culpritToken) {
-        context.report(mainNode, culpritToken.loc.start, "Infix operators must be spaced.");
+        context.report({
+            node: mainNode,
+            loc: culpritToken.loc.start,
+            message: "Infix operators must be spaced.",
+            fix: function(fixer) {
+                var previousToken = context.getTokenBefore(culpritToken);
+                var afterToken = context.getTokenAfter(culpritToken);
+                var fixString = "";
+
+                if (culpritToken.range[0] - previousToken.range[1] === 0) {
+                    fixString = " ";
+                }
+
+                fixString += culpritToken.value;
+
+                if (afterToken.range[0] - culpritToken.range[1] === 0) {
+                    fixString += " ";
+                }
+
+                return fixer.replaceText(culpritToken, fixString);
+            }
+        });
     }
 
     /**
@@ -38797,7 +39033,13 @@ module.exports = function(context) {
             value = tokens[0].value;
 
         if (tokens[0].range[1] >= tokens[1].range[0]) {
-            context.report(node, "Keyword \"" + value + "\" must be followed by whitespace.");
+            context.report({
+                node: node,
+                message: "Keyword \"" + value + "\" must be followed by whitespace.",
+                fix: function(fixer) {
+                    return fixer.insertTextAfterRange(tokens[0].range, " ");
+                }
+            });
         }
     }
 
@@ -40694,6 +40936,124 @@ exports.PLUGIN_NAME_PREFIX = PLUGIN_NAME_PREFIX;
 
 },{}],341:[function(require,module,exports){
 /**
+ * @fileoverview The event generator for comments.
+ * @author Toru Nagashima
+ * @copyright 2015 Toru Nagashima. All rights reserved.
+ * See LICENSE file in root directory for full license.
+ */
+
+"use strict";
+
+//------------------------------------------------------------------------------
+// Helpers
+//------------------------------------------------------------------------------
+
+/**
+ * Check collection of comments to prevent double event for comment as
+ * leading and trailing, then emit event if passing
+ * @param {ASTNode[]} comments - Collection of comment nodes
+ * @param {EventEmitter} emitter - The event emitter which is the destination of events.
+ * @param {Object[]} locs - List of locations of previous comment nodes
+ * @param {string} eventName - Event name postfix
+ * @returns {void}
+ */
+function emitComments(comments, emitter, locs, eventName) {
+    if (comments.length > 0) {
+        comments.forEach(function(node) {
+            var index = locs.indexOf(node.loc);
+            if (index >= 0) {
+                locs.splice(index, 1);
+            } else {
+                locs.push(node.loc);
+                emitter.emit(node.type + eventName, node);
+            }
+        });
+    }
+}
+
+/**
+ * Shortcut to check and emit enter of comment nodes
+ * @param {CommentEventGenerator} generator - A generator to emit.
+ * @param {ASTNode[]} comments - Collection of comment nodes
+ * @returns {void}
+ */
+function emitCommentsEnter(generator, comments) {
+    emitComments(
+        comments,
+        generator.emitter,
+        generator.commentLocsEnter,
+        "Comment");
+}
+
+/**
+ * Shortcut to check and emit exit of comment nodes
+ * @param {CommentEventGenerator} generator - A generator to emit.
+ * @param {ASTNode[]} comments Collection of comment nodes
+ * @returns {void}
+ */
+function emitCommentsExit(generator, comments) {
+    emitComments(
+        comments,
+        generator.emitter,
+        generator.commentLocsExit,
+        "Comment:exit");
+}
+
+//------------------------------------------------------------------------------
+// Public Interface
+//------------------------------------------------------------------------------
+
+/**
+ * The event generator for comments.
+ * This is the decorator pattern.
+ * This generates events of comments before/after events which are generated the original generator.
+ *
+ * @param {EventGenerator} originalEventGenerator - An event generator which is the decoration target.
+ * @param {SourceCode} sourceCode - A source code which has comments.
+ * @returns {CommentEventGenerator} new instance.
+ */
+function CommentEventGenerator(originalEventGenerator, sourceCode) {
+    this.original = originalEventGenerator;
+    this.emitter = originalEventGenerator.emitter;
+    this.sourceCode = sourceCode;
+    this.commentLocsEnter = [];
+    this.commentLocsExit = [];
+}
+
+CommentEventGenerator.prototype = {
+    constructor: CommentEventGenerator,
+
+    /**
+     * Emits an event of entering comments.
+     * @param {ASTNode} node - A node which was entered.
+     * @returns {void}
+     */
+    enterNode: function enterNode(node) {
+        var comments = this.sourceCode.getComments(node);
+
+        emitCommentsEnter(this, comments.leading);
+        this.original.enterNode(node);
+        emitCommentsEnter(this, comments.trailing);
+    },
+
+    /**
+     * Emits an event of leaving comments.
+     * @param {ASTNode} node - A node which was left.
+     * @returns {void}
+     */
+    leaveNode: function leaveNode(node) {
+        var comments = this.sourceCode.getComments(node);
+
+        emitCommentsExit(this, comments.trailing);
+        this.original.leaveNode(node);
+        emitCommentsExit(this, comments.leading);
+    }
+};
+
+module.exports = CommentEventGenerator;
+
+},{}],342:[function(require,module,exports){
+/**
  * @fileoverview A shared list of ES3 keywords.
  * @author Josh Perez
  * @copyright 2015 Jose Roberto Vidal. All rights reserved.
@@ -40762,7 +41122,64 @@ module.exports = [
     "with"
 ];
 
-},{}],342:[function(require,module,exports){
+},{}],343:[function(require,module,exports){
+/**
+ * @fileoverview The event generator for AST nodes.
+ * @author Toru Nagashima
+ * @copyright 2015 Toru Nagashima. All rights reserved.
+ * See LICENSE file in root directory for full license.
+ */
+
+"use strict";
+
+//------------------------------------------------------------------------------
+// Public Interface
+//------------------------------------------------------------------------------
+
+/**
+ * The event generator for AST nodes.
+ * This implements below interface.
+ *
+ * ```ts
+ * interface EventGenerator {
+ *     emitter: EventEmitter;
+ *     enterNode(node: ASTNode): void;
+ *     leaveNode(node: ASTNode): void;
+ * }
+ * ```
+ *
+ * @param {EventEmitter} emitter - An event emitter which is the destination of events.
+ * @returns {NodeEventGenerator} new instance.
+ */
+function NodeEventGenerator(emitter) {
+    this.emitter = emitter;
+}
+
+NodeEventGenerator.prototype = {
+    constructor: NodeEventGenerator,
+
+    /**
+     * Emits an event of entering AST node.
+     * @param {ASTNode} node - A node which was entered.
+     * @returns {void}
+     */
+    enterNode: function enterNode(node) {
+        this.emitter.emit(node.type, node);
+    },
+
+    /**
+     * Emits an event of leaving AST node.
+     * @param {ASTNode} node - A node which was left.
+     * @returns {void}
+     */
+    leaveNode: function leaveNode(node) {
+        this.emitter.emit(node.type + ":exit", node);
+    }
+};
+
+module.exports = NodeEventGenerator;
+
+},{}],344:[function(require,module,exports){
 /**
  * @fileoverview An object that creates fix commands for rules.
  * @author Nicholas C. Zakas
@@ -40911,7 +41328,7 @@ RuleFixer.prototype = {
 
 module.exports = RuleFixer;
 
-},{}],343:[function(require,module,exports){
+},{}],345:[function(require,module,exports){
 /**
  * @fileoverview Abstraction of JavaScript source code.
  * @author Nicholas C. Zakas
@@ -41028,12 +41445,6 @@ function SourceCode(text, ast) {
      * @type string[]
      */
     this.lines = text.split(/\r\n|\r|\n|\u2028|\u2029/g);
-
-    /**
-     * Fixes to be made later on.
-     * @type Object[]
-     */
-    this._fixes = [];
 
     // create token store methods
     var tokenStore = createTokenStore(ast.tokens);
@@ -41173,8 +41584,21 @@ SourceCode.prototype = {
         });
 
         return result;
-    }
+    },
 
+    /**
+     * Determines if two tokens have at least one whitespace character
+     * between them. This completely disregards comments in making the
+     * determination, so comments count as zero-length substrings.
+     * @param {Token} first The token to check after.
+     * @param {Token} second The token to check before.
+     * @returns {boolean} True if there is only space between tokens, false
+     *  if there is anything other than whitespace between tokens.
+     */
+    isSpaceBetweenTokens: function(first, second) {
+        var text = this.text.slice(first.range[1], second.range[0]);
+        return /\s/.test(text.replace(/\/\*.*?\*\//g, ""));
+    }
 };
 
 

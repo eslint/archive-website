@@ -203,6 +203,21 @@ The top-level report object has a `results` array containing all linting results
 
 Once you get a report object, it's up to you to determine how to output the results.
 
+### resolveFileGlobPatterns()
+
+You can pass filesystem-style or glob patterns to ESLint and have it function properly. In order to achieve this, ESLint must resolve non-glob patterns into glob patterns before determining which files to execute on. The `resolveFileGlobPatterns()` methods uses the current settings from `CLIEngine` to resolve non-glob patterns into glob patterns. Pass an array of patterns that might be passed to the ESLint CLI and it will return an array of glob patterns that mean the same thing. Here's an example:
+
+```js
+var CLIEngine = require("eslint").CLIEngine;
+
+var cli = new CLIEngine({
+});
+
+// pass an array of patterns
+var globPatterns = cli.resolveFileGlobPatterns(["."]);
+console.log(globPatterns[i]);       // ["**/*.js"]
+```
+
 ### getConfigForFile()
 
 If you want to retrieve a configuration object for a given file, use the `getConfigForFile()` method. This method accepts one argument, a file path, and returns an object represented the calculated configuration of the file. Here's an example:
@@ -302,7 +317,19 @@ var isIgnored = cli.isPathIgnored("foo/bar.js");
 
 ### getFormatter()
 
-Retrieves a formatter, which you can then use to format a report object. The argument is either the name of a built-in formatter ("stylish" (the default), "checkstyle", "compact", "html", "jslint-xml", "junit", "json", "tap", and "unix") or the full path to a JavaScript file containing a custom formatter. You can also omit the argument to retrieve the default formatter.
+Retrieves a formatter, which you can then use to format a report object. The argument is either the name of a built-in formatter:
+
+* "[stylish](./user-guide/formatters#stylish)" (the default)
+* "[checkstyle](./user-guide/formatters#checkstyle)"
+* "[compact](./user-guide/formatters#compact)"
+* "[html](./user-guide/formatters#html)"
+* "[jslint-xml](./user-guide/formatters#jslint-xml)"
+* "[json](./user-guide/formatters#json)"
+* "[junit](./user-guide/formatters#junit)"
+* "[tap](./user-guide/formatters#tap)"
+* "[unix](./user-guide/formatters#unix)"
+
+or the full path to a JavaScript file containing a custom formatter. You can also omit the argument to retrieve the default formatter.
 
 ```js
 var CLIEngine = require("eslint").CLIEngine;

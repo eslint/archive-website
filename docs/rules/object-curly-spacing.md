@@ -46,7 +46,7 @@ Depending on your coding conventions, you can choose either option by specifying
 
 #### never
 
-When `"never"` is set, the following patterns are considered warnings:
+When `"never"` is set, the following patterns are considered problems:
 
 ```js
 /*eslint object-curly-spacing: [2, "never"]*/
@@ -59,7 +59,7 @@ var {x } = y;                                                                   
 import { foo } from 'bar';             /*error There should be no space after '{'*/ /*error There should be no space before '}'*/
 ```
 
-The following patterns are not warnings:
+The following patterns are not considered problems:
 
 ```js
 /*eslint object-curly-spacing: [2, "never"]*/
@@ -80,7 +80,7 @@ import {foo} from 'bar';
 
 #### always
 
-When `"always"` is used, the following patterns are considered warnings:
+When `"always"` is used, the following patterns are considered problems:
 
 ```js
 /*eslint object-curly-spacing: [2, "always"]*/
@@ -97,7 +97,7 @@ var {x} = y;                            /*error A space is required after '{'*/ 
 import {foo } from 'bar';               /*error A space is required after '{'*/
 ```
 
-The following patterns are not warnings:
+The following patterns are not considered problems:
 
 ```js
 /*eslint object-curly-spacing: [2, "always"]*/

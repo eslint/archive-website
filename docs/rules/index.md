@@ -27,7 +27,7 @@ The following rules point out areas where you might have made mistakes.
 * [no-ex-assign](no-ex-assign) - disallow assigning to the exception in a `catch` block (recommended)
 * [no-extra-boolean-cast](no-extra-boolean-cast) - disallow double-negation boolean casts in a boolean context (recommended)
 * [no-extra-parens](no-extra-parens) - disallow unnecessary parentheses
-* [no-extra-semi](no-extra-semi) - disallow unnecessary semicolons (recommended)
+* [no-extra-semi](no-extra-semi) - disallow unnecessary semicolons (recommended) (fixable)
 * [no-func-assign](no-func-assign) - disallow overwriting functions written as function declarations (recommended)
 * [no-inner-declarations](no-inner-declarations) - disallow function or variable declarations in nested blocks (recommended)
 * [no-invalid-regexp](no-invalid-regexp) - disallow invalid regular expression strings in the `RegExp` constructor (recommended)
@@ -150,12 +150,12 @@ These rules are purely matters of style and are quite subjective.
 * [comma-style](comma-style) - enforce one true comma style
 * [computed-property-spacing](computed-property-spacing) - require or disallow padding inside computed properties
 * [consistent-this](consistent-this) - enforce consistent naming when capturing the current execution context
-* [eol-last](eol-last) - enforce newline at the end of file, with no multiple empty lines
+* [eol-last](eol-last) - enforce newline at the end of file, with no multiple empty lines (fixable)
 * [func-names](func-names) - require function expressions to have a name
 * [func-style](func-style) - enforce use of function declarations or expressions
 * [id-length](id-length) - this option enforces minimum and maximum identifier lengths (variable names, property names etc.)
 * [id-match](id-match) - require identifiers to match the provided regular expression
-* [indent](indent) - specify tab or space width for your code
+* [indent](indent) - specify tab or space width for your code (fixable)
 * [jsx-quotes](jsx-quotes) - specify whether double or single quotes should be used in JSX attributes
 * [key-spacing](key-spacing) - enforce spacing between keys and values in object literal properties
 * [lines-around-comment](lines-around-comment) - enforce empty lines around comments
@@ -173,9 +173,9 @@ These rules are purely matters of style and are quite subjective.
 * [no-nested-ternary](no-nested-ternary) - disallow nested ternary expressions
 * [no-new-object](no-new-object) - disallow the use of the `Object` constructor
 * [no-restricted-syntax](no-restricted-syntax) - disallow use of certain syntax in code
-* [no-spaced-func](no-spaced-func) - disallow space between function identifier and application
+* [no-spaced-func](no-spaced-func) - disallow space between function identifier and application (fixable)
 * [no-ternary](no-ternary) - disallow the use of ternary operators
-* [no-trailing-spaces](no-trailing-spaces) - disallow trailing whitespace at the end of lines
+* [no-trailing-spaces](no-trailing-spaces) - disallow trailing whitespace at the end of lines (fixable)
 * [no-underscore-dangle](no-underscore-dangle) - disallow dangling underscores in identifiers
 * [no-unneeded-ternary](no-unneeded-ternary) - disallow the use of ternary operators when a simpler alternative exists
 * [object-curly-spacing](object-curly-spacing) - require or disallow padding inside curly braces
@@ -189,13 +189,13 @@ These rules are purely matters of style and are quite subjective.
 * [semi-spacing](semi-spacing) - enforce spacing before and after semicolons
 * [semi](semi) - require or disallow use of semicolons instead of ASI (fixable)
 * [sort-vars](sort-vars) - sort variables within the same declaration block
-* [space-after-keywords](space-after-keywords) - require a space after certain keywords
-* [space-before-keywords](space-before-keywords) - require a space before certain keywords
-* [space-before-blocks](space-before-blocks) - require or disallow a space before blocks
-* [space-before-function-paren](space-before-function-paren) - require or disallow a space before function opening parenthesis
+* [space-after-keywords](space-after-keywords) - require a space after certain keywords (fixable)
+* [space-before-keywords](space-before-keywords) - require a space before certain keywords (fixable)
+* [space-before-blocks](space-before-blocks) - require or disallow a space before blocks (fixable)
+* [space-before-function-paren](space-before-function-paren) - require or disallow a space before function opening parenthesis (fixable)
 * [space-in-parens](space-in-parens) - require or disallow spaces inside parentheses
-* [space-infix-ops](space-infix-ops) - require spaces around operators
-* [space-return-throw-case](space-return-throw-case) - require a space after `return`, `throw`, and `case`
+* [space-infix-ops](space-infix-ops) - require spaces around operators (fixable)
+* [space-return-throw-case](space-return-throw-case) - require a space after `return`, `throw`, and `case` (fixable)
 * [space-unary-ops](space-unary-ops) - require or disallow spaces before/after unary operators
 * [spaced-comment](spaced-comment) - require or disallow a space immediately following the `//` or `/*` in a comment
 * [wrap-regex](wrap-regex) - require regex literals to be wrapped in parentheses

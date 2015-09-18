@@ -31,7 +31,7 @@ if (foo) {
 
 This rule warns when an `if` statement's `else` block contains only another `if` statement.
 
-The following patterns are considered warnings:
+The following patterns are considered problems:
 
 ```js
 /*eslint no-lonely-if: 2*/
@@ -43,9 +43,19 @@ if (condition) {
         // ...
     }
 }
+
+if (condition) {
+    // ...
+} else {
+    if (anotherCondition) { /*error Unexpected if as the only statement in an else block.*/
+        // ...
+    } else {
+        // ...
+    }
+}
 ```
 
-The following patterns are not considered warnings:
+The following patterns are not considered problems:
 
 ```js
 /*eslint no-lonely-if: 2*/
@@ -53,6 +63,14 @@ The following patterns are not considered warnings:
 if (condition) {
     // ...
 } else if (anotherCondition) {
+    // ...
+}
+
+if (condition) {
+    // ...
+} else if (anotherCondition) {
+    // ...
+} else {
     // ...
 }
 

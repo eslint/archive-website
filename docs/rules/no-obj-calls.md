@@ -15,7 +15,7 @@ The [ECMAScript 5 specification](http://es5.github.io/#x15.8) makes it clear tha
 
 This rule is aimed at preventing the accidental calling of global objects as functions.
 
-The following patterns are considered warnings:
+The following patterns are considered problems:
 
 ```js
 /*eslint no-obj-calls: 2*/
@@ -24,7 +24,7 @@ var x = Math(); /*error 'Math' is not a function.*/
 var y = JSON(); /*error 'JSON' is not a function.*/
 ```
 
-The following patterns are not considered warnings:
+The following patterns are not considered problems:
 
 ```js
 /*eslint no-obj-calls: 2*/

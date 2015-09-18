@@ -31,7 +31,7 @@ if(('' + !a) in b) {
 }
 ```
 
-The following patterns are considered warnings:
+The following patterns are considered problems:
 
 ```js
 /*eslint no-negated-in-lhs: 2*/
@@ -41,7 +41,7 @@ if(!a in b) {       /*error The `in` expression's left operand is negated*/
 }
 ```
 
-The following patterns are not considered warnings:
+The following patterns are not considered problems:
 
 ```js
 /*eslint no-negated-in-lhs: 2*/

@@ -12,7 +12,7 @@ Labeled statements are only used in conjunction with labeled break and continue 
 
 This error occurs when a label is used to mark a statement that is not an iteration or switch
 
-The following patterns are considered warnings:
+The following patterns are considered problems:
 
 ```js
 /*eslint no-empty-label: 2*/
@@ -21,7 +21,7 @@ labeled:     /*error Unexpected label "labeled"*/
 var x = 10;
 ```
 
-The following patterns are not considered warnings:
+The following patterns are not considered problems:
 
 ```js
 /*eslint no-empty-label: 2*/

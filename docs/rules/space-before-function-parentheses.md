@@ -33,7 +33,7 @@ This rule takes one argument. If it is `"always"` then all named functions and a
 
 The default configuration is `"always"`.
 
-The following patterns are considered warnings when configured `"always"`:
+The following patterns are considered problems when configured `"always"`:
 
 ```js
 function foo() {
@@ -61,7 +61,7 @@ var foo = {
 };
 ```
 
-The following patterns are not considered warnings when configured `"always"`:
+The following patterns are not considered problems when configured `"always"`:
 
 ```js
 function foo () {
@@ -89,7 +89,7 @@ var foo = {
 };
 ```
 
-The following patterns are considered warnings when configured `"never"`:
+The following patterns are considered problems when configured `"never"`:
 
 ```js
 function foo () {
@@ -117,7 +117,7 @@ var foo = {
 };
 ```
 
-The following patterns are not considered warnings when configured `"never"`:
+The following patterns are not considered problems when configured `"never"`:
 
 ```js
 function foo() {
@@ -145,7 +145,7 @@ var foo = {
 };
 ```
 
-The following patterns are considered warnings when configured `{"anonymous": "always", "named": "never"}`:
+The following patterns are considered problems when configured `{"anonymous": "always", "named": "never"}`:
 
 ```js
 function foo () {
@@ -169,7 +169,7 @@ var foo = {
 };
 ```
 
-The following patterns are not considered warnings when configured `{"anonymous": "always", "named": "never"}`:
+The following patterns are not considered problems when configured `{"anonymous": "always", "named": "never"}`:
 
 ```js
 function foo() {
@@ -193,7 +193,7 @@ var foo = {
 };
 ```
 
-The following patterns are considered warnings when configured `{"anonymous": "never", "named": "always"}`:
+The following patterns are considered problems when configured `{"anonymous": "never", "named": "always"}`:
 
 ```js
 function foo() {
@@ -217,7 +217,7 @@ var foo = {
 };
 ```
 
-The following patterns are not considered warnings when configured `{"anonymous": "never", "named": "always"}`:
+The following patterns are not considered problems when configured `{"anonymous": "never", "named": "always"}`:
 
 ```js
 function foo () {

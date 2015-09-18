@@ -23,6 +23,8 @@ This is the most common scenarios recommended in different style guides:
 * Tabs: jQuery
 * Four spaces: Crockford
 
+**Fixable:** This rule is automatically fixable using the `--fix` flag on the command line.
+
 ## Rule Details
 
 This rule is aimed to enforce consistent indentation style. The default style is `4 spaces`.
@@ -73,7 +75,7 @@ tabbed indentation
 "indent": [2, "tab"]
 ```
 
-The following patterns are considered warnings:
+The following patterns are considered problems:
 
 ```js
 /*eslint indent: [2, 2]*/
@@ -122,7 +124,7 @@ case "b":          /*error Expected indentation of 2 space characters but found 
 }
 ```
 
-The following patterns are not warnings:
+The following patterns are not considered problems:
 
 ```js
 /*eslint indent: [2, 2]*/

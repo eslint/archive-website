@@ -32,7 +32,7 @@ This rule aims to prevent invalid and incomplete JSDoc comments. In doing so, it
 1. A parameter has no associated `@param` in the JSDoc comment
 1. `@param`s are out of order with named arguments
 
-The following patterns are considered warnings:
+The following patterns are considered problems:
 
 ```js
 /*eslint valid-jsdoc: 2*/
@@ -94,7 +94,7 @@ function foo(a) {
 }
 ```
 
-The following patterns are not warnings:
+The following patterns are not considered problems:
 
 ```js
 /*eslint valid-jsdoc: 2*/

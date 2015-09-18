@@ -17,6 +17,8 @@ This string is a valid JavaScript expression, but isn't actually used. Even thou
 
 This rule aims to eliminate unused expressions. The value of an expression should always be used, except in the case of expressions that side effect: function calls, assignments, and the `new` operator.
 
+**Note:** Sequence expressions (those using a comma, such as `a = 1, b = 2`) are always considered unused unless their return value is assigned or a function call is made with the sequence expression value.
+
 ### Options
 
 This rule, in it's default state, does not require any arguments. If you would like to enable one or more of the following you may pass an object with the options set as follows:
@@ -26,7 +28,7 @@ This rule, in it's default state, does not require any arguments. If you would l
 
 ### Usage
 
-By default the following patterns are considered warnings:
+By default the following patterns are considered problems:
 
 ```js
 /*eslint no-unused-expressions: 2*/
@@ -40,9 +42,11 @@ if(0) 0  /*error Expected an assignment or function call and instead saw an expr
 f(0), {} /*error Expected an assignment or function call and instead saw an expression.*/
 
 a && b() /*error Expected an assignment or function call and instead saw an expression.*/
+
+a, b()   /*error Expected an assignment or function call and instead saw an expression.*/
 ```
 
-The following patterns are not considered warnings by default:
+The following patterns are not considered problems by default:
 
 ```js
 /*eslint no-unused-expressions: 2*/
@@ -58,9 +62,11 @@ new C
 delete a.b
 
 void a
+
+c = a, b;
 ```
 
-The following patterns are not considered warnings if `allowShortCircuit` is enabled:
+The following patterns are not considered problems if `allowShortCircuit` is enabled:
 
 ```js
 /*eslint no-unused-expressions: [2, { allowShortCircuit: true }]*/

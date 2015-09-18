@@ -50,7 +50,7 @@ This rule has three options.
 
 #### boolean
 
-The following patterns are considered warnings:
+The following patterns are considered problems:
 
 ```js
 /*eslint no-implicit-coercion: 2*/
@@ -61,7 +61,7 @@ var b = ~foo.indexOf("."); /*error use `foo.indexOf(".") !== -1` instead.*/
 
 ```
 
-The following patterns are not considered warnings:
+The following patterns are not considered problems:
 
 ```js
 /*eslint no-implicit-coercion: 2*/
@@ -74,7 +74,7 @@ var n = ~foo; // This is a just binary negating.
 
 #### number
 
-The following patterns are considered warnings:
+The following patterns are considered problems:
 
 ```js
 /*eslint no-implicit-coercion: 2*/
@@ -83,7 +83,7 @@ var n = +foo;    /*error use `Number(foo)` instead.*/
 var n = 1 * foo; /*error use `Number(foo)` instead.*/
 ```
 
-The following patterns are not considered warnings:
+The following patterns are not considered problems:
 
 ```js
 /*eslint no-implicit-coercion: 2*/
@@ -95,7 +95,7 @@ var b = parseInt(foo, 10);
 
 #### string
 
-The following patterns are considered warnings:
+The following patterns are considered problems:
 
 ```js
 /*eslint no-implicit-coercion: 2*/
@@ -103,7 +103,7 @@ The following patterns are considered warnings:
 var n = "" + foo; /*error use `String(foo)` instead.*/
 ```
 
-The following patterns are not considered warnings:
+The following patterns are not considered problems:
 
 ```js
 /*eslint no-implicit-coercion: 2*/
