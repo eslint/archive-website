@@ -44,6 +44,7 @@ if (foo) {
 ## Related Rules
 
 * [no-ternary](no-ternary)
+* [no-unneeded-ternary](no-unneeded-ternary)
 
 ## Version
 

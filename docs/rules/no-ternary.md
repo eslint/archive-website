@@ -60,6 +60,7 @@ function quux() {
 ## Related Rules
 
 * [no-nested-ternary](no-nested-ternary)
+* [no-unneeded-ternary](no-unneeded-ternary)
 
 ## Version
 

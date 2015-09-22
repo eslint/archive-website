@@ -9864,6 +9864,10 @@ function hasOwnProperty(obj, prop) {
                     name += scanIdentifier(last);
 
                 }
+                if(source.charCodeAt(index) === 0x5B  /* '[' */ && source.charCodeAt(index + 1) === 0x5D  /* ']' */){
+                    name += advance();
+                    name += advance();
+                }
                 while (source.charCodeAt(index) === 0x2E  /* '.' */ ||
                         source.charCodeAt(index) === 0x23  /* '#' */ ||
                         source.charCodeAt(index) === 0x7E  /* '~' */) {
@@ -10121,7 +10125,9 @@ function hasOwnProperty(obj, prop) {
             // un-fix potentially sloppy declaration
             if (isParamTitle(this._title) && !this._tag.type && description && description.charAt(0) === '[') {
                 this._tag.type = this._extra.name;
-                this._tag.name = undefined;
+                if (!this._tag.name) {
+                    this._tag.name = undefined;
+                }
 
                 if (!sloppy) {
                     if (!this.addError('Missing or invalid tag name')) {
@@ -10196,6 +10202,8 @@ function hasOwnProperty(obj, prop) {
             'this': ['parseNamePath', 'ensureEnd'],
             // http://usejsdoc.org/tags-todo.html
             'todo': ['parseDescription'],
+            // http://usejsdoc.org/tags-typedef.html
+            'typedef': ['parseType', 'parseNamePathOptional'],
             // http://usejsdoc.org/tags-variation.html
             'variation': ['parseVariation'],
             // http://usejsdoc.org/tags-version.html
@@ -10254,7 +10262,7 @@ function hasOwnProperty(obj, prop) {
         // Parse JSDoc
         //
 
-        function scanJSDocDescription() {
+        function scanJSDocDescription(preserveWhitespace) {
             var description = '', ch, atAllowed;
 
             atAllowed = true;
@@ -10273,7 +10281,8 @@ function hasOwnProperty(obj, prop) {
 
                 description += advance();
             }
-            return trim(description);
+
+            return preserveWhitespace ? description : trim(description);
         }
 
         function parse(comment, options) {
@@ -10312,7 +10321,7 @@ function hasOwnProperty(obj, prop) {
             sloppy = options.sloppy;
             strict = options.strict;
 
-            description = scanJSDocDescription();
+            description = scanJSDocDescription(options.preserveWhitespace);
 
             while (true) {
                 tag = parseTag(options);
@@ -12101,22 +12110,30 @@ module.exports={
   "description": "JSDoc parser",
   "homepage": "http://github.com/Constellation/doctrine.html",
   "main": "lib/doctrine.js",
-  "version": "0.6.4",
+  "version": "0.7.0",
   "engines": {
     "node": ">=0.10.0"
   },
   "directories": {
     "lib": "./lib"
   },
+  "files": [
+    "lib",
+    "LICENSE.BSD",
+    "LICENSE.closure-compiler",
+    "LICENSE.esprima",
+    "README.md"
+  ],
   "maintainers": [
     {
-      "name": "constellation",
-      "email": "utatane.tea@gmail.com"
+      "name": "Yusuke Suzuki",
+      "email": "utatane.tea@gmail.com",
+      "url": "http://github.com/Constellation"
     }
   ],
   "repository": {
     "type": "git",
-    "url": "http://github.com/Constellation/doctrine.git"
+    "url": "http://github.com/eslint/doctrine.git"
   },
   "devDependencies": {
     "coveralls": "^2.11.2",
@@ -12135,7 +12152,7 @@ module.exports={
   "licenses": [
     {
       "type": "BSD",
-      "url": "http://github.com/Constellation/doctrine/raw/master/LICENSE.BSD"
+      "url": "http://github.com/eslint/doctrine/raw/master/LICENSE.BSD"
     }
   ],
   "scripts": {
@@ -12148,24 +12165,15 @@ module.exports={
     "esutils": "^1.1.6",
     "isarray": "0.0.1"
   },
-  "gitHead": "0835299b485ecdfa908d20628d6c8900144590ff",
+  "readme": "[![NPM version][npm-image]][npm-url]\n[![build status][travis-image]][travis-url]\n[![Test coverage][coveralls-image]][coveralls-url]\n[![Downloads][downloads-image]][downloads-url]\n[![Join the chat at https://gitter.im/eslint/doctrine](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/eslint/doctrine?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)\n\n# Doctrine\n\nDoctrine is a [JSDoc](http://usejsdoc.org) parser that parses documentation comments from JavaScript (you need to pass in the comment, not a whole JavaScript file).\n\n## Installation\n\nYou can install Doctrine using [npm](https://npmjs.com):\n\n```\n$ npm install doctrine --save-dev\n```\n\nDoctrine can also be used in web browsers using [Browserify](http://browserify.org).\n\n## Usage\n\nRequire doctrine inside of your JavaScript:\n\n```js\nvar doctrine = require(\"doctrine\");\n```\n\n### parse()\n\nThe primary method is `parse()`, which accepts two arguments: the JSDoc comment to parse and an optional options object. The available options are:\n\n* `unwrap` - set to `true` to delete the leading `/**`, any `*` that begins a line, and the trailing `*/` from the source text. Default: `false`.\n* `tags` - an array of tags to return. When specified, Doctrine returns only tags in this array. For example, if `tags` is `[\"param\"]`, then only `@param` tags will be returned. Default: `null`.\n* `recoverable` - set to `true` to keep parsing even when syntax errors occur. Default: `false`.\n* `sloppy` - set to `true` to allow optional parameters to be specified in brackets (`@param {string} [foo]`). Default: `false`.\n* `lineNumberes` - set to `true` to add `lineNumber` to each node, specifying the line on which the node is found in the source. Default: `false`.\n\nHere's a simple example:\n\n```js\nvar ast = doctrine.parse(\n    [\n        \"/**\",\n        \" * This function comment is parsed by doctrine\",\n        \" * @param {{ok:String}} userName\",\n        \"*/\"\n    ].join('\\n'), { unwrap: true });\n```\n\nThis example returns the following AST:\n\n    {\n        \"description\": \"This function comment is parsed by doctrine\",\n        \"tags\": [\n            {\n                \"title\": \"param\",\n                \"description\": null,\n                \"type\": {\n                    \"type\": \"RecordType\",\n                    \"fields\": [\n                        {\n                            \"type\": \"FieldType\",\n                            \"key\": \"ok\",\n                            \"value\": {\n                                \"type\": \"NameExpression\",\n                                \"name\": \"String\"\n                            }\n                        }\n                    ]\n                },\n                \"name\": \"userName\"\n            }\n        ]\n    }\n\nSee the [demo page](http://eslint.org/doctrine/demo/) more detail.\n\n## Team\n\nThese folks keep the project moving and are resources for help:\n\n* Nicholas C. Zakas ([@nzakas](https://github.com/nzakas)) - project lead\n* Yusuke Suzuki ([@constellation](https://github.com/constellation)) - reviewer\n\n## Contributing\n\nIssues and pull requests will be triaged and responded to as quickly as possible. We operate under the [ESLint Contributor Guidelines](http://eslint.org/docs/developer-guide/contributing), so please be sure to read them before contributing. If you're not sure where to dig in, check out the [issues](https://github.com/eslint/doctrine/issues).\n\n## Frequently Asked Questions\n\n### Can I pass a whole JavaScript file to Doctrine?\n\nNo. Doctrine can only parse JSDoc comments, so you'll need to pass just the JSDoc comment to Doctrine in order to work.\n\n\n### License\n\n#### doctrine\n\nCopyright (C) 2012 [Yusuke Suzuki](http://github.com/Constellation)\n (twitter: [@Constellation](http://twitter.com/Constellation)) and other contributors.\n\nRedistribution and use in source and binary forms, with or without\nmodification, are permitted provided that the following conditions are met:\n\n  * Redistributions of source code must retain the above copyright\n    notice, this list of conditions and the following disclaimer.\n\n  * Redistributions in binary form must reproduce the above copyright\n    notice, this list of conditions and the following disclaimer in the\n    documentation and/or other materials provided with the distribution.\n\nTHIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS \"AS IS\"\nAND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE\nIMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE\nARE DISCLAIMED. IN NO EVENT SHALL <COPYRIGHT HOLDER> BE LIABLE FOR ANY\nDIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES\n(INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;\nLOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND\nON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT\n(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF\nTHIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n\n#### esprima\n\nsome of functions is derived from esprima\n\nCopyright (C) 2012, 2011 [Ariya Hidayat](http://ariya.ofilabs.com/about)\n (twitter: [@ariyahidayat](http://twitter.com/ariyahidayat)) and other contributors.\n\nRedistribution and use in source and binary forms, with or without\nmodification, are permitted provided that the following conditions are met:\n\n  * Redistributions of source code must retain the above copyright\n    notice, this list of conditions and the following disclaimer.\n\n  * Redistributions in binary form must reproduce the above copyright\n    notice, this list of conditions and the following disclaimer in the\n    documentation and/or other materials provided with the distribution.\n\nTHIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS \"AS IS\"\nAND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE\nIMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE\nARE DISCLAIMED. IN NO EVENT SHALL <COPYRIGHT HOLDER> BE LIABLE FOR ANY\nDIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES\n(INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;\nLOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND\nON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT\n(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF\nTHIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n\n\n#### closure-compiler\n\nsome of extensions is derived from closure-compiler\n\nApache License\nVersion 2.0, January 2004\nhttp://www.apache.org/licenses/\n\n\n### Where to ask for help?\n\nJoin our [Chatroom](https://gitter.im/eslint/doctrine)\n\n[npm-image]: https://img.shields.io/npm/v/doctrine.svg?style=flat-square\n[npm-url]: https://www.npmjs.com/package/doctrine\n[travis-image]: https://img.shields.io/travis/eslint/doctrine/master.svg?style=flat-square\n[travis-url]: https://travis-ci.org/eslint/doctrine\n[coveralls-image]: https://img.shields.io/coveralls/eslint/doctrine/master.svg?style=flat-square\n[coveralls-url]: https://coveralls.io/r/eslint/doctrine?branch=master\n[downloads-image]: http://img.shields.io/npm/dm/doctrine.svg?style=flat-square\n[downloads-url]: https://www.npmjs.com/package/doctrine\n",
+  "readmeFilename": "README.md",
+  "gitHead": "0d059e422bdfd630eaa15d583567c8668923f7e6",
   "bugs": {
-    "url": "https://github.com/Constellation/doctrine/issues"
+    "url": "https://github.com/eslint/doctrine/issues"
   },
-  "_id": "doctrine@0.6.4",
-  "_shasum": "81428491a942ef18b0492056eda3800eee57d61d",
-  "_from": "doctrine@^0.6.2",
-  "_npmVersion": "1.4.28",
-  "_npmUser": {
-    "name": "constellation",
-    "email": "utatane.tea@gmail.com"
-  },
-  "dist": {
-    "shasum": "81428491a942ef18b0492056eda3800eee57d61d",
-    "tarball": "http://registry.npmjs.org/doctrine/-/doctrine-0.6.4.tgz"
-  },
-  "_resolved": "https://registry.npmjs.org/doctrine/-/doctrine-0.6.4.tgz",
-  "readme": "ERROR: No README data found!"
+  "_id": "doctrine@0.7.0",
+  "_shasum": "dcc9589850b043d6e58abe24b561ccd57176cfd3",
+  "_from": "doctrine@^0.7.0"
 }
 
 },{}],22:[function(require,module,exports){
@@ -24710,32 +24718,52 @@ module.exports.schema = [];
 module.exports = function(context) {
 
     var style = context.options[0],
-        enforceDeclarations = (style === "declaration");
+        enforceDeclarations = (style === "declaration"),
+        stack = [];
 
     return {
+        "Program": function() {
+            stack = [];
+        },
 
         "FunctionDeclaration": function(node) {
+            stack.push(false);
+
             if (!enforceDeclarations) {
                 context.report(node, "Expected a function expression.");
             }
         },
+        "FunctionDeclaration:exit": function() {
+            stack.pop();
+        },
 
-        "FunctionExpression": function() {
-            var parent = context.getAncestors().pop();
+        "FunctionExpression": function(node) {
+            stack.push(false);
 
-            if (enforceDeclarations && parent.type === "VariableDeclarator") {
-                context.report(parent, "Expected a function declaration.");
+            if (enforceDeclarations && node.parent.type === "VariableDeclarator") {
+                context.report(node.parent, "Expected a function declaration.");
             }
+        },
+        "FunctionExpression:exit": function() {
+            stack.pop();
         },
 
         "ArrowFunctionExpression": function() {
-            var parent = context.getAncestors().pop();
+            stack.push(false);
+        },
+        "ArrowFunctionExpression:exit": function(node) {
+            var hasThisExpr = stack.pop();
 
-            if (enforceDeclarations && parent.type === "VariableDeclarator") {
-                context.report(parent, "Expected a function declaration.");
+            if (enforceDeclarations && !hasThisExpr && node.parent.type === "VariableDeclarator") {
+                context.report(node.parent, "Expected a function declaration.");
+            }
+        },
+
+        "ThisExpression": function() {
+            if (stack.length > 0) {
+                stack[stack.length - 1] = true;
             }
         }
-
     };
 
 };
@@ -28444,6 +28472,8 @@ module.exports.schema = [];
  * @fileoverview Rule to flag duplicate arguments
  * @author Jamund Ferguson
  * @copyright 2015 Jamund Ferguson. All rights reserved.
+ * @copyright 2015 Toru Nagashima. All rights reserved.
+ * See LICENSE file in root directory for full license.
  */
 
 "use strict";
@@ -28459,62 +28489,44 @@ module.exports = function(context) {
     //--------------------------------------------------------------------------
 
     /**
+     * Checks whether or not a given definition is a parameter's.
+     * @param {escope.DefEntry} def - A definition to check.
+     * @returns {boolean} `true` if the definition is a parameter's.
+     */
+    function isParameter(def) {
+        return def.type === "Parameter";
+    }
+
+    /**
      * Determines if a given node has duplicate parameters.
      * @param {ASTNode} node The node to check.
      * @returns {void}
      * @private
      */
     function checkParams(node) {
-        var params = {},
-            dups = {};
+        var variables = context.getDeclaredVariables(node);
+        var keyMap = Object.create(null);
 
+        for (var i = 0; i < variables.length; ++i) {
+            var variable = variables[i];
 
-        /**
-         * Marks a given param as either seen or duplicated.
-         * @param {string} name The name of the param to mark.
-         * @returns {void}
-         * @private
-         */
-        function markParam(name) {
-            if (params.hasOwnProperty(name)) {
-                dups[name] = 1;
-            } else {
-                params[name] = 1;
+            // TODO(nagashima): Remove this duplication check after https://github.com/estools/escope/pull/79
+            var key = "$" + variable.name; // to avoid __proto__.
+            if (!isParameter(variable.defs[0]) || keyMap[key]) {
+                continue;
+            }
+            keyMap[key] = true;
+
+            // Checks and reports duplications.
+            var defs = variable.defs.filter(isParameter);
+            if (defs.length >= 2) {
+                context.report({
+                    node: node,
+                    message: "Duplicate param '{{name}}'.",
+                    data: {name: variable.name}
+                });
             }
         }
-
-        // loop through and find each duplicate param
-        node.params.forEach(function(param) {
-
-            switch (param.type) {
-                case "Identifier":
-                    markParam(param.name);
-                    break;
-
-                case "ObjectPattern":
-                    param.properties.forEach(function(property) {
-                        markParam(property.key.name);
-                    });
-                    break;
-
-                case "ArrayPattern":
-                    param.elements.forEach(function(element) {
-
-                        // Arrays can be sparse (unwanted arguments)
-                        if (element !== null) {
-                            markParam(element.name);
-                        }
-                    });
-                    break;
-
-                // no default
-            }
-        });
-
-        // log an error for each duplicate (not 2 for each)
-        Object.keys(dups).forEach(function(currentParam) {
-            context.report(node, "Duplicate param '{{key}}'.", { key: currentParam });
-        });
     }
 
     //--------------------------------------------------------------------------
@@ -38422,7 +38434,7 @@ module.exports = function(context) {
         }
 
         options = options || {};
-        options.allowedPrecedingChars = options.allowedPrecedingChars || [];
+        options.allowedPrecedingChars = options.allowedPrecedingChars || [ "{" ];
         options.requireSpace = typeof options.requireSpace === "undefined" ? SPACE_REQUIRED : options.requireSpace;
 
         var hasSpace = sourceCode.isSpaceBetweenTokens(left, right);
@@ -38505,7 +38517,7 @@ module.exports = function(context) {
                 check(caseNode);
             });
         },
-        ThrowStatement: check,
+        "ThrowStatement": check,
         "TryStatement": function(node) {
             // try
             check(node);
@@ -38519,7 +38531,7 @@ module.exports = function(context) {
         },
         "WithStatement": check,
         "VariableDeclaration": function(node) {
-            check(node, { allowedPrecedingChars: [ "(" ] });
+            check(node, { allowedPrecedingChars: [ "(", "{" ] });
         },
         "ReturnStatement": check,
         "BreakStatement": check,
@@ -38527,25 +38539,18 @@ module.exports = function(context) {
         "ContinueStatement": check,
         "FunctionDeclaration": check,
         "FunctionExpression": function(node) {
-
             var left = context.getTokenBefore(node);
-
-            // Check to see if the function expression is a class method
-            if (node.parent && node.parent.type === "MethodDefinition") {
-                return;
-            }
-
-            // Check to see if the function expression is an object literal shorthand method
-            if (node.parent && node.parent.method && node.parent.type === "Property") {
-                return;
-            }
-
             var right = context.getFirstToken(node);
 
-            checkTokens(node, left, right, { allowedPrecedingChars: [ "(" ] });
+            // If it's a method, a getter, or a setter, the first token is not the `function` keyword.
+            if (right.type !== "Keyword") {
+                return;
+            }
+
+            checkTokens(node, left, right, { allowedPrecedingChars: [ "(", "{" ] });
         },
         "YieldExpression": function(node) {
-            check(node, { allowedPrecedingChars: [ "(" ] });
+            check(node, { allowedPrecedingChars: [ "(", "{" ] });
         },
         "ForOfStatement": check,
         "ClassBody": function(node) {
