@@ -97,6 +97,7 @@ The following patterns are not considered problems:
 
 ```js
 /*eslint quote-props: [2, "always"]*/
+/*eslint-env es6*/
 
 var object1 = {
     "foo": "bar",
@@ -136,6 +137,7 @@ The following patterns are not considered problems:
 
 ```js
 /*eslint quote-props: [2, "as-needed"]*/
+/*eslint-env es6*/
 
 var object1 = {
     "a-b": 0,

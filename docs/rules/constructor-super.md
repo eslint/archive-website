@@ -19,6 +19,7 @@ The following patterns are considered problems:
 
 ```js
 /*eslint constructor-super: 2*/
+/*eslint-env es6*/
 
 class A {
     constructor() {
@@ -41,6 +42,7 @@ The following patterns are not considered problems:
 
 ```js
 /*eslint constructor-super: 2*/
+/*eslint-env es6*/
 
 class A {
     constructor() { }

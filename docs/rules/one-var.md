@@ -87,6 +87,7 @@ When configured with `"always"` as the first option (the default), the following
 
 ```js
 /*eslint one-var: [2, "always"]*/
+/*eslint-env es6*/
 
 function foo() {
     var bar;
@@ -115,6 +116,7 @@ The following patterns are not considered problems:
 
 ```js
 /*eslint one-var: [2, "always"]*/
+/*eslint-env es6*/
 
 function foo() {
     var bar,
@@ -152,6 +154,7 @@ When configured with `"never"` as the first option, the following patterns are c
 
 ```js
 /*eslint one-var: [2, "never"]*/
+/*eslint-env es6*/
 
 function foo() {
     var bar,          /*error Split 'var' declarations into multiple statements.*/
@@ -179,6 +182,7 @@ The following patterns are not considered problems:
 
 ```js
 /*eslint one-var: [2, "never"]*/
+/*eslint-env es6*/
 
 function foo() {
     var bar;
@@ -208,6 +212,7 @@ The following patterns are not considered problems:
 
 ```js
 /*eslint one-var: [2, { var: "always", let: "never", const: "never" }]*/
+/*eslint-env es6*/
 
 function foo() {
     var bar,
@@ -240,6 +245,7 @@ If you are configuring the rule with an object, by default, if you didn't specif
 
 ```js
 /*eslint one-var: [2, { var: "always", let: "always" }]*/
+/*eslint-env es6*/
 
 function foo() {
     var a, b;

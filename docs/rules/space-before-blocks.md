@@ -113,6 +113,7 @@ The following patterns are considered problems when configured `{ "functions": "
 
 ```js
 /*eslint space-before-blocks: [2, { "functions": "never", "keywords": "always" }]*/
+/*eslint-env es6*/
 
 function a() {}    /*error Unexpected space before opening brace.*/
 
@@ -128,6 +129,7 @@ The following patterns are not considered problems when configured `{ "functions
 
 ```js
 /*eslint space-before-blocks: [2, { "functions": "never", "keywords": "always" }]*/
+/*eslint-env es6*/
 
 for (;;) {
   // ...
@@ -146,6 +148,7 @@ The following patterns are considered problems when configured `{ "functions": "
 
 ```js
 /*eslint space-before-blocks: [2, { "functions": "always", "keywords": "never" }]*/
+/*eslint-env es6*/
 
 function a(){}      /*error Missing space before opening brace.*/
 
@@ -161,6 +164,7 @@ The following patterns are not considered problems when configured `{ "functions
 
 ```js
 /*eslint space-before-blocks: [2, { "functions": "always", "keywords": "never" }]*/
+/*eslint-env es6*/
 
 if (a){
   b();

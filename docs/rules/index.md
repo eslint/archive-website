@@ -74,7 +74,7 @@ These are rules designed to prevent you from making mistakes. They either prescr
 * [no-labels](no-labels) - disallow use of labeled statements
 * [no-lone-blocks](no-lone-blocks) - disallow unnecessary nested blocks
 * [no-loop-func](no-loop-func) - disallow creation of functions within loops
-* [no-multi-spaces](no-multi-spaces) - disallow use of multiple spaces
+* [no-multi-spaces](no-multi-spaces) - disallow use of multiple spaces (fixable)
 * [no-multi-str](no-multi-str) - disallow use of multiline strings
 * [no-native-reassign](no-native-reassign) - disallow reassignments of native objects
 * [no-new-func](no-new-func) - disallow use of new operator for `Function` object
@@ -142,13 +142,13 @@ These rules are specific to JavaScript running on Node.js or using CommonJS in t
 
 These rules are purely matters of style and are quite subjective.
 
-* [array-bracket-spacing](array-bracket-spacing) - enforce spacing inside array brackets
-* [block-spacing](block-spacing) - disallow or enforce spaces inside of single line blocks
+* [array-bracket-spacing](array-bracket-spacing) - enforce spacing inside array brackets (fixable)
+* [block-spacing](block-spacing) - disallow or enforce spaces inside of single line blocks (fixable)
 * [brace-style](brace-style) - enforce one true brace style
 * [camelcase](camelcase) - require camel case names
 * [comma-spacing](comma-spacing) - enforce spacing before and after comma
 * [comma-style](comma-style) - enforce one true comma style
-* [computed-property-spacing](computed-property-spacing) - require or disallow padding inside computed properties
+* [computed-property-spacing](computed-property-spacing) - require or disallow padding inside computed properties (fixable)
 * [consistent-this](consistent-this) - enforce consistent naming when capturing the current execution context
 * [eol-last](eol-last) - enforce newline at the end of file, with no multiple empty lines (fixable)
 * [func-names](func-names) - require function expressions to have a name
@@ -171,6 +171,7 @@ These rules are purely matters of style and are quite subjective.
 * [no-mixed-spaces-and-tabs](no-mixed-spaces-and-tabs) - disallow mixed spaces and tabs for indentation (recommended)
 * [no-multiple-empty-lines](no-multiple-empty-lines) - disallow multiple empty lines
 * [no-nested-ternary](no-nested-ternary) - disallow nested ternary expressions
+* [no-negated-condition](no-negated-condition) - disallow negated conditions
 * [no-new-object](no-new-object) - disallow the use of the `Object` constructor
 * [no-restricted-syntax](no-restricted-syntax) - disallow use of certain syntax in code
 * [no-spaced-func](no-spaced-func) - disallow space between function identifier and application (fixable)
@@ -178,7 +179,7 @@ These rules are purely matters of style and are quite subjective.
 * [no-trailing-spaces](no-trailing-spaces) - disallow trailing whitespace at the end of lines (fixable)
 * [no-underscore-dangle](no-underscore-dangle) - disallow dangling underscores in identifiers
 * [no-unneeded-ternary](no-unneeded-ternary) - disallow the use of ternary operators when a simpler alternative exists
-* [object-curly-spacing](object-curly-spacing) - require or disallow padding inside curly braces
+* [object-curly-spacing](object-curly-spacing) - require or disallow padding inside curly braces (fixable)
 * [one-var](one-var) - require or disallow one variable declaration per function
 * [operator-assignment](operator-assignment) - require assignment operator shorthand where possible or prohibit it entirely
 * [operator-linebreak](operator-linebreak) - enforce operators to be placed before or after line breaks
@@ -196,7 +197,7 @@ These rules are purely matters of style and are quite subjective.
 * [space-in-parens](space-in-parens) - require or disallow spaces inside parentheses
 * [space-infix-ops](space-infix-ops) - require spaces around operators (fixable)
 * [space-return-throw-case](space-return-throw-case) - require a space after `return`, `throw`, and `case` (fixable)
-* [space-unary-ops](space-unary-ops) - require or disallow spaces before/after unary operators
+* [space-unary-ops](space-unary-ops) - require or disallow spaces before/after unary operators (fixable)
 * [spaced-comment](spaced-comment) - require or disallow a space immediately following the `//` or `/*` in a comment
 * [wrap-regex](wrap-regex) - require regex literals to be wrapped in parentheses
 
@@ -205,9 +206,9 @@ These rules are purely matters of style and are quite subjective.
 These rules are only relevant to ES6 environments.
 
 * [arrow-parens](arrow-parens) - require parens in arrow function arguments
-* [arrow-spacing](arrow-spacing) - require space before/after arrow function's arrow
+* [arrow-spacing](arrow-spacing) - require space before/after arrow function's arrow (fixable)
 * [constructor-super](constructor-super) - verify calls of `super()` in constructors
-* [generator-star-spacing](generator-star-spacing) - enforce spacing around the `*` in generator functions
+* [generator-star-spacing](generator-star-spacing) - enforce spacing around the `*` in generator functions (fixable)
 * [no-class-assign](no-class-assign) - disallow modifying variables of class declarations
 * [no-const-assign](no-const-assign) - disallow modifying variables that are declared using `const`
 * [no-dupe-class-members](no-dupe-class-members) - disallow duplicate name in class members

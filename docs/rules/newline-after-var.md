@@ -39,6 +39,7 @@ console.log(greet, name);
 
 ```js
 /*eslint newline-after-var: [2, "never"]*/
+/*eslint-env es6*/
 
 let greet = "hello,",     /*error Unexpected blank line after variable declarations.*/
     name = "world";
@@ -48,6 +49,7 @@ console.log(greet, name);
 
 ```js
 /*eslint newline-after-var: 2*/  // defaults to always
+/*eslint-env es6*/
 
 var greet = "hello,";
 const NAME = "world";      /*error Expected blank line after variable declarations.*/
@@ -67,6 +69,7 @@ console.log(greet, name);
 
 ```js
 /*eslint newline-after-var: [2, "never"]*/
+/*eslint-env es6*/
 
 let greet = "hello,",
     name = "world";
@@ -75,6 +78,7 @@ console.log(greet, name);
 
 ```js
 /*eslint newline-after-var: 2*/  // defaults to always
+/*eslint-env es6*/
 
 var greet = "hello,";
 const NAME = "world";

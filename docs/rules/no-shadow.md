@@ -24,6 +24,7 @@ The following patterns are considered problems:
 
 ```js
 /*eslint no-shadow: 2*/
+/*eslint-env es6*/
 
 var a = 3;
 function b() {
@@ -83,6 +84,7 @@ With `"hoist"` set to `"all"`, both `let a` and `let b` in the `if` statement ar
 
 ```js
 /*eslint no-shadow: [2, { "hoist": "all" }]*/
+/*eslint-env es6*/
 
 if (true) {
     let a = 3;    /*error a is already declared in the upper scope.*/
@@ -99,6 +101,7 @@ With `"hoist"` set to `"functions"`, `let b` is considered a warning. But `let a
 
 ```js
 /*eslint no-shadow: [2, { "hoist": "functions" }]*/
+/*eslint-env es6*/
 
 if (true) {
     let a = 3;
@@ -115,6 +118,7 @@ With `"hoist"` set to `"never"`, neither `let a` nor `let b` in the `if` stateme
 
 ```js
 /*eslint no-shadow: [2, { "hoist": "never" }]*/
+/*eslint-env es6*/
 
 if (true) {
     let a = 3;

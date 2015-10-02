@@ -57,6 +57,7 @@ When configured with `"always"` (the default), the following patterns are consid
 
 ```js
 /*eslint init-declarations: [2, "always"]*/
+/*eslint-env es6*/
 
 function foo() {
     var bar;     /*error Variable 'bar' should be initialized on declaration.*/
@@ -68,6 +69,7 @@ The following patterns are not considered problems with `"always"`.
 
 ```js
 /*eslint init-declarations: [2, "always"]*/
+/*eslint-env es6*/
 
 function foo() {
     var bar = 1;
@@ -80,6 +82,7 @@ When configured with `"never"`, the following patterns are considered problems.
 
 ```js
 /*eslint init-declarations: [2, "never"]*/
+/*eslint-env es6*/
 
 function foo() {
     var bar = 1;   /*error Variable 'bar' should not be initialized on declaration.*/
@@ -91,6 +94,7 @@ The following patterns are not considered problems with `"never"`. Note that `co
 
 ```js
 /*eslint init-declarations: [2, "never"]*/
+/*eslint-env es6*/
 
 function foo() {
     var bar;

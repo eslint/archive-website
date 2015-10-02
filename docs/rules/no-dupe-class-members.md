@@ -9,6 +9,8 @@ If there are declarations of the same name in class members, the last declaratio
 It can cause unexpected behaviors.
 
 ```js
+/*eslint-env es6*/
+
 class Foo {
   bar() { console.log("hello"); }
   bar() { console.log("goodbye"); }
@@ -26,6 +28,7 @@ The following patterns are considered problems:
 
 ```js
 /*eslint no-dupe-class-members: 2*/
+/*eslint-env es6*/
 
 class Foo {
   bar() { }
@@ -47,6 +50,7 @@ The following patterns are not considered problems:
 
 ```js
 /*eslint no-dupe-class-members: 2*/
+/*eslint-env es6*/
 
 class Foo {
   bar() { }

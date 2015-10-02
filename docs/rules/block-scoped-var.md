@@ -40,7 +40,7 @@ function doSomething() {
 
 function doSomething() {
     if (true) {
-        var build = true;
+        var build = true;  /*error "build" used outside of binding context.*/
     } else {
         var build = false; /*error "build" used outside of binding context.*/
     }

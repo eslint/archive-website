@@ -8,6 +8,8 @@ layout: doc
 JavaScript allows you to define strings in one of three ways: double quotes, single quotes, and backticks (as of ECMAScript 6). For example:
 
 ```js
+/*eslint-env es6*/
+
 var double = "double";
 var single = 'single';
 var backtick = `backtick`;    // ES6 only
@@ -81,6 +83,7 @@ The following patterns are not considered problems:
 
 ```js
 /*eslint quotes: [2, "double"]*/
+/*eslint-env es6*/
 
 var double = "double";
 var backtick = `backtick`; // backticks are allowed
@@ -88,6 +91,7 @@ var backtick = `backtick`; // backticks are allowed
 
 ```js
 /*eslint quotes: [2, "single"]*/
+/*eslint-env es6*/
 
 var single = 'single';
 var backtick = `backtick`; // backticks are allowed
@@ -107,6 +111,7 @@ var double = "a string containing 'single' quotes";
 
 ```js
 /*eslint quotes: [2, "backtick"]*/
+/*eslint-env es6*/
 
 var backtick = `backtick`;
 ```
@@ -120,7 +125,6 @@ var double = "a string containing `backtick` quotes"
 ## When Not To Use It
 
 If you do not need consistency in your string styles, you can safely disable this rule.
-
 
 ## Version
 

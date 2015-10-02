@@ -9,6 +9,8 @@ While formatting preferences are very personal, a number of style guides require
 or disallow spaces between computed properties in the following situations:
 
 ```js
+/*eslint-env es6*/
+
 // computed properties
 var obj = { prop: "value" };
 var a = "prop";
@@ -18,6 +20,8 @@ var x = obj[a];
 var a = "prop";
 var obj = { [a]: "value" };
 ```
+
+**Fixable:** This rule is automatically fixable using the `--fix` flag on the command line.
 
 ## Rule Details
 
@@ -45,6 +49,8 @@ When `"never"` is set, the following patterns will give a warning:
 
 ```js
 /*eslint computed-property-spacing: [2, "never"]*/
+/*eslint-env es6*/
+
 obj[foo ]                                                       /*error There should be no space before ']'*/
 obj[ 'foo']        /*error There should be no space after '['*/
 var x = {[ b ]: a} /*error There should be no space after '['*/ /*error There should be no space before ']'*/
@@ -55,6 +61,7 @@ The following patterns are considered correct:
 
 ```js
 /*eslint computed-property-spacing: [2, "never"]*/
+/*eslint-env es6*/
 
 obj[foo]
 obj['foo']
@@ -68,6 +75,7 @@ When `"always"` is used, the following patterns will give a warning:
 
 ```js
 /*eslint computed-property-spacing: [2, "always"]*/
+/*eslint-env es6*/
 
 obj[foo]          /*error A space is required after '['*/ /*error A space is required before ']'*/
 var x = {[b]: a}  /*error A space is required after '['*/ /*error A space is required before ']'*/
@@ -82,6 +90,7 @@ The following patterns are considered correct:
 
 ```js
 /*eslint computed-property-spacing: [2, "always"]*/
+/*eslint-env es6*/
 
 obj[ foo ]
 obj[ 'foo' ]

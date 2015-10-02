@@ -7,6 +7,8 @@ layout: doc
 
 Some styleguides require or disallow spaces before or after unary operators. This is mainly a stylistic issue, however, some JavaScript expressions can be written without spacing which makes it harder to read and maintain.
 
+**Fixable:** This rule is automatically fixable using the `--fix` flag on the command line.
+
 ## Rule Details
 
 This rule enforces consistency regarding the spaces after `words` unary operators and after/before `nonwords` unary operators.
@@ -59,6 +61,7 @@ Given the default values `words`: `true`, `nonwords`: `false`, the following pat
 
 ```js
 /*eslint space-unary-ops: 2*/
+/*eslint-env es6*/
 
 typeof!foo;        /*error Unary word operator "typeof" must be followed by whitespace.*/
 

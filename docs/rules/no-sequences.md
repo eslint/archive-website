@@ -26,7 +26,7 @@ This rule forbids the use of the comma operator, with the following exceptions:
 
 The following patterns are considered problems:
 
-```
+```js
 /*eslint no-sequences: 2*/
 
 foo = doSomething, val;              /*error Unexpected use of comma operator.*/
@@ -46,7 +46,7 @@ with (doSomething(), val) {}         /*error Unexpected use of comma operator.*/
 
 The following patterns are not considered problems:
 
-```
+```js
 /*eslint no-sequences: 2*/
 
 foo = (doSomething(), val);

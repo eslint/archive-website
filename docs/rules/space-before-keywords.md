@@ -13,11 +13,11 @@ Some styleguides require or disallow spaces preceding certain keywords.
 
 This rule will enforce consistency of spacing before the keywords `if`, `else`, `for`,
 `while`, `do`, `switch`, `throw`, `try`, `catch`, `finally`, `with`, `break`, `continue`,
-`return`, `function`, `yield`, `class`, `super` and variable declarations (`let`, `const`, `var`)
+`return`, `function`, `yield`, `class` and variable declarations (`let`, `const`, `var`)
 and label statements.
 
 This rule takes one argument: `"always"` or `"never"`. If `"always"` then the keywords
-must be followed by at least one space. If `"never"` then no spaces will be allowed before
+must be preceded by at least one space. If `"never"` then no spaces will be allowed before
 the keywords `else`, `while` (do...while), `finally` and `catch`. The default value is `"always"`.
 
 This rule will allow keywords to be preceded by an opening curly brace (`{`). If you wish to alter
@@ -62,6 +62,7 @@ The following patterns are considered errors when configured `"always"`:
 
 ```js
 /*eslint space-before-keywords: [2, "always"]*/
+/*eslint-env es6*/
 
 if (foo) {
     // ...
@@ -80,6 +81,7 @@ The following patterns are not considered errors when configured `"always"`:
 
 ```js
 /*eslint space-before-keywords: [2, "always"]*/
+/*eslint-env es6*/
 
 if (foo) {
     // ...

@@ -8,7 +8,7 @@ layout: doc
 While formatting preferences are very personal, a number of style guides require
 or disallow spaces between curly braces in the following situations:
 
-```js
+```
 // simple object literals
 var obj = { foo: "bar" };
 
@@ -22,6 +22,8 @@ var { x, y } = y;
 import { foo } from "bar";
 export { foo };
 ```
+
+**Fixable:** This rule is automatically fixable using the `--fix` flag on the command line.
 
 ## Rule Details
 
@@ -48,7 +50,7 @@ Depending on your coding conventions, you can choose either option by specifying
 
 When `"never"` is set, the following patterns are considered problems:
 
-```js
+```
 /*eslint object-curly-spacing: [2, "never"]*/
 
 var obj = { 'foo': 'bar' };            /*error There should be no space after '{'*/ /*error There should be no space before '}'*/
@@ -61,7 +63,7 @@ import { foo } from 'bar';             /*error There should be no space after '{
 
 The following patterns are not considered problems:
 
-```js
+```
 /*eslint object-curly-spacing: [2, "never"]*/
 
 var obj = {'foo': 'bar'};
@@ -82,7 +84,7 @@ import {foo} from 'bar';
 
 When `"always"` is used, the following patterns are considered problems:
 
-```js
+```
 /*eslint object-curly-spacing: [2, "always"]*/
 
 var obj = {'foo': 'bar'};               /*error A space is required after '{'*/ /*error A space is required before '}'*/
@@ -99,7 +101,7 @@ import {foo } from 'bar';               /*error A space is required after '{'*/
 
 The following patterns are not considered problems:
 
-```js
+```
 /*eslint object-curly-spacing: [2, "always"]*/
 
 var obj = {};
@@ -179,7 +181,6 @@ You can turn this rule off if you are not concerned with the consistency of spac
 * [comma-spacing](comma-spacing)
 * [space-in-parens](space-in-parens)
 * [space-in-brackets](space-in-brackets) (deprecated)
-
 
 ## Version
 

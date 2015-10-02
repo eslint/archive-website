@@ -28,6 +28,8 @@ var foo = {
 Now here are ES6 equivalents:
 
 ```js
+/*eslint-env es6*/
+
 // properties
 var foo = {x, y, z};
 
@@ -49,6 +51,7 @@ Each of the following properties would warn:
 
 ```js
 /*eslint object-shorthand: 2*/
+/*eslint-env es6*/
 
 var foo = {
     x: function() {},   /*error Expected method shorthand.*/
@@ -61,6 +64,7 @@ In that case the expected syntax would have been:
 
 ```js
 /*eslint object-shorthand: 2*/
+/*eslint-env es6*/
 
 var foo = {
     x() {},
@@ -74,6 +78,7 @@ The following will *not* warn:
 
 ```js
 /*eslint object-shorthand: 2*/
+/*eslint-env es6*/
 
 var foo = {
     x: (y) => y
