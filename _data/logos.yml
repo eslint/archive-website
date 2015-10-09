@@ -101,3 +101,7 @@
 - url: https://www.algolia.com/
   src: /img/logos/algolia.svg
   name: Algolia
+
+- url: https://www.transloadit.com/
+  src: /img/logos/transloadit.png
+  name: Transloadit
