@@ -1,29 +1,29 @@
  - algolia.svg 10.7KB 391x124
- - alianza.png 8.29KB 500x200
- - angular-formly.png 28.8KB 200x200
+ - alianza.png 5.95KB 500x200
+ - angular-formly.png 8.81KB 200x200
  - atlassian.svg 8.36KB 792x168
- - box.png 22.6KB 1024x565
+ - box.png 16KB 800x441
  - brigade.svg 2.44KB 250x137
- - cerner.png 5.03KB 240x65
- - cocktailjs.png 137KB 228x150
- - codinum.png 44.5KB 1679x308
+ - cerner.png 3KB 240x65
+ - cocktailjs.png 4.78KB 228x150
+ - codinum.png 17.1KB 800x147
  - computerbase.svg 8.24KB 177x84
  - disqus.svg 2.79KB 438x80
  - domain.svg 5.4KB 502x202
- - facebook.png 43.8KB 2026x713
- - fingerproof.png 2.04KB 200x200
- - geekpark.png 20.1KB 800x172
- - getable.png 47.5KB 785x200
- - kahoot.png 23.3KB 800x600
+ - facebook.png 12.5KB 800x282
+ - fingerproof.png 2.32KB 200x200
+ - geekpark.png 12.5KB 800x172
+ - getable.png 22.3KB 785x200
+ - kahoot.png 11.4KB 800x600
  - millenium.svg 2.83KB 1745x513
- - paypal.png 25.6KB 1256x408
+ - paypal.png 11.3KB 800x260
  - paypal.svg 4.8KB 500x200
- - qualitybath.png 16.1KB 1210x340
- - schibsted.png 5.49KB 200x200
- - simplifield.png 62.1KB 3500x700
- - the-native-web.png 10.7KB 956x151
- - transloadit.png 24KB 1639x417
- - valor-software-sm.png 22.8KB 333x250
- - windsorcircle.png 107KB 1000x240
+ - qualitybath.png 11KB 800x225
+ - schibsted.png 1.88KB 200x200
+ - simplifield.png 7.72KB 800x160
+ - the-native-web.png 10.3KB 800x126
+ - transloadit.png 11.8KB 800x204
+ - valor-software-sm.png 10.1KB 333x250
+ - windsorcircle.png 25.4KB 800x192
  - 2gis.svg 2.29KB 313x150
-752K	img/logos
+312K	img/logos
