@@ -25847,6 +25847,7 @@ module.exports.schema = [
  * @fileoverview Rule to flag non-matching identifiers
  * @author Matthieu Larcher
  * @copyright 2015 Matthieu Larcher. All rights reserved.
+ * See LICENSE in root directory for full license.
  */
 
 "use strict";
@@ -25966,7 +25967,7 @@ module.exports.schema = [
         "type": "object",
         "properties": {
             "properties": {
-                "enum": [true, false]
+                "type": "boolean"
             }
         }
     }
@@ -26313,7 +26314,8 @@ module.exports = function(context) {
                 }
             } else {
                 if (isCallArgsMultiline(calleeParent) &&
-                    calleeParent.callee.loc.start.line === calleeParent.callee.loc.end.line) {
+                    calleeParent.callee.loc.start.line === calleeParent.callee.loc.end.line &&
+                    !isNodeFirstInLine(calleeNode)) {
                     indent = getNodeIndent(calleeParent);
                 }
             }
@@ -32578,6 +32580,12 @@ module.exports = function(context) {
         "Literal": function(node) {
             var parent = node.parent,
                 okTypes = detectObjects ? [] : ["ObjectExpression", "Property", "AssignmentExpression"];
+
+            // don't warn on parseInt() radix
+            if (node.parent.type === "CallExpression" && node === node.parent.arguments[1] &&
+                    node.parent.callee.name === "parseInt") {
+                return;
+            }
 
             if (!isNumber(node) || shouldIgnoreNumber(node.value)) {
                 return;
