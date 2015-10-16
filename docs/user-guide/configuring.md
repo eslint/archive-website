@@ -119,6 +119,7 @@ An environment defines global variables that are predefined. The available envir
 * `nashorn` - Java 8 Nashorn global variables.
 * `serviceworker` - Service Worker global variables.
 * `embertest` - Ember test helper globals.
+* `webextensions` - WebExtensions globals.
 * `es6` - enable all ECMAScript 6 features except for modules.
 
 These environments are not mutually exclusive, so you can define more than one at a time.
@@ -466,7 +467,14 @@ The complete configuration hierarchy, from highest precedence to lowest preceden
 
 If you want to extend a specific configuration file, you can use the `extends` property and specify the path to the file. The path can be either relative or absolute.
 
-The extended configuration provides base rules, which can be overriden by the configuration that references it. For example:
+Configurations can be extended by using:
+
+1. YAML file
+1. JSON file
+1. JS file
+1. Shareable configuration package
+
+The extended configuration provides base rules, which can be overridden by the configuration that references it. For example:
 
 ```js
 {
@@ -484,8 +492,8 @@ Configurations may also be provided as an array, with additional files overridin
 ```js
 {
     "extends": [
-        "./node_modules/coding-standard/.eslintrc-defaults",
-        // Override .eslintrc-defaults
+        "./node_modules/coding-standard/eslintDefaults.js",
+        // Override eslintDefaults.js
         "./node_modules/coding-standard/.eslintrc-es6",
         // Override .eslintrc-es6
         "./node_modules/coding-standard/.eslintrc-jsx",

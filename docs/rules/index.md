@@ -36,11 +36,11 @@ The following rules point out areas where you might have made mistakes.
 * [no-obj-calls](no-obj-calls) - disallow the use of object properties of the global object (`Math` and `JSON`) as functions (recommended)
 * [no-regex-spaces](no-regex-spaces) - disallow multiple spaces in a regular expression literal (recommended)
 * [no-sparse-arrays](no-sparse-arrays) - disallow sparse arrays (recommended)
+* [no-unexpected-multiline](no-unexpected-multiline) - Avoid code that looks like two expressions but is actually one
 * [no-unreachable](no-unreachable) - disallow unreachable statements after a return, throw, continue, or break statement (recommended)
 * [use-isnan](use-isnan) - disallow comparisons with the value `NaN` (recommended)
 * [valid-jsdoc](valid-jsdoc) - Ensure JSDoc comments are valid
 * [valid-typeof](valid-typeof) - Ensure that the results of typeof are compared against a valid string (recommended)
-* [no-unexpected-multiline](no-unexpected-multiline) - Avoid code that looks like two expressions but is actually one
 
 ## Best Practices
 
@@ -52,8 +52,8 @@ These are rules designed to prevent you from making mistakes. They either prescr
 * [consistent-return](consistent-return) - require `return` statements to either always or never specify values
 * [curly](curly) - specify curly brace conventions for all control statements
 * [default-case](default-case) - require `default` case in `switch` statements
-* [dot-notation](dot-notation) - encourages use of dot notation whenever possible
 * [dot-location](dot-location) - enforces consistent newlines before or after dots
+* [dot-notation](dot-notation) - encourages use of dot notation whenever possible
 * [eqeqeq](eqeqeq) - require the use of `===` and `!==` (fixable)
 * [guard-for-in](guard-for-in) - make sure `for-in` loops have an `if` statement
 * [no-alert](no-alert) - disallow the use of `alert`, `confirm`, and `prompt`
@@ -61,6 +61,7 @@ These are rules designed to prevent you from making mistakes. They either prescr
 * [no-div-regex](no-div-regex) - disallow division operators explicitly at beginning of regular expression
 * [no-else-return](no-else-return) - disallow `else` after a `return` in an `if`
 * [no-empty-label](no-empty-label) - disallow use of labels for anything other than loops and switches
+* [no-empty-pattern](no-empty-pattern) - disallow use of empty destructuring patterns
 * [no-eq-null](no-eq-null) - disallow comparisons to null without a type-checking operator
 * [no-eval](no-eval) - disallow use of `eval()`
 * [no-extend-native](no-extend-native) - disallow adding to native types
@@ -74,6 +75,7 @@ These are rules designed to prevent you from making mistakes. They either prescr
 * [no-labels](no-labels) - disallow use of labeled statements
 * [no-lone-blocks](no-lone-blocks) - disallow unnecessary nested blocks
 * [no-loop-func](no-loop-func) - disallow creation of functions within loops
+* [no-magic-numbers](no-magic-numbers) - disallow the use of magic numbers
 * [no-multi-spaces](no-multi-spaces) - disallow use of multiple spaces (fixable)
 * [no-multi-str](no-multi-str) - disallow use of multiline strings
 * [no-native-reassign](no-native-reassign) - disallow reassignments of native objects
@@ -129,7 +131,7 @@ These rules have to do with variable declarations.
 These rules are specific to JavaScript running on Node.js or using CommonJS in the browser.
 
 * [callback-return](callback-return) - enforce `return` after a callback
-* [global-require](global-require) - disallow `require()` outside of the top-level module scope
+* [global-require](global-require) - enforce `require()` on top-level module scope
 * [handle-callback-err](handle-callback-err) - enforce error handling in callbacks
 * [no-mixed-requires](no-mixed-requires) - disallow mixing regular variable and require declarations
 * [no-new-require](no-new-require) - disallow use of `new` operator with the `require` function
@@ -158,8 +160,8 @@ These rules are purely matters of style and are quite subjective.
 * [indent](indent) - specify tab or space width for your code (fixable)
 * [jsx-quotes](jsx-quotes) - specify whether double or single quotes should be used in JSX attributes
 * [key-spacing](key-spacing) - enforce spacing between keys and values in object literal properties
-* [lines-around-comment](lines-around-comment) - enforce empty lines around comments
 * [linebreak-style](linebreak-style) - disallow mixed 'LF' and 'CRLF' as linebreaks
+* [lines-around-comment](lines-around-comment) - enforce empty lines around comments
 * [max-nested-callbacks](max-nested-callbacks) - specify the maximum depth callbacks can be nested
 * [new-cap](new-cap) - require a capital letter for constructors
 * [new-parens](new-parens) - disallow the omission of parentheses when invoking a constructor with no arguments
@@ -170,8 +172,8 @@ These rules are purely matters of style and are quite subjective.
 * [no-lonely-if](no-lonely-if) - disallow `if` as the only statement in an `else` block
 * [no-mixed-spaces-and-tabs](no-mixed-spaces-and-tabs) - disallow mixed spaces and tabs for indentation (recommended)
 * [no-multiple-empty-lines](no-multiple-empty-lines) - disallow multiple empty lines
-* [no-nested-ternary](no-nested-ternary) - disallow nested ternary expressions
 * [no-negated-condition](no-negated-condition) - disallow negated conditions
+* [no-nested-ternary](no-nested-ternary) - disallow nested ternary expressions
 * [no-new-object](no-new-object) - disallow the use of the `Object` constructor
 * [no-restricted-syntax](no-restricted-syntax) - disallow use of certain syntax in code
 * [no-spaced-func](no-spaced-func) - disallow space between function identifier and application (fixable)
@@ -191,9 +193,9 @@ These rules are purely matters of style and are quite subjective.
 * [semi](semi) - require or disallow use of semicolons instead of ASI (fixable)
 * [sort-vars](sort-vars) - sort variables within the same declaration block
 * [space-after-keywords](space-after-keywords) - require a space after certain keywords (fixable)
-* [space-before-keywords](space-before-keywords) - require a space before certain keywords (fixable)
 * [space-before-blocks](space-before-blocks) - require or disallow a space before blocks (fixable)
 * [space-before-function-paren](space-before-function-paren) - require or disallow a space before function opening parenthesis (fixable)
+* [space-before-keywords](space-before-keywords) - require a space before certain keywords (fixable)
 * [space-in-parens](space-in-parens) - require or disallow spaces inside parentheses
 * [space-infix-ops](space-infix-ops) - require spaces around operators (fixable)
 * [space-return-throw-case](space-return-throw-case) - require a space after `return`, `throw`, and `case` (fixable)
@@ -217,8 +219,8 @@ These rules are only relevant to ES6 environments.
 * [object-shorthand](object-shorthand) - require method and property shorthand syntax for object literals
 * [prefer-arrow-callback](prefer-arrow-callback) - suggest using arrow functions as callbacks
 * [prefer-const](prefer-const) - suggest using `const` declaration for variables that are never modified after declared
-* [prefer-spread](prefer-spread) - suggest using the spread operator instead of `.apply()`.
 * [prefer-reflect](prefer-reflect) - suggest using Reflect methods where applicable
+* [prefer-spread](prefer-spread) - suggest using the spread operator instead of `.apply()`.
 * [prefer-template](prefer-template) - suggest using template literals instead of strings concatenation
 * [require-yield](require-yield) - disallow generator functions that do not have `yield`
 
