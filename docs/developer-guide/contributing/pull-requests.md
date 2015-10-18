@@ -45,7 +45,7 @@ You should do all of your development for the issue in this branch.
 
 ### Step 2: Make your changes<a name="step2"></a>
 
-Make the changes to the code and tests and then commit to your branch:
+Make the changes to the code and tests, following the [code conventions](../code-conventions) as you go. Once you have finished, commit the changes to your branch:
 
 ```
 $ git add -A
@@ -72,7 +72,9 @@ The `Tag` is one of the following:
 * `Build` - changes to build process only.
 * `Upgrade` - for a dependency upgrade.
 
-The message summary should be a one-sentence description of the change and preferably shorter than 75 characters total. The issue number should be mentioned at the end. If the commit doesn't completely fix the issue, then use `(refs #1234)` instead of `(fixes #1234)`.
+Use the [labels of the issue you are working on](working-on-issues#issue-labels) to determine the best tag.
+
+The message summary should be a one-sentence description of the change, and it must be 72 characters in length or shorter. The issue number should be mentioned at the end. If the commit doesn't completely fix the issue, then use `(refs #1234)` instead of `(fixes #1234)`.
 
 Here are some good commit message summary examples:
 
