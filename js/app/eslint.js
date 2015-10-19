@@ -23581,12 +23581,12 @@ module.exports.schema = [
 /**
  * Gets the last element of a given array.
  *
- * @param {any[]} xs - An array to get.
- * @returns {any} The last element, or undefined.
+ * @param {*[]} xs - An array to get.
+ * @returns {*} The last element, or undefined.
  */
 function getLast(xs) {
     if (xs.length === 0) {
-        return void 0;
+        return null;
     }
     return xs[xs.length - 1];
 }
@@ -23670,8 +23670,16 @@ module.exports = function(context) {
             return;
         }
 
-        var sourceCode = context.getSourceCode();
-        var trailingToken = sourceCode.getTokenAfter(lastItem);
+        var sourceCode = context.getSourceCode(),
+            trailingToken;
+
+        // last item can be surrounded by parentheses for object and array literals
+        if (node.type === "ObjectExpression" || node.type === "ArrayExpression") {
+            trailingToken = sourceCode.getTokenBefore(sourceCode.getLastToken(node));
+        } else {
+            trailingToken = sourceCode.getTokenAfter(lastItem);
+        }
+
         if (trailingToken.value === ",") {
             context.report(
                 lastItem,
@@ -23702,8 +23710,16 @@ module.exports = function(context) {
             return;
         }
 
-        var sourceCode = context.getSourceCode();
-        var trailingToken = sourceCode.getTokenAfter(lastItem);
+        var sourceCode = context.getSourceCode(),
+            trailingToken;
+
+        // last item can be surrounded by parentheses for object and array literals
+        if (node.type === "ObjectExpression" || node.type === "ArrayExpression") {
+            trailingToken = sourceCode.getTokenBefore(sourceCode.getLastToken(node));
+        } else {
+            trailingToken = sourceCode.getTokenAfter(lastItem);
+        }
+
         if (trailingToken.value !== ",") {
             context.report(
                 lastItem,
@@ -30071,17 +30087,17 @@ module.exports = function(context) {
             });
         },
 
-        // handle the Object.defineProperty(Array.prototype) case
+        // handle the Object.definePropert[y|ies](Array.prototype) case
         "CallExpression": function(node) {
 
             var callee = node.callee,
                 subject,
                 object;
 
-            // only worry about Object.defineProperty
+            // only worry about Object.definePropert[y|ies]
             if (callee.type === "MemberExpression" &&
                 callee.object.name === "Object" &&
-                callee.property.name === "defineProperty") {
+                (callee.property.name === "defineProperty" || callee.property.name === "defineProperties")) {
 
                 // verify the object being added to is a native prototype
                 subject = node.arguments[0];
@@ -32581,9 +32597,13 @@ module.exports = function(context) {
             var parent = node.parent,
                 okTypes = detectObjects ? [] : ["ObjectExpression", "Property", "AssignmentExpression"];
 
-            // don't warn on parseInt() radix
+            // don't warn on parseInt() or Number.parseInt() radix
             if (node.parent.type === "CallExpression" && node === node.parent.arguments[1] &&
-                    node.parent.callee.name === "parseInt") {
+                    (node.parent.callee.name === "parseInt" ||
+                    node.parent.callee.type === "MemberExpression" &&
+                    node.parent.callee.object.name === "Number" &&
+                    node.parent.callee.property.name === "parseInt")
+                ) {
                 return;
             }
 
@@ -32831,9 +32851,7 @@ module.exports.schema = [
 module.exports = function(context) {
 
     var smartTabs,
-        templateLocs = [],
-        lastTemplateLocIndex = 0,
-        lastCommentLocIndex = 0;
+        ignoredLocs = [];
 
     switch (context.options[0]) {
         case true: // Support old syntax, maybe add deprecation warning here
@@ -32881,7 +32899,7 @@ module.exports = function(context) {
     return {
 
         "TemplateElement": function(node) {
-            templateLocs.push(node.loc);
+            ignoredLocs.push(node.loc);
         },
 
         "Program:exit": function(node) {
@@ -32894,6 +32912,22 @@ module.exports = function(context) {
                 match,
                 lines = context.getSourceLines(),
                 comments = context.getAllComments();
+
+            comments.forEach(function(comment) {
+                ignoredLocs.push(comment.loc);
+            });
+
+            ignoredLocs.sort(function(first, second) {
+                if (beforeLoc(first, second.start.line, second.start.column)) {
+                    return 1;
+                }
+
+                if (beforeLoc(second, first.start.line, second.start.column)) {
+                    return -1;
+                }
+
+                return 0;
+            });
 
             if (smartTabs) {
                 /*
@@ -32910,28 +32944,18 @@ module.exports = function(context) {
                     var lineNumber = i + 1,
                         column = match.index + 1;
 
-                    for (; lastCommentLocIndex < comments.length; lastCommentLocIndex++) {
-                        if (beforeLoc(comments[lastCommentLocIndex].loc, lineNumber, column)) {
+                    for (var j = 0; j < ignoredLocs.length; j++) {
+                        if (beforeLoc(ignoredLocs[j], lineNumber, column)) {
                             continue;
                         }
-                        if (afterLoc(comments[lastCommentLocIndex].loc, lineNumber, column)) {
-                            break;
+                        if (afterLoc(ignoredLocs[j], lineNumber, column)) {
+                            continue;
                         }
+
                         return;
                     }
 
-                    // make sure this isn't inside of a template element
-                    for (; lastTemplateLocIndex < templateLocs.length; lastTemplateLocIndex++) {
-                        if (beforeLoc(templateLocs[lastTemplateLocIndex], lineNumber, column)) {
-                            continue;
-                        }
-                        if (afterLoc(templateLocs[lastTemplateLocIndex], lineNumber, column)) {
-                            break;
-                        }
-                        return;
-                    }
-
-                    context.report(node, { line: i + 1, column: column }, "Mixed spaces and tabs.");
+                    context.report(node, { line: lineNumber, column: column }, "Mixed spaces and tabs.");
                 }
             });
         }
