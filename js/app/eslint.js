@@ -23644,9 +23644,9 @@ module.exports = function(context) {
             return false;
         }
 
-        var sourceCode = context.getSourceCode();
-        var penultimateToken = sourceCode.getLastToken(lastItem);
-        var lastToken = sourceCode.getTokenAfter(penultimateToken);
+        var sourceCode = context.getSourceCode(),
+            penultimateToken = sourceCode.getLastToken(lastItem),
+            lastToken = sourceCode.getLastToken(node);
 
         if (lastToken.value === ",") {
             penultimateToken = lastToken;
@@ -26276,15 +26276,16 @@ module.exports = function(context) {
     }
 
     /**
-     * Check to see if the node arguments are spread across multiple lines
+     * Check to see if the argument before the callee node is multi-line and
+     * there should only be 1 argument before the callee node
      * @param {ASTNode} node node to check
      * @returns {boolean} True if arguments are multi-line
      */
-    function isCallArgsMultiline(node) {
-        var lastArg = node.arguments.length > 0 ? node.arguments[node.arguments.length - 1] : null;
+    function isArgBeforeCalleeNodeMultiline(node) {
+        var parent = node.parent;
 
-        if (lastArg) {
-            return lastArg.loc.end.line > node.loc.start.line;
+        if (parent.arguments.length >= 2 && parent.arguments[1] === node) {
+            return parent.arguments[0].loc.end.line > parent.arguments[0].loc.start.line;
         }
 
         return false;
@@ -26329,7 +26330,7 @@ module.exports = function(context) {
                     indent = getNodeIndent(calleeParent);
                 }
             } else {
-                if (isCallArgsMultiline(calleeParent) &&
+                if (isArgBeforeCalleeNodeMultiline(calleeNode) &&
                     calleeParent.callee.loc.start.line === calleeParent.callee.loc.end.line &&
                     !isNodeFirstInLine(calleeNode)) {
                     indent = getNodeIndent(calleeParent);
@@ -26427,7 +26428,7 @@ module.exports = function(context) {
                 } else if (parent.loc.start.line !== node.loc.start.line && parentVarNode === parentVarNode.parent.declarations[0]) {
                     nodeIndent = nodeIndent + indentSize;
                 }
-            } else if (!parentVarNode && !isFirstArrayElementOnSameLine(parent) && effectiveParent.type !== "ExpressionStatement" && effectiveParent.type !== "AssignmentExpression" && effectiveParent.type !== "Property") {
+            } else if (!parentVarNode && !isFirstArrayElementOnSameLine(parent) && effectiveParent.type !== "MemberExpression" && effectiveParent.type !== "ExpressionStatement" && effectiveParent.type !== "AssignmentExpression" && effectiveParent.type !== "Property") {
                 nodeIndent = nodeIndent + indentSize;
             }
 
@@ -26996,30 +26997,12 @@ module.exports = function(context) {
         afterColon = +!(options.afterColon === false); // Defaults to true
 
     /**
-     * Gets the first node on the same line with the provided node.
-     * @param {ASTNode} node The node to check find from
-     * @returns {ASTNode} the first node on the given node's line
-     */
-    function getFirstNodeInLine(node) {
-        var startLine, endLine, firstToken = node;
-
-        do {
-            node = firstToken;
-            firstToken = context.getTokenBefore(node);
-            startLine = node.loc.start.line;
-            endLine = firstToken ? firstToken.loc.end.line : -1;
-        } while (startLine === endLine);
-
-        return node;
-    }
-
-    /**
      * Starting from the given a node (a property.key node here) looks forward
-     * until it finds the first node before a colon punctuator and returns it.
-     * @param {ASTNode} node The node to start looking from
-     * @returns {ASTNode} the first node before a colon punctuator
+     * until it finds the last token before a colon punctuator and returns it.
+     * @param {ASTNode} node The node to start looking from.
+     * @returns {ASTNode} The last token before a colon punctuator.
      */
-    function getFirstNodeBeforeColon(node) {
+    function getLastTokenBeforeColon(node) {
         var prevNode;
 
         while (node && (node.type !== "Punctuator" || node.value !== ":")) {
@@ -27078,9 +27061,15 @@ module.exports = function(context) {
      * @returns {int} Width of the key.
      */
     function getKeyWidth(property) {
-        var key = property.key;
-        var startToken = getFirstNodeInLine(key);
-        var endToken = getFirstNodeBeforeColon(key);
+        var startToken, endToken;
+
+        // Ignore shorthand methods and properties, as they have no colon
+        if (property.method || property.shorthand) {
+            return 0;
+        }
+
+        startToken = context.getFirstToken(property);
+        endToken = getLastTokenBeforeColon(property.key);
 
         return endToken.range[1] - startToken.range[0];
     }
@@ -32595,19 +32584,32 @@ module.exports = function(context) {
     return {
         "Literal": function(node) {
             var parent = node.parent,
+                value = node.value,
+                raw = node.raw,
                 okTypes = detectObjects ? [] : ["ObjectExpression", "Property", "AssignmentExpression"];
 
-            // don't warn on parseInt() or Number.parseInt() radix
-            if (node.parent.type === "CallExpression" && node === node.parent.arguments[1] &&
-                    (node.parent.callee.name === "parseInt" ||
-                    node.parent.callee.type === "MemberExpression" &&
-                    node.parent.callee.object.name === "Number" &&
-                    node.parent.callee.property.name === "parseInt")
-                ) {
+            if (!isNumber(node)) {
                 return;
             }
 
-            if (!isNumber(node) || shouldIgnoreNumber(node.value)) {
+            if (parent.type === "UnaryExpression" && parent.operator === "-") {
+                node = parent;
+                parent = node.parent;
+                value = -value;
+                raw = "-" + raw;
+            }
+
+            if (shouldIgnoreNumber(value)) {
+                return;
+            }
+
+            // don't warn on parseInt() or Number.parseInt() radix
+            if (parent.type === "CallExpression" && node === parent.arguments[1] &&
+                    (parent.callee.name === "parseInt" ||
+                    parent.callee.type === "MemberExpression" &&
+                    parent.callee.object.name === "Number" &&
+                    parent.callee.property.name === "parseInt")
+            ) {
                 return;
             }
 
@@ -32621,7 +32623,7 @@ module.exports = function(context) {
             } else if (okTypes.indexOf(parent.type) === -1) {
                 context.report({
                     node: node,
-                    message: "No magic number: " + node.raw
+                    message: "No magic number: " + raw
                 });
             }
         }
@@ -33211,9 +33213,9 @@ module.exports = function(context) {
                 trimmedLines[i] = x;
             });
 
-            // swallow the final newline, as some editors add it automatically
-            // and we don't want it to cause an issue
-            if (trimmedLines[trimmedLines.length - 1] === "") {
+            // a single empty line at the end is a valid case regardless of the value of "max" option
+            if (trimmedLines[trimmedLines.length - 2] !== "" &&
+                trimmedLines[trimmedLines.length - 1] === "") {
                 trimmedLines = trimmedLines.slice(0, -1);
             }
 
@@ -41273,7 +41275,7 @@ module.exports = function(context) {
                 }
 
                 // check tag preferences
-                if (prefer.hasOwnProperty(tag.title)) {
+                if (prefer.hasOwnProperty(tag.title) && tag.title !== prefer[tag.title]) {
                     context.report(jsdocNode, "Use @{{name}} instead.", { name: prefer[tag.title] });
                 }
 
