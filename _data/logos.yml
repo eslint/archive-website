@@ -1,3 +1,7 @@
+- url: https://www.zendesk.com
+  src: /img/logos/zendesk.svg
+  name: Zendesk
+
 - url: http://www.domain.com.au
   src: /img/logos/domain.svg
   name: Domain
