@@ -143,7 +143,7 @@ These rules are purely matters of style and are quite subjective.
 * [block-spacing](block-spacing.md) - disallow or enforce spaces inside of single line blocks (fixable)
 * [brace-style](brace-style.md) - enforce one true brace style
 * [camelcase](camelcase.md) - require camel case names
-* [comma-spacing](comma-spacing.md) - enforce spacing before and after comma
+* [comma-spacing](comma-spacing.md) - enforce spacing before and after comma (fixable)
 * [comma-style](comma-style.md) - enforce one true comma style
 * [computed-property-spacing](computed-property-spacing.md) - require or disallow padding inside computed properties (fixable)
 * [consistent-this](consistent-this.md) - enforce consistent naming when capturing the current execution context
@@ -202,10 +202,12 @@ These rules are purely matters of style and are quite subjective.
 
 These rules are only relevant to ES6 environments.
 
+* [arrow-body-style](arrow-body-style.md) - require braces in arrow function body
 * [arrow-parens](arrow-parens.md) - require parens in arrow function arguments
 * [arrow-spacing](arrow-spacing.md) - require space before/after arrow function's arrow (fixable)
 * [constructor-super](constructor-super.md) - verify calls of `super()` in constructors
 * [generator-star-spacing](generator-star-spacing.md) - enforce spacing around the `*` in generator functions (fixable)
+* [no-arrow-condition](no-arrow-condition.md) - disallow arrow functions where a condition is expected
 * [no-class-assign](no-class-assign.md) - disallow modifying variables of class declarations
 * [no-const-assign](no-const-assign.md) - disallow modifying variables that are declared using `const`
 * [no-dupe-class-members](no-dupe-class-members.md) - disallow duplicate name in class members

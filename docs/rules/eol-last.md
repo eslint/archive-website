@@ -12,7 +12,7 @@ rule enforces newlines for all non-empty programs.
 
 Prior to v0.16.0 this rule also enforced that there was only a single line at
 the end of the file. If you still want this behaviour, consider enabling
-[no-multiple-empty-lines](no-multiple-empty-lines) and/or
+[no-multiple-empty-lines](no-multiple-empty-lines) with `maxEOF` and/or
 [no-trailing-spaces](no-trailing-spaces).
 
 **Fixable:** This rule is automatically fixable using the `--fix` flag on the command line.
@@ -39,6 +39,10 @@ function doSmth() {
 }
 // spaces here
 ```
+
+### Options
+
+This rule may take one option which is either `unix` (LF) or `windows` (CRLF). When omitted `unix` is assumed.
 
 ## Version
 

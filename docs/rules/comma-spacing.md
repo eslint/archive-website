@@ -5,6 +5,8 @@ layout: doc
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 # Enforces spacing around commas (comma-spacing)
 
+**Fixable:** This rule is automatically fixable using the `--fix` flag on the command line.
+
 Spacing around commas improve readability of a list of items. Although most of the style guidelines for languages prescribe adding a space after a comma and not before it, it is subjective to the preferences of a project.
 
 ```js
