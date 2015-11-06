@@ -1,0 +1,281 @@
+
+/* Hide every mention of search if JavaScript is disabled */
+.no-js .eslint-nav .eslint-navbar .eslint-toggle-search-open,
+.no-js .eslint-nav .eslint-navbar-toggles .eslint-toggle-search-open,
+.no-js .eslint-navbar .eslint-search {
+  display: none;
+}
+
+/* We revert the right/left padding because we changed the underlying markup */
+.eslint-nav .navbar-brand {
+  margin-left: -15px;
+}
+
+.eslint-nav .eslint-navbar-toggles {
+  margin-right: -15px;
+}
+
+/* On small screens, the display of the search bar on top of the menu is toggled */
+/* through a checkbox, when clicking on the matching label. The checkbox is */
+/* hidden, and we have two labels (pointing to the same checkbox), for two */
+/* different RWD breakpoints. */
+.eslint-toggle-search-checkbox {
+  display: none;
+}
+
+ /* Magnifying glass label */
+.eslint-toggle-search-open {
+  color: #463fd4;
+  cursor: pointer;
+  margin: 21px 15px 21px 0;
+  padding: 6px 10px 2px 10px;
+}
+ /* Hiding the second magnifying glass that will only be used on bigger screen */
+.eslint-navbar .eslint-toggle-search-open {
+  display: none;
+}
+
+
+ /* When the checkbox is checked, we hide everything in the .eslint-nav, except */
+ /* the form input */
+ /* Hide all */
+.eslint-toggle-search-checkbox:checked + .eslint-nav .navbar-brand,
+.eslint-toggle-search-checkbox:checked + .eslint-nav .eslint-navbar-toggles,
+.eslint-toggle-search-checkbox:checked + .eslint-nav .navbar-nav {
+  display: none;
+}
+ /* Display search */
+.eslint-toggle-search-checkbox:checked + .eslint-nav .eslint-navbar {
+  border-top: 0;
+  display: block;
+  visibility: visible;
+}
+.eslint-toggle-search-checkbox:checked + .eslint-nav .eslint-navbar .eslint-search {
+  display: block;
+}
+
+ /* Search input for small screen */
+.eslint-navbar .eslint-search {
+  border-color: transparent;
+  display: none;
+  margin: 0 -15px;
+  padding: 20px 15px 15px 15px;
+}
+ /* We need to play with display table to align the form element in the header */
+.eslint-search .eslint-search-input-wrapper {
+  display: table;
+  width: 100%;
+  border-bottom: 2px solid #463fd4;
+}
+.eslint-search .eslint-search-input-wrapper:before {
+  content: "\e003";
+  display: table-cell;
+  color: #463fd4;
+  vertical-align: middle;
+  font-family: "Glyphicons Halflings";
+  text-align: center;
+  width: 30px;
+}
+
+.eslint-search .eslint-toggle-search-close {
+  cursor: pointer;
+  display: table-cell;
+  vertical-align: middle;
+  color: #463fd4;
+  width: 30px;
+}
+ /* We hide the submit button, so we need to round the corners of the input */
+.eslint-search .input-group-btn {
+  display: none;
+}
+
+.eslint-nav .eslint-search .form-control {
+  font-weight: normal;
+  box-shadow: none;
+  border-color: transparent;
+  background-color: transparent;
+}
+
+ /* Fix display of nav elements in dropdown hamburger list */
+.eslint-nav .eslint-navbar {
+  clear: both;
+}
+
+/* Enough room to display the links, but not the full search. We'll only add */
+/* a magnifying glass to toggle the search */
+@media (min-width: 768px) {
+  .eslint-nav .eslint-navbar {
+    clear: none;
+  }
+  /* Show magnifying glass */
+  .eslint-nav .eslint-navbar .eslint-toggle-search-open {
+    color: #666;
+    display: block;
+    border: none;
+  }
+  .eslint-nav .eslint-navbar .eslint-toggle-search-open:hover {
+    background: transparent;
+    color: #444;
+  }
+  /* Hide the magnifying glass */
+  .eslint-toggle-search-checkbox:checked + .eslint-nav .eslint-toggle-search-open {
+    display: none;
+  }
+  /* Force the search to take all available space */
+  .eslint-toggle-search-checkbox:checked + .eslint-nav .eslint-navbar .eslint-search {
+    width: 100%;
+    margin: 0;
+  }
+}
+
+/* Enough room to display the input directly in the header */
+@media (min-width: 996px) {
+   /* Hide magnifying glass and close button */
+  .eslint-nav .eslint-search .eslint-toggle-search-close,
+  .eslint-nav .eslint-navbar .eslint-toggle-search-open {
+    display: none;
+  }
+   /* Show search */
+  .eslint-nav .eslint-search {
+    display: block;
+    width: 325px;
+  }
+  /* Tone down the colors a bit */
+  .eslint-search .eslint-search-input-wrapper {
+    border-color: #666;
+  }
+  .eslint-search .eslint-search-input-wrapper:before {
+    color: #666;
+  }
+}
+
+
+/* Main autocomplete wrapper */
+.eslint-nav .algolia-autocomplete {
+  width: 100%;
+}
+.eslint-nav .aa-dropdown-menu {
+  background-color: #FFF;
+  border: 1px solid #333;
+  border-radius: 4px;
+  font-size: 16px;
+  margin: 6px 0 0;
+  padding: 4px;
+  text-align: left;
+  left: -20px !important;
+  right: -20px !important;
+}
+
+/* Category headers */
+.eslint-nav .suggestion-category {
+  background-color: #4B54DE;
+  color: white;
+  font-weight: 600;
+  padding: 5px 10px;
+  text-align: left;
+}
+.eslint-nav .suggestion-category mark {
+  background-color: #4D47D5;
+  color: white;
+  padding: 0;
+}
+
+/* Suggestion */
+.eslint-nav .suggestion {
+  color: #333;
+  cursor: pointer;
+  overflow: hidden;
+  border-bottom: 1px solid #3A33D1;
+}
+.eslint-nav .aa-suggestion:last-child .suggestion {
+  border-bottom-color: transparent;
+}
+.eslint-nav .suggestion mark {
+  padding: 0;
+  color: #3A33D1;
+  background: none;
+  font-weight: 600;
+}
+.eslint-nav .suggestion-subcategory-secondary {
+  display: inline-block;
+  font-weight: bold;
+}
+.eslint-nav .suggestion-subcategory-secondary:after {
+  content: " › ";
+}
+.eslint-nav .suggestion-title {
+  display: inline;
+}
+.eslint-nav .suggestion-content {
+  padding: 3px 5px;
+}
+/* Hidden elements for this viewport */
+.eslint-nav .suggestion-subcategory-main,
+.eslint-nav .suggestion-text {
+  display: none;
+}
+
+/* Selected suggestion */
+.eslint-nav .aa-cursor .suggestion-content,
+.eslint-nav .aa-cursor .suggestion-content code,
+.eslint-nav .aa-cursor .suggestion-content mark {
+  color: #272296;
+}
+.eslint-nav .aa-cursor .suggestion {
+  background: #EBEBFB;
+}
+
+/* Screen big enough to display the text snippets */
+@media (min-width: 568px) {
+  .eslint-nav .suggestion-text {
+    display: block;
+    font-size: .9em;
+  }
+}
+
+/* Screen big enough to display results in two columns */
+@media (min-width: 768px) {
+   /* Use table display for the two columns */
+  .eslint-nav .suggestion {
+    display: table;
+    width: 100%;
+    border-bottom: 1px solid #9D99E8;
+  }
+  .eslint-nav .suggestion-subcategory-main {
+    border-right: 1px solid #9D99E8;
+    background: #F2F2FF;
+    color: #4E4726;
+    display: table-cell;
+    max-width: 135px;
+    min-width: 135px;
+    overflow: hidden;
+    padding: 5px 7px 5px 5px;
+    text-align: right;
+    text-overflow: ellipsis;
+    vertical-align: top;
+    width: 135px;
+  }
+  .eslint-nav .suggestion-content {
+    display: table-cell;
+    padding: 5px 10px;
+  }
+  .eslint-nav .suggestion-subcategory-secondary {
+    display: none;
+  }
+  .eslint-nav .suggestion-title {
+    font-weight: 600;
+  }
+  .eslint-nav .suggestion-text {
+    display: block;
+    font-weight: normal;
+    padding: 2px;
+  }
+}
+
+/* Enough room to display the autocomplete in the header directly */
+@media (min-width: 996px) {
+  .eslint-nav .aa-dropdown-menu {
+    left: -30px !important;
+    right: -270px !important;
+  }
+}
