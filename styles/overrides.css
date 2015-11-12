@@ -11,3 +11,21 @@ main.doc .highlight pre {
   overflow-x: auto;
   word-wrap: normal;
 }
+
+/* We need to push the content because of the fixed header */
+body {
+  padding-top: 80px;
+}
+/* Allow anchors to not be hidden by the fixed header */
+h1:target:before,
+h2:target:before,
+h3:target:before,
+h4:target:before,
+h5:target:before,
+h6:target:before {
+  content: "";
+  display: block;
+  margin-top: -80px;
+  height: 80px;
+  width: 1px;
+}

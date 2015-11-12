@@ -1,54 +1,80 @@
-<header class="navbar navbar-default navbar-demo" role="navigation">
-    <div class="container">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a href="/" class="navbar-brand">
-                <img alt="ESLint" src="/img/logo.svg" itemprop="image">
-                ESLint</a>
+<input type="checkbox" id="eslint-toggle-search" class="eslint-toggle-search-checkbox" />
+<header class="navbar navbar-default navbar-demo navbar-fixed-top eslint-nav" id="top" role="banner">
+  <div class="container">
+
+    <a href="/" class="navbar-brand"><img alt="ESLint" src="/img/logo.svg" itemprop="image">ESLint</a>
+
+    <div class="eslint-navbar-toggles">
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#eslint-navbar" aria-controls="eslint-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+
+      <label for="eslint-toggle-search" class="navbar-toggle eslint-toggle-search-open">
+        <span class="sr-only">Open search</span>
+        <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+      </label>
+    </div>
+
+    <nav id="eslint-navbar" class="collapse navbar-collapse eslint-navbar">
+      <ul class="nav navbar-nav navbar-right">
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">User guide<span class="caret"></span></a>
+          <ul class="dropdown-menu" role="menu">
+            <li><a href="/docs/user-guide/configuring">Configuring ESLint</a></li>
+            <li><a href="/docs/user-guide/command-line-interface">Command Line Interface</a></li>
+            <li><a href="/docs/rules/">Rules</a></li>
+            <li class="divider"></li>
+            <li><a href="/docs/user-guide/migrating-to-1.0.0">Migrating to v1.0.0</a></li>
+            <li><a href="/docs/user-guide/integrations">Integrations</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Developer guide<span class="caret"></span></a>
+          <ul class="dropdown-menu" role="menu">
+            <li><a href="/docs/developer-guide/architecture">Architecture</a></li>
+            <li><a href="/docs/developer-guide/contributing">Contributing</a></li>
+            <li><a href="/docs/developer-guide/source-code">Get the Source Code</a></li>
+            <li><a href="/docs/developer-guide/development-environment">Setup a Development Environment</a></li>
+            <li><a href="/docs/developer-guide/unit-tests">Run the Unit Tests</a></li>
+            <li><a href="/docs/developer-guide/working-with-rules">Working with Rules</a></li>
+            <li><a href="/docs/developer-guide/working-with-plugins">Working with Plugins</a></li>
+            <li><a href="/docs/developer-guide/shareable-configs">Shareable Configs</a></li>
+            <li><a href="/docs/developer-guide/nodejs-api">Node.js API</a></li>
+            <li><a href="/docs/developer-guide/governance">Governance Model</a></li>
+          </ul>
+        </li>
+        <li><a href="/blog/">Blog</a></li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Demo<span class="caret"></span></a>
+          <ul class="dropdown-menu" role="menu">
+            <li><a href="/demo/">ESLint Demo</a></li>
+            <li><a href="/parser/">Espree Demo</a></li>
+          </ul>
+        </li>
+        <li><a href="/docs/about/">About</a></li>
+      </ul>
+
+      <label for="eslint-toggle-search" class="navbar-toggle eslint-toggle-search-open">
+        <span class="sr-only">Open search</span>
+        <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+      </label>
+
+      <div class="navbar-form navbar-right eslint-search" role="search">
+        <div class="input-group">
+          <label class="sr-only" aria-label="Search" for="eslint-search-input">Search</label>
+          <div class="eslint-search-input-wrapper">
+            <input type="text" class="form-control" id="eslint-search-input" accesskey="s" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="Search the docs...">
+            <label for="eslint-toggle-search" class="eslint-toggle-search-close">
+              <span class="sr-only">Close search</span>
+              <span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span>
+            </label>
+          </div>
         </div>
-        <nav class="collapse navbar-collapse">
-            <ul class="nav navbar-nav navbar-right">
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">User guide<span class="caret"></span></a>
-                    <ul class="dropdown-menu" role="menu">
-                        <li><a href="/docs/user-guide/configuring">Configuring ESLint</a></li>
-                        <li><a href="/docs/user-guide/command-line-interface">Command Line Interface</a></li>
-                        <li><a href="/docs/rules/">Rules</a></li>
-                        <li class="divider"></li>
-                        <li><a href="/docs/user-guide/migrating-to-1.0.0">Migrating to v1.0.0</a></li>
-                        <li><a href="/docs/user-guide/integrations">Integrations</a></li>
-                    </ul>
-                </li>
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Developer guide<span class="caret"></span></a>
-                    <ul class="dropdown-menu" role="menu">
-                        <li><a href="/docs/developer-guide/architecture">Architecture</a></li>
-                        <li><a href="/docs/developer-guide/contributing">Contributing</a></li>
-                        <li><a href="/docs/developer-guide/source-code">Get the Source Code</a></li>
-                        <li><a href="/docs/developer-guide/development-environment">Setup a Development Environment</a></li>
-                        <li><a href="/docs/developer-guide/unit-tests">Run the Unit Tests</a></li>
-                        <li><a href="/docs/developer-guide/working-with-rules">Working with Rules</a></li>
-                        <li><a href="/docs/developer-guide/working-with-plugins">Working with Plugins</a></li>
-                        <li><a href="/docs/developer-guide/shareable-configs">Shareable Configs</a></li>
-                        <li><a href="/docs/developer-guide/nodejs-api">Node.js API</a></li>
-                        <li><a href="/docs/developer-guide/governance">Governance Model</a></li>
-                    </ul>
-                </li>
-                <li><a href="/blog/">Blog</a></li>
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Demo<span class="caret"></span></a>
-                    <ul class="dropdown-menu" role="menu">
-                        <li><a href="/demo/">ESLint Demo</a></li>
-                        <li><a href="/parser/">Espree Demo</a></li>
-                    </ul>
-                </li>
-                <li><a href="/docs/about/">About</a></li>
-            </ul>
-        </nav>
-    </div><!-- /.container -->
+      </div>
+    </nav>
+
+  </div><!-- /.container -->
 </header><!-- /.navbar -->
