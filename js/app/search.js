@@ -6,6 +6,8 @@
   var suggestionTemplate = window.Hogan.compile($('#suggestion-item-template').text());
   var searchInputSelector = '#eslint-search-input';
   var $searchInput = $(searchInputSelector);
+  var suggestionFooter = '<a class="suggestion-footer" href="https://www.algolia.com/?utm_source=eslint" target="_blank">powered by <span class="suggestion-footer-logo">Algolia</span></a>';
+
 
   // Calls the Algolia API to get results matching the query
   function autocompleteSource(query, callback) {
@@ -66,6 +68,9 @@
       templates: {
         suggestion: function(suggestion) {
           return suggestionTemplate.render(suggestion);
+        },
+        footer: function() {
+          return suggestionFooter;
         }
       }
     }
