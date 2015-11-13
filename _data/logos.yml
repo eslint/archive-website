@@ -1,3 +1,7 @@
+- url: https://www.adroll.com
+  src: /img/logos/adroll.svg
+  name: AdRoll
+
 - url: https://www.zendesk.com
   src: /img/logos/zendesk.svg
   name: Zendesk
