@@ -1,6 +1,6 @@
 // Code goes here
 
-require.config({
+requirejs.config({
     paths: {
         'text': '//cdnjs.cloudflare.com/ajax/libs/require-text/2.0.12/text',
         'orion': 'http://eclipse.org/orion/editor/releases/current/built-editor-amd.min'
