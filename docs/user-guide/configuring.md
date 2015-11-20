@@ -8,7 +8,7 @@ layout: doc
 ESLint is designed to be completely configurable, meaning you can turn off every rule and run only with basic syntax validation, or mix and match the bundled rules and your custom rules to make ESLint perfect for your project. There are two primary ways to configure ESLint:
 
 1. **Configuration Comments** - use JavaScript comments to embed configuration information directly into a file.
-1. **Configuration Files** - use a JSON or YAML file to specify configuration information for an entire directory and all of its subdirectories. This can be in the form of an `.eslintrc` file or an `eslintConfig` field in a `package.json` file, both of which ESLint will look for and read automatically, or you can specify a configuration file on the [command line](command-line-interface).
+1. **Configuration Files** - use a JavaScript, JSON or YAML file to specify configuration information for an entire directory and all of its subdirectories. This can be in the form of an `.eslintrc` file or an `eslintConfig` field in a `package.json` file, both of which ESLint will look for and read automatically, or you can specify a configuration file on the [command line](command-line-interface).
 
 There are several pieces of information that can be configured:
 
@@ -387,6 +387,25 @@ The second way to use configuration files is via `.eslintrc` and `package.json` 
 
 In each case, the settings in the configuration file override default settings.
 
+## Configuration File Formats
+
+ESLint supports configuration files in several formats:
+
+* **JavaScript** - use `.eslintrc.js` and export an object containing your configuration.
+* **YAML** - use `.eslintrc.yaml` or `.eslintrc.yml` to define the configuration structure.
+* **JSON** - use `.eslintrc.json` to define the configuration structure. ESLint's JSON files also allow JavaScript-style comments.
+* **package.json** - create an `eslintConfig` property in your `package.json` file and define your configuration there.
+* **Deprecated** - use `.eslintrc`, which can be either JSON or YAML.
+
+If there are multiple `.eslintrc.*` files in the same directory, ESLint will only use one. The priority order is:
+
+1. `.eslintrc.js`
+1. `.eslintrc.yaml`
+1. `.eslintrc.yml`
+1. `.eslintrc.json`
+1. `.eslintrc`
+
+
 ## Configuration Cascading and Hierarchy
 
 When using `.eslintrc` and `package.json` files for configuration, you can take advantage of configuration cascading. For instance, suppose you have the following structure:
@@ -417,6 +436,8 @@ your-project
 
 If there is an `.eslintrc` and a `package.json` file found in the same directory, both will be used, with the `.eslintrc` having the higher precendence.
 
+**Note:** If you have a personal configuration file in your home directory (`~/.eslintrc`), it will only be used if no other configuration files are found. Since a personal configuration would apply to everything inside of a user's directory, including third-party code, this could cause problems when running ESLint.
+
 By default, ESLint will look for configuration files in all parent folders up to the root directory. This can be useful if you want all of your projects to follow a certain convention, but can sometimes lead to unexpected results. To limit ESLint to a specific project, place `"root": true` inside the `eslintConfig` field of the `package.json` file or in the `.eslintrc` file at your project's root level.  ESLint will stop looking in parent folders once it finds a configuration with `"root": true`.
 
 ```js
@@ -432,16 +453,16 @@ And in YAML:
   root: true
 ```
 
-For example, consider `projectA` which has `"root": true` set in the `.eslintrc` file in the main project directory.  In this case, while linting main.js, the configurations within `lib/` and `projectA` will be used, but the `.eslintrc` file in `user/` will not.
+For example, consider `projectA` which has `"root": true` set in the `.eslintrc` file in the main project directory.  In this case, while linting `main.js`, the configurations within `lib/`will be used, but the `.eslintrc` file in `projectA/` will not.
 
 ```text
 home
 └── user
-    ├── .eslintrc
+    ├── .eslintrc <- Always skipped if other configs present
     └── projectA
-        ├── .eslintrc <- { "root": true }
+        ├── .eslintrc  <- Not used
         └── lib
-            ├── .eslintrc
+            ├── .eslintrc  <- { "root": true }
             └── main.js
 ```
 

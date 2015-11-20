@@ -33,8 +33,10 @@ The most important method on `linter` is `verify()`, which initiates linting of 
 
 * `code` - the source code to lint (a string or instance of `SourceCode`).
 * `config` - a configuration object.
-* `filename` - (optional) the filename to associate with the source code.
-* `saveState` - (optional) set to true to maintain the internal state of `linter` after linting (mostly used for testing purposes).
+* `options` - (optional) Additional options for this run.
+    * `filename` - (optional) the filename to associate with the source code.
+    * `saveState` - (optional) set to true to maintain the internal state of `linter` after linting (mostly used for testing purposes).
+    * `allowInlineConfig` - (optional) set to `false` to disable inline comments from changing eslint rules.
 
 You can call `verify()` like this:
 
@@ -45,7 +47,7 @@ var messages = linter.verify("var foo;", {
     rules: {
         semi: 2
     }
-}, "foo.js");
+}, { filename: "foo.js" });
 
 // or using SourceCode
 
@@ -58,7 +60,7 @@ var messages = linter.verify(code, {
     rules: {
         semi: 2
     }
-}, "foo.js");
+}, { filename: "foo.js" });
 ```
 
 The `verify()` method returns an array of objects containing information about the linting warnings and errors. Here's an example:
@@ -100,7 +102,7 @@ var messages = linter.verify("var foo = bar;", {
     rules: {
         semi: 2
     }
-}, "foo.js");
+}, { filename: "foo.js" });
 
 var code = linter.getSourceCode();
 
@@ -128,6 +130,7 @@ The `CLIEngine` is a constructor, and you can create a new instance by passing i
 * `fix` - True indicates that fixes should be applied to the text when possible.
 * `ignore` - False disables use of `.eslintignore` (default: true). Corresponds to `--no-ignore`.
 * `ignorePath` - The ignore file to use instead of `.eslintignore` (default: null). Corresponds to `--ignore-path`.
+* `ignorePattern` - Glob patterns for paths to ignore. String or array of strings.
 * `baseConfig` - Set to false to disable use of base config. Could be set to an object to override default base config as well.
 * `rulePaths` - An array of directories to load custom rules from (default: empty array). Corresponds to `--rulesdir`.
 * `rules` - An object of rules to use (default: null). Corresponds to `--rule`.
@@ -135,7 +138,7 @@ The `CLIEngine` is a constructor, and you can create a new instance by passing i
 * `parser` - Specify the parser to be used (default: `espree`). Corresponds to `--parser`.
 * `cache` - Operate only on changed files (default: `false`). Corresponds to `--cache`.
 * `cacheFile` - Name of the file where the cache will be stored (default: `.eslintcache`). Corresponds to `--cache-file`. Deprecated: use `cacheLocation` instead.
-* `cacheLocation` - Name of the file or directory where the cache will be stored (default: `.estlintcache`). Correspond to `--cache-location`
+* `cacheLocation` - Name of the file or directory where the cache will be stored (default: `.eslintcache`). Correspond to `--cache-location`
 
 For example:
 
