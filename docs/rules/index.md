@@ -5,7 +5,7 @@ layout: doc
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 # Rules
 
-Rules in ESLint are divided into several categories to help you better understand their value. Though none are enabled by default, you can turn on rules that ESLint recommends by specifying your configuration to inherit from `eslint:recommended`. The rules that will be enabled when you inherit from `eslint:recommended` are indicated below as "(recommended)". For more information on how to configure rules and inherit from `eslint:recommended`, please see the [configuration documentation](../user-guide/configuring).
+Rules in ESLint are divided into several categories to help you better understand their value. All rules are disabled by default. ESLint recommends some rules to catch common problems, and you can use these recommended rules by including `extends: "eslint:recommended"` in your configuration file. The rules that will be enabled when you inherit from `eslint:recommended` are indicated below as "(recommended)". For more information on how to configure rules and use `extends`, please see the [configuration documentation](../user-guide/configuring).
 
 Some rules are fixable using the `--fix` command line flag. Those rules are marked as "(fixable)" below.
 
@@ -163,11 +163,16 @@ These rules are purely matters of style and are quite subjective.
 * [key-spacing](key-spacing) - enforce spacing between keys and values in object literal properties
 * [linebreak-style](linebreak-style) - disallow mixed 'LF' and 'CRLF' as linebreaks
 * [lines-around-comment](lines-around-comment) - enforce empty lines around comments
+* [max-depth](max-depth) - specify the maximum depth that blocks can be nested
+* [max-len](max-len) - specify the maximum length of a line in your program
 * [max-nested-callbacks](max-nested-callbacks) - specify the maximum depth callbacks can be nested
+* [max-params](max-params) - limits the number of parameters that can be used in the function declaration.
+* [max-statements](max-statements) - specify the maximum number of statement allowed in a function
 * [new-cap](new-cap) - require a capital letter for constructors
 * [new-parens](new-parens) - disallow the omission of parentheses when invoking a constructor with no arguments
 * [newline-after-var](newline-after-var) - require or disallow an empty newline after variable declarations
 * [no-array-constructor](no-array-constructor) - disallow use of the `Array` constructor
+* [no-bitwise](no-bitwise) - disallow use of bitwise operators
 * [no-continue](no-continue) - disallow use of the `continue` statement
 * [no-inline-comments](no-inline-comments) - disallow comments inline after code
 * [no-lonely-if](no-lonely-if) - disallow `if` as the only statement in an `else` block
@@ -176,6 +181,7 @@ These rules are purely matters of style and are quite subjective.
 * [no-negated-condition](no-negated-condition) - disallow negated conditions
 * [no-nested-ternary](no-nested-ternary) - disallow nested ternary expressions
 * [no-new-object](no-new-object) - disallow the use of the `Object` constructor
+* [no-plusplus](no-plusplus) - disallow use of unary operators, `++` and `--`
 * [no-restricted-syntax](no-restricted-syntax) - disallow use of certain syntax in code
 * [no-spaced-func](no-spaced-func) - disallow space between function identifier and application (fixable)
 * [no-ternary](no-ternary) - disallow the use of ternary operators
@@ -227,16 +233,6 @@ These rules are only relevant to ES6 environments.
 * [prefer-template](prefer-template) - suggest using template literals instead of strings concatenation
 * [require-yield](require-yield) - disallow generator functions that do not have `yield`
 
-## Legacy
-
-The following rules are included for compatibility with [JSHint](http://jshint.com/) and [JSLint](http://jslint.com/). While the names of the rules may not match up with the JSHint/JSLint counterpart, the functionality is the same.
-
-* [max-depth](max-depth) - specify the maximum depth that blocks can be nested
-* [max-len](max-len) - specify the maximum length of a line in your program
-* [max-params](max-params) - limits the number of parameters that can be used in the function declaration.
-* [max-statements](max-statements) - specify the maximum number of statement allowed in a function
-* [no-bitwise](no-bitwise) - disallow use of bitwise operators
-* [no-plusplus](no-plusplus) - disallow use of unary operators, `++` and `--`
 
 ## Removed
 
