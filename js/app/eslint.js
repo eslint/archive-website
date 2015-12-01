@@ -25817,9 +25817,12 @@ module.exports = function(context) {
 
         "ForInStatement": function(node) {
             prepareCheck(node, node.body, "for-in").check();
+        },
+
+        "ForOfStatement": function(node) {
+            prepareCheck(node, node.body, "for-of").check();
         }
     };
-
 };
 
 module.exports.schema = {
@@ -41102,7 +41105,7 @@ module.exports = function(context) {
                 return;
             }
 
-            checkTokens(node, left, right, { allowedPrecedingChars: [ "(", "{" ] });
+            checkTokens(node, left, right, { allowedPrecedingChars: [ "(", "{", "[" ] });
         },
         "YieldExpression": function(node) {
             check(node, { allowedPrecedingChars: [ "(", "{" ] });
