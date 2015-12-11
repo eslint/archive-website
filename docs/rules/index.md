@@ -47,6 +47,7 @@ The following rules point out areas where you might have made mistakes.
 These are rules designed to prevent you from making mistakes. They either prescribe a better way of doing something or help you avoid footguns.
 
 * [accessor-pairs](accessor-pairs) - Enforces getter/setter pairs in objects
+* [array-callback-return](array-callback-return) - Enforces return statements in callbacks of array's methods
 * [block-scoped-var](block-scoped-var) - treat `var` statements as if they were block scoped
 * [complexity](complexity) - specify the maximum cyclomatic complexity allowed in a program
 * [consistent-return](consistent-return) - require `return` statements to either always or never specify values
@@ -54,7 +55,7 @@ These are rules designed to prevent you from making mistakes. They either prescr
 * [default-case](default-case) - require `default` case in `switch` statements
 * [dot-location](dot-location) - enforces consistent newlines before or after dots
 * [dot-notation](dot-notation) - encourages use of dot notation whenever possible
-* [eqeqeq](eqeqeq) - require the use of `===` and `!==` (fixable)
+* [eqeqeq](eqeqeq) - require the use of `===` and `!==`
 * [guard-for-in](guard-for-in) - make sure `for-in` loops have an `if` statement
 * [no-alert](no-alert) - disallow the use of `alert`, `confirm`, and `prompt`
 * [no-caller](no-caller) - disallow use of `arguments.caller` or `arguments.callee`
@@ -70,6 +71,7 @@ These are rules designed to prevent you from making mistakes. They either prescr
 * [no-fallthrough](no-fallthrough) - disallow fallthrough of `case` statements (recommended)
 * [no-floating-decimal](no-floating-decimal) - disallow the use of leading or trailing decimal points in numeric literals
 * [no-implicit-coercion](no-implicit-coercion) - disallow the type conversions with shorter notations
+* [no-implicit-globals](no-implicit-globals) - disallow `var` and named functions in global scope
 * [no-implied-eval](no-implied-eval) - disallow use of `eval()`-like methods
 * [no-invalid-this](no-invalid-this) - disallow `this` keywords outside of classes or class-like objects
 * [no-iterator](no-iterator) - disallow usage of `__iterator__` property
@@ -138,6 +140,7 @@ These rules are specific to JavaScript running on Node.js or using CommonJS in t
 * [no-new-require](no-new-require) - disallow use of `new` operator with the `require` function
 * [no-path-concat](no-path-concat) - disallow string concatenation with `__dirname` and `__filename`
 * [no-process-exit](no-process-exit) - disallow `process.exit()`
+* [no-restricted-imports](no-restricted-imports) - restrict usage of specified node imports
 * [no-restricted-modules](no-restricted-modules) - restrict usage of specified node modules
 * [no-sync](no-sync) - disallow use of synchronous methods
 
@@ -229,9 +232,11 @@ These rules are only relevant to ES6 environments.
 * [prefer-arrow-callback](prefer-arrow-callback) - suggest using arrow functions as callbacks
 * [prefer-const](prefer-const) - suggest using `const` declaration for variables that are never modified after declared
 * [prefer-reflect](prefer-reflect) - suggest using Reflect methods where applicable
+* [prefer-rest-params](prefer-rest-params) - suggest using the rest parameters instead of `arguments`
 * [prefer-spread](prefer-spread) - suggest using the spread operator instead of `.apply()`.
 * [prefer-template](prefer-template) - suggest using template literals instead of strings concatenation
 * [require-yield](require-yield) - disallow generator functions that do not have `yield`
+* [yield-star-spacing](yield-star-spacing) - enforce spacing around the `*` in `yield*` expressions (fixable)
 
 
 ## Removed
