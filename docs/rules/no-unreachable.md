@@ -17,7 +17,7 @@ function fn() {
 
 ## Rule Details
 
-This rule is aimed at detecting unreachable code. It produces an error when a statements exist after a `return`, `throw`, `break`, or `continue` statement.
+This rule is aimed at detecting unreachable code. It produces an error when a statements in a block exist after a `return`, `throw`, `break`, or `continue` statement. The rule checks inside the program root, block statements, and switch cases.
 
 The following are considered problems:
 
@@ -26,33 +26,21 @@ The following are considered problems:
 
 function foo() {
     return true;
-    console.log("done");      /*error Unreachable code.*/
+    console.log("done");      /*error Found unexpected statement after a return.*/
 }
 
 function bar() {
     throw new Error("Oops!");
-    console.log("done");      /*error Unreachable code.*/
+    console.log("done");      /*error Found unexpected statement after a throw.*/
 }
 
 while(value) {
     break;
-    console.log("done");      /*error Unreachable code.*/
+    console.log("done");      /*error Found unexpected statement after a break.*/
 }
 
 throw new Error("Oops!");
-console.log("done");          /*error Unreachable code.*/
-
-function baz() {
-    if (Math.random() < 0.5) {
-        return;
-    } else {
-        throw new Error();
-    }
-    console.log("done");      /*error Unreachable code.*/
-}
-
-for (;;) {}
-console.log("done");          /*error Unreachable code.*/
+console.log("done");          /*error Found unexpected statement after a throw.*/
 ```
 
 The following patterns are not considered problems (due to JavaScript function and variable hoisting):
