@@ -17,6 +17,7 @@ The built-in formatter options are:
 * [stylish](#stylish)
 * [tap](#tap)
 * [unix](#unix)
+* [visualstudio](#visualstudio)
 
 ## Example Source
 
@@ -155,6 +156,21 @@ fullOfProblems.js:5:7: Expected indentation of 8 space characters but found 6. [
 fullOfProblems.js:5:7: Expected a return value. [Error/consistent-return]
 fullOfProblems.js:5:13: Missing semicolon. [Warning/semi]
 fullOfProblems.js:7:2: Unnecessary semicolon. [Error/no-extra-semi]
+
+9 problems
+```
+
+### visualstudio
+```
+fullOfProblems.js(1,10): error no-unused-vars : "addOne" is defined but never used
+fullOfProblems.js(2,9): error use-isnan : Use the isNaN function to compare with NaN.
+fullOfProblems.js(3,16): error space-unary-ops : Unexpected space before unary operator "++".
+fullOfProblems.js(3,20): warning semi : Missing semicolon.
+fullOfProblems.js(4,12): warning no-else-return : Unexpected 'else' after 'return'.
+fullOfProblems.js(5,7): warning indent : Expected indentation of 8 space characters but found 6.
+fullOfProblems.js(5,7): error consistent-return : Expected a return value.
+fullOfProblems.js(5,13): warning semi : Missing semicolon.
+fullOfProblems.js(7,2): error no-extra-semi : Unnecessary semicolon.
 
 9 problems
 ```

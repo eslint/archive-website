@@ -21,6 +21,27 @@ var code = new SourceCode("var foo = bar;", ast);
 
 The `SourceCode` constructor throws an error if the AST is missing any of the required information.
 
+### splitLines()
+
+This is a static function on `SourceCode` that is used to split the source code text into an array of lines.
+
+```js
+var SourceCode = require("eslint").SourceCode;
+
+var code = "var a = 1;\nvar b = 2;"
+
+// split code into an array
+var codeLines = SourceCode.splitLines(code);
+
+/*
+    Value of codeLines will be
+    [
+        "var a = 1;",
+        "var b = 2;"
+    ]
+ */
+```
+
 ## linter
 
 The `linter` object does the actual evaluation of the JavaScript code. It doesn't do any filesystem operations, it simply parses and reports on the code. You can retrieve `linter` like this:
@@ -138,7 +159,8 @@ The `CLIEngine` is a constructor, and you can create a new instance by passing i
 * `parser` - Specify the parser to be used (default: `espree`). Corresponds to `--parser`.
 * `cache` - Operate only on changed files (default: `false`). Corresponds to `--cache`.
 * `cacheFile` - Name of the file where the cache will be stored (default: `.eslintcache`). Corresponds to `--cache-file`. Deprecated: use `cacheLocation` instead.
-* `cacheLocation` - Name of the file or directory where the cache will be stored (default: `.eslintcache`). Correspond to `--cache-location`
+* `cacheLocation` - Name of the file or directory where the cache will be stored (default: `.eslintcache`). Correspond to `--cache-location`.
+* `cwd` - Path to a directory that should be considered as the current working directory.
 
 For example:
 

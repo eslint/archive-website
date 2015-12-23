@@ -105,6 +105,7 @@ An environment defines global variables that are predefined. The available envir
 * `embertest` - Ember test helper globals.
 * `webextensions` - WebExtensions globals.
 * `es6` - enable all ECMAScript 6 features except for modules.
+* `greasemonkey` - GreaseMonkey globals.
 
 These environments are not mutually exclusive, so you can define more than one at a time.
 
@@ -546,6 +547,10 @@ Both the JSON and YAML configuration file formats support comments (`package.jso
     }
 }
 ```
+
+## Specifying File extensions to Lint
+
+Currently the sole method for telling ESLint which file extensions to lint is by specifying a comma separated list of extensions using the [`--ext`](./command-line-interface#ext) command line option.
 
 ## Ignoring Files and Directories
 

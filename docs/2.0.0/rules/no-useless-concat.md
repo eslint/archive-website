@@ -3,7 +3,7 @@ title: Rule no-useless-concat
 layout: doc
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
-# Disallow unncessary concatenation of strings (no-useless-concat)
+# Disallow unnecessary concatenation of strings (no-useless-concat)
 
 It's unnecessary to concatenate two strings together, such as:
 

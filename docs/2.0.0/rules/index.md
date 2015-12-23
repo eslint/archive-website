@@ -96,6 +96,7 @@ These are rules designed to prevent you from making mistakes. They either prescr
 * [no-self-compare](no-self-compare) - disallow comparisons where both sides are exactly the same
 * [no-sequences](no-sequences) - disallow use of the comma operator
 * [no-throw-literal](no-throw-literal) - restrict what can be thrown as an exception
+* [no-unmodified-loop-condition](no-unmodified-loop-condition) - disallow unmodified conditions of loops
 * [no-unused-expressions](no-unused-expressions) - disallow usage of expressions in statement position
 * [no-useless-call](no-useless-call) - disallow unnecessary `.call()` and `.apply()`
 * [no-useless-concat](no-useless-concat) - disallow unnecessary concatenation of literals or template literals
@@ -199,7 +200,7 @@ These rules are purely matters of style and are quite subjective.
 * [quote-props](quote-props) - require quotes around object literal property names
 * [quotes](quotes) - specify whether backticks, double or single quotes should be used (fixable)
 * [require-jsdoc](require-jsdoc) - Require JSDoc comment
-* [semi-spacing](semi-spacing) - enforce spacing before and after semicolons
+* [semi-spacing](semi-spacing) - enforce spacing before and after semicolons (fixable)
 * [semi](semi) - require or disallow use of semicolons instead of ASI (fixable)
 * [sort-vars](sort-vars) - sort variables within the same declaration block
 * [space-after-keywords](space-after-keywords) - require a space after certain keywords (fixable)
@@ -222,8 +223,8 @@ These rules are only relevant to ES6 environments.
 * [arrow-spacing](arrow-spacing) - require space before/after arrow function's arrow (fixable)
 * [constructor-super](constructor-super) - verify calls of `super()` in constructors
 * [generator-star-spacing](generator-star-spacing) - enforce spacing around the `*` in generator functions (fixable)
-* [no-arrow-condition](no-arrow-condition) - disallow arrow functions where a condition is expected
 * [no-class-assign](no-class-assign) - disallow modifying variables of class declarations
+* [no-confusing-arrow](no-confusing-arrow) - disallow arrow functions where they could be confused with comparisons
 * [no-const-assign](no-const-assign) - disallow modifying variables that are declared using `const`
 * [no-dupe-class-members](no-dupe-class-members) - disallow duplicate name in class members
 * [no-this-before-super](no-this-before-super) - disallow use of `this`/`super` before calling `super()` in constructors.
@@ -245,6 +246,7 @@ These rules existed in a previous version of ESLint but have since been replaced
 
 * [generator-star](generator-star) - enforce the position of the `*` in generator functions (replaced by [generator-star-spacing](generator-star-spacing))
 * [global-strict](global-strict) - require or disallow the `"use strict"` pragma in the global scope (replaced by [strict](strict))
+* [no-arrow-condition](no-arrow-condition) - disallow arrow functions where a condition is expected (replaced by [no-confusing-arrow](no-confusing-arrow) and [no-constant-condition](no-constant-condition))
 * [no-comma-dangle](no-comma-dangle) - disallow trailing commas in object literals (replaced by [comma-dangle](comma-dangle))
 * [no-empty-class](no-empty-class) - disallow the use of empty character classes in regular expressions (replaced by [no-empty-character-class](no-empty-character-class))
 * [no-extra-strict](no-extra-strict) - disallow unnecessary use of `"use strict";` when already in strict mode (replaced by [strict](strict))

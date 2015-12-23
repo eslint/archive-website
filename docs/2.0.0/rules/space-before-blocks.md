@@ -20,10 +20,10 @@ This rule ignores spacing which is between `=>` and a block. The spacing is hand
 
 This rule takes one argument. If it is `"always"` then blocks must always have at least one preceding space. If `"never"`
 then all blocks should never have any preceding space. If different spacing is desired for function
-blocks and keyword blocks, an optional configuration object can be passed as the rule argument to
+blocks, keyword blocks and classes, an optional configuration object can be passed as the rule argument to
 configure the cases separately.
 
-( e.g. `{ "functions": "never", "keywords": "always" }` )
+( e.g. `{ "functions": "never", "keywords": "always", classes: "always" }` )
 
 The default is `"always"`.
 
@@ -51,6 +51,10 @@ for (;;){         /*error Missing space before opening brace.*/
 }
 
 try {} catch(a){} /*error Missing space before opening brace.*/
+
+class Foo{          /*error Missing space before opening brace.*/
+  constructor(){}   /*error Missing space before opening brace.*/
+}
 ```
 
 The following patterns are not considered problems:
@@ -107,28 +111,32 @@ for (;;){
 }
 
 try{} catch(a){}
+
+class Foo{
+  constructor(){}
+}
 ```
 
-The following patterns are considered problems when configured `{ "functions": "never", "keywords": "always" }`:
+The following patterns are considered problems when configured `{ "functions": "never", "keywords": "always", classes: "never" }`:
 
 ```js
-/*eslint space-before-blocks: [2, { "functions": "never", "keywords": "always" }]*/
+/*eslint space-before-blocks: [2, { "functions": "never", "keywords": "always", classes: "never" }]*/
 /*eslint-env es6*/
 
 function a() {}    /*error Unexpected space before opening brace.*/
 
 try {} catch(a){}  /*error Missing space before opening brace.*/
 
-class Foo{         /*error Missing space before opening brace.*/
+class Foo{
   constructor() {} /*error Unexpected space before opening brace.*/
 }
 ```
 
 
-The following patterns are not considered problems when configured `{ "functions": "never", "keywords": "always" }`:
+The following patterns are not considered problems when configured `{ "functions": "never", "keywords": "always", classes: "never" }`:
 
 ```js
-/*eslint space-before-blocks: [2, { "functions": "never", "keywords": "always" }]*/
+/*eslint space-before-blocks: [2, { "functions": "never", "keywords": "always", classes: "never" }]*/
 /*eslint-env es6*/
 
 for (;;) {
@@ -139,15 +147,15 @@ describe(function(){
   // ...
 });
 
-class Foo {
+class Foo {         /*error Unexpected space before opening brace.*/
   constructor(){}
 }
 ```
 
-The following patterns are considered problems when configured `{ "functions": "always", "keywords": "never" }`:
+The following patterns are considered problems when configured `{ "functions": "always", "keywords": "never", classes: "never" }`:
 
 ```js
-/*eslint space-before-blocks: [2, { "functions": "always", "keywords": "never" }]*/
+/*eslint space-before-blocks: [2, { "functions": "always", "keywords": "never", classes: "never" }]*/
 /*eslint-env es6*/
 
 function a(){}      /*error Missing space before opening brace.*/
@@ -160,10 +168,10 @@ class Foo {         /*error Unexpected space before opening brace.*/
 ```
 
 
-The following patterns are not considered problems when configured `{ "functions": "always", "keywords": "never" }`:
+The following patterns are not considered problems when configured `{ "functions": "always", "keywords": "never", classes: "never" }`:
 
 ```js
-/*eslint space-before-blocks: [2, { "functions": "always", "keywords": "never" }]*/
+/*eslint space-before-blocks: [2, { "functions": "always", "keywords": "never", classes: "never" }]*/
 /*eslint-env es6*/
 
 if (a){
@@ -174,6 +182,29 @@ var a = function() {}
 
 class Foo{
   constructor() {}
+}
+```
+
+The following patterns are considered problems when configured `{ "functions": "never", "keywords": "never", classes: "always" }`:
+
+```js
+/*eslint space-before-blocks: [2, { "functions": "never", "keywords": "never", classes: "always" }]*/
+/*eslint-env es6*/
+
+class Foo{         /*error Unexpected space before opening brace.*/
+  constructor(){}
+}
+```
+
+
+The following patterns are not considered problems when configured `{ "functions": "never", "keywords": "never", classes: "always" }`:
+
+```js
+/*eslint space-before-blocks: [2, { "functions": "never", "keywords": "never", classes: "always" }]*/
+/*eslint-env es6*/
+
+class Foo {
+  constructor(){}
 }
 ```
 

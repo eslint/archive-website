@@ -79,13 +79,6 @@ var obj = {
     }
 };
 
-class Foo {
-    static foo() {
-        this.a = 0;      /*error Unexpected `this`.*/
-        baz(() => this); /*error Unexpected `this`.*/
-    }
-}
-
 foo.forEach(function() {
     this.a = 0;          /*error Unexpected `this`.*/
     baz(() => this);     /*error Unexpected `this`.*/
@@ -175,6 +168,12 @@ Foo.prototype.foo = function foo() {
 class Foo {
     foo() {
         // OK, this is in a method.
+        this.a = 0;
+        baz(() => this);
+    }
+
+    static foo() {
+        // OK, this is in a method (static methods also have valid this).
         this.a = 0;
         baz(() => this);
     }

@@ -290,6 +290,7 @@ This option specifies the output format for the console. Possible formats are:
 * [junit](formatters/#junit)
 * [tap](formatters/#tap)
 * [unix](formatters/#unix)
+* [visualstudio](formatters/#visualstudio)
 
 Example:
 

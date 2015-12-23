@@ -12,6 +12,7 @@ Each ESLint rule has two files: a source file in the `lib/rules` directory and a
  * @fileoverview Rule to flag use of an empty block statement
  * @author Nicholas C. Zakas
  * @copyright 2014 Nicholas C. Zakas. All rights reserved.
+ * See LICENSE in root directory for full license.
  */
 "use strict";
 
@@ -86,7 +87,6 @@ Additionally, the `context` object has the following methods:
 * `getFilename()` - returns the filename associated with the source.
 * `getScope()` - returns the current scope.
 * `getSourceCode()` - returns a `SourceCode` object that you can use to work with the source that was passed to ESLint
-* `isMarkedAsUsed(name)` - returns true if a given variable name has been marked as used.
 * `markVariableAsUsed(name)` - marks the named variable in scope as used. This affects the [no-unused-vars](../rules/no-unused-vars) rule.
 * `report(descriptor)` - reports a problem in the code.
 
@@ -341,6 +341,7 @@ The basic pattern for a rule unit test file is:
  * @fileoverview Tests for no-with rule.
  * @author Nicholas C. Zakas
  * @copyright 2015 Nicholas C. Zakas. All rights reserved.
+ * See LICENSE in root directory for full license.
  */
 
 "use strict";
@@ -370,7 +371,7 @@ ruleTester.run("no-with", rule, {
 });
 ```
 
-Be sure to replace the value of `"block-scoped-var"` with your rule's ID. There are plenty of examples in the `tests/lib/rules/` directory.
+Be sure to replace the value of `"no-with"` with your rule's ID. There are plenty of examples in the `tests/lib/rules/` directory.
 
 ### Valid Code
 
@@ -400,7 +401,7 @@ The `options` property must be an array of options. This gets passed through to 
 
 ### Invalid Code
 
-Each invalid case must be an object containing the code to test and at least the message that is produced by the rule. The `errors` key specifies an array of objects, each containing a message (your rule may trigger multiple messages for the same code). You should also specify the type of AST node you expect to receive back using the `type` key. The AST node should represent the actual spot in the code where there is a problem. For example:
+Each invalid case must be an object containing the code to test and at least one message that is produced by the rule. The `errors` key specifies an array of objects, each containing a message (your rule may trigger multiple messages for the same code). You should also specify the type of AST node you expect to receive back using the `type` key. The AST node should represent the actual spot in the code where there is a problem. For example:
 
 ```js
 invalid: [
@@ -443,7 +444,7 @@ invalid: [
 
 ### Write Several Tests
 
-You must have at least one valid and one invalid case for the rule tests to pass. Provide as many unit tests as possible. Your pull request will never be turned down for having too many tests submitted with it!
+Provide as many unit tests as possible. Your pull request will never be turned down for having too many tests submitted with it!
 
 ## Performance Testing
 
