@@ -43,10 +43,10 @@ You've developed library-specific rules for ESLint and you want to share it with
 
 If you're interested in writing a tool that uses ESLint, then you can use the Node.js API to get programmatic access to functionality.
 
-## Section 6: [Contributing](contributing/)
+## Section 7: [Contributing](contributing/)
 
 Once you've made changes that you want to share with the community, the next step is to submit those changes back via a pull request.
 
-## Section 7: [Governance](governance.html)
+## Section 8: [Governance](governance.html)
 
 After you've made several contributions, you might be eligible to be a Committer or Reviewer. Learn what that means for you and your involvement in the project.
