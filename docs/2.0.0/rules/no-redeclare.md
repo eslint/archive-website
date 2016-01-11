@@ -17,7 +17,7 @@ The following patterns are considered problems:
 /*eslint no-redeclare: 2*/
 
 var a = 3;
-var a = 10; /*error "a" is already defined*/
+var a = 10; /*error 'a' is already defined*/
 ```
 
 The following patterns are not considered problems:
@@ -50,7 +50,7 @@ When `{"builtinGlobals": true}`, the following patterns are considered problems:
 ```js
 /*eslint no-redeclare: [2, { "builtinGlobals": true }]*/
 
-var Object = 0; /*error "Object" is already defined*/
+var Object = 0; /*error 'Object' is already defined*/
 ```
 
 When `{"builtinGlobals": true}` and under `browser` environment, the following patterns are considered problems:
@@ -59,7 +59,7 @@ When `{"builtinGlobals": true}` and under `browser` environment, the following p
 /*eslint-env browser*/
 /*eslint no-redeclare: [2, { "builtinGlobals": true }]*/
 
-var top = 0; /*error "top" is already defined*/
+var top = 0; /*error 'top' is already defined*/
 ```
 
 * Note: The `browser` environment has many built-in global variables, `top` is one of them.

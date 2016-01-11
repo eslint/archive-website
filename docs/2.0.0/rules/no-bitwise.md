@@ -63,6 +63,14 @@ var x = y < z;
 x += y;
 ```
 
+This rule takes one argument, an object with the `allow` property. This allows the listed bitwise operators to be used as exceptions to the rule. For example:
+
+```js
+/*eslint no-bitwise: [2, { allow: ["~"] }] */
+
+~[1,2,3].indexOf(1) === -1;
+```
+
 ## Version
 
 This rule was introduced in ESLint 0.0.2.

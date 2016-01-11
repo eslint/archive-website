@@ -56,7 +56,10 @@ module.exports = {
 
 The following rules have been deprecated with new rules created to take their place. The following is a list of the removed rules and their replacements:
 
-* [no-arrow-condition](http://eslint.org/docs/rules/no-arrow-condition) is replaced by a combination of [no-confusing-arrow](http://eslint.org/docs/rules/no-confusing-arrow) and [no-arrow-condition](http://eslint.org/docs/rules/no-arrow-condition). Turn on both of these rules to get the same functionality as `no-arrow-condition`.
+* [no-arrow-condition](http://eslint.org/docs/rules/no-arrow-condition) is replaced by a combination of [no-confusing-arrow](http://eslint.org/docs/rules/no-confusing-arrow) and [no-constant-condition](http://eslint.org/docs/rules/no-constant-condition). Turn on both of these rules to get the same functionality as `no-arrow-condition`.
+* [space-after-keywords](http://eslint.org/docs/rules/space-after-keywords) is replaced by [keyword-spacing](http://eslint.org/docs/rules/keyword-spacing).
+* [space-before-keywords](http://eslint.org/docs/rules/space-before-keywords) is replaced by [keyword-spacing](http://eslint.org/docs/rules/keyword-spacing).
+* [space-return-throw-case](http://eslint.org/docs/rules/space-return-throw-case) is replaced by [keyword-spacing](http://eslint.org/docs/rules/keyword-spacing).
 
 **To address:** You'll need to update your rule configurations to use the new rules. ESLint v2.0.0 will also warn you when you're using a rule that has been removed and will suggest the replacement rules. Hopefully, this will result in few surprises during the upgrade process.
 
@@ -231,3 +234,38 @@ if (variable) {
 ```
 
 Further Reading: http://estools.github.io/escope/
+
+## Default Changes When Using `eslint:recommended`
+
+This will affect you if you are extending from `eslint:recommended`, and are enabling [`no-multiple-empty-lines`] or [`func-style`] with only a severity, such as:
+
+```json
+{
+    "extends": "eslint:recommended",
+    "rules": {
+        "no-multiple-empty-lines": 2,
+        "func-style": 2
+    }
+}
+```
+
+The rule `no-multiple-empty-lines` has no default exceptions, but in ESLint `1.x`, a default from `eslint:recommended` was applied such that a maximum of two empty lines would be permitted.
+
+The rule `func-style` has a default configuration of `"expression"`, but in ESLint `1.x`, `eslint:recommended` defaulted it to `"declaration"`.
+
+ESLint 2.0.0 removes these conflicting defaults, and so you may begin seeing linting errors related to these rules.
+
+**To address:**  If you would like to maintain the previous behavior, update your configuration for `no-multiple-empty-lines` by adding `{"max": 2}`, and change `func-style` to `"declaration"`. For example:
+
+```json
+{
+    "extends": "eslint:recommended",
+    "rules": {
+        "no-multiple-empty-lines": [2, {"max": 2}],
+        "func-style": [2, "declaration"]
+    }
+}
+```
+
+[`no-multiple-empty-lines`]: ../rules/no-multiple-empty-lines
+[`func-style`]: ../rules/func-style

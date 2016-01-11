@@ -10,7 +10,7 @@ The following rules point out areas where you might have made mistakes.
 
 * [comma-dangle](comma-dangle.md) - disallow or enforce trailing commas (recommended)
 * [no-cond-assign](no-cond-assign.md) - disallow assignment in conditional expressions (recommended)
-* [no-console](no-console.md) - disallow use of `console` in the node environment (recommended)
+* [no-console](no-console.md) - disallow use of `console` (recommended)
 * [no-constant-condition](no-constant-condition.md) - disallow use of constant expressions in conditions (recommended)
 * [no-control-regex](no-control-regex.md) - disallow control characters in regular expressions (recommended)
 * [no-debugger](no-debugger.md) - disallow use of `debugger` (recommended)
@@ -160,6 +160,7 @@ These rules are purely matters of style and are quite subjective.
 * [indent](indent.md) - specify tab or space width for your code (fixable)
 * [jsx-quotes](jsx-quotes.md) - specify whether double or single quotes should be used in JSX attributes
 * [key-spacing](key-spacing.md) - enforce spacing between keys and values in object literal properties
+* [keyword-spacing](keyword-spacing.md) - enforce spacing before and after keywords (fixable)
 * [linebreak-style](linebreak-style.md) - disallow mixed 'LF' and 'CRLF' as linebreaks
 * [lines-around-comment](lines-around-comment.md) - enforce empty lines around comments
 * [max-depth](max-depth.md) - specify the maximum depth that blocks can be nested
@@ -182,6 +183,7 @@ These rules are purely matters of style and are quite subjective.
 * [no-new-object](no-new-object.md) - disallow the use of the `Object` constructor
 * [no-plusplus](no-plusplus.md) - disallow use of unary operators, `++` and `--`
 * [no-restricted-syntax](no-restricted-syntax.md) - disallow use of certain syntax in code
+* [no-whitespace-before-property](no-whitespace-before-property.md) - disallow whitespace before properties
 * [no-spaced-func](no-spaced-func.md) - disallow space between function identifier and application (fixable)
 * [no-ternary](no-ternary.md) - disallow the use of ternary operators
 * [no-trailing-spaces](no-trailing-spaces.md) - disallow trailing whitespace at the end of lines (fixable)
@@ -198,13 +200,11 @@ These rules are purely matters of style and are quite subjective.
 * [semi-spacing](semi-spacing.md) - enforce spacing before and after semicolons (fixable)
 * [semi](semi.md) - require or disallow use of semicolons instead of ASI (fixable)
 * [sort-vars](sort-vars.md) - sort variables within the same declaration block
-* [space-after-keywords](space-after-keywords.md) - require a space after certain keywords (fixable)
+* [sort-imports](sort-imports.md) - sort import declarations within module
 * [space-before-blocks](space-before-blocks.md) - require or disallow a space before blocks (fixable)
 * [space-before-function-paren](space-before-function-paren.md) - require or disallow a space before function opening parenthesis (fixable)
-* [space-before-keywords](space-before-keywords.md) - require a space before certain keywords (fixable)
 * [space-in-parens](space-in-parens.md) - require or disallow spaces inside parentheses
 * [space-infix-ops](space-infix-ops.md) - require spaces around operators (fixable)
-* [space-return-throw-case](space-return-throw-case.md) - require a space after `return`, `throw`, and `case` (fixable)
 * [space-unary-ops](space-unary-ops.md) - require or disallow spaces before/after unary operators (fixable)
 * [spaced-comment](spaced-comment.md) - require or disallow a space immediately following the `//` or `/*` in a comment
 * [wrap-regex](wrap-regex.md) - require regex literals to be wrapped in parentheses
@@ -222,8 +222,10 @@ These rules are only relevant to ES6 environments.
 * [no-confusing-arrow](no-confusing-arrow.md) - disallow arrow functions where they could be confused with comparisons
 * [no-const-assign](no-const-assign.md) - disallow modifying variables that are declared using `const`
 * [no-dupe-class-members](no-dupe-class-members.md) - disallow duplicate name in class members
+* [no-new-symbol](no-new-symbol.md) - disallow use of the `new` operator with the `Symbol` object
 * [no-this-before-super](no-this-before-super.md) - disallow use of `this`/`super` before calling `super()` in constructors.
 * [no-var](no-var.md) - require `let` or `const` instead of `var`
+* [no-useless-constructor](no-useless-constructor.md) - disallow unnecessary constructor
 * [object-shorthand](object-shorthand.md) - require method and property shorthand syntax for object literals
 * [prefer-arrow-callback](prefer-arrow-callback.md) - suggest using arrow functions as callbacks
 * [prefer-const](prefer-const.md) - suggest using `const` declaration for variables that are never modified after declared
@@ -249,7 +251,10 @@ These rules existed in a previous version of ESLint but have since been replaced
 * [no-space-before-semi](no-space-before-semi.md) - disallow space before semicolon (replaced by [semi-spacing](semi-spacing.md))
 * [no-wrap-func](no-wrap-func.md) - disallow wrapping of non-IIFE statements in parens (replaced by [no-extra-parens](no-extra-parens.md))
 * [space-after-function-name](space-after-function-name.md) - require a space after function names (replaced by [space-before-function-paren](space-before-function-paren.md))
+* [space-after-keywords](space-after-keywords.md) - require a space after certain keywords (fixable) (replaced by [keyword-spacing](keyword-spacing.md))
 * [space-before-function-parentheses](space-before-function-parentheses.md) - require or disallow space before function parentheses (replaced by [space-before-function-paren](space-before-function-paren.md))
+* [space-before-keywords](space-before-keywords.md) - require a space before certain keywords (fixable) (replaced by [keyword-spacing](keyword-spacing.md))
 * [space-in-brackets](space-in-brackets.md) - require or disallow spaces inside brackets (replaced by [object-curly-spacing](object-curly-spacing.md) and [array-bracket-spacing](array-bracket-spacing.md))
+* [space-return-throw-case](space-return-throw-case.md) - require a space after `return`, `throw`, and `case` (fixable) (replaced by [keyword-spacing](keyword-spacing.md))
 * [space-unary-word-ops](space-unary-word-ops.md) - require or disallow spaces before/after unary operators (replaced by [space-unary-ops](space-unary-ops.md))
 * [spaced-line-comment](spaced-line-comment.md) - require or disallow a space immediately following the `//` in a line comment (replaced by [spaced-comment](spaced-comment.md))

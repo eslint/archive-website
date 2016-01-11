@@ -21,7 +21,7 @@ The following patterns are considered problems:
 /*eslint-env es6*/
 
 const a = 0;
-a = 1;       /*error `a` is constant.*/
+a = 1;       /*error 'a' is constant.*/
 ```
 
 ```js
@@ -29,7 +29,7 @@ a = 1;       /*error `a` is constant.*/
 /*eslint-env es6*/
 
 const a = 0;
-a += 1;      /*error `a` is constant.*/
+a += 1;      /*error 'a' is constant.*/
 ```
 
 ```js
@@ -37,7 +37,7 @@ a += 1;      /*error `a` is constant.*/
 /*eslint-env es6*/
 
 const a = 0;
-++a;         /*error `a` is constant.*/
+++a;         /*error 'a' is constant.*/
 ```
 
 The following patterns are not considered problems:
