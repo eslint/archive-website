@@ -23,9 +23,9 @@ If that sounds like you, then continue reading to get started.
 
 Before you can get started, you'll need to get a copy of the ESLint source code. This section explains how to do that and a little about the source code structure.
 
-## Section 2: Setup a [Development Environment](development-environment.html)
+## Section 2: Set up a [Development Environment](development-environment.html)
 
-Developing for ESLint is a bit different than running it on the command line. This section shows you how to setup a development environment and get you ready to write code.
+Developing for ESLint is a bit different than running it on the command line. This section shows you how to set up a development environment and get you ready to write code.
 
 ## Section 3: Run the [Unit Tests](unit-tests.html)
 
