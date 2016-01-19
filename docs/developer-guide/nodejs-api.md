@@ -70,7 +70,6 @@ The `verify()` method returns an array of objects containing information about t
     fatal: false,
     severity: 2,
     ruleId: "semi",
-    severity: 2,
     line: 1,
     column: 23,
     message: "Expected a semicolon.",
