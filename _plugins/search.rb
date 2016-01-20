@@ -49,6 +49,8 @@ class EslintCustomSearchHelper
     # Old docs
     return true if item[:url] =~ %r{^/docs/0.24.1/}
     return true if item[:url] =~ %r{^/docs/1.0.0/}
+    # Beta docs
+    return true if item[:url] =~ %r{^/docs/2.0.0/}
     # Redirect pages
     return true if item[:type] == 'redirectpage'
     false
