@@ -17,7 +17,7 @@ This rule has a option, its value is `"always"` or `"never"`.
 - `"always"` (by default) enforces one or more spaces.
 - `"never"` disallows space(s).
 
-### always
+### "always"
 
 ```json
 {
@@ -42,7 +42,7 @@ function foo() { return true; }
 if (foo) { bar = 0; }
 ```
 
-### never
+### "never"
 
 ```json
 {

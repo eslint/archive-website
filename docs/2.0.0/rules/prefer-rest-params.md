@@ -5,10 +5,10 @@ layout: doc
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 # Suggest using the rest parameters instead of `arguments` (prefer-rest-params)
 
-There is rest parameters in ES2015.
-We can use that feature for variadic functions instead of `arguments` variable.
+There are rest parameters in ES2015.
+We can use that feature for variadic functions instead of the `arguments` variable.
 
-`arguments` does not have methods of `Array.prototype`, so it's inconvenience a bit.
+`arguments` does not have methods of `Array.prototype`, so it's a bit of an inconvenience.
 
 ## Rule Details
 
@@ -27,7 +27,7 @@ function foo(action) {
 }
 ```
 
-The following patterns are considered not problems:
+The following patterns are not considered problems:
 
 ```js
 function foo(...args) {
@@ -35,7 +35,7 @@ function foo(...args) {
 }
 
 function foo(action, ...args) {
-    action.apply(null, args); // or `action(...args)`, related with the `prefer-spread` rule.
+    action.apply(null, args); // or `action(...args)`, related to the `prefer-spread` rule.
 }
 
 // Note: the implicit arguments can be overwritten.

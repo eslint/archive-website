@@ -119,7 +119,7 @@ Default option settings are
 }
 ```
 
-#### ignoreCase
+#### `ignoreCase`
 
 When `true` the rule ignores the case-sensitivity of the imports local name.
 
@@ -144,7 +144,7 @@ import c from 'baz.js';
 
 Default is `false`.
 
-#### ignoreMemberSort
+#### `ignoreMemberSort`
 
 Ignores the member sorting within a `multiple` member import declaration.
 
@@ -164,7 +164,7 @@ import {b, a, c} from 'foo.js'
 
 Default is `false`.
 
-#### memberSyntaxSortOrder
+#### `memberSyntaxSortOrder`
 
 The member syntax sort order can be configured with this option. There are four different styles and the default member syntax sort order is:
 

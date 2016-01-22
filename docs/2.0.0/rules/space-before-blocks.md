@@ -28,7 +28,7 @@ configure the cases separately.
 
 The default is `"always"`.
 
-### `"always"`
+### "always"
 
 The following patterns are considered problems:
 
@@ -77,7 +77,7 @@ for (;;) {
 try {} catch(a) {}
 ```
 
-### `"never"`
+### "never"
 
 The following patterns are considered problems:
 

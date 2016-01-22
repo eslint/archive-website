@@ -182,7 +182,7 @@ If you were using `ecmaFeatures.modules` to enable ES6 module support like this:
 Additionally, if you are using `context.ecmaFeatures` inside of your rules, then you'll need to update your code in the following ways:
 
 1. If you're using an ES6 feature flag such as `context.ecmaFeatures.blockBindings`, rewrite to check for `context.parserOptions.ecmaVersion > 5`.
-1. If you're using `context.ecmaFeatures.modules`, rewrite to check for `context.parserOptions.sourceType === "module"`.
+1. If you're using `context.ecmaFeatures.modules`, rewrite to check that the `sourceType` property of the Program node is `"module"`.
 1. If you're using a non-ES6 feature flag such as `context.ecmaFeatures.jsx`, rewrite to check for `context.parserOptions.ecmaFeatures.jsx`.
 
 If you're not using `ecmaFeatures` in your configuration, then no change is needed.
@@ -269,3 +269,36 @@ ESLint 2.0.0 removes these conflicting defaults, and so you may begin seeing lin
 
 [`no-multiple-empty-lines`]: ../rules/no-multiple-empty-lines
 [`func-style`]: ../rules/func-style
+
+## SourceCode constructor (Node API) changes
+
+`SourceCode` constructor got to handle Unicode BOM.
+If the first argument `text` has BOM, `SourceCode` constructor sets `true` to `this.hasBOM` and strips BOM from the text.
+
+```js
+var SourceCode = require("eslint").SourceCode;
+
+var code = new SourceCode("\uFEFFvar foo = bar;", ast);
+
+assert(code.hasBOM === true);
+assert(code.text === "var foo = bar;");
+```
+
+So the second argument `ast` also should be parsed from stripped text.
+
+**To address:** If you are using `SourceCode` constructor in your code, please parse the source code after it stripped BOM:
+
+```js
+var ast = yourParser.parse(text.replace(/^\uFEFF/, ""), options);
+var sourceCode = new SourceCode(text, ast);
+```
+
+## Rule Changes
+
+* [`strict`](../rules/strict) - defaults to `"safe"` (previous default was `"function"`)
+
+## Plugins No Longer Have Default Configurations
+
+Prior to v2.0.0, plugins could specify a `rulesConfig` for the plugin. The `rulesConfig` would automatically be applied whenever someone uses the plugin, which is the opposite of what ESLint does in every other situation (where nothing is on by default). To bring plugins behavior in line, we have removed support for `rulesConfig` in plugins.
+
+**To address:** If you are using a plugin in your configuration file, you will need to manually enable the plugin rules in the configuration file.

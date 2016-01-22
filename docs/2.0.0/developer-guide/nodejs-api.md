@@ -21,6 +21,18 @@ var code = new SourceCode("var foo = bar;", ast);
 
 The `SourceCode` constructor throws an error if the AST is missing any of the required information.
 
+The `SourceCode` constructor strips Unicode BOM.
+Please note the AST also should be parsed from stripped text.
+
+```js
+var SourceCode = require("eslint").SourceCode;
+
+var code = new SourceCode("\uFEFFvar foo = bar;", ast);
+
+assert(code.hasBOM === true);
+assert(code.text === "var foo = bar;");
+```
+
 ### splitLines()
 
 This is a static function on `SourceCode` that is used to split the source code text into an array of lines.
@@ -89,7 +101,6 @@ The `verify()` method returns an array of objects containing information about t
 ```js
 {
     fatal: false,
-    severity: 2,
     ruleId: "semi",
     severity: 2,
     line: 1,
@@ -345,15 +356,15 @@ var isIgnored = cli.isPathIgnored("foo/bar.js");
 
 Retrieves a formatter, which you can then use to format a report object. The argument is either the name of a built-in formatter:
 
-* "[stylish](./user-guide/formatters#stylish)" (the default)
-* "[checkstyle](./user-guide/formatters#checkstyle)"
-* "[compact](./user-guide/formatters#compact)"
-* "[html](./user-guide/formatters#html)"
-* "[jslint-xml](./user-guide/formatters#jslint-xml)"
-* "[json](./user-guide/formatters#json)"
-* "[junit](./user-guide/formatters#junit)"
-* "[tap](./user-guide/formatters#tap)"
-* "[unix](./user-guide/formatters#unix)"
+* "[stylish](../user-guide/formatters#stylish)" (the default)
+* "[checkstyle](../user-guide/formatters#checkstyle)"
+* "[compact](../user-guide/formatters#compact)"
+* "[html](../user-guide/formatters#html)"
+* "[jslint-xml](../user-guide/formatters#jslint-xml)"
+* "[json](../user-guide/formatters#json)"
+* "[junit](../user-guide/formatters#junit)"
+* "[tap](../user-guide/formatters#tap)"
+* "[unix](../user-guide/formatters#unix)"
 
 or the full path to a JavaScript file containing a custom formatter. You can also omit the argument to retrieve the default formatter.
 

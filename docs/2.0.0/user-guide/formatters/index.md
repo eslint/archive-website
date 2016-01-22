@@ -135,6 +135,48 @@ not ok 1 - fullOfProblems.js
     column: 10
     ruleId: no-unused-vars
   messages:
+    - message: Use the isNaN function to compare with NaN.
+      severity: error
+      data:
+        line: 2
+        column: 9
+        ruleId: use-isnan
+    - message: "Unexpected space before unary operator '++'."
+      severity: error
+      data:
+        line: 3
+        column: 16
+        ruleId: space-unary-ops
+    - message: Missing semicolon.
+      severity: warning
+      data:
+        line: 3
+        column: 20
+        ruleId: semi
+    - message: "Unexpected 'else' after 'return'."
+      severity: warning
+      data:
+        line: 4
+        column: 12
+        ruleId: no-else-return
+    - message: Expected indentation of 8 space characters but found 6.
+      severity: warning
+      data:
+        line: 5
+        column: 7
+        ruleId: indent
+    - message: Expected a return value.
+      severity: error
+      data:
+        line: 5
+        column: 7
+        ruleId: consistent-return
+    - message: Missing semicolon.
+      severity: warning
+      data:
+        line: 5
+        column: 13
+        ruleId: semi
     - message: Unnecessary semicolon.
       severity: error
       data:

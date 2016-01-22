@@ -40,7 +40,7 @@ Depending on your coding conventions, you can choose either option by specifying
 "array-bracket-spacing": [2, "always"]
 ```
 
-#### never
+#### "never"
 
 When `"never"` is set, the following patterns are considered problems:
 
@@ -85,7 +85,7 @@ var [x, ...y] = z;
 var [,,x,] = z;
 ```
 
-#### always
+#### "always"
 
 When `"always"` is used, the following patterns are considered problems:
 

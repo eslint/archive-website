@@ -27,7 +27,7 @@ The `operator-linebreak` rule is aimed at enforcing a particular operator line b
 
 ### Options
 
-The rule takes two options, a string, which can be "after", "before" or "none" where the default is "after" and an object for more fine-grained configuration.
+The rule takes two options, a string, which can be `"after"`, `"before"` or `"none"` where the default is `"after"` and an object for more fine-grained configuration.
 
 You can set the style in configuration like this:
 
@@ -37,7 +37,7 @@ You can set the style in configuration like this:
 
 The default configuration is to enforce line breaks _after_ the operator except for the ternary operator `?` and `:` following that.
 
-#### `"after"`
+#### "after"
 
 This is the default setting for this rule. This option requires the line break to be placed after the operator.
 
@@ -87,7 +87,7 @@ answer = everything ?
   foo;
 ```
 
-#### `"before"`
+#### "before"
 
 This option requires the line break to be placed before the operator.
 
@@ -133,7 +133,7 @@ answer = everything
   : foo;
 ```
 
-#### `"none"`
+#### "none"
 
 This option disallows line breaks on either side of the operator.
 
@@ -190,7 +190,7 @@ The rule allows you to have even finer-grained control over individual operators
 
 This would override the global setting for that specific operator.
 
-#### `"ignore"` override
+#### "ignore" override
 
 This option is only supported using overrides and ignores line breaks on either side of the operator.
 

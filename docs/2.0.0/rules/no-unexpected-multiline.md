@@ -30,6 +30,13 @@ var foo = bar
 
 var hello = 'world'
 [1, 2, 3].forEach(addNumber); /*error Unexpected newline between object and [ of property access.*/
+
+let x = function() {}         /*error Unexpected newline between template tag and template literal.*/
+`hello`
+
+let x = function() {}
+x                             /*error Unexpected newline between template tag and template literal.*/
+`hello`
 ```
 
 The following patterns are not considered problems:
@@ -48,6 +55,12 @@ var hello = 'world';
 
 var hello = 'world'
 void [1, 2, 3].forEach(addNumber);
+
+let x = function() {};
+`hello`
+
+let tag = function() {}
+tag `hello`
 ```
 
 ## When Not To Use It

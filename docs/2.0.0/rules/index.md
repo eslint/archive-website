@@ -36,7 +36,7 @@ The following rules point out areas where you might have made mistakes.
 * [no-obj-calls](no-obj-calls) - disallow the use of object properties of the global object (`Math` and `JSON`) as functions (recommended)
 * [no-regex-spaces](no-regex-spaces) - disallow multiple spaces in a regular expression literal (recommended)
 * [no-sparse-arrays](no-sparse-arrays) - disallow sparse arrays (recommended)
-* [no-unexpected-multiline](no-unexpected-multiline) - Avoid code that looks like two expressions but is actually one
+* [no-unexpected-multiline](no-unexpected-multiline) - Avoid code that looks like two expressions but is actually one (recommended)
 * [no-unreachable](no-unreachable) - disallow unreachable statements after a return, throw, continue, or break statement (recommended)
 * [use-isnan](use-isnan) - disallow comparisons with the value `NaN` (recommended)
 * [valid-jsdoc](valid-jsdoc) - Ensure JSDoc comments are valid
@@ -59,11 +59,11 @@ These are rules designed to prevent you from making mistakes. They either prescr
 * [guard-for-in](guard-for-in) - make sure `for-in` loops have an `if` statement
 * [no-alert](no-alert) - disallow the use of `alert`, `confirm`, and `prompt`
 * [no-caller](no-caller) - disallow use of `arguments.caller` or `arguments.callee`
-* [no-case-declarations](no-case-declarations) - disallow lexical declarations in case clauses
+* [no-case-declarations](no-case-declarations) - disallow lexical declarations in case clauses (recommended)
 * [no-div-regex](no-div-regex) - disallow division operators explicitly at beginning of regular expression
 * [no-else-return](no-else-return) - disallow `else` after a `return` in an `if`
-* [no-empty-label](no-empty-label) - disallow use of labels for anything other than loops and switches
-* [no-empty-pattern](no-empty-pattern) - disallow use of empty destructuring patterns
+* [no-empty-label](no-empty-label) - disallow use of labels for anything other than loops and switches (recommended)
+* [no-empty-pattern](no-empty-pattern) - disallow use of empty destructuring patterns (recommended)
 * [no-eq-null](no-eq-null) - disallow comparisons to null without a type-checking operator
 * [no-eval](no-eval) - disallow use of `eval()`
 * [no-extend-native](no-extend-native) - disallow adding to native types
@@ -110,9 +110,9 @@ These are rules designed to prevent you from making mistakes. They either prescr
 
 ## Strict Mode
 
-These rules relate to using strict mode.
+These rules relate to using strict mode and strict mode directives.
 
-* [strict](strict) - controls location of Use Strict Directives
+* [strict](strict) - require effective use of strict mode directives
 
 ## Variables
 
@@ -162,8 +162,9 @@ These rules are purely matters of style and are quite subjective.
 * [func-style](func-style) - enforce use of function declarations or expressions
 * [id-length](id-length) - this option enforces minimum and maximum identifier lengths (variable names, property names etc.)
 * [id-match](id-match) - require identifiers to match the provided regular expression
+* [id-blacklist](id-blacklist) - blacklist certain identifiers to prevent them being used
 * [indent](indent) - specify tab or space width for your code (fixable)
-* [jsx-quotes](jsx-quotes) - specify whether double or single quotes should be used in JSX attributes
+* [jsx-quotes](jsx-quotes) - specify whether double or single quotes should be used in JSX attributes (fixable)
 * [key-spacing](key-spacing) - enforce spacing between keys and values in object literal properties
 * [keyword-spacing](keyword-spacing) - enforce spacing before and after keywords (fixable)
 * [linebreak-style](linebreak-style) - disallow mixed 'LF' and 'CRLF' as linebreaks
@@ -221,14 +222,14 @@ These rules are only relevant to ES6 environments.
 * [arrow-body-style](arrow-body-style) - require braces in arrow function body
 * [arrow-parens](arrow-parens) - require parens in arrow function arguments
 * [arrow-spacing](arrow-spacing) - require space before/after arrow function's arrow (fixable)
-* [constructor-super](constructor-super) - verify calls of `super()` in constructors
+* [constructor-super](constructor-super) - verify calls of `super()` in constructors (recommended)
 * [generator-star-spacing](generator-star-spacing) - enforce spacing around the `*` in generator functions (fixable)
-* [no-class-assign](no-class-assign) - disallow modifying variables of class declarations
+* [no-class-assign](no-class-assign) - disallow modifying variables of class declarations (recommended)
 * [no-confusing-arrow](no-confusing-arrow) - disallow arrow functions where they could be confused with comparisons
-* [no-const-assign](no-const-assign) - disallow modifying variables that are declared using `const`
-* [no-dupe-class-members](no-dupe-class-members) - disallow duplicate name in class members
-* [no-new-symbol](no-new-symbol) - disallow use of the `new` operator with the `Symbol` object
-* [no-this-before-super](no-this-before-super) - disallow use of `this`/`super` before calling `super()` in constructors.
+* [no-const-assign](no-const-assign) - disallow modifying variables that are declared using `const` (recommended)
+* [no-dupe-class-members](no-dupe-class-members) - disallow duplicate name in class members (recommended)
+* [no-new-symbol](no-new-symbol) - disallow use of the `new` operator with the `Symbol` object (recommended)
+* [no-this-before-super](no-this-before-super) - disallow use of `this`/`super` before calling `super()` in constructors (recommended)
 * [no-var](no-var) - require `let` or `const` instead of `var`
 * [no-useless-constructor](no-useless-constructor) - disallow unnecessary constructor
 * [object-shorthand](object-shorthand) - require method and property shorthand syntax for object literals

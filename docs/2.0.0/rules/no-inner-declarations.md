@@ -89,7 +89,7 @@ function doSomethingElse() {
 }
 ```
 
-With "both" option to check variable declarations, the following are considered problems:
+With `"both"` option to check variable declarations, the following are considered problems:
 
 ```js
 /*eslint no-inner-declarations: [2, "both"]*/

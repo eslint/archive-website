@@ -34,7 +34,7 @@ if (obj.getStuff() != undefined) { } /*error Expected '!==' and instead saw '!='
 
 ### Options
 
-* `"smart"`
+#### "smart"
 
 This option enforces the use of `===` and `!==` except for these cases:
 
@@ -76,7 +76,7 @@ bananas != 1        /*error Expected '!==' and instead saw '!='.*/
 value == undefined  /*error Expected '===' and instead saw '=='.*/
 ```
 
-* `"allow-null"`
+#### "allow-null"
 
 This option will enforce `===` and `!==` in your code with one exception - it permits comparing to `null` to check for `null` or `undefined` in a single expression.
 

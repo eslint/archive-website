@@ -97,7 +97,7 @@ Object.defineProperty(o, 'c', {
 
 ```
 
-#### getWithoutSet
+#### `getWithoutSet`
 
 The following patterns are considered problems with option `getWithoutSet` set:
 

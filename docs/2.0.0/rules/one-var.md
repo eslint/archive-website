@@ -64,7 +64,7 @@ Exactly one declarator per declaration per function (var) or block (let or const
 "one-var": [2, "never"]
 ```
 
-Configure each declaration type individually. Defaults to "always" if key not present.
+Configure each declaration type individually. Defaults to `"always"` if key not present.
 
 ```json
 "one-var": [2, {
@@ -74,7 +74,7 @@ Configure each declaration type individually. Defaults to "always" if key not pr
 }]
 ```
 
-Configure uninitialized and initialized seperately. Defaults to "always" if key not present.
+Configure uninitialized and initialized seperately. Defaults to `"always"` if key not present.
 
 ```json
 "one-var": [2, {
