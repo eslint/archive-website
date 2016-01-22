@@ -29,3 +29,9 @@ h6:target:before {
   height: 80px;
   width: 1px;
 }
+
+/* icon margins for rules page */
+.glyphicon {
+  margin: 0 2px;
+}
+

@@ -3,7 +3,7 @@
 <main class="doc">
   <article class="container">
     {% include ad.html %}
-    {{ content }}
+    {{ content | replace: '(recommended)', '<span aria-label="recommended" class="glyphicon glyphicon-ok"></span>' | replace: '(fixable)', '<span aria-label="fixable" class="glyphicon glyphicon-wrench"></span>' }}
   </article>
 </main>
 {% include footer.html %}
