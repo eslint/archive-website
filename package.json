@@ -1,6 +1,7 @@
 {
   "name": "eslint.github.io",
   "version": "1.0.0",
+  "private": true,
   "description": "This contains the code running on eslint.org.",
   "main": "index.js",
   "directories": {
