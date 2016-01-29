@@ -1,6 +1,7 @@
 {
   "name": "eslint.github.io",
   "version": "1.0.0",
+  "private": true,
   "description": "This contains the code running on eslint.org.",
   "main": "index.js",
   "directories": {
@@ -15,7 +16,7 @@
     "url": "git+https://github.com/eslint/eslint.github.io.git"
   },
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/eslint/eslint.github.io/issues"
   },
