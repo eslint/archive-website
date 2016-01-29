@@ -197,6 +197,7 @@ These rules are purely matters of style and are quite subjective.
 * [no-unneeded-ternary](no-unneeded-ternary) - disallow the use of ternary operators when a simpler alternative exists
 * [object-curly-spacing](object-curly-spacing) - require or disallow padding inside curly braces (fixable)
 * [one-var](one-var) - require or disallow one variable declaration per function
+* [one-var-declaration-per-line](one-var-declaration-per-line) - require or disallow an newline around variable declarations
 * [operator-assignment](operator-assignment) - require assignment operator shorthand where possible or prohibit it entirely
 * [operator-linebreak](operator-linebreak) - enforce operators to be placed before or after line breaks
 * [padded-blocks](padded-blocks) - enforce padding within blocks

@@ -68,9 +68,8 @@ if(a) {}
 
 ## Version
 
-This rule was introduced in ESLint 0.6.0.
+This rule was introduced in ESLint 0.6.0 and removed in 2.0.0-beta.3.
 
 ## Resources
 
-* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/space-after-keywords.js)
 * [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/space-after-keywords.md)

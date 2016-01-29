@@ -54,9 +54,8 @@ var x = (a) => 1 ? 2 : 3
 
 ## Version
 
-This rule was introduced in ESLint 1.8.0.
+This rule was introduced in ESLint 1.8.0 and removed in 2.0.0-beta.3.
 
 ## Resources
 
-* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/no-arrow-condition.js)
 * [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/no-arrow-condition.md)
