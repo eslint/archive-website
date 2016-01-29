@@ -15,7 +15,7 @@
     "url": "git+https://github.com/eslint/eslint.github.io.git"
   },
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/eslint/eslint.github.io/issues"
   },
