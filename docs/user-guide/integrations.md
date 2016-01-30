@@ -13,7 +13,9 @@ redirect_from: "/docs/integrations/"
     * [Build Next](https://github.com/albertosantini/sublimetext-buildnext)
 * [Vim](https://github.com/scrooloose/syntastic/tree/master/syntax_checkers/javascript)
 * Emacs: [Flycheck](http://flycheck.readthedocs.org/en/latest/) supports ESLint in recent versions.
-* Eclipse Orion: ESLint is the [default linter](http://dev.eclipse.org/mhonarc/lists/orion-dev/msg02718.html)
+* Eclipse 
+    * Eclipse Orion: ESLint is the [default linter](http://dev.eclipse.org/mhonarc/lists/orion-dev/msg02718.html)
+    * Eclipse IDE with [Tern ESLint linter](https://github.com/angelozerr/tern.java/wiki/Tern-Linter-ESLint)
 * [TextMate 2](https://github.com/natesilva/javascript-eslint.tmbundle)
 * Atom: [linter-eslint](https://atom.io/packages/linter-eslint)
 * [IntelliJ IDEA, RubyMine, WebStorm, PhpStorm, PyCharm, AppCode, Android Studio, 0xDBE](http://plugins.jetbrains.com/plugin/7494)
