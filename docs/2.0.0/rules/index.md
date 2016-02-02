@@ -62,12 +62,12 @@ These are rules designed to prevent you from making mistakes. They either prescr
 * [no-case-declarations](no-case-declarations) - disallow lexical declarations in case clauses (recommended)
 * [no-div-regex](no-div-regex) - disallow division operators explicitly at beginning of regular expression
 * [no-else-return](no-else-return) - disallow `else` after a `return` in an `if`
-* [no-empty-label](no-empty-label) - disallow use of labels for anything other than loops and switches (recommended)
 * [no-empty-pattern](no-empty-pattern) - disallow use of empty destructuring patterns (recommended)
 * [no-eq-null](no-eq-null) - disallow comparisons to null without a type-checking operator
 * [no-eval](no-eval) - disallow use of `eval()`
 * [no-extend-native](no-extend-native) - disallow adding to native types
 * [no-extra-bind](no-extra-bind) - disallow unnecessary function binding
+* [no-extra-label](no-extra-label) - disallow unnecessary labels
 * [no-fallthrough](no-fallthrough) - disallow fallthrough of `case` statements (recommended)
 * [no-floating-decimal](no-floating-decimal) - disallow the use of leading or trailing decimal points in numeric literals
 * [no-implicit-coercion](no-implicit-coercion) - disallow the type conversions with shorter notations
@@ -93,11 +93,13 @@ These are rules designed to prevent you from making mistakes. They either prescr
 * [no-redeclare](no-redeclare) - disallow declaring the same variable more than once (recommended)
 * [no-return-assign](no-return-assign) - disallow use of assignment in `return` statement
 * [no-script-url](no-script-url) - disallow use of `javascript:` urls.
+* [no-self-assign](no-self-assign) - disallow assignments where both sides are exactly the same (recommended)
 * [no-self-compare](no-self-compare) - disallow comparisons where both sides are exactly the same
 * [no-sequences](no-sequences) - disallow use of the comma operator
 * [no-throw-literal](no-throw-literal) - restrict what can be thrown as an exception
 * [no-unmodified-loop-condition](no-unmodified-loop-condition) - disallow unmodified conditions of loops
 * [no-unused-expressions](no-unused-expressions) - disallow usage of expressions in statement position
+* [no-unused-labels](no-unused-labels) - disallow unused labels (recommended)
 * [no-useless-call](no-useless-call) - disallow unnecessary `.call()` and `.apply()`
 * [no-useless-concat](no-useless-concat) - disallow unnecessary concatenation of literals or template literals
 * [no-void](no-void) - disallow use of the `void` operator
@@ -177,6 +179,7 @@ These rules are purely matters of style and are quite subjective.
 * [new-cap](new-cap) - require a capital letter for constructors
 * [new-parens](new-parens) - disallow the omission of parentheses when invoking a constructor with no arguments
 * [newline-after-var](newline-after-var) - require or disallow an empty newline after variable declarations
+* [newline-per-chained-call](newline-per-chained-call) - enforce newline after each call when chaining the calls
 * [no-array-constructor](no-array-constructor) - disallow use of the `Array` constructor
 * [no-bitwise](no-bitwise) - disallow use of bitwise operators
 * [no-continue](no-continue) - disallow use of the `continue` statement
@@ -241,6 +244,7 @@ These rules are only relevant to ES6 environments.
 * [prefer-spread](prefer-spread) - suggest using the spread operator instead of `.apply()`.
 * [prefer-template](prefer-template) - suggest using template literals instead of strings concatenation
 * [require-yield](require-yield) - disallow generator functions that do not have `yield`
+* [template-curly-spacing](template-curly-spacing) - enforce spacing around embedded expressions of template strings (fixable)
 * [yield-star-spacing](yield-star-spacing) - enforce spacing around the `*` in `yield*` expressions (fixable)
 
 
@@ -253,6 +257,7 @@ These rules existed in a previous version of ESLint but have since been replaced
 * [no-arrow-condition](no-arrow-condition) - disallow arrow functions where a condition is expected (replaced by [no-confusing-arrow](no-confusing-arrow) and [no-constant-condition](no-constant-condition))
 * [no-comma-dangle](no-comma-dangle) - disallow trailing commas in object literals (replaced by [comma-dangle](comma-dangle))
 * [no-empty-class](no-empty-class) - disallow the use of empty character classes in regular expressions (replaced by [no-empty-character-class](no-empty-character-class))
+* [no-empty-label](no-empty-label) - disallow use of labels for anything other than loops and switches (replaced by [no-labels](no-labels))
 * [no-extra-strict](no-extra-strict) - disallow unnecessary use of `"use strict";` when already in strict mode (replaced by [strict](strict))
 * [no-reserved-keys](no-reserved-keys) - disallow reserved words being used as object literal keys
 * [no-space-before-semi](no-space-before-semi) - disallow space before semicolon (replaced by [semi-spacing](semi-spacing))
