@@ -7,6 +7,21 @@ code[data-lang] {
   white-space: pre;
 }
 
+a[href="#recommended"], a[href="#fixable"] {
+  text-decoration: none;
+  pointer-events: none;
+}
+
+a[href="#recommended"] code {
+  background-color: #fff3c9;
+  color: #8a6500;
+}
+
+a[href="#fixable"] code {
+  background-color: #c8deb9;
+  color: #2f8000;
+}
+
 main.doc .highlight pre {
   overflow-x: auto;
   word-wrap: normal;
