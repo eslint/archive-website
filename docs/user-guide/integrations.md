@@ -21,22 +21,14 @@ redirect_from: "/docs/integrations/"
 
 ## Build Systems
 
-* **Grunt:**
-    * [grunt-eslint](https://npmjs.org/package/grunt-eslint)
-* **Gulp:**
-    * [gulp-eslint](https://npmjs.org/package/gulp-eslint)
-* **Mimosa:**
-    * [mimosa-eslint](https://npmjs.org/package/mimosa-eslint)
-* **Broccoli:**
-    * [broccoli-eslint](https://www.npmjs.org/package/broccoli-eslint)
-* **Browserify**
-    * [eslintify](https://www.npmjs.com/package/eslintify)
-* **Webpack:**
-    * [eslint-loader](https://www.npmjs.org/package/eslint-loader)
-* **Ember-cli**
-    * [ember-cli-eslint](https://www.npmjs.com/package/ember-cli-eslint)
-* **Sails.js**
-    * [sails-hook-eslint](https://www.npmjs.com/package/sails-hook-eslint)
+* Grunt: [grunt-eslint](https://npmjs.org/package/grunt-eslint)
+* Gulp: [gulp-eslint](https://npmjs.org/package/gulp-eslint)
+* Mimosa: [mimosa-eslint](https://npmjs.org/package/mimosa-eslint)
+* Broccoli: [broccoli-eslint](https://www.npmjs.org/package/broccoli-eslint)
+* Browserify: [eslintify](https://www.npmjs.com/package/eslintify)
+* Webpack: [eslint-loader](https://www.npmjs.org/package/eslint-loader)
+* Ember-cli: [ember-cli-eslint](https://www.npmjs.com/package/ember-cli-eslint)
+* Sails.js: [sails-hook-eslint](https://www.npmjs.com/package/sails-hook-eslint)
 
 ## Command Line Tools
 
@@ -51,8 +43,7 @@ redirect_from: "/docs/integrations/"
 
 ## Testing
 
- * **Mocha.js**
-    * [mocha-eslint](https://www.npmjs.com/package/mocha-eslint)
+ * Mocha.js: [mocha-eslint](https://www.npmjs.com/package/mocha-eslint)
 
 ## External ESLint rules
 
