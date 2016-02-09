@@ -18,7 +18,7 @@ The following rules point out areas where you might have made mistakes.
 * [no-dupe-keys](no-dupe-keys.md) - disallow duplicate keys when creating object literals (recommended)
 * [no-duplicate-case](no-duplicate-case.md) - disallow a duplicate case label. (recommended)
 * [no-empty-character-class](no-empty-character-class.md) - disallow the use of empty character classes in regular expressions (recommended)
-* [no-empty](no-empty.md) - disallow empty statements (recommended)
+* [no-empty](no-empty.md) - disallow empty block statements (recommended)
 * [no-ex-assign](no-ex-assign.md) - disallow assigning to the exception in a `catch` block (recommended)
 * [no-extra-boolean-cast](no-extra-boolean-cast.md) - disallow double-negation boolean casts in a boolean context (recommended)
 * [no-extra-parens](no-extra-parens.md) - disallow unnecessary parentheses
@@ -169,7 +169,7 @@ These rules are purely matters of style and are quite subjective.
 * [max-depth](max-depth.md) - specify the maximum depth that blocks can be nested
 * [max-len](max-len.md) - specify the maximum length of a line in your program
 * [max-nested-callbacks](max-nested-callbacks.md) - specify the maximum depth callbacks can be nested
-* [max-params](max-params.md) - limits the number of parameters that can be used in the function declaration.
+* [max-params](max-params.md) - limits the number of parameters that can be used in the function declaration
 * [max-statements](max-statements.md) - specify the maximum number of statement allowed in a function
 * [new-cap](new-cap.md) - require a capital letter for constructors
 * [new-parens](new-parens.md) - disallow the omission of parentheses when invoking a constructor with no arguments
@@ -208,7 +208,7 @@ These rules are purely matters of style and are quite subjective.
 * [sort-imports](sort-imports.md) - sort import declarations within module
 * [space-before-blocks](space-before-blocks.md) - require or disallow a space before blocks (fixable)
 * [space-before-function-paren](space-before-function-paren.md) - require or disallow a space before function opening parenthesis (fixable)
-* [space-in-parens](space-in-parens.md) - require or disallow spaces inside parentheses
+* [space-in-parens](space-in-parens.md) - require or disallow spaces inside parentheses (fixable)
 * [space-infix-ops](space-infix-ops.md) - require spaces around operators (fixable)
 * [space-unary-ops](space-unary-ops.md) - require or disallow spaces before/after unary operators (fixable)
 * [spaced-comment](spaced-comment.md) - require or disallow a space immediately following the `//` or `/*` in a comment
@@ -236,7 +236,7 @@ These rules are only relevant to ES6 environments.
 * [prefer-const](prefer-const.md) - suggest using `const` declaration for variables that are never modified after declared
 * [prefer-reflect](prefer-reflect.md) - suggest using Reflect methods where applicable
 * [prefer-rest-params](prefer-rest-params.md) - suggest using the rest parameters instead of `arguments`
-* [prefer-spread](prefer-spread.md) - suggest using the spread operator instead of `.apply()`.
+* [prefer-spread](prefer-spread.md) - suggest using the spread operator instead of `.apply()`
 * [prefer-template](prefer-template.md) - suggest using template literals instead of strings concatenation
 * [require-yield](require-yield.md) - disallow generator functions that do not have `yield`
 * [template-curly-spacing](template-curly-spacing.md) - enforce spacing around embedded expressions of template strings (fixable)

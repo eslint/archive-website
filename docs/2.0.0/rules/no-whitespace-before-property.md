@@ -13,7 +13,7 @@ foo. bar .baz . quz
 
 ## Rule Details
 
-This rule alerts for whitespace around the dot or brackets before properties of objects if they are on the same line. It does not alert for whitespace when the object and property are on separate lines, as it is common to add newlines to longer chains of properties:
+This rule alerts for whitespace around the dot or before the opening bracket before properties of objects if they are on the same line. It does not alert for whitespace when the object and property are on separate lines, as it is common to add newlines to longer chains of properties:
 
 ```js
 foo
@@ -51,6 +51,8 @@ foo.bar
 
 foo[bar]
 
+foo[ bar ]
+
 foo.bar.baz
 
 foo
@@ -67,7 +69,7 @@ foo.
 
 ## When Not To Use It
 
-Turn this rule off if you do not care about allowing whitespace around dot or brackets before properties of objects if they are on the same line.
+Turn this rule off if you do not care about allowing whitespace around the dot or before the opening bracket before properties of objects if they are on the same line.
 
 
 ## Version

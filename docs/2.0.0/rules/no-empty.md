@@ -5,7 +5,7 @@ layout: doc
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 # Disallow Empty Block Statements (no-empty)
 
-Empty statements usually occur due to refactoring that wasn't completed, such as:
+Empty block statements usually occur due to refactoring that wasn't completed, such as:
 
 ```js
 if (foo) {
@@ -68,7 +68,7 @@ try {
 }
 ```
 
-Since you must always have at least a `catch` or a `finally` block for any `try`, it is common to have empty statements when execution should continue regardless of error.
+Since you must always have at least a `catch` or a `finally` block for any `try`, it is common to have empty block statements when execution should continue regardless of error.
 
 ### Options
 
@@ -104,7 +104,7 @@ var foo = {
 
 ## When Not To Use It
 
-If you intentionally use empty statements then you can disable this rule.
+If you intentionally use empty block statements then you can disable this rule.
 
 ## Version
 

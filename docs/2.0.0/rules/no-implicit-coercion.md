@@ -149,7 +149,7 @@ var b = !!foo;
 var c = ~foo.indexOf(".");
 ```
 
-## When Not to Use It
+## When Not To Use It
 
 If you don't want to be notified about shorter notations for the type conversion, you can safely disable this rule.
 

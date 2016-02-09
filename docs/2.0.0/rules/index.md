@@ -23,7 +23,7 @@ The following rules point out areas where you might have made mistakes.
 * [no-dupe-keys](no-dupe-keys) - disallow duplicate keys when creating object literals (recommended)
 * [no-duplicate-case](no-duplicate-case) - disallow a duplicate case label. (recommended)
 * [no-empty-character-class](no-empty-character-class) - disallow the use of empty character classes in regular expressions (recommended)
-* [no-empty](no-empty) - disallow empty statements (recommended)
+* [no-empty](no-empty) - disallow empty block statements (recommended)
 * [no-ex-assign](no-ex-assign) - disallow assigning to the exception in a `catch` block (recommended)
 * [no-extra-boolean-cast](no-extra-boolean-cast) - disallow double-negation boolean casts in a boolean context (recommended)
 * [no-extra-parens](no-extra-parens) - disallow unnecessary parentheses
@@ -174,7 +174,7 @@ These rules are purely matters of style and are quite subjective.
 * [max-depth](max-depth) - specify the maximum depth that blocks can be nested
 * [max-len](max-len) - specify the maximum length of a line in your program
 * [max-nested-callbacks](max-nested-callbacks) - specify the maximum depth callbacks can be nested
-* [max-params](max-params) - limits the number of parameters that can be used in the function declaration.
+* [max-params](max-params) - limits the number of parameters that can be used in the function declaration
 * [max-statements](max-statements) - specify the maximum number of statement allowed in a function
 * [new-cap](new-cap) - require a capital letter for constructors
 * [new-parens](new-parens) - disallow the omission of parentheses when invoking a constructor with no arguments
@@ -213,7 +213,7 @@ These rules are purely matters of style and are quite subjective.
 * [sort-imports](sort-imports) - sort import declarations within module
 * [space-before-blocks](space-before-blocks) - require or disallow a space before blocks (fixable)
 * [space-before-function-paren](space-before-function-paren) - require or disallow a space before function opening parenthesis (fixable)
-* [space-in-parens](space-in-parens) - require or disallow spaces inside parentheses
+* [space-in-parens](space-in-parens) - require or disallow spaces inside parentheses (fixable)
 * [space-infix-ops](space-infix-ops) - require spaces around operators (fixable)
 * [space-unary-ops](space-unary-ops) - require or disallow spaces before/after unary operators (fixable)
 * [spaced-comment](spaced-comment) - require or disallow a space immediately following the `//` or `/*` in a comment
@@ -241,7 +241,7 @@ These rules are only relevant to ES6 environments.
 * [prefer-const](prefer-const) - suggest using `const` declaration for variables that are never modified after declared
 * [prefer-reflect](prefer-reflect) - suggest using Reflect methods where applicable
 * [prefer-rest-params](prefer-rest-params) - suggest using the rest parameters instead of `arguments`
-* [prefer-spread](prefer-spread) - suggest using the spread operator instead of `.apply()`.
+* [prefer-spread](prefer-spread) - suggest using the spread operator instead of `.apply()`
 * [prefer-template](prefer-template) - suggest using template literals instead of strings concatenation
 * [require-yield](require-yield) - disallow generator functions that do not have `yield`
 * [template-curly-spacing](template-curly-spacing) - enforce spacing around embedded expressions of template strings (fixable)

@@ -76,6 +76,7 @@ Miscellaneous:
   -v, --version              Outputs the version number
   --no-inline-config         Prevent comments from changing eslint rules -
                              default: false
+  --print-config             Print the configuration to be used
 ```
 
 Options that accept array values can be specified by repeating the option or with a comma-delimited list (other than `--ignore-pattern` which does not allow the second style).
@@ -281,13 +282,14 @@ When specified, the given format is output into the provided file name.
 
 This option specifies the output format for the console. Possible formats are:
 
-* [stylish](formatters/#stylish) (the default)
 * [checkstyle](formatters/#checkstyle)
 * [compact](formatters/#compact)
 * [html](formatters/#html)
 * [jslint-xml](formatters/#jslint-xml)
 * [json](formatters/#json)
 * [junit](formatters/#junit)
+* [stylish](formatters/#stylish) (the default)
+* [table](formatters/#table)
 * [tap](formatters/#tap)
 * [unix](formatters/#unix)
 * [visualstudio](formatters/#visualstudio)
@@ -361,6 +363,14 @@ config without files modifying it. All inline config comments are ignored, e.g.:
 Example:
 
     eslint --no-inline-config file.js
+
+#### `--print-config`
+
+This option outputs the configuration to be used for the file passed. When present, no linting is performed and only config-related options are valid.
+
+Example:
+
+    eslint --print-config file.js
 
 ## Ignoring files from linting
 

@@ -93,7 +93,7 @@ class A {
 }
 ```
 
-## When Not to Use It
+## When Not To Use It
 
 If you don't want to be notified about modifying variables of class declarations, you can safely disable this rule.
 

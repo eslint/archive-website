@@ -29,7 +29,7 @@ The following patterns are considered okay and could be used alternatively:
 var a = Object.getPrototypeOf(obj);
 ```
 
-## When not to use
+## When Not To Use It
 
 If you need to support legacy browsers, you might want to turn this rule off, since support for `getPrototypeOf` is not yet universal.
 
