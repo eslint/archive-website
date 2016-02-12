@@ -21,6 +21,39 @@ var code = new SourceCode("var foo = bar;", ast);
 
 The `SourceCode` constructor throws an error if the AST is missing any of the required information.
 
+The `SourceCode` constructor strips Unicode BOM.
+Please note the AST also should be parsed from stripped text.
+
+```js
+var SourceCode = require("eslint").SourceCode;
+
+var code = new SourceCode("\uFEFFvar foo = bar;", ast);
+
+assert(code.hasBOM === true);
+assert(code.text === "var foo = bar;");
+```
+
+### splitLines()
+
+This is a static function on `SourceCode` that is used to split the source code text into an array of lines.
+
+```js
+var SourceCode = require("eslint").SourceCode;
+
+var code = "var a = 1;\nvar b = 2;"
+
+// split code into an array
+var codeLines = SourceCode.splitLines(code);
+
+/*
+    Value of codeLines will be
+    [
+        "var a = 1;",
+        "var b = 2;"
+    ]
+ */
+```
+
 ## linter
 
 The `linter` object does the actual evaluation of the JavaScript code. It doesn't do any filesystem operations, it simply parses and reports on the code. You can retrieve `linter` like this:
@@ -32,11 +65,12 @@ var linter = require("eslint").linter;
 The most important method on `linter` is `verify()`, which initiates linting of the given text. This method accepts four arguments:
 
 * `code` - the source code to lint (a string or instance of `SourceCode`).
-* `config` - a configuration object.
-* `options` - (optional) Additional options for this run.
+* `config` - a configuration object that is equivalent to an eslintrc file.
+* `optionsOrFilename` - (optional) Additional options for this run or a string representing the filename to associate with the code being linted.
     * `filename` - (optional) the filename to associate with the source code.
-    * `saveState` - (optional) set to true to maintain the internal state of `linter` after linting (mostly used for testing purposes).
+    * `saveState` - (optional) see below. This will override any value passed as the fourth argument if an options object is used here instead of the filename.
     * `allowInlineConfig` - (optional) set to `false` to disable inline comments from changing eslint rules.
+* `saveState` - (optional) set to true to maintain the internal state of `linter` after linting (mostly used for testing purposes)
 
 You can call `verify()` like this:
 
@@ -68,8 +102,8 @@ The `verify()` method returns an array of objects containing information about t
 ```js
 {
     fatal: false,
-    severity: 2,
     ruleId: "semi",
+    severity: 2,
     line: 1,
     column: 23,
     message: "Expected a semicolon.",
@@ -137,7 +171,8 @@ The `CLIEngine` is a constructor, and you can create a new instance by passing i
 * `parser` - Specify the parser to be used (default: `espree`). Corresponds to `--parser`.
 * `cache` - Operate only on changed files (default: `false`). Corresponds to `--cache`.
 * `cacheFile` - Name of the file where the cache will be stored (default: `.eslintcache`). Corresponds to `--cache-file`. Deprecated: use `cacheLocation` instead.
-* `cacheLocation` - Name of the file or directory where the cache will be stored (default: `.eslintcache`). Correspond to `--cache-location`
+* `cacheLocation` - Name of the file or directory where the cache will be stored (default: `.eslintcache`). Correspond to `--cache-location`.
+* `cwd` - Path to a directory that should be considered as the current working directory.
 
 For example:
 
@@ -322,15 +357,16 @@ var isIgnored = cli.isPathIgnored("foo/bar.js");
 
 Retrieves a formatter, which you can then use to format a report object. The argument is either the name of a built-in formatter:
 
+* "[checkstyle](../user-guide/formatters#checkstyle)"
+* "[compact](../user-guide/formatters#compact)"
+* "[html](../user-guide/formatters#html)"
+* "[jslint-xml](../user-guide/formatters#jslint-xml)"
+* "[json](../user-guide/formatters#json)"
+* "[junit](../user-guide/formatters#junit)"
 * "[stylish](./user-guide/formatters#stylish)" (the default)
-* "[checkstyle](./user-guide/formatters#checkstyle)"
-* "[compact](./user-guide/formatters#compact)"
-* "[html](./user-guide/formatters#html)"
-* "[jslint-xml](./user-guide/formatters#jslint-xml)"
-* "[json](./user-guide/formatters#json)"
-* "[junit](./user-guide/formatters#junit)"
-* "[tap](./user-guide/formatters#tap)"
-* "[unix](./user-guide/formatters#unix)"
+* "[table](../user-guide/formatters#table)"
+* "[tap](../user-guide/formatters#tap)"
+* "[unix](../user-guide/formatters#unix)"
 
 or the full path to a JavaScript file containing a custom formatter. You can also omit the argument to retrieve the default formatter.
 

@@ -33,7 +33,7 @@ The single-declaration school of thought is based in pre-ECMAScript 6 behaviors,
 
 This rule is aimed at enforcing the use of either one variable declaration or multiple declarations per function (for `var`) or block (for `let` and `const`) scope. As such, it will warn when it encounters an unexpected number of variable declarations.
 
-### Options
+## Options
 
 There are two ways to configure this rule. The first is by using one string specified as `"always"` (the default) to enforce one variable declaration per scope or `"never"` to enforce multiple variable declarations per scope.  If you declare variables in your code with `let` and `const`, then `"always"` and `"never"` will apply to the block scope for those declarations, not the function scope.
 
@@ -64,7 +64,7 @@ Exactly one declarator per declaration per function (var) or block (let or const
 "one-var": [2, "never"]
 ```
 
-Configure each declaration type individually. Defaults to "always" if key not present.
+Configure each declaration type individually. Defaults to `"always"` if key not present.
 
 ```json
 "one-var": [2, {
@@ -74,7 +74,7 @@ Configure each declaration type individually. Defaults to "always" if key not pr
 }]
 ```
 
-Configure uninitialized and initialized seperately. Defaults to "always" if key not present.
+Configure uninitialized and initialized seperately. Defaults to `"always"` if key not present.
 
 ```json
 "one-var": [2, {

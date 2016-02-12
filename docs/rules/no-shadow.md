@@ -28,24 +28,24 @@ The following patterns are considered problems:
 
 var a = 3;
 function b() {
-    var a = 10;       /*error a is already declared in the upper scope.*/
+    var a = 10;       /*error 'a' is already declared in the upper scope.*/
 }
 
 var b = function () {
-    var a = 10;       /*error a is already declared in the upper scope.*/
+    var a = 10;       /*error 'a' is already declared in the upper scope.*/
 }
 
-function b(a) {       /*error a is already declared in the upper scope.*/
+function b(a) {       /*error 'a' is already declared in the upper scope.*/
     a = 10;
 }
 b(a);
 
 if (true) {
-    let a = 5;        /*error a is already declared in the upper scope.*/
+    let a = 5;        /*error 'a' is already declared in the upper scope.*/
 }
 ```
 
-### Options
+## Options
 
 This rule takes one option, an object, with properties `"builtinGlobals"`, `"hoist"` and `"allow"`.
 
@@ -55,7 +55,7 @@ This rule takes one option, an object, with properties `"builtinGlobals"`, `"hoi
 }
 ```
 
-#### builtinGlobals
+### `builtinGlobals`
 
 `false` by default.
 If this is `true`, this rule checks with built-in global variables such as `Object`, `Array`, `Number`, ...
@@ -66,11 +66,11 @@ When `{"builtinGlobals": true}`, the following patterns are considered problems:
 /*eslint no-shadow: [2, { "builtinGlobals": true }]*/
 
 function foo() {
-    var Object = 0; /*error Object is already declared in the upper scope.*/
+    var Object = 0; /*error 'Object' is already declared in the upper scope.*/
 }
 ```
 
-#### hoist
+### `hoist`
 
 The option has three settings:
 
@@ -78,7 +78,7 @@ The option has three settings:
 * `functions` (by default) - reports shadowing before the outer functions are defined.
 * `never` - never report shadowing before the outer variables/functions are defined.
 
-##### { "hoist": "all" }
+#### `{ "hoist": "all" }`
 
 With `"hoist"` set to `"all"`, both `let a` and `let b` in the `if` statement are considered problems.
 
@@ -87,15 +87,15 @@ With `"hoist"` set to `"all"`, both `let a` and `let b` in the `if` statement ar
 /*eslint-env es6*/
 
 if (true) {
-    let a = 3;    /*error a is already declared in the upper scope.*/
-    let b = 6;    /*error b is already declared in the upper scope.*/
+    let a = 3;    /*error 'a' is already declared in the upper scope.*/
+    let b = 6;    /*error 'b' is already declared in the upper scope.*/
 }
 
 let a = 5;
 function b() {}
 ```
 
-##### { "hoist": "functions" } (default)
+#### `{ "hoist": "functions" }` (default)
 
 With `"hoist"` set to `"functions"`, `let b` is considered a warning. But `let a` in the `if` statement is not considered a warning, because it is before `let a` of the outer scope.
 
@@ -105,14 +105,14 @@ With `"hoist"` set to `"functions"`, `let b` is considered a warning. But `let a
 
 if (true) {
     let a = 3;
-    let b = 6;    /*error b is already declared in the upper scope.*/
+    let b = 6;    /*error 'b' is already declared in the upper scope.*/
 }
 
 let a = 5;
 function b() {}
 ```
 
-##### { "hoist": "never" }
+#### `{ "hoist": "never" }`
 
 With `"hoist"` set to `"never"`, neither `let a` nor `let b` in the `if` statement are considered problems, because they are before the declarations of the outer scope.
 
@@ -129,7 +129,7 @@ let a = 5;
 function b() {}
 ```
 
-#### allow
+### `allow`
 
 The option is an array of identifier names to be allowed (ie. "resolve", "reject", "done", "cb" etc.):
 

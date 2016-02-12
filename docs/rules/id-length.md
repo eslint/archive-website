@@ -16,7 +16,7 @@ var x = 5; // too short
 
 This rule is aimed at increasing code readability and maintainability by enforcing an identifier length convention. It will warn on any type of identifier which doesn't conform to length limits (upper and lower).
 
-It allows the programmers to silently by-pass this check by using "quoted" property names or calculated property access to allow potential server-side data requirements.
+It allows the programmers to silently by-pass this check by using `"quoted"` property names or calculated property access to allow potential server-side data requirements.
 
 The following patterns are considered problems:
 
@@ -121,7 +121,7 @@ export var num = 0;
 ```
 
 
-### Options
+## Options
 
 The `id-length` rule has no required options and has 4 optional ones that needs to be passed in a single options object:
 

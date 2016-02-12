@@ -18,45 +18,30 @@ There are several pieces of information that can be configured:
 
 All of these options give you fine-grained control over how ESLint treats your code.
 
-## Specifying Language Options
+## Specifying Parser Options
 
-ESLint allows you to specify the JavaScript language options you want to support. By default, ESLint supports only ECMAScript 5 syntax. You can override that setting to enable support for ECMAScript 6 as well as [JSX](http://facebook.github.io/jsx/) by using configuration settings.
+ESLint allows you to specify the JavaScript language options you want to support. By default, ESLint supports only ECMAScript 5 syntax. You can override that setting to enable support for ECMAScript 6 as well as [JSX](http://facebook.github.io/jsx/) by using parser options.
 
-Configuration settings are set in your `.eslintrc` file by using the `ecmaFeatures` property. The available options are:
+Parser options are set in your `.eslintrc.*` file by using the `parserOptions` property. The available options are:
 
-* `arrowFunctions` - enable [arrow functions](https://leanpub.com/understandinges6/read#leanpub-auto-arrow-functions)
-* `binaryLiterals` - enable [binary literals](https://leanpub.com/understandinges6/read#leanpub-auto-octal-and-binary-literals)
-* `blockBindings` - enable `let` and `const` (aka [block bindings](https://leanpub.com/understandinges6/read#leanpub-auto-block-bindings))
-* `classes` - enable classes
-* `defaultParams` - enable [default function parameters](https://leanpub.com/understandinges6/read/#leanpub-auto-default-parameters)
-* `destructuring` - enable [destructuring](https://leanpub.com/understandinges6/read#leanpub-auto-destructuring-assignment)
-* `forOf` - enable [`for-of` loops](https://leanpub.com/understandinges6/read#leanpub-auto-iterables-and-for-of)
-* `generators` - enable [generators](https://leanpub.com/understandinges6/read#leanpub-auto-generators)
-* `modules` - enable modules and global strict mode
-* `objectLiteralComputedProperties` - enable [computed object literal property names](https://leanpub.com/understandinges6/read#leanpub-auto-computed-property-names)
-* `objectLiteralDuplicateProperties` - enable [duplicate object literal properties](https://leanpub.com/understandinges6/read#leanpub-auto-duplicate-object-literal-properties) in strict mode
-* `objectLiteralShorthandMethods` - enable [object literal shorthand methods](https://leanpub.com/understandinges6/read#leanpub-auto-method-initializer-shorthand)
-* `objectLiteralShorthandProperties` - enable [object literal shorthand properties](https://leanpub.com/understandinges6/read#leanpub-auto-property-initializer-shorthand)
-* `octalLiterals` - enable [octal literals](https://leanpub.com/understandinges6/read#leanpub-auto-octal-and-binary-literals)
-* `regexUFlag` - enable the [regular expression `u` flag](https://leanpub.com/understandinges6/read#leanpub-auto-the-regular-expression-u-flag)
-* `regexYFlag` - enable the [regular expression `y` flag](https://leanpub.com/understandinges6/read#leanpub-auto-the-regular-expression-y-flag)
-* `restParams` - enable the [rest parameters](https://leanpub.com/understandinges6/read#leanpub-auto-rest-parameters)
-* `spread` - enable the [spread operator](https://leanpub.com/understandinges6/read#leanpub-auto-the-spread-operator) for arrays
-* `superInFunctions` - enable `super` references inside of functions
-* `templateStrings` - enable [template strings](https://leanpub.com/understandinges6/read/#leanpub-auto-template-strings)
-* `unicodeCodePointEscapes` - enable [code point escapes](https://leanpub.com/understandinges6/read/#leanpub-auto-escaping-non-bmp-characters)
-* `globalReturn` - allow `return` statements in the global scope
-* `jsx` - enable [JSX](http://facebook.github.io/jsx/)
-* `experimentalObjectRestSpread` - enable support for the experimental [object rest/spread properties](https://github.com/sebmarkbage/ecmascript-rest-spread) (**IMPORTANT:** This is an experimental feature that may change significantly in the future. It's recommended that you do *not* write rules relying on this functionality unless you are willing to incur maintenance cost when it changes.)
+* `ecmaVersion` - set to 3, 5 (default), or 6 to specify the version of ECMAScript you want to use.
+* `sourceType` - set to `"script"` (default) or `"module"` if your code is in ECMAScript modules.
+* `ecmaFeatures` - an object indicating which additional language features you'd like to use:
+    * `globalReturn` - allow `return` statements in the global scope
+    * `impliedStrict` - enable global [strict mode](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Strict_mode) (if `ecmaVersion` is 5 or greater)
+    * `jsx` - enable [JSX](http://facebook.github.io/jsx/)
+    * `experimentalObjectRestSpread` - enable support for the experimental [object rest/spread properties](https://github.com/sebmarkbage/ecmascript-rest-spread) (**IMPORTANT:** This is an experimental feature that may change significantly in the future. It's recommended that you do *not* write rules relying on this functionality unless you are willing to incur maintenance cost when it changes.)
 
-Here's an example `.eslintrc` file:
+Here's an example `.eslintrc.json` file:
 
 ```json
 {
-    "ecmaFeatures": {
-        "blockBindings": true,
-        "forOf": true,
-        "jsx": true
+    "parserOptions": {
+        "ecmaVersion": 6,
+        "sourceType": "module",
+        "ecmaFeatures": {
+            "jsx": true
+        },
     },
     "rules": {
         "semi": 2
@@ -64,7 +49,7 @@ Here's an example `.eslintrc` file:
 }
 ```
 
-Setting language options helps ESLint determine what is a parsing error. All language options are `false` by default.
+Setting parser options helps ESLint determine what is a parsing error. All language options are `false` by default.
 
 ## Specifying Parser
 
@@ -93,7 +78,7 @@ The following parsers are compatible with ESLint:
 * [Esprima-FB](https://npmjs.com/package/esprima-fb) - Facebook's fork of Esprima that includes their proprietary syntax additions.
 * [Babel-ESLint](https://npmjs.com/package/babel-eslint) - A wrapper around the [Babel](http://babeljs.io) parser that makes it compatible with ESLint.
 
-Note when using a custom parser, the `ecmaFeatures` configuration property is still required for ESLint to work properly with features not in ECMAScript 5 by default. Parsers may or may not also use `ecmaFeatures` to determine which features to enable.
+Note when using a custom parser, the `parserOptions` configuration property is still required for ESLint to work properly with features not in ECMAScript 5 by default. Parsers are all passed `parserOptions` and may or may not use them to determine which features to enable.
 
 ## Specifying Environments
 
@@ -102,6 +87,8 @@ An environment defines global variables that are predefined. The available envir
 * `browser` - browser global variables.
 * `node` - Node.js global variables and Node.js scoping.
 * `commonjs` - CommonJS global variables and CommonJS scoping (use this for browser-only code that uses Browserify/WebPack).
+* `shared-node-browser` - Globals common to both Node and Browser.
+* `es6` - enable all ECMAScript 6 features except for modules.
 * `worker` - web workers global variables.
 * `amd` - defines `require()` and `define()` as global variables as per the [amd](https://github.com/amdjs/amdjs-api/wiki/AMD) spec.
 * `mocha` - adds all of the Mocha testing global variables.
@@ -118,9 +105,10 @@ An environment defines global variables that are predefined. The available envir
 * `applescript` - AppleScript global variables.
 * `nashorn` - Java 8 Nashorn global variables.
 * `serviceworker` - Service Worker global variables.
+* `atomtest` - Atom test helper globals.
 * `embertest` - Ember test helper globals.
 * `webextensions` - WebExtensions globals.
-* `es6` - enable all ECMAScript 6 features except for modules.
+* `greasemonkey` - GreaseMonkey globals.
 
 These environments are not mutually exclusive, so you can define more than one at a time.
 
@@ -167,6 +155,42 @@ And in YAML:
   env:
     browser: true
     node: true
+```
+
+If you want to use an environment from a plugin, be sure to specify the plugin name in the `plugins` array and the use the unprefixed plugin name, followed by a slash, followed by the environment name. For example:
+
+```json
+{
+    "plugins": ["example"],
+    "env": {
+        "example/custom": true
+    }
+}
+```
+
+Or in a `package.json` file
+
+```json
+{
+    "name": "mypackage",
+    "version": "0.0.1",
+    "eslintConfig": {
+        "plugins": ["example"],
+        "env": {
+            "example/custom": true
+        }
+    }
+}
+```
+
+And in YAML:
+
+```yaml
+---
+  plugins:
+    - example
+  env:
+    example/custom: true
 ```
 
 ## Specifying Globals
@@ -319,20 +343,18 @@ In these configuration files, the rule `plugin1/rule1` comes from the plugin nam
 
 **Note:** When specifying rules from plugins, make sure to omit `eslint-plugin-`. ESLint uses only the unprefixed name internally to locate rules.
 
-All rules that are enabled by default are set to 2, so they will cause a non-zero exit code when encountered. You can lower these rules to a warning by setting them to 1, which has the effect of outputting the message onto the console but doesn't affect the exit code.
-
-To temporary disable warnings in your file use the following format:
+To temporarily disable rule warnings in your file use the following format:
 
 ```js
 /*eslint-disable */
 
-//suppress all warnings between comments
+//Disable all rules between comments
 alert('foo');
 
 /*eslint-enable */
 ```
 
-You can also disable and enable back warnings of specific rules
+You can also disable or enable warnings for specific rules:
 
 ```js
 /*eslint-disable no-alert, no-console */
@@ -343,17 +365,19 @@ console.log('bar');
 /*eslint-enable no-alert */
 ```
 
-To disable warnings on a specific line
+To disable all rules on a specific line:
 
 ```js
 alert('foo'); // eslint-disable-line
 ```
 
-To disable a specific rule on a specific line
+To disable a specific rule on a specific line:
 
 ```js
 alert('foo'); // eslint-disable-line no-alert
 ```
+
+**Note:** Comments that disable warnings for a portion of a file tell ESLint not to report rule violations for the disabled code. ESLint parses the entire file, so disabled code still needs to be syntactically valid JavaScript.
 
 ## Adding Shared Settings
 
@@ -383,7 +407,7 @@ There are two ways to use configuration files. The first is to save the file whe
 
     eslint -c myconfig.json myfiletotest.js
 
-The second way to use configuration files is via `.eslintrc` and `package.json` files. ESLint will automatically look for them in the directory of the file to be linted, and in successive parent directories all the way up to the root directory of the filesystem. This option is useful when you want different configurations for different parts of a project or when you want others to be able to use ESLint directly without needing to remember to pass in the configuration file.
+The second way to use configuration files is via `.eslintrc.*` and `package.json` files. ESLint will automatically look for them in the directory of the file to be linted, and in successive parent directories all the way up to the root directory of the filesystem. This option is useful when you want different configurations for different parts of a project or when you want others to be able to use ESLint directly without needing to remember to pass in the configuration file.
 
 In each case, the settings in the configuration file override default settings.
 
@@ -394,21 +418,22 @@ ESLint supports configuration files in several formats:
 * **JavaScript** - use `.eslintrc.js` and export an object containing your configuration.
 * **YAML** - use `.eslintrc.yaml` or `.eslintrc.yml` to define the configuration structure.
 * **JSON** - use `.eslintrc.json` to define the configuration structure. ESLint's JSON files also allow JavaScript-style comments.
-* **package.json** - create an `eslintConfig` property in your `package.json` file and define your configuration there.
 * **Deprecated** - use `.eslintrc`, which can be either JSON or YAML.
+* **package.json** - create an `eslintConfig` property in your `package.json` file and define your configuration there.
 
-If there are multiple `.eslintrc.*` files in the same directory, ESLint will only use one. The priority order is:
+If there are multiple configuration files in the same directory, ESLint will only use one. The priority order is:
 
 1. `.eslintrc.js`
 1. `.eslintrc.yaml`
 1. `.eslintrc.yml`
 1. `.eslintrc.json`
 1. `.eslintrc`
+1. `package.json`
 
 
 ## Configuration Cascading and Hierarchy
 
-When using `.eslintrc` and `package.json` files for configuration, you can take advantage of configuration cascading. For instance, suppose you have the following structure:
+When using `.eslintrc.*` and `package.json` files for configuration, you can take advantage of configuration cascading. For instance, suppose you have the following structure:
 
 ```text
 your-project
@@ -434,11 +459,11 @@ your-project
   └── test.js
 ```
 
-If there is an `.eslintrc` and a `package.json` file found in the same directory, both will be used, with the `.eslintrc` having the higher precendence.
+If there is an `.eslintrc` and a `package.json` file found in the same directory, `.eslintrc` will take a priority and `package.json` file will not be used.
 
 **Note:** If you have a personal configuration file in your home directory (`~/.eslintrc`), it will only be used if no other configuration files are found. Since a personal configuration would apply to everything inside of a user's directory, including third-party code, this could cause problems when running ESLint.
 
-By default, ESLint will look for configuration files in all parent folders up to the root directory. This can be useful if you want all of your projects to follow a certain convention, but can sometimes lead to unexpected results. To limit ESLint to a specific project, place `"root": true` inside the `eslintConfig` field of the `package.json` file or in the `.eslintrc` file at your project's root level.  ESLint will stop looking in parent folders once it finds a configuration with `"root": true`.
+By default, ESLint will look for configuration files in all parent folders up to the root directory. This can be useful if you want all of your projects to follow a certain convention, but can sometimes lead to unexpected results. To limit ESLint to a specific project, place `"root": true` inside the `eslintConfig` field of the `package.json` file or in the `.eslintrc.*` file at your project's root level.  ESLint will stop looking in parent folders once it finds a configuration with `"root": true`.
 
 ```js
 {
@@ -479,8 +504,7 @@ The complete configuration hierarchy, from highest precedence to lowest preceden
     1. `--env`
     1. `-c`, `--config`
 3. Project-level configuration:
-    1. `.eslintrc` file in same directory as linted file
-    1. `package.json` file in same directory as linted file
+    1. `.eslintrc.*` or `package.json` file in same directory as linted file
     1. Continue searching for `.eslintrc` and `package.json` files in ancestor directories (parent has highest precedence, then grandparent, etc.), up to and including the root directory or until a config with `"root": true` is found.
     1. In the absence of any configuration from (1) thru (3), fall back to a personal default configuration in  `~/.eslintrc`.
 
@@ -546,6 +570,25 @@ In this example, the `eslint-config-myrules` package will be loaded as an object
 
 **Note:** You can omit `eslint-config-` and ESLint will automatically insert it for you, similar to how plugins work. See [Shareable Configs](../developer-guide/shareable-configs) for more information.
 
+ESLint also supports extending configuration from plugins that provide configs:
+
+```js
+{
+    "extends": "plugin:eslint-plugin-myplugin/myConfig",
+
+    "rules": {
+        // Override any settings from the "parent" configuration
+        "eqeqeq": 1
+    }
+}
+```
+
+In this example, the `eslint-plugin-myplugin` package contains configuration named `default`.
+
+**Important:** When you are extending from the configuration bundled with plugins, you need to start with `plugin:` prefix as well as specify configuration name after the slash. You may optionally omit the `eslint-plugin-` prefix.
+
+**Note:** For configuration files in your home directory, or in any path that isn't an ancestor to the location of ESLint (either globally or locally), `extends` is resolved from the path of the project using ESLint (typically the current working directory) rather than relative to the file itself.
+
 ## Comments in Configuration Files
 
 Both the JSON and YAML configuration file formats support comments (`package.json` files should not include them). You can use JavaScript-style comments or YAML-style comments in either type of file and ESLint will safely ignore them. This allows your configuration files to be more human-friendly. For example:
@@ -563,6 +606,10 @@ Both the JSON and YAML configuration file formats support comments (`package.jso
 }
 ```
 
+## Specifying File extensions to Lint
+
+Currently the sole method for telling ESLint which file extensions to lint is by specifying a comma separated list of extensions using the [`--ext`](./command-line-interface#ext) command line option.
+
 ## Ignoring Files and Directories
 
 You can tell ESLint to ignore specific files and directories by creating an `.eslintignore` file in your project's root directory. The `.eslintignore` file is a plain text file where each line is a glob pattern indicating which paths should be omitted from linting. For example, the following will omit all JavaScript files:
@@ -573,18 +620,20 @@ You can tell ESLint to ignore specific files and directories by creating an `.es
 
 When ESLint is run, it looks in the current working directory to find an `.eslintignore` file before determining which files to lint. If this file is found, then those preferences are applied when traversing directories. Only one `.eslintignore` file can be used at a time, so `.eslintignore` files other than the one in the current working directory will not be used.
 
-Globs are matched using [minimatch](https://github.com/isaacs/minimatch), so a number of features are available:
+Globs are matched using [node-ignore](https://github.com/kaelzhang/node-ignore), so a number of features are available:
 
 * Lines beginning with `#` are treated as comments and do not affect ignore patterns.
+* Paths are relative to `.eslintignore` location or the current working directory. This also influences paths passed via `--ignore-pattern`.
+* Ignore patterns behave according to the `.gitignore` [specification](http://git-scm.com/docs/gitignore)
 * Lines preceded by `!` are negated patterns that re-include a pattern that was ignored by an earlier pattern.
 * Brace expansion can refer to multiple files in a pattern. For example, `file.{js,ts,coffee}` will ignore `file.js`, `file.ts`, and `file.coffee`.
 
-In addition to any patterns in a `.eslintignore` file, ESLint always ignores files in `node_modules/**`.
+In addition to any patterns in a `.eslintignore` file, ESLint always ignores files in `/node_modules/**` and `/bower_components/**`.
 
-For example, placing the following `.eslintignore` file in the current working directory will ignore all of `node_modules`, any files with the extensions `.ts.js` or `.coffee.js` extension that might have been transpiled, and anything in the `build/` directory except `build/index.js`:
+For example, placing the following `.eslintignore` file in the current working directory will ignore all of `node_modules`, `bower_components`, any files with the extensions `.ts.js` or `.coffee.js` extension that might have been transpiled, and anything in the `build/` directory except `build/index.js`:
 
 ```text
-# node_modules ignored by default
+# /node_modules and /bower_components ignored by default
 
 # Ignore files compiled from TypeScript and CoffeeScript
 **/*.{ts,coffee}.js

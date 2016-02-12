@@ -15,6 +15,8 @@ var a = "b" ;
 var c = "d";var e = "f";
 ```
 
+**Fixable:** This rule is automatically fixable using the `--fix` flag on the command line.
+
 ## Rule Details
 
 This rule aims to enforce spacing around a semicolon. This rule prevents the use of spaces before a semicolon in expressions.
@@ -27,7 +29,7 @@ This rule doesn't check spacing in the following cases:
 
 * The spacing around the semicolon in a for loop with an empty condition (`for(;;)`).
 
-### Options
+## Options
 
 The rule takes one option, an object, which has two keys `before` and `after` having boolean values `true` or `false`.
 If `before` is `true`, space is enforced before semicolons and if it's `false`, space is disallowed before semicolons.
@@ -40,7 +42,7 @@ The default is `{"before": false, "after": true}`.
     "semi-spacing": [2, {"before": false, "after": true}]
 ```
 
-#### {"before": false, "after": true}
+### `{"before": false, "after": true}`
 
 This is the default option. It enforces spacing after semicolons and disallows spacing before semicolons.
 
@@ -72,7 +74,7 @@ if (true) {;}
 ;foo();
 ```
 
-#### {"before": true, "after": false}
+### `{"before": true, "after": false}`
 
 This option enforces spacing before semicolons and disallows spacing after semicolons.
 

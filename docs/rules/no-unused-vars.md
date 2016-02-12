@@ -23,23 +23,23 @@ The following patterns are considered problems:
 
 ```js
 /*eslint no-unused-vars: 2*/
-/*global some_unsed_var */   /*error "some_unsed_var" is defined but never used*/
+/*global some_unsed_var */   /*error 'some_unsed_var' is defined but never used*/
 
 //It checks variables you have defined as global
 some_unsed_var = 42;
 
-var x;                       /*error "x" is defined but never used*/
+var x;                       /*error 'x' is defined but never used*/
 
-var y = 10;                  /*error "y" is defined but never used*/
+var y = 10;                  /*error 'y' is defined but never used*/
 y = 5;
 
 // By default, unused arguments cause warnings.
-(function(foo) {             /*error "foo" is defined but never used*/
+(function(foo) {             /*error 'foo' is defined but never used*/
     return 5;
 })();
 
 // Unused recursive functions also cause warnings.
-function fact(n) {           /*error "fact" is defined but never used*/
+function fact(n) {           /*error 'fact' is defined but never used*/
     if (n < 2) return 1;
     return n * fact(n - 1);
 }
@@ -65,9 +65,9 @@ myFunc(function foo() {
 
 ### Exporting Variables
 
-In environments outside of CommonJS or ECMAScript modules, you may use `var` to create a global variable that may be used by other scripts. You can use the `/* exported variableName */` comment block to indicate that this variable is being exported and therefore should not be considered unused. Note that `/* exported */` has no effect when used with the `node` or `commonjs` environments or when `ecmaFeatures.modules` is true.
+In environments outside of CommonJS or ECMAScript modules, you may use `var` to create a global variable that may be used by other scripts. You can use the `/* exported variableName */` comment block to indicate that this variable is being exported and therefore should not be considered unused. Note that `/* exported */` has no effect when used with the `node` or `commonjs` environments or when `ecmaFeatures.modules` or `ecmaFeatures.globalReturn` are true.
 
-### Options
+## Options
 
 By default this rule is enabled with `all` option for variables and `after-used` for arguments.
 
@@ -79,14 +79,14 @@ By default this rule is enabled with `all` option for variables and `after-used`
 }
 ```
 
-#### vars
+### `vars`
 
 This option has two settings:
 
 * `all` checks all variables for usage, including those in the global scope. This is the default setting.
 * `local` checks only that locally-declared variables are used but will allow global variables to be unused.
 
-#### args
+### `args`
 
 This option has three settings:
 
@@ -94,27 +94,27 @@ This option has three settings:
 * `after-used` - only the last argument must be used. This allows you, for instance, to have two named parameters to a function and as long as you use the second argument, ESLint will not warn you about the first. This is the default setting.
 * `none` - do not check arguments.
 
-##### with `{ "args": "all" }`
+#### with `{ "args": "all" }`
 
 ```js
 /*eslint no-unused-vars: [2, { "args": "all" }]*/
 
-(function(foo, bar, baz) { /*error "foo" is defined but never used*/ /*error "baz" is defined but never used*/
+(function(foo, bar, baz) { /*error 'foo' is defined but never used*/ /*error 'baz' is defined but never used*/
     return bar;
 })();
 ```
 
-##### with `{ "args": "after-used" }`
+#### with `{ "args": "after-used" }`
 
 ```js
 /*eslint no-unused-vars: [2, { "args": "after-used" }]*/
 
-(function(foo, bar, baz) { /*error "baz" is defined but never used*/
+(function(foo, bar, baz) { /*error 'baz' is defined but never used*/
     return bar;
 })();
 ```
 
-##### with `{ "args": "none" }`
+#### with `{ "args": "none" }`
 
 ```js
 /*eslint no-unused-vars: [2, { "args": "none" }]*/
@@ -124,12 +124,12 @@ This option has three settings:
 })();
 ```
 
-#### Ignore identifiers that match specific patterns
+### Ignore identifiers that match specific patterns
 
 * `varsIgnorePattern` - all variables that match this regexp pattern will not be checked.
 * `argsIgnorePattern` - all arguments that match this regexp pattern will not be checked.
 
-##### Examples
+#### Examples
 
 * Ignore all unused function arguments with a leading underscore
 
@@ -173,7 +173,7 @@ This option has three settings:
     ```
 
 
-## When Not to Use It
+## When Not To Use It
 
 If you don't want to be notified about unused variables or function arguments, you can safely turn this rule off.
 

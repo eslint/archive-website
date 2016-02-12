@@ -63,7 +63,7 @@ function doSomething() {
 
 This rule requires that function declarations and, optionally, variable declarations be in the root of a program or the body of a function.
 
-### Options
+## Options
 
 This rule takes a single option to specify whether it should check just function declarations or both function and variable declarations. The default is `"functions"`. Setting it to `"both"` will apply the same rules to both types of declarations.
 
@@ -89,7 +89,7 @@ function doSomethingElse() {
 }
 ```
 
-With "both" option to check variable declarations, the following are considered problems:
+With `"both"` option to check variable declarations, the following are considered problems:
 
 ```js
 /*eslint no-inner-declarations: [2, "both"]*/

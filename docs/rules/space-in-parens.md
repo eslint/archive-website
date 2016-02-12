@@ -15,11 +15,13 @@ foo('bar');
 var x = (1 + 2) * 3;
 ```
 
+**Fixable:** This rule is automatically fixable using the `--fix` flag on the command line.
+
 ## Rule Details
 
 This rule will enforce consistency of spacing directly inside of parentheses, by disallowing or requiring one or more spaces to the right of `(` and to the left of `)`. In either case, `()` will still be allowed.
 
-### Options
+## Options
 
 There are two options for this rule:
 
@@ -32,7 +34,7 @@ Depending on your coding conventions, you can choose either option by specifying
 "space-in-parens": [2, "always"]
 ```
 
-#### always
+### "always"
 
 When `"always"` is set, the following patterns are considered problems:
 
@@ -60,7 +62,7 @@ var foo = ( 1 + 2 ) * 3;
 ( function () { return 'bar'; }() );
 ```
 
-#### never
+### "never"
 
 When `"never"` is used, the following patterns are considered problems:
 
@@ -88,11 +90,11 @@ var foo = (1 + 2) * 3;
 (function () { return 'bar'; }());
 ```
 
-#### Exceptions
+### Exceptions
 
 An object literal may be used as a third array item to specify exceptions, with the key `"exceptions"` and an array as the value. These exceptions work in the context of the first option. That is, if `"always"` is set to enforce spacing, then any "exception" will *disallow* spacing. Conversely, if `"never"` is set to disallow spacing, then any "exception" will *enforce* spacing.
 
-The following exceptions are available: `["{}", "[]", "()", "empty"`].
+The following exceptions are available: `["{}", "[]", "()", "empty"]`.
 
 For example, given `"space-in-parens": [2, "always", { "exceptions": ["{}"] }]`, the following patterns are considered problems:
 

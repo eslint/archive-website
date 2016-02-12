@@ -28,7 +28,10 @@ This rule is aimed at ensuring consistency of string quotes and as such will rep
 The rule configuration takes up to two options:
 
 1. The first option is `"double"`, `"single"` or `"backtick"` for double-quotes, single-quotes or backticks respectively. The default is `"double"`.
-1. The second option is the `"avoid-escape"` flag. When using `"avoid-escape"`, this rule will not report a problem when a string is using incorrect quotes so long as the string contains a quote that would have to be escaped. For example, if you specify `"double"` and `"avoid-escape"`, the string `'He said, "hi!"'` is not considered a problem because using double quotes for that string would require escaping the double quotes inside of the string. This option is off by default.
+1. The second option is the `"avoid-escape"` flag. When using `"avoid-escape"`, this rule will not report a problem when a string is using single-quotes or double-quotes so long as the string contains a quote that would have to be escaped otherwise. For example, if you specify `"double"` and `"avoid-escape"`, the string `'He said, "hi!"'` is not considered a problem because using double quotes for that string would require escaping the double quotes inside of the string. This option is off by default.
+
+When using `"single"` or `"double"`, template literals that don't contain a substitution, don't contain a line break and aren't tagged templates, are flagged as problems, even with the `"avoid-escape"` option.
+
 
 Configuration looks like this:
 
@@ -56,12 +59,14 @@ var unescaped = "a string containing 'single' quotes"; /*error Strings must use 
 /*eslint quotes: [2, "double", "avoid-escape"]*/
 
 var single = 'single'; /*error Strings must use doublequote.*/
+var single = `single`; /*error Strings must use doublequote.*/
 ```
 
 ```js
 /*eslint quotes: [2, "single", "avoid-escape"]*/
 
 var double = "double"; /*error Strings must use singlequote.*/
+var double = `double`; /*error Strings must use singlequote.*/
 ```
 
 ```js
@@ -86,7 +91,8 @@ The following patterns are not considered problems:
 /*eslint-env es6*/
 
 var double = "double";
-var backtick = `backtick`; // backticks are allowed
+var backtick = `back\ntick`;  // backticks are allowed due to newline
+var backtick = tag`backtick`; // backticks are allowed due to tag
 ```
 
 ```js
@@ -94,7 +100,7 @@ var backtick = `backtick`; // backticks are allowed
 /*eslint-env es6*/
 
 var single = 'single';
-var backtick = `backtick`; // backticks are allowed
+var backtick = `back${x}tick`; // backticks are allowed due to substitution
 ```
 
 ```js

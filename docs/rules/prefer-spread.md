@@ -30,11 +30,11 @@ The following patterns are considered problems:
 ```js
 /*eslint prefer-spread: 2*/
 
-foo.apply(undefined, args); /*error use the spread operator instead of the ".apply()".*/
+foo.apply(undefined, args); /*error use the spread operator instead of the '.apply()'.*/
 
-foo.apply(null, args);      /*error use the spread operator instead of the ".apply()".*/
+foo.apply(null, args);      /*error use the spread operator instead of the '.apply()'.*/
 
-obj.foo.apply(obj, args);   /*error use the spread operator instead of the ".apply()".*/
+obj.foo.apply(obj, args);   /*error use the spread operator instead of the '.apply()'.*/
 ```
 
 The following patterns are not considered problems:
@@ -63,19 +63,19 @@ So if the `this` argument is computed in a dynamic expression, this rule cannot 
 /*eslint prefer-spread: 2*/
 
 // This warns.
-a[i++].foo.apply(a[i++], args); /*error use the spread operator instead of the ".apply()".*/
+a[i++].foo.apply(a[i++], args); /*error use the spread operator instead of the '.apply()'.*/
 
 // This does not warn.
 a[++i].foo.apply(a[i], args);
 ```
 
-## When Not to Use It
+## When Not To Use It
 
 This rule should not be used in ES3/5 environments.
 
 In ES2015 (ES6) or later, if you don't want to be notified about `Function.prototype.apply()` callings, you can safely disable this rule.
 
-## Related rules
+## Related Rules
 
 * [no-useless-call](no-useless-call)
 

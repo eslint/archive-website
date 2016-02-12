@@ -5,7 +5,9 @@ layout: doc
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 # Require or disallow spaces before keywords (space-before-keywords)
 
-Keywords are syntax elements of JavaScript, such as `function` and `if`. These identifiers have special meaning to the language and so often appear in a different color in code editors. As an important part of the language, style guides often refer to the spacing that should be used around keywords. For example, you might have a style guide that says keywords should be always be preceeded by spaces, which would mean `if-else` statements must look like this:
+**Replacement notice**: This rule was removed in ESLint v2.0 and replaced by [keyword-spacing](keyword-spacing) rule.
+
+Keywords are syntax elements of JavaScript, such as `function` and `if`. These identifiers have special meaning to the language and so often appear in a different color in code editors. As an important part of the language, style guides often refer to the spacing that should be used around keywords. For example, you might have a style guide that says keywords should be always be preceded by spaces, which would mean `if-else` statements must look like this:
 
 ```js
 if (foo) {
@@ -40,16 +42,16 @@ The following patterns are considered errors when configured `"never"`:
 
 if (foo) {
     // ...
-} else {}         /*error Unexpected space before keyword "else".*/
+} else {}         /*error Unexpected space before keyword 'else'.*/
 
 do {
 
 }
-while (foo)       /*error Unexpected space before keyword "while".*/
+while (foo)       /*error Unexpected space before keyword 'while'.*/
 
-try {} finally {} /*error Unexpected space before keyword "finally".*/
+try {} finally {} /*error Unexpected space before keyword 'finally'.*/
 
-try {} catch(e) {} /*error Unexpected space before keyword "catch".*/
+try {} catch(e) {} /*error Unexpected space before keyword 'catch'.*/
 ```
 
 The following patterns are not considered errors when configured `"never"`:
@@ -76,14 +78,14 @@ The following patterns are considered errors when configured `"always"`:
 
 if (foo) {
     // ...
-}else {}                           /*error Missing space before keyword "else".*/
+}else {}                           /*error Missing space before keyword 'else'.*/
 
-const foo = 'bar';let baz = 'qux'; /*error Missing space before keyword "let".*/
+const foo = 'bar';let baz = 'qux'; /*error Missing space before keyword 'let'.*/
 
-var foo =function bar () {}        /*error Missing space before keyword "function".*/
+var foo =function bar () {}        /*error Missing space before keyword 'function'.*/
 
 function bar() {
-    if (foo) {return; }            /*error Missing space before keyword "return".*/
+    if (foo) {return; }            /*error Missing space before keyword 'return'.*/
 }
 ```
 
@@ -118,9 +120,8 @@ If you do not wish to enforce consistency on keyword spacing.
 
 ## Version
 
-This rule was introduced in ESLint 1.4.0.
+This rule was introduced in ESLint 1.4.0 and removed in 2.0.0-beta.3.
 
 ## Resources
 
-* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/space-before-keywords.js)
 * [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/space-before-keywords.md)

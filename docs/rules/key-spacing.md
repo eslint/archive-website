@@ -11,7 +11,7 @@ This rule enforces spacing around the colon in object literal properties. It can
 
 This rule will warn when spacing in properties does not match the specified options. In the case of long lines, it is acceptable to add a new line wherever whitespace is allowed. There are three modes:
 
-### 1. Individual
+## Options
 
 Use the `beforeColon`, `afterColon` and `mode` options to enforce having one space or zero spaces on each side, using `true` or `false`, respectively. The default is no whitespace between the key and the colon and one space between the colon and the value.
 
@@ -52,11 +52,11 @@ The following patterns are considered problems:
 ```js
 /*eslint key-spacing: [2, {"beforeColon": false, "afterColon": false}]*/
 
-var obj = { foo: 42 };          /*error Extra space before value for key "foo".*/
-var bar = { baz :52 };          /*error Extra space after key "baz".*/
+var obj = { foo: 42 };          /*error Extra space before value for key 'foo'.*/
+var bar = { baz :52 };          /*error Extra space after key 'baz'.*/
 
 foo = { thisLineWouldBeTooLong:
-    soUseAnotherLine };         /*error Extra space before value for key "thisLineWouldBeTooLong".*/
+    soUseAnotherLine };         /*error Extra space before value for key 'thisLineWouldBeTooLong'.*/
 ```
 
 ```js
@@ -64,8 +64,8 @@ foo = { thisLineWouldBeTooLong:
 
 function foo() {
     return {
-        foobar: 42,             /*error Missing space after key "foobar".*/
-        bat :"value"            /*error Missing space before value for key "bat".*/
+        foobar: 42,             /*error Missing space after key 'foobar'.*/
+        bat :"value"            /*error Missing space before value for key 'bat'.*/
     };
 }
 ```
@@ -75,13 +75,13 @@ function foo() {
 
 function foo() {
     return {
-        foobar  : 42,             /*error Extra space after key "foobar".*/
-        bat :  "value"            /*error Extra space before value for key "bat".*/
+        foobar  : 42,             /*error Extra space after key 'foobar'.*/
+        bat :  "value"            /*error Extra space before value for key 'bat'.*/
     };
 }
 ```
 
-### 2. Vertically align values `"align": "value"`
+### `"align": "value"`
 
 Use the `align` option to enforce vertical alignment of values in an object literal. This mode still respects `beforeColon` and `afterColon` where possible, but it will pad with spaces after the colon where necessary. Groups of properties separated by blank lines are considered distinct and can have different alignment than other groups. Single line object literals will not be checked for vertical alignment, but each property will still be checked for `beforeColon` and `afterColon`.
 
@@ -120,13 +120,13 @@ The following patterns are considered problems:
 /*eslint key-spacing: [2, { "align": "value" }]*/
 
 var obj = {
-    a: value,     /*error Missing space before value for key "a".*/
-    bcde:  42,    /*error Extra space before value for key "bcde".*/
-    fg :   foo()  /*error Extra space after key "fg".*/
+    a: value,     /*error Missing space before value for key 'a'.*/
+    bcde:  42,    /*error Extra space before value for key 'bcde'.*/
+    fg :   foo()  /*error Extra space after key 'fg'.*/
 };
 ```
 
-### 3. Vertically align colons `"align": "colon"`
+### `"align": "colon"`
 
 The `align` option can also vertically align colons and values together. Whereas with `"value"` alignment, padding belongs right of the colon, with `"colon"` alignment, padding goes to the left of the colon. Except in the case of padding, it still respects `beforeColon` and `afterColon`. As with `"value"` alignment, groups of properties separated by blank lines are considered distinct and can have different alignment than other groups.
 
@@ -161,11 +161,41 @@ The following patterns are considered problems:
 /*eslint key-spacing: [2, { "align": "colon" }]*/
 
 var obj = {
-    one:   1,  /*error Missing space after key "one".*/ /*error Extra space before value for key "one".*/
+    one:   1,  /*error Missing space after key 'one'.*/ /*error Extra space before value for key 'one'.*/
     "two": 2,
-    three:  3  /*error Extra space before value for key "three".*/
+    three:  3  /*error Extra space before value for key 'three'.*/
 };
 ```
+
+### Fine-grained control
+
+You can specify these options separately for single-line and multi-line configurations by organizing the options this way:
+
+```js
+"key-spacing": [2, {
+    "singleLine": {
+        "beforeColon": false,
+        "afterColon": true
+    },
+    "multiLine": {
+        "beforeColon": true,
+        "afterColon": true,
+        "align": "colon"
+    }
+}]
+```
+
+The following patterns are considered valid:
+
+```js
+var obj = {one: 1, "two": 2, three: 3}; /* valid due to `singleLine:{ beforeColon: false }`*/
+var obj2 = {
+    "two" : 2,
+    three : 3
+};
+```
+
+Please note that you can either use the top-level options or the grouped options (`singleLine` and `multiLine`) but not both.
 
 ## When Not To Use It
 

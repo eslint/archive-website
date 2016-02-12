@@ -5,6 +5,8 @@ layout: doc
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 # Disallow arrow functions where a condition is expected (no-arrow-condition)
 
+**Replacement notice**: This rule was removed in ESLint v2.0 and replaced by a combination of [no-confusing-arrow](no-confusing-arrow) and [no-constant-condition](no-constant-condition) rules.
+
 Arrow functions (`=>`) are similar in syntax to some comparison operators (`>`, `<`, `<=`, and `>=`). This rule warns against using the arrow function syntax in places where a condition is expected. Even if the arguments of the arrow function are wrapped with parens, this rule still warns about it.
 
 Here's an example where the usage of `=>` is most likely a typo:
@@ -47,12 +49,13 @@ var x = (a) => 1 ? 2 : 3
 ## Related Rules
 
 * [arrow-parens](arrow-parens)
+* [no-confusing-arrow](no-confusing-arrow)
+* [no-constant-condition](no-constant-condition)
 
 ## Version
 
-This rule was introduced in ESLint 1.8.0.
+This rule was introduced in ESLint 1.8.0 and removed in 2.0.0-beta.3.
 
 ## Resources
 
-* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/no-arrow-condition.js)
 * [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/no-arrow-condition.md)

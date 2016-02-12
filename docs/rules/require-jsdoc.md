@@ -21,7 +21,7 @@ function sum(num1, num2) {
 
 Some style guides require JSDoc comments for all functions as a way of explaining function behavior.
 
-## Rule details
+## Rule Details
 
 This rule generates warnings for nodes that do not have JSDoc comments when they should. Supported nodes:
 
@@ -29,7 +29,7 @@ This rule generates warnings for nodes that do not have JSDoc comments when they
 * `ClassDeclaration`
 * `MethodDefinition`
 
-### Options
+## Options
 
 This rule accepts a `require` object with its properties as
 
@@ -112,7 +112,7 @@ class Test{
 }
 ```
 
-## When not to use
+## When Not To Use It
 
 If you do not require JSDoc for your functions, then you can leave this rule off.
 

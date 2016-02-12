@@ -50,15 +50,15 @@ The rule can also be configured to discourage the use of parens when they are no
 a => {}
 ```
 
-### Options
+## Options
 
-The rule takes one option, a string, which could be either "always" or "as-needed". The default is "always".
+The rule takes one option, a string, which could be either `"always"` or `"as-needed"`. The default is `"always"`.
 
 You can set the option in configuration like this:
 
 "arrow-parens": [2, "always"]
 
-#### "always"
+### "always"
 
 When the rule is set to `"always"` the following patterns are considered problems:
 
@@ -88,7 +88,7 @@ a.then((foo) => {});
 a.then((foo) => { if (true) {}; });
 ```
 
-##### If Statements
+#### If Statements
 
 One benefits of this option is that it prevents the incorrect use of arrow functions in conditionals:
 
@@ -145,7 +145,7 @@ var f = (a) => b ? c: d;
 ```
 
 
-#### "as-needed"
+### "as-needed"
 
 When the rule is set to `"as-needed"` the following patterns are considered problems:
 

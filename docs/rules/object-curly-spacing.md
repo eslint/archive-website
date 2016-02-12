@@ -33,7 +33,7 @@ applies to EcmaScript 6 destructured assignment and import/export specifiers.
 It either requires or disallows spaces between those braces and the values inside of them.
 Braces that are separated from the adjacent value by a new line are exempt from this rule.
 
-### Options
+## Options
 
 There are two main options for the rule:
 
@@ -46,7 +46,7 @@ Depending on your coding conventions, you can choose either option by specifying
 "object-curly-spacing": [2, "always"]
 ```
 
-#### never
+### "never"
 
 When `"never"` is set, the following patterns are considered problems:
 
@@ -80,7 +80,7 @@ var {x} = y;
 import {foo} from 'bar';
 ```
 
-#### always
+### "always"
 
 When `"always"` is used, the following patterns are considered problems:
 
@@ -116,7 +116,7 @@ import { foo } from 'bar';
 
 Note that `{}` is always exempt from spacing requirements with this rule.
 
-#### Exceptions
+### Exceptions
 
 There are two exceptions you can apply to this rule: `objectsInObjects` and
 `arraysInObjects`. Their values can be set to either `true` or `false` as part
@@ -137,7 +137,7 @@ You can add exceptions like so:
 }]
 ```
 
-##### objectsInObjects
+#### `objectsInObjects`
 
 In the case of the `"always"` option, set `objectsInObjects` exception to `false` to
 enforce the following syntax (notice the `}}` at the end):
@@ -154,7 +154,7 @@ the following style (with a space between the `}` at the end:
 var obj = {"foo": {"baz": 1, "bar": 2} };
 ```
 
-##### arraysInObjects
+#### `arraysInObjects`
 
 In the case of the `"always"` option, set `arraysInObjects` exception to `false` to
 enforce the following syntax (notice the `]}` at the end):

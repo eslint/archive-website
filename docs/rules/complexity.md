@@ -21,7 +21,7 @@ function a(x) {
 
 ## Rule Details
 
-This rule is aimed at reducing code complexity by capping the amount of cyclomatic complexity allowed in a program. As such, it will warn when the cyclomatic complexity crosses the configured threshold.
+This rule is aimed at reducing code complexity by capping the amount of cyclomatic complexity allowed in a program. As such, it will warn when the cyclomatic complexity crosses the configured threshold (default is `20`).
 
 The following patterns are considered problems:
 
@@ -53,7 +53,7 @@ function a(x) {
 }
 ```
 
-## When Not to Use It
+## When Not To Use It
 
 If you can't determine an appropriate complexity limit for your code, then it's best to disable this rule.
 

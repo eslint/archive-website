@@ -20,8 +20,6 @@ If one of those occurs in an innocent-looking statement such as `a == b` the act
 
 This rule is aimed at eliminating the type-unsafe equality operators.
 
-**Fixable:** This rule is automatically fixable using the `--fix` flag on the command line.
-
 The following patterns are considered problems:
 
 ```js
@@ -34,9 +32,9 @@ if ("" == text) { }                  /*error Expected '===' and instead saw '=='
 if (obj.getStuff() != undefined) { } /*error Expected '!==' and instead saw '!='.*/
 ```
 
-### Options
+## Options
 
-* `"smart"`
+### "smart"
 
 This option enforces the use of `===` and `!==` except for these cases:
 
@@ -78,7 +76,7 @@ bananas != 1        /*error Expected '!==' and instead saw '!='.*/
 value == undefined  /*error Expected '===' and instead saw '=='.*/
 ```
 
-* `"allow-null"`
+### "allow-null"
 
 This option will enforce `===` and `!==` in your code with one exception - it permits comparing to `null` to check for `null` or `undefined` in a single expression.
 

@@ -9,14 +9,16 @@ Some style guides require or disallow a whitespace immediately after the initial
 Whitespace after the `//` or `/*` makes it easier to read text in comments.
 On the other hand, commenting out code is easier without having to put a whitespace right after the `//` or `/*`.
 
+**Fixable:** This rule is automatically fixable using the `--fix` flag on the command line.
+
 ## Rule Details
 
 This rule will enforce consistency of spacing after the start of a comment `//` or `/*`. It also provides several
 exceptions for various documentation styles.
 
-### Options
+## Options
 
-The rule takes two options. The first is a string which be either "always" or "never". If you pass `"always"` then the `//` or `/*` must be followed by at least once whitespace. If `"never"` then there should be no whitespace following. The default is `"always"`.
+The rule takes two options. The first is a string which be either `"always"` or `"never"`. If you pass `"always"` then the `//` or `/*` must be followed by at least once whitespace. If `"never"` then there should be no whitespace following. The default is `"always"`.
 
 Here is an example of how to configure the rule with this option:
 
@@ -24,7 +26,7 @@ Here is an example of how to configure the rule with this option:
 "spaced-comment": [2, "always"]
 ```
 
-#### Exceptions
+### Exceptions
 
 This rule can also take a 2nd option, an object with either of the following keys: `"exceptions"` and `"markers"`.
 
@@ -61,64 +63,64 @@ You can also define separate exceptions and markers for block and line comments:
 }]
 ```
 
-#### Examples
+## Examples
 
 The following patterns are considered problems:
 
 ```js
 /*eslint spaced-comment: [2, "never"]*/
 
-// This is a comment with a whitespace at the beginning      /*error Unexpected space or tab after // in comment.*/
+// This is a comment with a whitespace at the beginning      /*error Unexpected space or tab after '//' in comment.*/
 
-/* This is a comment with a whitespace at the beginning */   /*error Unexpected space or tab after /* in comment.*/
+/* This is a comment with a whitespace at the beginning */   /*error Unexpected space or tab after '/*' in comment.*/
 
-/* \nThis is a comment with a whitespace at the beginning */ /*error Unexpected space or tab after /* in comment.*/
+/* \nThis is a comment with a whitespace at the beginning */ /*error Unexpected space or tab after '/*' in comment.*/
 ```
 
 ```js
-/*eslint spaced-comment: [2, "always"]*/                     /*error Expected space or tab after /* in comment.*/
+/*eslint spaced-comment: [2, "always"]*/                     /*error Expected space or tab after '/*' in comment.*/
 
-//This is a comment with no whitespace at the beginning      /*error Expected space or tab after // in comment.*/
+//This is a comment with no whitespace at the beginning      /*error Expected space or tab after '//' in comment.*/
 
-/*This is a comment with no whitespace at the beginning */   /*error Expected space or tab after /* in comment.*/
+/*This is a comment with no whitespace at the beginning */   /*error Expected space or tab after '/*' in comment.*/
 ```
 
 ```js
 /* eslint spaced-comment: [2, "always", { "block": { "exceptions": ["-"] } }] */
 
-//--------------    /*error Expected space or tab after // in comment.*/
+//--------------    /*error Expected space or tab after '//' in comment.*/
 // Comment block
-//--------------    /*error Expected space or tab after // in comment.*/
+//--------------    /*error Expected space or tab after '//' in comment.*/
 ```
 
 ```js
 /* eslint spaced-comment: [2, "always", { "exceptions": ["-", "+"] }] */
 
-//------++++++++    /*error Expected exception block, space or tab after // in comment.*/
+//------++++++++    /*error Expected exception block, space or tab after '//' in comment.*/
 // Comment block
-//------++++++++    /*error Expected exception block, space or tab after // in comment.*/
+//------++++++++    /*error Expected exception block, space or tab after '//' in comment.*/
 ```
 
 ```js
 /* eslint spaced-comment: [2, "always", { "markers": ["/"] }] */
 
-///This is a comment with a marker but without whitespace  /*error Expected space or tab after // in comment.*/
+///This is a comment with a marker but without whitespace  /*error Expected space or tab after '///' in comment.*/
 ```
 
 ```js
 /* eslint spaced-comment: [2, "always", { "exceptions": ["-", "+"] }] */
 
-/*------++++++++*/     /*error Expected exception block, space or tab after /* in comment.*/
+/*------++++++++*/     /*error Expected exception block, space or tab after '/*' in comment.*/
 /* Comment block */
-/*------++++++++*/     /*error Expected exception block, space or tab after /* in comment.*/
+/*------++++++++*/     /*error Expected exception block, space or tab after '/*' in comment.*/
 ```
 
 ```js
 /* eslint spaced-comment: [2, "always", { "line": { "exceptions": ["-+"] } }] */
 
-/*-+-+-+-+-+-+-+*/     /*error Expected space or tab after /* in comment.*/
+/*-+-+-+-+-+-+-+*/     /*error Expected space or tab after '/*' in comment.*/
 // Comment block
-/*-+-+-+-+-+-+-+*/     /*error Expected space or tab after /* in comment.*/
+/*-+-+-+-+-+-+-+*/     /*error Expected space or tab after '/*' in comment.*/
 ```
 
 The following patterns are not considered problems:

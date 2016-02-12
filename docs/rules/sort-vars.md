@@ -55,7 +55,7 @@ But this one, will only produce one:
 var c, d, a, e; /*error Variables within the same declaration block should be sorted alphabetically*/
 ```
 
-## Rule Options
+## Options
 
 ```
 "sort-vars": [<enabled>, { "ignoreCase": <boolean> }]
@@ -75,7 +75,7 @@ var a, A;
 var a, B, c;
 ```
 
-## When not to use
+## When Not To Use It
 
 This rule is a formatting preference and not following it won't negatively affect the quality of your code. If you alphabetizing variables isn't a part of your coding standards, then you can leave this rule off.
 

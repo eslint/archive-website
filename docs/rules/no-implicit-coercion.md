@@ -34,31 +34,39 @@ foo = String(foo);
 
 This rule is aimed to flag shorter notations for the type conversion, then suggest a more self-explanatory notation.
 
-### Options
+## Options
 
-This rule has three options.
+This rule has three main options and one override option to allow some coercions as required.
 
-```json
+```js
 {
-  "rules": {
-    "no-implicit-coercion": [2, {"boolean": true, "number": true, "string": true}]
-  }
+    "rules": {
+        "no-implicit-coercion": [2, {
+            "boolean": true,
+            "number": true,
+            "string": true,
+            "allow": [/* "!!", "~", "*", "+" */]
+        }]
+    }
 }
 ```
 
 * `"boolean"` (`true` by default) - When this is `true`, this rule warns shorter type conversions for `boolean` type.
 * `"number"` (`true` by default) - When this is `true`, this rule warns shorter type conversions for `number` type.
 * `"string"` (`true` by default) - When this is `true`, this rule warns shorter type conversions for `string` type.
+* `"array"` (`empty` by default) - Each entry in this array can be one of `~`, `!!`, `+` or `*` that are to be allowed.
 
-#### boolean
+Note that operator `+` in `allow` list would allow `+foo` (number coercion) as well as `"" + foo` (string coercion).
+
+### `boolean`
 
 The following patterns are considered problems:
 
 ```js
 /*eslint no-implicit-coercion: 2*/
 
-var b = !!foo;             /*error use `Boolean(foo)` instead.*/
-var b = ~foo.indexOf("."); /*error use `foo.indexOf(".") !== -1` instead.*/
+var b = !!foo;             /*error use 'Boolean(foo)' instead.*/
+var b = ~foo.indexOf("."); /*error use 'foo.indexOf(".") !== -1' instead.*/
 // only with `indexOf`/`lastIndexOf` method calling.
 
 ```
@@ -74,15 +82,15 @@ var b = foo.indexOf(".") !== -1;
 var n = ~foo; // This is a just binary negating.
 ```
 
-#### number
+### `number`
 
 The following patterns are considered problems:
 
 ```js
 /*eslint no-implicit-coercion: 2*/
 
-var n = +foo;    /*error use `Number(foo)` instead.*/
-var n = 1 * foo; /*error use `Number(foo)` instead.*/
+var n = +foo;    /*error use 'Number(foo)' instead.*/
+var n = 1 * foo; /*error use 'Number(foo)' instead.*/
 ```
 
 The following patterns are not considered problems:
@@ -95,16 +103,16 @@ var b = parseFloat(foo);
 var b = parseInt(foo, 10);
 ```
 
-#### string
+### `string`
 
 The following patterns are considered problems:
 
 ```js
 /*eslint no-implicit-coercion: 2*/
 
-var n = "" + foo; /*error use `String(foo)` instead.*/
+var n = "" + foo; /*error use 'String(foo)' instead.*/
 
-foo += ""; /*error use `foo = String(foo)` instead.*/
+foo += ""; /*error use 'foo = String(foo)' instead.*/
 ```
 
 The following patterns are not considered problems:
@@ -115,7 +123,33 @@ The following patterns are not considered problems:
 var b = String(foo);
 ```
 
-## When Not to Use It
+### Fine-grained control
+
+Using `allow` list, we can override and allow specific operators.
+
+For example, when the configuration is like this:
+
+```json
+{
+    "rules": {
+        "no-implicit-coercion": [2, {
+            "boolean": true,
+            "number": true,
+            "string": true,
+            "allow": ["!!", "~"]
+        }]
+    }
+}
+```
+
+The following patterns are not considered problems:
+
+```js
+var b = !!foo;
+var c = ~foo.indexOf(".");
+```
+
+## When Not To Use It
 
 If you don't want to be notified about shorter notations for the type conversion, you can safely disable this rule.
 

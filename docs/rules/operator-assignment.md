@@ -25,9 +25,13 @@ JavaScript provides shorthand operators that combine variable assignment and som
 
 ## Rule Details
 
-This rule enforces use of the shorthand assignment operators by requiring them where possible or prohibiting them entirely. It has two modes: `always` and `never`.
+This rule enforces use of the shorthand assignment operators by requiring them where possible or prohibiting them entirely.
 
-### always
+## Options
+
+This rule has two options: `always` and `never`. The default is `always`.
+
+### "always"
 
 `"operator-assignment": [2, "always"]`
 
@@ -58,7 +62,7 @@ x[0] = x[0] / y;  /*error Assignment can be replaced with operator assignment.*/
 x.y = x.y << z;   /*error Assignment can be replaced with operator assignment.*/
 ```
 
-### never
+### "never"
 
 `"operator-assignment": [2, "never"]`
 

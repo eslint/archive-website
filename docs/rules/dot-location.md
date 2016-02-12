@@ -21,7 +21,7 @@ var b = universe
 
 This rule aims to enforce newline consistency in member expressions. This rule prevents the use of mixed newlines around the dot in a member expression.
 
-### Options
+## Options
 
 The rule takes one option, a string, which can be either `object` or `property`.
 If it is `object`, the dot in a member expression should be on the same line as the object portion.
@@ -33,7 +33,7 @@ If unset, the default behavior is `"object"`.
     "dot-location": [2, "object"]
 ```
 
-#### "object"
+### "object"
 
 This is the default option. It requires the dot to be on the same line as the object.
 
@@ -56,7 +56,7 @@ property;
 var bar = object.property;
 ```
 
-#### "property"
+### "property"
 
 This option requires the dot to be on the same line as the property.
 
