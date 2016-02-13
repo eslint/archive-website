@@ -7,32 +7,67 @@ var lib = require('./lib');
 var editor = document.querySelector('#editor');
 var results = document.querySelector('#results');
 var controls = document.querySelector('#configuration');
-var optionsControl = document.querySelector('.options .list');
 
-function handleBodyClick(event) {
-	if (event.target.classList.contains('option-checkbox')) {
-		toggleControl(event.target.id);
+function handleSelectChange(property, el) {
+	var selected = el.value;
+	config[property] = selected;
+}
+
+function toggleOption(option, property) {
+	if (property) {
+		config[property][option] = !config[property][option];
+	} else {
+		config[option] = !config[option];
 	}
 }
 
-function toggleControl(id) {
-	config[id] = !config[id];
-}
-
-function setupControls() {
-	// setup basic handler for all clicks
-	document.body.onclick = handleBodyClick;
+function drawCheckboxes(config, property) {
+	var el = document.querySelector('.' + (property || 'options'));
 
 	// convert the list of options into checkboxes
 	var checkboxes = Object.keys(config).filter(function(option) {
 		return typeof config[option] === 'boolean';
 	}).map(function(option) {
 		var checked = config[option] ? ' checked ' : ' ';
-		return '<div class="checkbox-inline"><label><input' + checked + 'type="checkbox" class="option-checkbox" id="' + option + '" />' + option + '</label></div>';
+		return '<div class="checkbox"><label><input' + checked + 'type="checkbox" class="option-checkbox" id="' + option + '" />' + option + '</label></div>';
 	});
 
-	// append the checkboxes to the control list
-	optionsControl.innerHTML = checkboxes.join('');
+	el.innerHTML = checkboxes.join('');
+	el.onchange = function(event) {
+		toggleOption(event.target.id, property);
+	}
+
+}
+
+function drawSelectBoxes(config, property) {
+	var el = document.querySelector('.' + property);
+	var select = document.createElement('select');
+	var options = Object.keys(config).filter(function(option) {
+		return typeof config[option] === 'boolean';
+	}).map(function(option) {
+		var selected = config[option] ? ' selected ' : ' ';
+		return '<option ' + selected + ' value="' + option + '">' + option +'</option>';
+	});
+	select.innerHTML = options;
+	select.onchange = function(event) {
+		handleSelectChange(property, event.target);
+	};
+	el.appendChild(select);
+
+	// reset the config to take the currently selected value
+	handleSelectChange(property, select);
+}
+
+function drawVersion() {
+	document.getElementById('version').innerHTML = lib.getVersion();
+}
+
+function setupControls() {
+	drawVersion();
+	drawCheckboxes(config);
+	drawCheckboxes(config.ecmaFeatures, "ecmaFeatures");
+	drawSelectBoxes(config.ecmaVersion, "ecmaVersion");
+	drawSelectBoxes(config.sourceType, "sourceType");
 }
 
 function showError(error) {
@@ -45,7 +80,7 @@ function showError(error) {
 function parseForever() {
 	var ast;
 	try {
-		ast = lib.parse(config);
+		ast = lib.parse(editor.value, config);
 		results.classList.remove('error');
 		results.innerHTML = ast;
 	} catch(error) {
@@ -57,16 +92,19 @@ function parseForever() {
 // set everything up
 setupControls();
 parseForever();
-
 },{"./lib":2,"./parser.config":3}],2:[function(require,module,exports){
 // requires
 var espree = require('espree');
 
-exports.parse = function(config) {
-	var code = editor.value;
+exports.parse = function(code, config) {
 	var ast = espree.parse(code, config); // throws...
 	return JSON.stringify(ast, null, '  ');
 };
+
+exports.getVersion = function() {
+	return espree.version;
+};
+
 },{"espree":"espree"}],3:[function(require,module,exports){
 module.exports = {
 	range: false,
@@ -75,31 +113,19 @@ module.exports = {
 	attachComment: false,
 	tokens: false,
 	tolerant: true,
+	ecmaVersion: {
+		3: false,
+		5: false,
+		6: true
+	},
+	sourceType: {
+		script: false,
+		module: true
+	},
 	ecmaFeatures: {
-		arrowFunctions: true,
-		blockBindings: true,
-		destructuring: true,
-		regexYFlag: true,
-		regexUFlag: true,
-		templateStrings: true,
-		binaryLiterals: true,
-		octalLiterals: true,
-		unicodeCodePointEscapes: true,
-		defaultParams: true,
-		restParams: true,
-		forOf: true,
-		objectLiteralComputedProperties: true,
-		objectLiteralShorthandMethods: true,
-		objectLiteralShorthandProperties: true,
-		objectLiteralDuplicateProperties: true,
-		generators: true,
-		spread: true,
-		superInFunctions: true,
-		classes: true,
-		newTarget: false,
-		modules: true,
 		jsx: true,
 		globalReturn: true,
+		impliedStrict: false,
 		experimentalObjectRestSpread: true
 	}
 };
