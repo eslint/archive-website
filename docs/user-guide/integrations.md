@@ -27,6 +27,7 @@ redirect_from: "/docs/integrations/"
 * Broccoli: [broccoli-eslint](https://www.npmjs.org/package/broccoli-eslint)
 * Browserify: [eslintify](https://www.npmjs.com/package/eslintify)
 * Webpack: [eslint-loader](https://www.npmjs.org/package/eslint-loader)
+* Rollup: [rollup-plugin-eslint](https://www.npmjs.org/package/rollup-plugin-eslint)
 * Ember-cli: [ember-cli-eslint](https://www.npmjs.com/package/ember-cli-eslint)
 * Sails.js: [sails-hook-eslint](https://www.npmjs.com/package/sails-hook-eslint)
 
