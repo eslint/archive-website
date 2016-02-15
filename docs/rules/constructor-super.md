@@ -23,18 +23,18 @@ The following patterns are considered problems:
 
 class A {
     constructor() {
-        super();       /*error unexpected 'super()'.*/
+        super();
     }
 }
 
 class A extends null {
     constructor() {
-        super();       /*error unexpected 'super()'.*/
+        super();
     }
 }
 
 class A extends B {
-    constructor() { }  /*error this constructor requires 'super()'.*/
+    constructor() { }
 }
 ```
 

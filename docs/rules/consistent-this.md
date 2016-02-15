@@ -35,7 +35,7 @@ This rule takes one option, a string, which is the designated `this` variable. T
 Additionally, you may configure extra aliases for cases where there are more than one supported alias for `this`.
 
 ```js
-{ "consistent-this": [ 2, "self",  "vm" ] } ] }
+{ "consistent-this": [ 2, "self",  "vm" ] }
 ```
 
 The following patterns are considered problems:
@@ -43,13 +43,13 @@ The following patterns are considered problems:
 ```js
 /*eslint consistent-this: [2, "that"]*/
 
-var that = 42;   /*error Designated alias 'that' is not assigned to 'this'.*/
+var that = 42;
 
-var self = this; /*error Unexpected alias 'self' for 'this'.*/
+var self = this;
 
-that = 42;       /*error Designated alias 'that' is not assigned to 'this'.*/
+that = 42;
 
-self = this;     /*error Unexpected alias 'self' for 'this'.*/
+self = this;
 ```
 
 The following patterns are not considered problems:
@@ -86,7 +86,7 @@ But the following pattern is considered a warning:
 ```js
 /*eslint consistent-this: [2, "that"]*/
 
-var that;        /*error Designated alias 'that' is not assigned to 'this'.*/
+var that;
 function f() {
     that = this;
 }

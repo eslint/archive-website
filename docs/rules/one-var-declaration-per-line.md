@@ -38,11 +38,11 @@ The following patterns are considered problems when set to `"always"`:
 /*eslint one-var-declaration-per-line: [2, "always"]*/
 /*eslint-env es6*/
 
-var a, b;               /*error Expected variable declaration to be on a new line. */
+var a, b;
 
-let a, b = 0;           /*error Expected variable declaration to be on a new line. */
+let a, b = 0;
 
-const a = 0, b = 0;     /*error Expected variable declaration to be on a new line. */
+const a = 0, b = 0;
 ```
 
 The following patterns are not considered problems when set to `"always"`:
@@ -64,10 +64,10 @@ The following patterns are considered problems when set to `"initializations"`:
 /*eslint one-var-declaration-per-line: [2, "initializations"]*/
 /*eslint-env es6*/
 
-var a, b, c = 0;        /*error Expected variable declaration to be on a new line. */
+var a, b, c = 0;
 
 let a,
-    b = 0, c;           /*error Expected variable declaration to be on a new line. */
+    b = 0, c;
 ```
 
 The following patterns are not considered problems when set to `"initializations"`:

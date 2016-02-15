@@ -20,8 +20,8 @@ The following patterns are considered problems:
 ```js
 /*eslint no-obj-calls: 2*/
 
-var x = Math(); /*error 'Math' is not a function.*/
-var y = JSON(); /*error 'JSON' is not a function.*/
+var x = Math();
+var y = JSON();
 ```
 
 The following patterns are not considered problems:

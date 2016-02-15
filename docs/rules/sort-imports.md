@@ -58,26 +58,26 @@ The following patterns are considered problems:
 ```js
 /*eslint sort-imports: 2*/
 import b from 'foo.js';
-import a from 'bar.js'; /*error Imports should be sorted alphabetically.*/
+import a from 'bar.js';
 
 /*eslint sort-imports: 2*/
 import a from 'foo.js';
-import A from 'bar.js'; /*error Imports should be sorted alphabetically.*/
+import A from 'bar.js';
 
 /*eslint sort-imports: 2*/
 import {b, c} from 'foo.js';
-import {a, b} from 'bar.js'; /*error Imports should be sorted alphabetically.*/
+import {a, b} from 'bar.js';
 
 /*eslint sort-imports: 2*/
 import a from 'foo.js';
-import {b, c} from 'bar.js'; /*error Imports should be sorted by their member syntax. Use 'multiple' before 'single' member syntax.*/
+import {b, c} from 'bar.js';
 
 /*eslint sort-imports: 2*/
 import a from 'foo.js';
-import * as b from 'bar.js'; /*error Imports should be sorted by their member syntax. Use 'all' before 'single' member syntax. */
+import * as b from 'bar.js';
 
 /*eslint sort-imports: 2*/
-import {b, a, c} from 'foo.js' /*error Members of an import declaration should be sorted alphabetically.*/
+import {b, a, c} from 'foo.js'
 ```
 
 The following patterns are not considered problems:
@@ -152,7 +152,7 @@ The following patterns are considered problems:
 
 ```js
 /*eslint sort-imports: 2*/
-import {b, a, c} from 'foo.js' /*error Members of an import declaration should be sorted alphabetically.*/
+import {b, a, c} from 'foo.js'
 ```
 
 The following patterns are not considered problems:
@@ -180,7 +180,7 @@ The following patterns are considered problems:
 ```js
 /*eslint sort-imports: 2*/
 import a from 'foo.js';
-import * as b from 'bar.js'; /*error Imports should be sorted by their member syntax. Use 'all' before 'single' member syntax. */
+import * as b from 'bar.js';
 ```
 
 The following patterns are not considered problems:

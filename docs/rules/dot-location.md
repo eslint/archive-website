@@ -43,7 +43,7 @@ The following patterns are considered problems:
 /*eslint dot-location: [2, "object"]*/
 
 var foo = object
-.property;       /*error Expected dot to be on same line as object.*/
+.property;
 ```
 
 The following patterns are not considered problems:
@@ -65,7 +65,7 @@ The following patterns are considered problems:
 ```js
 /*eslint dot-location: [2, "property"]*/
 
-var foo = object. /*error Expected dot to be on same line as property.*/
+var foo = object.
 property;
 ```
 

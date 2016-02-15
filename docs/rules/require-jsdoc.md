@@ -57,17 +57,17 @@ The following patterns are considered problems:
 /*eslint "require-jsdoc": [2, {
     "require": {
         "FunctionDeclaration": true,
-        "MethodDefinition": false,
-        "ClassDeclaration": false
+        "MethodDefinition": true,
+        "ClassDeclaration": true
     }
 }]*/
 
-function foo() {       /*error Missing JSDoc comment.*/
+function foo() {
     return 10;
 }
 
-class Test{            /*error Missing JSDoc comment.*/
-    getDate(){}        /*error Missing JSDoc comment.*/
+class Test{
+    getDate(){}
 }
 ```
 
@@ -77,8 +77,8 @@ The following patterns are not considered problems:
 /*eslint "require-jsdoc": [2, {
     "require": {
         "FunctionDeclaration": true,
-        "MethodDefinition": false,
-        "ClassDeclaration": false
+        "MethodDefinition": true,
+        "ClassDeclaration": true
     }
 }]*/
 

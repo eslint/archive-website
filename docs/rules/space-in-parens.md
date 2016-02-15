@@ -41,12 +41,12 @@ When `"always"` is set, the following patterns are considered problems:
 ```js
 /*eslint space-in-parens: [2, "always"]*/
 
-foo( 'bar'); /*error There must be a space inside this paren.*/
-foo('bar' ); /*error There must be a space inside this paren.*/
-foo('bar');  /*error There must be a space inside this paren.*/
+foo( 'bar');
+foo('bar' );
+foo('bar');
 
-var foo = (1 + 2) * 3;             /*error There must be a space inside this paren.*/
-(function () { return 'bar'; }()); /*error There must be a space inside this paren.*/
+var foo = (1 + 2) * 3;
+(function () { return 'bar'; }());
 ```
 
 The following patterns are not considered problems:
@@ -69,12 +69,12 @@ When `"never"` is used, the following patterns are considered problems:
 ```js
 /*eslint space-in-parens: [2, "never"]*/
 
-foo( 'bar');  /*error There should be no spaces inside this paren.*/
-foo('bar' );  /*error There should be no spaces inside this paren.*/
-foo( 'bar' ); /*error There should be no spaces inside this paren.*/
+foo( 'bar');
+foo('bar' );
+foo( 'bar' );
 
-var foo = ( 1 + 2 ) * 3;             /*error There should be no spaces inside this paren.*/
-( function () { return 'bar'; }() ); /*error There should be no spaces inside this paren.*/
+var foo = ( 1 + 2 ) * 3;
+( function () { return 'bar'; }() );
 ```
 
 The following patterns are not considered problems:
@@ -101,8 +101,8 @@ For example, given `"space-in-parens": [2, "always", { "exceptions": ["{}"] }]`,
 ```js
 /*eslint space-in-parens: [2, "always", { "exceptions": ["{}"] }]*/
 
-foo( {bar: 'baz'} );    /*error There should be no spaces inside this paren.*/
-foo( 1, {bar: 'baz'} ); /*error There should be no spaces inside this paren.*/
+foo( {bar: 'baz'} );
+foo( 1, {bar: 'baz'} );
 ```
 
 The following patterns are not considered problems:
@@ -119,8 +119,8 @@ Or, given `"space-in-parens": [2, "never", { "exceptions": ["{}"] }]`, the follo
 ```js
 /*eslint space-in-parens: [2, "never", { "exceptions": ["{}"] }]*/
 
-foo({bar: 'baz'});    /*error There must be a space inside this paren.*/
-foo(1, {bar: 'baz'}); /*error There must be a space inside this paren.*/
+foo({bar: 'baz'});
+foo(1, {bar: 'baz'});
 ```
 
 The following patterns are not considered problems:
@@ -137,8 +137,8 @@ Given `"space-in-parens": [2, "always", { "exceptions": ["[]"] }]`, the followin
 ```js
 /*eslint space-in-parens: [2, "always", { "exceptions": ["[]"] }]*/
 
-foo( [bar, baz] );    /*error There should be no spaces inside this paren.*/
-foo( [bar, baz], 1 ); /*error There should be no spaces inside this paren.*/
+foo( [bar, baz] );
+foo( [bar, baz], 1 );
 ```
 
 The following patterns are not considered problems:
@@ -155,8 +155,8 @@ Or, given `"space-in-parens": [2, "never", { "exceptions": ["[]"] }]`, the follo
 ```js
 /*eslint space-in-parens: [2, "never", { "exceptions": ["[]"] }]*/
 
-foo([bar, baz]);    /*error There must be a space inside this paren.*/
-foo([bar, baz], 1); /*error There must be a space inside this paren.*/
+foo([bar, baz]);
+foo([bar, baz], 1);
 ```
 
 The following patterns are not considered problems:
@@ -173,8 +173,8 @@ Given `"space-in-parens": [2, "always", { "exceptions": ["()"] }]`, the followin
 ```js
 /*eslint space-in-parens: [2, "always", { "exceptions": ["()"] }]*/
 
-foo( ( 1 + 2 ) );    /*error There should be no spaces inside this paren.*/
-foo( ( 1 + 2 ), 1 ); /*error There should be no spaces inside this paren.*/
+foo( ( 1 + 2 ) );
+foo( ( 1 + 2 ), 1 );
 ```
 
 The following patterns are not considered problems:
@@ -191,8 +191,8 @@ Or, given `"space-in-parens": [2, "never", { "exceptions": ["()"] }]`, the follo
 ```js
 /*eslint space-in-parens: [2, "never", { "exceptions": ["()"] }]*/
 
-foo((1 + 2));    /*error There must be a space inside this paren.*/
-foo((1 + 2), 1); /*error There must be a space inside this paren.*/
+foo((1 + 2));
+foo((1 + 2), 1);
 ```
 
 The following patterns are not considered problems:
@@ -211,7 +211,7 @@ For example, given `"space-in-parens": [2, "always", { "exceptions": ["empty"] }
 ```js
 /*eslint space-in-parens: [2, "always", { "exceptions": ["empty"] }]*/
 
-foo( ); /*error There should be no spaces inside this paren.*/
+foo( );
 ```
 
 The following patterns are not considered problems:
@@ -227,7 +227,7 @@ Or, given `"space-in-parens": [2, "never", { "exceptions": ["empty"] }]`, the fo
 ```js
 /*eslint space-in-parens: [2, "never", { "exceptions": ["empty"] }]*/
 
-foo(); /*error There must be a space inside this paren.*/
+foo();
 ```
 
 The following patterns are not considered problems:
@@ -243,9 +243,9 @@ You can include multiple entries in the `"exceptions"` array. For example, given
 ```js
 /*eslint space-in-parens: [2, "always", { "exceptions": ["{}", "[]"] }]*/
 
-bar( {bar:'baz'} );          /*error There should be no spaces inside this paren.*/
-baz( 1, [1,2] );             /*error There should be no spaces inside this paren.*/
-foo( {bar: 'baz'}, [1, 2] ); /*error There should be no spaces inside this paren.*/
+bar( {bar:'baz'} );
+baz( 1, [1,2] );
+foo( {bar: 'baz'}, [1, 2] );
 ```
 
 The following patterns are not considered problems:

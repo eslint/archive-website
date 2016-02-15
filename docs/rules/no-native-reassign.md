@@ -20,7 +20,7 @@ The following patterns are considered problems:
 ```js
 /*eslint no-native-reassign: 2*/
 
-String = new Object(); /*error String is a read-only native object.*/
+String = new Object();
 ```
 
 ## Options

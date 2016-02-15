@@ -80,7 +80,8 @@ function *generator() {
 }
 ```
 
-To use this rule you must set the `generators` flag to `true` in the `ecmaFeatures` configuration object.
+To use this rule you either need to [use the `es6` environment](../user-guide/configuring) or
+[set `ecmaVersion` to `6` in `parserOptions`](../user-guide/configuring).
 
 ## When Not To Use It
 

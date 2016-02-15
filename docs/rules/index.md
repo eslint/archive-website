@@ -22,8 +22,8 @@ The following rules point out areas where you might have made mistakes.
 * [no-dupe-args](no-dupe-args) - disallow duplicate arguments in functions (recommended)
 * [no-dupe-keys](no-dupe-keys) - disallow duplicate keys when creating object literals (recommended)
 * [no-duplicate-case](no-duplicate-case) - disallow a duplicate case label. (recommended)
-* [no-empty-character-class](no-empty-character-class) - disallow the use of empty character classes in regular expressions (recommended)
 * [no-empty](no-empty) - disallow empty block statements (recommended)
+* [no-empty-character-class](no-empty-character-class) - disallow the use of empty character classes in regular expressions (recommended)
 * [no-ex-assign](no-ex-assign) - disallow assigning to the exception in a `catch` block (recommended)
 * [no-extra-boolean-cast](no-extra-boolean-cast) - disallow double-negation boolean casts in a boolean context (recommended)
 * [no-extra-parens](no-extra-parens) - disallow unnecessary parentheses
@@ -83,11 +83,11 @@ These are rules designed to prevent you from making mistakes. They either prescr
 * [no-multi-spaces](no-multi-spaces) - disallow use of multiple spaces (fixable)
 * [no-multi-str](no-multi-str) - disallow use of multiline strings
 * [no-native-reassign](no-native-reassign) - disallow reassignments of native objects
+* [no-new](no-new) - disallow use of the `new` operator when not part of an assignment or comparison
 * [no-new-func](no-new-func) - disallow use of new operator for `Function` object
 * [no-new-wrappers](no-new-wrappers) - disallows creating new instances of `String`,`Number`, and `Boolean`
-* [no-new](no-new) - disallow use of the `new` operator when not part of an assignment or comparison
-* [no-octal-escape](no-octal-escape) - disallow use of octal escape sequences in string literals, such as `var foo = "Copyright \251";`
 * [no-octal](no-octal) - disallow use of octal literals (recommended)
+* [no-octal-escape](no-octal-escape) - disallow use of octal escape sequences in string literals, such as `var foo = "Copyright \251";`
 * [no-param-reassign](no-param-reassign) - disallow reassignment of function parameters
 * [no-process-env](no-process-env) - disallow use of `process.env`
 * [no-proto](no-proto) - disallow usage of `__proto__` property
@@ -125,10 +125,10 @@ These rules have to do with variable declarations.
 * [no-catch-shadow](no-catch-shadow) - disallow the catch clause parameter name being the same as a variable in the outer scope
 * [no-delete-var](no-delete-var) - disallow deletion of variables (recommended)
 * [no-label-var](no-label-var) - disallow labels that share a name with a variable
-* [no-shadow-restricted-names](no-shadow-restricted-names) - disallow shadowing of names such as `arguments`
 * [no-shadow](no-shadow) - disallow declaration of variables already declared in the outer scope
-* [no-undef-init](no-undef-init) - disallow use of undefined when initializing variables
+* [no-shadow-restricted-names](no-shadow-restricted-names) - disallow shadowing of names such as `arguments`
 * [no-undef](no-undef) - disallow use of undeclared variables unless mentioned in a `/*global */` block (recommended)
+* [no-undef-init](no-undef-init) - disallow use of undefined when initializing variables
 * [no-undefined](no-undefined) - disallow use of `undefined` variable
 * [no-unused-vars](no-unused-vars) - disallow declaration of variables that are not used in the code (recommended)
 * [no-use-before-define](no-use-before-define) - disallow use of variables before they are defined
@@ -163,9 +163,9 @@ These rules are purely matters of style and are quite subjective.
 * [eol-last](eol-last) - enforce newline at the end of file, with no multiple empty lines (fixable)
 * [func-names](func-names) - require function expressions to have a name
 * [func-style](func-style) - enforce use of function declarations or expressions
+* [id-blacklist](id-blacklist) - blacklist certain identifiers to prevent them being used
 * [id-length](id-length) - this option enforces minimum and maximum identifier lengths (variable names, property names etc.)
 * [id-match](id-match) - require identifiers to match the provided regular expression
-* [id-blacklist](id-blacklist) - blacklist certain identifiers to prevent them being used
 * [indent](indent) - specify tab or space width for your code (fixable)
 * [jsx-quotes](jsx-quotes) - specify whether double or single quotes should be used in JSX attributes (fixable)
 * [key-spacing](key-spacing) - enforce spacing between keys and values in object literal properties
@@ -193,12 +193,12 @@ These rules are purely matters of style and are quite subjective.
 * [no-new-object](no-new-object) - disallow the use of the `Object` constructor
 * [no-plusplus](no-plusplus) - disallow use of unary operators, `++` and `--`
 * [no-restricted-syntax](no-restricted-syntax) - disallow use of certain syntax in code
-* [no-whitespace-before-property](no-whitespace-before-property) - disallow whitespace before properties
 * [no-spaced-func](no-spaced-func) - disallow space between function identifier and application (fixable)
 * [no-ternary](no-ternary) - disallow the use of ternary operators
 * [no-trailing-spaces](no-trailing-spaces) - disallow trailing whitespace at the end of lines (fixable)
 * [no-underscore-dangle](no-underscore-dangle) - disallow dangling underscores in identifiers
 * [no-unneeded-ternary](no-unneeded-ternary) - disallow the use of ternary operators when a simpler alternative exists
+* [no-whitespace-before-property](no-whitespace-before-property) - disallow whitespace before properties
 * [object-curly-spacing](object-curly-spacing) - require or disallow padding inside curly braces (fixable)
 * [one-var](one-var) - require or disallow one variable declaration per function
 * [one-var-declaration-per-line](one-var-declaration-per-line) - require or disallow an newline around variable declarations
@@ -208,10 +208,10 @@ These rules are purely matters of style and are quite subjective.
 * [quote-props](quote-props) - require quotes around object literal property names
 * [quotes](quotes) - specify whether backticks, double or single quotes should be used (fixable)
 * [require-jsdoc](require-jsdoc) - Require JSDoc comment
-* [semi-spacing](semi-spacing) - enforce spacing before and after semicolons (fixable)
 * [semi](semi) - require or disallow use of semicolons instead of ASI (fixable)
-* [sort-vars](sort-vars) - sort variables within the same declaration block
+* [semi-spacing](semi-spacing) - enforce spacing before and after semicolons (fixable)
 * [sort-imports](sort-imports) - sort import declarations within module
+* [sort-vars](sort-vars) - sort variables within the same declaration block
 * [space-before-blocks](space-before-blocks) - require or disallow a space before blocks (fixable)
 * [space-before-function-paren](space-before-function-paren) - require or disallow a space before function opening parenthesis (fixable)
 * [space-in-parens](space-in-parens) - require or disallow spaces inside parentheses (fixable)
@@ -235,8 +235,8 @@ These rules are only relevant to ES6 environments.
 * [no-dupe-class-members](no-dupe-class-members) - disallow duplicate name in class members (recommended)
 * [no-new-symbol](no-new-symbol) - disallow use of the `new` operator with the `Symbol` object (recommended)
 * [no-this-before-super](no-this-before-super) - disallow use of `this`/`super` before calling `super()` in constructors (recommended)
-* [no-var](no-var) - require `let` or `const` instead of `var`
 * [no-useless-constructor](no-useless-constructor) - disallow unnecessary constructor
+* [no-var](no-var) - require `let` or `const` instead of `var`
 * [object-shorthand](object-shorthand) - require method and property shorthand syntax for object literals
 * [prefer-arrow-callback](prefer-arrow-callback) - suggest using arrow functions as callbacks
 * [prefer-const](prefer-const) - suggest using `const` declaration for variables that are never modified after declared

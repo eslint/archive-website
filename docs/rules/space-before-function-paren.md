@@ -43,26 +43,26 @@ The following patterns are considered problems:
 /*eslint space-before-function-paren: 2*/
 /*eslint-env es6*/
 
-function foo() {           /*error Missing space before function parentheses.*/
+function foo() {
     // ...
 }
 
-var bar = function() {     /*error Missing space before function parentheses.*/
+var bar = function() {
     // ...
 };
 
-var bar = function foo() { /*error Missing space before function parentheses.*/
+var bar = function foo() {
     // ...
 };
 
 class Foo {
-    constructor() {        /*error Missing space before function parentheses.*/
+    constructor() {
         // ...
     }
 }
 
 var foo = {
-    bar() {                /*error Missing space before function parentheses.*/
+    bar() {
         // ...
     }
 };
@@ -107,26 +107,26 @@ The following patterns are considered problems:
 /*eslint space-before-function-paren: [2, "never"]*/
 /*eslint-env es6*/
 
-function foo () {           /*error Unexpected space before function parentheses.*/
+function foo () {
     // ...
 }
 
-var bar = function () {     /*error Unexpected space before function parentheses.*/
+var bar = function () {
     // ...
 };
 
-var bar = function foo () { /*error Unexpected space before function parentheses.*/
+var bar = function foo () {
     // ...
 };
 
 class Foo {
-    constructor () {        /*error Unexpected space before function parentheses.*/
+    constructor () {
         // ...
     }
 }
 
 var foo = {
-    bar () {                /*error Unexpected space before function parentheses.*/
+    bar () {
         // ...
     }
 };
@@ -171,22 +171,22 @@ The following patterns are considered problems:
 /*eslint space-before-function-paren: [2, { "anonymous": "always", "named": "never" }]*/
 /*eslint-env es6*/
 
-function foo () {      /*error Unexpected space before function parentheses.*/
+function foo () {
     // ...
 }
 
-var bar = function() { /*error Missing space before function parentheses.*/
+var bar = function() {
     // ...
 };
 
 class Foo {
-    constructor () {   /*error Unexpected space before function parentheses.*/
+    constructor () {
         // ...
     }
 }
 
 var foo = {
-    bar () {           /*error Unexpected space before function parentheses.*/
+    bar () {
         // ...
     }
 };
@@ -227,22 +227,22 @@ The following patterns are considered problems:
 /*eslint space-before-function-paren: [2, { "anonymous": "never", "named": "always" }]*/
 /*eslint-env es6*/
 
-function foo() {        /*error Missing space before function parentheses.*/
+function foo() {
     // ...
 }
 
-var bar = function () { /*error Unexpected space before function parentheses.*/
+var bar = function () {
     // ...
 };
 
 class Foo {
-    constructor() {     /*error Missing space before function parentheses.*/
+    constructor() {
         // ...
     }
 }
 
 var foo = {
-    bar() {             /*error Missing space before function parentheses.*/
+    bar() {
         // ...
     }
 };

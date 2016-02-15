@@ -37,20 +37,20 @@ The following patterns are considered problems:
 ```js
 /*eslint space-before-blocks: 2*/
 
-if (a){           /*error Missing space before opening brace.*/
+if (a){
     b();
 }
 
-function a(){}    /*error Missing space before opening brace.*/
+function a(){}
 
-for (;;){         /*error Missing space before opening brace.*/
+for (;;){
     b();
 }
 
-try {} catch(a){} /*error Missing space before opening brace.*/
+try {} catch(a){}
 
-class Foo{          /*error Missing space before opening brace.*/
-  constructor(){}   /*error Missing space before opening brace.*/
+class Foo{
+  constructor(){}
 }
 ```
 
@@ -86,17 +86,17 @@ The following patterns are considered problems:
 ```js
 /*eslint space-before-blocks: [2, "never"]*/
 
-if (a) {           /*error Unexpected space before opening brace.*/
+if (a) {
     b();
 }
 
-function a() {}    /*error Unexpected space before opening brace.*/
+function a() {}
 
-for (;;) {         /*error Unexpected space before opening brace.*/
+for (;;) {
     b();
 }
 
-try {} catch(a) {} /*error Unexpected space before opening brace.*/
+try {} catch(a) {}
 ```
 
 The following patterns are not considered problems:
@@ -127,12 +127,12 @@ The following patterns are considered problems when configured `{ "functions": "
 /*eslint space-before-blocks: [2, { "functions": "never", "keywords": "always", classes: "never" }]*/
 /*eslint-env es6*/
 
-function a() {}    /*error Unexpected space before opening brace.*/
+function a() {}
 
-try {} catch(a){}  /*error Missing space before opening brace.*/
+try {} catch(a){}
 
 class Foo{
-  constructor() {} /*error Unexpected space before opening brace.*/
+  constructor() {}
 }
 ```
 
@@ -151,7 +151,7 @@ describe(function(){
   // ...
 });
 
-class Foo {         /*error Unexpected space before opening brace.*/
+class Foo {
   constructor(){}
 }
 ```
@@ -162,12 +162,12 @@ The following patterns are considered problems when configured `{ "functions": "
 /*eslint space-before-blocks: [2, { "functions": "always", "keywords": "never", classes: "never" }]*/
 /*eslint-env es6*/
 
-function a(){}      /*error Missing space before opening brace.*/
+function a(){}
 
-try {} catch(a) {}  /*error Unexpected space before opening brace.*/
+try {} catch(a) {}
 
-class Foo {         /*error Unexpected space before opening brace.*/
-  constructor(){}   /*error Missing space before opening brace.*/
+class Foo {
+  constructor(){}
 }
 ```
 
@@ -195,7 +195,7 @@ The following patterns are considered problems when configured `{ "functions": "
 /*eslint space-before-blocks: [2, { "functions": "never", "keywords": "never", classes: "always" }]*/
 /*eslint-env es6*/
 
-class Foo{         /*error Unexpected space before opening brace.*/
+class Foo{
   constructor(){}
 }
 ```

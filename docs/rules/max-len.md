@@ -24,7 +24,7 @@ The following patterns are considered problems:
 ```js
 /*eslint max-len: [2, 80, 4]*/ // maximum length of 80 characters
 
-var foo = { "bar": "This is a bar.", "baz": { "qux": "This is a qux" }, "difficult": "to read" }; /*error Line 3 exceeds the maximum line length of 80.*/
+var foo = { "bar": "This is a bar.", "baz": { "qux": "This is a qux" }, "difficult": "to read" };
 ```
 
 The following patterns are not considered problems:
@@ -54,8 +54,6 @@ The `max-len` rule supports the following options:
 `ignoreComments`: Ignores all trailing comments and comments on their own line. For example, `function foo(/*string*/ bar) { /* ... */ }` isn't collapsed.
 
 `ignoreTrailingComments`: Only ignores comments that are trailing source.
-
-`commentLength`: Specifies an alternate max length that applies only to full length comments.
 
 `ignoreUrls`: Ignores lines that contain a URL.
 
