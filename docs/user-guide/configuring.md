@@ -75,7 +75,6 @@ To indicate the npm module to use as your parser, specify it using the `parser` 
 The following parsers are compatible with ESLint:
 
 * [Esprima](https://npmjs.com/package/esprima)
-* [Esprima-FB](https://npmjs.com/package/esprima-fb) - Facebook's fork of Esprima that includes their proprietary syntax additions.
 * [Babel-ESLint](https://npmjs.com/package/babel-eslint) - A wrapper around the [Babel](http://babeljs.io) parser that makes it compatible with ESLint.
 
 Note when using a custom parser, the `parserOptions` configuration property is still required for ESLint to work properly with features not in ECMAScript 5 by default. Parsers are all passed `parserOptions` and may or may not use them to determine which features to enable.
@@ -369,12 +368,27 @@ To disable all rules on a specific line:
 
 ```js
 alert('foo'); // eslint-disable-line
+
+// eslint-disable-next-line
+alert('foo');
 ```
 
 To disable a specific rule on a specific line:
 
 ```js
 alert('foo'); // eslint-disable-line no-alert
+
+// eslint-disable-next-line no-alert
+alert('foo');
+```
+
+To disable multiple rules on a specific line:
+
+```js
+alert('foo'); // eslint-disable-line no-alert, quotes, semi
+
+// eslint-disable-next-line no-alert, quotes, semi
+alert('foo');
 ```
 
 **Note:** Comments that disable warnings for a portion of a file tell ESLint not to report rule violations for the disabled code. ESLint parses the entire file, so disabled code still needs to be syntactically valid JavaScript.

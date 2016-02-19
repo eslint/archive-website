@@ -18381,7 +18381,6 @@ var xtend = require('xtend')
 var formats = require('./formats')
 
 var get = function(obj, additionalSchemas, ptr) {
-  if (/^https?:\/\//.test(ptr)) return null
 
   var visit = function(sub) {
     if (sub && sub.id === ptr) return sub
@@ -18526,7 +18525,7 @@ var compile = function(schema, cache, root, reporter, opts) {
       if (reporter === true) {
         validate('if (validate.errors === null) validate.errors = []')
         if (verbose) {
-          validate('validate.errors.push({field:%s,message:%s,value:%s})', formatName(prop || name), JSON.stringify(msg), value || name)
+          validate('validate.errors.push({field:%s,message:%s,value:%s,type:%s})', formatName(prop || name), JSON.stringify(msg), value || name, JSON.stringify(type))
         } else {
           validate('validate.errors.push({field:%s,message:%s})', formatName(prop || name), JSON.stringify(msg))
         }
@@ -19136,7 +19135,7 @@ function extend() {
 (function (global){
 /**
  * @license
- * lodash 4.3.0 (Custom Build) <https://lodash.com/>
+ * lodash 4.5.0 (Custom Build) <https://lodash.com/>
  * Build: `lodash -d -o ./foo/lodash.js`
  * Copyright 2012-2016 The Dojo Foundation <http://dojofoundation.org/>
  * Based on Underscore.js 1.8.3 <http://underscorejs.org/LICENSE>
@@ -19149,7 +19148,7 @@ function extend() {
   var undefined;
 
   /** Used as the semantic version number. */
-  var VERSION = '4.3.0';
+  var VERSION = '4.5.0';
 
   /** Used to compose bitmasks for wrapper metadata. */
   var BIND_FLAG = 1,
@@ -19471,10 +19470,19 @@ function extend() {
       freeParseInt = parseInt;
 
   /** Detect free variable `exports`. */
-  var freeExports = (objectTypes[typeof exports] && exports && !exports.nodeType) ? exports : null;
+  var freeExports = (objectTypes[typeof exports] && exports && !exports.nodeType)
+    ? exports
+    : undefined;
 
   /** Detect free variable `module`. */
-  var freeModule = (objectTypes[typeof module] && module && !module.nodeType) ? module : null;
+  var freeModule = (objectTypes[typeof module] && module && !module.nodeType)
+    ? module
+    : undefined;
+
+  /** Detect the popular CommonJS extension `module.exports`. */
+  var moduleExports = (freeModule && freeModule.exports === freeExports)
+    ? freeExports
+    : undefined;
 
   /** Detect free variable `global` from Node.js. */
   var freeGlobal = checkGlobal(freeExports && freeModule && typeof global == 'object' && global);
@@ -19485,9 +19493,6 @@ function extend() {
   /** Detect free variable `window`. */
   var freeWindow = checkGlobal(objectTypes[typeof window] && window);
 
-  /** Detect the popular CommonJS extension `module.exports`. */
-  var moduleExports = (freeModule && freeModule.exports === freeExports) ? freeExports : null;
-
   /** Detect `this` as the global object. */
   var thisGlobal = checkGlobal(objectTypes[typeof this] && this);
 
@@ -19497,7 +19502,9 @@ function extend() {
    * The `this` value is used if it's the global object to avoid Greasemonkey's
    * restricted `window` object, otherwise the `window` object is used.
    */
-  var root = freeGlobal || ((freeWindow !== (thisGlobal && thisGlobal.window)) && freeWindow) || freeSelf || thisGlobal || Function('return this')();
+  var root = freeGlobal ||
+    ((freeWindow !== (thisGlobal && thisGlobal.window)) && freeWindow) ||
+      freeSelf || thisGlobal || Function('return this')();
 
   /*--------------------------------------------------------------------------*/
 
@@ -20452,6 +20459,7 @@ function extend() {
         getPrototypeOf = Object.getPrototypeOf,
         getOwnPropertySymbols = Object.getOwnPropertySymbols,
         iteratorSymbol = typeof (iteratorSymbol = Symbol && Symbol.iterator) == 'symbol' ? iteratorSymbol : undefined,
+        objectCreate = Object.create,
         propertyIsEnumerable = objectProto.propertyIsEnumerable,
         setTimeout = context.setTimeout,
         splice = arrayProto.splice;
@@ -20531,51 +20539,52 @@ function extend() {
      * `tail`, `take`, `takeRight`, `takeRightWhile`, `takeWhile`, and `toArray`
      *
      * The chainable wrapper methods are:
-     * `after`, `ary`, `assign`, `assignIn`, `assignInWith`, `assignWith`,
-     * `at`, `before`, `bind`, `bindAll`, `bindKey`, `chain`, `chunk`, `commit`,
-     * `compact`, `concat`, `conforms`, `constant`, `countBy`, `create`, `curry`,
-     * `debounce`, `defaults`, `defaultsDeep`, `defer`, `delay`, `difference`,
+     * `after`, `ary`, `assign`, `assignIn`, `assignInWith`, `assignWith`, `at`,
+     * `before`, `bind`, `bindAll`, `bindKey`, `castArray`, `chain`, `chunk`,
+     * `commit`, `compact`, `concat`, `conforms`, `constant`, `countBy`, `create`,
+     * `curry`, `debounce`, `defaults`, `defaultsDeep`, `defer`, `delay`, `difference`,
      * `differenceBy`, `differenceWith`, `drop`, `dropRight`, `dropRightWhile`,
-     * `dropWhile`, `fill`, `filter`, `flatten`, `flattenDeep`, `flip`, `flow`,
-     * `flowRight`, `fromPairs`, `functions`, `functionsIn`, `groupBy`, `initial`,
-     * `intersection`, `intersectionBy`, `intersectionWith`, `invert`, `invertBy`,
-     * `invokeMap`, `iteratee`, `keyBy`, `keys`, `keysIn`, `map`, `mapKeys`,
-     * `mapValues`, `matches`, `matchesProperty`, `memoize`, `merge`, `mergeWith`,
-     * `method`, `methodOf`, `mixin`, `negate`, `nthArg`, `omit`, `omitBy`, `once`,
-     * `orderBy`, `over`, `overArgs`, `overEvery`, `overSome`, `partial`,
-     * `partialRight`, `partition`, `pick`, `pickBy`, `plant`, `property`,
-     * `propertyOf`, `pull`, `pullAll`, `pullAllBy`, `pullAt`, `push`, `range`,
-     * `rangeRight`, `rearg`, `reject`, `remove`, `rest`, `reverse`, `sampleSize`,
-     * `set`, `setWith`, `shuffle`, `slice`, `sort`, `sortBy`, `splice`, `spread`,
-     * `tail`, `take`, `takeRight`, `takeRightWhile`, `takeWhile`, `tap`, `throttle`,
-     * `thru`, `toArray`, `toPairs`, `toPairsIn`, `toPath`, `toPlainObject`,
-     * `transform`, `unary`, `union`, `unionBy`, `unionWith`, `uniq`, `uniqBy`,
-     * `uniqWith`, `unset`, `unshift`, `unzip`, `unzipWith`, `values`, `valuesIn`,
-     * `without`, `wrap`, `xor`, `xorBy`, `xorWith`, `zip`, `zipObject`,
-     * `zipObjectDeep`, and `zipWith`
+     * `dropWhile`, `fill`, `filter`, `flatten`, `flattenDeep`, `flattenDepth`,
+     * `flip`, `flow`, `flowRight`, `fromPairs`, `functions`, `functionsIn`,
+     * `groupBy`, `initial`, `intersection`, `intersectionBy`, `intersectionWith`,
+     * `invert`, `invertBy`, `invokeMap`, `iteratee`, `keyBy`, `keys`, `keysIn`,
+     * `map`, `mapKeys`, `mapValues`, `matches`, `matchesProperty`, `memoize`,
+     * `merge`, `mergeWith`, `method`, `methodOf`, `mixin`, `negate`, `nthArg`,
+     * `omit`, `omitBy`, `once`, `orderBy`, `over`, `overArgs`, `overEvery`,
+     * `overSome`, `partial`, `partialRight`, `partition`, `pick`, `pickBy`, `plant`,
+     * `property`, `propertyOf`, `pull`, `pullAll`, `pullAllBy`, `pullAt`, `push`,
+     * `range`, `rangeRight`, `rearg`, `reject`, `remove`, `rest`, `reverse`,
+     * `sampleSize`, `set`, `setWith`, `shuffle`, `slice`, `sort`, `sortBy`,
+     * `splice`, `spread`, `tail`, `take`, `takeRight`, `takeRightWhile`,
+     * `takeWhile`, `tap`, `throttle`, `thru`, `toArray`, `toPairs`, `toPairsIn`,
+     * `toPath`, `toPlainObject`, `transform`, `unary`, `union`, `unionBy`,
+     * `unionWith`, `uniq`, `uniqBy`, `uniqWith`, `unset`, `unshift`, `unzip`,
+     * `unzipWith`, `values`, `valuesIn`, `without`, `wrap`, `xor`, `xorBy`,
+     * `xorWith`, `zip`, `zipObject`, `zipObjectDeep`, and `zipWith`
      *
      * The wrapper methods that are **not** chainable by default are:
      * `add`, `attempt`, `camelCase`, `capitalize`, `ceil`, `clamp`, `clone`,
      * `cloneDeep`, `cloneDeepWith`, `cloneWith`, `deburr`, `endsWith`, `eq`,
-     * `escape`, `escapeRegExp`, `every`, `find`, `findIndex`, `findKey`,
-     * `findLast`, `findLastIndex`, `findLastKey`, `floor`, `forEach`, `forEachRight`,
-     * `forIn`, `forInRight`, `forOwn`, `forOwnRight`, `get`, `gt`, `gte`, `has`,
-     * `hasIn`, `head`, `identity`, `includes`, `indexOf`, `inRange`, `invoke`,
-     * `isArguments`, `isArray`, `isArrayLike`, `isArrayLikeObject`, `isBoolean`,
-     * `isDate`, `isElement`, `isEmpty`, `isEqual`, `isEqualWith`, `isError`,
-     * `isFinite`, `isFunction`, `isInteger`, `isLength`, `isMatch`, `isMatchWith`,
-     * `isNaN`, `isNative`, `isNil`, `isNull`, `isNumber`, `isObject`, `isObjectLike`,
-     * `isPlainObject`, `isRegExp`, `isSafeInteger`, `isString`, `isUndefined`,
-     * `isTypedArray`, `join`, `kebabCase`, `last`, `lastIndexOf`, `lowerCase`,
-     * `lowerFirst`, `lt`, `lte`, `max`, `maxBy`, `mean`, `min`, `minBy`,
-     * `noConflict`, `noop`, `now`, `pad`, `padEnd`, `padStart`, `parseInt`,
-     * `pop`, `random`, `reduce`, `reduceRight`, `repeat`, `result`, `round`,
-     * `runInContext`, `sample`, `shift`, `size`, `snakeCase`, `some`, `sortedIndex`,
-     * `sortedIndexBy`, `sortedLastIndex`, `sortedLastIndexBy`, `startCase`,
-     * `startsWith`, `subtract`, `sum`, `sumBy`, `template`, `times`, `toLower`,
-     * `toInteger`, `toLength`, `toNumber`, `toSafeInteger`, `toString`, `toUpper`,
-     * `trim`, `trimEnd`, `trimStart`, `truncate`, `unescape`, `uniqueId`,
-     * `upperCase`, `upperFirst`, `value`, and `words`
+     * `escape`, `escapeRegExp`, `every`, `find`, `findIndex`, `findKey`, `findLast`,
+     * `findLastIndex`, `findLastKey`, `floor`, `forEach`, `forEachRight`, `forIn`,
+     * `forInRight`, `forOwn`, `forOwnRight`, `get`, `gt`, `gte`, `has`, `hasIn`,
+     * `head`, `identity`, `includes`, `indexOf`, `inRange`, `invoke`, `isArguments`,
+     * `isArray`, `isArrayBuffer`, `isArrayLike`, `isArrayLikeObject`, `isBoolean`,
+     * `isBuffer`, `isDate`, `isElement`, `isEmpty`, `isEqual`, `isEqualWith`,
+     * `isError`, `isFinite`, `isFunction`, `isInteger`, `isLength`, `isMap`,
+     * `isMatch`, `isMatchWith`, `isNaN`, `isNative`, `isNil`, `isNull`, `isNumber`,
+     * `isObject`, `isObjectLike`, `isPlainObject`, `isRegExp`, `isSafeInteger`,
+     * `isSet`, `isString`, `isUndefined`, `isTypedArray`, `isWeakMap`, `isWeakSet`,
+     * `join`, `kebabCase`, `last`, `lastIndexOf`, `lowerCase`, `lowerFirst`,
+     * `lt`, `lte`, `max`, `maxBy`, `mean`, `min`, `minBy`, `noConflict`, `noop`,
+     * `now`, `pad`, `padEnd`, `padStart`, `parseInt`, `pop`, `random`, `reduce`,
+     * `reduceRight`, `repeat`, `result`, `round`, `runInContext`, `sample`,
+     * `shift`, `size`, `snakeCase`, `some`, `sortedIndex`, `sortedIndexBy`,
+     * `sortedLastIndex`, `sortedLastIndexBy`, `startCase`, `startsWith`, `subtract`,
+     * `sum`, `sumBy`, `template`, `times`, `toLower`, `toInteger`, `toLength`,
+     * `toNumber`, `toSafeInteger`, `toString`, `toUpper`, `trim`, `trimEnd`,
+     * `trimStart`, `truncate`, `unescape`, `uniqueId`, `upperCase`, `upperFirst`,
+     * `value`, and `words`
      *
      * @name _
      * @constructor
@@ -20646,7 +20655,7 @@ function extend() {
      *
      * @static
      * @memberOf _
-     * @type Object
+     * @type {Object}
      */
     lodash.templateSettings = {
 
@@ -20654,7 +20663,7 @@ function extend() {
        * Used to detect `data` property values to be HTML-escaped.
        *
        * @memberOf _.templateSettings
-       * @type RegExp
+       * @type {RegExp}
        */
       'escape': reEscape,
 
@@ -20662,7 +20671,7 @@ function extend() {
        * Used to detect code to be evaluated.
        *
        * @memberOf _.templateSettings
-       * @type RegExp
+       * @type {RegExp}
        */
       'evaluate': reEvaluate,
 
@@ -20670,7 +20679,7 @@ function extend() {
        * Used to detect `data` property values to inject.
        *
        * @memberOf _.templateSettings
-       * @type RegExp
+       * @type {RegExp}
        */
       'interpolate': reInterpolate,
 
@@ -20678,7 +20687,7 @@ function extend() {
        * Used to reference the data object in the template text.
        *
        * @memberOf _.templateSettings
-       * @type string
+       * @type {string}
        */
       'variable': '',
 
@@ -20686,7 +20695,7 @@ function extend() {
        * Used to import variables into the compiled template.
        *
        * @memberOf _.templateSettings
-       * @type Object
+       * @type {Object}
        */
       'imports': {
 
@@ -20694,7 +20703,7 @@ function extend() {
          * A reference to the `lodash` function.
          *
          * @memberOf _.templateSettings.imports
-         * @type Function
+         * @type {Function}
          */
         '_': lodash
       }
@@ -20706,6 +20715,7 @@ function extend() {
      * Creates a lazy wrapper object which wraps `value` to enable lazy evaluation.
      *
      * @private
+     * @constructor
      * @param {*} value The value to wrap.
      */
     function LazyWrapper(value) {
@@ -20781,7 +20791,8 @@ function extend() {
           resIndex = 0,
           takeCount = nativeMin(length, this.__takeCount__);
 
-      if (!isArr || arrLength < LARGE_ARRAY_SIZE || (arrLength == length && takeCount == length)) {
+      if (!isArr || arrLength < LARGE_ARRAY_SIZE ||
+          (arrLength == length && takeCount == length)) {
         return baseWrapperValue(array, this.__actions__);
       }
       var result = [];
@@ -20820,6 +20831,7 @@ function extend() {
      * Creates an hash object.
      *
      * @private
+     * @constructor
      * @returns {Object} Returns the new hash object.
      */
     function Hash() {}
@@ -20882,6 +20894,7 @@ function extend() {
      * Creates a map cache object to store key-value pairs.
      *
      * @private
+     * @constructor
      * @param {Array} [values] The values to cache.
      */
     function MapCache(values) {
@@ -20903,7 +20916,11 @@ function extend() {
      * @memberOf MapCache
      */
     function mapClear() {
-      this.__data__ = { 'hash': new Hash, 'map': Map ? new Map : [], 'string': new Hash };
+      this.__data__ = {
+        'hash': new Hash,
+        'map': Map ? new Map : [],
+        'string': new Hash
+      };
     }
 
     /**
@@ -20986,6 +21003,7 @@ function extend() {
      * Creates a set cache object to store unique values.
      *
      * @private
+     * @constructor
      * @param {Array} [values] The values to cache.
      */
     function SetCache(values) {
@@ -21044,6 +21062,7 @@ function extend() {
      * Creates a stack cache object to store key-value pairs.
      *
      * @private
+     * @constructor
      * @param {Array} [values] The values to cache.
      */
     function Stack(values) {
@@ -21336,6 +21355,39 @@ function extend() {
     }
 
     /**
+     * Casts `value` to an empty array if it's not an array like object.
+     *
+     * @private
+     * @param {*} value The value to inspect.
+     * @returns {Array} Returns the array-like object.
+     */
+    function baseCastArrayLikeObject(value) {
+      return isArrayLikeObject(value) ? value : [];
+    }
+
+    /**
+     * Casts `value` to `identity` if it's not a function.
+     *
+     * @private
+     * @param {*} value The value to inspect.
+     * @returns {Array} Returns the array-like object.
+     */
+    function baseCastFunction(value) {
+      return typeof value == 'function' ? value : identity;
+    }
+
+    /**
+     * Casts `value` to a path array if it's not one.
+     *
+     * @private
+     * @param {*} value The value to inspect.
+     * @returns {Array} Returns the cast property path array.
+     */
+    function baseCastPath(value) {
+      return isArray(value) ? value : stringToPath(value);
+    }
+
+    /**
      * The base implementation of `_.clamp` which doesn't coerce arguments to numbers.
      *
      * @private
@@ -21402,9 +21454,10 @@ function extend() {
             return copySymbols(value, baseAssign(result, value));
           }
         } else {
-          return cloneableTags[tag]
-            ? initCloneByTag(value, tag, isDeep)
-            : (object ? value : {});
+          if (!cloneableTags[tag]) {
+            return object ? value : {};
+          }
+          result = initCloneByTag(value, tag, isDeep);
         }
       }
       // Check for circular references and return its corresponding clone.
@@ -21459,17 +21512,9 @@ function extend() {
      * @param {Object} prototype The object to inherit from.
      * @returns {Object} Returns the new object.
      */
-    var baseCreate = (function() {
-      function object() {}
-      return function(prototype) {
-        if (isObject(prototype)) {
-          object.prototype = prototype;
-          var result = new object;
-          object.prototype = undefined;
-        }
-        return result || {};
-      };
-    }());
+    function baseCreate(proto) {
+      return isObject(proto) ? objectCreate(proto) : {};
+    }
 
     /**
      * The base implementation of `_.delay` and `_.defer` which accepts an array
@@ -21631,12 +21676,12 @@ function extend() {
      *
      * @private
      * @param {Array} array The array to flatten.
-     * @param {boolean} [isDeep] Specify a deep flatten.
+     * @param {number} depth The maximum recursion depth.
      * @param {boolean} [isStrict] Restrict flattening to arrays-like objects.
      * @param {Array} [result=[]] The initial result value.
      * @returns {Array} Returns the new flattened array.
      */
-    function baseFlatten(array, isDeep, isStrict, result) {
+    function baseFlatten(array, depth, isStrict, result) {
       result || (result = []);
 
       var index = -1,
@@ -21644,11 +21689,11 @@ function extend() {
 
       while (++index < length) {
         var value = array[index];
-        if (isArrayLikeObject(value) &&
+        if (depth > 0 && isArrayLikeObject(value) &&
             (isStrict || isArray(value) || isArguments(value))) {
-          if (isDeep) {
+          if (depth > 1) {
             // Recursively flatten arrays (susceptible to call stack limits).
-            baseFlatten(value, isDeep, isStrict, result);
+            baseFlatten(value, depth - 1, isStrict, result);
           } else {
             arrayPush(result, value);
           }
@@ -21745,7 +21790,7 @@ function extend() {
      * @returns {*} Returns the resolved value.
      */
     function baseGet(object, path) {
-      path = isKey(path, object) ? [path + ''] : baseToPath(path);
+      path = isKey(path, object) ? [path + ''] : baseCastPath(path);
 
       var index = 0,
           length = path.length;
@@ -21834,11 +21879,17 @@ function extend() {
         var value = array[index],
             computed = iteratee ? iteratee(value) : value;
 
-        if (!(seen ? cacheHas(seen, computed) : includes(result, computed, comparator))) {
+        if (!(seen
+              ? cacheHas(seen, computed)
+              : includes(result, computed, comparator)
+            )) {
           var othIndex = othLength;
           while (--othIndex) {
             var cache = caches[othIndex];
-            if (!(cache ? cacheHas(cache, computed) : includes(arrays[othIndex], computed, comparator))) {
+            if (!(cache
+                  ? cacheHas(cache, computed)
+                  : includes(arrays[othIndex], computed, comparator))
+                ) {
               continue outer;
             }
           }
@@ -21881,7 +21932,7 @@ function extend() {
      */
     function baseInvoke(object, path, args) {
       if (!isKey(path, object)) {
-        path = baseToPath(path);
+        path = baseCastPath(path);
         object = parent(object, path);
         path = last(path);
       }
@@ -22054,7 +22105,6 @@ function extend() {
      * property of prototypes or treat sparse arrays as dense.
      *
      * @private
-     * @type Function
      * @param {Object} object The object to query.
      * @returns {Array} Returns the array of property names.
      */
@@ -22162,7 +22212,10 @@ function extend() {
       if (object === source) {
         return;
       }
-      var props = (isArray(source) || isTypedArray(source)) ? undefined : keysIn(source);
+      var props = (isArray(source) || isTypedArray(source))
+        ? undefined
+        : keysIn(source);
+
       arrayEach(props || source, function(srcValue, key) {
         if (props) {
           key = srcValue;
@@ -22173,7 +22226,10 @@ function extend() {
           baseMergeDeep(object, source, key, srcIndex, baseMerge, customizer, stack);
         }
         else {
-          var newValue = customizer ? customizer(object[key], srcValue, (key + ''), object, source, stack) : undefined;
+          var newValue = customizer
+            ? customizer(object[key], srcValue, (key + ''), object, source, stack)
+            : undefined;
+
           if (newValue === undefined) {
             newValue = srcValue;
           }
@@ -22205,21 +22261,24 @@ function extend() {
         assignMergeValue(object, key, stacked);
         return;
       }
-      var newValue = customizer ? customizer(objValue, srcValue, (key + ''), object, source, stack) : undefined,
-          isCommon = newValue === undefined;
+      var newValue = customizer
+        ? customizer(objValue, srcValue, (key + ''), object, source, stack)
+        : undefined;
+
+      var isCommon = newValue === undefined;
 
       if (isCommon) {
         newValue = srcValue;
         if (isArray(srcValue) || isTypedArray(srcValue)) {
           if (isArray(objValue)) {
-            newValue = srcIndex ? copyArray(objValue) : objValue;
+            newValue = objValue;
           }
           else if (isArrayLikeObject(objValue)) {
             newValue = copyArray(objValue);
           }
           else {
             isCommon = false;
-            newValue = baseClone(srcValue);
+            newValue = baseClone(srcValue, true);
           }
         }
         else if (isPlainObject(srcValue) || isArguments(srcValue)) {
@@ -22228,10 +22287,10 @@ function extend() {
           }
           else if (!isObject(objValue) || (srcIndex && isFunction(objValue))) {
             isCommon = false;
-            newValue = baseClone(srcValue);
+            newValue = baseClone(srcValue, true);
           }
           else {
-            newValue = srcIndex ? baseClone(objValue) : objValue;
+            newValue = objValue;
           }
         }
         else {
@@ -22405,7 +22464,7 @@ function extend() {
             splice.call(array, index, 1);
           }
           else if (!isKey(index, array)) {
-            var path = baseToPath(index),
+            var path = baseCastPath(index),
                 object = parent(array, path);
 
             if (object != null) {
@@ -22467,7 +22526,7 @@ function extend() {
      * @returns {Object} Returns `object`.
      */
     function baseSet(object, path, value, customizer) {
-      path = isKey(path, object) ? [path + ''] : baseToPath(path);
+      path = isKey(path, object) ? [path + ''] : baseCastPath(path);
 
       var index = -1,
           length = path.length,
@@ -22482,7 +22541,9 @@ function extend() {
             var objValue = nested[key];
             newValue = customizer ? customizer(objValue, key, nested) : undefined;
             if (newValue === undefined) {
-              newValue = objValue == null ? (isIndex(path[index + 1]) ? [] : {}) : objValue;
+              newValue = objValue == null
+                ? (isIndex(path[index + 1]) ? [] : {})
+                : objValue;
             }
           }
           assignValue(nested, key, newValue);
@@ -22674,18 +22735,6 @@ function extend() {
     }
 
     /**
-     * The base implementation of `_.toPath` which only converts `value` to a
-     * path if it's not one.
-     *
-     * @private
-     * @param {*} value The value to process.
-     * @returns {Array} Returns the property path array.
-     */
-    function baseToPath(value) {
-      return isArray(value) ? value : stringToPath(value);
-    }
-
-    /**
      * The base implementation of `_.uniqBy` without support for iteratee shorthands.
      *
      * @private
@@ -22754,7 +22803,7 @@ function extend() {
      * @returns {boolean} Returns `true` if the property is deleted, else `false`.
      */
     function baseUnset(object, path) {
-      path = isKey(path, object) ? [path + ''] : baseToPath(path);
+      path = isKey(path, object) ? [path + ''] : baseCastPath(path);
       object = parent(object, path);
       var key = last(path);
       return (object != null && has(object, key)) ? delete object[key] : true;
@@ -22943,10 +22992,11 @@ function extend() {
      * @returns {Object} Returns the cloned typed array.
      */
     function cloneTypedArray(typedArray, isDeep) {
-      var buffer = typedArray.buffer,
+      var arrayBuffer = typedArray.buffer,
+          buffer = isDeep ? cloneArrayBuffer(arrayBuffer) : arrayBuffer,
           Ctor = typedArray.constructor;
 
-      return new Ctor(isDeep ? cloneArrayBuffer(buffer) : buffer, typedArray.byteOffset, typedArray.length);
+      return new Ctor(buffer, typedArray.byteOffset, typedArray.length);
     }
 
     /**
@@ -23061,8 +23111,11 @@ function extend() {
           length = props.length;
 
       while (++index < length) {
-        var key = props[index],
-            newValue = customizer ? customizer(object[key], source[key], key, object, source) : source[key];
+        var key = props[index];
+
+        var newValue = customizer
+          ? customizer(object[key], source[key], key, object, source)
+          : source[key];
 
         assignValue(object, key, newValue);
       }
@@ -23112,7 +23165,10 @@ function extend() {
             customizer = length > 1 ? sources[length - 1] : undefined,
             guard = length > 2 ? sources[2] : undefined;
 
-        customizer = typeof customizer == 'function' ? (length--, customizer) : undefined;
+        customizer = typeof customizer == 'function'
+          ? (length--, customizer)
+          : undefined;
+
         if (guard && isIterateeCall(sources[0], sources[1], guard)) {
           customizer = length < 3 ? undefined : customizer;
           length = 1;
@@ -23213,8 +23269,11 @@ function extend() {
       return function(string) {
         string = toString(string);
 
-        var strSymbols = reHasComplexSymbol.test(string) ? stringToArray(string) : undefined,
-            chr = strSymbols ? strSymbols[0] : string.charAt(0),
+        var strSymbols = reHasComplexSymbol.test(string)
+          ? stringToArray(string)
+          : undefined;
+
+        var chr = strSymbols ? strSymbols[0] : string.charAt(0),
             trailing = strSymbols ? strSymbols.slice(1).join('') : string.slice(1);
 
         return chr[methodName]() + trailing;
@@ -23310,7 +23369,7 @@ function extend() {
      */
     function createFlow(fromRight) {
       return rest(function(funcs) {
-        funcs = baseFlatten(funcs);
+        funcs = baseFlatten(funcs, 1);
 
         var length = funcs.length,
             index = length,
@@ -23335,7 +23394,10 @@ function extend() {
           var funcName = getFuncName(func),
               data = funcName == 'wrapper' ? getData(func) : undefined;
 
-          if (data && isLaziable(data[0]) && data[1] == (ARY_FLAG | CURRY_FLAG | PARTIAL_FLAG | REARG_FLAG) && !data[4].length && data[9] == 1) {
+          if (data && isLaziable(data[0]) &&
+                data[1] == (ARY_FLAG | CURRY_FLAG | PARTIAL_FLAG | REARG_FLAG) &&
+                !data[4].length && data[9] == 1
+              ) {
             wrapper = wrapper[getFuncName(data[0])].apply(wrapper, data[3]);
           } else {
             wrapper = (func.length == 1 && isLaziable(func)) ? wrapper[funcName]() : wrapper.thru(func);
@@ -23345,7 +23407,8 @@ function extend() {
           var args = arguments,
               value = args[0];
 
-          if (wrapper && args.length == 1 && isArray(value) && value.length >= LARGE_ARRAY_SIZE) {
+          if (wrapper && args.length == 1 &&
+              isArray(value) && value.length >= LARGE_ARRAY_SIZE) {
             return wrapper.plant(value).value();
           }
           var index = 0,
@@ -23405,7 +23468,10 @@ function extend() {
 
           length -= argsHolders.length;
           if (length < arity) {
-            return createRecurryWrapper(func, bitmask, createHybridWrapper, placeholder, thisArg, args, argsHolders, argPos, ary, arity - length);
+            return createRecurryWrapper(
+              func, bitmask, createHybridWrapper, placeholder, thisArg, args,
+              argsHolders, argPos, ary, arity - length
+            );
           }
         }
         var thisBinding = isBind ? thisArg : this,
@@ -23450,7 +23516,7 @@ function extend() {
      */
     function createOver(arrayFunc) {
       return rest(function(iteratees) {
-        iteratees = arrayMap(baseFlatten(iteratees), getIteratee());
+        iteratees = arrayMap(baseFlatten(iteratees, 1), getIteratee());
         return rest(function(args) {
           var thisArg = this;
           return arrayFunc(iteratees, function(iteratee) {
@@ -23577,9 +23643,12 @@ function extend() {
       if (!(bitmask & CURRY_BOUND_FLAG)) {
         bitmask &= ~(BIND_FLAG | BIND_KEY_FLAG);
       }
-      var newData = [func, bitmask, thisArg, newPartials, newsHolders, newPartialsRight, newHoldersRight, newArgPos, ary, arity],
-          result = wrapFunc.apply(undefined, newData);
+      var newData = [
+        func, bitmask, thisArg, newPartials, newsHolders, newPartialsRight,
+        newHoldersRight, newArgPos, ary, arity
+      ];
 
+      var result = wrapFunc.apply(undefined, newData);
       if (isLaziable(func)) {
         setData(result, newData);
       }
@@ -23668,8 +23737,12 @@ function extend() {
 
         partials = holders = undefined;
       }
-      var data = isBindKey ? undefined : getData(func),
-          newData = [func, bitmask, thisArg, partials, holders, partialsRight, holdersRight, argPos, ary, arity];
+      var data = isBindKey ? undefined : getData(func);
+
+      var newData = [
+        func, bitmask, thisArg, partials, holders, partialsRight, holdersRight,
+        argPos, ary, arity
+      ];
 
       if (data) {
         mergeData(newData, data);
@@ -24077,7 +24150,7 @@ function extend() {
       }
       var result = hasFunc(object, path);
       if (!result && !isKey(path)) {
-        path = baseToPath(path);
+        path = baseCastPath(path);
         object = parent(object, path);
         if (object != null) {
           path = last(path);
@@ -24236,7 +24309,7 @@ function extend() {
     function isKeyable(value) {
       var type = typeof value;
       return type == 'number' || type == 'boolean' ||
-        (type == 'string' && value !== '__proto__') || value == null;
+        (type == 'string' && value != '__proto__') || value == null;
     }
 
     /**
@@ -24459,28 +24532,6 @@ function extend() {
     }
 
     /**
-     * Converts `value` to an array-like object if it's not one.
-     *
-     * @private
-     * @param {*} value The value to process.
-     * @returns {Array} Returns the array-like object.
-     */
-    function toArrayLikeObject(value) {
-      return isArrayLikeObject(value) ? value : [];
-    }
-
-    /**
-     * Converts `value` to a function if it's not one.
-     *
-     * @private
-     * @param {*} value The value to process.
-     * @returns {Function} Returns the function.
-     */
-    function toFunction(value) {
-      return typeof value == 'function' ? value : identity;
-    }
-
-    /**
      * Creates a clone of `wrapper`.
      *
      * @private
@@ -24590,7 +24641,7 @@ function extend() {
       if (!isArray(array)) {
         array = array == null ? [] : [Object(array)];
       }
-      values = baseFlatten(values);
+      values = baseFlatten(values, 1);
       return arrayConcat(array, values);
     });
 
@@ -24612,7 +24663,7 @@ function extend() {
      */
     var difference = rest(function(array, values) {
       return isArrayLikeObject(array)
-        ? baseDifference(array, baseFlatten(values, false, true))
+        ? baseDifference(array, baseFlatten(values, 1, true))
         : [];
     });
 
@@ -24643,7 +24694,7 @@ function extend() {
         iteratee = undefined;
       }
       return isArrayLikeObject(array)
-        ? baseDifference(array, baseFlatten(values, false, true), getIteratee(iteratee))
+        ? baseDifference(array, baseFlatten(values, 1, true), getIteratee(iteratee))
         : [];
     });
 
@@ -24672,7 +24723,7 @@ function extend() {
         comparator = undefined;
       }
       return isArrayLikeObject(array)
-        ? baseDifference(array, baseFlatten(values, false, true), undefined, comparator)
+        ? baseDifference(array, baseFlatten(values, 1, true), undefined, comparator)
         : [];
     });
 
@@ -24942,7 +24993,7 @@ function extend() {
     }
 
     /**
-     * Flattens `array` a single level.
+     * Flattens `array` a single level deep.
      *
      * @static
      * @memberOf _
@@ -24951,30 +25002,58 @@ function extend() {
      * @returns {Array} Returns the new flattened array.
      * @example
      *
-     * _.flatten([1, [2, 3, [4]]]);
-     * // => [1, 2, 3, [4]]
+     * _.flatten([1, [2, [3, [4]], 5]]);
+     * // => [1, 2, [3, [4]], 5]
      */
     function flatten(array) {
       var length = array ? array.length : 0;
-      return length ? baseFlatten(array) : [];
+      return length ? baseFlatten(array, 1) : [];
     }
 
     /**
-     * This method is like `_.flatten` except that it recursively flattens `array`.
+     * Recursively flattens `array`.
      *
      * @static
      * @memberOf _
      * @category Array
-     * @param {Array} array The array to recursively flatten.
+     * @param {Array} array The array to flatten.
      * @returns {Array} Returns the new flattened array.
      * @example
      *
-     * _.flattenDeep([1, [2, 3, [4]]]);
-     * // => [1, 2, 3, 4]
+     * _.flattenDeep([1, [2, [3, [4]], 5]]);
+     * // => [1, 2, 3, 4, 5]
      */
     function flattenDeep(array) {
       var length = array ? array.length : 0;
-      return length ? baseFlatten(array, true) : [];
+      return length ? baseFlatten(array, INFINITY) : [];
+    }
+
+    /**
+     * Recursively flatten `array` up to `depth` times.
+     *
+     * @static
+     * @memberOf _
+     * @category Array
+     * @param {Array} array The array to flatten.
+     * @param {number} [depth=1] The maximum recursion depth.
+     * @returns {Array} Returns the new flattened array.
+     * @example
+     *
+     * var array = [1, [2, [3, [4]], 5]];
+     *
+     * _.flattenDepth(array, 1);
+     * // => [1, 2, [3, [4]], 5]
+     *
+     * _.flattenDepth(array, 2);
+     * // => [1, 2, 3, [4], 5]
+     */
+    function flattenDepth(array, depth) {
+      var length = array ? array.length : 0;
+      if (!length) {
+        return [];
+      }
+      depth = depth === undefined ? 1 : toInteger(depth);
+      return baseFlatten(array, depth);
     }
 
     /**
@@ -25091,7 +25170,7 @@ function extend() {
      * // => [2]
      */
     var intersection = rest(function(arrays) {
-      var mapped = arrayMap(arrays, toArrayLikeObject);
+      var mapped = arrayMap(arrays, baseCastArrayLikeObject);
       return (mapped.length && mapped[0] === arrays[0])
         ? baseIntersection(mapped)
         : [];
@@ -25119,7 +25198,7 @@ function extend() {
      */
     var intersectionBy = rest(function(arrays) {
       var iteratee = last(arrays),
-          mapped = arrayMap(arrays, toArrayLikeObject);
+          mapped = arrayMap(arrays, baseCastArrayLikeObject);
 
       if (iteratee === last(mapped)) {
         iteratee = undefined;
@@ -25152,7 +25231,7 @@ function extend() {
      */
     var intersectionWith = rest(function(arrays) {
       var comparator = last(arrays),
-          mapped = arrayMap(arrays, toArrayLikeObject);
+          mapped = arrayMap(arrays, baseCastArrayLikeObject);
 
       if (comparator === last(mapped)) {
         comparator = undefined;
@@ -25342,7 +25421,7 @@ function extend() {
      * // => [10, 20]
      */
     var pullAt = rest(function(array, indexes) {
-      indexes = arrayMap(baseFlatten(indexes), String);
+      indexes = arrayMap(baseFlatten(indexes, 1), String);
 
       var result = baseAt(array, indexes);
       basePullAt(array, indexes.sort(compareAscending));
@@ -25814,7 +25893,7 @@ function extend() {
      * // => [2, 1, 4]
      */
     var union = rest(function(arrays) {
-      return baseUniq(baseFlatten(arrays, false, true));
+      return baseUniq(baseFlatten(arrays, 1, true));
     });
 
     /**
@@ -25842,7 +25921,7 @@ function extend() {
       if (isArrayLikeObject(iteratee)) {
         iteratee = undefined;
       }
-      return baseUniq(baseFlatten(arrays, false, true), getIteratee(iteratee));
+      return baseUniq(baseFlatten(arrays, 1, true), getIteratee(iteratee));
     });
 
     /**
@@ -25869,7 +25948,7 @@ function extend() {
       if (isArrayLikeObject(comparator)) {
         comparator = undefined;
       }
-      return baseUniq(baseFlatten(arrays, false, true), undefined, comparator);
+      return baseUniq(baseFlatten(arrays, 1, true), undefined, comparator);
     });
 
     /**
@@ -26293,17 +26372,22 @@ function extend() {
      * // => ['a', 'c']
      */
     var wrapperAt = rest(function(paths) {
-      paths = baseFlatten(paths);
+      paths = baseFlatten(paths, 1);
       var length = paths.length,
           start = length ? paths[0] : 0,
           value = this.__wrapped__,
           interceptor = function(object) { return baseAt(object, paths); };
 
-      if (length > 1 || this.__actions__.length || !(value instanceof LazyWrapper) || !isIndex(start)) {
+      if (length > 1 || this.__actions__.length ||
+          !(value instanceof LazyWrapper) || !isIndex(start)) {
         return this.thru(interceptor);
       }
       value = value.slice(start, +start + (length ? 1 : 0));
-      value.__actions__.push({ 'func': thru, 'args': [interceptor], 'thisArg': undefined });
+      value.__actions__.push({
+        'func': thru,
+        'args': [interceptor],
+        'thisArg': undefined
+      });
       return new LodashWrapper(value, this.__chain__).thru(function(array) {
         if (length && !array.length) {
           array.push(undefined);
@@ -26514,7 +26598,11 @@ function extend() {
           wrapped = new LazyWrapper(this);
         }
         wrapped = wrapped.reverse();
-        wrapped.__actions__.push({ 'func': thru, 'args': [reverse], 'thisArg': undefined });
+        wrapped.__actions__.push({
+          'func': thru,
+          'args': [reverse],
+          'thisArg': undefined
+        });
         return new LodashWrapper(wrapped, this.__chain__);
       }
       return this.thru(reverse);
@@ -26733,7 +26821,7 @@ function extend() {
      * // => [1, 1, 2, 2]
      */
     function flatMap(collection, iteratee) {
-      return baseFlatten(map(collection, iteratee));
+      return baseFlatten(map(collection, iteratee), 1);
     }
 
     /**
@@ -26767,7 +26855,7 @@ function extend() {
     function forEach(collection, iteratee) {
       return (typeof iteratee == 'function' && isArray(collection))
         ? arrayEach(collection, iteratee)
-        : baseEach(collection, toFunction(iteratee));
+        : baseEach(collection, baseCastFunction(iteratee));
     }
 
     /**
@@ -26791,7 +26879,7 @@ function extend() {
     function forEachRight(collection, iteratee) {
       return (typeof iteratee == 'function' && isArray(collection))
         ? arrayEachRight(collection, iteratee)
-        : baseEachRight(collection, toFunction(iteratee));
+        : baseEachRight(collection, baseCastFunction(iteratee));
     }
 
     /**
@@ -27355,7 +27443,7 @@ function extend() {
       } else if (length > 2 && isIterateeCall(iteratees[0], iteratees[1], iteratees[2])) {
         iteratees.length = 1;
       }
-      return baseOrderBy(collection, baseFlatten(iteratees), []);
+      return baseOrderBy(collection, baseFlatten(iteratees, 1), []);
     });
 
     /*------------------------------------------------------------------------*/
@@ -27366,7 +27454,7 @@ function extend() {
      *
      * @static
      * @memberOf _
-     * @type Function
+     * @type {Function}
      * @category Date
      * @returns {number} Returns the timestamp.
      * @example
@@ -27792,8 +27880,10 @@ function extend() {
           if (!lastCalled && !maxTimeoutId && !leading) {
             lastCalled = stamp;
           }
-          var remaining = maxWait - (stamp - lastCalled),
-              isCalled = remaining <= 0 || remaining > maxWait;
+          var remaining = maxWait - (stamp - lastCalled);
+
+          var isCalled = (remaining <= 0 || remaining > maxWait) &&
+            (leading || maxTimeoutId);
 
           if (isCalled) {
             if (maxTimeoutId) {
@@ -28033,7 +28123,7 @@ function extend() {
      * // => [100, 10]
      */
     var overArgs = rest(function(func, transforms) {
-      transforms = arrayMap(baseFlatten(transforms), getIteratee());
+      transforms = arrayMap(baseFlatten(transforms, 1), getIteratee());
 
       var funcsLength = transforms.length;
       return rest(function(args) {
@@ -28147,7 +28237,7 @@ function extend() {
      * // => ['a', 'b', 'c']
      */
     var rearg = rest(function(func, indexes) {
-      return createWrapper(func, REARG_FLAG, undefined, undefined, undefined, baseFlatten(indexes));
+      return createWrapper(func, REARG_FLAG, undefined, undefined, undefined, baseFlatten(indexes, 1));
     });
 
     /**
@@ -28299,7 +28389,11 @@ function extend() {
         leading = 'leading' in options ? !!options.leading : leading;
         trailing = 'trailing' in options ? !!options.trailing : trailing;
       }
-      return debounce(func, wait, { 'leading': leading, 'maxWait': wait, 'trailing': trailing });
+      return debounce(func, wait, {
+        'leading': leading,
+        'maxWait': wait,
+        'trailing': trailing
+      });
     }
 
     /**
@@ -28330,7 +28424,7 @@ function extend() {
      * @memberOf _
      * @category Function
      * @param {*} value The value to wrap.
-     * @param {Function} wrapper The wrapper function.
+     * @param {Function} [wrapper=identity] The wrapper function.
      * @returns {Function} Returns the new function.
      * @example
      *
@@ -28347,6 +28441,46 @@ function extend() {
     }
 
     /*------------------------------------------------------------------------*/
+
+    /**
+     * Casts `value` as an array if it's not one.
+     *
+     * @static
+     * @memberOf _
+     * @category Lang
+     * @param {*} value The value to inspect.
+     * @returns {Array} Returns the cast array.
+     * @example
+     *
+     * _.castArray(1);
+     * // => [1]
+     *
+     * _.castArray({ 'a': 1 });
+     * // => [{ 'a': 1 }]
+     *
+     * _.castArray('abc');
+     * // => ['abc']
+     *
+     * _.castArray(null);
+     * // => [null]
+     *
+     * _.castArray(undefined);
+     * // => [undefined]
+     *
+     * _.castArray();
+     * // => []
+     *
+     * var array = [1, 2, 3];
+     * console.log(_.castArray(array) === array);
+     * // => true
+     */
+    function castArray() {
+      if (!arguments.length) {
+        return [];
+      }
+      var value = arguments[0];
+      return isArray(value) ? value : [value];
+    }
 
     /**
      * Creates a shallow clone of `value`.
@@ -28568,7 +28702,7 @@ function extend() {
      *
      * @static
      * @memberOf _
-     * @type Function
+     * @type {Function}
      * @category Lang
      * @param {*} value The value to check.
      * @returns {boolean} Returns `true` if `value` is correctly classified, else `false`.
@@ -28593,7 +28727,6 @@ function extend() {
      *
      * @static
      * @memberOf _
-     * @type Function
      * @category Lang
      * @param {*} value The value to check.
      * @returns {boolean} Returns `true` if `value` is correctly classified, else `false`.
@@ -28616,7 +28749,6 @@ function extend() {
      *
      * @static
      * @memberOf _
-     * @type Function
      * @category Lang
      * @param {*} value The value to check.
      * @returns {boolean} Returns `true` if `value` is array-like, else `false`.
@@ -28645,7 +28777,6 @@ function extend() {
      *
      * @static
      * @memberOf _
-     * @type Function
      * @category Lang
      * @param {*} value The value to check.
      * @returns {boolean} Returns `true` if `value` is an array-like object, else `false`.
@@ -28777,7 +28908,8 @@ function extend() {
      */
     function isEmpty(value) {
       if (isArrayLike(value) &&
-          (isArray(value) || isString(value) || isFunction(value.splice) || isArguments(value))) {
+          (isArray(value) || isString(value) ||
+            isFunction(value.splice) || isArguments(value))) {
         return !value.length;
       }
       for (var key in value) {
@@ -28820,10 +28952,10 @@ function extend() {
     }
 
     /**
-     * This method is like `_.isEqual` except that it accepts `customizer` which is
-     * invoked to compare values. If `customizer` returns `undefined` comparisons are
-     * handled by the method instead. The `customizer` is invoked with up to six arguments:
-     * (objValue, othValue [, index|key, object, other, stack]).
+     * This method is like `_.isEqual` except that it accepts `customizer` which
+     * is invoked to compare values. If `customizer` returns `undefined` comparisons
+     * are handled by the method instead. The `customizer` is invoked with up to
+     * six arguments: (objValue, othValue [, index|key, object, other, stack]).
      *
      * @static
      * @memberOf _
@@ -28874,8 +29006,12 @@ function extend() {
      * // => false
      */
     function isError(value) {
-      return isObjectLike(value) &&
-        typeof value.message == 'string' && objectToString.call(value) == errorTag;
+      if (!isObjectLike(value)) {
+        return false;
+      }
+      var Ctor = value.constructor;
+      return (objectToString.call(value) == errorTag) ||
+        (typeof Ctor == 'function' && objectToString.call(Ctor.prototype) == errorTag);
     }
 
     /**
@@ -28983,7 +29119,8 @@ function extend() {
      * // => false
      */
     function isLength(value) {
-      return typeof value == 'number' && value > -1 && value % 1 == 0 && value <= MAX_SAFE_INTEGER;
+      return typeof value == 'number' &&
+        value > -1 && value % 1 == 0 && value <= MAX_SAFE_INTEGER;
     }
 
     /**
@@ -29062,8 +29199,9 @@ function extend() {
     }
 
     /**
-     * Performs a deep comparison between `object` and `source` to determine if
-     * `object` contains equivalent property values.
+     * Performs a partial deep comparison between `object` and `source` to
+     * determine if `object` contains equivalent property values. This method is
+     * equivalent to a `_.matches` function when `source` is partially applied.
      *
      * **Note:** This method supports comparing the same values as `_.isEqual`.
      *
@@ -29282,7 +29420,8 @@ function extend() {
      * // => true
      */
     function isPlainObject(value) {
-      if (!isObjectLike(value) || objectToString.call(value) != objectTag || isHostObject(value)) {
+      if (!isObjectLike(value) ||
+          objectToString.call(value) != objectTag || isHostObject(value)) {
         return false;
       }
       var proto = objectProto;
@@ -29425,7 +29564,8 @@ function extend() {
      * // => false
      */
     function isTypedArray(value) {
-      return isObjectLike(value) && isLength(value.length) && !!typedArrayTags[objectToString.call(value)];
+      return isObjectLike(value) &&
+        isLength(value.length) && !!typedArrayTags[objectToString.call(value)];
     }
 
     /**
@@ -29917,7 +30057,7 @@ function extend() {
      * // => ['a', 'c']
      */
     var at = rest(function(object, paths) {
-      return baseAt(object, baseFlatten(paths));
+      return baseAt(object, baseFlatten(paths, 1));
     });
 
     /**
@@ -30105,7 +30245,9 @@ function extend() {
      * // => logs 'a', 'b', then 'c' (iteration order is not guaranteed)
      */
     function forIn(object, iteratee) {
-      return object == null ? object : baseFor(object, toFunction(iteratee), keysIn);
+      return object == null
+        ? object
+        : baseFor(object, baseCastFunction(iteratee), keysIn);
     }
 
     /**
@@ -30133,7 +30275,9 @@ function extend() {
      * // => logs 'c', 'b', then 'a' assuming `_.forIn` logs 'a', 'b', then 'c'
      */
     function forInRight(object, iteratee) {
-      return object == null ? object : baseForRight(object, toFunction(iteratee), keysIn);
+      return object == null
+        ? object
+        : baseForRight(object, baseCastFunction(iteratee), keysIn);
     }
 
     /**
@@ -30163,7 +30307,7 @@ function extend() {
      * // => logs 'a' then 'b' (iteration order is not guaranteed)
      */
     function forOwn(object, iteratee) {
-      return object && baseForOwn(object, toFunction(iteratee));
+      return object && baseForOwn(object, baseCastFunction(iteratee));
     }
 
     /**
@@ -30191,7 +30335,7 @@ function extend() {
      * // => logs 'b' then 'a' assuming `_.forOwn` logs 'a' then 'b'
      */
     function forOwnRight(object, iteratee) {
-      return object && baseForOwnRight(object, toFunction(iteratee));
+      return object && baseForOwnRight(object, baseCastFunction(iteratee));
     }
 
     /**
@@ -30558,12 +30702,12 @@ function extend() {
     }
 
     /**
-     * Recursively merges own and inherited enumerable properties of source
-     * objects into the destination object, skipping source properties that resolve
-     * to `undefined`. Array and plain object properties are merged recursively.
-     * Other objects and value types are overridden by assignment. Source objects
-     * are applied from left to right. Subsequent sources overwrite property
-     * assignments of previous sources.
+     * Recursively merges own and inherited enumerable properties of source objects
+     * into the destination object. Source properties that resolve to `undefined`
+     * are skipped if a destination value exists. Array and plain object properties
+     * are merged recursively. Other objects and value types are overridden by
+     * assignment. Source objects are applied from left to right. Subsequent
+     * sources overwrite property assignments of previous sources.
      *
      * **Note:** This method mutates `object`.
      *
@@ -30640,7 +30784,7 @@ function extend() {
      * @category Object
      * @param {Object} object The source object.
      * @param {...(string|string[])} [props] The property names to omit, specified
-     *  individually or in arrays..
+     *  individually or in arrays.
      * @returns {Object} Returns the new object.
      * @example
      *
@@ -30653,7 +30797,7 @@ function extend() {
       if (object == null) {
         return {};
       }
-      props = arrayMap(baseFlatten(props), String);
+      props = arrayMap(baseFlatten(props, 1), String);
       return basePick(object, baseDifference(keysIn(object), props));
     });
 
@@ -30700,7 +30844,7 @@ function extend() {
      * // => { 'a': 1, 'c': 3 }
      */
     var pick = rest(function(object, props) {
-      return object == null ? {} : basePick(object, baseFlatten(props));
+      return object == null ? {} : basePick(object, baseFlatten(props, 1));
     });
 
     /**
@@ -30754,7 +30898,7 @@ function extend() {
      */
     function result(object, path, defaultValue) {
       if (!isKey(path, object)) {
-        path = baseToPath(path);
+        path = baseCastPath(path);
         var result = get(object, path);
         object = parent(object, path);
       } else {
@@ -30824,7 +30968,8 @@ function extend() {
     }
 
     /**
-     * Creates an array of own enumerable key-value pairs for `object`.
+     * Creates an array of own enumerable key-value pairs for `object` which
+     * can be consumed by `_.fromPairs`.
      *
      * @static
      * @memberOf _
@@ -30848,7 +30993,8 @@ function extend() {
     }
 
     /**
-     * Creates an array of own and inherited enumerable key-value pairs for `object`.
+     * Creates an array of own and inherited enumerable key-value pairs for
+     * `object` which can be consumed by `_.fromPairs`.
      *
      * @static
      * @memberOf _
@@ -31003,7 +31149,7 @@ function extend() {
      * // => [1, 2, 3] (iteration order is not guaranteed)
      */
     function valuesIn(object) {
-      return object == null ? baseValues(object, keysIn(object)) : [];
+      return object == null ? [] : baseValues(object, keysIn(object));
     }
 
     /*------------------------------------------------------------------------*/
@@ -31501,7 +31647,7 @@ function extend() {
      * @memberOf _
      * @category String
      * @param {string} string The string to convert.
-     * @param {number} [radix] The radix to interpret `value` by.
+     * @param {number} [radix=10] The radix to interpret `value` by.
      * @param- {Object} [guard] Enables use as an iteratee for functions like `_.map`.
      * @returns {number} Returns the converted integer.
      * @example
@@ -31873,7 +32019,8 @@ function extend() {
         'return __p\n}';
 
       var result = attempt(function() {
-        return Function(importsKeys, sourceURL + 'return ' + source).apply(undefined, importsValues);
+        return Function(importsKeys, sourceURL + 'return ' + source)
+          .apply(undefined, importsValues);
       });
 
       // Provide the compiled function's source by its `toString` method or
@@ -31967,7 +32114,9 @@ function extend() {
       var strSymbols = stringToArray(string),
           chrSymbols = stringToArray(chars);
 
-      return strSymbols.slice(charsStartIndex(strSymbols, chrSymbols), charsEndIndex(strSymbols, chrSymbols) + 1).join('');
+      return strSymbols
+        .slice(charsStartIndex(strSymbols, chrSymbols), charsEndIndex(strSymbols, chrSymbols) + 1)
+        .join('');
     }
 
     /**
@@ -32001,7 +32150,9 @@ function extend() {
         return string;
       }
       var strSymbols = stringToArray(string);
-      return strSymbols.slice(0, charsEndIndex(strSymbols, stringToArray(chars)) + 1).join('');
+      return strSymbols
+        .slice(0, charsEndIndex(strSymbols, stringToArray(chars)) + 1)
+        .join('');
     }
 
     /**
@@ -32035,7 +32186,9 @@ function extend() {
         return string;
       }
       var strSymbols = stringToArray(string);
-      return strSymbols.slice(charsStartIndex(strSymbols, stringToArray(chars))).join('');
+      return strSymbols
+        .slice(charsStartIndex(strSymbols, stringToArray(chars)))
+        .join('');
     }
 
     /**
@@ -32047,7 +32200,7 @@ function extend() {
      * @memberOf _
      * @category String
      * @param {string} [string=''] The string to truncate.
-     * @param {Object} [options] The options object.
+     * @param {Object} [options=({})] The options object.
      * @param {number} [options.length=30] The maximum string length.
      * @param {string} [options.omission='...'] The string to indicate text is omitted.
      * @param {RegExp|string} [options.separator] The separator pattern to truncate to.
@@ -32232,7 +32385,7 @@ function extend() {
       try {
         return apply(func, undefined, args);
       } catch (e) {
-        return isObject(e) ? e : new Error(e);
+        return isError(e) ? e : new Error(e);
       }
     });
 
@@ -32263,7 +32416,7 @@ function extend() {
      * // => logs 'clicked docs' when clicked
      */
     var bindAll = rest(function(object, methodNames) {
-      arrayEach(baseFlatten(methodNames), function(key) {
+      arrayEach(baseFlatten(methodNames, 1), function(key) {
         object[key] = bind(object[key], object);
       });
       return object;
@@ -32431,7 +32584,8 @@ function extend() {
      * Creates a function that invokes `func` with the arguments of the created
      * function. If `func` is a property name the created callback returns the
      * property value for a given element. If `func` is an object the created
-     * callback returns `true` for elements that contain the equivalent object properties, otherwise it returns `false`.
+     * callback returns `true` for elements that contain the equivalent object
+     * properties, otherwise it returns `false`.
      *
      * @static
      * @memberOf _
@@ -32461,9 +32615,10 @@ function extend() {
     }
 
     /**
-     * Creates a function that performs a deep partial comparison between a given
+     * Creates a function that performs a partial deep comparison between a given
      * object and `source`, returning `true` if the given object has equivalent
-     * property values, else `false`.
+     * property values, else `false`. The created function is equivalent to
+     * `_.isMatch` with a `source` partially applied.
      *
      * **Note:** This method supports comparing the same values as `_.isEqual`.
      *
@@ -32487,7 +32642,7 @@ function extend() {
     }
 
     /**
-     * Creates a function that performs a deep partial comparison between the
+     * Creates a function that performs a partial deep comparison between the
      * value at `path` of a given object to `srcValue`, returning `true` if the
      * object value is equivalent, else `false`.
      *
@@ -32921,7 +33076,7 @@ function extend() {
       var index = MAX_ARRAY_LENGTH,
           length = nativeMin(n, MAX_ARRAY_LENGTH);
 
-      iteratee = toFunction(iteratee);
+      iteratee = baseCastFunction(iteratee);
       n -= MAX_ARRAY_LENGTH;
 
       var result = baseTimes(length, iteratee);
@@ -32966,7 +33121,7 @@ function extend() {
      * @static
      * @memberOf _
      * @category Util
-     * @param {string} [prefix] The value to prefix the ID with.
+     * @param {string} [prefix=''] The value to prefix the ID with.
      * @returns {string} Returns the unique ID.
      * @example
      *
@@ -33317,6 +33472,7 @@ function extend() {
     lodash.bind = bind;
     lodash.bindAll = bindAll;
     lodash.bindKey = bindKey;
+    lodash.castArray = castArray;
     lodash.chain = chain;
     lodash.chunk = chunk;
     lodash.compact = compact;
@@ -33345,6 +33501,7 @@ function extend() {
     lodash.flatMap = flatMap;
     lodash.flatten = flatten;
     lodash.flattenDeep = flattenDeep;
+    lodash.flattenDepth = flattenDepth;
     lodash.flip = flip;
     lodash.flow = flow;
     lodash.flowRight = flowRight;
@@ -33619,7 +33776,7 @@ function extend() {
      *
      * @static
      * @memberOf _
-     * @type string
+     * @type {string}
      */
     lodash.VERSION = VERSION;
 
@@ -33641,7 +33798,10 @@ function extend() {
         if (filtered) {
           result.__takeCount__ = nativeMin(n, result.__takeCount__);
         } else {
-          result.__views__.push({ 'size': nativeMin(n, MAX_ARRAY_LENGTH), 'type': methodName + (result.__dir__ < 0 ? 'Right' : '') });
+          result.__views__.push({
+            'size': nativeMin(n, MAX_ARRAY_LENGTH),
+            'type': methodName + (result.__dir__ < 0 ? 'Right' : '')
+          });
         }
         return result;
       };
@@ -33658,7 +33818,10 @@ function extend() {
 
       LazyWrapper.prototype[methodName] = function(iteratee) {
         var result = this.clone();
-        result.__iteratees__.push({ 'iteratee': getIteratee(iteratee, 3), 'type': type });
+        result.__iteratees__.push({
+          'iteratee': getIteratee(iteratee, 3),
+          'type': type
+        });
         result.__filtered__ = result.__filtered__ || isFilter;
         return result;
       };
@@ -33810,7 +33973,10 @@ function extend() {
       }
     });
 
-    realNames[createHybridWrapper(undefined, BIND_KEY_FLAG).name] = [{ 'name': 'wrapper', 'func': undefined }];
+    realNames[createHybridWrapper(undefined, BIND_KEY_FLAG).name] = [{
+      'name': 'wrapper',
+      'func': undefined
+    }];
 
     // Add functions to the lazy wrapper.
     LazyWrapper.prototype.clone = lazyClone;
@@ -35067,7 +35233,8 @@ function CodePathSegment(id, allPrevSegments, reachable) {
 
     // Internal data.
     Object.defineProperty(this, "internal", {value: {
-        used: false
+        used: false,
+        loopedPrevSegments: []
     }});
 
     /* istanbul ignore if */
@@ -35076,6 +35243,20 @@ function CodePathSegment(id, allPrevSegments, reachable) {
         this.internal.exitNodes = [];
     }
 }
+
+CodePathSegment.prototype = {
+    constructor: CodePathSegment,
+
+    /**
+     * Checks a given previous segment is coming from the end of a loop.
+     *
+     * @param {CodePathSegment} segment - A previous segment to check.
+     * @returns {boolean} `true` if the segment is coming from the end of a loop.
+     */
+    isLoopedPrevSegment: function(segment) {
+        return this.internal.loopedPrevSegments.indexOf(segment) !== -1;
+    }
+};
 
 /**
  * Creates the root segment.
@@ -35150,6 +35331,17 @@ CodePathSegment.markUsed = function(segment) {
             segment.allPrevSegments[i].allNextSegments.push(segment);
         }
     }
+};
+
+/**
+ * Marks a previous segment as looped.
+ *
+ * @param {CodePathSegment} segment - A segment.
+ * @param {CodePathSegment} prevSegment - A previous segment to mark.
+ * @returns {void}
+ */
+CodePathSegment.markPrevSegmentAsLooped = function(segment, prevSegment) {
+    segment.internal.loopedPrevSegments.push(prevSegment);
 };
 
 module.exports = CodePathSegment;
@@ -35337,6 +35529,10 @@ function makeLooped(state, fromSegments, toSegments) {
         }
         fromSegment.allNextSegments.push(toSegment);
         toSegment.allPrevSegments.push(fromSegment);
+
+        if (toSegment.allPrevSegments.length >= 2) {
+            CodePathSegment.markPrevSegmentAsLooped(toSegment, fromSegment);
+        }
 
         state.notifyLooped(fromSegment, toSegment);
     }
@@ -36584,6 +36780,120 @@ CodePath.prototype = {
      */
     get currentSegments() {
         return this.internal.currentSegments;
+    },
+
+    /**
+     * Traverses all segments in this code path.
+     *
+     *     codePath.traverseSegments(function(segment, controller) {
+     *         // do something.
+     *     });
+     *
+     * This method enumerates segments in order from the head.
+     *
+     * The `controller` object has two methods.
+     *
+     * - `controller.skip()` - Skip the following segments in this branch.
+     * - `controller.break()` - Skip all following segments.
+     *
+     * @param {object} [options] - Omittable.
+     * @param {CodePathSegment} [options.first] - The first segment to traverse.
+     * @param {CodePathSegment} [options.last] - The last segment to traverse.
+     * @param {function} callback - A callback function.
+     * @returns {void}
+     */
+    traverseSegments: function(options, callback) {
+        if (typeof options === "function") {
+            callback = options;
+            options = null;
+        }
+
+        options = options || {};
+        var startSegment = options.first || this.internal.initialSegment;
+        var lastSegment = options.last;
+
+        var item = null;
+        var index = 0;
+        var end = 0;
+        var segment = null;
+        var visited = Object.create(null);
+        var stack = [[startSegment, 0]];
+        var skippedSegment = null;
+        var broken = false;
+        var controller = {
+            skip: function() {
+                if (stack.length <= 1) {
+                    broken = true;
+                } else {
+                    skippedSegment = stack[stack.length - 2][0];
+                }
+            },
+            break: function() {
+                broken = true;
+            }
+        };
+
+        /**
+         * Checks a given previous segment has been visited.
+         * @param {CodePathSegment} prevSegment - A previous segment to check.
+         * @returns {boolean} `true` if the segment has been visited.
+         */
+        function isVisited(prevSegment) {
+            return (
+                visited[prevSegment.id] ||
+                segment.isLoopedPrevSegment(prevSegment)
+            );
+        }
+
+        while (stack.length > 0) {
+            item = stack[stack.length - 1];
+            segment = item[0];
+            index = item[1];
+
+            if (index === 0) {
+                // Skip this has been visited already.
+                if (visited[segment.id]) {
+                    stack.pop();
+                    continue;
+                }
+                // Skip if all previous segments have not been visited.
+                if (segment !== startSegment &&
+                    segment.prevSegments.length > 0 &&
+                    !segment.prevSegments.every(isVisited)
+                ) {
+                    stack.pop();
+                    continue;
+                }
+                // Reset the flag of skipping if all branches have been skipped.
+                if (skippedSegment && segment.prevSegments.indexOf(skippedSegment) !== -1) {
+                    skippedSegment = null;
+                }
+                visited[segment.id] = true;
+
+                // Call the callback when the first time.
+                if (!skippedSegment) {
+                    callback.call(this, segment, controller); // eslint-disable-line callback-return
+                    if (segment === lastSegment) {
+                        controller.skip();
+                    }
+                    if (broken) {
+                        break;
+                    }
+                }
+            }
+
+            // Update the stack.
+            end = segment.nextSegments.length - 1;
+            if (index < end) {
+                item[1] += 1;
+                stack.push([segment.nextSegments[index], 0]);
+            } else if (index === end) {
+                item[0] = segment.nextSegments[index];
+                item[1] = 0;
+            } else {
+                stack.pop();
+            }
+        }
     }
 };
 
@@ -37833,7 +38143,7 @@ function modifyConfigsFromComments(filename, ast, config, reportingConfig, messa
     ast.comments.forEach(function(comment) {
 
         var value = comment.value.trim();
-        var match = /^(eslint-\w+|eslint-\w+-\w+|eslint|exported|globals?)(\s|$)/.exec(value);
+        var match = /^(eslint(-\w+){0,3}|exported|globals?)(\s|$)/.exec(value);
 
         if (match) {
             value = value.substring(match.index + match[1].length);
@@ -37877,6 +38187,9 @@ function modifyConfigsFromComments(filename, ast, config, reportingConfig, messa
                 if (match[1] === "eslint-disable-line") {
                     disableReporting(reportingConfig, { "line": comment.loc.start.line, "column": 0 }, Object.keys(parseListConfig(value)));
                     enableReporting(reportingConfig, comment.loc.end, Object.keys(parseListConfig(value)));
+                } else if (match[1] === "eslint-disable-next-line") {
+                    disableReporting(reportingConfig, comment.loc.start, Object.keys(parseListConfig(value)));
+                    enableReporting(reportingConfig, { "line": comment.loc.start.line + 2 }, Object.keys(parseListConfig(value)));
                 }
             }
         }
@@ -41909,6 +42222,7 @@ module.exports = function(context) {
     // Information for each code path segment.
     // - calledInSomePaths:  A flag of be called `super()` in some code paths.
     // - calledInEveryPaths: A flag of be called `super()` in all code paths.
+    // - validNodes:
     var segInfoMap = Object.create(null);
 
     /**
@@ -41937,21 +42251,26 @@ module.exports = function(context) {
          * @returns {void}
          */
         "onCodePathStart": function(codePath, node) {
-            if (!isConstructorFunction(node)) {
-                return;
+            if (isConstructorFunction(node)) {
+                // Class > ClassBody > MethodDefinition > FunctionExpression
+                var classNode = node.parent.parent.parent;
+                funcInfo = {
+                    upper: funcInfo,
+                    isConstructor: true,
+                    hasExtends: Boolean(
+                        classNode.superClass &&
+                        !astUtils.isNullOrUndefined(classNode.superClass)
+                    ),
+                    codePath: codePath
+                };
+            } else {
+                funcInfo = {
+                    upper: funcInfo,
+                    isConstructor: false,
+                    hasExtends: false,
+                    codePath: codePath
+                };
             }
-
-            // Class > ClassBody > MethodDefinition > FunctionExpression
-            var classNode = node.parent.parent.parent;
-            funcInfo = {
-                upper: funcInfo,
-                hasExtends: Boolean(
-                    classNode.superClass &&
-                    !astUtils.isNullOrUndefined(classNode.superClass)
-                ),
-                scope: context.getScope(),
-                codePath: codePath
-            };
         },
 
         /**
@@ -41962,10 +42281,6 @@ module.exports = function(context) {
          * @returns {void}
          */
         "onCodePathEnd": function(codePath, node) {
-            if (!isConstructorFunction(node)) {
-                return;
-            }
-
             // Skip if own class which has a valid `extends` part.
             var hasExtends = funcInfo.hasExtends;
             funcInfo = funcInfo.upper;
@@ -41995,18 +42310,15 @@ module.exports = function(context) {
         "onCodePathSegmentStart": function(segment) {
             // Skip if this is not in a constructor of a class which has a valid
             // `extends` part.
-            if (!(
-                funcInfo &&
-                funcInfo.hasExtends &&
-                funcInfo.scope === context.getScope().variableScope
-            )) {
+            if (!(funcInfo && funcInfo.isConstructor && funcInfo.hasExtends)) {
                 return;
             }
 
             // Initialize info.
             var info = segInfoMap[segment.id] = {
                 calledInSomePaths: false,
-                calledInEveryPaths: false
+                calledInEveryPaths: false,
+                validNodes: []
             };
 
             // When there are previous segments, aggregates these.
@@ -42015,6 +42327,51 @@ module.exports = function(context) {
                 info.calledInSomePaths = prevSegments.some(isCalledInSomePath);
                 info.calledInEveryPaths = prevSegments.every(isCalledInEveryPath);
             }
+        },
+
+        /**
+         * Update information of the code path segment when a code path was
+         * looped.
+         * @param {CodePathSegment} fromSegment - The code path segment of the
+         *      end of a loop.
+         * @param {CodePathSegment} toSegment - A code path segment of the head
+         *      of a loop.
+         * @returns {void}
+         */
+        "onCodePathSegmentLoop": function(fromSegment, toSegment) {
+            // Skip if this is not in a constructor of a class which has a valid
+            // `extends` part.
+            if (!(funcInfo && funcInfo.isConstructor && funcInfo.hasExtends)) {
+                return;
+            }
+
+            // Update information inside of the loop.
+            var isRealLoop = toSegment.prevSegments.length >= 2;
+            funcInfo.codePath.traverseSegments(
+                {first: toSegment, last: fromSegment},
+                function(segment) {
+                    var info = segInfoMap[segment.id];
+
+                    // Updates flags.
+                    var prevSegments = segment.prevSegments;
+                    info.calledInSomePaths = prevSegments.some(isCalledInSomePath);
+                    info.calledInEveryPaths = prevSegments.every(isCalledInEveryPath);
+
+                    // If flags become true anew, reports the valid nodes.
+                    if (info.calledInSomePaths || isRealLoop) {
+                        var nodes = info.validNodes;
+                        info.validNodes = [];
+
+                        for (var i = 0; i < nodes.length; ++i) {
+                            var node = nodes[i];
+                            context.report({
+                                message: "Unexpected duplicate 'super()'.",
+                                node: node
+                            });
+                        }
+                    }
+                }
+            );
         },
 
         /**
@@ -42029,7 +42386,7 @@ module.exports = function(context) {
             }
 
             // Skip if this is not in a constructor.
-            if (!(funcInfo && funcInfo.scope === context.getScope().variableScope)) {
+            if (!(funcInfo && funcInfo.isConstructor)) {
                 return;
             }
 
@@ -42051,6 +42408,8 @@ module.exports = function(context) {
                         message: "Unexpected duplicate 'super()'.",
                         node: node
                     });
+                } else {
+                    info.validNodes.push(node);
                 }
             } else {
                 // This class does not have a valid `extends` part.
@@ -43929,7 +44288,12 @@ module.exports = function(context) {
                 if (parent.type !== "VariableDeclarator" || parentVarNode === parentVarNode.parent.declarations[0]) {
                     if (parentVarNode.loc.start.line === effectiveParent.loc.start.line) {
                         nodeIndent = nodeIndent + (indentSize * options.VariableDeclarator[parentVarNode.parent.kind]);
-                    } else if (parent.type === "ObjectExpression" || parent.type === "ArrayExpression") {
+                    } else if (
+                        parent.type === "ObjectExpression" ||
+                        parent.type === "ArrayExpression" ||
+                        parent.type === "CallExpression" ||
+                        parent.type === "ArrowFunctionExpression"
+                    ) {
                         nodeIndent = nodeIndent + indentSize;
                     }
                 }
@@ -52265,7 +52629,7 @@ module.exports = function(context) {
 
             var source = context.getSource(),
                 allComments = context.getAllComments(),
-                pattern = /[^\n\r\u2028\u2029 ] {2,}/g,  // note: repeating space
+                pattern = /[^\n\r\u2028\u2029\t ].? {2,}/g,  // note: repeating space
                 token,
                 previousToken,
                 parent;
@@ -54423,7 +54787,6 @@ function isConstructorFunction(node) {
 //------------------------------------------------------------------------------
 
 module.exports = function(context) {
-    // {{hasExtends: boolean, scope: Scope}[]}
     // Information for each constructor.
     // - upper:      Information of the upper constructor.
     // - hasExtends: A flag which shows whether the owner class has a valid
@@ -54432,9 +54795,11 @@ module.exports = function(context) {
     // - codePath:   The code path of this constructor.
     var funcInfo = null;
 
-    // {Map<string, boolean>}
     // Information for each code path segment.
-    // The value is a flag which shows `super()` called in all code paths.
+    // Each key are the ids of code path segments.
+    // Each value are an object:
+    // - superCalled:  The flag which shows `super()` called in all code paths.
+    // - invalidNodes: The array of invalid ThisExpression and Super nodes.
     var segInfoMap = Object.create(null);
 
     /**
@@ -54443,19 +54808,15 @@ module.exports = function(context) {
      * @returns {boolean} `true` if `super()` is called.
      */
     function isCalled(segment) {
-        return Boolean(segInfoMap[segment.id]);
+        return segInfoMap[segment.id].superCalled;
     }
 
     /**
      * Checks whether or not this is in a constructor.
      * @returns {boolean} `true` if this is in a constructor.
      */
-    function isInConstructor() {
-        return Boolean(
-            funcInfo &&
-            funcInfo.hasExtends &&
-            funcInfo.scope === context.getScope().variableScope
-        );
+    function isInConstructorOfDerivedClass() {
+        return Boolean(funcInfo && funcInfo.isConstructor && funcInfo.hasExtends);
     }
 
     /**
@@ -54464,46 +54825,101 @@ module.exports = function(context) {
      */
     function isBeforeCallOfSuper() {
         return (
-            isInConstructor(funcInfo) &&
+            isInConstructorOfDerivedClass(funcInfo) &&
             !funcInfo.codePath.currentSegments.every(isCalled)
         );
     }
 
+    /**
+     * Sets a given node as invalid.
+     * @param {ASTNode} node - A node to set as invalid. This is one of
+     *      a ThisExpression and a Super.
+     * @returns {void}
+     */
+    function setInvalid(node) {
+        var segments = funcInfo.codePath.currentSegments;
+        for (var i = 0; i < segments.length; ++i) {
+            segInfoMap[segments[i].id].invalidNodes.push(node);
+        }
+    }
+
+    /**
+     * Sets the current segment as `super` was called.
+     * @returns {void}
+     */
+    function setSuperCalled() {
+        var segments = funcInfo.codePath.currentSegments;
+        for (var i = 0; i < segments.length; ++i) {
+            segInfoMap[segments[i].id].superCalled = true;
+        }
+    }
+
     return {
         /**
-         * Stacks a constructor information.
+         * Adds information of a constructor into the stack.
          * @param {CodePath} codePath - A code path which was started.
          * @param {ASTNode} node - The current node.
          * @returns {void}
          */
         "onCodePathStart": function(codePath, node) {
-            if (!isConstructorFunction(node)) {
-                return;
+            if (isConstructorFunction(node)) {
+                // Class > ClassBody > MethodDefinition > FunctionExpression
+                var classNode = node.parent.parent.parent;
+                funcInfo = {
+                    upper: funcInfo,
+                    isConstructor: true,
+                    hasExtends: Boolean(
+                        classNode.superClass &&
+                        !astUtils.isNullOrUndefined(classNode.superClass)
+                    ),
+                    codePath: codePath
+                };
+            } else {
+                funcInfo = {
+                    upper: funcInfo,
+                    isConstructor: false,
+                    hasExtends: false,
+                    codePath: codePath
+                };
             }
-
-            // Class > ClassBody > MethodDefinition > FunctionExpression
-            var classNode = node.parent.parent.parent;
-            funcInfo = {
-                upper: funcInfo,
-                hasExtends: Boolean(
-                    classNode.superClass &&
-                    !astUtils.isNullOrUndefined(classNode.superClass)
-                ),
-                scope: context.getScope(),
-                codePath: codePath
-            };
         },
 
         /**
-         * Pops a constructor information.
+         * Removes the top of stack item.
+         *
+         * And this treverses all segments of this code path then reports every
+         * invalid node.
+         *
          * @param {CodePath} codePath - A code path which was ended.
          * @param {ASTNode} node - The current node.
          * @returns {void}
          */
-        "onCodePathEnd": function(codePath, node) {
-            if (isConstructorFunction(node)) {
-                funcInfo = funcInfo.upper;
+        "onCodePathEnd": function(codePath) {
+            var isDerivedClass = funcInfo.hasExtends;
+            funcInfo = funcInfo.upper;
+            if (!isDerivedClass) {
+                return;
             }
+
+            codePath.traverseSegments(function(segment, controller) {
+                var info = segInfoMap[segment.id];
+
+                for (var i = 0; i < info.invalidNodes.length; ++i) {
+                    var invalidNode = info.invalidNodes[i];
+
+                    context.report({
+                        message: "'{{kind}}' is not allowed before 'super()'.",
+                        node: invalidNode,
+                        data: {
+                            kind: invalidNode.type === "Super" ? "super" : "this"
+                        }
+                    });
+                }
+
+                if (info.superCalled) {
+                    controller.skip();
+                }
+            });
         },
 
         /**
@@ -54512,14 +54928,50 @@ module.exports = function(context) {
          * @returns {void}
          */
         "onCodePathSegmentStart": function(segment) {
-            if (!isInConstructor(funcInfo)) {
+            if (!isInConstructorOfDerivedClass(funcInfo)) {
                 return;
             }
 
             // Initialize info.
-            segInfoMap[segment.id] = (
-                segment.prevSegments.length > 0 &&
-                segment.prevSegments.every(isCalled)
+            segInfoMap[segment.id] = {
+                superCalled: (
+                    segment.prevSegments.length > 0 &&
+                    segment.prevSegments.every(isCalled)
+                ),
+                invalidNodes: []
+            };
+        },
+
+        /**
+         * Update information of the code path segment when a code path was
+         * looped.
+         * @param {CodePathSegment} fromSegment - The code path segment of the
+         *      end of a loop.
+         * @param {CodePathSegment} toSegment - A code path segment of the head
+         *      of a loop.
+         * @returns {void}
+         */
+        "onCodePathSegmentLoop": function(fromSegment, toSegment) {
+            if (!isInConstructorOfDerivedClass(funcInfo)) {
+                return;
+            }
+
+            // Update information inside of the loop.
+            funcInfo.codePath.traverseSegments(
+                {first: toSegment, last: fromSegment},
+                function(segment, controller) {
+                    var info = segInfoMap[segment.id];
+                    if (info.superCalled) {
+                        info.invalidNodes = [];
+                        controller.skip();
+                    } else if (
+                        segment.prevSegments.length > 0 &&
+                        segment.prevSegments.every(isCalled)
+                    ) {
+                        info.superCalled = true;
+                        info.invalidNodes = [];
+                    }
+                }
             );
         },
 
@@ -54530,10 +54982,7 @@ module.exports = function(context) {
          */
         "ThisExpression": function(node) {
             if (isBeforeCallOfSuper()) {
-                context.report({
-                    message: "'this' is not allowed before 'super()'.",
-                    node: node
-                });
+                setInvalid(node);
             }
         },
 
@@ -54544,10 +54993,7 @@ module.exports = function(context) {
          */
         "Super": function(node) {
             if (!astUtils.isCallee(node) && isBeforeCallOfSuper()) {
-                context.report({
-                    message: "'super' is not allowed before 'super()'.",
-                    node: node
-                });
+                setInvalid(node);
             }
         },
 
@@ -54558,10 +55004,7 @@ module.exports = function(context) {
          */
         "CallExpression:exit": function(node) {
             if (node.callee.type === "Super" && isBeforeCallOfSuper()) {
-                var segments = funcInfo.codePath.currentSegments;
-                for (var i = 0; i < segments.length; ++i) {
-                    segInfoMap[segments[i].id] = true;
-                }
+                setSuperCalled();
             }
         },
 
@@ -60069,16 +60512,21 @@ module.exports = function(context) {
 
             // Multiple members of an import declaration should also be sorted alphabetically.
             if (!ignoreMemberSort && node.specifiers.length > 1) {
-                node.specifiers.reduce(function(previousSpecifier, currentSpecifier) {
-                    var currentSpecifierName = currentSpecifier.local.name,
-                        previousSpecifierName = previousSpecifier.local.name;
+                var previousSpecifier = null;
+                var previousSpecifierName = null;
 
-                    if (ignoreCase) {
-                        currentSpecifierName = currentSpecifierName.toLowerCase();
-                        previousSpecifierName = previousSpecifierName.toLowerCase();
+                for (var i = 0; i < node.specifiers.length; ++i) {
+                    var currentSpecifier = node.specifiers[i];
+                    if (currentSpecifier.type !== "ImportSpecifier") {
+                        continue;
                     }
 
-                    if (currentSpecifierName < previousSpecifierName) {
+                    var currentSpecifierName = currentSpecifier.local.name;
+                    if (ignoreCase) {
+                        currentSpecifierName = currentSpecifierName.toLowerCase();
+                    }
+
+                    if (previousSpecifier && currentSpecifierName < previousSpecifierName) {
                         context.report({
                             node: currentSpecifier,
                             message: "Member '{{memberName}}' of the import declaration should be sorted alphabetically.",
@@ -60088,8 +60536,9 @@ module.exports = function(context) {
                         });
                     }
 
-                    return currentSpecifier;
-                }, node.specifiers[0]);
+                    previousSpecifier = currentSpecifier;
+                    previousSpecifierName = currentSpecifierName;
+                }
             }
 
             previousDeclaration = node;
