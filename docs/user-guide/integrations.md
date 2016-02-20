@@ -31,6 +31,7 @@ redirect_from: "/docs/integrations/"
 * Rollup: [rollup-plugin-eslint](https://www.npmjs.org/package/rollup-plugin-eslint)
 * Ember-cli: [ember-cli-eslint](https://www.npmjs.com/package/ember-cli-eslint)
 * Sails.js: [sails-hook-eslint](https://www.npmjs.com/package/sails-hook-eslint)
+* Start: [start-eslint](https://www.npmjs.com/package/start-eslint)
 
 ## Command Line Tools
 
