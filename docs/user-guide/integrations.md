@@ -18,7 +18,7 @@ redirect_from: "/docs/integrations/"
 * [TextMate 2](https://github.com/natesilva/javascript-eslint.tmbundle)
 * Atom: [linter-eslint](https://atom.io/packages/linter-eslint)
 * [IntelliJ IDEA, RubyMine, WebStorm, PhpStorm, PyCharm, AppCode, Android Studio, 0xDBE](http://plugins.jetbrains.com/plugin/7494)
-
+* [Visual Studio Code](https://code.visualstudio.com) with the [ESLint Extension](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint)
 
 ## Build Systems
 
