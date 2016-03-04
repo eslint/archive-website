@@ -38,17 +38,30 @@ Once the bot checks have been satisfied, you check the following:
 
 **Note:** If you are a team member and you've left a comment on the pull request, please follow up to verify that your comments have been addressed.
 
+## Who Can Merge a Pull Request
+
+Reviewers and committers may merge pull requests, depending on the contents of the pull request.
+
+Committers may merge a pull request if it is a non-breaking change and is:
+
+1. A documentation change
+1. A bug fix (for either rules or core)
+1. A dependency upgrade
+1. Related to the build system
+
+Reviewers may merge all pull requests, including those that committers may merge.
+
 ## When to Merge a Pull Request
 
-If you are a reviewer, then you can click the "Merge" button on a pull request to merge the changes. Before merging a pull request, verify that:
+We use the "Merge" button to merge requests into the repository. Before merging a pull request, verify that:
 
-1. All comments have been addressed.
-1. Any team members who made comments have verified that their concerns were addressed.
-1. All automated tests are passing (never merge a pull request with failing tests).
-
-Ideally, the first reviewer to comment on the pull request should be the one to merge it. However, if you don't feel comfortable doing so for any reason, just leave a comment saying "LGTM but would like someone else to verify".
+1. All comments have been addressed
+1. Any team members who made comments have verified that their concerns were addressed
+1. All automated tests are passing (never merge a pull request with failing tests)
 
 Be sure to say thank you to the submitter before merging, especially if they put a lot of work into the pull request.
+
+**Note:** You should not merge your own pull request unless you're received feedback from at least one other team member.
 
 ## When to Close a Pull Request
 
