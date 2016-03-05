@@ -3,6 +3,7 @@ title: Rule dot-notation
 layout: doc
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
+
 # Require Dot Notation (dot-notation)
 
 In JavaScript, one can access properties using the dot notation (`foo.bar`) or square-bracket notation (`foo["bar"]`). However, the dot notation is often preferred because it is easier to read, less verbose, and works better with aggressive JavaScript minimizers.

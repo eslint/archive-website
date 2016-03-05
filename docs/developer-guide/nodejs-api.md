@@ -3,6 +3,7 @@ title: Documentation
 layout: doc
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
+
 # Node.js API
 
 While ESLint is designed to be run on the command line, it's possible to use ESLint programmatically through the Node.js API. The purpose of the Node.js API is to allow plugin and tool authors to use the ESLint functionality directly, without going through the command line interface.

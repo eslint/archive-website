@@ -3,6 +3,7 @@ title: Rule no-wrap-func
 layout: doc
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
+
 # Disallow Parens Around Functions (no-wrap-func)
 
 **Replacement notice**: This rule was removed in ESLint v1.0 and replaced by the [no-extra-parens](no-extra-parens) rule, when configured in the `"functions"` mode.

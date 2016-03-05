@@ -3,6 +3,7 @@ title: Rule space-return-throw-case
 layout: doc
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
+
 # Require spaces following `return`, `throw`, and `case` (space-return-throw-case)
 
 **Replacement notice**: This rule was removed in ESLint v2.0 and replaced by [keyword-spacing](keyword-spacing) rule.

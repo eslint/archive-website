@@ -3,6 +3,7 @@ title: Rule no-irregular-whitespace
 layout: doc
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
+
 # No irregular whitespace (no-irregular-whitespace)
 
 Invalid or irregular whitespace causes issues with ECMAScript 5 parsers and also makes code harder to debug in a similar nature to mixed tabs and spaces.
@@ -21,7 +22,7 @@ Known issues these spaces cause:
 
 This rule is aimed at catching invalid whitespace that is not a normal tab and space. Some of these characters may cause issues in modern browsers and others will be a debugging issue to spot.
 
-With this rule enabled the following characters will cause warnings outside of strings:
+With this rule enabled the following characters will cause warnings outside of strings and comments:
 
     \u000B - Line Tabulation (\v) - <VT>
     \u000C - Form Feed (\f) - <FF>
@@ -48,7 +49,7 @@ With this rule enabled the following characters will cause warnings outside of s
     \u205f - Medium Mathematical Space
     \u3000 - Ideographic Space
 
-The following examples are considered problems:
+Examples of **incorrect** code for this rule:
 
 ```js
 /*eslint no-irregular-whitespace: 2*/
@@ -78,7 +79,7 @@ function thing() {
 }
 ```
 
-The following patterns are not considered problems:
+Examples of **correct** code for this rule:
 
 ```js
 /*eslint no-irregular-whitespace: 2*/
@@ -94,6 +95,24 @@ function thing() {
 function thing() {
   return 'th <NBSP>ing';
 }
+
+// Description<NBSP>: some descriptive text
+
+/*
+Description<NBSP>: some descriptive text
+*/
+```
+
+## Options
+
+The `no-irregular-whitespace` rule has no required option and has one optional one that needs to be passed in a single options object:
+
+* **skipComments** *(default: `false`)*: whether to ignore irregular whitespace within comments (`true`) or whether to check for them in there, too (`false`).
+
+For example, to specify that you want to skip checking for irregular whitespace within comments, use the following configuration:
+
+```json
+"no-irregular-whitespace": [2, { "skipComments": true }]
 ```
 
 ## When Not To Use It

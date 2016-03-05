@@ -3,6 +3,7 @@ title: Documentation
 layout: doc
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
+
 # Code Path Analysis Details
 
 | [Objects](#objects) | [Events](#events) | [Usage Examples](#usage-examples) | [Code Path Examples](#code-path-examples) |
@@ -203,7 +204,7 @@ bar();
 ### To check whether or not this is reachable
 
 ```js
-var getLast = require("../ast-utils").getLast;
+var last = require("lodash").last;
 
 function isReachable(segment) {
     return segment.reachable;
@@ -223,7 +224,7 @@ module.exports = function(context) {
 
         // Checks reachable or not.
         "ExpressionStatement": function(node) {
-            var codePath = getLast(codePathStack);
+            var codePath = last(codePathStack);
 
             // Checks the current code path segments.
             if (!codePath.currentSegments.some(isReachable)) {
@@ -247,7 +248,7 @@ So a rule must not modify those instances.
 Please use a map of information instead.
 
 ```js
-var getLast = require("../ast-utils").getLast;
+var last = require("lodash").last;
 
 function hasCb(node, context) {
     if (node.type.indexOf("Function") !== -1) {
@@ -294,7 +295,7 @@ module.exports = function(context) {
         // Manages state of code paths.
         "onCodePathSegmentStart": function(segment) {
             // Ignores if `cb` doesn't exist.
-            if (!getLast(funcInfoStack).hasCb) {
+            if (!last(funcInfoStack).hasCb) {
                 return;
             }
 
@@ -312,7 +313,7 @@ module.exports = function(context) {
 
         // Checks reachable or not.
         "CallExpression": function(node) {
-            var funcInfo = getLast(funcInfoStack);
+            var funcInfo = last(funcInfoStack);
 
             // Ignores if `cb` doesn't exist.
             if (!funcInfo.hasCb) {

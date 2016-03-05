@@ -3,6 +3,7 @@ title: Rule no-space-before-semi
 layout: doc
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
+
 # Disallow Spaces Before Semicolon (no-space-before-semi)
 
 **Replacement notice**: This rule was removed in ESLint v1.0 and replaced by the [semi-spacing](semi-spacing) rule.

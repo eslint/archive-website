@@ -3,6 +3,7 @@ title: Rule space-in-parens
 layout: doc
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
+
 # Disallow or enforce spaces inside of parentheses (space-in-parens)
 
 Some style guides require or disallow spaces inside of parentheses:

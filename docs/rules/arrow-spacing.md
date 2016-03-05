@@ -3,6 +3,7 @@ title: Rule arrow-spacing
 layout: doc
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
+
 # Require space before/after arrow function's arrow (arrow-spacing)
 
 This rule normalize style of spacing before/after an arrow function's arrow(`=>`).

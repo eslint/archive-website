@@ -3,6 +3,7 @@ title: Rule eqeqeq
 layout: doc
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
+
 # Require === and !== (eqeqeq)
 
 It is considered good practice to use the type-safe equality operators `===` and `!==` instead of their regular counterparts `==` and `!=`.

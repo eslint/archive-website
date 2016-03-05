@@ -3,6 +3,7 @@ title: Rule jsx-quotes
 layout: doc
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
+
 # Enforce JSX Quote Style (jsx-quotes)
 
 JSX attribute values can contain string literals, which are delimited with single or double quotes.

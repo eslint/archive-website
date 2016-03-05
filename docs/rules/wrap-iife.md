@@ -3,6 +3,7 @@ title: Rule wrap-iife
 layout: doc
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
+
 # Require IIFEs to be Wrapped (wrap-iife)
 
 Require immediate function invocation to be wrapped in parentheses.

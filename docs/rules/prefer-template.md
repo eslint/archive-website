@@ -3,6 +3,7 @@ title: Rule prefer-template
 layout: doc
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
+
 # Suggest using template literals instead of string concatenation. (prefer-template)
 
 In ES2015 (ES6), we can use template literals instead of string concatenation.

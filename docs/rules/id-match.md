@@ -3,6 +3,7 @@ title: Rule id-match
 layout: doc
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
+
 # Require IDs to match a pattern (id-match)
 
 > "There are only two hard things in Computer Science: cache invalidation and naming things." — Phil Karlton

@@ -3,6 +3,7 @@ title: Rule no-useless-call
 layout: doc
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
+
 # Disallow unnecessary `.call()` and `.apply()`. (no-useless-call)
 
 The function invocation can be written by `Function.prototype.call()` and `Function.prototype.apply()`.

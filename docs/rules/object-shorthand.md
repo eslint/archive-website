@@ -3,6 +3,7 @@ title: Rule object-shorthand
 layout: doc
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
+
 # Require Object Literal Shorthand Syntax (object-shorthand)
 
 EcmaScript 6 provides a concise form for defining object literal methods and properties. This

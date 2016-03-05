@@ -3,16 +3,17 @@ title: Rule no-unexpected-multiline
 layout: doc
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
+
 # Avoid unexpected multiline expressions (no-unexpected-multiline)
 
 Semicolons are optional in JavaScript, via a process called automatic semicolon insertion (ASI). See the documentation for [semi](./semi) for a fuller discussion of that feature.
 
 The rules for ASI are relatively straightforward: In short, as once described by Isaac Schlueter, a `\n` character always ends a statement (just like a semicolon) unless one of the following is true:
 
-1. The statement has an unclosed paren, array literal, or object literal or ends in some other way that is not a valid way to end a statement. (For instance, ending with `.` or `,`.)
-2. The line is `--` or `++` (in which case it will decrement/increment the next token.)
-3. It is a `for()`, `while()`, `do`, `if()`, or `else`, and there is no `{`
-4. The next line starts with `[`, `(`, `+`, `*`, `/`, `-`, `,`, `.`, or some other binary operator that can only be found between two tokens in a single expression.
+* The statement has an unclosed paren, array literal, or object literal or ends in some other way that is not a valid way to end a statement. (For instance, ending with `.` or `,`.)
+* The line is `--` or `++` (in which case it will decrement/increment the next token.)
+* It is a `for()`, `while()`, `do`, `if()`, or `else`, and there is no `{`
+* The next line starts with `[`, `(`, `+`, `*`, `/`, `-`, `,`, `.`, or some other binary operator that can only be found between two tokens in a single expression.
 
 This particular rule aims to spot scenarios where a newline looks like it is ending a statement, but is not.
 
@@ -20,7 +21,7 @@ This particular rule aims to spot scenarios where a newline looks like it is end
 
 This rule is aimed at ensuring that two unrelated consecutive lines are not accidentally interpreted as a single expression.
 
-The following patterns are considered problems:
+Examples of **incorrect** code for this rule:
 
 ```js
 /*eslint no-unexpected-multiline: 2*/
@@ -39,7 +40,7 @@ x
 `hello`
 ```
 
-The following patterns are not considered problems:
+Examples of **correct** code for this rule:
 
 ```js
 /*eslint no-unexpected-multiline: 2*/

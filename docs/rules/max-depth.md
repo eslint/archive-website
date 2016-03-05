@@ -3,6 +3,7 @@ title: Rule max-depth
 layout: doc
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
+
 # Limit Maximum Depth (max-depth)
 
 The `max-depth` rule allows you to specify the maximum depth blocks can be nested.
@@ -29,6 +30,10 @@ The default depth above which this rule will warn is `4`.  You can configure the
 
 ```json
 "max-depth": [2, 10]
+
+// or you can use an object property
+
+"max-depth": [2, {"maximum": 10}]
 ```
 
 The following patterns are considered problems:

@@ -3,6 +3,7 @@ title: Rule no-class-assign
 layout: doc
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
+
 # Disallow modifying variables of class declarations (no-class-assign)
 
 `ClassDeclaration` creates a variable, and we can modify the variable.

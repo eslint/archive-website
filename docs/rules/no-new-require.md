@@ -3,6 +3,7 @@ title: Rule no-new-require
 layout: doc
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
+
 # Disallow new require (no-new-require)
 
 The `require` function is used to include modules that exist in separate files, such as:

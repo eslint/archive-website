@@ -3,6 +3,7 @@ title: Documentation
 layout: doc
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
+
 # Working with Rules
 
 Each ESLint rule has two files: a source file in the `lib/rules` directory and a test file in the `tests/lib/rules` directory. Both files should be named with the rule ID (i.e., `no-eval.js` for rule ID `no-eval`) The basic source code format for a rule is:
@@ -75,7 +76,7 @@ In this code, `"Identifier:exit"` is called on the way up the AST. This capabili
 
 The `context` object contains additional functionality that is helpful for rules to do their jobs. As the name implies, the `context` object contains information that is relevant to the context of the rule. The `context` object has the following properties:
 
-* `ecmaFeatures` - the language feature flags.
+* `parserOptions` - the parser options configured for this run (more details [here](../user-guide/configuring#specifying-parser-options)).
 * `id` - the rule ID.
 * `options` - an array of rule options.
 * `settings` - the `settings` from configuration.
@@ -443,6 +444,45 @@ invalid: [
     }
 ]
 ```
+
+### Specifying Parser Options
+
+Some tests require that a certain parser configuration must be used. This can be specified in test specifications via the `parserOptions` setting.
+
+For example, to set `ecmaVersion` to 6 (in order to use constructs like `for ... of`):
+
+```js
+valid: [
+    {
+        code: "for (x of a) doSomething();",
+        parserOptions: { ecmaVersion: 6 }
+    }
+]
+```
+
+If you are working with ES6 modules:
+
+```js
+valid: [
+    {
+        code: "export default function () {};",
+        parserOptions: { ecmaVersion: 6, sourceType: "module" }
+    }
+]
+```
+
+For non-version specific features such as JSX:
+
+```js
+valid: [
+    {
+        code: "var foo = <div>{bar}</div>",
+        parserOptions: { ecmaFeatures: { jsx: true } }
+    }
+]
+```
+
+The options available and the expected syntax for `parserOptions` is the same as those used in [configuration](../user-guide/configuring#specifying-parser-options).
 
 ### Write Several Tests
 

@@ -3,6 +3,7 @@ title: Rule handle-callback-err
 layout: doc
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
+
 # Enforce Callback Error Handling (handle-callback-err)
 
 In node, a common pattern for dealing with asynchronous behavior is called the callback pattern.

@@ -3,6 +3,7 @@ title: Rule newline-after-var
 layout: doc
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
+
 # Require or disallow an empty newline after variable declarations (newline-after-var)
 
 As of today there is no consistency in separating variable declarations from the rest of the code. Some developers leave an empty line between var statements and the rest of the code like:

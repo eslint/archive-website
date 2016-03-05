@@ -3,6 +3,7 @@ title: Rule space-unary-word-ops
 layout: doc
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
+
 # Require spaces following unary word operators (space-unary-word-ops)
 
 **Replacement notice**: This rule was removed and has been replaced by the [space-unary-ops](space-unary-ops) rule.

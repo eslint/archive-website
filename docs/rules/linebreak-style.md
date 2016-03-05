@@ -3,6 +3,7 @@ title: Rule linebreak-style
 layout: doc
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
+
 # Disallow mixing CRLF and LF linebreaks (linebreak-style)
 
 When developing with a lot of people all having different editors, VCS applications and operating systems it may occur that

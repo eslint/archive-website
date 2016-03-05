@@ -3,6 +3,7 @@ title: Rule keyword-spacing
 layout: doc
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
+
 # Enforce spacing before and after keywords (keyword-spacing)
 
 Keywords are syntax elements of JavaScript, such as `function` and `if`.

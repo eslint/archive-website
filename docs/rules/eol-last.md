@@ -3,6 +3,7 @@ title: Rule eol-last
 layout: doc
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
+
 # Require file to end with single newline (eol-last)
 
 Trailing newlines in non-empty files are a common UNIX idiom. Benefits of

@@ -3,6 +3,7 @@ title: Rule no-div-regex
 layout: doc
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
+
 # Disallow Regexs That Look Like Division (no-div-regex)
 
 Require regex literals to escape division operators.

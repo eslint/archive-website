@@ -3,6 +3,7 @@ title: Rule no-empty-class
 layout: doc
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
+
 # Disallow Empty Character Classes (no-empty-class)
 
 **Replacement notice**: This rule was removed in ESLint v1.0 and replaced by the [no-empty-character-class](no-empty-character-class) rule.

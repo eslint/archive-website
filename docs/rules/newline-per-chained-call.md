@@ -3,6 +3,7 @@ title: Rule newline-per-chained-call
 layout: doc
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
+
 # Newline Per Chained Method Call (newline-per-chained-call)
 
 Chained method calls on a single line without line breaks are harder to read. This rule enforces new line after each method call in the chain to make it more readable and easy to maintain.
@@ -62,7 +63,7 @@ _
   .filter(bar);
 
 // Or
-obj.prop.method().prop
+obj.method().method2().method3();
 ```
 
 Following patterns are not considered problems with default configuration:
@@ -83,10 +84,20 @@ _
   .filter(bar);
 
 // Or
+_.chain({})
+  .map(foo)
+  .filter(bar);
+
+// Or
 obj
   .prop
-  .method()
-  .prop
+  .method().prop;
+
+// Or
+obj
+  .prop.method()
+  .method2()
+  .method3().prop;
 ```
 
 Change the option `ignoreChainWithDepth` value to allow single line chains of that depth.
@@ -115,12 +126,13 @@ Following patterns are considered problems:
 _.chain({}).map(foo).filter(bar);
 
 // Or
-obj.prop.method().prop;
+obj.prop.method().method2().method3();
 
 // Or
 obj
   .prop
-  .method().prop;
+  .method()
+  .method2().method3();
 
 ```
 

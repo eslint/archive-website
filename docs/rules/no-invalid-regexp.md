@@ -3,13 +3,14 @@ title: Rule no-invalid-regexp
 layout: doc
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
+
 # Disallow Invalid Regular Expressions (no-invalid-regexp)
 
 This rule validates string arguments passed to the `RegExp` constructor.
 
 ## Rule Details
 
-The following patterns are considered problems:
+Examples of **incorrect** code for this rule:
 
 ```js
 /*eslint no-invalid-regexp: 2*/
@@ -21,7 +22,7 @@ RegExp('.', 'z')
 new RegExp('\\')
 ```
 
-The following patterns are not considered problems:
+Examples of **correct** code for this rule:
 
 ```js
 /*eslint no-invalid-regexp: 2*/
@@ -33,9 +34,27 @@ new RegExp
 this.RegExp('[')
 ```
 
-## New ECMAScript 6 Flags
+## Environments
 
 ECMAScript 6 adds the "u" ([unicode](https://people.mozilla.org/~jorendorff/es6-draft.html#sec-get-regexp.prototype.unicode)) and "y" ([sticky](https://people.mozilla.org/~jorendorff/es6-draft.html#sec-get-regexp.prototype.sticky)) flags. You can enable these to be recognized as valid by setting the ECMAScript version to 6 in your [ESLint configuration](../user-guide/configuring).
+
+
+## Options
+
+If you want to allow additional constructor flags for any reason, you can specify them using an `allowConstructorFlags` option in `.eslintrc`. These flags will then be ignored by the rule regardless of the `ecmaVersion` setting.
+
+### `allowConstructorFlags`
+
+This takes in an array of flags. With this option, the following patterns aren't considered problems:
+
+```js
+/*eslint no-invalid-regexp: [2, {"allowConstructorFlags": ["u", "y"]}]*/
+
+new RegExp('.', 'y')
+
+new RegExp('.', 'yu')
+```
+
 
 ## Further Reading
 

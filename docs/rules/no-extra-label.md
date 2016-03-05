@@ -3,6 +3,7 @@ title: Rule no-extra-label
 layout: doc
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
+
 # Disallow Unnecessary Labels (no-extra-label)
 
 If a loop contains no nested loops or switches, labeling the loop is unnecessary.
@@ -76,15 +77,15 @@ C: switch (a) {
 }
 ```
 
+## When Not To Use It
+
+If you don't want to be notified about usage of labels, then it's safe to disable this rule.
+
 ## Related Rules
 
 * [no-labels](./no-labels)
 * [no-label-var](./no-label-var)
 * [no-unused-labels](./no-unused-labels)
-
-## When Not To Use It
-
-If you don't want to be notified about usage of labels, then it's safe to disable this rule.
 
 ## Version
 

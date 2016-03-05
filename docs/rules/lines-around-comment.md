@@ -3,6 +3,7 @@ title: Rule lines-around-comment
 layout: doc
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
+
 # Enforce empty lines around comments (lines-around-comment)
 
 Many style guides require empty lines before or after comments. The primary goal

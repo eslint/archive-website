@@ -3,6 +3,7 @@ title: Rule no-sparse-arrays
 layout: doc
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
+
 # Disallow Sparse Arrays (no-sparse-arrays)
 
 Sparse arrays contain empty slots, most frequently due to multiple commas being used in an array literal, such as:
@@ -25,7 +26,7 @@ The confusion around sparse arrays defined in this manner is enough that it's re
 
 This rule aims to eliminate sparse arrays that are defined by extra commas.
 
-The following patterns are considered problems:
+Examples of **incorrect** code for this rule:
 
 ```js
 /*eslint no-sparse-arrays: 2*/
@@ -34,7 +35,7 @@ var items = [,];
 var colors = [ "red",, "blue" ];
 ```
 
-The following patterns are not considered problems:
+Examples of **correct** code for this rule:
 
 ```js
 /*eslint no-sparse-arrays: 2*/

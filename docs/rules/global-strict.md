@@ -3,6 +3,7 @@ title: Rule global-strict
 layout: doc
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
+
 # Global Strict Mode (global-strict)
 
 **Replacement notice**: This rule was removed in ESLint v1.0 and replaced by the [strict](strict) rule. `"global"` mode in the strict rule is most similar to this rule.

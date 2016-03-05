@@ -3,6 +3,7 @@ title: Rule semi-spacing
 layout: doc
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
+
 # Enforce spacing before and after semicolons (semi-spacing)
 
 JavaScript allows you to place unnecessary spaces before or after a semicolon.

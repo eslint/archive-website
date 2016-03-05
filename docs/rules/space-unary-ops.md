@@ -3,6 +3,7 @@ title: Rule space-unary-ops
 layout: doc
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
+
 # Require or disallow spaces before/after unary operators (space-unary-ops)
 
 Some styleguides require or disallow spaces before or after unary operators. This is mainly a stylistic issue, however, some JavaScript expressions can be written without spacing which makes it harder to read and maintain.
@@ -12,19 +13,6 @@ Some styleguides require or disallow spaces before or after unary operators. Thi
 ## Rule Details
 
 This rule enforces consistency regarding the spaces after `words` unary operators and after/before `nonwords` unary operators.
-
-## Options
-
-This rule has two options: `words` and `nonwords`:
-
-* `words` - applies to unary word operators such as: `new`, `delete`, `typeof`, `void`, `yield`
-* `nonwords` - applies to unary operators such as: `-`, `+`, `--`, `++`, `!`, `!!`
-
-Default values are:
-
-```json
-"space-unary-ops": [1, { "words": true, "nonwords": false }]
-```
 
 Examples of unary `words` operators:
 
@@ -55,13 +43,17 @@ baz = !foo;
 qux = !!baz;
 ```
 
-## Examples
+## Options
+
+This rule has two options: `words` and `nonwords`:
+
+* `words` - applies to unary word operators such as: `new`, `delete`, `typeof`, `void`, `yield`
+* `nonwords` - applies to unary operators such as: `-`, `+`, `--`, `++`, `!`, `!!`
 
 Given the default values `words`: `true`, `nonwords`: `false`, the following patterns are considered problems:
 
 ```js
 /*eslint space-unary-ops: 2*/
-/*eslint-env es6*/
 
 typeof!foo;
 
@@ -70,10 +62,6 @@ void{foo:0};
 new[foo][0];
 
 delete(foo.bar);
-
-function *foo() {
-    yield(0)
-}
 
 ++ foo;
 
@@ -84,9 +72,16 @@ foo --;
 + "3";
 ```
 
+```js
+/*eslint space-unary-ops: 2*/
+/*eslint-env es6*/
+
+function *foo() {
+    yield(0)
+}
+```
+
 Given the default values `words`: `true`, `nonwords`: `false`, the following patterns are not considered problems:
-
-
 
 ```js
 /*eslint space-unary-ops: 2*/
@@ -111,6 +106,15 @@ foo--;
 
 // Unary operator "+" is not followed by whitespace.
 +"3";
+```
+
+```js
+/*eslint space-unary-ops: 2*/
+/*eslint-env es6*/
+
+function *foo() {
+    yield (0)
+}
 ```
 
 ## Version

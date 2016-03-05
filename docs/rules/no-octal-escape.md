@@ -3,6 +3,7 @@ title: Rule no-octal-escape
 layout: doc
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
+
 # Disallow Octal Escapes (no-octal-escape)
 
 As of version 5 of the ECMAScript specification, octal escape sequences are a deprecated feature and should not be used. It is recommended that Unicode escapes be used instead.

@@ -3,6 +3,7 @@ title: Rule prefer-arrow-callback
 layout: doc
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
+
 # Suggest using arrow functions as callbacks. (prefer-arrow-callback)
 
 Arrow functions are suited to callbacks, because:

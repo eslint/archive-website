@@ -3,6 +3,7 @@ title: Rule no-unused-labels
 layout: doc
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
+
 # Disallow Unused Labels (no-unused-labels)
 
 Labels that are declared and not used anywhere in the code are most likely an error due to incomplete refactoring.

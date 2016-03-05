@@ -3,6 +3,7 @@ title: Rule no-restricted-syntax
 layout: doc
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
+
 # Disallow certain syntax (no-restricted-syntax)
 
 JavaScript has a lot of language features, and not everyone likes every features. As a result, some projects choose to disallow the use of certain language features altogether. For instance, you might decide to disallow the use of `try-catch` or `class`.

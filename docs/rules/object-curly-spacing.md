@@ -3,6 +3,7 @@ title: Rule object-curly-spacing
 layout: doc
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
+
 # Disallow or enforce spaces inside of curly braces in objects. (object-curly-spacing)
 
 While formatting preferences are very personal, a number of style guides require

@@ -3,6 +3,7 @@ title: Rule no-use-before-define
 layout: doc
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
+
 # Disallow Early Use (no-use-before-define)
 
 In JavaScript, prior to ES6, variable and function declarations are hoisted to the top of a scope, so it's possible to use identifiers before their formal declarations in code. This can be confusing and some believe it is best to always declare variables and functions before using them.
@@ -11,9 +12,9 @@ In ES6, block-level bindings (`let` and `const`) introduce a "temporal dead zone
 
 ## Rule Details
 
-This rule will warn when it encounters a reference to an identifier that has not been yet declared.
+This rule will warn when it encounters a reference to an identifier that has not yet been declared.
 
-The following patterns are considered problems:
+Examples of **incorrect** code for this rule:
 
 ```js
 /*eslint no-use-before-define: 2*/
@@ -37,7 +38,7 @@ var b = 1;
 }
 ```
 
-The following patterns are not considered problems:
+Examples of **correct** code for this rule:
 
 ```js
 /*eslint no-use-before-define: 2*/
@@ -66,7 +67,7 @@ function g() {
 
 ```json
 {
-    "no-use-before-define": [2, {"functions": true, "classes": true}]
+    "no-use-before-define": [2, { "functions": true, "classes": true }]
 }
 ```
 
@@ -84,36 +85,42 @@ function g() {
   Default is `true`.
 
 This rule accepts `"nofunc"` string as a option.
-`"nofunc"` is the same as `{"functions": false, "classes": true}`.
+`"nofunc"` is the same as `{ "functions": false, "classes": true }`.
 
-The following patterns are not considered problems when `"functions": false` is specified:
+### functions
+
+Examples of **correct** code for the `{ "functions": false }` option:
 
 ```js
-/*eslint no-use-before-define: [2, {functions: false}]*/
+/*eslint no-use-before-define: [2, { "functions": false }]*/
 
 f();
 function f() {}
 ```
 
-The following patterns are not considered problems when `"classes": false` is specified:
+### classes
+
+Examples of **incorrect** code for the `{ "classes": false }` option:
 
 ```js
-/*eslint no-use-before-define: [2, {classes: false}]*/
+/*eslint no-use-before-define: [2, { "classes": false }]*/
+/*eslint-env es6*/
+
+new A();
+class A {
+}
+```
+
+Examples of **correct** code for the `{ "classes": false }` option:
+
+```js
+/*eslint no-use-before-define: [2, { "classes": false }]*/
+/*eslint-env es6*/
 
 function foo() {
     return new A();
 }
 
-class A {
-}
-```
-
-The following patterns are considered problems when `"classes": false` is specified:
-
-```js
-/*eslint no-use-before-define: [2, {classes: false}]*/
-
-new A();
 class A {
 }
 ```

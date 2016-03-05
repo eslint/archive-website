@@ -3,6 +3,7 @@ title: Rule complexity
 layout: doc
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
+
 # Limit Cyclomatic Complexity (complexity)
 
 Cyclomatic complexity measures the number of linearly independent paths through a program's source code. This rule allows setting a cyclomatic complexity threshold.
@@ -51,6 +52,18 @@ function a(x) {
         return 4;
     }
 }
+```
+
+Optionally, you may specify a `maximum` object property:
+
+```json
+"complexity": [2, 2]
+```
+
+is equivalent to
+
+```json
+"complexity": [2, {"maximum": 2}]
 ```
 
 ## When Not To Use It

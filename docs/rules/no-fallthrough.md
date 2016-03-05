@@ -3,6 +3,7 @@ title: Rule no-fallthrough
 layout: doc
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
+
 # Disallow Case Statement Fallthrough (no-fallthrough)
 
 The `switch` statement in JavaScript is one of the more error-prone constructs of the language thanks in part to the ability to "fall through" from one `case` to the next. For example:
@@ -17,7 +18,7 @@ switch(foo) {
 }
 ```
 
-In this example, if `foo` is `1`,then execution will flow through both cases, as the first falls through to the second. You can prevent this by using `break`, as in this example:
+In this example, if `foo` is `1`, then execution will flow through both cases, as the first falls through to the second. You can prevent this by using `break`, as in this example:
 
 ```js
 switch(foo) {

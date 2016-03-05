@@ -3,6 +3,7 @@ title: Rule array-bracket-spacing
 layout: doc
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
+
 # Disallow or enforce spaces inside of brackets. (array-bracket-spacing)
 
 A number of style guides require or disallow spaces between array brackets. This rule

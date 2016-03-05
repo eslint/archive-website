@@ -3,6 +3,7 @@ title: Rule space-before-function-parentheses
 layout: doc
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
+
 # Require or disallow spaces before function parentheses (space-before-function-parentheses)
 
 **Replacement notice**: This rule was removed in ESLint v1.0 and has been renamed to [space-before-function-paren](space-before-function-paren) for consistency with other rules' names, which used "parens" instead of "parentheses". The new rule is identical in everything except name.

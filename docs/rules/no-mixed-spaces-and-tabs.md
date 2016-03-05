@@ -3,6 +3,7 @@ title: Rule no-mixed-spaces-and-tabs
 layout: doc
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
+
 # Disallow mixed spaces and tabs for indentation (no-mixed-spaces-and-tabs)
 
 Most code conventions require either tabs or spaces be used for indentation. As such, it's usually an error if a single line of code is indented with both tabs and spaces.

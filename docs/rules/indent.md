@@ -3,6 +3,7 @@ title: Rule indent
 layout: doc
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
+
 # Validate Indentation (indent)
 
 This option validates a specific tab width for your code in block statements.

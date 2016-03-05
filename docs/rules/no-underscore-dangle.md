@@ -3,6 +3,7 @@ title: Rule no-underscore-dangle
 layout: doc
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
+
 # Disallow Dangling Underscores in Identifiers (no-underscore-dangle)
 
 As far as naming conventions for identifiers go, dangling underscores may be the most polarizing in JavaScript. Dangling underscores are underscores at either the beginning or end of an identifier, such as:

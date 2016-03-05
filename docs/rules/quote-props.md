@@ -3,6 +3,7 @@ title: Rule quote-props
 layout: doc
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
+
 # Quoting Style for Property Names (quote-props)
 
 Object literal property names can be defined in two ways: using literals or using strings. For example, these two objects are equivalent:

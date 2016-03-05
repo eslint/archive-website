@@ -3,6 +3,7 @@ title: Rule yield-star-spacing
 layout: doc
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
+
 # Enforce spacing around the `*` in `yield*` expressions (yield-star-spacing)
 
 **Fixable:** This rule is automatically fixable using the `--fix` flag on the command line.

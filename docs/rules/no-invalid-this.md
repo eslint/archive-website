@@ -3,6 +3,7 @@ title: Rule no-invalid-this
 layout: doc
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
+
 # Disallow `this` keywords outside of classes or class-like objects. (no-invalid-this)
 
 Under the strict mode, `this` keywords outside of classes or class-like objects might be `undefined` and raise a `TypeError`.
@@ -32,7 +33,7 @@ And this rule allows `this` keywords in functions below:
 
 Otherwise are considered problems.
 
-### The following patterns are considered problems:
+The following patterns are considered problems:
 
 This rule warns below **only** under the strict mode.
 Please note your code in ES2015 Modules/Classes is always the strict mode.
@@ -85,7 +86,7 @@ foo.forEach(function() {
 });
 ```
 
-### The following patterns are not considered problems:
+The following patterns are not considered problems:
 
 ```js
 /*eslint no-invalid-this: 2*/

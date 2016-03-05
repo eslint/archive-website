@@ -3,6 +3,7 @@ title: Rule strict
 layout: doc
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
+
 # Strict Mode Directives (strict)
 
 A strict mode directive at the beginning of a script or function body enables strict mode semantics:

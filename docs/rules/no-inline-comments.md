@@ -3,6 +3,7 @@ title: Rule no-inline-comments
 layout: doc
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
+
 # Disallows comments after code. Comments must come on their own lines (no-inline-comments)
 
 Some style guides disallow a comments on the same line as code.

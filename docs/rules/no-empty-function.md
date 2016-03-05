@@ -3,6 +3,7 @@ title: Rule no-empty-function
 layout: doc
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
+
 # Disallow empty functions (no-empty-function)
 
 Empty functions can reduce readability because readers need to guess whether it's intentional or not.

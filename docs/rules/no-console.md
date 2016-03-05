@@ -3,6 +3,7 @@ title: Rule no-console
 layout: doc
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
+
 # Disallow Use of console (no-console)
 
 In JavaScript that is designed to be executed in the browser, it's considered a best practice to avoid using methods on `console`. Such messages are considered to be for debugging purposes and therefore not suitable to ship to the client. In general, calls using `console` should be stripped before being pushed to production.
@@ -17,7 +18,7 @@ console.error("That shouldn't have happened.");
 
 This rule is aimed at eliminating unwanted `console` references from your JavaScript. As such, it warns whenever it sees `console` used as an identifier in code.
 
-The following patterns are considered problems:
+Examples of **incorrect** code for this rule:
 
 ```js
 /*eslint no-console: 2*/
@@ -26,13 +27,27 @@ console.log("Hello world!");
 console.error("Something bad happened.");
 ```
 
-The following patterns are not considered problems:
+Examples of **correct** code for this rule:
 
 ```js
 /*eslint no-console: 2*/
 
 // custom console
 Console.log("Hello world!");
+```
+
+## Options
+
+This rule supports the following options:
+
+`allow`: The list of console operations to be used as exceptions to the rule. For example:
+
+```js
+/*eslint no-console: [2, { allow: ["warn", "error"] }] */
+
+console.log("this will be considered a problem");
+console.warn("this will not be considered a problem");
+console.error("this will not be considered a problem");
 ```
 
 ## When Not To Use It

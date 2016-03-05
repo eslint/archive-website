@@ -3,6 +3,7 @@ title: Rule prefer-reflect
 layout: doc
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
+
 # Suggest using Reflect methods where applicable (prefer-reflect)
 
 The ES6 Reflect API comes with a handful of methods which somewhat deprecate methods on old constructors:

@@ -3,6 +3,7 @@ title: Rule template-curly-spacing
 layout: doc
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
+
 # Enforce Usage of Spacing in Template Strings (template-curly-spacing)
 
 We can embed expressions in template strings with using a pair of `${` and `}`.

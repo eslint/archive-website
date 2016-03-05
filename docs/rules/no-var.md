@@ -3,6 +3,7 @@ title: Rule no-var
 layout: doc
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
+
 # require `let` or `const` instead of `var` (no-var)
 
 ECMAScript 6 allows programmers to create variables with block scope instead of function scope using the `let`

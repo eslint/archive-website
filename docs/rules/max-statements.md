@@ -3,6 +3,7 @@ title: Rule max-statements
 layout: doc
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
+
 # Limit Maximum Number of Statements (max-statements)
 
 The `max-statements` rule allows you to specify the maximum number of statements allowed in a function.
@@ -25,6 +26,10 @@ There is an additional optional argument to ignore top level functions.
 
 ```json
 "max-statements": [2, 10, {"ignoreTopLevelFunctions": true}]
+
+// or you can use an object property to set the maximum
+
+"max-statements": [2, {"maximum": 10}, {"ignoreTopLevelFunctions": true}]
 ```
 
 The following patterns are considered problems:

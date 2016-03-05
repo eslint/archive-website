@@ -3,6 +3,7 @@ title: Rule no-self-assign
 layout: doc
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
+
 # Disallow Self Assignment (no-self-assign)
 
 Self assignments have no effect, so probably those are an error due to incomplete refactoring.

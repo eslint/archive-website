@@ -3,6 +3,7 @@ title: Rule constructor-super
 layout: doc
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
+
 # Verify calls of `super()` in constructors (constructor-super)
 
 Constructors of derived classes must call `super()`.

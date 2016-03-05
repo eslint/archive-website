@@ -3,6 +3,7 @@ title: List of available rules
 layout: doc
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
+
 # Rules
 
 Rules in ESLint are divided into several categories to help you better understand their value. All rules are disabled by default. ESLint recommends some rules to catch common problems, and you can use these recommended rules by including `extends: "eslint:recommended"` in your configuration file. The rules that will be enabled when you inherit from `eslint:recommended` are indicated below as "(recommended)". For more information on how to configure rules and use `extends`, please see the [configuration documentation](../user-guide/configuring).
@@ -125,6 +126,7 @@ These rules have to do with variable declarations.
 * [no-catch-shadow](no-catch-shadow) - disallow the catch clause parameter name being the same as a variable in the outer scope
 * [no-delete-var](no-delete-var) - disallow deletion of variables (recommended)
 * [no-label-var](no-label-var) - disallow labels that share a name with a variable
+* [no-restricted-globals](no-restricted-globals) - restrict usage of specified global variables
 * [no-shadow](no-shadow) - disallow declaration of variables already declared in the outer scope
 * [no-shadow-restricted-names](no-shadow-restricted-names) - disallow shadowing of names such as `arguments`
 * [no-undef](no-undef) - disallow use of undeclared variables unless mentioned in a `/*global */` block (recommended)
@@ -180,6 +182,7 @@ These rules are purely matters of style and are quite subjective.
 * [new-cap](new-cap) - require a capital letter for constructors
 * [new-parens](new-parens) - disallow the omission of parentheses when invoking a constructor with no arguments
 * [newline-after-var](newline-after-var) - require or disallow an empty newline after variable declarations
+* [newline-before-return](newline-before-return) - require newline before `return` statement
 * [newline-per-chained-call](newline-per-chained-call) - enforce newline after each call when chaining the calls
 * [no-array-constructor](no-array-constructor) - disallow use of the `Array` constructor
 * [no-bitwise](no-bitwise) - disallow use of bitwise operators

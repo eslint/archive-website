@@ -3,6 +3,7 @@ title: Rule no-extra-semi
 layout: doc
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
+
 # Disallow Extra Semicolons (no-extra-semi)
 
 JavaScript will more or less let you put semicolons after any statement without complaining. Typos and misunderstandings about where semicolons are required can lead to extra semicolons that are unnecessary.
@@ -13,7 +14,7 @@ JavaScript will more or less let you put semicolons after any statement without 
 
 This rule is aimed at eliminating extra unnecessary semicolons. While not technically an error, extra semicolons can be a source of confusion when reading code.
 
-The following patterns are considered problems:
+Examples of **incorrect** code for this rule:
 
 ```js
 /*eslint no-extra-semi: 2*/
@@ -26,7 +27,7 @@ function foo() {
 
 ```
 
-The following patterns are not considered problems:
+Examples of **correct** code for this rule:
 
 ```js
 /*eslint no-extra-semi: 2*/

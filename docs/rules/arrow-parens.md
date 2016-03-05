@@ -3,6 +3,7 @@ title: Rule arrow-parens
 layout: doc
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
+
 # Require parens in arrow function arguments (arrow-parens)
 
 Arrow functions can omit parentheses when they have exactly one parameter. In all other cases the parameter(s) must

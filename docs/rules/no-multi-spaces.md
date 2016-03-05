@@ -3,6 +3,7 @@ title: Rule no-multi-spaces
 layout: doc
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
+
 # Disallow multiple spaces (no-multi-spaces)
 
 Multiple spaces in a row that are not used for indentation are typically mistakes. For example:

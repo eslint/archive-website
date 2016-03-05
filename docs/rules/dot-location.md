@@ -3,6 +3,7 @@ title: Rule dot-location
 layout: doc
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
+
 # Enforce newline before and after dot (dot-location)
 
 JavaScript allows you to place newlines before or after a dot in a member expression.

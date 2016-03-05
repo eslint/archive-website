@@ -3,6 +3,7 @@ title: Rule no-array-constructor
 layout: doc
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
+
 # Disallow creation of dense arrays using the `Array` constructor (no-array-constructor)
 
 Use of the `Array` constructor to construct a new array is generally

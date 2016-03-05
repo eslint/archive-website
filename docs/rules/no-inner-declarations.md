@@ -3,6 +3,7 @@ title: Rule no-inner-declarations
 layout: doc
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
+
 # Declarations in Program or Function Body (no-inner-declarations)
 
 In JavaScript, prior to ES6, a function declaration is only allowed in the first level of a program or the body of another function, though parsers sometimes [erroneously accept them elsewhere](https://code.google.com/p/esprima/issues/detail?id=422). This only applies to function declarations; named or anonymous function expressions can occur anywhere an expression is permitted.
@@ -73,7 +74,9 @@ You can set the option in configuration like this:
 "no-inner-declarations": [2, "both"]
 ```
 
-The following patterns are considered problems:
+### functions
+
+Examples of **incorrect** code for the default `"functions"` option:
 
 ```js
 /*eslint no-inner-declarations: 2*/
@@ -89,27 +92,10 @@ function doSomethingElse() {
 }
 ```
 
-With `"both"` option to check variable declarations, the following are considered problems:
-
-```js
-/*eslint no-inner-declarations: [2, "both"]*/
-
-if (test) {
-    var foo = 42;
-}
-
-function doAnotherThing() {
-    if (test) {
-        var bar = 81;
-    }
-}
-```
-
-The following patterns are considered valid:
+Examples of **correct** code for the default `"functions"` option:
 
 ```js
 /*eslint no-inner-declarations: 2*/
-/*eslint-env es6*/
 
 function doSomething() { }
 
@@ -125,6 +111,31 @@ var fn;
 if (test) {
     fn = function fnExpression() { };
 }
+```
+
+### both
+
+Examples of **incorrect** code for the `"both"` option:
+
+```js
+/*eslint no-inner-declarations: [2, "both"]*/
+
+if (test) {
+    var foo = 42;
+}
+
+function doAnotherThing() {
+    if (test) {
+        var bar = 81;
+    }
+}
+```
+
+Examples of **correct** code for the `"both"` option:
+
+```js
+/*eslint no-inner-declarations: 2*/
+/*eslint-env es6*/
 
 var bar = 42;
 

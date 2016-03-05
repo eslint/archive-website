@@ -3,6 +3,7 @@ title: Rule accessor-pairs
 layout: doc
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
+
 # Enforces getter/setter pairs in objects (accessor-pairs)
 
 It's a common mistake in JavaScript to create an object with just a setter for a property but never have a corresponding getter defined for it. Without a getter, you cannot read the property, so it ends up not being used.

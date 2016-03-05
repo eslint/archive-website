@@ -3,6 +3,7 @@ title: Rule prefer-spread
 layout: doc
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
+
 # Suggest using the spread operator instead of `.apply()`. (prefer-spread)
 
 Before ES2015, one must use `Function.prototype.apply()` to call variadic functions.

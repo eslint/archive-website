@@ -3,6 +3,7 @@ title: Rule require-yield
 layout: doc
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
+
 # Disallow generator functions that do not have `yield` (require-yield)
 
 This rule generates warnings for generator functions that do not have the `yield` keyword.

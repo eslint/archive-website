@@ -3,6 +3,7 @@ title: Rule no-floating-decimal
 layout: doc
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
+
 # Disallow Floating Decimals (no-floating-decimal)
 
 Float values in JavaScript contain a decimal point, and there is no requirement that the decimal point be preceded or followed by a number. For example, the following are all valid JavaScript numbers:
@@ -38,13 +39,13 @@ var num = 0.5;
 var num = 2.0;
 ```
 
-## Compatibility
-
-* **JSHint**: W008
-
 ## When Not To Use It
 
 If you aren't concerned about misinterpreting floating decimal point values, then you can safely turn this rule off.
+
+## Compatibility
+
+* **JSHint**: W008
 
 ## Further Reading
 

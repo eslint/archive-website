@@ -3,6 +3,7 @@ title: Rule func-style
 layout: doc
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
+
 # Enforce Function Style (func-style)
 
 There are two ways of defining functions in JavaScript: function declarations and function expressions. Declarations have the `function` keyword first, followed by a name, followed by its arguments and the function body, such as:
@@ -67,6 +68,32 @@ An additional option object can be added with a property `"allowArrowFunctions"`
 "func-style": [2, "expression", { "allowArrowFunctions": true }]
 ```
 
+The following patterns are considered problems:
+
+```js
+/*eslint func-style: [2, "expression"]*/
+
+function foo() {
+    // ...
+}
+```
+
+The following patterns are not considered problems:
+
+```js
+/*eslint func-style: [2, "expression"]*/
+
+var foo = function() {
+    // ...
+};
+```
+
+```js
+/*eslint func-style: [2, "declaration", { "allowArrowFunctions": true }]*/
+
+var foo = () => {};
+```
+
 ### "declaration"
 
 This reports an error if any function expressions are used where function declarations are expected. You can specify to use expressions instead:
@@ -74,8 +101,6 @@ This reports an error if any function expressions are used where function declar
 ```json
 "func-style": [2, "declaration"]
 ```
-
-## Examples
 
 The following patterns are considered problems:
 
@@ -85,14 +110,6 @@ The following patterns are considered problems:
 var foo = function() {
     // ...
 };
-```
-
-```js
-/*eslint func-style: [2, "expression"]*/
-
-function foo() {
-    // ...
-}
 ```
 
 ```js
@@ -114,20 +131,6 @@ function foo() {
 SomeObject.foo = function() {
     // ...
 };
-```
-
-```js
-/*eslint func-style: [2, "expression"]*/
-
-var foo = function() {
-    // ...
-};
-```
-
-```js
-/*eslint func-style: [2, "declaration", { "allowArrowFunctions": true }]*/
-
-var foo = () => {};
 ```
 
 

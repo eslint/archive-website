@@ -3,6 +3,7 @@ title: Rule array-callback-return
 layout: doc
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
+
 # Enforces return statements in callbacks of array's methods (array-callback-return)
 
 `Array` has several methods for filtering, mapping, and folding.

@@ -3,6 +3,7 @@ title: Rule no-negated-in-lhs
 layout: doc
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
+
 # Disallow negated left operand of `in` operator (no-negated-in-lhs)
 
 ## Rule Details
@@ -31,7 +32,7 @@ if(('' + !a) in b) {
 }
 ```
 
-The following patterns are considered problems:
+Examples of **incorrect** code for this rule:
 
 ```js
 /*eslint no-negated-in-lhs: 2*/
@@ -41,7 +42,7 @@ if(!a in b) {
 }
 ```
 
-The following patterns are not considered problems:
+Examples of **correct** code for this rule:
 
 ```js
 /*eslint no-negated-in-lhs: 2*/

@@ -3,6 +3,7 @@ title: Rule no-unused-expressions
 layout: doc
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
+
 # Disallow Unused Expressions (no-unused-expressions)
 
 Unused expressions are those expressions that evaluate to a value but are never used. For example:

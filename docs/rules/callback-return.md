@@ -3,6 +3,7 @@ title: Rule callback-return
 layout: doc
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
+
 # Enforce Return After Callback (callback-return)
 
 The callback pattern is at the heart of most I/O and event-driven programming
@@ -62,7 +63,7 @@ The rule takes a single option, which is an array of possible callback names.
 callback-return: [2, ["callback", "cb", "next"]]
 ```
 
-## Gotchas
+## Known Limitations
 
 There are several cases of bad behavior that this rule will not catch and even a few cases where
 the rule will warn even though you are handling your callbacks correctly. Most of these issues arise

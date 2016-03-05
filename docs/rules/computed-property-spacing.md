@@ -3,6 +3,7 @@ title: Rule computed-property-spacing
 layout: doc
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
+
 # Disallow or enforce spaces inside of computed properties. (computed-property-spacing)
 
 While formatting preferences are very personal, a number of style guides require

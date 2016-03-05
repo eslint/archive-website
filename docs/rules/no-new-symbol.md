@@ -3,6 +3,7 @@ title: Rule no-new-symbol
 layout: doc
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
+
 # Disallow Symbol Constructor (no-new-symbol)
 
 The `Symbol` constructor is not intended to be used with the `new` operator, but to be called as a function.

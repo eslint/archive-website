@@ -3,6 +3,7 @@ title: Rule prefer-rest-params
 layout: doc
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
+
 # Suggest using the rest parameters instead of `arguments` (prefer-rest-params)
 
 There are rest parameters in ES2015.

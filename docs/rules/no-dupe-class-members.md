@@ -3,6 +3,7 @@ title: Rule no-dupe-class-members
 layout: doc
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
+
 # Disallow duplicate name in class members (no-dupe-class-members)
 
 If there are declarations of the same name in class members, the last declaration overwrites other declarations silently.

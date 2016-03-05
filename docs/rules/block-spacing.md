@@ -3,6 +3,7 @@ title: Rule block-spacing
 layout: doc
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
+
 # Disallow or enforce spaces inside of single line blocks. (block-spacing)
 
 This rule is for spacing style within single line blocks.

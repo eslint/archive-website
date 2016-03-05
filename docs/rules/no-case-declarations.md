@@ -3,6 +3,7 @@ title: Rule no-case-declarations
 layout: doc
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
+
 # Disallow lexical declarations in case/default clauses (no-case-declarations)
 
 This rule disallows lexical declarations (`let`, `const`, `function` and `class`)

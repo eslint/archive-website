@@ -3,6 +3,7 @@ title: Rule comma-spacing
 layout: doc
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
+
 # Enforces spacing around commas (comma-spacing)
 
 **Fixable:** This rule is automatically fixable using the `--fix` flag on the command line.

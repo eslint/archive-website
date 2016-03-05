@@ -3,6 +3,7 @@ title: Documentation
 layout: doc
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
+
 # Migrating to v2.0.0
 
 ESLint v2.0.0 is the second major version release. As a result, there are some significant changes between how ESLint worked during its life in 0.x and 1.x and how it will work going forward. These changes are the direct result of feedback from the ESLint community of users and were not made without due consideration for the upgrade path. We believe that these changes make ESLint even better, and while some work is necessary to upgrade, we hope the pain of this upgrade is small enough that you will see the benefit of upgrading.
@@ -186,7 +187,21 @@ Additionally, if you are using `context.ecmaFeatures` inside of your rules, then
 1. If you're using `context.ecmaFeatures.modules`, rewrite to check that the `sourceType` property of the Program node is `"module"`.
 1. If you're using a non-ES6 feature flag such as `context.ecmaFeatures.jsx`, rewrite to check for `context.parserOptions.ecmaFeatures.jsx`.
 
-If you're not using `ecmaFeatures` in your configuration, then no change is needed.
+If you have a plugin with rules and you are using RuleTester, then you also need to update the options you pass for rules that use `ecmaFeatures`. For example:
+
+```js
+var ruleTester = new RuleTester();
+ruleTester.run("no-var", rule, {
+    valid: [
+        {
+            code: "let x;",
+            parserOptions: { ecmaVersion: 6 }
+        }
+    ]
+});
+```
+
+If you're not using `ecmaFeatures` in your configuration or your custom/plugin rules and tests, then no change is needed.
 
 ## New Rules in `"eslint:recommended"`
 

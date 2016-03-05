@@ -3,6 +3,7 @@ title: Rule no-extra-strict
 layout: doc
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
+
 # Disallow Unnecessary Strict Pragma (no-extra-strict)
 
 **Replacement notice**: This rule was removed in ESLint v1.0 and replaced by the [strict](strict) rule. Both `"global"` and `"function"` mode in the strict rule implement this rule's behavior.

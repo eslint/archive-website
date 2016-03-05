@@ -3,6 +3,7 @@ title: Rule no-restricted-modules
 layout: doc
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
+
 # Disallow Node modules (no-restricted-modules)
 
 Disallowing usage of specific node modules can be useful if you want to control the available methods, a developer can

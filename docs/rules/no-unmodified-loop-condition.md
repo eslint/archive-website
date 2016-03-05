@@ -3,6 +3,7 @@ title: Rule no-unmodified-loop-condition
 layout: doc
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
+
 # Disallow unmodified conditions of loops (no-unmodified-loop-condition)
 
 Variables in a loop condition often are modified in the loop.

@@ -3,6 +3,7 @@ title: Rule no-cond-assign
 layout: doc
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
+
 # Disallow Assignment in Conditional Statements (no-cond-assign)
 
 In conditional statements, it is very easy to mistype a comparison operator (such as `==`) as an assignment operator (such as `=`). For example:
@@ -27,11 +28,11 @@ The rule takes one option, a string, which must contain one of the following val
 * `except-parens` (default): Disallow assignments unless they are enclosed in parentheses.
 * `always`: Disallow all assignments.
 
-### "except-parens"
+### except-parens
 
-This is the default option. It disallows assignments unless they are enclosed in parentheses. This option makes it possible to use common patterns, such as reassigning a value in the condition of a `while` or `do...while` loop, without causing a warning.
+The default `"except-parens"` option disallows assignment expressions unless they are enclosed in parentheses. It allows common patterns, such as reassigning a value in the condition of a `while` or `do...while` loop.
 
-The following patterns are considered problems:
+Examples of **incorrect** code for the default `"except-parens"` option:
 
 ```js
 /*eslint no-cond-assign: 2*/
@@ -51,7 +52,7 @@ function setHeight(someNode) {
 }
 ```
 
-The following patterns are not considered problems:
+Examples of **correct** code for the default `"except-parens"` option:
 
 ```js
 /*eslint no-cond-assign: 2*/
@@ -79,11 +80,11 @@ function setHeight(someNode) {
 }
 ```
 
-### "always"
+### always
 
-This option disallows all assignments in conditional statement tests. All assignments are treated as problems.
+The `"always"` option disallows assignment expressions in the test of a conditional statement.
 
-The following patterns are considered problems:
+Examples of **incorrect** code for the `"always"` option:
 
 ```js
 /*eslint no-cond-assign: [2, "always"]*/
@@ -119,7 +120,7 @@ function setHeight(someNode) {
 }
 ```
 
-The following patterns are not considered problems:
+Examples of **correct** code for the `"always"` option:
 
 ```js
 /*eslint no-cond-assign: [2, "always"]*/
@@ -134,6 +135,10 @@ if (x === 0) {
 ## Further Reading
 
 * [JSLint -- Unexpected assignment expression](http://jslinterrors.com/unexpected-assignment-expression/)
+
+## Related Rules
+
+* [no-extra-parens](no-extra-parens)
 
 ## Version
 

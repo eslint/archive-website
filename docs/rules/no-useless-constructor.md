@@ -3,6 +3,7 @@ title: Rule no-useless-constructor
 layout: doc
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
+
 # Disallow unnecessary constructor (no-useless-constructor)
 
 ES2015 provides a default class constructor if one is not specified. As such, it is unnecessary to provide an empty constructor or one that simply delegates into its parent class, as in the following examples:

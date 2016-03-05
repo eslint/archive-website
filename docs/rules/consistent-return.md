@@ -3,6 +3,7 @@ title: Rule consistent-return
 layout: doc
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
+
 # Require Consistent Returns (consistent-return)
 
 One of the confusing aspects of JavaScript is that any function may or may not return a value at any point in time. When a function exits without any `return` statement executing, the function returns `undefined`. Similarly, calling `return` without specifying any value will cause the function to return `undefined`. Only when `return` is called with a value is there a change in the function's return value.
@@ -25,6 +26,8 @@ Here, one branch of the function returns `true`, a Boolean value, while the othe
 ## Rule Details
 
 This rule is aimed at ensuring all `return` statements either specify a value or don't specify a value.
+
+It excludes constructors which, when invoked with the `new` operator, return the instantiated object if another object is not explicitly returned.  This rule treats a function as a constructor if its name starts with an uppercase letter.
 
 The following patterns are considered problems:
 
@@ -69,6 +72,14 @@ function doSomething(condition) {
     } else {
         return false;
     }
+}
+
+function Foo() {
+    if (!(this instanceof Foo)) {
+        return new Foo();
+    }
+
+    this.a = 0;
 }
 ```
 

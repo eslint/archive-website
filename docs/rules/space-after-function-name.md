@@ -3,6 +3,7 @@ title: Rule space-after-function-name
 layout: doc
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
+
 # Require or disallow spaces following function names (space-after-function-name)
 
 **Replacement notice**: This rule was removed in ESLint v1.0 and replaced by the [space-before-function-paren](space-before-function-paren) rule.

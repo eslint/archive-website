@@ -3,6 +3,7 @@ title: Rule no-implicit-coercion
 layout: doc
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
+
 # Disallow the type conversion with shorter notations. (no-implicit-coercion)
 
 In JavaScript, there are a lot of different ways to convert value types.

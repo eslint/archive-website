@@ -3,6 +3,7 @@ title: Rule id-blacklist
 layout: doc
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
+
 # Blacklist certain identifiers to prevent them being used (id-blacklist)
 
 > "There are only two hard things in Computer Science: cache invalidation and naming things." — Phil Karlton

@@ -3,6 +3,7 @@ title: Rule no-arrow-condition
 layout: doc
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
+
 # Disallow arrow functions where a condition is expected (no-arrow-condition)
 
 **Replacement notice**: This rule was removed in ESLint v2.0 and replaced by a combination of [no-confusing-arrow](no-confusing-arrow) and [no-constant-condition](no-constant-condition) rules.
