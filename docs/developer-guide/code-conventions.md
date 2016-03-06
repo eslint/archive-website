@@ -15,7 +15,7 @@ Each file has this same basic format:
 /**
  * @fileoverview Description of the file
  * @author Your Name
- * @copyright 2015 Your Name. All rights reserved.
+ * @copyright 2016 Your Name. All rights reserved.
  * See LICENSE file in root directory for full license.
  */
 
