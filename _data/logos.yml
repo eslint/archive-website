@@ -117,3 +117,7 @@
 - url: https://www.transloadit.com/
   src: /img/logos/transloadit.png
   name: Transloadit
+
+- url: https://www.paperlesspost.com/
+  src: /img/logos/paperlesspost.png
+  name: Paperless Post
