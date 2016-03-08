@@ -46,11 +46,8 @@ class EslintCustomSearchHelper
     return true if item[:url] == '/docs/user-guide/integrations/index.html'
     return true if item[:url] == '/index.html'
     return true if item[:url] == '/parser/index.html'
-    # Old docs
-    return true if item[:url] =~ %r{^/docs/0.24.1/}
-    return true if item[:url] =~ %r{^/docs/1.0.0/}
-    # Beta docs
-    return true if item[:url] =~ %r{^/docs/2.0.0/}
+    # Only index the latest doc, not the one with a specific version
+    return true if item[:url] =~ %r{^/docs/[0-9]}
     # Redirect pages
     return true if item[:type] == 'redirectpage'
     false
@@ -96,12 +93,16 @@ class EslintCustomSearchHelper
       hierarchy << item[h.to_sym] if item[h.to_sym]
     end
 
+    # Split the main name in rule name and description
     if rule?(item)
-      # Split the main name in rule name and description
-      split = hierarchy.shift.match(/(.*) \((.*)\)$/).captures
-      rule_name = split[1]
-      rule_description = split[0]
-      hierarchy = ['Rules', rule_name, rule_description] + hierarchy
+      full_title = hierarchy.shift
+      # Excluding main page
+      if full_title != 'Rules'
+        split = full_title.match(/(.*) \((.*)\)$/).captures
+        rule_name = split[1]
+        rule_description = split[0]
+        hierarchy = ['Rules', rule_name, rule_description] + hierarchy
+      end
     end
 
     # Find the first three levels of display
@@ -132,6 +133,9 @@ class EslintCustomSearchHelper
 
     # Url is correct for top level element (under h1)
     return initial_item[:url] if closest_heading_type == 'h1'
+    # Also correct if no closest heading
+    return initial_item[:url] if closest_heading_type.nil?
+
     # Otherwise we guess it from the closest heading
     closest_heading_value = initial_item[closest_heading_type.to_sym]
     anchor = anchor(closest_heading_value)
