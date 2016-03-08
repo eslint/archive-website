@@ -31,11 +31,10 @@ Committers:
 
 * Are expected to work on public branches of the source repository and submit pull requests from that branch to the master branch.
 * Are expected to delete their public branches when they are no longer necessary.
-* May submit small changes (documentation updates, changes to tests or code comments, configuration changes) without pull requests.
-* Must submit pull requests for any non-trivial changes.
+* Must submit pull requests for all changes.
 * Have their work reviewed by Reviewers before acceptance into the repository.
-* May label issues as they are submitted ("accepted" label should only be added for bugs, and only if the committer verified the bug as valid).
-* May close issues if they are duplicates of already resolved issues.
+* May label and close issues (see [Managing Issues](issues.html))
+* May merge some pull requests (see [Managing Pull Requests](pullrequests.html))
 
 To become a Committer:
 

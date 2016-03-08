@@ -52,13 +52,15 @@ The steps for triaging an issue are:
 1. Next steps:
   * **Questions:** answer the question and close the issue when the conversation is over.
   * **Bugs:** if you can verify the bug, add the "accepted" label and ask if they would like to submit a pull request.
-  * **New Rules:** if you are willing to champion the rule (meaning you believe it should be included in ESLint core), then add a comment saying you will champion the rule and add an "accepted" label. As the champion, it's your job to guide the rule creation process until it's complete, so only champion a rule that you have time to implement or help another contributor implement it.
+  * **New Rules:** if you are willing to champion the rule (meaning you believe it should be included in ESLint core), then add a comment saying you will champion the issue and add an "accepted" label. As the champion, it's your job to guide the rule creation process until it's complete, so only champion a rule that you have time to implement or help another contributor implement.
+  * **Rule Changes:** if you are willing to champion the change, and the change would not be breaking (requiring a major version increment), then add a comment saying that you will champion the issue and add an "accepted" label. As with new rules, the champion is expected to guide the change through to completion.
+  * **Breaking Changes:** if you suspect or can verify that a change would be breaking, label it as "Breaking".
   * **Duplicates:** if you can verify the issue is a duplicate, add a comment mentioning the duplicate issue (such as, "Duplicate of #1234") and close the issue.
 1. Regardless of the above, always leave a comment. Don't just add labels, engage with the person who opened the issue by asking a question (request more information if necessary) or stating your opinion of the issue. If it's a verified bug, ask if the user would like to submit a pull request.
 
-**Note:** Don't add an "accepted" label to an issue unless it's a bug that you've been able to reproduce and verify (you're sure it's a bug) or a new rule that you're championing. The "accepted" label will be added by a project lead if it's appropriate for the roadmap.
+**Note:** Don't add an "accepted" label to an issue unless it's a bug that you've been able to reproduce and verify (you're sure it's a bug), a new rule that you're championing, or a rule change that you're championing. The "accepted" label will be added to other issues by a project lead if it's appropriate for the roadmap.
 
-## Evaluating Features and Enhancements (Project Leads Only)
+## Evaluating Core Features and Enhancements (Project Leads Only)
 
 If you're a project lead, then you'll need to evaluate incoming requests for inclusion in the formal roadmap. You should label an issue as "accepted" when all of the following are true:
 
