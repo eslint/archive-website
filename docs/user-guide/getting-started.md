@@ -31,22 +31,22 @@ After that, you can run ESLint on any JavaScript file:
 
 **Note:** If you are coming from a version before 1.0.0 please see the [migration guide](http://eslint.org/docs/user-guide/migrating-to-1.0.0).
 
-After running `eslint --init`, you'll have a `.eslintrc` file in your directory. In it, you'll see some rules configured like this:
+After running `eslint --init`, you'll have a `.eslintrc.*` file in your directory. In it, you'll see some rules configured like this:
 
 ```json
 {
     "rules": {
-        "semi": [2, "always"],
-        "quotes": [2, "double"]
+        "semi": ["error", "always"],
+        "quotes": ["error", "double"]
     }
 }
 ```
 
-The names `"semi"` and `"quotes"` are the names of [rules](http://eslint.org/docs/rules) in ESLint. The number is the error level of the rule and can be one of the three values:
+The names `"semi"` and `"quotes"` are the names of [rules](http://eslint.org/docs/rules) in ESLint. The number is the error level of the rule and can be one of the following values:
 
-* `0` - turn the rule off
-* `1` - turn the rule on as a warning (doesn't affect exit code)
-* `2` - turn the rule on as an error (exit code will be 1)
+* `"off"` or `0` - turn the rule off
+* `"warn"` or `1` - turn the rule on as a warning (doesn't affect exit code)
+* `"error"` or `2` - turn the rule on as an error (exit code will be 1)
 
 The three error levels allow you fine-grained control over how ESLint applies rules (for more configuration options and details, see the [configuration docs](http://eslint.org/docs/user-guide/configuring)).
 
@@ -63,6 +63,7 @@ Because of this this line, all of the rules marked "(recommended)" on the [rules
 ## Next Steps
 
 * Learn about [advanced configuration](http://eslint.org/docs/user-guide/configuring) of ESLint.
+* Get familiar with the [command line options](/docs/user-guide/command-line-interface).
 * Explore [ESLint integrations](http://eslint.org/docs/user-guide/integrations) into other tools like editors, build systems, and more.
 * Can't find just the right rule?  Make your own [custom rule](http://eslint.org/docs/developer-guide/working-with-rules).
 * Make ESLint even better by [contributing](http://eslint.org/docs/developer-guide/contributing).
