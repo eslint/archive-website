@@ -43,6 +43,11 @@ function bar() {
 {
     function foo() {}
 }
+
+{
+    aLabel: {
+    }
+}
 ```
 
 The following patterns are not considered problems:
@@ -75,6 +80,9 @@ function bar() {
 
 {
     class Foo {}
+}
+
+aLabel: {
 }
 ```
 

@@ -8,50 +8,32 @@ layout: doc
 
 The `block-scoped-var` rule generates warnings when variables are used outside of the block in which they were defined. This emulates C-style block scope.
 
-```js
-function doSomething() {
-    if (true) {
-        var build = true;
-    }
-
-    console.log(build);
-}
-```
-
 ## Rule Details
 
 This rule aims to reduce the usage of variables outside of their binding context and emulate traditional block scope from other languages. This is to help newcomers to the language avoid difficult bugs with variable hoisting.
 
-The following patterns are considered problems:
+Examples of **incorrect** code for this rule:
 
 ```js
 /*eslint block-scoped-var: 2*/
 
-function doSomething() {
+function doIf() {
     if (true) {
         var build = true;
     }
 
     console.log(build);
 }
-```
 
-```js
-/*eslint block-scoped-var: 2*/
-
-function doSomething() {
+function doIfElse() {
     if (true) {
         var build = true;
     } else {
         var build = false;
     }
 }
-```
 
-```js
-/*eslint block-scoped-var: 2*/
-
-function doAnother() {
+function doTryCatch() {
     try {
         var build = 1;
     } catch (e) {
@@ -60,12 +42,12 @@ function doAnother() {
 }
 ```
 
-The following patterns are not considered problems:
+Examples of **correct** code for this rule:
 
 ```js
 /*eslint block-scoped-var: 2*/
 
-function doSomething() {
+function doIf() {
     var build;
 
     if (true) {
@@ -74,18 +56,25 @@ function doSomething() {
 
     console.log(build);
 }
-```
 
-```js
-/*eslint block-scoped-var: 2*/
-
-function doSomething() {
+function doIfElse() {
     var build;
 
     if (true) {
         build = true;
     } else {
         build = false;
+    }
+}
+
+function doTryCatch() {
+    var build;
+    var f;
+
+    try {
+        build = 1;
+    } catch (e) {
+        f = build;
     }
 }
 ```
