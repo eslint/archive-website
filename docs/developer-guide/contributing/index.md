@@ -21,6 +21,10 @@ Think you found a problem? We'd love to hear about it. This section explains how
 
 We get a lot of proposals for new rules in ESLint. This section explains how we determine which rules are accepted and what information you should provide to help us evaluate your proposal.
 
+## Proposing a [Rule Change](rule-changes)
+
+Want to make a change to an existing rule? This section explains the process and how we evaluate such proposals.
+
 ## Requesting a [Change](changes)
 
 If you'd like to request a change other than a bug fix or new rule, this section explains that process.
