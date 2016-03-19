@@ -27,7 +27,7 @@ The first goal when evaluating an issue is to determine which category the issue
 
 ## When an Issue is Opened
 
-When a issue is opened, the bot will automatically apply the "triage" label. Issues labeled with "triage" are the ones that need to be looked at by team members to determine what to do next.
+When an issue is opened, the bot will automatically apply the "triage" label. Issues labeled with "triage" are the ones that need to be looked at by team members to determine what to do next.
 
 The steps for triaging an issue are:
 
