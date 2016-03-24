@@ -48,12 +48,13 @@ The steps for triaging an issue are:
 1. Once it's clear what type of issue it is, make sure all of the relevant information is provided:
   * **Bugs**: See [bug reporting guidelines](/docs/developer-guide/contributing/reporting-bugs)
   * **New Rules:** See [rule proposal guidelines](/docs/developer-guide/contributing/new-rules)
+  * **Rule Changes:** See [rule change proposal guidelines](/docs/developer-guide/contributing/rule-changes)
   * **Other Changes:** See [change proposal guidelines](http://eslint.org/docs/developer-guide/contributing/changes)
 1. Next steps:
   * **Questions:** answer the question and close the issue when the conversation is over.
   * **Bugs:** if you can verify the bug, add the "accepted" label and ask if they would like to submit a pull request.
-  * **New Rules:** if you are willing to champion the rule (meaning you believe it should be included in ESLint core), then add a comment saying you will champion the issue and add an "accepted" label. As the champion, it's your job to guide the rule creation process until it's complete, so only champion a rule that you have time to implement or help another contributor implement.
-  * **Rule Changes:** if you are willing to champion the change, and the change would not be breaking (requiring a major version increment), then add a comment saying that you will champion the issue and add an "accepted" label. As with new rules, the champion is expected to guide the change through to completion.
+  * **New Rules:** if you are willing to champion the rule (meaning you believe it should be included in ESLint core and you will take ownership of the process for including it), then add a comment saying you will champion the issue. As the champion, it's your job to gain consensus from the ESLint team on inclusion, guide the rule creation process until it's complete, so only champion a rule that you have time to implement or help another contributor implement. Once consensus has been reached on inclusion, add the "accepted" and "help wanted" labels.
+  * **Rule Changes:** if you are willing to champion the change, and the change would not be breaking (requiring a major version increment), then add a comment saying that you will champion the issue. As with new rules, the champion is expected to gain consensus from the ESLint team on inclusion and to guide the change through to completion. Once consensus has been reached on inclusion, add the "accepted" and "help wanted" labels.
   * **Breaking Changes:** if you suspect or can verify that a change would be breaking, label it as "Breaking".
   * **Duplicates:** if you can verify the issue is a duplicate, add a comment mentioning the duplicate issue (such as, "Duplicate of #1234") and close the issue.
 1. Regardless of the above, always leave a comment. Don't just add labels, engage with the person who opened the issue by asking a question (request more information if necessary) or stating your opinion of the issue. If it's a verified bug, ask if the user would like to submit a pull request.
@@ -85,3 +86,7 @@ Any team member may close an issue if any of the following is true:
 1. The request is outside the scope of the project
 
 In general, it's better to close issues sooner rather than later. It gives people better feedback about the issue affects the project roadmap.
+
+## Consensus
+
+Consensus is reached on issues when there are at least three team members who believe the change is a good idea and no one who believes the change is a bad idea. If consensus cannot be reached, then a consensus among reviewers must be achieved where no one believes it is a bad idea. If consensus among reviewers cannot be achieved, the reviewers will vote and majority wins.
