@@ -29,12 +29,12 @@ The rule takes one option, a string, which must contain one of the following val
 * `except-parens` (default): Disallow assignments unless they are enclosed in parentheses.
 * `always`: Disallow all assignments.
 
-### "except-parens"
+### except-parens
 
 This is the default option.
 It disallows assignments unless they are enclosed in parentheses.
 
-The following patterns are considered problems:
+Examples of **incorrect** code for the default `"except-parens"` option:
 
 ```js
 /*eslint no-return-assign: 2*/
@@ -48,7 +48,7 @@ function doSomething() {
 }
 ```
 
-The following patterns are not considered problems:
+Examples of **correct** code for the default `"except-parens"` option:
 
 ```js
 /*eslint no-return-assign: 2*/
@@ -66,12 +66,12 @@ function doSomething() {
 }
 ```
 
-### "always"
+### always
 
 This option disallows all assignments in `return` statements.
 All assignments are treated as problems.
 
-The following patterns are considered problems:
+Examples of **incorrect** code for the `"always"` option:
 
 ```js
 /*eslint no-return-assign: [2, "always"]*/
@@ -89,7 +89,7 @@ function doSomething() {
 }
 ```
 
-The following patterns are not considered problems:
+Examples of **correct** code for the `"always"` option:
 
 ```js
 /*eslint no-return-assign: [2, "always"]*/

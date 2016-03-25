@@ -45,7 +45,7 @@ For these reasons, it's considered a best practice to avoid using primitive wrap
 
 This rule aims to eliminate the use of `String`, `Number`, and `Boolean` with the `new` operator. As such, it warns whenever it sees `new String`, `new Number`, or `new Boolean`.
 
-The following patterns are considered problems:
+Examples of **incorrect** code for this rule:
 
 ```js
 /*eslint no-new-wrappers: 2*/
@@ -59,7 +59,7 @@ var numberObject = new Number;
 var booleanObject = new Boolean;
 ```
 
-The following patterns are not considered problems:
+Examples of **correct** code for this rule:
 
 ```js
 /*eslint no-new-wrappers: 2*/
