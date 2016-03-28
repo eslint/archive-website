@@ -15,7 +15,7 @@ This rule aims to prevent unintended behavior caused by overwriting function par
 Examples of **incorrect** code for this rule:
 
 ```js
-/*eslint no-param-reassign: 2*/
+/*eslint no-param-reassign: "error"*/
 
 function foo(bar) {
     bar = 13;
@@ -29,7 +29,7 @@ function foo(bar) {
 Examples of **correct** code for this rule:
 
 ```js
-/*eslint no-param-reassign: 2*/
+/*eslint no-param-reassign: "error"*/
 
 function foo(bar) {
     var baz = bar;
@@ -45,7 +45,7 @@ This rule takes one option, an object, with a property `"props"`. It is `false` 
 Examples of **correct** code for the default `{ "props": false }` option:
 
 ```js
-/*eslint no-param-reassign: [2, { "props": false }]*/
+/*eslint no-param-reassign: ["error", { "props": false }]*/
 
 function foo(bar) {
     bar.prop = "value";
@@ -63,7 +63,7 @@ function foo(bar) {
 Examples of **incorrect** code for the `{ "props": true }` option:
 
 ```js
-/*eslint no-param-reassign: [2, { "props": true }]*/
+/*eslint no-param-reassign: ["error", { "props": true }]*/
 
 function foo(bar) {
     bar.prop = "value";

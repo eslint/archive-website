@@ -46,7 +46,7 @@ There are four behaviors for this rule: `"always"` (default), `"as-needed"`, `"c
 
 ```json
 {
-    "quote-props": [2, "as-needed"]
+    "quote-props": ["error", "as-needed"]
 }
 ```
 
@@ -85,7 +85,7 @@ var object = {
 When configured with `"always"` as the first option (the default), quoting for all properties will be enforced. The following patterns are considered problems:
 
 ```js
-/*eslint quote-props: [2, "always"]*/
+/*eslint quote-props: ["error", "always"]*/
 
 var object = {
     foo: "bar",
@@ -97,7 +97,7 @@ var object = {
 The following patterns are not considered problems:
 
 ```js
-/*eslint quote-props: [2, "always"]*/
+/*eslint quote-props: ["error", "always"]*/
 /*eslint-env es6*/
 
 var object1 = {
@@ -124,7 +124,7 @@ var object3 = {
 When configured with `"as-needed"` as the first option, quotes will be enforced when they are strictly required, and unnecessary quotes will cause warnings. The following patterns are considered problems:
 
 ```js
-/*eslint quote-props: [2, "as-needed"]*/
+/*eslint quote-props: ["error", "as-needed"]*/
 
 var object = {
     "a": 0,
@@ -137,7 +137,7 @@ var object = {
 The following patterns are not considered problems:
 
 ```js
-/*eslint quote-props: [2, "as-needed"]*/
+/*eslint quote-props: ["error", "as-needed"]*/
 /*eslint-env es6*/
 
 var object1 = {
@@ -165,14 +165,14 @@ When the `"as-needed"` mode is selected, an additional `keywords` option can be 
 
 ```json
 {
-    "quote-props": [2, "as-needed", { "keywords": true }]
+    "quote-props": ["error", "as-needed", { "keywords": true }]
 }
 ```
 
 When `keywords` is set to `true`, the following patterns become problems:
 
 ```js
-/*eslint quote-props: [2, "as-needed", { "keywords": true }]*/
+/*eslint quote-props: ["error", "as-needed", { "keywords": true }]*/
 
 var x = {
     while: 1,
@@ -184,14 +184,14 @@ Another modifier for this rule is the `unnecessary` option which defaults to `tr
 
 ```json
 {
-    "quote-props": [2, "as-needed", { "keywords": true, "unnecessary": false }]
+    "quote-props": ["error", "as-needed", { "keywords": true, "unnecessary": false }]
 }
 ```
 
 When `unnecessary` is set to `false`, the following patterns _stop_ being problems:
 
 ```js
-/*eslint quote-props: [2, "as-needed", { "keywords": true, "unnecessary": false }]*/
+/*eslint quote-props: ["error", "as-needed", { "keywords": true, "unnecessary": false }]*/
 
 var x = {
     "while": 1,
@@ -203,14 +203,14 @@ A `numbers` flag, with default value `false`, can also be used as a modifier for
 
 ```json
 {
-    "quote-props": [2, "as-needed", {"numbers": true}]
+    "quote-props": ["error", "as-needed", {"numbers": true}]
 }
 ```
 
 When `numbers` is set to `true`, the following patterns become problems:
 
 ```js
-/*eslint quote-props: [2, "as-needed", { "numbers": true }]*/
+/*eslint quote-props: ["error", "as-needed", { "numbers": true }]*/
 
 var x = {
     100: 1
@@ -230,7 +230,7 @@ var x = {
 When configured with `"consistent"`, the patterns below are considered problems. Basically `"consistent"` means all or no properties are expected to be quoted, in other words quoting style can't be mixed within an object. Please note the latter situation (no quotation at all) isn't always possible as some property names require quoting.
 
 ```js
-/*eslint quote-props: [2, "consistent"]*/
+/*eslint quote-props: ["error", "consistent"]*/
 
 var object1 = {
     foo: "bar",
@@ -247,7 +247,7 @@ var object2 = {
 The following patterns are not considered problems:
 
 ```js
-/*eslint quote-props: [2, "consistent"]*/
+/*eslint quote-props: ["error", "consistent"]*/
 
 var object1 = {
     "foo": "bar",
@@ -271,7 +271,7 @@ var object3 = {
 When configured with `"consistent-as-needed"`, the behavior is similar to `"consistent"` with one difference. Namely, properties' quoting should be consistent (as in `"consistent"`) but whenever all quotes are redundant a warning is raised. In other words if at least one property name has to be quoted (like `qux-lorem`) then all property names must be quoted, otherwise no properties can be quoted. The following patterns are considered problems:
 
 ```js
-/*eslint quote-props: [2, "consistent-as-needed"]*/
+/*eslint quote-props: ["error", "consistent-as-needed"]*/
 
 var object1 = {
     foo: "bar",
@@ -288,7 +288,7 @@ var object2 = {
 The following patterns are not considered problems:
 
 ```js
-/*eslint quote-props: [2, "consistent-as-needed"]*/
+/*eslint quote-props: ["error", "consistent-as-needed"]*/
 
 var object1 = {
     "foo": "bar",
@@ -306,14 +306,14 @@ When the `"consistent-as-needed"` mode is selected, an additional `keywords` opt
 
 ```json
 {
-    "quote-props": [2, "consistent-as-needed", { "keywords": true }]
+    "quote-props": ["error", "consistent-as-needed", { "keywords": true }]
 }
 ```
 
 When `keywords` is set to `true`, the following patterns are considered problems:
 
 ```js
-/*eslint quote-props: [2, "consistent-as-needed", { "keywords": true }]*/
+/*eslint quote-props: ["error", "consistent-as-needed", { "keywords": true }]*/
 
 var x = {
     while: 1,

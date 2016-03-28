@@ -19,7 +19,7 @@ This rule is aimed to flag invalid/missing `super()` calls.
 The following patterns are considered problems:
 
 ```js
-/*eslint constructor-super: 2*/
+/*eslint constructor-super: "error"*/
 /*eslint-env es6*/
 
 class A {
@@ -42,7 +42,7 @@ class A extends B {
 The following patterns are not considered problems:
 
 ```js
-/*eslint constructor-super: 2*/
+/*eslint constructor-super: "error"*/
 /*eslint-env es6*/
 
 class A {

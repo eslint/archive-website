@@ -21,7 +21,7 @@ This rule takes a list of strings where strings denote the node types:
 ```json
 {
     "rules": {
-        "no-restricted-syntax": [2, "FunctionExpression", "WithStatement"]
+        "no-restricted-syntax": ["error", "FunctionExpression", "WithStatement"]
     }
 }
 ```
@@ -29,7 +29,7 @@ This rule takes a list of strings where strings denote the node types:
 The following patterns are considered problems:
 
 ```js
-/* eslint no-restricted-syntax: [2, "FunctionExpression", "WithStatement"] */
+/* eslint no-restricted-syntax: ["error", "FunctionExpression", "WithStatement"] */
 
 with (me) {
     dontMess();
@@ -41,7 +41,7 @@ var doSomething = function () {};
 The following patterns are not considered problems:
 
 ```js
-/* eslint no-restricted-syntax: [2, "FunctionExpression", "WithStatement"] */
+/* eslint no-restricted-syntax: ["error", "FunctionExpression", "WithStatement"] */
 
 me.dontMess();
 

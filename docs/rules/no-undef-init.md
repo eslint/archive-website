@@ -30,7 +30,7 @@ This rule aims to eliminate variable declarations that initialize to `undefined`
 Examples of **incorrect** code for this rule:
 
 ```js
-/*eslint no-undef-init: 2*/
+/*eslint no-undef-init: "error"*/
 /*eslint-env es6*/
 
 var foo = undefined;
@@ -40,7 +40,7 @@ let bar = undefined;
 Examples of **correct** code for this rule:
 
 ```js
-/*eslint no-undef-init: 2*/
+/*eslint no-undef-init: "error"*/
 /*eslint-env es6*/
 
 var foo;
@@ -102,7 +102,7 @@ If you're using such an initialization inside of a loop, then you should disable
 Example of **correct** code for this rule, because it is disabled on a specific line:
 
 ```js
-/*eslint no-undef-init: 2*/
+/*eslint no-undef-init: "error"*/
 
 for (i = 0; i < 10; i++) {
     var x = undefined; // eslint-disable-line no-undef-init

@@ -32,7 +32,7 @@ It excludes constructors which, when invoked with the `new` operator, return the
 Examples of **incorrect** code for this rule:
 
 ```js
-/*eslint consistent-return: 2*/
+/*eslint consistent-return: "error"*/
 
 function doSomething(condition) {
 
@@ -63,7 +63,7 @@ function doSomething(condition) {
 Examples of **correct** code for this rule:
 
 ```js
-/*eslint consistent-return: 2*/
+/*eslint consistent-return: "error"*/
 
 function doSomething(condition) {
 

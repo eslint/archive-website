@@ -70,7 +70,7 @@ In this case, spacing will be disallowed after a `new` operator and required bef
 Given the default values `words`: `true`, `nonwords`: `false`, the following patterns are considered problems:
 
 ```js
-/*eslint space-unary-ops: 2*/
+/*eslint space-unary-ops: "error"*/
 
 typeof!foo;
 
@@ -90,7 +90,7 @@ foo --;
 ```
 
 ```js
-/*eslint space-unary-ops: 2*/
+/*eslint space-unary-ops: "error"*/
 /*eslint-env es6*/
 
 function *foo() {
@@ -101,7 +101,7 @@ function *foo() {
 Given the default values `words`: `true`, `nonwords`: `false`, the following patterns are not considered problems:
 
 ```js
-/*eslint space-unary-ops: 2*/
+/*eslint space-unary-ops: "error"*/
 
 // Word unary operator "delete" is followed by a whitespace.
 delete foo.bar;
@@ -126,7 +126,7 @@ foo--;
 ```
 
 ```js
-/*eslint space-unary-ops: 2*/
+/*eslint space-unary-ops: "error"*/
 /*eslint-env es6*/
 
 function *foo() {

@@ -19,7 +19,7 @@ This rule is aimed at helping to distinguish regular functions from constructor 
 The following patterns are considered problems:
 
 ```js
-/*eslint new-cap: 2*/
+/*eslint new-cap: "error"*/
 
 var friend = new person();
 var colleague = Person();
@@ -28,14 +28,14 @@ var colleague = Person();
 The following patterns are not considered problems:
 
 ```js
-/*eslint new-cap: 2*/
+/*eslint new-cap: "error"*/
 
 var friend = new Person();
 var colleague = person();
 ```
 
 ```js
-/*eslint new-cap: [2, {"capIsNewExceptions": ["Person"]}]*/
+/*eslint new-cap: ["error", {"capIsNewExceptions": ["Person"]}]*/
 
 var colleague = Person();
 var colleague = foo.Person();
@@ -43,7 +43,7 @@ var colleague = foo.bar.Person();
 ```
 
 ```js
-/*eslint new-cap: [2, {"capIsNewExceptions": ["foo.Person"]}]*/
+/*eslint new-cap: ["error", {"capIsNewExceptions": ["foo.Person"]}]*/
 
 var colleague = foo.Person();
 ```

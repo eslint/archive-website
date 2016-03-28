@@ -32,7 +32,7 @@ If you want to enforce padding within switches and classes, a configuration obje
 The following patterns are considered problems when set to `"always"`:
 
 ```js
-/*eslint padded-blocks: [2, "always"]*/
+/*eslint padded-blocks: ["error", "always"]*/
 
 if (a) {
     b();
@@ -65,7 +65,7 @@ if (a) {
 The following patterns are not considered problems when set to `"always"`:
 
 ```js
-/*eslint padded-blocks: [2, "always"]*/
+/*eslint padded-blocks: ["error", "always"]*/
 
 if (a) {
 
@@ -91,7 +91,7 @@ if (a) {
 The following patterns are considered problems when set to `"never"`:
 
 ```js
-/*eslint padded-blocks: [2, "never"]*/
+/*eslint padded-blocks: ["error", "never"]*/
 
 if (a) {
 
@@ -120,7 +120,7 @@ if (a) {
 The following patterns are not considered problems when set to `"never"`:
 
 ```js
-/*eslint padded-blocks: [2, "never"]*/
+/*eslint padded-blocks: ["error", "never"]*/
 
 if (a) {
     b();
@@ -135,7 +135,7 @@ if (a)
 The following patterns are considered problems when configured `{ "switches": "always" }`:
 
 ```js
-/*eslint padded-blocks: [2, { "switches": "always" }]*/
+/*eslint padded-blocks: ["error", { "switches": "always" }]*/
 
 switch (a) {
     case 0: foo();
@@ -145,7 +145,7 @@ switch (a) {
 The following patterns are not considered problems when configured `{ "switches": "always" }`:
 
 ```js
-/*eslint padded-blocks: [2, { "switches": "always" }]*/
+/*eslint padded-blocks: ["error", { "switches": "always" }]*/
 
 switch (a) {
 
@@ -161,7 +161,7 @@ if (a) {
 The following patterns are considered problems when configured `{ "switches": "never" }`:
 
 ```js
-/*eslint padded-blocks: [2, { "switches": "never" }]*/
+/*eslint padded-blocks: ["error", { "switches": "never" }]*/
 
 switch (a) {
 
@@ -173,7 +173,7 @@ switch (a) {
 The following patterns are not considered problems when configured `{ "switches": "never" }`:
 
 ```js
-/*eslint padded-blocks: [2, { "switches": "never" }]*/
+/*eslint padded-blocks: ["error", { "switches": "never" }]*/
 
 switch (a) {
     case 0: foo();
@@ -189,7 +189,7 @@ if (a) {
 The following patterns are considered problems when configured `{ "classes": "always" }`:
 
 ```js
-/*eslint padded-blocks: [2, { "classes": "always" }]*/
+/*eslint padded-blocks: ["error", { "classes": "always" }]*/
 
 class  A {
     constructor(){
@@ -200,7 +200,7 @@ class  A {
 The following patterns are not considered problems when configured `{ "classes": "always" }`:
 
 ```js
-/*eslint padded-blocks: [2, { "classes": "always" }]*/
+/*eslint padded-blocks: ["error", { "classes": "always" }]*/
 
 class  A {
 
@@ -213,7 +213,7 @@ class  A {
 The following patterns are considered problems when configured `{ "classes": "never" }`:
 
 ```js
-/*eslint padded-blocks: [2, { "classes": "never" }]*/
+/*eslint padded-blocks: ["error", { "classes": "never" }]*/
 
 class  A {
 
@@ -226,7 +226,7 @@ class  A {
 The following patterns are not considered problems when configured `{ "classes": "never" }`:
 
 ```js
-/*eslint padded-blocks: [2, { "classes": "never" }]*/
+/*eslint padded-blocks: ["error", { "classes": "never" }]*/
 
 class  A {
     constructor(){

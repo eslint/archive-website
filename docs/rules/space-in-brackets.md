@@ -34,7 +34,7 @@ There are two options for this rule:
 Depending on your coding conventions, you can choose either option by specifying it in your configuration:
 
 ```json
-"space-in-brackets": [2, "always"]
+"space-in-brackets": ["error", "always"]
 ```
 
 ### "never"
@@ -64,7 +64,7 @@ var obj = {baz: { 'foo': 'qux' }, bar};
 The following patterns are not considered problems:
 
 ```js
-// When options are [2, "never"]
+// When options are ["error", "never"]
 
 foo['bar'];
 foo[
@@ -171,7 +171,7 @@ You can add exceptions like so:
 In case of `"always"` option, set an exception to `false` to enable it:
 
 ```json
-"space-in-brackets": [2, "always", {
+"space-in-brackets": ["error", "always", {
   "singleValue": false,
   "objectsInArrays": false,
   "arraysInArrays": false,
@@ -184,7 +184,7 @@ In case of `"always"` option, set an exception to `false` to enable it:
 In case of `"never"` option, set an exception to `true` to enable it:
 
 ```json
-"space-in-brackets": [2, "never", {
+"space-in-brackets": ["error", "never", {
   "singleValue": true,
   "objectsInArrays": true,
   "arraysInArrays": true,

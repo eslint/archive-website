@@ -25,7 +25,7 @@ This rule aims to eliminate the use of dangling underscores in identifiers.
 ### `allow`
 
 ```json
-"no-underscore-dangle": [2, { "allow": [] }]
+"no-underscore-dangle": ["error", { "allow": [] }]
 ```
 
 Array of variable names that are permitted to be used with underscore. If provided, it must be an `Array`.
@@ -33,7 +33,7 @@ Array of variable names that are permitted to be used with underscore. If provid
 ### `allowAfterThis`
 
 ```json
-"no-underscore-dangle": [2, { "allowAfterThis": true }]
+"no-underscore-dangle": ["error", { "allowAfterThis": true }]
 ```
 
 This option allows usage of dangled variables as members of `this`.
@@ -41,7 +41,7 @@ This option allows usage of dangled variables as members of `this`.
 The following patterns are considered problems:
 
 ```js
-/*eslint no-underscore-dangle: 2*/
+/*eslint no-underscore-dangle: "error"*/
 
 var foo_;
 var __proto__ = {};
@@ -51,7 +51,7 @@ foo._bar();
 The following patterns are not considered problems:
 
 ```js
-/*eslint no-underscore-dangle: 2*/
+/*eslint no-underscore-dangle: "error"*/
 
 var _ = require('underscore');
 var obj = _.contains(items, item);
@@ -61,14 +61,14 @@ var file = __filename;
 
 
 ```js
-/*eslint no-underscore-dangle: [2, { "allow": ["foo_", "_bar"] }]*/
+/*eslint no-underscore-dangle: ["error", { "allow": ["foo_", "_bar"] }]*/
 
 var foo_;
 foo._bar();
 ```
 
 ```js
-/*eslint no-underscore-dangle: [2, { "allowAfterThis": true }]*/
+/*eslint no-underscore-dangle: ["error", { "allowAfterThis": true }]*/
 
 var a = this.foo_;
 this._bar();

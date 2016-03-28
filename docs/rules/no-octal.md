@@ -23,7 +23,7 @@ The rule is aimed at preventing the use of a deprecated JavaScript feature, the 
 Examples of **incorrect** code for this rule:
 
 ```js
-/*eslint no-octal: 2*/
+/*eslint no-octal: "error"*/
 
 var num = 071;
 var result = 5 + 07;
@@ -32,7 +32,7 @@ var result = 5 + 07;
 Examples of **correct** code for this rule:
 
 ```js
-/*eslint no-octal: 2*/
+/*eslint no-octal: "error"*/
 
 var num  = "071";
 ```

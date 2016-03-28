@@ -25,7 +25,7 @@ This rule is aimed to flag usage of `+` operators with strings.
 The following patterns are considered problems:
 
 ```js
-/*eslint prefer-template: 2*/
+/*eslint prefer-template: "error"*/
 
 var str = "Hello, " + name + "!";
 var str = "Time: " + (12 * 60 * 60 * 1000);
@@ -34,7 +34,7 @@ var str = "Time: " + (12 * 60 * 60 * 1000);
 The following patterns are not considered problems:
 
 ```js
-/*eslint prefer-template: 2*/
+/*eslint prefer-template: "error"*/
 /*eslint-env es6*/
 
 var str = "Hello World!";

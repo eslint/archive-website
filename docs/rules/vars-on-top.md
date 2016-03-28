@@ -18,7 +18,7 @@ Allowing multiple declarations helps promote maintainability and is thus allowed
 Examples of **incorrect** code for this rule:
 
 ```js
-/*eslint vars-on-top: 2*/
+/*eslint vars-on-top: "error"*/
 
 // Variable declarations in a block:
 function doSomething() {
@@ -36,7 +36,7 @@ function doSomething() {
 ```
 
 ```js
-/*eslint vars-on-top: 2*/
+/*eslint vars-on-top: "error"*/
 
 // Variables after other statements:
 f();
@@ -46,7 +46,7 @@ var a;
 Examples of **correct** code for this rule:
 
 ```js
-/*eslint vars-on-top: 2*/
+/*eslint vars-on-top: "error"*/
 
 function doSomething() {
     var first;
@@ -63,14 +63,14 @@ function doSomething() {
 ```
 
 ```js
-/*eslint vars-on-top: 2*/
+/*eslint vars-on-top: "error"*/
 
 var a;
 f();
 ```
 
 ```js
-/*eslint vars-on-top: 2*/
+/*eslint vars-on-top: "error"*/
 
 // Directives may precede variable declarations.
 "use strict";

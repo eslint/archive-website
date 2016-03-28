@@ -51,7 +51,7 @@ Each of the following properties would warn:
 
 
 ```js
-/*eslint object-shorthand: 2*/
+/*eslint object-shorthand: "error"*/
 /*eslint-env es6*/
 
 var foo = {
@@ -64,7 +64,7 @@ var foo = {
 In that case the expected syntax would have been:
 
 ```js
-/*eslint object-shorthand: 2*/
+/*eslint object-shorthand: "error"*/
 /*eslint-env es6*/
 
 var foo = {
@@ -78,7 +78,7 @@ This rule does not flag arrow functions inside of object literals.
 The following will *not* warn:
 
 ```js
-/*eslint object-shorthand: 2*/
+/*eslint object-shorthand: "error"*/
 /*eslint-env es6*/
 
 var foo = {
@@ -100,7 +100,7 @@ You can set the option in configuration like this:
 
 ```json
 {
-    "object-shorthand": [2, "always"]
+    "object-shorthand": ["error", "always"]
 }
 ```
 
@@ -108,14 +108,14 @@ While set to `"always"` or `"methods"`, constructor functions can be ignored wit
 
 ```json
 {
-    "object-shorthand": [2, "always", { "ignoreConstructors": true }]
+    "object-shorthand": ["error", "always", { "ignoreConstructors": true }]
 }
 ```
 
 The following will *not* warn when `"ignoreConstructors"` is enabled:
 
 ```js
-/*eslint object-shorthand: [2, "always", { "ignoreConstructors": true }]*/
+/*eslint object-shorthand: ["error", "always", { "ignoreConstructors": true }]*/
 /*eslint-env es6*/
 
 var foo = {

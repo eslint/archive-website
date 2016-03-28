@@ -33,7 +33,7 @@ This rule needs a a set of identifier names to blacklist, like so:
 ```json
 {
     "rules": {
-        "id-blacklist": [2, "data", "err", "e", "cb", "callback"]
+        "id-blacklist": ["error", "data", "err", "e", "cb", "callback"]
     }
 }
 ```
@@ -41,7 +41,7 @@ This rule needs a a set of identifier names to blacklist, like so:
 For the rule in this example, the following patterns are considered problems:
 
 ```js
-/*eslint id-blacklist: [2, "data", "err", "e", "cb", "callback"] */
+/*eslint id-blacklist: ["error", "data", "err", "e", "cb", "callback"] */
 
 var data = {...};
 
@@ -61,7 +61,7 @@ var itemSet = {
 The following patterns are not considered problems:
 
 ```js
-/*eslint id-blacklist: [2, "data", "err", "e", "cb", "callback"] */
+/*eslint id-blacklist: ["error", "data", "err", "e", "cb", "callback"] */
 
 var encodingOptions = {...};
 

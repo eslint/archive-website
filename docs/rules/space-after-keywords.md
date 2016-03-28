@@ -36,7 +36,7 @@ then there should be no spaces following. The default is `"always"`.
 The following patterns are considered problems:
 
 ```js
-/*eslint space-after-keywords: 2*/
+/*eslint space-after-keywords: "error"*/
 
 if(a) {}
 
@@ -46,7 +46,7 @@ do{} while (a);
 ```
 
 ```js
-/*eslint space-after-keywords: [2, "never"]*/
+/*eslint space-after-keywords: ["error", "never"]*/
 
 if (a) {}
 ```
@@ -54,7 +54,7 @@ if (a) {}
 The following patterns are not considered problems:
 
 ```js
-/*eslint space-after-keywords: 2*/
+/*eslint space-after-keywords: "error"*/
 
 if (a) {}
 
@@ -62,7 +62,7 @@ if (a) {} else {}
 ```
 
 ```js
-/*eslint space-after-keywords: [2, "never"]*/
+/*eslint space-after-keywords: ["error", "never"]*/
 
 if(a) {}
 ```

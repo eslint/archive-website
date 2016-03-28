@@ -15,7 +15,7 @@ This rule is aimed at eliminating empty block statements. A block will not be co
 Examples of **incorrect** code for this rule:
 
 ```js
-/*eslint no-empty: 2*/
+/*eslint no-empty: "error"*/
 
 if (foo) {
 }
@@ -38,7 +38,7 @@ try {
 Examples of **correct** code for this rule:
 
 ```js
-/*eslint no-empty: 2*/
+/*eslint no-empty: "error"*/
 
 if (foo) {
     // empty

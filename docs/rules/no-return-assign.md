@@ -37,7 +37,7 @@ It disallows assignments unless they are enclosed in parentheses.
 Examples of **incorrect** code for the default `"except-parens"` option:
 
 ```js
-/*eslint no-return-assign: 2*/
+/*eslint no-return-assign: "error"*/
 
 function doSomething() {
     return foo = bar + 2;
@@ -51,7 +51,7 @@ function doSomething() {
 Examples of **correct** code for the default `"except-parens"` option:
 
 ```js
-/*eslint no-return-assign: 2*/
+/*eslint no-return-assign: "error"*/
 
 function doSomething() {
     return foo == bar + 2;
@@ -74,7 +74,7 @@ All assignments are treated as problems.
 Examples of **incorrect** code for the `"always"` option:
 
 ```js
-/*eslint no-return-assign: [2, "always"]*/
+/*eslint no-return-assign: ["error", "always"]*/
 
 function doSomething() {
     return foo = bar + 2;
@@ -92,7 +92,7 @@ function doSomething() {
 Examples of **correct** code for the `"always"` option:
 
 ```js
-/*eslint no-return-assign: [2, "always"]*/
+/*eslint no-return-assign: ["error", "always"]*/
 
 function doSomething() {
     return foo == bar + 2;

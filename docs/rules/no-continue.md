@@ -29,7 +29,7 @@ As such it warns whenever it sees `continue` statement.
 The following patterns are considered problems:
 
 ```js
-/*eslint no-continue: 2*/
+/*eslint no-continue: "error"*/
 
 var sum = 0,
     i;
@@ -44,7 +44,7 @@ for(i = 0; i < 10; i++) {
 ```
 
 ```js
-/*eslint no-continue: 2*/
+/*eslint no-continue: "error"*/
 
 var sum = 0,
     i;
@@ -61,7 +61,7 @@ labeledLoop: for(i = 0; i < 10; i++) {
 The following patterns are not considered problems:
 
 ```js
-/*eslint no-continue: 2*/
+/*eslint no-continue: "error"*/
 
 var sum = 0,
     i;

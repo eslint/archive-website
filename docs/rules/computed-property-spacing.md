@@ -41,7 +41,7 @@ There are two main options for the rule:
 Depending on your coding conventions, you can choose either option by specifying it in your configuration:
 
 ```json
-"computed-property-spacing": [2, "never"]
+"computed-property-spacing": ["error", "never"]
 ```
 
 ### "never"
@@ -49,7 +49,7 @@ Depending on your coding conventions, you can choose either option by specifying
 When `"never"` is set, the following patterns will give a warning:
 
 ```js
-/*eslint computed-property-spacing: [2, "never"]*/
+/*eslint computed-property-spacing: ["error", "never"]*/
 /*eslint-env es6*/
 
 obj[foo ]
@@ -61,7 +61,7 @@ obj[foo[ bar ]]
 The following patterns are considered correct:
 
 ```js
-/*eslint computed-property-spacing: [2, "never"]*/
+/*eslint computed-property-spacing: ["error", "never"]*/
 /*eslint-env es6*/
 
 obj[foo]
@@ -75,7 +75,7 @@ obj[foo[bar]]
 When `"always"` is used, the following patterns will give a warning:
 
 ```js
-/*eslint computed-property-spacing: [2, "always"]*/
+/*eslint computed-property-spacing: ["error", "always"]*/
 /*eslint-env es6*/
 
 obj[foo]
@@ -90,7 +90,7 @@ var x = {[ b]: a}
 The following patterns are considered correct:
 
 ```js
-/*eslint computed-property-spacing: [2, "always"]*/
+/*eslint computed-property-spacing: ["error", "always"]*/
 /*eslint-env es6*/
 
 obj[ foo ]

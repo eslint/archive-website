@@ -25,17 +25,17 @@ This rule allows you to configure the maximum number of statements allowed in a 
 There is an additional optional argument to ignore top level functions.
 
 ```json
-"max-statements": [2, 10, {"ignoreTopLevelFunctions": true}]
+"max-statements": ["error", 10, {"ignoreTopLevelFunctions": true}]
 
 // or you can use an object property to set the maximum
 
-"max-statements": [2, {"maximum": 10}, {"ignoreTopLevelFunctions": true}]
+"max-statements": ["error", {"maximum": 10}, {"ignoreTopLevelFunctions": true}]
 ```
 
 The following patterns are considered problems:
 
 ```js
-/*eslint max-statements: [2, 2]*/  // Maximum of 2 statements.
+/*eslint max-statements: ["error", 2]*/  // Maximum of 2 statements.
 function foo() {
   var bar = 1;
   var baz = 2;
@@ -47,7 +47,7 @@ function foo() {
 The following patterns are not considered problems:
 
 ```js
-/*eslint max-statements: [2, 2]*/  // Maximum of 2 statements.
+/*eslint max-statements: ["error", 2]*/  // Maximum of 2 statements.
 function foo() {
   var bar = 1;
   return function () {
@@ -61,7 +61,7 @@ function foo() {
 ```
 
 ```js
-/*eslint max-statements: [2, 1, {ignoreTopLevelFunctions: true}]*/  // Maximum of 1 statement.
+/*eslint max-statements: ["error", 1, {ignoreTopLevelFunctions: true}]*/  // Maximum of 1 statement.
 (function() {
   var bar = 1;
   return function () {

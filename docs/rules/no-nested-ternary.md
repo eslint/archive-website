@@ -19,7 +19,7 @@ The `no-nested-ternary` rule aims to increase the clarity and readability of cod
 The following patterns are considered problems:
 
 ```js
-/*eslint no-nested-ternary: 2*/
+/*eslint no-nested-ternary: "error"*/
 
 var thing = foo ? bar : baz === qux ? quxx : foobar;
 
@@ -29,7 +29,7 @@ foo ? baz === qux ? quxx() : foobar() : bar();
 The following patterns are considered okay and could be used alternatively:
 
 ```js
-/*eslint no-nested-ternary: 2*/
+/*eslint no-nested-ternary: "error"*/
 
 var thing;
 

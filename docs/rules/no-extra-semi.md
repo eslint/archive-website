@@ -17,7 +17,7 @@ This rule is aimed at eliminating extra unnecessary semicolons. While not techni
 Examples of **incorrect** code for this rule:
 
 ```js
-/*eslint no-extra-semi: 2*/
+/*eslint no-extra-semi: "error"*/
 
 var x = 5;;
 
@@ -30,7 +30,7 @@ function foo() {
 Examples of **correct** code for this rule:
 
 ```js
-/*eslint no-extra-semi: 2*/
+/*eslint no-extra-semi: "error"*/
 
 var x = 5;
 

@@ -26,7 +26,7 @@ The rule is aimed at preventing a constant expression in the test of:
 Examples of **incorrect** code for this rule:
 
 ```js
-/*eslint no-constant-condition: 2*/
+/*eslint no-constant-condition: "error"*/
 
 if (true) {
     doSomething();
@@ -34,13 +34,13 @@ if (true) {
 ```
 
 ```js
-/*eslint no-constant-condition: 2*/
+/*eslint no-constant-condition: "error"*/
 
 var result = 0 ? a : b;
 ```
 
 ```js
-/*eslint no-constant-condition: 2*/
+/*eslint no-constant-condition: "error"*/
 
 while (-2) {
     doSomething();
@@ -48,7 +48,7 @@ while (-2) {
 ```
 
 ```js
-/*eslint no-constant-condition: 2*/
+/*eslint no-constant-condition: "error"*/
 
 for (;true;) {
     doSomething();
@@ -56,7 +56,7 @@ for (;true;) {
 ```
 
 ```js
-/*eslint no-constant-condition: 2*/
+/*eslint no-constant-condition: "error"*/
 
 do{
     something();
@@ -66,7 +66,7 @@ do{
 Examples of **correct** code for this rule:
 
 ```js
-/*eslint no-constant-condition: 2*/
+/*eslint no-constant-condition: "error"*/
 
 if (x === 0) {
     doSomething();
@@ -74,7 +74,7 @@ if (x === 0) {
 ```
 
 ```js
-/*eslint no-constant-condition: 2*/
+/*eslint no-constant-condition: "error"*/
 
 do {
     something();
@@ -82,7 +82,7 @@ do {
 ```
 
 ```js
-/*eslint no-constant-condition: 2*/
+/*eslint no-constant-condition: "error"*/
 
 for (;;) {
     something();

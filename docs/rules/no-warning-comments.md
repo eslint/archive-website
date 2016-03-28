@@ -27,7 +27,7 @@ This rule has an options object literal:
 Example of **incorrect** code for the default `{ "terms": ["todo", "fixme", "xxx"], "location": "start" }` options:
 
 ```js
-/*eslint no-warning-comments: 2*/
+/*eslint no-warning-comments: "error"*/
 
 function callback(err, results) {
   if (err) {
@@ -41,7 +41,7 @@ function callback(err, results) {
 Example of **correct** code for the default `{ "terms": ["todo", "fixme", "xxx"], "location": "start" }` options:
 
 ```js
-/*eslint no-warning-comments: 2*/
+/*eslint no-warning-comments: "error"*/
 
 function callback(err, results) {
   if (err) {
@@ -58,7 +58,7 @@ function callback(err, results) {
 Examples of **incorrect** code for the `{ "terms": ["todo", "fixme", "any other term"], "location": "anywhere" }` options:
 
 ```js
-/*eslint no-warning-comments: [2, { "terms": ["todo", "fixme", "any other term"], "location": "anywhere" }]*/
+/*eslint no-warning-comments: ["error", { "terms": ["todo", "fixme", "any other term"], "location": "anywhere" }]*/
 
 // TODO: this
 // todo: this too
@@ -73,7 +73,7 @@ Examples of **incorrect** code for the `{ "terms": ["todo", "fixme", "any other 
 Examples of **correct** code for the `{ "terms": ["todo", "fixme", "any other term"], "location": "anywhere" }` options:
 
 ```js
-/*eslint no-warning-comments: [2, { "terms": ["todo", "fixme", "any other term"], "location": "anywhere" }]*/
+/*eslint no-warning-comments: ["error", { "terms": ["todo", "fixme", "any other term"], "location": "anywhere" }]*/
 
 // This is to do
 // even not any other    term

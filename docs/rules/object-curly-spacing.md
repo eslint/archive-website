@@ -44,7 +44,7 @@ There are two main options for the rule:
 Depending on your coding conventions, you can choose either option by specifying it in your configuration:
 
 ```json
-"object-curly-spacing": [2, "always"]
+"object-curly-spacing": ["error", "always"]
 ```
 
 ### "never"
@@ -52,7 +52,7 @@ Depending on your coding conventions, you can choose either option by specifying
 When `"never"` is set, the following patterns are considered problems:
 
 ```
-/*eslint object-curly-spacing: [2, "never"]*/
+/*eslint object-curly-spacing: ["error", "never"]*/
 
 var obj = { 'foo': 'bar' };
 var obj = {'foo': 'bar' };
@@ -65,7 +65,7 @@ import { foo } from 'bar';
 The following patterns are not considered problems:
 
 ```
-/*eslint object-curly-spacing: [2, "never"]*/
+/*eslint object-curly-spacing: ["error", "never"]*/
 
 var obj = {'foo': 'bar'};
 var obj = {'foo': {'bar': 'baz'}, 'qux': 'quxx'};
@@ -86,7 +86,7 @@ import {foo} from 'bar';
 When `"always"` is used, the following patterns are considered problems:
 
 ```
-/*eslint object-curly-spacing: [2, "always"]*/
+/*eslint object-curly-spacing: ["error", "always"]*/
 
 var obj = {'foo': 'bar'};
 var obj = {'foo': 'bar' };
@@ -103,7 +103,7 @@ import {foo } from 'bar';
 The following patterns are not considered problems:
 
 ```
-/*eslint object-curly-spacing: [2, "always"]*/
+/*eslint object-curly-spacing: ["error", "always"]*/
 
 var obj = {};
 var obj = { 'foo': 'bar' };
@@ -132,7 +132,7 @@ it will enforce spacing for cases matching the exception.
 You can add exceptions like so:
 
 ```json
-"object-curly-spacing": [2, "always", {
+"object-curly-spacing": ["error", "always", {
   "objectsInObjects": false,
   "arraysInObjects": false
 }]

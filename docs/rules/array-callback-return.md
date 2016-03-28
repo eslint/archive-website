@@ -37,7 +37,7 @@ This rule finds callback functions of the following methods, then checks usage o
 Examples of **incorrect** code for this rule:
 
 ```js
-/*eslint array-callback-return: 2*/
+/*eslint array-callback-return: "error"*/
 
 var indexMap = myArray.reduce(function(memo, item, index) {
     memo[item] = index;
@@ -61,7 +61,7 @@ var bar = foo.filter(function(x) {
 Examples of **correct** code for this rule:
 
 ```js
-/*eslint array-callback-return: 2*/
+/*eslint array-callback-return: "error"*/
 
 var indexMap = myArray.reduce(function(memo, item, index) {
     memo[item] = index;

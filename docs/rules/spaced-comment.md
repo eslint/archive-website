@@ -33,7 +33,7 @@ The rule takes two options.
     Please note that exceptions are ignored if the first argument is `"never"`.
 
     ```json
-    "spaced-comment": [2, "always", { "exceptions": ["-", "+"] }]
+    "spaced-comment": ["error", "always", { "exceptions": ["-", "+"] }]
     ```
 
     * The `"markers"` value is an array of string patterns which are considered markers for docblock-style comments,
@@ -41,7 +41,7 @@ The rule takes two options.
     The `"markers"` array will apply regardless of the value of the first argument, e.g. `"always"` or `"never"`.
 
     ```json
-    "spaced-comment": [2, "always", { "markers": ["/"] }]
+    "spaced-comment": ["error", "always", { "markers": ["/"] }]
     ```
 
 The difference between a marker and an exception is that a marker only appears at the beginning of the comment whereas
@@ -50,7 +50,7 @@ exceptions can occur anywhere in the comment string.
 You can also define separate exceptions and markers for block and line comments:
 
 ```json
-"spaced-comment": [2, "always", {
+"spaced-comment": ["error", "always", {
     "line": {
         "markers": ["/"],
         "exceptions": ["-", "+"]
@@ -67,7 +67,7 @@ You can also define separate exceptions and markers for block and line comments:
 The following patterns are considered problems:
 
 ```js
-/*eslint spaced-comment: [2, "always"]*/
+/*eslint spaced-comment: ["error", "always"]*/
 
 //This is a comment with no whitespace at the beginning
 
@@ -77,7 +77,7 @@ The following patterns are considered problems:
 The following patterns are not considered problems:
 
 ```js
-/* eslint spaced-comment: [2, "always"] */
+/* eslint spaced-comment: ["error", "always"] */
 
 // This is a comment with a whitespace at the beginning
 
@@ -93,7 +93,7 @@ This comment has a newline
 ```
 
 ```js
-/* eslint spaced-comment: [2, "always"] */
+/* eslint spaced-comment: ["error", "always"] */
 
 /**
 * I am jsdoc
@@ -105,7 +105,7 @@ This comment has a newline
 The following patterns are considered problems:
 
 ```js
-/*eslint spaced-comment: [2, "never"]*/
+/*eslint spaced-comment: ["error", "never"]*/
 
 // This is a comment with a whitespace at the beginning
 
@@ -117,13 +117,13 @@ The following patterns are considered problems:
 The following patterns are not considered problems:
 
 ```js
-/*eslint spaced-comment: [2, "never"]*/
+/*eslint spaced-comment: ["error", "never"]*/
 
 /*This is a comment with no whitespace at the beginning */
 ```
 
 ```js
-/*eslint spaced-comment: [2, "never"]*/
+/*eslint spaced-comment: ["error", "never"]*/
 
 /**
 * I am jsdoc
@@ -135,7 +135,7 @@ The following patterns are not considered problems:
 The following patterns are considered problems:
 
 ```js
-/* eslint spaced-comment: [2, "always", { "block": { "exceptions": ["-"] } }] */
+/* eslint spaced-comment: ["error", "always", { "block": { "exceptions": ["-"] } }] */
 
 //--------------
 // Comment block
@@ -143,7 +143,7 @@ The following patterns are considered problems:
 ```
 
 ```js
-/* eslint spaced-comment: [2, "always", { "exceptions": ["-", "+"] }] */
+/* eslint spaced-comment: ["error", "always", { "exceptions": ["-", "+"] }] */
 
 //------++++++++
 // Comment block
@@ -151,7 +151,7 @@ The following patterns are considered problems:
 ```
 
 ```js
-/* eslint spaced-comment: [2, "always", { "exceptions": ["-", "+"] }] */
+/* eslint spaced-comment: ["error", "always", { "exceptions": ["-", "+"] }] */
 
 /*------++++++++*/
 /* Comment block */
@@ -159,7 +159,7 @@ The following patterns are considered problems:
 ```
 
 ```js
-/* eslint spaced-comment: [2, "always", { "line": { "exceptions": ["-+"] } }] */
+/* eslint spaced-comment: ["error", "always", { "line": { "exceptions": ["-+"] } }] */
 
 /*-+-+-+-+-+-+-+*/
 // Comment block
@@ -169,7 +169,7 @@ The following patterns are considered problems:
 The following patterns are not considered problems:
 
 ```js
-/* eslint spaced-comment: [2, "always", { "exceptions": ["-"] }] */
+/* eslint spaced-comment: ["error", "always", { "exceptions": ["-"] }] */
 
 //--------------
 // Comment block
@@ -177,7 +177,7 @@ The following patterns are not considered problems:
 ```
 
 ```js
-/* eslint spaced-comment: [2, "always", { "line": { "exceptions": ["-"] } }] */
+/* eslint spaced-comment: ["error", "always", { "line": { "exceptions": ["-"] } }] */
 
 //--------------
 // Comment block
@@ -185,7 +185,7 @@ The following patterns are not considered problems:
 ```
 
 ```js
-/* eslint spaced-comment: [2, "always", { "exceptions": ["*"] }] */
+/* eslint spaced-comment: ["error", "always", { "exceptions": ["*"] }] */
 
 /****************
  * Comment block
@@ -193,7 +193,7 @@ The following patterns are not considered problems:
 ```
 
 ```js
-/* eslint spaced-comment: [2, "always", { "exceptions": ["-+"] }] */
+/* eslint spaced-comment: ["error", "always", { "exceptions": ["-+"] }] */
 
 //-+-+-+-+-+-+-+
 // Comment block
@@ -205,7 +205,7 @@ The following patterns are not considered problems:
 ```
 
 ```js
-/* eslint spaced-comment: [2, "always", { "block": { "exceptions": ["-+"] } }] */
+/* eslint spaced-comment: ["error", "always", { "block": { "exceptions": ["-+"] } }] */
 
 /*-+-+-+-+-+-+-+*/
 // Comment block
@@ -217,7 +217,7 @@ The following patterns are not considered problems:
 The following patterns are considered problems:
 
 ```js
-/* eslint spaced-comment: [2, "always", { "markers": ["/"] }] */
+/* eslint spaced-comment: ["error", "always", { "markers": ["/"] }] */
 
 ///This is a comment with a marker but without whitespace
 ```
@@ -225,13 +225,13 @@ The following patterns are considered problems:
 The following patterns are not considered problems:
 
 ```js
-/* eslint spaced-comment: [2, "always", { "markers": ["/"] }] */
+/* eslint spaced-comment: ["error", "always", { "markers": ["/"] }] */
 
 /// This is a comment with a marker
 ```
 
 ```js
-/*eslint spaced-comment: [2, "never", { "markers": ["!<"] }]*/
+/*eslint spaced-comment: ["error", "never", { "markers": ["!<"] }]*/
 
 //!<This is a line comment with a marker
 
@@ -241,7 +241,7 @@ subsequent lines are ignored
 ```
 
 ```js
-/* eslint spaced-comment: [2, "always", { "markers": ["global"] }] */
+/* eslint spaced-comment: ["error", "always", { "markers": ["global"] }] */
 
 /*global ABC*/
 ```

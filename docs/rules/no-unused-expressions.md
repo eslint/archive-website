@@ -42,7 +42,7 @@ These options allow unused expressions *only if all* of the code paths either di
 Examples of **incorrect** code for the default `{ "allowShortCircuit": false, "allowTernary": false }` options:
 
 ```js
-/*eslint no-unused-expressions: 2*/
+/*eslint no-unused-expressions: "error"*/
 
 0
 
@@ -77,7 +77,7 @@ Note that one or more string expression statements (with or without semi-colons)
 Examples of **correct** code for the default `{ "allowShortCircuit": false, "allowTernary": false }` options:
 
 ```js
-/*eslint no-unused-expressions: 2*/
+/*eslint no-unused-expressions: "error"*/
 
 {} // In this context, this is a block statement, not an object literal
 
@@ -103,7 +103,7 @@ void a
 Examples of **incorrect** code for the `{ "allowShortCircuit": true }` option:
 
 ```js
-/*eslint no-unused-expressions: [2, { "allowShortCircuit": true }]*/
+/*eslint no-unused-expressions: ["error", { "allowShortCircuit": true }]*/
 
 a || b
 ```
@@ -111,7 +111,7 @@ a || b
 Examples of **correct** code for the `{ "allowShortCircuit": true }` option:
 
 ```js
-/*eslint no-unused-expressions: [2, { "allowShortCircuit": true }]*/
+/*eslint no-unused-expressions: ["error", { "allowShortCircuit": true }]*/
 
 a && b()
 a() || (b = c)
@@ -122,7 +122,7 @@ a() || (b = c)
 Examples of **incorrect** code for the `{ "allowTernary": true }` option:
 
 ```js
-/*eslint no-unused-expressions: [2, { "allowTernary": true }]*/
+/*eslint no-unused-expressions: ["error", { "allowTernary": true }]*/
 
 a ? b : 0
 a ? b : c()
@@ -131,7 +131,7 @@ a ? b : c()
 Examples of **correct** code for the `{ "allowTernary": true }` option:
 
 ```js
-/*eslint no-unused-expressions: [2, { "allowTernary": true }]*/
+/*eslint no-unused-expressions: ["error", { "allowTernary": true }]*/
 
 a ? b() : c()
 a ? (b = c) : d()
@@ -142,7 +142,7 @@ a ? (b = c) : d()
 Examples of **correct** code for the `{ "allowShortCircuit": true, "allowTernary": true }` options:
 
 ```js
-/*eslint no-unused-expressions: [2, { "allowShortCircuit": true, "allowTernary": true }]*/
+/*eslint no-unused-expressions: ["error", { "allowShortCircuit": true, "allowTernary": true }]*/
 
 a ? b() || (c = d) : e()
 ```

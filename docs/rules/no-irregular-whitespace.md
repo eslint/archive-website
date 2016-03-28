@@ -52,7 +52,7 @@ With this rule enabled the following characters will cause warnings outside of s
 Examples of **incorrect** code for this rule:
 
 ```js
-/*eslint no-irregular-whitespace: 2*/
+/*eslint no-irregular-whitespace: "error"*/
 
 function thing() /*<NBSP>*/{
   return 'test';
@@ -82,7 +82,7 @@ function thing() {
 Examples of **correct** code for this rule:
 
 ```js
-/*eslint no-irregular-whitespace: 2*/
+/*eslint no-irregular-whitespace: "error"*/
 
 function thing() {
   return ' <NBSP>thing';
@@ -112,7 +112,7 @@ The `no-irregular-whitespace` rule has no required option and has one optional o
 For example, to specify that you want to skip checking for irregular whitespace within comments, use the following configuration:
 
 ```json
-"no-irregular-whitespace": [2, { "skipComments": true }]
+"no-irregular-whitespace": ["error", { "skipComments": true }]
 ```
 
 ## When Not To Use It

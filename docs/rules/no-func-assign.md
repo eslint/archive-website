@@ -20,7 +20,7 @@ This rule is aimed at flagging probable mistakes and issues in the form of overw
 Examples of **incorrect** code for this rule:
 
 ```js
-/*eslint no-func-assign: 2*/
+/*eslint no-func-assign: "error"*/
 
 function foo() {}
 foo = bar;
@@ -33,7 +33,7 @@ function foo() {
 Examples of **incorrect** code for this rule, unlike the corresponding rule in JSHint:
 
 ```js
-/*eslint no-func-assign: 2*/
+/*eslint no-func-assign: "error"*/
 
 foo = bar;
 function foo() {}
@@ -42,7 +42,7 @@ function foo() {}
 Examples of **correct** code for this rule:
 
 ```js
-/*eslint no-func-assign: 2*/
+/*eslint no-func-assign: "error"*/
 
 var foo = function () {}
 foo = bar;

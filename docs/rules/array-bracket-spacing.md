@@ -38,7 +38,7 @@ There are two options for this rule:
 Depending on your coding conventions, you can choose either option by specifying it in your configuration:
 
 ```json
-"array-bracket-spacing": [2, "always"]
+"array-bracket-spacing": ["error", "always"]
 ```
 
 ### "never"
@@ -46,7 +46,7 @@ Depending on your coding conventions, you can choose either option by specifying
 When `"never"` is set, the following patterns are considered problems:
 
 ```js
-/*eslint array-bracket-spacing: [2, "never"]*/
+/*eslint array-bracket-spacing: ["error", "never"]*/
 /*eslint-env es6*/
 
 var arr = [ 'foo', 'bar' ];
@@ -65,7 +65,7 @@ var [ ,,x, ] = z;
 The following patterns are not considered problems:
 
 ```js
-/*eslint array-bracket-spacing: [2, "never"]*/
+/*eslint array-bracket-spacing: ["error", "never"]*/
 /*eslint-env es6*/
 
 var arr = [];
@@ -91,7 +91,7 @@ var [,,x,] = z;
 When `"always"` is used, the following patterns are considered problems:
 
 ```js
-/*eslint array-bracket-spacing: [2, "always"]*/
+/*eslint array-bracket-spacing: ["error", "always"]*/
 /*eslint-env es6*/
 
 var arr = ['foo', 'bar'];
@@ -113,7 +113,7 @@ var [,,x,] = z;
 The following patterns are not considered problems:
 
 ```js
-/*eslint array-bracket-spacing: [2, "always"]*/
+/*eslint array-bracket-spacing: ["error", "always"]*/
 /*eslint-env es6*/
 
 var arr = [];
@@ -142,7 +142,7 @@ You can add exceptions like so:
 In case of `"always"` option, set an exception to `false` to enable it:
 
 ```json
-"array-bracket-spacing": [2, "always", {
+"array-bracket-spacing": ["error", "always", {
   "singleValue": false,
   "objectsInArrays": false,
   "arraysInArrays": false
@@ -152,7 +152,7 @@ In case of `"always"` option, set an exception to `false` to enable it:
 In case of `"never"` option, set an exception to `true` to enable it:
 
 ```json
-"array-bracket-spacing": [2, "never", {
+"array-bracket-spacing": ["error", "never", {
   "singleValue": true,
   "objectsInArrays": true,
   "arraysInArrays": true
@@ -170,7 +170,7 @@ In each of the following examples, the `"always"` option is assumed.
 When `"singleValue"` is set to `false`, the following patterns are considered problems:
 
 ```js
-/*eslint array-bracket-spacing: [2, "always", { singleValue: false }]*/
+/*eslint array-bracket-spacing: ["error", "always", { singleValue: false }]*/
 
 var foo = [ 'foo' ];
 var foo = [ 'foo'];
@@ -185,7 +185,7 @@ var foo = [ { 'foo': 'bar' } ];
 The following patterns are not considered problems:
 
 ```js
-/*eslint array-bracket-spacing: [2, "always", { singleValue: false }]*/
+/*eslint array-bracket-spacing: ["error", "always", { singleValue: false }]*/
 
 var foo = ['foo'];
 var foo = [1];
@@ -196,7 +196,7 @@ var foo = [{ 'foo': 'bar' }];
 When `"objectsInArrays"` is set to `false`, the following patterns are considered problems:
 
 ```js
-/*eslint array-bracket-spacing: [2, "always", { objectsInArrays: false }]*/
+/*eslint array-bracket-spacing: ["error", "always", { objectsInArrays: false }]*/
 
 var arr = [ { 'foo': 'bar' } ];
 var arr = [ {
@@ -207,7 +207,7 @@ var arr = [ {
 The following patterns are not considered problems:
 
 ```js
-/*eslint array-bracket-spacing: [2, "always", { objectsInArrays: false }]*/
+/*eslint array-bracket-spacing: ["error", "always", { objectsInArrays: false }]*/
 
 var arr = [{ 'foo': 'bar' }];
 var arr = [{
@@ -218,7 +218,7 @@ var arr = [{
 When `"arraysInArrays"` is set to `false`, the following patterns are considered problems:
 
 ```js
-/*eslint array-bracket-spacing: [2, "always", { arraysInArrays: false }]*/
+/*eslint array-bracket-spacing: ["error", "always", { arraysInArrays: false }]*/
 
 var arr = [ [ 1, 2 ], 2, 3, 4 ];
 var arr = [ [ 1, 2 ], 2, [ 3, 4 ] ];
@@ -227,7 +227,7 @@ var arr = [ [ 1, 2 ], 2, [ 3, 4 ] ];
 The following patterns are not considered problems:
 
 ```js
-/*eslint array-bracket-spacing: [2, "always", { arraysInArrays: false }]*/
+/*eslint array-bracket-spacing: ["error", "always", { arraysInArrays: false }]*/
 
 var arr = [[ 1, 2 ], 2, 3, 4 ];
 var arr = [[ 1, 2 ], 2, [ 3, 4 ]];

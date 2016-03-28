@@ -28,7 +28,7 @@ This rule flags class constructors that can be safely removed without changing h
 The following patterns are considered problems:
 
 ```js
-/*eslint no-useless-constructor: 2*/
+/*eslint no-useless-constructor: "error"*/
 /*eslint-env es6*/
 
 class A {
@@ -46,7 +46,7 @@ class A extends B {
 The following patterns are not considered problems:
 
 ```js
-/*eslint no-useless-constructor: 2*/
+/*eslint no-useless-constructor: "error"*/
 
 class A { }
 

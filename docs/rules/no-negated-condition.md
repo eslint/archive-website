@@ -37,7 +37,7 @@ The rule is aimed at preventing the use of a negated expression in a condition.
 The following patterns are considered warnings:
 
 ```js
-/*eslint no-negated-condition: 2*/
+/*eslint no-negated-condition: "error"*/
 
 if (!a) {
     doSomething();
@@ -66,7 +66,7 @@ The following patterns are not warnings:
 
 
 ```js
-/*eslint no-negated-condition: 2*/
+/*eslint no-negated-condition: "error"*/
 
 if (!a) {
     doSomething();

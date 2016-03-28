@@ -33,7 +33,7 @@ The rule takes one option which can enforce a consistent wrapping style:
 Examples of **incorrect** code for the default `"outside"` option:
 
 ```js
-/*eslint wrap-iife: [2, "outside"]*/
+/*eslint wrap-iife: ["error", "outside"]*/
 
 var x = function () { return { y: 1 };}(); // unwrapped
 var x = (function () { return { y: 1 };})(); // wrapped function expression
@@ -42,7 +42,7 @@ var x = (function () { return { y: 1 };})(); // wrapped function expression
 Examples of **correct** code for the default `"outside"` option:
 
 ```js
-/*eslint wrap-iife: [2, "outside"]*/
+/*eslint wrap-iife: ["error", "outside"]*/
 
 var x = (function () { return { y: 1 };}()); // wrapped call expression
 ```
@@ -52,7 +52,7 @@ var x = (function () { return { y: 1 };}()); // wrapped call expression
 Examples of **incorrect** code for the `"inside"` option:
 
 ```js
-/*eslint wrap-iife: [2, "inside"]*/
+/*eslint wrap-iife: ["error", "inside"]*/
 
 var x = function () { return { y: 1 };}(); // unwrapped
 var x = (function () { return { y: 1 };}()); // wrapped call expression
@@ -61,7 +61,7 @@ var x = (function () { return { y: 1 };}()); // wrapped call expression
 Examples of **correct** code for the `"inside"` option:
 
 ```js
-/*eslint wrap-iife: [2, "inside"]*/
+/*eslint wrap-iife: ["error", "inside"]*/
 
 var x = (function () { return { y: 1 };})(); // wrapped function expression
 ```
@@ -71,7 +71,7 @@ var x = (function () { return { y: 1 };})(); // wrapped function expression
 Examples of **incorrect** code for the `"any"` option:
 
 ```js
-/*eslint wrap-iife: [2, "any"]*/
+/*eslint wrap-iife: ["error", "any"]*/
 
 var x = function () { return { y: 1 };}(); // unwrapped
 ```
@@ -79,7 +79,7 @@ var x = function () { return { y: 1 };}(); // unwrapped
 Examples of **correct** code for the `"any"` option:
 
 ```js
-/*eslint wrap-iife: [2, "any"]*/
+/*eslint wrap-iife: ["error", "any"]*/
 
 var x = (function () { return { y: 1 };}()); // wrapped call expression
 var x = (function () { return { y: 1 };})(); // wrapped function expression

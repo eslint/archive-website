@@ -19,7 +19,7 @@ Then any code used within the same scope would not get the global `undefined`, b
 Examples of **incorrect** code for this rule:
 
 ```js
-/*eslint no-shadow-restricted-names: 2*/
+/*eslint no-shadow-restricted-names: "error"*/
 
 function NaN(){}
 
@@ -33,7 +33,7 @@ try {} catch(eval){}
 Examples of **correct** code for this rule:
 
 ```js
-/*eslint no-shadow-restricted-names: 2*/
+/*eslint no-shadow-restricted-names: "error"*/
 
 var Object;
 

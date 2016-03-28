@@ -34,7 +34,7 @@ The default is `"prefer-double"`.
 The following patterns are considered problems when set to `"prefer-double"`:
 
 ```xml
-/*eslint jsx-quotes: [2, "prefer-double"]*/
+/*eslint jsx-quotes: ["error", "prefer-double"]*/
 
 <a b='c' />
 ```
@@ -42,7 +42,7 @@ The following patterns are considered problems when set to `"prefer-double"`:
 The following patterns are not considered problems when set to `"prefer-double"`:
 
 ```xml
-/*eslint jsx-quotes: [2, "prefer-double"]*/
+/*eslint jsx-quotes: ["error", "prefer-double"]*/
 
 <a b="c" />
 <a b='"' />
@@ -51,7 +51,7 @@ The following patterns are not considered problems when set to `"prefer-double"`
 The following patterns are considered problems when set to `"prefer-single"`:
 
 ```xml
-/*eslint jsx-quotes: [2, "prefer-single"]*/
+/*eslint jsx-quotes: ["error", "prefer-single"]*/
 
 <a b="c" />
 ```
@@ -59,7 +59,7 @@ The following patterns are considered problems when set to `"prefer-single"`:
 The following patterns are not considered problems when set to `"prefer-single"`:
 
 ```xml
-/*eslint jsx-quotes: [2, "prefer-single"]*/
+/*eslint jsx-quotes: ["error", "prefer-single"]*/
 
 <a b='c' />
 <a b="'" />

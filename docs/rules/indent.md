@@ -55,31 +55,31 @@ Level of indentation denotes the multiple of the indent specified. Example:
 2 space indentation with enabled switch cases indentation
 
 ```json
- "indent": [2, 2, {"SwitchCase": 1}]
+ "indent": ["error", 2, {"SwitchCase": 1}]
 ```
 
 4 space indention
 
 ```json
-"indent": 2
+"indent": "error"
 ```
 
 2 space indentation
 
 ```json
-"indent": [2, 2]
+"indent": ["error", 2]
 ```
 
 tabbed indentation
 
 ```json
-"indent": [2, "tab"]
+"indent": ["error", "tab"]
 ```
 
 The following patterns are considered problems:
 
 ```js
-/*eslint indent: [2, 2]*/
+/*eslint indent: ["error", 2]*/
 
 if (a) {
    b=c;
@@ -90,7 +90,7 @@ function foo(d) {
 ```
 
 ```js
-/*eslint indent: [2, "tab"]*/
+/*eslint indent: ["error", "tab"]*/
 
 if (a) {
      b=c;
@@ -101,7 +101,7 @@ function foo(d) {
 ```
 
 ```js
-/*eslint indent: [2, 2, {"VariableDeclarator": 1}]*/
+/*eslint indent: ["error", 2, {"VariableDeclarator": 1}]*/
 /*eslint-env es6*/
 
 var a,
@@ -116,7 +116,7 @@ const a = 1,
 ```
 
 ```js
-/*eslint indent: [2, 2, {"SwitchCase": 1}]*/
+/*eslint indent: ["error", 2, {"SwitchCase": 1}]*/
 
 switch(a){
 case "a":
@@ -129,7 +129,7 @@ case "b":
 The following patterns are not considered problems:
 
 ```js
-/*eslint indent: [2, 2]*/
+/*eslint indent: ["error", 2]*/
 
 if (a) {
   b=c;
@@ -140,7 +140,7 @@ if (a) {
 ```
 
 ```js
-/*indent: [2, "tab"]*/
+/*indent: ["error", "tab"]*/
 
 if (a) {
 /*tab*/b=c;
@@ -151,7 +151,7 @@ if (a) {
 ```
 
 ```js
-/*eslint indent: [2, 2, {"VariableDeclarator": 2}]*/
+/*eslint indent: ["error", 2, {"VariableDeclarator": 2}]*/
 /*eslint-env es6*/
 
 var a,
@@ -166,7 +166,7 @@ const a = 1,
 ```
 
 ```js
-/*eslint indent: [2, 2, {"VariableDeclarator": { "var": 2, "let": 2, "const": 3}}]*/
+/*eslint indent: ["error", 2, {"VariableDeclarator": { "var": 2, "let": 2, "const": 3}}]*/
 /*eslint-env es6*/
 
 var a,
@@ -181,7 +181,7 @@ const a = 1,
 ```
 
 ```js
-/*eslint indent: [2, 4, {"SwitchCase": 1}]*/
+/*eslint indent: ["error", 4, {"SwitchCase": 1}]*/
 
 switch(a){
     case "a":

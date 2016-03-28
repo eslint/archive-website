@@ -21,7 +21,7 @@ fn ()
 The following patterns are considered problems:
 
 ```js
-/*eslint no-spaced-func: 2*/
+/*eslint no-spaced-func: "error"*/
 
 fn ()
 
@@ -32,11 +32,10 @@ fn
 The following patterns are not considered problems:
 
 ```js
-/*eslint no-spaced-func: 2*/
+/*eslint no-spaced-func: "error"*/
 
 fn()
 ```
-
 
 ## Version
 

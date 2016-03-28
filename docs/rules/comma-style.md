@@ -23,7 +23,7 @@ The rule takes an option, a string, which could be either `"last"` or `"first"`.
 You can set the style in configuration like this:
 
 ```json
-"comma-style": [2, "first"]
+"comma-style": ["error", "first"]
 ```
 
 ### "last"
@@ -33,7 +33,7 @@ This is the default setting for this rule. This option requires that the comma b
 While using this setting, the following patterns are considered problems:
 
 ```js
-/*eslint comma-style: [2, "last"]*/
+/*eslint comma-style: ["error", "last"]*/
 
 var foo = 1
 ,
@@ -59,7 +59,7 @@ function bar() {
 The following patterns are not considered problems:
 
 ```js
-/*eslint comma-style: [2, "last"]*/
+/*eslint comma-style: ["error", "last"]*/
 
 var foo = 1, bar = 2;
 
@@ -87,7 +87,7 @@ This option requires that the comma be placed before and be in the same line as 
 While using this setting, the following patterns are considered problems:
 
 ```js
-/*eslint comma-style: [2, "first"]*/
+/*eslint comma-style: ["error", "first"]*/
 
 var foo = 1,
     bar = 2;
@@ -109,7 +109,7 @@ function bar() {
 The following patterns are not considered problems:
 
 ```js
-/*eslint comma-style: [2, "first"]*/
+/*eslint comma-style: ["error", "first"]*/
 
 var foo = 1, bar = 2;
 
@@ -145,7 +145,7 @@ An example use case is if a user wanted to only enforce comma style in var state
 The following is considered a warning:
 
 ```js
-/*eslint comma-style: [2, "first", {exceptions: {ArrayExpression: true, ObjectExpression: true} }]*/
+/*eslint comma-style: ["error", "first", {exceptions: {ArrayExpression: true, ObjectExpression: true} }]*/
 
 var o = {},
     a = [];
@@ -154,7 +154,7 @@ var o = {},
 But the following would not be a warning:
 
 ```js
-/*eslint comma-style: [2, "first", {exceptions: {ArrayExpression: true, ObjectExpression: true} }]*/
+/*eslint comma-style: ["error", "first", {exceptions: {ArrayExpression: true, ObjectExpression: true} }]*/
 
 var o = {fst:1,
          snd: [1,
