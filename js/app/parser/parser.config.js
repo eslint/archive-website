@@ -5,31 +5,19 @@ module.exports = {
 	attachComment: false,
 	tokens: false,
 	tolerant: true,
+	ecmaVersion: {
+		3: false,
+		5: false,
+		6: true
+	},
+	sourceType: {
+		script: false,
+		module: true
+	},
 	ecmaFeatures: {
-		arrowFunctions: true,
-		blockBindings: true,
-		destructuring: true,
-		regexYFlag: true,
-		regexUFlag: true,
-		templateStrings: true,
-		binaryLiterals: true,
-		octalLiterals: true,
-		unicodeCodePointEscapes: true,
-		defaultParams: true,
-		restParams: true,
-		forOf: true,
-		objectLiteralComputedProperties: true,
-		objectLiteralShorthandMethods: true,
-		objectLiteralShorthandProperties: true,
-		objectLiteralDuplicateProperties: true,
-		generators: true,
-		spread: true,
-		superInFunctions: true,
-		classes: true,
-		newTarget: false,
-		modules: true,
 		jsx: true,
 		globalReturn: true,
+		impliedStrict: false,
 		experimentalObjectRestSpread: true
 	}
 };
