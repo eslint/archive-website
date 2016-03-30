@@ -35,3 +35,7 @@ h6:target:before {
   margin: 0 2px;
 }
 
+/* wrench icon at the beginning of the first paragraph in the doc for a fixable rule */
+h1 + p > span.glyphicon:first-child {
+  margin-right: 1em;
+}
