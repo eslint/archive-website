@@ -20,7 +20,7 @@ if (a && b) {
 bar();
 ```
 
-![Code Path Example](./code-path-analysis/helo.svg)
+![Code Path Example](./helo.svg)
 
 ## Objects
 
@@ -148,17 +148,17 @@ bar();
 
 1. First, the analysis advances to the end of loop.
 
-   ![Loop Event's Example 1](./code-path-analysis/loop-event-example-while-1.svg)
+   ![Loop Event's Example 1](./loop-event-example-while-1.svg)
 
 2. Second, it creates the looping path.
    At this time, the next segment has existed already, so the `onCodePathSegmentStart` event is not fired.
    It fires `onCodePathSegmentLoop` instead.
 
-   ![Loop Event's Example 2](./code-path-analysis/loop-event-example-while-2.svg)
+   ![Loop Event's Example 2](./loop-event-example-while-2.svg)
 
 3. Last, it advances to the end.
 
-   ![Loop Event's Example 3](./code-path-analysis/loop-event-example-while-3.svg)
+   ![Loop Event's Example 3](./loop-event-example-while-3.svg)
 
 For example 2:
 
@@ -173,29 +173,29 @@ bar();
    First, the analysis advances to `ForStatement.update`.
    The `update` segment is hovered at first.
 
-   ![Loop Event's Example 1](./code-path-analysis/loop-event-example-for-1.svg)
+   ![Loop Event's Example 1](./loop-event-example-for-1.svg)
 
 2. Second, it advances to `ForStatement.body`.
    Of course the `body` segment is preceded by the `test` segment.
    It keeps the `update` segment hovering.
 
-   ![Loop Event's Example 2](./code-path-analysis/loop-event-example-for-2.svg)
+   ![Loop Event's Example 2](./loop-event-example-for-2.svg)
 
 3. Third, it creates the looping path from `body` segment to `update` segment.
    At this time, the next segment has existed already, so the `onCodePathSegmentStart` event is not fired.
    It fires `onCodePathSegmentLoop` instead.
 
-   ![Loop Event's Example 3](./code-path-analysis/loop-event-example-for-3.svg)
+   ![Loop Event's Example 3](./loop-event-example-for-3.svg)
 
 4. Fourth, also it creates the looping path from `update` segment to `test` segment.
    At this time, the next segment has existed already, so the `onCodePathSegmentStart` event is not fired.
    It fires `onCodePathSegmentLoop` instead.
 
-   ![Loop Event's Example 4](./code-path-analysis/loop-event-example-for-4.svg)
+   ![Loop Event's Example 4](./loop-event-example-for-4.svg)
 
 5. Last, it advances to the end.
 
-   ![Loop Event's Example 5](./code-path-analysis/loop-event-example-for-5.svg)
+   ![Loop Event's Example 5](./loop-event-example-for-5.svg)
 
 
 
@@ -345,7 +345,7 @@ See Also:
 console.log("Hello world!");
 ```
 
-![Hello World](./code-path-analysis/example-hello-world.svg)
+![Hello World](./example-hello-world.svg)
 
 ### `IfStatement`
 
@@ -357,7 +357,7 @@ if (a) {
 }
 ```
 
-![`IfStatement`](./code-path-analysis/example-ifstatement.svg)
+![`IfStatement`](./example-ifstatement.svg)
 
 ### `IfStatement` (chain)
 
@@ -371,7 +371,7 @@ if (a) {
 }
 ```
 
-![`IfStatement` (chain)](./code-path-analysis/example-ifstatement-chain.svg)
+![`IfStatement` (chain)](./example-ifstatement-chain.svg)
 
 ### `SwitchStatement`
 
@@ -392,7 +392,7 @@ switch (a) {
 }
 ```
 
-![`SwitchStatement`](./code-path-analysis/example-switchstatement.svg)
+![`SwitchStatement`](./example-switchstatement.svg)
 
 ### `SwitchStatement` (has `default`)
 
@@ -417,7 +417,7 @@ switch (a) {
 }
 ```
 
-![`SwitchStatement` (has `default`)](./code-path-analysis/example-switchstatement-has-default.svg)
+![`SwitchStatement` (has `default`)](./example-switchstatement-has-default.svg)
 
 ### `TryStatement` (try-catch)
 
@@ -440,7 +440,7 @@ It creates the paths from `try` block to `catch` block at:
 * The first throwable node (e.g. a function call) in the `try` block.
 * The end of the `try` block.
 
-![`TryStatement` (try-catch)](./code-path-analysis/example-trystatement-try-catch.svg)
+![`TryStatement` (try-catch)](./example-trystatement-try-catch.svg)
 
 ### `TryStatement` (try-finally)
 
@@ -458,7 +458,7 @@ If there is not `catch` block, `finally` block has two current segments.
 At this time, `CodePath.currentSegments.length` is `2`.
 One is the normal path, and another is the leaving path (`throw` or `return`).
 
-![`TryStatement` (try-finally)](./code-path-analysis/example-trystatement-try-finally.svg)
+![`TryStatement` (try-finally)](./example-trystatement-try-finally.svg)
 
 ### `TryStatement` (try-catch-finally)
 
@@ -474,7 +474,7 @@ try {
 last();
 ```
 
-![`TryStatement` (try-catch-finally)](./code-path-analysis/example-trystatement-try-catch-finally.svg)
+![`TryStatement` (try-catch-finally)](./example-trystatement-try-catch-finally.svg)
 
 ### `WhileStatement`
 
@@ -488,7 +488,7 @@ while (a) {
 }
 ```
 
-![`WhileStatement`](./code-path-analysis/example-whilestatement.svg)
+![`WhileStatement`](./example-whilestatement.svg)
 
 ### `DoWhileStatement`
 
@@ -499,7 +499,7 @@ do {
 } while (a);
 ```
 
-![`DoWhileStatement`](./code-path-analysis/example-dowhilestatement.svg)
+![`DoWhileStatement`](./example-dowhilestatement.svg)
 
 ### `ForStatement`
 
@@ -513,7 +513,7 @@ for (let i = 0; i < 10; ++i) {
 }
 ```
 
-![`ForStatement`](./code-path-analysis/example-forstatement.svg)
+![`ForStatement`](./example-forstatement.svg)
 
 ### `ForStatement` (for ever)
 
@@ -524,7 +524,7 @@ for (;;) {
 bar();
 ```
 
-![`ForStatement` (for ever)](./code-path-analysis/example-forstatement-for-ever.svg)
+![`ForStatement` (for ever)](./example-forstatement-for-ever.svg)
 
 ### `ForInStatement`
 
@@ -534,7 +534,7 @@ for (let key in obj) {
 }
 ```
 
-![`ForInStatement`](./code-path-analysis/example-forinstatement.svg)
+![`ForInStatement`](./example-forinstatement.svg)
 
 ### When there is a function
 
@@ -553,8 +553,8 @@ It creates two code paths.
 
 * The global's
 
-  ![When there is a function](./code-path-analysis/example-when-there-is-a-function-g.svg)
+  ![When there is a function](./example-when-there-is-a-function-g.svg)
 
 * The function's
 
-  ![When there is a function](./code-path-analysis/example-when-there-is-a-function-f.svg)
+  ![When there is a function](./example-when-there-is-a-function-f.svg)
