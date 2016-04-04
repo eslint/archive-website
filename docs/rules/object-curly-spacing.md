@@ -6,10 +6,12 @@ layout: doc
 
 # Disallow or enforce spaces inside of curly braces in objects. (object-curly-spacing)
 
+(fixable) The --fix option on the [command line](../user-guide/command-line-interface#fix) automatically fixes problems reported by this rule.
+
 While formatting preferences are very personal, a number of style guides require
 or disallow spaces between curly braces in the following situations:
 
-```
+```js
 // simple object literals
 var obj = { foo: "bar" };
 
@@ -23,8 +25,6 @@ var { x, y } = y;
 import { foo } from "bar";
 export { foo };
 ```
-
-**Fixable:** This rule is automatically fixable using the `--fix` flag on the command line.
 
 ## Rule Details
 
@@ -51,7 +51,7 @@ Depending on your coding conventions, you can choose either option by specifying
 
 When `"never"` is set, the following patterns are considered problems:
 
-```
+```js
 /*eslint object-curly-spacing: ["error", "never"]*/
 
 var obj = { 'foo': 'bar' };
@@ -64,7 +64,7 @@ import { foo } from 'bar';
 
 The following patterns are not considered problems:
 
-```
+```js
 /*eslint object-curly-spacing: ["error", "never"]*/
 
 var obj = {'foo': 'bar'};
@@ -85,7 +85,7 @@ import {foo} from 'bar';
 
 When `"always"` is used, the following patterns are considered problems:
 
-```
+```js
 /*eslint object-curly-spacing: ["error", "always"]*/
 
 var obj = {'foo': 'bar'};
@@ -102,7 +102,7 @@ import {foo } from 'bar';
 
 The following patterns are not considered problems:
 
-```
+```js
 /*eslint object-curly-spacing: ["error", "always"]*/
 
 var obj = {};

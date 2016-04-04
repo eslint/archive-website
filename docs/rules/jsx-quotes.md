@@ -6,6 +6,8 @@ layout: doc
 
 # Enforce JSX Quote Style (jsx-quotes)
 
+(fixable) The --fix option on the [command line](../user-guide/command-line-interface#fix) automatically fixes problems reported by this rule.
+
 JSX attribute values can contain string literals, which are delimited with single or double quotes.
 
 ```xml
@@ -20,8 +22,6 @@ If you want to have e.g. a double quote within a JSX attribute value, you have t
 <a b="'" />
 <a b='"' />
 ```
-
-**Fixable:** This rule is automatically fixable using the `--fix` flag on the command line.
 
 ## Rule Details
 

@@ -221,7 +221,7 @@ These rules are purely matters of style and are quite subjective.
 * [space-in-parens](space-in-parens): require or disallow spaces inside parentheses (fixable)
 * [space-infix-ops](space-infix-ops): require spaces around operators (fixable)
 * [space-unary-ops](space-unary-ops): require or disallow spaces before/after unary operators (fixable)
-* [spaced-comment](spaced-comment): require or disallow a space immediately following the `//` or `/*` in a comment
+* [spaced-comment](spaced-comment): require or disallow a space immediately following the `//` or `/*` in a comment (fixable)
 * [wrap-regex](wrap-regex): require regex literals to be wrapped in parentheses
 
 ## ECMAScript 6

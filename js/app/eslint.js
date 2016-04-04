@@ -4864,12 +4864,31 @@ module.exports={
     "betarelease": "eslint-prelease beta",
     "browserify": "node Makefile.js browserify"
   },
-  "readme": "# Espree\n\nEspree started out as a fork of [Esprima](http://esprima.org) v1.2.2, the last stable published released of Esprima before work on ECMAScript 6 began. Espree is now built on top of [Acorn](https://github.com/ternjs/acorn), which has a modular architecture that allows extension of core functionality. The goal of Espree is to produce output that is similar to Esprima with a similar API so that it can be used in place of Esprima.\n\n## Usage\n\nInstall:\n\n```\nnpm i espree --save\n```\n\nAnd in your Node.js code:\n\n```javascript\nvar espree = require(\"espree\");\n\nvar ast = espree.parse(code);\n```\n\nThere is a second argument to `parse()` that allows you to specify various options:\n\n```javascript\nvar espree = require(\"espree\");\n\nvar ast = espree.parse(code, {\n\n    // attach range information to each node\n    range: true,\n\n    // attach line/column location information to each node\n    loc: true,\n\n    // create a top-level comments array containing all comments\n    comment: true,\n\n    // attach comments to the closest relevant node as leadingComments and\n    // trailingComments\n    attachComment: true,\n\n    // create a top-level tokens array containing all tokens\n    tokens: true,\n\n    // specify the language version (3, 5, 6, or 7, default is 5)\n    ecmaVersion: 5,\n\n    // specify which type of script you're parsing (script or module, default is script)\n    sourceType: \"script\",\n\n    // specify additional language features\n    ecmaFeatures: {\n\n        // enable JSX parsing\n        jsx: true,\n\n        // enable return in global scope\n        globalReturn: true,\n\n        // enable implied strict mode (if ecmaVersion >= 5)\n        impliedStrict: true,\n\n        // allow experimental object rest/spread\n        experimentalObjectRestSpread: true\n    }\n});\n```\n\n## Esprima Compatibility Going Forward\n\nThe primary goal is to produce the exact same AST structure and tokens as Esprima, and that takes precedence over anything else. (The AST structure being the [ESTree](https://github.com/estree/estree) API with JSX extensions.) Separate from that, Espree may deviate from what Esprima outputs in terms of where and how comments are attached, as well as what additional information is available on AST nodes. That is to say, Espree may add more things to the AST nodes than Esprima does but the overall AST structure produced will be the same.\n\nEspree may also deviate from Esprima in the interface it exposes.\n\n## Contributing\n\nIssues and pull requests will be triaged and responded to as quickly as possible. We operate under the [ESLint Contributor Guidelines](http://eslint.org/docs/developer-guide/contributing), so please be sure to read them before contributing. If you're not sure where to dig in, check out the [issues](https://github.com/eslint/espree/issues).\n\nEspree is licensed under a permissive BSD 2-clause license.\n\n## Build Commands\n\n* `npm test` - run all linting and tests\n* `npm run lint` - run all linting\n* `npm run browserify` - creates a version of Espree that is usable in a browser\n\n## Differences from Espree 2.x\n\n* The `tokenize()` method does not use `ecmaFeatures`. Any string will be tokenized completely based on ECMAScript 6 semantics.\n* Trailing whitespace no longer is counted as part of a node.\n* `let` and `const` declarations are no longer parsed by default. You must opt-in using `ecmaFeatures.blockBindings`.\n* The `esparse` and `esvalidate` binary scripts have been removed.\n* There is no `tolerant` option. We will investigate adding this back in the future.\n\n## Known Incompatibilities\n\nIn an effort to help those wanting to transition from other parsers to Espree, the following is a list of noteworthy incompatibilities with other parsers. These are known differences that we do not intend to change.\n\n### Esprima 1.2.2\n\n* Esprima counts trailing whitespace as part of each AST node while Espree does not. In Espree, the end of a node is where the last token occurs.\n* Espree does not parse `let` and `const` declarations by default.\n* Error messages returned for parsing errors are different.\n* There are two addition properties on every node and token: `start` and `end`. These represent the same data as `range` and are used internally by Acorn.\n\n### Esprima 2.x\n\n* Esprima 2.x uses a different comment attachment algorithm that results in some comments being added in different places than Espree. The algorithm Espree uses is the same one used in Esprima 1.2.2.\n\n## Frequently Asked Questions\n\n### Why another parser\n\n[ESLint](http://eslint.org) had been relying on Esprima as its parser from the beginning. While that was fine when the JavaScript language was evolving slowly, the pace of development increased dramatically and Esprima had fallen behind. ESLint, like many other tools reliant on Esprima, has been stuck in using new JavaScript language features until Esprima updates, and that caused our users frustration.\n\nWe decided the only way for us to move forward was to create our own parser, bringing us inline with JSHint and JSLint, and allowing us to keep implementing new features as we need them. We chose to fork Esprima instead of starting from scratch in order to move as quickly as possible with a compatible API.\n\nWith Espree 2.0.0, we are no longer a fork of Esprima but rather a translation layer between Acorn and Esprima syntax. This allows us to put work back into a community-supported parser (Acorn) that is continuing to grow and evolve while maintaining an Esprima-compatible parser for those utilities still built on Esprima.\n\n### Have you tried working with Esprima?\n\nYes. Since the start of ESLint, we've regularly filed bugs and feature requests with Esprima and will continue to do so. However, there are some different philosophies around how the projects work that need to be worked through. The initial goal was to have Espree track Esprima and eventually merge the two back together, but we ultimately decided that building on top of Acorn was a better choice due to Acorn's plugin support.\n\n### Why don't you just use Acorn?\n\nAcorn is a great JavaScript parser that produces an AST that is compatible with Esprima. Unfortunately, ESLint relies on more than just the AST to do its job. It relies on Esprima's tokens and comment attachment features to get a complete picture of the source code. We investigated switching to Acorn, but the inconsistencies between Esprima and Acorn created too much work for a project like ESLint.\n\nWe are building on top of Acorn, however, so that we can contribute back and help make Acorn even better.\n\n### What ECMAScript 6 features do you support?\n\nAll of them.\n\n### What ECMAScript 7 features do you support?\n\nThere is only one ECMAScript 7 syntax change: the exponentiation operator. Espree supports this.\n\n### How do you determine which experimental features to support?\n\nIn general, we do not support experimental JavaScript features. We may make exceptions from time to time depending on the maturity of the features.\n",
-  "readmeFilename": "README.md",
   "_id": "espree@3.1.3",
   "_shasum": "a77ca630986c19b74d95541b845298cd6faa228c",
+  "_from": "espree@3.1.3",
+  "_npmVersion": "1.4.10",
+  "_npmUser": {
+    "name": "nzakas",
+    "email": "nicholas@nczconsulting.com"
+  },
+  "maintainers": [
+    {
+      "name": "nzakas",
+      "email": "nicholas@nczconsulting.com"
+    }
+  ],
+  "dist": {
+    "shasum": "a77ca630986c19b74d95541b845298cd6faa228c",
+    "tarball": "http://registry.npmjs.org/espree/-/espree-3.1.3.tgz"
+  },
+  "_npmOperationalInternal": {
+    "host": "packages-12-west.internal.npmjs.com",
+    "tmp": "tmp/espree-3.1.3.tgz_1458322183008_0.931681108660996"
+  },
+  "directories": {},
   "_resolved": "https://registry.npmjs.org/espree/-/espree-3.1.3.tgz",
-  "_from": "espree@3.1.3"
+  "readme": "ERROR: No README data found!"
 }
 
 },{}],"espree":[function(require,module,exports){
@@ -10577,14 +10596,12 @@ module.exports={
   ],
   "maintainers": [
     {
-      "name": "Nicholas C. Zakas",
-      "email": "nicholas+npm@nczconsulting.com",
-      "url": "https://www.nczonline.net"
+      "name": "constellation",
+      "email": "utatane.tea@gmail.com"
     },
     {
-      "name": "Yusuke Suzuki",
-      "email": "utatane.tea@gmail.com",
-      "url": "https://github.com/Constellation"
+      "name": "nzakas",
+      "email": "nicholas@nczconsulting.com"
     }
   ],
   "repository": {
@@ -10622,15 +10639,29 @@ module.exports={
     "esutils": "^1.1.6",
     "isarray": "^1.0.0"
   },
-  "readme": "[![NPM version][npm-image]][npm-url]\n[![build status][travis-image]][travis-url]\n[![Test coverage][coveralls-image]][coveralls-url]\n[![Downloads][downloads-image]][downloads-url]\n[![Join the chat at https://gitter.im/eslint/doctrine](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/eslint/doctrine?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)\n\n# Doctrine\n\nDoctrine is a [JSDoc](http://usejsdoc.org) parser that parses documentation comments from JavaScript (you need to pass in the comment, not a whole JavaScript file).\n\n## Installation\n\nYou can install Doctrine using [npm](https://npmjs.com):\n\n```\n$ npm install doctrine --save-dev\n```\n\nDoctrine can also be used in web browsers using [Browserify](http://browserify.org).\n\n## Usage\n\nRequire doctrine inside of your JavaScript:\n\n```js\nvar doctrine = require(\"doctrine\");\n```\n\n### parse()\n\nThe primary method is `parse()`, which accepts two arguments: the JSDoc comment to parse and an optional options object. The available options are:\n\n* `unwrap` - set to `true` to delete the leading `/**`, any `*` that begins a line, and the trailing `*/` from the source text. Default: `false`.\n* `tags` - an array of tags to return. When specified, Doctrine returns only tags in this array. For example, if `tags` is `[\"param\"]`, then only `@param` tags will be returned. Default: `null`.\n* `recoverable` - set to `true` to keep parsing even when syntax errors occur. Default: `false`.\n* `sloppy` - set to `true` to allow optional parameters to be specified in brackets (`@param {string} [foo]`). Default: `false`.\n* `lineNumbers` - set to `true` to add `lineNumber` to each node, specifying the line on which the node is found in the source. Default: `false`.\n\nHere's a simple example:\n\n```js\nvar ast = doctrine.parse(\n    [\n        \"/**\",\n        \" * This function comment is parsed by doctrine\",\n        \" * @param {{ok:String}} userName\",\n        \"*/\"\n    ].join('\\n'), { unwrap: true });\n```\n\nThis example returns the following AST:\n\n    {\n        \"description\": \"This function comment is parsed by doctrine\",\n        \"tags\": [\n            {\n                \"title\": \"param\",\n                \"description\": null,\n                \"type\": {\n                    \"type\": \"RecordType\",\n                    \"fields\": [\n                        {\n                            \"type\": \"FieldType\",\n                            \"key\": \"ok\",\n                            \"value\": {\n                                \"type\": \"NameExpression\",\n                                \"name\": \"String\"\n                            }\n                        }\n                    ]\n                },\n                \"name\": \"userName\"\n            }\n        ]\n    }\n\nSee the [demo page](http://eslint.org/doctrine/demo/) more detail.\n\n## Team\n\nThese folks keep the project moving and are resources for help:\n\n* Nicholas C. Zakas ([@nzakas](https://github.com/nzakas)) - project lead\n* Yusuke Suzuki ([@constellation](https://github.com/constellation)) - reviewer\n\n## Contributing\n\nIssues and pull requests will be triaged and responded to as quickly as possible. We operate under the [ESLint Contributor Guidelines](http://eslint.org/docs/developer-guide/contributing), so please be sure to read them before contributing. If you're not sure where to dig in, check out the [issues](https://github.com/eslint/doctrine/issues).\n\n## Frequently Asked Questions\n\n### Can I pass a whole JavaScript file to Doctrine?\n\nNo. Doctrine can only parse JSDoc comments, so you'll need to pass just the JSDoc comment to Doctrine in order to work.\n\n\n### License\n\n#### doctrine\n\nCopyright (C) 2012 [Yusuke Suzuki](http://github.com/Constellation)\n (twitter: [@Constellation](http://twitter.com/Constellation)) and other contributors.\n\nRedistribution and use in source and binary forms, with or without\nmodification, are permitted provided that the following conditions are met:\n\n  * Redistributions of source code must retain the above copyright\n    notice, this list of conditions and the following disclaimer.\n\n  * Redistributions in binary form must reproduce the above copyright\n    notice, this list of conditions and the following disclaimer in the\n    documentation and/or other materials provided with the distribution.\n\nTHIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS \"AS IS\"\nAND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE\nIMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE\nARE DISCLAIMED. IN NO EVENT SHALL <COPYRIGHT HOLDER> BE LIABLE FOR ANY\nDIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES\n(INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;\nLOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND\nON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT\n(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF\nTHIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n\n#### esprima\n\nsome of functions is derived from esprima\n\nCopyright (C) 2012, 2011 [Ariya Hidayat](http://ariya.ofilabs.com/about)\n (twitter: [@ariyahidayat](http://twitter.com/ariyahidayat)) and other contributors.\n\nRedistribution and use in source and binary forms, with or without\nmodification, are permitted provided that the following conditions are met:\n\n  * Redistributions of source code must retain the above copyright\n    notice, this list of conditions and the following disclaimer.\n\n  * Redistributions in binary form must reproduce the above copyright\n    notice, this list of conditions and the following disclaimer in the\n    documentation and/or other materials provided with the distribution.\n\nTHIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS \"AS IS\"\nAND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE\nIMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE\nARE DISCLAIMED. IN NO EVENT SHALL <COPYRIGHT HOLDER> BE LIABLE FOR ANY\nDIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES\n(INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;\nLOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND\nON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT\n(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF\nTHIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n\n\n#### closure-compiler\n\nsome of extensions is derived from closure-compiler\n\nApache License\nVersion 2.0, January 2004\nhttp://www.apache.org/licenses/\n\n\n### Where to ask for help?\n\nJoin our [Chatroom](https://gitter.im/eslint/doctrine)\n\n[npm-image]: https://img.shields.io/npm/v/doctrine.svg?style=flat-square\n[npm-url]: https://www.npmjs.com/package/doctrine\n[travis-image]: https://img.shields.io/travis/eslint/doctrine/master.svg?style=flat-square\n[travis-url]: https://travis-ci.org/eslint/doctrine\n[coveralls-image]: https://img.shields.io/coveralls/eslint/doctrine/master.svg?style=flat-square\n[coveralls-url]: https://coveralls.io/r/eslint/doctrine?branch=master\n[downloads-image]: http://img.shields.io/npm/dm/doctrine.svg?style=flat-square\n[downloads-url]: https://www.npmjs.com/package/doctrine\n",
-  "readmeFilename": "README.md",
   "gitHead": "18dba10454f17acbc49ae3c0628119734cb34952",
   "bugs": {
     "url": "https://github.com/eslint/doctrine/issues"
   },
   "_id": "doctrine@1.2.1",
   "_shasum": "ac0c649d70b9501e16e97acb7ec4e27168f746a3",
-  "_from": "doctrine@>=1.2.1 <2.0.0"
+  "_from": "doctrine@>=1.2.1 <2.0.0",
+  "_npmVersion": "2.14.9",
+  "_nodeVersion": "0.12.9",
+  "_npmUser": {
+    "name": "nzakas",
+    "email": "nicholas@nczconsulting.com"
+  },
+  "dist": {
+    "shasum": "ac0c649d70b9501e16e97acb7ec4e27168f746a3",
+    "tarball": "https://registry.npmjs.org/doctrine/-/doctrine-1.2.1.tgz"
+  },
+  "_npmOperationalInternal": {
+    "host": "packages-12-west.internal.npmjs.com",
+    "tmp": "tmp/doctrine-1.2.1.tgz_1459275509740_0.26917822007089853"
+  },
+  "_resolved": "https://registry.npmjs.org/doctrine/-/doctrine-1.2.1.tgz",
+  "readme": "ERROR: No README data found!"
 }
 
 },{}],23:[function(require,module,exports){
@@ -15603,9 +15634,16 @@ module.exports={
   },
   "maintainers": [
     {
-      "name": "Yusuke Suzuki",
-      "email": "utatane.tea@gmail.com",
-      "url": "http://github.com/Constellation"
+      "name": "constellation",
+      "email": "utatane.tea@gmail.com"
+    },
+    {
+      "name": "michaelficarra",
+      "email": "npm@michael.ficarra.me"
+    },
+    {
+      "name": "nzakas",
+      "email": "nicholas@nczconsulting.com"
     }
   ],
   "repository": {
@@ -15630,15 +15668,26 @@ module.exports={
     "lint": "jshint estraverse.js",
     "unit-test": "mocha --compilers coffee:coffee-script/register"
   },
-  "readme": "### Estraverse [![Build Status](https://secure.travis-ci.org/estools/estraverse.png)](http://travis-ci.org/estools/estraverse)\n\nEstraverse ([estraverse](http://github.com/estools/estraverse)) is\n[ECMAScript](http://www.ecma-international.org/publications/standards/Ecma-262.htm)\ntraversal functions from [esmangle project](http://github.com/estools/esmangle).\n\n### Documentation\n\nYou can find usage docs at [wiki page](https://github.com/estools/estraverse/wiki/Usage).\n\n### Example Usage\n\nThe following code will output all variables declared at the root of a file.\n\n```javascript\nestraverse.traverse(ast, {\n    enter: function (node, parent) {\n        if (node.type == 'FunctionExpression' || node.type == 'FunctionDeclaration')\n            return estraverse.VisitorOption.Skip;\n    },\n    leave: function (node, parent) {\n        if (node.type == 'VariableDeclarator')\n          console.log(node.id.name);\n    }\n});\n```\n\nWe can use `this.skip`, `this.remove` and `this.break` functions instead of using Skip, Remove and Break.\n\n```javascript\nestraverse.traverse(ast, {\n    enter: function (node) {\n        this.break();\n    }\n});\n```\n\nAnd estraverse provides `estraverse.replace` function. When returning node from `enter`/`leave`, current node is replaced with it.\n\n```javascript\nresult = estraverse.replace(tree, {\n    enter: function (node) {\n        // Replace it with replaced.\n        if (node.type === 'Literal')\n            return replaced;\n    }\n});\n```\n\nBy passing `visitor.keys` mapping, we can extend estraverse traversing functionality.\n\n```javascript\n// This tree contains a user-defined `TestExpression` node.\nvar tree = {\n    type: 'TestExpression',\n\n    // This 'argument' is the property containing the other **node**.\n    argument: {\n        type: 'Literal',\n        value: 20\n    },\n\n    // This 'extended' is the property not containing the other **node**.\n    extended: true\n};\nestraverse.traverse(tree, {\n    enter: function (node) { },\n\n    // Extending the existing traversing rules.\n    keys: {\n        // TargetNodeName: [ 'keys', 'containing', 'the', 'other', '**node**' ]\n        TestExpression: ['argument']\n    }\n});\n```\n\nBy passing `visitor.fallback` option, we can control the behavior when encountering unknown nodes.\n```javascript\n// This tree contains a user-defined `TestExpression` node.\nvar tree = {\n    type: 'TestExpression',\n\n    // This 'argument' is the property containing the other **node**.\n    argument: {\n        type: 'Literal',\n        value: 20\n    },\n\n    // This 'extended' is the property not containing the other **node**.\n    extended: true\n};\nestraverse.traverse(tree, {\n    enter: function (node) { },\n\n    // Iterating the child **nodes** of unknown nodes.\n    fallback: 'iteration'\n});\n```\n\n### License\n\nCopyright (C) 2012-2013 [Yusuke Suzuki](http://github.com/Constellation)\n (twitter: [@Constellation](http://twitter.com/Constellation)) and other contributors.\n\nRedistribution and use in source and binary forms, with or without\nmodification, are permitted provided that the following conditions are met:\n\n  * Redistributions of source code must retain the above copyright\n    notice, this list of conditions and the following disclaimer.\n\n  * Redistributions in binary form must reproduce the above copyright\n    notice, this list of conditions and the following disclaimer in the\n    documentation and/or other materials provided with the distribution.\n\nTHIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS \"AS IS\"\nAND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE\nIMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE\nARE DISCLAIMED. IN NO EVENT SHALL <COPYRIGHT HOLDER> BE LIABLE FOR ANY\nDIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES\n(INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;\nLOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND\nON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT\n(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF\nTHIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n",
-  "readmeFilename": "README.md",
+  "gitHead": "bbcccbfe98296585e4311c8755e1d00dcd581e3c",
   "bugs": {
     "url": "https://github.com/estools/estraverse/issues"
   },
   "_id": "estraverse@4.1.1",
   "_shasum": "f6caca728933a850ef90661d0e17982ba47111a2",
+  "_from": "estraverse@>=4.1.0 <4.2.0",
+  "_npmVersion": "2.14.4",
+  "_nodeVersion": "4.1.1",
+  "_npmUser": {
+    "name": "constellation",
+    "email": "utatane.tea@gmail.com"
+  },
+  "dist": {
+    "shasum": "f6caca728933a850ef90661d0e17982ba47111a2",
+    "tarball": "http://registry.npmjs.org/estraverse/-/estraverse-4.1.1.tgz"
+  },
+  "directories": {},
   "_resolved": "https://registry.npmjs.org/estraverse/-/estraverse-4.1.1.tgz",
-  "_from": "estraverse@>=4.1.0 <4.2.0"
+  "readme": "ERROR: No README data found!"
 }
 
 },{}],132:[function(require,module,exports){
@@ -15694,9 +15743,16 @@ module.exports={
   },
   "maintainers": [
     {
-      "name": "Yusuke Suzuki",
-      "email": "utatane.tea@gmail.com",
-      "url": "https://github.com/Constellation"
+      "name": "constellation",
+      "email": "utatane.tea@gmail.com"
+    },
+    {
+      "name": "michaelficarra",
+      "email": "npm@michael.ficarra.me"
+    },
+    {
+      "name": "nzakas",
+      "email": "nicholas@nczconsulting.com"
     }
   ],
   "repository": {
@@ -15727,15 +15783,30 @@ module.exports={
     "unit-test": "gulp test",
     "lint": "gulp lint"
   },
-  "readme": "### Esrecurse [![Build Status](https://travis-ci.org/estools/esrecurse.svg?branch=master)](https://travis-ci.org/estools/esrecurse)\n\nEsrecurse ([esrecurse](https://github.com/estools/esrecurse)) is\n[ECMAScript](http://www.ecma-international.org/publications/standards/Ecma-262.htm)\nrecursive traversing functionality.\n\n### Example Usage\n\nThe following code will output all variables declared at the root of a file.\n\n```javascript\nesrecurse.visit(ast, {\n    XXXStatement: function (node) {\n        this.visit(node.left);\n        // do something...\n        this.visit(node.right);\n    }\n});\n```\n\nWe can use `Visitor` instance.\n\n```javascript\nvar visitor = new esrecurse.Visitor({\n    XXXStatement: function (node) {\n        this.visit(node.left);\n        // do something...\n        this.visit(node.right);\n    }\n});\n\nvisitor.visit(ast);\n```\n\nWe can inherit `Visitor` instance easily.\n\n```javascript\nfunction DerivedVisitor() {\n    esrecurse.Visitor.call(/* this for constructor */  this  /* visitor object automatically becomes this. */);\n}\nutil.inherits(DerivedVisitor, esrecurse.Visitor);\nDerivedVisitor.prototype.XXXStatement = function (node) {\n    this.visit(node.left);\n    // do something...\n    this.visit(node.right);\n};\n```\n\nAnd you can invoke default visiting operation inside custom visit operation.\n\n```javascript\nfunction DerivedVisitor() {\n    esrecurse.Visitor.call(/* this for constructor */  this  /* visitor object automatically becomes this. */);\n}\nutil.inherits(DerivedVisitor, esrecurse.Visitor);\nDerivedVisitor.prototype.XXXStatement = function (node) {\n    // do something...\n    this.visitChildren(node);\n};\n```\n\nThe `childVisitorKeys` option does customize the behavoir of `this.visitChildren(node)`.\nWe can use user-defined node types.\n\n```javascript\n// This tree contains a user-defined `TestExpression` node.\nvar tree = {\n    type: 'TestExpression',\n\n    // This 'argument' is the property containing the other **node**.\n    argument: {\n        type: 'Literal',\n        value: 20\n    },\n\n    // This 'extended' is the property not containing the other **node**.\n    extended: true\n};\nesrecurse.visit(\n    ast,\n    {\n        Literal: function (node) {\n            // do something...\n        }\n    },\n    {\n        // Extending the existing traversing rules.\n        childVisitorKeys: {\n            // TargetNodeName: [ 'keys', 'containing', 'the', 'other', '**node**' ]\n            TestExpression: ['argument']\n        }\n    }\n);\n```\n\nWe can use the `fallback` option as well.\nIf the `fallback` option is `\"iteration\"`, `esrecurse` would visit all enumerable properties of unknown nodes.\nPlease note circular references cause the stack overflow. AST might have circular references in additional properties for some purpose (e.g. `node.parent`).\n\n```javascript\nesrecurse.visit(\n    ast,\n    {\n        Literal: function (node) {\n            // do something...\n        }\n    },\n    {\n        fallback: 'iteration'\n    }\n);\n```\n\nIf the `fallback` option is a function, `esrecurse` calls this function to determine the enumerable properties of unknown nodes.\nPlease note circular references cause the stack overflow. AST might have circular references in additional properties for some purpose (e.g. `node.parent`).\n\n```javascript\nesrecurse.visit(\n    ast,\n    {\n        Literal: function (node) {\n            // do something...\n        }\n    },\n    {\n        fallback: function (node) {\n            return Object.keys(node).filter(function(key) {\n                return key !== 'argument'\n            });\n        }\n    }\n);\n```\n\n### License\n\nCopyright (C) 2014 [Yusuke Suzuki](https://github.com/Constellation)\n (twitter: [@Constellation](https://twitter.com/Constellation)) and other contributors.\n\nRedistribution and use in source and binary forms, with or without\nmodification, are permitted provided that the following conditions are met:\n\n  * Redistributions of source code must retain the above copyright\n    notice, this list of conditions and the following disclaimer.\n\n  * Redistributions in binary form must reproduce the above copyright\n    notice, this list of conditions and the following disclaimer in the\n    documentation and/or other materials provided with the distribution.\n\nTHIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS \"AS IS\"\nAND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE\nIMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE\nARE DISCLAIMED. IN NO EVENT SHALL <COPYRIGHT HOLDER> BE LIABLE FOR ANY\nDIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES\n(INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;\nLOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND\nON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT\n(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF\nTHIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n",
-  "readmeFilename": "README.md",
   "gitHead": "63a34714834bd7ad2063054bd4abb24fb82ca667",
   "bugs": {
     "url": "https://github.com/estools/esrecurse/issues"
   },
   "_id": "esrecurse@4.1.0",
   "_shasum": "4713b6536adf7f2ac4f327d559e7756bff648220",
-  "_from": "esrecurse@>=4.1.0 <5.0.0"
+  "_from": "esrecurse@>=4.1.0 <5.0.0",
+  "_npmVersion": "2.14.9",
+  "_nodeVersion": "0.12.9",
+  "_npmUser": {
+    "name": "nzakas",
+    "email": "nicholas@nczconsulting.com"
+  },
+  "dist": {
+    "shasum": "4713b6536adf7f2ac4f327d559e7756bff648220",
+    "tarball": "http://registry.npmjs.org/esrecurse/-/esrecurse-4.1.0.tgz"
+  },
+  "_npmOperationalInternal": {
+    "host": "packages-13-west.internal.npmjs.com",
+    "tmp": "tmp/esrecurse-4.1.0.tgz_1457712782215_0.15950557170435786"
+  },
+  "directories": {},
+  "_resolved": "https://registry.npmjs.org/esrecurse/-/esrecurse-4.1.0.tgz",
+  "readme": "ERROR: No README data found!"
 }
 
 },{}],134:[function(require,module,exports){
@@ -15750,9 +15821,16 @@ module.exports={
   },
   "maintainers": [
     {
-      "name": "Yusuke Suzuki",
-      "email": "utatane.tea@gmail.com",
-      "url": "http://github.com/Constellation"
+      "name": "constellation",
+      "email": "utatane.tea@gmail.com"
+    },
+    {
+      "name": "michaelficarra",
+      "email": "npm@michael.ficarra.me"
+    },
+    {
+      "name": "nzakas",
+      "email": "nicholas@nczconsulting.com"
     }
   ],
   "repository": {
@@ -15795,15 +15873,30 @@ module.exports={
     "lint": "gulp lint",
     "jsdoc": "jsdoc src/*.js README.md"
   },
-  "readme": "Escope ([escope](http://github.com/estools/escope)) is\n[ECMAScript](http://www.ecma-international.org/publications/standards/Ecma-262.htm)\nscope analyzer extracted from [esmangle project](http://github.com/estools/esmangle).\n\n[![Build Status](https://travis-ci.org/estools/escope.png?branch=master)](https://travis-ci.org/estools/escope)\n\n### Example\n\n```js\nvar escope = require('escope');\nvar esprima = require('esprima');\nvar estraverse = require('estraverse');\n\nvar ast = esprima.parse(code);\nvar scopeManager = escope.analyze(ast);\n\nvar currentScope = scopeManager.acquire(ast);   // global scope\n\nestraverse.traverse(ast, {\n    enter: function(node, parent) {\n        // do stuff\n        \n        if (/Function/.test(node.type)) {\n            currentScope = scopeManager.acquire(node);  // get current function scope\n        }\n    },\n    leave: function(node, parent) {\n        if (/Function/.test(node.type)) {\n            currentScope = currentScope.upper;  // set to parent scope\n        }\n        \n        // do stuff\n    }\n});\n```\n\n### Document\n\nGenerated JSDoc is [here](http://estools.github.io/escope/).\n\n### Demos and Tools\n\nDemonstration is [here](http://mazurov.github.io/escope-demo/) by [Sasha Mazurov](https://github.com/mazurov) (twitter: [@mazurov](http://twitter.com/mazurov)). [issue](https://github.com/estools/escope/issues/14)\n\n![Demo](https://f.cloud.github.com/assets/75759/462920/7aa6dd40-b4f5-11e2-9f07-9f4e8d0415f9.gif)\n\n\nAnd there are tools constructed on Escope.\n\n- [Esmangle](https://github.com/estools/esmangle) is a minifier / mangler / optimizer.\n- [Eslevels](https://github.com/mazurov/eslevels) is a scope levels analyzer and [SublimeText plugin for scope context coloring](https://github.com/mazurov/sublime-levels) is constructed on it.\n- [Esgoggles](https://github.com/keeyipchan/esgoggles) is JavaScript code browser.\n\n\n### License\n\nCopyright (C) 2012-2013 [Yusuke Suzuki](http://github.com/Constellation)\n (twitter: [@Constellation](http://twitter.com/Constellation)) and other contributors.\n\nRedistribution and use in source and binary forms, with or without\nmodification, are permitted provided that the following conditions are met:\n\n  * Redistributions of source code must retain the above copyright\n    notice, this list of conditions and the following disclaimer.\n\n  * Redistributions in binary form must reproduce the above copyright\n    notice, this list of conditions and the following disclaimer in the\n    documentation and/or other materials provided with the distribution.\n\nTHIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS \"AS IS\"\nAND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE\nIMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE\nARE DISCLAIMED. IN NO EVENT SHALL <COPYRIGHT HOLDER> BE LIABLE FOR ANY\nDIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES\n(INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;\nLOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND\nON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT\n(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF\nTHIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n",
-  "readmeFilename": "README.md",
   "gitHead": "aa35861faa76a09f01203dee3497a939d70b463c",
   "bugs": {
     "url": "https://github.com/estools/escope/issues"
   },
   "_id": "escope@3.6.0",
   "_shasum": "e01975e812781a163a6dadfdd80398dc64c889c3",
-  "_from": "escope@>=3.6.0 <4.0.0"
+  "_from": "escope@>=3.6.0 <4.0.0",
+  "_npmVersion": "2.14.9",
+  "_nodeVersion": "0.12.9",
+  "_npmUser": {
+    "name": "nzakas",
+    "email": "nicholas@nczconsulting.com"
+  },
+  "dist": {
+    "shasum": "e01975e812781a163a6dadfdd80398dc64c889c3",
+    "tarball": "http://registry.npmjs.org/escope/-/escope-3.6.0.tgz"
+  },
+  "_npmOperationalInternal": {
+    "host": "packages-12-west.internal.npmjs.com",
+    "tmp": "tmp/escope-3.6.0.tgz_1457720018969_0.025237560039386153"
+  },
+  "directories": {},
+  "_resolved": "https://registry.npmjs.org/escope/-/escope-3.6.0.tgz",
+  "readme": "ERROR: No README data found!"
 }
 
 },{}],135:[function(require,module,exports){
@@ -16669,9 +16762,16 @@ module.exports={
   },
   "maintainers": [
     {
-      "name": "Yusuke Suzuki",
-      "email": "utatane.tea@gmail.com",
-      "url": "http://github.com/Constellation"
+      "name": "constellation",
+      "email": "utatane.tea@gmail.com"
+    },
+    {
+      "name": "michaelficarra",
+      "email": "npm@michael.ficarra.me"
+    },
+    {
+      "name": "nzakas",
+      "email": "nicholas@nczconsulting.com"
     }
   ],
   "repository": {
@@ -16697,15 +16797,30 @@ module.exports={
     "lint": "jshint estraverse.js",
     "unit-test": "mocha --compilers js:babel-register"
   },
-  "readme": "### Estraverse [![Build Status](https://secure.travis-ci.org/estools/estraverse.png)](http://travis-ci.org/estools/estraverse)\n\nEstraverse ([estraverse](http://github.com/estools/estraverse)) is\n[ECMAScript](http://www.ecma-international.org/publications/standards/Ecma-262.htm)\ntraversal functions from [esmangle project](http://github.com/estools/esmangle).\n\n### Documentation\n\nYou can find usage docs at [wiki page](https://github.com/estools/estraverse/wiki/Usage).\n\n### Example Usage\n\nThe following code will output all variables declared at the root of a file.\n\n```javascript\nestraverse.traverse(ast, {\n    enter: function (node, parent) {\n        if (node.type == 'FunctionExpression' || node.type == 'FunctionDeclaration')\n            return estraverse.VisitorOption.Skip;\n    },\n    leave: function (node, parent) {\n        if (node.type == 'VariableDeclarator')\n          console.log(node.id.name);\n    }\n});\n```\n\nWe can use `this.skip`, `this.remove` and `this.break` functions instead of using Skip, Remove and Break.\n\n```javascript\nestraverse.traverse(ast, {\n    enter: function (node) {\n        this.break();\n    }\n});\n```\n\nAnd estraverse provides `estraverse.replace` function. When returning node from `enter`/`leave`, current node is replaced with it.\n\n```javascript\nresult = estraverse.replace(tree, {\n    enter: function (node) {\n        // Replace it with replaced.\n        if (node.type === 'Literal')\n            return replaced;\n    }\n});\n```\n\nBy passing `visitor.keys` mapping, we can extend estraverse traversing functionality.\n\n```javascript\n// This tree contains a user-defined `TestExpression` node.\nvar tree = {\n    type: 'TestExpression',\n\n    // This 'argument' is the property containing the other **node**.\n    argument: {\n        type: 'Literal',\n        value: 20\n    },\n\n    // This 'extended' is the property not containing the other **node**.\n    extended: true\n};\nestraverse.traverse(tree, {\n    enter: function (node) { },\n\n    // Extending the existing traversing rules.\n    keys: {\n        // TargetNodeName: [ 'keys', 'containing', 'the', 'other', '**node**' ]\n        TestExpression: ['argument']\n    }\n});\n```\n\nBy passing `visitor.fallback` option, we can control the behavior when encountering unknown nodes.\n\n```javascript\n// This tree contains a user-defined `TestExpression` node.\nvar tree = {\n    type: 'TestExpression',\n\n    // This 'argument' is the property containing the other **node**.\n    argument: {\n        type: 'Literal',\n        value: 20\n    },\n\n    // This 'extended' is the property not containing the other **node**.\n    extended: true\n};\nestraverse.traverse(tree, {\n    enter: function (node) { },\n\n    // Iterating the child **nodes** of unknown nodes.\n    fallback: 'iteration'\n});\n```\n\nWhen `visitor.fallback` is a function, we can determine which keys to visit on each node.\n\n```javascript\n// This tree contains a user-defined `TestExpression` node.\nvar tree = {\n    type: 'TestExpression',\n\n    // This 'argument' is the property containing the other **node**.\n    argument: {\n        type: 'Literal',\n        value: 20\n    },\n\n    // This 'extended' is the property not containing the other **node**.\n    extended: true\n};\nestraverse.traverse(tree, {\n    enter: function (node) { },\n\n    // Skip the `argument` property of each node\n    fallback: function(node) {\n        return Object.keys(node).filter(function(key) {\n            return key !== 'argument';\n        });\n    }\n});\n```\n\n### License\n\nCopyright (C) 2012-2016 [Yusuke Suzuki](http://github.com/Constellation)\n (twitter: [@Constellation](http://twitter.com/Constellation)) and other contributors.\n\nRedistribution and use in source and binary forms, with or without\nmodification, are permitted provided that the following conditions are met:\n\n  * Redistributions of source code must retain the above copyright\n    notice, this list of conditions and the following disclaimer.\n\n  * Redistributions in binary form must reproduce the above copyright\n    notice, this list of conditions and the following disclaimer in the\n    documentation and/or other materials provided with the distribution.\n\nTHIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS \"AS IS\"\nAND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE\nIMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE\nARE DISCLAIMED. IN NO EVENT SHALL <COPYRIGHT HOLDER> BE LIABLE FOR ANY\nDIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES\n(INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;\nLOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND\nON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT\n(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF\nTHIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n",
-  "readmeFilename": "README.md",
   "gitHead": "6f6a4e99653908e859c7c10d04d9518bf4844ede",
   "bugs": {
     "url": "https://github.com/estools/estraverse/issues"
   },
   "_id": "estraverse@4.2.0",
   "_shasum": "0dee3fed31fcd469618ce7342099fc1afa0bdb13",
-  "_from": "estraverse@>=4.2.0 <5.0.0"
+  "_from": "estraverse@>=4.2.0 <5.0.0",
+  "_npmVersion": "2.14.9",
+  "_nodeVersion": "0.12.9",
+  "_npmUser": {
+    "name": "nzakas",
+    "email": "nicholas@nczconsulting.com"
+  },
+  "dist": {
+    "shasum": "0dee3fed31fcd469618ce7342099fc1afa0bdb13",
+    "tarball": "http://registry.npmjs.org/estraverse/-/estraverse-4.2.0.tgz"
+  },
+  "_npmOperationalInternal": {
+    "host": "packages-12-west.internal.npmjs.com",
+    "tmp": "tmp/estraverse-4.2.0.tgz_1457646738925_0.7118953282479197"
+  },
+  "directories": {},
+  "_resolved": "https://registry.npmjs.org/estraverse/-/estraverse-4.2.0.tgz",
+  "readme": "ERROR: No README data found!"
 }
 
 },{}],137:[function(require,module,exports){
@@ -18129,6 +18244,7 @@ module.exports={
 		"ReactiveDict": false,
 		"ReactiveVar": false,
 		"Router": false,
+		"ServiceConfiguration": false,
 		"Session": false,
 		"share": false,
 		"Spacebars": false,
@@ -19058,7 +19174,7 @@ function extend() {
 (function (global){
 /**
  * @license
- * lodash 4.7.0 (Custom Build) <https://lodash.com/>
+ * lodash 4.8.0 (Custom Build) <https://lodash.com/>
  * Build: `lodash -d -o ./foo/lodash.js`
  * Copyright jQuery Foundation and other contributors <https://jquery.org/>
  * Released under MIT license <https://lodash.com/license>
@@ -19071,7 +19187,7 @@ function extend() {
   var undefined;
 
   /** Used as the semantic version number. */
-  var VERSION = '4.7.0';
+  var VERSION = '4.8.0';
 
   /** Used as the size to enable large array optimizations. */
   var LARGE_ARRAY_SIZE = 200;
@@ -19177,7 +19293,10 @@ function extend() {
       reIsPlainProp = /^\w*$/,
       rePropName = /[^.[\]]+|\[(?:(-?\d+(?:\.\d+)?)|(["'])((?:(?!\2)[^\\]|\\.)*?)\2)\]/g;
 
-  /** Used to match `RegExp` [syntax characters](http://ecma-international.org/ecma-262/6.0/#sec-patterns). */
+  /**
+   * Used to match `RegExp`
+   * [syntax characters](http://ecma-international.org/ecma-262/6.0/#sec-patterns).
+   */
   var reRegExpChar = /[\\^$.*+?()[\]{}|]/g,
       reHasRegExpChar = RegExp(reRegExpChar.source);
 
@@ -19189,7 +19308,10 @@ function extend() {
   /** Used to match backslashes in property paths. */
   var reEscapeChar = /\\(\\)?/g;
 
-  /** Used to match [ES template delimiters](http://ecma-international.org/ecma-262/6.0/#sec-template-literal-lexical-components). */
+  /**
+   * Used to match
+   * [ES template delimiters](http://ecma-international.org/ecma-262/6.0/#sec-template-literal-lexical-components).
+   */
   var reEsTemplate = /\$\{([^\\}]*(?:\\.[^\\}]*)*)\}/g;
 
   /** Used to match `RegExp` flags from their coerced string values. */
@@ -19468,7 +19590,7 @@ function extend() {
    * @private
    * @param {Function} func The function to invoke.
    * @param {*} thisArg The `this` binding of `func`.
-   * @param {...*} args The arguments to invoke `func` with.
+   * @param {Array} args The arguments to invoke `func` with.
    * @returns {*} Returns the result of `func`.
    */
   function apply(func, thisArg, args) {
@@ -20449,7 +20571,8 @@ function extend() {
     var objectCtorString = funcToString.call(Object);
 
     /**
-     * Used to resolve the [`toStringTag`](http://ecma-international.org/ecma-262/6.0/#sec-object.prototype.tostring)
+     * Used to resolve the
+     * [`toStringTag`](http://ecma-international.org/ecma-262/6.0/#sec-object.prototype.tostring)
      * of values.
      */
     var objectToString = objectProto.toString;
@@ -20508,11 +20631,11 @@ function extend() {
     var realNames = {};
 
     /** Used to detect maps, sets, and weakmaps. */
-    var dataViewCtorString = DataView ? (DataView + '') : '',
-        mapCtorString = Map ? funcToString.call(Map) : '',
-        promiseCtorString = Promise ? funcToString.call(Promise) : '',
-        setCtorString = Set ? funcToString.call(Set) : '',
-        weakMapCtorString = WeakMap ? funcToString.call(WeakMap) : '';
+    var dataViewCtorString = toSource(DataView),
+        mapCtorString = toSource(Map),
+        promiseCtorString = toSource(Promise),
+        setCtorString = toSource(Set),
+        weakMapCtorString = toSource(WeakMap);
 
     /** Used to convert symbols to primitives and strings. */
     var symbolProto = Symbol ? Symbol.prototype : undefined,
@@ -22248,16 +22371,7 @@ function extend() {
     function baseMatches(source) {
       var matchData = getMatchData(source);
       if (matchData.length == 1 && matchData[0][2]) {
-        var key = matchData[0][0],
-            value = matchData[0][1];
-
-        return function(object) {
-          if (object == null) {
-            return false;
-          }
-          return object[key] === value &&
-            (value !== undefined || (key in Object(object)));
-        };
+        return matchesStrictComparable(matchData[0][0], matchData[0][1]);
       }
       return function(object) {
         return object === source || baseIsMatch(object, source, matchData);
@@ -22273,6 +22387,9 @@ function extend() {
      * @returns {Function} Returns the new function.
      */
     function baseMatchesProperty(path, srcValue) {
+      if (isKey(path) && isStrictComparable(srcValue)) {
+        return matchesStrictComparable(path, srcValue);
+      }
       return function(object) {
         var objValue = get(object, path);
         return (objValue === undefined && objValue === srcValue)
@@ -23444,8 +23561,8 @@ function extend() {
      */
     function createCtorWrapper(Ctor) {
       return function() {
-        // Use a `switch` statement to work with class constructors.
-        // See http://ecma-international.org/ecma-262/6.0/#sec-ecmascript-function-objects-call-thisargument-argumentslist
+        // Use a `switch` statement to work with class constructors. See
+        // http://ecma-international.org/ecma-262/6.0/#sec-ecmascript-function-objects-call-thisargument-argumentslist
         // for more details.
         var args = arguments;
         switch (args.length) {
@@ -23666,7 +23783,7 @@ function extend() {
      */
     function createOver(arrayFunc) {
       return rest(function(iteratees) {
-        iteratees = arrayMap(baseFlatten(iteratees, 1), getIteratee());
+        iteratees = arrayMap(iteratees, getIteratee());
         return rest(function(args) {
           var thisArg = this;
           return arrayFunc(iteratees, function(iteratee) {
@@ -23699,9 +23816,8 @@ function extend() {
     }
 
     /**
-     * Creates a function that wraps `func` to invoke it with the optional `this`
-     * binding of `thisArg` and the `partials` prepended to those provided to
-     * the wrapper.
+     * Creates a function that wraps `func` to invoke it with the `this` binding
+     * of `thisArg` and `partials` prepended to the arguments it receives.
      *
      * @private
      * @param {Function} func The function to wrap.
@@ -24044,7 +24160,8 @@ function extend() {
         case regexpTag:
         case stringTag:
           // Coerce regexes to strings and treat strings, primitives and objects,
-          // as equal. See https://es5.github.io/#x15.10.6.4 for more details.
+          // as equal. See http://www.ecma-international.org/ecma-262/6.0/#sec-regexp.prototype.tostring
+          // for more details.
           return object == (other + '');
 
         case mapTag:
@@ -24211,7 +24328,7 @@ function extend() {
     /**
      * Gets the appropriate "iteratee" function. If the `_.iteratee` method is
      * customized this function returns the custom method, otherwise it returns
-     * `baseIteratee`. If arguments are provided the chosen function is invoked
+     * `baseIteratee`. If arguments are provided, the chosen function is invoked
      * with them and its result is returned.
      *
      * @private
@@ -24349,7 +24466,7 @@ function extend() {
       getTag = function(value) {
         var result = objectToString.call(value),
             Ctor = result == objectTag ? value.constructor : null,
-            ctorString = typeof Ctor == 'function' ? funcToString.call(Ctor) : '';
+            ctorString = toSource(Ctor);
 
         if (ctorString) {
           switch (ctorString) {
@@ -24402,29 +24519,25 @@ function extend() {
      * @returns {boolean} Returns `true` if `path` exists, else `false`.
      */
     function hasPath(object, path, hasFunc) {
-      if (object == null) {
-        return false;
-      }
-      var result = hasFunc(object, path);
-      if (!result && !isKey(path)) {
-        path = baseCastPath(path);
+      path = isKey(path, object) ? [path] : baseCastPath(path);
 
-        var index = -1,
-            length = path.length;
+      var result,
+          index = -1,
+          length = path.length;
 
-        while (object != null && ++index < length) {
-          var key = path[index];
-          if (!(result = hasFunc(object, key))) {
-            break;
-          }
-          object = object[key];
+      while (++index < length) {
+        var key = path[index];
+        if (!(result = object != null && hasFunc(object, key))) {
+          break;
         }
+        object = object[key];
       }
-      var length = object ? object.length : undefined;
-      return result || (
-        !!length && isLength(length) && isIndex(path, length) &&
-        (isArray(object) || isString(object) || isArguments(object))
-      );
+      if (result) {
+        return result;
+      }
+      var length = object ? object.length : 0;
+      return !!length && isLength(length) && isIndex(key, length) &&
+        (isArray(object) || isString(object) || isArguments(object));
     }
 
     /**
@@ -24629,6 +24742,25 @@ function extend() {
     }
 
     /**
+     * A specialized version of `matchesProperty` for source values suitable
+     * for strict equality comparisons, i.e. `===`.
+     *
+     * @private
+     * @param {string} key The key of the property to get.
+     * @param {*} srcValue The value to match.
+     * @returns {Function} Returns the new function.
+     */
+    function matchesStrictComparable(key, srcValue) {
+      return function(object) {
+        if (object == null) {
+          return false;
+        }
+        return object[key] === srcValue &&
+          (srcValue !== undefined || (key in Object(object)));
+      };
+    }
+
+    /**
      * Merges the function metadata of `source` into `data`.
      *
      * Merging metadata reduces the number of wrappers used to invoke a function.
@@ -24803,6 +24935,22 @@ function extend() {
     });
 
     /**
+     * Converts `func` to its source code.
+     *
+     * @private
+     * @param {Function} func The function to process.
+     * @returns {string} Returns the source code.
+     */
+    function toSource(func) {
+      if (isFunction(func)) {
+        try {
+          return funcToString.call(func);
+        } catch (e) {}
+      }
+      return toString(func);
+    }
+
+    /**
      * Creates a clone of `wrapper`.
      *
      * @private
@@ -24832,7 +24980,8 @@ function extend() {
      * @since 3.0.0
      * @category Array
      * @param {Array} array The array to process.
-     * @param {number} [size=0] The length of each chunk.
+     * @param {number} [size=1] The length of each chunk
+     * @param- {Object} [guard] Enables use as an iteratee for methods like `_.map`.
      * @returns {Array} Returns the new array containing chunks.
      * @example
      *
@@ -24842,9 +24991,12 @@ function extend() {
      * _.chunk(['a', 'b', 'c', 'd'], 3);
      * // => [['a', 'b', 'c'], ['d']]
      */
-    function chunk(array, size) {
-      size = nativeMax(toInteger(size), 0);
-
+    function chunk(array, size, guard) {
+      if ((guard ? isIterateeCall(array, size, guard) : size === undefined)) {
+        size = 1;
+      } else {
+        size = nativeMax(toInteger(size), 0);
+      }
       var length = array ? array.length : 0;
       if (!length || size < 1) {
         return [];
@@ -27026,9 +27178,9 @@ function extend() {
 
     /**
      * Creates an object composed of keys generated from the results of running
-     * each element of `collection` through `iteratee`. The corresponding value
-     * of each key is the number of times the key was returned by `iteratee`.
-     * The iteratee is invoked with one argument: (value).
+     * each element of `collection` thru `iteratee`. The corresponding value of
+     * each key is the number of times the key was returned by `iteratee`. The
+     * iteratee is invoked with one argument: (value).
      *
      * @static
      * @memberOf _
@@ -27210,8 +27362,8 @@ function extend() {
 
     /**
      * Creates a flattened array of values by running each element in `collection`
-     * through `iteratee` and flattening the mapped results. The iteratee is
-     * invoked with three arguments: (value, index|key, collection).
+     * thru `iteratee` and flattening the mapped results. The iteratee is invoked
+     * with three arguments: (value, index|key, collection).
      *
      * @static
      * @memberOf _
@@ -27348,9 +27500,9 @@ function extend() {
 
     /**
      * Creates an object composed of keys generated from the results of running
-     * each element of `collection` through `iteratee`. The corresponding value
-     * of each key is an array of elements responsible for generating the key.
-     * The iteratee is invoked with one argument: (value).
+     * each element of `collection` thru `iteratee`. The corresponding value of
+     * each key is an array of elements responsible for generating the key. The
+     * iteratee is invoked with one argument: (value).
      *
      * @static
      * @memberOf _
@@ -27458,8 +27610,8 @@ function extend() {
 
     /**
      * Creates an object composed of keys generated from the results of running
-     * each element of `collection` through `iteratee`. The corresponding value
-     * of each key is the last element responsible for generating the key. The
+     * each element of `collection` thru `iteratee`. The corresponding value of
+     * each key is the last element responsible for generating the key. The
      * iteratee is invoked with one argument: (value).
      *
      * @static
@@ -27490,7 +27642,7 @@ function extend() {
     });
 
     /**
-     * Creates an array of values by running each element in `collection` through
+     * Creates an array of values by running each element in `collection` thru
      * `iteratee`. The iteratee is invoked with three arguments:
      * (value, index|key, collection).
      *
@@ -27498,10 +27650,10 @@ function extend() {
      * `_.every`, `_.filter`, `_.map`, `_.mapValues`, `_.reject`, and `_.some`.
      *
      * The guarded methods are:
-     * `ary`, `curry`, `curryRight`, `drop`, `dropRight`, `every`, `fill`,
-     * `invert`, `parseInt`, `random`, `range`, `rangeRight`, `slice`, `some`,
-     * `sortBy`, `take`, `takeRight`, `template`, `trim`, `trimEnd`, `trimStart`,
-     * and `words`
+     * `ary`, `chunk`, `curry`, `curryRight`, `drop`, `dropRight`, `every`,
+     * `fill`, `invert`, `parseInt`, `random`, `range`, `rangeRight`, `repeat`,
+     * `sampleSize`, `slice`, `some`, `sortBy`, `take`, `takeRight`, `template`,
+     * `trim`, `trimEnd`, `trimStart`, and `words`
      *
      * @static
      * @memberOf _
@@ -27623,7 +27775,7 @@ function extend() {
 
     /**
      * Reduces `collection` to a value which is the accumulated result of running
-     * each element in `collection` through `iteratee`, where each successive
+     * each element in `collection` thru `iteratee`, where each successive
      * invocation is supplied the return value of the previous. If `accumulator`
      * is not given the first element of `collection` is used as the initial
      * value. The iteratee is invoked with four arguments:
@@ -27764,7 +27916,8 @@ function extend() {
      * @since 4.0.0
      * @category Collection
      * @param {Array|Object} collection The collection to sample.
-     * @param {number} [n=0] The number of elements to sample.
+     * @param {number} [n=1] The number of elements to sample.
+     * @param- {Object} [guard] Enables use as an iteratee for methods like `_.map`.
      * @returns {Array} Returns the random elements.
      * @example
      *
@@ -27774,13 +27927,17 @@ function extend() {
      * _.sampleSize([1, 2, 3], 4);
      * // => [2, 3, 1]
      */
-    function sampleSize(collection, n) {
+    function sampleSize(collection, n, guard) {
       var index = -1,
           result = toArray(collection),
           length = result.length,
           lastIndex = length - 1;
 
-      n = baseClamp(toInteger(n), 0, length);
+      if ((guard ? isIterateeCall(collection, n, guard) : n === undefined)) {
+        n = 1;
+      } else {
+        n = baseClamp(toInteger(n), 0, length);
+      }
       while (++index < n) {
         var rand = baseRandom(index, lastIndex),
             value = result[rand];
@@ -27896,7 +28053,7 @@ function extend() {
 
     /**
      * Creates an array of elements, sorted in ascending order by the results of
-     * running each element in a collection through each iteratee. This method
+     * running each element in a collection thru each iteratee. This method
      * performs a stable sort, that is, it preserves the original sort order of
      * equal elements. The iteratees are invoked with one argument: (value).
      *
@@ -28002,8 +28159,8 @@ function extend() {
     }
 
     /**
-     * Creates a function that accepts up to `n` arguments, ignoring any
-     * additional arguments.
+     * Creates a function that invokes `func`, with up to `n` arguments,
+     * ignoring any additional arguments.
      *
      * @static
      * @memberOf _
@@ -28060,8 +28217,7 @@ function extend() {
 
     /**
      * Creates a function that invokes `func` with the `this` binding of `thisArg`
-     * and prepends any additional `_.bind` arguments to those provided to the
-     * bound function.
+     * and `partials` prepended to the arguments it receives.
      *
      * The `_.bind.placeholder` value, which defaults to `_` in monolithic builds,
      * may be used as a placeholder for partially applied arguments.
@@ -28104,8 +28260,8 @@ function extend() {
     });
 
     /**
-     * Creates a function that invokes the method at `object[key]` and prepends
-     * any additional `_.bindKey` arguments to those provided to the bound function.
+     * Creates a function that invokes the method at `object[key]` with `partials`
+     * prepended to the arguments it receives.
      *
      * This method differs from `_.bind` by allowing bound functions to reference
      * methods that may be redefined or don't yet exist. See
@@ -28611,7 +28767,7 @@ function extend() {
      * @memberOf _
      * @category Function
      * @param {Function} func The function to wrap.
-     * @param {...(Function|Function[])} [transforms] The functions to transform
+     * @param {...Function} [transforms] The functions to transform
      * arguments, specified individually or in arrays.
      * @returns {Function} Returns the new function.
      * @example
@@ -28635,7 +28791,7 @@ function extend() {
      * // => [100, 10]
      */
     var overArgs = rest(function(func, transforms) {
-      transforms = arrayMap(baseFlatten(transforms, 1), getIteratee());
+      transforms = arrayMap(transforms, getIteratee());
 
       var funcsLength = transforms.length;
       return rest(function(args) {
@@ -28650,9 +28806,9 @@ function extend() {
     });
 
     /**
-     * Creates a function that invokes `func` with `partial` arguments prepended
-     * to those provided to the new function. This method is like `_.bind` except
-     * it does **not** alter the `this` binding.
+     * Creates a function that invokes `func` with `partials` prepended to the
+     * arguments it receives. This method is like `_.bind` except it does **not**
+     * alter the `this` binding.
      *
      * The `_.partial.placeholder` value, which defaults to `_` in monolithic
      * builds, may be used as a placeholder for partially applied arguments.
@@ -28689,7 +28845,7 @@ function extend() {
 
     /**
      * This method is like `_.partial` except that partially applied arguments
-     * are appended to those provided to the new function.
+     * are appended to the arguments it receives.
      *
      * The `_.partialRight.placeholder` value, which defaults to `_` in monolithic
      * builds, may be used as a placeholder for partially applied arguments.
@@ -28726,7 +28882,7 @@ function extend() {
 
     /**
      * Creates a function that invokes `func` with arguments arranged according
-     * to the specified indexes where the argument value at the first index is
+     * to the specified `indexes` where the argument value at the first index is
      * provided as the first argument, the argument value at the second index is
      * provided as the second argument, and so on.
      *
@@ -28808,7 +28964,7 @@ function extend() {
     /**
      * Creates a function that invokes `func` with the `this` binding of the
      * create function and an array of arguments much like
-     * [`Function#apply`](https://es5.github.io/#x15.3.4.3).
+     * [`Function#apply`](http://www.ecma-international.org/ecma-262/6.0/#sec-function.prototype.apply).
      *
      * **Note:** This method is based on the
      * [spread operator](https://mdn.io/spread_operator).
@@ -29697,8 +29853,9 @@ function extend() {
     }
 
     /**
-     * Checks if `value` is the [language type](https://es5.github.io/#x8) of `Object`.
-     * (e.g. arrays, functions, objects, regexes, `new Number(0)`, and `new String('')`)
+     * Checks if `value` is the
+     * [language type](http://www.ecma-international.org/ecma-262/6.0/#sec-ecmascript-language-types)
+     * of `Object`. (e.g. arrays, functions, objects, regexes, `new Number(0)`, and `new String('')`)
      *
      * @static
      * @memberOf _
@@ -29843,9 +30000,10 @@ function extend() {
     /**
      * Checks if `value` is `NaN`.
      *
-     * **Note:** This method is not the same as
-     * [`isNaN`](https://es5.github.io/#x15.1.2.4) which returns `true` for
-     * `undefined` and other non-numeric values.
+     * **Note:** This method is based on
+     * [`Number.isNaN`](https://mdn.io/Number/isNaN) and is not the same as
+     * global [`isNaN`](https://mdn.io/isNaN) which returns `true` for
+     * `undefined` and other non-number values.
      *
      * @static
      * @memberOf _
@@ -29893,14 +30051,11 @@ function extend() {
      * // => false
      */
     function isNative(value) {
-      if (value == null) {
+      if (!isObject(value)) {
         return false;
       }
-      if (isFunction(value)) {
-        return reIsNative.test(funcToString.call(value));
-      }
-      return isObjectLike(value) &&
-        (isHostObject(value) ? reIsNative : reIsHostCtor).test(value);
+      var pattern = (isFunction(value) || isHostObject(value)) ? reIsNative : reIsHostCtor;
+      return pattern.test(toSource(value));
     }
 
     /**
@@ -30429,7 +30584,7 @@ function extend() {
         value = isObject(other) ? (other + '') : other;
       }
       if (typeof value != 'string') {
-        return value === 0 ?  value : +value;
+        return value === 0 ? value : +value;
       }
       value = value.replace(reTrim, '');
       var isBinary = reIsBinary.test(value);
@@ -31105,7 +31260,7 @@ function extend() {
      * // => false
      */
     function has(object, path) {
-      return hasPath(object, path, baseHas);
+      return object != null && hasPath(object, path, baseHas);
     }
 
     /**
@@ -31135,7 +31290,7 @@ function extend() {
      * // => false
      */
     function hasIn(object, path) {
-      return hasPath(object, path, baseHasIn);
+      return object != null && hasPath(object, path, baseHasIn);
     }
 
     /**
@@ -31162,8 +31317,8 @@ function extend() {
 
     /**
      * This method is like `_.invert` except that the inverted object is generated
-     * from the results of running each element of `object` through `iteratee`.
-     * The corresponding inverted value of each inverted key is an array of keys
+     * from the results of running each element of `object` thru `iteratee`. The
+     * corresponding inverted value of each inverted key is an array of keys
      * responsible for generating the inverted value. The iteratee is invoked
      * with one argument: (value).
      *
@@ -31309,8 +31464,8 @@ function extend() {
     /**
      * The opposite of `_.mapValues`; this method creates an object with the
      * same values as `object` and keys generated by running each own enumerable
-     * string keyed property of `object` through `iteratee`. The iteratee is
-     * invoked with three arguments: (value, key, object).
+     * string keyed property of `object` thru `iteratee`. The iteratee is invoked
+     * with three arguments: (value, key, object).
      *
      * @static
      * @memberOf _
@@ -31338,8 +31493,8 @@ function extend() {
     }
 
     /**
-     * Creates an object with the same keys as `object` and values generated by
-     * running each own enumerable string keyed property of `object` through
+     * Creates an object with the same keys as `object` and values generated
+     * by running each own enumerable string keyed property of `object` thru
      * `iteratee`. The iteratee is invoked with three arguments:
      * (value, key, object).
      *
@@ -31628,7 +31783,7 @@ function extend() {
      * console.log(object.a[0].b.c);
      * // => 4
      *
-     * _.set(object, 'x[0].y.z', 5);
+     * _.set(object, ['x', '0', 'y', 'z'], 5);
      * console.log(object.x[0].y.z);
      * // => 5
      */
@@ -31721,11 +31876,11 @@ function extend() {
 
     /**
      * An alternative to `_.reduce`; this method transforms `object` to a new
-     * `accumulator` object which is the result of running each of its own enumerable
-     * string keyed properties through `iteratee`, with each invocation potentially
-     * mutating the `accumulator` object. The iteratee is invoked with four arguments:
-     * (accumulator, value, key, object). Iteratee functions may exit iteration
-     * early by explicitly returning `false`.
+     * `accumulator` object which is the result of running each of its own
+     * enumerable string keyed properties thru `iteratee`, with each invocation
+     * potentially mutating the `accumulator` object. The iteratee is invoked
+     * with four arguments: (accumulator, value, key, object). Iteratee functions
+     * may exit iteration early by explicitly returning `false`.
      *
      * @static
      * @memberOf _
@@ -31791,7 +31946,7 @@ function extend() {
      * console.log(object);
      * // => { 'a': [{ 'b': {} }] };
      *
-     * _.unset(object, 'a[0].b.c');
+     * _.unset(object, ['a', '0', 'b', 'c']);
      * // => true
      *
      * console.log(object);
@@ -32459,7 +32614,8 @@ function extend() {
      * @since 3.0.0
      * @category String
      * @param {string} [string=''] The string to repeat.
-     * @param {number} [n=0] The number of times to repeat the string.
+     * @param {number} [n=1] The number of times to repeat the string.
+     * @param- {Object} [guard] Enables use as an iteratee for methods like `_.map`.
      * @returns {string} Returns the repeated string.
      * @example
      *
@@ -32472,8 +32628,13 @@ function extend() {
      * _.repeat('abc', 0);
      * // => ''
      */
-    function repeat(string, n) {
-      return baseRepeat(toString(string), toInteger(n));
+    function repeat(string, n, guard) {
+      if ((guard ? isIterateeCall(string, n, guard) : n === undefined)) {
+        n = 1;
+      } else {
+        n = toInteger(n);
+      }
+      return baseRepeat(toString(string), n);
     }
 
     /**
@@ -33698,14 +33859,14 @@ function extend() {
     }
 
     /**
-     * Creates a function that invokes `iteratees` with the arguments provided
-     * to the created function and returns their results.
+     * Creates a function that invokes `iteratees` with the arguments it receives
+     * and returns their results.
      *
      * @static
      * @memberOf _
      * @since 4.0.0
      * @category Util
-     * @param {...(Function|Function[])} iteratees The iteratees to invoke.
+     * @param {...Function} iteratees The iteratees to invoke.
      * @returns {Function} Returns the new function.
      * @example
      *
@@ -33718,13 +33879,13 @@ function extend() {
 
     /**
      * Creates a function that checks if **all** of the `predicates` return
-     * truthy when invoked with the arguments provided to the created function.
+     * truthy when invoked with the arguments it receives.
      *
      * @static
      * @memberOf _
      * @since 4.0.0
      * @category Util
-     * @param {...(Function|Function[])} predicates The predicates to check.
+     * @param {...Function} predicates The predicates to check.
      * @returns {Function} Returns the new function.
      * @example
      *
@@ -33743,13 +33904,13 @@ function extend() {
 
     /**
      * Creates a function that checks if **any** of the `predicates` return
-     * truthy when invoked with the arguments provided to the created function.
+     * truthy when invoked with the arguments it receives.
      *
      * @static
      * @memberOf _
      * @since 4.0.0
      * @category Util
-     * @param {...(Function|Function[])} predicates The predicates to check.
+     * @param {...Function} predicates The predicates to check.
      * @returns {Function} Returns the new function.
      * @example
      *
@@ -35091,6 +35252,7 @@ function isMethodWhichHasThisArg(node) {
  */
 function hasJSDocThisTag(node, sourceCode) {
     var jsdocComment = sourceCode.getJSDocComment(node);
+
     if (jsdocComment && thisTagPattern.test(jsdocComment.value)) {
         return true;
     }
@@ -35215,6 +35377,7 @@ module.exports = {
      */
     isDirectiveComment: function(node) {
         var comment = node.value.trim();
+
         return (
             node.type === "Line" && comment.indexOf("eslint-") === 0 ||
             node.type === "Block" && (
@@ -35247,8 +35410,10 @@ module.exports = {
      */
     getVariableByName: function(initScope, name) {
         var scope = initScope;
+
         while (scope) {
             var variable = scope.set.get(name);
+
             if (variable) {
                 return variable;
             }
@@ -35287,6 +35452,7 @@ module.exports = {
 
         while (node) {
             var parent = node.parent;
+
             switch (parent.type) {
 
                 /*
@@ -35306,6 +35472,7 @@ module.exports = {
                 //   })();
                 case "ReturnStatement":
                     var func = getUpperFunction(parent);
+
                     if (func === null || !isCallee(func)) {
                         return true;
                     }
@@ -35432,6 +35599,7 @@ function isCaseNode(node) {
  */
 function isForkingByTrueOrFalse(node) {
     var parent = node.parent;
+
     switch (parent.type) {
         case "ConditionalExpression":
         case "IfStatement":
@@ -36257,6 +36425,7 @@ CodePathSegment.markUsed = function(segment) {
     segment.internal.used = true;
 
     var i;
+
     if (segment.reachable) {
         for (i = 0; i < segment.allPrevSegments.length; ++i) {
             var prevSegment = segment.allPrevSegments[i];
@@ -36342,6 +36511,7 @@ function getContinueContext(state, label) {
     }
 
     var context = state.loopContext;
+
     while (context) {
         if (context.label === label) {
             return context;
@@ -36362,6 +36532,7 @@ function getContinueContext(state, label) {
  */
 function getBreakContext(state, label) {
     var context = state.breakContext;
+
     while (context) {
         if (label ? context.label === label : context.breakable) {
             return context;
@@ -36381,6 +36552,7 @@ function getBreakContext(state, label) {
  */
 function getReturnContext(state) {
     var context = state.tryContext;
+
     while (context) {
         if (context.hasFinalizer && context.position !== "finally") {
             return context;
@@ -36399,6 +36571,7 @@ function getReturnContext(state) {
  */
 function getThrowContext(state) {
     var context = state.tryContext;
+
     while (context) {
         if (context.position === "try" ||
             (context.hasFinalizer && context.position === "catch")
@@ -36455,6 +36628,7 @@ function removeConnection(prevSegments, nextSegments) {
  */
 function makeLooped(state, fromSegments, toSegments) {
     var end = Math.min(fromSegments.length, toSegments.length);
+
     for (var i = 0; i < end; ++i) {
         var fromSegment = fromSegments[i];
         var toSegment = toSegments[i];
@@ -36528,6 +36702,7 @@ function CodePathState(idGenerator, onLooped) {
     var final = this.finalSegments = [];
     var returned = this.returnedForkContext = [];
     var thrown = this.thrownForkContext = [];
+
     returned.add = addToReturnedOrThrown.bind(null, returned, thrown, final);
     thrown.add = addToReturnedOrThrown.bind(null, thrown, returned, final);
 }
@@ -36550,6 +36725,7 @@ CodePathState.prototype = {
      */
     get parentForkContext() {
         var current = this.forkContext;
+
         return current && current.upper;
     },
 
@@ -36653,6 +36829,7 @@ CodePathState.prototype = {
      */
     popChoiceContext: function() {
         var context = this.choiceContext;
+
         this.choiceContext = context.upper;
 
         var forkContext = this.forkContext;
@@ -36678,6 +36855,7 @@ CodePathState.prototype = {
                  */
                 if (context.isForkingAsResult) {
                     var parentContext = this.choiceContext;
+
                     parentContext.trueForkContext.addAll(context.trueForkContext);
                     parentContext.falseForkContext.addAll(context.falseForkContext);
                     parentContext.processed = true;
@@ -36724,6 +36902,7 @@ CodePathState.prototype = {
 
         // Merges all paths.
         var prevForkContext = context.trueForkContext;
+
         prevForkContext.addAll(context.falseForkContext);
         forkContext.replaceHead(prevForkContext.makeNext(0, -1));
 
@@ -36863,6 +37042,7 @@ CodePathState.prototype = {
      */
     popSwitchContext: function() {
         var context = this.switchContext;
+
         this.switchContext = context.upper;
 
         var forkContext = this.forkContext;
@@ -36884,6 +37064,7 @@ CodePathState.prototype = {
         }
 
         var lastSegments = forkContext.head;
+
         this.forkBypassPath();
         var lastCaseSegments = forkContext.head;
 
@@ -36937,6 +37118,7 @@ CodePathState.prototype = {
      */
     makeSwitchCaseBody: function(isEmpty, isDefault) {
         var context = this.switchContext;
+
         if (!context.hasCase) {
             return;
         }
@@ -36948,6 +37130,7 @@ CodePathState.prototype = {
          */
         var parentForkContext = this.forkContext;
         var forkContext = this.pushForkContext();
+
         forkContext.add(parentForkContext.makeNext(0, -1));
 
         /*
@@ -37007,6 +37190,7 @@ CodePathState.prototype = {
      */
     popTryContext: function() {
         var context = this.tryContext;
+
         this.tryContext = context.upper;
 
         if (context.position === "catch") {
@@ -37030,6 +37214,7 @@ CodePathState.prototype = {
 
         // Separate head to normal paths and leaving paths.
         var headSegments = this.forkContext.head;
+
         this.forkContext = this.forkContext.upper;
         var normalSegments = headSegments.slice(0, headSegments.length / 2 | 0);
         var leavingSegments = headSegments.slice(headSegments.length / 2 | 0);
@@ -37118,6 +37303,7 @@ CodePathState.prototype = {
          */
         var segments = forkContext.makeNext(-1, -1);
         var j;
+
         for (var i = 0; i < forkContext.count; ++i) {
             var prevSegsOfLeavingSegment = [headOfLeavingSegments[i]];
 
@@ -37145,11 +37331,13 @@ CodePathState.prototype = {
      */
     makeFirstThrowablePathInTryBlock: function() {
         var forkContext = this.forkContext;
+
         if (!forkContext.reachable) {
             return;
         }
 
         var context = getThrowContext(this);
+
         if (context === this ||
             context.position !== "try" ||
             !context.thrownForkContext.empty
@@ -37248,6 +37436,7 @@ CodePathState.prototype = {
      */
     popLoopContext: function() {
         var context = this.loopContext;
+
         this.loopContext = context.upper;
 
         var forkContext = this.forkContext;
@@ -37278,6 +37467,7 @@ CodePathState.prototype = {
 
                 // `true` paths go to looping.
                 var segmentsList = choiceContext.trueForkContext.segmentsList;
+
                 for (var i = 0; i < segmentsList.length; ++i) {
                     makeLooped(
                         this,
@@ -37424,6 +37614,7 @@ CodePathState.prototype = {
 
         // Update state.
         var updateSegments = forkContext.makeDisconnected(-1, -1);
+
         context.continueDestSegments = context.updateSegments = updateSegments;
         forkContext.replaceHead(updateSegments);
     },
@@ -37467,6 +37658,7 @@ CodePathState.prototype = {
              * `init` part and the `update` part.
              */
             var prevForkContext = ForkContext.newEmpty(forkContext);
+
             prevForkContext.add(context.endOfInitSegments);
             if (context.endOfUpdateSegments) {
                 prevForkContext.add(context.endOfUpdateSegments);
@@ -37505,6 +37697,7 @@ CodePathState.prototype = {
         var context = this.loopContext;
         var forkContext = this.forkContext;
         var temp = ForkContext.newEmpty(forkContext);
+
         temp.add(context.prevSegments);
         var rightSegments = temp.makeNext(-1, -1);
 
@@ -37523,6 +37716,7 @@ CodePathState.prototype = {
         var context = this.loopContext;
         var forkContext = this.forkContext;
         var temp = ForkContext.newEmpty(forkContext);
+
         temp.add(context.endOfLeftSegments);
         var bodySegments = temp.makeNext(-1, -1);
 
@@ -37564,11 +37758,13 @@ CodePathState.prototype = {
     popBreakContext: function() {
         var context = this.breakContext;
         var forkContext = this.forkContext;
+
         this.breakContext = context.upper;
 
         // Process this context here for other than switches and loops.
         if (!context.breakable) {
             var brokenForkContext = context.brokenForkContext;
+
             if (!brokenForkContext.empty) {
                 brokenForkContext.add(forkContext.head);
                 forkContext.replaceHead(brokenForkContext.makeNext(0, -1));
@@ -37589,6 +37785,7 @@ CodePathState.prototype = {
      */
     makeBreak: function(label) {
         var forkContext = this.forkContext;
+
         if (!forkContext.reachable) {
             return;
         }
@@ -37614,6 +37811,7 @@ CodePathState.prototype = {
      */
     makeContinue: function(label) {
         var forkContext = this.forkContext;
+
         if (!forkContext.reachable) {
             return;
         }
@@ -37648,6 +37846,7 @@ CodePathState.prototype = {
      */
     makeReturn: function() {
         var forkContext = this.forkContext;
+
         if (forkContext.reachable) {
             getReturnContext(this).returnedForkContext.add(forkContext.head);
             forkContext.replaceHead(forkContext.makeUnreachable(-1, -1));
@@ -37664,6 +37863,7 @@ CodePathState.prototype = {
      */
     makeThrow: function() {
         var forkContext = this.forkContext;
+
         if (forkContext.reachable) {
             getThrowContext(this).thrownForkContext.add(forkContext.head);
             forkContext.replaceHead(forkContext.makeUnreachable(-1, -1));
@@ -37676,6 +37876,7 @@ CodePathState.prototype = {
      */
     makeFinal: function() {
         var segments = this.currentSegments;
+
         if (segments.length > 0 && segments[0].reachable) {
             this.returnedForkContext.add(segments);
         }
@@ -37983,6 +38184,7 @@ module.exports = {
     dumpState: !debug.enabled ? debug : /* istanbul ignore next */ function(node, state, leaving) {
         for (var i = 0; i < state.currentSegments.length; ++i) {
             var segInternal = state.currentSegments[i].internal;
+
             if (leaving) {
                 segInternal.exitNodes.push(node);
             } else {
@@ -38079,12 +38281,14 @@ module.exports = {
             var item = stack.pop();
             var segment = item[0];
             var index = item[1];
+
             if (done[segment.id] && index === 0) {
                 continue;
             }
             done[segment.id] = segment;
 
             var nextSegment = segment.allNextSegments[index];
+
             if (!nextSegment) {
                 continue;
             }
@@ -38172,6 +38376,7 @@ function isReachable(segment) {
  */
 function makeSegments(context, begin, end, create) {
     var list = context.segmentsList;
+
     if (begin < 0) {
         begin = list.length + begin;
     }
@@ -38180,6 +38385,7 @@ function makeSegments(context, begin, end, create) {
     }
 
     var segments = [];
+
     for (var i = 0; i < context.count; ++i) {
         var allPrevSegments = [];
 
@@ -38206,6 +38412,7 @@ function makeSegments(context, begin, end, create) {
 function mergeExtraSegments(context, segments) {
     while (segments.length > context.count) {
         var merged = [];
+
         for (var i = 0, length = segments.length / 2 | 0; i < length; ++i) {
             merged.push(CodePathSegment.newNext(
                 context.idGenerator.next(),
@@ -38245,6 +38452,7 @@ ForkContext.prototype = {
      */
     get head() {
         var list = this.segmentsList;
+
         return list.length === 0 ? [] : list[list.length - 1];
     },
 
@@ -38262,6 +38470,7 @@ ForkContext.prototype = {
      */
     get reachable() {
         var segments = this.head;
+
         return segments.length > 0 && segments.some(isReachable);
     },
 
@@ -38337,6 +38546,7 @@ ForkContext.prototype = {
         assert(context.count === this.count);
 
         var source = context.segmentsList;
+
         for (var i = 0; i < source.length; ++i) {
             this.segmentsList.push(source[i]);
         }
@@ -38832,6 +39042,7 @@ function validateEnvironment(environment, source) {
                     source, ":\n",
                     "\tEnvironment key \"", env, "\" is unknown\n"
                 ];
+
                 throw new Error(message.join(""));
             }
         });
@@ -39015,6 +39226,7 @@ function parseBooleanConfig(string, comment) {
         }
         var pos = name.indexOf(":"),
             value;
+
         if (pos !== -1) {
             value = name.substring(pos + 1, name.length);
             name = name.substring(0, pos);
@@ -39038,6 +39250,7 @@ function parseBooleanConfig(string, comment) {
  */
 function parseJsonConfig(string, location, messages) {
     var items = {};
+
     string = string.replace(/([a-zA-Z0-9\-\/]+):/g, "\"$1\":").replace(/(\]|[0-9])\s+(?=")/, "$1,");
     try {
         items = JSON.parse("{" + string + "}");
@@ -39100,6 +39313,7 @@ function addDeclaredGlobals(program, globalScope, config) {
         if (config.env[name]) {
             var env = Environments.get(name),
                 environmentGlobals = env && env.globals;
+
             if (environmentGlobals) {
                 lodash.assign(declaredGlobals, environmentGlobals);
             }
@@ -39112,6 +39326,7 @@ function addDeclaredGlobals(program, globalScope, config) {
 
     Object.keys(declaredGlobals).forEach(function(name) {
         var variable = globalScope.set.get(name);
+
         if (!variable) {
             variable = new escope.Variable(name, globalScope);
             variable.eslintExplicitGlobal = false;
@@ -39123,6 +39338,7 @@ function addDeclaredGlobals(program, globalScope, config) {
 
     Object.keys(explicitGlobals).forEach(function(name) {
         var variable = globalScope.set.get(name);
+
         if (!variable) {
             variable = new escope.Variable(name, globalScope);
             variable.eslintExplicitGlobal = true;
@@ -39136,6 +39352,7 @@ function addDeclaredGlobals(program, globalScope, config) {
     // mark all exported variables as such
     Object.keys(exportedGlobals).forEach(function(name) {
         var variable = globalScope.set.get(name);
+
         if (variable) {
             variable.eslintUsed = true;
         }
@@ -39217,6 +39434,7 @@ function enableReporting(reportingConfig, start, rulesToEnable) {
 
         // find all previous disabled locations if they was started as list of rules
         var prevStart;
+
         for (i = reportingConfig.length - 1; i >= 0; i--) {
             if (prevStart && prevStart !== reportingConfig[i].start) {
                 break;
@@ -39284,8 +39502,10 @@ function modifyConfigsFromComments(filename, ast, config, reportingConfig, messa
 
                     case "eslint":
                         var items = parseJsonConfig(value, comment.loc, messages);
+
                         Object.keys(items).forEach(function(name) {
                             var ruleValue = items[name];
+
                             validator.validateRuleOptions(name, ruleValue, filename + " line " + comment.loc.start.line);
                             commentRules[name] = ruleValue;
                         });
@@ -39308,6 +39528,7 @@ function modifyConfigsFromComments(filename, ast, config, reportingConfig, messa
     // apply environment configs
     Object.keys(commentConfig.env).forEach(function(name) {
         var env = Environments.get(name);
+
         if (env) {
             commentConfig = ConfigOps.merge(commentConfig, env);
         }
@@ -39329,6 +39550,7 @@ function isDisabledByReportingConfig(reportingConfig, ruleId, location) {
     for (var i = 0, c = reportingConfig.length; i < c; i++) {
 
         var ignore = reportingConfig[i];
+
         if ((!ignore.rule || ignore.rule === ruleId) &&
             (location.line > ignore.start.line || (location.line === ignore.start.line && location.column >= ignore.start.column)) &&
             (!ignore.end || (location.line < ignore.end.line || (location.line === ignore.end.line && location.column <= ignore.end.column)))) {
@@ -39356,6 +39578,7 @@ function prepareConfig(config) {
     if (typeof config.rules === "object") {
         Object.keys(config.rules).forEach(function(k) {
             var rule = config.rules[k];
+
             if (rule === null) {
                 throw new Error("Invalid config for rule '" + k + "'\.");
             }
@@ -39371,6 +39594,7 @@ function prepareConfig(config) {
     if (typeof config.env === "object") {
         Object.keys(config.env).forEach(function(envName) {
             var env = Environments.get(envName);
+
             if (config.env[envName] && env && env.parserOptions) {
                 parserOptions = ConfigOps.merge(parserOptions, env.parserOptions);
             }
@@ -39438,6 +39662,7 @@ function createStubRule(message) {
 function getRuleReplacementMessage(ruleId) {
     if (ruleId in replacements.rules) {
         var newRules = replacements.rules[ruleId];
+
         return "Rule \'" + ruleId + "\' was removed and replaced by: " + newRules.join(", ");
     }
 
@@ -39670,6 +39895,7 @@ module.exports = (function() {
 
         // search and apply "eslint-env *".
         var envInFile = findEslintEnv(text || textOrSourceCode.text);
+
         if (envInFile) {
             if (!config || !config.env) {
                 config = lodash.assign({}, config || {}, {env: envInFile});
@@ -39732,6 +39958,7 @@ module.exports = (function() {
 
                 if (!ruleCreator) {
                     var replacementMsg = getRuleReplacementMessage(key);
+
                     if (replacementMsg) {
                         ruleCreator = createStubRule(replacementMsg);
                     } else {
@@ -39747,6 +39974,7 @@ module.exports = (function() {
                     var ruleContext = new RuleContext(
                         key, api, severity, options,
                         config.settings, config.parserOptions, config.parser, ruleCreator.meta);
+
                     rule = ruleCreator.create ? ruleCreator.create(ruleContext) :
                         ruleCreator(ruleContext);
 
@@ -39813,6 +40041,7 @@ module.exports = (function() {
             }
 
             var eventGenerator = new NodeEventGenerator(api);
+
             eventGenerator = new CodePathAnalyzer(eventGenerator);
             eventGenerator = new CommentEventGenerator(eventGenerator, sourceCode);
 
@@ -39975,6 +40204,7 @@ module.exports = (function() {
 
             // if current node introduces a scope, add it to the list
             var current = traverser.current();
+
             if (currentConfig.parserOptions.ecmaVersion >= 6) {
                 if (["BlockStatement", "SwitchStatement", "CatchClause", "FunctionDeclaration", "FunctionExpression", "ArrowFunctionExpression"].indexOf(current.type) >= 0) {
                     parents.push(current);
@@ -40525,6 +40755,7 @@ function define(ruleId, ruleModule) {
  */
 function load(rulesDir, cwd) {
     var newRules = loadRules(rulesDir, cwd);
+
     Object.keys(newRules).forEach(function(ruleId) {
         define(ruleId, newRules[ruleId]);
     });
@@ -40624,6 +40855,7 @@ function isIdentifier(node, name) {
  */
 function isArgumentOfMethodCall(node, index, object, property) {
     var parent = node.parent;
+
     return (
         parent.type === "CallExpression" &&
         parent.callee.type === "MemberExpression" &&
@@ -40704,6 +40936,7 @@ module.exports = {
                 var property = node.properties[i];
 
                 var propToCheck = "";
+
                 if (property.kind === "init") {
                     if (isDescriptor && !property.computed) {
                         propToCheck = property.key.name;
@@ -40833,6 +41066,7 @@ module.exports = {
                 message: "There should be no space after '" + token.value + "'",
                 fix: function(fixer) {
                     var nextToken = context.getSourceCode().getTokenAfter(token);
+
                     return fixer.removeRange([token.range[1], nextToken.range[0]]);
                 }
             });
@@ -40851,6 +41085,7 @@ module.exports = {
                 message: "There should be no space before '" + token.value + "'",
                 fix: function(fixer) {
                     var previousToken = context.getSourceCode().getTokenBefore(token);
+
                     return fixer.removeRange([previousToken.range[1], token.range[0]]);
                 }
             });
@@ -41077,6 +41312,7 @@ function isTargetMethod(node) {
 function isCallbackOfArrayMethod(node) {
     while (node) {
         var parent = node.parent;
+
         switch (parent.type) {
 
             /*
@@ -41096,6 +41332,7 @@ function isCallbackOfArrayMethod(node) {
             //   })());
             case "ReturnStatement":
                 var func = astUtils.getUpperFunction(parent);
+
                 if (func === null || !astUtils.isCallee(func)) {
                     return false;
                 }
@@ -41232,6 +41469,7 @@ module.exports = function(context) {
      */
     function validate(node) {
         var arrowBody = node.body;
+
         if (arrowBody.type === "BlockStatement") {
             var blockBody = arrowBody.body;
 
@@ -41351,11 +41589,13 @@ module.exports = function(context) {
     function getTokens(node) {
         var t = context.getFirstToken(node);
         var before;
+
         while (t.type !== "Punctuator" || t.value !== "=>") {
             before = t;
             t = context.getTokenAfter(t);
         }
         var after = context.getTokenAfter(t);
+
         return { before: before, arrow: t, after: after };
     }
 
@@ -41367,6 +41607,7 @@ module.exports = function(context) {
     function countSpaces(tokens) {
         var before = tokens.arrow.range[0] - tokens.before.range[1];
         var after = tokens.after.range[0] - tokens.arrow.range[1];
+
         return { before: before, after: after };
     }
 
@@ -41494,6 +41735,7 @@ module.exports = function(context) {
      */
     function report(reference) {
         var identifier = reference.identifier;
+
         context.report(
             identifier,
             "'{{name}}' used outside of binding context.",
@@ -41521,6 +41763,7 @@ module.exports = function(context) {
          */
         function isOutsideOfScope(reference) {
             var idRange = reference.identifier.range;
+
             return idRange[0] < scopeRange[0] || idRange[1] > scopeRange[1];
         }
 
@@ -41747,7 +41990,11 @@ module.exports = function(context) {
 
         return function(node) {
             Array.prototype.forEach.call(blockProperties, function(blockProp) {
-                var block = node[blockProp], previousToken, curlyToken, curlyTokenEnd, allOnSameLine;
+                var block = node[blockProp],
+                    previousToken,
+                    curlyToken,
+                    curlyTokenEnd,
+                    allOnSameLine;
 
                 if (!isBlock(block)) {
                     return;
@@ -41867,6 +42114,7 @@ module.exports = function(context) {
      */
     function checkSwitchStatement(node) {
         var tokens;
+
         if (node.cases && node.cases.length) {
             tokens = sourceCode.getTokensBefore(node.cases[0], 2);
         } else {
@@ -42258,6 +42506,7 @@ module.exports = function(context) {
      */
     function isMultiline(node) {
         var lastItem = lodash.last(node.properties || node.elements || node.specifiers);
+
         if (!lastItem) {
             return false;
         }
@@ -42290,6 +42539,7 @@ module.exports = function(context) {
      */
     function forbidTrailingComma(node) {
         var lastItem = lodash.last(node.properties || node.elements || node.specifiers);
+
         if (!lastItem || (node.type === "ImportDeclaration" && lastItem.type !== "ImportSpecifier")) {
             return;
         }
@@ -42326,6 +42576,7 @@ module.exports = function(context) {
      */
     function forceTrailingComma(node) {
         var lastItem = lodash.last(node.properties || node.elements || node.specifiers);
+
         if (!lastItem || (node.type === "ImportDeclaration" && lastItem.type !== "ImportSpecifier")) {
             return;
         }
@@ -42388,6 +42639,7 @@ module.exports = function(context) {
 
     // Chooses a checking function.
     var checkForTrailingComma;
+
     if (mode === "always") {
         checkForTrailingComma = forceTrailingComma;
     } else if (mode === "always-multiline") {
@@ -42807,6 +43059,9 @@ module.exports = function(context) {
     if (typeof option === "object" && option.hasOwnProperty("maximum") && typeof option.maximum === "number") {
         THRESHOLD = option.maximum;
     }
+    if (typeof option === "object" && option.hasOwnProperty("max") && typeof option.max === "number") {
+        THRESHOLD = option.max;
+    }
     if (typeof option === "number") {
         THRESHOLD = option;
     }
@@ -42924,6 +43179,10 @@ module.exports.schema = [
                 "type": "object",
                 "properties": {
                     "maximum": {
+                        "type": "integer",
+                        "minimum": 0
+                    },
+                    "max": {
                         "type": "integer",
                         "minimum": 0
                     }
@@ -43299,6 +43558,7 @@ module.exports = function(context) {
         // assigned later in the same scope.
         if (!variable.references.some(function(reference) {
             var write = reference.writeExpr;
+
             return (
                 reference.from === scope &&
                 write && write.type === "ThisExpression" &&
@@ -43502,6 +43762,7 @@ module.exports = function(context) {
             var segments = codePath.returnedSegments;
             var calledInEveryPaths = segments.every(isCalledInEveryPath);
             var calledInSomePaths = segments.some(isCalledInSomePath);
+
             if (!calledInEveryPaths) {
                 context.report({
                     message: calledInSomePaths ?
@@ -43536,6 +43797,7 @@ module.exports = function(context) {
 
             // When there are previous segments, aggregates these.
             var prevSegments = segment.prevSegments;
+
             if (prevSegments.length > 0) {
                 info.calledInSomePaths = prevSegments.some(isCalledInSomePath);
                 info.calledInEveryPaths = prevSegments.every(isCalledInEveryPath);
@@ -43571,16 +43833,19 @@ module.exports = function(context) {
 
                     // Updates flags.
                     var prevSegments = segment.prevSegments;
+
                     info.calledInSomePaths = prevSegments.some(isCalledInSomePath);
                     info.calledInEveryPaths = prevSegments.every(isCalledInEveryPath);
 
                     // If flags become true anew, reports the valid nodes.
                     if (info.calledInSomePaths || isRealLoop) {
                         var nodes = info.validNodes;
+
                         info.validNodes = [];
 
                         for (var i = 0; i < nodes.length; ++i) {
                             var node = nodes[i];
+
                             context.report({
                                 message: "Unexpected duplicate 'super()'.",
                                 node: node
@@ -43617,6 +43882,7 @@ module.exports = function(context) {
                  */
                 var segments = funcInfo.codePath.currentSegments;
                 var duplicate = false;
+
                 for (var i = 0; i < segments.length; ++i) {
                     var info = segInfoMap[segments[i].id];
 
@@ -43695,6 +43961,7 @@ module.exports = function(context) {
     function isCollapsedOneLiner(node) {
         var before = context.getTokenBefore(node),
             last = context.getLastToken(node);
+
         return before.loc.start.line === last.loc.end.line;
     }
 
@@ -43857,6 +44124,7 @@ module.exports = function(context) {
      */
     function prepareIfChecks(node) {
         var preparedChecks = [];
+
         do {
             preparedChecks.push(prepareCheck(node, node.consequent, "if", "condition"));
             if (node.alternate && node.alternate.type !== "IfStatement") {
@@ -44006,6 +44274,7 @@ module.exports = function(context) {
                 var comments;
 
                 var lastCase = last(node.cases);
+
                 comments = context.getComments(lastCase).trailing;
 
                 if (comments.length) {
@@ -44105,6 +44374,7 @@ module.exports = function(context) {
     var allowKeywords = options.allowKeywords === void 0 || !!options.allowKeywords;
 
     var allowPattern;
+
     if (options.allowPattern) {
         allowPattern = new RegExp(options.allowPattern);
     }
@@ -44265,6 +44535,7 @@ module.exports = function(context) {
      */
     function getOperatorLocation(node) {
         var opToken = context.getTokenAfter(node.left);
+
         return {line: opToken.loc.start.line, column: opToken.loc.start.column};
     }
 
@@ -44478,6 +44749,7 @@ module.exports = function(context) {
             var node = after ? leftToken : rightToken;
             var type = spaceRequired ? "Missing" : "Unexpected";
             var message = type + " space " + side + " *.";
+
             context.report({
                 node: node,
                 message: message,
@@ -44595,6 +44867,7 @@ function findReference(scope, node) {
  */
 function isShadowed(scope, node) {
     var reference = findReference(scope, node);
+
     return reference && reference.resolved && reference.resolved.defs.length > 0;
 }
 
@@ -44677,6 +44950,7 @@ module.exports = function(context) {
      */
     function isPattern(stringToCheck) {
         var firstChar = stringToCheck[0];
+
         return firstChar === "^";
     }
 
@@ -44688,6 +44962,7 @@ module.exports = function(context) {
     function matchesConfiguredErrorName(name) {
         if (isPattern(errorArgument)) {
             var regexp = new RegExp(errorArgument);
+
             return regexp.test(name);
         }
         return name === errorArgument;
@@ -44913,6 +45188,7 @@ module.exports = function(context) {
 
             var isShort = name.length < minLength;
             var isLong = name.length > maxLength;
+
             if (!(isShort || isLong) || exceptions[name]) {
                 return;  // Nothing to report
             }
@@ -45155,8 +45431,10 @@ module.exports = function(context) {
 
         if (context.options[1]) {
             var opts = context.options[1];
+
             options.SwitchCase = opts.SwitchCase || 0;
             var variableDeclaratorRules = opts.VariableDeclarator;
+
             if (typeof variableDeclaratorRules === "number") {
                 options.VariableDeclarator = {
                     var: variableDeclaratorRules,
@@ -45296,6 +45574,7 @@ module.exports = function(context) {
      */
     function checkNodeIndent(node, indent, excludeCommas) {
         var nodeIndent = getNodeIndent(node, false, excludeCommas);
+
         if (
             node.type !== "ArrayExpression" && node.type !== "ObjectExpression" &&
             nodeIndent !== indent && isNodeFirstInLine(node)
@@ -45315,6 +45594,7 @@ module.exports = function(context) {
         nodes.forEach(function(node) {
             if (node.type === "IfStatement" && node.alternate) {
                 var elseToken = context.getTokenBefore(node.alternate);
+
                 checkNodeIndent(elseToken, indent, excludeCommas);
             }
             checkNodeIndent(node, indent, excludeCommas);
@@ -45350,6 +45630,7 @@ module.exports = function(context) {
      */
     function checkFirstNodeLineIndent(node, firstLineIndent) {
         var startIndent = getNodeIndent(node, false);
+
         if (startIndent !== firstLineIndent && isNodeFirstInLine(node)) {
             report(
                 node,
@@ -45461,6 +45742,7 @@ module.exports = function(context) {
 
         // check if the node is inside a variable
         var parentVarNode = getVariableDeclaratorNode(node);
+
         if (parentVarNode && isNodeInVarOnTop(node, parentVarNode)) {
             indent += indentSize * options.VariableDeclarator[parentVarNode.parent.kind];
         }
@@ -45595,7 +45877,7 @@ module.exports = function(context) {
      * @returns {boolean} True if it or its body is a block statement
      */
     function isNodeBodyBlock(node) {
-        return node.type === "BlockStatement" || (node.body && node.body.type === "BlockStatement") ||
+        return node.type === "BlockStatement" || node.type === "ClassBody" || (node.body && node.body.type === "BlockStatement") ||
             (node.consequent && node.consequent.type === "BlockStatement");
     }
 
@@ -45628,7 +45910,7 @@ module.exports = function(context) {
          * not from the beginning of the block.
          */
         var statementsWithProperties = [
-            "IfStatement", "WhileStatement", "ForStatement", "ForInStatement", "ForOfStatement", "DoWhileStatement"
+            "IfStatement", "WhileStatement", "ForStatement", "ForInStatement", "ForOfStatement", "DoWhileStatement", "ClassDeclaration"
         ];
 
         if (node.parent && statementsWithProperties.indexOf(node.parent.type) !== -1 && isNodeBodyBlock(node)) {
@@ -45792,6 +46074,7 @@ module.exports = function(context) {
             // Switch is not a 'BlockStatement'
             var switchIndent = getNodeIndent(node);
             var caseIndent = expectedCaseIndent(node, switchIndent);
+
             checkNodesIndent(node.cases, caseIndent);
 
 
@@ -45805,6 +46088,7 @@ module.exports = function(context) {
                 return;
             }
             var caseIndent = expectedCaseIndent(node);
+
             checkNodesIndent(node.consequent, caseIndent + indentSize);
         }
     };
@@ -45929,6 +46213,7 @@ module.exports = function(context) {
                     id = declaration.id,
                     initialized = isInitialized(declaration),
                     isIgnoredForLoop = params.ignoreForLoopInit && isForLoop(node.parent);
+
                 if (id.type !== "Identifier") {
                     continue;
                 }
@@ -46388,6 +46673,7 @@ module.exports = function(context) {
      */
     function verifySpacing(node, lineOptions) {
         var actual = getPropertyWhitespace(node);
+
         if (actual) { // Object literal getters/setters lack colons
             report(node, "key", actual.beforeColon, lineOptions.beforeColon, lineOptions.mode);
             report(node, "value", actual.afterColon, lineOptions.afterColon, lineOptions.mode);
@@ -46416,7 +46702,7 @@ module.exports = function(context) {
         return {
             "ObjectExpression": function(node) {
                 if (isSingleLine(node)) {
-                    verifyListSpacing(node.properties);
+                    verifyListSpacing(node.properties.filter(isKeyValueProperty));
                 } else {
                     verifyAlignment(node);
                 }
@@ -46580,6 +46866,7 @@ module.exports = function(context) {
         pattern = pattern || PREV_TOKEN;
 
         var prevToken = sourceCode.getTokenBefore(token);
+
         if (prevToken &&
             (CHECK_TYPE.test(prevToken.type) || pattern.test(prevToken.value)) &&
             !isOpenParenOfTemplate(prevToken) &&
@@ -46609,6 +46896,7 @@ module.exports = function(context) {
         pattern = pattern || PREV_TOKEN;
 
         var prevToken = sourceCode.getTokenBefore(token);
+
         if (prevToken &&
             (CHECK_TYPE.test(prevToken.type) || pattern.test(prevToken.value)) &&
             !isOpenParenOfTemplate(prevToken) &&
@@ -46638,6 +46926,7 @@ module.exports = function(context) {
         pattern = pattern || NEXT_TOKEN;
 
         var nextToken = sourceCode.getTokenAfter(token);
+
         if (nextToken &&
             (CHECK_TYPE.test(nextToken.type) || pattern.test(nextToken.value)) &&
             !isCloseParenOfTemplate(nextToken) &&
@@ -46667,6 +46956,7 @@ module.exports = function(context) {
         pattern = pattern || NEXT_TOKEN;
 
         var nextToken = sourceCode.getTokenAfter(token);
+
         if (nextToken &&
             (CHECK_TYPE.test(nextToken.type) || pattern.test(nextToken.value)) &&
             !isCloseParenOfTemplate(nextToken) &&
@@ -46709,6 +46999,7 @@ module.exports = function(context) {
             if (override) {
                 var thisBefore = ("before" in override) ? override.before : before;
                 var thisAfter = ("after" in override) ? override.after : after;
+
                 retv[key] = {
                     before: thisBefore ? expectSpaceBefore : unexpectSpaceBefore,
                     after: thisAfter ? expectSpaceAfter : unexpectSpaceAfter
@@ -46769,6 +47060,7 @@ module.exports = function(context) {
      */
     function checkSpacingAroundFirstToken(node) {
         var firstToken = node && sourceCode.getFirstToken(node);
+
         if (firstToken && firstToken.type === "Keyword") {
             checkSpacingAround(firstToken);
         }
@@ -46786,6 +47078,7 @@ module.exports = function(context) {
      */
     function checkSpacingBeforeFirstToken(node) {
         var firstToken = node && sourceCode.getFirstToken(node);
+
         if (firstToken && firstToken.type === "Keyword") {
             checkSpacingBefore(firstToken);
         }
@@ -46801,6 +47094,7 @@ module.exports = function(context) {
     function checkSpacingAroundTokenBefore(node) {
         if (node) {
             var token = sourceCode.getTokenBefore(node);
+
             while (token.type !== "Keyword") {
                 token = sourceCode.getTokenBefore(token);
             }
@@ -46882,6 +47176,7 @@ module.exports = function(context) {
 
         // `of` is not a keyword token.
         var token = sourceCode.getTokenBefore(node.right);
+
         while (token.value !== "of") {
             token = sourceCode.getTokenBefore(token);
         }
@@ -46902,11 +47197,13 @@ module.exports = function(context) {
      */
     function checkSpacingForModuleDeclaration(node) {
         var firstToken = sourceCode.getFirstToken(node);
+
         checkSpacingBefore(firstToken, PREV_TOKEN_M);
         checkSpacingAfter(firstToken, NEXT_TOKEN_M);
 
         if (node.source) {
             var fromToken = sourceCode.getTokenBefore(node.source);
+
             checkSpacingBefore(fromToken, PREV_TOKEN_M);
             checkSpacingAfter(fromToken, NEXT_TOKEN_M);
         }
@@ -46921,6 +47218,7 @@ module.exports = function(context) {
      */
     function checkSpacingForImportNamespaceSpecifier(node) {
         var asToken = sourceCode.getFirstToken(node, 1);
+
         checkSpacingBefore(asToken, PREV_TOKEN_M);
     }
 
@@ -46940,6 +47238,7 @@ module.exports = function(context) {
                 node,
                 node.static ? 1 : 0
             );
+
             checkSpacingAround(token);
         }
     }
@@ -47073,6 +47372,7 @@ module.exports = function(context) {
                 range;
 
             var i = 0;
+
             while ((match = pattern.exec(source)) !== null) {
                 i++;
                 if (match[0] === expectedLFChars) {
@@ -47137,6 +47437,7 @@ function getEmptyLineNums(lines) {
     }).map(function(line) {
         return line.num;
     });
+
     return emptyLines;
 }
 
@@ -47147,9 +47448,11 @@ function getEmptyLineNums(lines) {
  */
 function getCommentLineNums(comments) {
     var lines = [];
+
     comments.forEach(function(token) {
         var start = token.loc.start.line;
         var end = token.loc.end.line;
+
         lines.push(start, end);
     });
     return lines;
@@ -47172,6 +47475,7 @@ function contains(val, array) {
 module.exports = function(context) {
 
     var options = context.options[0] ? lodash.assign({}, context.options[0]) : {};
+
     options.beforeLineComment = options.beforeLineComment || false;
     options.afterLineComment = options.afterLineComment || false;
     options.beforeBlockComment = typeof options.beforeBlockComment !== "undefined" ? options.beforeBlockComment : true;
@@ -47265,7 +47569,7 @@ module.exports = function(context) {
      * @returns {boolean} True if the comment is at block start.
      */
     function isCommentAtBlockStart(node) {
-        return isCommentAtParentStart(node, "ClassBody") || isCommentAtParentStart(node, "BlockStatement");
+        return isCommentAtParentStart(node, "ClassBody") || isCommentAtParentStart(node, "BlockStatement") || isCommentAtParentStart(node, "SwitchCase");
     }
 
     /**
@@ -47274,7 +47578,7 @@ module.exports = function(context) {
      * @returns {boolean} True if the comment is at block end.
      */
     function isCommentAtBlockEnd(node) {
-        return isCommentAtParentEnd(node, "ClassBody") || isCommentAtParentEnd(node, "BlockStatement");
+        return isCommentAtParentEnd(node, "ClassBody") || isCommentAtParentEnd(node, "BlockStatement") || isCommentAtParentEnd(node, "SwitchCase") || isCommentAtParentEnd(node, "SwitchStatement");
     }
 
     /**
@@ -47464,6 +47768,9 @@ module.exports = function(context) {
     if (typeof option === "object" && option.hasOwnProperty("maximum") && typeof option.maximum === "number") {
         maxDepth = option.maximum;
     }
+    if (typeof option === "object" && option.hasOwnProperty("max") && typeof option.max === "number") {
+        maxDepth = option.max;
+    }
     if (typeof option === "number") {
         maxDepth = option;
     }
@@ -47565,6 +47872,10 @@ module.exports.schema = [
                     "maximum": {
                         "type": "integer",
                         "minimum": 0
+                    },
+                    "max": {
+                        "type": "integer",
+                        "minimum": 0
                     }
                 },
                 "additionalProperties": false
@@ -47608,10 +47919,12 @@ module.exports = function(context) {
      */
     function computeLineLength(line, tabWidth) {
         var extraCharacterCount = 0;
+
         line.replace(/\t/g, function(match, offset) {
             var totalOffset = offset + extraCharacterCount,
                 previousTabStopOffset = tabWidth ? totalOffset % tabWidth : 0,
                 spaceCount = tabWidth - previousTabStopOffset;
+
             extraCharacterCount += spaceCount - 1;  // -1 for the replaced tab
         });
         return line.length + extraCharacterCount;
@@ -47842,6 +48155,9 @@ module.exports = function(context) {
     if (typeof option === "object" && option.hasOwnProperty("maximum") && typeof option.maximum === "number") {
         THRESHOLD = option.maximum;
     }
+    if (typeof option === "object" && option.hasOwnProperty("max") && typeof option.max === "number") {
+        THRESHOLD = option.max;
+    }
     if (typeof option === "number") {
         THRESHOLD = option;
     }
@@ -47867,6 +48183,7 @@ module.exports = function(context) {
 
         if (callbackStack.length > THRESHOLD) {
             var opts = {num: callbackStack.length, max: THRESHOLD};
+
             context.report(node, "Too many nested callbacks ({{num}}). Maximum allowed is {{max}}.", opts);
         }
     }
@@ -47907,6 +48224,10 @@ module.exports.schema = [
                     "maximum": {
                         "type": "integer",
                         "minimum": 0
+                    },
+                    "max": {
+                        "type": "integer",
+                        "minimum": 0
                     }
                 },
                 "additionalProperties": false
@@ -47936,6 +48257,9 @@ module.exports = function(context) {
 
     if (typeof option === "object" && option.hasOwnProperty("maximum") && typeof option.maximum === "number") {
         numParams = option.maximum;
+    }
+    if (typeof option === "object" && option.hasOwnProperty("max") && typeof option.max === "number") {
+        numParams = option.max;
     }
     if (typeof option === "number") {
         numParams = option;
@@ -47975,6 +48299,10 @@ module.exports.schema = [
                 "type": "object",
                 "properties": {
                     "maximum": {
+                        "type": "integer",
+                        "minimum": 0
+                    },
+                    "max": {
                         "type": "integer",
                         "minimum": 0
                     }
@@ -48036,6 +48364,7 @@ module.exports = function(context) {
 
         for (var i = 0, l = nodes.length; i < l; ++i) {
             var currentStatement = nodes[i];
+
             if (currentStatement.loc.start.line === lastStatementLine) {
                 ++numberOfStatementsOnThisLine;
             } else {
@@ -48120,6 +48449,9 @@ module.exports = function(context) {
     if (typeof option === "object" && option.hasOwnProperty("maximum") && typeof option.maximum === "number") {
         maxStatements = option.maximum;
     }
+    if (typeof option === "object" && option.hasOwnProperty("max") && typeof option.max === "number") {
+        maxStatements = option.max;
+    }
     if (typeof option === "number") {
         maxStatements = option;
     }
@@ -48158,6 +48490,7 @@ module.exports = function(context) {
      */
     function endFunction(node) {
         var count = functionStack.pop();
+
         if (ignoreTopLevelFunctions && functionStack.length === 0) {
             topLevelFunctions.push({ node: node, count: count});
         } else {
@@ -48198,6 +48531,7 @@ module.exports = function(context) {
             topLevelFunctions.forEach(function(element) {
                 var count = element.count;
                 var node = element.node;
+
                 reportIfTooManyStatements(node, count, maxStatements);
             });
         }
@@ -48216,6 +48550,10 @@ module.exports.schema = [
                 "type": "object",
                 "properties": {
                     "maximum": {
+                        "type": "integer",
+                        "minimum": 0
+                    },
+                    "max": {
                         "type": "integer",
                         "minimum": 0
                     }
@@ -48317,6 +48655,7 @@ function calculateCapIsNewExceptions(config) {
 module.exports = function(context) {
 
     var config = context.options[0] ? lodash.assign({}, context.options[0]) : {};
+
     config.newIsCap = config.newIsCap !== false;
     config.capIsNew = config.capIsNew !== false;
     var skipProperties = config.properties === false;
@@ -48424,9 +48763,11 @@ module.exports = function(context) {
         listeners.NewExpression = function(node) {
 
             var constructorName = extractNameFromExpression(node);
+
             if (constructorName) {
                 var capitalization = getCap(constructorName);
                 var isAllowed = capitalization !== "lower" || isCapAllowed(newIsCapExceptions, node, constructorName);
+
                 if (!isAllowed) {
                     report(node, "A constructor name should not start with a lowercase letter.");
                 }
@@ -48438,9 +48779,11 @@ module.exports = function(context) {
         listeners.CallExpression = function(node) {
 
             var calleeName = extractNameFromExpression(node);
+
             if (calleeName) {
                 var capitalization = getCap(calleeName);
                 var isAllowed = capitalization !== "upper" || isCapAllowed(capIsNewExceptions, node, calleeName);
+
                 if (!isAllowed) {
                     report(node, "A function with a name starting with an uppercase letter should only be used as a constructor.");
                 }
@@ -48502,6 +48845,7 @@ module.exports = function(context) {
             var prenticesTokens = tokens.filter(function(token) {
                 return token.value === "(" || token.value === ")";
             });
+
             if (prenticesTokens.length < 2) {
                 context.report(node, "Missing '()' invoking a constructor");
             }
@@ -48587,6 +48931,7 @@ module.exports = function(context) {
      */
     function isLastNode(node) {
         var token = sourceCode.getTokenAfter(node);
+
         return !token || (token.type === "Punctuator" && token.value === "}");
     }
 
@@ -48962,6 +49307,7 @@ function findReference(scope, node) {
  */
 function isShadowed(scope, globalScope, node) {
     var reference = findReference(scope, node);
+
     return reference && reference.resolved && reference.resolved.defs.length > 0;
 }
 
@@ -49229,6 +49575,7 @@ module.exports = function(context) {
         "SwitchCase": function(node) {
             for (var i = 0; i < node.consequent.length; i++) {
                 var statement = node.consequent[i];
+
                 if (isLexicalDeclaration(statement)) {
                     context.report({
                         node: node,
@@ -49549,6 +49896,7 @@ module.exports = function(context) {
      */
     function checkArrowFunc(node) {
         var body = node.body;
+
         if (isConditional(body) && !(config.allowParens && astUtils.isParenthesised(context, body))) {
             context.report(node, "Arrow function used ambiguously with a conditional expression.");
         }
@@ -49799,6 +50147,7 @@ module.exports = function(context) {
         } else if (typeof node.value === "string") {
 
             var parent = context.getAncestors().pop();
+
             if ((parent.type === "NewExpression" || parent.type === "CallExpression") &&
                 parent.callee.type === "Identifier" && parent.callee.name === "RegExp"
             ) {
@@ -49958,6 +50307,7 @@ module.exports = function(context) {
 
             // TODO(nagashima): Remove this duplication check after https://github.com/estools/escope/pull/79
             var key = "$" + variable.name; // to avoid __proto__.
+
             if (!isParameter(variable.defs[0]) || keyMap[key]) {
                 continue;
             }
@@ -49965,6 +50315,7 @@ module.exports = function(context) {
 
             // Checks and reports duplications.
             var defs = variable.defs.filter(isParameter);
+
             if (defs.length >= 2) {
                 context.report({
                     node: node,
@@ -50069,6 +50420,7 @@ module.exports = function(context) {
             var name = getName(node.key);
             var state = getState(name, node.static);
             var isDuplicate = false;
+
             if (node.kind === "get") {
                 isDuplicate = (state.init || state.get);
                 state.get = true;
@@ -50162,6 +50514,7 @@ module.exports = function(context) {
 
             node.cases.forEach(function(switchCase) {
                 var key = context.getSource(switchCase.test);
+
                 if (mapping[key]) {
                     context.report(switchCase, "Duplicate case label.");
                 } else {
@@ -50488,6 +50841,7 @@ module.exports = function(context) {
 
         "Literal": function(node) {
             var token = context.getFirstToken(node);
+
             if (token.type === "RegularExpression" && !regex.test(token.value)) {
                 context.report(node, "Empty class.");
             }
@@ -50583,6 +50937,7 @@ function getKind(node) {
 
     // Detects prefix.
     var prefix = "";
+
     if (node.generator) {
         prefix = "generator";
     } else if (node.async) {
@@ -50920,11 +51275,13 @@ module.exports = function(context) {
         for (var i = 0; i < candidatesOfGlobalObject.length; ++i) {
             var name = candidatesOfGlobalObject[i];
             var variable = astUtils.getVariableByName(globalScope, name);
+
             if (!variable) {
                 continue;
             }
 
             var references = variable.references;
+
             for (var j = 0; j < references.length; ++j) {
                 var identifier = references[j].identifier;
                 var node = identifier.parent;
@@ -50950,11 +51307,13 @@ module.exports = function(context) {
      */
     function reportAccessingEval(globalScope) {
         var variable = astUtils.getVariableByName(globalScope, "eval");
+
         if (!variable) {
             return;
         }
 
         var references = variable.references;
+
         for (var i = 0; i < references.length; ++i) {
             var reference = references[i];
             var id = reference.identifier;
@@ -50973,6 +51332,7 @@ module.exports = function(context) {
         return {
             "CallExpression:exit": function(node) {
                 var callee = node.callee;
+
                 if (isIdentifier(callee, "eval")) {
                     report(callee);
                 }
@@ -50983,6 +51343,7 @@ module.exports = function(context) {
     return {
         "CallExpression:exit": function(node) {
             var callee = node.callee;
+
             if (isIdentifier(callee, "eval")) {
                 report(callee);
             }
@@ -51132,7 +51493,8 @@ module.exports = function(context) {
 
         // handle the Array.prototype.extra style case
         "AssignmentExpression": function(node) {
-            var lhs = node.left, affectsProto;
+            var lhs = node.left,
+                affectsProto;
 
             if (lhs.type !== "MemberExpression" || lhs.object.type !== "MemberExpression") {
                 return;
@@ -51268,6 +51630,7 @@ module.exports = function(context) {
     function isCalleeOfBindMethod(node) {
         var parent = node.parent;
         var grandparent = parent.parent;
+
         return (
             grandparent &&
             grandparent.type === "CallExpression" &&
@@ -51664,6 +52027,7 @@ module.exports = function(context) {
      */
     function isHeadOfExpressionStatement(node) {
         var parent = node.parent;
+
         while (parent) {
             switch (parent.type) {
                 case "SequenceExpression":
@@ -51819,6 +52183,7 @@ module.exports = function(context) {
      */
     function report(node) {
         var previousToken = context.getTokenBefore(node);
+
         context.report(node, previousToken.loc.start, "Gratuitous parentheses around expression.");
     }
 
@@ -51871,6 +52236,7 @@ module.exports = function(context) {
      */
     function dryBinaryLogical(node) {
         var prec = precedence(node);
+
         if (hasExcessParens(node.left) && precedence(node.left) >= prec) {
             report(node.left);
         }
@@ -51932,6 +52298,7 @@ module.exports = function(context) {
 
         "ExpressionStatement": function(node) {
             var firstToken, secondToken, firstTokens;
+
             if (hasExcessParens(node.expression)) {
                 firstTokens = context.getFirstTokens(node.expression, 2);
                 firstToken = firstTokens[0];
@@ -52021,6 +52388,7 @@ module.exports = function(context) {
         "ObjectExpression": function(node) {
             [].forEach.call(node.properties, function(e) {
                 var v = e.value;
+
                 if (v && hasExcessParens(v) && precedence(v) >= precedence({type: "AssignmentExpression"})) {
                     report(v);
                 }
@@ -52606,6 +52974,7 @@ module.exports = function(context) {
             // 1 * foo
             operatorAllowed = options.allow.indexOf("*") >= 0;
             var nonNumericOperand = !operatorAllowed && options.number && isMultiplyByOne(node) && getNonNumericOperand(node);
+
             if (nonNumericOperand) {
                 context.report(
                     node,
@@ -52696,6 +53065,7 @@ module.exports = function(context) {
 
             scope.implicit.variables.forEach(function(variable) {
                 var scopeVariable = scope.set.get(variable.name);
+
                 if (scopeVariable && scopeVariable.writeable) {
                     return;
                 }
@@ -52809,6 +53179,7 @@ module.exports = function(context) {
 
             // remove the entire substack, to avoid duplicate reports
             var substack = impliedEvalAncestorsStack.pop();
+
             context.report(substack[0], "Implied eval. Consider passing a function instead of a string.");
         }
     }
@@ -53126,6 +53497,7 @@ module.exports = function(context) {
      */
     stack.getCurrent = function() {
         var current = this[this.length - 1];
+
         if (!current.init) {
             current.init = true;
             current.valid = !astUtils.isDefaultThisBinding(
@@ -53196,6 +53568,7 @@ module.exports = function(context) {
         // Reports if `this` of the current context is invalid.
         "ThisExpression": function(node) {
             var current = stack.getCurrent();
+
             if (current && !current.valid) {
                 context.report(node, "Unexpected 'this'.");
             }
@@ -53246,6 +53619,7 @@ module.exports = function(context) {
 
         errors = errors.filter(function(error) {
             var errorLoc = error[1];
+
             if (errorLoc.line >= locStart.line && errorLoc.line <= locEnd.line) {
                 if (errorLoc.column >= locStart.column && (errorLoc.column <= locEnd.column || errorLoc.line < locEnd.line)) {
                     return false;
@@ -53557,6 +53931,7 @@ module.exports = function(context) {
      */
     function getKind(label) {
         var info = scopeInfo;
+
         while (info) {
             if (info.label === label) {
                 return info.kind;
@@ -53655,6 +54030,7 @@ module.exports = function(context) {
     */
     function report(node) {
         var parent = context.getAncestors().pop();
+
         context.report(node, parent.type === "Program" ?
             "Block is redundant." :
             "Nested block is redundant."
@@ -53667,6 +54043,7 @@ module.exports = function(context) {
     */
     function isLoneBlock() {
         var parent = context.getAncestors().pop();
+
         return parent.type === "BlockStatement" || parent.type === "Program";
     }
 
@@ -53789,6 +54166,7 @@ module.exports.schema = [];
  */
 function getContainingLoopNode(node) {
     var parent = node.parent;
+
     while (parent) {
         switch (parent.type) {
             case "WhileStatement":
@@ -53903,6 +54281,7 @@ function isSafe(funcNode, loopNode, reference) {
      */
     function isSafeReference(upperRef) {
         var id = upperRef.identifier;
+
         return (
             !upperRef.isWrite() ||
             variable.scope.variableScope === upperRef.from.variableScope &&
@@ -53930,11 +54309,13 @@ module.exports = function(context) {
      */
     function checkForLoops(node) {
         var loopNode = getContainingLoopNode(node);
+
         if (!loopNode) {
             return;
         }
 
         var references = context.getScope().through;
+
         if (references.length > 0 &&
             !references.every(isSafe.bind(null, node, loopNode))
         ) {
@@ -54255,6 +54636,7 @@ module.exports = function(context) {
 
         declarations.forEach(function(declaration) {
             var type = getDeclarationType(declaration.init);
+
             contains[type] = true;
         });
 
@@ -54687,6 +55069,7 @@ module.exports = function(context) {
         "TemplateLiteral": function(node) {
             var start = node.loc.start.line;
             var end = node.loc.end.line;
+
             while (start <= end) {
                 notEmpty.push(start);
                 start++;
@@ -54705,6 +55088,7 @@ module.exports = function(context) {
 
             lines.forEach(function(str, i) {
                 var trimmed = str.trim();
+
                 if ((firstNonBlankLine === -1) && (trimmed !== "")) {
                     firstNonBlankLine = i;
                 }
@@ -54865,6 +55249,7 @@ module.exports = function(context) {
     return {
         "Program": function() {
             var globalScope = context.getScope();
+
             globalScope.variables.forEach(checkVariable);
         }
     };
@@ -55126,9 +55511,11 @@ module.exports = function(context) {
         "Program:exit": function() {
             var globalScope = context.getScope();
             var variable = globalScope.set.get("Symbol");
+
             if (variable && variable.defs.length === 0) {
                 variable.references.forEach(function(ref) {
                     var node = ref.identifier;
+
                     if (node.parent && node.parent.type === "NewExpression") {
                         context.report(node, "`Symbol` cannot be called as a constructor.");
                     }
@@ -55159,6 +55546,7 @@ module.exports = function(context) {
 
         "NewExpression": function(node) {
             var wrapperObjects = ["String", "Number", "Boolean", "Math", "JSON"];
+
             if (wrapperObjects.indexOf(node.callee.name) > -1) {
                 context.report(node, "Do not use {{fn}} as a constructor.", { fn: node.callee.name });
             }
@@ -55217,6 +55605,7 @@ module.exports = function(context) {
 
             if (node.callee.type === "Identifier") {
                 var name = node.callee.name;
+
                 if (name === "Math" || name === "JSON") {
                     context.report(node, "'{{name}}' is not a function.", { name: name });
                 }
@@ -55314,59 +55703,52 @@ module.exports = function(context) {
     var props = context.options[0] && Boolean(context.options[0].props);
 
     /**
-     * Checks whether or not a reference modifies its variable.
-     * If the `props` option is `true`, this checks whether or not the reference modifies properties of its variable also.
+     * Checks whether or not the reference modifies properties of its variable.
      * @param {Reference} reference - A reference to check.
-     * @returns {boolean} Whether or not the reference modifies its variable.
+     * @returns {boolean} Whether or not the reference modifies properties of its variable.
      */
-    function isModifying(reference) {
-        if (reference.isWrite()) {
-            return true;
-        }
+    function isModifyingProp(reference) {
+        var node = reference.identifier;
+        var parent = node.parent;
 
-        // Checks whether its property is modified.
-        if (props) {
-            var node = reference.identifier;
-            var parent = node.parent;
-            while (parent && !stopNodePattern.test(parent.type)) {
-                switch (parent.type) {
+        while (parent && !stopNodePattern.test(parent.type)) {
+            switch (parent.type) {
 
-                    // e.g. foo.a = 0;
-                    case "AssignmentExpression":
-                        return parent.left === node;
+                // e.g. foo.a = 0;
+                case "AssignmentExpression":
+                    return parent.left === node;
 
-                    // e.g. ++foo.a;
-                    case "UpdateExpression":
+                // e.g. ++foo.a;
+                case "UpdateExpression":
+                    return true;
+
+                // e.g. delete foo.a;
+                case "UnaryExpression":
+                    if (parent.operator === "delete") {
                         return true;
+                    }
+                    break;
 
-                    // e.g. delete foo.a;
-                    case "UnaryExpression":
-                        if (parent.operator === "delete") {
-                            return true;
-                        }
-                        break;
+                // EXCLUDES: e.g. cache.get(foo.a).b = 0;
+                case "CallExpression":
+                    if (parent.callee !== node) {
+                        return false;
+                    }
+                    break;
 
-                    // EXCLUDES: e.g. cache.get(foo.a).b = 0;
-                    case "CallExpression":
-                        if (parent.callee !== node) {
-                            return false;
-                        }
-                        break;
+                // EXCLUDES: e.g. cache[foo.a] = 0;
+                case "MemberExpression":
+                    if (parent.property === node) {
+                        return false;
+                    }
+                    break;
 
-                    // EXCLUDES: e.g. cache[foo.a] = 0;
-                    case "MemberExpression":
-                        if (parent.property === node) {
-                            return false;
-                        }
-                        break;
-
-                    default:
-                        break;
-                }
-
-                node = parent;
-                parent = parent.parent;
+                default:
+                    break;
             }
+
+            node = parent;
+            parent = node.parent;
         }
 
         return false;
@@ -55384,16 +55766,22 @@ module.exports = function(context) {
 
         if (identifier &&
             !reference.init &&
-            isModifying(reference) &&
 
             // Destructuring assignments can have multiple default value,
             // so possibly there are multiple writeable references for the same identifier.
             (index === 0 || references[index - 1].identifier !== identifier)
         ) {
-            context.report(
-                identifier,
-                "Assignment to function parameter '{{name}}'.",
-                {name: identifier.name});
+            if (reference.isWrite()) {
+                context.report(
+                    identifier,
+                    "Assignment to function parameter '{{name}}'.",
+                    {name: identifier.name});
+            } else if (props && isModifyingProp(reference)) {
+                context.report(
+                    identifier,
+                    "Assignment to property of function parameter '{{name}}'.",
+                    {name: identifier.name});
+            }
         }
     }
 
@@ -56062,11 +56450,13 @@ module.exports = function(context) {
     return {
         "ReturnStatement": function(node) {
             var message = "Return statement should not contain assignment.";
+
             checkForAssignInReturn(node.argument, node, message);
         },
         "ArrowFunctionExpression": function(node) {
             if (node.body.type !== "BlockStatement") {
                 var message = "Arrow function should not return assignment.";
+
                 checkForAssignInReturn(node.body, node, message);
             }
         }
@@ -56156,6 +56546,7 @@ function eachSelfAssignment(left, right, report) {
         right.type === "ArrayExpression"
     ) {
         var end = Math.min(left.elements.length, right.elements.length);
+
         for (i = 0; i < end; ++i) {
             var rightElement = right.elements[i];
 
@@ -56180,6 +56571,7 @@ function eachSelfAssignment(left, right, report) {
         // Gets the index of the last spread property.
         // It's possible to overwrite properties followed by it.
         var startJ = 0;
+
         for (i = right.properties.length - 1; i >= 0; --i) {
             if (right.properties[i].type === "ExperimentalSpreadProperty") {
                 startJ = i + 1;
@@ -56259,6 +56651,7 @@ module.exports = function(context) {
 
         "BinaryExpression": function(node) {
             var operators = ["===", "==", "!==", "!=", ">", "<", ">=", "<="];
+
             if (operators.indexOf(node.operator) > -1 &&
                 (node.left.type === "Identifier" && node.right.type === "Identifier" && node.left.name === node.right.name ||
                 node.left.type === "Literal" && node.right.type === "Literal" && node.left.value === node.right.value)) {
@@ -56361,6 +56754,7 @@ module.exports = function(context) {
             }
 
             var child = context.getTokenAfter(node.expressions[0]);
+
             context.report(node, child.loc.start, "Unexpected use of comma operator.");
         }
     };
@@ -56473,6 +56867,7 @@ module.exports = function(context) {
      */
     function isDuplicatedClassNameVariable(variable) {
         var block = variable.scope.block;
+
         return block.type === "ClassDeclaration" && block.id === variable.identifiers[0];
     }
 
@@ -56511,6 +56906,7 @@ module.exports = function(context) {
      */
     function getNameRange(variable) {
         var def = variable.defs[0];
+
         return def && def.name.range;
     }
 
@@ -56524,6 +56920,7 @@ module.exports = function(context) {
         var outerDef = scopeVar.defs[0];
         var inner = getNameRange(variable);
         var outer = getNameRange(scopeVar);
+
         return (
             inner &&
             outer &&
@@ -56541,6 +56938,7 @@ module.exports = function(context) {
      */
     function checkForShadows(scope) {
         var variables = scope.variables;
+
         for (var i = 0; i < variables.length; ++i) {
             var variable = variables[i];
 
@@ -56554,6 +56952,7 @@ module.exports = function(context) {
 
             // Gets shadowed variable.
             var shadowed = astUtils.getVariableByName(scope.upper, variable.name);
+
             if (shadowed &&
                 (shadowed.identifiers.length > 0 || (options.builtinGlobals && "writeable" in shadowed)) &&
                 !isOnInitializer(variable, shadowed) &&
@@ -56851,6 +57250,7 @@ module.exports = function(context) {
      */
     function setInvalid(node) {
         var segments = funcInfo.codePath.currentSegments;
+
         for (var i = 0; i < segments.length; ++i) {
             segInfoMap[segments[i].id].invalidNodes.push(node);
         }
@@ -56862,6 +57262,7 @@ module.exports = function(context) {
      */
     function setSuperCalled() {
         var segments = funcInfo.codePath.currentSegments;
+
         for (var i = 0; i < segments.length; ++i) {
             segInfoMap[segments[i].id].superCalled = true;
         }
@@ -56912,6 +57313,7 @@ module.exports = function(context) {
          */
         "onCodePathEnd": function(codePath) {
             var isDerivedClass = funcInfo.hasExtends;
+
             funcInfo = funcInfo.upper;
             if (!isDerivedClass) {
                 return;
@@ -56977,6 +57379,7 @@ module.exports = function(context) {
                 {first: toSegment, last: fromSegment},
                 function(segment, controller) {
                     var info = segInfoMap[segment.id];
+
                     if (info.superCalled) {
                         info.invalidNodes = [];
                         controller.skip();
@@ -57070,6 +57473,7 @@ function couldBeError(node) {
 
         case "SequenceExpression":
             var exprs = node.expressions;
+
             return exprs.length !== 0 && couldBeError(exprs[exprs.length - 1]);
 
         case "LogicalExpression":
@@ -57169,7 +57573,8 @@ module.exports = function(context) {
             var src = context.getSource(),
                 re = new RegExp(NONBLANK),
                 skipMatch = new RegExp(SKIP_BLANK),
-                matches, lines = src.split(/\r?\n/),
+                matches,
+                lines = src.split(/\r?\n/),
                 linebreaks = context.getSource().match(/\r\n|\r|\n|\u2028|\u2029/g),
                 location,
                 totalLength = 0,
@@ -57272,6 +57677,7 @@ module.exports.schema = [];
  */
 function hasTypeOfOperator(node) {
     var parent = node.parent;
+
     return parent.type === "UnaryExpression" && parent.operator === "typeof";
 }
 
@@ -57334,6 +57740,7 @@ module.exports = function(context) {
         "Identifier": function(node) {
             if (node.name === "undefined") {
                 var parent = context.getAncestors().pop();
+
                 if (!parent || parent.type !== "MemberExpression" || node !== parent.property || parent.computed) {
                     context.report(node, "Unexpected use of undefined.");
                 }
@@ -57612,6 +58019,7 @@ var DYNAMIC_PATTERN = /^(?:Call|Member|New|TaggedTemplate|Yield)Expression$/;
 function isWriteReference(reference) {
     if (reference.init) {
         var def = reference.resolved && reference.resolved.defs[0];
+
         if (!def || def.type !== "Variable" || def.parent.kind !== "var") {
             return false;
         }
@@ -57651,6 +58059,7 @@ function isUnmodifiedAndNotBelongToGroup(condition) {
 function isInRange(node, reference) {
     var or = node.range;
     var ir = reference.identifier.range;
+
     return or[0] <= ir[0] && ir[1] <= or[1];
 }
 
@@ -57841,6 +58250,7 @@ module.exports = function(context) {
 
             if (condition.group) {
                 var group = groupMap.get(condition.group);
+
                 if (!group) {
                     group = [];
                     groupMap.set(condition.group, group);
@@ -57886,6 +58296,7 @@ module.exports = function(context) {
 
         // Check the conditions are modified.
         var modifiers = variable.references.filter(isWriteReference);
+
         if (modifiers.length > 0) {
             updateModifiedFlag(conditions, modifiers);
         }
@@ -57902,9 +58313,11 @@ module.exports = function(context) {
     return {
         "Program:exit": function() {
             var queue = [context.getScope()];
+
             groupMap = new Map();
 
             var scope;
+
             while ((scope = queue.pop())) {
                 pushAll(queue, scope.childScopes);
                 scope.variables.forEach(checkReferences);
@@ -58134,6 +58547,7 @@ module.exports = function(context) {
     function isDirective(node, ancestors) {
         var parent = ancestors[ancestors.length - 1],
             grandparent = ancestors[ancestors.length - 2];
+
         return (parent.type === "Program" || parent.type === "BlockStatement" &&
                 (/Function/.test(grandparent.type))) &&
                 directives(parent).indexOf(node) >= 0;
@@ -58251,6 +58665,7 @@ module.exports = function(context) {
 
         var label = node.label.name;
         var info = scopeInfo;
+
         while (info) {
             if (info.label === label) {
                 info.used = true;
@@ -58339,6 +58754,7 @@ module.exports = function(context) {
         if (definition) {
 
             var node = definition.node;
+
             if (node.type === "VariableDeclarator") {
                 node = node.parent;
             } else if (definition.type === "Parameter") {
@@ -58434,6 +58850,7 @@ module.exports = function(context) {
 
                 // explicit global variables don't have definitions.
                 var def = variable.defs[0];
+
                 if (def) {
                     var type = def.type;
 
@@ -58506,6 +58923,7 @@ module.exports = function(context) {
 
         // Search a given variable name.
         var match = namePattern.exec(comment.value);
+
         return match ? match.index + 1 : 0;
     }
 
@@ -58733,6 +59151,7 @@ module.exports = function(context) {
 
     // Defines a function which checks whether or not a reference is allowed according to the option.
     var isAllowed;
+
     if (options.functions && options.classes) {
         isAllowed = alwaysFalse;
     } else if (options.functions) {
@@ -58785,6 +59204,7 @@ module.exports = function(context) {
      */
     function findVariables() {
         var scope = context.getScope();
+
         findVariablesInScope(scope);
     }
 
@@ -58971,6 +59391,7 @@ function isConcatenation(node) {
  */
 function getLeft(node) {
     var left = node.left;
+
     while (isConcatenation(left)) {
         left = left.right;
     }
@@ -58984,6 +59405,7 @@ function getLeft(node) {
  */
 function getRight(node) {
     var right = node.right;
+
     while (isConcatenation(right)) {
         right = right.left;
     }
@@ -59014,6 +59436,7 @@ module.exports = function(context) {
 
                 // move warning location to operator
                 var operatorToken = context.getTokenAfter(left);
+
                 while (operatorToken.value !== "+") {
                     operatorToken = context.getTokenAfter(operatorToken);
                 }
@@ -59189,6 +59612,7 @@ module.exports = function(context) {
         var body = node.value.body.body;
         var ctorParams = node.value.params;
         var superClass = node.parent.parent.superClass;
+
         if (superClass ? isRedundantSuperCall(body, ctorParams) : (body.length === 0)) {
             context.report({
                 node: node,
@@ -59226,7 +59650,9 @@ var VALID_STRING_ESCAPES = [
     "b",
     "f",
     "u",
-    "x"
+    "x",
+    "\n",
+    "\r"
 ];
 
 var VALID_REGEX_ESCAPES = [
@@ -59246,6 +59672,7 @@ var VALID_REGEX_ESCAPES = [
     "(",
     ")",
     "b",
+    "B",
     "c",
     "d",
     "D",
@@ -59276,6 +59703,7 @@ module.exports = function(context) {
     function validate(elm) {
         var escapeNotFound = this.escapes.indexOf(elm[1]) === -1;
         var isQuoteEscape = elm[1] === this.node.raw[0];
+
         if (escapeNotFound && !isQuoteEscape) {
             context.report(this.node, "Unnecessary escape character: " + elm);
         }
@@ -59654,6 +60082,7 @@ module.exports = function(context) {
             message: "There should be no space after '" + token.value + "'",
             fix: function(fixer) {
                 var nextToken = context.getSourceCode().getTokenAfter(token);
+
                 return fixer.removeRange([token.range[1], nextToken.range[0]]);
             }
         });
@@ -59672,6 +60101,7 @@ module.exports = function(context) {
             message: "There should be no space before '" + token.value + "'",
             fix: function(fixer) {
                 var previousToken = context.getSourceCode().getTokenBefore(token);
+
                 return fixer.removeRange([previousToken.range[1], token.range[0]]);
             }
         });
@@ -60052,6 +60482,7 @@ module.exports = function(context) {
 
         var declarations = node.declarations;
         var prev;
+
         declarations.forEach(function(current) {
             if (prev && prev.loc.end.line === current.loc.start.line) {
                 if (always || prev.init || current.init) {
@@ -60229,6 +60660,7 @@ module.exports = function(context) {
      */
     function getCurrentScope(statementType) {
         var currentScope;
+
         if (statementType === "var") {
             currentScope = functionStack[functionStack.length - 1];
         } else if (statementType === "let") {
@@ -60247,6 +60679,7 @@ module.exports = function(context) {
      */
     function countDeclarations(declarations) {
         var counts = { uninitialized: 0, initialized: 0 };
+
         for (var i = 0; i < declarations.length; i++) {
             if (declarations[i].init === null) {
                 counts.uninitialized++;
@@ -60844,6 +61277,7 @@ module.exports = function(context) {
     }
 
     var rule = {};
+
     if (options.hasOwnProperty("switches")) {
         rule.SwitchStatement = function(node) {
             if (node.cases.length === 0) {
@@ -60945,8 +61379,10 @@ function checkMetaProperty(node, metaName, propertyName) {
  */
 function getVariableOfArguments(scope) {
     var variables = scope.variables;
+
     for (var i = 0; i < variables.length; ++i) {
         var variable = variables[i];
+
         if (variable.name === "arguments") {
 
             /*
@@ -60972,6 +61408,7 @@ function getVariableOfArguments(scope) {
 function getCallbackInfo(node) {
     var retv = {isCallback: false, isLexicalThis: false};
     var parent = node.parent;
+
     while (node) {
         switch (parent.type) {
 
@@ -61061,6 +61498,7 @@ module.exports = function(context) {
         // If there are below, it cannot replace with arrow functions merely.
         ThisExpression: function() {
             var info = stack[stack.length - 1];
+
             if (info) {
                 info.this = true;
             }
@@ -61068,6 +61506,7 @@ module.exports = function(context) {
 
         Super: function() {
             var info = stack[stack.length - 1];
+
             if (info) {
                 info.super = true;
             }
@@ -61075,6 +61514,7 @@ module.exports = function(context) {
 
         MetaProperty: function(node) {
             var info = stack[stack.length - 1];
+
             if (info && checkMetaProperty(node, "new", "target")) {
                 info.meta = true;
             }
@@ -61096,18 +61536,21 @@ module.exports = function(context) {
 
             // Skip recursive functions.
             var nameVar = context.getDeclaredVariables(node)[0];
+
             if (isFunctionName(nameVar) && nameVar.references.length > 0) {
                 return;
             }
 
             // Skip if it's using arguments.
             var variable = getVariableOfArguments(context.getScope());
+
             if (variable && variable.references.length > 0) {
                 return;
             }
 
             // Reports if it's a callback which can replace with arrows.
             var callbackInfo = getCallbackInfo(node);
+
             if (callbackInfo.isCallback &&
                 (!scopeInfo.this || callbackInfo.isLexicalThis) &&
                 !scopeInfo.super &&
@@ -61131,11 +61574,18 @@ module.exports.schema = [];
 "use strict";
 
 //------------------------------------------------------------------------------
+// Requirements
+//------------------------------------------------------------------------------
+
+var Map = require("es6-map");
+
+//------------------------------------------------------------------------------
 // Helpers
 //------------------------------------------------------------------------------
 
 var PATTERN_TYPE = /^(?:.+?Pattern|RestElement|Property)$/;
 var DECLARATION_HOST_TYPE = /^(?:Program|BlockStatement|SwitchCase)$/;
+var DESTRUCTURING_HOST_TYPE = /^(?:VariableDeclarator|AssignmentExpression)$/;
 
 /**
  * Adds multiple items to the tail of an array.
@@ -61164,6 +61614,7 @@ function isInitOfForStatement(node) {
  */
 function canBecomeVariableDeclaration(identifier) {
     var node = identifier.parent;
+
     while (PATTERN_TYPE.test(node.type)) {
         node = node.parent;
     }
@@ -61179,30 +61630,116 @@ function canBecomeVariableDeclaration(identifier) {
 }
 
 /**
- * Gets the WriteReference of a given variable if the variable is never
- * reassigned.
+ * Gets the WriteReference of a given variable if the variable should be
+ * declared as const.
  *
  * @param {escope.Variable} variable - A variable to get.
  * @returns {escope.Reference|null} The singular WriteReference or null.
  */
-function getWriteReferenceIfOnce(variable) {
-    var retv = null;
+function getWriteReferenceIfShouldBeConst(variable) {
+    if (variable.eslintUsed) {
+        return null;
+    }
 
+    // Finds the singular WriteReference.
+    var retv = null;
     var references = variable.references;
+
     for (var i = 0; i < references.length; ++i) {
         var reference = references[i];
 
         if (reference.isWrite()) {
-            if (retv && !(retv.init && reference.init)) {
+            var isReassigned = Boolean(
+                retv && retv.identifier !== reference.identifier
+            );
 
-                // This variable is reassigned.
+            if (isReassigned) {
                 return null;
             }
             retv = reference;
         }
     }
 
-    return retv;
+    // Checks the writer is located in the same scope and can be modified to
+    // const.
+    var isSameScopeAndCanBecomeVariableDeclaration = Boolean(
+        retv &&
+        retv.from === variable.scope &&
+        canBecomeVariableDeclaration(retv.identifier)
+    );
+
+    return isSameScopeAndCanBecomeVariableDeclaration ? retv : null;
+}
+
+/**
+ * Gets the VariableDeclarator/AssignmentExpression node that a given reference
+ * belongs to.
+ * This is used to detect a mix of reassigned and never reassigned in a
+ * destructuring.
+ *
+ * @param {escope.Reference} reference - A reference to get.
+ * @returns {ASTNode|null} A VariableDeclarator/AssignmentExpression node or
+ *      null.
+ */
+function getDestructuringHost(reference) {
+    if (!reference.isWrite()) {
+        return null;
+    }
+    var node = reference.identifier.parent;
+
+    while (PATTERN_TYPE.test(node.type)) {
+        node = node.parent;
+    }
+
+    if (!DESTRUCTURING_HOST_TYPE.test(node.type)) {
+        return null;
+    }
+    return node;
+}
+
+/**
+ * Groups by the VariableDeclarator/AssignmentExpression node that each
+ * reference of given variables belongs to.
+ * This is used to detect a mix of reassigned and never reassigned in a
+ * destructuring.
+ *
+ * @param {escope.Variable[]} variables - Variables to group by destructuring.
+ * @returns {Map<ASTNode, (escope.Reference|null)[]>} Grouped references.
+ */
+function groupByDestructuring(variables) {
+    var writersMap = new Map();
+
+    for (var i = 0; i < variables.length; ++i) {
+        var variable = variables[i];
+        var references = variable.references;
+        var writer = getWriteReferenceIfShouldBeConst(variable);
+        var prevId = null;
+
+        for (var j = 0; j < references.length; ++j) {
+            var reference = references[j];
+            var id = reference.identifier;
+
+            // Avoid counting a reference twice or more for default values of
+            // destructuring.
+            if (id === prevId) {
+                continue;
+            }
+            prevId = id;
+
+            // Add the writer into the destructuring group.
+            var group = getDestructuringHost(reference);
+
+            if (group) {
+                if (writersMap.has(group)) {
+                    writersMap.get(group).push(writer);
+                } else {
+                    writersMap.set(group, [writer]);
+                }
+            }
+        }
+    }
+
+    return writersMap;
 }
 
 //------------------------------------------------------------------------------
@@ -61210,30 +61747,57 @@ function getWriteReferenceIfOnce(variable) {
 //------------------------------------------------------------------------------
 
 module.exports = function(context) {
+    var options = context.options[0] || {};
+    var checkingMixedDestructuring = options.destructuring !== "all";
     var variables = null;
 
     /**
-     * Reports a given variable if the singular WriteReference of the variable
-     * exists in the same scope as the declaration.
+     * Reports a given reference.
      *
-     * @param {escope.Variable} variable - A variable to check.
+     * @param {escope.Reference} reference - A reference to report.
+     * @returns {void}
+     */
+    function report(reference) {
+        var id = reference.identifier;
+
+        context.report({
+            node: id,
+            message: "'{{name}}' is never reassigned, use 'const' instead.",
+            data: id
+        });
+    }
+
+    /**
+     * Reports a given variable if the variable should be declared as const.
+     *
+     * @param {escope.Variable} variable - A variable to report.
      * @returns {void}
      */
     function checkVariable(variable) {
-        if (variable.eslintUsed) {
-            return;
-        }
+        var writer = getWriteReferenceIfShouldBeConst(variable);
 
-        var writer = getWriteReferenceIfOnce(variable);
-        if (writer &&
-            writer.from === variable.scope &&
-            canBecomeVariableDeclaration(writer.identifier)
-        ) {
-            context.report({
-                node: writer.identifier,
-                message: "'{{name}}' is never reassigned, use 'const' instead.",
-                data: variable
-            });
+        if (writer) {
+            report(writer);
+        }
+    }
+
+    /**
+     * Reports given references if all of the reference should be declared as
+     * const.
+     *
+     * The argument 'writers' is an array of references.
+     * This reference is the result of
+     * 'getWriteReferenceIfShouldBeConst(variable)', so it's nullable.
+     * In simple declaration or assignment cases, the length of the array is 1.
+     * In destructuring cases, the length of the array can be 2 or more.
+     *
+     * @param {(escope.Reference|null)[]} writers - References which are grouped
+     *      by destructuring to report.
+     * @returns {void}
+     */
+    function checkGroup(writers) {
+        if (writers.every(Boolean)) {
+            writers.forEach(report);
         }
     }
 
@@ -61243,7 +61807,12 @@ module.exports = function(context) {
         },
 
         "Program:exit": function() {
-            variables.forEach(checkVariable);
+            if (checkingMixedDestructuring) {
+                variables.forEach(checkVariable);
+            } else {
+                groupByDestructuring(variables).forEach(checkGroup);
+            }
+
             variables = null;
         },
 
@@ -61255,9 +61824,17 @@ module.exports = function(context) {
     };
 };
 
-module.exports.schema = [];
+module.exports.schema = [
+    {
+        type: "object",
+        properties: {
+            destructuring: {enum: ["any", "all"]}
+        },
+        additionalProperties: false
+    }
+];
 
-},{}],346:[function(require,module,exports){
+},{"es6-map":23}],346:[function(require,module,exports){
 /**
  * @fileoverview Rule to suggest using "Reflect" api over Function/Object methods
  * @author Keith Cirkel <http://keithcirkel.co.uk>
@@ -61316,6 +61893,7 @@ module.exports = function(context) {
             var isReflectCall = (node.callee.object || {}).name === "Reflect";
             var hasReflectSubsitute = reflectSubsitutes.hasOwnProperty(methodName);
             var userConfiguredException = exceptions.indexOf(methodName) !== -1;
+
             if (hasReflectSubsitute && !isReflectCall && !userConfiguredException) {
                 report(node, existingNames[methodName], reflectSubsitutes[methodName]);
             }
@@ -61324,6 +61902,7 @@ module.exports = function(context) {
             var isDeleteOperator = node.operator === "delete";
             var targetsIdentifier = node.argument.type === "Identifier";
             var userConfiguredException = exceptions.indexOf("delete") !== -1;
+
             if (isDeleteOperator && !targetsIdentifier && !userConfiguredException) {
                 report(node, "the delete keyword", "Reflect.deleteProperty");
             }
@@ -61380,8 +61959,10 @@ module.exports.schema = [
  */
 function getVariableOfArguments(scope) {
     var variables = scope.variables;
+
     for (var i = 0; i < variables.length; ++i) {
         var variable = variables[i];
+
         if (variable.name === "arguments") {
 
             // If there was a parameter which is named "arguments", the implicit "arguments" is not defined.
@@ -61420,6 +62001,7 @@ module.exports = function(context) {
      */
     function checkForArguments() {
         var argumentsVar = getVariableOfArguments(context.getScope());
+
         if (argumentsVar) {
             argumentsVar.references.forEach(report);
         }
@@ -61903,6 +62485,7 @@ QUOTE_SETTINGS.single.convert =
 QUOTE_SETTINGS.backtick.convert = function(str) {
     var newQuote = this.quote;
     var oldQuote = str[0];
+
     if (newQuote === oldQuote) {
         return str;
     }
@@ -61968,6 +62551,7 @@ module.exports = function(context) {
      */
     function isPartOfDirectivePrologue(node) {
         var block = node.parent.parent;
+
         if (block.type !== "Program" && (block.type !== "BlockStatement" || !FUNCTION_TYPE.test(block.parent.type))) {
             return false;
         }
@@ -62380,6 +62964,7 @@ module.exports = function(context) {
         }
 
         var countYield = stack.pop();
+
         if (countYield === 0 && node.body.body.length > 0) {
             context.report(
                 node,
@@ -62444,6 +63029,7 @@ module.exports = function(context) {
      */
     function hasLeadingSpace(token) {
         var tokenBefore = context.getTokenBefore(token);
+
         return tokenBefore && astUtils.isTokenOnSameLine(tokenBefore, token) && sourceCode.isSpaceBetweenTokens(tokenBefore, token);
     }
 
@@ -62454,6 +63040,7 @@ module.exports = function(context) {
      */
     function hasTrailingSpace(token) {
         var tokenAfter = context.getTokenAfter(token);
+
         return tokenAfter && astUtils.isTokenOnSameLine(token, tokenAfter) && sourceCode.isSpaceBetweenTokens(token, tokenAfter);
     }
 
@@ -62464,6 +63051,7 @@ module.exports = function(context) {
      */
     function isLastTokenInCurrentLine(token) {
         var tokenAfter = context.getTokenAfter(token);
+
         return !(tokenAfter && astUtils.isTokenOnSameLine(token, tokenAfter));
     }
 
@@ -62474,6 +63062,7 @@ module.exports = function(context) {
      */
     function isFirstTokenInCurrentLine(token) {
         var tokenBefore = context.getTokenBefore(token);
+
         return !(tokenBefore && astUtils.isTokenOnSameLine(token, tokenBefore));
     }
 
@@ -62484,6 +63073,7 @@ module.exports = function(context) {
      */
     function isBeforeClosingParen(token) {
         var nextToken = context.getTokenAfter(token);
+
         return (
             nextToken &&
             nextToken.type === "Punctuator" &&
@@ -62520,6 +63110,7 @@ module.exports = function(context) {
                         message: "Unexpected whitespace before semicolon.",
                         fix: function(fixer) {
                             var tokenBefore = context.getTokenBefore(token);
+
                             return fixer.removeRange([tokenBefore.range[1], token.range[0]]);
                         }
                     });
@@ -62546,6 +63137,7 @@ module.exports = function(context) {
                             message: "Unexpected whitespace after semicolon.",
                             fix: function(fixer) {
                                 var tokenAfter = context.getTokenAfter(token);
+
                                 return fixer.removeRange([token.range[1], tokenAfter.range[0]]);
                             }
                         });
@@ -62573,6 +63165,7 @@ module.exports = function(context) {
      */
     function checkNode(node) {
         var token = context.getLastToken(node);
+
         checkSemicolonSpacing(token, node);
     }
 
@@ -62715,11 +63308,13 @@ module.exports = function(context) {
      */
     function isOneLinerBlock(node) {
         var nextToken = context.getTokenAfter(node);
+
         if (!nextToken || nextToken.value !== "}") {
             return false;
         }
 
         var parent = node.parent;
+
         return parent && parent.type === "BlockStatement" &&
           parent.loc.start.line === parent.loc.end.line;
     }
@@ -62941,11 +63536,13 @@ module.exports = function(context) {
 
                 for (var i = 0; i < node.specifiers.length; ++i) {
                     var currentSpecifier = node.specifiers[i];
+
                     if (currentSpecifier.type !== "ImportSpecifier") {
                         continue;
                     }
 
                     var currentSpecifierName = currentSpecifier.local.name;
+
                     if (ignoreCase) {
                         currentSpecifierName = currentSpecifierName.toLowerCase();
                     }
@@ -63358,6 +63955,7 @@ module.exports = function(context) {
     function getExceptions() {
         var openers = [],
             closers = [];
+
         if (options.braceException) {
             openers.push("{");
             closers.push("}");
@@ -63509,6 +64107,7 @@ module.exports = function(context) {
     return {
         "Program": function checkParenSpaces(node) {
             var tokens, prevToken, nextToken;
+
             exceptions = getExceptions();
             tokens = sourceCode.tokensAndComments;
 
@@ -63617,7 +64216,9 @@ module.exports = function(context) {
      * @private
      */
     function getFirstNonSpacedToken(left, right) {
-        var op, tokens = context.getTokensBetween(left, right, 1);
+        var op,
+            tokens = context.getTokensBetween(left, right, 1);
+
         for (var i = 1, l = tokens.length - 1; i < l; ++i) {
             op = tokens[i];
             if (
@@ -64028,6 +64629,7 @@ var lodash = require("lodash");
  */
 function escape(s) {
     var isOneChar = s.length === 1;
+
     s = lodash.escapeRegExp(s);
     return isOneChar ? s : "(?:" + s + ")";
 }
@@ -64139,6 +64741,7 @@ function createAlwaysStylePattern(markers, exceptions) {
  */
 function createNeverStylePattern(markers) {
     var pattern = "^(" + markers.map(escape).join("|") + ")?[ \t]+";
+
     return new RegExp(pattern);
 }
 
@@ -64222,6 +64825,7 @@ module.exports = function(context) {
             if (!rule.regex.test(node.value)) {
                 var hasMarker = rule.markers.exec(node.value);
                 var marker = hasMarker ? commentIdentifier + hasMarker[0] : commentIdentifier;
+
                 if (rule.hasExceptions) {
                     report(node, "Expected exception block, space or tab after '" + marker + "' in comment.", hasMarker);
                 } else {
@@ -64230,6 +64834,7 @@ module.exports = function(context) {
             }
         } else {
             var matched = rule.regex.exec(node.value);
+
             if (matched) {
                 if (!matched[1]) {
                     report(node, "Unexpected space or tab after '" + commentIdentifier + "' in comment.", matched);
@@ -64563,6 +65168,7 @@ module.exports = function(context) {
      */
     function checkSpacingBefore(token) {
         var prevToken = sourceCode.getTokenBefore(token);
+
         if (prevToken &&
             CLOSE_PAREN.test(token.value) &&
             astUtils.isTokenOnSameLine(prevToken, token) &&
@@ -64591,6 +65197,7 @@ module.exports = function(context) {
      */
     function checkSpacingAfter(token) {
         var nextToken = sourceCode.getTokenAfter(token);
+
         if (nextToken &&
             OPEN_PAREN.test(token.value) &&
             astUtils.isTokenOnSameLine(token, nextToken) &&
@@ -64618,6 +65225,7 @@ module.exports = function(context) {
     return {
         TemplateElement: function(node) {
             var token = sourceCode.getFirstToken(node);
+
             checkSpacingBefore(token);
             checkSpacingAfter(token);
         }
@@ -64766,13 +65374,13 @@ module.exports = function(context) {
         var currentType;
         var expectedType;
 
-        if (!type.name) {
-            currentType = type.expression.name;
-        } else {
+        if (type.name) {
             currentType = type.name;
+        } else if (type.expression) {
+            currentType = type.expression.name;
         }
 
-        expectedType = preferType[currentType];
+        expectedType = currentType && preferType[currentType];
 
         return {
             currentType: currentType,
@@ -64782,46 +65390,49 @@ module.exports = function(context) {
 
     /**
      * Check if return tag type is void or undefined
-     * @param {Object} tag JSDoc tag
      * @param {Object} jsdocNode JSDoc node
+     * @param {Object} type JSDoc tag
      * @returns {void}
      * @private
      */
-    function validateTagType(tag, jsdocNode) {
-        if (!tag.type || !canTypeBeValidated(tag.type.type)) {
+    function validateType(jsdocNode, type) {
+        if (!type || !canTypeBeValidated(type.type)) {
             return;
         }
 
         var typesToCheck = [];
         var elements = [];
 
-        if (tag.type.type === "TypeApplication") { // {Array.<String>}
-            elements = tag.type.applications[0].type === "UnionType" ? tag.type.applications[0].elements : tag.type.applications;
-            typesToCheck.push(getCurrentExpectedTypes(tag.type));
-        } else if (tag.type.type === "RecordType") { // {{20:String}}
-            elements = tag.type.fields;
-        } else if (tag.type.type === "UnionType") { // {String|number|Test}
-            elements = tag.type.elements;
-        } else {
-            typesToCheck.push(getCurrentExpectedTypes(tag.type));
+        switch (type.type) {
+            case "TypeApplication":  // {Array.<String>}
+                elements = type.applications[0].type === "UnionType" ? type.applications[0].elements : type.applications;
+                typesToCheck.push(getCurrentExpectedTypes(type));
+                break;
+            case "RecordType":  // {{20:String}}
+                elements = type.fields;
+                break;
+            case "UnionType":  // {String|number|Test}
+            case "ArrayType":  // {[String, number, Test]}
+                elements = type.elements;
+                break;
+            case "FieldType":  // Array.<{count: number, votes: number}>
+                typesToCheck.push(getCurrentExpectedTypes(type.value));
+                break;
+            default:
+                typesToCheck.push(getCurrentExpectedTypes(type));
         }
 
-        elements.forEach(function(type) {
-            type = type.value ? type.value : type; // we have to use type.value for RecordType
-            if (canTypeBeValidated(type.type)) {
-                typesToCheck.push(getCurrentExpectedTypes(type));
-            }
-        });
+        elements.forEach(validateType.bind(null, jsdocNode));
 
-        typesToCheck.forEach(function(type) {
-            if (type.expectedType &&
-                type.expectedType !== type.currentType) {
+        typesToCheck.forEach(function(typeToCheck) {
+            if (typeToCheck.expectedType &&
+                typeToCheck.expectedType !== typeToCheck.currentType) {
                 context.report({
                     node: jsdocNode,
                     message: "Use '{{expectedType}}' instead of '{{currentType}}'.",
                     data: {
-                        currentType: type.currentType,
-                        expectedType: type.expectedType
+                        currentType: typeToCheck.currentType,
+                        expectedType: typeToCheck.expectedType
                     }
                 });
             }
@@ -64927,8 +65538,8 @@ module.exports = function(context) {
                 }
 
                 // validate the types
-                if (checkPreferType) {
-                    validateTagType(tag, jsdocNode);
+                if (checkPreferType && tag.type) {
+                    validateType(jsdocNode, tag.type);
                 }
             });
 
@@ -64948,8 +65559,12 @@ module.exports = function(context) {
                 node.params.forEach(function(param, i) {
                     var name = param.name;
 
+                    if (param.type === "AssignmentPattern") {
+                        name = param.left.name;
+                    }
+
                     // TODO(nzakas): Figure out logical things to do with destructured, default, rest params
-                    if (param.type === "Identifier") {
+                    if (param.type === "Identifier" || param.type === "AssignmentPattern") {
                         if (jsdocParams[i] && (name !== jsdocParams[i])) {
                             context.report(jsdocNode, "Expected JSDoc for '{{name}}' but found '{{jsdocName}}'.", {
                                 name: name,
@@ -65123,7 +65738,8 @@ module.exports = function(context) {
      * @returns {Boolean} True if var is on top otherwise false
      */
     function isVarOnTop(node, statements) {
-        var i = 0, l = statements.length;
+        var i = 0,
+            l = statements.length;
 
         // skip over directives
         for (; i < l; ++i) {
@@ -65133,7 +65749,9 @@ module.exports = function(context) {
         }
 
         for (; i < l; ++i) {
-            if (statements[i].type !== "VariableDeclaration") {
+            if (statements[i].type !== "VariableDeclaration" &&
+                    (statements[i].type !== "ExportNamedDeclaration" ||
+                    statements[i].declaration.type !== "VariableDeclaration")) {
                 return false;
             }
             if (statements[i] === node) {
@@ -65182,6 +65800,12 @@ module.exports = function(context) {
             var grandParent = ancestors.pop();
 
             if (node.kind === "var") { // check variable is `var` type and not `let` or `const`
+                if (parent.type === "ExportNamedDeclaration") {
+                    node = parent;
+                    parent = grandParent;
+                    grandParent = ancestors.pop();
+                }
+
                 if (parent.type === "Program") { // That means its a global variable
                     globalVarCheck(node, parent);
                 } else {
@@ -65221,6 +65845,7 @@ module.exports = function(context) {
     function wrapped(node) {
         var previousToken = context.getTokenBefore(node),
             nextToken = context.getTokenAfter(node);
+
         return previousToken && previousToken.value === "(" &&
             nextToken && nextToken.value === ")";
     }
@@ -65335,6 +65960,7 @@ module.exports = function(context) {
             var node = after ? leftToken : rightToken;
             var type = spaceRequired ? "Missing" : "Unexpected";
             var message = type + " space " + side + " *.";
+
             context.report({
                 node: node,
                 message: message,
@@ -65704,6 +66330,7 @@ function display(data) {
     var rows = Object.keys(data)
         .map(function(key) {
             var time = data[key];
+
             total += time;
             return [key, time];
         })
@@ -65720,8 +66347,12 @@ function display(data) {
     rows.unshift(HEADERS);
 
     var widths = [];
+
     rows.forEach(function(row) {
-        var len = row.length, i, n;
+        var len = row.length,
+            i,
+            n;
+
         for (i = 0; i < len; i++) {
             n = row[i].length;
             if (!widths[i] || n > widths[i]) {
@@ -65735,6 +66366,7 @@ function display(data) {
             return ALIGN[index](cell, widths[index]);
         }).join(" | ");
     });
+
     table.splice(1, 0, widths.map(function(w, index) {
         if (index !== 0 && index !== widths.length - 1) {
             w++;
@@ -65765,6 +66397,7 @@ module.exports = (function() {
 
         return function() {
             var t = process.hrtime();
+
             fn.apply(null, Array.prototype.slice.call(arguments));
             t = process.hrtime(t);
             data[key] += t[0] * 1e3 + t[1] / 1e6;
@@ -65864,6 +66497,7 @@ module.exports = function(tokens) {
      */
     api.getTokensBefore = function(node, beforeCount) {
         var first = starts[node.range[0]];
+
         return get(first - (beforeCount || 0), first);
     };
 
@@ -65888,6 +66522,7 @@ module.exports = function(tokens) {
      */
     api.getTokensAfter = function(node, afterCount) {
         var start = lastTokenIndex(node) + 1;
+
         return get(start, start + (afterCount || 0));
     };
 
@@ -65924,6 +66559,7 @@ module.exports = function(tokens) {
      */
     api.getFirstTokens = function(node, count) {
         var first = starts[node.range[0]];
+
         return get(
             first,
             Math.min(lastTokenIndex(node) + 1, first + (count || 0))
@@ -65948,6 +66584,7 @@ module.exports = function(tokens) {
      */
     api.getLastTokens = function(node, count) {
         var last = lastTokenIndex(node) + 1;
+
         return get(Math.max(starts[node.range[0]], last - (count || 0)), last);
     };
 
@@ -66015,6 +66652,7 @@ function emitComments(comments, emitter, locs, eventName) {
     if (comments.length > 0) {
         comments.forEach(function(node) {
             var index = locs.indexOf(node.loc);
+
             if (index >= 0) {
                 locs.splice(index, 1);
             } else {
@@ -66511,11 +67149,13 @@ function SourceCode(text, ast) {
 
     // create token store methods
     var tokenStore = createTokenStore(ast.tokens);
+
     Object.keys(tokenStore).forEach(function(methodName) {
         this[methodName] = tokenStore[methodName];
     }, this);
 
     var tokensAndCommentsStore = createTokenStore(this.tokensAndComments);
+
     this.getTokenOrCommentBefore = tokensAndCommentsStore.getTokenBefore;
     this.getTokenOrCommentAfter = tokensAndCommentsStore.getTokenAfter;
 
@@ -66680,6 +67320,7 @@ SourceCode.prototype = {
      */
     isSpaceBetweenTokens: function(first, second) {
         var text = this.text.slice(first.range[1], second.range[0]);
+
         return /\s/.test(text.replace(/\/\*.*?\*\//g, ""));
     }
 };
