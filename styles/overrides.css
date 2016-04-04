@@ -35,3 +35,50 @@ h6:target:before {
   margin: 0 2px;
 }
 
+p.incorrect + div + div + div > pre, /* vars-on-top */
+p.incorrect + div + div > pre, /* no-continue */
+p.incorrect + div > pre {
+  background-color: #fff6f6; /* light red hsl(0,100%,98%) */
+}
+
+p.correct + div + div + div > pre, /* vars-on-top */
+p.correct + div + div > pre, /* no-continue */
+p.correct + div > pre {
+  background-color: #f6fff6; /* light green hsl(120,100%,98%) */
+}
+
+@media (min-width: 768px) {
+
+  p.incorrect + div + div + div > pre:before, /* vars-on-top */
+  p.incorrect + div + div > pre:before, /* no-continue */
+  p.incorrect + div > pre:before {
+    content: "\e126"; /* thumbs-down */
+    font-family: "Glyphicons Halflings";
+    color: #4d4d4d; /* gray hsl(0,0%,30%) */
+    position: absolute;
+    left: -20px;
+  }
+
+  p.correct + div + div + div > pre:before, /* vars-on-top */
+  p.correct + div + div > pre:before, /* no-continue */
+  p.correct+div>pre:before {
+    content: "\e125"; /* thumbs-up */
+    font-family: "Glyphicons Halflings";
+    color: #4d4d4d; /* gray hsl(0,0%,30%) */
+    position: absolute;
+    left: -20px;
+  }
+
+  p.fixable:before {
+    content: "\e136"; /* wrench */
+    font-family: "Glyphicons Halflings";
+    color: #4d4d4d; /* gray hsl(0,0%,30%) */
+    position: absolute;
+    left: -20px;
+  }
+
+  p.fixable,
+  .highlighter-rouge {
+    position:relative;
+  }
+}
