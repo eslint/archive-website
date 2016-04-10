@@ -35,6 +35,25 @@ h6:target:before {
   margin: 0 2px;
 }
 
+td .glyphicon {
+  margin: 0; /* within table in rules page */
+}
+
+th,
+td {
+  padding-left: 0.5em;
+  min-width: 1em; /* width of glyphicon for a column of empty cells */
+}
+
+th:first-child,
+td:first-child {
+  padding-left: 0;
+}
+
+tr {
+  vertical-align: baseline;
+}
+
 p.incorrect + div + div + div > pre, /* vars-on-top */
 p.incorrect + div + div > pre, /* no-continue */
 p.incorrect + div > pre {
