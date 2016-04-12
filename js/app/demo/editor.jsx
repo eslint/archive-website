@@ -37,7 +37,7 @@ define(['react', 'orion', 'reactDom'], function(React, orion, ReactDOM) {
         },
         render: function() {
             return (
-                <pre id="editor" data-editor-lang="js" style={{height: height + 'px'}}>var foo = bar;</pre>
+                <pre id="editor" data-editor-lang="js" style={{height: height + 'px'}}>{this.props.text}</pre>
             );
         }
     });

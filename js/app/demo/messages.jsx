@@ -15,7 +15,8 @@ define(['react', 'jsx!message'], function(React, Message) {
                     <div id="results">
                         {
                             this.props.values.map(function(message, index) {
-                                return <Message key={index} value={message} />;
+                                var key = '' + message.line + ':' + message.column + ':' + message.ruleId;
+                                return <Message key={key} value={message} />;
                             })
                         }
                     </div>
