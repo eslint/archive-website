@@ -1,6 +1,6 @@
 'use strict';
 
-define(['react', 'jsx!editor', 'jsx!messages', 'jsx!configuration', 'eslint'], function(React, Editor, Messages, Configuration, eslint) {
+define(['react', 'jsx!editor', 'jsx!messages', 'jsx!configuration', 'eslint', 'text!../eslint.json'], function(React, Editor, Messages, Configuration, eslint, config) {
     return React.createClass({
         displayName: 'App',
         getInitialState: function() {
@@ -17,7 +17,34 @@ define(['react', 'jsx!editor', 'jsx!messages', 'jsx!configuration', 'eslint'], f
                             experimentalObjectRestSpread: false
                         }
                     },
-                    rules: {}
+                    rules: JSON.parse(config).rules,
+                    env: {
+                        browser: false,
+                        node: false,
+                        commonjs: false,
+                        "shared-node-browser": false,
+                        worker: false,
+                        amd: false,
+                        mocha: false,
+                        jasmine: false,
+                        jest: false,
+                        phantomjs: false,
+                        jquery: false,
+                        qunit: false,
+                        prototypejs: false,
+                        shelljs: false,
+                        meteor: false,
+                        mongo: false,
+                        protractor: false,
+                        applescript: false,
+                        nashorn: false,
+                        serviceworker: false,
+                        atomtest: false,
+                        embertest: false,
+                        webextensions: false,
+                        es6: false,
+                        greasemonkey: false
+                    }
                 },
                 text: 'var foo = bar;'
             };

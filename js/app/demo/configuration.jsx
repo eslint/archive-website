@@ -1,6 +1,6 @@
 'use strict';
 
-define(['react', 'jsx!parserOptions', 'jsx!rulesConfig'], function(React, ParserOptions, RulesConfig) {
+define(['react', 'jsx!parserOptions', 'jsx!environments', 'jsx!rulesConfig'], function(React, ParserOptions, Environments, RulesConfig) {
     return React.createClass({
         displayName: 'Configuration',
         getInitialState: function() {
@@ -13,6 +13,11 @@ define(['react', 'jsx!parserOptions', 'jsx!rulesConfig'], function(React, Parser
         },
         updateRules: function(rules) {
             this.setState({ rules: rules }, function() {
+                this.props.onUpdate(this.state);
+            });
+        },
+        updateEnvironments: function(env) {
+            this.setState({ env: env }, function() {
                 this.props.onUpdate(this.state);
             });
         },
@@ -30,6 +35,9 @@ define(['react', 'jsx!parserOptions', 'jsx!rulesConfig'], function(React, Parser
                         <div id="configuration" className="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
                             <div className="panel-body">
                                 <ParserOptions options={this.props.options.parserOptions} onUpdate={this.updateParserOptions} />
+                                <hr />
+                                <Environments env={this.props.options.env} onUpdate={this.updateEnvironments} />
+                                <hr />
                                 <RulesConfig config={this.props.options.rules} onUpdate={this.updateRules} />
                             </div>
                         </div>
