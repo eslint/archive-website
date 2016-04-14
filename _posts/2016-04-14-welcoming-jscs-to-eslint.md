@@ -32,9 +32,9 @@ If you're a current JSCS user, I strongly urge you to upgrade to 3.0.0 and repor
 
 We recognize that there is a large and vibrant JSCS user base, and as such, the first goal of the combined ESLint/JSCS team is to make the transition to ESLint easy for JSCS users. To that end, our immediate-term plan includes the following tasks:
 
-* Identifying rules that exist in JSCS but are missing in ESLint and creating as many of those rules as we can.
-* Incorporating a way to convert `.jscsrc` files into `.eslintrc` files with the goal of having a single command to do this automatically.
-* Creating ESLint shareable configs for the most popular JSCS presets.
+* Identifying rules that exist in JSCS but are missing in ESLint and creating as many of those rules as we can. ([#5856](https://github.com/eslint/eslint/issues/5856))
+* Incorporating a way to convert `.jscsrc` files into `.eslintrc` files with the goal of having a single command to do this automatically. ([#5857](https://github.com/eslint/eslint/issues/5857))
+* Creating ESLint shareable configs for the most popular JSCS presets. ([#5858](https://github.com/eslint/eslint/issues/5858))
 * Expanding ESLint's autofixing capabilities to fix more problems and try, as much as is possible, to approach the level of autofixing available in JSCS 2.x.
 * Write documentation to guide JSCS users through transitioning to ESLint.
 
