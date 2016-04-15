@@ -11,9 +11,19 @@ Please note that all HTML documentation is split between this repository and the
 * Create a fork of this repository
 * Clone it locally
 * Create a new branch
-* Add your logo image to /img/logos/ directory. Logo should be at least 150px of height. Name your logo with your company/project name.
-* Update /_data/logos.yml file and add an entry for your company with the name, url and src (should point to the logo you just added).
+* Add your logo image to `/img/logos/` directory. Logo should be at least 150px of height. Name your logo with your company/project name.
+* Update `/_data/logos.yml` file and add an entry for your company with the name, url and src (should point to the logo you just added).
 * Commit your changes to your fork and create a pull request into the main repository.
+
+## Developer Setup
+
+This repository runs on GitHub pages through Jekyll. To setup a local environment, please follow the [GitHub instruction](https://help.github.com/articles/setting-up-your-github-pages-site-locally-with-jekyll/) (be sure to follow the instructions for your platform).
+
+Once you have setup a local environment, you can run a copy of the website locally using this command:
+
+```
+$ bundle exec jekyll serve --watch
+```
 
 ## License
 
