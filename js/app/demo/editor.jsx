@@ -1,44 +1,33 @@
-'use strict';
+import React from 'react'
+import ReactDOM from 'reactDom'
+import { debounce } from './utils'
 
-var height = 350;
+// import orion from 'orion'
+const orion = window.orion.editor.edit.bind(window.orion.editor)
 
-function debounce(func, wait, immediate) {
-    var timeout;
-    return function() {
-        var context = this,
-            args = arguments;
-        var later = function() {
-            timeout = null;
-            if (!immediate) func.apply(context, args);
-        };
-        var callNow = immediate && !timeout;
-        clearTimeout(timeout);
-        timeout = setTimeout(later, wait);
-        if (callNow) func.apply(context, args);
-    };
-}
+// constants
+const height = 350;
 
-define(['react', 'orion', 'reactDom'], function(React, orion, ReactDOM) {
-    return React.createClass({
-        displayName: 'Editor',
-        componentDidMount: function() {
-            var element = ReactDOM.findDOMNode(this);
-            var editor = orion(element);
-            
-            var update = debounce(function() {
-                this.props.onChange({ value: editor.getModel().getText() });
-            }.bind(this), 500);
-            
-            editor.getTextView().onModify = function() {
-                update();
-            }.bind(this);
-            
+const Editor = React.createClass({
+    componentDidMount: function() {
+        var element = ReactDOM.findDOMNode(this);
+        var editor = orion(element);
+
+        var update = debounce(function() {
             this.props.onChange({ value: editor.getModel().getText() });
-        },
-        render: function() {
-            return (
-                <pre id="editor" data-editor-lang="js" style={{height: height + 'px'}}>{this.props.text}</pre>
-            );
-        }
-    });
+        }.bind(this), 500);
+
+        editor.getTextView().onModify = function() {
+            update();
+        }.bind(this);
+
+        this.props.onChange({ value: editor.getModel().getText() });
+    },
+    render: function() {
+        return (
+            <pre id="editor" data-editor-lang="js" style={{height: height + 'px'}}>{this.props.text}</pre>
+        );
+    }
 });
+
+export default Editor
