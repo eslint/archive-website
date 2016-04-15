@@ -1,8 +1,8 @@
-'use strict';
+import ReactDOM from 'reactDom';
+import React from 'react';
+import App from './app'
 
-define(['react', 'reactDom', 'jsx!app'], function(React, ReactDOM, App) {
-    ReactDOM.render(
-        React.createElement(App),
-        document.getElementById('app')
-    );
-});
+ReactDOM.render(
+    React.createElement(App),
+    document.getElementById('app')
+);
