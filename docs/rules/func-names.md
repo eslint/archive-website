@@ -6,7 +6,7 @@ layout: doc
 
 # Require Function Expressions to have a Name (func-names)
 
-A pattern that's becoming more common is to give function expressions names to aid in debugging, such as:
+A pattern that's becoming more common is to give function expressions names to aid in debugging. For example:
 
 ```js
 Foo.prototype.bar = function bar() {};
@@ -16,7 +16,7 @@ Adding the second `bar` in the above example is optional.  If you leave off the 
 
 ## Rule Details
 
-The following patterns are considered problems:
+Examples of **incorrect** code for this rule:
 
 ```js
 /*eslint func-names: "error"*/
@@ -28,7 +28,7 @@ Foo.prototype.bar = function() {};
 }())
 ```
 
-The following patterns are not considered problems:
+Examples of **correct** code for this rule:
 
 ```js
 /*eslint func-names: "error"*/

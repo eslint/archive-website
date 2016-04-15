@@ -47,6 +47,15 @@ do{
 var result = 0 ? a : b;
 ```
 
+```js
+/*eslint no-constant-condition: "error"*/
+
+if (typeof x) {
+    doSomething();
+}
+```
+
+
 Examples of **correct** code for this rule:
 
 ```js
@@ -69,6 +78,14 @@ do{
 } while (x);
 
 var result = x !== 0 ? a : b;
+```
+
+```js
+/*eslint no-constant-condition: "error"*/
+
+if (typeof x === 'undefined') {
+    doSomething();
+}
 ```
 
 ## Version

@@ -121,7 +121,7 @@ The plugin support was introduced in ESLint version `0.8.0`. Ensure the `peerDep
 
 ### Testing
 
-You can test the rules of your plugin [the same way as bundled ESLint rules](working-with-rules) using [`ESLintTester`](https://github.com/eslint/eslint-tester).
+You can test the rules of your plugin [the same way as bundled ESLint rules](working-with-rules) using RuleTester.
 
 Example:
 

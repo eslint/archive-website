@@ -4864,31 +4864,12 @@ module.exports={
     "betarelease": "eslint-prelease beta",
     "browserify": "node Makefile.js browserify"
   },
+  "readme": "# Espree\n\nEspree started out as a fork of [Esprima](http://esprima.org) v1.2.2, the last stable published released of Esprima before work on ECMAScript 6 began. Espree is now built on top of [Acorn](https://github.com/ternjs/acorn), which has a modular architecture that allows extension of core functionality. The goal of Espree is to produce output that is similar to Esprima with a similar API so that it can be used in place of Esprima.\n\n## Usage\n\nInstall:\n\n```\nnpm i espree --save\n```\n\nAnd in your Node.js code:\n\n```javascript\nvar espree = require(\"espree\");\n\nvar ast = espree.parse(code);\n```\n\nThere is a second argument to `parse()` that allows you to specify various options:\n\n```javascript\nvar espree = require(\"espree\");\n\nvar ast = espree.parse(code, {\n\n    // attach range information to each node\n    range: true,\n\n    // attach line/column location information to each node\n    loc: true,\n\n    // create a top-level comments array containing all comments\n    comment: true,\n\n    // attach comments to the closest relevant node as leadingComments and\n    // trailingComments\n    attachComment: true,\n\n    // create a top-level tokens array containing all tokens\n    tokens: true,\n\n    // specify the language version (3, 5, 6, or 7, default is 5)\n    ecmaVersion: 5,\n\n    // specify which type of script you're parsing (script or module, default is script)\n    sourceType: \"script\",\n\n    // specify additional language features\n    ecmaFeatures: {\n\n        // enable JSX parsing\n        jsx: true,\n\n        // enable return in global scope\n        globalReturn: true,\n\n        // enable implied strict mode (if ecmaVersion >= 5)\n        impliedStrict: true,\n\n        // allow experimental object rest/spread\n        experimentalObjectRestSpread: true\n    }\n});\n```\n\n## Esprima Compatibility Going Forward\n\nThe primary goal is to produce the exact same AST structure and tokens as Esprima, and that takes precedence over anything else. (The AST structure being the [ESTree](https://github.com/estree/estree) API with JSX extensions.) Separate from that, Espree may deviate from what Esprima outputs in terms of where and how comments are attached, as well as what additional information is available on AST nodes. That is to say, Espree may add more things to the AST nodes than Esprima does but the overall AST structure produced will be the same.\n\nEspree may also deviate from Esprima in the interface it exposes.\n\n## Contributing\n\nIssues and pull requests will be triaged and responded to as quickly as possible. We operate under the [ESLint Contributor Guidelines](http://eslint.org/docs/developer-guide/contributing), so please be sure to read them before contributing. If you're not sure where to dig in, check out the [issues](https://github.com/eslint/espree/issues).\n\nEspree is licensed under a permissive BSD 2-clause license.\n\n## Build Commands\n\n* `npm test` - run all linting and tests\n* `npm run lint` - run all linting\n* `npm run browserify` - creates a version of Espree that is usable in a browser\n\n## Differences from Espree 2.x\n\n* The `tokenize()` method does not use `ecmaFeatures`. Any string will be tokenized completely based on ECMAScript 6 semantics.\n* Trailing whitespace no longer is counted as part of a node.\n* `let` and `const` declarations are no longer parsed by default. You must opt-in using `ecmaFeatures.blockBindings`.\n* The `esparse` and `esvalidate` binary scripts have been removed.\n* There is no `tolerant` option. We will investigate adding this back in the future.\n\n## Known Incompatibilities\n\nIn an effort to help those wanting to transition from other parsers to Espree, the following is a list of noteworthy incompatibilities with other parsers. These are known differences that we do not intend to change.\n\n### Esprima 1.2.2\n\n* Esprima counts trailing whitespace as part of each AST node while Espree does not. In Espree, the end of a node is where the last token occurs.\n* Espree does not parse `let` and `const` declarations by default.\n* Error messages returned for parsing errors are different.\n* There are two addition properties on every node and token: `start` and `end`. These represent the same data as `range` and are used internally by Acorn.\n\n### Esprima 2.x\n\n* Esprima 2.x uses a different comment attachment algorithm that results in some comments being added in different places than Espree. The algorithm Espree uses is the same one used in Esprima 1.2.2.\n\n## Frequently Asked Questions\n\n### Why another parser\n\n[ESLint](http://eslint.org) had been relying on Esprima as its parser from the beginning. While that was fine when the JavaScript language was evolving slowly, the pace of development increased dramatically and Esprima had fallen behind. ESLint, like many other tools reliant on Esprima, has been stuck in using new JavaScript language features until Esprima updates, and that caused our users frustration.\n\nWe decided the only way for us to move forward was to create our own parser, bringing us inline with JSHint and JSLint, and allowing us to keep implementing new features as we need them. We chose to fork Esprima instead of starting from scratch in order to move as quickly as possible with a compatible API.\n\nWith Espree 2.0.0, we are no longer a fork of Esprima but rather a translation layer between Acorn and Esprima syntax. This allows us to put work back into a community-supported parser (Acorn) that is continuing to grow and evolve while maintaining an Esprima-compatible parser for those utilities still built on Esprima.\n\n### Have you tried working with Esprima?\n\nYes. Since the start of ESLint, we've regularly filed bugs and feature requests with Esprima and will continue to do so. However, there are some different philosophies around how the projects work that need to be worked through. The initial goal was to have Espree track Esprima and eventually merge the two back together, but we ultimately decided that building on top of Acorn was a better choice due to Acorn's plugin support.\n\n### Why don't you just use Acorn?\n\nAcorn is a great JavaScript parser that produces an AST that is compatible with Esprima. Unfortunately, ESLint relies on more than just the AST to do its job. It relies on Esprima's tokens and comment attachment features to get a complete picture of the source code. We investigated switching to Acorn, but the inconsistencies between Esprima and Acorn created too much work for a project like ESLint.\n\nWe are building on top of Acorn, however, so that we can contribute back and help make Acorn even better.\n\n### What ECMAScript 6 features do you support?\n\nAll of them.\n\n### What ECMAScript 7 features do you support?\n\nThere is only one ECMAScript 7 syntax change: the exponentiation operator. Espree supports this.\n\n### How do you determine which experimental features to support?\n\nIn general, we do not support experimental JavaScript features. We may make exceptions from time to time depending on the maturity of the features.\n",
+  "readmeFilename": "README.md",
   "_id": "espree@3.1.3",
   "_shasum": "a77ca630986c19b74d95541b845298cd6faa228c",
-  "_from": "espree@3.1.3",
-  "_npmVersion": "1.4.10",
-  "_npmUser": {
-    "name": "nzakas",
-    "email": "nicholas@nczconsulting.com"
-  },
-  "maintainers": [
-    {
-      "name": "nzakas",
-      "email": "nicholas@nczconsulting.com"
-    }
-  ],
-  "dist": {
-    "shasum": "a77ca630986c19b74d95541b845298cd6faa228c",
-    "tarball": "http://registry.npmjs.org/espree/-/espree-3.1.3.tgz"
-  },
-  "_npmOperationalInternal": {
-    "host": "packages-12-west.internal.npmjs.com",
-    "tmp": "tmp/espree-3.1.3.tgz_1458322183008_0.931681108660996"
-  },
-  "directories": {},
   "_resolved": "https://registry.npmjs.org/espree/-/espree-3.1.3.tgz",
-  "readme": "ERROR: No README data found!"
+  "_from": "espree@3.1.3"
 }
 
 },{}],"espree":[function(require,module,exports){
@@ -10596,12 +10577,14 @@ module.exports={
   ],
   "maintainers": [
     {
-      "name": "constellation",
-      "email": "utatane.tea@gmail.com"
+      "name": "Nicholas C. Zakas",
+      "email": "nicholas+npm@nczconsulting.com",
+      "url": "https://www.nczonline.net"
     },
     {
-      "name": "nzakas",
-      "email": "nicholas@nczconsulting.com"
+      "name": "Yusuke Suzuki",
+      "email": "utatane.tea@gmail.com",
+      "url": "https://github.com/Constellation"
     }
   ],
   "repository": {
@@ -10639,29 +10622,15 @@ module.exports={
     "esutils": "^1.1.6",
     "isarray": "^1.0.0"
   },
+  "readme": "[![NPM version][npm-image]][npm-url]\n[![build status][travis-image]][travis-url]\n[![Test coverage][coveralls-image]][coveralls-url]\n[![Downloads][downloads-image]][downloads-url]\n[![Join the chat at https://gitter.im/eslint/doctrine](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/eslint/doctrine?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)\n\n# Doctrine\n\nDoctrine is a [JSDoc](http://usejsdoc.org) parser that parses documentation comments from JavaScript (you need to pass in the comment, not a whole JavaScript file).\n\n## Installation\n\nYou can install Doctrine using [npm](https://npmjs.com):\n\n```\n$ npm install doctrine --save-dev\n```\n\nDoctrine can also be used in web browsers using [Browserify](http://browserify.org).\n\n## Usage\n\nRequire doctrine inside of your JavaScript:\n\n```js\nvar doctrine = require(\"doctrine\");\n```\n\n### parse()\n\nThe primary method is `parse()`, which accepts two arguments: the JSDoc comment to parse and an optional options object. The available options are:\n\n* `unwrap` - set to `true` to delete the leading `/**`, any `*` that begins a line, and the trailing `*/` from the source text. Default: `false`.\n* `tags` - an array of tags to return. When specified, Doctrine returns only tags in this array. For example, if `tags` is `[\"param\"]`, then only `@param` tags will be returned. Default: `null`.\n* `recoverable` - set to `true` to keep parsing even when syntax errors occur. Default: `false`.\n* `sloppy` - set to `true` to allow optional parameters to be specified in brackets (`@param {string} [foo]`). Default: `false`.\n* `lineNumbers` - set to `true` to add `lineNumber` to each node, specifying the line on which the node is found in the source. Default: `false`.\n\nHere's a simple example:\n\n```js\nvar ast = doctrine.parse(\n    [\n        \"/**\",\n        \" * This function comment is parsed by doctrine\",\n        \" * @param {{ok:String}} userName\",\n        \"*/\"\n    ].join('\\n'), { unwrap: true });\n```\n\nThis example returns the following AST:\n\n    {\n        \"description\": \"This function comment is parsed by doctrine\",\n        \"tags\": [\n            {\n                \"title\": \"param\",\n                \"description\": null,\n                \"type\": {\n                    \"type\": \"RecordType\",\n                    \"fields\": [\n                        {\n                            \"type\": \"FieldType\",\n                            \"key\": \"ok\",\n                            \"value\": {\n                                \"type\": \"NameExpression\",\n                                \"name\": \"String\"\n                            }\n                        }\n                    ]\n                },\n                \"name\": \"userName\"\n            }\n        ]\n    }\n\nSee the [demo page](http://eslint.org/doctrine/demo/) more detail.\n\n## Team\n\nThese folks keep the project moving and are resources for help:\n\n* Nicholas C. Zakas ([@nzakas](https://github.com/nzakas)) - project lead\n* Yusuke Suzuki ([@constellation](https://github.com/constellation)) - reviewer\n\n## Contributing\n\nIssues and pull requests will be triaged and responded to as quickly as possible. We operate under the [ESLint Contributor Guidelines](http://eslint.org/docs/developer-guide/contributing), so please be sure to read them before contributing. If you're not sure where to dig in, check out the [issues](https://github.com/eslint/doctrine/issues).\n\n## Frequently Asked Questions\n\n### Can I pass a whole JavaScript file to Doctrine?\n\nNo. Doctrine can only parse JSDoc comments, so you'll need to pass just the JSDoc comment to Doctrine in order to work.\n\n\n### License\n\n#### doctrine\n\nCopyright (C) 2012 [Yusuke Suzuki](http://github.com/Constellation)\n (twitter: [@Constellation](http://twitter.com/Constellation)) and other contributors.\n\nRedistribution and use in source and binary forms, with or without\nmodification, are permitted provided that the following conditions are met:\n\n  * Redistributions of source code must retain the above copyright\n    notice, this list of conditions and the following disclaimer.\n\n  * Redistributions in binary form must reproduce the above copyright\n    notice, this list of conditions and the following disclaimer in the\n    documentation and/or other materials provided with the distribution.\n\nTHIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS \"AS IS\"\nAND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE\nIMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE\nARE DISCLAIMED. IN NO EVENT SHALL <COPYRIGHT HOLDER> BE LIABLE FOR ANY\nDIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES\n(INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;\nLOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND\nON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT\n(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF\nTHIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n\n#### esprima\n\nsome of functions is derived from esprima\n\nCopyright (C) 2012, 2011 [Ariya Hidayat](http://ariya.ofilabs.com/about)\n (twitter: [@ariyahidayat](http://twitter.com/ariyahidayat)) and other contributors.\n\nRedistribution and use in source and binary forms, with or without\nmodification, are permitted provided that the following conditions are met:\n\n  * Redistributions of source code must retain the above copyright\n    notice, this list of conditions and the following disclaimer.\n\n  * Redistributions in binary form must reproduce the above copyright\n    notice, this list of conditions and the following disclaimer in the\n    documentation and/or other materials provided with the distribution.\n\nTHIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS \"AS IS\"\nAND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE\nIMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE\nARE DISCLAIMED. IN NO EVENT SHALL <COPYRIGHT HOLDER> BE LIABLE FOR ANY\nDIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES\n(INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;\nLOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND\nON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT\n(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF\nTHIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n\n\n#### closure-compiler\n\nsome of extensions is derived from closure-compiler\n\nApache License\nVersion 2.0, January 2004\nhttp://www.apache.org/licenses/\n\n\n### Where to ask for help?\n\nJoin our [Chatroom](https://gitter.im/eslint/doctrine)\n\n[npm-image]: https://img.shields.io/npm/v/doctrine.svg?style=flat-square\n[npm-url]: https://www.npmjs.com/package/doctrine\n[travis-image]: https://img.shields.io/travis/eslint/doctrine/master.svg?style=flat-square\n[travis-url]: https://travis-ci.org/eslint/doctrine\n[coveralls-image]: https://img.shields.io/coveralls/eslint/doctrine/master.svg?style=flat-square\n[coveralls-url]: https://coveralls.io/r/eslint/doctrine?branch=master\n[downloads-image]: http://img.shields.io/npm/dm/doctrine.svg?style=flat-square\n[downloads-url]: https://www.npmjs.com/package/doctrine\n",
+  "readmeFilename": "README.md",
   "gitHead": "18dba10454f17acbc49ae3c0628119734cb34952",
   "bugs": {
     "url": "https://github.com/eslint/doctrine/issues"
   },
   "_id": "doctrine@1.2.1",
   "_shasum": "ac0c649d70b9501e16e97acb7ec4e27168f746a3",
-  "_from": "doctrine@>=1.2.1 <2.0.0",
-  "_npmVersion": "2.14.9",
-  "_nodeVersion": "0.12.9",
-  "_npmUser": {
-    "name": "nzakas",
-    "email": "nicholas@nczconsulting.com"
-  },
-  "dist": {
-    "shasum": "ac0c649d70b9501e16e97acb7ec4e27168f746a3",
-    "tarball": "https://registry.npmjs.org/doctrine/-/doctrine-1.2.1.tgz"
-  },
-  "_npmOperationalInternal": {
-    "host": "packages-12-west.internal.npmjs.com",
-    "tmp": "tmp/doctrine-1.2.1.tgz_1459275509740_0.26917822007089853"
-  },
-  "_resolved": "https://registry.npmjs.org/doctrine/-/doctrine-1.2.1.tgz",
-  "readme": "ERROR: No README data found!"
+  "_from": "doctrine@>=1.2.1 <2.0.0"
 }
 
 },{}],23:[function(require,module,exports){
@@ -15634,16 +15603,9 @@ module.exports={
   },
   "maintainers": [
     {
-      "name": "constellation",
-      "email": "utatane.tea@gmail.com"
-    },
-    {
-      "name": "michaelficarra",
-      "email": "npm@michael.ficarra.me"
-    },
-    {
-      "name": "nzakas",
-      "email": "nicholas@nczconsulting.com"
+      "name": "Yusuke Suzuki",
+      "email": "utatane.tea@gmail.com",
+      "url": "http://github.com/Constellation"
     }
   ],
   "repository": {
@@ -15668,26 +15630,15 @@ module.exports={
     "lint": "jshint estraverse.js",
     "unit-test": "mocha --compilers coffee:coffee-script/register"
   },
-  "gitHead": "bbcccbfe98296585e4311c8755e1d00dcd581e3c",
+  "readme": "### Estraverse [![Build Status](https://secure.travis-ci.org/estools/estraverse.png)](http://travis-ci.org/estools/estraverse)\n\nEstraverse ([estraverse](http://github.com/estools/estraverse)) is\n[ECMAScript](http://www.ecma-international.org/publications/standards/Ecma-262.htm)\ntraversal functions from [esmangle project](http://github.com/estools/esmangle).\n\n### Documentation\n\nYou can find usage docs at [wiki page](https://github.com/estools/estraverse/wiki/Usage).\n\n### Example Usage\n\nThe following code will output all variables declared at the root of a file.\n\n```javascript\nestraverse.traverse(ast, {\n    enter: function (node, parent) {\n        if (node.type == 'FunctionExpression' || node.type == 'FunctionDeclaration')\n            return estraverse.VisitorOption.Skip;\n    },\n    leave: function (node, parent) {\n        if (node.type == 'VariableDeclarator')\n          console.log(node.id.name);\n    }\n});\n```\n\nWe can use `this.skip`, `this.remove` and `this.break` functions instead of using Skip, Remove and Break.\n\n```javascript\nestraverse.traverse(ast, {\n    enter: function (node) {\n        this.break();\n    }\n});\n```\n\nAnd estraverse provides `estraverse.replace` function. When returning node from `enter`/`leave`, current node is replaced with it.\n\n```javascript\nresult = estraverse.replace(tree, {\n    enter: function (node) {\n        // Replace it with replaced.\n        if (node.type === 'Literal')\n            return replaced;\n    }\n});\n```\n\nBy passing `visitor.keys` mapping, we can extend estraverse traversing functionality.\n\n```javascript\n// This tree contains a user-defined `TestExpression` node.\nvar tree = {\n    type: 'TestExpression',\n\n    // This 'argument' is the property containing the other **node**.\n    argument: {\n        type: 'Literal',\n        value: 20\n    },\n\n    // This 'extended' is the property not containing the other **node**.\n    extended: true\n};\nestraverse.traverse(tree, {\n    enter: function (node) { },\n\n    // Extending the existing traversing rules.\n    keys: {\n        // TargetNodeName: [ 'keys', 'containing', 'the', 'other', '**node**' ]\n        TestExpression: ['argument']\n    }\n});\n```\n\nBy passing `visitor.fallback` option, we can control the behavior when encountering unknown nodes.\n```javascript\n// This tree contains a user-defined `TestExpression` node.\nvar tree = {\n    type: 'TestExpression',\n\n    // This 'argument' is the property containing the other **node**.\n    argument: {\n        type: 'Literal',\n        value: 20\n    },\n\n    // This 'extended' is the property not containing the other **node**.\n    extended: true\n};\nestraverse.traverse(tree, {\n    enter: function (node) { },\n\n    // Iterating the child **nodes** of unknown nodes.\n    fallback: 'iteration'\n});\n```\n\n### License\n\nCopyright (C) 2012-2013 [Yusuke Suzuki](http://github.com/Constellation)\n (twitter: [@Constellation](http://twitter.com/Constellation)) and other contributors.\n\nRedistribution and use in source and binary forms, with or without\nmodification, are permitted provided that the following conditions are met:\n\n  * Redistributions of source code must retain the above copyright\n    notice, this list of conditions and the following disclaimer.\n\n  * Redistributions in binary form must reproduce the above copyright\n    notice, this list of conditions and the following disclaimer in the\n    documentation and/or other materials provided with the distribution.\n\nTHIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS \"AS IS\"\nAND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE\nIMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE\nARE DISCLAIMED. IN NO EVENT SHALL <COPYRIGHT HOLDER> BE LIABLE FOR ANY\nDIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES\n(INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;\nLOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND\nON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT\n(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF\nTHIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n",
+  "readmeFilename": "README.md",
   "bugs": {
     "url": "https://github.com/estools/estraverse/issues"
   },
   "_id": "estraverse@4.1.1",
   "_shasum": "f6caca728933a850ef90661d0e17982ba47111a2",
-  "_from": "estraverse@>=4.1.0 <4.2.0",
-  "_npmVersion": "2.14.4",
-  "_nodeVersion": "4.1.1",
-  "_npmUser": {
-    "name": "constellation",
-    "email": "utatane.tea@gmail.com"
-  },
-  "dist": {
-    "shasum": "f6caca728933a850ef90661d0e17982ba47111a2",
-    "tarball": "http://registry.npmjs.org/estraverse/-/estraverse-4.1.1.tgz"
-  },
-  "directories": {},
   "_resolved": "https://registry.npmjs.org/estraverse/-/estraverse-4.1.1.tgz",
-  "readme": "ERROR: No README data found!"
+  "_from": "estraverse@>=4.1.0 <4.2.0"
 }
 
 },{}],132:[function(require,module,exports){
@@ -15743,16 +15694,9 @@ module.exports={
   },
   "maintainers": [
     {
-      "name": "constellation",
-      "email": "utatane.tea@gmail.com"
-    },
-    {
-      "name": "michaelficarra",
-      "email": "npm@michael.ficarra.me"
-    },
-    {
-      "name": "nzakas",
-      "email": "nicholas@nczconsulting.com"
+      "name": "Yusuke Suzuki",
+      "email": "utatane.tea@gmail.com",
+      "url": "https://github.com/Constellation"
     }
   ],
   "repository": {
@@ -15783,30 +15727,15 @@ module.exports={
     "unit-test": "gulp test",
     "lint": "gulp lint"
   },
+  "readme": "### Esrecurse [![Build Status](https://travis-ci.org/estools/esrecurse.svg?branch=master)](https://travis-ci.org/estools/esrecurse)\n\nEsrecurse ([esrecurse](https://github.com/estools/esrecurse)) is\n[ECMAScript](http://www.ecma-international.org/publications/standards/Ecma-262.htm)\nrecursive traversing functionality.\n\n### Example Usage\n\nThe following code will output all variables declared at the root of a file.\n\n```javascript\nesrecurse.visit(ast, {\n    XXXStatement: function (node) {\n        this.visit(node.left);\n        // do something...\n        this.visit(node.right);\n    }\n});\n```\n\nWe can use `Visitor` instance.\n\n```javascript\nvar visitor = new esrecurse.Visitor({\n    XXXStatement: function (node) {\n        this.visit(node.left);\n        // do something...\n        this.visit(node.right);\n    }\n});\n\nvisitor.visit(ast);\n```\n\nWe can inherit `Visitor` instance easily.\n\n```javascript\nfunction DerivedVisitor() {\n    esrecurse.Visitor.call(/* this for constructor */  this  /* visitor object automatically becomes this. */);\n}\nutil.inherits(DerivedVisitor, esrecurse.Visitor);\nDerivedVisitor.prototype.XXXStatement = function (node) {\n    this.visit(node.left);\n    // do something...\n    this.visit(node.right);\n};\n```\n\nAnd you can invoke default visiting operation inside custom visit operation.\n\n```javascript\nfunction DerivedVisitor() {\n    esrecurse.Visitor.call(/* this for constructor */  this  /* visitor object automatically becomes this. */);\n}\nutil.inherits(DerivedVisitor, esrecurse.Visitor);\nDerivedVisitor.prototype.XXXStatement = function (node) {\n    // do something...\n    this.visitChildren(node);\n};\n```\n\nThe `childVisitorKeys` option does customize the behavoir of `this.visitChildren(node)`.\nWe can use user-defined node types.\n\n```javascript\n// This tree contains a user-defined `TestExpression` node.\nvar tree = {\n    type: 'TestExpression',\n\n    // This 'argument' is the property containing the other **node**.\n    argument: {\n        type: 'Literal',\n        value: 20\n    },\n\n    // This 'extended' is the property not containing the other **node**.\n    extended: true\n};\nesrecurse.visit(\n    ast,\n    {\n        Literal: function (node) {\n            // do something...\n        }\n    },\n    {\n        // Extending the existing traversing rules.\n        childVisitorKeys: {\n            // TargetNodeName: [ 'keys', 'containing', 'the', 'other', '**node**' ]\n            TestExpression: ['argument']\n        }\n    }\n);\n```\n\nWe can use the `fallback` option as well.\nIf the `fallback` option is `\"iteration\"`, `esrecurse` would visit all enumerable properties of unknown nodes.\nPlease note circular references cause the stack overflow. AST might have circular references in additional properties for some purpose (e.g. `node.parent`).\n\n```javascript\nesrecurse.visit(\n    ast,\n    {\n        Literal: function (node) {\n            // do something...\n        }\n    },\n    {\n        fallback: 'iteration'\n    }\n);\n```\n\nIf the `fallback` option is a function, `esrecurse` calls this function to determine the enumerable properties of unknown nodes.\nPlease note circular references cause the stack overflow. AST might have circular references in additional properties for some purpose (e.g. `node.parent`).\n\n```javascript\nesrecurse.visit(\n    ast,\n    {\n        Literal: function (node) {\n            // do something...\n        }\n    },\n    {\n        fallback: function (node) {\n            return Object.keys(node).filter(function(key) {\n                return key !== 'argument'\n            });\n        }\n    }\n);\n```\n\n### License\n\nCopyright (C) 2014 [Yusuke Suzuki](https://github.com/Constellation)\n (twitter: [@Constellation](https://twitter.com/Constellation)) and other contributors.\n\nRedistribution and use in source and binary forms, with or without\nmodification, are permitted provided that the following conditions are met:\n\n  * Redistributions of source code must retain the above copyright\n    notice, this list of conditions and the following disclaimer.\n\n  * Redistributions in binary form must reproduce the above copyright\n    notice, this list of conditions and the following disclaimer in the\n    documentation and/or other materials provided with the distribution.\n\nTHIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS \"AS IS\"\nAND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE\nIMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE\nARE DISCLAIMED. IN NO EVENT SHALL <COPYRIGHT HOLDER> BE LIABLE FOR ANY\nDIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES\n(INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;\nLOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND\nON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT\n(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF\nTHIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n",
+  "readmeFilename": "README.md",
   "gitHead": "63a34714834bd7ad2063054bd4abb24fb82ca667",
   "bugs": {
     "url": "https://github.com/estools/esrecurse/issues"
   },
   "_id": "esrecurse@4.1.0",
   "_shasum": "4713b6536adf7f2ac4f327d559e7756bff648220",
-  "_from": "esrecurse@>=4.1.0 <5.0.0",
-  "_npmVersion": "2.14.9",
-  "_nodeVersion": "0.12.9",
-  "_npmUser": {
-    "name": "nzakas",
-    "email": "nicholas@nczconsulting.com"
-  },
-  "dist": {
-    "shasum": "4713b6536adf7f2ac4f327d559e7756bff648220",
-    "tarball": "http://registry.npmjs.org/esrecurse/-/esrecurse-4.1.0.tgz"
-  },
-  "_npmOperationalInternal": {
-    "host": "packages-13-west.internal.npmjs.com",
-    "tmp": "tmp/esrecurse-4.1.0.tgz_1457712782215_0.15950557170435786"
-  },
-  "directories": {},
-  "_resolved": "https://registry.npmjs.org/esrecurse/-/esrecurse-4.1.0.tgz",
-  "readme": "ERROR: No README data found!"
+  "_from": "esrecurse@>=4.1.0 <5.0.0"
 }
 
 },{}],134:[function(require,module,exports){
@@ -15821,16 +15750,9 @@ module.exports={
   },
   "maintainers": [
     {
-      "name": "constellation",
-      "email": "utatane.tea@gmail.com"
-    },
-    {
-      "name": "michaelficarra",
-      "email": "npm@michael.ficarra.me"
-    },
-    {
-      "name": "nzakas",
-      "email": "nicholas@nczconsulting.com"
+      "name": "Yusuke Suzuki",
+      "email": "utatane.tea@gmail.com",
+      "url": "http://github.com/Constellation"
     }
   ],
   "repository": {
@@ -15873,30 +15795,15 @@ module.exports={
     "lint": "gulp lint",
     "jsdoc": "jsdoc src/*.js README.md"
   },
+  "readme": "Escope ([escope](http://github.com/estools/escope)) is\n[ECMAScript](http://www.ecma-international.org/publications/standards/Ecma-262.htm)\nscope analyzer extracted from [esmangle project](http://github.com/estools/esmangle).\n\n[![Build Status](https://travis-ci.org/estools/escope.png?branch=master)](https://travis-ci.org/estools/escope)\n\n### Example\n\n```js\nvar escope = require('escope');\nvar esprima = require('esprima');\nvar estraverse = require('estraverse');\n\nvar ast = esprima.parse(code);\nvar scopeManager = escope.analyze(ast);\n\nvar currentScope = scopeManager.acquire(ast);   // global scope\n\nestraverse.traverse(ast, {\n    enter: function(node, parent) {\n        // do stuff\n        \n        if (/Function/.test(node.type)) {\n            currentScope = scopeManager.acquire(node);  // get current function scope\n        }\n    },\n    leave: function(node, parent) {\n        if (/Function/.test(node.type)) {\n            currentScope = currentScope.upper;  // set to parent scope\n        }\n        \n        // do stuff\n    }\n});\n```\n\n### Document\n\nGenerated JSDoc is [here](http://estools.github.io/escope/).\n\n### Demos and Tools\n\nDemonstration is [here](http://mazurov.github.io/escope-demo/) by [Sasha Mazurov](https://github.com/mazurov) (twitter: [@mazurov](http://twitter.com/mazurov)). [issue](https://github.com/estools/escope/issues/14)\n\n![Demo](https://f.cloud.github.com/assets/75759/462920/7aa6dd40-b4f5-11e2-9f07-9f4e8d0415f9.gif)\n\n\nAnd there are tools constructed on Escope.\n\n- [Esmangle](https://github.com/estools/esmangle) is a minifier / mangler / optimizer.\n- [Eslevels](https://github.com/mazurov/eslevels) is a scope levels analyzer and [SublimeText plugin for scope context coloring](https://github.com/mazurov/sublime-levels) is constructed on it.\n- [Esgoggles](https://github.com/keeyipchan/esgoggles) is JavaScript code browser.\n\n\n### License\n\nCopyright (C) 2012-2013 [Yusuke Suzuki](http://github.com/Constellation)\n (twitter: [@Constellation](http://twitter.com/Constellation)) and other contributors.\n\nRedistribution and use in source and binary forms, with or without\nmodification, are permitted provided that the following conditions are met:\n\n  * Redistributions of source code must retain the above copyright\n    notice, this list of conditions and the following disclaimer.\n\n  * Redistributions in binary form must reproduce the above copyright\n    notice, this list of conditions and the following disclaimer in the\n    documentation and/or other materials provided with the distribution.\n\nTHIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS \"AS IS\"\nAND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE\nIMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE\nARE DISCLAIMED. IN NO EVENT SHALL <COPYRIGHT HOLDER> BE LIABLE FOR ANY\nDIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES\n(INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;\nLOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND\nON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT\n(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF\nTHIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n",
+  "readmeFilename": "README.md",
   "gitHead": "aa35861faa76a09f01203dee3497a939d70b463c",
   "bugs": {
     "url": "https://github.com/estools/escope/issues"
   },
   "_id": "escope@3.6.0",
   "_shasum": "e01975e812781a163a6dadfdd80398dc64c889c3",
-  "_from": "escope@>=3.6.0 <4.0.0",
-  "_npmVersion": "2.14.9",
-  "_nodeVersion": "0.12.9",
-  "_npmUser": {
-    "name": "nzakas",
-    "email": "nicholas@nczconsulting.com"
-  },
-  "dist": {
-    "shasum": "e01975e812781a163a6dadfdd80398dc64c889c3",
-    "tarball": "http://registry.npmjs.org/escope/-/escope-3.6.0.tgz"
-  },
-  "_npmOperationalInternal": {
-    "host": "packages-12-west.internal.npmjs.com",
-    "tmp": "tmp/escope-3.6.0.tgz_1457720018969_0.025237560039386153"
-  },
-  "directories": {},
-  "_resolved": "https://registry.npmjs.org/escope/-/escope-3.6.0.tgz",
-  "readme": "ERROR: No README data found!"
+  "_from": "escope@>=3.6.0 <4.0.0"
 }
 
 },{}],135:[function(require,module,exports){
@@ -16762,16 +16669,9 @@ module.exports={
   },
   "maintainers": [
     {
-      "name": "constellation",
-      "email": "utatane.tea@gmail.com"
-    },
-    {
-      "name": "michaelficarra",
-      "email": "npm@michael.ficarra.me"
-    },
-    {
-      "name": "nzakas",
-      "email": "nicholas@nczconsulting.com"
+      "name": "Yusuke Suzuki",
+      "email": "utatane.tea@gmail.com",
+      "url": "http://github.com/Constellation"
     }
   ],
   "repository": {
@@ -16797,30 +16697,15 @@ module.exports={
     "lint": "jshint estraverse.js",
     "unit-test": "mocha --compilers js:babel-register"
   },
+  "readme": "### Estraverse [![Build Status](https://secure.travis-ci.org/estools/estraverse.png)](http://travis-ci.org/estools/estraverse)\n\nEstraverse ([estraverse](http://github.com/estools/estraverse)) is\n[ECMAScript](http://www.ecma-international.org/publications/standards/Ecma-262.htm)\ntraversal functions from [esmangle project](http://github.com/estools/esmangle).\n\n### Documentation\n\nYou can find usage docs at [wiki page](https://github.com/estools/estraverse/wiki/Usage).\n\n### Example Usage\n\nThe following code will output all variables declared at the root of a file.\n\n```javascript\nestraverse.traverse(ast, {\n    enter: function (node, parent) {\n        if (node.type == 'FunctionExpression' || node.type == 'FunctionDeclaration')\n            return estraverse.VisitorOption.Skip;\n    },\n    leave: function (node, parent) {\n        if (node.type == 'VariableDeclarator')\n          console.log(node.id.name);\n    }\n});\n```\n\nWe can use `this.skip`, `this.remove` and `this.break` functions instead of using Skip, Remove and Break.\n\n```javascript\nestraverse.traverse(ast, {\n    enter: function (node) {\n        this.break();\n    }\n});\n```\n\nAnd estraverse provides `estraverse.replace` function. When returning node from `enter`/`leave`, current node is replaced with it.\n\n```javascript\nresult = estraverse.replace(tree, {\n    enter: function (node) {\n        // Replace it with replaced.\n        if (node.type === 'Literal')\n            return replaced;\n    }\n});\n```\n\nBy passing `visitor.keys` mapping, we can extend estraverse traversing functionality.\n\n```javascript\n// This tree contains a user-defined `TestExpression` node.\nvar tree = {\n    type: 'TestExpression',\n\n    // This 'argument' is the property containing the other **node**.\n    argument: {\n        type: 'Literal',\n        value: 20\n    },\n\n    // This 'extended' is the property not containing the other **node**.\n    extended: true\n};\nestraverse.traverse(tree, {\n    enter: function (node) { },\n\n    // Extending the existing traversing rules.\n    keys: {\n        // TargetNodeName: [ 'keys', 'containing', 'the', 'other', '**node**' ]\n        TestExpression: ['argument']\n    }\n});\n```\n\nBy passing `visitor.fallback` option, we can control the behavior when encountering unknown nodes.\n\n```javascript\n// This tree contains a user-defined `TestExpression` node.\nvar tree = {\n    type: 'TestExpression',\n\n    // This 'argument' is the property containing the other **node**.\n    argument: {\n        type: 'Literal',\n        value: 20\n    },\n\n    // This 'extended' is the property not containing the other **node**.\n    extended: true\n};\nestraverse.traverse(tree, {\n    enter: function (node) { },\n\n    // Iterating the child **nodes** of unknown nodes.\n    fallback: 'iteration'\n});\n```\n\nWhen `visitor.fallback` is a function, we can determine which keys to visit on each node.\n\n```javascript\n// This tree contains a user-defined `TestExpression` node.\nvar tree = {\n    type: 'TestExpression',\n\n    // This 'argument' is the property containing the other **node**.\n    argument: {\n        type: 'Literal',\n        value: 20\n    },\n\n    // This 'extended' is the property not containing the other **node**.\n    extended: true\n};\nestraverse.traverse(tree, {\n    enter: function (node) { },\n\n    // Skip the `argument` property of each node\n    fallback: function(node) {\n        return Object.keys(node).filter(function(key) {\n            return key !== 'argument';\n        });\n    }\n});\n```\n\n### License\n\nCopyright (C) 2012-2016 [Yusuke Suzuki](http://github.com/Constellation)\n (twitter: [@Constellation](http://twitter.com/Constellation)) and other contributors.\n\nRedistribution and use in source and binary forms, with or without\nmodification, are permitted provided that the following conditions are met:\n\n  * Redistributions of source code must retain the above copyright\n    notice, this list of conditions and the following disclaimer.\n\n  * Redistributions in binary form must reproduce the above copyright\n    notice, this list of conditions and the following disclaimer in the\n    documentation and/or other materials provided with the distribution.\n\nTHIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS \"AS IS\"\nAND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE\nIMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE\nARE DISCLAIMED. IN NO EVENT SHALL <COPYRIGHT HOLDER> BE LIABLE FOR ANY\nDIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES\n(INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;\nLOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND\nON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT\n(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF\nTHIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n",
+  "readmeFilename": "README.md",
   "gitHead": "6f6a4e99653908e859c7c10d04d9518bf4844ede",
   "bugs": {
     "url": "https://github.com/estools/estraverse/issues"
   },
   "_id": "estraverse@4.2.0",
   "_shasum": "0dee3fed31fcd469618ce7342099fc1afa0bdb13",
-  "_from": "estraverse@>=4.2.0 <5.0.0",
-  "_npmVersion": "2.14.9",
-  "_nodeVersion": "0.12.9",
-  "_npmUser": {
-    "name": "nzakas",
-    "email": "nicholas@nczconsulting.com"
-  },
-  "dist": {
-    "shasum": "0dee3fed31fcd469618ce7342099fc1afa0bdb13",
-    "tarball": "http://registry.npmjs.org/estraverse/-/estraverse-4.2.0.tgz"
-  },
-  "_npmOperationalInternal": {
-    "host": "packages-12-west.internal.npmjs.com",
-    "tmp": "tmp/estraverse-4.2.0.tgz_1457646738925_0.7118953282479197"
-  },
-  "directories": {},
-  "_resolved": "https://registry.npmjs.org/estraverse/-/estraverse-4.2.0.tgz",
-  "readme": "ERROR: No README data found!"
+  "_from": "estraverse@>=4.2.0 <5.0.0"
 }
 
 },{}],137:[function(require,module,exports){
@@ -17967,6 +17852,7 @@ module.exports={
 		"exports": true,
 		"GLOBAL": false,
 		"global": false,
+		"Intl": false,
 		"module": false,
 		"process": false,
 		"require": false,
@@ -19174,7 +19060,7 @@ function extend() {
 (function (global){
 /**
  * @license
- * lodash 4.8.0 (Custom Build) <https://lodash.com/>
+ * lodash 4.11.1 (Custom Build) <https://lodash.com/>
  * Build: `lodash -d -o ./foo/lodash.js`
  * Copyright jQuery Foundation and other contributors <https://jquery.org/>
  * Released under MIT license <https://lodash.com/license>
@@ -19187,7 +19073,7 @@ function extend() {
   var undefined;
 
   /** Used as the semantic version number. */
-  var VERSION = '4.8.0';
+  var VERSION = '4.11.1';
 
   /** Used as the size to enable large array optimizations. */
   var LARGE_ARRAY_SIZE = 200;
@@ -19305,6 +19191,9 @@ function extend() {
       reTrimStart = /^\s+/,
       reTrimEnd = /\s+$/;
 
+  /** Used to match non-compound words composed of alphanumeric characters. */
+  var reBasicWord = /[a-zA-Z0-9]+/g;
+
   /** Used to match backslashes in property paths. */
   var reEscapeChar = /\\(\\)?/g;
 
@@ -19359,7 +19248,8 @@ function extend() {
       rsBreakRange = rsMathOpRange + rsNonCharRange + rsQuoteRange + rsSpaceRange;
 
   /** Used to compose unicode capture groups. */
-  var rsAstral = '[' + rsAstralRange + ']',
+  var rsApos = "['\u2019]",
+      rsAstral = '[' + rsAstralRange + ']',
       rsBreak = '[' + rsBreakRange + ']',
       rsCombo = '[' + rsComboMarksRange + rsComboSymbolsRange + ']',
       rsDigits = '\\d+',
@@ -19377,12 +19267,17 @@ function extend() {
   /** Used to compose unicode regexes. */
   var rsLowerMisc = '(?:' + rsLower + '|' + rsMisc + ')',
       rsUpperMisc = '(?:' + rsUpper + '|' + rsMisc + ')',
+      rsOptLowerContr = '(?:' + rsApos + '(?:d|ll|m|re|s|t|ve))?',
+      rsOptUpperContr = '(?:' + rsApos + '(?:D|LL|M|RE|S|T|VE))?',
       reOptMod = rsModifier + '?',
       rsOptVar = '[' + rsVarRange + ']?',
       rsOptJoin = '(?:' + rsZWJ + '(?:' + [rsNonAstral, rsRegional, rsSurrPair].join('|') + ')' + rsOptVar + reOptMod + ')*',
       rsSeq = rsOptVar + reOptMod + rsOptJoin,
       rsEmoji = '(?:' + [rsDingbat, rsRegional, rsSurrPair].join('|') + ')' + rsSeq,
       rsSymbol = '(?:' + [rsNonAstral + rsCombo + '?', rsCombo, rsRegional, rsSurrPair, rsAstral].join('|') + ')';
+
+  /** Used to match apostrophes. */
+  var reApos = RegExp(rsApos, 'g');
 
   /**
    * Used to match [combining diacritical marks](https://en.wikipedia.org/wiki/Combining_Diacritical_Marks) and
@@ -19393,21 +19288,18 @@ function extend() {
   /** Used to match [string symbols](https://mathiasbynens.be/notes/javascript-unicode). */
   var reComplexSymbol = RegExp(rsFitz + '(?=' + rsFitz + ')|' + rsSymbol + rsSeq, 'g');
 
-  /** Used to detect strings with [zero-width joiners or code points from the astral planes](http://eev.ee/blog/2015/09/12/dark-corners-of-unicode/). */
-  var reHasComplexSymbol = RegExp('[' + rsZWJ + rsAstralRange  + rsComboMarksRange + rsComboSymbolsRange + rsVarRange + ']');
-
-  /** Used to match non-compound words composed of alphanumeric characters. */
-  var reBasicWord = /[a-zA-Z0-9]+/g;
-
   /** Used to match complex or compound words. */
   var reComplexWord = RegExp([
-    rsUpper + '?' + rsLower + '+(?=' + [rsBreak, rsUpper, '$'].join('|') + ')',
-    rsUpperMisc + '+(?=' + [rsBreak, rsUpper + rsLowerMisc, '$'].join('|') + ')',
-    rsUpper + '?' + rsLowerMisc + '+',
-    rsUpper + '+',
+    rsUpper + '?' + rsLower + '+' + rsOptLowerContr + '(?=' + [rsBreak, rsUpper, '$'].join('|') + ')',
+    rsUpperMisc + '+' + rsOptUpperContr + '(?=' + [rsBreak, rsUpper + rsLowerMisc, '$'].join('|') + ')',
+    rsUpper + '?' + rsLowerMisc + '+' + rsOptLowerContr,
+    rsUpper + '+' + rsOptUpperContr,
     rsDigits,
     rsEmoji
   ].join('|'), 'g');
+
+  /** Used to detect strings with [zero-width joiners or code points from the astral planes](http://eev.ee/blog/2015/09/12/dark-corners-of-unicode/). */
+  var reHasComplexSymbol = RegExp('[' + rsZWJ + rsAstralRange  + rsComboMarksRange + rsComboSymbolsRange + rsVarRange + ']');
 
   /** Used to detect strings that need a more robust regexp to match words. */
   var reHasComplexWord = /[a-z][A-Z]|[A-Z]{2,}[a-z]|[0-9][a-zA-Z]|[a-zA-Z][0-9]|[^a-zA-Z0-9 ]/;
@@ -20556,7 +20448,8 @@ function extend() {
 
     /** Used for built-in method references. */
     var arrayProto = context.Array.prototype,
-        objectProto = context.Object.prototype;
+        objectProto = context.Object.prototype,
+        stringProto = context.String.prototype;
 
     /** Used to resolve the decompiled source of functions. */
     var funcToString = context.Function.prototype.toString;
@@ -20611,7 +20504,9 @@ function extend() {
         nativeMin = Math.min,
         nativeParseInt = context.parseInt,
         nativeRandom = Math.random,
-        nativeReverse = arrayProto.reverse;
+        nativeReplace = stringProto.replace,
+        nativeReverse = arrayProto.reverse,
+        nativeSplit = stringProto.split;
 
     /* Built-in method references that are verified to be native. */
     var DataView = getNative(context, 'DataView'),
@@ -20662,9 +20557,9 @@ function extend() {
      * Shortcut fusion is an optimization to merge iteratee calls; this avoids
      * the creation of intermediate arrays and can greatly reduce the number of
      * iteratee executions. Sections of a chain sequence qualify for shortcut
-     * fusion if the section is applied to an array of at least two hundred
-     * elements and any iteratees accept only one argument. The heuristic for
-     * whether a section qualifies for shortcut fusion is subject to change.
+     * fusion if the section is applied to an array of at least `200` elements
+     * and any iteratees accept only one argument. The heuristic for whether a
+     * section qualifies for shortcut fusion is subject to change.
      *
      * Chaining is supported in custom builds as long as the `_#value` method is
      * directly or indirectly included in the build.
@@ -20724,7 +20619,7 @@ function extend() {
      * `isSet`, `isString`, `isUndefined`, `isTypedArray`, `isWeakMap`, `isWeakSet`,
      * `join`, `kebabCase`, `last`, `lastIndexOf`, `lowerCase`, `lowerFirst`,
      * `lt`, `lte`, `max`, `maxBy`, `mean`, `meanBy`, `min`, `minBy`, `multiply`,
-     * `noConflict`, `noop`, `now`, `pad`, `padEnd`, `padStart`, `parseInt`,
+     * `noConflict`, `noop`, `now`, `nth`, `pad`, `padEnd`, `padStart`, `parseInt`,
      * `pop`, `random`, `reduce`, `reduceRight`, `repeat`, `result`, `round`,
      * `runInContext`, `sample`, `shift`, `size`, `snakeCase`, `some`, `sortedIndex`,
      * `sortedIndexBy`, `sortedLastIndex`, `sortedLastIndexBy`, `startCase`,
@@ -20986,7 +20881,7 @@ function extend() {
     /*------------------------------------------------------------------------*/
 
     /**
-     * Creates an hash object.
+     * Creates a hash object.
      *
      * @private
      * @constructor
@@ -21532,50 +21427,6 @@ function extend() {
     }
 
     /**
-     * Casts `value` to an empty array if it's not an array like object.
-     *
-     * @private
-     * @param {*} value The value to inspect.
-     * @returns {Array|Object} Returns the cast array-like object.
-     */
-    function baseCastArrayLikeObject(value) {
-      return isArrayLikeObject(value) ? value : [];
-    }
-
-    /**
-     * Casts `value` to `identity` if it's not a function.
-     *
-     * @private
-     * @param {*} value The value to inspect.
-     * @returns {Function} Returns cast function.
-     */
-    function baseCastFunction(value) {
-      return typeof value == 'function' ? value : identity;
-    }
-
-    /**
-     * Casts `value` to a string if it's not a string or symbol.
-     *
-     * @private
-     * @param {*} value The value to inspect.
-     * @returns {string|symbol} Returns the cast key.
-     */
-    function baseCastKey(key) {
-      return (typeof key == 'string' || isSymbol(key)) ? key : (key + '');
-    }
-
-    /**
-     * Casts `value` to a path array if it's not one.
-     *
-     * @private
-     * @param {*} value The value to inspect.
-     * @returns {Array} Returns the cast property path array.
-     */
-    function baseCastPath(value) {
-      return isArray(value) ? value : stringToPath(value);
-    }
-
-    /**
      * The base implementation of `_.clamp` which doesn't coerce arguments to numbers.
      *
      * @private
@@ -21875,23 +21726,24 @@ function extend() {
      * @private
      * @param {Array} array The array to flatten.
      * @param {number} depth The maximum recursion depth.
-     * @param {boolean} [isStrict] Restrict flattening to arrays-like objects.
+     * @param {boolean} [predicate=isFlattenable] The function invoked per iteration.
+     * @param {boolean} [isStrict] Restrict to values that pass `predicate` checks.
      * @param {Array} [result=[]] The initial result value.
      * @returns {Array} Returns the new flattened array.
      */
-    function baseFlatten(array, depth, isStrict, result) {
-      result || (result = []);
-
+    function baseFlatten(array, depth, predicate, isStrict, result) {
       var index = -1,
           length = array.length;
 
+      predicate || (predicate = isFlattenable);
+      result || (result = []);
+
       while (++index < length) {
         var value = array[index];
-        if (depth > 0 && isArrayLikeObject(value) &&
-            (isStrict || isArray(value) || isArguments(value))) {
+        if (depth > 0 && predicate(value)) {
           if (depth > 1) {
             // Recursively flatten arrays (susceptible to call stack limits).
-            baseFlatten(value, depth - 1, isStrict, result);
+            baseFlatten(value, depth - 1, predicate, isStrict, result);
           } else {
             arrayPush(result, value);
           }
@@ -21904,7 +21756,7 @@ function extend() {
 
     /**
      * The base implementation of `baseForOwn` which iterates over `object`
-     * properties returned by `keysFunc` invoking `iteratee` for each property.
+     * properties returned by `keysFunc` and invokes `iteratee` for each property.
      * Iteratee functions may exit iteration early by explicitly returning `false`.
      *
      * @private
@@ -21975,7 +21827,7 @@ function extend() {
      * @returns {*} Returns the resolved value.
      */
     function baseGet(object, path) {
-      path = isKey(path, object) ? [path] : baseCastPath(path);
+      path = isKey(path, object) ? [path] : castPath(path);
 
       var index = 0,
           length = path.length;
@@ -22137,7 +21989,7 @@ function extend() {
      */
     function baseInvoke(object, path, args) {
       if (!isKey(path, object)) {
-        path = baseCastPath(path);
+        path = castPath(path);
         object = parent(object, path);
         path = last(path);
       }
@@ -22509,6 +22361,23 @@ function extend() {
     }
 
     /**
+     * The base implementation of `_.nth` which doesn't coerce `n` to an integer.
+     *
+     * @private
+     * @param {Array} array The array to query.
+     * @param {number} n The index of the element to return.
+     * @returns {*} Returns the nth element of `array`.
+     */
+    function baseNth(array, n) {
+      var length = array.length;
+      if (!length) {
+        return;
+      }
+      n += n < 0 ? length : 0;
+      return isIndex(n, length) ? array[n] : undefined;
+    }
+
+    /**
      * The base implementation of `_.orderBy` without param guards.
      *
      * @private
@@ -22519,7 +22388,7 @@ function extend() {
      */
     function baseOrderBy(collection, iteratees, orders) {
       var index = -1;
-      iteratees = arrayMap(iteratees.length ? iteratees : [identity], getIteratee());
+      iteratees = arrayMap(iteratees.length ? iteratees : [identity], baseUnary(getIteratee()));
 
       var result = baseMap(collection, function(value, key, collection) {
         var criteria = arrayMap(iteratees, function(iteratee) {
@@ -22659,7 +22528,7 @@ function extend() {
             splice.call(array, index, 1);
           }
           else if (!isKey(index, array)) {
-            var path = baseCastPath(index),
+            var path = castPath(index),
                 object = parent(array, path);
 
             if (object != null) {
@@ -22749,7 +22618,7 @@ function extend() {
      * @returns {Object} Returns `object`.
      */
     function baseSet(object, path, value, customizer) {
-      path = isKey(path, object) ? [path] : baseCastPath(path);
+      path = isKey(path, object) ? [path] : castPath(path);
 
       var index = -1,
           length = path.length,
@@ -23028,7 +22897,7 @@ function extend() {
      * @returns {boolean} Returns `true` if the property is deleted, else `false`.
      */
     function baseUnset(object, path) {
-      path = isKey(path, object) ? [path] : baseCastPath(path);
+      path = isKey(path, object) ? [path] : castPath(path);
       object = parent(object, path);
       var key = last(path);
       return (object != null && has(object, key)) ? delete object[key] : true;
@@ -23136,6 +23005,54 @@ function extend() {
         assignFunc(result, props[index], value);
       }
       return result;
+    }
+
+    /**
+     * Casts `value` to an empty array if it's not an array like object.
+     *
+     * @private
+     * @param {*} value The value to inspect.
+     * @returns {Array|Object} Returns the cast array-like object.
+     */
+    function castArrayLikeObject(value) {
+      return isArrayLikeObject(value) ? value : [];
+    }
+
+    /**
+     * Casts `value` to `identity` if it's not a function.
+     *
+     * @private
+     * @param {*} value The value to inspect.
+     * @returns {Function} Returns cast function.
+     */
+    function castFunction(value) {
+      return typeof value == 'function' ? value : identity;
+    }
+
+    /**
+     * Casts `value` to a path array if it's not one.
+     *
+     * @private
+     * @param {*} value The value to inspect.
+     * @returns {Array} Returns the cast property path array.
+     */
+    function castPath(value) {
+      return isArray(value) ? value : stringToPath(value);
+    }
+
+    /**
+     * Casts `array` to a slice if it's needed.
+     *
+     * @private
+     * @param {Array} array The array to inspect.
+     * @param {number} start The start position.
+     * @param {number} [end=array.length] The end position.
+     * @returns {Array} Returns the cast slice.
+     */
+    function castSlice(array, start, end) {
+      var length = array.length;
+      end = end === undefined ? length : end;
+      return (!start && end >= length) ? array : baseSlice(array, start, end);
     }
 
     /**
@@ -23344,24 +23261,10 @@ function extend() {
      * @param {Object} source The object to copy properties from.
      * @param {Array} props The property identifiers to copy.
      * @param {Object} [object={}] The object to copy properties to.
-     * @returns {Object} Returns `object`.
-     */
-    function copyObject(source, props, object) {
-      return copyObjectWith(source, props, object);
-    }
-
-    /**
-     * This function is like `copyObject` except that it accepts a function to
-     * customize copied values.
-     *
-     * @private
-     * @param {Object} source The object to copy properties from.
-     * @param {Array} props The property identifiers to copy.
-     * @param {Object} [object={}] The object to copy properties to.
      * @param {Function} [customizer] The function to customize copied values.
      * @returns {Object} Returns `object`.
      */
-    function copyObjectWith(source, props, object, customizer) {
+    function copyObject(source, props, object, customizer) {
       object || (object = {});
 
       var index = -1,
@@ -23531,8 +23434,13 @@ function extend() {
           ? stringToArray(string)
           : undefined;
 
-        var chr = strSymbols ? strSymbols[0] : string.charAt(0),
-            trailing = strSymbols ? strSymbols.slice(1).join('') : string.slice(1);
+        var chr = strSymbols
+          ? strSymbols[0]
+          : string.charAt(0);
+
+        var trailing = strSymbols
+          ? castSlice(strSymbols, 1).join('')
+          : string.slice(1);
 
         return chr[methodName]() + trailing;
       };
@@ -23547,7 +23455,7 @@ function extend() {
      */
     function createCompounder(callback) {
       return function(string) {
-        return arrayReduce(words(deburr(string)), callback, '');
+        return arrayReduce(words(deburr(string).replace(reApos, '')), callback, '');
       };
     }
 
@@ -23783,7 +23691,10 @@ function extend() {
      */
     function createOver(arrayFunc) {
       return rest(function(iteratees) {
-        iteratees = arrayMap(iteratees, getIteratee());
+        iteratees = (iteratees.length == 1 && isArray(iteratees[0]))
+          ? arrayMap(iteratees[0], baseUnary(getIteratee()))
+          : arrayMap(baseFlatten(iteratees, 1, isFlattenableIteratee), baseUnary(getIteratee()));
+
         return rest(function(args) {
           var thisArg = this;
           return arrayFunc(iteratees, function(iteratee) {
@@ -23811,7 +23722,7 @@ function extend() {
       }
       var result = baseRepeat(chars, nativeCeil(length / stringSize(chars)));
       return reHasComplexSymbol.test(chars)
-        ? stringToArray(result).slice(0, length).join('')
+        ? castSlice(stringToArray(result), 0, length).join('')
         : result.slice(0, length);
     }
 
@@ -23897,7 +23808,6 @@ function extend() {
      */
     function createRecurryWrapper(func, bitmask, wrapFunc, placeholder, thisArg, partials, holders, argPos, ary, arity) {
       var isCurry = bitmask & CURRY_FLAG,
-          newArgPos = argPos ? copyArray(argPos) : undefined,
           newHolders = isCurry ? holders : undefined,
           newHoldersRight = isCurry ? undefined : holders,
           newPartials = isCurry ? partials : undefined,
@@ -23911,7 +23821,7 @@ function extend() {
       }
       var newData = [
         func, bitmask, thisArg, newPartials, newHolders, newPartialsRight,
-        newHoldersRight, newArgPos, ary, arity
+        newHoldersRight, argPos, ary, arity
       ];
 
       var result = wrapFunc.apply(undefined, newData);
@@ -24326,10 +24236,10 @@ function extend() {
     }
 
     /**
-     * Gets the appropriate "iteratee" function. If the `_.iteratee` method is
-     * customized this function returns the custom method, otherwise it returns
-     * `baseIteratee`. If arguments are provided, the chosen function is invoked
-     * with them and its result is returned.
+     * Gets the appropriate "iteratee" function. If `_.iteratee` is customized,
+     * this function returns the custom method, otherwise it returns `baseIteratee`.
+     * If arguments are provided, the chosen function is invoked with them and
+     * its result is returned.
      *
      * @private
      * @param {*} [value] The value to convert to an iteratee.
@@ -24465,8 +24375,8 @@ function extend() {
         (WeakMap && getTag(new WeakMap) != weakMapTag)) {
       getTag = function(value) {
         var result = objectToString.call(value),
-            Ctor = result == objectTag ? value.constructor : null,
-            ctorString = toSource(Ctor);
+            Ctor = result == objectTag ? value.constructor : undefined,
+            ctorString = Ctor ? toSource(Ctor) : undefined;
 
         if (ctorString) {
           switch (ctorString) {
@@ -24519,7 +24429,7 @@ function extend() {
      * @returns {boolean} Returns `true` if `path` exists, else `false`.
      */
     function hasPath(object, path, hasFunc) {
-      path = isKey(path, object) ? [path] : baseCastPath(path);
+      path = isKey(path, object) ? [path] : castPath(path);
 
       var result,
           index = -1,
@@ -24636,6 +24546,29 @@ function extend() {
         return baseTimes(length, String);
       }
       return null;
+    }
+
+    /**
+     * Checks if `value` is a flattenable `arguments` object or array.
+     *
+     * @private
+     * @param {*} value The value to check.
+     * @returns {boolean} Returns `true` if `value` is flattenable, else `false`.
+     */
+    function isFlattenable(value) {
+      return isArrayLikeObject(value) && (isArray(value) || isArguments(value));
+    }
+
+    /**
+     * Checks if `value` is a flattenable array and not a `_.matchesProperty`
+     * iteratee shorthand.
+     *
+     * @private
+     * @param {*} value The value to check.
+     * @returns {boolean} Returns `true` if `value` is flattenable, else `false`.
+     */
+    function isFlattenableIteratee(value) {
+      return isArray(value) && !(value.length == 2 && !isFunction(value[0]));
     }
 
     /**
@@ -24801,20 +24734,20 @@ function extend() {
       var value = source[3];
       if (value) {
         var partials = data[3];
-        data[3] = partials ? composeArgs(partials, value, source[4]) : copyArray(value);
-        data[4] = partials ? replaceHolders(data[3], PLACEHOLDER) : copyArray(source[4]);
+        data[3] = partials ? composeArgs(partials, value, source[4]) : value;
+        data[4] = partials ? replaceHolders(data[3], PLACEHOLDER) : source[4];
       }
       // Compose partial right arguments.
       value = source[5];
       if (value) {
         partials = data[5];
-        data[5] = partials ? composeArgsRight(partials, value, source[6]) : copyArray(value);
-        data[6] = partials ? replaceHolders(data[5], PLACEHOLDER) : copyArray(source[6]);
+        data[5] = partials ? composeArgsRight(partials, value, source[6]) : value;
+        data[6] = partials ? replaceHolders(data[5], PLACEHOLDER) : source[6];
       }
       // Use source `argPos` if available.
       value = source[7];
       if (value) {
-        data[7] = copyArray(value);
+        data[7] = value;
       }
       // Use source `ary` if it's smaller.
       if (srcBitmask & ARY_FLAG) {
@@ -24935,6 +24868,17 @@ function extend() {
     });
 
     /**
+     * Converts `value` to a string key if it's not a string or symbol.
+     *
+     * @private
+     * @param {*} value The value to inspect.
+     * @returns {string|symbol} Returns the key.
+     */
+    function toKey(key) {
+      return (typeof key == 'string' || isSymbol(key)) ? key : (key + '');
+    }
+
+    /**
      * Converts `func` to its source code.
      *
      * @private
@@ -24942,12 +24886,15 @@ function extend() {
      * @returns {string} Returns the source code.
      */
     function toSource(func) {
-      if (isFunction(func)) {
+      if (func != null) {
         try {
           return funcToString.call(func);
         } catch (e) {}
+        try {
+          return (func + '');
+        } catch (e) {}
       }
-      return toString(func);
+      return '';
     }
 
     /**
@@ -25097,7 +25044,7 @@ function extend() {
      */
     var difference = rest(function(array, values) {
       return isArrayLikeObject(array)
-        ? baseDifference(array, baseFlatten(values, 1, true))
+        ? baseDifference(array, baseFlatten(values, 1, isArrayLikeObject, true))
         : [];
     });
 
@@ -25131,7 +25078,7 @@ function extend() {
         iteratee = undefined;
       }
       return isArrayLikeObject(array)
-        ? baseDifference(array, baseFlatten(values, 1, true), getIteratee(iteratee))
+        ? baseDifference(array, baseFlatten(values, 1, isArrayLikeObject, true), getIteratee(iteratee))
         : [];
     });
 
@@ -25162,7 +25109,7 @@ function extend() {
         comparator = undefined;
       }
       return isArrayLikeObject(array)
-        ? baseDifference(array, baseFlatten(values, 1, true), undefined, comparator)
+        ? baseDifference(array, baseFlatten(values, 1, isArrayLikeObject, true), undefined, comparator)
         : [];
     });
 
@@ -25555,14 +25502,14 @@ function extend() {
      * // => undefined
      */
     function head(array) {
-      return array ? array[0] : undefined;
+      return (array && array.length) ? array[0] : undefined;
     }
 
     /**
      * Gets the index at which the first occurrence of `value` is found in `array`
      * using [`SameValueZero`](http://ecma-international.org/ecma-262/6.0/#sec-samevaluezero)
-     * for equality comparisons. If `fromIndex` is negative, it's used as the offset
-     * from the end of `array`.
+     * for equality comparisons. If `fromIndex` is negative, it's used as the
+     * offset from the end of `array`.
      *
      * @static
      * @memberOf _
@@ -25629,7 +25576,7 @@ function extend() {
      * // => [2]
      */
     var intersection = rest(function(arrays) {
-      var mapped = arrayMap(arrays, baseCastArrayLikeObject);
+      var mapped = arrayMap(arrays, castArrayLikeObject);
       return (mapped.length && mapped[0] === arrays[0])
         ? baseIntersection(mapped)
         : [];
@@ -25660,7 +25607,7 @@ function extend() {
      */
     var intersectionBy = rest(function(arrays) {
       var iteratee = last(arrays),
-          mapped = arrayMap(arrays, baseCastArrayLikeObject);
+          mapped = arrayMap(arrays, castArrayLikeObject);
 
       if (iteratee === last(mapped)) {
         iteratee = undefined;
@@ -25695,7 +25642,7 @@ function extend() {
      */
     var intersectionWith = rest(function(arrays) {
       var comparator = last(arrays),
-          mapped = arrayMap(arrays, baseCastArrayLikeObject);
+          mapped = arrayMap(arrays, castArrayLikeObject);
 
       if (comparator === last(mapped)) {
         comparator = undefined;
@@ -25789,6 +25736,31 @@ function extend() {
         }
       }
       return -1;
+    }
+
+    /**
+     * Gets the nth element of `array`. If `n` is negative, the nth element
+     * from the end is returned.
+     *
+     * @static
+     * @memberOf _
+     * @since 4.11.0
+     * @category Array
+     * @param {Array} array The array to query.
+     * @param {number} [n=0] The index of the element to return.
+     * @returns {*} Returns the nth element of `array`.
+     * @example
+     *
+     * var array = ['a', 'b', 'c', 'd'];
+     *
+     * _.nth(array, 1);
+     * // => 'b'
+     *
+     * _.nth(array, -2);
+     * // => 'c';
+     */
+    function nth(array, n) {
+      return (array && array.length) ? baseNth(array, toInteger(n)) : undefined;
     }
 
     /**
@@ -25912,8 +25884,7 @@ function extend() {
      * @since 3.0.0
      * @category Array
      * @param {Array} array The array to modify.
-     * @param {...(number|number[])} [indexes] The indexes of elements to remove,
-     *  specified individually or in arrays.
+     * @param {...(number|number[])} [indexes] The indexes of elements to remove.
      * @returns {Array} Returns the new array of removed elements.
      * @example
      *
@@ -26428,7 +26399,7 @@ function extend() {
      * // => [2, 1, 4]
      */
     var union = rest(function(arrays) {
-      return baseUniq(baseFlatten(arrays, 1, true));
+      return baseUniq(baseFlatten(arrays, 1, isArrayLikeObject, true));
     });
 
     /**
@@ -26459,7 +26430,7 @@ function extend() {
       if (isArrayLikeObject(iteratee)) {
         iteratee = undefined;
       }
-      return baseUniq(baseFlatten(arrays, 1, true), getIteratee(iteratee));
+      return baseUniq(baseFlatten(arrays, 1, isArrayLikeObject, true), getIteratee(iteratee));
     });
 
     /**
@@ -26487,7 +26458,7 @@ function extend() {
       if (isArrayLikeObject(comparator)) {
         comparator = undefined;
       }
-      return baseUniq(baseFlatten(arrays, 1, true), undefined, comparator);
+      return baseUniq(baseFlatten(arrays, 1, isArrayLikeObject, true), undefined, comparator);
     });
 
     /**
@@ -26921,8 +26892,7 @@ function extend() {
      * @memberOf _
      * @since 1.0.0
      * @category Seq
-     * @param {...(string|string[])} [paths] The property paths of elements to pick,
-     *  specified individually or in arrays.
+     * @param {...(string|string[])} [paths] The property paths of elements to pick.
      * @returns {Object} Returns the new `lodash` wrapper instance.
      * @example
      *
@@ -27439,7 +27409,7 @@ function extend() {
     }
 
     /**
-     * Iterates over elements of `collection` invoking `iteratee` for each element.
+     * Iterates over elements of `collection` and invokes `iteratee` for each element.
      * The iteratee is invoked with three arguments: (value, index|key, collection).
      * Iteratee functions may exit iteration early by explicitly returning `false`.
      *
@@ -27500,9 +27470,10 @@ function extend() {
 
     /**
      * Creates an object composed of keys generated from the results of running
-     * each element of `collection` thru `iteratee`. The corresponding value of
-     * each key is an array of elements responsible for generating the key. The
-     * iteratee is invoked with one argument: (value).
+     * each element of `collection` thru `iteratee`. The order of grouped values
+     * is determined by the order they occur in `collection`. The corresponding
+     * value of each key is an array of elements responsible for generating the
+     * key. The iteratee is invoked with one argument: (value).
      *
      * @static
      * @memberOf _
@@ -27530,7 +27501,7 @@ function extend() {
     });
 
     /**
-     * Checks if `value` is in `collection`. If `collection` is a string it's
+     * Checks if `value` is in `collection`. If `collection` is a string, it's
      * checked for a substring of `value`, otherwise
      * [`SameValueZero`](http://ecma-international.org/ecma-262/6.0/#sec-samevaluezero)
      * is used for equality comparisons. If `fromIndex` is negative, it's used as
@@ -27575,8 +27546,8 @@ function extend() {
     /**
      * Invokes the method at `path` of each element in `collection`, returning
      * an array of the results of each invoked method. Any additional arguments
-     * are provided to each invoked method. If `methodName` is a function it's
-     * invoked for, and `this` bound to, each element in `collection`.
+     * are provided to each invoked method. If `methodName` is a function, it's
+     * invoked for and `this` bound to, each element in `collection`.
      *
      * @static
      * @memberOf _
@@ -27652,8 +27623,8 @@ function extend() {
      * The guarded methods are:
      * `ary`, `chunk`, `curry`, `curryRight`, `drop`, `dropRight`, `every`,
      * `fill`, `invert`, `parseInt`, `random`, `range`, `rangeRight`, `repeat`,
-     * `sampleSize`, `slice`, `some`, `sortBy`, `take`, `takeRight`, `template`,
-     * `trim`, `trimEnd`, `trimStart`, and `words`
+     * `sampleSize`, `slice`, `some`, `sortBy`, `split`, `take`, `takeRight`,
+     * `template`, `trim`, `trimEnd`, `trimStart`, and `words`
      *
      * @static
      * @memberOf _
@@ -27777,7 +27748,7 @@ function extend() {
      * Reduces `collection` to a value which is the accumulated result of running
      * each element in `collection` thru `iteratee`, where each successive
      * invocation is supplied the return value of the previous. If `accumulator`
-     * is not given the first element of `collection` is used as the initial
+     * is not given, the first element of `collection` is used as the initial
      * value. The iteratee is invoked with four arguments:
      * (accumulator, value, index|key, collection).
      *
@@ -28063,8 +28034,7 @@ function extend() {
      * @category Collection
      * @param {Array|Object} collection The collection to iterate over.
      * @param {...(Array|Array[]|Function|Function[]|Object|Object[]|string|string[])}
-     *  [iteratees=[_.identity]] The iteratees to sort by, specified individually
-     *  or in arrays.
+     *  [iteratees=[_.identity]] The iteratees to sort by.
      * @returns {Array} Returns the new sorted array.
      * @example
      *
@@ -28094,9 +28064,13 @@ function extend() {
       if (length > 1 && isIterateeCall(collection, iteratees[0], iteratees[1])) {
         iteratees = [];
       } else if (length > 2 && isIterateeCall(iteratees[0], iteratees[1], iteratees[2])) {
-        iteratees.length = 1;
+        iteratees = [iteratees[0]];
       }
-      return baseOrderBy(collection, baseFlatten(iteratees, 1), []);
+      iteratees = (iteratees.length == 1 && isArray(iteratees[0]))
+        ? iteratees[0]
+        : baseFlatten(iteratees, 1, isFlattenableIteratee);
+
+      return baseOrderBy(collection, iteratees, []);
     });
 
     /*------------------------------------------------------------------------*/
@@ -28420,7 +28394,7 @@ function extend() {
      * on the trailing edge of the timeout only if the debounced function is
      * invoked more than once during the `wait` timeout.
      *
-     * See [David Corbacho's article](http://drupalmotion.com/article/debounce-and-throttle-visual-explanation)
+     * See [David Corbacho's article](https://css-tricks.com/debouncing-throttling-explained-examples/)
      * for details over the differences between `_.debounce` and `_.throttle`.
      *
      * @static
@@ -28459,12 +28433,13 @@ function extend() {
     function debounce(func, wait, options) {
       var lastArgs,
           lastThis,
+          maxWait,
           result,
           timerId,
           lastCallTime = 0,
           lastInvokeTime = 0,
           leading = false,
-          maxWait = false,
+          maxing = false,
           trailing = true;
 
       if (typeof func != 'function') {
@@ -28473,7 +28448,8 @@ function extend() {
       wait = toNumber(wait) || 0;
       if (isObject(options)) {
         leading = !!options.leading;
-        maxWait = 'maxWait' in options && nativeMax(toNumber(options.maxWait) || 0, wait);
+        maxing = 'maxWait' in options;
+        maxWait = maxing ? nativeMax(toNumber(options.maxWait) || 0, wait) : maxWait;
         trailing = 'trailing' in options ? !!options.trailing : trailing;
       }
 
@@ -28501,7 +28477,7 @@ function extend() {
             timeSinceLastInvoke = time - lastInvokeTime,
             result = wait - timeSinceLastCall;
 
-        return maxWait === false ? result : nativeMin(result, maxWait - timeSinceLastInvoke);
+        return maxing ? nativeMin(result, maxWait - timeSinceLastInvoke) : result;
       }
 
       function shouldInvoke(time) {
@@ -28512,7 +28488,7 @@ function extend() {
         // trailing edge, the system time has gone backwards and we're treating
         // it as the trailing edge, or we've hit the `maxWait` limit.
         return (!lastCallTime || (timeSinceLastCall >= wait) ||
-          (timeSinceLastCall < 0) || (maxWait !== false && timeSinceLastInvoke >= maxWait));
+          (timeSinceLastCall < 0) || (maxing && timeSinceLastInvoke >= maxWait));
       }
 
       function timerExpired() {
@@ -28561,10 +28537,15 @@ function extend() {
           if (timerId === undefined) {
             return leadingEdge(lastCallTime);
           }
-          // Handle invocations in a tight loop.
-          clearTimeout(timerId);
+          if (maxing) {
+            // Handle invocations in a tight loop.
+            clearTimeout(timerId);
+            timerId = setTimeout(timerExpired, wait);
+            return invokeFunc(lastCallTime);
+          }
+        }
+        if (timerId === undefined) {
           timerId = setTimeout(timerExpired, wait);
-          return invokeFunc(lastCallTime);
         }
         return result;
       }
@@ -28642,7 +28623,7 @@ function extend() {
 
     /**
      * Creates a function that memoizes the result of `func`. If `resolver` is
-     * provided it determines the cache key for storing the result based on the
+     * provided, it determines the cache key for storing the result based on the
      * arguments provided to the memoized function. By default, the first argument
      * provided to the memoized function is used as the map cache key. The `func`
      * is invoked with the `this` binding of the memoized function.
@@ -28767,8 +28748,8 @@ function extend() {
      * @memberOf _
      * @category Function
      * @param {Function} func The function to wrap.
-     * @param {...Function} [transforms] The functions to transform
-     * arguments, specified individually or in arrays.
+     * @param {...(Array|Array[]|Function|Function[]|Object|Object[]|string|string[])}
+     *  [transforms[_.identity]] The functions to transform.
      * @returns {Function} Returns the new function.
      * @example
      *
@@ -28791,7 +28772,9 @@ function extend() {
      * // => [100, 10]
      */
     var overArgs = rest(function(func, transforms) {
-      transforms = arrayMap(transforms, getIteratee());
+      transforms = (transforms.length == 1 && isArray(transforms[0]))
+        ? arrayMap(transforms[0], baseUnary(getIteratee()))
+        : arrayMap(baseFlatten(transforms, 1, isFlattenableIteratee), baseUnary(getIteratee()));
 
       var funcsLength = transforms.length;
       return rest(function(args) {
@@ -28891,8 +28874,7 @@ function extend() {
      * @since 3.0.0
      * @category Function
      * @param {Function} func The function to rearrange arguments for.
-     * @param {...(number|number[])} indexes The arranged argument indexes,
-     *  specified individually or in arrays.
+     * @param {...(number|number[])} indexes The arranged argument indexes.
      * @returns {Function} Returns the new function.
      * @example
      *
@@ -29002,7 +28984,7 @@ function extend() {
       start = start === undefined ? 0 : nativeMax(toInteger(start), 0);
       return rest(function(args) {
         var array = args[start],
-            otherArgs = args.slice(0, start);
+            otherArgs = castSlice(args, 0, start);
 
         if (array) {
           arrayPush(otherArgs, array);
@@ -29025,7 +29007,7 @@ function extend() {
      * invoked on the trailing edge of the timeout only if the throttled function
      * is invoked more than once during the `wait` timeout.
      *
-     * See [David Corbacho's article](http://drupalmotion.com/article/debounce-and-throttle-visual-explanation)
+     * See [David Corbacho's article](https://css-tricks.com/debouncing-throttling-explained-examples/)
      * for details over the differences between `_.throttle` and `_.debounce`.
      *
      * @static
@@ -29190,7 +29172,7 @@ function extend() {
 
     /**
      * This method is like `_.clone` except that it accepts `customizer` which
-     * is invoked to produce the cloned value. If `customizer` returns `undefined`
+     * is invoked to produce the cloned value. If `customizer` returns `undefined`,
      * cloning is handled by the method instead. The `customizer` is invoked with
      * up to four arguments; (value [, index|key, object, stack]).
      *
@@ -29669,7 +29651,7 @@ function extend() {
 
     /**
      * This method is like `_.isEqual` except that it accepts `customizer` which
-     * is invoked to compare values. If `customizer` returns `undefined` comparisons
+     * is invoked to compare values. If `customizer` returns `undefined`, comparisons
      * are handled by the method instead. The `customizer` is invoked with up to
      * six arguments: (objValue, othValue [, index|key, object, other, stack]).
      *
@@ -29962,7 +29944,7 @@ function extend() {
 
     /**
      * This method is like `_.isMatch` except that it accepts `customizer` which
-     * is invoked to compare values. If `customizer` returns `undefined` comparisons
+     * is invoked to compare values. If `customizer` returns `undefined`, comparisons
      * are handled by the method instead. The `customizer` is invoked with five
      * arguments: (objValue, srcValue, index|key, object, source).
      *
@@ -30650,8 +30632,8 @@ function extend() {
     }
 
     /**
-     * Converts `value` to a string if it's not one. An empty string is returned
-     * for `null` and `undefined` values. The sign of `-0` is preserved.
+     * Converts `value` to a string. An empty string is returned for `null`
+     * and `undefined` values. The sign of `-0` is preserved.
      *
      * @static
      * @memberOf _
@@ -30773,7 +30755,7 @@ function extend() {
     /**
      * This method is like `_.assignIn` except that it accepts `customizer`
      * which is invoked to produce the assigned values. If `customizer` returns
-     * `undefined` assignment is handled by the method instead. The `customizer`
+     * `undefined`, assignment is handled by the method instead. The `customizer`
      * is invoked with five arguments: (objValue, srcValue, key, object, source).
      *
      * **Note:** This method mutates `object`.
@@ -30799,13 +30781,13 @@ function extend() {
      * // => { 'a': 1, 'b': 2 }
      */
     var assignInWith = createAssigner(function(object, source, srcIndex, customizer) {
-      copyObjectWith(source, keysIn(source), object, customizer);
+      copyObject(source, keysIn(source), object, customizer);
     });
 
     /**
      * This method is like `_.assign` except that it accepts `customizer`
      * which is invoked to produce the assigned values. If `customizer` returns
-     * `undefined` assignment is handled by the method instead. The `customizer`
+     * `undefined`, assignment is handled by the method instead. The `customizer`
      * is invoked with five arguments: (objValue, srcValue, key, object, source).
      *
      * **Note:** This method mutates `object`.
@@ -30830,7 +30812,7 @@ function extend() {
      * // => { 'a': 1, 'b': 2 }
      */
     var assignWith = createAssigner(function(object, source, srcIndex, customizer) {
-      copyObjectWith(source, keys(source), object, customizer);
+      copyObject(source, keys(source), object, customizer);
     });
 
     /**
@@ -30841,8 +30823,7 @@ function extend() {
      * @since 1.0.0
      * @category Object
      * @param {Object} object The object to iterate over.
-     * @param {...(string|string[])} [paths] The property paths of elements to pick,
-     *  specified individually or in arrays.
+     * @param {...(string|string[])} [paths] The property paths of elements to pick.
      * @returns {Array} Returns the new array of picked elements.
      * @example
      *
@@ -30860,7 +30841,7 @@ function extend() {
 
     /**
      * Creates an object that inherits from the `prototype` object. If a
-     * `properties` object is given its own enumerable string keyed properties
+     * `properties` object is given, its own enumerable string keyed properties
      * are assigned to the created object.
      *
      * @static
@@ -31028,9 +31009,9 @@ function extend() {
 
     /**
      * Iterates over own and inherited enumerable string keyed properties of an
-     * object invoking `iteratee` for each property. The iteratee is invoked with
-     * three arguments: (value, key, object). Iteratee functions may exit iteration
-     * early by explicitly returning `false`.
+     * object and invokes `iteratee` for each property. The iteratee is invoked
+     * with three arguments: (value, key, object). Iteratee functions may exit
+     * iteration early by explicitly returning `false`.
      *
      * @static
      * @memberOf _
@@ -31091,10 +31072,10 @@ function extend() {
     }
 
     /**
-     * Iterates over own enumerable string keyed properties of an object invoking
-     * `iteratee` for each property. The iteratee is invoked with three arguments:
-     * (value, key, object). Iteratee functions may exit iteration early by
-     * explicitly returning `false`.
+     * Iterates over own enumerable string keyed properties of an object and
+     * invokes `iteratee` for each property. The iteratee is invoked with three
+     * arguments: (value, key, object). Iteratee functions may exit iteration
+     * early by explicitly returning `false`.
      *
      * @static
      * @memberOf _
@@ -31204,7 +31185,7 @@ function extend() {
 
     /**
      * Gets the value at `path` of `object`. If the resolved value is
-     * `undefined` the `defaultValue` is used in its place.
+     * `undefined`, the `defaultValue` is used in its place.
      *
      * @static
      * @memberOf _
@@ -31244,16 +31225,16 @@ function extend() {
      * @returns {boolean} Returns `true` if `path` exists, else `false`.
      * @example
      *
-     * var object = { 'a': { 'b': { 'c': 3 } } };
-     * var other = _.create({ 'a': _.create({ 'b': _.create({ 'c': 3 }) }) });
+     * var object = { 'a': { 'b': 2 } };
+     * var other = _.create({ 'a': _.create({ 'b': 2 }) });
      *
      * _.has(object, 'a');
      * // => true
      *
-     * _.has(object, 'a.b.c');
+     * _.has(object, 'a.b');
      * // => true
      *
-     * _.has(object, ['a', 'b', 'c']);
+     * _.has(object, ['a', 'b']);
      * // => true
      *
      * _.has(other, 'a');
@@ -31275,15 +31256,15 @@ function extend() {
      * @returns {boolean} Returns `true` if `path` exists, else `false`.
      * @example
      *
-     * var object = _.create({ 'a': _.create({ 'b': _.create({ 'c': 3 }) }) });
+     * var object = _.create({ 'a': _.create({ 'b': 2 }) });
      *
      * _.hasIn(object, 'a');
      * // => true
      *
-     * _.hasIn(object, 'a.b.c');
+     * _.hasIn(object, 'a.b');
      * // => true
      *
-     * _.hasIn(object, ['a', 'b', 'c']);
+     * _.hasIn(object, ['a', 'b']);
      * // => true
      *
      * _.hasIn(object, 'b');
@@ -31568,7 +31549,7 @@ function extend() {
     /**
      * This method is like `_.merge` except that it accepts `customizer` which
      * is invoked to produce the merged values of the destination and source
-     * properties. If `customizer` returns `undefined` merging is handled by the
+     * properties. If `customizer` returns `undefined`, merging is handled by the
      * method instead. The `customizer` is invoked with seven arguments:
      * (objValue, srcValue, key, object, source, stack).
      *
@@ -31617,8 +31598,7 @@ function extend() {
      * @memberOf _
      * @category Object
      * @param {Object} object The source object.
-     * @param {...(string|string[])} [props] The property identifiers to omit,
-     *  specified individually or in arrays.
+     * @param {...(string|string[])} [props] The property identifiers to omit.
      * @returns {Object} Returns the new object.
      * @example
      *
@@ -31631,7 +31611,7 @@ function extend() {
       if (object == null) {
         return {};
       }
-      props = arrayMap(baseFlatten(props, 1), baseCastKey);
+      props = arrayMap(baseFlatten(props, 1), toKey);
       return basePick(object, baseDifference(getAllKeysIn(object), props));
     });
 
@@ -31671,8 +31651,7 @@ function extend() {
      * @memberOf _
      * @category Object
      * @param {Object} object The source object.
-     * @param {...(string|string[])} [props] The property identifiers to pick,
-     *  specified individually or in arrays.
+     * @param {...(string|string[])} [props] The property identifiers to pick.
      * @returns {Object} Returns the new object.
      * @example
      *
@@ -31738,7 +31717,7 @@ function extend() {
      * // => 'default'
      */
     function result(object, path, defaultValue) {
-      path = isKey(path, object) ? [path] : baseCastPath(path);
+      path = isKey(path, object) ? [path] : castPath(path);
 
       var index = -1,
           length = path.length;
@@ -31760,7 +31739,7 @@ function extend() {
     }
 
     /**
-     * Sets the value at `path` of `object`. If a portion of `path` doesn't exist
+     * Sets the value at `path` of `object`. If a portion of `path` doesn't exist,
      * it's created. Arrays are created for missing index properties while objects
      * are created for all other missing properties. Use `_.setWith` to customize
      * `path` creation.
@@ -31984,7 +31963,7 @@ function extend() {
      * // => 0
      */
     function update(object, path, updater) {
-      return object == null ? object : baseUpdate(object, path, baseCastFunction(updater));
+      return object == null ? object : baseUpdate(object, path, castFunction(updater));
     }
 
     /**
@@ -32013,7 +31992,7 @@ function extend() {
      */
     function updateWith(object, path, updater, customizer) {
       customizer = typeof customizer == 'function' ? customizer : undefined;
-      return object == null ? object : baseUpdate(object, path, baseCastFunction(updater), customizer);
+      return object == null ? object : baseUpdate(object, path, castFunction(updater), customizer);
     }
 
     /**
@@ -32113,7 +32092,7 @@ function extend() {
 
     /**
      * Checks if `n` is between `start` and up to but not including, `end`. If
-     * `end` is not specified it's set to `start` with `start` then set to `0`.
+     * `end` is not specified, it's set to `start` with `start` then set to `0`.
      * If `start` is greater than `end` the params are swapped to support
      * negative ranges.
      *
@@ -32660,7 +32639,7 @@ function extend() {
       var args = arguments,
           string = toString(args[0]);
 
-      return args.length < 3 ? string : string.replace(args[1], args[2]);
+      return args.length < 3 ? string : nativeReplace.call(string, args[1], args[2]);
     }
 
     /**
@@ -32708,7 +32687,24 @@ function extend() {
      * // => ['a', 'b']
      */
     function split(string, separator, limit) {
-      return toString(string).split(separator, limit);
+      if (limit && typeof limit != 'number' && isIterateeCall(string, separator, limit)) {
+        separator = limit = undefined;
+      }
+      limit = limit === undefined ? MAX_ARRAY_LENGTH : limit >>> 0;
+      if (!limit) {
+        return [];
+      }
+      string = toString(string);
+      if (string && (
+            typeof separator == 'string' ||
+            (separator != null && !isRegExp(separator))
+          )) {
+        separator += '';
+        if (separator == '' && reHasComplexSymbol.test(string)) {
+          return castSlice(stringToArray(string), 0, limit);
+        }
+      }
+      return nativeSplit.call(string, separator, limit);
     }
 
     /**
@@ -32770,7 +32766,7 @@ function extend() {
      * in "interpolate" delimiters, HTML-escape interpolated data properties in
      * "escape" delimiters, and execute JavaScript in "evaluate" delimiters. Data
      * properties may be accessed as free variables in the template. If a setting
-     * object is given it takes precedence over `_.templateSettings` values.
+     * object is given, it takes precedence over `_.templateSettings` values.
      *
      * **Note:** In the development build `_.template` utilizes
      * [sourceURLs](http://www.html5rocks.com/en/tutorials/developertools/sourcemaps/#toc-sourceurl)
@@ -33056,16 +33052,15 @@ function extend() {
       if (guard || chars === undefined) {
         return string.replace(reTrim, '');
       }
-      chars = (chars + '');
-      if (!chars) {
+      if (!(chars += '')) {
         return string;
       }
       var strSymbols = stringToArray(string),
-          chrSymbols = stringToArray(chars);
+          chrSymbols = stringToArray(chars),
+          start = charsStartIndex(strSymbols, chrSymbols),
+          end = charsEndIndex(strSymbols, chrSymbols) + 1;
 
-      return strSymbols
-        .slice(charsStartIndex(strSymbols, chrSymbols), charsEndIndex(strSymbols, chrSymbols) + 1)
-        .join('');
+      return castSlice(strSymbols, start, end).join('');
     }
 
     /**
@@ -33095,14 +33090,13 @@ function extend() {
       if (guard || chars === undefined) {
         return string.replace(reTrimEnd, '');
       }
-      chars = (chars + '');
-      if (!chars) {
+      if (!(chars += '')) {
         return string;
       }
-      var strSymbols = stringToArray(string);
-      return strSymbols
-        .slice(0, charsEndIndex(strSymbols, stringToArray(chars)) + 1)
-        .join('');
+      var strSymbols = stringToArray(string),
+          end = charsEndIndex(strSymbols, stringToArray(chars)) + 1;
+
+      return castSlice(strSymbols, 0, end).join('');
     }
 
     /**
@@ -33132,14 +33126,13 @@ function extend() {
       if (guard || chars === undefined) {
         return string.replace(reTrimStart, '');
       }
-      chars = (chars + '');
-      if (!chars) {
+      if (!(chars += '')) {
         return string;
       }
-      var strSymbols = stringToArray(string);
-      return strSymbols
-        .slice(charsStartIndex(strSymbols, stringToArray(chars)))
-        .join('');
+      var strSymbols = stringToArray(string),
+          start = charsStartIndex(strSymbols, stringToArray(chars));
+
+      return castSlice(strSymbols, start).join('');
     }
 
     /**
@@ -33203,7 +33196,7 @@ function extend() {
         return omission;
       }
       var result = strSymbols
-        ? strSymbols.slice(0, end).join('')
+        ? castSlice(strSymbols, 0, end).join('')
         : string.slice(0, end);
 
       if (separator === undefined) {
@@ -33376,8 +33369,7 @@ function extend() {
      * @memberOf _
      * @category Util
      * @param {Object} object The object to bind and assign the bound methods to.
-     * @param {...(string|string[])} methodNames The object method names to bind,
-     *  specified individually or in arrays.
+     * @param {...(string|string[])} methodNames The object method names to bind.
      * @returns {Object} Returns `object`.
      * @example
      *
@@ -33400,7 +33392,7 @@ function extend() {
     });
 
     /**
-     * Creates a function that iterates over `pairs` invoking the corresponding
+     * Creates a function that iterates over `pairs` and invokes the corresponding
      * function of the first predicate to return truthy. The predicate-function
      * pairs are invoked with the `this` binding and arguments of the created
      * function.
@@ -33565,8 +33557,8 @@ function extend() {
 
     /**
      * Creates a function that invokes `func` with the arguments of the created
-     * function. If `func` is a property name the created function returns the
-     * property value for a given element. If `func` is an array or object the
+     * function. If `func` is a property name, the created function returns the
+     * property value for a given element. If `func` is an array or object, the
      * created function returns `true` for elements that contain the equivalent
      * source properties, otherwise it returns `false`.
      *
@@ -33679,14 +33671,14 @@ function extend() {
      * @example
      *
      * var objects = [
-     *   { 'a': { 'b': { 'c': _.constant(2) } } },
-     *   { 'a': { 'b': { 'c': _.constant(1) } } }
+     *   { 'a': { 'b': _.constant(2) } },
+     *   { 'a': { 'b': _.constant(1) } }
      * ];
      *
-     * _.map(objects, _.method('a.b.c'));
+     * _.map(objects, _.method('a.b'));
      * // => [2, 1]
      *
-     * _.map(objects, _.method(['a', 'b', 'c']));
+     * _.map(objects, _.method(['a', 'b']));
      * // => [2, 1]
      */
     var method = rest(function(path, args) {
@@ -33726,7 +33718,7 @@ function extend() {
 
     /**
      * Adds all own enumerable string keyed function properties of a source
-     * object to the destination object. If `object` is a function then methods
+     * object to the destination object. If `object` is a function, then methods
      * are added to its prototype as well.
      *
      * **Note:** Use `_.runInContext` to create a pristine `lodash` function to
@@ -33771,7 +33763,7 @@ function extend() {
         object = this;
         methodNames = baseFunctions(source, keys(source));
       }
-      var chain = (isObject(options) && 'chain' in options) ? options.chain : true,
+      var chain = !(isObject(options) && 'chain' in options) || !!options.chain,
           isFunc = isFunction(object);
 
       arrayEach(methodNames, function(methodName) {
@@ -33836,7 +33828,8 @@ function extend() {
     }
 
     /**
-     * Creates a function that returns its nth argument.
+     * Creates a function that returns its nth argument. If `n` is negative,
+     * the nth argument from the end is returned.
      *
      * @static
      * @memberOf _
@@ -33847,15 +33840,18 @@ function extend() {
      * @example
      *
      * var func = _.nthArg(1);
-     *
-     * func('a', 'b', 'c');
+     * func('a', 'b', 'c', 'd');
      * // => 'b'
+     *
+     * var func = _.nthArg(-2);
+     * func('a', 'b', 'c', 'd');
+     * // => 'c'
      */
     function nthArg(n) {
       n = toInteger(n);
-      return function() {
-        return arguments[n];
-      };
+      return rest(function(args) {
+        return baseNth(args, n);
+      });
     }
 
     /**
@@ -33866,7 +33862,8 @@ function extend() {
      * @memberOf _
      * @since 4.0.0
      * @category Util
-     * @param {...Function} iteratees The iteratees to invoke.
+     * @param {...(Array|Array[]|Function|Function[]|Object|Object[]|string|string[])}
+     *  [iteratees=[_.identity]] The iteratees to invoke.
      * @returns {Function} Returns the new function.
      * @example
      *
@@ -33885,7 +33882,8 @@ function extend() {
      * @memberOf _
      * @since 4.0.0
      * @category Util
-     * @param {...Function} predicates The predicates to check.
+     * @param {...(Array|Array[]|Function|Function[]|Object|Object[]|string|string[])}
+     *  [predicates=[_.identity]] The predicates to check.
      * @returns {Function} Returns the new function.
      * @example
      *
@@ -33910,7 +33908,8 @@ function extend() {
      * @memberOf _
      * @since 4.0.0
      * @category Util
-     * @param {...Function} predicates The predicates to check.
+     * @param {...(Array|Array[]|Function|Function[]|Object|Object[]|string|string[])}
+     *  [predicates=[_.identity]] The predicates to check.
      * @returns {Function} Returns the new function.
      * @example
      *
@@ -33939,14 +33938,14 @@ function extend() {
      * @example
      *
      * var objects = [
-     *   { 'a': { 'b': { 'c': 2 } } },
-     *   { 'a': { 'b': { 'c': 1 } } }
+     *   { 'a': { 'b': 2 } },
+     *   { 'a': { 'b': 1 } }
      * ];
      *
-     * _.map(objects, _.property('a.b.c'));
+     * _.map(objects, _.property('a.b'));
      * // => [2, 1]
      *
-     * _.map(_.sortBy(objects, _.property(['a', 'b', 'c'])), 'a.b.c');
+     * _.map(_.sortBy(objects, _.property(['a', 'b'])), 'a.b');
      * // => [1, 2]
      */
     function property(path) {
@@ -33983,7 +33982,7 @@ function extend() {
     /**
      * Creates an array of numbers (positive and/or negative) progressing from
      * `start` up to, but not including, `end`. A step of `-1` is used if a negative
-     * `start` is specified without an `end` or `step`. If `end` is not specified
+     * `start` is specified without an `end` or `step`. If `end` is not specified,
      * it's set to `start` with `start` then set to `0`.
      *
      * **Note:** JavaScript follows the IEEE-754 standard for resolving
@@ -34124,13 +34123,13 @@ function extend() {
      */
     function toPath(value) {
       if (isArray(value)) {
-        return arrayMap(value, baseCastKey);
+        return arrayMap(value, toKey);
       }
       return isSymbol(value) ? [value] : copyArray(stringToPath(value));
     }
 
     /**
-     * Generates a unique ID. If `prefix` is given the ID is appended to it.
+     * Generates a unique ID. If `prefix` is given, the ID is appended to it.
      *
      * @static
      * @since 0.1.0
@@ -34238,7 +34237,7 @@ function extend() {
     var floor = createRound('floor');
 
     /**
-     * Computes the maximum value of `array`. If `array` is empty or falsey
+     * Computes the maximum value of `array`. If `array` is empty or falsey,
      * `undefined` is returned.
      *
      * @static
@@ -34338,7 +34337,7 @@ function extend() {
     }
 
     /**
-     * Computes the minimum value of `array`. If `array` is empty or falsey
+     * Computes the minimum value of `array`. If `array` is empty or falsey,
      * `undefined` is returned.
      *
      * @static
@@ -34760,6 +34759,7 @@ function extend() {
     lodash.min = min;
     lodash.minBy = minBy;
     lodash.multiply = multiply;
+    lodash.nth = nth;
     lodash.noConflict = noConflict;
     lodash.noop = noop;
     lodash.now = now;
@@ -36229,8 +36229,7 @@ module.exports = CodePathAnalyzer;
 // Requirements
 //------------------------------------------------------------------------------
 
-var assert = require("assert"),
-    debug = require("./debug-helpers");
+var debug = require("./debug-helpers");
 
 //------------------------------------------------------------------------------
 // Helpers
@@ -36396,7 +36395,13 @@ CodePathSegment.newNext = function(id, allPrevSegments) {
  * @returns {CodePathSegment} The created segment.
  */
 CodePathSegment.newUnreachable = function(id, allPrevSegments) {
-    return new CodePathSegment(id, flattenUnusedSegments(allPrevSegments), false);
+    var segment = new CodePathSegment(id, flattenUnusedSegments(allPrevSegments), false);
+
+    // In `if (a) return a; foo();` case, the unreachable segment preceded by
+    // the return statement is not used but must not be remove.
+    CodePathSegment.markUsed(segment);
+
+    return segment;
 };
 
 /**
@@ -36421,7 +36426,9 @@ CodePathSegment.newDisconnected = function(id, allPrevSegments) {
  * @returns {void}
  */
 CodePathSegment.markUsed = function(segment) {
-    assert(!segment.internal.used, segment.id + " is marked twice.");
+    if (segment.internal.used) {
+        return;
+    }
     segment.internal.used = true;
 
     var i;
@@ -36453,7 +36460,7 @@ CodePathSegment.markPrevSegmentAsLooped = function(segment, prevSegment) {
 
 module.exports = CodePathSegment;
 
-},{"./debug-helpers":156,"assert":5}],154:[function(require,module,exports){
+},{"./debug-helpers":156}],154:[function(require,module,exports){
 /**
  * @fileoverview A class to manage state of generating a code path.
  * @author Toru Nagashima
@@ -40134,7 +40141,7 @@ module.exports = (function() {
         };
 
         // ensure there's range and text properties as well as metadata switch, otherwise it's not a valid fix
-        if (fix && Array.isArray(fix.range) && (typeof fix.text === "string") && (!meta || !meta.docs || meta.docs.fixable)) {
+        if (fix && Array.isArray(fix.range) && (typeof fix.text === "string") && (!meta || meta.fixable)) {
             problem.fix = fix;
         }
 
@@ -41003,9 +41010,9 @@ module.exports = {
         docs: {
             description: "Enforce spacing inside array brackets",
             category: "Stylistic Issues",
-            recommended: false,
-            fixable: "whitespace"
+            recommended: false
         },
+        fixable: "whitespace",
         schema: [
             {
                 "enum": ["always", "never"]
@@ -41371,79 +41378,89 @@ function isCallbackOfArrayMethod(node) {
 // Rule Definition
 //------------------------------------------------------------------------------
 
-module.exports = function(context) {
-    var funcInfo = {
-        upper: null,
-        codePath: null,
-        hasReturn: false,
-        shouldCheck: false
-    };
-
-    /**
-     * Checks whether or not the last code path segment is reachable.
-     * Then reports this function if the segment is reachable.
-     *
-     * If the last code path segment is reachable, there are paths which are not
-     * returned or thrown.
-     *
-     * @param {ASTNode} node - A node to check.
-     * @returns {void}
-     */
-    function checkLastSegment(node) {
-        if (funcInfo.shouldCheck &&
-            funcInfo.codePath.currentSegments.some(isReachable)
-        ) {
-            context.report({
-                node: node,
-                loc: getLocation(node, context.getSourceCode()).loc.start,
-                message: funcInfo.hasReturn
-                    ? "Expected to return a value at the end of this function."
-                    : "Expected to return a value in this function."
-            });
-        }
-    }
-
-    return {
-
-        // Stacks this function's information.
-        "onCodePathStart": function(codePath, node) {
-            funcInfo = {
-                upper: funcInfo,
-                codePath: codePath,
-                hasReturn: false,
-                shouldCheck:
-                    TARGET_NODE_TYPE.test(node.type) &&
-                    node.body.type === "BlockStatement" &&
-                    isCallbackOfArrayMethod(node)
-            };
+module.exports = {
+    meta: {
+        docs: {
+            description: "enforce `return` statements in callbacks of array methods",
+            category: "Best Practices",
+            recommended: false
         },
 
-        // Pops this function's information.
-        "onCodePathEnd": function() {
-            funcInfo = funcInfo.upper;
-        },
+        schema: []
+    },
 
-        // Checks the return statement is valid.
-        "ReturnStatement": function(node) {
-            if (funcInfo.shouldCheck) {
-                funcInfo.hasReturn = true;
+    create: function(context) {
+        var funcInfo = {
+            upper: null,
+            codePath: null,
+            hasReturn: false,
+            shouldCheck: false
+        };
 
-                if (!node.argument) {
-                    context.report({
-                        node: node,
-                        message: "Expected a return value."
-                    });
-                }
+        /**
+         * Checks whether or not the last code path segment is reachable.
+         * Then reports this function if the segment is reachable.
+         *
+         * If the last code path segment is reachable, there are paths which are not
+         * returned or thrown.
+         *
+         * @param {ASTNode} node - A node to check.
+         * @returns {void}
+         */
+        function checkLastSegment(node) {
+            if (funcInfo.shouldCheck &&
+                funcInfo.codePath.currentSegments.some(isReachable)
+            ) {
+                context.report({
+                    node: node,
+                    loc: getLocation(node, context.getSourceCode()).loc.start,
+                    message: funcInfo.hasReturn
+                        ? "Expected to return a value at the end of this function."
+                        : "Expected to return a value in this function."
+                });
             }
-        },
+        }
 
-        // Reports a given function if the last path is reachable.
-        "FunctionExpression:exit": checkLastSegment,
-        "ArrowFunctionExpression:exit": checkLastSegment
-    };
+        return {
+
+            // Stacks this function's information.
+            "onCodePathStart": function(codePath, node) {
+                funcInfo = {
+                    upper: funcInfo,
+                    codePath: codePath,
+                    hasReturn: false,
+                    shouldCheck:
+                        TARGET_NODE_TYPE.test(node.type) &&
+                        node.body.type === "BlockStatement" &&
+                        isCallbackOfArrayMethod(node)
+                };
+            },
+
+            // Pops this function's information.
+            "onCodePathEnd": function() {
+                funcInfo = funcInfo.upper;
+            },
+
+            // Checks the return statement is valid.
+            "ReturnStatement": function(node) {
+                if (funcInfo.shouldCheck) {
+                    funcInfo.hasReturn = true;
+
+                    if (!node.argument) {
+                        context.report({
+                            node: node,
+                            message: "Expected a return value."
+                        });
+                    }
+                }
+            },
+
+            // Reports a given function if the last path is reachable.
+            "FunctionExpression:exit": checkLastSegment,
+            "ArrowFunctionExpression:exit": checkLastSegment
+        };
+    }
 };
-
-module.exports.schema = [];
 
 },{"../ast-utils":151}],169:[function(require,module,exports){
 /**
@@ -41458,53 +41475,63 @@ module.exports.schema = [];
 // Rule Definition
 //------------------------------------------------------------------------------
 
-module.exports = function(context) {
-    var always = context.options[0] === "always";
-    var asNeeded = !context.options[0] || context.options[0] === "as-needed";
+module.exports = {
+    meta: {
+        docs: {
+            description: "require braces around arrow function bodies",
+            category: "ECMAScript 6",
+            recommended: false
+        },
 
-    /**
-     * Determines whether a arrow function body needs braces
-     * @param {ASTNode} node The arrow function node.
-     * @returns {void}
-     */
-    function validate(node) {
-        var arrowBody = node.body;
-
-        if (arrowBody.type === "BlockStatement") {
-            var blockBody = arrowBody.body;
-
-            if (blockBody.length !== 1) {
-                return;
+        schema: [
+            {
+                "enum": ["always", "as-needed"]
             }
+        ]
+    },
 
-            if (asNeeded && blockBody[0].type === "ReturnStatement") {
-                context.report({
-                    node: node,
-                    loc: arrowBody.loc.start,
-                    message: "Unexpected block statement surrounding arrow body."
-                });
-            }
-        } else {
-            if (always) {
-                context.report({
-                    node: node,
-                    loc: arrowBody.loc.start,
-                    message: "Expected block statement surrounding arrow body."
-                });
+    create: function(context) {
+        var always = context.options[0] === "always";
+        var asNeeded = !context.options[0] || context.options[0] === "as-needed";
+
+        /**
+         * Determines whether a arrow function body needs braces
+         * @param {ASTNode} node The arrow function node.
+         * @returns {void}
+         */
+        function validate(node) {
+            var arrowBody = node.body;
+
+            if (arrowBody.type === "BlockStatement") {
+                var blockBody = arrowBody.body;
+
+                if (blockBody.length !== 1) {
+                    return;
+                }
+
+                if (asNeeded && blockBody[0].type === "ReturnStatement") {
+                    context.report({
+                        node: node,
+                        loc: arrowBody.loc.start,
+                        message: "Unexpected block statement surrounding arrow body."
+                    });
+                }
+            } else {
+                if (always) {
+                    context.report({
+                        node: node,
+                        loc: arrowBody.loc.start,
+                        message: "Expected block statement surrounding arrow body."
+                    });
+                }
             }
         }
-    }
 
-    return {
-        "ArrowFunctionExpression": validate
-    };
+        return {
+            "ArrowFunctionExpression": validate
+        };
+    }
 };
-
-module.exports.schema = [
-    {
-        "enum": ["always", "as-needed"]
-    }
-];
 
 },{}],170:[function(require,module,exports){
 /**
@@ -41518,47 +41545,57 @@ module.exports.schema = [
 // Rule Definition
 //------------------------------------------------------------------------------
 
-module.exports = function(context) {
-    var message = "Expected parentheses around arrow function argument.";
-    var asNeededMessage = "Unexpected parentheses around single function argument";
-    var asNeeded = context.options[0] === "as-needed";
+module.exports = {
+    meta: {
+        docs: {
+            description: "require parentheses around arrow function arguments",
+            category: "ECMAScript 6",
+            recommended: false
+        },
 
-    /**
-     * Determines whether a arrow function argument end with `)`
-     * @param {ASTNode} node The arrow function node.
-     * @returns {void}
-     */
-    function parens(node) {
-        var token = context.getFirstToken(node);
-
-        // as-needed: x => x
-        if (asNeeded && node.params.length === 1 && node.params[0].type === "Identifier") {
-            if (token.type === "Punctuator" && token.value === "(") {
-                context.report(node, asNeededMessage);
+        schema: [
+            {
+                "enum": ["always", "as-needed"]
             }
-            return;
+        ]
+    },
+
+    create: function(context) {
+        var message = "Expected parentheses around arrow function argument.";
+        var asNeededMessage = "Unexpected parentheses around single function argument";
+        var asNeeded = context.options[0] === "as-needed";
+
+        /**
+         * Determines whether a arrow function argument end with `)`
+         * @param {ASTNode} node The arrow function node.
+         * @returns {void}
+         */
+        function parens(node) {
+            var token = context.getFirstToken(node);
+
+            // as-needed: x => x
+            if (asNeeded && node.params.length === 1 && node.params[0].type === "Identifier") {
+                if (token.type === "Punctuator" && token.value === "(") {
+                    context.report(node, asNeededMessage);
+                }
+                return;
+            }
+
+            if (token.type === "Identifier") {
+                var after = context.getTokenAfter(token);
+
+                // (x) => x
+                if (after.value !== ")") {
+                    context.report(node, message);
+                }
+            }
         }
 
-        if (token.type === "Identifier") {
-            var after = context.getTokenAfter(token);
-
-            // (x) => x
-            if (after.value !== ")") {
-                context.report(node, message);
-            }
-        }
+        return {
+            "ArrowFunctionExpression": parens
+        };
     }
-
-    return {
-        "ArrowFunctionExpression": parens
-    };
 };
-
-module.exports.schema = [
-    {
-        "enum": ["always", "as-needed"]
-    }
-];
 
 },{}],171:[function(require,module,exports){
 /**
@@ -41572,128 +41609,140 @@ module.exports.schema = [
 // Rule Definition
 //------------------------------------------------------------------------------
 
-module.exports = function(context) {
-
-    // merge rules with default
-    var rule = { before: true, after: true },
-        option = context.options[0] || {};
-
-    rule.before = option.before !== false;
-    rule.after = option.after !== false;
-
-    /**
-     * Get tokens of arrow(`=>`) and before/after arrow.
-     * @param {ASTNode} node The arrow function node.
-     * @returns {Object} Tokens of arrow and before/after arrow.
-     */
-    function getTokens(node) {
-        var t = context.getFirstToken(node);
-        var before;
-
-        while (t.type !== "Punctuator" || t.value !== "=>") {
-            before = t;
-            t = context.getTokenAfter(t);
-        }
-        var after = context.getTokenAfter(t);
-
-        return { before: before, arrow: t, after: after };
-    }
-
-    /**
-     * Count spaces before/after arrow(`=>`) token.
-     * @param {Object} tokens Tokens before/after arrow.
-     * @returns {Object} count of space before/after arrow.
-     */
-    function countSpaces(tokens) {
-        var before = tokens.arrow.range[0] - tokens.before.range[1];
-        var after = tokens.after.range[0] - tokens.arrow.range[1];
-
-        return { before: before, after: after };
-    }
-
-    /**
-     * Determines whether space(s) before after arrow(`=>`) is satisfy rule.
-     * if before/after value is `true`, there should be space(s).
-     * if before/after value is `false`, there should be no space.
-     * @param {ASTNode} node The arrow function node.
-     * @returns {void}
-     */
-    function spaces(node) {
-        var tokens = getTokens(node);
-        var countSpace = countSpaces(tokens);
-
-        if (rule.before) {
-
-            // should be space(s) before arrow
-            if (countSpace.before === 0) {
-                context.report({
-                    node: tokens.before,
-                    message: "Missing space before =>",
-                    fix: function(fixer) {
-                        return fixer.insertTextBefore(tokens.arrow, " ");
-                    }
-                });
-            }
-        } else {
-
-            // should be no space before arrow
-            if (countSpace.before > 0) {
-                context.report({
-                    node: tokens.before,
-                    message: "Unexpected space before =>",
-                    fix: function(fixer) {
-                        return fixer.removeRange([tokens.before.range[1], tokens.arrow.range[0]]);
-                    }
-                });
-            }
-        }
-
-        if (rule.after) {
-
-            // should be space(s) after arrow
-            if (countSpace.after === 0) {
-                context.report({
-                    node: tokens.after,
-                    message: "Missing space after =>",
-                    fix: function(fixer) {
-                        return fixer.insertTextAfter(tokens.arrow, " ");
-                    }
-                });
-            }
-        } else {
-
-            // should be no space after arrow
-            if (countSpace.after > 0) {
-                context.report({
-                    node: tokens.after,
-                    message: "Unexpected space after =>",
-                    fix: function(fixer) {
-                        return fixer.removeRange([tokens.arrow.range[1], tokens.after.range[0]]);
-                    }
-                });
-            }
-        }
-    }
-
-    return {
-        "ArrowFunctionExpression": spaces
-    };
-};
-
-module.exports.schema = [
-    {
-        "type": "object",
-        "properties": {
-            "before": {
-                "type": "boolean"
-            },
-            "after": {
-                "type": "boolean"
-            }
+module.exports = {
+    meta: {
+        docs: {
+            description: "enforce consistent spacing before and after the arrow in arrow functions",
+            category: "ECMAScript 6",
+            recommended: false
         },
-        "additionalProperties": false
+
+        fixable: "whitespace",
+
+        schema: [
+            {
+                "type": "object",
+                "properties": {
+                    "before": {
+                        "type": "boolean"
+                    },
+                    "after": {
+                        "type": "boolean"
+                    }
+                },
+                "additionalProperties": false
+            }
+        ]
+    },
+
+    create: function(context) {
+
+        // merge rules with default
+        var rule = { before: true, after: true },
+            option = context.options[0] || {};
+
+        rule.before = option.before !== false;
+        rule.after = option.after !== false;
+
+        /**
+         * Get tokens of arrow(`=>`) and before/after arrow.
+         * @param {ASTNode} node The arrow function node.
+         * @returns {Object} Tokens of arrow and before/after arrow.
+         */
+        function getTokens(node) {
+            var t = context.getFirstToken(node);
+            var before;
+
+            while (t.type !== "Punctuator" || t.value !== "=>") {
+                before = t;
+                t = context.getTokenAfter(t);
+            }
+            var after = context.getTokenAfter(t);
+
+            return { before: before, arrow: t, after: after };
+        }
+
+        /**
+         * Count spaces before/after arrow(`=>`) token.
+         * @param {Object} tokens Tokens before/after arrow.
+         * @returns {Object} count of space before/after arrow.
+         */
+        function countSpaces(tokens) {
+            var before = tokens.arrow.range[0] - tokens.before.range[1];
+            var after = tokens.after.range[0] - tokens.arrow.range[1];
+
+            return { before: before, after: after };
+        }
+
+        /**
+         * Determines whether space(s) before after arrow(`=>`) is satisfy rule.
+         * if before/after value is `true`, there should be space(s).
+         * if before/after value is `false`, there should be no space.
+         * @param {ASTNode} node The arrow function node.
+         * @returns {void}
+         */
+        function spaces(node) {
+            var tokens = getTokens(node);
+            var countSpace = countSpaces(tokens);
+
+            if (rule.before) {
+
+                // should be space(s) before arrow
+                if (countSpace.before === 0) {
+                    context.report({
+                        node: tokens.before,
+                        message: "Missing space before =>",
+                        fix: function(fixer) {
+                            return fixer.insertTextBefore(tokens.arrow, " ");
+                        }
+                    });
+                }
+            } else {
+
+                // should be no space before arrow
+                if (countSpace.before > 0) {
+                    context.report({
+                        node: tokens.before,
+                        message: "Unexpected space before =>",
+                        fix: function(fixer) {
+                            return fixer.removeRange([tokens.before.range[1], tokens.arrow.range[0]]);
+                        }
+                    });
+                }
+            }
+
+            if (rule.after) {
+
+                // should be space(s) after arrow
+                if (countSpace.after === 0) {
+                    context.report({
+                        node: tokens.after,
+                        message: "Missing space after =>",
+                        fix: function(fixer) {
+                            return fixer.insertTextAfter(tokens.arrow, " ");
+                        }
+                    });
+                }
+            } else {
+
+                // should be no space after arrow
+                if (countSpace.after > 0) {
+                    context.report({
+                        node: tokens.after,
+                        message: "Unexpected space after =>",
+                        fix: function(fixer) {
+                            return fixer.removeRange([tokens.arrow.range[1], tokens.after.range[0]]);
+                        }
+                    });
+                }
+            }
+        }
+
+        return {
+            "ArrowFunctionExpression": spaces
+        };
     }
-];
+};
 
 },{}],172:[function(require,module,exports){
 /**
@@ -41708,104 +41757,114 @@ module.exports.schema = [
 // Rule Definition
 //------------------------------------------------------------------------------
 
-module.exports = function(context) {
-    var stack = [];
-
-    /**
-     * Makes a block scope.
-     * @param {ASTNode} node - A node of a scope.
-     * @returns {void}
-     */
-    function enterScope(node) {
-        stack.push(node.range);
-    }
-
-    /**
-     * Pops the last block scope.
-     * @returns {void}
-     */
-    function exitScope() {
-        stack.pop();
-    }
-
-    /**
-     * Reports a given reference.
-     * @param {escope.Reference} reference - A reference to report.
-     * @returns {void}
-     */
-    function report(reference) {
-        var identifier = reference.identifier;
-
-        context.report(
-            identifier,
-            "'{{name}}' used outside of binding context.",
-            {name: identifier.name});
-    }
-
-    /**
-     * Finds and reports references which are outside of valid scopes.
-     * @param {ASTNode} node - A node to get variables.
-     * @returns {void}
-     */
-    function checkForVariables(node) {
-        if (node.kind !== "var") {
-            return;
-        }
-
-        // Defines a predicate to check whether or not a given reference is outside of valid scope.
-        var scopeRange = stack[stack.length - 1];
-
-        /**
-         * Check if a reference is out of scope
-         * @param {ASTNode} reference node to examine
-         * @returns {boolean} True is its outside the scope
-         * @private
-         */
-        function isOutsideOfScope(reference) {
-            var idRange = reference.identifier.range;
-
-            return idRange[0] < scopeRange[0] || idRange[1] > scopeRange[1];
-        }
-
-        // Gets declared variables, and checks its references.
-        var variables = context.getDeclaredVariables(node);
-
-        for (var i = 0; i < variables.length; ++i) {
-
-            // Reports.
-            variables[i]
-                .references
-                .filter(isOutsideOfScope)
-                .forEach(report);
-        }
-    }
-
-    return {
-        "Program": function(node) {
-            stack = [node.range];
+module.exports = {
+    meta: {
+        docs: {
+            description: "enforce the use of variables within the scope they are defined",
+            category: "Best Practices",
+            recommended: false
         },
 
-        // Manages scopes.
-        "BlockStatement": enterScope,
-        "BlockStatement:exit": exitScope,
-        "ForStatement": enterScope,
-        "ForStatement:exit": exitScope,
-        "ForInStatement": enterScope,
-        "ForInStatement:exit": exitScope,
-        "ForOfStatement": enterScope,
-        "ForOfStatement:exit": exitScope,
-        "SwitchStatement": enterScope,
-        "SwitchStatement:exit": exitScope,
-        "CatchClause": enterScope,
-        "CatchClause:exit": exitScope,
+        schema: []
+    },
 
-        // Finds and reports references which are outside of valid scope.
-        "VariableDeclaration": checkForVariables
-    };
+    create: function(context) {
+        var stack = [];
 
+        /**
+         * Makes a block scope.
+         * @param {ASTNode} node - A node of a scope.
+         * @returns {void}
+         */
+        function enterScope(node) {
+            stack.push(node.range);
+        }
+
+        /**
+         * Pops the last block scope.
+         * @returns {void}
+         */
+        function exitScope() {
+            stack.pop();
+        }
+
+        /**
+         * Reports a given reference.
+         * @param {escope.Reference} reference - A reference to report.
+         * @returns {void}
+         */
+        function report(reference) {
+            var identifier = reference.identifier;
+
+            context.report(
+                identifier,
+                "'{{name}}' used outside of binding context.",
+                {name: identifier.name});
+        }
+
+        /**
+         * Finds and reports references which are outside of valid scopes.
+         * @param {ASTNode} node - A node to get variables.
+         * @returns {void}
+         */
+        function checkForVariables(node) {
+            if (node.kind !== "var") {
+                return;
+            }
+
+            // Defines a predicate to check whether or not a given reference is outside of valid scope.
+            var scopeRange = stack[stack.length - 1];
+
+            /**
+             * Check if a reference is out of scope
+             * @param {ASTNode} reference node to examine
+             * @returns {boolean} True is its outside the scope
+             * @private
+             */
+            function isOutsideOfScope(reference) {
+                var idRange = reference.identifier.range;
+
+                return idRange[0] < scopeRange[0] || idRange[1] > scopeRange[1];
+            }
+
+            // Gets declared variables, and checks its references.
+            var variables = context.getDeclaredVariables(node);
+
+            for (var i = 0; i < variables.length; ++i) {
+
+                // Reports.
+                variables[i]
+                    .references
+                    .filter(isOutsideOfScope)
+                    .forEach(report);
+            }
+        }
+
+        return {
+            "Program": function(node) {
+                stack = [node.range];
+            },
+
+            // Manages scopes.
+            "BlockStatement": enterScope,
+            "BlockStatement:exit": exitScope,
+            "ForStatement": enterScope,
+            "ForStatement:exit": exitScope,
+            "ForInStatement": enterScope,
+            "ForInStatement:exit": exitScope,
+            "ForOfStatement": enterScope,
+            "ForOfStatement:exit": exitScope,
+            "SwitchStatement": enterScope,
+            "SwitchStatement:exit": exitScope,
+            "CatchClause": enterScope,
+            "CatchClause:exit": exitScope,
+
+            // Finds and reports references which are outside of valid scope.
+            "VariableDeclaration": checkForVariables
+        };
+
+    }
 };
-
-module.exports.schema = [];
 
 },{}],173:[function(require,module,exports){
 /**
@@ -41822,112 +41881,124 @@ var util = require("../ast-utils");
 // Rule Definition
 //------------------------------------------------------------------------------
 
-module.exports = function(context) {
-    var always = (context.options[0] !== "never"),
-        message = always ? "Requires a space" : "Unexpected space(s)",
-        sourceCode = context.getSourceCode();
+module.exports = {
+    meta: {
+        docs: {
+            description: "enforce consistent spacing inside single-line blocks",
+            category: "Stylistic Issues",
+            recommended: false
+        },
 
-    /**
-     * Gets the open brace token from a given node.
-     * @param {ASTNode} node - A BlockStatement/SwitchStatement node to get.
-     * @returns {Token} The token of the open brace.
-     */
-    function getOpenBrace(node) {
-        if (node.type === "SwitchStatement") {
-            if (node.cases.length > 0) {
-                return context.getTokenBefore(node.cases[0]);
+        fixable: "whitespace",
+
+        schema: [
+            {enum: ["always", "never"]}
+        ]
+    },
+
+    create: function(context) {
+        var always = (context.options[0] !== "never"),
+            message = always ? "Requires a space" : "Unexpected space(s)",
+            sourceCode = context.getSourceCode();
+
+        /**
+         * Gets the open brace token from a given node.
+         * @param {ASTNode} node - A BlockStatement/SwitchStatement node to get.
+         * @returns {Token} The token of the open brace.
+         */
+        function getOpenBrace(node) {
+            if (node.type === "SwitchStatement") {
+                if (node.cases.length > 0) {
+                    return context.getTokenBefore(node.cases[0]);
+                }
+                return context.getLastToken(node, 1);
             }
-            return context.getLastToken(node, 1);
-        }
-        return context.getFirstToken(node);
-    }
-
-    /**
-     * Checks whether or not:
-     *   - given tokens are on same line.
-     *   - there is/isn't a space between given tokens.
-     * @param {Token} left - A token to check.
-     * @param {Token} right - The token which is next to `left`.
-     * @returns {boolean}
-     *    When the option is `"always"`, `true` if there are one or more spaces between given tokens.
-     *    When the option is `"never"`, `true` if there are not any spaces between given tokens.
-     *    If given tokens are not on same line, it's always `true`.
-     */
-    function isValid(left, right) {
-        return (
-            !util.isTokenOnSameLine(left, right) ||
-            sourceCode.isSpaceBetweenTokens(left, right) === always
-        );
-    }
-
-    /**
-     * Reports invalid spacing style inside braces.
-     * @param {ASTNode} node - A BlockStatement/SwitchStatement node to get.
-     * @returns {void}
-     */
-    function checkSpacingInsideBraces(node) {
-
-        // Gets braces and the first/last token of content.
-        var openBrace = getOpenBrace(node);
-        var closeBrace = context.getLastToken(node);
-        var firstToken = sourceCode.getTokenOrCommentAfter(openBrace);
-        var lastToken = sourceCode.getTokenOrCommentBefore(closeBrace);
-
-        // Skip if the node is invalid or empty.
-        if (openBrace.type !== "Punctuator" ||
-            openBrace.value !== "{" ||
-            closeBrace.type !== "Punctuator" ||
-            closeBrace.value !== "}" ||
-            firstToken === closeBrace
-        ) {
-            return;
+            return context.getFirstToken(node);
         }
 
-        // Skip line comments for option never
-        if (!always && firstToken.type === "Line") {
-            return;
+        /**
+         * Checks whether or not:
+         *   - given tokens are on same line.
+         *   - there is/isn't a space between given tokens.
+         * @param {Token} left - A token to check.
+         * @param {Token} right - The token which is next to `left`.
+         * @returns {boolean}
+         *    When the option is `"always"`, `true` if there are one or more spaces between given tokens.
+         *    When the option is `"never"`, `true` if there are not any spaces between given tokens.
+         *    If given tokens are not on same line, it's always `true`.
+         */
+        function isValid(left, right) {
+            return (
+                !util.isTokenOnSameLine(left, right) ||
+                sourceCode.isSpaceBetweenTokens(left, right) === always
+            );
         }
 
-        // Check.
-        if (!isValid(openBrace, firstToken)) {
-            context.report({
-                node: node,
-                loc: openBrace.loc.start,
-                message: message + " after '{'.",
-                fix: function(fixer) {
-                    if (always) {
-                        return fixer.insertTextBefore(firstToken, " ");
+        /**
+         * Reports invalid spacing style inside braces.
+         * @param {ASTNode} node - A BlockStatement/SwitchStatement node to get.
+         * @returns {void}
+         */
+        function checkSpacingInsideBraces(node) {
+
+            // Gets braces and the first/last token of content.
+            var openBrace = getOpenBrace(node);
+            var closeBrace = context.getLastToken(node);
+            var firstToken = sourceCode.getTokenOrCommentAfter(openBrace);
+            var lastToken = sourceCode.getTokenOrCommentBefore(closeBrace);
+
+            // Skip if the node is invalid or empty.
+            if (openBrace.type !== "Punctuator" ||
+                openBrace.value !== "{" ||
+                closeBrace.type !== "Punctuator" ||
+                closeBrace.value !== "}" ||
+                firstToken === closeBrace
+            ) {
+                return;
+            }
+
+            // Skip line comments for option never
+            if (!always && firstToken.type === "Line") {
+                return;
+            }
+
+            // Check.
+            if (!isValid(openBrace, firstToken)) {
+                context.report({
+                    node: node,
+                    loc: openBrace.loc.start,
+                    message: message + " after '{'.",
+                    fix: function(fixer) {
+                        if (always) {
+                            return fixer.insertTextBefore(firstToken, " ");
+                        }
+
+                        return fixer.removeRange([openBrace.range[1], firstToken.range[0]]);
                     }
+                });
+            }
+            if (!isValid(lastToken, closeBrace)) {
+                context.report({
+                    node: node,
+                    loc: closeBrace.loc.start,
+                    message: message + " before '}'.",
+                    fix: function(fixer) {
+                        if (always) {
+                            return fixer.insertTextAfter(lastToken, " ");
+                        }
 
-                    return fixer.removeRange([openBrace.range[1], firstToken.range[0]]);
-                }
-            });
-        }
-        if (!isValid(lastToken, closeBrace)) {
-            context.report({
-                node: node,
-                loc: closeBrace.loc.start,
-                message: message + " before '}'.",
-                fix: function(fixer) {
-                    if (always) {
-                        return fixer.insertTextAfter(lastToken, " ");
+                        return fixer.removeRange([lastToken.range[1], closeBrace.range[0]]);
                     }
-
-                    return fixer.removeRange([lastToken.range[1], closeBrace.range[0]]);
-                }
-            });
+                });
+            }
         }
-    }
 
-    return {
-        BlockStatement: checkSpacingInsideBraces,
-        SwitchStatement: checkSpacingInsideBraces
-    };
+        return {
+            BlockStatement: checkSpacingInsideBraces,
+            SwitchStatement: checkSpacingInsideBraces
+        };
+    }
 };
-
-module.exports.schema = [
-    {enum: ["always", "never"]}
-];
 
 },{"../ast-utils":151}],174:[function(require,module,exports){
 /**
@@ -41941,229 +42012,239 @@ module.exports.schema = [
 // Rule Definition
 //------------------------------------------------------------------------------
 
-module.exports = function(context) {
-    var style = context.options[0] || "1tbs",
-        params = context.options[1] || {},
-        sourceCode = context.getSourceCode();
-
-    var OPEN_MESSAGE = "Opening curly brace does not appear on the same line as controlling statement.",
-        OPEN_MESSAGE_ALLMAN = "Opening curly brace appears on the same line as controlling statement.",
-        BODY_MESSAGE = "Statement inside of curly braces should be on next line.",
-        CLOSE_MESSAGE = "Closing curly brace does not appear on the same line as the subsequent block.",
-        CLOSE_MESSAGE_SINGLE = "Closing curly brace should be on the same line as opening curly brace or on the line after the previous block.",
-        CLOSE_MESSAGE_STROUSTRUP_ALLMAN = "Closing curly brace appears on the same line as the subsequent block.";
-
-    //--------------------------------------------------------------------------
-    // Helpers
-    //--------------------------------------------------------------------------
-
-    /**
-     * Determines if a given node is a block statement.
-     * @param {ASTNode} node The node to check.
-     * @returns {boolean} True if the node is a block statement, false if not.
-     * @private
-     */
-    function isBlock(node) {
-        return node && node.type === "BlockStatement";
-    }
-
-    /**
-     * Check if the token is an punctuator with a value of curly brace
-     * @param {object} token - Token to check
-     * @returns {boolean} true if its a curly punctuator
-     * @private
-     */
-    function isCurlyPunctuator(token) {
-        return token.value === "{" || token.value === "}";
-    }
-
-    /**
-     * Binds a list of properties to a function that verifies that the opening
-     * curly brace is on the same line as its controlling statement of a given
-     * node.
-     * @param {...string} The properties to check on the node.
-     * @returns {Function} A function that will perform the check on a node
-     * @private
-     */
-    function checkBlock() {
-        var blockProperties = arguments;
-
-        return function(node) {
-            Array.prototype.forEach.call(blockProperties, function(blockProp) {
-                var block = node[blockProp],
-                    previousToken,
-                    curlyToken,
-                    curlyTokenEnd,
-                    allOnSameLine;
-
-                if (!isBlock(block)) {
-                    return;
-                }
-
-                previousToken = sourceCode.getTokenBefore(block);
-                curlyToken = sourceCode.getFirstToken(block);
-                curlyTokenEnd = sourceCode.getLastToken(block);
-                allOnSameLine = previousToken.loc.start.line === curlyTokenEnd.loc.start.line;
-
-                if (allOnSameLine && params.allowSingleLine) {
-                    return;
-                }
-
-                if (style !== "allman" && previousToken.loc.start.line !== curlyToken.loc.start.line) {
-                    context.report(node, OPEN_MESSAGE);
-                } else if (style === "allman" && previousToken.loc.start.line === curlyToken.loc.start.line) {
-                    context.report(node, OPEN_MESSAGE_ALLMAN);
-                }
-
-                if (!block.body.length) {
-                    return;
-                }
-
-                if (curlyToken.loc.start.line === block.body[0].loc.start.line) {
-                    context.report(block.body[0], BODY_MESSAGE);
-                }
-
-                if (curlyTokenEnd.loc.start.line === block.body[block.body.length - 1].loc.start.line) {
-                    context.report(block.body[block.body.length - 1], CLOSE_MESSAGE_SINGLE);
-                }
-            });
-        };
-    }
-
-    /**
-     * Enforces the configured brace style on IfStatements
-     * @param {ASTNode} node An IfStatement node.
-     * @returns {void}
-     * @private
-     */
-    function checkIfStatement(node) {
-        var tokens;
-
-        checkBlock("consequent", "alternate")(node);
-
-        if (node.alternate) {
-
-            tokens = sourceCode.getTokensBefore(node.alternate, 2);
-
-            if (style === "1tbs") {
-                if (tokens[0].loc.start.line !== tokens[1].loc.start.line &&
-                    node.consequent.type === "BlockStatement" &&
-                    isCurlyPunctuator(tokens[0])) {
-                    context.report(node.alternate, CLOSE_MESSAGE);
-                }
-            } else if (tokens[0].loc.start.line === tokens[1].loc.start.line) {
-                context.report(node.alternate, CLOSE_MESSAGE_STROUSTRUP_ALLMAN);
-            }
-
-        }
-    }
-
-    /**
-     * Enforces the configured brace style on TryStatements
-     * @param {ASTNode} node A TryStatement node.
-     * @returns {void}
-     * @private
-     */
-    function checkTryStatement(node) {
-        var tokens;
-
-        checkBlock("block", "finalizer")(node);
-
-        if (isBlock(node.finalizer)) {
-            tokens = sourceCode.getTokensBefore(node.finalizer, 2);
-            if (style === "1tbs") {
-                if (tokens[0].loc.start.line !== tokens[1].loc.start.line) {
-                    context.report(node.finalizer, CLOSE_MESSAGE);
-                }
-            } else if (tokens[0].loc.start.line === tokens[1].loc.start.line) {
-                context.report(node.finalizer, CLOSE_MESSAGE_STROUSTRUP_ALLMAN);
-            }
-        }
-    }
-
-    /**
-     * Enforces the configured brace style on CatchClauses
-     * @param {ASTNode} node A CatchClause node.
-     * @returns {void}
-     * @private
-     */
-    function checkCatchClause(node) {
-        var previousToken = sourceCode.getTokenBefore(node),
-            firstToken = sourceCode.getFirstToken(node);
-
-        checkBlock("body")(node);
-
-        if (isBlock(node.body)) {
-            if (style === "1tbs") {
-                if (previousToken.loc.start.line !== firstToken.loc.start.line) {
-                    context.report(node, CLOSE_MESSAGE);
-                }
-            } else {
-                if (previousToken.loc.start.line === firstToken.loc.start.line) {
-                    context.report(node, CLOSE_MESSAGE_STROUSTRUP_ALLMAN);
-                }
-            }
-        }
-    }
-
-    /**
-     * Enforces the configured brace style on SwitchStatements
-     * @param {ASTNode} node A SwitchStatement node.
-     * @returns {void}
-     * @private
-     */
-    function checkSwitchStatement(node) {
-        var tokens;
-
-        if (node.cases && node.cases.length) {
-            tokens = sourceCode.getTokensBefore(node.cases[0], 2);
-        } else {
-            tokens = sourceCode.getLastTokens(node, 3);
-        }
-
-        if (style !== "allman" && tokens[0].loc.start.line !== tokens[1].loc.start.line) {
-            context.report(node, OPEN_MESSAGE);
-        } else if (style === "allman" && tokens[0].loc.start.line === tokens[1].loc.start.line) {
-            context.report(node, OPEN_MESSAGE_ALLMAN);
-        }
-    }
-
-    //--------------------------------------------------------------------------
-    // Public API
-    //--------------------------------------------------------------------------
-
-    return {
-        "FunctionDeclaration": checkBlock("body"),
-        "FunctionExpression": checkBlock("body"),
-        "ArrowFunctionExpression": checkBlock("body"),
-        "IfStatement": checkIfStatement,
-        "TryStatement": checkTryStatement,
-        "CatchClause": checkCatchClause,
-        "DoWhileStatement": checkBlock("body"),
-        "WhileStatement": checkBlock("body"),
-        "WithStatement": checkBlock("body"),
-        "ForStatement": checkBlock("body"),
-        "ForInStatement": checkBlock("body"),
-        "ForOfStatement": checkBlock("body"),
-        "SwitchStatement": checkSwitchStatement
-    };
-
-};
-
-module.exports.schema = [
-    {
-        "enum": ["1tbs", "stroustrup", "allman"]
-    },
-    {
-        "type": "object",
-        "properties": {
-            "allowSingleLine": {
-                "type": "boolean"
-            }
+module.exports = {
+    meta: {
+        docs: {
+            description: "enforce consistent brace style for blocks",
+            category: "Stylistic Issues",
+            recommended: false
         },
-        "additionalProperties": false
+
+        schema: [
+            {
+                "enum": ["1tbs", "stroustrup", "allman"]
+            },
+            {
+                "type": "object",
+                "properties": {
+                    "allowSingleLine": {
+                        "type": "boolean"
+                    }
+                },
+                "additionalProperties": false
+            }
+        ]
+    },
+
+    create: function(context) {
+        var style = context.options[0] || "1tbs",
+            params = context.options[1] || {},
+            sourceCode = context.getSourceCode();
+
+        var OPEN_MESSAGE = "Opening curly brace does not appear on the same line as controlling statement.",
+            OPEN_MESSAGE_ALLMAN = "Opening curly brace appears on the same line as controlling statement.",
+            BODY_MESSAGE = "Statement inside of curly braces should be on next line.",
+            CLOSE_MESSAGE = "Closing curly brace does not appear on the same line as the subsequent block.",
+            CLOSE_MESSAGE_SINGLE = "Closing curly brace should be on the same line as opening curly brace or on the line after the previous block.",
+            CLOSE_MESSAGE_STROUSTRUP_ALLMAN = "Closing curly brace appears on the same line as the subsequent block.";
+
+        //--------------------------------------------------------------------------
+        // Helpers
+        //--------------------------------------------------------------------------
+
+        /**
+         * Determines if a given node is a block statement.
+         * @param {ASTNode} node The node to check.
+         * @returns {boolean} True if the node is a block statement, false if not.
+         * @private
+         */
+        function isBlock(node) {
+            return node && node.type === "BlockStatement";
+        }
+
+        /**
+         * Check if the token is an punctuator with a value of curly brace
+         * @param {object} token - Token to check
+         * @returns {boolean} true if its a curly punctuator
+         * @private
+         */
+        function isCurlyPunctuator(token) {
+            return token.value === "{" || token.value === "}";
+        }
+
+        /**
+         * Binds a list of properties to a function that verifies that the opening
+         * curly brace is on the same line as its controlling statement of a given
+         * node.
+         * @param {...string} The properties to check on the node.
+         * @returns {Function} A function that will perform the check on a node
+         * @private
+         */
+        function checkBlock() {
+            var blockProperties = arguments;
+
+            return function(node) {
+                Array.prototype.forEach.call(blockProperties, function(blockProp) {
+                    var block = node[blockProp],
+                        previousToken,
+                        curlyToken,
+                        curlyTokenEnd,
+                        allOnSameLine;
+
+                    if (!isBlock(block)) {
+                        return;
+                    }
+
+                    previousToken = sourceCode.getTokenBefore(block);
+                    curlyToken = sourceCode.getFirstToken(block);
+                    curlyTokenEnd = sourceCode.getLastToken(block);
+                    allOnSameLine = previousToken.loc.start.line === curlyTokenEnd.loc.start.line;
+
+                    if (allOnSameLine && params.allowSingleLine) {
+                        return;
+                    }
+
+                    if (style !== "allman" && previousToken.loc.start.line !== curlyToken.loc.start.line) {
+                        context.report(node, OPEN_MESSAGE);
+                    } else if (style === "allman" && previousToken.loc.start.line === curlyToken.loc.start.line) {
+                        context.report(node, OPEN_MESSAGE_ALLMAN);
+                    }
+
+                    if (!block.body.length) {
+                        return;
+                    }
+
+                    if (curlyToken.loc.start.line === block.body[0].loc.start.line) {
+                        context.report(block.body[0], BODY_MESSAGE);
+                    }
+
+                    if (curlyTokenEnd.loc.start.line === block.body[block.body.length - 1].loc.start.line) {
+                        context.report(block.body[block.body.length - 1], CLOSE_MESSAGE_SINGLE);
+                    }
+                });
+            };
+        }
+
+        /**
+         * Enforces the configured brace style on IfStatements
+         * @param {ASTNode} node An IfStatement node.
+         * @returns {void}
+         * @private
+         */
+        function checkIfStatement(node) {
+            var tokens;
+
+            checkBlock("consequent", "alternate")(node);
+
+            if (node.alternate) {
+
+                tokens = sourceCode.getTokensBefore(node.alternate, 2);
+
+                if (style === "1tbs") {
+                    if (tokens[0].loc.start.line !== tokens[1].loc.start.line &&
+                        node.consequent.type === "BlockStatement" &&
+                        isCurlyPunctuator(tokens[0])) {
+                        context.report(node.alternate, CLOSE_MESSAGE);
+                    }
+                } else if (tokens[0].loc.start.line === tokens[1].loc.start.line) {
+                    context.report(node.alternate, CLOSE_MESSAGE_STROUSTRUP_ALLMAN);
+                }
+
+            }
+        }
+
+        /**
+         * Enforces the configured brace style on TryStatements
+         * @param {ASTNode} node A TryStatement node.
+         * @returns {void}
+         * @private
+         */
+        function checkTryStatement(node) {
+            var tokens;
+
+            checkBlock("block", "finalizer")(node);
+
+            if (isBlock(node.finalizer)) {
+                tokens = sourceCode.getTokensBefore(node.finalizer, 2);
+                if (style === "1tbs") {
+                    if (tokens[0].loc.start.line !== tokens[1].loc.start.line) {
+                        context.report(node.finalizer, CLOSE_MESSAGE);
+                    }
+                } else if (tokens[0].loc.start.line === tokens[1].loc.start.line) {
+                    context.report(node.finalizer, CLOSE_MESSAGE_STROUSTRUP_ALLMAN);
+                }
+            }
+        }
+
+        /**
+         * Enforces the configured brace style on CatchClauses
+         * @param {ASTNode} node A CatchClause node.
+         * @returns {void}
+         * @private
+         */
+        function checkCatchClause(node) {
+            var previousToken = sourceCode.getTokenBefore(node),
+                firstToken = sourceCode.getFirstToken(node);
+
+            checkBlock("body")(node);
+
+            if (isBlock(node.body)) {
+                if (style === "1tbs") {
+                    if (previousToken.loc.start.line !== firstToken.loc.start.line) {
+                        context.report(node, CLOSE_MESSAGE);
+                    }
+                } else {
+                    if (previousToken.loc.start.line === firstToken.loc.start.line) {
+                        context.report(node, CLOSE_MESSAGE_STROUSTRUP_ALLMAN);
+                    }
+                }
+            }
+        }
+
+        /**
+         * Enforces the configured brace style on SwitchStatements
+         * @param {ASTNode} node A SwitchStatement node.
+         * @returns {void}
+         * @private
+         */
+        function checkSwitchStatement(node) {
+            var tokens;
+
+            if (node.cases && node.cases.length) {
+                tokens = sourceCode.getTokensBefore(node.cases[0], 2);
+            } else {
+                tokens = sourceCode.getLastTokens(node, 3);
+            }
+
+            if (style !== "allman" && tokens[0].loc.start.line !== tokens[1].loc.start.line) {
+                context.report(node, OPEN_MESSAGE);
+            } else if (style === "allman" && tokens[0].loc.start.line === tokens[1].loc.start.line) {
+                context.report(node, OPEN_MESSAGE_ALLMAN);
+            }
+        }
+
+        //--------------------------------------------------------------------------
+        // Public API
+        //--------------------------------------------------------------------------
+
+        return {
+            "FunctionDeclaration": checkBlock("body"),
+            "FunctionExpression": checkBlock("body"),
+            "ArrowFunctionExpression": checkBlock("body"),
+            "IfStatement": checkIfStatement,
+            "TryStatement": checkTryStatement,
+            "CatchClause": checkCatchClause,
+            "DoWhileStatement": checkBlock("body"),
+            "WhileStatement": checkBlock("body"),
+            "WithStatement": checkBlock("body"),
+            "ForStatement": checkBlock("body"),
+            "ForInStatement": checkBlock("body"),
+            "ForOfStatement": checkBlock("body"),
+            "SwitchStatement": checkSwitchStatement
+        };
+
     }
-];
+};
 
 },{}],175:[function(require,module,exports){
 /**
@@ -42177,139 +42258,149 @@ module.exports.schema = [
 // Rule Definition
 //------------------------------------------------------------------------------
 
-module.exports = function(context) {
+module.exports = {
+    meta: {
+        docs: {
+            description: "require `return` statements after callbacks",
+            category: "Node.js and CommonJS",
+            recommended: false
+        },
 
-    var callbacks = context.options[0] || ["callback", "cb", "next"];
+        schema: [{
+            type: "array",
+            items: { type: "string" }
+        }]
+    },
 
-    //--------------------------------------------------------------------------
-    // Helpers
-    //--------------------------------------------------------------------------
+    create: function(context) {
 
-    /**
-     * Find the closest parent matching a list of types.
-     * @param {ASTNode} node The node whose parents we are searching
-     * @param {Array} types The node types to match
-     * @returns {ASTNode} The matched node or undefined.
-     */
-    function findClosestParentOfType(node, types) {
-        if (!node.parent) {
-            return null;
+        var callbacks = context.options[0] || ["callback", "cb", "next"];
+
+        //--------------------------------------------------------------------------
+        // Helpers
+        //--------------------------------------------------------------------------
+
+        /**
+         * Find the closest parent matching a list of types.
+         * @param {ASTNode} node The node whose parents we are searching
+         * @param {Array} types The node types to match
+         * @returns {ASTNode} The matched node or undefined.
+         */
+        function findClosestParentOfType(node, types) {
+            if (!node.parent) {
+                return null;
+            }
+            if (types.indexOf(node.parent.type) === -1) {
+                return findClosestParentOfType(node.parent, types);
+            }
+            return node.parent;
         }
-        if (types.indexOf(node.parent.type) === -1) {
-            return findClosestParentOfType(node.parent, types);
+
+        /**
+         * Check to see if a CallExpression is in our callback list.
+         * @param {ASTNode} node The node to check against our callback names list.
+         * @returns {Boolean} Whether or not this function matches our callback name.
+         */
+        function isCallback(node) {
+            return node.callee.type === "Identifier" && callbacks.indexOf(node.callee.name) > -1;
         }
-        return node.parent;
-    }
 
-    /**
-     * Check to see if a CallExpression is in our callback list.
-     * @param {ASTNode} node The node to check against our callback names list.
-     * @returns {Boolean} Whether or not this function matches our callback name.
-     */
-    function isCallback(node) {
-        return node.callee.type === "Identifier" && callbacks.indexOf(node.callee.name) > -1;
-    }
+        /**
+         * Determines whether or not the callback is part of a callback expression.
+         * @param {ASTNode} node The callback node
+         * @param {ASTNode} parentNode The expression node
+         * @returns {boolean} Whether or not this is part of a callback expression
+         */
+        function isCallbackExpression(node, parentNode) {
 
-    /**
-     * Determines whether or not the callback is part of a callback expression.
-     * @param {ASTNode} node The callback node
-     * @param {ASTNode} parentNode The expression node
-     * @returns {boolean} Whether or not this is part of a callback expression
-     */
-    function isCallbackExpression(node, parentNode) {
+            // ensure the parent node exists and is an expression
+            if (!parentNode || parentNode.type !== "ExpressionStatement") {
+                return false;
+            }
 
-        // ensure the parent node exists and is an expression
-        if (!parentNode || parentNode.type !== "ExpressionStatement") {
+            // cb()
+            if (parentNode.expression === node) {
+                return true;
+            }
+
+            // special case for cb && cb() and similar
+            if (parentNode.expression.type === "BinaryExpression" || parentNode.expression.type === "LogicalExpression") {
+                if (parentNode.expression.right === node) {
+                    return true;
+                }
+            }
+
             return false;
         }
 
-        // cb()
-        if (parentNode.expression === node) {
-            return true;
-        }
+        //--------------------------------------------------------------------------
+        // Public
+        //--------------------------------------------------------------------------
 
-        // special case for cb && cb() and similar
-        if (parentNode.expression.type === "BinaryExpression" || parentNode.expression.type === "LogicalExpression") {
-            if (parentNode.expression.right === node) {
-                return true;
+        return {
+            "CallExpression": function(node) {
+
+                // if we"re not a callback we can return
+                if (!isCallback(node)) {
+                    return;
+                }
+
+                // find the closest block, return or loop
+                var closestBlock = findClosestParentOfType(node, ["BlockStatement", "ReturnStatement", "ArrowFunctionExpression"]) || {},
+                    lastItem, parentType;
+
+                // if our parent is a return we know we're ok
+                if (closestBlock.type === "ReturnStatement") {
+                    return;
+                }
+
+                // arrow functions don't always have blocks and implicitly return
+                if (closestBlock.type === "ArrowFunctionExpression") {
+                    return;
+                }
+
+                // block statements are part of functions and most if statements
+                if (closestBlock.type === "BlockStatement") {
+
+                    // find the last item in the block
+                    lastItem = closestBlock.body[closestBlock.body.length - 1];
+
+                    // if the callback is the last thing in a block that might be ok
+                    if (isCallbackExpression(node, lastItem)) {
+
+                        parentType = closestBlock.parent.type;
+
+                        // but only if the block is part of a function
+                        if (parentType === "FunctionExpression" ||
+                            parentType === "FunctionDeclaration" ||
+                            parentType === "ArrowFunctionExpression"
+                        ) {
+                            return;
+                        }
+
+                    }
+
+                    // ending a block with a return is also ok
+                    if (lastItem.type === "ReturnStatement") {
+
+                        // but only if the callback is immediately before
+                        if (isCallbackExpression(node, closestBlock.body[closestBlock.body.length - 2])) {
+                            return;
+                        }
+                    }
+
+                }
+
+                // as long as you're the child of a function at this point you should be asked to return
+                if (findClosestParentOfType(node, ["FunctionDeclaration", "FunctionExpression", "ArrowFunctionExpression"])) {
+                    context.report(node, "Expected return with your callback function.");
+                }
+
             }
-        }
 
-        return false;
+        };
     }
-
-    //--------------------------------------------------------------------------
-    // Public
-    //--------------------------------------------------------------------------
-
-    return {
-        "CallExpression": function(node) {
-
-            // if we"re not a callback we can return
-            if (!isCallback(node)) {
-                return;
-            }
-
-            // find the closest block, return or loop
-            var closestBlock = findClosestParentOfType(node, ["BlockStatement", "ReturnStatement", "ArrowFunctionExpression"]) || {},
-                lastItem, parentType;
-
-            // if our parent is a return we know we're ok
-            if (closestBlock.type === "ReturnStatement") {
-                return;
-            }
-
-            // arrow functions don't always have blocks and implicitly return
-            if (closestBlock.type === "ArrowFunctionExpression") {
-                return;
-            }
-
-            // block statements are part of functions and most if statements
-            if (closestBlock.type === "BlockStatement") {
-
-                // find the last item in the block
-                lastItem = closestBlock.body[closestBlock.body.length - 1];
-
-                // if the callback is the last thing in a block that might be ok
-                if (isCallbackExpression(node, lastItem)) {
-
-                    parentType = closestBlock.parent.type;
-
-                    // but only if the block is part of a function
-                    if (parentType === "FunctionExpression" ||
-                        parentType === "FunctionDeclaration" ||
-                        parentType === "ArrowFunctionExpression"
-                    ) {
-                        return;
-                    }
-
-                }
-
-                // ending a block with a return is also ok
-                if (lastItem.type === "ReturnStatement") {
-
-                    // but only if the callback is immediately before
-                    if (isCallbackExpression(node, closestBlock.body[closestBlock.body.length - 2])) {
-                        return;
-                    }
-                }
-
-            }
-
-            // as long as you're the child of a function at this point you should be asked to return
-            if (findClosestParentOfType(node, ["FunctionDeclaration", "FunctionExpression", "ArrowFunctionExpression"])) {
-                context.report(node, "Expected return with your callback function.");
-            }
-
-        }
-
-    };
 };
-
-module.exports.schema = [{
-    type: "array",
-    items: { type: "string" }
-}];
 
 },{}],176:[function(require,module,exports){
 /**
@@ -42324,119 +42415,129 @@ module.exports.schema = [{
 // Rule Definition
 //------------------------------------------------------------------------------
 
-module.exports = function(context) {
-
-    //--------------------------------------------------------------------------
-    // Helpers
-    //--------------------------------------------------------------------------
-
-    // contains reported nodes to avoid reporting twice on destructuring with shorthand notation
-    var reported = [];
-
-    /**
-     * Checks if a string contains an underscore and isn't all upper-case
-     * @param {String} name The string to check.
-     * @returns {boolean} if the string is underscored
-     * @private
-     */
-    function isUnderscored(name) {
-
-        // if there's an underscore, it might be A_CONSTANT, which is okay
-        return name.indexOf("_") > -1 && name !== name.toUpperCase();
-    }
-
-    /**
-     * Reports an AST node as a rule violation.
-     * @param {ASTNode} node The node to report.
-     * @returns {void}
-     * @private
-     */
-    function report(node) {
-        if (reported.indexOf(node) < 0) {
-            reported.push(node);
-            context.report(node, "Identifier '{{name}}' is not in camel case.", { name: node.name });
-        }
-    }
-
-    var options = context.options[0] || {},
-        properties = options.properties || "";
-
-    if (properties !== "always" && properties !== "never") {
-        properties = "always";
-    }
-
-    return {
-
-        "Identifier": function(node) {
-
-            /*
-             * Leading and trailing underscores are commonly used to flag
-             * private/protected identifiers, strip them
-             */
-            var name = node.name.replace(/^_+|_+$/g, ""),
-                effectiveParent = (node.parent.type === "MemberExpression") ? node.parent.parent : node.parent;
-
-            // MemberExpressions get special rules
-            if (node.parent.type === "MemberExpression") {
-
-                // "never" check properties
-                if (properties === "never") {
-                    return;
-                }
-
-                // Always report underscored object names
-                if (node.parent.object.type === "Identifier" &&
-                        node.parent.object.name === node.name &&
-                        isUnderscored(name)) {
-                    report(node);
-
-                // Report AssignmentExpressions only if they are the left side of the assignment
-                } else if (effectiveParent.type === "AssignmentExpression" &&
-                        isUnderscored(name) &&
-                        (effectiveParent.right.type !== "MemberExpression" ||
-                        effectiveParent.left.type === "MemberExpression" &&
-                        effectiveParent.left.property.name === node.name)) {
-                    report(node);
-                }
-
-            // Properties have their own rules
-            } else if (node.parent.type === "Property") {
-
-                // "never" check properties
-                if (properties === "never") {
-                    return;
-                }
-
-                if (node.parent.parent && node.parent.parent.type === "ObjectPattern" &&
-                        node.parent.key === node && node.parent.value !== node) {
-                    return;
-                }
-
-                if (isUnderscored(name) && effectiveParent.type !== "CallExpression") {
-                    report(node);
-                }
-
-            // Report anything that is underscored that isn't a CallExpression
-            } else if (isUnderscored(name) && effectiveParent.type !== "CallExpression") {
-                report(node);
-            }
-        }
-
-    };
-
-};
-
-module.exports.schema = [
-    {
-        "type": "object",
-        "properties": {
-            "properties": {
-                "enum": ["always", "never"]
-            }
+module.exports = {
+    meta: {
+        docs: {
+            description: "enforce camelcase naming convention",
+            category: "Stylistic Issues",
+            recommended: false
         },
-        "additionalProperties": false
+
+        schema: [
+            {
+                "type": "object",
+                "properties": {
+                    "properties": {
+                        "enum": ["always", "never"]
+                    }
+                },
+                "additionalProperties": false
+            }
+        ]
+    },
+
+    create: function(context) {
+
+        //--------------------------------------------------------------------------
+        // Helpers
+        //--------------------------------------------------------------------------
+
+        // contains reported nodes to avoid reporting twice on destructuring with shorthand notation
+        var reported = [];
+
+        /**
+         * Checks if a string contains an underscore and isn't all upper-case
+         * @param {String} name The string to check.
+         * @returns {boolean} if the string is underscored
+         * @private
+         */
+        function isUnderscored(name) {
+
+            // if there's an underscore, it might be A_CONSTANT, which is okay
+            return name.indexOf("_") > -1 && name !== name.toUpperCase();
+        }
+
+        /**
+         * Reports an AST node as a rule violation.
+         * @param {ASTNode} node The node to report.
+         * @returns {void}
+         * @private
+         */
+        function report(node) {
+            if (reported.indexOf(node) < 0) {
+                reported.push(node);
+                context.report(node, "Identifier '{{name}}' is not in camel case.", { name: node.name });
+            }
+        }
+
+        var options = context.options[0] || {},
+            properties = options.properties || "";
+
+        if (properties !== "always" && properties !== "never") {
+            properties = "always";
+        }
+
+        return {
+
+            "Identifier": function(node) {
+
+                /*
+                 * Leading and trailing underscores are commonly used to flag
+                 * private/protected identifiers, strip them
+                 */
+                var name = node.name.replace(/^_+|_+$/g, ""),
+                    effectiveParent = (node.parent.type === "MemberExpression") ? node.parent.parent : node.parent;
+
+                // MemberExpressions get special rules
+                if (node.parent.type === "MemberExpression") {
+
+                    // "never" check properties
+                    if (properties === "never") {
+                        return;
+                    }
+
+                    // Always report underscored object names
+                    if (node.parent.object.type === "Identifier" &&
+                            node.parent.object.name === node.name &&
+                            isUnderscored(name)) {
+                        report(node);
+
+                    // Report AssignmentExpressions only if they are the left side of the assignment
+                    } else if (effectiveParent.type === "AssignmentExpression" &&
+                            isUnderscored(name) &&
+                            (effectiveParent.right.type !== "MemberExpression" ||
+                            effectiveParent.left.type === "MemberExpression" &&
+                            effectiveParent.left.property.name === node.name)) {
+                        report(node);
+                    }
+
+                // Properties have their own rules
+                } else if (node.parent.type === "Property") {
+
+                    // "never" check properties
+                    if (properties === "never") {
+                        return;
+                    }
+
+                    if (node.parent.parent && node.parent.parent.type === "ObjectPattern" &&
+                            node.parent.key === node && node.parent.value !== node) {
+                        return;
+                    }
+
+                    if (isUnderscored(name) && effectiveParent.type !== "CallExpression") {
+                        report(node);
+                    }
+
+                // Report anything that is underscored that isn't a CallExpression
+                } else if (isUnderscored(name) && effectiveParent.type !== "CallExpression") {
+                    report(node);
+                }
+            }
+
+        };
+
     }
-];
+};
 
 },{}],177:[function(require,module,exports){
 /**
@@ -42491,180 +42592,190 @@ function isTrailingCommaAllowed(node, lastItem) {
 // Rule Definition
 //------------------------------------------------------------------------------
 
-module.exports = function(context) {
-    var mode = context.options[0];
-    var UNEXPECTED_MESSAGE = "Unexpected trailing comma.";
-    var MISSING_MESSAGE = "Missing trailing comma.";
+module.exports = {
+    meta: {
+        docs: {
+            description: "require or disallow trailing commas",
+            category: "Possible Errors",
+            recommended: true
+        },
 
-    /**
-     * Checks whether or not a given node is multiline.
-     * This rule handles a given node as multiline when the closing parenthesis
-     * and the last element are not on the same line.
-     *
-     * @param {ASTNode} node - A node to check.
-     * @returns {boolean} `true` if the node is multiline.
-     */
-    function isMultiline(node) {
-        var lastItem = lodash.last(node.properties || node.elements || node.specifiers);
+        schema: [
+            {
+                "enum": ["always", "always-multiline", "only-multiline", "never"]
+            }
+        ]
+    },
 
-        if (!lastItem) {
-            return false;
+    create: function(context) {
+        var mode = context.options[0];
+        var UNEXPECTED_MESSAGE = "Unexpected trailing comma.";
+        var MISSING_MESSAGE = "Missing trailing comma.";
+
+        /**
+         * Checks whether or not a given node is multiline.
+         * This rule handles a given node as multiline when the closing parenthesis
+         * and the last element are not on the same line.
+         *
+         * @param {ASTNode} node - A node to check.
+         * @returns {boolean} `true` if the node is multiline.
+         */
+        function isMultiline(node) {
+            var lastItem = lodash.last(node.properties || node.elements || node.specifiers);
+
+            if (!lastItem) {
+                return false;
+            }
+
+            var sourceCode = context.getSourceCode(),
+                penultimateToken = sourceCode.getLastToken(lastItem),
+                lastToken = sourceCode.getTokenAfter(penultimateToken);
+
+            // parentheses are a pain
+            while (lastToken.value === ")") {
+                penultimateToken = lastToken;
+                lastToken = sourceCode.getTokenAfter(lastToken);
+            }
+
+            if (lastToken.value === ",") {
+                penultimateToken = lastToken;
+                lastToken = sourceCode.getTokenAfter(lastToken);
+            }
+
+            return lastToken.loc.end.line !== penultimateToken.loc.end.line;
         }
 
-        var sourceCode = context.getSourceCode(),
-            penultimateToken = sourceCode.getLastToken(lastItem),
-            lastToken = sourceCode.getTokenAfter(penultimateToken);
+        /**
+         * Reports a trailing comma if it exists.
+         *
+         * @param {ASTNode} node - A node to check. Its type is one of
+         *   ObjectExpression, ObjectPattern, ArrayExpression, ArrayPattern,
+         *   ImportDeclaration, and ExportNamedDeclaration.
+         * @returns {void}
+         */
+        function forbidTrailingComma(node) {
+            var lastItem = lodash.last(node.properties || node.elements || node.specifiers);
 
-        // parentheses are a pain
-        while (lastToken.value === ")") {
-            penultimateToken = lastToken;
-            lastToken = sourceCode.getTokenAfter(lastToken);
+            if (!lastItem || (node.type === "ImportDeclaration" && lastItem.type !== "ImportSpecifier")) {
+                return;
+            }
+
+            var sourceCode = context.getSourceCode(),
+                trailingToken;
+
+            // last item can be surrounded by parentheses for object and array literals
+            if (node.type === "ObjectExpression" || node.type === "ArrayExpression") {
+                trailingToken = sourceCode.getTokenBefore(sourceCode.getLastToken(node));
+            } else {
+                trailingToken = sourceCode.getTokenAfter(lastItem);
+            }
+
+            if (trailingToken.value === ",") {
+                context.report(
+                    lastItem,
+                    trailingToken.loc.start,
+                    UNEXPECTED_MESSAGE);
+            }
         }
 
-        if (lastToken.value === ",") {
-            penultimateToken = lastToken;
-            lastToken = sourceCode.getTokenAfter(lastToken);
+        /**
+         * Reports the last element of a given node if it does not have a trailing
+         * comma.
+         *
+         * If a given node is `ArrayPattern` which has `RestElement`, the trailing
+         * comma is disallowed, so report if it exists.
+         *
+         * @param {ASTNode} node - A node to check. Its type is one of
+         *   ObjectExpression, ObjectPattern, ArrayExpression, ArrayPattern,
+         *   ImportDeclaration, and ExportNamedDeclaration.
+         * @returns {void}
+         */
+        function forceTrailingComma(node) {
+            var lastItem = lodash.last(node.properties || node.elements || node.specifiers);
+
+            if (!lastItem || (node.type === "ImportDeclaration" && lastItem.type !== "ImportSpecifier")) {
+                return;
+            }
+            if (!isTrailingCommaAllowed(node, lastItem)) {
+                forbidTrailingComma(node);
+                return;
+            }
+
+            var sourceCode = context.getSourceCode(),
+                trailingToken;
+
+            // last item can be surrounded by parentheses for object and array literals
+            if (node.type === "ObjectExpression" || node.type === "ArrayExpression") {
+                trailingToken = sourceCode.getTokenBefore(sourceCode.getLastToken(node));
+            } else {
+                trailingToken = sourceCode.getTokenAfter(lastItem);
+            }
+
+            if (trailingToken.value !== ",") {
+                context.report(
+                    lastItem,
+                    lastItem.loc.end,
+                    MISSING_MESSAGE);
+            }
         }
 
-        return lastToken.loc.end.line !== penultimateToken.loc.end.line;
-    }
-
-    /**
-     * Reports a trailing comma if it exists.
-     *
-     * @param {ASTNode} node - A node to check. Its type is one of
-     *   ObjectExpression, ObjectPattern, ArrayExpression, ArrayPattern,
-     *   ImportDeclaration, and ExportNamedDeclaration.
-     * @returns {void}
-     */
-    function forbidTrailingComma(node) {
-        var lastItem = lodash.last(node.properties || node.elements || node.specifiers);
-
-        if (!lastItem || (node.type === "ImportDeclaration" && lastItem.type !== "ImportSpecifier")) {
-            return;
+        /**
+         * If a given node is multiline, reports the last element of a given node
+         * when it does not have a trailing comma.
+         * Otherwise, reports a trailing comma if it exists.
+         *
+         * @param {ASTNode} node - A node to check. Its type is one of
+         *   ObjectExpression, ObjectPattern, ArrayExpression, ArrayPattern,
+         *   ImportDeclaration, and ExportNamedDeclaration.
+         * @returns {void}
+         */
+        function forceTrailingCommaIfMultiline(node) {
+            if (isMultiline(node)) {
+                forceTrailingComma(node);
+            } else {
+                forbidTrailingComma(node);
+            }
         }
 
-        var sourceCode = context.getSourceCode(),
-            trailingToken;
+        /**
+         * Only if a given node is not multiline, reports the last element of a given node
+         * when it does not have a trailing comma.
+         * Otherwise, reports a trailing comma if it exists.
+         *
+         * @param {ASTNode} node - A node to check. Its type is one of
+         *   ObjectExpression, ObjectPattern, ArrayExpression, ArrayPattern,
+         *   ImportDeclaration, and ExportNamedDeclaration.
+         * @returns {void}
+         */
+        function allowTrailingCommaIfMultiline(node) {
+            if (!isMultiline(node)) {
+                forbidTrailingComma(node);
+            }
+        }
 
-        // last item can be surrounded by parentheses for object and array literals
-        if (node.type === "ObjectExpression" || node.type === "ArrayExpression") {
-            trailingToken = sourceCode.getTokenBefore(sourceCode.getLastToken(node));
+        // Chooses a checking function.
+        var checkForTrailingComma;
+
+        if (mode === "always") {
+            checkForTrailingComma = forceTrailingComma;
+        } else if (mode === "always-multiline") {
+            checkForTrailingComma = forceTrailingCommaIfMultiline;
+        } else if (mode === "only-multiline") {
+            checkForTrailingComma = allowTrailingCommaIfMultiline;
         } else {
-            trailingToken = sourceCode.getTokenAfter(lastItem);
+            checkForTrailingComma = forbidTrailingComma;
         }
 
-        if (trailingToken.value === ",") {
-            context.report(
-                lastItem,
-                trailingToken.loc.start,
-                UNEXPECTED_MESSAGE);
-        }
+        return {
+            "ObjectExpression": checkForTrailingComma,
+            "ObjectPattern": checkForTrailingComma,
+            "ArrayExpression": checkForTrailingComma,
+            "ArrayPattern": checkForTrailingComma,
+            "ImportDeclaration": checkForTrailingComma,
+            "ExportNamedDeclaration": checkForTrailingComma
+        };
     }
-
-    /**
-     * Reports the last element of a given node if it does not have a trailing
-     * comma.
-     *
-     * If a given node is `ArrayPattern` which has `RestElement`, the trailing
-     * comma is disallowed, so report if it exists.
-     *
-     * @param {ASTNode} node - A node to check. Its type is one of
-     *   ObjectExpression, ObjectPattern, ArrayExpression, ArrayPattern,
-     *   ImportDeclaration, and ExportNamedDeclaration.
-     * @returns {void}
-     */
-    function forceTrailingComma(node) {
-        var lastItem = lodash.last(node.properties || node.elements || node.specifiers);
-
-        if (!lastItem || (node.type === "ImportDeclaration" && lastItem.type !== "ImportSpecifier")) {
-            return;
-        }
-        if (!isTrailingCommaAllowed(node, lastItem)) {
-            forbidTrailingComma(node);
-            return;
-        }
-
-        var sourceCode = context.getSourceCode(),
-            trailingToken;
-
-        // last item can be surrounded by parentheses for object and array literals
-        if (node.type === "ObjectExpression" || node.type === "ArrayExpression") {
-            trailingToken = sourceCode.getTokenBefore(sourceCode.getLastToken(node));
-        } else {
-            trailingToken = sourceCode.getTokenAfter(lastItem);
-        }
-
-        if (trailingToken.value !== ",") {
-            context.report(
-                lastItem,
-                lastItem.loc.end,
-                MISSING_MESSAGE);
-        }
-    }
-
-    /**
-     * If a given node is multiline, reports the last element of a given node
-     * when it does not have a trailing comma.
-     * Otherwise, reports a trailing comma if it exists.
-     *
-     * @param {ASTNode} node - A node to check. Its type is one of
-     *   ObjectExpression, ObjectPattern, ArrayExpression, ArrayPattern,
-     *   ImportDeclaration, and ExportNamedDeclaration.
-     * @returns {void}
-     */
-    function forceTrailingCommaIfMultiline(node) {
-        if (isMultiline(node)) {
-            forceTrailingComma(node);
-        } else {
-            forbidTrailingComma(node);
-        }
-    }
-
-    /**
-     * Only if a given node is not multiline, reports the last element of a given node
-     * when it does not have a trailing comma.
-     * Otherwise, reports a trailing comma if it exists.
-     *
-     * @param {ASTNode} node - A node to check. Its type is one of
-     *   ObjectExpression, ObjectPattern, ArrayExpression, ArrayPattern,
-     *   ImportDeclaration, and ExportNamedDeclaration.
-     * @returns {void}
-     */
-    function allowTrailingCommaIfMultiline(node) {
-        if (!isMultiline(node)) {
-            forbidTrailingComma(node);
-        }
-    }
-
-    // Chooses a checking function.
-    var checkForTrailingComma;
-
-    if (mode === "always") {
-        checkForTrailingComma = forceTrailingComma;
-    } else if (mode === "always-multiline") {
-        checkForTrailingComma = forceTrailingCommaIfMultiline;
-    } else if (mode === "only-multiline") {
-        checkForTrailingComma = allowTrailingCommaIfMultiline;
-    } else {
-        checkForTrailingComma = forbidTrailingComma;
-    }
-
-    return {
-        "ObjectExpression": checkForTrailingComma,
-        "ObjectPattern": checkForTrailingComma,
-        "ArrayExpression": checkForTrailingComma,
-        "ArrayPattern": checkForTrailingComma,
-        "ImportDeclaration": checkForTrailingComma,
-        "ExportNamedDeclaration": checkForTrailingComma
-    };
 };
-
-module.exports.schema = [
-    {
-        "enum": ["always", "always-multiline", "only-multiline", "never"]
-    }
-];
 
 },{"lodash":150}],178:[function(require,module,exports){
 /**
@@ -42680,176 +42791,188 @@ var astUtils = require("../ast-utils");
 // Rule Definition
 //------------------------------------------------------------------------------
 
-module.exports = function(context) {
+module.exports = {
+    meta: {
+        docs: {
+            description: "enforce consistent spacing before and after commas",
+            category: "Stylistic Issues",
+            recommended: false
+        },
 
-    var sourceCode = context.getSourceCode();
-    var tokensAndComments = sourceCode.tokensAndComments;
+        fixable: "whitespace",
 
-    var options = {
-        before: context.options[0] ? !!context.options[0].before : false,
-        after: context.options[0] ? !!context.options[0].after : true
-    };
+        schema: [
+            {
+                "type": "object",
+                "properties": {
+                    "before": {
+                        "type": "boolean"
+                    },
+                    "after": {
+                        "type": "boolean"
+                    }
+                },
+                "additionalProperties": false
+            }
+        ]
+    },
 
-    //--------------------------------------------------------------------------
-    // Helpers
-    //--------------------------------------------------------------------------
+    create: function(context) {
 
-    // list of comma tokens to ignore for the check of leading whitespace
-    var commaTokensToIgnore = [];
+        var sourceCode = context.getSourceCode();
+        var tokensAndComments = sourceCode.tokensAndComments;
 
-    /**
-     * Determines if a given token is a comma operator.
-     * @param {ASTNode} token The token to check.
-     * @returns {boolean} True if the token is a comma, false if not.
-     * @private
-     */
-    function isComma(token) {
-        return !!token && (token.type === "Punctuator") && (token.value === ",");
-    }
+        var options = {
+            before: context.options[0] ? !!context.options[0].before : false,
+            after: context.options[0] ? !!context.options[0].after : true
+        };
 
-    /**
-     * Reports a spacing error with an appropriate message.
-     * @param {ASTNode} node The binary expression node to report.
-     * @param {string} dir Is the error "before" or "after" the comma?
-     * @param {ASTNode} otherNode The node at the left or right of `node`
-     * @returns {void}
-     * @private
-     */
-    function report(node, dir, otherNode) {
-        context.report({
-            node: node,
-            fix: function(fixer) {
-                if (options[dir]) {
-                    if (dir === "before") {
-                        return fixer.insertTextBefore(node, " ");
+        //--------------------------------------------------------------------------
+        // Helpers
+        //--------------------------------------------------------------------------
+
+        // list of comma tokens to ignore for the check of leading whitespace
+        var commaTokensToIgnore = [];
+
+        /**
+         * Determines if a given token is a comma operator.
+         * @param {ASTNode} token The token to check.
+         * @returns {boolean} True if the token is a comma, false if not.
+         * @private
+         */
+        function isComma(token) {
+            return !!token && (token.type === "Punctuator") && (token.value === ",");
+        }
+
+        /**
+         * Reports a spacing error with an appropriate message.
+         * @param {ASTNode} node The binary expression node to report.
+         * @param {string} dir Is the error "before" or "after" the comma?
+         * @param {ASTNode} otherNode The node at the left or right of `node`
+         * @returns {void}
+         * @private
+         */
+        function report(node, dir, otherNode) {
+            context.report({
+                node: node,
+                fix: function(fixer) {
+                    if (options[dir]) {
+                        if (dir === "before") {
+                            return fixer.insertTextBefore(node, " ");
+                        } else {
+                            return fixer.insertTextAfter(node, " ");
+                        }
                     } else {
-                        return fixer.insertTextAfter(node, " ");
+                        var start, end;
+                        var newText = "";
+
+                        if (dir === "before") {
+                            start = otherNode.range[1];
+                            end = node.range[0];
+                        } else {
+                            start = node.range[1];
+                            end = otherNode.range[0];
+                        }
+
+                        return fixer.replaceTextRange([start, end], newText);
+                    }
+                },
+                message: options[dir] ?
+                  "A space is required " + dir + " ','." :
+                  "There should be no space " + dir + " ','."
+            });
+        }
+
+        /**
+         * Validates the spacing around a comma token.
+         * @param {Object} tokens - The tokens to be validated.
+         * @param {Token} tokens.comma The token representing the comma.
+         * @param {Token} [tokens.left] The last token before the comma.
+         * @param {Token} [tokens.right] The first token after the comma.
+         * @param {Token|ASTNode} reportItem The item to use when reporting an error.
+         * @returns {void}
+         * @private
+         */
+        function validateCommaItemSpacing(tokens, reportItem) {
+            if (tokens.left && astUtils.isTokenOnSameLine(tokens.left, tokens.comma) &&
+                    (options.before !== sourceCode.isSpaceBetweenTokens(tokens.left, tokens.comma))
+            ) {
+                report(reportItem, "before", tokens.left);
+            }
+
+            if (tokens.right && !options.after && tokens.right.type === "Line") {
+                return;
+            }
+
+            if (tokens.right && astUtils.isTokenOnSameLine(tokens.comma, tokens.right) &&
+                    (options.after !== sourceCode.isSpaceBetweenTokens(tokens.comma, tokens.right))
+            ) {
+                report(reportItem, "after", tokens.right);
+            }
+        }
+
+        /**
+         * Adds null elements of the given ArrayExpression or ArrayPattern node to the ignore list.
+         * @param {ASTNode} node An ArrayExpression or ArrayPattern node.
+         * @returns {void}
+         */
+        function addNullElementsToIgnoreList(node) {
+            var previousToken = context.getFirstToken(node);
+
+            node.elements.forEach(function(element) {
+                var token;
+
+                if (element === null) {
+                    token = context.getTokenAfter(previousToken);
+
+                    if (isComma(token)) {
+                        commaTokensToIgnore.push(token);
                     }
                 } else {
-                    var start, end;
-                    var newText = "";
+                    token = context.getTokenAfter(element);
+                }
 
-                    if (dir === "before") {
-                        start = otherNode.range[1];
-                        end = node.range[0];
-                    } else {
-                        start = node.range[1];
-                        end = otherNode.range[0];
+                previousToken = token;
+            });
+        }
+
+        //--------------------------------------------------------------------------
+        // Public
+        //--------------------------------------------------------------------------
+
+        return {
+            "Program:exit": function() {
+
+                var previousToken,
+                    nextToken;
+
+                tokensAndComments.forEach(function(token, i) {
+
+                    if (!isComma(token)) {
+                        return;
                     }
 
-                    return fixer.replaceTextRange([start, end], newText);
-                }
+                    if (token && token.type === "JSXText") {
+                        return;
+                    }
+
+                    previousToken = tokensAndComments[i - 1];
+                    nextToken = tokensAndComments[i + 1];
+
+                    validateCommaItemSpacing({
+                        comma: token,
+                        left: isComma(previousToken) || commaTokensToIgnore.indexOf(token) > -1 ? null : previousToken,
+                        right: isComma(nextToken) ? null : nextToken
+                    }, token);
+                });
             },
-            message: options[dir] ?
-              "A space is required " + dir + " ','." :
-              "There should be no space " + dir + " ','."
-        });
+            "ArrayExpression": addNullElementsToIgnoreList,
+            "ArrayPattern": addNullElementsToIgnoreList
+
+        };
+
     }
-
-    /**
-     * Validates the spacing around a comma token.
-     * @param {Object} tokens - The tokens to be validated.
-     * @param {Token} tokens.comma The token representing the comma.
-     * @param {Token} [tokens.left] The last token before the comma.
-     * @param {Token} [tokens.right] The first token after the comma.
-     * @param {Token|ASTNode} reportItem The item to use when reporting an error.
-     * @returns {void}
-     * @private
-     */
-    function validateCommaItemSpacing(tokens, reportItem) {
-        if (tokens.left && astUtils.isTokenOnSameLine(tokens.left, tokens.comma) &&
-                (options.before !== sourceCode.isSpaceBetweenTokens(tokens.left, tokens.comma))
-        ) {
-            report(reportItem, "before", tokens.left);
-        }
-
-        if (tokens.right && !options.after && tokens.right.type === "Line") {
-            return;
-        }
-
-        if (tokens.right && astUtils.isTokenOnSameLine(tokens.comma, tokens.right) &&
-                (options.after !== sourceCode.isSpaceBetweenTokens(tokens.comma, tokens.right))
-        ) {
-            report(reportItem, "after", tokens.right);
-        }
-    }
-
-    /**
-     * Adds null elements of the given ArrayExpression or ArrayPattern node to the ignore list.
-     * @param {ASTNode} node An ArrayExpression or ArrayPattern node.
-     * @returns {void}
-     */
-    function addNullElementsToIgnoreList(node) {
-        var previousToken = context.getFirstToken(node);
-
-        node.elements.forEach(function(element) {
-            var token;
-
-            if (element === null) {
-                token = context.getTokenAfter(previousToken);
-
-                if (isComma(token)) {
-                    commaTokensToIgnore.push(token);
-                }
-            } else {
-                token = context.getTokenAfter(element);
-            }
-
-            previousToken = token;
-        });
-    }
-
-    //--------------------------------------------------------------------------
-    // Public
-    //--------------------------------------------------------------------------
-
-    return {
-        "Program:exit": function() {
-
-            var previousToken,
-                nextToken;
-
-            tokensAndComments.forEach(function(token, i) {
-
-                if (!isComma(token)) {
-                    return;
-                }
-
-                if (token && token.type === "JSXText") {
-                    return;
-                }
-
-                previousToken = tokensAndComments[i - 1];
-                nextToken = tokensAndComments[i + 1];
-
-                validateCommaItemSpacing({
-                    comma: token,
-                    left: isComma(previousToken) || commaTokensToIgnore.indexOf(token) > -1 ? null : previousToken,
-                    right: isComma(nextToken) ? null : nextToken
-                }, token);
-            });
-        },
-        "ArrayExpression": addNullElementsToIgnoreList,
-        "ArrayPattern": addNullElementsToIgnoreList
-
-    };
-
 };
-
-module.exports.schema = [
-    {
-        "type": "object",
-        "properties": {
-            "before": {
-                "type": "boolean"
-            },
-            "after": {
-                "type": "boolean"
-            }
-        },
-        "additionalProperties": false
-    }
-];
 
 },{"../ast-utils":151}],179:[function(require,module,exports){
 /**
@@ -42867,177 +42990,187 @@ var astUtils = require("../ast-utils");
 // Rule Definition
 //------------------------------------------------------------------------------
 
-module.exports = function(context) {
+module.exports = {
+    meta: {
+        docs: {
+            description: "enforce consistent comma style",
+            category: "Stylistic Issues",
+            recommended: false
+        },
 
-    var style = context.options[0] || "last",
-        exceptions = {};
+        schema: [
+            {
+                "enum": ["first", "last"]
+            },
+            {
+                "type": "object",
+                "properties": {
+                    "exceptions": {
+                        "type": "object",
+                        "additionalProperties": {
+                            "type": "boolean"
+                        }
+                    }
+                },
+                "additionalProperties": false
+            }
+        ]
+    },
 
-    if (context.options.length === 2 && context.options[1].hasOwnProperty("exceptions")) {
-        exceptions = context.options[1].exceptions;
-    }
+    create: function(context) {
 
-    //--------------------------------------------------------------------------
-    // Helpers
-    //--------------------------------------------------------------------------
+        var style = context.options[0] || "last",
+            exceptions = {};
 
-    /**
-     * Determines if a given token is a comma operator.
-     * @param {ASTNode} token The token to check.
-     * @returns {boolean} True if the token is a comma, false if not.
-     * @private
-     */
-    function isComma(token) {
-        return !!token && (token.type === "Punctuator") && (token.value === ",");
-    }
-
-    /**
-     * Validates the spacing around single items in lists.
-     * @param {Token} previousItemToken The last token from the previous item.
-     * @param {Token} commaToken The token representing the comma.
-     * @param {Token} currentItemToken The first token of the current item.
-     * @param {Token} reportItem The item to use when reporting an error.
-     * @returns {void}
-     * @private
-     */
-    function validateCommaItemSpacing(previousItemToken, commaToken, currentItemToken, reportItem) {
-
-        // if single line
-        if (astUtils.isTokenOnSameLine(commaToken, currentItemToken) &&
-                astUtils.isTokenOnSameLine(previousItemToken, commaToken)) {
-
-            return;
-
-        } else if (!astUtils.isTokenOnSameLine(commaToken, currentItemToken) &&
-                !astUtils.isTokenOnSameLine(previousItemToken, commaToken)) {
-
-            // lone comma
-            context.report(reportItem, {
-                line: commaToken.loc.end.line,
-                column: commaToken.loc.start.column
-            }, "Bad line breaking before and after ','.");
-
-        } else if (style === "first" && !astUtils.isTokenOnSameLine(commaToken, currentItemToken)) {
-
-            context.report(reportItem, "',' should be placed first.");
-
-        } else if (style === "last" && astUtils.isTokenOnSameLine(commaToken, currentItemToken)) {
-
-            context.report(reportItem, {
-                line: commaToken.loc.end.line,
-                column: commaToken.loc.end.column
-            }, "',' should be placed last.");
+        if (context.options.length === 2 && context.options[1].hasOwnProperty("exceptions")) {
+            exceptions = context.options[1].exceptions;
         }
-    }
 
-    /**
-     * Checks the comma placement with regards to a declaration/property/element
-     * @param {ASTNode} node The binary expression node to check
-     * @param {string} property The property of the node containing child nodes.
-     * @private
-     * @returns {void}
-     */
-    function validateComma(node, property) {
-        var items = node[property],
-            arrayLiteral = (node.type === "ArrayExpression"),
-            previousItemToken;
+        //--------------------------------------------------------------------------
+        // Helpers
+        //--------------------------------------------------------------------------
 
-        if (items.length > 1 || arrayLiteral) {
+        /**
+         * Determines if a given token is a comma operator.
+         * @param {ASTNode} token The token to check.
+         * @returns {boolean} True if the token is a comma, false if not.
+         * @private
+         */
+        function isComma(token) {
+            return !!token && (token.type === "Punctuator") && (token.value === ",");
+        }
 
-            // seed as opening [
-            previousItemToken = context.getFirstToken(node);
+        /**
+         * Validates the spacing around single items in lists.
+         * @param {Token} previousItemToken The last token from the previous item.
+         * @param {Token} commaToken The token representing the comma.
+         * @param {Token} currentItemToken The first token of the current item.
+         * @param {Token} reportItem The item to use when reporting an error.
+         * @returns {void}
+         * @private
+         */
+        function validateCommaItemSpacing(previousItemToken, commaToken, currentItemToken, reportItem) {
 
-            items.forEach(function(item) {
-                var commaToken = item ? context.getTokenBefore(item) : previousItemToken,
-                    currentItemToken = item ? context.getFirstToken(item) : context.getTokenAfter(commaToken),
-                    reportItem = item || currentItemToken;
+            // if single line
+            if (astUtils.isTokenOnSameLine(commaToken, currentItemToken) &&
+                    astUtils.isTokenOnSameLine(previousItemToken, commaToken)) {
+
+                return;
+
+            } else if (!astUtils.isTokenOnSameLine(commaToken, currentItemToken) &&
+                    !astUtils.isTokenOnSameLine(previousItemToken, commaToken)) {
+
+                // lone comma
+                context.report(reportItem, {
+                    line: commaToken.loc.end.line,
+                    column: commaToken.loc.start.column
+                }, "Bad line breaking before and after ','.");
+
+            } else if (style === "first" && !astUtils.isTokenOnSameLine(commaToken, currentItemToken)) {
+
+                context.report(reportItem, "',' should be placed first.");
+
+            } else if (style === "last" && astUtils.isTokenOnSameLine(commaToken, currentItemToken)) {
+
+                context.report(reportItem, {
+                    line: commaToken.loc.end.line,
+                    column: commaToken.loc.end.column
+                }, "',' should be placed last.");
+            }
+        }
+
+        /**
+         * Checks the comma placement with regards to a declaration/property/element
+         * @param {ASTNode} node The binary expression node to check
+         * @param {string} property The property of the node containing child nodes.
+         * @private
+         * @returns {void}
+         */
+        function validateComma(node, property) {
+            var items = node[property],
+                arrayLiteral = (node.type === "ArrayExpression"),
+                previousItemToken;
+
+            if (items.length > 1 || arrayLiteral) {
+
+                // seed as opening [
+                previousItemToken = context.getFirstToken(node);
+
+                items.forEach(function(item) {
+                    var commaToken = item ? context.getTokenBefore(item) : previousItemToken,
+                        currentItemToken = item ? context.getFirstToken(item) : context.getTokenAfter(commaToken),
+                        reportItem = item || currentItemToken;
+
+                    /*
+                     * This works by comparing three token locations:
+                     * - previousItemToken is the last token of the previous item
+                     * - commaToken is the location of the comma before the current item
+                     * - currentItemToken is the first token of the current item
+                     *
+                     * These values get switched around if item is undefined.
+                     * previousItemToken will refer to the last token not belonging
+                     * to the current item, which could be a comma or an opening
+                     * square bracket. currentItemToken could be a comma.
+                     *
+                     * All comparisons are done based on these tokens directly, so
+                     * they are always valid regardless of an undefined item.
+                     */
+                    if (isComma(commaToken)) {
+                        validateCommaItemSpacing(previousItemToken, commaToken,
+                                currentItemToken, reportItem);
+                    }
+
+                    previousItemToken = item ? context.getLastToken(item) : previousItemToken;
+                });
 
                 /*
-                 * This works by comparing three token locations:
-                 * - previousItemToken is the last token of the previous item
-                 * - commaToken is the location of the comma before the current item
-                 * - currentItemToken is the first token of the current item
-                 *
-                 * These values get switched around if item is undefined.
-                 * previousItemToken will refer to the last token not belonging
-                 * to the current item, which could be a comma or an opening
-                 * square bracket. currentItemToken could be a comma.
-                 *
-                 * All comparisons are done based on these tokens directly, so
-                 * they are always valid regardless of an undefined item.
+                 * Special case for array literals that have empty last items, such
+                 * as [ 1, 2, ]. These arrays only have two items show up in the
+                 * AST, so we need to look at the token to verify that there's no
+                 * dangling comma.
                  */
-                if (isComma(commaToken)) {
-                    validateCommaItemSpacing(previousItemToken, commaToken,
-                            currentItemToken, reportItem);
-                }
+                if (arrayLiteral) {
 
-                previousItemToken = item ? context.getLastToken(item) : previousItemToken;
-            });
+                    var lastToken = context.getLastToken(node),
+                        nextToLastToken = context.getTokenBefore(lastToken);
 
-            /*
-             * Special case for array literals that have empty last items, such
-             * as [ 1, 2, ]. These arrays only have two items show up in the
-             * AST, so we need to look at the token to verify that there's no
-             * dangling comma.
-             */
-            if (arrayLiteral) {
-
-                var lastToken = context.getLastToken(node),
-                    nextToLastToken = context.getTokenBefore(lastToken);
-
-                if (isComma(nextToLastToken)) {
-                    validateCommaItemSpacing(
-                        context.getTokenBefore(nextToLastToken),
-                        nextToLastToken,
-                        lastToken,
-                        lastToken
-                    );
+                    if (isComma(nextToLastToken)) {
+                        validateCommaItemSpacing(
+                            context.getTokenBefore(nextToLastToken),
+                            nextToLastToken,
+                            lastToken,
+                            lastToken
+                        );
+                    }
                 }
             }
         }
-    }
 
-    //--------------------------------------------------------------------------
-    // Public
-    //--------------------------------------------------------------------------
+        //--------------------------------------------------------------------------
+        // Public
+        //--------------------------------------------------------------------------
 
-    var nodes = {};
+        var nodes = {};
 
-    if (!exceptions.VariableDeclaration) {
-        nodes.VariableDeclaration = function(node) {
-            validateComma(node, "declarations");
-        };
-    }
-    if (!exceptions.ObjectExpression) {
-        nodes.ObjectExpression = function(node) {
-            validateComma(node, "properties");
-        };
-    }
-    if (!exceptions.ArrayExpression) {
-        nodes.ArrayExpression = function(node) {
-            validateComma(node, "elements");
-        };
-    }
+        if (!exceptions.VariableDeclaration) {
+            nodes.VariableDeclaration = function(node) {
+                validateComma(node, "declarations");
+            };
+        }
+        if (!exceptions.ObjectExpression) {
+            nodes.ObjectExpression = function(node) {
+                validateComma(node, "properties");
+            };
+        }
+        if (!exceptions.ArrayExpression) {
+            nodes.ArrayExpression = function(node) {
+                validateComma(node, "elements");
+            };
+        }
 
-    return nodes;
+        return nodes;
+    }
 };
-
-module.exports.schema = [
-    {
-        "enum": ["first", "last"]
-    },
-    {
-        "type": "object",
-        "properties": {
-            "exceptions": {
-                "type": "object",
-                "additionalProperties": {
-                    "type": "boolean"
-                }
-            }
-        },
-        "additionalProperties": false
-    }
-];
 
 },{"../ast-utils":151}],180:[function(require,module,exports){
 /**
@@ -43052,146 +43185,156 @@ module.exports.schema = [
 // Rule Definition
 //------------------------------------------------------------------------------
 
-module.exports = function(context) {
-    var option = context.options[0],
-        THRESHOLD = 20;
+module.exports = {
+    meta: {
+        docs: {
+            description: "enforce a maximum cyclomatic complexity allowed in a program",
+            category: "Best Practices",
+            recommended: false
+        },
 
-    if (typeof option === "object" && option.hasOwnProperty("maximum") && typeof option.maximum === "number") {
-        THRESHOLD = option.maximum;
-    }
-    if (typeof option === "object" && option.hasOwnProperty("max") && typeof option.max === "number") {
-        THRESHOLD = option.max;
-    }
-    if (typeof option === "number") {
-        THRESHOLD = option;
-    }
-
-    //--------------------------------------------------------------------------
-    // Helpers
-    //--------------------------------------------------------------------------
-
-    // Using a stack to store complexity (handling nested functions)
-    var fns = [];
-
-    /**
-     * When parsing a new function, store it in our function stack
-     * @returns {void}
-     * @private
-     */
-    function startFunction() {
-        fns.push(1);
-    }
-
-    /**
-     * Evaluate the node at the end of function
-     * @param {ASTNode} node node to evaluate
-     * @returns {void}
-     * @private
-     */
-    function endFunction(node) {
-        var complexity = fns.pop(),
-            name = "anonymous";
-
-        if (node.id) {
-            name = node.id.name;
-        } else if (node.parent.type === "MethodDefinition" || node.parent.type === "Property") {
-            name = node.parent.key.name;
-        }
-
-        if (complexity > THRESHOLD) {
-            context.report(node, "Function '{{name}}' has a complexity of {{complexity}}.", { name: name, complexity: complexity });
-        }
-    }
-
-    /**
-     * Increase the complexity of the function in context
-     * @returns {void}
-     * @private
-     */
-    function increaseComplexity() {
-        if (fns.length) {
-            fns[fns.length - 1]++;
-        }
-    }
-
-    /**
-     * Increase the switch complexity in context
-     * @param {ASTNode} node node to evaluate
-     * @returns {void}
-     * @private
-     */
-    function increaseSwitchComplexity(node) {
-
-        // Avoiding `default`
-        if (node.test) {
-            increaseComplexity(node);
-        }
-    }
-
-    /**
-     * Increase the logical path complexity in context
-     * @param {ASTNode} node node to evaluate
-     * @returns {void}
-     * @private
-     */
-    function increaseLogicalComplexity(node) {
-
-        // Avoiding &&
-        if (node.operator === "||") {
-            increaseComplexity(node);
-        }
-    }
-
-    //--------------------------------------------------------------------------
-    // Public API
-    //--------------------------------------------------------------------------
-
-    return {
-        "FunctionDeclaration": startFunction,
-        "FunctionExpression": startFunction,
-        "ArrowFunctionExpression": startFunction,
-        "FunctionDeclaration:exit": endFunction,
-        "FunctionExpression:exit": endFunction,
-        "ArrowFunctionExpression:exit": endFunction,
-
-        "CatchClause": increaseComplexity,
-        "ConditionalExpression": increaseComplexity,
-        "LogicalExpression": increaseLogicalComplexity,
-        "ForStatement": increaseComplexity,
-        "ForInStatement": increaseComplexity,
-        "ForOfStatement": increaseComplexity,
-        "IfStatement": increaseComplexity,
-        "SwitchCase": increaseSwitchComplexity,
-        "WhileStatement": increaseComplexity,
-        "DoWhileStatement": increaseComplexity
-    };
-
-};
-
-module.exports.schema = [
-    {
-        "oneOf": [
+        schema: [
             {
-                "type": "integer",
-                "minimum": 0
-            },
-            {
-                "type": "object",
-                "properties": {
-                    "maximum": {
+                "oneOf": [
+                    {
                         "type": "integer",
                         "minimum": 0
                     },
-                    "max": {
-                        "type": "integer",
-                        "minimum": 0
+                    {
+                        "type": "object",
+                        "properties": {
+                            "maximum": {
+                                "type": "integer",
+                                "minimum": 0
+                            },
+                            "max": {
+                                "type": "integer",
+                                "minimum": 0
+                            }
+                        },
+                        "additionalProperties": false
                     }
-                },
-                "additionalProperties": false
+                ]
             }
         ]
+    },
+
+    create: function(context) {
+        var option = context.options[0],
+            THRESHOLD = 20;
+
+        if (typeof option === "object" && option.hasOwnProperty("maximum") && typeof option.maximum === "number") {
+            THRESHOLD = option.maximum;
+        }
+        if (typeof option === "object" && option.hasOwnProperty("max") && typeof option.max === "number") {
+            THRESHOLD = option.max;
+        }
+        if (typeof option === "number") {
+            THRESHOLD = option;
+        }
+
+        //--------------------------------------------------------------------------
+        // Helpers
+        //--------------------------------------------------------------------------
+
+        // Using a stack to store complexity (handling nested functions)
+        var fns = [];
+
+        /**
+         * When parsing a new function, store it in our function stack
+         * @returns {void}
+         * @private
+         */
+        function startFunction() {
+            fns.push(1);
+        }
+
+        /**
+         * Evaluate the node at the end of function
+         * @param {ASTNode} node node to evaluate
+         * @returns {void}
+         * @private
+         */
+        function endFunction(node) {
+            var complexity = fns.pop(),
+                name = "anonymous";
+
+            if (node.id) {
+                name = node.id.name;
+            } else if (node.parent.type === "MethodDefinition" || node.parent.type === "Property") {
+                name = node.parent.key.name;
+            }
+
+            if (complexity > THRESHOLD) {
+                context.report(node, "Function '{{name}}' has a complexity of {{complexity}}.", { name: name, complexity: complexity });
+            }
+        }
+
+        /**
+         * Increase the complexity of the function in context
+         * @returns {void}
+         * @private
+         */
+        function increaseComplexity() {
+            if (fns.length) {
+                fns[fns.length - 1]++;
+            }
+        }
+
+        /**
+         * Increase the switch complexity in context
+         * @param {ASTNode} node node to evaluate
+         * @returns {void}
+         * @private
+         */
+        function increaseSwitchComplexity(node) {
+
+            // Avoiding `default`
+            if (node.test) {
+                increaseComplexity(node);
+            }
+        }
+
+        /**
+         * Increase the logical path complexity in context
+         * @param {ASTNode} node node to evaluate
+         * @returns {void}
+         * @private
+         */
+        function increaseLogicalComplexity(node) {
+
+            // Avoiding &&
+            if (node.operator === "||") {
+                increaseComplexity(node);
+            }
+        }
+
+        //--------------------------------------------------------------------------
+        // Public API
+        //--------------------------------------------------------------------------
+
+        return {
+            "FunctionDeclaration": startFunction,
+            "FunctionExpression": startFunction,
+            "ArrowFunctionExpression": startFunction,
+            "FunctionDeclaration:exit": endFunction,
+            "FunctionExpression:exit": endFunction,
+            "ArrowFunctionExpression:exit": endFunction,
+
+            "CatchClause": increaseComplexity,
+            "ConditionalExpression": increaseComplexity,
+            "LogicalExpression": increaseLogicalComplexity,
+            "ForStatement": increaseComplexity,
+            "ForInStatement": increaseComplexity,
+            "ForOfStatement": increaseComplexity,
+            "IfStatement": increaseComplexity,
+            "SwitchCase": increaseSwitchComplexity,
+            "WhileStatement": increaseComplexity,
+            "DoWhileStatement": increaseComplexity
+        };
+
     }
-];
+};
 
 },{}],181:[function(require,module,exports){
 /**
@@ -43207,146 +43350,158 @@ var astUtils = require("../ast-utils");
 // Rule Definition
 //------------------------------------------------------------------------------
 
-module.exports = function(context) {
-    var sourceCode = context.getSourceCode();
-    var propertyNameMustBeSpaced = context.options[0] === "always"; // default is "never"
+module.exports = {
+    meta: {
+        docs: {
+            description: "enforce consistent spacing inside computed property brackets",
+            category: "Stylistic Issues",
+            recommended: false
+        },
 
-    //--------------------------------------------------------------------------
-    // Helpers
-    //--------------------------------------------------------------------------
+        fixable: "whitespace",
 
-    /**
-    * Reports that there shouldn't be a space after the first token
-    * @param {ASTNode} node - The node to report in the event of an error.
-    * @param {Token} token - The token to use for the report.
-    * @param {Token} tokenAfter - The token after `token`.
-    * @returns {void}
-    */
-    function reportNoBeginningSpace(node, token, tokenAfter) {
-        context.report({
-            node: node,
-            loc: token.loc.start,
-            message: "There should be no space after '" + token.value + "'",
-            fix: function(fixer) {
-                return fixer.removeRange([token.range[1], tokenAfter.range[0]]);
+        schema: [
+            {
+                "enum": ["always", "never"]
             }
-        });
-    }
+        ]
+    },
 
-    /**
-    * Reports that there shouldn't be a space before the last token
-    * @param {ASTNode} node - The node to report in the event of an error.
-    * @param {Token} token - The token to use for the report.
-    * @param {Token} tokenBefore - The token before `token`.
-    * @returns {void}
-    */
-    function reportNoEndingSpace(node, token, tokenBefore) {
-        context.report({
-            node: node,
-            loc: token.loc.start,
-            message: "There should be no space before '" + token.value + "'",
-            fix: function(fixer) {
-                return fixer.removeRange([tokenBefore.range[1], token.range[0]]);
-            }
-        });
-    }
+    create: function(context) {
+        var sourceCode = context.getSourceCode();
+        var propertyNameMustBeSpaced = context.options[0] === "always"; // default is "never"
 
-    /**
-    * Reports that there should be a space after the first token
-    * @param {ASTNode} node - The node to report in the event of an error.
-    * @param {Token} token - The token to use for the report.
-    * @returns {void}
-    */
-    function reportRequiredBeginningSpace(node, token) {
-        context.report({
-            node: node,
-            loc: token.loc.start,
-            message: "A space is required after '" + token.value + "'",
-            fix: function(fixer) {
-                return fixer.insertTextAfter(token, " ");
-            }
-        });
-    }
+        //--------------------------------------------------------------------------
+        // Helpers
+        //--------------------------------------------------------------------------
 
-    /**
-    * Reports that there should be a space before the last token
-    * @param {ASTNode} node - The node to report in the event of an error.
-    * @param {Token} token - The token to use for the report.
-    * @returns {void}
-    */
-    function reportRequiredEndingSpace(node, token) {
-        context.report({
-            node: node,
-            loc: token.loc.start,
-            message: "A space is required before '" + token.value + "'",
-            fix: function(fixer) {
-                return fixer.insertTextBefore(token, " ");
-            }
-        });
-    }
+        /**
+        * Reports that there shouldn't be a space after the first token
+        * @param {ASTNode} node - The node to report in the event of an error.
+        * @param {Token} token - The token to use for the report.
+        * @param {Token} tokenAfter - The token after `token`.
+        * @returns {void}
+        */
+        function reportNoBeginningSpace(node, token, tokenAfter) {
+            context.report({
+                node: node,
+                loc: token.loc.start,
+                message: "There should be no space after '" + token.value + "'",
+                fix: function(fixer) {
+                    return fixer.removeRange([token.range[1], tokenAfter.range[0]]);
+                }
+            });
+        }
 
-    /**
-     * Returns a function that checks the spacing of a node on the property name
-     * that was passed in.
-     * @param {String} propertyName The property on the node to check for spacing
-     * @returns {Function} A function that will check spacing on a node
-     */
-    function checkSpacing(propertyName) {
-        return function(node) {
-            if (!node.computed) {
-                return;
-            }
+        /**
+        * Reports that there shouldn't be a space before the last token
+        * @param {ASTNode} node - The node to report in the event of an error.
+        * @param {Token} token - The token to use for the report.
+        * @param {Token} tokenBefore - The token before `token`.
+        * @returns {void}
+        */
+        function reportNoEndingSpace(node, token, tokenBefore) {
+            context.report({
+                node: node,
+                loc: token.loc.start,
+                message: "There should be no space before '" + token.value + "'",
+                fix: function(fixer) {
+                    return fixer.removeRange([tokenBefore.range[1], token.range[0]]);
+                }
+            });
+        }
 
-            var property = node[propertyName];
+        /**
+        * Reports that there should be a space after the first token
+        * @param {ASTNode} node - The node to report in the event of an error.
+        * @param {Token} token - The token to use for the report.
+        * @returns {void}
+        */
+        function reportRequiredBeginningSpace(node, token) {
+            context.report({
+                node: node,
+                loc: token.loc.start,
+                message: "A space is required after '" + token.value + "'",
+                fix: function(fixer) {
+                    return fixer.insertTextAfter(token, " ");
+                }
+            });
+        }
 
-            var before = context.getTokenBefore(property),
-                first = context.getFirstToken(property),
-                last = context.getLastToken(property),
-                after = context.getTokenAfter(property);
+        /**
+        * Reports that there should be a space before the last token
+        * @param {ASTNode} node - The node to report in the event of an error.
+        * @param {Token} token - The token to use for the report.
+        * @returns {void}
+        */
+        function reportRequiredEndingSpace(node, token) {
+            context.report({
+                node: node,
+                loc: token.loc.start,
+                message: "A space is required before '" + token.value + "'",
+                fix: function(fixer) {
+                    return fixer.insertTextBefore(token, " ");
+                }
+            });
+        }
 
-            if (astUtils.isTokenOnSameLine(before, first)) {
-                if (propertyNameMustBeSpaced) {
-                    if (!sourceCode.isSpaceBetweenTokens(before, first) && astUtils.isTokenOnSameLine(before, first)) {
-                        reportRequiredBeginningSpace(node, before);
-                    }
-                } else {
-                    if (sourceCode.isSpaceBetweenTokens(before, first)) {
-                        reportNoBeginningSpace(node, before, first);
+        /**
+         * Returns a function that checks the spacing of a node on the property name
+         * that was passed in.
+         * @param {String} propertyName The property on the node to check for spacing
+         * @returns {Function} A function that will check spacing on a node
+         */
+        function checkSpacing(propertyName) {
+            return function(node) {
+                if (!node.computed) {
+                    return;
+                }
+
+                var property = node[propertyName];
+
+                var before = context.getTokenBefore(property),
+                    first = context.getFirstToken(property),
+                    last = context.getLastToken(property),
+                    after = context.getTokenAfter(property);
+
+                if (astUtils.isTokenOnSameLine(before, first)) {
+                    if (propertyNameMustBeSpaced) {
+                        if (!sourceCode.isSpaceBetweenTokens(before, first) && astUtils.isTokenOnSameLine(before, first)) {
+                            reportRequiredBeginningSpace(node, before);
+                        }
+                    } else {
+                        if (sourceCode.isSpaceBetweenTokens(before, first)) {
+                            reportNoBeginningSpace(node, before, first);
+                        }
                     }
                 }
-            }
 
-            if (astUtils.isTokenOnSameLine(last, after)) {
-                if (propertyNameMustBeSpaced) {
-                    if (!sourceCode.isSpaceBetweenTokens(last, after) && astUtils.isTokenOnSameLine(last, after)) {
-                        reportRequiredEndingSpace(node, after);
-                    }
-                } else {
-                    if (sourceCode.isSpaceBetweenTokens(last, after)) {
-                        reportNoEndingSpace(node, after, last);
+                if (astUtils.isTokenOnSameLine(last, after)) {
+                    if (propertyNameMustBeSpaced) {
+                        if (!sourceCode.isSpaceBetweenTokens(last, after) && astUtils.isTokenOnSameLine(last, after)) {
+                            reportRequiredEndingSpace(node, after);
+                        }
+                    } else {
+                        if (sourceCode.isSpaceBetweenTokens(last, after)) {
+                            reportNoEndingSpace(node, after, last);
+                        }
                     }
                 }
-            }
+            };
+        }
+
+
+        //--------------------------------------------------------------------------
+        // Public
+        //--------------------------------------------------------------------------
+
+        return {
+            Property: checkSpacing("key"),
+            MemberExpression: checkSpacing("property")
         };
+
     }
-
-
-    //--------------------------------------------------------------------------
-    // Public
-    //--------------------------------------------------------------------------
-
-    return {
-        Property: checkSpacing("key"),
-        MemberExpression: checkSpacing("property")
-    };
-
 };
-
-module.exports.schema = [
-    {
-        "enum": ["always", "never"]
-    }
-];
 
 },{"../ast-utils":151}],182:[function(require,module,exports){
 /**
@@ -43378,103 +43533,113 @@ function isUnreachable(segment) {
 // Rule Definition
 //------------------------------------------------------------------------------
 
-module.exports = function(context) {
-    var funcInfo = null;
+module.exports = {
+    meta: {
+        docs: {
+            description: "require `return` statements to either always or never specify values",
+            category: "Best Practices",
+            recommended: false
+        },
 
-    /**
-     * Checks whether of not the implicit returning is consistent if the last
-     * code path segment is reachable.
-     *
-     * @param {ASTNode} node - A program/function node to check.
-     * @returns {void}
-     */
-    function checkLastSegment(node) {
-        var loc, type;
+        schema: []
+    },
 
-        /*
-         * Skip if it expected no return value or unreachable.
-         * When unreachable, all paths are returned or thrown.
+    create: function(context) {
+        var funcInfo = null;
+
+        /**
+         * Checks whether of not the implicit returning is consistent if the last
+         * code path segment is reachable.
+         *
+         * @param {ASTNode} node - A program/function node to check.
+         * @returns {void}
          */
-        if (!funcInfo.hasReturnValue ||
-            funcInfo.codePath.currentSegments.every(isUnreachable) ||
-            astUtils.isES5Constructor(node)
-        ) {
-            return;
-        }
+        function checkLastSegment(node) {
+            var loc, type;
 
-        // Adjust a location and a message.
-        if (node.type === "Program") {
-
-            // The head of program.
-            loc = {line: 1, column: 0};
-            type = "program";
-        } else if (node.type === "ArrowFunctionExpression") {
-
-            // `=>` token
-            loc = context.getSourceCode().getTokenBefore(node.body).loc.start;
-            type = "function";
-        } else if (
-            node.parent.type === "MethodDefinition" ||
-            (node.parent.type === "Property" && node.parent.method)
-        ) {
-
-            // Method name.
-            loc = node.parent.key.loc.start;
-            type = "method";
-        } else {
-
-            // Function name or `function` keyword.
-            loc = (node.id || node).loc.start;
-            type = "function";
-        }
-
-        // Reports.
-        context.report({
-            node: node,
-            loc: loc,
-            message: "Expected to return a value at the end of this {{type}}.",
-            data: {type: type}
-        });
-    }
-
-    return {
-
-        // Initializes/Disposes state of each code path.
-        "onCodePathStart": function(codePath) {
-            funcInfo = {
-                upper: funcInfo,
-                codePath: codePath,
-                hasReturn: false,
-                hasReturnValue: false,
-                message: ""
-            };
-        },
-        "onCodePathEnd": function() {
-            funcInfo = funcInfo.upper;
-        },
-
-        // Reports a given return statement if it's inconsistent.
-        "ReturnStatement": function(node) {
-            var hasReturnValue = Boolean(node.argument);
-
-            if (!funcInfo.hasReturn) {
-                funcInfo.hasReturn = true;
-                funcInfo.hasReturnValue = hasReturnValue;
-                funcInfo.message = "Expected " + (hasReturnValue ? "a" : "no") + " return value.";
-            } else if (funcInfo.hasReturnValue !== hasReturnValue) {
-                context.report({node: node, message: funcInfo.message});
+            /*
+             * Skip if it expected no return value or unreachable.
+             * When unreachable, all paths are returned or thrown.
+             */
+            if (!funcInfo.hasReturnValue ||
+                funcInfo.codePath.currentSegments.every(isUnreachable) ||
+                astUtils.isES5Constructor(node)
+            ) {
+                return;
             }
-        },
 
-        // Reports a given program/function if the implicit returning is not consistent.
-        "Program:exit": checkLastSegment,
-        "FunctionDeclaration:exit": checkLastSegment,
-        "FunctionExpression:exit": checkLastSegment,
-        "ArrowFunctionExpression:exit": checkLastSegment
-    };
+            // Adjust a location and a message.
+            if (node.type === "Program") {
+
+                // The head of program.
+                loc = {line: 1, column: 0};
+                type = "program";
+            } else if (node.type === "ArrowFunctionExpression") {
+
+                // `=>` token
+                loc = context.getSourceCode().getTokenBefore(node.body).loc.start;
+                type = "function";
+            } else if (
+                node.parent.type === "MethodDefinition" ||
+                (node.parent.type === "Property" && node.parent.method)
+            ) {
+
+                // Method name.
+                loc = node.parent.key.loc.start;
+                type = "method";
+            } else {
+
+                // Function name or `function` keyword.
+                loc = (node.id || node).loc.start;
+                type = "function";
+            }
+
+            // Reports.
+            context.report({
+                node: node,
+                loc: loc,
+                message: "Expected to return a value at the end of this {{type}}.",
+                data: {type: type}
+            });
+        }
+
+        return {
+
+            // Initializes/Disposes state of each code path.
+            "onCodePathStart": function(codePath) {
+                funcInfo = {
+                    upper: funcInfo,
+                    codePath: codePath,
+                    hasReturn: false,
+                    hasReturnValue: false,
+                    message: ""
+                };
+            },
+            "onCodePathEnd": function() {
+                funcInfo = funcInfo.upper;
+            },
+
+            // Reports a given return statement if it's inconsistent.
+            "ReturnStatement": function(node) {
+                var hasReturnValue = Boolean(node.argument);
+
+                if (!funcInfo.hasReturn) {
+                    funcInfo.hasReturn = true;
+                    funcInfo.hasReturnValue = hasReturnValue;
+                    funcInfo.message = "Expected " + (hasReturnValue ? "a" : "no") + " return value.";
+                } else if (funcInfo.hasReturnValue !== hasReturnValue) {
+                    context.report({node: node, message: funcInfo.message});
+                }
+            },
+
+            // Reports a given program/function if the implicit returning is not consistent.
+            "Program:exit": checkLastSegment,
+            "FunctionDeclaration:exit": checkLastSegment,
+            "FunctionExpression:exit": checkLastSegment,
+            "ArrowFunctionExpression:exit": checkLastSegment
+        };
+    }
 };
-
-module.exports.schema = [];
 
 },{"../ast-utils":151}],183:[function(require,module,exports){
 /**
@@ -43489,133 +43654,143 @@ module.exports.schema = [];
 // Rule Definition
 //------------------------------------------------------------------------------
 
-module.exports = function(context) {
-    var aliases = [];
-
-    if (context.options.length === 0) {
-        aliases.push("that");
-    } else {
-        aliases = context.options;
-    }
-
-    /**
-     * Reports that a variable declarator or assignment expression is assigning
-     * a non-'this' value to the specified alias.
-     * @param {ASTNode} node - The assigning node.
-     * @param {string} alias - the name of the alias that was incorrectly used.
-     * @returns {void}
-     */
-    function reportBadAssignment(node, alias) {
-        context.report(node,
-            "Designated alias '{{alias}}' is not assigned to 'this'.",
-            { alias: alias });
-    }
-
-    /**
-     * Checks that an assignment to an identifier only assigns 'this' to the
-     * appropriate alias, and the alias is only assigned to 'this'.
-     * @param {ASTNode} node - The assigning node.
-     * @param {Identifier} name - The name of the variable assigned to.
-     * @param {Expression} value - The value of the assignment.
-     * @returns {void}
-     */
-    function checkAssignment(node, name, value) {
-        var isThis = value.type === "ThisExpression";
-
-        if (aliases.indexOf(name) !== -1) {
-            if (!isThis || node.operator && node.operator !== "=") {
-                reportBadAssignment(node, name);
-            }
-        } else if (isThis) {
-            context.report(node,
-                "Unexpected alias '{{name}}' for 'this'.", { name: name });
-        }
-    }
-
-    /**
-     * Ensures that a variable declaration of the alias in a program or function
-     * is assigned to the correct value.
-     * @param {string} alias alias the check the assignment of.
-     * @param {object} scope scope of the current code we are checking.
-     * @private
-     * @returns {void}
-     */
-    function checkWasAssigned(alias, scope) {
-        var variable = scope.set.get(alias);
-
-        if (!variable) {
-            return;
-        }
-
-        if (variable.defs.some(function(def) {
-            return def.node.type === "VariableDeclarator" &&
-            def.node.init !== null;
-        })) {
-            return;
-        }
-
-        // The alias has been declared and not assigned: check it was
-        // assigned later in the same scope.
-        if (!variable.references.some(function(reference) {
-            var write = reference.writeExpr;
-
-            return (
-                reference.from === scope &&
-                write && write.type === "ThisExpression" &&
-                write.parent.operator === "="
-            );
-        })) {
-            variable.defs.map(function(def) {
-                return def.node;
-            }).forEach(function(node) {
-                reportBadAssignment(node, alias);
-            });
-        }
-    }
-
-    /**
-     * Check each alias to ensure that is was assinged to the correct value.
-     * @returns {void}
-     */
-    function ensureWasAssigned() {
-        var scope = context.getScope();
-
-        aliases.forEach(function(alias) {
-            checkWasAssigned(alias, scope);
-        });
-    }
-
-    return {
-        "Program:exit": ensureWasAssigned,
-        "FunctionExpression:exit": ensureWasAssigned,
-        "FunctionDeclaration:exit": ensureWasAssigned,
-
-        "VariableDeclarator": function(node) {
-            var id = node.id;
-            var isDestructuring =
-                id.type === "ArrayPattern" || id.type === "ObjectPattern";
-
-            if (node.init !== null && !isDestructuring) {
-                checkAssignment(node, id.name, node.init);
-            }
+module.exports = {
+    meta: {
+        docs: {
+            description: "enforce consistent naming when capturing the current execution context",
+            category: "Stylistic Issues",
+            recommended: false
         },
 
-        "AssignmentExpression": function(node) {
-            if (node.left.type === "Identifier") {
-                checkAssignment(node, node.left.name, node.right);
+        schema: {
+            "type": "array",
+            "items": {
+                "type": "string",
+                "minLength": 1
+            },
+            "uniqueItems": true
+        }
+    },
+
+    create: function(context) {
+        var aliases = [];
+
+        if (context.options.length === 0) {
+            aliases.push("that");
+        } else {
+            aliases = context.options;
+        }
+
+        /**
+         * Reports that a variable declarator or assignment expression is assigning
+         * a non-'this' value to the specified alias.
+         * @param {ASTNode} node - The assigning node.
+         * @param {string} alias - the name of the alias that was incorrectly used.
+         * @returns {void}
+         */
+        function reportBadAssignment(node, alias) {
+            context.report(node,
+                "Designated alias '{{alias}}' is not assigned to 'this'.",
+                { alias: alias });
+        }
+
+        /**
+         * Checks that an assignment to an identifier only assigns 'this' to the
+         * appropriate alias, and the alias is only assigned to 'this'.
+         * @param {ASTNode} node - The assigning node.
+         * @param {Identifier} name - The name of the variable assigned to.
+         * @param {Expression} value - The value of the assignment.
+         * @returns {void}
+         */
+        function checkAssignment(node, name, value) {
+            var isThis = value.type === "ThisExpression";
+
+            if (aliases.indexOf(name) !== -1) {
+                if (!isThis || node.operator && node.operator !== "=") {
+                    reportBadAssignment(node, name);
+                }
+            } else if (isThis) {
+                context.report(node,
+                    "Unexpected alias '{{name}}' for 'this'.", { name: name });
             }
         }
-    };
 
-};
+        /**
+         * Ensures that a variable declaration of the alias in a program or function
+         * is assigned to the correct value.
+         * @param {string} alias alias the check the assignment of.
+         * @param {object} scope scope of the current code we are checking.
+         * @private
+         * @returns {void}
+         */
+        function checkWasAssigned(alias, scope) {
+            var variable = scope.set.get(alias);
 
-module.exports.schema = {
-    "type": "array",
-    "items": {
-        "type": "string",
-        "minLength": 1
-    },
-    "uniqueItems": true
+            if (!variable) {
+                return;
+            }
+
+            if (variable.defs.some(function(def) {
+                return def.node.type === "VariableDeclarator" &&
+                def.node.init !== null;
+            })) {
+                return;
+            }
+
+            // The alias has been declared and not assigned: check it was
+            // assigned later in the same scope.
+            if (!variable.references.some(function(reference) {
+                var write = reference.writeExpr;
+
+                return (
+                    reference.from === scope &&
+                    write && write.type === "ThisExpression" &&
+                    write.parent.operator === "="
+                );
+            })) {
+                variable.defs.map(function(def) {
+                    return def.node;
+                }).forEach(function(node) {
+                    reportBadAssignment(node, alias);
+                });
+            }
+        }
+
+        /**
+         * Check each alias to ensure that is was assinged to the correct value.
+         * @returns {void}
+         */
+        function ensureWasAssigned() {
+            var scope = context.getScope();
+
+            aliases.forEach(function(alias) {
+                checkWasAssigned(alias, scope);
+            });
+        }
+
+        return {
+            "Program:exit": ensureWasAssigned,
+            "FunctionExpression:exit": ensureWasAssigned,
+            "FunctionDeclaration:exit": ensureWasAssigned,
+
+            "VariableDeclarator": function(node) {
+                var id = node.id;
+                var isDestructuring =
+                    id.type === "ArrayPattern" || id.type === "ObjectPattern";
+
+                if (node.init !== null && !isDestructuring) {
+                    checkAssignment(node, id.name, node.init);
+                }
+            },
+
+            "AssignmentExpression": function(node) {
+                if (node.left.type === "Identifier") {
+                    checkAssignment(node, node.left.name, node.right);
+                }
+            }
+        };
+
+    }
 };
 
 },{}],184:[function(require,module,exports){
@@ -43626,12 +43801,6 @@ module.exports.schema = {
  */
 
 "use strict";
-
-//------------------------------------------------------------------------------
-// Requirements
-//------------------------------------------------------------------------------
-
-var astUtils = require("../ast-utils");
 
 //------------------------------------------------------------------------------
 // Helpers
@@ -43652,278 +43821,345 @@ function isConstructorFunction(node) {
     );
 }
 
+/**
+ * Checks whether a given node can be a constructor or not.
+ *
+ * @param {ASTNode} node - A node to check.
+ * @returns {boolean} `true` if the node can be a constructor.
+ */
+function isPossibleConstructor(node) {
+    if (!node) {
+        return false;
+    }
+
+    switch (node.type) {
+        case "ClassExpression":
+        case "FunctionExpression":
+        case "ThisExpression":
+        case "MemberExpression":
+        case "CallExpression":
+        case "NewExpression":
+        case "YieldExpression":
+        case "TaggedTemplateExpression":
+        case "MetaProperty":
+            return true;
+
+        case "Identifier":
+            return node.name !== "undefined";
+
+        case "AssignmentExpression":
+            return isPossibleConstructor(node.right);
+
+        case "LogicalExpression":
+            return (
+                isPossibleConstructor(node.left) ||
+                isPossibleConstructor(node.right)
+            );
+
+        case "ConditionalExpression":
+            return (
+                isPossibleConstructor(node.alternate) ||
+                isPossibleConstructor(node.consequent)
+            );
+
+        case "SequenceExpression":
+            var lastExpression = node.expressions[node.expressions.length - 1];
+
+            return isPossibleConstructor(lastExpression);
+
+        default:
+            return false;
+    }
+}
+
 //------------------------------------------------------------------------------
 // Rule Definition
 //------------------------------------------------------------------------------
 
-module.exports = function(context) {
+module.exports = {
+    meta: {
+        docs: {
+            description: "require `super()` calls in constructors",
+            category: "ECMAScript 6",
+            recommended: true
+        },
 
-    /*
-     * {{hasExtends: boolean, scope: Scope, codePath: CodePath}[]}
-     * Information for each constructor.
-     * - upper:      Information of the upper constructor.
-     * - hasExtends: A flag which shows whether own class has a valid `extends`
-     *               part.
-     * - scope:      The scope of own class.
-     * - codePath:   The code path object of the constructor.
-     */
-    var funcInfo = null;
+        schema: []
+    },
 
-    /*
-     * {Map<string, {calledInSomePaths: boolean, calledInEveryPaths: boolean}>}
-     * Information for each code path segment.
-     * - calledInSomePaths:  A flag of be called `super()` in some code paths.
-     * - calledInEveryPaths: A flag of be called `super()` in all code paths.
-     * - validNodes:
-     */
-    var segInfoMap = Object.create(null);
-
-    /**
-     * Gets the flag which shows `super()` is called in some paths.
-     * @param {CodePathSegment} segment - A code path segment to get.
-     * @returns {boolean} The flag which shows `super()` is called in some paths
-     */
-    function isCalledInSomePath(segment) {
-        return segInfoMap[segment.id].calledInSomePaths;
-    }
-
-    /**
-     * Gets the flag which shows `super()` is called in all paths.
-     * @param {CodePathSegment} segment - A code path segment to get.
-     * @returns {boolean} The flag which shows `super()` is called in all paths.
-     */
-    function isCalledInEveryPath(segment) {
+    create: function(context) {
 
         /*
-         * If specific segment is the looped segment of the current segment,
-         * skip the segment.
-         * If not skipped, this never becomes true after a loop.
+         * {{hasExtends: boolean, scope: Scope, codePath: CodePath}[]}
+         * Information for each constructor.
+         * - upper:      Information of the upper constructor.
+         * - hasExtends: A flag which shows whether own class has a valid `extends`
+         *               part.
+         * - scope:      The scope of own class.
+         * - codePath:   The code path object of the constructor.
          */
-        if (segment.nextSegments.length === 1 &&
-            segment.nextSegments[0].isLoopedPrevSegment(segment)
-        ) {
-            return true;
+        var funcInfo = null;
+
+        /*
+         * {Map<string, {calledInSomePaths: boolean, calledInEveryPaths: boolean}>}
+         * Information for each code path segment.
+         * - calledInSomePaths:  A flag of be called `super()` in some code paths.
+         * - calledInEveryPaths: A flag of be called `super()` in all code paths.
+         * - validNodes:
+         */
+        var segInfoMap = Object.create(null);
+
+        /**
+         * Gets the flag which shows `super()` is called in some paths.
+         * @param {CodePathSegment} segment - A code path segment to get.
+         * @returns {boolean} The flag which shows `super()` is called in some paths
+         */
+        function isCalledInSomePath(segment) {
+            return segInfoMap[segment.id].calledInSomePaths;
         }
-        return segInfoMap[segment.id].calledInEveryPaths;
-    }
-
-    return {
 
         /**
-         * Stacks a constructor information.
-         * @param {CodePath} codePath - A code path which was started.
-         * @param {ASTNode} node - The current node.
-         * @returns {void}
+         * Gets the flag which shows `super()` is called in all paths.
+         * @param {CodePathSegment} segment - A code path segment to get.
+         * @returns {boolean} The flag which shows `super()` is called in all paths.
          */
-        "onCodePathStart": function(codePath, node) {
-            if (isConstructorFunction(node)) {
-
-                // Class > ClassBody > MethodDefinition > FunctionExpression
-                var classNode = node.parent.parent.parent;
-
-                funcInfo = {
-                    upper: funcInfo,
-                    isConstructor: true,
-                    hasExtends: Boolean(
-                        classNode.superClass &&
-                        !astUtils.isNullOrUndefined(classNode.superClass)
-                    ),
-                    codePath: codePath
-                };
-            } else {
-                funcInfo = {
-                    upper: funcInfo,
-                    isConstructor: false,
-                    hasExtends: false,
-                    codePath: codePath
-                };
-            }
-        },
-
-        /**
-         * Pops a constructor information.
-         * And reports if `super()` lacked.
-         * @param {CodePath} codePath - A code path which was ended.
-         * @param {ASTNode} node - The current node.
-         * @returns {void}
-         */
-        "onCodePathEnd": function(codePath, node) {
-
-            // Skip if own class which has a valid `extends` part.
-            var hasExtends = funcInfo.hasExtends;
-
-            funcInfo = funcInfo.upper;
-
-            if (!hasExtends) {
-                return;
-            }
-
-            // Reports if `super()` lacked.
-            var segments = codePath.returnedSegments;
-            var calledInEveryPaths = segments.every(isCalledInEveryPath);
-            var calledInSomePaths = segments.some(isCalledInSomePath);
-
-            if (!calledInEveryPaths) {
-                context.report({
-                    message: calledInSomePaths ?
-                        "Lacked a call of 'super()' in some code paths." :
-                        "Expected to call 'super()'.",
-                    node: node.parent
-                });
-            }
-        },
-
-        /**
-         * Initialize information of a given code path segment.
-         * @param {CodePathSegment} segment - A code path segment to initialize.
-         * @returns {void}
-         */
-        "onCodePathSegmentStart": function(segment) {
+        function isCalledInEveryPath(segment) {
 
             /*
-             * Skip if this is not in a constructor of a class which has a
-             * valid `extends` part.
+             * If specific segment is the looped segment of the current segment,
+             * skip the segment.
+             * If not skipped, this never becomes true after a loop.
              */
-            if (!(funcInfo && funcInfo.isConstructor && funcInfo.hasExtends)) {
-                return;
+            if (segment.nextSegments.length === 1 &&
+                segment.nextSegments[0].isLoopedPrevSegment(segment)
+            ) {
+                return true;
             }
+            return segInfoMap[segment.id].calledInEveryPaths;
+        }
 
-            // Initialize info.
-            var info = segInfoMap[segment.id] = {
-                calledInSomePaths: false,
-                calledInEveryPaths: false,
-                validNodes: []
-            };
+        return {
 
-            // When there are previous segments, aggregates these.
-            var prevSegments = segment.prevSegments;
-
-            if (prevSegments.length > 0) {
-                info.calledInSomePaths = prevSegments.some(isCalledInSomePath);
-                info.calledInEveryPaths = prevSegments.every(isCalledInEveryPath);
-            }
-        },
-
-        /**
-         * Update information of the code path segment when a code path was
-         * looped.
-         * @param {CodePathSegment} fromSegment - The code path segment of the
-         *      end of a loop.
-         * @param {CodePathSegment} toSegment - A code path segment of the head
-         *      of a loop.
-         * @returns {void}
-         */
-        "onCodePathSegmentLoop": function(fromSegment, toSegment) {
-
-            /*
-             * Skip if this is not in a constructor of a class which has a
-             * valid `extends` part.
+            /**
+             * Stacks a constructor information.
+             * @param {CodePath} codePath - A code path which was started.
+             * @param {ASTNode} node - The current node.
+             * @returns {void}
              */
-            if (!(funcInfo && funcInfo.isConstructor && funcInfo.hasExtends)) {
-                return;
-            }
+            "onCodePathStart": function(codePath, node) {
+                if (isConstructorFunction(node)) {
 
-            // Update information inside of the loop.
-            var isRealLoop = toSegment.prevSegments.length >= 2;
+                    // Class > ClassBody > MethodDefinition > FunctionExpression
+                    var classNode = node.parent.parent.parent;
+                    var superClass = classNode.superClass;
 
-            funcInfo.codePath.traverseSegments(
-                {first: toSegment, last: fromSegment},
-                function(segment) {
-                    var info = segInfoMap[segment.id];
+                    funcInfo = {
+                        upper: funcInfo,
+                        isConstructor: true,
+                        hasExtends: Boolean(superClass),
+                        superIsConstructor: isPossibleConstructor(superClass),
+                        codePath: codePath
+                    };
+                } else {
+                    funcInfo = {
+                        upper: funcInfo,
+                        isConstructor: false,
+                        hasExtends: false,
+                        superIsConstructor: false,
+                        codePath: codePath
+                    };
+                }
+            },
 
-                    // Updates flags.
-                    var prevSegments = segment.prevSegments;
+            /**
+             * Pops a constructor information.
+             * And reports if `super()` lacked.
+             * @param {CodePath} codePath - A code path which was ended.
+             * @param {ASTNode} node - The current node.
+             * @returns {void}
+             */
+            "onCodePathEnd": function(codePath, node) {
+                var hasExtends = funcInfo.hasExtends;
 
+                // Pop.
+                funcInfo = funcInfo.upper;
+
+                if (!hasExtends) {
+                    return;
+                }
+
+                // Reports if `super()` lacked.
+                var segments = codePath.returnedSegments;
+                var calledInEveryPaths = segments.every(isCalledInEveryPath);
+                var calledInSomePaths = segments.some(isCalledInSomePath);
+
+                if (!calledInEveryPaths) {
+                    context.report({
+                        message: calledInSomePaths ?
+                            "Lacked a call of 'super()' in some code paths." :
+                            "Expected to call 'super()'.",
+                        node: node.parent
+                    });
+                }
+            },
+
+            /**
+             * Initialize information of a given code path segment.
+             * @param {CodePathSegment} segment - A code path segment to initialize.
+             * @returns {void}
+             */
+            "onCodePathSegmentStart": function(segment) {
+                if (!(funcInfo && funcInfo.isConstructor && funcInfo.hasExtends)) {
+                    return;
+                }
+
+                // Initialize info.
+                var info = segInfoMap[segment.id] = {
+                    calledInSomePaths: false,
+                    calledInEveryPaths: false,
+                    validNodes: []
+                };
+
+                // When there are previous segments, aggregates these.
+                var prevSegments = segment.prevSegments;
+
+                if (prevSegments.length > 0) {
                     info.calledInSomePaths = prevSegments.some(isCalledInSomePath);
                     info.calledInEveryPaths = prevSegments.every(isCalledInEveryPath);
+                }
+            },
 
-                    // If flags become true anew, reports the valid nodes.
-                    if (info.calledInSomePaths || isRealLoop) {
-                        var nodes = info.validNodes;
+            /**
+             * Update information of the code path segment when a code path was
+             * looped.
+             * @param {CodePathSegment} fromSegment - The code path segment of the
+             *      end of a loop.
+             * @param {CodePathSegment} toSegment - A code path segment of the head
+             *      of a loop.
+             * @returns {void}
+             */
+            "onCodePathSegmentLoop": function(fromSegment, toSegment) {
+                if (!(funcInfo && funcInfo.isConstructor && funcInfo.hasExtends)) {
+                    return;
+                }
 
-                        info.validNodes = [];
+                // Update information inside of the loop.
+                var isRealLoop = toSegment.prevSegments.length >= 2;
 
-                        for (var i = 0; i < nodes.length; ++i) {
-                            var node = nodes[i];
+                funcInfo.codePath.traverseSegments(
+                    {first: toSegment, last: fromSegment},
+                    function(segment) {
+                        var info = segInfoMap[segment.id];
+                        var prevSegments = segment.prevSegments;
 
-                            context.report({
-                                message: "Unexpected duplicate 'super()'.",
-                                node: node
-                            });
+                        // Updates flags.
+                        info.calledInSomePaths = prevSegments.some(isCalledInSomePath);
+                        info.calledInEveryPaths = prevSegments.every(isCalledInEveryPath);
+
+                        // If flags become true anew, reports the valid nodes.
+                        if (info.calledInSomePaths || isRealLoop) {
+                            var nodes = info.validNodes;
+
+                            info.validNodes = [];
+
+                            for (var i = 0; i < nodes.length; ++i) {
+                                var node = nodes[i];
+
+                                context.report({
+                                    message: "Unexpected duplicate 'super()'.",
+                                    node: node
+                                });
+                            }
                         }
                     }
+                );
+            },
+
+            /**
+             * Checks for a call of `super()`.
+             * @param {ASTNode} node - A CallExpression node to check.
+             * @returns {void}
+             */
+            "CallExpression:exit": function(node) {
+                if (!(funcInfo && funcInfo.isConstructor)) {
+                    return;
                 }
-            );
-        },
 
-        /**
-         * Checks for a call of `super()`.
-         * @param {ASTNode} node - A CallExpression node to check.
-         * @returns {void}
-         */
-        "CallExpression:exit": function(node) {
+                // Skips except `super()`.
+                if (node.callee.type !== "Super") {
+                    return;
+                }
 
-            // Skip if the node is not `super()`.
-            if (node.callee.type !== "Super") {
-                return;
-            }
+                // Reports if needed.
+                if (funcInfo.hasExtends) {
+                    var segments = funcInfo.codePath.currentSegments;
+                    var duplicate = false;
 
-            // Skip if this is not in a constructor.
-            if (!(funcInfo && funcInfo.isConstructor)) {
-                return;
-            }
+                    for (var i = 0; i < segments.length; ++i) {
+                        var info = segInfoMap[segments[i].id];
 
-            // Reports if needed.
-            if (funcInfo.hasExtends) {
+                        duplicate = duplicate || info.calledInSomePaths;
+                        info.calledInSomePaths = info.calledInEveryPaths = true;
+                    }
 
-                /*
-                 * This class has a valid `extends` part.
-                 * Checks duplicate `super()`;
-                 */
+                    if (duplicate) {
+                        context.report({
+                            message: "Unexpected duplicate 'super()'.",
+                            node: node
+                        });
+                    } else if (!funcInfo.superIsConstructor) {
+                        context.report({
+                            message: "Unexpected 'super()' because 'super' is not a constructor.",
+                            node: node
+                        });
+                    } else {
+                        info.validNodes.push(node);
+                    }
+                } else {
+                    context.report({
+                        message: "Unexpected 'super()'.",
+                        node: node
+                    });
+                }
+            },
+
+            /**
+             * Set the mark to the returned path as `super()` was called.
+             * @param {ASTNode} node - A ReturnStatement node to check.
+             * @returns {void}
+             */
+            "ReturnStatement": function(node) {
+                if (!(funcInfo && funcInfo.isConstructor && funcInfo.hasExtends)) {
+                    return;
+                }
+
+                // Skips if no argument.
+                if (!node.argument) {
+                    return;
+                }
+
+                // Returning argument is a substitute of 'super()'.
                 var segments = funcInfo.codePath.currentSegments;
-                var duplicate = false;
 
                 for (var i = 0; i < segments.length; ++i) {
                     var info = segInfoMap[segments[i].id];
 
-                    duplicate = duplicate || info.calledInSomePaths;
                     info.calledInSomePaths = info.calledInEveryPaths = true;
                 }
+            },
 
-                if (duplicate) {
-                    context.report({
-                        message: "Unexpected duplicate 'super()'.",
-                        node: node
-                    });
-                } else {
-                    info.validNodes.push(node);
-                }
-            } else {
-
-                /*
-                 * This class does not have a valid `extends` part.
-                 * Disallow `super()`.
-                 */
-                context.report({
-                    message: "Unexpected 'super()'.",
-                    node: node
-                });
+            /**
+             * Resets state.
+             * @returns {void}
+             */
+            "Program:exit": function() {
+                segInfoMap = Object.create(null);
             }
-        },
-
-        /**
-         * Resets state.
-         * @returns {void}
-         */
-        "Program:exit": function() {
-            segInfoMap = Object.create(null);
-        }
-    };
+        };
+    }
 };
 
-module.exports.schema = [];
-
-},{"../ast-utils":151}],185:[function(require,module,exports){
+},{}],185:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag statements without curly braces
  * @author Nicholas C. Zakas
@@ -43941,282 +44177,292 @@ var astUtils = require("../ast-utils");
 // Rule Definition
 //------------------------------------------------------------------------------
 
-module.exports = function(context) {
+module.exports = {
+    meta: {
+        docs: {
+            description: "enforce consistent brace style for all control statements",
+            category: "Best Practices",
+            recommended: false
+        },
 
-    var multiOnly = (context.options[0] === "multi");
-    var multiLine = (context.options[0] === "multi-line");
-    var multiOrNest = (context.options[0] === "multi-or-nest");
-    var consistent = (context.options[1] === "consistent");
+        schema: {
+            "anyOf": [
+                {
+                    "type": "array",
+                    "items": [
+                        {
+                            "enum": ["all"]
+                        }
+                    ],
+                    "minItems": 0,
+                    "maxItems": 1
+                },
+                {
+                    "type": "array",
+                    "items": [
+                        {
+                            "enum": ["multi", "multi-line", "multi-or-nest"]
+                        },
+                        {
+                            "enum": ["consistent"]
+                        }
+                    ],
+                    "minItems": 0,
+                    "maxItems": 2
+                }
+            ]
+        }
+    },
 
-    //--------------------------------------------------------------------------
-    // Helpers
-    //--------------------------------------------------------------------------
+    create: function(context) {
 
-    /**
-     * Determines if a given node is a one-liner that's on the same line as it's preceding code.
-     * @param {ASTNode} node The node to check.
-     * @returns {boolean} True if the node is a one-liner that's on the same line as it's preceding code.
-     * @private
-     */
-    function isCollapsedOneLiner(node) {
-        var before = context.getTokenBefore(node),
-            last = context.getLastToken(node);
+        var multiOnly = (context.options[0] === "multi");
+        var multiLine = (context.options[0] === "multi-line");
+        var multiOrNest = (context.options[0] === "multi-or-nest");
+        var consistent = (context.options[1] === "consistent");
 
-        return before.loc.start.line === last.loc.end.line;
-    }
+        //--------------------------------------------------------------------------
+        // Helpers
+        //--------------------------------------------------------------------------
 
-    /**
-     * Determines if a given node is a one-liner.
-     * @param {ASTNode} node The node to check.
-     * @returns {boolean} True if the node is a one-liner.
-     * @private
-     */
-    function isOneLiner(node) {
-        var first = context.getFirstToken(node),
-            last = context.getLastToken(node);
+        /**
+         * Determines if a given node is a one-liner that's on the same line as it's preceding code.
+         * @param {ASTNode} node The node to check.
+         * @returns {boolean} True if the node is a one-liner that's on the same line as it's preceding code.
+         * @private
+         */
+        function isCollapsedOneLiner(node) {
+            var before = context.getTokenBefore(node),
+                last = context.getLastToken(node);
 
-        return first.loc.start.line === last.loc.end.line;
-    }
-
-    /**
-     * Gets the `else` keyword token of a given `IfStatement` node.
-     * @param {ASTNode} node - A `IfStatement` node to get.
-     * @returns {Token} The `else` keyword token.
-     */
-    function getElseKeyword(node) {
-        var sourceCode = context.getSourceCode();
-        var token = sourceCode.getTokenAfter(node.consequent);
-
-        while (token.type !== "Keyword" || token.value !== "else") {
-            token = sourceCode.getTokenAfter(token);
+            return before.loc.start.line === last.loc.end.line;
         }
 
-        return token;
-    }
+        /**
+         * Determines if a given node is a one-liner.
+         * @param {ASTNode} node The node to check.
+         * @returns {boolean} True if the node is a one-liner.
+         * @private
+         */
+        function isOneLiner(node) {
+            var first = context.getFirstToken(node),
+                last = context.getLastToken(node);
 
-    /**
-     * Checks a given IfStatement node requires braces of the consequent chunk.
-     * This returns `true` when below:
-     *
-     * 1. The given node has the `alternate` node.
-     * 2. There is a `IfStatement` which doesn't have `alternate` node in the
-     *    trailing statement chain of the `consequent` node.
-     *
-     * @param {ASTNode} node - A IfStatement node to check.
-     * @returns {boolean} `true` if the node requires braces of the consequent chunk.
-     */
-    function requiresBraceOfConsequent(node) {
-        if (node.alternate && node.consequent.type === "BlockStatement") {
-            if (node.consequent.body.length >= 2) {
-                return true;
+            return first.loc.start.line === last.loc.end.line;
+        }
+
+        /**
+         * Gets the `else` keyword token of a given `IfStatement` node.
+         * @param {ASTNode} node - A `IfStatement` node to get.
+         * @returns {Token} The `else` keyword token.
+         */
+        function getElseKeyword(node) {
+            var sourceCode = context.getSourceCode();
+            var token = sourceCode.getTokenAfter(node.consequent);
+
+            while (token.type !== "Keyword" || token.value !== "else") {
+                token = sourceCode.getTokenAfter(token);
             }
 
-            node = node.consequent.body[0];
-            while (node) {
-                if (node.type === "IfStatement" && !node.alternate) {
+            return token;
+        }
+
+        /**
+         * Checks a given IfStatement node requires braces of the consequent chunk.
+         * This returns `true` when below:
+         *
+         * 1. The given node has the `alternate` node.
+         * 2. There is a `IfStatement` which doesn't have `alternate` node in the
+         *    trailing statement chain of the `consequent` node.
+         *
+         * @param {ASTNode} node - A IfStatement node to check.
+         * @returns {boolean} `true` if the node requires braces of the consequent chunk.
+         */
+        function requiresBraceOfConsequent(node) {
+            if (node.alternate && node.consequent.type === "BlockStatement") {
+                if (node.consequent.body.length >= 2) {
                     return true;
                 }
-                node = astUtils.getTrailingStatement(node);
+
+                node = node.consequent.body[0];
+                while (node) {
+                    if (node.type === "IfStatement" && !node.alternate) {
+                        return true;
+                    }
+                    node = astUtils.getTrailingStatement(node);
+                }
             }
+
+            return false;
         }
 
-        return false;
-    }
-
-    /**
-     * Reports "Expected { after ..." error
-     * @param {ASTNode} node The node to report.
-     * @param {string} name The name to report.
-     * @param {string} suffix Additional string to add to the end of a report.
-     * @returns {void}
-     * @private
-     */
-    function reportExpectedBraceError(node, name, suffix) {
-        context.report({
-            node: node,
-            loc: (name !== "else" ? node : getElseKeyword(node)).loc.start,
-            message: "Expected { after '{{name}}'{{suffix}}.",
-            data: {
-                name: name,
-                suffix: (suffix ? " " + suffix : "")
-            }
-        });
-    }
-
-    /**
-     * Reports "Unnecessary { after ..." error
-     * @param {ASTNode} node The node to report.
-     * @param {string} name The name to report.
-     * @param {string} suffix Additional string to add to the end of a report.
-     * @returns {void}
-     * @private
-     */
-    function reportUnnecessaryBraceError(node, name, suffix) {
-        context.report({
-            node: node,
-            loc: (name !== "else" ? node : getElseKeyword(node)).loc.start,
-            message: "Unnecessary { after '{{name}}'{{suffix}}.",
-            data: {
-                name: name,
-                suffix: (suffix ? " " + suffix : "")
-            }
-        });
-    }
-
-    /**
-     * Prepares to check the body of a node to see if it's a block statement.
-     * @param {ASTNode} node The node to report if there's a problem.
-     * @param {ASTNode} body The body node to check for blocks.
-     * @param {string} name The name to report if there's a problem.
-     * @param {string} suffix Additional string to add to the end of a report.
-     * @returns {object} a prepared check object, with "actual", "expected", "check" properties.
-     *   "actual" will be `true` or `false` whether the body is already a block statement.
-     *   "expected" will be `true` or `false` if the body should be a block statement or not, or
-     *   `null` if it doesn't matter, depending on the rule options. It can be modified to change
-     *   the final behavior of "check".
-     *   "check" will be a function reporting appropriate problems depending on the other
-     *   properties.
-     */
-    function prepareCheck(node, body, name, suffix) {
-        var hasBlock = (body.type === "BlockStatement");
-        var expected = null;
-
-        if (node.type === "IfStatement" && node.consequent === body && requiresBraceOfConsequent(node)) {
-            expected = true;
-        } else if (multiOnly) {
-            if (hasBlock && body.body.length === 1) {
-                expected = false;
-            }
-        } else if (multiLine) {
-            if (!isCollapsedOneLiner(body)) {
-                expected = true;
-            }
-        } else if (multiOrNest) {
-            if (hasBlock && body.body.length === 1 && isOneLiner(body.body[0])) {
-                expected = false;
-            } else if (!isOneLiner(body)) {
-                expected = true;
-            }
-        } else {
-            expected = true;
+        /**
+         * Reports "Expected { after ..." error
+         * @param {ASTNode} node The node to report.
+         * @param {string} name The name to report.
+         * @param {string} suffix Additional string to add to the end of a report.
+         * @returns {void}
+         * @private
+         */
+        function reportExpectedBraceError(node, name, suffix) {
+            context.report({
+                node: node,
+                loc: (name !== "else" ? node : getElseKeyword(node)).loc.start,
+                message: "Expected { after '{{name}}'{{suffix}}.",
+                data: {
+                    name: name,
+                    suffix: (suffix ? " " + suffix : "")
+                }
+            });
         }
 
-        return {
-            actual: hasBlock,
-            expected: expected,
-            check: function() {
-                if (this.expected !== null && this.expected !== this.actual) {
-                    if (this.expected) {
-                        reportExpectedBraceError(node, name, suffix);
-                    } else {
-                        reportUnnecessaryBraceError(node, name, suffix);
+        /**
+         * Reports "Unnecessary { after ..." error
+         * @param {ASTNode} node The node to report.
+         * @param {string} name The name to report.
+         * @param {string} suffix Additional string to add to the end of a report.
+         * @returns {void}
+         * @private
+         */
+        function reportUnnecessaryBraceError(node, name, suffix) {
+            context.report({
+                node: node,
+                loc: (name !== "else" ? node : getElseKeyword(node)).loc.start,
+                message: "Unnecessary { after '{{name}}'{{suffix}}.",
+                data: {
+                    name: name,
+                    suffix: (suffix ? " " + suffix : "")
+                }
+            });
+        }
+
+        /**
+         * Prepares to check the body of a node to see if it's a block statement.
+         * @param {ASTNode} node The node to report if there's a problem.
+         * @param {ASTNode} body The body node to check for blocks.
+         * @param {string} name The name to report if there's a problem.
+         * @param {string} suffix Additional string to add to the end of a report.
+         * @returns {object} a prepared check object, with "actual", "expected", "check" properties.
+         *   "actual" will be `true` or `false` whether the body is already a block statement.
+         *   "expected" will be `true` or `false` if the body should be a block statement or not, or
+         *   `null` if it doesn't matter, depending on the rule options. It can be modified to change
+         *   the final behavior of "check".
+         *   "check" will be a function reporting appropriate problems depending on the other
+         *   properties.
+         */
+        function prepareCheck(node, body, name, suffix) {
+            var hasBlock = (body.type === "BlockStatement");
+            var expected = null;
+
+            if (node.type === "IfStatement" && node.consequent === body && requiresBraceOfConsequent(node)) {
+                expected = true;
+            } else if (multiOnly) {
+                if (hasBlock && body.body.length === 1) {
+                    expected = false;
+                }
+            } else if (multiLine) {
+                if (!isCollapsedOneLiner(body)) {
+                    expected = true;
+                }
+            } else if (multiOrNest) {
+                if (hasBlock && body.body.length === 1 && isOneLiner(body.body[0])) {
+                    expected = false;
+                } else if (!isOneLiner(body)) {
+                    expected = true;
+                }
+            } else {
+                expected = true;
+            }
+
+            return {
+                actual: hasBlock,
+                expected: expected,
+                check: function() {
+                    if (this.expected !== null && this.expected !== this.actual) {
+                        if (this.expected) {
+                            reportExpectedBraceError(node, name, suffix);
+                        } else {
+                            reportUnnecessaryBraceError(node, name, suffix);
+                        }
                     }
                 }
+            };
+        }
+
+        /**
+         * Prepares to check the bodies of a "if", "else if" and "else" chain.
+         * @param {ASTNode} node The first IfStatement node of the chain.
+         * @returns {object[]} prepared checks for each body of the chain. See `prepareCheck` for more
+         *   information.
+         */
+        function prepareIfChecks(node) {
+            var preparedChecks = [];
+
+            do {
+                preparedChecks.push(prepareCheck(node, node.consequent, "if", "condition"));
+                if (node.alternate && node.alternate.type !== "IfStatement") {
+                    preparedChecks.push(prepareCheck(node, node.alternate, "else"));
+                    break;
+                }
+                node = node.alternate;
+            } while (node);
+
+            if (consistent) {
+
+                /*
+                 * If any node should have or already have braces, make sure they
+                 * all have braces.
+                 * If all nodes shouldn't have braces, make sure they don't.
+                 */
+                var expected = preparedChecks.some(function(preparedCheck) {
+                    if (preparedCheck.expected !== null) {
+                        return preparedCheck.expected;
+                    }
+                    return preparedCheck.actual;
+                });
+
+                preparedChecks.forEach(function(preparedCheck) {
+                    preparedCheck.expected = expected;
+                });
+            }
+
+            return preparedChecks;
+        }
+
+        //--------------------------------------------------------------------------
+        // Public
+        //--------------------------------------------------------------------------
+
+        return {
+            "IfStatement": function(node) {
+                if (node.parent.type !== "IfStatement") {
+                    prepareIfChecks(node).forEach(function(preparedCheck) {
+                        preparedCheck.check();
+                    });
+                }
+            },
+
+            "WhileStatement": function(node) {
+                prepareCheck(node, node.body, "while", "condition").check();
+            },
+
+            "DoWhileStatement": function(node) {
+                prepareCheck(node, node.body, "do").check();
+            },
+
+            "ForStatement": function(node) {
+                prepareCheck(node, node.body, "for", "condition").check();
+            },
+
+            "ForInStatement": function(node) {
+                prepareCheck(node, node.body, "for-in").check();
+            },
+
+            "ForOfStatement": function(node) {
+                prepareCheck(node, node.body, "for-of").check();
             }
         };
     }
-
-    /**
-     * Prepares to check the bodies of a "if", "else if" and "else" chain.
-     * @param {ASTNode} node The first IfStatement node of the chain.
-     * @returns {object[]} prepared checks for each body of the chain. See `prepareCheck` for more
-     *   information.
-     */
-    function prepareIfChecks(node) {
-        var preparedChecks = [];
-
-        do {
-            preparedChecks.push(prepareCheck(node, node.consequent, "if", "condition"));
-            if (node.alternate && node.alternate.type !== "IfStatement") {
-                preparedChecks.push(prepareCheck(node, node.alternate, "else"));
-                break;
-            }
-            node = node.alternate;
-        } while (node);
-
-        if (consistent) {
-
-            /*
-             * If any node should have or already have braces, make sure they
-             * all have braces.
-             * If all nodes shouldn't have braces, make sure they don't.
-             */
-            var expected = preparedChecks.some(function(preparedCheck) {
-                if (preparedCheck.expected !== null) {
-                    return preparedCheck.expected;
-                }
-                return preparedCheck.actual;
-            });
-
-            preparedChecks.forEach(function(preparedCheck) {
-                preparedCheck.expected = expected;
-            });
-        }
-
-        return preparedChecks;
-    }
-
-    //--------------------------------------------------------------------------
-    // Public
-    //--------------------------------------------------------------------------
-
-    return {
-        "IfStatement": function(node) {
-            if (node.parent.type !== "IfStatement") {
-                prepareIfChecks(node).forEach(function(preparedCheck) {
-                    preparedCheck.check();
-                });
-            }
-        },
-
-        "WhileStatement": function(node) {
-            prepareCheck(node, node.body, "while", "condition").check();
-        },
-
-        "DoWhileStatement": function(node) {
-            prepareCheck(node, node.body, "do").check();
-        },
-
-        "ForStatement": function(node) {
-            prepareCheck(node, node.body, "for", "condition").check();
-        },
-
-        "ForInStatement": function(node) {
-            prepareCheck(node, node.body, "for-in").check();
-        },
-
-        "ForOfStatement": function(node) {
-            prepareCheck(node, node.body, "for-of").check();
-        }
-    };
-};
-
-module.exports.schema = {
-    "anyOf": [
-        {
-            "type": "array",
-            "items": [
-                {
-                    "enum": ["all"]
-                }
-            ],
-            "minItems": 0,
-            "maxItems": 1
-        },
-        {
-            "type": "array",
-            "items": [
-                {
-                    "enum": ["multi", "multi-line", "multi-or-nest"]
-                },
-                {
-                    "enum": ["consistent"]
-                }
-            ],
-            "minItems": 0,
-            "maxItems": 2
-        }
-    ]
 };
 
 },{"../ast-utils":151}],186:[function(require,module,exports){
@@ -44232,64 +44478,74 @@ var COMMENT_VALUE = "no default";
 // Rule Definition
 //------------------------------------------------------------------------------
 
-module.exports = function(context) {
+module.exports = {
+    meta: {
+        docs: {
+            description: "require `default` cases in <code>switch</code> statements",
+            category: "Best Practices",
+            recommended: false
+        },
 
-    //--------------------------------------------------------------------------
-    // Helpers
-    //--------------------------------------------------------------------------
+        schema: []
+    },
 
-    /**
-     * Shortcut to get last element of array
-     * @param  {*[]} collection Array
-     * @returns {*} Last element
-     */
-    function last(collection) {
-        return collection[collection.length - 1];
-    }
+    create: function(context) {
 
-    //--------------------------------------------------------------------------
-    // Public
-    //--------------------------------------------------------------------------
+        //--------------------------------------------------------------------------
+        // Helpers
+        //--------------------------------------------------------------------------
 
-    return {
-
-        "SwitchStatement": function(node) {
-
-            if (!node.cases.length) {
-
-                /*
-                 * skip check of empty switch because there is no easy way
-                 * to extract comments inside it now
-                 */
-                return;
-            }
-
-            var hasDefault = node.cases.some(function(v) {
-                return v.test === null;
-            });
-
-            if (!hasDefault) {
-
-                var comment;
-                var comments;
-
-                var lastCase = last(node.cases);
-
-                comments = context.getComments(lastCase).trailing;
-
-                if (comments.length) {
-                    comment = last(comments);
-                }
-
-                if (!comment || comment.value.trim() !== COMMENT_VALUE) {
-                    context.report(node, "Expected a default case.");
-                }
-            }
+        /**
+         * Shortcut to get last element of array
+         * @param  {*[]} collection Array
+         * @returns {*} Last element
+         */
+        function last(collection) {
+            return collection[collection.length - 1];
         }
-    };
-};
 
-module.exports.schema = [];
+        //--------------------------------------------------------------------------
+        // Public
+        //--------------------------------------------------------------------------
+
+        return {
+
+            "SwitchStatement": function(node) {
+
+                if (!node.cases.length) {
+
+                    /*
+                     * skip check of empty switch because there is no easy way
+                     * to extract comments inside it now
+                     */
+                    return;
+                }
+
+                var hasDefault = node.cases.some(function(v) {
+                    return v.test === null;
+                });
+
+                if (!hasDefault) {
+
+                    var comment;
+                    var comments;
+
+                    var lastCase = last(node.cases);
+
+                    comments = context.getComments(lastCase).trailing;
+
+                    if (comments.length) {
+                        comment = last(comments);
+                    }
+
+                    if (!comment || comment.value.trim() !== COMMENT_VALUE) {
+                        context.report(node, "Expected a default case.");
+                    }
+                }
+            }
+        };
+    }
+};
 
 },{}],187:[function(require,module,exports){
 /**
@@ -44306,54 +44562,64 @@ var astUtils = require("../ast-utils");
 // Rule Definition
 //------------------------------------------------------------------------------
 
-module.exports = function(context) {
+module.exports = {
+    meta: {
+        docs: {
+            description: "enforce consistent newlines before and after dots",
+            category: "Best Practices",
+            recommended: false
+        },
 
-    var config = context.options[0],
-        onObject;
+        schema: [
+            {
+                "enum": ["object", "property"]
+            }
+        ]
+    },
 
-    // default to onObject if no preference is passed
-    onObject = config === "object" || !config;
+    create: function(context) {
 
-    /**
-     * Reports if the dot between object and property is on the correct loccation.
-     * @param {ASTNode} obj The object owning the property.
-     * @param {ASTNode} prop The property of the object.
-     * @param {ASTNode} node The corresponding node of the token.
-     * @returns {void}
-     */
-    function checkDotLocation(obj, prop, node) {
-        var dot = context.getTokenBefore(prop);
+        var config = context.options[0],
+            onObject;
 
-        if (dot.type === "Punctuator" && dot.value === ".") {
-            if (onObject) {
-                if (!astUtils.isTokenOnSameLine(obj, dot)) {
-                    context.report(node, dot.loc.start, "Expected dot to be on same line as object.");
+        // default to onObject if no preference is passed
+        onObject = config === "object" || !config;
+
+        /**
+         * Reports if the dot between object and property is on the correct loccation.
+         * @param {ASTNode} obj The object owning the property.
+         * @param {ASTNode} prop The property of the object.
+         * @param {ASTNode} node The corresponding node of the token.
+         * @returns {void}
+         */
+        function checkDotLocation(obj, prop, node) {
+            var dot = context.getTokenBefore(prop);
+
+            if (dot.type === "Punctuator" && dot.value === ".") {
+                if (onObject) {
+                    if (!astUtils.isTokenOnSameLine(obj, dot)) {
+                        context.report(node, dot.loc.start, "Expected dot to be on same line as object.");
+                    }
+                } else if (!astUtils.isTokenOnSameLine(dot, prop)) {
+                    context.report(node, dot.loc.start, "Expected dot to be on same line as property.");
                 }
-            } else if (!astUtils.isTokenOnSameLine(dot, prop)) {
-                context.report(node, dot.loc.start, "Expected dot to be on same line as property.");
             }
         }
-    }
 
-    /**
-     * Checks the spacing of the dot within a member expression.
-     * @param {ASTNode} node The node to check.
-     * @returns {void}
-     */
-    function checkNode(node) {
-        checkDotLocation(node.object, node.property, node);
-    }
+        /**
+         * Checks the spacing of the dot within a member expression.
+         * @param {ASTNode} node The node to check.
+         * @returns {void}
+         */
+        function checkNode(node) {
+            checkDotLocation(node.object, node.property, node);
+        }
 
-    return {
-        "MemberExpression": checkNode
-    };
+        return {
+            "MemberExpression": checkNode
+        };
+    }
 };
-
-module.exports.schema = [
-    {
-        "enum": ["object", "property"]
-    }
-];
 
 },{"../ast-utils":151}],188:[function(require,module,exports){
 /**
@@ -44369,53 +44635,63 @@ module.exports.schema = [
 var validIdentifier = /^[a-zA-Z_$][a-zA-Z0-9_$]*$/;
 var keywords = require("../util/keywords");
 
-module.exports = function(context) {
-    var options = context.options[0] || {};
-    var allowKeywords = options.allowKeywords === void 0 || !!options.allowKeywords;
+module.exports = {
+    meta: {
+        docs: {
+            description: "enforce dot notation whenever possible",
+            category: "Best Practices",
+            recommended: false
+        },
 
-    var allowPattern;
+        schema: [
+            {
+                "type": "object",
+                "properties": {
+                    "allowKeywords": {
+                        "type": "boolean"
+                    },
+                    "allowPattern": {
+                        "type": "string"
+                    }
+                },
+                "additionalProperties": false
+            }
+        ]
+    },
 
-    if (options.allowPattern) {
-        allowPattern = new RegExp(options.allowPattern);
-    }
+    create: function(context) {
+        var options = context.options[0] || {};
+        var allowKeywords = options.allowKeywords === void 0 || !!options.allowKeywords;
 
-    return {
-        "MemberExpression": function(node) {
-            if (
-                node.computed &&
-                node.property.type === "Literal" &&
-                validIdentifier.test(node.property.value) &&
-                (allowKeywords || keywords.indexOf("" + node.property.value) === -1)
-            ) {
-                if (!(allowPattern && allowPattern.test(node.property.value))) {
-                    context.report(node.property, "[" + JSON.stringify(node.property.value) + "] is better written in dot notation.");
+        var allowPattern;
+
+        if (options.allowPattern) {
+            allowPattern = new RegExp(options.allowPattern);
+        }
+
+        return {
+            "MemberExpression": function(node) {
+                if (
+                    node.computed &&
+                    node.property.type === "Literal" &&
+                    validIdentifier.test(node.property.value) &&
+                    (allowKeywords || keywords.indexOf("" + node.property.value) === -1)
+                ) {
+                    if (!(allowPattern && allowPattern.test(node.property.value))) {
+                        context.report(node.property, "[" + JSON.stringify(node.property.value) + "] is better written in dot notation.");
+                    }
+                }
+                if (
+                    !allowKeywords &&
+                    !node.computed &&
+                    keywords.indexOf("" + node.property.name) !== -1
+                ) {
+                    context.report(node.property, "." + node.property.name + " is a syntax error.");
                 }
             }
-            if (
-                !allowKeywords &&
-                !node.computed &&
-                keywords.indexOf("" + node.property.name) !== -1
-            ) {
-                context.report(node.property, "." + node.property.name + " is a syntax error.");
-            }
-        }
-    };
-};
-
-module.exports.schema = [
-    {
-        "type": "object",
-        "properties": {
-            "allowKeywords": {
-                "type": "boolean"
-            },
-            "allowPattern": {
-                "type": "string"
-            }
-        },
-        "additionalProperties": false
+        };
     }
-];
+};
 
 },{"../util/keywords":378}],189:[function(require,module,exports){
 /**
@@ -44428,46 +44704,58 @@ module.exports.schema = [
 // Rule Definition
 //------------------------------------------------------------------------------
 
-module.exports = function(context) {
+module.exports = {
+    meta: {
+        docs: {
+            description: "enforce at least one newline at the end of files",
+            category: "Stylistic Issues",
+            recommended: false
+        },
 
-    //--------------------------------------------------------------------------
-    // Public
-    //--------------------------------------------------------------------------
+        fixable: "whitespace",
 
-    return {
-
-        "Program": function checkBadEOF(node) {
-
-            // Get the whole source code, not for node only.
-            var src = context.getSource(),
-                location = {column: 1},
-                linebreakStyle = context.options[0] || "unix",
-                linebreak = linebreakStyle === "unix" ? "\n" : "\r\n";
-
-            if (src[src.length - 1] !== "\n") {
-
-                // file is not newline-terminated
-                location.line = src.split(/\n/g).length;
-                context.report({
-                    node: node,
-                    loc: location,
-                    message: "Newline required at end of file but not found.",
-                    fix: function(fixer) {
-                        return fixer.insertTextAfterRange([0, src.length], linebreak);
-                    }
-                });
+        schema: [
+            {
+                "enum": ["unix", "windows"]
             }
-        }
+        ]
+    },
 
-    };
+    create: function(context) {
 
-};
+        //--------------------------------------------------------------------------
+        // Public
+        //--------------------------------------------------------------------------
 
-module.exports.schema = [
-    {
-        "enum": ["unix", "windows"]
+        return {
+
+            "Program": function checkBadEOF(node) {
+
+                // Get the whole source code, not for node only.
+                var src = context.getSource(),
+                    location = {column: 1},
+                    linebreakStyle = context.options[0] || "unix",
+                    linebreak = linebreakStyle === "unix" ? "\n" : "\r\n";
+
+                if (src[src.length - 1] !== "\n") {
+
+                    // file is not newline-terminated
+                    location.line = src.split(/\n/g).length;
+                    context.report({
+                        node: node,
+                        loc: location,
+                        message: "Newline required at end of file but not found.",
+                        fix: function(fixer) {
+                            return fixer.insertTextAfterRange([0, src.length], linebreak);
+                        }
+                    });
+                }
+            }
+
+        };
+
     }
-];
+};
 
 },{}],190:[function(require,module,exports){
 /**
@@ -44483,94 +44771,104 @@ module.exports.schema = [
 // Rule Definition
 //------------------------------------------------------------------------------
 
-module.exports = function(context) {
+module.exports = {
+    meta: {
+        docs: {
+            description: "require the use of `===` and `!==`",
+            category: "Best Practices",
+            recommended: false
+        },
 
-    /**
-     * Checks if an expression is a typeof expression
-     * @param  {ASTNode} node The node to check
-     * @returns {boolean} if the node is a typeof expression
-     */
-    function isTypeOf(node) {
-        return node.type === "UnaryExpression" && node.operator === "typeof";
-    }
-
-    /**
-     * Checks if either operand of a binary expression is a typeof operation
-     * @param {ASTNode} node The node to check
-     * @returns {boolean} if one of the operands is typeof
-     * @private
-     */
-    function isTypeOfBinary(node) {
-        return isTypeOf(node.left) || isTypeOf(node.right);
-    }
-
-    /**
-     * Checks if operands are literals of the same type (via typeof)
-     * @param {ASTNode} node The node to check
-     * @returns {boolean} if operands are of same type
-     * @private
-     */
-    function areLiteralsAndSameType(node) {
-        return node.left.type === "Literal" && node.right.type === "Literal" &&
-                typeof node.left.value === typeof node.right.value;
-    }
-
-    /**
-     * Checks if one of the operands is a literal null
-     * @param {ASTNode} node The node to check
-     * @returns {boolean} if operands are null
-     * @private
-     */
-    function isNullCheck(node) {
-        return (node.right.type === "Literal" && node.right.value === null) ||
-                (node.left.type === "Literal" && node.left.value === null);
-    }
-
-    /**
-     * Gets the location (line and column) of the binary expression's operator
-     * @param {ASTNode} node The binary expression node to check
-     * @param {String} operator The operator to find
-     * @returns {Object} { line, column } location of operator
-     * @private
-     */
-    function getOperatorLocation(node) {
-        var opToken = context.getTokenAfter(node.left);
-
-        return {line: opToken.loc.start.line, column: opToken.loc.start.column};
-    }
-
-    return {
-        "BinaryExpression": function(node) {
-            if (node.operator !== "==" && node.operator !== "!=") {
-                return;
+        schema: [
+            {
+                "enum": ["smart", "allow-null"]
             }
+        ]
+    },
 
-            if (context.options[0] === "smart" && (isTypeOfBinary(node) ||
-                    areLiteralsAndSameType(node) || isNullCheck(node))) {
-                return;
-            }
+    create: function(context) {
 
-            if (context.options[0] === "allow-null" && isNullCheck(node)) {
-                return;
-            }
-
-            context.report({
-                node: node,
-                loc: getOperatorLocation(node),
-                message: "Expected '{{op}}=' and instead saw '{{op}}'.",
-                data: { op: node.operator }
-            });
-
+        /**
+         * Checks if an expression is a typeof expression
+         * @param  {ASTNode} node The node to check
+         * @returns {boolean} if the node is a typeof expression
+         */
+        function isTypeOf(node) {
+            return node.type === "UnaryExpression" && node.operator === "typeof";
         }
-    };
 
-};
+        /**
+         * Checks if either operand of a binary expression is a typeof operation
+         * @param {ASTNode} node The node to check
+         * @returns {boolean} if one of the operands is typeof
+         * @private
+         */
+        function isTypeOfBinary(node) {
+            return isTypeOf(node.left) || isTypeOf(node.right);
+        }
 
-module.exports.schema = [
-    {
-        "enum": ["smart", "allow-null"]
+        /**
+         * Checks if operands are literals of the same type (via typeof)
+         * @param {ASTNode} node The node to check
+         * @returns {boolean} if operands are of same type
+         * @private
+         */
+        function areLiteralsAndSameType(node) {
+            return node.left.type === "Literal" && node.right.type === "Literal" &&
+                    typeof node.left.value === typeof node.right.value;
+        }
+
+        /**
+         * Checks if one of the operands is a literal null
+         * @param {ASTNode} node The node to check
+         * @returns {boolean} if operands are null
+         * @private
+         */
+        function isNullCheck(node) {
+            return (node.right.type === "Literal" && node.right.value === null) ||
+                    (node.left.type === "Literal" && node.left.value === null);
+        }
+
+        /**
+         * Gets the location (line and column) of the binary expression's operator
+         * @param {ASTNode} node The binary expression node to check
+         * @param {String} operator The operator to find
+         * @returns {Object} { line, column } location of operator
+         * @private
+         */
+        function getOperatorLocation(node) {
+            var opToken = context.getTokenAfter(node.left);
+
+            return {line: opToken.loc.start.line, column: opToken.loc.start.column};
+        }
+
+        return {
+            "BinaryExpression": function(node) {
+                if (node.operator !== "==" && node.operator !== "!=") {
+                    return;
+                }
+
+                if (context.options[0] === "smart" && (isTypeOfBinary(node) ||
+                        areLiteralsAndSameType(node) || isNullCheck(node))) {
+                    return;
+                }
+
+                if (context.options[0] === "allow-null" && isNullCheck(node)) {
+                    return;
+                }
+
+                context.report({
+                    node: node,
+                    loc: getOperatorLocation(node),
+                    message: "Expected '{{op}}=' and instead saw '{{op}}'.",
+                    data: { op: node.operator }
+                });
+
+            }
+        };
+
     }
-];
+};
 
 },{}],191:[function(require,module,exports){
 /**
@@ -44586,38 +44884,48 @@ module.exports.schema = [
 // Rule Definition
 //------------------------------------------------------------------------------
 
-module.exports = function(context) {
+module.exports = {
+    meta: {
+        docs: {
+            description: "enforce named `function` expressions",
+            category: "Stylistic Issues",
+            recommended: false
+        },
 
-    /**
-     * Determines whether the current FunctionExpression node is a get, set, or
-     * shorthand method in an object literal or a class.
-     * @returns {boolean} True if the node is a get, set, or shorthand method.
-     */
-    function isObjectOrClassMethod() {
-        var parent = context.getAncestors().pop();
+        schema: []
+    },
 
-        return (parent.type === "MethodDefinition" || (
-            parent.type === "Property" && (
-                parent.method ||
-                parent.kind === "get" ||
-                parent.kind === "set"
-            )
-        ));
-    }
+    create: function(context) {
 
-    return {
-        "FunctionExpression": function(node) {
+        /**
+         * Determines whether the current FunctionExpression node is a get, set, or
+         * shorthand method in an object literal or a class.
+         * @returns {boolean} True if the node is a get, set, or shorthand method.
+         */
+        function isObjectOrClassMethod() {
+            var parent = context.getAncestors().pop();
 
-            var name = node.id && node.id.name;
-
-            if (!name && !isObjectOrClassMethod()) {
-                context.report(node, "Missing function expression name.");
-            }
+            return (parent.type === "MethodDefinition" || (
+                parent.type === "Property" && (
+                    parent.method ||
+                    parent.kind === "get" ||
+                    parent.kind === "set"
+                )
+            ));
         }
-    };
-};
 
-module.exports.schema = [];
+        return {
+            "FunctionExpression": function(node) {
+
+                var name = node.id && node.id.name;
+
+                if (!name && !isObjectOrClassMethod()) {
+                    context.report(node, "Missing function expression name.");
+                }
+            }
+        };
+    }
+};
 
 },{}],192:[function(require,module,exports){
 /**
@@ -44631,79 +44939,89 @@ module.exports.schema = [];
 // Rule Definition
 //------------------------------------------------------------------------------
 
-module.exports = function(context) {
-
-    var style = context.options[0],
-        allowArrowFunctions = context.options[1] && context.options[1].allowArrowFunctions === true,
-        enforceDeclarations = (style === "declaration"),
-        stack = [];
-
-    var nodesToCheck = {
-        "Program": function() {
-            stack = [];
+module.exports = {
+    meta: {
+        docs: {
+            description: "enforce the consistent use of either `function` declarations or expressions",
+            category: "Stylistic Issues",
+            recommended: false
         },
 
-        "FunctionDeclaration": function(node) {
-            stack.push(false);
-
-            if (!enforceDeclarations && node.parent.type !== "ExportDefaultDeclaration") {
-                context.report(node, "Expected a function expression.");
+        schema: [
+            {
+                "enum": ["declaration", "expression"]
+            },
+            {
+                "type": "object",
+                "properties": {
+                    "allowArrowFunctions": {
+                        "type": "boolean"
+                    }
+                },
+                "additionalProperties": false
             }
-        },
-        "FunctionDeclaration:exit": function() {
-            stack.pop();
-        },
-
-        "FunctionExpression": function(node) {
-            stack.push(false);
-
-            if (enforceDeclarations && node.parent.type === "VariableDeclarator") {
-                context.report(node.parent, "Expected a function declaration.");
-            }
-        },
-        "FunctionExpression:exit": function() {
-            stack.pop();
-        },
-
-        "ThisExpression": function() {
-            if (stack.length > 0) {
-                stack[stack.length - 1] = true;
-            }
-        }
-    };
-
-    if (!allowArrowFunctions) {
-        nodesToCheck.ArrowFunctionExpression = function() {
-            stack.push(false);
-        };
-
-        nodesToCheck["ArrowFunctionExpression:exit"] = function(node) {
-            var hasThisExpr = stack.pop();
-
-            if (enforceDeclarations && !hasThisExpr && node.parent.type === "VariableDeclarator") {
-                context.report(node.parent, "Expected a function declaration.");
-            }
-        };
-    }
-
-    return nodesToCheck;
-
-};
-
-module.exports.schema = [
-    {
-        "enum": ["declaration", "expression"]
+        ]
     },
-    {
-        "type": "object",
-        "properties": {
-            "allowArrowFunctions": {
-                "type": "boolean"
+
+    create: function(context) {
+
+        var style = context.options[0],
+            allowArrowFunctions = context.options[1] && context.options[1].allowArrowFunctions === true,
+            enforceDeclarations = (style === "declaration"),
+            stack = [];
+
+        var nodesToCheck = {
+            "Program": function() {
+                stack = [];
+            },
+
+            "FunctionDeclaration": function(node) {
+                stack.push(false);
+
+                if (!enforceDeclarations && node.parent.type !== "ExportDefaultDeclaration") {
+                    context.report(node, "Expected a function expression.");
+                }
+            },
+            "FunctionDeclaration:exit": function() {
+                stack.pop();
+            },
+
+            "FunctionExpression": function(node) {
+                stack.push(false);
+
+                if (enforceDeclarations && node.parent.type === "VariableDeclarator") {
+                    context.report(node.parent, "Expected a function declaration.");
+                }
+            },
+            "FunctionExpression:exit": function() {
+                stack.pop();
+            },
+
+            "ThisExpression": function() {
+                if (stack.length > 0) {
+                    stack[stack.length - 1] = true;
+                }
             }
-        },
-        "additionalProperties": false
+        };
+
+        if (!allowArrowFunctions) {
+            nodesToCheck.ArrowFunctionExpression = function() {
+                stack.push(false);
+            };
+
+            nodesToCheck["ArrowFunctionExpression:exit"] = function(node) {
+                var hasThisExpr = stack.pop();
+
+                if (enforceDeclarations && !hasThisExpr && node.parent.type === "VariableDeclarator") {
+                    context.report(node.parent, "Expected a function declaration.");
+                }
+            };
+        }
+
+        return nodesToCheck;
+
     }
-];
+};
 
 },{}],193:[function(require,module,exports){
 /**
@@ -44719,105 +45037,117 @@ module.exports.schema = [
 // Rule Definition
 //------------------------------------------------------------------------------
 
-module.exports = function(context) {
+module.exports = {
+    meta: {
+        docs: {
+            description: "enforce consistent spacing around `*` operators in generator functions",
+            category: "ECMAScript 6",
+            recommended: false
+        },
 
-    var mode = (function(option) {
-        if (!option || typeof option === "string") {
-            return {
-                before: { before: true, after: false },
-                after: { before: false, after: true },
-                both: { before: true, after: true },
-                neither: { before: false, after: false }
-            }[option || "before"];
-        }
-        return option;
-    }(context.options[0]));
+        fixable: "whitespace",
 
-    /**
-     * Checks the spacing between two tokens before or after the star token.
-     * @param {string} side Either "before" or "after".
-     * @param {Token} leftToken `function` keyword token if side is "before", or
-     *     star token if side is "after".
-     * @param {Token} rightToken Star token if side is "before", or identifier
-     *     token if side is "after".
-     * @returns {void}
-     */
-    function checkSpacing(side, leftToken, rightToken) {
-        if (!!(rightToken.range[0] - leftToken.range[1]) !== mode[side]) {
-            var after = leftToken.value === "*";
-            var spaceRequired = mode[side];
-            var node = after ? leftToken : rightToken;
-            var type = spaceRequired ? "Missing" : "Unexpected";
-            var message = type + " space " + side + " *.";
-
-            context.report({
-                node: node,
-                message: message,
-                fix: function(fixer) {
-                    if (spaceRequired) {
-                        if (after) {
-                            return fixer.insertTextAfter(node, " ");
-                        }
-                        return fixer.insertTextBefore(node, " ");
+        schema: [
+            {
+                "oneOf": [
+                    {
+                        "enum": ["before", "after", "both", "neither"]
+                    },
+                    {
+                        "type": "object",
+                        "properties": {
+                            "before": {"type": "boolean"},
+                            "after": {"type": "boolean"}
+                        },
+                        "additionalProperties": false
                     }
-                    return fixer.removeRange([leftToken.range[1], rightToken.range[0]]);
-                }
-            });
-        }
-    }
-
-    /**
-     * Enforces the spacing around the star if node is a generator function.
-     * @param {ASTNode} node A function expression or declaration node.
-     * @returns {void}
-     */
-    function checkFunction(node) {
-        var prevToken, starToken, nextToken;
-
-        if (!node.generator) {
-            return;
-        }
-
-        if (node.parent.method || node.parent.type === "MethodDefinition") {
-            starToken = context.getTokenBefore(node, 1);
-        } else {
-            starToken = context.getFirstToken(node, 1);
-        }
-
-        // Only check before when preceded by `function` keyword
-        prevToken = context.getTokenBefore(starToken);
-        if (prevToken.value === "function" || prevToken.value === "static") {
-            checkSpacing("before", prevToken, starToken);
-        }
-
-        nextToken = context.getTokenAfter(starToken);
-        checkSpacing("after", starToken, nextToken);
-    }
-
-    return {
-        "FunctionDeclaration": checkFunction,
-        "FunctionExpression": checkFunction
-    };
-
-};
-
-module.exports.schema = [
-    {
-        "oneOf": [
-            {
-                "enum": ["before", "after", "both", "neither"]
-            },
-            {
-                "type": "object",
-                "properties": {
-                    "before": {"type": "boolean"},
-                    "after": {"type": "boolean"}
-                },
-                "additionalProperties": false
+                ]
             }
         ]
+    },
+
+    create: function(context) {
+
+        var mode = (function(option) {
+            if (!option || typeof option === "string") {
+                return {
+                    before: { before: true, after: false },
+                    after: { before: false, after: true },
+                    both: { before: true, after: true },
+                    neither: { before: false, after: false }
+                }[option || "before"];
+            }
+            return option;
+        }(context.options[0]));
+
+        /**
+         * Checks the spacing between two tokens before or after the star token.
+         * @param {string} side Either "before" or "after".
+         * @param {Token} leftToken `function` keyword token if side is "before", or
+         *     star token if side is "after".
+         * @param {Token} rightToken Star token if side is "before", or identifier
+         *     token if side is "after".
+         * @returns {void}
+         */
+        function checkSpacing(side, leftToken, rightToken) {
+            if (!!(rightToken.range[0] - leftToken.range[1]) !== mode[side]) {
+                var after = leftToken.value === "*";
+                var spaceRequired = mode[side];
+                var node = after ? leftToken : rightToken;
+                var type = spaceRequired ? "Missing" : "Unexpected";
+                var message = type + " space " + side + " *.";
+
+                context.report({
+                    node: node,
+                    message: message,
+                    fix: function(fixer) {
+                        if (spaceRequired) {
+                            if (after) {
+                                return fixer.insertTextAfter(node, " ");
+                            }
+                            return fixer.insertTextBefore(node, " ");
+                        }
+                        return fixer.removeRange([leftToken.range[1], rightToken.range[0]]);
+                    }
+                });
+            }
+        }
+
+        /**
+         * Enforces the spacing around the star if node is a generator function.
+         * @param {ASTNode} node A function expression or declaration node.
+         * @returns {void}
+         */
+        function checkFunction(node) {
+            var prevToken, starToken, nextToken;
+
+            if (!node.generator) {
+                return;
+            }
+
+            if (node.parent.method || node.parent.type === "MethodDefinition") {
+                starToken = context.getTokenBefore(node, 1);
+            } else {
+                starToken = context.getFirstToken(node, 1);
+            }
+
+            // Only check before when preceded by `function` keyword
+            prevToken = context.getTokenBefore(starToken);
+            if (prevToken.value === "function" || prevToken.value === "static") {
+                checkSpacing("before", prevToken, starToken);
+            }
+
+            nextToken = context.getTokenAfter(starToken);
+            checkSpacing("after", starToken, nextToken);
+        }
+
+        return {
+            "FunctionDeclaration": checkFunction,
+            "FunctionExpression": checkFunction
+        };
+
     }
-];
+};
 
 },{}],194:[function(require,module,exports){
 /**
@@ -44871,25 +45201,35 @@ function isShadowed(scope, node) {
     return reference && reference.resolved && reference.resolved.defs.length > 0;
 }
 
-module.exports = function(context) {
-    return {
-        "CallExpression": function(node) {
-            var currentScope = context.getScope(),
-                isGoodRequire;
+module.exports = {
+    meta: {
+        docs: {
+            description: "require `require()` calls to be placed at top-level module scope",
+            category: "Node.js and CommonJS",
+            recommended: false
+        },
 
-            if (node.callee.name === "require" && !isShadowed(currentScope, node.callee)) {
-                isGoodRequire = context.getAncestors().every(function(parent) {
-                    return ACCEPTABLE_PARENTS.indexOf(parent.type) > -1;
-                });
-                if (!isGoodRequire) {
-                    context.report(node, "Unexpected require().");
+        schema: []
+    },
+
+    create: function(context) {
+        return {
+            "CallExpression": function(node) {
+                var currentScope = context.getScope(),
+                    isGoodRequire;
+
+                if (node.callee.name === "require" && !isShadowed(currentScope, node.callee)) {
+                    isGoodRequire = context.getAncestors().every(function(parent) {
+                        return ACCEPTABLE_PARENTS.indexOf(parent.type) > -1;
+                    });
+                    if (!isGoodRequire) {
+                        context.report(node, "Unexpected require().");
+                    }
                 }
             }
-        }
-    };
+        };
+    }
 };
-
-module.exports.schema = [];
 
 },{}],195:[function(require,module,exports){
 /**
@@ -44903,27 +45243,37 @@ module.exports.schema = [];
 // Rule Definition
 //------------------------------------------------------------------------------
 
-module.exports = function(context) {
+module.exports = {
+    meta: {
+        docs: {
+            description: "require `for-in` loops to include an `if` statement",
+            category: "Best Practices",
+            recommended: false
+        },
 
-    return {
+        schema: []
+    },
 
-        "ForInStatement": function(node) {
+    create: function(context) {
 
-            /*
-             * If the for-in statement has {}, then the real body is the body
-             * of the BlockStatement. Otherwise, just use body as provided.
-             */
-            var body = node.body.type === "BlockStatement" ? node.body.body[0] : node.body;
+        return {
 
-            if (body && body.type !== "IfStatement") {
-                context.report(node, "The body of a for-in should be wrapped in an if statement to filter unwanted properties from the prototype.");
+            "ForInStatement": function(node) {
+
+                /*
+                 * If the for-in statement has {}, then the real body is the body
+                 * of the BlockStatement. Otherwise, just use body as provided.
+                 */
+                var body = node.body.type === "BlockStatement" ? node.body.body[0] : node.body;
+
+                if (body && body.type !== "IfStatement") {
+                    context.report(node, "The body of a for-in should be wrapped in an if statement to filter unwanted properties from the prototype.");
+                }
             }
-        }
-    };
+        };
 
+    }
 };
-
-module.exports.schema = [];
 
 },{}],196:[function(require,module,exports){
 /**
@@ -44939,76 +45289,86 @@ module.exports.schema = [];
 // Rule Definition
 //------------------------------------------------------------------------------
 
-module.exports = function(context) {
+module.exports = {
+    meta: {
+        docs: {
+            description: "require error handling in callbacks",
+            category: "Node.js and CommonJS",
+            recommended: false
+        },
 
-    var errorArgument = context.options[0] || "err";
+        schema: [
+            {
+                "type": "string"
+            }
+        ]
+    },
 
-    /**
-     * Checks if the given argument should be interpreted as a regexp pattern.
-     * @param {string} stringToCheck The string which should be checked.
-     * @returns {boolean} Whether or not the string should be interpreted as a pattern.
-     */
-    function isPattern(stringToCheck) {
-        var firstChar = stringToCheck[0];
+    create: function(context) {
 
-        return firstChar === "^";
-    }
+        var errorArgument = context.options[0] || "err";
 
-    /**
-     * Checks if the given name matches the configured error argument.
-     * @param {string} name The name which should be compared.
-     * @returns {boolean} Whether or not the given name matches the configured error variable name.
-     */
-    function matchesConfiguredErrorName(name) {
-        if (isPattern(errorArgument)) {
-            var regexp = new RegExp(errorArgument);
+        /**
+         * Checks if the given argument should be interpreted as a regexp pattern.
+         * @param {string} stringToCheck The string which should be checked.
+         * @returns {boolean} Whether or not the string should be interpreted as a pattern.
+         */
+        function isPattern(stringToCheck) {
+            var firstChar = stringToCheck[0];
 
-            return regexp.test(name);
+            return firstChar === "^";
         }
-        return name === errorArgument;
-    }
 
-    /**
-     * Get the parameters of a given function scope.
-     * @param {object} scope The function scope.
-     * @returns {array} All parameters of the given scope.
-     */
-    function getParameters(scope) {
-        return scope.variables.filter(function(variable) {
-            return variable.defs[0] && variable.defs[0].type === "Parameter";
-        });
-    }
+        /**
+         * Checks if the given name matches the configured error argument.
+         * @param {string} name The name which should be compared.
+         * @returns {boolean} Whether or not the given name matches the configured error variable name.
+         */
+        function matchesConfiguredErrorName(name) {
+            if (isPattern(errorArgument)) {
+                var regexp = new RegExp(errorArgument);
 
-    /**
-     * Check to see if we're handling the error object properly.
-     * @param {ASTNode} node The AST node to check.
-     * @returns {void}
-     */
-    function checkForError(node) {
-        var scope = context.getScope(),
-            parameters = getParameters(scope),
-            firstParameter = parameters[0];
+                return regexp.test(name);
+            }
+            return name === errorArgument;
+        }
 
-        if (firstParameter && matchesConfiguredErrorName(firstParameter.name)) {
-            if (firstParameter.references.length === 0) {
-                context.report(node, "Expected error to be handled.");
+        /**
+         * Get the parameters of a given function scope.
+         * @param {object} scope The function scope.
+         * @returns {array} All parameters of the given scope.
+         */
+        function getParameters(scope) {
+            return scope.variables.filter(function(variable) {
+                return variable.defs[0] && variable.defs[0].type === "Parameter";
+            });
+        }
+
+        /**
+         * Check to see if we're handling the error object properly.
+         * @param {ASTNode} node The AST node to check.
+         * @returns {void}
+         */
+        function checkForError(node) {
+            var scope = context.getScope(),
+                parameters = getParameters(scope),
+                firstParameter = parameters[0];
+
+            if (firstParameter && matchesConfiguredErrorName(firstParameter.name)) {
+                if (firstParameter.references.length === 0) {
+                    context.report(node, "Expected error to be handled.");
+                }
             }
         }
+
+        return {
+            "FunctionDeclaration": checkForError,
+            "FunctionExpression": checkForError,
+            "ArrowFunctionExpression": checkForError
+        };
+
     }
-
-    return {
-        "FunctionDeclaration": checkForError,
-        "FunctionExpression": checkForError,
-        "ArrowFunctionExpression": checkForError
-    };
-
 };
-
-module.exports.schema = [
-    {
-        "type": "string"
-    }
-];
 
 },{}],197:[function(require,module,exports){
 /**
@@ -45027,99 +45387,110 @@ module.exports.schema = [
 // Rule Definition
 //------------------------------------------------------------------------------
 
-module.exports = function(context) {
+module.exports = {
+    meta: {
+        docs: {
+            description: "disallow specified identifiers",
+            category: "Stylistic Issues",
+            recommended: false
+        },
+
+        schema: {
+            "type": "array",
+            "items": {
+                "type": "string"
+            },
+            "uniqueItems": true
+        }
+    },
+
+    create: function(context) {
 
 
-    //--------------------------------------------------------------------------
-    // Helpers
-    //--------------------------------------------------------------------------
+        //--------------------------------------------------------------------------
+        // Helpers
+        //--------------------------------------------------------------------------
 
-    var blacklist = context.options;
+        var blacklist = context.options;
 
 
-    /**
-     * Checks if a string matches the provided pattern
-     * @param {String} name The string to check.
-     * @returns {boolean} if the string is a match
-     * @private
-     */
-    function isInvalid(name) {
-        return blacklist.indexOf(name) !== -1;
-    }
-
-    /**
-     * Verifies if we should report an error or not based on the effective
-     * parent node and the identifier name.
-     * @param {ASTNode} effectiveParent The effective parent node of the node to be reported
-     * @param {String} name The identifier name of the identifier node
-     * @returns {boolean} whether an error should be reported or not
-     */
-    function shouldReport(effectiveParent, name) {
-        return effectiveParent.type !== "CallExpression"
-            && effectiveParent.type !== "NewExpression" &&
-            isInvalid(name);
-    }
-
-    /**
-     * Reports an AST node as a rule violation.
-     * @param {ASTNode} node The node to report.
-     * @returns {void}
-     * @private
-     */
-    function report(node) {
-        context.report(node, "Identifier '{{name}}' is blacklisted", {
-            name: node.name
-        });
-    }
-
-    return {
-
-        "Identifier": function(node) {
-            var name = node.name,
-                effectiveParent = (node.parent.type === "MemberExpression") ? node.parent.parent : node.parent;
-
-            // MemberExpressions get special rules
-            if (node.parent.type === "MemberExpression") {
-
-                // Always check object names
-                if (node.parent.object.type === "Identifier" &&
-                    node.parent.object.name === node.name) {
-                    if (isInvalid(name)) {
-                        report(node);
-                    }
-
-                    // Report AssignmentExpressions only if they are the left side of the assignment
-                } else if (effectiveParent.type === "AssignmentExpression" &&
-                    (effectiveParent.right.type !== "MemberExpression" ||
-                    effectiveParent.left.type === "MemberExpression" &&
-                    effectiveParent.left.property.name === node.name)) {
-                    if (isInvalid(name)) {
-                        report(node);
-                    }
-                }
-
-            // Properties have their own rules
-            } else if (node.parent.type === "Property") {
-
-                if (shouldReport(effectiveParent, name)) {
-                    report(node);
-                }
-
-            // Report anything that is a match and not a CallExpression
-            } else if (shouldReport(effectiveParent, name)) {
-                report(node);
-            }
+        /**
+         * Checks if a string matches the provided pattern
+         * @param {String} name The string to check.
+         * @returns {boolean} if the string is a match
+         * @private
+         */
+        function isInvalid(name) {
+            return blacklist.indexOf(name) !== -1;
         }
 
-    };
+        /**
+         * Verifies if we should report an error or not based on the effective
+         * parent node and the identifier name.
+         * @param {ASTNode} effectiveParent The effective parent node of the node to be reported
+         * @param {String} name The identifier name of the identifier node
+         * @returns {boolean} whether an error should be reported or not
+         */
+        function shouldReport(effectiveParent, name) {
+            return effectiveParent.type !== "CallExpression"
+                && effectiveParent.type !== "NewExpression" &&
+                isInvalid(name);
+        }
 
-};
-module.exports.schema = {
-    "type": "array",
-    "items": {
-        "type": "string"
-    },
-    "uniqueItems": true
+        /**
+         * Reports an AST node as a rule violation.
+         * @param {ASTNode} node The node to report.
+         * @returns {void}
+         * @private
+         */
+        function report(node) {
+            context.report(node, "Identifier '{{name}}' is blacklisted", {
+                name: node.name
+            });
+        }
+
+        return {
+
+            "Identifier": function(node) {
+                var name = node.name,
+                    effectiveParent = (node.parent.type === "MemberExpression") ? node.parent.parent : node.parent;
+
+                // MemberExpressions get special rules
+                if (node.parent.type === "MemberExpression") {
+
+                    // Always check object names
+                    if (node.parent.object.type === "Identifier" &&
+                        node.parent.object.name === node.name) {
+                        if (isInvalid(name)) {
+                            report(node);
+                        }
+
+                        // Report AssignmentExpressions only if they are the left side of the assignment
+                    } else if (effectiveParent.type === "AssignmentExpression" &&
+                        (effectiveParent.right.type !== "MemberExpression" ||
+                        effectiveParent.left.type === "MemberExpression" &&
+                        effectiveParent.left.property.name === node.name)) {
+                        if (isInvalid(name)) {
+                            report(node);
+                        }
+                    }
+
+                // Properties have their own rules
+                } else if (node.parent.type === "Property") {
+
+                    if (shouldReport(effectiveParent, name)) {
+                        report(node);
+                    }
+
+                // Report anything that is a match and not a CallExpression
+                } else if (shouldReport(effectiveParent, name)) {
+                    report(node);
+                }
+            }
+
+        };
+
+    }
 };
 
 },{}],198:[function(require,module,exports){
@@ -45137,101 +45508,108 @@ module.exports.schema = {
 // Rule Definition
 //------------------------------------------------------------------------------
 
-module.exports = function(context) {
-    var options = context.options[0] || {};
-    var minLength = typeof options.min !== "undefined" ? options.min : 2;
-    var maxLength = typeof options.max !== "undefined" ? options.max : Infinity;
-    var properties = options.properties !== "never";
-    var exceptions = (options.exceptions ? options.exceptions : [])
-        .reduce(function(obj, item) {
-            obj[item] = true;
+module.exports = {
+    meta: {
+        docs: {
+            description: "enforce minimum and maximum identifier lengths",
+            category: "Stylistic Issues",
+            recommended: false
+        },
 
-            return obj;
-        }, {});
+        schema: [
+            {
+                "type": "object",
+                "properties": {
+                    "min": {
+                        "type": "number"
+                    },
+                    "max": {
+                        "type": "number"
+                    },
+                    "exceptions": {
+                        "type": "array",
+                        "uniqueItems": true,
+                        "items": {
+                            "type": "string"
+                        }
+                    },
+                    "properties": {
+                        "enum": ["always", "never"]
+                    }
+                },
+                "additionalProperties": false
+            }
+        ]
+    },
 
-    var SUPPORTED_EXPRESSIONS = {
-        "MemberExpression": properties && function(parent) {
-            return !parent.computed && (
+    create: function(context) {
+        var options = context.options[0] || {};
+        var minLength = typeof options.min !== "undefined" ? options.min : 2;
+        var maxLength = typeof options.max !== "undefined" ? options.max : Infinity;
+        var properties = options.properties !== "never";
+        var exceptions = (options.exceptions ? options.exceptions : [])
+            .reduce(function(obj, item) {
+                obj[item] = true;
 
-                // regular property assignment
-                parent.parent.left === parent || (
+                return obj;
+            }, {});
 
-                    // or the last identifier in an ObjectPattern destructuring
+        var SUPPORTED_EXPRESSIONS = {
+            "MemberExpression": properties && function(parent) {
+                return !parent.computed && (
+
+                    // regular property assignment
+                    (parent.parent.left === parent || // or the last identifier in an ObjectPattern destructuring
                     parent.parent.type === "Property" && parent.parent.value === parent &&
-                    parent.parent.parent.type === "ObjectPattern" && parent.parent.parent.parent.left === parent.parent.parent
-                )
-            );
-        },
-        "AssignmentPattern": function(parent, node) {
-            return parent.left === node;
-        },
-        "VariableDeclarator": function(parent, node) {
-            return parent.id === node;
-        },
-        "Property": properties && function(parent, node) {
-            return parent.key === node;
-        },
-        "ImportDefaultSpecifier": true,
-        "RestElement": true,
-        "FunctionExpression": true,
-        "ArrowFunctionExpression": true,
-        "ClassDeclaration": true,
-        "FunctionDeclaration": true,
-        "MethodDefinition": true,
-        "CatchClause": true
-    };
-
-    return {
-        Identifier: function(node) {
-            var name = node.name;
-            var parent = node.parent;
-
-            var isShort = name.length < minLength;
-            var isLong = name.length > maxLength;
-
-            if (!(isShort || isLong) || exceptions[name]) {
-                return;  // Nothing to report
-            }
-
-            var isValidExpression = SUPPORTED_EXPRESSIONS[parent.type];
-
-            if (isValidExpression && (isValidExpression === true || isValidExpression(parent, node))) {
-                context.report(
-                    node,
-                    isShort ?
-                        "Identifier name '{{name}}' is too short. (< {{min}})" :
-                        "Identifier name '{{name}}' is too long. (> {{max}})",
-                    { name: name, min: minLength, max: maxLength }
+                    parent.parent.parent.type === "ObjectPattern" && parent.parent.parent.parent.left === parent.parent.parent)
                 );
-            }
-        }
-    };
-};
+            },
+            "AssignmentPattern": function(parent, node) {
+                return parent.left === node;
+            },
+            "VariableDeclarator": function(parent, node) {
+                return parent.id === node;
+            },
+            "Property": properties && function(parent, node) {
+                return parent.key === node;
+            },
+            "ImportDefaultSpecifier": true,
+            "RestElement": true,
+            "FunctionExpression": true,
+            "ArrowFunctionExpression": true,
+            "ClassDeclaration": true,
+            "FunctionDeclaration": true,
+            "MethodDefinition": true,
+            "CatchClause": true
+        };
 
-module.exports.schema = [
-    {
-        "type": "object",
-        "properties": {
-            "min": {
-                "type": "number"
-            },
-            "max": {
-                "type": "number"
-            },
-            "exceptions": {
-                "type": "array",
-                "uniqueItems": true,
-                "items": {
-                    "type": "string"
+        return {
+            Identifier: function(node) {
+                var name = node.name;
+                var parent = node.parent;
+
+                var isShort = name.length < minLength;
+                var isLong = name.length > maxLength;
+
+                if (!(isShort || isLong) || exceptions[name]) {
+                    return;  // Nothing to report
                 }
-            },
-            "properties": {
-                "enum": ["always", "never"]
+
+                var isValidExpression = SUPPORTED_EXPRESSIONS[parent.type];
+
+                if (isValidExpression && (isValidExpression === true || isValidExpression(parent, node))) {
+                    context.report(
+                        node,
+                        isShort ?
+                            "Identifier name '{{name}}' is too short. (< {{min}})" :
+                            "Identifier name '{{name}}' is too long. (> {{max}})",
+                        { name: name, min: minLength, max: maxLength }
+                    );
+                }
             }
-        },
-        "additionalProperties": false
+        };
     }
-];
+};
 
 },{}],199:[function(require,module,exports){
 /**
@@ -45247,124 +45625,142 @@ module.exports.schema = [
 // Rule Definition
 //------------------------------------------------------------------------------
 
-module.exports = function(context) {
+module.exports = {
+    meta: {
+        docs: {
+            description: "require identifiers to match a specified regular expression",
+            category: "Stylistic Issues",
+            recommended: false
+        },
 
-    //--------------------------------------------------------------------------
-    // Helpers
-    //--------------------------------------------------------------------------
-
-    var pattern = context.options[0] || "^.+$",
-        regexp = new RegExp(pattern);
-
-    var options = context.options[1] || {},
-        properties = options.properties;
-
-    // cast to boolean and default to false
-    properties = !!properties;
-
-
-    /**
-     * Checks if a string matches the provided pattern
-     * @param {String} name The string to check.
-     * @returns {boolean} if the string is a match
-     * @private
-     */
-    function isInvalid(name) {
-        return !regexp.test(name);
-    }
-
-    /**
-     * Verifies if we should report an error or not based on the effective
-     * parent node and the identifier name.
-     * @param {ASTNode} effectiveParent The effective parent node of the node to be reported
-     * @param {String} name The identifier name of the identifier node
-     * @returns {boolean} whether an error should be reported or not
-     */
-    function shouldReport(effectiveParent, name) {
-        return effectiveParent.type !== "CallExpression"
-            && effectiveParent.type !== "NewExpression" &&
-            isInvalid(name);
-    }
-
-    /**
-     * Reports an AST node as a rule violation.
-     * @param {ASTNode} node The node to report.
-     * @returns {void}
-     * @private
-     */
-    function report(node) {
-        context.report(node, "Identifier '{{name}}' does not match the pattern '{{pattern}}'.", {
-            name: node.name,
-            pattern: pattern
-        });
-    }
-
-    return {
-
-        "Identifier": function(node) {
-            var name = node.name,
-                effectiveParent = (node.parent.type === "MemberExpression") ? node.parent.parent : node.parent;
-
-            // MemberExpressions get special rules
-            if (node.parent.type === "MemberExpression") {
-
-                // return early if properties is false
-                if (!properties) {
-                    return;
-                }
-
-                // Always check object names
-                if (node.parent.object.type === "Identifier" &&
-                    node.parent.object.name === node.name) {
-                    if (isInvalid(name)) {
-                        report(node);
-                    }
-
-                    // Report AssignmentExpressions only if they are the left side of the assignment
-                } else if (effectiveParent.type === "AssignmentExpression" &&
-                    (effectiveParent.right.type !== "MemberExpression" ||
-                    effectiveParent.left.type === "MemberExpression" &&
-                    effectiveParent.left.property.name === node.name)) {
-                    if (isInvalid(name)) {
-                        report(node);
+        schema: [
+            {
+                "type": "string"
+            },
+            {
+                "type": "object",
+                "properties": {
+                    "properties": {
+                        "type": "boolean"
                     }
                 }
-
-            // Properties have their own rules
-            } else if (node.parent.type === "Property") {
-
-                // return early if properties is false
-                if (!properties) {
-                    return;
-                }
-
-                if (shouldReport(effectiveParent, name)) {
-                    report(node);
-                }
-
-            // Report anything that is a match and not a CallExpression
-            } else if (shouldReport(effectiveParent, name)) {
-                report(node);
             }
-        }
-
-    };
-
-};
-
-module.exports.schema = [
-    {
-        "type": "string"
+        ]
     },
-    {
-        "type": "object",
-        "properties": {
-            "properties": {
-                "type": "boolean"
-            }
+
+    create: function(context) {
+
+        //--------------------------------------------------------------------------
+        // Helpers
+        //--------------------------------------------------------------------------
+
+        var pattern = context.options[0] || "^.+$",
+            regexp = new RegExp(pattern);
+
+        var options = context.options[1] || {},
+            properties = options.properties,
+            onlyDeclarations = !!options.onlyDeclarations;
+
+        // cast to boolean and default to false
+        properties = !!properties;
+
+        /**
+         * Checks if a string matches the provided pattern
+         * @param {String} name The string to check.
+         * @returns {boolean} if the string is a match
+         * @private
+         */
+        function isInvalid(name) {
+            return !regexp.test(name);
         }
+
+        /**
+         * Verifies if we should report an error or not based on the effective
+         * parent node and the identifier name.
+         * @param {ASTNode} effectiveParent The effective parent node of the node to be reported
+         * @param {String} name The identifier name of the identifier node
+         * @returns {boolean} whether an error should be reported or not
+         */
+        function shouldReport(effectiveParent, name) {
+            return effectiveParent.type !== "CallExpression"
+                && effectiveParent.type !== "NewExpression" &&
+                isInvalid(name);
+        }
+
+        /**
+         * Reports an AST node as a rule violation.
+         * @param {ASTNode} node The node to report.
+         * @returns {void}
+         * @private
+         */
+        function report(node) {
+            context.report(node, "Identifier '{{name}}' does not match the pattern '{{pattern}}'.", {
+                name: node.name,
+                pattern: pattern
+            });
+        }
+
+        return {
+
+            "Identifier": function(node) {
+                var name = node.name,
+                    effectiveParent = (node.parent.type === "MemberExpression") ? node.parent.parent : node.parent;
+
+                // MemberExpressions get special rules
+                if (node.parent.type === "MemberExpression") {
+
+                    // return early if properties is false
+                    if (!properties) {
+                        return;
+                    }
+
+                    // Always check object names
+                    if (node.parent.object.type === "Identifier" &&
+                        node.parent.object.name === node.name) {
+                        if (isInvalid(name)) {
+                            report(node);
+                        }
+
+                        // Report AssignmentExpressions only if they are the left side of the assignment
+                    } else if (effectiveParent.type === "AssignmentExpression" &&
+                        (effectiveParent.right.type !== "MemberExpression" ||
+                        effectiveParent.left.type === "MemberExpression" &&
+                        effectiveParent.left.property.name === node.name)) {
+                        if (isInvalid(name)) {
+                            report(node);
+                        }
+                    }
+
+                // Properties have their own rules
+                } else if (node.parent.type === "Property") {
+
+                    // return early if properties is false
+                    if (!properties) {
+                        return;
+                    }
+
+                    if (shouldReport(effectiveParent, name)) {
+                        report(node);
+                    }
+
+                // Report anything that is a match and not a CallExpression
+                } else {
+                    var isDeclaration = effectiveParent.type === "FunctionDeclaration" || effectiveParent.type === "VariableDeclarator";
+
+                    if (onlyDeclarations && !isDeclaration) {
+                        return;
+                    }
+
+                    if (shouldReport(effectiveParent, name)) {
+                        report(node);
+                    }
+                }
+            }
+
+        };
+
     }
-];
+};
 
 },{}],200:[function(require,module,exports){
 /**
@@ -45404,745 +45800,757 @@ module.exports.schema = [
 var util = require("util");
 var lodash = require("lodash");
 
-module.exports = function(context) {
-
-    var MESSAGE = "Expected indentation of {{needed}} {{type}} {{characters}} but found {{gotten}}.";
-    var DEFAULT_VARIABLE_INDENT = 1;
-
-    var indentType = "space";
-    var indentSize = 4;
-    var options = {
-        SwitchCase: 0,
-        VariableDeclarator: {
-            var: DEFAULT_VARIABLE_INDENT,
-            let: DEFAULT_VARIABLE_INDENT,
-            const: DEFAULT_VARIABLE_INDENT
-        }
-    };
-
-    if (context.options.length) {
-        if (context.options[0] === "tab") {
-            indentSize = 1;
-            indentType = "tab";
-        } else /* istanbul ignore else : this will be caught by options validation */ if (typeof context.options[0] === "number") {
-            indentSize = context.options[0];
-            indentType = "space";
-        }
-
-        if (context.options[1]) {
-            var opts = context.options[1];
-
-            options.SwitchCase = opts.SwitchCase || 0;
-            var variableDeclaratorRules = opts.VariableDeclarator;
-
-            if (typeof variableDeclaratorRules === "number") {
-                options.VariableDeclarator = {
-                    var: variableDeclaratorRules,
-                    let: variableDeclaratorRules,
-                    const: variableDeclaratorRules
-                };
-            } else if (typeof variableDeclaratorRules === "object") {
-                lodash.assign(options.VariableDeclarator, variableDeclaratorRules);
-            }
-        }
-    }
-
-    var indentPattern = {
-        normal: indentType === "space" ? /^ +/ : /^\t+/,
-        excludeCommas: indentType === "space" ? /^[ ,]+/ : /^[\t,]+/
-    };
-
-    var caseIndentStore = {};
-
-    /**
-     * Reports a given indent violation and properly pluralizes the message
-     * @param {ASTNode} node Node violating the indent rule
-     * @param {int} needed Expected indentation character count
-     * @param {int} gotten Indentation character count in the actual node/code
-     * @param {Object=} loc Error line and column location
-     * @param {boolean} isLastNodeCheck Is the error for last node check
-     * @returns {void}
-     */
-    function report(node, needed, gotten, loc, isLastNodeCheck) {
-        var msgContext = {
-            needed: needed,
-            type: indentType,
-            characters: needed === 1 ? "character" : "characters",
-            gotten: gotten
-        };
-        var indentChar = indentType === "space" ? " " : "\t";
-
-        /**
-         * Responsible for fixing the indentation issue fix
-         * @returns {Function} function to be executed by the fixer
-         * @private
-         */
-        function getFixerFunction() {
-            var rangeToFix = [];
-
-            if (needed > gotten) {
-                var spaces = "" + new Array(needed - gotten + 1).join(indentChar);  // replace with repeat in future
-
-                if (isLastNodeCheck === true) {
-                    rangeToFix = [
-                        node.range[1] - 1,
-                        node.range[1] - 1
-                    ];
-                } else {
-                    rangeToFix = [
-                        node.range[0],
-                        node.range[0]
-                    ];
-                }
-
-                return function(fixer) {
-                    return fixer.insertTextBeforeRange(rangeToFix, spaces);
-                };
-            } else {
-                if (isLastNodeCheck === true) {
-                    rangeToFix = [
-                        node.range[1] - (gotten - needed) - 1,
-                        node.range[1] - 1
-                    ];
-                } else {
-                    rangeToFix = [
-                        node.range[0] - (gotten - needed),
-                        node.range[0]
-                    ];
-                }
-
-                return function(fixer) {
-                    return fixer.removeRange(rangeToFix);
-                };
-            }
-        }
-
-        if (loc) {
-            context.report({
-                node: node,
-                loc: loc,
-                message: MESSAGE,
-                data: msgContext,
-                fix: getFixerFunction()
-            });
-        } else {
-            context.report({
-                node: node,
-                message: MESSAGE,
-                data: msgContext,
-                fix: getFixerFunction()
-            });
-        }
-    }
-
-    /**
-     * Get node indent
-     * @param {ASTNode|Token} node Node to examine
-     * @param {boolean} [byLastLine=false] get indent of node's last line
-     * @param {boolean} [excludeCommas=false] skip comma on start of line
-     * @returns {int} Indent
-     */
-    function getNodeIndent(node, byLastLine, excludeCommas) {
-        var token = byLastLine ? context.getLastToken(node) : context.getFirstToken(node);
-        var src = context.getSource(token, token.loc.start.column);
-        var regExp = excludeCommas ? indentPattern.excludeCommas : indentPattern.normal;
-        var indent = regExp.exec(src);
-
-        return indent ? indent[0].length : 0;
-    }
-
-    /**
-     * Checks node is the first in its own start line. By default it looks by start line.
-     * @param {ASTNode} node The node to check
-     * @param {boolean} [byEndLocation=false] Lookup based on start position or end
-     * @returns {boolean} true if its the first in the its start line
-     */
-    function isNodeFirstInLine(node, byEndLocation) {
-        var firstToken = byEndLocation === true ? context.getLastToken(node, 1) : context.getTokenBefore(node),
-            startLine = byEndLocation === true ? node.loc.end.line : node.loc.start.line,
-            endLine = firstToken ? firstToken.loc.end.line : -1;
-
-        return startLine !== endLine;
-    }
-
-    /**
-     * Check indent for node
-     * @param {ASTNode} node Node to check
-     * @param {int} indent needed indent
-     * @param {boolean} [excludeCommas=false] skip comma on start of line
-     * @returns {void}
-     */
-    function checkNodeIndent(node, indent, excludeCommas) {
-        var nodeIndent = getNodeIndent(node, false, excludeCommas);
-
-        if (
-            node.type !== "ArrayExpression" && node.type !== "ObjectExpression" &&
-            nodeIndent !== indent && isNodeFirstInLine(node)
-        ) {
-            report(node, indent, nodeIndent);
-        }
-    }
-
-    /**
-     * Check indent for nodes list
-     * @param {ASTNode[]} nodes list of node objects
-     * @param {int} indent needed indent
-     * @param {boolean} [excludeCommas=false] skip comma on start of line
-     * @returns {void}
-     */
-    function checkNodesIndent(nodes, indent, excludeCommas) {
-        nodes.forEach(function(node) {
-            if (node.type === "IfStatement" && node.alternate) {
-                var elseToken = context.getTokenBefore(node.alternate);
-
-                checkNodeIndent(elseToken, indent, excludeCommas);
-            }
-            checkNodeIndent(node, indent, excludeCommas);
-        });
-    }
-
-    /**
-     * Check last node line indent this detects, that block closed correctly
-     * @param {ASTNode} node Node to examine
-     * @param {int} lastLineIndent needed indent
-     * @returns {void}
-     */
-    function checkLastNodeLineIndent(node, lastLineIndent) {
-        var lastToken = context.getLastToken(node);
-        var endIndent = getNodeIndent(lastToken, true);
-
-        if (endIndent !== lastLineIndent && isNodeFirstInLine(node, true)) {
-            report(
-                node,
-                lastLineIndent,
-                endIndent,
-                { line: lastToken.loc.start.line, column: lastToken.loc.start.column },
-                true
-            );
-        }
-    }
-
-    /**
-     * Check first node line indent is correct
-     * @param {ASTNode} node Node to examine
-     * @param {int} firstLineIndent needed indent
-     * @returns {void}
-     */
-    function checkFirstNodeLineIndent(node, firstLineIndent) {
-        var startIndent = getNodeIndent(node, false);
-
-        if (startIndent !== firstLineIndent && isNodeFirstInLine(node)) {
-            report(
-                node,
-                firstLineIndent,
-                startIndent,
-                { line: node.loc.start.line, column: node.loc.start.column }
-            );
-        }
-    }
-
-    /**
-     * Returns the VariableDeclarator based on the current node
-     * if not present then return null
-     * @param {ASTNode} node node to examine
-     * @returns {ASTNode|void} if found then node otherwise null
-     */
-    function getVariableDeclaratorNode(node) {
-        var parent = node.parent;
-
-        while (parent.type !== "VariableDeclarator" && parent.type !== "Program") {
-            parent = parent.parent;
-        }
-
-        return parent.type === "VariableDeclarator" ? parent : null;
-    }
-
-    /**
-     * Check to see if the node is part of the multi-line variable declaration.
-     * Also if its on the same line as the varNode
-     * @param {ASTNode} node node to check
-     * @param {ASTNode} varNode variable declaration node to check against
-     * @returns {boolean} True if all the above condition satisfy
-     */
-    function isNodeInVarOnTop(node, varNode) {
-        return varNode &&
-            varNode.parent.loc.start.line === node.loc.start.line &&
-            varNode.parent.declarations.length > 1;
-    }
-
-    /**
-     * Check to see if the argument before the callee node is multi-line and
-     * there should only be 1 argument before the callee node
-     * @param {ASTNode} node node to check
-     * @returns {boolean} True if arguments are multi-line
-     */
-    function isArgBeforeCalleeNodeMultiline(node) {
-        var parent = node.parent;
-
-        if (parent.arguments.length >= 2 && parent.arguments[1] === node) {
-            return parent.arguments[0].loc.end.line > parent.arguments[0].loc.start.line;
-        }
-
-        return false;
-    }
-
-    /**
-     * Check indent for function block content
-     * @param {ASTNode} node node to examine
-     * @returns {void}
-     */
-    function checkIndentInFunctionBlock(node) {
-
-        /*
-         * Search first caller in chain.
-         * Ex.:
-         *
-         * Models <- Identifier
-         *   .User
-         *   .find()
-         *   .exec(function() {
-         *   // function body
-         * });
-         *
-         * Looks for 'Models'
-         */
-        var calleeNode = node.parent; // FunctionExpression
-        var indent;
-
-        if (calleeNode.parent &&
-            (calleeNode.parent.type === "Property" ||
-            calleeNode.parent.type === "ArrayExpression")) {
-
-            // If function is part of array or object, comma can be put at left
-            indent = getNodeIndent(calleeNode, false, false);
-        } else {
-
-            // If function is standalone, simple calculate indent
-            indent = getNodeIndent(calleeNode);
-        }
-
-        if (calleeNode.parent.type === "CallExpression") {
-            var calleeParent = calleeNode.parent;
-
-            if (calleeNode.type !== "FunctionExpression" && calleeNode.type !== "ArrowFunctionExpression") {
-                if (calleeParent && calleeParent.loc.start.line < node.loc.start.line) {
-                    indent = getNodeIndent(calleeParent);
-                }
-            } else {
-                if (isArgBeforeCalleeNodeMultiline(calleeNode) &&
-                    calleeParent.callee.loc.start.line === calleeParent.callee.loc.end.line &&
-                    !isNodeFirstInLine(calleeNode)) {
-                    indent = getNodeIndent(calleeParent);
-                }
-            }
-        }
-
-        // function body indent should be indent + indent size
-        indent += indentSize;
-
-        // check if the node is inside a variable
-        var parentVarNode = getVariableDeclaratorNode(node);
-
-        if (parentVarNode && isNodeInVarOnTop(node, parentVarNode)) {
-            indent += indentSize * options.VariableDeclarator[parentVarNode.parent.kind];
-        }
-
-        if (node.body.length > 0) {
-            checkNodesIndent(node.body, indent);
-        }
-
-        checkLastNodeLineIndent(node, indent - indentSize);
-    }
-
-
-    /**
-     * Checks if the given node starts and ends on the same line
-     * @param {ASTNode} node The node to check
-     * @returns {boolean} Whether or not the block starts and ends on the same line.
-     */
-    function isSingleLineNode(node) {
-        var lastToken = context.getLastToken(node),
-            startLine = node.loc.start.line,
-            endLine = lastToken.loc.end.line;
-
-        return startLine === endLine;
-    }
-
-    /**
-     * Check to see if the first element inside an array is an object and on the same line as the node
-     * If the node is not an array then it will return false.
-     * @param {ASTNode} node node to check
-     * @returns {boolean} success/failure
-     */
-    function isFirstArrayElementOnSameLine(node) {
-        if (node.type === "ArrayExpression" && node.elements[0]) {
-            return node.elements[0].loc.start.line === node.loc.start.line && node.elements[0].type === "ObjectExpression";
-        } else {
-            return false;
-        }
-    }
-
-    /**
-     * Check indent for array block content or object block content
-     * @param {ASTNode} node node to examine
-     * @returns {void}
-     */
-    function checkIndentInArrayOrObjectBlock(node) {
-
-        // Skip inline
-        if (isSingleLineNode(node)) {
-            return;
-        }
-
-        var elements = (node.type === "ArrayExpression") ? node.elements : node.properties;
-
-        // filter out empty elements example would be [ , 2] so remove first element as espree considers it as null
-        elements = elements.filter(function(elem) {
-            return elem !== null;
-        });
-
-        // Skip if first element is in same line with this node
-        if (elements.length > 0 && elements[0].loc.start.line === node.loc.start.line) {
-            return;
-        }
-
-        var nodeIndent;
-        var elementsIndent;
-        var parentVarNode = getVariableDeclaratorNode(node);
-
-        // TODO - come up with a better strategy in future
-        if (isNodeFirstInLine(node)) {
-            var parent = node.parent;
-            var effectiveParent = parent;
-
-            if (parent.type === "MemberExpression") {
-                if (isNodeFirstInLine(parent)) {
-                    effectiveParent = parent.parent.parent;
-                } else {
-                    effectiveParent = parent.parent;
-                }
-            }
-            nodeIndent = getNodeIndent(effectiveParent);
-            if (parentVarNode && parentVarNode.loc.start.line !== node.loc.start.line) {
-                if (parent.type !== "VariableDeclarator" || parentVarNode === parentVarNode.parent.declarations[0]) {
-                    if (parent.type === "VariableDeclarator" && parentVarNode.loc.start.line === effectiveParent.loc.start.line) {
-                        nodeIndent = nodeIndent + (indentSize * options.VariableDeclarator[parentVarNode.parent.kind]);
-                    } else if (
-                        parent.type === "ObjectExpression" ||
-                        parent.type === "ArrayExpression" ||
-                        parent.type === "CallExpression" ||
-                        parent.type === "ArrowFunctionExpression" ||
-                        parent.type === "NewExpression"
-                    ) {
-                        nodeIndent = nodeIndent + indentSize;
-                    }
-                }
-            } else if (!parentVarNode && !isFirstArrayElementOnSameLine(parent) && effectiveParent.type !== "MemberExpression" && effectiveParent.type !== "ExpressionStatement" && effectiveParent.type !== "AssignmentExpression" && effectiveParent.type !== "Property") {
-                nodeIndent = nodeIndent + indentSize;
-            }
-
-            elementsIndent = nodeIndent + indentSize;
-
-            checkFirstNodeLineIndent(node, nodeIndent);
-        } else {
-            nodeIndent = getNodeIndent(node);
-            elementsIndent = nodeIndent + indentSize;
-        }
-
-        /*
-         * Check if the node is a multiple variable declaration; if so, then
-         * make sure indentation takes that into account.
-         */
-        if (isNodeInVarOnTop(node, parentVarNode)) {
-            elementsIndent += indentSize * options.VariableDeclarator[parentVarNode.parent.kind];
-        }
-
-        // Comma can be placed before property name
-        checkNodesIndent(elements, elementsIndent, true);
-
-        if (elements.length > 0) {
-
-            // Skip last block line check if last item in same line
-            if (elements[elements.length - 1].loc.end.line === node.loc.end.line) {
-                return;
-            }
-        }
-
-        checkLastNodeLineIndent(node, elementsIndent - indentSize);
-    }
-
-    /**
-     * Check if the node or node body is a BlockStatement or not
-     * @param {ASTNode} node node to test
-     * @returns {boolean} True if it or its body is a block statement
-     */
-    function isNodeBodyBlock(node) {
-        return node.type === "BlockStatement" || node.type === "ClassBody" || (node.body && node.body.type === "BlockStatement") ||
-            (node.consequent && node.consequent.type === "BlockStatement");
-    }
-
-    /**
-     * Check indentation for blocks
-     * @param {ASTNode} node node to check
-     * @returns {void}
-     */
-    function blockIndentationCheck(node) {
-
-        // Skip inline blocks
-        if (isSingleLineNode(node)) {
-            return;
-        }
-
-        if (node.parent && (
-                node.parent.type === "FunctionExpression" ||
-                node.parent.type === "FunctionDeclaration" ||
-                node.parent.type === "ArrowFunctionExpression"
-        )) {
-            checkIndentInFunctionBlock(node);
-            return;
-        }
-
-        var indent;
-        var nodesToCheck = [];
-
-        /*
-         * For this statements we should check indent from statement beginning,
-         * not from the beginning of the block.
-         */
-        var statementsWithProperties = [
-            "IfStatement", "WhileStatement", "ForStatement", "ForInStatement", "ForOfStatement", "DoWhileStatement", "ClassDeclaration"
-        ];
-
-        if (node.parent && statementsWithProperties.indexOf(node.parent.type) !== -1 && isNodeBodyBlock(node)) {
-            indent = getNodeIndent(node.parent);
-        } else {
-            indent = getNodeIndent(node);
-        }
-
-        if (node.type === "IfStatement" && node.consequent.type !== "BlockStatement") {
-            nodesToCheck = [node.consequent];
-        } else if (util.isArray(node.body)) {
-            nodesToCheck = node.body;
-        } else {
-            nodesToCheck = [node.body];
-        }
-
-        if (nodesToCheck.length > 0) {
-            checkNodesIndent(nodesToCheck, indent + indentSize);
-        }
-
-        if (node.type === "BlockStatement") {
-            checkLastNodeLineIndent(node, indent);
-        }
-    }
-
-    /**
-     * Filter out the elements which are on the same line of each other or the node.
-     * basically have only 1 elements from each line except the variable declaration line.
-     * @param {ASTNode} node Variable declaration node
-     * @returns {ASTNode[]} Filtered elements
-     */
-    function filterOutSameLineVars(node) {
-        return node.declarations.reduce(function(finalCollection, elem) {
-            var lastElem = finalCollection[finalCollection.length - 1];
-
-            if ((elem.loc.start.line !== node.loc.start.line && !lastElem) ||
-                (lastElem && lastElem.loc.start.line !== elem.loc.start.line)) {
-                finalCollection.push(elem);
-            }
-
-            return finalCollection;
-        }, []);
-    }
-
-    /**
-     * Check indentation for variable declarations
-     * @param {ASTNode} node node to examine
-     * @returns {void}
-     */
-    function checkIndentInVariableDeclarations(node) {
-        var elements = filterOutSameLineVars(node);
-        var nodeIndent = getNodeIndent(node);
-        var lastElement = elements[elements.length - 1];
-
-        var elementsIndent = nodeIndent + indentSize * options.VariableDeclarator[node.kind];
-
-        // Comma can be placed before declaration
-        checkNodesIndent(elements, elementsIndent, true);
-
-        // Only check the last line if there is any token after the last item
-        if (context.getLastToken(node).loc.end.line <= lastElement.loc.end.line) {
-            return;
-        }
-
-        var tokenBeforeLastElement = context.getTokenBefore(lastElement);
-
-        if (tokenBeforeLastElement.value === ",") {
-
-            // Special case for comma-first syntax where the semicolon is indented
-            checkLastNodeLineIndent(node, getNodeIndent(tokenBeforeLastElement));
-        } else {
-            checkLastNodeLineIndent(node, elementsIndent - indentSize);
-        }
-    }
-
-    /**
-     * Check and decide whether to check for indentation for blockless nodes
-     * Scenarios are for or while statements without braces around them
-     * @param {ASTNode} node node to examine
-     * @returns {void}
-     */
-    function blockLessNodes(node) {
-        if (node.body.type !== "BlockStatement") {
-            blockIndentationCheck(node);
-        }
-    }
-
-    /**
-     * Returns the expected indentation for the case statement
-     * @param {ASTNode} node node to examine
-     * @param {int} [switchIndent] indent for switch statement
-     * @returns {int} indent size
-     */
-    function expectedCaseIndent(node, switchIndent) {
-        var switchNode = (node.type === "SwitchStatement") ? node : node.parent;
-        var caseIndent;
-
-        if (caseIndentStore[switchNode.loc.start.line]) {
-            return caseIndentStore[switchNode.loc.start.line];
-        } else {
-            if (typeof switchIndent === "undefined") {
-                switchIndent = getNodeIndent(switchNode);
-            }
-
-            if (switchNode.cases.length > 0 && options.SwitchCase === 0) {
-                caseIndent = switchIndent;
-            } else {
-                caseIndent = switchIndent + (indentSize * options.SwitchCase);
-            }
-
-            caseIndentStore[switchNode.loc.start.line] = caseIndent;
-            return caseIndent;
-        }
-    }
-
-    return {
-        "Program": function(node) {
-            if (node.body.length > 0) {
-
-                // Root nodes should have no indent
-                checkNodesIndent(node.body, getNodeIndent(node));
-            }
+module.exports = {
+    meta: {
+        docs: {
+            description: "enforce consistent indentation",
+            category: "Stylistic Issues",
+            recommended: false
         },
 
-        "ClassBody": blockIndentationCheck,
+        fixable: "whitespace",
 
-        "BlockStatement": blockIndentationCheck,
-
-        "WhileStatement": blockLessNodes,
-
-        "ForStatement": blockLessNodes,
-
-        "ForInStatement": blockLessNodes,
-
-        "ForOfStatement": blockLessNodes,
-
-        "DoWhileStatement": blockLessNodes,
-
-        "IfStatement": function(node) {
-            if (node.consequent.type !== "BlockStatement" && node.consequent.loc.start.line > node.loc.start.line) {
-                blockIndentationCheck(node);
-            }
-        },
-
-        "VariableDeclaration": function(node) {
-            if (node.declarations[node.declarations.length - 1].loc.start.line > node.declarations[0].loc.start.line) {
-                checkIndentInVariableDeclarations(node);
-            }
-        },
-
-        "ObjectExpression": function(node) {
-            checkIndentInArrayOrObjectBlock(node);
-        },
-
-        "ArrayExpression": function(node) {
-            checkIndentInArrayOrObjectBlock(node);
-        },
-
-        "SwitchStatement": function(node) {
-
-            // Switch is not a 'BlockStatement'
-            var switchIndent = getNodeIndent(node);
-            var caseIndent = expectedCaseIndent(node, switchIndent);
-
-            checkNodesIndent(node.cases, caseIndent);
-
-
-            checkLastNodeLineIndent(node, switchIndent);
-        },
-
-        "SwitchCase": function(node) {
-
-            // Skip inline cases
-            if (isSingleLineNode(node)) {
-                return;
-            }
-            var caseIndent = expectedCaseIndent(node);
-
-            checkNodesIndent(node.consequent, caseIndent + indentSize);
-        }
-    };
-
-};
-
-module.exports.schema = [
-    {
-        "oneOf": [
+        schema: [
             {
-                "enum": ["tab"]
-            },
-            {
-                "type": "integer",
-                "minimum": 0
-            }
-        ]
-    },
-    {
-        "type": "object",
-        "properties": {
-            "SwitchCase": {
-                "type": "integer",
-                "minimum": 0
-            },
-            "VariableDeclarator": {
                 "oneOf": [
+                    {
+                        "enum": ["tab"]
+                    },
                     {
                         "type": "integer",
                         "minimum": 0
-                    },
-                    {
-                        "type": "object",
-                        "properties": {
-                            "var": {
-                                "type": "integer",
-                                "minimum": 0
-                            },
-                            "let": {
-                                "type": "integer",
-                                "minimum": 0
-                            },
-                            "const": {
-                                "type": "integer",
-                                "minimum": 0
-                            }
-                        }
                     }
                 ]
+            },
+            {
+                "type": "object",
+                "properties": {
+                    "SwitchCase": {
+                        "type": "integer",
+                        "minimum": 0
+                    },
+                    "VariableDeclarator": {
+                        "oneOf": [
+                            {
+                                "type": "integer",
+                                "minimum": 0
+                            },
+                            {
+                                "type": "object",
+                                "properties": {
+                                    "var": {
+                                        "type": "integer",
+                                        "minimum": 0
+                                    },
+                                    "let": {
+                                        "type": "integer",
+                                        "minimum": 0
+                                    },
+                                    "const": {
+                                        "type": "integer",
+                                        "minimum": 0
+                                    }
+                                }
+                            }
+                        ]
+                    }
+                },
+                "additionalProperties": false
             }
-        },
-        "additionalProperties": false
+        ]
+    },
+
+    create: function(context) {
+
+        var MESSAGE = "Expected indentation of {{needed}} {{type}} {{characters}} but found {{gotten}}.";
+        var DEFAULT_VARIABLE_INDENT = 1;
+
+        var indentType = "space";
+        var indentSize = 4;
+        var options = {
+            SwitchCase: 0,
+            VariableDeclarator: {
+                var: DEFAULT_VARIABLE_INDENT,
+                let: DEFAULT_VARIABLE_INDENT,
+                const: DEFAULT_VARIABLE_INDENT
+            }
+        };
+
+        if (context.options.length) {
+            if (context.options[0] === "tab") {
+                indentSize = 1;
+                indentType = "tab";
+            } else /* istanbul ignore else : this will be caught by options validation */ if (typeof context.options[0] === "number") {
+                indentSize = context.options[0];
+                indentType = "space";
+            }
+
+            if (context.options[1]) {
+                var opts = context.options[1];
+
+                options.SwitchCase = opts.SwitchCase || 0;
+                var variableDeclaratorRules = opts.VariableDeclarator;
+
+                if (typeof variableDeclaratorRules === "number") {
+                    options.VariableDeclarator = {
+                        var: variableDeclaratorRules,
+                        let: variableDeclaratorRules,
+                        const: variableDeclaratorRules
+                    };
+                } else if (typeof variableDeclaratorRules === "object") {
+                    lodash.assign(options.VariableDeclarator, variableDeclaratorRules);
+                }
+            }
+        }
+
+        var indentPattern = {
+            normal: indentType === "space" ? /^ +/ : /^\t+/,
+            excludeCommas: indentType === "space" ? /^[ ,]+/ : /^[\t,]+/
+        };
+
+        var caseIndentStore = {};
+
+        /**
+         * Reports a given indent violation and properly pluralizes the message
+         * @param {ASTNode} node Node violating the indent rule
+         * @param {int} needed Expected indentation character count
+         * @param {int} gotten Indentation character count in the actual node/code
+         * @param {Object=} loc Error line and column location
+         * @param {boolean} isLastNodeCheck Is the error for last node check
+         * @returns {void}
+         */
+        function report(node, needed, gotten, loc, isLastNodeCheck) {
+            var msgContext = {
+                needed: needed,
+                type: indentType,
+                characters: needed === 1 ? "character" : "characters",
+                gotten: gotten
+            };
+            var indentChar = indentType === "space" ? " " : "\t";
+
+            /**
+             * Responsible for fixing the indentation issue fix
+             * @returns {Function} function to be executed by the fixer
+             * @private
+             */
+            function getFixerFunction() {
+                var rangeToFix = [];
+
+                if (needed > gotten) {
+                    var spaces = "" + new Array(needed - gotten + 1).join(indentChar);  // replace with repeat in future
+
+                    if (isLastNodeCheck === true) {
+                        rangeToFix = [
+                            node.range[1] - 1,
+                            node.range[1] - 1
+                        ];
+                    } else {
+                        rangeToFix = [
+                            node.range[0],
+                            node.range[0]
+                        ];
+                    }
+
+                    return function(fixer) {
+                        return fixer.insertTextBeforeRange(rangeToFix, spaces);
+                    };
+                } else {
+                    if (isLastNodeCheck === true) {
+                        rangeToFix = [
+                            node.range[1] - (gotten - needed) - 1,
+                            node.range[1] - 1
+                        ];
+                    } else {
+                        rangeToFix = [
+                            node.range[0] - (gotten - needed),
+                            node.range[0]
+                        ];
+                    }
+
+                    return function(fixer) {
+                        return fixer.removeRange(rangeToFix);
+                    };
+                }
+            }
+
+            if (loc) {
+                context.report({
+                    node: node,
+                    loc: loc,
+                    message: MESSAGE,
+                    data: msgContext,
+                    fix: getFixerFunction()
+                });
+            } else {
+                context.report({
+                    node: node,
+                    message: MESSAGE,
+                    data: msgContext,
+                    fix: getFixerFunction()
+                });
+            }
+        }
+
+        /**
+         * Get node indent
+         * @param {ASTNode|Token} node Node to examine
+         * @param {boolean} [byLastLine=false] get indent of node's last line
+         * @param {boolean} [excludeCommas=false] skip comma on start of line
+         * @returns {int} Indent
+         */
+        function getNodeIndent(node, byLastLine, excludeCommas) {
+            var token = byLastLine ? context.getLastToken(node) : context.getFirstToken(node);
+            var src = context.getSource(token, token.loc.start.column);
+            var regExp = excludeCommas ? indentPattern.excludeCommas : indentPattern.normal;
+            var indent = regExp.exec(src);
+
+            return indent ? indent[0].length : 0;
+        }
+
+        /**
+         * Checks node is the first in its own start line. By default it looks by start line.
+         * @param {ASTNode} node The node to check
+         * @param {boolean} [byEndLocation=false] Lookup based on start position or end
+         * @returns {boolean} true if its the first in the its start line
+         */
+        function isNodeFirstInLine(node, byEndLocation) {
+            var firstToken = byEndLocation === true ? context.getLastToken(node, 1) : context.getTokenBefore(node),
+                startLine = byEndLocation === true ? node.loc.end.line : node.loc.start.line,
+                endLine = firstToken ? firstToken.loc.end.line : -1;
+
+            return startLine !== endLine;
+        }
+
+        /**
+         * Check indent for node
+         * @param {ASTNode} node Node to check
+         * @param {int} indent needed indent
+         * @param {boolean} [excludeCommas=false] skip comma on start of line
+         * @returns {void}
+         */
+        function checkNodeIndent(node, indent, excludeCommas) {
+            var nodeIndent = getNodeIndent(node, false, excludeCommas);
+
+            if (
+                node.type !== "ArrayExpression" && node.type !== "ObjectExpression" &&
+                nodeIndent !== indent && isNodeFirstInLine(node)
+            ) {
+                report(node, indent, nodeIndent);
+            }
+        }
+
+        /**
+         * Check indent for nodes list
+         * @param {ASTNode[]} nodes list of node objects
+         * @param {int} indent needed indent
+         * @param {boolean} [excludeCommas=false] skip comma on start of line
+         * @returns {void}
+         */
+        function checkNodesIndent(nodes, indent, excludeCommas) {
+            nodes.forEach(function(node) {
+                if (node.type === "IfStatement" && node.alternate) {
+                    var elseToken = context.getTokenBefore(node.alternate);
+
+                    checkNodeIndent(elseToken, indent, excludeCommas);
+                }
+                checkNodeIndent(node, indent, excludeCommas);
+            });
+        }
+
+        /**
+         * Check last node line indent this detects, that block closed correctly
+         * @param {ASTNode} node Node to examine
+         * @param {int} lastLineIndent needed indent
+         * @returns {void}
+         */
+        function checkLastNodeLineIndent(node, lastLineIndent) {
+            var lastToken = context.getLastToken(node);
+            var endIndent = getNodeIndent(lastToken, true);
+
+            if (endIndent !== lastLineIndent && isNodeFirstInLine(node, true)) {
+                report(
+                    node,
+                    lastLineIndent,
+                    endIndent,
+                    { line: lastToken.loc.start.line, column: lastToken.loc.start.column },
+                    true
+                );
+            }
+        }
+
+        /**
+         * Check first node line indent is correct
+         * @param {ASTNode} node Node to examine
+         * @param {int} firstLineIndent needed indent
+         * @returns {void}
+         */
+        function checkFirstNodeLineIndent(node, firstLineIndent) {
+            var startIndent = getNodeIndent(node, false);
+
+            if (startIndent !== firstLineIndent && isNodeFirstInLine(node)) {
+                report(
+                    node,
+                    firstLineIndent,
+                    startIndent,
+                    { line: node.loc.start.line, column: node.loc.start.column }
+                );
+            }
+        }
+
+        /**
+         * Returns the VariableDeclarator based on the current node
+         * if not present then return null
+         * @param {ASTNode} node node to examine
+         * @returns {ASTNode|void} if found then node otherwise null
+         */
+        function getVariableDeclaratorNode(node) {
+            var parent = node.parent;
+
+            while (parent.type !== "VariableDeclarator" && parent.type !== "Program") {
+                parent = parent.parent;
+            }
+
+            return parent.type === "VariableDeclarator" ? parent : null;
+        }
+
+        /**
+         * Check to see if the node is part of the multi-line variable declaration.
+         * Also if its on the same line as the varNode
+         * @param {ASTNode} node node to check
+         * @param {ASTNode} varNode variable declaration node to check against
+         * @returns {boolean} True if all the above condition satisfy
+         */
+        function isNodeInVarOnTop(node, varNode) {
+            return varNode &&
+                varNode.parent.loc.start.line === node.loc.start.line &&
+                varNode.parent.declarations.length > 1;
+        }
+
+        /**
+         * Check to see if the argument before the callee node is multi-line and
+         * there should only be 1 argument before the callee node
+         * @param {ASTNode} node node to check
+         * @returns {boolean} True if arguments are multi-line
+         */
+        function isArgBeforeCalleeNodeMultiline(node) {
+            var parent = node.parent;
+
+            if (parent.arguments.length >= 2 && parent.arguments[1] === node) {
+                return parent.arguments[0].loc.end.line > parent.arguments[0].loc.start.line;
+            }
+
+            return false;
+        }
+
+        /**
+         * Check indent for function block content
+         * @param {ASTNode} node node to examine
+         * @returns {void}
+         */
+        function checkIndentInFunctionBlock(node) {
+
+            /*
+             * Search first caller in chain.
+             * Ex.:
+             *
+             * Models <- Identifier
+             *   .User
+             *   .find()
+             *   .exec(function() {
+             *   // function body
+             * });
+             *
+             * Looks for 'Models'
+             */
+            var calleeNode = node.parent; // FunctionExpression
+            var indent;
+
+            if (calleeNode.parent &&
+                (calleeNode.parent.type === "Property" ||
+                calleeNode.parent.type === "ArrayExpression")) {
+
+                // If function is part of array or object, comma can be put at left
+                indent = getNodeIndent(calleeNode, false, false);
+            } else {
+
+                // If function is standalone, simple calculate indent
+                indent = getNodeIndent(calleeNode);
+            }
+
+            if (calleeNode.parent.type === "CallExpression") {
+                var calleeParent = calleeNode.parent;
+
+                if (calleeNode.type !== "FunctionExpression" && calleeNode.type !== "ArrowFunctionExpression") {
+                    if (calleeParent && calleeParent.loc.start.line < node.loc.start.line) {
+                        indent = getNodeIndent(calleeParent);
+                    }
+                } else {
+                    if (isArgBeforeCalleeNodeMultiline(calleeNode) &&
+                        calleeParent.callee.loc.start.line === calleeParent.callee.loc.end.line &&
+                        !isNodeFirstInLine(calleeNode)) {
+                        indent = getNodeIndent(calleeParent);
+                    }
+                }
+            }
+
+            // function body indent should be indent + indent size
+            indent += indentSize;
+
+            // check if the node is inside a variable
+            var parentVarNode = getVariableDeclaratorNode(node);
+
+            if (parentVarNode && isNodeInVarOnTop(node, parentVarNode)) {
+                indent += indentSize * options.VariableDeclarator[parentVarNode.parent.kind];
+            }
+
+            if (node.body.length > 0) {
+                checkNodesIndent(node.body, indent);
+            }
+
+            checkLastNodeLineIndent(node, indent - indentSize);
+        }
+
+
+        /**
+         * Checks if the given node starts and ends on the same line
+         * @param {ASTNode} node The node to check
+         * @returns {boolean} Whether or not the block starts and ends on the same line.
+         */
+        function isSingleLineNode(node) {
+            var lastToken = context.getLastToken(node),
+                startLine = node.loc.start.line,
+                endLine = lastToken.loc.end.line;
+
+            return startLine === endLine;
+        }
+
+        /**
+         * Check to see if the first element inside an array is an object and on the same line as the node
+         * If the node is not an array then it will return false.
+         * @param {ASTNode} node node to check
+         * @returns {boolean} success/failure
+         */
+        function isFirstArrayElementOnSameLine(node) {
+            if (node.type === "ArrayExpression" && node.elements[0]) {
+                return node.elements[0].loc.start.line === node.loc.start.line && node.elements[0].type === "ObjectExpression";
+            } else {
+                return false;
+            }
+        }
+
+        /**
+         * Check indent for array block content or object block content
+         * @param {ASTNode} node node to examine
+         * @returns {void}
+         */
+        function checkIndentInArrayOrObjectBlock(node) {
+
+            // Skip inline
+            if (isSingleLineNode(node)) {
+                return;
+            }
+
+            var elements = (node.type === "ArrayExpression") ? node.elements : node.properties;
+
+            // filter out empty elements example would be [ , 2] so remove first element as espree considers it as null
+            elements = elements.filter(function(elem) {
+                return elem !== null;
+            });
+
+            // Skip if first element is in same line with this node
+            if (elements.length > 0 && elements[0].loc.start.line === node.loc.start.line) {
+                return;
+            }
+
+            var nodeIndent;
+            var elementsIndent;
+            var parentVarNode = getVariableDeclaratorNode(node);
+
+            // TODO - come up with a better strategy in future
+            if (isNodeFirstInLine(node)) {
+                var parent = node.parent;
+                var effectiveParent = parent;
+
+                if (parent.type === "MemberExpression") {
+                    if (isNodeFirstInLine(parent)) {
+                        effectiveParent = parent.parent.parent;
+                    } else {
+                        effectiveParent = parent.parent;
+                    }
+                }
+                nodeIndent = getNodeIndent(effectiveParent);
+                if (parentVarNode && parentVarNode.loc.start.line !== node.loc.start.line) {
+                    if (parent.type !== "VariableDeclarator" || parentVarNode === parentVarNode.parent.declarations[0]) {
+                        if (parent.type === "VariableDeclarator" && parentVarNode.loc.start.line === effectiveParent.loc.start.line) {
+                            nodeIndent = nodeIndent + (indentSize * options.VariableDeclarator[parentVarNode.parent.kind]);
+                        } else if (
+                            parent.type === "ObjectExpression" ||
+                            parent.type === "ArrayExpression" ||
+                            parent.type === "CallExpression" ||
+                            parent.type === "ArrowFunctionExpression" ||
+                            parent.type === "NewExpression"
+                        ) {
+                            nodeIndent = nodeIndent + indentSize;
+                        }
+                    }
+                } else if (!parentVarNode && !isFirstArrayElementOnSameLine(parent) && effectiveParent.type !== "MemberExpression" && effectiveParent.type !== "ExpressionStatement" && effectiveParent.type !== "AssignmentExpression" && effectiveParent.type !== "Property") {
+                    nodeIndent = nodeIndent + indentSize;
+                }
+
+                elementsIndent = nodeIndent + indentSize;
+
+                checkFirstNodeLineIndent(node, nodeIndent);
+            } else {
+                nodeIndent = getNodeIndent(node);
+                elementsIndent = nodeIndent + indentSize;
+            }
+
+            /*
+             * Check if the node is a multiple variable declaration; if so, then
+             * make sure indentation takes that into account.
+             */
+            if (isNodeInVarOnTop(node, parentVarNode)) {
+                elementsIndent += indentSize * options.VariableDeclarator[parentVarNode.parent.kind];
+            }
+
+            // Comma can be placed before property name
+            checkNodesIndent(elements, elementsIndent, true);
+
+            if (elements.length > 0) {
+
+                // Skip last block line check if last item in same line
+                if (elements[elements.length - 1].loc.end.line === node.loc.end.line) {
+                    return;
+                }
+            }
+
+            checkLastNodeLineIndent(node, elementsIndent - indentSize);
+        }
+
+        /**
+         * Check if the node or node body is a BlockStatement or not
+         * @param {ASTNode} node node to test
+         * @returns {boolean} True if it or its body is a block statement
+         */
+        function isNodeBodyBlock(node) {
+            return node.type === "BlockStatement" || node.type === "ClassBody" || (node.body && node.body.type === "BlockStatement") ||
+                (node.consequent && node.consequent.type === "BlockStatement");
+        }
+
+        /**
+         * Check indentation for blocks
+         * @param {ASTNode} node node to check
+         * @returns {void}
+         */
+        function blockIndentationCheck(node) {
+
+            // Skip inline blocks
+            if (isSingleLineNode(node)) {
+                return;
+            }
+
+            if (node.parent && (
+                    node.parent.type === "FunctionExpression" ||
+                    node.parent.type === "FunctionDeclaration" ||
+                    node.parent.type === "ArrowFunctionExpression"
+            )) {
+                checkIndentInFunctionBlock(node);
+                return;
+            }
+
+            var indent;
+            var nodesToCheck = [];
+
+            /*
+             * For this statements we should check indent from statement beginning,
+             * not from the beginning of the block.
+             */
+            var statementsWithProperties = [
+                "IfStatement", "WhileStatement", "ForStatement", "ForInStatement", "ForOfStatement", "DoWhileStatement", "ClassDeclaration"
+            ];
+
+            if (node.parent && statementsWithProperties.indexOf(node.parent.type) !== -1 && isNodeBodyBlock(node)) {
+                indent = getNodeIndent(node.parent);
+            } else {
+                indent = getNodeIndent(node);
+            }
+
+            if (node.type === "IfStatement" && node.consequent.type !== "BlockStatement") {
+                nodesToCheck = [node.consequent];
+            } else if (util.isArray(node.body)) {
+                nodesToCheck = node.body;
+            } else {
+                nodesToCheck = [node.body];
+            }
+
+            if (nodesToCheck.length > 0) {
+                checkNodesIndent(nodesToCheck, indent + indentSize);
+            }
+
+            if (node.type === "BlockStatement") {
+                checkLastNodeLineIndent(node, indent);
+            }
+        }
+
+        /**
+         * Filter out the elements which are on the same line of each other or the node.
+         * basically have only 1 elements from each line except the variable declaration line.
+         * @param {ASTNode} node Variable declaration node
+         * @returns {ASTNode[]} Filtered elements
+         */
+        function filterOutSameLineVars(node) {
+            return node.declarations.reduce(function(finalCollection, elem) {
+                var lastElem = finalCollection[finalCollection.length - 1];
+
+                if ((elem.loc.start.line !== node.loc.start.line && !lastElem) ||
+                    (lastElem && lastElem.loc.start.line !== elem.loc.start.line)) {
+                    finalCollection.push(elem);
+                }
+
+                return finalCollection;
+            }, []);
+        }
+
+        /**
+         * Check indentation for variable declarations
+         * @param {ASTNode} node node to examine
+         * @returns {void}
+         */
+        function checkIndentInVariableDeclarations(node) {
+            var elements = filterOutSameLineVars(node);
+            var nodeIndent = getNodeIndent(node);
+            var lastElement = elements[elements.length - 1];
+
+            var elementsIndent = nodeIndent + indentSize * options.VariableDeclarator[node.kind];
+
+            // Comma can be placed before declaration
+            checkNodesIndent(elements, elementsIndent, true);
+
+            // Only check the last line if there is any token after the last item
+            if (context.getLastToken(node).loc.end.line <= lastElement.loc.end.line) {
+                return;
+            }
+
+            var tokenBeforeLastElement = context.getTokenBefore(lastElement);
+
+            if (tokenBeforeLastElement.value === ",") {
+
+                // Special case for comma-first syntax where the semicolon is indented
+                checkLastNodeLineIndent(node, getNodeIndent(tokenBeforeLastElement));
+            } else {
+                checkLastNodeLineIndent(node, elementsIndent - indentSize);
+            }
+        }
+
+        /**
+         * Check and decide whether to check for indentation for blockless nodes
+         * Scenarios are for or while statements without braces around them
+         * @param {ASTNode} node node to examine
+         * @returns {void}
+         */
+        function blockLessNodes(node) {
+            if (node.body.type !== "BlockStatement") {
+                blockIndentationCheck(node);
+            }
+        }
+
+        /**
+         * Returns the expected indentation for the case statement
+         * @param {ASTNode} node node to examine
+         * @param {int} [switchIndent] indent for switch statement
+         * @returns {int} indent size
+         */
+        function expectedCaseIndent(node, switchIndent) {
+            var switchNode = (node.type === "SwitchStatement") ? node : node.parent;
+            var caseIndent;
+
+            if (caseIndentStore[switchNode.loc.start.line]) {
+                return caseIndentStore[switchNode.loc.start.line];
+            } else {
+                if (typeof switchIndent === "undefined") {
+                    switchIndent = getNodeIndent(switchNode);
+                }
+
+                if (switchNode.cases.length > 0 && options.SwitchCase === 0) {
+                    caseIndent = switchIndent;
+                } else {
+                    caseIndent = switchIndent + (indentSize * options.SwitchCase);
+                }
+
+                caseIndentStore[switchNode.loc.start.line] = caseIndent;
+                return caseIndent;
+            }
+        }
+
+        return {
+            "Program": function(node) {
+                if (node.body.length > 0) {
+
+                    // Root nodes should have no indent
+                    checkNodesIndent(node.body, getNodeIndent(node));
+                }
+            },
+
+            "ClassBody": blockIndentationCheck,
+
+            "BlockStatement": blockIndentationCheck,
+
+            "WhileStatement": blockLessNodes,
+
+            "ForStatement": blockLessNodes,
+
+            "ForInStatement": blockLessNodes,
+
+            "ForOfStatement": blockLessNodes,
+
+            "DoWhileStatement": blockLessNodes,
+
+            "IfStatement": function(node) {
+                if (node.consequent.type !== "BlockStatement" && node.consequent.loc.start.line > node.loc.start.line) {
+                    blockIndentationCheck(node);
+                }
+            },
+
+            "VariableDeclaration": function(node) {
+                if (node.declarations[node.declarations.length - 1].loc.start.line > node.declarations[0].loc.start.line) {
+                    checkIndentInVariableDeclarations(node);
+                }
+            },
+
+            "ObjectExpression": function(node) {
+                checkIndentInArrayOrObjectBlock(node);
+            },
+
+            "ArrayExpression": function(node) {
+                checkIndentInArrayOrObjectBlock(node);
+            },
+
+            "SwitchStatement": function(node) {
+
+                // Switch is not a 'BlockStatement'
+                var switchIndent = getNodeIndent(node);
+                var caseIndent = expectedCaseIndent(node, switchIndent);
+
+                checkNodesIndent(node.cases, caseIndent);
+
+
+                checkLastNodeLineIndent(node, switchIndent);
+            },
+
+            "SwitchCase": function(node) {
+
+                // Skip inline cases
+                if (isSingleLineNode(node)) {
+                    return;
+                }
+                var caseIndent = expectedCaseIndent(node);
+
+                checkNodesIndent(node.consequent, caseIndent + indentSize);
+            }
+        };
+
     }
-];
+};
 
 },{"lodash":150,"util":10}],201:[function(require,module,exports){
 /**
@@ -46190,76 +46598,86 @@ function isInitialized(node) {
 // Rule Definition
 //------------------------------------------------------------------------------
 
-module.exports = function(context) {
-
-    var MODE_ALWAYS = "always",
-        MODE_NEVER = "never";
-
-    var mode = context.options[0] || MODE_ALWAYS;
-    var params = context.options[1] || {};
-
-    //--------------------------------------------------------------------------
-    // Public API
-    //--------------------------------------------------------------------------
-
-    return {
-        "VariableDeclaration:exit": function(node) {
-
-            var kind = node.kind,
-                declarations = node.declarations;
-
-            for (var i = 0; i < declarations.length; ++i) {
-                var declaration = declarations[i],
-                    id = declaration.id,
-                    initialized = isInitialized(declaration),
-                    isIgnoredForLoop = params.ignoreForLoopInit && isForLoop(node.parent);
-
-                if (id.type !== "Identifier") {
-                    continue;
-                }
-
-                if (mode === MODE_ALWAYS && !initialized) {
-                    context.report(declaration, "Variable '" + id.name + "' should be initialized on declaration.");
-                } else if (mode === MODE_NEVER && kind !== "const" && initialized && !isIgnoredForLoop) {
-                    context.report(declaration, "Variable '" + id.name + "' should not be initialized on declaration.");
-                }
-            }
-        }
-    };
-};
-
-module.exports.schema = {
-    "anyOf": [
-        {
-            "type": "array",
-            "items": [
-                {
-                    "enum": ["always"]
-                }
-            ],
-            "minItems": 0,
-            "maxItems": 1
+module.exports = {
+    meta: {
+        docs: {
+            description: "require or disallow initialization in `var` declarations",
+            category: "Variables",
+            recommended: false
         },
-        {
-            "type": "array",
-            "items": [
+
+        schema: {
+            "anyOf": [
                 {
-                    "enum": ["never"]
+                    "type": "array",
+                    "items": [
+                        {
+                            "enum": ["always"]
+                        }
+                    ],
+                    "minItems": 0,
+                    "maxItems": 1
                 },
                 {
-                    "type": "object",
-                    "properties": {
-                        "ignoreForLoopInit": {
-                            "type": "boolean"
+                    "type": "array",
+                    "items": [
+                        {
+                            "enum": ["never"]
+                        },
+                        {
+                            "type": "object",
+                            "properties": {
+                                "ignoreForLoopInit": {
+                                    "type": "boolean"
+                                }
+                            },
+                            "additionalProperties": false
                         }
-                    },
-                    "additionalProperties": false
+                    ],
+                    "minItems": 0,
+                    "maxItems": 2
                 }
-            ],
-            "minItems": 0,
-            "maxItems": 2
+            ]
         }
-    ]
+    },
+
+    create: function(context) {
+
+        var MODE_ALWAYS = "always",
+            MODE_NEVER = "never";
+
+        var mode = context.options[0] || MODE_ALWAYS;
+        var params = context.options[1] || {};
+
+        //--------------------------------------------------------------------------
+        // Public API
+        //--------------------------------------------------------------------------
+
+        return {
+            "VariableDeclaration:exit": function(node) {
+
+                var kind = node.kind,
+                    declarations = node.declarations;
+
+                for (var i = 0; i < declarations.length; ++i) {
+                    var declaration = declarations[i],
+                        id = declaration.id,
+                        initialized = isInitialized(declaration),
+                        isIgnoredForLoop = params.ignoreForLoopInit && isForLoop(node.parent);
+
+                    if (id.type !== "Identifier") {
+                        continue;
+                    }
+
+                    if (mode === MODE_ALWAYS && !initialized) {
+                        context.report(declaration, "Variable '" + id.name + "' should be initialized on declaration.");
+                    } else if (mode === MODE_NEVER && kind !== "const" && initialized && !isIgnoredForLoop) {
+                        context.report(declaration, "Variable '" + id.name + "' should not be initialized on declaration.");
+                    }
+                }
+            }
+        };
+    }
 };
 
 },{}],202:[function(require,module,exports){
@@ -46302,42 +46720,54 @@ var QUOTE_SETTINGS = {
 // Rule Definition
 //------------------------------------------------------------------------------
 
-module.exports = function(context) {
-    var quoteOption = context.options[0] || "prefer-double",
-        setting = QUOTE_SETTINGS[quoteOption];
+module.exports = {
+    meta: {
+        docs: {
+            description: "enforce the consistent use of either double or single quotes in JSX attributes",
+            category: "Stylistic Issues",
+            recommended: false
+        },
 
-    /**
-     * Checks if the given string literal node uses the expected quotes
-     * @param {ASTNode} node - A string literal node.
-     * @returns {boolean} Whether or not the string literal used the expected quotes.
-     * @public
-     */
-    function usesExpectedQuotes(node) {
-        return node.value.indexOf(setting.quote) !== -1 || astUtils.isSurroundedBy(node.raw, setting.quote);
-    }
+        fixable: "whitespace",
 
-    return {
-        "JSXAttribute": function(node) {
-            var attributeValue = node.value;
-
-            if (attributeValue && astUtils.isStringLiteral(attributeValue) && !usesExpectedQuotes(attributeValue)) {
-                context.report({
-                    node: attributeValue,
-                    message: "Unexpected usage of " + setting.description + ".",
-                    fix: function(fixer) {
-                        return fixer.replaceText(attributeValue, setting.convert(attributeValue.raw));
-                    }
-                });
+        schema: [
+            {
+                "enum": [ "prefer-single", "prefer-double" ]
             }
-        }
-    };
-};
+        ]
+    },
 
-module.exports.schema = [
-    {
-        "enum": [ "prefer-single", "prefer-double" ]
+    create: function(context) {
+        var quoteOption = context.options[0] || "prefer-double",
+            setting = QUOTE_SETTINGS[quoteOption];
+
+        /**
+         * Checks if the given string literal node uses the expected quotes
+         * @param {ASTNode} node - A string literal node.
+         * @returns {boolean} Whether or not the string literal used the expected quotes.
+         * @public
+         */
+        function usesExpectedQuotes(node) {
+            return node.value.indexOf(setting.quote) !== -1 || astUtils.isSurroundedBy(node.raw, setting.quote);
+        }
+
+        return {
+            "JSXAttribute": function(node) {
+                var attributeValue = node.value;
+
+                if (attributeValue && astUtils.isStringLiteral(attributeValue) && !usesExpectedQuotes(attributeValue)) {
+                    context.report({
+                        node: attributeValue,
+                        message: "Unexpected usage of " + setting.description + ".",
+                        fix: function(fixer) {
+                            return fixer.replaceText(attributeValue, setting.convert(attributeValue.raw));
+                        }
+                    });
+                }
+            }
+        };
     }
-];
+};
 
 },{"../ast-utils":151}],203:[function(require,module,exports){
 /**
@@ -46453,313 +46883,17 @@ var messages = {
     value: "{{error}} space before value for {{computed}}key '{{key}}'."
 };
 
-module.exports = function(context) {
-
-    /**
-     * OPTIONS
-     * "key-spacing": [2, {
-     *     beforeColon: false,
-     *     afterColon: true,
-     *     align: "colon" // Optional, or "value"
-     * }
-     */
-
-    var options = context.options[0] || {},
-        multiLineOptions = initOptions({}, (options.multiLine || options)),
-        singleLineOptions = initOptions({}, (options.singleLine || options));
-
-    /**
-     * Determines if the given property is key-value property.
-     * @param {ASTNode} property Property node to check.
-     * @returns {Boolean} Whether the property is a key-value property.
-     */
-    function isKeyValueProperty(property) {
-        return !(
-            property.method ||
-            property.shorthand ||
-            property.kind !== "init" ||
-            property.type !== "Property" // Could be "ExperimentalSpreadProperty" or "SpreadProperty"
-        );
-    }
-
-    /**
-     * Starting from the given a node (a property.key node here) looks forward
-     * until it finds the last token before a colon punctuator and returns it.
-     * @param {ASTNode} node The node to start looking from.
-     * @returns {ASTNode} The last token before a colon punctuator.
-     */
-    function getLastTokenBeforeColon(node) {
-        var prevNode;
-
-        while (node && (node.type !== "Punctuator" || node.value !== ":")) {
-            prevNode = node;
-            node = context.getTokenAfter(node);
-        }
-
-        return prevNode;
-    }
-
-    /**
-     * Starting from the given a node (a property.key node here) looks forward
-     * until it finds the colon punctuator and returns it.
-     * @param {ASTNode} node The node to start looking from.
-     * @returns {ASTNode} The colon punctuator.
-     */
-    function getNextColon(node) {
-
-        while (node && (node.type !== "Punctuator" || node.value !== ":")) {
-            node = context.getTokenAfter(node);
-        }
-
-        return node;
-    }
-
-    /**
-     * Gets an object literal property's key as the identifier name or string value.
-     * @param {ASTNode} property Property node whose key to retrieve.
-     * @returns {string} The property's key.
-     */
-    function getKey(property) {
-        var key = property.key;
-
-        if (property.computed) {
-            return context.getSource().slice(key.range[0], key.range[1]);
-        }
-
-        return property.key.name || property.key.value;
-    }
-
-    /**
-     * Reports an appropriately-formatted error if spacing is incorrect on one
-     * side of the colon.
-     * @param {ASTNode} property Key-value pair in an object literal.
-     * @param {string} side Side being verified - either "key" or "value".
-     * @param {string} whitespace Actual whitespace string.
-     * @param {int} expected Expected whitespace length.
-     * @param {string} mode Value of the mode as "strict" or "minimum"
-     * @returns {void}
-     */
-    function report(property, side, whitespace, expected, mode) {
-        var diff = whitespace.length - expected,
-            key = property.key,
-            firstTokenAfterColon = context.getTokenAfter(getNextColon(key)),
-            location = side === "key" ? key.loc.start : firstTokenAfterColon.loc.start;
-
-        if ((
-            diff && mode === "strict" ||
-            diff < 0 && mode === "minimum" ||
-            diff > 0 && !expected && mode === "minimum") &&
-            !(expected && containsLineTerminator(whitespace))
-        ) {
-            context.report(property[side], location, messages[side], {
-                error: diff > 0 ? "Extra" : "Missing",
-                computed: property.computed ? "computed " : "",
-                key: getKey(property)
-            });
-        }
-    }
-
-    /**
-     * Gets the number of characters in a key, including quotes around string
-     * keys and braces around computed property keys.
-     * @param {ASTNode} property Property of on object literal.
-     * @returns {int} Width of the key.
-     */
-    function getKeyWidth(property) {
-        var startToken, endToken;
-
-        startToken = context.getFirstToken(property);
-        endToken = getLastTokenBeforeColon(property.key);
-
-        return endToken.range[1] - startToken.range[0];
-    }
-
-    /**
-     * Gets the whitespace around the colon in an object literal property.
-     * @param {ASTNode} property Property node from an object literal.
-     * @returns {Object} Whitespace before and after the property's colon.
-     */
-    function getPropertyWhitespace(property) {
-        var whitespace = /(\s*):(\s*)/.exec(context.getSource().slice(
-            property.key.range[1], property.value.range[0]
-        ));
-
-        if (whitespace) {
-            return {
-                beforeColon: whitespace[1],
-                afterColon: whitespace[2]
-            };
-        }
-        return null;
-    }
-
-    /**
-     * Creates groups of properties.
-     * @param  {ASTNode} node ObjectExpression node being evaluated.
-     * @returns {Array.<ASTNode[]>} Groups of property AST node lists.
-     */
-    function createGroups(node) {
-        if (node.properties.length === 1) {
-            return [node.properties];
-        }
-
-        return node.properties.reduce(function(groups, property) {
-            var currentGroup = last(groups),
-                prev = last(currentGroup);
-
-            if (!prev || continuesPropertyGroup(prev, property)) {
-                currentGroup.push(property);
-            } else {
-                groups.push([property]);
-            }
-
-            return groups;
-        }, [
-            []
-        ]);
-    }
-
-    /**
-     * Verifies correct vertical alignment of a group of properties.
-     * @param {ASTNode[]} properties List of Property AST nodes.
-     * @returns {void}
-     */
-    function verifyGroupAlignment(properties) {
-        var length = properties.length,
-            widths = properties.map(getKeyWidth), // Width of keys, including quotes
-            targetWidth = Math.max.apply(null, widths),
-            i, property, whitespace, width,
-            align = multiLineOptions.align,
-            beforeColon = multiLineOptions.beforeColon,
-            afterColon = multiLineOptions.afterColon,
-            mode = multiLineOptions.mode;
-
-        // Conditionally include one space before or after colon
-        targetWidth += (align === "colon" ? beforeColon : afterColon);
-
-        for (i = 0; i < length; i++) {
-            property = properties[i];
-            whitespace = getPropertyWhitespace(property);
-            if (whitespace) { // Object literal getters/setters lack a colon
-                width = widths[i];
-
-                if (align === "value") {
-                    report(property, "key", whitespace.beforeColon, beforeColon, mode);
-                    report(property, "value", whitespace.afterColon, targetWidth - width, mode);
-                } else { // align = "colon"
-                    report(property, "key", whitespace.beforeColon, targetWidth - width, mode);
-                    report(property, "value", whitespace.afterColon, afterColon, mode);
-                }
-            }
-        }
-    }
-
-    /**
-     * Verifies vertical alignment, taking into account groups of properties.
-     * @param  {ASTNode} node ObjectExpression node being evaluated.
-     * @returns {void}
-     */
-    function verifyAlignment(node) {
-        createGroups(node).forEach(function(group) {
-            verifyGroupAlignment(group.filter(isKeyValueProperty));
-        });
-    }
-
-    /**
-     * Verifies spacing of property conforms to specified options.
-     * @param  {ASTNode} node Property node being evaluated.
-     * @param {Object} lineOptions Configured singleLine or multiLine options
-     * @returns {void}
-     */
-    function verifySpacing(node, lineOptions) {
-        var actual = getPropertyWhitespace(node);
-
-        if (actual) { // Object literal getters/setters lack colons
-            report(node, "key", actual.beforeColon, lineOptions.beforeColon, lineOptions.mode);
-            report(node, "value", actual.afterColon, lineOptions.afterColon, lineOptions.mode);
-        }
-    }
-
-    /**
-     * Verifies spacing of each property in a list.
-     * @param  {ASTNode[]} properties List of Property AST nodes.
-     * @returns {void}
-     */
-    function verifyListSpacing(properties) {
-        var length = properties.length;
-
-        for (var i = 0; i < length; i++) {
-            verifySpacing(properties[i], singleLineOptions);
-        }
-    }
-
-    //--------------------------------------------------------------------------
-    // Public API
-    //--------------------------------------------------------------------------
-
-    if (multiLineOptions.align) { // Verify vertical alignment
-
-        return {
-            "ObjectExpression": function(node) {
-                if (isSingleLine(node)) {
-                    verifyListSpacing(node.properties.filter(isKeyValueProperty));
-                } else {
-                    verifyAlignment(node);
-                }
-            }
-        };
-
-    } else { // Obey beforeColon and afterColon in each property as configured
-
-        return {
-            "Property": function(node) {
-                verifySpacing(node, isSingleLine(node.parent) ? singleLineOptions : multiLineOptions);
-            }
-        };
-
-    }
-
-};
-
-module.exports.schema = [{
-    "anyOf": [
-        {
-            "type": "object",
-            "properties": {
-                "align": {
-                    "enum": ["colon", "value"]
-                },
-                "mode": {
-                    "enum": ["strict", "minimum"]
-                },
-                "beforeColon": {
-                    "type": "boolean"
-                },
-                "afterColon": {
-                    "type": "boolean"
-                }
-            },
-            "additionalProperties": false
+module.exports = {
+    meta: {
+        docs: {
+            description: "enforce consistent spacing between keys and values in object literal properties",
+            category: "Stylistic Issues",
+            recommended: false
         },
-        {
-            "type": "object",
-            "properties": {
-                "singleLine": {
-                    "type": "object",
-                    "properties": {
-                        "mode": {
-                            "enum": ["strict", "minimum"]
-                        },
-                        "beforeColon": {
-                            "type": "boolean"
-                        },
-                        "afterColon": {
-                            "type": "boolean"
-                        }
-                    },
-                    "additionalProperties": false
-                },
-                "multiLine": {
+
+        schema: [{
+            "anyOf": [
+                {
                     "type": "object",
                     "properties": {
                         "align": {
@@ -46776,12 +46910,317 @@ module.exports.schema = [{
                         }
                     },
                     "additionalProperties": false
+                },
+                {
+                    "type": "object",
+                    "properties": {
+                        "singleLine": {
+                            "type": "object",
+                            "properties": {
+                                "mode": {
+                                    "enum": ["strict", "minimum"]
+                                },
+                                "beforeColon": {
+                                    "type": "boolean"
+                                },
+                                "afterColon": {
+                                    "type": "boolean"
+                                }
+                            },
+                            "additionalProperties": false
+                        },
+                        "multiLine": {
+                            "type": "object",
+                            "properties": {
+                                "align": {
+                                    "enum": ["colon", "value"]
+                                },
+                                "mode": {
+                                    "enum": ["strict", "minimum"]
+                                },
+                                "beforeColon": {
+                                    "type": "boolean"
+                                },
+                                "afterColon": {
+                                    "type": "boolean"
+                                }
+                            },
+                            "additionalProperties": false
+                        }
+                    },
+                    "additionalProperties": false
                 }
-            },
-            "additionalProperties": false
+            ]
+        }]
+    },
+
+    create: function(context) {
+
+        /**
+         * OPTIONS
+         * "key-spacing": [2, {
+         *     beforeColon: false,
+         *     afterColon: true,
+         *     align: "colon" // Optional, or "value"
+         * }
+         */
+
+        var options = context.options[0] || {},
+            multiLineOptions = initOptions({}, (options.multiLine || options)),
+            singleLineOptions = initOptions({}, (options.singleLine || options));
+
+        /**
+         * Determines if the given property is key-value property.
+         * @param {ASTNode} property Property node to check.
+         * @returns {Boolean} Whether the property is a key-value property.
+         */
+        function isKeyValueProperty(property) {
+            return !(
+                (property.method ||
+                property.shorthand ||
+                property.kind !== "init" || property.type !== "Property") // Could be "ExperimentalSpreadProperty" or "SpreadProperty"
+            );
         }
-    ]
-}];
+
+        /**
+         * Starting from the given a node (a property.key node here) looks forward
+         * until it finds the last token before a colon punctuator and returns it.
+         * @param {ASTNode} node The node to start looking from.
+         * @returns {ASTNode} The last token before a colon punctuator.
+         */
+        function getLastTokenBeforeColon(node) {
+            var prevNode;
+
+            while (node && (node.type !== "Punctuator" || node.value !== ":")) {
+                prevNode = node;
+                node = context.getTokenAfter(node);
+            }
+
+            return prevNode;
+        }
+
+        /**
+         * Starting from the given a node (a property.key node here) looks forward
+         * until it finds the colon punctuator and returns it.
+         * @param {ASTNode} node The node to start looking from.
+         * @returns {ASTNode} The colon punctuator.
+         */
+        function getNextColon(node) {
+
+            while (node && (node.type !== "Punctuator" || node.value !== ":")) {
+                node = context.getTokenAfter(node);
+            }
+
+            return node;
+        }
+
+        /**
+         * Gets an object literal property's key as the identifier name or string value.
+         * @param {ASTNode} property Property node whose key to retrieve.
+         * @returns {string} The property's key.
+         */
+        function getKey(property) {
+            var key = property.key;
+
+            if (property.computed) {
+                return context.getSource().slice(key.range[0], key.range[1]);
+            }
+
+            return property.key.name || property.key.value;
+        }
+
+        /**
+         * Reports an appropriately-formatted error if spacing is incorrect on one
+         * side of the colon.
+         * @param {ASTNode} property Key-value pair in an object literal.
+         * @param {string} side Side being verified - either "key" or "value".
+         * @param {string} whitespace Actual whitespace string.
+         * @param {int} expected Expected whitespace length.
+         * @param {string} mode Value of the mode as "strict" or "minimum"
+         * @returns {void}
+         */
+        function report(property, side, whitespace, expected, mode) {
+            var diff = whitespace.length - expected,
+                key = property.key,
+                firstTokenAfterColon = context.getTokenAfter(getNextColon(key)),
+                location = side === "key" ? key.loc.start : firstTokenAfterColon.loc.start;
+
+            if ((
+                diff && mode === "strict" ||
+                diff < 0 && mode === "minimum" ||
+                diff > 0 && !expected && mode === "minimum") &&
+                !(expected && containsLineTerminator(whitespace))
+            ) {
+                context.report(property[side], location, messages[side], {
+                    error: diff > 0 ? "Extra" : "Missing",
+                    computed: property.computed ? "computed " : "",
+                    key: getKey(property)
+                });
+            }
+        }
+
+        /**
+         * Gets the number of characters in a key, including quotes around string
+         * keys and braces around computed property keys.
+         * @param {ASTNode} property Property of on object literal.
+         * @returns {int} Width of the key.
+         */
+        function getKeyWidth(property) {
+            var startToken, endToken;
+
+            startToken = context.getFirstToken(property);
+            endToken = getLastTokenBeforeColon(property.key);
+
+            return endToken.range[1] - startToken.range[0];
+        }
+
+        /**
+         * Gets the whitespace around the colon in an object literal property.
+         * @param {ASTNode} property Property node from an object literal.
+         * @returns {Object} Whitespace before and after the property's colon.
+         */
+        function getPropertyWhitespace(property) {
+            var whitespace = /(\s*):(\s*)/.exec(context.getSource().slice(
+                property.key.range[1], property.value.range[0]
+            ));
+
+            if (whitespace) {
+                return {
+                    beforeColon: whitespace[1],
+                    afterColon: whitespace[2]
+                };
+            }
+            return null;
+        }
+
+        /**
+         * Creates groups of properties.
+         * @param  {ASTNode} node ObjectExpression node being evaluated.
+         * @returns {Array.<ASTNode[]>} Groups of property AST node lists.
+         */
+        function createGroups(node) {
+            if (node.properties.length === 1) {
+                return [node.properties];
+            }
+
+            return node.properties.reduce(function(groups, property) {
+                var currentGroup = last(groups),
+                    prev = last(currentGroup);
+
+                if (!prev || continuesPropertyGroup(prev, property)) {
+                    currentGroup.push(property);
+                } else {
+                    groups.push([property]);
+                }
+
+                return groups;
+            }, [
+                []
+            ]);
+        }
+
+        /**
+         * Verifies correct vertical alignment of a group of properties.
+         * @param {ASTNode[]} properties List of Property AST nodes.
+         * @returns {void}
+         */
+        function verifyGroupAlignment(properties) {
+            var length = properties.length,
+                widths = properties.map(getKeyWidth), // Width of keys, including quotes
+                targetWidth = Math.max.apply(null, widths),
+                i, property, whitespace, width,
+                align = multiLineOptions.align,
+                beforeColon = multiLineOptions.beforeColon,
+                afterColon = multiLineOptions.afterColon,
+                mode = multiLineOptions.mode;
+
+            // Conditionally include one space before or after colon
+            targetWidth += (align === "colon" ? beforeColon : afterColon);
+
+            for (i = 0; i < length; i++) {
+                property = properties[i];
+                whitespace = getPropertyWhitespace(property);
+                if (whitespace) { // Object literal getters/setters lack a colon
+                    width = widths[i];
+
+                    if (align === "value") {
+                        report(property, "key", whitespace.beforeColon, beforeColon, mode);
+                        report(property, "value", whitespace.afterColon, targetWidth - width, mode);
+                    } else { // align = "colon"
+                        report(property, "key", whitespace.beforeColon, targetWidth - width, mode);
+                        report(property, "value", whitespace.afterColon, afterColon, mode);
+                    }
+                }
+            }
+        }
+
+        /**
+         * Verifies vertical alignment, taking into account groups of properties.
+         * @param  {ASTNode} node ObjectExpression node being evaluated.
+         * @returns {void}
+         */
+        function verifyAlignment(node) {
+            createGroups(node).forEach(function(group) {
+                verifyGroupAlignment(group.filter(isKeyValueProperty));
+            });
+        }
+
+        /**
+         * Verifies spacing of property conforms to specified options.
+         * @param  {ASTNode} node Property node being evaluated.
+         * @param {Object} lineOptions Configured singleLine or multiLine options
+         * @returns {void}
+         */
+        function verifySpacing(node, lineOptions) {
+            var actual = getPropertyWhitespace(node);
+
+            if (actual) { // Object literal getters/setters lack colons
+                report(node, "key", actual.beforeColon, lineOptions.beforeColon, lineOptions.mode);
+                report(node, "value", actual.afterColon, lineOptions.afterColon, lineOptions.mode);
+            }
+        }
+
+        /**
+         * Verifies spacing of each property in a list.
+         * @param  {ASTNode[]} properties List of Property AST nodes.
+         * @returns {void}
+         */
+        function verifyListSpacing(properties) {
+            var length = properties.length;
+
+            for (var i = 0; i < length; i++) {
+                verifySpacing(properties[i], singleLineOptions);
+            }
+        }
+
+        //--------------------------------------------------------------------------
+        // Public API
+        //--------------------------------------------------------------------------
+
+        if (multiLineOptions.align) { // Verify vertical alignment
+
+            return {
+                "ObjectExpression": function(node) {
+                    if (isSingleLine(node)) {
+                        verifyListSpacing(node.properties.filter(isKeyValueProperty));
+                    } else {
+                        verifyAlignment(node);
+                    }
+                }
+            };
+
+        } else { // Obey beforeColon and afterColon in each property as configured
+
+            return {
+                "Property": function(node) {
+                    verifySpacing(node, isSingleLine(node.parent) ? singleLineOptions : multiLineOptions);
+                }
+            };
+
+        }
+
+    }
+};
 
 },{}],204:[function(require,module,exports){
 /**
@@ -46851,473 +47290,485 @@ function isCloseParenOfTemplate(token) {
 // Rule Definition
 //------------------------------------------------------------------------------
 
-module.exports = function(context) {
-    var sourceCode = context.getSourceCode();
+module.exports = {
+    meta: {
+        docs: {
+            description: "enforce consistent spacing before and after keywords",
+            category: "Stylistic Issues",
+            recommended: false
+        },
 
-    /**
-     * Reports a given token if there are not space(s) before the token.
-     *
-     * @param {Token} token - A token to report.
-     * @param {RegExp|undefined} pattern - Optional. A pattern of the previous
-     *      token to check.
-     * @returns {void}
-     */
-    function expectSpaceBefore(token, pattern) {
-        pattern = pattern || PREV_TOKEN;
+        fixable: "whitespace",
 
-        var prevToken = sourceCode.getTokenBefore(token);
-
-        if (prevToken &&
-            (CHECK_TYPE.test(prevToken.type) || pattern.test(prevToken.value)) &&
-            !isOpenParenOfTemplate(prevToken) &&
-            astUtils.isTokenOnSameLine(prevToken, token) &&
-            !sourceCode.isSpaceBetweenTokens(prevToken, token)
-        ) {
-            context.report({
-                loc: token.loc.start,
-                message: "Expected space(s) before \"{{value}}\".",
-                data: token,
-                fix: function(fixer) {
-                    return fixer.insertTextBefore(token, " ");
-                }
-            });
-        }
-    }
-
-    /**
-     * Reports a given token if there are space(s) before the token.
-     *
-     * @param {Token} token - A token to report.
-     * @param {RegExp|undefined} pattern - Optional. A pattern of the previous
-     *      token to check.
-     * @returns {void}
-     */
-    function unexpectSpaceBefore(token, pattern) {
-        pattern = pattern || PREV_TOKEN;
-
-        var prevToken = sourceCode.getTokenBefore(token);
-
-        if (prevToken &&
-            (CHECK_TYPE.test(prevToken.type) || pattern.test(prevToken.value)) &&
-            !isOpenParenOfTemplate(prevToken) &&
-            astUtils.isTokenOnSameLine(prevToken, token) &&
-            sourceCode.isSpaceBetweenTokens(prevToken, token)
-        ) {
-            context.report({
-                loc: token.loc.start,
-                message: "Unexpected space(s) before \"{{value}}\".",
-                data: token,
-                fix: function(fixer) {
-                    return fixer.removeRange([prevToken.range[1], token.range[0]]);
-                }
-            });
-        }
-    }
-
-    /**
-     * Reports a given token if there are not space(s) after the token.
-     *
-     * @param {Token} token - A token to report.
-     * @param {RegExp|undefined} pattern - Optional. A pattern of the next
-     *      token to check.
-     * @returns {void}
-     */
-    function expectSpaceAfter(token, pattern) {
-        pattern = pattern || NEXT_TOKEN;
-
-        var nextToken = sourceCode.getTokenAfter(token);
-
-        if (nextToken &&
-            (CHECK_TYPE.test(nextToken.type) || pattern.test(nextToken.value)) &&
-            !isCloseParenOfTemplate(nextToken) &&
-            astUtils.isTokenOnSameLine(token, nextToken) &&
-            !sourceCode.isSpaceBetweenTokens(token, nextToken)
-        ) {
-            context.report({
-                loc: token.loc.start,
-                message: "Expected space(s) after \"{{value}}\".",
-                data: token,
-                fix: function(fixer) {
-                    return fixer.insertTextAfter(token, " ");
-                }
-            });
-        }
-    }
-
-    /**
-     * Reports a given token if there are space(s) after the token.
-     *
-     * @param {Token} token - A token to report.
-     * @param {RegExp|undefined} pattern - Optional. A pattern of the next
-     *      token to check.
-     * @returns {void}
-     */
-    function unexpectSpaceAfter(token, pattern) {
-        pattern = pattern || NEXT_TOKEN;
-
-        var nextToken = sourceCode.getTokenAfter(token);
-
-        if (nextToken &&
-            (CHECK_TYPE.test(nextToken.type) || pattern.test(nextToken.value)) &&
-            !isCloseParenOfTemplate(nextToken) &&
-            astUtils.isTokenOnSameLine(token, nextToken) &&
-            sourceCode.isSpaceBetweenTokens(token, nextToken)
-        ) {
-            context.report({
-                loc: token.loc.start,
-                message: "Unexpected space(s) after \"{{value}}\".",
-                data: token,
-                fix: function(fixer) {
-                    return fixer.removeRange([token.range[1], nextToken.range[0]]);
-                }
-            });
-        }
-    }
-
-    /**
-     * Parses the option object and determines check methods for each keyword.
-     *
-     * @param {object|undefined} options - The option object to parse.
-     * @returns {object} - Normalized option object.
-     *      Keys are keywords (there are for every keyword).
-     *      Values are instances of `{"before": function, "after": function}`.
-     */
-    function parseOptions(options) {
-        var before = !options || options.before !== false;
-        var after = !options || options.after !== false;
-        var defaultValue = {
-            before: before ? expectSpaceBefore : unexpectSpaceBefore,
-            after: after ? expectSpaceAfter : unexpectSpaceAfter
-        };
-        var overrides = (options && options.overrides) || {};
-        var retv = Object.create(null);
-
-        for (var i = 0; i < KEYS.length; ++i) {
-            var key = KEYS[i];
-            var override = overrides[key];
-
-            if (override) {
-                var thisBefore = ("before" in override) ? override.before : before;
-                var thisAfter = ("after" in override) ? override.after : after;
-
-                retv[key] = {
-                    before: thisBefore ? expectSpaceBefore : unexpectSpaceBefore,
-                    after: thisAfter ? expectSpaceAfter : unexpectSpaceAfter
-                };
-            } else {
-                retv[key] = defaultValue;
-            }
-        }
-
-        return retv;
-    }
-
-    var checkMethodMap = parseOptions(context.options[0]);
-
-    /**
-     * Reports a given token if usage of spacing followed by the token is
-     * invalid.
-     *
-     * @param {Token} token - A token to report.
-     * @param {RegExp|undefined} pattern - Optional. A pattern of the previous
-     *      token to check.
-     * @returns {void}
-     */
-    function checkSpacingBefore(token, pattern) {
-        checkMethodMap[token.value].before(token, pattern);
-    }
-
-    /**
-     * Reports a given token if usage of spacing preceded by the token is
-     * invalid.
-     *
-     * @param {Token} token - A token to report.
-     * @param {RegExp|undefined} pattern - Optional. A pattern of the next
-     *      token to check.
-     * @returns {void}
-     */
-    function checkSpacingAfter(token, pattern) {
-        checkMethodMap[token.value].after(token, pattern);
-    }
-
-    /**
-     * Reports a given token if usage of spacing around the token is invalid.
-     *
-     * @param {Token} token - A token to report.
-     * @returns {void}
-     */
-    function checkSpacingAround(token) {
-        checkSpacingBefore(token);
-        checkSpacingAfter(token);
-    }
-
-    /**
-     * Reports the first token of a given node if the first token is a keyword
-     * and usage of spacing around the token is invalid.
-     *
-     * @param {ASTNode|null} node - A node to report.
-     * @returns {void}
-     */
-    function checkSpacingAroundFirstToken(node) {
-        var firstToken = node && sourceCode.getFirstToken(node);
-
-        if (firstToken && firstToken.type === "Keyword") {
-            checkSpacingAround(firstToken);
-        }
-    }
-
-    /**
-     * Reports the first token of a given node if the first token is a keyword
-     * and usage of spacing followed by the token is invalid.
-     *
-     * This is used for unary operators (e.g. `typeof`), `function`, and `super`.
-     * Other rules are handling usage of spacing preceded by those keywords.
-     *
-     * @param {ASTNode|null} node - A node to report.
-     * @returns {void}
-     */
-    function checkSpacingBeforeFirstToken(node) {
-        var firstToken = node && sourceCode.getFirstToken(node);
-
-        if (firstToken && firstToken.type === "Keyword") {
-            checkSpacingBefore(firstToken);
-        }
-    }
-
-    /**
-     * Reports the previous token of a given node if the token is a keyword and
-     * usage of spacing around the token is invalid.
-     *
-     * @param {ASTNode|null} node - A node to report.
-     * @returns {void}
-     */
-    function checkSpacingAroundTokenBefore(node) {
-        if (node) {
-            var token = sourceCode.getTokenBefore(node);
-
-            while (token.type !== "Keyword") {
-                token = sourceCode.getTokenBefore(token);
-            }
-
-            checkSpacingAround(token);
-        }
-    }
-
-    /**
-     * Reports `class` and `extends` keywords of a given node if usage of
-     * spacing around those keywords is invalid.
-     *
-     * @param {ASTNode} node - A node to report.
-     * @returns {void}
-     */
-    function checkSpacingForClass(node) {
-        checkSpacingAroundFirstToken(node);
-        checkSpacingAroundTokenBefore(node.superClass);
-    }
-
-    /**
-     * Reports `if` and `else` keywords of a given node if usage of spacing
-     * around those keywords is invalid.
-     *
-     * @param {ASTNode} node - A node to report.
-     * @returns {void}
-     */
-    function checkSpacingForIfStatement(node) {
-        checkSpacingAroundFirstToken(node);
-        checkSpacingAroundTokenBefore(node.alternate);
-    }
-
-    /**
-     * Reports `try`, `catch`, and `finally` keywords of a given node if usage
-     * of spacing around those keywords is invalid.
-     *
-     * @param {ASTNode} node - A node to report.
-     * @returns {void}
-     */
-    function checkSpacingForTryStatement(node) {
-        checkSpacingAroundFirstToken(node);
-        checkSpacingAroundFirstToken(node.handler);
-        checkSpacingAroundTokenBefore(node.finalizer);
-    }
-
-    /**
-     * Reports `do` and `while` keywords of a given node if usage of spacing
-     * around those keywords is invalid.
-     *
-     * @param {ASTNode} node - A node to report.
-     * @returns {void}
-     */
-    function checkSpacingForDoWhileStatement(node) {
-        checkSpacingAroundFirstToken(node);
-        checkSpacingAroundTokenBefore(node.test);
-    }
-
-    /**
-     * Reports `for` and `in` keywords of a given node if usage of spacing
-     * around those keywords is invalid.
-     *
-     * @param {ASTNode} node - A node to report.
-     * @returns {void}
-     */
-    function checkSpacingForForInStatement(node) {
-        checkSpacingAroundFirstToken(node);
-        checkSpacingAroundTokenBefore(node.right);
-    }
-
-    /**
-     * Reports `for` and `of` keywords of a given node if usage of spacing
-     * around those keywords is invalid.
-     *
-     * @param {ASTNode} node - A node to report.
-     * @returns {void}
-     */
-    function checkSpacingForForOfStatement(node) {
-        checkSpacingAroundFirstToken(node);
-
-        // `of` is not a keyword token.
-        var token = sourceCode.getTokenBefore(node.right);
-
-        while (token.value !== "of") {
-            token = sourceCode.getTokenBefore(token);
-        }
-        checkSpacingAround(token);
-    }
-
-    /**
-     * Reports `import`, `export`, `as`, and `from` keywords of a given node if
-     * usage of spacing around those keywords is invalid.
-     *
-     * This rule handles the `*` token in module declarations.
-     *
-     *     import*as A from "./a"; /*error Expected space(s) after "import".
-     *                               error Expected space(s) before "as".
-     *
-     * @param {ASTNode} node - A node to report.
-     * @returns {void}
-     */
-    function checkSpacingForModuleDeclaration(node) {
-        var firstToken = sourceCode.getFirstToken(node);
-
-        checkSpacingBefore(firstToken, PREV_TOKEN_M);
-        checkSpacingAfter(firstToken, NEXT_TOKEN_M);
-
-        if (node.source) {
-            var fromToken = sourceCode.getTokenBefore(node.source);
-
-            checkSpacingBefore(fromToken, PREV_TOKEN_M);
-            checkSpacingAfter(fromToken, NEXT_TOKEN_M);
-        }
-    }
-
-    /**
-     * Reports `as` keyword of a given node if usage of spacing around this
-     * keyword is invalid.
-     *
-     * @param {ASTNode} node - A node to report.
-     * @returns {void}
-     */
-    function checkSpacingForImportNamespaceSpecifier(node) {
-        var asToken = sourceCode.getFirstToken(node, 1);
-
-        checkSpacingBefore(asToken, PREV_TOKEN_M);
-    }
-
-    /**
-     * Reports `static`, `get`, and `set` keywords of a given node if usage of
-     * spacing around those keywords is invalid.
-     *
-     * @param {ASTNode} node - A node to report.
-     * @returns {void}
-     */
-    function checkSpacingForProperty(node) {
-        if (node.static) {
-            checkSpacingAroundFirstToken(node);
-        }
-        if (node.kind === "get" || node.kind === "set") {
-            var token = sourceCode.getFirstToken(
-                node,
-                node.static ? 1 : 0
-            );
-
-            checkSpacingAround(token);
-        }
-    }
-
-    return {
-
-        // Statements
-        DebuggerStatement: checkSpacingAroundFirstToken,
-        WithStatement: checkSpacingAroundFirstToken,
-
-        // Statements - Control flow
-        BreakStatement: checkSpacingAroundFirstToken,
-        ContinueStatement: checkSpacingAroundFirstToken,
-        ReturnStatement: checkSpacingAroundFirstToken,
-        ThrowStatement: checkSpacingAroundFirstToken,
-        TryStatement: checkSpacingForTryStatement,
-
-        // Statements - Choice
-        IfStatement: checkSpacingForIfStatement,
-        SwitchStatement: checkSpacingAroundFirstToken,
-        SwitchCase: checkSpacingAroundFirstToken,
-
-        // Statements - Loops
-        DoWhileStatement: checkSpacingForDoWhileStatement,
-        ForInStatement: checkSpacingForForInStatement,
-        ForOfStatement: checkSpacingForForOfStatement,
-        ForStatement: checkSpacingAroundFirstToken,
-        WhileStatement: checkSpacingAroundFirstToken,
-
-        // Statements - Declarations
-        ClassDeclaration: checkSpacingForClass,
-        ExportNamedDeclaration: checkSpacingForModuleDeclaration,
-        ExportDefaultDeclaration: checkSpacingAroundFirstToken,
-        ExportAllDeclaration: checkSpacingForModuleDeclaration,
-        FunctionDeclaration: checkSpacingBeforeFirstToken,
-        ImportDeclaration: checkSpacingForModuleDeclaration,
-        VariableDeclaration: checkSpacingAroundFirstToken,
-
-        // Expressions
-        ClassExpression: checkSpacingForClass,
-        FunctionExpression: checkSpacingBeforeFirstToken,
-        NewExpression: checkSpacingBeforeFirstToken,
-        Super: checkSpacingBeforeFirstToken,
-        ThisExpression: checkSpacingBeforeFirstToken,
-        UnaryExpression: checkSpacingBeforeFirstToken,
-        YieldExpression: checkSpacingBeforeFirstToken,
-
-        // Others
-        ImportNamespaceSpecifier: checkSpacingForImportNamespaceSpecifier,
-        MethodDefinition: checkSpacingForProperty,
-        Property: checkSpacingForProperty
-    };
-};
-
-module.exports.schema = [
-    {
-        "type": "object",
-        "properties": {
-            "before": {"type": "boolean"},
-            "after": {"type": "boolean"},
-            "overrides": {
+        schema: [
+            {
                 "type": "object",
-                "properties": KEYS.reduce(function(retv, key) {
-                    retv[key] = {
+                "properties": {
+                    "before": {"type": "boolean"},
+                    "after": {"type": "boolean"},
+                    "overrides": {
                         "type": "object",
-                        "properties": {
-                            "before": {"type": "boolean"},
-                            "after": {"type": "boolean"}
-                        },
+                        "properties": KEYS.reduce(function(retv, key) {
+                            retv[key] = {
+                                "type": "object",
+                                "properties": {
+                                    "before": {"type": "boolean"},
+                                    "after": {"type": "boolean"}
+                                },
+                                "additionalProperties": false
+                            };
+                            return retv;
+                        }, {}),
                         "additionalProperties": false
-                    };
-                    return retv;
-                }, {}),
+                    }
+                },
                 "additionalProperties": false
             }
-        },
-        "additionalProperties": false
+        ]
+    },
+
+    create: function(context) {
+        var sourceCode = context.getSourceCode();
+
+        /**
+         * Reports a given token if there are not space(s) before the token.
+         *
+         * @param {Token} token - A token to report.
+         * @param {RegExp|undefined} pattern - Optional. A pattern of the previous
+         *      token to check.
+         * @returns {void}
+         */
+        function expectSpaceBefore(token, pattern) {
+            pattern = pattern || PREV_TOKEN;
+
+            var prevToken = sourceCode.getTokenBefore(token);
+
+            if (prevToken &&
+                (CHECK_TYPE.test(prevToken.type) || pattern.test(prevToken.value)) &&
+                !isOpenParenOfTemplate(prevToken) &&
+                astUtils.isTokenOnSameLine(prevToken, token) &&
+                !sourceCode.isSpaceBetweenTokens(prevToken, token)
+            ) {
+                context.report({
+                    loc: token.loc.start,
+                    message: "Expected space(s) before \"{{value}}\".",
+                    data: token,
+                    fix: function(fixer) {
+                        return fixer.insertTextBefore(token, " ");
+                    }
+                });
+            }
+        }
+
+        /**
+         * Reports a given token if there are space(s) before the token.
+         *
+         * @param {Token} token - A token to report.
+         * @param {RegExp|undefined} pattern - Optional. A pattern of the previous
+         *      token to check.
+         * @returns {void}
+         */
+        function unexpectSpaceBefore(token, pattern) {
+            pattern = pattern || PREV_TOKEN;
+
+            var prevToken = sourceCode.getTokenBefore(token);
+
+            if (prevToken &&
+                (CHECK_TYPE.test(prevToken.type) || pattern.test(prevToken.value)) &&
+                !isOpenParenOfTemplate(prevToken) &&
+                astUtils.isTokenOnSameLine(prevToken, token) &&
+                sourceCode.isSpaceBetweenTokens(prevToken, token)
+            ) {
+                context.report({
+                    loc: token.loc.start,
+                    message: "Unexpected space(s) before \"{{value}}\".",
+                    data: token,
+                    fix: function(fixer) {
+                        return fixer.removeRange([prevToken.range[1], token.range[0]]);
+                    }
+                });
+            }
+        }
+
+        /**
+         * Reports a given token if there are not space(s) after the token.
+         *
+         * @param {Token} token - A token to report.
+         * @param {RegExp|undefined} pattern - Optional. A pattern of the next
+         *      token to check.
+         * @returns {void}
+         */
+        function expectSpaceAfter(token, pattern) {
+            pattern = pattern || NEXT_TOKEN;
+
+            var nextToken = sourceCode.getTokenAfter(token);
+
+            if (nextToken &&
+                (CHECK_TYPE.test(nextToken.type) || pattern.test(nextToken.value)) &&
+                !isCloseParenOfTemplate(nextToken) &&
+                astUtils.isTokenOnSameLine(token, nextToken) &&
+                !sourceCode.isSpaceBetweenTokens(token, nextToken)
+            ) {
+                context.report({
+                    loc: token.loc.start,
+                    message: "Expected space(s) after \"{{value}}\".",
+                    data: token,
+                    fix: function(fixer) {
+                        return fixer.insertTextAfter(token, " ");
+                    }
+                });
+            }
+        }
+
+        /**
+         * Reports a given token if there are space(s) after the token.
+         *
+         * @param {Token} token - A token to report.
+         * @param {RegExp|undefined} pattern - Optional. A pattern of the next
+         *      token to check.
+         * @returns {void}
+         */
+        function unexpectSpaceAfter(token, pattern) {
+            pattern = pattern || NEXT_TOKEN;
+
+            var nextToken = sourceCode.getTokenAfter(token);
+
+            if (nextToken &&
+                (CHECK_TYPE.test(nextToken.type) || pattern.test(nextToken.value)) &&
+                !isCloseParenOfTemplate(nextToken) &&
+                astUtils.isTokenOnSameLine(token, nextToken) &&
+                sourceCode.isSpaceBetweenTokens(token, nextToken)
+            ) {
+                context.report({
+                    loc: token.loc.start,
+                    message: "Unexpected space(s) after \"{{value}}\".",
+                    data: token,
+                    fix: function(fixer) {
+                        return fixer.removeRange([token.range[1], nextToken.range[0]]);
+                    }
+                });
+            }
+        }
+
+        /**
+         * Parses the option object and determines check methods for each keyword.
+         *
+         * @param {object|undefined} options - The option object to parse.
+         * @returns {object} - Normalized option object.
+         *      Keys are keywords (there are for every keyword).
+         *      Values are instances of `{"before": function, "after": function}`.
+         */
+        function parseOptions(options) {
+            var before = !options || options.before !== false;
+            var after = !options || options.after !== false;
+            var defaultValue = {
+                before: before ? expectSpaceBefore : unexpectSpaceBefore,
+                after: after ? expectSpaceAfter : unexpectSpaceAfter
+            };
+            var overrides = (options && options.overrides) || {};
+            var retv = Object.create(null);
+
+            for (var i = 0; i < KEYS.length; ++i) {
+                var key = KEYS[i];
+                var override = overrides[key];
+
+                if (override) {
+                    var thisBefore = ("before" in override) ? override.before : before;
+                    var thisAfter = ("after" in override) ? override.after : after;
+
+                    retv[key] = {
+                        before: thisBefore ? expectSpaceBefore : unexpectSpaceBefore,
+                        after: thisAfter ? expectSpaceAfter : unexpectSpaceAfter
+                    };
+                } else {
+                    retv[key] = defaultValue;
+                }
+            }
+
+            return retv;
+        }
+
+        var checkMethodMap = parseOptions(context.options[0]);
+
+        /**
+         * Reports a given token if usage of spacing followed by the token is
+         * invalid.
+         *
+         * @param {Token} token - A token to report.
+         * @param {RegExp|undefined} pattern - Optional. A pattern of the previous
+         *      token to check.
+         * @returns {void}
+         */
+        function checkSpacingBefore(token, pattern) {
+            checkMethodMap[token.value].before(token, pattern);
+        }
+
+        /**
+         * Reports a given token if usage of spacing preceded by the token is
+         * invalid.
+         *
+         * @param {Token} token - A token to report.
+         * @param {RegExp|undefined} pattern - Optional. A pattern of the next
+         *      token to check.
+         * @returns {void}
+         */
+        function checkSpacingAfter(token, pattern) {
+            checkMethodMap[token.value].after(token, pattern);
+        }
+
+        /**
+         * Reports a given token if usage of spacing around the token is invalid.
+         *
+         * @param {Token} token - A token to report.
+         * @returns {void}
+         */
+        function checkSpacingAround(token) {
+            checkSpacingBefore(token);
+            checkSpacingAfter(token);
+        }
+
+        /**
+         * Reports the first token of a given node if the first token is a keyword
+         * and usage of spacing around the token is invalid.
+         *
+         * @param {ASTNode|null} node - A node to report.
+         * @returns {void}
+         */
+        function checkSpacingAroundFirstToken(node) {
+            var firstToken = node && sourceCode.getFirstToken(node);
+
+            if (firstToken && firstToken.type === "Keyword") {
+                checkSpacingAround(firstToken);
+            }
+        }
+
+        /**
+         * Reports the first token of a given node if the first token is a keyword
+         * and usage of spacing followed by the token is invalid.
+         *
+         * This is used for unary operators (e.g. `typeof`), `function`, and `super`.
+         * Other rules are handling usage of spacing preceded by those keywords.
+         *
+         * @param {ASTNode|null} node - A node to report.
+         * @returns {void}
+         */
+        function checkSpacingBeforeFirstToken(node) {
+            var firstToken = node && sourceCode.getFirstToken(node);
+
+            if (firstToken && firstToken.type === "Keyword") {
+                checkSpacingBefore(firstToken);
+            }
+        }
+
+        /**
+         * Reports the previous token of a given node if the token is a keyword and
+         * usage of spacing around the token is invalid.
+         *
+         * @param {ASTNode|null} node - A node to report.
+         * @returns {void}
+         */
+        function checkSpacingAroundTokenBefore(node) {
+            if (node) {
+                var token = sourceCode.getTokenBefore(node);
+
+                while (token.type !== "Keyword") {
+                    token = sourceCode.getTokenBefore(token);
+                }
+
+                checkSpacingAround(token);
+            }
+        }
+
+        /**
+         * Reports `class` and `extends` keywords of a given node if usage of
+         * spacing around those keywords is invalid.
+         *
+         * @param {ASTNode} node - A node to report.
+         * @returns {void}
+         */
+        function checkSpacingForClass(node) {
+            checkSpacingAroundFirstToken(node);
+            checkSpacingAroundTokenBefore(node.superClass);
+        }
+
+        /**
+         * Reports `if` and `else` keywords of a given node if usage of spacing
+         * around those keywords is invalid.
+         *
+         * @param {ASTNode} node - A node to report.
+         * @returns {void}
+         */
+        function checkSpacingForIfStatement(node) {
+            checkSpacingAroundFirstToken(node);
+            checkSpacingAroundTokenBefore(node.alternate);
+        }
+
+        /**
+         * Reports `try`, `catch`, and `finally` keywords of a given node if usage
+         * of spacing around those keywords is invalid.
+         *
+         * @param {ASTNode} node - A node to report.
+         * @returns {void}
+         */
+        function checkSpacingForTryStatement(node) {
+            checkSpacingAroundFirstToken(node);
+            checkSpacingAroundFirstToken(node.handler);
+            checkSpacingAroundTokenBefore(node.finalizer);
+        }
+
+        /**
+         * Reports `do` and `while` keywords of a given node if usage of spacing
+         * around those keywords is invalid.
+         *
+         * @param {ASTNode} node - A node to report.
+         * @returns {void}
+         */
+        function checkSpacingForDoWhileStatement(node) {
+            checkSpacingAroundFirstToken(node);
+            checkSpacingAroundTokenBefore(node.test);
+        }
+
+        /**
+         * Reports `for` and `in` keywords of a given node if usage of spacing
+         * around those keywords is invalid.
+         *
+         * @param {ASTNode} node - A node to report.
+         * @returns {void}
+         */
+        function checkSpacingForForInStatement(node) {
+            checkSpacingAroundFirstToken(node);
+            checkSpacingAroundTokenBefore(node.right);
+        }
+
+        /**
+         * Reports `for` and `of` keywords of a given node if usage of spacing
+         * around those keywords is invalid.
+         *
+         * @param {ASTNode} node - A node to report.
+         * @returns {void}
+         */
+        function checkSpacingForForOfStatement(node) {
+            checkSpacingAroundFirstToken(node);
+
+            // `of` is not a keyword token.
+            var token = sourceCode.getTokenBefore(node.right);
+
+            while (token.value !== "of") {
+                token = sourceCode.getTokenBefore(token);
+            }
+            checkSpacingAround(token);
+        }
+
+        /**
+         * Reports `import`, `export`, `as`, and `from` keywords of a given node if
+         * usage of spacing around those keywords is invalid.
+         *
+         * This rule handles the `*` token in module declarations.
+         *
+         *     import*as A from "./a"; /*error Expected space(s) after "import".
+         *                               error Expected space(s) before "as".
+         *
+         * @param {ASTNode} node - A node to report.
+         * @returns {void}
+         */
+        function checkSpacingForModuleDeclaration(node) {
+            var firstToken = sourceCode.getFirstToken(node);
+
+            checkSpacingBefore(firstToken, PREV_TOKEN_M);
+            checkSpacingAfter(firstToken, NEXT_TOKEN_M);
+
+            if (node.source) {
+                var fromToken = sourceCode.getTokenBefore(node.source);
+
+                checkSpacingBefore(fromToken, PREV_TOKEN_M);
+                checkSpacingAfter(fromToken, NEXT_TOKEN_M);
+            }
+        }
+
+        /**
+         * Reports `as` keyword of a given node if usage of spacing around this
+         * keyword is invalid.
+         *
+         * @param {ASTNode} node - A node to report.
+         * @returns {void}
+         */
+        function checkSpacingForImportNamespaceSpecifier(node) {
+            var asToken = sourceCode.getFirstToken(node, 1);
+
+            checkSpacingBefore(asToken, PREV_TOKEN_M);
+        }
+
+        /**
+         * Reports `static`, `get`, and `set` keywords of a given node if usage of
+         * spacing around those keywords is invalid.
+         *
+         * @param {ASTNode} node - A node to report.
+         * @returns {void}
+         */
+        function checkSpacingForProperty(node) {
+            if (node.static) {
+                checkSpacingAroundFirstToken(node);
+            }
+            if (node.kind === "get" || node.kind === "set") {
+                var token = sourceCode.getFirstToken(
+                    node,
+                    node.static ? 1 : 0
+                );
+
+                checkSpacingAround(token);
+            }
+        }
+
+        return {
+
+            // Statements
+            DebuggerStatement: checkSpacingAroundFirstToken,
+            WithStatement: checkSpacingAroundFirstToken,
+
+            // Statements - Control flow
+            BreakStatement: checkSpacingAroundFirstToken,
+            ContinueStatement: checkSpacingAroundFirstToken,
+            ReturnStatement: checkSpacingAroundFirstToken,
+            ThrowStatement: checkSpacingAroundFirstToken,
+            TryStatement: checkSpacingForTryStatement,
+
+            // Statements - Choice
+            IfStatement: checkSpacingForIfStatement,
+            SwitchStatement: checkSpacingAroundFirstToken,
+            SwitchCase: checkSpacingAroundFirstToken,
+
+            // Statements - Loops
+            DoWhileStatement: checkSpacingForDoWhileStatement,
+            ForInStatement: checkSpacingForForInStatement,
+            ForOfStatement: checkSpacingForForOfStatement,
+            ForStatement: checkSpacingAroundFirstToken,
+            WhileStatement: checkSpacingAroundFirstToken,
+
+            // Statements - Declarations
+            ClassDeclaration: checkSpacingForClass,
+            ExportNamedDeclaration: checkSpacingForModuleDeclaration,
+            ExportDefaultDeclaration: checkSpacingAroundFirstToken,
+            ExportAllDeclaration: checkSpacingForModuleDeclaration,
+            FunctionDeclaration: checkSpacingBeforeFirstToken,
+            ImportDeclaration: checkSpacingForModuleDeclaration,
+            VariableDeclaration: checkSpacingAroundFirstToken,
+
+            // Expressions
+            ClassExpression: checkSpacingForClass,
+            FunctionExpression: checkSpacingBeforeFirstToken,
+            NewExpression: checkSpacingBeforeFirstToken,
+            Super: checkSpacingBeforeFirstToken,
+            ThisExpression: checkSpacingBeforeFirstToken,
+            UnaryExpression: checkSpacingBeforeFirstToken,
+            YieldExpression: checkSpacingBeforeFirstToken,
+
+            // Others
+            ImportNamespaceSpecifier: checkSpacingForImportNamespaceSpecifier,
+            MethodDefinition: checkSpacingForProperty,
+            Property: checkSpacingForProperty
+        };
     }
-];
+};
 
 },{"../ast-utils":151,"../util/keywords":378}],205:[function(require,module,exports){
 /**
@@ -47334,72 +47785,84 @@ module.exports.schema = [
 // Rule Definition
 //------------------------------------------------------------------------------
 
-module.exports = function(context) {
+module.exports = {
+    meta: {
+        docs: {
+            description: "enforce consistent linebreak style",
+            category: "Stylistic Issues",
+            recommended: false
+        },
 
-    var EXPECTED_LF_MSG = "Expected linebreaks to be 'LF' but found 'CRLF'.",
-        EXPECTED_CRLF_MSG = "Expected linebreaks to be 'CRLF' but found 'LF'.";
+        fixable: "whitespace",
 
-    //--------------------------------------------------------------------------
-    // Helpers
-    //--------------------------------------------------------------------------
+        schema: [
+            {
+                "enum": ["unix", "windows"]
+            }
+        ]
+    },
 
-    /**
-     * Builds a fix function that replaces text at the specified range in the source text.
-     * @param {int[]} range The range to replace
-     * @param {string} text The text to insert.
-     * @returns {function} Fixer function
-     * @private
-     */
-    function createFix(range, text) {
-        return function(fixer) {
-            return fixer.replaceTextRange(range, text);
+    create: function(context) {
+
+        var EXPECTED_LF_MSG = "Expected linebreaks to be 'LF' but found 'CRLF'.",
+            EXPECTED_CRLF_MSG = "Expected linebreaks to be 'CRLF' but found 'LF'.";
+
+        //--------------------------------------------------------------------------
+        // Helpers
+        //--------------------------------------------------------------------------
+
+        /**
+         * Builds a fix function that replaces text at the specified range in the source text.
+         * @param {int[]} range The range to replace
+         * @param {string} text The text to insert.
+         * @returns {function} Fixer function
+         * @private
+         */
+        function createFix(range, text) {
+            return function(fixer) {
+                return fixer.replaceTextRange(range, text);
+            };
+        }
+
+        //--------------------------------------------------------------------------
+        // Public
+        //--------------------------------------------------------------------------
+
+        return {
+            "Program": function checkForlinebreakStyle(node) {
+                var linebreakStyle = context.options[0] || "unix",
+                    expectedLF = linebreakStyle === "unix",
+                    expectedLFChars = expectedLF ? "\n" : "\r\n",
+                    source = context.getSource(),
+                    pattern = /\r\n|\r|\n|\u2028|\u2029/g,
+                    match,
+                    index,
+                    range;
+
+                var i = 0;
+
+                while ((match = pattern.exec(source)) !== null) {
+                    i++;
+                    if (match[0] === expectedLFChars) {
+                        continue;
+                    }
+
+                    index = match.index;
+                    range = [index, index + match[0].length];
+                    context.report({
+                        node: node,
+                        loc: {
+                            line: i,
+                            column: context.getSourceLines()[i - 1].length
+                        },
+                        message: expectedLF ? EXPECTED_LF_MSG : EXPECTED_CRLF_MSG,
+                        fix: createFix(range, expectedLFChars)
+                    });
+                }
+            }
         };
     }
-
-    //--------------------------------------------------------------------------
-    // Public
-    //--------------------------------------------------------------------------
-
-    return {
-        "Program": function checkForlinebreakStyle(node) {
-            var linebreakStyle = context.options[0] || "unix",
-                expectedLF = linebreakStyle === "unix",
-                expectedLFChars = expectedLF ? "\n" : "\r\n",
-                source = context.getSource(),
-                pattern = /\r\n|\r|\n|\u2028|\u2029/g,
-                match,
-                index,
-                range;
-
-            var i = 0;
-
-            while ((match = pattern.exec(source)) !== null) {
-                i++;
-                if (match[0] === expectedLFChars) {
-                    continue;
-                }
-
-                index = match.index;
-                range = [index, index + match[0].length];
-                context.report({
-                    node: node,
-                    loc: {
-                        line: i,
-                        column: context.getSourceLines()[i - 1].length
-                    },
-                    message: expectedLF ? EXPECTED_LF_MSG : EXPECTED_CRLF_MSG,
-                    fix: createFix(range, expectedLFChars)
-                });
-            }
-        }
-    };
 };
-
-module.exports.schema = [
-    {
-        "enum": ["unix", "windows"]
-    }
-];
 
 },{}],206:[function(require,module,exports){
 /**
@@ -47472,275 +47935,285 @@ function contains(val, array) {
 // Rule Definition
 //------------------------------------------------------------------------------
 
-module.exports = function(context) {
-
-    var options = context.options[0] ? lodash.assign({}, context.options[0]) : {};
-
-    options.beforeLineComment = options.beforeLineComment || false;
-    options.afterLineComment = options.afterLineComment || false;
-    options.beforeBlockComment = typeof options.beforeBlockComment !== "undefined" ? options.beforeBlockComment : true;
-    options.afterBlockComment = options.afterBlockComment || false;
-    options.allowBlockStart = options.allowBlockStart || false;
-    options.allowBlockEnd = options.allowBlockEnd || false;
-
-    var sourceCode = context.getSourceCode();
-
-    /**
-     * Returns whether or not comments are on lines starting with or ending with code
-     * @param {ASTNode} node The comment node to check.
-     * @returns {boolean} True if the comment is not alone.
-     */
-    function codeAroundComment(node) {
-        var token;
-
-        token = node;
-        do {
-            token = sourceCode.getTokenOrCommentBefore(token);
-        } while (token && (token.type === "Block" || token.type === "Line"));
-
-        if (token && token.loc.end.line === node.loc.start.line) {
-            return true;
-        }
-
-        token = node;
-        do {
-            token = sourceCode.getTokenOrCommentAfter(token);
-        } while (token && (token.type === "Block" || token.type === "Line"));
-
-        if (token && token.loc.start.line === node.loc.end.line) {
-            return true;
-        }
-
-        return false;
-    }
-
-    /**
-     * Returns whether or not comments are inside a node type or not.
-     * @param {ASTNode} node The Comment node.
-     * @param {ASTNode} parent The Comment parent node.
-     * @param {string} nodeType The parent type to check against.
-     * @returns {boolean} True if the comment is inside nodeType.
-     */
-    function isCommentInsideNodeType(node, parent, nodeType) {
-        return parent.type === nodeType ||
-            (parent.body && parent.body.type === nodeType) ||
-            (parent.consequent && parent.consequent.type === nodeType);
-    }
-
-    /**
-     * Returns whether or not comments are at the parent start or not.
-     * @param {ASTNode} node The Comment node.
-     * @param {string} nodeType The parent type to check against.
-     * @returns {boolean} True if the comment is at parent start.
-     */
-    function isCommentAtParentStart(node, nodeType) {
-        var ancestors = context.getAncestors();
-        var parent;
-
-        if (ancestors.length) {
-            parent = ancestors.pop();
-        }
-
-        return parent && isCommentInsideNodeType(node, parent, nodeType) &&
-                node.loc.start.line - parent.loc.start.line === 1;
-    }
-
-    /**
-     * Returns whether or not comments are at the parent end or not.
-     * @param {ASTNode} node The Comment node.
-     * @param {string} nodeType The parent type to check against.
-     * @returns {boolean} True if the comment is at parent end.
-     */
-    function isCommentAtParentEnd(node, nodeType) {
-        var ancestors = context.getAncestors();
-        var parent;
-
-        if (ancestors.length) {
-            parent = ancestors.pop();
-        }
-
-        return parent && isCommentInsideNodeType(node, parent, nodeType) &&
-                parent.loc.end.line - node.loc.end.line === 1;
-    }
-
-    /**
-     * Returns whether or not comments are at the block start or not.
-     * @param {ASTNode} node The Comment node.
-     * @returns {boolean} True if the comment is at block start.
-     */
-    function isCommentAtBlockStart(node) {
-        return isCommentAtParentStart(node, "ClassBody") || isCommentAtParentStart(node, "BlockStatement") || isCommentAtParentStart(node, "SwitchCase");
-    }
-
-    /**
-     * Returns whether or not comments are at the block end or not.
-     * @param {ASTNode} node The Comment node.
-     * @returns {boolean} True if the comment is at block end.
-     */
-    function isCommentAtBlockEnd(node) {
-        return isCommentAtParentEnd(node, "ClassBody") || isCommentAtParentEnd(node, "BlockStatement") || isCommentAtParentEnd(node, "SwitchCase") || isCommentAtParentEnd(node, "SwitchStatement");
-    }
-
-    /**
-     * Returns whether or not comments are at the object start or not.
-     * @param {ASTNode} node The Comment node.
-     * @returns {boolean} True if the comment is at object start.
-     */
-    function isCommentAtObjectStart(node) {
-        return isCommentAtParentStart(node, "ObjectExpression") || isCommentAtParentStart(node, "ObjectPattern");
-    }
-
-    /**
-     * Returns whether or not comments are at the object end or not.
-     * @param {ASTNode} node The Comment node.
-     * @returns {boolean} True if the comment is at object end.
-     */
-    function isCommentAtObjectEnd(node) {
-        return isCommentAtParentEnd(node, "ObjectExpression") || isCommentAtParentEnd(node, "ObjectPattern");
-    }
-
-    /**
-     * Returns whether or not comments are at the array start or not.
-     * @param {ASTNode} node The Comment node.
-     * @returns {boolean} True if the comment is at array start.
-     */
-    function isCommentAtArrayStart(node) {
-        return isCommentAtParentStart(node, "ArrayExpression") || isCommentAtParentStart(node, "ArrayPattern");
-    }
-
-    /**
-     * Returns whether or not comments are at the array end or not.
-     * @param {ASTNode} node The Comment node.
-     * @returns {boolean} True if the comment is at array end.
-     */
-    function isCommentAtArrayEnd(node) {
-        return isCommentAtParentEnd(node, "ArrayExpression") || isCommentAtParentEnd(node, "ArrayPattern");
-    }
-
-    /**
-     * Checks if a comment node has lines around it (ignores inline comments)
-     * @param {ASTNode} node The Comment node.
-     * @param {Object} opts Options to determine the newline.
-     * @param {Boolean} opts.after Should have a newline after this line.
-     * @param {Boolean} opts.before Should have a newline before this line.
-     * @returns {void}
-     */
-    function checkForEmptyLine(node, opts) {
-
-        var lines = context.getSourceLines(),
-            numLines = lines.length + 1,
-            comments = context.getAllComments(),
-            commentLines = getCommentLineNums(comments),
-            emptyLines = getEmptyLineNums(lines),
-            commentAndEmptyLines = commentLines.concat(emptyLines);
-
-        var after = opts.after,
-            before = opts.before;
-
-        var prevLineNum = node.loc.start.line - 1,
-            nextLineNum = node.loc.end.line + 1,
-            commentIsNotAlone = codeAroundComment(node);
-
-        var blockStartAllowed = options.allowBlockStart && isCommentAtBlockStart(node),
-            blockEndAllowed = options.allowBlockEnd && isCommentAtBlockEnd(node),
-            objectStartAllowed = options.allowObjectStart && isCommentAtObjectStart(node),
-            objectEndAllowed = options.allowObjectEnd && isCommentAtObjectEnd(node),
-            arrayStartAllowed = options.allowArrayStart && isCommentAtArrayStart(node),
-            arrayEndAllowed = options.allowArrayEnd && isCommentAtArrayEnd(node);
-
-        var exceptionStartAllowed = blockStartAllowed || objectStartAllowed || arrayStartAllowed;
-        var exceptionEndAllowed = blockEndAllowed || objectEndAllowed || arrayEndAllowed;
-
-        // ignore top of the file and bottom of the file
-        if (prevLineNum < 1) {
-            before = false;
-        }
-        if (nextLineNum >= numLines) {
-            after = false;
-        }
-
-        // we ignore all inline comments
-        if (commentIsNotAlone) {
-            return;
-        }
-
-        // check for newline before
-        if (!exceptionStartAllowed && before && !contains(prevLineNum, commentAndEmptyLines)) {
-            context.report(node, "Expected line before comment.");
-        }
-
-        // check for newline after
-        if (!exceptionEndAllowed && after && !contains(nextLineNum, commentAndEmptyLines)) {
-            context.report(node, "Expected line after comment.");
-        }
-
-    }
-
-    //--------------------------------------------------------------------------
-    // Public
-    //--------------------------------------------------------------------------
-
-    return {
-
-        "LineComment": function(node) {
-            if (options.beforeLineComment || options.afterLineComment) {
-                checkForEmptyLine(node, {
-                    after: options.afterLineComment,
-                    before: options.beforeLineComment
-                });
-            }
+module.exports = {
+    meta: {
+        docs: {
+            description: "require empty lines around comments",
+            category: "Stylistic Issues",
+            recommended: false
         },
 
-        "BlockComment": function(node) {
-            if (options.beforeBlockComment || options.afterBlockComment) {
-                checkForEmptyLine(node, {
-                    after: options.afterBlockComment,
-                    before: options.beforeBlockComment
-                });
+        schema: [
+            {
+                "type": "object",
+                "properties": {
+                    "beforeBlockComment": {
+                        "type": "boolean"
+                    },
+                    "afterBlockComment": {
+                        "type": "boolean"
+                    },
+                    "beforeLineComment": {
+                        "type": "boolean"
+                    },
+                    "afterLineComment": {
+                        "type": "boolean"
+                    },
+                    "allowBlockStart": {
+                        "type": "boolean"
+                    },
+                    "allowBlockEnd": {
+                        "type": "boolean"
+                    },
+                    "allowObjectStart": {
+                        "type": "boolean"
+                    },
+                    "allowObjectEnd": {
+                        "type": "boolean"
+                    },
+                    "allowArrayStart": {
+                        "type": "boolean"
+                    },
+                    "allowArrayEnd": {
+                        "type": "boolean"
+                    }
+                },
+                "additionalProperties": false
             }
+        ]
+    },
+
+    create: function(context) {
+
+        var options = context.options[0] ? lodash.assign({}, context.options[0]) : {};
+
+        options.beforeLineComment = options.beforeLineComment || false;
+        options.afterLineComment = options.afterLineComment || false;
+        options.beforeBlockComment = typeof options.beforeBlockComment !== "undefined" ? options.beforeBlockComment : true;
+        options.afterBlockComment = options.afterBlockComment || false;
+        options.allowBlockStart = options.allowBlockStart || false;
+        options.allowBlockEnd = options.allowBlockEnd || false;
+
+        var sourceCode = context.getSourceCode();
+
+        /**
+         * Returns whether or not comments are on lines starting with or ending with code
+         * @param {ASTNode} node The comment node to check.
+         * @returns {boolean} True if the comment is not alone.
+         */
+        function codeAroundComment(node) {
+            var token;
+
+            token = node;
+            do {
+                token = sourceCode.getTokenOrCommentBefore(token);
+            } while (token && (token.type === "Block" || token.type === "Line"));
+
+            if (token && token.loc.end.line === node.loc.start.line) {
+                return true;
+            }
+
+            token = node;
+            do {
+                token = sourceCode.getTokenOrCommentAfter(token);
+            } while (token && (token.type === "Block" || token.type === "Line"));
+
+            if (token && token.loc.start.line === node.loc.end.line) {
+                return true;
+            }
+
+            return false;
         }
 
-    };
+        /**
+         * Returns whether or not comments are inside a node type or not.
+         * @param {ASTNode} node The Comment node.
+         * @param {ASTNode} parent The Comment parent node.
+         * @param {string} nodeType The parent type to check against.
+         * @returns {boolean} True if the comment is inside nodeType.
+         */
+        function isCommentInsideNodeType(node, parent, nodeType) {
+            return parent.type === nodeType ||
+                (parent.body && parent.body.type === nodeType) ||
+                (parent.consequent && parent.consequent.type === nodeType);
+        }
+
+        /**
+         * Returns whether or not comments are at the parent start or not.
+         * @param {ASTNode} node The Comment node.
+         * @param {string} nodeType The parent type to check against.
+         * @returns {boolean} True if the comment is at parent start.
+         */
+        function isCommentAtParentStart(node, nodeType) {
+            var ancestors = context.getAncestors();
+            var parent;
+
+            if (ancestors.length) {
+                parent = ancestors.pop();
+            }
+
+            return parent && isCommentInsideNodeType(node, parent, nodeType) &&
+                    node.loc.start.line - parent.loc.start.line === 1;
+        }
+
+        /**
+         * Returns whether or not comments are at the parent end or not.
+         * @param {ASTNode} node The Comment node.
+         * @param {string} nodeType The parent type to check against.
+         * @returns {boolean} True if the comment is at parent end.
+         */
+        function isCommentAtParentEnd(node, nodeType) {
+            var ancestors = context.getAncestors();
+            var parent;
+
+            if (ancestors.length) {
+                parent = ancestors.pop();
+            }
+
+            return parent && isCommentInsideNodeType(node, parent, nodeType) &&
+                    parent.loc.end.line - node.loc.end.line === 1;
+        }
+
+        /**
+         * Returns whether or not comments are at the block start or not.
+         * @param {ASTNode} node The Comment node.
+         * @returns {boolean} True if the comment is at block start.
+         */
+        function isCommentAtBlockStart(node) {
+            return isCommentAtParentStart(node, "ClassBody") || isCommentAtParentStart(node, "BlockStatement") || isCommentAtParentStart(node, "SwitchCase");
+        }
+
+        /**
+         * Returns whether or not comments are at the block end or not.
+         * @param {ASTNode} node The Comment node.
+         * @returns {boolean} True if the comment is at block end.
+         */
+        function isCommentAtBlockEnd(node) {
+            return isCommentAtParentEnd(node, "ClassBody") || isCommentAtParentEnd(node, "BlockStatement") || isCommentAtParentEnd(node, "SwitchCase") || isCommentAtParentEnd(node, "SwitchStatement");
+        }
+
+        /**
+         * Returns whether or not comments are at the object start or not.
+         * @param {ASTNode} node The Comment node.
+         * @returns {boolean} True if the comment is at object start.
+         */
+        function isCommentAtObjectStart(node) {
+            return isCommentAtParentStart(node, "ObjectExpression") || isCommentAtParentStart(node, "ObjectPattern");
+        }
+
+        /**
+         * Returns whether or not comments are at the object end or not.
+         * @param {ASTNode} node The Comment node.
+         * @returns {boolean} True if the comment is at object end.
+         */
+        function isCommentAtObjectEnd(node) {
+            return isCommentAtParentEnd(node, "ObjectExpression") || isCommentAtParentEnd(node, "ObjectPattern");
+        }
+
+        /**
+         * Returns whether or not comments are at the array start or not.
+         * @param {ASTNode} node The Comment node.
+         * @returns {boolean} True if the comment is at array start.
+         */
+        function isCommentAtArrayStart(node) {
+            return isCommentAtParentStart(node, "ArrayExpression") || isCommentAtParentStart(node, "ArrayPattern");
+        }
+
+        /**
+         * Returns whether or not comments are at the array end or not.
+         * @param {ASTNode} node The Comment node.
+         * @returns {boolean} True if the comment is at array end.
+         */
+        function isCommentAtArrayEnd(node) {
+            return isCommentAtParentEnd(node, "ArrayExpression") || isCommentAtParentEnd(node, "ArrayPattern");
+        }
+
+        /**
+         * Checks if a comment node has lines around it (ignores inline comments)
+         * @param {ASTNode} node The Comment node.
+         * @param {Object} opts Options to determine the newline.
+         * @param {Boolean} opts.after Should have a newline after this line.
+         * @param {Boolean} opts.before Should have a newline before this line.
+         * @returns {void}
+         */
+        function checkForEmptyLine(node, opts) {
+
+            var lines = context.getSourceLines(),
+                numLines = lines.length + 1,
+                comments = context.getAllComments(),
+                commentLines = getCommentLineNums(comments),
+                emptyLines = getEmptyLineNums(lines),
+                commentAndEmptyLines = commentLines.concat(emptyLines);
+
+            var after = opts.after,
+                before = opts.before;
+
+            var prevLineNum = node.loc.start.line - 1,
+                nextLineNum = node.loc.end.line + 1,
+                commentIsNotAlone = codeAroundComment(node);
+
+            var blockStartAllowed = options.allowBlockStart && isCommentAtBlockStart(node),
+                blockEndAllowed = options.allowBlockEnd && isCommentAtBlockEnd(node),
+                objectStartAllowed = options.allowObjectStart && isCommentAtObjectStart(node),
+                objectEndAllowed = options.allowObjectEnd && isCommentAtObjectEnd(node),
+                arrayStartAllowed = options.allowArrayStart && isCommentAtArrayStart(node),
+                arrayEndAllowed = options.allowArrayEnd && isCommentAtArrayEnd(node);
+
+            var exceptionStartAllowed = blockStartAllowed || objectStartAllowed || arrayStartAllowed;
+            var exceptionEndAllowed = blockEndAllowed || objectEndAllowed || arrayEndAllowed;
+
+            // ignore top of the file and bottom of the file
+            if (prevLineNum < 1) {
+                before = false;
+            }
+            if (nextLineNum >= numLines) {
+                after = false;
+            }
+
+            // we ignore all inline comments
+            if (commentIsNotAlone) {
+                return;
+            }
+
+            // check for newline before
+            if (!exceptionStartAllowed && before && !contains(prevLineNum, commentAndEmptyLines)) {
+                context.report(node, "Expected line before comment.");
+            }
+
+            // check for newline after
+            if (!exceptionEndAllowed && after && !contains(nextLineNum, commentAndEmptyLines)) {
+                context.report(node, "Expected line after comment.");
+            }
+
+        }
+
+        //--------------------------------------------------------------------------
+        // Public
+        //--------------------------------------------------------------------------
+
+        return {
+
+            "LineComment": function(node) {
+                if (options.beforeLineComment || options.afterLineComment) {
+                    checkForEmptyLine(node, {
+                        after: options.afterLineComment,
+                        before: options.beforeLineComment
+                    });
+                }
+            },
+
+            "BlockComment": function(node) {
+                if (options.beforeBlockComment || options.afterBlockComment) {
+                    checkForEmptyLine(node, {
+                        after: options.afterBlockComment,
+                        before: options.beforeBlockComment
+                    });
+                }
+            }
+
+        };
+    }
 };
-
-module.exports.schema = [
-    {
-        "type": "object",
-        "properties": {
-            "beforeBlockComment": {
-                "type": "boolean"
-            },
-            "afterBlockComment": {
-                "type": "boolean"
-            },
-            "beforeLineComment": {
-                "type": "boolean"
-            },
-            "afterLineComment": {
-                "type": "boolean"
-            },
-            "allowBlockStart": {
-                "type": "boolean"
-            },
-            "allowBlockEnd": {
-                "type": "boolean"
-            },
-            "allowObjectStart": {
-                "type": "boolean"
-            },
-            "allowObjectEnd": {
-                "type": "boolean"
-            },
-            "allowArrayStart": {
-                "type": "boolean"
-            },
-            "allowArrayEnd": {
-                "type": "boolean"
-            }
-        },
-        "additionalProperties": false
-    }
-];
 
 },{"lodash":150}],207:[function(require,module,exports){
 /**
@@ -47755,134 +48228,144 @@ module.exports.schema = [
 // Rule Definition
 //------------------------------------------------------------------------------
 
-module.exports = function(context) {
-
-    //--------------------------------------------------------------------------
-    // Helpers
-    //--------------------------------------------------------------------------
-
-    var functionStack = [],
-        option = context.options[0],
-        maxDepth = 4;
-
-    if (typeof option === "object" && option.hasOwnProperty("maximum") && typeof option.maximum === "number") {
-        maxDepth = option.maximum;
-    }
-    if (typeof option === "object" && option.hasOwnProperty("max") && typeof option.max === "number") {
-        maxDepth = option.max;
-    }
-    if (typeof option === "number") {
-        maxDepth = option;
-    }
-
-    /**
-     * When parsing a new function, store it in our function stack
-     * @returns {void}
-     * @private
-     */
-    function startFunction() {
-        functionStack.push(0);
-    }
-
-    /**
-     * When parsing is done then pop out the reference
-     * @returns {void}
-     * @private
-     */
-    function endFunction() {
-        functionStack.pop();
-    }
-
-    /**
-     * Save the block and Evaluate the node
-     * @param {ASTNode} node node to evaluate
-     * @returns {void}
-     * @private
-     */
-    function pushBlock(node) {
-        var len = ++functionStack[functionStack.length - 1];
-
-        if (len > maxDepth) {
-            context.report(node, "Blocks are nested too deeply ({{depth}}).",
-                    { depth: len });
-        }
-    }
-
-    /**
-     * Pop the saved block
-     * @returns {void}
-     * @private
-     */
-    function popBlock() {
-        functionStack[functionStack.length - 1]--;
-    }
-
-    //--------------------------------------------------------------------------
-    // Public API
-    //--------------------------------------------------------------------------
-
-    return {
-        "Program": startFunction,
-        "FunctionDeclaration": startFunction,
-        "FunctionExpression": startFunction,
-        "ArrowFunctionExpression": startFunction,
-
-        "IfStatement": function(node) {
-            if (node.parent.type !== "IfStatement") {
-                pushBlock(node);
-            }
+module.exports = {
+    meta: {
+        docs: {
+            description: "enforce a maximum depth that blocks can be nested",
+            category: "Stylistic Issues",
+            recommended: false
         },
-        "SwitchStatement": pushBlock,
-        "TryStatement": pushBlock,
-        "DoWhileStatement": pushBlock,
-        "WhileStatement": pushBlock,
-        "WithStatement": pushBlock,
-        "ForStatement": pushBlock,
-        "ForInStatement": pushBlock,
-        "ForOfStatement": pushBlock,
 
-        "IfStatement:exit": popBlock,
-        "SwitchStatement:exit": popBlock,
-        "TryStatement:exit": popBlock,
-        "DoWhileStatement:exit": popBlock,
-        "WhileStatement:exit": popBlock,
-        "WithStatement:exit": popBlock,
-        "ForStatement:exit": popBlock,
-        "ForInStatement:exit": popBlock,
-        "ForOfStatement:exit": popBlock,
-
-        "FunctionDeclaration:exit": endFunction,
-        "FunctionExpression:exit": endFunction,
-        "ArrowFunctionExpression:exit": endFunction,
-        "Program:exit": endFunction
-    };
-
-};
-
-module.exports.schema = [
-    {
-        "oneOf": [
+        schema: [
             {
-                "type": "integer",
-                "minimum": 0
-            },
-            {
-                "type": "object",
-                "properties": {
-                    "maximum": {
+                "oneOf": [
+                    {
                         "type": "integer",
                         "minimum": 0
                     },
-                    "max": {
-                        "type": "integer",
-                        "minimum": 0
+                    {
+                        "type": "object",
+                        "properties": {
+                            "maximum": {
+                                "type": "integer",
+                                "minimum": 0
+                            },
+                            "max": {
+                                "type": "integer",
+                                "minimum": 0
+                            }
+                        },
+                        "additionalProperties": false
                     }
-                },
-                "additionalProperties": false
+                ]
             }
         ]
+    },
+
+    create: function(context) {
+
+        //--------------------------------------------------------------------------
+        // Helpers
+        //--------------------------------------------------------------------------
+
+        var functionStack = [],
+            option = context.options[0],
+            maxDepth = 4;
+
+        if (typeof option === "object" && option.hasOwnProperty("maximum") && typeof option.maximum === "number") {
+            maxDepth = option.maximum;
+        }
+        if (typeof option === "object" && option.hasOwnProperty("max") && typeof option.max === "number") {
+            maxDepth = option.max;
+        }
+        if (typeof option === "number") {
+            maxDepth = option;
+        }
+
+        /**
+         * When parsing a new function, store it in our function stack
+         * @returns {void}
+         * @private
+         */
+        function startFunction() {
+            functionStack.push(0);
+        }
+
+        /**
+         * When parsing is done then pop out the reference
+         * @returns {void}
+         * @private
+         */
+        function endFunction() {
+            functionStack.pop();
+        }
+
+        /**
+         * Save the block and Evaluate the node
+         * @param {ASTNode} node node to evaluate
+         * @returns {void}
+         * @private
+         */
+        function pushBlock(node) {
+            var len = ++functionStack[functionStack.length - 1];
+
+            if (len > maxDepth) {
+                context.report(node, "Blocks are nested too deeply ({{depth}}).",
+                        { depth: len });
+            }
+        }
+
+        /**
+         * Pop the saved block
+         * @returns {void}
+         * @private
+         */
+        function popBlock() {
+            functionStack[functionStack.length - 1]--;
+        }
+
+        //--------------------------------------------------------------------------
+        // Public API
+        //--------------------------------------------------------------------------
+
+        return {
+            "Program": startFunction,
+            "FunctionDeclaration": startFunction,
+            "FunctionExpression": startFunction,
+            "ArrowFunctionExpression": startFunction,
+
+            "IfStatement": function(node) {
+                if (node.parent.type !== "IfStatement") {
+                    pushBlock(node);
+                }
+            },
+            "SwitchStatement": pushBlock,
+            "TryStatement": pushBlock,
+            "DoWhileStatement": pushBlock,
+            "WhileStatement": pushBlock,
+            "WithStatement": pushBlock,
+            "ForStatement": pushBlock,
+            "ForInStatement": pushBlock,
+            "ForOfStatement": pushBlock,
+
+            "IfStatement:exit": popBlock,
+            "SwitchStatement:exit": popBlock,
+            "TryStatement:exit": popBlock,
+            "DoWhileStatement:exit": popBlock,
+            "WhileStatement:exit": popBlock,
+            "WithStatement:exit": popBlock,
+            "ForStatement:exit": popBlock,
+            "ForInStatement:exit": popBlock,
+            "ForOfStatement:exit": popBlock,
+
+            "FunctionDeclaration:exit": endFunction,
+            "FunctionExpression:exit": endFunction,
+            "ArrowFunctionExpression:exit": endFunction,
+            "Program:exit": endFunction
+        };
+
     }
-];
+};
 
 },{}],208:[function(require,module,exports){
 /**
@@ -47894,195 +48377,8 @@ module.exports.schema = [
 "use strict";
 
 //------------------------------------------------------------------------------
-// Rule Definition
+// Constants
 //------------------------------------------------------------------------------
-
-module.exports = function(context) {
-
-    /*
-     * Inspired by http://tools.ietf.org/html/rfc3986#appendix-B, however:
-     * - They're matching an entire string that we know is a URI
-     * - We're matching part of a string where we think there *might* be a URL
-     * - We're only concerned about URLs, as picking out any URI would cause
-     *   too many false positives
-     * - We don't care about matching the entire URL, any small segment is fine
-     */
-    var URL_REGEXP = /[^:/?#]:\/\/[^?#]/;
-
-    /**
-     * Computes the length of a line that may contain tabs. The width of each
-     * tab will be the number of spaces to the next tab stop.
-     * @param {string} line The line.
-     * @param {int} tabWidth The width of each tab stop in spaces.
-     * @returns {int} The computed line length.
-     * @private
-     */
-    function computeLineLength(line, tabWidth) {
-        var extraCharacterCount = 0;
-
-        line.replace(/\t/g, function(match, offset) {
-            var totalOffset = offset + extraCharacterCount,
-                previousTabStopOffset = tabWidth ? totalOffset % tabWidth : 0,
-                spaceCount = tabWidth - previousTabStopOffset;
-
-            extraCharacterCount += spaceCount - 1;  // -1 for the replaced tab
-        });
-        return line.length + extraCharacterCount;
-    }
-
-    // The options object must be the last option specified…
-    var lastOption = context.options[context.options.length - 1];
-    var options = typeof lastOption === "object" ? Object.create(lastOption) : {};
-
-    // …but max code length…
-    if (typeof context.options[0] === "number") {
-        options.code = context.options[0];
-    }
-
-    // …and tabWidth can be optionally specified directly as integers.
-    if (typeof context.options[1] === "number") {
-        options.tabWidth = context.options[1];
-    }
-
-    var maxLength = options.code || 80,
-        tabWidth = options.tabWidth || 4,
-        ignorePattern = options.ignorePattern || null,
-        ignoreComments = options.ignoreComments || false,
-        ignoreTrailingComments = options.ignoreTrailingComments || options.ignoreComments || false,
-        ignoreUrls = options.ignoreUrls || false,
-        maxCommentLength = options.comments;
-
-    if (ignorePattern) {
-        ignorePattern = new RegExp(ignorePattern);
-    }
-
-    //--------------------------------------------------------------------------
-    // Helpers
-    //--------------------------------------------------------------------------
-
-    /**
-     * Tells if a given comment is trailing: it starts on the current line and
-     * extends to or past the end of the current line.
-     * @param {string} line The source line we want to check for a trailing comment on
-     * @param {number} lineNumber The one-indexed line number for line
-     * @param {ASTNode} comment The comment to inspect
-     * @returns {boolean} If the comment is trailing on the given line
-     */
-    function isTrailingComment(line, lineNumber, comment) {
-        return comment &&
-            (comment.loc.start.line === lineNumber && lineNumber <= comment.loc.end.line) &&
-            (comment.loc.end.line > lineNumber || comment.loc.end.column === line.length);
-    }
-
-    /**
-     * Tells if a comment encompasses the entire line.
-     * @param {string} line The source line with a trailing comment
-     * @param {number} lineNumber The one-indexed line number this is on
-     * @param {ASTNode} comment The comment to remove
-     * @returns {boolean} If the comment covers the entire line
-     */
-    function isFullLineComment(line, lineNumber, comment) {
-        var start = comment.loc.start,
-            end = comment.loc.end;
-
-        return comment &&
-            (start.line < lineNumber || (start.line === lineNumber && start.column === 0)) &&
-            (end.line > lineNumber || end.column === line.length);
-    }
-
-    /**
-     * Gets the line after the comment and any remaining trailing whitespace is
-     * stripped.
-     * @param {string} line The source line with a trailing comment
-     * @param {number} lineNumber The one-indexed line number this is on
-     * @param {ASTNode} comment The comment to remove
-     * @returns {string} Line without comment and trailing whitepace
-     */
-    function stripTrailingComment(line, lineNumber, comment) {
-
-        // loc.column is zero-indexed
-        return line.slice(0, comment.loc.start.column).replace(/\s+$/, "");
-    }
-
-    /**
-     * Check the program for max length
-     * @param {ASTNode} node Node to examine
-     * @returns {void}
-     * @private
-     */
-    function checkProgramForMaxLength(node) {
-
-        // split (honors line-ending)
-        var lines = context.getSourceLines(),
-
-            // list of comments to ignore
-            comments = ignoreComments || maxCommentLength || ignoreTrailingComments ? context.getAllComments() : [],
-
-            // we iterate over comments in parallel with the lines
-            commentsIndex = 0;
-
-        lines.forEach(function(line, i) {
-
-            // i is zero-indexed, line numbers are one-indexed
-            var lineNumber = i + 1;
-
-            /*
-             * if we're checking comment length; we need to know whether this
-             * line is a comment
-             */
-            var lineIsComment = false;
-
-            /*
-             * We can short-circuit the comment checks if we're already out of
-             * comments to check.
-             */
-            if (commentsIndex < comments.length) {
-
-                // iterate over comments until we find one past the current line
-                do {
-                    var comment = comments[++commentsIndex];
-                } while (comment && comment.loc.start.line <= lineNumber);
-
-                // and step back by one
-                comment = comments[--commentsIndex];
-
-                if (isFullLineComment(line, lineNumber, comment)) {
-                    lineIsComment = true;
-                } else if (ignoreTrailingComments && isTrailingComment(line, lineNumber, comment)) {
-                    line = stripTrailingComment(line, lineNumber, comment);
-                }
-            }
-            if (ignorePattern && ignorePattern.test(line) ||
-                ignoreUrls && URL_REGEXP.test(line)) {
-
-                // ignore this line
-                return;
-            }
-
-            var lineLength = computeLineLength(line, tabWidth);
-
-            if (lineIsComment && ignoreComments) {
-                return;
-            }
-
-            if (lineIsComment && lineLength > maxCommentLength) {
-                context.report(node, { line: lineNumber, column: 0 }, "Line " + (i + 1) + " exceeds the maximum comment line length of " + maxCommentLength + ".");
-            } else if (lineLength > maxLength) {
-                context.report(node, { line: lineNumber, column: 0 }, "Line " + (i + 1) + " exceeds the maximum line length of " + maxLength + ".");
-            }
-        });
-    }
-
-
-    //--------------------------------------------------------------------------
-    // Public API
-    //--------------------------------------------------------------------------
-
-    return {
-        "Program": checkProgramForMaxLength
-    };
-
-};
 
 var OPTIONS_SCHEMA = {
     "type": "object",
@@ -48125,11 +48421,212 @@ var OPTIONS_OR_INTEGER_SCHEMA = {
     ]
 };
 
-module.exports.schema = [
-    OPTIONS_OR_INTEGER_SCHEMA,
-    OPTIONS_OR_INTEGER_SCHEMA,
-    OPTIONS_SCHEMA
-];
+//------------------------------------------------------------------------------
+// Rule Definition
+//------------------------------------------------------------------------------
+
+module.exports = {
+    meta: {
+        docs: {
+            description: "enforce a maximum line length",
+            category: "Stylistic Issues",
+            recommended: false
+        },
+
+        schema: [
+            OPTIONS_OR_INTEGER_SCHEMA,
+            OPTIONS_OR_INTEGER_SCHEMA,
+            OPTIONS_SCHEMA
+        ]
+    },
+
+    create: function(context) {
+
+        /*
+         * Inspired by http://tools.ietf.org/html/rfc3986#appendix-B, however:
+         * - They're matching an entire string that we know is a URI
+         * - We're matching part of a string where we think there *might* be a URL
+         * - We're only concerned about URLs, as picking out any URI would cause
+         *   too many false positives
+         * - We don't care about matching the entire URL, any small segment is fine
+         */
+        var URL_REGEXP = /[^:/?#]:\/\/[^?#]/;
+
+        /**
+         * Computes the length of a line that may contain tabs. The width of each
+         * tab will be the number of spaces to the next tab stop.
+         * @param {string} line The line.
+         * @param {int} tabWidth The width of each tab stop in spaces.
+         * @returns {int} The computed line length.
+         * @private
+         */
+        function computeLineLength(line, tabWidth) {
+            var extraCharacterCount = 0;
+
+            line.replace(/\t/g, function(match, offset) {
+                var totalOffset = offset + extraCharacterCount,
+                    previousTabStopOffset = tabWidth ? totalOffset % tabWidth : 0,
+                    spaceCount = tabWidth - previousTabStopOffset;
+
+                extraCharacterCount += spaceCount - 1;  // -1 for the replaced tab
+            });
+            return line.length + extraCharacterCount;
+        }
+
+        // The options object must be the last option specified…
+        var lastOption = context.options[context.options.length - 1];
+        var options = typeof lastOption === "object" ? Object.create(lastOption) : {};
+
+        // …but max code length…
+        if (typeof context.options[0] === "number") {
+            options.code = context.options[0];
+        }
+
+        // …and tabWidth can be optionally specified directly as integers.
+        if (typeof context.options[1] === "number") {
+            options.tabWidth = context.options[1];
+        }
+
+        var maxLength = options.code || 80,
+            tabWidth = options.tabWidth || 4,
+            ignorePattern = options.ignorePattern || null,
+            ignoreComments = options.ignoreComments || false,
+            ignoreTrailingComments = options.ignoreTrailingComments || options.ignoreComments || false,
+            ignoreUrls = options.ignoreUrls || false,
+            maxCommentLength = options.comments;
+
+        if (ignorePattern) {
+            ignorePattern = new RegExp(ignorePattern);
+        }
+
+        //--------------------------------------------------------------------------
+        // Helpers
+        //--------------------------------------------------------------------------
+
+        /**
+         * Tells if a given comment is trailing: it starts on the current line and
+         * extends to or past the end of the current line.
+         * @param {string} line The source line we want to check for a trailing comment on
+         * @param {number} lineNumber The one-indexed line number for line
+         * @param {ASTNode} comment The comment to inspect
+         * @returns {boolean} If the comment is trailing on the given line
+         */
+        function isTrailingComment(line, lineNumber, comment) {
+            return comment &&
+                (comment.loc.start.line === lineNumber && lineNumber <= comment.loc.end.line) &&
+                (comment.loc.end.line > lineNumber || comment.loc.end.column === line.length);
+        }
+
+        /**
+         * Tells if a comment encompasses the entire line.
+         * @param {string} line The source line with a trailing comment
+         * @param {number} lineNumber The one-indexed line number this is on
+         * @param {ASTNode} comment The comment to remove
+         * @returns {boolean} If the comment covers the entire line
+         */
+        function isFullLineComment(line, lineNumber, comment) {
+            var start = comment.loc.start,
+                end = comment.loc.end;
+
+            return comment &&
+                (start.line < lineNumber || (start.line === lineNumber && start.column === 0)) &&
+                (end.line > lineNumber || end.column === line.length);
+        }
+
+        /**
+         * Gets the line after the comment and any remaining trailing whitespace is
+         * stripped.
+         * @param {string} line The source line with a trailing comment
+         * @param {number} lineNumber The one-indexed line number this is on
+         * @param {ASTNode} comment The comment to remove
+         * @returns {string} Line without comment and trailing whitepace
+         */
+        function stripTrailingComment(line, lineNumber, comment) {
+
+            // loc.column is zero-indexed
+            return line.slice(0, comment.loc.start.column).replace(/\s+$/, "");
+        }
+
+        /**
+         * Check the program for max length
+         * @param {ASTNode} node Node to examine
+         * @returns {void}
+         * @private
+         */
+        function checkProgramForMaxLength(node) {
+
+            // split (honors line-ending)
+            var lines = context.getSourceLines(),
+
+                // list of comments to ignore
+                comments = ignoreComments || maxCommentLength || ignoreTrailingComments ? context.getAllComments() : [],
+
+                // we iterate over comments in parallel with the lines
+                commentsIndex = 0;
+
+            lines.forEach(function(line, i) {
+
+                // i is zero-indexed, line numbers are one-indexed
+                var lineNumber = i + 1;
+
+                /*
+                 * if we're checking comment length; we need to know whether this
+                 * line is a comment
+                 */
+                var lineIsComment = false;
+
+                /*
+                 * We can short-circuit the comment checks if we're already out of
+                 * comments to check.
+                 */
+                if (commentsIndex < comments.length) {
+
+                    // iterate over comments until we find one past the current line
+                    do {
+                        var comment = comments[++commentsIndex];
+                    } while (comment && comment.loc.start.line <= lineNumber);
+
+                    // and step back by one
+                    comment = comments[--commentsIndex];
+
+                    if (isFullLineComment(line, lineNumber, comment)) {
+                        lineIsComment = true;
+                    } else if (ignoreTrailingComments && isTrailingComment(line, lineNumber, comment)) {
+                        line = stripTrailingComment(line, lineNumber, comment);
+                    }
+                }
+                if (ignorePattern && ignorePattern.test(line) ||
+                    ignoreUrls && URL_REGEXP.test(line)) {
+
+                    // ignore this line
+                    return;
+                }
+
+                var lineLength = computeLineLength(line, tabWidth);
+
+                if (lineIsComment && ignoreComments) {
+                    return;
+                }
+
+                if (lineIsComment && lineLength > maxCommentLength) {
+                    context.report(node, { line: lineNumber, column: 0 }, "Line " + (i + 1) + " exceeds the maximum comment line length of " + maxCommentLength + ".");
+                } else if (lineLength > maxLength) {
+                    context.report(node, { line: lineNumber, column: 0 }, "Line " + (i + 1) + " exceeds the maximum line length of " + maxLength + ".");
+                }
+            });
+        }
+
+
+        //--------------------------------------------------------------------------
+        // Public API
+        //--------------------------------------------------------------------------
+
+        return {
+            "Program": checkProgramForMaxLength
+        };
+
+    }
+};
 
 },{}],209:[function(require,module,exports){
 /**
@@ -48144,97 +48641,107 @@ module.exports.schema = [
 // Rule Definition
 //------------------------------------------------------------------------------
 
-module.exports = function(context) {
+module.exports = {
+    meta: {
+        docs: {
+            description: "enforce a maximum depth that callbacks can be nested",
+            category: "Stylistic Issues",
+            recommended: false
+        },
 
-    //--------------------------------------------------------------------------
-    // Constants
-    //--------------------------------------------------------------------------
-    var option = context.options[0],
-        THRESHOLD = 10;
-
-    if (typeof option === "object" && option.hasOwnProperty("maximum") && typeof option.maximum === "number") {
-        THRESHOLD = option.maximum;
-    }
-    if (typeof option === "object" && option.hasOwnProperty("max") && typeof option.max === "number") {
-        THRESHOLD = option.max;
-    }
-    if (typeof option === "number") {
-        THRESHOLD = option;
-    }
-
-    //--------------------------------------------------------------------------
-    // Helpers
-    //--------------------------------------------------------------------------
-
-    var callbackStack = [];
-
-    /**
-     * Checks a given function node for too many callbacks.
-     * @param {ASTNode} node The node to check.
-     * @returns {void}
-     * @private
-     */
-    function checkFunction(node) {
-        var parent = node.parent;
-
-        if (parent.type === "CallExpression") {
-            callbackStack.push(node);
-        }
-
-        if (callbackStack.length > THRESHOLD) {
-            var opts = {num: callbackStack.length, max: THRESHOLD};
-
-            context.report(node, "Too many nested callbacks ({{num}}). Maximum allowed is {{max}}.", opts);
-        }
-    }
-
-    /**
-     * Pops the call stack.
-     * @returns {void}
-     * @private
-     */
-    function popStack() {
-        callbackStack.pop();
-    }
-
-    //--------------------------------------------------------------------------
-    // Public API
-    //--------------------------------------------------------------------------
-
-    return {
-        "ArrowFunctionExpression": checkFunction,
-        "ArrowFunctionExpression:exit": popStack,
-
-        "FunctionExpression": checkFunction,
-        "FunctionExpression:exit": popStack
-    };
-
-};
-
-module.exports.schema = [
-    {
-        "oneOf": [
+        schema: [
             {
-                "type": "integer",
-                "minimum": 0
-            },
-            {
-                "type": "object",
-                "properties": {
-                    "maximum": {
+                "oneOf": [
+                    {
                         "type": "integer",
                         "minimum": 0
                     },
-                    "max": {
-                        "type": "integer",
-                        "minimum": 0
+                    {
+                        "type": "object",
+                        "properties": {
+                            "maximum": {
+                                "type": "integer",
+                                "minimum": 0
+                            },
+                            "max": {
+                                "type": "integer",
+                                "minimum": 0
+                            }
+                        },
+                        "additionalProperties": false
                     }
-                },
-                "additionalProperties": false
+                ]
             }
         ]
+    },
+
+    create: function(context) {
+
+        //--------------------------------------------------------------------------
+        // Constants
+        //--------------------------------------------------------------------------
+        var option = context.options[0],
+            THRESHOLD = 10;
+
+        if (typeof option === "object" && option.hasOwnProperty("maximum") && typeof option.maximum === "number") {
+            THRESHOLD = option.maximum;
+        }
+        if (typeof option === "object" && option.hasOwnProperty("max") && typeof option.max === "number") {
+            THRESHOLD = option.max;
+        }
+        if (typeof option === "number") {
+            THRESHOLD = option;
+        }
+
+        //--------------------------------------------------------------------------
+        // Helpers
+        //--------------------------------------------------------------------------
+
+        var callbackStack = [];
+
+        /**
+         * Checks a given function node for too many callbacks.
+         * @param {ASTNode} node The node to check.
+         * @returns {void}
+         * @private
+         */
+        function checkFunction(node) {
+            var parent = node.parent;
+
+            if (parent.type === "CallExpression") {
+                callbackStack.push(node);
+            }
+
+            if (callbackStack.length > THRESHOLD) {
+                var opts = {num: callbackStack.length, max: THRESHOLD};
+
+                context.report(node, "Too many nested callbacks ({{num}}). Maximum allowed is {{max}}.", opts);
+            }
+        }
+
+        /**
+         * Pops the call stack.
+         * @returns {void}
+         * @private
+         */
+        function popStack() {
+            callbackStack.pop();
+        }
+
+        //--------------------------------------------------------------------------
+        // Public API
+        //--------------------------------------------------------------------------
+
+        return {
+            "ArrowFunctionExpression": checkFunction,
+            "ArrowFunctionExpression:exit": popStack,
+
+            "FunctionExpression": checkFunction,
+            "FunctionExpression:exit": popStack
+        };
+
     }
-];
+};
 
 },{}],210:[function(require,module,exports){
 /**
@@ -48250,68 +48757,78 @@ module.exports.schema = [
 // Rule Definition
 //------------------------------------------------------------------------------
 
-module.exports = function(context) {
+module.exports = {
+    meta: {
+        docs: {
+            description: "enforce a maximum number of parameters in `function` definitions",
+            category: "Stylistic Issues",
+            recommended: false
+        },
 
-    var option = context.options[0],
-        numParams = 3;
-
-    if (typeof option === "object" && option.hasOwnProperty("maximum") && typeof option.maximum === "number") {
-        numParams = option.maximum;
-    }
-    if (typeof option === "object" && option.hasOwnProperty("max") && typeof option.max === "number") {
-        numParams = option.max;
-    }
-    if (typeof option === "number") {
-        numParams = option;
-    }
-
-    /**
-     * Checks a function to see if it has too many parameters.
-     * @param {ASTNode} node The node to check.
-     * @returns {void}
-     * @private
-     */
-    function checkFunction(node) {
-        if (node.params.length > numParams) {
-            context.report(node, "This function has too many parameters ({{count}}). Maximum allowed is {{max}}.", {
-                count: node.params.length,
-                max: numParams
-            });
-        }
-    }
-
-    return {
-        "FunctionDeclaration": checkFunction,
-        "ArrowFunctionExpression": checkFunction,
-        "FunctionExpression": checkFunction
-    };
-
-};
-
-module.exports.schema = [
-    {
-        "oneOf": [
+        schema: [
             {
-                "type": "integer",
-                "minimum": 0
-            },
-            {
-                "type": "object",
-                "properties": {
-                    "maximum": {
+                "oneOf": [
+                    {
                         "type": "integer",
                         "minimum": 0
                     },
-                    "max": {
-                        "type": "integer",
-                        "minimum": 0
+                    {
+                        "type": "object",
+                        "properties": {
+                            "maximum": {
+                                "type": "integer",
+                                "minimum": 0
+                            },
+                            "max": {
+                                "type": "integer",
+                                "minimum": 0
+                            }
+                        },
+                        "additionalProperties": false
                     }
-                },
-                "additionalProperties": false
+                ]
             }
         ]
+    },
+
+    create: function(context) {
+
+        var option = context.options[0],
+            numParams = 3;
+
+        if (typeof option === "object" && option.hasOwnProperty("maximum") && typeof option.maximum === "number") {
+            numParams = option.maximum;
+        }
+        if (typeof option === "object" && option.hasOwnProperty("max") && typeof option.max === "number") {
+            numParams = option.max;
+        }
+        if (typeof option === "number") {
+            numParams = option;
+        }
+
+        /**
+         * Checks a function to see if it has too many parameters.
+         * @param {ASTNode} node The node to check.
+         * @returns {void}
+         * @private
+         */
+        function checkFunction(node) {
+            if (node.params.length > numParams) {
+                context.report(node, "This function has too many parameters ({{count}}). Maximum allowed is {{max}}.", {
+                    count: node.params.length,
+                    max: numParams
+                });
+            }
+        }
+
+        return {
+            "FunctionDeclaration": checkFunction,
+            "ArrowFunctionExpression": checkFunction,
+            "FunctionExpression": checkFunction
+        };
+
     }
-];
+};
 
 },{}],211:[function(require,module,exports){
 /**
@@ -48327,99 +48844,109 @@ module.exports.schema = [
 // Rule Definition
 //------------------------------------------------------------------------------
 
-module.exports = function(context) {
-
-    var options = context.options[0] || {},
-        lastStatementLine = 0,
-        numberOfStatementsOnThisLine = 0,
-        maxStatementsPerLine = typeof options.max !== "undefined" ? options.max : 1;
-
-    //--------------------------------------------------------------------------
-    // Helpers
-    //--------------------------------------------------------------------------
-
-    /**
-     * Reports a node
-     * @param {ASTNode} node The node to report
-     * @returns {void}
-     * @private
-     */
-    function report(node) {
-        context.report(
-            node,
-            "This line has too many statements. Maximum allowed is {{max}}.",
-            { max: maxStatementsPerLine });
-    }
-
-    /**
-     * Enforce a maximum number of statements per line
-     * @param {ASTNode} nodes Array of nodes to evaluate
-     * @returns {void}
-     * @private
-     */
-    function enforceMaxStatementsPerLine(nodes) {
-        if (nodes.length < 1) {
-            return;
-        }
-
-        for (var i = 0, l = nodes.length; i < l; ++i) {
-            var currentStatement = nodes[i];
-
-            if (currentStatement.loc.start.line === lastStatementLine) {
-                ++numberOfStatementsOnThisLine;
-            } else {
-                numberOfStatementsOnThisLine = 1;
-                lastStatementLine = currentStatement.loc.end.line;
-            }
-            if (numberOfStatementsOnThisLine === maxStatementsPerLine + 1) {
-                report(currentStatement);
-            }
-        }
-    }
-
-    /**
-     * Check each line in the body of a node
-     * @param {ASTNode} node node to evaluate
-     * @returns {void}
-     * @private
-     */
-    function checkLinesInBody(node) {
-        enforceMaxStatementsPerLine(node.body);
-    }
-
-    /**
-     * Check each line in the consequent of a switch case
-     * @param {ASTNode} node node to evaluate
-     * @returns {void}
-     * @private
-     */
-    function checkLinesInConsequent(node) {
-        enforceMaxStatementsPerLine(node.consequent);
-    }
-
-    //--------------------------------------------------------------------------
-    // Public API
-    //--------------------------------------------------------------------------
-
-    return {
-        "Program": checkLinesInBody,
-        "BlockStatement": checkLinesInBody,
-        "SwitchCase": checkLinesInConsequent
-    };
-
-};
-
-module.exports.schema = [
-    {
-        "type": "object",
-        "properties": {
-            "max": {
-                "type": "integer"
-            }
+module.exports = {
+    meta: {
+        docs: {
+            description: "enforce a maximum number of statements allowed per line",
+            category: "Stylistic Issues",
+            recommended: false
         },
-        "additionalProperties": false
+
+        schema: [
+            {
+                "type": "object",
+                "properties": {
+                    "max": {
+                        "type": "integer"
+                    }
+                },
+                "additionalProperties": false
+            }
+        ]
+    },
+
+    create: function(context) {
+
+        var options = context.options[0] || {},
+            lastStatementLine = 0,
+            numberOfStatementsOnThisLine = 0,
+            maxStatementsPerLine = typeof options.max !== "undefined" ? options.max : 1;
+
+        //--------------------------------------------------------------------------
+        // Helpers
+        //--------------------------------------------------------------------------
+
+        /**
+         * Reports a node
+         * @param {ASTNode} node The node to report
+         * @returns {void}
+         * @private
+         */
+        function report(node) {
+            context.report(
+                node,
+                "This line has too many statements. Maximum allowed is {{max}}.",
+                { max: maxStatementsPerLine });
+        }
+
+        /**
+         * Enforce a maximum number of statements per line
+         * @param {ASTNode} nodes Array of nodes to evaluate
+         * @returns {void}
+         * @private
+         */
+        function enforceMaxStatementsPerLine(nodes) {
+            if (nodes.length < 1) {
+                return;
+            }
+
+            for (var i = 0, l = nodes.length; i < l; ++i) {
+                var currentStatement = nodes[i];
+
+                if (currentStatement.loc.start.line === lastStatementLine) {
+                    ++numberOfStatementsOnThisLine;
+                } else {
+                    numberOfStatementsOnThisLine = 1;
+                    lastStatementLine = currentStatement.loc.end.line;
+                }
+                if (numberOfStatementsOnThisLine === maxStatementsPerLine + 1) {
+                    report(currentStatement);
+                }
+            }
+        }
+
+        /**
+         * Check each line in the body of a node
+         * @param {ASTNode} node node to evaluate
+         * @returns {void}
+         * @private
+         */
+        function checkLinesInBody(node) {
+            enforceMaxStatementsPerLine(node.body);
+        }
+
+        /**
+         * Check each line in the consequent of a switch case
+         * @param {ASTNode} node node to evaluate
+         * @returns {void}
+         * @private
+         */
+        function checkLinesInConsequent(node) {
+            enforceMaxStatementsPerLine(node.consequent);
+        }
+
+        //--------------------------------------------------------------------------
+        // Public API
+        //--------------------------------------------------------------------------
+
+        return {
+            "Program": checkLinesInBody,
+            "BlockStatement": checkLinesInBody,
+            "SwitchCase": checkLinesInConsequent
+        };
+
     }
-];
+};
 
 },{}],212:[function(require,module,exports){
 /**
@@ -48434,144 +48961,154 @@ module.exports.schema = [
 // Rule Definition
 //------------------------------------------------------------------------------
 
-module.exports = function(context) {
+module.exports = {
+    meta: {
+        docs: {
+            description: "enforce a maximum number of statements allowed in `function` blocks",
+            category: "Stylistic Issues",
+            recommended: false
+        },
 
-    //--------------------------------------------------------------------------
-    // Helpers
-    //--------------------------------------------------------------------------
-
-    var functionStack = [],
-        option = context.options[0],
-        maxStatements = 10,
-        ignoreTopLevelFunctions = context.options[1] && context.options[1].ignoreTopLevelFunctions || false,
-        topLevelFunctions = [];
-
-    if (typeof option === "object" && option.hasOwnProperty("maximum") && typeof option.maximum === "number") {
-        maxStatements = option.maximum;
-    }
-    if (typeof option === "object" && option.hasOwnProperty("max") && typeof option.max === "number") {
-        maxStatements = option.max;
-    }
-    if (typeof option === "number") {
-        maxStatements = option;
-    }
-
-    /**
-     * Reports a node if it has too many statements
-     * @param {ASTNode} node node to evaluate
-     * @param {int} count Number of statements in node
-     * @param {int} max Maximum number of statements allowed
-     * @returns {void}
-     * @private
-     */
-    function reportIfTooManyStatements(node, count, max) {
-        if (count > max) {
-            context.report(
-                node,
-                "This function has too many statements ({{count}}). Maximum allowed is {{max}}.",
-                { count: count, max: max });
-        }
-    }
-
-    /**
-     * When parsing a new function, store it in our function stack
-     * @returns {void}
-     * @private
-     */
-    function startFunction() {
-        functionStack.push(0);
-    }
-
-    /**
-     * Evaluate the node at the end of function
-     * @param {ASTNode} node node to evaluate
-     * @returns {void}
-     * @private
-     */
-    function endFunction(node) {
-        var count = functionStack.pop();
-
-        if (ignoreTopLevelFunctions && functionStack.length === 0) {
-            topLevelFunctions.push({ node: node, count: count});
-        } else {
-            reportIfTooManyStatements(node, count, maxStatements);
-        }
-    }
-
-    /**
-     * Increment the count of the functions
-     * @param {ASTNode} node node to evaluate
-     * @returns {void}
-     * @private
-     */
-    function countStatements(node) {
-        functionStack[functionStack.length - 1] += node.body.length;
-    }
-
-    //--------------------------------------------------------------------------
-    // Public API
-    //--------------------------------------------------------------------------
-
-    return {
-        "FunctionDeclaration": startFunction,
-        "FunctionExpression": startFunction,
-        "ArrowFunctionExpression": startFunction,
-
-        "BlockStatement": countStatements,
-
-        "FunctionDeclaration:exit": endFunction,
-        "FunctionExpression:exit": endFunction,
-        "ArrowFunctionExpression:exit": endFunction,
-
-        "Program:exit": function() {
-            if (topLevelFunctions.length === 1) {
-                return;
-            }
-
-            topLevelFunctions.forEach(function(element) {
-                var count = element.count;
-                var node = element.node;
-
-                reportIfTooManyStatements(node, count, maxStatements);
-            });
-        }
-    };
-
-};
-
-module.exports.schema = [
-    {
-        "oneOf": [
+        schema: [
             {
-                "type": "integer",
-                "minimum": 0
+                "oneOf": [
+                    {
+                        "type": "integer",
+                        "minimum": 0
+                    },
+                    {
+                        "type": "object",
+                        "properties": {
+                            "maximum": {
+                                "type": "integer",
+                                "minimum": 0
+                            },
+                            "max": {
+                                "type": "integer",
+                                "minimum": 0
+                            }
+                        },
+                        "additionalProperties": false
+                    }
+                ]
             },
             {
                 "type": "object",
                 "properties": {
-                    "maximum": {
-                        "type": "integer",
-                        "minimum": 0
-                    },
-                    "max": {
-                        "type": "integer",
-                        "minimum": 0
+                    "ignoreTopLevelFunctions": {
+                        "type": "boolean"
                     }
                 },
                 "additionalProperties": false
             }
         ]
     },
-    {
-        "type": "object",
-        "properties": {
-            "ignoreTopLevelFunctions": {
-                "type": "boolean"
+
+    create: function(context) {
+
+        //--------------------------------------------------------------------------
+        // Helpers
+        //--------------------------------------------------------------------------
+
+        var functionStack = [],
+            option = context.options[0],
+            maxStatements = 10,
+            ignoreTopLevelFunctions = context.options[1] && context.options[1].ignoreTopLevelFunctions || false,
+            topLevelFunctions = [];
+
+        if (typeof option === "object" && option.hasOwnProperty("maximum") && typeof option.maximum === "number") {
+            maxStatements = option.maximum;
+        }
+        if (typeof option === "object" && option.hasOwnProperty("max") && typeof option.max === "number") {
+            maxStatements = option.max;
+        }
+        if (typeof option === "number") {
+            maxStatements = option;
+        }
+
+        /**
+         * Reports a node if it has too many statements
+         * @param {ASTNode} node node to evaluate
+         * @param {int} count Number of statements in node
+         * @param {int} max Maximum number of statements allowed
+         * @returns {void}
+         * @private
+         */
+        function reportIfTooManyStatements(node, count, max) {
+            if (count > max) {
+                context.report(
+                    node,
+                    "This function has too many statements ({{count}}). Maximum allowed is {{max}}.",
+                    { count: count, max: max });
             }
-        },
-        "additionalProperties": false
+        }
+
+        /**
+         * When parsing a new function, store it in our function stack
+         * @returns {void}
+         * @private
+         */
+        function startFunction() {
+            functionStack.push(0);
+        }
+
+        /**
+         * Evaluate the node at the end of function
+         * @param {ASTNode} node node to evaluate
+         * @returns {void}
+         * @private
+         */
+        function endFunction(node) {
+            var count = functionStack.pop();
+
+            if (ignoreTopLevelFunctions && functionStack.length === 0) {
+                topLevelFunctions.push({ node: node, count: count});
+            } else {
+                reportIfTooManyStatements(node, count, maxStatements);
+            }
+        }
+
+        /**
+         * Increment the count of the functions
+         * @param {ASTNode} node node to evaluate
+         * @returns {void}
+         * @private
+         */
+        function countStatements(node) {
+            functionStack[functionStack.length - 1] += node.body.length;
+        }
+
+        //--------------------------------------------------------------------------
+        // Public API
+        //--------------------------------------------------------------------------
+
+        return {
+            "FunctionDeclaration": startFunction,
+            "FunctionExpression": startFunction,
+            "ArrowFunctionExpression": startFunction,
+
+            "BlockStatement": countStatements,
+
+            "FunctionDeclaration:exit": endFunction,
+            "FunctionExpression:exit": endFunction,
+            "ArrowFunctionExpression:exit": endFunction,
+
+            "Program:exit": function() {
+                if (topLevelFunctions.length === 1) {
+                    return;
+                }
+
+                topLevelFunctions.forEach(function(element) {
+                    var count = element.count;
+                    var node = element.node;
+
+                    reportIfTooManyStatements(node, count, maxStatements);
+                });
+            }
+        };
+
     }
-];
+};
 
 },{}],213:[function(require,module,exports){
 /**
@@ -48652,177 +49189,187 @@ function calculateCapIsNewExceptions(config) {
 // Rule Definition
 //------------------------------------------------------------------------------
 
-module.exports = function(context) {
-
-    var config = context.options[0] ? lodash.assign({}, context.options[0]) : {};
-
-    config.newIsCap = config.newIsCap !== false;
-    config.capIsNew = config.capIsNew !== false;
-    var skipProperties = config.properties === false;
-
-    var newIsCapExceptions = checkArray(config, "newIsCapExceptions", []).reduce(invert, {});
-
-    var capIsNewExceptions = calculateCapIsNewExceptions(config);
-
-    var listeners = {};
-
-    //--------------------------------------------------------------------------
-    // Helpers
-    //--------------------------------------------------------------------------
-
-    /**
-     * Get exact callee name from expression
-     * @param {ASTNode} node CallExpression or NewExpression node
-     * @returns {string} name
-     */
-    function extractNameFromExpression(node) {
-
-        var name = "",
-            property;
-
-        if (node.callee.type === "MemberExpression") {
-            property = node.callee.property;
-
-            if (property.type === "Literal" && (typeof property.value === "string")) {
-                name = property.value;
-            } else if (property.type === "Identifier" && !node.callee.computed) {
-                name = property.name;
-            }
-        } else {
-            name = node.callee.name;
-        }
-        return name;
-    }
-
-    /**
-     * Returns the capitalization state of the string -
-     * Whether the first character is uppercase, lowercase, or non-alphabetic
-     * @param {string} str String
-     * @returns {string} capitalization state: "non-alpha", "lower", or "upper"
-     */
-    function getCap(str) {
-        var firstChar = str.charAt(0);
-
-        var firstCharLower = firstChar.toLowerCase();
-        var firstCharUpper = firstChar.toUpperCase();
-
-        if (firstCharLower === firstCharUpper) {
-
-            // char has no uppercase variant, so it's non-alphabetic
-            return "non-alpha";
-        } else if (firstChar === firstCharLower) {
-            return "lower";
-        } else {
-            return "upper";
-        }
-    }
-
-    /**
-     * Check if capitalization is allowed for a CallExpression
-     * @param {Object} allowedMap Object mapping calleeName to a Boolean
-     * @param {ASTNode} node CallExpression node
-     * @param {string} calleeName Capitalized callee name from a CallExpression
-     * @returns {Boolean} Returns true if the callee may be capitalized
-     */
-    function isCapAllowed(allowedMap, node, calleeName) {
-        if (allowedMap[calleeName] || allowedMap[context.getSource(node.callee)]) {
-            return true;
-        }
-
-        if (calleeName === "UTC" && node.callee.type === "MemberExpression") {
-
-            // allow if callee is Date.UTC
-            return node.callee.object.type === "Identifier" &&
-                node.callee.object.name === "Date";
-        }
-
-        return skipProperties && node.callee.type === "MemberExpression";
-    }
-
-    /**
-     * Reports the given message for the given node. The location will be the start of the property or the callee.
-     * @param {ASTNode} node CallExpression or NewExpression node.
-     * @param {string} message The message to report.
-     * @returns {void}
-     */
-    function report(node, message) {
-        var callee = node.callee;
-
-        if (callee.type === "MemberExpression") {
-            callee = callee.property;
-        }
-
-        context.report(node, callee.loc.start, message);
-    }
-
-    //--------------------------------------------------------------------------
-    // Public
-    //--------------------------------------------------------------------------
-
-    if (config.newIsCap) {
-        listeners.NewExpression = function(node) {
-
-            var constructorName = extractNameFromExpression(node);
-
-            if (constructorName) {
-                var capitalization = getCap(constructorName);
-                var isAllowed = capitalization !== "lower" || isCapAllowed(newIsCapExceptions, node, constructorName);
-
-                if (!isAllowed) {
-                    report(node, "A constructor name should not start with a lowercase letter.");
-                }
-            }
-        };
-    }
-
-    if (config.capIsNew) {
-        listeners.CallExpression = function(node) {
-
-            var calleeName = extractNameFromExpression(node);
-
-            if (calleeName) {
-                var capitalization = getCap(calleeName);
-                var isAllowed = capitalization !== "upper" || isCapAllowed(capIsNewExceptions, node, calleeName);
-
-                if (!isAllowed) {
-                    report(node, "A function with a name starting with an uppercase letter should only be used as a constructor.");
-                }
-            }
-        };
-    }
-
-    return listeners;
-};
-
-module.exports.schema = [
-    {
-        "type": "object",
-        "properties": {
-            "newIsCap": {
-                "type": "boolean"
-            },
-            "capIsNew": {
-                "type": "boolean"
-            },
-            "newIsCapExceptions": {
-                "type": "array",
-                "items": {
-                    "type": "string"
-                }
-            },
-            "capIsNewExceptions": {
-                "type": "array",
-                "items": {
-                    "type": "string"
-                }
-            },
-            "properties": {
-                "type": "boolean"
-            }
+module.exports = {
+    meta: {
+        docs: {
+            description: "require constructor `function` names to begin with a capital letter",
+            category: "Stylistic Issues",
+            recommended: false
         },
-        "additionalProperties": false
+
+        schema: [
+            {
+                "type": "object",
+                "properties": {
+                    "newIsCap": {
+                        "type": "boolean"
+                    },
+                    "capIsNew": {
+                        "type": "boolean"
+                    },
+                    "newIsCapExceptions": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    },
+                    "capIsNewExceptions": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    },
+                    "properties": {
+                        "type": "boolean"
+                    }
+                },
+                "additionalProperties": false
+            }
+        ]
+    },
+
+    create: function(context) {
+
+        var config = context.options[0] ? lodash.assign({}, context.options[0]) : {};
+
+        config.newIsCap = config.newIsCap !== false;
+        config.capIsNew = config.capIsNew !== false;
+        var skipProperties = config.properties === false;
+
+        var newIsCapExceptions = checkArray(config, "newIsCapExceptions", []).reduce(invert, {});
+
+        var capIsNewExceptions = calculateCapIsNewExceptions(config);
+
+        var listeners = {};
+
+        //--------------------------------------------------------------------------
+        // Helpers
+        //--------------------------------------------------------------------------
+
+        /**
+         * Get exact callee name from expression
+         * @param {ASTNode} node CallExpression or NewExpression node
+         * @returns {string} name
+         */
+        function extractNameFromExpression(node) {
+
+            var name = "",
+                property;
+
+            if (node.callee.type === "MemberExpression") {
+                property = node.callee.property;
+
+                if (property.type === "Literal" && (typeof property.value === "string")) {
+                    name = property.value;
+                } else if (property.type === "Identifier" && !node.callee.computed) {
+                    name = property.name;
+                }
+            } else {
+                name = node.callee.name;
+            }
+            return name;
+        }
+
+        /**
+         * Returns the capitalization state of the string -
+         * Whether the first character is uppercase, lowercase, or non-alphabetic
+         * @param {string} str String
+         * @returns {string} capitalization state: "non-alpha", "lower", or "upper"
+         */
+        function getCap(str) {
+            var firstChar = str.charAt(0);
+
+            var firstCharLower = firstChar.toLowerCase();
+            var firstCharUpper = firstChar.toUpperCase();
+
+            if (firstCharLower === firstCharUpper) {
+
+                // char has no uppercase variant, so it's non-alphabetic
+                return "non-alpha";
+            } else if (firstChar === firstCharLower) {
+                return "lower";
+            } else {
+                return "upper";
+            }
+        }
+
+        /**
+         * Check if capitalization is allowed for a CallExpression
+         * @param {Object} allowedMap Object mapping calleeName to a Boolean
+         * @param {ASTNode} node CallExpression node
+         * @param {string} calleeName Capitalized callee name from a CallExpression
+         * @returns {Boolean} Returns true if the callee may be capitalized
+         */
+        function isCapAllowed(allowedMap, node, calleeName) {
+            if (allowedMap[calleeName] || allowedMap[context.getSource(node.callee)]) {
+                return true;
+            }
+
+            if (calleeName === "UTC" && node.callee.type === "MemberExpression") {
+
+                // allow if callee is Date.UTC
+                return node.callee.object.type === "Identifier" &&
+                    node.callee.object.name === "Date";
+            }
+
+            return skipProperties && node.callee.type === "MemberExpression";
+        }
+
+        /**
+         * Reports the given message for the given node. The location will be the start of the property or the callee.
+         * @param {ASTNode} node CallExpression or NewExpression node.
+         * @param {string} message The message to report.
+         * @returns {void}
+         */
+        function report(node, message) {
+            var callee = node.callee;
+
+            if (callee.type === "MemberExpression") {
+                callee = callee.property;
+            }
+
+            context.report(node, callee.loc.start, message);
+        }
+
+        //--------------------------------------------------------------------------
+        // Public
+        //--------------------------------------------------------------------------
+
+        if (config.newIsCap) {
+            listeners.NewExpression = function(node) {
+
+                var constructorName = extractNameFromExpression(node);
+
+                if (constructorName) {
+                    var capitalization = getCap(constructorName);
+                    var isAllowed = capitalization !== "lower" || isCapAllowed(newIsCapExceptions, node, constructorName);
+
+                    if (!isAllowed) {
+                        report(node, "A constructor name should not start with a lowercase letter.");
+                    }
+                }
+            };
+        }
+
+        if (config.capIsNew) {
+            listeners.CallExpression = function(node) {
+
+                var calleeName = extractNameFromExpression(node);
+
+                if (calleeName) {
+                    var capitalization = getCap(calleeName);
+                    var isAllowed = capitalization !== "upper" || isCapAllowed(capIsNewExceptions, node, calleeName);
+
+                    if (!isAllowed) {
+                        report(node, "A function with a name starting with an uppercase letter should only be used as a constructor.");
+                    }
+                }
+            };
+        }
+
+        return listeners;
     }
-];
+};
 
 },{"lodash":150}],214:[function(require,module,exports){
 /**
@@ -48836,25 +49383,35 @@ module.exports.schema = [
 // Rule Definition
 //------------------------------------------------------------------------------
 
-module.exports = function(context) {
+module.exports = {
+    meta: {
+        docs: {
+            description: "require parentheses when invoking a constructor with no arguments",
+            category: "Stylistic Issues",
+            recommended: false
+        },
 
-    return {
+        schema: []
+    },
 
-        "NewExpression": function(node) {
-            var tokens = context.getTokens(node);
-            var prenticesTokens = tokens.filter(function(token) {
-                return token.value === "(" || token.value === ")";
-            });
+    create: function(context) {
 
-            if (prenticesTokens.length < 2) {
-                context.report(node, "Missing '()' invoking a constructor");
+        return {
+
+            "NewExpression": function(node) {
+                var tokens = context.getTokens(node);
+                var prenticesTokens = tokens.filter(function(token) {
+                    return token.value === "(" || token.value === ")";
+                });
+
+                if (prenticesTokens.length < 2) {
+                    context.report(node, "Missing '()' invoking a constructor");
+                }
             }
-        }
-    };
+        };
 
+    }
 };
-
-module.exports.schema = [];
 
 },{}],215:[function(require,module,exports){
 /**
@@ -48871,162 +49428,172 @@ module.exports.schema = [];
 // Rule Definition
 //------------------------------------------------------------------------------
 
-module.exports = function(context) {
+module.exports = {
+    meta: {
+        docs: {
+            description: "require or disallow an empty line after `var` declarations",
+            category: "Stylistic Issues",
+            recommended: false
+        },
 
-    var ALWAYS_MESSAGE = "Expected blank line after variable declarations.",
-        NEVER_MESSAGE = "Unexpected blank line after variable declarations.";
+        schema: [
+            {
+                "enum": ["never", "always"]
+            }
+        ]
+    },
 
-    var sourceCode = context.getSourceCode();
+    create: function(context) {
 
-    // Default `mode` to "always".
-    var mode = context.options[0] === "never" ? "never" : "always";
+        var ALWAYS_MESSAGE = "Expected blank line after variable declarations.",
+            NEVER_MESSAGE = "Unexpected blank line after variable declarations.";
 
-    // Cache starting and ending line numbers of comments for faster lookup
-    var commentEndLine = context.getAllComments().reduce(function(result, token) {
-        result[token.loc.start.line] = token.loc.end.line;
-        return result;
-    }, {});
+        var sourceCode = context.getSourceCode();
+
+        // Default `mode` to "always".
+        var mode = context.options[0] === "never" ? "never" : "always";
+
+        // Cache starting and ending line numbers of comments for faster lookup
+        var commentEndLine = context.getAllComments().reduce(function(result, token) {
+            result[token.loc.start.line] = token.loc.end.line;
+            return result;
+        }, {});
 
 
-    //--------------------------------------------------------------------------
-    // Helpers
-    //--------------------------------------------------------------------------
+        //--------------------------------------------------------------------------
+        // Helpers
+        //--------------------------------------------------------------------------
 
-    /**
-     * Determine if provided keyword is a variable declaration
-     * @private
-     * @param {string} keyword - keyword to test
-     * @returns {boolean} True if `keyword` is a type of var
-     */
-    function isVar(keyword) {
-        return keyword === "var" || keyword === "let" || keyword === "const";
+        /**
+         * Determine if provided keyword is a variable declaration
+         * @private
+         * @param {string} keyword - keyword to test
+         * @returns {boolean} True if `keyword` is a type of var
+         */
+        function isVar(keyword) {
+            return keyword === "var" || keyword === "let" || keyword === "const";
+        }
+
+        /**
+         * Determine if provided keyword is a variant of for specifiers
+         * @private
+         * @param {string} keyword - keyword to test
+         * @returns {boolean} True if `keyword` is a variant of for specifier
+         */
+        function isForTypeSpecifier(keyword) {
+            return keyword === "ForStatement" || keyword === "ForInStatement" || keyword === "ForOfStatement";
+        }
+
+        /**
+         * Determine if provided keyword is an export specifiers
+         * @private
+         * @param {string} nodeType - nodeType to test
+         * @returns {boolean} True if `nodeType` is an export specifier
+         */
+        function isExportSpecifier(nodeType) {
+            return nodeType === "ExportNamedDeclaration" || nodeType === "ExportSpecifier" ||
+                nodeType === "ExportDefaultDeclaration" || nodeType === "ExportAllDeclaration";
+        }
+
+        /**
+         * Determine if provided node is the last of their parent block.
+         * @private
+         * @param {ASTNode} node - node to test
+         * @returns {boolean} True if `node` is last of their parent block.
+         */
+        function isLastNode(node) {
+            var token = sourceCode.getTokenAfter(node);
+
+            return !token || (token.type === "Punctuator" && token.value === "}");
+        }
+
+        /**
+         * Determine if a token starts more than one line after a comment ends
+         * @param  {token}   token            The token being checked
+         * @param {integer}  commentStartLine The line number on which the comment starts
+         * @returns {boolean}                 True if `token` does not start immediately after a comment
+         */
+        function hasBlankLineAfterComment(token, commentStartLine) {
+            var commentEnd = commentEndLine[commentStartLine];
+
+            // If there's another comment, repeat check for blank line
+            if (commentEndLine[commentEnd + 1]) {
+                return hasBlankLineAfterComment(token, commentEnd + 1);
+            }
+
+            return (token.loc.start.line > commentEndLine[commentStartLine] + 1);
+        }
+
+        /**
+         * Checks that a blank line exists after a variable declaration when mode is
+         * set to "always", or checks that there is no blank line when mode is set
+         * to "never"
+         * @private
+         * @param {ASTNode} node - `VariableDeclaration` node to test
+         * @returns {void}
+         */
+        function checkForBlankLine(node) {
+            var lastToken = sourceCode.getLastToken(node),
+                nextToken = sourceCode.getTokenAfter(node),
+                nextLineNum = lastToken.loc.end.line + 1,
+                noNextLineToken,
+                hasNextLineComment;
+
+            // Ignore if there is no following statement
+            if (!nextToken) {
+                return;
+            }
+
+            // Ignore if parent of node is a for variant
+            if (isForTypeSpecifier(node.parent.type)) {
+                return;
+            }
+
+            // Ignore if parent of node is an export specifier
+            if (isExportSpecifier(node.parent.type)) {
+                return;
+            }
+
+            // Some coding styles use multiple `var` statements, so do nothing if
+            // the next token is a `var` statement.
+            if (nextToken.type === "Keyword" && isVar(nextToken.value)) {
+                return;
+            }
+
+            // Ignore if it is last statement in a block
+            if (isLastNode(node)) {
+                return;
+            }
+
+            // Next statement is not a `var`...
+            noNextLineToken = nextToken.loc.start.line > nextLineNum;
+            hasNextLineComment = (typeof commentEndLine[nextLineNum] !== "undefined");
+
+            if (mode === "never" && noNextLineToken && !hasNextLineComment) {
+                context.report(node, NEVER_MESSAGE, { identifier: node.name });
+            }
+
+            // Token on the next line, or comment without blank line
+            if (
+                mode === "always" && (
+                    !noNextLineToken ||
+                    hasNextLineComment && !hasBlankLineAfterComment(nextToken, nextLineNum)
+                )
+            ) {
+                context.report(node, ALWAYS_MESSAGE, { identifier: node.name });
+            }
+        }
+
+        //--------------------------------------------------------------------------
+        // Public
+        //--------------------------------------------------------------------------
+
+        return {
+            "VariableDeclaration": checkForBlankLine
+        };
+
     }
-
-    /**
-     * Determine if provided keyword is a variant of for specifiers
-     * @private
-     * @param {string} keyword - keyword to test
-     * @returns {boolean} True if `keyword` is a variant of for specifier
-     */
-    function isForTypeSpecifier(keyword) {
-        return keyword === "ForStatement" || keyword === "ForInStatement" || keyword === "ForOfStatement";
-    }
-
-    /**
-     * Determine if provided keyword is an export specifiers
-     * @private
-     * @param {string} nodeType - nodeType to test
-     * @returns {boolean} True if `nodeType` is an export specifier
-     */
-    function isExportSpecifier(nodeType) {
-        return nodeType === "ExportNamedDeclaration" || nodeType === "ExportSpecifier" ||
-            nodeType === "ExportDefaultDeclaration" || nodeType === "ExportAllDeclaration";
-    }
-
-    /**
-     * Determine if provided node is the last of their parent block.
-     * @private
-     * @param {ASTNode} node - node to test
-     * @returns {boolean} True if `node` is last of their parent block.
-     */
-    function isLastNode(node) {
-        var token = sourceCode.getTokenAfter(node);
-
-        return !token || (token.type === "Punctuator" && token.value === "}");
-    }
-
-    /**
-     * Determine if a token starts more than one line after a comment ends
-     * @param  {token}   token            The token being checked
-     * @param {integer}  commentStartLine The line number on which the comment starts
-     * @returns {boolean}                 True if `token` does not start immediately after a comment
-     */
-    function hasBlankLineAfterComment(token, commentStartLine) {
-        var commentEnd = commentEndLine[commentStartLine];
-
-        // If there's another comment, repeat check for blank line
-        if (commentEndLine[commentEnd + 1]) {
-            return hasBlankLineAfterComment(token, commentEnd + 1);
-        }
-
-        return (token.loc.start.line > commentEndLine[commentStartLine] + 1);
-    }
-
-    /**
-     * Checks that a blank line exists after a variable declaration when mode is
-     * set to "always", or checks that there is no blank line when mode is set
-     * to "never"
-     * @private
-     * @param {ASTNode} node - `VariableDeclaration` node to test
-     * @returns {void}
-     */
-    function checkForBlankLine(node) {
-        var lastToken = sourceCode.getLastToken(node),
-            nextToken = sourceCode.getTokenAfter(node),
-            nextLineNum = lastToken.loc.end.line + 1,
-            noNextLineToken,
-            hasNextLineComment;
-
-        // Ignore if there is no following statement
-        if (!nextToken) {
-            return;
-        }
-
-        // Ignore if parent of node is a for variant
-        if (isForTypeSpecifier(node.parent.type)) {
-            return;
-        }
-
-        // Ignore if parent of node is an export specifier
-        if (isExportSpecifier(node.parent.type)) {
-            return;
-        }
-
-        // Some coding styles use multiple `var` statements, so do nothing if
-        // the next token is a `var` statement.
-        if (nextToken.type === "Keyword" && isVar(nextToken.value)) {
-            return;
-        }
-
-        // Ignore if it is last statement in a block
-        if (isLastNode(node)) {
-            return;
-        }
-
-        // Next statement is not a `var`...
-        noNextLineToken = nextToken.loc.start.line > nextLineNum;
-        hasNextLineComment = (typeof commentEndLine[nextLineNum] !== "undefined");
-
-        if (mode === "never" && noNextLineToken && !hasNextLineComment) {
-            context.report(node, NEVER_MESSAGE, { identifier: node.name });
-        }
-
-        // Token on the next line, or comment without blank line
-        if (
-            mode === "always" && (
-                !noNextLineToken ||
-                hasNextLineComment && !hasBlankLineAfterComment(nextToken, nextLineNum)
-            )
-        ) {
-            context.report(node, ALWAYS_MESSAGE, { identifier: node.name });
-        }
-    }
-
-    //--------------------------------------------------------------------------
-    // Public
-    //--------------------------------------------------------------------------
-
-    return {
-        "VariableDeclaration": checkForBlankLine
-    };
-
 };
-
-module.exports.schema = [
-    {
-        "enum": ["never", "always"]
-    }
-];
 
 },{}],216:[function(require,module,exports){
 
@@ -49042,136 +49609,162 @@ module.exports.schema = [
 // Rule Definition
 //------------------------------------------------------------------------------
 
-module.exports = function(context) {
-    var sourceCode = context.getSourceCode();
+module.exports = {
+    meta: {
+        docs: {
+            description: "require an empty line before `return` statements",
+            category: "Stylistic Issues",
+            recommended: false
+        },
 
-    //--------------------------------------------------------------------------
-    // Helpers
-    //--------------------------------------------------------------------------
+        schema: []
+    },
 
-    /**
-     * Tests whether node is preceded by supplied tokens
-     * @param {ASTNode} node - node to check
-     * @param {array} testTokens - array of tokens to test against
-     * @returns {boolean} Whether or not the node is preceded by one of the supplied tokens
-     * @private
-     */
-    function isPrecededByTokens(node, testTokens) {
-        var tokenBefore = sourceCode.getTokenBefore(node);
+    create: function(context) {
+        var sourceCode = context.getSourceCode();
 
-        return testTokens.some(function(token) {
-            return tokenBefore.value === token;
-        });
-    }
+        //--------------------------------------------------------------------------
+        // Helpers
+        //--------------------------------------------------------------------------
 
-    /**
-     * Checks whether node is the first node after statement or in block
-     * @param {ASTNode} node - node to check
-     * @returns {boolean} Whether or not the node is the first node after statement or in block
-     * @private
-     */
-    function isFirstNode(node) {
-        var parentType = node.parent.type;
+        /**
+         * Tests whether node is preceded by supplied tokens
+         * @param {ASTNode} node - node to check
+         * @param {array} testTokens - array of tokens to test against
+         * @returns {boolean} Whether or not the node is preceded by one of the supplied tokens
+         * @private
+         */
+        function isPrecededByTokens(node, testTokens) {
+            var tokenBefore = sourceCode.getTokenBefore(node);
 
-        if (node.parent.body) {
-            return Array.isArray(node.parent.body)
-              ? node.parent.body[0] === node
-              : node.parent.body === node;
+            return testTokens.some(function(token) {
+                return tokenBefore.value === token;
+            });
         }
 
-        if (parentType === "IfStatement") {
-            return isPrecededByTokens(node, ["else", ")"]);
-        } else if (parentType === "DoWhileStatement") {
-            return isPrecededByTokens(node, ["do"]);
-        } else if (parentType === "SwitchCase") {
-            return isPrecededByTokens(node, [":"]);
-        } else {
-            return isPrecededByTokens(node, [")"]);
+        /**
+         * Checks whether node is the first node after statement or in block
+         * @param {ASTNode} node - node to check
+         * @returns {boolean} Whether or not the node is the first node after statement or in block
+         * @private
+         */
+        function isFirstNode(node) {
+            var parentType = node.parent.type;
+
+            if (node.parent.body) {
+                return Array.isArray(node.parent.body)
+                  ? node.parent.body[0] === node
+                  : node.parent.body === node;
+            }
+
+            if (parentType === "IfStatement") {
+                return isPrecededByTokens(node, ["else", ")"]);
+            } else if (parentType === "DoWhileStatement") {
+                return isPrecededByTokens(node, ["do"]);
+            } else if (parentType === "SwitchCase") {
+                return isPrecededByTokens(node, [":"]);
+            } else {
+                return isPrecededByTokens(node, [")"]);
+            }
         }
-    }
 
-    /**
-     * Returns the number of lines of comments that precede the node
-     * @param {ASTNode} node - node to check for overlapping comments
-     * @param {token} tokenBefore - previous token to check for overlapping comments
-     * @returns {number} Number of lines of comments that precede the node
-     * @private
-     */
-    function calcCommentLines(node, tokenBefore) {
-        var comments = sourceCode.getComments(node).leading;
-        var numLinesComments = 0;
+        /**
+         * Returns the number of lines of comments that precede the node
+         * @param {ASTNode} node - node to check for overlapping comments
+         * @param {number} lineNumTokenBefore - line number of previous token, to check for overlapping comments
+         * @returns {number} Number of lines of comments that precede the node
+         * @private
+         */
+        function calcCommentLines(node, lineNumTokenBefore) {
+            var comments = sourceCode.getComments(node).leading,
+                numLinesComments = 0;
 
-        if (!comments.length) {
+            if (!comments.length) {
+                return numLinesComments;
+            }
+
+            comments.forEach(function(comment) {
+                numLinesComments++;
+
+                if (comment.type === "Block") {
+                    numLinesComments += comment.loc.end.line - comment.loc.start.line;
+                }
+
+                // avoid counting lines with inline comments twice
+                if (comment.loc.start.line === lineNumTokenBefore) {
+                    numLinesComments--;
+                }
+
+                if (comment.loc.end.line === node.loc.start.line) {
+                    numLinesComments--;
+                }
+            });
+
             return numLinesComments;
         }
 
-        comments.forEach(function(comment) {
-            numLinesComments++;
+        /**
+         * Checks whether node is preceded by a newline
+         * @param {ASTNode} node - node to check
+         * @returns {boolean} Whether or not the node is preceded by a newline
+         * @private
+         */
+        function hasNewlineBefore(node) {
+            var tokenBefore = sourceCode.getTokenBefore(node),
+                lineNumNode = node.loc.start.line,
+                lineNumTokenBefore,
+                commentLines;
 
-            if (comment.type === "Block") {
-                numLinesComments += comment.loc.end.line - comment.loc.start.line;
+            /**
+             * Global return (at the beginning of a script) is a special case.
+             * If there is no token before `return`, then we expect no line
+             * break before the return. Comments are allowed to occupy lines
+             * before the global return, just no blank lines.
+             * Setting lineNumTokenBefore to zero in that case results in the
+             * desired behavior.
+             */
+            if (tokenBefore) {
+                lineNumTokenBefore = tokenBefore.loc.end.line;
+            } else {
+                lineNumTokenBefore = 0;     // global return at beginning of script
             }
 
-            // avoid counting lines with inline comments twice
-            if (comment.loc.start.line === tokenBefore.loc.end.line) {
-                numLinesComments--;
-            }
+            commentLines = calcCommentLines(node, lineNumTokenBefore);
 
-            if (comment.loc.end.line === node.loc.start.line) {
-                numLinesComments--;
-            }
-        });
-
-        return numLinesComments;
-    }
-
-    /**
-     * Checks whether node is preceded by a newline
-     * @param {ASTNode} node - node to check
-     * @returns {boolean} Whether or not the node is preceded by a newline
-     * @private
-     */
-    function hasNewlineBefore(node) {
-        var tokenBefore = sourceCode.getTokenBefore(node);
-        var lineNumTokenBefore = tokenBefore.loc.end.line;
-        var lineNumNode = node.loc.start.line;
-        var commentLines = calcCommentLines(node, tokenBefore);
-
-        return (lineNumNode - lineNumTokenBefore - commentLines) > 1;
-    }
-
-    /**
-     * Reports expected/unexpected newline before return statement
-     * @param {ASTNode} node - the node to report in the event of an error
-     * @param {boolean} isExpected - whether the newline is expected or not
-     * @returns {void}
-     * @private
-     */
-    function reportError(node, isExpected) {
-        var expected = isExpected ? "Expected" : "Unexpected";
-
-        context.report({
-            node: node,
-            message: expected + " newline before return statement."
-        });
-    }
-
-    //--------------------------------------------------------------------------
-    // Public
-    //--------------------------------------------------------------------------
-
-    return {
-        ReturnStatement: function(node) {
-            if (isFirstNode(node) && hasNewlineBefore(node)) {
-                reportError(node, false);
-            } else if (!isFirstNode(node) && !hasNewlineBefore(node)) {
-                reportError(node, true);
-            }
+            return (lineNumNode - lineNumTokenBefore - commentLines) > 1;
         }
-    };
-};
 
-module.exports.schema = [];
+        /**
+         * Reports expected/unexpected newline before return statement
+         * @param {ASTNode} node - the node to report in the event of an error
+         * @param {boolean} isExpected - whether the newline is expected or not
+         * @returns {void}
+         * @private
+         */
+        function reportError(node, isExpected) {
+            var expected = isExpected ? "Expected" : "Unexpected";
+
+            context.report({
+                node: node,
+                message: expected + " newline before return statement."
+            });
+        }
+
+        //--------------------------------------------------------------------------
+        // Public
+        //--------------------------------------------------------------------------
+
+        return {
+            ReturnStatement: function(node) {
+                if (isFirstNode(node) && hasNewlineBefore(node)) {
+                    reportError(node, false);
+                } else if (!isFirstNode(node) && !hasNewlineBefore(node)) {
+                    reportError(node, true);
+                }
+            }
+        };
+    }
+};
 
 },{}],217:[function(require,module,exports){
 /**
@@ -49188,48 +49781,58 @@ module.exports.schema = [];
 // Rule Definition
 //------------------------------------------------------------------------------
 
-module.exports = function(context) {
+module.exports = {
+    meta: {
+        docs: {
+            description: "require a newline after each call in a method chain",
+            category: "Stylistic Issues",
+            recommended: false
+        },
 
-    var options = context.options[0] || {},
-        ignoreChainWithDepth = options.ignoreChainWithDepth || 2;
-
-    return {
-        "CallExpression:exit": function(node) {
-            if (!node.callee || node.callee.type !== "MemberExpression") {
-                return;
-            }
-
-            var callee = node.callee;
-            var parent = callee.object;
-            var depth = 1;
-
-            while (parent && parent.callee) {
-                depth += 1;
-                parent = parent.callee.object;
-            }
-
-            if (depth > ignoreChainWithDepth && callee.property.loc.start.line === callee.object.loc.end.line) {
-                context.report(
-                    callee.property,
-                    callee.property.loc.start,
-                    "Expected line break after `" + context.getSource(callee.object).replace(/\r\n|\r|\n/g, "\\n") + "`."
-                );
-            }
-        }
-    };
-};
-
-module.exports.schema = [{
-    "type": "object",
-    "properties": {
-        "ignoreChainWithDepth": {
-            "type": "integer",
-            "minimum": 1,
-            "maximum": 10
-        }
+        schema: [{
+            "type": "object",
+            "properties": {
+                "ignoreChainWithDepth": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 10
+                }
+            },
+            "additionalProperties": false
+        }]
     },
-    "additionalProperties": false
-}];
+
+    create: function(context) {
+
+        var options = context.options[0] || {},
+            ignoreChainWithDepth = options.ignoreChainWithDepth || 2;
+
+        return {
+            "CallExpression:exit": function(node) {
+                if (!node.callee || node.callee.type !== "MemberExpression") {
+                    return;
+                }
+
+                var callee = node.callee;
+                var parent = callee.object;
+                var depth = 1;
+
+                while (parent && parent.callee) {
+                    depth += 1;
+                    parent = parent.callee.object;
+                }
+
+                if (depth > ignoreChainWithDepth && callee.property.loc.start.line === callee.object.loc.end.line) {
+                    context.report(
+                        callee.property,
+                        callee.property.loc.start,
+                        "Expected line break after `" + context.getSource(callee.object).replace(/\r\n|\r|\n/g, "\\n") + "`."
+                    );
+                }
+            }
+        };
+    }
+};
 
 },{}],218:[function(require,module,exports){
 /**
@@ -49332,42 +49935,52 @@ function isGlobalThisReferenceOrGlobalWindow(scope, globalScope, node) {
 // Rule Definition
 //------------------------------------------------------------------------------
 
-module.exports = function(context) {
-    var globalScope;
-
-    return {
-
-        "Program": function() {
-            globalScope = context.getScope();
+module.exports = {
+    meta: {
+        docs: {
+            description: "disallow the use of `alert`, `confirm`, and `prompt`",
+            category: "Best Practices",
+            recommended: false
         },
 
-        "CallExpression": function(node) {
-            var callee = node.callee,
-                identifierName,
-                currentScope = context.getScope();
+        schema: []
+    },
 
-            // without window.
-            if (callee.type === "Identifier") {
-                identifierName = callee.name;
+    create: function(context) {
+        var globalScope;
 
-                if (!isShadowed(currentScope, globalScope, callee) && isProhibitedIdentifier(callee.name)) {
-                    report(context, node, identifierName);
+        return {
+
+            "Program": function() {
+                globalScope = context.getScope();
+            },
+
+            "CallExpression": function(node) {
+                var callee = node.callee,
+                    identifierName,
+                    currentScope = context.getScope();
+
+                // without window.
+                if (callee.type === "Identifier") {
+                    identifierName = callee.name;
+
+                    if (!isShadowed(currentScope, globalScope, callee) && isProhibitedIdentifier(callee.name)) {
+                        report(context, node, identifierName);
+                    }
+
+                } else if (callee.type === "MemberExpression" && isGlobalThisReferenceOrGlobalWindow(currentScope, globalScope, callee.object)) {
+                    identifierName = getPropertyName(callee);
+
+                    if (isProhibitedIdentifier(identifierName)) {
+                        report(context, node, identifierName);
+                    }
                 }
 
-            } else if (callee.type === "MemberExpression" && isGlobalThisReferenceOrGlobalWindow(currentScope, globalScope, callee.object)) {
-                identifierName = getPropertyName(callee);
-
-                if (isProhibitedIdentifier(identifierName)) {
-                    report(context, node, identifierName);
-                }
             }
+        };
 
-        }
-    };
-
+    }
 };
-
-module.exports.schema = [];
 
 },{}],219:[function(require,module,exports){
 /**
@@ -49381,32 +49994,42 @@ module.exports.schema = [];
 // Rule Definition
 //------------------------------------------------------------------------------
 
-module.exports = function(context) {
+module.exports = {
+    meta: {
+        docs: {
+            description: "disallow `Array` constructors",
+            category: "Stylistic Issues",
+            recommended: false
+        },
 
-    /**
-     * Disallow construction of dense arrays using the Array constructor
-     * @param {ASTNode} node node to evaluate
-     * @returns {void}
-     * @private
-     */
-    function check(node) {
-        if (
-            node.arguments.length !== 1 &&
-            node.callee.type === "Identifier" &&
-            node.callee.name === "Array"
-        ) {
-            context.report(node, "The array literal notation [] is preferrable.");
+        schema: []
+    },
+
+    create: function(context) {
+
+        /**
+         * Disallow construction of dense arrays using the Array constructor
+         * @param {ASTNode} node node to evaluate
+         * @returns {void}
+         * @private
+         */
+        function check(node) {
+            if (
+                node.arguments.length !== 1 &&
+                node.callee.type === "Identifier" &&
+                node.callee.name === "Array"
+            ) {
+                context.report(node, "The array literal notation [] is preferrable.");
+            }
         }
+
+        return {
+            "CallExpression": check,
+            "NewExpression": check
+        };
+
     }
-
-    return {
-        "CallExpression": check,
-        "NewExpression": check
-    };
-
 };
-
-module.exports.schema = [];
 
 },{}],220:[function(require,module,exports){
 /**
@@ -49429,85 +50052,95 @@ var BITWISE_OPERATORS = [
 // Rule Definition
 //------------------------------------------------------------------------------
 
-module.exports = function(context) {
-    var options = context.options[0] || {};
-    var allowed = options.allow || [];
-    var int32Hint = options.int32Hint === true;
-
-    /**
-     * Reports an unexpected use of a bitwise operator.
-     * @param   {ASTNode} node Node which contains the bitwise operator.
-     * @returns {void}
-     */
-    function report(node) {
-        context.report(node, "Unexpected use of '{{operator}}'.", { operator: node.operator });
-    }
-
-    /**
-     * Checks if the given node has a bitwise operator.
-     * @param   {ASTNode} node The node to check.
-     * @returns {boolean} Whether or not the node has a bitwise operator.
-     */
-    function hasBitwiseOperator(node) {
-        return BITWISE_OPERATORS.indexOf(node.operator) !== -1;
-    }
-
-    /**
-     * Checks if exceptions were provided, e.g. `{ allow: ['~', '|'] }`.
-     * @param   {ASTNode} node The node to check.
-     * @returns {boolean} Whether or not the node has a bitwise operator.
-     */
-    function allowedOperator(node) {
-        return allowed.indexOf(node.operator) !== -1;
-    }
-
-    /**
-     * Checks if the given bitwise operator is used for integer typecasting, i.e. "|0"
-     * @param   {ASTNode} node The node to check.
-     * @returns {boolean} whether the node is used in integer typecasting.
-     */
-    function isInt32Hint(node) {
-        return int32Hint && node.operator === "|" && node.right &&
-          node.right.type === "Literal" && node.right.value === 0;
-    }
-
-    /**
-     * Report if the given node contains a bitwise operator.
-     * @param   {ASTNode} node The node to check.
-     * @returns {void}
-     */
-    function checkNodeForBitwiseOperator(node) {
-        if (hasBitwiseOperator(node) && !allowedOperator(node) && !isInt32Hint(node)) {
-            report(node);
-        }
-    }
-
-    return {
-        "AssignmentExpression": checkNodeForBitwiseOperator,
-        "BinaryExpression": checkNodeForBitwiseOperator,
-        "UnaryExpression": checkNodeForBitwiseOperator
-    };
-
-};
-
-module.exports.schema = [
-    {
-        "type": "object",
-        "properties": {
-            "allow": {
-                "type": "array",
-                "items": {
-                    "enum": BITWISE_OPERATORS
-                },
-                "uniqueItems": true
-            },
-            "int32Hint": {
-                "type": "boolean"
-            }
+module.exports = {
+    meta: {
+        docs: {
+            description: "disallow bitwise operators",
+            category: "Stylistic Issues",
+            recommended: false
         },
-        "additionalProperties": false
+
+        schema: [
+            {
+                "type": "object",
+                "properties": {
+                    "allow": {
+                        "type": "array",
+                        "items": {
+                            "enum": BITWISE_OPERATORS
+                        },
+                        "uniqueItems": true
+                    },
+                    "int32Hint": {
+                        "type": "boolean"
+                    }
+                },
+                "additionalProperties": false
+            }
+        ]
+    },
+
+    create: function(context) {
+        var options = context.options[0] || {};
+        var allowed = options.allow || [];
+        var int32Hint = options.int32Hint === true;
+
+        /**
+         * Reports an unexpected use of a bitwise operator.
+         * @param   {ASTNode} node Node which contains the bitwise operator.
+         * @returns {void}
+         */
+        function report(node) {
+            context.report(node, "Unexpected use of '{{operator}}'.", { operator: node.operator });
+        }
+
+        /**
+         * Checks if the given node has a bitwise operator.
+         * @param   {ASTNode} node The node to check.
+         * @returns {boolean} Whether or not the node has a bitwise operator.
+         */
+        function hasBitwiseOperator(node) {
+            return BITWISE_OPERATORS.indexOf(node.operator) !== -1;
+        }
+
+        /**
+         * Checks if exceptions were provided, e.g. `{ allow: ['~', '|'] }`.
+         * @param   {ASTNode} node The node to check.
+         * @returns {boolean} Whether or not the node has a bitwise operator.
+         */
+        function allowedOperator(node) {
+            return allowed.indexOf(node.operator) !== -1;
+        }
+
+        /**
+         * Checks if the given bitwise operator is used for integer typecasting, i.e. "|0"
+         * @param   {ASTNode} node The node to check.
+         * @returns {boolean} whether the node is used in integer typecasting.
+         */
+        function isInt32Hint(node) {
+            return int32Hint && node.operator === "|" && node.right &&
+              node.right.type === "Literal" && node.right.value === 0;
+        }
+
+        /**
+         * Report if the given node contains a bitwise operator.
+         * @param   {ASTNode} node The node to check.
+         * @returns {void}
+         */
+        function checkNodeForBitwiseOperator(node) {
+            if (hasBitwiseOperator(node) && !allowedOperator(node) && !isInt32Hint(node)) {
+                report(node);
+            }
+        }
+
+        return {
+            "AssignmentExpression": checkNodeForBitwiseOperator,
+            "BinaryExpression": checkNodeForBitwiseOperator,
+            "UnaryExpression": checkNodeForBitwiseOperator
+        };
+
     }
-];
+};
 
 },{}],221:[function(require,module,exports){
 /**
@@ -49521,24 +50154,34 @@ module.exports.schema = [
 // Rule Definition
 //------------------------------------------------------------------------------
 
-module.exports = function(context) {
+module.exports = {
+    meta: {
+        docs: {
+            description: "disallow the use of `arguments.caller` or `arguments.callee`",
+            category: "Best Practices",
+            recommended: false
+        },
 
-    return {
+        schema: []
+    },
 
-        "MemberExpression": function(node) {
-            var objectName = node.object.name,
-                propertyName = node.property.name;
+    create: function(context) {
 
-            if (objectName === "arguments" && !node.computed && propertyName && propertyName.match(/^calle[er]$/)) {
-                context.report(node, "Avoid arguments.{{property}}.", { property: propertyName });
+        return {
+
+            "MemberExpression": function(node) {
+                var objectName = node.object.name,
+                    propertyName = node.property.name;
+
+                if (objectName === "arguments" && !node.computed && propertyName && propertyName.match(/^calle[er]$/)) {
+                    context.report(node, "Avoid arguments.{{property}}.", { property: propertyName });
+                }
+
             }
+        };
 
-        }
-    };
-
+    }
 };
-
-module.exports.schema = [];
 
 },{}],222:[function(require,module,exports){
 /**
@@ -49552,43 +50195,53 @@ module.exports.schema = [];
 // Rule Definition
 //------------------------------------------------------------------------------
 
-module.exports = function(context) {
+module.exports = {
+    meta: {
+        docs: {
+            description: "disallow lexical declarations in case clauses",
+            category: "Best Practices",
+            recommended: true
+        },
 
-    /**
-     * Checks whether or not a node is a lexical declaration.
-     * @param {ASTNode} node A direct child statement of a switch case.
-     * @returns {boolean} Whether or not the node is a lexical declaration.
-     */
-    function isLexicalDeclaration(node) {
-        switch (node.type) {
-            case "FunctionDeclaration":
-            case "ClassDeclaration":
-                return true;
-            case "VariableDeclaration":
-                return node.kind !== "var";
-            default:
-                return false;
-        }
-    }
+        schema: []
+    },
 
-    return {
-        "SwitchCase": function(node) {
-            for (var i = 0; i < node.consequent.length; i++) {
-                var statement = node.consequent[i];
+    create: function(context) {
 
-                if (isLexicalDeclaration(statement)) {
-                    context.report({
-                        node: node,
-                        message: "Unexpected lexical declaration in case block."
-                    });
-                }
+        /**
+         * Checks whether or not a node is a lexical declaration.
+         * @param {ASTNode} node A direct child statement of a switch case.
+         * @returns {boolean} Whether or not the node is a lexical declaration.
+         */
+        function isLexicalDeclaration(node) {
+            switch (node.type) {
+                case "FunctionDeclaration":
+                case "ClassDeclaration":
+                    return true;
+                case "VariableDeclaration":
+                    return node.kind !== "var";
+                default:
+                    return false;
             }
         }
-    };
 
+        return {
+            "SwitchCase": function(node) {
+                for (var i = 0; i < node.consequent.length; i++) {
+                    var statement = node.consequent[i];
+
+                    if (isLexicalDeclaration(statement)) {
+                        context.report({
+                            node: node,
+                            message: "Unexpected lexical declaration in case block."
+                        });
+                    }
+                }
+            }
+        };
+
+    }
 };
-
-module.exports.schema = [];
 
 },{}],223:[function(require,module,exports){
 /**
@@ -49608,47 +50261,57 @@ var astUtils = require("../ast-utils");
 // Rule Definition
 //------------------------------------------------------------------------------
 
-module.exports = function(context) {
+module.exports = {
+    meta: {
+        docs: {
+            description: "disallow `catch` clause parameters from shadowing variables in the outer scope",
+            category: "Variables",
+            recommended: false
+        },
 
-    //--------------------------------------------------------------------------
-    // Helpers
-    //--------------------------------------------------------------------------
+        schema: []
+    },
 
-    /**
-     * Check if the parameters are been shadowed
-     * @param {object} scope current scope
-     * @param {string} name parameter name
-     * @returns {boolean} True is its been shadowed
-     */
-    function paramIsShadowing(scope, name) {
-        return astUtils.getVariableByName(scope, name) !== null;
-    }
+    create: function(context) {
 
-    //--------------------------------------------------------------------------
-    // Public API
-    //--------------------------------------------------------------------------
+        //--------------------------------------------------------------------------
+        // Helpers
+        //--------------------------------------------------------------------------
 
-    return {
-
-        "CatchClause": function(node) {
-            var scope = context.getScope();
-
-            // When blockBindings is enabled, CatchClause creates its own scope
-            // so start from one upper scope to exclude the current node
-            if (scope.block === node) {
-                scope = scope.upper;
-            }
-
-            if (paramIsShadowing(scope, node.param.name)) {
-                context.report(node, "Value of '{{name}}' may be overwritten in IE 8 and earlier.",
-                        { name: node.param.name });
-            }
+        /**
+         * Check if the parameters are been shadowed
+         * @param {object} scope current scope
+         * @param {string} name parameter name
+         * @returns {boolean} True is its been shadowed
+         */
+        function paramIsShadowing(scope, name) {
+            return astUtils.getVariableByName(scope, name) !== null;
         }
-    };
 
+        //--------------------------------------------------------------------------
+        // Public API
+        //--------------------------------------------------------------------------
+
+        return {
+
+            "CatchClause": function(node) {
+                var scope = context.getScope();
+
+                // When blockBindings is enabled, CatchClause creates its own scope
+                // so start from one upper scope to exclude the current node
+                if (scope.block === node) {
+                    scope = scope.upper;
+                }
+
+                if (paramIsShadowing(scope, node.param.name)) {
+                    context.report(node, "Value of '{{name}}' may be overwritten in IE 8 and earlier.",
+                            { name: node.param.name });
+                }
+            }
+        };
+
+    }
 };
-
-module.exports.schema = [];
 
 },{"../ast-utils":151}],224:[function(require,module,exports){
 /**
@@ -49665,40 +50328,50 @@ var astUtils = require("../ast-utils");
 // Rule Definition
 //------------------------------------------------------------------------------
 
-module.exports = function(context) {
+module.exports = {
+    meta: {
+        docs: {
+            description: "disallow reassigning class members",
+            category: "ECMAScript 6",
+            recommended: true
+        },
 
-    /**
-     * Finds and reports references that are non initializer and writable.
-     * @param {Variable} variable - A variable to check.
-     * @returns {void}
-     */
-    function checkVariable(variable) {
-        astUtils.getModifyingReferences(variable.references).forEach(function(reference) {
-            context.report(
-                reference.identifier,
-                "'{{name}}' is a class.",
-                {name: reference.identifier.name});
+        schema: []
+    },
 
-        });
+    create: function(context) {
+
+        /**
+         * Finds and reports references that are non initializer and writable.
+         * @param {Variable} variable - A variable to check.
+         * @returns {void}
+         */
+        function checkVariable(variable) {
+            astUtils.getModifyingReferences(variable.references).forEach(function(reference) {
+                context.report(
+                    reference.identifier,
+                    "'{{name}}' is a class.",
+                    {name: reference.identifier.name});
+
+            });
+        }
+
+        /**
+         * Finds and reports references that are non initializer and writable.
+         * @param {ASTNode} node - A ClassDeclaration/ClassExpression node to check.
+         * @returns {void}
+         */
+        function checkForClass(node) {
+            context.getDeclaredVariables(node).forEach(checkVariable);
+        }
+
+        return {
+            "ClassDeclaration": checkForClass,
+            "ClassExpression": checkForClass
+        };
+
     }
-
-    /**
-     * Finds and reports references that are non initializer and writable.
-     * @param {ASTNode} node - A ClassDeclaration/ClassExpression node to check.
-     * @returns {void}
-     */
-    function checkForClass(node) {
-        context.getDeclaredVariables(node).forEach(checkVariable);
-    }
-
-    return {
-        "ClassDeclaration": checkForClass,
-        "ClassExpression": checkForClass
-    };
-
 };
-
-module.exports.schema = [];
 
 },{"../ast-utils":151}],225:[function(require,module,exports){
 /**
@@ -49718,123 +50391,133 @@ var NODE_DESCRIPTIONS = {
 // Rule Definition
 //------------------------------------------------------------------------------
 
-module.exports = function(context) {
+module.exports = {
+    meta: {
+        docs: {
+            description: "disallow assignment operators in conditional expressions",
+            category: "Possible Errors",
+            recommended: true
+        },
 
-    var prohibitAssign = (context.options[0] || "except-parens");
-
-    /**
-     * Check whether an AST node is the test expression for a conditional statement.
-     * @param {!Object} node The node to test.
-     * @returns {boolean} `true` if the node is the text expression for a conditional statement; otherwise, `false`.
-     */
-    function isConditionalTestExpression(node) {
-        return node.parent &&
-            node.parent.test &&
-            node === node.parent.test;
-    }
-
-    /**
-     * Given an AST node, perform a bottom-up search for the first ancestor that represents a conditional statement.
-     * @param {!Object} node The node to use at the start of the search.
-     * @returns {?Object} The closest ancestor node that represents a conditional statement.
-     */
-    function findConditionalAncestor(node) {
-        var currentAncestor = node;
-
-        do {
-            if (isConditionalTestExpression(currentAncestor)) {
-                return currentAncestor.parent;
+        schema: [
+            {
+                "enum": ["except-parens", "always"]
             }
-        } while ((currentAncestor = currentAncestor.parent));
+        ]
+    },
 
-        return null;
-    }
+    create: function(context) {
 
-    /**
-     * Check whether the code represented by an AST node is enclosed in parentheses.
-     * @param {!Object} node The node to test.
-     * @returns {boolean} `true` if the code is enclosed in parentheses; otherwise, `false`.
-     */
-    function isParenthesised(node) {
-        var previousToken = context.getTokenBefore(node),
-            nextToken = context.getTokenAfter(node);
+        var prohibitAssign = (context.options[0] || "except-parens");
 
-        return previousToken.value === "(" && previousToken.range[1] <= node.range[0] &&
-            nextToken.value === ")" && nextToken.range[0] >= node.range[1];
-    }
-
-    /**
-     * Check whether the code represented by an AST node is enclosed in two sets of parentheses.
-     * @param {!Object} node The node to test.
-     * @returns {boolean} `true` if the code is enclosed in two sets of parentheses; otherwise, `false`.
-     */
-    function isParenthesisedTwice(node) {
-        var previousToken = context.getTokenBefore(node, 1),
-            nextToken = context.getTokenAfter(node, 1);
-
-        return isParenthesised(node) &&
-            previousToken.value === "(" && previousToken.range[1] <= node.range[0] &&
-            nextToken.value === ")" && nextToken.range[0] >= node.range[1];
-    }
-
-    /**
-     * Check a conditional statement's test expression for top-level assignments that are not enclosed in parentheses.
-     * @param {!Object} node The node for the conditional statement.
-     * @returns {void}
-     */
-    function testForAssign(node) {
-        if (node.test &&
-            (node.test.type === "AssignmentExpression") &&
-            (node.type === "ForStatement" ?
-                !isParenthesised(node.test) :
-                !isParenthesisedTwice(node.test)
-            )
-        ) {
-
-            // must match JSHint's error message
-            context.report({
-                node: node,
-                loc: node.test.loc.start,
-                message: "Expected a conditional expression and instead saw an assignment."
-            });
+        /**
+         * Check whether an AST node is the test expression for a conditional statement.
+         * @param {!Object} node The node to test.
+         * @returns {boolean} `true` if the node is the text expression for a conditional statement; otherwise, `false`.
+         */
+        function isConditionalTestExpression(node) {
+            return node.parent &&
+                node.parent.test &&
+                node === node.parent.test;
         }
-    }
 
-    /**
-     * Check whether an assignment expression is descended from a conditional statement's test expression.
-     * @param {!Object} node The node for the assignment expression.
-     * @returns {void}
-     */
-    function testForConditionalAncestor(node) {
-        var ancestor = findConditionalAncestor(node);
+        /**
+         * Given an AST node, perform a bottom-up search for the first ancestor that represents a conditional statement.
+         * @param {!Object} node The node to use at the start of the search.
+         * @returns {?Object} The closest ancestor node that represents a conditional statement.
+         */
+        function findConditionalAncestor(node) {
+            var currentAncestor = node;
 
-        if (ancestor) {
-            context.report(ancestor, "Unexpected assignment within {{type}}.", {
-                type: NODE_DESCRIPTIONS[ancestor.type] || ancestor.type
-            });
+            do {
+                if (isConditionalTestExpression(currentAncestor)) {
+                    return currentAncestor.parent;
+                }
+            } while ((currentAncestor = currentAncestor.parent));
+
+            return null;
         }
-    }
 
-    if (prohibitAssign === "always") {
+        /**
+         * Check whether the code represented by an AST node is enclosed in parentheses.
+         * @param {!Object} node The node to test.
+         * @returns {boolean} `true` if the code is enclosed in parentheses; otherwise, `false`.
+         */
+        function isParenthesised(node) {
+            var previousToken = context.getTokenBefore(node),
+                nextToken = context.getTokenAfter(node);
+
+            return previousToken.value === "(" && previousToken.range[1] <= node.range[0] &&
+                nextToken.value === ")" && nextToken.range[0] >= node.range[1];
+        }
+
+        /**
+         * Check whether the code represented by an AST node is enclosed in two sets of parentheses.
+         * @param {!Object} node The node to test.
+         * @returns {boolean} `true` if the code is enclosed in two sets of parentheses; otherwise, `false`.
+         */
+        function isParenthesisedTwice(node) {
+            var previousToken = context.getTokenBefore(node, 1),
+                nextToken = context.getTokenAfter(node, 1);
+
+            return isParenthesised(node) &&
+                previousToken.value === "(" && previousToken.range[1] <= node.range[0] &&
+                nextToken.value === ")" && nextToken.range[0] >= node.range[1];
+        }
+
+        /**
+         * Check a conditional statement's test expression for top-level assignments that are not enclosed in parentheses.
+         * @param {!Object} node The node for the conditional statement.
+         * @returns {void}
+         */
+        function testForAssign(node) {
+            if (node.test &&
+                (node.test.type === "AssignmentExpression") &&
+                (node.type === "ForStatement" ?
+                    !isParenthesised(node.test) :
+                    !isParenthesisedTwice(node.test)
+                )
+            ) {
+
+                // must match JSHint's error message
+                context.report({
+                    node: node,
+                    loc: node.test.loc.start,
+                    message: "Expected a conditional expression and instead saw an assignment."
+                });
+            }
+        }
+
+        /**
+         * Check whether an assignment expression is descended from a conditional statement's test expression.
+         * @param {!Object} node The node for the assignment expression.
+         * @returns {void}
+         */
+        function testForConditionalAncestor(node) {
+            var ancestor = findConditionalAncestor(node);
+
+            if (ancestor) {
+                context.report(ancestor, "Unexpected assignment within {{type}}.", {
+                    type: NODE_DESCRIPTIONS[ancestor.type] || ancestor.type
+                });
+            }
+        }
+
+        if (prohibitAssign === "always") {
+            return {
+                "AssignmentExpression": testForConditionalAncestor
+            };
+        }
+
         return {
-            "AssignmentExpression": testForConditionalAncestor
+            "DoWhileStatement": testForAssign,
+            "ForStatement": testForAssign,
+            "IfStatement": testForAssign,
+            "WhileStatement": testForAssign
         };
+
     }
-
-    return {
-        "DoWhileStatement": testForAssign,
-        "ForStatement": testForAssign,
-        "IfStatement": testForAssign,
-        "WhileStatement": testForAssign
-    };
-
 };
-
-module.exports.schema = [
-    {
-        "enum": ["except-parens", "always"]
-    }
-];
 
 },{}],226:[function(require,module,exports){
 /**
@@ -49886,34 +50569,44 @@ function isConditional(node) {
 // Rule Definition
 //------------------------------------------------------------------------------
 
-module.exports = function(context) {
-    var config = context.options[0] || {};
+module.exports = {
+    meta: {
+        docs: {
+            description: "disallow arrow functions where they could be confused with comparisons",
+            category: "ECMAScript 6",
+            recommended: false
+        },
 
-    /**
-     * Reports if an arrow function contains an ambiguous conditional.
-     * @param {ASTNode} node - A node to check and report.
-     * @returns {void}
-     */
-    function checkArrowFunc(node) {
-        var body = node.body;
-
-        if (isConditional(body) && !(config.allowParens && astUtils.isParenthesised(context, body))) {
-            context.report(node, "Arrow function used ambiguously with a conditional expression.");
-        }
-    }
-
-    return {
-        "ArrowFunctionExpression": checkArrowFunc
-    };
-};
-
-module.exports.schema = [{
-    type: "object",
-    properties: {
-        allowParens: {type: "boolean"}
+        schema: [{
+            type: "object",
+            properties: {
+                allowParens: {type: "boolean"}
+            },
+            additionalProperties: false
+        }]
     },
-    additionalProperties: false
-}];
+
+    create: function(context) {
+        var config = context.options[0] || {};
+
+        /**
+         * Reports if an arrow function contains an ambiguous conditional.
+         * @param {ASTNode} node - A node to check and report.
+         * @returns {void}
+         */
+        function checkArrowFunc(node) {
+            var body = node.body;
+
+            if (isConditional(body) && !(config.allowParens && astUtils.isParenthesised(context, body))) {
+                context.report(node, "Arrow function used ambiguously with a conditional expression.");
+            }
+        }
+
+        return {
+            "ArrowFunctionExpression": checkArrowFunc
+        };
+    }
+};
 
 },{"../ast-utils.js":151}],227:[function(require,module,exports){
 /**
@@ -49928,50 +50621,60 @@ module.exports.schema = [{
 // Rule Definition
 //------------------------------------------------------------------------------
 
-module.exports = function(context) {
+module.exports = {
+    meta: {
+        docs: {
+            description: "disallow the use of `console`",
+            category: "Possible Errors",
+            recommended: true
+        },
 
-    return {
+        schema: [
+            {
+                "type": "object",
+                "properties": {
+                    "allow": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "minItems": 1,
+                        "uniqueItems": true
+                    }
+                },
+                "additionalProperties": false
+            }
+        ]
+    },
 
-        "MemberExpression": function(node) {
+    create: function(context) {
 
-            if (node.object.name === "console") {
-                var blockConsole = true;
+        return {
 
-                if (context.options.length > 0) {
-                    var allowedProperties = context.options[0].allow;
-                    var passedProperty = node.property.name;
-                    var propertyIsAllowed = (allowedProperties.indexOf(passedProperty) > -1);
+            "MemberExpression": function(node) {
 
-                    if (propertyIsAllowed) {
-                        blockConsole = false;
+                if (node.object.name === "console") {
+                    var blockConsole = true;
+
+                    if (context.options.length > 0) {
+                        var allowedProperties = context.options[0].allow;
+                        var passedProperty = node.property.name;
+                        var propertyIsAllowed = (allowedProperties.indexOf(passedProperty) > -1);
+
+                        if (propertyIsAllowed) {
+                            blockConsole = false;
+                        }
+                    }
+
+                    if (blockConsole) {
+                        context.report(node, "Unexpected console statement.");
                     }
                 }
-
-                if (blockConsole) {
-                    context.report(node, "Unexpected console statement.");
-                }
             }
-        }
-    };
+        };
 
-};
-
-module.exports.schema = [
-    {
-        "type": "object",
-        "properties": {
-            "allow": {
-                "type": "array",
-                "items": {
-                    "type": "string"
-                },
-                "minItems": 1,
-                "uniqueItems": true
-            }
-        },
-        "additionalProperties": false
     }
-];
+};
 
 },{}],228:[function(require,module,exports){
 /**
@@ -49988,33 +50691,43 @@ var astUtils = require("../ast-utils");
 // Rule Definition
 //------------------------------------------------------------------------------
 
-module.exports = function(context) {
+module.exports = {
+    meta: {
+        docs: {
+            description: "disallow reassigning `const` variables",
+            category: "ECMAScript 6",
+            recommended: true
+        },
 
-    /**
-     * Finds and reports references that are non initializer and writable.
-     * @param {Variable} variable - A variable to check.
-     * @returns {void}
-     */
-    function checkVariable(variable) {
-        astUtils.getModifyingReferences(variable.references).forEach(function(reference) {
-            context.report(
-                reference.identifier,
-                "'{{name}}' is constant.",
-                {name: reference.identifier.name});
-        });
-    }
+        schema: []
+    },
 
-    return {
-        "VariableDeclaration": function(node) {
-            if (node.kind === "const") {
-                context.getDeclaredVariables(node).forEach(checkVariable);
-            }
+    create: function(context) {
+
+        /**
+         * Finds and reports references that are non initializer and writable.
+         * @param {Variable} variable - A variable to check.
+         * @returns {void}
+         */
+        function checkVariable(variable) {
+            astUtils.getModifyingReferences(variable.references).forEach(function(reference) {
+                context.report(
+                    reference.identifier,
+                    "'{{name}}' is constant.",
+                    {name: reference.identifier.name});
+            });
         }
-    };
 
+        return {
+            "VariableDeclaration": function(node) {
+                if (node.kind === "const") {
+                    context.getDeclaredVariables(node).forEach(checkVariable);
+                }
+            }
+        };
+
+    }
 };
-
-module.exports.schema = [];
 
 },{"../ast-utils":151}],229:[function(require,module,exports){
 /**
@@ -50029,72 +50742,113 @@ module.exports.schema = [];
 // Rule Definition
 //------------------------------------------------------------------------------
 
-module.exports = function(context) {
+module.exports = {
+    meta: {
+        docs: {
+            description: "disallow constant expressions in conditions",
+            category: "Possible Errors",
+            recommended: true
+        },
 
-    //--------------------------------------------------------------------------
-    // Helpers
-    //--------------------------------------------------------------------------
+        schema: []
+    },
 
-    /**
-     * Checks if a node has a constant truthiness value.
-     * @param {ASTNode} node The AST node to check.
-     * @returns {Bool} true when node's truthiness is constant
-     * @private
-     */
-    function isConstant(node) {
-        switch (node.type) {
-            case "Literal":
-            case "ArrowFunctionExpression":
-            case "FunctionExpression":
-            case "ObjectExpression":
-            case "ArrayExpression":
-                return true;
+    create: function(context) {
 
-            case "UnaryExpression":
-                return isConstant(node.argument);
+        //--------------------------------------------------------------------------
+        // Helpers
+        //--------------------------------------------------------------------------
 
-            case "BinaryExpression":
-            case "LogicalExpression":
-                return isConstant(node.left) && isConstant(node.right) && node.operator !== "in";
 
-            case "AssignmentExpression":
-                return (node.operator === "=") && isConstant(node.right);
+        /**
+         * Checks if a branch node of LogicalExpression short circuits the whole condition
+         * @param {ASTNode} node The branch of main condition which needs to be checked
+         * @param {string} operator The operator of the main LogicalExpression.
+         * @returns {boolean} true when condition short circuits whole condition
+         */
+        function isLogicalIdentity(node, operator) {
+            switch (node.type) {
+                case "Literal":
+                    return (operator === "||" && node.value === true) ||
+                           (operator === "&&" && node.value === false);
+                case "LogicalExpression":
+                    return isLogicalIdentity(node.left, node.operator) ||
+                             isLogicalIdentity(node.right, node.operator);
 
-            case "SequenceExpression":
-                return isConstant(node.expressions[node.expressions.length - 1]);
-
-            // no default
+                     // no default
+            }
+            return false;
         }
-        return false;
-    }
 
-    /**
-     * Reports when the given node contains a constant condition.
-     * @param {ASTNode} node The AST node to check.
-     * @returns {void}
-     * @private
-     */
-    function checkConstantCondition(node) {
-        if (node.test && isConstant(node.test)) {
-            context.report(node, "Unexpected constant condition.");
+        /**
+         * Checks if a node has a constant truthiness value.
+         * @param {ASTNode} node The AST node to check.
+         * @param {boolean} inBooleanPosition `false` if checking branch of a condition.
+         *  `true` in all other cases
+         * @returns {Bool} true when node's truthiness is constant
+         * @private
+         */
+        function isConstant(node, inBooleanPosition) {
+            switch (node.type) {
+                case "Literal":
+                case "ArrowFunctionExpression":
+                case "FunctionExpression":
+                case "ObjectExpression":
+                case "ArrayExpression":
+                    return true;
+
+                case "UnaryExpression":
+                    return (node.operator === "typeof" && inBooleanPosition) ||
+                        isConstant(node.argument, true);
+
+                case "BinaryExpression":
+                    return isConstant(node.left, false) &&
+                            isConstant(node.right, false) &&
+                            node.operator !== "in";
+                case "LogicalExpression":
+                    var isLeftConstant = isConstant(node.left, inBooleanPosition);
+                    var isRightConstant = isConstant(node.right, inBooleanPosition);
+                    var isLeftShortCircuit = (isLeftConstant && isLogicalIdentity(node.left, node.operator));
+                    var isRightShortCircuit = (isRightConstant && isLogicalIdentity(node.right, node.operator));
+
+                    return (isLeftConstant && isRightConstant) || isLeftShortCircuit || isRightShortCircuit;
+                case "AssignmentExpression":
+                    return (node.operator === "=") && isConstant(node.right, inBooleanPosition);
+
+                case "SequenceExpression":
+                    return isConstant(node.expressions[node.expressions.length - 1], inBooleanPosition);
+
+                // no default
+            }
+            return false;
         }
+
+        /**
+         * Reports when the given node contains a constant condition.
+         * @param {ASTNode} node The AST node to check.
+         * @returns {void}
+         * @private
+         */
+        function checkConstantCondition(node) {
+            if (node.test && isConstant(node.test, true)) {
+                context.report(node, "Unexpected constant condition.");
+            }
+        }
+
+        //--------------------------------------------------------------------------
+        // Public
+        //--------------------------------------------------------------------------
+
+        return {
+            "ConditionalExpression": checkConstantCondition,
+            "IfStatement": checkConstantCondition,
+            "WhileStatement": checkConstantCondition,
+            "DoWhileStatement": checkConstantCondition,
+            "ForStatement": checkConstantCondition
+        };
+
     }
-
-    //--------------------------------------------------------------------------
-    // Public
-    //--------------------------------------------------------------------------
-
-    return {
-        "ConditionalExpression": checkConstantCondition,
-        "IfStatement": checkConstantCondition,
-        "WhileStatement": checkConstantCondition,
-        "DoWhileStatement": checkConstantCondition,
-        "ForStatement": checkConstantCondition
-    };
-
 };
-
-module.exports.schema = [];
 
 },{}],230:[function(require,module,exports){
 /**
@@ -50109,17 +50863,27 @@ module.exports.schema = [];
 // Rule Definition
 //------------------------------------------------------------------------------
 
-module.exports = function(context) {
+module.exports = {
+    meta: {
+        docs: {
+            description: "disallow `continue` statements",
+            category: "Stylistic Issues",
+            recommended: false
+        },
 
-    return {
-        "ContinueStatement": function(node) {
-            context.report(node, "Unexpected use of continue statement");
-        }
-    };
+        schema: []
+    },
 
+    create: function(context) {
+
+        return {
+            "ContinueStatement": function(node) {
+                context.report(node, "Unexpected use of continue statement");
+            }
+        };
+
+    }
 };
-
-module.exports.schema = [];
 
 },{}],231:[function(require,module,exports){
 /**
@@ -50133,54 +50897,64 @@ module.exports.schema = [];
 // Rule Definition
 //------------------------------------------------------------------------------
 
-module.exports = function(context) {
+module.exports = {
+    meta: {
+        docs: {
+            description: "disallow control characters in regular expressions",
+            category: "Possible Errors",
+            recommended: true
+        },
 
-    /**
-     * Get the regex expression
-     * @param {ASTNode} node node to evaluate
-     * @returns {*} Regex if found else null
-     * @private
-     */
-    function getRegExp(node) {
-        if (node.value instanceof RegExp) {
-            return node.value;
-        } else if (typeof node.value === "string") {
+        schema: []
+    },
 
-            var parent = context.getAncestors().pop();
+    create: function(context) {
 
-            if ((parent.type === "NewExpression" || parent.type === "CallExpression") &&
-                parent.callee.type === "Identifier" && parent.callee.name === "RegExp"
-            ) {
+        /**
+         * Get the regex expression
+         * @param {ASTNode} node node to evaluate
+         * @returns {*} Regex if found else null
+         * @private
+         */
+        function getRegExp(node) {
+            if (node.value instanceof RegExp) {
+                return node.value;
+            } else if (typeof node.value === "string") {
 
-                // there could be an invalid regular expression string
-                try {
-                    return new RegExp(node.value);
-                } catch (ex) {
-                    return null;
+                var parent = context.getAncestors().pop();
+
+                if ((parent.type === "NewExpression" || parent.type === "CallExpression") &&
+                    parent.callee.type === "Identifier" && parent.callee.name === "RegExp"
+                ) {
+
+                    // there could be an invalid regular expression string
+                    try {
+                        return new RegExp(node.value);
+                    } catch (ex) {
+                        return null;
+                    }
                 }
             }
+
+            return null;
         }
 
-        return null;
+        return {
+            "Literal": function(node) {
+                var computedValue,
+                    regex = getRegExp(node);
+
+                if (regex) {
+                    computedValue = regex.toString();
+                    if (/[\x00-\x1f]/.test(computedValue)) {
+                        context.report(node, "Unexpected control character in regular expression.");
+                    }
+                }
+            }
+        };
+
     }
-
-    return {
-        "Literal": function(node) {
-            var computedValue,
-                regex = getRegExp(node);
-
-            if (regex) {
-                computedValue = regex.toString();
-                if (/[\x00-\x1f]/.test(computedValue)) {
-                    context.report(node, "Unexpected control character in regular expression.");
-                }
-            }
-        }
-    };
-
 };
-
-module.exports.schema = [];
 
 },{}],232:[function(require,module,exports){
 /**
@@ -50194,17 +50968,27 @@ module.exports.schema = [];
 // Rule Definition
 //------------------------------------------------------------------------------
 
-module.exports = function(context) {
+module.exports = {
+    meta: {
+        docs: {
+            description: "disallow the use of `debugger`",
+            category: "Possible Errors",
+            recommended: true
+        },
 
-    return {
-        "DebuggerStatement": function(node) {
-            context.report(node, "Unexpected 'debugger' statement.");
-        }
-    };
+        schema: []
+    },
 
+    create: function(context) {
+
+        return {
+            "DebuggerStatement": function(node) {
+                context.report(node, "Unexpected 'debugger' statement.");
+            }
+        };
+
+    }
 };
-
-module.exports.schema = [];
 
 },{}],233:[function(require,module,exports){
 /**
@@ -50218,20 +51002,30 @@ module.exports.schema = [];
 // Rule Definition
 //------------------------------------------------------------------------------
 
-module.exports = function(context) {
+module.exports = {
+    meta: {
+        docs: {
+            description: "disallow deleting variables",
+            category: "Variables",
+            recommended: true
+        },
 
-    return {
+        schema: []
+    },
 
-        "UnaryExpression": function(node) {
-            if (node.operator === "delete" && node.argument.type === "Identifier") {
-                context.report(node, "Variables should not be deleted.");
+    create: function(context) {
+
+        return {
+
+            "UnaryExpression": function(node) {
+                if (node.operator === "delete" && node.argument.type === "Identifier") {
+                    context.report(node, "Variables should not be deleted.");
+                }
             }
-        }
-    };
+        };
 
+    }
 };
-
-module.exports.schema = [];
 
 },{}],234:[function(require,module,exports){
 /**
@@ -50245,22 +51039,32 @@ module.exports.schema = [];
 // Rule Definition
 //------------------------------------------------------------------------------
 
-module.exports = function(context) {
+module.exports = {
+    meta: {
+        docs: {
+            description: "disallow division operators explicitly at the beginning of regular expressions",
+            category: "Best Practices",
+            recommended: false
+        },
 
-    return {
+        schema: []
+    },
 
-        "Literal": function(node) {
-            var token = context.getFirstToken(node);
+    create: function(context) {
 
-            if (token.type === "RegularExpression" && token.value[1] === "=") {
-                context.report(node, "A regular expression literal can be confused with '/='.");
+        return {
+
+            "Literal": function(node) {
+                var token = context.getFirstToken(node);
+
+                if (token.type === "RegularExpression" && token.value[1] === "=") {
+                    context.report(node, "A regular expression literal can be confused with '/='.");
+                }
             }
-        }
-    };
+        };
 
+    }
 };
-
-module.exports.schema = [];
 
 },{}],235:[function(require,module,exports){
 /**
@@ -50277,67 +51081,77 @@ module.exports.schema = [];
 // Rule Definition
 //------------------------------------------------------------------------------
 
-module.exports = function(context) {
+module.exports = {
+    meta: {
+        docs: {
+            description: "disallow duplicate arguments in `function` definitions",
+            category: "Possible Errors",
+            recommended: true
+        },
 
-    //--------------------------------------------------------------------------
-    // Helpers
-    //--------------------------------------------------------------------------
+        schema: []
+    },
 
-    /**
-     * Checks whether or not a given definition is a parameter's.
-     * @param {escope.DefEntry} def - A definition to check.
-     * @returns {boolean} `true` if the definition is a parameter's.
-     */
-    function isParameter(def) {
-        return def.type === "Parameter";
-    }
+    create: function(context) {
 
-    /**
-     * Determines if a given node has duplicate parameters.
-     * @param {ASTNode} node The node to check.
-     * @returns {void}
-     * @private
-     */
-    function checkParams(node) {
-        var variables = context.getDeclaredVariables(node);
-        var keyMap = Object.create(null);
+        //--------------------------------------------------------------------------
+        // Helpers
+        //--------------------------------------------------------------------------
 
-        for (var i = 0; i < variables.length; ++i) {
-            var variable = variables[i];
+        /**
+         * Checks whether or not a given definition is a parameter's.
+         * @param {escope.DefEntry} def - A definition to check.
+         * @returns {boolean} `true` if the definition is a parameter's.
+         */
+        function isParameter(def) {
+            return def.type === "Parameter";
+        }
 
-            // TODO(nagashima): Remove this duplication check after https://github.com/estools/escope/pull/79
-            var key = "$" + variable.name; // to avoid __proto__.
+        /**
+         * Determines if a given node has duplicate parameters.
+         * @param {ASTNode} node The node to check.
+         * @returns {void}
+         * @private
+         */
+        function checkParams(node) {
+            var variables = context.getDeclaredVariables(node);
+            var keyMap = Object.create(null);
 
-            if (!isParameter(variable.defs[0]) || keyMap[key]) {
-                continue;
-            }
-            keyMap[key] = true;
+            for (var i = 0; i < variables.length; ++i) {
+                var variable = variables[i];
 
-            // Checks and reports duplications.
-            var defs = variable.defs.filter(isParameter);
+                // TODO(nagashima): Remove this duplication check after https://github.com/estools/escope/pull/79
+                var key = "$" + variable.name; // to avoid __proto__.
 
-            if (defs.length >= 2) {
-                context.report({
-                    node: node,
-                    message: "Duplicate param '{{name}}'.",
-                    data: {name: variable.name}
-                });
+                if (!isParameter(variable.defs[0]) || keyMap[key]) {
+                    continue;
+                }
+                keyMap[key] = true;
+
+                // Checks and reports duplications.
+                var defs = variable.defs.filter(isParameter);
+
+                if (defs.length >= 2) {
+                    context.report({
+                        node: node,
+                        message: "Duplicate param '{{name}}'.",
+                        data: {name: variable.name}
+                    });
+                }
             }
         }
+
+        //--------------------------------------------------------------------------
+        // Public API
+        //--------------------------------------------------------------------------
+
+        return {
+            "FunctionDeclaration": checkParams,
+            "FunctionExpression": checkParams
+        };
+
     }
-
-    //--------------------------------------------------------------------------
-    // Public API
-    //--------------------------------------------------------------------------
-
-    return {
-        "FunctionDeclaration": checkParams,
-        "FunctionExpression": checkParams
-    };
-
 };
-
-module.exports.schema = [];
 
 },{}],236:[function(require,module,exports){
 /**
@@ -50352,94 +51166,104 @@ module.exports.schema = [];
 // Rule Definition
 //------------------------------------------------------------------------------
 
-module.exports = function(context) {
-    var stack = [];
+module.exports = {
+    meta: {
+        docs: {
+            description: "disallow duplicate class members",
+            category: "ECMAScript 6",
+            recommended: true
+        },
 
-    /**
-     * Gets state of a given member name.
-     * @param {string} name - A name of a member.
-     * @param {boolean} isStatic - A flag which specifies that is a static member.
-     * @returns {object} A state of a given member name.
-     *   - retv.init {boolean} A flag which shows the name is declared as normal member.
-     *   - retv.get {boolean} A flag which shows the name is declared as getter.
-     *   - retv.set {boolean} A flag which shows the name is declared as setter.
-     */
-    function getState(name, isStatic) {
-        var stateMap = stack[stack.length - 1];
-        var key = "$" + name; // to avoid "__proto__".
+        schema: []
+    },
 
-        if (!stateMap[key]) {
-            stateMap[key] = {
-                nonStatic: {init: false, get: false, set: false},
-                static: {init: false, get: false, set: false}
-            };
+    create: function(context) {
+        var stack = [];
+
+        /**
+         * Gets state of a given member name.
+         * @param {string} name - A name of a member.
+         * @param {boolean} isStatic - A flag which specifies that is a static member.
+         * @returns {object} A state of a given member name.
+         *   - retv.init {boolean} A flag which shows the name is declared as normal member.
+         *   - retv.get {boolean} A flag which shows the name is declared as getter.
+         *   - retv.set {boolean} A flag which shows the name is declared as setter.
+         */
+        function getState(name, isStatic) {
+            var stateMap = stack[stack.length - 1];
+            var key = "$" + name; // to avoid "__proto__".
+
+            if (!stateMap[key]) {
+                stateMap[key] = {
+                    nonStatic: {init: false, get: false, set: false},
+                    static: {init: false, get: false, set: false}
+                };
+            }
+
+            return stateMap[key][isStatic ? "static" : "nonStatic"];
         }
 
-        return stateMap[key][isStatic ? "static" : "nonStatic"];
+        /**
+         * Gets the name text of a given node.
+         *
+         * @param {ASTNode} node - A node to get the name.
+         * @returns {string} The name text of the node.
+         */
+        function getName(node) {
+            switch (node.type) {
+                case "Identifier": return node.name;
+                case "Literal": return String(node.value);
+
+                /* istanbul ignore next: syntax error */
+                default: return "";
+            }
+        }
+
+        return {
+
+            // Initializes the stack of state of member declarations.
+            "Program": function() {
+                stack = [];
+            },
+
+            // Initializes state of member declarations for the class.
+            "ClassBody": function() {
+                stack.push(Object.create(null));
+            },
+
+            // Disposes the state for the class.
+            "ClassBody:exit": function() {
+                stack.pop();
+            },
+
+            // Reports the node if its name has been declared already.
+            "MethodDefinition": function(node) {
+                if (node.computed) {
+                    return;
+                }
+
+                var name = getName(node.key);
+                var state = getState(name, node.static);
+                var isDuplicate = false;
+
+                if (node.kind === "get") {
+                    isDuplicate = (state.init || state.get);
+                    state.get = true;
+                } else if (node.kind === "set") {
+                    isDuplicate = (state.init || state.set);
+                    state.set = true;
+                } else {
+                    isDuplicate = (state.init || state.get || state.set);
+                    state.init = true;
+                }
+
+                if (isDuplicate) {
+                    context.report(node, "Duplicate name '{{name}}'.", {name: name});
+                }
+            }
+        };
     }
-
-    /**
-     * Gets the name text of a given node.
-     *
-     * @param {ASTNode} node - A node to get the name.
-     * @returns {string} The name text of the node.
-     */
-    function getName(node) {
-        switch (node.type) {
-            case "Identifier": return node.name;
-            case "Literal": return String(node.value);
-
-            /* istanbul ignore next: syntax error */
-            default: return "";
-        }
-    }
-
-    return {
-
-        // Initializes the stack of state of member declarations.
-        "Program": function() {
-            stack = [];
-        },
-
-        // Initializes state of member declarations for the class.
-        "ClassBody": function() {
-            stack.push(Object.create(null));
-        },
-
-        // Disposes the state for the class.
-        "ClassBody:exit": function() {
-            stack.pop();
-        },
-
-        // Reports the node if its name has been declared already.
-        "MethodDefinition": function(node) {
-            if (node.computed) {
-                return;
-            }
-
-            var name = getName(node.key);
-            var state = getState(name, node.static);
-            var isDuplicate = false;
-
-            if (node.kind === "get") {
-                isDuplicate = (state.init || state.get);
-                state.get = true;
-            } else if (node.kind === "set") {
-                isDuplicate = (state.init || state.set);
-                state.set = true;
-            } else {
-                isDuplicate = (state.init || state.get || state.set);
-                state.init = true;
-            }
-
-            if (isDuplicate) {
-                context.report(node, "Duplicate name '{{name}}'.", {name: name});
-            }
-        }
-    };
 };
-
-module.exports.schema = [];
 
 },{}],237:[function(require,module,exports){
 /**
@@ -50455,41 +51279,51 @@ module.exports.schema = [];
 // Rule Definition
 //------------------------------------------------------------------------------
 
-module.exports = function(context) {
+module.exports = {
+    meta: {
+        docs: {
+            description: "disallow duplicate keys in object literals",
+            category: "Possible Errors",
+            recommended: true
+        },
 
-    return {
+        schema: []
+    },
 
-        "ObjectExpression": function(node) {
+    create: function(context) {
 
-            // Object that will be a map of properties--safe because we will
-            // prefix all of the keys.
-            var nodeProps = Object.create(null);
+        return {
 
-            node.properties.forEach(function(property) {
+            "ObjectExpression": function(node) {
 
-                if (property.type !== "Property") {
-                    return;
-                }
+                // Object that will be a map of properties--safe because we will
+                // prefix all of the keys.
+                var nodeProps = Object.create(null);
 
-                var keyName = property.key.name || property.key.value,
-                    key = property.kind + "-" + keyName,
-                    checkProperty = (!property.computed || property.key.type === "Literal");
+                node.properties.forEach(function(property) {
 
-                if (checkProperty) {
-                    if (nodeProps[key]) {
-                        context.report(node, property.loc.start, "Duplicate key '{{key}}'.", { key: keyName });
-                    } else {
-                        nodeProps[key] = true;
+                    if (property.type !== "Property") {
+                        return;
                     }
-                }
-            });
 
-        }
-    };
+                    var keyName = property.key.name || property.key.value,
+                        key = property.kind + "-" + keyName,
+                        checkProperty = (!property.computed || property.key.type === "Literal");
 
+                    if (checkProperty) {
+                        if (nodeProps[key]) {
+                            context.report(node, property.loc.start, "Duplicate key '{{key}}'.", { key: keyName });
+                        } else {
+                            nodeProps[key] = true;
+                        }
+                    }
+                });
+
+            }
+        };
+
+    }
 };
-
-module.exports.schema = [];
 
 },{}],238:[function(require,module,exports){
 /**
@@ -50506,26 +51340,36 @@ module.exports.schema = [];
 // Rule Definition
 //------------------------------------------------------------------------------
 
-module.exports = function(context) {
+module.exports = {
+    meta: {
+        docs: {
+            description: "disallow duplicate case labels",
+            category: "Possible Errors",
+            recommended: true
+        },
 
-    return {
-        "SwitchStatement": function(node) {
-            var mapping = {};
+        schema: []
+    },
 
-            node.cases.forEach(function(switchCase) {
-                var key = context.getSource(switchCase.test);
+    create: function(context) {
 
-                if (mapping[key]) {
-                    context.report(switchCase, "Duplicate case label.");
-                } else {
-                    mapping[key] = switchCase;
-                }
-            });
-        }
-    };
+        return {
+            "SwitchStatement": function(node) {
+                var mapping = {};
+
+                node.cases.forEach(function(switchCase) {
+                    var key = context.getSource(switchCase.test);
+
+                    if (mapping[key]) {
+                        context.report(switchCase, "Duplicate case label.");
+                    } else {
+                        mapping[key] = switchCase;
+                    }
+                });
+            }
+        };
+    }
 };
-
-module.exports.schema = [];
 
 },{}],239:[function(require,module,exports){
 /**
@@ -50628,32 +51472,42 @@ function handleExports(context, importsInFile, exportsInFile) {
     };
 }
 
-module.exports = function(context) {
-    var includeExports = (context.options[0] || {}).includeExports,
-        importsInFile = [],
-        exportsInFile = [];
+module.exports = {
+    meta: {
+        docs: {
+            description: "disallow duplicate module imports",
+            category: "ECMAScript 6",
+            recommended: false
+        },
 
-    var handlers = {
-        "ImportDeclaration": handleImports(context, includeExports, importsInFile, exportsInFile)
-    };
-
-    if (includeExports) {
-        handlers.ExportNamedDeclaration = handleExports(context, importsInFile, exportsInFile);
-        handlers.ExportAllDeclaration = handleExports(context, importsInFile, exportsInFile);
-    }
-
-    return handlers;
-};
-
-module.exports.schema = [{
-    "type": "object",
-    "properties": {
-        "includeExports": {
-            "type": "boolean"
-        }
+        schema: [{
+            "type": "object",
+            "properties": {
+                "includeExports": {
+                    "type": "boolean"
+                }
+            },
+            "additionalProperties": false
+        }]
     },
-    "additionalProperties": false
-}];
+
+    create: function(context) {
+        var includeExports = (context.options[0] || {}).includeExports,
+            importsInFile = [],
+            exportsInFile = [];
+
+        var handlers = {
+            "ImportDeclaration": handleImports(context, includeExports, importsInFile, exportsInFile)
+        };
+
+        if (includeExports) {
+            handlers.ExportNamedDeclaration = handleExports(context, importsInFile, exportsInFile);
+            handlers.ExportAllDeclaration = handleExports(context, importsInFile, exportsInFile);
+        }
+
+        return handlers;
+    }
+};
 
 },{}],240:[function(require,module,exports){
 /**
@@ -50667,143 +51521,153 @@ module.exports.schema = [{
 // Rule Definition
 //------------------------------------------------------------------------------
 
-module.exports = function(context) {
+module.exports = {
+    meta: {
+        docs: {
+            description: "disallow `else` blocks after `return` statements in `if` statements",
+            category: "Best Practices",
+            recommended: false
+        },
 
-    //--------------------------------------------------------------------------
-    // Helpers
-    //--------------------------------------------------------------------------
+        schema: []
+    },
 
-    /**
-     * Display the context report if rule is violated
-     *
-     * @param {Node} node The 'else' node
-     * @returns {void}
-     */
-    function displayReport(node) {
-        context.report(node, "Unexpected 'else' after 'return'.");
-    }
+    create: function(context) {
 
-    /**
-     * Check to see if the node is a ReturnStatement
-     *
-     * @param {Node} node The node being evaluated
-     * @returns {boolean} True if node is a return
-     */
-    function checkForReturn(node) {
-        return node.type === "ReturnStatement";
-    }
+        //--------------------------------------------------------------------------
+        // Helpers
+        //--------------------------------------------------------------------------
 
-    /**
-     * Naive return checking, does not iterate through the whole
-     * BlockStatement because we make the assumption that the ReturnStatement
-     * will be the last node in the body of the BlockStatement.
-     *
-     * @param {Node} node The consequent/alternate node
-     * @returns {boolean} True if it has a return
-     */
-    function naiveHasReturn(node) {
-        if (node.type === "BlockStatement") {
-            var body = node.body,
-                lastChildNode = body[body.length - 1];
-
-            return lastChildNode && checkForReturn(lastChildNode);
+        /**
+         * Display the context report if rule is violated
+         *
+         * @param {Node} node The 'else' node
+         * @returns {void}
+         */
+        function displayReport(node) {
+            context.report(node, "Unexpected 'else' after 'return'.");
         }
-        return checkForReturn(node);
-    }
 
-    /**
-     * Check to see if the node is valid for evaluation,
-     * meaning it has an else and not an else-if
-     *
-     * @param {Node} node The node being evaluated
-     * @returns {boolean} True if the node is valid
-     */
-    function hasElse(node) {
-        return node.alternate && node.consequent && node.alternate.type !== "IfStatement";
-    }
-
-    /**
-     * If the consequent is an IfStatement, check to see if it has an else
-     * and both its consequent and alternate path return, meaning this is
-     * a nested case of rule violation.  If-Else not considered currently.
-     *
-     * @param {Node} node The consequent node
-     * @returns {boolean} True if this is a nested rule violation
-     */
-    function checkForIf(node) {
-        return node.type === "IfStatement" && hasElse(node) &&
-            naiveHasReturn(node.alternate) && naiveHasReturn(node.consequent);
-    }
-
-    /**
-     * Check the consequent/body node to make sure it is not
-     * a ReturnStatement or an IfStatement that returns on both
-     * code paths.
-     *
-     * @param {Node} node The consequent or body node
-     * @param {Node} alternate The alternate node
-     * @returns {boolean} `true` if it is a Return/If node that always returns.
-     */
-    function checkForReturnOrIf(node) {
-        return checkForReturn(node) || checkForIf(node);
-    }
-
-
-    /**
-     * Check whether a node returns in every codepath.
-     * @param {Node} node The node to be checked
-     * @returns {boolean} `true` if it returns on every codepath.
-     */
-    function alwaysReturns(node) {
-        if (node.type === "BlockStatement") {
-
-            // If we have a BlockStatement, check each consequent body node.
-            return node.body.some(checkForReturnOrIf);
-        } else {
-
-            /*
-             * If not a block statement, make sure the consequent isn't a
-             * ReturnStatement or an IfStatement with returns on both paths.
-             */
-            return checkForReturnOrIf(node);
+        /**
+         * Check to see if the node is a ReturnStatement
+         *
+         * @param {Node} node The node being evaluated
+         * @returns {boolean} True if node is a return
+         */
+        function checkForReturn(node) {
+            return node.type === "ReturnStatement";
         }
-    }
 
-    //--------------------------------------------------------------------------
-    // Public API
-    //--------------------------------------------------------------------------
+        /**
+         * Naive return checking, does not iterate through the whole
+         * BlockStatement because we make the assumption that the ReturnStatement
+         * will be the last node in the body of the BlockStatement.
+         *
+         * @param {Node} node The consequent/alternate node
+         * @returns {boolean} True if it has a return
+         */
+        function naiveHasReturn(node) {
+            if (node.type === "BlockStatement") {
+                var body = node.body,
+                    lastChildNode = body[body.length - 1];
 
-    return {
-
-        "IfStatement": function(node) {
-            var parent = context.getAncestors().pop(),
-                consequents,
-                alternate;
-
-            // Only "top-level" if statements are checked, meaning the first `if`
-            // in a `if-else-if-...` chain.
-            if (parent.type === "IfStatement" && parent.alternate === node) {
-                return;
+                return lastChildNode && checkForReturn(lastChildNode);
             }
+            return checkForReturn(node);
+        }
 
-            for (consequents = []; node.type === "IfStatement"; node = node.alternate) {
-                if (!node.alternate) {
+        /**
+         * Check to see if the node is valid for evaluation,
+         * meaning it has an else and not an else-if
+         *
+         * @param {Node} node The node being evaluated
+         * @returns {boolean} True if the node is valid
+         */
+        function hasElse(node) {
+            return node.alternate && node.consequent && node.alternate.type !== "IfStatement";
+        }
+
+        /**
+         * If the consequent is an IfStatement, check to see if it has an else
+         * and both its consequent and alternate path return, meaning this is
+         * a nested case of rule violation.  If-Else not considered currently.
+         *
+         * @param {Node} node The consequent node
+         * @returns {boolean} True if this is a nested rule violation
+         */
+        function checkForIf(node) {
+            return node.type === "IfStatement" && hasElse(node) &&
+                naiveHasReturn(node.alternate) && naiveHasReturn(node.consequent);
+        }
+
+        /**
+         * Check the consequent/body node to make sure it is not
+         * a ReturnStatement or an IfStatement that returns on both
+         * code paths.
+         *
+         * @param {Node} node The consequent or body node
+         * @param {Node} alternate The alternate node
+         * @returns {boolean} `true` if it is a Return/If node that always returns.
+         */
+        function checkForReturnOrIf(node) {
+            return checkForReturn(node) || checkForIf(node);
+        }
+
+
+        /**
+         * Check whether a node returns in every codepath.
+         * @param {Node} node The node to be checked
+         * @returns {boolean} `true` if it returns on every codepath.
+         */
+        function alwaysReturns(node) {
+            if (node.type === "BlockStatement") {
+
+                // If we have a BlockStatement, check each consequent body node.
+                return node.body.some(checkForReturnOrIf);
+            } else {
+
+                /*
+                 * If not a block statement, make sure the consequent isn't a
+                 * ReturnStatement or an IfStatement with returns on both paths.
+                 */
+                return checkForReturnOrIf(node);
+            }
+        }
+
+        //--------------------------------------------------------------------------
+        // Public API
+        //--------------------------------------------------------------------------
+
+        return {
+
+            "IfStatement": function(node) {
+                var parent = context.getAncestors().pop(),
+                    consequents,
+                    alternate;
+
+                // Only "top-level" if statements are checked, meaning the first `if`
+                // in a `if-else-if-...` chain.
+                if (parent.type === "IfStatement" && parent.alternate === node) {
                     return;
                 }
-                consequents.push(node.consequent);
-                alternate = node.alternate;
+
+                for (consequents = []; node.type === "IfStatement"; node = node.alternate) {
+                    if (!node.alternate) {
+                        return;
+                    }
+                    consequents.push(node.consequent);
+                    alternate = node.alternate;
+                }
+
+                if (consequents.every(alwaysReturns)) {
+                    displayReport(alternate);
+                }
             }
 
-            if (consequents.every(alwaysReturns)) {
-                displayReport(alternate);
-            }
-        }
+        };
 
-    };
-
+    }
 };
-
-module.exports.schema = [];
 
 },{}],241:[function(require,module,exports){
 /**
@@ -50835,23 +51699,33 @@ var regex = /^\/([^\\[]|\\.|\[([^\\\]]|\\.)+\])*\/[gimuy]*$/;
 // Rule Definition
 //------------------------------------------------------------------------------
 
-module.exports = function(context) {
+module.exports = {
+    meta: {
+        docs: {
+            description: "disallow empty character classes in regular expressions",
+            category: "Possible Errors",
+            recommended: true
+        },
 
-    return {
+        schema: []
+    },
 
-        "Literal": function(node) {
-            var token = context.getFirstToken(node);
+    create: function(context) {
 
-            if (token.type === "RegularExpression" && !regex.test(token.value)) {
-                context.report(node, "Empty class.");
+        return {
+
+            "Literal": function(node) {
+                var token = context.getFirstToken(node);
+
+                if (token.type === "RegularExpression" && !regex.test(token.value)) {
+                    context.report(node, "Empty class.");
+                }
             }
-        }
 
-    };
+        };
 
+    }
 };
-
-module.exports.schema = [];
 
 },{}],242:[function(require,module,exports){
 /**
@@ -50952,58 +51826,68 @@ function getKind(node) {
 // Rule Definition
 //------------------------------------------------------------------------------
 
-module.exports = function(context) {
-    var options = context.options[0] || {};
-    var allowed = options.allow || [];
-
-    /**
-     * Reports a given function node if the node matches the following patterns.
-     *
-     * - Not allowed by options.
-     * - The body is empty.
-     * - The body doesn't have any comments.
-     *
-     * @param {ASTNode} node - A function node to report. This is one of
-     *      an ArrowFunctionExpression, a FunctionDeclaration, or a
-     *      FunctionExpression.
-     * @returns {void}
-     */
-    function reportIfEmpty(node) {
-        var kind = getKind(node);
-
-        if (allowed.indexOf(kind) === -1 &&
-            node.body.type === "BlockStatement" &&
-            node.body.body.length === 0 &&
-            context.getComments(node.body).trailing.length === 0
-        ) {
-            context.report({
-                node: node,
-                loc: node.body.loc.start,
-                message: "Unexpected empty " + SHOW_KIND[kind] + "."
-            });
-        }
-    }
-
-    return {
-        ArrowFunctionExpression: reportIfEmpty,
-        FunctionDeclaration: reportIfEmpty,
-        FunctionExpression: reportIfEmpty
-    };
-};
-
-module.exports.schema = [
-    {
-        type: "object",
-        properties: {
-            allow: {
-                type: "array",
-                items: {enum: ALLOW_OPTIONS},
-                uniqueItems: true
-            }
+module.exports = {
+    meta: {
+        docs: {
+            description: "disallow empty functions",
+            category: "Best Practices",
+            recommended: false
         },
-        additionalProperties: false
+
+        schema: [
+            {
+                type: "object",
+                properties: {
+                    allow: {
+                        type: "array",
+                        items: {enum: ALLOW_OPTIONS},
+                        uniqueItems: true
+                    }
+                },
+                additionalProperties: false
+            }
+        ]
+    },
+
+    create: function(context) {
+        var options = context.options[0] || {};
+        var allowed = options.allow || [];
+
+        /**
+         * Reports a given function node if the node matches the following patterns.
+         *
+         * - Not allowed by options.
+         * - The body is empty.
+         * - The body doesn't have any comments.
+         *
+         * @param {ASTNode} node - A function node to report. This is one of
+         *      an ArrowFunctionExpression, a FunctionDeclaration, or a
+         *      FunctionExpression.
+         * @returns {void}
+         */
+        function reportIfEmpty(node) {
+            var kind = getKind(node);
+
+            if (allowed.indexOf(kind) === -1 &&
+                node.body.type === "BlockStatement" &&
+                node.body.body.length === 0 &&
+                context.getComments(node.body).trailing.length === 0
+            ) {
+                context.report({
+                    node: node,
+                    loc: node.body.loc.start,
+                    message: "Unexpected empty " + SHOW_KIND[kind] + "."
+                });
+            }
+        }
+
+        return {
+            ArrowFunctionExpression: reportIfEmpty,
+            FunctionDeclaration: reportIfEmpty,
+            FunctionExpression: reportIfEmpty
+        };
     }
-];
+};
 
 },{}],243:[function(require,module,exports){
 /**
@@ -51018,22 +51902,32 @@ module.exports.schema = [
 // Rule Definition
 //------------------------------------------------------------------------------
 
-module.exports = function(context) {
-    return {
-        "ObjectPattern": function(node) {
-            if (node.properties.length === 0) {
-                context.report(node, "Unexpected empty object pattern.");
-            }
+module.exports = {
+    meta: {
+        docs: {
+            description: "disallow empty destructuring patterns",
+            category: "Best Practices",
+            recommended: true
         },
-        "ArrayPattern": function(node) {
-            if (node.elements.length === 0) {
-                context.report(node, "Unexpected empty array pattern.");
-            }
-        }
-    };
-};
 
-module.exports.schema = [];
+        schema: []
+    },
+
+    create: function(context) {
+        return {
+            "ObjectPattern": function(node) {
+                if (node.properties.length === 0) {
+                    context.report(node, "Unexpected empty object pattern.");
+                }
+            },
+            "ArrayPattern": function(node) {
+                if (node.elements.length === 0) {
+                    context.report(node, "Unexpected empty array pattern.");
+                }
+            }
+        };
+    }
+};
 
 },{}],244:[function(require,module,exports){
 /**
@@ -51050,39 +51944,66 @@ module.exports.schema = [];
 
 var FUNCTION_TYPE = /^(?:ArrowFunctionExpression|Function(?:Declaration|Expression))$/;
 
-module.exports = function(context) {
-    return {
-        "BlockStatement": function(node) {
-
-            // if the body is not empty, we can just return immediately
-            if (node.body.length !== 0) {
-                return;
-            }
-
-            // a function is generally allowed to be empty
-            if (FUNCTION_TYPE.test(node.parent.type)) {
-                return;
-            }
-
-            // any other block is only allowed to be empty, if it contains a comment
-            if (context.getComments(node).trailing.length > 0) {
-                return;
-            }
-
-            context.report(node, "Empty block statement.");
+module.exports = {
+    meta: {
+        docs: {
+            description: "disallow empty block statements",
+            category: "Possible Errors",
+            recommended: true
         },
 
-        "SwitchStatement": function(node) {
-
-            if (typeof node.cases === "undefined" || node.cases.length === 0) {
-                context.report(node, "Empty switch statement.");
+        schema: [
+            {
+                "type": "object",
+                "properties": {
+                    "allowEmptyCatch": {
+                        "type": "boolean"
+                    }
+                },
+                "additionalProperties": false
             }
-        }
-    };
+        ]
+    },
 
+    create: function(context) {
+        var options = context.options[0] || {},
+            allowEmptyCatch = options.allowEmptyCatch || false;
+
+        return {
+            "BlockStatement": function(node) {
+
+                // if the body is not empty, we can just return immediately
+                if (node.body.length !== 0) {
+                    return;
+                }
+
+                // a function is generally allowed to be empty
+                if (FUNCTION_TYPE.test(node.parent.type)) {
+                    return;
+                }
+
+                if (allowEmptyCatch && node.parent.type === "CatchClause") {
+                    return;
+                }
+
+                // any other block is only allowed to be empty, if it contains a comment
+                if (context.getComments(node).trailing.length > 0) {
+                    return;
+                }
+
+                context.report(node, "Empty block statement.");
+            },
+
+            "SwitchStatement": function(node) {
+
+                if (typeof node.cases === "undefined" || node.cases.length === 0) {
+                    context.report(node, "Empty switch statement.");
+                }
+            }
+        };
+
+    }
 };
-
-module.exports.schema = [];
 
 },{}],245:[function(require,module,exports){
 /**
@@ -51097,23 +52018,33 @@ module.exports.schema = [];
 // Rule Definition
 //------------------------------------------------------------------------------
 
-module.exports = function(context) {
+module.exports = {
+    meta: {
+        docs: {
+            description: "disallow `null` comparisons without type-checking operators",
+            category: "Best Practices",
+            recommended: false
+        },
 
-    return {
+        schema: []
+    },
 
-        "BinaryExpression": function(node) {
-            var badOperator = node.operator === "==" || node.operator === "!=";
+    create: function(context) {
 
-            if (node.right.type === "Literal" && node.right.raw === "null" && badOperator ||
-                    node.left.type === "Literal" && node.left.raw === "null" && badOperator) {
-                context.report(node, "Use ‘===’ to compare with ‘null’.");
+        return {
+
+            "BinaryExpression": function(node) {
+                var badOperator = node.operator === "==" || node.operator === "!=";
+
+                if (node.right.type === "Literal" && node.right.raw === "null" && badOperator ||
+                        node.left.type === "Literal" && node.left.raw === "null" && badOperator) {
+                    context.report(node, "Use ‘===’ to compare with ‘null’.");
+                }
             }
-        }
-    };
+        };
 
+    }
 };
-
-module.exports.schema = [];
 
 },{}],246:[function(require,module,exports){
 /**
@@ -51195,140 +52126,170 @@ function isMember(node, name) {
 // Rule Definition
 //------------------------------------------------------------------------------
 
-module.exports = function(context) {
-    var allowIndirect = Boolean(
-        context.options[0] &&
-        context.options[0].allowIndirect
-    );
-    var sourceCode = context.getSourceCode();
-    var funcInfo = null;
+module.exports = {
+    meta: {
+        docs: {
+            description: "disallow the use of `eval()`",
+            category: "Best Practices",
+            recommended: false
+        },
 
-    /**
-     * Pushs a variable scope (Program or Function) information to the stack.
-     *
-     * This is used in order to check whether or not `this` binding is a
-     * reference to the global object.
-     *
-     * @param {ASTNode} node - A node of the scope. This is one of Program,
-     *      FunctionDeclaration, FunctionExpression, and ArrowFunctionExpression.
-     * @returns {void}
-     */
-    function enterVarScope(node) {
-        var strict = context.getScope().isStrict;
+        schema: [
+            {
+                "type": "object",
+                "properties": {
+                    "allowIndirect": {"type": "boolean"}
+                },
+                "additionalProperties": false
+            }
+        ]
+    },
 
-        funcInfo = {
-            upper: funcInfo,
-            node: node,
-            strict: strict,
-            defaultThis: false,
-            initialized: strict
-        };
-    }
+    create: function(context) {
+        var allowIndirect = Boolean(
+            context.options[0] &&
+            context.options[0].allowIndirect
+        );
+        var sourceCode = context.getSourceCode();
+        var funcInfo = null;
 
-    /**
-     * Pops a variable scope from the stack.
-     *
-     * @returns {void}
-     */
-    function exitVarScope() {
-        funcInfo = funcInfo.upper;
-    }
+        /**
+         * Pushs a variable scope (Program or Function) information to the stack.
+         *
+         * This is used in order to check whether or not `this` binding is a
+         * reference to the global object.
+         *
+         * @param {ASTNode} node - A node of the scope. This is one of Program,
+         *      FunctionDeclaration, FunctionExpression, and ArrowFunctionExpression.
+         * @returns {void}
+         */
+        function enterVarScope(node) {
+            var strict = context.getScope().isStrict;
 
-    /**
-     * Reports a given node.
-     *
-     * `node` is `Identifier` or `MemberExpression`.
-     * The parent of `node` might be `CallExpression`.
-     *
-     * The location of the report is always `eval` `Identifier` (or possibly
-     * `Literal`). The type of the report is `CallExpression` if the parent is
-     * `CallExpression`. Otherwise, it's the given node type.
-     *
-     * @param {ASTNode} node - A node to report.
-     * @returns {void}
-     */
-    function report(node) {
-        var locationNode = node;
-        var parent = node.parent;
-
-        if (node.type === "MemberExpression") {
-            locationNode = node.property;
-        }
-        if (parent.type === "CallExpression" && parent.callee === node) {
-            node = parent;
+            funcInfo = {
+                upper: funcInfo,
+                node: node,
+                strict: strict,
+                defaultThis: false,
+                initialized: strict
+            };
         }
 
-        context.report({
-            node: node,
-            loc: locationNode.loc.start,
-            message: "eval can be harmful."
-        });
-    }
+        /**
+         * Pops a variable scope from the stack.
+         *
+         * @returns {void}
+         */
+        function exitVarScope() {
+            funcInfo = funcInfo.upper;
+        }
 
-    /**
-     * Reports accesses of `eval` via the global object.
-     *
-     * @param {escope.Scope} globalScope - The global scope.
-     * @returns {void}
-     */
-    function reportAccessingEvalViaGlobalObject(globalScope) {
-        for (var i = 0; i < candidatesOfGlobalObject.length; ++i) {
-            var name = candidatesOfGlobalObject[i];
-            var variable = astUtils.getVariableByName(globalScope, name);
+        /**
+         * Reports a given node.
+         *
+         * `node` is `Identifier` or `MemberExpression`.
+         * The parent of `node` might be `CallExpression`.
+         *
+         * The location of the report is always `eval` `Identifier` (or possibly
+         * `Literal`). The type of the report is `CallExpression` if the parent is
+         * `CallExpression`. Otherwise, it's the given node type.
+         *
+         * @param {ASTNode} node - A node to report.
+         * @returns {void}
+         */
+        function report(node) {
+            var locationNode = node;
+            var parent = node.parent;
+
+            if (node.type === "MemberExpression") {
+                locationNode = node.property;
+            }
+            if (parent.type === "CallExpression" && parent.callee === node) {
+                node = parent;
+            }
+
+            context.report({
+                node: node,
+                loc: locationNode.loc.start,
+                message: "eval can be harmful."
+            });
+        }
+
+        /**
+         * Reports accesses of `eval` via the global object.
+         *
+         * @param {escope.Scope} globalScope - The global scope.
+         * @returns {void}
+         */
+        function reportAccessingEvalViaGlobalObject(globalScope) {
+            for (var i = 0; i < candidatesOfGlobalObject.length; ++i) {
+                var name = candidatesOfGlobalObject[i];
+                var variable = astUtils.getVariableByName(globalScope, name);
+
+                if (!variable) {
+                    continue;
+                }
+
+                var references = variable.references;
+
+                for (var j = 0; j < references.length; ++j) {
+                    var identifier = references[j].identifier;
+                    var node = identifier.parent;
+
+                    // To detect code like `window.window.eval`.
+                    while (isMember(node, name)) {
+                        node = node.parent;
+                    }
+
+                    // Reports.
+                    if (isMember(node, "eval")) {
+                        report(node);
+                    }
+                }
+            }
+        }
+
+        /**
+         * Reports all accesses of `eval` (excludes direct calls to eval).
+         *
+         * @param {escope.Scope} globalScope - The global scope.
+         * @returns {void}
+         */
+        function reportAccessingEval(globalScope) {
+            var variable = astUtils.getVariableByName(globalScope, "eval");
 
             if (!variable) {
-                continue;
+                return;
             }
 
             var references = variable.references;
 
-            for (var j = 0; j < references.length; ++j) {
-                var identifier = references[j].identifier;
-                var node = identifier.parent;
+            for (var i = 0; i < references.length; ++i) {
+                var reference = references[i];
+                var id = reference.identifier;
 
-                // To detect code like `window.window.eval`.
-                while (isMember(node, name)) {
-                    node = node.parent;
-                }
+                if (id.name === "eval" && !astUtils.isCallee(id)) {
 
-                // Reports.
-                if (isMember(node, "eval")) {
-                    report(node);
+                    // Is accessing to eval (excludes direct calls to eval)
+                    report(id);
                 }
             }
         }
-    }
 
-    /**
-     * Reports all accesses of `eval` (excludes direct calls to eval).
-     *
-     * @param {escope.Scope} globalScope - The global scope.
-     * @returns {void}
-     */
-    function reportAccessingEval(globalScope) {
-        var variable = astUtils.getVariableByName(globalScope, "eval");
+        if (allowIndirect) {
 
-        if (!variable) {
-            return;
+            // Checks only direct calls to eval. It's simple!
+            return {
+                "CallExpression:exit": function(node) {
+                    var callee = node.callee;
+
+                    if (isIdentifier(callee, "eval")) {
+                        report(callee);
+                    }
+                }
+            };
         }
 
-        var references = variable.references;
-
-        for (var i = 0; i < references.length; ++i) {
-            var reference = references[i];
-            var id = reference.identifier;
-
-            if (id.name === "eval" && !astUtils.isCallee(id)) {
-
-                // Is accessing to eval (excludes direct calls to eval)
-                report(id);
-            }
-        }
-    }
-
-    if (allowIndirect) {
-
-        // Checks only direct calls to eval. It's simple!
         return {
             "CallExpression:exit": function(node) {
                 var callee = node.callee;
@@ -51336,87 +52297,67 @@ module.exports = function(context) {
                 if (isIdentifier(callee, "eval")) {
                     report(callee);
                 }
+            },
+
+            "Program": function(node) {
+                var scope = context.getScope(),
+                    features = context.parserOptions.ecmaFeatures || {},
+                    strict =
+                        scope.isStrict ||
+                        node.sourceType === "module" ||
+                        (features.globalReturn && scope.childScopes[0].isStrict);
+
+                funcInfo = {
+                    upper: null,
+                    node: node,
+                    strict: strict,
+                    defaultThis: true,
+                    initialized: true
+                };
+            },
+
+            "Program:exit": function() {
+                var globalScope = context.getScope();
+
+                exitVarScope();
+                reportAccessingEval(globalScope);
+                reportAccessingEvalViaGlobalObject(globalScope);
+            },
+
+            "FunctionDeclaration": enterVarScope,
+            "FunctionDeclaration:exit": exitVarScope,
+            "FunctionExpression": enterVarScope,
+            "FunctionExpression:exit": exitVarScope,
+            "ArrowFunctionExpression": enterVarScope,
+            "ArrowFunctionExpression:exit": exitVarScope,
+
+            "ThisExpression": function(node) {
+                if (!isMember(node.parent, "eval")) {
+                    return;
+                }
+
+                /*
+                 * `this.eval` is found.
+                 * Checks whether or not the value of `this` is the global object.
+                 */
+                if (!funcInfo.initialized) {
+                    funcInfo.initialized = true;
+                    funcInfo.defaultThis = astUtils.isDefaultThisBinding(
+                        funcInfo.node,
+                        sourceCode
+                    );
+                }
+
+                if (!funcInfo.strict && funcInfo.defaultThis) {
+
+                    // `this.eval` is possible built-in `eval`.
+                    report(node.parent);
+                }
             }
         };
+
     }
-
-    return {
-        "CallExpression:exit": function(node) {
-            var callee = node.callee;
-
-            if (isIdentifier(callee, "eval")) {
-                report(callee);
-            }
-        },
-
-        "Program": function(node) {
-            var scope = context.getScope(),
-                features = context.parserOptions.ecmaFeatures || {},
-                strict =
-                    scope.isStrict ||
-                    node.sourceType === "module" ||
-                    (features.globalReturn && scope.childScopes[0].isStrict);
-
-            funcInfo = {
-                upper: null,
-                node: node,
-                strict: strict,
-                defaultThis: true,
-                initialized: true
-            };
-        },
-
-        "Program:exit": function() {
-            var globalScope = context.getScope();
-
-            exitVarScope();
-            reportAccessingEval(globalScope);
-            reportAccessingEvalViaGlobalObject(globalScope);
-        },
-
-        "FunctionDeclaration": enterVarScope,
-        "FunctionDeclaration:exit": exitVarScope,
-        "FunctionExpression": enterVarScope,
-        "FunctionExpression:exit": exitVarScope,
-        "ArrowFunctionExpression": enterVarScope,
-        "ArrowFunctionExpression:exit": exitVarScope,
-
-        "ThisExpression": function(node) {
-            if (!isMember(node.parent, "eval")) {
-                return;
-            }
-
-            /*
-             * `this.eval` is found.
-             * Checks whether or not the value of `this` is the global object.
-             */
-            if (!funcInfo.initialized) {
-                funcInfo.initialized = true;
-                funcInfo.defaultThis = astUtils.isDefaultThisBinding(
-                    funcInfo.node,
-                    sourceCode
-                );
-            }
-
-            if (!funcInfo.strict && funcInfo.defaultThis) {
-
-                // `this.eval` is possible built-in `eval`.
-                report(node.parent);
-            }
-        }
-    };
-
 };
-
-module.exports.schema = [
-    {
-        "type": "object",
-        "properties": {
-            "allowIndirect": {"type": "boolean"}
-        },
-        "additionalProperties": false
-    }
-];
 
 },{"../ast-utils":151}],247:[function(require,module,exports){
 /**
@@ -51432,30 +52373,40 @@ var astUtils = require("../ast-utils");
 // Rule Definition
 //------------------------------------------------------------------------------
 
-module.exports = function(context) {
+module.exports = {
+    meta: {
+        docs: {
+            description: "disallow reassigning exceptions in `catch` clauses",
+            category: "Possible Errors",
+            recommended: true
+        },
 
-    /**
-     * Finds and reports references that are non initializer and writable.
-     * @param {Variable} variable - A variable to check.
-     * @returns {void}
-     */
-    function checkVariable(variable) {
-        astUtils.getModifyingReferences(variable.references).forEach(function(reference) {
-            context.report(
-                reference.identifier,
-                "Do not assign to the exception parameter.");
-        });
-    }
+        schema: []
+    },
 
-    return {
-        "CatchClause": function(node) {
-            context.getDeclaredVariables(node).forEach(checkVariable);
+    create: function(context) {
+
+        /**
+         * Finds and reports references that are non initializer and writable.
+         * @param {Variable} variable - A variable to check.
+         * @returns {void}
+         */
+        function checkVariable(variable) {
+            astUtils.getModifyingReferences(variable.references).forEach(function(reference) {
+                context.report(
+                    reference.identifier,
+                    "Do not assign to the exception parameter.");
+            });
         }
-    };
 
+        return {
+            "CatchClause": function(node) {
+                context.getDeclaredVariables(node).forEach(checkVariable);
+            }
+        };
+
+    }
 };
-
-module.exports.schema = [];
 
 },{"../ast-utils":151}],248:[function(require,module,exports){
 /**
@@ -51946,6 +52897,7 @@ module.exports = function(context) {
     var isParenthesised = astUtils.isParenthesised.bind(astUtils, context);
     var ALL_NODES = context.options[0] !== "functions";
     var EXCEPT_COND_ASSIGN = ALL_NODES && context.options[1] && context.options[1].conditionalAssign === false;
+    var NESTED_BINARY = ALL_NODES && context.options[1] && context.options[1].nestedBinaryExpressions === false;
     var sourceCode = context.getSourceCode();
 
     /**
@@ -52235,13 +53187,15 @@ module.exports = function(context) {
      * @private
      */
     function dryBinaryLogical(node) {
-        var prec = precedence(node);
+        if (!NESTED_BINARY) {
+            var prec = precedence(node);
 
-        if (hasExcessParens(node.left) && precedence(node.left) >= prec) {
-            report(node.left);
-        }
-        if (hasExcessParens(node.right) && precedence(node.right) > prec) {
-            report(node.right);
+            if (hasExcessParens(node.left) && precedence(node.left) >= prec) {
+                report(node.left);
+            }
+            if (hasExcessParens(node.right) && precedence(node.right) > prec) {
+                report(node.right);
+            }
         }
     }
 
@@ -52256,7 +53210,7 @@ module.exports = function(context) {
 
         "ArrowFunctionExpression": function(node) {
             if (node.body.type !== "BlockStatement") {
-                if (node.body.type !== "ObjectExpression" && hasExcessParens(node.body) && precedence(node.body) >= precedence({type: "AssignmentExpression"})) {
+                if (sourceCode.getFirstToken(node.body).value !== "{" && hasExcessParens(node.body) && precedence(node.body) >= precedence({type: "AssignmentExpression"})) {
                     report(node.body);
                     return;
                 }
@@ -52498,7 +53452,8 @@ module.exports.schema = {
                 {
                     "type": "object",
                     "properties": {
-                        "conditionalAssign": {"type": "boolean"}
+                        "conditionalAssign": {"type": "boolean"},
+                        "nestedBinaryExpressions": {"type": "boolean"}
                     },
                     "additionalProperties": false
                 }
@@ -52612,19 +53567,20 @@ var lodash = require("lodash");
 // Helpers
 //------------------------------------------------------------------------------
 
-var FALLTHROUGH_COMMENT = /falls?\s?through/i;
+var DEFAULT_FALLTHROUGH_COMMENT = /falls?\s?through/i;
 
 /**
  * Checks whether or not a given node has a fallthrough comment.
  * @param {ASTNode} node - A SwitchCase node to get comments.
  * @param {RuleContext} context - A rule context which stores comments.
- * @returns {boolean} `true` if the node has a fallthrough comment.
+ * @param {RegExp} fallthroughCommentPattern - A pattern to match comment to.
+ * @returns {boolean} `true` if the node has a valid fallthrough comment.
  */
-function hasFallthroughComment(node, context) {
+function hasFallthroughComment(node, context, fallthroughCommentPattern) {
     var sourceCode = context.getSourceCode();
     var comment = lodash.last(sourceCode.getComments(node).leading);
 
-    return Boolean(comment && FALLTHROUGH_COMMENT.test(comment.value));
+    return Boolean(comment && fallthroughCommentPattern.test(comment.value));
 }
 
 /**
@@ -52636,18 +53592,37 @@ function isReachable(segment) {
     return segment.reachable;
 }
 
+/**
+ * Checks whether a node and a token are separated by blank lines
+ * @param {ASTNode} node - The node to check
+ * @param {Token} token - The token to compare against
+ * @returns {boolean} `true` if there are blank lines between node and token
+ */
+function hasBlankLinesBetween(node, token) {
+    return token.loc.start.line > node.loc.end.line + 1;
+}
+
 //------------------------------------------------------------------------------
 // Rule Definition
 //------------------------------------------------------------------------------
 
 module.exports = function(context) {
+    var options = context.options[0] || {};
     var currentCodePath = null;
+    var sourceCode = context.getSourceCode();
 
     /*
      * We need to use leading comments of the next SwitchCase node because
      * trailing comments is wrong if semicolons are omitted.
      */
     var fallthroughCase = null;
+    var fallthroughCommentPattern = null;
+
+    if (options.commentPattern) {
+        fallthroughCommentPattern = new RegExp(options.commentPattern);
+    } else {
+        fallthroughCommentPattern = DEFAULT_FALLTHROUGH_COMMENT;
+    }
 
     return {
         "onCodePathStart": function(codePath) {
@@ -52663,7 +53638,7 @@ module.exports = function(context) {
              * Checks whether or not there is a fallthrough comment.
              * And reports the previous fallthrough node if that does not exist.
              */
-            if (fallthroughCase && !hasFallthroughComment(node, context)) {
+            if (fallthroughCase && !hasFallthroughComment(node, context, fallthroughCommentPattern)) {
                 context.report({
                     message: "Expected a 'break' statement before '{{type}}'.",
                     data: {type: node.test ? "case" : "default"},
@@ -52674,6 +53649,7 @@ module.exports = function(context) {
         },
 
         "SwitchCase:exit": function(node) {
+            var nextToken = sourceCode.getTokenAfter(node);
 
             /*
              * `reachable` meant fall through because statements preceded by
@@ -52681,16 +53657,25 @@ module.exports = function(context) {
              * And allows empty cases and the last case.
              */
             if (currentCodePath.currentSegments.some(isReachable) &&
-                node.consequent.length > 0 &&
-                lodash.last(node.parent.cases) !== node
-            ) {
+                (node.consequent.length > 0 || hasBlankLinesBetween(node, nextToken)) &&
+                lodash.last(node.parent.cases) !== node) {
                 fallthroughCase = node;
             }
         }
     };
 };
 
-module.exports.schema = [];
+module.exports.schema = [
+    {
+        "type": "object",
+        "properties": {
+            "commentPattern": {
+                "type": "string"
+            }
+        },
+        "additionalProperties": false
+    }
+];
 
 },{"lodash":150}],255:[function(require,module,exports){
 /**
@@ -54460,7 +55445,8 @@ module.exports = function(context) {
                         message: "Number constants declarations must use 'const'"
                     });
                 }
-            } else if (okTypes.indexOf(parent.type) === -1) {
+            } else if (okTypes.indexOf(parent.type) === -1 ||
+                (parent.type === "AssignmentExpression" && parent.operator !== "=")) {
                 context.report({
                     node: node,
                     message: "No magic number: " + raw
@@ -57525,6 +58511,7 @@ module.exports.schema = [];
 //------------------------------------------------------------------------------
 
 module.exports = function(context) {
+    var sourceCode = context.getSourceCode();
 
     var BLANK_CLASS = "[ \t\u00a0\u2000-\u200b\u2028\u2029\u3000]",
         SKIP_BLANK = "^" + BLANK_CLASS + "*$",
@@ -57570,15 +58557,17 @@ module.exports = function(context) {
             // Let's hack. Since Espree does not return whitespace nodes,
             // fetch the source code and do matching via regexps.
 
-            var src = context.getSource(),
-                re = new RegExp(NONBLANK),
+            var re = new RegExp(NONBLANK),
                 skipMatch = new RegExp(SKIP_BLANK),
                 matches,
-                lines = src.split(/\r?\n/),
-                linebreaks = context.getSource().match(/\r\n|\r|\n|\u2028|\u2029/g),
+                lines = sourceCode.lines,
+                linebreaks = sourceCode.getText().match(/\r\n|\r|\n|\u2028|\u2029/g),
                 location,
                 totalLength = 0,
-                fixRange = [];
+                rangeStart,
+                rangeEnd,
+                fixRange = [],
+                containingNode;
 
             for (var i = 0, ii = lines.length; i < ii; i++) {
                 matches = re.exec(lines[i]);
@@ -57590,19 +58579,29 @@ module.exports = function(context) {
                 var lineLength = lines[i].length + linebreakLength;
 
                 if (matches) {
+                    location = {
+                        line: i + 1,
+                        column: matches.index
+                    };
+
+                    rangeStart = totalLength + location.column;
+                    rangeEnd = totalLength + lineLength - linebreakLength;
+                    containingNode = sourceCode.getNodeByRangeIndex(rangeStart);
+
+                    if (containingNode && containingNode.type === "TemplateElement" &&
+                      rangeStart > containingNode.parent.range[0] &&
+                      rangeEnd < containingNode.parent.range[1]) {
+                        totalLength += lineLength;
+                        continue;
+                    }
 
                     // If the line has only whitespace, and skipBlankLines
                     // is true, don't report it
                     if (skipBlankLines && skipMatch.test(lines[i])) {
                         continue;
                     }
-                    location = {
-                        line: i + 1,
-                        column: matches.index
-                    };
 
-                    fixRange = [totalLength + location.column, totalLength + lineLength - linebreakLength];
-
+                    fixRange = [rangeStart, rangeEnd];
                     report(node, location, fixRange);
                 }
 
@@ -59695,17 +60694,24 @@ module.exports = function(context) {
      * Checks if the escape character in given slice is unnecessary.
      *
      * @private
-     * @param {string} elm - string slice to validate.
+     * @param {string[]} escapes - list of valid escapes
      * @param {ASTNode} node - node to validate.
+     * @param {string} elm - string slice to validate.
      * @returns {void}
-     * @this escapes_quote_node
      */
-    function validate(elm) {
-        var escapeNotFound = this.escapes.indexOf(elm[1]) === -1;
-        var isQuoteEscape = elm[1] === this.node.raw[0];
+    function validate(escapes, node, elm) {
+        var escapeNotFound = escapes.indexOf(elm[0][1]) === -1;
+        var isQuoteEscape = elm[0][1] === node.raw[0];
 
         if (escapeNotFound && !isQuoteEscape) {
-            context.report(this.node, "Unnecessary escape character: " + elm);
+            context.report({
+                node: node,
+                loc: {
+                    line: node.loc.start.line,
+                    column: node.loc.start.column + elm.index
+                },
+                message: "Unnecessary escape character: " + elm[0]
+            });
         }
     }
 
@@ -59716,7 +60722,8 @@ module.exports = function(context) {
      * @returns {void}
      */
     function check(node) {
-        var nodeEscapes;
+        var nodeEscapes, match;
+        var pattern = /\\[^\d]/g;
 
         if (typeof node.value === "string") {
             nodeEscapes = VALID_STRING_ESCAPES;
@@ -59726,10 +60733,9 @@ module.exports = function(context) {
             return;
         }
 
-        (node.raw.match(/\\[^\d]/g) || []).forEach(validate, {
-            "escapes": nodeEscapes,
-            "node": node
-        });
+        while ((match = pattern.exec(node.raw))) {
+            validate(nodeEscapes, node, match);
+        }
     }
     return {
         "Literal": check
@@ -61463,6 +62469,7 @@ function getCallbackInfo(node) {
 //------------------------------------------------------------------------------
 
 module.exports = function(context) {
+    var allowNamedFunctions = context.options[0] && context.options[0].allowNamedFunctions;
 
     /*
      * {Array<{this: boolean, super: boolean, meta: boolean}>}
@@ -61529,6 +62536,11 @@ module.exports = function(context) {
         "FunctionExpression:exit": function(node) {
             var scopeInfo = exitScope();
 
+            // Skip named function expressions
+            if (allowNamedFunctions && node.id && node.id.name) {
+                return;
+            }
+
             // Skip generators.
             if (node.generator) {
                 return;
@@ -61562,7 +62574,17 @@ module.exports = function(context) {
     };
 };
 
-module.exports.schema = [];
+module.exports.schema = [
+    {
+        type: "object",
+        properties: {
+            allowNamedFunctions: {
+                "type": "boolean"
+            }
+        },
+        additionalProperties: false
+    }
+];
 
 },{}],345:[function(require,module,exports){
 /**
@@ -62514,8 +63536,15 @@ module.exports = function(context) {
 
     var quoteOption = context.options[0],
         settings = QUOTE_SETTINGS[quoteOption || "double"],
-        avoidEscape = context.options[1] === AVOID_ESCAPE,
+        options = context.options[1],
+        avoidEscape = options && options.avoidEscape === true,
+        allowTemplateLiterals = options && options.allowTemplateLiterals === true,
         sourceCode = context.getSourceCode();
+
+    // deprecated
+    if (options === AVOID_ESCAPE) {
+        avoidEscape = true;
+    }
 
     /**
      * Determines if a given node is part of JSX syntax.
@@ -62633,7 +63662,7 @@ module.exports = function(context) {
         "TemplateLiteral": function(node) {
 
             // If backticks are expected or it's a tagged template, then this shouldn't throw an errors
-            if (quoteOption === "backtick" || node.parent.type === "TaggedTemplateExpression") {
+            if (allowTemplateLiterals || quoteOption === "backtick" || node.parent.type === "TaggedTemplateExpression") {
                 return;
             }
 
@@ -62658,7 +63687,23 @@ module.exports.schema = [
         "enum": ["single", "double", "backtick"]
     },
     {
-        "enum": ["avoid-escape"]
+        "anyOf": [
+            {
+                "enum": ["avoid-escape"]
+            },
+            {
+                "type": "object",
+                "properties": {
+                    "avoidEscape": {
+                        "type": "boolean"
+                    },
+                    "allowTemplateLiterals": {
+                        "type": "boolean"
+                    }
+                },
+                "additionalProperties": false
+            }
+        ]
     }
 ];
 
@@ -63806,14 +64851,22 @@ module.exports = function(context) {
     var configuration = context.options[0],
         sourceCode = context.getSourceCode(),
         requireAnonymousFunctionSpacing = true,
-        requireNamedFunctionSpacing = true;
+        forbidAnonymousFunctionSpacing = false,
+        requireNamedFunctionSpacing = true,
+        forbidNamedFunctionSpacing = false;
 
     if (typeof configuration === "object") {
-        requireAnonymousFunctionSpacing = configuration.anonymous !== "never";
-        requireNamedFunctionSpacing = configuration.named !== "never";
+        requireAnonymousFunctionSpacing = (
+            !configuration.anonymous || configuration.anonymous === "always");
+        forbidAnonymousFunctionSpacing = configuration.anonymous === "never";
+        requireNamedFunctionSpacing = (
+            !configuration.named || configuration.named === "always");
+        forbidNamedFunctionSpacing = configuration.named === "never";
     } else if (configuration === "never") {
         requireAnonymousFunctionSpacing = false;
+        forbidAnonymousFunctionSpacing = true;
         requireNamedFunctionSpacing = false;
+        forbidNamedFunctionSpacing = true;
     }
 
     /**
@@ -63862,7 +64915,7 @@ module.exports = function(context) {
         location = leftToken.loc.end;
 
         if (sourceCode.isSpaceBetweenTokens(leftToken, rightToken)) {
-            if ((isNamed && !requireNamedFunctionSpacing) || (!isNamed && !requireAnonymousFunctionSpacing)) {
+            if ((isNamed && forbidNamedFunctionSpacing) || (!isNamed && forbidAnonymousFunctionSpacing)) {
                 context.report({
                     node: node,
                     loc: location,
@@ -63902,10 +64955,10 @@ module.exports.schema = [
                 "type": "object",
                 "properties": {
                     "anonymous": {
-                        "enum": ["always", "never"]
+                        "enum": ["always", "never", "ignore"]
                     },
                     "named": {
-                        "enum": ["always", "never"]
+                        "enum": ["always", "never", "ignore"]
                     }
                 },
                 "additionalProperties": false
