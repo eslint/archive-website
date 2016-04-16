@@ -38,7 +38,7 @@ We recognize that there is a large and vibrant JSCS user base, and as such, the 
 * Expanding ESLint's autofixing capabilities to fix more problems and try, as much as is possible, to approach the level of autofixing available in JSCS 2.x.
 * Write documentation to guide JSCS users through transitioning to ESLint. ([#5859](https://github.com/eslint/eslint/issues/5859))
 
-Check out our milestone on the tasks above [here](https://github.com/eslint/eslint/milestones/JSCS%20Compatibility)
+Check out our milestone on the tasks above [here](https://github.com/eslint/eslint/milestones/JSCS%20Compatibility).
 
 We expect this effort to take several months, and as such, we still encourage current JSCS users to upgrade to JSCS 3.0.0 and provide feedback to the team. We'll announce when all of the changes necessary to support JSCS users in ESLint are complete and will start encouraging JSCS users to switch to ESLint at that time.
 
