@@ -3,7 +3,19 @@
 <main class="doc">
   <article class="container">
     {% include ad.html %}
-    {{ content | replace: '(recommended)', '<span title="recommended" aria-label="recommended" class="glyphicon glyphicon-ok"></span>' | replace: '<p>(fixable) ', '<p class="fixable">' | replace: '(fixable)', '<span title="fixable" aria-label="fixable" class="glyphicon glyphicon-wrench"></span>' | replace: '<p>Examples of <strong>incorrect</strong> code', '<p class="incorrect">Examples of <strong>incorrect</strong> code' | replace: '<p>Examples of <strong>correct</strong> code', '<p class="correct">Examples of <strong>correct</strong> code' | replace: '<p>Example of <strong>incorrect</strong> code', '<p class="incorrect">Example of <strong>incorrect</strong> code' | replace: '<p>Example of <strong>correct</strong> code', '<p class="correct">Example of <strong>correct</strong> code' }}
+    {{ content
+      | replace: '<p>Examples of <strong>incorrect</strong> code', '<p class="incorrect">Examples of <strong>incorrect</strong> code'
+      | replace: '<p>Example of <strong>incorrect</strong> code', '<p class="incorrect">Example of <strong>incorrect</strong> code'
+      | replace: '<p>Examples of additional <strong>incorrect</strong> code', '<p class="incorrect">Examples of additional <strong>incorrect</strong> code'
+      | replace: '<p>Example of additional <strong>incorrect</strong> code', '<p class="incorrect">Example of additional <strong>incorrect</strong> code'
+      | replace: '<p>Examples of <strong>correct</strong> code', '<p class="correct">Examples of <strong>correct</strong> code'
+      | replace: '<p>Example of <strong>correct</strong> code', '<p class="correct">Example of <strong>correct</strong> code'
+      | replace: '<p>Examples of additional <strong>correct</strong> code', '<p class="correct">Examples of additional <strong>correct</strong> code'
+      | replace: '<p>Example of additional <strong>correct</strong> code', '<p class="correct">Example of additional <strong>correct</strong> code'
+      | replace: '<p>(fixable) ', '<p class="fixable">'
+      | replace: '(recommended)', '<span title="recommended" aria-label="recommended" class="glyphicon glyphicon-ok"></span>'
+      | replace: '(fixable)', '<span title="fixable" aria-label="fixable" class="glyphicon glyphicon-wrench"></span>'
+    }}
   </article>
 </main>
 {% include footer.html %}
