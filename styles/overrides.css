@@ -66,38 +66,49 @@ p.correct + div > pre {
   background-color: #f6fff6; /* light green hsl(120,100%,98%) */
 }
 
+p.icon:before {
+  font-family: "Glyphicons Halflings";
+  color: #4d4d4d; /* gray hsl(0,0%,30%) */
+  margin-right: 0.5em;
+}
+
+p.recommended:before {
+  content: "\e013"; /* ok */
+}
+
+p.removed:before {
+  content: "\e014"; /* remove */
+}
+
+p.fixable:before {
+  content: "\e136"; /* wrench */
+}
+
+p.incorrect:before {
+  content: "\e126"; /* thumbs-down */
+}
+
+p.correct:before {
+  content: "\e125"; /* thumbs-up */
+}
+
 @media (min-width: 768px) {
 
-  p.incorrect + div + div + div > pre:before, /* vars-on-top */
-  p.incorrect + div + div > pre:before, /* no-continue */
-  p.incorrect + div > pre:before {
-    content: "\e126"; /* thumbs-down */
-    font-family: "Glyphicons Halflings";
-    color: #4d4d4d; /* gray hsl(0,0%,30%) */
+  p.icon:before {
     position: absolute;
     left: -20px;
   }
 
-  p.correct + div + div + div > pre:before, /* vars-on-top */
-  p.correct + div + div > pre:before, /* no-continue */
-  p.correct+div>pre:before {
-    content: "\e125"; /* thumbs-up */
-    font-family: "Glyphicons Halflings";
-    color: #4d4d4d; /* gray hsl(0,0%,30%) */
-    position: absolute;
-    left: -20px;
-  }
-
-  p.fixable:before {
-    content: "\e136"; /* wrench */
-    font-family: "Glyphicons Halflings";
-    color: #4d4d4d; /* gray hsl(0,0%,30%) */
-    position: absolute;
-    left: -20px;
-  }
-
-  p.fixable,
-  .highlighter-rouge {
+  p.icon {
     position:relative;
   }
+
+}
+
+@media (max-width: 767px) {
+
+  code {
+    white-space: normal;
+  }
+
 }
