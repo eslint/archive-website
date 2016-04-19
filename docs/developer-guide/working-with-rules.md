@@ -12,8 +12,8 @@ Each ESLint rule has two files: a source file in the `lib/rules` directory and a
 /**
  * @fileoverview Rule to flag use of an empty block statement
  * @author Nicholas C. Zakas
- * @copyright 2014 Nicholas C. Zakas. All rights reserved.
- * See LICENSE in root directory for full license.
+ * @copyright jQuery Foundation and other contributors, https://jquery.org/
+ * MIT License
  */
 "use strict";
 
@@ -343,8 +343,8 @@ The basic pattern for a rule unit test file is:
 /**
  * @fileoverview Tests for no-with rule.
  * @author Nicholas C. Zakas
- * @copyright 2015 Nicholas C. Zakas. All rights reserved.
- * See LICENSE in root directory for full license.
+ * @copyright jQuery Foundation and other contributors, https://jquery.org/
+ * MIT License
  */
 
 "use strict";
@@ -559,16 +559,6 @@ The rule naming conventions for ESLint are fairly simple:
 * If your rule is enforcing the inclusion of something, use a short name without a special prefix.
 * Keep your rule names as short as possible, use abbreviations where appropriate, and no more than four words.
 * Use dashes between words.
-
-## Rule Acceptance Criteria
-
-Because rules are highly personal (and therefore very contentious), accepted rules should:
-
-* Not be library-specific.
-* Demonstrate a possible issue that can be resolved by rewriting the code.
-* Be general enough so as to apply for a large number of developers.
-* Not be the opposite of an existing rule.
-* Not overlap with an existing rule.
 
 ## Runtime Rules
 
