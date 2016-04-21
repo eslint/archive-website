@@ -27,6 +27,8 @@ After that, you can run ESLint on any JavaScript file:
 
     eslint test.js test2.js
 
+**Note:** `eslint --init` is intended for setting up and configuring ESLint on a per-project basis and will perform a local installation of ESLint and its plugins in the directory in which it is run. If you prefer using a global installation of ESLint, any plugins used in your configuration must also be installed globally.
+
 ## Configuration
 
 **Note:** If you are coming from a version before 1.0.0 please see the [migration guide](http://eslint.org/docs/user-guide/migrating-to-1.0.0).
