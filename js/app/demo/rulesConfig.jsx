@@ -6,9 +6,9 @@ define(['react'], function(React) {
         getInitialState: function() {
             return this.props.config;
         },
-        buildRules: function(state) {
+        renderRules: function() {
             var result = [];
-            var rules = Object.keys(state);
+            var rules = Object.keys(this.state);
             var limit = Math.ceil(rules.length / 3);
             for (var i = 0; i < 3; i++) {
                 var currentRow = [];
@@ -16,7 +16,7 @@ define(['react'], function(React) {
                     currentRow.push(
                         <div className="checkbox" key={rules[j]}>
                             <label>
-                                <input type="checkbox" checked={typeof state[rules[j]] === 'string' ? state[rules[j]] !== 'off' : state[rules[j]][0] !== 'off'} id={rules[j]} onChange={this.handleChange.bind(this, rules[j])} />{rules[j]}
+                                <input type="checkbox" checked={typeof this.state[rules[j]] === 'string' ? this.state[rules[j]] !== 'off' : this.state[rules[j]][0] !== 'off'} id={rules[j]} onChange={this.handleChange.bind(this, rules[j])} />{rules[j]}
                             </label>
                         </div>
                     );
@@ -42,11 +42,11 @@ define(['react'], function(React) {
             });
         },
         render: function() {
-            return ( 
+            return (
                 <div className="row rules">
                     <div className="container">
                         <div className="row"><div className="col-md-12"><h3>Rules</h3></div></div>
-                        <div className="row">{this.buildRules(this.state)}</div>
+                        <div className="row">{this.renderRules()}</div>
                     </div>
                 </div>
             );
