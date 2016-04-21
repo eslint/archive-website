@@ -61,11 +61,13 @@ define(['react', 'jsx!editor', 'jsx!messages', 'jsx!configuration', 'eslint', 't
             });
         },
         lint: function() {
-            var results = eslint.verify(this.state.text, this.state.options);
-            this.setState({
-                messages: results,
-                name: this.state.text
-            });
+            setTimeout(function() {
+                var results = eslint.verify(this.state.text, this.state.options);
+                this.setState({
+                    messages: results,
+                    name: this.state.text
+                });                
+            }.bind(this), 1);
         },
         render: function() {
             return (

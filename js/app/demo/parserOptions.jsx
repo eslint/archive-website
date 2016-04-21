@@ -35,9 +35,9 @@ define(['react'], function(React) {
                             <option value="7">7</option>
                         </select>
                     </div>
-                    <div className="col-md-4" onChange={this.handleSourceType}>
+                    <div className="col-md-4">
                         <h3>Source Type</h3>
-                        <select value={this.state.sourceType}>
+                        <select value={this.state.sourceType} onChange={this.handleSourceType}>
                             <option value="module">module</option>
                             <option value="script">script</option>
                         </select>
