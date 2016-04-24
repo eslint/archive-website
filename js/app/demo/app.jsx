@@ -56,23 +56,17 @@ const App = React.createClass({
     },
 
     handleChange: function(event) {
-        this.setState({ text: event.value }, function() {
-            this.lint();
-        });
+        this.setState({ text: event.value });
     },
     updateOptions: function(options) {
-        this.setState({options: options}, function() {
-            this.lint();
-        });
+        this.setState({ options: options });
     },
     lint: function() {
-        setTimeout(() => {
-            var results = eslint.verify(this.state.text, this.state.options);
-            this.setState({
-                messages: results,
-                name: this.state.text
-            })
-        }, 0)
+//        var results = eslint.verify(this.state.text, this.state.options);
+//        this.setState({
+//            messages: results,
+//            name: this.state.text
+//        })
     },
     render: function() {
         return (
