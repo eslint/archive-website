@@ -58,15 +58,12 @@ const App = React.createClass({
     handleChange: function(event) {
         this.setState({ text: event.value });
     },
-    updateOptions: function(options) {
-        this.setState({ options: options });
-    },
     lint: function() {
-//        var results = eslint.verify(this.state.text, this.state.options);
-//        this.setState({
-//            messages: results,
-//            name: this.state.text
-//        })
+        var results = eslint.verify(this.state.text, this.state.options);
+        this.setState({
+            messages: results,
+            name: this.state.text
+        })
     },
     render: function() {
         return (
@@ -80,7 +77,7 @@ const App = React.createClass({
                     </div>
                 </div>
                 <div className="row">
-                    <Configuration options={this.state.options} onUpdate={this.updateOptions} />
+                    <Configuration options={this.state.options} onUpdate={()=>{}} />
                 </div>
             </div>
         );

@@ -17,10 +17,10 @@ const Configuration = React.createClass({
             this.props.onUpdate(this.state);
         });
     },
-    updateEnvironments: function(env) {
-        this.setState({ env: env }, function() {
-            this.props.onUpdate(this.state);
-        });
+    updateEnvironments: function(env, checked) {
+        let change = this.state.env;
+        change[env] = checked;
+        this.setState({ env: change });
     },
     render: function() {
         return (
@@ -37,7 +37,7 @@ const Configuration = React.createClass({
                         <div className="panel-body">
                             <ParserOptions options={this.props.options.parserOptions} onUpdate={this.updateParserOptions} />
                             <hr />
-                            <Environments env={this.props.options.env} onUpdate={this.updateEnvironments} />
+                            <Environments env={this.state.env} onUpdate={this.updateEnvironments} />
                             <hr />
                             <RulesConfig config={this.props.options.rules} onUpdate={this.updateRules} />
                         </div>

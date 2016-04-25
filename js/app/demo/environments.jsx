@@ -1,18 +1,15 @@
 import React from 'react';
 
 const Environments = React.createClass({
-    getInitialState: function() {
-        return this.props.env;
-    },
     handleChange: function(env, event) {
+        // Shouldn't this be what we want??
+        // event.preventDefault();
         var environment = {};
         environment[env] = event.target.checked;
-        this.setState(environment, function() {
-            this.props.onUpdate(this.state);
-        });
+        this.props.onUpdate(env, event.target.checked);
     },
     renderEnvironments: function() {
-        var env = Object.keys(this.state);
+        var env = Object.keys(this.props.env);
         var limit = Math.ceil(env.length / 3);
         var result = [];
         for (var i = 0; i < 3; i++) {
@@ -21,7 +18,7 @@ const Environments = React.createClass({
                 currentRow.push(
                     <div className="checkbox" key={env[j]}>
                         <label>
-                            <input type="checkbox" checked={this.state[env[j]]} id={env[j]} onChange={this.handleChange.bind(this, env[j])} />{env[j]}
+                            <input type="checkbox" checked={this.props[env[j]]} id={env[j]} onChange={this.handleChange.bind(this, env[j])} />{env[j]}
                         </label>
                     </div>
                 );

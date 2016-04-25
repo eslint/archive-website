@@ -39,11 +39,12 @@ const RulesConfig = React.createClass({
     },
     handleChange(e, key) {
         let change = {};
+        const value = e.target.checked ? 'error' : 'off'
         if (typeof this.state[key] === 'string') {
-            change[key] = e.target.checked ? 'error' : 'off';
+            change[key] = value;
         } else {
             change[key] = this.state[key];
-            change[key][0] = e.target.checked ? 'error' : 'off';
+            change[key][0] = value;
         }
         this.setState(change);
     },
