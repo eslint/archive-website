@@ -1,12 +1,13 @@
 import React from 'react';
 
 const Rule = ({ rule, isChecked, handleChange }) => (
-    <div className="checkbox" key={rule}>
+    <div className="checkbox">
         <label>
             <input type="checkbox"
                 checked={isChecked}
                 id={rule}
-                onChange={handleChange} />
+                onChange={e => handleChange(e, rule)}
+                />
             {rule}
         </label>
     </div>
@@ -16,32 +17,27 @@ const RulesConfig = React.createClass({
     getInitialState() {
         return this.props.config;
     },
-    shouldBeChecked(ruleValue) {
+    shouldBeChecked(rule) {
+        const ruleValue = this.state[rule];
         return typeof ruleValue === 'string' ? ruleValue !== 'off' : ruleValue[0] !== 'off';
     },
     getRow(i) {
         const rules = Object.keys(this.state);
         const limit = Math.ceil(rules.length / 3);
         const start = limit * i;
-        // console.log(rules.length, i, limit, start);
         return Array(limit).fill('').map((_, j) => {
             const rule = rules[start + j];
-            if (!rule) {
-                return;
-            }
-            let isChecked = this.shouldBeChecked(this.state[rule]);
-            return <Rule rule={rule} isChecked={isChecked} handleChange={handleChange} />
+            return rule && <Rule key={rule} rule={rule} isChecked={this.shouldBeChecked(rule)} handleChange={this.handleChange} />
         });
     },
     renderRules() {
-        return Array(3).fill('').map((_, i) => (
+        return [0, 1, 2].map((i) => (
             <div className="col-md-4" key={i}>
                 {this.getRow(i)}
             </div>
         ))
     },
-    handleChange(e) {
-        let key = e.target.id;
+    handleChange(e, key) {
         let change = {};
         if (typeof this.state[key] === 'string') {
             change[key] = e.target.checked ? 'error' : 'off';
@@ -50,7 +46,6 @@ const RulesConfig = React.createClass({
             change[key][0] = e.target.checked ? 'error' : 'off';
         }
         this.setState(change);
-//      this.props.onUpdate(this.state)
     },
     render: function() {
         return (
