@@ -125,3 +125,7 @@
 - url: https://www.airbnb.com
   src: /img/logos/airbnb.png
   name: Airbnb
+
+- url: https://read.douban.com
+  src: /img/logos/ark.svg
+  name: Ark Reading
