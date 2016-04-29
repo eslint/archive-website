@@ -155,7 +155,7 @@ TAP version 13
 1..1
 not ok 1 - C:\Users\Nicholas\projects\personal\eslint\fullOfProblems.js
   ---
-  message: "'addOne' is defined but never used"
+  message: '''addOne'' is defined but never used'
   severity: error
   data:
     line: 1
@@ -168,7 +168,7 @@ not ok 1 - C:\Users\Nicholas\projects\personal\eslint\fullOfProblems.js
         line: 2
         column: 9
         ruleId: use-isnan
-    - message: "Unexpected space before unary operator '++'."
+    - message: Unexpected space before unary operator '++'.
       severity: error
       data:
         line: 3
@@ -180,7 +180,7 @@ not ok 1 - C:\Users\Nicholas\projects\personal\eslint\fullOfProblems.js
         line: 3
         column: 20
         ruleId: semi
-    - message: "Unexpected 'else' after 'return'."
+    - message: Unexpected 'else' after 'return'.
       severity: warning
       data:
         line: 4

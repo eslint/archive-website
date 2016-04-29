@@ -44,7 +44,7 @@ var foo = {
 ## Rule Details
 
 This rule enforces the use of the shorthand syntax. This applies
-to all methods (including generators) defined on object literals and any
+to all methods (including generators) defined in object literals and any
 properties defined where the key name matches name of the assigned variable.
 
 Each of the following properties would warn:
@@ -55,8 +55,9 @@ Each of the following properties would warn:
 /*eslint-env es6*/
 
 var foo = {
-    x: function() {},
-    y: function *() {},
+    w: function() {},
+    x: function *() {},
+    [y]: function() {},
     z: z
 };
 ```
@@ -68,8 +69,9 @@ In that case the expected syntax would have been:
 /*eslint-env es6*/
 
 var foo = {
-    x() {},
-    *y() {},
+    w() {},
+    *x() {},
+    [y]() {},
     z
 };
 ```

@@ -72,7 +72,7 @@ Handling warnings:
 Output:
   -o, --output-file path::String  Specify file to write report to
   -f, --format String        Use a specific output format - default: stylish
-  --no-color                 Disable color in piped output
+  --color, --no-color        Force enabling/disabling of color
 
 Miscellaneous:
   --init                     Run config initialization wizard - default: false
@@ -80,7 +80,7 @@ Miscellaneous:
   --debug                    Output debugging information
   -h, --help                 Show help
   -v, --version              Outputs the version number
-  --no-inline-config         Prevent comments from changing eslint rules -
+  --no-inline-config         Prevent comments from changing config or rules -
                              default: false
   --print-config             Print the configuration to be used
 ```
@@ -329,12 +329,13 @@ When specified, the given format is output to the console. If you'd like to save
 
 This saves the output into the `results.txt` file.
 
-#### `--no-color`
+#### `--color`, `--no-color`
 
-Disable color in piped output.
+This option forces the enabling/disabling of colorized output. You can use this to override the default behavior, which is to enable colorized output unless no TTY is detected, such as when when piping `eslint` through `cat` or `less`.
 
-Example:
+Examples:
 
+    eslint --color file.js | cat
     eslint --no-color file.js
 
 ### Miscellaneous

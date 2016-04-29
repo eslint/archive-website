@@ -1,14 +1,16 @@
 # Rules
 
-Rules in ESLint are divided into several categories to help you better understand their value. All rules are disabled by default. ESLint recommends some rules to catch common problems, and you can use these recommended rules by including `extends: "eslint:recommended"` in your configuration file. The rules that will be enabled when you inherit from `eslint:recommended` are indicated below as "(recommended)". For more information on how to configure rules and use `extends`, please see the [configuration documentation](../user-guide/configuring.md).
+Rules in ESLint are grouped by category to help you understand their purpose.
 
-Some rules are fixable using the `--fix` command line flag. Those rules are marked as "(fixable)" below. Currently these fixes are mostly limited only to whitespace fixes.
+No rules are enabled by default. The `"extends": "eslint:recommended"` property in a [configuration file](../user-guide/configuring#extending-configuration-files) enables rules that report common problems, which have a check mark (recommended) below.
+
+The `--fix` option on the [command line](../user-guide/command-line-interface#fix) automatically fixes problems (currently mostly whitespace) reported by rules which have a wrench (fixable) below.
 
 ## Possible Errors
 
-The following rules point out areas where you might have made mistakes.
+These rules relate to possible syntax or logic errors in JavaScript code:
 
-* [comma-dangle](comma-dangle.md): require or disallow trailing commas (recommended)
+* [comma-dangle](comma-dangle.md): require or disallow trailing commas (recommended) (fixable)
 * [no-cond-assign](no-cond-assign.md): disallow assignment operators in conditional expressions (recommended)
 * [no-console](no-console.md): disallow the use of `console` (recommended)
 * [no-constant-condition](no-constant-condition.md): disallow constant expressions in conditions (recommended)
@@ -33,13 +35,14 @@ The following rules point out areas where you might have made mistakes.
 * [no-sparse-arrays](no-sparse-arrays.md): disallow sparse arrays (recommended)
 * [no-unexpected-multiline](no-unexpected-multiline.md): disallow confusing multiline expressions (recommended)
 * [no-unreachable](no-unreachable.md): disallow unreachable code after `return`, `throw`, `continue`, and `break` statements (recommended)
+* [no-unsafe-finally](no-unsafe-finally.md): disallow control flow statements in `finally` blocks
 * [use-isnan](use-isnan.md): require calls to `isNaN()` when checking for `NaN` (recommended)
 * [valid-jsdoc](valid-jsdoc.md): enforce valid JSDoc comments
 * [valid-typeof](valid-typeof.md): enforce comparing `typeof` expressions against valid strings (recommended)
 
 ## Best Practices
 
-These are rules designed to prevent you from making mistakes. They either prescribe a better way of doing something or help you avoid footguns.
+These rules relate to better ways of doing things to help you avoid problems:
 
 * [accessor-pairs](accessor-pairs.md): enforce getter and setter pairs in objects
 * [array-callback-return](array-callback-return.md): enforce `return` statements in callbacks of array methods
@@ -108,13 +111,13 @@ These are rules designed to prevent you from making mistakes. They either prescr
 
 ## Strict Mode
 
-These rules relate to using strict mode and strict mode directives.
+These rules relate to strict mode directives:
 
 * [strict](strict.md): require or disallow strict mode directives
 
 ## Variables
 
-These rules have to do with variable declarations.
+These rules relate to variable declarations:
 
 * [init-declarations](init-declarations.md): require or disallow initialization in `var` declarations
 * [no-catch-shadow](no-catch-shadow.md): disallow `catch` clause parameters from shadowing variables in the outer scope
@@ -131,7 +134,7 @@ These rules have to do with variable declarations.
 
 ## Node.js and CommonJS
 
-These rules are specific to JavaScript running on Node.js or using CommonJS in the browser.
+These rules relate to code running in Node.js, or in browsers with CommonJS:
 
 * [callback-return](callback-return.md): require `return` statements after callbacks
 * [global-require](global-require.md): require `require()` calls to be placed at top-level module scope
@@ -146,7 +149,7 @@ These rules are specific to JavaScript running on Node.js or using CommonJS in t
 
 ## Stylistic Issues
 
-These rules are purely matters of style and are quite subjective.
+These rules relate to style guidelines, and are therefore quite subjective:
 
 * [array-bracket-spacing](array-bracket-spacing.md): enforce consistent spacing inside array brackets (fixable)
 * [block-spacing](block-spacing.md): enforce consistent spacing inside single-line blocks (fixable)
@@ -196,7 +199,7 @@ These rules are purely matters of style and are quite subjective.
 * [no-trailing-spaces](no-trailing-spaces.md): disallow trailing whitespace at the end of lines (fixable)
 * [no-underscore-dangle](no-underscore-dangle.md): disallow dangling underscores in identifiers
 * [no-unneeded-ternary](no-unneeded-ternary.md): disallow ternary operators when simpler alternatives exist
-* [no-whitespace-before-property](no-whitespace-before-property.md): disallow whitespace before properties
+* [no-whitespace-before-property](no-whitespace-before-property.md): disallow whitespace before properties (fixable)
 * [object-curly-spacing](object-curly-spacing.md): enforce consistent spacing inside braces (fixable)
 * [one-var](one-var.md): enforce variables to be declared either together or separately in functions
 * [one-var-declaration-per-line](one-var-declaration-per-line.md): require or disallow newlines around `var` declarations
@@ -208,7 +211,6 @@ These rules are purely matters of style and are quite subjective.
 * [require-jsdoc](require-jsdoc.md): require JSDoc comments
 * [semi](semi.md): require or disallow semicolons instead of ASI (fixable)
 * [semi-spacing](semi-spacing.md): enforce consistent spacing before and after semicolons (fixable)
-* [sort-imports](sort-imports.md): enforce sorted import declarations within module
 * [sort-vars](sort-vars.md): require variables within the same declaration block to be sorted
 * [space-before-blocks](space-before-blocks.md): enforce consistent spacing before blocks (fixable)
 * [space-before-function-paren](space-before-function-paren.md): enforce consistent spacing before `function` definition opening parenthesis (fixable)
@@ -220,7 +222,7 @@ These rules are purely matters of style and are quite subjective.
 
 ## ECMAScript 6
 
-These rules are only relevant to ES6 environments.
+These rules relate to ES6, also known as ES2015:
 
 * [arrow-body-style](arrow-body-style.md): require braces around arrow function bodies
 * [arrow-parens](arrow-parens.md): require parentheses around arrow function arguments
@@ -235,6 +237,7 @@ These rules are only relevant to ES6 environments.
 * [no-new-symbol](no-new-symbol.md): disallow `new` operators with the `Symbol` object (recommended)
 * [no-restricted-imports](no-restricted-imports.md): disallow specified modules when loaded by `import`
 * [no-this-before-super](no-this-before-super.md): disallow `this`/`super` before calling `super()` in constructors (recommended)
+* [no-useless-computed-key](no-useless-computed-key.md): disallow unnecessary computed property keys in object literals
 * [no-useless-constructor](no-useless-constructor.md): disallow unnecessary constructors
 * [no-var](no-var.md): require `let` or `const` instead of `var`
 * [object-shorthand](object-shorthand.md): require or disallow method and property shorthand syntax for object literals
@@ -245,12 +248,13 @@ These rules are only relevant to ES6 environments.
 * [prefer-spread](prefer-spread.md): require spread operators instead of `.apply()`
 * [prefer-template](prefer-template.md): require template literals instead of string concatenation
 * [require-yield](require-yield.md): require generator functions to contain `yield`
+* [sort-imports](sort-imports.md): enforce sorted import declarations within modules
 * [template-curly-spacing](template-curly-spacing.md): require or disallow spacing around embedded expressions of template strings (fixable)
 * [yield-star-spacing](yield-star-spacing.md): require or disallow spacing around the `*` in `yield*` expressions (fixable)
 
 ## Removed
 
-These rules existed in a previous version of ESLint but have since been replaced by newer rules.
+These rules from older versions of ESLint have been replaced by newer rules:
 
 * [generator-star](generator-star.md): enforce consistent positioning of the `*` in generator functions (replaced by [generator-star-spacing](generator-star-spacing.md))
 * [global-strict](global-strict.md): require or disallow `"use strict"` in the global scope (replaced by [strict](strict.md))
