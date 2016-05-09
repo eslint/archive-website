@@ -13,6 +13,7 @@ gems:
     - algoliasearch-jekyll
 kramdown:
   input: GFM
+  toc_levels: 2..3
 algolia:
   application_id: 'XWXG7MEBSB'
   index_name:     'eslint'

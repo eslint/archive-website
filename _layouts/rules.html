@@ -1,0 +1,11 @@
+{% include header.html %}
+{% include menu.html %}
+<main class="rules doc">
+  <article class="container">
+    {{ content
+      | replace: '(recommended)', '<span title="recommended" aria-label="recommended" class="glyphicon glyphicon-ok"></span>'
+      | replace: '(fixable)', '<span title="fixable" aria-label="fixable" class="glyphicon glyphicon-wrench"></span>'
+    }}
+  </article>
+</main>
+{% include footer.html %}
