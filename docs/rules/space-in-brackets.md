@@ -4,9 +4,9 @@ layout: doc
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
-# Disallow or enforce spaces inside of brackets. (space-in-brackets)
+# space-in-brackets: enforce consistent spacing inside braces of object literals and brackets of array literals
 
-**Replacement notice**: This rule was removed in ESLint v1.0 and replaced by the [object-curly-spacing](object-curly-spacing), [computed-property-spacing](computed-property-spacing) and [array-bracket-spacing](array-bracket-spacing) rules.
+(removed) This rule was **removed** in ESLint v1.0 and **replaced** by the [object-curly-spacing](object-curly-spacing) and [array-bracket-spacing](array-bracket-spacing) rules.
 
 While formatting preferences are very personal, a number of style guides require or disallow spaces between brackets:
 

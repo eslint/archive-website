@@ -1,5 +1,5 @@
 ---
-title: Documentation
+title: Migrating to v2.0.0
 layout: doc
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->

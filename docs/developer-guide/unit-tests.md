@@ -1,7 +1,8 @@
 ---
-title: Unit tests
+title: Unit Tests
 layout: doc
 ---
+<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
 # Unit Tests
 
@@ -18,5 +19,5 @@ This automatically starts Mocha and runs all tests in the `tests` directory. You
 If you want to quickly run just one test, you can do so by running Mocha directly and passing in the filename. For example:
 
     ./node_modules/.bin/mocha tests/lib/rules/no-wrap-func.js
-    
+
 Running individual tests is useful when you're working on a specific bug and iterating on the solution. You should be sure to run `npm test` before submitting a pull request.

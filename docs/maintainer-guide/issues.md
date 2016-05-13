@@ -2,6 +2,7 @@
 title: Managing Issues
 layout: doc
 ---
+<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
 # Managing Issues
 
@@ -32,31 +33,31 @@ When an issue is opened, the bot will automatically apply the "triage" label. Is
 The steps for triaging an issue are:
 
 1. Is it clear what is being requested?
-  * No: add the "needs info" label to the issue. The bot will add a comment asking for more information. You don't need to comment any further until the person who opened the issue responds with the information requested from the bot.
-  * Yes:
-    * Remove the "triage" label
-    * Label questions with the "question" label
-    * Label bug reports with the "bug" label (also use the "accepted" label if you can reproduce and verify the bug, otherwise add the "evaluating" label to indicate someone needs to verify)
-    * Label requests for changes to existing features (new rule options, new configuration options, etc.) with the "enhancement" and "evaluating" labels
-    * Label requests for completely new features (new rules, supporting a new file format, etc.) with the "feature" and "evaluating" labels
-    * Use an appropriate label for the part of the project the issue refers to:
-      * "build" - related to commands run during a build (testing, linting, release scripts, etc.)
-      * "cli" - related to command line input or output, or to `CLIEngine`
-      * "core" - related to internal APIs
-      * "documentation" - related to content on eslint.org
-      * "infrastructure" - related to resources needed for builds or deployment (VMs, CI tools, bots, etc.)
+    * No: add the "needs info" label to the issue. The bot will add a comment asking for more information. You don't need to comment any further until the person who opened the issue responds with the information requested from the bot.
+    * Yes:
+        * Remove the "triage" label
+        * Label questions with the "question" label
+        * Label bug reports with the "bug" label (also use the "accepted" label if you can reproduce and verify the bug, otherwise add the "evaluating" label to indicate someone needs to verify)
+        * Label requests for changes to existing features (new rule options, new configuration options, etc.) with the "enhancement" and "evaluating" labels
+        * Label requests for completely new features (new rules, supporting a new file format, etc.) with the "feature" and "evaluating" labels
+        * Use an appropriate label for the part of the project the issue refers to:
+            * "build" - related to commands run during a build (testing, linting, release scripts, etc.)
+            * "cli" - related to command line input or output, or to `CLIEngine`
+            * "core" - related to internal APIs
+            * "documentation" - related to content on eslint.org
+            * "infrastructure" - related to resources needed for builds or deployment (VMs, CI tools, bots, etc.)
 1. Once it's clear what type of issue it is, make sure all of the relevant information is provided:
-  * **Bugs**: See [bug reporting guidelines](/docs/developer-guide/contributing/reporting-bugs)
-  * **New Rules:** See [rule proposal guidelines](/docs/developer-guide/contributing/new-rules)
-  * **Rule Changes:** See [rule change proposal guidelines](/docs/developer-guide/contributing/rule-changes)
-  * **Other Changes:** See [change proposal guidelines](http://eslint.org/docs/developer-guide/contributing/changes)
+    * **Bugs**: See [bug reporting guidelines](/docs/developer-guide/contributing/reporting-bugs)
+    * **New Rules:** See [rule proposal guidelines](/docs/developer-guide/contributing/new-rules)
+    * **Rule Changes:** See [rule change proposal guidelines](/docs/developer-guide/contributing/rule-changes)
+    * **Other Changes:** See [change proposal guidelines](http://eslint.org/docs/developer-guide/contributing/changes)
 1. Next steps:
-  * **Questions:** answer the question and close the issue when the conversation is over.
-  * **Bugs:** if you can verify the bug, add the "accepted" label and ask if they would like to submit a pull request.
-  * **New Rules:** if you are willing to champion the rule (meaning you believe it should be included in ESLint core and you will take ownership of the process for including it), then add a comment saying you will champion the issue. As the champion, it's your job to gain consensus from the ESLint team on inclusion, guide the rule creation process until it's complete, so only champion a rule that you have time to implement or help another contributor implement. Once consensus has been reached on inclusion, add the "accepted" and "help wanted" labels.
-  * **Rule Changes:** if you are willing to champion the change, and the change would not be breaking (requiring a major version increment), then add a comment saying that you will champion the issue. As with new rules, the champion is expected to gain consensus from the ESLint team on inclusion and to guide the change through to completion. Once consensus has been reached on inclusion, add the "accepted" and "help wanted" labels.
-  * **Breaking Changes:** if you suspect or can verify that a change would be breaking, label it as "Breaking".
-  * **Duplicates:** if you can verify the issue is a duplicate, add a comment mentioning the duplicate issue (such as, "Duplicate of #1234") and close the issue.
+    * **Questions:** answer the question and close the issue when the conversation is over.
+    * **Bugs:** if you can verify the bug, add the "accepted" label and ask if they would like to submit a pull request.
+    * **New Rules:** if you are willing to champion the rule (meaning you believe it should be included in ESLint core and you will take ownership of the process for including it), then add a comment saying you will champion the issue. As the champion, it's your job to gain consensus from the ESLint team on inclusion, guide the rule creation process until it's complete, so only champion a rule that you have time to implement or help another contributor implement. Once consensus has been reached on inclusion, add the "accepted" and "help wanted" labels.
+    * **Rule Changes:** if you are willing to champion the change, and the change would not be breaking (requiring a major version increment), then add a comment saying that you will champion the issue. As with new rules, the champion is expected to gain consensus from the ESLint team on inclusion and to guide the change through to completion. Once consensus has been reached on inclusion, add the "accepted" and "help wanted" labels.
+    * **Breaking Changes:** if you suspect or can verify that a change would be breaking, label it as "Breaking".
+    * **Duplicates:** if you can verify the issue is a duplicate, add a comment mentioning the duplicate issue (such as, "Duplicate of #1234") and close the issue.
 1. Regardless of the above, always leave a comment. Don't just add labels, engage with the person who opened the issue by asking a question (request more information if necessary) or stating your opinion of the issue. If it's a verified bug, ask if the user would like to submit a pull request.
 
 **Note:** Don't add an "accepted" label to an issue unless it's a bug that you've been able to reproduce and verify (you're sure it's a bug), a new rule that you're championing, or a rule change that you're championing. The "accepted" label will be added to other issues by a project lead if it's appropriate for the roadmap.

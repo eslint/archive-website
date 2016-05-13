@@ -4773,12 +4773,33 @@ module.exports={
     "betarelease": "eslint-prelease beta",
     "browserify": "node Makefile.js browserify"
   },
-  "readme": "# Espree\n\nEspree started out as a fork of [Esprima](http://esprima.org) v1.2.2, the last stable published released of Esprima before work on ECMAScript 6 began. Espree is now built on top of [Acorn](https://github.com/ternjs/acorn), which has a modular architecture that allows extension of core functionality. The goal of Espree is to produce output that is similar to Esprima with a similar API so that it can be used in place of Esprima.\n\n## Usage\n\nInstall:\n\n```\nnpm i espree --save\n```\n\nAnd in your Node.js code:\n\n```javascript\nvar espree = require(\"espree\");\n\nvar ast = espree.parse(code);\n```\n\nThere is a second argument to `parse()` that allows you to specify various options:\n\n```javascript\nvar espree = require(\"espree\");\n\nvar ast = espree.parse(code, {\n\n    // attach range information to each node\n    range: true,\n\n    // attach line/column location information to each node\n    loc: true,\n\n    // create a top-level comments array containing all comments\n    comment: true,\n\n    // attach comments to the closest relevant node as leadingComments and\n    // trailingComments\n    attachComment: true,\n\n    // create a top-level tokens array containing all tokens\n    tokens: true,\n\n    // specify the language version (3, 5, 6, or 7, default is 5)\n    ecmaVersion: 5,\n\n    // specify which type of script you're parsing (script or module, default is script)\n    sourceType: \"script\",\n\n    // specify additional language features\n    ecmaFeatures: {\n\n        // enable JSX parsing\n        jsx: true,\n\n        // enable return in global scope\n        globalReturn: true,\n\n        // enable implied strict mode (if ecmaVersion >= 5)\n        impliedStrict: true,\n\n        // allow experimental object rest/spread\n        experimentalObjectRestSpread: true\n    }\n});\n```\n\n## Esprima Compatibility Going Forward\n\nThe primary goal is to produce the exact same AST structure and tokens as Esprima, and that takes precedence over anything else. (The AST structure being the [ESTree](https://github.com/estree/estree) API with JSX extensions.) Separate from that, Espree may deviate from what Esprima outputs in terms of where and how comments are attached, as well as what additional information is available on AST nodes. That is to say, Espree may add more things to the AST nodes than Esprima does but the overall AST structure produced will be the same.\n\nEspree may also deviate from Esprima in the interface it exposes.\n\n## Contributing\n\nIssues and pull requests will be triaged and responded to as quickly as possible. We operate under the [ESLint Contributor Guidelines](http://eslint.org/docs/developer-guide/contributing), so please be sure to read them before contributing. If you're not sure where to dig in, check out the [issues](https://github.com/eslint/espree/issues).\n\nEspree is licensed under a permissive BSD 2-clause license.\n\n## Build Commands\n\n* `npm test` - run all linting and tests\n* `npm run lint` - run all linting\n* `npm run browserify` - creates a version of Espree that is usable in a browser\n\n## Differences from Espree 2.x\n\n* The `tokenize()` method does not use `ecmaFeatures`. Any string will be tokenized completely based on ECMAScript 6 semantics.\n* Trailing whitespace no longer is counted as part of a node.\n* `let` and `const` declarations are no longer parsed by default. You must opt-in using `ecmaFeatures.blockBindings`.\n* The `esparse` and `esvalidate` binary scripts have been removed.\n* There is no `tolerant` option. We will investigate adding this back in the future.\n\n## Known Incompatibilities\n\nIn an effort to help those wanting to transition from other parsers to Espree, the following is a list of noteworthy incompatibilities with other parsers. These are known differences that we do not intend to change.\n\n### Esprima 1.2.2\n\n* Esprima counts trailing whitespace as part of each AST node while Espree does not. In Espree, the end of a node is where the last token occurs.\n* Espree does not parse `let` and `const` declarations by default.\n* Error messages returned for parsing errors are different.\n* There are two addition properties on every node and token: `start` and `end`. These represent the same data as `range` and are used internally by Acorn.\n\n### Esprima 2.x\n\n* Esprima 2.x uses a different comment attachment algorithm that results in some comments being added in different places than Espree. The algorithm Espree uses is the same one used in Esprima 1.2.2.\n\n## Frequently Asked Questions\n\n### Why another parser\n\n[ESLint](http://eslint.org) had been relying on Esprima as its parser from the beginning. While that was fine when the JavaScript language was evolving slowly, the pace of development increased dramatically and Esprima had fallen behind. ESLint, like many other tools reliant on Esprima, has been stuck in using new JavaScript language features until Esprima updates, and that caused our users frustration.\n\nWe decided the only way for us to move forward was to create our own parser, bringing us inline with JSHint and JSLint, and allowing us to keep implementing new features as we need them. We chose to fork Esprima instead of starting from scratch in order to move as quickly as possible with a compatible API.\n\nWith Espree 2.0.0, we are no longer a fork of Esprima but rather a translation layer between Acorn and Esprima syntax. This allows us to put work back into a community-supported parser (Acorn) that is continuing to grow and evolve while maintaining an Esprima-compatible parser for those utilities still built on Esprima.\n\n### Have you tried working with Esprima?\n\nYes. Since the start of ESLint, we've regularly filed bugs and feature requests with Esprima and will continue to do so. However, there are some different philosophies around how the projects work that need to be worked through. The initial goal was to have Espree track Esprima and eventually merge the two back together, but we ultimately decided that building on top of Acorn was a better choice due to Acorn's plugin support.\n\n### Why don't you just use Acorn?\n\nAcorn is a great JavaScript parser that produces an AST that is compatible with Esprima. Unfortunately, ESLint relies on more than just the AST to do its job. It relies on Esprima's tokens and comment attachment features to get a complete picture of the source code. We investigated switching to Acorn, but the inconsistencies between Esprima and Acorn created too much work for a project like ESLint.\n\nWe are building on top of Acorn, however, so that we can contribute back and help make Acorn even better.\n\n### What ECMAScript 6 features do you support?\n\nAll of them.\n\n### What ECMAScript 7 features do you support?\n\nThere is only one ECMAScript 7 syntax change: the exponentiation operator. Espree supports this.\n\n### How do you determine which experimental features to support?\n\nIn general, we do not support experimental JavaScript features. We may make exceptions from time to time depending on the maturity of the features.\n",
-  "readmeFilename": "README.md",
   "gitHead": "72ef3f4a332d6f8bfb32a55573eacb06f65e7f11",
   "_id": "espree@3.1.4",
   "_shasum": "0726d7ac83af97a7c8498da9b363a3609d2a68a1",
-  "_from": "espree@3.1.4"
+  "_from": "espree@3.1.4",
+  "_npmVersion": "2.15.0",
+  "_nodeVersion": "4.4.2",
+  "_npmUser": {
+    "name": "nzakas",
+    "email": "nicholas@nczconsulting.com"
+  },
+  "maintainers": [
+    {
+      "name": "nzakas",
+      "email": "nicholas@nczconsulting.com"
+    }
+  ],
+  "dist": {
+    "shasum": "0726d7ac83af97a7c8498da9b363a3609d2a68a1",
+    "tarball": "https://registry.npmjs.org/espree/-/espree-3.1.4.tgz"
+  },
+  "_npmOperationalInternal": {
+    "host": "packages-16-east.internal.npmjs.com",
+    "tmp": "tmp/espree-3.1.4.tgz_1461264685938_0.4520344687625766"
+  },
+  "directories": {},
+  "_resolved": "https://registry.npmjs.org/espree/-/espree-3.1.4.tgz",
+  "readme": "ERROR: No README data found!"
 }
 
 },{}],"espree":[function(require,module,exports){
@@ -5893,6 +5914,7 @@ module.exports={
         "newline-before-return": "off",
         "newline-per-chained-call": "off",
         "object-curly-spacing": ["off", "never"],
+        "object-property-newline": "off",
         "object-shorthand": "off",
         "one-var": "off",
         "one-var-declaration-per-line": "off",
@@ -6655,6 +6677,9 @@ var currentQueue;
 var queueIndex = -1;
 
 function cleanUpNextTick() {
+    if (!draining || !currentQueue) {
+        return;
+    }
     draining = false;
     if (currentQueue.length) {
         queue = currentQueue.concat(queue);
@@ -10486,14 +10511,12 @@ module.exports={
   ],
   "maintainers": [
     {
-      "name": "Nicholas C. Zakas",
-      "email": "nicholas+npm@nczconsulting.com",
-      "url": "https://www.nczonline.net"
+      "name": "constellation",
+      "email": "utatane.tea@gmail.com"
     },
     {
-      "name": "Yusuke Suzuki",
-      "email": "utatane.tea@gmail.com",
-      "url": "https://github.com/Constellation"
+      "name": "nzakas",
+      "email": "nicholas@nczconsulting.com"
     }
   ],
   "repository": {
@@ -10531,15 +10554,29 @@ module.exports={
     "esutils": "^1.1.6",
     "isarray": "^1.0.0"
   },
-  "readme": "[![NPM version][npm-image]][npm-url]\n[![build status][travis-image]][travis-url]\n[![Test coverage][coveralls-image]][coveralls-url]\n[![Downloads][downloads-image]][downloads-url]\n[![Join the chat at https://gitter.im/eslint/doctrine](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/eslint/doctrine?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)\n\n# Doctrine\n\nDoctrine is a [JSDoc](http://usejsdoc.org) parser that parses documentation comments from JavaScript (you need to pass in the comment, not a whole JavaScript file).\n\n## Installation\n\nYou can install Doctrine using [npm](https://npmjs.com):\n\n```\n$ npm install doctrine --save-dev\n```\n\nDoctrine can also be used in web browsers using [Browserify](http://browserify.org).\n\n## Usage\n\nRequire doctrine inside of your JavaScript:\n\n```js\nvar doctrine = require(\"doctrine\");\n```\n\n### parse()\n\nThe primary method is `parse()`, which accepts two arguments: the JSDoc comment to parse and an optional options object. The available options are:\n\n* `unwrap` - set to `true` to delete the leading `/**`, any `*` that begins a line, and the trailing `*/` from the source text. Default: `false`.\n* `tags` - an array of tags to return. When specified, Doctrine returns only tags in this array. For example, if `tags` is `[\"param\"]`, then only `@param` tags will be returned. Default: `null`.\n* `recoverable` - set to `true` to keep parsing even when syntax errors occur. Default: `false`.\n* `sloppy` - set to `true` to allow optional parameters to be specified in brackets (`@param {string} [foo]`). Default: `false`.\n* `lineNumbers` - set to `true` to add `lineNumber` to each node, specifying the line on which the node is found in the source. Default: `false`.\n\nHere's a simple example:\n\n```js\nvar ast = doctrine.parse(\n    [\n        \"/**\",\n        \" * This function comment is parsed by doctrine\",\n        \" * @param {{ok:String}} userName\",\n        \"*/\"\n    ].join('\\n'), { unwrap: true });\n```\n\nThis example returns the following AST:\n\n    {\n        \"description\": \"This function comment is parsed by doctrine\",\n        \"tags\": [\n            {\n                \"title\": \"param\",\n                \"description\": null,\n                \"type\": {\n                    \"type\": \"RecordType\",\n                    \"fields\": [\n                        {\n                            \"type\": \"FieldType\",\n                            \"key\": \"ok\",\n                            \"value\": {\n                                \"type\": \"NameExpression\",\n                                \"name\": \"String\"\n                            }\n                        }\n                    ]\n                },\n                \"name\": \"userName\"\n            }\n        ]\n    }\n\nSee the [demo page](http://eslint.org/doctrine/demo/) more detail.\n\n## Team\n\nThese folks keep the project moving and are resources for help:\n\n* Nicholas C. Zakas ([@nzakas](https://github.com/nzakas)) - project lead\n* Yusuke Suzuki ([@constellation](https://github.com/constellation)) - reviewer\n\n## Contributing\n\nIssues and pull requests will be triaged and responded to as quickly as possible. We operate under the [ESLint Contributor Guidelines](http://eslint.org/docs/developer-guide/contributing), so please be sure to read them before contributing. If you're not sure where to dig in, check out the [issues](https://github.com/eslint/doctrine/issues).\n\n## Frequently Asked Questions\n\n### Can I pass a whole JavaScript file to Doctrine?\n\nNo. Doctrine can only parse JSDoc comments, so you'll need to pass just the JSDoc comment to Doctrine in order to work.\n\n\n### License\n\n#### doctrine\n\nCopyright (C) 2012 [Yusuke Suzuki](http://github.com/Constellation)\n (twitter: [@Constellation](http://twitter.com/Constellation)) and other contributors.\n\nRedistribution and use in source and binary forms, with or without\nmodification, are permitted provided that the following conditions are met:\n\n  * Redistributions of source code must retain the above copyright\n    notice, this list of conditions and the following disclaimer.\n\n  * Redistributions in binary form must reproduce the above copyright\n    notice, this list of conditions and the following disclaimer in the\n    documentation and/or other materials provided with the distribution.\n\nTHIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS \"AS IS\"\nAND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE\nIMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE\nARE DISCLAIMED. IN NO EVENT SHALL <COPYRIGHT HOLDER> BE LIABLE FOR ANY\nDIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES\n(INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;\nLOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND\nON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT\n(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF\nTHIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n\n#### esprima\n\nsome of functions is derived from esprima\n\nCopyright (C) 2012, 2011 [Ariya Hidayat](http://ariya.ofilabs.com/about)\n (twitter: [@ariyahidayat](http://twitter.com/ariyahidayat)) and other contributors.\n\nRedistribution and use in source and binary forms, with or without\nmodification, are permitted provided that the following conditions are met:\n\n  * Redistributions of source code must retain the above copyright\n    notice, this list of conditions and the following disclaimer.\n\n  * Redistributions in binary form must reproduce the above copyright\n    notice, this list of conditions and the following disclaimer in the\n    documentation and/or other materials provided with the distribution.\n\nTHIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS \"AS IS\"\nAND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE\nIMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE\nARE DISCLAIMED. IN NO EVENT SHALL <COPYRIGHT HOLDER> BE LIABLE FOR ANY\nDIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES\n(INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;\nLOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND\nON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT\n(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF\nTHIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n\n\n#### closure-compiler\n\nsome of extensions is derived from closure-compiler\n\nApache License\nVersion 2.0, January 2004\nhttp://www.apache.org/licenses/\n\n\n### Where to ask for help?\n\nJoin our [Chatroom](https://gitter.im/eslint/doctrine)\n\n[npm-image]: https://img.shields.io/npm/v/doctrine.svg?style=flat-square\n[npm-url]: https://www.npmjs.com/package/doctrine\n[travis-image]: https://img.shields.io/travis/eslint/doctrine/master.svg?style=flat-square\n[travis-url]: https://travis-ci.org/eslint/doctrine\n[coveralls-image]: https://img.shields.io/coveralls/eslint/doctrine/master.svg?style=flat-square\n[coveralls-url]: https://coveralls.io/r/eslint/doctrine?branch=master\n[downloads-image]: http://img.shields.io/npm/dm/doctrine.svg?style=flat-square\n[downloads-url]: https://www.npmjs.com/package/doctrine\n",
-  "readmeFilename": "README.md",
   "gitHead": "18dba10454f17acbc49ae3c0628119734cb34952",
   "bugs": {
     "url": "https://github.com/eslint/doctrine/issues"
   },
   "_id": "doctrine@1.2.1",
   "_shasum": "ac0c649d70b9501e16e97acb7ec4e27168f746a3",
-  "_from": "doctrine@>=1.2.1 <2.0.0"
+  "_from": "doctrine@>=1.2.1 <2.0.0",
+  "_npmVersion": "2.14.9",
+  "_nodeVersion": "0.12.9",
+  "_npmUser": {
+    "name": "nzakas",
+    "email": "nicholas@nczconsulting.com"
+  },
+  "dist": {
+    "shasum": "ac0c649d70b9501e16e97acb7ec4e27168f746a3",
+    "tarball": "https://registry.npmjs.org/doctrine/-/doctrine-1.2.1.tgz"
+  },
+  "_npmOperationalInternal": {
+    "host": "packages-12-west.internal.npmjs.com",
+    "tmp": "tmp/doctrine-1.2.1.tgz_1459275509740_0.26917822007089853"
+  },
+  "_resolved": "https://registry.npmjs.org/doctrine/-/doctrine-1.2.1.tgz",
+  "readme": "ERROR: No README data found!"
 }
 
 },{}],23:[function(require,module,exports){
@@ -15512,9 +15549,16 @@ module.exports={
   },
   "maintainers": [
     {
-      "name": "Yusuke Suzuki",
-      "email": "utatane.tea@gmail.com",
-      "url": "http://github.com/Constellation"
+      "name": "constellation",
+      "email": "utatane.tea@gmail.com"
+    },
+    {
+      "name": "michaelficarra",
+      "email": "npm@michael.ficarra.me"
+    },
+    {
+      "name": "nzakas",
+      "email": "nicholas@nczconsulting.com"
     }
   ],
   "repository": {
@@ -15539,20 +15583,31 @@ module.exports={
     "lint": "jshint estraverse.js",
     "unit-test": "mocha --compilers coffee:coffee-script/register"
   },
-  "readme": "### Estraverse [![Build Status](https://secure.travis-ci.org/estools/estraverse.png)](http://travis-ci.org/estools/estraverse)\n\nEstraverse ([estraverse](http://github.com/estools/estraverse)) is\n[ECMAScript](http://www.ecma-international.org/publications/standards/Ecma-262.htm)\ntraversal functions from [esmangle project](http://github.com/estools/esmangle).\n\n### Documentation\n\nYou can find usage docs at [wiki page](https://github.com/estools/estraverse/wiki/Usage).\n\n### Example Usage\n\nThe following code will output all variables declared at the root of a file.\n\n```javascript\nestraverse.traverse(ast, {\n    enter: function (node, parent) {\n        if (node.type == 'FunctionExpression' || node.type == 'FunctionDeclaration')\n            return estraverse.VisitorOption.Skip;\n    },\n    leave: function (node, parent) {\n        if (node.type == 'VariableDeclarator')\n          console.log(node.id.name);\n    }\n});\n```\n\nWe can use `this.skip`, `this.remove` and `this.break` functions instead of using Skip, Remove and Break.\n\n```javascript\nestraverse.traverse(ast, {\n    enter: function (node) {\n        this.break();\n    }\n});\n```\n\nAnd estraverse provides `estraverse.replace` function. When returning node from `enter`/`leave`, current node is replaced with it.\n\n```javascript\nresult = estraverse.replace(tree, {\n    enter: function (node) {\n        // Replace it with replaced.\n        if (node.type === 'Literal')\n            return replaced;\n    }\n});\n```\n\nBy passing `visitor.keys` mapping, we can extend estraverse traversing functionality.\n\n```javascript\n// This tree contains a user-defined `TestExpression` node.\nvar tree = {\n    type: 'TestExpression',\n\n    // This 'argument' is the property containing the other **node**.\n    argument: {\n        type: 'Literal',\n        value: 20\n    },\n\n    // This 'extended' is the property not containing the other **node**.\n    extended: true\n};\nestraverse.traverse(tree, {\n    enter: function (node) { },\n\n    // Extending the existing traversing rules.\n    keys: {\n        // TargetNodeName: [ 'keys', 'containing', 'the', 'other', '**node**' ]\n        TestExpression: ['argument']\n    }\n});\n```\n\nBy passing `visitor.fallback` option, we can control the behavior when encountering unknown nodes.\n```javascript\n// This tree contains a user-defined `TestExpression` node.\nvar tree = {\n    type: 'TestExpression',\n\n    // This 'argument' is the property containing the other **node**.\n    argument: {\n        type: 'Literal',\n        value: 20\n    },\n\n    // This 'extended' is the property not containing the other **node**.\n    extended: true\n};\nestraverse.traverse(tree, {\n    enter: function (node) { },\n\n    // Iterating the child **nodes** of unknown nodes.\n    fallback: 'iteration'\n});\n```\n\n### License\n\nCopyright (C) 2012-2013 [Yusuke Suzuki](http://github.com/Constellation)\n (twitter: [@Constellation](http://twitter.com/Constellation)) and other contributors.\n\nRedistribution and use in source and binary forms, with or without\nmodification, are permitted provided that the following conditions are met:\n\n  * Redistributions of source code must retain the above copyright\n    notice, this list of conditions and the following disclaimer.\n\n  * Redistributions in binary form must reproduce the above copyright\n    notice, this list of conditions and the following disclaimer in the\n    documentation and/or other materials provided with the distribution.\n\nTHIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS \"AS IS\"\nAND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE\nIMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE\nARE DISCLAIMED. IN NO EVENT SHALL <COPYRIGHT HOLDER> BE LIABLE FOR ANY\nDIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES\n(INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;\nLOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND\nON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT\n(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF\nTHIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n",
-  "readmeFilename": "README.md",
+  "gitHead": "bbcccbfe98296585e4311c8755e1d00dcd581e3c",
   "bugs": {
     "url": "https://github.com/estools/estraverse/issues"
   },
   "_id": "estraverse@4.1.1",
   "_shasum": "f6caca728933a850ef90661d0e17982ba47111a2",
+  "_from": "estraverse@>=4.1.0 <4.2.0",
+  "_npmVersion": "2.14.4",
+  "_nodeVersion": "4.1.1",
+  "_npmUser": {
+    "name": "constellation",
+    "email": "utatane.tea@gmail.com"
+  },
+  "dist": {
+    "shasum": "f6caca728933a850ef90661d0e17982ba47111a2",
+    "tarball": "http://registry.npmjs.org/estraverse/-/estraverse-4.1.1.tgz"
+  },
+  "directories": {},
   "_resolved": "https://registry.npmjs.org/estraverse/-/estraverse-4.1.1.tgz",
-  "_from": "estraverse@>=4.1.0 <4.2.0"
+  "readme": "ERROR: No README data found!"
 }
 
 },{}],132:[function(require,module,exports){
-/* eslint-disable no-unused-vars */
 'use strict';
+/* eslint-disable no-unused-vars */
 var hasOwnProperty = Object.prototype.hasOwnProperty;
 var propIsEnumerable = Object.prototype.propertyIsEnumerable;
 
@@ -15564,7 +15619,51 @@ function toObject(val) {
 	return Object(val);
 }
 
-module.exports = Object.assign || function (target, source) {
+function shouldUseNative() {
+	try {
+		if (!Object.assign) {
+			return false;
+		}
+
+		// Detect buggy property enumeration order in older V8 versions.
+
+		// https://bugs.chromium.org/p/v8/issues/detail?id=4118
+		var test1 = new String('abc');  // eslint-disable-line
+		test1[5] = 'de';
+		if (Object.getOwnPropertyNames(test1)[0] === '5') {
+			return false;
+		}
+
+		// https://bugs.chromium.org/p/v8/issues/detail?id=3056
+		var test2 = {};
+		for (var i = 0; i < 10; i++) {
+			test2['_' + String.fromCharCode(i)] = i;
+		}
+		var order2 = Object.getOwnPropertyNames(test2).map(function (n) {
+			return test2[n];
+		});
+		if (order2.join('') !== '0123456789') {
+			return false;
+		}
+
+		// https://bugs.chromium.org/p/v8/issues/detail?id=3056
+		var test3 = {};
+		'abcdefghijklmnopqrst'.split('').forEach(function (letter) {
+			test3[letter] = letter;
+		});
+		if (Object.keys(Object.assign({}, test3)).join('') !==
+				'abcdefghijklmnopqrst') {
+			return false;
+		}
+
+		return true;
+	} catch (e) {
+		// We don't expect any of the above to throw, but better to be safe.
+		return false;
+	}
+}
+
+module.exports = shouldUseNative() ? Object.assign : function (target, source) {
 	var from;
 	var to = toObject(target);
 	var symbols;
@@ -15603,9 +15702,16 @@ module.exports={
   },
   "maintainers": [
     {
-      "name": "Yusuke Suzuki",
-      "email": "utatane.tea@gmail.com",
-      "url": "https://github.com/Constellation"
+      "name": "constellation",
+      "email": "utatane.tea@gmail.com"
+    },
+    {
+      "name": "michaelficarra",
+      "email": "npm@michael.ficarra.me"
+    },
+    {
+      "name": "nzakas",
+      "email": "nicholas@nczconsulting.com"
     }
   ],
   "repository": {
@@ -15636,15 +15742,30 @@ module.exports={
     "unit-test": "gulp test",
     "lint": "gulp lint"
   },
-  "readme": "### Esrecurse [![Build Status](https://travis-ci.org/estools/esrecurse.svg?branch=master)](https://travis-ci.org/estools/esrecurse)\n\nEsrecurse ([esrecurse](https://github.com/estools/esrecurse)) is\n[ECMAScript](http://www.ecma-international.org/publications/standards/Ecma-262.htm)\nrecursive traversing functionality.\n\n### Example Usage\n\nThe following code will output all variables declared at the root of a file.\n\n```javascript\nesrecurse.visit(ast, {\n    XXXStatement: function (node) {\n        this.visit(node.left);\n        // do something...\n        this.visit(node.right);\n    }\n});\n```\n\nWe can use `Visitor` instance.\n\n```javascript\nvar visitor = new esrecurse.Visitor({\n    XXXStatement: function (node) {\n        this.visit(node.left);\n        // do something...\n        this.visit(node.right);\n    }\n});\n\nvisitor.visit(ast);\n```\n\nWe can inherit `Visitor` instance easily.\n\n```javascript\nfunction DerivedVisitor() {\n    esrecurse.Visitor.call(/* this for constructor */  this  /* visitor object automatically becomes this. */);\n}\nutil.inherits(DerivedVisitor, esrecurse.Visitor);\nDerivedVisitor.prototype.XXXStatement = function (node) {\n    this.visit(node.left);\n    // do something...\n    this.visit(node.right);\n};\n```\n\nAnd you can invoke default visiting operation inside custom visit operation.\n\n```javascript\nfunction DerivedVisitor() {\n    esrecurse.Visitor.call(/* this for constructor */  this  /* visitor object automatically becomes this. */);\n}\nutil.inherits(DerivedVisitor, esrecurse.Visitor);\nDerivedVisitor.prototype.XXXStatement = function (node) {\n    // do something...\n    this.visitChildren(node);\n};\n```\n\nThe `childVisitorKeys` option does customize the behavoir of `this.visitChildren(node)`.\nWe can use user-defined node types.\n\n```javascript\n// This tree contains a user-defined `TestExpression` node.\nvar tree = {\n    type: 'TestExpression',\n\n    // This 'argument' is the property containing the other **node**.\n    argument: {\n        type: 'Literal',\n        value: 20\n    },\n\n    // This 'extended' is the property not containing the other **node**.\n    extended: true\n};\nesrecurse.visit(\n    ast,\n    {\n        Literal: function (node) {\n            // do something...\n        }\n    },\n    {\n        // Extending the existing traversing rules.\n        childVisitorKeys: {\n            // TargetNodeName: [ 'keys', 'containing', 'the', 'other', '**node**' ]\n            TestExpression: ['argument']\n        }\n    }\n);\n```\n\nWe can use the `fallback` option as well.\nIf the `fallback` option is `\"iteration\"`, `esrecurse` would visit all enumerable properties of unknown nodes.\nPlease note circular references cause the stack overflow. AST might have circular references in additional properties for some purpose (e.g. `node.parent`).\n\n```javascript\nesrecurse.visit(\n    ast,\n    {\n        Literal: function (node) {\n            // do something...\n        }\n    },\n    {\n        fallback: 'iteration'\n    }\n);\n```\n\nIf the `fallback` option is a function, `esrecurse` calls this function to determine the enumerable properties of unknown nodes.\nPlease note circular references cause the stack overflow. AST might have circular references in additional properties for some purpose (e.g. `node.parent`).\n\n```javascript\nesrecurse.visit(\n    ast,\n    {\n        Literal: function (node) {\n            // do something...\n        }\n    },\n    {\n        fallback: function (node) {\n            return Object.keys(node).filter(function(key) {\n                return key !== 'argument'\n            });\n        }\n    }\n);\n```\n\n### License\n\nCopyright (C) 2014 [Yusuke Suzuki](https://github.com/Constellation)\n (twitter: [@Constellation](https://twitter.com/Constellation)) and other contributors.\n\nRedistribution and use in source and binary forms, with or without\nmodification, are permitted provided that the following conditions are met:\n\n  * Redistributions of source code must retain the above copyright\n    notice, this list of conditions and the following disclaimer.\n\n  * Redistributions in binary form must reproduce the above copyright\n    notice, this list of conditions and the following disclaimer in the\n    documentation and/or other materials provided with the distribution.\n\nTHIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS \"AS IS\"\nAND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE\nIMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE\nARE DISCLAIMED. IN NO EVENT SHALL <COPYRIGHT HOLDER> BE LIABLE FOR ANY\nDIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES\n(INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;\nLOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND\nON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT\n(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF\nTHIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n",
-  "readmeFilename": "README.md",
   "gitHead": "63a34714834bd7ad2063054bd4abb24fb82ca667",
   "bugs": {
     "url": "https://github.com/estools/esrecurse/issues"
   },
   "_id": "esrecurse@4.1.0",
   "_shasum": "4713b6536adf7f2ac4f327d559e7756bff648220",
-  "_from": "esrecurse@>=4.1.0 <5.0.0"
+  "_from": "esrecurse@>=4.1.0 <5.0.0",
+  "_npmVersion": "2.14.9",
+  "_nodeVersion": "0.12.9",
+  "_npmUser": {
+    "name": "nzakas",
+    "email": "nicholas@nczconsulting.com"
+  },
+  "dist": {
+    "shasum": "4713b6536adf7f2ac4f327d559e7756bff648220",
+    "tarball": "http://registry.npmjs.org/esrecurse/-/esrecurse-4.1.0.tgz"
+  },
+  "_npmOperationalInternal": {
+    "host": "packages-13-west.internal.npmjs.com",
+    "tmp": "tmp/esrecurse-4.1.0.tgz_1457712782215_0.15950557170435786"
+  },
+  "directories": {},
+  "_resolved": "https://registry.npmjs.org/esrecurse/-/esrecurse-4.1.0.tgz",
+  "readme": "ERROR: No README data found!"
 }
 
 },{}],134:[function(require,module,exports){
@@ -15659,9 +15780,16 @@ module.exports={
   },
   "maintainers": [
     {
-      "name": "Yusuke Suzuki",
-      "email": "utatane.tea@gmail.com",
-      "url": "http://github.com/Constellation"
+      "name": "constellation",
+      "email": "utatane.tea@gmail.com"
+    },
+    {
+      "name": "michaelficarra",
+      "email": "npm@michael.ficarra.me"
+    },
+    {
+      "name": "nzakas",
+      "email": "nicholas@nczconsulting.com"
     }
   ],
   "repository": {
@@ -15704,15 +15832,30 @@ module.exports={
     "lint": "gulp lint",
     "jsdoc": "jsdoc src/*.js README.md"
   },
-  "readme": "Escope ([escope](http://github.com/estools/escope)) is\n[ECMAScript](http://www.ecma-international.org/publications/standards/Ecma-262.htm)\nscope analyzer extracted from [esmangle project](http://github.com/estools/esmangle).\n\n[![Build Status](https://travis-ci.org/estools/escope.png?branch=master)](https://travis-ci.org/estools/escope)\n\n### Example\n\n```js\nvar escope = require('escope');\nvar esprima = require('esprima');\nvar estraverse = require('estraverse');\n\nvar ast = esprima.parse(code);\nvar scopeManager = escope.analyze(ast);\n\nvar currentScope = scopeManager.acquire(ast);   // global scope\n\nestraverse.traverse(ast, {\n    enter: function(node, parent) {\n        // do stuff\n        \n        if (/Function/.test(node.type)) {\n            currentScope = scopeManager.acquire(node);  // get current function scope\n        }\n    },\n    leave: function(node, parent) {\n        if (/Function/.test(node.type)) {\n            currentScope = currentScope.upper;  // set to parent scope\n        }\n        \n        // do stuff\n    }\n});\n```\n\n### Document\n\nGenerated JSDoc is [here](http://estools.github.io/escope/).\n\n### Demos and Tools\n\nDemonstration is [here](http://mazurov.github.io/escope-demo/) by [Sasha Mazurov](https://github.com/mazurov) (twitter: [@mazurov](http://twitter.com/mazurov)). [issue](https://github.com/estools/escope/issues/14)\n\n![Demo](https://f.cloud.github.com/assets/75759/462920/7aa6dd40-b4f5-11e2-9f07-9f4e8d0415f9.gif)\n\n\nAnd there are tools constructed on Escope.\n\n- [Esmangle](https://github.com/estools/esmangle) is a minifier / mangler / optimizer.\n- [Eslevels](https://github.com/mazurov/eslevels) is a scope levels analyzer and [SublimeText plugin for scope context coloring](https://github.com/mazurov/sublime-levels) is constructed on it.\n- [Esgoggles](https://github.com/keeyipchan/esgoggles) is JavaScript code browser.\n\n\n### License\n\nCopyright (C) 2012-2013 [Yusuke Suzuki](http://github.com/Constellation)\n (twitter: [@Constellation](http://twitter.com/Constellation)) and other contributors.\n\nRedistribution and use in source and binary forms, with or without\nmodification, are permitted provided that the following conditions are met:\n\n  * Redistributions of source code must retain the above copyright\n    notice, this list of conditions and the following disclaimer.\n\n  * Redistributions in binary form must reproduce the above copyright\n    notice, this list of conditions and the following disclaimer in the\n    documentation and/or other materials provided with the distribution.\n\nTHIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS \"AS IS\"\nAND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE\nIMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE\nARE DISCLAIMED. IN NO EVENT SHALL <COPYRIGHT HOLDER> BE LIABLE FOR ANY\nDIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES\n(INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;\nLOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND\nON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT\n(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF\nTHIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n",
-  "readmeFilename": "README.md",
   "gitHead": "aa35861faa76a09f01203dee3497a939d70b463c",
   "bugs": {
     "url": "https://github.com/estools/escope/issues"
   },
   "_id": "escope@3.6.0",
   "_shasum": "e01975e812781a163a6dadfdd80398dc64c889c3",
-  "_from": "escope@>=3.6.0 <4.0.0"
+  "_from": "escope@>=3.6.0 <4.0.0",
+  "_npmVersion": "2.14.9",
+  "_nodeVersion": "0.12.9",
+  "_npmUser": {
+    "name": "nzakas",
+    "email": "nicholas@nczconsulting.com"
+  },
+  "dist": {
+    "shasum": "e01975e812781a163a6dadfdd80398dc64c889c3",
+    "tarball": "http://registry.npmjs.org/escope/-/escope-3.6.0.tgz"
+  },
+  "_npmOperationalInternal": {
+    "host": "packages-12-west.internal.npmjs.com",
+    "tmp": "tmp/escope-3.6.0.tgz_1457720018969_0.025237560039386153"
+  },
+  "directories": {},
+  "_resolved": "https://registry.npmjs.org/escope/-/escope-3.6.0.tgz",
+  "readme": "ERROR: No README data found!"
 }
 
 },{}],135:[function(require,module,exports){
@@ -16578,9 +16721,16 @@ module.exports={
   },
   "maintainers": [
     {
-      "name": "Yusuke Suzuki",
-      "email": "utatane.tea@gmail.com",
-      "url": "http://github.com/Constellation"
+      "name": "constellation",
+      "email": "utatane.tea@gmail.com"
+    },
+    {
+      "name": "michaelficarra",
+      "email": "npm@michael.ficarra.me"
+    },
+    {
+      "name": "nzakas",
+      "email": "nicholas@nczconsulting.com"
     }
   ],
   "repository": {
@@ -16606,15 +16756,30 @@ module.exports={
     "lint": "jshint estraverse.js",
     "unit-test": "mocha --compilers js:babel-register"
   },
-  "readme": "### Estraverse [![Build Status](https://secure.travis-ci.org/estools/estraverse.png)](http://travis-ci.org/estools/estraverse)\n\nEstraverse ([estraverse](http://github.com/estools/estraverse)) is\n[ECMAScript](http://www.ecma-international.org/publications/standards/Ecma-262.htm)\ntraversal functions from [esmangle project](http://github.com/estools/esmangle).\n\n### Documentation\n\nYou can find usage docs at [wiki page](https://github.com/estools/estraverse/wiki/Usage).\n\n### Example Usage\n\nThe following code will output all variables declared at the root of a file.\n\n```javascript\nestraverse.traverse(ast, {\n    enter: function (node, parent) {\n        if (node.type == 'FunctionExpression' || node.type == 'FunctionDeclaration')\n            return estraverse.VisitorOption.Skip;\n    },\n    leave: function (node, parent) {\n        if (node.type == 'VariableDeclarator')\n          console.log(node.id.name);\n    }\n});\n```\n\nWe can use `this.skip`, `this.remove` and `this.break` functions instead of using Skip, Remove and Break.\n\n```javascript\nestraverse.traverse(ast, {\n    enter: function (node) {\n        this.break();\n    }\n});\n```\n\nAnd estraverse provides `estraverse.replace` function. When returning node from `enter`/`leave`, current node is replaced with it.\n\n```javascript\nresult = estraverse.replace(tree, {\n    enter: function (node) {\n        // Replace it with replaced.\n        if (node.type === 'Literal')\n            return replaced;\n    }\n});\n```\n\nBy passing `visitor.keys` mapping, we can extend estraverse traversing functionality.\n\n```javascript\n// This tree contains a user-defined `TestExpression` node.\nvar tree = {\n    type: 'TestExpression',\n\n    // This 'argument' is the property containing the other **node**.\n    argument: {\n        type: 'Literal',\n        value: 20\n    },\n\n    // This 'extended' is the property not containing the other **node**.\n    extended: true\n};\nestraverse.traverse(tree, {\n    enter: function (node) { },\n\n    // Extending the existing traversing rules.\n    keys: {\n        // TargetNodeName: [ 'keys', 'containing', 'the', 'other', '**node**' ]\n        TestExpression: ['argument']\n    }\n});\n```\n\nBy passing `visitor.fallback` option, we can control the behavior when encountering unknown nodes.\n\n```javascript\n// This tree contains a user-defined `TestExpression` node.\nvar tree = {\n    type: 'TestExpression',\n\n    // This 'argument' is the property containing the other **node**.\n    argument: {\n        type: 'Literal',\n        value: 20\n    },\n\n    // This 'extended' is the property not containing the other **node**.\n    extended: true\n};\nestraverse.traverse(tree, {\n    enter: function (node) { },\n\n    // Iterating the child **nodes** of unknown nodes.\n    fallback: 'iteration'\n});\n```\n\nWhen `visitor.fallback` is a function, we can determine which keys to visit on each node.\n\n```javascript\n// This tree contains a user-defined `TestExpression` node.\nvar tree = {\n    type: 'TestExpression',\n\n    // This 'argument' is the property containing the other **node**.\n    argument: {\n        type: 'Literal',\n        value: 20\n    },\n\n    // This 'extended' is the property not containing the other **node**.\n    extended: true\n};\nestraverse.traverse(tree, {\n    enter: function (node) { },\n\n    // Skip the `argument` property of each node\n    fallback: function(node) {\n        return Object.keys(node).filter(function(key) {\n            return key !== 'argument';\n        });\n    }\n});\n```\n\n### License\n\nCopyright (C) 2012-2016 [Yusuke Suzuki](http://github.com/Constellation)\n (twitter: [@Constellation](http://twitter.com/Constellation)) and other contributors.\n\nRedistribution and use in source and binary forms, with or without\nmodification, are permitted provided that the following conditions are met:\n\n  * Redistributions of source code must retain the above copyright\n    notice, this list of conditions and the following disclaimer.\n\n  * Redistributions in binary form must reproduce the above copyright\n    notice, this list of conditions and the following disclaimer in the\n    documentation and/or other materials provided with the distribution.\n\nTHIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS \"AS IS\"\nAND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE\nIMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE\nARE DISCLAIMED. IN NO EVENT SHALL <COPYRIGHT HOLDER> BE LIABLE FOR ANY\nDIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES\n(INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;\nLOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND\nON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT\n(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF\nTHIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n",
-  "readmeFilename": "README.md",
   "gitHead": "6f6a4e99653908e859c7c10d04d9518bf4844ede",
   "bugs": {
     "url": "https://github.com/estools/estraverse/issues"
   },
   "_id": "estraverse@4.2.0",
   "_shasum": "0dee3fed31fcd469618ce7342099fc1afa0bdb13",
-  "_from": "estraverse@>=4.2.0 <5.0.0"
+  "_from": "estraverse@>=4.2.0 <5.0.0",
+  "_npmVersion": "2.14.9",
+  "_nodeVersion": "0.12.9",
+  "_npmUser": {
+    "name": "nzakas",
+    "email": "nicholas@nczconsulting.com"
+  },
+  "dist": {
+    "shasum": "0dee3fed31fcd469618ce7342099fc1afa0bdb13",
+    "tarball": "http://registry.npmjs.org/estraverse/-/estraverse-4.2.0.tgz"
+  },
+  "_npmOperationalInternal": {
+    "host": "packages-12-west.internal.npmjs.com",
+    "tmp": "tmp/estraverse-4.2.0.tgz_1457646738925_0.7118953282479197"
+  },
+  "directories": {},
+  "_resolved": "https://registry.npmjs.org/estraverse/-/estraverse-4.2.0.tgz",
+  "readme": "ERROR: No README data found!"
 }
 
 },{}],137:[function(require,module,exports){
@@ -18074,12 +18239,15 @@ module.exports={
 		"getHostName": false,
 		"getMemInfo": false,
 		"hostname": false,
+		"ISODate": false,
 		"listFiles": false,
 		"load": false,
 		"ls": false,
 		"md5sumFile": false,
 		"mkdir": false,
 		"Mongo": false,
+		"NumberInt": false,
+		"NumberLong": false,
 		"ObjectId": false,
 		"PlanCache": false,
 		"print": false,
@@ -18981,8 +19149,7 @@ function extend() {
 (function (global){
 /**
  * @license
- * lodash 4.11.1 (Custom Build) <https://lodash.com/>
- * Build: `lodash -d -o ./foo/lodash.js`
+ * lodash <https://lodash.com/>
  * Copyright jQuery Foundation and other contributors <https://jquery.org/>
  * Released under MIT license <https://lodash.com/license>
  * Based on Underscore.js 1.8.3 <http://underscorejs.org/LICENSE>
@@ -18994,7 +19161,7 @@ function extend() {
   var undefined;
 
   /** Used as the semantic version number. */
-  var VERSION = '4.11.1';
+  var VERSION = '4.12.0';
 
   /** Used as the size to enable large array optimizations. */
   var LARGE_ARRAY_SIZE = 200;
@@ -19162,11 +19329,11 @@ function extend() {
       rsLowerRange = 'a-z\\xdf-\\xf6\\xf8-\\xff',
       rsMathOpRange = '\\xac\\xb1\\xd7\\xf7',
       rsNonCharRange = '\\x00-\\x2f\\x3a-\\x40\\x5b-\\x60\\x7b-\\xbf',
-      rsQuoteRange = '\\u2018\\u2019\\u201c\\u201d',
+      rsPunctuationRange = '\\u2000-\\u206f',
       rsSpaceRange = ' \\t\\x0b\\f\\xa0\\ufeff\\n\\r\\u2028\\u2029\\u1680\\u180e\\u2000\\u2001\\u2002\\u2003\\u2004\\u2005\\u2006\\u2007\\u2008\\u2009\\u200a\\u202f\\u205f\\u3000',
       rsUpperRange = 'A-Z\\xc0-\\xd6\\xd8-\\xde',
       rsVarRange = '\\ufe0e\\ufe0f',
-      rsBreakRange = rsMathOpRange + rsNonCharRange + rsQuoteRange + rsSpaceRange;
+      rsBreakRange = rsMathOpRange + rsNonCharRange + rsPunctuationRange + rsSpaceRange;
 
   /** Used to compose unicode capture groups. */
   var rsApos = "['\u2019]",
@@ -19439,30 +19606,6 @@ function extend() {
   }
 
   /**
-   * Creates a new array concatenating `array` with `other`.
-   *
-   * @private
-   * @param {Array} array The first array to concatenate.
-   * @param {Array} other The second array to concatenate.
-   * @returns {Array} Returns the new concatenated array.
-   */
-  function arrayConcat(array, other) {
-    var index = -1,
-        length = array.length,
-        othIndex = -1,
-        othLength = other.length,
-        result = Array(length + othLength);
-
-    while (++index < length) {
-      result[index] = array[index];
-    }
-    while (++othIndex < othLength) {
-      result[index++] = other[othIndex];
-    }
-    return result;
-  }
-
-  /**
    * A specialized version of `_.forEach` for arrays without support for
    * iteratee shorthands.
    *
@@ -19693,35 +19836,6 @@ function extend() {
   }
 
   /**
-   * The base implementation of methods like `_.max` and `_.min` which accepts a
-   * `comparator` to determine the extremum value.
-   *
-   * @private
-   * @param {Array} array The array to iterate over.
-   * @param {Function} iteratee The iteratee invoked per iteration.
-   * @param {Function} comparator The comparator used to compare values.
-   * @returns {*} Returns the extremum value.
-   */
-  function baseExtremum(array, iteratee, comparator) {
-    var index = -1,
-        length = array.length;
-
-    while (++index < length) {
-      var value = array[index],
-          current = iteratee(value);
-
-      if (current != null && (computed === undefined
-            ? current === current
-            : comparator(current, computed)
-          )) {
-        var computed = current,
-            result = value;
-      }
-    }
-    return result;
-  }
-
-  /**
    * The base implementation of methods like `_.find` and `_.findKey`, without
    * support for iteratee shorthands, which iterates over `collection` using
    * `eachFunc`.
@@ -19918,7 +20032,7 @@ function extend() {
    * @private
    * @param {Object} object The object to query.
    * @param {Array} props The property names to get values for.
-   * @returns {Object} Returns the new array of key-value pairs.
+   * @returns {Object} Returns the key-value pairs.
    */
   function baseToPairs(object, props) {
     return arrayMap(props, function(key) {
@@ -19931,7 +20045,7 @@ function extend() {
    *
    * @private
    * @param {Function} func The function to cap arguments for.
-   * @returns {Function} Returns the new function.
+   * @returns {Function} Returns the new capped function.
    */
   function baseUnary(func) {
     return function(value) {
@@ -19953,6 +20067,18 @@ function extend() {
     return arrayMap(props, function(key) {
       return object[key];
     });
+  }
+
+  /**
+   * Checks if a cache value for `key` exists.
+   *
+   * @private
+   * @param {Object} cache The cache to query.
+   * @param {string} key The key of the entry to check.
+   * @returns {boolean} Returns `true` if an entry for `key` exists, else `false`.
+   */
+  function cacheHas(cache, key) {
+    return cache.has(key);
   }
 
   /**
@@ -20000,79 +20126,6 @@ function extend() {
   }
 
   /**
-   * Compares values to sort them in ascending order.
-   *
-   * @private
-   * @param {*} value The value to compare.
-   * @param {*} other The other value to compare.
-   * @returns {number} Returns the sort order indicator for `value`.
-   */
-  function compareAscending(value, other) {
-    if (value !== other) {
-      var valIsNull = value === null,
-          valIsUndef = value === undefined,
-          valIsReflexive = value === value;
-
-      var othIsNull = other === null,
-          othIsUndef = other === undefined,
-          othIsReflexive = other === other;
-
-      if ((value > other && !othIsNull) || !valIsReflexive ||
-          (valIsNull && !othIsUndef && othIsReflexive) ||
-          (valIsUndef && othIsReflexive)) {
-        return 1;
-      }
-      if ((value < other && !valIsNull) || !othIsReflexive ||
-          (othIsNull && !valIsUndef && valIsReflexive) ||
-          (othIsUndef && valIsReflexive)) {
-        return -1;
-      }
-    }
-    return 0;
-  }
-
-  /**
-   * Used by `_.orderBy` to compare multiple properties of a value to another
-   * and stable sort them.
-   *
-   * If `orders` is unspecified, all values are sorted in ascending order. Otherwise,
-   * specify an order of "desc" for descending or "asc" for ascending sort order
-   * of corresponding values.
-   *
-   * @private
-   * @param {Object} object The object to compare.
-   * @param {Object} other The other object to compare.
-   * @param {boolean[]|string[]} orders The order to sort by for each property.
-   * @returns {number} Returns the sort order indicator for `object`.
-   */
-  function compareMultiple(object, other, orders) {
-    var index = -1,
-        objCriteria = object.criteria,
-        othCriteria = other.criteria,
-        length = objCriteria.length,
-        ordersLength = orders.length;
-
-    while (++index < length) {
-      var result = compareAscending(objCriteria[index], othCriteria[index]);
-      if (result) {
-        if (index >= ordersLength) {
-          return result;
-        }
-        var order = orders[index];
-        return result * (order == 'desc' ? -1 : 1);
-      }
-    }
-    // Fixes an `Array#sort` bug in the JS engine embedded in Adobe applications
-    // that causes it, under certain circumstances, to provide the same value for
-    // `object` and `other`. See https://github.com/jashkenas/underscore/pull/1247
-    // for more details.
-    //
-    // This also ensures a stable sort in V8 and other engines.
-    // See https://bugs.chromium.org/p/v8/issues/detail?id=90 for more details.
-    return object.index - other.index;
-  }
-
-  /**
    * Gets the number of `placeholder` occurrences in `array`.
    *
    * @private
@@ -20090,29 +20143,6 @@ function extend() {
       }
     }
     return result;
-  }
-
-  /**
-   * Creates a function that performs a mathematical operation on two values.
-   *
-   * @private
-   * @param {Function} operator The function to perform the operation.
-   * @returns {Function} Returns the new mathematical operation function.
-   */
-  function createMathOperation(operator) {
-    return function(value, other) {
-      var result;
-      if (value === undefined && other === undefined) {
-        return 0;
-      }
-      if (value !== undefined) {
-        result = value;
-      }
-      if (other !== undefined) {
-        result = result === undefined ? other : operator(result, other);
-      }
-      return result;
-    };
   }
 
   /**
@@ -20190,20 +20220,6 @@ function extend() {
   }
 
   /**
-   * Checks if `value` is a valid array-like index.
-   *
-   * @private
-   * @param {*} value The value to check.
-   * @param {number} [length=MAX_SAFE_INTEGER] The upper bounds of a valid index.
-   * @returns {boolean} Returns `true` if `value` is a valid index, else `false`.
-   */
-  function isIndex(value, length) {
-    value = (typeof value == 'number' || reIsUint.test(value)) ? +value : -1;
-    length = length == null ? MAX_SAFE_INTEGER : length;
-    return value > -1 && value % 1 == 0 && value < length;
-  }
-
-  /**
    * Converts `iterator` to an array.
    *
    * @private
@@ -20221,11 +20237,11 @@ function extend() {
   }
 
   /**
-   * Converts `map` to an array.
+   * Converts `map` to its key-value pairs.
    *
    * @private
    * @param {Object} map The map to convert.
-   * @returns {Array} Returns the converted array.
+   * @returns {Array} Returns the key-value pairs.
    */
   function mapToArray(map) {
     var index = -1,
@@ -20263,11 +20279,11 @@ function extend() {
   }
 
   /**
-   * Converts `set` to an array.
+   * Converts `set` to an array of its values.
    *
    * @private
    * @param {Object} set The set to convert.
-   * @returns {Array} Returns the converted array.
+   * @returns {Array} Returns the values.
    */
   function setToArray(set) {
     var index = -1,
@@ -20275,6 +20291,23 @@ function extend() {
 
     set.forEach(function(value) {
       result[++index] = value;
+    });
+    return result;
+  }
+
+  /**
+   * Converts `set` to its value-value pairs.
+   *
+   * @private
+   * @param {Object} set The set to convert.
+   * @returns {Array} Returns the value-value pairs.
+   */
+  function setToPairs(set) {
+    var index = -1,
+        result = Array(set.size);
+
+    set.forEach(function(value) {
+      result[++index] = [value, value];
     });
     return result;
   }
@@ -20532,10 +20565,10 @@ function extend() {
      * `floor`, `forEach`, `forEachRight`, `forIn`, `forInRight`, `forOwn`,
      * `forOwnRight`, `get`, `gt`, `gte`, `has`, `hasIn`, `head`, `identity`,
      * `includes`, `indexOf`, `inRange`, `invoke`, `isArguments`, `isArray`,
-     * `isArrayBuffer`, `isArrayLike`, `isArrayLikeObject`, `isBoolean`, `isBuffer`,
-     * `isDate`, `isElement`, `isEmpty`, `isEqual`, `isEqualWith`, `isError`,
-     * `isFinite`, `isFunction`, `isInteger`, `isLength`, `isMap`, `isMatch`,
-     * `isMatchWith`, `isNaN`, `isNative`, `isNil`, `isNull`, `isNumber`,
+     * `isArrayBuffer`, `isArrayLike`, `isArrayLikeObject`, `isBoolean`,
+     * `isBuffer`, `isDate`, `isElement`, `isEmpty`, `isEqual`, `isEqualWith`,
+     * `isError`, `isFinite`, `isFunction`, `isInteger`, `isLength`, `isMap`,
+     * `isMatch`, `isMatchWith`, `isNaN`, `isNative`, `isNil`, `isNull`, `isNumber`,
      * `isObject`, `isObjectLike`, `isPlainObject`, `isRegExp`, `isSafeInteger`,
      * `isSet`, `isString`, `isUndefined`, `isTypedArray`, `isWeakMap`, `isWeakSet`,
      * `join`, `kebabCase`, `last`, `lastIndexOf`, `lowerCase`, `lowerFirst`,
@@ -20544,9 +20577,9 @@ function extend() {
      * `pop`, `random`, `reduce`, `reduceRight`, `repeat`, `result`, `round`,
      * `runInContext`, `sample`, `shift`, `size`, `snakeCase`, `some`, `sortedIndex`,
      * `sortedIndexBy`, `sortedLastIndex`, `sortedLastIndexBy`, `startCase`,
-     * `startsWith`, `subtract`, `sum`, `sumBy`, `template`, `times`, `toInteger`,
-     * `toJSON`, `toLength`, `toLower`, `toNumber`, `toSafeInteger`, `toString`,
-     * `toUpper`, `trim`, `trimEnd`, `trimStart`, `truncate`, `unescape`,
+     * `startsWith`, `subtract`, `sum`, `sumBy`, `template`, `times`, `toFinite`,
+     * `toInteger`, `toJSON`, `toLength`, `toLower`, `toNumber`, `toSafeInteger`,
+     * `toString`, `toUpper`, `trim`, `trimEnd`, `trimStart`, `truncate`, `unescape`,
      * `uniqueId`, `upperCase`, `upperFirst`, `value`, and `words`
      *
      * @name _
@@ -20806,64 +20839,212 @@ function extend() {
      *
      * @private
      * @constructor
-     * @returns {Object} Returns the new hash object.
+     * @param {Array} [entries] The key-value pairs to cache.
      */
-    function Hash() {}
+    function Hash(entries) {
+      var index = -1,
+          length = entries ? entries.length : 0;
+
+      this.clear();
+      while (++index < length) {
+        var entry = entries[index];
+        this.set(entry[0], entry[1]);
+      }
+    }
+
+    /**
+     * Removes all key-value entries from the hash.
+     *
+     * @private
+     * @name clear
+     * @memberOf Hash
+     */
+    function hashClear() {
+      this.__data__ = nativeCreate ? nativeCreate(null) : {};
+    }
 
     /**
      * Removes `key` and its value from the hash.
      *
      * @private
+     * @name delete
+     * @memberOf Hash
      * @param {Object} hash The hash to modify.
      * @param {string} key The key of the value to remove.
      * @returns {boolean} Returns `true` if the entry was removed, else `false`.
      */
-    function hashDelete(hash, key) {
-      return hashHas(hash, key) && delete hash[key];
+    function hashDelete(key) {
+      return this.has(key) && delete this.__data__[key];
     }
 
     /**
      * Gets the hash value for `key`.
      *
      * @private
-     * @param {Object} hash The hash to query.
+     * @name get
+     * @memberOf Hash
      * @param {string} key The key of the value to get.
      * @returns {*} Returns the entry value.
      */
-    function hashGet(hash, key) {
+    function hashGet(key) {
+      var data = this.__data__;
       if (nativeCreate) {
-        var result = hash[key];
+        var result = data[key];
         return result === HASH_UNDEFINED ? undefined : result;
       }
-      return hasOwnProperty.call(hash, key) ? hash[key] : undefined;
+      return hasOwnProperty.call(data, key) ? data[key] : undefined;
     }
 
     /**
      * Checks if a hash value for `key` exists.
      *
      * @private
-     * @param {Object} hash The hash to query.
+     * @name has
+     * @memberOf Hash
      * @param {string} key The key of the entry to check.
      * @returns {boolean} Returns `true` if an entry for `key` exists, else `false`.
      */
-    function hashHas(hash, key) {
-      return nativeCreate ? hash[key] !== undefined : hasOwnProperty.call(hash, key);
+    function hashHas(key) {
+      var data = this.__data__;
+      return nativeCreate ? data[key] !== undefined : hasOwnProperty.call(data, key);
     }
 
     /**
      * Sets the hash `key` to `value`.
      *
      * @private
-     * @param {Object} hash The hash to modify.
+     * @name set
+     * @memberOf Hash
      * @param {string} key The key of the value to set.
      * @param {*} value The value to set.
+     * @returns {Object} Returns the hash instance.
      */
-    function hashSet(hash, key, value) {
-      hash[key] = (nativeCreate && value === undefined) ? HASH_UNDEFINED : value;
+    function hashSet(key, value) {
+      var data = this.__data__;
+      data[key] = (nativeCreate && value === undefined) ? HASH_UNDEFINED : value;
+      return this;
     }
 
-    // Avoid inheriting from `Object.prototype` when possible.
-    Hash.prototype = nativeCreate ? nativeCreate(null) : objectProto;
+    // Add methods to `Hash`.
+    Hash.prototype.clear = hashClear;
+    Hash.prototype['delete'] = hashDelete;
+    Hash.prototype.get = hashGet;
+    Hash.prototype.has = hashHas;
+    Hash.prototype.set = hashSet;
+
+    /*------------------------------------------------------------------------*/
+
+    /**
+     * Creates an list cache object.
+     *
+     * @private
+     * @constructor
+     * @param {Array} [entries] The key-value pairs to cache.
+     */
+    function ListCache(entries) {
+      var index = -1,
+          length = entries ? entries.length : 0;
+
+      this.clear();
+      while (++index < length) {
+        var entry = entries[index];
+        this.set(entry[0], entry[1]);
+      }
+    }
+
+    /**
+     * Removes all key-value entries from the list cache.
+     *
+     * @private
+     * @name clear
+     * @memberOf ListCache
+     */
+    function listCacheClear() {
+      this.__data__ = [];
+    }
+
+    /**
+     * Removes `key` and its value from the list cache.
+     *
+     * @private
+     * @name delete
+     * @memberOf ListCache
+     * @param {string} key The key of the value to remove.
+     * @returns {boolean} Returns `true` if the entry was removed, else `false`.
+     */
+    function listCacheDelete(key) {
+      var data = this.__data__,
+          index = assocIndexOf(data, key);
+
+      if (index < 0) {
+        return false;
+      }
+      var lastIndex = data.length - 1;
+      if (index == lastIndex) {
+        data.pop();
+      } else {
+        splice.call(data, index, 1);
+      }
+      return true;
+    }
+
+    /**
+     * Gets the list cache value for `key`.
+     *
+     * @private
+     * @name get
+     * @memberOf ListCache
+     * @param {string} key The key of the value to get.
+     * @returns {*} Returns the entry value.
+     */
+    function listCacheGet(key) {
+      var data = this.__data__,
+          index = assocIndexOf(data, key);
+
+      return index < 0 ? undefined : data[index][1];
+    }
+
+    /**
+     * Checks if a list cache value for `key` exists.
+     *
+     * @private
+     * @name has
+     * @memberOf ListCache
+     * @param {string} key The key of the entry to check.
+     * @returns {boolean} Returns `true` if an entry for `key` exists, else `false`.
+     */
+    function listCacheHas(key) {
+      return assocIndexOf(this.__data__, key) > -1;
+    }
+
+    /**
+     * Sets the list cache `key` to `value`.
+     *
+     * @private
+     * @name set
+     * @memberOf ListCache
+     * @param {string} key The key of the value to set.
+     * @param {*} value The value to set.
+     * @returns {Object} Returns the list cache instance.
+     */
+    function listCacheSet(key, value) {
+      var data = this.__data__,
+          index = assocIndexOf(data, key);
+
+      if (index < 0) {
+        data.push([key, value]);
+      } else {
+        data[index][1] = value;
+      }
+      return this;
+    }
+
+    // Add methods to `ListCache`.
+    ListCache.prototype.clear = listCacheClear;
+    ListCache.prototype['delete'] = listCacheDelete;
+    ListCache.prototype.get = listCacheGet;
+    ListCache.prototype.has = listCacheHas;
+    ListCache.prototype.set = listCacheSet;
 
     /*------------------------------------------------------------------------*/
 
@@ -20872,15 +21053,15 @@ function extend() {
      *
      * @private
      * @constructor
-     * @param {Array} [values] The values to cache.
+     * @param {Array} [entries] The key-value pairs to cache.
      */
-    function MapCache(values) {
+    function MapCache(entries) {
       var index = -1,
-          length = values ? values.length : 0;
+          length = entries ? entries.length : 0;
 
       this.clear();
       while (++index < length) {
-        var entry = values[index];
+        var entry = entries[index];
         this.set(entry[0], entry[1]);
       }
     }
@@ -20892,10 +21073,10 @@ function extend() {
      * @name clear
      * @memberOf MapCache
      */
-    function mapClear() {
+    function mapCacheClear() {
       this.__data__ = {
         'hash': new Hash,
-        'map': Map ? new Map : [],
+        'map': new (Map || ListCache),
         'string': new Hash
       };
     }
@@ -20909,12 +21090,8 @@ function extend() {
      * @param {string} key The key of the value to remove.
      * @returns {boolean} Returns `true` if the entry was removed, else `false`.
      */
-    function mapDelete(key) {
-      var data = this.__data__;
-      if (isKeyable(key)) {
-        return hashDelete(typeof key == 'string' ? data.string : data.hash, key);
-      }
-      return Map ? data.map['delete'](key) : assocDelete(data.map, key);
+    function mapCacheDelete(key) {
+      return getMapData(this, key)['delete'](key);
     }
 
     /**
@@ -20926,12 +21103,8 @@ function extend() {
      * @param {string} key The key of the value to get.
      * @returns {*} Returns the entry value.
      */
-    function mapGet(key) {
-      var data = this.__data__;
-      if (isKeyable(key)) {
-        return hashGet(typeof key == 'string' ? data.string : data.hash, key);
-      }
-      return Map ? data.map.get(key) : assocGet(data.map, key);
+    function mapCacheGet(key) {
+      return getMapData(this, key).get(key);
     }
 
     /**
@@ -20943,12 +21116,8 @@ function extend() {
      * @param {string} key The key of the entry to check.
      * @returns {boolean} Returns `true` if an entry for `key` exists, else `false`.
      */
-    function mapHas(key) {
-      var data = this.__data__;
-      if (isKeyable(key)) {
-        return hashHas(typeof key == 'string' ? data.string : data.hash, key);
-      }
-      return Map ? data.map.has(key) : assocHas(data.map, key);
+    function mapCacheHas(key) {
+      return getMapData(this, key).has(key);
     }
 
     /**
@@ -20961,30 +21130,23 @@ function extend() {
      * @param {*} value The value to set.
      * @returns {Object} Returns the map cache instance.
      */
-    function mapSet(key, value) {
-      var data = this.__data__;
-      if (isKeyable(key)) {
-        hashSet(typeof key == 'string' ? data.string : data.hash, key, value);
-      } else if (Map) {
-        data.map.set(key, value);
-      } else {
-        assocSet(data.map, key, value);
-      }
+    function mapCacheSet(key, value) {
+      getMapData(this, key).set(key, value);
       return this;
     }
 
     // Add methods to `MapCache`.
-    MapCache.prototype.clear = mapClear;
-    MapCache.prototype['delete'] = mapDelete;
-    MapCache.prototype.get = mapGet;
-    MapCache.prototype.has = mapHas;
-    MapCache.prototype.set = mapSet;
+    MapCache.prototype.clear = mapCacheClear;
+    MapCache.prototype['delete'] = mapCacheDelete;
+    MapCache.prototype.get = mapCacheGet;
+    MapCache.prototype.has = mapCacheHas;
+    MapCache.prototype.set = mapCacheSet;
 
     /*------------------------------------------------------------------------*/
 
     /**
      *
-     * Creates a set cache object to store unique values.
+     * Creates an array cache object to store unique values.
      *
      * @private
      * @constructor
@@ -20996,52 +21158,41 @@ function extend() {
 
       this.__data__ = new MapCache;
       while (++index < length) {
-        this.push(values[index]);
+        this.add(values[index]);
       }
     }
 
     /**
-     * Checks if `value` is in `cache`.
+     * Adds `value` to the array cache.
      *
      * @private
-     * @param {Object} cache The set cache to search.
+     * @name add
+     * @memberOf SetCache
+     * @alias push
+     * @param {*} value The value to cache.
+     * @returns {Object} Returns the cache instance.
+     */
+    function setCacheAdd(value) {
+      this.__data__.set(value, HASH_UNDEFINED);
+      return this;
+    }
+
+    /**
+     * Checks if `value` is in the array cache.
+     *
+     * @private
+     * @name has
+     * @memberOf SetCache
      * @param {*} value The value to search for.
      * @returns {number} Returns `true` if `value` is found, else `false`.
      */
-    function cacheHas(cache, value) {
-      var map = cache.__data__;
-      if (isKeyable(value)) {
-        var data = map.__data__,
-            hash = typeof value == 'string' ? data.string : data.hash;
-
-        return hash[value] === HASH_UNDEFINED;
-      }
-      return map.has(value);
-    }
-
-    /**
-     * Adds `value` to the set cache.
-     *
-     * @private
-     * @name push
-     * @memberOf SetCache
-     * @param {*} value The value to cache.
-     */
-    function cachePush(value) {
-      var map = this.__data__;
-      if (isKeyable(value)) {
-        var data = map.__data__,
-            hash = typeof value == 'string' ? data.string : data.hash;
-
-        hash[value] = HASH_UNDEFINED;
-      }
-      else {
-        map.set(value, HASH_UNDEFINED);
-      }
+    function setCacheHas(value) {
+      return this.__data__.has(value);
     }
 
     // Add methods to `SetCache`.
-    SetCache.prototype.push = cachePush;
+    SetCache.prototype.add = SetCache.prototype.push = setCacheAdd;
+    SetCache.prototype.has = setCacheHas;
 
     /*------------------------------------------------------------------------*/
 
@@ -21050,17 +21201,10 @@ function extend() {
      *
      * @private
      * @constructor
-     * @param {Array} [values] The values to cache.
+     * @param {Array} [entries] The key-value pairs to cache.
      */
-    function Stack(values) {
-      var index = -1,
-          length = values ? values.length : 0;
-
-      this.clear();
-      while (++index < length) {
-        var entry = values[index];
-        this.set(entry[0], entry[1]);
-      }
+    function Stack(entries) {
+      this.__data__ = new ListCache(entries);
     }
 
     /**
@@ -21071,7 +21215,7 @@ function extend() {
      * @memberOf Stack
      */
     function stackClear() {
-      this.__data__ = { 'array': [], 'map': null };
+      this.__data__ = new ListCache;
     }
 
     /**
@@ -21084,10 +21228,7 @@ function extend() {
      * @returns {boolean} Returns `true` if the entry was removed, else `false`.
      */
     function stackDelete(key) {
-      var data = this.__data__,
-          array = data.array;
-
-      return array ? assocDelete(array, key) : data.map['delete'](key);
+      return this.__data__['delete'](key);
     }
 
     /**
@@ -21100,10 +21241,7 @@ function extend() {
      * @returns {*} Returns the entry value.
      */
     function stackGet(key) {
-      var data = this.__data__,
-          array = data.array;
-
-      return array ? assocGet(array, key) : data.map.get(key);
+      return this.__data__.get(key);
     }
 
     /**
@@ -21116,10 +21254,7 @@ function extend() {
      * @returns {boolean} Returns `true` if an entry for `key` exists, else `false`.
      */
     function stackHas(key) {
-      var data = this.__data__,
-          array = data.array;
-
-      return array ? assocHas(array, key) : data.map.has(key);
+      return this.__data__.has(key);
     }
 
     /**
@@ -21133,21 +21268,11 @@ function extend() {
      * @returns {Object} Returns the stack cache instance.
      */
     function stackSet(key, value) {
-      var data = this.__data__,
-          array = data.array;
-
-      if (array) {
-        if (array.length < (LARGE_ARRAY_SIZE - 1)) {
-          assocSet(array, key, value);
-        } else {
-          data.array = null;
-          data.map = new MapCache(array);
-        }
+      var cache = this.__data__;
+      if (cache instanceof ListCache && cache.__data__.length == LARGE_ARRAY_SIZE) {
+        cache = this.__data__ = new MapCache(cache.__data__);
       }
-      var map = data.map;
-      if (map) {
-        map.set(key, value);
-      }
+      cache.set(key, value);
       return this;
     }
 
@@ -21157,90 +21282,6 @@ function extend() {
     Stack.prototype.get = stackGet;
     Stack.prototype.has = stackHas;
     Stack.prototype.set = stackSet;
-
-    /*------------------------------------------------------------------------*/
-
-    /**
-     * Removes `key` and its value from the associative array.
-     *
-     * @private
-     * @param {Array} array The array to modify.
-     * @param {string} key The key of the value to remove.
-     * @returns {boolean} Returns `true` if the entry was removed, else `false`.
-     */
-    function assocDelete(array, key) {
-      var index = assocIndexOf(array, key);
-      if (index < 0) {
-        return false;
-      }
-      var lastIndex = array.length - 1;
-      if (index == lastIndex) {
-        array.pop();
-      } else {
-        splice.call(array, index, 1);
-      }
-      return true;
-    }
-
-    /**
-     * Gets the associative array value for `key`.
-     *
-     * @private
-     * @param {Array} array The array to query.
-     * @param {string} key The key of the value to get.
-     * @returns {*} Returns the entry value.
-     */
-    function assocGet(array, key) {
-      var index = assocIndexOf(array, key);
-      return index < 0 ? undefined : array[index][1];
-    }
-
-    /**
-     * Checks if an associative array value for `key` exists.
-     *
-     * @private
-     * @param {Array} array The array to query.
-     * @param {string} key The key of the entry to check.
-     * @returns {boolean} Returns `true` if an entry for `key` exists, else `false`.
-     */
-    function assocHas(array, key) {
-      return assocIndexOf(array, key) > -1;
-    }
-
-    /**
-     * Gets the index at which the `key` is found in `array` of key-value pairs.
-     *
-     * @private
-     * @param {Array} array The array to search.
-     * @param {*} key The key to search for.
-     * @returns {number} Returns the index of the matched value, else `-1`.
-     */
-    function assocIndexOf(array, key) {
-      var length = array.length;
-      while (length--) {
-        if (eq(array[length][0], key)) {
-          return length;
-        }
-      }
-      return -1;
-    }
-
-    /**
-     * Sets the associative array `key` to `value`.
-     *
-     * @private
-     * @param {Array} array The array to modify.
-     * @param {string} key The key of the value to set.
-     * @param {*} value The value to set.
-     */
-    function assocSet(array, key, value) {
-      var index = assocIndexOf(array, key);
-      if (index < 0) {
-        array.push([key, value]);
-      } else {
-        array[index][1] = value;
-      }
-    }
 
     /*------------------------------------------------------------------------*/
 
@@ -21297,6 +21338,24 @@ function extend() {
     }
 
     /**
+     * Gets the index at which the `key` is found in `array` of key-value pairs.
+     *
+     * @private
+     * @param {Array} array The array to search.
+     * @param {*} key The key to search for.
+     * @returns {number} Returns the index of the matched value, else `-1`.
+     */
+    function assocIndexOf(array, key) {
+      var length = array.length;
+      while (length--) {
+        if (eq(array[length][0], key)) {
+          return length;
+        }
+      }
+      return -1;
+    }
+
+    /**
      * Aggregates elements of `collection` on `accumulator` with keys transformed
      * by `iteratee` and values set by `setter`.
      *
@@ -21333,7 +21392,7 @@ function extend() {
      * @private
      * @param {Object} object The object to iterate over.
      * @param {string[]} paths The property paths of elements to pick.
-     * @returns {Array} Returns the new array of picked elements.
+     * @returns {Array} Returns the picked elements.
      */
     function baseAt(object, paths) {
       var index = -1,
@@ -21448,7 +21507,7 @@ function extend() {
      *
      * @private
      * @param {Object} source The object of property predicates to conform to.
-     * @returns {Function} Returns the new function.
+     * @returns {Function} Returns the new spec function.
      */
     function baseConforms(source) {
       var props = keys(source),
@@ -21541,6 +21600,7 @@ function extend() {
         var value = array[index],
             computed = iteratee ? iteratee(value) : value;
 
+        value = (comparator || value !== 0) ? value : 0;
         if (isCommon && computed === computed) {
           var valuesIndex = valuesLength;
           while (valuesIndex--) {
@@ -21592,6 +21652,35 @@ function extend() {
         result = !!predicate(value, index, collection);
         return result;
       });
+      return result;
+    }
+
+    /**
+     * The base implementation of methods like `_.max` and `_.min` which accepts a
+     * `comparator` to determine the extremum value.
+     *
+     * @private
+     * @param {Array} array The array to iterate over.
+     * @param {Function} iteratee The iteratee invoked per iteration.
+     * @param {Function} comparator The comparator used to compare values.
+     * @returns {*} Returns the extremum value.
+     */
+    function baseExtremum(array, iteratee, comparator) {
+      var index = -1,
+          length = array.length;
+
+      while (++index < length) {
+        var value = array[index],
+            current = iteratee(value);
+
+        if (current != null && (computed === undefined
+              ? (current === current && !isSymbol(current))
+              : comparator(current, computed)
+            )) {
+          var computed = current,
+              result = value;
+        }
+      }
       return result;
     }
 
@@ -21731,7 +21820,7 @@ function extend() {
      * @private
      * @param {Object} object The object to inspect.
      * @param {Array} props The property names to filter.
-     * @returns {Array} Returns the new array of filtered property names.
+     * @returns {Array} Returns the function names.
      */
     function baseFunctions(object, props) {
       return arrayFilter(props, function(key) {
@@ -21754,7 +21843,7 @@ function extend() {
           length = path.length;
 
       while (object != null && index < length) {
-        object = object[path[index++]];
+        object = object[toKey(path[index++])];
       }
       return (index && index == length) ? object : undefined;
     }
@@ -21772,9 +21861,20 @@ function extend() {
      */
     function baseGetAllKeys(object, keysFunc, symbolsFunc) {
       var result = keysFunc(object);
-      return isArray(object)
-        ? result
-        : arrayPush(result, symbolsFunc(object));
+      return isArray(object) ? result : arrayPush(result, symbolsFunc(object));
+    }
+
+    /**
+     * The base implementation of `_.gt` which doesn't coerce arguments to numbers.
+     *
+     * @private
+     * @param {*} value The value to compare.
+     * @param {*} other The other value to compare.
+     * @returns {boolean} Returns `true` if `value` is greater than `other`,
+     *  else `false`.
+     */
+    function baseGt(value, other) {
+      return value > other;
     }
 
     /**
@@ -21857,6 +21957,7 @@ function extend() {
         var value = array[index],
             computed = iteratee ? iteratee(value) : value;
 
+        value = (comparator || value !== 0) ? value : 0;
         if (!(seen
               ? cacheHas(seen, computed)
               : includes(result, computed, comparator)
@@ -21914,7 +22015,7 @@ function extend() {
         object = parent(object, path);
         path = last(path);
       }
-      var func = object == null ? object : object[path];
+      var func = object == null ? object : object[toKey(path)];
       return func == null ? undefined : apply(func, object, args);
     }
 
@@ -22117,6 +22218,19 @@ function extend() {
     }
 
     /**
+     * The base implementation of `_.lt` which doesn't coerce arguments to numbers.
+     *
+     * @private
+     * @param {*} value The value to compare.
+     * @param {*} other The other value to compare.
+     * @returns {boolean} Returns `true` if `value` is less than `other`,
+     *  else `false`.
+     */
+    function baseLt(value, other) {
+      return value < other;
+    }
+
+    /**
      * The base implementation of `_.map` without support for iteratee shorthands.
      *
      * @private
@@ -22139,7 +22253,7 @@ function extend() {
      *
      * @private
      * @param {Object} source The object of property values to match.
-     * @returns {Function} Returns the new function.
+     * @returns {Function} Returns the new spec function.
      */
     function baseMatches(source) {
       var matchData = getMatchData(source);
@@ -22157,11 +22271,11 @@ function extend() {
      * @private
      * @param {string} path The path of the property to get.
      * @param {*} srcValue The value to match.
-     * @returns {Function} Returns the new function.
+     * @returns {Function} Returns the new spec function.
      */
     function baseMatchesProperty(path, srcValue) {
       if (isKey(path) && isStrictComparable(srcValue)) {
-        return matchesStrictComparable(path, srcValue);
+        return matchesStrictComparable(toKey(path), srcValue);
       }
       return function(object) {
         var objValue = get(object, path);
@@ -22372,7 +22486,7 @@ function extend() {
      *
      * @private
      * @param {string} key The key of the property to get.
-     * @returns {Function} Returns the new function.
+     * @returns {Function} Returns the new accessor function.
      */
     function baseProperty(key) {
       return function(object) {
@@ -22385,7 +22499,7 @@ function extend() {
      *
      * @private
      * @param {Array|string} path The path of the property to get.
-     * @returns {Function} Returns the new function.
+     * @returns {Function} Returns the new accessor function.
      */
     function basePropertyDeep(path) {
       return function(object) {
@@ -22443,7 +22557,7 @@ function extend() {
 
       while (length--) {
         var index = indexes[length];
-        if (lastIndex == length || index != previous) {
+        if (length == lastIndex || index !== previous) {
           var previous = index;
           if (isIndex(index)) {
             splice.call(array, index, 1);
@@ -22453,11 +22567,11 @@ function extend() {
                 object = parent(array, path);
 
             if (object != null) {
-              delete object[last(path)];
+              delete object[toKey(last(path))];
             }
           }
           else {
-            delete array[index];
+            delete array[toKey(index)];
           }
         }
       }
@@ -22486,7 +22600,7 @@ function extend() {
      * @param {number} end The end of the range.
      * @param {number} step The value to increment or decrement by.
      * @param {boolean} [fromRight] Specify iterating from right to left.
-     * @returns {Array} Returns the new array of numbers.
+     * @returns {Array} Returns the range of numbers.
      */
     function baseRange(start, end, step, fromRight) {
       var index = -1,
@@ -22547,7 +22661,7 @@ function extend() {
           nested = object;
 
       while (nested != null && ++index < length) {
-        var key = path[index];
+        var key = toKey(path[index]);
         if (isObject(nested)) {
           var newValue = value;
           if (index != lastIndex) {
@@ -22649,7 +22763,8 @@ function extend() {
           var mid = (low + high) >>> 1,
               computed = array[mid];
 
-          if ((retHighest ? (computed <= value) : (computed < value)) && computed !== null) {
+          if (computed !== null && !isSymbol(computed) &&
+              (retHighest ? (computed <= value) : (computed < value))) {
             low = mid + 1;
           } else {
             high = mid;
@@ -22680,21 +22795,26 @@ function extend() {
           high = array ? array.length : 0,
           valIsNaN = value !== value,
           valIsNull = value === null,
-          valIsUndef = value === undefined;
+          valIsSymbol = isSymbol(value),
+          valIsUndefined = value === undefined;
 
       while (low < high) {
         var mid = nativeFloor((low + high) / 2),
             computed = iteratee(array[mid]),
-            isDef = computed !== undefined,
-            isReflexive = computed === computed;
+            othIsDefined = computed !== undefined,
+            othIsNull = computed === null,
+            othIsReflexive = computed === computed,
+            othIsSymbol = isSymbol(computed);
 
         if (valIsNaN) {
-          var setLow = isReflexive || retHighest;
+          var setLow = retHighest || othIsReflexive;
+        } else if (valIsUndefined) {
+          setLow = othIsReflexive && (retHighest || othIsDefined);
         } else if (valIsNull) {
-          setLow = isReflexive && isDef && (retHighest || computed != null);
-        } else if (valIsUndef) {
-          setLow = isReflexive && (retHighest || isDef);
-        } else if (computed == null) {
+          setLow = othIsReflexive && othIsDefined && (retHighest || !othIsNull);
+        } else if (valIsSymbol) {
+          setLow = othIsReflexive && othIsDefined && !othIsNull && (retHighest || !othIsSymbol);
+        } else if (othIsNull || othIsSymbol) {
           setLow = false;
         } else {
           setLow = retHighest ? (computed <= value) : (computed < value);
@@ -22709,44 +22829,68 @@ function extend() {
     }
 
     /**
-     * The base implementation of `_.sortedUniq`.
-     *
-     * @private
-     * @param {Array} array The array to inspect.
-     * @returns {Array} Returns the new duplicate free array.
-     */
-    function baseSortedUniq(array) {
-      return baseSortedUniqBy(array);
-    }
-
-    /**
-     * The base implementation of `_.sortedUniqBy` without support for iteratee
-     * shorthands.
+     * The base implementation of `_.sortedUniq` and `_.sortedUniqBy` without
+     * support for iteratee shorthands.
      *
      * @private
      * @param {Array} array The array to inspect.
      * @param {Function} [iteratee] The iteratee invoked per element.
      * @returns {Array} Returns the new duplicate free array.
      */
-    function baseSortedUniqBy(array, iteratee) {
-      var index = 0,
+    function baseSortedUniq(array, iteratee) {
+      var index = -1,
           length = array.length,
-          value = array[0],
-          computed = iteratee ? iteratee(value) : value,
-          seen = computed,
-          resIndex = 1,
-          result = [value];
+          resIndex = 0,
+          result = [];
 
       while (++index < length) {
-        value = array[index],
-        computed = iteratee ? iteratee(value) : value;
+        var value = array[index],
+            computed = iteratee ? iteratee(value) : value;
 
-        if (!eq(computed, seen)) {
-          seen = computed;
-          result[resIndex++] = value;
+        if (!index || !eq(computed, seen)) {
+          var seen = computed;
+          result[resIndex++] = value === 0 ? 0 : value;
         }
       }
       return result;
+    }
+
+    /**
+     * The base implementation of `_.toNumber` which doesn't ensure correct
+     * conversions of binary, hexadecimal, or octal string values.
+     *
+     * @private
+     * @param {*} value The value to process.
+     * @returns {number} Returns the number.
+     */
+    function baseToNumber(value) {
+      if (typeof value == 'number') {
+        return value;
+      }
+      if (isSymbol(value)) {
+        return NAN;
+      }
+      return +value;
+    }
+
+    /**
+     * The base implementation of `_.toString` which doesn't convert nullish
+     * values to empty strings.
+     *
+     * @private
+     * @param {*} value The value to process.
+     * @returns {string} Returns the string.
+     */
+    function baseToString(value) {
+      // Exit early for strings to avoid a performance hit in some environments.
+      if (typeof value == 'string') {
+        return value;
+      }
+      if (isSymbol(value)) {
+        return symbolToString ? symbolToString.call(value) : '';
+      }
+      var result = (value + '');
+      return (result == '0' && (1 / value) == -INFINITY) ? '-0' : result;
     }
 
     /**
@@ -22787,6 +22931,7 @@ function extend() {
         var value = array[index],
             computed = iteratee ? iteratee(value) : value;
 
+        value = (comparator || value !== 0) ? value : 0;
         if (isCommon && computed === computed) {
           var seenIndex = seen.length;
           while (seenIndex--) {
@@ -22820,8 +22965,9 @@ function extend() {
     function baseUnset(object, path) {
       path = isKey(path, object) ? [path] : castPath(path);
       object = parent(object, path);
-      var key = last(path);
-      return (object != null && has(object, key)) ? delete object[key] : true;
+
+      var key = toKey(last(path));
+      return !(object != null && baseHas(object, key)) || delete object[key];
     }
 
     /**
@@ -23085,11 +23231,90 @@ function extend() {
     }
 
     /**
+     * Compares values to sort them in ascending order.
+     *
+     * @private
+     * @param {*} value The value to compare.
+     * @param {*} other The other value to compare.
+     * @returns {number} Returns the sort order indicator for `value`.
+     */
+    function compareAscending(value, other) {
+      if (value !== other) {
+        var valIsDefined = value !== undefined,
+            valIsNull = value === null,
+            valIsReflexive = value === value,
+            valIsSymbol = isSymbol(value);
+
+        var othIsDefined = other !== undefined,
+            othIsNull = other === null,
+            othIsReflexive = other === other,
+            othIsSymbol = isSymbol(other);
+
+        if ((!othIsNull && !othIsSymbol && !valIsSymbol && value > other) ||
+            (valIsSymbol && othIsDefined && othIsReflexive && !othIsNull && !othIsSymbol) ||
+            (valIsNull && othIsDefined && othIsReflexive) ||
+            (!valIsDefined && othIsReflexive) ||
+            !valIsReflexive) {
+          return 1;
+        }
+        if ((!valIsNull && !valIsSymbol && !othIsSymbol && value < other) ||
+            (othIsSymbol && valIsDefined && valIsReflexive && !valIsNull && !valIsSymbol) ||
+            (othIsNull && valIsDefined && valIsReflexive) ||
+            (!othIsDefined && valIsReflexive) ||
+            !othIsReflexive) {
+          return -1;
+        }
+      }
+      return 0;
+    }
+
+    /**
+     * Used by `_.orderBy` to compare multiple properties of a value to another
+     * and stable sort them.
+     *
+     * If `orders` is unspecified, all values are sorted in ascending order. Otherwise,
+     * specify an order of "desc" for descending or "asc" for ascending sort order
+     * of corresponding values.
+     *
+     * @private
+     * @param {Object} object The object to compare.
+     * @param {Object} other The other object to compare.
+     * @param {boolean[]|string[]} orders The order to sort by for each property.
+     * @returns {number} Returns the sort order indicator for `object`.
+     */
+    function compareMultiple(object, other, orders) {
+      var index = -1,
+          objCriteria = object.criteria,
+          othCriteria = other.criteria,
+          length = objCriteria.length,
+          ordersLength = orders.length;
+
+      while (++index < length) {
+        var result = compareAscending(objCriteria[index], othCriteria[index]);
+        if (result) {
+          if (index >= ordersLength) {
+            return result;
+          }
+          var order = orders[index];
+          return result * (order == 'desc' ? -1 : 1);
+        }
+      }
+      // Fixes an `Array#sort` bug in the JS engine embedded in Adobe applications
+      // that causes it, under certain circumstances, to provide the same value for
+      // `object` and `other`. See https://github.com/jashkenas/underscore/pull/1247
+      // for more details.
+      //
+      // This also ensures a stable sort in V8 and other engines.
+      // See https://bugs.chromium.org/p/v8/issues/detail?id=90 for more details.
+      return object.index - other.index;
+    }
+
+    /**
      * Creates an array that is the composition of partially applied arguments,
      * placeholders, and provided arguments into a single array of arguments.
      *
      * @private
-     * @param {Array|Object} args The provided arguments.
+     * @param {Array} args The provided arguments.
      * @param {Array} partials The arguments to prepend to those provided.
      * @param {Array} holders The `partials` placeholder indexes.
      * @params {boolean} [isCurried] Specify composing for a curried function.
@@ -23124,7 +23349,7 @@ function extend() {
      * is tailored for `_.partialRight`.
      *
      * @private
-     * @param {Array|Object} args The provided arguments.
+     * @param {Array} args The provided arguments.
      * @param {Array} partials The arguments to append to those provided.
      * @param {Array} holders The `partials` placeholder indexes.
      * @params {boolean} [isCurried] Specify composing for a curried function.
@@ -23246,7 +23471,7 @@ function extend() {
             customizer = length > 1 ? sources[length - 1] : undefined,
             guard = length > 2 ? sources[2] : undefined;
 
-        customizer = typeof customizer == 'function'
+        customizer = (assigner.length > 3 && typeof customizer == 'function')
           ? (length--, customizer)
           : undefined;
 
@@ -23345,7 +23570,7 @@ function extend() {
      *
      * @private
      * @param {string} methodName The name of the `String` case method to use.
-     * @returns {Function} Returns the new function.
+     * @returns {Function} Returns the new case function.
      */
     function createCaseFirst(methodName) {
       return function(string) {
@@ -23430,7 +23655,7 @@ function extend() {
         var length = arguments.length,
             args = Array(length),
             index = length,
-            placeholder = getPlaceholder(wrapper);
+            placeholder = getHolder(wrapper);
 
         while (index--) {
           args[index] = arguments[index];
@@ -23545,14 +23770,14 @@ function extend() {
 
       function wrapper() {
         var length = arguments.length,
-            index = length,
-            args = Array(length);
+            args = Array(length),
+            index = length;
 
         while (index--) {
           args[index] = arguments[index];
         }
         if (isCurried) {
-          var placeholder = getPlaceholder(wrapper),
+          var placeholder = getHolder(wrapper),
               holdersCount = countHolders(args, placeholder);
         }
         if (partials) {
@@ -23604,11 +23829,44 @@ function extend() {
     }
 
     /**
+     * Creates a function that performs a mathematical operation on two values.
+     *
+     * @private
+     * @param {Function} operator The function to perform the operation.
+     * @returns {Function} Returns the new mathematical operation function.
+     */
+    function createMathOperation(operator) {
+      return function(value, other) {
+        var result;
+        if (value === undefined && other === undefined) {
+          return 0;
+        }
+        if (value !== undefined) {
+          result = value;
+        }
+        if (other !== undefined) {
+          if (result === undefined) {
+            return other;
+          }
+          if (typeof value == 'string' || typeof other == 'string') {
+            value = baseToString(value);
+            other = baseToString(other);
+          } else {
+            value = baseToNumber(value);
+            other = baseToNumber(other);
+          }
+          result = operator(value, other);
+        }
+        return result;
+      };
+    }
+
+    /**
      * Creates a function like `_.over`.
      *
      * @private
      * @param {Function} arrayFunc The function to iterate over iteratees.
-     * @returns {Function} Returns the new invoker function.
+     * @returns {Function} Returns the new over function.
      */
     function createOver(arrayFunc) {
       return rest(function(iteratees) {
@@ -23635,7 +23893,7 @@ function extend() {
      * @returns {string} Returns the padding for `string`.
      */
     function createPadding(length, chars) {
-      chars = chars === undefined ? ' ' : (chars + '');
+      chars = chars === undefined ? ' ' : baseToString(chars);
 
       var charsLength = chars.length;
       if (charsLength < 2) {
@@ -23706,6 +23964,23 @@ function extend() {
         }
         step = step === undefined ? (start < end ? 1 : -1) : (toNumber(step) || 0);
         return baseRange(start, end, step, fromRight);
+      };
+    }
+
+    /**
+     * Creates a function that performs a relational operation on two values.
+     *
+     * @private
+     * @param {Function} operator The function to perform the operation.
+     * @returns {Function} Returns the new relational operation function.
+     */
+    function createRelationalOperation(operator) {
+      return function(value, other) {
+        if (!(typeof value == 'string' && typeof other == 'string')) {
+          value = toNumber(value);
+          other = toNumber(other);
+        }
+        return operator(value, other);
       };
     }
 
@@ -23785,9 +24060,29 @@ function extend() {
      * @param {Array} values The values to add to the set.
      * @returns {Object} Returns the new set.
      */
-    var createSet = !(Set && new Set([1, 2]).size === 2) ? noop : function(values) {
+    var createSet = !(Set && (1 / setToArray(new Set([,-0]))[1]) == INFINITY) ? noop : function(values) {
       return new Set(values);
     };
+
+    /**
+     * Creates a `_.toPairs` or `_.toPairsIn` function.
+     *
+     * @private
+     * @param {Function} keysFunc The function to get the keys of a given object.
+     * @returns {Function} Returns the new pairs function.
+     */
+    function createToPairs(keysFunc) {
+      return function(object) {
+        var tag = getTag(object);
+        if (tag == mapTag) {
+          return mapToArray(object);
+        }
+        if (tag == setTag) {
+          return setToPairs(object);
+        }
+        return baseToPairs(object, keysFunc(object));
+      };
+    }
 
     /**
      * Creates a function that either curries or invokes `func` with optional
@@ -23806,6 +24101,7 @@ function extend() {
      *    64 - `_.partialRight`
      *   128 - `_.rearg`
      *   256 - `_.ary`
+     *   512 - `_.flip`
      * @param {*} [thisArg] The `this` binding of `func`.
      * @param {Array} [partials] The arguments to be partially applied.
      * @param {Array} [holders] The `partials` placeholder indexes.
@@ -23884,9 +24180,7 @@ function extend() {
      * @returns {boolean} Returns `true` if the arrays are equivalent, else `false`.
      */
     function equalArrays(array, other, equalFunc, customizer, bitmask, stack) {
-      var index = -1,
-          isPartial = bitmask & PARTIAL_COMPARE_FLAG,
-          isUnordered = bitmask & UNORDERED_COMPARE_FLAG,
+      var isPartial = bitmask & PARTIAL_COMPARE_FLAG,
           arrLength = array.length,
           othLength = other.length;
 
@@ -23898,7 +24192,10 @@ function extend() {
       if (stacked) {
         return stacked == other;
       }
-      var result = true;
+      var index = -1,
+          result = true,
+          seen = (bitmask & UNORDERED_COMPARE_FLAG) ? new SetCache : undefined;
+
       stack.set(array, other);
 
       // Ignore non-index properties.
@@ -23919,10 +24216,12 @@ function extend() {
           break;
         }
         // Recursively compare arrays (susceptible to call stack limits).
-        if (isUnordered) {
-          if (!arraySome(other, function(othValue) {
-                return arrValue === othValue ||
-                  equalFunc(arrValue, othValue, customizer, bitmask, stack);
+        if (seen) {
+          if (!arraySome(other, function(othValue, othIndex) {
+                if (!seen.has(othIndex) &&
+                    (arrValue === othValue || equalFunc(arrValue, othValue, customizer, bitmask, stack))) {
+                  return seen.add(othIndex);
+                }
               })) {
             result = false;
             break;
@@ -24157,6 +24456,18 @@ function extend() {
     }
 
     /**
+     * Gets the argument placeholder value for `func`.
+     *
+     * @private
+     * @param {Function} func The function to inspect.
+     * @returns {*} Returns the placeholder value.
+     */
+    function getHolder(func) {
+      var object = hasOwnProperty.call(lodash, 'placeholder') ? lodash : func;
+      return object.placeholder;
+    }
+
+    /**
      * Gets the appropriate "iteratee" function. If `_.iteratee` is customized,
      * this function returns the custom method, otherwise it returns `baseIteratee`.
      * If arguments are provided, the chosen function is invoked with them and
@@ -24187,6 +24498,21 @@ function extend() {
     var getLength = baseProperty('length');
 
     /**
+     * Gets the data for `map`.
+     *
+     * @private
+     * @param {Object} map The map to query.
+     * @param {string} key The reference key.
+     * @returns {*} Returns the map data.
+     */
+    function getMapData(map, key) {
+      var data = map.__data__;
+      return isKeyable(key)
+        ? data[typeof key == 'string' ? 'string' : 'hash']
+        : data.map;
+    }
+
+    /**
      * Gets the property names, values, and compare flags of `object`.
      *
      * @private
@@ -24214,18 +24540,6 @@ function extend() {
     function getNative(object, key) {
       var value = object[key];
       return isNative(value) ? value : undefined;
-    }
-
-    /**
-     * Gets the argument placeholder value for `func`.
-     *
-     * @private
-     * @param {Function} func The function to inspect.
-     * @returns {*} Returns the placeholder value.
-     */
-    function getPlaceholder(func) {
-      var object = hasOwnProperty.call(lodash, 'placeholder') ? lodash : func;
-      return object.placeholder;
     }
 
     /**
@@ -24357,7 +24671,7 @@ function extend() {
           length = path.length;
 
       while (++index < length) {
-        var key = path[index];
+        var key = toKey(path[index]);
         if (!(result = object != null && hasFunc(object, key))) {
           break;
         }
@@ -24477,7 +24791,7 @@ function extend() {
      * @returns {boolean} Returns `true` if `value` is flattenable, else `false`.
      */
     function isFlattenable(value) {
-      return isArrayLikeObject(value) && (isArray(value) || isArguments(value));
+      return isArray(value) || isArguments(value);
     }
 
     /**
@@ -24490,6 +24804,21 @@ function extend() {
      */
     function isFlattenableIteratee(value) {
       return isArray(value) && !(value.length == 2 && !isFunction(value[0]));
+    }
+
+    /**
+     * Checks if `value` is a valid array-like index.
+     *
+     * @private
+     * @param {*} value The value to check.
+     * @param {number} [length=MAX_SAFE_INTEGER] The upper bounds of a valid index.
+     * @returns {boolean} Returns `true` if `value` is a valid index, else `false`.
+     */
+    function isIndex(value, length) {
+      length = length == null ? MAX_SAFE_INTEGER : length;
+      return !!length &&
+        (typeof value == 'number' || reIsUint.test(value)) &&
+        (value > -1 && value % 1 == 0 && value < length);
     }
 
     /**
@@ -24525,13 +24854,16 @@ function extend() {
      * @returns {boolean} Returns `true` if `value` is a property name, else `false`.
      */
     function isKey(value, object) {
+      if (isArray(value)) {
+        return false;
+      }
       var type = typeof value;
-      if (type == 'number' || type == 'symbol') {
+      if (type == 'number' || type == 'symbol' || type == 'boolean' ||
+          value == null || isSymbol(value)) {
         return true;
       }
-      return !isArray(value) &&
-        (isSymbol(value) || reIsPlainProp.test(value) || !reIsDeepProp.test(value) ||
-          (object != null && value in Object(object)));
+      return reIsPlainProp.test(value) || !reIsDeepProp.test(value) ||
+        (object != null && value in Object(object));
     }
 
     /**
@@ -24543,8 +24875,9 @@ function extend() {
      */
     function isKeyable(value) {
       var type = typeof value;
-      return type == 'number' || type == 'boolean' ||
-        (type == 'string' && value != '__proto__') || value == null;
+      return (type == 'string' || type == 'number' || type == 'symbol' || type == 'boolean')
+        ? (value !== '__proto__')
+        : (value === null);
     }
 
     /**
@@ -24602,7 +24935,7 @@ function extend() {
      * @private
      * @param {string} key The key of the property to get.
      * @param {*} srcValue The value to match.
-     * @returns {Function} Returns the new function.
+     * @returns {Function} Returns the new spec function.
      */
     function matchesStrictComparable(key, srcValue) {
       return function(object) {
@@ -24795,8 +25128,12 @@ function extend() {
      * @param {*} value The value to inspect.
      * @returns {string|symbol} Returns the key.
      */
-    function toKey(key) {
-      return (typeof key == 'string' || isSymbol(key)) ? key : (key + '');
+    function toKey(value) {
+      if (typeof value == 'string' || isSymbol(value)) {
+        return value;
+      }
+      var result = (value + '');
+      return (result == '0' && (1 / value) == -INFINITY) ? '-0' : result;
     }
 
     /**
@@ -24850,7 +25187,7 @@ function extend() {
      * @param {Array} array The array to process.
      * @param {number} [size=1] The length of each chunk
      * @param- {Object} [guard] Enables use as an iteratee for methods like `_.map`.
-     * @returns {Array} Returns the new array containing chunks.
+     * @returns {Array} Returns the new array of chunks.
      * @example
      *
      * _.chunk(['a', 'b', 'c', 'd'], 2);
@@ -24933,16 +25270,16 @@ function extend() {
      */
     function concat() {
       var length = arguments.length,
-          array = castArray(arguments[0]);
+          args = Array(length ? length - 1 : 0),
+          array = arguments[0],
+          index = length;
 
-      if (length < 2) {
-        return length ? copyArray(array) : [];
+      while (index--) {
+        args[index - 1] = arguments[index];
       }
-      var args = Array(length - 1);
-      while (length--) {
-        args[length - 1] = arguments[length];
-      }
-      return arrayConcat(array, baseFlatten(args, 1));
+      return length
+        ? arrayPush(isArray(array) ? copyArray(array) : [array], baseFlatten(args, 1))
+        : [];
     }
 
     /**
@@ -24958,6 +25295,7 @@ function extend() {
      * @param {Array} array The array to inspect.
      * @param {...Array} [values] The values to exclude.
      * @returns {Array} Returns the new array of filtered values.
+     * @see _.without, _.xor
      * @example
      *
      * _.difference([3, 2, 1], [4, 2]);
@@ -25660,8 +25998,8 @@ function extend() {
     }
 
     /**
-     * Gets the nth element of `array`. If `n` is negative, the nth element
-     * from the end is returned.
+     * Gets the element at `n` index of `array`. If `n` is negative, the nth
+     * element from the end is returned.
      *
      * @static
      * @memberOf _
@@ -25819,10 +26157,15 @@ function extend() {
      * // => [10, 20]
      */
     var pullAt = rest(function(array, indexes) {
-      indexes = arrayMap(baseFlatten(indexes, 1), String);
+      indexes = baseFlatten(indexes, 1);
 
-      var result = baseAt(array, indexes);
-      basePullAt(array, indexes.sort(compareAscending));
+      var length = array ? array.length : 0,
+          result = baseAt(array, indexes);
+
+      basePullAt(array, arrayMap(indexes, function(index) {
+        return isIndex(index, length) ? +index : index;
+      }).sort(compareAscending));
+
       return result;
     });
 
@@ -26129,7 +26472,7 @@ function extend() {
      */
     function sortedUniqBy(array, iteratee) {
       return (array && array.length)
-        ? baseSortedUniqBy(array, getIteratee(iteratee))
+        ? baseSortedUniq(array, getIteratee(iteratee))
         : [];
     }
 
@@ -26536,9 +26879,10 @@ function extend() {
      * @memberOf _
      * @since 0.1.0
      * @category Array
-     * @param {Array} array The array to filter.
+     * @param {Array} array The array to inspect.
      * @param {...*} [values] The values to exclude.
      * @returns {Array} Returns the new array of filtered values.
+     * @see _.difference, _.xor
      * @example
      *
      * _.without([1, 2, 1, 3], 1, 2);
@@ -26561,7 +26905,8 @@ function extend() {
      * @since 2.4.0
      * @category Array
      * @param {...Array} [arrays] The arrays to inspect.
-     * @returns {Array} Returns the new array of values.
+     * @returns {Array} Returns the new array of filtered values.
+     * @see _.difference, _.without
      * @example
      *
      * _.xor([2, 1], [4, 2]);
@@ -26584,7 +26929,7 @@ function extend() {
      * @param {...Array} [arrays] The arrays to inspect.
      * @param {Array|Function|Object|string} [iteratee=_.identity]
      *  The iteratee invoked per element.
-     * @returns {Array} Returns the new array of values.
+     * @returns {Array} Returns the new array of filtered values.
      * @example
      *
      * _.xorBy([2.1, 1.2], [4.3, 2.4], Math.floor);
@@ -26613,7 +26958,7 @@ function extend() {
      * @category Array
      * @param {...Array} [arrays] The arrays to inspect.
      * @param {Function} [comparator] The comparator invoked per element.
-     * @returns {Array} Returns the new array of values.
+     * @returns {Array} Returns the new array of filtered values.
      * @example
      *
      * var objects = [{ 'x': 1, 'y': 2 }, { 'x': 2, 'y': 1 }];
@@ -27151,6 +27496,7 @@ function extend() {
      * @param {Array|Function|Object|string} [predicate=_.identity]
      *  The function invoked per iteration.
      * @returns {Array} Returns the new filtered array.
+     * @see _.reject
      * @example
      *
      * var users = [
@@ -27346,6 +27692,7 @@ function extend() {
      * @param {Array|Object} collection The collection to iterate over.
      * @param {Function} [iteratee=_.identity] The function invoked per iteration.
      * @returns {Array|Object} Returns `collection`.
+     * @see _.forEachRight
      * @example
      *
      * _([1, 2]).forEach(function(value) {
@@ -27359,9 +27706,8 @@ function extend() {
      * // => Logs 'a' then 'b' (iteration order is not guaranteed).
      */
     function forEach(collection, iteratee) {
-      return (typeof iteratee == 'function' && isArray(collection))
-        ? arrayEach(collection, iteratee)
-        : baseEach(collection, getIteratee(iteratee));
+      var func = isArray(collection) ? arrayEach : baseEach;
+      return func(collection, getIteratee(iteratee, 3));
     }
 
     /**
@@ -27376,6 +27722,7 @@ function extend() {
      * @param {Array|Object} collection The collection to iterate over.
      * @param {Function} [iteratee=_.identity] The function invoked per iteration.
      * @returns {Array|Object} Returns `collection`.
+     * @see _.forEach
      * @example
      *
      * _.forEachRight([1, 2], function(value) {
@@ -27384,9 +27731,8 @@ function extend() {
      * // => Logs `2` then `1`.
      */
     function forEachRight(collection, iteratee) {
-      return (typeof iteratee == 'function' && isArray(collection))
-        ? arrayEachRight(collection, iteratee)
-        : baseEachRight(collection, getIteratee(iteratee));
+      var func = isArray(collection) ? arrayEachRight : baseEachRight;
+      return func(collection, getIteratee(iteratee, 3));
     }
 
     /**
@@ -27688,6 +28034,7 @@ function extend() {
      * @param {Function} [iteratee=_.identity] The function invoked per iteration.
      * @param {*} [accumulator] The initial value.
      * @returns {*} Returns the accumulated value.
+     * @see _.reduceRight
      * @example
      *
      * _.reduce([1, 2], function(sum, n) {
@@ -27720,6 +28067,7 @@ function extend() {
      * @param {Function} [iteratee=_.identity] The function invoked per iteration.
      * @param {*} [accumulator] The initial value.
      * @returns {*} Returns the accumulated value.
+     * @see _.reduce
      * @example
      *
      * var array = [[0, 1], [2, 3], [4, 5]];
@@ -27748,6 +28096,7 @@ function extend() {
      * @param {Array|Function|Object|string} [predicate=_.identity]
      *  The function invoked per iteration.
      * @returns {Array} Returns the new filtered array.
+     * @see _.filter
      * @example
      *
      * var users = [
@@ -28064,7 +28413,7 @@ function extend() {
      * @param {Function} func The function to cap arguments for.
      * @param {number} [n=func.length] The arity cap.
      * @param- {Object} [guard] Enables use as an iteratee for methods like `_.map`.
-     * @returns {Function} Returns the new function.
+     * @returns {Function} Returns the new capped function.
      * @example
      *
      * _.map(['6', '8', '10'], _.ary(parseInt, 1));
@@ -28148,7 +28497,7 @@ function extend() {
     var bind = rest(function(func, thisArg, partials) {
       var bitmask = BIND_FLAG;
       if (partials.length) {
-        var holders = replaceHolders(partials, getPlaceholder(bind));
+        var holders = replaceHolders(partials, getHolder(bind));
         bitmask |= PARTIAL_FLAG;
       }
       return createWrapper(func, bitmask, thisArg, partials, holders);
@@ -28202,7 +28551,7 @@ function extend() {
     var bindKey = rest(function(object, key, partials) {
       var bitmask = BIND_FLAG | BIND_KEY_FLAG;
       if (partials.length) {
-        var holders = replaceHolders(partials, getPlaceholder(bindKey));
+        var holders = replaceHolders(partials, getHolder(bindKey));
         bitmask |= PARTIAL_FLAG;
       }
       return createWrapper(key, bitmask, object, partials, holders);
@@ -28528,7 +28877,7 @@ function extend() {
      * @since 4.0.0
      * @category Function
      * @param {Function} func The function to flip arguments for.
-     * @returns {Function} Returns the new function.
+     * @returns {Function} Returns the new flipped function.
      * @example
      *
      * var flipped = _.flip(function() {
@@ -28561,7 +28910,7 @@ function extend() {
      * @category Function
      * @param {Function} func The function to have its output memoized.
      * @param {Function} [resolver] The function to resolve the cache key.
-     * @returns {Function} Returns the new memoizing function.
+     * @returns {Function} Returns the new memoized function.
      * @example
      *
      * var object = { 'a': 1, 'b': 2 };
@@ -28619,7 +28968,7 @@ function extend() {
      * @since 3.0.0
      * @category Function
      * @param {Function} predicate The predicate to negate.
-     * @returns {Function} Returns the new function.
+     * @returns {Function} Returns the new negated function.
      * @example
      *
      * function isEven(n) {
@@ -28743,7 +29092,7 @@ function extend() {
      * // => 'hi fred'
      */
     var partial = rest(function(func, partials) {
-      var holders = replaceHolders(partials, getPlaceholder(partial));
+      var holders = replaceHolders(partials, getHolder(partial));
       return createWrapper(func, PARTIAL_FLAG, undefined, partials, holders);
     });
 
@@ -28780,7 +29129,7 @@ function extend() {
      * // => 'hello fred'
      */
     var partialRight = rest(function(func, partials) {
-      var holders = replaceHolders(partials, getPlaceholder(partialRight));
+      var holders = replaceHolders(partials, getHolder(partialRight));
       return createWrapper(func, PARTIAL_RIGHT_FLAG, undefined, partials, holders);
     });
 
@@ -28982,7 +29331,7 @@ function extend() {
      * @since 4.0.0
      * @category Function
      * @param {Function} func The function to cap arguments for.
-     * @returns {Function} Returns the new function.
+     * @returns {Function} Returns the new capped function.
      * @example
      *
      * _.map(['6', '8', '10'], _.unary(parseInt));
@@ -29079,6 +29428,7 @@ function extend() {
      * @category Lang
      * @param {*} value The value to clone.
      * @returns {*} Returns the cloned value.
+     * @see _.cloneDeep
      * @example
      *
      * var objects = [{ 'a': 1 }, { 'b': 2 }];
@@ -29104,6 +29454,7 @@ function extend() {
      * @param {*} value The value to clone.
      * @param {Function} [customizer] The function to customize cloning.
      * @returns {*} Returns the cloned value.
+     * @see _.cloneDeepWith
      * @example
      *
      * function customizer(value) {
@@ -29134,6 +29485,7 @@ function extend() {
      * @category Lang
      * @param {*} value The value to recursively clone.
      * @returns {*} Returns the deep cloned value.
+     * @see _.clone
      * @example
      *
      * var objects = [{ 'a': 1 }, { 'b': 2 }];
@@ -29156,6 +29508,7 @@ function extend() {
      * @param {*} value The value to recursively clone.
      * @param {Function} [customizer] The function to customize cloning.
      * @returns {*} Returns the deep cloned value.
+     * @see _.cloneWith
      * @example
      *
      * function customizer(value) {
@@ -29224,6 +29577,7 @@ function extend() {
      * @param {*} other The other value to compare.
      * @returns {boolean} Returns `true` if `value` is greater than `other`,
      *  else `false`.
+     * @see _.lt
      * @example
      *
      * _.gt(3, 1);
@@ -29235,9 +29589,7 @@ function extend() {
      * _.gt(1, 3);
      * // => false
      */
-    function gt(value, other) {
-      return value > other;
-    }
+    var gt = createRelationalOperation(baseGt);
 
     /**
      * Checks if `value` is greater than or equal to `other`.
@@ -29250,6 +29602,7 @@ function extend() {
      * @param {*} other The other value to compare.
      * @returns {boolean} Returns `true` if `value` is greater than or equal to
      *  `other`, else `false`.
+     * @see _.lte
      * @example
      *
      * _.gte(3, 1);
@@ -29261,9 +29614,9 @@ function extend() {
      * _.gte(1, 3);
      * // => false
      */
-    function gte(value, other) {
+    var gte = createRelationalOperation(function(value, other) {
       return value >= other;
-    }
+    });
 
     /**
      * Checks if `value` is likely an `arguments` object.
@@ -29654,13 +30007,13 @@ function extend() {
      * _.isFinite(3);
      * // => true
      *
-     * _.isFinite(Number.MAX_VALUE);
-     * // => true
-     *
-     * _.isFinite(3.14);
+     * _.isFinite(Number.MIN_VALUE);
      * // => true
      *
      * _.isFinite(Infinity);
+     * // => false
+     *
+     * _.isFinite('3');
      * // => false
      */
     function isFinite(value) {
@@ -30302,6 +30655,7 @@ function extend() {
      * @param {*} other The other value to compare.
      * @returns {boolean} Returns `true` if `value` is less than `other`,
      *  else `false`.
+     * @see _.gt
      * @example
      *
      * _.lt(1, 3);
@@ -30313,9 +30667,7 @@ function extend() {
      * _.lt(3, 1);
      * // => false
      */
-    function lt(value, other) {
-      return value < other;
-    }
+    var lt = createRelationalOperation(baseLt);
 
     /**
      * Checks if `value` is less than or equal to `other`.
@@ -30328,6 +30680,7 @@ function extend() {
      * @param {*} other The other value to compare.
      * @returns {boolean} Returns `true` if `value` is less than or equal to
      *  `other`, else `false`.
+     * @see _.gte
      * @example
      *
      * _.lte(1, 3);
@@ -30339,9 +30692,9 @@ function extend() {
      * _.lte(3, 1);
      * // => false
      */
-    function lte(value, other) {
+    var lte = createRelationalOperation(function(value, other) {
       return value <= other;
-    }
+    });
 
     /**
      * Converts `value` to an array.
@@ -30383,6 +30736,41 @@ function extend() {
     }
 
     /**
+     * Converts `value` to a finite number.
+     *
+     * @static
+     * @memberOf _
+     * @since 4.12.0
+     * @category Lang
+     * @param {*} value The value to convert.
+     * @returns {number} Returns the converted number.
+     * @example
+     *
+     * _.toFinite(3.2);
+     * // => 3.2
+     *
+     * _.toFinite(Number.MIN_VALUE);
+     * // => 5e-324
+     *
+     * _.toFinite(Infinity);
+     * // => 1.7976931348623157e+308
+     *
+     * _.toFinite('3.2');
+     * // => 3.2
+     */
+    function toFinite(value) {
+      if (!value) {
+        return value === 0 ? value : 0;
+      }
+      value = toNumber(value);
+      if (value === INFINITY || value === -INFINITY) {
+        var sign = (value < 0 ? -1 : 1);
+        return sign * MAX_INTEGER;
+      }
+      return value === value ? value : 0;
+    }
+
+    /**
      * Converts `value` to an integer.
      *
      * **Note:** This function is loosely based on
@@ -30396,7 +30784,7 @@ function extend() {
      * @returns {number} Returns the converted integer.
      * @example
      *
-     * _.toInteger(3);
+     * _.toInteger(3.2);
      * // => 3
      *
      * _.toInteger(Number.MIN_VALUE);
@@ -30405,20 +30793,14 @@ function extend() {
      * _.toInteger(Infinity);
      * // => 1.7976931348623157e+308
      *
-     * _.toInteger('3');
+     * _.toInteger('3.2');
      * // => 3
      */
     function toInteger(value) {
-      if (!value) {
-        return value === 0 ? value : 0;
-      }
-      value = toNumber(value);
-      if (value === INFINITY || value === -INFINITY) {
-        var sign = (value < 0 ? -1 : 1);
-        return sign * MAX_INTEGER;
-      }
-      var remainder = value % 1;
-      return value === value ? (remainder ? value - remainder : value) : 0;
+      var result = toFinite(value),
+          remainder = result % 1;
+
+      return result === result ? (remainder ? result - remainder : result) : 0;
     }
 
     /**
@@ -30436,7 +30818,7 @@ function extend() {
      * @returns {number} Returns the converted integer.
      * @example
      *
-     * _.toLength(3);
+     * _.toLength(3.2);
      * // => 3
      *
      * _.toLength(Number.MIN_VALUE);
@@ -30445,7 +30827,7 @@ function extend() {
      * _.toLength(Infinity);
      * // => 4294967295
      *
-     * _.toLength('3');
+     * _.toLength('3.2');
      * // => 3
      */
     function toLength(value) {
@@ -30463,8 +30845,8 @@ function extend() {
      * @returns {number} Returns the number.
      * @example
      *
-     * _.toNumber(3);
-     * // => 3
+     * _.toNumber(3.2);
+     * // => 3.2
      *
      * _.toNumber(Number.MIN_VALUE);
      * // => 5e-324
@@ -30472,8 +30854,8 @@ function extend() {
      * _.toNumber(Infinity);
      * // => Infinity
      *
-     * _.toNumber('3');
-     * // => 3
+     * _.toNumber('3.2');
+     * // => 3.2
      */
     function toNumber(value) {
       if (typeof value == 'number') {
@@ -30536,7 +30918,7 @@ function extend() {
      * @returns {number} Returns the converted integer.
      * @example
      *
-     * _.toSafeInteger(3);
+     * _.toSafeInteger(3.2);
      * // => 3
      *
      * _.toSafeInteger(Number.MIN_VALUE);
@@ -30545,7 +30927,7 @@ function extend() {
      * _.toSafeInteger(Infinity);
      * // => 9007199254740991
      *
-     * _.toSafeInteger('3');
+     * _.toSafeInteger('3.2');
      * // => 3
      */
     function toSafeInteger(value) {
@@ -30574,18 +30956,7 @@ function extend() {
      * // => '1,2,3'
      */
     function toString(value) {
-      // Exit early for strings to avoid a performance hit in some environments.
-      if (typeof value == 'string') {
-        return value;
-      }
-      if (value == null) {
-        return '';
-      }
-      if (isSymbol(value)) {
-        return symbolToString ? symbolToString.call(value) : '';
-      }
-      var result = (value + '');
-      return (result == '0' && (1 / value) == -INFINITY) ? '-0' : result;
+      return value == null ? '' : baseToString(value);
     }
 
     /*------------------------------------------------------------------------*/
@@ -30605,6 +30976,7 @@ function extend() {
      * @param {Object} object The destination object.
      * @param {...Object} [sources] The source objects.
      * @returns {Object} Returns `object`.
+     * @see _.assignIn
      * @example
      *
      * function Foo() {
@@ -30647,6 +31019,7 @@ function extend() {
      * @param {Object} object The destination object.
      * @param {...Object} [sources] The source objects.
      * @returns {Object} Returns `object`.
+     * @see _.assign
      * @example
      *
      * function Foo() {
@@ -30690,6 +31063,7 @@ function extend() {
      * @param {...Object} sources The source objects.
      * @param {Function} [customizer] The function to customize assigned values.
      * @returns {Object} Returns `object`.
+     * @see _.assignWith
      * @example
      *
      * function customizer(objValue, srcValue) {
@@ -30721,6 +31095,7 @@ function extend() {
      * @param {...Object} sources The source objects.
      * @param {Function} [customizer] The function to customize assigned values.
      * @returns {Object} Returns `object`.
+     * @see _.assignInWith
      * @example
      *
      * function customizer(objValue, srcValue) {
@@ -30745,7 +31120,7 @@ function extend() {
      * @category Object
      * @param {Object} object The object to iterate over.
      * @param {...(string|string[])} [paths] The property paths of elements to pick.
-     * @returns {Array} Returns the new array of picked elements.
+     * @returns {Array} Returns the picked values.
      * @example
      *
      * var object = { 'a': [{ 'b': { 'c': 3 } }, 4] };
@@ -30814,6 +31189,7 @@ function extend() {
      * @param {Object} object The destination object.
      * @param {...Object} [sources] The source objects.
      * @returns {Object} Returns `object`.
+     * @see _.defaultsDeep
      * @example
      *
      * _.defaults({ 'user': 'barney' }, { 'age': 36 }, { 'user': 'fred' });
@@ -30837,6 +31213,7 @@ function extend() {
      * @param {Object} object The destination object.
      * @param {...Object} [sources] The source objects.
      * @returns {Object} Returns `object`.
+     * @see _.defaults
      * @example
      *
      * _.defaultsDeep({ 'user': { 'name': 'barney' } }, { 'user': { 'name': 'fred', 'age': 36 } });
@@ -30941,6 +31318,7 @@ function extend() {
      * @param {Object} object The object to iterate over.
      * @param {Function} [iteratee=_.identity] The function invoked per iteration.
      * @returns {Object} Returns `object`.
+     * @see _.forInRight
      * @example
      *
      * function Foo() {
@@ -30958,7 +31336,7 @@ function extend() {
     function forIn(object, iteratee) {
       return object == null
         ? object
-        : baseFor(object, getIteratee(iteratee), keysIn);
+        : baseFor(object, getIteratee(iteratee, 3), keysIn);
     }
 
     /**
@@ -30972,6 +31350,7 @@ function extend() {
      * @param {Object} object The object to iterate over.
      * @param {Function} [iteratee=_.identity] The function invoked per iteration.
      * @returns {Object} Returns `object`.
+     * @see _.forIn
      * @example
      *
      * function Foo() {
@@ -30989,7 +31368,7 @@ function extend() {
     function forInRight(object, iteratee) {
       return object == null
         ? object
-        : baseForRight(object, getIteratee(iteratee), keysIn);
+        : baseForRight(object, getIteratee(iteratee, 3), keysIn);
     }
 
     /**
@@ -31005,6 +31384,7 @@ function extend() {
      * @param {Object} object The object to iterate over.
      * @param {Function} [iteratee=_.identity] The function invoked per iteration.
      * @returns {Object} Returns `object`.
+     * @see _.forOwnRight
      * @example
      *
      * function Foo() {
@@ -31020,7 +31400,7 @@ function extend() {
      * // => Logs 'a' then 'b' (iteration order is not guaranteed).
      */
     function forOwn(object, iteratee) {
-      return object && baseForOwn(object, getIteratee(iteratee));
+      return object && baseForOwn(object, getIteratee(iteratee, 3));
     }
 
     /**
@@ -31034,6 +31414,7 @@ function extend() {
      * @param {Object} object The object to iterate over.
      * @param {Function} [iteratee=_.identity] The function invoked per iteration.
      * @returns {Object} Returns `object`.
+     * @see _.forOwn
      * @example
      *
      * function Foo() {
@@ -31049,7 +31430,7 @@ function extend() {
      * // => Logs 'b' then 'a' assuming `_.forOwn` logs 'a' then 'b'.
      */
     function forOwnRight(object, iteratee) {
-      return object && baseForOwnRight(object, getIteratee(iteratee));
+      return object && baseForOwnRight(object, getIteratee(iteratee, 3));
     }
 
     /**
@@ -31061,7 +31442,8 @@ function extend() {
      * @memberOf _
      * @category Object
      * @param {Object} object The object to inspect.
-     * @returns {Array} Returns the new array of property names.
+     * @returns {Array} Returns the function names.
+     * @see _.functionsIn
      * @example
      *
      * function Foo() {
@@ -31087,7 +31469,8 @@ function extend() {
      * @since 4.0.0
      * @category Object
      * @param {Object} object The object to inspect.
-     * @returns {Array} Returns the new array of property names.
+     * @returns {Array} Returns the function names.
+     * @see _.functions
      * @example
      *
      * function Foo() {
@@ -31377,6 +31760,7 @@ function extend() {
      * @param {Array|Function|Object|string} [iteratee=_.identity]
      *  The function invoked per iteration.
      * @returns {Object} Returns the new mapped object.
+     * @see _.mapValues
      * @example
      *
      * _.mapKeys({ 'a': 1, 'b': 2 }, function(value, key) {
@@ -31408,6 +31792,7 @@ function extend() {
      * @param {Array|Function|Object|string} [iteratee=_.identity]
      *  The function invoked per iteration.
      * @returns {Object} Returns the new mapped object.
+     * @see _.mapKeys
      * @example
      *
      * var users = {
@@ -31437,7 +31822,7 @@ function extend() {
      * inherited enumerable string keyed properties of source objects into the
      * destination object. Source properties that resolve to `undefined` are
      * skipped if a destination value exists. Array and plain object properties
-     * are merged recursively.Other objects and value types are overridden by
+     * are merged recursively. Other objects and value types are overridden by
      * assignment. Source objects are applied from left to right. Subsequent
      * sources overwrite property assignments of previous sources.
      *
@@ -31582,7 +31967,7 @@ function extend() {
      * // => { 'a': 1, 'c': 3 }
      */
     var pick = rest(function(object, props) {
-      return object == null ? {} : basePick(object, baseFlatten(props, 1));
+      return object == null ? {} : basePick(object, arrayMap(baseFlatten(props, 1), toKey));
     });
 
     /**
@@ -31649,7 +32034,7 @@ function extend() {
         length = 1;
       }
       while (++index < length) {
-        var value = object == null ? undefined : object[path[index]];
+        var value = object == null ? undefined : object[toKey(path[index])];
         if (value === undefined) {
           index = length;
           value = defaultValue;
@@ -31722,7 +32107,8 @@ function extend() {
 
     /**
      * Creates an array of own enumerable string keyed-value pairs for `object`
-     * which can be consumed by `_.fromPairs`.
+     * which can be consumed by `_.fromPairs`. If `object` is a map or set, its
+     * entries are returned.
      *
      * @static
      * @memberOf _
@@ -31730,7 +32116,7 @@ function extend() {
      * @alias entries
      * @category Object
      * @param {Object} object The object to query.
-     * @returns {Array} Returns the new array of key-value pairs.
+     * @returns {Array} Returns the key-value pairs.
      * @example
      *
      * function Foo() {
@@ -31743,13 +32129,12 @@ function extend() {
      * _.toPairs(new Foo);
      * // => [['a', 1], ['b', 2]] (iteration order is not guaranteed)
      */
-    function toPairs(object) {
-      return baseToPairs(object, keys(object));
-    }
+    var toPairs = createToPairs(keys);
 
     /**
      * Creates an array of own and inherited enumerable string keyed-value pairs
-     * for `object` which can be consumed by `_.fromPairs`.
+     * for `object` which can be consumed by `_.fromPairs`. If `object` is a map
+     * or set, its entries are returned.
      *
      * @static
      * @memberOf _
@@ -31757,7 +32142,7 @@ function extend() {
      * @alias entriesIn
      * @category Object
      * @param {Object} object The object to query.
-     * @returns {Array} Returns the new array of key-value pairs.
+     * @returns {Array} Returns the key-value pairs.
      * @example
      *
      * function Foo() {
@@ -31768,11 +32153,9 @@ function extend() {
      * Foo.prototype.c = 3;
      *
      * _.toPairsIn(new Foo);
-     * // => [['a', 1], ['b', 2], ['c', 1]] (iteration order is not guaranteed)
+     * // => [['a', 1], ['b', 2], ['c', 3]] (iteration order is not guaranteed)
      */
-    function toPairsIn(object) {
-      return baseToPairs(object, keysIn(object));
-    }
+    var toPairsIn = createToPairs(keysIn);
 
     /**
      * An alternative to `_.reduce`; this method transforms `object` to a new
@@ -32012,7 +32395,7 @@ function extend() {
     }
 
     /**
-     * Checks if `n` is between `start` and up to but not including, `end`. If
+     * Checks if `n` is between `start` and up to, but not including, `end`. If
      * `end` is not specified, it's set to `start` with `start` then set to `0`.
      * If `start` is greater than `end` the params are swapped to support
      * negative ranges.
@@ -32025,6 +32408,7 @@ function extend() {
      * @param {number} [start=0] The start of the range.
      * @param {number} end The end of the range.
      * @returns {boolean} Returns `true` if `number` is in the range, else `false`.
+     * @see _.range, _.rangeRight
      * @example
      *
      * _.inRange(3, 2, 4);
@@ -32223,7 +32607,7 @@ function extend() {
      */
     function endsWith(string, target, position) {
       string = toString(string);
-      target = typeof target == 'string' ? target : (target + '');
+      target = baseToString(target);
 
       var length = string.length;
       position = position === undefined
@@ -32601,7 +32985,7 @@ function extend() {
      * @param {string} [string=''] The string to split.
      * @param {RegExp|string} separator The separator pattern to split by.
      * @param {number} [limit] The length to truncate results to.
-     * @returns {Array} Returns the new array of string segments.
+     * @returns {Array} Returns the string segments.
      * @example
      *
      * _.split('a-b-c', '-', 2);
@@ -32620,7 +33004,7 @@ function extend() {
             typeof separator == 'string' ||
             (separator != null && !isRegExp(separator))
           )) {
-        separator += '';
+        separator = baseToString(separator);
         if (separator == '' && reHasComplexSymbol.test(string)) {
           return castSlice(stringToArray(string), 0, limit);
         }
@@ -32679,7 +33063,7 @@ function extend() {
     function startsWith(string, target, position) {
       string = toString(string);
       position = baseClamp(toInteger(position), 0, string.length);
-      return string.lastIndexOf(target, position) == position;
+      return string.lastIndexOf(baseToString(target), position) == position;
     }
 
     /**
@@ -32746,12 +33130,6 @@ function extend() {
      * compiled({ 'user': 'pebbles' });
      * // => 'hello pebbles!'
      *
-     * // Use custom template delimiters.
-     * _.templateSettings.interpolate = /{{([\s\S]+?)}}/g;
-     * var compiled = _.template('hello {{ user }}!');
-     * compiled({ 'user': 'mustache' });
-     * // => 'hello mustache!'
-     *
      * // Use backslashes to treat delimiters as plain text.
      * var compiled = _.template('<%= "\\<%- value %\\>" %>');
      * compiled({ 'value': 'ignored' });
@@ -32777,9 +33155,15 @@ function extend() {
      * //   return __p;
      * // }
      *
+     * // Use custom template delimiters.
+     * _.templateSettings.interpolate = /{{([\s\S]+?)}}/g;
+     * var compiled = _.template('hello {{ user }}!');
+     * compiled({ 'user': 'mustache' });
+     * // => 'hello mustache!'
+     *
      * // Use the `source` property to inline compiled templates for meaningful
      * // line numbers in error messages and stack traces.
-     * fs.writeFileSync(path.join(cwd, 'jst.js'), '\
+     * fs.writeFileSync(path.join(process.cwd(), 'jst.js'), '\
      *   var JST = {\
      *     "main": ' + _.template(mainText).source + '\
      *   };\
@@ -32967,13 +33351,10 @@ function extend() {
      */
     function trim(string, chars, guard) {
       string = toString(string);
-      if (!string) {
-        return string;
-      }
-      if (guard || chars === undefined) {
+      if (string && (guard || chars === undefined)) {
         return string.replace(reTrim, '');
       }
-      if (!(chars += '')) {
+      if (!string || !(chars = baseToString(chars))) {
         return string;
       }
       var strSymbols = stringToArray(string),
@@ -33005,13 +33386,10 @@ function extend() {
      */
     function trimEnd(string, chars, guard) {
       string = toString(string);
-      if (!string) {
-        return string;
-      }
-      if (guard || chars === undefined) {
+      if (string && (guard || chars === undefined)) {
         return string.replace(reTrimEnd, '');
       }
-      if (!(chars += '')) {
+      if (!string || !(chars = baseToString(chars))) {
         return string;
       }
       var strSymbols = stringToArray(string),
@@ -33041,13 +33419,10 @@ function extend() {
      */
     function trimStart(string, chars, guard) {
       string = toString(string);
-      if (!string) {
-        return string;
-      }
-      if (guard || chars === undefined) {
+      if (string && (guard || chars === undefined)) {
         return string.replace(reTrimStart, '');
       }
-      if (!(chars += '')) {
+      if (!string || !(chars = baseToString(chars))) {
         return string;
       }
       var strSymbols = stringToArray(string),
@@ -33100,7 +33475,7 @@ function extend() {
       if (isObject(options)) {
         var separator = 'separator' in options ? options.separator : separator;
         length = 'length' in options ? toInteger(options.length) : length;
-        omission = 'omission' in options ? toString(options.omission) : omission;
+        omission = 'omission' in options ? baseToString(options.omission) : omission;
       }
       string = toString(string);
 
@@ -33140,7 +33515,7 @@ function extend() {
           }
           result = result.slice(0, newEnd === undefined ? end : newEnd);
         }
-      } else if (string.indexOf(separator, end) != end) {
+      } else if (string.indexOf(baseToString(separator), end) != end) {
         var index = result.lastIndexOf(separator);
         if (index > -1) {
           result = result.slice(0, index);
@@ -33307,6 +33682,7 @@ function extend() {
      */
     var bindAll = rest(function(object, methodNames) {
       arrayEach(baseFlatten(methodNames, 1), function(key) {
+        key = toKey(key);
         object[key] = bind(object[key], object);
       });
       return object;
@@ -33323,7 +33699,7 @@ function extend() {
      * @since 4.0.0
      * @category Util
      * @param {Array} pairs The predicate-function pairs.
-     * @returns {Function} Returns the new function.
+     * @returns {Function} Returns the new composite function.
      * @example
      *
      * var func = _.cond([
@@ -33373,7 +33749,7 @@ function extend() {
      * @since 4.0.0
      * @category Util
      * @param {Object} source The object of property predicates to conform to.
-     * @returns {Function} Returns the new function.
+     * @returns {Function} Returns the new spec function.
      * @example
      *
      * var users = [
@@ -33396,7 +33772,7 @@ function extend() {
      * @since 2.4.0
      * @category Util
      * @param {*} value The value to return from the new function.
-     * @returns {Function} Returns the new function.
+     * @returns {Function} Returns the new constant function.
      * @example
      *
      * var object = { 'user': 'fred' };
@@ -33421,7 +33797,8 @@ function extend() {
      * @since 3.0.0
      * @category Util
      * @param {...(Function|Function[])} [funcs] Functions to invoke.
-     * @returns {Function} Returns the new function.
+     * @returns {Function} Returns the new composite function.
+     * @see _.flowRight
      * @example
      *
      * function square(n) {
@@ -33439,11 +33816,12 @@ function extend() {
      * invokes the given functions from right to left.
      *
      * @static
-     * @since 0.1.0
+     * @since 3.0.0
      * @memberOf _
      * @category Util
      * @param {...(Function|Function[])} [funcs] Functions to invoke.
-     * @returns {Function} Returns the new function.
+     * @returns {Function} Returns the new composite function.
+     * @see _.flow
      * @example
      *
      * function square(n) {
@@ -33535,7 +33913,7 @@ function extend() {
      * @since 3.0.0
      * @category Util
      * @param {Object} source The object of property values to match.
-     * @returns {Function} Returns the new function.
+     * @returns {Function} Returns the new spec function.
      * @example
      *
      * var users = [
@@ -33563,7 +33941,7 @@ function extend() {
      * @category Util
      * @param {Array|string} path The path of the property to get.
      * @param {*} srcValue The value to match.
-     * @returns {Function} Returns the new function.
+     * @returns {Function} Returns the new spec function.
      * @example
      *
      * var users = [
@@ -33588,7 +33966,7 @@ function extend() {
      * @category Util
      * @param {Array|string} path The path of the method to invoke.
      * @param {...*} [args] The arguments to invoke the method with.
-     * @returns {Function} Returns the new function.
+     * @returns {Function} Returns the new invoker function.
      * @example
      *
      * var objects = [
@@ -33619,7 +33997,7 @@ function extend() {
      * @category Util
      * @param {Object} object The object to query.
      * @param {...*} [args] The arguments to invoke the method with.
-     * @returns {Function} Returns the new function.
+     * @returns {Function} Returns the new invoker function.
      * @example
      *
      * var array = _.times(3, _.constant),
@@ -33749,7 +34127,7 @@ function extend() {
     }
 
     /**
-     * Creates a function that returns its nth argument. If `n` is negative,
+     * Creates a function that gets the argument at `n` index. If `n` is negative,
      * the nth argument from the end is returned.
      *
      * @static
@@ -33757,7 +34135,7 @@ function extend() {
      * @since 4.0.0
      * @category Util
      * @param {number} [n=0] The index of the argument to return.
-     * @returns {Function} Returns the new function.
+     * @returns {Function} Returns the new pass-thru function.
      * @example
      *
      * var func = _.nthArg(1);
@@ -33855,7 +34233,7 @@ function extend() {
      * @since 2.4.0
      * @category Util
      * @param {Array|string} path The path of the property to get.
-     * @returns {Function} Returns the new function.
+     * @returns {Function} Returns the new accessor function.
      * @example
      *
      * var objects = [
@@ -33870,7 +34248,7 @@ function extend() {
      * // => [1, 2]
      */
     function property(path) {
-      return isKey(path) ? baseProperty(path) : basePropertyDeep(path);
+      return isKey(path) ? baseProperty(toKey(path)) : basePropertyDeep(path);
     }
 
     /**
@@ -33882,7 +34260,7 @@ function extend() {
      * @since 3.0.0
      * @category Util
      * @param {Object} object The object to query.
-     * @returns {Function} Returns the new function.
+     * @returns {Function} Returns the new accessor function.
      * @example
      *
      * var array = [0, 1, 2],
@@ -33916,7 +34294,8 @@ function extend() {
      * @param {number} [start=0] The start of the range.
      * @param {number} end The end of the range.
      * @param {number} [step=1] The value to increment or decrement by.
-     * @returns {Array} Returns the new array of numbers.
+     * @returns {Array} Returns the range of numbers.
+     * @see _.inRange, _.rangeRight
      * @example
      *
      * _.range(4);
@@ -33953,7 +34332,8 @@ function extend() {
      * @param {number} [start=0] The start of the range.
      * @param {number} end The end of the range.
      * @param {number} [step=1] The value to increment or decrement by.
-     * @returns {Array} Returns the new array of numbers.
+     * @returns {Array} Returns the range of numbers.
+     * @see _.inRange, _.range
      * @example
      *
      * _.rangeRight(4);
@@ -34177,7 +34557,7 @@ function extend() {
      */
     function max(array) {
       return (array && array.length)
-        ? baseExtremum(array, identity, gt)
+        ? baseExtremum(array, identity, baseGt)
         : undefined;
     }
 
@@ -34207,7 +34587,7 @@ function extend() {
      */
     function maxBy(array, iteratee) {
       return (array && array.length)
-        ? baseExtremum(array, getIteratee(iteratee), gt)
+        ? baseExtremum(array, getIteratee(iteratee), baseGt)
         : undefined;
     }
 
@@ -34277,7 +34657,7 @@ function extend() {
      */
     function min(array) {
       return (array && array.length)
-        ? baseExtremum(array, identity, lt)
+        ? baseExtremum(array, identity, baseLt)
         : undefined;
     }
 
@@ -34307,7 +34687,7 @@ function extend() {
      */
     function minBy(array, iteratee) {
       return (array && array.length)
-        ? baseExtremum(array, getIteratee(iteratee), lt)
+        ? baseExtremum(array, getIteratee(iteratee), baseLt)
         : undefined;
     }
 
@@ -34713,6 +35093,7 @@ function extend() {
     lodash.sumBy = sumBy;
     lodash.template = template;
     lodash.times = times;
+    lodash.toFinite = toFinite;
     lodash.toInteger = toInteger;
     lodash.toLength = toLength;
     lodash.toLower = toLower;
@@ -34979,9 +35360,11 @@ function extend() {
   // Export lodash.
   var _ = runInContext();
 
-  // Expose lodash on the free variable `window` or `self` when available. This
-  // prevents errors in cases where lodash is loaded by a script tag in the presence
-  // of an AMD loader. See http://requirejs.org/docs/errors.html#mismatch for more details.
+  // Expose Lodash on the free variable `window` or `self` when available so it's
+  // globally accessible, even when bundled with Browserify, Webpack, etc. This
+  // also prevents errors in cases where Lodash is loaded by a script tag in the
+  // presence of an AMD loader. See http://requirejs.org/docs/errors.html#mismatch
+  // for more details. Use `_.noConflict` to remove Lodash from the global object.
   (freeWindow || freeSelf || {})._ = _;
 
   // Some AMD build optimizers like r.js check for condition patterns like the following:
@@ -35068,7 +35451,7 @@ function isModifyingReference(reference, index, references) {
 function isES5Constructor(node) {
     return (
         node.id &&
-        node.id.name[0] === node.id.name[0].toLocaleUpperCase()
+        node.id.name[0] !== node.id.name[0].toLocaleLowerCase()
     );
 }
 
@@ -35187,14 +35570,14 @@ function hasJSDocThisTag(node, sourceCode) {
 
 /**
  * Determines if a node is surrounded by parentheses.
- * @param {RuleContext} context The context object passed to the rule
+ * @param {SourceCode} sourceCode The ESLint source code object
  * @param {ASTNode} node The node to be checked.
  * @returns {boolean} True if the node is parenthesised.
  * @private
  */
-function isParenthesised(context, node) {
-    var previousToken = context.getTokenBefore(node),
-        nextToken = context.getTokenAfter(node);
+function isParenthesised(sourceCode, node) {
+    var previousToken = sourceCode.getTokenBefore(node),
+        nextToken = sourceCode.getTokenAfter(node);
 
     return Boolean(previousToken && nextToken) &&
         previousToken.value === "(" && previousToken.range[1] <= node.range[0] &&
@@ -40038,8 +40421,14 @@ module.exports = (function() {
             source: sourceCode.lines[location.line - 1] || ""
         };
 
-        // ensure there's range and text properties as well as metadata switch, otherwise it's not a valid fix
-        if (fix && Array.isArray(fix.range) && (typeof fix.text === "string") && (!meta || meta.fixable)) {
+        // ensure there's range and text properties, otherwise it's not a valid fix
+        if (fix && Array.isArray(fix.range) && (typeof fix.text === "string")) {
+
+            // If rule uses fix, has metadata, but has no metadata.fixable, we should throw
+            if (meta && !meta.fixable) {
+                throw new Error("Fixable rules should export a `meta.fixable` property.");
+            }
+
             problem.fix = fix;
         }
 
@@ -40241,7 +40630,7 @@ module.exports = (function() {
 
 }());
 
-},{"../conf/blank-script.json":1,"../conf/eslint.json":3,"../conf/replacements.json":4,"./code-path-analysis/code-path-analyzer":152,"./config/config-ops":159,"./config/config-validator":160,"./config/environments":161,"./rule-context":164,"./rules":165,"./timing":377,"./util/comment-event-generator":379,"./util/node-event-generator":381,"./util/source-code":383,"./util/traverser":384,"assert":5,"escope":77,"events":6,"lodash":150}],163:[function(require,module,exports){
+},{"../conf/blank-script.json":1,"../conf/eslint.json":3,"../conf/replacements.json":4,"./code-path-analysis/code-path-analyzer":152,"./config/config-ops":159,"./config/config-validator":160,"./config/environments":161,"./rule-context":164,"./rules":165,"./timing":378,"./util/comment-event-generator":380,"./util/node-event-generator":382,"./util/source-code":384,"./util/traverser":385,"assert":5,"escope":77,"events":6,"lodash":150}],163:[function(require,module,exports){
 module.exports = function() {
     var rules = Object.create(null);
     rules["accessor-pairs"] = require("./rules/accessor-pairs");
@@ -40418,6 +40807,7 @@ module.exports = function() {
     rules["no-whitespace-before-property"] = require("./rules/no-whitespace-before-property");
     rules["no-with"] = require("./rules/no-with");
     rules["object-curly-spacing"] = require("./rules/object-curly-spacing");
+    rules["object-property-newline"] = require("./rules/object-property-newline");
     rules["object-shorthand"] = require("./rules/object-shorthand");
     rules["one-var-declaration-per-line"] = require("./rules/one-var-declaration-per-line");
     rules["one-var"] = require("./rules/one-var");
@@ -40458,7 +40848,7 @@ module.exports = function() {
 
     return rules;
 };
-},{"./rules/accessor-pairs":166,"./rules/array-bracket-spacing":167,"./rules/array-callback-return":168,"./rules/arrow-body-style":169,"./rules/arrow-parens":170,"./rules/arrow-spacing":171,"./rules/block-scoped-var":172,"./rules/block-spacing":173,"./rules/brace-style":174,"./rules/callback-return":175,"./rules/camelcase":176,"./rules/comma-dangle":177,"./rules/comma-spacing":178,"./rules/comma-style":179,"./rules/complexity":180,"./rules/computed-property-spacing":181,"./rules/consistent-return":182,"./rules/consistent-this":183,"./rules/constructor-super":184,"./rules/curly":185,"./rules/default-case":186,"./rules/dot-location":187,"./rules/dot-notation":188,"./rules/eol-last":189,"./rules/eqeqeq":190,"./rules/func-names":191,"./rules/func-style":192,"./rules/generator-star-spacing":193,"./rules/global-require":194,"./rules/guard-for-in":195,"./rules/handle-callback-err":196,"./rules/id-blacklist":197,"./rules/id-length":198,"./rules/id-match":199,"./rules/indent":200,"./rules/init-declarations":201,"./rules/jsx-quotes":202,"./rules/key-spacing":203,"./rules/keyword-spacing":204,"./rules/linebreak-style":205,"./rules/lines-around-comment":206,"./rules/max-depth":207,"./rules/max-len":208,"./rules/max-nested-callbacks":209,"./rules/max-params":210,"./rules/max-statements":212,"./rules/max-statements-per-line":211,"./rules/new-cap":213,"./rules/new-parens":214,"./rules/newline-after-var":215,"./rules/newline-before-return":216,"./rules/newline-per-chained-call":217,"./rules/no-alert":218,"./rules/no-array-constructor":219,"./rules/no-bitwise":220,"./rules/no-caller":221,"./rules/no-case-declarations":222,"./rules/no-catch-shadow":223,"./rules/no-class-assign":224,"./rules/no-cond-assign":225,"./rules/no-confusing-arrow":226,"./rules/no-console":227,"./rules/no-const-assign":228,"./rules/no-constant-condition":229,"./rules/no-continue":230,"./rules/no-control-regex":231,"./rules/no-debugger":232,"./rules/no-delete-var":233,"./rules/no-div-regex":234,"./rules/no-dupe-args":235,"./rules/no-dupe-class-members":236,"./rules/no-dupe-keys":237,"./rules/no-duplicate-case":238,"./rules/no-duplicate-imports":239,"./rules/no-else-return":240,"./rules/no-empty":244,"./rules/no-empty-character-class":241,"./rules/no-empty-function":242,"./rules/no-empty-pattern":243,"./rules/no-eq-null":245,"./rules/no-eval":246,"./rules/no-ex-assign":247,"./rules/no-extend-native":248,"./rules/no-extra-bind":249,"./rules/no-extra-boolean-cast":250,"./rules/no-extra-label":251,"./rules/no-extra-parens":252,"./rules/no-extra-semi":253,"./rules/no-fallthrough":254,"./rules/no-floating-decimal":255,"./rules/no-func-assign":256,"./rules/no-implicit-coercion":257,"./rules/no-implicit-globals":258,"./rules/no-implied-eval":259,"./rules/no-inline-comments":260,"./rules/no-inner-declarations":261,"./rules/no-invalid-regexp":262,"./rules/no-invalid-this":263,"./rules/no-irregular-whitespace":264,"./rules/no-iterator":265,"./rules/no-label-var":266,"./rules/no-labels":267,"./rules/no-lone-blocks":268,"./rules/no-lonely-if":269,"./rules/no-loop-func":270,"./rules/no-magic-numbers":271,"./rules/no-mixed-requires":272,"./rules/no-mixed-spaces-and-tabs":273,"./rules/no-multi-spaces":274,"./rules/no-multi-str":275,"./rules/no-multiple-empty-lines":276,"./rules/no-native-reassign":277,"./rules/no-negated-condition":278,"./rules/no-negated-in-lhs":279,"./rules/no-nested-ternary":280,"./rules/no-new":286,"./rules/no-new-func":281,"./rules/no-new-object":282,"./rules/no-new-require":283,"./rules/no-new-symbol":284,"./rules/no-new-wrappers":285,"./rules/no-obj-calls":287,"./rules/no-octal":289,"./rules/no-octal-escape":288,"./rules/no-param-reassign":290,"./rules/no-path-concat":291,"./rules/no-plusplus":292,"./rules/no-process-env":293,"./rules/no-process-exit":294,"./rules/no-proto":295,"./rules/no-redeclare":296,"./rules/no-regex-spaces":297,"./rules/no-restricted-globals":298,"./rules/no-restricted-imports":299,"./rules/no-restricted-modules":300,"./rules/no-restricted-syntax":301,"./rules/no-return-assign":302,"./rules/no-script-url":303,"./rules/no-self-assign":304,"./rules/no-self-compare":305,"./rules/no-sequences":306,"./rules/no-shadow":308,"./rules/no-shadow-restricted-names":307,"./rules/no-spaced-func":309,"./rules/no-sparse-arrays":310,"./rules/no-sync":311,"./rules/no-ternary":312,"./rules/no-this-before-super":313,"./rules/no-throw-literal":314,"./rules/no-trailing-spaces":315,"./rules/no-undef":317,"./rules/no-undef-init":316,"./rules/no-undefined":318,"./rules/no-underscore-dangle":319,"./rules/no-unexpected-multiline":320,"./rules/no-unmodified-loop-condition":321,"./rules/no-unneeded-ternary":322,"./rules/no-unreachable":323,"./rules/no-unsafe-finally":324,"./rules/no-unused-expressions":325,"./rules/no-unused-labels":326,"./rules/no-unused-vars":327,"./rules/no-use-before-define":328,"./rules/no-useless-call":329,"./rules/no-useless-computed-key":330,"./rules/no-useless-concat":331,"./rules/no-useless-constructor":332,"./rules/no-useless-escape":333,"./rules/no-var":334,"./rules/no-void":335,"./rules/no-warning-comments":336,"./rules/no-whitespace-before-property":337,"./rules/no-with":338,"./rules/object-curly-spacing":339,"./rules/object-shorthand":340,"./rules/one-var":342,"./rules/one-var-declaration-per-line":341,"./rules/operator-assignment":343,"./rules/operator-linebreak":344,"./rules/padded-blocks":345,"./rules/prefer-arrow-callback":346,"./rules/prefer-const":347,"./rules/prefer-reflect":348,"./rules/prefer-rest-params":349,"./rules/prefer-spread":350,"./rules/prefer-template":351,"./rules/quote-props":352,"./rules/quotes":353,"./rules/radix":354,"./rules/require-jsdoc":355,"./rules/require-yield":356,"./rules/semi":358,"./rules/semi-spacing":357,"./rules/sort-imports":359,"./rules/sort-vars":360,"./rules/space-before-blocks":361,"./rules/space-before-function-paren":362,"./rules/space-in-parens":363,"./rules/space-infix-ops":364,"./rules/space-unary-ops":365,"./rules/spaced-comment":366,"./rules/strict":367,"./rules/template-curly-spacing":368,"./rules/use-isnan":369,"./rules/valid-jsdoc":370,"./rules/valid-typeof":371,"./rules/vars-on-top":372,"./rules/wrap-iife":373,"./rules/wrap-regex":374,"./rules/yield-star-spacing":375,"./rules/yoda":376}],164:[function(require,module,exports){
+},{"./rules/accessor-pairs":166,"./rules/array-bracket-spacing":167,"./rules/array-callback-return":168,"./rules/arrow-body-style":169,"./rules/arrow-parens":170,"./rules/arrow-spacing":171,"./rules/block-scoped-var":172,"./rules/block-spacing":173,"./rules/brace-style":174,"./rules/callback-return":175,"./rules/camelcase":176,"./rules/comma-dangle":177,"./rules/comma-spacing":178,"./rules/comma-style":179,"./rules/complexity":180,"./rules/computed-property-spacing":181,"./rules/consistent-return":182,"./rules/consistent-this":183,"./rules/constructor-super":184,"./rules/curly":185,"./rules/default-case":186,"./rules/dot-location":187,"./rules/dot-notation":188,"./rules/eol-last":189,"./rules/eqeqeq":190,"./rules/func-names":191,"./rules/func-style":192,"./rules/generator-star-spacing":193,"./rules/global-require":194,"./rules/guard-for-in":195,"./rules/handle-callback-err":196,"./rules/id-blacklist":197,"./rules/id-length":198,"./rules/id-match":199,"./rules/indent":200,"./rules/init-declarations":201,"./rules/jsx-quotes":202,"./rules/key-spacing":203,"./rules/keyword-spacing":204,"./rules/linebreak-style":205,"./rules/lines-around-comment":206,"./rules/max-depth":207,"./rules/max-len":208,"./rules/max-nested-callbacks":209,"./rules/max-params":210,"./rules/max-statements":212,"./rules/max-statements-per-line":211,"./rules/new-cap":213,"./rules/new-parens":214,"./rules/newline-after-var":215,"./rules/newline-before-return":216,"./rules/newline-per-chained-call":217,"./rules/no-alert":218,"./rules/no-array-constructor":219,"./rules/no-bitwise":220,"./rules/no-caller":221,"./rules/no-case-declarations":222,"./rules/no-catch-shadow":223,"./rules/no-class-assign":224,"./rules/no-cond-assign":225,"./rules/no-confusing-arrow":226,"./rules/no-console":227,"./rules/no-const-assign":228,"./rules/no-constant-condition":229,"./rules/no-continue":230,"./rules/no-control-regex":231,"./rules/no-debugger":232,"./rules/no-delete-var":233,"./rules/no-div-regex":234,"./rules/no-dupe-args":235,"./rules/no-dupe-class-members":236,"./rules/no-dupe-keys":237,"./rules/no-duplicate-case":238,"./rules/no-duplicate-imports":239,"./rules/no-else-return":240,"./rules/no-empty":244,"./rules/no-empty-character-class":241,"./rules/no-empty-function":242,"./rules/no-empty-pattern":243,"./rules/no-eq-null":245,"./rules/no-eval":246,"./rules/no-ex-assign":247,"./rules/no-extend-native":248,"./rules/no-extra-bind":249,"./rules/no-extra-boolean-cast":250,"./rules/no-extra-label":251,"./rules/no-extra-parens":252,"./rules/no-extra-semi":253,"./rules/no-fallthrough":254,"./rules/no-floating-decimal":255,"./rules/no-func-assign":256,"./rules/no-implicit-coercion":257,"./rules/no-implicit-globals":258,"./rules/no-implied-eval":259,"./rules/no-inline-comments":260,"./rules/no-inner-declarations":261,"./rules/no-invalid-regexp":262,"./rules/no-invalid-this":263,"./rules/no-irregular-whitespace":264,"./rules/no-iterator":265,"./rules/no-label-var":266,"./rules/no-labels":267,"./rules/no-lone-blocks":268,"./rules/no-lonely-if":269,"./rules/no-loop-func":270,"./rules/no-magic-numbers":271,"./rules/no-mixed-requires":272,"./rules/no-mixed-spaces-and-tabs":273,"./rules/no-multi-spaces":274,"./rules/no-multi-str":275,"./rules/no-multiple-empty-lines":276,"./rules/no-native-reassign":277,"./rules/no-negated-condition":278,"./rules/no-negated-in-lhs":279,"./rules/no-nested-ternary":280,"./rules/no-new":286,"./rules/no-new-func":281,"./rules/no-new-object":282,"./rules/no-new-require":283,"./rules/no-new-symbol":284,"./rules/no-new-wrappers":285,"./rules/no-obj-calls":287,"./rules/no-octal":289,"./rules/no-octal-escape":288,"./rules/no-param-reassign":290,"./rules/no-path-concat":291,"./rules/no-plusplus":292,"./rules/no-process-env":293,"./rules/no-process-exit":294,"./rules/no-proto":295,"./rules/no-redeclare":296,"./rules/no-regex-spaces":297,"./rules/no-restricted-globals":298,"./rules/no-restricted-imports":299,"./rules/no-restricted-modules":300,"./rules/no-restricted-syntax":301,"./rules/no-return-assign":302,"./rules/no-script-url":303,"./rules/no-self-assign":304,"./rules/no-self-compare":305,"./rules/no-sequences":306,"./rules/no-shadow":308,"./rules/no-shadow-restricted-names":307,"./rules/no-spaced-func":309,"./rules/no-sparse-arrays":310,"./rules/no-sync":311,"./rules/no-ternary":312,"./rules/no-this-before-super":313,"./rules/no-throw-literal":314,"./rules/no-trailing-spaces":315,"./rules/no-undef":317,"./rules/no-undef-init":316,"./rules/no-undefined":318,"./rules/no-underscore-dangle":319,"./rules/no-unexpected-multiline":320,"./rules/no-unmodified-loop-condition":321,"./rules/no-unneeded-ternary":322,"./rules/no-unreachable":323,"./rules/no-unsafe-finally":324,"./rules/no-unused-expressions":325,"./rules/no-unused-labels":326,"./rules/no-unused-vars":327,"./rules/no-use-before-define":328,"./rules/no-useless-call":329,"./rules/no-useless-computed-key":330,"./rules/no-useless-concat":331,"./rules/no-useless-constructor":332,"./rules/no-useless-escape":333,"./rules/no-var":334,"./rules/no-void":335,"./rules/no-warning-comments":336,"./rules/no-whitespace-before-property":337,"./rules/no-with":338,"./rules/object-curly-spacing":339,"./rules/object-property-newline":340,"./rules/object-shorthand":341,"./rules/one-var":343,"./rules/one-var-declaration-per-line":342,"./rules/operator-assignment":344,"./rules/operator-linebreak":345,"./rules/padded-blocks":346,"./rules/prefer-arrow-callback":347,"./rules/prefer-const":348,"./rules/prefer-reflect":349,"./rules/prefer-rest-params":350,"./rules/prefer-spread":351,"./rules/prefer-template":352,"./rules/quote-props":353,"./rules/quotes":354,"./rules/radix":355,"./rules/require-jsdoc":356,"./rules/require-yield":357,"./rules/semi":359,"./rules/semi-spacing":358,"./rules/sort-imports":360,"./rules/sort-vars":361,"./rules/space-before-blocks":362,"./rules/space-before-function-paren":363,"./rules/space-in-parens":364,"./rules/space-infix-ops":365,"./rules/space-unary-ops":366,"./rules/spaced-comment":367,"./rules/strict":368,"./rules/template-curly-spacing":369,"./rules/use-isnan":370,"./rules/valid-jsdoc":371,"./rules/valid-typeof":372,"./rules/vars-on-top":373,"./rules/wrap-iife":374,"./rules/wrap-regex":375,"./rules/yield-star-spacing":376,"./rules/yoda":377}],164:[function(require,module,exports){
 /**
  * @fileoverview RuleContext utility for rules
  * @author Nicholas C. Zakas
@@ -40476,18 +40866,21 @@ var RuleFixer = require("./util/rule-fixer");
 //------------------------------------------------------------------------------
 
 var PASSTHROUGHS = [
-    "getAllComments",
     "getAncestors",
-    "getComments",
     "getDeclaredVariables",
     "getFilename",
+    "getScope",
+    "markVariableAsUsed",
+
+    // DEPRECATED
+    "getAllComments",
+    "getComments",
     "getFirstToken",
     "getFirstTokens",
     "getJSDocComment",
     "getLastToken",
     "getLastTokens",
     "getNodeByRangeIndex",
-    "getScope",
     "getSource",
     "getSourceLines",
     "getTokenAfter",
@@ -40496,8 +40889,7 @@ var PASSTHROUGHS = [
     "getTokens",
     "getTokensAfter",
     "getTokensBefore",
-    "getTokensBetween",
-    "markVariableAsUsed"
+    "getTokensBetween"
 ];
 
 //------------------------------------------------------------------------------
@@ -40618,7 +41010,7 @@ PASSTHROUGHS.forEach(function(name) {
 
 module.exports = RuleContext;
 
-},{"./util/rule-fixer":382}],165:[function(require,module,exports){
+},{"./util/rule-fixer":383}],165:[function(require,module,exports){
 /**
  * @fileoverview Defines a storage for rules.
  * @author Nicholas C. Zakas
@@ -40965,7 +41357,7 @@ module.exports = {
                 loc: token.loc.start,
                 message: "There should be no space after '" + token.value + "'",
                 fix: function(fixer) {
-                    var nextToken = context.getSourceCode().getTokenAfter(token);
+                    var nextToken = sourceCode.getTokenAfter(token);
 
                     return fixer.removeRange([token.range[1], nextToken.range[0]]);
                 }
@@ -40984,7 +41376,7 @@ module.exports = {
                 loc: token.loc.start,
                 message: "There should be no space before '" + token.value + "'",
                 fix: function(fixer) {
-                    var previousToken = context.getSourceCode().getTokenBefore(token);
+                    var previousToken = sourceCode.getTokenBefore(token);
 
                     return fixer.removeRange([previousToken.range[1], token.range[0]]);
                 }
@@ -41053,10 +41445,10 @@ module.exports = {
                 return;
             }
 
-            var first = context.getFirstToken(node),
-                second = context.getFirstToken(node, 1),
-                penultimate = context.getLastToken(node, 1),
-                last = context.getLastToken(node),
+            var first = sourceCode.getFirstToken(node),
+                second = sourceCode.getFirstToken(node, 1),
+                penultimate = sourceCode.getLastToken(node, 1),
+                last = sourceCode.getLastToken(node),
                 firstElement = node.elements[0],
                 lastElement = node.elements[node.elements.length - 1];
 
@@ -41453,13 +41845,15 @@ module.exports = {
         var asNeededMessage = "Unexpected parentheses around single function argument";
         var asNeeded = context.options[0] === "as-needed";
 
+        var sourceCode = context.getSourceCode();
+
         /**
          * Determines whether a arrow function argument end with `)`
          * @param {ASTNode} node The arrow function node.
          * @returns {void}
          */
         function parens(node) {
-            var token = context.getFirstToken(node);
+            var token = sourceCode.getFirstToken(node);
 
             // as-needed: x => x
             if (asNeeded && node.params.length === 1 && node.params[0].type === "Identifier") {
@@ -41470,7 +41864,7 @@ module.exports = {
             }
 
             if (token.type === "Identifier") {
-                var after = context.getTokenAfter(token);
+                var after = sourceCode.getTokenAfter(token);
 
                 // (x) => x
                 if (after.value !== ")") {
@@ -41531,20 +41925,22 @@ module.exports = {
         rule.before = option.before !== false;
         rule.after = option.after !== false;
 
+        var sourceCode = context.getSourceCode();
+
         /**
          * Get tokens of arrow(`=>`) and before/after arrow.
          * @param {ASTNode} node The arrow function node.
          * @returns {Object} Tokens of arrow and before/after arrow.
          */
         function getTokens(node) {
-            var t = context.getFirstToken(node);
+            var t = sourceCode.getFirstToken(node);
             var before;
 
             while (t.type !== "Punctuator" || t.value !== "=>") {
                 before = t;
-                t = context.getTokenAfter(t);
+                t = sourceCode.getTokenAfter(t);
             }
-            var after = context.getTokenAfter(t);
+            var after = sourceCode.getTokenAfter(t);
 
             return { before: before, arrow: t, after: after };
         }
@@ -41793,11 +42189,11 @@ module.exports = {
         function getOpenBrace(node) {
             if (node.type === "SwitchStatement") {
                 if (node.cases.length > 0) {
-                    return context.getTokenBefore(node.cases[0]);
+                    return sourceCode.getTokenBefore(node.cases[0]);
                 }
-                return context.getLastToken(node, 1);
+                return sourceCode.getLastToken(node, 1);
             }
-            return context.getFirstToken(node);
+            return sourceCode.getFirstToken(node);
         }
 
         /**
@@ -41827,7 +42223,7 @@ module.exports = {
 
             // Gets braces and the first/last token of content.
             var openBrace = getOpenBrace(node);
-            var closeBrace = context.getLastToken(node);
+            var closeBrace = sourceCode.getLastToken(node);
             var firstToken = sourceCode.getTokenOrCommentAfter(openBrace);
             var lastToken = sourceCode.getTokenOrCommentBefore(closeBrace);
 
@@ -42785,19 +43181,19 @@ module.exports = {
          * @returns {void}
          */
         function addNullElementsToIgnoreList(node) {
-            var previousToken = context.getFirstToken(node);
+            var previousToken = sourceCode.getFirstToken(node);
 
             node.elements.forEach(function(element) {
                 var token;
 
                 if (element === null) {
-                    token = context.getTokenAfter(previousToken);
+                    token = sourceCode.getTokenAfter(previousToken);
 
                     if (isComma(token)) {
                         commaTokensToIgnore.push(token);
                     }
                 } else {
-                    token = context.getTokenAfter(element);
+                    token = sourceCode.getTokenAfter(element);
                 }
 
                 previousToken = token;
@@ -42884,9 +43280,9 @@ module.exports = {
     },
 
     create: function(context) {
-
         var style = context.options[0] || "last",
-            exceptions = {};
+            exceptions = {},
+            sourceCode = context.getSourceCode();
 
         if (context.options.length === 2 && context.options[1].hasOwnProperty("exceptions")) {
             exceptions = context.options[1].exceptions;
@@ -42960,12 +43356,18 @@ module.exports = {
             if (items.length > 1 || arrayLiteral) {
 
                 // seed as opening [
-                previousItemToken = context.getFirstToken(node);
+                previousItemToken = sourceCode.getFirstToken(node);
 
                 items.forEach(function(item) {
-                    var commaToken = item ? context.getTokenBefore(item) : previousItemToken,
-                        currentItemToken = item ? context.getFirstToken(item) : context.getTokenAfter(commaToken),
-                        reportItem = item || currentItemToken;
+                    var commaToken = item ? sourceCode.getTokenBefore(item) : previousItemToken,
+                        currentItemToken = item ? sourceCode.getFirstToken(item) : sourceCode.getTokenAfter(commaToken),
+                        reportItem = item || currentItemToken,
+                        tokenBeforeComma = sourceCode.getTokenBefore(commaToken);
+
+                    // Check if previous token is wrapped in parentheses
+                    if (tokenBeforeComma && tokenBeforeComma.value === ")") {
+                        previousItemToken = tokenBeforeComma;
+                    }
 
                     /*
                      * This works by comparing three token locations:
@@ -42986,7 +43388,7 @@ module.exports = {
                                 currentItemToken, reportItem);
                     }
 
-                    previousItemToken = item ? context.getLastToken(item) : previousItemToken;
+                    previousItemToken = item ? sourceCode.getLastToken(item) : previousItemToken;
                 });
 
                 /*
@@ -42997,12 +43399,12 @@ module.exports = {
                  */
                 if (arrayLiteral) {
 
-                    var lastToken = context.getLastToken(node),
-                        nextToLastToken = context.getTokenBefore(lastToken);
+                    var lastToken = sourceCode.getLastToken(node),
+                        nextToLastToken = sourceCode.getTokenBefore(lastToken);
 
                     if (isComma(nextToLastToken)) {
                         validateCommaItemSpacing(
-                            context.getTokenBefore(nextToLastToken),
+                            sourceCode.getTokenBefore(nextToLastToken),
                             nextToLastToken,
                             lastToken,
                             lastToken
@@ -43324,10 +43726,10 @@ module.exports = {
 
                 var property = node[propertyName];
 
-                var before = context.getTokenBefore(property),
-                    first = context.getFirstToken(property),
-                    last = context.getLastToken(property),
-                    after = context.getTokenAfter(property);
+                var before = sourceCode.getTokenBefore(property),
+                    first = sourceCode.getFirstToken(property),
+                    last = sourceCode.getLastToken(property),
+                    after = sourceCode.getTokenAfter(property);
 
                 if (astUtils.isTokenOnSameLine(before, first)) {
                     if (propertyNameMustBeSpaced) {
@@ -44104,6 +44506,8 @@ module.exports = {
         var multiOrNest = (context.options[0] === "multi-or-nest");
         var consistent = (context.options[1] === "consistent");
 
+        var sourceCode = context.getSourceCode();
+
         //--------------------------------------------------------------------------
         // Helpers
         //--------------------------------------------------------------------------
@@ -44115,8 +44519,8 @@ module.exports = {
          * @private
          */
         function isCollapsedOneLiner(node) {
-            var before = context.getTokenBefore(node),
-                last = context.getLastToken(node);
+            var before = sourceCode.getTokenBefore(node),
+                last = sourceCode.getLastToken(node);
 
             return before.loc.start.line === last.loc.end.line;
         }
@@ -44128,8 +44532,8 @@ module.exports = {
          * @private
          */
         function isOneLiner(node) {
-            var first = context.getFirstToken(node),
-                last = context.getLastToken(node);
+            var first = sourceCode.getFirstToken(node),
+                last = sourceCode.getLastToken(node);
 
             return first.loc.start.line === last.loc.end.line;
         }
@@ -44140,7 +44544,6 @@ module.exports = {
          * @returns {Token} The `else` keyword token.
          */
         function getElseKeyword(node) {
-            var sourceCode = context.getSourceCode();
             var token = sourceCode.getTokenAfter(node.consequent);
 
             while (token.type !== "Keyword" || token.value !== "else") {
@@ -44386,6 +44789,8 @@ module.exports = {
             new RegExp(options.commentPattern) :
             DEFAULT_COMMENT_PATTERN;
 
+        var sourceCode = context.getSourceCode();
+
         //--------------------------------------------------------------------------
         // Helpers
         //--------------------------------------------------------------------------
@@ -44427,7 +44832,7 @@ module.exports = {
 
                     var lastCase = last(node.cases);
 
-                    comments = context.getComments(lastCase).trailing;
+                    comments = sourceCode.getComments(lastCase).trailing;
 
                     if (comments.length) {
                         comment = last(comments);
@@ -44473,11 +44878,12 @@ module.exports = {
 
     create: function(context) {
 
-        var config = context.options[0],
-            onObject;
+        var config = context.options[0];
 
         // default to onObject if no preference is passed
-        onObject = config === "object" || !config;
+        var onObject = config === "object" || !config;
+
+        var sourceCode = context.getSourceCode();
 
         /**
          * Reports if the dot between object and property is on the correct loccation.
@@ -44487,7 +44893,7 @@ module.exports = {
          * @returns {void}
          */
         function checkDotLocation(obj, prop, node) {
-            var dot = context.getTokenBefore(prop);
+            var dot = sourceCode.getTokenBefore(prop);
 
             if (dot.type === "Punctuator" && dot.value === ".") {
                 if (onObject) {
@@ -44587,7 +44993,7 @@ module.exports = {
     }
 };
 
-},{"../util/keywords":380}],189:[function(require,module,exports){
+},{"../util/keywords":381}],189:[function(require,module,exports){
 /**
  * @fileoverview Require file to end with single newline.
  * @author Nodeca Team <https://github.com/nodeca>
@@ -44625,8 +45031,8 @@ module.exports = {
 
             Program: function checkBadEOF(node) {
 
-                // Get the whole source code, not for node only.
-                var src = context.getSource(),
+                var sourceCode = context.getSourceCode(),
+                    src = sourceCode.getText(),
                     location = {column: 1},
                     linebreakStyle = context.options[0] || "unix",
                     linebreak = linebreakStyle === "unix" ? "\n" : "\r\n";
@@ -44679,6 +45085,7 @@ module.exports = {
     },
 
     create: function(context) {
+        var sourceCode = context.getSourceCode();
 
         /**
          * Checks if an expression is a typeof expression
@@ -44729,7 +45136,7 @@ module.exports = {
          * @private
          */
         function getOperatorLocation(node) {
-            var opToken = context.getTokenAfter(node.left);
+            var opToken = sourceCode.getTokenAfter(node.left);
 
             return {line: opToken.loc.start.line, column: opToken.loc.start.column};
         }
@@ -44967,6 +45374,8 @@ module.exports = {
             return option;
         }(context.options[0]));
 
+        var sourceCode = context.getSourceCode();
+
         /**
          * Checks the spacing between two tokens before or after the star token.
          * @param {string} side Either "before" or "after".
@@ -45013,18 +45422,18 @@ module.exports = {
             }
 
             if (node.parent.method || node.parent.type === "MethodDefinition") {
-                starToken = context.getTokenBefore(node, 1);
+                starToken = sourceCode.getTokenBefore(node, 1);
             } else {
-                starToken = context.getFirstToken(node, 1);
+                starToken = sourceCode.getFirstToken(node, 1);
             }
 
             // Only check before when preceded by `function` keyword
-            prevToken = context.getTokenBefore(starToken);
+            prevToken = sourceCode.getTokenBefore(starToken);
             if (prevToken.value === "function" || prevToken.value === "static") {
                 checkSpacing("before", prevToken, starToken);
             }
 
-            nextToken = context.getTokenAfter(starToken);
+            nextToken = sourceCode.getTokenAfter(starToken);
             checkSpacing("after", starToken, nextToken);
         }
 
@@ -45724,6 +46133,8 @@ module.exports = {
             }
         };
 
+        var sourceCode = context.getSourceCode();
+
         if (context.options.length) {
             if (context.options[0] === "tab") {
                 indentSize = 1;
@@ -45847,8 +46258,8 @@ module.exports = {
          * @returns {int} Indent
          */
         function getNodeIndent(node, byLastLine, excludeCommas) {
-            var token = byLastLine ? context.getLastToken(node) : context.getFirstToken(node);
-            var src = context.getSource(token, token.loc.start.column);
+            var token = byLastLine ? sourceCode.getLastToken(node) : sourceCode.getFirstToken(node);
+            var src = sourceCode.getText(token, token.loc.start.column);
             var regExp = excludeCommas ? indentPattern.excludeCommas : indentPattern.normal;
             var indent = regExp.exec(src);
 
@@ -45862,7 +46273,7 @@ module.exports = {
          * @returns {boolean} true if its the first in the its start line
          */
         function isNodeFirstInLine(node, byEndLocation) {
-            var firstToken = byEndLocation === true ? context.getLastToken(node, 1) : context.getTokenBefore(node),
+            var firstToken = byEndLocation === true ? sourceCode.getLastToken(node, 1) : sourceCode.getTokenBefore(node),
                 startLine = byEndLocation === true ? node.loc.end.line : node.loc.start.line,
                 endLine = firstToken ? firstToken.loc.end.line : -1;
 
@@ -45897,7 +46308,7 @@ module.exports = {
         function checkNodesIndent(nodes, indent, excludeCommas) {
             nodes.forEach(function(node) {
                 if (node.type === "IfStatement" && node.alternate) {
-                    var elseToken = context.getTokenBefore(node.alternate);
+                    var elseToken = sourceCode.getTokenBefore(node.alternate);
 
                     checkNodeIndent(elseToken, indent, excludeCommas);
                 }
@@ -45912,7 +46323,7 @@ module.exports = {
          * @returns {void}
          */
         function checkLastNodeLineIndent(node, lastLineIndent) {
-            var lastToken = context.getLastToken(node);
+            var lastToken = sourceCode.getLastToken(node);
             var endIndent = getNodeIndent(lastToken, true);
 
             if (endIndent !== lastLineIndent && isNodeFirstInLine(node, true)) {
@@ -46065,7 +46476,7 @@ module.exports = {
          * @returns {boolean} Whether or not the block starts and ends on the same line.
          */
         function isSingleLineNode(node) {
-            var lastToken = context.getLastToken(node),
+            var lastToken = sourceCode.getLastToken(node),
                 startLine = node.loc.start.line,
                 endLine = lastToken.loc.end.line;
 
@@ -46275,11 +46686,11 @@ module.exports = {
             checkNodesIndent(elements, elementsIndent, true);
 
             // Only check the last line if there is any token after the last item
-            if (context.getLastToken(node).loc.end.line <= lastElement.loc.end.line) {
+            if (sourceCode.getLastToken(node).loc.end.line <= lastElement.loc.end.line) {
                 return;
             }
 
-            var tokenBeforeLastElement = context.getTokenBefore(lastElement);
+            var tokenBeforeLastElement = sourceCode.getTokenBefore(lastElement);
 
             if (tokenBeforeLastElement.value === ",") {
 
@@ -46814,6 +47225,8 @@ module.exports = {
             multiLineOptions = initOptions({}, (options.multiLine || options)),
             singleLineOptions = initOptions({}, (options.singleLine || options));
 
+        var sourceCode = context.getSourceCode();
+
         /**
          * Determines if the given property is key-value property.
          * @param {ASTNode} property Property node to check.
@@ -46838,7 +47251,7 @@ module.exports = {
 
             while (node && (node.type !== "Punctuator" || node.value !== ":")) {
                 prevNode = node;
-                node = context.getTokenAfter(node);
+                node = sourceCode.getTokenAfter(node);
             }
 
             return prevNode;
@@ -46853,7 +47266,7 @@ module.exports = {
         function getNextColon(node) {
 
             while (node && (node.type !== "Punctuator" || node.value !== ":")) {
-                node = context.getTokenAfter(node);
+                node = sourceCode.getTokenAfter(node);
             }
 
             return node;
@@ -46868,7 +47281,7 @@ module.exports = {
             var key = property.key;
 
             if (property.computed) {
-                return context.getSource().slice(key.range[0], key.range[1]);
+                return sourceCode.getText().slice(key.range[0], key.range[1]);
             }
 
             return property.key.name || property.key.value;
@@ -46887,7 +47300,7 @@ module.exports = {
         function report(property, side, whitespace, expected, mode) {
             var diff = whitespace.length - expected,
                 key = property.key,
-                firstTokenAfterColon = context.getTokenAfter(getNextColon(key)),
+                firstTokenAfterColon = sourceCode.getTokenAfter(getNextColon(key)),
                 location = side === "key" ? key.loc.start : firstTokenAfterColon.loc.start;
 
             if ((
@@ -46913,7 +47326,7 @@ module.exports = {
         function getKeyWidth(property) {
             var startToken, endToken;
 
-            startToken = context.getFirstToken(property);
+            startToken = sourceCode.getFirstToken(property);
             endToken = getLastTokenBeforeColon(property.key);
 
             return endToken.range[1] - startToken.range[0];
@@ -46925,7 +47338,7 @@ module.exports = {
          * @returns {Object} Whitespace before and after the property's colon.
          */
         function getPropertyWhitespace(property) {
-            var whitespace = /(\s*):(\s*)/.exec(context.getSource().slice(
+            var whitespace = /(\s*):(\s*)/.exec(sourceCode.getText().slice(
                 property.key.range[1], property.value.range[0]
             ));
 
@@ -47613,7 +48026,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":151,"../util/keywords":380}],205:[function(require,module,exports){
+},{"../ast-utils":151,"../util/keywords":381}],205:[function(require,module,exports){
 /**
  * @fileoverview Rule to enforce a single linebreak style.
  * @author Erik Mueller
@@ -47647,6 +48060,8 @@ module.exports = {
         var EXPECTED_LF_MSG = "Expected linebreaks to be 'LF' but found 'CRLF'.",
             EXPECTED_CRLF_MSG = "Expected linebreaks to be 'CRLF' but found 'LF'.";
 
+        var sourceCode = context.getSourceCode();
+
         //--------------------------------------------------------------------------
         // Helpers
         //--------------------------------------------------------------------------
@@ -47673,7 +48088,7 @@ module.exports = {
                 var linebreakStyle = context.options[0] || "unix",
                     expectedLF = linebreakStyle === "unix",
                     expectedLFChars = expectedLF ? "\n" : "\r\n",
-                    source = context.getSource(),
+                    source = sourceCode.getText(),
                     pattern = /\r\n|\r|\n|\u2028|\u2029/g,
                     match,
                     index,
@@ -47693,7 +48108,7 @@ module.exports = {
                         node: node,
                         loc: {
                             line: i,
-                            column: context.getSourceLines()[i - 1].length
+                            column: sourceCode.lines[i - 1].length
                         },
                         message: expectedLF ? EXPECTED_LF_MSG : EXPECTED_CRLF_MSG,
                         fix: createFix(range, expectedLFChars)
@@ -47715,7 +48130,8 @@ module.exports = {
 // Requirements
 //------------------------------------------------------------------------------
 
-var lodash = require("lodash");
+var lodash = require("lodash"),
+    astUtils = require("../ast-utils");
 
 //------------------------------------------------------------------------------
 // Helpers
@@ -47758,16 +48174,6 @@ function getCommentLineNums(comments) {
     return lines;
 }
 
-/**
- * Determines if a value is an array.
- * @param {number} val The value we wish to check for in the array..
- * @param {Array} array An array.
- * @returns {boolean} True if the value is in the array..
- */
-function contains(val, array) {
-    return array.indexOf(val) > -1;
-}
-
 //------------------------------------------------------------------------------
 // Rule Definition
 //------------------------------------------------------------------------------
@@ -47779,6 +48185,8 @@ module.exports = {
             category: "Stylistic Issues",
             recommended: false
         },
+
+        fixable: "whitespace",
 
         schema: [
             {
@@ -47833,6 +48241,22 @@ module.exports = {
 
         var sourceCode = context.getSourceCode();
 
+        var lines = sourceCode.lines,
+            numLines = lines.length + 1,
+            comments = sourceCode.getAllComments(),
+            commentLines = getCommentLineNums(comments),
+            emptyLines = getEmptyLineNums(lines),
+            commentAndEmptyLines = commentLines.concat(emptyLines);
+
+        /**
+         * Returns whether or not a token is a comment node type
+         * @param {Token} token The token to check
+         * @returns {boolean} True if the token is a comment node
+         */
+        function isCommentNodeType(token) {
+            return token && (token.type === "Block" || token.type === "Line");
+        }
+
         /**
          * Returns whether or not comments are on lines starting with or ending with code
          * @param {ASTNode} node The comment node to check.
@@ -47844,18 +48268,18 @@ module.exports = {
             token = node;
             do {
                 token = sourceCode.getTokenOrCommentBefore(token);
-            } while (token && (token.type === "Block" || token.type === "Line"));
+            } while (isCommentNodeType(token));
 
-            if (token && token.loc.end.line === node.loc.start.line) {
+            if (token && astUtils.isTokenOnSameLine(token, node)) {
                 return true;
             }
 
             token = node;
             do {
                 token = sourceCode.getTokenOrCommentAfter(token);
-            } while (token && (token.type === "Block" || token.type === "Line"));
+            } while (isCommentNodeType(token));
 
-            if (token && token.loc.start.line === node.loc.end.line) {
+            if (token && astUtils.isTokenOnSameLine(node, token)) {
                 return true;
             }
 
@@ -47974,14 +48398,6 @@ module.exports = {
          * @returns {void}
          */
         function checkForEmptyLine(node, opts) {
-
-            var lines = context.getSourceLines(),
-                numLines = lines.length + 1,
-                comments = context.getAllComments(),
-                commentLines = getCommentLineNums(comments),
-                emptyLines = getEmptyLineNums(lines),
-                commentAndEmptyLines = commentLines.concat(emptyLines);
-
             var after = opts.after,
                 before = opts.before;
 
@@ -48012,14 +48428,34 @@ module.exports = {
                 return;
             }
 
+            var previousTokenOrComment = sourceCode.getTokenOrCommentBefore(node);
+            var nextTokenOrComment = sourceCode.getTokenOrCommentAfter(node);
+
             // check for newline before
-            if (!exceptionStartAllowed && before && !contains(prevLineNum, commentAndEmptyLines)) {
-                context.report(node, "Expected line before comment.");
+            if (!exceptionStartAllowed && before && !lodash.includes(commentAndEmptyLines, prevLineNum) &&
+                    !(isCommentNodeType(previousTokenOrComment) && astUtils.isTokenOnSameLine(previousTokenOrComment, node))) {
+                var lineStart = node.range[0] - node.loc.start.column;
+                var range = [lineStart, lineStart];
+
+                context.report({
+                    node: node,
+                    message: "Expected line before comment.",
+                    fix: function(fixer) {
+                        return fixer.insertTextBeforeRange(range, "\n");
+                    }
+                });
             }
 
             // check for newline after
-            if (!exceptionEndAllowed && after && !contains(nextLineNum, commentAndEmptyLines)) {
-                context.report(node, "Expected line after comment.");
+            if (!exceptionEndAllowed && after && !lodash.includes(commentAndEmptyLines, nextLineNum) &&
+                    !(isCommentNodeType(nextTokenOrComment) && astUtils.isTokenOnSameLine(node, nextTokenOrComment))) {
+                context.report({
+                    node: node,
+                    message: "Expected line after comment.",
+                    fix: function(fixer) {
+                        return fixer.insertTextAfter(node, "\n");
+                    }
+                });
             }
 
         }
@@ -48052,7 +48488,7 @@ module.exports = {
     }
 };
 
-},{"lodash":150}],207:[function(require,module,exports){
+},{"../ast-utils":151,"lodash":150}],207:[function(require,module,exports){
 /**
  * @fileoverview A rule to set the maximum depth block can be nested in a function.
  * @author Ian Christian Myers
@@ -48287,6 +48723,8 @@ module.exports = {
          */
         var URL_REGEXP = /[^:/?#]:\/\/[^?#]/;
 
+        var sourceCode = context.getSourceCode();
+
         /**
          * Computes the length of a line that may contain tabs. The width of each
          * tab will be the number of spaces to the next tab stop.
@@ -48391,10 +48829,10 @@ module.exports = {
         function checkProgramForMaxLength(node) {
 
             // split (honors line-ending)
-            var lines = context.getSourceLines(),
+            var lines = sourceCode.lines,
 
                 // list of comments to ignore
-                comments = ignoreComments || maxCommentLength || ignoreTrailingComments ? context.getAllComments() : [],
+                comments = ignoreComments || maxCommentLength || ignoreTrailingComments ? sourceCode.getAllComments() : [],
 
                 // we iterate over comments in parallel with the lines
                 commentsIndex = 0;
@@ -48764,6 +49202,18 @@ module.exports = {
             enforceMaxStatementsPerLine(node.consequent);
         }
 
+        /**
+         * Check each line in both sides of an if statement
+         * @param {ASTNode} node node to evaluate
+         * @returns {void}
+         * @private
+         */
+        function checkLinesInNonBlockElse(node) {
+            if (node.alternate && node.alternate.type !== "BlockStatement") {
+                enforceMaxStatementsPerLine([node.alternate]);
+            }
+        }
+
         //--------------------------------------------------------------------------
         // Public API
         //--------------------------------------------------------------------------
@@ -48771,7 +49221,8 @@ module.exports = {
         return {
             Program: checkLinesInBody,
             BlockStatement: checkLinesInBody,
-            SwitchCase: checkLinesInConsequent
+            SwitchCase: checkLinesInConsequent,
+            IfStatement: checkLinesInNonBlockElse
         };
 
     }
@@ -49068,6 +49519,8 @@ module.exports = {
 
         var listeners = {};
 
+        var sourceCode = context.getSourceCode();
+
         //--------------------------------------------------------------------------
         // Helpers
         //--------------------------------------------------------------------------
@@ -49127,7 +49580,7 @@ module.exports = {
          * @returns {Boolean} Returns true if the callee may be capitalized
          */
         function isCapAllowed(allowedMap, node, calleeName) {
-            if (allowedMap[calleeName] || allowedMap[context.getSource(node.callee)]) {
+            if (allowedMap[calleeName] || allowedMap[sourceCode.getText(node.callee)]) {
                 return true;
             }
 
@@ -49221,11 +49674,12 @@ module.exports = {
     },
 
     create: function(context) {
+        var sourceCode = context.getSourceCode();
 
         return {
 
             NewExpression: function(node) {
-                var tokens = context.getTokens(node);
+                var tokens = sourceCode.getTokens(node);
                 var prenticesTokens = tokens.filter(function(token) {
                     return token.value === "(" || token.value === ")";
                 });
@@ -49277,7 +49731,7 @@ module.exports = {
         var mode = context.options[0] === "never" ? "never" : "always";
 
         // Cache starting and ending line numbers of comments for faster lookup
-        var commentEndLine = context.getAllComments().reduce(function(result, token) {
+        var commentEndLine = sourceCode.getAllComments().reduce(function(result, token) {
             result[token.loc.start.line] = token.loc.end.line;
             return result;
         }, {});
@@ -49625,6 +50079,8 @@ module.exports = {
         var options = context.options[0] || {},
             ignoreChainWithDepth = options.ignoreChainWithDepth || 2;
 
+        var sourceCode = context.getSourceCode();
+
         return {
             "CallExpression:exit": function(node) {
                 if (!node.callee || node.callee.type !== "MemberExpression") {
@@ -49644,7 +50100,7 @@ module.exports = {
                     context.report(
                         callee.property,
                         callee.property.loc.start,
-                        "Expected line break after `" + context.getSource(callee.object).replace(/\r\n|\r|\n/g, "\\n") + "`."
+                        "Expected line break after `" + sourceCode.getText(callee.object).replace(/\r\n|\r|\n/g, "\\n") + "`."
                     );
                 }
             }
@@ -50224,6 +50680,8 @@ module.exports = {
 
         var prohibitAssign = (context.options[0] || "except-parens");
 
+        var sourceCode = context.getSourceCode();
+
         /**
          * Check whether an AST node is the test expression for a conditional statement.
          * @param {!Object} node The node to test.
@@ -50258,8 +50716,8 @@ module.exports = {
          * @returns {boolean} `true` if the code is enclosed in parentheses; otherwise, `false`.
          */
         function isParenthesised(node) {
-            var previousToken = context.getTokenBefore(node),
-                nextToken = context.getTokenAfter(node);
+            var previousToken = sourceCode.getTokenBefore(node),
+                nextToken = sourceCode.getTokenAfter(node);
 
             return previousToken.value === "(" && previousToken.range[1] <= node.range[0] &&
                 nextToken.value === ")" && nextToken.range[0] >= node.range[1];
@@ -50271,8 +50729,8 @@ module.exports = {
          * @returns {boolean} `true` if the code is enclosed in two sets of parentheses; otherwise, `false`.
          */
         function isParenthesisedTwice(node) {
-            var previousToken = context.getTokenBefore(node, 1),
-                nextToken = context.getTokenAfter(node, 1);
+            var previousToken = sourceCode.getTokenBefore(node, 1),
+                nextToken = sourceCode.getTokenAfter(node, 1);
 
             return isParenthesised(node) &&
                 previousToken.value === "(" && previousToken.range[1] <= node.range[0] &&
@@ -50380,6 +50838,7 @@ module.exports = {
 
     create: function(context) {
         var config = context.options[0] || {};
+        var sourceCode = context.getSourceCode();
 
         /**
          * Reports if an arrow function contains an ambiguous conditional.
@@ -50389,7 +50848,7 @@ module.exports = {
         function checkArrowFunc(node) {
             var body = node.body;
 
-            if (isConditional(body) && !(config.allowParens && astUtils.isParenthesised(context, body))) {
+            if (isConditional(body) && !(config.allowParens && astUtils.isParenthesised(sourceCode, body))) {
                 context.report(node, "Arrow function used ambiguously with a conditional expression.");
             }
         }
@@ -50865,11 +51324,12 @@ module.exports = {
     },
 
     create: function(context) {
+        var sourceCode = context.getSourceCode();
 
         return {
 
             Literal: function(node) {
-                var token = context.getFirstToken(node);
+                var token = sourceCode.getFirstToken(node);
 
                 if (token.type === "RegularExpression" && token.value[1] === "=") {
                     context.report(node, "A regular expression literal can be confused with '/='.");
@@ -51149,13 +51609,14 @@ module.exports = {
     },
 
     create: function(context) {
+        var sourceCode = context.getSourceCode();
 
         return {
             SwitchStatement: function(node) {
                 var mapping = {};
 
                 node.cases.forEach(function(switchCase) {
-                    var key = context.getSource(switchCase.test);
+                    var key = sourceCode.getText(switchCase.test);
 
                     if (mapping[key]) {
                         context.report(switchCase, "Duplicate case label.");
@@ -51506,11 +51967,12 @@ module.exports = {
     },
 
     create: function(context) {
+        var sourceCode = context.getSourceCode();
 
         return {
 
             Literal: function(node) {
-                var token = context.getFirstToken(node);
+                var token = sourceCode.getFirstToken(node);
 
                 if (token.type === "RegularExpression" && !regex.test(token.value)) {
                     context.report(node, "Empty class.");
@@ -51646,6 +52108,8 @@ module.exports = {
         var options = context.options[0] || {};
         var allowed = options.allow || [];
 
+        var sourceCode = context.getSourceCode();
+
         /**
          * Reports a given function node if the node matches the following patterns.
          *
@@ -51664,7 +52128,7 @@ module.exports = {
             if (allowed.indexOf(kind) === -1 &&
                 node.body.type === "BlockStatement" &&
                 node.body.body.length === 0 &&
-                context.getComments(node.body).trailing.length === 0
+                sourceCode.getComments(node.body).trailing.length === 0
             ) {
                 context.report({
                     node: node,
@@ -51758,6 +52222,8 @@ module.exports = {
         var options = context.options[0] || {},
             allowEmptyCatch = options.allowEmptyCatch || false;
 
+        var sourceCode = context.getSourceCode();
+
         return {
             BlockStatement: function(node) {
 
@@ -51776,7 +52242,7 @@ module.exports = {
                 }
 
                 // any other block is only allowed to be empty, if it contains a comment
-                if (context.getComments(node).trailing.length > 0) {
+                if (sourceCode.getComments(node).trailing.length > 0) {
                     return;
                 }
 
@@ -52742,7 +53208,8 @@ module.exports = {
                             type: "object",
                             properties: {
                                 conditionalAssign: {type: "boolean"},
-                                nestedBinaryExpressions: {type: "boolean"}
+                                nestedBinaryExpressions: {type: "boolean"},
+                                returnAssign: {type: "boolean"}
                             },
                             additionalProperties: false
                         }
@@ -52755,11 +53222,13 @@ module.exports = {
     },
 
     create: function(context) {
-        var isParenthesised = astUtils.isParenthesised.bind(astUtils, context);
+        var sourceCode = context.getSourceCode();
+
+        var isParenthesised = astUtils.isParenthesised.bind(astUtils, sourceCode);
         var ALL_NODES = context.options[0] !== "functions";
         var EXCEPT_COND_ASSIGN = ALL_NODES && context.options[1] && context.options[1].conditionalAssign === false;
         var NESTED_BINARY = ALL_NODES && context.options[1] && context.options[1].nestedBinaryExpressions === false;
-        var sourceCode = context.getSourceCode();
+        var EXCEPT_RETURN_ASSIGN = ALL_NODES && context.options[1] && context.options[1].returnAssign === false;
 
         /**
          * Determines if this rule should be enforced for a node given the current configuration.
@@ -52778,8 +53247,8 @@ module.exports = {
          * @private
          */
         function isParenthesisedTwice(node) {
-            var previousToken = context.getTokenBefore(node, 1),
-                nextToken = context.getTokenAfter(node, 1);
+            var previousToken = sourceCode.getTokenBefore(node, 1),
+                nextToken = sourceCode.getTokenAfter(node, 1);
 
             return isParenthesised(node) && previousToken && nextToken &&
                 previousToken.value === "(" && previousToken.range[1] <= node.range[0] &&
@@ -52815,6 +53284,64 @@ module.exports = {
          */
         function isCondAssignException(node) {
             return EXCEPT_COND_ASSIGN && node.test.type === "AssignmentExpression";
+        }
+
+        /**
+         * Determines if a node is in a return statement
+         * @param {ASTNode} node - The node to be checked.
+         * @returns {boolean} True if the node is in a return statement.
+         * @private
+         */
+        function isInReturnStatement(node) {
+            while (node) {
+                if (node.type === "ReturnStatement" ||
+                        (node.type === "ArrowFunctionExpression" && node.body.type !== "BlockStatement")) {
+                    return true;
+                }
+                node = node.parent;
+            }
+
+            return false;
+        }
+
+        /**
+         * Determines if a node is or contains an assignment expression
+         * @param {ASTNode} node - The node to be checked.
+         * @returns {boolean} True if the node is or contains an assignment expression.
+         * @private
+         */
+        function containsAssignment(node) {
+            if (node.type === "AssignmentExpression") {
+                return true;
+            } else if (node.type === "ConditionalExpression" &&
+                    (node.consequent.type === "AssignmentExpression" || node.alternate.type === "AssignmentExpression")) {
+                return true;
+            } else if ((node.left && node.left.type === "AssignmentExpression") ||
+                    (node.right && node.right.type === "AssignmentExpression")) {
+                return true;
+            }
+
+            return false;
+        }
+
+        /**
+         * Determines if a node is contained by or is itself a return statement and is allowed to have a parenthesised assignment
+         * @param {ASTNode} node - The node to be checked.
+         * @returns {boolean} True if the assignment can be parenthesised.
+         * @private
+         */
+        function isReturnAssignException(node) {
+            if (!EXCEPT_RETURN_ASSIGN || !isInReturnStatement(node)) {
+                return false;
+            }
+
+            if (node.type === "ReturnStatement") {
+                return containsAssignment(node.argument);
+            } else if (node.type === "ArrowFunctionExpression" && node.body.type !== "BlockStatement") {
+                return containsAssignment(node.body);
+            } else {
+                return containsAssignment(node);
+            }
         }
 
         /**
@@ -52995,7 +53522,7 @@ module.exports = {
          * @private
          */
         function report(node) {
-            var previousToken = context.getTokenBefore(node);
+            var previousToken = sourceCode.getTokenBefore(node);
 
             context.report(node, previousToken.loc.start, "Gratuitous parentheses around expression.");
         }
@@ -53070,6 +53597,10 @@ module.exports = {
             },
 
             ArrowFunctionExpression: function(node) {
+                if (isReturnAssignException(node)) {
+                    return;
+                }
+
                 if (node.body.type !== "BlockStatement") {
                     if (sourceCode.getFirstToken(node.body).value !== "{" && hasExcessParens(node.body) && precedence(node.body) >= precedence({type: "AssignmentExpression"})) {
                         report(node.body);
@@ -53085,6 +53616,10 @@ module.exports = {
             },
 
             AssignmentExpression: function(node) {
+                if (isReturnAssignException(node)) {
+                    return;
+                }
+
                 if (hasExcessParens(node.right) && precedence(node.right) >= precedence(node)) {
                     report(node.right);
                 }
@@ -53094,12 +53629,18 @@ module.exports = {
             CallExpression: dryCallNew,
 
             ConditionalExpression: function(node) {
+                if (isReturnAssignException(node)) {
+                    return;
+                }
+
                 if (hasExcessParens(node.test) && precedence(node.test) >= precedence({type: "LogicalExpression", operator: "||"})) {
                     report(node.test);
                 }
+
                 if (hasExcessParens(node.consequent) && precedence(node.consequent) >= precedence({type: "AssignmentExpression"})) {
                     report(node.consequent);
                 }
+
                 if (hasExcessParens(node.alternate) && precedence(node.alternate) >= precedence({type: "AssignmentExpression"})) {
                     report(node.alternate);
                 }
@@ -53115,7 +53656,7 @@ module.exports = {
                 var firstToken, secondToken, firstTokens;
 
                 if (hasExcessParens(node.expression)) {
-                    firstTokens = context.getFirstTokens(node.expression, 2);
+                    firstTokens = sourceCode.getFirstTokens(node.expression, 2);
                     firstToken = firstTokens[0];
                     secondToken = firstTokens[1];
 
@@ -53178,7 +53719,7 @@ module.exports = {
                         !(
                             (node.object.type === "Literal" &&
                             typeof node.object.value === "number" &&
-                            /^[0-9]+$/.test(context.getFirstToken(node.object).value))
+                            /^[0-9]+$/.test(sourceCode.getFirstToken(node.object).value))
                             ||
 
                             // RegExp literal is allowed to have parens (#1589)
@@ -53212,6 +53753,10 @@ module.exports = {
 
             ReturnStatement: function(node) {
                 var returnToken = sourceCode.getFirstToken(node);
+
+                if (isReturnAssignException(node)) {
+                    return;
+                }
 
                 if (node.argument &&
                         hasExcessParensNoLineTerminator(returnToken, node.argument) &&
@@ -53318,6 +53863,7 @@ module.exports = {
     },
 
     create: function(context) {
+        var sourceCode = context.getSourceCode();
 
         /**
          * Reports an unnecessary semicolon error.
@@ -53344,7 +53890,7 @@ module.exports = {
         function checkForPartOfClassBody(firstToken) {
             for (var token = firstToken;
                 token.type === "Punctuator" && token.value !== "}";
-                token = context.getTokenAfter(token)
+                token = sourceCode.getTokenAfter(token)
             ) {
                 if (token.value === ";") {
                     report(token);
@@ -53374,7 +53920,7 @@ module.exports = {
              * @returns {void}
              */
             ClassBody: function(node) {
-                checkForPartOfClassBody(context.getFirstToken(node, 1)); // 0 is `{`.
+                checkForPartOfClassBody(sourceCode.getFirstToken(node, 1)); // 0 is `{`.
             },
 
             /**
@@ -53383,7 +53929,7 @@ module.exports = {
              * @returns {void}
              */
             MethodDefinition: function(node) {
-                checkForPartOfClassBody(context.getTokenAfter(node));
+                checkForPartOfClassBody(sourceCode.getTokenAfter(node));
             }
         };
 
@@ -53819,6 +54365,8 @@ module.exports = {
         var options = parseOptions(context.options[0]),
             operatorAllowed = false;
 
+        var sourceCode = context.getSourceCode();
+
         return {
             UnaryExpression: function(node) {
 
@@ -53828,7 +54376,7 @@ module.exports = {
                     context.report(
                         node,
                         "use `Boolean({{code}})` instead.", {
-                            code: context.getSource(node.argument.argument)
+                            code: sourceCode.getText(node.argument.argument)
                         });
                 }
 
@@ -53838,7 +54386,7 @@ module.exports = {
                     context.report(
                         node,
                         "use `{{code}} !== -1` instead.", {
-                            code: context.getSource(node.argument)
+                            code: sourceCode.getText(node.argument)
                         });
                 }
 
@@ -53848,7 +54396,7 @@ module.exports = {
                     context.report(
                         node,
                         "use `Number({{code}})` instead.", {
-                            code: context.getSource(node.argument)
+                            code: sourceCode.getText(node.argument)
                         });
                 }
             },
@@ -53864,7 +54412,7 @@ module.exports = {
                     context.report(
                         node,
                         "use `Number({{code}})` instead.", {
-                            code: context.getSource(nonNumericOperand)
+                            code: sourceCode.getText(nonNumericOperand)
                         });
                 }
 
@@ -53874,7 +54422,7 @@ module.exports = {
                     context.report(
                         node,
                         "use `String({{code}})` instead.", {
-                            code: context.getSource(getOtherOperand(node, ""))
+                            code: sourceCode.getText(getOtherOperand(node, ""))
                         });
                 }
             },
@@ -53887,7 +54435,7 @@ module.exports = {
                     context.report(
                         node,
                         "use `{{code}} = String({{code}})` instead.", {
-                            code: context.getSource(getOtherOperand(node, ""))
+                            code: sourceCode.getText(getOtherOperand(node, ""))
                         });
                 }
             }
@@ -54139,6 +54687,7 @@ module.exports = {
     },
 
     create: function(context) {
+        var sourceCode = context.getSourceCode();
 
         /**
          * Will check that comments are not on lines starting with or ending with code
@@ -54149,8 +54698,8 @@ module.exports = {
         function testCodeAroundComment(node) {
 
             // Get the whole line and cut it off at the start of the comment
-            var startLine = String(context.getSourceLines()[node.loc.start.line - 1]);
-            var endLine = String(context.getSourceLines()[node.loc.end.line - 1]);
+            var startLine = String(sourceCode.lines[node.loc.start.line - 1]);
+            var endLine = String(sourceCode.lines[node.loc.end.line - 1]);
 
             var preamble = startLine.slice(0, node.loc.start.column).trim();
 
@@ -54502,6 +55051,15 @@ module.exports = {
 "use strict";
 
 //------------------------------------------------------------------------------
+// Constants
+//------------------------------------------------------------------------------
+
+var ALL_IRREGULARS = /[\f\v\u0085\u00A0\ufeff\u00a0\u1680\u180e\u2000\u2001\u2002\u2003\u2004\u2005\u2006\u2007\u2008\u2009\u200a\u200b\u202f\u205f\u3000\u2028\u2029]/;
+var IRREGULAR_WHITESPACE = /[\f\v\u0085\u00A0\ufeff\u00a0\u1680\u180e\u2000\u2001\u2002\u2003\u2004\u2005\u2006\u2007\u2008\u2009\u200a\u200b\u202f\u205f\u3000]+/mg;
+var IRREGULAR_LINE_TERMINATORS = /[\u2028\u2029]/mg;
+var LINE_BREAK = /\r\n|\r|\n|\u2028|\u2029/g;
+
+//------------------------------------------------------------------------------
 // Rule Definition
 //------------------------------------------------------------------------------
 
@@ -54519,6 +55077,15 @@ module.exports = {
                 properties: {
                     skipComments: {
                         type: "boolean"
+                    },
+                    skipStrings: {
+                        type: "boolean"
+                    },
+                    skipTemplates: {
+                        type: "boolean"
+                    },
+                    skipRegExps: {
+                        type: "boolean"
                     }
                 },
                 additionalProperties: false
@@ -54527,9 +55094,6 @@ module.exports = {
     },
 
     create: function(context) {
-
-        var irregularWhitespace = /[\u0085\u00A0\ufeff\f\v\u00a0\u1680\u180e\u2000\u2001\u2002\u2003\u2004\u2005\u2006\u2007\u2008\u2009\u200a\u200b\u202f\u205f\u3000]+/mg,
-            irregularLineTerminators = /[\u2028\u2029]/mg;
 
         // Module store of errors that we have found
         var errors = [];
@@ -54540,6 +55104,11 @@ module.exports = {
         // Lookup the `skipComments` option, which defaults to `false`.
         var options = context.options[0] || {};
         var skipComments = !!options.skipComments;
+        var skipStrings = options.skipStrings !== false;
+        var skipRegExps = !!options.skipRegExps;
+        var skipTemplates = !!options.skipTemplates;
+
+        var sourceCode = context.getSourceCode();
 
         /**
          * Removes errors that occur inside a string node
@@ -54570,10 +55139,27 @@ module.exports = {
          * @private
          */
         function removeInvalidNodeErrorsInIdentifierOrLiteral(node) {
-            if (typeof node.value === "string") {
+            var shouldCheckStrings = skipStrings && (typeof node.value === "string");
+            var shouldCheckRegExps = skipRegExps && (node.value instanceof RegExp);
+
+            if (shouldCheckStrings || shouldCheckRegExps) {
 
                 // If we have irregular characters remove them from the errors list
-                if (node.raw.match(irregularWhitespace) || node.raw.match(irregularLineTerminators)) {
+                if (ALL_IRREGULARS.test(node.raw)) {
+                    removeWhitespaceError(node);
+                }
+            }
+        }
+
+        /**
+         * Checks template string literal nodes for errors that we are choosing to ignore and calls the relevant methods to remove the errors
+         * @param {ASTNode} node to check for matching errors.
+         * @returns {void}
+         * @private
+         */
+        function removeInvalidNodeErrorsInTemplateLiteral(node) {
+            if (typeof node.value.raw === "string") {
+                if (ALL_IRREGULARS.test(node.value.raw)) {
                     removeWhitespaceError(node);
                 }
             }
@@ -54586,7 +55172,7 @@ module.exports = {
          * @private
          */
         function removeInvalidNodeErrorsInComment(node) {
-            if (node.value.match(irregularWhitespace) || node.value.match(irregularLineTerminators)) {
+            if (ALL_IRREGULARS.test(node.value)) {
                 removeWhitespaceError(node);
             }
         }
@@ -54598,14 +55184,14 @@ module.exports = {
          * @private
          */
         function checkForIrregularWhitespace(node) {
-            var sourceLines = context.getSourceLines();
+            var sourceLines = sourceCode.lines;
 
             sourceLines.forEach(function(sourceLine, lineIndex) {
                 var lineNumber = lineIndex + 1,
                     location,
                     match;
 
-                while ((match = irregularWhitespace.exec(sourceLine)) !== null) {
+                while ((match = IRREGULAR_WHITESPACE.exec(sourceLine)) !== null) {
                     location = {
                         line: lineNumber,
                         column: match.index
@@ -54623,15 +55209,15 @@ module.exports = {
          * @private
          */
         function checkForIrregularLineTerminators(node) {
-            var source = context.getSource(),
-                sourceLines = context.getSourceLines(),
-                linebreaks = source.match(/\r\n|\r|\n|\u2028|\u2029/g),
+            var source = sourceCode.getText(),
+                sourceLines = sourceCode.lines,
+                linebreaks = source.match(LINE_BREAK),
                 lastLineIndex = -1,
                 lineIndex,
                 location,
                 match;
 
-            while ((match = irregularLineTerminators.exec(source)) !== null) {
+            while ((match = IRREGULAR_LINE_TERMINATORS.exec(source)) !== null) {
                 lineIndex = linebreaks.indexOf(match[0], lastLineIndex + 1) || 0;
 
                 location = {
@@ -54661,8 +55247,10 @@ module.exports = {
          */
         function noop() {}
 
-        return {
-            Program: function(node) {
+        var nodes = {};
+
+        if (ALL_IRREGULARS.test(sourceCode.getText())) {
+            nodes.Program = function(node) {
 
                 /*
                  * As we can easily fire warnings for all white space issues with
@@ -54677,13 +55265,14 @@ module.exports = {
 
                 checkForIrregularWhitespace(node);
                 checkForIrregularLineTerminators(node);
-            },
+            };
 
-            Identifier: removeInvalidNodeErrorsInIdentifierOrLiteral,
-            Literal: removeInvalidNodeErrorsInIdentifierOrLiteral,
-            LineComment: skipComments ? rememberCommentNode : noop,
-            BlockComment: skipComments ? rememberCommentNode : noop,
-            "Program:exit": function() {
+            nodes.Identifier = removeInvalidNodeErrorsInIdentifierOrLiteral;
+            nodes.Literal = removeInvalidNodeErrorsInIdentifierOrLiteral;
+            nodes.TemplateElement = skipTemplates ? removeInvalidNodeErrorsInTemplateLiteral : noop;
+            nodes.LineComment = skipComments ? rememberCommentNode : noop;
+            nodes.BlockComment = skipComments ? rememberCommentNode : noop;
+            nodes["Program:exit"] = function() {
 
                 if (skipComments) {
 
@@ -54695,8 +55284,12 @@ module.exports = {
                 errors.forEach(function(error) {
                     context.report.apply(context, error);
                 });
-            }
-        };
+            };
+        } else {
+            nodes.Program = noop;
+        }
+
+        return nodes;
     }
 };
 
@@ -55186,7 +55779,7 @@ function getContainingLoopNode(node) {
  * @returns {ASTNode} The most outer loop node.
  */
 function getTopLoopNode(node, excludedNode) {
-    var retv = null;
+    var retv = node;
     var border = excludedNode ? excludedNode.range[1] : 0;
 
     while (node && node.range[0] >= border) {
@@ -55707,6 +56300,7 @@ module.exports = {
     },
 
     create: function(context) {
+        var sourceCode = context.getSourceCode();
 
         var smartTabs,
             ignoredLocs = [];
@@ -55769,8 +56363,8 @@ module.exports = {
                  */
                 var regex = /^(?=[\t ]*(\t | \t))/,
                     match,
-                    lines = context.getSourceLines(),
-                    comments = context.getAllComments();
+                    lines = sourceCode.lines,
+                    comments = sourceCode.getAllComments();
 
                 comments.forEach(function(comment) {
                     ignoredLocs.push(comment.loc);
@@ -55923,8 +56517,9 @@ module.exports = {
         return {
             Program: function() {
 
-                var source = context.getSource(),
-                    allComments = context.getAllComments(),
+                var sourceCode = context.getSourceCode(),
+                    source = sourceCode.getText(),
+                    allComments = sourceCode.getAllComments(),
                     pattern = /[^\n\r\u2028\u2029\t ].? {2,}/g,  // note: repeating space
                     token,
                     previousToken,
@@ -55949,12 +56544,12 @@ module.exports = {
                     // do not flag anything inside of comments
                     if (!isIndexInComment(pattern.lastIndex, allComments)) {
 
-                        token = context.getTokenByRangeStart(pattern.lastIndex);
+                        token = sourceCode.getTokenByRangeStart(pattern.lastIndex);
                         if (token) {
-                            previousToken = context.getTokenBefore(token);
+                            previousToken = sourceCode.getTokenBefore(token);
 
                             if (hasExceptions) {
-                                parent = context.getNodeByRangeIndex(pattern.lastIndex - 1);
+                                parent = sourceCode.getNodeByRangeIndex(pattern.lastIndex - 1);
                             }
 
                             if (!parent || !exceptions[parent.type]) {
@@ -56088,6 +56683,8 @@ module.exports = {
             maxBOF = context.options[0].maxBOF;
         }
 
+        var sourceCode = context.getSourceCode();
+
         //--------------------------------------------------------------------------
         // Public
         //--------------------------------------------------------------------------
@@ -56105,7 +56702,7 @@ module.exports = {
             },
 
             "Program:exit": function checkBlankLines(node) {
-                var lines = context.getSourceLines(),
+                var lines = sourceCode.lines,
                     currentLocation = -1,
                     lastLocation,
                     blankCounter = 0,
@@ -56152,6 +56749,8 @@ module.exports = {
 
                 // Aggregate and count blank lines
                 if (firstNonBlankLine > maxBOF) {
+                    currentLocation = firstNonBlankLine - 1;
+
                     context.report(node, 0,
                             "Too many blank lines at the beginning of file. Max of " + maxBOF + " allowed.");
                 }
@@ -57333,11 +57932,12 @@ module.exports = {
     },
 
     create: function(context) {
+        var sourceCode = context.getSourceCode();
 
         return {
 
             Literal: function(node) {
-                var token = context.getFirstToken(node),
+                var token = sourceCode.getFirstToken(node),
                     nodeType = token.type,
                     nodeValue = token.value,
                     multipleSpacesRegex = /( {2,})+?/,
@@ -57650,24 +58250,17 @@ module.exports = {
 // Helpers
 //------------------------------------------------------------------------------
 
-/**
- * Checks whether or not a node is an `AssignmentExpression`.
- * @param {Node|null} node - A node to check.
- * @returns {boolean} Whether or not the node is an `AssignmentExpression`.
- */
-function isAssignment(node) {
-    return node && node.type === "AssignmentExpression";
-}
+var SENTINEL_TYPE = /^(?:[a-zA-Z]+?Statement|ArrowFunctionExpression|FunctionExpression|ClassExpression)$/;
 
 /**
  * Checks whether or not a node is enclosed in parentheses.
  * @param {Node|null} node - A node to check.
- * @param {RuleContext} context - The current context.
+ * @param {sourceCode} sourceCode - The ESLint SourceCode object.
  * @returns {boolean} Whether or not the node is enclosed in parentheses.
  */
-function isEnclosedInParens(node, context) {
-    var prevToken = context.getTokenBefore(node);
-    var nextToken = context.getTokenAfter(node);
+function isEnclosedInParens(node, sourceCode) {
+    var prevToken = sourceCode.getTokenBefore(node);
+    var nextToken = sourceCode.getTokenAfter(node);
 
     return prevToken.value === "(" && nextToken.value === ")";
 }
@@ -57693,32 +58286,33 @@ module.exports = {
 
     create: function(context) {
         var always = (context.options[0] || "except-parens") !== "except-parens";
-
-        /**
-         * Check whether return statement contains assignment
-         * @param {ASTNode} nodeToCheck node to check
-         * @param {ASTNode} nodeToReport node to report
-         * @param {string} message message to report
-         * @returns {void}
-         * @private
-         */
-        function checkForAssignInReturn(nodeToCheck, nodeToReport, message) {
-            if (isAssignment(nodeToCheck) && (always || !isEnclosedInParens(nodeToCheck, context))) {
-                context.report(nodeToReport, message);
-            }
-        }
+        var sourceCode = context.getSourceCode();
 
         return {
-            ReturnStatement: function(node) {
-                var message = "Return statement should not contain assignment.";
+            AssignmentExpression: function(node) {
+                if (!always && isEnclosedInParens(node, sourceCode)) {
+                    return;
+                }
 
-                checkForAssignInReturn(node.argument, node, message);
-            },
-            ArrowFunctionExpression: function(node) {
-                if (node.body.type !== "BlockStatement") {
-                    var message = "Arrow function should not return assignment.";
+                var parent = node.parent;
 
-                    checkForAssignInReturn(node.body, node, message);
+                // Find ReturnStatement or ArrowFunctionExpression in ancestors.
+                while (parent && !SENTINEL_TYPE.test(parent.type)) {
+                    node = parent;
+                    parent = parent.parent;
+                }
+
+                // Reports.
+                if (parent && parent.type === "ReturnStatement") {
+                    context.report({
+                        node: parent,
+                        message: "Return statement should not contain assignment."
+                    });
+                } else if (parent && parent.type === "ArrowFunctionExpression" && parent.body === node) {
+                    context.report({
+                        node: parent,
+                        message: "Arrow function should not return assignment."
+                    });
                 }
             }
         };
@@ -57972,6 +58566,7 @@ module.exports = {
     },
 
     create: function(context) {
+        var sourceCode = context.getSourceCode();
 
         /**
          * Parts of the grammar that are required to have parens.
@@ -57981,7 +58576,8 @@ module.exports = {
             IfStatement: "test",
             SwitchStatement: "discriminant",
             WhileStatement: "test",
-            WithStatement: "object"
+            WithStatement: "object",
+            ArrowFunctionExpression: "body"
 
             // Omitting CallExpression - commas are parsed as argument separators
             // Omitting NewExpression - commas are parsed as argument separators
@@ -58006,8 +58602,8 @@ module.exports = {
          * @returns {boolean} True if the node has a paren on each side.
          */
         function isParenthesised(node) {
-            var previousToken = context.getTokenBefore(node),
-                nextToken = context.getTokenAfter(node);
+            var previousToken = sourceCode.getTokenBefore(node),
+                nextToken = sourceCode.getTokenAfter(node);
 
             return previousToken && nextToken &&
                 previousToken.value === "(" && previousToken.range[1] <= node.range[0] &&
@@ -58020,8 +58616,8 @@ module.exports = {
          * @returns {boolean} True if two parens surround the node on each side.
          */
         function isParenthesisedTwice(node) {
-            var previousToken = context.getTokenBefore(node, 1),
-                nextToken = context.getTokenAfter(node, 1);
+            var previousToken = sourceCode.getTokenBefore(node, 1),
+                nextToken = sourceCode.getTokenAfter(node, 1);
 
             return isParenthesised(node) && previousToken && nextToken &&
                 previousToken.value === "(" && previousToken.range[1] <= node.range[0] &&
@@ -58048,7 +58644,7 @@ module.exports = {
                     }
                 }
 
-                var child = context.getTokenAfter(node.expressions[0]);
+                var child = sourceCode.getTokenAfter(node.expressions[0]);
 
                 context.report(node, child.loc.start, "Unexpected use of comma operator.");
             }
@@ -59363,6 +59959,8 @@ module.exports = {
         var PROPERTY_MESSAGE = "Unexpected newline between object and [ of property access.";
         var TAGGED_TEMPLATE_MESSAGE = "Unexpected newline between template tag and template literal.";
 
+        var sourceCode = context.getSourceCode();
+
         /**
          * Check to see if there is a newline between the node and the following open bracket
          * line's expression
@@ -59373,12 +59971,12 @@ module.exports = {
          */
         function checkForBreakAfter(node, msg) {
             var nodeExpressionEnd = node;
-            var openParen = context.getTokenAfter(node);
+            var openParen = sourceCode.getTokenAfter(node);
 
             // Move along until the end of the wrapped expression
             while (openParen.value === ")") {
                 nodeExpressionEnd = openParen;
-                openParen = context.getTokenAfter(nodeExpressionEnd);
+                openParen = sourceCode.getTokenAfter(nodeExpressionEnd);
             }
 
             if (openParen.loc.start.line !== nodeExpressionEnd.loc.end.line) {
@@ -59786,7 +60384,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":151,"../util/traverser":384,"es6-map":23}],322:[function(require,module,exports){
+},{"../ast-utils":151,"../util/traverser":385,"es6-map":23}],322:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag no-unneeded-ternary
  * @author Gyandeep Singh
@@ -59974,7 +60572,10 @@ module.exports = {
 // Helpers
 //------------------------------------------------------------------------------
 
-var SENTINEL_NODE_TYPE = /^(?:Program|(?:Function|Class)(?:Declaration|Expression)|ArrowFunctionExpression)$/;
+var SENTINEL_NODE_TYPE_RETURN_THROW = /^(?:Program|(?:Function|Class)(?:Declaration|Expression)|ArrowFunctionExpression)$/;
+var SENTINEL_NODE_TYPE_BREAK = /^(?:Program|(?:Function|Class)(?:Declaration|Expression)|ArrowFunctionExpression|DoWhileStatement|WhileStatement|ForOfStatement|ForInStatement|ForStatement|SwitchStatement)$/;
+var SENTINEL_NODE_TYPE_CONTINUE = /^(?:Program|(?:Function|Class)(?:Declaration|Expression)|ArrowFunctionExpression|DoWhileStatement|WhileStatement|ForOfStatement|ForInStatement|ForStatement)$/;
+
 
 //------------------------------------------------------------------------------
 // Rule Definition
@@ -60004,11 +60605,29 @@ module.exports = {
          * Climbs up the tree if the node is not a sentinel node
          *
          * @param {ASTNode} node - node to check.
+         * @param {String} label - label of the break or continue statement
          * @returns {Boolean} - return whether the node is a finally block or a sentinel node
          */
-        function isInFinallyBlock(node) {
-            while (node && !SENTINEL_NODE_TYPE.test(node.type)) {
+        function isInFinallyBlock(node, label) {
+            var labelInside = false;
+            var sentinelNodeType;
+
+            if (node.type === "BreakStatement" && !node.label) {
+                sentinelNodeType = SENTINEL_NODE_TYPE_BREAK;
+            } else if (node.type === "ContinueStatement") {
+                sentinelNodeType = SENTINEL_NODE_TYPE_CONTINUE;
+            } else {
+                sentinelNodeType = SENTINEL_NODE_TYPE_RETURN_THROW;
+            }
+
+            while (node && !sentinelNodeType.test(node.type)) {
+                if (node.parent.label && label && (node.parent.label.name === label.name)) {
+                    labelInside = true;
+                }
                 if (isFinallyBlock(node)) {
+                    if (label && labelInside) {
+                        return false;
+                    }
                     return true;
                 }
                 node = node.parent;
@@ -60023,7 +60642,7 @@ module.exports = {
          * @returns {void}
          */
         function check(node) {
-            if (isInFinallyBlock(node)) {
+            if (isInFinallyBlock(node, node.label)) {
                 context.report({
                     message: "Unsafe usage of " + node.type,
                     node: node,
@@ -60880,12 +61499,12 @@ function isCallOrNonVariadicApply(node) {
  * Checks whether or not the tokens of two given nodes are same.
  * @param {ASTNode} left - A node 1 to compare.
  * @param {ASTNode} right - A node 2 to compare.
- * @param {RuleContext} context - The ESLint rule context object.
+ * @param {SourceCode} sourceCode - The ESLint source code object.
  * @returns {boolean} the source code for the given node.
  */
-function equalTokens(left, right, context) {
-    var tokensL = context.getTokens(left);
-    var tokensR = context.getTokens(right);
+function equalTokens(left, right, sourceCode) {
+    var tokensL = sourceCode.getTokens(left);
+    var tokensR = sourceCode.getTokens(right);
 
     if (tokensL.length !== tokensR.length) {
         return false;
@@ -60905,14 +61524,14 @@ function equalTokens(left, right, context) {
  * Checks whether or not `thisArg` is not changed by `.call()`/`.apply()`.
  * @param {ASTNode|null} expectedThis - The node that is the owner of the applied function.
  * @param {ASTNode} thisArg - The node that is given to the first argument of the `.call()`/`.apply()`.
- * @param {RuleContext} context - The ESLint rule context object.
+ * @param {SourceCode} sourceCode - The ESLint source code object.
  * @returns {boolean} Whether or not `thisArg` is not changed by `.call()`/`.apply()`.
  */
-function isValidThisArg(expectedThis, thisArg, context) {
+function isValidThisArg(expectedThis, thisArg, sourceCode) {
     if (!expectedThis) {
         return astUtils.isNullOrUndefined(thisArg);
     }
-    return equalTokens(expectedThis, thisArg, context);
+    return equalTokens(expectedThis, thisArg, sourceCode);
 }
 
 //------------------------------------------------------------------------------
@@ -60931,6 +61550,8 @@ module.exports = {
     },
 
     create: function(context) {
+        var sourceCode = context.getSourceCode();
+
         return {
             CallExpression: function(node) {
                 if (!isCallOrNonVariadicApply(node)) {
@@ -60941,7 +61562,7 @@ module.exports = {
                 var expectedThis = (applied.type === "MemberExpression") ? applied.object : null;
                 var thisArg = node.arguments[0];
 
-                if (isValidThisArg(expectedThis, thisArg, context)) {
+                if (isValidThisArg(expectedThis, thisArg, sourceCode)) {
                     context.report(
                         node,
                         "unnecessary '.{{name}}()'.",
@@ -60974,6 +61595,8 @@ module.exports = {
         }
     },
     create: function(context) {
+        var sourceCode = context.getSourceCode();
+
         return {
             Property: function(node) {
                 if (!node.computed) {
@@ -60984,7 +61607,7 @@ module.exports = {
                     nodeType = typeof key.value;
 
                 if (key.type === "Literal" && (nodeType === "string" || nodeType === "number")) {
-                    context.report(node, MESSAGE_UNNECESSARY_COMPUTED, { property: context.getSource(key) });
+                    context.report(node, MESSAGE_UNNECESSARY_COMPUTED, { property: sourceCode.getText(key) });
                 }
             }
         };
@@ -61061,6 +61684,8 @@ module.exports = {
     },
 
     create: function(context) {
+        var sourceCode = context.getSourceCode();
+
         return {
             BinaryExpression: function(node) {
 
@@ -61079,10 +61704,10 @@ module.exports = {
                 ) {
 
                     // move warning location to operator
-                    var operatorToken = context.getTokenAfter(left);
+                    var operatorToken = sourceCode.getTokenAfter(left);
 
                     while (operatorToken.value !== "+") {
-                        operatorToken = context.getTokenAfter(operatorToken);
+                        operatorToken = sourceCode.getTokenAfter(operatorToken);
                     }
 
                     context.report(
@@ -62042,6 +62667,81 @@ module.exports = {
 
 },{"../ast-utils":151}],340:[function(require,module,exports){
 /**
+ * @fileoverview Rule to enforce placing object properties on separate lines.
+ * @author Vitor Balocco
+ */
+
+"use strict";
+
+//------------------------------------------------------------------------------
+// Rule Definition
+//------------------------------------------------------------------------------
+
+module.exports = {
+    meta: {
+        docs: {
+            description: "enforce placing object properties on separate lines",
+            category: "Stylistic Issues",
+            recommended: false
+        },
+
+        schema: [
+            {
+                type: "object",
+                properties: {
+                    allowMultiplePropertiesPerLine: {
+                        type: "boolean"
+                    }
+                },
+                additionalProperties: false
+            }
+        ]
+    },
+
+    create: function(context) {
+        var allowSameLine = context.options[0] && Boolean(context.options[0].allowMultiplePropertiesPerLine);
+        var errorMessage = allowSameLine ?
+            "Object properties must go on a new line if they aren't all on the same line" :
+            "Object properties must go on a new line";
+
+        var sourceCode = context.getSourceCode();
+
+        return {
+            ObjectExpression: function(node) {
+                var lastTokenOfPreviousValue, firstTokenOfCurrentKey;
+
+                if (allowSameLine) {
+                    if (node.properties.length > 1) {
+                        var firstToken = sourceCode.getFirstToken(node.properties[0].key);
+                        var lastToken = sourceCode.getLastToken(node.properties[node.properties.length - 1].value);
+
+                        if (firstToken.loc.end.line === lastToken.loc.start.line) {
+
+                            // All keys and values are on the same line
+                            return;
+                        }
+                    }
+                }
+
+                for (var i = 1; i < node.properties.length; i++) {
+                    lastTokenOfPreviousValue = sourceCode.getLastToken(node.properties[i - 1].value);
+                    firstTokenOfCurrentKey = sourceCode.getFirstToken(node.properties[i].key);
+
+                    if (lastTokenOfPreviousValue.loc.end.line === firstTokenOfCurrentKey.loc.start.line) {
+                        context.report({
+                            node: node,
+                            loc: firstTokenOfCurrentKey.loc.start,
+                            message: errorMessage
+                        });
+                    }
+                }
+            }
+        };
+    }
+};
+
+},{}],341:[function(require,module,exports){
+/**
  * @fileoverview Rule to enforce concise object methods and properties.
  * @author Jamund Ferguson
  */
@@ -62082,12 +62782,34 @@ module.exports = {
                     type: "array",
                     items: [
                         {
+                            enum: ["always", "methods", "properties"]
+                        },
+                        {
+                            type: "object",
+                            properties: {
+                                avoidQuotes: {
+                                    type: "boolean"
+                                }
+                            },
+                            additionalProperties: false
+                        }
+                    ],
+                    minItems: 0,
+                    maxItems: 2
+                },
+                {
+                    type: "array",
+                    items: [
+                        {
                             enum: ["always", "methods"]
                         },
                         {
                             type: "object",
                             properties: {
                                 ignoreConstructors: {
+                                    type: "boolean"
+                                },
+                                avoidQuotes: {
                                     type: "boolean"
                                 }
                             },
@@ -62109,6 +62831,7 @@ module.exports = {
 
         var PARAMS = context.options[1] || {};
         var IGNORE_CONSTRUCTORS = PARAMS.ignoreConstructors;
+        var AVOID_QUOTES = PARAMS.avoidQuotes;
 
         //--------------------------------------------------------------------------
         // Helpers
@@ -62124,6 +62847,15 @@ module.exports = {
             var firstChar = name.charAt(0);
 
             return firstChar === firstChar.toUpperCase();
+        }
+
+        /**
+          * Checks whether a node is a string literal.
+          * @param   {ASTNode} node - Any AST node.
+          * @returns {boolean} `true` if it is a string literal.
+          */
+        function isStringLiteral(node) {
+            return node.type === "Literal" && typeof node.value === "string";
         }
 
         //--------------------------------------------------------------------------
@@ -62146,13 +62878,18 @@ module.exports = {
                     context.report(node, "Expected longform " + type + " syntax.");
                 }
 
+                // {'xyz'() {}} should be written as {'xyz': function() {}}
+                if (AVOID_QUOTES && isStringLiteral(node.key) && isConciseProperty) {
+                    context.report(node, "Expected longform method syntax for string literal keys.");
+                }
+
                 // at this point if we're concise or if we're "never" we can leave
-                if (APPLY_NEVER || isConciseProperty) {
+                if (APPLY_NEVER || AVOID_QUOTES || isConciseProperty) {
                     return;
                 }
 
                 // only computed methods can fail the following checks
-                if (!APPLY_TO_METHODS && node.computed) {
+                if (node.computed && node.value.type !== "FunctionExpression") {
                     return;
                 }
 
@@ -62179,11 +62916,10 @@ module.exports = {
                 }
             }
         };
-
     }
 };
 
-},{}],341:[function(require,module,exports){
+},{}],342:[function(require,module,exports){
 /**
  * @fileoverview Rule to check multiple var declarations per line
  * @author Alberto Rodríguez
@@ -62268,7 +63004,7 @@ module.exports = {
     }
 };
 
-},{}],342:[function(require,module,exports){
+},{}],343:[function(require,module,exports){
 /**
  * @fileoverview A rule to control the use of single variable declarations.
  * @author Ian Christian Myers
@@ -62599,7 +63335,7 @@ module.exports = {
     }
 };
 
-},{}],343:[function(require,module,exports){
+},{}],344:[function(require,module,exports){
 /**
  * @fileoverview Rule to replace assignment expressions with operator assignment
  * @author Brandon Mills
@@ -62734,7 +63470,7 @@ module.exports = {
     }
 };
 
-},{}],344:[function(require,module,exports){
+},{}],345:[function(require,module,exports){
 /**
  * @fileoverview Operator linebreak - enforces operator linebreak style of two types: after and before
  * @author Benoît Zugmeyer
@@ -62794,6 +63530,8 @@ module.exports = {
             styleOverrides[":"] = "before";
         }
 
+        var sourceCode = context.getSourceCode();
+
         //--------------------------------------------------------------------------
         // Helpers
         //--------------------------------------------------------------------------
@@ -62806,8 +63544,8 @@ module.exports = {
          * @returns {void}
          */
         function validateNode(node, leftSide) {
-            var leftToken = context.getLastToken(leftSide);
-            var operatorToken = context.getTokenAfter(leftToken);
+            var leftToken = sourceCode.getLastToken(leftSide);
+            var operatorToken = sourceCode.getTokenAfter(leftToken);
 
             // When the left part of a binary expression is a single expression wrapped in
             // parentheses (ex: `(a) + b`), leftToken will be the last token of the expression
@@ -62816,10 +63554,10 @@ module.exports = {
             // should be the token right after that.
             while (operatorToken.value === ")") {
                 leftToken = operatorToken;
-                operatorToken = context.getTokenAfter(operatorToken);
+                operatorToken = sourceCode.getTokenAfter(operatorToken);
             }
 
-            var rightToken = context.getTokenAfter(operatorToken);
+            var rightToken = sourceCode.getTokenAfter(operatorToken);
             var operator = operatorToken.value;
             var operatorStyleOverride = styleOverrides[operator];
             var style = operatorStyleOverride || globalStyle;
@@ -62893,7 +63631,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":151,"lodash":150}],345:[function(require,module,exports){
+},{"../ast-utils":151,"lodash":150}],346:[function(require,module,exports){
 /**
  * @fileoverview A rule to ensure blank lines within blocks.
  * @author Mathias Schreck <https://github.com/lo1tuma>
@@ -63122,7 +63860,7 @@ module.exports = {
     }
 };
 
-},{}],346:[function(require,module,exports){
+},{}],347:[function(require,module,exports){
 /**
  * @fileoverview A rule to suggest using arrow functions as callbacks.
  * @author Toru Nagashima
@@ -63378,7 +64116,7 @@ module.exports = {
     }
 };
 
-},{}],347:[function(require,module,exports){
+},{}],348:[function(require,module,exports){
 /**
  * @fileoverview A rule to suggest using of const declaration for variables that are never reassigned after declared.
  * @author Toru Nagashima
@@ -63443,45 +64181,72 @@ function canBecomeVariableDeclaration(identifier) {
 }
 
 /**
- * Gets the WriteReference of a given variable if the variable should be
- * declared as const.
+ * Gets an identifier node of a given variable.
+ *
+ * If the initialization exists or one or more reading references exist before
+ * the first assignment, the identifier node is the node of the declaration.
+ * Otherwise, the identifier node is the node of the first assignment.
+ *
+ * If the variable should not change to const, this function returns null.
+ * - If the variable is reassigned.
+ * - If the variable is never initialized and assigned.
+ * - If the variable is initialized in a different scope from the declaration.
+ * - If the unique assignment of the variable cannot change to a declaration.
  *
  * @param {escope.Variable} variable - A variable to get.
- * @returns {escope.Reference|null} The singular WriteReference or null.
+ * @param {boolean} ignoreReadBeforeAssign -
+ *      The value of `ignoreReadBeforeAssign` option.
+ * @returns {ASTNode|null}
+ *      An Identifier node if the variable should change to const.
+ *      Otherwise, null.
  */
-function getWriteReferenceIfShouldBeConst(variable) {
+function getIdentifierIfShouldBeConst(variable, ignoreReadBeforeAssign) {
     if (variable.eslintUsed) {
         return null;
     }
 
-    // Finds the singular WriteReference.
-    var retv = null;
+    // Finds the unique WriteReference.
+    var writer = null;
+    var isReadBeforeInit = false;
     var references = variable.references;
 
     for (var i = 0; i < references.length; ++i) {
         var reference = references[i];
 
         if (reference.isWrite()) {
-            var isReassigned = Boolean(
-                retv && retv.identifier !== reference.identifier
+            var isReassigned = (
+                writer !== null &&
+                writer.identifier !== reference.identifier
             );
 
             if (isReassigned) {
                 return null;
             }
-            retv = reference;
+            writer = reference;
+
+        } else if (reference.isRead() && writer === null) {
+            if (ignoreReadBeforeAssign) {
+                return null;
+            }
+            isReadBeforeInit = true;
         }
     }
 
-    // Checks the writer is located in the same scope and can be modified to
-    // const.
-    var isSameScopeAndCanBecomeVariableDeclaration = Boolean(
-        retv &&
-        retv.from === variable.scope &&
-        canBecomeVariableDeclaration(retv.identifier)
+    // If the assignment is from a different scope, ignore it.
+    // If the assignment cannot change to a declaration, ignore it.
+    var shouldBeConst = (
+        writer !== null &&
+        writer.from === variable.scope &&
+        canBecomeVariableDeclaration(writer.identifier)
     );
 
-    return isSameScopeAndCanBecomeVariableDeclaration ? retv : null;
+    if (!shouldBeConst) {
+        return null;
+    }
+    if (isReadBeforeInit) {
+        return variable.defs[0].name;
+    }
+    return writer.identifier;
 }
 
 /**
@@ -63517,15 +64282,17 @@ function getDestructuringHost(reference) {
  * destructuring.
  *
  * @param {escope.Variable[]} variables - Variables to group by destructuring.
- * @returns {Map<ASTNode, (escope.Reference|null)[]>} Grouped references.
+ * @param {boolean} ignoreReadBeforeAssign -
+ *      The value of `ignoreReadBeforeAssign` option.
+ * @returns {Map<ASTNode, ASTNode[]>} Grouped identifier nodes.
  */
-function groupByDestructuring(variables) {
-    var writersMap = new Map();
+function groupByDestructuring(variables, ignoreReadBeforeAssign) {
+    var identifierMap = new Map();
 
     for (var i = 0; i < variables.length; ++i) {
         var variable = variables[i];
         var references = variable.references;
-        var writer = getWriteReferenceIfShouldBeConst(variable);
+        var identifier = getIdentifierIfShouldBeConst(variable, ignoreReadBeforeAssign);
         var prevId = null;
 
         for (var j = 0; j < references.length; ++j) {
@@ -63539,20 +64306,20 @@ function groupByDestructuring(variables) {
             }
             prevId = id;
 
-            // Add the writer into the destructuring group.
+            // Add the identifier node into the destructuring group.
             var group = getDestructuringHost(reference);
 
             if (group) {
-                if (writersMap.has(group)) {
-                    writersMap.get(group).push(writer);
+                if (identifierMap.has(group)) {
+                    identifierMap.get(group).push(identifier);
                 } else {
-                    writersMap.set(group, [writer]);
+                    identifierMap.set(group, [identifier]);
                 }
             }
         }
     }
 
-    return writersMap;
+    return identifierMap;
 }
 
 //------------------------------------------------------------------------------
@@ -63571,7 +64338,8 @@ module.exports = {
             {
                 type: "object",
                 properties: {
-                    destructuring: {enum: ["any", "all"]}
+                    destructuring: {enum: ["any", "all"]},
+                    ignoreReadBeforeAssign: {type: "boolean"}
                 },
                 additionalProperties: false
             }
@@ -63581,21 +64349,20 @@ module.exports = {
     create: function(context) {
         var options = context.options[0] || {};
         var checkingMixedDestructuring = options.destructuring !== "all";
+        var ignoreReadBeforeAssign = options.ignoreReadBeforeAssign === true;
         var variables = null;
 
         /**
-         * Reports a given reference.
+         * Reports a given Identifier node.
          *
-         * @param {escope.Reference} reference - A reference to report.
+         * @param {ASTNode} node - An Identifier node to report.
          * @returns {void}
          */
-        function report(reference) {
-            var id = reference.identifier;
-
+        function report(node) {
             context.report({
-                node: id,
+                node: node,
                 message: "'{{name}}' is never reassigned, use 'const' instead.",
-                data: id
+                data: node
             });
         }
 
@@ -63606,30 +64373,30 @@ module.exports = {
          * @returns {void}
          */
         function checkVariable(variable) {
-            var writer = getWriteReferenceIfShouldBeConst(variable);
+            var node = getIdentifierIfShouldBeConst(variable, ignoreReadBeforeAssign);
 
-            if (writer) {
-                report(writer);
+            if (node) {
+                report(node);
             }
         }
 
         /**
-         * Reports given references if all of the reference should be declared as
-         * const.
+         * Reports given identifier nodes if all of the nodes should be declared
+         * as const.
          *
-         * The argument 'writers' is an array of references.
-         * This reference is the result of
-         * 'getWriteReferenceIfShouldBeConst(variable)', so it's nullable.
-         * In simple declaration or assignment cases, the length of the array is 1.
-         * In destructuring cases, the length of the array can be 2 or more.
+         * The argument 'nodes' is an array of Identifier nodes.
+         * This node is the result of 'getIdentifierIfShouldBeConst()', so it's
+         * nullable. In simple declaration or assignment cases, the length of
+         * the array is 1. In destructuring cases, the length of the array can
+         * be 2 or more.
          *
-         * @param {(escope.Reference|null)[]} writers - References which are grouped
-         *      by destructuring to report.
+         * @param {(escope.Reference|null)[]} nodes -
+         *      References which are grouped by destructuring to report.
          * @returns {void}
          */
-        function checkGroup(writers) {
-            if (writers.every(Boolean)) {
-                writers.forEach(report);
+        function checkGroup(nodes) {
+            if (nodes.every(Boolean)) {
+                nodes.forEach(report);
             }
         }
 
@@ -63642,7 +64409,8 @@ module.exports = {
                 if (checkingMixedDestructuring) {
                     variables.forEach(checkVariable);
                 } else {
-                    groupByDestructuring(variables).forEach(checkGroup);
+                    groupByDestructuring(variables, ignoreReadBeforeAssign)
+                        .forEach(checkGroup);
                 }
 
                 variables = null;
@@ -63657,7 +64425,7 @@ module.exports = {
     }
 };
 
-},{"es6-map":23}],348:[function(require,module,exports){
+},{"es6-map":23}],349:[function(require,module,exports){
 /**
  * @fileoverview Rule to suggest using "Reflect" api over Function/Object methods
  * @author Keith Cirkel <http://keithcirkel.co.uk>
@@ -63770,7 +64538,7 @@ module.exports = {
     }
 };
 
-},{}],349:[function(require,module,exports){
+},{}],350:[function(require,module,exports){
 /**
  * @fileoverview Rule to
  * @author Toru Nagashima
@@ -63855,7 +64623,7 @@ module.exports = {
     }
 };
 
-},{}],350:[function(require,module,exports){
+},{}],351:[function(require,module,exports){
 /**
  * @fileoverview A rule to suggest using of the spread operator instead of `.apply()`.
  * @author Toru Nagashima
@@ -63889,12 +64657,12 @@ function isVariadicApplyCalling(node) {
  * Checks whether or not the tokens of two given nodes are same.
  * @param {ASTNode} left - A node 1 to compare.
  * @param {ASTNode} right - A node 2 to compare.
- * @param {RuleContext} context - The ESLint rule context object.
+ * @param {SourceCode} sourceCode - The ESLint source code object.
  * @returns {boolean} the source code for the given node.
  */
-function equalTokens(left, right, context) {
-    var tokensL = context.getTokens(left);
-    var tokensR = context.getTokens(right);
+function equalTokens(left, right, sourceCode) {
+    var tokensL = sourceCode.getTokens(left);
+    var tokensR = sourceCode.getTokens(right);
 
     if (tokensL.length !== tokensR.length) {
         return false;
@@ -63940,6 +64708,8 @@ module.exports = {
     },
 
     create: function(context) {
+        var sourceCode = context.getSourceCode();
+
         return {
             CallExpression: function(node) {
                 if (!isVariadicApplyCalling(node)) {
@@ -63950,7 +64720,7 @@ module.exports = {
                 var expectedThis = (applied.type === "MemberExpression") ? applied.object : null;
                 var thisArg = node.arguments[0];
 
-                if (isValidThisArg(expectedThis, thisArg, context)) {
+                if (isValidThisArg(expectedThis, thisArg, sourceCode)) {
                     context.report(node, "use the spread operator instead of the '.apply()'.");
                 }
             }
@@ -63958,7 +64728,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":151}],351:[function(require,module,exports){
+},{"../ast-utils":151}],352:[function(require,module,exports){
 /**
  * @fileoverview A rule to suggest using template literals instead of string concatenation.
  * @author Toru Nagashima
@@ -64066,7 +64836,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":151}],352:[function(require,module,exports){
+},{"../ast-utils":151}],353:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag non-quoted property names in object literals.
  * @author Mathias Bynens <http://mathiasbynens.be/>
@@ -64299,7 +65069,7 @@ module.exports = {
     }
 };
 
-},{"../util/keywords":380,"espree":"espree"}],353:[function(require,module,exports){
+},{"../util/keywords":381,"espree":"espree"}],354:[function(require,module,exports){
 /**
  * @fileoverview A rule to choose between single and double quote marks
  * @author Matt DuVall <http://www.mattduvall.com/>, Brandon Payton
@@ -64561,7 +65331,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":151}],354:[function(require,module,exports){
+},{"../ast-utils":151}],355:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag use of parseInt without a radix argument
  * @author James Allardice
@@ -64734,7 +65504,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":151}],355:[function(require,module,exports){
+},{"../ast-utils":151}],356:[function(require,module,exports){
 /**
  * @fileoverview Rule to check for jsdoc presence.
  * @author Gyandeep Singh
@@ -64842,7 +65612,7 @@ module.exports = {
     }
 };
 
-},{"lodash":150}],356:[function(require,module,exports){
+},{"lodash":150}],357:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag the generator functions that does not have yield.
  * @author Toru Nagashima
@@ -64917,7 +65687,7 @@ module.exports = {
     }
 };
 
-},{}],357:[function(require,module,exports){
+},{}],358:[function(require,module,exports){
 /**
  * @fileoverview Validates spacing before and after semicolon
  * @author Mathias Schreck
@@ -64979,7 +65749,7 @@ module.exports = {
          * @returns {boolean} True if the given token has leading space, false if not.
          */
         function hasLeadingSpace(token) {
-            var tokenBefore = context.getTokenBefore(token);
+            var tokenBefore = sourceCode.getTokenBefore(token);
 
             return tokenBefore && astUtils.isTokenOnSameLine(tokenBefore, token) && sourceCode.isSpaceBetweenTokens(tokenBefore, token);
         }
@@ -64990,7 +65760,7 @@ module.exports = {
          * @returns {boolean} True if the given token has trailing space, false if not.
          */
         function hasTrailingSpace(token) {
-            var tokenAfter = context.getTokenAfter(token);
+            var tokenAfter = sourceCode.getTokenAfter(token);
 
             return tokenAfter && astUtils.isTokenOnSameLine(token, tokenAfter) && sourceCode.isSpaceBetweenTokens(token, tokenAfter);
         }
@@ -65001,7 +65771,7 @@ module.exports = {
          * @returns {boolean} Whether or not the token is the last in its line.
          */
         function isLastTokenInCurrentLine(token) {
-            var tokenAfter = context.getTokenAfter(token);
+            var tokenAfter = sourceCode.getTokenAfter(token);
 
             return !(tokenAfter && astUtils.isTokenOnSameLine(token, tokenAfter));
         }
@@ -65012,7 +65782,7 @@ module.exports = {
          * @returns {boolean} Whether or not the token is the first in its line.
          */
         function isFirstTokenInCurrentLine(token) {
-            var tokenBefore = context.getTokenBefore(token);
+            var tokenBefore = sourceCode.getTokenBefore(token);
 
             return !(tokenBefore && astUtils.isTokenOnSameLine(token, tokenBefore));
         }
@@ -65023,7 +65793,7 @@ module.exports = {
          * @returns {boolean} Whether or not the next token of a given token is a closing parenthesis.
          */
         function isBeforeClosingParen(token) {
-            var nextToken = context.getTokenAfter(token);
+            var nextToken = sourceCode.getTokenAfter(token);
 
             return (
                 nextToken &&
@@ -65060,7 +65830,7 @@ module.exports = {
                             loc: location,
                             message: "Unexpected whitespace before semicolon.",
                             fix: function(fixer) {
-                                var tokenBefore = context.getTokenBefore(token);
+                                var tokenBefore = sourceCode.getTokenBefore(token);
 
                                 return fixer.removeRange([tokenBefore.range[1], token.range[0]]);
                             }
@@ -65087,7 +65857,7 @@ module.exports = {
                                 loc: location,
                                 message: "Unexpected whitespace after semicolon.",
                                 fix: function(fixer) {
-                                    var tokenAfter = context.getTokenAfter(token);
+                                    var tokenAfter = sourceCode.getTokenAfter(token);
 
                                     return fixer.removeRange([token.range[1], tokenAfter.range[0]]);
                                 }
@@ -65115,7 +65885,7 @@ module.exports = {
          * @returns {void}
          */
         function checkNode(node) {
-            var token = context.getLastToken(node);
+            var token = sourceCode.getLastToken(node);
 
             checkSemicolonSpacing(token, node);
         }
@@ -65130,18 +65900,18 @@ module.exports = {
             ThrowStatement: checkNode,
             ForStatement: function(node) {
                 if (node.init) {
-                    checkSemicolonSpacing(context.getTokenAfter(node.init), node);
+                    checkSemicolonSpacing(sourceCode.getTokenAfter(node.init), node);
                 }
 
                 if (node.test) {
-                    checkSemicolonSpacing(context.getTokenAfter(node.test), node);
+                    checkSemicolonSpacing(sourceCode.getTokenAfter(node.test), node);
                 }
             }
         };
     }
 };
 
-},{"../ast-utils":151}],358:[function(require,module,exports){
+},{"../ast-utils":151}],359:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag missing semicolons.
  * @author Nicholas C. Zakas
@@ -65265,7 +66035,7 @@ module.exports = {
                 return false;
             }
 
-            nextToken = context.getTokenAfter(lastToken);
+            nextToken = sourceCode.getTokenAfter(lastToken);
 
             if (!nextToken) {
                 return true;
@@ -65285,7 +66055,7 @@ module.exports = {
          * @returns {boolean} whether the node is in a one-liner block statement.
          */
         function isOneLinerBlock(node) {
-            var nextToken = context.getTokenAfter(node);
+            var nextToken = sourceCode.getTokenAfter(node);
 
             if (!nextToken || nextToken.value !== "}") {
                 return false;
@@ -65303,7 +66073,7 @@ module.exports = {
          * @returns {void}
          */
         function checkForSemicolon(node) {
-            var lastToken = context.getLastToken(node);
+            var lastToken = sourceCode.getLastToken(node);
 
             if (never) {
                 if (isUnnecessarySemicolon(lastToken)) {
@@ -65369,7 +66139,7 @@ module.exports = {
     }
 };
 
-},{}],359:[function(require,module,exports){
+},{}],360:[function(require,module,exports){
 /**
  * @fileoverview Rule to require sorting of import declarations
  * @author Christian Schuller
@@ -65546,7 +66316,7 @@ module.exports = {
     }
 };
 
-},{}],360:[function(require,module,exports){
+},{}],361:[function(require,module,exports){
 /**
  * @fileoverview Rule to require sorting of variables within a single Variable Declaration block
  * @author Ilya Volodin
@@ -65611,7 +66381,7 @@ module.exports = {
     }
 };
 
-},{}],361:[function(require,module,exports){
+},{}],362:[function(require,module,exports){
 /**
  * @fileoverview A rule to ensure whitespace before blocks.
  * @author Mathias Schreck <https://github.com/lo1tuma>
@@ -65695,7 +66465,7 @@ module.exports = {
          * @returns {void} undefined.
          */
         function checkPrecedingSpace(node) {
-            var precedingToken = context.getTokenBefore(node),
+            var precedingToken = sourceCode.getTokenBefore(node),
                 hasSpace,
                 parent,
                 requireSpace;
@@ -65747,9 +66517,9 @@ module.exports = {
 
             if (cases.length > 0) {
                 firstCase = cases[0];
-                openingBrace = context.getTokenBefore(firstCase);
+                openingBrace = sourceCode.getTokenBefore(firstCase);
             } else {
-                openingBrace = context.getLastToken(node, 1);
+                openingBrace = sourceCode.getLastToken(node, 1);
             }
 
             checkPrecedingSpace(openingBrace);
@@ -65764,7 +66534,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":151}],362:[function(require,module,exports){
+},{"../ast-utils":151}],363:[function(require,module,exports){
 /**
  * @fileoverview Rule to validate spacing before function paren.
  * @author Mathias Schreck <https://github.com/lo1tuma>
@@ -65873,7 +66643,7 @@ module.exports = {
             while (rightToken.value !== "(") {
                 rightToken = sourceCode.getTokenAfter(rightToken);
             }
-            leftToken = context.getTokenBefore(rightToken);
+            leftToken = sourceCode.getTokenBefore(rightToken);
             location = leftToken.loc.end;
 
             if (sourceCode.isSpaceBetweenTokens(leftToken, rightToken)) {
@@ -65908,7 +66678,7 @@ module.exports = {
     }
 };
 
-},{}],363:[function(require,module,exports){
+},{}],364:[function(require,module,exports){
 /**
  * @fileoverview Disallows or enforces spaces inside of parentheses.
  * @author Jonathan Rajavuori
@@ -66191,7 +66961,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":151}],364:[function(require,module,exports){
+},{"../ast-utils":151}],365:[function(require,module,exports){
 /**
  * @fileoverview Require spaces around infix operators
  * @author Michael Ficarra
@@ -66235,6 +67005,8 @@ module.exports = {
             "?", ":", ",", "**"
         ];
 
+        var sourceCode = context.getSourceCode();
+
         /**
          * Returns the first token which violates the rule
          * @param {ASTNode} left - The left node of the main node
@@ -66244,7 +67016,7 @@ module.exports = {
          */
         function getFirstNonSpacedToken(left, right) {
             var op,
-                tokens = context.getTokensBetween(left, right, 1);
+                tokens = sourceCode.getTokensBetween(left, right, 1);
 
             for (var i = 1, l = tokens.length - 1; i < l; ++i) {
                 op = tokens[i];
@@ -66272,8 +67044,8 @@ module.exports = {
                 loc: culpritToken.loc.start,
                 message: "Infix operators must be spaced.",
                 fix: function(fixer) {
-                    var previousToken = context.getTokenBefore(culpritToken);
-                    var afterToken = context.getTokenAfter(culpritToken);
+                    var previousToken = sourceCode.getTokenBefore(culpritToken);
+                    var afterToken = sourceCode.getTokenAfter(culpritToken);
                     var fixString = "";
 
                     if (culpritToken.range[0] - previousToken.range[1] === 0) {
@@ -66301,7 +67073,7 @@ module.exports = {
             var nonSpacedNode = getFirstNonSpacedToken(node.left, node.right);
 
             if (nonSpacedNode) {
-                if (!(int32Hint && context.getSource(node).substr(-2) === "|0")) {
+                if (!(int32Hint && sourceCode.getText(node).substr(-2) === "|0")) {
                     report(node, nonSpacedNode);
                 }
             }
@@ -66353,7 +67125,7 @@ module.exports = {
     }
 };
 
-},{}],365:[function(require,module,exports){
+},{}],366:[function(require,module,exports){
 /**
  * @fileoverview This rule shoud require or disallow spaces before or after unary operations.
  * @author Marcin Kumorek
@@ -66398,6 +67170,8 @@ module.exports = {
 
     create: function(context) {
         var options = context.options && Array.isArray(context.options) && context.options[0] || { words: true, nonwords: false };
+
+        var sourceCode = context.getSourceCode();
 
         //--------------------------------------------------------------------------
         // Helpers
@@ -66514,7 +67288,7 @@ module.exports = {
         * @returns {void}
         */
         function checkForSpacesAfterYield(node) {
-            var tokens = context.getFirstTokens(node, 3),
+            var tokens = sourceCode.getFirstTokens(node, 3),
                 word = "yield";
 
             if (!node.argument || node.delegate) {
@@ -66595,7 +67369,7 @@ module.exports = {
         * @returns {void}
         */
         function checkForSpaces(node) {
-            var tokens = context.getFirstTokens(node, 2),
+            var tokens = sourceCode.getFirstTokens(node, 2),
                 firstToken = tokens[0],
                 secondToken = tokens[1];
 
@@ -66633,7 +67407,7 @@ module.exports = {
     }
 };
 
-},{}],366:[function(require,module,exports){
+},{}],367:[function(require,module,exports){
 /**
  * @fileoverview Source code for spaced-comments rule
  * @author Gyandeep Singh
@@ -66949,7 +67723,7 @@ module.exports = {
     }
 };
 
-},{"lodash":150}],367:[function(require,module,exports){
+},{"lodash":150}],368:[function(require,module,exports){
 /**
  * @fileoverview Rule to control usage of strict mode directives.
  * @author Brandon Mills
@@ -67172,7 +67946,7 @@ module.exports = {
     }
 };
 
-},{"lodash":150}],368:[function(require,module,exports){
+},{"lodash":150}],369:[function(require,module,exports){
 /**
  * @fileoverview Rule to enforce spacing around embedded expressions of template strings
  * @author Toru Nagashima
@@ -67289,7 +68063,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":151}],369:[function(require,module,exports){
+},{"../ast-utils":151}],370:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag comparisons to the value NaN
  * @author James Allardice
@@ -67325,7 +68099,7 @@ module.exports = {
     }
 };
 
-},{}],370:[function(require,module,exports){
+},{}],371:[function(require,module,exports){
 /**
  * @fileoverview Validates JSDoc comments are syntactically correct
  * @author Nicholas C. Zakas
@@ -67723,7 +68497,7 @@ module.exports = {
     }
 };
 
-},{"doctrine":14}],371:[function(require,module,exports){
+},{"doctrine":14}],372:[function(require,module,exports){
 /**
  * @fileoverview Ensures that the results of typeof are compared against a valid string
  * @author Ian Christian Myers
@@ -67777,7 +68551,7 @@ module.exports = {
     }
 };
 
-},{}],372:[function(require,module,exports){
+},{}],373:[function(require,module,exports){
 /**
  * @fileoverview Rule to enforce var declarations are only at the top of a function.
  * @author Danny Fritz
@@ -67913,7 +68687,7 @@ module.exports = {
     }
 };
 
-},{}],373:[function(require,module,exports){
+},{}],374:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag when IIFE is not wrapped in parens
  * @author Ilya Volodin
@@ -67944,6 +68718,8 @@ module.exports = {
 
         var style = context.options[0] || "outside";
 
+        var sourceCode = context.getSourceCode();
+
         /**
          * Check if the node is wrapped in ()
          * @param {ASTNode} node node to evaluate
@@ -67951,8 +68727,8 @@ module.exports = {
          * @private
          */
         function wrapped(node) {
-            var previousToken = context.getTokenBefore(node),
-                nextToken = context.getTokenAfter(node);
+            var previousToken = sourceCode.getTokenBefore(node),
+                nextToken = sourceCode.getTokenAfter(node);
 
             return previousToken && previousToken.value === "(" &&
                 nextToken && nextToken.value === ")";
@@ -67979,7 +68755,7 @@ module.exports = {
     }
 };
 
-},{}],374:[function(require,module,exports){
+},{}],375:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag when regex literals are not wrapped in parens
  * @author Matt DuVall <http://www.mattduvall.com>
@@ -68003,18 +68779,19 @@ module.exports = {
     },
 
     create: function(context) {
+        var sourceCode = context.getSourceCode();
 
         return {
 
             Literal: function(node) {
-                var token = context.getFirstToken(node),
+                var token = sourceCode.getFirstToken(node),
                     nodeType = token.type,
                     source,
                     grandparent,
                     ancestors;
 
                 if (nodeType === "RegularExpression") {
-                    source = context.getTokenBefore(node);
+                    source = sourceCode.getTokenBefore(node);
                     ancestors = context.getAncestors();
                     grandparent = ancestors[ancestors.length - 1];
 
@@ -68029,7 +68806,7 @@ module.exports = {
     }
 };
 
-},{}],375:[function(require,module,exports){
+},{}],376:[function(require,module,exports){
 /**
  * @fileoverview Rule to check the spacing around the * in yield* expressions.
  * @author Bryan Smith
@@ -68144,7 +68921,7 @@ module.exports = {
     }
 };
 
-},{}],376:[function(require,module,exports){
+},{}],377:[function(require,module,exports){
 /**
  * @fileoverview Rule to require or disallow yoda comparisons
  * @author Nicholas C. Zakas
@@ -68298,6 +69075,8 @@ module.exports = {
         var exceptRange = (context.options[1] && context.options[1].exceptRange);
         var onlyEquality = (context.options[1] && context.options[1].onlyEquality);
 
+        var sourceCode = context.getSourceCode();
+
         /**
          * Determines whether node represents a range test.
          * A range test is a "between" test like `(0 <= x && x < 1)` or an "outside"
@@ -68349,9 +69128,9 @@ module.exports = {
             function isParenWrapped() {
                 var tokenBefore, tokenAfter;
 
-                return ((tokenBefore = context.getTokenBefore(node)) &&
+                return ((tokenBefore = sourceCode.getTokenBefore(node)) &&
                     tokenBefore.value === "(" &&
-                    (tokenAfter = context.getTokenAfter(node)) &&
+                    (tokenAfter = sourceCode.getTokenAfter(node)) &&
                     tokenAfter.value === ")");
             }
 
@@ -68401,7 +69180,7 @@ module.exports = {
     }
 };
 
-},{}],377:[function(require,module,exports){
+},{}],378:[function(require,module,exports){
 (function (process){
 /**
  * @fileoverview Tracks performance of individual rules.
@@ -68549,7 +69328,7 @@ module.exports = (function() {
 }());
 
 }).call(this,require('_process'))
-},{"_process":8}],378:[function(require,module,exports){
+},{"_process":8}],379:[function(require,module,exports){
 /**
  * @fileoverview Object to handle access and retrieval of tokens.
  * @author Brandon Mills
@@ -68754,7 +69533,7 @@ module.exports = function(tokens) {
     return api;
 };
 
-},{}],379:[function(require,module,exports){
+},{}],380:[function(require,module,exports){
 /**
  * @fileoverview The event generator for comments.
  * @author Toru Nagashima
@@ -68871,7 +69650,7 @@ CommentEventGenerator.prototype = {
 
 module.exports = CommentEventGenerator;
 
-},{}],380:[function(require,module,exports){
+},{}],381:[function(require,module,exports){
 /**
  * @fileoverview A shared list of ES3 keywords.
  * @author Josh Perez
@@ -68940,7 +69719,7 @@ module.exports = [
     "with"
 ];
 
-},{}],381:[function(require,module,exports){
+},{}],382:[function(require,module,exports){
 /**
  * @fileoverview The event generator for AST nodes.
  * @author Toru Nagashima
@@ -68995,7 +69774,7 @@ NodeEventGenerator.prototype = {
 
 module.exports = NodeEventGenerator;
 
-},{}],382:[function(require,module,exports){
+},{}],383:[function(require,module,exports){
 /**
  * @fileoverview An object that creates fix commands for rules.
  * @author Nicholas C. Zakas
@@ -69142,7 +69921,7 @@ RuleFixer.prototype = {
 
 module.exports = RuleFixer;
 
-},{}],383:[function(require,module,exports){
+},{}],384:[function(require,module,exports){
 /**
  * @fileoverview Abstraction of JavaScript source code.
  * @author Nicholas C. Zakas
@@ -69448,7 +70227,7 @@ SourceCode.prototype = {
 
 module.exports = SourceCode;
 
-},{"../token-store.js":378,"./traverser":384,"lodash":150}],384:[function(require,module,exports){
+},{"../token-store.js":379,"./traverser":385,"lodash":150}],385:[function(require,module,exports){
 /**
  * @fileoverview Wrapper around estraverse
  * @author Nicholas C. Zakas

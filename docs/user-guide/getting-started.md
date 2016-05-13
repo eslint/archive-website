@@ -1,7 +1,8 @@
 ---
-title: Getting Started
+title: Getting Started with ESLint
 layout: doc
 ---
+<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
 # Getting Started with ESLint
 

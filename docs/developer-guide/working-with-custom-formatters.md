@@ -1,12 +1,12 @@
 ---
-title: Documentation
+title: Working with Custom Formatters
 layout: doc
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
-# Working with custom formatters
+# Working with Custom Formatters
 
-Writing an [eslint](https://github.com/eslint/eslint) custom formatter is simple. All is neeeded is a module that exports a function that will receive the results from the execution of [eslint](https://github.com/eslint/eslint).
+Writing an ESlint custom formatter is simple. All that is needed is a module that exports a function that will receive the results from the execution of ESLint.
 
 The simplest formatter will be something like:
 

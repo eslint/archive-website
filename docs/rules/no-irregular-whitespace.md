@@ -4,7 +4,7 @@ layout: doc
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
-# No irregular whitespace (no-irregular-whitespace)
+# disallow irregular whitespace (no-irregular-whitespace)
 
 Invalid or irregular whitespace causes issues with ECMAScript 5 parsers and also makes code harder to debug in a similar nature to mixed tabs and spaces.
 
@@ -22,7 +22,7 @@ Known issues these spaces cause:
 
 This rule is aimed at catching invalid whitespace that is not a normal tab and space. Some of these characters may cause issues in modern browsers and others will be a debugging issue to spot.
 
-With this rule enabled the following characters will cause warnings outside of strings and comments:
+This rule disallows the following characters except where the options allow:
 
     \u000B - Line Tabulation (\v) - <VT>
     \u000C - Form Feed (\f) - <FF>
@@ -49,70 +49,121 @@ With this rule enabled the following characters will cause warnings outside of s
     \u205f - Medium Mathematical Space
     \u3000 - Ideographic Space
 
-Examples of **incorrect** code for this rule:
+## Options
+
+This rule has an object option for exceptions:
+
+* `"skipStrings": true` (default) allows any whitespace characters in string literals
+* `"skipComments": true` allows any whitespace characters in comments
+* `"skipRegExps": true` allows any whitespace characters in regular expression literals
+* `"skipTemplates": true` allows any whitespace characters in template literals
+
+### skipStrings
+
+Examples of **incorrect** code for this rule with the default `{ "skipStrings": true }` option:
 
 ```js
 /*eslint no-irregular-whitespace: "error"*/
 
 function thing() /*<NBSP>*/{
-  return 'test';
+    return 'test';
 }
 
 function thing( /*<NBSP>*/){
-  return 'test';
+    return 'test';
 }
 
 function thing /*<NBSP>*/(){
-  return 'test';
+    return 'test';
 }
 
 function thing᠎/*<MVS>*/(){
-  return 'test';
+    return 'test';
 }
 
 function thing() {
-  return 'test'; /*<ENSP>*/
+    return 'test'; /*<ENSP>*/
 }
 
 function thing() {
-  return 'test'; /*<NBSP>*/
+    return 'test'; /*<NBSP>*/
+}
+
+function thing() {
+    // Description <NBSP>: some descriptive text
+}
+
+/*
+Description <NBSP>: some descriptive text
+*/
+
+function thing() {
+    return / <NBSP>regexp/;
+}
+
+/*eslint-env es6*/
+function thing() {
+    return `template <NBSP>string`;
 }
 ```
 
-Examples of **correct** code for this rule:
+Examples of **correct** code for this rule with the default `{ "skipStrings": true }` option:
 
 ```js
 /*eslint no-irregular-whitespace: "error"*/
 
 function thing() {
-  return ' <NBSP>thing';
+    return ' <NBSP>thing';
 }
 
 function thing() {
-  return '​<ZWSP>thing';
+    return '​<ZWSP>thing';
 }
 
 function thing() {
-  return 'th <NBSP>ing';
+    return 'th <NBSP>ing';
 }
+```
 
-// Description<NBSP>: some descriptive text
+### skipComments
+
+Examples of additional **correct** code for this rule with the `{ "skipComments": true }` option:
+
+```js
+/*eslint no-irregular-whitespace: ["error", { "skipComments": true }]*/
+
+function thing() {
+    // Description <NBSP>: some descriptive text
+}
 
 /*
-Description<NBSP>: some descriptive text
+Description <NBSP>: some descriptive text
 */
 ```
 
-## Options
+### skipRegExps
 
-The `no-irregular-whitespace` rule has no required option and has one optional one that needs to be passed in a single options object:
+Examples of additional **correct** code for this rule with the `{ "skipRegExps": true }` option:
 
-* **skipComments** *(default: `false`)*: whether to ignore irregular whitespace within comments (`true`) or whether to check for them in there, too (`false`).
+```js
+/*eslint no-irregular-whitespace: ["error", { "skipRegExps": true }]*/
 
-For example, to specify that you want to skip checking for irregular whitespace within comments, use the following configuration:
+function thing() {
+    return / <NBSP>regexp/;
+}
+```
 
-```json
-"no-irregular-whitespace": ["error", { "skipComments": true }]
+### skipTemplates
+
+Examples of additional **correct** code for this rule with the `{ "skipTemplates": true }` option:
+
+```js
+/*eslint no-irregular-whitespace: ["error", { "skipTemplates": true }]*/
+/*eslint-env es6*/
+
+function thing() {
+    return `template <NBSP>string`;
+}
 ```
 
 ## When Not To Use It

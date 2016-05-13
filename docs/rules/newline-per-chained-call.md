@@ -4,22 +4,22 @@ layout: doc
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
-# Newline Per Chained Method Call (newline-per-chained-call)
+# require a newline after each call in a method chain (newline-per-chained-call)
 
-Chained method calls on a single line without line breaks are harder to read. This rule enforces new line after each method call in the chain to make it more readable and easy to maintain.
+Chained method calls on a single line without line breaks are harder to read, so some developers place a newline character after each method call in the chain to make it more readable and easy to maintain.
 
 Let's look at the following perfectly valid (but single line) code.
 
 ```js
-d3.select('body').selectAll('p').data([4, 8, 15, 16, 23, 42 ]).enter().append('p').text(function(d) { return "I'm number " + d + "!"; });
+d3.select("body").selectAll("p").data([4, 8, 15, 16, 23, 42 ]).enter().append("p").text(function(d) { return "I'm number " + d + "!"; });
 ```
 
 However, with appropriate new lines, it becomes easy to read and understand. Look at the same code written below with line breaks after each call.
 
 ```js
 d3
-    .select('body')
-    .selectAll('p')
+    .select("body")
+    .selectAll("p")
     .data([
         4,
         8,
@@ -29,28 +29,47 @@ d3
         42
     ])
     .enter()
-    .append('p')
+    .append("p")
     .text(function (d) {
         return "I'm number " + d + "!";
     });
 ```
 
-This rule reports such code and encourages new lines after each call in the chain as a good practice.
+Another argument in favor of this style is that it improves the clarity of diffs when something in the method chain is changed:
+
+Less clear:
+
+```diff
+-d3.select("body").selectAll("p").style("color", "white");
++d3.select("body").selectAll("p").style("color", "blue");
+```
+
+More clear:
+
+```diff
+d3
+    .select("body")
+    .selectAll("p")
+-    .style("color", "white");
++    .style("color", "blue");
+```
 
 ## Rule Details
 
-This rule checks and reports the chained calls if there are no new lines after each call or deep member access. Computed property accesses such as `instance[something]` are excluded.
+This rule requires a newline after each call in a method chain or deep member access. Computed property accesses such as `instance[something]` are excluded.
 
 ## Options
 
-The rule takes a single option `ignoreChainWithDepth`. The level/depth to be allowed is configurable through `ignoreChainWithDepth` option. This rule, in its default state, allows 2 levels.
+This rule has an object option:
 
-* `ignoreChainWithDepth` Number of depths to be allowed (Default: `2`).
+* `"ignoreChainWithDepth"` (default: `2`) allows chains up to a specified depth.
 
-Following patterns are considered problems with default configuration:
+### ignoreChainWithDepth
+
+Examples of **incorrect** code for this rule with the default `{ "ignoreChainWithDepth": 2 }` option:
 
 ```js
-/*eslint newline-per-chained-call: "error"*/
+/*eslint newline-per-chained-call: ["error", { "ignoreChainWithDepth": 2 }]*/
 
 _.chain({}).map(foo).filter(bar).value();
 
@@ -66,10 +85,10 @@ _
 obj.method().method2().method3();
 ```
 
-Following patterns are not considered problems with default configuration:
+Examples of **correct** code for this rule with the default `{ "ignoreChainWithDepth": 2 }` option:
 
 ```js
-/*eslint newline-per-chained-call: "error"*/
+/*eslint newline-per-chained-call: ["error", { "ignoreChainWithDepth": 2 }]*/
 
 _
   .chain({})
@@ -98,42 +117,6 @@ obj
   .prop.method()
   .method2()
   .method3().prop;
-```
-
-Change the option `ignoreChainWithDepth` value to allow single line chains of that depth.
-
-For example, when configuration is like this:
-
-```js
-{
-    "newline-per-chained-call": ["error", {"ignoreChainWithDepth": 3}]
-}
-```
-
-Following patterns are not considered problems:
-
-```js
-_.chain({}).map(foo);
-
-// Or
-obj.prop.method();
-
-```
-
-Following patterns are considered problems:
-
-```js
-_.chain({}).map(foo).filter(bar);
-
-// Or
-obj.prop.method().method2().method3();
-
-// Or
-obj
-  .prop
-  .method()
-  .method2().method3();
-
 ```
 
 ## When Not To Use It

@@ -2,6 +2,7 @@
 title: Code Conventions
 layout: doc
 ---
+<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
 # Code Conventions
 
@@ -15,8 +16,6 @@ Each file has this same basic format:
 /**
  * @fileoverview Description of the file
  * @author Your Name
- * @copyright 2016 Your Name. All rights reserved.
- * See LICENSE file in root directory for full license.
  */
 
 "use strict";

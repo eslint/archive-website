@@ -1,5 +1,5 @@
 ---
-title: Documentation
+title: Command Line Interface
 layout: doc
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
@@ -246,6 +246,15 @@ Disables excluding of files from `.eslintignore` and `--ignore-path` files.
 Example:
 
     eslint --no-ignore file.js
+
+#### `--ignore-pattern`
+
+This option allows you to specify patterns of files to ignore (in addition to those in `.eslintignore`). You can repeat the option to provide multiple patterns. The supported syntax is the same as in the `.eslintignore` file.
+
+Example:
+
+    eslint --ignore-pattern '/lib/' --ignore-pattern '/src/vendor/*' .
+
 
 ### Using stdin
 

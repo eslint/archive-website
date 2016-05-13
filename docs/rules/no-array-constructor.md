@@ -4,7 +4,7 @@ layout: doc
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
-# Disallow creation of dense arrays using the `Array` constructor (no-array-constructor)
+# disallow `Array` constructors (no-array-constructor)
 
 Use of the `Array` constructor to construct a new array is generally
 discouraged in favour of array literal notation because of the single-argument
@@ -14,7 +14,9 @@ specified size by giving the constructor a single numeric argument.
 
 ## Rule Details
 
-The following patterns are considered problems:
+This rule disallows `Array` constructors.
+
+Examples of **incorrect** code for this rule:
 
 ```js
 /*eslint no-array-constructor: "error"*/
@@ -28,7 +30,7 @@ Array(0, 1, 2)
 new Array(0, 1, 2)
 ```
 
-The following patterns are not considered problems:
+Examples of **correct** code for this rule:
 
 ```js
 /*eslint no-array-constructor: "error"*/

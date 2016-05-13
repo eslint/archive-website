@@ -207,6 +207,7 @@ These rules relate to style guidelines, and are therefore quite subjective:
 * [no-unneeded-ternary](no-unneeded-ternary): disallow ternary operators when simpler alternatives exist
 * [no-whitespace-before-property](no-whitespace-before-property): disallow whitespace before properties (fixable)
 * [object-curly-spacing](object-curly-spacing): enforce consistent spacing inside braces (fixable)
+* [object-property-newline](object-property-newline): enforce placing object properties on separate lines
 * [one-var](one-var): enforce variables to be declared either together or separately in functions
 * [one-var-declaration-per-line](one-var-declaration-per-line): require or disallow newlines around `var` declarations
 * [operator-assignment](operator-assignment): require or disallow assignment operator shorthand where possible
@@ -262,21 +263,23 @@ These rules relate to ES6, also known as ES2015:
 
 These rules from older versions of ESLint have been replaced by newer rules:
 
-* [generator-star](generator-star): enforce consistent positioning of the `*` in generator functions (replaced by [generator-star-spacing](generator-star-spacing))
-* [global-strict](global-strict): require or disallow `"use strict"` in the global scope (replaced by [strict](strict))
-* [no-arrow-condition](no-arrow-condition): disallow arrow functions where conditions are expected (replaced by [no-confusing-arrow](no-confusing-arrow) and [no-constant-condition](no-constant-condition))
-* [no-comma-dangle](no-comma-dangle): disallow trailing commas in object literals (replaced by [comma-dangle](comma-dangle))
-* [no-empty-class](no-empty-class): disallow empty character classes in regular expressions (replaced by [no-empty-character-class](no-empty-character-class))
-* [no-empty-label](no-empty-label): disallow labels for anything other than loops and switches (replaced by [no-labels](no-labels))
-* [no-extra-strict](no-extra-strict): disallow `"use strict";` when already in strict mode (replaced by [strict](strict))
-* [no-reserved-keys](no-reserved-keys): disallow the use of reserved words as object literal keys (replaced by [quote-props](quote-props))
-* [no-space-before-semi](no-space-before-semi): disallow spacing before semicolons (replaced by [semi-spacing](semi-spacing))
-* [no-wrap-func](no-wrap-func): disallow parentheses around non-IIFE statements (replaced by [no-extra-parens](no-extra-parens))
-* [space-after-function-name](space-after-function-name): enforce consistent spacing after `function` names (replaced by [space-before-function-paren](space-before-function-paren))
-* [space-after-keywords](space-after-keywords): enforce consistent spacing after specified keywords (fixable) (replaced by [keyword-spacing](keyword-spacing))
-* [space-before-function-parentheses](space-before-function-parentheses): enforce consistent spacing before `function` parentheses (replaced by [space-before-function-paren](space-before-function-paren))
-* [space-before-keywords](space-before-keywords): enforce consistent spacing before specified keywords (fixable) (replaced by [keyword-spacing](keyword-spacing))
-* [space-in-brackets](space-in-brackets): enforce consistent spacing inside brackets (replaced by [object-curly-spacing](object-curly-spacing) and [array-bracket-spacing](array-bracket-spacing))
-* [space-return-throw-case](space-return-throw-case): require spacing after `return`, `throw`, and `case` (fixable) (replaced by [keyword-spacing](keyword-spacing))
-* [space-unary-word-ops](space-unary-word-ops): enforce consistent spacing before and after unary operators (replaced by [space-unary-ops](space-unary-ops))
-* [spaced-line-comment](spaced-line-comment): enforce consistent spacing after the `//` in line comments (replaced by [spaced-comment](spaced-comment))
+|Removed rule|Replaced by
+|---|---
+|[generator-star](generator-star)|[generator-star-spacing](generator-star-spacing)
+|[global-strict](global-strict)|[strict](strict)
+|[no-arrow-condition](no-arrow-condition)|[no-confusing-arrow](no-confusing-arrow) and [no-constant-condition](no-constant-condition)
+|[no-comma-dangle](no-comma-dangle)|[comma-dangle](comma-dangle)
+|[no-empty-class](no-empty-class)|[no-empty-character-class](no-empty-character-class)
+|[no-empty-label](no-empty-label)|[no-labels](no-labels)
+|[no-extra-strict](no-extra-strict)|[strict](strict)
+|[no-reserved-keys](no-reserved-keys)|[quote-props](quote-props)
+|[no-space-before-semi](no-space-before-semi)|[semi-spacing](semi-spacing)
+|[no-wrap-func](no-wrap-func)|[no-extra-parens](no-extra-parens)
+|[space-after-function-name](space-after-function-name)|[space-before-function-paren](space-before-function-paren)
+|[space-after-keywords](space-after-keywords)|[keyword-spacing](keyword-spacing)
+|[space-before-function-parentheses](space-before-function-parentheses)|[space-before-function-paren](space-before-function-paren)
+|[space-before-keywords](space-before-keywords)|[keyword-spacing](keyword-spacing)
+|[space-in-brackets](space-in-brackets)|[object-curly-spacing](object-curly-spacing) and [array-bracket-spacing](array-bracket-spacing)
+|[space-return-throw-case](space-return-throw-case)|[keyword-spacing](keyword-spacing)
+|[space-unary-word-ops](space-unary-word-ops)|[space-unary-ops](space-unary-ops)
+|[spaced-line-comment](spaced-line-comment)|[spaced-comment](spaced-comment)
