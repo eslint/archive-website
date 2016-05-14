@@ -49170,6 +49170,10 @@ module.exports = {
             for (var i = 0, l = nodes.length; i < l; ++i) {
                 var currentStatement = nodes[i];
 
+                if (currentStatement.type === "EmptyStatement") {
+                    continue;
+                }
+
                 if (currentStatement.loc.start.line === lastStatementLine) {
                     ++numberOfStatementsOnThisLine;
                 } else {
@@ -53336,7 +53340,7 @@ module.exports = {
             }
 
             if (node.type === "ReturnStatement") {
-                return containsAssignment(node.argument);
+                return node.argument && containsAssignment(node.argument);
             } else if (node.type === "ArrowFunctionExpression" && node.body.type !== "BlockStatement") {
                 return containsAssignment(node.body);
             } else {
@@ -58262,7 +58266,7 @@ function isEnclosedInParens(node, sourceCode) {
     var prevToken = sourceCode.getTokenBefore(node);
     var nextToken = sourceCode.getTokenAfter(node);
 
-    return prevToken.value === "(" && nextToken.value === ")";
+    return prevToken && prevToken.value === "(" && nextToken && nextToken.value === ")";
 }
 
 //------------------------------------------------------------------------------
@@ -68442,14 +68446,14 @@ module.exports = {
 
                 if (node.params) {
                     node.params.forEach(function(param, i) {
-                        var name = param.name;
-
                         if (param.type === "AssignmentPattern") {
-                            name = param.left.name;
+                            param = param.left;
                         }
 
+                        var name = param.name;
+
                         // TODO(nzakas): Figure out logical things to do with destructured, default, rest params
-                        if (param.type === "Identifier" || param.type === "AssignmentPattern") {
+                        if (param.type === "Identifier") {
                             if (jsdocParams[i] && (name !== jsdocParams[i])) {
                                 context.report(jsdocNode, "Expected JSDoc for '{{name}}' but found '{{jsdocName}}'.", {
                                     name: name,
