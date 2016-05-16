@@ -4,7 +4,7 @@ layout: doc
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
-# Disallow Spaces in Regular Expressions (no-regex-spaces)
+# disallow multiple spaces in regular expression literals (no-regex-spaces)
 
 Regular expressions can be very complex and difficult to understand, which is why it's important to keep them as simple as possible in order to avoid mistakes. One of the more error-prone things you can do with a regular expression is to use more than one space, such as:
 
@@ -22,7 +22,7 @@ Now it is very clear that three spaces are expected to be matched.
 
 ## Rule Details
 
-This rule aims to eliminate errors due to multiple spaces inside of a regular expression. As such, it warns whenever more than one space in a row is found inside of a regular expression literal.
+This rule disallows multiple spaces in regular expression literals.
 
 Examples of **incorrect** code for this rule:
 
@@ -38,6 +38,16 @@ Examples of **correct** code for this rule:
 /*eslint no-regex-spaces: "error"*/
 
 var re = /foo {3}bar/;
+```
+
+## Known Limitations
+
+This rule does not report multiple spaces in the string argument of calls to the `RegExp` constructor.
+
+Example of a *false negative* when this rule reports correct code:
+
+```js
+/*eslint no-regex-spaces: "error"*/
 
 var re = new RegExp("foo   bar");
 ```
