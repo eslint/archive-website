@@ -37,6 +37,7 @@ These rules relate to possible syntax or logic errors in JavaScript code:
 * [no-irregular-whitespace](no-irregular-whitespace): disallow irregular whitespace outside of strings and comments (recommended)
 * [no-negated-in-lhs](no-negated-in-lhs): disallow negating the left operand in `in` expressions (recommended)
 * [no-obj-calls](no-obj-calls): disallow calling global object properties as functions (recommended)
+* [no-prototype-builtins](no-prototype-builtins): Disallow use of `Object.prototypes` builtins directly
 * [no-regex-spaces](no-regex-spaces): disallow multiple spaces in regular expression literals (recommended)
 * [no-sparse-arrays](no-sparse-arrays): disallow sparse arrays (recommended)
 * [no-unexpected-multiline](no-unexpected-multiline): disallow confusing multiline expressions (recommended)
@@ -225,6 +226,7 @@ These rules relate to style guidelines, and are therefore quite subjective:
 * [space-infix-ops](space-infix-ops): require spacing around operators (fixable)
 * [space-unary-ops](space-unary-ops): enforce consistent spacing before or after unary operators (fixable)
 * [spaced-comment](spaced-comment): enforce consistent spacing after the `//` or `/*` in a comment (fixable)
+* [unicode-bom](unicode-bom): require or disallow the Unicode BOM (fixable)
 * [wrap-regex](wrap-regex): require parenthesis around regex literals
 
 ## ECMAScript 6
@@ -246,6 +248,7 @@ These rules relate to ES6, also known as ES2015:
 * [no-this-before-super](no-this-before-super): disallow `this`/`super` before calling `super()` in constructors (recommended)
 * [no-useless-computed-key](no-useless-computed-key): disallow unnecessary computed property keys in object literals
 * [no-useless-constructor](no-useless-constructor): disallow unnecessary constructors
+* [no-useless-rename](no-useless-rename): disallow renaming import, export, and destructured assignments to the same name
 * [no-var](no-var): require `let` or `const` instead of `var`
 * [object-shorthand](object-shorthand): require or disallow method and property shorthand syntax for object literals
 * [prefer-arrow-callback](prefer-arrow-callback): require arrow functions as callbacks

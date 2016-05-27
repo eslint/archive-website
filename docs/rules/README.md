@@ -31,6 +31,7 @@ These rules relate to possible syntax or logic errors in JavaScript code:
 * [no-irregular-whitespace](no-irregular-whitespace.md): disallow irregular whitespace outside of strings and comments (recommended)
 * [no-negated-in-lhs](no-negated-in-lhs.md): disallow negating the left operand in `in` expressions (recommended)
 * [no-obj-calls](no-obj-calls.md): disallow calling global object properties as functions (recommended)
+* [no-prototype-builtins](no-prototype-builtins.md): Disallow use of `Object.prototypes` builtins directly
 * [no-regex-spaces](no-regex-spaces.md): disallow multiple spaces in regular expression literals (recommended)
 * [no-sparse-arrays](no-sparse-arrays.md): disallow sparse arrays (recommended)
 * [no-unexpected-multiline](no-unexpected-multiline.md): disallow confusing multiline expressions (recommended)
@@ -219,6 +220,7 @@ These rules relate to style guidelines, and are therefore quite subjective:
 * [space-infix-ops](space-infix-ops.md): require spacing around operators (fixable)
 * [space-unary-ops](space-unary-ops.md): enforce consistent spacing before or after unary operators (fixable)
 * [spaced-comment](spaced-comment.md): enforce consistent spacing after the `//` or `/*` in a comment (fixable)
+* [unicode-bom](unicode-bom.md): require or disallow the Unicode BOM (fixable)
 * [wrap-regex](wrap-regex.md): require parenthesis around regex literals
 
 ## ECMAScript 6
@@ -240,6 +242,7 @@ These rules relate to ES6, also known as ES2015:
 * [no-this-before-super](no-this-before-super.md): disallow `this`/`super` before calling `super()` in constructors (recommended)
 * [no-useless-computed-key](no-useless-computed-key.md): disallow unnecessary computed property keys in object literals
 * [no-useless-constructor](no-useless-constructor.md): disallow unnecessary constructors
+* [no-useless-rename](no-useless-rename.md): disallow renaming import, export, and destructured assignments to the same name
 * [no-var](no-var.md): require `let` or `const` instead of `var`
 * [object-shorthand](object-shorthand.md): require or disallow method and property shorthand syntax for object literals
 * [prefer-arrow-callback](prefer-arrow-callback.md): require arrow functions as callbacks
