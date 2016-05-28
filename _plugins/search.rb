@@ -80,6 +80,34 @@ class EslintCustomSearchHelper
     %w(h1 h2 h3 h4 h5 h6).include?(tag_name)
   end
 
+  def self.extract_rule_name_and_description(rule)
+    # Excluding main page
+    return {} if rule == 'Rules'
+
+    # Page titles can have one of this two patterns
+    # 1. rule-name: description
+    matches = rule.match(/^(.*): (.*)$/)
+    if matches
+      return {
+        name: matches[1],
+        description: matches[2]
+      }
+    end
+
+    # 2. description (rule-name)
+    matches = rule.match(/^(.*) \((.*)\)$/)
+    if matches
+      return {
+        name: matches[2],
+        description: matches[1]
+      }
+    end
+
+    {
+      name: rule
+    }
+  end
+
   # Returns information about the item place in the page hierarchy
   # - main category (eg. Rule, Blog, etc)
   # - subcategory (eg. accessor-pairs, ESLint v1.7.0 released)
@@ -96,13 +124,16 @@ class EslintCustomSearchHelper
     # Split the main name in rule name and description
     if rule?(item)
       full_title = hierarchy.shift
-      # Excluding main page
-      if full_title != 'Rules'
-        split = full_title.match(/(.*) \((.*)\)$/).captures
-        rule_name = split[1]
-        rule_description = split[0]
-        hierarchy = ['Rules', rule_name, rule_description] + hierarchy
+      rule_data = extract_rule_name_and_description(full_title)
+      # Adding name and description if found
+      hierarchy_prefix = []
+      if rule_data[:name]
+        hierarchy_prefix << 'Rules'
+        hierarchy_prefix << rule_data[:name]
       end
+      hierarchy_prefix << rule_data[:description] if rule_data[:description]
+
+      hierarchy = hierarchy_prefix + hierarchy
     end
 
     # Find the first three levels of display
