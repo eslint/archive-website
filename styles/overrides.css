@@ -190,27 +190,30 @@ p.correct:before {
   content: "\e125"; /* thumbs-up */
 }
 
-ol,
-ul {
+main ol,
+main ul {
   padding-left: 1.5em; /* same as indent for inline glyphicon at narrow width */
 }
 
-li ul {
+main li ul {
   list-style: disc;
 }
 
-li p ~ ul {
+main li p ~ ul {
   margin-bottom: 12px; /* same as p, ol, ul */
 }
 
 .container {
-  position: relative; /* for toc */
-  overflow: hidden; /* for toc */
   width: auto; /* override media queries */
   margin-left: 0; /* not centered */
   margin-right: 0; /* not centered */
   padding-left: 2em; /* padding-right plus negative left position of glyphicon in margin */
   padding-right: 0.5em;
+}
+
+main .container {
+  position: relative; /* for toc */
+  overflow: hidden; /* for toc */
 }
 
 #markdown-toc {
