@@ -1,0 +1,20 @@
+{% include header.html %}
+{% include menu.html %}
+<main class="rule doc">
+  <article class="container">
+    {{ content
+      | replace: '<p>Examples of <strong>incorrect</strong> code', '<p class="incorrect icon">Examples of <strong>incorrect</strong> code'
+      | replace: '<p>Example of <strong>incorrect</strong> code', '<p class="incorrect icon">Example of <strong>incorrect</strong> code'
+      | replace: '<p>Examples of additional <strong>incorrect</strong> code', '<p class="incorrect icon">Examples of additional <strong>incorrect</strong> code'
+      | replace: '<p>Example of additional <strong>incorrect</strong> code', '<p class="incorrect icon">Example of additional <strong>incorrect</strong> code'
+      | replace: '<p>Examples of <strong>correct</strong> code', '<p class="correct icon">Examples of <strong>correct</strong> code'
+      | replace: '<p>Example of <strong>correct</strong> code', '<p class="correct icon">Example of <strong>correct</strong> code'
+      | replace: '<p>Examples of additional <strong>correct</strong> code', '<p class="correct icon">Examples of additional <strong>correct</strong> code'
+      | replace: '<p>Example of additional <strong>correct</strong> code', '<p class="correct icon">Example of additional <strong>correct</strong> code'
+      | replace: '<p>(removed) ', '<p class="removed icon">'
+      | replace: '<p>(recommended) ', '<p class="recommended icon">'
+      | replace: '<p>(fixable) ', '<p class="fixable icon">'
+    }}
+  </article>
+</main>
+{% include footer.html %}
