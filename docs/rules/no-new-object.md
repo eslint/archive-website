@@ -4,7 +4,7 @@ layout: doc
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
-# Disallow the use of the Object constructor (no-new-object)
+# disallow `Object` constructors (no-new-object)
 
 The `Object` constructor is used to create new generic objects in JavaScript, such as:
 
@@ -24,9 +24,9 @@ While there are no performance differences between the two approaches, the byte 
 
 ## Rule Details
 
-This rule aims to eliminate use of the `Object` constructor. As such, it warns whenever `new Object` is found in code.
+This rule disallows `Object` constructors.
 
-The following patterns are considered problems:
+Examples of **incorrect** code for this rule:
 
 ```js
 /*eslint no-new-object: "error"*/
@@ -36,7 +36,7 @@ var myObject = new Object();
 var myObject = new Object;
 ```
 
-The following patterns are not considered problems:
+Examples of **correct** code for this rule:
 
 ```js
 /*eslint no-new-object: "error"*/

@@ -218,7 +218,7 @@ const a = 1,
 ## Compatibility
 
 * **JSHint**: `indent`
-* **JSCS**: `validateIndentation`
+* **JSCS**: [validateIndentation](http://jscs.info/rule/validateIndentation)
 
 ## Version
 

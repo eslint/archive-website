@@ -4,37 +4,18 @@ layout: doc
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
-# Disallow use of negated expressions in conditions (no-negated-condition)
+# disallow negated conditions (no-negated-condition)
 
-Checks against the use of a negated expression in an if condition when the else branch is not empty or in a ternary operator. Negated conditions are more difficult to understand. Code can be made more readable by inverting the condition instead.
-
-For example:
-
-```js
-if (!a) {
-    doSomething();
-}
-else {
-    doSomethingElse();
-}
-```
-
-should instead be written as:
-
-```js
-if (a) {
-    doSomethingElse();
-}
-else {
-    doSomething();
-}
-```
+Negated conditions are more difficult to understand. Code can be made more readable by inverting the condition instead.
 
 ## Rule Details
 
-The rule is aimed at preventing the use of a negated expression in a condition.
+This rule disallows negated conditions in either of the following:
 
-The following patterns are considered warnings:
+* `if` statements which have an `else` branch
+* ternary expressions
+
+Examples of **incorrect** code for this rule:
 
 ```js
 /*eslint no-negated-condition: "error"*/
@@ -57,13 +38,10 @@ if (a !== b) {
     doSomethingElse();
 }
 
-
-!a ? b : c
-
+!a ? c : b
 ```
 
-The following patterns are not warnings:
-
+Examples of **correct** code for this rule:
 
 ```js
 /*eslint no-negated-condition: "error"*/
@@ -83,7 +61,6 @@ if (a != b) {
 }
 
 a ? b : c
-
 ```
 
 ## Version

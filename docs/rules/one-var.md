@@ -209,6 +209,8 @@ function foo() {
 
 When configured with an object as the first option, you can individually control how `var`, `let`, and `const` are handled, or alternatively how `uninitialized` and `initialized` variables are handled (which if used will override `var`, `let`, and `const`).
 
+**Note:** A variable declared in a for-in or for-of loop will not be flagged with the option `{ uninitialized: "always" }`, as this value is determined by the loop.
+
 The following patterns are not considered problems:
 
 ```js
@@ -240,6 +242,16 @@ function foo() {
     var foo = true;
     var bar = false;
 }
+
+let x, y;
+for (let z of foo) {
+    doSomething(z);
+}
+
+let x, y, z;
+for (z of foo) {
+    doSomething(z);
+}
 ```
 
 If you are configuring the rule with an object, by default, if you didn't specify declaration type it will not be checked. So the following pattern is not considered a warning when options are set to: `{ var: "always", let: "always" }`
@@ -259,8 +271,8 @@ function foo() {
 
 ## Compatibility
 
-* **JSHint** - This rule maps to the `onevar` JSHint rule, but allows `let` and `const` to be configured separately.
-* **JSCS** - This rule roughly maps to `"disallowMultipleVarDecl"`
+* **JSHint**: This rule maps to the `onevar` JSHint rule, but allows `let` and `const` to be configured separately.
+* **JSCS**: This rule roughly maps to [disallowMultipleVarDecl](http://jscs.info/rule/disallowMultipleVarDecl)
 
 ## Further Reading
 

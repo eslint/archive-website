@@ -56,7 +56,7 @@ Specifying rules and plugins:
 
 Ignoring files:
   --ignore-path path::String  Specify path of ignore file
-  --no-ignore                Disable use of .eslintignore
+  --no-ignore                Disable use of ignore files and patterns
   --ignore-pattern [String]  Patterns of files to ignore (in addition to those
                              in .eslintignore)
 
@@ -241,7 +241,7 @@ Example:
 
 #### `--no-ignore`
 
-Disables excluding of files from `.eslintignore` and `--ignore-path` files.
+Disables excluding of files from `.eslintignore`, `--ignore-path` and `--ignore-pattern`.
 
 Example:
 

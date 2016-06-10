@@ -98,13 +98,15 @@ configs: {
     myConfig: {
         env: ["browser"],
         rules: {
-            semi: 2
+            semi: 2,
+            "myPlugin/my-rule": 2,
+            "eslint-plugin-myPlugin/another-rule": 2
         }
     }
 }
 ```
 
-**Note:** Please note that configuration will not automatically attach your rules and you have to specify your plugin name and any rules you want to enable that are part of the plugin. See [Configuring Plugins](../user-guide/configuring#configuring-plugins)
+**Note:** Please note that configuration will not automatically attach your rules and you have to specify your plugin name and any rules you want to enable that are part of the plugin. Any plugin rules must be prefixed with the short or long plugin name. See [Configuring Plugins](../user-guide/configuring#configuring-plugins)
 
 ### Peer Dependency
 
@@ -145,6 +147,31 @@ ruleTester.run("custom-plugin-rule", rule, {
     ]
 });
 ```
+
+#### Customizing RuleTester
+
+To create tests for each valid and invalid case, `RuleTester` internally uses `describe` and `it` methods from the Mocha test framework when it is available. If you use another test framework, you can override `RuleTester.describe` and `RuleTester.it` to make `RuleTester` compatible with it and have proper individual tests and feedback.
+
+Example:
+
+```js
+"use strict";
+
+var RuleTester = require("eslint").RuleTester;
+var test = require("my-test-runner");
+
+RuleTester.describe = function(text, method) {
+    RuleTester.it.title = text;
+    return method.apply(this);
+};
+
+RuleTester.it = function(text, method) {
+    test(RuleTester.it.title + ": " + text, method);
+};
+
+// then use RuleTester as documented
+```
+
 
 ## Share Plugins
 

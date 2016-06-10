@@ -174,6 +174,7 @@ These rules relate to style guidelines, and are therefore quite subjective:
 * [lines-around-comment](lines-around-comment.md): require empty lines around comments
 * [max-depth](max-depth.md): enforce a maximum depth that blocks can be nested
 * [max-len](max-len.md): enforce a maximum line length
+* [max-lines](max-lines.md): enforce a maximum file length
 * [max-nested-callbacks](max-nested-callbacks.md): enforce a maximum depth that callbacks can be nested
 * [max-params](max-params.md): enforce a maximum number of parameters in `function` definitions
 * [max-statements](max-statements.md): enforce a maximum number of statements allowed in `function` blocks
@@ -188,6 +189,7 @@ These rules relate to style guidelines, and are therefore quite subjective:
 * [no-continue](no-continue.md): disallow `continue` statements
 * [no-inline-comments](no-inline-comments.md): disallow inline comments after code
 * [no-lonely-if](no-lonely-if.md): disallow `if` statements as the only statement in `else` blocks
+* [no-mixed-operators](no-mixed-operators.md): disallow mixes of different operators
 * [no-mixed-spaces-and-tabs](no-mixed-spaces-and-tabs.md): disallow mixed spaces and tabs for indentation (recommended)
 * [no-multiple-empty-lines](no-multiple-empty-lines.md): disallow multiple empty lines
 * [no-negated-condition](no-negated-condition.md): disallow negated conditions
@@ -201,6 +203,7 @@ These rules relate to style guidelines, and are therefore quite subjective:
 * [no-underscore-dangle](no-underscore-dangle.md): disallow dangling underscores in identifiers
 * [no-unneeded-ternary](no-unneeded-ternary.md): disallow ternary operators when simpler alternatives exist
 * [no-whitespace-before-property](no-whitespace-before-property.md): disallow whitespace before properties (fixable)
+* [object-curly-newline](object-curly-newline.md): enforce consistent line breaks inside braces (fixable)
 * [object-curly-spacing](object-curly-spacing.md): enforce consistent spacing inside braces (fixable)
 * [object-property-newline](object-property-newline.md): enforce placing object properties on separate lines
 * [one-var](one-var.md): enforce variables to be declared either together or separately in functions
@@ -242,7 +245,7 @@ These rules relate to ES6, also known as ES2015:
 * [no-this-before-super](no-this-before-super.md): disallow `this`/`super` before calling `super()` in constructors (recommended)
 * [no-useless-computed-key](no-useless-computed-key.md): disallow unnecessary computed property keys in object literals
 * [no-useless-constructor](no-useless-constructor.md): disallow unnecessary constructors
-* [no-useless-rename](no-useless-rename.md): disallow renaming import, export, and destructured assignments to the same name
+* [no-useless-rename](no-useless-rename.md): disallow renaming import, export, and destructured assignments to the same name (fixable)
 * [no-var](no-var.md): require `let` or `const` instead of `var`
 * [object-shorthand](object-shorthand.md): require or disallow method and property shorthand syntax for object literals
 * [prefer-arrow-callback](prefer-arrow-callback.md): require arrow functions as callbacks
@@ -252,6 +255,7 @@ These rules relate to ES6, also known as ES2015:
 * [prefer-spread](prefer-spread.md): require spread operators instead of `.apply()`
 * [prefer-template](prefer-template.md): require template literals instead of string concatenation
 * [require-yield](require-yield.md): require generator functions to contain `yield`
+* [rest-spread-spacing](rest-spread-spacing.md): enforce spacing between rest and spread operators and their expressions (fixable)
 * [sort-imports](sort-imports.md): enforce sorted import declarations within modules
 * [template-curly-spacing](template-curly-spacing.md): require or disallow spacing around embedded expressions of template strings (fixable)
 * [yield-star-spacing](yield-star-spacing.md): require or disallow spacing around the `*` in `yield*` expressions (fixable)
