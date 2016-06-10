@@ -207,7 +207,7 @@ main li p ~ ul {
   width: auto; /* override media queries */
   margin-left: 0; /* not centered */
   margin-right: 0; /* not centered */
-  padding-left: 2em; /* padding-right plus negative left position of glyphicon in margin */
+  padding-left: 3em;
   padding-right: 0.5em;
 }
 
@@ -230,14 +230,14 @@ main .container {
   margin-bottom: 0;
 }
 
-h2 a, h3 a, h4 a, /* anchor link icons */
-#markdown-toc a {
-  color: inherit; /* same as text */
-}
-
 a:active, a:focus, a:hover, /* needed only to override main.css */
 a {
   color: #4B32C3; /* hsl(250,59%,48%) is same blue as outer hexagon in ESLint logo */
+}
+
+#markdown-toc a,
+a.anchorjs-link { /* anchor link icons */
+  color: inherit; /* same as text */
 }
 
 pre {
@@ -262,13 +262,31 @@ code {
   white-space: normal;
 }
 
-h1 code, h2 code, h3 code, h4 code, /* in heading: same dark gray as text */
-a code { /* in link: blue */
-  color: inherit
+a code, /* in link: blue */
+h1 code, h2 code, h3 code, h4 code { /* in heading: same dark gray as text */
+  color: inherit;
 }
 
-main h2, main h3, main h4, main p, main ol, main ul, main table, main div.highlighter-rouge {
-  max-width: 43em; /* about 3 alphabets and just enough for 80 characters in pre */
+h1 code, h2 code, h3 code, h4 code {
+  background-color: #f4f4f4; /* hsl(0,0%,96%) in heading: same lighter gray as pre */
+}
+
+main h1, main h2, main h3, main h4, main p, main ol, main ul, main table, main div.highlighter-rouge {
+  max-width: 731px; /* 43em is about 3 alphabets and just enough for 80 characters in pre */
+}
+
+/* breakpoint is based on content and rounded up to device size */
+/* 1020px = 17 px/em * (2 padding + 43 content + 6 gutter + 9 toc) em */
+@media (max-width: 1023px) { /* less than 1024px */
+
+  .container {
+    padding-left: 2em; /* padding-right plus negative left position of glyphicon in margin */
+  }
+
+  #markdown-toc {
+    display: none;
+  }
+
 }
 
 /* breakpoint is based on content and rounded up to device size */
@@ -282,16 +300,6 @@ main h2, main h3, main h4, main p, main ol, main ul, main table, main div.highli
   p.icon:before {
     position: static;
     margin-right: 0.5em; /* margin plus glyphicon width is same as padding-left of ul */
-  }
-
-}
-
-/* breakpoint is based on content and rounded up to device size */
-/* 1020px = 17 px/em * (2 padding + 43 content + 6 gutter + 9 toc) em */
-@media (max-width: 1023px) { /* less than 1024px */
-
-  #markdown-toc {
-    display: none;
   }
 
 }
