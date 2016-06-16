@@ -129,3 +129,7 @@
 - url: https://read.douban.com
   src: /img/logos/ark.svg
   name: Ark Reading
+
+- url: http://phoenixrobotix.com
+  src: /img/logos/phoenixrobotix.png
+  name: Phoenix Robotix
