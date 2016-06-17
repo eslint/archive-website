@@ -167,14 +167,14 @@ These rules relate to style guidelines, and are therefore quite subjective:
 * [computed-property-spacing](computed-property-spacing): enforce consistent spacing inside computed property brackets (fixable)
 * [consistent-this](consistent-this): enforce consistent naming when capturing the current execution context
 * [eol-last](eol-last): enforce at least one newline at the end of files (fixable)
-* [func-names](func-names): enforce named `function` expressions
+* [func-names](func-names): require or disallow named `function` expressions
 * [func-style](func-style): enforce the consistent use of either `function` declarations or expressions
 * [id-blacklist](id-blacklist): disallow specified identifiers
 * [id-length](id-length): enforce minimum and maximum identifier lengths
 * [id-match](id-match): require identifiers to match a specified regular expression
 * [indent](indent): enforce consistent indentation (fixable)
 * [jsx-quotes](jsx-quotes): enforce the consistent use of either double or single quotes in JSX attributes (fixable)
-* [key-spacing](key-spacing): enforce consistent spacing between keys and values in object literal properties
+* [key-spacing](key-spacing): enforce consistent spacing between keys and values in object literal properties (fixable)
 * [keyword-spacing](keyword-spacing): enforce consistent spacing before and after keywords (fixable)
 * [linebreak-style](linebreak-style): enforce consistent linebreak style (fixable)
 * [lines-around-comment](lines-around-comment): require empty lines around comments
@@ -197,7 +197,7 @@ These rules relate to style guidelines, and are therefore quite subjective:
 * [no-lonely-if](no-lonely-if): disallow `if` statements as the only statement in `else` blocks
 * [no-mixed-operators](no-mixed-operators): disallow mixes of different operators
 * [no-mixed-spaces-and-tabs](no-mixed-spaces-and-tabs): disallow mixed spaces and tabs for indentation (recommended)
-* [no-multiple-empty-lines](no-multiple-empty-lines): disallow multiple empty lines
+* [no-multiple-empty-lines](no-multiple-empty-lines): disallow multiple empty lines (fixable)
 * [no-negated-condition](no-negated-condition): disallow negated conditions
 * [no-nested-ternary](no-nested-ternary): disallow nested ternary expressions
 * [no-new-object](no-new-object): disallow `Object` constructors
@@ -216,7 +216,7 @@ These rules relate to style guidelines, and are therefore quite subjective:
 * [one-var-declaration-per-line](one-var-declaration-per-line): require or disallow newlines around `var` declarations
 * [operator-assignment](operator-assignment): require or disallow assignment operator shorthand where possible
 * [operator-linebreak](operator-linebreak): enforce consistent linebreak style for operators
-* [padded-blocks](padded-blocks): require or disallow padding within blocks
+* [padded-blocks](padded-blocks): require or disallow padding within blocks (fixable)
 * [quote-props](quote-props): require quotes around object literal property names
 * [quotes](quotes): enforce the consistent use of either backticks, double, or single quotes (fixable)
 * [require-jsdoc](require-jsdoc): require JSDoc comments

@@ -478,7 +478,7 @@ If you don't want to enforce consistent line breaks inside braces, then it's saf
 
 ## Related Rules
 
-* [comma-spacing](key-spacing)
+* [comma-spacing](comma-spacing)
 * [key-spacing](key-spacing)
 * [object-curly-spacing](object-curly-spacing)
 * [object-property-newline](object-property-newline)

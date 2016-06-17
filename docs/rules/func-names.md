@@ -4,7 +4,7 @@ layout: doc
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
-# Require Function Expressions to have a Name (func-names)
+# Require or disallow named `function` expressions (func-names)
 
 A pattern that's becoming more common is to give function expressions names to aid in debugging. For example:
 
@@ -16,7 +16,17 @@ Adding the second `bar` in the above example is optional.  If you leave off the 
 
 ## Rule Details
 
-Examples of **incorrect** code for this rule:
+This rule can enforce or disallow the use of named function expressions.
+
+## Options
+
+This rule has a string option:
+
+* `"always"` (default) requires function expressions to have a name
+* `"never"` disallows named function expressions
+
+
+Examples of **incorrect** code for this rule with the default `"always"` option:
 
 ```js
 /*eslint func-names: "error"*/
@@ -28,7 +38,7 @@ Foo.prototype.bar = function() {};
 }())
 ```
 
-Examples of **correct** code for this rule:
+Examples of **correct** code for this rule with the default `"always"` option:
 
 ```js
 /*eslint func-names: "error"*/
@@ -40,9 +50,38 @@ Foo.prototype.bar = function bar() {};
 }())
 ```
 
+Examples of **incorrect** code for this rule with the `"never"` option:
+
+```js
+/*eslint func-names: "error"*/
+
+Foo.prototype.bar = function bar() {};
+
+(function bar() {
+    // ...
+}())
+```
+
+Examples of **correct** code for this rule with the `"never"` option:
+
+```js
+/*eslint func-names: "error"*/
+
+Foo.prototype.bar = function() {};
+
+(function() {
+    // ...
+}())
+```
+
 ## Further Reading
 
 * [Functions Explained](http://markdaggett.com/blog/2013/02/15/functions-explained/)
+
+## Compatibility
+
+* **JSCS**: [requireAnonymousFunctions](http://jscs.info/rule/requireAnonymousFunctions)
+* **JSCS**: [disallowAnonymousFunctions](http://jscs.info/rule/disallowAnonymousFunctions)
 
 ## Version
 

@@ -399,7 +399,8 @@ TokenTranslator.prototype = {
                  type === tt.bracketR || type === tt.ellipsis ||
                  type === tt.arrow || type === tt.jsxTagStart ||
                  type === tt.incDec || type === tt.starstar ||
-                 type === tt.jsxTagEnd || (type.binop && !type.keyword) ||
+                 type === tt.jsxTagEnd || type === tt.prefix ||
+                 (type.binop && !type.keyword) ||
                  type.isAssign) {
 
             token.type = Token.Punctuator;
@@ -4743,7 +4744,7 @@ module.exports={
   },
   "homepage": "https://github.com/eslint/espree",
   "main": "espree.js",
-  "version": "3.1.4",
+  "version": "3.1.6",
   "files": [
     "lib",
     "espree.js"
@@ -4760,7 +4761,7 @@ module.exports={
   },
   "license": "BSD-2-Clause",
   "dependencies": {
-    "acorn": "^3.1.0",
+    "acorn": "^3.2.0",
     "acorn-jsx": "^3.0.0"
   },
   "devDependencies": {
@@ -4797,33 +4798,12 @@ module.exports={
     "betarelease": "eslint-prelease beta",
     "browserify": "node Makefile.js browserify"
   },
-  "gitHead": "72ef3f4a332d6f8bfb32a55573eacb06f65e7f11",
-  "_id": "espree@3.1.4",
-  "_shasum": "0726d7ac83af97a7c8498da9b363a3609d2a68a1",
-  "_from": "espree@3.1.4",
-  "_npmVersion": "2.15.0",
-  "_nodeVersion": "4.4.2",
-  "_npmUser": {
-    "name": "nzakas",
-    "email": "nicholas@nczconsulting.com"
-  },
-  "maintainers": [
-    {
-      "name": "nzakas",
-      "email": "nicholas@nczconsulting.com"
-    }
-  ],
-  "dist": {
-    "shasum": "0726d7ac83af97a7c8498da9b363a3609d2a68a1",
-    "tarball": "https://registry.npmjs.org/espree/-/espree-3.1.4.tgz"
-  },
-  "_npmOperationalInternal": {
-    "host": "packages-16-east.internal.npmjs.com",
-    "tmp": "tmp/espree-3.1.4.tgz_1461264685938_0.4520344687625766"
-  },
-  "directories": {},
-  "_resolved": "https://registry.npmjs.org/espree/-/espree-3.1.4.tgz",
-  "readme": "ERROR: No README data found!"
+  "readme": "# Espree\n\nEspree started out as a fork of [Esprima](http://esprima.org) v1.2.2, the last stable published released of Esprima before work on ECMAScript 6 began. Espree is now built on top of [Acorn](https://github.com/ternjs/acorn), which has a modular architecture that allows extension of core functionality. The goal of Espree is to produce output that is similar to Esprima with a similar API so that it can be used in place of Esprima.\n\n## Usage\n\nInstall:\n\n```\nnpm i espree --save\n```\n\nAnd in your Node.js code:\n\n```javascript\nvar espree = require(\"espree\");\n\nvar ast = espree.parse(code);\n```\n\nThere is a second argument to `parse()` that allows you to specify various options:\n\n```javascript\nvar espree = require(\"espree\");\n\nvar ast = espree.parse(code, {\n\n    // attach range information to each node\n    range: true,\n\n    // attach line/column location information to each node\n    loc: true,\n\n    // create a top-level comments array containing all comments\n    comment: true,\n\n    // attach comments to the closest relevant node as leadingComments and\n    // trailingComments\n    attachComment: true,\n\n    // create a top-level tokens array containing all tokens\n    tokens: true,\n\n    // specify the language version (3, 5, 6, or 7, default is 5)\n    ecmaVersion: 5,\n\n    // specify which type of script you're parsing (script or module, default is script)\n    sourceType: \"script\",\n\n    // specify additional language features\n    ecmaFeatures: {\n\n        // enable JSX parsing\n        jsx: true,\n\n        // enable return in global scope\n        globalReturn: true,\n\n        // enable implied strict mode (if ecmaVersion >= 5)\n        impliedStrict: true,\n\n        // allow experimental object rest/spread\n        experimentalObjectRestSpread: true\n    }\n});\n```\n\n## Esprima Compatibility Going Forward\n\nThe primary goal is to produce the exact same AST structure and tokens as Esprima, and that takes precedence over anything else. (The AST structure being the [ESTree](https://github.com/estree/estree) API with JSX extensions.) Separate from that, Espree may deviate from what Esprima outputs in terms of where and how comments are attached, as well as what additional information is available on AST nodes. That is to say, Espree may add more things to the AST nodes than Esprima does but the overall AST structure produced will be the same.\n\nEspree may also deviate from Esprima in the interface it exposes.\n\n## Contributing\n\nIssues and pull requests will be triaged and responded to as quickly as possible. We operate under the [ESLint Contributor Guidelines](http://eslint.org/docs/developer-guide/contributing), so please be sure to read them before contributing. If you're not sure where to dig in, check out the [issues](https://github.com/eslint/espree/issues).\n\nEspree is licensed under a permissive BSD 2-clause license.\n\n## Build Commands\n\n* `npm test` - run all linting and tests\n* `npm run lint` - run all linting\n* `npm run browserify` - creates a version of Espree that is usable in a browser\n\n## Differences from Espree 2.x\n\n* The `tokenize()` method does not use `ecmaFeatures`. Any string will be tokenized completely based on ECMAScript 6 semantics.\n* Trailing whitespace no longer is counted as part of a node.\n* `let` and `const` declarations are no longer parsed by default. You must opt-in using `ecmaFeatures.blockBindings`.\n* The `esparse` and `esvalidate` binary scripts have been removed.\n* There is no `tolerant` option. We will investigate adding this back in the future.\n\n## Known Incompatibilities\n\nIn an effort to help those wanting to transition from other parsers to Espree, the following is a list of noteworthy incompatibilities with other parsers. These are known differences that we do not intend to change.\n\n### Esprima 1.2.2\n\n* Esprima counts trailing whitespace as part of each AST node while Espree does not. In Espree, the end of a node is where the last token occurs.\n* Espree does not parse `let` and `const` declarations by default.\n* Error messages returned for parsing errors are different.\n* There are two addition properties on every node and token: `start` and `end`. These represent the same data as `range` and are used internally by Acorn.\n\n### Esprima 2.x\n\n* Esprima 2.x uses a different comment attachment algorithm that results in some comments being added in different places than Espree. The algorithm Espree uses is the same one used in Esprima 1.2.2.\n\n## Frequently Asked Questions\n\n### Why another parser\n\n[ESLint](http://eslint.org) had been relying on Esprima as its parser from the beginning. While that was fine when the JavaScript language was evolving slowly, the pace of development increased dramatically and Esprima had fallen behind. ESLint, like many other tools reliant on Esprima, has been stuck in using new JavaScript language features until Esprima updates, and that caused our users frustration.\n\nWe decided the only way for us to move forward was to create our own parser, bringing us inline with JSHint and JSLint, and allowing us to keep implementing new features as we need them. We chose to fork Esprima instead of starting from scratch in order to move as quickly as possible with a compatible API.\n\nWith Espree 2.0.0, we are no longer a fork of Esprima but rather a translation layer between Acorn and Esprima syntax. This allows us to put work back into a community-supported parser (Acorn) that is continuing to grow and evolve while maintaining an Esprima-compatible parser for those utilities still built on Esprima.\n\n### Have you tried working with Esprima?\n\nYes. Since the start of ESLint, we've regularly filed bugs and feature requests with Esprima and will continue to do so. However, there are some different philosophies around how the projects work that need to be worked through. The initial goal was to have Espree track Esprima and eventually merge the two back together, but we ultimately decided that building on top of Acorn was a better choice due to Acorn's plugin support.\n\n### Why don't you just use Acorn?\n\nAcorn is a great JavaScript parser that produces an AST that is compatible with Esprima. Unfortunately, ESLint relies on more than just the AST to do its job. It relies on Esprima's tokens and comment attachment features to get a complete picture of the source code. We investigated switching to Acorn, but the inconsistencies between Esprima and Acorn created too much work for a project like ESLint.\n\nWe are building on top of Acorn, however, so that we can contribute back and help make Acorn even better.\n\n### What ECMAScript 6 features do you support?\n\nAll of them.\n\n### What ECMAScript 7 features do you support?\n\nThere is only one ECMAScript 7 syntax change: the exponentiation operator. Espree supports this.\n\n### How do you determine which experimental features to support?\n\nIn general, we do not support experimental JavaScript features. We may make exceptions from time to time depending on the maturity of the features.\n",
+  "readmeFilename": "README.md",
+  "gitHead": "ea34a7755cc172b94861a1b838e0229f281cde31",
+  "_id": "espree@3.1.6",
+  "_shasum": "b26f0824de1436a0e17146e65cdcb728681e21f4",
+  "_from": "espree@>=3.1.6 <4.0.0"
 }
 
 },{}],"espree":[function(require,module,exports){
@@ -5783,9 +5763,9 @@ module.exports={
         "no-debugger": "error",
         "no-delete-var": "error",
         "no-div-regex": "off",
+        "no-dupe-args": "error",
         "no-dupe-class-members": "error",
         "no-dupe-keys": "error",
-        "no-dupe-args": "error",
         "no-duplicate-case": "error",
         "no-duplicate-imports": "off",
         "no-else-return": "off",
@@ -5819,10 +5799,10 @@ module.exports={
         "no-lone-blocks": "off",
         "no-lonely-if": "off",
         "no-loop-func": "off",
+        "no-magic-numbers": "off",
         "no-mixed-operators": "off",
         "no-mixed-requires": "off",
         "no-mixed-spaces-and-tabs": "error",
-        "linebreak-style": "off",
         "no-multi-spaces": "off",
         "no-multi-str": "off",
         "no-multiple-empty-lines": "off",
@@ -5890,7 +5870,6 @@ module.exports={
         "no-var": "off",
         "no-warning-comments": "off",
         "no-with": "off",
-        "no-magic-numbers": "off",
         "array-bracket-spacing": "off",
         "array-callback-return": "off",
         "arrow-body-style": "off",
@@ -5922,12 +5901,15 @@ module.exports={
         "global-require": "off",
         "guard-for-in": "off",
         "handle-callback-err": "off",
+        "id-blacklist": "off",
         "id-length": "off",
+        "id-match": "off",
         "indent": "off",
         "init-declarations": "off",
         "jsx-quotes": "off",
         "key-spacing": "off",
         "keyword-spacing": "off",
+        "linebreak-style": "off",
         "lines-around-comment": "off",
         "max-depth": "off",
         "max-len": "off",
@@ -5959,15 +5941,13 @@ module.exports={
         "quote-props": "off",
         "quotes": "off",
         "radix": "off",
-        "id-match": "off",
-        "id-blacklist": "off",
         "require-jsdoc": "off",
         "require-yield": "off",
         "rest-spread-spacing": "off",
         "semi": "off",
         "semi-spacing": "off",
-        "sort-vars": "off",
         "sort-imports": "off",
+        "sort-vars": "off",
         "space-before-blocks": "off",
         "space-before-function-paren": "off",
         "space-in-parens": "off",
@@ -6703,10 +6683,30 @@ if (typeof Object.create === 'function') {
 
 var process = module.exports = {};
 
-// cached from whatever global is present so that test runners that stub it don't break things.
-var cachedSetTimeout = setTimeout;
-var cachedClearTimeout = clearTimeout;
+// cached from whatever global is present so that test runners that stub it
+// don't break things.  But we need to wrap it in a try catch in case it is
+// wrapped in strict mode code which doesn't define any globals.  It's inside a
+// function because try/catches deoptimize in certain engines.
 
+var cachedSetTimeout;
+var cachedClearTimeout;
+
+(function () {
+  try {
+    cachedSetTimeout = setTimeout;
+  } catch (e) {
+    cachedSetTimeout = function () {
+      throw new Error('setTimeout is not defined');
+    }
+  }
+  try {
+    cachedClearTimeout = clearTimeout;
+  } catch (e) {
+    cachedClearTimeout = function () {
+      throw new Error('clearTimeout is not defined');
+    }
+  }
+} ())
 var queue = [];
 var draining = false;
 var currentQueue;
@@ -43527,7 +43527,7 @@ function isPropertyDescriptor(node) {
 module.exports = {
     meta: {
         docs: {
-            description: "Enforces getter/setter pairs in objects",
+            description: "enforce getter and setter pairs in objects",
             category: "Best Practices",
             recommended: false
         },
@@ -43625,7 +43625,7 @@ var astUtils = require("../ast-utils");
 module.exports = {
     meta: {
         docs: {
-            description: "Enforce spacing inside array brackets",
+            description: "enforce consistent spacing inside array brackets",
             category: "Stylistic Issues",
             recommended: false
         },
@@ -47188,7 +47188,7 @@ var DEFAULT_COMMENT_PATTERN = /^no default$/;
 module.exports = {
     meta: {
         docs: {
-            description: "require `default` cases in <code>switch</code> statements",
+            description: "require `default` cases in `switch` statements",
             category: "Best Practices",
             recommended: false
         },
@@ -47605,15 +47605,20 @@ module.exports = {
 module.exports = {
     meta: {
         docs: {
-            description: "enforce named `function` expressions",
+            description: "require or disallow named `function` expressions",
             category: "Stylistic Issues",
             recommended: false
         },
 
-        schema: []
+        schema: [
+            {
+                enum: ["always", "never"]
+            }
+        ]
     },
 
     create: function(context) {
+        var never = context.options[0] === "never";
 
         /**
          * Determines whether the current FunctionExpression node is a get, set, or
@@ -47637,8 +47642,14 @@ module.exports = {
 
                 var name = node.id && node.id.name;
 
-                if (!name && !isObjectOrClassMethod()) {
-                    context.report(node, "Missing function expression name.");
+                if (never) {
+                    if (name) {
+                        context.report(node, "Unexpected function expression name.");
+                    }
+                } else {
+                    if (!name && !isObjectOrClassMethod()) {
+                        context.report(node, "Missing function expression name.");
+                    }
                 }
             }
         };
@@ -52744,6 +52755,21 @@ module.exports = {
 
         var sourceCode = context.getSourceCode();
 
+        /**
+         * Gets the property text of a given MemberExpression node.
+         * If the text is multiline, this returns only the first line.
+         *
+         * @param {ASTNode} node - A MemberExpression node to get.
+         * @returns {string} The property text of the node.
+         */
+        function getPropertyText(node) {
+            var prefix = node.computed ? "[" : ".";
+            var lines = sourceCode.getText(node.property).split(/\r\n|\r|\n/g);
+            var suffix = node.computed && lines.length === 1 ? "]" : "";
+
+            return prefix + lines[0] + suffix;
+        }
+
         return {
             "CallExpression:exit": function(node) {
                 if (!node.callee || node.callee.type !== "MemberExpression") {
@@ -52763,7 +52789,7 @@ module.exports = {
                     context.report(
                         callee.property,
                         callee.property.loc.start,
-                        "Expected line break after `" + sourceCode.getText(callee.object).replace(/\r\n|\r|\n/g, "\\n") + "`."
+                        "Expected line break before `" + getPropertyText(callee) + "`."
                     );
                 }
             }
@@ -56504,7 +56530,16 @@ module.exports = {
              */
             EmptyStatement: function(node) {
                 var parent = node.parent,
-                    allowedParentTypes = ["ForStatement", "ForInStatement", "ForOfStatement", "WhileStatement", "DoWhileStatement"];
+                    allowedParentTypes = [
+                        "ForStatement",
+                        "ForInStatement",
+                        "ForOfStatement",
+                        "WhileStatement",
+                        "DoWhileStatement",
+                        "IfStatement",
+                        "LabeledStatement",
+                        "WithStatement"
+                    ];
 
                 if (allowedParentTypes.indexOf(parent.type) === -1) {
                     report(node);
@@ -58723,7 +58758,7 @@ function includesBothInAGroup(groups, left, right) {
 module.exports = {
     meta: {
         docs: {
-            description: "Disallow mixed binary operators.",
+            description: "disallow mixed binary operators",
             category: "Stylistic Issues",
             recommended: false
         },
@@ -59455,6 +59490,8 @@ module.exports = {
             recommended: false
         },
 
+        fixable: "whitespace",
+
         schema: [
             {
                 type: "object",
@@ -59514,21 +59551,34 @@ module.exports = {
 
             "Program:exit": function checkBlankLines(node) {
                 var lines = sourceCode.lines,
-                    currentLocation = -1,
-                    lastLocation,
+                    fullLines = sourceCode.text.match(/.*(\r\n|\r|\n|\u2028|\u2029)/g),
+                    firstNonBlankLine = -1,
+                    trimmedLines = [],
+                    linesRangeStart = [],
                     blankCounter = 0,
+                    currentLocation,
+                    lastLocation,
                     location,
                     firstOfEndingBlankLines,
-                    firstNonBlankLine = -1,
-                    trimmedLines = [];
+                    diff,
+                    fix,
+                    rangeStart,
+                    rangeEnd;
 
+                fix = function(fixer) {
+                    return fixer.removeRange([rangeStart, rangeEnd]);
+                };
+
+                linesRangeStart.push(0);
                 lines.forEach(function(str, i) {
-                    var trimmed = str.trim();
+                    var length = i < fullLines.length ? fullLines[i].length : 0,
+                        trimmed = str.trim();
 
                     if ((firstNonBlankLine === -1) && (trimmed !== "")) {
                         firstNonBlankLine = i;
                     }
 
+                    linesRangeStart.push(linesRangeStart[linesRangeStart.length - 1] + length);
                     trimmedLines.push(trimmed);
                 });
 
@@ -59560,8 +59610,15 @@ module.exports = {
 
                 // Aggregate and count blank lines
                 if (firstNonBlankLine > maxBOF) {
-                    context.report(node, 0,
-                            "Too many blank lines at the beginning of file. Max of " + maxBOF + " allowed.");
+                    diff = firstNonBlankLine - maxBOF;
+                    rangeStart = linesRangeStart[firstNonBlankLine - diff];
+                    rangeEnd = linesRangeStart[firstNonBlankLine];
+                    context.report({
+                        node: node,
+                        loc: node.loc.start,
+                        message: "Too many blank lines at the beginning of file. Max of " + maxBOF + " allowed.",
+                        fix: fix
+                    });
                 }
                 currentLocation = firstNonBlankLine - 1;
 
@@ -59582,20 +59639,29 @@ module.exports = {
 
                             // within the file, not at the end
                             if (blankCounter >= max) {
+                                diff = blankCounter - max + 1;
+                                rangeStart = linesRangeStart[location.line - diff];
+                                rangeEnd = linesRangeStart[location.line];
+
                                 context.report({
                                     node: node,
                                     loc: location,
-                                    message: "More than " + max + " blank " + (max === 1 ? "line" : "lines") + " not allowed."
+                                    message: "More than " + max + " blank " + (max === 1 ? "line" : "lines") + " not allowed.",
+                                    fix: fix
                                 });
                             }
                         } else {
 
                             // inside the last blank lines
                             if (blankCounter > maxEOF) {
+                                diff = blankCounter - maxEOF + 1;
+                                rangeStart = linesRangeStart[location.line - diff];
+                                rangeEnd = linesRangeStart[location.line - 1];
                                 context.report({
                                     node: node,
                                     loc: location,
-                                    message: "Too many blank lines at the end of file. Max of " + maxEOF + " allowed."
+                                    message: "Too many blank lines at the end of file. Max of " + maxEOF + " allowed.",
+                                    fix: fix
                                 });
                             }
                         }
@@ -60624,7 +60690,7 @@ module.exports = {
 module.exports = {
     meta: {
         docs: {
-            description: "disallow calling some Object.prototype methods directly on objects",
+            description: "disallow calling some `Object.prototype` methods directly on objects",
             category: "Possible Errors",
             recommended: false
         }
@@ -61200,7 +61266,7 @@ module.exports = {
 module.exports = {
     meta: {
         docs: {
-            description: "disallow `javascript",
+            description: "disallow `javascript:` urls",
             category: "Best Practices",
             recommended: false
         },
@@ -63448,7 +63514,7 @@ var SENTINEL_NODE_TYPE_CONTINUE = /^(?:Program|(?:Function|Class)(?:Declaration|
 module.exports = {
     meta: {
         docs: {
-            description: "disallow control flow statements in finally blocks",
+            description: "disallow control flow statements in `finally` blocks",
             category: "Possible Errors",
             recommended: false
         }
@@ -65486,7 +65552,7 @@ function normalizeOptions(options) {
 module.exports = {
     meta: {
         docs: {
-            description: "require or disallow line breaks inside braces.",
+            description: "enforce consistent line breaks inside braces",
             category: "Stylistic Issues",
             recommended: false
         },
@@ -65524,8 +65590,8 @@ module.exports = {
             var options = normalizedOptions[node.type];
             var openBrace = sourceCode.getFirstToken(node);
             var closeBrace = sourceCode.getLastToken(node);
-            var first = sourceCode.getTokenAfter(openBrace);
-            var last = sourceCode.getTokenBefore(closeBrace);
+            var first = sourceCode.getTokenOrCommentAfter(openBrace);
+            var last = sourceCode.getTokenOrCommentBefore(closeBrace);
             var needsLinebreaks = (
                 node.properties.length >= options.minProperties ||
                 (
@@ -65534,6 +65600,17 @@ module.exports = {
                     first.loc.start.line !== last.loc.end.line
                 )
             );
+
+            /*
+             * Use tokens or comments to check multiline or not.
+             * But use only tokens to check whether line breaks are needed.
+             * This allows:
+             *     var obj = { // eslint-disable-line foo
+             *         a: 1
+             *     }
+             */
+            first = sourceCode.getTokenAfter(openBrace);
+            last = sourceCode.getTokenBefore(closeBrace);
 
             if (needsLinebreaks) {
                 if (astUtils.isTokenOnSameLine(openBrace, first)) {
@@ -65982,6 +66059,8 @@ module.exports = {
             recommended: false
         },
 
+        fixable: "code",
+
         schema: {
             anyOf: [
                 {
@@ -66091,12 +66170,36 @@ module.exports = {
                 // if we're "never" and concise we should warn now
                 if (APPLY_NEVER && isConciseProperty) {
                     type = node.method ? "method" : "property";
-                    context.report(node, "Expected longform " + type + " syntax.");
+                    context.report({
+                        node: node,
+                        message: "Expected longform " + type + " syntax.",
+                        fix: function(fixer) {
+                            if (node.method) {
+                                if (node.value.generator) {
+                                    return fixer.replaceTextRange([node.range[0], node.key.range[1]], node.key.name + ": function*");
+                                }
+
+                                return fixer.insertTextAfter(node.key, ": function");
+                            }
+
+                            return fixer.insertTextAfter(node.key, ": " + node.key.name);
+                        }
+                    });
                 }
 
                 // {'xyz'() {}} should be written as {'xyz': function() {}}
                 if (AVOID_QUOTES && isStringLiteral(node.key) && isConciseProperty) {
-                    context.report(node, "Expected longform method syntax for string literal keys.");
+                    context.report({
+                        node: node,
+                        message: "Expected longform method syntax for string literal keys.",
+                        fix: function(fixer) {
+                            if (node.computed) {
+                                return fixer.insertTextAfterRange([node.key.range[0], node.key.range[1] + 1], ": function");
+                            }
+
+                            return fixer.insertTextAfter(node.key, ": function");
+                        }
+                    });
                 }
 
                 // at this point if we're concise or if we're "never" we can leave
@@ -66119,16 +66222,60 @@ module.exports = {
                         return;
                     }
 
+                    // {[x]: function(){}} should be written as {[x]() {}}
+                    if (node.computed) {
+                        context.report({
+                            node: node,
+                            message: "Expected method shorthand.",
+                            fix: function(fixer) {
+                                if (node.value.generator) {
+                                    return fixer.replaceTextRange(
+                                        [node.key.range[0], node.value.range[0] + "function*".length],
+                                        "*[" + node.key.name + "]"
+                                    );
+                                }
+
+                                return fixer.removeRange([node.key.range[1] + 1, node.value.range[0] + "function".length]);
+                            }
+                        });
+                        return;
+                    }
+
                     // {x: function(){}} should be written as {x() {}}
-                    context.report(node, "Expected method shorthand.");
+                    context.report({
+                        node: node,
+                        message: "Expected method shorthand.",
+                        fix: function(fixer) {
+                            if (node.value.generator) {
+                                return fixer.replaceTextRange(
+                                    [node.key.range[0], node.value.range[0] + "function*".length],
+                                    "*" + node.key.name
+                                );
+                            }
+
+                            return fixer.removeRange([node.key.range[1], node.value.range[0] + "function".length]);
+                        }
+                    });
                 } else if (node.value.type === "Identifier" && node.key.name === node.value.name && APPLY_TO_PROPS) {
 
                     // {x: x} should be written as {x}
-                    context.report(node, "Expected property shorthand.");
+                    context.report({
+                        node: node,
+                        message: "Expected property shorthand.",
+                        fix: function(fixer) {
+                            return fixer.replaceText(node, node.value.name);
+                        }
+                    });
                 } else if (node.value.type === "Identifier" && node.key.type === "Literal" && node.key.value === node.value.name && APPLY_TO_PROPS) {
 
                     // {"x": x} should be written as {x}
-                    context.report(node, "Expected property shorthand.");
+                    context.report({
+                        node: node,
+                        message: "Expected property shorthand.",
+                        fix: function(fixer) {
+                            return fixer.replaceText(node, node.value.name);
+                        }
+                    });
                 }
             }
         };
@@ -66870,6 +67017,8 @@ module.exports = {
             recommended: false
         },
 
+        fixable: "whitespace",
+
         schema: [
             {
                 oneOf: [
@@ -67017,6 +67166,9 @@ module.exports = {
                     context.report({
                         node: node,
                         loc: { line: openBrace.loc.start.line, column: openBrace.loc.start.column },
+                        fix: function(fixer) {
+                            return fixer.insertTextAfter(openBrace, "\n");
+                        },
                         message: ALWAYS_MESSAGE
                     });
                 }
@@ -67024,23 +67176,36 @@ module.exports = {
                     context.report({
                         node: node,
                         loc: {line: closeBrace.loc.end.line, column: closeBrace.loc.end.column - 1 },
+                        fix: function(fixer) {
+                            return fixer.insertTextBefore(closeBrace, "\n");
+                        },
                         message: ALWAYS_MESSAGE
                     });
                 }
             } else {
                 if (blockHasTopPadding) {
+                    var nextToken = sourceCode.getTokenOrCommentAfter(openBrace);
+
                     context.report({
                         node: node,
                         loc: { line: openBrace.loc.start.line, column: openBrace.loc.start.column },
+                        fix: function(fixer) {
+                            return fixer.replaceTextRange([openBrace.end, nextToken.start], "\n");
+                        },
                         message: NEVER_MESSAGE
                     });
                 }
 
                 if (blockHasBottomPadding) {
+                    var previousToken = sourceCode.getTokenOrCommentBefore(closeBrace);
+
                     context.report({
                         node: node,
                         loc: {line: closeBrace.loc.end.line, column: closeBrace.loc.end.column - 1 },
-                        message: NEVER_MESSAGE
+                        message: NEVER_MESSAGE,
+                        fix: function(fixer) {
+                            return fixer.replaceTextRange([previousToken.end, closeBrace.start], "\n");
+                        }
                     });
                 }
             }
@@ -71405,7 +71570,7 @@ module.exports = {
 module.exports = {
     meta: {
         docs: {
-            description: "require or disallow Unicode BOM",
+            description: "require or disallow Unicode byte order mark (BOM)",
             category: "Stylistic Issues",
             recommended: false
         },

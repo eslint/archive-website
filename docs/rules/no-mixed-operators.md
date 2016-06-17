@@ -19,8 +19,8 @@ var foo = a && (b || c || d);  /*GOOD*/
 
 This rule checks `BinaryExpression` and `LogicalExpression`.
 
-This rule may conflict with [no-extra-parens] rule.
-If you use both this and [no-extra-parens] rule together, you need to use the `nestedBinaryExpressions` option of [no-extra-parens] rule.
+This rule may conflict with [no-extra-parens](no-extra-parens) rule.
+If you use both this and [no-extra-parens](no-extra-parens) rule together, you need to use the `nestedBinaryExpressions` option of [no-extra-parens](no-extra-parens) rule.
 
 Examples of **incorrect** code for this rule:
 
@@ -139,9 +139,7 @@ If you don't want to be notified about mixed operators, then it's safe to disabl
 
 ## Related Rules
 
-* [no-extra-parens]
-
-[no-extra-parens]: no-extra-parens.md
+* [no-extra-parens](no-extra-parens)
 
 ## Version
 

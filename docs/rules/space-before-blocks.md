@@ -27,7 +27,7 @@ then all blocks should never have any preceding space. If different spacing is d
 blocks, keyword blocks and classes, an optional configuration object can be passed as the rule argument to
 configure the cases separately.
 
-( e.g. `{ "functions": "never", "keywords": "always", classes: "always" }` )
+( e.g. `{ "functions": "never", "keywords": "always", "classes": "always" }` )
 
 The default is `"always"`.
 
@@ -122,10 +122,10 @@ class Foo{
 }
 ```
 
-The following patterns are considered problems when configured `{ "functions": "never", "keywords": "always", classes: "never" }`:
+The following patterns are considered problems when configured `{ "functions": "never", "keywords": "always", "classes": "never" }`:
 
 ```js
-/*eslint space-before-blocks: ["error", { "functions": "never", "keywords": "always", classes: "never" }]*/
+/*eslint space-before-blocks: ["error", { "functions": "never", "keywords": "always", "classes": "never" }]*/
 /*eslint-env es6*/
 
 function a() {}
@@ -138,10 +138,10 @@ class Foo{
 ```
 
 
-The following patterns are not considered problems when configured `{ "functions": "never", "keywords": "always", classes: "never" }`:
+The following patterns are not considered problems when configured `{ "functions": "never", "keywords": "always", "classes": "never" }`:
 
 ```js
-/*eslint space-before-blocks: ["error", { "functions": "never", "keywords": "always", classes: "never" }]*/
+/*eslint space-before-blocks: ["error", { "functions": "never", "keywords": "always", "classes": "never" }]*/
 /*eslint-env es6*/
 
 for (;;) {
@@ -157,10 +157,10 @@ class Foo {
 }
 ```
 
-The following patterns are considered problems when configured `{ "functions": "always", "keywords": "never", classes: "never" }`:
+The following patterns are considered problems when configured `{ "functions": "always", "keywords": "never", "classes": "never" }`:
 
 ```js
-/*eslint space-before-blocks: ["error", { "functions": "always", "keywords": "never", classes: "never" }]*/
+/*eslint space-before-blocks: ["error", { "functions": "always", "keywords": "never", "classes": "never" }]*/
 /*eslint-env es6*/
 
 function a(){}
@@ -173,10 +173,10 @@ class Foo {
 ```
 
 
-The following patterns are not considered problems when configured `{ "functions": "always", "keywords": "never", classes: "never" }`:
+The following patterns are not considered problems when configured `{ "functions": "always", "keywords": "never", "classes": "never" }`:
 
 ```js
-/*eslint space-before-blocks: ["error", { "functions": "always", "keywords": "never", classes: "never" }]*/
+/*eslint space-before-blocks: ["error", { "functions": "always", "keywords": "never", "classes": "never" }]*/
 /*eslint-env es6*/
 
 if (a){
@@ -190,10 +190,10 @@ class Foo{
 }
 ```
 
-The following patterns are considered problems when configured `{ "functions": "never", "keywords": "never", classes: "always" }`:
+The following patterns are considered problems when configured `{ "functions": "never", "keywords": "never", "classes": "always" }`:
 
 ```js
-/*eslint space-before-blocks: ["error", { "functions": "never", "keywords": "never", classes: "always" }]*/
+/*eslint space-before-blocks: ["error", { "functions": "never", "keywords": "never", "classes": "always" }]*/
 /*eslint-env es6*/
 
 class Foo{
@@ -202,10 +202,10 @@ class Foo{
 ```
 
 
-The following patterns are not considered problems when configured `{ "functions": "never", "keywords": "never", classes: "always" }`:
+The following patterns are not considered problems when configured `{ "functions": "never", "keywords": "never", "classes": "always" }`:
 
 ```js
-/*eslint space-before-blocks: ["error", { "functions": "never", "keywords": "never", classes: "always" }]*/
+/*eslint space-before-blocks: ["error", { "functions": "never", "keywords": "never", "classes": "always" }]*/
 /*eslint-env es6*/
 
 class Foo {

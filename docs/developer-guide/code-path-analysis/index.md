@@ -6,9 +6,6 @@ layout: doc
 
 # Code Path Analysis Details
 
-| [Objects](#objects) | [Events](#events) | [Usage Examples](#usage-examples) | [Code Path Examples](#code-path-examples) |
-|:-------------------:|:-----------------:|:---------------------------------:|:-----------------------------------------:|
-
 ESLint's rules can use code paths.
 The code path is execution routes of programs.
 It forks/joins at such as `if` statements.
