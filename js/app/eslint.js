@@ -59551,7 +59551,7 @@ module.exports = {
 
             "Program:exit": function checkBlankLines(node) {
                 var lines = sourceCode.lines,
-                    fullLines = sourceCode.text.match(/.*(\r\n|\r|\n|\u2028|\u2029)/g),
+                    fullLines = sourceCode.text.match(/.*(\r\n|\r|\n|\u2028|\u2029)/g) || [],
                     firstNonBlankLine = -1,
                     trimmedLines = [],
                     linesRangeStart = [],
@@ -67190,7 +67190,7 @@ module.exports = {
                         node: node,
                         loc: { line: openBrace.loc.start.line, column: openBrace.loc.start.column },
                         fix: function(fixer) {
-                            return fixer.replaceTextRange([openBrace.end, nextToken.start], "\n");
+                            return fixer.replaceTextRange([openBrace.end, nextToken.start - nextToken.loc.start.column], "\n");
                         },
                         message: NEVER_MESSAGE
                     });
@@ -67204,7 +67204,7 @@ module.exports = {
                         loc: {line: closeBrace.loc.end.line, column: closeBrace.loc.end.column - 1 },
                         message: NEVER_MESSAGE,
                         fix: function(fixer) {
-                            return fixer.replaceTextRange([previousToken.end, closeBrace.start], "\n");
+                            return fixer.replaceTextRange([previousToken.end, closeBrace.start - closeBrace.loc.start.column], "\n");
                         }
                     });
                 }
