@@ -9,7 +9,8 @@
   },
   "scripts": {
     "build": "browserify -x espree js/app/parser/index.js > js/app/parser/index.built.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "less": "lessc styles/less/main.less styles/main.css -x --source-map=styles/main.css.map"
   },
   "repository": {
     "type": "git",
@@ -23,8 +24,10 @@
   "homepage": "https://github.com/eslint/eslint.github.io#readme",
   "dependencies": {},
   "devDependencies": {
+    "bootstrap": "^3.3.6",
     "browserify": "^11.0.1",
     "json-loader": "^0.5.2",
+    "less": "^2.7.1",
     "node-libs-browser": "^0.5.2"
   }
 }

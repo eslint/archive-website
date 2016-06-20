@@ -1,0 +1,106 @@
+.btn-getting-started {
+  margin-top: 30px;
+}
+
+/* We need to push the content because of the fixed header */
+body {
+  padding-top: 80px;
+}
+/* Allow anchors to not be hidden by the fixed header */
+h1:target:before,
+h2:target:before,
+h3:target:before,
+h4:target:before,
+h5:target:before,
+h6:target:before {
+  content: "";
+  display: block;
+  margin-top: -80px;
+  height: 80px;
+  width: 1px;
+}
+
+.glyphicon {
+  margin: 0 2px; /* margins for icons in ordinary text */
+  color: #4d4d4d; /* hsl(0,0%,30%) is 10% lighter gray than text */
+}
+
+p {
+  &.incorrect + div + div + div > pre, /* vars-on-top */
+  &.incorrect + div + div > pre, /* no-continue */
+  &.incorrect + div > pre {
+    background-color: #fff6f6; /* hsl(0,100%,98%) light red */
+  }
+
+  &.correct + div + div + div > pre, /* vars-on-top */
+  &.correct + div + div > pre, /* no-continue */
+  &.correct + div > pre {
+    background-color: #f6fff6; /* hsl(120,100%,98%) light green */
+  }
+
+  &.icon {
+    position:relative;
+  }
+
+  &.icon:before {
+    position: absolute;
+    left: -1.5em; /* negative padding-left of ul */
+    font-family: "Glyphicons Halflings";
+    color: #4d4d4d; /* hsl(0,0%,30%) is 10% lighter gray than text */
+  }
+
+  &.removed ~ p.fixable:before {
+    color: #ccc; /* hsl(0,0%,80%) light gray */
+  }
+
+  &.recommended:before {
+    content: "\e013"; /* ok */
+  }
+
+  &.removed:before {
+    content: "\e014"; /* remove */
+  }
+
+  &.fixable:before {
+    content: "\e136"; /* wrench */
+  }
+
+  &.incorrect:before {
+    content: "\e126"; /* thumbs-down */
+  }
+
+  &.correct:before {
+    content: "\e125"; /* thumbs-up */
+  }
+}
+
+main {
+  ol, ul {
+    padding-left: 1.5em; /* same as indent for inline glyphicon at narrow width */
+  }
+
+  li  {
+    ul {
+      list-style: disc;
+    }
+
+    p ~ ul {
+      margin-bottom: 12px; /* same as p, ol, ul */
+    }
+  }
+}
+
+a code, /* in link: blue */
+h1 code, h2 code, h3 code, h4 code { /* in heading: same dark gray as text */
+  color: inherit;
+}
+
+h1 code, h2 code, h3 code, h4 code {
+  background-color: #f4f4f4; /* hsl(0,0%,96%) in heading: same lighter gray as pre */
+}
+
+// @media (min-width: @screen-lg-min) {
+//   .doc > .container {
+//     max-width: 730px;
+//   }
+// }
