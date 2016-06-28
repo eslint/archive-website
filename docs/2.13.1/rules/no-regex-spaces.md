@@ -1,0 +1,75 @@
+---
+title: Rule no-regex-spaces
+layout: doc
+---
+<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
+
+# disallow multiple spaces in regular expression literals (no-regex-spaces)
+
+Regular expressions can be very complex and difficult to understand, which is why it's important to keep them as simple as possible in order to avoid mistakes. One of the more error-prone things you can do with a regular expression is to use more than one space, such as:
+
+```js
+var re = /foo   bar/;
+```
+
+In this regular expression, it's very hard to tell how many spaces are intended to be matched. It's better to use only one space and then specify how many spaces are expected, such as:
+
+```js
+var re = /foo {3}bar/;
+```
+
+Now it is very clear that three spaces are expected to be matched.
+
+## Rule Details
+
+This rule disallows multiple spaces in regular expression literals.
+
+Examples of **incorrect** code for this rule:
+
+```js
+/*eslint no-regex-spaces: "error"*/
+
+var re = /foo   bar/;
+```
+
+Examples of **correct** code for this rule:
+
+```js
+/*eslint no-regex-spaces: "error"*/
+
+var re = /foo {3}bar/;
+```
+
+## Known Limitations
+
+This rule does not report multiple spaces in the string argument of calls to the `RegExp` constructor.
+
+Example of a *false negative* when this rule reports correct code:
+
+```js
+/*eslint no-regex-spaces: "error"*/
+
+var re = new RegExp("foo   bar");
+```
+
+## When Not To Use It
+
+If you want to allow multiple spaces in a regular expression, then you can safely turn this rule off.
+
+## Further Reading
+
+* [Spaces are hard to count](http://jslinterrors.com/spaces-are-hard-to-count-use-a/)
+
+## Related Rules
+
+* [no-div-regex](no-div-regex)
+* [no-control-regex](no-control-regex)
+
+## Version
+
+This rule was introduced in ESLint 0.4.0.
+
+## Resources
+
+* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/no-regex-spaces.js)
+* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/no-regex-spaces.md)
