@@ -21,19 +21,25 @@ function debounce(func, wait, immediate) {
 define(['react', 'orion', 'reactDom'], function(React, orion, ReactDOM) {
     return React.createClass({
         displayName: 'Editor',
+        editor: null,
         componentDidMount: function() {
             var element = ReactDOM.findDOMNode(this);
-            var editor = orion(element);
+            this.editor = orion(element);
             
             var update = debounce(function() {
-                this.props.onChange({ value: editor.getModel().getText() });
+                this.props.onChange({ value: this.editor.getModel().getText() });
             }.bind(this), 500);
             
-            editor.getTextView().onModify = function() {
+            this.editor.getTextView().onModify = function() {
                 update();
             }.bind(this);
             
-            this.props.onChange({ value: editor.getModel().getText() });
+            this.props.onChange({ value: this.editor.getModel().getText() });
+        },
+        componentWillReceiveProps: function(nextProps) {
+            if (nextProps.focusedError) {
+                this.editor.onGotoLine(nextProps.focusedError.line - 1, nextProps.focusedError.column - 1, nextProps.focusedError.column - 1);
+            }
         },
         render: function() {
             return (

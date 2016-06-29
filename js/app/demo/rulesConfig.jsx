@@ -1,41 +1,56 @@
 'use strict';
 
 define(['react'], function(React) {
+
+    function Rule(ref) {
+        var handler = function(e) {
+            ref.handleChange(e, ref.rule);
+        };
+        return (
+            <div className="checkbox">
+                <label>
+                    <input type="checkbox" checked={ref.isChecked} id={ref.rule} onChange={handler} />
+                    {ref.rule}
+                </label>
+            </div>
+        );
+    }
+
     return React.createClass({
         displayName: 'RulesConfig',
         getInitialState: function() {
             return this.props.config;
         },
-        renderRules: function() {
-            var result = [];
+        shouldBeChecked(rule) {
+            var ruleValue = this.state[rule];
+            return typeof ruleValue === 'string' ? ruleValue !== 'off' : ruleValue[0] !== 'off';
+        },
+        getRow(i) {
             var rules = Object.keys(this.state);
             var limit = Math.ceil(rules.length / 3);
-            for (var i = 0; i < 3; i++) {
-                var currentRow = [];
-                for (var j = i * limit, l = (i + 1) * limit; j < l && j < rules.length; j++) {
-                    currentRow.push(
-                        <div className="checkbox" key={rules[j]}>
-                            <label>
-                                <input type="checkbox" checked={typeof this.state[rules[j]] === 'string' ? this.state[rules[j]] !== 'off' : this.state[rules[j]][0] !== 'off'} id={rules[j]} onChange={this.handleChange.bind(this, rules[j])} />{rules[j]}
-                            </label>
-                        </div>
-                    );
-                }
-                result.push(
+            const start = limit * i;
+            return Array(limit).fill('').map(function(item, index) {
+                var rule = rules[start + index];
+                return rule && <Rule key={rule} rule={rule} isChecked={this.shouldBeChecked(rule)} handleChange={this.handleChange} />
+            }, this);
+        },
+        renderRules() {
+            return [0, 1, 2].map(function(i) {
+                return (
                     <div className="col-md-4" key={i}>
-                        {currentRow}
+                        {this.getRow(i)}
                     </div>
                 );
-            }
-            return result;
+            }, this);
         },
-        handleChange: function(key, e) {
+        handleChange: function(e, key) {
             var change = {};
+            var value = e.target.checked ? 'error' : 'off';
             if (typeof this.state[key] === 'string') {
-                change[key] = e.target.checked ? 'error' : 'off';
+                change[key] = value;
             } else {
                 change[key] = this.state[key];
-                change[key][0] = e.target.checked ? 'error' : 'off';
+                change[key][0] = value;
             }
             this.setState(change, function() {
                 this.props.onUpdate(this.state)

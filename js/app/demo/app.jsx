@@ -60,6 +60,10 @@ define(['react', 'jsx!editor', 'jsx!messages', 'jsx!configuration', 'eslint', 't
                 this.lint();
             });
         },
+        focusedError: null,
+        showError: function(line, column) {
+            this.focusedError = { line: line, column: column };
+        },
         lint: function() {
             setTimeout(function() {
                 var results = eslint.verify(this.state.text, this.state.options);
@@ -74,10 +78,10 @@ define(['react', 'jsx!editor', 'jsx!messages', 'jsx!configuration', 'eslint', 't
                 <div className="container editorRow">
                     <div className="row">
                         <div className="col-md-7">
-                            <Editor onChange={this.handleChange} text="var foo = bar;"/>
+                            <Editor onChange={this.handleChange} text="var foo = bar;" focusedError={this.focusedError}/>
                         </div>
                         <div className="col-md-5">
-                            <Messages values={this.state.messages} />
+                            <Messages values={this.state.messages} onClick={this.showError} />
                         </div>
                     </div>
                     <div className="row">
