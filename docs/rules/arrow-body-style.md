@@ -26,7 +26,9 @@ The second one is an object for more fine-grained configuration when the first o
 "arrow-body-style": ["error", "always"]
 ```
 
-When the rule is set to `"always"` the following patterns are considered problems:
+### always
+
+Examples of **incorrect** code for this rule with the `"always"` option:
 
 ```js
 /*eslint arrow-body-style: ["error", "always"]*/
@@ -34,7 +36,7 @@ When the rule is set to `"always"` the following patterns are considered problem
 let foo = () => 0;
 ```
 
-The following patterns are not considered problems:
+Examples of **correct** code for this rule with the `"always"` option:
 
 ```js
 let foo = () => {
@@ -46,9 +48,9 @@ let foo = (retv, name) => {
 };
 ```
 
-### "as-needed"
+### as-needed
 
-When the rule is set to `"as-needed"` the following patterns are considered problems:
+Examples of **incorrect** code for this rule with the default `"as-needed"` option:
 
 ```js
 /*eslint arrow-body-style: ["error", "as-needed"]*/
@@ -67,7 +69,7 @@ let foo = () => {
 };
 ```
 
-The following patterns are not considered problems:
+Examples of **correct** code for this rule with the default `"as-needed"` option:
 
 ```js
 /*eslint arrow-body-style: ["error", "as-needed"]*/
@@ -95,7 +97,9 @@ let foo = () => ({ bar: 0 });
 
 #### requireReturnForObjectLiteral
 
-When the rule is set to `"as-needed", { requireReturnForObjectLiteral: true }` the following patterns are considered problems:
+> This option is only applicable when used in conjunction with the `"as-needed"` option.
+
+Examples of **incorrect** code for this rule with the `{ "requireReturnForObjectLiteral": true }` option:
 
 ```js
 /*eslint arrow-body-style: ["error", "as-needed", { requireReturnForObjectLiteral: true }]*/
@@ -104,7 +108,7 @@ let foo = () => ({});
 let foo = () => ({ bar: 0 });
 ```
 
-The following patterns are not considered problems:
+Examples of **correct** code for this rule with the `{ "requireReturnForObjectLiteral": true }` option:
 
 ```js
 /*eslint arrow-body-style: ["error", "as-needed", { requireReturnForObjectLiteral: true }]*/
@@ -114,9 +118,9 @@ let foo = () => {};
 let foo = () => { return { bar: 0 }; };
 ```
 
-### "never"
+### never
 
-When the rule is set to `"never"` the following patterns are considered problems:
+Examples of **incorrect** code for this rule with the `"never"` option:
 
 ```js
 /*eslint arrow-body-style: ["error", "never"]*/
@@ -131,7 +135,7 @@ let foo = (retv, name) => {
 };
 ```
 
-The following patterns are not considered problems:
+Examples of **correct** code for this rule with the `"never"` option:
 
 ```js
 /*eslint arrow-body-style: ["error", "never"]*/

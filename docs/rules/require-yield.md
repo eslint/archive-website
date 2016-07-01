@@ -6,11 +6,13 @@ layout: doc
 
 # Disallow generator functions that do not have `yield` (require-yield)
 
-This rule generates warnings for generator functions that do not have the `yield` keyword.
-
 ## Rule Details
 
-The following patterns are considered problems:
+This rule generates warnings for generator functions that do not have the `yield` keyword.
+
+## Examples
+
+Examples of **incorrect** code for this rule:
 
 ```js
 /*eslint require-yield: "error"*/
@@ -21,7 +23,7 @@ function* foo() {
 }
 ```
 
-The following patterns are not considered problems:
+Examples of **correct** code for this rule:
 
 ```js
 /*eslint require-yield: "error"*/

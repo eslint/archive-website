@@ -15,7 +15,9 @@ We can use that feature for variadic functions instead of the `arguments` variab
 
 This rule is aimed to flag usage of `arguments` variables.
 
-The following patterns are considered problems:
+## Examples
+
+Examples of **incorrect** code for this rule:
 
 ```js
 function foo() {
@@ -28,7 +30,7 @@ function foo(action) {
 }
 ```
 
-The following patterns are not considered problems:
+Examples of **correct** code for this rule:
 
 ```js
 function foo(...args) {

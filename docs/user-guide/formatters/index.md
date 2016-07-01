@@ -55,7 +55,7 @@ function addOne(i) {
 
 ### checkstyle
 ```
-<?xml version="1.0" encoding="utf-8"?><checkstyle version="4.3"><file name="C:\Users\Nicholas\projects\personal\eslint\fullOfProblems.js"><error line="1" column="10" severity="error" message="&apos;addOne&apos; is defined but never used (no-unused-vars)" source="eslint.rules.no-unused-vars" /><error line="2" column="9" severity="error" message="Use the isNaN function to compare with NaN. (use-isnan)" source="eslint.rules.use-isnan" /><error line="3" column="16" severity="error" message="Unexpected space before unary operator &apos;++&apos;. (space-unary-ops)" source="eslint.rules.space-unary-ops" /><error line="3" column="20" severity="warning" message="Missing semicolon. (semi)" source="eslint.rules.semi" /><error line="4" column="12" severity="warning" message="Unexpected &apos;else&apos; after &apos;return&apos;. (no-else-return)" source="eslint.rules.no-else-return" /><error line="5" column="7" severity="warning" message="Expected indentation of 8 space characters but found 6. (indent)" source="eslint.rules.indent" /><error line="5" column="7" severity="error" message="Expected a return value. (consistent-return)" source="eslint.rules.consistent-return" /><error line="5" column="13" severity="warning" message="Missing semicolon. (semi)" source="eslint.rules.semi" /><error line="7" column="2" severity="error" message="Unnecessary semicolon. (no-extra-semi)" source="eslint.rules.no-extra-semi" /></file></checkstyle>
+<?xml version="1.0" encoding="utf-8"?><checkstyle version="4.3"><file name="C:\Users\Nicholas\projects\personal\eslint\fullOfProblems.js"><error line="1" column="10" severity="error" message="&apos;addOne&apos; is defined but never used (no-unused-vars)" source="eslint.rules.no-unused-vars" /><error line="2" column="9" severity="error" message="Use the isNaN function to compare with NaN. (use-isnan)" source="eslint.rules.use-isnan" /><error line="3" column="16" severity="error" message="Unexpected space before unary operator &apos;++&apos;. (space-unary-ops)" source="eslint.rules.space-unary-ops" /><error line="3" column="20" severity="warning" message="Missing semicolon. (semi)" source="eslint.rules.semi" /><error line="4" column="12" severity="warning" message="Unnecessary &apos;else&apos; after &apos;return&apos;. (no-else-return)" source="eslint.rules.no-else-return" /><error line="5" column="7" severity="warning" message="Expected indentation of 8 space characters but found 6. (indent)" source="eslint.rules.indent" /><error line="5" column="7" severity="error" message="Expected a return value. (consistent-return)" source="eslint.rules.consistent-return" /><error line="5" column="13" severity="warning" message="Missing semicolon. (semi)" source="eslint.rules.semi" /><error line="7" column="2" severity="error" message="Unnecessary semicolon. (no-extra-semi)" source="eslint.rules.no-extra-semi" /></file></checkstyle>
 ```
 
 ### compact
@@ -64,7 +64,7 @@ C:\Users\Nicholas\projects\personal\eslint\fullOfProblems.js: line 1, col 10, Er
 C:\Users\Nicholas\projects\personal\eslint\fullOfProblems.js: line 2, col 9, Error - Use the isNaN function to compare with NaN. (use-isnan)
 C:\Users\Nicholas\projects\personal\eslint\fullOfProblems.js: line 3, col 16, Error - Unexpected space before unary operator '++'. (space-unary-ops)
 C:\Users\Nicholas\projects\personal\eslint\fullOfProblems.js: line 3, col 20, Warning - Missing semicolon. (semi)
-C:\Users\Nicholas\projects\personal\eslint\fullOfProblems.js: line 4, col 12, Warning - Unexpected 'else' after 'return'. (no-else-return)
+C:\Users\Nicholas\projects\personal\eslint\fullOfProblems.js: line 4, col 12, Warning - Unnecessary 'else' after 'return'. (no-else-return)
 C:\Users\Nicholas\projects\personal\eslint\fullOfProblems.js: line 5, col 7, Warning - Expected indentation of 8 space characters but found 6. (indent)
 C:\Users\Nicholas\projects\personal\eslint\fullOfProblems.js: line 5, col 7, Error - Expected a return value. (consistent-return)
 C:\Users\Nicholas\projects\personal\eslint\fullOfProblems.js: line 5, col 13, Warning - Missing semicolon. (semi)
@@ -78,12 +78,12 @@ C:\Users\Nicholas\projects\personal\eslint\fullOfProblems.js: line 7, col 2, Err
 
 ### jslint-xml
 ```
-<?xml version="1.0" encoding="utf-8"?><jslint><file name="C:\Users\Nicholas\projects\personal\eslint\fullOfProblems.js"><issue line="1" char="10" evidence="function addOne(i) {" reason="&#39;addOne&#39; is defined but never used (no-unused-vars)" /><issue line="2" char="9" evidence="    if (i != NaN) {" reason="Use the isNaN function to compare with NaN. (use-isnan)" /><issue line="3" char="16" evidence="        return i ++" reason="Unexpected space before unary operator &#39;++&#39;. (space-unary-ops)" /><issue line="3" char="20" evidence="        return i ++" reason="Missing semicolon. (semi)" /><issue line="4" char="12" evidence="    } else {" reason="Unexpected &#39;else&#39; after &#39;return&#39;. (no-else-return)" /><issue line="5" char="7" evidence="      return" reason="Expected indentation of 8 space characters but found 6. (indent)" /><issue line="5" char="7" evidence="      return" reason="Expected a return value. (consistent-return)" /><issue line="5" char="13" evidence="      return" reason="Missing semicolon. (semi)" /><issue line="7" char="2" evidence="};" reason="Unnecessary semicolon. (no-extra-semi)" /></file></jslint>
+<?xml version="1.0" encoding="utf-8"?><jslint><file name="C:\Users\Nicholas\projects\personal\eslint\fullOfProblems.js"><issue line="1" char="10" evidence="function addOne(i) {" reason="&#39;addOne&#39; is defined but never used (no-unused-vars)" /><issue line="2" char="9" evidence="    if (i != NaN) {" reason="Use the isNaN function to compare with NaN. (use-isnan)" /><issue line="3" char="16" evidence="        return i ++" reason="Unexpected space before unary operator &#39;++&#39;. (space-unary-ops)" /><issue line="3" char="20" evidence="        return i ++" reason="Missing semicolon. (semi)" /><issue line="4" char="12" evidence="    } else {" reason="Unnecessary &#39;else&#39; after &#39;return&#39;. (no-else-return)" /><issue line="5" char="7" evidence="      return" reason="Expected indentation of 8 space characters but found 6. (indent)" /><issue line="5" char="7" evidence="      return" reason="Expected a return value. (consistent-return)" /><issue line="5" char="13" evidence="      return" reason="Missing semicolon. (semi)" /><issue line="7" char="2" evidence="};" reason="Unnecessary semicolon. (no-extra-semi)" /></file></jslint>
 ```
 
 ### json
 ```
-[{"filePath":"C:\\Users\\Nicholas\\projects\\personal\\eslint\\fullOfProblems.js","messages":[{"ruleId":"no-unused-vars","severity":2,"message":"'addOne' is defined but never used","line":1,"column":10,"nodeType":"Identifier","source":"function addOne(i) {"},{"ruleId":"use-isnan","severity":2,"message":"Use the isNaN function to compare with NaN.","line":2,"column":9,"nodeType":"BinaryExpression","source":"    if (i != NaN) {"},{"ruleId":"space-unary-ops","severity":2,"message":"Unexpected space before unary operator '++'.","line":3,"column":16,"nodeType":"UpdateExpression","source":"        return i ++","fix":{"range":[57,58],"text":""}},{"ruleId":"semi","severity":1,"message":"Missing semicolon.","line":3,"column":20,"nodeType":"ReturnStatement","source":"        return i ++","fix":{"range":[60,60],"text":";"}},{"ruleId":"no-else-return","severity":1,"message":"Unexpected 'else' after 'return'.","line":4,"column":12,"nodeType":"BlockStatement","source":"    } else {"},{"ruleId":"indent","severity":1,"message":"Expected indentation of 8 space characters but found 6.","line":5,"column":7,"nodeType":"ReturnStatement","source":"      return","fix":{"range":[80,80],"text":"  "}},{"ruleId":"consistent-return","severity":2,"message":"Expected a return value.","line":5,"column":7,"nodeType":"ReturnStatement","source":"      return"},{"ruleId":"semi","severity":1,"message":"Missing semicolon.","line":5,"column":13,"nodeType":"ReturnStatement","source":"      return","fix":{"range":[86,86],"text":";"}},{"ruleId":"no-extra-semi","severity":2,"message":"Unnecessary semicolon.","line":7,"column":2,"nodeType":"EmptyStatement","source":"};","fix":{"range":[94,95],"text":""}}],"errorCount":5,"warningCount":4}]
+[{"filePath":"C:\\Users\\Nicholas\\projects\\personal\\eslint\\fullOfProblems.js","messages":[{"ruleId":"no-unused-vars","severity":2,"message":"'addOne' is defined but never used","line":1,"column":10,"nodeType":"Identifier","source":"function addOne(i) {"},{"ruleId":"use-isnan","severity":2,"message":"Use the isNaN function to compare with NaN.","line":2,"column":9,"nodeType":"BinaryExpression","source":"    if (i != NaN) {"},{"ruleId":"space-unary-ops","severity":2,"message":"Unexpected space before unary operator '++'.","line":3,"column":16,"nodeType":"UpdateExpression","source":"        return i ++","fix":{"range":[57,58],"text":""}},{"ruleId":"semi","severity":1,"message":"Missing semicolon.","line":3,"column":20,"nodeType":"ReturnStatement","source":"        return i ++","fix":{"range":[60,60],"text":";"}},{"ruleId":"no-else-return","severity":1,"message":"Unnecessary 'else' after 'return'.","line":4,"column":12,"nodeType":"BlockStatement","source":"    } else {"},{"ruleId":"indent","severity":1,"message":"Expected indentation of 8 space characters but found 6.","line":5,"column":7,"nodeType":"ReturnStatement","source":"      return","fix":{"range":[80,80],"text":"  "}},{"ruleId":"consistent-return","severity":2,"message":"Expected a return value.","line":5,"column":7,"nodeType":"ReturnStatement","source":"      return"},{"ruleId":"semi","severity":1,"message":"Missing semicolon.","line":5,"column":13,"nodeType":"ReturnStatement","source":"      return","fix":{"range":[86,86],"text":";"}},{"ruleId":"no-extra-semi","severity":2,"message":"Unnecessary semicolon.","line":7,"column":2,"nodeType":"EmptyStatement","source":"};","fix":{"range":[94,95],"text":""}}],"errorCount":5,"warningCount":4}]
 ```
 
 ### junit
@@ -95,7 +95,7 @@ C:\Users\Nicholas\projects\personal\eslint\fullOfProblems.js: line 7, col 2, Err
 <testcase time="0" name="org.eslint.use-isnan"><failure message="Use the isNaN function to compare with NaN."><![CDATA[line 2, col 9, Error - Use the isNaN function to compare with NaN. (use-isnan)]]></failure></testcase>
 <testcase time="0" name="org.eslint.space-unary-ops"><failure message="Unexpected space before unary operator &#39;++&#39;."><![CDATA[line 3, col 16, Error - Unexpected space before unary operator &#39;++&#39;. (space-unary-ops)]]></failure></testcase>
 <testcase time="0" name="org.eslint.semi"><failure message="Missing semicolon."><![CDATA[line 3, col 20, Warning - Missing semicolon. (semi)]]></failure></testcase>
-<testcase time="0" name="org.eslint.no-else-return"><failure message="Unexpected &#39;else&#39; after &#39;return&#39;."><![CDATA[line 4, col 12, Warning - Unexpected &#39;else&#39; after &#39;return&#39;. (no-else-return)]]></failure></testcase>
+<testcase time="0" name="org.eslint.no-else-return"><failure message="Unnecessary &#39;else&#39; after &#39;return&#39;."><![CDATA[line 4, col 12, Warning - Unnecessary &#39;else&#39; after &#39;return&#39;. (no-else-return)]]></failure></testcase>
 <testcase time="0" name="org.eslint.indent"><failure message="Expected indentation of 8 space characters but found 6."><![CDATA[line 5, col 7, Warning - Expected indentation of 8 space characters but found 6. (indent)]]></failure></testcase>
 <testcase time="0" name="org.eslint.consistent-return"><failure message="Expected a return value."><![CDATA[line 5, col 7, Error - Expected a return value. (consistent-return)]]></failure></testcase>
 <testcase time="0" name="org.eslint.semi"><failure message="Missing semicolon."><![CDATA[line 5, col 13, Warning - Missing semicolon. (semi)]]></failure></testcase>
@@ -113,7 +113,7 @@ C:\Users\Nicholas\projects\personal\eslint\fullOfProblems.js
   2:9   error    Use the isNaN function to compare with NaN              use-isnan
   3:16  error    Unexpected space before unary operator '++'             space-unary-ops
   3:20  warning  Missing semicolon                                       semi
-  4:12  warning  Unexpected 'else' after 'return'                        no-else-return
+  4:12  warning  Unnecessary 'else' after 'return'                       no-else-return
   5:7   warning  Expected indentation of 8 space characters but found 6  indent
   5:7   error    Expected a return value                                 consistent-return
   5:13  warning  Missing semicolon                                       semi
@@ -134,7 +134,7 @@ C:\Users\Nicholas\projects\personal\eslint\fullOfProblems.js
 ║ 2        │ 9        │ error    │ Use the isNaN function to compare with NaN.            │ use-isnan            ║
 ║ 3        │ 16       │ error    │ Unexpected space before unary operator '++'.           │ space-unary-ops      ║
 ║ 3        │ 20       │ warning  │ Missing semicolon.                                     │ semi                 ║
-║ 4        │ 12       │ warning  │ Unexpected 'else' after 'return'.                      │ no-else-return       ║
+║ 4        │ 12       │ warning  │ Unnecessary 'else' after 'return'.                     │ no-else-return       ║
 ║ 5        │ 7        │ warning  │ Expected indentation of 8 space characters but         │ indent               ║
 ║          │          │          │ found 6.                                               │                      ║
 ║ 5        │ 7        │ error    │ Expected a return value.                               │ consistent-return    ║
@@ -180,7 +180,7 @@ not ok 1 - C:\Users\Nicholas\projects\personal\eslint\fullOfProblems.js
         line: 3
         column: 20
         ruleId: semi
-    - message: Unexpected 'else' after 'return'.
+    - message: Unnecessary 'else' after 'return'.
       severity: warning
       data:
         line: 4
@@ -220,7 +220,7 @@ C:\Users\Nicholas\projects\personal\eslint\fullOfProblems.js:1:10: 'addOne' is d
 C:\Users\Nicholas\projects\personal\eslint\fullOfProblems.js:2:9: Use the isNaN function to compare with NaN. [Error/use-isnan]
 C:\Users\Nicholas\projects\personal\eslint\fullOfProblems.js:3:16: Unexpected space before unary operator '++'. [Error/space-unary-ops]
 C:\Users\Nicholas\projects\personal\eslint\fullOfProblems.js:3:20: Missing semicolon. [Warning/semi]
-C:\Users\Nicholas\projects\personal\eslint\fullOfProblems.js:4:12: Unexpected 'else' after 'return'. [Warning/no-else-return]
+C:\Users\Nicholas\projects\personal\eslint\fullOfProblems.js:4:12: Unnecessary 'else' after 'return'. [Warning/no-else-return]
 C:\Users\Nicholas\projects\personal\eslint\fullOfProblems.js:5:7: Expected indentation of 8 space characters but found 6. [Warning/indent]
 C:\Users\Nicholas\projects\personal\eslint\fullOfProblems.js:5:7: Expected a return value. [Error/consistent-return]
 C:\Users\Nicholas\projects\personal\eslint\fullOfProblems.js:5:13: Missing semicolon. [Warning/semi]
@@ -235,7 +235,7 @@ C:\Users\Nicholas\projects\personal\eslint\fullOfProblems.js(1,10): error no-unu
 C:\Users\Nicholas\projects\personal\eslint\fullOfProblems.js(2,9): error use-isnan : Use the isNaN function to compare with NaN.
 C:\Users\Nicholas\projects\personal\eslint\fullOfProblems.js(3,16): error space-unary-ops : Unexpected space before unary operator '++'.
 C:\Users\Nicholas\projects\personal\eslint\fullOfProblems.js(3,20): warning semi : Missing semicolon.
-C:\Users\Nicholas\projects\personal\eslint\fullOfProblems.js(4,12): warning no-else-return : Unexpected 'else' after 'return'.
+C:\Users\Nicholas\projects\personal\eslint\fullOfProblems.js(4,12): warning no-else-return : Unnecessary 'else' after 'return'.
 C:\Users\Nicholas\projects\personal\eslint\fullOfProblems.js(5,7): warning indent : Expected indentation of 8 space characters but found 6.
 C:\Users\Nicholas\projects\personal\eslint\fullOfProblems.js(5,7): error consistent-return : Expected a return value.
 C:\Users\Nicholas\projects\personal\eslint\fullOfProblems.js(5,13): warning semi : Missing semicolon.

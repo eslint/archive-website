@@ -5806,7 +5806,7 @@ module.exports={
         "no-multi-spaces": "off",
         "no-multi-str": "off",
         "no-multiple-empty-lines": "off",
-        "no-native-reassign": "off",
+        "no-native-reassign": "error",
         "no-negated-condition": "off",
         "no-negated-in-lhs": "error",
         "no-nested-ternary": "off",
@@ -5855,7 +5855,7 @@ module.exports={
         "no-unmodified-loop-condition": "off",
         "no-unneeded-ternary": "off",
         "no-unreachable": "error",
-        "no-unsafe-finally": "off",
+        "no-unsafe-finally": "error",
         "no-unused-expressions": "off",
         "no-unused-labels": "error",
         "no-unused-vars": "error",
@@ -5881,10 +5881,10 @@ module.exports={
         "brace-style": "off",
         "callback-return": "off",
         "camelcase": "off",
-        "comma-dangle": "error",
+        "comma-dangle": "off",
         "comma-spacing": "off",
         "comma-style": "off",
-        "complexity": ["off", 11],
+        "complexity": "off",
         "computed-property-spacing": "off",
         "consistent-return": "off",
         "consistent-this": "off",
@@ -5942,7 +5942,7 @@ module.exports={
         "quotes": "off",
         "radix": "off",
         "require-jsdoc": "off",
-        "require-yield": "off",
+        "require-yield": "error",
         "rest-spread-spacing": "off",
         "semi": "off",
         "semi-spacing": "off",
@@ -6413,8 +6413,12 @@ EventEmitter.prototype.emit = function(type) {
       er = arguments[1];
       if (er instanceof Error) {
         throw er; // Unhandled 'error' event
+      } else {
+        // At least give some kind of context to the user
+        var err = new Error('Uncaught, unspecified "error" event. (' + er + ')');
+        err.context = er;
+        throw err;
       }
-      throw TypeError('Uncaught, unspecified "error" event.');
     }
   }
 
@@ -41686,14 +41690,11 @@ module.exports = {
 // Requirements
 //------------------------------------------------------------------------------
 
-var debug = require("debug"),
-    envs = require("../../conf/environments");
+var envs = require("../../conf/environments");
 
 //------------------------------------------------------------------------------
 // Private
 //------------------------------------------------------------------------------
-
-debug = debug("eslint:enviroments");
 
 var environments = Object.create(null);
 
@@ -41762,7 +41763,7 @@ module.exports = {
     }
 };
 
-},{"../../conf/environments":2,"debug":11}],174:[function(require,module,exports){
+},{"../../conf/environments":2}],174:[function(require,module,exports){
 /**
  * @fileoverview Main ESLint object.
  * @author Nicholas C. Zakas
@@ -44207,6 +44208,8 @@ module.exports = {
             recommended: false
         },
 
+        fixable: "code",
+
         schema: [
             {
                 enum: ["always", "as-needed"]
@@ -44232,7 +44235,19 @@ module.exports = {
             // as-needed: x => x
             if (asNeeded && node.params.length === 1 && node.params[0].type === "Identifier") {
                 if (token.type === "Punctuator" && token.value === "(") {
-                    context.report(node, asNeededMessage);
+                    context.report({
+                        node: node,
+                        message: asNeededMessage,
+                        fix: function(fixer) {
+                            var paramToken = context.getTokenAfter(token);
+                            var closingParenToken = context.getTokenAfter(paramToken);
+
+                            return fixer.replaceTextRange([
+                                token.range[0],
+                                closingParenToken.range[1]
+                            ], paramToken.value);
+                        }
+                    });
                 }
                 return;
             }
@@ -44242,7 +44257,13 @@ module.exports = {
 
                 // (x) => x
                 if (after.value !== ")") {
-                    context.report(node, message);
+                    context.report({
+                        node: node,
+                        message: message,
+                        fix: function(fixer) {
+                            return fixer.replaceText(token, "(" + token.value + ")");
+                        }
+                    });
                 }
             }
         }
@@ -45247,8 +45268,8 @@ module.exports = {
     meta: {
         docs: {
             description: "require or disallow trailing commas",
-            category: "Possible Errors",
-            recommended: true
+            category: "Stylistic Issues",
+            recommended: false
         },
 
         fixable: "code",
@@ -48560,6 +48581,10 @@ module.exports = {
                                 }
                             }
                         ]
+                    },
+                    outerIIFEBody: {
+                        type: "integer",
+                        minimum: 0
                     }
                 },
                 additionalProperties: false
@@ -48580,7 +48605,8 @@ module.exports = {
                 var: DEFAULT_VARIABLE_INDENT,
                 let: DEFAULT_VARIABLE_INDENT,
                 const: DEFAULT_VARIABLE_INDENT
-            }
+            },
+            outerIIFEBody: null
         };
 
         var sourceCode = context.getSourceCode();
@@ -48608,6 +48634,10 @@ module.exports = {
                     };
                 } else if (typeof variableDeclaratorRules === "object") {
                     lodash.assign(options.VariableDeclarator, variableDeclaratorRules);
+                }
+
+                if (typeof opts.outerIIFEBody === "number") {
+                    options.outerIIFEBody = opts.outerIIFEBody;
                 }
             }
         }
@@ -48701,7 +48731,7 @@ module.exports = {
         }
 
         /**
-         * Get node indent
+         * Get the actual indent of node
          * @param {ASTNode|Token} node Node to examine
          * @param {boolean} [byLastLine=false] get indent of node's last line
          * @param {boolean} [excludeCommas=false] skip comma on start of line
@@ -48851,6 +48881,17 @@ module.exports = {
             return false;
         }
 
+		/**
+         * Check to see if the node is a file level IIFE
+         * @param {ASTNode} node node to check
+         * @returns {boolean} True if the node is the outer IIFE
+         */
+        function isOuterIIFE(node) {
+            return node && node.type === "CallExpression" &&
+                node.parent && node.parent.type === "ExpressionStatement" &&
+                node.parent.parent && node.parent.parent.type === "Program";
+        }
+
         /**
          * Check indent for function block content
          * @param {ASTNode} node node to examine
@@ -48902,8 +48943,14 @@ module.exports = {
                 }
             }
 
-            // function body indent should be indent + indent size
-            indent += indentSize;
+            // function body indent should be indent + indent size, unless this
+            // is the outer IIFE and that option is enabled.
+            var functionOffset = indentSize;
+
+            if (options.outerIIFEBody !== null && isOuterIIFE(calleeNode.parent)) {
+                functionOffset = options.outerIIFEBody;
+            }
+            indent += functionOffset;
 
             // check if the node is inside a variable
             var parentVarNode = getVariableDeclaratorNode(node);
@@ -48916,7 +48963,7 @@ module.exports = {
                 checkNodesIndent(node.body, indent);
             }
 
-            checkLastNodeLineIndent(node, indent - indentSize);
+            checkLastNodeLineIndent(node, indent - functionOffset);
         }
 
 
@@ -54515,7 +54562,7 @@ module.exports = {
          * @returns {void}
          */
         function displayReport(node) {
-            context.report(node, "Unexpected 'else' after 'return'.");
+            context.report(node, "Unnecessary 'else' after 'return'.");
         }
 
         /**
@@ -54594,14 +54641,13 @@ module.exports = {
 
                 // If we have a BlockStatement, check each consequent body node.
                 return node.body.some(checkForReturnOrIf);
-            } else {
-
-                /*
-                 * If not a block statement, make sure the consequent isn't a
-                 * ReturnStatement or an IfStatement with returns on both paths.
-                 */
-                return checkForReturnOrIf(node);
             }
+
+            /*
+             * If not a block statement, make sure the consequent isn't a
+             * ReturnStatement or an IfStatement with returns on both paths.
+             */
+            return checkForReturnOrIf(node);
         }
 
         //--------------------------------------------------------------------------
@@ -59678,7 +59724,7 @@ module.exports = {
 
 },{}],291:[function(require,module,exports){
 /**
- * @fileoverview Rule to flag when re-assigning native objects
+ * @fileoverview Rule to disallow assignments to native objects or read-only global variables
  * @author Ilya Volodin
  */
 
@@ -59691,9 +59737,9 @@ module.exports = {
 module.exports = {
     meta: {
         docs: {
-            description: "disallow reassigning native objects",
+            description: "disallow assignments to native objects or read-only global variables",
             category: "Best Practices",
-            recommended: false
+            recommended: true
         },
 
         schema: [
@@ -59734,14 +59780,14 @@ module.exports = {
             ) {
                 context.report({
                     node: identifier,
-                    message: "{{name}} is a read-only native object.",
+                    message: "Read-only global '{{name}}' should not be modified.",
                     data: identifier
                 });
             }
         }
 
         /**
-         * Reports write references if a given variable is readonly builtin.
+         * Reports write references if a given variable is read-only builtin.
          * @param {Variable} variable - A variable to check.
          * @returns {void}
          */
@@ -60853,7 +60899,7 @@ module.exports = {
 module.exports = {
     meta: {
         docs: {
-            description: "disallow multiple spaces in regular expression literals",
+            description: "disallow multiple spaces in regular expressions",
             category: "Possible Errors",
             recommended: true
         },
@@ -60864,23 +60910,64 @@ module.exports = {
     create: function(context) {
         var sourceCode = context.getSourceCode();
 
-        return {
+        /**
+         * Validate regular expressions
+         * @param {ASTNode} node node to validate
+         * @param {string} value regular expression to validate
+         * @returns {void}
+         * @private
+         */
+        function checkRegex(node, value) {
+            var multipleSpacesRegex = /( {2,})+?/,
+                regexResults = multipleSpacesRegex.exec(value);
 
-            Literal: function(node) {
-                var token = sourceCode.getFirstToken(node),
-                    nodeType = token.type,
-                    nodeValue = token.value,
-                    multipleSpacesRegex = /( {2,})+?/,
-                    regexResults;
-
-                if (nodeType === "RegularExpression") {
-                    regexResults = multipleSpacesRegex.exec(nodeValue);
-
-                    if (regexResults !== null) {
-                        context.report(node, "Spaces are hard to count. Use {" + regexResults[0].length + "}.");
-                    }
-                }
+            if (regexResults !== null) {
+                context.report(node, "Spaces are hard to count. Use {" + regexResults[0].length + "}.");
             }
+        }
+
+        /**
+         * Validate regular expression literals
+         * @param {ASTNode} node node to validate
+         * @returns {void}
+         * @private
+         */
+        function checkLiteral(node) {
+            var token = sourceCode.getFirstToken(node),
+                nodeType = token.type,
+                nodeValue = token.value;
+
+            if (nodeType === "RegularExpression") {
+                checkRegex(node, nodeValue);
+            }
+        }
+
+        /**
+         * Check if node is a string
+         * @param {ASTNode} node node to evaluate
+         * @returns {boolean} True if its a string
+         * @private
+         */
+        function isString(node) {
+            return node && node.type === "Literal" && typeof node.value === "string";
+        }
+
+        /**
+         * Validate strings passed to the RegExp constructor
+         * @param {ASTNode} node node to validate
+         * @returns {void}
+         * @private
+         */
+        function checkFunction(node) {
+            if (node.callee.type === "Identifier" && node.callee.name === "RegExp" && isString(node.arguments[0])) {
+                checkRegex(node, node.arguments[0].value);
+            }
+        }
+
+        return {
+            Literal: checkLiteral,
+            CallExpression: checkFunction,
+            NewExpression: checkFunction
         };
 
     }
@@ -63516,7 +63603,7 @@ module.exports = {
         docs: {
             description: "disallow control flow statements in `finally` blocks",
             category: "Possible Errors",
-            recommended: false
+            recommended: true
         }
     },
     create: function(context) {
@@ -63958,6 +64045,73 @@ module.exports = {
         }
 
         /**
+         * If a given reference is left-hand side of an assignment, this gets
+         * the right-hand side node of the assignment.
+         *
+         * @param {escope.Reference} ref - A reference to check.
+         * @param {ASTNode} prevRhsNode - The previous RHS node.
+         * @returns {ASTNode} The RHS node.
+         */
+        function getRhsNode(ref, prevRhsNode) {
+            var id = ref.identifier;
+            var parent = id.parent;
+            var granpa = parent.parent;
+
+            /*
+             * Inherits the previous node if this reference is in the node.
+             * This is for `a = a + a`-like code.
+             */
+            if (prevRhsNode &&
+                prevRhsNode.range[0] <= id.range[0] &&
+                prevRhsNode.range[1] >= id.range[1]
+            ) {
+                return prevRhsNode;
+            }
+
+            if (parent.type === "AssignmentExpression" &&
+                granpa.type === "ExpressionStatement" &&
+                id === parent.left
+            ) {
+                return parent.right;
+            }
+            return null;
+        }
+
+        /**
+         * Checks whether a given reference is a read to update itself or not.
+         *
+         * @param {escope.Reference} ref - A reference to check.
+         * @param {ASTNode} rhsNode - The RHS node of the previous assignment.
+         * @returns {boolean} The reference is a read to update itself.
+         */
+        function isReadForItself(ref, rhsNode) {
+            var id = ref.identifier;
+            var parent = id.parent;
+            var granpa = parent.parent;
+
+            return ref.isRead() && (
+
+                // self update. e.g. `a += 1`, `a++`
+                (
+                    parent.type === "AssignmentExpression" &&
+                    granpa.type === "ExpressionStatement" &&
+                    parent.left === id
+                ) ||
+                (
+                    parent.type === "UpdateExpression" &&
+                    granpa.type === "ExpressionStatement"
+                ) ||
+
+                // in RHS of an assignment for itself. e.g. `a = a + 1`
+                (
+                    rhsNode &&
+                    rhsNode.range[0] <= id.range[0] &&
+                    rhsNode.range[1] >= id.range[1]
+                )
+            );
+        }
+
+        /**
          * Determines if the variable is used.
          * @param {Variable} variable - The variable to check.
          * @param {Reference[]} references - The variable references to check.
@@ -63969,10 +64123,19 @@ module.exports = {
                 }).map(function(def) {
                     return def.node;
                 }),
-                isFunctionDefinition = functionNodes.length > 0;
+                isFunctionDefinition = functionNodes.length > 0,
+                rhsNode = null;
 
             return variable.references.some(function(ref) {
-                return isReadRef(ref) && !(isFunctionDefinition && isSelfReference(ref, functionNodes));
+                var forItself = isReadForItself(ref, rhsNode);
+
+                rhsNode = getRhsNode(ref, rhsNode);
+
+                return (
+                    isReadRef(ref) &&
+                    !forItself &&
+                    !(isFunctionDefinition && isSelfReference(ref, functionNodes))
+                );
             });
         }
 
@@ -65053,7 +65216,7 @@ module.exports = {
 
             for (i = 0; i < properties.length; i++) {
                 if (properties[i].shorthand) {
-                    return;
+                    continue;
                 }
 
                 /**
@@ -65063,7 +65226,7 @@ module.exports = {
                  * so there is no "renaming" occurring here.
                  */
                 if (properties[i].computed || !properties[i].key) {
-                    return;
+                    continue;
                 }
 
                 if (properties[i].key.type === "Identifier" && properties[i].key.name === properties[i].value.name ||
@@ -65844,7 +66007,7 @@ module.exports = {
 
                 closingCurlyBraceMustBeSpaced = (
                     options.arraysInObjectsException && penultimateType === "ArrayExpression" ||
-                    options.objectsInObjectsException && penultimateType === "ObjectExpression"
+                    options.objectsInObjectsException && (penultimateType === "ObjectExpression" || penultimateType === "ObjectPattern")
                 ) ? !options.spaced : options.spaced;
 
                 lastSpaced = sourceCode.isSpaceBetweenTokens(penultimate, last);
@@ -66167,43 +66330,8 @@ module.exports = {
                     return;
                 }
 
-                // if we're "never" and concise we should warn now
-                if (APPLY_NEVER && isConciseProperty) {
-                    type = node.method ? "method" : "property";
-                    context.report({
-                        node: node,
-                        message: "Expected longform " + type + " syntax.",
-                        fix: function(fixer) {
-                            if (node.method) {
-                                if (node.value.generator) {
-                                    return fixer.replaceTextRange([node.range[0], node.key.range[1]], node.key.name + ": function*");
-                                }
-
-                                return fixer.insertTextAfter(node.key, ": function");
-                            }
-
-                            return fixer.insertTextAfter(node.key, ": " + node.key.name);
-                        }
-                    });
-                }
-
-                // {'xyz'() {}} should be written as {'xyz': function() {}}
-                if (AVOID_QUOTES && isStringLiteral(node.key) && isConciseProperty) {
-                    context.report({
-                        node: node,
-                        message: "Expected longform method syntax for string literal keys.",
-                        fix: function(fixer) {
-                            if (node.computed) {
-                                return fixer.insertTextAfterRange([node.key.range[0], node.key.range[1] + 1], ": function");
-                            }
-
-                            return fixer.insertTextAfter(node.key, ": function");
-                        }
-                    });
-                }
-
-                // at this point if we're concise or if we're "never" we can leave
-                if (APPLY_NEVER || AVOID_QUOTES || isConciseProperty) {
+                // getters and setters are ignored
+                if (node.kind === "get" || node.kind === "set") {
                     return;
                 }
 
@@ -66212,13 +66340,55 @@ module.exports = {
                     return;
                 }
 
-                // getters and setters are ignored
-                if (node.kind === "get" || node.kind === "set") {
+                //--------------------------------------------------------------
+                // Checks for property/method shorthand.
+                if (isConciseProperty) {
+
+                    // if we're "never" and concise we should warn now
+                    if (APPLY_NEVER) {
+                        type = node.method ? "method" : "property";
+                        context.report({
+                            node: node,
+                            message: "Expected longform " + type + " syntax.",
+                            fix: function(fixer) {
+                                if (node.method) {
+                                    if (node.value.generator) {
+                                        return fixer.replaceTextRange([node.range[0], node.key.range[1]], node.key.name + ": function*");
+                                    }
+
+                                    return fixer.insertTextAfter(node.key, ": function");
+                                }
+
+                                return fixer.insertTextAfter(node.key, ": " + node.key.name);
+                            }
+                        });
+                    }
+
+                    // {'xyz'() {}} should be written as {'xyz': function() {}}
+                    if (AVOID_QUOTES && isStringLiteral(node.key)) {
+                        context.report({
+                            node: node,
+                            message: "Expected longform method syntax for string literal keys.",
+                            fix: function(fixer) {
+                                if (node.computed) {
+                                    return fixer.insertTextAfterRange([node.key.range[0], node.key.range[1] + 1], ": function");
+                                }
+
+                                return fixer.insertTextAfter(node.key, ": function");
+                            }
+                        });
+                    }
+
                     return;
                 }
 
+                //--------------------------------------------------------------
+                // Checks for longform properties.
                 if (node.value.type === "FunctionExpression" && !node.value.id && APPLY_TO_METHODS) {
                     if (IGNORE_CONSTRUCTORS && isConstructor(node.key.name)) {
+                        return;
+                    }
+                    if (AVOID_QUOTES && isStringLiteral(node.key)) {
                         return;
                     }
 
@@ -66267,6 +66437,9 @@ module.exports = {
                         }
                     });
                 } else if (node.value.type === "Identifier" && node.key.type === "Literal" && node.key.value === node.value.name && APPLY_TO_PROPS) {
+                    if (AVOID_QUOTES) {
+                        return;
+                    }
 
                     // {"x": x} should be written as {x}
                     context.report({
@@ -67513,6 +67686,7 @@ module.exports = {
 //------------------------------------------------------------------------------
 
 var Map = require("es6-map");
+var lodash = require("lodash");
 
 //------------------------------------------------------------------------------
 // Helpers
@@ -67706,6 +67880,24 @@ function groupByDestructuring(variables, ignoreReadBeforeAssign) {
     return identifierMap;
 }
 
+/**
+ * Finds the nearest parent of node with a given type.
+ *
+ * @param {ASTNode} node – The node to search from.
+ * @param {string} type – The type field of the parent node.
+ * @param {function} shouldStop – a predicate that returns true if the traversal should stop, and false otherwise.
+ * @returns {ASTNode} The closest ancestor with the specified type; null if no such ancestor exists.
+ */
+function findUp(node, type, shouldStop) {
+    if (!node || shouldStop(node)) {
+        return null;
+    }
+    if (node.type === type) {
+        return node;
+    }
+    return findUp(node.parent, type, shouldStop);
+}
+
 //------------------------------------------------------------------------------
 // Rule Definition
 //------------------------------------------------------------------------------
@@ -67717,6 +67909,8 @@ module.exports = {
             category: "ECMAScript 6",
             recommended: false
         },
+
+        fixable: "code",
 
         schema: [
             {
@@ -67743,11 +67937,54 @@ module.exports = {
          * @returns {void}
          */
         function report(node) {
-            context.report({
-                node: node,
-                message: "'{{name}}' is never reassigned, use 'const' instead.",
-                data: node
-            });
+            var reportArgs = {
+                    node: node,
+                    message: "'{{name}}' is never reassigned. Use 'const' instead.",
+                    data: node
+                },
+                varDeclParent = findUp(node, "VariableDeclaration", function(parentNode) {
+                    return lodash.endsWith(parentNode.type, "Statement");
+                }),
+                isNormalVarDecl = (node.parent.parent.parent.type === "ForInStatement" ||
+                        node.parent.parent.parent.type === "ForOfStatement" ||
+                        node.parent.init),
+
+                isDestructuringVarDecl =
+
+                    // {let {a} = obj} should be written as {const {a} = obj}
+                    (node.parent.parent.type === "ObjectPattern" &&
+
+                        // If options.destucturing is "all", then this warning will not occur unless
+                        // every assignment in the destructuring should be const. In that case, it's safe
+                        // to apply the fix. Otherwise, it's safe to apply the fix if there's only one
+                        // assignment occurring. If there is more than one assignment and options.destructuring
+                        // is not "all", then it's not clear how the developer would want to resolve the issue,
+                        // so we should not attempt to do it programmatically.
+                        (options.destructuring === "all" || node.parent.parent.properties.length === 1)) ||
+
+                    // {let [a] = [1]} should be written as {const [a] = [1]}
+                    (node.parent.type === "ArrayPattern" &&
+
+                        // See note above about fixing multiple warnings at once.
+                        (options.destructuring === "all" || node.parent.elements.length === 1));
+
+            if (varDeclParent &&
+                    (isNormalVarDecl || isDestructuringVarDecl) &&
+
+                    // If there are multiple variable declarations, like {let a = 1, b = 2}, then
+                    // do not attempt to fix if one of the declarations should be `const`. It's
+                    // too hard to know how the developer would want to automatically resolve the issue.
+                    varDeclParent.declarations.length === 1) {
+
+                reportArgs.fix = function(fixer) {
+                    return fixer.replaceTextRange(
+                        [varDeclParent.start, varDeclParent.start + "let".length],
+                        "const"
+                    );
+                };
+            }
+
+            context.report(reportArgs);
         }
 
         /**
@@ -67809,7 +68046,7 @@ module.exports = {
     }
 };
 
-},{"es6-map":23}],366:[function(require,module,exports){
+},{"es6-map":23,"lodash":162}],366:[function(require,module,exports){
 /**
  * @fileoverview Rule to suggest using "Reflect" api over Function/Object methods
  * @author Keith Cirkel <http://keithcirkel.co.uk>
@@ -69013,7 +69250,7 @@ module.exports = {
         docs: {
             description: "require generator functions to contain `yield`",
             category: "ECMAScript 6",
-            recommended: false
+            recommended: true
         },
 
         schema: []
@@ -71242,7 +71479,9 @@ var messages = {
     unnecessary: "Unnecessary 'use strict' directive.",
     module: "'use strict' is unnecessary inside of modules.",
     implied: "'use strict' is unnecessary when implied strict mode is enabled.",
-    unnecessaryInClasses: "'use strict' is unnecessary inside of classes."
+    unnecessaryInClasses: "'use strict' is unnecessary inside of classes.",
+    nonSimpleParameterList: "'use strict' directive inside a function with non-simple parameter list throws a syntax error since ES2016.",
+    wrap: "Wrap this function in a function with 'use strict' directive."
 };
 
 /**
@@ -71270,6 +71509,26 @@ function getUseStrictDirectives(statements) {
     }
 
     return directives;
+}
+
+/**
+ * Checks whether a given parameter is a simple parameter.
+ *
+ * @param {ASTNode} node - A pattern node to check.
+ * @returns {boolean} `true` if the node is an Identifier node.
+ */
+function isSimpleParameter(node) {
+    return node.type === "Identifier";
+}
+
+/**
+ * Checks whether a given parameter list is a simple parameter list.
+ *
+ * @param {ASTNode[]} params - A parameter list to check.
+ * @returns {boolean} `true` if the every parameter is an Identifier node.
+ */
+function isSimpleParameterList(params) {
+    return params.every(isSimpleParameter);
 }
 
 //------------------------------------------------------------------------------
@@ -71355,7 +71614,9 @@ module.exports = {
                 isStrict = useStrictDirectives.length > 0;
 
             if (isStrict) {
-                if (isParentStrict) {
+                if (!isSimpleParameterList(node.params)) {
+                    context.report(useStrictDirectives[0], messages.nonSimpleParameterList);
+                } else if (isParentStrict) {
                     context.report(useStrictDirectives[0], messages.unnecessary);
                 } else if (isInClass) {
                     context.report(useStrictDirectives[0], messages.unnecessaryInClasses);
@@ -71363,7 +71624,11 @@ module.exports = {
 
                 reportAllExceptFirst(useStrictDirectives, messages.multiple);
             } else if (isParentGlobal) {
-                context.report(node, messages.function);
+                if (isSimpleParameterList(node.params)) {
+                    context.report(node, messages.function);
+                } else {
+                    context.report(node, messages.wrap);
+                }
             }
 
             scopes.push(isParentStrict || isStrict);
@@ -71391,8 +71656,13 @@ module.exports = {
 
             if (mode === "function") {
                 enterFunctionInFunctionMode(node, useStrictDirectives);
-            } else {
-                reportAll(useStrictDirectives, messages[mode]);
+            } else if (useStrictDirectives.length > 0) {
+                if (isSimpleParameterList(node.params)) {
+                    reportAll(useStrictDirectives, messages[mode]);
+                } else {
+                    context.report(useStrictDirectives[0], messages.nonSimpleParameterList);
+                    reportAllExceptFirst(useStrictDirectives, messages.multiple);
+                }
             }
         }
 

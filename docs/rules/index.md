@@ -16,7 +16,6 @@ The `--fix` option on the [command line](../user-guide/command-line-interface#fi
 
 These rules relate to possible syntax or logic errors in JavaScript code:
 
-* [comma-dangle](comma-dangle): require or disallow trailing commas (recommended) (fixable)
 * [no-cond-assign](no-cond-assign): disallow assignment operators in conditional expressions (recommended)
 * [no-console](no-console): disallow the use of `console` (recommended)
 * [no-constant-condition](no-constant-condition): disallow constant expressions in conditions (recommended)
@@ -42,7 +41,7 @@ These rules relate to possible syntax or logic errors in JavaScript code:
 * [no-sparse-arrays](no-sparse-arrays): disallow sparse arrays (recommended)
 * [no-unexpected-multiline](no-unexpected-multiline): disallow confusing multiline expressions (recommended)
 * [no-unreachable](no-unreachable): disallow unreachable code after `return`, `throw`, `continue`, and `break` statements (recommended)
-* [no-unsafe-finally](no-unsafe-finally): disallow control flow statements in `finally` blocks
+* [no-unsafe-finally](no-unsafe-finally): disallow control flow statements in `finally` blocks (recommended)
 * [use-isnan](use-isnan): require calls to `isNaN()` when checking for `NaN` (recommended)
 * [valid-jsdoc](valid-jsdoc): enforce valid JSDoc comments
 * [valid-typeof](valid-typeof): enforce comparing `typeof` expressions against valid strings (recommended)
@@ -87,7 +86,7 @@ These rules relate to better ways of doing things to help you avoid problems:
 * [no-magic-numbers](no-magic-numbers): disallow magic numbers
 * [no-multi-spaces](no-multi-spaces): disallow multiple spaces (fixable)
 * [no-multi-str](no-multi-str): disallow multiline strings
-* [no-native-reassign](no-native-reassign): disallow reassigning native objects
+* [no-native-reassign](no-native-reassign): disallow assignments to native objects or read-only global variables (recommended)
 * [no-new](no-new): disallow `new` operators outside of assignments or comparisons
 * [no-new-func](no-new-func): disallow `new` operators with the `Function` object
 * [no-new-wrappers](no-new-wrappers): disallow `new` operators with the `String`, `Number`, and `Boolean` objects
@@ -162,6 +161,7 @@ These rules relate to style guidelines, and are therefore quite subjective:
 * [block-spacing](block-spacing): enforce consistent spacing inside single-line blocks (fixable)
 * [brace-style](brace-style): enforce consistent brace style for blocks
 * [camelcase](camelcase): enforce camelcase naming convention
+* [comma-dangle](comma-dangle): require or disallow trailing commas (fixable)
 * [comma-spacing](comma-spacing): enforce consistent spacing before and after commas (fixable)
 * [comma-style](comma-style): enforce consistent comma style
 * [computed-property-spacing](computed-property-spacing): enforce consistent spacing inside computed property brackets (fixable)
@@ -237,7 +237,7 @@ These rules relate to style guidelines, and are therefore quite subjective:
 These rules relate to ES6, also known as ES2015:
 
 * [arrow-body-style](arrow-body-style): require braces around arrow function bodies
-* [arrow-parens](arrow-parens): require parentheses around arrow function arguments
+* [arrow-parens](arrow-parens): require parentheses around arrow function arguments (fixable)
 * [arrow-spacing](arrow-spacing): enforce consistent spacing before and after the arrow in arrow functions (fixable)
 * [constructor-super](constructor-super): require `super()` calls in constructors (recommended)
 * [generator-star-spacing](generator-star-spacing): enforce consistent spacing around `*` operators in generator functions (fixable)
@@ -253,14 +253,14 @@ These rules relate to ES6, also known as ES2015:
 * [no-useless-constructor](no-useless-constructor): disallow unnecessary constructors
 * [no-useless-rename](no-useless-rename): disallow renaming import, export, and destructured assignments to the same name (fixable)
 * [no-var](no-var): require `let` or `const` instead of `var`
-* [object-shorthand](object-shorthand): require or disallow method and property shorthand syntax for object literals
+* [object-shorthand](object-shorthand): require or disallow method and property shorthand syntax for object literals (fixable)
 * [prefer-arrow-callback](prefer-arrow-callback): require arrow functions as callbacks
-* [prefer-const](prefer-const): require `const` declarations for variables that are never reassigned after declared
+* [prefer-const](prefer-const): require `const` declarations for variables that are never reassigned after declared (fixable)
 * [prefer-reflect](prefer-reflect): require `Reflect` methods where applicable
 * [prefer-rest-params](prefer-rest-params): require rest parameters instead of `arguments`
 * [prefer-spread](prefer-spread): require spread operators instead of `.apply()`
 * [prefer-template](prefer-template): require template literals instead of string concatenation
-* [require-yield](require-yield): require generator functions to contain `yield`
+* [require-yield](require-yield): require generator functions to contain `yield` (recommended)
 * [rest-spread-spacing](rest-spread-spacing): enforce spacing between rest and spread operators and their expressions (fixable)
 * [sort-imports](sort-imports): enforce sorted import declarations within modules
 * [template-curly-spacing](template-curly-spacing): require or disallow spacing around embedded expressions of template strings (fixable)

@@ -73,7 +73,7 @@ var a, b, c;
 Examples of **incorrect** code for this rule with the `{ "skipBlankLines": true }` option:
 
 ```js
-/*eslint max-lines: ["error", 2, {"skipBlankLines": true}]*/
+/*eslint max-lines: ["error", {"max": 2, "skipBlankLines": true}]*/
 
 var a,
     b,
@@ -83,7 +83,7 @@ var a,
 Examples of **correct** code for this rule with the `{ "skipBlankLines": true }` option:
 
 ```js
-/*eslint max-lines: ["error", 2, {"skipBlankLines": true}]*/
+/*eslint max-lines: ["error", {"max": 2, "skipBlankLines": true}]*/
 
 var a,
     b, c;
@@ -94,7 +94,7 @@ var a,
 Examples of **incorrect** code for this rule with the `{ "skipComments": true }` option:
 
 ```js
-/*eslint max-lines: ["error", 2, {"skipComments": true}]*/
+/*eslint max-lines: ["error", {"max": 2, "skipComments": true}]*/
 // a comment
 var a,
     b,
@@ -104,7 +104,7 @@ var a,
 Examples of **correct** code for this rule with the `{ "skipComments": true }` option:
 
 ```js
-/*eslint max-lines: ["error", 2, {"skipComments": true}]*/
+/*eslint max-lines: ["error", {"max": 2, "skipComments": true}]*/
 // a comment
 var a,
     b, c;
