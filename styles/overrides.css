@@ -203,39 +203,42 @@ main li p ~ ul {
   margin-bottom: 12px; /* same as p, ol, ul */
 }
 
+/* Move container to the right so icons have a 2em = 34px margin */
+/* .container has 15px horizontal padding */
+/* .container has effective minimum horizontal margin */
+/* from the difference between breakpoint and width, for example: */
+/* @media (min-width:768px){.container{width:750px}} */
+
 .container {
-  width: auto; /* override media queries */
-  margin-left: 0; /* not centered */
-  margin-right: 0; /* not centered */
-  padding-left: 3em;
-  padding-right: 0.5em;
+  position: relative;
 }
 
-main .container {
-  position: relative; /* for toc */
-  overflow: hidden; /* for toc */
+@media (min-width:768px){
+  .container {
+    left: 10px; /* 34 - 15 - 9 where 9 = 18 / 2 and 18 = 768 - 750 */
+  }
 }
 
-#markdown-toc {
-  position: absolute;
-  top: auto; /* aligned at the top of paragraph of content which follows in document order */
-  left: 51em; /* 2 padding + 43 content + 6 gutter */
-  white-space: nowrap;
-  padding-left: 0;
+@media (min-width:992px){
+  .container {
+     left: 8px; /* 34 - 15 - 11 where 11 = 22 / 2 and 22 = 992 - 970 */
+  }
 }
 
-#markdown-toc, /* is itself ul */
-#markdown-toc ul {
-  list-style: none;
-  margin-bottom: 0;
+@media (min-width:1200px) {
+  .container{
+    left: 4px; /* 34 - 15 - 15 where 15 = 30 / 2 and 30 = 1200 - 1170 */
+  }
 }
 
-a:active, a:focus, a:hover, /* needed only to override main.css */
-a {
-  color: #4B32C3; /* hsl(250,59%,48%) is same blue as outer hexagon in ESLint logo */
+body {
+  overflow-x: hidden; /* prevent horizontal scroll bar because of above */
 }
 
-#markdown-toc a,
+a:active, a:focus, a:hover { /* do not change the color */
+  color: #3a33d1; /* hsl(243,63%,51%) is same blue as outer hexagon in old ESLint logo */
+}
+
 a.anchorjs-link { /* anchor link icons */
   color: inherit; /* same as text */
 }
@@ -244,7 +247,7 @@ pre {
   font-size: 15px; /* for similar chars/line as text font */
   word-break: normal; /* do not break a line within an ordinary word */
   word-wrap: break-word; /* break an "unbreakable" word only if there are no otherwise-acceptable break points */
-  padding: 12px 2px; /* vertical same as margin-bottom of p and horizontal same as padding of code */
+  padding: 12px 4px; /* vertical same as margin-bottom of p and horizontal same as padding of code */
   border-width: 1px;
   border-color: #ccc; /* hsl(0,0%,80%) light gray */
   border-top-style: solid;
@@ -275,31 +278,17 @@ main h1, main h2, main h3, main h4, main p, main ol, main ul, main table, main d
   max-width: 731px; /* 43em is about 3 alphabets and just enough for 80 characters in pre */
 }
 
-/* breakpoint is based on content and rounded up to device size */
-/* 1020px = 17 px/em * (2 padding + 43 content + 6 gutter + 9 toc) em */
-@media (max-width: 1023px) { /* less than 1024px */
-
-  .container {
-    padding-left: 2em; /* padding-right plus negative left position of glyphicon in margin */
-  }
-
-  #markdown-toc {
-    display: none;
-  }
-
+main.blog ul, /* lists of commit messages in blog articles */
+.jumbotron + main h2, /* Who's using ESLint? */
+.jumbotron + main p { /* sentence under Welcome on home page */
+  max-width: none;
 }
 
 /* breakpoint is based on content and rounded up to device size */
 /* 765px = 17 px/em * (2 padding + 43 content) em */
 @media (max-width: 767px) { /* width less than 768px */
-
-  .container {
-    padding-left: 0.5em; /* same as padding-right */
-  }
-
   p.icon:before {
     position: static;
     margin-right: 0.5em; /* margin plus glyphicon width is same as padding-left of ul */
   }
-
 }
