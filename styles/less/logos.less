@@ -1,0 +1,35 @@
+.logos {
+    margin-top: 30px;
+    overflow-y: hidden;
+    transition: max-height 0.20s ease-out;
+    max-height: 150px;
+
+    .slide {
+        height: 150px;
+        text-align: center;
+        padding: 15px 5% 15px 5%;
+    }
+
+    img {
+        max-height: 100%;
+        max-width: 100%;
+        margin: 0 auto;
+        position: relative;
+        top: 50%;
+        transform: translateY(-50%);
+        -webkit-transform-style: preserve-3d;
+        -moz-transform-style: preserve-3d;
+        transform-style: preserve-3d
+    }
+
+    &.expended {
+        height: auto;
+        transition: max-height 1s ease-in
+    }
+}
+
+.expender {
+    margin-top: 10px;
+    margin-bottom: 30px;
+    cursor: pointer
+}
