@@ -17945,6 +17945,7 @@ module.exports={
 		"jest": false,
 		"pit": false,
 		"require": false,
+		"test": false,
 		"xdescribe": false,
 		"xit": false
 	},
@@ -48883,18 +48884,23 @@ module.exports = {
 
 		/**
          * Check to see if the node is a file level IIFE
-         * @param {ASTNode} node node to check
+         * @param {ASTNode} node The function node to check.
          * @returns {boolean} True if the node is the outer IIFE
          */
         function isOuterIIFE(node) {
-            return node && node.type === "CallExpression" &&
-                node.parent && node.parent.type === "ExpressionStatement" &&
-                node.parent.parent && node.parent.parent.type === "Program";
+            var parent = node.parent;
+
+            return (
+                parent.type === "CallExpression" &&
+                parent.callee === node &&
+                parent.parent.type === "ExpressionStatement" &&
+                parent.parent.parent && parent.parent.parent.type === "Program"
+            );
         }
 
         /**
          * Check indent for function block content
-         * @param {ASTNode} node node to examine
+         * @param {ASTNode} node A BlockStatement node that is inside of a function.
          * @returns {void}
          */
         function checkIndentInFunctionBlock(node) {
@@ -48947,8 +48953,8 @@ module.exports = {
             // is the outer IIFE and that option is enabled.
             var functionOffset = indentSize;
 
-            if (options.outerIIFEBody !== null && isOuterIIFE(calleeNode.parent)) {
-                functionOffset = options.outerIIFEBody;
+            if (options.outerIIFEBody !== null && isOuterIIFE(calleeNode)) {
+                functionOffset = options.outerIIFEBody * indentSize;
             }
             indent += functionOffset;
 
@@ -51341,7 +51347,7 @@ module.exports = {
 
             return comment &&
                 (start.line < lineNumber || (start.line === lineNumber && isFirstTokenOnLine)) &&
-                (end.line > lineNumber || end.column === line.length);
+                (end.line > lineNumber || (end.line === lineNumber && end.column === line.length));
         }
 
         /**
@@ -63902,6 +63908,7 @@ module.exports = {
 //------------------------------------------------------------------------------
 
 var lodash = require("lodash");
+var astUtils = require("../ast-utils");
 
 //------------------------------------------------------------------------------
 // Rule Definition
@@ -63987,6 +63994,8 @@ module.exports = {
         // Helpers
         //--------------------------------------------------------------------------
 
+        var STATEMENT_TYPE = /(?:Statement|Declaration)$/;
+
         /**
          * Determines if a given variable is being exported from a module.
          * @param {Variable} variable - EScope variable object.
@@ -64016,7 +64025,7 @@ module.exports = {
         /**
          * Determines if a reference is a read operation.
          * @param {Reference} ref - An escope Reference
-         * @returns {Boolean} whether the given reference represents a read operation
+         * @returns {boolean} whether the given reference represents a read operation
          * @private
          */
         function isReadRef(ref) {
@@ -64045,6 +64054,20 @@ module.exports = {
         }
 
         /**
+         * Checks the position of given nodes.
+         *
+         * @param {ASTNode} inner - A node which is expected as inside.
+         * @param {ASTNode} outer - A node which is expected as outside.
+         * @returns {boolean} `true` if the `inner` node exists in the `outer` node.
+         */
+        function isInside(inner, outer) {
+            return (
+                inner.range[0] >= outer.range[0] &&
+                inner.range[1] <= outer.range[1]
+            );
+        }
+
+        /**
          * If a given reference is left-hand side of an assignment, this gets
          * the right-hand side node of the assignment.
          *
@@ -64056,25 +64079,100 @@ module.exports = {
             var id = ref.identifier;
             var parent = id.parent;
             var granpa = parent.parent;
+            var refScope = ref.from.variableScope;
+            var varScope = ref.resolved.scope.variableScope;
+            var canBeUsedLater = refScope !== varScope;
 
             /*
              * Inherits the previous node if this reference is in the node.
              * This is for `a = a + a`-like code.
              */
-            if (prevRhsNode &&
-                prevRhsNode.range[0] <= id.range[0] &&
-                prevRhsNode.range[1] >= id.range[1]
-            ) {
+            if (prevRhsNode && isInside(id, prevRhsNode)) {
                 return prevRhsNode;
             }
 
             if (parent.type === "AssignmentExpression" &&
                 granpa.type === "ExpressionStatement" &&
-                id === parent.left
+                id === parent.left &&
+                !canBeUsedLater
             ) {
                 return parent.right;
             }
             return null;
+        }
+
+        /**
+         * Checks whether a given function node is stored to somewhere or not.
+         * If the function node is stored, the function can be used later.
+         *
+         * @param {ASTNode} funcNode - A function node to check.
+         * @param {ASTNode} rhsNode - The RHS node of the previous assignment.
+         * @returns {boolean} `true` if under the following conditions:
+         *      - the funcNode is assigned to a variable.
+         *      - the funcNode is bound as an argument of a function call.
+         *      - the function is bound to a property and the object satisfies above conditions.
+         */
+        function isStorableFunction(funcNode, rhsNode) {
+            var node = funcNode;
+            var parent = funcNode.parent;
+
+            while (parent && isInside(parent, rhsNode)) {
+                switch (parent.type) {
+                    case "SequenceExpression":
+                        if (parent.expressions[parent.expressions.length - 1] !== node) {
+                            return false;
+                        }
+                        break;
+
+                    case "CallExpression":
+                    case "NewExpression":
+                        return parent.callee !== node;
+
+                    case "AssignmentExpression":
+                    case "TaggedTemplateExpression":
+                    case "YieldExpression":
+                        return true;
+
+                    default:
+                        if (STATEMENT_TYPE.test(parent.type)) {
+
+                            /*
+                             * If it encountered statements, this is a complex pattern.
+                             * Since analyzeing complex patterns is hard, this returns `true` to avoid false positive.
+                             */
+                            return true;
+                        }
+                }
+
+                node = parent;
+                parent = parent.parent;
+            }
+
+            return false;
+        }
+
+        /**
+         * Checks whether a given Identifier node exists inside of a function node which can be used later.
+         *
+         * "can be used later" means:
+         * - the function is assigned to a variable.
+         * - the function is bound to a property and the object can be used later.
+         * - the function is bound as an argument of a function call.
+         *
+         * If a reference exists in a function which can be used later, the reference is read when the function is called.
+         *
+         * @param {ASTNode} id - An Identifier node to check.
+         * @param {ASTNode} rhsNode - The RHS node of the previous assignment.
+         * @returns {boolean} `true` if the `id` node exists inside of a function node which can be used later.
+         */
+        function isInsideOfStorableFunction(id, rhsNode) {
+            var funcNode = astUtils.getUpperFunction(id);
+
+            return (
+                funcNode &&
+                isInside(funcNode, rhsNode) &&
+                isStorableFunction(funcNode, rhsNode)
+            );
         }
 
         /**
@@ -64105,17 +64203,54 @@ module.exports = {
                 // in RHS of an assignment for itself. e.g. `a = a + 1`
                 (
                     rhsNode &&
-                    rhsNode.range[0] <= id.range[0] &&
-                    rhsNode.range[1] >= id.range[1]
+                    isInside(id, rhsNode) &&
+                    !isInsideOfStorableFunction(id, rhsNode)
                 )
             );
         }
 
         /**
+         * Determine if an identifier is used either in for-in loops.
+         *
+         * @param {Reference} ref - The reference to check.
+         * @returns {boolean} whether reference is used in the for-in loops
+         * @private
+         */
+        function isForInRef(ref) {
+            var target = ref.identifier.parent;
+
+
+            // "for (var ...) { return; }"
+            if (target.type === "VariableDeclarator") {
+                target = target.parent.parent;
+            }
+
+            if (target.type !== "ForInStatement") {
+                return false;
+            }
+
+            // "for (...) { return; }"
+            if (target.body.type === "BlockStatement") {
+                target = target.body.body[0];
+
+            // "for (...) return;"
+            } else {
+                target = target.body;
+            }
+
+            // For empty loop body
+            if (!target) {
+                return false;
+            }
+
+            return target.type === "ReturnStatement";
+        }
+
+        /**
          * Determines if the variable is used.
          * @param {Variable} variable - The variable to check.
-         * @param {Reference[]} references - The variable references to check.
          * @returns {boolean} True if the variable is used
+         * @private
          */
         function isUsedVariable(variable) {
             var functionNodes = variable.defs.filter(function(def) {
@@ -64127,6 +64262,10 @@ module.exports = {
                 rhsNode = null;
 
             return variable.references.some(function(ref) {
+                if (isForInRef(ref)) {
+                    return true;
+                }
+
                 var forItself = isReadForItself(ref, rhsNode);
 
                 rhsNode = getRhsNode(ref, rhsNode);
@@ -64236,6 +64375,7 @@ module.exports = {
          * @param {escope.Variable} variable - A variable to get.
          * @param {ASTNode} comment - A comment node which includes the variable name.
          * @returns {number} The index of the variable name's location.
+         * @private
          */
         function getColumnInComment(variable, comment) {
             var namePattern = new RegExp("[\\s,]" + lodash.escapeRegExp(variable.name) + "(?:$|[\\s,:])", "g");
@@ -64255,6 +64395,7 @@ module.exports = {
          *
          * @param {escope.Variable} variable - A variable to get its location.
          * @returns {{line: number, column: number}} The location object for the variable.
+         * @private
          */
         function getLocation(variable) {
             var comment = variable.eslintExplicitGlobalComment;
@@ -64309,7 +64450,7 @@ module.exports = {
     }
 };
 
-},{"lodash":162}],343:[function(require,module,exports){
+},{"../ast-utils":163,"lodash":162}],343:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag use of variables before they are defined
  * @author Ilya Volodin
