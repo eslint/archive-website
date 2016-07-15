@@ -179,6 +179,7 @@ These rules relate to style guidelines, and are therefore quite subjective:
 * [max-params](max-params.md): enforce a maximum number of parameters in `function` definitions
 * [max-statements](max-statements.md): enforce a maximum number of statements allowed in `function` blocks
 * [max-statements-per-line](max-statements-per-line.md): enforce a maximum number of statements allowed per line
+* [multiline-ternary](multiline-ternary.md): enforce newlines between operands of ternary expressions
 * [new-cap](new-cap.md): require constructor `function` names to begin with a capital letter
 * [new-parens](new-parens.md): require parentheses when invoking a constructor with no arguments
 * [newline-after-var](newline-after-var.md): require or disallow an empty line after `var` declarations
@@ -246,7 +247,7 @@ These rules relate to ES6, also known as ES2015:
 * [no-useless-computed-key](no-useless-computed-key.md): disallow unnecessary computed property keys in object literals
 * [no-useless-constructor](no-useless-constructor.md): disallow unnecessary constructors
 * [no-useless-rename](no-useless-rename.md): disallow renaming import, export, and destructured assignments to the same name (fixable)
-* [no-var](no-var.md): require `let` or `const` instead of `var`
+* [no-var](no-var.md): require `let` or `const` instead of `var` (fixable)
 * [object-shorthand](object-shorthand.md): require or disallow method and property shorthand syntax for object literals (fixable)
 * [prefer-arrow-callback](prefer-arrow-callback.md): require arrow functions as callbacks
 * [prefer-const](prefer-const.md): require `const` declarations for variables that are never reassigned after declared (fixable)
