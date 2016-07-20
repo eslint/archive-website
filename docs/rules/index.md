@@ -20,10 +20,10 @@ The `--fix` option on the [command line](../user-guide/command-line-interface#fi
 
 <table class="rule-list table">
 <colgroup>
-<col class="recommended"></col>
-<col class="fixable"></col>
-<col class="name"></col>
-<col class="description"></col>
+<col class="recommended" />
+<col class="fixable" />
+<col class="name" />
+<col class="description" />
 </colgroup>
 <tbody>
 {% for rule in category.rules %}
