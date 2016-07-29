@@ -1,3 +1,9 @@
+---
+title: Rule no-extra-parens
+layout: doc
+---
+<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
+
 # disallow unnecessary parentheses (no-extra-parens)
 
 This rule restricts the use of parentheses to only where they are necessary.
@@ -6,8 +12,8 @@ This rule restricts the use of parentheses to only where they are necessary.
 
 This rule always ignores extra parentheses around the following:
 
-* RegExp literals such as `(/abc/).test(var)` to avoid conflicts with the [wrap-regex](wrap-regex.md) rule
-* immediately-invokes function expressions (also known as IIFEs) such as `var x = (function () {})();` and `((function foo() {return 1;})())` to avoid conflicts with the [wrap-iife](wrap-iife.md) rule
+* RegExp literals such as `(/abc/).test(var)` to avoid conflicts with the [wrap-regex](wrap-regex) rule
+* immediately-invokes function expressions (also known as IIFEs) such as `var x = (function () {})();` and `((function foo() {return 1;})())` to avoid conflicts with the [wrap-iife](wrap-iife) rule
 
 ## Options
 
@@ -138,5 +144,14 @@ typeof (a);
 
 ## Related Rules
 
-* [no-cond-assign](no-cond-assign.md)
-* [no-return-assign](no-return-assign.md)
+* [no-cond-assign](no-cond-assign)
+* [no-return-assign](no-return-assign)
+
+## Version
+
+This rule was introduced in ESLint 0.1.4.
+
+## Resources
+
+* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/no-extra-parens.js)
+* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/no-extra-parens.md)

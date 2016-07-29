@@ -1,3 +1,9 @@
+---
+title: Rule wrap-iife
+layout: doc
+---
+<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
+
 # Require IIFEs to be Wrapped (wrap-iife)
 
 You can immediately invoke function expressions, but not function declarations. A common technique to create an immediately-invoked function expression (IIFE) is to wrap a function declaration in parentheses. The opening parentheses causes the contained function to be parsed as an expression, rather than a declaration.
@@ -78,3 +84,12 @@ Examples of **correct** code for the `"any"` option:
 var x = (function () { return { y: 1 };}()); // wrapped call expression
 var x = (function () { return { y: 1 };})(); // wrapped function expression
 ```
+
+## Version
+
+This rule was introduced in ESLint 0.0.9.
+
+## Resources
+
+* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/wrap-iife.js)
+* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/wrap-iife.md)

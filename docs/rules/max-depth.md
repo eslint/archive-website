@@ -1,3 +1,9 @@
+---
+title: Rule max-depth
+layout: doc
+---
+<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
+
 # enforce a maximum depth that blocks can be nested (max-depth)
 
 Many developers consider code difficult to read if blocks are nested beyond a certain depth.
@@ -56,8 +62,17 @@ function foo() {
 
 ## Related Rules
 
-* [complexity](complexity.md)
-* [max-len](max-len.md)
-* [max-nested-callbacks](max-nested-callbacks.md)
-* [max-params](max-params.md)
-* [max-statements](max-statements.md)
+* [complexity](complexity)
+* [max-len](max-len)
+* [max-nested-callbacks](max-nested-callbacks)
+* [max-params](max-params)
+* [max-statements](max-statements)
+
+## Version
+
+This rule was introduced in ESLint 0.0.9.
+
+## Resources
+
+* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/max-depth.js)
+* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/max-depth.md)

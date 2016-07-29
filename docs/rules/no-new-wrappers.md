@@ -1,3 +1,9 @@
+---
+title: Rule no-new-wrappers
+layout: doc
+---
+<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
+
 # Disallow Primitive Wrapper Instances (no-new-wrappers)
 
 There are three primitive types in JavaScript that have wrapper objects: string, number, and boolean. These are represented by the constructors `String`, `Number`, and `Boolean`, respectively. The primitive wrapper types are used whenever one of these primitive values is read, providing them with object-like capabilities such as methods. Behind the scenes, an object of the associated wrapper type is created and then destroyed, which is why you can call methods on primitive values, such as:
@@ -74,5 +80,14 @@ If you want to allow the use of primitive wrapper objects, then you can safely d
 
 ## Related Rules
 
-* [no-array-constructor](no-array-constructor.md)
-* [no-new-object](no-new-object.md)
+* [no-array-constructor](no-array-constructor)
+* [no-new-object](no-new-object)
+
+## Version
+
+This rule was introduced in ESLint 0.0.6.
+
+## Resources
+
+* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/no-new-wrappers.js)
+* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/no-new-wrappers.md)

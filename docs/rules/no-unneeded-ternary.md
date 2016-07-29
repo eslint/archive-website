@@ -1,3 +1,9 @@
+---
+title: Rule no-unneeded-ternary
+layout: doc
+---
+<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
+
 # disallow ternary operators when simpler alternatives exist (no-unneeded-ternary)
 
 It's a common mistake in JavaScript to use a conditional expression to select between two Boolean values instead of using ! to convert the test to a Boolean.
@@ -82,5 +88,14 @@ You can turn this rule off if you are not concerned with unnecessary complexity 
 
 ## Related Rules
 
-* [no-ternary](no-ternary.md)
-* [no-nested-ternary](no-nested-ternary.md)
+* [no-ternary](no-ternary)
+* [no-nested-ternary](no-nested-ternary)
+
+## Version
+
+This rule was introduced in ESLint 0.21.0.
+
+## Resources
+
+* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/no-unneeded-ternary.js)
+* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/no-unneeded-ternary.md)

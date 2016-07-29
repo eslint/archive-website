@@ -1,3 +1,9 @@
+---
+title: Rule camelcase
+layout: doc
+---
+<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
+
 # Require Camelcase (camelcase)
 
 When it comes to naming variables, style guides generally fall into one of two camps: camelcase (`variableName`) and underscores (`variable_name`). This rule focuses on using the camelcase approach. If your style guide calls for camelcasing your variable names, then this rule is for you!
@@ -67,3 +73,12 @@ var obj = {
 ## When Not To Use It
 
 If you have established coding standards using a different naming convention (separating words with underscores), turn this rule off.
+
+## Version
+
+This rule was introduced in ESLint 0.0.2.
+
+## Resources
+
+* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/camelcase.js)
+* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/camelcase.md)

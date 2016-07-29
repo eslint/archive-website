@@ -1,3 +1,9 @@
+---
+title: Rule no-extra-bind
+layout: doc
+---
+<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
+
 # Disallow unnecessary function binding (no-extra-bind)
 
 The `bind()` method is used to create functions with specific `this` values and, optionally, binds arguments to specific values. When used to specify the value of `this`, it's important that the function actually use `this` in its function body. For example:
@@ -84,3 +90,12 @@ If you are not concerned about unnecessary calls to `bind()`, you can safely dis
 
 * [Function.prototype.bind](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/bind)
 * [Understanding JavaScript's Function.prototype.bind](http://www.smashingmagazine.com/2014/01/understanding-javascript-function-prototype-bind/)
+
+## Version
+
+This rule was introduced in ESLint 0.8.0.
+
+## Resources
+
+* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/no-extra-bind.js)
+* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/no-extra-bind.md)

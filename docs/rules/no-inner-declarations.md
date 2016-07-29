@@ -1,3 +1,9 @@
+---
+title: Rule no-inner-declarations
+layout: doc
+---
+<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
+
 # disallow `function` or `var` declarations in nested blocks (no-inner-declarations)
 
 In JavaScript, prior to ES6, a function declaration is only allowed in the first level of a program or the body of another function, though parsers sometimes [erroneously accept them elsewhere](https://code.google.com/p/esprima/issues/detail?id=422). This only applies to function declarations; named or anonymous function expressions can occur anywhere an expression is permitted.
@@ -141,4 +147,13 @@ function doAnotherThing() {
 
 ## When Not To Use It
 
-The function declaration portion rule will be rendered obsolete when [block-scoped functions](https://bugzilla.mozilla.org/show_bug.cgi?id=585536) land in ES6, but until then, it should be left on to enforce valid constructions. Disable checking variable declarations when using [block-scoped-var](block-scoped-var.md) or if declaring variables in nested blocks is acceptable despite hoisting.
+The function declaration portion rule will be rendered obsolete when [block-scoped functions](https://bugzilla.mozilla.org/show_bug.cgi?id=585536) land in ES6, but until then, it should be left on to enforce valid constructions. Disable checking variable declarations when using [block-scoped-var](block-scoped-var) or if declaring variables in nested blocks is acceptable despite hoisting.
+
+## Version
+
+This rule was introduced in ESLint 0.6.0.
+
+## Resources
+
+* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/no-inner-declarations.js)
+* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/no-inner-declarations.md)

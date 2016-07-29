@@ -1,3 +1,9 @@
+---
+title: Rule no-case-declarations
+layout: doc
+---
+<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
+
 # Disallow lexical declarations in case/default clauses (no-case-declarations)
 
 This rule disallows lexical declarations (`let`, `const`, `function` and `class`)
@@ -64,4 +70,13 @@ If you depend on fall through behavior and want access to bindings introduced in
 
 ## Related Rules
 
-* [no-fallthrough](no-fallthrough.md)
+* [no-fallthrough](no-fallthrough)
+
+## Version
+
+This rule was introduced in ESLint 1.9.0.
+
+## Resources
+
+* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/no-case-declarations.js)
+* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/no-case-declarations.md)

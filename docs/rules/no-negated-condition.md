@@ -1,3 +1,9 @@
+---
+title: Rule no-negated-condition
+layout: doc
+---
+<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
+
 # disallow negated conditions (no-negated-condition)
 
 Negated conditions are more difficult to understand. Code can be made more readable by inverting the condition instead.
@@ -56,3 +62,12 @@ if (a != b) {
 
 a ? b : c
 ```
+
+## Version
+
+This rule was introduced in ESLint 1.6.0.
+
+## Resources
+
+* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/no-negated-condition.js)
+* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/no-negated-condition.md)

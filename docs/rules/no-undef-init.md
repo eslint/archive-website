@@ -1,3 +1,9 @@
+---
+title: Rule no-undef-init
+layout: doc
+---
+<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
+
 # Disallow Initializing to undefined (no-undef-init)
 
 In JavaScript, a variable that is declared and not initialized to any value automatically gets the value of `undefined`. For example:
@@ -107,5 +113,14 @@ for (i = 0; i < 10; i++) {
 
 ## Related Rules
 
-* [no-undefined](no-undefined.md)
-* [no-void](no-void.md)
+* [no-undefined](no-undefined)
+* [no-void](no-void)
+
+## Version
+
+This rule was introduced in ESLint 0.0.6.
+
+## Resources
+
+* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/no-undef-init.js)
+* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/no-undef-init.md)

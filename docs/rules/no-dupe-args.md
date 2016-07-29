@@ -1,3 +1,9 @@
+---
+title: Rule no-dupe-args
+layout: doc
+---
+<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
+
 # disallow duplicate arguments in `function` definitions (no-dupe-args)
 
 If more than one parameter has the same name in a function definition, the last occurrence "shadows" the preceding occurrences. A duplicated name might be a typing error.
@@ -35,3 +41,12 @@ var bar = function (a, b, c) {
     console.log(a, b, c);
 };
 ```
+
+## Version
+
+This rule was introduced in ESLint 0.16.0.
+
+## Resources
+
+* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/no-dupe-args.js)
+* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/no-dupe-args.md)

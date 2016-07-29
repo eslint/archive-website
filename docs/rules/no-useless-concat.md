@@ -1,3 +1,9 @@
+---
+title: Rule no-useless-concat
+layout: doc
+---
+<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
+
 # Disallow unnecessary concatenation of strings (no-useless-concat)
 
 It's unnecessary to concatenate two strings together, such as:
@@ -48,3 +54,12 @@ var c = "foo" +
 ## When Not To Use It
 
 If you don't want to be notified about unnecessary string concatenation, you can safely disable this rule.
+
+## Version
+
+This rule was introduced in ESLint 1.3.0.
+
+## Resources
+
+* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/no-useless-concat.js)
+* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/no-useless-concat.md)

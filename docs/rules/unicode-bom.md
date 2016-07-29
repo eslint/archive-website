@@ -1,3 +1,9 @@
+---
+title: Rule unicode-bom
+layout: doc
+---
+<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
+
 # Require or disallow the Unicode Byte Order Mark (BOM) (unicode-bom)
 
 (fixable) The `--fix` option on the [command line](../user-guide/command-line-interface#fix) automatically fixes problems reported by this rule.
@@ -63,3 +69,12 @@ var abc;
 
 If you use some UTF-16 or UTF-32 files and you want to allow a file to
 optionally begin with a Unicode BOM, you should turn this rule off.
+
+## Version
+
+This rule was introduced in ESLint 2.11.0.
+
+## Resources
+
+* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/unicode-bom.js)
+* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/unicode-bom.md)

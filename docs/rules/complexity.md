@@ -1,3 +1,9 @@
+---
+title: Rule complexity
+layout: doc
+---
+<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
+
 # Limit Cyclomatic Complexity (complexity)
 
 Cyclomatic complexity measures the number of linearly independent paths through a program's source code. This rule allows setting a cyclomatic complexity threshold.
@@ -75,8 +81,17 @@ If you can't determine an appropriate complexity limit for your code, then it's 
 
 ## Related Rules
 
-* [max-depth](max-depth.md)
-* [max-len](max-len.md)
-* [max-nested-callbacks](max-nested-callbacks.md)
-* [max-params](max-params.md)
-* [max-statements](max-statements.md)
+* [max-depth](max-depth)
+* [max-len](max-len)
+* [max-nested-callbacks](max-nested-callbacks)
+* [max-params](max-params)
+* [max-statements](max-statements)
+
+## Version
+
+This rule was introduced in ESLint 0.0.9.
+
+## Resources
+
+* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/complexity.js)
+* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/complexity.md)

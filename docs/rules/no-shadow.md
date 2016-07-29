@@ -1,3 +1,9 @@
+---
+title: Rule no-shadow
+layout: doc
+---
+<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
+
 # Disallow Shadowing (no-shadow)
 
 Shadowing is the process by which a local variable shares the same name as a variable in its containing scope. For example:
@@ -170,4 +176,13 @@ foo(function (err, result) {
 
 ## Related Rules
 
-* [no-shadow-restricted-names](no-shadow-restricted-names.md)
+* [no-shadow-restricted-names](no-shadow-restricted-names)
+
+## Version
+
+This rule was introduced in ESLint 0.0.9.
+
+## Resources
+
+* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/no-shadow.js)
+* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/no-shadow.md)

@@ -1,3 +1,9 @@
+---
+title: Rule Deprecation
+layout: doc
+---
+<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
+
 # Rule Deprecation
 
 Balancing the trade-offs of improving a tool and the frustration these changes can cause is a difficult task. One key area in which this affects our users is in the removal of rules.

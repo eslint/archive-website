@@ -1,3 +1,9 @@
+---
+title: Rule indent
+layout: doc
+---
+<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
+
 # enforce consistent indentation (indent)
 
 (fixable) The `--fix` option on the [command line](../user-guide/command-line-interface#fix) automatically fixes problems reported by this rule.
@@ -280,3 +286,12 @@ foo
 
 * **JSHint**: `indent`
 * **JSCS**: [validateIndentation](http://jscs.info/rule/validateIndentation)
+
+## Version
+
+This rule was introduced in ESLint 0.14.0.
+
+## Resources
+
+* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/indent.js)
+* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/indent.md)

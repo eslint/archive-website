@@ -1,3 +1,9 @@
+---
+title: Configuring ESLint
+layout: doc
+---
+<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
+
 # Configuring ESLint
 
 ESLint is designed to be completely configurable, meaning you can turn off every rule and run only with basic syntax validation, or mix and match the bundled rules and your custom rules to make ESLint perfect for your project. There are two primary ways to configure ESLint:
@@ -191,7 +197,7 @@ And in YAML:
 
 ## Specifying Globals
 
-The [no-undef](../rules/no-undef.md) rule will warn on variables that are accessed but not defined within the same file. If you are using global variables inside of a file then it's worthwhile to define those globals so that ESLint will not warn about their usage. You can define global variables either using comments inside of a file or in the configuration file.
+The [no-undef](../rules/no-undef) rule will warn on variables that are accessed but not defined within the same file. If you are using global variables inside of a file then it's worthwhile to define those globals so that ESLint will not warn about their usage. You can define global variables either using comments inside of a file or in the configuration file.
 
 To specify globals using a comment inside of your JavaScript file, use the following format:
 
@@ -227,7 +233,7 @@ And in YAML:
 
 These examples allow `var1` to be overwritten in your code, but disallow it for `var2`.
 
-**Note:** Enable the [no-native-reassign](../rules/no-native-reassign.md) rule to disallow modifications to read-only global variables in your code.
+**Note:** Enable the [no-native-reassign](../rules/no-native-reassign) rule to disallow modifications to read-only global variables in your code.
 
 ## Configuring Plugins
 

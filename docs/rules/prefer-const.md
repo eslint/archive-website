@@ -1,3 +1,9 @@
+---
+title: Rule prefer-const
+layout: doc
+---
+<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
+
 # Suggest using `const` (prefer-const)
 
 (fixable) The `--fix` option on the [command line](../user-guide/command-line-interface#fix) automatically fixes some instances of problems reported by this rule.
@@ -194,5 +200,14 @@ If you don't want to be notified about variables that are never reassigned after
 
 ## Related Rules
 
-* [no-var](no-var.md)
-* [no-use-before-define](no-use-before-define.md)
+* [no-var](no-var)
+* [no-use-before-define](no-use-before-define)
+
+## Version
+
+This rule was introduced in ESLint 0.23.0.
+
+## Resources
+
+* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/prefer-const.js)
+* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/prefer-const.md)

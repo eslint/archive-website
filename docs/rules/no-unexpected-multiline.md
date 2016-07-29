@@ -1,6 +1,12 @@
+---
+title: Rule no-unexpected-multiline
+layout: doc
+---
+<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
+
 # disallow confusing multiline expressions (no-unexpected-multiline)
 
-Semicolons are usually optional in JavaScript, because of automatic semicolon insertion (ASI). You can require or disallow semicolons with the [semi](./semi.md) rule.
+Semicolons are usually optional in JavaScript, because of automatic semicolon insertion (ASI). You can require or disallow semicolons with the [semi](./semi) rule.
 
 The rules for ASI are relatively straightforward: As once described by Isaac Schlueter, a newline character character always ends a statement, just like a semicolon, **except** where one of the following is true:
 
@@ -62,10 +68,19 @@ tag `hello`
 
 You can turn this rule off if you are confident that you will not accidentally introduce code like this.
 
-Note that the patterns considered problems are **not** flagged by the [semi](semi.md) rule.
+Note that the patterns considered problems are **not** flagged by the [semi](semi) rule.
 
 ## Related Rules
 
-* [semi](semi.md)
-* [no-spaced-func](no-spaced-func.md)
-* [space-unary-ops](space-unary-ops.md)
+* [semi](semi)
+* [no-spaced-func](no-spaced-func)
+* [space-unary-ops](space-unary-ops)
+
+## Version
+
+This rule was introduced in ESLint 0.24.0.
+
+## Resources
+
+* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/no-unexpected-multiline.js)
+* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/no-unexpected-multiline.md)

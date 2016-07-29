@@ -1,3 +1,9 @@
+---
+title: Rule no-sequences
+layout: doc
+---
+<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
+
 # Disallow Use of the Comma Operator (no-sequences)
 
 The comma operator includes multiple expressions where only one is expected. It evaluates each operand from left to right and returns the value of the last operand. However, this frequently obscures side effects, and its use is often an accident. Here are some examples of sequences:
@@ -66,3 +72,12 @@ while ((val = foo(), val < 42));
 ## When Not To Use It
 
 Disable this rule if sequence expressions with the comma operator are acceptable.
+
+## Version
+
+This rule was introduced in ESLint 0.5.1.
+
+## Resources
+
+* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/no-sequences.js)
+* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/no-sequences.md)

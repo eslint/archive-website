@@ -1,3 +1,9 @@
+---
+title: Rule no-useless-computed-key
+layout: doc
+---
+<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
+
 # Disallow unnecessary computed property keys on objects (no-useless-computed-key)
 
 It's unnecessary to use computed properties with literals such as:
@@ -46,3 +52,12 @@ var c = { '0+1,234': 0 };
 ## When Not To Use It
 
 If you don't want to be notified about unnecessary computed property keys, you can safely disable this rule.
+
+## Version
+
+This rule was introduced in ESLint 2.9.0.
+
+## Resources
+
+* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/no-useless-computed-key.js)
+* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/no-useless-computed-key.md)

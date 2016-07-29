@@ -1,3 +1,9 @@
+---
+title: Rule space-before-function-paren
+layout: doc
+---
+<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
+
 # Require or disallow a space before function parenthesis (space-before-function-paren)
 
 (fixable) The `--fix` option on the [command line](../user-guide/command-line-interface#fix) automatically fixes problems reported by this rule.
@@ -332,5 +338,14 @@ You can turn this rule off if you are not concerned with the consistency of spac
 
 ## Related Rules
 
-* [space-after-keywords](space-after-keywords.md)
-* [space-return-throw-case](space-return-throw-case.md)
+* [space-after-keywords](space-after-keywords)
+* [space-return-throw-case](space-return-throw-case)
+
+## Version
+
+This rule was introduced in ESLint 0.18.0.
+
+## Resources
+
+* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/space-before-function-paren.js)
+* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/space-before-function-paren.md)

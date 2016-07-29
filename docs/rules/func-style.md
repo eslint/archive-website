@@ -1,3 +1,9 @@
+---
+title: Rule func-style
+layout: doc
+---
+<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
+
 # enforce the consistent use of either `function` declarations or expressions (func-style)
 
 There are two ways of defining functions in JavaScript: `function` declarations and `function` expressions. Declarations contain the `function` keyword first, followed by a name and then its arguments and the function body, for example:
@@ -125,3 +131,12 @@ If you want to allow developers to each decide how they want to write functions 
 ## Further Reading
 
 * [JavaScript Scoping and Hoisting](http://www.adequatelygood.com/JavaScript-Scoping-and-Hoisting.html)
+
+## Version
+
+This rule was introduced in ESLint 0.2.0.
+
+## Resources
+
+* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/func-style.js)
+* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/func-style.md)

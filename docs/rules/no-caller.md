@@ -1,3 +1,9 @@
+---
+title: Rule no-caller
+layout: doc
+---
+<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
+
 # Disallow Use of caller/callee (no-caller)
 
 The use of `arguments.caller` and `arguments.callee` make several code optimizations impossible. They have been deprecated in future versions of JavaScript and their use is forbidden in ECMAScript 5 while in strict mode.
@@ -47,3 +53,12 @@ function foo(n) {
     return !(n > 1) ? 1 : factorial(n - 1) * n;
 });
 ```
+
+## Version
+
+This rule was introduced in ESLint 0.0.6.
+
+## Resources
+
+* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/no-caller.js)
+* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/no-caller.md)

@@ -1,3 +1,9 @@
+---
+title: Rule no-func-assign
+layout: doc
+---
+<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
+
 # disallow reassigning `function` declarations (no-func-assign)
 
 JavaScript functions can be written as a FunctionDeclaration `function foo() { ... }` or as a FunctionExpression `var foo = function() { ... };`. While a JavaScript interpreter might tolerate it, overwriting/reassigning a function written as a FunctionDeclaration is often indicative of a mistake or issue.
@@ -49,3 +55,12 @@ function foo() {
     var foo = bar;  // `foo` is shadowed.
 }
 ```
+
+## Version
+
+This rule was introduced in ESLint 0.0.9.
+
+## Resources
+
+* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/no-func-assign.js)
+* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/no-func-assign.md)

@@ -1,3 +1,9 @@
+---
+title: Rule block-spacing
+layout: doc
+---
+<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
+
 # Disallow or enforce spaces inside of single line blocks (block-spacing)
 
 (fixable) The `--fix` option on the [command line](../user-guide/command-line-interface#fix) automatically fixes problems reported by this rule.
@@ -56,3 +62,12 @@ if (foo) {bar = 0;}
 ## When Not To Use It
 
 If you don't want to be notified about spacing style inside of blocks, you can safely disable this rule.
+
+## Version
+
+This rule was introduced in ESLint 1.2.0.
+
+## Resources
+
+* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/block-spacing.js)
+* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/block-spacing.md)

@@ -1,3 +1,9 @@
+---
+title: Rule arrow-body-style
+layout: doc
+---
+<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
+
 # Require braces in arrow function body (arrow-body-style)
 
 Arrow functions have two syntactic forms for their function bodies.  They may be defined with a *block* body (denoted by curly braces) `() => { ... }` or with a single expression `() => ...`, whose value is implicitly returned.
@@ -138,3 +144,12 @@ Examples of **correct** code for this rule with the `"never"` option:
 let foo = () => 0;
 let foo = () => ({ foo: 0 });
 ```
+
+## Version
+
+This rule was introduced in ESLint 1.8.0.
+
+## Resources
+
+* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/arrow-body-style.js)
+* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/arrow-body-style.md)

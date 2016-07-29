@@ -1,3 +1,9 @@
+---
+title: Rule comma-dangle
+layout: doc
+---
+<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
+
 # require or disallow trailing commas (comma-dangle)
 
 (fixable) The `--fix` option on the [command line](../user-guide/command-line-interface#fix) automatically fixes problems reported by this rule.
@@ -240,3 +246,12 @@ foo({
 ## When Not To Use It
 
 You can turn this rule off if you are not concerned with dangling commas.
+
+## Version
+
+This rule was introduced in ESLint 0.16.0.
+
+## Resources
+
+* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/comma-dangle.js)
+* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/comma-dangle.md)

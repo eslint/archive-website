@@ -1,3 +1,9 @@
+---
+title: Rule no-void
+layout: doc
+---
+<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
+
 # Disallow use of the void operator. (no-void)
 
 The `void` operator takes an operand and returns `undefined`: `void expression` will evaluate `expression` and return `undefined`. It can be used to ignore any side effects `expression` may produce:
@@ -69,5 +75,14 @@ If you intentionally use the `void` operator then you can disable this rule.
 
 ## Related Rules
 
-* [no-undef-init](no-undef-init.md)
-* [no-undefined](no-undefined.md)
+* [no-undef-init](no-undef-init)
+* [no-undefined](no-undefined)
+
+## Version
+
+This rule was introduced in ESLint 0.8.0.
+
+## Resources
+
+* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/no-void.js)
+* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/no-void.md)

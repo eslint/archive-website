@@ -1,3 +1,9 @@
+---
+title: Rule yoda
+layout: doc
+---
+<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
+
 # Require or disallow Yoda Conditions (yoda)
 
 Yoda conditions are so named because the literal value of the condition comes first while the variable comes second. For example, the following is a Yoda condition:
@@ -150,3 +156,12 @@ if (-1 < str.indexOf(substr)) {
 
 * [Yoda Conditions](http://en.wikipedia.org/wiki/Yoda_conditions)
 * [Yoda Notation and Safe Switching](http://thomas.tuerke.net/on/design/?with=1249091668#msg1146181680)
+
+## Version
+
+This rule was introduced in ESLint 0.7.1.
+
+## Resources
+
+* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/yoda.js)
+* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/yoda.md)

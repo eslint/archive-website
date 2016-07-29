@@ -1,3 +1,9 @@
+---
+title: Rule yield-star-spacing
+layout: doc
+---
+<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
+
 # Enforce spacing around the `*` in `yield*` expressions (yield-star-spacing)
 
 (fixable) The `--fix` option on the [command line](../user-guide/command-line-interface#fix) automatically fixes problems reported by this rule.
@@ -6,8 +12,8 @@
 
 This rule enforces spacing around the `*` in `yield*` expressions.
 
-To use this rule you either need to [use the `es6` environment](../user-guide/configuring.md#specifying-environments) or
-[set `ecmaVersion` to `6` in `parserOptions`](../user-guide/configuring.md#specifying-parser-options).
+To use this rule you either need to [use the `es6` environment](../user-guide/configuring) or
+[set `ecmaVersion` to `6` in `parserOptions`](../user-guide/configuring).
 
 ## Options
 
@@ -97,3 +103,12 @@ If your project will not be using generators or you are not concerned with spaci
 ## Further Reading
 
 * [Understanding ES6: Generators](https://leanpub.com/understandinges6/read/#leanpub-auto-generators)
+
+## Version
+
+This rule was introduced in ESLint 2.0.0-alpha-1.
+
+## Resources
+
+* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/yield-star-spacing.js)
+* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/yield-star-spacing.md)

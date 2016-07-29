@@ -1,3 +1,9 @@
+---
+title: Rule comma-spacing
+layout: doc
+---
+<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
+
 # Enforces spacing around commas (comma-spacing)
 
 (fixable) The `--fix` option on the [command line](../user-guide/command-line-interface#fix) automatically fixes problems reported by this rule.
@@ -16,7 +22,7 @@ This rule enforces consistent spacing before and after commas in variable declar
 This rule does not apply in an `ArrayExpression` or `ArrayPattern` in either of the following cases:
 
 * adjacent null elements
-* an initial null element, to avoid conflicts with the [`array-bracket-spacing`](array-bracket-spacing.md) rule
+* an initial null element, to avoid conflicts with the [`array-bracket-spacing`](array-bracket-spacing) rule
 
 ## Options
 
@@ -121,11 +127,20 @@ If your project will not be following a consistent comma-spacing pattern, turn t
 
 ## Related Rules
 
-* [array-bracket-spacing](array-bracket-spacing.md)
-* [comma-style](comma-style.md)
-* [space-in-brackets](space-in-brackets.md) (deprecated)
-* [space-in-parens](space-in-parens.md)
-* [space-infix-ops](space-infix-ops.md)
+* [array-bracket-spacing](array-bracket-spacing)
+* [comma-style](comma-style)
+* [space-in-brackets](space-in-brackets) (deprecated)
+* [space-in-parens](space-in-parens)
+* [space-infix-ops](space-infix-ops)
 * [space-after-keywords](space-after-keywords)
 * [space-unary-ops](space-unary-ops)
 * [space-return-throw-case](space-return-throw-case)
+
+## Version
+
+This rule was introduced in ESLint 0.9.0.
+
+## Resources
+
+* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/comma-spacing.js)
+* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/comma-spacing.md)

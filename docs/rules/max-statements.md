@@ -1,3 +1,9 @@
+---
+title: Rule max-statements
+layout: doc
+---
+<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
+
 # enforce a maximum number of statements allowed in `function` blocks (max-statements)
 
 The `max-statements` rule allows you to specify the maximum number of statements allowed in a function.
@@ -136,8 +142,17 @@ function foo() {
 
 ## Related Rules
 
-* [complexity](complexity.md)
-* [max-depth](max-depth.md)
-* [max-len](max-len.md)
-* [max-nested-callbacks](max-nested-callbacks.md)
-* [max-params](max-params.md)
+* [complexity](complexity)
+* [max-depth](max-depth)
+* [max-len](max-len)
+* [max-nested-callbacks](max-nested-callbacks)
+* [max-params](max-params)
+
+## Version
+
+This rule was introduced in ESLint 0.0.9.
+
+## Resources
+
+* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/max-statements.js)
+* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/max-statements.md)

@@ -1,3 +1,9 @@
+---
+title: Rule no-multi-spaces
+layout: doc
+---
+<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
+
 # Disallow multiple spaces (no-multi-spaces)
 
 (fixable) The `--fix` option on the [command line](../user-guide/command-line-interface#fix) automatically fixes problems reported by this rule.
@@ -62,7 +68,7 @@ To avoid contradictions if some other rules require multiple spaces, this rule h
 
 The `exceptions` object expects property names to be AST node types as defined by [ESTree](https://github.com/estree/estree). The easiest way to determine the node types for `exceptions` is to use the [online demo](http://eslint.org/parser).
 
-Only the `Property` node type is ignored by default, because for the [key-spacing](key-spacing.md) rule some alignment options require multiple spaces in properties of object literals.
+Only the `Property` node type is ignored by default, because for the [key-spacing](key-spacing) rule some alignment options require multiple spaces in properties of object literals.
 
 Examples of **correct** code for the default `"exceptions": { "Property": true }` option:
 
@@ -120,10 +126,19 @@ If you don't want to check and disallow multiple spaces, then you should turn th
 
 ## Related Rules
 
-* [key-spacing](key-spacing.md)
-* [space-infix-ops](space-infix-ops.md)
-* [space-in-brackets](space-in-brackets.md) (deprecated)
-* [space-in-parens](space-in-parens.md)
+* [key-spacing](key-spacing)
+* [space-infix-ops](space-infix-ops)
+* [space-in-brackets](space-in-brackets) (deprecated)
+* [space-in-parens](space-in-parens)
 * [space-after-keywords](space-after-keywords)
 * [space-unary-ops](space-unary-ops)
 * [space-return-throw-case](space-return-throw-case)
+
+## Version
+
+This rule was introduced in ESLint 0.9.0.
+
+## Resources
+
+* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/no-multi-spaces.js)
+* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/no-multi-spaces.md)

@@ -1,3 +1,9 @@
+---
+title: Rule require-jsdoc
+layout: doc
+---
+<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
+
 # Require JSDoc comment (require-jsdoc)
 
 [JSDoc](http://usejsdoc.org) is a JavaScript API documentation generator. It uses specially-formatted comments inside of code to generate API documentation automatically. For example, this is what a JSDoc comment looks like for a function:
@@ -113,4 +119,13 @@ If you do not require JSDoc for your functions, then you can leave this rule off
 
 ## Related Rules
 
-* [valid-jsdoc](valid-jsdoc.md)
+* [valid-jsdoc](valid-jsdoc)
+
+## Version
+
+This rule was introduced in ESLint 1.4.0.
+
+## Resources
+
+* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/require-jsdoc.js)
+* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/require-jsdoc.md)

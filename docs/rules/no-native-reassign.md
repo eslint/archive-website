@@ -1,3 +1,9 @@
+---
+title: Rule no-native-reassign
+layout: doc
+---
+<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
+
 # Disallow Reassignment of Native Objects (no-native-reassign)
 
 JavaScript environments contain a number of built-in global variables, such as `window` in browsers and `process` in Node.js. In almost all cases, you don't want to assign a value to these global variables as doing so could result in losing access to important functionality. For example, you probably don't want to do this in browser code:
@@ -84,6 +90,15 @@ If you are trying to override one of the native objects.
 
 ## Related Rules
 
-* [no-extend-native](no-extend-native.md)
-* [no-redeclare](no-redeclare.md)
-* [no-shadow](no-shadow.md)
+* [no-extend-native](no-extend-native)
+* [no-redeclare](no-redeclare)
+* [no-shadow](no-shadow)
+
+## Version
+
+This rule was introduced in ESLint 0.0.9.
+
+## Resources
+
+* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/no-native-reassign.js)
+* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/no-native-reassign.md)

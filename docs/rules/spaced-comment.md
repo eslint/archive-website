@@ -1,3 +1,9 @@
+---
+title: Rule spaced-comment
+layout: doc
+---
+<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
+
 # Requires or disallows a whitespace (space or tab) beginning a comment (spaced-comment)
 
 (fixable) The `--fix` option on the [command line](../user-guide/command-line-interface#fix) automatically fixes problems reported by this rule.
@@ -270,4 +276,13 @@ subsequent lines are ignored
 
 ## Related Rules
 
-* [spaced-line-comment](spaced-line-comment.md)
+* [spaced-line-comment](spaced-line-comment)
+
+## Version
+
+This rule was introduced in ESLint 0.23.0.
+
+## Resources
+
+* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/spaced-comment.js)
+* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/spaced-comment.md)

@@ -1,3 +1,9 @@
+---
+title: Rule no-underscore-dangle
+layout: doc
+---
+<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
+
 # disallow dangling underscores in identifiers (no-underscore-dangle)
 
 As far as naming conventions for identifiers go, dangling underscores may be the most polarizing in JavaScript. Dangling underscores are underscores at either the beginning or end of an identifier, such as:
@@ -79,3 +85,12 @@ super._bar();
 ## When Not To Use It
 
 If you want to allow dangling underscores in identifiers, then you can safely turn this rule off.
+
+## Version
+
+This rule was introduced in ESLint 0.0.9.
+
+## Resources
+
+* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/no-underscore-dangle.js)
+* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/no-underscore-dangle.md)

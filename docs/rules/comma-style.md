@@ -1,3 +1,9 @@
+---
+title: Rule comma-style
+layout: doc
+---
+<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
+
 # Comma style (comma-style)
 
 The Comma Style rule enforces styles for comma-separated lists. There are two comma styles primarily used in JavaScript:
@@ -160,4 +166,13 @@ For more information on the Comma First style:
 
 ## Related Rules
 
-* [operator-linebreak](operator-linebreak.md)
+* [operator-linebreak](operator-linebreak)
+
+## Version
+
+This rule was introduced in ESLint 0.9.0.
+
+## Resources
+
+* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/comma-style.js)
+* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/comma-style.md)

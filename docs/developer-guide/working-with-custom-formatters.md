@@ -1,3 +1,9 @@
+---
+title: Working with Custom Formatters
+layout: doc
+---
+<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
+
 # Working with Custom Formatters
 
 Writing an ESlint custom formatter is simple. All that is needed is a module that exports a function that will receive the results from the execution of ESLint.
@@ -78,7 +84,7 @@ The following are the fields of the result object:
 - **message**: the human readable description of the error.
 - **line**: the line where where the issue is located.
 - **column**: the colum where the issue is located.
-- **nodeType**: the type of the node in the [AST](https://github.com/estree/estree/blob/master/spec.md#node-objects)
+- **nodeType**: the type of the node in the [AST](https://github.com/estree/estree/blob/master/spec)
 - **source**: a extract of the code the line where the failure happened.
 
 ## Examples

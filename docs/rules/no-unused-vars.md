@@ -1,3 +1,9 @@
+---
+title: Rule no-unused-vars
+layout: doc
+---
+<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
+
 # Disallow Unused Variables (no-unused-vars)
 
 Variables that are declared and not used anywhere in the code are most likely an error due to incomplete refactoring. Such variables take up space in the code and can lead to confusion by readers.
@@ -261,3 +267,12 @@ try {
 ## When Not To Use It
 
 If you don't want to be notified about unused variables or function arguments, you can safely turn this rule off.
+
+## Version
+
+This rule was introduced in ESLint 0.0.9.
+
+## Resources
+
+* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/no-unused-vars.js)
+* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/no-unused-vars.md)

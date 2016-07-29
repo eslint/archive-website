@@ -1,3 +1,9 @@
+---
+title: Rule no-invalid-regexp
+layout: doc
+---
+<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
+
 # disallow invalid regular expression strings in `RegExp` constructors (no-invalid-regexp)
 
 An invalid pattern in a regular expression literal is a `SyntaxError` when the code is parsed, but an invalid string in `RegExp` constructors throws a `SyntaxError` only when the code is executed.
@@ -62,3 +68,12 @@ new RegExp('.', 'yu')
 ## Further Reading
 
 * [Annotated ES5 §7.8.5 - Regular Expression Literals](http://es5.github.io/#x7.8.5)
+
+## Version
+
+This rule was introduced in ESLint 0.1.4.
+
+## Resources
+
+* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/no-invalid-regexp.js)
+* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/no-invalid-regexp.md)

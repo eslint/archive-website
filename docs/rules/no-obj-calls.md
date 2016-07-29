@@ -1,3 +1,9 @@
+---
+title: Rule no-obj-calls
+layout: doc
+---
+<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
+
 # disallow calling global object properties as functions (no-obj-calls)
 
 ECMAScript provides several global objects that are intended to be used as-is. Some of these objects look as if they could be constructors due their capitalization (such as `Math` and `JSON`) but will throw an error if you try to execute them as functions.
@@ -34,3 +40,12 @@ var object = JSON.parse("{}");
 
 * [The Math Object](http://es5.github.io/#x15.8)
 * ['{a}' is not a function](http://jslinterrors.com/a-is-not-a-function/)
+
+## Version
+
+This rule was introduced in ESLint 0.0.9.
+
+## Resources
+
+* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/no-obj-calls.js)
+* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/no-obj-calls.md)

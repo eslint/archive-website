@@ -1,3 +1,9 @@
+---
+title: Rule no-restricted-syntax
+layout: doc
+---
+<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
+
 # disallow specified syntax (no-restricted-syntax)
 
 JavaScript has a lot of language features, and not everyone likes all of them. As a result, some projects choose to disallow the use of certain language features altogether. For instance, you might decide to disallow the use of `try-catch` or `class`.
@@ -48,6 +54,15 @@ If you don't want to restrict your code from using any JavaScript features or sy
 
 ## Related Rules
 
-* [no-alert](no-alert.md)
-* [no-console](no-console.md)
-* [no-debugger](no-debugger.md)
+* [no-alert](no-alert)
+* [no-console](no-console)
+* [no-debugger](no-debugger)
+
+## Version
+
+This rule was introduced in ESLint 1.4.0.
+
+## Resources
+
+* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/no-restricted-syntax.js)
+* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/no-restricted-syntax.md)

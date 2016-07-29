@@ -1,3 +1,9 @@
+---
+title: Rule no-lone-blocks
+layout: doc
+---
+<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
+
 # Disallow Unnecessary Nested Blocks (no-lone-blocks)
 
 In JavaScript, prior to ES6, standalone code blocks delimited by curly braces do not create a new scope and have no use. For example, these curly braces do nothing to `foo`:
@@ -92,3 +98,12 @@ Examples of **correct** code for this rule with es6 environment and strict mode 
     function foo() {}
 }
 ```
+
+## Version
+
+This rule was introduced in ESLint 0.4.0.
+
+## Resources
+
+* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/no-lone-blocks.js)
+* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/no-lone-blocks.md)

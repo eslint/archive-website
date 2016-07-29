@@ -1,3 +1,9 @@
+---
+title: Governance
+layout: doc
+---
+<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
+
 # Governance
 
 ESLint is an open source project that depends on contributions from the community. Anyone may contribute to the project at any time by submitting code, participating in discussions, making suggestions, or any other contribution they see fit. This document describes how various types of contributors work within the ESLint project.
@@ -126,6 +132,6 @@ or else the discussion will continue. Simple majority wins.
 
 ----
 
-This work is a derivative of [YUI Contributor Model](https://github.com/yui/yui3/wiki/Contributor-Model) and the [Node.js Project Governance Model](https://github.com/nodejs/node/blob/master/GOVERNANCE.md).
+This work is a derivative of [YUI Contributor Model](https://github.com/yui/yui3/wiki/Contributor-Model) and the [Node.js Project Governance Model](https://github.com/nodejs/node/blob/master/GOVERNANCE).
 
 This work is licensed under a [Creative Commons Attribution-ShareAlike 2.0 UK: England & Wales License](http://creativecommons.org/licenses/by-sa/2.0/uk/).

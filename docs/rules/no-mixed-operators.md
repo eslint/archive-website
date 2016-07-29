@@ -1,3 +1,9 @@
+---
+title: Rule no-mixed-operators
+layout: doc
+---
+<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
+
 # Disallow mixes of different operators (no-mixed-operators)
 
 Enclosing complex expressions by parentheses clarifies the developer's intention, which makes the code more readable.
@@ -13,8 +19,8 @@ var foo = a && (b || c || d);  /*GOOD*/
 
 This rule checks `BinaryExpression` and `LogicalExpression`.
 
-This rule may conflict with [no-extra-parens](no-extra-parens.md) rule.
-If you use both this and [no-extra-parens](no-extra-parens.md) rule together, you need to use the `nestedBinaryExpressions` option of [no-extra-parens](no-extra-parens.md) rule.
+This rule may conflict with [no-extra-parens](no-extra-parens) rule.
+If you use both this and [no-extra-parens](no-extra-parens) rule together, you need to use the `nestedBinaryExpressions` option of [no-extra-parens](no-extra-parens) rule.
 
 Examples of **incorrect** code for this rule:
 
@@ -133,4 +139,13 @@ If you don't want to be notified about mixed operators, then it's safe to disabl
 
 ## Related Rules
 
-* [no-extra-parens](no-extra-parens.md)
+* [no-extra-parens](no-extra-parens)
+
+## Version
+
+This rule was introduced in ESLint 2.12.0.
+
+## Resources
+
+* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/no-mixed-operators.js)
+* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/no-mixed-operators.md)

@@ -1,3 +1,9 @@
+---
+title: Rule prefer-spread
+layout: doc
+---
+<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
+
 # Suggest using the spread operator instead of `.apply()`. (prefer-spread)
 
 Before ES2015, one must use `Function.prototype.apply()` to call variadic functions.
@@ -73,4 +79,13 @@ In ES2015 (ES6) or later, if you don't want to be notified about `Function.proto
 
 ## Related Rules
 
-* [no-useless-call](no-useless-call.md)
+* [no-useless-call](no-useless-call)
+
+## Version
+
+This rule was introduced in ESLint 1.0.0-rc-1.
+
+## Resources
+
+* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/prefer-spread.js)
+* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/prefer-spread.md)

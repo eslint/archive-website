@@ -1,3 +1,9 @@
+---
+title: Rule sort-vars
+layout: doc
+---
+<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
+
 # Variable Sorting (sort-vars)
 
 When declaring multiple variables within the same block, some developers prefer to sort variable names alphabetically to be able to find necessary variable easier at the later time. Others feel that it adds complexity and becomes burden to maintain.
@@ -73,3 +79,12 @@ var a, B, c;
 ## When Not To Use It
 
 This rule is a formatting preference and not following it won't negatively affect the quality of your code. If you alphabetizing variables isn't a part of your coding standards, then you can leave this rule off.
+
+## Version
+
+This rule was introduced in ESLint 0.2.0.
+
+## Resources
+
+* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/sort-vars.js)
+* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/sort-vars.md)

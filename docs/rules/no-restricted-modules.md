@@ -1,3 +1,9 @@
+---
+title: Rule no-restricted-modules
+layout: doc
+---
+<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
+
 # Disallow Node.js modules (no-restricted-modules)
 
 Disallowing usage of specific Node.js modules can be useful if you want to control the available methods, a developer can
@@ -40,3 +46,12 @@ Examples of **correct** code for this rule with sample `"fs", "cluster"` restric
 
 var crypto = require('crypto');
 ```
+
+## Version
+
+This rule was introduced in ESLint 0.6.0.
+
+## Resources
+
+* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/no-restricted-modules.js)
+* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/no-restricted-modules.md)

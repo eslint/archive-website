@@ -1,3 +1,9 @@
+---
+title: Rule one-var
+layout: doc
+---
+<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
+
 # Require or Disallow One Variable Declaration per Scope (one-var)
 
 Variables can be declared at any point in JavaScript code using `var`, `let`, or `const`. There are many styles and preferences related to the declaration of variables, and one of those is deciding on how many variable declarations should be allowed in a single function.
@@ -271,3 +277,12 @@ function foo() {
 ## Further Reading
 
 [JSLint Errors - Combine this with the previous 'var' statement](http://jslinterrors.com/combine-this-with-the-previous-var-statement/)
+
+## Version
+
+This rule was introduced in ESLint 0.0.9.
+
+## Resources
+
+* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/one-var.js)
+* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/one-var.md)

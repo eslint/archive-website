@@ -1,3 +1,9 @@
+---
+title: Rule no-octal
+layout: doc
+---
+<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
+
 # disallow octal literals (no-octal)
 
 Octal literals are numerals that begin with a leading zero, such as:
@@ -38,3 +44,12 @@ var num  = "071";
 ## Further Reading
 
 * [Octal literals not allowed in strict mode](http://jslinterrors.com/octal-literals-are-not-allowed-in-strict-mode)
+
+## Version
+
+This rule was introduced in ESLint 0.0.6.
+
+## Resources
+
+* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/no-octal.js)
+* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/no-octal.md)

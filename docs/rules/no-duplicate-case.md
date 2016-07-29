@@ -1,3 +1,9 @@
+---
+title: Rule no-duplicate-case
+layout: doc
+---
+<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
+
 # Rule to disallow a duplicate case label (no-duplicate-case)
 
 If a `switch` statement has duplicate test expressions in `case` clauses, it is likely that a programmer copied a `case` clause but forgot to change the test expression.
@@ -89,3 +95,12 @@ switch (a) {
         break;
 }
 ```
+
+## Version
+
+This rule was introduced in ESLint 0.17.0.
+
+## Resources
+
+* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/no-duplicate-case.js)
+* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/no-duplicate-case.md)

@@ -1,3 +1,9 @@
+---
+title: Rule use-isnan
+layout: doc
+---
+<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
+
 # require calls to `isNaN()` when checking for `NaN` (use-isnan)
 
 In JavaScript, `NaN` is a special value of the `Number` type. It's used to represent any of the "not-a-number" values represented by the double-precision 64-bit format as specified by the IEEE Standard for Binary Floating-Point Arithmetic.
@@ -44,3 +50,12 @@ if (!isNaN(foo)) {
 ## Further Reading
 
 * [Use the isNaN function to compare with NaN](http://jslinterrors.com/use-the-isnan-function-to-compare-with-nan/)
+
+## Version
+
+This rule was introduced in ESLint 0.0.6.
+
+## Resources
+
+* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/use-isnan.js)
+* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/use-isnan.md)

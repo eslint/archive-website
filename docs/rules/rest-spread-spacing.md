@@ -1,3 +1,9 @@
+---
+title: Rule rest-spread-spacing
+layout: doc
+---
+<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
+
 # Enforce spacing between rest and spread operators and their expressions (rest-spread-spacing)
 
 (fixable) The `--fix` option on the [command line](../user-guide/command-line-interface#fix) automatically fixes problems reported by this rule.
@@ -143,3 +149,12 @@ You can safely disable this rule if you do not care about enforcing consistent s
 ## Further Reading
 
 * [Object Rest/Spread Properties for ECMAScript](https://github.com/sebmarkbage/ecmascript-rest-spread)
+
+## Version
+
+This rule was introduced in ESLint 2.12.0.
+
+## Resources
+
+* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/rest-spread-spacing.js)
+* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/rest-spread-spacing.md)

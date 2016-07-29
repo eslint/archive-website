@@ -1,3 +1,9 @@
+---
+title: Rule no-path-concat
+layout: doc
+---
+<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
+
 # Disallow string concatenation when using `__dirname` and `__filename` (no-path-concat)
 
 In Node.js, the `__dirname` and `__filename` global variables contain the directory path and the file path of the currently executing script file, respectively. Sometimes, developers try to use these variables to create paths to other files, such as:
@@ -48,3 +54,12 @@ var fullPath = dirname + "/foo.js";
 ## When Not To Use It
 
 If you want to allow string concatenation of path names.
+
+## Version
+
+This rule was introduced in ESLint 0.4.0.
+
+## Resources
+
+* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/no-path-concat.js)
+* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/no-path-concat.md)

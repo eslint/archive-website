@@ -1,3 +1,9 @@
+---
+title: Rule padded-blocks
+layout: doc
+---
+<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
+
 # Enforce padding within blocks (padded-blocks)
 
 (fixable) The `--fix` option on the [command line](../user-guide/command-line-interface#fix) automatically fixes problems reported by this rule.
@@ -290,3 +296,12 @@ class  A {
 ## When Not To Use It
 
 You can turn this rule off if you are not concerned with the consistency of padding within blocks.
+
+## Version
+
+This rule was introduced in ESLint 0.9.0.
+
+## Resources
+
+* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/padded-blocks.js)
+* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/padded-blocks.md)

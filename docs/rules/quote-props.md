@@ -1,3 +1,9 @@
+---
+title: Rule quote-props
+layout: doc
+---
+<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
+
 # Quoting Style for Property Names (quote-props)
 
 Object literal property names can be defined in two ways: using literals or using strings. For example, these two objects are equivalent:
@@ -323,3 +329,12 @@ If you don't care if property names are consistently wrapped in quotes or not, a
 
 * [Reserved words as property names](http://kangax.github.io/compat-table/es5/#Reserved_words_as_property_names)
 * [Unquoted property names / object keys in JavaScript](https://mathiasbynens.be/notes/javascript-properties)
+
+## Version
+
+This rule was introduced in ESLint 0.0.6.
+
+## Resources
+
+* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/quote-props.js)
+* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/quote-props.md)

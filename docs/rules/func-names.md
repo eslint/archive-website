@@ -1,3 +1,9 @@
+---
+title: Rule func-names
+layout: doc
+---
+<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
+
 # Require or disallow named `function` expressions (func-names)
 
 A pattern that's becoming more common is to give function expressions names to aid in debugging. For example:
@@ -79,3 +85,12 @@ Foo.prototype.bar = function() {};
 
 * **JSCS**: [requireAnonymousFunctions](http://jscs.info/rule/requireAnonymousFunctions)
 * **JSCS**: [disallowAnonymousFunctions](http://jscs.info/rule/disallowAnonymousFunctions)
+
+## Version
+
+This rule was introduced in ESLint 0.4.0.
+
+## Resources
+
+* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/func-names.js)
+* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/func-names.md)

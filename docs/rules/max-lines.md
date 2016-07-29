@@ -1,3 +1,9 @@
+---
+title: Rule max-lines
+layout: doc
+---
+<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
+
 # enforce a maximum file length (max-lines)
 
 Some people consider large files a code smell. Large files tend to do a lot of things and can make it hard following what's going. While there is not an objective maximum number of lines considered acceptable in a file, most people would agree it should not be in the thousands. Recommendations usually range from 100 to 500 lines.
@@ -114,12 +120,21 @@ You can turn this rule off if you are not concerned with the number of lines in 
 
 ## Related Rules
 
-* [complexity](complexity.md)
-* [max-depth](max-depth.md)
-* [max-nested-callbacks](max-nested-callbacks.md)
-* [max-params](max-params.md)
-* [max-statements](max-statements.md)
+* [complexity](complexity)
+* [max-depth](max-depth)
+* [max-nested-callbacks](max-nested-callbacks)
+* [max-params](max-params)
+* [max-statements](max-statements)
 
 ## Compatibility
 
 * **JSCS**: [maximumNumberOfLines](http://jscs.info/rule/maximumNumberOfLines)
+
+## Version
+
+This rule was introduced in ESLint 2.12.0.
+
+## Resources
+
+* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/max-lines.js)
+* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/max-lines.md)

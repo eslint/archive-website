@@ -1,3 +1,9 @@
+---
+title: Rule no-tabs
+layout: doc
+---
+<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
+
 # Disallow tabs in file (no-tabs)
 
 some style guides don't allow the use of tab characters anywhere. So they would want to disallow tab anywhere inside a file including comments.
@@ -39,3 +45,12 @@ If you have established a standard where having tabs is fine.
 ## Compatibility
 
 * **JSCS**: [disallowTabs](http://jscs.info/rule/disallowTabs)
+
+## Version
+
+This rule was introduced in ESLint 3.2.0.
+
+## Resources
+
+* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/no-tabs.js)
+* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/no-tabs.md)

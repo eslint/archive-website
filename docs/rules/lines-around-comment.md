@@ -1,3 +1,9 @@
+---
+title: Rule lines-around-comment
+layout: doc
+---
+<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
+
 # require empty lines around comments (lines-around-comment)
 
 Many style guides require empty lines before or after comments. The primary goal
@@ -341,5 +347,14 @@ Many people enjoy a terser code style and don't mind comments bumping up against
 
 ## Related Rules
 
-* [space-before-blocks](space-before-blocks.md)
-* [spaced-comment](spaced-comment.md)
+* [space-before-blocks](space-before-blocks)
+* [spaced-comment](spaced-comment)
+
+## Version
+
+This rule was introduced in ESLint 0.22.0.
+
+## Resources
+
+* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/lines-around-comment.js)
+* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/lines-around-comment.md)

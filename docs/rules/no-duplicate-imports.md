@@ -1,3 +1,9 @@
+---
+title: Rule no-duplicate-imports
+layout: doc
+---
+<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
+
 # Disallow duplicate imports (no-duplicate-imports)
 
 Using a single `import` statement per module will make the code clearer because you can see everything being imported from that module on one line.
@@ -58,3 +64,12 @@ import { merge, find } from 'module';
 
 export { find };
 ```
+
+## Version
+
+This rule was introduced in ESLint 2.5.0.
+
+## Resources
+
+* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/no-duplicate-imports.js)
+* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/no-duplicate-imports.md)

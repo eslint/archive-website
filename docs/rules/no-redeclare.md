@@ -1,3 +1,9 @@
+---
+title: Rule no-redeclare
+layout: doc
+---
+<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
+
 # Disallow Redeclaring Variables (no-redeclare)
 
 In JavaScript, it's possible to redeclare the same variable name using `var`. This can lead to confusion as to where the variable is actually declared and initialized.
@@ -50,3 +56,12 @@ var top = 0;
 ```
 
 The `browser` environment has many built-in global variables (for example, `top`). Some of built-in global variables cannot be redeclared.
+
+## Version
+
+This rule was introduced in ESLint 0.0.9.
+
+## Resources
+
+* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/no-redeclare.js)
+* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/no-redeclare.md)

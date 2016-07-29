@@ -1,3 +1,9 @@
+---
+title: Rule default-case
+layout: doc
+---
+<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
+
 # Require Default Case in Switch Statements (default-case)
 
 Some code conventions require that all `switch` statements have a `default` case, even if the default case is empty, such as:
@@ -116,4 +122,13 @@ If you don't want to enforce a `default` case for `switch` statements, you can s
 
 ## Related Rules
 
-* [no-fallthrough](no-fallthrough.md)
+* [no-fallthrough](no-fallthrough)
+
+## Version
+
+This rule was introduced in ESLint 0.6.0.
+
+## Resources
+
+* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/default-case.js)
+* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/default-case.md)

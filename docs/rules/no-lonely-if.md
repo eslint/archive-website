@@ -1,3 +1,9 @@
+---
+title: Rule no-lonely-if
+layout: doc
+---
+<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
+
 # disallow `if` statements as the only statement in `else` blocks (no-lonely-if)
 
 If an `if` statement is the only statement in the `else` block, it is often clearer to use an `else if` form.
@@ -82,3 +88,12 @@ if (condition) {
 ## When Not To Use It
 
 Disable this rule if the code is clearer without requiring the `else if` form.
+
+## Version
+
+This rule was introduced in ESLint 0.6.0.
+
+## Resources
+
+* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/no-lonely-if.js)
+* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/no-lonely-if.md)

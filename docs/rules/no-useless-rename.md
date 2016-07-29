@@ -1,3 +1,9 @@
+---
+title: Rule no-useless-rename
+layout: doc
+---
+<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
+
 # Disallow renaming import, export, and destructured assignments to the same name (no-useless-rename)
 
 (fixable) The `--fix` option on the [command line](../user-guide/command-line-interface#fix) automatically fixes problems reported by this rule.
@@ -120,3 +126,12 @@ You can safely disable this rule if you do not care about redundantly renaming i
 ## Compatibility
 
 * **JSCS**: [disallowIdenticalDestructuringNames](http://jscs.info/rule/disallowIdenticalDestructuringNames)
+
+## Version
+
+This rule was introduced in ESLint 2.11.0.
+
+## Resources
+
+* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/no-useless-rename.js)
+* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/no-useless-rename.md)

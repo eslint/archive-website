@@ -1,3 +1,9 @@
+---
+title: Rule consistent-return
+layout: doc
+---
+<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
+
 # require `return` statements to either always or never specify values (consistent-return)
 
 Unlike statically-typed languages which enforce that a function returns a specified type of value, JavaScript allows different code paths in a function to return different types of values.
@@ -143,3 +149,12 @@ function bar(condition) {
 ## When Not To Use It
 
 If you want to allow functions to have different `return` behavior depending on code branching, then it is safe to disable this rule.
+
+## Version
+
+This rule was introduced in ESLint 0.4.0.
+
+## Resources
+
+* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/consistent-return.js)
+* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/consistent-return.md)

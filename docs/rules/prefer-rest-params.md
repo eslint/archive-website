@@ -1,3 +1,9 @@
+---
+title: Rule prefer-rest-params
+layout: doc
+---
+<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
+
 # Suggest using the rest parameters instead of `arguments` (prefer-rest-params)
 
 There are rest parameters in ES2015.
@@ -53,4 +59,13 @@ In ES2015 (ES6) or later, if you don't want to be notified about `arguments` var
 
 ## Related Rules
 
-* [prefer-spread](prefer-spread.md)
+* [prefer-spread](prefer-spread)
+
+## Version
+
+This rule was introduced in ESLint 2.0.0-alpha-1.
+
+## Resources
+
+* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/prefer-rest-params.js)
+* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/prefer-rest-params.md)

@@ -1,3 +1,9 @@
+---
+title: Rule sort-imports
+layout: doc
+---
+<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
+
 # Import Sorting (sort-imports)
 
 The import statement is used to import members (functions, objects or primitives) that have been exported from an external module. Using a specific member syntax:
@@ -198,3 +204,12 @@ Default is `["none", "all", "multiple", "single"]`.
 ## When Not To Use It
 
 This rule is a formatting preference and not following it won't negatively affect the quality of your code. If alphabetizing imports isn't a part of your coding standards, then you can leave this rule disabled.
+
+## Version
+
+This rule was introduced in ESLint 2.0.0-beta.1.
+
+## Resources
+
+* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/sort-imports.js)
+* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/sort-imports.md)

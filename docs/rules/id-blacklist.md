@@ -1,3 +1,9 @@
+---
+title: Rule id-blacklist
+layout: doc
+---
+<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
+
 # disallow specified identifiers (id-blacklist)
 
 > "There are only two hard things in Computer Science: cache invalidation and naming things." — Phil Karlton
@@ -80,3 +86,12 @@ foo.data; // all property names that are not assignments are ignored
 ## When Not To Use It
 
 You can turn this rule off if you are happy for identifiers to be named freely.
+
+## Version
+
+This rule was introduced in ESLint 2.0.0-beta.2.
+
+## Resources
+
+* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/id-blacklist.js)
+* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/id-blacklist.md)

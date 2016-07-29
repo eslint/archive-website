@@ -1,3 +1,9 @@
+---
+title: Rule callback-return
+layout: doc
+---
+<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
+
 # Enforce Return After Callback (callback-return)
 
 The callback pattern is at the heart of most I/O and event-driven programming
@@ -171,4 +177,13 @@ There are some cases where you might want to call a callback function more than 
 
 ## Related Rules
 
-* [handle-callback-err](handle-callback-err.md)
+* [handle-callback-err](handle-callback-err)
+
+## Version
+
+This rule was introduced in ESLint 1.0.0-rc-1.
+
+## Resources
+
+* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/callback-return.js)
+* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/callback-return.md)

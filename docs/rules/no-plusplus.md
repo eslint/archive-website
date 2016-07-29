@@ -1,3 +1,9 @@
+---
+title: Rule no-plusplus
+layout: doc
+---
+<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
+
 # disallow the unary operators `++` and `--` (no-plusplus)
 
 Because the unary `++` and `--` operators are subject to automatic semicolon insertion, differences in whitespace can change semantics of source code.
@@ -78,3 +84,12 @@ for (i = 0; i < l; i--) {
     return;
 }
 ```
+
+## Version
+
+This rule was introduced in ESLint 0.0.9.
+
+## Resources
+
+* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/no-plusplus.js)
+* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/no-plusplus.md)

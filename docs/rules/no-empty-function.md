@@ -1,3 +1,9 @@
+---
+title: Rule no-empty-function
+layout: doc
+---
+<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
+
 # Disallow empty functions (no-empty-function)
 
 Empty functions can reduce readability because readers need to guess whether it's intentional or not.
@@ -313,4 +319,13 @@ If you don't want to be notified about empty functions, then it's safe to disabl
 
 ## Related Rules
 
-* [no-empty](./no-empty.md)
+* [no-empty](./no-empty)
+
+## Version
+
+This rule was introduced in ESLint 2.0.0.
+
+## Resources
+
+* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/no-empty-function.js)
+* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/no-empty-function.md)

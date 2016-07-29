@@ -1,3 +1,9 @@
+---
+title: Rule global-require
+layout: doc
+---
+<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
+
 # Enforce require() on the top-level module scope (global-require)
 
 In Node.js, module dependencies are included using the `require()` function, such as:
@@ -87,3 +93,12 @@ var x = require("x"),
 ## When Not To Use It
 
 If you have a module that must be initialized with information that comes from the file-system or if a module is only used in very rare situations and will cause significant overhead to load it may make sense to disable the rule. If you need to `require()` an optional dependency inside of a `try`/`catch`, you can disable this rule for just that dependency using the `// eslint-disable-line global-require` comment.
+
+## Version
+
+This rule was introduced in ESLint 1.4.0.
+
+## Resources
+
+* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/global-require.js)
+* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/global-require.md)
