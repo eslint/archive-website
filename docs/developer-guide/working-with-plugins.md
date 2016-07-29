@@ -1,9 +1,3 @@
----
-title: Working with Plugins
-layout: doc
----
-<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
-
 # Working with Plugins
 
 Each plugin is an npm module with a name in the format of `eslint-plugin-<plugin-name>`, such as `eslint-plugin-jquery`. You can also use scoped packages in the format of `@<scope>/eslint-plugin-<plugin-name>` such as `@jquery/eslint-plugin-jquery`.
@@ -125,7 +119,7 @@ The plugin support was introduced in ESLint version `0.8.0`. Ensure the `peerDep
 
 ### Testing
 
-You can test the rules of your plugin [the same way as bundled ESLint rules](working-with-rules) using RuleTester.
+You can test the rules of your plugin [the same way as bundled ESLint rules](working-with-rules.md#rule-unit-tests) using RuleTester.
 
 Example:
 

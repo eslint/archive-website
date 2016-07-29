@@ -1,9 +1,3 @@
----
-title: Code Path Analysis Details
-layout: doc
----
-<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
-
 # Code Path Analysis Details
 
 ESLint's rules can use code paths.

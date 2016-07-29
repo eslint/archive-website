@@ -1,9 +1,3 @@
----
-title: Rule max-params
-layout: doc
----
-<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
-
 # enforce a maximum number of parameters in `function` definitions (max-params)
 
 Functions that take numerous parameters can be difficult to read and write because it requires the memorization of what each parameter is, its type, and the order they should appear in. As a result, many coders adhere to a convention that caps the number of parameters a function can take.
@@ -60,17 +54,8 @@ let foo = (bar, baz, qux) => {
 
 ## Related Rules
 
-* [complexity](complexity)
-* [max-depth](max-depth)
-* [max-len](max-len)
-* [max-nested-callbacks](max-nested-callbacks)
-* [max-statements](max-statements)
-
-## Version
-
-This rule was introduced in ESLint 0.0.9.
-
-## Resources
-
-* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/max-params.js)
-* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/max-params.md)
+* [complexity](complexity.md)
+* [max-depth](max-depth.md)
+* [max-len](max-len.md)
+* [max-nested-callbacks](max-nested-callbacks.md)
+* [max-statements](max-statements.md)

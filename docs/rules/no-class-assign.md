@@ -1,9 +1,3 @@
----
-title: Rule no-class-assign
-layout: doc
----
-<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
-
 # Disallow modifying variables of class declarations (no-class-assign)
 
 `ClassDeclaration` creates a variable, and we can modify the variable.
@@ -97,12 +91,3 @@ class A {
 ## When Not To Use It
 
 If you don't want to be notified about modifying variables of class declarations, you can safely disable this rule.
-
-## Version
-
-This rule was introduced in ESLint 1.0.0-rc-1.
-
-## Resources
-
-* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/no-class-assign.js)
-* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/no-class-assign.md)

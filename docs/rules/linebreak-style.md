@@ -1,9 +1,3 @@
----
-title: Rule linebreak-style
-layout: doc
----
-<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
-
 # enforce consistent linebreak style (linebreak-style)
 
 (fixable) The `--fix` option on the [command line](../user-guide/command-line-interface#fix) automatically fixes problems reported by this rule.
@@ -82,12 +76,3 @@ If you aren't concerned about having different line endings within you code, the
 ## Compatibility
 
 * **JSCS**: [validateLineBreaks](http://jscs.info/rule/validateLineBreaks)
-
-## Version
-
-This rule was introduced in ESLint 0.21.0.
-
-## Resources
-
-* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/linebreak-style.js)
-* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/linebreak-style.md)

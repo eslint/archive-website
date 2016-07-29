@@ -1,9 +1,3 @@
----
-title: Rule no-new-func
-layout: doc
----
-<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
-
 # Disallow Function Constructor (no-new-func)
 
 It's possible to create functions in JavaScript using the `Function` constructor, such as:
@@ -44,12 +38,3 @@ In more advanced cases where you really need to use the `Function` constructor.
 ## Further Reading
 
 * [The Function constructor is eval](http://jslinterrors.com/the-function-constructor-is-eval/)
-
-## Version
-
-This rule was introduced in ESLint 0.0.7.
-
-## Resources
-
-* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/no-new-func.js)
-* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/no-new-func.md)

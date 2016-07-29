@@ -1,9 +1,3 @@
----
-title: Rule newline-after-var
-layout: doc
----
-<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
-
 # require or disallow an empty line after `var` declarations (newline-after-var)
 
 As of today there is no consistency in separating variable declarations from the rest of the code. Some developers leave an empty line between var statements and the rest of the code like:
@@ -144,12 +138,3 @@ var name = "world";
 // var name = require("world");
 console.log(greet, name);
 ```
-
-## Version
-
-This rule was introduced in ESLint 0.18.0.
-
-## Resources
-
-* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/newline-after-var.js)
-* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/newline-after-var.md)

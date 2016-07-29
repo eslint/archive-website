@@ -1,9 +1,3 @@
----
-title: Rule semi-spacing
-layout: doc
----
-<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
-
 # Enforce spacing before and after semicolons (semi-spacing)
 
 (fixable) The `--fix` option on the [command line](../user-guide/command-line-interface#fix) automatically fixes problems reported by this rule.
@@ -110,17 +104,8 @@ You can turn this rule off if you are not concerned with the consistency of spac
 
 ## Related Rules
 
-* [semi](semi)
-* [no-extra-semi](no-extra-semi)
-* [comma-spacing](comma-spacing)
-* [block-spacing](block-spacing)
-* [space-in-parens](space-in-parens)
-
-## Version
-
-This rule was introduced in ESLint 0.16.0.
-
-## Resources
-
-* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/semi-spacing.js)
-* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/semi-spacing.md)
+* [semi](semi.md)
+* [no-extra-semi](no-extra-semi.md)
+* [comma-spacing](comma-spacing.md)
+* [block-spacing](block-spacing.md)
+* [space-in-parens](space-in-parens.md)

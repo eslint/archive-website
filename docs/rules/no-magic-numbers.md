@@ -1,9 +1,3 @@
----
-title: Rule no-magic-numbers
-layout: doc
----
-<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
-
 # Disallow Magic Numbers (no-magic-numbers)
 
 'Magic numbers' are numbers that occur multiple time in code without an explicit meaning.
@@ -122,12 +116,3 @@ var magic = {
 var dutyFreePrice = 100,
     finalPrice = dutyFreePrice + (dutyFreePrice * magic.tax);
 ```
-
-## Version
-
-This rule was introduced in ESLint 1.7.0.
-
-## Resources
-
-* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/no-magic-numbers.js)
-* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/no-magic-numbers.md)

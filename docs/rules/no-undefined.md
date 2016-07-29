@@ -1,9 +1,3 @@
----
-title: Rule no-undefined
-layout: doc
----
-<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
-
 # Disallow Use of `undefined` Variable (no-undefined)
 
 The `undefined` variable is unique in JavaScript because it is actually a property of the global object. As such, in ECMAScript 3 it was possible to overwrite the value of `undefined`. While ECMAScript 5 disallows overwriting `undefined`, it's still possible to shadow `undefined`, such as:
@@ -88,14 +82,5 @@ If you want to allow the use of `undefined` in your code, then you can safely tu
 
 ## Related Rules
 
-* [no-undef-init](no-undef-init)
-* [no-void](no-void)
-
-## Version
-
-This rule was introduced in ESLint 0.7.1.
-
-## Resources
-
-* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/no-undefined.js)
-* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/no-undefined.md)
+* [no-undef-init](no-undef-init.md)
+* [no-void](no-void.md)

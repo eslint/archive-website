@@ -1,9 +1,3 @@
----
-title: Rule consistent-this
-layout: doc
----
-<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
-
 # Require Consistent This (consistent-this)
 
 It is often necessary to capture the current execution context in order to make it available subsequently. A prominent example of this are jQuery callbacks:
@@ -88,12 +82,3 @@ that = this;
 ## When Not To Use It
 
 If you need to capture nested context, `consistent-this` is going to be problematic. Code of that nature is usually difficult to read and maintain and you should consider refactoring it.
-
-## Version
-
-This rule was introduced in ESLint 0.0.9.
-
-## Resources
-
-* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/consistent-this.js)
-* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/consistent-this.md)

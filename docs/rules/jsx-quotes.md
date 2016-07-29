@@ -1,9 +1,3 @@
----
-title: Rule jsx-quotes
-layout: doc
----
-<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
-
 # enforce the consistent use of either double or single quotes in JSX attributes (jsx-quotes)
 
 (fixable) The `--fix` option on the [command line](../user-guide/command-line-interface#fix) automatically fixes problems reported by this rule.
@@ -78,13 +72,4 @@ You can turn this rule off if you don’t use JSX or if you aren’t concerned w
 
 ## Related Rules
 
-* [quotes](quotes)
-
-## Version
-
-This rule was introduced in ESLint 1.4.0.
-
-## Resources
-
-* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/jsx-quotes.js)
-* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/jsx-quotes.md)
+* [quotes](quotes.md)

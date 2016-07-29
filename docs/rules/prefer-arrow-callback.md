@@ -1,9 +1,3 @@
----
-title: Rule prefer-arrow-callback
-layout: doc
----
-<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
-
 # Suggest using arrow functions as callbacks. (prefer-arrow-callback)
 
 Arrow functions are suited to callbacks, because:
@@ -81,12 +75,3 @@ someArray.map(function (itm) { return this.doSomething(itm); }, someObject);
 This rule should not be used in ES3/5 environments.
 
 In ES2015 (ES6) or later, if you don't want to be notified about function expressions in an argument list, you can safely disable this rule.
-
-## Version
-
-This rule was introduced in ESLint 1.2.0.
-
-## Resources
-
-* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/prefer-arrow-callback.js)
-* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/prefer-arrow-callback.md)

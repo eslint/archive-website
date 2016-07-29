@@ -1,9 +1,3 @@
----
-title: Rule no-warning-comments
-layout: doc
----
-<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
-
 # Disallow Warning Comments (no-warning-comments)
 
 Developers often add comments to code which is not complete or needs review. Most likely you want to fix or review the code, and then remove the comment, before you consider the code to be production ready.
@@ -89,12 +83,3 @@ Examples of **correct** code for the `{ "terms": ["todo", "fixme", "any other te
 
 * If you have a large code base that was not developed with a policy to not use such warning terms, you might get hundreds of warnings / errors which might be contra-productive if you can't fix all of them (e.g. if you don't get the time to do it) as you might overlook other warnings / errors or get used to many of them and don't pay attention on it anymore.
 * Same reason as the point above: You shouldn't configure terms that are used very often (e.g. central parts of the native language used in your comments).
-
-## Version
-
-This rule was introduced in ESLint 0.4.4.
-
-## Resources
-
-* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/no-warning-comments.js)
-* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/no-warning-comments.md)

@@ -1,9 +1,3 @@
----
-title: Rule no-new-require
-layout: doc
----
-<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
-
 # Disallow new require (no-new-require)
 
 The `require` function is used to include modules that exist in separate files, such as:
@@ -50,12 +44,3 @@ var appHeader = new AppHeader();
 ## When Not To Use It
 
 If you are using a custom implementation of `require` and your code will never be used in projects where a standard `require` (CommonJS, Node.js, AMD) is expected, you can safely turn this rule off.
-
-## Version
-
-This rule was introduced in ESLint 0.6.0.
-
-## Resources
-
-* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/no-new-require.js)
-* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/no-new-require.md)

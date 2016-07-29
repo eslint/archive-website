@@ -1,9 +1,3 @@
----
-title: Rule no-self-compare
-layout: doc
----
-<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
-
 # Disallow Self Compare (no-self-compare)
 
 Comparing a variable against itself is usually an error, either an typo or refactoring error. It is confusing to the reader and may potentially introduce a runtime error.
@@ -28,12 +22,3 @@ if (x === x) {
 ## Further Reading
 
 * [Weird Relation](http://jslinterrors.com/weird-relation/)
-
-## Version
-
-This rule was introduced in ESLint 0.0.9.
-
-## Resources
-
-* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/no-self-compare.js)
-* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/no-self-compare.md)

@@ -1,9 +1,3 @@
----
-title: Rule dot-notation
-layout: doc
----
-<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
-
 # Require Dot Notation (dot-notation)
 
 In JavaScript, one can access properties using the dot notation (`foo.bar`) or square-bracket notation (`foo["bar"]`). However, the dot notation is often preferred because it is easier to read, less verbose, and works better with aggressive JavaScript minimizers.
@@ -71,12 +65,3 @@ data["fooBar"] = 42;
 var data = {};
 data["foo_bar"] = 42; // no warning
 ```
-
-## Version
-
-This rule was introduced in ESLint 0.0.7.
-
-## Resources
-
-* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/dot-notation.js)
-* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/dot-notation.md)

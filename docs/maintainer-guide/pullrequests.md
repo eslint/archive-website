@@ -1,9 +1,3 @@
----
-title: Reviewing Pull Requests
-layout: doc
----
-<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
-
 # Reviewing Pull Requests
 
 Pull requests are submitted frequently and represent our best opportunity to interact with the community. As such, it's important that pull requests are well-reviewed before being merged and that interactions on pull requests are positive.
@@ -57,6 +51,20 @@ We use the "Merge" button to merge requests into the repository. Before merging 
 1. All automated tests are passing (never merge a pull request with failing tests)
 
 Be sure to say thank you to the submitter before merging, especially if they put a lot of work into the pull request.
+
+Team members may merge a pull request immediately if it:
+
+1. Makes a small documentation change
+1. Is a chore
+1. Fixes a block of other work on the repo (build-related, test-related, dependency-related, etc.)
+1. Is an important fix to get into a patch release
+
+Otherwise, team members should observe a waiting period before merging a pull request:
+
+* Wait **2 days** if the pull request was opened Monday through Friday.
+* Wait **3 days** if the pull request was opened on Saturday or Sunday.
+
+The waiting period ensures that other team members have a chance to review the pull request before it is merged.
 
 **Note:** You should not merge your own pull request unless you're received feedback from at least one other team member.
 

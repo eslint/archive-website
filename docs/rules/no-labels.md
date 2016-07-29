@@ -1,9 +1,3 @@
----
-title: Rule no-labels
-layout: doc
----
-<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
-
 # Disallow Labeled Statements (no-labels)
 
 Labeled statements in JavaScript are used in conjunction with `break` and `continue` to control flow around multiple loops. For example:
@@ -124,15 +118,6 @@ If you need to use labeled statements everywhere, then you can safely disable th
 
 ## Related Rules
 
-* [no-extra-label](./no-extra-label)
-* [no-label-var](./no-label-var)
-* [no-unused-labels](./no-unused-labels)
-
-## Version
-
-This rule was introduced in ESLint 0.4.0.
-
-## Resources
-
-* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/no-labels.js)
-* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/no-labels.md)
+* [no-extra-label](./no-extra-label.md)
+* [no-label-var](./no-label-var.md)
+* [no-unused-labels](./no-unused-labels.md)

@@ -1,9 +1,3 @@
----
-title: Rule no-unmodified-loop-condition
-layout: doc
----
-<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
-
 # Disallow unmodified conditions of loops (no-unmodified-loop-condition)
 
 Variables in a loop condition often are modified in the loop.
@@ -88,12 +82,3 @@ while (check(obj)) {
 ## When Not To Use It
 
 If you don't want to notified about references inside of loop conditions, then it's safe to disable this rule.
-
-## Version
-
-This rule was introduced in ESLint 2.0.0-alpha-2.
-
-## Resources
-
-* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/no-unmodified-loop-condition.js)
-* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/no-unmodified-loop-condition.md)

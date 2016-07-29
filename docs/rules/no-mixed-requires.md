@@ -1,9 +1,3 @@
----
-title: Rule no-mixed-requires
-layout: doc
----
-<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
-
 # Disallow Mixed Requires (no-mixed-requires)
 
 In the Node.js community it is often customary to separate initializations with calls to `require` modules from other variable declarations, sometimes also grouping them by the type of module. This rule helps you enforce this convention.
@@ -128,12 +122,3 @@ If you use a pattern such as [UMD][4] where the `require`d modules are not loade
 [2]: http://nodejs.org/api/modules.html#modules_file_modules
 [3]: http://nodejs.org/api/modules.html#modules_loading_from_node_modules_folders
 [4]: https://github.com/umdjs/umd
-
-## Version
-
-This rule was introduced in ESLint 0.0.9.
-
-## Resources
-
-* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/no-mixed-requires.js)
-* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/no-mixed-requires.md)

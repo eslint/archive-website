@@ -1,9 +1,3 @@
----
-title: Architecture
-layout: doc
----
-<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
-
 # Architecture
 
 At a high level, there are a few key parts to ESLint:

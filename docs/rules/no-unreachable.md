@@ -1,9 +1,3 @@
----
-title: Rule no-unreachable
-layout: doc
----
-<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
-
 # disallow unreachable code after `return`, `throw`, `continue`, and `break` statements (no-unreachable)
 
 Because the `return`, `throw`, `break`, and `continue` statements unconditionally exit a block of code, any statements after them cannot be executed. Unreachable statements are usually a mistake.
@@ -79,12 +73,3 @@ switch (foo) {
         var x;
 }
 ```
-
-## Version
-
-This rule was introduced in ESLint 0.0.6.
-
-## Resources
-
-* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/no-unreachable.js)
-* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/no-unreachable.md)

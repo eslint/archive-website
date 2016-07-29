@@ -1,9 +1,3 @@
----
-title: Rule accessor-pairs
-layout: doc
----
-<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
-
 # Enforces getter/setter pairs in objects (accessor-pairs)
 
 It's a common mistake in JavaScript to create an object with just a setter for a property but never have a corresponding getter defined for it. Without a getter, you cannot read the property, so it ends up not being used.
@@ -158,12 +152,3 @@ You can turn this rule off if you are not concerned with the simultaneous presen
 * [Object Setters](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/set)
 * [Object Getters](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/get)
 * [Working with Objects](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Working_with_Objects)
-
-## Version
-
-This rule was introduced in ESLint 0.22.0.
-
-## Resources
-
-* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/accessor-pairs.js)
-* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/accessor-pairs.md)

@@ -1,9 +1,3 @@
----
-title: Rule indent
-layout: doc
----
-<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
-
 # enforce consistent indentation (indent)
 
 (fixable) The `--fix` option on the [command line](../user-guide/command-line-interface#fix) automatically fixes problems reported by this rule.
@@ -79,6 +73,7 @@ This rule has an object option:
 * `"SwitchCase"` (default: 0) enforces indentation level for `case` clauses in `switch` statements
 * `"VariableDeclarator"` (default: 1) enforces indentation level for `var` declarators; can also take an object to define separate rules for `var`, `let` and `const` declarations.
 * `"outerIIFEBody"` (default: 1) enforces indentation level for file-level IIFEs.
+* `"MemberExpression"` (default: 1) enforces indentation level for multi-line property chains
 
 Level of indentation denotes the multiple of the indent specified. Example:
 
@@ -89,6 +84,9 @@ Level of indentation denotes the multiple of the indent specified. Example:
 * Indent of 2 spaces with `SwitchCase` set to `0` will not indent `case` clauses with respect to `switch` statements.
 * Indent of 2 spaces with `SwitchCase` set to `2` will indent `case` clauses with 4 spaces with respect to `switch` statements.
 * Indent of tabs with `SwitchCase` set to `2` will indent `case` clauses with 2 tabs with respect to `switch` statements.
+* Indent of 2 spaces with `MemberExpression` set to `0` will indent the multi-line property chains with 0 spaces.
+* Indent of 2 spaces with `MemberExpression` set to `1` will indent the multi-line property chains with 2 spaces.
+* Indent of 2 spaces with `MemberExpression` set to `2` will indent the multi-line property chains with 4 spaces.
 
 ### tab
 
@@ -256,16 +254,29 @@ if(y) {
 }
 ```
 
+### MemberExpression
+
+Examples of **incorrect** code for this rule with the `2, { "MemberExpression": 1 }` options:
+
+```js
+/*eslint indent: ["error", 2, { "MemberExpression": 1 }]*/
+
+foo
+.bar
+.baz()
+```
+
+Examples of **correct** code for this rule with the `2, { "MemberExpression": 1 }` option:
+
+```js
+/*eslint indent: ["error", 2, { "MemberExpression": 1 }]*/
+
+foo
+  .bar
+  .baz();
+```
+
 ## Compatibility
 
 * **JSHint**: `indent`
 * **JSCS**: [validateIndentation](http://jscs.info/rule/validateIndentation)
-
-## Version
-
-This rule was introduced in ESLint 0.14.0.
-
-## Resources
-
-* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/indent.js)
-* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/indent.md)

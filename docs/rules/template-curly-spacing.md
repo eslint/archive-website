@@ -1,9 +1,3 @@
----
-title: Rule template-curly-spacing
-layout: doc
----
-<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
-
 # Enforce Usage of Spacing in Template Strings (template-curly-spacing)
 
 (fixable) The `--fix` option on the [command line](../user-guide/command-line-interface#fix) automatically fixes problems reported by this rule.
@@ -88,12 +82,3 @@ Examples of **correct** code for this rule with the `"always"` option:
 ## When Not To Use It
 
 If you don't want to be notified about usage of spacing inside of template strings, then it's safe to disable this rule.
-
-## Version
-
-This rule was introduced in ESLint 2.0.0-rc.0.
-
-## Resources
-
-* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/template-curly-spacing.js)
-* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/template-curly-spacing.md)

@@ -1,9 +1,3 @@
----
-title: Rule no-useless-call
-layout: doc
----
-<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
-
 # Disallow unnecessary `.call()` and `.apply()`. (no-useless-call)
 
 The function invocation can be written by `Function.prototype.call()` and `Function.prototype.apply()`.
@@ -72,12 +66,3 @@ a[++i].foo.call(a[i], 1, 2, 3);
 ## When Not To Use It
 
 If you don't want to be notified about unnecessary `.call()` and `.apply()`, you can safely disable this rule.
-
-## Version
-
-This rule was introduced in ESLint 1.0.0-rc-1.
-
-## Resources
-
-* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/no-useless-call.js)
-* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/no-useless-call.md)

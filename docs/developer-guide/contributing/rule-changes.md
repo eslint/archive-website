@@ -1,16 +1,10 @@
----
-title: Rule Changes
-layout: doc
----
-<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
-
 # Rule Changes
 
 Occasionally, a core ESLint rule needs to be changed. This is not necessarily a bug, but rather, an enhancement that makes a rule more configurable. In those situations, we will consider making changes to rules.
 
 ## Proposing a Rule Change
 
-If you want to propose a rule change, [create an issue](https://github.com/eslint/eslint/issues/new?body=**What%20version%20of%20ESLint%20are%20you%20using%3F**%0A%0A**What%20rule%20do%20you%20want%20to%20change%3F**%0A%0A**What%20code%20should%20be%20flagged%20as%20incorrect%20with%20this%20change%3F**%0A%0A**What%20happens%20when%20the%20rule%20is%20applied%20to%20this%20code%20now%3F**%0A%0A%0A) be sure to include:
+If you want to propose a rule change, [create an issue](https://github.com/eslint/eslint/issues/new?body=**What%20version%20of%20ESLint%20are%20you%20using%3F**%0A%0A**What%20rule%20do%20you%20want%20to%20change%3F**%0A%0A**What%20code%20should%20be%20flagged%20as%20incorrect%20with%20this%20change%3F**%0A%0A**What%20happens%20when%20the%20rule%20is%20applied%20to%20this%20code%20now%3F**%0A%0A%0A) and be sure to include:
 
 1. The version of ESLint you are using
 2. The rule you want to change

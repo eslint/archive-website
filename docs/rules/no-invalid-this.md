@@ -1,9 +1,3 @@
----
-title: Rule no-invalid-this
-layout: doc
----
-<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
-
 # Disallow `this` keywords outside of classes or class-like objects. (no-invalid-this)
 
 Under the strict mode, `this` keywords outside of classes or class-like objects might be `undefined` and raise a `TypeError`.
@@ -205,12 +199,3 @@ function foo() {
 ## When Not To Use It
 
 If you don't want to be notified about usage of `this` keyword outside of classes or class-like objects, you can safely disable this rule.
-
-## Version
-
-This rule was introduced in ESLint 1.0.0-rc-2.
-
-## Resources
-
-* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/no-invalid-this.js)
-* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/no-invalid-this.md)

@@ -1,9 +1,3 @@
----
-title: Rule no-else-return
-layout: doc
----
-<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
-
 # Disallow return before else (no-else-return)
 
 If an `if` block contains a `return` statement, the `else` block becomes unnecessary. Its contents can be placed outside of the block.
@@ -102,12 +96,3 @@ function foo() {
     }
 }
 ```
-
-## Version
-
-This rule was introduced in ESLint 0.0.9.
-
-## Resources
-
-* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/no-else-return.js)
-* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/no-else-return.md)

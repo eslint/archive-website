@@ -1,9 +1,3 @@
----
-title: Rule no-implicit-globals
-layout: doc
----
-<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
-
 # Disallow `var` and Named Functions in Global Scope (no-implicit-globals)
 
 When working with browser scripts, developers often forget that variable and function declarations at the top-level scope become global variables on the `window` object. As opposed to modules which have their own scope. Globals should be explicitly assigned to `window` or `self` if that is the intent. Otherwise variables intended to be local to the script should be wrapped in an IIFE.
@@ -56,12 +50,3 @@ If you want to be able to declare variables and functions in the global scope yo
 ## Further Reading
 
 * [Immediately-Invoked Function Expression (IIFE)](http://benalman.com/news/2010/11/immediately-invoked-function-expression/)
-
-## Version
-
-This rule was introduced in ESLint 2.0.0-alpha-1.
-
-## Resources
-
-* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/no-implicit-globals.js)
-* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/no-implicit-globals.md)

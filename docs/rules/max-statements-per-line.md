@@ -1,9 +1,3 @@
----
-title: Rule max-statements-per-line
-layout: doc
----
-<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
-
 # enforce a maximum number of statements allowed per line (max-statements-per-line)
 
 A line of code containing too many statements can be difficult to read. Code is generally read from the top down, especially when scanning, so limiting the number of statements allowed on a single line can be very beneficial for readability and maintainability.
@@ -84,17 +78,8 @@ You can turn this rule off if you are not concerned with the number of statement
 
 ## Related Rules
 
-* [max-depth](max-depth)
-* [max-len](max-len)
-* [max-nested-callbacks](max-nested-callbacks)
-* [max-params](max-params)
-* [max-statements](max-statements)
-
-## Version
-
-This rule was introduced in ESLint 2.5.0.
-
-## Resources
-
-* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/max-statements-per-line.js)
-* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/max-statements-per-line.md)
+* [max-depth](max-depth.md)
+* [max-len](max-len.md)
+* [max-nested-callbacks](max-nested-callbacks.md)
+* [max-params](max-params.md)
+* [max-statements](max-statements.md)

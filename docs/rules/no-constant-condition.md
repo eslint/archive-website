@@ -1,9 +1,3 @@
----
-title: Rule no-constant-condition
-layout: doc
----
-<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
-
 # disallow constant expressions in conditions (no-constant-condition)
 
 A constant expression (for example, a literal) as a test condition might be a typo or development trigger for a specific behavior. For example, the following code looks as if it is not ready for production.
@@ -101,12 +95,3 @@ do {
     }
 } while (true)
 ```
-
-## Version
-
-This rule was introduced in ESLint 0.4.1.
-
-## Resources
-
-* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/no-constant-condition.js)
-* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/no-constant-condition.md)

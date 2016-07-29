@@ -1,9 +1,3 @@
----
-title: Rule no-trailing-spaces
-layout: doc
----
-<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
-
 # disallow trailing whitespace at the end of lines (no-trailing-spaces)
 
 (fixable) The `--fix` option on the [command line](../user-guide/command-line-interface#fix) automatically fixes problems reported by this rule.
@@ -51,12 +45,3 @@ var foo = 0;
 var baz = 5;
 //•••••
 ```
-
-## Version
-
-This rule was introduced in ESLint 0.7.1.
-
-## Resources
-
-* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/no-trailing-spaces.js)
-* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/no-trailing-spaces.md)

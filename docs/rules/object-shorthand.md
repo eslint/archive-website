@@ -1,9 +1,3 @@
----
-title: Rule object-shorthand
-layout: doc
----
-<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
-
 # Require Object Literal Shorthand Syntax (object-shorthand)
 
 (fixable) The `--fix` option on the [command line](../user-guide/command-line-interface#fix) automatically fixes problems reported by this rule.
@@ -166,12 +160,3 @@ syntax harder to read and may not want to encourage it with this rule.
 ## Further Reading
 
 [Object initializer - MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Object_initializer)
-
-## Version
-
-This rule was introduced in ESLint 0.20.0.
-
-## Resources
-
-* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/object-shorthand.js)
-* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/object-shorthand.md)

@@ -1,12 +1,6 @@
----
-title: Rule no-reserved-keys
-layout: doc
----
-<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
-
 # no-reserved-keys: disallow unquoted reserved words as property names in object literals
 
-(removed) This rule was **removed** in ESLint v1.0 and **replaced** by the [quote-props](quote-props) rule.
+(removed) This rule was **removed** in ESLint v1.0 and **replaced** by the [quote-props](quote-props.md) rule.
 
 ECMAScript 3 described as series of keywords and reserved words, such as `if` and `public`, that are used or intended to be used for a core language feature. The specification also indicated that these keywords and reserved words could not be used as object property names without being enclosed in strings. An error occurs in an ECMAScript 3 environment when you use a keyword or reserved word in an object literal. For example:
 
@@ -57,11 +51,3 @@ If your code is only going to be executed in an ECMAScript 5 or higher environme
 ## Further Reading
 
 * [Reserved words as property names](http://kangax.github.io/compat-table/es5/#Reserved_words_as_property_names)
-
-## Version
-
-This rule was introduced in ESLint 0.8.0 and removed in 1.0.0.
-
-## Resources
-
-* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/no-reserved-keys.md)

@@ -1,9 +1,3 @@
----
-title: Rule valid-typeof
-layout: doc
----
-<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
-
 # enforce comparing `typeof` expressions against valid strings (valid-typeof)
 
 For a vast majority of use cases, the result of the `typeof` operator is one of the following string literals: `"undefined"`, `"object"`, `"boolean"`, `"number"`, `"string"`, `"function"` and `"symbol"`. It is usually a typing mistake to compare the result of a `typeof` operator to other string literals.
@@ -37,12 +31,3 @@ typeof bar === typeof qux
 ## When Not To Use It
 
 You may want to turn this rule off if you will be using the `typeof` operator on host objects.
-
-## Version
-
-This rule was introduced in ESLint 0.5.0.
-
-## Resources
-
-* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/valid-typeof.js)
-* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/valid-typeof.md)

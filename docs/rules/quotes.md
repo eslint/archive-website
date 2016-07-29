@@ -1,9 +1,3 @@
----
-title: Rule quotes
-layout: doc
----
-<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
-
 # Enforce Quote Style (quotes)
 
 (fixable) The `--fix` option on the [command line](../user-guide/command-line-interface#fix) automatically fixes problems reported by this rule.
@@ -149,12 +143,3 @@ var double = "a string containing `backtick` quotes"
 ## When Not To Use It
 
 If you do not need consistency in your string styles, you can safely disable this rule.
-
-## Version
-
-This rule was introduced in ESLint 0.0.7.
-
-## Resources
-
-* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/quotes.js)
-* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/quotes.md)

@@ -1,9 +1,3 @@
----
-title: Rule no-whitespace-before-property
-layout: doc
----
-<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
-
 # disallow whitespace before properties (no-whitespace-before-property)
 
 (fixable) The `--fix` option on the [command line](../user-guide/command-line-interface#fix) automatically fixes problems reported by this rule.
@@ -73,12 +67,3 @@ foo.
 ## When Not To Use It
 
 Turn this rule off if you do not care about allowing whitespace around the dot or before the opening bracket before properties of objects if they are on the same line.
-
-## Version
-
-This rule was introduced in ESLint 2.0.0-beta.1.
-
-## Resources
-
-* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/no-whitespace-before-property.js)
-* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/no-whitespace-before-property.md)

@@ -1,9 +1,3 @@
----
-title: Rule eqeqeq
-layout: doc
----
-<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
-
 # Require === and !== (eqeqeq)
 
 It is considered good practice to use the type-safe equality operators `===` and `!==` instead of their regular counterparts `==` and `!=`.
@@ -136,12 +130,3 @@ foo == null
 ## When Not To Use It
 
 If you don't want to enforce a style for using equality operators, then it's safe to disable this rule.
-
-## Version
-
-This rule was introduced in ESLint 0.0.2.
-
-## Resources
-
-* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/eqeqeq.js)
-* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/eqeqeq.md)

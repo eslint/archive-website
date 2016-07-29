@@ -1,9 +1,3 @@
----
-title: Rule no-bitwise
-layout: doc
----
-<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
-
 # disallow bitwise operators (no-bitwise)
 
 The use of bitwise operators in JavaScript is very rare and often `&` or `|` is simply a mistyped `&&` or `||`, which will lead to unexpected behavior.
@@ -90,12 +84,3 @@ Examples of **correct** code for this rule with the `{ "int32Hint": true }` opti
 
 var b = a|0;
 ```
-
-## Version
-
-This rule was introduced in ESLint 0.0.2.
-
-## Resources
-
-* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/no-bitwise.js)
-* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/no-bitwise.md)

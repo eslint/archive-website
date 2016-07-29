@@ -1,9 +1,3 @@
----
-title: Rule no-extra-semi
-layout: doc
----
-<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
-
 # disallow unnecessary semicolons (no-extra-semi)
 
 (fixable) The `--fix` option on the [command line](../user-guide/command-line-interface#fix) automatically fixes problems reported by this rule.
@@ -46,14 +40,5 @@ If you intentionally use extra semicolons then you can disable this rule.
 
 ## Related Rules
 
-* [semi](semi)
-* [semi-spacing](semi-spacing)
-
-## Version
-
-This rule was introduced in ESLint 0.0.9.
-
-## Resources
-
-* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/no-extra-semi.js)
-* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/no-extra-semi.md)
+* [semi](semi.md)
+* [semi-spacing](semi-spacing.md)

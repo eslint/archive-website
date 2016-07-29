@@ -1,9 +1,3 @@
----
-title: Rule no-negated-in-lhs
-layout: doc
----
-<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
-
 # disallow negating the left operand in `in` expressions (no-negated-in-lhs)
 
 ## Rule Details
@@ -43,12 +37,3 @@ if(('' + !key) in object) {
 ## When Not To Use It
 
 Never.
-
-## Version
-
-This rule was introduced in ESLint 0.1.2.
-
-## Resources
-
-* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/no-negated-in-lhs.js)
-* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/no-negated-in-lhs.md)

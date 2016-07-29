@@ -1,9 +1,3 @@
----
-title: Rule no-implied-eval
-layout: doc
----
-<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
-
 # Disallow Implied eval() (no-implied-eval)
 
 It's considered a good practice to avoid using `eval()` in JavaScript. There are security and performance implications involved with doing so, which is why many linters (including ESLint) recommend disallowing `eval()`. However, there are some other ways to pass a string and have it interpreted as JavaScript code that have similar concerns.
@@ -70,13 +64,4 @@ If you want to allow `setTimeout()` and `setInterval()` with string arguments, t
 
 ## Related Rules
 
-* [no-eval](no-eval)
-
-## Version
-
-This rule was introduced in ESLint 0.0.7.
-
-## Resources
-
-* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/no-implied-eval.js)
-* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/no-implied-eval.md)
+* [no-eval](no-eval.md)

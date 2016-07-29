@@ -1,9 +1,3 @@
----
-title: Rule no-label-var
-layout: doc
----
-<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
-
 # Disallow Labels That Are Variables Names (no-label-var)
 
 ## Rule Details
@@ -53,15 +47,6 @@ If you don't want to be notified about usage of labels, then it's safe to disabl
 
 ## Related Rules
 
-* [no-extra-label](./no-extra-label)
-* [no-labels](./no-labels)
-* [no-unused-labels](./no-unused-labels)
-
-## Version
-
-This rule was introduced in ESLint 0.0.9.
-
-## Resources
-
-* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/no-label-var.js)
-* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/no-label-var.md)
+* [no-extra-label](./no-extra-label.md)
+* [no-labels](./no-labels.md)
+* [no-unused-labels](./no-unused-labels.md)

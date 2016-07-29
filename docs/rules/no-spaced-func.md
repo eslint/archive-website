@@ -1,9 +1,3 @@
----
-title: Rule no-spaced-func
-layout: doc
----
-<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
-
 # disallow spacing between `function` identifiers and their applications (no-spaced-func)
 
 (fixable) The `--fix` option on the [command line](../user-guide/command-line-interface#fix) automatically fixes problems reported by this rule.
@@ -32,12 +26,3 @@ Examples of **correct** code for this rule:
 
 fn()
 ```
-
-## Version
-
-This rule was introduced in ESLint 0.1.2.
-
-## Resources
-
-* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/no-spaced-func.js)
-* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/no-spaced-func.md)

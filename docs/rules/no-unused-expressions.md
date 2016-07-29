@@ -1,9 +1,3 @@
----
-title: Rule no-unused-expressions
-layout: doc
----
-<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
-
 # Disallow Unused Expressions (no-unused-expressions)
 
 An unused expression which has no effect on the state of the program indicates a logic error.
@@ -146,12 +140,3 @@ Examples of **correct** code for the `{ "allowShortCircuit": true, "allowTernary
 
 a ? b() || (c = d) : e()
 ```
-
-## Version
-
-This rule was introduced in ESLint 0.1.0.
-
-## Resources
-
-* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/no-unused-expressions.js)
-* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/no-unused-expressions.md)

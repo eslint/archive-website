@@ -1,9 +1,3 @@
----
-title: Rule no-dupe-class-members
-layout: doc
----
-<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
-
 # Disallow duplicate name in class members (no-dupe-class-members)
 
 If there are declarations of the same name in class members, the last declaration overwrites other declarations silently.
@@ -76,12 +70,3 @@ class Foo {
 This rule should not be used in ES3/5 environments.
 
 In ES2015 (ES6) or later, if you don't want to be notified about duplicate names in class members, you can safely disable this rule.
-
-## Version
-
-This rule was introduced in ESLint 1.2.0.
-
-## Resources
-
-* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/no-dupe-class-members.js)
-* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/no-dupe-class-members.md)

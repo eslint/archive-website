@@ -1,9 +1,3 @@
----
-title: Migrating to v2.0.0
-layout: doc
----
-<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
-
 # Migrating to v2.0.0
 
 ESLint v2.0.0 is the second major version release. As a result, there are some significant changes between how ESLint worked during its life in 0.x and 1.x and how it will work going forward. These changes are the direct result of feedback from the ESLint community of users and were not made without due consideration for the upgrade path. We believe that these changes make ESLint even better, and while some work is necessary to upgrade, we hope the pain of this upgrade is small enough that you will see the benefit of upgrading.
@@ -353,7 +347,7 @@ var sourceCode = new SourceCode(text, ast);
 
 ## Rule Changes
 
-* [`strict`](../rules/strict) - defaults to `"safe"` (previous default was `"function"`)
+* [`strict`](../rules/strict.md) - defaults to `"safe"` (previous default was `"function"`)
 
 ## Plugins No Longer Have Default Configurations
 

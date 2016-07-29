@@ -1,9 +1,3 @@
----
-title: Rule object-curly-newline
-layout: doc
----
-<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
-
 # enforce consistent line breaks inside braces (object-curly-newline)
 
 (fixable) The `--fix` option on the [command line](../user-guide/command-line-interface#fix) automatically fixes problems reported by this rule.
@@ -400,16 +394,7 @@ If you don't want to enforce consistent line breaks inside braces, then it's saf
 
 ## Related Rules
 
-* [comma-spacing](comma-spacing)
-* [key-spacing](key-spacing)
-* [object-curly-spacing](object-curly-spacing)
-* [object-property-newline](object-property-newline)
-
-## Version
-
-This rule was introduced in ESLint 2.12.0.
-
-## Resources
-
-* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/object-curly-newline.js)
-* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/object-curly-newline.md)
+* [comma-spacing](comma-spacing.md)
+* [key-spacing](key-spacing.md)
+* [object-curly-spacing](object-curly-spacing.md)
+* [object-property-newline](object-property-newline.md)

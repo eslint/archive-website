@@ -1,9 +1,3 @@
----
-title: Rule brace-style
-layout: doc
----
-<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
-
 # Require Brace Style (brace-style)
 
 Brace style is closely related to [indent style](http://en.wikipedia.org/wiki/Indent_style) in programming and describes the placement of braces relative to their control statement and body. There are probably a dozen, if not more, brace styles in the world.
@@ -308,12 +302,3 @@ If your project will not be using the one true brace style, turn this rule off.
 ## Further Reading
 
 * [Indent style](http://en.wikipedia.org/wiki/Indent_style)
-
-## Version
-
-This rule was introduced in ESLint 0.0.7.
-
-## Resources
-
-* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/brace-style.js)
-* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/brace-style.md)

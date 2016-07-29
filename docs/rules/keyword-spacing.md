@@ -1,9 +1,3 @@
----
-title: Rule keyword-spacing
-layout: doc
----
-<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
-
 # enforce consistent spacing before and after keywords (keyword-spacing)
 
 (fixable) The `--fix` option on the [command line](../user-guide/command-line-interface#fix) automatically fixes problems reported by this rule.
@@ -276,12 +270,3 @@ while(true) {
 ## When Not To Use It
 
 If you don't want to enforce consistency on keyword spacing, then it's safe to disable this rule.
-
-## Version
-
-This rule was introduced in ESLint 2.0.0-beta.1.
-
-## Resources
-
-* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/keyword-spacing.js)
-* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/keyword-spacing.md)

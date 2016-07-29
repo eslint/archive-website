@@ -1,9 +1,3 @@
----
-title: Rule no-unused-labels
-layout: doc
----
-<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
-
 # Disallow Unused Labels (no-unused-labels)
 
 Labels that are declared and not used anywhere in the code are most likely an error due to incomplete refactoring.
@@ -69,15 +63,6 @@ If you don't want to be notified about unused labels, then it's safe to disable 
 
 ## Related Rules
 
-* [no-extra-label](./no-extra-label)
-* [no-labels](./no-labels)
-* [no-label-var](./no-label-var)
-
-## Version
-
-This rule was introduced in ESLint 2.0.0-rc.0.
-
-## Resources
-
-* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/no-unused-labels.js)
-* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/no-unused-labels.md)
+* [no-extra-label](./no-extra-label.md)
+* [no-labels](./no-labels.md)
+* [no-label-var](./no-label-var.md)

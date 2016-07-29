@@ -1,12 +1,6 @@
----
-title: Rule space-after-keywords
-layout: doc
----
-<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
-
 # space-after-keywords: enforce consistent spacing after keywords
 
-(removed) This rule was **removed** in ESLint v2.0 and replaced by the [keyword-spacing](keyword-spacing) rule.
+(removed) This rule was **removed** in ESLint v2.0 and replaced by the [keyword-spacing](keyword-spacing.md) rule.
 
 (fixable) The `--fix` option on the [command line](../user-guide/command-line-interface#fix) automatically fixed problems reported by this rule.
 
@@ -66,11 +60,3 @@ if (a) {} else {}
 
 if(a) {}
 ```
-
-## Version
-
-This rule was introduced in ESLint 0.6.0 and removed in 2.0.0-beta.3.
-
-## Resources
-
-* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/space-after-keywords.md)

@@ -1,9 +1,3 @@
----
-title: Rule no-array-constructor
-layout: doc
----
-<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
-
 # disallow `Array` constructors (no-array-constructor)
 
 Use of the `Array` constructor to construct a new array is generally
@@ -51,14 +45,5 @@ rule may be disabled if the constructor style is preferred.
 
 ## Related Rules
 
-* [no-new-object](no-new-object)
-* [no-new-wrappers](no-new-wrappers)
-
-## Version
-
-This rule was introduced in ESLint 0.4.0.
-
-## Resources
-
-* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/no-array-constructor.js)
-* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/no-array-constructor.md)
+* [no-new-object](no-new-object.md)
+* [no-new-wrappers](no-new-wrappers.md)

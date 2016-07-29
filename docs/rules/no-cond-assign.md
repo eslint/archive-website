@@ -1,9 +1,3 @@
----
-title: Rule no-cond-assign
-layout: doc
----
-<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
-
 # disallow assignment operators in conditional statements (no-cond-assign)
 
 In conditional statements, it is very easy to mistype a comparison operator (such as `==`) as an assignment operator (such as `=`). For example:
@@ -134,13 +128,4 @@ if (x === 0) {
 
 ## Related Rules
 
-* [no-extra-parens](no-extra-parens)
-
-## Version
-
-This rule was introduced in ESLint 0.0.9.
-
-## Resources
-
-* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/no-cond-assign.js)
-* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/no-cond-assign.md)
+* [no-extra-parens](no-extra-parens.md)

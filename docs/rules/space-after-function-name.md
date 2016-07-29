@@ -1,12 +1,6 @@
----
-title: Rule space-after-function-name
-layout: doc
----
-<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
-
 # space-after-function-name: enforce consistent spacing after name in function definitions
 
-(removed) This rule was **removed** in ESLint v1.0 and **replaced** by the [space-before-function-paren](space-before-function-paren) rule.
+(removed) This rule was **removed** in ESLint v1.0 and **replaced** by the [space-before-function-paren](space-before-function-paren.md) rule.
 
 Whitespace between a function name and its parameter list is optional.
 
@@ -56,11 +50,3 @@ function bar (x) {
     // ...
 }
 ```
-
-## Version
-
-This rule was introduced in ESLint 0.11.0 and removed in 1.0.0-rc-1.
-
-## Resources
-
-* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/space-after-function-name.md)

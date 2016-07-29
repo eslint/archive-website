@@ -1,9 +1,3 @@
----
-title: Rule space-before-blocks
-layout: doc
----
-<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
-
 # Require Or Disallow Space Before Blocks (space-before-blocks)
 
 (fixable) The `--fix` option on the [command line](../user-guide/command-line-interface#fix) automatically fixes problems reported by this rule.
@@ -219,15 +213,6 @@ You can turn this rule off if you are not concerned with the consistency of spac
 
 ## Related Rules
 
-* [keyword-spacing](keyword-spacing)
-* [arrow-spacing](arrow-spacing)
-* [brace-style](brace-style)
-
-## Version
-
-This rule was introduced in ESLint 0.9.0.
-
-## Resources
-
-* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/space-before-blocks.js)
-* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/space-before-blocks.md)
+* [keyword-spacing](keyword-spacing.md)
+* [arrow-spacing](arrow-spacing.md)
+* [brace-style](brace-style.md)

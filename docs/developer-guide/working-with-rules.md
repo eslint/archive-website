@@ -1,9 +1,3 @@
----
-title: Working with Rules
-layout: doc
----
-<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
-
 # Working with Rules
 
 **Note:** This page covers the most recent rule format. There is also a [deprecated rule format](./working-with-rules-deprecated).
@@ -71,7 +65,7 @@ The source file for a rule exports an object with the following properties.
 
 * if a key is a node type, ESLint calls that **visitor** function while going **down** the tree
 * if a key is a node type plus `:exit`, ESLint calls that **visitor** function while going **up** the tree
-* if a key is an event name, ESLint calls that **handler** function for [code path analysis](./code-path-analysis)
+* if a key is an event name, ESLint calls that **handler** function for [code path analysis](./code-path-analysis.md)
 
 A rule can use the current node and its surrounding tree to report or fix problems.
 
@@ -121,7 +115,7 @@ Additionally, the `context` object has the following methods:
 * `getFilename()` - returns the filename associated with the source.
 * `getScope()` - returns the current scope.
 * `getSourceCode()` - returns a `SourceCode` object that you can use to work with the source that was passed to ESLint
-* `markVariableAsUsed(name)` - marks the named variable in scope as used. This affects the [no-unused-vars](../rules/no-unused-vars) rule.
+* `markVariableAsUsed(name)` - marks the named variable in scope as used. This affects the [no-unused-vars](../rules/no-unused-vars.md) rule.
 * `report(descriptor)` - reports a problem in the code.
 
 **Note:** Earlier versions of ESLint supported additional methods on the `context` object. Those methods were removed in the new format and should not be relied upon.
@@ -349,7 +343,7 @@ Keep in mind that comments are technically not a part of the AST and are only at
 ESLint analyzes code paths while traversing AST.
 You can access that code path objects with five events related to code paths.
 
-[details here](./code-path-analysis)
+[details here](./code-path-analysis.md)
 
 ## Rule Unit Tests
 
@@ -440,6 +434,26 @@ invalid: [
 
 In this case, the message is specific to the variable being used and the AST node type is `Identifier`.
 
+You can also check that the rule returns the correct line and column numbers for the message by adding `line` and `column` properties as needed (both are optional, but highly recommend):
+
+```js
+invalid: [
+    {
+        code: "function doSomething() { var f; if (true) { var build = true; } f = build; }",
+        errors: [
+            {
+                message: "build used outside of binding context.",
+                type: "Identifier",
+                line: 1,
+                column: 68
+            }
+        ]
+    }
+]
+```
+
+The test fails if the line or column reported by the rule doesn't match the options specified in the test.
+
 Similar to the valid cases, you can also specify `options` to be passed to the rule:
 
 ```js
@@ -466,11 +480,90 @@ invalid: [
 ]
 ```
 
-### Specifying Parser Options
+### Specifying Globals
 
-Some tests require that a certain parser configuration must be used. This can be specified in test specifications via the `parserOptions` setting.
+If your rule relies on globals to be specified, you can provide global variable declarations by using the `globals` property. For example:
 
-For example, to set `ecmaVersion` to 6 (in order to use constructs like `for ... of`):
+```js
+valid: [
+    {
+        code: "for (x of a) doSomething();",
+        globals: { window: true }
+    }
+]
+```
+
+The same works on invalid tests:
+
+```js
+invalid: [
+    {
+        code: "'single quotes'",
+        globals: { window: true },
+        errors: ["Strings must use doublequote."]
+    }
+]
+```
+
+### Specifying Settings
+
+If your rule relies on `context.settings` to be specified, you can provide those settings by using the `settings` property. For example:
+
+```js
+valid: [
+    {
+        code: "for (x of a) doSomething();",
+        settings: { message: "hi" }
+    }
+]
+```
+
+The same works on invalid tests:
+
+```js
+invalid: [
+    {
+        code: "'single quotes'",
+        settings: { message: "hi" },
+        errors: ["Strings must use doublequote."]
+    }
+]
+```
+
+You can then access `context.settings.message` inside of the rule.
+
+### Specifying Filename
+
+If your rule relies on `context.getFilename()` to be specified, you can provide the filename by using the `filename` property. For example:
+
+```js
+valid: [
+    {
+        code: "for (x of a) doSomething();",
+        filename: "foo/bar.js"
+    }
+]
+```
+
+The same works on invalid tests:
+
+```js
+invalid: [
+    {
+        code: "'single quotes'",
+        filename: "foo/bar.js",
+        errors: ["Strings must use doublequote."]
+    }
+]
+```
+
+You can then access `context.getFilename()` inside of the rule.
+
+### Specifying Parser and Parser Options
+
+Some tests require that a certain parser configuration must be used. This can be specified in test specifications via the `parser` and `parserOptions` properties. While the following examples show usage in `valid` tests, you can use the same options in `invalid` tests as well.
+
+For example, to set `ecmaVersion` to 6 (in order to use constructs like `for-of`):
 
 ```js
 valid: [
@@ -503,11 +596,18 @@ valid: [
 ]
 ```
 
+To use a different parser:
+
+```js
+valid: [
+    {
+        code: "var foo = <div>{bar}</div>",
+        parser: "my-custom-parser"
+    }
+]
+```
+
 The options available and the expected syntax for `parserOptions` is the same as those used in [configuration](../user-guide/configuring#specifying-parser-options).
-
-### Write Several Tests
-
-Provide as many unit tests as possible. Your pull request will never be turned down for having too many tests submitted with it!
 
 ## Performance Testing
 

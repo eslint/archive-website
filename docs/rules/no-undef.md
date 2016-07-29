@@ -1,9 +1,3 @@
----
-title: Rule no-undef
-layout: doc
----
-<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
-
 # Disallow Undeclared Variables (no-undef)
 
 This rule can help you locate potential ReferenceErrors resulting from misspellings of variable and parameter names, or accidental implicit globals (for example, from forgetting the `var` keyword in a `for` loop initializer).
@@ -121,12 +115,3 @@ This rule provides compatibility with treatment of global variables in [JSHint](
 ## Further Reading
 
 * ['{a}' is not defined](http://jslinterrors.com/a-is-not-defined)
-
-## Version
-
-This rule was introduced in ESLint 0.0.9.
-
-## Resources
-
-* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/no-undef.js)
-* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/no-undef.md)

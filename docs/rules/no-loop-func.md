@@ -1,9 +1,3 @@
----
-title: Rule no-loop-func
-layout: doc
----
-<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
-
 # Disallow Functions in Loops (no-loop-func)
 
 Writing functions within loops tends to result in errors due to the way the function creates a closure around the loop. For example:
@@ -98,12 +92,3 @@ for (let i=10; i; i--) {
 ## Further Reading
 
 * [Don't make functions within a loop](http://jslinterrors.com/dont-make-functions-within-a-loop/)
-
-## Version
-
-This rule was introduced in ESLint 0.0.9.
-
-## Resources
-
-* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/no-loop-func.js)
-* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/no-loop-func.md)

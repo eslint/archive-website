@@ -1,9 +1,3 @@
----
-title: Rule operator-assignment
-layout: doc
----
-<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
-
 # Operator Assignment Shorthand (operator-assignment)
 
 JavaScript provides shorthand operators that combine variable assignment and some simple mathematical operations. For example, `x = x + 4` can be shortened to `x += 4`. The supported shorthand forms are as follows:
@@ -90,12 +84,3 @@ x ^= (y + z) / foo();
 ## When Not To Use It
 
 Use of operator assignment shorthand is a stylistic choice. Leaving this rule turned off would allow developers to choose which style is more readable on a case-by-case basis.
-
-## Version
-
-This rule was introduced in ESLint 0.10.0.
-
-## Resources
-
-* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/operator-assignment.js)
-* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/operator-assignment.md)

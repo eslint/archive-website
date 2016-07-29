@@ -1,12 +1,6 @@
----
-title: Rule space-before-function-parentheses
-layout: doc
----
-<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
-
 # space-before-function-parentheses: enforce consistent spacing before opening parenthesis in function definitions
 
-(removed) This rule was **removed** in ESLint v1.0 and **replaced** by the [space-before-function-paren](space-before-function-paren) rule. The name of the rule changed from "parentheses" to "paren" for consistency with the names of other rules.
+(removed) This rule was **removed** in ESLint v1.0 and **replaced** by the [space-before-function-paren](space-before-function-paren.md) rule. The name of the rule changed from "parentheses" to "paren" for consistency with the names of other rules.
 
 When formatting a function, whitespace is allowed between the function name or `function` keyword and the opening paren. Named functions also require a space between the `function` keyword and the function name, but anonymous functions require no whitespace. For example:
 
@@ -264,13 +258,5 @@ You can turn this rule off if you are not concerned with the consistency of spac
 
 ## Related Rules
 
-* [space-after-keywords](space-after-keywords)
-* [space-return-throw-case](space-return-throw-case)
-
-## Version
-
-This rule was introduced in ESLint 0.15.0 and removed in 1.0.0-rc-1.
-
-## Resources
-
-* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/space-before-function-parentheses.md)
+* [space-after-keywords](space-after-keywords.md)
+* [space-return-throw-case](space-return-throw-case.md)

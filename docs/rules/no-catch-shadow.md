@@ -1,9 +1,3 @@
----
-title: Rule no-catch-shadow
-layout: doc
----
-<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
-
 # Disallow Shadowing of Variables Inside of catch (no-catch-shadow)
 
 In IE 8 and earlier, the catch clause parameter can overwrite the value of a variable in the outer scope, if that variable has the same name as the catch clause parameter.
@@ -75,12 +69,3 @@ try {
 ## When Not To Use It
 
 If you do not need to support IE 8 and earlier, you should turn this rule off.
-
-## Version
-
-This rule was introduced in ESLint 0.0.9.
-
-## Resources
-
-* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/no-catch-shadow.js)
-* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/no-catch-shadow.md)

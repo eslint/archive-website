@@ -1,9 +1,3 @@
----
-title: Rule array-bracket-spacing
-layout: doc
----
-<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
-
 # Disallow or enforce spaces inside of brackets (array-bracket-spacing)
 
 (fixable) The `--fix` option on the [command line](../user-guide/command-line-interface#fix) automatically fixes problems reported by this rule.
@@ -226,15 +220,6 @@ You can turn this rule off if you are not concerned with the consistency of spac
 
 ## Related Rules
 
-* [space-in-parens](space-in-parens)
-* [object-curly-spacing](object-curly-spacing)
-* [computed-property-spacing](computed-property-spacing)
-
-## Version
-
-This rule was introduced in ESLint 0.24.0.
-
-## Resources
-
-* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/array-bracket-spacing.js)
-* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/array-bracket-spacing.md)
+* [space-in-parens](space-in-parens.md)
+* [object-curly-spacing](object-curly-spacing.md)
+* [computed-property-spacing](computed-property-spacing.md)

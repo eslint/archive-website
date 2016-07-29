@@ -1,9 +1,3 @@
----
-title: Rule guard-for-in
-layout: doc
----
-<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
-
 # Require Guarding for-in (guard-for-in)
 
 Looping over objects with a `for in` loop will include properties that are inherited through the prototype chain. This behavior can lead to unexpected items in your for loop.
@@ -44,12 +38,3 @@ for (key in foo) {
 
 * [Exploring JavaScript for-in loops](http://javascriptweblog.wordpress.com/2011/01/04/exploring-javascript-for-in-loops/)
 * [The pitfalls of using objects as maps in JavaScript](http://www.2ality.com/2012/01/objects-as-maps.html)
-
-## Version
-
-This rule was introduced in ESLint 0.0.6.
-
-## Resources
-
-* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/guard-for-in.js)
-* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/guard-for-in.md)

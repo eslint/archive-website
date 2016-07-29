@@ -1,9 +1,3 @@
----
-title: Rule no-regex-spaces
-layout: doc
----
-<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
-
 # disallow multiple spaces in regular expression literals (no-regex-spaces)
 
 Regular expressions can be very complex and difficult to understand, which is why it's important to keep them as simple as possible in order to avoid mistakes. One of the more error-prone things you can do with a regular expression is to use more than one space, such as:
@@ -52,14 +46,5 @@ If you want to allow multiple spaces in a regular expression, then you can safel
 
 ## Related Rules
 
-* [no-div-regex](no-div-regex)
-* [no-control-regex](no-control-regex)
-
-## Version
-
-This rule was introduced in ESLint 0.4.0.
-
-## Resources
-
-* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/no-regex-spaces.js)
-* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/no-regex-spaces.md)
+* [no-div-regex](no-div-regex.md)
+* [no-control-regex](no-control-regex.md)

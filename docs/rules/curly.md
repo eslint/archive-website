@@ -1,9 +1,3 @@
----
-title: Rule curly
-layout: doc
----
-<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
-
 # Require Following Curly Brace Conventions (curly)
 
 JavaScript allows the omission of curly braces when a block contains only one statement. However, it is considered by many to be best practice to _never_ omit curly braces around blocks, even when they are optional, because it can lead to bugs and reduces code clarity. So the following:
@@ -288,12 +282,3 @@ if (foo)
 ## When Not To Use It
 
 If you have no strict conventions about when to use block statements and when not to, you can safely disable this rule.
-
-## Version
-
-This rule was introduced in ESLint 0.0.2.
-
-## Resources
-
-* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/curly.js)
-* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/curly.md)

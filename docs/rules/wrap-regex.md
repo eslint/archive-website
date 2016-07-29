@@ -1,9 +1,3 @@
----
-title: Rule wrap-regex
-layout: doc
----
-<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
-
 # Require Regex Literals to be Wrapped (wrap-regex)
 
 When a regular expression is used in certain situations, it can end up looking like a division operator. For example:
@@ -37,12 +31,3 @@ function a() {
     return (/foo/).test("bar");
 }
 ```
-
-## Version
-
-This rule was introduced in ESLint 0.1.0.
-
-## Resources
-
-* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/wrap-regex.js)
-* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/wrap-regex.md)

@@ -1,9 +1,3 @@
----
-title: Rule id-match
-layout: doc
----
-<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
-
 # require identifiers to match a specified regular expression (id-match)
 
 > "There are only two hard things in Computer Science: cache invalidation and naming things." — Phil Karlton
@@ -90,12 +84,3 @@ do_something(__dirname);
 ## When Not To Use It
 
 If your rules are too complex, it is possible that you encounter performance issues due to the nature of the job.
-
-## Version
-
-This rule was introduced in ESLint 1.0.0.
-
-## Resources
-
-* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/id-match.js)
-* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/id-match.md)

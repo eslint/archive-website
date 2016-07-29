@@ -1,9 +1,3 @@
----
-title: Rule space-in-parens
-layout: doc
----
-<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
-
 # Disallow or enforce spaces inside of parentheses (space-in-parens)
 
 (fixable) The `--fix` option on the [command line](../user-guide/command-line-interface#fix) automatically fixes problems reported by this rule.
@@ -265,13 +259,4 @@ You can turn this rule off if you are not concerned with the consistency of spac
 
 ## Related Rules
 
-* [space-in-brackets](space-in-brackets) (deprecated)
-
-## Version
-
-This rule was introduced in ESLint 0.8.0.
-
-## Resources
-
-* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/space-in-parens.js)
-* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/space-in-parens.md)
+* [space-in-brackets](space-in-brackets.md) (deprecated)

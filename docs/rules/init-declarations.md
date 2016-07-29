@@ -1,9 +1,3 @@
----
-title: Rule init-declarations
-layout: doc
----
-<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
-
 # Enforce/Disallow Variable Initializations (init-declarations)
 
 In JavaScript, variables can be assigned during declaration, or at any point afterwards using an assignment statement. For example, in the following code, `foo` is initialized during declaration, while `bar` is initialized later.
@@ -135,12 +129,3 @@ for (var i = 0; i < 1; i++) {}
 ## When Not To Use It
 
 When you are indifferent as to how your variables are initialized.
-
-## Version
-
-This rule was introduced in ESLint 1.0.0-rc-1.
-
-## Resources
-
-* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/init-declarations.js)
-* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/init-declarations.md)

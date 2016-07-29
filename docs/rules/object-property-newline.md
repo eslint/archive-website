@@ -1,9 +1,3 @@
----
-title: Rule object-property-newline
-layout: doc
----
-<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
-
 # enforce placing object properties on separate lines (object-property-newline)
 
 While formatting preferences are very personal, a number of style guides require that object properties be placed on separate lines for better readability.
@@ -89,16 +83,7 @@ You can turn this rule off if you are not concerned with the consistency of newl
 
 ## Related Rules
 
-* [brace-style](brace-style)
-* [comma-dangle](comma-dangle)
-* [key-spacing](key-spacing)
-* [object-curly-spacing](object-curly-spacing)
-
-## Version
-
-This rule was introduced in ESLint 2.10.0.
-
-## Resources
-
-* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/object-property-newline.js)
-* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/object-property-newline.md)
+* [brace-style](brace-style.md)
+* [comma-dangle](comma-dangle.md)
+* [key-spacing](key-spacing.md)
+* [object-curly-spacing](object-curly-spacing.md)

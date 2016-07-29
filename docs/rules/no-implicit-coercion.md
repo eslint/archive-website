@@ -1,9 +1,3 @@
----
-title: Rule no-implicit-coercion
-layout: doc
----
-<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
-
 # Disallow the type conversion with shorter notations. (no-implicit-coercion)
 
 In JavaScript, there are a lot of different ways to convert value types.
@@ -125,12 +119,3 @@ var b = ~foo.indexOf(".");
 ## When Not To Use It
 
 If you don't want to be notified about shorter notations for the type conversion, you can safely disable this rule.
-
-## Version
-
-This rule was introduced in ESLint 1.0.0-rc-2.
-
-## Resources
-
-* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/no-implicit-coercion.js)
-* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/no-implicit-coercion.md)

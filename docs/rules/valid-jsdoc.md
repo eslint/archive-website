@@ -1,9 +1,3 @@
----
-title: Rule valid-jsdoc
-layout: doc
----
-<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
-
 # enforce valid JSDoc comments (valid-jsdoc)
 
 [JSDoc](http://usejsdoc.org) generates application programming interface (API) documentation from specially-formatted comments in JavaScript code. For example, this is a JSDoc comment for a function:
@@ -36,6 +30,8 @@ This rule enforces valid and consistent JSDoc comments. It reports any of the fo
 * syntax error
 
 This rule does not report missing JSDoc comments for classes, functions, or methods.
+
+**Note:** This rule does not support all of the Google Closure documentation tool's use cases. As such, some code such as `(/**number*/ n => n * 2);` will be flagged as missing appropriate function JSDoc comments even though `/**number*/` is intended to be a type hint and not a documentation block for the function. We don't recommend using this rule if you use type hints in this way.
 
 Examples of **incorrect** code for this rule:
 
@@ -373,13 +369,4 @@ If you aren't using JSDoc, then you can safely turn this rule off.
 
 ## Related Rules
 
-* [require-jsdoc](require-jsdoc)
-
-## Version
-
-This rule was introduced in ESLint 0.4.0.
-
-## Resources
-
-* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/valid-jsdoc.js)
-* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/valid-jsdoc.md)
+* [require-jsdoc](require-jsdoc.md)

@@ -1,9 +1,3 @@
----
-title: Rule vars-on-top
-layout: doc
----
-<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
-
 # Require Variable Declarations to be at the top of their scope (vars-on-top)
 
 The `vars-on-top` rule generates warnings when variable declarations are not used serially at the top of a function scope or the top of a program.
@@ -92,12 +86,3 @@ function doSomething() {
 * [var Hoisting](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/var#var_hoisting)
 * [A criticism of the Single Var Pattern in JavaScript, and a simple alternative](http://danielhough.co.uk/blog/single-var-pattern-rant/)
 * [Multiple var statements in JavaScript, not superfluous](http://benalman.com/news/2012/05/multiple-var-statements-javascript/)
-
-## Version
-
-This rule was introduced in ESLint 0.8.0.
-
-## Resources
-
-* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/vars-on-top.js)
-* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/vars-on-top.md)

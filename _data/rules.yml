@@ -624,7 +624,7 @@ categories:
         name: max-statements
         recommended: false
       - description: enforce newlines between operands of ternary expressions
-        fixable: true
+        fixable: false
         name: multiline-ternary
         recommended: false
       - description: require constructor `function` names to begin with a capital letter
@@ -702,6 +702,10 @@ categories:
       - description: disallow spacing between `function` identifiers and their applications
         fixable: true
         name: no-spaced-func
+        recommended: false
+      - description: Disallow tabs in file
+        fixable: false
+        name: no-tabs
         recommended: false
       - description: disallow ternary operators
         fixable: false
@@ -889,7 +893,7 @@ categories:
         name: no-useless-rename
         recommended: false
       - description: require `let` or `const` instead of `var`
-        fixable: false
+        fixable: true
         name: no-var
         recommended: false
       - description: >-
@@ -948,20 +952,6 @@ categories:
         fixable: true
         name: yield-star-spacing
         recommended: false
-intro: >-
-  Rules in ESLint are grouped by category to help you understand their purpose.
-
-
-  No rules are enabled by default. The `"extends": "eslint:recommended"`
-  property in a [configuration
-  file](../user-guide/configuring#extending-configuration-files) enables rules
-  that report common problems, which have a check mark (recommended) below.
-
-
-  The `--fix` option on the [command
-  line](../user-guide/command-line-interface#fix) automatically fixes problems
-  (currently mostly whitespace) reported by rules which have a wrench (fixable)
-  below.
 removed:
   description: 'These rules from older versions of ESLint have been replaced by newer rules:'
   name: Removed

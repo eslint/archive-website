@@ -1,9 +1,3 @@
----
-title: Rule operator-linebreak
-layout: doc
----
-<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
-
 # Operator Linebreak (operator-linebreak)
 
 When a statement is too long to fit on a single line, line breaks are generally inserted next to the operators separating expressions. The first style coming to mind would be to place the operator at the end of the line, following the english punctuation rules.
@@ -217,13 +211,4 @@ If your project will not be using a common operator line break style, turn this 
 
 ## Related Rules
 
-* [comma-style](comma-style)
-
-## Version
-
-This rule was introduced in ESLint 0.19.0.
-
-## Resources
-
-* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/operator-linebreak.js)
-* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/operator-linebreak.md)
+* [comma-style](comma-style.md)

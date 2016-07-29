@@ -1,9 +1,3 @@
----
-title: Rule arrow-parens
-layout: doc
----
-<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
-
 # Require parens in arrow function arguments (arrow-parens)
 
 (fixable) The `--fix` option on the [command line](../user-guide/command-line-interface#fix) automatically fixes problems reported by this rule.
@@ -183,12 +177,3 @@ a.then(foo => { if (true) {}; });
 ([a, b]) => a;
 ({a, b}) => a;
 ```
-
-## Version
-
-This rule was introduced in ESLint 1.0.0-rc-1.
-
-## Resources
-
-* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/arrow-parens.js)
-* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/arrow-parens.md)

@@ -1,9 +1,3 @@
----
-title: Rule one-var-declaration-per-line
-layout: doc
----
-<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
-
 # Require or disallow an newline around variable declarations (one-var-declaration-per-line)
 
 Some developers declare multiple var statements on the same line:
@@ -88,13 +82,4 @@ let a,
 
 ## Related Rules
 
-* [one-var](one-var)
-
-## Version
-
-This rule was introduced in ESLint 2.0.0-beta.3.
-
-## Resources
-
-* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/one-var-declaration-per-line.js)
-* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/one-var-declaration-per-line.md)
+* [one-var](one-var.md)

@@ -1,9 +1,3 @@
----
-title: Rule no-unsafe-finally
-layout: doc
----
-<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
-
 # disallow control flow statements in `finally` blocks (no-unsafe-finally)
 
 JavaScript suspends the control flow statements of `try` and `catch` blocks until the execution of `finally` block finishes. So, when `return`, `throw`, `break`, or `continue` is used in `finally`, control flow statements inside `try` and `catch` are overwritten, which is considered as unexpected behavior. Such as:
@@ -148,12 +142,3 @@ let foo = function(a) {
 ## When Not To Use It
 
 If you want to allow control flow operations in `finally` blocks, you can turn this rule off.
-
-## Version
-
-This rule was introduced in ESLint 2.9.0.
-
-## Resources
-
-* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/no-unsafe-finally.js)
-* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/no-unsafe-finally.md)

@@ -1,9 +1,3 @@
----
-title: Rule no-multiple-empty-lines
-layout: doc
----
-<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
-
 # disallow multiple empty lines (no-multiple-empty-lines)
 
 (fixable) The `--fix` option on the [command line](../user-guide/command-line-interface#fix) automatically fixes problems reported by this rule.
@@ -102,12 +96,3 @@ var bar = 3;
 ## When Not To Use It
 
 If you do not care about extra blank lines, turn this off.
-
-## Version
-
-This rule was introduced in ESLint 0.9.0.
-
-## Resources
-
-* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/no-multiple-empty-lines.js)
-* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/no-multiple-empty-lines.md)

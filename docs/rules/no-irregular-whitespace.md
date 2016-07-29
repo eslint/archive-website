@@ -1,9 +1,3 @@
----
-title: Rule no-irregular-whitespace
-layout: doc
----
-<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
-
 # disallow irregular whitespace (no-irregular-whitespace)
 
 Invalid or irregular whitespace causes issues with ECMAScript 5 parsers and also makes code harder to debug in a similar nature to mixed tabs and spaces.
@@ -174,12 +168,3 @@ If you decide that you wish to use whitespace other than tabs and spaces outside
 
 * [ECMA whitespace](https://es5.github.io/#x7.2 \xA0)
 * [JSON whitespace issues](http://timelessrepo.com/json-isnt-a-javascript-subset)
-
-## Version
-
-This rule was introduced in ESLint 0.9.0.
-
-## Resources
-
-* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/no-irregular-whitespace.js)
-* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/no-irregular-whitespace.md)

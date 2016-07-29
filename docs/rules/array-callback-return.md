@@ -1,9 +1,3 @@
----
-title: Rule array-callback-return
-layout: doc
----
-<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
-
 # Enforces return statements in callbacks of array's methods (array-callback-return)
 
 `Array` has several methods for filtering, mapping, and folding.
@@ -85,12 +79,3 @@ This rule checks callback functions of methods with the given names, *even if* t
 ## When Not To Use It
 
 If you don't want to warn about usage of `return` statement in callbacks of array's methods, then it's safe to disable this rule.
-
-## Version
-
-This rule was introduced in ESLint 2.0.0-alpha-1.
-
-## Resources
-
-* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/array-callback-return.js)
-* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/array-callback-return.md)

@@ -1,9 +1,3 @@
----
-title: Rule no-empty
-layout: doc
----
-<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
-
 # disallow empty block statements (no-empty)
 
 Empty block statements, while not technically errors, usually occur due to refactoring that wasn't completed. They can cause confusion when reading code.
@@ -92,13 +86,4 @@ If you intentionally use empty block statements then you can disable this rule.
 
 ## Related Rules
 
-* [no-empty-function](./no-empty-function)
-
-## Version
-
-This rule was introduced in ESLint 0.0.2.
-
-## Resources
-
-* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/no-empty.js)
-* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/no-empty.md)
+* [no-empty-function](./no-empty-function.md)
