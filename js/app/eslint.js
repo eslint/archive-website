@@ -11268,7 +11268,7 @@ module.exports={
   },
   "homepage": "https://github.com/eslint/espree",
   "main": "espree.js",
-  "version": "3.1.6",
+  "version": "3.1.7",
   "files": [
     "lib",
     "espree.js"
@@ -11285,7 +11285,7 @@ module.exports={
   },
   "license": "BSD-2-Clause",
   "dependencies": {
-    "acorn": "^3.2.0",
+    "acorn": "^3.3.0",
     "acorn-jsx": "^3.0.0"
   },
   "devDependencies": {
@@ -11293,7 +11293,7 @@ module.exports={
     "chai": "^1.10.0",
     "eslint": "^2.0.0-beta.1",
     "eslint-config-eslint": "^3.0.0",
-    "eslint-release": "^0.3.0",
+    "eslint-release": "^0.6.4",
     "esprima": "latest",
     "esprima-fb": "^8001.2001.0-dev-harmony-fb",
     "istanbul": "~0.2.6",
@@ -11318,16 +11318,42 @@ module.exports={
     "test": "npm run-script lint && node Makefile.js test",
     "lint": "node Makefile.js lint",
     "release": "eslint-release",
+    "ci-release": "eslint-ci-release",
     "alpharelease": "eslint-prelease alpha",
     "betarelease": "eslint-prelease beta",
     "browserify": "node Makefile.js browserify"
   },
-  "readme": "# Espree\n\nEspree started out as a fork of [Esprima](http://esprima.org) v1.2.2, the last stable published released of Esprima before work on ECMAScript 6 began. Espree is now built on top of [Acorn](https://github.com/ternjs/acorn), which has a modular architecture that allows extension of core functionality. The goal of Espree is to produce output that is similar to Esprima with a similar API so that it can be used in place of Esprima.\n\n## Usage\n\nInstall:\n\n```\nnpm i espree --save\n```\n\nAnd in your Node.js code:\n\n```javascript\nvar espree = require(\"espree\");\n\nvar ast = espree.parse(code);\n```\n\nThere is a second argument to `parse()` that allows you to specify various options:\n\n```javascript\nvar espree = require(\"espree\");\n\nvar ast = espree.parse(code, {\n\n    // attach range information to each node\n    range: true,\n\n    // attach line/column location information to each node\n    loc: true,\n\n    // create a top-level comments array containing all comments\n    comment: true,\n\n    // attach comments to the closest relevant node as leadingComments and\n    // trailingComments\n    attachComment: true,\n\n    // create a top-level tokens array containing all tokens\n    tokens: true,\n\n    // specify the language version (3, 5, 6, or 7, default is 5)\n    ecmaVersion: 5,\n\n    // specify which type of script you're parsing (script or module, default is script)\n    sourceType: \"script\",\n\n    // specify additional language features\n    ecmaFeatures: {\n\n        // enable JSX parsing\n        jsx: true,\n\n        // enable return in global scope\n        globalReturn: true,\n\n        // enable implied strict mode (if ecmaVersion >= 5)\n        impliedStrict: true,\n\n        // allow experimental object rest/spread\n        experimentalObjectRestSpread: true\n    }\n});\n```\n\n## Esprima Compatibility Going Forward\n\nThe primary goal is to produce the exact same AST structure and tokens as Esprima, and that takes precedence over anything else. (The AST structure being the [ESTree](https://github.com/estree/estree) API with JSX extensions.) Separate from that, Espree may deviate from what Esprima outputs in terms of where and how comments are attached, as well as what additional information is available on AST nodes. That is to say, Espree may add more things to the AST nodes than Esprima does but the overall AST structure produced will be the same.\n\nEspree may also deviate from Esprima in the interface it exposes.\n\n## Contributing\n\nIssues and pull requests will be triaged and responded to as quickly as possible. We operate under the [ESLint Contributor Guidelines](http://eslint.org/docs/developer-guide/contributing), so please be sure to read them before contributing. If you're not sure where to dig in, check out the [issues](https://github.com/eslint/espree/issues).\n\nEspree is licensed under a permissive BSD 2-clause license.\n\n## Build Commands\n\n* `npm test` - run all linting and tests\n* `npm run lint` - run all linting\n* `npm run browserify` - creates a version of Espree that is usable in a browser\n\n## Differences from Espree 2.x\n\n* The `tokenize()` method does not use `ecmaFeatures`. Any string will be tokenized completely based on ECMAScript 6 semantics.\n* Trailing whitespace no longer is counted as part of a node.\n* `let` and `const` declarations are no longer parsed by default. You must opt-in using `ecmaFeatures.blockBindings`.\n* The `esparse` and `esvalidate` binary scripts have been removed.\n* There is no `tolerant` option. We will investigate adding this back in the future.\n\n## Known Incompatibilities\n\nIn an effort to help those wanting to transition from other parsers to Espree, the following is a list of noteworthy incompatibilities with other parsers. These are known differences that we do not intend to change.\n\n### Esprima 1.2.2\n\n* Esprima counts trailing whitespace as part of each AST node while Espree does not. In Espree, the end of a node is where the last token occurs.\n* Espree does not parse `let` and `const` declarations by default.\n* Error messages returned for parsing errors are different.\n* There are two addition properties on every node and token: `start` and `end`. These represent the same data as `range` and are used internally by Acorn.\n\n### Esprima 2.x\n\n* Esprima 2.x uses a different comment attachment algorithm that results in some comments being added in different places than Espree. The algorithm Espree uses is the same one used in Esprima 1.2.2.\n\n## Frequently Asked Questions\n\n### Why another parser\n\n[ESLint](http://eslint.org) had been relying on Esprima as its parser from the beginning. While that was fine when the JavaScript language was evolving slowly, the pace of development increased dramatically and Esprima had fallen behind. ESLint, like many other tools reliant on Esprima, has been stuck in using new JavaScript language features until Esprima updates, and that caused our users frustration.\n\nWe decided the only way for us to move forward was to create our own parser, bringing us inline with JSHint and JSLint, and allowing us to keep implementing new features as we need them. We chose to fork Esprima instead of starting from scratch in order to move as quickly as possible with a compatible API.\n\nWith Espree 2.0.0, we are no longer a fork of Esprima but rather a translation layer between Acorn and Esprima syntax. This allows us to put work back into a community-supported parser (Acorn) that is continuing to grow and evolve while maintaining an Esprima-compatible parser for those utilities still built on Esprima.\n\n### Have you tried working with Esprima?\n\nYes. Since the start of ESLint, we've regularly filed bugs and feature requests with Esprima and will continue to do so. However, there are some different philosophies around how the projects work that need to be worked through. The initial goal was to have Espree track Esprima and eventually merge the two back together, but we ultimately decided that building on top of Acorn was a better choice due to Acorn's plugin support.\n\n### Why don't you just use Acorn?\n\nAcorn is a great JavaScript parser that produces an AST that is compatible with Esprima. Unfortunately, ESLint relies on more than just the AST to do its job. It relies on Esprima's tokens and comment attachment features to get a complete picture of the source code. We investigated switching to Acorn, but the inconsistencies between Esprima and Acorn created too much work for a project like ESLint.\n\nWe are building on top of Acorn, however, so that we can contribute back and help make Acorn even better.\n\n### What ECMAScript 6 features do you support?\n\nAll of them.\n\n### What ECMAScript 7 features do you support?\n\nThere is only one ECMAScript 7 syntax change: the exponentiation operator. Espree supports this.\n\n### How do you determine which experimental features to support?\n\nIn general, we do not support experimental JavaScript features. We may make exceptions from time to time depending on the maturity of the features.\n",
-  "readmeFilename": "README.md",
-  "gitHead": "ea34a7755cc172b94861a1b838e0229f281cde31",
-  "_id": "espree@3.1.6",
-  "_shasum": "b26f0824de1436a0e17146e65cdcb728681e21f4",
-  "_from": "espree@>=3.1.6 <4.0.0"
+  "gitHead": "4ddfacba95c96732541d94521efbcdccce2fad99",
+  "_id": "espree@3.1.7",
+  "_shasum": "fd5deec76a97a5120a9cd3a7cb1177a0923b11d2",
+  "_from": "espree@>=3.1.6 <4.0.0",
+  "_npmVersion": "2.15.8",
+  "_nodeVersion": "4.4.7",
+  "_npmUser": {
+    "name": "eslint",
+    "email": "nicholas+eslint@nczconsulting.com"
+  },
+  "dist": {
+    "shasum": "fd5deec76a97a5120a9cd3a7cb1177a0923b11d2",
+    "tarball": "https://registry.npmjs.org/espree/-/espree-3.1.7.tgz"
+  },
+  "maintainers": [
+    {
+      "name": "eslint",
+      "email": "nicholas+eslint@nczconsulting.com"
+    },
+    {
+      "name": "nzakas",
+      "email": "nicholas@nczconsulting.com"
+    }
+  ],
+  "_npmOperationalInternal": {
+    "host": "packages-16-east.internal.npmjs.com",
+    "tmp": "tmp/espree-3.1.7.tgz_1469818741131_0.25705570145510137"
+  },
+  "directories": {},
+  "_resolved": "https://registry.npmjs.org/espree/-/espree-3.1.7.tgz",
+  "readme": "ERROR: No README data found!"
 }
 
 },{}],"espree":[function(require,module,exports){
@@ -50171,9 +50197,9 @@ module.exports = {
             }
 
             if (checkSetWithoutGet && isSetPresent && !isGetPresent) {
-                context.report(node, "Getter is not present");
+                context.report(node, "Getter is not present.");
             } else if (checkGetWithoutSet && isGetPresent && !isSetPresent) {
-                context.report(node, "Setter is not present");
+                context.report(node, "Setter is not present.");
             }
         }
 
@@ -50262,7 +50288,7 @@ module.exports = {
             context.report({
                 node: node,
                 loc: token.loc.start,
-                message: "There should be no space after '" + token.value + "'",
+                message: "There should be no space after '" + token.value + "'.",
                 fix: function fix(fixer) {
                     var nextToken = sourceCode.getTokenAfter(token);
 
@@ -50281,7 +50307,7 @@ module.exports = {
             context.report({
                 node: node,
                 loc: token.loc.start,
-                message: "There should be no space before '" + token.value + "'",
+                message: "There should be no space before '" + token.value + "'.",
                 fix: function fix(fixer) {
                     var previousToken = sourceCode.getTokenBefore(token);
 
@@ -50300,7 +50326,7 @@ module.exports = {
             context.report({
                 node: node,
                 loc: token.loc.start,
-                message: "A space is required after '" + token.value + "'",
+                message: "A space is required after '" + token.value + "'.",
                 fix: function fix(fixer) {
                     return fixer.insertTextAfter(token, " ");
                 }
@@ -50317,7 +50343,7 @@ module.exports = {
             context.report({
                 node: node,
                 loc: token.loc.start,
-                message: "A space is required before '" + token.value + "'",
+                message: "A space is required before '" + token.value + "'.",
                 fix: function fix(fixer) {
                     return fixer.insertTextBefore(token, " ");
                 }
@@ -50756,7 +50782,7 @@ module.exports = {
 
     create: function create(context) {
         var message = "Expected parentheses around arrow function argument.";
-        var asNeededMessage = "Unexpected parentheses around single function argument";
+        var asNeededMessage = "Unexpected parentheses around single function argument.";
         var asNeeded = context.options[0] === "as-needed";
 
         var sourceCode = context.getSourceCode();
@@ -50901,7 +50927,7 @@ module.exports = {
                 if (countSpace.before === 0) {
                     context.report({
                         node: tokens.before,
-                        message: "Missing space before =>",
+                        message: "Missing space before =>.",
                         fix: function fix(fixer) {
                             return fixer.insertTextBefore(tokens.arrow, " ");
                         }
@@ -50913,7 +50939,7 @@ module.exports = {
                 if (countSpace.before > 0) {
                     context.report({
                         node: tokens.before,
-                        message: "Unexpected space before =>",
+                        message: "Unexpected space before =>.",
                         fix: function fix(fixer) {
                             return fixer.removeRange([tokens.before.range[1], tokens.arrow.range[0]]);
                         }
@@ -50927,7 +50953,7 @@ module.exports = {
                 if (countSpace.after === 0) {
                     context.report({
                         node: tokens.after,
-                        message: "Missing space after =>",
+                        message: "Missing space after =>.",
                         fix: function fix(fixer) {
                             return fixer.insertTextAfter(tokens.arrow, " ");
                         }
@@ -50939,7 +50965,7 @@ module.exports = {
                 if (countSpace.after > 0) {
                     context.report({
                         node: tokens.after,
-                        message: "Unexpected space after =>",
+                        message: "Unexpected space after =>.",
                         fix: function fix(fixer) {
                             return fixer.removeRange([tokens.arrow.range[1], tokens.after.range[0]]);
                         }
@@ -52533,7 +52559,7 @@ module.exports = {
             context.report({
                 node: node,
                 loc: token.loc.start,
-                message: "There should be no space after '" + token.value + "'",
+                message: "There should be no space after '" + token.value + "'.",
                 fix: function fix(fixer) {
                     return fixer.removeRange([token.range[1], tokenAfter.range[0]]);
                 }
@@ -52551,7 +52577,7 @@ module.exports = {
             context.report({
                 node: node,
                 loc: token.loc.start,
-                message: "There should be no space before '" + token.value + "'",
+                message: "There should be no space before '" + token.value + "'.",
                 fix: function fix(fixer) {
                     return fixer.removeRange([tokenBefore.range[1], token.range[0]]);
                 }
@@ -52568,7 +52594,7 @@ module.exports = {
             context.report({
                 node: node,
                 loc: token.loc.start,
-                message: "A space is required after '" + token.value + "'",
+                message: "A space is required after '" + token.value + "'.",
                 fix: function fix(fixer) {
                     return fixer.insertTextAfter(token, " ");
                 }
@@ -52585,7 +52611,7 @@ module.exports = {
             context.report({
                 node: node,
                 loc: token.loc.start,
-                message: "A space is required before '" + token.value + "'",
+                message: "A space is required before '" + token.value + "'.",
                 fix: function fix(fixer) {
                     return fixer.insertTextBefore(token, " ");
                 }
@@ -54591,7 +54617,7 @@ module.exports = {
          * @private
          */
         function report(node) {
-            context.report(node, "Identifier '{{name}}' is blacklisted", {
+            context.report(node, "Identifier '{{name}}' is blacklisted.", {
                 name: node.name
             });
         }
@@ -54733,7 +54759,7 @@ module.exports = {
                 var isValidExpression = SUPPORTED_EXPRESSIONS[parent.type];
 
                 if (isValidExpression && (isValidExpression === true || isValidExpression(parent, node))) {
-                    context.report(node, isShort ? "Identifier name '{{name}}' is too short. (< {{min}})" : "Identifier name '{{name}}' is too long. (> {{max}})", { name: name, min: minLength, max: maxLength });
+                    context.report(node, isShort ? "Identifier name '{{name}}' is too short (< {{min}})." : "Identifier name '{{name}}' is too long (> {{max}}).", { name: name, min: minLength, max: maxLength });
                 }
             }
         };
@@ -54963,8 +54989,7 @@ module.exports = {
                 let: DEFAULT_VARIABLE_INDENT,
                 const: DEFAULT_VARIABLE_INDENT
             },
-            outerIIFEBody: null,
-            MemberExpression: 1
+            outerIIFEBody: null
         };
 
         var sourceCode = context.getSourceCode();
@@ -55620,6 +55645,10 @@ module.exports = {
             },
 
             MemberExpression: function MemberExpression(node) {
+                if (typeof options.MemberExpression === "undefined") {
+                    return;
+                }
+
                 if (isSingleLineNode(node)) {
                     return;
                 }
@@ -58014,7 +58043,7 @@ module.exports = {
                 if (lines.length > max) {
                     context.report({
                         loc: { line: 1, column: 0 },
-                        message: "File must be at most " + max + " lines long"
+                        message: "File must be at most " + max + " lines long."
                     });
                 }
             }
@@ -58888,7 +58917,7 @@ module.exports = {
                 });
 
                 if (prenticesTokens.length < 2) {
-                    context.report(node, "Missing '()' invoking a constructor");
+                    context.report(node, "Missing '()' invoking a constructor.");
                 }
             }
         };
@@ -60286,7 +60315,7 @@ module.exports = {
 
         return {
             ContinueStatement: function ContinueStatement(node) {
-                context.report(node, "Unexpected use of continue statement");
+                context.report(node, "Unexpected use of continue statement.");
             }
         };
     }
@@ -63769,7 +63798,7 @@ module.exports = {
                 try {
                     void new RegExp(node.arguments[0].value);
                 } catch (e) {
-                    context.report(node, e.message);
+                    context.report(node, e.message + ".");
                 }
 
                 if (flags) {
@@ -63777,7 +63806,7 @@ module.exports = {
                     try {
                         espree.parse("/./" + flags, context.parserOptions);
                     } catch (ex) {
-                        context.report(node, "Invalid flags supplied to RegExp constructor '" + flags + "'");
+                        context.report(node, "Invalid flags supplied to RegExp constructor '" + flags + "'.");
                     }
                 }
             }
@@ -64062,7 +64091,7 @@ module.exports = {
                         column: match.index
                     };
 
-                    errors.push([node, location, "Irregular whitespace not allowed"]);
+                    errors.push([node, location, "Irregular whitespace not allowed."]);
                 }
             });
         }
@@ -64090,7 +64119,7 @@ module.exports = {
                     column: sourceLines[lineIndex].length
                 };
 
-                errors.push([node, location, "Irregular whitespace not allowed"]);
+                errors.push([node, location, "Irregular whitespace not allowed."]);
                 lastLineIndex = lineIndex;
             }
         }
@@ -64730,7 +64759,7 @@ module.exports = {
             var references = context.getScope().through;
 
             if (references.length > 0 && !references.every(isSafe.bind(null, node, loopNode))) {
-                context.report(node, "Don't make functions within a loop");
+                context.report(node, "Don't make functions within a loop.");
             }
         }
 
@@ -64866,13 +64895,13 @@ module.exports = {
                     if (enforceConst && parent.parent.kind !== "const") {
                         context.report({
                             node: node,
-                            message: "Number constants declarations must use 'const'"
+                            message: "Number constants declarations must use 'const'."
                         });
                     }
                 } else if (okTypes.indexOf(parent.type) === -1 || parent.type === "AssignmentExpression" && parent.operator !== "=") {
                     context.report({
                         node: node,
-                        message: "No magic number: " + raw
+                        message: "No magic number: " + raw + "."
                     });
                 }
             }
@@ -66001,7 +66030,7 @@ module.exports = {
 
             BinaryExpression: function BinaryExpression(node) {
                 if (node.operator === "in" && node.left.type === "UnaryExpression" && node.left.operator === "!") {
-                    context.report(node, "The 'in' expression's left operand is negated");
+                    context.report(node, "The 'in' expression's left operand is negated.");
                 }
             }
         };
@@ -66036,7 +66065,7 @@ module.exports = {
         return {
             ConditionalExpression: function ConditionalExpression(node) {
                 if (node.alternate.type === "ConditionalExpression" || node.consequent.type === "ConditionalExpression") {
-                    context.report(node, "Do not nest ternary expressions");
+                    context.report(node, "Do not nest ternary expressions.");
                 }
             }
         };
@@ -66870,7 +66899,7 @@ module.exports = {
                     });
 
                     for (var i = hasBuiltin ? 0 : 1, l = variable.identifiers.length; i < l; i++) {
-                        context.report(variable.identifiers[i], "'{{a}}' is already defined", { a: variable.name });
+                        context.report(variable.identifiers[i], "'{{a}}' is already defined.", { a: variable.name });
                     }
                 }
             });
@@ -67052,7 +67081,7 @@ module.exports = {
          * @private
          */
         function reportReference(reference) {
-            context.report(reference.identifier, "Unexpected use of '{{name}}'", {
+            context.report(reference.identifier, "Unexpected use of '{{name}}'.", {
                 name: reference.identifier.name
             });
         }
@@ -69427,9 +69456,9 @@ module.exports = {
 
             ConditionalExpression: function ConditionalExpression(node) {
                 if (isBooleanLiteral(node.alternate) && isBooleanLiteral(node.consequent)) {
-                    context.report(node, node.consequent.loc.start, "Unnecessary use of boolean literals in conditional expression");
+                    context.report(node, node.consequent.loc.start, "Unnecessary use of boolean literals in conditional expression.");
                 } else if (!defaultAssignment && matchesDefaultAssignment(node)) {
-                    context.report(node, node.consequent.loc.start, "Unnecessary use of conditional expression for default assignment");
+                    context.report(node, node.consequent.loc.start, "Unnecessary use of conditional expression for default assignment.");
                 }
             }
         };
@@ -69760,7 +69789,7 @@ module.exports = {
         function check(node) {
             if (isInFinallyBlock(node, node.label)) {
                 context.report({
-                    message: "Unsafe usage of " + node.type,
+                    message: "Unsafe usage of " + node.type + ".",
                     node: node,
                     line: node.loc.line,
                     column: node.loc.column
@@ -70735,7 +70764,7 @@ module.exports = {
                 // Reports.
                 context.report({
                     node: reference.identifier,
-                    message: "'{{name}}' was used before it was defined",
+                    message: "'{{name}}' was used before it was defined.",
                     data: reference.identifier
                 });
             });
@@ -71230,7 +71259,7 @@ module.exports = {
                         line: node.loc.start.line,
                         column: node.loc.start.column + elm.index
                     },
-                    message: "Unnecessary escape character: " + elm[0]
+                    message: "Unnecessary escape character: " + elm[0] + "."
                 });
             }
         }
@@ -72137,7 +72166,7 @@ module.exports = {
             context.report({
                 node: node,
                 loc: token.loc.start,
-                message: "There should be no space after '" + token.value + "'",
+                message: "There should be no space after '" + token.value + "'.",
                 fix: function fix(fixer) {
                     var nextToken = context.getSourceCode().getTokenAfter(token);
 
@@ -72156,7 +72185,7 @@ module.exports = {
             context.report({
                 node: node,
                 loc: token.loc.start,
-                message: "There should be no space before '" + token.value + "'",
+                message: "There should be no space before '" + token.value + "'.",
                 fix: function fix(fixer) {
                     var previousToken = context.getSourceCode().getTokenBefore(token);
 
@@ -72175,7 +72204,7 @@ module.exports = {
             context.report({
                 node: node,
                 loc: token.loc.start,
-                message: "A space is required after '" + token.value + "'",
+                message: "A space is required after '" + token.value + "'.",
                 fix: function fix(fixer) {
                     return fixer.insertTextAfter(token, " ");
                 }
@@ -72192,7 +72221,7 @@ module.exports = {
             context.report({
                 node: node,
                 loc: token.loc.start,
-                message: "A space is required before '" + token.value + "'",
+                message: "A space is required before '" + token.value + "'.",
                 fix: function fix(fixer) {
                     return fixer.insertTextBefore(token, " ");
                 }
@@ -72374,7 +72403,7 @@ module.exports = {
 
     create: function create(context) {
         var allowSameLine = context.options[0] && Boolean(context.options[0].allowMultiplePropertiesPerLine);
-        var errorMessage = allowSameLine ? "Object properties must go on a new line if they aren't all on the same line" : "Object properties must go on a new line";
+        var errorMessage = allowSameLine ? "Object properties must go on a new line if they aren't all on the same line." : "Object properties must go on a new line.";
 
         var sourceCode = context.getSourceCode();
 
@@ -73319,7 +73348,7 @@ module.exports = {
                 context.report(node, {
                     line: operatorToken.loc.end.line,
                     column: operatorToken.loc.end.column
-                }, "There should be no line break before or after '" + operator + "'");
+                }, "There should be no line break before or after '" + operator + "'.");
             }
         }
 
@@ -74257,7 +74286,7 @@ module.exports = {
          * @returns {void}
          */
         function report(node, existing, substitute) {
-            context.report(node, "Avoid using {{existing}}, instead use {{substitute}}", {
+            context.report(node, "Avoid using {{existing}}, instead use {{substitute}}.", {
                 existing: existing,
                 substitute: substitute
             });
@@ -75451,7 +75480,7 @@ module.exports = {
                         line: operator.loc.end.line,
                         column: operator.loc.end.column
                     },
-                    message: "Expected whitespace after {{type}} operator",
+                    message: "Expected whitespace after {{type}} operator.",
                     data: {
                         type: type
                     },
@@ -75466,7 +75495,7 @@ module.exports = {
                         line: operator.loc.end.line,
                         column: operator.loc.end.column
                     },
-                    message: "Unexpected whitespace after {{type}} operator",
+                    message: "Unexpected whitespace after {{type}} operator.",
                     data: {
                         type: type
                     },
@@ -76153,7 +76182,7 @@ module.exports = {
                     }
 
                     if (currenVariableName < lastVariableName) {
-                        context.report(decl, "Variables within the same declaration block should be sorted alphabetically");
+                        context.report(decl, "Variables within the same declaration block should be sorted alphabetically.");
                         return memo;
                     } else {
                         return decl;
@@ -77502,7 +77531,7 @@ module.exports = {
                 }
 
                 if (balanced && type === "block" && !endMatch) {
-                    reportEnd(node, "Expected space or tab before '*/' in comment");
+                    reportEnd(node, "Expected space or tab before '*/' in comment.");
                 }
             } else {
                 if (beginMatch) {
@@ -77514,7 +77543,7 @@ module.exports = {
                 }
 
                 if (balanced && type === "block" && endMatch) {
-                    reportEnd(node, "Unexpected space or tab before '*/' in comment", endMatch);
+                    reportEnd(node, "Unexpected space or tab before '*/' in comment.", endMatch);
                 }
             }
         }
@@ -78425,7 +78454,7 @@ module.exports = {
                         sibling = parent.left === node ? parent.right : parent.left;
 
                         if (sibling.type === "Literal" && VALID_TYPES.indexOf(sibling.value) === -1) {
-                            context.report(sibling, "Invalid typeof comparison value");
+                            context.report(sibling, "Invalid typeof comparison value.");
                         }
                     }
                 }
