@@ -2,7 +2,6 @@
 title: List of available rules
 layout: doc
 ---
-<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
 # Rules
 
@@ -40,6 +39,19 @@ The `--fix` option on the [command line](../user-guide/command-line-interface#fi
 </table>
 
 {% endfor %}
+
+{% if site.data.rules.deprecated %}
+## {{ site.data.rules.deprecated.name }}
+
+{{ site.data.rules.deprecated.description }}
+
+<div class="deprecated-rules" markdown="1">
+|Deprecated rule|Replaced by
+|---|---
+{% for rule in site.data.rules.deprecated.rules %}|[{{rule.name}}]({{rule.name}})| {% for replaced in rule.replacedBy %} [{{replaced}}]({{replaced}}) {% endfor %}
+{% endfor %}
+</div>
+{% endif %}
 
 ## {{ site.data.rules.removed.name }}
 
