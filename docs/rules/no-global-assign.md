@@ -1,12 +1,10 @@
 ---
-title: Rule no-native-reassign
+title: Rule no-global-assign
 layout: doc
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
-# Disallow Reassignment of Native Objects (no-native-reassign)
-
-This rule was **deprecated** in ESLint v3.3.0 and replaced by the [no-global-assign](no-global-assign) rule.
+# Disallow assignment to native objects or read-only global variables (no-global-assign)
 
 JavaScript environments contain a number of built-in global variables, such as `window` in browsers and `process` in Node.js. In almost all cases, you don't want to assign a value to these global variables as doing so could result in losing access to important functionality. For example, you probably don't want to do this in browser code:
 
@@ -28,14 +26,14 @@ ESLint has the capability to configure global variables as read-only.
 Examples of **incorrect** code for this rule:
 
 ```js
-/*eslint no-native-reassign: "error"*/
+/*eslint no-global-assign: "error"*/
 
 Object = null
 undefined = 1
 ```
 
 ```js
-/*eslint no-native-reassign: "error"*/
+/*eslint no-global-assign: "error"*/
 /*eslint-env browser*/
 
 window = {}
@@ -44,7 +42,7 @@ top = 1
 ```
 
 ```js
-/*eslint no-native-reassign: "error"*/
+/*eslint no-global-assign: "error"*/
 /*globals a:false*/
 
 a = 1
@@ -53,7 +51,7 @@ a = 1
 Examples of **correct** code for this rule:
 
 ```js
-/*eslint no-native-reassign: "error"*/
+/*eslint no-global-assign: "error"*/
 
 a = 1
 var b = 1
@@ -61,14 +59,14 @@ b = 2
 ```
 
 ```js
-/*eslint no-native-reassign: "error"*/
+/*eslint no-global-assign: "error"*/
 /*eslint-env browser*/
 
 onload = function() {}
 ```
 
 ```js
-/*eslint no-native-reassign: "error"*/
+/*eslint no-global-assign: "error"*/
 /*globals a:true*/
 
 a = 1
@@ -81,7 +79,7 @@ This rule accepts an `exceptions` option, which can be used to specify a list of
 ```json
 {
     "rules": {
-        "no-native-reassign": ["error", {"exceptions": ["Object"]}]
+        "no-global-assign": ["error", {"exceptions": ["Object"]}]
     }
 }
 ```
@@ -98,9 +96,9 @@ If you are trying to override one of the native objects.
 
 ## Version
 
-This rule was introduced in ESLint 0.0.9.
+This rule was introduced in ESLint 3.3.0.
 
 ## Resources
 
-* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/no-native-reassign.js)
-* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/no-native-reassign.md)
+* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/no-global-assign.js)
+* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/no-global-assign.md)

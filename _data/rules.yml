@@ -74,10 +74,6 @@ categories:
         fixable: false
         name: no-irregular-whitespace
         recommended: true
-      - description: disallow negating the left operand in `in` expressions
-        fixable: false
-        name: no-negated-in-lhs
-        recommended: true
       - description: disallow calling global object properties as functions
         fixable: false
         name: no-obj-calls
@@ -94,6 +90,10 @@ categories:
         fixable: false
         name: no-sparse-arrays
         recommended: true
+      - description: Disallow template literal placeholder syntax in regular strings
+        fixable: false
+        name: no-template-curly-in-string
+        recommended: false
       - description: disallow confusing multiline expressions
         fixable: false
         name: no-unexpected-multiline
@@ -108,6 +108,10 @@ categories:
         fixable: false
         name: no-unsafe-finally
         recommended: true
+      - description: disallow negating the left operand of relational operators
+        fixable: true
+        name: no-unsafe-negation
+        recommended: false
       - description: require calls to `isNaN()` when checking for `NaN`
         fixable: false
         name: use-isnan
@@ -227,6 +231,10 @@ categories:
         fixable: false
         name: no-floating-decimal
         recommended: false
+      - description: disallow assignments to native objects or read-only global variables
+        fixable: false
+        name: no-global-assign
+        recommended: false
       - description: disallow shorthand type conversions
         fixable: false
         name: no-implicit-coercion
@@ -273,10 +281,6 @@ categories:
         fixable: false
         name: no-multi-str
         recommended: false
-      - description: disallow assignments to native objects or read-only global variables
-        fixable: false
-        name: no-native-reassign
-        recommended: true
       - description: disallow `new` operators with the `Function` object
         fixable: false
         name: no-new-func
@@ -545,6 +549,12 @@ categories:
         fixable: true
         name: eol-last
         recommended: false
+      - description: >-
+          require or disallow spacing between `function` identifiers and their
+          invocations
+        fixable: true
+        name: func-call-spacing
+        recommended: false
       - description: require or disallow named `function` expressions
         fixable: false
         name: func-names
@@ -699,10 +709,6 @@ categories:
         fixable: false
         name: no-restricted-syntax
         recommended: false
-      - description: disallow spacing between `function` identifiers and their applications
-        fixable: true
-        name: no-spaced-func
-        recommended: false
       - description: Disallow tabs in file
         fixable: false
         name: no-tabs
@@ -782,6 +788,10 @@ categories:
       - description: require or disallow semicolons instead of ASI
         fixable: true
         name: semi
+        recommended: false
+      - description: requires object keys to be sorted
+        fixable: false
+        name: sort-keys
         recommended: false
       - description: require variables within the same declaration block to be sorted
         fixable: false
@@ -952,6 +962,19 @@ categories:
         fixable: true
         name: yield-star-spacing
         recommended: false
+deprecated:
+  description: 'These rules have been deprecated and replaced by newer rules:'
+  name: Deprecated
+  rules:
+    - name: no-native-reassign
+      replacedBy:
+        - no-global-assign
+    - name: no-negated-in-lhs
+      replacedBy:
+        - no-unsafe-negation
+    - name: no-spaced-func
+      replacedBy:
+        - func-call-spacing
 removed:
   description: 'These rules from older versions of ESLint have been replaced by newer rules:'
   name: Removed

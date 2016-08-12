@@ -205,6 +205,11 @@ Default is `["none", "all", "multiple", "single"]`.
 
 This rule is a formatting preference and not following it won't negatively affect the quality of your code. If alphabetizing imports isn't a part of your coding standards, then you can leave this rule disabled.
 
+## Related Rules
+
+* [sort-keys](http://eslint.org/docs/rules/sort-keys)
+* [sort-vars](http://eslint.org/docs/rules/sort-vars)
+
 ## Version
 
 This rule was introduced in ESLint 2.0.0-beta.1.

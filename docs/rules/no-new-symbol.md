@@ -6,7 +6,7 @@ layout: doc
 
 # Disallow Symbol Constructor (no-new-symbol)
 
-The `Symbol` constructor is not intended to be used with the `new` operator, but to be called as a function.
+`Symbol` is not intended to be used with the `new` operator, but to be called as a function.
 
 ```js
 var foo = new Symbol("foo");

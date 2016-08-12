@@ -185,7 +185,7 @@ let obj = {
     foo:function() {}
 };
 
-// not conflict with `no-spaced-func`
+// not conflict with `func-call-spacing`
 class A {
     constructor() {
         super();

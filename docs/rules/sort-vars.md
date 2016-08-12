@@ -80,6 +80,11 @@ var a, B, c;
 
 This rule is a formatting preference and not following it won't negatively affect the quality of your code. If you alphabetizing variables isn't a part of your coding standards, then you can leave this rule off.
 
+## Related Rules
+
+* [sort-keys](http://eslint.org/docs/rules/sort-keys)
+* [sort-imports](http://eslint.org/docs/rules/sort-imports)
+
 ## Version
 
 This rule was introduced in ESLint 0.2.0.

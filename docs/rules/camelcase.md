@@ -10,7 +10,7 @@ When it comes to naming variables, style guides generally fall into one of two c
 
 ## Rule Details
 
-This rule looks for any underscores (`_`) located within the source code. It ignores leading and trailing underscores and only checks those in the middle of a variable name. If ESLint decides that the variable is a constant (all uppercase), then no warning will be thrown. Otherwise, a warning will be thrown. This rule only flags definitions and assignments but not function calls.
+This rule looks for any underscores (`_`) located within the source code. It ignores leading and trailing underscores and only checks those in the middle of a variable name. If ESLint decides that the variable is a constant (all uppercase), then no warning will be thrown. Otherwise, a warning will be thrown. This rule only flags definitions and assignments but not function calls. In case of ES6 `import` statements, this rule only targets the name of the variable that will be imported into the local module scope.
 
 ## Options
 
@@ -25,6 +25,8 @@ Examples of **incorrect** code for this rule with the default `{ "properties": "
 
 ```js
 /*eslint camelcase: "error"*/
+
+import { no_camelcased } from "external-module"
 
 var my_favorite_color = "#112C85";
 
@@ -45,6 +47,8 @@ Examples of **correct** code for this rule with the default `{ "properties": "al
 
 ```js
 /*eslint camelcase: "error"*/
+
+import { no_camelcased as camelCased } from "external-module";
 
 var myFavoriteColor   = "#112C85";
 var _myFavoriteColor  = "#112C85";

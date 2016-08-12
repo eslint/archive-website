@@ -72,8 +72,8 @@ Note that the patterns considered problems are **not** flagged by the [semi](sem
 
 ## Related Rules
 
+* [func-call-spacing](func-call-spacing)
 * [semi](semi)
-* [no-spaced-func](no-spaced-func)
 * [space-unary-ops](space-unary-ops)
 
 ## Version
