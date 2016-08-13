@@ -17,7 +17,7 @@ The `--fix` option on the [command line](../user-guide/command-line-interface#fi
 
 {{ category.description }}
 
-<table class="rule-list table">
+<table class="rule-list table table-striped">
 <colgroup>
 <col class="recommended" />
 <col class="fixable" />
@@ -45,11 +45,33 @@ The `--fix` option on the [command line](../user-guide/command-line-interface#fi
 
 {{ site.data.rules.deprecated.description }}
 
-<div class="deprecated-rules" markdown="1">
-|Deprecated rule|Replaced by
-|---|---
-{% for rule in site.data.rules.deprecated.rules %}|[{{rule.name}}]({{rule.name}})| {% for replaced in rule.replacedBy %} [{{replaced}}]({{replaced}}) {% endfor %}
+<div class="rule-list deprecated-rules">
+<table class="table table-striped">
+
+<colgroup>
+<col class="name" />
+<col class="replaced-by" />
+</colgroup>
+
+<thead>
+<tr>
+<th>Deprecated rule</th>
+<th>Replaced by</th>
+</tr>
+</thead>
+
+<tbody>
+{% for rule in site.data.rules.deprecated.rules %}
+<tr>
+<td markdown="1">[{{rule.name}}]({{rule.name}})
+</td>
+<td markdown="1">{% for replaced in rule.replacedBy %} [{{replaced}}]({{replaced}}) {% endfor %}
+</td>
+</tr>
 {% endfor %}
+</tbody>
+
+</table>
 </div>
 {% endif %}
 
@@ -57,9 +79,31 @@ The `--fix` option on the [command line](../user-guide/command-line-interface#fi
 
 {{ site.data.rules.removed.description }}
 
-<div class="removed-rules" markdown="1">
-|Removed rule|Replaced by
-|---|---
-{% for rule in site.data.rules.removed.rules %}|[{{rule.removed}}]({{rule.removed}})| {% for replaced in rule.replacedBy %} [{{replaced}}]({{replaced}}) {% endfor %}
+<div class="rule-list removed-rules">
+<table class="table table-striped">
+
+<colgroup>
+<col class="name" />
+<col class="replaced-by" />
+</colgroup>
+
+<thead>
+<tr>
+<th>Removed rule</th>
+<th>Replaced by</th>
+</tr>
+</thead>
+
+<tbody>
+{% for rule in site.data.rules.removed.rules %}
+<tr>
+<td markdown="1">[{{rule.removed}}]({{rule.removed}})
+</td>
+<td markdown="1">{% for replaced in rule.replacedBy %} [{{replaced}}]({{replaced}}) {% endfor %}
+</td>
+</tr>
 {% endfor %}
+</tbody>
+
+</table>
 </div>
