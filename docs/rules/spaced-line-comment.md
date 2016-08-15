@@ -1,5 +1,5 @@
 ---
-title: Rule spaced-line-comment
+title: spaced-line-comment - Rules
 layout: doc
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->

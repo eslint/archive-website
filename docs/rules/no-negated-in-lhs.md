@@ -1,5 +1,5 @@
 ---
-title: Rule no-negated-in-lhs
+title: no-negated-in-lhs - Rules
 layout: doc
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->

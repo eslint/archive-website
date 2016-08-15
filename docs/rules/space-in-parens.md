@@ -1,5 +1,5 @@
 ---
-title: Rule space-in-parens
+title: space-in-parens - Rules
 layout: doc
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->

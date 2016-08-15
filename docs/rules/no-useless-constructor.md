@@ -1,5 +1,5 @@
 ---
-title: Rule no-useless-constructor
+title: no-useless-constructor - Rules
 layout: doc
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->

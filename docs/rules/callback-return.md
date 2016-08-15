@@ -1,5 +1,5 @@
 ---
-title: Rule callback-return
+title: callback-return - Rules
 layout: doc
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->

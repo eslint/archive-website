@@ -1,5 +1,5 @@
 ---
-title: Rule no-catch-shadow
+title: no-catch-shadow - Rules
 layout: doc
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->

@@ -1,5 +1,5 @@
 ---
-title: Rule array-bracket-spacing
+title: array-bracket-spacing - Rules
 layout: doc
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->

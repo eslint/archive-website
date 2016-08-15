@@ -1,5 +1,5 @@
 ---
-title: Rule no-template-curly-in-string
+title: no-template-curly-in-string - Rules
 layout: doc
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
@@ -11,7 +11,7 @@ ECMAScript 6 allows programmers to create strings containing variable or express
 
 ## Rule Details
 
-This rule aims to warn when a regular string contains what looks like a template literal placeholder. It will warn when it finds a string containing the template literal place holder (`${something}`) that uses either `\"` or `\'` for the quotes.
+This rule aims to warn when a regular string contains what looks like a template literal placeholder. It will warn when it finds a string containing the template literal place holder (`${something}`) that uses either `"` or `'` for the quotes.
 
 ## Examples
 

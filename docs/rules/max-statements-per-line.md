@@ -1,5 +1,5 @@
 ---
-title: Rule max-statements-per-line
+title: max-statements-per-line - Rules
 layout: doc
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->

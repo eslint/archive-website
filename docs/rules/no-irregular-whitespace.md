@@ -1,5 +1,5 @@
 ---
-title: Rule no-irregular-whitespace
+title: no-irregular-whitespace - Rules
 layout: doc
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->

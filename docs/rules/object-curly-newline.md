@@ -1,5 +1,5 @@
 ---
-title: Rule object-curly-newline
+title: object-curly-newline - Rules
 layout: doc
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->

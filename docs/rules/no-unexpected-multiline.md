@@ -1,5 +1,5 @@
 ---
-title: Rule no-unexpected-multiline
+title: no-unexpected-multiline - Rules
 layout: doc
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->

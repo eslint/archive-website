@@ -1,5 +1,5 @@
 ---
-title: Rule no-sparse-arrays
+title: no-sparse-arrays - Rules
 layout: doc
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->

@@ -1,5 +1,5 @@
 ---
-title: Rule dot-location
+title: dot-location - Rules
 layout: doc
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->

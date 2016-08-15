@@ -1,5 +1,5 @@
 ---
-title: Rule no-empty-function
+title: no-empty-function - Rules
 layout: doc
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->

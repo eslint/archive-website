@@ -1,5 +1,5 @@
 ---
-title: Rule space-return-throw-case
+title: space-return-throw-case - Rules
 layout: doc
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->

@@ -1,5 +1,5 @@
 ---
-title: Rule template-curly-spacing
+title: template-curly-spacing - Rules
 layout: doc
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->

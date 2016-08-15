@@ -1,5 +1,5 @@
 ---
-title: Rule require-jsdoc
+title: require-jsdoc - Rules
 layout: doc
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->

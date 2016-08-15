@@ -1,5 +1,5 @@
 ---
-title: Rule no-space-before-semi
+title: no-space-before-semi - Rules
 layout: doc
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->

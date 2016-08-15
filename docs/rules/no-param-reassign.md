@@ -1,5 +1,5 @@
 ---
-title: Rule no-param-reassign
+title: no-param-reassign - Rules
 layout: doc
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->

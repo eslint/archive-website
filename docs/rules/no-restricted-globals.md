@@ -1,5 +1,5 @@
 ---
-title: Rule no-restricted-globals
+title: no-restricted-globals - Rules
 layout: doc
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->

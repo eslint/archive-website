@@ -44830,6 +44830,7 @@ module.exports = {
         return left.loc.end.line === right.loc.start.line;
     },
 
+
     isNullOrUndefined: isNullOrUndefined,
     isCallee: isCallee,
     isES5Constructor: isES5Constructor,
@@ -44845,6 +44846,7 @@ module.exports = {
     isStringLiteral: function isStringLiteral(node) {
         return node.type === "Literal" && typeof node.value === "string" || node.type === "TemplateLiteral";
     },
+
 
     /**
      * Checks whether a given node is a breakable statement or not.
@@ -44864,6 +44866,7 @@ module.exports = {
         return breakableTypePattern.test(node.type);
     },
 
+
     /**
      * Gets the label if the parent node of a given node is a LabeledStatement.
      *
@@ -44877,6 +44880,7 @@ module.exports = {
         return null;
     },
 
+
     /**
      * Gets references which are non initializer and writable.
      * @param {Reference[]} references - An array of references.
@@ -44886,6 +44890,7 @@ module.exports = {
     getModifyingReferences: function getModifyingReferences(references) {
         return references.filter(isModifyingReference);
     },
+
 
     /**
      * Validate that a string passed in is surrounded by the specified character
@@ -44898,6 +44903,7 @@ module.exports = {
         return val[0] === character && val[val.length - 1] === character;
     },
 
+
     /**
      * Returns whether the provided node is an ESLint directive comment or not
      * @param {LineComment|BlockComment} node The node to be checked
@@ -44908,6 +44914,7 @@ module.exports = {
 
         return node.type === "Line" && comment.indexOf("eslint-") === 0 || node.type === "Block" && (comment.indexOf("global ") === 0 || comment.indexOf("eslint ") === 0 || comment.indexOf("eslint-") === 0);
     },
+
 
     /**
      * Gets the trailing statement of a given node.
@@ -44944,6 +44951,7 @@ module.exports = {
 
         return null;
     },
+
 
     /**
      * Checks whether or not a given function node is the default `this` binding.
@@ -45070,6 +45078,7 @@ module.exports = {
         return true;
     },
 
+
     /**
      * Get the precedence level based on the node type
      * @param {ASTNode} node node to evaluate
@@ -45161,6 +45170,7 @@ module.exports = {
         return 18;
     },
 
+
     /**
      * Checks whether a given node is a loop node or not.
      * The following types are loop nodes:
@@ -45178,6 +45188,7 @@ module.exports = {
         return Boolean(node && anyLoopPattern.test(node.type));
     },
 
+
     /**
      * Checks whether a given node is a function node or not.
      * The following types are function nodes:
@@ -45192,6 +45203,7 @@ module.exports = {
     isFunction: function isFunction(node) {
         return Boolean(node && anyFunctionPattern.test(node.type));
     },
+
 
     /**
      * Gets the property name of a given node.
@@ -45859,6 +45871,7 @@ CodePathAnalyzer.prototype = {
         this.currentNode = null;
     },
 
+
     /**
      * Does the process to leave a given AST node.
      * This updates state of analysis and calls `leaveNode` of the wrapped.
@@ -45881,6 +45894,7 @@ CodePathAnalyzer.prototype = {
 
         this.currentNode = null;
     },
+
 
     /**
      * This is called on a code path looped.
@@ -46425,6 +46439,7 @@ CodePathState.prototype = {
         return this.forkContext;
     },
 
+
     /**
      * Pops and merges the last forking context.
      * @returns {ForkContext} The last context.
@@ -46438,6 +46453,7 @@ CodePathState.prototype = {
         return lastContext;
     },
 
+
     /**
      * Creates a new path.
      * @returns {void}
@@ -46445,6 +46461,7 @@ CodePathState.prototype = {
     forkPath: function forkPath() {
         this.forkContext.add(this.parentForkContext.makeNext(-1, -1));
     },
+
 
     /**
      * Creates a bypass path.
@@ -46455,6 +46472,7 @@ CodePathState.prototype = {
     forkBypassPath: function forkBypassPath() {
         this.forkContext.add(this.parentForkContext.head);
     },
+
 
     //--------------------------------------------------------------------------
     // ConditionalExpression, LogicalExpression, IfStatement
@@ -46501,6 +46519,7 @@ CodePathState.prototype = {
             processed: false
         };
     },
+
 
     /**
      * Pops the last choice context and finalizes it.
@@ -46589,6 +46608,7 @@ CodePathState.prototype = {
         return context;
     },
 
+
     /**
      * Makes a code path segment of the right-hand operand of a logical
      * expression.
@@ -46633,6 +46653,7 @@ CodePathState.prototype = {
         }
     },
 
+
     /**
      * Makes a code path segment of the `if` block.
      *
@@ -46658,6 +46679,7 @@ CodePathState.prototype = {
         forkContext.replaceHead(context.trueForkContext.makeNext(0, -1));
     },
 
+
     /**
      * Makes a code path segment of the `else` block.
      *
@@ -46678,6 +46700,7 @@ CodePathState.prototype = {
         // Creates new path from the `false` case.
         forkContext.replaceHead(context.falseForkContext.makeNext(0, -1));
     },
+
 
     //--------------------------------------------------------------------------
     // SwitchStatement
@@ -46704,6 +46727,7 @@ CodePathState.prototype = {
 
         this.pushBreakContext(true, label);
     },
+
 
     /**
      * Pops the last context of SwitchStatement and finalizes it.
@@ -46784,6 +46808,7 @@ CodePathState.prototype = {
         this.forkContext.replaceHead(brokenForkContext.makeNext(0, -1));
     },
 
+
     /**
      * Makes a code path segment for a `SwitchCase` node.
      *
@@ -46831,6 +46856,7 @@ CodePathState.prototype = {
         context.countForks += 1;
     },
 
+
     //--------------------------------------------------------------------------
     // TryStatement
     //--------------------------------------------------------------------------
@@ -46855,6 +46881,7 @@ CodePathState.prototype = {
             lastOfCatchIsReachable: false
         };
     },
+
 
     /**
      * Pops the last context of TryStatement and finalizes it.
@@ -46910,6 +46937,7 @@ CodePathState.prototype = {
         }
     },
 
+
     /**
      * Makes a code path segment for a `catch` block.
      *
@@ -46934,6 +46962,7 @@ CodePathState.prototype = {
         this.forkBypassPath();
         this.forkContext.add(thrownSegments);
     },
+
 
     /**
      * Makes a code path segment for a `finally` block.
@@ -46994,6 +47023,7 @@ CodePathState.prototype = {
         this.forkContext.add(segments);
     },
 
+
     /**
      * Makes a code path segment from the first throwable node to the `catch`
      * block or the `finally` block.
@@ -47016,6 +47046,7 @@ CodePathState.prototype = {
         context.thrownForkContext.add(forkContext.head);
         forkContext.replaceHead(forkContext.makeNext(-1, -1));
     },
+
 
     //--------------------------------------------------------------------------
     // Loop Statements
@@ -47097,6 +47128,7 @@ CodePathState.prototype = {
         }
     },
 
+
     /**
      * Pops the last context of a loop statement and finalizes it.
      *
@@ -47159,6 +47191,7 @@ CodePathState.prototype = {
         }
     },
 
+
     /**
      * Makes a code path segment for the test part of a WhileStatement.
      *
@@ -47175,6 +47208,7 @@ CodePathState.prototype = {
         context.continueDestSegments = testSegments;
         forkContext.replaceHead(testSegments);
     },
+
 
     /**
      * Makes a code path segment for the body part of a WhileStatement.
@@ -47198,6 +47232,7 @@ CodePathState.prototype = {
         forkContext.replaceHead(choiceContext.trueForkContext.makeNext(0, -1));
     },
 
+
     /**
      * Makes a code path segment for the body part of a DoWhileStatement.
      *
@@ -47212,6 +47247,7 @@ CodePathState.prototype = {
         context.entrySegments = bodySegments;
         forkContext.replaceHead(bodySegments);
     },
+
 
     /**
      * Makes a code path segment for the test part of a DoWhileStatement.
@@ -47234,6 +47270,7 @@ CodePathState.prototype = {
         }
     },
 
+
     /**
      * Makes a code path segment for the test part of a ForStatement.
      *
@@ -47252,6 +47289,7 @@ CodePathState.prototype = {
         context.continueDestSegments = context.testSegments = testSegments;
         forkContext.replaceHead(testSegments);
     },
+
 
     /**
      * Makes a code path segment for the update part of a ForStatement.
@@ -47276,6 +47314,7 @@ CodePathState.prototype = {
         context.continueDestSegments = context.updateSegments = updateSegments;
         forkContext.replaceHead(updateSegments);
     },
+
 
     /**
      * Makes a code path segment for the body part of a ForStatement.
@@ -47322,6 +47361,7 @@ CodePathState.prototype = {
         forkContext.replaceHead(bodySegments);
     },
 
+
     /**
      * Makes a code path segment for the left part of a ForInStatement and a
      * ForOfStatement.
@@ -47338,6 +47378,7 @@ CodePathState.prototype = {
         context.leftSegments = context.continueDestSegments = leftSegments;
         forkContext.replaceHead(leftSegments);
     },
+
 
     /**
      * Makes a code path segment for the right part of a ForInStatement and a
@@ -47357,6 +47398,7 @@ CodePathState.prototype = {
         context.endOfLeftSegments = forkContext.head;
         forkContext.replaceHead(rightSegments);
     },
+
 
     /**
      * Makes a code path segment for the body part of a ForInStatement and a
@@ -47380,6 +47422,7 @@ CodePathState.prototype = {
         forkContext.replaceHead(bodySegments);
     },
 
+
     //--------------------------------------------------------------------------
     // Control Statements
     //--------------------------------------------------------------------------
@@ -47401,6 +47444,7 @@ CodePathState.prototype = {
         };
         return this.breakContext;
     },
+
 
     /**
      * Removes the top item of the break context stack.
@@ -47425,6 +47469,7 @@ CodePathState.prototype = {
 
         return context;
     },
+
 
     /**
      * Makes a path for a `break` statement.
@@ -47451,6 +47496,7 @@ CodePathState.prototype = {
 
         forkContext.replaceHead(forkContext.makeUnreachable(-1, -1));
     },
+
 
     /**
      * Makes a path for a `continue` statement.
@@ -47486,6 +47532,7 @@ CodePathState.prototype = {
         forkContext.replaceHead(forkContext.makeUnreachable(-1, -1));
     },
 
+
     /**
      * Makes a path for a `return` statement.
      *
@@ -47503,6 +47550,7 @@ CodePathState.prototype = {
         }
     },
 
+
     /**
      * Makes a path for a `throw` statement.
      *
@@ -47519,6 +47567,7 @@ CodePathState.prototype = {
             forkContext.replaceHead(forkContext.makeUnreachable(-1, -1));
         }
     },
+
 
     /**
      * Makes the final path.
@@ -48118,6 +48167,7 @@ ForkContext.prototype = {
         return makeSegments(this, begin, end, CodePathSegment.newNext);
     },
 
+
     /**
      * Creates new segments from this context.
      * The new segments is always unreachable.
@@ -48129,6 +48179,7 @@ ForkContext.prototype = {
     makeUnreachable: function makeUnreachable(begin, end) {
         return makeSegments(this, begin, end, CodePathSegment.newUnreachable);
     },
+
 
     /**
      * Creates new segments from this context.
@@ -48143,6 +48194,7 @@ ForkContext.prototype = {
         return makeSegments(this, begin, end, CodePathSegment.newDisconnected);
     },
 
+
     /**
      * Adds segments into this context.
      * The added segments become the head.
@@ -48156,6 +48208,7 @@ ForkContext.prototype = {
         this.segmentsList.push(mergeExtraSegments(this, segments));
     },
 
+
     /**
      * Replaces the head segments with given segments.
      * The current head segments are removed.
@@ -48168,6 +48221,7 @@ ForkContext.prototype = {
 
         this.segmentsList.splice(-1, 1, mergeExtraSegments(this, segments));
     },
+
 
     /**
      * Adds all segments of a given fork context into this context.
@@ -48184,6 +48238,7 @@ ForkContext.prototype = {
             this.segmentsList.push(source[i]);
         }
     },
+
 
     /**
      * Clears all secments in this context.
@@ -48316,6 +48371,7 @@ module.exports = {
         };
     },
 
+
     /**
      * Creates an environment config based on the specified environments.
      * @param {Object<string,boolean>} env The environment settings.
@@ -48351,6 +48407,7 @@ module.exports = {
         return envConfig;
     },
 
+
     /**
      * Given a config with environment settings, applies the globals and
      * ecmaFeatures to the configuration and returns the result.
@@ -48365,6 +48422,7 @@ module.exports = {
 
         return config;
     },
+
 
     /**
      * Merges two config objects. This will not only add missing keys, but will also modify values to match.
@@ -48480,6 +48538,7 @@ module.exports = {
         }
     },
 
+
     /**
      * Converts old-style severity settings (0, 1, 2) into new-style
      * severity settings (off, warn, error) for all rules. Assumption is that severity
@@ -48502,6 +48561,7 @@ module.exports = {
         }
     },
 
+
     /**
      * Determines if the severity for the given rule configuration represents an error.
      * @param {int|string|Array} ruleConfig The configuration for an individual rule.
@@ -48518,6 +48578,7 @@ module.exports = {
         return typeof severity === "number" && severity === 2;
     },
 
+
     /**
      * Checks whether a given config has valid severity or not.
      * @param {number|string|Array} ruleConfig - The configuration for an individual rule.
@@ -48531,6 +48592,7 @@ module.exports = {
         }
         return VALID_SEVERITIES.indexOf(severity) !== -1;
     },
+
 
     /**
      * Checks whether every rule of a given config has valid severity or not.
@@ -50303,6 +50365,7 @@ RuleContext.prototype = {
         return this.eslint.getSourceCode();
     },
 
+
     /**
      * Passthrough to eslint.report() that automatically assigns the rule ID and severity.
      * @param {ASTNode|MessageDescriptor} nodeOrDescriptor The AST node related to the message or a message
@@ -50412,7 +50475,7 @@ function importPlugin(pluginRules, pluginName) {
  * @param {string} ruleId Rule id (file name).
  * @returns {Function} Rule handler.
  */
-function get(ruleId) {
+function getHandler(ruleId) {
     if (typeof rules[ruleId] === "string") {
         return require(rules[ruleId]);
     } else {
@@ -50433,7 +50496,7 @@ module.exports = {
     define: define,
     load: load,
     import: importPlugin,
-    get: get,
+    get: getHandler,
     testClear: testClear,
 
     /**
@@ -77308,6 +77371,10 @@ module.exports = {
                 stack = stack.upper;
             },
             Property: function Property(node) {
+                if (node.parent.type === "ObjectPattern") {
+                    return;
+                }
+
                 var prevName = stack.prevName;
                 var thisName = getPropertyName(node);
 
@@ -80811,6 +80878,7 @@ RuleFixer.prototype = {
         return this.insertTextAfterRange(nodeOrToken.range, text);
     },
 
+
     /**
      * Creates a fix command that inserts text after the specified range in the source text.
      * The fix is not applied until applyFixes() is called.
@@ -80823,6 +80891,7 @@ RuleFixer.prototype = {
         return insertTextAt(range[1], text);
     },
 
+
     /**
      * Creates a fix command that inserts text before the given node or token.
      * The fix is not applied until applyFixes() is called.
@@ -80833,6 +80902,7 @@ RuleFixer.prototype = {
     insertTextBefore: function insertTextBefore(nodeOrToken, text) {
         return this.insertTextBeforeRange(nodeOrToken.range, text);
     },
+
 
     /**
      * Creates a fix command that inserts text before the specified range in the source text.
@@ -80846,6 +80916,7 @@ RuleFixer.prototype = {
         return insertTextAt(range[0], text);
     },
 
+
     /**
      * Creates a fix command that replaces text at the node or token.
      * The fix is not applied until applyFixes() is called.
@@ -80856,6 +80927,7 @@ RuleFixer.prototype = {
     replaceText: function replaceText(nodeOrToken, text) {
         return this.replaceTextRange(nodeOrToken.range, text);
     },
+
 
     /**
      * Creates a fix command that replaces text at the specified range in the source text.
@@ -80872,6 +80944,7 @@ RuleFixer.prototype = {
         };
     },
 
+
     /**
      * Creates a fix command that removes the node or token from the source.
      * The fix is not applied until applyFixes() is called.
@@ -80881,6 +80954,7 @@ RuleFixer.prototype = {
     remove: function remove(nodeOrToken) {
         return this.removeRange(nodeOrToken.range);
     },
+
 
     /**
      * Creates a fix command that removes the specified range of text from the source.
@@ -80895,7 +80969,6 @@ RuleFixer.prototype = {
             text: ""
         };
     }
-
 };
 
 module.exports = RuleFixer;
@@ -81067,6 +81140,7 @@ SourceCode.prototype = {
         }
     },
 
+
     /**
      * Gets the entire source text split into an array of lines.
      * @returns {Array} The source text as an array of lines.
@@ -81075,6 +81149,7 @@ SourceCode.prototype = {
         return this.lines;
     },
 
+
     /**
      * Retrieves an array containing all comments in the source code.
      * @returns {ASTNode[]} An array of comment nodes.
@@ -81082,6 +81157,7 @@ SourceCode.prototype = {
     getAllComments: function getAllComments() {
         return this.ast.comments;
     },
+
 
     /**
      * Gets all comments for the given node.
@@ -81110,6 +81186,7 @@ SourceCode.prototype = {
             trailing: trailingComments
         };
     },
+
 
     /**
      * Retrieves the JSDoc comment for a given node.
@@ -81153,6 +81230,7 @@ SourceCode.prototype = {
         }
     },
 
+
     /**
      * Gets the deepest node containing a range index.
      * @param {int} index Range index of the desired node.
@@ -81181,6 +81259,7 @@ SourceCode.prototype = {
 
         return result ? Object.assign({ parent: resultParent }, result) : null;
     },
+
 
     /**
      * Determines if two tokens have at least one whitespace character

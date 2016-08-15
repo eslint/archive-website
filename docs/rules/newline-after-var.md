@@ -1,5 +1,5 @@
 ---
-title: Rule newline-after-var
+title: newline-after-var - Rules
 layout: doc
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->

@@ -1,5 +1,5 @@
 ---
-title: Rule newline-per-chained-call
+title: newline-per-chained-call - Rules
 layout: doc
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
