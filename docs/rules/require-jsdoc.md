@@ -4,7 +4,7 @@ layout: doc
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
-# Require JSDoc comment (require-jsdoc)
+# require JSDoc comments (require-jsdoc)
 
 [JSDoc](http://usejsdoc.org) is a JavaScript API documentation generator. It uses specially-formatted comments inside of code to generate API documentation automatically. For example, this is what a JSDoc comment looks like for a function:
 
@@ -24,21 +24,19 @@ Some style guides require JSDoc comments for all functions as a way of explainin
 
 ## Rule Details
 
-This rule generates warnings for nodes that do not have JSDoc comments when they should. Supported nodes:
+This rule requires JSDoc comments for specified nodes. Supported nodes:
 
-* `FunctionDeclaration`
-* `ClassDeclaration`
-* `MethodDefinition`
+* `"FunctionDeclaration"`
+* `"ClassDeclaration"`
+* `"MethodDefinition"`
 
 ## Options
 
-This rule accepts a `require` object with its properties as
+This rule has a single object option:
 
-* `FunctionDeclaration` (default: `true`)
-* `ClassDeclaration` (default: `false`)
-* `MethodDefinition` (default: `false`)
+* `"require"` requires JSDoc comments for the specified nodes
 
-Default option settings are
+Default option settings are:
 
 ```json
 {
@@ -52,7 +50,9 @@ Default option settings are
 }
 ```
 
-The following patterns are considered problems:
+### require
+
+Examples of **incorrect** code for this rule with the `{ "require": { "FunctionDeclaration": true, "MethodDefinition": true, "ClassDeclaration": true } }` option:
 
 ```js
 /*eslint "require-jsdoc": ["error", {
@@ -72,7 +72,7 @@ class Test{
 }
 ```
 
-The following patterns are not considered problems:
+Examples of **correct** code for this rule with the `{ "require": { "FunctionDeclaration": true, "MethodDefinition": true, "ClassDeclaration": true } }` option:
 
 ```js
 /*eslint "require-jsdoc": ["error", {
@@ -84,15 +84,15 @@ The following patterns are not considered problems:
 }]*/
 
 /**
-* It returns 10
-*/
+ * It returns 10
+ */
 function foo() {
     return 10;
 }
 
 /**
-* It returns 10
-*/
+ * It returns 10
+ */
 var foo = function() {
     return 10;
 }
@@ -103,8 +103,8 @@ array.filter(function(item) {
 });
 
 /**
-* It returns 10
-*/
+ * It returns 10
+ */
 class Test{
     /**
     * returns the date

@@ -51,7 +51,7 @@ categories:
         name: no-extra-boolean-cast
         recommended: true
       - description: disallow unnecessary parentheses
-        fixable: false
+        fixable: true
         name: no-extra-parens
         recommended: false
       - description: disallow unnecessary semicolons
@@ -90,7 +90,7 @@ categories:
         fixable: false
         name: no-sparse-arrays
         recommended: true
-      - description: Disallow template literal placeholder syntax in regular strings
+      - description: disallow template literal placeholder syntax in regular strings
         fixable: false
         name: no-template-curly-in-string
         recommended: false
@@ -140,6 +140,10 @@ categories:
       - description: enforce the use of variables within the scope they are defined
         fixable: false
         name: block-scoped-var
+        recommended: false
+      - description: enforce that class methods utilize `this`
+        fixable: false
+        name: class-methods-use-this
         recommended: false
       - description: enforce a maximum cyclomatic complexity allowed in a program
         fixable: false
@@ -709,7 +713,7 @@ categories:
         fixable: false
         name: no-restricted-syntax
         recommended: false
-      - description: Disallow tabs in file
+      - description: disallow tabs in file
         fixable: false
         name: no-tabs
         recommended: false
@@ -951,6 +955,10 @@ categories:
       - description: enforce sorted import declarations within modules
         fixable: false
         name: sort-imports
+        recommended: false
+      - description: require symbol descriptions
+        fixable: false
+        name: symbol-description
         recommended: false
       - description: >-
           require or disallow spacing around embedded expressions of template

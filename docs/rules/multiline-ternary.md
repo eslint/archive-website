@@ -4,7 +4,7 @@ layout: doc
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
-# Enforce newlines between operands of ternary expressions (multiline-ternary)
+# Enforce or disallow newlines between operands of ternary expressions (multiline-ternary)
 
 JavaScript allows operands of ternary expressions to be separated by newlines, which can improve the readability of your program.
 
@@ -24,13 +24,24 @@ var foo = bar > baz ?
 
 ## Rule Details
 
-This rule enforces newlines between operands of a ternary expression.
+This rule enforces or disallows newlines between operands of a ternary expression.
 Note: The location of the operators is not enforced by this rule. Please see the [operator-linebreak](operator-linebreak) rule if you are interested in enforcing the location of the operators themselves.
 
-Examples of **incorrect** code for this rule:
+## Options
+
+This rule has a string option:
+
+* `"always"` (default) enforces newlines between the operands of a ternary expression.
+* `"never"` disallows newlines between the operands of a ternary expression (enforcing that the entire ternary expression is on one line).
+
+### always
+
+This is the default option.
+
+Examples of **incorrect** code for this rule with the `"always"` option:
 
 ```js
-/*eslint multiline-ternary: "error"*/
+/*eslint multiline-ternary: ["error", "always"]*/
 
 foo > bar ? value1 : value2;
 
@@ -41,10 +52,10 @@ foo > bar ?
     value : value2;
 ```
 
-Examples of **correct** code for this rule:
+Examples of **correct** code for this rule with the `"always"` option:
 
 ```js
-/*eslint multiline-ternary: "error"*/
+/*eslint multiline-ternary: ["error", "always"]*/
 
 foo > bar ?
     value1 :
@@ -55,6 +66,35 @@ foo > bar ?
         value1 :
         value2) :
     value3;
+```
+
+### never
+
+Examples of **incorrect** code for this rule with the `"never"` option:
+
+```js
+/*eslint multiline-ternary: ["error", "never"]*/
+
+foo > bar ? value :
+    value2;
+
+foo > bar ?
+    value : value2;
+
+foo >
+    bar ?
+    value1 :
+    value2;
+```
+
+Examples of **correct** code for this rule with the `"never"` option:
+
+```js
+/*eslint multiline-ternary: ["error", "never"]*/
+
+foo > bar ? value1 : value2;
+
+foo > bar ? (baz > qux ? value1 : value2) : value3;
 ```
 
 ## When Not To Use It
