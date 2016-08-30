@@ -137,3 +137,7 @@
 - url: http://www.jeuxvideo.com/
   src: /img/logos/jeuxvideo.com.svg
   name: JeuxVideo.com
+
+- url: https://www.airhelp.com/
+  src: /img/logos/airhelp.png
+  name: AirHelp
