@@ -166,7 +166,7 @@ categories:
         name: dot-location
         recommended: false
       - description: enforce dot notation whenever possible
-        fixable: false
+        fixable: true
         name: dot-notation
         recommended: false
       - description: require the use of `===` and `!==`
@@ -232,7 +232,7 @@ categories:
         name: no-fallthrough
         recommended: true
       - description: disallow leading or trailing decimal points in numeric literals
-        fixable: false
+        fixable: true
         name: no-floating-decimal
         recommended: false
       - description: disallow assignments to native objects or read-only global variables
@@ -240,7 +240,7 @@ categories:
         name: no-global-assign
         recommended: false
       - description: disallow shorthand type conversions
-        fixable: false
+        fixable: true
         name: no-implicit-coercion
         recommended: false
       - description: disallow `var` and named `function` declarations in the global scope
@@ -504,6 +504,10 @@ categories:
         fixable: false
         name: no-restricted-modules
         recommended: false
+      - description: disallow certain properties on certain objects
+        fixable: false
+        name: no-restricted-properties
+        recommended: false
       - description: disallow synchronous methods
         fixable: false
         name: no-sync
@@ -538,7 +542,7 @@ categories:
         name: comma-spacing
         recommended: false
       - description: enforce consistent comma style
-        fixable: false
+        fixable: true
         name: comma-style
         recommended: false
       - description: enforce consistent spacing inside computed property brackets
@@ -601,6 +605,10 @@ categories:
         fixable: true
         name: keyword-spacing
         recommended: false
+      - description: enforce position of line comments
+        fixable: false
+        name: line-comment-position
+        recommended: false
       - description: enforce consistent linebreak style
         fixable: true
         name: linebreak-style
@@ -608,6 +616,10 @@ categories:
       - description: require empty lines around comments
         fixable: true
         name: lines-around-comment
+        recommended: false
+      - description: require or disallow newlines around directives
+        fixable: false
+        name: lines-around-directive
         recommended: false
       - description: enforce a maximum depth that blocks can be nested
         fixable: false
@@ -646,7 +658,7 @@ categories:
         name: new-cap
         recommended: false
       - description: require parentheses when invoking a constructor with no arguments
-        fixable: false
+        fixable: true
         name: new-parens
         recommended: false
       - description: require or disallow an empty line after `var` declarations
@@ -654,7 +666,7 @@ categories:
         name: newline-after-var
         recommended: false
       - description: require an empty line before `return` statements
-        fixable: false
+        fixable: true
         name: newline-before-return
         recommended: false
       - description: require a newline after each call in a method chain
@@ -832,7 +844,7 @@ categories:
         name: unicode-bom
         recommended: false
       - description: require parenthesis around regex literals
-        fixable: false
+        fixable: true
         name: wrap-regex
         recommended: false
   - description: 'These rules relate to ES6, also known as ES2015:'
@@ -917,7 +929,7 @@ categories:
         name: object-shorthand
         recommended: false
       - description: require arrow functions as callbacks
-        fixable: false
+        fixable: true
         name: prefer-arrow-callback
         recommended: false
       - description: >-
@@ -925,6 +937,12 @@ categories:
           after declared
         fixable: true
         name: prefer-const
+        recommended: false
+      - description: >-
+          disallow `parseInt()` in favor of binary, octal, and hexadecimal
+          literals
+        fixable: false
+        name: prefer-numeric-literals
         recommended: false
       - description: require `Reflect` methods where applicable
         fixable: false

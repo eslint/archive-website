@@ -12352,6 +12352,7 @@ module.exports={
         "no-restricted-globals": "off",
         "no-restricted-imports": "off",
         "no-restricted-modules": "off",
+        "no-restricted-properties": "off",
         "no-restricted-syntax": "off",
         "no-return-assign": "off",
         "no-script-url": "off",
@@ -12435,7 +12436,9 @@ module.exports={
         "key-spacing": "off",
         "keyword-spacing": "off",
         "linebreak-style": "off",
+        "line-comment-position": "off",
         "lines-around-comment": "off",
+        "lines-around-directive": "off",
         "max-depth": "off",
         "max-len": "off",
         "max-lines": "off",
@@ -12460,6 +12463,7 @@ module.exports={
         "padded-blocks": "off",
         "prefer-arrow-callback": "off",
         "prefer-const": "off",
+        "prefer-numeric-literals": "off",
         "prefer-reflect": "off",
         "prefer-rest-params": "off",
         "prefer-spread": "off",
@@ -13187,31 +13191,6 @@ function isUndefined(arg) {
 }
 
 },{}],7:[function(require,module,exports){
-if (typeof Object.create === 'function') {
-  // implementation from standard node.js 'util' module
-  module.exports = function inherits(ctor, superCtor) {
-    ctor.super_ = superCtor
-    ctor.prototype = Object.create(superCtor.prototype, {
-      constructor: {
-        value: ctor,
-        enumerable: false,
-        writable: true,
-        configurable: true
-      }
-    });
-  };
-} else {
-  // old school shim for old browsers
-  module.exports = function inherits(ctor, superCtor) {
-    ctor.super_ = superCtor
-    var TempCtor = function () {}
-    TempCtor.prototype = superCtor.prototype
-    ctor.prototype = new TempCtor()
-    ctor.prototype.constructor = ctor
-  }
-}
-
-},{}],8:[function(require,module,exports){
 // shim for using process in browser
 var process = module.exports = {};
 
@@ -13223,25 +13202,40 @@ var process = module.exports = {};
 var cachedSetTimeout;
 var cachedClearTimeout;
 
+function defaultSetTimout() {
+    throw new Error('setTimeout has not been defined');
+}
+function defaultClearTimeout () {
+    throw new Error('clearTimeout has not been defined');
+}
 (function () {
     try {
-        cachedSetTimeout = setTimeout;
-    } catch (e) {
-        cachedSetTimeout = function () {
-            throw new Error('setTimeout is not defined');
+        if (typeof setTimeout === 'function') {
+            cachedSetTimeout = setTimeout;
+        } else {
+            cachedSetTimeout = defaultSetTimout;
         }
+    } catch (e) {
+        cachedSetTimeout = defaultSetTimout;
     }
     try {
-        cachedClearTimeout = clearTimeout;
-    } catch (e) {
-        cachedClearTimeout = function () {
-            throw new Error('clearTimeout is not defined');
+        if (typeof clearTimeout === 'function') {
+            cachedClearTimeout = clearTimeout;
+        } else {
+            cachedClearTimeout = defaultClearTimeout;
         }
+    } catch (e) {
+        cachedClearTimeout = defaultClearTimeout;
     }
 } ())
 function runTimeout(fun) {
     if (cachedSetTimeout === setTimeout) {
         //normal enviroments in sane situations
+        return setTimeout(fun, 0);
+    }
+    // if setTimeout wasn't available but was latter defined
+    if ((cachedSetTimeout === defaultSetTimout || !cachedSetTimeout) && setTimeout) {
+        cachedSetTimeout = setTimeout;
         return setTimeout(fun, 0);
     }
     try {
@@ -13262,6 +13256,11 @@ function runTimeout(fun) {
 function runClearTimeout(marker) {
     if (cachedClearTimeout === clearTimeout) {
         //normal enviroments in sane situations
+        return clearTimeout(marker);
+    }
+    // if clearTimeout wasn't available but was latter defined
+    if ((cachedClearTimeout === defaultClearTimeout || !cachedClearTimeout) && clearTimeout) {
+        cachedClearTimeout = clearTimeout;
         return clearTimeout(marker);
     }
     try {
@@ -13372,6 +13371,31 @@ process.chdir = function (dir) {
     throw new Error('process.chdir is not supported');
 };
 process.umask = function() { return 0; };
+
+},{}],8:[function(require,module,exports){
+if (typeof Object.create === 'function') {
+  // implementation from standard node.js 'util' module
+  module.exports = function inherits(ctor, superCtor) {
+    ctor.super_ = superCtor
+    ctor.prototype = Object.create(superCtor.prototype, {
+      constructor: {
+        value: ctor,
+        enumerable: false,
+        writable: true,
+        configurable: true
+      }
+    });
+  };
+} else {
+  // old school shim for old browsers
+  module.exports = function inherits(ctor, superCtor) {
+    ctor.super_ = superCtor
+    var TempCtor = function () {}
+    TempCtor.prototype = superCtor.prototype
+    ctor.prototype = new TempCtor()
+    ctor.prototype.constructor = ctor
+  }
+}
 
 },{}],9:[function(require,module,exports){
 module.exports = function isBuffer(arg) {
@@ -13970,7 +13994,7 @@ function hasOwnProperty(obj, prop) {
 }
 
 }).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"./support/isBuffer":9,"_process":8,"inherits":7}],11:[function(require,module,exports){
+},{"./support/isBuffer":9,"_process":7,"inherits":8}],11:[function(require,module,exports){
 
 /**
  * This is the web browser implementation of `debug()`.
@@ -45045,6 +45069,56 @@ module.exports = {
         }
 
         return null;
+    },
+
+
+    /**
+     * Get directives from directive prologue of a Program or Function node.
+     * @param {ASTNode} node - The node to check.
+     * @returns {ASTNode[]} The directives found in the directive prologue.
+     */
+    getDirectivePrologue: function getDirectivePrologue(node) {
+        var directives = [];
+
+        // Directive prologues only occur at the top of files or functions.
+        if (node.type === "Program" || node.type === "FunctionDeclaration" || node.type === "FunctionExpression" ||
+
+        // Do not check arrow functions with implicit return.
+        // `() => "use strict";` returns the string `"use strict"`.
+        node.type === "ArrowFunctionExpression" && node.body.type === "BlockStatement") {
+            var statements = node.type === "Program" ? node.body : node.body.body;
+
+            var _iteratorNormalCompletion = true;
+            var _didIteratorError = false;
+            var _iteratorError = undefined;
+
+            try {
+                for (var _iterator = statements[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+                    var statement = _step.value;
+
+                    if (statement.type === "ExpressionStatement" && statement.expression.type === "Literal") {
+                        directives.push(statement);
+                    } else {
+                        break;
+                    }
+                }
+            } catch (err) {
+                _didIteratorError = true;
+                _iteratorError = err;
+            } finally {
+                try {
+                    if (!_iteratorNormalCompletion && _iterator.return) {
+                        _iterator.return();
+                    }
+                } finally {
+                    if (_didIteratorError) {
+                        throw _iteratorError;
+                    }
+                }
+            }
+        }
+
+        return directives;
     }
 };
 
@@ -49240,10 +49314,11 @@ module.exports = function () {
      * as possible
      * @param {string} text The text to parse.
      * @param {Object} config The ESLint configuration object.
+     * @param {string} filePath The path to the file being parsed.
      * @returns {ASTNode} The AST if successful or null if not.
      * @private
      */
-    function parse(text, config) {
+    function parse(text, config, filePath) {
 
         var parser = void 0,
             parserOptions = {
@@ -49252,7 +49327,8 @@ module.exports = function () {
             raw: true,
             tokens: true,
             comment: true,
-            attachComment: true
+            attachComment: true,
+            filePath: filePath
         };
 
         try {
@@ -49423,7 +49499,7 @@ module.exports = function () {
             ast = parse(stripUnicodeBOM(text).replace(/^#!([^\r\n]+)/, function (match, captured) {
                 shebang = captured;
                 return "//" + captured;
-            }), config);
+            }), config, currentFilename);
 
             if (ast) {
                 sourceCode = new SourceCode(text, ast);
@@ -49610,7 +49686,7 @@ module.exports = function () {
         }
 
         if (opts) {
-            message = message.replace(/\{\{\s*(.+?)\s*\}\}/g, function (fullMatch, term) {
+            message = message.replace(/\{\{\s*([^{}]+?)\s*\}\}/g, function (fullMatch, term) {
                 if (term in opts) {
                     return opts[term];
                 }
@@ -49842,7 +49918,7 @@ module.exports = function () {
     return api;
 }();
 
-},{"../conf/blank-script.json":1,"../conf/eslint.json":3,"../conf/replacements.json":4,"./code-path-analysis/code-path-analyzer":161,"./config/config-ops":168,"./config/config-validator":169,"./config/environments":170,"./rule-context":173,"./rules":174,"./timing":403,"./util/comment-event-generator":405,"./util/node-event-generator":407,"./util/source-code":409,"./util/traverser":410,"assert":5,"escope":20,"events":6,"levn":147}],172:[function(require,module,exports){
+},{"../conf/blank-script.json":1,"../conf/eslint.json":3,"../conf/replacements.json":4,"./code-path-analysis/code-path-analyzer":161,"./config/config-ops":168,"./config/config-validator":169,"./config/environments":170,"./rule-context":173,"./rules":174,"./timing":407,"./util/comment-event-generator":409,"./util/node-event-generator":411,"./util/source-code":413,"./util/traverser":414,"assert":5,"escope":20,"events":6,"levn":147}],172:[function(require,module,exports){
 "use strict";
 
 module.exports = function () {
@@ -49888,8 +49964,10 @@ module.exports = function () {
     rules["jsx-quotes"] = require("./rules/jsx-quotes");
     rules["key-spacing"] = require("./rules/key-spacing");
     rules["keyword-spacing"] = require("./rules/keyword-spacing");
+    rules["line-comment-position"] = require("./rules/line-comment-position");
     rules["linebreak-style"] = require("./rules/linebreak-style");
     rules["lines-around-comment"] = require("./rules/lines-around-comment");
+    rules["lines-around-directive"] = require("./rules/lines-around-directive");
     rules["max-depth"] = require("./rules/max-depth");
     rules["max-len"] = require("./rules/max-len");
     rules["max-lines"] = require("./rules/max-lines");
@@ -49989,6 +50067,7 @@ module.exports = function () {
     rules["no-restricted-globals"] = require("./rules/no-restricted-globals");
     rules["no-restricted-imports"] = require("./rules/no-restricted-imports");
     rules["no-restricted-modules"] = require("./rules/no-restricted-modules");
+    rules["no-restricted-properties"] = require("./rules/no-restricted-properties");
     rules["no-restricted-syntax"] = require("./rules/no-restricted-syntax");
     rules["no-return-assign"] = require("./rules/no-return-assign");
     rules["no-script-url"] = require("./rules/no-script-url");
@@ -50042,6 +50121,7 @@ module.exports = function () {
     rules["padded-blocks"] = require("./rules/padded-blocks");
     rules["prefer-arrow-callback"] = require("./rules/prefer-arrow-callback");
     rules["prefer-const"] = require("./rules/prefer-const");
+    rules["prefer-numeric-literals"] = require("./rules/prefer-numeric-literals");
     rules["prefer-reflect"] = require("./rules/prefer-reflect");
     rules["prefer-rest-params"] = require("./rules/prefer-rest-params");
     rules["prefer-spread"] = require("./rules/prefer-spread");
@@ -50079,7 +50159,7 @@ module.exports = function () {
     return rules;
 };
 
-},{"./rules/accessor-pairs":175,"./rules/array-bracket-spacing":176,"./rules/array-callback-return":177,"./rules/arrow-body-style":178,"./rules/arrow-parens":179,"./rules/arrow-spacing":180,"./rules/block-scoped-var":181,"./rules/block-spacing":182,"./rules/brace-style":183,"./rules/callback-return":184,"./rules/camelcase":185,"./rules/class-methods-use-this":186,"./rules/comma-dangle":187,"./rules/comma-spacing":188,"./rules/comma-style":189,"./rules/complexity":190,"./rules/computed-property-spacing":191,"./rules/consistent-return":192,"./rules/consistent-this":193,"./rules/constructor-super":194,"./rules/curly":195,"./rules/default-case":196,"./rules/dot-location":197,"./rules/dot-notation":198,"./rules/eol-last":199,"./rules/eqeqeq":200,"./rules/func-call-spacing":201,"./rules/func-names":202,"./rules/func-style":203,"./rules/generator-star-spacing":204,"./rules/global-require":205,"./rules/guard-for-in":206,"./rules/handle-callback-err":207,"./rules/id-blacklist":208,"./rules/id-length":209,"./rules/id-match":210,"./rules/indent":211,"./rules/init-declarations":212,"./rules/jsx-quotes":213,"./rules/key-spacing":214,"./rules/keyword-spacing":215,"./rules/linebreak-style":216,"./rules/lines-around-comment":217,"./rules/max-depth":218,"./rules/max-len":219,"./rules/max-lines":220,"./rules/max-nested-callbacks":221,"./rules/max-params":222,"./rules/max-statements":224,"./rules/max-statements-per-line":223,"./rules/multiline-ternary":225,"./rules/new-cap":226,"./rules/new-parens":227,"./rules/newline-after-var":228,"./rules/newline-before-return":229,"./rules/newline-per-chained-call":230,"./rules/no-alert":231,"./rules/no-array-constructor":232,"./rules/no-bitwise":233,"./rules/no-caller":234,"./rules/no-case-declarations":235,"./rules/no-catch-shadow":236,"./rules/no-class-assign":237,"./rules/no-cond-assign":238,"./rules/no-confusing-arrow":239,"./rules/no-console":240,"./rules/no-const-assign":241,"./rules/no-constant-condition":242,"./rules/no-continue":243,"./rules/no-control-regex":244,"./rules/no-debugger":245,"./rules/no-delete-var":246,"./rules/no-div-regex":247,"./rules/no-dupe-args":248,"./rules/no-dupe-class-members":249,"./rules/no-dupe-keys":250,"./rules/no-duplicate-case":251,"./rules/no-duplicate-imports":252,"./rules/no-else-return":253,"./rules/no-empty":257,"./rules/no-empty-character-class":254,"./rules/no-empty-function":255,"./rules/no-empty-pattern":256,"./rules/no-eq-null":258,"./rules/no-eval":259,"./rules/no-ex-assign":260,"./rules/no-extend-native":261,"./rules/no-extra-bind":262,"./rules/no-extra-boolean-cast":263,"./rules/no-extra-label":264,"./rules/no-extra-parens":265,"./rules/no-extra-semi":266,"./rules/no-fallthrough":267,"./rules/no-floating-decimal":268,"./rules/no-func-assign":269,"./rules/no-global-assign":270,"./rules/no-implicit-coercion":271,"./rules/no-implicit-globals":272,"./rules/no-implied-eval":273,"./rules/no-inline-comments":274,"./rules/no-inner-declarations":275,"./rules/no-invalid-regexp":276,"./rules/no-invalid-this":277,"./rules/no-irregular-whitespace":278,"./rules/no-iterator":279,"./rules/no-label-var":280,"./rules/no-labels":281,"./rules/no-lone-blocks":282,"./rules/no-lonely-if":283,"./rules/no-loop-func":284,"./rules/no-magic-numbers":285,"./rules/no-mixed-operators":286,"./rules/no-mixed-requires":287,"./rules/no-mixed-spaces-and-tabs":288,"./rules/no-multi-spaces":289,"./rules/no-multi-str":290,"./rules/no-multiple-empty-lines":291,"./rules/no-native-reassign":292,"./rules/no-negated-condition":293,"./rules/no-negated-in-lhs":294,"./rules/no-nested-ternary":295,"./rules/no-new":301,"./rules/no-new-func":296,"./rules/no-new-object":297,"./rules/no-new-require":298,"./rules/no-new-symbol":299,"./rules/no-new-wrappers":300,"./rules/no-obj-calls":302,"./rules/no-octal":304,"./rules/no-octal-escape":303,"./rules/no-param-reassign":305,"./rules/no-path-concat":306,"./rules/no-plusplus":307,"./rules/no-process-env":308,"./rules/no-process-exit":309,"./rules/no-proto":310,"./rules/no-prototype-builtins":311,"./rules/no-redeclare":312,"./rules/no-regex-spaces":313,"./rules/no-restricted-globals":314,"./rules/no-restricted-imports":315,"./rules/no-restricted-modules":316,"./rules/no-restricted-syntax":317,"./rules/no-return-assign":318,"./rules/no-script-url":319,"./rules/no-self-assign":320,"./rules/no-self-compare":321,"./rules/no-sequences":322,"./rules/no-shadow":324,"./rules/no-shadow-restricted-names":323,"./rules/no-spaced-func":325,"./rules/no-sparse-arrays":326,"./rules/no-sync":327,"./rules/no-tabs":328,"./rules/no-template-curly-in-string":329,"./rules/no-ternary":330,"./rules/no-this-before-super":331,"./rules/no-throw-literal":332,"./rules/no-trailing-spaces":333,"./rules/no-undef":335,"./rules/no-undef-init":334,"./rules/no-undefined":336,"./rules/no-underscore-dangle":337,"./rules/no-unexpected-multiline":338,"./rules/no-unmodified-loop-condition":339,"./rules/no-unneeded-ternary":340,"./rules/no-unreachable":341,"./rules/no-unsafe-finally":342,"./rules/no-unsafe-negation":343,"./rules/no-unused-expressions":344,"./rules/no-unused-labels":345,"./rules/no-unused-vars":346,"./rules/no-use-before-define":347,"./rules/no-useless-call":348,"./rules/no-useless-computed-key":349,"./rules/no-useless-concat":350,"./rules/no-useless-constructor":351,"./rules/no-useless-escape":352,"./rules/no-useless-rename":353,"./rules/no-var":354,"./rules/no-void":355,"./rules/no-warning-comments":356,"./rules/no-whitespace-before-property":357,"./rules/no-with":358,"./rules/object-curly-newline":359,"./rules/object-curly-spacing":360,"./rules/object-property-newline":361,"./rules/object-shorthand":362,"./rules/one-var":364,"./rules/one-var-declaration-per-line":363,"./rules/operator-assignment":365,"./rules/operator-linebreak":366,"./rules/padded-blocks":367,"./rules/prefer-arrow-callback":368,"./rules/prefer-const":369,"./rules/prefer-reflect":370,"./rules/prefer-rest-params":371,"./rules/prefer-spread":372,"./rules/prefer-template":373,"./rules/quote-props":374,"./rules/quotes":375,"./rules/radix":376,"./rules/require-jsdoc":377,"./rules/require-yield":378,"./rules/rest-spread-spacing":379,"./rules/semi":381,"./rules/semi-spacing":380,"./rules/sort-imports":382,"./rules/sort-keys":383,"./rules/sort-vars":384,"./rules/space-before-blocks":385,"./rules/space-before-function-paren":386,"./rules/space-in-parens":387,"./rules/space-infix-ops":388,"./rules/space-unary-ops":389,"./rules/spaced-comment":390,"./rules/strict":391,"./rules/symbol-description":392,"./rules/template-curly-spacing":393,"./rules/unicode-bom":394,"./rules/use-isnan":395,"./rules/valid-jsdoc":396,"./rules/valid-typeof":397,"./rules/vars-on-top":398,"./rules/wrap-iife":399,"./rules/wrap-regex":400,"./rules/yield-star-spacing":401,"./rules/yoda":402}],173:[function(require,module,exports){
+},{"./rules/accessor-pairs":175,"./rules/array-bracket-spacing":176,"./rules/array-callback-return":177,"./rules/arrow-body-style":178,"./rules/arrow-parens":179,"./rules/arrow-spacing":180,"./rules/block-scoped-var":181,"./rules/block-spacing":182,"./rules/brace-style":183,"./rules/callback-return":184,"./rules/camelcase":185,"./rules/class-methods-use-this":186,"./rules/comma-dangle":187,"./rules/comma-spacing":188,"./rules/comma-style":189,"./rules/complexity":190,"./rules/computed-property-spacing":191,"./rules/consistent-return":192,"./rules/consistent-this":193,"./rules/constructor-super":194,"./rules/curly":195,"./rules/default-case":196,"./rules/dot-location":197,"./rules/dot-notation":198,"./rules/eol-last":199,"./rules/eqeqeq":200,"./rules/func-call-spacing":201,"./rules/func-names":202,"./rules/func-style":203,"./rules/generator-star-spacing":204,"./rules/global-require":205,"./rules/guard-for-in":206,"./rules/handle-callback-err":207,"./rules/id-blacklist":208,"./rules/id-length":209,"./rules/id-match":210,"./rules/indent":211,"./rules/init-declarations":212,"./rules/jsx-quotes":213,"./rules/key-spacing":214,"./rules/keyword-spacing":215,"./rules/line-comment-position":216,"./rules/linebreak-style":217,"./rules/lines-around-comment":218,"./rules/lines-around-directive":219,"./rules/max-depth":220,"./rules/max-len":221,"./rules/max-lines":222,"./rules/max-nested-callbacks":223,"./rules/max-params":224,"./rules/max-statements":226,"./rules/max-statements-per-line":225,"./rules/multiline-ternary":227,"./rules/new-cap":228,"./rules/new-parens":229,"./rules/newline-after-var":230,"./rules/newline-before-return":231,"./rules/newline-per-chained-call":232,"./rules/no-alert":233,"./rules/no-array-constructor":234,"./rules/no-bitwise":235,"./rules/no-caller":236,"./rules/no-case-declarations":237,"./rules/no-catch-shadow":238,"./rules/no-class-assign":239,"./rules/no-cond-assign":240,"./rules/no-confusing-arrow":241,"./rules/no-console":242,"./rules/no-const-assign":243,"./rules/no-constant-condition":244,"./rules/no-continue":245,"./rules/no-control-regex":246,"./rules/no-debugger":247,"./rules/no-delete-var":248,"./rules/no-div-regex":249,"./rules/no-dupe-args":250,"./rules/no-dupe-class-members":251,"./rules/no-dupe-keys":252,"./rules/no-duplicate-case":253,"./rules/no-duplicate-imports":254,"./rules/no-else-return":255,"./rules/no-empty":259,"./rules/no-empty-character-class":256,"./rules/no-empty-function":257,"./rules/no-empty-pattern":258,"./rules/no-eq-null":260,"./rules/no-eval":261,"./rules/no-ex-assign":262,"./rules/no-extend-native":263,"./rules/no-extra-bind":264,"./rules/no-extra-boolean-cast":265,"./rules/no-extra-label":266,"./rules/no-extra-parens":267,"./rules/no-extra-semi":268,"./rules/no-fallthrough":269,"./rules/no-floating-decimal":270,"./rules/no-func-assign":271,"./rules/no-global-assign":272,"./rules/no-implicit-coercion":273,"./rules/no-implicit-globals":274,"./rules/no-implied-eval":275,"./rules/no-inline-comments":276,"./rules/no-inner-declarations":277,"./rules/no-invalid-regexp":278,"./rules/no-invalid-this":279,"./rules/no-irregular-whitespace":280,"./rules/no-iterator":281,"./rules/no-label-var":282,"./rules/no-labels":283,"./rules/no-lone-blocks":284,"./rules/no-lonely-if":285,"./rules/no-loop-func":286,"./rules/no-magic-numbers":287,"./rules/no-mixed-operators":288,"./rules/no-mixed-requires":289,"./rules/no-mixed-spaces-and-tabs":290,"./rules/no-multi-spaces":291,"./rules/no-multi-str":292,"./rules/no-multiple-empty-lines":293,"./rules/no-native-reassign":294,"./rules/no-negated-condition":295,"./rules/no-negated-in-lhs":296,"./rules/no-nested-ternary":297,"./rules/no-new":303,"./rules/no-new-func":298,"./rules/no-new-object":299,"./rules/no-new-require":300,"./rules/no-new-symbol":301,"./rules/no-new-wrappers":302,"./rules/no-obj-calls":304,"./rules/no-octal":306,"./rules/no-octal-escape":305,"./rules/no-param-reassign":307,"./rules/no-path-concat":308,"./rules/no-plusplus":309,"./rules/no-process-env":310,"./rules/no-process-exit":311,"./rules/no-proto":312,"./rules/no-prototype-builtins":313,"./rules/no-redeclare":314,"./rules/no-regex-spaces":315,"./rules/no-restricted-globals":316,"./rules/no-restricted-imports":317,"./rules/no-restricted-modules":318,"./rules/no-restricted-properties":319,"./rules/no-restricted-syntax":320,"./rules/no-return-assign":321,"./rules/no-script-url":322,"./rules/no-self-assign":323,"./rules/no-self-compare":324,"./rules/no-sequences":325,"./rules/no-shadow":327,"./rules/no-shadow-restricted-names":326,"./rules/no-spaced-func":328,"./rules/no-sparse-arrays":329,"./rules/no-sync":330,"./rules/no-tabs":331,"./rules/no-template-curly-in-string":332,"./rules/no-ternary":333,"./rules/no-this-before-super":334,"./rules/no-throw-literal":335,"./rules/no-trailing-spaces":336,"./rules/no-undef":338,"./rules/no-undef-init":337,"./rules/no-undefined":339,"./rules/no-underscore-dangle":340,"./rules/no-unexpected-multiline":341,"./rules/no-unmodified-loop-condition":342,"./rules/no-unneeded-ternary":343,"./rules/no-unreachable":344,"./rules/no-unsafe-finally":345,"./rules/no-unsafe-negation":346,"./rules/no-unused-expressions":347,"./rules/no-unused-labels":348,"./rules/no-unused-vars":349,"./rules/no-use-before-define":350,"./rules/no-useless-call":351,"./rules/no-useless-computed-key":352,"./rules/no-useless-concat":353,"./rules/no-useless-constructor":354,"./rules/no-useless-escape":355,"./rules/no-useless-rename":356,"./rules/no-var":357,"./rules/no-void":358,"./rules/no-warning-comments":359,"./rules/no-whitespace-before-property":360,"./rules/no-with":361,"./rules/object-curly-newline":362,"./rules/object-curly-spacing":363,"./rules/object-property-newline":364,"./rules/object-shorthand":365,"./rules/one-var":367,"./rules/one-var-declaration-per-line":366,"./rules/operator-assignment":368,"./rules/operator-linebreak":369,"./rules/padded-blocks":370,"./rules/prefer-arrow-callback":371,"./rules/prefer-const":372,"./rules/prefer-numeric-literals":373,"./rules/prefer-reflect":374,"./rules/prefer-rest-params":375,"./rules/prefer-spread":376,"./rules/prefer-template":377,"./rules/quote-props":378,"./rules/quotes":379,"./rules/radix":380,"./rules/require-jsdoc":381,"./rules/require-yield":382,"./rules/rest-spread-spacing":383,"./rules/semi":385,"./rules/semi-spacing":384,"./rules/sort-imports":386,"./rules/sort-keys":387,"./rules/sort-vars":388,"./rules/space-before-blocks":389,"./rules/space-before-function-paren":390,"./rules/space-in-parens":391,"./rules/space-infix-ops":392,"./rules/space-unary-ops":393,"./rules/spaced-comment":394,"./rules/strict":395,"./rules/symbol-description":396,"./rules/template-curly-spacing":397,"./rules/unicode-bom":398,"./rules/use-isnan":399,"./rules/valid-jsdoc":400,"./rules/valid-typeof":401,"./rules/vars-on-top":402,"./rules/wrap-iife":403,"./rules/wrap-regex":404,"./rules/yield-star-spacing":405,"./rules/yoda":406}],173:[function(require,module,exports){
 /**
  * @fileoverview RuleContext utility for rules
  * @author Nicholas C. Zakas
@@ -50202,7 +50282,7 @@ PASSTHROUGHS.forEach(function (name) {
 
 module.exports = RuleContext;
 
-},{"./util/rule-fixer":408}],174:[function(require,module,exports){
+},{"./util/rule-fixer":412}],174:[function(require,module,exports){
 /**
  * @fileoverview Defines a storage for rules.
  * @author Nicholas C. Zakas
@@ -50535,7 +50615,10 @@ module.exports = {
             context.report({
                 node: node,
                 loc: token.loc.start,
-                message: "There should be no space after '" + token.value + "'.",
+                message: "There should be no space after '{{tokenValue}}'.",
+                data: {
+                    tokenValue: token.value
+                },
                 fix: function fix(fixer) {
                     var nextToken = sourceCode.getTokenAfter(token);
 
@@ -50554,7 +50637,10 @@ module.exports = {
             context.report({
                 node: node,
                 loc: token.loc.start,
-                message: "There should be no space before '" + token.value + "'.",
+                message: "There should be no space before '{{tokenValue}}'.",
+                data: {
+                    tokenValue: token.value
+                },
                 fix: function fix(fixer) {
                     var previousToken = sourceCode.getTokenBefore(token);
 
@@ -50573,7 +50659,10 @@ module.exports = {
             context.report({
                 node: node,
                 loc: token.loc.start,
-                message: "A space is required after '" + token.value + "'.",
+                message: "A space is required after '{{tokenValue}}'.",
+                data: {
+                    tokenValue: token.value
+                },
                 fix: function fix(fixer) {
                     return fixer.insertTextAfter(token, " ");
                 }
@@ -50590,7 +50679,10 @@ module.exports = {
             context.report({
                 node: node,
                 loc: token.loc.start,
-                message: "A space is required before '" + token.value + "'.",
+                message: "A space is required before '{{tokenValue}}'.",
+                data: {
+                    tokenValue: token.value
+                },
                 fix: function fix(fixer) {
                     return fixer.insertTextBefore(token, " ");
                 }
@@ -51147,16 +51239,18 @@ module.exports = {
          * @returns {Object} Tokens of arrow and before/after arrow.
          */
         function getTokens(node) {
-            var t = sourceCode.getFirstToken(node);
-            var before = void 0;
+            var arrow = sourceCode.getTokenBefore(node.body);
 
-            while (t.type !== "Punctuator" || t.value !== "=>") {
-                before = t;
-                t = sourceCode.getTokenAfter(t);
+            // skip '(' tokens.
+            while (arrow.value !== "=>") {
+                arrow = sourceCode.getTokenBefore(arrow);
             }
-            var after = sourceCode.getTokenAfter(t);
 
-            return { before: before, arrow: t, after: after };
+            return {
+                before: sourceCode.getTokenBefore(arrow),
+                arrow: arrow,
+                after: sourceCode.getTokenAfter(arrow)
+            };
         }
 
         /**
@@ -51445,7 +51539,10 @@ module.exports = {
                 context.report({
                     node: node,
                     loc: openBrace.loc.start,
-                    message: message + " after '{'.",
+                    message: "{{message}} after '{'.",
+                    data: {
+                        message: message
+                    },
                     fix: function fix(fixer) {
                         if (always) {
                             return fixer.insertTextBefore(firstToken, " ");
@@ -51459,7 +51556,10 @@ module.exports = {
                 context.report({
                     node: node,
                     loc: closeBrace.loc.start,
-                    message: message + " before '}'.",
+                    message: "{{message}} before '}'.",
+                    data: {
+                        message: message
+                    },
                     fix: function fix(fixer) {
                         if (always) {
                             return fixer.insertTextAfter(lastToken, " ");
@@ -52067,7 +52167,13 @@ module.exports = {
             var methodUsesThis = stack.pop();
 
             if (isInstanceMethod(node.parent) && !methodUsesThis) {
-                context.report(node, "Expected 'this' to be used by class method '" + node.parent.key.name + "'.");
+                context.report({
+                    node: node,
+                    message: "Expected 'this' to be used by class method '{{classMethod}}'.",
+                    data: {
+                        classMethod: node.parent.key.name
+                    }
+                });
             }
         }
 
@@ -52415,7 +52521,10 @@ module.exports = {
                     }
                 },
 
-                message: options[dir] ? "A space is required " + dir + " ','." : "There should be no space " + dir + " ','."
+                message: options[dir] ? "A space is required {{dir}} ','." : "There should be no space {{dir}} ','.",
+                data: {
+                    dir: dir
+                }
             });
         }
 
@@ -52523,7 +52632,7 @@ module.exports = {
             category: "Stylistic Issues",
             recommended: false
         },
-
+        fixable: "code",
         schema: [{
             enum: ["first", "last"]
         }, {
@@ -52564,6 +52673,47 @@ module.exports = {
         }
 
         /**
+         * Modified text based on the style
+         * @param {string} styleType Style type
+         * @param {string} text Source code text
+         * @returns {string} modified text
+         * @private
+         */
+        function getReplacedText(styleType, text) {
+            switch (styleType) {
+                case "between":
+                    return "," + text.replace("\n", "");
+
+                case "first":
+                    return text + ",";
+
+                case "last":
+                    return "," + text;
+
+                default:
+                    return "";
+            }
+        }
+
+        /**
+         * Determines the fixer function for a given style.
+         * @param {string} styleType comma style
+         * @param {ASTNode} previousItemToken The token to check.
+         * @param {ASTNode} commaToken The token to check.
+         * @param {ASTNode} currentItemToken The token to check.
+         * @returns {Function} Fixer function
+         * @private
+         */
+        function getFixerFunction(styleType, previousItemToken, commaToken, currentItemToken) {
+            var text = sourceCode.text.slice(previousItemToken.range[1], commaToken.range[0]) + sourceCode.text.slice(commaToken.range[1], currentItemToken.range[0]);
+            var range = [previousItemToken.range[1], currentItemToken.range[0]];
+
+            return function (fixer) {
+                return fixer.replaceTextRange(range, getReplacedText(styleType, text));
+            };
+        }
+
+        /**
          * Validates the spacing around single items in lists.
          * @param {Token} previousItemToken The last token from the previous item.
          * @param {Token} commaToken The token representing the comma.
@@ -52581,19 +52731,33 @@ module.exports = {
             } else if (!astUtils.isTokenOnSameLine(commaToken, currentItemToken) && !astUtils.isTokenOnSameLine(previousItemToken, commaToken)) {
 
                 // lone comma
-                context.report(reportItem, {
-                    line: commaToken.loc.end.line,
-                    column: commaToken.loc.start.column
-                }, "Bad line breaking before and after ','.");
+                context.report({
+                    node: reportItem,
+                    loc: {
+                        line: commaToken.loc.end.line,
+                        column: commaToken.loc.start.column
+                    },
+                    message: "Bad line breaking before and after ','.",
+                    fix: getFixerFunction("between", previousItemToken, commaToken, currentItemToken)
+                });
             } else if (style === "first" && !astUtils.isTokenOnSameLine(commaToken, currentItemToken)) {
 
-                context.report(reportItem, "',' should be placed first.");
+                context.report({
+                    node: reportItem,
+                    message: "',' should be placed first.",
+                    fix: getFixerFunction(style, previousItemToken, commaToken, currentItemToken)
+                });
             } else if (style === "last" && astUtils.isTokenOnSameLine(commaToken, currentItemToken)) {
 
-                context.report(reportItem, {
-                    line: commaToken.loc.end.line,
-                    column: commaToken.loc.end.column
-                }, "',' should be placed last.");
+                context.report({
+                    node: reportItem,
+                    loc: {
+                        line: commaToken.loc.end.line,
+                        column: commaToken.loc.end.column
+                    },
+                    message: "',' should be placed last.",
+                    fix: getFixerFunction(style, previousItemToken, commaToken, currentItemToken)
+                });
             }
         }
 
@@ -52898,7 +53062,10 @@ module.exports = {
             context.report({
                 node: node,
                 loc: token.loc.start,
-                message: "There should be no space after '" + token.value + "'.",
+                message: "There should be no space after '{{tokenValue}}'.",
+                data: {
+                    tokenValue: token.value
+                },
                 fix: function fix(fixer) {
                     return fixer.removeRange([token.range[1], tokenAfter.range[0]]);
                 }
@@ -52916,7 +53083,10 @@ module.exports = {
             context.report({
                 node: node,
                 loc: token.loc.start,
-                message: "There should be no space before '" + token.value + "'.",
+                message: "There should be no space before '{{tokenValue}}'.",
+                data: {
+                    tokenValue: token.value
+                },
                 fix: function fix(fixer) {
                     return fixer.removeRange([tokenBefore.range[1], token.range[0]]);
                 }
@@ -52933,7 +53103,10 @@ module.exports = {
             context.report({
                 node: node,
                 loc: token.loc.start,
-                message: "A space is required after '" + token.value + "'.",
+                message: "A space is required after '{{tokenValue}}'.",
+                data: {
+                    tokenValue: token.value
+                },
                 fix: function fix(fixer) {
                     return fixer.insertTextAfter(token, " ");
                 }
@@ -52950,7 +53123,10 @@ module.exports = {
             context.report({
                 node: node,
                 loc: token.loc.start,
-                message: "A space is required before '" + token.value + "'.",
+                message: "A space is required before '{{tokenValue}}'.",
+                data: {
+                    tokenValue: token.value
+                },
                 fix: function fix(fixer) {
                     return fixer.insertTextBefore(token, " ");
                 }
@@ -53157,9 +53333,16 @@ module.exports = {
                 if (!funcInfo.hasReturn) {
                     funcInfo.hasReturn = true;
                     funcInfo.hasReturnValue = hasReturnValue;
-                    funcInfo.message = "Expected " + (hasReturnValue ? "a" : "no") + " return value.";
+                    funcInfo.message = "Expected {{which}} return value.";
+                    funcInfo.data = {
+                        which: hasReturnValue ? "a" : "no"
+                    };
                 } else if (funcInfo.hasReturnValue !== hasReturnValue) {
-                    context.report({ node: node, message: funcInfo.message });
+                    context.report({
+                        node: node,
+                        message: funcInfo.message,
+                        data: funcInfo.data
+                    });
                 }
             },
 
@@ -54181,12 +54364,15 @@ module.exports = {
                 }
             },
             additionalProperties: false
-        }]
+        }],
+
+        fixable: "code"
     },
 
     create: function create(context) {
         var options = context.options[0] || {};
         var allowKeywords = options.allowKeywords === void 0 || !!options.allowKeywords;
+        var sourceCode = context.getSourceCode();
 
         var allowPattern = void 0;
 
@@ -54196,20 +54382,58 @@ module.exports = {
 
         return {
             MemberExpression: function MemberExpression(node) {
-                if (node.computed && node.property.type === "Literal" && validIdentifier.test(node.property.value) && (allowKeywords || keywords.indexOf("" + node.property.value) === -1)) {
+                if (node.computed && node.property.type === "Literal" && validIdentifier.test(node.property.value) && (allowKeywords || keywords.indexOf(String(node.property.value)) === -1)) {
                     if (!(allowPattern && allowPattern.test(node.property.value))) {
-                        context.report(node.property, "[" + JSON.stringify(node.property.value) + "] is better written in dot notation.");
+                        context.report({
+                            node: node.property,
+                            message: "[{{propertyValue}}] is better written in dot notation.",
+                            data: {
+                                propertyValue: JSON.stringify(node.property.value)
+                            },
+                            fix: function fix(fixer) {
+                                var leftBracket = sourceCode.getTokenBefore(node.property);
+                                var rightBracket = sourceCode.getTokenAfter(node.property);
+                                var textBeforeProperty = sourceCode.text.slice(leftBracket.range[1], node.property.range[0]);
+                                var textAfterProperty = sourceCode.text.slice(node.property.range[1], rightBracket.range[0]);
+
+                                if (textBeforeProperty.trim() || textAfterProperty.trim()) {
+
+                                    // Don't perform any fixes if there are comments inside the brackets.
+                                    return null;
+                                }
+
+                                return fixer.replaceTextRange([leftBracket.range[0], rightBracket.range[1]], "." + node.property.value);
+                            }
+                        });
                     }
                 }
-                if (!allowKeywords && !node.computed && keywords.indexOf("" + node.property.name) !== -1) {
-                    context.report(node.property, "." + node.property.name + " is a syntax error.");
+                if (!allowKeywords && !node.computed && keywords.indexOf(String(node.property.name)) !== -1) {
+                    context.report({
+                        node: node.property,
+                        message: ".{{propertyName}} is a syntax error.",
+                        data: {
+                            propertyName: node.property.name
+                        },
+                        fix: function fix(fixer) {
+                            var dot = sourceCode.getTokenBefore(node.property);
+                            var textAfterDot = sourceCode.text.slice(dot.range[1], node.property.range[0]);
+
+                            if (textAfterDot.trim()) {
+
+                                // Don't perform any fixes if there are comments between the dot and the property name.
+                                return null;
+                            }
+
+                            return fixer.replaceTextRange([dot.range[0], node.property.range[1]], "[" + textAfterDot + "\"" + node.property.name + "\"]");
+                        }
+                    });
                 }
             }
         };
     }
 };
 
-},{"../util/keywords":406}],199:[function(require,module,exports){
+},{"../util/keywords":410}],199:[function(require,module,exports){
 /**
  * @fileoverview Require file to end with single newline.
  * @author Nodeca Team <https://github.com/nodeca>
@@ -54806,11 +55030,16 @@ module.exports = {
                     var spaceRequired = mode[side];
                     var node = after ? leftToken : rightToken;
                     var type = spaceRequired ? "Missing" : "Unexpected";
-                    var message = type + " space " + side + " *.";
+                    var message = "{{type}} space {{side}} *.";
+                    var data = {
+                        type: type,
+                        side: side
+                    };
 
                     context.report({
                         node: node,
                         message: message,
+                        data: data,
                         fix: function fix(fixer) {
                             if (spaceRequired) {
                                 if (after) {
@@ -55477,6 +55706,40 @@ module.exports = {
                 MemberExpression: {
                     type: "integer",
                     minimum: 0
+                },
+                FunctionDeclaration: {
+                    type: "object",
+                    properties: {
+                        parameters: {
+                            oneOf: [{
+                                type: "integer",
+                                minimum: 0
+                            }, {
+                                enum: ["first"]
+                            }]
+                        },
+                        body: {
+                            type: "integer",
+                            minimum: 0
+                        }
+                    }
+                },
+                FunctionExpression: {
+                    type: "object",
+                    properties: {
+                        parameters: {
+                            oneOf: [{
+                                type: "integer",
+                                minimum: 0
+                            }, {
+                                enum: ["first"]
+                            }]
+                        },
+                        body: {
+                            type: "integer",
+                            minimum: 0
+                        }
+                    }
                 }
             },
             additionalProperties: false
@@ -55487,6 +55750,8 @@ module.exports = {
 
         var MESSAGE = "Expected indentation of {{needed}} {{type}} {{characters}} but found {{gotten}}.";
         var DEFAULT_VARIABLE_INDENT = 1;
+        var DEFAULT_PARAMETER_INDENT = null; // For backwards compatibility, don't check parameter indentation unless specified in the config
+        var DEFAULT_FUNCTION_BODY_INDENT = 1;
 
         var indentType = "space";
         var indentSize = 4;
@@ -55497,7 +55762,15 @@ module.exports = {
                 let: DEFAULT_VARIABLE_INDENT,
                 const: DEFAULT_VARIABLE_INDENT
             },
-            outerIIFEBody: null
+            outerIIFEBody: null,
+            FunctionDeclaration: {
+                parameters: DEFAULT_PARAMETER_INDENT,
+                body: DEFAULT_FUNCTION_BODY_INDENT
+            },
+            FunctionExpression: {
+                parameters: DEFAULT_PARAMETER_INDENT,
+                body: DEFAULT_FUNCTION_BODY_INDENT
+            }
         };
 
         var sourceCode = context.getSourceCode();
@@ -55533,6 +55806,14 @@ module.exports = {
 
                 if (typeof opts.MemberExpression === "number") {
                     options.MemberExpression = opts.MemberExpression;
+                }
+
+                if (_typeof(opts.FunctionDeclaration) === "object") {
+                    Object.assign(options.FunctionDeclaration, opts.FunctionDeclaration);
+                }
+
+                if (_typeof(opts.FunctionExpression) === "object") {
+                    Object.assign(options.FunctionExpression, opts.FunctionExpression);
                 }
             }
         }
@@ -55572,7 +55853,7 @@ module.exports = {
 
                 if (needed > gotten) {
                     var _ret = function () {
-                        var spaces = "" + new Array(needed - gotten + 1).join(indentChar); // replace with repeat in future
+                        var spaces = indentChar.repeat(needed - gotten);
 
                         if (isLastNodeCheck === true) {
                             rangeToFix = [node.range[1] - 1, node.range[1] - 1];
@@ -55856,11 +56137,15 @@ module.exports = {
             }
 
             // function body indent should be indent + indent size, unless this
-            // is the outer IIFE and that option is enabled.
+            // is a FunctionDeclaration, FunctionExpression, or outer IIFE and the corresponding options are enabled.
             var functionOffset = indentSize;
 
             if (options.outerIIFEBody !== null && isOuterIIFE(calleeNode)) {
                 functionOffset = options.outerIIFEBody * indentSize;
+            } else if (calleeNode.type === "FunctionExpression") {
+                functionOffset = options.FunctionExpression.body * indentSize;
+            } else if (calleeNode.type === "FunctionDeclaration") {
+                functionOffset = options.FunctionDeclaration.body * indentSize;
             }
             indent += functionOffset;
 
@@ -56227,6 +56512,26 @@ module.exports = {
                 var caseIndent = expectedCaseIndent(node);
 
                 checkNodesIndent(node.consequent, caseIndent + indentSize);
+            },
+            FunctionDeclaration: function FunctionDeclaration(node) {
+                if (isSingleLineNode(node)) {
+                    return;
+                }
+                if (options.FunctionDeclaration.parameters === "first" && node.params.length) {
+                    checkNodesIndent(node.params.slice(1), node.params[0].loc.start.column);
+                } else if (options.FunctionDeclaration.parameters !== null) {
+                    checkNodesIndent(node.params, indentSize * options.FunctionDeclaration.parameters);
+                }
+            },
+            FunctionExpression: function FunctionExpression(node) {
+                if (isSingleLineNode(node)) {
+                    return;
+                }
+                if (options.FunctionExpression.parameters === "first" && node.params.length) {
+                    checkNodesIndent(node.params.slice(1), node.params[0].loc.start.column);
+                } else if (options.FunctionExpression.parameters !== null) {
+                    checkNodesIndent(node.params, indentSize * options.FunctionExpression.parameters);
+                }
             }
         };
     }
@@ -56340,9 +56645,21 @@ module.exports = {
                     }
 
                     if (mode === MODE_ALWAYS && !initialized) {
-                        context.report(declaration, "Variable '" + id.name + "' should be initialized on declaration.");
+                        context.report({
+                            node: declaration,
+                            message: "Variable '{{idName}}' should be initialized on declaration.",
+                            data: {
+                                idName: id.name
+                            }
+                        });
                     } else if (mode === MODE_NEVER && kind !== "const" && initialized && !isIgnoredForLoop) {
-                        context.report(declaration, "Variable '" + id.name + "' should not be initialized on declaration.");
+                        context.report({
+                            node: declaration,
+                            message: "Variable '{{idName}}' should not be initialized on declaration.",
+                            data: {
+                                idName: id.name
+                            }
+                        });
                     }
                 }
             }
@@ -56425,7 +56742,10 @@ module.exports = {
                 if (attributeValue && astUtils.isStringLiteral(attributeValue) && !usesExpectedQuotes(attributeValue)) {
                     context.report({
                         node: attributeValue,
-                        message: "Unexpected usage of " + setting.description + ".",
+                        message: "Unexpected usage of {{description}}.",
+                        data: {
+                            description: setting.description
+                        },
                         fix: function fix(fixer) {
                             return fixer.replaceText(attributeValue, setting.convert(attributeValue.raw));
                         }
@@ -56576,7 +56896,7 @@ function initOptions(toOptions, fromOptions) {
         if (toOptions.multiLine.align) {
             toOptions.align = {
                 on: toOptions.multiLine.align.on,
-                mode: toOptions.multiLine.mode,
+                mode: toOptions.multiLine.align.mode || toOptions.multiLine.mode,
                 beforeColon: toOptions.multiLine.align.beforeColon,
                 afterColon: toOptions.multiLine.align.afterColon
             };
@@ -56720,6 +57040,9 @@ module.exports = {
                     multiLine: {
                         type: "object",
                         properties: {
+                            mode: {
+                                enum: ["strict", "minimum"]
+                            },
                             beforeColon: {
                                 type: "boolean"
                             },
@@ -57584,7 +57907,104 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":160,"../util/keywords":406}],216:[function(require,module,exports){
+},{"../ast-utils":160,"../util/keywords":410}],216:[function(require,module,exports){
+/**
+ * @fileoverview Rule to enforce the position of line comments
+ * @author Alberto Rodríguez
+ */
+"use strict";
+
+//------------------------------------------------------------------------------
+// Rule Definition
+//------------------------------------------------------------------------------
+
+module.exports = {
+    meta: {
+        docs: {
+            description: "enforce position of line comments",
+            category: "Stylistic Issues",
+            recommended: false
+        },
+
+        schema: [{
+            oneOf: [{
+                enum: ["above", "beside"]
+            }, {
+                type: "object",
+                properties: {
+                    position: {
+                        enum: ["above", "beside"]
+                    },
+                    ignorePattern: {
+                        type: "string"
+                    },
+                    applyDefaultPatterns: {
+                        type: "boolean"
+                    }
+                },
+                additionalProperties: false
+            }]
+        }]
+    },
+
+    create: function create(context) {
+        var DEFAULT_IGNORE_PATTERN = "^\\s*(?:eslint|jshint\\s+|jslint\\s+|istanbul\\s+|globals?\\s+|exported\\s+|jscs|falls?\\s?through)";
+        var options = context.options[0];
+
+        var above = void 0,
+            ignorePattern = void 0,
+            applyDefaultPatterns = true;
+
+        if (!options || typeof option === "string") {
+            above = !options || options === "above";
+        } else {
+            above = options.position === "above";
+            ignorePattern = options.ignorePattern;
+            applyDefaultPatterns = options.applyDefaultPatterns !== false;
+        }
+
+        var defaultIgnoreRegExp = new RegExp(DEFAULT_IGNORE_PATTERN);
+        var customIgnoreRegExp = new RegExp(ignorePattern);
+        var sourceCode = context.getSourceCode();
+
+        //--------------------------------------------------------------------------
+        // Public
+        //--------------------------------------------------------------------------
+
+        return {
+            LineComment: function LineComment(node) {
+                if (applyDefaultPatterns && defaultIgnoreRegExp.test(node.value)) {
+                    return;
+                }
+
+                if (ignorePattern && customIgnoreRegExp.test(node.value)) {
+                    return;
+                }
+
+                var previous = sourceCode.getTokenOrCommentBefore(node);
+                var isOnSameLine = previous && previous.loc.end.line === node.loc.start.line;
+
+                if (above) {
+                    if (isOnSameLine) {
+                        context.report({
+                            node: node,
+                            message: "Expected comment to be above code."
+                        });
+                    }
+                } else {
+                    if (!isOnSameLine) {
+                        context.report({
+                            node: node,
+                            message: "Expected comment to be beside code."
+                        });
+                    }
+                }
+            }
+        };
+    }
+};
+
+},{}],217:[function(require,module,exports){
 /**
  * @fileoverview Rule to enforce a single linebreak style.
  * @author Erik Mueller
@@ -57674,7 +58094,7 @@ module.exports = {
     }
 };
 
-},{}],217:[function(require,module,exports){
+},{}],218:[function(require,module,exports){
 /**
  * @fileoverview Enforces empty lines around comments.
  * @author Jamund Ferguson
@@ -58033,7 +58453,164 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":160,"lodash":158}],218:[function(require,module,exports){
+},{"../ast-utils":160,"lodash":158}],219:[function(require,module,exports){
+/**
+ * @fileoverview Require or disallow newlines around directives.
+ * @author Kai Cataldo
+ */
+
+"use strict";
+
+var astUtils = require("../ast-utils");
+
+//------------------------------------------------------------------------------
+// Rule Definition
+//------------------------------------------------------------------------------
+
+module.exports = {
+    meta: {
+        docs: {
+            description: "require or disallow newlines around directives",
+            category: "Stylistic Issues",
+            recommended: false
+        },
+        schema: [{
+            oneOf: [{
+                enum: ["always", "never"]
+            }, {
+                type: "object",
+                properties: {
+                    before: {
+                        enum: ["always", "never"]
+                    },
+                    after: {
+                        enum: ["always", "never"]
+                    }
+                },
+                additionalProperties: false,
+                minProperties: 2
+            }]
+        }]
+    },
+
+    create: function create(context) {
+        var sourceCode = context.getSourceCode();
+        var config = context.options[0] || "always";
+        var expectLineBefore = typeof config === "string" ? config : config.before;
+        var expectLineAfter = typeof config === "string" ? config : config.after;
+
+        //--------------------------------------------------------------------------
+        // Helpers
+        //--------------------------------------------------------------------------
+
+        /**
+         * Check if node is preceded by a blank newline.
+         * @param {ASTNode} node Node to check.
+         * @returns {boolean} Whether or not the passed in node is preceded by a blank newline.
+         */
+        function hasNewlineBefore(node) {
+            var tokenBefore = sourceCode.getTokenOrCommentBefore(node);
+            var tokenLineBefore = tokenBefore ? tokenBefore.loc.end.line : 0;
+
+            return node.loc.start.line - tokenLineBefore >= 2;
+        }
+
+        /**
+         * Check if node is followed by a blank newline.
+         * @param {ASTNode} node Node to check.
+         * @returns {boolean} Whether or not the passed in node is followed by a blank newline.
+         */
+        function hasNewlineAfter(node) {
+            var tokenAfter = sourceCode.getTokenOrCommentAfter(node);
+
+            return tokenAfter.loc.start.line - node.loc.end.line >= 2;
+        }
+
+        /**
+         * Report errors for newlines around directives.
+         * @param {ASTNode} node Node to check.
+         * @param {string} location Whether the error was found before or after the directive.
+         * @param {boolean} expected Whether or not a newline was expected or unexpected.
+         * @returns {void}
+         */
+        function reportError(node, location, expected) {
+            context.report({
+                node: node,
+                message: "{{expected}} newline {{location}} \"{{value}}\" directive.",
+                data: {
+                    expected: expected ? "Expected" : "Unexpected",
+                    value: node.expression.value,
+                    location: location
+                }
+            });
+        }
+
+        /**
+         * Check lines around directives in node
+         * @param {ASTNode} node - node to check
+         * @returns {void}
+         */
+        function checkDirectives(node) {
+            var directives = astUtils.getDirectivePrologue(node);
+
+            if (!directives.length) {
+                return;
+            }
+
+            var firstDirective = directives[0];
+            var hasTokenOrCommentBefore = !!sourceCode.getTokenOrCommentBefore(firstDirective);
+
+            // Only check before the first directive if it is preceded by a comment or if it is at the top of
+            // the file and expectLineBefore is set to "never". This is to not force a newline at the top of
+            // the file if there are no comments as well as for compatibility with padded-blocks.
+            if (firstDirective.leadingComments && firstDirective.leadingComments.length ||
+
+            // Shebangs are not added to leading comments but are accounted for by the following.
+            node.type === "Program" && hasTokenOrCommentBefore) {
+                if (expectLineBefore === "always" && !hasNewlineBefore(firstDirective)) {
+                    reportError(firstDirective, "before", true);
+                }
+
+                if (expectLineBefore === "never" && hasNewlineBefore(firstDirective)) {
+                    reportError(firstDirective, "before", false);
+                }
+            } else if (node.type === "Program" && expectLineBefore === "never" && !hasTokenOrCommentBefore && hasNewlineBefore(firstDirective)) {
+                reportError(firstDirective, "before", false);
+            }
+
+            var lastDirective = directives[directives.length - 1];
+            var statements = node.type === "Program" ? node.body : node.body.body;
+
+            // Do not check after the last directive if the body only
+            // contains a directive prologue and isn't followed by a comment to ensure
+            // this rule behaves well with padded-blocks.
+            if (lastDirective === statements[statements.length - 1] && !lastDirective.trailingComments) {
+                return;
+            }
+
+            if (expectLineAfter === "always" && !hasNewlineAfter(lastDirective)) {
+                reportError(lastDirective, "after", true);
+            }
+
+            if (expectLineAfter === "never" && hasNewlineAfter(lastDirective)) {
+                reportError(lastDirective, "after", false);
+            }
+        }
+
+        //--------------------------------------------------------------------------
+        // Public
+        //--------------------------------------------------------------------------
+
+        return {
+            Program: checkDirectives,
+            FunctionDeclaration: checkDirectives,
+            FunctionExpression: checkDirectives,
+            ArrowFunctionExpression: checkDirectives
+        };
+    }
+};
+
+},{"../ast-utils":160}],220:[function(require,module,exports){
 /**
  * @fileoverview A rule to set the maximum depth block can be nested in a function.
  * @author Ian Christian Myers
@@ -58180,7 +58757,7 @@ module.exports = {
     }
 };
 
-},{}],219:[function(require,module,exports){
+},{}],221:[function(require,module,exports){
 /**
  * @fileoverview Rule to check for max length on a line.
  * @author Matt DuVall <http://www.mattduvall.com>
@@ -58215,7 +58792,13 @@ var OPTIONS_SCHEMA = {
         ignoreComments: {
             type: "boolean"
         },
+        ignoreStrings: {
+            type: "boolean"
+        },
         ignoreUrls: {
+            type: "boolean"
+        },
+        ignoreTemplateLiterals: {
             type: "boolean"
         },
         ignoreTrailingComments: {
@@ -58299,6 +58882,8 @@ module.exports = {
         var maxLength = options.code || 80,
             tabWidth = options.tabWidth || 4,
             ignoreComments = options.ignoreComments || false,
+            ignoreStrings = options.ignoreStrings || false,
+            ignoreTemplateLiterals = options.ignoreTemplateLiterals || false,
             ignoreTrailingComments = options.ignoreTrailingComments || options.ignoreComments || false,
             ignoreUrls = options.ignoreUrls || false,
             maxCommentLength = options.comments;
@@ -58354,6 +58939,58 @@ module.exports = {
         }
 
         /**
+         * Ensure that an array exists at [key] on `object`, and add `value` to it.
+         *
+         * @param {Object} object the object to mutate
+         * @param {string} key the object's key
+         * @param {*} value the value to add
+         * @returns {void}
+         * @private
+         */
+        function ensureArrayAndPush(object, key, value) {
+            if (!Array.isArray(object[key])) {
+                object[key] = [];
+            }
+            object[key].push(value);
+        }
+
+        /**
+         * Retrieves an array containing all strings (" or ') in the source code.
+         *
+         * @returns {ASTNode[]} An array of string nodes.
+         */
+        function getAllStrings() {
+            return sourceCode.ast.tokens.filter(function (token) {
+                return token.type === "String";
+            });
+        }
+
+        /**
+         * Retrieves an array containing all template literals in the source code.
+         *
+         * @returns {ASTNode[]} An array of template literal nodes.
+         */
+        function getAllTemplateLiterals() {
+            return sourceCode.ast.tokens.filter(function (token) {
+                return token.type === "Template";
+            });
+        }
+
+        /**
+         * A reducer to group an AST node by line number, both start and end.
+         *
+         * @param {Object} acc the accumulator
+         * @param {ASTNode} node the AST node in question
+         * @returns {Object} the modified accumulator
+         * @private
+         */
+        function groupByLineNumber(acc, node) {
+            ensureArrayAndPush(acc, node.loc.start.line, node);
+            ensureArrayAndPush(acc, node.loc.end.line, node);
+            return acc;
+        }
+
+        /**
          * Check the program for max length
          * @param {ASTNode} node Node to examine
          * @returns {void}
@@ -58370,6 +59007,12 @@ module.exports = {
 
             // we iterate over comments in parallel with the lines
             var commentsIndex = 0;
+
+            var strings = getAllStrings(sourceCode);
+            var stringsByLine = strings.reduce(groupByLineNumber, {});
+
+            var templateLiterals = getAllTemplateLiterals(sourceCode);
+            var templateLiteralsByLine = templateLiterals.reduce(groupByLineNumber, {});
 
             lines.forEach(function (line, i) {
 
@@ -58403,7 +59046,7 @@ module.exports = {
                         line = stripTrailingComment(line, lineNumber, comment);
                     }
                 }
-                if (ignorePattern && ignorePattern.test(line) || ignoreUrls && URL_REGEXP.test(line)) {
+                if (ignorePattern && ignorePattern.test(line) || ignoreUrls && URL_REGEXP.test(line) || ignoreStrings && stringsByLine[lineNumber] || ignoreTemplateLiterals && templateLiteralsByLine[lineNumber]) {
 
                     // ignore this line
                     return;
@@ -58416,9 +59059,25 @@ module.exports = {
                 }
 
                 if (lineIsComment && lineLength > maxCommentLength) {
-                    context.report(node, { line: lineNumber, column: 0 }, "Line " + (i + 1) + " exceeds the maximum comment line length of " + maxCommentLength + ".");
+                    context.report({
+                        node: node,
+                        loc: { line: lineNumber, column: 0 },
+                        message: "Line {{lineNumber}} exceeds the maximum comment line length of {{maxCommentLength}}.",
+                        data: {
+                            lineNumber: i + 1,
+                            maxCommentLength: maxCommentLength
+                        }
+                    });
                 } else if (lineLength > maxLength) {
-                    context.report(node, { line: lineNumber, column: 0 }, "Line " + (i + 1) + " exceeds the maximum line length of " + maxLength + ".");
+                    context.report({
+                        node: node,
+                        loc: { line: lineNumber, column: 0 },
+                        message: "Line {{lineNumber}} exceeds the maximum line length of {{maxLength}}.",
+                        data: {
+                            lineNumber: i + 1,
+                            maxLength: maxLength
+                        }
+                    });
                 }
             });
         }
@@ -58433,7 +59092,7 @@ module.exports = {
     }
 };
 
-},{}],220:[function(require,module,exports){
+},{}],222:[function(require,module,exports){
 /**
  * @fileoverview enforce a maximum file length
  * @author Alberto Rodríguez
@@ -58586,7 +59245,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":160,"lodash":158}],221:[function(require,module,exports){
+},{"../ast-utils":160,"lodash":158}],223:[function(require,module,exports){
 /**
  * @fileoverview Rule to enforce a maximum number of nested callbacks.
  * @author Ian Christian Myers
@@ -58696,7 +59355,7 @@ module.exports = {
     }
 };
 
-},{}],222:[function(require,module,exports){
+},{}],224:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag when a function has too many parameters
  * @author Ilya Volodin
@@ -58777,7 +59436,7 @@ module.exports = {
     }
 };
 
-},{}],223:[function(require,module,exports){
+},{}],225:[function(require,module,exports){
 /**
  * @fileoverview Specify the maximum number of statements allowed per line.
  * @author Kenneth Williams
@@ -58813,15 +59472,37 @@ module.exports = {
         var sourceCode = context.getSourceCode(),
             options = context.options[0] || {},
             maxStatementsPerLine = typeof options.max !== "undefined" ? options.max : 1,
-            message = "This line has too many statements. Maximum allowed is " + maxStatementsPerLine + ".";
+            message = "This line has {{numberOfStatementsOnThisLine}} {{statements}}. Maximum allowed is {{maxStatementsPerLine}}.";
+
         var lastStatementLine = 0,
-            numberOfStatementsOnThisLine = 0;
+            numberOfStatementsOnThisLine = 0,
+            firstExtraStatement = void 0;
 
         //--------------------------------------------------------------------------
         // Helpers
         //--------------------------------------------------------------------------
 
         var SINGLE_CHILD_ALLOWED = /^(?:(?:DoWhile|For|ForIn|ForOf|If|Labeled|While)Statement|Export(?:Default|Named)Declaration)$/;
+
+        /**
+         * Reports with the first extra statement, and clears it.
+         *
+         * @returns {void}
+         */
+        function reportFirstExtraStatementAndClear() {
+            if (firstExtraStatement) {
+                context.report({
+                    node: firstExtraStatement,
+                    message: message,
+                    data: {
+                        numberOfStatementsOnThisLine: numberOfStatementsOnThisLine,
+                        maxStatementsPerLine: maxStatementsPerLine,
+                        statements: numberOfStatementsOnThisLine === 1 ? "statement" : "statements"
+                    }
+                });
+            }
+            firstExtraStatement = null;
+        }
 
         /**
          * Gets the actual last token of a given node.
@@ -58859,13 +59540,14 @@ module.exports = {
             if (line === lastStatementLine) {
                 numberOfStatementsOnThisLine += 1;
             } else {
+                reportFirstExtraStatementAndClear();
                 numberOfStatementsOnThisLine = 1;
                 lastStatementLine = line;
             }
 
             // Reports if the node violated this rule.
             if (numberOfStatementsOnThisLine === maxStatementsPerLine + 1) {
-                context.report({ node: node, message: message });
+                firstExtraStatement = firstExtraStatement || node;
             }
         }
 
@@ -58880,6 +59562,7 @@ module.exports = {
 
             // Update state.
             if (line !== lastStatementLine) {
+                reportFirstExtraStatementAndClear();
                 numberOfStatementsOnThisLine = 1;
                 lastStatementLine = line;
             }
@@ -58937,19 +59620,28 @@ module.exports = {
             "ExportNamedDeclaration:exit": leaveStatement,
             "ExportDefaultDeclaration:exit": leaveStatement,
             "ExportAllDeclaration:exit": leaveStatement,
+            "Program:exit": reportFirstExtraStatementAndClear,
 
             // For backward compatibility.
             // Empty blocks should be warned if `{max: 0}` was given.
             BlockStatement: function reportIfZero(node) {
                 if (maxStatementsPerLine === 0 && node.body.length === 0) {
-                    context.report({ node: node, message: message });
+                    context.report({
+                        node: node,
+                        message: message,
+                        data: {
+                            numberOfStatementsOnThisLine: 0,
+                            maxStatementsPerLine: maxStatementsPerLine,
+                            statements: "statements"
+                        }
+                    });
                 }
             }
         };
     }
 };
 
-},{}],224:[function(require,module,exports){
+},{}],226:[function(require,module,exports){
 /**
  * @fileoverview A rule to set the maximum number of statements in a function.
  * @author Ian Christian Myers
@@ -59102,7 +59794,7 @@ module.exports = {
     }
 };
 
-},{}],225:[function(require,module,exports){
+},{}],227:[function(require,module,exports){
 /**
  * @fileoverview Enforce newlines between operands of ternary expressions
  * @author Kai Cataldo
@@ -59185,7 +59877,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":160}],226:[function(require,module,exports){
+},{"../ast-utils":160}],228:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag use of constructors without capital letters
  * @author Nicholas C. Zakas
@@ -59444,13 +60136,52 @@ module.exports = {
     }
 };
 
-},{}],227:[function(require,module,exports){
+},{}],229:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag when using constructor without parentheses
  * @author Ilya Volodin
  */
 
 "use strict";
+
+//------------------------------------------------------------------------------
+// Helpers
+//------------------------------------------------------------------------------
+
+/**
+ * Checks whether the given token is an opening parenthesis or not.
+ *
+ * @param {Token} token - The token to check.
+ * @returns {boolean} `true` if the token is an opening parenthesis.
+ */
+
+function isOpeningParen(token) {
+    return token.type === "Punctuator" && token.value === "(";
+}
+
+/**
+ * Checks whether the given token is an closing parenthesis or not.
+ *
+ * @param {Token} token - The token to check.
+ * @returns {boolean} `true` if the token is an closing parenthesis.
+ */
+function isClosingParen(token) {
+    return token.type === "Punctuator" && token.value === ")";
+}
+
+/**
+ * Checks whether the given node is inside of another given node.
+ *
+ * @param {ASTNode|Token} inner - The inner node to check.
+ * @param {ASTNode|Token} outer - The outer node to check.
+ * @returns {boolean} `true` if the `inner` is in `outer`.
+ */
+function isInRange(inner, outer) {
+    var ir = inner.range;
+    var or = outer.range;
+
+    return or[0] <= ir[0] && ir[1] <= or[1];
+}
 
 //------------------------------------------------------------------------------
 // Rule Definition
@@ -59464,7 +60195,9 @@ module.exports = {
             recommended: false
         },
 
-        schema: []
+        schema: [],
+
+        fixable: "code"
     },
 
     create: function create(context) {
@@ -59472,20 +60205,28 @@ module.exports = {
 
         return {
             NewExpression: function NewExpression(node) {
-                var tokens = sourceCode.getTokens(node);
-                var prenticesTokens = tokens.filter(function (token) {
-                    return token.value === "(" || token.value === ")";
-                });
+                var token = sourceCode.getTokenAfter(node.callee);
 
-                if (prenticesTokens.length < 2) {
-                    context.report(node, "Missing '()' invoking a constructor.");
+                // Skip ')'
+                while (token && isClosingParen(token)) {
+                    token = sourceCode.getTokenAfter(token);
+                }
+
+                if (!(token && isOpeningParen(token) && isInRange(token, node))) {
+                    context.report({
+                        node: node,
+                        message: "Missing '()' invoking a constructor.",
+                        fix: function fix(fixer) {
+                            return fixer.insertTextAfter(node, "()");
+                        }
+                    });
                 }
             }
         };
     }
 };
 
-},{}],228:[function(require,module,exports){
+},{}],230:[function(require,module,exports){
 /**
  * @fileoverview Rule to check empty newline after "var" statement
  * @author Gopal Venkatesan
@@ -59683,7 +60424,7 @@ module.exports = {
     }
 };
 
-},{}],229:[function(require,module,exports){
+},{}],231:[function(require,module,exports){
 /**
  * @fileoverview Rule to require newlines before `return` statement
  * @author Kai Cataldo
@@ -59701,7 +60442,7 @@ module.exports = {
             category: "Stylistic Issues",
             recommended: false
         },
-
+        fixable: "whitespace",
         schema: []
     },
 
@@ -59787,14 +60528,13 @@ module.exports = {
         }
 
         /**
-         * Checks whether node is preceded by a newline
-         * @param {ASTNode} node - node to check
-         * @returns {boolean} Whether or not the node is preceded by a newline
+         * Returns the line number of the token before the node that is passed in as an argument
+         * @param {ASTNode} node - The node to use as the start of the calculation
+         * @returns {number} Line number of the token before `node`
          * @private
          */
-        function hasNewlineBefore(node) {
-            var tokenBefore = sourceCode.getTokenBefore(node),
-                lineNumNode = node.loc.start.line;
+        function getLineNumberOfTokenBefore(node) {
+            var tokenBefore = sourceCode.getTokenBefore(node);
             var lineNumTokenBefore = void 0;
 
             /**
@@ -59811,9 +60551,55 @@ module.exports = {
                 lineNumTokenBefore = 0; // global return at beginning of script
             }
 
+            return lineNumTokenBefore;
+        }
+
+        /**
+         * Checks whether node is preceded by a newline
+         * @param {ASTNode} node - node to check
+         * @returns {boolean} Whether or not the node is preceded by a newline
+         * @private
+         */
+        function hasNewlineBefore(node) {
+            var lineNumNode = node.loc.start.line;
+            var lineNumTokenBefore = getLineNumberOfTokenBefore(node);
             var commentLines = calcCommentLines(node, lineNumTokenBefore);
 
             return lineNumNode - lineNumTokenBefore - commentLines > 1;
+        }
+
+        /**
+         * Checks whether it is safe to apply a fix to a given return statement.
+         *
+         * The fix is not considered safe if the given return statement has leading comments,
+         * as we cannot safely determine if the newline should be added before or after the comments.
+         * For more information, see: https://github.com/eslint/eslint/issues/5958#issuecomment-222767211
+         *
+         * @param {ASTNode} node - The return statement node to check.
+         * @returns {boolean} `true` if it can fix the node.
+         * @private
+         */
+        function canFix(node) {
+            var leadingComments = sourceCode.getComments(node).leading;
+            var lastLeadingComment = leadingComments[leadingComments.length - 1];
+            var tokenBefore = sourceCode.getTokenBefore(node);
+
+            if (leadingComments.length === 0) {
+                return true;
+            }
+
+            // if the last leading comment ends in the same line as the previous token and
+            // does not share a line with the `return` node, we can consider it safe to fix.
+            // Example:
+            // function a() {
+            //     var b; //comment
+            //     return;
+            // }
+            if (lastLeadingComment.loc.end.line === tokenBefore.loc.end.line && lastLeadingComment.loc.end.line !== node.loc.start.line) {
+                return true;
+            }
+
+            return false;
         }
 
         //--------------------------------------------------------------------------
@@ -59825,7 +60611,16 @@ module.exports = {
                 if (!isFirstNode(node) && !hasNewlineBefore(node)) {
                     context.report({
                         node: node,
-                        message: "Expected newline before return statement."
+                        message: "Expected newline before return statement.",
+                        fix: function fix(fixer) {
+                            if (canFix(node)) {
+                                var tokenBefore = sourceCode.getTokenBefore(node);
+                                var newlines = node.loc.start.line === tokenBefore.loc.end.line ? "\n\n" : "\n";
+
+                                return fixer.insertTextBefore(node, newlines);
+                            }
+                            return null;
+                        }
                     });
                 }
             }
@@ -59833,7 +60628,7 @@ module.exports = {
     }
 };
 
-},{}],230:[function(require,module,exports){
+},{}],232:[function(require,module,exports){
 /**
  * @fileoverview Rule to ensure newline per method call when chaining calls
  * @author Rajendra Patil
@@ -59905,14 +60700,21 @@ module.exports = {
                 }
 
                 if (depth > ignoreChainWithDepth && callee.property.loc.start.line === callee.object.loc.end.line) {
-                    context.report(callee.property, callee.property.loc.start, "Expected line break before `" + getPropertyText(callee) + "`.");
+                    context.report({
+                        node: callee.property,
+                        loc: callee.property.loc.start,
+                        message: "Expected line break before `{{callee}}`.",
+                        data: {
+                            callee: getPropertyText(callee)
+                        }
+                    });
                 }
             }
         };
     }
 };
 
-},{}],231:[function(require,module,exports){
+},{}],233:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag use of alert, confirm, prompt
  * @author Nicholas C. Zakas
@@ -60042,7 +60844,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":160}],232:[function(require,module,exports){
+},{"../ast-utils":160}],234:[function(require,module,exports){
 /**
  * @fileoverview Disallow construction of dense arrays using the Array constructor
  * @author Matt DuVall <http://www.mattduvall.com/>
@@ -60086,7 +60888,7 @@ module.exports = {
     }
 };
 
-},{}],233:[function(require,module,exports){
+},{}],235:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag bitwise identifiers
  * @author Nicholas C. Zakas
@@ -60190,7 +60992,7 @@ module.exports = {
     }
 };
 
-},{}],234:[function(require,module,exports){
+},{}],236:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag use of arguments.callee and arguments.caller.
  * @author Nicholas C. Zakas
@@ -60228,7 +61030,7 @@ module.exports = {
     }
 };
 
-},{}],235:[function(require,module,exports){
+},{}],237:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag use of an lexical declarations inside a case clause
  * @author Erik Arvidsson
@@ -60286,7 +61088,7 @@ module.exports = {
     }
 };
 
-},{}],236:[function(require,module,exports){
+},{}],238:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag variable leak in CatchClauses in IE 8 and earlier
  * @author Ian Christian Myers
@@ -60353,7 +61155,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":160}],237:[function(require,module,exports){
+},{"../ast-utils":160}],239:[function(require,module,exports){
 /**
  * @fileoverview A rule to disallow modifying variables of class declarations
  * @author Toru Nagashima
@@ -60407,7 +61209,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":160}],238:[function(require,module,exports){
+},{"../ast-utils":160}],240:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag assignment in a conditional statement's test expression
  * @author Stephen Murray <spmurrayzzz>
@@ -60543,7 +61345,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":160}],239:[function(require,module,exports){
+},{"../ast-utils":160}],241:[function(require,module,exports){
 /**
  * @fileoverview A rule to warn against using arrow functions when they could be
  * confused with comparisions
@@ -60611,13 +61413,19 @@ module.exports = {
     }
 };
 
-},{"../ast-utils.js":160}],240:[function(require,module,exports){
+},{"../ast-utils.js":160}],242:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag use of console object
  * @author Nicholas C. Zakas
  */
 
 "use strict";
+
+//------------------------------------------------------------------------------
+// Requirements
+//------------------------------------------------------------------------------
+
+var astUtils = require("../ast-utils");
 
 //------------------------------------------------------------------------------
 // Rule Definition
@@ -60648,33 +61456,86 @@ module.exports = {
     },
 
     create: function create(context) {
+        var options = context.options[0] || {};
+        var allowed = options.allow || [];
+
+        /**
+         * Checks whether the given reference is 'console' or not.
+         *
+         * @param {escope.Reference} reference - The reference to check.
+         * @returns {boolean} `true` if the reference is 'console'.
+         */
+        function isConsole(reference) {
+            var id = reference.identifier;
+
+            return id && id.name === "console";
+        }
+
+        /**
+         * Checks whether the property name of the given MemberExpression node
+         * is allowed by options or not.
+         *
+         * @param {ASTNode} node - The MemberExpression node to check.
+         * @returns {boolean} `true` if the property name of the node is allowed.
+         */
+        function isAllowed(node) {
+            var propertyName = astUtils.getStaticPropertyName(node);
+
+            return propertyName && allowed.indexOf(propertyName) !== -1;
+        }
+
+        /**
+         * Checks whether the given reference is a member access which is not
+         * allowed by options or not.
+         *
+         * @param {escope.Reference} reference - The reference to check.
+         * @returns {boolean} `true` if the reference is a member access which
+         *      is not allowed by options.
+         */
+        function isMemberAccessExceptAllowed(reference) {
+            var node = reference.identifier;
+            var parent = node.parent;
+
+            return parent.type === "MemberExpression" && parent.object === node && !isAllowed(parent);
+        }
+
+        /**
+         * Reports the given reference as a violation.
+         *
+         * @param {escope.Reference} reference - The reference to report.
+         * @returns {void}
+         */
+        function report(reference) {
+            var node = reference.identifier.parent;
+
+            context.report({
+                node: node,
+                loc: node.loc,
+                message: "Unexpected console statement."
+            });
+        }
 
         return {
-            MemberExpression: function MemberExpression(node) {
+            "Program:exit": function ProgramExit() {
+                var scope = context.getScope();
+                var consoleVar = astUtils.getVariableByName(scope, "console");
+                var shadowed = consoleVar && consoleVar.defs.length > 0;
 
-                if (node.object.name === "console") {
-                    var blockConsole = true;
+                /* 'scope.through' includes all references to undefined
+                 * variables. If the variable 'console' is not defined, it uses
+                 * 'scope.through'.
+                 */
+                var references = consoleVar ? consoleVar.references : scope.through.filter(isConsole);
 
-                    if (context.options.length > 0) {
-                        var allowedProperties = context.options[0].allow;
-                        var passedProperty = node.property.name;
-                        var propertyIsAllowed = allowedProperties.indexOf(passedProperty) > -1;
-
-                        if (propertyIsAllowed) {
-                            blockConsole = false;
-                        }
-                    }
-
-                    if (blockConsole) {
-                        context.report(node, "Unexpected console statement.");
-                    }
+                if (!shadowed) {
+                    references.filter(isMemberAccessExceptAllowed).forEach(report);
                 }
             }
         };
     }
 };
 
-},{}],241:[function(require,module,exports){
+},{"../ast-utils":160}],243:[function(require,module,exports){
 /**
  * @fileoverview A rule to disallow modifying variables that are declared using `const`
  * @author Toru Nagashima
@@ -60722,7 +61583,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":160}],242:[function(require,module,exports){
+},{"../ast-utils":160}],244:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag use constant conditions
  * @author Christian Schulz <http://rndm.de>
@@ -60870,7 +61731,7 @@ module.exports = {
     }
 };
 
-},{}],243:[function(require,module,exports){
+},{}],245:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag use of continue statement
  * @author Borislav Zhivkov
@@ -60903,7 +61764,7 @@ module.exports = {
     }
 };
 
-},{}],244:[function(require,module,exports){
+},{}],246:[function(require,module,exports){
 /**
  * @fileoverview Rule to forbid control charactes from regular expressions.
  * @author Nicholas C. Zakas
@@ -60994,7 +61855,9 @@ module.exports = {
             }
 
             return controlChars.map(function (x) {
-                return "\\x" + ("0" + x.charCodeAt(0).toString(16)).slice(-2);
+                var hexCode = ("0" + x.charCodeAt(0).toString(16)).slice(-2);
+
+                return "\\x" + hexCode;
             }).concat(stringControlChars);
         }
 
@@ -61022,7 +61885,7 @@ module.exports = {
     }
 };
 
-},{}],245:[function(require,module,exports){
+},{}],247:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag use of a debugger statement
  * @author Nicholas C. Zakas
@@ -61055,7 +61918,7 @@ module.exports = {
     }
 };
 
-},{}],246:[function(require,module,exports){
+},{}],248:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag when deleting variables
  * @author Ilya Volodin
@@ -61090,7 +61953,7 @@ module.exports = {
     }
 };
 
-},{}],247:[function(require,module,exports){
+},{}],249:[function(require,module,exports){
 /**
  * @fileoverview Rule to check for ambiguous div operator in regexes
  * @author Matt DuVall <http://www.mattduvall.com>
@@ -61128,7 +61991,7 @@ module.exports = {
     }
 };
 
-},{}],248:[function(require,module,exports){
+},{}],250:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag duplicate arguments
  * @author Jamund Ferguson
@@ -61202,7 +62065,7 @@ module.exports = {
     }
 };
 
-},{}],249:[function(require,module,exports){
+},{}],251:[function(require,module,exports){
 /**
  * @fileoverview A rule to disallow duplicate name in class members.
  * @author Toru Nagashima
@@ -61319,7 +62182,7 @@ module.exports = {
     }
 };
 
-},{}],250:[function(require,module,exports){
+},{}],252:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag use of duplicate keys in an object.
  * @author Ian Christian Myers
@@ -61472,7 +62335,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":160}],251:[function(require,module,exports){
+},{"../ast-utils":160}],253:[function(require,module,exports){
 /**
  * @fileoverview Rule to disallow a duplicate case label.
  * @author Dieter Oberkofler
@@ -61517,7 +62380,7 @@ module.exports = {
     }
 };
 
-},{}],252:[function(require,module,exports){
+},{}],254:[function(require,module,exports){
 /**
  * @fileoverview Restrict usage of duplicate imports.
  * @author Simen Bekkhus
@@ -61558,8 +62421,11 @@ function checkAndReport(context, node, value, array, message) {
     if (array.indexOf(value) !== -1) {
         context.report({
             node: node,
-            message: "'{{module}}' " + message,
-            data: { module: value }
+            message: "'{{module}}' {{message}}",
+            data: {
+                module: value,
+                message: message
+            }
         });
     }
 }
@@ -61654,7 +62520,7 @@ module.exports = {
     }
 };
 
-},{}],253:[function(require,module,exports){
+},{}],255:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag `else` after a `return` in `if`
  * @author Ian Christian Myers
@@ -61808,7 +62674,7 @@ module.exports = {
     }
 };
 
-},{}],254:[function(require,module,exports){
+},{}],256:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag the use of empty character classes in regular expressions
  * @author Ian Christian Myers
@@ -61865,7 +62731,7 @@ module.exports = {
     }
 };
 
-},{}],255:[function(require,module,exports){
+},{}],257:[function(require,module,exports){
 /**
  * @fileoverview Rule to disallow empty functions.
  * @author Toru Nagashima
@@ -61997,7 +62863,10 @@ module.exports = {
                 context.report({
                     node: node,
                     loc: node.body.loc.start,
-                    message: "Unexpected empty " + SHOW_KIND[kind] + "."
+                    message: "Unexpected empty {{kind}}.",
+                    data: {
+                        kind: SHOW_KIND[kind]
+                    }
                 });
             }
         }
@@ -62010,7 +62879,7 @@ module.exports = {
     }
 };
 
-},{}],256:[function(require,module,exports){
+},{}],258:[function(require,module,exports){
 /**
  * @fileoverview Rule to disallow an empty pattern
  * @author Alberto Rodríguez
@@ -62048,7 +62917,7 @@ module.exports = {
     }
 };
 
-},{}],257:[function(require,module,exports){
+},{}],259:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag use of an empty block statement
  * @author Nicholas C. Zakas
@@ -62124,7 +62993,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":160}],258:[function(require,module,exports){
+},{"../ast-utils":160}],260:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag comparisons to null without a type-checking
  * operator.
@@ -62162,7 +63031,7 @@ module.exports = {
     }
 };
 
-},{}],259:[function(require,module,exports){
+},{}],261:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag use of eval() statement
  * @author Nicholas C. Zakas
@@ -62450,7 +63319,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":160}],260:[function(require,module,exports){
+},{"../ast-utils":160}],262:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag assignment of the exception parameter
  * @author Stephen Murray <spmurrayzzz>
@@ -62496,7 +63365,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":160}],261:[function(require,module,exports){
+},{"../ast-utils":160}],263:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag adding properties to native object's prototypes.
  * @author David Nelson
@@ -62569,7 +63438,13 @@ module.exports = {
 
                 modifiedBuiltins.forEach(function (builtin) {
                     if (lhs.object.object.name === builtin) {
-                        context.report(node, builtin + " prototype is read only, properties should not be added.");
+                        context.report({
+                            node: node,
+                            message: "{{builtin}} prototype is read only, properties should not be added.",
+                            data: {
+                                builtin: builtin
+                            }
+                        });
                     }
                 });
             },
@@ -62589,7 +63464,13 @@ module.exports = {
 
                     if (object && object.type === "Identifier" && modifiedBuiltins.indexOf(object.name) > -1 && subject.property.name === "prototype") {
 
-                        context.report(node, object.name + " prototype is read only, properties should not be added.");
+                        context.report({
+                            node: node,
+                            message: "{{objectName}} prototype is read only, properties should not be added.",
+                            data: {
+                                objectName: object.name
+                            }
+                        });
                     }
                 }
             }
@@ -62597,7 +63478,7 @@ module.exports = {
     }
 };
 
-},{"globals":138}],262:[function(require,module,exports){
+},{"globals":138}],264:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag unnecessary bind calls
  * @author Bence Dányi <bence@danyi.me>
@@ -62728,7 +63609,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":160}],263:[function(require,module,exports){
+},{"../ast-utils":160}],265:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag unnecessary double negation in Boolean contexts
  * @author Brandon Mills
@@ -62803,7 +63684,7 @@ module.exports = {
     }
 };
 
-},{}],264:[function(require,module,exports){
+},{}],266:[function(require,module,exports){
 /**
  * @fileoverview Rule to disallow unnecessary labels
  * @author Toru Nagashima
@@ -62945,7 +63826,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":160}],265:[function(require,module,exports){
+},{"../ast-utils":160}],267:[function(require,module,exports){
 /**
  * @fileoverview Disallow parenthesising higher precedence subexpressions.
  * @author Michael Ficarra
@@ -63509,7 +64390,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils.js":160,"esutils":136}],266:[function(require,module,exports){
+},{"../ast-utils.js":160,"esutils":136}],268:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag use of unnecessary semicolons
  * @author Nicholas C. Zakas
@@ -63605,7 +64486,7 @@ module.exports = {
     }
 };
 
-},{}],267:[function(require,module,exports){
+},{}],269:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag fall-through cases in switch statements.
  * @author Matt DuVall <http://mattduvall.com/>
@@ -63736,7 +64617,7 @@ module.exports = {
     }
 };
 
-},{"lodash":158}],268:[function(require,module,exports){
+},{"lodash":158}],270:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag use of a leading/trailing decimal point in a numeric literal
  * @author James Allardice
@@ -63756,7 +64637,9 @@ module.exports = {
             recommended: false
         },
 
-        schema: []
+        schema: [],
+
+        fixable: "code"
     },
 
     create: function create(context) {
@@ -63766,10 +64649,22 @@ module.exports = {
 
                 if (typeof node.value === "number") {
                     if (node.raw.indexOf(".") === 0) {
-                        context.report(node, "A leading decimal point can be confused with a dot.");
+                        context.report({
+                            node: node,
+                            message: "A leading decimal point can be confused with a dot.",
+                            fix: function fix(fixer) {
+                                return fixer.insertTextBefore(node, "0");
+                            }
+                        });
                     }
                     if (node.raw.indexOf(".") === node.raw.length - 1) {
-                        context.report(node, "A trailing decimal point can be confused with a dot.");
+                        context.report({
+                            node: node,
+                            message: "A trailing decimal point can be confused with a dot.",
+                            fix: function fix(fixer) {
+                                return fixer.insertTextAfter(node, "0");
+                            }
+                        });
                     }
                 }
             }
@@ -63777,7 +64672,7 @@ module.exports = {
     }
 };
 
-},{}],269:[function(require,module,exports){
+},{}],271:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag use of function declaration identifiers as variables.
  * @author Ian Christian Myers
@@ -63842,7 +64737,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":160}],270:[function(require,module,exports){
+},{"../ast-utils":160}],272:[function(require,module,exports){
 /**
  * @fileoverview Rule to disallow assignments to native objects or read-only global variables
  * @author Ilya Volodin
@@ -63923,13 +64818,15 @@ module.exports = {
     }
 };
 
-},{}],271:[function(require,module,exports){
+},{}],273:[function(require,module,exports){
 /**
  * @fileoverview A rule to disallow the type conversions with shorter notations.
  * @author Toru Nagashima
  */
 
 "use strict";
+
+var astUtils = require("../ast-utils");
 
 //------------------------------------------------------------------------------
 // Helpers
@@ -64012,12 +64909,32 @@ function getNonNumericOperand(node) {
 }
 
 /**
+ * Checks whether a node is a string literal or not.
+ * @param {ASTNode} node The node to check.
+ * @returns {boolean} Whether or not the passed in node is a
+ * string literal or not.
+ */
+function isStringLiteral(node) {
+    return astUtils.isStringLiteral(node) && node.type !== "TemplateLiteral";
+}
+
+/**
+ * Checks whether a node is an empty string literal or not.
+ * @param {ASTNode} node The node to check.
+ * @returns {boolean} Whether or not the passed in node is an
+ * empty string literal or not.
+ */
+function isEmptyString(node) {
+    return isStringLiteral(node) && node.value === "";
+}
+
+/**
  * Checks whether or not a node is a concatenating with an empty string.
  * @param {ASTNode} node - A BinaryExpression node to check.
  * @returns {boolean} Whether or not the node is a concatenating with an empty string.
  */
 function isConcatWithEmptyString(node) {
-    return node.operator === "+" && (node.left.type === "Literal" && node.left.value === "" || node.right.type === "Literal" && node.right.value === "");
+    return node.operator === "+" && (isEmptyString(node.left) && !isStringLiteral(node.right) || isEmptyString(node.right) && !isStringLiteral(node.left));
 }
 
 /**
@@ -64026,20 +64943,16 @@ function isConcatWithEmptyString(node) {
  * @returns {boolean} Whether or not the node is appended with an empty string.
  */
 function isAppendEmptyString(node) {
-    return node.operator === "+=" && node.right.type === "Literal" && node.right.value === "";
+    return node.operator === "+=" && isEmptyString(node.right);
 }
 
 /**
- * Gets a node that is the left or right operand of a node, is not the specified literal.
- * @param {ASTNode} node - A BinaryExpression node to get.
- * @param {any} value - A literal value to check.
- * @returns {ASTNode} A node that is the left or right operand of the node, is not the specified literal.
+ * Returns the operand that is not an empty string from a flagged BinaryExpression.
+ * @param {ASTNode} node - The flagged BinaryExpression node to check.
+ * @returns {ASTNode} The operand that is not an empty string from a flagged BinaryExpression.
  */
-function getOtherOperand(node, value) {
-    if (node.left.type === "Literal" && node.left.value === value) {
-        return node.right;
-    }
-    return node.left;
+function getNonEmptyOperand(node) {
+    return isEmptyString(node.left) ? node.right : node.left;
 }
 
 //------------------------------------------------------------------------------
@@ -64054,6 +64967,7 @@ module.exports = {
             recommended: false
         },
 
+        fixable: "code",
         schema: [{
             type: "object",
             properties: {
@@ -64082,6 +64996,25 @@ module.exports = {
         var options = parseOptions(context.options[0]);
         var sourceCode = context.getSourceCode();
 
+        /**
+        * Reports an error and autofixes the node
+        * @param {ASTNode} node - An ast node to report the error on.
+        * @param {string} recommendation - The recommended code for the issue
+        * @returns {void}
+        */
+        function report(node, recommendation) {
+            context.report({
+                node: node,
+                message: "use `{{recommendation}}` instead.",
+                data: {
+                    recommendation: recommendation
+                },
+                fix: function fix(fixer) {
+                    return fixer.replaceText(node, recommendation);
+                }
+            });
+        }
+
         return {
             UnaryExpression: function UnaryExpression(node) {
                 var operatorAllowed = void 0;
@@ -64089,25 +65022,25 @@ module.exports = {
                 // !!foo
                 operatorAllowed = options.allow.indexOf("!!") >= 0;
                 if (!operatorAllowed && options.boolean && isDoubleLogicalNegating(node)) {
-                    context.report(node, "use `Boolean({{code}})` instead.", {
-                        code: sourceCode.getText(node.argument.argument)
-                    });
+                    var recommendation = "Boolean(" + sourceCode.getText(node.argument.argument) + ")";
+
+                    report(node, recommendation);
                 }
 
                 // ~foo.indexOf(bar)
                 operatorAllowed = options.allow.indexOf("~") >= 0;
                 if (!operatorAllowed && options.boolean && isBinaryNegatingOfIndexOf(node)) {
-                    context.report(node, "use `{{code}} !== -1` instead.", {
-                        code: sourceCode.getText(node.argument)
-                    });
+                    var _recommendation = sourceCode.getText(node.argument) + " !== -1";
+
+                    report(node, _recommendation);
                 }
 
                 // +foo
                 operatorAllowed = options.allow.indexOf("+") >= 0;
                 if (!operatorAllowed && options.number && node.operator === "+" && !isNumeric(node.argument)) {
-                    context.report(node, "use `Number({{code}})` instead.", {
-                        code: sourceCode.getText(node.argument)
-                    });
+                    var _recommendation2 = "Number(" + sourceCode.getText(node.argument) + ")";
+
+                    report(node, _recommendation2);
                 }
             },
 
@@ -64121,17 +65054,17 @@ module.exports = {
                 var nonNumericOperand = !operatorAllowed && options.number && isMultiplyByOne(node) && getNonNumericOperand(node);
 
                 if (nonNumericOperand) {
-                    context.report(node, "use `Number({{code}})` instead.", {
-                        code: sourceCode.getText(nonNumericOperand)
-                    });
+                    var recommendation = "Number(" + sourceCode.getText(nonNumericOperand) + ")";
+
+                    report(node, recommendation);
                 }
 
                 // "" + foo
                 operatorAllowed = options.allow.indexOf("+") >= 0;
                 if (!operatorAllowed && options.string && isConcatWithEmptyString(node)) {
-                    context.report(node, "use `String({{code}})` instead.", {
-                        code: sourceCode.getText(getOtherOperand(node, ""))
-                    });
+                    var _recommendation3 = "String(" + sourceCode.getText(getNonEmptyOperand(node)) + ")";
+
+                    report(node, _recommendation3);
                 }
             },
             AssignmentExpression: function AssignmentExpression(node) {
@@ -64140,16 +65073,17 @@ module.exports = {
                 var operatorAllowed = options.allow.indexOf("+") >= 0;
 
                 if (!operatorAllowed && options.string && isAppendEmptyString(node)) {
-                    context.report(node, "use `{{code}} = String({{code}})` instead.", {
-                        code: sourceCode.getText(getOtherOperand(node, ""))
-                    });
+                    var code = sourceCode.getText(getNonEmptyOperand(node));
+                    var recommendation = code + " = String(" + code + ")";
+
+                    report(node, recommendation);
                 }
             }
         };
     }
 };
 
-},{}],272:[function(require,module,exports){
+},{"../ast-utils":160}],274:[function(require,module,exports){
 /**
  * @fileoverview Rule to check for implicit global variables and functions.
  * @author Joshua Peek
@@ -64205,7 +65139,7 @@ module.exports = {
     }
 };
 
-},{}],273:[function(require,module,exports){
+},{}],275:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag use of implied eval via setTimeout and setInterval
  * @author James Allardice
@@ -64359,7 +65293,7 @@ module.exports = {
     }
 };
 
-},{}],274:[function(require,module,exports){
+},{}],276:[function(require,module,exports){
 /**
  * @fileoverview Enforces or disallows inline comments.
  * @author Greg Cochard
@@ -64425,7 +65359,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":160}],275:[function(require,module,exports){
+},{"../ast-utils":160}],277:[function(require,module,exports){
 /**
  * @fileoverview Rule to enforce declarations in program or function body root.
  * @author Brandon Mills
@@ -64505,7 +65439,7 @@ module.exports = {
     }
 };
 
-},{}],276:[function(require,module,exports){
+},{}],278:[function(require,module,exports){
 /**
  * @fileoverview Validate strings passed to the RegExp constructor
  * @author Michael Ficarra
@@ -64580,7 +65514,10 @@ module.exports = {
                 try {
                     void new RegExp(node.arguments[0].value);
                 } catch (e) {
-                    context.report(node, e.message + ".");
+                    context.report({
+                        node: node,
+                        message: e.message + "."
+                    });
                 }
 
                 if (flags) {
@@ -64588,7 +65525,13 @@ module.exports = {
                     try {
                         espree.parse("/./" + flags, context.parserOptions);
                     } catch (ex) {
-                        context.report(node, "Invalid flags supplied to RegExp constructor '" + flags + "'.");
+                        context.report({
+                            node: node,
+                            message: "Invalid flags supplied to RegExp constructor '{{flags}}'.",
+                            data: {
+                                flags: flags
+                            }
+                        });
                     }
                 }
             }
@@ -64601,7 +65544,7 @@ module.exports = {
     }
 };
 
-},{"espree":"espree"}],277:[function(require,module,exports){
+},{"espree":"espree"}],279:[function(require,module,exports){
 /**
  * @fileoverview A rule to disallow `this` keywords outside of classes or class-like objects.
  * @author Toru Nagashima
@@ -64719,7 +65662,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":160}],278:[function(require,module,exports){
+},{"../ast-utils":160}],280:[function(require,module,exports){
 /**
  * @fileoverview Rule to disalow whitespace that is not a tab or space, whitespace inside strings and comments are allowed
  * @author Jonathan Kingston
@@ -64965,7 +65908,7 @@ module.exports = {
     }
 };
 
-},{}],279:[function(require,module,exports){
+},{}],281:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag usage of __iterator__ property
  * @author Ian Christian Myers
@@ -65001,7 +65944,7 @@ module.exports = {
     }
 };
 
-},{}],280:[function(require,module,exports){
+},{}],282:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag labels that are the same as an identifier
  * @author Ian Christian Myers
@@ -65067,7 +66010,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":160}],281:[function(require,module,exports){
+},{"../ast-utils":160}],283:[function(require,module,exports){
 /**
  * @fileoverview Disallow Labeled Statements
  * @author Nicholas C. Zakas
@@ -65207,7 +66150,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":160}],282:[function(require,module,exports){
+},{"../ast-utils":160}],284:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag blocks with no reason to exist
  * @author Brandon Mills
@@ -65318,7 +66261,7 @@ module.exports = {
     }
 };
 
-},{}],283:[function(require,module,exports){
+},{}],285:[function(require,module,exports){
 /**
  * @fileoverview Rule to disallow if as the only statmenet in an else block
  * @author Brandon Mills
@@ -65356,7 +66299,7 @@ module.exports = {
     }
 };
 
-},{}],284:[function(require,module,exports){
+},{}],286:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag creation of function inside a loop
  * @author Ilya Volodin
@@ -65543,7 +66486,7 @@ module.exports = {
     }
 };
 
-},{}],285:[function(require,module,exports){
+},{}],287:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag statements that use magic numbers (adapted from https://github.com/danielstjules/buddy.js)
  * @author Vincent Lemeunier
@@ -65670,10 +66613,13 @@ module.exports = {
                             message: "Number constants declarations must use 'const'."
                         });
                     }
-                } else if (okTypes.indexOf(parent.type) === -1 || parent.type === "AssignmentExpression" && parent.operator !== "=") {
+                } else if (okTypes.indexOf(parent.type) === -1 || parent.type === "AssignmentExpression" && parent.left.type === "Identifier") {
                     context.report({
                         node: node,
-                        message: "No magic number: " + raw + "."
+                        message: "No magic number: {{raw}}.",
+                        data: {
+                            raw: raw
+                        }
                     });
                 }
             }
@@ -65681,7 +66627,7 @@ module.exports = {
     }
 };
 
-},{}],286:[function(require,module,exports){
+},{}],288:[function(require,module,exports){
 /**
  * @fileoverview Rule to disallow mixed binary operators.
  * @author Toru Nagashima
@@ -65833,17 +66779,23 @@ module.exports = {
             var parent = node.parent;
             var left = parent.left === node ? node : parent;
             var right = parent.left !== node ? node : parent;
-            var message = "Unexpected mix of '" + left.operator + "' and '" + right.operator + "'.";
+            var message = "Unexpected mix of '{{leftOperator}}' and '{{rightOperator}}'.";
+            var data = {
+                leftOperator: left.operator,
+                rightOperator: right.operator
+            };
 
             context.report({
                 node: left,
                 loc: getOperatorToken(left).loc.start,
-                message: message
+                message: message,
+                data: data
             });
             context.report({
                 node: right,
                 loc: getOperatorToken(right).loc.start,
-                message: message
+                message: message,
+                data: data
             });
         }
 
@@ -65867,7 +66819,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils.js":160}],287:[function(require,module,exports){
+},{"../ast-utils.js":160}],289:[function(require,module,exports){
 /**
  * @fileoverview Rule to enforce grouped require statements for Node.JS
  * @author Raphael Pigulla
@@ -66064,7 +67016,7 @@ module.exports = {
     }
 };
 
-},{}],288:[function(require,module,exports){
+},{}],290:[function(require,module,exports){
 /**
  * @fileoverview Disallow mixed spaces and tabs for indentation
  * @author Jary Niebur
@@ -66203,7 +67155,7 @@ module.exports = {
     }
 };
 
-},{}],289:[function(require,module,exports){
+},{}],291:[function(require,module,exports){
 /**
  * @fileoverview Disallow use of multiple spaces.
  * @author Nicholas C. Zakas
@@ -66344,7 +67296,7 @@ module.exports = {
     }
 };
 
-},{}],290:[function(require,module,exports){
+},{}],292:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag when using multiline strings
  * @author Ilya Volodin
@@ -66395,7 +67347,7 @@ module.exports = {
     }
 };
 
-},{}],291:[function(require,module,exports){
+},{}],293:[function(require,module,exports){
 /**
  * @fileoverview Disallows multiple blank lines.
  * implementation adapted from the no-trailing-spaces rule.
@@ -66541,7 +67493,10 @@ module.exports = {
                     context.report({
                         node: node,
                         loc: node.loc.start,
-                        message: "Too many blank lines at the beginning of file. Max of " + maxBOF + " allowed.",
+                        message: "Too many blank lines at the beginning of file. Max of {{maxBOF}} allowed.",
+                        data: {
+                            maxBOF: maxBOF
+                        },
                         fix: fix
                     });
                 }
@@ -66557,7 +67512,7 @@ module.exports = {
                     } else {
                         var location = {
                             line: lastLocation + 1,
-                            column: 1
+                            column: 0
                         };
 
                         if (lastLocation < firstOfEndingBlankLines) {
@@ -66571,7 +67526,11 @@ module.exports = {
                                 context.report({
                                     node: node,
                                     loc: location,
-                                    message: "More than " + max + " blank " + (max === 1 ? "line" : "lines") + " not allowed.",
+                                    message: "More than {{max}} blank {{lines}} not allowed.",
+                                    data: {
+                                        max: max,
+                                        lines: max === 1 ? "line" : "lines"
+                                    },
                                     fix: fix
                                 });
                             }
@@ -66585,7 +67544,10 @@ module.exports = {
                                 context.report({
                                     node: node,
                                     loc: location,
-                                    message: "Too many blank lines at the end of file. Max of " + maxEOF + " allowed.",
+                                    message: "Too many blank lines at the end of file. Max of {{maxEOF}} allowed.",
+                                    data: {
+                                        maxEOF: maxEOF
+                                    },
                                     fix: fix
                                 });
                             }
@@ -66600,7 +67562,7 @@ module.exports = {
     }
 };
 
-},{}],292:[function(require,module,exports){
+},{}],294:[function(require,module,exports){
 /**
  * @fileoverview Rule to disallow assignments to native objects or read-only global variables
  * @author Ilya Volodin
@@ -66685,7 +67647,7 @@ module.exports = {
     }
 };
 
-},{}],293:[function(require,module,exports){
+},{}],295:[function(require,module,exports){
 /**
  * @fileoverview Rule to disallow a negated condition
  * @author Alberto Rodríguez
@@ -66768,7 +67730,7 @@ module.exports = {
     }
 };
 
-},{}],294:[function(require,module,exports){
+},{}],296:[function(require,module,exports){
 /**
  * @fileoverview A rule to disallow negated left operands of the `in` operator
  * @author Michael Ficarra
@@ -66806,7 +67768,7 @@ module.exports = {
     }
 };
 
-},{}],295:[function(require,module,exports){
+},{}],297:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag nested ternary expressions
  * @author Ian Christian Myers
@@ -66841,7 +67803,7 @@ module.exports = {
     }
 };
 
-},{}],296:[function(require,module,exports){
+},{}],298:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag when using new Function
  * @author Ilya Volodin
@@ -66889,7 +67851,7 @@ module.exports = {
     }
 };
 
-},{}],297:[function(require,module,exports){
+},{}],299:[function(require,module,exports){
 /**
  * @fileoverview A rule to disallow calls to the Object constructor
  * @author Matt DuVall <http://www.mattduvall.com/>
@@ -66924,7 +67886,7 @@ module.exports = {
     }
 };
 
-},{}],298:[function(require,module,exports){
+},{}],300:[function(require,module,exports){
 /**
  * @fileoverview Rule to disallow use of new operator with the `require` function
  * @author Wil Moore III
@@ -66959,7 +67921,7 @@ module.exports = {
     }
 };
 
-},{}],299:[function(require,module,exports){
+},{}],301:[function(require,module,exports){
 /**
  * @fileoverview Rule to disallow use of the new operator with the `Symbol` object
  * @author Alberto Rodríguez
@@ -67003,7 +67965,7 @@ module.exports = {
     }
 };
 
-},{}],300:[function(require,module,exports){
+},{}],302:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag when using constructor for wrapper objects
  * @author Ilya Volodin
@@ -67040,7 +68002,7 @@ module.exports = {
     }
 };
 
-},{}],301:[function(require,module,exports){
+},{}],303:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag statements with function invocation preceded by
  * "new" and not part of assignment
@@ -67077,7 +68039,7 @@ module.exports = {
     }
 };
 
-},{}],302:[function(require,module,exports){
+},{}],304:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag use of an object property of the global object (Math and JSON) as a function
  * @author James Allardice
@@ -67117,7 +68079,7 @@ module.exports = {
     }
 };
 
-},{}],303:[function(require,module,exports){
+},{}],305:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag octal escape sequences in string literals.
  * @author Ian Christian Myers
@@ -67163,7 +68125,7 @@ module.exports = {
     }
 };
 
-},{}],304:[function(require,module,exports){
+},{}],306:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag when initializing octal literal
  * @author Ilya Volodin
@@ -67198,7 +68160,7 @@ module.exports = {
     }
 };
 
-},{}],305:[function(require,module,exports){
+},{}],307:[function(require,module,exports){
 /**
  * @fileoverview Disallow reassignment of function parameters.
  * @author Nat Burns
@@ -67336,7 +68298,7 @@ module.exports = {
     }
 };
 
-},{}],306:[function(require,module,exports){
+},{}],308:[function(require,module,exports){
 /**
  * @fileoverview Disallow string concatenation when using __dirname and __filename
  * @author Nicholas C. Zakas
@@ -67381,7 +68343,7 @@ module.exports = {
     }
 };
 
-},{}],307:[function(require,module,exports){
+},{}],309:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag use of unary increment and decrement operators.
  * @author Ian Christian Myers
@@ -67429,13 +68391,19 @@ module.exports = {
                 if (allowInForAfterthought && node.parent.type === "ForStatement") {
                     return;
                 }
-                context.report(node, "Unary operator '" + node.operator + "' used.");
+                context.report({
+                    node: node,
+                    message: "Unary operator '{{operator}}' used.",
+                    data: {
+                        operator: node.operator
+                    }
+                });
             }
         };
     }
 };
 
-},{}],308:[function(require,module,exports){
+},{}],310:[function(require,module,exports){
 /**
  * @fileoverview Disallow the use of process.env()
  * @author Vignesh Anand
@@ -67472,7 +68440,7 @@ module.exports = {
     }
 };
 
-},{}],309:[function(require,module,exports){
+},{}],311:[function(require,module,exports){
 /**
  * @fileoverview Disallow the use of process.exit()
  * @author Nicholas C. Zakas
@@ -67512,7 +68480,7 @@ module.exports = {
     }
 };
 
-},{}],310:[function(require,module,exports){
+},{}],312:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag usage of __proto__ property
  * @author Ilya Volodin
@@ -67548,7 +68516,7 @@ module.exports = {
     }
 };
 
-},{}],311:[function(require,module,exports){
+},{}],313:[function(require,module,exports){
 /**
  * @fileoverview Rule to disallow use of Object.prototype builtins on objects
  * @author Andrew Levine
@@ -67600,7 +68568,7 @@ module.exports = {
     }
 };
 
-},{}],312:[function(require,module,exports){
+},{}],314:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag when the same variable is declared more then once.
  * @author Ilya Volodin
@@ -67702,7 +68670,7 @@ module.exports = {
     }
 };
 
-},{}],313:[function(require,module,exports){
+},{}],315:[function(require,module,exports){
 /**
  * @fileoverview Rule to count multiple spaces in regular expressions
  * @author Matt DuVall <http://www.mattduvall.com/>
@@ -67740,7 +68708,18 @@ module.exports = {
                 regexResults = multipleSpacesRegex.exec(value);
 
             if (regexResults !== null) {
-                context.report(node, "Spaces are hard to count. Use {" + regexResults[0].length + "}.");
+                context.report({
+                    node: node,
+                    message: "Spaces are hard to count. Use {{{count}}}.",
+                    data: {
+                        count: regexResults[0].length
+                    }
+                });
+
+                /*
+                 * TODO: (platinumazure) Fix message to use rule message
+                 * substitution when api.report is fixed in lib/eslint.js.
+                 */
             }
         }
 
@@ -67790,7 +68769,7 @@ module.exports = {
     }
 };
 
-},{}],314:[function(require,module,exports){
+},{}],316:[function(require,module,exports){
 /**
  * @fileoverview Restrict usage of specified globals.
  * @author Benoît Zugmeyer
@@ -67870,7 +68849,7 @@ module.exports = {
     }
 };
 
-},{}],315:[function(require,module,exports){
+},{}],317:[function(require,module,exports){
 /**
  * @fileoverview Restrict usage of specified node imports.
  * @author Guy Ellis
@@ -67923,7 +68902,7 @@ module.exports = {
     }
 };
 
-},{}],316:[function(require,module,exports){
+},{}],318:[function(require,module,exports){
 /**
  * @fileoverview Restrict usage of specified node modules.
  * @author Christian Schulz
@@ -68016,7 +68995,94 @@ module.exports = {
     }
 };
 
-},{}],317:[function(require,module,exports){
+},{}],319:[function(require,module,exports){
+/**
+ * @fileoverview Rule to disallow certain object properties
+ * @author Will Klein & Eli White
+ */
+
+"use strict";
+
+var astUtils = require("../ast-utils");
+
+//------------------------------------------------------------------------------
+// Rule Definition
+//------------------------------------------------------------------------------
+
+module.exports = {
+    meta: {
+        docs: {
+            description: "disallow certain properties on certain objects",
+            category: "Node.js and CommonJS",
+            recommended: false
+        },
+
+        schema: {
+            type: "array",
+            items: {
+                type: "object",
+                properties: {
+                    object: {
+                        type: "string"
+                    },
+                    property: {
+                        type: "string"
+                    },
+                    message: {
+                        type: "string"
+                    }
+                },
+                additionalProperties: false,
+                required: ["object", "property"]
+            },
+            uniqueItems: true
+        }
+    },
+
+    create: function create(context) {
+        var restrictedCalls = context.options;
+
+        if (restrictedCalls.length === 0) {
+            return {};
+        }
+
+        var restrictedProperties = restrictedCalls.reduce(function (restrictions, option) {
+            var objectName = option.object;
+            var propertyName = option.property;
+
+            if (!restrictions.has(objectName)) {
+                restrictions.set(objectName, new Map());
+            }
+
+            restrictions.get(objectName).set(propertyName, {
+                message: option.message
+            });
+
+            return restrictions;
+        }, new Map());
+
+        return {
+            MemberExpression: function MemberExpression(node) {
+                var objectName = node.object && node.object.name;
+                var propertyName = astUtils.getStaticPropertyName(node);
+                var matchedObject = restrictedProperties.get(objectName);
+                var matchedObjectProperty = matchedObject && matchedObject.get(propertyName);
+
+                if (matchedObjectProperty) {
+                    var message = matchedObjectProperty.message ? " " + matchedObjectProperty.message : "";
+
+                    context.report(node, "'{{objectName}}.{{propertyName}}' is restricted from being used.{{message}}", {
+                        objectName: objectName,
+                        propertyName: propertyName,
+                        message: message
+                    });
+                }
+            }
+        };
+    }
+};
+
+},{"../ast-utils":160}],320:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag use of certain node types
  * @author Burak Yigit Kaya
@@ -68068,7 +69134,7 @@ module.exports = {
     }
 };
 
-},{"espree":"espree"}],318:[function(require,module,exports){
+},{"espree":"espree"}],321:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag when return statement contains assignment
  * @author Ilya Volodin
@@ -68146,7 +69212,7 @@ module.exports = {
     }
 };
 
-},{}],319:[function(require,module,exports){
+},{}],322:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag when using javascript: urls
  * @author Ilya Volodin
@@ -68187,7 +69253,7 @@ module.exports = {
     }
 };
 
-},{}],320:[function(require,module,exports){
+},{}],323:[function(require,module,exports){
 /**
  * @fileoverview Rule to disallow assignments where both sides are exactly the same
  * @author Toru Nagashima
@@ -68363,7 +69429,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":160}],321:[function(require,module,exports){
+},{"../ast-utils":160}],324:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag comparison where left part is the same as the right
  * part.
@@ -68401,7 +69467,7 @@ module.exports = {
     }
 };
 
-},{}],322:[function(require,module,exports){
+},{}],325:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag use of comma operator
  * @author Brandon Mills
@@ -68505,7 +69571,7 @@ module.exports = {
     }
 };
 
-},{}],323:[function(require,module,exports){
+},{}],326:[function(require,module,exports){
 /**
  * @fileoverview Disallow shadowing of NaN, undefined, and Infinity (ES5 section 15.1.1)
  * @author Michael Ficarra
@@ -68539,7 +69605,13 @@ module.exports = {
          */
         function checkForViolation(id) {
             if (RESTRICTED.indexOf(id.name) > -1) {
-                context.report(id, "Shadowing of global property '" + id.name + "'.");
+                context.report({
+                    node: id,
+                    message: "Shadowing of global property '{{idName}}'.",
+                    data: {
+                        idName: id.name
+                    }
+                });
             }
         }
 
@@ -68569,7 +69641,7 @@ module.exports = {
     }
 };
 
-},{}],324:[function(require,module,exports){
+},{}],327:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag on declaring variables already declared in the outer scope
  * @author Ilya Volodin
@@ -68738,7 +69810,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":160}],325:[function(require,module,exports){
+},{"../ast-utils":160}],328:[function(require,module,exports){
 /**
  * @fileoverview Rule to check that spaced function application
  * @author Matt DuVall <http://www.mattduvall.com>
@@ -68807,7 +69879,7 @@ module.exports = {
     }
 };
 
-},{}],326:[function(require,module,exports){
+},{}],329:[function(require,module,exports){
 /**
  * @fileoverview Disallow sparse arrays
  * @author Nicholas C. Zakas
@@ -68848,7 +69920,7 @@ module.exports = {
     }
 };
 
-},{}],327:[function(require,module,exports){
+},{}],330:[function(require,module,exports){
 /**
  * @fileoverview Rule to check for properties whose identifier ends with the string Sync
  * @author Matt DuVall<http://mattduvall.com/>
@@ -68881,14 +69953,20 @@ module.exports = {
                     syncRegex = /.*Sync$/;
 
                 if (syncRegex.exec(propertyName) !== null) {
-                    context.report(node, "Unexpected sync method: '" + propertyName + "'.");
+                    context.report({
+                        node: node,
+                        message: "Unexpected sync method: '{{propertyName}}'.",
+                        data: {
+                            propertyName: propertyName
+                        }
+                    });
                 }
             }
         };
     }
 };
 
-},{}],328:[function(require,module,exports){
+},{}],331:[function(require,module,exports){
 /**
  * @fileoverview Rule to check for tabs inside a file
  * @author Gyandeep Singh
@@ -68934,7 +70012,7 @@ module.exports = {
     }
 };
 
-},{}],329:[function(require,module,exports){
+},{}],332:[function(require,module,exports){
 /**
  * @fileoverview Warn when using template string syntax in regular strings
  * @author Jeroen Engels
@@ -68972,7 +70050,7 @@ module.exports = {
     }
 };
 
-},{}],330:[function(require,module,exports){
+},{}],333:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag use of ternary operators.
  * @author Ian Christian Myers
@@ -69005,7 +70083,7 @@ module.exports = {
     }
 };
 
-},{}],331:[function(require,module,exports){
+},{}],334:[function(require,module,exports){
 /**
  * @fileoverview A rule to disallow using `this`/`super` before `super()`.
  * @author Toru Nagashima
@@ -69294,7 +70372,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":160}],332:[function(require,module,exports){
+},{"../ast-utils":160}],335:[function(require,module,exports){
 /**
  * @fileoverview Rule to restrict what can be thrown as an exception.
  * @author Dieter Oberkofler
@@ -69374,7 +70452,7 @@ module.exports = {
     }
 };
 
-},{}],333:[function(require,module,exports){
+},{}],336:[function(require,module,exports){
 /**
  * @fileoverview Disallow trailing spaces at the end of lines.
  * @author Nodeca Team <https://github.com/nodeca>
@@ -69502,7 +70580,7 @@ module.exports = {
     }
 };
 
-},{}],334:[function(require,module,exports){
+},{}],337:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag when initializing to undefined
  * @author Ilya Volodin
@@ -69540,7 +70618,7 @@ module.exports = {
     }
 };
 
-},{}],335:[function(require,module,exports){
+},{}],338:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag references to undeclared variables.
  * @author Mark Macdonald
@@ -69612,7 +70690,7 @@ module.exports = {
     }
 };
 
-},{}],336:[function(require,module,exports){
+},{}],339:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag references to the undefined variable.
  * @author Michael Ficarra
@@ -69650,7 +70728,7 @@ module.exports = {
     }
 };
 
-},{}],337:[function(require,module,exports){
+},{}],340:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag trailing underscores in variable declarations.
  * @author Matt DuVall <http://www.mattduvall.com>
@@ -69758,7 +70836,13 @@ module.exports = {
                 var identifier = node.id.name;
 
                 if (typeof identifier !== "undefined" && hasTrailingUnderscore(identifier) && !isAllowed(identifier)) {
-                    context.report(node, "Unexpected dangling '_' in '" + identifier + "'.");
+                    context.report({
+                        node: node,
+                        message: "Unexpected dangling '_' in '{{identifier}}'.",
+                        data: {
+                            identifier: identifier
+                        }
+                    });
                 }
             }
         }
@@ -69773,7 +70857,13 @@ module.exports = {
             var identifier = node.id.name;
 
             if (typeof identifier !== "undefined" && hasTrailingUnderscore(identifier) && !isSpecialCaseIdentifierInVariableExpression(identifier) && !isAllowed(identifier)) {
-                context.report(node, "Unexpected dangling '_' in '" + identifier + "'.");
+                context.report({
+                    node: node,
+                    message: "Unexpected dangling '_' in '{{identifier}}'.",
+                    data: {
+                        identifier: identifier
+                    }
+                });
             }
         }
 
@@ -69789,7 +70879,13 @@ module.exports = {
                 isMemberOfSuper = node.object.type === "Super";
 
             if (typeof identifier !== "undefined" && hasTrailingUnderscore(identifier) && !(isMemberOfThis && allowAfterThis) && !(isMemberOfSuper && allowAfterSuper) && !isSpecialCaseIdentifierForMemberExpression(identifier) && !isAllowed(identifier)) {
-                context.report(node, "Unexpected dangling '_' in '" + identifier + "'.");
+                context.report({
+                    node: node,
+                    message: "Unexpected dangling '_' in '{{identifier}}'.",
+                    data: {
+                        identifier: identifier
+                    }
+                });
             }
         }
 
@@ -69805,7 +70901,7 @@ module.exports = {
     }
 };
 
-},{}],338:[function(require,module,exports){
+},{}],341:[function(require,module,exports){
 /**
  * @fileoverview Rule to spot scenarios where a newline looks like it is ending a statement, but is not.
  * @author Glen Mailer
@@ -69885,7 +70981,7 @@ module.exports = {
     }
 };
 
-},{}],339:[function(require,module,exports){
+},{}],342:[function(require,module,exports){
 /**
  * @fileoverview Rule to disallow use of unmodified expressions in loop conditions
  * @author Toru Nagashima
@@ -70242,7 +71338,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":160,"../util/traverser":410}],340:[function(require,module,exports){
+},{"../ast-utils":160,"../util/traverser":414}],343:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag no-unneeded-ternary
  * @author Gyandeep Singh
@@ -70309,7 +71405,7 @@ module.exports = {
     }
 };
 
-},{}],341:[function(require,module,exports){
+},{}],344:[function(require,module,exports){
 /**
  * @fileoverview Checks for unreachable code due to return, throws, break, and continue.
  * @author Joel Feenstra
@@ -70549,7 +71645,7 @@ module.exports = {
     }
 };
 
-},{}],342:[function(require,module,exports){
+},{}],345:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag unsafe statements in finally block
  * @author Onur Temizkan
@@ -70634,7 +71730,10 @@ module.exports = {
         function check(node) {
             if (isInFinallyBlock(node, node.label)) {
                 context.report({
-                    message: "Unsafe usage of " + node.type + ".",
+                    message: "Unsafe usage of {{nodeType}}.",
+                    data: {
+                        nodeType: node.type
+                    },
                     node: node,
                     line: node.loc.line,
                     column: node.loc.column
@@ -70651,7 +71750,7 @@ module.exports = {
     }
 };
 
-},{}],343:[function(require,module,exports){
+},{}],346:[function(require,module,exports){
 /**
  * @fileoverview Rule to disallow negating the left operand of relational operators
  * @author Toru Nagashima
@@ -70730,7 +71829,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":160}],344:[function(require,module,exports){
+},{"../ast-utils":160}],347:[function(require,module,exports){
 /**
  * @fileoverview Flag expressions in statement position that do not side effect
  * @author Michael Ficarra
@@ -70843,7 +71942,7 @@ module.exports = {
     }
 };
 
-},{}],345:[function(require,module,exports){
+},{}],348:[function(require,module,exports){
 /**
  * @fileoverview Rule to disallow unused labels.
  * @author Toru Nagashima
@@ -70935,7 +72034,7 @@ module.exports = {
     }
 };
 
-},{}],346:[function(require,module,exports){
+},{}],349:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag declared but unused variables
  * @author Ilya Volodin
@@ -71490,7 +72589,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":160,"lodash":158}],347:[function(require,module,exports){
+},{"../ast-utils":160,"lodash":158}],350:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag use of variables before they are defined
  * @author Ilya Volodin
@@ -71736,7 +72835,7 @@ module.exports = {
     }
 };
 
-},{}],348:[function(require,module,exports){
+},{}],351:[function(require,module,exports){
 /**
  * @fileoverview A rule to disallow unnecessary `.call()` and `.apply()`.
  * @author Toru Nagashima
@@ -71832,7 +72931,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":160}],349:[function(require,module,exports){
+},{"../ast-utils":160}],352:[function(require,module,exports){
 /**
  * @fileoverview Rule to disallow unnecessary computed property keys in object literals
  * @author Burak Yigit Kaya
@@ -71877,7 +72976,7 @@ module.exports = {
     }
 };
 
-},{}],350:[function(require,module,exports){
+},{}],353:[function(require,module,exports){
 /**
  * @fileoverview disallow unncessary concatenation of template strings
  * @author Henry Zhu
@@ -71977,7 +73076,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":160}],351:[function(require,module,exports){
+},{"../ast-utils":160}],354:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag the use of redundant constructors in classes.
  * @author Alberto Rodríguez
@@ -72134,7 +73233,7 @@ module.exports = {
     }
 };
 
-},{}],352:[function(require,module,exports){
+},{}],355:[function(require,module,exports){
 /**
  * @fileoverview Look for useless escapes in strings and regexes
  * @author Onur Temizkan
@@ -72183,7 +73282,10 @@ module.exports = {
                         line: node.loc.start.line,
                         column: node.loc.start.column + elm.index
                     },
-                    message: "Unnecessary escape character: " + elm[0] + "."
+                    message: "Unnecessary escape character: {{character}}.",
+                    data: {
+                        character: elm[0]
+                    }
                 });
             }
         }
@@ -72223,7 +73325,7 @@ module.exports = {
     }
 };
 
-},{}],353:[function(require,module,exports){
+},{}],356:[function(require,module,exports){
 /**
  * @fileoverview Disallow renaming import, export, and destructured assignments to the same name.
  * @author Kai Cataldo
@@ -72363,7 +73465,7 @@ module.exports = {
     }
 };
 
-},{}],354:[function(require,module,exports){
+},{}],357:[function(require,module,exports){
 /**
  * @fileoverview Rule to check for the usage of var.
  * @author Jamund Ferguson
@@ -72523,7 +73625,7 @@ module.exports = {
     }
 };
 
-},{}],355:[function(require,module,exports){
+},{}],358:[function(require,module,exports){
 /**
  * @fileoverview Rule to disallow use of void operator.
  * @author Mike Sidorov
@@ -72561,7 +73663,7 @@ module.exports = {
     }
 };
 
-},{}],356:[function(require,module,exports){
+},{}],359:[function(require,module,exports){
 /**
  * @fileoverview Rule that warns about used warning comments
  * @author Alexander Schmidt <https://github.com/lxanders>
@@ -72679,7 +73781,13 @@ module.exports = {
             var matches = commentContainsWarningTerm(node.value);
 
             matches.forEach(function (matchedTerm) {
-                context.report(node, "Unexpected '" + matchedTerm + "' comment.");
+                context.report({
+                    node: node,
+                    message: "Unexpected '{{matchedTerm}}' comment.",
+                    data: {
+                        matchedTerm: matchedTerm
+                    }
+                });
             });
         }
 
@@ -72690,7 +73798,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":160}],357:[function(require,module,exports){
+},{"../ast-utils":160}],360:[function(require,module,exports){
 /**
  * @fileoverview Rule to disallow whitespace before properties
  * @author Kai Cataldo
@@ -72789,7 +73897,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":160}],358:[function(require,module,exports){
+},{"../ast-utils":160}],361:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag use of with statement
  * @author Nicholas C. Zakas
@@ -72822,7 +73930,7 @@ module.exports = {
     }
 };
 
-},{}],359:[function(require,module,exports){
+},{}],362:[function(require,module,exports){
 /**
  * @fileoverview Rule to require or disallow line breaks inside braces.
  * @author Toru Nagashima
@@ -73012,7 +74120,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":160}],360:[function(require,module,exports){
+},{"../ast-utils":160}],363:[function(require,module,exports){
 /**
  * @fileoverview Disallows or enforces spaces inside of object literals.
  * @author Jamund Ferguson
@@ -73086,7 +74194,10 @@ module.exports = {
             context.report({
                 node: node,
                 loc: token.loc.start,
-                message: "There should be no space after '" + token.value + "'.",
+                message: "There should be no space after '{{token}}'.",
+                data: {
+                    token: token.value
+                },
                 fix: function fix(fixer) {
                     var nextToken = context.getSourceCode().getTokenAfter(token);
 
@@ -73105,7 +74216,10 @@ module.exports = {
             context.report({
                 node: node,
                 loc: token.loc.start,
-                message: "There should be no space before '" + token.value + "'.",
+                message: "There should be no space before '{{token}}'.",
+                data: {
+                    token: token.value
+                },
                 fix: function fix(fixer) {
                     var previousToken = context.getSourceCode().getTokenBefore(token);
 
@@ -73124,7 +74238,10 @@ module.exports = {
             context.report({
                 node: node,
                 loc: token.loc.start,
-                message: "A space is required after '" + token.value + "'.",
+                message: "A space is required after '{{token}}'.",
+                data: {
+                    token: token.value
+                },
                 fix: function fix(fixer) {
                     return fixer.insertTextAfter(token, " ");
                 }
@@ -73141,7 +74258,10 @@ module.exports = {
             context.report({
                 node: node,
                 loc: token.loc.start,
-                message: "A space is required before '" + token.value + "'.",
+                message: "A space is required before '{{token}}'.",
+                data: {
+                    token: token.value
+                },
                 fix: function fix(fixer) {
                     return fixer.insertTextBefore(token, " ");
                 }
@@ -73309,7 +74429,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":160}],361:[function(require,module,exports){
+},{"../ast-utils":160}],364:[function(require,module,exports){
 /**
  * @fileoverview Rule to enforce placing object properties on separate lines.
  * @author Vitor Balocco
@@ -73378,7 +74498,7 @@ module.exports = {
     }
 };
 
-},{}],362:[function(require,module,exports){
+},{}],365:[function(require,module,exports){
 /**
  * @fileoverview Rule to enforce concise object methods and properties.
  * @author Jamund Ferguson
@@ -73604,7 +74724,10 @@ module.exports = {
 
                         context.report({
                             node: node,
-                            message: "Expected longform " + type + " syntax.",
+                            message: "Expected longform {{type}} syntax.",
+                            data: {
+                                type: type
+                            },
                             fix: function fix(fixer) {
                                 if (node.method) {
                                     if (node.value.generator) {
@@ -73704,7 +74827,7 @@ module.exports = {
     }
 };
 
-},{}],363:[function(require,module,exports){
+},{}],366:[function(require,module,exports){
 /**
  * @fileoverview Rule to check multiple var declarations per line
  * @author Alberto Rodríguez
@@ -73786,7 +74909,7 @@ module.exports = {
     }
 };
 
-},{}],364:[function(require,module,exports){
+},{}],367:[function(require,module,exports){
 /**
  * @fileoverview A rule to control the use of single variable declarations.
  * @author Ian Christian Myers
@@ -74064,16 +75187,34 @@ module.exports = {
                 // always
                 if (!hasOnlyOneStatement(type, declarations)) {
                     if (options[type].initialized === MODE_ALWAYS && options[type].uninitialized === MODE_ALWAYS) {
-                        context.report(node, "Combine this with the previous '" + type + "' statement.");
+                        context.report({
+                            node: node,
+                            message: "Combine this with the previous '{{type}}' statement.",
+                            data: {
+                                type: type
+                            }
+                        });
                     } else {
                         if (options[type].initialized === MODE_ALWAYS) {
-                            context.report(node, "Combine this with the previous '" + type + "' statement with initialized variables.");
+                            context.report({
+                                node: node,
+                                message: "Combine this with the previous '{{type}}' statement with initialized variables.",
+                                data: {
+                                    type: type
+                                }
+                            });
                         }
                         if (options[type].uninitialized === MODE_ALWAYS) {
                             if (node.parent.left === node && (node.parent.type === "ForInStatement" || node.parent.type === "ForOfStatement")) {
                                 return;
                             }
-                            context.report(node, "Combine this with the previous '" + type + "' statement with uninitialized variables.");
+                            context.report({
+                                node: node,
+                                message: "Combine this with the previous '{{type}}' statement with uninitialized variables.",
+                                data: {
+                                    type: type
+                                }
+                            });
                         }
                     }
                 }
@@ -74087,15 +75228,33 @@ module.exports = {
                         if (options[type].initialized === MODE_NEVER && options[type].uninitialized === MODE_NEVER) {
 
                             // both initialized and uninitialized
-                            context.report(node, "Split '" + type + "' declarations into multiple statements.");
+                            context.report({
+                                node: node,
+                                message: "Split '{{type}}' declarations into multiple statements.",
+                                data: {
+                                    type: type
+                                }
+                            });
                         } else if (options[type].initialized === MODE_NEVER && declarationCounts.initialized > 0) {
 
                             // initialized
-                            context.report(node, "Split initialized '" + type + "' declarations into multiple statements.");
+                            context.report({
+                                node: node,
+                                message: "Split initialized '{{type}}' declarations into multiple statements.",
+                                data: {
+                                    type: type
+                                }
+                            });
                         } else if (options[type].uninitialized === MODE_NEVER && declarationCounts.uninitialized > 0) {
 
                             // uninitialized
-                            context.report(node, "Split uninitialized '" + type + "' declarations into multiple statements.");
+                            context.report({
+                                node: node,
+                                message: "Split uninitialized '{{type}}' declarations into multiple statements.",
+                                data: {
+                                    type: type
+                                }
+                            });
                         }
                     }
                 }
@@ -74115,7 +75274,7 @@ module.exports = {
     }
 };
 
-},{}],365:[function(require,module,exports){
+},{}],368:[function(require,module,exports){
 /**
  * @fileoverview Rule to replace assignment expressions with operator assignment
  * @author Brandon Mills
@@ -74246,7 +75405,7 @@ module.exports = {
     }
 };
 
-},{}],366:[function(require,module,exports){
+},{}],369:[function(require,module,exports){
 /**
  * @fileoverview Operator linebreak - enforces operator linebreak style of two types: after and before
  * @author Benoît Zugmeyer
@@ -74341,28 +75500,56 @@ module.exports = {
             } else if (operatorStyleOverride !== "ignore" && !astUtils.isTokenOnSameLine(leftToken, operatorToken) && !astUtils.isTokenOnSameLine(operatorToken, rightToken)) {
 
                 // lone operator
-                context.report(node, {
-                    line: operatorToken.loc.end.line,
-                    column: operatorToken.loc.end.column
-                }, "Bad line breaking before and after '" + operator + "'.");
+                context.report({
+                    node: node,
+                    loc: {
+                        line: operatorToken.loc.end.line,
+                        column: operatorToken.loc.end.column
+                    },
+                    message: "Bad line breaking before and after '{{operator}}'.",
+                    data: {
+                        operator: operator
+                    }
+                });
             } else if (style === "before" && astUtils.isTokenOnSameLine(leftToken, operatorToken)) {
 
-                context.report(node, {
-                    line: operatorToken.loc.end.line,
-                    column: operatorToken.loc.end.column
-                }, "'" + operator + "' should be placed at the beginning of the line.");
+                context.report({
+                    node: node,
+                    loc: {
+                        line: operatorToken.loc.end.line,
+                        column: operatorToken.loc.end.column
+                    },
+                    message: "'{{operator}}' should be placed at the beginning of the line.",
+                    data: {
+                        operator: operator
+                    }
+                });
             } else if (style === "after" && astUtils.isTokenOnSameLine(operatorToken, rightToken)) {
 
-                context.report(node, {
-                    line: operatorToken.loc.end.line,
-                    column: operatorToken.loc.end.column
-                }, "'" + operator + "' should be placed at the end of the line.");
+                context.report({
+                    node: node,
+                    loc: {
+                        line: operatorToken.loc.end.line,
+                        column: operatorToken.loc.end.column
+                    },
+                    message: "'{{operator}}' should be placed at the end of the line.",
+                    data: {
+                        operator: operator
+                    }
+                });
             } else if (style === "none") {
 
-                context.report(node, {
-                    line: operatorToken.loc.end.line,
-                    column: operatorToken.loc.end.column
-                }, "There should be no line break before or after '" + operator + "'.");
+                context.report({
+                    node: node,
+                    loc: {
+                        line: operatorToken.loc.end.line,
+                        column: operatorToken.loc.end.column
+                    },
+                    message: "There should be no line break before or after '{{operator}}'.",
+                    data: {
+                        operator: operator
+                    }
+                });
             }
         }
 
@@ -74396,7 +75583,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":160}],367:[function(require,module,exports){
+},{"../ast-utils":160}],370:[function(require,module,exports){
 /**
  * @fileoverview A rule to ensure blank lines within blocks.
  * @author Mathias Schreck <https://github.com/lo1tuma>
@@ -74643,7 +75830,7 @@ module.exports = {
     }
 };
 
-},{}],368:[function(require,module,exports){
+},{}],371:[function(require,module,exports){
 /**
  * @fileoverview A rule to suggest using arrow functions as callbacks.
  * @author Toru Nagashima
@@ -74753,6 +75940,21 @@ function getCallbackInfo(node) {
     throw new Error("unreachable");
 }
 
+/**
+* Checks whether a simple list of parameters contains any duplicates. This does not handle complex
+parameter lists (e.g. with destructuring), since complex parameter lists are a SyntaxError with duplicate
+parameter names anyway. Instead, it always returns `false` for complex parameter lists.
+* @param {ASTNode[]} paramsList The list of parameters for a function
+* @returns {boolean} `true` if the list of parameters contains any duplicates
+*/
+function hasDuplicateParams(paramsList) {
+    return paramsList.every(function (param) {
+        return param.type === "Identifier";
+    }) && paramsList.length !== new Set(paramsList.map(function (param) {
+        return param.name;
+    })).size;
+}
+
 //------------------------------------------------------------------------------
 // Rule Definition
 //------------------------------------------------------------------------------
@@ -74776,7 +75978,9 @@ module.exports = {
                 }
             },
             additionalProperties: false
-        }]
+        }],
+
+        fixable: "code"
     },
 
     create: function create(context) {
@@ -74784,6 +75988,7 @@ module.exports = {
 
         var allowUnboundThis = options.allowUnboundThis !== false; // default to true
         var allowNamedFunctions = options.allowNamedFunctions;
+        var sourceCode = context.getSourceCode();
 
         /*
          * {Array<{this: boolean, super: boolean, meta: boolean}>}
@@ -74878,14 +76083,40 @@ module.exports = {
                 var callbackInfo = getCallbackInfo(node);
 
                 if (callbackInfo.isCallback && (!allowUnboundThis || !scopeInfo.this || callbackInfo.isLexicalThis) && !scopeInfo.super && !scopeInfo.meta) {
-                    context.report(node, "Unexpected function expression.");
+                    context.report({
+                        node: node,
+                        message: "Unexpected function expression.",
+                        fix: function fix(fixer) {
+                            if (!callbackInfo.isLexicalThis && scopeInfo.this || hasDuplicateParams(node.params)) {
+
+                                // If the callback function does not have .bind(this) and contains a reference to `this`, there
+                                // is no way to determine what `this` should be, so don't perform any fixes.
+                                // If the callback function has duplicates in its list of parameters (possible in sloppy mode),
+                                // don't replace it with an arrow function, because this is a SyntaxError with arrow functions.
+                                return null;
+                            }
+
+                            var paramsLeftParen = node.params.length ? sourceCode.getTokenBefore(node.params[0]) : sourceCode.getTokenBefore(node.body, 1);
+                            var paramsRightParen = sourceCode.getTokenBefore(node.body);
+                            var paramsFullText = sourceCode.text.slice(paramsLeftParen.range[0], paramsRightParen.range[1]);
+
+                            if (callbackInfo.isLexicalThis) {
+
+                                // If the callback function has `.bind(this)`, replace it with an arrow function and remove the binding.
+                                return fixer.replaceText(node.parent.parent, paramsFullText + " => " + sourceCode.getText(node.body));
+                            }
+
+                            // Otherwise, only replace the `function` keyword and parameters with the arrow function parameters.
+                            return fixer.replaceTextRange([node.start, node.body.start], paramsFullText + " => ");
+                        }
+                    });
                 }
             }
         };
     }
 };
 
-},{}],369:[function(require,module,exports){
+},{}],372:[function(require,module,exports){
 /**
  * @fileoverview A rule to suggest using of const declaration for variables that are never reassigned after declared.
  * @author Toru Nagashima
@@ -75235,7 +76466,66 @@ module.exports = {
     }
 };
 
-},{"lodash":158}],370:[function(require,module,exports){
+},{"lodash":158}],373:[function(require,module,exports){
+/**
+ * @fileoverview Rule to disallow `parseInt()` in favor of binary, octal, and hexadecimal literals
+ * @author Annie Zhang, Henry Zhu
+ */
+
+"use strict";
+
+//------------------------------------------------------------------------------
+// Rule Definition
+//------------------------------------------------------------------------------
+
+module.exports = {
+    meta: {
+        docs: {
+            description: "disallow `parseInt()` in favor of binary, octal, and hexadecimal literals",
+            category: "ECMAScript 6",
+            recommended: false
+        },
+
+        schema: []
+    },
+
+    create: function create(context) {
+        var radixMap = {
+            2: "binary",
+            8: "octal",
+            16: "hexadecimal"
+        };
+
+        //--------------------------------------------------------------------------
+        // Public
+        //--------------------------------------------------------------------------
+
+        return {
+            CallExpression: function CallExpression(node) {
+
+                // doesn't check parseInt() if it doesn't have a radix argument
+                if (node.arguments.length !== 2) {
+                    return;
+                }
+
+                // only error if the radix is 2, 8, or 16
+                var radixName = radixMap[node.arguments[1].value];
+
+                if (node.callee.type === "Identifier" && node.callee.name === "parseInt" && radixName && node.arguments[0].type === "Literal") {
+                    context.report({
+                        node: node,
+                        message: "Use {{radixName}} literals instead of parseInt().",
+                        data: {
+                            radixName: radixName
+                        }
+                    });
+                }
+            }
+        };
+    }
+};
+
+},{}],374:[function(require,module,exports){
 /**
  * @fileoverview Rule to suggest using "Reflect" api over Function/Object methods
  * @author Keith Cirkel <http://keithcirkel.co.uk>
@@ -75334,7 +76624,7 @@ module.exports = {
     }
 };
 
-},{}],371:[function(require,module,exports){
+},{}],375:[function(require,module,exports){
 /**
  * @fileoverview Rule to
  * @author Toru Nagashima
@@ -75439,7 +76729,7 @@ module.exports = {
     }
 };
 
-},{}],372:[function(require,module,exports){
+},{}],376:[function(require,module,exports){
 /**
  * @fileoverview A rule to suggest using of the spread operator instead of `.apply()`.
  * @author Toru Nagashima
@@ -75535,7 +76825,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":160}],373:[function(require,module,exports){
+},{"../ast-utils":160}],377:[function(require,module,exports){
 /**
  * @fileoverview A rule to suggest using template literals instead of string concatenation.
  * @author Toru Nagashima
@@ -75642,7 +76932,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":160}],374:[function(require,module,exports){
+},{"../ast-utils":160}],378:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag non-quoted property names in object literals.
  * @author Mathias Bynens <http://mathiasbynens.be/>
@@ -75730,7 +77020,7 @@ module.exports = {
          * @private
          */
         function areQuotesRedundant(rawKey, tokens, skipNumberLiterals) {
-            return tokens.length === 1 && tokens[0].start === 0 && tokens[0].end === rawKey.length && (["Identifier", "Keyword", "Null", "Boolean"].indexOf(tokens[0].type) >= 0 || tokens[0].type === "Numeric" && !skipNumberLiterals && "" + +tokens[0].value === tokens[0].value);
+            return tokens.length === 1 && tokens[0].start === 0 && tokens[0].end === rawKey.length && (["Identifier", "Keyword", "Null", "Boolean"].indexOf(tokens[0].type) >= 0 || tokens[0].type === "Numeric" && !skipNumberLiterals && String(+tokens[0].value) === tokens[0].value);
         }
 
         /**
@@ -75861,7 +77151,7 @@ module.exports = {
     }
 };
 
-},{"../util/keywords":406,"espree":"espree"}],375:[function(require,module,exports){
+},{"../util/keywords":410,"espree":"espree"}],379:[function(require,module,exports){
 /**
  * @fileoverview A rule to choose between single and double quote marks
  * @author Matt DuVall <http://www.mattduvall.com/>, Brandon Payton
@@ -76074,7 +77364,10 @@ module.exports = {
                     if (!isValid) {
                         context.report({
                             node: node,
-                            message: "Strings must use " + settings.description + ".",
+                            message: "Strings must use {{description}}.",
+                            data: {
+                                description: settings.description
+                            },
                             fix: function fix(fixer) {
                                 return fixer.replaceText(node, settings.convert(node.raw));
                             }
@@ -76094,7 +77387,10 @@ module.exports = {
                 if (shouldWarn) {
                     context.report({
                         node: node,
-                        message: "Strings must use " + settings.description + ".",
+                        message: "Strings must use {{description}}.",
+                        data: {
+                            description: settings.description
+                        },
                         fix: function fix(fixer) {
                             return fixer.replaceText(node, settings.convert(sourceCode.getText(node)));
                         }
@@ -76105,7 +77401,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":160}],376:[function(require,module,exports){
+},{"../ast-utils":160}],380:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag use of parseInt without a radix argument
  * @author James Allardice
@@ -76268,7 +77564,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":160}],377:[function(require,module,exports){
+},{"../ast-utils":160}],381:[function(require,module,exports){
 /**
  * @fileoverview Rule to check for jsdoc presence.
  * @author Gyandeep Singh
@@ -76372,7 +77668,7 @@ module.exports = {
     }
 };
 
-},{}],378:[function(require,module,exports){
+},{}],382:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag the generator functions that does not have yield.
  * @author Toru Nagashima
@@ -76445,7 +77741,7 @@ module.exports = {
     }
 };
 
-},{}],379:[function(require,module,exports){
+},{}],383:[function(require,module,exports){
 /**
  * @fileoverview Enforce spacing between rest and spread operators and their expressions.
  * @author Kai Cataldo
@@ -76552,7 +77848,7 @@ module.exports = {
     }
 };
 
-},{}],380:[function(require,module,exports){
+},{}],384:[function(require,module,exports){
 /**
  * @fileoverview Validates spacing before and after semicolon
  * @author Mathias Schreck
@@ -76770,7 +78066,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":160}],381:[function(require,module,exports){
+},{"../ast-utils":160}],385:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag missing semicolons.
  * @author Nicholas C. Zakas
@@ -76983,7 +78279,7 @@ module.exports = {
     }
 };
 
-},{}],382:[function(require,module,exports){
+},{}],386:[function(require,module,exports){
 /**
  * @fileoverview Rule to require sorting of import declarations
  * @author Christian Schuller
@@ -77155,7 +78451,7 @@ module.exports = {
     }
 };
 
-},{}],383:[function(require,module,exports){
+},{}],387:[function(require,module,exports){
 /**
  * @fileoverview Rule to requires object keys to be sorted
  * @author Toru Nagashima
@@ -77307,7 +78603,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":160,"natural-compare":159}],384:[function(require,module,exports){
+},{"../ast-utils":160,"natural-compare":159}],388:[function(require,module,exports){
 /**
  * @fileoverview Rule to require sorting of variables within a single Variable Declaration block
  * @author Ilya Volodin
@@ -77370,7 +78666,7 @@ module.exports = {
     }
 };
 
-},{}],385:[function(require,module,exports){
+},{}],389:[function(require,module,exports){
 /**
  * @fileoverview A rule to ensure whitespace before blocks.
  * @author Mathias Schreck <https://github.com/lo1tuma>
@@ -77516,7 +78812,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":160}],386:[function(require,module,exports){
+},{"../ast-utils":160}],390:[function(require,module,exports){
 /**
  * @fileoverview Rule to validate spacing before function paren.
  * @author Mathias Schreck <https://github.com/lo1tuma>
@@ -77645,7 +78941,7 @@ module.exports = {
     }
 };
 
-},{}],387:[function(require,module,exports){
+},{}],391:[function(require,module,exports){
 /**
  * @fileoverview Disallows or enforces spaces inside of parentheses.
  * @author Jonathan Rajavuori
@@ -77921,7 +79217,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":160}],388:[function(require,module,exports){
+},{"../ast-utils":160}],392:[function(require,module,exports){
 /**
  * @fileoverview Require spaces around infix operators
  * @author Michael Ficarra
@@ -78076,7 +79372,7 @@ module.exports = {
     }
 };
 
-},{}],389:[function(require,module,exports){
+},{}],393:[function(require,module,exports){
 /**
  * @fileoverview This rule shoud require or disallow spaces before or after unary operations.
  * @author Marcin Kumorek
@@ -78176,7 +79472,10 @@ module.exports = {
             if (secondToken.range[0] === firstToken.range[1]) {
                 context.report({
                     node: node,
-                    message: "Unary word operator '" + word + "' must be followed by whitespace.",
+                    message: "Unary word operator '{{word}}' must be followed by whitespace.",
+                    data: {
+                        word: word
+                    },
                     fix: function fix(fixer) {
                         return fixer.insertTextAfter(firstToken, " ");
                     }
@@ -78197,7 +79496,10 @@ module.exports = {
                 if (secondToken.range[0] > firstToken.range[1]) {
                     context.report({
                         node: node,
-                        message: "Unexpected space after unary word operator '" + word + "'.",
+                        message: "Unexpected space after unary word operator '{{word}}'.",
+                        data: {
+                            word: word
+                        },
                         fix: function fix(fixer) {
                             return fixer.removeRange([firstToken.range[1], secondToken.range[0]]);
                         }
@@ -78261,7 +79563,10 @@ module.exports = {
                 if (firstToken.range[1] === secondToken.range[0]) {
                     context.report({
                         node: node,
-                        message: "Unary operator '" + firstToken.value + "' must be followed by whitespace.",
+                        message: "Unary operator '{{operator}}' must be followed by whitespace.",
+                        data: {
+                            operator: firstToken.value
+                        },
                         fix: function fix(fixer) {
                             return fixer.insertTextAfter(firstToken, " ");
                         }
@@ -78271,7 +79576,10 @@ module.exports = {
                 if (firstToken.range[1] === secondToken.range[0]) {
                     context.report({
                         node: node,
-                        message: "Space is required before unary expressions '" + secondToken.value + "'.",
+                        message: "Space is required before unary expressions '{{token}}'.",
+                        data: {
+                            token: secondToken.value
+                        },
                         fix: function fix(fixer) {
                             return fixer.insertTextBefore(secondToken, " ");
                         }
@@ -78292,7 +79600,10 @@ module.exports = {
                 if (secondToken.range[0] > firstToken.range[1]) {
                     context.report({
                         node: node,
-                        message: "Unexpected space after unary operator '" + firstToken.value + "'.",
+                        message: "Unexpected space after unary operator '{{operator}}'.",
+                        data: {
+                            operator: firstToken.value
+                        },
                         fix: function fix(fixer) {
                             return fixer.removeRange([firstToken.range[1], secondToken.range[0]]);
                         }
@@ -78302,7 +79613,10 @@ module.exports = {
                 if (secondToken.range[0] > firstToken.range[1]) {
                     context.report({
                         node: node,
-                        message: "Unexpected space before unary operator '" + secondToken.value + "'.",
+                        message: "Unexpected space before unary operator '{{operator}}'.",
+                        data: {
+                            operator: secondToken.value
+                        },
                         fix: function fix(fixer) {
                             return fixer.removeRange([firstToken.range[1], secondToken.range[0]]);
                         }
@@ -78354,7 +79668,7 @@ module.exports = {
     }
 };
 
-},{}],390:[function(require,module,exports){
+},{}],394:[function(require,module,exports){
 /**
  * @fileoverview Source code for spaced-comments rule
  * @author Gyandeep Singh
@@ -78615,9 +79929,10 @@ module.exports = {
          * @param {ASTNode} node - A comment node to check.
          * @param {string} message - An error message to report.
          * @param {Array} match - An array of match results for markers.
+         * @param {string} refChar - Character used for reference in the error message.
          * @returns {void}
          */
-        function reportBegin(node, message, match) {
+        function reportBegin(node, message, match, refChar) {
             var type = node.type.toLowerCase(),
                 commentIdentifier = type === "block" ? "/*" : "//";
 
@@ -78638,7 +79953,8 @@ module.exports = {
                     }
                 },
 
-                message: message
+                message: message,
+                data: { refChar: refChar }
             });
         }
 
@@ -78692,9 +80008,9 @@ module.exports = {
                     var marker = hasMarker ? commentIdentifier + hasMarker[0] : commentIdentifier;
 
                     if (rule.hasExceptions) {
-                        reportBegin(node, "Expected exception block, space or tab after '" + marker + "' in comment.", hasMarker);
+                        reportBegin(node, "Expected exception block, space or tab after '{{refChar}}' in comment.", hasMarker, marker);
                     } else {
-                        reportBegin(node, "Expected space or tab after '" + marker + "' in comment.", hasMarker);
+                        reportBegin(node, "Expected space or tab after '{{refChar}}' in comment.", hasMarker, marker);
                     }
                 }
 
@@ -78704,9 +80020,9 @@ module.exports = {
             } else {
                 if (beginMatch) {
                     if (!beginMatch[1]) {
-                        reportBegin(node, "Unexpected space or tab after '" + commentIdentifier + "' in comment.", beginMatch);
+                        reportBegin(node, "Unexpected space or tab after '{{refChar}}' in comment.", beginMatch, commentIdentifier);
                     } else {
-                        reportBegin(node, "Unexpected space or tab after marker (" + beginMatch[1] + ") in comment.", beginMatch);
+                        reportBegin(node, "Unexpected space or tab after marker ({{refChar}}) in comment.", beginMatch, beginMatch[1]);
                     }
                 }
 
@@ -78725,7 +80041,7 @@ module.exports = {
     }
 };
 
-},{"lodash":158}],391:[function(require,module,exports){
+},{"lodash":158}],395:[function(require,module,exports){
 /**
  * @fileoverview Rule to control usage of strict mode directives.
  * @author Brandon Mills
@@ -78972,7 +80288,7 @@ module.exports = {
     }
 };
 
-},{}],392:[function(require,module,exports){
+},{}],396:[function(require,module,exports){
 /**
  * @fileoverview Rule to enforce description with the `Symbol` object
  * @author Jarek Rencz
@@ -79039,7 +80355,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":160}],393:[function(require,module,exports){
+},{"../ast-utils":160}],397:[function(require,module,exports){
 /**
  * @fileoverview Rule to enforce spacing around embedded expressions of template strings
  * @author Toru Nagashima
@@ -79093,7 +80409,10 @@ module.exports = {
             if (prevToken && CLOSE_PAREN.test(token.value) && astUtils.isTokenOnSameLine(prevToken, token) && sourceCode.isSpaceBetweenTokens(prevToken, token) !== always) {
                 context.report({
                     loc: token.loc.start,
-                    message: prefix + " space(s) before '}'.",
+                    message: "{{prefix}} space(s) before '}'.",
+                    data: {
+                        prefix: prefix
+                    },
                     fix: function fix(fixer) {
                         if (always) {
                             return fixer.insertTextBefore(token, " ");
@@ -79118,7 +80437,10 @@ module.exports = {
                         line: token.loc.end.line,
                         column: token.loc.end.column - 2
                     },
-                    message: prefix + " space(s) after '${'.",
+                    message: "{{prefix}} space(s) after '${'.",
+                    data: {
+                        prefix: prefix
+                    },
                     fix: function fix(fixer) {
                         if (always) {
                             return fixer.insertTextAfter(token, " ");
@@ -79140,7 +80462,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":160}],394:[function(require,module,exports){
+},{"../ast-utils":160}],398:[function(require,module,exports){
 /**
  * @fileoverview Require or disallow Unicode BOM
  * @author Andrew Johnston <https://github.com/ehjay>
@@ -79205,7 +80527,7 @@ module.exports = {
     }
 };
 
-},{}],395:[function(require,module,exports){
+},{}],399:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag comparisons to the value NaN
  * @author James Allardice
@@ -79240,7 +80562,7 @@ module.exports = {
     }
 };
 
-},{}],396:[function(require,module,exports){
+},{}],400:[function(require,module,exports){
 /**
  * @fileoverview Validates JSDoc comments are syntactically correct
  * @author Nicholas C. Zakas
@@ -79528,7 +80850,13 @@ module.exports = {
                                 hasReturns = true;
 
                                 if (!requireReturn && !functionData.returnPresent && (tag.type === null || !isValidReturnType(tag)) && !isAbstract) {
-                                    context.report(jsdocNode, "Unexpected @" + tag.title + " tag; function has no return statement.");
+                                    context.report({
+                                        node: jsdocNode,
+                                        message: "Unexpected @{{title}} tag; function has no return statement.",
+                                        data: {
+                                            title: tag.title
+                                        }
+                                    });
                                 } else {
                                     if (requireReturnType && !tag.type) {
                                         context.report(jsdocNode, "Missing JSDoc return type.");
@@ -79577,7 +80905,13 @@ module.exports = {
                     // check for functions missing @returns
                     if (!isOverride && !hasReturns && !hasConstructor && !isInterface && node.parent.kind !== "get" && node.parent.kind !== "constructor" && node.parent.kind !== "set" && !isTypeClass(node)) {
                         if (requireReturn || functionData.returnPresent) {
-                            context.report(jsdocNode, "Missing JSDoc @" + (prefer.returns || "returns") + " for function.");
+                            context.report({
+                                node: jsdocNode,
+                                message: "Missing JSDoc @{{returns}} for function.",
+                                data: {
+                                    returns: prefer.returns || "returns"
+                                }
+                            });
                         }
                     }
 
@@ -79641,7 +80975,7 @@ module.exports = {
     }
 };
 
-},{"doctrine":14}],397:[function(require,module,exports){
+},{"doctrine":14}],401:[function(require,module,exports){
 /**
  * @fileoverview Ensures that the results of typeof are compared against a valid string
  * @author Ian Christian Myers
@@ -79702,7 +81036,7 @@ module.exports = {
     }
 };
 
-},{}],398:[function(require,module,exports){
+},{}],402:[function(require,module,exports){
 /**
  * @fileoverview Rule to enforce var declarations are only at the top of a function.
  * @author Danny Fritz
@@ -79843,7 +81177,7 @@ module.exports = {
     }
 };
 
-},{}],399:[function(require,module,exports){
+},{}],403:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag when IIFE is not wrapped in parens
  * @author Ilya Volodin
@@ -79906,7 +81240,7 @@ module.exports = {
     }
 };
 
-},{}],400:[function(require,module,exports){
+},{}],404:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag when regex literals are not wrapped in parens
  * @author Matt DuVall <http://www.mattduvall.com>
@@ -79926,7 +81260,9 @@ module.exports = {
             recommended: false
         },
 
-        schema: []
+        schema: [],
+
+        fixable: "code"
     },
 
     create: function create(context) {
@@ -79943,7 +81279,13 @@ module.exports = {
                     var grandparent = ancestors[ancestors.length - 1];
 
                     if (grandparent.type === "MemberExpression" && grandparent.object === node && (!source || source.value !== "(")) {
-                        context.report(node, "Wrap the regexp literal in parens to disambiguate the slash.");
+                        context.report({
+                            node: node,
+                            message: "Wrap the regexp literal in parens to disambiguate the slash.",
+                            fix: function fix(fixer) {
+                                return fixer.replaceText(node, "(" + sourceCode.getText(node) + ")");
+                            }
+                        });
                     }
                 }
             }
@@ -79951,7 +81293,7 @@ module.exports = {
     }
 };
 
-},{}],401:[function(require,module,exports){
+},{}],405:[function(require,module,exports){
 /**
  * @fileoverview Rule to check the spacing around the * in yield* expressions.
  * @author Bryan Smith
@@ -80018,11 +81360,15 @@ module.exports = {
                     var spaceRequired = mode[side];
                     var node = after ? leftToken : rightToken;
                     var type = spaceRequired ? "Missing" : "Unexpected";
-                    var message = type + " space " + side + " *.";
+                    var message = "{{type}} space {{side}} *.";
 
                     context.report({
                         node: node,
                         message: message,
+                        data: {
+                            type: type,
+                            side: side
+                        },
                         fix: function fix(fixer) {
                             if (spaceRequired) {
                                 if (after) {
@@ -80062,7 +81408,7 @@ module.exports = {
     }
 };
 
-},{}],402:[function(require,module,exports){
+},{}],406:[function(require,module,exports){
 /**
  * @fileoverview Rule to require or disallow yoda comparisons
  * @author Nicholas C. Zakas
@@ -80275,20 +81621,32 @@ module.exports = {
 
                 // Comparisons must always be yoda-style: if ("blue" === color)
                 if ((node.right.type === "Literal" || looksLikeLiteral(node.right)) && !(node.left.type === "Literal" || looksLikeLiteral(node.left)) && !(!isEqualityOperator(node.operator) && onlyEquality) && isComparisonOperator(node.operator) && !(exceptRange && isRangeTest(context.getAncestors().pop()))) {
-                    context.report(node, "Expected literal to be on the left side of " + node.operator + ".");
+                    context.report({
+                        node: node,
+                        message: "Expected literal to be on the left side of {{operator}}.",
+                        data: {
+                            operator: node.operator
+                        }
+                    });
                 }
             } : function (node) {
 
                 // Comparisons must never be yoda-style (default)
                 if ((node.left.type === "Literal" || looksLikeLiteral(node.left)) && !(node.right.type === "Literal" || looksLikeLiteral(node.right)) && !(!isEqualityOperator(node.operator) && onlyEquality) && isComparisonOperator(node.operator) && !(exceptRange && isRangeTest(context.getAncestors().pop()))) {
-                    context.report(node, "Expected literal to be on the right side of " + node.operator + ".");
+                    context.report({
+                        node: node,
+                        message: "Expected literal to be on the right side of {{operator}}.",
+                        data: {
+                            operator: node.operator
+                        }
+                    });
                 }
             }
         };
     }
 };
 
-},{}],403:[function(require,module,exports){
+},{}],407:[function(require,module,exports){
 (function (process){
 /**
  * @fileoverview Tracks performance of individual rules.
@@ -80432,7 +81790,7 @@ module.exports = function () {
 }();
 
 }).call(this,require('_process'))
-},{"_process":8}],404:[function(require,module,exports){
+},{"_process":7}],408:[function(require,module,exports){
 /**
  * @fileoverview Object to handle access and retrieval of tokens.
  * @author Brandon Mills
@@ -80628,7 +81986,7 @@ module.exports = function (tokens) {
     return api;
 };
 
-},{}],405:[function(require,module,exports){
+},{}],409:[function(require,module,exports){
 /**
  * @fileoverview The event generator for comments.
  * @author Toru Nagashima
@@ -80738,7 +82096,7 @@ CommentEventGenerator.prototype = {
 
 module.exports = CommentEventGenerator;
 
-},{}],406:[function(require,module,exports){
+},{}],410:[function(require,module,exports){
 /**
  * @fileoverview A shared list of ES3 keywords.
  * @author Josh Perez
@@ -80747,7 +82105,7 @@ module.exports = CommentEventGenerator;
 
 module.exports = ["abstract", "boolean", "break", "byte", "case", "catch", "char", "class", "const", "continue", "debugger", "default", "delete", "do", "double", "else", "enum", "export", "extends", "false", "final", "finally", "float", "for", "function", "goto", "if", "implements", "import", "in", "instanceof", "int", "interface", "long", "native", "new", "null", "package", "private", "protected", "public", "return", "short", "static", "super", "switch", "synchronized", "this", "throw", "throws", "transient", "true", "try", "typeof", "var", "void", "volatile", "while", "with"];
 
-},{}],407:[function(require,module,exports){
+},{}],411:[function(require,module,exports){
 /**
  * @fileoverview The event generator for AST nodes.
  * @author Toru Nagashima
@@ -80803,7 +82161,7 @@ NodeEventGenerator.prototype = {
 
 module.exports = NodeEventGenerator;
 
-},{}],408:[function(require,module,exports){
+},{}],412:[function(require,module,exports){
 /**
  * @fileoverview An object that creates fix commands for rules.
  * @author Nicholas C. Zakas
@@ -80956,7 +82314,7 @@ RuleFixer.prototype = {
 
 module.exports = RuleFixer;
 
-},{}],409:[function(require,module,exports){
+},{}],413:[function(require,module,exports){
 /**
  * @fileoverview Abstraction of JavaScript source code.
  * @author Nicholas C. Zakas
@@ -81263,7 +82621,7 @@ SourceCode.prototype = {
 
 module.exports = SourceCode;
 
-},{"../token-store.js":404,"./traverser":410}],410:[function(require,module,exports){
+},{"../token-store.js":408,"./traverser":414}],414:[function(require,module,exports){
 /**
  * @fileoverview Wrapper around estraverse
  * @author Nicholas C. Zakas
