@@ -1,10 +1,10 @@
 'use strict';
 
-define(['react'], function(React) {
+define(['react', 'events'], function(React, events) {
     return React.createClass({
         displayName: 'Message',
         handleClick: function() {
-            this.props.onClick(this.props.value.line, this.props.value.column);
+            events.trigger('showError', this.props.value.line, this.props.value.column);
         },
         render: function() {
             return (

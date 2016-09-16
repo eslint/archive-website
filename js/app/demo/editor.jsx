@@ -18,7 +18,7 @@ function debounce(func, wait, immediate) {
     };
 }
 
-define(['react', 'orion', 'reactDom'], function(React, orion, ReactDOM) {
+define(['react', 'orion', 'reactDom', 'events'], function(React, orion, ReactDOM, events) {
     return React.createClass({
         displayName: 'Editor',
         editor: null,
@@ -35,12 +35,26 @@ define(['react', 'orion', 'reactDom'], function(React, orion, ReactDOM) {
             }.bind(this);
             
             this.props.onChange({ value: this.editor.getModel().getText() });
+
+            events.on('showError', function(line, column) {
+                this.editor.onGotoLine(line - 1, column - 1, column - 1);
+            }.bind(this));
         },
+
         componentWillReceiveProps: function(nextProps) {
-            if (nextProps.focusedError) {
-                this.editor.onGotoLine(nextProps.focusedError.line - 1, nextProps.focusedError.column - 1, nextProps.focusedError.column - 1);
+            if (nextProps.errors) {
+                this.editor.showProblems(nextProps.errors.map(function(error) {
+                    return {
+                        line: error.line,
+                        start: error.column,
+                        end: error.column + 1,
+                        description: error.message + ' (' + error.ruleId + ')',
+                        severity: error.severity === 2 ? 'error' : 'warning'
+                    };
+                }));
             }
         },
+
         render: function() {
             return (
                 <pre id="editor" data-editor-lang="js" style={{height: height + 'px'}}>{this.props.text}</pre>
