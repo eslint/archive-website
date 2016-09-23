@@ -8123,7 +8123,6 @@ module.exports = {
     3: "abstract boolean byte char class double enum export extends final float goto implements import int interface long native package private protected public short static super synchronized throws transient volatile",
     5: "class enum extends super const export import",
     6: "enum",
-    7: "enum",
     strict: "implements interface let package private protected public static yield",
     strictBind: "eval arguments"
   }
@@ -8357,7 +8356,7 @@ module.exports = {
   var lineBreakG = new RegExp(lineBreak.source, "g")
 
   function isNewLine(code) {
-    return code === 10 || code === 13 || code === 0x2028 || code == 0x2029
+    return code === 10 || code === 13 || code === 0x2028 || code === 0x2029
   }
 
   var nonASCIIwhitespace = /[\u1680\u180e\u2000-\u200a\u202f\u205f\u3000\ufeff]/
@@ -8416,11 +8415,13 @@ module.exports = {
 
   var defaultOptions = {
     // `ecmaVersion` indicates the ECMAScript version to parse. Must
-    // be either 3, or 5, or 6. This influences support for strict
-    // mode, the set of reserved words, support for getters and
-    // setters and other features. The default is 6.
-    ecmaVersion: 6,
-    // Source type ("script" or "module") for different semantics
+    // be either 3, 5, 6 (2015), 7 (2016), or 8 (2017). This influences support
+    // for strict mode, the set of reserved words, and support for
+    // new syntax features. The default is 7.
+    ecmaVersion: 7,
+    // `sourceType` indicates the mode the code should be parsed in.
+    // Can be either `"script"` or `"module"`. This influences global
+    // strict mode and parsing of `import` and `export` declarations.
     sourceType: "script",
     // `onInsertedSemicolon` can be a callback that will be called
     // when a semicolon is automatically inserted. It will be passed
@@ -8498,8 +8499,13 @@ module.exports = {
 
   function getOptions(opts) {
     var options = {}
+
     for (var opt in defaultOptions)
       options[opt] = opts && has(opts, opt) ? opts[opt] : defaultOptions[opt]
+
+    if (options.ecmaVersion >= 2015)
+      options.ecmaVersion -= 2009
+
     if (options.allowReserved == null)
       options.allowReserved = options.ecmaVersion < 5
 
@@ -8540,8 +8546,12 @@ module.exports = {
     this.options = options = getOptions(options)
     this.sourceFile = options.sourceFile
     this.keywords = keywordRegexp(keywords[options.ecmaVersion >= 6 ? 6 : 5])
-    var reserved = options.allowReserved ? "" :
-        reservedWords[options.ecmaVersion] + (options.sourceType == "module" ? " await" : "")
+    var reserved = ""
+    if (!options.allowReserved) {
+      for (var v = options.ecmaVersion;; v--)
+        if (reserved = reservedWords[v]) break
+      if (options.sourceType == "module") reserved += " await"
+    }
     this.reservedWords = keywordRegexp(reserved)
     var reservedStrict = (reserved ? reserved + " " : "") + reservedWords.strict
     this.reservedWordsStrict = keywordRegexp(reservedStrict)
@@ -8561,7 +8571,7 @@ module.exports = {
     // The current position of the tokenizer in the input.
     if (startPos) {
       this.pos = startPos
-      this.lineStart = Math.max(0, this.input.lastIndexOf("\n", startPos))
+      this.lineStart = this.input.lastIndexOf("\n", startPos - 1) + 1
       this.curLine = this.input.slice(0, this.lineStart).split(lineBreak).length
     } else {
       this.pos = this.lineStart = 0
@@ -8595,8 +8605,10 @@ module.exports = {
     // Used to signify the start of a potential arrow function
     this.potentialArrowAt = -1
 
-    // Flags to track whether we are in a function, a generator.
-    this.inFunction = this.inGenerator = false
+    // Flags to track whether we are in a function, a generator, an async function.
+    this.inFunction = this.inGenerator = this.inAsync = false
+    // Positions to delayed-check that yield/await does not exist in default parameters.
+    this.yieldPos = this.awaitPos = 0
     // Labels in scope.
     this.labels = []
 
@@ -8694,11 +8706,12 @@ module.exports = {
     if (!this.eat(tt.semi) && !this.insertSemicolon()) this.unexpected()
   }
 
-  pp.afterTrailingComma = function(tokType) {
+  pp.afterTrailingComma = function(tokType, notNext) {
     if (this.type == tokType) {
       if (this.options.onTrailingComma)
         this.options.onTrailingComma(this.lastTokStart, this.lastTokStartLoc)
-      this.next()
+      if (!notNext)
+        this.next()
       return true
     }
   }
@@ -8733,6 +8746,13 @@ module.exports = {
     if (pos) this.raise(pos, "Shorthand property assignments are valid only in destructuring patterns")
   }
 
+  pp.checkYieldAwaitInDefaultParams = function() {
+    if (this.yieldPos && (!this.awaitPos || this.yieldPos < this.awaitPos))
+      this.raise(this.yieldPos, "Yield expression cannot be a default value")
+    if (this.awaitPos)
+      this.raise(this.awaitPos, "Await expression cannot be a default value")
+  }
+
   var pp$1 = Parser.prototype
 
   // ### Statement parsing
@@ -8745,10 +8765,10 @@ module.exports = {
   pp$1.parseTopLevel = function(node) {
     var this$1 = this;
 
-    var first = true
+    var first = true, exports = {}
     if (!node.body) node.body = []
     while (this.type !== tt.eof) {
-      var stmt = this$1.parseStatement(true, true)
+      var stmt = this$1.parseStatement(true, true, exports)
       node.body.push(stmt)
       if (first) {
         if (this$1.isUseStrict(stmt)) this$1.setStrict(true)
@@ -8778,6 +8798,21 @@ module.exports = {
     return false
   }
 
+  // check 'async [no LineTerminator here] function'
+  // - 'async /*foo*/ function' is OK.
+  // - 'async /*\n*/ function' is invalid.
+  pp$1.isAsyncFunction = function() {
+    if (this.type !== tt.name || this.options.ecmaVersion < 8 || this.value != "async")
+      return false
+
+    skipWhiteSpace.lastIndex = this.pos
+    var skip = skipWhiteSpace.exec(this.input)
+    var next = this.pos + skip[0].length
+    return !lineBreak.test(this.input.slice(this.pos, next)) &&
+      this.input.slice(next, next + 8) === "function" &&
+      (next + 8 == this.input.length || !isIdentifierChar(this.input.charAt(next + 8)))
+  }
+
   // Parse a single statement.
   //
   // If expecting a statement and finding a slash operator, parse a
@@ -8785,7 +8820,7 @@ module.exports = {
   // `if (foo) /blah/.exec(foo)`, where looking at the previous token
   // does not help.
 
-  pp$1.parseStatement = function(declaration, topLevel) {
+  pp$1.parseStatement = function(declaration, topLevel, exports) {
     var starttype = this.type, node = this.startNode(), kind
 
     if (this.isLet()) {
@@ -8804,7 +8839,7 @@ module.exports = {
     case tt._for: return this.parseForStatement(node)
     case tt._function:
       if (!declaration && this.options.ecmaVersion >= 6) this.unexpected()
-      return this.parseFunctionStatement(node)
+      return this.parseFunctionStatement(node, false)
     case tt._class:
       if (!declaration) this.unexpected()
       return this.parseClass(node, true)
@@ -8829,7 +8864,7 @@ module.exports = {
         if (!this.inModule)
           this.raise(this.start, "'import' and 'export' may appear only with 'sourceType: module'")
       }
-      return starttype === tt._import ? this.parseImport(node) : this.parseExport(node)
+      return starttype === tt._import ? this.parseImport(node) : this.parseExport(node, exports)
 
       // If the statement does not start with a statement keyword or a
       // brace, it's an ExpressionStatement or LabeledStatement. We
@@ -8837,6 +8872,11 @@ module.exports = {
       // next token is a colon and the expression was a simple
       // Identifier node, we switch to interpreting it as a label.
     default:
+      if (this.isAsyncFunction() && declaration) {
+        this.next()
+        return this.parseFunctionStatement(node, true)
+      }
+
       var maybeName = this.value, expr = this.parseExpression()
       if (starttype === tt.name && expr.type === "Identifier" && this.eat(tt.colon))
         return this.parseLabeledStatement(node, maybeName, expr)
@@ -8926,16 +8966,21 @@ module.exports = {
     return this.parseFor(node, init)
   }
 
-  pp$1.parseFunctionStatement = function(node) {
+  pp$1.parseFunctionStatement = function(node, isAsync) {
     this.next()
-    return this.parseFunction(node, true)
+    return this.parseFunction(node, true, false, isAsync)
+  }
+
+  pp$1.isFunction = function() {
+    return this.type === tt._function || this.isAsyncFunction()
   }
 
   pp$1.parseIfStatement = function(node) {
     this.next()
     node.test = this.parseParenExpression()
-    node.consequent = this.parseStatement(false)
-    node.alternate = this.eat(tt._else) ? this.parseStatement(false) : null
+    // allow function declarations in branches, but only in non-strict mode
+    node.consequent = this.parseStatement(!this.strict && this.isFunction())
+    node.alternate = this.eat(tt._else) ? this.parseStatement(!this.strict && this.isFunction()) : null
     return this.finishNode(node, "IfStatement")
   }
 
@@ -9166,23 +9211,38 @@ module.exports = {
   // Parse a function declaration or literal (depending on the
   // `isStatement` parameter).
 
-  pp$1.parseFunction = function(node, isStatement, allowExpressionBody) {
+  pp$1.parseFunction = function(node, isStatement, allowExpressionBody, isAsync) {
     this.initFunction(node)
-    if (this.options.ecmaVersion >= 6)
+    if (this.options.ecmaVersion >= 6 && !isAsync)
       node.generator = this.eat(tt.star)
-    var oldInGen = this.inGenerator
+    if (this.options.ecmaVersion >= 8)
+      node.async = !!isAsync
+
+    if (isStatement)
+      node.id = this.parseIdent()
+
+    var oldInGen = this.inGenerator, oldInAsync = this.inAsync, oldYieldPos = this.yieldPos, oldAwaitPos = this.awaitPos
     this.inGenerator = node.generator
-    if (isStatement || this.type === tt.name)
+    this.inAsync = node.async
+    this.yieldPos = 0
+    this.awaitPos = 0
+
+    if (!isStatement && this.type === tt.name)
       node.id = this.parseIdent()
     this.parseFunctionParams(node)
     this.parseFunctionBody(node, allowExpressionBody)
+
     this.inGenerator = oldInGen
+    this.inAsync = oldInAsync
+    this.yieldPos = oldYieldPos
+    this.awaitPos = oldAwaitPos
     return this.finishNode(node, isStatement ? "FunctionDeclaration" : "FunctionExpression")
   }
 
   pp$1.parseFunctionParams = function(node) {
     this.expect(tt.parenL)
-    node.params = this.parseBindingList(tt.parenR, false, false, true)
+    node.params = this.parseBindingList(tt.parenR, false, this.options.ecmaVersion >= 8, true)
+    this.checkYieldAwaitInDefaultParams()
   }
 
   // Parse a class declaration or literal (depending on the
@@ -9202,6 +9262,7 @@ module.exports = {
       if (this$1.eat(tt.semi)) continue
       var method = this$1.startNode()
       var isGenerator = this$1.eat(tt.star)
+      var isAsync = false
       var isMaybeStatic = this$1.type === tt.name && this$1.value === "static"
       this$1.parsePropertyName(method)
       method.static = isMaybeStatic && this$1.type !== tt.parenL
@@ -9210,11 +9271,17 @@ module.exports = {
         isGenerator = this$1.eat(tt.star)
         this$1.parsePropertyName(method)
       }
+      if (this$1.options.ecmaVersion >= 8 && !isGenerator && !method.computed &&
+          method.key.type === "Identifier" && method.key.name === "async" && this$1.type !== tt.parenL &&
+          !this$1.canInsertSemicolon()) {
+        isAsync = true
+        this$1.parsePropertyName(method)
+      }
       method.kind = "method"
       var isGetSet = false
       if (!method.computed) {
         var key = method.key;
-        if (!isGenerator && key.type === "Identifier" && this$1.type !== tt.parenL && (key.name === "get" || key.name === "set")) {
+        if (!isGenerator && !isAsync && key.type === "Identifier" && this$1.type !== tt.parenL && (key.name === "get" || key.name === "set")) {
           isGetSet = true
           method.kind = key.name
           key = this$1.parsePropertyName(method)
@@ -9224,11 +9291,12 @@ module.exports = {
           if (hadConstructor) this$1.raise(key.start, "Duplicate constructor in the same class")
           if (isGetSet) this$1.raise(key.start, "Constructor can't have get/set modifier")
           if (isGenerator) this$1.raise(key.start, "Constructor can't be a generator")
+          if (isAsync) this$1.raise(key.start, "Constructor can't be an async method")
           method.kind = "constructor"
           hadConstructor = true
         }
       }
-      this$1.parseClassMethod(classBody, method, isGenerator)
+      this$1.parseClassMethod(classBody, method, isGenerator, isAsync)
       if (isGetSet) {
         var paramCount = method.kind === "get" ? 0 : 1
         if (method.value.params.length !== paramCount) {
@@ -9237,17 +9305,18 @@ module.exports = {
             this$1.raiseRecoverable(start, "getter should have no params")
           else
             this$1.raiseRecoverable(start, "setter should have exactly one param")
+        } else {
+          if (method.kind === "set" && method.value.params[0].type === "RestElement")
+            this$1.raiseRecoverable(method.value.params[0].start, "Setter cannot use rest params")
         }
-        if (method.kind === "set" && method.value.params[0].type === "RestElement")
-          this$1.raise(method.value.params[0].start, "Setter cannot use rest params")
       }
     }
     node.body = this.finishNode(classBody, "ClassBody")
     return this.finishNode(node, isStatement ? "ClassDeclaration" : "ClassExpression")
   }
 
-  pp$1.parseClassMethod = function(classBody, method, isGenerator) {
-    method.value = this.parseMethod(isGenerator)
+  pp$1.parseClassMethod = function(classBody, method, isGenerator, isAsync) {
+    method.value = this.parseMethod(isGenerator, isAsync)
     classBody.body.push(this.finishNode(method, "MethodDefinition"))
   }
 
@@ -9261,7 +9330,7 @@ module.exports = {
 
   // Parses module export declaration.
 
-  pp$1.parseExport = function(node) {
+  pp$1.parseExport = function(node, exports) {
     var this$1 = this;
 
     this.next()
@@ -9273,6 +9342,7 @@ module.exports = {
       return this.finishNode(node, "ExportAllDeclaration")
     }
     if (this.eat(tt._default)) { // export default ...
+      this.checkExport(exports, "default", this.lastTokStart)
       var parens = this.type == tt.parenL
       var expr = this.parseMaybeAssign()
       var needsSemi = true
@@ -9292,11 +9362,15 @@ module.exports = {
     // export var|const|let|function|class ...
     if (this.shouldParseExportStatement()) {
       node.declaration = this.parseStatement(true)
+      if (node.declaration.type === "VariableDeclaration")
+        this.checkVariableExport(exports, node.declaration.declarations)
+      else
+        this.checkExport(exports, node.declaration.id.name, node.declaration.id.start)
       node.specifiers = []
       node.source = null
     } else { // export { x, y as z } [from '...']
       node.declaration = null
-      node.specifiers = this.parseExportSpecifiers()
+      node.specifiers = this.parseExportSpecifiers(exports)
       if (this.eatContextual("from")) {
         node.source = this.type === tt.string ? this.parseExprAtom() : this.unexpected()
       } else {
@@ -9314,13 +9388,48 @@ module.exports = {
     return this.finishNode(node, "ExportNamedDeclaration")
   }
 
+  pp$1.checkExport = function(exports, name, pos) {
+    if (!exports) return
+    if (Object.prototype.hasOwnProperty.call(exports, name))
+      this.raiseRecoverable(pos, "Duplicate export '" + name + "'")
+    exports[name] = true
+  }
+
+  pp$1.checkPatternExport = function(exports, pat) {
+    var this$1 = this;
+
+    var type = pat.type
+    if (type == "Identifier")
+      this.checkExport(exports, pat.name, pat.start)
+    else if (type == "ObjectPattern")
+      for (var i = 0; i < pat.properties.length; ++i)
+        this$1.checkPatternExport(exports, pat.properties[i].value)
+    else if (type == "ArrayPattern")
+      for (var i$1 = 0; i$1 < pat.elements.length; ++i$1) {
+        var elt = pat.elements[i$1]
+        if (elt) this$1.checkPatternExport(exports, elt)
+      }
+    else if (type == "AssignmentPattern")
+      this.checkPatternExport(exports, pat.left)
+    else if (type == "ParenthesizedExpression")
+      this.checkPatternExport(exports, pat.expression)
+  }
+
+  pp$1.checkVariableExport = function(exports, decls) {
+    var this$1 = this;
+
+    if (!exports) return
+    for (var i = 0; i < decls.length; i++)
+      this$1.checkPatternExport(exports, decls[i].id)
+  }
+
   pp$1.shouldParseExportStatement = function() {
-    return this.type.keyword || this.isLet()
+    return this.type.keyword || this.isLet() || this.isAsyncFunction()
   }
 
   // Parses a comma-separated list of module exports.
 
-  pp$1.parseExportSpecifiers = function() {
+  pp$1.parseExportSpecifiers = function(exports) {
     var this$1 = this;
 
     var nodes = [], first = true
@@ -9335,6 +9444,7 @@ module.exports = {
       var node = this$1.startNode()
       node.local = this$1.parseIdent(this$1.type === tt._default)
       node.exported = this$1.eatContextual("as") ? this$1.parseIdent(true) : node.local
+      this$1.checkExport(exports, node.exported.name, node.exported.start)
       nodes.push(this$1.finishNode(node, "ExportSpecifier"))
     }
     return nodes
@@ -9394,7 +9504,7 @@ module.exports = {
       } else {
         node$2.local = node$2.imported
         if (this$1.isKeyword(node$2.local.name)) this$1.unexpected(node$2.local.start)
-        if (this$1.reservedWordsStrict.test(node$2.local.name)) this$1.raise(node$2.local.start, "The keyword '" + node$2.local.name + "' is reserved")
+        if (this$1.reservedWordsStrict.test(node$2.local.name)) this$1.raiseRecoverable(node$2.local.start, "The keyword '" + node$2.local.name + "' is reserved")
       }
       this$1.checkLVal(node$2.local, true)
       nodes.push(this$1.finishNode(node$2, "ImportSpecifier"))
@@ -9412,7 +9522,11 @@ module.exports = {
 
     if (this.options.ecmaVersion >= 6 && node) {
       switch (node.type) {
-      case "Identifier":
+        case "Identifier":
+        if (this.inAsync && node.name === "await")
+          this.raise(node.start, "Can not use 'await' as identifier inside an async function")
+        break
+
       case "ObjectPattern":
       case "ArrayPattern":
         break
@@ -9435,6 +9549,7 @@ module.exports = {
         if (node.operator === "=") {
           node.type = "AssignmentPattern"
           delete node.operator
+          this.toAssignable(node.left, isBinding)
           // falls through to AssignmentPattern
         } else {
           this.raise(node.left.end, "Only '=' operator can be used for specifying default value.")
@@ -9442,8 +9557,6 @@ module.exports = {
         }
 
       case "AssignmentPattern":
-        if (node.right.type === "YieldExpression")
-          this.raise(node.right.start, "Yield expression cannot be a default value")
         break
 
       case "ParenthesizedExpression":
@@ -9788,7 +9901,10 @@ module.exports = {
     var this$1 = this;
 
     var startPos = this.start, startLoc = this.startLoc, expr
-    if (this.type.prefix) {
+    if (this.inAsync && this.isContextual("await")) {
+      expr = this.parseAwait(refDestructuringErrors)
+      sawUnary = true
+    } else if (this.type.prefix) {
       var node = this.startNode(), update = this.type === tt.incDec
       node.operator = this.value
       node.prefix = true
@@ -9835,6 +9951,7 @@ module.exports = {
     var this$1 = this;
 
     for (;;) {
+      var maybeAsyncArrow = this$1.options.ecmaVersion >= 8 && base.type === "Identifier" && base.name === "async" && !this$1.canInsertSemicolon()
       if (this$1.eat(tt.dot)) {
         var node = this$1.startNodeAt(startPos, startLoc)
         node.object = base
@@ -9849,9 +9966,23 @@ module.exports = {
         this$1.expect(tt.bracketR)
         base = this$1.finishNode(node$1, "MemberExpression")
       } else if (!noCalls && this$1.eat(tt.parenL)) {
+        var refDestructuringErrors = new DestructuringErrors, oldYieldPos = this$1.yieldPos, oldAwaitPos = this$1.awaitPos
+        this$1.yieldPos = 0
+        this$1.awaitPos = 0
+        var exprList = this$1.parseExprList(tt.parenR, this$1.options.ecmaVersion >= 8, false, refDestructuringErrors)
+        if (maybeAsyncArrow && !this$1.canInsertSemicolon() && this$1.eat(tt.arrow)) {
+          this$1.checkPatternErrors(refDestructuringErrors, true)
+          this$1.checkYieldAwaitInDefaultParams()
+          this$1.yieldPos = oldYieldPos
+          this$1.awaitPos = oldAwaitPos
+          return this$1.parseArrowExpression(this$1.startNodeAt(startPos, startLoc), exprList, true)
+        }
+        this$1.checkExpressionErrors(refDestructuringErrors, true)
+        this$1.yieldPos = oldYieldPos || this$1.yieldPos
+        this$1.awaitPos = oldAwaitPos || this$1.awaitPos
         var node$2 = this$1.startNodeAt(startPos, startLoc)
         node$2.callee = base
-        node$2.arguments = this$1.parseExprList(tt.parenR, false)
+        node$2.arguments = exprList
         base = this$1.finishNode(node$2, "CallExpression")
       } else if (this$1.type === tt.backQuote) {
         var node$3 = this$1.startNodeAt(startPos, startLoc)
@@ -9885,8 +10016,18 @@ module.exports = {
     case tt.name:
       var startPos = this.start, startLoc = this.startLoc
       var id = this.parseIdent(this.type !== tt.name)
-      if (canBeArrow && !this.canInsertSemicolon() && this.eat(tt.arrow))
-        return this.parseArrowExpression(this.startNodeAt(startPos, startLoc), [id])
+      if (this.options.ecmaVersion >= 8 && id.name === "async" && !this.canInsertSemicolon() && this.eat(tt._function))
+        return this.parseFunction(this.startNodeAt(startPos, startLoc), false, false, true)
+      if (canBeArrow && !this.canInsertSemicolon()) {
+        if (this.eat(tt.arrow))
+          return this.parseArrowExpression(this.startNodeAt(startPos, startLoc), [id], false)
+        if (this.options.ecmaVersion >= 8 && id.name === "async" && this.type === tt.name) {
+          id = this.parseIdent()
+          if (this.canInsertSemicolon() || !this.eat(tt.arrow))
+            this.unexpected()
+          return this.parseArrowExpression(this.startNodeAt(startPos, startLoc), [id], true)
+        }
+      }
       return id
 
     case tt.regexp:
@@ -9954,18 +10095,24 @@ module.exports = {
   pp$3.parseParenAndDistinguishExpression = function(canBeArrow) {
     var this$1 = this;
 
-    var startPos = this.start, startLoc = this.startLoc, val
+    var startPos = this.start, startLoc = this.startLoc, val, allowTrailingComma = this.options.ecmaVersion >= 8
     if (this.options.ecmaVersion >= 6) {
       this.next()
 
       var innerStartPos = this.start, innerStartLoc = this.startLoc
-      var exprList = [], first = true
-      var refDestructuringErrors = new DestructuringErrors, spreadStart, innerParenStart
+      var exprList = [], first = true, lastIsComma = false
+      var refDestructuringErrors = new DestructuringErrors, oldYieldPos = this.yieldPos, oldAwaitPos = this.awaitPos, spreadStart, innerParenStart
+      this.yieldPos = 0
+      this.awaitPos = 0
       while (this.type !== tt.parenR) {
         first ? first = false : this$1.expect(tt.comma)
-        if (this$1.type === tt.ellipsis) {
+        if (allowTrailingComma && this$1.afterTrailingComma(tt.parenR, true)) {
+          lastIsComma = true
+          break
+        } else if (this$1.type === tt.ellipsis) {
           spreadStart = this$1.start
           exprList.push(this$1.parseParenItem(this$1.parseRest()))
+          if (this$1.type === tt.comma) this$1.raise(this$1.start, "Comma is not permitted after the rest element")
           break
         } else {
           if (this$1.type === tt.parenL && !innerParenStart) {
@@ -9979,13 +10126,18 @@ module.exports = {
 
       if (canBeArrow && !this.canInsertSemicolon() && this.eat(tt.arrow)) {
         this.checkPatternErrors(refDestructuringErrors, true)
+        this.checkYieldAwaitInDefaultParams()
         if (innerParenStart) this.unexpected(innerParenStart)
+        this.yieldPos = oldYieldPos
+        this.awaitPos = oldAwaitPos
         return this.parseParenArrowList(startPos, startLoc, exprList)
       }
 
-      if (!exprList.length) this.unexpected(this.lastTokStart)
+      if (!exprList.length || lastIsComma) this.unexpected(this.lastTokStart)
       if (spreadStart) this.unexpected(spreadStart)
       this.checkExpressionErrors(refDestructuringErrors, true)
+      this.yieldPos = oldYieldPos || this.yieldPos
+      this.awaitPos = oldAwaitPos || this.awaitPos
 
       if (exprList.length > 1) {
         val = this.startNodeAt(innerStartPos, innerStartLoc)
@@ -10037,7 +10189,7 @@ module.exports = {
     }
     var startPos = this.start, startLoc = this.startLoc
     node.callee = this.parseSubscripts(this.parseExprAtom(), startPos, startLoc, true)
-    if (this.eat(tt.parenL)) node.arguments = this.parseExprList(tt.parenR, false)
+    if (this.eat(tt.parenL)) node.arguments = this.parseExprList(tt.parenR, this.options.ecmaVersion >= 8, false)
     else node.arguments = empty$1
     return this.finishNode(node, "NewExpression")
   }
@@ -10087,7 +10239,7 @@ module.exports = {
         if (this$1.afterTrailingComma(tt.braceR)) break
       } else first = false
 
-      var prop = this$1.startNode(), isGenerator, startPos, startLoc
+      var prop = this$1.startNode(), isGenerator, isAsync, startPos, startLoc
       if (this$1.options.ecmaVersion >= 6) {
         prop.method = false
         prop.shorthand = false
@@ -10099,14 +10251,25 @@ module.exports = {
           isGenerator = this$1.eat(tt.star)
       }
       this$1.parsePropertyName(prop)
-      this$1.parsePropertyValue(prop, isPattern, isGenerator, startPos, startLoc, refDestructuringErrors)
+      if (!isPattern && this$1.options.ecmaVersion >= 8 && !isGenerator && !prop.computed &&
+          prop.key.type === "Identifier" && prop.key.name === "async" && this$1.type !== tt.parenL &&
+          this$1.type !== tt.colon && !this$1.canInsertSemicolon()) {
+        isAsync = true
+        this$1.parsePropertyName(prop, refDestructuringErrors)
+      } else {
+        isAsync = false
+      }
+      this$1.parsePropertyValue(prop, isPattern, isGenerator, isAsync, startPos, startLoc, refDestructuringErrors)
       this$1.checkPropClash(prop, propHash)
       node.properties.push(this$1.finishNode(prop, "Property"))
     }
     return this.finishNode(node, isPattern ? "ObjectPattern" : "ObjectExpression")
   }
 
-  pp$3.parsePropertyValue = function(prop, isPattern, isGenerator, startPos, startLoc, refDestructuringErrors) {
+  pp$3.parsePropertyValue = function(prop, isPattern, isGenerator, isAsync, startPos, startLoc, refDestructuringErrors) {
+    if ((isGenerator || isAsync) && this.type === tt.colon)
+      this.unexpected()
+
     if (this.eat(tt.colon)) {
       prop.value = isPattern ? this.parseMaybeDefault(this.start, this.startLoc) : this.parseMaybeAssign(false, refDestructuringErrors)
       prop.kind = "init"
@@ -10114,11 +10277,11 @@ module.exports = {
       if (isPattern) this.unexpected()
       prop.kind = "init"
       prop.method = true
-      prop.value = this.parseMethod(isGenerator)
+      prop.value = this.parseMethod(isGenerator, isAsync)
     } else if (this.options.ecmaVersion >= 5 && !prop.computed && prop.key.type === "Identifier" &&
                (prop.key.name === "get" || prop.key.name === "set") &&
                (this.type != tt.comma && this.type != tt.braceR)) {
-      if (isGenerator || isPattern) this.unexpected()
+      if (isGenerator || isAsync || isPattern) this.unexpected()
       prop.kind = prop.key.name
       this.parsePropertyName(prop)
       prop.value = this.parseMethod(false)
@@ -10129,13 +10292,15 @@ module.exports = {
           this.raiseRecoverable(start, "getter should have no params")
         else
           this.raiseRecoverable(start, "setter should have exactly one param")
+      } else {
+        if (prop.kind === "set" && prop.value.params[0].type === "RestElement")
+          this.raiseRecoverable(prop.value.params[0].start, "Setter cannot use rest params")
       }
-      if (prop.kind === "set" && prop.value.params[0].type === "RestElement")
-        this.raiseRecoverable(prop.value.params[0].start, "Setter cannot use rest params")
     } else if (this.options.ecmaVersion >= 6 && !prop.computed && prop.key.type === "Identifier") {
       if (this.keywords.test(prop.key.name) ||
-          (this.strict ? this.reservedWordsStrictBind : this.reservedWords).test(prop.key.name) ||
-          (this.inGenerator && prop.key.name == "yield"))
+          (this.strict ? this.reservedWordsStrict : this.reservedWords).test(prop.key.name) ||
+          (this.inGenerator && prop.key.name == "yield") ||
+          (this.inAsync && prop.key.name == "await"))
         this.raiseRecoverable(prop.key.start, "'" + prop.key.name + "' can not be used as shorthand property")
       prop.kind = "init"
       if (isPattern) {
@@ -10173,32 +10338,59 @@ module.exports = {
       node.generator = false
       node.expression = false
     }
+    if (this.options.ecmaVersion >= 8)
+      node.async = false
   }
 
   // Parse object or class method.
 
-  pp$3.parseMethod = function(isGenerator) {
-    var node = this.startNode(), oldInGen = this.inGenerator
-    this.inGenerator = isGenerator
+  pp$3.parseMethod = function(isGenerator, isAsync) {
+    var node = this.startNode(), oldInGen = this.inGenerator, oldInAsync = this.inAsync, oldYieldPos = this.yieldPos, oldAwaitPos = this.awaitPos
+
     this.initFunction(node)
-    this.expect(tt.parenL)
-    node.params = this.parseBindingList(tt.parenR, false, false)
     if (this.options.ecmaVersion >= 6)
       node.generator = isGenerator
+    if (this.options.ecmaVersion >= 8)
+      node.async = !!isAsync
+
+    this.inGenerator = node.generator
+    this.inAsync = node.async
+    this.yieldPos = 0
+    this.awaitPos = 0
+
+    this.expect(tt.parenL)
+    node.params = this.parseBindingList(tt.parenR, false, this.options.ecmaVersion >= 8)
+    this.checkYieldAwaitInDefaultParams()
     this.parseFunctionBody(node, false)
+
     this.inGenerator = oldInGen
+    this.inAsync = oldInAsync
+    this.yieldPos = oldYieldPos
+    this.awaitPos = oldAwaitPos
     return this.finishNode(node, "FunctionExpression")
   }
 
   // Parse arrow function expression with given parameters.
 
-  pp$3.parseArrowExpression = function(node, params) {
-    var oldInGen = this.inGenerator
-    this.inGenerator = false
+  pp$3.parseArrowExpression = function(node, params, isAsync) {
+    var oldInGen = this.inGenerator, oldInAsync = this.inAsync, oldYieldPos = this.yieldPos, oldAwaitPos = this.awaitPos
+
     this.initFunction(node)
+    if (this.options.ecmaVersion >= 8)
+      node.async = !!isAsync
+
+    this.inGenerator = false
+    this.inAsync = node.async
+    this.yieldPos = 0
+    this.awaitPos = 0
+
     node.params = this.toAssignableList(params, true)
     this.parseFunctionBody(node, true)
+
     this.inGenerator = oldInGen
+    this.inAsync = oldInAsync
+    this.yieldPos = oldYieldPos
+    this.awaitPos = oldAwaitPos
     return this.finishNode(node, "ArrowFunctionExpression")
   }
 
@@ -10223,31 +10415,36 @@ module.exports = {
     // If this is a strict mode function, verify that argument names
     // are not repeated, and it does not try to bind the words `eval`
     // or `arguments`.
-    var useStrict = (!isExpression && node.body.body.length && this.isUseStrict(node.body.body[0])) ? node.body.body[0] : null;
+    var useStrict = (!isExpression && node.body.body.length && this.isUseStrict(node.body.body[0])) ? node.body.body[0] : null
+    if (useStrict && this.options.ecmaVersion >= 7 && !this.isSimpleParamList(node.params))
+      this.raiseRecoverable(useStrict.start, "Illegal 'use strict' directive in function with non-simple parameter list")
+
     if (this.strict || useStrict) {
       var oldStrict = this.strict
       this.strict = true
       if (node.id)
         this.checkLVal(node.id, true)
-      this.checkParams(node, useStrict)
+      this.checkParams(node)
       this.strict = oldStrict
-    } else if (isArrowFunction) {
-      this.checkParams(node, useStrict)
+    } else if (isArrowFunction || !this.isSimpleParamList(node.params)) {
+      this.checkParams(node)
     }
+  }
+
+  pp$3.isSimpleParamList = function(params) {
+    for (var i = 0; i < params.length; i++)
+      if (params[i].type !== "Identifier") return false
+    return true
   }
 
   // Checks function params for various disallowed patterns such as using "eval"
   // or "arguments" and duplicate parameters.
 
-  pp$3.checkParams = function(node, useStrict) {
-      var this$1 = this;
+  pp$3.checkParams = function(node) {
+    var this$1 = this;
 
-      var nameHash = {}
-      for (var i = 0; i < node.params.length; i++) {
-        if (useStrict && this$1.options.ecmaVersion >= 7 && node.params[i].type !== "Identifier")
-          this$1.raiseRecoverable(useStrict.start, "Illegal 'use strict' directive in function with non-simple parameter list");
-        this$1.checkLVal(node.params[i], true, nameHash)
-      }
+    var nameHash = {}
+    for (var i = 0; i < node.params.length; i++) this$1.checkLVal(node.params[i], true, nameHash)
   }
 
   // Parses a comma-separated list of expressions, and returns them as
@@ -10272,7 +10469,7 @@ module.exports = {
       else if (this$1.type === tt.ellipsis) {
         elt = this$1.parseSpread(refDestructuringErrors)
         if (this$1.type === tt.comma && refDestructuringErrors && !refDestructuringErrors.trailingComma) {
-          refDestructuringErrors.trailingComma = this$1.lastTokStart
+          refDestructuringErrors.trailingComma = this$1.start
         }
       } else
         elt = this$1.parseMaybeAssign(false, refDestructuringErrors)
@@ -10293,8 +10490,10 @@ module.exports = {
           (this.options.ecmaVersion >= 6 ||
            this.input.slice(this.start, this.end).indexOf("\\") == -1))
         this.raiseRecoverable(this.start, "The keyword '" + this.value + "' is reserved")
-      if (!liberal && this.inGenerator && this.value === "yield")
+      if (this.inGenerator && this.value === "yield")
         this.raiseRecoverable(this.start, "Can not use 'yield' as identifier inside a generator")
+      if (this.inAsync && this.value === "await")
+        this.raiseRecoverable(this.start, "Can not use 'await' as identifier inside an async function")
       node.name = this.value
     } else if (liberal && this.type.keyword) {
       node.name = this.type.keyword
@@ -10308,6 +10507,8 @@ module.exports = {
   // Parses yield expression inside generator.
 
   pp$3.parseYield = function() {
+    if (!this.yieldPos) this.yieldPos = this.start
+
     var node = this.startNode()
     this.next()
     if (this.type == tt.semi || this.canInsertSemicolon() || (this.type != tt.star && !this.type.startsExpr)) {
@@ -10318,6 +10519,15 @@ module.exports = {
       node.argument = this.parseMaybeAssign()
     }
     return this.finishNode(node, "YieldExpression")
+  }
+
+  pp$3.parseAwait = function() {
+    if (!this.awaitPos) this.awaitPos = this.start
+
+    var node = this.startNode()
+    this.next()
+    node.argument = this.parseMaybeUnary(null, true)
+    return this.finishNode(node, "AwaitExpression")
   }
 
   var pp$4 = Parser.prototype
@@ -10988,14 +11198,15 @@ module.exports = {
   pp$7.readNumber = function(startsWithDot) {
     var start = this.pos, isFloat = false, octal = this.input.charCodeAt(this.pos) === 48
     if (!startsWithDot && this.readInt(10) === null) this.raise(start, "Invalid number")
+    if (octal && this.pos == start + 1) octal = false
     var next = this.input.charCodeAt(this.pos)
-    if (next === 46) { // '.'
+    if (next === 46 && !octal) { // '.'
       ++this.pos
       this.readInt(10)
       isFloat = true
       next = this.input.charCodeAt(this.pos)
     }
-    if (next === 69 || next === 101) { // 'eE'
+    if ((next === 69 || next === 101) && !octal) { // 'eE'
       next = this.input.charCodeAt(++this.pos)
       if (next === 43 || next === 45) ++this.pos // '+-'
       if (this.readInt(10) === null) this.raise(start, "Invalid number")
@@ -11198,7 +11409,7 @@ module.exports = {
     return this.finishToken(type, word)
   }
 
-  var version = "3.3.0"
+  var version = "4.0.3"
 
   // The main exported interface (under `self.acorn` when in the
   // browser) is a `parse` function that takes a code string and
@@ -11228,10 +11439,20 @@ module.exports = {
     return new Parser(options, input)
   }
 
+  // This is a terrible kludge to support the existing, pre-ES6
+  // interface where the loose parser module retroactively adds exports
+  // to this module.
+  function addLooseExports(parse, Parser, plugins) {
+    exports.parse_dammit = parse
+    exports.LooseParser = Parser
+    exports.pluginsLoose = plugins
+  }
+
   exports.version = version;
   exports.parse = parse;
   exports.parseExpressionAt = parseExpressionAt;
   exports.tokenizer = tokenizer;
+  exports.addLooseExports = addLooseExports;
   exports.Parser = Parser;
   exports.plugins = plugins;
   exports.defaultOptions = defaultOptions;
@@ -11263,7 +11484,7 @@ module.exports={
   },
   "homepage": "https://github.com/eslint/espree",
   "main": "espree.js",
-  "version": "3.1.7",
+  "version": "3.3.0",
   "files": [
     "lib",
     "espree.js"
@@ -11273,14 +11494,14 @@ module.exports={
   },
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@github.com/eslint/espree.git"
+    "url": "git+https://github.com/eslint/espree.git"
   },
   "bugs": {
     "url": "http://github.com/eslint/espree.git"
   },
   "license": "BSD-2-Clause",
   "dependencies": {
-    "acorn": "^3.3.0",
+    "acorn": "^4.0.1",
     "acorn-jsx": "^3.0.0"
   },
   "devDependencies": {
@@ -11288,7 +11509,7 @@ module.exports={
     "chai": "^1.10.0",
     "eslint": "^2.0.0-beta.1",
     "eslint-config-eslint": "^3.0.0",
-    "eslint-release": "^0.6.4",
+    "eslint-release": "^0.10.0",
     "esprima": "latest",
     "esprima-fb": "^8001.2001.0-dev-harmony-fb",
     "istanbul": "~0.2.6",
@@ -11314,16 +11535,17 @@ module.exports={
     "lint": "node Makefile.js lint",
     "release": "eslint-release",
     "ci-release": "eslint-ci-release",
+    "gh-release": "eslint-gh-release",
     "alpharelease": "eslint-prelease alpha",
     "betarelease": "eslint-prelease beta",
     "browserify": "node Makefile.js browserify"
   },
-  "gitHead": "4ddfacba95c96732541d94521efbcdccce2fad99",
-  "readme": "# Espree\n\nEspree started out as a fork of [Esprima](http://esprima.org) v1.2.2, the last stable published released of Esprima before work on ECMAScript 6 began. Espree is now built on top of [Acorn](https://github.com/ternjs/acorn), which has a modular architecture that allows extension of core functionality. The goal of Espree is to produce output that is similar to Esprima with a similar API so that it can be used in place of Esprima.\n\n## Usage\n\nInstall:\n\n```\nnpm i espree --save\n```\n\nAnd in your Node.js code:\n\n```javascript\nvar espree = require(\"espree\");\n\nvar ast = espree.parse(code);\n```\n\nThere is a second argument to `parse()` that allows you to specify various options:\n\n```javascript\nvar espree = require(\"espree\");\n\nvar ast = espree.parse(code, {\n\n    // attach range information to each node\n    range: true,\n\n    // attach line/column location information to each node\n    loc: true,\n\n    // create a top-level comments array containing all comments\n    comment: true,\n\n    // attach comments to the closest relevant node as leadingComments and\n    // trailingComments\n    attachComment: true,\n\n    // create a top-level tokens array containing all tokens\n    tokens: true,\n\n    // specify the language version (3, 5, 6, or 7, default is 5)\n    ecmaVersion: 5,\n\n    // specify which type of script you're parsing (script or module, default is script)\n    sourceType: \"script\",\n\n    // specify additional language features\n    ecmaFeatures: {\n\n        // enable JSX parsing\n        jsx: true,\n\n        // enable return in global scope\n        globalReturn: true,\n\n        // enable implied strict mode (if ecmaVersion >= 5)\n        impliedStrict: true,\n\n        // allow experimental object rest/spread\n        experimentalObjectRestSpread: true\n    }\n});\n```\n\n## Esprima Compatibility Going Forward\n\nThe primary goal is to produce the exact same AST structure and tokens as Esprima, and that takes precedence over anything else. (The AST structure being the [ESTree](https://github.com/estree/estree) API with JSX extensions.) Separate from that, Espree may deviate from what Esprima outputs in terms of where and how comments are attached, as well as what additional information is available on AST nodes. That is to say, Espree may add more things to the AST nodes than Esprima does but the overall AST structure produced will be the same.\n\nEspree may also deviate from Esprima in the interface it exposes.\n\n## Contributing\n\nIssues and pull requests will be triaged and responded to as quickly as possible. We operate under the [ESLint Contributor Guidelines](http://eslint.org/docs/developer-guide/contributing), so please be sure to read them before contributing. If you're not sure where to dig in, check out the [issues](https://github.com/eslint/espree/issues).\n\nEspree is licensed under a permissive BSD 2-clause license.\n\n## Build Commands\n\n* `npm test` - run all linting and tests\n* `npm run lint` - run all linting\n* `npm run browserify` - creates a version of Espree that is usable in a browser\n\n## Differences from Espree 2.x\n\n* The `tokenize()` method does not use `ecmaFeatures`. Any string will be tokenized completely based on ECMAScript 6 semantics.\n* Trailing whitespace no longer is counted as part of a node.\n* `let` and `const` declarations are no longer parsed by default. You must opt-in using `ecmaFeatures.blockBindings`.\n* The `esparse` and `esvalidate` binary scripts have been removed.\n* There is no `tolerant` option. We will investigate adding this back in the future.\n\n## Known Incompatibilities\n\nIn an effort to help those wanting to transition from other parsers to Espree, the following is a list of noteworthy incompatibilities with other parsers. These are known differences that we do not intend to change.\n\n### Esprima 1.2.2\n\n* Esprima counts trailing whitespace as part of each AST node while Espree does not. In Espree, the end of a node is where the last token occurs.\n* Espree does not parse `let` and `const` declarations by default.\n* Error messages returned for parsing errors are different.\n* There are two addition properties on every node and token: `start` and `end`. These represent the same data as `range` and are used internally by Acorn.\n\n### Esprima 2.x\n\n* Esprima 2.x uses a different comment attachment algorithm that results in some comments being added in different places than Espree. The algorithm Espree uses is the same one used in Esprima 1.2.2.\n\n## Frequently Asked Questions\n\n### Why another parser\n\n[ESLint](http://eslint.org) had been relying on Esprima as its parser from the beginning. While that was fine when the JavaScript language was evolving slowly, the pace of development increased dramatically and Esprima had fallen behind. ESLint, like many other tools reliant on Esprima, has been stuck in using new JavaScript language features until Esprima updates, and that caused our users frustration.\n\nWe decided the only way for us to move forward was to create our own parser, bringing us inline with JSHint and JSLint, and allowing us to keep implementing new features as we need them. We chose to fork Esprima instead of starting from scratch in order to move as quickly as possible with a compatible API.\n\nWith Espree 2.0.0, we are no longer a fork of Esprima but rather a translation layer between Acorn and Esprima syntax. This allows us to put work back into a community-supported parser (Acorn) that is continuing to grow and evolve while maintaining an Esprima-compatible parser for those utilities still built on Esprima.\n\n### Have you tried working with Esprima?\n\nYes. Since the start of ESLint, we've regularly filed bugs and feature requests with Esprima and will continue to do so. However, there are some different philosophies around how the projects work that need to be worked through. The initial goal was to have Espree track Esprima and eventually merge the two back together, but we ultimately decided that building on top of Acorn was a better choice due to Acorn's plugin support.\n\n### Why don't you just use Acorn?\n\nAcorn is a great JavaScript parser that produces an AST that is compatible with Esprima. Unfortunately, ESLint relies on more than just the AST to do its job. It relies on Esprima's tokens and comment attachment features to get a complete picture of the source code. We investigated switching to Acorn, but the inconsistencies between Esprima and Acorn created too much work for a project like ESLint.\n\nWe are building on top of Acorn, however, so that we can contribute back and help make Acorn even better.\n\n### What ECMAScript 6 features do you support?\n\nAll of them.\n\n### What ECMAScript 7 features do you support?\n\nThere is only one ECMAScript 7 syntax change: the exponentiation operator. Espree supports this.\n\n### How do you determine which experimental features to support?\n\nIn general, we do not support experimental JavaScript features. We may make exceptions from time to time depending on the maturity of the features.\n",
+  "readme": "# Espree\n\nEspree started out as a fork of [Esprima](http://esprima.org) v1.2.2, the last stable published released of Esprima before work on ECMAScript 6 began. Espree is now built on top of [Acorn](https://github.com/ternjs/acorn), which has a modular architecture that allows extension of core functionality. The goal of Espree is to produce output that is similar to Esprima with a similar API so that it can be used in place of Esprima.\n\n## Usage\n\nInstall:\n\n```\nnpm i espree --save\n```\n\nAnd in your Node.js code:\n\n```javascript\nvar espree = require(\"espree\");\n\nvar ast = espree.parse(code);\n```\n\nThere is a second argument to `parse()` that allows you to specify various options:\n\n```javascript\nvar espree = require(\"espree\");\n\nvar ast = espree.parse(code, {\n\n    // attach range information to each node\n    range: true,\n\n    // attach line/column location information to each node\n    loc: true,\n\n    // create a top-level comments array containing all comments\n    comment: true,\n\n    // attach comments to the closest relevant node as leadingComments and\n    // trailingComments\n    attachComment: true,\n\n    // create a top-level tokens array containing all tokens\n    tokens: true,\n\n    // specify the language version (3, 5, 6, 7, or 8, default is 5)\n    ecmaVersion: 5,\n\n    // specify which type of script you're parsing (script or module, default is script)\n    sourceType: \"script\",\n\n    // specify additional language features\n    ecmaFeatures: {\n\n        // enable JSX parsing\n        jsx: true,\n\n        // enable return in global scope\n        globalReturn: true,\n\n        // enable implied strict mode (if ecmaVersion >= 5)\n        impliedStrict: true,\n\n        // allow experimental object rest/spread\n        experimentalObjectRestSpread: true\n    }\n});\n```\n\n## Esprima Compatibility Going Forward\n\nThe primary goal is to produce the exact same AST structure and tokens as Esprima, and that takes precedence over anything else. (The AST structure being the [ESTree](https://github.com/estree/estree) API with JSX extensions.) Separate from that, Espree may deviate from what Esprima outputs in terms of where and how comments are attached, as well as what additional information is available on AST nodes. That is to say, Espree may add more things to the AST nodes than Esprima does but the overall AST structure produced will be the same.\n\nEspree may also deviate from Esprima in the interface it exposes.\n\n## Contributing\n\nIssues and pull requests will be triaged and responded to as quickly as possible. We operate under the [ESLint Contributor Guidelines](http://eslint.org/docs/developer-guide/contributing), so please be sure to read them before contributing. If you're not sure where to dig in, check out the [issues](https://github.com/eslint/espree/issues).\n\nEspree is licensed under a permissive BSD 2-clause license.\n\n## Build Commands\n\n* `npm test` - run all linting and tests\n* `npm run lint` - run all linting\n* `npm run browserify` - creates a version of Espree that is usable in a browser\n\n## Differences from Espree 2.x\n\n* The `tokenize()` method does not use `ecmaFeatures`. Any string will be tokenized completely based on ECMAScript 6 semantics.\n* Trailing whitespace no longer is counted as part of a node.\n* `let` and `const` declarations are no longer parsed by default. You must opt-in using `ecmaFeatures.blockBindings`.\n* The `esparse` and `esvalidate` binary scripts have been removed.\n* There is no `tolerant` option. We will investigate adding this back in the future.\n\n## Known Incompatibilities\n\nIn an effort to help those wanting to transition from other parsers to Espree, the following is a list of noteworthy incompatibilities with other parsers. These are known differences that we do not intend to change.\n\n### Esprima 1.2.2\n\n* Esprima counts trailing whitespace as part of each AST node while Espree does not. In Espree, the end of a node is where the last token occurs.\n* Espree does not parse `let` and `const` declarations by default.\n* Error messages returned for parsing errors are different.\n* There are two addition properties on every node and token: `start` and `end`. These represent the same data as `range` and are used internally by Acorn.\n\n### Esprima 2.x\n\n* Esprima 2.x uses a different comment attachment algorithm that results in some comments being added in different places than Espree. The algorithm Espree uses is the same one used in Esprima 1.2.2.\n\n## Frequently Asked Questions\n\n### Why another parser\n\n[ESLint](http://eslint.org) had been relying on Esprima as its parser from the beginning. While that was fine when the JavaScript language was evolving slowly, the pace of development increased dramatically and Esprima had fallen behind. ESLint, like many other tools reliant on Esprima, has been stuck in using new JavaScript language features until Esprima updates, and that caused our users frustration.\n\nWe decided the only way for us to move forward was to create our own parser, bringing us inline with JSHint and JSLint, and allowing us to keep implementing new features as we need them. We chose to fork Esprima instead of starting from scratch in order to move as quickly as possible with a compatible API.\n\nWith Espree 2.0.0, we are no longer a fork of Esprima but rather a translation layer between Acorn and Esprima syntax. This allows us to put work back into a community-supported parser (Acorn) that is continuing to grow and evolve while maintaining an Esprima-compatible parser for those utilities still built on Esprima.\n\n### Have you tried working with Esprima?\n\nYes. Since the start of ESLint, we've regularly filed bugs and feature requests with Esprima and will continue to do so. However, there are some different philosophies around how the projects work that need to be worked through. The initial goal was to have Espree track Esprima and eventually merge the two back together, but we ultimately decided that building on top of Acorn was a better choice due to Acorn's plugin support.\n\n### Why don't you just use Acorn?\n\nAcorn is a great JavaScript parser that produces an AST that is compatible with Esprima. Unfortunately, ESLint relies on more than just the AST to do its job. It relies on Esprima's tokens and comment attachment features to get a complete picture of the source code. We investigated switching to Acorn, but the inconsistencies between Esprima and Acorn created too much work for a project like ESLint.\n\nWe are building on top of Acorn, however, so that we can contribute back and help make Acorn even better.\n\n### What ECMAScript 6 features do you support?\n\nAll of them.\n\n### What ECMAScript 7/2016 features do you support?\n\nThere is only one ECMAScript 7 syntax change: the exponentiation operator. Espree supports this.\n\n### What ECMAScript 2017 features do you support?\n\nBecause ECMAScript 2017 is still under development, we are implementing features as they are finalized. Currently, Espree supports:\n\n* `async` functions\n* Trailing commas in function declarations and calls (including arrow functions and concise methods)\n\n### How do you determine which experimental features to support?\n\nIn general, we do not support experimental JavaScript features. We may make exceptions from time to time depending on the maturity of the features.\n",
   "readmeFilename": "README.md",
-  "_id": "espree@3.1.7",
-  "_shasum": "fd5deec76a97a5120a9cd3a7cb1177a0923b11d2",
-  "_from": "espree@>=3.1.6 <4.0.0"
+  "gitHead": "6606f63a6c30ef5cd3405f0a4e46fd9f51f7fbbe",
+  "_id": "espree@3.3.0",
+  "_shasum": "9b32fc5127eeea573c339b99873046638ed91761",
+  "_from": "espree@>=3.2.0 <4.0.0"
 }
 
 },{}],"espree":[function(require,module,exports){
@@ -11669,6 +11891,7 @@ acorn.plugins.espree = function(instance) {
 
             var prop = this.startNode(),
                 isGenerator,
+                isAsync,
                 startPos,
                 startLoc;
 
@@ -11698,8 +11921,22 @@ acorn.plugins.espree = function(instance) {
                 }
             }
 
-            this.parsePropertyName(prop);
-            this.parsePropertyValue(prop, isPattern, isGenerator, startPos, startLoc, refShorthandDefaultPos);
+            // grab the property name or "async"
+            this.parsePropertyName(prop/* , refDestructuringErrors */);
+            if (this.options.ecmaVersion >= 8 &&
+                !isPattern &&
+                !isGenerator &&
+                !prop.computed &&
+                prop.key.type === "Identifier" &&
+                prop.key.name === "async" &&
+                this.type !== tt.parenL &&
+                !this.canInsertSemicolon()
+            ) {
+                this.parsePropertyName(prop/* , refDestructuringErrors */);
+                isAsync = true;
+            }
+
+            this.parsePropertyValue(prop, isPattern, isGenerator, isAsync, startPos, startLoc, refShorthandDefaultPos);
             this.checkPropClash(prop, propHash);
             node.properties.push(this.finishNode(prop, "Property"));
         }
@@ -11835,12 +12072,13 @@ function tokenize(code, options) {
             case 5:
             case 6:
             case 7:
+            case 8:
                 acornOptions.ecmaVersion = options.ecmaVersion;
                 extra.ecmaVersion = options.ecmaVersion;
                 break;
 
             default:
-                throw new Error("ecmaVersion must be 3, 5, 6, or 7.");
+                throw new Error("ecmaVersion must be 3, 5, 6, 7, or 8.");
         }
     }
 
@@ -11972,12 +12210,13 @@ function parse(code, options) {
                 case 5:
                 case 6:
                 case 7:
+                case 8:
                     acornOptions.ecmaVersion = options.ecmaVersion;
                     extra.ecmaVersion = options.ecmaVersion;
                     break;
 
                 default:
-                    throw new Error("ecmaVersion must be 3, 5, 6, or 7.");
+                    throw new Error("ecmaVersion must be 3, 5, 6, 7, or 8.");
             }
         }
 
@@ -14565,6 +14804,10 @@ function plural(ms, n, name) {
         return isProperty(title) || isParamTitle(title);
     }
 
+    function isAllowedOptional(title) {
+        return isProperty(title) || isParamTitle(title);
+    }
+
     function isTypeParameterRequired(title) {
         return isParamTitle(title) || isReturnTitle(title) ||
             title === 'define' || title === 'enum' ||
@@ -14748,9 +14991,10 @@ function plural(ms, n, name) {
                 return utility.throwError('Braces are not balanced');
             }
 
-            if (isParamTitle(title)) {
+            if (isAllowedOptional(title)) {
                 return typed.parseParamType(type);
             }
+
             return typed.parseType(type);
         }
 
@@ -14776,6 +15020,7 @@ function plural(ms, n, name) {
             var name = '',
                 useBrackets,
                 insideString;
+
 
             skipWhiteSpace(last);
 
@@ -14962,7 +15207,7 @@ function plural(ms, n, name) {
 
         TagParser.prototype._parseNamePath = function (optional) {
             var name;
-            name = parseName(this._last, sloppy && isParamTitle(this._title), true);
+            name = parseName(this._last, sloppy && isAllowedOptional(this._title), true);
             if (!name) {
                 if (!optional) {
                     if (!this.addError('Missing or invalid tag name')) {
@@ -14988,7 +15233,7 @@ function plural(ms, n, name) {
 
             // param, property requires name
             if (isAllowedName(this._title)) {
-                this._tag.name = parseName(this._last, sloppy && isParamTitle(this._title), isAllowedNested(this._title));
+                this._tag.name = parseName(this._last, sloppy && isAllowedOptional(this._title), isAllowedNested(this._title));
                 if (!this._tag.name) {
                     if (!isNameParameterRequired(this._title)) {
                         return true;
@@ -15027,6 +15272,7 @@ function plural(ms, n, name) {
                     }
                 }
             }
+
 
             return true;
         };
@@ -15140,7 +15386,7 @@ function plural(ms, n, name) {
 
             description = this._tag.description;
             // un-fix potentially sloppy declaration
-            if (isParamTitle(this._title) && !this._tag.type && description && description.charAt(0) === '[') {
+            if (isAllowedOptional(this._title) && !this._tag.type && description && description.charAt(0) === '[') {
                 this._tag.type = this._extra.name;
                 if (!this._tag.name) {
                     this._tag.name = undefined;
@@ -15232,6 +15478,7 @@ function plural(ms, n, name) {
         TagParser.prototype.parse = function parse() {
             var i, iz, sequences, method;
 
+
             // empty title
             if (!this._title) {
                 if (!this.addError('Missing or invalid title')) {
@@ -15278,6 +15525,7 @@ function plural(ms, n, name) {
             while (index < parser._last) {
                 advance();
             }
+
             return tag;
         }
 
@@ -16702,7 +16950,7 @@ module.exports={
   "description": "JSDoc parser",
   "homepage": "https://github.com/eslint/doctrine",
   "main": "lib/doctrine.js",
-  "version": "1.3.0",
+  "version": "1.4.0",
   "engines": {
     "node": ">=0.10.0"
   },
@@ -16766,12 +17014,12 @@ module.exports={
   },
   "readme": "[![NPM version][npm-image]][npm-url]\n[![build status][travis-image]][travis-url]\n[![Test coverage][coveralls-image]][coveralls-url]\n[![Downloads][downloads-image]][downloads-url]\n[![Join the chat at https://gitter.im/eslint/doctrine](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/eslint/doctrine?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)\n\n# Doctrine\n\nDoctrine is a [JSDoc](http://usejsdoc.org) parser that parses documentation comments from JavaScript (you need to pass in the comment, not a whole JavaScript file).\n\n## Installation\n\nYou can install Doctrine using [npm](https://npmjs.com):\n\n```\n$ npm install doctrine --save-dev\n```\n\nDoctrine can also be used in web browsers using [Browserify](http://browserify.org).\n\n## Usage\n\nRequire doctrine inside of your JavaScript:\n\n```js\nvar doctrine = require(\"doctrine\");\n```\n\n### parse()\n\nThe primary method is `parse()`, which accepts two arguments: the JSDoc comment to parse and an optional options object. The available options are:\n\n* `unwrap` - set to `true` to delete the leading `/**`, any `*` that begins a line, and the trailing `*/` from the source text. Default: `false`.\n* `tags` - an array of tags to return. When specified, Doctrine returns only tags in this array. For example, if `tags` is `[\"param\"]`, then only `@param` tags will be returned. Default: `null`.\n* `recoverable` - set to `true` to keep parsing even when syntax errors occur. Default: `false`.\n* `sloppy` - set to `true` to allow optional parameters to be specified in brackets (`@param {string} [foo]`). Default: `false`.\n* `lineNumbers` - set to `true` to add `lineNumber` to each node, specifying the line on which the node is found in the source. Default: `false`.\n\nHere's a simple example:\n\n```js\nvar ast = doctrine.parse(\n    [\n        \"/**\",\n        \" * This function comment is parsed by doctrine\",\n        \" * @param {{ok:String}} userName\",\n        \"*/\"\n    ].join('\\n'), { unwrap: true });\n```\n\nThis example returns the following AST:\n\n    {\n        \"description\": \"This function comment is parsed by doctrine\",\n        \"tags\": [\n            {\n                \"title\": \"param\",\n                \"description\": null,\n                \"type\": {\n                    \"type\": \"RecordType\",\n                    \"fields\": [\n                        {\n                            \"type\": \"FieldType\",\n                            \"key\": \"ok\",\n                            \"value\": {\n                                \"type\": \"NameExpression\",\n                                \"name\": \"String\"\n                            }\n                        }\n                    ]\n                },\n                \"name\": \"userName\"\n            }\n        ]\n    }\n\nSee the [demo page](http://eslint.org/doctrine/demo/) more detail.\n\n## Team\n\nThese folks keep the project moving and are resources for help:\n\n* Nicholas C. Zakas ([@nzakas](https://github.com/nzakas)) - project lead\n* Yusuke Suzuki ([@constellation](https://github.com/constellation)) - reviewer\n\n## Contributing\n\nIssues and pull requests will be triaged and responded to as quickly as possible. We operate under the [ESLint Contributor Guidelines](http://eslint.org/docs/developer-guide/contributing), so please be sure to read them before contributing. If you're not sure where to dig in, check out the [issues](https://github.com/eslint/doctrine/issues).\n\n## Frequently Asked Questions\n\n### Can I pass a whole JavaScript file to Doctrine?\n\nNo. Doctrine can only parse JSDoc comments, so you'll need to pass just the JSDoc comment to Doctrine in order to work.\n\n\n### License\n\n#### doctrine\n\nCopyright (C) 2012 [Yusuke Suzuki](http://github.com/Constellation)\n (twitter: [@Constellation](http://twitter.com/Constellation)) and other contributors.\n\nRedistribution and use in source and binary forms, with or without\nmodification, are permitted provided that the following conditions are met:\n\n  * Redistributions of source code must retain the above copyright\n    notice, this list of conditions and the following disclaimer.\n\n  * Redistributions in binary form must reproduce the above copyright\n    notice, this list of conditions and the following disclaimer in the\n    documentation and/or other materials provided with the distribution.\n\nTHIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS \"AS IS\"\nAND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE\nIMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE\nARE DISCLAIMED. IN NO EVENT SHALL <COPYRIGHT HOLDER> BE LIABLE FOR ANY\nDIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES\n(INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;\nLOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND\nON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT\n(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF\nTHIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n\n#### esprima\n\nsome of functions is derived from esprima\n\nCopyright (C) 2012, 2011 [Ariya Hidayat](http://ariya.ofilabs.com/about)\n (twitter: [@ariyahidayat](http://twitter.com/ariyahidayat)) and other contributors.\n\nRedistribution and use in source and binary forms, with or without\nmodification, are permitted provided that the following conditions are met:\n\n  * Redistributions of source code must retain the above copyright\n    notice, this list of conditions and the following disclaimer.\n\n  * Redistributions in binary form must reproduce the above copyright\n    notice, this list of conditions and the following disclaimer in the\n    documentation and/or other materials provided with the distribution.\n\nTHIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS \"AS IS\"\nAND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE\nIMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE\nARE DISCLAIMED. IN NO EVENT SHALL <COPYRIGHT HOLDER> BE LIABLE FOR ANY\nDIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES\n(INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;\nLOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND\nON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT\n(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF\nTHIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n\n\n#### closure-compiler\n\nsome of extensions is derived from closure-compiler\n\nApache License\nVersion 2.0, January 2004\nhttp://www.apache.org/licenses/\n\n\n### Where to ask for help?\n\nJoin our [Chatroom](https://gitter.im/eslint/doctrine)\n\n[npm-image]: https://img.shields.io/npm/v/doctrine.svg?style=flat-square\n[npm-url]: https://www.npmjs.com/package/doctrine\n[travis-image]: https://img.shields.io/travis/eslint/doctrine/master.svg?style=flat-square\n[travis-url]: https://travis-ci.org/eslint/doctrine\n[coveralls-image]: https://img.shields.io/coveralls/eslint/doctrine/master.svg?style=flat-square\n[coveralls-url]: https://coveralls.io/r/eslint/doctrine?branch=master\n[downloads-image]: http://img.shields.io/npm/dm/doctrine.svg?style=flat-square\n[downloads-url]: https://www.npmjs.com/package/doctrine\n",
   "readmeFilename": "README.md",
-  "gitHead": "b4b2870ccb4e47977fafce8e6055740e4dda28af",
+  "gitHead": "39e5f75775ef84ceabdb07683dd68de318bc3571",
   "bugs": {
     "url": "https://github.com/eslint/doctrine/issues"
   },
-  "_id": "doctrine@1.3.0",
-  "_shasum": "13e75682b55518424276f7c173783456ef913d26",
+  "_id": "doctrine@1.4.0",
+  "_shasum": "e2db32defa752407b935b381e89f3740e469e599",
   "_from": "doctrine@>=1.2.2 <2.0.0"
 }
 
@@ -24395,7 +24643,9 @@ module.exports={
 		"xit": false
 	},
 	"jest": {
+		"afterAll": false,
 		"afterEach": false,
+		"beforeAll": false,
 		"beforeEach": false,
 		"check": false,
 		"describe": false,
@@ -24408,7 +24658,8 @@ module.exports={
 		"require": false,
 		"test": false,
 		"xdescribe": false,
-		"xit": false
+		"xit": false,
+		"xtest": false
 	},
 	"qunit": {
 		"asyncTest": false,
@@ -24539,9 +24790,11 @@ module.exports={
 		"pwd": false,
 		"rm": false,
 		"sed": false,
+		"set": false,
 		"target": false,
 		"tempdir": false,
 		"test": false,
+		"touch": false,
 		"which": false
 	},
 	"prototypejs": {
@@ -25294,15 +25547,23 @@ var compile = function(schema, cache, root, reporter, opts) {
     }
 
     if (node.minimum !== undefined) {
+      if (type !== 'number' && type !== 'integer') validate('if (%s) {', types.number(name))
+
       validate('if (%s %s %d) {', name, node.exclusiveMinimum ? '<=' : '<', node.minimum)
       error('is less than minimum')
       validate('}')
+
+      if (type !== 'number' && type !== 'integer') validate('}')
     }
 
     if (node.maximum !== undefined) {
+      if (type !== 'number' && type !== 'integer') validate('if (%s) {', types.number(name))
+
       validate('if (%s %s %d) {', name, node.exclusiveMaximum ? '>=' : '>', node.maximum)
       error('is more than maximum')
       validate('}')
+
+      if (type !== 'number' && type !== 'integer') validate('}')
     }
 
     if (properties) {
@@ -25320,6 +25581,8 @@ var compile = function(schema, cache, root, reporter, opts) {
 
   var validate = genfun
     ('function validate(data) {')
+      // Since undefined is not a valid JSON value, we coerce to null and other checks will catch this
+      ('if (data === undefined) data = null')
       ('validate.errors = null')
       ('var errors = 0')
 
@@ -27655,7 +27918,7 @@ function curry$(f, bound){
   var undefined;
 
   /** Used as the semantic version number. */
-  var VERSION = '4.15.0';
+  var VERSION = '4.16.1';
 
   /** Used as the size to enable large array optimizations. */
   var LARGE_ARRAY_SIZE = 200;
@@ -27665,6 +27928,9 @@ function curry$(f, bound){
 
   /** Used to stand-in for `undefined` hash values. */
   var HASH_UNDEFINED = '__lodash_hash_undefined__';
+
+  /** Used as the maximum memoize cache size. */
+  var MAX_MEMOIZE_SIZE = 500;
 
   /** Used as the internal argument placeholder. */
   var PLACEHOLDER = '__lodash_placeholder__';
@@ -27690,7 +27956,7 @@ function curry$(f, bound){
       DEFAULT_TRUNC_OMISSION = '...';
 
   /** Used to detect hot functions by number of calls within a span of milliseconds. */
-  var HOT_COUNT = 150,
+  var HOT_COUNT = 500,
       HOT_SPAN = 16;
 
   /** Used to indicate the type of lazy iteratees. */
@@ -27759,8 +28025,8 @@ function curry$(f, bound){
       reEmptyStringTrailing = /(__e\(.*?\)|\b__t\)) \+\n'';/g;
 
   /** Used to match HTML entities and HTML characters. */
-  var reEscapedHtml = /&(?:amp|lt|gt|quot|#39|#96);/g,
-      reUnescapedHtml = /[&<>"'`]/g,
+  var reEscapedHtml = /&(?:amp|lt|gt|quot|#39);/g,
+      reUnescapedHtml = /[&<>"']/g,
       reHasEscapedHtml = RegExp(reEscapedHtml.source),
       reHasUnescapedHtml = RegExp(reUnescapedHtml.source);
 
@@ -27806,9 +28072,6 @@ function curry$(f, bound){
 
   /** Used to match `RegExp` flags from their coerced string values. */
   var reFlags = /\w*$/;
-
-  /** Used to detect hexadecimal string values. */
-  var reHasHexPrefix = /^0x/i;
 
   /** Used to detect bad signed hexadecimal string values. */
   var reIsBadHex = /^[-+]0x[0-9a-f]+$/i;
@@ -28004,7 +28267,7 @@ function curry$(f, bound){
     '\u017a': 'z',  '\u017c': 'z', '\u017e': 'z',
     '\u0132': 'IJ', '\u0133': 'ij',
     '\u0152': 'Oe', '\u0153': 'oe',
-    '\u0149': "'n", '\u017f': 'ss'
+    '\u0149': "'n", '\u017f': 's'
   };
 
   /** Used to map characters to HTML entities. */
@@ -28013,8 +28276,7 @@ function curry$(f, bound){
     '<': '&lt;',
     '>': '&gt;',
     '"': '&quot;',
-    "'": '&#39;',
-    '`': '&#96;'
+    "'": '&#39;'
   };
 
   /** Used to map HTML entities to characters. */
@@ -28023,8 +28285,7 @@ function curry$(f, bound){
     '&lt;': '<',
     '&gt;': '>',
     '&quot;': '"',
-    '&#39;': "'",
-    '&#96;': '`'
+    '&#39;': "'"
   };
 
   /** Used to escape characters for inclusion in compiled string literals. */
@@ -28465,18 +28726,9 @@ function curry$(f, bound){
    * @returns {number} Returns the index of the matched value, else `-1`.
    */
   function baseIndexOf(array, value, fromIndex) {
-    if (value !== value) {
-      return baseFindIndex(array, baseIsNaN, fromIndex);
-    }
-    var index = fromIndex - 1,
-        length = array.length;
-
-    while (++index < length) {
-      if (array[index] === value) {
-        return index;
-      }
-    }
-    return -1;
+    return value === value
+      ? strictIndexOf(array, value, fromIndex)
+      : baseFindIndex(array, baseIsNaN, fromIndex);
   }
 
   /**
@@ -28681,7 +28933,7 @@ function curry$(f, bound){
   }
 
   /**
-   * Checks if a cache value for `key` exists.
+   * Checks if a `cache` value for `key` exists.
    *
    * @private
    * @param {Object} cache The cache to query.
@@ -28739,7 +28991,7 @@ function curry$(f, bound){
 
     while (length--) {
       if (array[length] === placeholder) {
-        result++;
+        ++result;
       }
     }
     return result;
@@ -28807,25 +29059,6 @@ function curry$(f, bound){
    */
   function hasUnicodeWord(string) {
     return reHasUnicodeWord.test(string);
-  }
-
-  /**
-   * Checks if `value` is a host object in IE < 9.
-   *
-   * @private
-   * @param {*} value The value to check.
-   * @returns {boolean} Returns `true` if `value` is a host object, else `false`.
-   */
-  function isHostObject(value) {
-    // Many host objects are `Object` objects that can coerce to strings
-    // despite having improperly defined `toString` methods.
-    var result = false;
-    if (value != null && typeof value.toString != 'function') {
-      try {
-        result = !!(value + '');
-      } catch (e) {}
-    }
-    return result;
   }
 
   /**
@@ -28936,6 +29169,48 @@ function curry$(f, bound){
   }
 
   /**
+   * A specialized version of `_.indexOf` which performs strict equality
+   * comparisons of values, i.e. `===`.
+   *
+   * @private
+   * @param {Array} array The array to inspect.
+   * @param {*} value The value to search for.
+   * @param {number} fromIndex The index to search from.
+   * @returns {number} Returns the index of the matched value, else `-1`.
+   */
+  function strictIndexOf(array, value, fromIndex) {
+    var index = fromIndex - 1,
+        length = array.length;
+
+    while (++index < length) {
+      if (array[index] === value) {
+        return index;
+      }
+    }
+    return -1;
+  }
+
+  /**
+   * A specialized version of `_.lastIndexOf` which performs strict equality
+   * comparisons of values, i.e. `===`.
+   *
+   * @private
+   * @param {Array} array The array to inspect.
+   * @param {*} value The value to search for.
+   * @param {number} fromIndex The index to search from.
+   * @returns {number} Returns the index of the matched value, else `-1`.
+   */
+  function strictLastIndexOf(array, value, fromIndex) {
+    var index = fromIndex + 1;
+    while (index--) {
+      if (array[index] === value) {
+        return index;
+      }
+    }
+    return index;
+  }
+
+  /**
    * Gets the number of symbols in `string`.
    *
    * @private
@@ -28980,7 +29255,7 @@ function curry$(f, bound){
   function unicodeSize(string) {
     var result = reUnicode.lastIndex = 0;
     while (reUnicode.test(string)) {
-      result++;
+      ++result;
     }
     return result;
   }
@@ -29035,17 +29310,10 @@ function curry$(f, bound){
    * lodash.isFunction(lodash.bar);
    * // => true
    *
-   * // Use `context` to stub `Date#getTime` use in `_.now`.
-   * var stubbed = _.runInContext({
-   *   'Date': function() {
-   *     return { 'getTime': stubGetTime };
-   *   }
-   * });
-   *
    * // Create a suped-up `defer` in Node.js.
    * var defer = _.runInContext({ 'setTimeout': setImmediate }).defer;
    */
-  function runInContext(context) {
+  var runInContext = (function runInContext(context) {
     context = context ? _.defaults(root.Object(), context, _.pick(root, contextProps)) : root;
 
     /** Built-in constructor references. */
@@ -29105,6 +29373,7 @@ function curry$(f, bound){
     var Buffer = moduleExports ? context.Buffer : undefined,
         Symbol = context.Symbol,
         Uint8Array = context.Uint8Array,
+        defineProperty = Object.defineProperty,
         getPrototype = overArg(Object.getPrototypeOf, Object),
         iteratorSymbol = Symbol ? Symbol.iterator : undefined,
         objectCreate = Object.create,
@@ -29127,6 +29396,7 @@ function curry$(f, bound){
         nativeKeys = overArg(Object.keys, Object),
         nativeMax = Math.max,
         nativeMin = Math.min,
+        nativeNow = Date.now,
         nativeParseInt = context.parseInt,
         nativeRandom = Math.random,
         nativeReverse = arrayProto.reverse;
@@ -29137,21 +29407,11 @@ function curry$(f, bound){
         Promise = getNative(context, 'Promise'),
         Set = getNative(context, 'Set'),
         WeakMap = getNative(context, 'WeakMap'),
-        nativeCreate = getNative(Object, 'create');
-
-    /* Used to set `toString` methods. */
-    var defineProperty = (function() {
-      var func = getNative(Object, 'defineProperty'),
-          name = getNative.name;
-
-      return (name && name.length > 2) ? func : undefined;
-    }());
+        nativeCreate = getNative(Object, 'create'),
+        nativeDefineProperty = getNative(Object, 'defineProperty');
 
     /** Used to store function metadata. */
     var metaMap = WeakMap && new WeakMap;
-
-    /** Detect if properties shadowing those on `Object.prototype` are non-enumerable. */
-    var nonEnumShadows = !propertyIsEnumerable.call({ 'valueOf': 1 }, 'valueOf');
 
     /** Used to lookup unminified function names. */
     var realNames = {};
@@ -29540,6 +29800,7 @@ function curry$(f, bound){
      */
     function hashClear() {
       this.__data__ = nativeCreate ? nativeCreate(null) : {};
+      this.size = 0;
     }
 
     /**
@@ -29553,7 +29814,9 @@ function curry$(f, bound){
      * @returns {boolean} Returns `true` if the entry was removed, else `false`.
      */
     function hashDelete(key) {
-      return this.has(key) && delete this.__data__[key];
+      var result = this.has(key) && delete this.__data__[key];
+      this.size -= result ? 1 : 0;
+      return result;
     }
 
     /**
@@ -29600,6 +29863,7 @@ function curry$(f, bound){
      */
     function hashSet(key, value) {
       var data = this.__data__;
+      this.size += this.has(key) ? 0 : 1;
       data[key] = (nativeCreate && value === undefined) ? HASH_UNDEFINED : value;
       return this;
     }
@@ -29640,6 +29904,7 @@ function curry$(f, bound){
      */
     function listCacheClear() {
       this.__data__ = [];
+      this.size = 0;
     }
 
     /**
@@ -29664,6 +29929,7 @@ function curry$(f, bound){
       } else {
         splice.call(data, index, 1);
       }
+      --this.size;
       return true;
     }
 
@@ -29711,6 +29977,7 @@ function curry$(f, bound){
           index = assocIndexOf(data, key);
 
       if (index < 0) {
+        ++this.size;
         data.push([key, value]);
       } else {
         data[index][1] = value;
@@ -29753,6 +30020,7 @@ function curry$(f, bound){
      * @memberOf MapCache
      */
     function mapCacheClear() {
+      this.size = 0;
       this.__data__ = {
         'hash': new Hash,
         'map': new (Map || ListCache),
@@ -29770,7 +30038,9 @@ function curry$(f, bound){
      * @returns {boolean} Returns `true` if the entry was removed, else `false`.
      */
     function mapCacheDelete(key) {
-      return getMapData(this, key)['delete'](key);
+      var result = getMapData(this, key)['delete'](key);
+      this.size -= result ? 1 : 0;
+      return result;
     }
 
     /**
@@ -29810,7 +30080,11 @@ function curry$(f, bound){
      * @returns {Object} Returns the map cache instance.
      */
     function mapCacheSet(key, value) {
-      getMapData(this, key).set(key, value);
+      var data = getMapData(this, key),
+          size = data.size;
+
+      data.set(key, value);
+      this.size += data.size == size ? 0 : 1;
       return this;
     }
 
@@ -29883,7 +30157,8 @@ function curry$(f, bound){
      * @param {Array} [entries] The key-value pairs to cache.
      */
     function Stack(entries) {
-      this.__data__ = new ListCache(entries);
+      var data = this.__data__ = new ListCache(entries);
+      this.size = data.size;
     }
 
     /**
@@ -29895,6 +30170,7 @@ function curry$(f, bound){
      */
     function stackClear() {
       this.__data__ = new ListCache;
+      this.size = 0;
     }
 
     /**
@@ -29907,7 +30183,11 @@ function curry$(f, bound){
      * @returns {boolean} Returns `true` if the entry was removed, else `false`.
      */
     function stackDelete(key) {
-      return this.__data__['delete'](key);
+      var data = this.__data__,
+          result = data['delete'](key);
+
+      this.size = data.size;
+      return result;
     }
 
     /**
@@ -29947,16 +30227,18 @@ function curry$(f, bound){
      * @returns {Object} Returns the stack cache instance.
      */
     function stackSet(key, value) {
-      var cache = this.__data__;
-      if (cache instanceof ListCache) {
-        var pairs = cache.__data__;
+      var data = this.__data__;
+      if (data instanceof ListCache) {
+        var pairs = data.__data__;
         if (!Map || (pairs.length < LARGE_ARRAY_SIZE - 1)) {
           pairs.push([key, value]);
+          this.size = ++data.size;
           return this;
         }
-        cache = this.__data__ = new MapCache(pairs);
+        data = this.__data__ = new MapCache(pairs);
       }
-      cache.set(key, value);
+      data.set(key, value);
+      this.size = data.size;
       return this;
     }
 
@@ -29997,6 +30279,44 @@ function curry$(f, bound){
     }
 
     /**
+     * A specialized version of `_.sample` for arrays without support for iteratee
+     * shorthands.
+     *
+     * @private
+     * @param {Array} array The array to sample.
+     * @returns {*} Returns the random element.
+     */
+    function arraySample(array) {
+      var length = array.length;
+      return length ? array[baseRandom(0, length - 1)] : undefined;
+    }
+
+    /**
+     * A specialized version of `_.sampleSize` for arrays.
+     *
+     * @private
+     * @param {Array} array The array to sample.
+     * @param {number} n The number of elements to sample.
+     * @returns {Array} Returns the random elements.
+     */
+    function arraySampleSize(array, n) {
+      var result = arrayShuffle(array);
+      result.length = baseClamp(n, 0, result.length);
+      return result;
+    }
+
+    /**
+     * A specialized version of `_.shuffle` for arrays.
+     *
+     * @private
+     * @param {Array} array The array to shuffle.
+     * @returns {Array} Returns the new shuffled array.
+     */
+    function arrayShuffle(array) {
+      return shuffleSelf(copyArray(array));
+    }
+
+    /**
      * Used by `_.defaults` to customize its `_.assignIn` use.
      *
      * @private
@@ -30026,7 +30346,7 @@ function curry$(f, bound){
     function assignMergeValue(object, key, value) {
       if ((value !== undefined && !eq(object[key], value)) ||
           (typeof key == 'number' && value === undefined && !(key in object))) {
-        object[key] = value;
+        baseAssignValue(object, key, value);
       }
     }
 
@@ -30044,7 +30364,7 @@ function curry$(f, bound){
       var objValue = object[key];
       if (!(hasOwnProperty.call(object, key) && eq(objValue, value)) ||
           (value === undefined && !(key in object))) {
-        object[key] = value;
+        baseAssignValue(object, key, value);
       }
     }
 
@@ -30095,6 +30415,28 @@ function curry$(f, bound){
      */
     function baseAssign(object, source) {
       return object && copyObject(source, keys(source), object);
+    }
+
+    /**
+     * The base implementation of `assignValue` and `assignMergeValue` without
+     * value checks.
+     *
+     * @private
+     * @param {Object} object The object to modify.
+     * @param {string} key The key of the property to assign.
+     * @param {*} value The value to assign.
+     */
+    function baseAssignValue(object, key, value) {
+      if (key == '__proto__' && defineProperty) {
+        defineProperty(object, key, {
+          'configurable': true,
+          'enumerable': true,
+          'value': value,
+          'writable': true
+        });
+      } else {
+        object[key] = value;
+      }
     }
 
     /**
@@ -30177,9 +30519,6 @@ function curry$(f, bound){
           return cloneBuffer(value, isDeep);
         }
         if (tag == objectTag || tag == argsTag || (isFunc && !object)) {
-          if (isHostObject(value)) {
-            return object ? value : {};
-          }
           result = initCloneObject(isFunc ? {} : value);
           if (!isDeep) {
             return copySymbols(value, baseAssign(result, value));
@@ -30823,8 +31162,8 @@ function curry$(f, bound){
         othTag = getTag(other);
         othTag = othTag == argsTag ? objectTag : othTag;
       }
-      var objIsObj = objTag == objectTag && !isHostObject(object),
-          othIsObj = othTag == objectTag && !isHostObject(other),
+      var objIsObj = objTag == objectTag,
+          othIsObj = othTag == objectTag,
           isSameTag = objTag == othTag;
 
       if (isSameTag && !objIsObj) {
@@ -30929,7 +31268,7 @@ function curry$(f, bound){
       if (!isObject(value) || isMasked(value)) {
         return false;
       }
-      var pattern = (isFunction(value) || isHostObject(value)) ? reIsNative : reIsHostCtor;
+      var pattern = isFunction(value) ? reIsNative : reIsHostCtor;
       return pattern.test(toSource(value));
     }
 
@@ -31287,7 +31626,7 @@ function curry$(f, bound){
             value = object[key];
 
         if (predicate(value, key)) {
-          result[key] = value;
+          baseAssignValue(result, key, value);
         }
       }
       return result;
@@ -31453,24 +31792,7 @@ function curry$(f, bound){
      * @returns {Function} Returns the new function.
      */
     function baseRest(func, start) {
-      start = nativeMax(start === undefined ? (func.length - 1) : start, 0);
-      return function() {
-        var args = arguments,
-            index = -1,
-            length = nativeMax(args.length - start, 0),
-            array = Array(length);
-
-        while (++index < length) {
-          array[index] = args[start + index];
-        }
-        index = -1;
-        var otherArgs = Array(start + 1);
-        while (++index < start) {
-          otherArgs[index] = args[index];
-        }
-        otherArgs[start] = array;
-        return apply(func, this, otherArgs);
-      };
+      return setToString(overRest(func, start, identity), func + '');
     }
 
     /**
@@ -31514,7 +31836,7 @@ function curry$(f, bound){
     }
 
     /**
-     * The base implementation of `setData` without support for hot loop detection.
+     * The base implementation of `setData` without support for hot loop shorting.
      *
      * @private
      * @param {Function} func The function to associate metadata with.
@@ -31524,6 +31846,23 @@ function curry$(f, bound){
     var baseSetData = !metaMap ? identity : function(func, data) {
       metaMap.set(func, data);
       return func;
+    };
+
+    /**
+     * The base implementation of `setToString` without support for hot loop shorting.
+     *
+     * @private
+     * @param {Function} func The function to modify.
+     * @param {Function} string The `toString` result.
+     * @returns {Function} Returns `func`.
+     */
+    var baseSetToString = !nativeDefineProperty ? identity : function(func, string) {
+      return nativeDefineProperty(func, 'toString', {
+        'configurable': true,
+        'enumerable': false,
+        'value': constant(string),
+        'writable': true
+      });
     };
 
     /**
@@ -31941,6 +32280,17 @@ function curry$(f, bound){
     }
 
     /**
+     * A `baseRest` alias which can be replaced with `identity` by module
+     * replacement plugins.
+     *
+     * @private
+     * @type {Function}
+     * @param {Function} func The function to apply a rest parameter to.
+     * @returns {Function} Returns the new function.
+     */
+    var castRest = baseRest;
+
+    /**
      * Casts `array` to a slice if it's needed.
      *
      * @private
@@ -32254,6 +32604,7 @@ function curry$(f, bound){
      * @returns {Object} Returns `object`.
      */
     function copyObject(source, props, object, customizer) {
+      var isNew = !object;
       object || (object = {});
 
       var index = -1,
@@ -32266,7 +32617,14 @@ function curry$(f, bound){
           ? customizer(object[key], source[key], key, object, source)
           : undefined;
 
-        assignValue(object, key, newValue === undefined ? source[key] : newValue);
+        if (newValue === undefined) {
+          newValue = source[key];
+        }
+        if (isNew) {
+          baseAssignValue(object, key, newValue);
+        } else {
+          assignValue(object, key, newValue);
+        }
       }
       return object;
     }
@@ -32545,9 +32903,7 @@ function curry$(f, bound){
      * @returns {Function} Returns the new flow function.
      */
     function createFlow(fromRight) {
-      return baseRest(function(funcs) {
-        funcs = baseFlatten(funcs, 1);
-
+      return flatRest(function(funcs) {
         var length = funcs.length,
             index = length,
             prereq = LodashWrapper.prototype.thru;
@@ -32730,11 +33086,8 @@ function curry$(f, bound){
      * @returns {Function} Returns the new over function.
      */
     function createOver(arrayFunc) {
-      return baseRest(function(iteratees) {
-        iteratees = (iteratees.length == 1 && isArray(iteratees[0]))
-          ? arrayMap(iteratees[0], baseUnary(getIteratee()))
-          : arrayMap(baseFlatten(iteratees, 1), baseUnary(getIteratee()));
-
+      return flatRest(function(iteratees) {
+        iteratees = arrayMap(iteratees, baseUnary(getIteratee()));
         return baseRest(function(args) {
           var thisArg = this;
           return arrayFunc(iteratees, function(iteratee) {
@@ -33077,9 +33430,9 @@ function curry$(f, bound){
         // Recursively compare arrays (susceptible to call stack limits).
         if (seen) {
           if (!arraySome(other, function(othValue, othIndex) {
-                if (!seen.has(othIndex) &&
+                if (!cacheHas(seen, othIndex) &&
                     (arrValue === othValue || equalFunc(arrValue, othValue, customizer, bitmask, stack))) {
-                  return seen.add(othIndex);
+                  return seen.push(othIndex);
                 }
               })) {
             result = false;
@@ -33260,6 +33613,17 @@ function curry$(f, bound){
     }
 
     /**
+     * A specialized version of `baseRest` which flattens the rest array.
+     *
+     * @private
+     * @param {Function} func The function to apply a rest parameter to.
+     * @returns {Function} Returns the new function.
+     */
+    function flatRest(func) {
+      return setToString(overRest(func, undefined, flatten), func + '');
+    }
+
+    /**
      * Creates an array of own enumerable property names and symbols of `object`.
      *
      * @private
@@ -33427,8 +33791,7 @@ function curry$(f, bound){
      */
     var getTag = baseGetTag;
 
-    // Fallback for data views, maps, sets, and weak maps in IE 11,
-    // for data views in Edge < 14, and promises in Node.js.
+    // Fallback for data views, maps, sets, and weak maps in IE 11 and promises in Node.js < 6.
     if ((DataView && getTag(new DataView(new ArrayBuffer(1))) != dataViewTag) ||
         (Map && getTag(new Map) != mapTag) ||
         (Promise && getTag(Promise.resolve()) != promiseTag) ||
@@ -33504,9 +33867,9 @@ function curry$(f, bound){
     function hasPath(object, path, hasFunc) {
       path = isKey(path, object) ? [path] : castPath(path);
 
-      var result,
-          index = -1,
-          length = path.length;
+      var index = -1,
+          length = path.length,
+          result = false;
 
       while (++index < length) {
         var key = toKey(path[index]);
@@ -33515,10 +33878,10 @@ function curry$(f, bound){
         }
         object = object[key];
       }
-      if (result) {
+      if (result || ++index != length) {
         return result;
       }
-      var length = object ? object.length : 0;
+      length = object ? object.length : 0;
       return !!length && isLength(length) && isIndex(key, length) &&
         (isArray(object) || isArguments(object));
     }
@@ -33613,9 +33976,11 @@ function curry$(f, bound){
      * @returns {string} Returns the modified source.
      */
     function insertWrapDetails(source, details) {
-      var length = details.length,
-          lastIndex = length - 1;
-
+      var length = details.length;
+      if (!length) {
+        return source;
+      }
+      var lastIndex = length - 1;
       details[lastIndex] = (length > 1 ? '& ' : '') + details[lastIndex];
       details = details.join(length > 2 ? ', ' : ' ');
       return source.replace(reWrapComment, '{\n/* [wrapped with ' + details + '] */\n');
@@ -33795,6 +34160,26 @@ function curry$(f, bound){
     }
 
     /**
+     * A specialized version of `_.memoize` which clears the memoized function's
+     * cache when it exceeds `MAX_MEMOIZE_SIZE`.
+     *
+     * @private
+     * @param {Function} func The function to have its output memoized.
+     * @returns {Function} Returns the new memoized function.
+     */
+    function memoizeCapped(func) {
+      var result = memoize(func, function(key) {
+        if (cache.size === MAX_MEMOIZE_SIZE) {
+          cache.clear();
+        }
+        return key;
+      });
+
+      var cache = result.cache;
+      return result;
+    }
+
+    /**
      * Merges the function metadata of `source` into `data`.
      *
      * Merging metadata reduces the number of wrappers used to invoke a function.
@@ -33908,6 +34293,36 @@ function curry$(f, bound){
     }
 
     /**
+     * A specialized version of `baseRest` which transforms the rest array.
+     *
+     * @private
+     * @param {Function} func The function to apply a rest parameter to.
+     * @param {number} [start=func.length-1] The start position of the rest parameter.
+     * @param {Function} transform The rest array transform.
+     * @returns {Function} Returns the new function.
+     */
+    function overRest(func, start, transform) {
+      start = nativeMax(start === undefined ? (func.length - 1) : start, 0);
+      return function() {
+        var args = arguments,
+            index = -1,
+            length = nativeMax(args.length - start, 0),
+            array = Array(length);
+
+        while (++index < length) {
+          array[index] = args[start + index];
+        }
+        index = -1;
+        var otherArgs = Array(start + 1);
+        while (++index < start) {
+          otherArgs[index] = args[index];
+        }
+        otherArgs[start] = transform(array);
+        return apply(func, this, otherArgs);
+      };
+    }
+
+    /**
      * Gets the parent value at `path` of `object`.
      *
      * @private
@@ -33955,25 +34370,7 @@ function curry$(f, bound){
      * @param {*} data The metadata.
      * @returns {Function} Returns `func`.
      */
-    var setData = (function() {
-      var count = 0,
-          lastCalled = 0;
-
-      return function(key, value) {
-        var stamp = now(),
-            remaining = HOT_SPAN - (stamp - lastCalled);
-
-        lastCalled = stamp;
-        if (remaining > 0) {
-          if (++count >= HOT_COUNT) {
-            return key;
-          }
-        } else {
-          count = 0;
-        }
-        return baseSetData(key, value);
-      };
-    }());
+    var setData = shortOut(baseSetData);
 
     /**
      * A simple wrapper around the global [`setTimeout`](https://mdn.io/setTimeout).
@@ -33988,6 +34385,16 @@ function curry$(f, bound){
     };
 
     /**
+     * Sets the `toString` method of `func` to return `string`.
+     *
+     * @private
+     * @param {Function} func The function to modify.
+     * @param {Function} string The `toString` result.
+     * @returns {Function} Returns `func`.
+     */
+    var setToString = shortOut(baseSetToString);
+
+    /**
      * Sets the `toString` method of `wrapper` to mimic the source of `reference`
      * with wrapper details in a comment at the top of the source body.
      *
@@ -33997,14 +34404,61 @@ function curry$(f, bound){
      * @param {number} bitmask The bitmask flags. See `createWrap` for more details.
      * @returns {Function} Returns `wrapper`.
      */
-    var setWrapToString = !defineProperty ? identity : function(wrapper, reference, bitmask) {
+    function setWrapToString(wrapper, reference, bitmask) {
       var source = (reference + '');
-      return defineProperty(wrapper, 'toString', {
-        'configurable': true,
-        'enumerable': false,
-        'value': constant(insertWrapDetails(source, updateWrapDetails(getWrapDetails(source), bitmask)))
-      });
-    };
+      return setToString(wrapper, insertWrapDetails(source, updateWrapDetails(getWrapDetails(source), bitmask)));
+    }
+
+    /**
+     * Creates a function that'll short out and invoke `identity` instead
+     * of `func` when it's called `HOT_COUNT` or more times in `HOT_SPAN`
+     * milliseconds.
+     *
+     * @private
+     * @param {Function} func The function to restrict.
+     * @returns {Function} Returns the new shortable function.
+     */
+    function shortOut(func) {
+      var count = 0,
+          lastCalled = 0;
+
+      return function() {
+        var stamp = nativeNow(),
+            remaining = HOT_SPAN - (stamp - lastCalled);
+
+        lastCalled = stamp;
+        if (remaining > 0) {
+          if (++count >= HOT_COUNT) {
+            return arguments[0];
+          }
+        } else {
+          count = 0;
+        }
+        return func.apply(undefined, arguments);
+      };
+    }
+
+    /**
+     * A specialized version of `arrayShuffle` which mutates `array`.
+     *
+     * @private
+     * @param {Array} array The array to shuffle.
+     * @returns {Array} Returns `array`.
+     */
+    function shuffleSelf(array) {
+      var index = -1,
+          length = array.length,
+          lastIndex = length - 1;
+
+      while (++index < length) {
+        var rand = baseRandom(index, lastIndex),
+            value = array[rand];
+
+        array[rand] = array[index];
+        array[index] = value;
+      }
+      return array;
+    }
 
     /**
      * Converts `string` to a property path array.
@@ -34013,7 +34467,7 @@ function curry$(f, bound){
      * @param {string} string The string to convert.
      * @returns {Array} Returns the property path array.
      */
-    var stringToPath = memoize(function(string) {
+    var stringToPath = memoizeCapped(function(string) {
       string = toString(string);
 
       var result = [];
@@ -34192,24 +34646,25 @@ function curry$(f, bound){
      * // => [1]
      */
     function concat() {
-      var length = arguments.length,
-          args = Array(length ? length - 1 : 0),
+      var length = arguments.length;
+      if (!length) {
+        return [];
+      }
+      var args = Array(length - 1),
           array = arguments[0],
           index = length;
 
       while (index--) {
         args[index - 1] = arguments[index];
       }
-      return length
-        ? arrayPush(isArray(array) ? copyArray(array) : [array], baseFlatten(args, 1))
-        : [];
+      return arrayPush(isArray(array) ? copyArray(array) : [array], baseFlatten(args, 1));
     }
 
     /**
      * Creates an array of `array` values not included in the other given arrays
      * using [`SameValueZero`](http://ecma-international.org/ecma-262/7.0/#sec-samevaluezero)
-     * for equality comparisons. The order of result values is determined by the
-     * order they occur in the first array.
+     * for equality comparisons. The order and references of result values are
+     * determined by the first array.
      *
      * **Note:** Unlike `_.pullAll`, this method returns a new array.
      *
@@ -34235,8 +34690,9 @@ function curry$(f, bound){
     /**
      * This method is like `_.difference` except that it accepts `iteratee` which
      * is invoked for each element of `array` and `values` to generate the criterion
-     * by which they're compared. Result values are chosen from the first array.
-     * The iteratee is invoked with one argument: (value).
+     * by which they're compared. The order and references of result values are
+     * determined by the first array. The iteratee is invoked with one argument:
+     * (value).
      *
      * **Note:** Unlike `_.pullAllBy`, this method returns a new array.
      *
@@ -34269,9 +34725,9 @@ function curry$(f, bound){
 
     /**
      * This method is like `_.difference` except that it accepts `comparator`
-     * which is invoked to compare elements of `array` to `values`. Result values
-     * are chosen from the first array. The comparator is invoked with two arguments:
-     * (arrVal, othVal).
+     * which is invoked to compare elements of `array` to `values`. The order and
+     * references of result values are determined by the first array. The comparator
+     * is invoked with two arguments: (arrVal, othVal).
      *
      * **Note:** Unlike `_.pullAllWith`, this method returns a new array.
      *
@@ -34765,8 +35221,8 @@ function curry$(f, bound){
     /**
      * Creates an array of unique values that are included in all given arrays
      * using [`SameValueZero`](http://ecma-international.org/ecma-262/7.0/#sec-samevaluezero)
-     * for equality comparisons. The order of result values is determined by the
-     * order they occur in the first array.
+     * for equality comparisons. The order and references of result values are
+     * determined by the first array.
      *
      * @static
      * @memberOf _
@@ -34789,8 +35245,9 @@ function curry$(f, bound){
     /**
      * This method is like `_.intersection` except that it accepts `iteratee`
      * which is invoked for each element of each `arrays` to generate the criterion
-     * by which they're compared. Result values are chosen from the first array.
-     * The iteratee is invoked with one argument: (value).
+     * by which they're compared. The order and references of result values are
+     * determined by the first array. The iteratee is invoked with one argument:
+     * (value).
      *
      * @static
      * @memberOf _
@@ -34824,9 +35281,9 @@ function curry$(f, bound){
 
     /**
      * This method is like `_.intersection` except that it accepts `comparator`
-     * which is invoked to compare elements of `arrays`. Result values are chosen
-     * from the first array. The comparator is invoked with two arguments:
-     * (arrVal, othVal).
+     * which is invoked to compare elements of `arrays`. The order and references
+     * of result values are determined by the first array. The comparator is
+     * invoked with two arguments: (arrVal, othVal).
      *
      * @static
      * @memberOf _
@@ -34924,21 +35381,11 @@ function curry$(f, bound){
       var index = length;
       if (fromIndex !== undefined) {
         index = toInteger(fromIndex);
-        index = (
-          index < 0
-            ? nativeMax(length + index, 0)
-            : nativeMin(index, length - 1)
-        ) + 1;
+        index = index < 0 ? nativeMax(length + index, 0) : nativeMin(index, length - 1);
       }
-      if (value !== value) {
-        return baseFindIndex(array, baseIsNaN, index - 1, true);
-      }
-      while (index--) {
-        if (array[index] === value) {
-          return index;
-        }
-      }
-      return -1;
+      return value === value
+        ? strictLastIndexOf(array, value, index)
+        : baseFindIndex(array, baseIsNaN, index, true);
     }
 
     /**
@@ -35100,9 +35547,7 @@ function curry$(f, bound){
      * console.log(pulled);
      * // => ['b', 'd']
      */
-    var pullAt = baseRest(function(array, indexes) {
-      indexes = baseFlatten(indexes, 1);
-
+    var pullAt = flatRest(function(array, indexes) {
       var length = array ? array.length : 0,
           result = baseAt(array, indexes);
 
@@ -35677,8 +36122,9 @@ function curry$(f, bound){
     /**
      * Creates a duplicate-free version of an array, using
      * [`SameValueZero`](http://ecma-international.org/ecma-262/7.0/#sec-samevaluezero)
-     * for equality comparisons, in which only the first occurrence of each
-     * element is kept.
+     * for equality comparisons, in which only the first occurrence of each element
+     * is kept. The order of result values is determined by the order they occur
+     * in the array.
      *
      * @static
      * @memberOf _
@@ -35700,7 +36146,9 @@ function curry$(f, bound){
     /**
      * This method is like `_.uniq` except that it accepts `iteratee` which is
      * invoked for each element in `array` to generate the criterion by which
-     * uniqueness is computed. The iteratee is invoked with one argument: (value).
+     * uniqueness is computed. The order of result values is determined by the
+     * order they occur in the array. The iteratee is invoked with one argument:
+     * (value).
      *
      * @static
      * @memberOf _
@@ -35727,8 +36175,9 @@ function curry$(f, bound){
 
     /**
      * This method is like `_.uniq` except that it accepts `comparator` which
-     * is invoked to compare elements of `array`. The comparator is invoked with
-     * two arguments: (arrVal, othVal).
+     * is invoked to compare elements of `array`. The order of result values is
+     * determined by the order they occur in the array.The comparator is invoked
+     * with two arguments: (arrVal, othVal).
      *
      * @static
      * @memberOf _
@@ -35870,8 +36319,9 @@ function curry$(f, bound){
     /**
      * This method is like `_.xor` except that it accepts `iteratee` which is
      * invoked for each element of each `arrays` to generate the criterion by
-     * which by which they're compared. The iteratee is invoked with one argument:
-     * (value).
+     * which by which they're compared. The order of result values is determined
+     * by the order they occur in the arrays. The iteratee is invoked with one
+     * argument: (value).
      *
      * @static
      * @memberOf _
@@ -35900,8 +36350,9 @@ function curry$(f, bound){
 
     /**
      * This method is like `_.xor` except that it accepts `comparator` which is
-     * invoked to compare elements of `arrays`. The comparator is invoked with
-     * two arguments: (arrVal, othVal).
+     * invoked to compare elements of `arrays`. The order of result values is
+     * determined by the order they occur in the arrays. The comparator is invoked
+     * with two arguments: (arrVal, othVal).
      *
      * @static
      * @memberOf _
@@ -36118,8 +36569,7 @@ function curry$(f, bound){
      * _(object).at(['a[0].b.c', 'a[1]']).value();
      * // => [3, 4]
      */
-    var wrapperAt = baseRest(function(paths) {
-      paths = baseFlatten(paths, 1);
+    var wrapperAt = flatRest(function(paths) {
       var length = paths.length,
           start = length ? paths[0] : 0,
           value = this.__wrapped__,
@@ -36384,7 +36834,11 @@ function curry$(f, bound){
      * // => { '3': 2, '5': 1 }
      */
     var countBy = createAggregator(function(result, value, key) {
-      hasOwnProperty.call(result, key) ? ++result[key] : (result[key] = 1);
+      if (hasOwnProperty.call(result, key)) {
+        ++result[key];
+      } else {
+        baseAssignValue(result, key, 1);
+      }
     });
 
     /**
@@ -36639,7 +37093,7 @@ function curry$(f, bound){
      * @see _.forEachRight
      * @example
      *
-     * _([1, 2]).forEach(function(value) {
+     * _.forEach([1, 2], function(value) {
      *   console.log(value);
      * });
      * // => Logs `1` then `2`.
@@ -36707,7 +37161,7 @@ function curry$(f, bound){
       if (hasOwnProperty.call(result, key)) {
         result[key].push(value);
       } else {
-        result[key] = [value];
+        baseAssignValue(result, key, [value]);
       }
     });
 
@@ -36820,7 +37274,7 @@ function curry$(f, bound){
      * // => { 'left': { 'dir': 'left', 'code': 97 }, 'right': { 'dir': 'right', 'code': 100 } }
      */
     var keyBy = createAggregator(function(result, value, key) {
-      result[key] = value;
+      baseAssignValue(result, key, value);
     });
 
     /**
@@ -37080,10 +37534,7 @@ function curry$(f, bound){
      * // => 2
      */
     function sample(collection) {
-      var array = isArrayLike(collection) ? collection : values(collection),
-          length = array.length;
-
-      return length > 0 ? array[baseRandom(0, length - 1)] : undefined;
+      return arraySample(isArrayLike(collection) ? collection : values(collection));
     }
 
     /**
@@ -37107,25 +37558,12 @@ function curry$(f, bound){
      * // => [2, 3, 1]
      */
     function sampleSize(collection, n, guard) {
-      var index = -1,
-          result = toArray(collection),
-          length = result.length,
-          lastIndex = length - 1;
-
       if ((guard ? isIterateeCall(collection, n, guard) : n === undefined)) {
         n = 1;
       } else {
-        n = baseClamp(toInteger(n), 0, length);
+        n = toInteger(n);
       }
-      while (++index < n) {
-        var rand = baseRandom(index, lastIndex),
-            value = result[rand];
-
-        result[rand] = result[index];
-        result[index] = value;
-      }
-      result.length = n;
-      return result;
+      return arraySampleSize(isArrayLike(collection) ? collection : values(collection), n);
     }
 
     /**
@@ -37144,7 +37582,10 @@ function curry$(f, bound){
      * // => [4, 1, 3, 2]
      */
     function shuffle(collection) {
-      return sampleSize(collection, MAX_ARRAY_LENGTH);
+      return shuffleSelf(isArrayLike(collection)
+        ? copyArray(collection)
+        : values(collection)
+      );
     }
 
     /**
@@ -37249,16 +37690,11 @@ function curry$(f, bound){
      *   { 'user': 'barney', 'age': 34 }
      * ];
      *
-     * _.sortBy(users, function(o) { return o.user; });
+     * _.sortBy(users, [function(o) { return o.user; }]);
      * // => objects for [['barney', 36], ['barney', 34], ['fred', 48], ['fred', 40]]
      *
      * _.sortBy(users, ['user', 'age']);
      * // => objects for [['barney', 34], ['barney', 36], ['fred', 40], ['fred', 48]]
-     *
-     * _.sortBy(users, 'user', function(o) {
-     *   return Math.floor(o.age / 10);
-     * });
-     * // => objects for [['barney', 36], ['barney', 34], ['fred', 48], ['fred', 40]]
      */
     var sortBy = baseRest(function(collection, iteratees) {
       if (collection == null) {
@@ -37773,7 +38209,7 @@ function curry$(f, bound){
      * _.defer(function(text) {
      *   console.log(text);
      * }, 'deferred');
-     * // => Logs 'deferred' after one or more milliseconds.
+     * // => Logs 'deferred' after one millisecond.
      */
     var defer = baseRest(function(func, args) {
       return baseDelay(func, 1, args);
@@ -37881,14 +38317,14 @@ function curry$(f, bound){
           return cache.get(key);
         }
         var result = func.apply(this, args);
-        memoized.cache = cache.set(key, result);
+        memoized.cache = cache.set(key, result) || cache;
         return result;
       };
       memoized.cache = new (memoize.Cache || MapCache);
       return memoized;
     }
 
-    // Assign cache to `_.memoize`.
+    // Expose `MapCache`.
     memoize.Cache = MapCache;
 
     /**
@@ -37980,7 +38416,7 @@ function curry$(f, bound){
      * func(10, 5);
      * // => [100, 10]
      */
-    var overArgs = baseRest(function(func, transforms) {
+    var overArgs = castRest(function(func, transforms) {
       transforms = (transforms.length == 1 && isArray(transforms[0]))
         ? arrayMap(transforms[0], baseUnary(getIteratee()))
         : arrayMap(baseFlatten(transforms, 1), baseUnary(getIteratee()));
@@ -38094,8 +38530,8 @@ function curry$(f, bound){
      * rearged('b', 'c', 'a')
      * // => ['a', 'b', 'c']
      */
-    var rearg = baseRest(function(func, indexes) {
-      return createWrap(func, REARG_FLAG, undefined, undefined, undefined, baseFlatten(indexes, 1));
+    var rearg = flatRest(function(func, indexes) {
+      return createWrap(func, REARG_FLAG, undefined, undefined, undefined, indexes);
     });
 
     /**
@@ -38771,7 +39207,7 @@ function curry$(f, bound){
      * // => false
      */
     function isElement(value) {
-      return !!value && value.nodeType === 1 && isObjectLike(value) && !isPlainObject(value);
+      return value != null && value.nodeType === 1 && isObjectLike(value) && !isPlainObject(value);
     }
 
     /**
@@ -38817,7 +39253,7 @@ function curry$(f, bound){
       if (tag == mapTag || tag == setTag) {
         return !value.size;
       }
-      if (nonEnumShadows || isPrototype(value)) {
+      if (isPrototype(value)) {
         return !nativeKeys(value).length;
       }
       for (var key in value) {
@@ -39066,7 +39502,7 @@ function curry$(f, bound){
      */
     function isObject(value) {
       var type = typeof value;
-      return !!value && (type == 'object' || type == 'function');
+      return value != null && (type == 'object' || type == 'function');
     }
 
     /**
@@ -39094,7 +39530,7 @@ function curry$(f, bound){
      * // => false
      */
     function isObjectLike(value) {
-      return !!value && typeof value == 'object';
+      return value != null && typeof value == 'object';
     }
 
     /**
@@ -39358,8 +39794,7 @@ function curry$(f, bound){
      * // => true
      */
     function isPlainObject(value) {
-      if (!isObjectLike(value) ||
-          objectToString.call(value) != objectTag || isHostObject(value)) {
+      if (!isObjectLike(value) || objectToString.call(value) != objectTag) {
         return false;
       }
       var proto = getPrototype(value);
@@ -39916,7 +40351,7 @@ function curry$(f, bound){
      * // => { 'a': 1, 'c': 3 }
      */
     var assign = createAssigner(function(object, source) {
-      if (nonEnumShadows || isPrototype(source) || isArrayLike(source)) {
+      if (isPrototype(source) || isArrayLike(source)) {
         copyObject(source, keys(source), object);
         return;
       }
@@ -40044,9 +40479,7 @@ function curry$(f, bound){
      * _.at(object, ['a[0].b.c', 'a[1]']);
      * // => [3, 4]
      */
-    var at = baseRest(function(object, paths) {
-      return baseAt(object, baseFlatten(paths, 1));
-    });
+    var at = flatRest(baseAt);
 
     /**
      * Creates an object that inherits from the `prototype` object. If a
@@ -40649,7 +41082,7 @@ function curry$(f, bound){
       iteratee = getIteratee(iteratee, 3);
 
       baseForOwn(object, function(value, key, object) {
-        result[iteratee(value, key, object)] = value;
+        baseAssignValue(result, iteratee(value, key, object), value);
       });
       return result;
     }
@@ -40687,7 +41120,7 @@ function curry$(f, bound){
       iteratee = getIteratee(iteratee, 3);
 
       baseForOwn(object, function(value, key, object) {
-        result[key] = iteratee(value, key, object);
+        baseAssignValue(result, key, iteratee(value, key, object));
       });
       return result;
     }
@@ -40731,7 +41164,7 @@ function curry$(f, bound){
      * This method is like `_.merge` except that it accepts `customizer` which
      * is invoked to produce the merged values of the destination and source
      * properties. If `customizer` returns `undefined`, merging is handled by the
-     * method instead. The `customizer` is invoked with seven arguments:
+     * method instead. The `customizer` is invoked with six arguments:
      * (objValue, srcValue, key, object, source, stack).
      *
      * **Note:** This method mutates `object`.
@@ -40781,11 +41214,11 @@ function curry$(f, bound){
      * _.omit(object, ['a', 'c']);
      * // => { 'b': '2' }
      */
-    var omit = baseRest(function(object, props) {
+    var omit = flatRest(function(object, props) {
       if (object == null) {
         return {};
       }
-      props = arrayMap(baseFlatten(props, 1), toKey);
+      props = arrayMap(props, toKey);
       return basePick(object, baseDifference(getAllKeysIn(object), props));
     });
 
@@ -40830,8 +41263,8 @@ function curry$(f, bound){
      * _.pick(object, ['a', 'c']);
      * // => { 'a': 1, 'c': 3 }
      */
-    var pick = baseRest(function(object, props) {
-      return object == null ? {} : basePick(object, arrayMap(baseFlatten(props, 1), toKey));
+    var pick = flatRest(function(object, props) {
+      return object == null ? {} : basePick(object, arrayMap(props, toKey));
     });
 
     /**
@@ -41485,8 +41918,8 @@ function curry$(f, bound){
     }
 
     /**
-     * Converts the characters "&", "<", ">", '"', "'", and "\`" in `string` to
-     * their corresponding HTML entities.
+     * Converts the characters "&", "<", ">", '"', and "'" in `string` to their
+     * corresponding HTML entities.
      *
      * **Note:** No other characters are escaped. To escape additional
      * characters use a third-party library like [_he_](https://mths.be/he).
@@ -41496,12 +41929,6 @@ function curry$(f, bound){
      * unless they're part of a tag or unquoted attribute value. See
      * [Mathias Bynens's article](https://mathiasbynens.be/notes/ambiguous-ampersands)
      * (under "semi-related fun fact") for more details.
-     *
-     * Backticks are escaped because in IE < 9, they can break out of
-     * attribute values or HTML comments. See [#59](https://html5sec.org/#59),
-     * [#102](https://html5sec.org/#102), [#108](https://html5sec.org/#108), and
-     * [#133](https://html5sec.org/#133) of the
-     * [HTML5 Security Cheatsheet](https://html5sec.org/) for more details.
      *
      * When working with HTML you should always
      * [quote attribute values](http://wonko.com/post/html-escaping) to reduce
@@ -41745,15 +42172,12 @@ function curry$(f, bound){
      * // => [6, 8, 10]
      */
     function parseInt(string, radix, guard) {
-      // Chrome fails to trim leading <BOM> whitespace characters.
-      // See https://bugs.chromium.org/p/v8/issues/detail?id=3109 for more details.
       if (guard || radix == null) {
         radix = 0;
       } else if (radix) {
         radix = +radix;
       }
-      string = toString(string).replace(reTrim, '');
-      return nativeParseInt(string, radix || (reHasHexPrefix.test(string) ? 16 : 10));
+      return nativeParseInt(toString(string), radix || 0);
     }
 
     /**
@@ -41992,7 +42416,8 @@ function curry$(f, bound){
      * compiled({ 'user': 'barney' });
      * // => 'hello barney!'
      *
-     * // Use the ES delimiter as an alternative to the default "interpolate" delimiter.
+     * // Use the ES template literal delimiter as an "interpolate" delimiter.
+     * // Disable support by replacing the "interpolate" delimiter.
      * var compiled = _.template('hello ${ user }!');
      * compiled({ 'user': 'pebbles' });
      * // => 'hello pebbles!'
@@ -42393,7 +42818,7 @@ function curry$(f, bound){
 
     /**
      * The inverse of `_.escape`; this method converts the HTML entities
-     * `&amp;`, `&lt;`, `&gt;`, `&quot;`, `&#39;`, and `&#96;` in `string` to
+     * `&amp;`, `&lt;`, `&gt;`, `&quot;`, and `&#39;` in `string` to
      * their corresponding characters.
      *
      * **Note:** No other HTML entities are unescaped. To unescape additional
@@ -42547,10 +42972,10 @@ function curry$(f, bound){
      * jQuery(element).on('click', view.click);
      * // => Logs 'clicked docs' when clicked.
      */
-    var bindAll = baseRest(function(object, methodNames) {
-      arrayEach(baseFlatten(methodNames, 1), function(key) {
+    var bindAll = flatRest(function(object, methodNames) {
+      arrayEach(methodNames, function(key) {
         key = toKey(key);
-        object[key] = bind(object[key], object);
+        baseAssignValue(object, key, bind(object[key], object));
       });
       return object;
     });
@@ -44341,7 +44766,7 @@ function curry$(f, bound){
       lodash.prototype[iteratorSymbol] = wrapperToIterator;
     }
     return lodash;
-  }
+  });
 
   /*--------------------------------------------------------------------------*/
 
@@ -44946,6 +45371,7 @@ module.exports = {
             /* falls through */
 
             case "UnaryExpression":
+            case "AwaitExpression":
                 return 14;
 
             case "UpdateExpression":
@@ -45119,6 +45545,28 @@ module.exports = {
         }
 
         return directives;
+    },
+
+
+    /**
+     * Determines whether this node is a decimal integer literal. If a node is a decimal integer literal, a dot added
+     after the node will be parsed as a decimal point, rather than a property-access dot.
+     * @param {ASTNode} node - The node to check.
+     * @returns {boolean} `true` if this node is a decimal integer.
+     * @example
+     *
+     * 5       // true
+     * 5.      // false
+     * 5.0     // false
+     * 05      // false
+     * 0x5     // false
+     * 0b101   // false
+     * 0o5     // false
+     * 5e0     // false
+     * '5'     // false
+     */
+    isDecimalInteger: function isDecimalInteger(node) {
+        return node.type === "Literal" && typeof node.value === "number" && /^(0|[1-9]\d*)$/.test(node.raw);
     }
 };
 
@@ -50931,7 +51379,7 @@ module.exports = {
                     upper: funcInfo,
                     codePath: codePath,
                     hasReturn: false,
-                    shouldCheck: TARGET_NODE_TYPE.test(node.type) && node.body.type === "BlockStatement" && isCallbackOfArrayMethod(node)
+                    shouldCheck: TARGET_NODE_TYPE.test(node.type) && node.body.type === "BlockStatement" && isCallbackOfArrayMethod(node) && !node.async && !node.generator
                 };
             },
 
@@ -51116,7 +51564,7 @@ module.exports = {
          * @returns {void}
          */
         function parens(node) {
-            var token = sourceCode.getFirstToken(node);
+            var token = sourceCode.getFirstToken(node, node.async ? 1 : 0);
 
             // "as-needed", { "requireForBlockBody": true }: x => x
             if (requireForBlockBody && node.params.length === 1 && node.params[0].type === "Identifier" && node.body.type !== "BlockStatement") {
@@ -52130,9 +52578,23 @@ module.exports = {
             category: "Best Practices",
             recommended: false
         },
-        schema: []
+        schema: [{
+            type: "object",
+            properties: {
+                exceptMethods: {
+                    type: "array",
+                    items: {
+                        type: "string"
+                    }
+                }
+            },
+            additionalProperties: false
+        }]
     },
     create: function create(context) {
+        var config = context.options[0] ? Object.assign({}, context.options[0]) : {};
+        var exceptMethods = new Set(config.exceptMethods || []);
+
         var stack = [];
 
         /**
@@ -52156,6 +52618,16 @@ module.exports = {
         }
 
         /**
+         * Check if the node is an instance method not excluded by config
+         * @param {ASTNode} node - node to check
+         * @returns {boolean} True if it is an instance method, and not excluded by config
+         * @private
+         */
+        function isIncludedInstanceMethod(node) {
+            return isInstanceMethod(node) && !exceptMethods.has(node.key.name);
+        }
+
+        /**
          * Checks if we are leaving a function that is a method, and reports if 'this' has not been used.
          * Static methods and the constructor are exempt.
          * Then pops the context off the stack.
@@ -52166,7 +52638,7 @@ module.exports = {
         function exitFunction(node) {
             var methodUsesThis = stack.pop();
 
-            if (isInstanceMethod(node.parent) && !methodUsesThis) {
+            if (isIncludedInstanceMethod(node.parent) && !methodUsesThis) {
                 context.report({
                     node: node,
                     message: "Expected 'this' to be used by class method '{{classMethod}}'.",
@@ -54435,10 +54907,16 @@ module.exports = {
 
 },{"../util/keywords":410}],199:[function(require,module,exports){
 /**
- * @fileoverview Require file to end with single newline.
+ * @fileoverview Require or disallow newline at the end of files
  * @author Nodeca Team <https://github.com/nodeca>
  */
 "use strict";
+
+//------------------------------------------------------------------------------
+// Requirements
+//------------------------------------------------------------------------------
+
+var lodash = require("lodash");
 
 //------------------------------------------------------------------------------
 // Rule Definition
@@ -54447,18 +54925,15 @@ module.exports = {
 module.exports = {
     meta: {
         docs: {
-            description: "enforce at least one newline at the end of files",
+            description: "require or disallow newline at the end of files",
             category: "Stylistic Issues",
             recommended: false
         },
-
         fixable: "whitespace",
-
         schema: [{
-            enum: ["unix", "windows"]
+            enum: ["always", "never", "unix", "windows"]
         }]
     },
-
     create: function create(context) {
 
         //--------------------------------------------------------------------------
@@ -54466,35 +54941,65 @@ module.exports = {
         //--------------------------------------------------------------------------
 
         return {
-
             Program: function checkBadEOF(node) {
-
                 var sourceCode = context.getSourceCode(),
                     src = sourceCode.getText(),
-                    location = { column: 1 },
-                    linebreakStyle = context.options[0] || "unix",
-                    linebreak = linebreakStyle === "unix" ? "\n" : "\r\n";
+                    location = {
+                    column: lodash.last(sourceCode.lines).length,
+                    line: sourceCode.lines.length
+                },
+                    LF = "\n",
+                    CRLF = "\r" + LF,
+                    endsWithNewline = lodash.endsWith(src, LF);
 
-                if (src[src.length - 1] !== "\n") {
+                var mode = context.options[0] || "always",
+                    appendCRLF = false;
 
-                    // file is not newline-terminated
-                    location.line = src.split(/\n/g).length;
+                if (mode === "unix") {
+
+                    // `"unix"` should behave exactly as `"always"`
+                    mode = "always";
+                }
+                if (mode === "windows") {
+
+                    // `"windows"` should behave exactly as `"always"`, but append CRLF in the fixer for backwards compatibility
+                    mode = "always";
+                    appendCRLF = true;
+                }
+                if (mode === "always" && !endsWithNewline) {
+
+                    // File is not newline-terminated, but should be
                     context.report({
                         node: node,
                         loc: location,
                         message: "Newline required at end of file but not found.",
                         fix: function fix(fixer) {
-                            return fixer.insertTextAfterRange([0, src.length], linebreak);
+                            return fixer.insertTextAfterRange([0, src.length], appendCRLF ? CRLF : LF);
+                        }
+                    });
+                } else if (mode === "never" && endsWithNewline) {
+
+                    // File is newline-terminated, but shouldn't be
+                    context.report({
+                        node: node,
+                        loc: location,
+                        message: "Newline not allowed at end of file.",
+                        fix: function fix(fixer) {
+                            var finalEOLs = /(?:\r?\n)+$/,
+                                match = finalEOLs.exec(sourceCode.text),
+                                start = match.index,
+                                end = sourceCode.text.length;
+
+                            return fixer.replaceTextRange([start, end], "");
                         }
                     });
                 }
             }
-
         };
     }
 };
 
-},{}],200:[function(require,module,exports){
+},{"lodash":158}],200:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag statements that use != and == instead of !== and ===
  * @author Nicholas C. Zakas
@@ -54658,7 +55163,7 @@ module.exports = {
 module.exports = {
     meta: {
         docs: {
-            description: "require or disallow spacing between `function` identifiers and their invocations",
+            description: "require or disallow spacing between function identifiers and their invocations",
             category: "Stylistic Issues",
             recommended: false
         },
@@ -55747,8 +56252,6 @@ module.exports = {
     },
 
     create: function create(context) {
-
-        var MESSAGE = "Expected indentation of {{needed}} {{type}} {{characters}} but found {{gotten}}.";
         var DEFAULT_VARIABLE_INDENT = 1;
         var DEFAULT_PARAMETER_INDENT = null; // For backwards compatibility, don't check parameter indentation unless specified in the config
         var DEFAULT_FUNCTION_BODY_INDENT = 1;
@@ -55818,86 +56321,61 @@ module.exports = {
             }
         }
 
-        var indentPattern = {
-            normal: indentType === "space" ? /^ +/ : /^\t+/,
-            excludeCommas: indentType === "space" ? /^[ ,]+/ : /^[\t,]+/
-        };
-
         var caseIndentStore = {};
 
         /**
-         * Reports a given indent violation and properly pluralizes the message
+         * Creates an error message for a line, given the expected/actual indentation.
+         * @param {int} expectedAmount The expected amount of indentation characters for this line
+         * @param {int} actualSpaces The actual number of indentation spaces that were found on this line
+         * @param {int} actualTabs The actual number of indentation tabs that were found on this line
+         * @returns {string} An error message for this line
+         */
+        function createErrorMessage(expectedAmount, actualSpaces, actualTabs) {
+            var expectedStatement = expectedAmount + " " + indentType + (expectedAmount === 1 ? "" : "s"); // e.g. "2 tabs"
+            var foundSpacesWord = "space" + (actualSpaces === 1 ? "" : "s"); // e.g. "space"
+            var foundTabsWord = "tab" + (actualTabs === 1 ? "" : "s"); // e.g. "tabs"
+            var foundStatement = void 0;
+
+            if (actualSpaces > 0 && actualTabs > 0) {
+                foundStatement = actualSpaces + " " + foundSpacesWord + " and " + actualTabs + " " + foundTabsWord; // e.g. "1 space and 2 tabs"
+            } else if (actualSpaces > 0) {
+
+                // Abbreviate the message if the expected indentation is also spaces.
+                // e.g. 'Expected 4 spaces but found 2' rather than 'Expected 4 spaces but found 2 spaces'
+                foundStatement = indentType === "space" ? actualSpaces : actualSpaces + " " + foundSpacesWord;
+            } else if (actualTabs > 0) {
+                foundStatement = indentType === "tab" ? actualTabs : actualTabs + " " + foundTabsWord;
+            } else {
+                foundStatement = "0";
+            }
+
+            return "Expected indentation of " + expectedStatement + " but found " + foundStatement + ".";
+        }
+
+        /**
+         * Reports a given indent violation
          * @param {ASTNode} node Node violating the indent rule
          * @param {int} needed Expected indentation character count
-         * @param {int} gotten Indentation character count in the actual node/code
+         * @param {int} gottenSpaces Indentation space count in the actual node/code
+         * @param {int} gottenTabs Indentation tab count in the actual node/code
          * @param {Object=} loc Error line and column location
          * @param {boolean} isLastNodeCheck Is the error for last node check
          * @returns {void}
          */
-        function report(node, needed, gotten, loc, isLastNodeCheck) {
-            var msgContext = {
-                needed: needed,
-                type: indentType,
-                characters: needed === 1 ? "character" : "characters",
-                gotten: gotten
-            };
-            var indentChar = indentType === "space" ? " " : "\t";
+        function report(node, needed, gottenSpaces, gottenTabs, loc, isLastNodeCheck) {
 
-            /**
-             * Responsible for fixing the indentation issue fix
-             * @returns {Function} function to be executed by the fixer
-             * @private
-             */
-            function getFixerFunction() {
-                var rangeToFix = [];
+            var desiredIndent = (indentType === "space" ? " " : "\t").repeat(needed);
 
-                if (needed > gotten) {
-                    var _ret = function () {
-                        var spaces = indentChar.repeat(needed - gotten);
+            var textRange = isLastNodeCheck ? [node.range[1] - gottenSpaces - gottenTabs - 1, node.range[1] - 1] : [node.range[0] - gottenSpaces - gottenTabs, node.range[0]];
 
-                        if (isLastNodeCheck === true) {
-                            rangeToFix = [node.range[1] - 1, node.range[1] - 1];
-                        } else {
-                            rangeToFix = [node.range[0], node.range[0]];
-                        }
-
-                        return {
-                            v: function v(fixer) {
-                                return fixer.insertTextBeforeRange(rangeToFix, spaces);
-                            }
-                        };
-                    }();
-
-                    if ((typeof _ret === "undefined" ? "undefined" : _typeof(_ret)) === "object") return _ret.v;
-                } else {
-                    if (isLastNodeCheck === true) {
-                        rangeToFix = [node.range[1] - (gotten - needed) - 1, node.range[1] - 1];
-                    } else {
-                        rangeToFix = [node.range[0] - (gotten - needed), node.range[0]];
-                    }
-
-                    return function (fixer) {
-                        return fixer.removeRange(rangeToFix);
-                    };
+            context.report({
+                node: node,
+                loc: loc,
+                message: createErrorMessage(needed, gottenSpaces, gottenTabs),
+                fix: function fix(fixer) {
+                    return fixer.replaceTextRange(textRange, desiredIndent);
                 }
-            }
-
-            if (loc) {
-                context.report({
-                    node: node,
-                    loc: loc,
-                    message: MESSAGE,
-                    data: msgContext,
-                    fix: getFixerFunction()
-                });
-            } else {
-                context.report({
-                    node: node,
-                    message: MESSAGE,
-                    data: msgContext,
-                    fix: getFixerFunction()
-                });
-            }
+            });
         }
 
         /**
@@ -55905,15 +56383,29 @@ module.exports = {
          * @param {ASTNode|Token} node Node to examine
          * @param {boolean} [byLastLine=false] get indent of node's last line
          * @param {boolean} [excludeCommas=false] skip comma on start of line
-         * @returns {int} Indent
+         * @returns {Object} The node's indent. Contains keys `space` and `tab`, representing the indent of each character. Also
+         contains keys `goodChar` and `badChar`, where `goodChar` is the amount of the user's desired indentation character, and
+         `badChar` is the amount of the other indentation character.
          */
-        function getNodeIndent(node, byLastLine, excludeCommas) {
+        function getNodeIndent(node, byLastLine) {
             var token = byLastLine ? sourceCode.getLastToken(node) : sourceCode.getFirstToken(node);
-            var src = sourceCode.getText(token, token.loc.start.column);
-            var regExp = excludeCommas ? indentPattern.excludeCommas : indentPattern.normal;
-            var indent = regExp.exec(src);
+            var srcCharsBeforeNode = sourceCode.getText(token, token.loc.start.column).split("");
+            var indentChars = srcCharsBeforeNode.slice(0, srcCharsBeforeNode.findIndex(function (char) {
+                return char !== " " && char !== "\t";
+            }));
+            var spaces = indentChars.filter(function (char) {
+                return char === " ";
+            }).length;
+            var tabs = indentChars.filter(function (char) {
+                return char === "\t";
+            }).length;
 
-            return indent ? indent[0].length : 0;
+            return {
+                space: spaces,
+                tab: tabs,
+                goodChar: indentType === "space" ? spaces : tabs,
+                badChar: indentType === "space" ? tabs : spaces
+            };
         }
 
         /**
@@ -55933,24 +56425,24 @@ module.exports = {
         /**
          * Check indent for node
          * @param {ASTNode} node Node to check
-         * @param {int} indent needed indent
+         * @param {int} neededIndent needed indent
          * @param {boolean} [excludeCommas=false] skip comma on start of line
          * @returns {void}
          */
-        function checkNodeIndent(node, indent, excludeCommas) {
-            var nodeIndent = getNodeIndent(node, false, excludeCommas);
+        function checkNodeIndent(node, neededIndent) {
+            var actualIndent = getNodeIndent(node, false);
 
-            if (node.type !== "ArrayExpression" && node.type !== "ObjectExpression" && nodeIndent !== indent && isNodeFirstInLine(node)) {
-                report(node, indent, nodeIndent);
+            if (node.type !== "ArrayExpression" && node.type !== "ObjectExpression" && (actualIndent.goodChar !== neededIndent || actualIndent.badChar !== 0) && isNodeFirstInLine(node)) {
+                report(node, neededIndent, actualIndent.space, actualIndent.tab);
             }
 
             if (node.type === "IfStatement" && node.alternate) {
                 var elseToken = sourceCode.getTokenBefore(node.alternate);
 
-                checkNodeIndent(elseToken, indent, excludeCommas);
+                checkNodeIndent(elseToken, neededIndent);
 
                 if (!isNodeFirstInLine(node.alternate)) {
-                    checkNodeIndent(node.alternate, indent, excludeCommas);
+                    checkNodeIndent(node.alternate, neededIndent);
                 }
             }
         }
@@ -55962,9 +56454,9 @@ module.exports = {
          * @param {boolean} [excludeCommas=false] skip comma on start of line
          * @returns {void}
          */
-        function checkNodesIndent(nodes, indent, excludeCommas) {
+        function checkNodesIndent(nodes, indent) {
             nodes.forEach(function (node) {
-                return checkNodeIndent(node, indent, excludeCommas);
+                return checkNodeIndent(node, indent);
             });
         }
 
@@ -55978,8 +56470,8 @@ module.exports = {
             var lastToken = sourceCode.getLastToken(node);
             var endIndent = getNodeIndent(lastToken, true);
 
-            if (endIndent !== lastLineIndent && isNodeFirstInLine(node, true)) {
-                report(node, lastLineIndent, endIndent, { line: lastToken.loc.start.line, column: lastToken.loc.start.column }, true);
+            if ((endIndent.goodChar !== lastLineIndent || endIndent.badChar !== 0) && isNodeFirstInLine(node, true)) {
+                report(node, lastLineIndent, endIndent.space, endIndent.tab, { line: lastToken.loc.start.line, column: lastToken.loc.start.column }, true);
             }
         }
 
@@ -55992,8 +56484,8 @@ module.exports = {
         function checkFirstNodeLineIndent(node, firstLineIndent) {
             var startIndent = getNodeIndent(node, false);
 
-            if (startIndent !== firstLineIndent && isNodeFirstInLine(node)) {
-                report(node, firstLineIndent, startIndent, { line: node.loc.start.line, column: node.loc.start.column });
+            if ((startIndent.goodChar !== firstLineIndent || startIndent.badChar !== 0) && isNodeFirstInLine(node)) {
+                report(node, firstLineIndent, startIndent.space, startIndent.tab, { line: node.loc.start.line, column: node.loc.start.column });
             }
         }
 
@@ -56115,11 +56607,11 @@ module.exports = {
             if (calleeNode.parent && (calleeNode.parent.type === "Property" || calleeNode.parent.type === "ArrayExpression")) {
 
                 // If function is part of array or object, comma can be put at left
-                indent = getNodeIndent(calleeNode, false, false);
+                indent = getNodeIndent(calleeNode, false, false).goodChar;
             } else {
 
                 // If function is standalone, simple calculate indent
-                indent = getNodeIndent(calleeNode);
+                indent = getNodeIndent(calleeNode).goodChar;
             }
 
             if (calleeNode.parent.type === "CallExpression") {
@@ -56127,11 +56619,11 @@ module.exports = {
 
                 if (calleeNode.type !== "FunctionExpression" && calleeNode.type !== "ArrowFunctionExpression") {
                     if (calleeParent && calleeParent.loc.start.line < node.loc.start.line) {
-                        indent = getNodeIndent(calleeParent);
+                        indent = getNodeIndent(calleeParent).goodChar;
                     }
                 } else {
                     if (isArgBeforeCalleeNodeMultiline(calleeNode) && calleeParent.callee.loc.start.line === calleeParent.callee.loc.end.line && !isNodeFirstInLine(calleeNode)) {
-                        indent = getNodeIndent(calleeParent);
+                        indent = getNodeIndent(calleeParent).goodChar;
                     }
                 }
             }
@@ -56230,12 +56722,12 @@ module.exports = {
                         effectiveParent = parent.parent;
                     }
                 }
-                nodeIndent = getNodeIndent(effectiveParent);
+                nodeIndent = getNodeIndent(effectiveParent).goodChar;
                 if (parentVarNode && parentVarNode.loc.start.line !== node.loc.start.line) {
                     if (parent.type !== "VariableDeclarator" || parentVarNode === parentVarNode.parent.declarations[0]) {
                         if (parent.type === "VariableDeclarator" && parentVarNode.loc.start.line === effectiveParent.loc.start.line) {
                             nodeIndent = nodeIndent + indentSize * options.VariableDeclarator[parentVarNode.parent.kind];
-                        } else if (parent.type === "ObjectExpression" || parent.type === "ArrayExpression" || parent.type === "CallExpression" || parent.type === "ArrowFunctionExpression" || parent.type === "NewExpression") {
+                        } else if (parent.type === "ObjectExpression" || parent.type === "ArrayExpression" || parent.type === "CallExpression" || parent.type === "ArrowFunctionExpression" || parent.type === "NewExpression" || parent.type === "LogicalExpression") {
                             nodeIndent = nodeIndent + indentSize;
                         }
                     }
@@ -56247,7 +56739,7 @@ module.exports = {
 
                 checkFirstNodeLineIndent(node, nodeIndent);
             } else {
-                nodeIndent = getNodeIndent(node);
+                nodeIndent = getNodeIndent(node).goodChar;
                 elementsIndent = nodeIndent + indentSize;
             }
 
@@ -56259,8 +56751,7 @@ module.exports = {
                 elementsIndent += indentSize * options.VariableDeclarator[parentVarNode.parent.kind];
             }
 
-            // Comma can be placed before property name
-            checkNodesIndent(elements, elementsIndent, true);
+            checkNodesIndent(elements, elementsIndent);
 
             if (elements.length > 0) {
 
@@ -56309,9 +56800,9 @@ module.exports = {
             var statementsWithProperties = ["IfStatement", "WhileStatement", "ForStatement", "ForInStatement", "ForOfStatement", "DoWhileStatement", "ClassDeclaration"];
 
             if (node.parent && statementsWithProperties.indexOf(node.parent.type) !== -1 && isNodeBodyBlock(node)) {
-                indent = getNodeIndent(node.parent);
+                indent = getNodeIndent(node.parent).goodChar;
             } else {
-                indent = getNodeIndent(node);
+                indent = getNodeIndent(node).goodChar;
             }
 
             if (node.type === "IfStatement" && node.consequent.type !== "BlockStatement") {
@@ -56356,13 +56847,12 @@ module.exports = {
          */
         function checkIndentInVariableDeclarations(node) {
             var elements = filterOutSameLineVars(node);
-            var nodeIndent = getNodeIndent(node);
+            var nodeIndent = getNodeIndent(node).goodChar;
             var lastElement = elements[elements.length - 1];
 
             var elementsIndent = nodeIndent + indentSize * options.VariableDeclarator[node.kind];
 
-            // Comma can be placed before declaration
-            checkNodesIndent(elements, elementsIndent, true);
+            checkNodesIndent(elements, elementsIndent);
 
             // Only check the last line if there is any token after the last item
             if (sourceCode.getLastToken(node).loc.end.line <= lastElement.loc.end.line) {
@@ -56374,7 +56864,7 @@ module.exports = {
             if (tokenBeforeLastElement.value === ",") {
 
                 // Special case for comma-first syntax where the semicolon is indented
-                checkLastNodeLineIndent(node, getNodeIndent(tokenBeforeLastElement));
+                checkLastNodeLineIndent(node, getNodeIndent(tokenBeforeLastElement).goodChar);
             } else {
                 checkLastNodeLineIndent(node, elementsIndent - indentSize);
             }
@@ -56406,7 +56896,7 @@ module.exports = {
                 return caseIndentStore[switchNode.loc.start.line];
             } else {
                 if (typeof switchIndent === "undefined") {
-                    switchIndent = getNodeIndent(switchNode);
+                    switchIndent = getNodeIndent(switchNode).goodChar;
                 }
 
                 if (switchNode.cases.length > 0 && options.SwitchCase === 0) {
@@ -56425,7 +56915,7 @@ module.exports = {
                 if (node.body.length > 0) {
 
                     // Root nodes should have no indent
-                    checkNodesIndent(node.body, getNodeIndent(node));
+                    checkNodesIndent(node.body, getNodeIndent(node).goodChar);
                 }
             },
 
@@ -56481,7 +56971,7 @@ module.exports = {
                     return;
                 }
 
-                var propertyIndent = getNodeIndent(node) + indentSize * options.MemberExpression;
+                var propertyIndent = getNodeIndent(node).goodChar + indentSize * options.MemberExpression;
 
                 var checkNodes = [node.property];
 
@@ -56496,7 +56986,7 @@ module.exports = {
             SwitchStatement: function SwitchStatement(node) {
 
                 // Switch is not a 'BlockStatement'
-                var switchIndent = getNodeIndent(node);
+                var switchIndent = getNodeIndent(node).goodChar;
                 var caseIndent = expectedCaseIndent(node, switchIndent);
 
                 checkNodesIndent(node.cases, caseIndent);
@@ -56584,7 +57074,7 @@ function isInitialized(node) {
 module.exports = {
     meta: {
         docs: {
-            description: "require or disallow initialization in `var` declarations",
+            description: "require or disallow initialization in variable declarations",
             category: "Variables",
             recommended: false
         },
@@ -57412,7 +57902,7 @@ var NEXT_TOKEN_M = /^[\{*]$/;
 var TEMPLATE_OPEN_PAREN = /\$\{$/;
 var TEMPLATE_CLOSE_PAREN = /^\}/;
 var CHECK_TYPE = /^(?:JSXElement|RegularExpression|String|Template)$/;
-var KEYS = keywords.concat(["as", "await", "from", "get", "let", "of", "set", "yield"]);
+var KEYS = keywords.concat(["as", "async", "await", "from", "get", "let", "of", "set", "yield"]);
 
 // check duplications.
 (function () {
@@ -57720,6 +58210,21 @@ module.exports = {
         }
 
         /**
+         * Reports `async` or `function` keywords of a given node if usage of
+         * spacing around those keywords is invalid.
+         *
+         * @param {ASTNode} node - A node to report.
+         * @returns {void}
+         */
+        function checkSpacingForFunction(node) {
+            var firstToken = node && sourceCode.getFirstToken(node);
+
+            if (firstToken && (firstToken.type === "Keyword" || firstToken.value === "async")) {
+                checkSpacingBefore(firstToken);
+            }
+        }
+
+        /**
          * Reports `class` and `extends` keywords of a given node if usage of
          * spacing around those keywords is invalid.
          *
@@ -57849,11 +58354,22 @@ module.exports = {
             if (node.static) {
                 checkSpacingAroundFirstToken(node);
             }
-            if (node.kind === "get" || node.kind === "set") {
+            if (node.kind === "get" || node.kind === "set" || (node.method || node.type === "MethodDefinition") && node.value.async) {
                 var token = sourceCode.getFirstToken(node, node.static ? 1 : 0);
 
                 checkSpacingAround(token);
             }
+        }
+
+        /**
+         * Reports `await` keyword of a given node if usage of spacing before
+         * this keyword is invalid.
+         *
+         * @param {ASTNode} node - A node to report.
+         * @returns {void}
+         */
+        function checkSpacingForAwaitExpression(node) {
+            checkSpacingBefore(sourceCode.getFirstToken(node));
         }
 
         return {
@@ -57886,13 +58402,15 @@ module.exports = {
             ExportNamedDeclaration: checkSpacingForModuleDeclaration,
             ExportDefaultDeclaration: checkSpacingAroundFirstToken,
             ExportAllDeclaration: checkSpacingForModuleDeclaration,
-            FunctionDeclaration: checkSpacingBeforeFirstToken,
+            FunctionDeclaration: checkSpacingForFunction,
             ImportDeclaration: checkSpacingForModuleDeclaration,
             VariableDeclaration: checkSpacingAroundFirstToken,
 
             // Expressions
+            ArrowFunctionExpression: checkSpacingForFunction,
+            AwaitExpression: checkSpacingForAwaitExpression,
             ClassExpression: checkSpacingForClass,
-            FunctionExpression: checkSpacingBeforeFirstToken,
+            FunctionExpression: checkSpacingForFunction,
             NewExpression: checkSpacingBeforeFirstToken,
             Super: checkSpacingBeforeFirstToken,
             ThisExpression: checkSpacingBeforeFirstToken,
@@ -57955,7 +58473,7 @@ module.exports = {
             ignorePattern = void 0,
             applyDefaultPatterns = true;
 
-        if (!options || typeof option === "string") {
+        if (!options || typeof options === "string") {
             above = !options || options === "above";
         } else {
             above = options.position === "above";
@@ -58985,8 +59503,9 @@ module.exports = {
          * @private
          */
         function groupByLineNumber(acc, node) {
-            ensureArrayAndPush(acc, node.loc.start.line, node);
-            ensureArrayAndPush(acc, node.loc.end.line, node);
+            for (var i = node.loc.start.line; i <= node.loc.end.line; ++i) {
+                ensureArrayAndPush(acc, i, node);
+            }
             return acc;
         }
 
@@ -59372,7 +59891,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 module.exports = {
     meta: {
         docs: {
-            description: "enforce a maximum number of parameters in `function` definitions",
+            description: "enforce a maximum number of parameters in function definitions",
             category: "Stylistic Issues",
             recommended: false
         },
@@ -59460,7 +59979,7 @@ module.exports = {
             properties: {
                 max: {
                     type: "integer",
-                    minimum: 0
+                    minimum: 1
                 }
             },
             additionalProperties: false
@@ -59620,23 +60139,7 @@ module.exports = {
             "ExportNamedDeclaration:exit": leaveStatement,
             "ExportDefaultDeclaration:exit": leaveStatement,
             "ExportAllDeclaration:exit": leaveStatement,
-            "Program:exit": reportFirstExtraStatementAndClear,
-
-            // For backward compatibility.
-            // Empty blocks should be warned if `{max: 0}` was given.
-            BlockStatement: function reportIfZero(node) {
-                if (maxStatementsPerLine === 0 && node.body.length === 0) {
-                    context.report({
-                        node: node,
-                        message: message,
-                        data: {
-                            numberOfStatementsOnThisLine: 0,
-                            maxStatementsPerLine: maxStatementsPerLine,
-                            statements: "statements"
-                        }
-                    });
-                }
-            }
+            "Program:exit": reportFirstExtraStatementAndClear
         };
     }
 };
@@ -59658,7 +60161,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 module.exports = {
     meta: {
         docs: {
-            description: "enforce a maximum number of statements allowed in `function` blocks",
+            description: "enforce a maximum number of statements allowed in function blocks",
             category: "Stylistic Issues",
             recommended: false
         },
@@ -59944,7 +60447,7 @@ function calculateCapIsNewExceptions(config) {
 module.exports = {
     meta: {
         docs: {
-            description: "require constructor `function` names to begin with a capital letter",
+            description: "require constructor names to begin with a capital letter",
             category: "Stylistic Issues",
             recommended: false
         },
@@ -60241,7 +60744,7 @@ module.exports = {
 module.exports = {
     meta: {
         docs: {
-            description: "require or disallow an empty line after `var` declarations",
+            description: "require or disallow an empty line after variable declarations",
             category: "Stylistic Issues",
             recommended: false
         },
@@ -64358,6 +64861,7 @@ module.exports = {
 
             UnaryExpression: dryUnaryUpdate,
             UpdateExpression: dryUnaryUpdate,
+            AwaitExpression: dryUnaryUpdate,
 
             VariableDeclarator: function VariableDeclarator(node) {
                 if (node.init && hasExcessParens(node.init) && precedence(node.init) >= precedence({ type: "AssignmentExpression" }) &&
@@ -64909,23 +65413,13 @@ function getNonNumericOperand(node) {
 }
 
 /**
- * Checks whether a node is a string literal or not.
- * @param {ASTNode} node The node to check.
- * @returns {boolean} Whether or not the passed in node is a
- * string literal or not.
- */
-function isStringLiteral(node) {
-    return astUtils.isStringLiteral(node) && node.type !== "TemplateLiteral";
-}
-
-/**
  * Checks whether a node is an empty string literal or not.
  * @param {ASTNode} node The node to check.
  * @returns {boolean} Whether or not the passed in node is an
  * empty string literal or not.
  */
 function isEmptyString(node) {
-    return isStringLiteral(node) && node.value === "";
+    return astUtils.isStringLiteral(node) && (node.value === "" || node.type === "TemplateLiteral" && node.quasis.length === 1 && node.quasis[0].value.cooked === "");
 }
 
 /**
@@ -64934,7 +65428,7 @@ function isEmptyString(node) {
  * @returns {boolean} Whether or not the node is a concatenating with an empty string.
  */
 function isConcatWithEmptyString(node) {
-    return node.operator === "+" && (isEmptyString(node.left) && !isStringLiteral(node.right) || isEmptyString(node.right) && !isStringLiteral(node.left));
+    return node.operator === "+" && (isEmptyString(node.left) && !astUtils.isStringLiteral(node.right) || isEmptyString(node.right) && !astUtils.isStringLiteral(node.left));
 }
 
 /**
@@ -65098,7 +65592,7 @@ module.exports = {
 module.exports = {
     meta: {
         docs: {
-            description: "disallow `var` and named `function` declarations in the global scope",
+            description: "disallow variable and `function` declarations in the global scope",
             category: "Best Practices",
             recommended: false
         },
@@ -65374,7 +65868,7 @@ module.exports = {
 module.exports = {
     meta: {
         docs: {
-            description: "disallow `function` or `var` declarations in nested blocks",
+            description: "disallow variable or `function` declarations in nested blocks",
             category: "Possible Errors",
             recommended: true
         },
@@ -66836,7 +67330,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 module.exports = {
     meta: {
         docs: {
-            description: "disallow `require` calls to be mixed with regular `var` declarations",
+            description: "disallow `require` calls to be mixed with regular variable declarations",
             category: "Node.js and CommonJS",
             recommended: false
         },
@@ -68583,7 +69077,7 @@ module.exports = {
 module.exports = {
     meta: {
         docs: {
-            description: "disallow `var` redeclaration",
+            description: "disallow variable redeclaration",
             category: "Best Practices",
             recommended: true
         },
@@ -68678,6 +69172,8 @@ module.exports = {
 
 "use strict";
 
+var astUtils = require("../ast-utils");
+
 //------------------------------------------------------------------------------
 // Rule Definition
 //------------------------------------------------------------------------------
@@ -68690,7 +69186,9 @@ module.exports = {
             recommended: true
         },
 
-        schema: []
+        schema: [],
+
+        fixable: "code"
     },
 
     create: function create(context) {
@@ -68700,26 +69198,33 @@ module.exports = {
          * Validate regular expressions
          * @param {ASTNode} node node to validate
          * @param {string} value regular expression to validate
+         * @param {number} valueStart The start location of the regex/string literal. It will always be the case that
+         `sourceCode.getText().slice(valueStart, valueStart + value.length) === value`
          * @returns {void}
          * @private
          */
-        function checkRegex(node, value) {
+        function checkRegex(node, value, valueStart) {
             var multipleSpacesRegex = /( {2,})+?/,
                 regexResults = multipleSpacesRegex.exec(value);
 
             if (regexResults !== null) {
-                context.report({
-                    node: node,
-                    message: "Spaces are hard to count. Use {{{count}}}.",
-                    data: {
-                        count: regexResults[0].length
-                    }
-                });
+                (function () {
+                    var count = regexResults[0].length;
 
-                /*
-                 * TODO: (platinumazure) Fix message to use rule message
-                 * substitution when api.report is fixed in lib/eslint.js.
-                 */
+                    context.report({
+                        node: node,
+                        message: "Spaces are hard to count. Use {{{count}}}.",
+                        data: { count: count },
+                        fix: function fix(fixer) {
+                            return fixer.replaceTextRange([valueStart + regexResults.index, valueStart + regexResults.index + count], " {" + count + "}");
+                        }
+                    });
+
+                    /*
+                     * TODO: (platinumazure) Fix message to use rule message
+                     * substitution when api.report is fixed in lib/eslint.js.
+                     */
+                })();
             }
         }
 
@@ -68735,7 +69240,7 @@ module.exports = {
                 nodeValue = token.value;
 
             if (nodeType === "RegularExpression") {
-                checkRegex(node, nodeValue);
+                checkRegex(node, nodeValue, token.start);
             }
         }
 
@@ -68756,8 +69261,12 @@ module.exports = {
          * @private
          */
         function checkFunction(node) {
-            if (node.callee.type === "Identifier" && node.callee.name === "RegExp" && isString(node.arguments[0])) {
-                checkRegex(node, node.arguments[0].value);
+            var scope = context.getScope();
+            var regExpVar = astUtils.getVariableByName(scope, "RegExp");
+            var shadowed = regExpVar && regExpVar.defs.length > 0;
+
+            if (node.callee.type === "Identifier" && node.callee.name === "RegExp" && isString(node.arguments[0]) && !shadowed) {
+                checkRegex(node, node.arguments[0].value, node.arguments[0].start + 1);
             }
         }
 
@@ -68769,7 +69278,7 @@ module.exports = {
     }
 };
 
-},{}],316:[function(require,module,exports){
+},{"../ast-utils":160}],316:[function(require,module,exports){
 /**
  * @fileoverview Restrict usage of specified globals.
  * @author Benoît Zugmeyer
@@ -69013,27 +69522,45 @@ module.exports = {
     meta: {
         docs: {
             description: "disallow certain properties on certain objects",
-            category: "Node.js and CommonJS",
+            category: "Best Practices",
             recommended: false
         },
 
         schema: {
             type: "array",
             items: {
-                type: "object",
-                properties: {
-                    object: {
-                        type: "string"
+                anyOf: [// `object` and `property` are both optional, but at least one of them must be provided.
+                {
+                    type: "object",
+                    properties: {
+                        object: {
+                            type: "string"
+                        },
+                        property: {
+                            type: "string"
+                        },
+                        message: {
+                            type: "string"
+                        }
                     },
-                    property: {
-                        type: "string"
+                    additionalProperties: false,
+                    required: ["object"]
+                }, {
+                    type: "object",
+                    properties: {
+                        object: {
+                            type: "string"
+                        },
+                        property: {
+                            type: "string"
+                        },
+                        message: {
+                            type: "string"
+                        }
                     },
-                    message: {
-                        type: "string"
-                    }
-                },
-                additionalProperties: false,
-                required: ["object", "property"]
+                    additionalProperties: false,
+                    required: ["property"]
+                }]
             },
             uniqueItems: true
         }
@@ -69046,38 +69573,101 @@ module.exports = {
             return {};
         }
 
-        var restrictedProperties = restrictedCalls.reduce(function (restrictions, option) {
+        var restrictedProperties = new Map();
+        var globallyRestrictedObjects = new Map();
+        var globallyRestrictedProperties = new Map();
+
+        restrictedCalls.forEach(function (option) {
             var objectName = option.object;
             var propertyName = option.property;
 
-            if (!restrictions.has(objectName)) {
-                restrictions.set(objectName, new Map());
+            if (typeof objectName === "undefined") {
+                globallyRestrictedProperties.set(propertyName, { message: option.message });
+            } else if (typeof propertyName === "undefined") {
+                globallyRestrictedObjects.set(objectName, { message: option.message });
+            } else {
+                if (!restrictedProperties.has(objectName)) {
+                    restrictedProperties.set(objectName, new Map());
+                }
+
+                restrictedProperties.get(objectName).set(propertyName, {
+                    message: option.message
+                });
             }
+        });
 
-            restrictions.get(objectName).set(propertyName, {
-                message: option.message
-            });
+        /**
+        * Checks to see whether a property access is restricted, and reports it if so.
+        * @param {ASTNode} node The node to report
+        * @param {string} objectName The name of the object
+        * @param {string} propertyName The name of the property
+        * @returns {undefined}
+        */
+        function checkPropertyAccess(node, objectName, propertyName) {
+            if (propertyName === null) {
+                return;
+            }
+            var matchedObject = restrictedProperties.get(objectName);
+            var matchedObjectProperty = matchedObject ? matchedObject.get(propertyName) : globallyRestrictedObjects.get(objectName);
+            var globalMatchedProperty = globallyRestrictedProperties.get(propertyName);
 
-            return restrictions;
-        }, new Map());
+            if (matchedObjectProperty) {
+                var message = matchedObjectProperty.message ? " " + matchedObjectProperty.message : "";
+
+                context.report(node, "'{{objectName}}.{{propertyName}}' is restricted from being used.{{message}}", {
+                    objectName: objectName,
+                    propertyName: propertyName,
+                    message: message
+                });
+            } else if (globalMatchedProperty) {
+                var _message = globalMatchedProperty.message ? " " + globalMatchedProperty.message : "";
+
+                context.report(node, "'{{propertyName}}' is restricted from being used.{{message}}", {
+                    propertyName: propertyName,
+                    message: _message
+                });
+            }
+        }
+
+        /**
+        * Checks property accesses in a destructuring assignment expression, e.g. `var foo; ({foo} = bar);`
+        * @param {ASTNode} node An AssignmentExpression or AssignmentPattern node
+        * @returns {undefined}
+        */
+        function checkDestructuringAssignment(node) {
+            if (node.right.type === "Identifier") {
+                (function () {
+                    var objectName = node.right.name;
+
+                    if (node.left.type === "ObjectPattern") {
+                        node.left.properties.forEach(function (property) {
+                            checkPropertyAccess(node.left, objectName, astUtils.getStaticPropertyName(property));
+                        });
+                    }
+                })();
+            }
+        }
 
         return {
             MemberExpression: function MemberExpression(node) {
-                var objectName = node.object && node.object.name;
-                var propertyName = astUtils.getStaticPropertyName(node);
-                var matchedObject = restrictedProperties.get(objectName);
-                var matchedObjectProperty = matchedObject && matchedObject.get(propertyName);
+                checkPropertyAccess(node, node.object && node.object.name, astUtils.getStaticPropertyName(node));
+            },
+            VariableDeclarator: function VariableDeclarator(node) {
+                if (node.init && node.init.type === "Identifier") {
+                    (function () {
+                        var objectName = node.init.name;
 
-                if (matchedObjectProperty) {
-                    var message = matchedObjectProperty.message ? " " + matchedObjectProperty.message : "";
-
-                    context.report(node, "'{{objectName}}.{{propertyName}}' is restricted from being used.{{message}}", {
-                        objectName: objectName,
-                        propertyName: propertyName,
-                        message: message
-                    });
+                        if (node.id.type === "ObjectPattern") {
+                            node.id.properties.forEach(function (property) {
+                                checkPropertyAccess(node.id, objectName, astUtils.getStaticPropertyName(property));
+                            });
+                        }
+                    })();
                 }
-            }
+            },
+
+            AssignmentExpression: checkDestructuringAssignment,
+            AssignmentPattern: checkDestructuringAssignment
         };
     }
 };
@@ -69662,7 +70252,7 @@ var astUtils = require("../ast-utils");
 module.exports = {
     meta: {
         docs: {
-            description: "disallow `var` declarations from shadowing variables in the outer scope",
+            description: "disallow variable declarations from shadowing variables declared in the outer scope",
             category: "Variables",
             recommended: false
         },
@@ -69826,7 +70416,7 @@ module.exports = {
 module.exports = {
     meta: {
         docs: {
-            description: "disallow spacing between `function` identifiers and their applications (deprecated)",
+            description: "disallow spacing between function identifiers and their applications (deprecated)",
             category: "Stylistic Issues",
             recommended: false,
             replacedBy: ["func-call-spacing"]
@@ -71928,7 +72518,7 @@ module.exports = {
                 }
             }
 
-            return (/^(?:Assignment|Call|New|Update|Yield)Expression$/.test(node.type) || node.type === "UnaryExpression" && ["delete", "void"].indexOf(node.operator) >= 0
+            return (/^(?:Assignment|Call|New|Update|Yield|Await)Expression$/.test(node.type) || node.type === "UnaryExpression" && ["delete", "void"].indexOf(node.operator) >= 0
             );
         }
 
@@ -72418,6 +73008,35 @@ module.exports = {
         }
 
         /**
+         * Checks whether the given variable is the last parameter in the non-ignored parameters.
+         *
+         * @param {escope.Variable} variable - The variable to check.
+         * @returns {boolean} `true` if the variable is the last.
+         */
+        function isLastInNonIgnoredParameters(variable) {
+            var def = variable.defs[0];
+
+            // This is the last.
+            if (def.index === def.node.params.length - 1) {
+                return true;
+            }
+
+            // if all parameters preceded by this variable are ignored, this is the last.
+            if (config.argsIgnorePattern) {
+                var params = context.getDeclaredVariables(def.node);
+                var posteriorParams = params.slice(params.indexOf(variable) + 1);
+
+                if (posteriorParams.every(function (v) {
+                    return config.argsIgnorePattern.test(v.name);
+                })) {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        /**
          * Gets an array of variables without read references.
          * @param {Scope} scope - an escope Scope object.
          * @param {Variable[]} unusedVars - an array that saving result.
@@ -72485,7 +73104,7 @@ module.exports = {
                             }
 
                             // if "args" option is "after-used", skip all but the last parameter
-                            if (config.args === "after-used" && def.index < def.node.params.length - 1) {
+                            if (config.args === "after-used" && !isLastInNonIgnoredParameters(variable)) {
                                 continue;
                             }
                         } else {
@@ -73863,6 +74482,12 @@ module.exports = {
                     propName: sourceCode.getText(node.property)
                 },
                 fix: function fix(fixer) {
+                    if (!node.computed && astUtils.isDecimalInteger(node.object)) {
+
+                        // If the object is a number literal, fixing it to something like 5.toString() would cause a SyntaxError.
+                        // Don't fix this case.
+                        return null;
+                    }
                     return fixer.replaceTextRange([leftToken.range[1], rightToken.range[0]], replacementText);
                 }
             });
@@ -74841,7 +75466,7 @@ module.exports = {
 module.exports = {
     meta: {
         docs: {
-            description: "require or disallow newlines around `var` declarations",
+            description: "require or disallow newlines around variable declarations",
             category: "Stylistic Issues",
             recommended: false
         },
@@ -76098,16 +76723,17 @@ module.exports = {
 
                             var paramsLeftParen = node.params.length ? sourceCode.getTokenBefore(node.params[0]) : sourceCode.getTokenBefore(node.body, 1);
                             var paramsRightParen = sourceCode.getTokenBefore(node.body);
+                            var asyncKeyword = node.async ? "async " : "";
                             var paramsFullText = sourceCode.text.slice(paramsLeftParen.range[0], paramsRightParen.range[1]);
 
                             if (callbackInfo.isLexicalThis) {
 
                                 // If the callback function has `.bind(this)`, replace it with an arrow function and remove the binding.
-                                return fixer.replaceText(node.parent.parent, paramsFullText + " => " + sourceCode.getText(node.body));
+                                return fixer.replaceText(node.parent.parent, asyncKeyword + paramsFullText + " => " + sourceCode.getText(node.body));
                             }
 
                             // Otherwise, only replace the `function` keyword and parameters with the arrow function parameters.
-                            return fixer.replaceTextRange([node.start, node.body.start], paramsFullText + " => ");
+                            return fixer.replaceTextRange([node.start, node.body.start], asyncKeyword + paramsFullText + " => ");
                         }
                     });
                 }
@@ -76865,6 +77491,20 @@ function getTopConcatBinaryExpression(node) {
 }
 
 /**
+* Checks whether or not a given binary expression has string literals.
+* @param {ASTNode} node - A node to check.
+* @returns {boolean} `true` if the node has string literals.
+*/
+function hasStringLiteral(node) {
+    if (isConcatenation(node)) {
+
+        // `left` is deeper than `right` normally.
+        return hasStringLiteral(node.right) || hasStringLiteral(node.left);
+    }
+    return astUtils.isStringLiteral(node);
+}
+
+/**
  * Checks whether or not a given binary expression has non string literals.
  * @param {ASTNode} node - A node to check.
  * @returns {boolean} `true` if the node has non string literals.
@@ -76876,6 +77516,36 @@ function hasNonStringLiteral(node) {
         return hasNonStringLiteral(node.right) || hasNonStringLiteral(node.left);
     }
     return !astUtils.isStringLiteral(node);
+}
+
+/**
+* Determines whether a given node will start with a template curly expression (`${}`) when being converted to a template literal.
+* @param {ASTNode} node The node that will be fixed to a template literal
+* @returns {boolean} `true` if the node will start with a template curly.
+*/
+function startsWithTemplateCurly(node) {
+    if (node.type === "BinaryExpression") {
+        return startsWithTemplateCurly(node.left);
+    }
+    if (node.type === "TemplateLiteral") {
+        return node.expressions.length && node.quasis.length && node.quasis[0].start === node.quasis[0].end;
+    }
+    return node.type !== "Literal" || typeof node.value !== "string";
+}
+
+/**
+* Determines whether a given node end with a template curly expression (`${}`) when being converted to a template literal.
+* @param {ASTNode} node The node that will be fixed to a template literal
+* @returns {boolean} `true` if the node will end with a template curly.
+*/
+function endsWithTemplateCurly(node) {
+    if (node.type === "BinaryExpression") {
+        return startsWithTemplateCurly(node.right);
+    }
+    if (node.type === "TemplateLiteral") {
+        return node.expressions.length && node.quasis.length && node.quasis[node.quasis.length - 1].start === node.quasis[node.quasis.length - 1].end;
+    }
+    return node.type !== "Literal" || typeof node.value !== "string";
 }
 
 //------------------------------------------------------------------------------
@@ -76890,11 +77560,85 @@ module.exports = {
             recommended: false
         },
 
-        schema: []
+        schema: [],
+
+        fixable: "code"
     },
 
     create: function create(context) {
+        var sourceCode = context.getSourceCode();
         var done = Object.create(null);
+
+        /**
+        * Gets the non-token text between two nodes, ignoring any other tokens that appear between the two tokens.
+        * @param {ASTNode} node1 The first node
+        * @param {ASTNode} node2 The second node
+        * @returns {string} The text between the nodes, excluding other tokens
+        */
+        function getTextBetween(node1, node2) {
+            var allTokens = [node1].concat(sourceCode.getTokensBetween(node1, node2)).concat(node2);
+            var sourceText = sourceCode.getText();
+
+            return allTokens.slice(0, -1).reduce(function (accumulator, token, index) {
+                return accumulator + sourceText.slice(token.range[1], allTokens[index + 1].range[0]);
+            }, "");
+        }
+
+        /**
+        * Returns a template literal form of the given node.
+        * @param {ASTNode} currentNode A node that should be converted to a template literal
+        * @param {string} textBeforeNode Text that should appear before the node
+        * @param {string} textAfterNode Text that should appear after the node
+        * @returns {string} A string form of this node, represented as a template literal
+        */
+        function getTemplateLiteral(currentNode, textBeforeNode, textAfterNode) {
+            if (currentNode.type === "Literal" && typeof currentNode.value === "string") {
+
+                // If the current node is a string literal, escape any instances of ${ or ` to prevent them from being interpreted
+                // as a template placeholder. However, if the code already contains a backslash before the ${ or `
+                // for some reason, don't add another backslash, because that would change the meaning of the code (it would cause
+                // an actual backslash character to appear before the dollar sign).
+                return "`" + currentNode.raw.slice(1, -1).replace(/\\*(\${|`)/g, function (matched) {
+                    if (matched.lastIndexOf("\\") % 2) {
+                        return "\\" + matched;
+                    }
+                    return matched;
+                }) + "`";
+            }
+
+            if (currentNode.type === "TemplateLiteral") {
+                return sourceCode.getText(currentNode);
+            }
+
+            if (isConcatenation(currentNode) && hasStringLiteral(currentNode) && hasNonStringLiteral(currentNode)) {
+                var plusSign = sourceCode.getTokensBetween(currentNode.left, currentNode.right).find(function (token) {
+                    return token.value === "+";
+                });
+                var textBeforePlus = getTextBetween(currentNode.left, plusSign);
+                var textAfterPlus = getTextBetween(plusSign, currentNode.right);
+                var leftEndsWithCurly = endsWithTemplateCurly(currentNode.left);
+                var rightStartsWithCurly = startsWithTemplateCurly(currentNode.right);
+
+                if (leftEndsWithCurly) {
+
+                    // If the left side of the expression ends with a template curly, add the extra text to the end of the curly bracket.
+                    // `foo${bar}` /* comment */ + 'baz' --> `foo${bar /* comment */  }${baz}`
+                    return getTemplateLiteral(currentNode.left, textBeforeNode, textBeforePlus + textAfterPlus).slice(0, -1) + getTemplateLiteral(currentNode.right, null, textAfterNode).slice(1);
+                }
+                if (rightStartsWithCurly) {
+
+                    // Otherwise, if the right side of the expression starts with a template curly, add the text there.
+                    // 'foo' /* comment */ + `${bar}baz` --> `foo${ /* comment */  bar}baz`
+                    return getTemplateLiteral(currentNode.left, textBeforeNode, null).slice(0, -1) + getTemplateLiteral(currentNode.right, textBeforePlus + textAfterPlus, textAfterNode).slice(1);
+                }
+
+                // Otherwise, these nodes should not be combined into a template curly, since there is nowhere to put
+                // the text between them.
+                return getTemplateLiteral(currentNode.left, textBeforeNode, null) + textBeforePlus + "+" + textAfterPlus + getTemplateLiteral(currentNode.right, textAfterNode, null);
+            }
+
+            return "`${" + (textBeforeNode || "") + sourceCode.getText(currentNode) + (textAfterNode || "") + "}`";
+        }
 
         /**
          * Reports if a given node is string concatenation with non string literals.
@@ -76916,7 +77660,13 @@ module.exports = {
             done[topBinaryExpr.range[0]] = true;
 
             if (hasNonStringLiteral(topBinaryExpr)) {
-                context.report(topBinaryExpr, "Unexpected string concatenation.");
+                context.report({
+                    node: topBinaryExpr,
+                    message: "Unexpected string concatenation.",
+                    fix: function fix(fixer) {
+                        return fixer.replaceText(topBinaryExpr, getTemplateLiteral(topBinaryExpr, null, null));
+                    }
+                });
             }
         }
 
@@ -76988,7 +77738,9 @@ module.exports = {
                 minItems: 0,
                 maxItems: 2
             }]
-        }
+        },
+
+        fixable: "code"
     },
 
     create: function create(context) {
@@ -77000,7 +77752,8 @@ module.exports = {
             MESSAGE_UNNECESSARY = "Unnecessarily quoted property '{{property}}' found.",
             MESSAGE_UNQUOTED = "Unquoted property '{{property}}' found.",
             MESSAGE_NUMERIC = "Unquoted number literal '{{property}}' used as key.",
-            MESSAGE_RESERVED = "Unquoted reserved word '{{property}}' used as key.";
+            MESSAGE_RESERVED = "Unquoted reserved word '{{property}}' used as key.",
+            sourceCode = context.getSourceCode();
 
         /**
          * Checks whether a certain string constitutes an ES3 token
@@ -77021,6 +77774,31 @@ module.exports = {
          */
         function areQuotesRedundant(rawKey, tokens, skipNumberLiterals) {
             return tokens.length === 1 && tokens[0].start === 0 && tokens[0].end === rawKey.length && (["Identifier", "Keyword", "Null", "Boolean"].indexOf(tokens[0].type) >= 0 || tokens[0].type === "Numeric" && !skipNumberLiterals && String(+tokens[0].value) === tokens[0].value);
+        }
+
+        /**
+        * Returns a string representation of a property node with quotes removed
+        * @param {ASTNode} key Key AST Node, which may or may not be quoted
+        * @returns {string} A replacement string for this property
+        */
+        function getUnquotedKey(key) {
+            return key.type === "Identifier" ? key.name : key.value;
+        }
+
+        /**
+        * Returns a string representation of a property node with quotes added
+        * @param {ASTNode} key Key AST Node, which may or may not be quoted
+        * @returns {string} A replacement string for this property
+        */
+        function getQuotedKey(key) {
+            if (key.type === "Literal" && typeof key.value === "string") {
+
+                // If the key is already a string literal, don't replace the quotes with double quotes.
+                return sourceCode.getText(key);
+            }
+
+            // Otherwise, the key is either an identifier or a number literal.
+            return "\"" + (key.type === "Identifier" ? key.name : key.value) + "\"";
         }
 
         /**
@@ -77054,12 +77832,33 @@ module.exports = {
                 }
 
                 if (CHECK_UNNECESSARY && areQuotesRedundant(key.value, tokens, NUMBERS)) {
-                    context.report(node, MESSAGE_UNNECESSARY, { property: key.value });
+                    context.report({
+                        node: node,
+                        message: MESSAGE_UNNECESSARY,
+                        data: { property: key.value },
+                        fix: function fix(fixer) {
+                            return fixer.replaceText(key, getUnquotedKey(key));
+                        }
+                    });
                 }
             } else if (KEYWORDS && key.type === "Identifier" && isKeyword(key.name)) {
-                context.report(node, MESSAGE_RESERVED, { property: key.name });
+                context.report({
+                    node: node,
+                    message: MESSAGE_RESERVED,
+                    data: { property: key.name },
+                    fix: function fix(fixer) {
+                        return fixer.replaceText(key, getQuotedKey(key));
+                    }
+                });
             } else if (NUMBERS && key.type === "Literal" && typeof key.value === "number") {
-                context.report(node, MESSAGE_NUMERIC, { property: key.value });
+                context.report({
+                    node: node,
+                    message: MESSAGE_NUMERIC,
+                    data: { property: key.value },
+                    fix: function fix(fixer) {
+                        return fixer.replaceText(key, getQuotedKey(key));
+                    }
+                });
             }
         }
 
@@ -77072,8 +77871,13 @@ module.exports = {
             var key = node.key;
 
             if (!node.method && !node.computed && !node.shorthand && !(key.type === "Literal" && typeof key.value === "string")) {
-                context.report(node, MESSAGE_UNQUOTED, {
-                    property: key.name || key.value
+                context.report({
+                    node: node,
+                    message: MESSAGE_UNQUOTED,
+                    data: { property: key.name || key.value },
+                    fix: function fix(fixer) {
+                        return fixer.replaceText(key, getQuotedKey(key));
+                    }
                 });
             }
         }
@@ -77085,8 +77889,9 @@ module.exports = {
          * @returns {void}
          */
         function checkConsistency(node, checkQuotesRedundancy) {
-            var quotes = false,
-                lackOfQuotes = false,
+            var quotedProps = [],
+                unquotedProps = [];
+            var keywordKeyName = null,
                 necessaryQuotes = false;
 
             node.properties.forEach(function (property) {
@@ -77099,7 +77904,7 @@ module.exports = {
 
                 if (key.type === "Literal" && typeof key.value === "string") {
 
-                    quotes = true;
+                    quotedProps.push(property);
 
                     if (checkQuotesRedundancy) {
                         try {
@@ -77112,21 +77917,46 @@ module.exports = {
                         necessaryQuotes = necessaryQuotes || !areQuotesRedundant(key.value, tokens) || KEYWORDS && isKeyword(tokens[0].value);
                     }
                 } else if (KEYWORDS && checkQuotesRedundancy && key.type === "Identifier" && isKeyword(key.name)) {
+                    unquotedProps.push(property);
                     necessaryQuotes = true;
-                    context.report(node, "Properties should be quoted as '{{property}}' is a reserved word.", { property: key.name });
+                    keywordKeyName = key.name;
                 } else {
-                    lackOfQuotes = true;
-                }
-
-                if (quotes && lackOfQuotes) {
-                    context.report(node, "Inconsistently quoted property '{{key}}' found.", {
-                        key: key.name || key.value
-                    });
+                    unquotedProps.push(property);
                 }
             });
 
-            if (checkQuotesRedundancy && quotes && !necessaryQuotes) {
-                context.report(node, "Properties shouldn't be quoted as all quotes are redundant.");
+            if (checkQuotesRedundancy && quotedProps.length && !necessaryQuotes) {
+                quotedProps.forEach(function (property) {
+                    context.report({
+                        node: property,
+                        message: "Properties shouldn't be quoted as all quotes are redundant.",
+                        fix: function fix(fixer) {
+                            return fixer.replaceText(property.key, getUnquotedKey(property.key));
+                        }
+                    });
+                });
+            } else if (unquotedProps.length && keywordKeyName) {
+                unquotedProps.forEach(function (property) {
+                    context.report({
+                        node: property,
+                        message: "Properties should be quoted as '{{property}}' is a reserved word.",
+                        data: { property: keywordKeyName },
+                        fix: function fix(fixer) {
+                            return fixer.replaceText(property.key, getQuotedKey(property.key));
+                        }
+                    });
+                });
+            } else if (quotedProps.length && unquotedProps.length) {
+                unquotedProps.forEach(function (property) {
+                    context.report({
+                        node: property,
+                        message: "Inconsistently quoted property '{{key}}' found.",
+                        data: { key: property.key.name || property.key.value },
+                        fix: function fix(fixer) {
+                            return fixer.replaceText(property.key, getQuotedKey(property.key));
+                        }
+                    });
+                });
             }
         }
 
@@ -77269,12 +78099,26 @@ module.exports = {
 
         /**
          * Determines if a given node is part of JSX syntax.
-         * @param {ASTNode} node The node to check.
-         * @returns {boolean} True if the node is a JSX node, false if not.
+         *
+         * This function returns `true` in the following cases:
+         *
+         * - `<div className="foo"></div>` ... If the literal is an attribute value, the parent of the literal is `JSXAttribute`.
+         * - `<div>foo</div>` ... If the literal is a text content, the parent of the literal is `JSXElement`.
+         *
+         * In particular, this function returns `false` in the following cases:
+         *
+         * - `<div className={"foo"}></div>`
+         * - `<div>{"foo"}</div>`
+         *
+         * In both cases, inside of the braces is handled as normal JavaScript.
+         * The braces are `JSXExpressionContainer` nodes.
+         *
+         * @param {ASTNode} node The Literal node to check.
+         * @returns {boolean} True if the node is a part of JSX, false if not.
          * @private
          */
-        function isJSXElement(node) {
-            return node.type.indexOf("JSX") === 0;
+        function isJSXLiteral(node) {
+            return node.parent.type === "JSXAttribute" || node.parent.type === "JSXElement";
         }
 
         /**
@@ -77355,7 +78199,7 @@ module.exports = {
                 var isValid = void 0;
 
                 if (settings && typeof val === "string") {
-                    isValid = quoteOption === "backtick" && isAllowedAsNonBacktick(node) || isJSXElement(node.parent) || astUtils.isSurroundedBy(rawVal, settings.quote);
+                    isValid = quoteOption === "backtick" && isAllowedAsNonBacktick(node) || isJSXLiteral(node) || astUtils.isSurroundedBy(rawVal, settings.quote);
 
                     if (!isValid && avoidEscape) {
                         isValid = astUtils.isSurroundedBy(rawVal, settings.alternateQuote) && rawVal.indexOf(settings.quote) >= 0;
@@ -78528,7 +79372,7 @@ var isValidOrders = {
 module.exports = {
     meta: {
         docs: {
-            description: "requires object keys to be sorted",
+            description: "require object keys to be sorted",
             category: "Stylistic Issues",
             recommended: false
         },
@@ -79231,7 +80075,7 @@ module.exports = {
 module.exports = {
     meta: {
         docs: {
-            description: "require spacing around operators",
+            description: "require spacing around infix operators",
             category: "Stylistic Issues",
             recommended: false
         },
@@ -79549,6 +80393,17 @@ module.exports = {
         }
 
         /**
+        * Verifies AwaitExpressions satisfy spacing requirements
+        * @param {ASTNode} node AwaitExpression AST node
+        * @returns {void}
+        */
+        function checkForSpacesAfterAwait(node) {
+            var tokens = sourceCode.getFirstTokens(node, 3);
+
+            checkUnaryWordOperatorForSpaces(node, tokens[0], tokens[1], "await");
+        }
+
+        /**
         * Verifies UnaryExpression, UpdateExpression and NewExpression have spaces before or after the operator
         * @param {ASTnode} node AST node
         * @param {Object} firstToken First token in the expression
@@ -79663,7 +80518,8 @@ module.exports = {
             UnaryExpression: checkForSpaces,
             UpdateExpression: checkForSpaces,
             NewExpression: checkForSpaces,
-            YieldExpression: checkForSpacesAfterYield
+            YieldExpression: checkForSpacesAfterYield,
+            AwaitExpression: checkForSpacesAfterAwait
         };
     }
 };
@@ -80126,7 +80982,9 @@ module.exports = {
 
         schema: [{
             enum: ["never", "global", "function", "safe"]
-        }]
+        }],
+
+        fixable: "code"
     },
 
     create: function create(context) {
@@ -80143,39 +81001,60 @@ module.exports = {
         }
 
         /**
+        * Determines whether a reported error should be fixed, depending on the error type.
+        * @param {string} errorType The type of error
+        * @returns {boolean} `true` if the reported error should be fixed
+        */
+        function shouldFix(errorType) {
+            return errorType === "multiple" || errorType === "unnecessary" || errorType === "module" || errorType === "implied" || errorType === "unnecessaryInClasses";
+        }
+
+        /**
+        * Gets a fixer function to remove a given 'use strict' directive.
+        * @param {ASTNode} node The directive that should be removed
+        * @returns {Function} A fixer function
+        */
+        function getFixFunction(node) {
+            return function (fixer) {
+                return fixer.remove(node);
+            };
+        }
+
+        /**
          * Report a slice of an array of nodes with a given message.
          * @param {ASTNode[]} nodes Nodes.
          * @param {string} start Index to start from.
          * @param {string} end Index to end before.
          * @param {string} message Message to display.
+         * @param {boolean} fix `true` if the directive should be fixed (i.e. removed)
          * @returns {void}
          */
-        function reportSlice(nodes, start, end, message) {
-            var i = void 0;
-
-            for (i = start; i < end; i++) {
-                context.report(nodes[i], message);
-            }
+        function reportSlice(nodes, start, end, message, fix) {
+            nodes.slice(start, end).forEach(function (node) {
+                context.report({ node: node, message: message, fix: fix ? getFixFunction(node) : null });
+            });
         }
 
         /**
          * Report all nodes in an array with a given message.
          * @param {ASTNode[]} nodes Nodes.
          * @param {string} message Message to display.
+         * @param {boolean} fix `true` if the directive should be fixed (i.e. removed)
          * @returns {void}
          */
-        function reportAll(nodes, message) {
-            reportSlice(nodes, 0, nodes.length, message);
+        function reportAll(nodes, message, fix) {
+            reportSlice(nodes, 0, nodes.length, message, fix);
         }
 
         /**
          * Report all nodes in an array, except the first, with a given message.
          * @param {ASTNode[]} nodes Nodes.
          * @param {string} message Message to display.
+         * @param {boolean} fix `true` if the directive should be fixed (i.e. removed)
          * @returns {void}
          */
-        function reportAllExceptFirst(nodes, message) {
-            reportSlice(nodes, 1, nodes.length, message);
+        function reportAllExceptFirst(nodes, message, fix) {
+            reportSlice(nodes, 1, nodes.length, message, fix);
         }
 
         /**
@@ -80195,12 +81074,12 @@ module.exports = {
                 if (!isSimpleParameterList(node.params)) {
                     context.report(useStrictDirectives[0], messages.nonSimpleParameterList);
                 } else if (isParentStrict) {
-                    context.report(useStrictDirectives[0], messages.unnecessary);
+                    context.report({ node: useStrictDirectives[0], message: messages.unnecessary, fix: getFixFunction(useStrictDirectives[0]) });
                 } else if (isInClass) {
-                    context.report(useStrictDirectives[0], messages.unnecessaryInClasses);
+                    context.report({ node: useStrictDirectives[0], message: messages.unnecessaryInClasses, fix: getFixFunction(useStrictDirectives[0]) });
                 }
 
-                reportAllExceptFirst(useStrictDirectives, messages.multiple);
+                reportAllExceptFirst(useStrictDirectives, messages.multiple, true);
             } else if (isParentGlobal) {
                 if (isSimpleParameterList(node.params)) {
                     context.report(node, messages.function);
@@ -80235,10 +81114,10 @@ module.exports = {
                 enterFunctionInFunctionMode(node, useStrictDirectives);
             } else if (useStrictDirectives.length > 0) {
                 if (isSimpleParameterList(node.params)) {
-                    reportAll(useStrictDirectives, messages[mode]);
+                    reportAll(useStrictDirectives, messages[mode], shouldFix(mode));
                 } else {
                     context.report(useStrictDirectives[0], messages.nonSimpleParameterList);
-                    reportAllExceptFirst(useStrictDirectives, messages.multiple);
+                    reportAllExceptFirst(useStrictDirectives, messages.multiple, true);
                 }
             }
         }
@@ -80255,9 +81134,9 @@ module.exports = {
                     if (node.body.length > 0 && useStrictDirectives.length === 0) {
                         context.report(node, messages.global);
                     }
-                    reportAllExceptFirst(useStrictDirectives, messages.multiple);
+                    reportAllExceptFirst(useStrictDirectives, messages.multiple, true);
                 } else {
-                    reportAll(useStrictDirectives, messages[mode]);
+                    reportAll(useStrictDirectives, messages[mode], shouldFix(mode));
                 }
             },
 
@@ -80730,7 +81609,7 @@ module.exports = {
         }
 
         /**
-         * Check if return tag type is void or undefined
+         * Validate type for a given JSDoc node
          * @param {Object} jsdocNode JSDoc node
          * @param {Object} type JSDoc tag
          * @returns {void}
@@ -80761,7 +81640,9 @@ module.exports = {
                     break;
                 case "FieldType":
                     // Array.<{count: number, votes: number}>
-                    typesToCheck.push(getCurrentExpectedTypes(type.value));
+                    if (type.value) {
+                        typesToCheck.push(getCurrentExpectedTypes(type.value));
+                    }
                     break;
                 default:
                     typesToCheck.push(getCurrentExpectedTypes(type));
@@ -81010,23 +81891,36 @@ module.exports = {
         var VALID_TYPES = ["symbol", "undefined", "object", "boolean", "number", "string", "function"],
             OPERATORS = ["==", "===", "!=", "!=="];
 
+        var requireStringLiterals = context.options[0] && context.options[0].requireStringLiterals;
+
+        /**
+        * Determines whether a node is a typeof expression.
+        * @param {ASTNode} node The node
+        * @returns {boolean} `true` if the node is a typeof expression
+        */
+        function isTypeofExpression(node) {
+            return node.type === "UnaryExpression" && node.operator === "typeof";
+        }
+
         //--------------------------------------------------------------------------
         // Public
         //--------------------------------------------------------------------------
 
         return {
             UnaryExpression: function UnaryExpression(node) {
-                if (node.operator === "typeof") {
+                if (isTypeofExpression(node)) {
                     var parent = context.getAncestors().pop();
 
                     if (parent.type === "BinaryExpression" && OPERATORS.indexOf(parent.operator) !== -1) {
                         var sibling = parent.left === node ? parent.right : parent.left;
 
-                        if (sibling.type === "Literal") {
-                            if (VALID_TYPES.indexOf(sibling.value) === -1) {
+                        if (sibling.type === "Literal" || sibling.type === "TemplateLiteral" && !sibling.expressions.length) {
+                            var value = sibling.type === "Literal" ? sibling.value : sibling.quasis[0].value.cooked;
+
+                            if (VALID_TYPES.indexOf(value) === -1) {
                                 context.report(sibling, "Invalid typeof comparison value.");
                             }
-                        } else if (context.options[0] && context.options[0].requireStringLiterals) {
+                        } else if (requireStringLiterals && !isTypeofExpression(sibling)) {
                             context.report(sibling, "Typeof comparisons should be to string literals.");
                         }
                     }

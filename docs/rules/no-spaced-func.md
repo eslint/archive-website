@@ -4,7 +4,7 @@ layout: doc
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
-# disallow spacing between `function` identifiers and their applications (no-spaced-func)
+# disallow spacing between function identifiers and their applications (no-spaced-func)
 
 This rule was **deprecated** in ESLint v3.3.0 and replaced by the [func-call-spacing](func-call-spacing) rule.
 

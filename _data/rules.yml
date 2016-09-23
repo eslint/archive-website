@@ -62,7 +62,7 @@ categories:
         fixable: false
         name: no-func-assign
         recommended: true
-      - description: disallow `function` or `var` declarations in nested blocks
+      - description: disallow variable or `function` declarations in nested blocks
         fixable: false
         name: no-inner-declarations
         recommended: true
@@ -83,7 +83,7 @@ categories:
         name: no-prototype-builtins
         recommended: false
       - description: disallow multiple spaces in regular expressions
-        fixable: false
+        fixable: true
         name: no-regex-spaces
         recommended: true
       - description: disallow sparse arrays
@@ -243,7 +243,7 @@ categories:
         fixable: true
         name: no-implicit-coercion
         recommended: false
-      - description: disallow `var` and named `function` declarations in the global scope
+      - description: disallow variable and `function` declarations in the global scope
         fixable: false
         name: no-implicit-globals
         recommended: false
@@ -315,10 +315,14 @@ categories:
         fixable: false
         name: no-proto
         recommended: false
-      - description: disallow `var` redeclaration
+      - description: disallow variable redeclaration
         fixable: false
         name: no-redeclare
         recommended: true
+      - description: disallow certain properties on certain objects
+        fixable: false
+        name: no-restricted-properties
+        recommended: false
       - description: disallow assignment operators in `return` statements
         fixable: false
         name: no-return-assign
@@ -403,13 +407,13 @@ categories:
     name: Strict Mode
     rules:
       - description: require or disallow strict mode directives
-        fixable: false
+        fixable: true
         name: strict
         recommended: false
   - description: 'These rules relate to variable declarations:'
     name: Variables
     rules:
-      - description: require or disallow initialization in `var` declarations
+      - description: require or disallow initialization in variable declarations
         fixable: false
         name: init-declarations
         recommended: false
@@ -436,8 +440,8 @@ categories:
         name: no-shadow-restricted-names
         recommended: false
       - description: >-
-          disallow `var` declarations from shadowing variables in the outer
-          scope
+          disallow variable declarations from shadowing variables declared in
+          the outer scope
         fixable: false
         name: no-shadow
         recommended: false
@@ -480,7 +484,9 @@ categories:
         fixable: false
         name: handle-callback-err
         recommended: false
-      - description: disallow `require` calls to be mixed with regular `var` declarations
+      - description: >-
+          disallow `require` calls to be mixed with regular variable
+          declarations
         fixable: false
         name: no-mixed-requires
         recommended: false
@@ -503,10 +509,6 @@ categories:
       - description: disallow specified modules when loaded by `require`
         fixable: false
         name: no-restricted-modules
-        recommended: false
-      - description: disallow certain properties on certain objects
-        fixable: false
-        name: no-restricted-properties
         recommended: false
       - description: disallow synchronous methods
         fixable: false
@@ -553,12 +555,12 @@ categories:
         fixable: false
         name: consistent-this
         recommended: false
-      - description: enforce at least one newline at the end of files
+      - description: require or disallow newline at the end of files
         fixable: true
         name: eol-last
         recommended: false
       - description: >-
-          require or disallow spacing between `function` identifiers and their
+          require or disallow spacing between function identifiers and their
           invocations
         fixable: true
         name: func-call-spacing
@@ -637,7 +639,7 @@ categories:
         fixable: false
         name: max-nested-callbacks
         recommended: false
-      - description: enforce a maximum number of parameters in `function` definitions
+      - description: enforce a maximum number of parameters in function definitions
         fixable: false
         name: max-params
         recommended: false
@@ -645,7 +647,7 @@ categories:
         fixable: false
         name: max-statements-per-line
         recommended: false
-      - description: enforce a maximum number of statements allowed in `function` blocks
+      - description: enforce a maximum number of statements allowed in function blocks
         fixable: false
         name: max-statements
         recommended: false
@@ -653,7 +655,7 @@ categories:
         fixable: false
         name: multiline-ternary
         recommended: false
-      - description: require constructor `function` names to begin with a capital letter
+      - description: require constructor names to begin with a capital letter
         fixable: false
         name: new-cap
         recommended: false
@@ -661,7 +663,7 @@ categories:
         fixable: true
         name: new-parens
         recommended: false
-      - description: require or disallow an empty line after `var` declarations
+      - description: require or disallow an empty line after variable declarations
         fixable: false
         name: newline-after-var
         recommended: false
@@ -761,7 +763,7 @@ categories:
         fixable: false
         name: object-property-newline
         recommended: false
-      - description: require or disallow newlines around `var` declarations
+      - description: require or disallow newlines around variable declarations
         fixable: false
         name: one-var-declaration-per-line
         recommended: false
@@ -784,7 +786,7 @@ categories:
         name: padded-blocks
         recommended: false
       - description: require quotes around object literal property names
-        fixable: false
+        fixable: true
         name: quote-props
         recommended: false
       - description: >-
@@ -805,7 +807,7 @@ categories:
         fixable: true
         name: semi
         recommended: false
-      - description: requires object keys to be sorted
+      - description: require object keys to be sorted
         fixable: false
         name: sort-keys
         recommended: false
@@ -827,7 +829,7 @@ categories:
         fixable: true
         name: space-in-parens
         recommended: false
-      - description: require spacing around operators
+      - description: require spacing around infix operators
         fixable: true
         name: space-infix-ops
         recommended: false
@@ -957,7 +959,7 @@ categories:
         name: prefer-spread
         recommended: false
       - description: require template literals instead of string concatenation
-        fixable: false
+        fixable: true
         name: prefer-template
         recommended: false
       - description: require generator functions to contain `yield`

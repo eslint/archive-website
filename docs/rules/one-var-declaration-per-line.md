@@ -4,7 +4,7 @@ layout: doc
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
-# require or disallow newlines around `var` declarations (one-var-declaration-per-line)
+# require or disallow newlines around variable declarations (one-var-declaration-per-line)
 
 Some developers declare multiple var statements on the same line:
 

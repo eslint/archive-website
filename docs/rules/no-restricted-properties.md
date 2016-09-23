@@ -20,10 +20,10 @@ This rule takes a list of objects, where the object name and property names are 
 ```json
 {
     "rules": {
-        "no-restricted-properties": [2, [{
+        "no-restricted-properties": [2, {
             "object": "disallowedObjectName",
             "property": "disallowedPropertyName"
-        }]]
+        }]
     }
 }
 ```
@@ -33,14 +33,40 @@ Multiple object/property values can be disallowed, and you can specify an option
 ```json
 {
     "rules": {
-        "no-restricted-properties": [2, [{
+        "no-restricted-properties": [2, {
             "object": "disallowedObjectName",
             "property": "disallowedPropertyName"
         }, {
             "object": "disallowedObjectName",
             "property": "anotherDisallowedPropertyName",
             "message": "Please use allowedObjectName.allowedPropertyName."
-        }]]
+        }]
+    }
+}
+```
+
+If the object name is omitted, the property is disallowed for all objects:
+
+```json
+{
+    "rules": {
+        "no-restricted-properties": [2, {
+            "property": "__defineGetter__",
+            "message": "Please use Object.defineProperty instead."
+        }]
+    }
+}
+```
+
+If the property name is omitted, accessing any property of the given object is disallowed:
+
+```json
+{
+    "rules": {
+        "no-restricted-properties": [2, {
+            "object": "require",
+            "message": "Please call require() directly."
+        }]
     }
 }
 ```
@@ -58,6 +84,22 @@ var example = disallowedObjectName.disallowedPropertyName; /*error Disallowed ob
 disallowedObjectName.disallowedPropertyName(); /*error Disallowed object property: disallowedObjectName.disallowedPropertyName.*/
 ```
 
+```js
+/* eslint no-restricted-properties: [2, {
+    "property": "__defineGetter__"
+}] */
+
+foo.__defineGetter__(bar, baz);
+```
+
+```js
+/* eslint no-restricted-properties: [2, {
+    "object": "require"
+}] */
+
+require.resolve('foo');
+```
+
 Examples of **correct** code for this rule:
 
 ```js
@@ -69,6 +111,14 @@ Examples of **correct** code for this rule:
 var example = disallowedObjectName.somePropertyName;
 
 allowedObjectName.disallowedPropertyName();
+```
+
+```js
+/* eslint no-restricted-properties: [2, {
+    "object": "require"
+}] */
+
+require('foo');
 ```
 
 ## When Not To Use It
