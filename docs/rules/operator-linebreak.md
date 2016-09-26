@@ -42,7 +42,7 @@ Object option:
 
 ### after
 
-Examples of **incorrect** code for this rule with the default `"always"` option:
+Examples of **incorrect** code for this rule with the default `"after"` option:
 
 ```js
 /*eslint operator-linebreak: ["error", "after"]*/
@@ -66,7 +66,7 @@ answer = everything
   : foo;
 ```
 
-Examples of **correct** code for this rule with the default `"always"` option:
+Examples of **correct** code for this rule with the default `"after"` option:
 
 ```js
 /*eslint operator-linebreak: ["error", "after"]*/

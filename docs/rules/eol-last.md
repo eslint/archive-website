@@ -25,7 +25,7 @@ the end of the file. If you still want this behaviour, consider enabling
 Examples of **incorrect** code for this rule:
 
 ```js
-/*eslint eol-last: "error"*/
+/*eslint eol-last: ["error", "always"]*/
 
 function doSmth() {
   var foo = 2;
@@ -35,7 +35,7 @@ function doSmth() {
 Examples of **correct** code for this rule:
 
 ```js
-/*eslint eol-last: "error"*/
+/*eslint eol-last: ["error", "always"]*/
 
 function doSmth() {
   var foo = 2;

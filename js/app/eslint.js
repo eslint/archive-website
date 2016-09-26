@@ -7241,6 +7241,13 @@ TokenTranslator.prototype = {
         }
 
         if (token.type === tt.backQuote) {
+
+            // if there's already a curly, it's not part of the template
+            if (this._curlyBrace) {
+                tokens.push(this.translate(this._curlyBrace, extra));
+                this._curlyBrace = null;
+            }
+
             templateTokens.push(token);
 
             // it's the end
@@ -7257,7 +7264,6 @@ TokenTranslator.prototype = {
 
             // if there's already a curly, it's not part of the template
             if (this._curlyBrace) {
-
                 tokens.push(this.translate(this._curlyBrace, extra));
             }
 
@@ -11484,7 +11490,7 @@ module.exports={
   },
   "homepage": "https://github.com/eslint/espree",
   "main": "espree.js",
-  "version": "3.3.0",
+  "version": "3.3.1",
   "files": [
     "lib",
     "espree.js"
@@ -11542,10 +11548,10 @@ module.exports={
   },
   "readme": "# Espree\n\nEspree started out as a fork of [Esprima](http://esprima.org) v1.2.2, the last stable published released of Esprima before work on ECMAScript 6 began. Espree is now built on top of [Acorn](https://github.com/ternjs/acorn), which has a modular architecture that allows extension of core functionality. The goal of Espree is to produce output that is similar to Esprima with a similar API so that it can be used in place of Esprima.\n\n## Usage\n\nInstall:\n\n```\nnpm i espree --save\n```\n\nAnd in your Node.js code:\n\n```javascript\nvar espree = require(\"espree\");\n\nvar ast = espree.parse(code);\n```\n\nThere is a second argument to `parse()` that allows you to specify various options:\n\n```javascript\nvar espree = require(\"espree\");\n\nvar ast = espree.parse(code, {\n\n    // attach range information to each node\n    range: true,\n\n    // attach line/column location information to each node\n    loc: true,\n\n    // create a top-level comments array containing all comments\n    comment: true,\n\n    // attach comments to the closest relevant node as leadingComments and\n    // trailingComments\n    attachComment: true,\n\n    // create a top-level tokens array containing all tokens\n    tokens: true,\n\n    // specify the language version (3, 5, 6, 7, or 8, default is 5)\n    ecmaVersion: 5,\n\n    // specify which type of script you're parsing (script or module, default is script)\n    sourceType: \"script\",\n\n    // specify additional language features\n    ecmaFeatures: {\n\n        // enable JSX parsing\n        jsx: true,\n\n        // enable return in global scope\n        globalReturn: true,\n\n        // enable implied strict mode (if ecmaVersion >= 5)\n        impliedStrict: true,\n\n        // allow experimental object rest/spread\n        experimentalObjectRestSpread: true\n    }\n});\n```\n\n## Esprima Compatibility Going Forward\n\nThe primary goal is to produce the exact same AST structure and tokens as Esprima, and that takes precedence over anything else. (The AST structure being the [ESTree](https://github.com/estree/estree) API with JSX extensions.) Separate from that, Espree may deviate from what Esprima outputs in terms of where and how comments are attached, as well as what additional information is available on AST nodes. That is to say, Espree may add more things to the AST nodes than Esprima does but the overall AST structure produced will be the same.\n\nEspree may also deviate from Esprima in the interface it exposes.\n\n## Contributing\n\nIssues and pull requests will be triaged and responded to as quickly as possible. We operate under the [ESLint Contributor Guidelines](http://eslint.org/docs/developer-guide/contributing), so please be sure to read them before contributing. If you're not sure where to dig in, check out the [issues](https://github.com/eslint/espree/issues).\n\nEspree is licensed under a permissive BSD 2-clause license.\n\n## Build Commands\n\n* `npm test` - run all linting and tests\n* `npm run lint` - run all linting\n* `npm run browserify` - creates a version of Espree that is usable in a browser\n\n## Differences from Espree 2.x\n\n* The `tokenize()` method does not use `ecmaFeatures`. Any string will be tokenized completely based on ECMAScript 6 semantics.\n* Trailing whitespace no longer is counted as part of a node.\n* `let` and `const` declarations are no longer parsed by default. You must opt-in using `ecmaFeatures.blockBindings`.\n* The `esparse` and `esvalidate` binary scripts have been removed.\n* There is no `tolerant` option. We will investigate adding this back in the future.\n\n## Known Incompatibilities\n\nIn an effort to help those wanting to transition from other parsers to Espree, the following is a list of noteworthy incompatibilities with other parsers. These are known differences that we do not intend to change.\n\n### Esprima 1.2.2\n\n* Esprima counts trailing whitespace as part of each AST node while Espree does not. In Espree, the end of a node is where the last token occurs.\n* Espree does not parse `let` and `const` declarations by default.\n* Error messages returned for parsing errors are different.\n* There are two addition properties on every node and token: `start` and `end`. These represent the same data as `range` and are used internally by Acorn.\n\n### Esprima 2.x\n\n* Esprima 2.x uses a different comment attachment algorithm that results in some comments being added in different places than Espree. The algorithm Espree uses is the same one used in Esprima 1.2.2.\n\n## Frequently Asked Questions\n\n### Why another parser\n\n[ESLint](http://eslint.org) had been relying on Esprima as its parser from the beginning. While that was fine when the JavaScript language was evolving slowly, the pace of development increased dramatically and Esprima had fallen behind. ESLint, like many other tools reliant on Esprima, has been stuck in using new JavaScript language features until Esprima updates, and that caused our users frustration.\n\nWe decided the only way for us to move forward was to create our own parser, bringing us inline with JSHint and JSLint, and allowing us to keep implementing new features as we need them. We chose to fork Esprima instead of starting from scratch in order to move as quickly as possible with a compatible API.\n\nWith Espree 2.0.0, we are no longer a fork of Esprima but rather a translation layer between Acorn and Esprima syntax. This allows us to put work back into a community-supported parser (Acorn) that is continuing to grow and evolve while maintaining an Esprima-compatible parser for those utilities still built on Esprima.\n\n### Have you tried working with Esprima?\n\nYes. Since the start of ESLint, we've regularly filed bugs and feature requests with Esprima and will continue to do so. However, there are some different philosophies around how the projects work that need to be worked through. The initial goal was to have Espree track Esprima and eventually merge the two back together, but we ultimately decided that building on top of Acorn was a better choice due to Acorn's plugin support.\n\n### Why don't you just use Acorn?\n\nAcorn is a great JavaScript parser that produces an AST that is compatible with Esprima. Unfortunately, ESLint relies on more than just the AST to do its job. It relies on Esprima's tokens and comment attachment features to get a complete picture of the source code. We investigated switching to Acorn, but the inconsistencies between Esprima and Acorn created too much work for a project like ESLint.\n\nWe are building on top of Acorn, however, so that we can contribute back and help make Acorn even better.\n\n### What ECMAScript 6 features do you support?\n\nAll of them.\n\n### What ECMAScript 7/2016 features do you support?\n\nThere is only one ECMAScript 7 syntax change: the exponentiation operator. Espree supports this.\n\n### What ECMAScript 2017 features do you support?\n\nBecause ECMAScript 2017 is still under development, we are implementing features as they are finalized. Currently, Espree supports:\n\n* `async` functions\n* Trailing commas in function declarations and calls (including arrow functions and concise methods)\n\n### How do you determine which experimental features to support?\n\nIn general, we do not support experimental JavaScript features. We may make exceptions from time to time depending on the maturity of the features.\n",
   "readmeFilename": "README.md",
-  "gitHead": "6606f63a6c30ef5cd3405f0a4e46fd9f51f7fbbe",
-  "_id": "espree@3.3.0",
-  "_shasum": "9b32fc5127eeea573c339b99873046638ed91761",
-  "_from": "espree@>=3.2.0 <4.0.0"
+  "gitHead": "acd7168c8a856d7e378e95afdfb0a152c5e35244",
+  "_id": "espree@3.3.1",
+  "_shasum": "42107376856738a65ff3b5877f3a58bd52497643",
+  "_from": "espree@>=3.3.1 <4.0.0"
 }
 
 },{}],"espree":[function(require,module,exports){
@@ -11930,6 +11936,7 @@ acorn.plugins.espree = function(instance) {
                 prop.key.type === "Identifier" &&
                 prop.key.name === "async" &&
                 this.type !== tt.parenL &&
+                this.type !== tt.colon &&
                 !this.canInsertSemicolon()
             ) {
                 this.parsePropertyName(prop/* , refDestructuringErrors */);
@@ -27918,13 +27925,14 @@ function curry$(f, bound){
   var undefined;
 
   /** Used as the semantic version number. */
-  var VERSION = '4.16.1';
+  var VERSION = '4.16.2';
 
   /** Used as the size to enable large array optimizations. */
   var LARGE_ARRAY_SIZE = 200;
 
-  /** Used as the `TypeError` message for "Functions" methods. */
-  var FUNC_ERROR_TEXT = 'Expected a function';
+  /** Error message constants. */
+  var CORE_ERROR_TEXT = 'Unsupported core-js use. Try https://github.com/es-shims.',
+      FUNC_ERROR_TEXT = 'Expected a function';
 
   /** Used to stand-in for `undefined` hash values. */
   var HASH_UNDEFINED = '__lodash_hash_undefined__';
@@ -29373,6 +29381,7 @@ function curry$(f, bound){
     var Buffer = moduleExports ? context.Buffer : undefined,
         Symbol = context.Symbol,
         Uint8Array = context.Uint8Array,
+        allocUnsafe = Buffer ? Buffer.allocUnsafe : undefined,
         defineProperty = Object.defineProperty,
         getPrototype = overArg(Object.getPrototypeOf, Object),
         iteratorSymbol = Symbol ? Symbol.iterator : undefined,
@@ -29558,6 +29567,30 @@ function curry$(f, bound){
       }
       return new LodashWrapper(value);
     }
+
+    /**
+     * The base implementation of `_.create` without support for assigning
+     * properties to the created object.
+     *
+     * @private
+     * @param {Object} proto The object to inherit from.
+     * @returns {Object} Returns the new object.
+     */
+    var baseCreate = (function() {
+      function object() {}
+      return function(proto) {
+        if (!isObject(proto)) {
+          return {};
+        }
+        if (objectCreate) {
+          return objectCreate(proto);
+        }
+        object.prototype = prototype;
+        var result = new object;
+        object.prototype = undefined;
+        return result;
+      };
+    }());
 
     /**
      * The function whose prototype chain sequence wrappers inherit from.
@@ -30279,8 +30312,7 @@ function curry$(f, bound){
     }
 
     /**
-     * A specialized version of `_.sample` for arrays without support for iteratee
-     * shorthands.
+     * A specialized version of `_.sample` for arrays.
      *
      * @private
      * @param {Array} array The array to sample.
@@ -30300,9 +30332,7 @@ function curry$(f, bound){
      * @returns {Array} Returns the random elements.
      */
     function arraySampleSize(array, n) {
-      var result = arrayShuffle(array);
-      result.length = baseClamp(n, 0, result.length);
-      return result;
+      return shuffleSelf(copyArray(array), n);
     }
 
     /**
@@ -30590,18 +30620,6 @@ function curry$(f, bound){
         }
       }
       return true;
-    }
-
-    /**
-     * The base implementation of `_.create` without support for assigning
-     * properties to the created object.
-     *
-     * @private
-     * @param {Object} prototype The object to inherit from.
-     * @returns {Object} Returns the new object.
-     */
-    function baseCreate(proto) {
-      return isObject(proto) ? objectCreate(proto) : {};
     }
 
     /**
@@ -31796,6 +31814,29 @@ function curry$(f, bound){
     }
 
     /**
+     * The base implementation of `_.sample`.
+     *
+     * @private
+     * @param {Array|Object} collection The collection to sample.
+     * @returns {*} Returns the random element.
+     */
+    function baseSample(collection) {
+      return arraySample(values(collection));
+    }
+
+    /**
+     * The base implementation of `_.sampleSize` without param guards.
+     *
+     * @private
+     * @param {Array|Object} collection The collection to sample.
+     * @param {number} n The number of elements to sample.
+     * @returns {Array} Returns the random elements.
+     */
+    function baseSampleSize(collection, n) {
+      return shuffleSelf(values(collection), n);
+    }
+
+    /**
      * The base implementation of `_.set`.
      *
      * @private
@@ -31864,6 +31905,17 @@ function curry$(f, bound){
         'writable': true
       });
     };
+
+    /**
+     * The base implementation of `_.shuffle`.
+     *
+     * @private
+     * @param {Array|Object} collection The collection to shuffle.
+     * @returns {Array} Returns the new shuffled array.
+     */
+    function baseShuffle(collection) {
+      return shuffleSelf(values(collection));
+    }
 
     /**
      * The base implementation of `_.slice` without an iteratee call guard.
@@ -32327,7 +32379,9 @@ function curry$(f, bound){
       if (isDeep) {
         return buffer.slice();
       }
-      var result = new buffer.constructor(buffer.length);
+      var length = buffer.length,
+          result = allocUnsafe ? allocUnsafe(length) : new buffer.constructor(length);
+
       buffer.copy(result);
       return result;
     }
@@ -34439,24 +34493,27 @@ function curry$(f, bound){
     }
 
     /**
-     * A specialized version of `arrayShuffle` which mutates `array`.
+     * A specialized version of `_.shuffle` which mutates and sets the size of `array`.
      *
      * @private
      * @param {Array} array The array to shuffle.
+     * @param {number} [size=array.length] The size of `array`.
      * @returns {Array} Returns `array`.
      */
-    function shuffleSelf(array) {
+    function shuffleSelf(array, size) {
       var index = -1,
           length = array.length,
           lastIndex = length - 1;
 
-      while (++index < length) {
+      size = size === undefined ? length : baseClamp(size, 0, length);
+      while (++index < size) {
         var rand = baseRandom(index, lastIndex),
             value = array[rand];
 
         array[rand] = array[index];
         array[index] = value;
       }
+      array.length = size;
       return array;
     }
 
@@ -37534,7 +37591,8 @@ function curry$(f, bound){
      * // => 2
      */
     function sample(collection) {
-      return arraySample(isArrayLike(collection) ? collection : values(collection));
+      var func = isArray(collection) ? arraySample : baseSample;
+      return func(collection);
     }
 
     /**
@@ -37563,7 +37621,8 @@ function curry$(f, bound){
       } else {
         n = toInteger(n);
       }
-      return arraySampleSize(isArrayLike(collection) ? collection : values(collection), n);
+      var func = isArray(collection) ? arraySampleSize : baseSampleSize;
+      return func(collection, n);
     }
 
     /**
@@ -37582,10 +37641,8 @@ function curry$(f, bound){
      * // => [4, 1, 3, 2]
      */
     function shuffle(collection) {
-      return shuffleSelf(isArrayLike(collection)
-        ? copyArray(collection)
-        : values(collection)
-      );
+      var func = isArray(collection) ? arrayShuffle : baseShuffle;
+      return func(collection);
     }
 
     /**
@@ -39684,7 +39741,7 @@ function curry$(f, bound){
      */
     function isNative(value) {
       if (isMaskable(value)) {
-        throw new Error('This method is not supported with core-js. Try https://github.com/es-shims.');
+        throw new Error(CORE_ERROR_TEXT);
       }
       return baseIsNative(value);
     }
@@ -42177,7 +42234,7 @@ function curry$(f, bound){
       } else if (radix) {
         radix = +radix;
       }
-      return nativeParseInt(toString(string), radix || 0);
+      return nativeParseInt(toString(string).replace(reTrimStart, ''), radix || 0);
     }
 
     /**
@@ -49749,7 +49806,6 @@ module.exports = function () {
     var messages = [],
         currentConfig = null,
         currentScopes = null,
-        scopeMap = null,
         scopeManager = null,
         currentFilename = null,
         traverser = null,
@@ -49870,7 +49926,6 @@ module.exports = function () {
         messages = [];
         currentConfig = null;
         currentScopes = null;
-        scopeMap = null;
         scopeManager = null;
         traverser = null;
         reportingConfig = [];
@@ -50026,24 +50081,6 @@ module.exports = function () {
                 });
 
                 currentScopes = scopeManager.scopes;
-
-                /*
-                 * Index the scopes by the start range of their block for efficient
-                 * lookup in getScope.
-                 */
-                scopeMap = [];
-
-                currentScopes.forEach(function (scope, index) {
-                    var range = scope.block.range[0];
-
-                    /*
-                     * Sometimes two scopes are returned for a given node. This is
-                     * handled later in a known way, so just don't overwrite here.
-                     */
-                    if (!scopeMap[range]) {
-                        scopeMap[range] = index;
-                    }
-                });
 
                 // augment global scope with declared global variables
                 addDeclaredGlobals(ast, currentScopes[0], currentConfig);
