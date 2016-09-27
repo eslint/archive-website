@@ -10,7 +10,7 @@ Occasionally, a core ESLint rule needs to be changed. This is not necessarily a 
 
 ## Proposing a Rule Change
 
-To propose a change to an existing rule, [create a new issue](https://github.com/eslint/eslint/issues/new) or a [pull request](/docs/developer-guide/contributing/pull-requests) on GitHub. Be sure to copy the questions from the [rule change proposal template](https://github.com/eslint/eslint/blob/master/templates/rule-change-proposal).
+To propose a change to an existing rule, [create a new issue](https://github.com/eslint/eslint/issues/new) or a [pull request](/docs/developer-guide/contributing/pull-requests) on GitHub. Be sure to copy the questions from the [rule change proposal template](https://github.com/eslint/eslint/blob/master/templates/rule-change-proposal.md).
 
 We need all of this information in order to determine whether or not the change is a good candidate for inclusion.
 
