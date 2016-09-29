@@ -65,7 +65,7 @@ The `--fix` option on the [command line](../user-guide/command-line-interface#fi
 <tr>
 <td markdown="1">[{{rule.name}}]({{rule.name}})
 </td>
-<td markdown="1">{% for replaced in rule.replacedBy %} [{{replaced}}]({{replaced}}) {% endfor %}
+<td class="replaced-by" markdown="1">{% for replaced in rule.replacedBy %}[{{replaced}}]({{replaced}}){% endfor %}
 </td>
 </tr>
 {% endfor %}
@@ -99,7 +99,7 @@ The `--fix` option on the [command line](../user-guide/command-line-interface#fi
 <tr>
 <td markdown="1">[{{rule.removed}}]({{rule.removed}})
 </td>
-<td markdown="1">{% for replaced in rule.replacedBy %} [{{replaced}}]({{replaced}}) {% endfor %}
+<td class="replaced-by" markdown="1">{% for replaced in rule.replacedBy %}[{{replaced}}]({{replaced}}){% endfor %}
 </td>
 </tr>
 {% endfor %}
