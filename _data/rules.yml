@@ -162,7 +162,7 @@ categories:
         name: default-case
         recommended: false
       - description: enforce consistent newlines before and after dots
-        fixable: false
+        fixable: true
         name: dot-location
         recommended: false
       - description: enforce dot notation whenever possible
@@ -396,11 +396,11 @@ categories:
         name: vars-on-top
         recommended: false
       - description: require parentheses around immediate `function` invocations
-        fixable: false
+        fixable: true
         name: wrap-iife
         recommended: false
       - description: require or disallow "Yoda" conditions
-        fixable: false
+        fixable: true
         name: yoda
         recommended: false
   - description: 'These rules relate to strict mode directives:'
@@ -446,7 +446,7 @@ categories:
         name: no-shadow
         recommended: false
       - description: disallow initializing variables to `undefined`
-        fixable: false
+        fixable: true
         name: no-undef-init
         recommended: false
       - description: >-
@@ -620,7 +620,7 @@ categories:
         name: lines-around-comment
         recommended: false
       - description: require or disallow newlines around directives
-        fixable: false
+        fixable: true
         name: lines-around-directive
         recommended: false
       - description: enforce a maximum depth that blocks can be nested
@@ -907,7 +907,7 @@ categories:
         name: no-this-before-super
         recommended: true
       - description: disallow unnecessary computed property keys in object literals
-        fixable: false
+        fixable: true
         name: no-useless-computed-key
         recommended: false
       - description: disallow unnecessary constructors
@@ -943,7 +943,7 @@ categories:
       - description: >-
           disallow `parseInt()` in favor of binary, octal, and hexadecimal
           literals
-        fixable: false
+        fixable: true
         name: prefer-numeric-literals
         recommended: false
       - description: require `Reflect` methods where applicable

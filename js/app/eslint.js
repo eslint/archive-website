@@ -8,14 +8,10 @@ _dereq_(296);
 
 _dereq_(2);
 
-/* eslint max-len: 0 */
-
 if (global._babelPolyfill) {
   throw new Error("only one instance of babel-polyfill is allowed");
 }
 global._babelPolyfill = true;
-
-// Should be removed in the next major release:
 
 var DEFINE_PROPERTY = "defineProperty";
 function define(O, key, value) {
@@ -11490,7 +11486,7 @@ module.exports={
   },
   "homepage": "https://github.com/eslint/espree",
   "main": "espree.js",
-  "version": "3.3.1",
+  "version": "3.3.2",
   "files": [
     "lib",
     "espree.js"
@@ -11548,9 +11544,9 @@ module.exports={
   },
   "readme": "# Espree\n\nEspree started out as a fork of [Esprima](http://esprima.org) v1.2.2, the last stable published released of Esprima before work on ECMAScript 6 began. Espree is now built on top of [Acorn](https://github.com/ternjs/acorn), which has a modular architecture that allows extension of core functionality. The goal of Espree is to produce output that is similar to Esprima with a similar API so that it can be used in place of Esprima.\n\n## Usage\n\nInstall:\n\n```\nnpm i espree --save\n```\n\nAnd in your Node.js code:\n\n```javascript\nvar espree = require(\"espree\");\n\nvar ast = espree.parse(code);\n```\n\nThere is a second argument to `parse()` that allows you to specify various options:\n\n```javascript\nvar espree = require(\"espree\");\n\nvar ast = espree.parse(code, {\n\n    // attach range information to each node\n    range: true,\n\n    // attach line/column location information to each node\n    loc: true,\n\n    // create a top-level comments array containing all comments\n    comment: true,\n\n    // attach comments to the closest relevant node as leadingComments and\n    // trailingComments\n    attachComment: true,\n\n    // create a top-level tokens array containing all tokens\n    tokens: true,\n\n    // specify the language version (3, 5, 6, 7, or 8, default is 5)\n    ecmaVersion: 5,\n\n    // specify which type of script you're parsing (script or module, default is script)\n    sourceType: \"script\",\n\n    // specify additional language features\n    ecmaFeatures: {\n\n        // enable JSX parsing\n        jsx: true,\n\n        // enable return in global scope\n        globalReturn: true,\n\n        // enable implied strict mode (if ecmaVersion >= 5)\n        impliedStrict: true,\n\n        // allow experimental object rest/spread\n        experimentalObjectRestSpread: true\n    }\n});\n```\n\n## Esprima Compatibility Going Forward\n\nThe primary goal is to produce the exact same AST structure and tokens as Esprima, and that takes precedence over anything else. (The AST structure being the [ESTree](https://github.com/estree/estree) API with JSX extensions.) Separate from that, Espree may deviate from what Esprima outputs in terms of where and how comments are attached, as well as what additional information is available on AST nodes. That is to say, Espree may add more things to the AST nodes than Esprima does but the overall AST structure produced will be the same.\n\nEspree may also deviate from Esprima in the interface it exposes.\n\n## Contributing\n\nIssues and pull requests will be triaged and responded to as quickly as possible. We operate under the [ESLint Contributor Guidelines](http://eslint.org/docs/developer-guide/contributing), so please be sure to read them before contributing. If you're not sure where to dig in, check out the [issues](https://github.com/eslint/espree/issues).\n\nEspree is licensed under a permissive BSD 2-clause license.\n\n## Build Commands\n\n* `npm test` - run all linting and tests\n* `npm run lint` - run all linting\n* `npm run browserify` - creates a version of Espree that is usable in a browser\n\n## Differences from Espree 2.x\n\n* The `tokenize()` method does not use `ecmaFeatures`. Any string will be tokenized completely based on ECMAScript 6 semantics.\n* Trailing whitespace no longer is counted as part of a node.\n* `let` and `const` declarations are no longer parsed by default. You must opt-in using `ecmaFeatures.blockBindings`.\n* The `esparse` and `esvalidate` binary scripts have been removed.\n* There is no `tolerant` option. We will investigate adding this back in the future.\n\n## Known Incompatibilities\n\nIn an effort to help those wanting to transition from other parsers to Espree, the following is a list of noteworthy incompatibilities with other parsers. These are known differences that we do not intend to change.\n\n### Esprima 1.2.2\n\n* Esprima counts trailing whitespace as part of each AST node while Espree does not. In Espree, the end of a node is where the last token occurs.\n* Espree does not parse `let` and `const` declarations by default.\n* Error messages returned for parsing errors are different.\n* There are two addition properties on every node and token: `start` and `end`. These represent the same data as `range` and are used internally by Acorn.\n\n### Esprima 2.x\n\n* Esprima 2.x uses a different comment attachment algorithm that results in some comments being added in different places than Espree. The algorithm Espree uses is the same one used in Esprima 1.2.2.\n\n## Frequently Asked Questions\n\n### Why another parser\n\n[ESLint](http://eslint.org) had been relying on Esprima as its parser from the beginning. While that was fine when the JavaScript language was evolving slowly, the pace of development increased dramatically and Esprima had fallen behind. ESLint, like many other tools reliant on Esprima, has been stuck in using new JavaScript language features until Esprima updates, and that caused our users frustration.\n\nWe decided the only way for us to move forward was to create our own parser, bringing us inline with JSHint and JSLint, and allowing us to keep implementing new features as we need them. We chose to fork Esprima instead of starting from scratch in order to move as quickly as possible with a compatible API.\n\nWith Espree 2.0.0, we are no longer a fork of Esprima but rather a translation layer between Acorn and Esprima syntax. This allows us to put work back into a community-supported parser (Acorn) that is continuing to grow and evolve while maintaining an Esprima-compatible parser for those utilities still built on Esprima.\n\n### Have you tried working with Esprima?\n\nYes. Since the start of ESLint, we've regularly filed bugs and feature requests with Esprima and will continue to do so. However, there are some different philosophies around how the projects work that need to be worked through. The initial goal was to have Espree track Esprima and eventually merge the two back together, but we ultimately decided that building on top of Acorn was a better choice due to Acorn's plugin support.\n\n### Why don't you just use Acorn?\n\nAcorn is a great JavaScript parser that produces an AST that is compatible with Esprima. Unfortunately, ESLint relies on more than just the AST to do its job. It relies on Esprima's tokens and comment attachment features to get a complete picture of the source code. We investigated switching to Acorn, but the inconsistencies between Esprima and Acorn created too much work for a project like ESLint.\n\nWe are building on top of Acorn, however, so that we can contribute back and help make Acorn even better.\n\n### What ECMAScript 6 features do you support?\n\nAll of them.\n\n### What ECMAScript 7/2016 features do you support?\n\nThere is only one ECMAScript 7 syntax change: the exponentiation operator. Espree supports this.\n\n### What ECMAScript 2017 features do you support?\n\nBecause ECMAScript 2017 is still under development, we are implementing features as they are finalized. Currently, Espree supports:\n\n* `async` functions\n* Trailing commas in function declarations and calls (including arrow functions and concise methods)\n\n### How do you determine which experimental features to support?\n\nIn general, we do not support experimental JavaScript features. We may make exceptions from time to time depending on the maturity of the features.\n",
   "readmeFilename": "README.md",
-  "gitHead": "acd7168c8a856d7e378e95afdfb0a152c5e35244",
-  "_id": "espree@3.3.1",
-  "_shasum": "42107376856738a65ff3b5877f3a58bd52497643",
+  "gitHead": "c8ca13a205ecd3572045872cd0471e174a060281",
+  "_id": "espree@3.3.2",
+  "_shasum": "dbf3fadeb4ecb4d4778303e50103b3d36c88b89c",
   "_from": "espree@>=3.3.1 <4.0.0"
 }
 
@@ -11928,7 +11924,7 @@ acorn.plugins.espree = function(instance) {
             }
 
             // grab the property name or "async"
-            this.parsePropertyName(prop/* , refDestructuringErrors */);
+            this.parsePropertyName(prop, refShorthandDefaultPos);
             if (this.options.ecmaVersion >= 8 &&
                 !isPattern &&
                 !isGenerator &&
@@ -11939,8 +11935,10 @@ acorn.plugins.espree = function(instance) {
                 this.type !== tt.colon &&
                 !this.canInsertSemicolon()
             ) {
-                this.parsePropertyName(prop/* , refDestructuringErrors */);
+                this.parsePropertyName(prop, refShorthandDefaultPos);
                 isAsync = true;
+            } else {
+                isAsync = false;
             }
 
             this.parsePropertyValue(prop, isPattern, isGenerator, isAsync, startPos, startLoc, refShorthandDefaultPos);
@@ -48687,7 +48685,7 @@ module.exports = IdGenerator;
 // Requirements
 //------------------------------------------------------------------------------
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 var Environments = require("./environments");
 
@@ -48970,7 +48968,7 @@ module.exports = {
 // Requirements
 //------------------------------------------------------------------------------
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 var rules = require("../rules"),
     Environments = require("./environments"),
@@ -49225,7 +49223,7 @@ module.exports = {
 // Requirements
 //------------------------------------------------------------------------------
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 var assert = require("assert"),
     EventEmitter = require("events").EventEmitter,
@@ -53377,7 +53375,7 @@ module.exports = {
 // Rule Definition
 //------------------------------------------------------------------------------
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 module.exports = {
     meta: {
@@ -54792,7 +54790,9 @@ module.exports = {
 
         schema: [{
             enum: ["object", "property"]
-        }]
+        }],
+
+        fixable: "code"
     },
 
     create: function create(context) {
@@ -54813,14 +54813,34 @@ module.exports = {
          */
         function checkDotLocation(obj, prop, node) {
             var dot = sourceCode.getTokenBefore(prop);
+            var textBeforeDot = sourceCode.getText().slice(obj.range[1], dot.range[0]);
+            var textAfterDot = sourceCode.getText().slice(dot.range[1], prop.range[0]);
 
             if (dot.type === "Punctuator" && dot.value === ".") {
                 if (onObject) {
                     if (!astUtils.isTokenOnSameLine(obj, dot)) {
-                        context.report(node, dot.loc.start, "Expected dot to be on same line as object.");
+                        (function () {
+                            var neededTextAfterObj = astUtils.isDecimalInteger(obj) ? " " : "";
+
+                            context.report({
+                                node: node,
+                                loc: dot.loc.start,
+                                message: "Expected dot to be on same line as object.",
+                                fix: function fix(fixer) {
+                                    return fixer.replaceTextRange([obj.range[1], prop.range[0]], neededTextAfterObj + "." + textBeforeDot + textAfterDot);
+                                }
+                            });
+                        })();
                     }
                 } else if (!astUtils.isTokenOnSameLine(dot, prop)) {
-                    context.report(node, dot.loc.start, "Expected dot to be on same line as property.");
+                    context.report({
+                        node: node,
+                        loc: dot.loc.start,
+                        message: "Expected dot to be on same line as property.",
+                        fix: function fix(fixer) {
+                            return fixer.replaceTextRange([obj.range[1], prop.range[0]], "" + textBeforeDot + textAfterDot + ".");
+                        }
+                    });
                 }
             }
         }
@@ -55048,7 +55068,7 @@ module.exports = {
 // Rule Definition
 //------------------------------------------------------------------------------
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 module.exports = {
     meta: {
@@ -56193,7 +56213,7 @@ module.exports = {
 // Rule Definition
 //------------------------------------------------------------------------------
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 module.exports = {
     meta: {
@@ -56400,6 +56420,12 @@ module.exports = {
          * @returns {void}
          */
         function report(node, needed, gottenSpaces, gottenTabs, loc, isLastNodeCheck) {
+
+            if (gottenSpaces && gottenTabs) {
+
+                // To avoid conflicts with `no-mixed-spaces-and-tabs`, don't report lines that have both spaces and tabs.
+                return;
+            }
 
             var desiredIndent = (indentType === "space" ? " " : "\t").repeat(needed);
 
@@ -57047,7 +57073,7 @@ module.exports = {
                 if (options.FunctionDeclaration.parameters === "first" && node.params.length) {
                     checkNodesIndent(node.params.slice(1), node.params[0].loc.start.column);
                 } else if (options.FunctionDeclaration.parameters !== null) {
-                    checkNodesIndent(node.params, indentSize * options.FunctionDeclaration.parameters);
+                    checkNodesIndent(node.params, getNodeIndent(node).goodChar + indentSize * options.FunctionDeclaration.parameters);
                 }
             },
             FunctionExpression: function FunctionExpression(node) {
@@ -57057,7 +57083,7 @@ module.exports = {
                 if (options.FunctionExpression.parameters === "first" && node.params.length) {
                     checkNodesIndent(node.params.slice(1), node.params[0].loc.start.column);
                 } else if (options.FunctionExpression.parameters !== null) {
-                    checkNodesIndent(node.params, indentSize * options.FunctionExpression.parameters);
+                    checkNodesIndent(node.params, getNodeIndent(node).goodChar + indentSize * options.FunctionExpression.parameters);
                 }
             }
         };
@@ -57301,7 +57327,7 @@ module.exports = {
  * @returns {boolean} True if str contains a line terminator.
  */
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 function containsLineTerminator(str) {
     return (/[\n\r\u2028\u2029]/.test(str)
@@ -59045,7 +59071,8 @@ module.exports = {
                 additionalProperties: false,
                 minProperties: 2
             }]
-        }]
+        }],
+        fixable: "whitespace"
     },
 
     create: function create(context) {
@@ -59096,6 +59123,12 @@ module.exports = {
                     expected: expected ? "Expected" : "Unexpected",
                     value: node.expression.value,
                     location: location
+                },
+                fix: function fix(fixer) {
+                    if (expected) {
+                        return location === "before" ? fixer.insertTextBefore(node, "\n") : fixer.insertTextAfter(node, "\n");
+                    }
+                    return fixer.removeRange(location === "before" ? [node.range[0] - 1, node.range[0]] : [node.range[1], node.range[1] + 1]);
                 }
             });
         }
@@ -59177,7 +59210,7 @@ module.exports = {
 // Rule Definition
 //------------------------------------------------------------------------------
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 module.exports = {
     meta: {
@@ -59324,7 +59357,7 @@ module.exports = {
 // Constants
 //------------------------------------------------------------------------------
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 var OPTIONS_SCHEMA = {
     type: "object",
@@ -59659,7 +59692,7 @@ module.exports = {
 // Requirements
 //------------------------------------------------------------------------------
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 var lodash = require("lodash");
 var astUtils = require("../ast-utils");
@@ -59813,7 +59846,7 @@ module.exports = {
 // Rule Definition
 //------------------------------------------------------------------------------
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 module.exports = {
     meta: {
@@ -59923,7 +59956,7 @@ module.exports = {
 // Rule Definition
 //------------------------------------------------------------------------------
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 module.exports = {
     meta: {
@@ -60193,7 +60226,7 @@ module.exports = {
 // Rule Definition
 //------------------------------------------------------------------------------
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 module.exports = {
     meta: {
@@ -64715,15 +64748,15 @@ module.exports = {
          * @private
          */
         function dryBinaryLogical(node) {
-            if (!NESTED_BINARY) {
-                var prec = precedence(node);
+            var prec = precedence(node);
+            var shouldSkipLeft = NESTED_BINARY && (node.left.type === "BinaryExpression" || node.left.type === "LogicalExpression");
+            var shouldSkipRight = NESTED_BINARY && (node.right.type === "BinaryExpression" || node.right.type === "LogicalExpression");
 
-                if (hasExcessParens(node.left) && precedence(node.left) >= prec) {
-                    report(node.left);
-                }
-                if (hasExcessParens(node.right) && precedence(node.right) > prec) {
-                    report(node.right);
-                }
+            if (!shouldSkipLeft && hasExcessParens(node.left) && precedence(node.left) >= prec) {
+                report(node.left);
+            }
+            if (!shouldSkipRight && hasExcessParens(node.right) && precedence(node.right) > prec) {
+                report(node.right);
             }
         }
 
@@ -67362,7 +67395,7 @@ module.exports = {
 // Rule Definition
 //------------------------------------------------------------------------------
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 module.exports = {
     meta: {
@@ -68887,7 +68920,7 @@ module.exports = {
 // Rule Definition
 //------------------------------------------------------------------------------
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 module.exports = {
     meta: {
@@ -71114,7 +71147,7 @@ module.exports = {
     create: function create(context) {
         var sourceCode = context.getSourceCode();
 
-        var BLANK_CLASS = "[ \t  -​\u2028\u2029　]",
+        var BLANK_CLASS = "[ \t\xA0\u2000-\u200B\u2028\u2029\u3000]",
             SKIP_BLANK = "^" + BLANK_CLASS + "*$",
             NONBLANK = BLANK_CLASS + "+$";
 
@@ -71215,6 +71248,8 @@ module.exports = {
 
 "use strict";
 
+var astUtils = require("../ast-utils");
+
 //------------------------------------------------------------------------------
 // Rule Definition
 //------------------------------------------------------------------------------
@@ -71227,25 +71262,44 @@ module.exports = {
             recommended: false
         },
 
-        schema: []
+        schema: [],
+
+        fixable: "code"
     },
 
     create: function create(context) {
 
+        var sourceCode = context.getSourceCode();
+
         return {
             VariableDeclarator: function VariableDeclarator(node) {
-                var name = node.id.name,
-                    init = node.init && node.init.name;
+                var name = sourceCode.getText(node.id),
+                    init = node.init && node.init.name,
+                    scope = context.getScope(),
+                    undefinedVar = astUtils.getVariableByName(scope, "undefined"),
+                    shadowed = undefinedVar && undefinedVar.defs.length > 0;
 
-                if (init === "undefined" && node.parent.kind !== "const") {
-                    context.report(node, "It's not necessary to initialize '{{name}}' to undefined.", { name: name });
+                if (init === "undefined" && node.parent.kind !== "const" && !shadowed) {
+                    context.report({
+                        node: node,
+                        message: "It's not necessary to initialize '{{name}}' to undefined.",
+                        data: { name: name },
+                        fix: function fix(fixer) {
+                            if (node.id.type === "ArrayPattern" || node.id.type === "ObjectPattern") {
+
+                                // Don't fix destructuring assignment to `undefined`.
+                                return null;
+                            }
+                            return fixer.removeRange([node.id.range[1], node.range[1]]);
+                        }
+                    });
                 }
             }
         };
     }
 };
 
-},{}],338:[function(require,module,exports){
+},{"../ast-utils":160}],338:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag references to undeclared variables.
  * @author Mark Macdonald
@@ -73058,13 +73112,13 @@ module.exports = {
                 return true;
             }
 
-            // if all parameters preceded by this variable are ignored, this is the last.
+            // if all parameters preceded by this variable are ignored and unused, this is the last.
             if (config.argsIgnorePattern) {
                 var params = context.getDeclaredVariables(def.node);
                 var posteriorParams = params.slice(params.indexOf(variable) + 1);
 
                 if (posteriorParams.every(function (v) {
-                    return config.argsIgnorePattern.test(v.name);
+                    return v.references.length === 0 && config.argsIgnorePattern.test(v.name);
                 })) {
                     return true;
                 }
@@ -73257,7 +73311,7 @@ module.exports = {
 // Helpers
 //------------------------------------------------------------------------------
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 var SENTINEL_TYPE = /^(?:(?:Function|Class)(?:Declaration|Expression)|ArrowFunctionExpression|CatchClause|ImportDeclaration|ExportNamedDeclaration)$/;
 var FOR_IN_OF_TYPE = /^For(?:In|Of)Statement$/;
@@ -73598,7 +73652,7 @@ module.exports = {
 // Rule Definition
 //------------------------------------------------------------------------------
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 var MESSAGE_UNNECESSARY_COMPUTED = "Unnecessarily computed property [{{property}}] found.";
 
@@ -73610,7 +73664,9 @@ module.exports = {
             recommended: false
         },
 
-        schema: []
+        schema: [],
+
+        fixable: "code"
     },
     create: function create(context) {
         var sourceCode = context.getSourceCode();
@@ -73625,7 +73681,28 @@ module.exports = {
                     nodeType = _typeof(key.value);
 
                 if (key.type === "Literal" && (nodeType === "string" || nodeType === "number")) {
-                    context.report(node, MESSAGE_UNNECESSARY_COMPUTED, { property: sourceCode.getText(key) });
+                    context.report({
+                        node: node,
+                        message: MESSAGE_UNNECESSARY_COMPUTED,
+                        data: { property: sourceCode.getText(key) },
+                        fix: function fix(fixer) {
+                            var leftSquareBracket = sourceCode.getFirstToken(node, node.value.generator || node.value.async ? 1 : 0);
+                            var rightSquareBracket = sourceCode.getTokensBetween(node.key, node.value).find(function (token) {
+                                return token.value === "]";
+                            });
+
+                            var tokensBetween = sourceCode.getTokensBetween(leftSquareBracket, rightSquareBracket, 1);
+
+                            if (tokensBetween.slice(0, -1).some(function (token, index) {
+                                return sourceCode.getText().slice(token.range[1], tokensBetween[index + 1].range[0]).trim();
+                            })) {
+
+                                // If there are comments between the brackets and the property name, don't do a fix.
+                                return null;
+                            }
+                            return fixer.replaceTextRange([leftSquareBracket.range[0], rightSquareBracket.range[1]], key.raw);
+                        }
+                    });
                 }
             }
         };
@@ -75178,6 +75255,11 @@ var OPTIONS = {
 };
 
 //------------------------------------------------------------------------------
+// Requirements
+//------------------------------------------------------------------------------
+var astUtils = require("../ast-utils");
+
+//------------------------------------------------------------------------------
 // Rule Definition
 //------------------------------------------------------------------------------
 module.exports = {
@@ -75300,14 +75382,17 @@ module.exports = {
          * @returns {boolean} True if the key and value are named equally, false if not.
          * @private
          **/
-        function isRedudant(property) {
-            return property.key && (
+        function isRedundant(property) {
+            var value = property.value;
 
-            // A function expression
-            property.value && property.value.id && property.value.id.name === property.key.name ||
+            if (value.type === "FunctionExpression") {
+                return !value.id; // Only anonymous should be shorthand method.
+            }
+            if (value.type === "Identifier") {
+                return astUtils.getStaticPropertyName(property) === value.name;
+            }
 
-            // A property
-            property.value && property.value.name === property.key.name);
+            return false;
         }
 
         /**
@@ -75335,8 +75420,8 @@ module.exports = {
                     } else if (checkRedundancy) {
 
                         // If all properties of the object contain a method or value with a name matching it's key,
-                        // all the keys are redudant.
-                        var canAlwaysUseShorthand = properties.every(isRedudant);
+                        // all the keys are redundant.
+                        var canAlwaysUseShorthand = properties.every(isRedundant);
 
                         if (canAlwaysUseShorthand) {
                             context.report(node, "Expected shorthand for all properties.");
@@ -75489,7 +75574,7 @@ module.exports = {
     }
 };
 
-},{}],366:[function(require,module,exports){
+},{"../ast-utils":160}],366:[function(require,module,exports){
 /**
  * @fileoverview Rule to check multiple var declarations per line
  * @author Alberto Rodríguez
@@ -75583,7 +75668,7 @@ module.exports = {
 // Rule Definition
 //------------------------------------------------------------------------------
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 module.exports = {
     meta: {
@@ -77149,7 +77234,9 @@ module.exports = {
             recommended: false
         },
 
-        schema: []
+        schema: [],
+
+        fixable: "code"
     },
 
     create: function create(context) {
@@ -77157,6 +77244,12 @@ module.exports = {
             2: "binary",
             8: "octal",
             16: "hexadecimal"
+        };
+
+        var prefixMap = {
+            2: "0b",
+            8: "0o",
+            16: "0x"
         };
 
         //--------------------------------------------------------------------------
@@ -77180,6 +77273,17 @@ module.exports = {
                         message: "Use {{radixName}} literals instead of parseInt().",
                         data: {
                             radixName: radixName
+                        },
+                        fix: function fix(fixer) {
+                            var newPrefix = prefixMap[node.arguments[1].value];
+
+                            if (+(newPrefix + node.arguments[0].value) !== parseInt(node.arguments[0].value, node.arguments[1].value)) {
+
+                                // If the newly-produced literal would be invalid, (e.g. 0b1234),
+                                // or it would yield an incorrect parseInt result for some other reason, don't make a fix.
+                                return null;
+                            }
+                            return fixer.replaceText(node, prefixMap[node.arguments[1].value] + node.arguments[0].value);
                         }
                     });
                 }
@@ -78737,7 +78841,7 @@ module.exports = {
 
 "use strict";
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 var astUtils = require("../ast-utils");
 
@@ -79334,7 +79438,7 @@ module.exports = {
 
 },{}],387:[function(require,module,exports){
 /**
- * @fileoverview Rule to requires object keys to be sorted
+ * @fileoverview Rule to require object keys to be sorted
  * @author Toru Nagashima
  */
 
@@ -79555,7 +79659,7 @@ module.exports = {
 
 "use strict";
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 var astUtils = require("../ast-utils");
 
@@ -79704,7 +79808,7 @@ module.exports = {
 // Rule Definition
 //------------------------------------------------------------------------------
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 module.exports = {
     meta: {
@@ -81424,7 +81528,7 @@ module.exports = {
                         loc: location,
                         message: "Expected Unicode BOM (Byte Order Mark).",
                         fix: function fix(fixer) {
-                            return fixer.insertTextBefore(node, "﻿");
+                            return fixer.insertTextBefore(node, "\uFEFF");
                         }
                     });
                 } else if (sourceCode.hasBOM && requireBOM === "never") {
@@ -81489,7 +81593,7 @@ module.exports = {
 // Requirements
 //------------------------------------------------------------------------------
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 var doctrine = require("doctrine");
 
@@ -82130,7 +82234,9 @@ module.exports = {
 
         schema: [{
             enum: ["outside", "inside", "any"]
-        }]
+        }],
+
+        fixable: "code"
     },
 
     create: function create(context) {
@@ -82159,11 +82265,49 @@ module.exports = {
                         functionExpressionWrapped = wrapped(node.callee);
 
                     if (!callExpressionWrapped && !functionExpressionWrapped) {
-                        context.report(node, "Wrap an immediate function invocation in parentheses.");
+                        context.report({
+                            node: node,
+                            message: "Wrap an immediate function invocation in parentheses.",
+                            fix: function fix(fixer) {
+                                var nodeToSurround = style === "inside" ? node.callee : node;
+
+                                return fixer.replaceText(nodeToSurround, "(" + sourceCode.getText(nodeToSurround) + ")");
+                            }
+                        });
                     } else if (style === "inside" && !functionExpressionWrapped) {
-                        context.report(node, "Wrap only the function expression in parens.");
+                        context.report({
+                            node: node,
+                            message: "Wrap only the function expression in parens.",
+                            fix: function fix(fixer) {
+
+                                /*
+                                 * The outer call expression will always be wrapped at this point.
+                                 * Replace the range between the end of the function expression and the end of the call expression.
+                                 * for example, in `(function(foo) {}(bar))`, the range `(bar))` should get replaced with `)(bar)`.
+                                 * Replace the parens from the outer expression, and parenthesize the function expression.
+                                 */
+                                var parenAfter = sourceCode.getTokenAfter(node);
+
+                                return fixer.replaceTextRange([node.callee.range[1], parenAfter.range[1]], ")" + sourceCode.getText().slice(node.callee.range[1], parenAfter.range[0]));
+                            }
+                        });
                     } else if (style === "outside" && !callExpressionWrapped) {
-                        context.report(node, "Move the invocation into the parens that contain the function.");
+                        context.report({
+                            node: node,
+                            message: "Move the invocation into the parens that contain the function.",
+                            fix: function fix(fixer) {
+
+                                /*
+                                 * The inner function expression will always be wrapped at this point.
+                                 * It's only necessary to replace the range between the end of the function expression
+                                 * and the call expression. For example, in `(function(foo) {})(bar)`, the range `)(bar)`
+                                 * should get replaced with `(bar))`.
+                                 */
+                                var parenAfter = sourceCode.getTokenAfter(node.callee);
+
+                                return fixer.replaceTextRange([parenAfter.range[0], node.range[1]], sourceCode.getText().slice(parenAfter.range[1], node.range[1]) + ")");
+                            }
+                        });
                     }
                 }
             }
@@ -82479,7 +82623,9 @@ module.exports = {
                 }
             },
             additionalProperties: false
-        }]
+        }],
+
+        fixable: "code"
     },
 
     create: function create(context) {
@@ -82543,32 +82689,54 @@ module.exports = {
             return node.type === "LogicalExpression" && left.type === "BinaryExpression" && right.type === "BinaryExpression" && isRangeTestOperator(left.operator) && isRangeTestOperator(right.operator) && (isBetweenTest() || isOutsideTest()) && isParenWrapped();
         }
 
+        var OPERATOR_FLIP_MAP = {
+            "===": "===",
+            "!==": "!==",
+            "==": "==",
+            "!=": "!=",
+            "<": ">",
+            ">": "<",
+            "<=": ">=",
+            ">=": "<="
+        };
+
+        /**
+        * Returns a string representation of a BinaryExpression node with its sides/operator flipped around.
+        * @param {ASTNode} node The BinaryExpression node
+        * @returns {string} A string representation of the node with the sides and operator flipped
+        */
+        function getFlippedString(node) {
+            var operatorToken = sourceCode.getTokensBetween(node.left, node.right).find(function (token) {
+                return token.value === node.operator;
+            });
+            var textBeforeOperator = sourceCode.getText().slice(node.left.range[1], operatorToken.range[0]);
+            var textAfterOperator = sourceCode.getText().slice(operatorToken.range[1], node.right.range[0]);
+            var leftText = sourceCode.getText(node.left);
+            var rightText = sourceCode.getText(node.right);
+
+            return rightText + textBeforeOperator + OPERATOR_FLIP_MAP[operatorToken.value] + textAfterOperator + leftText;
+        }
+
         //--------------------------------------------------------------------------
         // Public
         //--------------------------------------------------------------------------
 
         return {
-            BinaryExpression: always ? function (node) {
+            BinaryExpression: function BinaryExpression(node) {
+                var expectedLiteral = always ? node.left : node.right;
+                var expectedNonLiteral = always ? node.right : node.left;
 
-                // Comparisons must always be yoda-style: if ("blue" === color)
-                if ((node.right.type === "Literal" || looksLikeLiteral(node.right)) && !(node.left.type === "Literal" || looksLikeLiteral(node.left)) && !(!isEqualityOperator(node.operator) && onlyEquality) && isComparisonOperator(node.operator) && !(exceptRange && isRangeTest(context.getAncestors().pop()))) {
+                // If `expectedLiteral` is not a literal, and `expectedNonLiteral` is a literal, raise an error.
+                if ((expectedNonLiteral.type === "Literal" || looksLikeLiteral(expectedNonLiteral)) && !(expectedLiteral.type === "Literal" || looksLikeLiteral(expectedLiteral)) && !(!isEqualityOperator(node.operator) && onlyEquality) && isComparisonOperator(node.operator) && !(exceptRange && isRangeTest(context.getAncestors().pop()))) {
                     context.report({
                         node: node,
-                        message: "Expected literal to be on the left side of {{operator}}.",
+                        message: "Expected literal to be on the {{expectedSide}} side of {{operator}}.",
                         data: {
-                            operator: node.operator
-                        }
-                    });
-                }
-            } : function (node) {
-
-                // Comparisons must never be yoda-style (default)
-                if ((node.left.type === "Literal" || looksLikeLiteral(node.left)) && !(node.right.type === "Literal" || looksLikeLiteral(node.right)) && !(!isEqualityOperator(node.operator) && onlyEquality) && isComparisonOperator(node.operator) && !(exceptRange && isRangeTest(context.getAncestors().pop()))) {
-                    context.report({
-                        node: node,
-                        message: "Expected literal to be on the right side of {{operator}}.",
-                        data: {
-                            operator: node.operator
+                            operator: node.operator,
+                            expectedSide: always ? "left" : "right"
+                        },
+                        fix: function fix(fixer) {
+                            return fixer.replaceText(node, getFlippedString(node));
                         }
                     });
                 }
