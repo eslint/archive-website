@@ -154,7 +154,7 @@ categories:
         name: consistent-return
         recommended: false
       - description: enforce consistent brace style for all control statements
-        fixable: false
+        fixable: true
         name: curly
         recommended: false
       - description: require `default` cases in `switch` statements
@@ -220,7 +220,7 @@ categories:
         name: no-extend-native
         recommended: false
       - description: disallow unnecessary calls to `.bind()`
-        fixable: false
+        fixable: true
         name: no-extra-bind
         recommended: false
       - description: disallow unnecessary labels
@@ -565,6 +565,12 @@ categories:
         fixable: true
         name: func-call-spacing
         recommended: false
+      - description: >-
+          require function names to match the name of the variable or property
+          to which they are assigned
+        fixable: false
+        name: func-name-matching
+        recommended: false
       - description: require or disallow named `function` expressions
         fixable: false
         name: func-names
@@ -692,7 +698,7 @@ categories:
         name: no-inline-comments
         recommended: false
       - description: disallow `if` statements as the only statement in `else` blocks
-        fixable: false
+        fixable: true
         name: no-lonely-if
         recommended: false
       - description: disallow mixed binary operators
@@ -764,7 +770,7 @@ categories:
         name: object-property-newline
         recommended: false
       - description: require or disallow newlines around variable declarations
-        fixable: false
+        fixable: true
         name: one-var-declaration-per-line
         recommended: false
       - description: >-
@@ -955,7 +961,7 @@ categories:
         name: prefer-rest-params
         recommended: false
       - description: require spread operators instead of `.apply()`
-        fixable: false
+        fixable: true
         name: prefer-spread
         recommended: false
       - description: require template literals instead of string concatenation

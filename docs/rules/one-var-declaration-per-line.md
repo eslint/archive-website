@@ -6,6 +6,8 @@ layout: doc
 
 # require or disallow newlines around variable declarations (one-var-declaration-per-line)
 
+(fixable) The `--fix` option on the [command line](../user-guide/command-line-interface#fix) automatically fixes problems reported by this rule.
+
 Some developers declare multiple var statements on the same line:
 
 ```js

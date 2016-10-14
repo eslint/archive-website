@@ -95,10 +95,6 @@ for (let i=10; i; i--) {
 //... no modifications of foo after this loop ...
 ```
 
-## Further Reading
-
-* [Don't make functions within a loop](http://jslinterrors.com/dont-make-functions-within-a-loop/)
-
 ## Version
 
 This rule was introduced in ESLint 0.0.9.
