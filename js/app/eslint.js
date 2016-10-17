@@ -52936,15 +52936,10 @@ module.exports = {
         function getTrailingToken(node, lastItem) {
             switch (node.type) {
                 case "ObjectExpression":
-                case "ObjectPattern":
                 case "ArrayExpression":
-                case "ArrayPattern":
                 case "CallExpression":
                 case "NewExpression":
                     return sourceCode.getLastToken(node, 1);
-                case "FunctionDeclaration":
-                case "FunctionExpression":
-                    return sourceCode.getTokenBefore(node.body, 1);
                 default:
                     {
                         var nextToken = sourceCode.getTokenAfter(lastItem);
@@ -74418,6 +74413,12 @@ module.exports = {
             var pattern = /\\[^\d]/g;
             var nodeEscapes = void 0,
                 match = void 0;
+
+            if (isTemplateElement && node.parent && node.parent.parent && node.parent.parent.type === "TaggedTemplateExpression") {
+
+                // Don't report tagged template literals, because the backslash character is accessible to the tag function.
+                return;
+            }
 
             if (typeof node.value === "string" || isTemplateElement) {
 
