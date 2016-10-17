@@ -22,7 +22,7 @@ This repository runs on GitHub pages through Jekyll. To setup a local environmen
 Once you have setup a local environment, you can run a copy of the website locally using this command:
 
 ```
-$ bundle exec jekyll serve --watch
+$ npm start
 ```
 
 ## License
