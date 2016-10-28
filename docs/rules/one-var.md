@@ -326,10 +326,6 @@ function foo() {
 * **JSHint**: This rule maps to the `onevar` JSHint rule, but allows `let` and `const` to be configured separately.
 * **JSCS**: This rule roughly maps to [disallowMultipleVarDecl](http://jscs.info/rule/disallowMultipleVarDecl)
 
-## Further Reading
-
-[JSLint Errors - Combine this with the previous 'var' statement](http://jslinterrors.com/combine-this-with-the-previous-var-statement/)
-
 ## Version
 
 This rule was introduced in ESLint 0.0.9.

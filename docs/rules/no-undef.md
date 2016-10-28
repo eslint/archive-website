@@ -118,10 +118,6 @@ If explicit declaration of global variables is not to your taste.
 
 This rule provides compatibility with treatment of global variables in [JSHint](http://www.jshint.com) and [JSLint](http://www.jslint.com).
 
-## Further Reading
-
-* ['{a}' is not defined](http://jslinterrors.com/a-is-not-defined)
-
 ## Version
 
 This rule was introduced in ESLint 0.0.9.

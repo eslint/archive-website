@@ -230,7 +230,6 @@ The return value is an object containing the results of the linting operation. H
             output: "foo;",
             messages: [
                 {
-                    fatal: false,
                     severity: 2,
                     ruleId: "semi",
                     severity: 2,
@@ -241,6 +240,34 @@ The return value is an object containing the results of the linting operation. H
             ],
             errorCount: 1,
             warningCount: 0
+        }
+    ],
+    errorCount: 1,
+    warningCount: 0
+}
+```
+
+If the operation ends with a parsing error, you will get a single message for this file, with `fatal: true` added as an extra property.
+
+```js
+{
+    results: [
+        {
+            filePath: "./myfile.js",
+            messages: [
+                {
+                    ruleId: null,
+                    fatal: true,
+                    severity: 2,
+                    source: "fucntion foo() {}",
+                    message: "Parsing error: Unexpected token foo",
+                    line: 1,
+                    column: 10
+                }
+            ],
+            errorCount: 1,
+            warningCount: 0,
+            source: "fucntion foo() {}"
         }
     ],
     errorCount: 1,
@@ -381,6 +408,7 @@ var isIgnored = cli.isPathIgnored("foo/bar.js");
 Retrieves a formatter, which you can then use to format a report object. The argument is either the name of a built-in formatter:
 
 * "[checkstyle](../user-guide/formatters#checkstyle)"
+* "[codeframe](../user-guide/formatters#codeframe)"
 * "[compact](../user-guide/formatters#compact)"
 * "[html](../user-guide/formatters#html)"
 * "[jslint-xml](../user-guide/formatters#jslint-xml)"

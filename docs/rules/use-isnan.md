@@ -47,10 +47,6 @@ if (!isNaN(foo)) {
 }
 ```
 
-## Further Reading
-
-* [Use the isNaN function to compare with NaN](http://jslinterrors.com/use-the-isnan-function-to-compare-with-nan/)
-
 ## Version
 
 This rule was introduced in ESLint 0.0.6.

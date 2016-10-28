@@ -371,6 +371,10 @@ categories:
         fixable: false
         name: no-useless-escape
         recommended: false
+      - description: disallow redundant return statements
+        fixable: true
+        name: no-useless-return
+        recommended: false
       - description: disallow `void` operators
         fixable: false
         name: no-void
@@ -528,7 +532,7 @@ categories:
         name: block-spacing
         recommended: false
       - description: enforce consistent brace style for blocks
-        fixable: false
+        fixable: true
         name: brace-style
         recommended: false
       - description: enforce camelcase naming convention
@@ -670,7 +674,7 @@ categories:
         name: new-parens
         recommended: false
       - description: require or disallow an empty line after variable declarations
-        fixable: false
+        fixable: true
         name: newline-after-var
         recommended: false
       - description: require an empty line before `return` statements
@@ -859,7 +863,7 @@ categories:
     name: ECMAScript 6
     rules:
       - description: require braces around arrow function bodies
-        fixable: false
+        fixable: true
         name: arrow-body-style
         recommended: false
       - description: require parentheses around arrow function arguments
@@ -952,10 +956,6 @@ categories:
         fixable: true
         name: prefer-numeric-literals
         recommended: false
-      - description: require `Reflect` methods where applicable
-        fixable: false
-        name: prefer-reflect
-        recommended: false
       - description: require rest parameters instead of `arguments`
         fixable: false
         name: prefer-rest-params
@@ -1009,6 +1009,8 @@ deprecated:
     - name: no-spaced-func
       replacedBy:
         - func-call-spacing
+    - name: prefer-reflect
+      replacedBy: []
 removed:
   description: 'These rules from older versions of ESLint have been replaced by newer rules:'
   name: Removed

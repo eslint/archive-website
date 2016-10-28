@@ -41,10 +41,6 @@ var x = function (a, b) {
 
 In more advanced cases where you really need to use the `Function` constructor.
 
-## Further Reading
-
-* [The Function constructor is eval](http://jslinterrors.com/the-function-constructor-is-eval/)
-
 ## Version
 
 This rule was introduced in ESLint 0.0.7.

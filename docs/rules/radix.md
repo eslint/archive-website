@@ -97,7 +97,6 @@ If you don't want to enforce either presence or omission of the `10` radix value
 ## Further Reading
 
 * [parseInt and radix](http://davidwalsh.name/parseint-radix)
-* [Missing radix parameter](http://jslinterrors.com/missing-radix-parameter/)
 
 ## Version
 

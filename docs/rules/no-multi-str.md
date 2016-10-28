@@ -36,12 +36,6 @@ var x = "Line 1\n" +
         "Line 2";
 ```
 
-
-
-## Further Reading
-
-* [Bad escapement of EOL](http://jslinterrors.com/bad-escapement-of-eol-use-option-multistr-if-needed/)
-
 ## Version
 
 This rule was introduced in ESLint 0.0.9.

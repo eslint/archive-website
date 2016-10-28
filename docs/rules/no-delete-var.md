@@ -23,10 +23,6 @@ var x;
 delete x;
 ```
 
-## Further Reading
-
-* [Only properties should be deleted](http://jslinterrors.com/only-properties-should-be-deleted/)
-
 ## Version
 
 This rule was introduced in ESLint 0.0.9.

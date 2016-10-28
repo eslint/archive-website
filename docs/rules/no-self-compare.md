@@ -25,10 +25,6 @@ if (x === x) {
 }
 ```
 
-## Further Reading
-
-* [Weird Relation](http://jslinterrors.com/weird-relation/)
-
 ## Version
 
 This rule was introduced in ESLint 0.0.9.

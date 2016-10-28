@@ -41,10 +41,6 @@ var num  = "071";
 
 * **JSHint**: W115
 
-## Further Reading
-
-* [Octal literals not allowed in strict mode](http://jslinterrors.com/octal-literals-are-not-allowed-in-strict-mode)
-
 ## Version
 
 This rule was introduced in ESLint 0.0.6.
