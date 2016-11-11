@@ -47,7 +47,7 @@ categories:
         name: no-ex-assign
         recommended: true
       - description: disallow unnecessary boolean casts
-        fixable: false
+        fixable: true
         name: no-extra-boolean-cast
         recommended: true
       - description: disallow unnecessary parentheses
@@ -170,7 +170,7 @@ categories:
         name: dot-notation
         recommended: false
       - description: require the use of `===` and `!==`
-        fixable: false
+        fixable: true
         name: eqeqeq
         recommended: false
       - description: require `for-in` loops to include an `if` statement
@@ -326,6 +326,10 @@ categories:
       - description: disallow assignment operators in `return` statements
         fixable: false
         name: no-return-assign
+        recommended: false
+      - description: disallow unnecessary `return await`
+        fixable: false
+        name: no-return-await
         recommended: false
       - description: 'disallow `javascript:` urls'
         fixable: false

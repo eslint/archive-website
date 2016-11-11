@@ -20,6 +20,8 @@ This rule allows you to specify modules that you don't want to use in your appli
 
 The rule takes one or more strings as options: the names of restricted modules.
 
+It can also take an object with lists of "paths" and gitignore-style "patterns" strings.
+
 For example, to restrict the use of all Node.js core modules (via https://github.com/nodejs/node/tree/master/lib):
 
 ```json
@@ -36,7 +38,19 @@ Examples of **incorrect** code for this rule with sample `"fs", "cluster"` restr
 /*eslint no-restricted-modules: ["error", "fs", "cluster"]*/
 
 var fs = require('fs');
-var cluster = require(' cluster ');
+var cluster = require('cluster');
+```
+
+```js
+/*eslint no-restricted-modules: ["error", { "paths": ["cluster"] }]*/
+
+var cluster = require('cluster');
+```
+
+```js
+/*eslint no-restricted-modules: ["error", { "patterns": ["lodash/*"] }]*/
+
+var cluster = require('lodash/pick');
 ```
 
 Examples of **correct** code for this rule with sample `"fs", "cluster"` restricted modules:
@@ -45,6 +59,16 @@ Examples of **correct** code for this rule with sample `"fs", "cluster"` restric
 /*eslint no-restricted-modules: ["error", "fs", "cluster"]*/
 
 var crypto = require('crypto');
+```
+
+```js
+/*eslint no-restricted-modules: ["error", {
+    "paths": ["fs", "cluster"],
+    "patterns": ["lodash/*", "!lodash/pick"]
+}]*/
+
+var crypto = require('crypto');
+var eslint = require('lodash/pick');
 ```
 
 ## Version
