@@ -741,7 +741,7 @@ categories:
         fixable: false
         name: no-restricted-syntax
         recommended: false
-      - description: disallow tabs in file
+      - description: disallow all tabs
         fixable: false
         name: no-tabs
         recommended: false

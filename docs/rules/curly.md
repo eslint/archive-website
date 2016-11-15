@@ -190,10 +190,9 @@ for (var i = 0; foo; i++) {
     doSomething();
 }
 
-if (foo) {
+if (foo)
     // some comment
     bar();
-}
 ```
 
 Examples of **correct** code for the `"multi-or-nest"` option:
@@ -223,6 +222,11 @@ while (true)
 
 for (var i = 0; foo; i++)
     doSomething();
+
+if (foo) {
+    // some comment
+    bar();
+}
 ```
 
 ### consistent
