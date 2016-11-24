@@ -3,3 +3,4 @@ _site/
 _algolia_api_key
 Gemfile.lock
 .jekyll-metadata
+npm-debug.log
