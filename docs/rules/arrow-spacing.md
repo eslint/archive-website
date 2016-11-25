@@ -28,7 +28,7 @@ The default configuration is `{ "before": true, "after": true }`.
 
 `true` means there should be **one or more spaces** and `false` means **no spaces**.
 
-The following patterns are considered problems if `{ "before": true, "after": true }`.
+Examples of **incorrect** code for this rule with the default `{ "before": true, "after": true }` option:
 
 ```js
 /*eslint arrow-spacing: "error"*/
@@ -44,7 +44,7 @@ a=> a;
 () =>{'\n'};
 ```
 
-The following patterns are not considered problems if `{ "before": true, "after": true }`.
+Examples of **correct** code for this rule with the default `{ "before": true, "after": true }` option:
 
 ```js
 /*eslint arrow-spacing: "error"*/
@@ -56,7 +56,18 @@ a => a;
 () => {'\n'};
 ```
 
-The following patterns are not considered problems if `{ "before": false, "after": false }`.
+Examples of **incorrect** code for this rule with the `{ "before": false, "after": false }` option:
+
+```js
+/*eslint arrow-spacing: ["error", { "before": false, "after": false }]*/
+/*eslint-env es6*/
+
+() =>{};
+(a) => {};
+()=> {'\n'};
+```
+
+Examples of **correct** code for this rule with the `{ "before": false, "after": false }` option:
 
 ```js
 /*eslint arrow-spacing: ["error", { "before": false, "after": false }]*/
@@ -64,23 +75,21 @@ The following patterns are not considered problems if `{ "before": false, "after
 
 ()=>{};
 (a)=>{};
-a=>a;
 ()=>{'\n'};
 ```
 
-The following patterns are not considered problems if `{ "before": true, "after": false }`.
+Examples of **incorrect** code for this rule with the `{ "before": false, "after": true }` option:
 
 ```js
-/*eslint arrow-spacing: ["error", { "before": true, "after": false }]*/
+/*eslint arrow-spacing: ["error", { "before": false, "after": true }]*/
 /*eslint-env es6*/
 
 () =>{};
-(a) =>{};
-a =>a;
-() =>{'\n'};
+(a) => {};
+()=>{'\n'};
 ```
 
-The following patterns are not considered problems if `{ "before": false, "after": true }`.
+Examples of **correct** code for this rule with the `{ "before": false, "after": true }` option:
 
 ```js
 /*eslint arrow-spacing: ["error", { "before": false, "after": true }]*/
@@ -88,7 +97,6 @@ The following patterns are not considered problems if `{ "before": false, "after
 
 ()=> {};
 (a)=> {};
-a=> a;
 ()=> {'\n'};
 ```
 

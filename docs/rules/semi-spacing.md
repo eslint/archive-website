@@ -47,7 +47,7 @@ The default is `{"before": false, "after": true}`.
 
 This is the default option. It enforces spacing after semicolons and disallows spacing before semicolons.
 
-The following patterns are considered problems:
+Examples of **incorrect** code for this rule:
 
 ```js
 /*eslint semi-spacing: "error"*/
@@ -60,7 +60,7 @@ for (i = 0 ; i < 10 ; i++) {}
 for (i = 0;i < 10;i++) {}
 ```
 
-The following patterns are not considered problems:
+Examples of **correct** code for this rule:
 
 ```js
 /*eslint semi-spacing: "error"*/
@@ -79,7 +79,7 @@ if (true) {;}
 
 This option enforces spacing before semicolons and disallows spacing after semicolons.
 
-The following patterns are considered problems:
+Examples of **incorrect** code for this rule with the `{"before": true, "after": false}` option:
 
 ```js
 /*eslint semi-spacing: ["error", { "before": true, "after": false }]*/
@@ -92,7 +92,7 @@ for (i = 0;i < 10;i++) {}
 for (i = 0; i < 10; i++) {}
 ```
 
-The following patterns are not considered problems:
+Examples of **correct** code for this rule with the `{"before": true, "after": false}` option:
 
 ```js
 /*eslint semi-spacing: ["error", { "before": true, "after": false }]*/

@@ -21,7 +21,7 @@ var x = a <= 1 ? 2 : 3;
 
 ## Rule Details
 
-The following patterns are considered warnings:
+Examples of **incorrect** code for this rule:
 
 ```js
 /*eslint no-confusing-arrow: "error"*/
@@ -32,7 +32,7 @@ var x = (a) => 1 ? 2 : 3;
 var x = (a) => (1 ? 2 : 3);
 ```
 
-The following patterns are not considered warnings:
+Examples of **correct** code for this rule:
 
 ```js
 /*eslint no-confusing-arrow: "error"*/
@@ -59,10 +59,10 @@ This rule accepts a single options argument with the following defaults:
 1. `true` relaxes the rule and accepts parenthesis as a valid "confusion-preventing" syntax.
 2. `false` warns even if the expression is wrapped in parenthesis
 
-When `allowParens` is set to `true` following patterns are no longer considered as warnings:
+Examples of **correct** code for this rule with the `{"allowParens": true}` option:
 
 ```js
-/*eslint no-confusing-arrow: ["error", {allowParens: true}]*/
+/*eslint no-confusing-arrow: ["error", {"allowParens": true}]*/
 /*eslint-env es6*/
 var x = a => (1 ? 2 : 3);
 var x = (a) => (1 ? 2 : 3);
