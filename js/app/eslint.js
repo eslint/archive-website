@@ -53916,6 +53916,10 @@ module.exports = {
             // 6. Is the initial word character a letter?
             var commentWordCharsOnly = commentWithoutAsterisks.replace(WHITESPACE, "");
 
+            if (commentWordCharsOnly.length === 0) {
+                return true;
+            }
+
             var firstWordChar = commentWordCharsOnly[0];
 
             if (!LETTER_PATTERN.test(firstWordChar)) {
