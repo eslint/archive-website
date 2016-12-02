@@ -141,3 +141,7 @@
 - url: https://www.airhelp.com/
   src: /img/logos/airhelp.png
   name: AirHelp
+
+- url: https://www.squarespace.com
+  src: /img/logos/squarespace.png
+  name: Squarespace
