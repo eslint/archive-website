@@ -2,6 +2,10 @@ categories:
   - description: 'These rules relate to possible syntax or logic errors in JavaScript code:'
     name: Possible Errors
     rules:
+      - description: disallow `await` inside of loops
+        fixable: false
+        name: no-await-in-loop
+        recommended: false
       - description: disallow assignment operators in conditional expressions
         fixable: false
         name: no-cond-assign
@@ -548,7 +552,7 @@ categories:
         name: camelcase
         recommended: false
       - description: enforce or disallow capitalization of the first letter of a comment
-        fixable: false
+        fixable: true
         name: capitalized-comments
         recommended: false
       - description: require or disallow trailing commas
