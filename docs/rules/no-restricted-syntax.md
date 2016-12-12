@@ -57,6 +57,8 @@ If you don't want to restrict your code from using any JavaScript features or sy
 * [no-alert](no-alert)
 * [no-console](no-console)
 * [no-debugger](no-debugger)
+* [no-restricted-properties](no-restricted-properties)
+* [no-restricted-syntax](no-restricted-syntax)
 
 ## Version
 

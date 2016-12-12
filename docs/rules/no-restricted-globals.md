@@ -51,6 +51,11 @@ import event from "event-module";
 var event = 1;
 ```
 
+## Related Rules
+
+* [no-restricted-properties](no-restricted-properties)
+* [no-restricted-syntax](no-restricted-syntax)
+
 ## Version
 
 This rule was introduced in ESLint 2.3.0.

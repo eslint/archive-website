@@ -45543,7 +45543,7 @@ try {
 },{}],161:[function(require,module,exports){
 module.exports={
   "name": "eslint",
-  "version": "3.11.1",
+  "version": "3.12.0",
   "author": "Nicholas C. Zakas <nicholas+npm@nczconsulting.com>",
   "description": "An AST-based pattern checker for JavaScript.",
   "bin": {
@@ -58870,8 +58870,12 @@ module.exports = {
                         } else if (parent.type === "CallExpression" || parent.type === "NewExpression") {
                             if (typeof options.CallExpression.arguments === "number") {
                                 nodeIndent += options.CallExpression.arguments * indentSize;
-                            } else if (parent.arguments.indexOf(node) !== -1) {
-                                nodeIndent = parent.arguments[0].loc.start.column;
+                            } else if (options.CallExpression.arguments === "first") {
+                                if (parent.arguments.indexOf(node) !== -1) {
+                                    nodeIndent = parent.arguments[0].loc.start.column;
+                                }
+                            } else {
+                                nodeIndent += indentSize;
                             }
                         } else if (parent.type === "LogicalExpression" || parent.type === "ArrowFunctionExpression") {
                             nodeIndent += indentSize;

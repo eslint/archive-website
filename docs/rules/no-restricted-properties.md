@@ -127,6 +127,7 @@ If you don't have any object/property combinations to restrict, you should not u
 
 ## Related Rules
 
+* [no-restricted-globals](no-restricted-globals)
 * [no-restricted-syntax](no-restricted-syntax)
 
 ## Version
