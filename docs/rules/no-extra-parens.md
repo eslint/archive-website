@@ -53,6 +53,8 @@ Examples of **correct** code for this rule with the default `"all"` option:
 
 (0).toString();
 
+(Object.prototype.toString.call());
+
 ({}.toString.call());
 
 (function(){}) ? a() : b();
@@ -126,6 +128,8 @@ Examples of **correct** code for this rule with the `"functions"` option:
 /* eslint no-extra-parens: ["error", "functions"] */
 
 (0).toString();
+
+(Object.prototype.toString.call());
 
 ({}.toString.call());
 
