@@ -1,71 +1,13 @@
----
-title: ESLint Demo
-layout: demo
----
-<link rel="stylesheet" property="stylesheet" href="../styles/demo.css"/>
-
-<div class="container editorRow">
-    <div class="row">
-        <div class="col-md-7">
-            <pre id="editor" data-editor-lang="js" style="height:350px">var foo = bar;</pre>
-        </div>
-        <div class="col-md-5">
-            <div id="results">
-
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-            <div class="panel panel-default">
-                <div class="panel-heading" role="tab" id="headingOne">
-                    <h4 class="panel-title">
-                        <a data-toggle="collapse" data-parent="#accordion" href="#configuration" aria-expanded="true" aria-controls="configuration">
-                            Rules Configuration
-                        </a>
-                    </h4>
-                </div>
-                <div id="configuration" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
-                    <div class="panel-body">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <h3>Environments</h3>
-                            </div>
-                        </div>
-                        <div class="row environments">
-                            <div class="col-md-12 list">
-
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <h3>ECMA Features</h3>
-                            </div>
-                        </div>
-                        <div class="row ecmaFeatures">
-                            <div class="col-md-12 list">
-
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <h3>Rules</h3>
-                            </div>
-                        </div>
-                        <div class="row rules">
-
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12 text-right">
-                                <button class="btn btn-primary">Ok</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<script src="//cdnjs.cloudflare.com/ajax/libs/require.js/2.1.15/require.min.js"></script>
-<script src="/js/app/demo.js"></script>
+<html>
+    <head>
+        <link rel="stylesheet" href="/styles/main.936b04d2.css"/>
+        <link rel="stylesheet" property="stylesheet" type="text/css" href="http://eclipse.org/orion/editor/releases/current/built-editor.css" />
+        <link rel="stylesheet" property="stylesheet" href="../styles/demo.css"/>
+    </head>
+    <body>
+        <div id="app"></div>
+        <script src="/js/vendor/jquery-1.10.2.min.js"></script>
+        <script src="/js/vendor/require.js" data-main="/js/app/demo/requireConfig"></script>
+        <script src="/js/vendor/bootstrap.min.js"></script>
+    </body>
+</html>
