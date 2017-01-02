@@ -145,3 +145,7 @@
 - url: https://www.squarespace.com
   src: /img/logos/squarespace.png
   name: Squarespace
+
+- url: https://www.microsoft.com/
+  src: /img/logos/microsoft.svg
+  name: Microsoft
