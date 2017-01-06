@@ -160,6 +160,7 @@ The node contains all of the information necessary to figure out the line and co
 You can also use placeholders in the message and provide `data`:
 
 ```js
+{% raw %}
 context.report({
     node: node,
     message: "Unexpected identifier: {{ identifier }}",
@@ -167,6 +168,7 @@ context.report({
         identifier: node.name
     }
 });
+{% endraw %}
 ```
 
 Note that leading and trailing whitespace is optional in message parameters.

@@ -51,7 +51,7 @@ Examples of **correct** code for this rule:
 `$\{${foo}\}`;
 /\\/g;
 /\t/g;
-/\\w\\$\\*\\^\\./;
+/\w\$\*\^\./;
 
 ```
 

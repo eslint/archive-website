@@ -6,6 +6,8 @@ layout: doc
 
 # Disallow Unnecessary Labels (no-extra-label)
 
+(fixable) The `--fix` option on the [command line](../user-guide/command-line-interface#fix) automatically fixes problems reported by this rule.
+
 If a loop contains no nested loops or switches, labeling the loop is unnecessary.
 
 ```js

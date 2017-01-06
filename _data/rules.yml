@@ -228,7 +228,7 @@ categories:
         name: no-extra-bind
         recommended: false
       - description: disallow unnecessary labels
-        fixable: false
+        fixable: true
         name: no-extra-label
         recommended: false
       - description: disallow fallthrough of `case` statements
@@ -770,7 +770,7 @@ categories:
         name: no-underscore-dangle
         recommended: false
       - description: disallow ternary operators when simpler alternatives exist
-        fixable: false
+        fixable: true
         name: no-unneeded-ternary
         recommended: false
       - description: disallow whitespace before properties
@@ -786,7 +786,7 @@ categories:
         name: object-curly-spacing
         recommended: false
       - description: enforce placing object properties on separate lines
-        fixable: false
+        fixable: true
         name: object-property-newline
         recommended: false
       - description: require or disallow newlines around variable declarations
@@ -804,7 +804,7 @@ categories:
         name: operator-assignment
         recommended: false
       - description: enforce consistent linebreak style for operators
-        fixable: false
+        fixable: true
         name: operator-linebreak
         recommended: false
       - description: require or disallow padding within blocks
@@ -965,6 +965,10 @@ categories:
           after declared
         fixable: true
         name: prefer-const
+        recommended: false
+      - description: require destructuring from arrays and/or objects
+        fixable: false
+        name: prefer-destructuring
         recommended: false
       - description: >-
           disallow `parseInt()` in favor of binary, octal, and hexadecimal
