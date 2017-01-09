@@ -45615,7 +45615,7 @@ try {
 },{}],161:[function(require,module,exports){
 module.exports={
   "name": "eslint",
-  "version": "3.12.2",
+  "version": "3.13.0",
   "author": "Nicholas C. Zakas <nicholas+npm@nczconsulting.com>",
   "description": "An AST-based pattern checker for JavaScript.",
   "bin": {
@@ -66947,8 +66947,6 @@ module.exports = {
 // Requirements
 //------------------------------------------------------------------------------
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
-
 var astUtils = require("../ast-utils");
 
 //------------------------------------------------------------------------------
@@ -67043,7 +67041,7 @@ module.exports = {
 
             var labelNode = node.label;
 
-            var _loop = function _loop(info) {
+            for (var info = scopeInfo; info !== null; info = info.upper) {
                 if (info.breakable || info.label && info.label.name === labelNode.name) {
                     if (info.breakable && info.label && info.label.name === labelNode.name) {
                         context.report({
@@ -67051,20 +67049,12 @@ module.exports = {
                             message: "This label '{{name}}' is unnecessary.",
                             data: labelNode,
                             fix: function fix(fixer) {
-                                return fixer.replaceTextRange([info.label.range[0], labelNode.range[1]], sourceCode.text.slice(info.label.parent.body.range[0], sourceCode.getFirstToken(node).range[1]));
+                                return fixer.removeRange([sourceCode.getFirstToken(node).range[1], labelNode.range[1]]);
                             }
                         });
                     }
-                    return {
-                        v: void 0
-                    };
+                    return;
                 }
-            };
-
-            for (var info = scopeInfo; info !== null; info = info.upper) {
-                var _ret = _loop(info);
-
-                if ((typeof _ret === "undefined" ? "undefined" : _typeof(_ret)) === "object") return _ret.v;
             }
         }
 
@@ -81042,7 +81032,9 @@ module.exports = {
          * @returns {void}
          */
         function checkAssigmentExpression(node) {
-            performCheck(node.left, node.right, node);
+            if (node.operator === "=") {
+                performCheck(node.left, node.right, node);
+            }
         }
 
         //--------------------------------------------------------------------------
