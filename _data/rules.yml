@@ -200,7 +200,7 @@ categories:
         name: no-div-regex
         recommended: false
       - description: disallow `else` blocks after `return` statements in `if` statements
-        fixable: false
+        fixable: true
         name: no-else-return
         recommended: false
       - description: disallow empty functions
@@ -394,6 +394,10 @@ categories:
       - description: disallow `with` statements
         fixable: false
         name: no-with
+        recommended: false
+      - description: require using Error objects as Promise rejection reasons
+        fixable: false
+        name: prefer-promise-reject-errors
         recommended: false
       - description: >-
           enforce the consistent use of the radix argument when using
@@ -729,6 +733,10 @@ categories:
         fixable: false
         name: no-mixed-spaces-and-tabs
         recommended: true
+      - description: disallow use of chained assignment expressions
+        fixable: false
+        name: no-multi-assign
+        recommended: false
       - description: disallow multiple empty lines
         fixable: true
         name: no-multiple-empty-lines
