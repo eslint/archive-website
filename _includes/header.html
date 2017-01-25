@@ -6,6 +6,18 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="keywords" content="JavaScript, Linter, Linting, Pluggable, Configurable, Code Quality">
   <meta name="description" content="{{ site.description }}">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:site_name" content="{{ site.name }}">
+  <meta property="og:title" content="{{ page.title }}">
+  <meta property="og:url" content="{{ site.url }}{{ page.url }}">
+  <meta property="og:image" content="{{ site.url }}/img/favicon.512x512.png">
+  
+  <meta name="twitter:site" content="@geteslint">
+  <meta name="twitter:title" content="{{ page.title }}">
+  <meta name="twitter:description" content="{{ site.description }}">
+  <meta name="twitter:url" content="{{ site.url }}{{ page.url }}">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:image" content="{{ site.url }}/img/favicon.512x512.png">
 {% if page.title != site.name %}
     {% if page.title != "ESLint" %}
         <title>{{ page.title }} - {{ site.name }}</title>
