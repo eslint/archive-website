@@ -45673,7 +45673,7 @@ try {
 },{}],161:[function(require,module,exports){
 module.exports={
   "name": "eslint",
-  "version": "3.13.1",
+  "version": "3.14.0",
   "author": "Nicholas C. Zakas <nicholas+npm@nczconsulting.com>",
   "description": "An AST-based pattern checker for JavaScript.",
   "bin": {
@@ -53803,7 +53803,6 @@ module.exports = {
             var tokenBeforeOpeningCurly = sourceCode.getTokenBefore(openingCurly);
             var tokenAfterOpeningCurly = sourceCode.getTokenAfter(openingCurly);
             var tokenBeforeClosingCurly = sourceCode.getTokenBefore(closingCurly);
-            var tokenAfterClosingCurly = sourceCode.getTokenAfter(closingCurly);
             var singleLineException = params.allowSingleLine && astUtils.isTokenOnSameLine(openingCurly, closingCurly);
 
             if (style !== "allman" && !astUtils.isTokenOnSameLine(tokenBeforeOpeningCurly, openingCurly)) {
@@ -53843,25 +53842,32 @@ module.exports = {
                     }
                 });
             }
+        }
 
-            if (tokenAfterClosingCurly && tokenAfterClosingCurly.type === "Keyword" && new Set(["else", "catch", "finally"]).has(tokenAfterClosingCurly.value)) {
-                if (style === "1tbs" && !astUtils.isTokenOnSameLine(closingCurly, tokenAfterClosingCurly)) {
-                    context.report({
-                        node: closingCurly,
-                        message: CLOSE_MESSAGE,
-                        fix: removeNewlineBetween(closingCurly, tokenAfterClosingCurly)
-                    });
-                }
+        /**
+        * Validates the location of a token that appears before a keyword (e.g. a newline before `else`)
+        * @param {Token} curlyToken The closing curly token. This is assumed to precede a keyword token (such as `else` or `finally`).
+        * @returns {void}
+        */
+        function validateCurlyBeforeKeyword(curlyToken) {
+            var keywordToken = sourceCode.getTokenAfter(curlyToken);
 
-                if (style !== "1tbs" && astUtils.isTokenOnSameLine(closingCurly, tokenAfterClosingCurly)) {
-                    context.report({
-                        node: closingCurly,
-                        message: CLOSE_MESSAGE_STROUSTRUP_ALLMAN,
-                        fix: function fix(fixer) {
-                            return fixer.insertTextAfter(closingCurly, "\n");
-                        }
-                    });
-                }
+            if (style === "1tbs" && !astUtils.isTokenOnSameLine(curlyToken, keywordToken)) {
+                context.report({
+                    node: curlyToken,
+                    message: CLOSE_MESSAGE,
+                    fix: removeNewlineBetween(curlyToken, keywordToken)
+                });
+            }
+
+            if (style !== "1tbs" && astUtils.isTokenOnSameLine(curlyToken, keywordToken)) {
+                context.report({
+                    node: curlyToken,
+                    message: CLOSE_MESSAGE_STROUSTRUP_ALLMAN,
+                    fix: function fix(fixer) {
+                        return fixer.insertTextAfter(curlyToken, "\n");
+                    }
+                });
             }
         }
 
@@ -53883,6 +53889,24 @@ module.exports = {
                 var openingCurly = sourceCode.getTokenBefore(node.cases.length ? node.cases[0] : closingCurly);
 
                 validateCurlyPair(openingCurly, closingCurly);
+            },
+            IfStatement: function IfStatement(node) {
+                if (node.consequent.type === "BlockStatement" && node.alternate) {
+
+                    // Handle the keyword after the `if` block (before `else`)
+                    validateCurlyBeforeKeyword(sourceCode.getLastToken(node.consequent));
+                }
+            },
+            TryStatement: function TryStatement(node) {
+
+                // Handle the keyword after the `try` block (before `catch` or `finally`)
+                validateCurlyBeforeKeyword(sourceCode.getLastToken(node.block));
+
+                if (node.handler && node.finalizer) {
+
+                    // Handle the keyword after the `catch` block (before `finally`)
+                    validateCurlyBeforeKeyword(sourceCode.getLastToken(node.handler.body));
+                }
             }
         };
     }
@@ -59213,7 +59237,7 @@ module.exports = {
                         } else if (parent.type === "ObjectExpression" || parent.type === "ArrayExpression") {
                             var parentElements = node.parent.type === "ObjectExpression" ? node.parent.properties : node.parent.elements;
 
-                            if (parentElements[0].loc.start.line === parent.loc.start.line && parentElements[0].loc.end.line !== parent.loc.start.line) {
+                            if (parentElements[0] && parentElements[0].loc.start.line === parent.loc.start.line && parentElements[0].loc.end.line !== parent.loc.start.line) {
 
                                 /*
                                  * If the first element of the array spans multiple lines, don't increase the expected indentation of the rest.
@@ -77839,6 +77863,7 @@ module.exports = {
          * - A variable is used from a closure within a loop.
          * - A variable might be used before it is assigned within a loop.
          * - A variable might be used in TDZ.
+         * - A variable is declared in statement position (e.g. a single-line `IfStatement`)
          *
          * ## A variable is declared on a SwitchCase node.
          *
@@ -77894,6 +77919,12 @@ module.exports = {
                 if (!isLoopAssignee(node) && !isDeclarationInitialized(node)) {
                     return false;
                 }
+            }
+
+            if (!isLoopAssignee(node) && node.parent.type !== "BlockStatement" && node.parent.type !== "Program" && node.parent.type !== "SwitchCase") {
+
+                // If the declaration is not in a block, e.g. `if (foo) var bar = 1;`, then it can't be fixed.
+                return false;
             }
 
             return true;
