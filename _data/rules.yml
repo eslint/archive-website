@@ -875,6 +875,10 @@ categories:
         fixable: true
         name: spaced-comment
         recommended: false
+      - description: require or disallow spacing between template tags and their literals
+        fixable: true
+        name: template-tag-spacing
+        recommended: false
       - description: require or disallow Unicode byte order mark (BOM)
         fixable: true
         name: unicode-bom

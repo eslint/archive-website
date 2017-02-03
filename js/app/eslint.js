@@ -11549,7 +11549,7 @@ module.exports={
   },
   "homepage": "https://github.com/eslint/espree",
   "main": "espree.js",
-  "version": "3.3.2",
+  "version": "3.4.0",
   "files": [
     "lib",
     "espree.js"
@@ -11566,7 +11566,7 @@ module.exports={
   },
   "license": "BSD-2-Clause",
   "dependencies": {
-    "acorn": "^4.0.1",
+    "acorn": "4.0.4",
     "acorn-jsx": "^3.0.0"
   },
   "devDependencies": {
@@ -11605,10 +11605,10 @@ module.exports={
     "betarelease": "eslint-prelease beta",
     "browserify": "node Makefile.js browserify"
   },
-  "gitHead": "c8ca13a205ecd3572045872cd0471e174a060281",
-  "_id": "espree@3.3.2",
-  "_shasum": "dbf3fadeb4ecb4d4778303e50103b3d36c88b89c",
-  "_from": "espree@>=3.3.1 <4.0.0",
+  "gitHead": "d7fb9d1354c77ce8382b4af3c9c1a52306b8c923",
+  "_id": "espree@3.4.0",
+  "_shasum": "41656fa5628e042878025ef467e78f125cb86e1d",
+  "_from": "espree@>=3.4.0 <4.0.0",
   "_npmVersion": "2.15.8",
   "_nodeVersion": "4.4.7",
   "_npmUser": {
@@ -11616,8 +11616,8 @@ module.exports={
     "email": "nicholas+eslint@nczconsulting.com"
   },
   "dist": {
-    "shasum": "dbf3fadeb4ecb4d4778303e50103b3d36c88b89c",
-    "tarball": "https://registry.npmjs.org/espree/-/espree-3.3.2.tgz"
+    "shasum": "41656fa5628e042878025ef467e78f125cb86e1d",
+    "tarball": "https://registry.npmjs.org/espree/-/espree-3.4.0.tgz"
   },
   "maintainers": [
     {
@@ -11630,11 +11630,11 @@ module.exports={
     }
   ],
   "_npmOperationalInternal": {
-    "host": "packages-16-east.internal.npmjs.com",
-    "tmp": "tmp/espree-3.3.2.tgz_1475184001667_0.6324210215825588"
+    "host": "packages-18-east.internal.npmjs.com",
+    "tmp": "tmp/espree-3.4.0.tgz_1486076846028_0.8194532077759504"
   },
   "directories": {},
-  "_resolved": "https://registry.npmjs.org/espree/-/espree-3.3.2.tgz"
+  "_resolved": "https://registry.npmjs.org/espree/-/espree-3.4.0.tgz"
 }
 
 },{}],"espree":[function(require,module,exports){
@@ -11706,7 +11706,7 @@ var astNodeTypes = require("./lib/ast-node-types"),
 
 
 var acorn = acornJSX(rawAcorn);
-
+var DEFAULT_ECMA_VERSION = 5;
 var lookahead,
     extra,
     lastToken;
@@ -11727,7 +11727,7 @@ function resetExtra() {
         errors: [],
         strict: false,
         ecmaFeatures: {},
-        ecmaVersion: 5,
+        ecmaVersion: DEFAULT_ECMA_VERSION,
         isModule: false
     };
 }
@@ -11739,6 +11739,37 @@ var tt = acorn.tokTypes,
 
 // custom type for JSX attribute values
 tt.jsxAttrValueToken = {};
+
+/**
+ * Normalize ECMAScript version from the initial config
+ * @param  {number} ecmaVersion ECMAScript version from the initial config
+ * @returns {number} normalized ECMAScript version
+ */
+function normalizeEcmaVersion(ecmaVersion) {
+    if (typeof ecmaVersion === "number") {
+        var version = ecmaVersion;
+
+        // Calculate ECMAScript edition number from official year version starting with
+        // ES2015, which corresponds with ES6 (or a difference of 2009).
+        if (version >= 2015) {
+            version -= 2009;
+        }
+
+        switch (version) {
+            case 3:
+            case 5:
+            case 6:
+            case 7:
+            case 8:
+                return version;
+
+            default:
+                throw new Error("Invalid ecmaVersion.");
+        }
+    } else {
+        return DEFAULT_ECMA_VERSION;
+    }
+}
 
 /**
  * Determines if a node is valid given the set of ecmaFeatures.
@@ -12129,7 +12160,7 @@ function tokenize(code, options) {
     options = options || {};
 
     var acornOptions = {
-        ecmaVersion: 5,
+        ecmaVersion: DEFAULT_ECMA_VERSION,
         plugins: {
             espree: true
         }
@@ -12158,21 +12189,7 @@ function tokenize(code, options) {
 
     extra.tolerant = typeof options.tolerant === "boolean" && options.tolerant;
 
-    if (typeof options.ecmaVersion === "number") {
-        switch (options.ecmaVersion) {
-            case 3:
-            case 5:
-            case 6:
-            case 7:
-            case 8:
-                acornOptions.ecmaVersion = options.ecmaVersion;
-                extra.ecmaVersion = options.ecmaVersion;
-                break;
-
-            default:
-                throw new Error("ecmaVersion must be 3, 5, 6, 7, or 8.");
-        }
-    }
+    acornOptions.ecmaVersion = extra.ecmaVersion = normalizeEcmaVersion(options.ecmaVersion);
 
     // apply parsing flags
     if (options.ecmaFeatures && typeof options.ecmaFeatures === "object") {
@@ -12255,7 +12272,7 @@ function parse(code, options) {
         translator,
         impliedStrict,
         acornOptions = {
-            ecmaVersion: 5,
+            ecmaVersion: DEFAULT_ECMA_VERSION,
             plugins: {
                 espree: true
             }
@@ -12296,21 +12313,7 @@ function parse(code, options) {
             commentAttachment.reset();
         }
 
-        if (typeof options.ecmaVersion === "number") {
-            switch (options.ecmaVersion) {
-                case 3:
-                case 5:
-                case 6:
-                case 7:
-                case 8:
-                    acornOptions.ecmaVersion = options.ecmaVersion;
-                    extra.ecmaVersion = options.ecmaVersion;
-                    break;
-
-                default:
-                    throw new Error("ecmaVersion must be 3, 5, 6, 7, or 8.");
-            }
-        }
+        acornOptions.ecmaVersion = extra.ecmaVersion = normalizeEcmaVersion(options.ecmaVersion);
 
         if (options.sourceType === "module") {
             extra.isModule = true;
@@ -12828,6 +12831,7 @@ module.exports={
         "strict": "off",
         "symbol-description": "off",
         "template-curly-spacing": "off",
+        "template-tag-spacing": "off",
         "unicode-bom": "off",
         "use-isnan": "error",
         "valid-jsdoc": "off",
@@ -25524,15 +25528,15 @@ function (match, p1) {
 }],
 
 // trailing wildcard
-[/(\\\/)?\\\*$/, function (match, p1) {
-  return p1 === '\\/'
-  // 'a/*' does not match 'a/'
-  // 'a/*' matches 'a/a'
-  // 'a/'
-  ? '\\/[^/]+(?=$|\\/$)'
-
-  // or it will match everything after
-  : '';
+[/(\^|\\\/)?\\\*$/, function (match, p1) {
+  return (p1
+  // '/*' does not match ''
+  // '/*' does not match everything
+  // 'abc/*' does not match 'abc/'
+  ? p1 + '[^/]+'
+  // 'a*' matches 'a'
+  // 'a*' matches 'aa'
+  : '[^/]*') + '(?=$|\\/$)';
 }], [
 // unescape
 /\\\\\\/g, function () {
@@ -45673,7 +45677,7 @@ try {
 },{}],161:[function(require,module,exports){
 module.exports={
   "name": "eslint",
-  "version": "3.14.0",
+  "version": "3.14.1",
   "author": "Nicholas C. Zakas <nicholas+npm@nczconsulting.com>",
   "description": "An AST-based pattern checker for JavaScript.",
   "bin": {
@@ -45713,7 +45717,7 @@ module.exports={
     "debug": "^2.1.1",
     "doctrine": "^1.2.2",
     "escope": "^3.6.0",
-    "espree": "^3.3.1",
+    "espree": "^3.4.0",
     "estraverse": "^4.2.0",
     "esutils": "^2.0.2",
     "file-entry-cache": "^2.0.0",
@@ -46420,6 +46424,8 @@ module.exports = {
                     case "/":
                     case "%":
                         return 13;
+                    case "**":
+                        return 15;
 
                     // no default
                 }
@@ -46428,10 +46434,10 @@ module.exports = {
 
             case "UnaryExpression":
             case "AwaitExpression":
-                return 14;
+                return 16;
 
             case "UpdateExpression":
-                return 15;
+                return 17;
 
             case "CallExpression":
 
@@ -46439,14 +46445,14 @@ module.exports = {
                 if (node.callee.type === "FunctionExpression") {
                     return -1;
                 }
-                return 16;
+                return 18;
 
             case "NewExpression":
-                return 17;
+                return 19;
 
             // no default
         }
-        return 18;
+        return 20;
     },
 
 
@@ -50517,13 +50523,12 @@ function getRuleOptionsSchema(id) {
                 minItems: 0,
                 maxItems: schema.length
             };
-        } else {
-            return {
-                type: "array",
-                minItems: 0,
-                maxItems: 0
-            };
         }
+        return {
+            type: "array",
+            minItems: 0,
+            maxItems: 0
+        };
     }
 
     // Given a full schema, leave it alone
@@ -51268,9 +51273,8 @@ function createStubRule(message) {
 
     if (message) {
         return createRuleModule;
-    } else {
-        throw new Error("No message passed to stub rule");
     }
+    throw new Error("No message passed to stub rule");
 }
 
 /**
@@ -51401,9 +51405,8 @@ module.exports = function () {
         try {
             if (typeof parser.parseForESLint === "function") {
                 return parser.parseForESLint(text, parserOptions);
-            } else {
-                return parser.parse(text, parserOptions);
             }
+            return parser.parse(text, parserOptions);
         } catch (ex) {
 
             // If the message includes a leading line number, strip it:
@@ -51436,9 +51439,8 @@ module.exports = function () {
             return ruleConfig;
         } else if (Array.isArray(ruleConfig)) {
             return ruleConfig[0];
-        } else {
-            return 0;
         }
+        return 0;
     }
 
     /**
@@ -51449,9 +51451,8 @@ module.exports = function () {
     function getRuleOptions(ruleConfig) {
         if (Array.isArray(ruleConfig)) {
             return ruleConfig.slice(1);
-        } else {
-            return [];
         }
+        return [];
     }
 
     // set unlimited listeners (see https://github.com/eslint/eslint/issues/524)
@@ -51672,9 +51673,8 @@ module.exports = function () {
 
             if (lineDiff === 0) {
                 return a.column - b.column;
-            } else {
-                return lineDiff;
             }
+            return lineDiff;
         });
 
         return messages;
@@ -51842,9 +51842,8 @@ module.exports = function () {
                 if (scope) {
                     if (scope.type === "function-expression-name") {
                         return scope.childScopes[0];
-                    } else {
-                        return scope;
                     }
+                    return scope;
                 }
             }
         }
@@ -51892,9 +51891,8 @@ module.exports = function () {
     api.getFilename = function () {
         if (typeof currentFilename === "string") {
             return currentFilename;
-        } else {
-            return "<input>";
         }
+        return "<input>";
     };
 
     /**
@@ -51962,7 +51960,7 @@ module.exports = function () {
     return api;
 }();
 
-},{"../conf/blank-script.json":1,"../conf/eslint.json":3,"../conf/replacements.json":4,"../package.json":161,"./code-path-analysis/code-path-analyzer":163,"./config/config-ops":170,"./config/config-validator":171,"./config/environments":172,"./rule-context":175,"./rules":176,"./timing":418,"./util/comment-event-generator":420,"./util/node-event-generator":422,"./util/source-code":425,"./util/traverser":426,"assert":5,"escope":20,"events":6,"levn":148}],174:[function(require,module,exports){
+},{"../conf/blank-script.json":1,"../conf/eslint.json":3,"../conf/replacements.json":4,"../package.json":161,"./code-path-analysis/code-path-analyzer":163,"./config/config-ops":170,"./config/config-validator":171,"./config/environments":172,"./rule-context":175,"./rules":176,"./timing":419,"./util/comment-event-generator":421,"./util/node-event-generator":423,"./util/source-code":426,"./util/traverser":427,"assert":5,"escope":20,"events":6,"levn":148}],174:[function(require,module,exports){
 "use strict";
 
 module.exports = function () {
@@ -52199,6 +52197,7 @@ module.exports = function () {
     rules["strict"] = require("./rules/strict");
     rules["symbol-description"] = require("./rules/symbol-description");
     rules["template-curly-spacing"] = require("./rules/template-curly-spacing");
+    rules["template-tag-spacing"] = require("./rules/template-tag-spacing");
     rules["unicode-bom"] = require("./rules/unicode-bom");
     rules["use-isnan"] = require("./rules/use-isnan");
     rules["valid-jsdoc"] = require("./rules/valid-jsdoc");
@@ -52212,7 +52211,7 @@ module.exports = function () {
     return rules;
 };
 
-},{"./rules/accessor-pairs":177,"./rules/array-bracket-spacing":178,"./rules/array-callback-return":179,"./rules/arrow-body-style":180,"./rules/arrow-parens":181,"./rules/arrow-spacing":182,"./rules/block-scoped-var":183,"./rules/block-spacing":184,"./rules/brace-style":185,"./rules/callback-return":186,"./rules/camelcase":187,"./rules/capitalized-comments":188,"./rules/class-methods-use-this":189,"./rules/comma-dangle":190,"./rules/comma-spacing":191,"./rules/comma-style":192,"./rules/complexity":193,"./rules/computed-property-spacing":194,"./rules/consistent-return":195,"./rules/consistent-this":196,"./rules/constructor-super":197,"./rules/curly":198,"./rules/default-case":199,"./rules/dot-location":200,"./rules/dot-notation":201,"./rules/eol-last":202,"./rules/eqeqeq":203,"./rules/func-call-spacing":204,"./rules/func-name-matching":205,"./rules/func-names":206,"./rules/func-style":207,"./rules/generator-star-spacing":208,"./rules/global-require":209,"./rules/guard-for-in":210,"./rules/handle-callback-err":211,"./rules/id-blacklist":212,"./rules/id-length":213,"./rules/id-match":214,"./rules/indent":215,"./rules/init-declarations":216,"./rules/jsx-quotes":217,"./rules/key-spacing":218,"./rules/keyword-spacing":219,"./rules/line-comment-position":220,"./rules/linebreak-style":221,"./rules/lines-around-comment":222,"./rules/lines-around-directive":223,"./rules/max-depth":224,"./rules/max-len":225,"./rules/max-lines":226,"./rules/max-nested-callbacks":227,"./rules/max-params":228,"./rules/max-statements":230,"./rules/max-statements-per-line":229,"./rules/multiline-ternary":231,"./rules/new-cap":232,"./rules/new-parens":233,"./rules/newline-after-var":234,"./rules/newline-before-return":235,"./rules/newline-per-chained-call":236,"./rules/no-alert":237,"./rules/no-array-constructor":238,"./rules/no-await-in-loop":239,"./rules/no-bitwise":240,"./rules/no-caller":241,"./rules/no-case-declarations":242,"./rules/no-catch-shadow":243,"./rules/no-class-assign":244,"./rules/no-cond-assign":245,"./rules/no-confusing-arrow":246,"./rules/no-console":247,"./rules/no-const-assign":248,"./rules/no-constant-condition":249,"./rules/no-continue":250,"./rules/no-control-regex":251,"./rules/no-debugger":252,"./rules/no-delete-var":253,"./rules/no-div-regex":254,"./rules/no-dupe-args":255,"./rules/no-dupe-class-members":256,"./rules/no-dupe-keys":257,"./rules/no-duplicate-case":258,"./rules/no-duplicate-imports":259,"./rules/no-else-return":260,"./rules/no-empty":264,"./rules/no-empty-character-class":261,"./rules/no-empty-function":262,"./rules/no-empty-pattern":263,"./rules/no-eq-null":265,"./rules/no-eval":266,"./rules/no-ex-assign":267,"./rules/no-extend-native":268,"./rules/no-extra-bind":269,"./rules/no-extra-boolean-cast":270,"./rules/no-extra-label":271,"./rules/no-extra-parens":272,"./rules/no-extra-semi":273,"./rules/no-fallthrough":274,"./rules/no-floating-decimal":275,"./rules/no-func-assign":276,"./rules/no-global-assign":277,"./rules/no-implicit-coercion":278,"./rules/no-implicit-globals":279,"./rules/no-implied-eval":280,"./rules/no-inline-comments":281,"./rules/no-inner-declarations":282,"./rules/no-invalid-regexp":283,"./rules/no-invalid-this":284,"./rules/no-irregular-whitespace":285,"./rules/no-iterator":286,"./rules/no-label-var":287,"./rules/no-labels":288,"./rules/no-lone-blocks":289,"./rules/no-lonely-if":290,"./rules/no-loop-func":291,"./rules/no-magic-numbers":292,"./rules/no-mixed-operators":293,"./rules/no-mixed-requires":294,"./rules/no-mixed-spaces-and-tabs":295,"./rules/no-multi-assign":296,"./rules/no-multi-spaces":297,"./rules/no-multi-str":298,"./rules/no-multiple-empty-lines":299,"./rules/no-native-reassign":300,"./rules/no-negated-condition":301,"./rules/no-negated-in-lhs":302,"./rules/no-nested-ternary":303,"./rules/no-new":309,"./rules/no-new-func":304,"./rules/no-new-object":305,"./rules/no-new-require":306,"./rules/no-new-symbol":307,"./rules/no-new-wrappers":308,"./rules/no-obj-calls":310,"./rules/no-octal":312,"./rules/no-octal-escape":311,"./rules/no-param-reassign":313,"./rules/no-path-concat":314,"./rules/no-plusplus":315,"./rules/no-process-env":316,"./rules/no-process-exit":317,"./rules/no-proto":318,"./rules/no-prototype-builtins":319,"./rules/no-redeclare":320,"./rules/no-regex-spaces":321,"./rules/no-restricted-globals":322,"./rules/no-restricted-imports":323,"./rules/no-restricted-modules":324,"./rules/no-restricted-properties":325,"./rules/no-restricted-syntax":326,"./rules/no-return-assign":327,"./rules/no-return-await":328,"./rules/no-script-url":329,"./rules/no-self-assign":330,"./rules/no-self-compare":331,"./rules/no-sequences":332,"./rules/no-shadow":334,"./rules/no-shadow-restricted-names":333,"./rules/no-spaced-func":335,"./rules/no-sparse-arrays":336,"./rules/no-sync":337,"./rules/no-tabs":338,"./rules/no-template-curly-in-string":339,"./rules/no-ternary":340,"./rules/no-this-before-super":341,"./rules/no-throw-literal":342,"./rules/no-trailing-spaces":343,"./rules/no-undef":345,"./rules/no-undef-init":344,"./rules/no-undefined":346,"./rules/no-underscore-dangle":347,"./rules/no-unexpected-multiline":348,"./rules/no-unmodified-loop-condition":349,"./rules/no-unneeded-ternary":350,"./rules/no-unreachable":351,"./rules/no-unsafe-finally":352,"./rules/no-unsafe-negation":353,"./rules/no-unused-expressions":354,"./rules/no-unused-labels":355,"./rules/no-unused-vars":356,"./rules/no-use-before-define":357,"./rules/no-useless-call":358,"./rules/no-useless-computed-key":359,"./rules/no-useless-concat":360,"./rules/no-useless-constructor":361,"./rules/no-useless-escape":362,"./rules/no-useless-rename":363,"./rules/no-useless-return":364,"./rules/no-var":365,"./rules/no-void":366,"./rules/no-warning-comments":367,"./rules/no-whitespace-before-property":368,"./rules/no-with":369,"./rules/object-curly-newline":370,"./rules/object-curly-spacing":371,"./rules/object-property-newline":372,"./rules/object-shorthand":373,"./rules/one-var":375,"./rules/one-var-declaration-per-line":374,"./rules/operator-assignment":376,"./rules/operator-linebreak":377,"./rules/padded-blocks":378,"./rules/prefer-arrow-callback":379,"./rules/prefer-const":380,"./rules/prefer-destructuring":381,"./rules/prefer-numeric-literals":382,"./rules/prefer-promise-reject-errors":383,"./rules/prefer-reflect":384,"./rules/prefer-rest-params":385,"./rules/prefer-spread":386,"./rules/prefer-template":387,"./rules/quote-props":388,"./rules/quotes":389,"./rules/radix":390,"./rules/require-await":391,"./rules/require-jsdoc":392,"./rules/require-yield":393,"./rules/rest-spread-spacing":394,"./rules/semi":396,"./rules/semi-spacing":395,"./rules/sort-imports":397,"./rules/sort-keys":398,"./rules/sort-vars":399,"./rules/space-before-blocks":400,"./rules/space-before-function-paren":401,"./rules/space-in-parens":402,"./rules/space-infix-ops":403,"./rules/space-unary-ops":404,"./rules/spaced-comment":405,"./rules/strict":406,"./rules/symbol-description":407,"./rules/template-curly-spacing":408,"./rules/unicode-bom":409,"./rules/use-isnan":410,"./rules/valid-jsdoc":411,"./rules/valid-typeof":412,"./rules/vars-on-top":413,"./rules/wrap-iife":414,"./rules/wrap-regex":415,"./rules/yield-star-spacing":416,"./rules/yoda":417}],175:[function(require,module,exports){
+},{"./rules/accessor-pairs":177,"./rules/array-bracket-spacing":178,"./rules/array-callback-return":179,"./rules/arrow-body-style":180,"./rules/arrow-parens":181,"./rules/arrow-spacing":182,"./rules/block-scoped-var":183,"./rules/block-spacing":184,"./rules/brace-style":185,"./rules/callback-return":186,"./rules/camelcase":187,"./rules/capitalized-comments":188,"./rules/class-methods-use-this":189,"./rules/comma-dangle":190,"./rules/comma-spacing":191,"./rules/comma-style":192,"./rules/complexity":193,"./rules/computed-property-spacing":194,"./rules/consistent-return":195,"./rules/consistent-this":196,"./rules/constructor-super":197,"./rules/curly":198,"./rules/default-case":199,"./rules/dot-location":200,"./rules/dot-notation":201,"./rules/eol-last":202,"./rules/eqeqeq":203,"./rules/func-call-spacing":204,"./rules/func-name-matching":205,"./rules/func-names":206,"./rules/func-style":207,"./rules/generator-star-spacing":208,"./rules/global-require":209,"./rules/guard-for-in":210,"./rules/handle-callback-err":211,"./rules/id-blacklist":212,"./rules/id-length":213,"./rules/id-match":214,"./rules/indent":215,"./rules/init-declarations":216,"./rules/jsx-quotes":217,"./rules/key-spacing":218,"./rules/keyword-spacing":219,"./rules/line-comment-position":220,"./rules/linebreak-style":221,"./rules/lines-around-comment":222,"./rules/lines-around-directive":223,"./rules/max-depth":224,"./rules/max-len":225,"./rules/max-lines":226,"./rules/max-nested-callbacks":227,"./rules/max-params":228,"./rules/max-statements":230,"./rules/max-statements-per-line":229,"./rules/multiline-ternary":231,"./rules/new-cap":232,"./rules/new-parens":233,"./rules/newline-after-var":234,"./rules/newline-before-return":235,"./rules/newline-per-chained-call":236,"./rules/no-alert":237,"./rules/no-array-constructor":238,"./rules/no-await-in-loop":239,"./rules/no-bitwise":240,"./rules/no-caller":241,"./rules/no-case-declarations":242,"./rules/no-catch-shadow":243,"./rules/no-class-assign":244,"./rules/no-cond-assign":245,"./rules/no-confusing-arrow":246,"./rules/no-console":247,"./rules/no-const-assign":248,"./rules/no-constant-condition":249,"./rules/no-continue":250,"./rules/no-control-regex":251,"./rules/no-debugger":252,"./rules/no-delete-var":253,"./rules/no-div-regex":254,"./rules/no-dupe-args":255,"./rules/no-dupe-class-members":256,"./rules/no-dupe-keys":257,"./rules/no-duplicate-case":258,"./rules/no-duplicate-imports":259,"./rules/no-else-return":260,"./rules/no-empty":264,"./rules/no-empty-character-class":261,"./rules/no-empty-function":262,"./rules/no-empty-pattern":263,"./rules/no-eq-null":265,"./rules/no-eval":266,"./rules/no-ex-assign":267,"./rules/no-extend-native":268,"./rules/no-extra-bind":269,"./rules/no-extra-boolean-cast":270,"./rules/no-extra-label":271,"./rules/no-extra-parens":272,"./rules/no-extra-semi":273,"./rules/no-fallthrough":274,"./rules/no-floating-decimal":275,"./rules/no-func-assign":276,"./rules/no-global-assign":277,"./rules/no-implicit-coercion":278,"./rules/no-implicit-globals":279,"./rules/no-implied-eval":280,"./rules/no-inline-comments":281,"./rules/no-inner-declarations":282,"./rules/no-invalid-regexp":283,"./rules/no-invalid-this":284,"./rules/no-irregular-whitespace":285,"./rules/no-iterator":286,"./rules/no-label-var":287,"./rules/no-labels":288,"./rules/no-lone-blocks":289,"./rules/no-lonely-if":290,"./rules/no-loop-func":291,"./rules/no-magic-numbers":292,"./rules/no-mixed-operators":293,"./rules/no-mixed-requires":294,"./rules/no-mixed-spaces-and-tabs":295,"./rules/no-multi-assign":296,"./rules/no-multi-spaces":297,"./rules/no-multi-str":298,"./rules/no-multiple-empty-lines":299,"./rules/no-native-reassign":300,"./rules/no-negated-condition":301,"./rules/no-negated-in-lhs":302,"./rules/no-nested-ternary":303,"./rules/no-new":309,"./rules/no-new-func":304,"./rules/no-new-object":305,"./rules/no-new-require":306,"./rules/no-new-symbol":307,"./rules/no-new-wrappers":308,"./rules/no-obj-calls":310,"./rules/no-octal":312,"./rules/no-octal-escape":311,"./rules/no-param-reassign":313,"./rules/no-path-concat":314,"./rules/no-plusplus":315,"./rules/no-process-env":316,"./rules/no-process-exit":317,"./rules/no-proto":318,"./rules/no-prototype-builtins":319,"./rules/no-redeclare":320,"./rules/no-regex-spaces":321,"./rules/no-restricted-globals":322,"./rules/no-restricted-imports":323,"./rules/no-restricted-modules":324,"./rules/no-restricted-properties":325,"./rules/no-restricted-syntax":326,"./rules/no-return-assign":327,"./rules/no-return-await":328,"./rules/no-script-url":329,"./rules/no-self-assign":330,"./rules/no-self-compare":331,"./rules/no-sequences":332,"./rules/no-shadow":334,"./rules/no-shadow-restricted-names":333,"./rules/no-spaced-func":335,"./rules/no-sparse-arrays":336,"./rules/no-sync":337,"./rules/no-tabs":338,"./rules/no-template-curly-in-string":339,"./rules/no-ternary":340,"./rules/no-this-before-super":341,"./rules/no-throw-literal":342,"./rules/no-trailing-spaces":343,"./rules/no-undef":345,"./rules/no-undef-init":344,"./rules/no-undefined":346,"./rules/no-underscore-dangle":347,"./rules/no-unexpected-multiline":348,"./rules/no-unmodified-loop-condition":349,"./rules/no-unneeded-ternary":350,"./rules/no-unreachable":351,"./rules/no-unsafe-finally":352,"./rules/no-unsafe-negation":353,"./rules/no-unused-expressions":354,"./rules/no-unused-labels":355,"./rules/no-unused-vars":356,"./rules/no-use-before-define":357,"./rules/no-useless-call":358,"./rules/no-useless-computed-key":359,"./rules/no-useless-concat":360,"./rules/no-useless-constructor":361,"./rules/no-useless-escape":362,"./rules/no-useless-rename":363,"./rules/no-useless-return":364,"./rules/no-var":365,"./rules/no-void":366,"./rules/no-warning-comments":367,"./rules/no-whitespace-before-property":368,"./rules/no-with":369,"./rules/object-curly-newline":370,"./rules/object-curly-spacing":371,"./rules/object-property-newline":372,"./rules/object-shorthand":373,"./rules/one-var":375,"./rules/one-var-declaration-per-line":374,"./rules/operator-assignment":376,"./rules/operator-linebreak":377,"./rules/padded-blocks":378,"./rules/prefer-arrow-callback":379,"./rules/prefer-const":380,"./rules/prefer-destructuring":381,"./rules/prefer-numeric-literals":382,"./rules/prefer-promise-reject-errors":383,"./rules/prefer-reflect":384,"./rules/prefer-rest-params":385,"./rules/prefer-spread":386,"./rules/prefer-template":387,"./rules/quote-props":388,"./rules/quotes":389,"./rules/radix":390,"./rules/require-await":391,"./rules/require-jsdoc":392,"./rules/require-yield":393,"./rules/rest-spread-spacing":394,"./rules/semi":396,"./rules/semi-spacing":395,"./rules/sort-imports":397,"./rules/sort-keys":398,"./rules/sort-vars":399,"./rules/space-before-blocks":400,"./rules/space-before-function-paren":401,"./rules/space-in-parens":402,"./rules/space-infix-ops":403,"./rules/space-unary-ops":404,"./rules/spaced-comment":405,"./rules/strict":406,"./rules/symbol-description":407,"./rules/template-curly-spacing":408,"./rules/template-tag-spacing":409,"./rules/unicode-bom":410,"./rules/use-isnan":411,"./rules/valid-jsdoc":412,"./rules/valid-typeof":413,"./rules/vars-on-top":414,"./rules/wrap-iife":415,"./rules/wrap-regex":416,"./rules/yield-star-spacing":417,"./rules/yoda":418}],175:[function(require,module,exports){
 /**
  * @fileoverview RuleContext utility for rules
  * @author Nicholas C. Zakas
@@ -52357,7 +52356,7 @@ PASSTHROUGHS.forEach(function (name) {
 
 module.exports = RuleContext;
 
-},{"./util/rule-fixer":424}],176:[function(require,module,exports){
+},{"./util/rule-fixer":425}],176:[function(require,module,exports){
 /**
  * @fileoverview Defines a storage for rules.
  * @author Nicholas C. Zakas
@@ -52430,9 +52429,8 @@ function importPlugin(plugin, pluginName) {
 function getHandler(ruleId) {
     if (typeof rules[ruleId] === "string") {
         return require(rules[ruleId]);
-    } else {
-        return rules[ruleId];
     }
+    return rules[ruleId];
 }
 
 /**
@@ -54498,7 +54496,7 @@ module.exports = {
     }
 };
 
-},{"../util/patterns/letters":423}],189:[function(require,module,exports){
+},{"../util/patterns/letters":424}],189:[function(require,module,exports){
 /**
  * @fileoverview Rule to enforce that all class methods use 'this'.
  * @author Patrick Williams
@@ -55013,24 +55011,22 @@ module.exports = {
                     if (options[dir]) {
                         if (dir === "before") {
                             return fixer.insertTextBefore(node, " ");
-                        } else {
-                            return fixer.insertTextAfter(node, " ");
                         }
-                    } else {
-                        var start = void 0,
-                            end = void 0;
-                        var newText = "";
-
-                        if (dir === "before") {
-                            start = otherNode.range[1];
-                            end = node.range[0];
-                        } else {
-                            start = node.range[1];
-                            end = otherNode.range[0];
-                        }
-
-                        return fixer.replaceTextRange([start, end], newText);
+                        return fixer.insertTextAfter(node, " ");
                     }
+                    var start = void 0,
+                        end = void 0;
+                    var newText = "";
+
+                    if (dir === "before") {
+                        start = otherNode.range[1];
+                        end = node.range[0];
+                    } else {
+                        start = node.range[1];
+                        end = otherNode.range[0];
+                    }
+
+                    return fixer.replaceTextRange([start, end], newText);
                 },
 
                 message: options[dir] ? "A space is required {{dir}} ','." : "There should be no space {{dir}} ','.",
@@ -57110,7 +57106,7 @@ module.exports = {
     }
 };
 
-},{"../util/keywords":421}],202:[function(require,module,exports){
+},{"../util/keywords":422}],202:[function(require,module,exports){
 /**
  * @fileoverview Require or disallow newline at the end of files
  * @author Nodeca Team <https://github.com/nodeca>
@@ -57671,7 +57667,7 @@ module.exports = {
                     return;
                 }
 
-                var isProp = node.left.type === "MemberExpression" ? true : false;
+                var isProp = node.left.type === "MemberExpression";
                 var name = isProp ? astUtils.getStaticPropertyName(node.left) : node.left.name;
 
                 if (node.right.id && isIdentifier(name) && shouldWarn(name, node.right.id.name)) {
@@ -58037,9 +58033,8 @@ function findReference(scope, node) {
     /* istanbul ignore else: correctly returns null */
     if (references.length === 1) {
         return references[0];
-    } else {
-        return null;
     }
+    return null;
 }
 
 /**
@@ -59197,9 +59192,8 @@ module.exports = {
         function isFirstArrayElementOnSameLine(node) {
             if (node.type === "ArrayExpression" && node.elements[0]) {
                 return node.elements[0].loc.start.line === node.loc.start.line && node.elements[0].type === "ObjectExpression";
-            } else {
-                return false;
             }
+            return false;
         }
 
         /**
@@ -59436,20 +59430,19 @@ module.exports = {
 
             if (caseIndentStore[switchNode.loc.start.line]) {
                 return caseIndentStore[switchNode.loc.start.line];
-            } else {
-                if (typeof switchIndent === "undefined") {
-                    switchIndent = getNodeIndent(switchNode).goodChar;
-                }
-
-                if (switchNode.cases.length > 0 && options.SwitchCase === 0) {
-                    caseIndent = switchIndent;
-                } else {
-                    caseIndent = switchIndent + indentSize * options.SwitchCase;
-                }
-
-                caseIndentStore[switchNode.loc.start.line] = caseIndent;
-                return caseIndent;
             }
+            if (typeof switchIndent === "undefined") {
+                switchIndent = getNodeIndent(switchNode).goodChar;
+            }
+
+            if (switchNode.cases.length > 0 && options.SwitchCase === 0) {
+                caseIndent = switchIndent;
+            } else {
+                caseIndent = switchIndent + indentSize * options.SwitchCase;
+            }
+
+            caseIndentStore[switchNode.loc.start.line] = caseIndent;
+            return caseIndent;
         }
 
         /**
@@ -60444,15 +60437,14 @@ module.exports = {
                     }
                 }
             };
-        } else {
-            // Obey beforeColon and afterColon in each property as configured
-
-            return {
-                Property: function Property(node) {
-                    verifySpacing(node, isSingleLine(node.parent) ? singleLineOptions : multiLineOptions);
-                }
-            };
         }
+
+        // Obey beforeColon and afterColon in each property as configured
+        return {
+            Property: function Property(node) {
+                verifySpacing(node, isSingleLine(node.parent) ? singleLineOptions : multiLineOptions);
+            }
+        };
     }
 };
 
@@ -61005,7 +60997,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":162,"../util/keywords":421}],220:[function(require,module,exports){
+},{"../ast-utils":162,"../util/keywords":422}],220:[function(require,module,exports){
 /**
  * @fileoverview Rule to enforce the position of line comments
  * @author Alberto Rodríguez
@@ -63185,9 +63177,8 @@ module.exports = {
                 return "non-alpha";
             } else if (firstChar === firstCharLower) {
                 return "lower";
-            } else {
-                return "upper";
             }
+            return "upper";
         }
 
         /**
@@ -63650,9 +63641,8 @@ module.exports = {
                 return isPrecededByTokens(node, ["do"]);
             } else if (parentType === "SwitchCase") {
                 return isPrecededByTokens(node, [":"]);
-            } else {
-                return isPrecededByTokens(node, [")"]);
             }
+            return isPrecededByTokens(node, [")"]);
         }
 
         /**
@@ -67316,6 +67306,19 @@ module.exports = {
         }
 
         /**
+         * Determines if a constructor function is newed-up with parens
+         * @param {ASTNode} newExpression - The NewExpression node to be checked.
+         * @returns {boolean} True if the constructor is called with parens.
+         * @private
+         */
+        function isNewExpressionWithParens(newExpression) {
+            var lastToken = sourceCode.getLastToken(newExpression);
+            var penultimateToken = sourceCode.getTokenBefore(lastToken);
+
+            return newExpression.arguments.length > 0 || penultimateToken.value === "(" && lastToken.value === ")";
+        }
+
+        /**
          * Determines if a node is or contains an assignment expression
          * @param {ASTNode} node - The node to be checked.
          * @returns {boolean} True if the node is or contains an assignment expression.
@@ -67348,9 +67351,8 @@ module.exports = {
                 return node.argument && containsAssignment(node.argument);
             } else if (node.type === "ArrowFunctionExpression" && node.body.type !== "BlockStatement") {
                 return containsAssignment(node.body);
-            } else {
-                return containsAssignment(node);
             }
+            return containsAssignment(node);
         }
 
         /**
@@ -67494,6 +67496,10 @@ module.exports = {
          * @private
          */
         function dryUnaryUpdate(node) {
+            if (node.type === "UnaryExpression" && node.argument.type === "BinaryExpression" && node.argument.operator === "**") {
+                return;
+            }
+
             if (hasExcessParens(node.argument) && precedence(node.argument) >= precedence(node)) {
                 report(node.argument);
             }
@@ -67506,7 +67512,7 @@ module.exports = {
          * @private
          */
         function dryCallNew(node) {
-            if (hasExcessParens(node.callee) && precedence(node.callee) >= precedence(node) && !(node.type === "CallExpression" && node.callee.type === "FunctionExpression" &&
+            if (hasExcessParens(node.callee) && precedence(node.callee) >= precedence(node) && !(node.type === "CallExpression" && (node.callee.type === "FunctionExpression" || node.callee.type === "NewExpression" && !isNewExpressionWithParens(node.callee)) &&
 
             // One set of parentheses are allowed for a function expression
             !hasDoubleExcessParens(node.callee))) {
@@ -67533,13 +67539,16 @@ module.exports = {
          */
         function dryBinaryLogical(node) {
             var prec = precedence(node);
-            var shouldSkipLeft = NESTED_BINARY && (node.left.type === "BinaryExpression" || node.left.type === "LogicalExpression");
+            var leftPrecedence = precedence(node.left);
+            var rightPrecedence = precedence(node.right);
+            var isExponentiation = node.operator === "**";
+            var shouldSkipLeft = NESTED_BINARY && (node.left.type === "BinaryExpression" || node.left.type === "LogicalExpression") || node.left.type === "UnaryExpression" && isExponentiation;
             var shouldSkipRight = NESTED_BINARY && (node.right.type === "BinaryExpression" || node.right.type === "LogicalExpression");
 
-            if (!shouldSkipLeft && hasExcessParens(node.left) && precedence(node.left) >= prec) {
+            if (!shouldSkipLeft && hasExcessParens(node.left) && (leftPrecedence > prec || leftPrecedence === prec && !isExponentiation)) {
                 report(node.left);
             }
-            if (!shouldSkipRight && hasExcessParens(node.right) && precedence(node.right) > prec) {
+            if (!shouldSkipRight && hasExcessParens(node.right) && (rightPrecedence > prec || rightPrecedence === prec && isExponentiation)) {
                 report(node.right);
             }
         }
@@ -70346,11 +70355,10 @@ module.exports = {
 
                 // "var utils = require('./utils');"
                 return REQ_FILE;
-            } else {
-
-                // "var async = require('async');"
-                return REQ_MODULE;
             }
+
+            // "var async = require('async');"
+            return REQ_MODULE;
         }
 
         /**
@@ -71998,14 +72006,13 @@ module.exports = {
                 BlockStatement: checkForBlock,
                 SwitchStatement: checkForBlock
             };
-        } else {
-            return {
-                Program: checkForGlobal,
-                FunctionDeclaration: checkForBlock,
-                FunctionExpression: checkForBlock,
-                ArrowFunctionExpression: checkForBlock
-            };
         }
+        return {
+            Program: checkForGlobal,
+            FunctionDeclaration: checkForBlock,
+            FunctionExpression: checkForBlock,
+            ArrowFunctionExpression: checkForBlock
+        };
     }
 };
 
@@ -74899,7 +74906,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":162,"../util/traverser":426}],350:[function(require,module,exports){
+},{"../ast-utils":162,"../util/traverser":427}],350:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag no-unneeded-ternary
  * @author Gyandeep Singh
@@ -75679,6 +75686,8 @@ module.exports = {
 // Requirements
 //------------------------------------------------------------------------------
 
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
 var lodash = require("lodash");
 var astUtils = require("../ast-utils");
 
@@ -75709,6 +75718,9 @@ module.exports = {
                     args: {
                         enum: ["all", "after-used", "none"]
                     },
+                    ignoreRestSiblings: {
+                        type: "boolean"
+                    },
                     argsIgnorePattern: {
                         type: "string"
                     },
@@ -75731,6 +75743,7 @@ module.exports = {
         var config = {
             vars: "all",
             args: "after-used",
+            ignoreRestSiblings: false,
             caughtErrors: "none"
         };
 
@@ -75742,6 +75755,7 @@ module.exports = {
             } else {
                 config.vars = firstOption.vars || config.vars;
                 config.args = firstOption.args || config.args;
+                config.ignoreRestSiblings = firstOption.ignoreRestSiblings || config.ignoreRestSiblings;
                 config.caughtErrors = firstOption.caughtErrors || config.caughtErrors;
 
                 if (firstOption.varsIgnorePattern) {
@@ -75785,9 +75799,36 @@ module.exports = {
                 }
 
                 return node.parent.type.indexOf("Export") === 0;
-            } else {
-                return false;
             }
+            return false;
+        }
+
+        /**
+         * Determines if a variable has a sibling rest property
+         * @param {Variable} variable - EScope variable object.
+         * @returns {boolean} True if the variable is exported, false if not.
+         * @private
+         */
+        function hasRestSpreadSibling(variable) {
+            if (config.ignoreRestSiblings) {
+                var _ret = function () {
+                    var restProperties = new Set(["ExperimentalRestProperty", "RestProperty"]);
+
+                    return {
+                        v: variable.defs.filter(function (def) {
+                            return def.name.type === "Identifier";
+                        }).some(function (def) {
+                            return def.node.id && def.node.id.type === "ObjectPattern" && def.node.id.properties.length && restProperties.has(def.node.id.properties[def.node.id.properties.length - 1].type) && // last property is a rest property
+                            !restProperties.has(def.name.parent.type) // variable is sibling of the rest property
+                            ;
+                        })
+                    };
+                }();
+
+                if ((typeof _ret === "undefined" ? "undefined" : _typeof(_ret)) === "object") return _ret.v;
+            }
+
+            return false;
         }
 
         /**
@@ -76138,7 +76179,7 @@ module.exports = {
                         }
                     }
 
-                    if (!isUsedVariable(variable) && !isExported(variable)) {
+                    if (!isUsedVariable(variable) && !isExported(variable) && !hasRestSpreadSibling(variable)) {
                         unusedVars.push(variable);
                     }
                 }
@@ -76258,22 +76299,17 @@ var FOR_IN_OF_TYPE = /^For(?:In|Of)Statement$/;
 function parseOptions(options) {
     var functions = true;
     var classes = true;
+    var variables = true;
 
     if (typeof options === "string") {
         functions = options !== "nofunc";
     } else if ((typeof options === "undefined" ? "undefined" : _typeof(options)) === "object" && options !== null) {
         functions = options.functions !== false;
         classes = options.classes !== false;
+        variables = options.variables !== false;
     }
 
-    return { functions: functions, classes: classes };
-}
-
-/**
- * @returns {boolean} `false`.
- */
-function alwaysFalse() {
-    return false;
+    return { functions: functions, classes: classes, variables: variables };
 }
 
 /**
@@ -76298,14 +76334,13 @@ function isOuterClass(variable, reference) {
 }
 
 /**
- * Checks whether or not a given variable is a function declaration or a class declaration in an upper function scope.
- *
- * @param {escope.Variable} variable - A variable to check.
- * @param {escope.Reference} reference - A reference to check.
- * @returns {boolean} `true` if the variable is a function declaration or a class declaration.
- */
-function isFunctionOrOuterClass(variable, reference) {
-    return isFunction(variable, reference) || isOuterClass(variable, reference);
+* Checks whether or not a given variable is a variable declaration in an upper function scope.
+* @param {escope.Variable} variable - A variable to check.
+* @param {escope.Reference} reference - A reference to check.
+* @returns {boolean} `true` if the variable is a variable declaration.
+*/
+function isOuterVariable(variable, reference) {
+    return variable.defs[0].type === "Variable" && variable.scope.variableScope !== reference.from.variableScope;
 }
 
 /**
@@ -76384,7 +76419,8 @@ module.exports = {
                 type: "object",
                 properties: {
                     functions: { type: "boolean" },
-                    classes: { type: "boolean" }
+                    classes: { type: "boolean" },
+                    variables: { type: "boolean" }
                 },
                 additionalProperties: false
             }]
@@ -76394,17 +76430,23 @@ module.exports = {
     create: function create(context) {
         var options = parseOptions(context.options[0]);
 
-        // Defines a function which checks whether or not a reference is allowed according to the option.
-        var isAllowed = void 0;
-
-        if (options.functions && options.classes) {
-            isAllowed = alwaysFalse;
-        } else if (options.functions) {
-            isAllowed = isOuterClass;
-        } else if (options.classes) {
-            isAllowed = isFunction;
-        } else {
-            isAllowed = isFunctionOrOuterClass;
+        /**
+         * Determines whether a given use-before-define case should be reportedaccording to the options.
+         * @param {escope.Variable} variable The variable that gets used before being defined
+         * @param {escope.Reference} reference The reference to the variable
+         * @returns {boolean} `true` if the usage should be reported
+         */
+        function isForbidden(variable, reference) {
+            if (isFunction(variable)) {
+                return options.functions;
+            }
+            if (isOuterClass(variable, reference)) {
+                return options.classes;
+            }
+            if (isOuterVariable(variable, reference)) {
+                return options.variables;
+            }
+            return true;
         }
 
         /**
@@ -76423,7 +76465,7 @@ module.exports = {
                 // - referring to a global environment variable (there're no identifiers).
                 // - located preceded by the variable (except in initializers).
                 // - allowed by options.
-                if (reference.init || !variable || variable.identifiers.length === 0 || variable.identifiers[0].range[1] < reference.identifier.range[1] && !isInInitializer(variable, reference) || isAllowed(variable, reference)) {
+                if (reference.init || !variable || variable.identifiers.length === 0 || variable.identifiers[0].range[1] < reference.identifier.range[1] && !isInInitializer(variable, reference) || !isForbidden(variable, reference)) {
                     return;
                 }
 
@@ -77921,7 +77963,7 @@ module.exports = {
                 }
             }
 
-            if (!isLoopAssignee(node) && node.parent.type !== "BlockStatement" && node.parent.type !== "Program" && node.parent.type !== "SwitchCase") {
+            if (!isLoopAssignee(node) && !(node.parent.type === "ForStatement" && node.parent.init === node) && node.parent.type !== "BlockStatement" && node.parent.type !== "Program" && node.parent.type !== "SwitchCase") {
 
                 // If the declaration is not in a block, e.g. `if (foo) var bar = 1;`, then it can't be fixed.
                 return false;
@@ -79086,17 +79128,16 @@ module.exports = {
                 var tokenBeforeParams = node.value.generator ? sourceCode.getTokenAfter(functionToken) : functionToken;
 
                 return fixer.replaceTextRange([firstKeyToken.range[0], tokenBeforeParams.range[1]], keyPrefix + keyText);
-            } else {
-                var arrowToken = sourceCode.getTokens(node.value).find(function (token) {
-                    return token.value === "=>";
-                });
-                var tokenBeforeArrow = sourceCode.getTokenBefore(arrowToken);
-                var hasParensAroundParameters = tokenBeforeArrow.type === "Punctuator" && tokenBeforeArrow.value === ")";
-                var oldParamText = sourceCode.text.slice(sourceCode.getFirstToken(node.value, node.value.async ? 1 : 0).range[0], tokenBeforeArrow.range[1]);
-                var newParamText = hasParensAroundParameters ? oldParamText : "(" + oldParamText + ")";
-
-                return fixer.replaceTextRange([firstKeyToken.range[0], arrowToken.range[1]], keyPrefix + keyText + newParamText);
             }
+            var arrowToken = sourceCode.getTokens(node.value).find(function (token) {
+                return token.value === "=>";
+            });
+            var tokenBeforeArrow = sourceCode.getTokenBefore(arrowToken);
+            var hasParensAroundParameters = tokenBeforeArrow.type === "Punctuator" && tokenBeforeArrow.value === ")";
+            var oldParamText = sourceCode.text.slice(sourceCode.getFirstToken(node.value, node.value.async ? 1 : 0).range[0], tokenBeforeArrow.range[1]);
+            var newParamText = hasParensAroundParameters ? oldParamText : "(" + oldParamText + ")";
+
+            return fixer.replaceTextRange([firstKeyToken.range[0], arrowToken.range[1]], keyPrefix + keyText + newParamText);
         }
 
         /**
@@ -79786,7 +79827,7 @@ function isCommutativeOperatorWithShorthand(operator) {
  *     a shorthand form.
  */
 function isNonCommutativeOperatorWithShorthand(operator) {
-    return ["+", "-", "/", "%", "<<", ">>", ">>>"].indexOf(operator) >= 0;
+    return ["+", "-", "/", "%", "<<", ">>", ">>>", "**"].indexOf(operator) >= 0;
 }
 
 //------------------------------------------------------------------------------
@@ -82265,7 +82306,7 @@ module.exports = {
     }
 };
 
-},{"../util/keywords":421,"espree":"espree"}],389:[function(require,module,exports){
+},{"../util/keywords":422,"espree":"espree"}],389:[function(require,module,exports){
 /**
  * @fileoverview A rule to choose between single and double quote marks
  * @author Matt DuVall <http://www.mattduvall.com/>, Brandon Payton
@@ -83595,9 +83636,8 @@ module.exports = {
                 return "all";
             } else if (node.specifiers.length === 1) {
                 return "single";
-            } else {
-                return "multiple";
             }
+            return "multiple";
         }
 
         /**
@@ -83617,9 +83657,8 @@ module.exports = {
         function getFirstLocalMemberName(node) {
             if (node.specifiers[0]) {
                 return node.specifiers[0].local.name;
-            } else {
-                return null;
             }
+            return null;
         }
 
         return {
@@ -83924,9 +83963,8 @@ module.exports = {
                     if (currenVariableName < lastVariableName) {
                         context.report({ node: decl, message: "Variables within the same declaration block should be sorted alphabetically." });
                         return memo;
-                    } else {
-                        return decl;
                     }
+                    return decl;
                 }, node.declarations[0]);
             }
         };
@@ -84367,9 +84405,8 @@ module.exports = {
                     return false;
                 }
                 return !isOpenerException(right);
-            } else {
-                return isOpenerException(right);
             }
+            return isOpenerException(right);
         }
 
         /**
@@ -84389,9 +84426,8 @@ module.exports = {
 
             if (ALWAYS) {
                 return !isCloserException(left);
-            } else {
-                return isCloserException(left);
             }
+            return isCloserException(left);
         }
 
         /**
@@ -84415,9 +84451,8 @@ module.exports = {
 
             if (ALWAYS) {
                 return isOpenerException(right);
-            } else {
-                return !isOpenerException(right);
             }
+            return !isOpenerException(right);
         }
 
         /**
@@ -84441,9 +84476,8 @@ module.exports = {
 
             if (ALWAYS) {
                 return isCloserException(left);
-            } else {
-                return !isCloserException(left);
             }
+            return !isCloserException(left);
         }
 
         //--------------------------------------------------------------------------
@@ -85254,10 +85288,9 @@ module.exports = {
                             end += match[0].length;
                         }
                         return fixer.insertTextAfterRange([start, end], " ");
-                    } else {
-                        end += match[0].length;
-                        return fixer.replaceTextRange([start, end], commentIdentifier + (match[1] ? match[1] : ""));
                     }
+                    end += match[0].length;
+                    return fixer.replaceTextRange([start, end], commentIdentifier + (match[1] ? match[1] : ""));
                 },
 
                 message: message,
@@ -85278,12 +85311,11 @@ module.exports = {
                 fix: function fix(fixer) {
                     if (requireSpace) {
                         return fixer.insertTextAfterRange([node.start, node.end - 2], " ");
-                    } else {
-                        var end = node.end - 2,
-                            start = end - match[0].length;
-
-                        return fixer.replaceTextRange([start, end], "");
                     }
+                    var end = node.end - 2,
+                        start = end - match[0].length;
+
+                    return fixer.replaceTextRange([start, end], "");
                 },
 
                 message: message
@@ -85794,6 +85826,84 @@ module.exports = {
 
 },{"../ast-utils":162}],409:[function(require,module,exports){
 /**
+ * @fileoverview Rule to check spacing between template tags and their literals
+ * @author Jonathan Wilsson
+ */
+
+"use strict";
+
+//------------------------------------------------------------------------------
+// Rule Definition
+//------------------------------------------------------------------------------
+
+module.exports = {
+    meta: {
+        docs: {
+            description: "require or disallow spacing between template tags and their literals",
+            category: "Stylistic Issues",
+            recommended: false
+        },
+
+        fixable: "whitespace",
+
+        schema: [{ enum: ["always", "never"] }]
+    },
+
+    create: function create(context) {
+        var never = context.options[0] !== "always";
+        var sourceCode = context.getSourceCode();
+
+        /**
+         * Check if a space is present between a template tag and its literal
+         * @param {ASTNode} node node to evaluate
+         * @returns {void}
+         * @private
+         */
+        function checkSpacing(node) {
+            var tagToken = sourceCode.getTokenBefore(node.quasi);
+            var literalToken = sourceCode.getFirstToken(node.quasi);
+            var hasWhitespace = sourceCode.isSpaceBetweenTokens(tagToken, literalToken);
+
+            if (never && hasWhitespace) {
+                context.report({
+                    node: node,
+                    loc: tagToken.loc.start,
+                    message: "Unexpected space between template tag and template literal.",
+                    fix: function fix(fixer) {
+                        var comments = sourceCode.getComments(node.quasi).leading;
+
+                        // Don't fix anything if there's a single line comment after the template tag
+                        if (comments.some(function (comment) {
+                            return comment.type === "Line";
+                        })) {
+                            return null;
+                        }
+
+                        return fixer.replaceTextRange([tagToken.range[1], literalToken.range[0]], comments.reduce(function (text, comment) {
+                            return text + sourceCode.getText(comment);
+                        }, ""));
+                    }
+                });
+            } else if (!never && !hasWhitespace) {
+                context.report({
+                    node: node,
+                    loc: tagToken.loc.start,
+                    message: "Missing space between template tag and template literal.",
+                    fix: function fix(fixer) {
+                        return fixer.insertTextAfter(tagToken, " ");
+                    }
+                });
+            }
+        }
+
+        return {
+            TaggedTemplateExpression: checkSpacing
+        };
+    }
+};
+
+},{}],410:[function(require,module,exports){
+/**
  * @fileoverview Require or disallow Unicode BOM
  * @author Andrew Johnston <https://github.com/ehjay>
  */
@@ -85857,7 +85967,7 @@ module.exports = {
     }
 };
 
-},{}],410:[function(require,module,exports){
+},{}],411:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag comparisons to the value NaN
  * @author James Allardice
@@ -85892,7 +86002,7 @@ module.exports = {
     }
 };
 
-},{}],411:[function(require,module,exports){
+},{}],412:[function(require,module,exports){
 /**
  * @fileoverview Validates JSDoc comments are syntactically correct
  * @author Nicholas C. Zakas
@@ -86307,7 +86417,7 @@ module.exports = {
     }
 };
 
-},{"doctrine":14}],412:[function(require,module,exports){
+},{"doctrine":14}],413:[function(require,module,exports){
 /**
  * @fileoverview Ensures that the results of typeof are compared against a valid string
  * @author Ian Christian Myers
@@ -86381,7 +86491,7 @@ module.exports = {
     }
 };
 
-},{}],413:[function(require,module,exports){
+},{}],414:[function(require,module,exports){
 /**
  * @fileoverview Rule to enforce var declarations are only at the top of a function.
  * @author Danny Fritz
@@ -86522,7 +86632,7 @@ module.exports = {
     }
 };
 
-},{}],414:[function(require,module,exports){
+},{}],415:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag when IIFE is not wrapped in parens
  * @author Ilya Volodin
@@ -86659,7 +86769,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":162}],415:[function(require,module,exports){
+},{"../ast-utils":162}],416:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag when regex literals are not wrapped in parens
  * @author Matt DuVall <http://www.mattduvall.com>
@@ -86712,7 +86822,7 @@ module.exports = {
     }
 };
 
-},{}],416:[function(require,module,exports){
+},{}],417:[function(require,module,exports){
 /**
  * @fileoverview Rule to check the spacing around the * in yield* expressions.
  * @author Bryan Smith
@@ -86827,7 +86937,7 @@ module.exports = {
     }
 };
 
-},{}],417:[function(require,module,exports){
+},{}],418:[function(require,module,exports){
 /**
  * @fileoverview Rule to require or disallow yoda comparisons
  * @author Nicholas C. Zakas
@@ -87113,7 +87223,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":162}],418:[function(require,module,exports){
+},{"../ast-utils":162}],419:[function(require,module,exports){
 (function (process){
 /**
  * @fileoverview Tracks performance of individual rules.
@@ -87257,7 +87367,7 @@ module.exports = function () {
 }();
 
 }).call(this,require('_process'))
-},{"_process":7}],419:[function(require,module,exports){
+},{"_process":7}],420:[function(require,module,exports){
 /**
  * @fileoverview Object to handle access and retrieval of tokens.
  * @author Brandon Mills
@@ -87453,7 +87563,7 @@ module.exports = function (tokens) {
     return api;
 };
 
-},{}],420:[function(require,module,exports){
+},{}],421:[function(require,module,exports){
 /**
  * @fileoverview The event generator for comments.
  * @author Toru Nagashima
@@ -87581,7 +87691,7 @@ var CommentEventGenerator = function () {
 
 module.exports = CommentEventGenerator;
 
-},{}],421:[function(require,module,exports){
+},{}],422:[function(require,module,exports){
 /**
  * @fileoverview A shared list of ES3 keywords.
  * @author Josh Perez
@@ -87590,7 +87700,7 @@ module.exports = CommentEventGenerator;
 
 module.exports = ["abstract", "boolean", "break", "byte", "case", "catch", "char", "class", "const", "continue", "debugger", "default", "delete", "do", "double", "else", "enum", "export", "extends", "false", "final", "finally", "float", "for", "function", "goto", "if", "implements", "import", "in", "instanceof", "int", "interface", "long", "native", "new", "null", "package", "private", "protected", "public", "return", "short", "static", "super", "switch", "synchronized", "this", "throw", "throws", "transient", "true", "try", "typeof", "var", "void", "volatile", "while", "with"];
 
-},{}],422:[function(require,module,exports){
+},{}],423:[function(require,module,exports){
 /**
  * @fileoverview The event generator for AST nodes.
  * @author Toru Nagashima
@@ -87661,7 +87771,7 @@ var NodeEventGenerator = function () {
 
 module.exports = NodeEventGenerator;
 
-},{}],423:[function(require,module,exports){
+},{}],424:[function(require,module,exports){
 /**
  * @fileoverview Pattern for detecting any letter (even letters outside of ASCII).
  * NOTE: This file was generated using this script in JSCS based on the Unicode 7.0.0 standard: https://github.com/jscs-dev/node-jscs/blob/f5ed14427deb7e7aac84f3056a5aab2d9f3e563e/publish/helpers/generate-patterns.js
@@ -87699,7 +87809,7 @@ module.exports = NodeEventGenerator;
 
 module.exports = /[A-Za-z\xAA\xB5\xBA\xC0-\xD6\xD8-\xF6\xF8-\u02C1\u02C6-\u02D1\u02E0-\u02E4\u02EC\u02EE\u0370-\u0374\u0376\u0377\u037A-\u037D\u037F\u0386\u0388-\u038A\u038C\u038E-\u03A1\u03A3-\u03F5\u03F7-\u0481\u048A-\u052F\u0531-\u0556\u0559\u0561-\u0587\u05D0-\u05EA\u05F0-\u05F2\u0620-\u064A\u066E\u066F\u0671-\u06D3\u06D5\u06E5\u06E6\u06EE\u06EF\u06FA-\u06FC\u06FF\u0710\u0712-\u072F\u074D-\u07A5\u07B1\u07CA-\u07EA\u07F4\u07F5\u07FA\u0800-\u0815\u081A\u0824\u0828\u0840-\u0858\u08A0-\u08B2\u0904-\u0939\u093D\u0950\u0958-\u0961\u0971-\u0980\u0985-\u098C\u098F\u0990\u0993-\u09A8\u09AA-\u09B0\u09B2\u09B6-\u09B9\u09BD\u09CE\u09DC\u09DD\u09DF-\u09E1\u09F0\u09F1\u0A05-\u0A0A\u0A0F\u0A10\u0A13-\u0A28\u0A2A-\u0A30\u0A32\u0A33\u0A35\u0A36\u0A38\u0A39\u0A59-\u0A5C\u0A5E\u0A72-\u0A74\u0A85-\u0A8D\u0A8F-\u0A91\u0A93-\u0AA8\u0AAA-\u0AB0\u0AB2\u0AB3\u0AB5-\u0AB9\u0ABD\u0AD0\u0AE0\u0AE1\u0B05-\u0B0C\u0B0F\u0B10\u0B13-\u0B28\u0B2A-\u0B30\u0B32\u0B33\u0B35-\u0B39\u0B3D\u0B5C\u0B5D\u0B5F-\u0B61\u0B71\u0B83\u0B85-\u0B8A\u0B8E-\u0B90\u0B92-\u0B95\u0B99\u0B9A\u0B9C\u0B9E\u0B9F\u0BA3\u0BA4\u0BA8-\u0BAA\u0BAE-\u0BB9\u0BD0\u0C05-\u0C0C\u0C0E-\u0C10\u0C12-\u0C28\u0C2A-\u0C39\u0C3D\u0C58\u0C59\u0C60\u0C61\u0C85-\u0C8C\u0C8E-\u0C90\u0C92-\u0CA8\u0CAA-\u0CB3\u0CB5-\u0CB9\u0CBD\u0CDE\u0CE0\u0CE1\u0CF1\u0CF2\u0D05-\u0D0C\u0D0E-\u0D10\u0D12-\u0D3A\u0D3D\u0D4E\u0D60\u0D61\u0D7A-\u0D7F\u0D85-\u0D96\u0D9A-\u0DB1\u0DB3-\u0DBB\u0DBD\u0DC0-\u0DC6\u0E01-\u0E30\u0E32\u0E33\u0E40-\u0E46\u0E81\u0E82\u0E84\u0E87\u0E88\u0E8A\u0E8D\u0E94-\u0E97\u0E99-\u0E9F\u0EA1-\u0EA3\u0EA5\u0EA7\u0EAA\u0EAB\u0EAD-\u0EB0\u0EB2\u0EB3\u0EBD\u0EC0-\u0EC4\u0EC6\u0EDC-\u0EDF\u0F00\u0F40-\u0F47\u0F49-\u0F6C\u0F88-\u0F8C\u1000-\u102A\u103F\u1050-\u1055\u105A-\u105D\u1061\u1065\u1066\u106E-\u1070\u1075-\u1081\u108E\u10A0-\u10C5\u10C7\u10CD\u10D0-\u10FA\u10FC-\u1248\u124A-\u124D\u1250-\u1256\u1258\u125A-\u125D\u1260-\u1288\u128A-\u128D\u1290-\u12B0\u12B2-\u12B5\u12B8-\u12BE\u12C0\u12C2-\u12C5\u12C8-\u12D6\u12D8-\u1310\u1312-\u1315\u1318-\u135A\u1380-\u138F\u13A0-\u13F4\u1401-\u166C\u166F-\u167F\u1681-\u169A\u16A0-\u16EA\u16F1-\u16F8\u1700-\u170C\u170E-\u1711\u1720-\u1731\u1740-\u1751\u1760-\u176C\u176E-\u1770\u1780-\u17B3\u17D7\u17DC\u1820-\u1877\u1880-\u18A8\u18AA\u18B0-\u18F5\u1900-\u191E\u1950-\u196D\u1970-\u1974\u1980-\u19AB\u19C1-\u19C7\u1A00-\u1A16\u1A20-\u1A54\u1AA7\u1B05-\u1B33\u1B45-\u1B4B\u1B83-\u1BA0\u1BAE\u1BAF\u1BBA-\u1BE5\u1C00-\u1C23\u1C4D-\u1C4F\u1C5A-\u1C7D\u1CE9-\u1CEC\u1CEE-\u1CF1\u1CF5\u1CF6\u1D00-\u1DBF\u1E00-\u1F15\u1F18-\u1F1D\u1F20-\u1F45\u1F48-\u1F4D\u1F50-\u1F57\u1F59\u1F5B\u1F5D\u1F5F-\u1F7D\u1F80-\u1FB4\u1FB6-\u1FBC\u1FBE\u1FC2-\u1FC4\u1FC6-\u1FCC\u1FD0-\u1FD3\u1FD6-\u1FDB\u1FE0-\u1FEC\u1FF2-\u1FF4\u1FF6-\u1FFC\u2071\u207F\u2090-\u209C\u2102\u2107\u210A-\u2113\u2115\u2119-\u211D\u2124\u2126\u2128\u212A-\u212D\u212F-\u2139\u213C-\u213F\u2145-\u2149\u214E\u2183\u2184\u2C00-\u2C2E\u2C30-\u2C5E\u2C60-\u2CE4\u2CEB-\u2CEE\u2CF2\u2CF3\u2D00-\u2D25\u2D27\u2D2D\u2D30-\u2D67\u2D6F\u2D80-\u2D96\u2DA0-\u2DA6\u2DA8-\u2DAE\u2DB0-\u2DB6\u2DB8-\u2DBE\u2DC0-\u2DC6\u2DC8-\u2DCE\u2DD0-\u2DD6\u2DD8-\u2DDE\u2E2F\u3005\u3006\u3031-\u3035\u303B\u303C\u3041-\u3096\u309D-\u309F\u30A1-\u30FA\u30FC-\u30FF\u3105-\u312D\u3131-\u318E\u31A0-\u31BA\u31F0-\u31FF\u3400-\u4DB5\u4E00-\u9FCC\uA000-\uA48C\uA4D0-\uA4FD\uA500-\uA60C\uA610-\uA61F\uA62A\uA62B\uA640-\uA66E\uA67F-\uA69D\uA6A0-\uA6E5\uA717-\uA71F\uA722-\uA788\uA78B-\uA78E\uA790-\uA7AD\uA7B0\uA7B1\uA7F7-\uA801\uA803-\uA805\uA807-\uA80A\uA80C-\uA822\uA840-\uA873\uA882-\uA8B3\uA8F2-\uA8F7\uA8FB\uA90A-\uA925\uA930-\uA946\uA960-\uA97C\uA984-\uA9B2\uA9CF\uA9E0-\uA9E4\uA9E6-\uA9EF\uA9FA-\uA9FE\uAA00-\uAA28\uAA40-\uAA42\uAA44-\uAA4B\uAA60-\uAA76\uAA7A\uAA7E-\uAAAF\uAAB1\uAAB5\uAAB6\uAAB9-\uAABD\uAAC0\uAAC2\uAADB-\uAADD\uAAE0-\uAAEA\uAAF2-\uAAF4\uAB01-\uAB06\uAB09-\uAB0E\uAB11-\uAB16\uAB20-\uAB26\uAB28-\uAB2E\uAB30-\uAB5A\uAB5C-\uAB5F\uAB64\uAB65\uABC0-\uABE2\uAC00-\uD7A3\uD7B0-\uD7C6\uD7CB-\uD7FB\uF900-\uFA6D\uFA70-\uFAD9\uFB00-\uFB06\uFB13-\uFB17\uFB1D\uFB1F-\uFB28\uFB2A-\uFB36\uFB38-\uFB3C\uFB3E\uFB40\uFB41\uFB43\uFB44\uFB46-\uFBB1\uFBD3-\uFD3D\uFD50-\uFD8F\uFD92-\uFDC7\uFDF0-\uFDFB\uFE70-\uFE74\uFE76-\uFEFC\uFF21-\uFF3A\uFF41-\uFF5A\uFF66-\uFFBE\uFFC2-\uFFC7\uFFCA-\uFFCF\uFFD2-\uFFD7\uFFDA-\uFFDC]|\uD800[\uDC00-\uDC0B\uDC0D-\uDC26\uDC28-\uDC3A\uDC3C\uDC3D\uDC3F-\uDC4D\uDC50-\uDC5D\uDC80-\uDCFA\uDE80-\uDE9C\uDEA0-\uDED0\uDF00-\uDF1F\uDF30-\uDF40\uDF42-\uDF49\uDF50-\uDF75\uDF80-\uDF9D\uDFA0-\uDFC3\uDFC8-\uDFCF]|\uD801[\uDC00-\uDC9D\uDD00-\uDD27\uDD30-\uDD63\uDE00-\uDF36\uDF40-\uDF55\uDF60-\uDF67]|\uD802[\uDC00-\uDC05\uDC08\uDC0A-\uDC35\uDC37\uDC38\uDC3C\uDC3F-\uDC55\uDC60-\uDC76\uDC80-\uDC9E\uDD00-\uDD15\uDD20-\uDD39\uDD80-\uDDB7\uDDBE\uDDBF\uDE00\uDE10-\uDE13\uDE15-\uDE17\uDE19-\uDE33\uDE60-\uDE7C\uDE80-\uDE9C\uDEC0-\uDEC7\uDEC9-\uDEE4\uDF00-\uDF35\uDF40-\uDF55\uDF60-\uDF72\uDF80-\uDF91]|\uD803[\uDC00-\uDC48]|\uD804[\uDC03-\uDC37\uDC83-\uDCAF\uDCD0-\uDCE8\uDD03-\uDD26\uDD50-\uDD72\uDD76\uDD83-\uDDB2\uDDC1-\uDDC4\uDDDA\uDE00-\uDE11\uDE13-\uDE2B\uDEB0-\uDEDE\uDF05-\uDF0C\uDF0F\uDF10\uDF13-\uDF28\uDF2A-\uDF30\uDF32\uDF33\uDF35-\uDF39\uDF3D\uDF5D-\uDF61]|\uD805[\uDC80-\uDCAF\uDCC4\uDCC5\uDCC7\uDD80-\uDDAE\uDE00-\uDE2F\uDE44\uDE80-\uDEAA]|\uD806[\uDCA0-\uDCDF\uDCFF\uDEC0-\uDEF8]|\uD808[\uDC00-\uDF98]|[\uD80C\uD840-\uD868\uD86A-\uD86C][\uDC00-\uDFFF]|\uD80D[\uDC00-\uDC2E]|\uD81A[\uDC00-\uDE38\uDE40-\uDE5E\uDED0-\uDEED\uDF00-\uDF2F\uDF40-\uDF43\uDF63-\uDF77\uDF7D-\uDF8F]|\uD81B[\uDF00-\uDF44\uDF50\uDF93-\uDF9F]|\uD82C[\uDC00\uDC01]|\uD82F[\uDC00-\uDC6A\uDC70-\uDC7C\uDC80-\uDC88\uDC90-\uDC99]|\uD835[\uDC00-\uDC54\uDC56-\uDC9C\uDC9E\uDC9F\uDCA2\uDCA5\uDCA6\uDCA9-\uDCAC\uDCAE-\uDCB9\uDCBB\uDCBD-\uDCC3\uDCC5-\uDD05\uDD07-\uDD0A\uDD0D-\uDD14\uDD16-\uDD1C\uDD1E-\uDD39\uDD3B-\uDD3E\uDD40-\uDD44\uDD46\uDD4A-\uDD50\uDD52-\uDEA5\uDEA8-\uDEC0\uDEC2-\uDEDA\uDEDC-\uDEFA\uDEFC-\uDF14\uDF16-\uDF34\uDF36-\uDF4E\uDF50-\uDF6E\uDF70-\uDF88\uDF8A-\uDFA8\uDFAA-\uDFC2\uDFC4-\uDFCB]|\uD83A[\uDC00-\uDCC4]|\uD83B[\uDE00-\uDE03\uDE05-\uDE1F\uDE21\uDE22\uDE24\uDE27\uDE29-\uDE32\uDE34-\uDE37\uDE39\uDE3B\uDE42\uDE47\uDE49\uDE4B\uDE4D-\uDE4F\uDE51\uDE52\uDE54\uDE57\uDE59\uDE5B\uDE5D\uDE5F\uDE61\uDE62\uDE64\uDE67-\uDE6A\uDE6C-\uDE72\uDE74-\uDE77\uDE79-\uDE7C\uDE7E\uDE80-\uDE89\uDE8B-\uDE9B\uDEA1-\uDEA3\uDEA5-\uDEA9\uDEAB-\uDEBB]|\uD869[\uDC00-\uDED6\uDF00-\uDFFF]|\uD86D[\uDC00-\uDF34\uDF40-\uDFFF]|\uD86E[\uDC00-\uDC1D]|\uD87E[\uDC00-\uDE1D]/;
 
-},{}],424:[function(require,module,exports){
+},{}],425:[function(require,module,exports){
 /**
  * @fileoverview An object that creates fix commands for rules.
  * @author Nicholas C. Zakas
@@ -87847,7 +87957,7 @@ var ruleFixer = Object.freeze({
 
 module.exports = ruleFixer;
 
-},{}],425:[function(require,module,exports){
+},{}],426:[function(require,module,exports){
 /**
  * @fileoverview Abstraction of JavaScript source code.
  * @author Nicholas C. Zakas
@@ -87906,9 +88016,8 @@ function findJSDocComment(comments, line) {
 
                 if (line - comments[i].loc.end.line <= 1) {
                     return comments[i];
-                } else {
-                    break;
                 }
+                break;
             }
         }
     }
@@ -88011,9 +88120,8 @@ SourceCode.prototype = {
     getText: function getText(node, beforeCount, afterCount) {
         if (node) {
             return this.text.slice(Math.max(node.range[0] - (beforeCount || 0), 0), node.range[1] + (afterCount || 0));
-        } else {
-            return this.text;
         }
+        return this.text;
     },
 
 
@@ -88156,7 +88264,7 @@ SourceCode.prototype = {
 
 module.exports = SourceCode;
 
-},{"../token-store.js":419,"./traverser":426}],426:[function(require,module,exports){
+},{"../token-store.js":420,"./traverser":427}],427:[function(require,module,exports){
 /**
  * @fileoverview Wrapper around estraverse
  * @author Nicholas C. Zakas
