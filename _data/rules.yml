@@ -364,7 +364,7 @@ categories:
         name: no-unused-expressions
         recommended: false
       - description: disallow unused labels
-        fixable: false
+        fixable: true
         name: no-unused-labels
         recommended: true
       - description: disallow unnecessary calls to `.call()` and `.apply()`

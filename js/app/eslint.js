@@ -12596,10 +12596,84 @@ module.exports = {
 };
 
 },{"globals":138}],3:[function(require,module,exports){
-module.exports={
-    "parser": "espree",
-    "ecmaFeatures": {},
-    "rules": {
+/**
+ * @fileoverview Configuration applied when a user configuration extends from
+ * eslint:recommended.
+ * @author Nicholas C. Zakas
+ */
+
+"use strict";
+
+/* eslint sort-keys: ["error", "asc"], quote-props: ["error", "consistent"] */
+/* eslint-disable sort-keys */
+
+module.exports = {
+    parser: "espree",
+    ecmaFeatures: {},
+
+    rules: {
+
+        /* eslint-enable sort-keys */
+        "accessor-pairs": "off",
+        "array-bracket-spacing": "off",
+        "array-callback-return": "off",
+        "arrow-body-style": "off",
+        "arrow-parens": "off",
+        "arrow-spacing": "off",
+        "block-scoped-var": "off",
+        "block-spacing": "off",
+        "brace-style": "off",
+        "callback-return": "off",
+        "camelcase": "off",
+        "capitalized-comments": "off",
+        "class-methods-use-this": "off",
+        "comma-dangle": "off",
+        "comma-spacing": "off",
+        "comma-style": "off",
+        "complexity": "off",
+        "computed-property-spacing": "off",
+        "consistent-return": "off",
+        "consistent-this": "off",
+        "constructor-super": "error",
+        "curly": "off",
+        "default-case": "off",
+        "dot-location": "off",
+        "dot-notation": "off",
+        "eol-last": "off",
+        "eqeqeq": "off",
+        "func-call-spacing": "off",
+        "func-name-matching": "off",
+        "func-names": "off",
+        "func-style": "off",
+        "generator-star-spacing": "off",
+        "global-require": "off",
+        "guard-for-in": "off",
+        "handle-callback-err": "off",
+        "id-blacklist": "off",
+        "id-length": "off",
+        "id-match": "off",
+        "indent": "off",
+        "init-declarations": "off",
+        "jsx-quotes": "off",
+        "key-spacing": "off",
+        "keyword-spacing": "off",
+        "line-comment-position": "off",
+        "linebreak-style": "off",
+        "lines-around-comment": "off",
+        "lines-around-directive": "off",
+        "max-depth": "off",
+        "max-len": "off",
+        "max-lines": "off",
+        "max-nested-callbacks": "off",
+        "max-params": "off",
+        "max-statements": "off",
+        "max-statements-per-line": "off",
+        "multiline-ternary": "off",
+        "new-cap": "off",
+        "new-parens": "off",
+        "newline-after-var": "off",
+        "newline-before-return": "off",
+        "newline-per-chained-call": "off",
         "no-alert": "off",
         "no-array-constructor": "off",
         "no-await-in-loop": "off",
@@ -12698,20 +12772,20 @@ module.exports={
         "no-sequences": "off",
         "no-shadow": "off",
         "no-shadow-restricted-names": "off",
-        "no-whitespace-before-property": "off",
         "no-spaced-func": "off",
         "no-sparse-arrays": "error",
         "no-sync": "off",
         "no-tabs": "off",
+        "no-template-curly-in-string": "off",
         "no-ternary": "off",
-        "no-trailing-spaces": "off",
         "no-this-before-super": "error",
         "no-throw-literal": "off",
+        "no-trailing-spaces": "off",
         "no-undef": "error",
         "no-undef-init": "off",
         "no-undefined": "off",
-        "no-unexpected-multiline": "error",
         "no-underscore-dangle": "off",
+        "no-unexpected-multiline": "error",
         "no-unmodified-loop-condition": "off",
         "no-unneeded-ternary": "off",
         "no-unreachable": "error",
@@ -12728,70 +12802,11 @@ module.exports={
         "no-useless-escape": "off",
         "no-useless-rename": "off",
         "no-useless-return": "off",
-        "no-void": "off",
         "no-var": "off",
+        "no-void": "off",
         "no-warning-comments": "off",
+        "no-whitespace-before-property": "off",
         "no-with": "off",
-        "array-bracket-spacing": "off",
-        "array-callback-return": "off",
-        "arrow-body-style": "off",
-        "arrow-parens": "off",
-        "arrow-spacing": "off",
-        "accessor-pairs": "off",
-        "block-scoped-var": "off",
-        "block-spacing": "off",
-        "brace-style": "off",
-        "callback-return": "off",
-        "camelcase": "off",
-        "capitalized-comments": "off",
-        "class-methods-use-this": "off",
-        "comma-dangle": "off",
-        "comma-spacing": "off",
-        "comma-style": "off",
-        "complexity": "off",
-        "computed-property-spacing": "off",
-        "consistent-return": "off",
-        "consistent-this": "off",
-        "constructor-super": "error",
-        "curly": "off",
-        "default-case": "off",
-        "dot-location": "off",
-        "dot-notation": "off",
-        "eol-last": "off",
-        "eqeqeq": "off",
-        "func-call-spacing": "off",
-        "func-names": "off",
-        "func-name-matching": "off",
-        "func-style": "off",
-        "generator-star-spacing": "off",
-        "global-require": "off",
-        "guard-for-in": "off",
-        "handle-callback-err": "off",
-        "id-blacklist": "off",
-        "id-length": "off",
-        "id-match": "off",
-        "indent": "off",
-        "init-declarations": "off",
-        "jsx-quotes": "off",
-        "key-spacing": "off",
-        "keyword-spacing": "off",
-        "linebreak-style": "off",
-        "line-comment-position": "off",
-        "lines-around-comment": "off",
-        "lines-around-directive": "off",
-        "max-depth": "off",
-        "max-len": "off",
-        "max-lines": "off",
-        "max-nested-callbacks": "off",
-        "max-params": "off",
-        "max-statements": "off",
-        "max-statements-per-line": "off",
-        "multiline-ternary": "off",
-        "new-cap": "off",
-        "new-parens": "off",
-        "newline-after-var": "off",
-        "newline-before-return": "off",
-        "newline-per-chained-call": "off",
         "object-curly-newline": "off",
         "object-curly-spacing": ["off", "never"],
         "object-property-newline": "off",
@@ -12819,8 +12834,8 @@ module.exports={
         "rest-spread-spacing": "off",
         "semi": "off",
         "semi-spacing": "off",
-        "sort-keys": "off",
         "sort-imports": "off",
+        "sort-keys": "off",
         "sort-vars": "off",
         "space-before-blocks": "off",
         "space-before-function-paren": "off",
@@ -12839,11 +12854,10 @@ module.exports={
         "vars-on-top": "off",
         "wrap-iife": "off",
         "wrap-regex": "off",
-        "no-template-curly-in-string": "off",
         "yield-star-spacing": "off",
         "yoda": "off"
     }
-}
+};
 
 },{}],4:[function(require,module,exports){
 module.exports={
@@ -14684,7 +14698,7 @@ function localstorage() {
  * Expose `debug()` as the module.
  */
 
-exports = module.exports = createDebug.debug = createDebug.default = createDebug;
+exports = module.exports = createDebug.debug = createDebug['default'] = createDebug;
 exports.coerce = coerce;
 exports.disable = disable;
 exports.enable = enable;
@@ -14815,6 +14829,9 @@ function createDebug(namespace) {
 
 function enable(namespaces) {
   exports.save(namespaces);
+
+  exports.names = [];
+  exports.skips = [];
 
   var split = (namespaces || '').split(/[\s,]+/);
   var len = split.length;
@@ -24330,6 +24347,7 @@ module.exports={
 		"MediaQueryList": false,
 		"MediaQueryListEvent": false,
 		"MediaSource": false,
+		"MediaRecorder": false,
 		"MediaStream": false,
 		"MediaStreamAudioDestinationNode": false,
 		"MediaStreamAudioSourceNode": false,
@@ -24834,6 +24852,7 @@ module.exports={
 		"expect": false,
 		"gen": false,
 		"it": false,
+		"fdescribe": false,
 		"fit": false,
 		"jest": false,
 		"pit": false,
@@ -25467,7 +25486,6 @@ var DEFAULT_REPLACER_PREFIX = [
 /^\^*\\\*\\\*\\\//,
 
 // '**/foo' <-> 'foo'
-// just remove it
 function () {
   return '^(?:.*\\/)?';
 }]];
@@ -25530,10 +25548,14 @@ function (match, p1) {
 // trailing wildcard
 [/(\^|\\\/)?\\\*$/, function (match, p1) {
   return (p1
+  // '\^':
   // '/*' does not match ''
   // '/*' does not match everything
+
+  // '\\\/':
   // 'abc/*' does not match 'abc/'
   ? p1 + '[^/]+'
+
   // 'a*' matches 'a'
   // 'a*' matches 'aa'
   : '[^/]*') + '(?=$|\\/$)';
@@ -25605,20 +25627,19 @@ function make_regex(pattern, negative) {
 
 // Windows
 // --------------------------------------------------------------
+/* istanbul ignore if  */
 if (process.env.IGNORE_TEST_WIN32 || process.platform === 'win32') {
-  (function () {
 
-    var filter = IgnoreBase.prototype._filter;
-    var make_posix = function make_posix(str) {
-      return (/^\\\\\?\\/.test(str) || /[^\x00-\x80]+/.test(str) ? str : str.replace(/\\/g, '/')
-      );
-    };
+  var filter = IgnoreBase.prototype._filter;
+  var make_posix = function make_posix(str) {
+    return (/^\\\\\?\\/.test(str) || /[^\x00-\x80]+/.test(str) ? str : str.replace(/\\/g, '/')
+    );
+  };
 
-    IgnoreBase.prototype._filter = function (path, slices) {
-      path = make_posix(path);
-      return filter.call(this, path, slices);
-    };
-  })();
+  IgnoreBase.prototype._filter = function (path, slices) {
+    path = make_posix(path);
+    return filter.call(this, path, slices);
+  };
 }
 
 }).call(this,require('_process'))
@@ -45677,7 +45698,7 @@ try {
 },{}],161:[function(require,module,exports){
 module.exports={
   "name": "eslint",
-  "version": "3.14.1",
+  "version": "3.15.0",
   "author": "Nicholas C. Zakas <nicholas+npm@nczconsulting.com>",
   "description": "An AST-based pattern checker for JavaScript.",
   "bin": {
@@ -45775,7 +45796,7 @@ module.exports={
     "load-perf": "^0.2.0",
     "markdownlint": "^0.3.1",
     "mocha": "^2.4.5",
-    "mock-fs": "^3.12.1",
+    "mock-fs": "^4.0.0",
     "npm-license": "^0.3.2",
     "phantomjs-prebuilt": "^2.1.7",
     "proxyquire": "^1.7.10",
@@ -45824,6 +45845,12 @@ var arrayMethodPattern = /^(?:every|filter|find|findIndex|forEach|map|some)$/;
 var bindOrCallOrApplyPattern = /^(?:bind|call|apply)$/;
 var breakableTypePattern = /^(?:(?:Do)?While|For(?:In|Of)?|Switch)Statement$/;
 var thisTagPattern = /^[\s*]*@this/m;
+
+var LINEBREAKS = new Set(["\r\n", "\r", "\n", "\u2028", "\u2029"]);
+var LINEBREAK_MATCHER = /\r\n|[\r\n\u2028\u2029]/;
+
+// A set of node types that can contain a list of statements
+var STATEMENT_LIST_PARENTS = new Set(["Program", "BlockStatement", "SwitchCase"]);
 
 /**
  * Checks reference if is non initializer and writable.
@@ -45937,7 +45964,7 @@ function isInLoop(node) {
  * @public
  */
 function isNullOrUndefined(node) {
-    return node.type === "Literal" && node.value === null || node.type === "Identifier" && node.name === "undefined" || node.type === "UnaryExpression" && node.operator === "void";
+    return module.exports.isNullLiteral(node) || node.type === "Identifier" && node.name === "undefined" || node.type === "UnaryExpression" && node.operator === "void";
 }
 
 /**
@@ -45989,6 +46016,17 @@ function isMethodWhichHasThisArg(node) {
 }
 
 /**
+ * Creates the negate function of the given function.
+ * @param {Function} f - The function to negate.
+ * @returns {Function} Negated function.
+ */
+function negate(f) {
+    return function (token) {
+        return !f(token);
+    };
+}
+
+/**
  * Checks whether or not a node has a `@this` tag in its comments.
  * @param {ASTNode} node - A node to check.
  * @param {SourceCode} sourceCode - A SourceCode instance to get comments.
@@ -46025,20 +46063,123 @@ function isParenthesised(sourceCode, node) {
 }
 
 /**
- * Gets the `=>` token of the given arrow function node.
+ * Checks if the given token is an arrow token or not.
  *
- * @param {ASTNode} node - The arrow function node to get.
- * @param {SourceCode} sourceCode - The source code object to get tokens.
- * @returns {Token} `=>` token.
+ * @param {Token} token - The token to check.
+ * @returns {boolean} `true` if the token is an arrow token.
  */
-function getArrowToken(node, sourceCode) {
-    var token = sourceCode.getTokenBefore(node.body);
+function isArrowToken(token) {
+    return token.value === "=>" && token.type === "Punctuator";
+}
 
-    while (token.value !== "=>") {
-        token = sourceCode.getTokenBefore(token);
-    }
+/**
+ * Checks if the given token is a comma token or not.
+ *
+ * @param {Token} token - The token to check.
+ * @returns {boolean} `true` if the token is a comma token.
+ */
+function isCommaToken(token) {
+    return token.value === "," && token.type === "Punctuator";
+}
 
-    return token;
+/**
+ * Checks if the given token is a semicolon token or not.
+ *
+ * @param {Token} token - The token to check.
+ * @returns {boolean} `true` if the token is a semicolon token.
+ */
+function isSemicolonToken(token) {
+    return token.value === ";" && token.type === "Punctuator";
+}
+
+/**
+ * Checks if the given token is a colon token or not.
+ *
+ * @param {Token} token - The token to check.
+ * @returns {boolean} `true` if the token is a colon token.
+ */
+function isColonToken(token) {
+    return token.value === ":" && token.type === "Punctuator";
+}
+
+/**
+ * Checks if the given token is an opening parenthesis token or not.
+ *
+ * @param {Token} token - The token to check.
+ * @returns {boolean} `true` if the token is an opening parenthesis token.
+ */
+function isOpeningParenToken(token) {
+    return token.value === "(" && token.type === "Punctuator";
+}
+
+/**
+ * Checks if the given token is a closing parenthesis token or not.
+ *
+ * @param {Token} token - The token to check.
+ * @returns {boolean} `true` if the token is a closing parenthesis token.
+ */
+function isClosingParenToken(token) {
+    return token.value === ")" && token.type === "Punctuator";
+}
+
+/**
+ * Checks if the given token is an opening square bracket token or not.
+ *
+ * @param {Token} token - The token to check.
+ * @returns {boolean} `true` if the token is an opening square bracket token.
+ */
+function isOpeningBracketToken(token) {
+    return token.value === "[" && token.type === "Punctuator";
+}
+
+/**
+ * Checks if the given token is a closing square bracket token or not.
+ *
+ * @param {Token} token - The token to check.
+ * @returns {boolean} `true` if the token is a closing square bracket token.
+ */
+function isClosingBracketToken(token) {
+    return token.value === "]" && token.type === "Punctuator";
+}
+
+/**
+ * Checks if the given token is an opening brace token or not.
+ *
+ * @param {Token} token - The token to check.
+ * @returns {boolean} `true` if the token is an opening brace token.
+ */
+function isOpeningBraceToken(token) {
+    return token.value === "{" && token.type === "Punctuator";
+}
+
+/**
+ * Checks if the given token is a closing brace token or not.
+ *
+ * @param {Token} token - The token to check.
+ * @returns {boolean} `true` if the token is a closing brace token.
+ */
+function isClosingBraceToken(token) {
+    return token.value === "}" && token.type === "Punctuator";
+}
+
+/**
+ * Checks if the given token is a comment token or not.
+ *
+ * @param {Token} token - The token to check.
+ * @returns {boolean} `true` if the token is a comment token.
+ */
+function isCommentToken(token) {
+    return token.type === "Line" || token.type === "Block" || token.type === "Shebang";
+}
+
+/**
+ * Checks if the given token is a keyword token or not.
+ *
+ * @param {Token} token - The token to check.
+ * @returns {boolean} `true` if the token is a keyword token.
+ */
+function isKeywordToken(token) {
+    return token.type === "Keyword";
 }
 
 /**
@@ -46049,13 +46190,16 @@ function getArrowToken(node, sourceCode) {
  * @returns {Token} `(` token.
  */
 function getOpeningParenOfParams(node, sourceCode) {
-    var token = node.id ? sourceCode.getTokenAfter(node.id) : sourceCode.getFirstToken(node);
+    return node.id ? sourceCode.getTokenAfter(node.id, isOpeningParenToken) : sourceCode.getFirstToken(node, isOpeningParenToken);
+}
 
-    while (token.value !== "(") {
-        token = sourceCode.getTokenAfter(token);
-    }
-
-    return token;
+/**
+ * Creates a version of the LINEBREAK_MATCHER regex with the global flag.
+ * Global regexes are mutable, so this needs to be a function instead of a constant.
+ * @returns {RegExp} A global regular expression that matches line terminators
+ */
+function createGlobalLinebreakMatcher() {
+    return new RegExp(LINEBREAK_MATCHER.source, "g");
 }
 
 var lineIndexCache = new WeakMap();
@@ -46069,7 +46213,7 @@ function getLineIndices(sourceCode) {
 
     if (!lineIndexCache.has(sourceCode)) {
         var lineIndices = [0];
-        var lineEndingPattern = /\r\n|[\r\n\u2028\u2029]/g;
+        var lineEndingPattern = createGlobalLinebreakMatcher();
         var match = void 0;
 
         /*
@@ -46097,6 +46241,9 @@ function getLineIndices(sourceCode) {
 //------------------------------------------------------------------------------
 
 module.exports = {
+    LINEBREAKS: LINEBREAKS,
+    LINEBREAK_MATCHER: LINEBREAK_MATCHER,
+    STATEMENT_LIST_PARENTS: STATEMENT_LIST_PARENTS,
 
     /**
      * Determines whether two adjacent tokens are on the same line.
@@ -46119,6 +46266,29 @@ module.exports = {
     isInLoop: isInLoop,
     isArrayFromMethod: isArrayFromMethod,
     isParenthesised: isParenthesised,
+    createGlobalLinebreakMatcher: createGlobalLinebreakMatcher,
+
+    isArrowToken: isArrowToken,
+    isClosingBraceToken: isClosingBraceToken,
+    isClosingBracketToken: isClosingBracketToken,
+    isClosingParenToken: isClosingParenToken,
+    isColonToken: isColonToken,
+    isCommaToken: isCommaToken,
+    isCommentToken: isCommentToken,
+    isKeywordToken: isKeywordToken,
+    isNotClosingBraceToken: negate(isClosingBraceToken),
+    isNotClosingBracketToken: negate(isClosingBracketToken),
+    isNotClosingParenToken: negate(isClosingParenToken),
+    isNotColonToken: negate(isColonToken),
+    isNotCommaToken: negate(isCommaToken),
+    isNotOpeningBraceToken: negate(isOpeningBraceToken),
+    isNotOpeningBracketToken: negate(isOpeningBracketToken),
+    isNotOpeningParenToken: negate(isOpeningParenToken),
+    isNotSemicolonToken: negate(isSemicolonToken),
+    isOpeningBraceToken: isOpeningBraceToken,
+    isOpeningBracketToken: isOpeningBracketToken,
+    isOpeningParenToken: isOpeningParenToken,
+    isSemicolonToken: isSemicolonToken,
 
     /**
      * Checks whether or not a given node is a string literal.
@@ -46811,7 +46981,7 @@ module.exports = {
         var end = null;
 
         if (node.type === "ArrowFunctionExpression") {
-            var arrowToken = getArrowToken(node, sourceCode);
+            var arrowToken = sourceCode.getTokenBefore(node.body, isArrowToken);
 
             start = arrowToken.loc.start;
             end = arrowToken.loc.end;
@@ -46918,6 +47088,24 @@ module.exports = {
             default:
                 return false;
         }
+    },
+
+
+    /**
+     * Determines whether the given node is a `null` literal.
+     * @param {ASTNode} node The node to check
+     * @returns {boolean} `true` if the node is a `null` literal
+     */
+    isNullLiteral: function isNullLiteral(node) {
+
+        /*
+         * Checking `node.value === null` does not guarantee that a literal is a null literal.
+         * When parsing values that cannot be represented in the current environment (e.g. unicode
+         * regexes in Node 4), `node.value` is set to `null` because it wouldn't be possible to
+         * set `node.value` to a unicode regex. To make sure a literal is actually `null`, check
+         * `node.regex` instead. Also see: https://github.com/eslint/eslint/issues/8020
+         */
+        return node.type === "Literal" && node.value === null && !node.regex;
     }
 };
 
@@ -48329,8 +48517,8 @@ var CodePathState = function () {
                  * This got segments already from the child choice context.
                  * Creates the next path from own true/false fork context.
                  */
-                var prevForkContext = context.kind === "&&" ? context.trueForkContext :
-                /* kind === "||" */context.falseForkContext;
+                var prevForkContext = context.kind === "&&" ? context.trueForkContext
+                /* kind === "||" */ : context.falseForkContext;
 
                 forkContext.replaceHead(prevForkContext.makeNext(0, -1));
                 prevForkContext.clear();
@@ -50759,7 +50947,7 @@ var assert = require("assert"),
     escope = require("escope"),
     levn = require("levn"),
     blankScriptAST = require("../conf/blank-script.json"),
-    DEFAULT_PARSER = require("../conf/eslint.json").parser,
+    DEFAULT_PARSER = require("../conf/eslint-recommended").parser,
     replacements = require("../conf/replacements.json"),
     CodePathAnalyzer = require("./code-path-analysis/code-path-analyzer"),
     ConfigOps = require("./config/config-ops"),
@@ -51102,19 +51290,15 @@ function modifyConfigsFromComments(filename, ast, config, reportingConfig, messa
 
                     case "eslint":
                         {
-                            var _ret = function () {
-                                var items = parseJsonConfig(value, comment.loc, messages);
+                            var items = parseJsonConfig(value, comment.loc, messages);
 
-                                Object.keys(items).forEach(function (name) {
-                                    var ruleValue = items[name];
+                            Object.keys(items).forEach(function (name) {
+                                var ruleValue = items[name];
 
-                                    validator.validateRuleOptions(name, ruleValue, filename + " line " + comment.loc.start.line);
-                                    commentRules[name] = ruleValue;
-                                });
-                                return "break";
-                            }();
-
-                            if (_ret === "break") break;
+                                validator.validateRuleOptions(name, ruleValue, filename + " line " + comment.loc.start.line);
+                                commentRules[name] = ruleValue;
+                            });
+                            break;
                         }
 
                     // no default
@@ -51564,107 +51748,103 @@ module.exports = function () {
 
         // if espree failed to parse the file, there's no sense in setting up rules
         if (ast) {
-            (function () {
 
-                // parse global comments and modify config
-                if (allowInlineConfig !== false) {
-                    config = modifyConfigsFromComments(currentFilename, ast, config, reportingConfig, messages);
+            // parse global comments and modify config
+            if (allowInlineConfig !== false) {
+                config = modifyConfigsFromComments(currentFilename, ast, config, reportingConfig, messages);
+            }
+
+            // ensure that severities are normalized in the config
+            ConfigOps.normalize(config);
+
+            // enable appropriate rules
+            Object.keys(config.rules).filter(function (key) {
+                return getRuleSeverity(config.rules[key]) > 0;
+            }).forEach(function (key) {
+                var ruleCreator = void 0;
+
+                ruleCreator = rules.get(key);
+
+                if (!ruleCreator) {
+                    var replacementMsg = getRuleReplacementMessage(key);
+
+                    if (replacementMsg) {
+                        ruleCreator = createStubRule(replacementMsg);
+                    } else {
+                        ruleCreator = createStubRule("Definition for rule '" + key + "' was not found");
+                    }
+                    rules.define(key, ruleCreator);
                 }
 
-                // ensure that severities are normalized in the config
-                ConfigOps.normalize(config);
+                var severity = getRuleSeverity(config.rules[key]);
+                var options = getRuleOptions(config.rules[key]);
 
-                // enable appropriate rules
-                Object.keys(config.rules).filter(function (key) {
-                    return getRuleSeverity(config.rules[key]) > 0;
-                }).forEach(function (key) {
-                    var ruleCreator = void 0;
+                try {
+                    var ruleContext = new RuleContext(key, api, severity, options, config.settings, config.parserOptions, config.parser, ruleCreator.meta, parseResult && parseResult.services ? parseResult.services : {});
 
-                    ruleCreator = rules.get(key);
+                    var rule = ruleCreator.create ? ruleCreator.create(ruleContext) : ruleCreator(ruleContext);
 
-                    if (!ruleCreator) {
-                        var replacementMsg = getRuleReplacementMessage(key);
-
-                        if (replacementMsg) {
-                            ruleCreator = createStubRule(replacementMsg);
-                        } else {
-                            ruleCreator = createStubRule("Definition for rule '" + key + "' was not found");
-                        }
-                        rules.define(key, ruleCreator);
-                    }
-
-                    var severity = getRuleSeverity(config.rules[key]);
-                    var options = getRuleOptions(config.rules[key]);
-
-                    try {
-                        (function () {
-                            var ruleContext = new RuleContext(key, api, severity, options, config.settings, config.parserOptions, config.parser, ruleCreator.meta, parseResult && parseResult.services ? parseResult.services : {});
-
-                            var rule = ruleCreator.create ? ruleCreator.create(ruleContext) : ruleCreator(ruleContext);
-
-                            // add all the node types as listeners
-                            Object.keys(rule).forEach(function (nodeType) {
-                                api.on(nodeType, timing.enabled ? timing.time(key, rule[nodeType]) : rule[nodeType]);
-                            });
-                        })();
-                    } catch (ex) {
-                        ex.message = "Error while loading rule '" + key + "': " + ex.message;
-                        throw ex;
-                    }
-                });
-
-                // save config so rules can access as necessary
-                currentConfig = config;
-                traverser = new Traverser();
-
-                var ecmaFeatures = currentConfig.parserOptions.ecmaFeatures || {};
-                var ecmaVersion = currentConfig.parserOptions.ecmaVersion || 5;
-
-                // gather scope data that may be needed by the rules
-                scopeManager = escope.analyze(ast, {
-                    ignoreEval: true,
-                    nodejsScope: ecmaFeatures.globalReturn,
-                    impliedStrict: ecmaFeatures.impliedStrict,
-                    ecmaVersion: ecmaVersion,
-                    sourceType: currentConfig.parserOptions.sourceType || "script",
-                    fallback: Traverser.getKeys
-                });
-
-                currentScopes = scopeManager.scopes;
-
-                // augment global scope with declared global variables
-                addDeclaredGlobals(ast, currentScopes[0], currentConfig);
-
-                // remove shebang comments
-                if (shebang && ast.comments.length && ast.comments[0].value === shebang) {
-                    ast.comments.splice(0, 1);
-
-                    if (ast.body.length && ast.body[0].leadingComments && ast.body[0].leadingComments[0].value === shebang) {
-                        ast.body[0].leadingComments.splice(0, 1);
-                    }
+                    // add all the node types as listeners
+                    Object.keys(rule).forEach(function (nodeType) {
+                        api.on(nodeType, timing.enabled ? timing.time(key, rule[nodeType]) : rule[nodeType]);
+                    });
+                } catch (ex) {
+                    ex.message = "Error while loading rule '" + key + "': " + ex.message;
+                    throw ex;
                 }
+            });
 
-                var eventGenerator = new NodeEventGenerator(api);
+            // save config so rules can access as necessary
+            currentConfig = config;
+            traverser = new Traverser();
 
-                eventGenerator = new CodePathAnalyzer(eventGenerator);
-                eventGenerator = new CommentEventGenerator(eventGenerator, sourceCode);
+            var ecmaFeatures = currentConfig.parserOptions.ecmaFeatures || {};
+            var ecmaVersion = currentConfig.parserOptions.ecmaVersion || 5;
 
-                /*
-                 * Each node has a type property. Whenever a particular type of
-                 * node is found, an event is fired. This allows any listeners to
-                 * automatically be informed that this type of node has been found
-                 * and react accordingly.
-                 */
-                traverser.traverse(ast, {
-                    enter: function enter(node, parent) {
-                        node.parent = parent;
-                        eventGenerator.enterNode(node);
-                    },
-                    leave: function leave(node) {
-                        eventGenerator.leaveNode(node);
-                    }
-                });
-            })();
+            // gather scope data that may be needed by the rules
+            scopeManager = escope.analyze(ast, {
+                ignoreEval: true,
+                nodejsScope: ecmaFeatures.globalReturn,
+                impliedStrict: ecmaFeatures.impliedStrict,
+                ecmaVersion: ecmaVersion,
+                sourceType: currentConfig.parserOptions.sourceType || "script",
+                fallback: Traverser.getKeys
+            });
+
+            currentScopes = scopeManager.scopes;
+
+            // augment global scope with declared global variables
+            addDeclaredGlobals(ast, currentScopes[0], currentConfig);
+
+            // remove shebang comments
+            if (shebang && ast.comments.length && ast.comments[0].value === shebang) {
+                ast.comments.splice(0, 1);
+
+                if (ast.body.length && ast.body[0].leadingComments && ast.body[0].leadingComments[0].value === shebang) {
+                    ast.body[0].leadingComments.splice(0, 1);
+                }
+            }
+
+            var eventGenerator = new NodeEventGenerator(api);
+
+            eventGenerator = new CodePathAnalyzer(eventGenerator);
+            eventGenerator = new CommentEventGenerator(eventGenerator, sourceCode);
+
+            /*
+             * Each node has a type property. Whenever a particular type of
+             * node is found, an event is fired. This allows any listeners to
+             * automatically be informed that this type of node has been found
+             * and react accordingly.
+             */
+            traverser.traverse(ast, {
+                enter: function enter(node, parent) {
+                    node.parent = parent;
+                    eventGenerator.enterNode(node);
+                },
+                leave: function leave(node) {
+                    eventGenerator.leaveNode(node);
+                }
+            });
         }
 
         // sort by line and column
@@ -51921,7 +52101,7 @@ module.exports = function () {
      * @returns {Object} Object mapping rule IDs to their default configurations
      */
     api.defaults = function () {
-        return require("../conf/eslint.json");
+        return require("../conf/eslint-recommended");
     };
 
     /**
@@ -51960,7 +52140,7 @@ module.exports = function () {
     return api;
 }();
 
-},{"../conf/blank-script.json":1,"../conf/eslint.json":3,"../conf/replacements.json":4,"../package.json":161,"./code-path-analysis/code-path-analyzer":163,"./config/config-ops":170,"./config/config-validator":171,"./config/environments":172,"./rule-context":175,"./rules":176,"./timing":419,"./util/comment-event-generator":421,"./util/node-event-generator":423,"./util/source-code":426,"./util/traverser":427,"assert":5,"escope":20,"events":6,"levn":148}],174:[function(require,module,exports){
+},{"../conf/blank-script.json":1,"../conf/eslint-recommended":3,"../conf/replacements.json":4,"../package.json":161,"./code-path-analysis/code-path-analyzer":163,"./config/config-ops":170,"./config/config-validator":171,"./config/environments":172,"./rule-context":175,"./rules":176,"./timing":419,"./util/comment-event-generator":433,"./util/node-event-generator":435,"./util/source-code":438,"./util/traverser":439,"assert":5,"escope":20,"events":6,"levn":148}],174:[function(require,module,exports){
 "use strict";
 
 module.exports = function () {
@@ -52356,7 +52536,7 @@ PASSTHROUGHS.forEach(function (name) {
 
 module.exports = RuleContext;
 
-},{"./util/rule-fixer":425}],176:[function(require,module,exports){
+},{"./util/rule-fixer":437}],176:[function(require,module,exports){
 /**
  * @fileoverview Defines a storage for rules.
  * @author Nicholas C. Zakas
@@ -53061,10 +53241,14 @@ module.exports = {
 "use strict";
 
 //------------------------------------------------------------------------------
-// Rule Definition
+// Requirements
 //------------------------------------------------------------------------------
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var astUtils = require("../ast-utils");
+
+//------------------------------------------------------------------------------
+// Rule Definition
+//------------------------------------------------------------------------------
 
 module.exports = {
     meta: {
@@ -53118,71 +53302,63 @@ module.exports = {
             var arrowBody = node.body;
 
             if (arrowBody.type === "BlockStatement") {
-                var _ret = function () {
-                    var blockBody = arrowBody.body;
+                var blockBody = arrowBody.body;
 
-                    if (blockBody.length !== 1 && !never) {
-                        return {
-                            v: void 0
-                        };
-                    }
+                if (blockBody.length !== 1 && !never) {
+                    return;
+                }
 
-                    if (asNeeded && requireReturnForObjectLiteral && blockBody[0].type === "ReturnStatement" && blockBody[0].argument && blockBody[0].argument.type === "ObjectExpression") {
-                        return {
-                            v: void 0
-                        };
-                    }
+                if (asNeeded && requireReturnForObjectLiteral && blockBody[0].type === "ReturnStatement" && blockBody[0].argument && blockBody[0].argument.type === "ObjectExpression") {
+                    return;
+                }
 
-                    if (never || asNeeded && blockBody[0].type === "ReturnStatement") {
-                        context.report({
-                            node: node,
-                            loc: arrowBody.loc.start,
-                            message: "Unexpected block statement surrounding arrow body.",
-                            fix: function fix(fixer) {
-                                if (blockBody.length !== 1 || blockBody[0].type !== "ReturnStatement" || !blockBody[0].argument) {
-                                    return null;
-                                }
-
-                                var sourceText = sourceCode.getText();
-                                var returnKeyword = sourceCode.getFirstToken(blockBody[0]);
-                                var firstValueToken = sourceCode.getTokenAfter(returnKeyword);
-                                var lastValueToken = sourceCode.getLastToken(blockBody[0]);
-
-                                if (lastValueToken.type === "Punctuator" && lastValueToken.value === ";") {
-
-                                    /* The last token of the returned value is the last token of the ReturnExpression (if
-                                     * the ReturnExpression has no semicolon), or the second-to-last token (if the ReturnExpression
-                                     * has a semicolon).
-                                     */
-                                    lastValueToken = sourceCode.getTokenBefore(lastValueToken);
-                                }
-
-                                var tokenAfterArrowBody = sourceCode.getTokenAfter(arrowBody);
-
-                                if (tokenAfterArrowBody && tokenAfterArrowBody.type === "Punctuator" && /^[([/`+-]/.test(tokenAfterArrowBody.value)) {
-
-                                    // Don't do a fix if the next token would cause ASI issues when preceded by the returned value.
-                                    return null;
-                                }
-
-                                var textBeforeReturn = sourceText.slice(arrowBody.range[0] + 1, returnKeyword.range[0]);
-                                var textBetweenReturnAndValue = sourceText.slice(returnKeyword.range[1], firstValueToken.range[0]);
-                                var rawReturnValueText = sourceText.slice(firstValueToken.range[0], lastValueToken.range[1]);
-                                var returnValueText = firstValueToken.value === "{" ? "(" + rawReturnValueText + ")" : rawReturnValueText;
-                                var textAfterValue = sourceText.slice(lastValueToken.range[1], blockBody[0].range[1] - 1);
-                                var textAfterReturnStatement = sourceText.slice(blockBody[0].range[1], arrowBody.range[1] - 1);
-
-                                /*
-                                 * For fixes that only contain spaces around the return value, remove the extra spaces.
-                                 * This avoids ugly fixes that end up with extra spaces after the arrow, e.g. `() =>   0 ;`
-                                 */
-                                return fixer.replaceText(arrowBody, (textBeforeReturn + textBetweenReturnAndValue).replace(/^\s*$/, "") + returnValueText + (textAfterValue + textAfterReturnStatement).replace(/^\s*$/, ""));
+                if (never || asNeeded && blockBody[0].type === "ReturnStatement") {
+                    context.report({
+                        node: node,
+                        loc: arrowBody.loc.start,
+                        message: "Unexpected block statement surrounding arrow body.",
+                        fix: function fix(fixer) {
+                            if (blockBody.length !== 1 || blockBody[0].type !== "ReturnStatement" || !blockBody[0].argument) {
+                                return null;
                             }
-                        });
-                    }
-                }();
 
-                if ((typeof _ret === "undefined" ? "undefined" : _typeof(_ret)) === "object") return _ret.v;
+                            var sourceText = sourceCode.getText();
+                            var returnKeyword = sourceCode.getFirstToken(blockBody[0]);
+                            var firstValueToken = sourceCode.getTokenAfter(returnKeyword);
+                            var lastValueToken = sourceCode.getLastToken(blockBody[0]);
+
+                            if (lastValueToken.type === "Punctuator" && lastValueToken.value === ";") {
+
+                                /* The last token of the returned value is the last token of the ReturnExpression (if
+                                 * the ReturnExpression has no semicolon), or the second-to-last token (if the ReturnExpression
+                                 * has a semicolon).
+                                 */
+                                lastValueToken = sourceCode.getTokenBefore(lastValueToken);
+                            }
+
+                            var tokenAfterArrowBody = sourceCode.getTokenAfter(arrowBody);
+
+                            if (tokenAfterArrowBody && tokenAfterArrowBody.type === "Punctuator" && /^[([/`+-]/.test(tokenAfterArrowBody.value)) {
+
+                                // Don't do a fix if the next token would cause ASI issues when preceded by the returned value.
+                                return null;
+                            }
+
+                            var textBeforeReturn = sourceText.slice(arrowBody.range[0] + 1, returnKeyword.range[0]);
+                            var textBetweenReturnAndValue = sourceText.slice(returnKeyword.range[1], firstValueToken.range[0]);
+                            var rawReturnValueText = sourceText.slice(firstValueToken.range[0], lastValueToken.range[1]);
+                            var returnValueText = firstValueToken.value === "{" ? "(" + rawReturnValueText + ")" : rawReturnValueText;
+                            var textAfterValue = sourceText.slice(lastValueToken.range[1], blockBody[0].range[1] - 1);
+                            var textAfterReturnStatement = sourceText.slice(blockBody[0].range[1], arrowBody.range[1] - 1);
+
+                            /*
+                             * For fixes that only contain spaces around the return value, remove the extra spaces.
+                             * This avoids ugly fixes that end up with extra spaces after the arrow, e.g. `() =>   0 ;`
+                             */
+                            return fixer.replaceText(arrowBody, (textBeforeReturn + textBetweenReturnAndValue).replace(/^\s*$/, "") + returnValueText + (textAfterValue + textAfterReturnStatement).replace(/^\s*$/, ""));
+                        }
+                    });
+                }
             } else {
                 if (always || asNeeded && requireReturnForObjectLiteral && arrowBody.type === "ObjectExpression") {
                     context.report({
@@ -53190,10 +53366,7 @@ module.exports = {
                         loc: arrowBody.loc.start,
                         message: "Expected block statement surrounding arrow body.",
                         fix: function fix(fixer) {
-                            var lastTokenBeforeBody = sourceCode.getTokensBetween(sourceCode.getFirstToken(node), arrowBody).reverse().find(function (token) {
-                                return token.value !== "(";
-                            });
-
+                            var lastTokenBeforeBody = sourceCode.getLastTokenBetween(sourceCode.getFirstToken(node), arrowBody, astUtils.isNotOpeningParenToken);
                             var firstBodyToken = sourceCode.getTokenAfter(lastTokenBeforeBody);
 
                             return fixer.replaceTextRange([firstBodyToken.range[0], node.range[1]], "{return " + sourceCode.getText().slice(firstBodyToken.range[0], node.range[1]) + "}");
@@ -53209,7 +53382,7 @@ module.exports = {
     }
 };
 
-},{}],181:[function(require,module,exports){
+},{"../ast-utils":162}],181:[function(require,module,exports){
 /**
  * @fileoverview Rule to require parens in arrow function arguments.
  * @author Jxck
@@ -53338,6 +53511,12 @@ module.exports = {
 "use strict";
 
 //------------------------------------------------------------------------------
+// Requirements
+//------------------------------------------------------------------------------
+
+var astUtils = require("../ast-utils");
+
+//------------------------------------------------------------------------------
 // Rule Definition
 //------------------------------------------------------------------------------
 
@@ -53382,12 +53561,7 @@ module.exports = {
          * @returns {Object} Tokens of arrow and before/after arrow.
          */
         function getTokens(node) {
-            var arrow = sourceCode.getTokenBefore(node.body);
-
-            // skip '(' tokens.
-            while (arrow.value !== "=>") {
-                arrow = sourceCode.getTokenBefore(arrow);
-            }
+            var arrow = sourceCode.getTokenBefore(node.body, astUtils.isArrowToken);
 
             return {
                 before: sourceCode.getTokenBefore(arrow),
@@ -53478,7 +53652,7 @@ module.exports = {
     }
 };
 
-},{}],183:[function(require,module,exports){
+},{"../ast-utils":162}],183:[function(require,module,exports){
 /**
  * @fileoverview Rule to check for "block scoped" variables by binding context
  * @author Matt DuVall <http://www.mattduvall.com>
@@ -53664,8 +53838,8 @@ module.exports = {
             // Gets braces and the first/last token of content.
             var openBrace = getOpenBrace(node);
             var closeBrace = sourceCode.getLastToken(node);
-            var firstToken = sourceCode.getTokenOrCommentAfter(openBrace);
-            var lastToken = sourceCode.getTokenOrCommentBefore(closeBrace);
+            var firstToken = sourceCode.getTokenAfter(openBrace, { includeComments: true });
+            var lastToken = sourceCode.getTokenBefore(closeBrace, { includeComments: true });
 
             // Skip if the node is invalid or empty.
             if (openBrace.type !== "Punctuator" || openBrace.value !== "{" || closeBrace.type !== "Punctuator" || closeBrace.value !== "}" || firstToken === closeBrace) {
@@ -53783,7 +53957,7 @@ module.exports = {
         function removeNewlineBetween(firstToken, secondToken) {
             var textRange = [firstToken.range[1], secondToken.range[0]];
             var textBetween = sourceCode.text.slice(textRange[0], textRange[1]);
-            var NEWLINE_REGEX = /\r\n|\r|\n|\u2028|\u2029/g;
+            var NEWLINE_REGEX = astUtils.createGlobalLinebreakMatcher();
 
             // Don't do a fix if there is a comment between the tokens
             return function (fixer) {
@@ -53875,7 +54049,7 @@ module.exports = {
 
         return {
             BlockStatement: function BlockStatement(node) {
-                if (node.parent.type !== "BlockStatement" && node.parent.type !== "SwitchCase" && node.parent.type !== "Program") {
+                if (!astUtils.STATEMENT_LIST_PARENTS.has(node.parent.type)) {
                     validateCurlyPair(sourceCode.getFirstToken(node), sourceCode.getLastToken(node));
                 }
             },
@@ -54373,8 +54547,8 @@ module.exports = {
          * otherwise.
          */
         function isInlineComment(comment) {
-            var previousToken = sourceCode.getTokenOrCommentBefore(comment),
-                nextToken = sourceCode.getTokenOrCommentAfter(comment);
+            var previousToken = sourceCode.getTokenBefore(comment, { includeComments: true }),
+                nextToken = sourceCode.getTokenAfter(comment, { includeComments: true });
 
             return Boolean(previousToken && nextToken && comment.loc.start.line === previousToken.loc.end.line && comment.loc.end.line === nextToken.loc.start.line);
         }
@@ -54386,7 +54560,7 @@ module.exports = {
          * @returns {boolean} True if the comment follows a valid comment.
          */
         function isConsecutiveComment(comment) {
-            var previousTokenOrComment = sourceCode.getTokenOrCommentBefore(comment);
+            var previousTokenOrComment = sourceCode.getTokenBefore(comment, { includeComments: true });
 
             return Boolean(previousTokenOrComment && ["Block", "Line"].indexOf(previousTokenOrComment.type) !== -1);
         }
@@ -54496,7 +54670,7 @@ module.exports = {
     }
 };
 
-},{"../util/patterns/letters":424}],189:[function(require,module,exports){
+},{"../util/patterns/letters":436}],189:[function(require,module,exports){
 /**
  * @fileoverview Rule to enforce that all class methods use 'this'.
  * @author Patrick Williams
@@ -55294,59 +55468,57 @@ module.exports = {
                 arrayLiteral = node.type === "ArrayExpression" || node.type === "ArrayPattern";
 
             if (items.length > 1 || arrayLiteral) {
-                (function () {
 
-                    // seed as opening [
-                    var previousItemToken = sourceCode.getFirstToken(node);
+                // seed as opening [
+                var previousItemToken = sourceCode.getFirstToken(node);
 
-                    items.forEach(function (item) {
-                        var commaToken = item ? sourceCode.getTokenBefore(item) : previousItemToken,
-                            currentItemToken = item ? sourceCode.getFirstToken(item) : sourceCode.getTokenAfter(commaToken),
-                            reportItem = item || currentItemToken,
-                            tokenBeforeComma = sourceCode.getTokenBefore(commaToken);
+                items.forEach(function (item) {
+                    var commaToken = item ? sourceCode.getTokenBefore(item) : previousItemToken,
+                        currentItemToken = item ? sourceCode.getFirstToken(item) : sourceCode.getTokenAfter(commaToken),
+                        reportItem = item || currentItemToken,
+                        tokenBeforeComma = sourceCode.getTokenBefore(commaToken);
 
-                        // Check if previous token is wrapped in parentheses
-                        if (tokenBeforeComma && tokenBeforeComma.value === ")") {
-                            previousItemToken = tokenBeforeComma;
-                        }
-
-                        /*
-                         * This works by comparing three token locations:
-                         * - previousItemToken is the last token of the previous item
-                         * - commaToken is the location of the comma before the current item
-                         * - currentItemToken is the first token of the current item
-                         *
-                         * These values get switched around if item is undefined.
-                         * previousItemToken will refer to the last token not belonging
-                         * to the current item, which could be a comma or an opening
-                         * square bracket. currentItemToken could be a comma.
-                         *
-                         * All comparisons are done based on these tokens directly, so
-                         * they are always valid regardless of an undefined item.
-                         */
-                        if (isComma(commaToken)) {
-                            validateCommaItemSpacing(previousItemToken, commaToken, currentItemToken, reportItem);
-                        }
-
-                        previousItemToken = item ? sourceCode.getLastToken(item) : previousItemToken;
-                    });
+                    // Check if previous token is wrapped in parentheses
+                    if (tokenBeforeComma && tokenBeforeComma.value === ")") {
+                        previousItemToken = tokenBeforeComma;
+                    }
 
                     /*
-                     * Special case for array literals that have empty last items, such
-                     * as [ 1, 2, ]. These arrays only have two items show up in the
-                     * AST, so we need to look at the token to verify that there's no
-                     * dangling comma.
+                     * This works by comparing three token locations:
+                     * - previousItemToken is the last token of the previous item
+                     * - commaToken is the location of the comma before the current item
+                     * - currentItemToken is the first token of the current item
+                     *
+                     * These values get switched around if item is undefined.
+                     * previousItemToken will refer to the last token not belonging
+                     * to the current item, which could be a comma or an opening
+                     * square bracket. currentItemToken could be a comma.
+                     *
+                     * All comparisons are done based on these tokens directly, so
+                     * they are always valid regardless of an undefined item.
                      */
-                    if (arrayLiteral) {
-
-                        var lastToken = sourceCode.getLastToken(node),
-                            nextToLastToken = sourceCode.getTokenBefore(lastToken);
-
-                        if (isComma(nextToLastToken)) {
-                            validateCommaItemSpacing(sourceCode.getTokenBefore(nextToLastToken), nextToLastToken, lastToken, lastToken);
-                        }
+                    if (isComma(commaToken)) {
+                        validateCommaItemSpacing(previousItemToken, commaToken, currentItemToken, reportItem);
                     }
-                })();
+
+                    previousItemToken = item ? sourceCode.getLastToken(item) : previousItemToken;
+                });
+
+                /*
+                 * Special case for array literals that have empty last items, such
+                 * as [ 1, 2, ]. These arrays only have two items show up in the
+                 * AST, so we need to look at the token to verify that there's no
+                 * dangling comma.
+                 */
+                if (arrayLiteral) {
+
+                    var lastToken = sourceCode.getLastToken(node),
+                        nextToLastToken = sourceCode.getTokenBefore(lastToken);
+
+                    if (isComma(nextToLastToken)) {
+                        validateCommaItemSpacing(sourceCode.getTokenBefore(nextToLastToken), nextToLastToken, lastToken, lastToken);
+                    }
+                }
             }
         }
 
@@ -55846,7 +56018,7 @@ module.exports = {
             } else if (node.type === "ArrowFunctionExpression") {
 
                 // `=>` token
-                loc = context.getSourceCode().getTokenBefore(node.body).loc.start;
+                loc = context.getSourceCode().getTokenBefore(node.body, astUtils.isArrowToken).loc.start;
                 type = "function";
             } else if (node.parent.type === "MethodDefinition" || node.parent.type === "Property" && node.parent.method) {
 
@@ -56528,18 +56700,22 @@ module.exports = {
         }
 
         /**
+         * Checks if the given token is an `else` token or not.
+         *
+         * @param {Token} token - The token to check.
+         * @returns {boolean} `true` if the token is an `else` token.
+         */
+        function isElseKeywordToken(token) {
+            return token.value === "else" && token.type === "Keyword";
+        }
+
+        /**
          * Gets the `else` keyword token of a given `IfStatement` node.
          * @param {ASTNode} node - A `IfStatement` node to get.
          * @returns {Token} The `else` keyword token.
          */
         function getElseKeyword(node) {
-            var token = sourceCode.getTokenAfter(node.consequent);
-
-            while (token.type !== "Keyword" || token.value !== "else") {
-                token = sourceCode.getTokenAfter(token);
-            }
-
-            return token;
+            return node.alternate && sourceCode.getFirstTokenBetween(node.consequent, node.alternate, isElseKeywordToken);
         }
 
         /**
@@ -56765,24 +56941,22 @@ module.exports = {
             } while (node);
 
             if (consistent) {
-                (function () {
 
-                    /*
-                     * If any node should have or already have braces, make sure they
-                     * all have braces.
-                     * If all nodes shouldn't have braces, make sure they don't.
-                     */
-                    var expected = preparedChecks.some(function (preparedCheck) {
-                        if (preparedCheck.expected !== null) {
-                            return preparedCheck.expected;
-                        }
-                        return preparedCheck.actual;
-                    });
+                /*
+                 * If any node should have or already have braces, make sure they
+                 * all have braces.
+                 * If all nodes shouldn't have braces, make sure they don't.
+                 */
+                var expected = preparedChecks.some(function (preparedCheck) {
+                    if (preparedCheck.expected !== null) {
+                        return preparedCheck.expected;
+                    }
+                    return preparedCheck.actual;
+                });
 
-                    preparedChecks.forEach(function (preparedCheck) {
-                        preparedCheck.expected = expected;
-                    });
-                })();
+                preparedChecks.forEach(function (preparedCheck) {
+                    preparedCheck.expected = expected;
+                });
             }
 
             return preparedChecks;
@@ -56963,18 +57137,16 @@ module.exports = {
             if (dot.type === "Punctuator" && dot.value === ".") {
                 if (onObject) {
                     if (!astUtils.isTokenOnSameLine(obj, dot)) {
-                        (function () {
-                            var neededTextAfterObj = astUtils.isDecimalInteger(obj) ? " " : "";
+                        var neededTextAfterObj = astUtils.isDecimalInteger(obj) ? " " : "";
 
-                            context.report({
-                                node: node,
-                                loc: dot.loc.start,
-                                message: "Expected dot to be on same line as object.",
-                                fix: function fix(fixer) {
-                                    return fixer.replaceTextRange([obj.range[1], prop.range[0]], neededTextAfterObj + "." + textBeforeDot + textAfterDot);
-                                }
-                            });
-                        })();
+                        context.report({
+                            node: node,
+                            loc: dot.loc.start,
+                            message: "Expected dot to be on same line as object.",
+                            fix: function fix(fixer) {
+                                return fixer.replaceTextRange([obj.range[1], prop.range[0]], neededTextAfterObj + "." + textBeforeDot + textAfterDot);
+                            }
+                        });
                     }
                 } else if (!astUtils.isTokenOnSameLine(dot, prop)) {
                     context.report({
@@ -57106,7 +57278,7 @@ module.exports = {
     }
 };
 
-},{"../util/keywords":422}],202:[function(require,module,exports){
+},{"../util/keywords":434}],202:[function(require,module,exports){
 /**
  * @fileoverview Require or disallow newline at the end of files
  * @author Nodeca Team <https://github.com/nodeca>
@@ -57209,10 +57381,16 @@ module.exports = {
 "use strict";
 
 //------------------------------------------------------------------------------
-// Rule Definition
+// Requirements
 //------------------------------------------------------------------------------
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+var astUtils = require("../ast-utils");
+
+//------------------------------------------------------------------------------
+// Rule Definition
+//------------------------------------------------------------------------------
 
 module.exports = {
     meta: {
@@ -57294,7 +57472,7 @@ module.exports = {
          * @private
          */
         function isNullCheck(node) {
-            return node.right.type === "Literal" && node.right.value === null || node.left.type === "Literal" && node.left.value === null;
+            return astUtils.isNullLiteral(node.right) || astUtils.isNullLiteral(node.left);
         }
 
         /**
@@ -57327,7 +57505,7 @@ module.exports = {
 
                     // If the comparison is a `typeof` comparison or both sides are literals with the same type, then it's safe to fix.
                     if (isTypeOfBinary(node) || areLiteralsAndSameType(node)) {
-                        var operatorToken = sourceCode.getTokensBetween(node.left, node.right).find(function (token) {
+                        var operatorToken = sourceCode.getFirstTokenBetween(node.left, node.right, function (token) {
                             return token.value === node.operator;
                         });
 
@@ -57363,13 +57541,19 @@ module.exports = {
     }
 };
 
-},{}],204:[function(require,module,exports){
+},{"../ast-utils":162}],204:[function(require,module,exports){
 /**
  * @fileoverview Rule to control spacing within function calls
  * @author Matt DuVall <http://www.mattduvall.com>
  */
 
 "use strict";
+
+//------------------------------------------------------------------------------
+// Requirements
+//------------------------------------------------------------------------------
+
+var astUtils = require("../ast-utils");
 
 //------------------------------------------------------------------------------
 // Rule Definition
@@ -57425,15 +57609,10 @@ module.exports = {
          * @private
          */
         function checkSpacing(node) {
+            var lastToken = sourceCode.getLastToken(node);
             var lastCalleeToken = sourceCode.getLastToken(node.callee);
-            var prevToken = lastCalleeToken;
-            var parenToken = sourceCode.getTokenAfter(lastCalleeToken);
-
-            // advances to an open parenthesis.
-            while (parenToken && parenToken.range[1] < node.range[1] && parenToken.value !== "(") {
-                prevToken = parenToken;
-                parenToken = sourceCode.getTokenAfter(parenToken);
-            }
+            var parenToken = sourceCode.getFirstTokenBetween(lastCalleeToken, lastToken, astUtils.isOpeningParenToken);
+            var prevToken = parenToken && sourceCode.getTokenBefore(parenToken);
 
             // Parens in NewExpression are optional
             if (!(parenToken && parenToken.range[1] < node.range[1])) {
@@ -57442,7 +57621,7 @@ module.exports = {
 
             var textBetweenTokens = text.slice(prevToken.range[1], parenToken.range[0]).replace(/\/\*.*?\*\//g, "");
             var hasWhitespace = /\s/.test(textBetweenTokens);
-            var hasNewline = hasWhitespace && /[\n\r\u2028\u2029]/.test(textBetweenTokens);
+            var hasNewline = hasWhitespace && astUtils.LINEBREAK_MATCHER.test(textBetweenTokens);
 
             /*
              * never allowNewlines hasWhitespace hasNewline message
@@ -57512,7 +57691,7 @@ module.exports = {
     }
 };
 
-},{}],205:[function(require,module,exports){
+},{"../ast-utils":162}],205:[function(require,module,exports){
 /**
  * @fileoverview Rule to require function names to match the name of the variable or property to which they are assigned.
  * @author Annie Zhang, Pavel Strashkin
@@ -57915,21 +58094,23 @@ module.exports = {
         var sourceCode = context.getSourceCode();
 
         /**
-         * Gets `*` token from a given node.
+         * Checks if the given token is a star token or not.
          *
-         * @param {ASTNode} node - A node to get `*` token. This is one of
-         *      FunctionDeclaration, FunctionExpression, Property, and
-         *      MethodDefinition.
-         * @returns {Token} `*` token.
+         * @param {Token} token - The token to check.
+         * @returns {boolean} `true` if the token is a star token.
+         */
+        function isStarToken(token) {
+            return token.value === "*" && token.type === "Punctuator";
+        }
+
+        /**
+         * Gets the generator star token of the given function node.
+         *
+         * @param {ASTNode} node - The function node to get.
+         * @returns {Token} Found star token.
          */
         function getStarToken(node) {
-            var token = sourceCode.getFirstToken(node);
-
-            while (token.value !== "*") {
-                token = sourceCode.getTokenAfter(token);
-            }
-
-            return token;
+            return sourceCode.getFirstToken(node.parent.method || node.parent.type === "MethodDefinition" ? node.parent : node, isStarToken);
         }
 
         /**
@@ -57943,32 +58124,30 @@ module.exports = {
          */
         function checkSpacing(side, leftToken, rightToken) {
             if (!!(rightToken.range[0] - leftToken.range[1]) !== mode[side]) {
-                (function () {
-                    var after = leftToken.value === "*";
-                    var spaceRequired = mode[side];
-                    var node = after ? leftToken : rightToken;
-                    var type = spaceRequired ? "Missing" : "Unexpected";
-                    var message = "{{type}} space {{side}} *.";
-                    var data = {
-                        type: type,
-                        side: side
-                    };
+                var after = leftToken.value === "*";
+                var spaceRequired = mode[side];
+                var node = after ? leftToken : rightToken;
+                var type = spaceRequired ? "Missing" : "Unexpected";
+                var message = "{{type}} space {{side}} *.";
+                var data = {
+                    type: type,
+                    side: side
+                };
 
-                    context.report({
-                        node: node,
-                        message: message,
-                        data: data,
-                        fix: function fix(fixer) {
-                            if (spaceRequired) {
-                                if (after) {
-                                    return fixer.insertTextAfter(node, " ");
-                                }
-                                return fixer.insertTextBefore(node, " ");
+                context.report({
+                    node: node,
+                    message: message,
+                    data: data,
+                    fix: function fix(fixer) {
+                        if (spaceRequired) {
+                            if (after) {
+                                return fixer.insertTextAfter(node, " ");
                             }
-                            return fixer.removeRange([leftToken.range[1], rightToken.range[0]]);
+                            return fixer.insertTextBefore(node, " ");
                         }
-                    });
-                })();
+                        return fixer.removeRange([leftToken.range[1], rightToken.range[0]]);
+                    }
+                });
             }
         }
 
@@ -57978,17 +58157,11 @@ module.exports = {
          * @returns {void}
          */
         function checkFunction(node) {
-            var starToken = void 0;
-
             if (!node.generator) {
                 return;
             }
 
-            if (node.parent.method || node.parent.type === "MethodDefinition") {
-                starToken = getStarToken(node.parent);
-            } else {
-                starToken = getStarToken(node);
-            }
+            var starToken = getStarToken(node);
 
             // Only check before when preceded by `function`|`static` keyword
             var prevToken = sourceCode.getTokenBefore(starToken);
@@ -58571,10 +58744,16 @@ module.exports = {
 "use strict";
 
 //------------------------------------------------------------------------------
-// Rule Definition
+// Requirements
 //------------------------------------------------------------------------------
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+var astUtils = require("../ast-utils");
+
+//------------------------------------------------------------------------------
+// Rule Definition
+//------------------------------------------------------------------------------
 
 module.exports = {
     meta: {
@@ -58971,15 +59150,10 @@ module.exports = {
          * @returns {void}
          */
         function checkLastReturnStatementLineIndent(node, firstLineIndent) {
-            var nodeLastToken = sourceCode.getLastToken(node);
-            var lastToken = nodeLastToken;
 
             // in case if return statement ends with ');' we have traverse back to ')'
             // otherwise we'll measure indent for ';' and replace ')'
-            while (lastToken.value !== ")") {
-                lastToken = sourceCode.getTokenBefore(lastToken);
-            }
-
+            var lastToken = sourceCode.getLastToken(node, astUtils.isClosingParenToken);
             var textBeforeClosingParenthesis = sourceCode.getText(lastToken, lastToken.loc.start.column).slice(0, -1);
 
             if (textBeforeClosingParenthesis.trim()) {
@@ -59600,7 +59774,7 @@ module.exports = {
     }
 };
 
-},{}],216:[function(require,module,exports){
+},{"../ast-utils":162}],216:[function(require,module,exports){
 /**
  * @fileoverview A rule to control the style of variable initializations.
  * @author Colin Ihrig
@@ -59827,6 +60001,14 @@ module.exports = {
 "use strict";
 
 //------------------------------------------------------------------------------
+// Requirements
+//------------------------------------------------------------------------------
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+var astUtils = require("../ast-utils");
+
+//------------------------------------------------------------------------------
 // Helpers
 //------------------------------------------------------------------------------
 
@@ -59836,12 +60018,8 @@ module.exports = {
  * @param {string} str String to test.
  * @returns {boolean} True if str contains a line terminator.
  */
-
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
-
 function containsLineTerminator(str) {
-    return (/[\n\r\u2028\u2029]/.test(str)
-    );
+    return astUtils.LINEBREAK_MATCHER.test(str);
 }
 
 /**
@@ -60173,14 +60351,9 @@ module.exports = {
          * @returns {ASTNode} The last token before a colon punctuator.
          */
         function getLastTokenBeforeColon(node) {
-            var prevNode = void 0;
+            var colonToken = sourceCode.getTokenAfter(node, astUtils.isColonToken);
 
-            while (node && (node.type !== "Punctuator" || node.value !== ":")) {
-                prevNode = node;
-                node = sourceCode.getTokenAfter(node);
-            }
-
-            return prevNode;
+            return sourceCode.getTokenBefore(colonToken);
         }
 
         /**
@@ -60190,12 +60363,7 @@ module.exports = {
          * @returns {ASTNode} The colon punctuator.
          */
         function getNextColon(node) {
-
-            while (node && (node.type !== "Punctuator" || node.value !== ":")) {
-                node = sourceCode.getTokenAfter(node);
-            }
-
-            return node;
+            return sourceCode.getTokenAfter(node, astUtils.isColonToken);
         }
 
         /**
@@ -60226,8 +60394,8 @@ module.exports = {
         function report(property, side, whitespace, expected, mode) {
             var diff = whitespace.length - expected,
                 nextColon = getNextColon(property.key),
-                tokenBeforeColon = sourceCode.getTokenOrCommentBefore(nextColon),
-                tokenAfterColon = sourceCode.getTokenOrCommentAfter(nextColon),
+                tokenBeforeColon = sourceCode.getTokenBefore(nextColon, { includeComments: true }),
+                tokenAfterColon = sourceCode.getTokenAfter(nextColon, { includeComments: true }),
                 isKeySide = side === "key",
                 locStart = isKeySide ? tokenBeforeColon.loc.start : tokenAfterColon.loc.start,
                 isExtra = diff > 0,
@@ -60237,19 +60405,17 @@ module.exports = {
 
             if ((diff && mode === "strict" || diff < 0 && mode === "minimum" || diff > 0 && !expected && mode === "minimum") && !(expected && containsLineTerminator(whitespace))) {
                 if (isExtra) {
-                    (function () {
-                        var range = void 0;
+                    var range = void 0;
 
-                        // Remove whitespace
-                        if (isKeySide) {
-                            range = [tokenBeforeColon.end, tokenBeforeColon.end + diffAbs];
-                        } else {
-                            range = [tokenAfterColon.start - diffAbs, tokenAfterColon.start];
-                        }
-                        fix = function fix(fixer) {
-                            return fixer.removeRange(range);
-                        };
-                    })();
+                    // Remove whitespace
+                    if (isKeySide) {
+                        range = [tokenBeforeColon.end, tokenBeforeColon.end + diffAbs];
+                    } else {
+                        range = [tokenAfterColon.start - diffAbs, tokenAfterColon.start];
+                    }
+                    fix = function fix(fixer) {
+                        return fixer.removeRange(range);
+                    };
                 } else {
 
                     // Add whitespace
@@ -60448,7 +60614,7 @@ module.exports = {
     }
 };
 
-},{}],219:[function(require,module,exports){
+},{"../ast-utils":162}],219:[function(require,module,exports){
 /**
  * @fileoverview Rule to enforce spacing before and after keywords.
  * @author Toru Nagashima
@@ -60771,11 +60937,7 @@ module.exports = {
          */
         function checkSpacingAroundTokenBefore(node) {
             if (node) {
-                var token = sourceCode.getTokenBefore(node);
-
-                while (token.type !== "Keyword") {
-                    token = sourceCode.getTokenBefore(token);
-                }
+                var token = sourceCode.getTokenBefore(node, astUtils.isKeywordToken);
 
                 checkSpacingAround(token);
             }
@@ -60866,14 +61028,7 @@ module.exports = {
          */
         function checkSpacingForForOfStatement(node) {
             checkSpacingAroundFirstToken(node);
-
-            // `of` is not a keyword token.
-            var token = sourceCode.getTokenBefore(node.right);
-
-            while (token.value !== "of") {
-                token = sourceCode.getTokenBefore(token);
-            }
-            checkSpacingAround(token);
+            checkSpacingAround(sourceCode.getTokenBefore(node.right, astUtils.isNotOpeningParenToken));
         }
 
         /**
@@ -60997,7 +61152,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":162,"../util/keywords":422}],220:[function(require,module,exports){
+},{"../ast-utils":162,"../util/keywords":434}],220:[function(require,module,exports){
 /**
  * @fileoverview Rule to enforce the position of line comments
  * @author Alberto Rodríguez
@@ -61071,7 +61226,7 @@ module.exports = {
                     return;
                 }
 
-                var previous = sourceCode.getTokenOrCommentBefore(node);
+                var previous = sourceCode.getTokenBefore(node, { includeComments: true });
                 var isOnSameLine = previous && previous.loc.end.line === node.loc.start.line;
 
                 if (above) {
@@ -61101,6 +61256,12 @@ module.exports = {
  */
 
 "use strict";
+
+//------------------------------------------------------------------------------
+// Requirements
+//------------------------------------------------------------------------------
+
+var astUtils = require("../ast-utils");
 
 //------------------------------------------------------------------------------
 // Rule Definition
@@ -61155,7 +61316,7 @@ module.exports = {
                     expectedLF = linebreakStyle === "unix",
                     expectedLFChars = expectedLF ? "\n" : "\r\n",
                     source = sourceCode.getText(),
-                    pattern = /\r\n|\r|\n|\u2028|\u2029/g;
+                    pattern = astUtils.createGlobalLinebreakMatcher();
                 var match = void 0;
 
                 var i = 0;
@@ -61184,7 +61345,7 @@ module.exports = {
     }
 };
 
-},{}],222:[function(require,module,exports){
+},{"../ast-utils":162}],222:[function(require,module,exports){
 /**
  * @fileoverview Enforces empty lines around comments.
  * @author Jamund Ferguson
@@ -61330,7 +61491,7 @@ module.exports = {
 
             token = node;
             do {
-                token = sourceCode.getTokenOrCommentBefore(token);
+                token = sourceCode.getTokenBefore(token, { includeComments: true });
             } while (isCommentNodeType(token));
 
             if (token && astUtils.isTokenOnSameLine(token, node)) {
@@ -61339,7 +61500,7 @@ module.exports = {
 
             token = node;
             do {
-                token = sourceCode.getTokenOrCommentAfter(token);
+                token = sourceCode.getTokenAfter(token, { includeComments: true });
             } while (isCommentNodeType(token));
 
             if (token && astUtils.isTokenOnSameLine(node, token)) {
@@ -61487,23 +61648,21 @@ module.exports = {
                 return;
             }
 
-            var previousTokenOrComment = sourceCode.getTokenOrCommentBefore(node);
-            var nextTokenOrComment = sourceCode.getTokenOrCommentAfter(node);
+            var previousTokenOrComment = sourceCode.getTokenBefore(node, { includeComments: true });
+            var nextTokenOrComment = sourceCode.getTokenAfter(node, { includeComments: true });
 
             // check for newline before
             if (!exceptionStartAllowed && before && !lodash.includes(commentAndEmptyLines, prevLineNum) && !(isCommentNodeType(previousTokenOrComment) && astUtils.isTokenOnSameLine(previousTokenOrComment, node))) {
-                (function () {
-                    var lineStart = node.range[0] - node.loc.start.column;
-                    var range = [lineStart, lineStart];
+                var lineStart = node.range[0] - node.loc.start.column;
+                var range = [lineStart, lineStart];
 
-                    context.report({
-                        node: node,
-                        message: "Expected line before comment.",
-                        fix: function fix(fixer) {
-                            return fixer.insertTextBeforeRange(range, "\n");
-                        }
-                    });
-                })();
+                context.report({
+                    node: node,
+                    message: "Expected line before comment.",
+                    fix: function fix(fixer) {
+                        return fixer.insertTextBeforeRange(range, "\n");
+                    }
+                });
             }
 
             // check for newline after
@@ -61600,7 +61759,7 @@ module.exports = {
          * @returns {boolean} Whether or not the passed in node is preceded by a blank newline.
          */
         function hasNewlineBefore(node) {
-            var tokenBefore = sourceCode.getTokenOrCommentBefore(node);
+            var tokenBefore = sourceCode.getTokenBefore(node, { includeComments: true });
             var tokenLineBefore = tokenBefore ? tokenBefore.loc.end.line : 0;
 
             return node.loc.start.line - tokenLineBefore >= 2;
@@ -61627,7 +61786,7 @@ module.exports = {
          */
         function hasNewlineAfter(node) {
             var lastToken = getLastTokenOnLine(node);
-            var tokenAfter = sourceCode.getTokenOrCommentAfter(lastToken);
+            var tokenAfter = sourceCode.getTokenAfter(lastToken, { includeComments: true });
 
             return tokenAfter.loc.start.line - lastToken.loc.end.line >= 2;
         }
@@ -61672,7 +61831,7 @@ module.exports = {
             }
 
             var firstDirective = directives[0];
-            var hasTokenOrCommentBefore = !!sourceCode.getTokenOrCommentBefore(firstDirective);
+            var hasTokenOrCommentBefore = !!sourceCode.getTokenBefore(firstDirective, { includeComments: true });
 
             // Only check before the first directive if it is preceded by a comment or if it is at the top of
             // the file and expectLineBefore is set to "never". This is to not force a newline at the top of
@@ -62315,7 +62474,7 @@ module.exports = {
 
             token = comment;
             do {
-                token = sourceCode.getTokenOrCommentBefore(token);
+                token = sourceCode.getTokenBefore(token, { includeComments: true });
             } while (isCommentNodeType(token));
 
             if (token && astUtils.isTokenOnSameLine(token, comment)) {
@@ -62324,7 +62483,7 @@ module.exports = {
 
             token = comment;
             do {
-                token = sourceCode.getTokenOrCommentAfter(token);
+                token = sourceCode.getTokenAfter(token, { includeComments: true });
             } while (isCommentNodeType(token));
 
             if (token && astUtils.isTokenOnSameLine(comment, token)) {
@@ -62350,17 +62509,15 @@ module.exports = {
                 }
 
                 if (skipComments) {
-                    (function () {
-                        var comments = sourceCode.getAllComments();
+                    var comments = sourceCode.getAllComments();
 
-                        var commentLines = lodash.flatten(comments.map(function (comment) {
-                            return getLinesWithoutCode(comment);
-                        }));
+                    var commentLines = lodash.flatten(comments.map(function (comment) {
+                        return getLinesWithoutCode(comment);
+                    }));
 
-                        lines = lines.filter(function (l) {
-                            return !lodash.includes(commentLines, l.lineNumber);
-                        });
-                    })();
+                    lines = lines.filter(function (l) {
+                        return !lodash.includes(commentLines, l.lineNumber);
+                    });
                 }
 
                 if (lines.length > max) {
@@ -62577,6 +62734,12 @@ module.exports = {
 "use strict";
 
 //------------------------------------------------------------------------------
+// Requirements
+//------------------------------------------------------------------------------
+
+var astUtils = require("../ast-utils");
+
+//------------------------------------------------------------------------------
 // Rule Definition
 //------------------------------------------------------------------------------
 
@@ -62644,12 +62807,7 @@ module.exports = {
          * @returns {Token} The actual last token.
          */
         function getActualLastToken(node) {
-            var lastToken = sourceCode.getLastToken(node);
-
-            if (lastToken.value === ";") {
-                lastToken = sourceCode.getTokenBefore(lastToken);
-            }
-            return lastToken;
+            return sourceCode.getLastToken(node, astUtils.isNotSemicolonToken);
         }
 
         /**
@@ -62758,7 +62916,7 @@ module.exports = {
     }
 };
 
-},{}],230:[function(require,module,exports){
+},{"../ast-utils":162}],230:[function(require,module,exports){
 /**
  * @fileoverview A rule to set the maximum number of statements in a function.
  * @author Ian Christian Myers
@@ -63351,6 +63509,12 @@ module.exports = {
 "use strict";
 
 //------------------------------------------------------------------------------
+// Requirements
+//------------------------------------------------------------------------------
+
+var astUtils = require("../ast-utils");
+
+//------------------------------------------------------------------------------
 // Rule Definition
 //------------------------------------------------------------------------------
 
@@ -63543,8 +63707,7 @@ module.exports = {
                     message: NEVER_MESSAGE,
                     data: { identifier: node.name },
                     fix: function fix(fixer) {
-                        var NEWLINE_REGEX = /\r\n|\r|\n|\u2028|\u2029/;
-                        var linesBetween = sourceCode.getText().slice(lastToken.range[1], nextToken.range[0]).split(NEWLINE_REGEX);
+                        var linesBetween = sourceCode.getText().slice(lastToken.range[1], nextToken.range[0]).split(astUtils.LINEBREAK_MATCHER);
 
                         return fixer.replaceTextRange([lastToken.range[1], nextToken.range[0]], linesBetween.slice(0, -1).join("") + "\n" + linesBetween[linesBetween.length - 1]);
                     }
@@ -63578,7 +63741,7 @@ module.exports = {
     }
 };
 
-},{}],235:[function(require,module,exports){
+},{"../ast-utils":162}],235:[function(require,module,exports){
 /**
  * @fileoverview Rule to require newlines before `return` statement
  * @author Kai Cataldo
@@ -63790,6 +63953,8 @@ module.exports = {
 
 "use strict";
 
+var astUtils = require("../ast-utils");
+
 //------------------------------------------------------------------------------
 // Rule Definition
 //------------------------------------------------------------------------------
@@ -63831,7 +63996,7 @@ module.exports = {
          */
         function getPropertyText(node) {
             var prefix = node.computed ? "[" : ".";
-            var lines = sourceCode.getText(node.property).split(/\r\n|\r|\n/g);
+            var lines = sourceCode.getText(node.property).split(astUtils.LINEBREAK_MATCHER);
             var suffix = node.computed && lines.length === 1 ? "]" : "";
 
             return prefix + lines[0] + suffix;
@@ -63867,7 +64032,7 @@ module.exports = {
     }
 };
 
-},{}],237:[function(require,module,exports){
+},{"../ast-utils":162}],237:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag use of alert, confirm, prompt
  * @author Nicholas C. Zakas
@@ -66772,7 +66937,7 @@ module.exports = {
 // Requirements
 //------------------------------------------------------------------------------
 
-var getPropertyName = require("../ast-utils").getStaticPropertyName;
+var astUtils = require("../ast-utils");
 
 //------------------------------------------------------------------------------
 // Rule Definition
@@ -66807,9 +66972,7 @@ module.exports = {
                 message: "The function binding is unnecessary.",
                 loc: node.parent.property.loc.start,
                 fix: function fix(fixer) {
-                    var firstTokenToRemove = context.getSourceCode().getTokensBetween(node.parent.object, node.parent.property).find(function (token) {
-                        return token.value !== ")";
-                    });
+                    var firstTokenToRemove = context.getSourceCode().getFirstTokenBetween(node.parent.object, node.parent.property, astUtils.isNotClosingParenToken);
 
                     return fixer.removeRange([firstTokenToRemove.range[0], node.parent.parent.range[1]]);
                 }
@@ -66830,7 +66993,7 @@ module.exports = {
             var parent = node.parent;
             var grandparent = parent.parent;
 
-            return grandparent && grandparent.type === "CallExpression" && grandparent.callee === parent && grandparent.arguments.length === 1 && parent.type === "MemberExpression" && parent.object === node && getPropertyName(parent) === "bind";
+            return grandparent && grandparent.type === "CallExpression" && grandparent.callee === parent && grandparent.arguments.length === 1 && parent.type === "MemberExpression" && parent.object === node && astUtils.getStaticPropertyName(parent) === "bind";
         }
 
         /**
@@ -66988,6 +67151,14 @@ module.exports = {
                         node: node,
                         message: "Redundant Boolean call.",
                         fix: function fix(fixer) {
+                            if (!node.arguments.length) {
+                                return fixer.replaceText(parent, "true");
+                            }
+
+                            if (node.arguments.length > 1 || node.arguments[0].type === "SpreadElement") {
+                                return null;
+                            }
+
                             var argument = node.arguments[0];
 
                             if (astUtils.getPrecedence(argument) < astUtils.getPrecedence(node.parent)) {
@@ -69035,13 +69206,19 @@ module.exports = {
 "use strict";
 
 //------------------------------------------------------------------------------
+// Requirements
+//------------------------------------------------------------------------------
+
+var astUtils = require("../ast-utils");
+
+//------------------------------------------------------------------------------
 // Constants
 //------------------------------------------------------------------------------
 
 var ALL_IRREGULARS = /[\f\v\u0085\u00A0\ufeff\u00a0\u1680\u180e\u2000\u2001\u2002\u2003\u2004\u2005\u2006\u2007\u2008\u2009\u200a\u200b\u202f\u205f\u3000\u2028\u2029]/;
 var IRREGULAR_WHITESPACE = /[\f\v\u0085\u00A0\ufeff\u00a0\u1680\u180e\u2000\u2001\u2002\u2003\u2004\u2005\u2006\u2007\u2008\u2009\u200a\u200b\u202f\u205f\u3000]+/mg;
 var IRREGULAR_LINE_TERMINATORS = /[\u2028\u2029]/mg;
-var LINE_BREAK = /\r\n|\r|\n|\u2028|\u2029/g;
+var LINE_BREAK = astUtils.createGlobalLinebreakMatcher();
 
 //------------------------------------------------------------------------------
 // Rule Definition
@@ -69271,7 +69448,7 @@ module.exports = {
     }
 };
 
-},{}],286:[function(require,module,exports){
+},{"../ast-utils":162}],286:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag usage of __iterator__ property
  * @author Ian Christian Myers
@@ -69548,20 +69725,21 @@ module.exports = {
          * @returns {void}
         */
         function report(node) {
-            var parent = context.getAncestors().pop();
+            var message = node.parent.type === "BlockStatement" ? "Nested block is redundant." : "Block is redundant.";
 
-            context.report({ node: node, message: parent.type === "Program" ? "Block is redundant." : "Nested block is redundant."
-            });
+            context.report({ node: node, message: message });
         }
 
         /**
-         * Checks for any ocurrence of BlockStatement > BlockStatement or Program > BlockStatement
-         * @returns {boolean} True if the current node is a lone block.
+         * Checks for any ocurrence of a BlockStatement in a place where lists of statements can appear
+         * @param {ASTNode} node The node to check
+         * @returns {boolean} True if the node is a lone block.
         */
-        function isLoneBlock() {
-            var parent = context.getAncestors().pop();
+        function isLoneBlock(node) {
+            return node.parent.type === "BlockStatement" || node.parent.type === "Program" ||
 
-            return parent.type === "BlockStatement" || parent.type === "Program";
+            // Don't report blocks in switch cases if the block is the only statement of the case.
+            node.parent.type === "SwitchCase" && !(node.parent.consequent[0] === node && node.parent.consequent.length === 1);
         }
 
         /**
@@ -70152,13 +70330,7 @@ module.exports = {
          * @returns {Token} The operator token of the node.
          */
         function getOperatorToken(node) {
-            var token = sourceCode.getTokenAfter(node.left);
-
-            while (token.value === ")") {
-                token = sourceCode.getTokenAfter(token);
-            }
-
-            return token;
+            return sourceCode.getTokenAfter(node.left, astUtils.isNotClosingParenToken);
         }
 
         /**
@@ -70598,6 +70770,12 @@ module.exports = {
 
 "use strict";
 
+var _templateObject = _taggedTemplateLiteral(["[^ \t", "].? {2,}"], ["[^ \\t", "].? {2,}"]);
+
+function _taggedTemplateLiteral(strings, raw) { return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
+
+var astUtils = require("../ast-utils");
+
 //------------------------------------------------------------------------------
 // Rule Definition
 //------------------------------------------------------------------------------
@@ -70684,7 +70862,8 @@ module.exports = {
                 var sourceCode = context.getSourceCode(),
                     source = sourceCode.getText(),
                     allComments = sourceCode.getAllComments(),
-                    pattern = /[^\n\r\u2028\u2029\t ].? {2,}/g; // note: repeating space
+                    JOINED_LINEBEAKS = Array.from(astUtils.LINEBREAKS).join(""),
+                    pattern = new RegExp(String.raw(_templateObject, JOINED_LINEBEAKS), "g"); // note: repeating space
                 var parent = void 0;
 
                 /**
@@ -70731,13 +70910,19 @@ module.exports = {
     }
 };
 
-},{}],298:[function(require,module,exports){
+},{"../ast-utils":162}],298:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag when using multiline strings
  * @author Ilya Volodin
  */
 
 "use strict";
+
+//------------------------------------------------------------------------------
+// Requirements
+//------------------------------------------------------------------------------
+
+var astUtils = require("../ast-utils");
 
 //------------------------------------------------------------------------------
 // Rule Definition
@@ -70772,9 +70957,7 @@ module.exports = {
 
         return {
             Literal: function Literal(node) {
-                var lineBreak = /\n/;
-
-                if (lineBreak.test(node.raw) && !isJSXElement(node.parent)) {
+                if (astUtils.LINEBREAK_MATCHER.test(node.raw) && !isJSXElement(node.parent)) {
                     context.report({ node: node, message: "Multiline support is limited to browsers supporting ES5 only." });
                 }
             }
@@ -70782,7 +70965,7 @@ module.exports = {
     }
 };
 
-},{}],299:[function(require,module,exports){
+},{"../ast-utils":162}],299:[function(require,module,exports){
 /**
  * @fileoverview Disallows multiple blank lines.
  * implementation adapted from the no-trailing-spaces rule.
@@ -72060,23 +72243,21 @@ module.exports = {
                 regexResults = multipleSpacesRegex.exec(value);
 
             if (regexResults !== null) {
-                (function () {
-                    var count = regexResults[0].length;
+                var count = regexResults[0].length;
 
-                    context.report({
-                        node: node,
-                        message: "Spaces are hard to count. Use {{{count}}}.",
-                        data: { count: count },
-                        fix: function fix(fixer) {
-                            return fixer.replaceTextRange([valueStart + regexResults.index, valueStart + regexResults.index + count], " {" + count + "}");
-                        }
-                    });
+                context.report({
+                    node: node,
+                    message: "Spaces are hard to count. Use {{{count}}}.",
+                    data: { count: count },
+                    fix: function fix(fixer) {
+                        return fixer.replaceTextRange([valueStart + regexResults.index, valueStart + regexResults.index + count], " {" + count + "}");
+                    }
+                });
 
-                    /*
-                     * TODO: (platinumazure) Fix message to use rule message
-                     * substitution when api.report is fixed in lib/eslint.js.
-                     */
-                })();
+                /*
+                 * TODO: (platinumazure) Fix message to use rule message
+                 * substitution when api.report is fixed in lib/eslint.js.
+                 */
             }
         }
 
@@ -72537,15 +72718,13 @@ module.exports = {
         */
         function checkDestructuringAssignment(node) {
             if (node.right.type === "Identifier") {
-                (function () {
-                    var objectName = node.right.name;
+                var objectName = node.right.name;
 
-                    if (node.left.type === "ObjectPattern") {
-                        node.left.properties.forEach(function (property) {
-                            checkPropertyAccess(node.left, objectName, astUtils.getStaticPropertyName(property));
-                        });
-                    }
-                })();
+                if (node.left.type === "ObjectPattern") {
+                    node.left.properties.forEach(function (property) {
+                        checkPropertyAccess(node.left, objectName, astUtils.getStaticPropertyName(property));
+                    });
+                }
             }
         }
 
@@ -72555,15 +72734,13 @@ module.exports = {
             },
             VariableDeclarator: function VariableDeclarator(node) {
                 if (node.init && node.init.type === "Identifier") {
-                    (function () {
-                        var objectName = node.init.name;
+                    var objectName = node.init.name;
 
-                        if (node.id.type === "ObjectPattern") {
-                            node.id.properties.forEach(function (property) {
-                                checkPropertyAccess(node.id, objectName, astUtils.getStaticPropertyName(property));
-                            });
-                        }
-                    })();
+                    if (node.id.type === "ObjectPattern") {
+                        node.id.properties.forEach(function (property) {
+                            checkPropertyAccess(node.id, objectName, astUtils.getStaticPropertyName(property));
+                        });
+                    }
                 }
             },
 
@@ -72633,23 +72810,16 @@ module.exports = {
 "use strict";
 
 //------------------------------------------------------------------------------
+// Requirements
+//------------------------------------------------------------------------------
+
+var astUtils = require("../ast-utils");
+
+//------------------------------------------------------------------------------
 // Helpers
 //------------------------------------------------------------------------------
 
 var SENTINEL_TYPE = /^(?:[a-zA-Z]+?Statement|ArrowFunctionExpression|FunctionExpression|ClassExpression)$/;
-
-/**
- * Checks whether or not a node is enclosed in parentheses.
- * @param {Node|null} node - A node to check.
- * @param {sourceCode} sourceCode - The ESLint SourceCode object.
- * @returns {boolean} Whether or not the node is enclosed in parentheses.
- */
-function isEnclosedInParens(node, sourceCode) {
-    var prevToken = sourceCode.getTokenBefore(node);
-    var nextToken = sourceCode.getTokenAfter(node);
-
-    return prevToken && prevToken.value === "(" && nextToken && nextToken.value === ")";
-}
 
 //------------------------------------------------------------------------------
 // Rule Definition
@@ -72674,7 +72844,7 @@ module.exports = {
 
         return {
             AssignmentExpression: function AssignmentExpression(node) {
-                if (!always && isEnclosedInParens(node, sourceCode)) {
+                if (!always && astUtils.isParenthesised(sourceCode, node)) {
                     return;
                 }
 
@@ -72703,7 +72873,7 @@ module.exports = {
     }
 };
 
-},{}],328:[function(require,module,exports){
+},{"../ast-utils":162}],328:[function(require,module,exports){
 /**
  * @fileoverview Disallows unnecessary `return await`
  * @author Jordan Harband
@@ -73062,6 +73232,12 @@ module.exports = {
 "use strict";
 
 //------------------------------------------------------------------------------
+// Requirements
+//------------------------------------------------------------------------------
+
+var astUtils = require("../ast-utils");
+
+//------------------------------------------------------------------------------
 // Rule Definition
 //------------------------------------------------------------------------------
 
@@ -73112,10 +73288,7 @@ module.exports = {
          * @returns {boolean} True if the node has a paren on each side.
          */
         function isParenthesised(node) {
-            var previousToken = sourceCode.getTokenBefore(node),
-                nextToken = sourceCode.getTokenAfter(node);
-
-            return previousToken && nextToken && previousToken.value === "(" && previousToken.range[1] <= node.range[0] && nextToken.value === ")" && nextToken.range[0] >= node.range[1];
+            return astUtils.isParenthesised(sourceCode, node);
         }
 
         /**
@@ -73157,7 +73330,7 @@ module.exports = {
     }
 };
 
-},{}],333:[function(require,module,exports){
+},{"../ast-utils":162}],333:[function(require,module,exports){
 /**
  * @fileoverview Disallow shadowing of NaN, undefined, and Infinity (ES5 section 15.1.1)
  * @author Michael Ficarra
@@ -74007,6 +74180,12 @@ module.exports = {
 "use strict";
 
 //------------------------------------------------------------------------------
+// Requirements
+//------------------------------------------------------------------------------
+
+var astUtils = require("../ast-utils");
+
+//------------------------------------------------------------------------------
 // Rule Definition
 //------------------------------------------------------------------------------
 
@@ -74034,7 +74213,7 @@ module.exports = {
     create: function create(context) {
         var sourceCode = context.getSourceCode();
 
-        var BLANK_CLASS = "[ \t\xA0\u2000-\u200B\u2028\u2029\u3000]",
+        var BLANK_CLASS = "[ \t\xA0\u2000-\u200B\u3000]",
             SKIP_BLANK = "^" + BLANK_CLASS + "*$",
             NONBLANK = BLANK_CLASS + "+$";
 
@@ -74080,7 +74259,7 @@ module.exports = {
                 var re = new RegExp(NONBLANK),
                     skipMatch = new RegExp(SKIP_BLANK),
                     lines = sourceCode.lines,
-                    linebreaks = sourceCode.getText().match(/\r\n|\r|\n|\u2028|\u2029/g);
+                    linebreaks = sourceCode.getText().match(astUtils.createGlobalLinebreakMatcher());
                 var totalLength = 0,
                     fixRange = [];
 
@@ -74127,7 +74306,7 @@ module.exports = {
     }
 };
 
-},{}],344:[function(require,module,exports){
+},{"../ast-utils":162}],344:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag when initializing to undefined
  * @author Ilya Volodin
@@ -74282,14 +74461,58 @@ module.exports = {
 
     create: function create(context) {
 
-        return {
-            Identifier: function Identifier(node) {
-                if (node.name === "undefined") {
-                    var parent = context.getAncestors().pop();
+        /**
+         * Report an invalid "undefined" identifier node.
+         * @param {ASTNode} node The node to report.
+         * @returns {void}
+         */
+        function report(node) {
+            context.report({
+                node: node,
+                message: "Unexpected use of undefined."
+            });
+        }
 
-                    if (!parent || parent.type !== "MemberExpression" || node !== parent.property || parent.computed) {
-                        context.report({ node: node, message: "Unexpected use of undefined." });
-                    }
+        /**
+         * Checks the given scope for references to `undefined` and reports
+         * all references found.
+         * @param {escope.Scope} scope The scope to check.
+         * @returns {void}
+         */
+        function checkScope(scope) {
+            var undefinedVar = scope.set.get("undefined");
+
+            if (!undefinedVar) {
+                return;
+            }
+
+            var references = undefinedVar.references;
+
+            var defs = undefinedVar.defs;
+
+            // Report non-initializing references (those are covered in defs below)
+            references.filter(function (ref) {
+                return !ref.init;
+            }).forEach(function (ref) {
+                return report(ref.identifier);
+            });
+
+            defs.forEach(function (def) {
+                return report(def.name);
+            });
+        }
+
+        return {
+            "Program:exit": function ProgramExit() {
+                var globalScope = context.getScope();
+
+                var stack = [globalScope];
+
+                while (stack.length) {
+                    var scope = stack.pop();
+
+                    stack.push.apply(stack, scope.childScopes);
+                    checkScope(scope);
                 }
             }
         };
@@ -74477,6 +74700,12 @@ module.exports = {
 "use strict";
 
 //------------------------------------------------------------------------------
+// Requirements
+//------------------------------------------------------------------------------
+
+var astUtils = require("../ast-utils");
+
+//------------------------------------------------------------------------------
 // Rule Definition
 //------------------------------------------------------------------------------
 
@@ -74508,14 +74737,8 @@ module.exports = {
          * @private
          */
         function checkForBreakAfter(node, msg) {
-            var nodeExpressionEnd = node;
-            var openParen = sourceCode.getTokenAfter(node);
-
-            // Move along until the end of the wrapped expression
-            while (openParen.value === ")") {
-                nodeExpressionEnd = openParen;
-                openParen = sourceCode.getTokenAfter(nodeExpressionEnd);
-            }
+            var openParen = sourceCode.getTokenAfter(node, astUtils.isNotClosingParenToken);
+            var nodeExpressionEnd = sourceCode.getTokenBefore(openParen);
 
             if (openParen.loc.start.line !== nodeExpressionEnd.loc.end.line) {
                 context.report({ node: node, loc: openParen.loc.start, message: msg, data: { char: openParen.value } });
@@ -74549,7 +74772,7 @@ module.exports = {
     }
 };
 
-},{}],349:[function(require,module,exports){
+},{"../ast-utils":162}],349:[function(require,module,exports){
 /**
  * @fileoverview Rule to disallow use of unmodified expressions in loop conditions
  * @author Toru Nagashima
@@ -74906,7 +75129,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":162,"../util/traverser":427}],350:[function(require,module,exports){
+},{"../ast-utils":162,"../util/traverser":439}],350:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag no-unneeded-ternary
  * @author Gyandeep Singh
@@ -74974,7 +75197,7 @@ module.exports = {
          */
         function invertExpression(node) {
             if (node.type === "BinaryExpression" && Object.prototype.hasOwnProperty.call(OPERATOR_INVERSES, node.operator)) {
-                var operatorToken = sourceCode.getTokensBetween(node.left, node.right).find(function (token) {
+                var operatorToken = sourceCode.getFirstTokenBetween(node.left, node.right, function (token) {
                     return token.value === node.operator;
                 });
 
@@ -75602,10 +75825,13 @@ module.exports = {
             recommended: true
         },
 
-        schema: []
+        schema: [],
+
+        fixable: "code"
     },
 
     create: function create(context) {
+        var sourceCode = context.getSourceCode();
         var scopeInfo = null;
 
         /**
@@ -75634,7 +75860,19 @@ module.exports = {
                 context.report({
                     node: node.label,
                     message: "'{{name}}:' is defined but never used.",
-                    data: node.label
+                    data: node.label,
+                    fix: function fix(fixer) {
+
+                        /*
+                         * Only perform a fix if there are no comments between the label and the body. This will be the case
+                         * when there is exactly one token/comment (the ":") between the label and the body.
+                         */
+                        if (sourceCode.getTokenAfter(node.label, { includeComments: true }) === sourceCode.getTokenBefore(node.body, { includeComments: true })) {
+                            return fixer.removeRange([node.range[0], node.body.range[0]]);
+                        }
+
+                        return null;
+                    }
                 });
             }
 
@@ -75686,8 +75924,6 @@ module.exports = {
 // Requirements
 //------------------------------------------------------------------------------
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
-
 var lodash = require("lodash");
 var astUtils = require("../ast-utils");
 
@@ -75736,6 +75972,7 @@ module.exports = {
     },
 
     create: function create(context) {
+        var sourceCode = context.getSourceCode();
 
         var DEFINED_MESSAGE = "'{{name}}' is defined but never used.";
         var ASSIGNED_MESSAGE = "'{{name}}' is assigned a value but never used.";
@@ -75811,21 +76048,15 @@ module.exports = {
          */
         function hasRestSpreadSibling(variable) {
             if (config.ignoreRestSiblings) {
-                var _ret = function () {
-                    var restProperties = new Set(["ExperimentalRestProperty", "RestProperty"]);
+                var restProperties = new Set(["ExperimentalRestProperty", "RestProperty"]);
 
-                    return {
-                        v: variable.defs.filter(function (def) {
-                            return def.name.type === "Identifier";
-                        }).some(function (def) {
-                            return def.node.id && def.node.id.type === "ObjectPattern" && def.node.id.properties.length && restProperties.has(def.node.id.properties[def.node.id.properties.length - 1].type) && // last property is a rest property
-                            !restProperties.has(def.name.parent.type) // variable is sibling of the rest property
-                            ;
-                        })
-                    };
-                }();
-
-                if ((typeof _ret === "undefined" ? "undefined" : _typeof(_ret)) === "object") return _ret.v;
+                return variable.defs.filter(function (def) {
+                    return def.name.type === "Identifier";
+                }).some(function (def) {
+                    return def.node.id && def.node.id.type === "ObjectPattern" && def.node.id.properties.length && restProperties.has(def.node.id.properties[def.node.id.properties.length - 1].type) && // last property is a rest property
+                    !restProperties.has(def.name.parent.type) // variable is sibling of the rest property
+                    ;
+                });
             }
 
             return false;
@@ -76221,23 +76452,8 @@ module.exports = {
          */
         function getLocation(variable) {
             var comment = variable.eslintExplicitGlobalComment;
-            var baseLoc = comment.loc.start;
-            var column = getColumnInComment(variable, comment);
-            var prefix = comment.value.slice(0, column);
-            var lineInComment = (prefix.match(/\n/g) || []).length;
 
-            if (lineInComment > 0) {
-                column -= 1 + prefix.lastIndexOf("\n");
-            } else {
-
-                // 2 is for `/*`
-                column += baseLoc.column + 2;
-            }
-
-            return {
-                line: baseLoc.line + lineInComment,
-                column: column
-            };
+            return astUtils.getLocationFromRangeIndex(sourceCode, comment.range[0] + 2 + getColumnInComment(variable, comment));
         }
 
         //--------------------------------------------------------------------------
@@ -76624,10 +76840,16 @@ module.exports = {
 "use strict";
 
 //------------------------------------------------------------------------------
-// Rule Definition
+// Requirements
 //------------------------------------------------------------------------------
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+var astUtils = require("../ast-utils");
+
+//------------------------------------------------------------------------------
+// Rule Definition
+//------------------------------------------------------------------------------
 
 var MESSAGE_UNNECESSARY_COMPUTED = "Unnecessarily computed property [{{property}}] found.";
 
@@ -76661,11 +76883,8 @@ module.exports = {
                         message: MESSAGE_UNNECESSARY_COMPUTED,
                         data: { property: sourceCode.getText(key) },
                         fix: function fix(fixer) {
-                            var leftSquareBracket = sourceCode.getFirstToken(node, node.value.generator || node.value.async ? 1 : 0);
-                            var rightSquareBracket = sourceCode.getTokensBetween(node.key, node.value).find(function (token) {
-                                return token.value === "]";
-                            });
-
+                            var leftSquareBracket = sourceCode.getFirstToken(node, astUtils.isOpeningBracketToken);
+                            var rightSquareBracket = sourceCode.getFirstTokenBetween(node.key, node.value, astUtils.isClosingBracketToken);
                             var tokensBetween = sourceCode.getTokensBetween(leftSquareBracket, rightSquareBracket, 1);
 
                             if (tokensBetween.slice(0, -1).some(function (token, index) {
@@ -76684,7 +76903,7 @@ module.exports = {
     }
 };
 
-},{}],360:[function(require,module,exports){
+},{"../ast-utils":162}],360:[function(require,module,exports){
 /**
  * @fileoverview disallow unncessary concatenation of template strings
  * @author Henry Zhu
@@ -76708,6 +76927,15 @@ var astUtils = require("../ast-utils");
  */
 function isConcatenation(node) {
     return node.type === "BinaryExpression" && node.operator === "+";
+}
+
+/**
+ * Checks if the given token is a `+` token or not.
+ * @param {Token} token - The token to check.
+ * @returns {boolean} `true` if the token is a `+` token.
+ */
+function isConcatOperatorToken(token) {
+    return token.value === "+" && token.type === "Punctuator";
 }
 
 /**
@@ -76769,13 +76997,7 @@ module.exports = {
                 var right = getRight(node);
 
                 if (astUtils.isStringLiteral(left) && astUtils.isStringLiteral(right) && astUtils.isTokenOnSameLine(left, right)) {
-
-                    // move warning location to operator
-                    var operatorToken = sourceCode.getTokenAfter(left);
-
-                    while (operatorToken.value !== "+") {
-                        operatorToken = sourceCode.getTokenAfter(operatorToken);
-                    }
+                    var operatorToken = sourceCode.getFirstTokenBetween(left, right, isConcatOperatorToken);
 
                     context.report({
                         node: node,
@@ -76985,7 +77207,7 @@ function union(setA, setB) {
     })());
 }
 
-var VALID_STRING_ESCAPES = new Set("\\nrvtbfux\n\r\u2028\u2029");
+var VALID_STRING_ESCAPES = union(new Set("\\nrvtbfux"), astUtils.LINEBREAKS);
 var REGEX_GENERAL_ESCAPES = new Set("\\bcdDfnrsStvwWxu0123456789]");
 var REGEX_NON_CHARCLASS_ESCAPES = union(REGEX_GENERAL_ESCAPES, new Set("^/.$*+?[{}|()B"));
 
@@ -77366,9 +77588,7 @@ function remove(array, element) {
  * @returns {boolean} `true` if the node is removeable.
  */
 function isRemovable(node) {
-    var parent = node.parent;
-
-    return parent.type === "Program" || parent.type === "BlockStatement" || parent.type === "SwitchCase";
+    return astUtils.STATEMENT_LIST_PARENTS.has(node.parent.type);
 }
 
 /**
@@ -77963,7 +78183,7 @@ module.exports = {
                 }
             }
 
-            if (!isLoopAssignee(node) && !(node.parent.type === "ForStatement" && node.parent.init === node) && node.parent.type !== "BlockStatement" && node.parent.type !== "Program" && node.parent.type !== "SwitchCase") {
+            if (!isLoopAssignee(node) && !(node.parent.type === "ForStatement" && node.parent.init === node) && !astUtils.STATEMENT_LIST_PARENTS.has(node.parent.type)) {
 
                 // If the declaration is not in a block, e.g. `if (foo) var bar = 1;`, then it can't be fixed.
                 return false;
@@ -78184,6 +78404,10 @@ module.exports = {
  */
 "use strict";
 
+//------------------------------------------------------------------------------
+// Requirements
+//------------------------------------------------------------------------------
+
 var astUtils = require("../ast-utils");
 
 //------------------------------------------------------------------------------
@@ -78208,21 +78432,6 @@ module.exports = {
         //--------------------------------------------------------------------------
         // Helpers
         //--------------------------------------------------------------------------
-
-        /**
-         * Finds opening bracket token of node's computed property
-         * @param {ASTNode} node - the node to check
-         * @returns {Token} opening bracket token of node's computed property
-         * @private
-         */
-        function findOpeningBracket(node) {
-            var token = sourceCode.getTokenBefore(node.property);
-
-            while (token.value !== "[") {
-                token = sourceCode.getTokenBefore(token);
-            }
-            return token;
-        }
 
         /**
          * Reports whitespace before property token
@@ -78267,7 +78476,7 @@ module.exports = {
                 }
 
                 if (node.computed) {
-                    rightToken = findOpeningBracket(node);
+                    rightToken = sourceCode.getTokenBefore(node.property, astUtils.isOpeningBracketToken);
                     leftToken = sourceCode.getTokenBefore(rightToken);
                 } else {
                     rightToken = sourceCode.getFirstToken(node.property);
@@ -78438,8 +78647,8 @@ module.exports = {
             var options = normalizedOptions[node.type];
             var openBrace = sourceCode.getFirstToken(node);
             var closeBrace = sourceCode.getLastToken(node);
-            var first = sourceCode.getTokenOrCommentAfter(openBrace);
-            var last = sourceCode.getTokenOrCommentBefore(closeBrace);
+            var first = sourceCode.getTokenAfter(openBrace, { includeComments: true });
+            var last = sourceCode.getTokenBefore(closeBrace, { includeComments: true });
             var needsLinebreaks = node.properties.length >= options.minProperties || options.multiline && node.properties.length > 0 && first.loc.start.line !== last.loc.end.line;
 
             /*
@@ -78705,14 +78914,8 @@ module.exports = {
          */
         function getClosingBraceOfObject(node) {
             var lastProperty = node.properties[node.properties.length - 1];
-            var token = sourceCode.getTokenAfter(lastProperty);
 
-            // skip ')' and trailing commas.
-            while (token.type !== "Punctuator" || token.value !== "}") {
-                token = sourceCode.getTokenAfter(token);
-            }
-
-            return token;
+            return sourceCode.getTokenAfter(lastProperty, astUtils.isClosingBraceToken);
         }
 
         /**
@@ -78753,15 +78956,9 @@ module.exports = {
                 firstSpecifier = node.specifiers[1];
             }
 
-            var first = sourceCode.getTokenBefore(firstSpecifier);
-            var last = sourceCode.getTokenAfter(lastSpecifier);
-
-            // to support a trailing comma.
-            if (last.value === ",") {
-                last = sourceCode.getTokenAfter(last);
-            }
-
-            var second = sourceCode.getTokenAfter(first),
+            var first = sourceCode.getTokenBefore(firstSpecifier),
+                last = sourceCode.getTokenAfter(lastSpecifier, astUtils.isNotCommaToken),
+                second = sourceCode.getTokenAfter(first),
                 penultimate = sourceCode.getTokenBefore(last);
 
             validateBraceSpacing(node, first, second, penultimate, last);
@@ -78779,15 +78976,9 @@ module.exports = {
 
             var firstSpecifier = node.specifiers[0],
                 lastSpecifier = node.specifiers[node.specifiers.length - 1],
-                first = sourceCode.getTokenBefore(firstSpecifier);
-            var last = sourceCode.getTokenAfter(lastSpecifier);
-
-            // to support a trailing comma.
-            if (last.value === ",") {
-                last = sourceCode.getTokenAfter(last);
-            }
-
-            var second = sourceCode.getTokenAfter(first),
+                first = sourceCode.getTokenBefore(firstSpecifier),
+                last = sourceCode.getTokenAfter(lastSpecifier, astUtils.isNotCommaToken),
+                second = sourceCode.getTokenAfter(first),
                 penultimate = sourceCode.getTokenBefore(last);
 
             validateBraceSpacing(node, first, second, penultimate, last);
@@ -79106,12 +79297,8 @@ module.exports = {
         * @returns {Object} A fix for this node
         */
         function makeFunctionShorthand(fixer, node) {
-            var firstKeyToken = node.computed ? sourceCode.getTokens(node).find(function (token) {
-                return token.value === "[";
-            }) : sourceCode.getFirstToken(node.key);
-            var lastKeyToken = node.computed ? sourceCode.getTokensBetween(node.key, node.value).find(function (token) {
-                return token.value === "]";
-            }) : sourceCode.getLastToken(node.key);
+            var firstKeyToken = node.computed ? sourceCode.getFirstToken(node, astUtils.isOpeningBracketToken) : sourceCode.getFirstToken(node.key);
+            var lastKeyToken = node.computed ? sourceCode.getFirstTokenBetween(node.key, node.value, astUtils.isClosingBracketToken) : sourceCode.getLastToken(node.key);
             var keyText = sourceCode.text.slice(firstKeyToken.range[0], lastKeyToken.range[1]);
             var keyPrefix = "";
 
@@ -79905,7 +80092,7 @@ module.exports = {
         * @returns {Token} The operator token in the node
         */
         function getOperatorToken(node) {
-            return sourceCode.getTokensBetween(node.left, node.right).find(function (token) {
+            return sourceCode.getFirstTokenBetween(node.left, node.right, function (token) {
                 return token.value === node.operator;
             });
         }
@@ -79994,13 +80181,15 @@ module.exports = {
 
 "use strict";
 
+//------------------------------------------------------------------------------
+// Requirements
+//------------------------------------------------------------------------------
+
 var astUtils = require("../ast-utils");
 
 //------------------------------------------------------------------------------
 // Rule Definition
 //------------------------------------------------------------------------------
-
-var LINEBREAK_REGEX = /\r\n|\r|\n|\u2028|\u2029/g;
 
 module.exports = {
     meta: {
@@ -80072,7 +80261,7 @@ module.exports = {
                 if (hasLinebreakBefore !== hasLinebreakAfter && desiredStyle !== "none") {
 
                     // If there is a comment before and after the operator, don't do a fix.
-                    if (sourceCode.getTokenOrCommentBefore(operatorToken) !== tokenBefore && sourceCode.getTokenOrCommentAfter(operatorToken) !== tokenAfter) {
+                    if (sourceCode.getTokenBefore(operatorToken, { includeComments: true }) !== tokenBefore && sourceCode.getTokenAfter(operatorToken, { includeComments: true }) !== tokenAfter) {
                         return null;
                     }
 
@@ -80087,6 +80276,7 @@ module.exports = {
                     newTextBefore = textAfter;
                     newTextAfter = textBefore;
                 } else {
+                    var LINEBREAK_REGEX = astUtils.createGlobalLinebreakMatcher();
 
                     // Otherwise, if no linebreak is desired and no comments interfere, replace the linebreaks with empty strings.
                     newTextBefore = desiredStyle === "before" || textBefore.trim() ? textBefore : textBefore.replace(LINEBREAK_REGEX, "");
@@ -80116,19 +80306,14 @@ module.exports = {
          * @returns {void}
          */
         function validateNode(node, leftSide) {
-            var leftToken = sourceCode.getLastToken(leftSide);
-            var operatorToken = sourceCode.getTokenAfter(leftToken);
 
             // When the left part of a binary expression is a single expression wrapped in
             // parentheses (ex: `(a) + b`), leftToken will be the last token of the expression
             // and operatorToken will be the closing parenthesis.
             // The leftToken should be the last closing parenthesis, and the operatorToken
             // should be the token right after that.
-            while (operatorToken.value === ")") {
-                leftToken = operatorToken;
-                operatorToken = sourceCode.getTokenAfter(operatorToken);
-            }
-
+            var operatorToken = sourceCode.getTokenAfter(leftSide, astUtils.isNotClosingParenToken);
+            var leftToken = sourceCode.getTokenBefore(operatorToken);
             var rightToken = sourceCode.getTokenAfter(operatorToken);
             var operator = operatorToken.value;
             var operatorStyleOverride = styleOverrides[operator];
@@ -80329,7 +80514,7 @@ module.exports = {
             var first = token;
 
             do {
-                first = sourceCode.getTokenOrCommentAfter(first);
+                first = sourceCode.getTokenAfter(first, { includeComments: true });
             } while (isComment(first) && first.loc.start.line === tokenStartLine);
 
             var firstLine = first.loc.start.line;
@@ -80348,7 +80533,7 @@ module.exports = {
             var last = token;
 
             do {
-                last = sourceCode.getTokenOrCommentBefore(last);
+                last = sourceCode.getTokenBefore(last, { includeComments: true });
             } while (isComment(last) && last.loc.end.line === blockEnd);
 
             var lastLine = last.loc.end.line;
@@ -80412,34 +80597,30 @@ module.exports = {
                 }
             } else {
                 if (blockHasTopPadding) {
-                    (function () {
-                        var nextToken = sourceCode.getTokenOrCommentAfter(openBrace);
+                    var nextToken = sourceCode.getTokenAfter(openBrace, { includeComments: true });
 
-                        context.report({
-                            node: node,
-                            loc: { line: openBrace.loc.start.line, column: openBrace.loc.start.column },
-                            fix: function fix(fixer) {
-                                return fixer.replaceTextRange([openBrace.end, nextToken.start - nextToken.loc.start.column], "\n");
-                            },
+                    context.report({
+                        node: node,
+                        loc: { line: openBrace.loc.start.line, column: openBrace.loc.start.column },
+                        fix: function fix(fixer) {
+                            return fixer.replaceTextRange([openBrace.end, nextToken.start - nextToken.loc.start.column], "\n");
+                        },
 
-                            message: NEVER_MESSAGE
-                        });
-                    })();
+                        message: NEVER_MESSAGE
+                    });
                 }
 
                 if (blockHasBottomPadding) {
-                    (function () {
-                        var previousToken = sourceCode.getTokenOrCommentBefore(closeBrace);
+                    var previousToken = sourceCode.getTokenBefore(closeBrace, { includeComments: true });
 
-                        context.report({
-                            node: node,
-                            loc: { line: closeBrace.loc.end.line, column: closeBrace.loc.end.column - 1 },
-                            message: NEVER_MESSAGE,
-                            fix: function fix(fixer) {
-                                return fixer.replaceTextRange([previousToken.end, closeBrace.start - closeBrace.loc.start.column], "\n");
-                            }
-                        });
-                    })();
+                    context.report({
+                        node: node,
+                        loc: { line: closeBrace.loc.end.line, column: closeBrace.loc.end.column - 1 },
+                        message: NEVER_MESSAGE,
+                        fix: function fix(fixer) {
+                            return fixer.replaceTextRange([previousToken.end, closeBrace.start - closeBrace.loc.start.column], "\n");
+                        }
+                    });
                 }
             }
         }
@@ -81032,36 +81213,34 @@ module.exports = {
             var nodesToReport = nodes.filter(Boolean);
 
             if (nodes.length && (checkingMixedDestructuring || nodesToReport.length === nodes.length)) {
-                (function () {
-                    var varDeclParent = findUp(nodes[0], "VariableDeclaration", function (parentNode) {
-                        return parentNode.type.endsWith("Statement");
+                var varDeclParent = findUp(nodes[0], "VariableDeclaration", function (parentNode) {
+                    return parentNode.type.endsWith("Statement");
+                });
+                var shouldFix = varDeclParent &&
+
+                // If there are multiple variable declarations, like {let a = 1, b = 2}, then
+                // do not attempt to fix if one of the declarations should be `const`. It's
+                // too hard to know how the developer would want to automatically resolve the issue.
+                varDeclParent.declarations.length === 1 && (
+
+                // Don't do a fix unless the variable is initialized (or it's in a for-in or for-of loop)
+                varDeclParent.parent.type === "ForInStatement" || varDeclParent.parent.type === "ForOfStatement" || varDeclParent.declarations[0].init) &&
+
+                // If options.destucturing is "all", then this warning will not occur unless
+                // every assignment in the destructuring should be const. In that case, it's safe
+                // to apply the fix.
+                nodesToReport.length === nodes.length;
+
+                nodesToReport.forEach(function (node) {
+                    context.report({
+                        node: node,
+                        message: "'{{name}}' is never reassigned. Use 'const' instead.",
+                        data: node,
+                        fix: shouldFix ? function (fixer) {
+                            return fixer.replaceText(sourceCode.getFirstToken(varDeclParent), "const");
+                        } : null
                     });
-                    var shouldFix = varDeclParent &&
-
-                    // If there are multiple variable declarations, like {let a = 1, b = 2}, then
-                    // do not attempt to fix if one of the declarations should be `const`. It's
-                    // too hard to know how the developer would want to automatically resolve the issue.
-                    varDeclParent.declarations.length === 1 && (
-
-                    // Don't do a fix unless the variable is initialized (or it's in a for-in or for-of loop)
-                    varDeclParent.parent.type === "ForInStatement" || varDeclParent.parent.type === "ForOfStatement" || varDeclParent.declarations[0].init) &&
-
-                    // If options.destucturing is "all", then this warning will not occur unless
-                    // every assignment in the destructuring should be const. In that case, it's safe
-                    // to apply the fix.
-                    nodesToReport.length === nodes.length;
-
-                    nodesToReport.forEach(function (node) {
-                        context.report({
-                            node: node,
-                            message: "'{{name}}' is never reassigned. Use 'const' instead.",
-                            data: node,
-                            fix: shouldFix ? function (fixer) {
-                                return fixer.replaceText(sourceCode.getFirstToken(varDeclParent), "const");
-                            } : null
-                        });
-                    });
-                })();
+                });
             }
         }
 
@@ -81761,7 +81940,7 @@ module.exports = {
                                 return null;
                             }
 
-                            var propertyDot = sourceCode.getTokensBetween(applied, node.callee.property).find(function (token) {
+                            var propertyDot = sourceCode.getFirstTokenBetween(applied, node.callee.property, function (token) {
                                 return token.value === ".";
                             });
 
@@ -81936,7 +82115,7 @@ module.exports = {
             }
 
             if (isConcatenation(currentNode) && hasStringLiteral(currentNode) && hasNonStringLiteral(currentNode)) {
-                var plusSign = sourceCode.getTokensBetween(currentNode.left, currentNode.right).find(function (token) {
+                var plusSign = sourceCode.getFirstTokenBetween(currentNode.left, currentNode.right, function (token) {
                     return token.value === "+";
                 });
                 var textBeforePlus = getTextBetween(currentNode.left, plusSign);
@@ -82306,7 +82485,7 @@ module.exports = {
     }
 };
 
-},{"../util/keywords":422,"espree":"espree"}],389:[function(require,module,exports){
+},{"../util/keywords":434,"espree":"espree"}],389:[function(require,module,exports){
 /**
  * @fileoverview A rule to choose between single and double quote marks
  * @author Matt DuVall <http://www.mattduvall.com/>, Brandon Payton
@@ -82317,6 +82496,10 @@ module.exports = {
 //------------------------------------------------------------------------------
 // Requirements
 //------------------------------------------------------------------------------
+
+var _templateObject = _taggedTemplateLiteral(["(^|[^\\])(\\\\)*[", "]"], ["(^|[^\\\\])(\\\\\\\\)*[", "]"]);
+
+function _taggedTemplateLiteral(strings, raw) { return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
 var astUtils = require("../ast-utils");
 
@@ -82341,6 +82524,9 @@ var QUOTE_SETTINGS = {
         description: "backtick"
     }
 };
+
+// An unescaped newline is a newline preceded by an even number of backslashes.
+var UNESCAPED_LINEBREAK_PATTERN = new RegExp(String.raw(_templateObject, Array.from(astUtils.LINEBREAKS).join("")));
 
 /**
  * Switches quoting of javascript string between ' " and `
@@ -82547,15 +82733,12 @@ module.exports = {
             TemplateLiteral: function TemplateLiteral(node) {
 
                 // If backticks are expected or it's a tagged template, then this shouldn't throw an errors
-                if (allowTemplateLiterals || quoteOption === "backtick" || node.parent.type === "TaggedTemplateExpression") {
+                if (allowTemplateLiterals || quoteOption === "backtick" || node.parent.type === "TaggedTemplateExpression" && node === node.parent.quasi) {
                     return;
                 }
 
-                /*
-                 * A warning should be produced if the template literal only has one TemplateElement, and has no unescaped newlines.
-                 * An unescaped newline is a newline preceded by an even number of backslashes.
-                 */
-                var shouldWarn = node.quasis.length === 1 && !/(^|[^\\])(\\\\)*[\r\n\u2028\u2029]/.test(node.quasis[0].value.raw);
+                // A warning should be produced if the template literal only has one TemplateElement, and has no unescaped newlines.
+                var shouldWarn = node.quasis.length === 1 && !UNESCAPED_LINEBREAK_PATTERN.test(node.quasis[0].value.raw);
 
                 if (shouldWarn) {
                     context.report({
@@ -83338,6 +83521,10 @@ module.exports = {
             DebuggerStatement: checkNode,
             ReturnStatement: checkNode,
             ThrowStatement: checkNode,
+            ImportDeclaration: checkNode,
+            ExportNamedDeclaration: checkNode,
+            ExportAllDeclaration: checkNode,
+            ExportDefaultDeclaration: checkNode,
             ForStatement: function ForStatement(node) {
                 if (node.init) {
                     checkSemicolonSpacing(sourceCode.getTokenAfter(node.init), node);
@@ -83699,56 +83886,54 @@ module.exports = {
                 }
 
                 if (!ignoreMemberSort) {
-                    (function () {
-                        var importSpecifiers = node.specifiers.filter(function (specifier) {
-                            return specifier.type === "ImportSpecifier";
-                        });
-                        var getSortableName = ignoreCase ? function (specifier) {
-                            return specifier.local.name.toLowerCase();
-                        } : function (specifier) {
-                            return specifier.local.name;
-                        };
-                        var firstUnsortedIndex = importSpecifiers.map(getSortableName).findIndex(function (name, index, array) {
-                            return array[index - 1] > name;
-                        });
+                    var importSpecifiers = node.specifiers.filter(function (specifier) {
+                        return specifier.type === "ImportSpecifier";
+                    });
+                    var getSortableName = ignoreCase ? function (specifier) {
+                        return specifier.local.name.toLowerCase();
+                    } : function (specifier) {
+                        return specifier.local.name;
+                    };
+                    var firstUnsortedIndex = importSpecifiers.map(getSortableName).findIndex(function (name, index, array) {
+                        return array[index - 1] > name;
+                    });
 
-                        if (firstUnsortedIndex !== -1) {
-                            context.report({
-                                node: importSpecifiers[firstUnsortedIndex],
-                                message: "Member '{{memberName}}' of the import declaration should be sorted alphabetically.",
-                                data: { memberName: importSpecifiers[firstUnsortedIndex].local.name },
-                                fix: function fix(fixer) {
-                                    if (importSpecifiers.some(function (specifier) {
-                                        return sourceCode.getComments(specifier).leading.length || sourceCode.getComments(specifier).trailing.length;
-                                    })) {
+                    if (firstUnsortedIndex !== -1) {
+                        context.report({
+                            node: importSpecifiers[firstUnsortedIndex],
+                            message: "Member '{{memberName}}' of the import declaration should be sorted alphabetically.",
+                            data: { memberName: importSpecifiers[firstUnsortedIndex].local.name },
+                            fix: function fix(fixer) {
+                                if (importSpecifiers.some(function (specifier) {
+                                    return sourceCode.getComments(specifier).leading.length || sourceCode.getComments(specifier).trailing.length;
+                                })) {
 
-                                        // If there are comments in the ImportSpecifier list, don't rearrange the specifiers.
-                                        return null;
-                                    }
-
-                                    return fixer.replaceTextRange([importSpecifiers[0].range[0], importSpecifiers[importSpecifiers.length - 1].range[1]], importSpecifiers
-
-                                    // Clone the importSpecifiers array to avoid mutating it
-                                    .slice()
-
-                                    // Sort the array into the desired order
-                                    .sort(function (specifierA, specifierB) {
-                                        var aName = getSortableName(specifierA);
-                                        var bName = getSortableName(specifierB);
-
-                                        return aName > bName ? 1 : -1;
-                                    })
-
-                                    // Build a string out of the sorted list of import specifiers and the text between the originals
-                                    .reduce(function (sourceText, specifier, index) {
-                                        var textAfterSpecifier = index === importSpecifiers.length - 1 ? "" : sourceCode.getText().slice(importSpecifiers[index].range[1], importSpecifiers[index + 1].range[0]);
-
-                                        return sourceText + sourceCode.getText(specifier) + textAfterSpecifier;
-                                    }, ""));
+                                    // If there are comments in the ImportSpecifier list, don't rearrange the specifiers.
+                                    return null;
                                 }
-                            });
-                        }
-                    })();
+
+                                return fixer.replaceTextRange([importSpecifiers[0].range[0], importSpecifiers[importSpecifiers.length - 1].range[1]], importSpecifiers
+
+                                // Clone the importSpecifiers array to avoid mutating it
+                                .slice()
+
+                                // Sort the array into the desired order
+                                .sort(function (specifierA, specifierB) {
+                                    var aName = getSortableName(specifierA);
+                                    var bName = getSortableName(specifierB);
+
+                                    return aName > bName ? 1 : -1;
+                                })
+
+                                // Build a string out of the sorted list of import specifiers and the text between the originals
+                                .reduce(function (sourceText, specifier, index) {
+                                    var textAfterSpecifier = index === importSpecifiers.length - 1 ? "" : sourceCode.getText().slice(importSpecifiers[index].range[1], importSpecifiers[index + 1].range[0]);
+
+                                    return sourceText + sourceCode.getText(specifier) + textAfterSpecifier;
+                                }, ""));
+                            }
+                        });
+                    }
                 }
 
                 previousDeclaration = node;
@@ -84125,10 +84310,16 @@ module.exports = {
 "use strict";
 
 //------------------------------------------------------------------------------
-// Rule Definition
+// Requirements
 //------------------------------------------------------------------------------
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+var astUtils = require("../ast-utils");
+
+//------------------------------------------------------------------------------
+// Rule Definition
+//------------------------------------------------------------------------------
 
 module.exports = {
     meta: {
@@ -84213,8 +84404,7 @@ module.exports = {
             var isNormalArrow = isArrow && !node.async;
             var isArrowWithoutParens = isArrow && sourceCode.getFirstToken(node, 1).value !== "(";
             var forbidSpacing = void 0,
-                requireSpacing = void 0,
-                rightToken = void 0;
+                requireSpacing = void 0;
 
             // isAnonymousGenerator → `generator-star-spacing` should warn it. E.g. `function* () {}`
             // isNormalArrow → ignore always.
@@ -84234,10 +84424,7 @@ module.exports = {
                 requireSpacing = requireAnonymousFunctionSpacing;
             }
 
-            rightToken = sourceCode.getFirstToken(node);
-            while (rightToken.value !== "(") {
-                rightToken = sourceCode.getTokenAfter(rightToken);
-            }
+            var rightToken = sourceCode.getFirstToken(node, astUtils.isOpeningParenToken);
             var leftToken = sourceCode.getTokenBefore(rightToken);
             var location = leftToken.loc.end;
 
@@ -84274,7 +84461,7 @@ module.exports = {
     }
 };
 
-},{}],402:[function(require,module,exports){
+},{"../ast-utils":162}],402:[function(require,module,exports){
 /**
  * @fileoverview Disallows or enforces spaces inside of parentheses.
  * @author Jonathan Rajavuori
@@ -85017,6 +85204,7 @@ module.exports = {
 "use strict";
 
 var lodash = require("lodash");
+var astUtils = require("../ast-utils");
 
 //------------------------------------------------------------------------------
 // Helpers
@@ -85100,8 +85288,7 @@ function createExceptionsPattern(exceptions) {
             pattern += exceptions.map(escapeAndRepeat).join("|");
             pattern += ")";
         }
-
-        pattern += "(?:$|[\n\r]))";
+        pattern += "(?:$|[" + Array.from(astUtils.LINEBREAKS).join("") + "]))";
     }
 
     return pattern;
@@ -85380,7 +85567,7 @@ module.exports = {
     }
 };
 
-},{"lodash":159}],406:[function(require,module,exports){
+},{"../ast-utils":162,"lodash":159}],406:[function(require,module,exports){
 /**
  * @fileoverview Rule to control usage of strict mode directives.
  * @author Brandon Mills
@@ -85948,7 +86135,7 @@ module.exports = {
                         loc: location,
                         message: "Expected Unicode BOM (Byte Order Mark).",
                         fix: function fix(fixer) {
-                            return fixer.insertTextBefore(node, "\uFEFF");
+                            return fixer.insertTextBeforeRange([0, 1], "\uFEFF");
                         }
                     });
                 } else if (sourceCode.hasBOM && requireBOM === "never") {
@@ -86012,8 +86199,6 @@ module.exports = {
 //------------------------------------------------------------------------------
 // Requirements
 //------------------------------------------------------------------------------
-
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 var doctrine = require("doctrine");
 
@@ -86244,156 +86429,150 @@ module.exports = {
 
             // make sure only to validate JSDoc comments
             if (jsdocNode) {
-                var _ret = function () {
 
-                    try {
-                        jsdoc = doctrine.parse(jsdocNode.value, {
-                            strict: true,
-                            unwrap: true,
-                            sloppy: true
-                        });
-                    } catch (ex) {
+                try {
+                    jsdoc = doctrine.parse(jsdocNode.value, {
+                        strict: true,
+                        unwrap: true,
+                        sloppy: true
+                    });
+                } catch (ex) {
 
-                        if (/braces/i.test(ex.message)) {
-                            context.report({ node: jsdocNode, message: "JSDoc type missing brace." });
-                        } else {
-                            context.report({ node: jsdocNode, message: "JSDoc syntax error." });
-                        }
-
-                        return {
-                            v: void 0
-                        };
+                    if (/braces/i.test(ex.message)) {
+                        context.report({ node: jsdocNode, message: "JSDoc type missing brace." });
+                    } else {
+                        context.report({ node: jsdocNode, message: "JSDoc syntax error." });
                     }
 
-                    jsdoc.tags.forEach(function (tag) {
+                    return;
+                }
 
-                        switch (tag.title.toLowerCase()) {
+                jsdoc.tags.forEach(function (tag) {
 
-                            case "param":
-                            case "arg":
-                            case "argument":
-                                if (!tag.type) {
-                                    context.report({ node: jsdocNode, message: "Missing JSDoc parameter type for '{{name}}'.", data: { name: tag.name } });
-                                }
+                    switch (tag.title.toLowerCase()) {
 
-                                if (!tag.description && requireParamDescription) {
-                                    context.report({ node: jsdocNode, message: "Missing JSDoc parameter description for '{{name}}'.", data: { name: tag.name } });
-                                }
+                        case "param":
+                        case "arg":
+                        case "argument":
+                            if (!tag.type) {
+                                context.report({ node: jsdocNode, message: "Missing JSDoc parameter type for '{{name}}'.", data: { name: tag.name } });
+                            }
 
-                                if (params[tag.name]) {
-                                    context.report({ node: jsdocNode, message: "Duplicate JSDoc parameter '{{name}}'.", data: { name: tag.name } });
-                                } else if (tag.name.indexOf(".") === -1) {
-                                    params[tag.name] = 1;
-                                }
-                                break;
+                            if (!tag.description && requireParamDescription) {
+                                context.report({ node: jsdocNode, message: "Missing JSDoc parameter description for '{{name}}'.", data: { name: tag.name } });
+                            }
 
-                            case "return":
-                            case "returns":
-                                hasReturns = true;
+                            if (params[tag.name]) {
+                                context.report({ node: jsdocNode, message: "Duplicate JSDoc parameter '{{name}}'.", data: { name: tag.name } });
+                            } else if (tag.name.indexOf(".") === -1) {
+                                params[tag.name] = 1;
+                            }
+                            break;
 
-                                if (!requireReturn && !functionData.returnPresent && (tag.type === null || !isValidReturnType(tag)) && !isAbstract) {
-                                    context.report({
-                                        node: jsdocNode,
-                                        message: "Unexpected @{{title}} tag; function has no return statement.",
-                                        data: {
-                                            title: tag.title
-                                        }
-                                    });
-                                } else {
-                                    if (requireReturnType && !tag.type) {
-                                        context.report({ node: jsdocNode, message: "Missing JSDoc return type." });
+                        case "return":
+                        case "returns":
+                            hasReturns = true;
+
+                            if (!requireReturn && !functionData.returnPresent && (tag.type === null || !isValidReturnType(tag)) && !isAbstract) {
+                                context.report({
+                                    node: jsdocNode,
+                                    message: "Unexpected @{{title}} tag; function has no return statement.",
+                                    data: {
+                                        title: tag.title
                                     }
-
-                                    if (!isValidReturnType(tag) && !tag.description && requireReturnDescription) {
-                                        context.report({ node: jsdocNode, message: "Missing JSDoc return description." });
-                                    }
+                                });
+                            } else {
+                                if (requireReturnType && !tag.type) {
+                                    context.report({ node: jsdocNode, message: "Missing JSDoc return type." });
                                 }
 
-                                break;
+                                if (!isValidReturnType(tag) && !tag.description && requireReturnDescription) {
+                                    context.report({ node: jsdocNode, message: "Missing JSDoc return description." });
+                                }
+                            }
 
-                            case "constructor":
-                            case "class":
-                                hasConstructor = true;
-                                break;
+                            break;
 
-                            case "override":
-                            case "inheritdoc":
-                                isOverride = true;
-                                break;
+                        case "constructor":
+                        case "class":
+                            hasConstructor = true;
+                            break;
 
-                            case "abstract":
-                            case "virtual":
-                                isAbstract = true;
-                                break;
+                        case "override":
+                        case "inheritdoc":
+                            isOverride = true;
+                            break;
 
-                            case "interface":
-                                isInterface = true;
-                                break;
+                        case "abstract":
+                        case "virtual":
+                            isAbstract = true;
+                            break;
 
-                            // no default
+                        case "interface":
+                            isInterface = true;
+                            break;
+
+                        // no default
+                    }
+
+                    // check tag preferences
+                    if (prefer.hasOwnProperty(tag.title) && tag.title !== prefer[tag.title]) {
+                        context.report({ node: jsdocNode, message: "Use @{{name}} instead.", data: { name: prefer[tag.title] } });
+                    }
+
+                    // validate the types
+                    if (checkPreferType && tag.type) {
+                        validateType(jsdocNode, tag.type);
+                    }
+                });
+
+                // check for functions missing @returns
+                if (!isOverride && !hasReturns && !hasConstructor && !isInterface && node.parent.kind !== "get" && node.parent.kind !== "constructor" && node.parent.kind !== "set" && !isTypeClass(node)) {
+                    if (requireReturn || functionData.returnPresent) {
+                        context.report({
+                            node: jsdocNode,
+                            message: "Missing JSDoc @{{returns}} for function.",
+                            data: {
+                                returns: prefer.returns || "returns"
+                            }
+                        });
+                    }
+                }
+
+                // check the parameters
+                var jsdocParams = Object.keys(params);
+
+                if (node.params) {
+                    node.params.forEach(function (param, i) {
+                        if (param.type === "AssignmentPattern") {
+                            param = param.left;
                         }
 
-                        // check tag preferences
-                        if (prefer.hasOwnProperty(tag.title) && tag.title !== prefer[tag.title]) {
-                            context.report({ node: jsdocNode, message: "Use @{{name}} instead.", data: { name: prefer[tag.title] } });
-                        }
+                        var name = param.name;
 
-                        // validate the types
-                        if (checkPreferType && tag.type) {
-                            validateType(jsdocNode, tag.type);
+                        // TODO(nzakas): Figure out logical things to do with destructured, default, rest params
+                        if (param.type === "Identifier") {
+                            if (jsdocParams[i] && name !== jsdocParams[i]) {
+                                context.report({ node: jsdocNode, message: "Expected JSDoc for '{{name}}' but found '{{jsdocName}}'.", data: {
+                                        name: name,
+                                        jsdocName: jsdocParams[i]
+                                    } });
+                            } else if (!params[name] && !isOverride) {
+                                context.report({ node: jsdocNode, message: "Missing JSDoc for parameter '{{name}}'.", data: {
+                                        name: name
+                                    } });
+                            }
                         }
                     });
+                }
 
-                    // check for functions missing @returns
-                    if (!isOverride && !hasReturns && !hasConstructor && !isInterface && node.parent.kind !== "get" && node.parent.kind !== "constructor" && node.parent.kind !== "set" && !isTypeClass(node)) {
-                        if (requireReturn || functionData.returnPresent) {
-                            context.report({
-                                node: jsdocNode,
-                                message: "Missing JSDoc @{{returns}} for function.",
-                                data: {
-                                    returns: prefer.returns || "returns"
-                                }
-                            });
-                        }
+                if (options.matchDescription) {
+                    var regex = new RegExp(options.matchDescription);
+
+                    if (!regex.test(jsdoc.description)) {
+                        context.report({ node: jsdocNode, message: "JSDoc description does not satisfy the regex pattern." });
                     }
-
-                    // check the parameters
-                    var jsdocParams = Object.keys(params);
-
-                    if (node.params) {
-                        node.params.forEach(function (param, i) {
-                            if (param.type === "AssignmentPattern") {
-                                param = param.left;
-                            }
-
-                            var name = param.name;
-
-                            // TODO(nzakas): Figure out logical things to do with destructured, default, rest params
-                            if (param.type === "Identifier") {
-                                if (jsdocParams[i] && name !== jsdocParams[i]) {
-                                    context.report({ node: jsdocNode, message: "Expected JSDoc for '{{name}}' but found '{{jsdocName}}'.", data: {
-                                            name: name,
-                                            jsdocName: jsdocParams[i]
-                                        } });
-                                } else if (!params[name] && !isOverride) {
-                                    context.report({ node: jsdocNode, message: "Missing JSDoc for parameter '{{name}}'.", data: {
-                                            name: name
-                                        } });
-                                }
-                            }
-                        });
-                    }
-
-                    if (options.matchDescription) {
-                        var regex = new RegExp(options.matchDescription);
-
-                        if (!regex.test(jsdoc.description)) {
-                            context.report({ node: jsdocNode, message: "JSDoc description does not satisfy the regex pattern." });
-                        }
-                    }
-                }();
-
-                if ((typeof _ret === "undefined" ? "undefined" : _typeof(_ret)) === "object") return _ret.v;
+                }
             }
         }
 
@@ -86640,6 +86819,10 @@ module.exports = {
 
 "use strict";
 
+//------------------------------------------------------------------------------
+// Requirements
+//------------------------------------------------------------------------------
+
 var astUtils = require("../ast-utils");
 
 //------------------------------------------------------------------------------
@@ -86683,10 +86866,7 @@ module.exports = {
          * @private
          */
         function wrapped(node) {
-            var previousToken = sourceCode.getTokenBefore(node),
-                nextToken = sourceCode.getTokenAfter(node);
-
-            return previousToken && previousToken.value === "(" && nextToken && nextToken.value === ")";
+            return astUtils.isParenthesised(sourceCode, node);
         }
 
         /**
@@ -86884,31 +87064,29 @@ module.exports = {
          */
         function checkSpacing(side, leftToken, rightToken) {
             if (sourceCode.isSpaceBetweenTokens(leftToken, rightToken) !== mode[side]) {
-                (function () {
-                    var after = leftToken.value === "*";
-                    var spaceRequired = mode[side];
-                    var node = after ? leftToken : rightToken;
-                    var type = spaceRequired ? "Missing" : "Unexpected";
-                    var message = "{{type}} space {{side}} *.";
+                var after = leftToken.value === "*";
+                var spaceRequired = mode[side];
+                var node = after ? leftToken : rightToken;
+                var type = spaceRequired ? "Missing" : "Unexpected";
+                var message = "{{type}} space {{side}} *.";
 
-                    context.report({
-                        node: node,
-                        message: message,
-                        data: {
-                            type: type,
-                            side: side
-                        },
-                        fix: function fix(fixer) {
-                            if (spaceRequired) {
-                                if (after) {
-                                    return fixer.insertTextAfter(node, " ");
-                                }
-                                return fixer.insertTextBefore(node, " ");
+                context.report({
+                    node: node,
+                    message: message,
+                    data: {
+                        type: type,
+                        side: side
+                    },
+                    fix: function fix(fixer) {
+                        if (spaceRequired) {
+                            if (after) {
+                                return fixer.insertTextAfter(node, " ");
                             }
-                            return fixer.removeRange([leftToken.range[1], rightToken.range[0]]);
+                            return fixer.insertTextBefore(node, " ");
                         }
-                    });
-                })();
+                        return fixer.removeRange([leftToken.range[1], rightToken.range[0]]);
+                    }
+                });
             }
         }
 
@@ -87158,10 +87336,7 @@ module.exports = {
              *                    paren token.
              */
             function isParenWrapped() {
-                var tokenBefore = void 0,
-                    tokenAfter = void 0;
-
-                return (tokenBefore = sourceCode.getTokenBefore(node)) && tokenBefore.value === "(" && (tokenAfter = sourceCode.getTokenAfter(node)) && tokenAfter.value === ")";
+                return astUtils.isParenthesised(sourceCode, node);
             }
 
             return node.type === "LogicalExpression" && left.type === "BinaryExpression" && right.type === "BinaryExpression" && isRangeTestOperator(left.operator) && isRangeTestOperator(right.operator) && (isBetweenTest() || isOutsideTest()) && isParenWrapped();
@@ -87184,7 +87359,7 @@ module.exports = {
         * @returns {string} A string representation of the node with the sides and operator flipped
         */
         function getFlippedString(node) {
-            var operatorToken = sourceCode.getTokensBetween(node.left, node.right).find(function (token) {
+            var operatorToken = sourceCode.getFirstTokenBetween(node.left, node.right, function (token) {
                 return token.value === node.operator;
             });
             var textBeforeOperator = sourceCode.getText().slice(sourceCode.getTokenBefore(operatorToken).range[1], operatorToken.range[0]);
@@ -87369,201 +87544,1478 @@ module.exports = function () {
 }).call(this,require('_process'))
 },{"_process":7}],420:[function(require,module,exports){
 /**
+ * @fileoverview Define the cursor which iterates tokens and comments in reverse.
+ * @author Toru Nagashima
+ */
+"use strict";
+
+//------------------------------------------------------------------------------
+// Requirements
+//------------------------------------------------------------------------------
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var Cursor = require("./cursor");
+var utils = require("./utils");
+
+//------------------------------------------------------------------------------
+// Exports
+//------------------------------------------------------------------------------
+
+/**
+ * The cursor which iterates tokens and comments in reverse.
+ */
+module.exports = function (_Cursor) {
+    _inherits(BackwardTokenCommentCursor, _Cursor);
+
+    /**
+     * Initializes this cursor.
+     * @param {Token[]} tokens - The array of tokens.
+     * @param {Comment[]} comments - The array of comments.
+     * @param {Object} indexMap - The map from locations to indices in `tokens`.
+     * @param {number} startLoc - The start location of the iteration range.
+     * @param {number} endLoc - The end location of the iteration range.
+     */
+    function BackwardTokenCommentCursor(tokens, comments, indexMap, startLoc, endLoc) {
+        _classCallCheck(this, BackwardTokenCommentCursor);
+
+        var _this = _possibleConstructorReturn(this, (BackwardTokenCommentCursor.__proto__ || Object.getPrototypeOf(BackwardTokenCommentCursor)).call(this));
+
+        _this.tokens = tokens;
+        _this.comments = comments;
+        _this.tokenIndex = utils.getLastIndex(tokens, indexMap, endLoc);
+        _this.commentIndex = utils.search(comments, endLoc) - 1;
+        _this.border = startLoc;
+        return _this;
+    }
+
+    /** @inheritdoc */
+
+
+    _createClass(BackwardTokenCommentCursor, [{
+        key: "moveNext",
+        value: function moveNext() {
+            var token = this.tokenIndex >= 0 ? this.tokens[this.tokenIndex] : null;
+            var comment = this.commentIndex >= 0 ? this.comments[this.commentIndex] : null;
+
+            if (token && (!comment || token.range[1] > comment.range[1])) {
+                this.current = token;
+                this.tokenIndex -= 1;
+            } else if (comment) {
+                this.current = comment;
+                this.commentIndex -= 1;
+            } else {
+                this.current = null;
+            }
+
+            return Boolean(this.current) && (this.border === -1 || this.current.range[0] >= this.border);
+        }
+    }]);
+
+    return BackwardTokenCommentCursor;
+}(Cursor);
+
+},{"./cursor":422,"./utils":432}],421:[function(require,module,exports){
+/**
+ * @fileoverview Define the cursor which iterates tokens only in reverse.
+ * @author Toru Nagashima
+ */
+"use strict";
+
+//------------------------------------------------------------------------------
+// Requirements
+//------------------------------------------------------------------------------
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var Cursor = require("./cursor");
+var utils = require("./utils");
+
+//------------------------------------------------------------------------------
+// Exports
+//------------------------------------------------------------------------------
+
+/**
+ * The cursor which iterates tokens only in reverse.
+ */
+module.exports = function (_Cursor) {
+    _inherits(BackwardTokenCursor, _Cursor);
+
+    /**
+     * Initializes this cursor.
+     * @param {Token[]} tokens - The array of tokens.
+     * @param {Comment[]} comments - The array of comments.
+     * @param {Object} indexMap - The map from locations to indices in `tokens`.
+     * @param {number} startLoc - The start location of the iteration range.
+     * @param {number} endLoc - The end location of the iteration range.
+     */
+    function BackwardTokenCursor(tokens, comments, indexMap, startLoc, endLoc) {
+        _classCallCheck(this, BackwardTokenCursor);
+
+        var _this = _possibleConstructorReturn(this, (BackwardTokenCursor.__proto__ || Object.getPrototypeOf(BackwardTokenCursor)).call(this));
+
+        _this.tokens = tokens;
+        _this.index = utils.getLastIndex(tokens, indexMap, endLoc);
+        _this.indexEnd = utils.getFirstIndex(tokens, indexMap, startLoc);
+        return _this;
+    }
+
+    /** @inheritdoc */
+
+
+    _createClass(BackwardTokenCursor, [{
+        key: "moveNext",
+        value: function moveNext() {
+            if (this.index >= this.indexEnd) {
+                this.current = this.tokens[this.index];
+                this.index -= 1;
+                return true;
+            }
+            return false;
+        }
+
+        //
+        // Shorthand for performance.
+        //
+
+        /** @inheritdoc */
+
+    }, {
+        key: "getOneToken",
+        value: function getOneToken() {
+            return this.index >= this.indexEnd ? this.tokens[this.index] : null;
+        }
+    }]);
+
+    return BackwardTokenCursor;
+}(Cursor);
+
+},{"./cursor":422,"./utils":432}],422:[function(require,module,exports){
+/**
+ * @fileoverview Define the abstract class about cursors which iterate tokens.
+ * @author Toru Nagashima
+ */
+"use strict";
+
+//------------------------------------------------------------------------------
+// Exports
+//------------------------------------------------------------------------------
+
+/**
+ * The abstract class about cursors which iterate tokens.
+ *
+ * This class has 2 abstract methods.
+ *
+ * - `current: Token | Comment | null` ... The current token.
+ * - `moveNext(): boolean` ... Moves this cursor to the next token. If the next token didn't exist, it returns `false`.
+ *
+ * This is similar to ES2015 Iterators.
+ * However, Iterators were slow (at 2017-01), so I created this class as similar to C# IEnumerable.
+ *
+ * There are the following known sub classes.
+ *
+ * - ForwardTokenCursor .......... The cursor which iterates tokens only.
+ * - BackwardTokenCursor ......... The cursor which iterates tokens only in reverse.
+ * - ForwardTokenCommentCursor ... The cursor which iterates tokens and comments.
+ * - BackwardTokenCommentCursor .. The cursor which iterates tokens and comments in reverse.
+ * - DecorativeCursor
+ *     - FilterCursor ............ The cursor which ignores the specified tokens.
+ *     - SkipCursor .............. The cursor which ignores the first few tokens.
+ *     - LimitCursor ............. The cursor which limits the count of tokens.
+ *
+ */
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+module.exports = function () {
+
+  /**
+   * Initializes this cursor.
+   */
+  function Cursor() {
+    _classCallCheck(this, Cursor);
+
+    this.current = null;
+  }
+
+  /**
+   * Gets the first token.
+   * This consumes this cursor.
+   * @returns {Token|Comment} The first token or null.
+   */
+
+
+  _createClass(Cursor, [{
+    key: "getOneToken",
+    value: function getOneToken() {
+      return this.moveNext() ? this.current : null;
+    }
+
+    /**
+     * Gets the first tokens.
+     * This consumes this cursor.
+     * @returns {(Token|Comment)[]} All tokens.
+     */
+
+  }, {
+    key: "getAllTokens",
+    value: function getAllTokens() {
+      var tokens = [];
+
+      while (this.moveNext()) {
+        tokens.push(this.current);
+      }
+
+      return tokens;
+    }
+
+    /**
+     * Moves this cursor to the next token.
+     * @returns {boolean} `true` if the next token exists.
+     * @abstract
+     */
+    /* istanbul ignore next */
+
+  }, {
+    key: "moveNext",
+    value: function moveNext() {
+      // eslint-disable-line class-methods-use-this
+      throw new Error("Not implemented.");
+    }
+  }]);
+
+  return Cursor;
+}();
+
+},{}],423:[function(require,module,exports){
+/**
+ * @fileoverview Define 2 token factories; forward and backward.
+ * @author Toru Nagashima
+ */
+"use strict";
+
+//------------------------------------------------------------------------------
+// Requirements
+//------------------------------------------------------------------------------
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var BackwardTokenCommentCursor = require("./backward-token-comment-cursor");
+var BackwardTokenCursor = require("./backward-token-cursor");
+var FilterCursor = require("./filter-cursor");
+var ForwardTokenCommentCursor = require("./forward-token-comment-cursor");
+var ForwardTokenCursor = require("./forward-token-cursor");
+var LimitCursor = require("./limit-cursor");
+var SkipCursor = require("./skip-cursor");
+
+//------------------------------------------------------------------------------
+// Helpers
+//------------------------------------------------------------------------------
+
+/**
+ * The cursor factory.
+ * @private
+ */
+
+var CursorFactory = function () {
+
+    /**
+     * Initializes this cursor.
+     * @param {Function} TokenCursor - The class of the cursor which iterates tokens only.
+     * @param {Function} TokenCommentCursor - The class of the cursor which iterates the mix of tokens and comments.
+     */
+    function CursorFactory(TokenCursor, TokenCommentCursor) {
+        _classCallCheck(this, CursorFactory);
+
+        this.TokenCursor = TokenCursor;
+        this.TokenCommentCursor = TokenCommentCursor;
+    }
+
+    /**
+     * Creates a base cursor instance that can be decorated by createCursor.
+     *
+     * @param {Token[]} tokens - The array of tokens.
+     * @param {Comment[]} comments - The array of comments.
+     * @param {Object} indexMap - The map from locations to indices in `tokens`.
+     * @param {number} startLoc - The start location of the iteration range.
+     * @param {number} endLoc - The end location of the iteration range.
+     * @param {boolean} includeComments - The flag to iterate comments as well.
+     * @returns {Cursor} The created base cursor.
+     */
+
+
+    _createClass(CursorFactory, [{
+        key: "createBaseCursor",
+        value: function createBaseCursor(tokens, comments, indexMap, startLoc, endLoc, includeComments) {
+            var Cursor = includeComments ? this.TokenCommentCursor : this.TokenCursor;
+
+            return new Cursor(tokens, comments, indexMap, startLoc, endLoc);
+        }
+
+        /**
+         * Creates a cursor that iterates tokens with normalized options.
+         *
+         * @param {Token[]} tokens - The array of tokens.
+         * @param {Comment[]} comments - The array of comments.
+         * @param {Object} indexMap - The map from locations to indices in `tokens`.
+         * @param {number} startLoc - The start location of the iteration range.
+         * @param {number} endLoc - The end location of the iteration range.
+         * @param {boolean} includeComments - The flag to iterate comments as well.
+         * @param {Function|null} filter - The predicate function to choose tokens.
+         * @param {number} skip - The count of tokens the cursor skips.
+         * @param {number} count - The maximum count of tokens the cursor iterates. Zero is no iteration for backward compatibility.
+         * @returns {Cursor} The created cursor.
+         */
+
+    }, {
+        key: "createCursor",
+        value: function createCursor(tokens, comments, indexMap, startLoc, endLoc, includeComments, filter, skip, count) {
+            var cursor = this.createBaseCursor(tokens, comments, indexMap, startLoc, endLoc, includeComments);
+
+            if (filter) {
+                cursor = new FilterCursor(cursor, filter);
+            }
+            if (skip >= 1) {
+                cursor = new SkipCursor(cursor, skip);
+            }
+            if (count >= 0) {
+                cursor = new LimitCursor(cursor, count);
+            }
+
+            return cursor;
+        }
+    }]);
+
+    return CursorFactory;
+}();
+
+//------------------------------------------------------------------------------
+// Exports
+//------------------------------------------------------------------------------
+
+exports.forward = new CursorFactory(ForwardTokenCursor, ForwardTokenCommentCursor);
+exports.backward = new CursorFactory(BackwardTokenCursor, BackwardTokenCommentCursor);
+
+},{"./backward-token-comment-cursor":420,"./backward-token-cursor":421,"./filter-cursor":425,"./forward-token-comment-cursor":426,"./forward-token-cursor":427,"./limit-cursor":429,"./skip-cursor":431}],424:[function(require,module,exports){
+/**
+ * @fileoverview Define the abstract class about cursors which manipulate another cursor.
+ * @author Toru Nagashima
+ */
+"use strict";
+
+//------------------------------------------------------------------------------
+// Requirements
+//------------------------------------------------------------------------------
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var Cursor = require("./cursor");
+
+//------------------------------------------------------------------------------
+// Exports
+//------------------------------------------------------------------------------
+
+/**
+ * The abstract class about cursors which manipulate another cursor.
+ */
+module.exports = function (_Cursor) {
+  _inherits(DecorativeCursor, _Cursor);
+
+  /**
+   * Initializes this cursor.
+   * @param {Cursor} cursor - The cursor to be decorated.
+   */
+  function DecorativeCursor(cursor) {
+    _classCallCheck(this, DecorativeCursor);
+
+    var _this = _possibleConstructorReturn(this, (DecorativeCursor.__proto__ || Object.getPrototypeOf(DecorativeCursor)).call(this));
+
+    _this.cursor = cursor;
+    return _this;
+  }
+
+  /** @inheritdoc */
+
+
+  _createClass(DecorativeCursor, [{
+    key: "moveNext",
+    value: function moveNext() {
+      var retv = this.cursor.moveNext();
+
+      this.current = this.cursor.current;
+
+      return retv;
+    }
+  }]);
+
+  return DecorativeCursor;
+}(Cursor);
+
+},{"./cursor":422}],425:[function(require,module,exports){
+/**
+ * @fileoverview Define the cursor which ignores specified tokens.
+ * @author Toru Nagashima
+ */
+"use strict";
+
+//------------------------------------------------------------------------------
+// Requirements
+//------------------------------------------------------------------------------
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _get = function get(object, property, receiver) { if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { return get(parent, property, receiver); } } else if ("value" in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } };
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var DecorativeCursor = require("./decorative-cursor");
+
+//------------------------------------------------------------------------------
+// Exports
+//------------------------------------------------------------------------------
+
+/**
+ * The decorative cursor which ignores specified tokens.
+ */
+module.exports = function (_DecorativeCursor) {
+    _inherits(FilterCursor, _DecorativeCursor);
+
+    /**
+     * Initializes this cursor.
+     * @param {Cursor} cursor - The cursor to be decorated.
+     * @param {Function} predicate - The predicate function to decide tokens this cursor iterates.
+     */
+    function FilterCursor(cursor, predicate) {
+        _classCallCheck(this, FilterCursor);
+
+        var _this = _possibleConstructorReturn(this, (FilterCursor.__proto__ || Object.getPrototypeOf(FilterCursor)).call(this, cursor));
+
+        _this.predicate = predicate;
+        return _this;
+    }
+
+    /** @inheritdoc */
+
+
+    _createClass(FilterCursor, [{
+        key: "moveNext",
+        value: function moveNext() {
+            var predicate = this.predicate;
+
+            while (_get(FilterCursor.prototype.__proto__ || Object.getPrototypeOf(FilterCursor.prototype), "moveNext", this).call(this)) {
+                if (predicate(this.current)) {
+                    return true;
+                }
+            }
+            return false;
+        }
+    }]);
+
+    return FilterCursor;
+}(DecorativeCursor);
+
+},{"./decorative-cursor":424}],426:[function(require,module,exports){
+/**
+ * @fileoverview Define the cursor which iterates tokens and comments.
+ * @author Toru Nagashima
+ */
+"use strict";
+
+//------------------------------------------------------------------------------
+// Requirements
+//------------------------------------------------------------------------------
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var Cursor = require("./cursor");
+var utils = require("./utils");
+
+//------------------------------------------------------------------------------
+// Exports
+//------------------------------------------------------------------------------
+
+/**
+ * The cursor which iterates tokens and comments.
+ */
+module.exports = function (_Cursor) {
+    _inherits(ForwardTokenCommentCursor, _Cursor);
+
+    /**
+     * Initializes this cursor.
+     * @param {Token[]} tokens - The array of tokens.
+     * @param {Comment[]} comments - The array of comments.
+     * @param {Object} indexMap - The map from locations to indices in `tokens`.
+     * @param {number} startLoc - The start location of the iteration range.
+     * @param {number} endLoc - The end location of the iteration range.
+     */
+    function ForwardTokenCommentCursor(tokens, comments, indexMap, startLoc, endLoc) {
+        _classCallCheck(this, ForwardTokenCommentCursor);
+
+        var _this = _possibleConstructorReturn(this, (ForwardTokenCommentCursor.__proto__ || Object.getPrototypeOf(ForwardTokenCommentCursor)).call(this));
+
+        _this.tokens = tokens;
+        _this.comments = comments;
+        _this.tokenIndex = utils.getFirstIndex(tokens, indexMap, startLoc);
+        _this.commentIndex = utils.search(comments, startLoc);
+        _this.border = endLoc;
+        return _this;
+    }
+
+    /** @inheritdoc */
+
+
+    _createClass(ForwardTokenCommentCursor, [{
+        key: "moveNext",
+        value: function moveNext() {
+            var token = this.tokenIndex < this.tokens.length ? this.tokens[this.tokenIndex] : null;
+            var comment = this.commentIndex < this.comments.length ? this.comments[this.commentIndex] : null;
+
+            if (token && (!comment || token.range[0] < comment.range[0])) {
+                this.current = token;
+                this.tokenIndex += 1;
+            } else if (comment) {
+                this.current = comment;
+                this.commentIndex += 1;
+            } else {
+                this.current = null;
+            }
+
+            return Boolean(this.current) && (this.border === -1 || this.current.range[1] <= this.border);
+        }
+    }]);
+
+    return ForwardTokenCommentCursor;
+}(Cursor);
+
+},{"./cursor":422,"./utils":432}],427:[function(require,module,exports){
+/**
+ * @fileoverview Define the cursor which iterates tokens only.
+ * @author Toru Nagashima
+ */
+"use strict";
+
+//------------------------------------------------------------------------------
+// Requirements
+//------------------------------------------------------------------------------
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var Cursor = require("./cursor");
+var utils = require("./utils");
+
+//------------------------------------------------------------------------------
+// Exports
+//------------------------------------------------------------------------------
+
+/**
+ * The cursor which iterates tokens only.
+ */
+module.exports = function (_Cursor) {
+    _inherits(ForwardTokenCursor, _Cursor);
+
+    /**
+     * Initializes this cursor.
+     * @param {Token[]} tokens - The array of tokens.
+     * @param {Comment[]} comments - The array of comments.
+     * @param {Object} indexMap - The map from locations to indices in `tokens`.
+     * @param {number} startLoc - The start location of the iteration range.
+     * @param {number} endLoc - The end location of the iteration range.
+     */
+    function ForwardTokenCursor(tokens, comments, indexMap, startLoc, endLoc) {
+        _classCallCheck(this, ForwardTokenCursor);
+
+        var _this = _possibleConstructorReturn(this, (ForwardTokenCursor.__proto__ || Object.getPrototypeOf(ForwardTokenCursor)).call(this));
+
+        _this.tokens = tokens;
+        _this.index = utils.getFirstIndex(tokens, indexMap, startLoc);
+        _this.indexEnd = utils.getLastIndex(tokens, indexMap, endLoc);
+        return _this;
+    }
+
+    /** @inheritdoc */
+
+
+    _createClass(ForwardTokenCursor, [{
+        key: "moveNext",
+        value: function moveNext() {
+            if (this.index <= this.indexEnd) {
+                this.current = this.tokens[this.index];
+                this.index += 1;
+                return true;
+            }
+            return false;
+        }
+
+        //
+        // Shorthand for performance.
+        //
+
+        /** @inheritdoc */
+
+    }, {
+        key: "getOneToken",
+        value: function getOneToken() {
+            return this.index <= this.indexEnd ? this.tokens[this.index] : null;
+        }
+
+        /** @inheritdoc */
+
+    }, {
+        key: "getAllTokens",
+        value: function getAllTokens() {
+            return this.tokens.slice(this.index, this.indexEnd + 1);
+        }
+    }]);
+
+    return ForwardTokenCursor;
+}(Cursor);
+
+},{"./cursor":422,"./utils":432}],428:[function(require,module,exports){
+/**
  * @fileoverview Object to handle access and retrieval of tokens.
  * @author Brandon Mills
  */
 "use strict";
 
 //------------------------------------------------------------------------------
-// Implementation
+// Requirements
 //------------------------------------------------------------------------------
 
-module.exports = function (tokens) {
-    var api = {},
-        starts = Object.create(null),
-        ends = Object.create(null),
-        length = tokens.length;
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-    /**
-     * Gets tokens in a given interval.
-     * @param {int} start Inclusive index of the first token. 0 if negative.
-     * @param {int} end Exclusive index of the last token.
-     * @returns {Token[]} Tokens in the interval.
-     */
-    function get(start, end) {
-        var result = [];
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-        for (var i = Math.max(0, start); i < end && i < length; i++) {
-            result.push(tokens[i]);
+var assert = require("assert");
+var cursors = require("./cursors");
+var ForwardTokenCursor = require("./forward-token-cursor");
+var PaddedTokenCursor = require("./padded-token-cursor");
+
+//------------------------------------------------------------------------------
+// Helpers
+//------------------------------------------------------------------------------
+
+var PUBLIC_METHODS = Object.freeze(["getTokenByRangeStart", "getFirstToken", "getLastToken", "getTokenBefore", "getTokenAfter", "getFirstTokenBetween", "getLastTokenBetween", "getFirstTokens", "getLastTokens", "getTokensBefore", "getTokensAfter", "getFirstTokensBetween", "getLastTokensBetween", "getTokens", "getTokensBetween", "getTokenOrCommentBefore", "getTokenOrCommentAfter"]);
+
+/**
+ * Creates the map from locations to indices in `tokens`.
+ *
+ * The first/last location of tokens is mapped to the index of the token.
+ * The first/last location of comments is mapped to the index of the next token of each comment.
+ *
+ * @param {Token[]} tokens - The array of tokens.
+ * @param {Comment[]} comments - The array of comments.
+ * @returns {Object} The map from locations to indices in `tokens`.
+ * @private
+ */
+function createIndexMap(tokens, comments) {
+    var map = Object.create(null);
+    var tokenIndex = 0;
+    var commentIndex = 0;
+    var nextStart = 0;
+    var range = null;
+
+    while (tokenIndex < tokens.length || commentIndex < comments.length) {
+        nextStart = commentIndex < comments.length ? comments[commentIndex].range[0] : Number.MAX_SAFE_INTEGER;
+        while (tokenIndex < tokens.length && (range = tokens[tokenIndex].range)[0] < nextStart) {
+            map[range[0]] = tokenIndex;
+            map[range[1] - 1] = tokenIndex;
+            tokenIndex += 1;
         }
 
-        return result;
-    }
-
-    /**
-     * Gets the index in the tokens array of the last token belonging to a node.
-     * Usually a node ends exactly at a token, but due to ASI, sometimes a
-     * node's range extends beyond its last token.
-     * @param {ASTNode} node The node for which to find the last token's index.
-     * @returns {int} Index in the tokens array of the node's last token.
-     */
-    function lastTokenIndex(node) {
-        var end = node.range[1];
-        var cursor = ends[end];
-
-        // If the node extends beyond its last token, get the token before the
-        // next token
-        if (typeof cursor === "undefined") {
-            cursor = starts[end] - 1;
+        nextStart = tokenIndex < tokens.length ? tokens[tokenIndex].range[0] : Number.MAX_SAFE_INTEGER;
+        while (commentIndex < comments.length && (range = comments[commentIndex].range)[0] < nextStart) {
+            map[range[0]] = tokenIndex;
+            map[range[1] - 1] = tokenIndex;
+            commentIndex += 1;
         }
-
-        // If there isn't a next token, the desired token is the last one in the
-        // array
-        if (isNaN(cursor)) {
-            cursor = length - 1;
-        }
-
-        return cursor;
     }
 
-    // Map tokens' start and end range to the index in the tokens array
-    for (var i = 0; i < length; i++) {
-        var range = tokens[i].range;
+    return map;
+}
 
-        starts[range[0]] = i;
-        ends[range[1]] = i;
+/**
+ * Creates the cursor iterates tokens with options.
+ *
+ * @param {CursorFactory} factory - The cursor factory to initialize cursor.
+ * @param {Token[]} tokens - The array of tokens.
+ * @param {Comment[]} comments - The array of comments.
+ * @param {Object} indexMap - The map from locations to indices in `tokens`.
+ * @param {number} startLoc - The start location of the iteration range.
+ * @param {number} endLoc - The end location of the iteration range.
+ * @param {number|Function|Object} [opts=0] - The option object. If this is a number then it's `opts.skip`. If this is a function then it's `opts.filter`.
+ * @param {boolean} [opts.includeComments=false] - The flag to iterate comments as well.
+ * @param {Function|null} [opts.filter=null] - The predicate function to choose tokens.
+ * @param {number} [opts.skip=0] - The count of tokens the cursor skips.
+ * @returns {Cursor} The created cursor.
+ * @private
+ */
+function createCursorWithSkip(factory, tokens, comments, indexMap, startLoc, endLoc, opts) {
+    var includeComments = false;
+    var skip = 0;
+    var filter = null;
+
+    if (typeof opts === "number") {
+        skip = opts | 0;
+    } else if (typeof opts === "function") {
+        filter = opts;
+    } else if (opts) {
+        includeComments = !!opts.includeComments;
+        skip = opts.skip | 0;
+        filter = opts.filter || null;
+    }
+    assert(skip >= 0, "options.skip should be zero or a positive integer.");
+    assert(!filter || typeof filter === "function", "options.filter should be a function.");
+
+    return factory.createCursor(tokens, comments, indexMap, startLoc, endLoc, includeComments, filter, skip, -1);
+}
+
+/**
+ * Creates the cursor iterates tokens with options.
+ *
+ * @param {CursorFactory} factory - The cursor factory to initialize cursor.
+ * @param {Token[]} tokens - The array of tokens.
+ * @param {Comment[]} comments - The array of comments.
+ * @param {Object} indexMap - The map from locations to indices in `tokens`.
+ * @param {number} startLoc - The start location of the iteration range.
+ * @param {number} endLoc - The end location of the iteration range.
+ * @param {number|Function|Object} [opts=0] - The option object. If this is a number then it's `opts.count`. If this is a function then it's `opts.filter`.
+ * @param {boolean} [opts.includeComments] - The flag to iterate comments as well.
+ * @param {Function|null} [opts.filter=null] - The predicate function to choose tokens.
+ * @param {number} [opts.count=0] - The maximum count of tokens the cursor iterates. Zero is no iteration for backward compatibility.
+ * @returns {Cursor} The created cursor.
+ * @private
+ */
+function createCursorWithCount(factory, tokens, comments, indexMap, startLoc, endLoc, opts) {
+    var includeComments = false;
+    var count = 0;
+    var countExists = false;
+    var filter = null;
+
+    if (typeof opts === "number") {
+        count = opts | 0;
+        countExists = true;
+    } else if (typeof opts === "function") {
+        filter = opts;
+    } else if (opts) {
+        includeComments = !!opts.includeComments;
+        count = opts.count | 0;
+        countExists = typeof opts.count === "number";
+        filter = opts.filter || null;
+    }
+    assert(count >= 0, "options.count should be zero or a positive integer.");
+    assert(!filter || typeof filter === "function", "options.filter should be a function.");
+
+    return factory.createCursor(tokens, comments, indexMap, startLoc, endLoc, includeComments, filter, 0, countExists ? count : -1);
+}
+
+/**
+ * Creates the cursor iterates tokens with options.
+ * This is overload function of the below.
+ *
+ * @param {Token[]} tokens - The array of tokens.
+ * @param {Comment[]} comments - The array of comments.
+ * @param {Object} indexMap - The map from locations to indices in `tokens`.
+ * @param {number} startLoc - The start location of the iteration range.
+ * @param {number} endLoc - The end location of the iteration range.
+ * @param {Function|Object} opts - The option object. If this is a function then it's `opts.filter`.
+ * @param {boolean} [opts.includeComments] - The flag to iterate comments as well.
+ * @param {Function|null} [opts.filter=null] - The predicate function to choose tokens.
+ * @param {number} [opts.count=0] - The maximum count of tokens the cursor iterates. Zero is no iteration for backward compatibility.
+ * @returns {Cursor} The created cursor.
+ * @private
+ */
+/**
+ * Creates the cursor iterates tokens with options.
+ *
+ * @param {Token[]} tokens - The array of tokens.
+ * @param {Comment[]} comments - The array of comments.
+ * @param {Object} indexMap - The map from locations to indices in `tokens`.
+ * @param {number} startLoc - The start location of the iteration range.
+ * @param {number} endLoc - The end location of the iteration range.
+ * @param {number} [beforeCount=0] - The number of tokens before the node to retrieve.
+ * @param {boolean} [afterCount=0] - The number of tokens after the node to retrieve.
+ * @returns {Cursor} The created cursor.
+ * @private
+ */
+function createCursorWithPadding(tokens, comments, indexMap, startLoc, endLoc, beforeCount, afterCount) {
+    if (typeof beforeCount === "undefined" && typeof afterCount === "undefined") {
+        return new ForwardTokenCursor(tokens, comments, indexMap, startLoc, endLoc);
+    }
+    if (typeof beforeCount === "number" || typeof beforeCount === "undefined") {
+        return new PaddedTokenCursor(tokens, comments, indexMap, startLoc, endLoc, beforeCount | 0, afterCount | 0);
+    }
+    return createCursorWithCount(cursors.forward, tokens, comments, indexMap, startLoc, endLoc, beforeCount);
+}
+
+//------------------------------------------------------------------------------
+// Exports
+//------------------------------------------------------------------------------
+
+/**
+ * The token store.
+ *
+ * This class provides methods to get tokens by locations as fast as possible.
+ * The methods are a part of public API, so we should be careful if it changes this class.
+ *
+ * People can get tokens in O(1) by the hash map which is mapping from the location of tokens/comments to tokens.
+ * Also people can get a mix of tokens and comments in O(log k), the k is the number of comments.
+ * Assuming that comments to be much fewer than tokens, this does not make hash map from token's locations to comments to reduce memory cost.
+ * This uses binary-searching instead for comments.
+ */
+module.exports = function () {
+
+    /**
+     * Initializes this token store.
+     *
+     * ※ `comments` needs to be cloned for backward compatibility.
+     * After this initialization, ESLint removes a shebang's comment from `comments`.
+     * However, so far we had been concatenating 'tokens' and 'comments' before,
+     * so the shebang's comment had remained in the concatenated array.
+     * As a result, both the result of `getTokenOrCommentAfter` and `getTokenOrCommentBefore`
+     * methods had included the shebang's comment.
+     * And some rules depends on this behavior.
+     *
+     * @param {Token[]} tokens - The array of tokens.
+     * @param {Comment[]} comments - The array of comments.
+     */
+    function TokenStore(tokens, comments) {
+        _classCallCheck(this, TokenStore);
+
+        this.tokens = tokens;
+        this.comments = comments.slice(0);
+        this.indexMap = createIndexMap(tokens, comments);
     }
 
-    /**
-     * Gets a number of tokens that precede a given node or token in the token
-     * stream.
-     * @param {(ASTNode|Token)} node The AST node or token.
-     * @param {int} [beforeCount=0] The number of tokens before the node or
-     *     token to retrieve.
-     * @returns {Token[]} Array of objects representing tokens.
-     */
-    api.getTokensBefore = function (node, beforeCount) {
-        var first = starts[node.range[0]];
-
-        return get(first - (beforeCount || 0), first);
-    };
-
-    /**
-     * Gets the token that precedes a given node or token in the token stream.
-     * @param {(ASTNode|Token)} node The AST node or token.
-     * @param {int} [skip=0] A number of tokens to skip before the given node or
-     *     token.
-     * @returns {Token} An object representing the token.
-     */
-    api.getTokenBefore = function (node, skip) {
-        return tokens[starts[node.range[0]] - (skip || 0) - 1];
-    };
-
-    /**
-     * Gets a number of tokens that follow a given node or token in the token
-     * stream.
-     * @param {(ASTNode|Token)} node The AST node or token.
-     * @param {int} [afterCount=0] The number of tokens after the node or token
-     *     to retrieve.
-     * @returns {Token[]} Array of objects representing tokens.
-     */
-    api.getTokensAfter = function (node, afterCount) {
-        var start = lastTokenIndex(node) + 1;
-
-        return get(start, start + (afterCount || 0));
-    };
-
-    /**
-     * Gets the token that follows a given node or token in the token stream.
-     * @param {(ASTNode|Token)} node The AST node or token.
-     * @param {int} [skip=0] A number of tokens to skip after the given node or
-     *     token.
-     * @returns {Token} An object representing the token.
-     */
-    api.getTokenAfter = function (node, skip) {
-        return tokens[lastTokenIndex(node) + (skip || 0) + 1];
-    };
-
-    /**
-     * Gets all tokens that are related to the given node.
-     * @param {ASTNode} node The AST node.
-     * @param {int} [beforeCount=0] The number of tokens before the node to retrieve.
-     * @param {int} [afterCount=0] The number of tokens after the node to retrieve.
-     * @returns {Token[]} Array of objects representing tokens.
-     */
-    api.getTokens = function (node, beforeCount, afterCount) {
-        return get(starts[node.range[0]] - (beforeCount || 0), lastTokenIndex(node) + (afterCount || 0) + 1);
-    };
-
-    /**
-     * Gets the first `count` tokens of the given node's token stream.
-     * @param {ASTNode} node The AST node.
-     * @param {int} [count=0] The number of tokens of the node to retrieve.
-     * @returns {Token[]} Array of objects representing tokens.
-     */
-    api.getFirstTokens = function (node, count) {
-        var first = starts[node.range[0]];
-
-        return get(first, Math.min(lastTokenIndex(node) + 1, first + (count || 0)));
-    };
-
-    /**
-     * Gets the first token of the given node's token stream.
-     * @param {ASTNode} node The AST node.
-     * @param {int} [skip=0] A number of tokens to skip.
-     * @returns {Token} An object representing the token.
-     */
-    api.getFirstToken = function (node, skip) {
-        return tokens[starts[node.range[0]] + (skip || 0)];
-    };
-
-    /**
-     * Gets the last `count` tokens of the given node.
-     * @param {ASTNode} node The AST node.
-     * @param {int} [count=0] The number of tokens of the node to retrieve.
-     * @returns {Token[]} Array of objects representing tokens.
-     */
-    api.getLastTokens = function (node, count) {
-        var last = lastTokenIndex(node) + 1;
-
-        return get(Math.max(starts[node.range[0]], last - (count || 0)), last);
-    };
-
-    /**
-     * Gets the last token of the given node's token stream.
-     * @param {ASTNode} node The AST node.
-     * @param {int} [skip=0] A number of tokens to skip.
-     * @returns {Token} An object representing the token.
-     */
-    api.getLastToken = function (node, skip) {
-        return tokens[lastTokenIndex(node) - (skip || 0)];
-    };
-
-    /**
-     * Gets all of the tokens between two non-overlapping nodes.
-     * @param {ASTNode} left Node before the desired token range.
-     * @param {ASTNode} right Node after the desired token range.
-     * @param {int} [padding=0] Number of extra tokens on either side of center.
-     * @returns {Token[]} Tokens between left and right plus padding.
-     */
-    api.getTokensBetween = function (left, right, padding) {
-        padding = padding || 0;
-        return get(lastTokenIndex(left) + 1 - padding, starts[right.range[0]] + padding);
-    };
+    //--------------------------------------------------------------------------
+    // Gets single token.
+    //--------------------------------------------------------------------------
 
     /**
      * Gets the token starting at the specified index.
-     * @param {int} startIndex Index of the start of the token's range.
-     * @returns {Token} The token starting at index, or null if no such token.
+     * @param {number} offset - Index of the start of the token's range.
+     * @param {Object} [options=0] - The option object.
+     * @param {boolean} [options.includeComments=false] - The flag to iterate comments as well.
+     * @returns {Token|null} The token starting at index, or null if no such token.
      */
-    api.getTokenByRangeStart = function (startIndex) {
-        return tokens[starts[startIndex]] || null;
-    };
 
-    return api;
+
+    _createClass(TokenStore, [{
+        key: "getTokenByRangeStart",
+        value: function getTokenByRangeStart(offset, options) {
+            var includeComments = options && options.includeComments;
+            var token = cursors.forward.createBaseCursor(this.tokens, this.comments, this.indexMap, offset, -1, includeComments).getOneToken();
+
+            if (token && token.range[0] === offset) {
+                return token;
+            }
+            return null;
+        }
+
+        /**
+         * Gets the first token of the given node.
+         * @param {ASTNode} node - The AST node.
+         * @param {number|Function|Object} [options=0] - The option object. If this is a number then it's `options.skip`. If this is a function then it's `options.filter`.
+         * @param {boolean} [options.includeComments=false] - The flag to iterate comments as well.
+         * @param {Function|null} [options.filter=null] - The predicate function to choose tokens.
+         * @param {number} [options.skip=0] - The count of tokens the cursor skips.
+         * @returns {Token|null} An object representing the token.
+         */
+
+    }, {
+        key: "getFirstToken",
+        value: function getFirstToken(node, options) {
+            return createCursorWithSkip(cursors.forward, this.tokens, this.comments, this.indexMap, node.range[0], node.range[1], options).getOneToken();
+        }
+
+        /**
+         * Gets the last token of the given node.
+         * @param {ASTNode} node - The AST node.
+         * @param {number|Function|Object} [options=0] - The option object. If this is a number then it's `options.skip`. If this is a function then it's `options.filter`.
+         * @param {boolean} [options.includeComments=false] - The flag to iterate comments as well.
+         * @param {Function|null} [options.filter=null] - The predicate function to choose tokens.
+         * @param {number} [options.skip=0] - The count of tokens the cursor skips.
+         * @returns {Token|null} An object representing the token.
+         */
+
+    }, {
+        key: "getLastToken",
+        value: function getLastToken(node, options) {
+            return createCursorWithSkip(cursors.backward, this.tokens, this.comments, this.indexMap, node.range[0], node.range[1], options).getOneToken();
+        }
+
+        /**
+         * Gets the token that precedes a given node or token.
+         * @param {ASTNode|Token|Comment} node - The AST node or token.
+         * @param {number|Function|Object} [options=0] - The option object. If this is a number then it's `options.skip`. If this is a function then it's `options.filter`.
+         * @param {boolean} [options.includeComments=false] - The flag to iterate comments as well.
+         * @param {Function|null} [options.filter=null] - The predicate function to choose tokens.
+         * @param {number} [options.skip=0] - The count of tokens the cursor skips.
+         * @returns {Token|null} An object representing the token.
+         */
+
+    }, {
+        key: "getTokenBefore",
+        value: function getTokenBefore(node, options) {
+            return createCursorWithSkip(cursors.backward, this.tokens, this.comments, this.indexMap, -1, node.range[0], options).getOneToken();
+        }
+
+        /**
+         * Gets the token that follows a given node or token.
+         * @param {ASTNode|Token|Comment} node - The AST node or token.
+         * @param {number|Function|Object} [options=0] - The option object. If this is a number then it's `options.skip`. If this is a function then it's `options.filter`.
+         * @param {boolean} [options.includeComments=false] - The flag to iterate comments as well.
+         * @param {Function|null} [options.filter=null] - The predicate function to choose tokens.
+         * @param {number} [options.skip=0] - The count of tokens the cursor skips.
+         * @returns {Token|null} An object representing the token.
+         */
+
+    }, {
+        key: "getTokenAfter",
+        value: function getTokenAfter(node, options) {
+            return createCursorWithSkip(cursors.forward, this.tokens, this.comments, this.indexMap, node.range[1], -1, options).getOneToken();
+        }
+
+        /**
+         * Gets the first token between two non-overlapping nodes.
+         * @param {ASTNode|Token|Comment} left - Node before the desired token range.
+         * @param {ASTNode|Token|Comment} right - Node after the desired token range.
+         * @param {number|Function|Object} [options=0] - The option object. If this is a number then it's `options.skip`. If this is a function then it's `options.filter`.
+         * @param {boolean} [options.includeComments=false] - The flag to iterate comments as well.
+         * @param {Function|null} [options.filter=null] - The predicate function to choose tokens.
+         * @param {number} [options.skip=0] - The count of tokens the cursor skips.
+         * @returns {Token|null} An object representing the token.
+         */
+
+    }, {
+        key: "getFirstTokenBetween",
+        value: function getFirstTokenBetween(left, right, options) {
+            return createCursorWithSkip(cursors.forward, this.tokens, this.comments, this.indexMap, left.range[1], right.range[0], options).getOneToken();
+        }
+
+        /**
+         * Gets the last token between two non-overlapping nodes.
+         * @param {ASTNode|Token|Comment} left Node before the desired token range.
+         * @param {ASTNode|Token|Comment} right Node after the desired token range.
+         * @param {number|Function|Object} [options=0] The option object. If this is a number then it's `options.skip`. If this is a function then it's `options.filter`.
+         * @param {boolean} [options.includeComments=false] - The flag to iterate comments as well.
+         * @param {Function|null} [options.filter=null] - The predicate function to choose tokens.
+         * @param {number} [options.skip=0] - The count of tokens the cursor skips.
+         * @returns {Token|null} Tokens between left and right.
+         */
+
+    }, {
+        key: "getLastTokenBetween",
+        value: function getLastTokenBetween(left, right, options) {
+            return createCursorWithSkip(cursors.backward, this.tokens, this.comments, this.indexMap, left.range[1], right.range[0], options).getOneToken();
+        }
+
+        /**
+         * Gets the token that precedes a given node or token in the token stream.
+         * This is defined for backward compatibility. Use `includeComments` option instead.
+         * TODO: We have a plan to remove this in a future major version.
+         * @param {ASTNode|Token|Comment} node The AST node or token.
+         * @param {number} [skip=0] A number of tokens to skip.
+         * @returns {Token|null} An object representing the token.
+         * @deprecated
+         */
+
+    }, {
+        key: "getTokenOrCommentBefore",
+        value: function getTokenOrCommentBefore(node, skip) {
+            return this.getTokenBefore(node, { includeComments: true, skip: skip });
+        }
+
+        /**
+         * Gets the token that follows a given node or token in the token stream.
+         * This is defined for backward compatibility. Use `includeComments` option instead.
+         * TODO: We have a plan to remove this in a future major version.
+         * @param {ASTNode|Token|Comment} node The AST node or token.
+         * @param {number} [skip=0] A number of tokens to skip.
+         * @returns {Token|null} An object representing the token.
+         * @deprecated
+         */
+
+    }, {
+        key: "getTokenOrCommentAfter",
+        value: function getTokenOrCommentAfter(node, skip) {
+            return this.getTokenAfter(node, { includeComments: true, skip: skip });
+        }
+
+        //--------------------------------------------------------------------------
+        // Gets multiple tokens.
+        //--------------------------------------------------------------------------
+
+        /**
+         * Gets the first `count` tokens of the given node.
+         * @param {ASTNode} node - The AST node.
+         * @param {number|Function|Object} [options=0] - The option object. If this is a number then it's `options.count`. If this is a function then it's `options.filter`.
+         * @param {boolean} [options.includeComments=false] - The flag to iterate comments as well.
+         * @param {Function|null} [options.filter=null] - The predicate function to choose tokens.
+         * @param {number} [options.count=0] - The maximum count of tokens the cursor iterates.
+         * @returns {Token[]} Tokens.
+         */
+
+    }, {
+        key: "getFirstTokens",
+        value: function getFirstTokens(node, options) {
+            return createCursorWithCount(cursors.forward, this.tokens, this.comments, this.indexMap, node.range[0], node.range[1], options).getAllTokens();
+        }
+
+        /**
+         * Gets the last `count` tokens of the given node.
+         * @param {ASTNode} node - The AST node.
+         * @param {number|Function|Object} [options=0] - The option object. If this is a number then it's `options.count`. If this is a function then it's `options.filter`.
+         * @param {boolean} [options.includeComments=false] - The flag to iterate comments as well.
+         * @param {Function|null} [options.filter=null] - The predicate function to choose tokens.
+         * @param {number} [options.count=0] - The maximum count of tokens the cursor iterates.
+         * @returns {Token[]} Tokens.
+         */
+
+    }, {
+        key: "getLastTokens",
+        value: function getLastTokens(node, options) {
+            return createCursorWithCount(cursors.backward, this.tokens, this.comments, this.indexMap, node.range[0], node.range[1], options).getAllTokens().reverse();
+        }
+
+        /**
+         * Gets the `count` tokens that precedes a given node or token.
+         * @param {ASTNode|Token|Comment} node - The AST node or token.
+         * @param {number|Function|Object} [options=0] - The option object. If this is a number then it's `options.count`. If this is a function then it's `options.filter`.
+         * @param {boolean} [options.includeComments=false] - The flag to iterate comments as well.
+         * @param {Function|null} [options.filter=null] - The predicate function to choose tokens.
+         * @param {number} [options.count=0] - The maximum count of tokens the cursor iterates.
+         * @returns {Token[]} Tokens.
+         */
+
+    }, {
+        key: "getTokensBefore",
+        value: function getTokensBefore(node, options) {
+            return createCursorWithCount(cursors.backward, this.tokens, this.comments, this.indexMap, -1, node.range[0], options).getAllTokens().reverse();
+        }
+
+        /**
+         * Gets the `count` tokens that follows a given node or token.
+         * @param {ASTNode|Token|Comment} node - The AST node or token.
+         * @param {number|Function|Object} [options=0] - The option object. If this is a number then it's `options.count`. If this is a function then it's `options.filter`.
+         * @param {boolean} [options.includeComments=false] - The flag to iterate comments as well.
+         * @param {Function|null} [options.filter=null] - The predicate function to choose tokens.
+         * @param {number} [options.count=0] - The maximum count of tokens the cursor iterates.
+         * @returns {Token[]} Tokens.
+         */
+
+    }, {
+        key: "getTokensAfter",
+        value: function getTokensAfter(node, options) {
+            return createCursorWithCount(cursors.forward, this.tokens, this.comments, this.indexMap, node.range[1], -1, options).getAllTokens();
+        }
+
+        /**
+         * Gets the first `count` tokens between two non-overlapping nodes.
+         * @param {ASTNode|Token|Comment} left - Node before the desired token range.
+         * @param {ASTNode|Token|Comment} right - Node after the desired token range.
+         * @param {number|Function|Object} [options=0] - The option object. If this is a number then it's `options.count`. If this is a function then it's `options.filter`.
+         * @param {boolean} [options.includeComments=false] - The flag to iterate comments as well.
+         * @param {Function|null} [options.filter=null] - The predicate function to choose tokens.
+         * @param {number} [options.count=0] - The maximum count of tokens the cursor iterates.
+         * @returns {Token[]} Tokens between left and right.
+         */
+
+    }, {
+        key: "getFirstTokensBetween",
+        value: function getFirstTokensBetween(left, right, options) {
+            return createCursorWithCount(cursors.forward, this.tokens, this.comments, this.indexMap, left.range[1], right.range[0], options).getAllTokens();
+        }
+
+        /**
+         * Gets the last `count` tokens between two non-overlapping nodes.
+         * @param {ASTNode|Token|Comment} left Node before the desired token range.
+         * @param {ASTNode|Token|Comment} right Node after the desired token range.
+         * @param {number|Function|Object} [options=0] The option object. If this is a number then it's `options.count`. If this is a function then it's `options.filter`.
+         * @param {boolean} [options.includeComments=false] - The flag to iterate comments as well.
+         * @param {Function|null} [options.filter=null] - The predicate function to choose tokens.
+         * @param {number} [options.count=0] - The maximum count of tokens the cursor iterates.
+         * @returns {Token[]} Tokens between left and right.
+         */
+
+    }, {
+        key: "getLastTokensBetween",
+        value: function getLastTokensBetween(left, right, options) {
+            return createCursorWithCount(cursors.backward, this.tokens, this.comments, this.indexMap, left.range[1], right.range[0], options).getAllTokens().reverse();
+        }
+
+        /**
+         * Gets all tokens that are related to the given node.
+         * @param {ASTNode} node - The AST node.
+         * @param {Function|Object} options The option object. If this is a function then it's `options.filter`.
+         * @param {boolean} [options.includeComments=false] - The flag to iterate comments as well.
+         * @param {Function|null} [options.filter=null] - The predicate function to choose tokens.
+         * @param {number} [options.count=0] - The maximum count of tokens the cursor iterates.
+         * @returns {Token[]} Array of objects representing tokens.
+         */
+        /**
+         * Gets all tokens that are related to the given node.
+         * @param {ASTNode} node - The AST node.
+         * @param {int} [beforeCount=0] - The number of tokens before the node to retrieve.
+         * @param {int} [afterCount=0] - The number of tokens after the node to retrieve.
+         * @returns {Token[]} Array of objects representing tokens.
+         */
+
+    }, {
+        key: "getTokens",
+        value: function getTokens(node, beforeCount, afterCount) {
+            return createCursorWithPadding(this.tokens, this.comments, this.indexMap, node.range[0], node.range[1], beforeCount, afterCount).getAllTokens();
+        }
+
+        /**
+         * Gets all of the tokens between two non-overlapping nodes.
+         * @param {ASTNode|Token|Comment} left Node before the desired token range.
+         * @param {ASTNode|Token|Comment} right Node after the desired token range.
+         * @param {Function|Object} options The option object. If this is a function then it's `options.filter`.
+         * @param {boolean} [options.includeComments=false] - The flag to iterate comments as well.
+         * @param {Function|null} [options.filter=null] - The predicate function to choose tokens.
+         * @param {number} [options.count=0] - The maximum count of tokens the cursor iterates.
+         * @returns {Token[]} Tokens between left and right.
+         */
+        /**
+         * Gets all of the tokens between two non-overlapping nodes.
+         * @param {ASTNode|Token|Comment} left Node before the desired token range.
+         * @param {ASTNode|Token|Comment} right Node after the desired token range.
+         * @param {int} [padding=0] Number of extra tokens on either side of center.
+         * @returns {Token[]} Tokens between left and right.
+         */
+
+    }, {
+        key: "getTokensBetween",
+        value: function getTokensBetween(left, right, padding) {
+            return createCursorWithPadding(this.tokens, this.comments, this.indexMap, left.range[1], right.range[0], padding, padding).getAllTokens();
+        }
+    }]);
+
+    return TokenStore;
+}();
+
+module.exports.PUBLIC_METHODS = PUBLIC_METHODS;
+
+},{"./cursors":423,"./forward-token-cursor":427,"./padded-token-cursor":430,"assert":5}],429:[function(require,module,exports){
+/**
+ * @fileoverview Define the cursor which limits the number of tokens.
+ * @author Toru Nagashima
+ */
+"use strict";
+
+//------------------------------------------------------------------------------
+// Requirements
+//------------------------------------------------------------------------------
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _get = function get(object, property, receiver) { if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { return get(parent, property, receiver); } } else if ("value" in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } };
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var DecorativeCursor = require("./decorative-cursor");
+
+//------------------------------------------------------------------------------
+// Exports
+//------------------------------------------------------------------------------
+
+/**
+ * The decorative cursor which limits the number of tokens.
+ */
+module.exports = function (_DecorativeCursor) {
+    _inherits(LimitCursor, _DecorativeCursor);
+
+    /**
+     * Initializes this cursor.
+     * @param {Cursor} cursor - The cursor to be decorated.
+     * @param {number} count - The count of tokens this cursor iterates.
+     */
+    function LimitCursor(cursor, count) {
+        _classCallCheck(this, LimitCursor);
+
+        var _this = _possibleConstructorReturn(this, (LimitCursor.__proto__ || Object.getPrototypeOf(LimitCursor)).call(this, cursor));
+
+        _this.count = count;
+        return _this;
+    }
+
+    /** @inheritdoc */
+
+
+    _createClass(LimitCursor, [{
+        key: "moveNext",
+        value: function moveNext() {
+            if (this.count > 0) {
+                this.count -= 1;
+                return _get(LimitCursor.prototype.__proto__ || Object.getPrototypeOf(LimitCursor.prototype), "moveNext", this).call(this);
+            }
+            return false;
+        }
+    }]);
+
+    return LimitCursor;
+}(DecorativeCursor);
+
+},{"./decorative-cursor":424}],430:[function(require,module,exports){
+/**
+ * @fileoverview Define the cursor which iterates tokens only, with inflated range.
+ * @author Toru Nagashima
+ */
+"use strict";
+
+//------------------------------------------------------------------------------
+// Requirements
+//------------------------------------------------------------------------------
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var ForwardTokenCursor = require("./forward-token-cursor");
+
+//------------------------------------------------------------------------------
+// Exports
+//------------------------------------------------------------------------------
+
+/**
+ * The cursor which iterates tokens only, with inflated range.
+ * This is for the backward compatibility of padding options.
+ */
+module.exports = function (_ForwardTokenCursor) {
+  _inherits(PaddedTokenCursor, _ForwardTokenCursor);
+
+  /**
+   * Initializes this cursor.
+   * @param {Token[]} tokens - The array of tokens.
+   * @param {Comment[]} comments - The array of comments.
+   * @param {Object} indexMap - The map from locations to indices in `tokens`.
+   * @param {number} startLoc - The start location of the iteration range.
+   * @param {number} endLoc - The end location of the iteration range.
+   * @param {number} beforeCount - The number of tokens this cursor iterates before start.
+   * @param {number} afterCount - The number of tokens this cursor iterates after end.
+   */
+  function PaddedTokenCursor(tokens, comments, indexMap, startLoc, endLoc, beforeCount, afterCount) {
+    _classCallCheck(this, PaddedTokenCursor);
+
+    var _this = _possibleConstructorReturn(this, (PaddedTokenCursor.__proto__ || Object.getPrototypeOf(PaddedTokenCursor)).call(this, tokens, comments, indexMap, startLoc, endLoc));
+
+    _this.index = Math.max(0, _this.index - beforeCount);
+    _this.indexEnd = Math.min(tokens.length - 1, _this.indexEnd + afterCount);
+    return _this;
+  }
+
+  return PaddedTokenCursor;
+}(ForwardTokenCursor);
+
+},{"./forward-token-cursor":427}],431:[function(require,module,exports){
+/**
+ * @fileoverview Define the cursor which ignores the first few tokens.
+ * @author Toru Nagashima
+ */
+"use strict";
+
+//------------------------------------------------------------------------------
+// Requirements
+//------------------------------------------------------------------------------
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _get = function get(object, property, receiver) { if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { return get(parent, property, receiver); } } else if ("value" in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } };
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var DecorativeCursor = require("./decorative-cursor");
+
+//------------------------------------------------------------------------------
+// Exports
+//------------------------------------------------------------------------------
+
+/**
+ * The decorative cursor which ignores the first few tokens.
+ */
+module.exports = function (_DecorativeCursor) {
+    _inherits(SkipCursor, _DecorativeCursor);
+
+    /**
+     * Initializes this cursor.
+     * @param {Cursor} cursor - The cursor to be decorated.
+     * @param {number} count - The count of tokens this cursor skips.
+     */
+    function SkipCursor(cursor, count) {
+        _classCallCheck(this, SkipCursor);
+
+        var _this = _possibleConstructorReturn(this, (SkipCursor.__proto__ || Object.getPrototypeOf(SkipCursor)).call(this, cursor));
+
+        _this.count = count;
+        return _this;
+    }
+
+    /** @inheritdoc */
+
+
+    _createClass(SkipCursor, [{
+        key: "moveNext",
+        value: function moveNext() {
+            while (this.count > 0) {
+                this.count -= 1;
+                if (!_get(SkipCursor.prototype.__proto__ || Object.getPrototypeOf(SkipCursor.prototype), "moveNext", this).call(this)) {
+                    return false;
+                }
+            }
+            return _get(SkipCursor.prototype.__proto__ || Object.getPrototypeOf(SkipCursor.prototype), "moveNext", this).call(this);
+        }
+    }]);
+
+    return SkipCursor;
+}(DecorativeCursor);
+
+},{"./decorative-cursor":424}],432:[function(require,module,exports){
+/**
+ * @fileoverview Define utilify functions for token store.
+ * @author Toru Nagashima
+ */
+"use strict";
+
+//------------------------------------------------------------------------------
+// Requirements
+//------------------------------------------------------------------------------
+
+var lodash = require("lodash");
+
+//------------------------------------------------------------------------------
+// Helpers
+//------------------------------------------------------------------------------
+
+/**
+ * Gets `token.range[0]` from the given token.
+ *
+ * @param {Node|Token|Comment} token - The token to get.
+ * @returns {number} The start location.
+ * @private
+ */
+function getStartLocation(token) {
+    return token.range[0];
+}
+
+//------------------------------------------------------------------------------
+// Exports
+//------------------------------------------------------------------------------
+
+/**
+ * Binary-searches the index of the first token which is after the given location.
+ * If it was not found, this returns `tokens.length`.
+ *
+ * @param {(Token|Comment)[]} tokens - It searches the token in this list.
+ * @param {number} location - The location to search.
+ * @returns {number} The found index or `tokens.length`.
+ */
+exports.search = function search(tokens, location) {
+    return lodash.sortedIndexBy(tokens, { range: [location] }, getStartLocation);
 };
 
-},{}],421:[function(require,module,exports){
+/**
+ * Gets the index of the `startLoc` in `tokens`.
+ * `startLoc` can be the value of `node.range[1]`, so this checks about `startLoc - 1` as well.
+ *
+ * @param {(Token|Comment)[]} tokens - The tokens to find an index.
+ * @param {Object} indexMap - The map from locations to indices.
+ * @param {number} startLoc - The location to get an index.
+ * @returns {number} The index.
+ */
+exports.getFirstIndex = function getFirstIndex(tokens, indexMap, startLoc) {
+    if (startLoc in indexMap) {
+        return indexMap[startLoc];
+    }
+    if (startLoc - 1 in indexMap) {
+        var index = indexMap[startLoc - 1];
+        var token = index >= 0 && index < tokens.length ? tokens[index] : null;
+
+        // For the map of "comment's location -> token's index", it points the next token of a comment.
+        // In that case, +1 is unnecessary.
+        if (token && token.range[0] >= startLoc) {
+            return index;
+        }
+        return index + 1;
+    }
+    return 0;
+};
+
+/**
+ * Gets the index of the `endLoc` in `tokens`.
+ * The information of end locations are recorded at `endLoc - 1` in `indexMap`, so this checks about `endLoc - 1` as well.
+ *
+ * @param {(Token|Comment)[]} tokens - The tokens to find an index.
+ * @param {Object} indexMap - The map from locations to indices.
+ * @param {number} endLoc - The location to get an index.
+ * @returns {number} The index.
+ */
+exports.getLastIndex = function getLastIndex(tokens, indexMap, endLoc) {
+    if (endLoc in indexMap) {
+        return indexMap[endLoc] - 1;
+    }
+    if (endLoc - 1 in indexMap) {
+        var index = indexMap[endLoc - 1];
+        var token = index >= 0 && index < tokens.length ? tokens[index] : null;
+
+        // For the map of "comment's location -> token's index", it points the next token of a comment.
+        // In that case, -1 is necessary.
+        if (token && token.range[1] > endLoc) {
+            return index - 1;
+        }
+        return index;
+    }
+    return tokens.length - 1;
+};
+
+},{"lodash":159}],433:[function(require,module,exports){
 /**
  * @fileoverview The event generator for comments.
  * @author Toru Nagashima
@@ -87691,7 +89143,7 @@ var CommentEventGenerator = function () {
 
 module.exports = CommentEventGenerator;
 
-},{}],422:[function(require,module,exports){
+},{}],434:[function(require,module,exports){
 /**
  * @fileoverview A shared list of ES3 keywords.
  * @author Josh Perez
@@ -87700,7 +89152,7 @@ module.exports = CommentEventGenerator;
 
 module.exports = ["abstract", "boolean", "break", "byte", "case", "catch", "char", "class", "const", "continue", "debugger", "default", "delete", "do", "double", "else", "enum", "export", "extends", "false", "final", "finally", "float", "for", "function", "goto", "if", "implements", "import", "in", "instanceof", "int", "interface", "long", "native", "new", "null", "package", "private", "protected", "public", "return", "short", "static", "super", "switch", "synchronized", "this", "throw", "throws", "transient", "true", "try", "typeof", "var", "void", "volatile", "while", "with"];
 
-},{}],423:[function(require,module,exports){
+},{}],435:[function(require,module,exports){
 /**
  * @fileoverview The event generator for AST nodes.
  * @author Toru Nagashima
@@ -87771,7 +89223,7 @@ var NodeEventGenerator = function () {
 
 module.exports = NodeEventGenerator;
 
-},{}],424:[function(require,module,exports){
+},{}],436:[function(require,module,exports){
 /**
  * @fileoverview Pattern for detecting any letter (even letters outside of ASCII).
  * NOTE: This file was generated using this script in JSCS based on the Unicode 7.0.0 standard: https://github.com/jscs-dev/node-jscs/blob/f5ed14427deb7e7aac84f3056a5aab2d9f3e563e/publish/helpers/generate-patterns.js
@@ -87809,7 +89261,7 @@ module.exports = NodeEventGenerator;
 
 module.exports = /[A-Za-z\xAA\xB5\xBA\xC0-\xD6\xD8-\xF6\xF8-\u02C1\u02C6-\u02D1\u02E0-\u02E4\u02EC\u02EE\u0370-\u0374\u0376\u0377\u037A-\u037D\u037F\u0386\u0388-\u038A\u038C\u038E-\u03A1\u03A3-\u03F5\u03F7-\u0481\u048A-\u052F\u0531-\u0556\u0559\u0561-\u0587\u05D0-\u05EA\u05F0-\u05F2\u0620-\u064A\u066E\u066F\u0671-\u06D3\u06D5\u06E5\u06E6\u06EE\u06EF\u06FA-\u06FC\u06FF\u0710\u0712-\u072F\u074D-\u07A5\u07B1\u07CA-\u07EA\u07F4\u07F5\u07FA\u0800-\u0815\u081A\u0824\u0828\u0840-\u0858\u08A0-\u08B2\u0904-\u0939\u093D\u0950\u0958-\u0961\u0971-\u0980\u0985-\u098C\u098F\u0990\u0993-\u09A8\u09AA-\u09B0\u09B2\u09B6-\u09B9\u09BD\u09CE\u09DC\u09DD\u09DF-\u09E1\u09F0\u09F1\u0A05-\u0A0A\u0A0F\u0A10\u0A13-\u0A28\u0A2A-\u0A30\u0A32\u0A33\u0A35\u0A36\u0A38\u0A39\u0A59-\u0A5C\u0A5E\u0A72-\u0A74\u0A85-\u0A8D\u0A8F-\u0A91\u0A93-\u0AA8\u0AAA-\u0AB0\u0AB2\u0AB3\u0AB5-\u0AB9\u0ABD\u0AD0\u0AE0\u0AE1\u0B05-\u0B0C\u0B0F\u0B10\u0B13-\u0B28\u0B2A-\u0B30\u0B32\u0B33\u0B35-\u0B39\u0B3D\u0B5C\u0B5D\u0B5F-\u0B61\u0B71\u0B83\u0B85-\u0B8A\u0B8E-\u0B90\u0B92-\u0B95\u0B99\u0B9A\u0B9C\u0B9E\u0B9F\u0BA3\u0BA4\u0BA8-\u0BAA\u0BAE-\u0BB9\u0BD0\u0C05-\u0C0C\u0C0E-\u0C10\u0C12-\u0C28\u0C2A-\u0C39\u0C3D\u0C58\u0C59\u0C60\u0C61\u0C85-\u0C8C\u0C8E-\u0C90\u0C92-\u0CA8\u0CAA-\u0CB3\u0CB5-\u0CB9\u0CBD\u0CDE\u0CE0\u0CE1\u0CF1\u0CF2\u0D05-\u0D0C\u0D0E-\u0D10\u0D12-\u0D3A\u0D3D\u0D4E\u0D60\u0D61\u0D7A-\u0D7F\u0D85-\u0D96\u0D9A-\u0DB1\u0DB3-\u0DBB\u0DBD\u0DC0-\u0DC6\u0E01-\u0E30\u0E32\u0E33\u0E40-\u0E46\u0E81\u0E82\u0E84\u0E87\u0E88\u0E8A\u0E8D\u0E94-\u0E97\u0E99-\u0E9F\u0EA1-\u0EA3\u0EA5\u0EA7\u0EAA\u0EAB\u0EAD-\u0EB0\u0EB2\u0EB3\u0EBD\u0EC0-\u0EC4\u0EC6\u0EDC-\u0EDF\u0F00\u0F40-\u0F47\u0F49-\u0F6C\u0F88-\u0F8C\u1000-\u102A\u103F\u1050-\u1055\u105A-\u105D\u1061\u1065\u1066\u106E-\u1070\u1075-\u1081\u108E\u10A0-\u10C5\u10C7\u10CD\u10D0-\u10FA\u10FC-\u1248\u124A-\u124D\u1250-\u1256\u1258\u125A-\u125D\u1260-\u1288\u128A-\u128D\u1290-\u12B0\u12B2-\u12B5\u12B8-\u12BE\u12C0\u12C2-\u12C5\u12C8-\u12D6\u12D8-\u1310\u1312-\u1315\u1318-\u135A\u1380-\u138F\u13A0-\u13F4\u1401-\u166C\u166F-\u167F\u1681-\u169A\u16A0-\u16EA\u16F1-\u16F8\u1700-\u170C\u170E-\u1711\u1720-\u1731\u1740-\u1751\u1760-\u176C\u176E-\u1770\u1780-\u17B3\u17D7\u17DC\u1820-\u1877\u1880-\u18A8\u18AA\u18B0-\u18F5\u1900-\u191E\u1950-\u196D\u1970-\u1974\u1980-\u19AB\u19C1-\u19C7\u1A00-\u1A16\u1A20-\u1A54\u1AA7\u1B05-\u1B33\u1B45-\u1B4B\u1B83-\u1BA0\u1BAE\u1BAF\u1BBA-\u1BE5\u1C00-\u1C23\u1C4D-\u1C4F\u1C5A-\u1C7D\u1CE9-\u1CEC\u1CEE-\u1CF1\u1CF5\u1CF6\u1D00-\u1DBF\u1E00-\u1F15\u1F18-\u1F1D\u1F20-\u1F45\u1F48-\u1F4D\u1F50-\u1F57\u1F59\u1F5B\u1F5D\u1F5F-\u1F7D\u1F80-\u1FB4\u1FB6-\u1FBC\u1FBE\u1FC2-\u1FC4\u1FC6-\u1FCC\u1FD0-\u1FD3\u1FD6-\u1FDB\u1FE0-\u1FEC\u1FF2-\u1FF4\u1FF6-\u1FFC\u2071\u207F\u2090-\u209C\u2102\u2107\u210A-\u2113\u2115\u2119-\u211D\u2124\u2126\u2128\u212A-\u212D\u212F-\u2139\u213C-\u213F\u2145-\u2149\u214E\u2183\u2184\u2C00-\u2C2E\u2C30-\u2C5E\u2C60-\u2CE4\u2CEB-\u2CEE\u2CF2\u2CF3\u2D00-\u2D25\u2D27\u2D2D\u2D30-\u2D67\u2D6F\u2D80-\u2D96\u2DA0-\u2DA6\u2DA8-\u2DAE\u2DB0-\u2DB6\u2DB8-\u2DBE\u2DC0-\u2DC6\u2DC8-\u2DCE\u2DD0-\u2DD6\u2DD8-\u2DDE\u2E2F\u3005\u3006\u3031-\u3035\u303B\u303C\u3041-\u3096\u309D-\u309F\u30A1-\u30FA\u30FC-\u30FF\u3105-\u312D\u3131-\u318E\u31A0-\u31BA\u31F0-\u31FF\u3400-\u4DB5\u4E00-\u9FCC\uA000-\uA48C\uA4D0-\uA4FD\uA500-\uA60C\uA610-\uA61F\uA62A\uA62B\uA640-\uA66E\uA67F-\uA69D\uA6A0-\uA6E5\uA717-\uA71F\uA722-\uA788\uA78B-\uA78E\uA790-\uA7AD\uA7B0\uA7B1\uA7F7-\uA801\uA803-\uA805\uA807-\uA80A\uA80C-\uA822\uA840-\uA873\uA882-\uA8B3\uA8F2-\uA8F7\uA8FB\uA90A-\uA925\uA930-\uA946\uA960-\uA97C\uA984-\uA9B2\uA9CF\uA9E0-\uA9E4\uA9E6-\uA9EF\uA9FA-\uA9FE\uAA00-\uAA28\uAA40-\uAA42\uAA44-\uAA4B\uAA60-\uAA76\uAA7A\uAA7E-\uAAAF\uAAB1\uAAB5\uAAB6\uAAB9-\uAABD\uAAC0\uAAC2\uAADB-\uAADD\uAAE0-\uAAEA\uAAF2-\uAAF4\uAB01-\uAB06\uAB09-\uAB0E\uAB11-\uAB16\uAB20-\uAB26\uAB28-\uAB2E\uAB30-\uAB5A\uAB5C-\uAB5F\uAB64\uAB65\uABC0-\uABE2\uAC00-\uD7A3\uD7B0-\uD7C6\uD7CB-\uD7FB\uF900-\uFA6D\uFA70-\uFAD9\uFB00-\uFB06\uFB13-\uFB17\uFB1D\uFB1F-\uFB28\uFB2A-\uFB36\uFB38-\uFB3C\uFB3E\uFB40\uFB41\uFB43\uFB44\uFB46-\uFBB1\uFBD3-\uFD3D\uFD50-\uFD8F\uFD92-\uFDC7\uFDF0-\uFDFB\uFE70-\uFE74\uFE76-\uFEFC\uFF21-\uFF3A\uFF41-\uFF5A\uFF66-\uFFBE\uFFC2-\uFFC7\uFFCA-\uFFCF\uFFD2-\uFFD7\uFFDA-\uFFDC]|\uD800[\uDC00-\uDC0B\uDC0D-\uDC26\uDC28-\uDC3A\uDC3C\uDC3D\uDC3F-\uDC4D\uDC50-\uDC5D\uDC80-\uDCFA\uDE80-\uDE9C\uDEA0-\uDED0\uDF00-\uDF1F\uDF30-\uDF40\uDF42-\uDF49\uDF50-\uDF75\uDF80-\uDF9D\uDFA0-\uDFC3\uDFC8-\uDFCF]|\uD801[\uDC00-\uDC9D\uDD00-\uDD27\uDD30-\uDD63\uDE00-\uDF36\uDF40-\uDF55\uDF60-\uDF67]|\uD802[\uDC00-\uDC05\uDC08\uDC0A-\uDC35\uDC37\uDC38\uDC3C\uDC3F-\uDC55\uDC60-\uDC76\uDC80-\uDC9E\uDD00-\uDD15\uDD20-\uDD39\uDD80-\uDDB7\uDDBE\uDDBF\uDE00\uDE10-\uDE13\uDE15-\uDE17\uDE19-\uDE33\uDE60-\uDE7C\uDE80-\uDE9C\uDEC0-\uDEC7\uDEC9-\uDEE4\uDF00-\uDF35\uDF40-\uDF55\uDF60-\uDF72\uDF80-\uDF91]|\uD803[\uDC00-\uDC48]|\uD804[\uDC03-\uDC37\uDC83-\uDCAF\uDCD0-\uDCE8\uDD03-\uDD26\uDD50-\uDD72\uDD76\uDD83-\uDDB2\uDDC1-\uDDC4\uDDDA\uDE00-\uDE11\uDE13-\uDE2B\uDEB0-\uDEDE\uDF05-\uDF0C\uDF0F\uDF10\uDF13-\uDF28\uDF2A-\uDF30\uDF32\uDF33\uDF35-\uDF39\uDF3D\uDF5D-\uDF61]|\uD805[\uDC80-\uDCAF\uDCC4\uDCC5\uDCC7\uDD80-\uDDAE\uDE00-\uDE2F\uDE44\uDE80-\uDEAA]|\uD806[\uDCA0-\uDCDF\uDCFF\uDEC0-\uDEF8]|\uD808[\uDC00-\uDF98]|[\uD80C\uD840-\uD868\uD86A-\uD86C][\uDC00-\uDFFF]|\uD80D[\uDC00-\uDC2E]|\uD81A[\uDC00-\uDE38\uDE40-\uDE5E\uDED0-\uDEED\uDF00-\uDF2F\uDF40-\uDF43\uDF63-\uDF77\uDF7D-\uDF8F]|\uD81B[\uDF00-\uDF44\uDF50\uDF93-\uDF9F]|\uD82C[\uDC00\uDC01]|\uD82F[\uDC00-\uDC6A\uDC70-\uDC7C\uDC80-\uDC88\uDC90-\uDC99]|\uD835[\uDC00-\uDC54\uDC56-\uDC9C\uDC9E\uDC9F\uDCA2\uDCA5\uDCA6\uDCA9-\uDCAC\uDCAE-\uDCB9\uDCBB\uDCBD-\uDCC3\uDCC5-\uDD05\uDD07-\uDD0A\uDD0D-\uDD14\uDD16-\uDD1C\uDD1E-\uDD39\uDD3B-\uDD3E\uDD40-\uDD44\uDD46\uDD4A-\uDD50\uDD52-\uDEA5\uDEA8-\uDEC0\uDEC2-\uDEDA\uDEDC-\uDEFA\uDEFC-\uDF14\uDF16-\uDF34\uDF36-\uDF4E\uDF50-\uDF6E\uDF70-\uDF88\uDF8A-\uDFA8\uDFAA-\uDFC2\uDFC4-\uDFCB]|\uD83A[\uDC00-\uDCC4]|\uD83B[\uDE00-\uDE03\uDE05-\uDE1F\uDE21\uDE22\uDE24\uDE27\uDE29-\uDE32\uDE34-\uDE37\uDE39\uDE3B\uDE42\uDE47\uDE49\uDE4B\uDE4D-\uDE4F\uDE51\uDE52\uDE54\uDE57\uDE59\uDE5B\uDE5D\uDE5F\uDE61\uDE62\uDE64\uDE67-\uDE6A\uDE6C-\uDE72\uDE74-\uDE77\uDE79-\uDE7C\uDE7E\uDE80-\uDE89\uDE8B-\uDE9B\uDEA1-\uDEA3\uDEA5-\uDEA9\uDEAB-\uDEBB]|\uD869[\uDC00-\uDED6\uDF00-\uDFFF]|\uD86D[\uDC00-\uDF34\uDF40-\uDFFF]|\uD86E[\uDC00-\uDC1D]|\uD87E[\uDC00-\uDE1D]/;
 
-},{}],425:[function(require,module,exports){
+},{}],437:[function(require,module,exports){
 /**
  * @fileoverview An object that creates fix commands for rules.
  * @author Nicholas C. Zakas
@@ -87957,7 +89409,7 @@ var ruleFixer = Object.freeze({
 
 module.exports = ruleFixer;
 
-},{}],426:[function(require,module,exports){
+},{}],438:[function(require,module,exports){
 /**
  * @fileoverview Abstraction of JavaScript source code.
  * @author Nicholas C. Zakas
@@ -87968,8 +89420,9 @@ module.exports = ruleFixer;
 // Requirements
 //------------------------------------------------------------------------------
 
-var createTokenStore = require("../token-store.js"),
-    Traverser = require("./traverser");
+var TokenStore = require("../token-store"),
+    Traverser = require("./traverser"),
+    astUtils = require("../ast-utils");
 
 //------------------------------------------------------------------------------
 // Private
@@ -88035,6 +89488,28 @@ function looksLikeExport(astNode) {
     return astNode.type === "ExportDefaultDeclaration" || astNode.type === "ExportNamedDeclaration" || astNode.type === "ExportAllDeclaration" || astNode.type === "ExportSpecifier";
 }
 
+/**
+ * Merges two sorted lists into a larger sorted list in O(n) time
+ * @param {Token[]} tokens The list of tokens
+ * @param {Token[]} comments The list of comments
+ * @returns {Token[]} A sorted list of tokens and comments
+ */
+function sortedMerge(tokens, comments) {
+    var result = [];
+    var tokenIndex = 0;
+    var commentIndex = 0;
+
+    while (tokenIndex < tokens.length || commentIndex < comments.length) {
+        if (commentIndex >= comments.length || tokenIndex < tokens.length && tokens[tokenIndex].range[0] < comments[commentIndex].range[0]) {
+            result.push(tokens[tokenIndex++]);
+        } else {
+            result.push(comments[commentIndex++]);
+        }
+    }
+
+    return result;
+}
+
 //------------------------------------------------------------------------------
 // Public Interface
 //------------------------------------------------------------------------------
@@ -88046,8 +89521,6 @@ function looksLikeExport(astNode) {
  * @constructor
  */
 function SourceCode(text, ast) {
-    var _this = this;
-
     validate(ast);
 
     /**
@@ -88076,23 +89549,38 @@ function SourceCode(text, ast) {
      */
     this.lines = SourceCode.splitLines(this.text);
 
-    this.tokensAndComments = ast.tokens.concat(ast.comments).sort(function (left, right) {
-        return left.range[0] - right.range[0];
-    });
+    this.tokensAndComments = sortedMerge(ast.tokens, ast.comments);
 
     // create token store methods
-    var tokenStore = createTokenStore(ast.tokens);
+    var tokenStore = new TokenStore(ast.tokens, ast.comments);
 
-    Object.keys(tokenStore).forEach(function (methodName) {
-        _this[methodName] = tokenStore[methodName];
-    });
+    var _iteratorNormalCompletion = true;
+    var _didIteratorError = false;
+    var _iteratorError = undefined;
 
-    var tokensAndCommentsStore = createTokenStore(this.tokensAndComments);
+    try {
+        for (var _iterator = TokenStore.PUBLIC_METHODS[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+            var methodName = _step.value;
 
-    this.getTokenOrCommentBefore = tokensAndCommentsStore.getTokenBefore;
-    this.getTokenOrCommentAfter = tokensAndCommentsStore.getTokenAfter;
+            this[methodName] = tokenStore[methodName].bind(tokenStore);
+        }
 
-    // don't allow modification of this object
+        // don't allow modification of this object
+    } catch (err) {
+        _didIteratorError = true;
+        _iteratorError = err;
+    } finally {
+        try {
+            if (!_iteratorNormalCompletion && _iterator.return) {
+                _iterator.return();
+            }
+        } finally {
+            if (_didIteratorError) {
+                throw _iteratorError;
+            }
+        }
+    }
+
     Object.freeze(this);
     Object.freeze(this.lines);
 }
@@ -88104,7 +89592,7 @@ function SourceCode(text, ast) {
  * @public
  */
 SourceCode.splitLines = function (text) {
-    return text.split(/\r\n|\r|\n|\u2028|\u2029/g);
+    return text.split(astUtils.createGlobalLinebreakMatcher());
 };
 
 SourceCode.prototype = {
@@ -88264,7 +89752,7 @@ SourceCode.prototype = {
 
 module.exports = SourceCode;
 
-},{"../token-store.js":420,"./traverser":427}],427:[function(require,module,exports){
+},{"../ast-utils":162,"../token-store":428,"./traverser":439}],439:[function(require,module,exports){
 /**
  * @fileoverview Wrapper around estraverse
  * @author Nicholas C. Zakas

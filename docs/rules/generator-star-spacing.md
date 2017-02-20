@@ -64,8 +64,10 @@ The rule takes one option, an object, which has two keys `before` and `after` ha
 
 The default is `{"before": true, "after": false}`.
 
+An example configuration:
+
 ```json
-"generator-star-spacing": ["error", {"before": false, "after": true}]
+"generator-star-spacing": ["error", {"before": true, "after": false}]
 ```
 
 And the option has shorthand as a string keyword:
@@ -74,6 +76,8 @@ And the option has shorthand as a string keyword:
 * `{"before": false, "after": true}` → `"after"`
 * `{"before": true, "after": true}` → `"both"`
 * `{"before": false, "after": false}` → `"neither"`
+
+An example of shorthand configuration:
 
 ```json
 "generator-star-spacing": ["error", "after"]
