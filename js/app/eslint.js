@@ -45698,7 +45698,7 @@ try {
 },{}],161:[function(require,module,exports){
 module.exports={
   "name": "eslint",
-  "version": "3.15.0",
+  "version": "3.16.0",
   "author": "Nicholas C. Zakas <nicholas+npm@nczconsulting.com>",
   "description": "An AST-based pattern checker for JavaScript.",
   "bin": {
@@ -80603,6 +80603,9 @@ module.exports = {
                         node: node,
                         loc: { line: openBrace.loc.start.line, column: openBrace.loc.start.column },
                         fix: function fix(fixer) {
+
+                            // FIXME: The start of this range is sometimes larger than the end.
+                            // https://github.com/eslint/eslint/issues/8116
                             return fixer.replaceTextRange([openBrace.end, nextToken.start - nextToken.loc.start.column], "\n");
                         },
 
