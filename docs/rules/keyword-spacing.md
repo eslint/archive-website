@@ -6,7 +6,7 @@ layout: doc
 
 # enforce consistent spacing before and after keywords (keyword-spacing)
 
-(fixable) The `--fix` option on the [command line](../user-guide/command-line-interface#fix) automatically fixes problems reported by this rule.
+(fixable) The `--fix` option on the [command line](../user-guide/command-line-interface#fix) can automatically fix some of the problems reported by this rule.
 
 Keywords are syntax elements of JavaScript, such as `function` and `if`.
 These identifiers have special meaning to the language and so often appear in a different color in code editors.

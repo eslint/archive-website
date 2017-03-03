@@ -6,6 +6,8 @@ layout: doc
 
 # Rule to disallow a duplicate case label (no-duplicate-case)
 
+(recommended) The `"extends": "eslint:recommended"` property in a configuration file enables this rule.
+
 If a `switch` statement has duplicate test expressions in `case` clauses, it is likely that a programmer copied a `case` clause but forgot to change the test expression.
 
 ## Rule Details

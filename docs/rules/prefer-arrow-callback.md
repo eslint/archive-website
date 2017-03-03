@@ -6,7 +6,7 @@ layout: doc
 
 # Suggest using arrow functions as callbacks. (prefer-arrow-callback)
 
-(fixable) The `--fix` option on the [command line](../user-guide/command-line-interface#fix) automatically fixes problems reported by this rule.
+(fixable) The `--fix` option on the [command line](../user-guide/command-line-interface#fix) can automatically fix some of the problems reported by this rule.
 
 Arrow functions are suited to callbacks, because:
 

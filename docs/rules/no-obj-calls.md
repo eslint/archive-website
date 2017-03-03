@@ -6,6 +6,8 @@ layout: doc
 
 # disallow calling global object properties as functions (no-obj-calls)
 
+(recommended) The `"extends": "eslint:recommended"` property in a configuration file enables this rule.
+
 ECMAScript provides several global objects that are intended to be used as-is. Some of these objects look as if they could be constructors due their capitalization (such as `Math` and `JSON`) but will throw an error if you try to execute them as functions.
 
 The [ECMAScript 5 specification](http://es5.github.io/#x15.8) makes it clear that both `Math` and `JSON` cannot be invoked:

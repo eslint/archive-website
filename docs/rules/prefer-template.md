@@ -6,7 +6,7 @@ layout: doc
 
 # Suggest using template literals instead of string concatenation. (prefer-template)
 
-(fixable) The `--fix` option on the [command line](../user-guide/command-line-interface#fix) automatically fixes problems reported by this rule.
+(fixable) The `--fix` option on the [command line](../user-guide/command-line-interface#fix) can automatically fix some of the problems reported by this rule.
 
 In ES2015 (ES6), we can use template literals instead of string concatenation.
 

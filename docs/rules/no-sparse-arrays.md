@@ -6,6 +6,8 @@ layout: doc
 
 # disallow sparse arrays (no-sparse-arrays)
 
+(recommended) The `"extends": "eslint:recommended"` property in a configuration file enables this rule.
+
 Sparse arrays contain empty slots, most frequently due to multiple commas being used in an array literal, such as:
 
 ```js

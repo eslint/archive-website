@@ -6,6 +6,8 @@ layout: doc
 
 # require calls to `isNaN()` when checking for `NaN` (use-isnan)
 
+(recommended) The `"extends": "eslint:recommended"` property in a configuration file enables this rule.
+
 In JavaScript, `NaN` is a special value of the `Number` type. It's used to represent any of the "not-a-number" values represented by the double-precision 64-bit format as specified by the IEEE Standard for Binary Floating-Point Arithmetic.
 
 Because `NaN` is unique in JavaScript by not being equal to anything, including itself, the results of comparisons to `NaN` are confusing:

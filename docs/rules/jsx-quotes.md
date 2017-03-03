@@ -6,7 +6,7 @@ layout: doc
 
 # enforce the consistent use of either double or single quotes in JSX attributes (jsx-quotes)
 
-(fixable) The `--fix` option on the [command line](../user-guide/command-line-interface#fix) automatically fixes problems reported by this rule.
+(fixable) The `--fix` option on the [command line](../user-guide/command-line-interface#fix) can automatically fix some of the problems reported by this rule.
 
 JSX attribute values can contain string literals, which are delimited with single or double quotes.
 

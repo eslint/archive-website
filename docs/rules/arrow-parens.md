@@ -6,7 +6,7 @@ layout: doc
 
 # Require parens in arrow function arguments (arrow-parens)
 
-(fixable) The `--fix` option on the [command line](../user-guide/command-line-interface#fix) automatically fixes problems reported by this rule.
+(fixable) The `--fix` option on the [command line](../user-guide/command-line-interface#fix) can automatically fix some of the problems reported by this rule.
 
 Arrow functions can omit parentheses when they have exactly one parameter. In all other cases the parameter(s) must
 be wrapped in parentheses. This rule enforces the consistent use of parentheses in arrow functions.

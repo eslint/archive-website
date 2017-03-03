@@ -6,6 +6,8 @@ layout: doc
 
 # Disallow Symbol Constructor (no-new-symbol)
 
+(recommended) The `"extends": "eslint:recommended"` property in a configuration file enables this rule.
+
 `Symbol` is not intended to be used with the `new` operator, but to be called as a function.
 
 ```js

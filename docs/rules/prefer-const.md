@@ -6,7 +6,7 @@ layout: doc
 
 # Suggest using `const` (prefer-const)
 
-(fixable) The `--fix` option on the [command line](../user-guide/command-line-interface#fix) automatically fixes some instances of problems reported by this rule.
+(fixable) The `--fix` option on the [command line](../user-guide/command-line-interface#fix) can automatically fix some of the problems reported by this rule.
 
 If a variable is never reassigned, using the `const` declaration is better.
 

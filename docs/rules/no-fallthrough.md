@@ -6,6 +6,8 @@ layout: doc
 
 # Disallow Case Statement Fallthrough (no-fallthrough)
 
+(recommended) The `"extends": "eslint:recommended"` property in a configuration file enables this rule.
+
 The `switch` statement in JavaScript is one of the more error-prone constructs of the language thanks in part to the ability to "fall through" from one `case` to the next. For example:
 
 ```js

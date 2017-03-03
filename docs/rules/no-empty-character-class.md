@@ -6,6 +6,8 @@ layout: doc
 
 # disallow empty character classes in regular expressions (no-empty-character-class)
 
+(recommended) The `"extends": "eslint:recommended"` property in a configuration file enables this rule.
+
 Because empty character classes in regular expressions do not match anything, they might be typing mistakes.
 
 ```js

@@ -6,6 +6,8 @@ layout: doc
 
 # enforce comparing `typeof` expressions against valid strings (valid-typeof)
 
+(recommended) The `"extends": "eslint:recommended"` property in a configuration file enables this rule.
+
 For a vast majority of use cases, the result of the `typeof` operator is one of the following string literals: `"undefined"`, `"object"`, `"boolean"`, `"number"`, `"string"`, `"function"` and `"symbol"`. It is usually a typing mistake to compare the result of a `typeof` operator to other string literals.
 
 ## Rule Details

@@ -6,7 +6,7 @@ layout: doc
 
 # require or disallow strict mode directives (strict)
 
-(fixable) The `--fix` option on the [command line](../user-guide/command-line-interface#fix) automatically fixes problems reported by this rule.
+(fixable) The `--fix` option on the [command line](../user-guide/command-line-interface#fix) can automatically fix some of the problems reported by this rule.
 
 A strict mode directive is a `"use strict"` literal at the beginning of a script or function body. It enables strict mode semantics.
 

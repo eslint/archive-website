@@ -6,6 +6,8 @@ layout: doc
 
 # disallow octal literals (no-octal)
 
+(recommended) The `"extends": "eslint:recommended"` property in a configuration file enables this rule.
+
 Octal literals are numerals that begin with a leading zero, such as:
 
 ```js

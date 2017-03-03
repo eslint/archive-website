@@ -6,6 +6,8 @@ layout: doc
 
 # Disallow modifying variables of class declarations (no-class-assign)
 
+(recommended) The `"extends": "eslint:recommended"` property in a configuration file enables this rule.
+
 `ClassDeclaration` creates a variable, and we can modify the variable.
 
 ```js

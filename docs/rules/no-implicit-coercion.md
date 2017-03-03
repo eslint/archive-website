@@ -6,7 +6,7 @@ layout: doc
 
 # Disallow the type conversion with shorter notations. (no-implicit-coercion)
 
-(fixable) The `--fix` option on the [command line](../user-guide/command-line-interface#fix) automatically fixes problems reported by this rule.
+(fixable) The `--fix` option on the [command line](../user-guide/command-line-interface#fix) can automatically fix some of the problems reported by this rule.
 
 In JavaScript, there are a lot of different ways to convert value types.
 Some of them might be hard to read and understand.

@@ -6,6 +6,8 @@ layout: doc
 
 # disallow mixed spaces and tabs for indentation (no-mixed-spaces-and-tabs)
 
+(recommended) The `"extends": "eslint:recommended"` property in a configuration file enables this rule.
+
 Most code conventions require either tabs or spaces be used for indentation. As such, it's usually an error if a single line of code is indented with both tabs and spaces.
 
 ## Rule Details

@@ -6,6 +6,8 @@ layout: doc
 
 # disallow constant expressions in conditions (no-constant-condition)
 
+(recommended) The `"extends": "eslint:recommended"` property in a configuration file enables this rule.
+
 A constant expression (for example, a literal) as a test condition might be a typo or development trigger for a specific behavior. For example, the following code looks as if it is not ready for production.
 
 ```js

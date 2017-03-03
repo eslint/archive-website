@@ -6,6 +6,8 @@ layout: doc
 
 # disallow reassigning exceptions in `catch` clauses (no-ex-assign)
 
+(recommended) The `"extends": "eslint:recommended"` property in a configuration file enables this rule.
+
 If a `catch` clause in a `try` statement accidentally (or purposely) assigns another value to the exception parameter, it impossible to refer to the error from that point on.
 Since there is no `arguments` object to offer alternative access to this data, assignment of the parameter is absolutely destructive.
 

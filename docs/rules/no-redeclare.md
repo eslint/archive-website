@@ -6,6 +6,8 @@ layout: doc
 
 # disallow variable redeclaration (no-redeclare)
 
+(recommended) The `"extends": "eslint:recommended"` property in a configuration file enables this rule.
+
 In JavaScript, it's possible to redeclare the same variable name using `var`. This can lead to confusion as to where the variable is actually declared and initialized.
 
 ## Rule Details

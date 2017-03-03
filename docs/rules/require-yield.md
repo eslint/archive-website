@@ -6,6 +6,8 @@ layout: doc
 
 # Disallow generator functions that do not have `yield` (require-yield)
 
+(recommended) The `"extends": "eslint:recommended"` property in a configuration file enables this rule.
+
 ## Rule Details
 
 This rule generates warnings for generator functions that do not have the `yield` keyword.

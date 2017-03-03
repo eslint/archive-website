@@ -6,7 +6,7 @@ layout: doc
 
 # Disallow Initializing to undefined (no-undef-init)
 
-(fixable) The `--fix` option on the [command line](../user-guide/command-line-interface#fix) automatically fixes problems reported by this rule.
+(fixable) The `--fix` option on the [command line](../user-guide/command-line-interface#fix) can automatically fix some of the problems reported by this rule.
 
 In JavaScript, a variable that is declared and not initialized to any value automatically gets the value of `undefined`. For example:
 

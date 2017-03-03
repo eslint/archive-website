@@ -6,6 +6,8 @@ layout: doc
 
 # disallow empty block statements (no-empty)
 
+(recommended) The `"extends": "eslint:recommended"` property in a configuration file enables this rule.
+
 Empty block statements, while not technically errors, usually occur due to refactoring that wasn't completed. They can cause confusion when reading code.
 
 ## Rule Details

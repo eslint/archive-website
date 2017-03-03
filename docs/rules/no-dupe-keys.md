@@ -6,6 +6,8 @@ layout: doc
 
 # disallow duplicate keys in object literals (no-dupe-keys)
 
+(recommended) The `"extends": "eslint:recommended"` property in a configuration file enables this rule.
+
 Multiple properties with the same key in object literals can cause unexpected behavior in your application.
 
 ```js

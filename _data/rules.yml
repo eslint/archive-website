@@ -6,6 +6,10 @@ categories:
         fixable: false
         name: no-await-in-loop
         recommended: false
+      - description: disallow comparing against -0
+        fixable: false
+        name: no-compare-neg-zero
+        recommended: false
       - description: disallow assignment operators in conditional expressions
         fixable: false
         name: no-cond-assign
@@ -38,13 +42,13 @@ categories:
         fixable: false
         name: no-duplicate-case
         recommended: true
-      - description: disallow empty character classes in regular expressions
-        fixable: false
-        name: no-empty-character-class
-        recommended: true
       - description: disallow empty block statements
         fixable: false
         name: no-empty
+        recommended: true
+      - description: disallow empty character classes in regular expressions
+        fixable: false
+        name: no-empty-character-class
         recommended: true
       - description: disallow reassigning exceptions in `catch` clauses
         fixable: false
@@ -289,6 +293,10 @@ categories:
         fixable: false
         name: no-multi-str
         recommended: false
+      - description: disallow `new` operators outside of assignments or comparisons
+        fixable: false
+        name: no-new
+        recommended: false
       - description: disallow `new` operators with the `Function` object
         fixable: false
         name: no-new-func
@@ -299,18 +307,14 @@ categories:
         fixable: false
         name: no-new-wrappers
         recommended: false
-      - description: disallow `new` operators outside of assignments or comparisons
-        fixable: false
-        name: no-new
-        recommended: false
-      - description: disallow octal escape sequences in string literals
-        fixable: false
-        name: no-octal-escape
-        recommended: false
       - description: disallow octal literals
         fixable: false
         name: no-octal
         recommended: true
+      - description: disallow octal escape sequences in string literals
+        fixable: false
+        name: no-octal-escape
+        recommended: false
       - description: disallow reassigning `function` parameters
         fixable: false
         name: no-param-reassign
@@ -455,19 +459,15 @@ categories:
         fixable: false
         name: no-restricted-globals
         recommended: false
-      - description: disallow identifiers from shadowing restricted names
-        fixable: false
-        name: no-shadow-restricted-names
-        recommended: false
       - description: >-
           disallow variable declarations from shadowing variables declared in
           the outer scope
         fixable: false
         name: no-shadow
         recommended: false
-      - description: disallow initializing variables to `undefined`
-        fixable: true
-        name: no-undef-init
+      - description: disallow identifiers from shadowing restricted names
+        fixable: false
+        name: no-shadow-restricted-names
         recommended: false
       - description: >-
           disallow the use of undeclared variables unless mentioned in `/*global
@@ -475,6 +475,10 @@ categories:
         fixable: false
         name: no-undef
         recommended: true
+      - description: disallow initializing variables to `undefined`
+        fixable: true
+        name: no-undef-init
+        recommended: false
       - description: disallow the use of `undefined` as an identifier
         fixable: false
         name: no-undefined
@@ -673,13 +677,13 @@ categories:
         fixable: false
         name: max-params
         recommended: false
-      - description: enforce a maximum number of statements allowed per line
-        fixable: false
-        name: max-statements-per-line
-        recommended: false
       - description: enforce a maximum number of statements allowed in function blocks
         fixable: false
         name: max-statements
+        recommended: false
+      - description: enforce a maximum number of statements allowed per line
+        fixable: false
+        name: max-statements-per-line
         recommended: false
       - description: enforce newlines between operands of ternary expressions
         fixable: false
@@ -785,6 +789,10 @@ categories:
         fixable: true
         name: no-whitespace-before-property
         recommended: false
+      - description: enforce the location of single-line statements
+        fixable: true
+        name: nonblock-statement-body-position
+        recommended: false
       - description: enforce consistent line breaks inside braces
         fixable: true
         name: object-curly-newline
@@ -797,15 +805,15 @@ categories:
         fixable: true
         name: object-property-newline
         recommended: false
-      - description: require or disallow newlines around variable declarations
-        fixable: true
-        name: one-var-declaration-per-line
-        recommended: false
       - description: >-
           enforce variables to be declared either together or separately in
           functions
         fixable: false
         name: one-var
+        recommended: false
+      - description: require or disallow newlines around variable declarations
+        fixable: true
+        name: one-var-declaration-per-line
         recommended: false
       - description: require or disallow assignment operator shorthand where possible
         fixable: true
@@ -833,13 +841,13 @@ categories:
         fixable: false
         name: require-jsdoc
         recommended: false
-      - description: enforce consistent spacing before and after semicolons
-        fixable: true
-        name: semi-spacing
-        recommended: false
       - description: require or disallow semicolons instead of ASI
         fixable: true
         name: semi
+        recommended: false
+      - description: enforce consistent spacing before and after semicolons
+        fixable: true
+        name: semi-spacing
         recommended: false
       - description: require object keys to be sorted
         fixable: false

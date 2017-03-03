@@ -6,7 +6,9 @@ layout: doc
 
 # Disallow Unused Labels (no-unused-labels)
 
-(fixable) The `--fix` option on the [command line](../user-guide/command-line-interface#fix) automatically fixes problems reported by this rule.
+(recommended) The `"extends": "eslint:recommended"` property in a configuration file enables this rule.
+
+(fixable) The `--fix` option on the [command line](../user-guide/command-line-interface#fix) can automatically fix some of the problems reported by this rule.
 
 Labels that are declared and not used anywhere in the code are most likely an error due to incomplete refactoring.
 

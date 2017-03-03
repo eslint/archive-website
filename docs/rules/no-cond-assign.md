@@ -6,6 +6,8 @@ layout: doc
 
 # disallow assignment operators in conditional statements (no-cond-assign)
 
+(recommended) The `"extends": "eslint:recommended"` property in a configuration file enables this rule.
+
 In conditional statements, it is very easy to mistype a comparison operator (such as `==`) as an assignment operator (such as `=`). For example:
 
 ```js

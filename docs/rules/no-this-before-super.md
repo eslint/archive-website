@@ -6,6 +6,8 @@ layout: doc
 
 # Disallow use of `this`/`super` before calling `super()` in constructors. (no-this-before-super)
 
+(recommended) The `"extends": "eslint:recommended"` property in a configuration file enables this rule.
+
 In the constructor of derived classes, if `this`/`super` are used before `super()` calls, it raises a reference error.
 
 This rule checks `this`/`super` keywords in constructors, then reports those that are before `super()`.

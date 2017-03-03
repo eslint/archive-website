@@ -6,6 +6,8 @@ layout: doc
 
 # Verify calls of `super()` in constructors (constructor-super)
 
+(recommended) The `"extends": "eslint:recommended"` property in a configuration file enables this rule.
+
 Constructors of derived classes must call `super()`.
 Constructors of non derived classes must not call `super()`.
 If this is not observed, the javascript engine will raise a runtime error.
