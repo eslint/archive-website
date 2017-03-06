@@ -45696,7 +45696,7 @@ try {
 },{}],161:[function(require,module,exports){
 module.exports={
   "name": "eslint",
-  "version": "3.16.1",
+  "version": "3.17.0",
   "author": "Nicholas C. Zakas <nicholas+npm@nczconsulting.com>",
   "description": "An AST-based pattern checker for JavaScript.",
   "bin": {
@@ -45777,6 +45777,7 @@ module.exports={
     "coveralls": "^2.11.16",
     "dateformat": "^1.0.8",
     "ejs": "^2.3.3",
+    "eslint-plugin-eslint-plugin": "^0.7.1",
     "eslint-plugin-node": "^4.1.0",
     "eslint-release": "^0.10.0",
     "esprima": "^2.4.1",
@@ -45792,7 +45793,7 @@ module.exports={
     "load-perf": "^0.2.0",
     "markdownlint": "^0.3.1",
     "mocha": "^2.4.5",
-    "mock-fs": "git://github.com/not-an-aardvark/mock-fs/#06868bbd7724707f9324b237bdde28f05f7a01d5",
+    "mock-fs": "not-an-aardvark/mock-fs#06868bbd7724707f9324b237bdde28f05f7a01d5",
     "npm-license": "^0.3.2",
     "phantomjs-prebuilt": "^2.1.7",
     "proxyquire": "^1.7.10",
@@ -69141,7 +69142,8 @@ module.exports = {
                 } catch (e) {
                     context.report({
                         node: node,
-                        message: e.message + "."
+                        message: "{{message}}.",
+                        data: e
                     });
                 }
 
@@ -72805,6 +72807,7 @@ module.exports = {
             if (matchedObjectProperty) {
                 var message = matchedObjectProperty.message ? " " + matchedObjectProperty.message : "";
 
+                // eslint-disable-next-line eslint-plugin/report-message-format
                 context.report({ node: node, message: "'{{objectName}}.{{propertyName}}' is restricted from being used.{{message}}", data: {
                         objectName: objectName,
                         propertyName: propertyName,
@@ -72813,6 +72816,7 @@ module.exports = {
             } else if (globalMatchedProperty) {
                 var _message = globalMatchedProperty.message ? " " + globalMatchedProperty.message : "";
 
+                // eslint-disable-next-line eslint-plugin/report-message-format
                 context.report({ node: node, message: "'{{propertyName}}' is restricted from being used.{{message}}", data: {
                         propertyName: propertyName,
                         message: _message
@@ -73004,7 +73008,7 @@ module.exports = {
             category: "Best Practices",
             recommended: false // TODO: set to true
         },
-        fixable: false,
+        fixable: null,
         schema: []
     },
 
@@ -78717,7 +78721,7 @@ module.exports = {
                         return fixer.insertTextBefore(node, "\n");
                     }
                 });
-            } else if (tokenBefore.loc.end.line !== node.loc.end.line && option === "beside") {
+            } else if (tokenBefore.loc.end.line !== node.loc.start.line && option === "beside") {
                 context.report({
                     node: node,
                     message: "Expected no linebreak before this statement.",
@@ -79704,11 +79708,12 @@ module.exports = {
                 // Checks for property/method shorthand.
                 if (isConciseProperty) {
                     if (node.method && (APPLY_NEVER || AVOID_QUOTES && isStringLiteral(node.key))) {
+                        var message = APPLY_NEVER ? "Expected longform method syntax." : "Expected longform method syntax for string literal keys.";
 
                         // { x() {} } should be written as { x: function() {} }
                         context.report({
                             node: node,
-                            message: "Expected longform method syntax" + (APPLY_NEVER ? "" : " for string literal keys") + ".",
+                            message: message,
                             fix: function fix(fixer) {
                                 return makeFunctionLongform(fixer, node);
                             }
@@ -80361,7 +80366,7 @@ module.exports = {
                                 var equalsToken = getOperatorToken(node);
                                 var operatorToken = getOperatorToken(expr);
                                 var leftText = sourceCode.getText().slice(node.range[0], equalsToken.range[0]);
-                                var rightText = sourceCode.getText().slice(operatorToken.range[1], node.range[1]);
+                                var rightText = sourceCode.getText().slice(operatorToken.range[1], expr.right.range[1]);
 
                                 return fixer.replaceText(node, "" + leftText + expr.operator + "=" + rightText);
                             }
@@ -81594,7 +81599,7 @@ module.exports = {
          * @returns {void}
          */
         function report(reportNode, type) {
-            context.report({ node: reportNode, message: "Use " + type + " destructuring" });
+            context.report({ node: reportNode, message: "Use {{type}} destructuring.", data: { type: type } });
         }
 
         /**
@@ -87643,8 +87648,8 @@ module.exports = {
             });
             var textBeforeOperator = sourceCode.getText().slice(sourceCode.getTokenBefore(operatorToken).range[1], operatorToken.range[0]);
             var textAfterOperator = sourceCode.getText().slice(operatorToken.range[1], sourceCode.getTokenAfter(operatorToken).range[0]);
-            var leftText = sourceCode.getText().slice(sourceCode.getFirstToken(node).range[0], sourceCode.getTokenBefore(operatorToken).range[1]);
-            var rightText = sourceCode.getText().slice(sourceCode.getTokenAfter(operatorToken).range[0], sourceCode.getLastToken(node).range[1]);
+            var leftText = sourceCode.getText().slice(node.range[0], sourceCode.getTokenBefore(operatorToken).range[1]);
+            var rightText = sourceCode.getText().slice(sourceCode.getTokenAfter(operatorToken).range[0], node.range[1]);
 
             return rightText + textBeforeOperator + OPERATOR_FLIP_MAP[operatorToken.value] + textAfterOperator + leftText;
         }
