@@ -149,3 +149,7 @@
 - url: https://www.microsoft.com/
   src: /img/logos/microsoft.svg
   name: Microsoft
+
+- url: https://www.tanda.co
+  src: /img/logos/tanda.svg
+  name: Tanda
