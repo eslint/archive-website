@@ -25,9 +25,8 @@ function debounce(func, wait, immediate) {
 
 require([
     'orion',
-    '../js/app/eslint.js',
-    'text!../js/app/eslint.json'
-], function(edit, eslint, config) {
+    '../js/app/eslint.js'
+], function(edit, eslint) {
     function makeResultNode(options) {
         var result = document.createElement('div');
         var classList = result.classList;
@@ -195,10 +194,21 @@ require([
         $('#configuration .btn').click(saveConfigAndClose);
     }
 
-    var OPTIONS = JSON.parse(config);
+    var allRules = eslint.getRules();
+
+    var OPTIONS = {};
+
     if (localStorage.rules) {
         OPTIONS.rules = JSON.parse(localStorage.rules);
+    } else {
+        OPTIONS.rules = Array.from(allRules.keys()).reduce((memo, ruleName) => {
+            var rule = allRules.get(ruleName);
+            var recommended = rule && rule.meta && rule.meta.recommended;
+
+            memo[ruleName] = recommended ? "error" : "off";
+        }, {});
     }
+
     if (localStorage.env) {
         OPTIONS.env = JSON.parse(localStorage.env);
     }
