@@ -1,11 +1,12 @@
 'use strict';
 
-define(['react', 'jsx!editor', 'jsx!messages', 'jsx!configuration', 'eslint', 'text!../eslint.json'], function(React, Editor, Messages, Configuration, eslint, config) {
+define(['react', 'jsx!editor', 'jsx!messages', 'jsx!configuration', 'eslint'], function(React, Editor, Messages, Configuration, eslint) {
     return React.createClass({
         displayName: 'App',
         getInitialState: function() {
+            var rules = eslint.getRules();
             function getDocs() {
-                var map = eslint.getRules();
+                var map = rules;
                 var result = {};
                 map.forEach(function(value, key) {
                     result[key] = value.meta;
@@ -26,7 +27,13 @@ define(['react', 'jsx!editor', 'jsx!messages', 'jsx!configuration', 'eslint', 't
                             experimentalObjectRestSpread: false
                         }
                     },
-                    rules: JSON.parse(config).rules,
+                    rules: (function() {
+                        var result = {};
+                        rules.forEach(function(value, key) {
+                            result[key] = value.meta.docs.recommended ? "error" : "off"
+                        });
+                        return result;
+                    }()),
                     env: {
                         browser: false,
                         node: false,
