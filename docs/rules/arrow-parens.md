@@ -79,7 +79,7 @@ a => a;
 a => {'\n'};
 a.then(foo => {});
 a.then(foo => a);
-a(foo => { if (true) {}; });
+a(foo => { if (true) {} });
 ```
 
 Examples of **correct** code for this rule with the default `"always"` option:
@@ -93,7 +93,7 @@ Examples of **correct** code for this rule with the default `"always"` option:
 (a) => a;
 (a) => {'\n'}
 a.then((foo) => {});
-a.then((foo) => { if (true) {}; });
+a.then((foo) => { if (true) {} });
 ```
 
 #### If Statements
@@ -110,7 +110,7 @@ if (a => b) {
  console.log('bigger');
 } else {
  console.log('smaller');
-};
+}
 // outputs 'bigger', not smaller as expected
 ```
 
@@ -128,7 +128,7 @@ if ((a) => b) {
  console.log('truthy value returned');
 } else {
  console.log('falsey value returned');
-};
+}
 // outputs 'truthy value returned'
 ```
 
@@ -166,7 +166,7 @@ Examples of **incorrect** code for this rule with the `"as-needed"` option:
 (a) => {'\n'};
 a.then((foo) => {});
 a.then((foo) => a);
-a((foo) => { if (true) {}; });
+a((foo) => { if (true) {} });
 ```
 
 Examples of **correct** code for this rule with the `"as-needed"` option:
@@ -180,7 +180,7 @@ a => {};
 a => a;
 a => {'\n'};
 a.then(foo => {});
-a.then(foo => { if (true) {}; });
+a.then(foo => { if (true) {} });
 (a, b, c) => a;
 (a = 10) => a;
 ([a, b]) => a;
@@ -217,8 +217,8 @@ a => ({});
 () => {};
 a => a;
 a.then((foo) => {});
-a.then((foo) => { if (true) {}; });
-a((foo) => { if (true) {}; });
+a.then((foo) => { if (true) {} });
+a((foo) => { if (true) {} });
 (a, b, c) => a;
 (a = 10) => a;
 ([a, b]) => a;

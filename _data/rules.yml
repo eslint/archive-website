@@ -246,7 +246,7 @@ categories:
       - description: disallow assignments to native objects or read-only global variables
         fixable: false
         name: no-global-assign
-        recommended: false
+        recommended: true
       - description: disallow shorthand type conversions
         fixable: true
         name: no-implicit-coercion

@@ -12595,7 +12595,7 @@ module.exports = {
     }
 };
 
-},{"globals":138}],3:[function(require,module,exports){
+},{"globals":140}],3:[function(require,module,exports){
 /**
  * @fileoverview Configuration applied when a user configuration extends from
  * eslint:recommended.
@@ -14657,14 +14657,17 @@ function save(namespaces) {
  */
 
 function load() {
+  var r;
   try {
-    return exports.storage.debug;
+    r = exports.storage.debug;
   } catch(e) {}
 
   // If debug isn't set in LS, and we're in Electron, try to load $DEBUG
-  if (typeof process !== 'undefined' && 'env' in process) {
-    return process.env.DEBUG;
+  if (!r && typeof process !== 'undefined' && 'env' in process) {
+    r = process.env.DEBUG;
   }
+
+  return r;
 }
 
 /**
@@ -15794,7 +15797,7 @@ function coerce(val) {
 }());
 /* vim: set sw=4 ts=4 et tw=80 : */
 
-},{"./typed":15,"./utility":16,"esutils":136,"isarray":17}],15:[function(require,module,exports){
+},{"./typed":15,"./utility":16,"esutils":138,"isarray":17}],15:[function(require,module,exports){
 /*
  * @fileoverview Type expression parser.
  * @author Yusuke Suzuki <utatane.tea@gmail.com>
@@ -17079,7 +17082,7 @@ function coerce(val) {
 }());
 /* vim: set sw=4 ts=4 et tw=80 : */
 
-},{"./utility":16,"esutils":136}],16:[function(require,module,exports){
+},{"./utility":16,"esutils":138}],16:[function(require,module,exports){
 /*
  * @fileoverview Utilities for Doctrine
  * @author Yusuke Suzuki <utatane.tea@gmail.com>
@@ -17129,7 +17132,7 @@ module.exports={
   "description": "JSDoc parser",
   "homepage": "https://github.com/eslint/doctrine",
   "main": "lib/doctrine.js",
-  "version": "1.5.0",
+  "version": "2.0.0",
   "engines": {
     "node": ">=0.10.0"
   },
@@ -17175,12 +17178,7 @@ module.exports={
     "shelljs-nodecli": "^0.1.1",
     "should": "^5.0.1"
   },
-  "licenses": [
-    {
-      "type": "BSD",
-      "url": "http://github.com/eslint/doctrine/raw/master/LICENSE.BSD"
-    }
-  ],
+  "license": "Apache-2.0",
   "scripts": {
     "test": "npm run lint && node Makefile.js test",
     "lint": "eslint lib/",
@@ -17193,28 +17191,28 @@ module.exports={
     "esutils": "^2.0.2",
     "isarray": "^1.0.0"
   },
-  "gitHead": "dcd631feb5dd5bcd0899dd35548da2752ea2263e",
+  "gitHead": "46c600f27f54b3ab6b0b8a9ac9f97c807ffa95ef",
   "bugs": {
     "url": "https://github.com/eslint/doctrine/issues"
   },
-  "_id": "doctrine@1.5.0",
-  "_shasum": "379dce730f6166f76cefa4e6707a159b02c5a6fa",
-  "_from": "doctrine@>=1.2.2 <2.0.0",
-  "_npmVersion": "2.15.8",
-  "_nodeVersion": "4.4.7",
+  "_id": "doctrine@2.0.0",
+  "_shasum": "c73d8d2909d22291e1a007a395804da8b665fe63",
+  "_from": "doctrine@>=2.0.0 <3.0.0",
+  "_npmVersion": "2.15.0",
+  "_nodeVersion": "4.4.2",
   "_npmUser": {
-    "name": "eslint",
-    "email": "nicholas+eslint@nczconsulting.com"
+    "name": "nzakas",
+    "email": "nicholas@nczconsulting.com"
   },
   "dist": {
-    "shasum": "379dce730f6166f76cefa4e6707a159b02c5a6fa",
-    "tarball": "https://registry.npmjs.org/doctrine/-/doctrine-1.5.0.tgz"
+    "shasum": "c73d8d2909d22291e1a007a395804da8b665fe63",
+    "tarball": "https://registry.npmjs.org/doctrine/-/doctrine-2.0.0.tgz"
   },
   "_npmOperationalInternal": {
-    "host": "packages-16-east.internal.npmjs.com",
-    "tmp": "tmp/doctrine-1.5.0.tgz_1476393949423_0.8078370734583586"
+    "host": "packages-12-west.internal.npmjs.com",
+    "tmp": "tmp/doctrine-2.0.0.tgz_1479232728285_0.34204454137943685"
   },
-  "_resolved": "https://registry.npmjs.org/doctrine/-/doctrine-1.5.0.tgz"
+  "_resolved": "https://registry.npmjs.org/doctrine/-/doctrine-2.0.0.tgz"
 }
 
 },{}],19:[function(require,module,exports){
@@ -17682,7 +17680,7 @@ var PatternVisitor = function (_esrecurse$Visitor) {
 exports.default = PatternVisitor;
 
 
-},{"esrecurse":125,"estraverse":131}],22:[function(require,module,exports){
+},{"esrecurse":125,"estraverse":133}],22:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -18518,7 +18516,7 @@ var Referencer = function (_esrecurse$Visitor2) {
 exports.default = Referencer;
 
 
-},{"./definition":19,"./pattern-visitor":21,"./reference":22,"./variable":26,"assert":5,"esrecurse":125,"estraverse":131}],24:[function(require,module,exports){
+},{"./definition":19,"./pattern-visitor":21,"./reference":22,"./variable":26,"assert":5,"esrecurse":125,"estraverse":133}],24:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -19583,7 +19581,7 @@ var ClassScope = exports.ClassScope = function (_Scope11) {
 /* vim: set sw=4 ts=4 et tw=80 : */
 
 
-},{"./definition":19,"./reference":22,"./variable":26,"assert":5,"es6-map":27,"estraverse":131}],26:[function(require,module,exports){
+},{"./definition":19,"./reference":22,"./variable":26,"assert":5,"es6-map":27,"estraverse":133}],26:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -19778,37 +19776,38 @@ Object.defineProperty(MapIterator.prototype, toStringTagSymbol,
 },{"./iterator-kinds":30,"d":33,"es5-ext/object/set-prototype-of":57,"es6-iterator":69,"es6-symbol":73}],32:[function(require,module,exports){
 'use strict';
 
-var copy       = require('es5-ext/object/copy')
-  , map        = require('es5-ext/object/map')
-  , callable   = require('es5-ext/object/valid-callable')
-  , validValue = require('es5-ext/object/valid-value')
+var copy             = require('es5-ext/object/copy')
+  , normalizeOptions = require('es5-ext/object/normalize-options')
+  , ensureCallable   = require('es5-ext/object/valid-callable')
+  , map              = require('es5-ext/object/map')
+  , callable         = require('es5-ext/object/valid-callable')
+  , validValue       = require('es5-ext/object/valid-value')
 
   , bind = Function.prototype.bind, defineProperty = Object.defineProperty
   , hasOwnProperty = Object.prototype.hasOwnProperty
   , define;
 
-define = function (name, desc, bindTo) {
+define = function (name, desc, options) {
 	var value = validValue(desc) && callable(desc.value), dgs;
 	dgs = copy(desc);
 	delete dgs.writable;
 	delete dgs.value;
 	dgs.get = function () {
-		if (hasOwnProperty.call(this, name)) return value;
-		desc.value = bind.call(value, (bindTo == null) ? this : this[bindTo]);
+		if (!options.overwriteDefinition && hasOwnProperty.call(this, name)) return value;
+		desc.value = bind.call(value, options.resolveContext ? options.resolveContext(this) : this);
 		defineProperty(this, name, desc);
 		return this[name];
 	};
 	return dgs;
 };
 
-module.exports = function (props/*, bindTo*/) {
-	var bindTo = arguments[1];
-	return map(props, function (desc, name) {
-		return define(name, desc, bindTo);
-	});
+module.exports = function (props/*, options*/) {
+	var options = normalizeOptions(arguments[1]);
+	if (options.resolveContext != null) ensureCallable(options.resolveContext);
+	return map(props, function (desc, name) { return define(name, desc, options); });
 };
 
-},{"es5-ext/object/copy":46,"es5-ext/object/map":54,"es5-ext/object/valid-callable":60,"es5-ext/object/valid-value":61}],33:[function(require,module,exports){
+},{"es5-ext/object/copy":46,"es5-ext/object/map":54,"es5-ext/object/normalize-options":55,"es5-ext/object/valid-callable":60,"es5-ext/object/valid-value":61}],33:[function(require,module,exports){
 'use strict';
 
 var assign        = require('es5-ext/object/assign')
@@ -20113,7 +20112,7 @@ module.exports = function (obj) { return typeof obj === 'function'; };
 },{}],50:[function(require,module,exports){
 'use strict';
 
-var map = { function: true, object: true };
+var map = { 'function': true, object: true };
 
 module.exports = function (x) {
 	return ((x != null) && map[typeof x]) || false;
@@ -20632,7 +20631,7 @@ module.exports = function (x) {
 };
 
 },{}],76:[function(require,module,exports){
-// ES2015 Symbol polyfill for environments that do not support it (or partially support it)
+// ES2015 Symbol polyfill for environments that do not (or partially) support it
 
 'use strict';
 
@@ -20677,7 +20676,7 @@ var generateName = (function () {
 // Internal constructor (not one exposed) for creating Symbol instances.
 // This one is used to ensure that `someSymbol instanceof Symbol` always return false
 HiddenSymbol = function Symbol(description) {
-	if (this instanceof HiddenSymbol) throw new TypeError('TypeError: Symbol is not a constructor');
+	if (this instanceof HiddenSymbol) throw new TypeError('Symbol is not a constructor');
 	return SymbolPolyfill(description);
 };
 
@@ -20685,7 +20684,7 @@ HiddenSymbol = function Symbol(description) {
 // (returns instances of HiddenSymbol)
 module.exports = SymbolPolyfill = function Symbol(description) {
 	var symbol;
-	if (this instanceof Symbol) throw new TypeError('TypeError: Symbol is not a constructor');
+	if (this instanceof Symbol) throw new TypeError('Symbol is not a constructor');
 	if (isNativeSafe) return NativeSymbol(description);
 	symbol = create(HiddenSymbol.prototype);
 	description = (description === undefined ? '' : String(description));
@@ -20705,8 +20704,8 @@ defineProperties(SymbolPolyfill, {
 		for (key in globalSymbols) if (globalSymbols[key] === s) return key;
 	}),
 
-	// If there's native implementation of given symbol, let's fallback to it
-	// to ensure proper interoperability with other native functions e.g. Array.from
+	// To ensure proper interoperability with other native functions (e.g. Array.from)
+	// fallback to eventual native implementation of given symbol
 	hasInstance: d('', (NativeSymbol && NativeSymbol.hasInstance) || SymbolPolyfill('hasInstance')),
 	isConcatSpreadable: d('', (NativeSymbol && NativeSymbol.isConcatSpreadable) ||
 		SymbolPolyfill('isConcatSpreadable')),
@@ -21040,7 +21039,7 @@ module.exports = (function () {
 
 },{}],83:[function(require,module,exports){
 arguments[4][32][0].apply(exports,arguments)
-},{"dup":32,"es5-ext/object/copy":91,"es5-ext/object/map":99,"es5-ext/object/valid-callable":104,"es5-ext/object/valid-value":106}],84:[function(require,module,exports){
+},{"dup":32,"es5-ext/object/copy":91,"es5-ext/object/map":99,"es5-ext/object/normalize-options":100,"es5-ext/object/valid-callable":104,"es5-ext/object/valid-value":106}],84:[function(require,module,exports){
 arguments[4][33][0].apply(exports,arguments)
 },{"dup":33,"es5-ext/object/assign":88,"es5-ext/object/is-callable":94,"es5-ext/object/normalize-options":100,"es5-ext/string/#/contains":107}],85:[function(require,module,exports){
 arguments[4][34][0].apply(exports,arguments)
@@ -22515,6 +22514,2925 @@ module.exports={
 }
 
 },{}],131:[function(require,module,exports){
+/* vim: set sw=4 sts=4 : */
+(function () {
+
+    var estraverse = require('estraverse');
+    var parser = require('./parser');
+
+    var isArray = Array.isArray || function isArray(array) {
+        return {}.toString.call(array) === '[object Array]';
+    };
+
+    var LEFT_SIDE = {};
+    var RIGHT_SIDE = {};
+
+    function esqueryModule() {
+
+        /**
+         * Get the value of a property which may be multiple levels down in the object.
+         */
+        function getPath(obj, key) {
+            var i, keys = key.split(".");
+            for (i = 0; i < keys.length; i++) {
+                if (obj == null) { return obj; }
+                obj = obj[keys[i]];
+            }
+            return obj;
+        }
+
+        /**
+         * Determine whether `node` can be reached by following `path`, starting at `ancestor`.
+         */
+        function inPath(node, ancestor, path) {
+            var field, remainingPath, i;
+            if (path.length === 0) { return node === ancestor; }
+            if (ancestor == null) { return false; }
+            field = ancestor[path[0]];
+            remainingPath = path.slice(1);
+            if (isArray(field)) {
+                for (i = 0, l = field.length; i < l; ++i) {
+                    if (inPath(node, field[i], remainingPath)) { return true; }
+                }
+                return false;
+            } else {
+                return inPath(node, field, remainingPath);
+            }
+        }
+
+        /**
+         * Given a `node` and its ancestors, determine if `node` is matched by `selector`.
+         */
+        function matches(node, selector, ancestry) {
+            var path, ancestor, i, l, p;
+            if (!selector) { return true; }
+            if (!node) { return false; }
+            if (!ancestry) { ancestry = []; }
+
+            switch(selector.type) {
+                case 'wildcard':
+                    return true;
+
+                case 'identifier':
+                    return selector.value.toLowerCase() === node.type.toLowerCase();
+
+                case 'field':
+                    path = selector.name.split('.');
+                    ancestor = ancestry[path.length - 1];
+                    return inPath(node, ancestor, path);
+
+                case 'matches':
+                    for (i = 0, l = selector.selectors.length; i < l; ++i) {
+                        if (matches(node, selector.selectors[i], ancestry)) { return true; }
+                    }
+                    return false;
+
+                case 'compound':
+                    for (i = 0, l = selector.selectors.length; i < l; ++i) {
+                        if (!matches(node, selector.selectors[i], ancestry)) { return false; }
+                    }
+                    return true;
+
+                case 'not':
+                    for (i = 0, l = selector.selectors.length; i < l; ++i) {
+                        if (matches(node, selector.selectors[i], ancestry)) { return false; }
+                    }
+                    return true;
+
+                case 'child':
+                    if (matches(node, selector.right, ancestry)) {
+                        return matches(ancestry[0], selector.left, ancestry.slice(1));
+                    }
+                    return false;
+
+                case 'descendant':
+                    if (matches(node, selector.right, ancestry)) {
+                        for (i = 0, l = ancestry.length; i < l; ++i) {
+                            if (matches(ancestry[i], selector.left, ancestry.slice(i + 1))) {
+                                return true;
+                            }
+                        }
+                    }
+                    return false;
+
+                case 'attribute':
+                    p = getPath(node, selector.name);
+                    switch (selector.operator) {
+                        case null:
+                        case void 0:
+                            return p != null;
+                        case '=':
+                            switch (selector.value.type) {
+                                case 'regexp': return selector.value.value.test(p);
+                                case 'literal': return '' + selector.value.value === '' + p;
+                                case 'type': return selector.value.value === typeof p;
+                            }
+                        case '!=':
+                            switch (selector.value.type) {
+                                case 'regexp': return !selector.value.value.test(p);
+                                case 'literal': return '' + selector.value.value !== '' + p;
+                                case 'type': return selector.value.value !== typeof p;
+                            }
+                        case '<=': return p <= selector.value.value;
+                        case '<': return p < selector.value.value;
+                        case '>': return p > selector.value.value;
+                        case '>=': return p >= selector.value.value;
+                    }
+
+                case 'sibling':
+                    return matches(node, selector.right, ancestry) &&
+                        sibling(node, selector.left, ancestry, LEFT_SIDE) ||
+                        selector.left.subject &&
+                        matches(node, selector.left, ancestry) &&
+                        sibling(node, selector.right, ancestry, RIGHT_SIDE);
+
+                case 'adjacent':
+                    return matches(node, selector.right, ancestry) &&
+                        adjacent(node, selector.left, ancestry, LEFT_SIDE) ||
+                        selector.right.subject &&
+                        matches(node, selector.left, ancestry) &&
+                        adjacent(node, selector.right, ancestry, RIGHT_SIDE);
+
+                case 'nth-child':
+                    return matches(node, selector.right, ancestry) &&
+                        nthChild(node, ancestry, function (length) {
+                            return selector.index.value - 1;
+                        });
+
+                case 'nth-last-child':
+                    return matches(node, selector.right, ancestry) &&
+                        nthChild(node, ancestry, function (length) {
+                            return length - selector.index.value;
+                        });
+
+                case 'class':
+                    if(!node.type) return false;
+                    switch(selector.name.toLowerCase()){
+                        case 'statement':
+                            if(node.type.slice(-9) === 'Statement') return true;
+                            // fallthrough: interface Declaration <: Statement { }
+                        case 'declaration':
+                            return node.type.slice(-11) === 'Declaration';
+                        case 'pattern':
+                            if(node.type.slice(-7) === 'Pattern') return true;
+                            // fallthrough: interface Expression <: Node, Pattern { }
+                        case 'expression':
+                            return node.type.slice(-10) === 'Expression' ||
+                                node.type === 'Literal' ||
+                                node.type === 'Identifier';
+                        case 'function':
+                            return node.type.slice(0, 8) === 'Function' ||
+                                node.type === 'ArrowFunctionExpression';
+                    }
+                    throw new Error('Unknown class name: ' + selector.name);
+            }
+
+            throw new Error('Unknown selector type: ' + selector.type);
+        }
+
+        /*
+         * Determines if the given node has a sibling that matches the given selector.
+         */
+        function sibling(node, selector, ancestry, side) {
+            var parent = ancestry[0], listProp, startIndex, keys, i, l, k, lowerBound, upperBound;
+            if (!parent) { return false; }
+            keys = estraverse.VisitorKeys[parent.type];
+            for (i = 0, l = keys.length; i < l; ++i) {
+                listProp = parent[keys[i]];
+                if (isArray(listProp)) {
+                    startIndex = listProp.indexOf(node);
+                    if (startIndex < 0) { continue; }
+                    if (side === LEFT_SIDE) {
+                      lowerBound = 0;
+                      upperBound = startIndex;
+                    } else {
+                      lowerBound = startIndex + 1;
+                      upperBound = listProp.length;
+                    }
+                    for (k = lowerBound; k < upperBound; ++k) {
+                        if (matches(listProp[k], selector, ancestry)) {
+                            return true;
+                        }
+                    }
+                }
+            }
+            return false;
+        }
+
+        /*
+         * Determines if the given node has an asjacent sibling that matches the given selector.
+         */
+        function adjacent(node, selector, ancestry, side) {
+            var parent = ancestry[0], listProp, keys, i, l, idx;
+            if (!parent) { return false; }
+            keys = estraverse.VisitorKeys[parent.type];
+            for (i = 0, l = keys.length; i < l; ++i) {
+                listProp = parent[keys[i]];
+                if (isArray(listProp)) {
+                    idx = listProp.indexOf(node);
+                    if (idx < 0) { continue; }
+                    if (side === LEFT_SIDE && idx > 0 && matches(listProp[idx - 1], selector, ancestry)) {
+                        return true;
+                    }
+                    if (side === RIGHT_SIDE && idx < listProp.length - 1 && matches(listProp[idx + 1], selector, ancestry)) {
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
+
+        /*
+         * Determines if the given node is the nth child, determined by idxFn, which is given the containing list's length.
+         */
+        function nthChild(node, ancestry, idxFn) {
+            var parent = ancestry[0], listProp, keys, i, l, idx;
+            if (!parent) { return false; }
+            keys = estraverse.VisitorKeys[parent.type];
+            for (i = 0, l = keys.length; i < l; ++i) {
+                listProp = parent[keys[i]];
+                if (isArray(listProp)) {
+                    idx = listProp.indexOf(node);
+                    if (idx >= 0 && idx === idxFn(listProp.length)) { return true; }
+                }
+            }
+            return false;
+        }
+
+        /*
+         * For each selector node marked as a subject, find the portion of the selector that the subject must match.
+         */
+        function subjects(selector, ancestor) {
+            var results, p;
+            if (selector == null || typeof selector != 'object') { return []; }
+            if (ancestor == null) { ancestor = selector; }
+            results = selector.subject ? [ancestor] : [];
+            for(p in selector) {
+                if(!{}.hasOwnProperty.call(selector, p)) { continue; }
+                [].push.apply(results, subjects(selector[p], p === 'left' ? selector[p] : ancestor));
+            }
+            return results;
+        }
+
+        /**
+         * From a JS AST and a selector AST, collect all JS AST nodes that match the selector.
+         */
+        function match(ast, selector) {
+            var ancestry = [], results = [], altSubjects, i, l, k, m;
+            if (!selector) { return results; }
+            altSubjects = subjects(selector);
+            estraverse.traverse(ast, {
+                enter: function (node, parent) {
+                    if (parent != null) { ancestry.unshift(parent); }
+                    if (matches(node, selector, ancestry)) {
+                        if (altSubjects.length) {
+                            for (i = 0, l = altSubjects.length; i < l; ++i) {
+                                if (matches(node, altSubjects[i], ancestry)) { results.push(node); }
+                                for (k = 0, m = ancestry.length; k < m; ++k) {
+                                    if (matches(ancestry[k], altSubjects[i], ancestry.slice(k + 1))) {
+                                        results.push(ancestry[k]);
+                                    }
+                                }
+                            }
+                        } else {
+                            results.push(node);
+                        }
+                    }
+                },
+                leave: function () { ancestry.shift(); }
+            });
+            return results;
+        }
+
+        /**
+         * Parse a selector string and return its AST.
+         */
+        function parse(selector) {
+            return parser.parse(selector);
+        }
+
+        /**
+         * Query the code AST using the selector string.
+         */
+        function query(ast, selector) {
+            return match(ast, parse(selector));
+        }
+
+        query.parse = parse;
+        query.match = match;
+        query.matches = matches;
+        return query.query = query;
+    }
+
+
+    if (typeof define === "function" && define.amd) {
+        define(esqueryModule);
+    } else if (typeof module !== 'undefined' && module.exports) {
+        module.exports = esqueryModule();
+    } else {
+        this.esquery = esqueryModule();
+    }
+
+})();
+
+},{"./parser":132,"estraverse":133}],132:[function(require,module,exports){
+var result = (function(){
+  /*
+   * Generated by PEG.js 0.7.0.
+   *
+   * http://pegjs.majda.cz/
+   */
+  
+  function quote(s) {
+    /*
+     * ECMA-262, 5th ed., 7.8.4: All characters may appear literally in a
+     * string literal except for the closing quote character, backslash,
+     * carriage return, line separator, paragraph separator, and line feed.
+     * Any character may appear in the form of an escape sequence.
+     *
+     * For portability, we also escape escape all control and non-ASCII
+     * characters. Note that "\0" and "\v" escape sequences are not used
+     * because JSHint does not like the first and IE the second.
+     */
+     return '"' + s
+      .replace(/\\/g, '\\\\')  // backslash
+      .replace(/"/g, '\\"')    // closing quote character
+      .replace(/\x08/g, '\\b') // backspace
+      .replace(/\t/g, '\\t')   // horizontal tab
+      .replace(/\n/g, '\\n')   // line feed
+      .replace(/\f/g, '\\f')   // form feed
+      .replace(/\r/g, '\\r')   // carriage return
+      .replace(/[\x00-\x07\x0B\x0E-\x1F\x80-\uFFFF]/g, escape)
+      + '"';
+  }
+  
+  var result = {
+    /*
+     * Parses the input with a generated parser. If the parsing is successfull,
+     * returns a value explicitly or implicitly specified by the grammar from
+     * which the parser was generated (see |PEG.buildParser|). If the parsing is
+     * unsuccessful, throws |PEG.parser.SyntaxError| describing the error.
+     */
+    parse: function(input, startRule) {
+      var parseFunctions = {
+        "start": parse_start,
+        "_": parse__,
+        "identifierName": parse_identifierName,
+        "binaryOp": parse_binaryOp,
+        "selectors": parse_selectors,
+        "selector": parse_selector,
+        "sequence": parse_sequence,
+        "atom": parse_atom,
+        "wildcard": parse_wildcard,
+        "identifier": parse_identifier,
+        "attr": parse_attr,
+        "attrOps": parse_attrOps,
+        "attrEqOps": parse_attrEqOps,
+        "attrName": parse_attrName,
+        "attrValue": parse_attrValue,
+        "string": parse_string,
+        "number": parse_number,
+        "path": parse_path,
+        "type": parse_type,
+        "regex": parse_regex,
+        "field": parse_field,
+        "negation": parse_negation,
+        "matches": parse_matches,
+        "firstChild": parse_firstChild,
+        "lastChild": parse_lastChild,
+        "nthChild": parse_nthChild,
+        "nthLastChild": parse_nthLastChild,
+        "class": parse_class
+      };
+      
+      if (startRule !== undefined) {
+        if (parseFunctions[startRule] === undefined) {
+          throw new Error("Invalid rule name: " + quote(startRule) + ".");
+        }
+      } else {
+        startRule = "start";
+      }
+      
+      var pos = 0;
+      var reportFailures = 0;
+      var rightmostFailuresPos = 0;
+      var rightmostFailuresExpected = [];
+      var cache = {};
+      
+      function padLeft(input, padding, length) {
+        var result = input;
+        
+        var padLength = length - input.length;
+        for (var i = 0; i < padLength; i++) {
+          result = padding + result;
+        }
+        
+        return result;
+      }
+      
+      function escape(ch) {
+        var charCode = ch.charCodeAt(0);
+        var escapeChar;
+        var length;
+        
+        if (charCode <= 0xFF) {
+          escapeChar = 'x';
+          length = 2;
+        } else {
+          escapeChar = 'u';
+          length = 4;
+        }
+        
+        return '\\' + escapeChar + padLeft(charCode.toString(16).toUpperCase(), '0', length);
+      }
+      
+      function matchFailed(failure) {
+        if (pos < rightmostFailuresPos) {
+          return;
+        }
+        
+        if (pos > rightmostFailuresPos) {
+          rightmostFailuresPos = pos;
+          rightmostFailuresExpected = [];
+        }
+        
+        rightmostFailuresExpected.push(failure);
+      }
+      
+      function parse_start() {
+        var cacheKey = "start@" + pos;
+        var cachedResult = cache[cacheKey];
+        if (cachedResult) {
+          pos = cachedResult.nextPos;
+          return cachedResult.result;
+        }
+        
+        var result0, result1, result2;
+        var pos0, pos1;
+        
+        pos0 = pos;
+        pos1 = pos;
+        result0 = parse__();
+        if (result0 !== null) {
+          result1 = parse_selectors();
+          if (result1 !== null) {
+            result2 = parse__();
+            if (result2 !== null) {
+              result0 = [result0, result1, result2];
+            } else {
+              result0 = null;
+              pos = pos1;
+            }
+          } else {
+            result0 = null;
+            pos = pos1;
+          }
+        } else {
+          result0 = null;
+          pos = pos1;
+        }
+        if (result0 !== null) {
+          result0 = (function(offset, ss) { return ss.length === 1 ? ss[0] : { type: 'matches', selectors: ss }; })(pos0, result0[1]);
+        }
+        if (result0 === null) {
+          pos = pos0;
+        }
+        if (result0 === null) {
+          pos0 = pos;
+          result0 = parse__();
+          if (result0 !== null) {
+            result0 = (function(offset) { return void 0; })(pos0);
+          }
+          if (result0 === null) {
+            pos = pos0;
+          }
+        }
+        
+        cache[cacheKey] = {
+          nextPos: pos,
+          result:  result0
+        };
+        return result0;
+      }
+      
+      function parse__() {
+        var cacheKey = "_@" + pos;
+        var cachedResult = cache[cacheKey];
+        if (cachedResult) {
+          pos = cachedResult.nextPos;
+          return cachedResult.result;
+        }
+        
+        var result0, result1;
+        
+        result0 = [];
+        if (input.charCodeAt(pos) === 32) {
+          result1 = " ";
+          pos++;
+        } else {
+          result1 = null;
+          if (reportFailures === 0) {
+            matchFailed("\" \"");
+          }
+        }
+        while (result1 !== null) {
+          result0.push(result1);
+          if (input.charCodeAt(pos) === 32) {
+            result1 = " ";
+            pos++;
+          } else {
+            result1 = null;
+            if (reportFailures === 0) {
+              matchFailed("\" \"");
+            }
+          }
+        }
+        
+        cache[cacheKey] = {
+          nextPos: pos,
+          result:  result0
+        };
+        return result0;
+      }
+      
+      function parse_identifierName() {
+        var cacheKey = "identifierName@" + pos;
+        var cachedResult = cache[cacheKey];
+        if (cachedResult) {
+          pos = cachedResult.nextPos;
+          return cachedResult.result;
+        }
+        
+        var result0, result1;
+        var pos0;
+        
+        pos0 = pos;
+        if (/^[^ [\],():#!=><~+.]/.test(input.charAt(pos))) {
+          result1 = input.charAt(pos);
+          pos++;
+        } else {
+          result1 = null;
+          if (reportFailures === 0) {
+            matchFailed("[^ [\\],():#!=><~+.]");
+          }
+        }
+        if (result1 !== null) {
+          result0 = [];
+          while (result1 !== null) {
+            result0.push(result1);
+            if (/^[^ [\],():#!=><~+.]/.test(input.charAt(pos))) {
+              result1 = input.charAt(pos);
+              pos++;
+            } else {
+              result1 = null;
+              if (reportFailures === 0) {
+                matchFailed("[^ [\\],():#!=><~+.]");
+              }
+            }
+          }
+        } else {
+          result0 = null;
+        }
+        if (result0 !== null) {
+          result0 = (function(offset, i) { return i.join(''); })(pos0, result0);
+        }
+        if (result0 === null) {
+          pos = pos0;
+        }
+        
+        cache[cacheKey] = {
+          nextPos: pos,
+          result:  result0
+        };
+        return result0;
+      }
+      
+      function parse_binaryOp() {
+        var cacheKey = "binaryOp@" + pos;
+        var cachedResult = cache[cacheKey];
+        if (cachedResult) {
+          pos = cachedResult.nextPos;
+          return cachedResult.result;
+        }
+        
+        var result0, result1, result2;
+        var pos0, pos1;
+        
+        pos0 = pos;
+        pos1 = pos;
+        result0 = parse__();
+        if (result0 !== null) {
+          if (input.charCodeAt(pos) === 62) {
+            result1 = ">";
+            pos++;
+          } else {
+            result1 = null;
+            if (reportFailures === 0) {
+              matchFailed("\">\"");
+            }
+          }
+          if (result1 !== null) {
+            result2 = parse__();
+            if (result2 !== null) {
+              result0 = [result0, result1, result2];
+            } else {
+              result0 = null;
+              pos = pos1;
+            }
+          } else {
+            result0 = null;
+            pos = pos1;
+          }
+        } else {
+          result0 = null;
+          pos = pos1;
+        }
+        if (result0 !== null) {
+          result0 = (function(offset) { return 'child'; })(pos0);
+        }
+        if (result0 === null) {
+          pos = pos0;
+        }
+        if (result0 === null) {
+          pos0 = pos;
+          pos1 = pos;
+          result0 = parse__();
+          if (result0 !== null) {
+            if (input.charCodeAt(pos) === 126) {
+              result1 = "~";
+              pos++;
+            } else {
+              result1 = null;
+              if (reportFailures === 0) {
+                matchFailed("\"~\"");
+              }
+            }
+            if (result1 !== null) {
+              result2 = parse__();
+              if (result2 !== null) {
+                result0 = [result0, result1, result2];
+              } else {
+                result0 = null;
+                pos = pos1;
+              }
+            } else {
+              result0 = null;
+              pos = pos1;
+            }
+          } else {
+            result0 = null;
+            pos = pos1;
+          }
+          if (result0 !== null) {
+            result0 = (function(offset) { return 'sibling'; })(pos0);
+          }
+          if (result0 === null) {
+            pos = pos0;
+          }
+          if (result0 === null) {
+            pos0 = pos;
+            pos1 = pos;
+            result0 = parse__();
+            if (result0 !== null) {
+              if (input.charCodeAt(pos) === 43) {
+                result1 = "+";
+                pos++;
+              } else {
+                result1 = null;
+                if (reportFailures === 0) {
+                  matchFailed("\"+\"");
+                }
+              }
+              if (result1 !== null) {
+                result2 = parse__();
+                if (result2 !== null) {
+                  result0 = [result0, result1, result2];
+                } else {
+                  result0 = null;
+                  pos = pos1;
+                }
+              } else {
+                result0 = null;
+                pos = pos1;
+              }
+            } else {
+              result0 = null;
+              pos = pos1;
+            }
+            if (result0 !== null) {
+              result0 = (function(offset) { return 'adjacent'; })(pos0);
+            }
+            if (result0 === null) {
+              pos = pos0;
+            }
+            if (result0 === null) {
+              pos0 = pos;
+              pos1 = pos;
+              if (input.charCodeAt(pos) === 32) {
+                result0 = " ";
+                pos++;
+              } else {
+                result0 = null;
+                if (reportFailures === 0) {
+                  matchFailed("\" \"");
+                }
+              }
+              if (result0 !== null) {
+                result1 = parse__();
+                if (result1 !== null) {
+                  result0 = [result0, result1];
+                } else {
+                  result0 = null;
+                  pos = pos1;
+                }
+              } else {
+                result0 = null;
+                pos = pos1;
+              }
+              if (result0 !== null) {
+                result0 = (function(offset) { return 'descendant'; })(pos0);
+              }
+              if (result0 === null) {
+                pos = pos0;
+              }
+            }
+          }
+        }
+        
+        cache[cacheKey] = {
+          nextPos: pos,
+          result:  result0
+        };
+        return result0;
+      }
+      
+      function parse_selectors() {
+        var cacheKey = "selectors@" + pos;
+        var cachedResult = cache[cacheKey];
+        if (cachedResult) {
+          pos = cachedResult.nextPos;
+          return cachedResult.result;
+        }
+        
+        var result0, result1, result2, result3, result4, result5;
+        var pos0, pos1, pos2;
+        
+        pos0 = pos;
+        pos1 = pos;
+        result0 = parse_selector();
+        if (result0 !== null) {
+          result1 = [];
+          pos2 = pos;
+          result2 = parse__();
+          if (result2 !== null) {
+            if (input.charCodeAt(pos) === 44) {
+              result3 = ",";
+              pos++;
+            } else {
+              result3 = null;
+              if (reportFailures === 0) {
+                matchFailed("\",\"");
+              }
+            }
+            if (result3 !== null) {
+              result4 = parse__();
+              if (result4 !== null) {
+                result5 = parse_selector();
+                if (result5 !== null) {
+                  result2 = [result2, result3, result4, result5];
+                } else {
+                  result2 = null;
+                  pos = pos2;
+                }
+              } else {
+                result2 = null;
+                pos = pos2;
+              }
+            } else {
+              result2 = null;
+              pos = pos2;
+            }
+          } else {
+            result2 = null;
+            pos = pos2;
+          }
+          while (result2 !== null) {
+            result1.push(result2);
+            pos2 = pos;
+            result2 = parse__();
+            if (result2 !== null) {
+              if (input.charCodeAt(pos) === 44) {
+                result3 = ",";
+                pos++;
+              } else {
+                result3 = null;
+                if (reportFailures === 0) {
+                  matchFailed("\",\"");
+                }
+              }
+              if (result3 !== null) {
+                result4 = parse__();
+                if (result4 !== null) {
+                  result5 = parse_selector();
+                  if (result5 !== null) {
+                    result2 = [result2, result3, result4, result5];
+                  } else {
+                    result2 = null;
+                    pos = pos2;
+                  }
+                } else {
+                  result2 = null;
+                  pos = pos2;
+                }
+              } else {
+                result2 = null;
+                pos = pos2;
+              }
+            } else {
+              result2 = null;
+              pos = pos2;
+            }
+          }
+          if (result1 !== null) {
+            result0 = [result0, result1];
+          } else {
+            result0 = null;
+            pos = pos1;
+          }
+        } else {
+          result0 = null;
+          pos = pos1;
+        }
+        if (result0 !== null) {
+          result0 = (function(offset, s, ss) {
+          return [s].concat(ss.map(function (s) { return s[3]; }));
+        })(pos0, result0[0], result0[1]);
+        }
+        if (result0 === null) {
+          pos = pos0;
+        }
+        
+        cache[cacheKey] = {
+          nextPos: pos,
+          result:  result0
+        };
+        return result0;
+      }
+      
+      function parse_selector() {
+        var cacheKey = "selector@" + pos;
+        var cachedResult = cache[cacheKey];
+        if (cachedResult) {
+          pos = cachedResult.nextPos;
+          return cachedResult.result;
+        }
+        
+        var result0, result1, result2, result3;
+        var pos0, pos1, pos2;
+        
+        pos0 = pos;
+        pos1 = pos;
+        result0 = parse_sequence();
+        if (result0 !== null) {
+          result1 = [];
+          pos2 = pos;
+          result2 = parse_binaryOp();
+          if (result2 !== null) {
+            result3 = parse_sequence();
+            if (result3 !== null) {
+              result2 = [result2, result3];
+            } else {
+              result2 = null;
+              pos = pos2;
+            }
+          } else {
+            result2 = null;
+            pos = pos2;
+          }
+          while (result2 !== null) {
+            result1.push(result2);
+            pos2 = pos;
+            result2 = parse_binaryOp();
+            if (result2 !== null) {
+              result3 = parse_sequence();
+              if (result3 !== null) {
+                result2 = [result2, result3];
+              } else {
+                result2 = null;
+                pos = pos2;
+              }
+            } else {
+              result2 = null;
+              pos = pos2;
+            }
+          }
+          if (result1 !== null) {
+            result0 = [result0, result1];
+          } else {
+            result0 = null;
+            pos = pos1;
+          }
+        } else {
+          result0 = null;
+          pos = pos1;
+        }
+        if (result0 !== null) {
+          result0 = (function(offset, a, ops) {
+            return ops.reduce(function (memo, rhs) {
+              return { type: rhs[0], left: memo, right: rhs[1] };
+            }, a);
+          })(pos0, result0[0], result0[1]);
+        }
+        if (result0 === null) {
+          pos = pos0;
+        }
+        
+        cache[cacheKey] = {
+          nextPos: pos,
+          result:  result0
+        };
+        return result0;
+      }
+      
+      function parse_sequence() {
+        var cacheKey = "sequence@" + pos;
+        var cachedResult = cache[cacheKey];
+        if (cachedResult) {
+          pos = cachedResult.nextPos;
+          return cachedResult.result;
+        }
+        
+        var result0, result1, result2;
+        var pos0, pos1;
+        
+        pos0 = pos;
+        pos1 = pos;
+        if (input.charCodeAt(pos) === 33) {
+          result0 = "!";
+          pos++;
+        } else {
+          result0 = null;
+          if (reportFailures === 0) {
+            matchFailed("\"!\"");
+          }
+        }
+        result0 = result0 !== null ? result0 : "";
+        if (result0 !== null) {
+          result2 = parse_atom();
+          if (result2 !== null) {
+            result1 = [];
+            while (result2 !== null) {
+              result1.push(result2);
+              result2 = parse_atom();
+            }
+          } else {
+            result1 = null;
+          }
+          if (result1 !== null) {
+            result0 = [result0, result1];
+          } else {
+            result0 = null;
+            pos = pos1;
+          }
+        } else {
+          result0 = null;
+          pos = pos1;
+        }
+        if (result0 !== null) {
+          result0 = (function(offset, subject, as) {
+            var b = as.length === 1 ? as[0] : { type: 'compound', selectors: as };
+            if(subject) b.subject = true;
+            return b;
+          })(pos0, result0[0], result0[1]);
+        }
+        if (result0 === null) {
+          pos = pos0;
+        }
+        
+        cache[cacheKey] = {
+          nextPos: pos,
+          result:  result0
+        };
+        return result0;
+      }
+      
+      function parse_atom() {
+        var cacheKey = "atom@" + pos;
+        var cachedResult = cache[cacheKey];
+        if (cachedResult) {
+          pos = cachedResult.nextPos;
+          return cachedResult.result;
+        }
+        
+        var result0;
+        
+        result0 = parse_wildcard();
+        if (result0 === null) {
+          result0 = parse_identifier();
+          if (result0 === null) {
+            result0 = parse_attr();
+            if (result0 === null) {
+              result0 = parse_field();
+              if (result0 === null) {
+                result0 = parse_negation();
+                if (result0 === null) {
+                  result0 = parse_matches();
+                  if (result0 === null) {
+                    result0 = parse_firstChild();
+                    if (result0 === null) {
+                      result0 = parse_lastChild();
+                      if (result0 === null) {
+                        result0 = parse_nthChild();
+                        if (result0 === null) {
+                          result0 = parse_nthLastChild();
+                          if (result0 === null) {
+                            result0 = parse_class();
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+        
+        cache[cacheKey] = {
+          nextPos: pos,
+          result:  result0
+        };
+        return result0;
+      }
+      
+      function parse_wildcard() {
+        var cacheKey = "wildcard@" + pos;
+        var cachedResult = cache[cacheKey];
+        if (cachedResult) {
+          pos = cachedResult.nextPos;
+          return cachedResult.result;
+        }
+        
+        var result0;
+        var pos0;
+        
+        pos0 = pos;
+        if (input.charCodeAt(pos) === 42) {
+          result0 = "*";
+          pos++;
+        } else {
+          result0 = null;
+          if (reportFailures === 0) {
+            matchFailed("\"*\"");
+          }
+        }
+        if (result0 !== null) {
+          result0 = (function(offset, a) { return { type: 'wildcard', value: a }; })(pos0, result0);
+        }
+        if (result0 === null) {
+          pos = pos0;
+        }
+        
+        cache[cacheKey] = {
+          nextPos: pos,
+          result:  result0
+        };
+        return result0;
+      }
+      
+      function parse_identifier() {
+        var cacheKey = "identifier@" + pos;
+        var cachedResult = cache[cacheKey];
+        if (cachedResult) {
+          pos = cachedResult.nextPos;
+          return cachedResult.result;
+        }
+        
+        var result0, result1;
+        var pos0, pos1;
+        
+        pos0 = pos;
+        pos1 = pos;
+        if (input.charCodeAt(pos) === 35) {
+          result0 = "#";
+          pos++;
+        } else {
+          result0 = null;
+          if (reportFailures === 0) {
+            matchFailed("\"#\"");
+          }
+        }
+        result0 = result0 !== null ? result0 : "";
+        if (result0 !== null) {
+          result1 = parse_identifierName();
+          if (result1 !== null) {
+            result0 = [result0, result1];
+          } else {
+            result0 = null;
+            pos = pos1;
+          }
+        } else {
+          result0 = null;
+          pos = pos1;
+        }
+        if (result0 !== null) {
+          result0 = (function(offset, i) { return { type: 'identifier', value: i }; })(pos0, result0[1]);
+        }
+        if (result0 === null) {
+          pos = pos0;
+        }
+        
+        cache[cacheKey] = {
+          nextPos: pos,
+          result:  result0
+        };
+        return result0;
+      }
+      
+      function parse_attr() {
+        var cacheKey = "attr@" + pos;
+        var cachedResult = cache[cacheKey];
+        if (cachedResult) {
+          pos = cachedResult.nextPos;
+          return cachedResult.result;
+        }
+        
+        var result0, result1, result2, result3, result4;
+        var pos0, pos1;
+        
+        pos0 = pos;
+        pos1 = pos;
+        if (input.charCodeAt(pos) === 91) {
+          result0 = "[";
+          pos++;
+        } else {
+          result0 = null;
+          if (reportFailures === 0) {
+            matchFailed("\"[\"");
+          }
+        }
+        if (result0 !== null) {
+          result1 = parse__();
+          if (result1 !== null) {
+            result2 = parse_attrValue();
+            if (result2 !== null) {
+              result3 = parse__();
+              if (result3 !== null) {
+                if (input.charCodeAt(pos) === 93) {
+                  result4 = "]";
+                  pos++;
+                } else {
+                  result4 = null;
+                  if (reportFailures === 0) {
+                    matchFailed("\"]\"");
+                  }
+                }
+                if (result4 !== null) {
+                  result0 = [result0, result1, result2, result3, result4];
+                } else {
+                  result0 = null;
+                  pos = pos1;
+                }
+              } else {
+                result0 = null;
+                pos = pos1;
+              }
+            } else {
+              result0 = null;
+              pos = pos1;
+            }
+          } else {
+            result0 = null;
+            pos = pos1;
+          }
+        } else {
+          result0 = null;
+          pos = pos1;
+        }
+        if (result0 !== null) {
+          result0 = (function(offset, v) { return v; })(pos0, result0[2]);
+        }
+        if (result0 === null) {
+          pos = pos0;
+        }
+        
+        cache[cacheKey] = {
+          nextPos: pos,
+          result:  result0
+        };
+        return result0;
+      }
+      
+      function parse_attrOps() {
+        var cacheKey = "attrOps@" + pos;
+        var cachedResult = cache[cacheKey];
+        if (cachedResult) {
+          pos = cachedResult.nextPos;
+          return cachedResult.result;
+        }
+        
+        var result0, result1;
+        var pos0, pos1;
+        
+        pos0 = pos;
+        pos1 = pos;
+        if (/^[><!]/.test(input.charAt(pos))) {
+          result0 = input.charAt(pos);
+          pos++;
+        } else {
+          result0 = null;
+          if (reportFailures === 0) {
+            matchFailed("[><!]");
+          }
+        }
+        result0 = result0 !== null ? result0 : "";
+        if (result0 !== null) {
+          if (input.charCodeAt(pos) === 61) {
+            result1 = "=";
+            pos++;
+          } else {
+            result1 = null;
+            if (reportFailures === 0) {
+              matchFailed("\"=\"");
+            }
+          }
+          if (result1 !== null) {
+            result0 = [result0, result1];
+          } else {
+            result0 = null;
+            pos = pos1;
+          }
+        } else {
+          result0 = null;
+          pos = pos1;
+        }
+        if (result0 !== null) {
+          result0 = (function(offset, a) { return a + '='; })(pos0, result0[0]);
+        }
+        if (result0 === null) {
+          pos = pos0;
+        }
+        if (result0 === null) {
+          if (/^[><]/.test(input.charAt(pos))) {
+            result0 = input.charAt(pos);
+            pos++;
+          } else {
+            result0 = null;
+            if (reportFailures === 0) {
+              matchFailed("[><]");
+            }
+          }
+        }
+        
+        cache[cacheKey] = {
+          nextPos: pos,
+          result:  result0
+        };
+        return result0;
+      }
+      
+      function parse_attrEqOps() {
+        var cacheKey = "attrEqOps@" + pos;
+        var cachedResult = cache[cacheKey];
+        if (cachedResult) {
+          pos = cachedResult.nextPos;
+          return cachedResult.result;
+        }
+        
+        var result0, result1;
+        var pos0, pos1;
+        
+        pos0 = pos;
+        pos1 = pos;
+        if (input.charCodeAt(pos) === 33) {
+          result0 = "!";
+          pos++;
+        } else {
+          result0 = null;
+          if (reportFailures === 0) {
+            matchFailed("\"!\"");
+          }
+        }
+        result0 = result0 !== null ? result0 : "";
+        if (result0 !== null) {
+          if (input.charCodeAt(pos) === 61) {
+            result1 = "=";
+            pos++;
+          } else {
+            result1 = null;
+            if (reportFailures === 0) {
+              matchFailed("\"=\"");
+            }
+          }
+          if (result1 !== null) {
+            result0 = [result0, result1];
+          } else {
+            result0 = null;
+            pos = pos1;
+          }
+        } else {
+          result0 = null;
+          pos = pos1;
+        }
+        if (result0 !== null) {
+          result0 = (function(offset, a) { return a + '='; })(pos0, result0[0]);
+        }
+        if (result0 === null) {
+          pos = pos0;
+        }
+        
+        cache[cacheKey] = {
+          nextPos: pos,
+          result:  result0
+        };
+        return result0;
+      }
+      
+      function parse_attrName() {
+        var cacheKey = "attrName@" + pos;
+        var cachedResult = cache[cacheKey];
+        if (cachedResult) {
+          pos = cachedResult.nextPos;
+          return cachedResult.result;
+        }
+        
+        var result0, result1;
+        var pos0;
+        
+        pos0 = pos;
+        result1 = parse_identifierName();
+        if (result1 === null) {
+          if (input.charCodeAt(pos) === 46) {
+            result1 = ".";
+            pos++;
+          } else {
+            result1 = null;
+            if (reportFailures === 0) {
+              matchFailed("\".\"");
+            }
+          }
+        }
+        if (result1 !== null) {
+          result0 = [];
+          while (result1 !== null) {
+            result0.push(result1);
+            result1 = parse_identifierName();
+            if (result1 === null) {
+              if (input.charCodeAt(pos) === 46) {
+                result1 = ".";
+                pos++;
+              } else {
+                result1 = null;
+                if (reportFailures === 0) {
+                  matchFailed("\".\"");
+                }
+              }
+            }
+          }
+        } else {
+          result0 = null;
+        }
+        if (result0 !== null) {
+          result0 = (function(offset, i) { return i.join(''); })(pos0, result0);
+        }
+        if (result0 === null) {
+          pos = pos0;
+        }
+        
+        cache[cacheKey] = {
+          nextPos: pos,
+          result:  result0
+        };
+        return result0;
+      }
+      
+      function parse_attrValue() {
+        var cacheKey = "attrValue@" + pos;
+        var cachedResult = cache[cacheKey];
+        if (cachedResult) {
+          pos = cachedResult.nextPos;
+          return cachedResult.result;
+        }
+        
+        var result0, result1, result2, result3, result4;
+        var pos0, pos1;
+        
+        pos0 = pos;
+        pos1 = pos;
+        result0 = parse_attrName();
+        if (result0 !== null) {
+          result1 = parse__();
+          if (result1 !== null) {
+            result2 = parse_attrEqOps();
+            if (result2 !== null) {
+              result3 = parse__();
+              if (result3 !== null) {
+                result4 = parse_type();
+                if (result4 === null) {
+                  result4 = parse_regex();
+                }
+                if (result4 !== null) {
+                  result0 = [result0, result1, result2, result3, result4];
+                } else {
+                  result0 = null;
+                  pos = pos1;
+                }
+              } else {
+                result0 = null;
+                pos = pos1;
+              }
+            } else {
+              result0 = null;
+              pos = pos1;
+            }
+          } else {
+            result0 = null;
+            pos = pos1;
+          }
+        } else {
+          result0 = null;
+          pos = pos1;
+        }
+        if (result0 !== null) {
+          result0 = (function(offset, name, op, value) {
+              return { type: 'attribute', name: name, operator: op, value: value };
+            })(pos0, result0[0], result0[2], result0[4]);
+        }
+        if (result0 === null) {
+          pos = pos0;
+        }
+        if (result0 === null) {
+          pos0 = pos;
+          pos1 = pos;
+          result0 = parse_attrName();
+          if (result0 !== null) {
+            result1 = parse__();
+            if (result1 !== null) {
+              result2 = parse_attrOps();
+              if (result2 !== null) {
+                result3 = parse__();
+                if (result3 !== null) {
+                  result4 = parse_string();
+                  if (result4 === null) {
+                    result4 = parse_number();
+                    if (result4 === null) {
+                      result4 = parse_path();
+                    }
+                  }
+                  if (result4 !== null) {
+                    result0 = [result0, result1, result2, result3, result4];
+                  } else {
+                    result0 = null;
+                    pos = pos1;
+                  }
+                } else {
+                  result0 = null;
+                  pos = pos1;
+                }
+              } else {
+                result0 = null;
+                pos = pos1;
+              }
+            } else {
+              result0 = null;
+              pos = pos1;
+            }
+          } else {
+            result0 = null;
+            pos = pos1;
+          }
+          if (result0 !== null) {
+            result0 = (function(offset, name, op, value) {
+                return { type: 'attribute', name: name, operator: op, value: value };
+              })(pos0, result0[0], result0[2], result0[4]);
+          }
+          if (result0 === null) {
+            pos = pos0;
+          }
+          if (result0 === null) {
+            pos0 = pos;
+            result0 = parse_attrName();
+            if (result0 !== null) {
+              result0 = (function(offset, name) { return { type: 'attribute', name: name }; })(pos0, result0);
+            }
+            if (result0 === null) {
+              pos = pos0;
+            }
+          }
+        }
+        
+        cache[cacheKey] = {
+          nextPos: pos,
+          result:  result0
+        };
+        return result0;
+      }
+      
+      function parse_string() {
+        var cacheKey = "string@" + pos;
+        var cachedResult = cache[cacheKey];
+        if (cachedResult) {
+          pos = cachedResult.nextPos;
+          return cachedResult.result;
+        }
+        
+        var result0, result1, result2, result3;
+        var pos0, pos1, pos2, pos3;
+        
+        pos0 = pos;
+        pos1 = pos;
+        if (input.charCodeAt(pos) === 34) {
+          result0 = "\"";
+          pos++;
+        } else {
+          result0 = null;
+          if (reportFailures === 0) {
+            matchFailed("\"\\\"\"");
+          }
+        }
+        if (result0 !== null) {
+          result1 = [];
+          if (/^[^\\"]/.test(input.charAt(pos))) {
+            result2 = input.charAt(pos);
+            pos++;
+          } else {
+            result2 = null;
+            if (reportFailures === 0) {
+              matchFailed("[^\\\\\"]");
+            }
+          }
+          if (result2 === null) {
+            pos2 = pos;
+            pos3 = pos;
+            if (input.charCodeAt(pos) === 92) {
+              result2 = "\\";
+              pos++;
+            } else {
+              result2 = null;
+              if (reportFailures === 0) {
+                matchFailed("\"\\\\\"");
+              }
+            }
+            if (result2 !== null) {
+              if (input.length > pos) {
+                result3 = input.charAt(pos);
+                pos++;
+              } else {
+                result3 = null;
+                if (reportFailures === 0) {
+                  matchFailed("any character");
+                }
+              }
+              if (result3 !== null) {
+                result2 = [result2, result3];
+              } else {
+                result2 = null;
+                pos = pos3;
+              }
+            } else {
+              result2 = null;
+              pos = pos3;
+            }
+            if (result2 !== null) {
+              result2 = (function(offset, a, b) { return a + b; })(pos2, result2[0], result2[1]);
+            }
+            if (result2 === null) {
+              pos = pos2;
+            }
+          }
+          while (result2 !== null) {
+            result1.push(result2);
+            if (/^[^\\"]/.test(input.charAt(pos))) {
+              result2 = input.charAt(pos);
+              pos++;
+            } else {
+              result2 = null;
+              if (reportFailures === 0) {
+                matchFailed("[^\\\\\"]");
+              }
+            }
+            if (result2 === null) {
+              pos2 = pos;
+              pos3 = pos;
+              if (input.charCodeAt(pos) === 92) {
+                result2 = "\\";
+                pos++;
+              } else {
+                result2 = null;
+                if (reportFailures === 0) {
+                  matchFailed("\"\\\\\"");
+                }
+              }
+              if (result2 !== null) {
+                if (input.length > pos) {
+                  result3 = input.charAt(pos);
+                  pos++;
+                } else {
+                  result3 = null;
+                  if (reportFailures === 0) {
+                    matchFailed("any character");
+                  }
+                }
+                if (result3 !== null) {
+                  result2 = [result2, result3];
+                } else {
+                  result2 = null;
+                  pos = pos3;
+                }
+              } else {
+                result2 = null;
+                pos = pos3;
+              }
+              if (result2 !== null) {
+                result2 = (function(offset, a, b) { return a + b; })(pos2, result2[0], result2[1]);
+              }
+              if (result2 === null) {
+                pos = pos2;
+              }
+            }
+          }
+          if (result1 !== null) {
+            if (input.charCodeAt(pos) === 34) {
+              result2 = "\"";
+              pos++;
+            } else {
+              result2 = null;
+              if (reportFailures === 0) {
+                matchFailed("\"\\\"\"");
+              }
+            }
+            if (result2 !== null) {
+              result0 = [result0, result1, result2];
+            } else {
+              result0 = null;
+              pos = pos1;
+            }
+          } else {
+            result0 = null;
+            pos = pos1;
+          }
+        } else {
+          result0 = null;
+          pos = pos1;
+        }
+        if (result0 !== null) {
+          result0 = (function(offset, d) {
+                return { type: 'literal', value: strUnescape(d.join('')) };
+              })(pos0, result0[1]);
+        }
+        if (result0 === null) {
+          pos = pos0;
+        }
+        if (result0 === null) {
+          pos0 = pos;
+          pos1 = pos;
+          if (input.charCodeAt(pos) === 39) {
+            result0 = "'";
+            pos++;
+          } else {
+            result0 = null;
+            if (reportFailures === 0) {
+              matchFailed("\"'\"");
+            }
+          }
+          if (result0 !== null) {
+            result1 = [];
+            if (/^[^\\']/.test(input.charAt(pos))) {
+              result2 = input.charAt(pos);
+              pos++;
+            } else {
+              result2 = null;
+              if (reportFailures === 0) {
+                matchFailed("[^\\\\']");
+              }
+            }
+            if (result2 === null) {
+              pos2 = pos;
+              pos3 = pos;
+              if (input.charCodeAt(pos) === 92) {
+                result2 = "\\";
+                pos++;
+              } else {
+                result2 = null;
+                if (reportFailures === 0) {
+                  matchFailed("\"\\\\\"");
+                }
+              }
+              if (result2 !== null) {
+                if (input.length > pos) {
+                  result3 = input.charAt(pos);
+                  pos++;
+                } else {
+                  result3 = null;
+                  if (reportFailures === 0) {
+                    matchFailed("any character");
+                  }
+                }
+                if (result3 !== null) {
+                  result2 = [result2, result3];
+                } else {
+                  result2 = null;
+                  pos = pos3;
+                }
+              } else {
+                result2 = null;
+                pos = pos3;
+              }
+              if (result2 !== null) {
+                result2 = (function(offset, a, b) { return a + b; })(pos2, result2[0], result2[1]);
+              }
+              if (result2 === null) {
+                pos = pos2;
+              }
+            }
+            while (result2 !== null) {
+              result1.push(result2);
+              if (/^[^\\']/.test(input.charAt(pos))) {
+                result2 = input.charAt(pos);
+                pos++;
+              } else {
+                result2 = null;
+                if (reportFailures === 0) {
+                  matchFailed("[^\\\\']");
+                }
+              }
+              if (result2 === null) {
+                pos2 = pos;
+                pos3 = pos;
+                if (input.charCodeAt(pos) === 92) {
+                  result2 = "\\";
+                  pos++;
+                } else {
+                  result2 = null;
+                  if (reportFailures === 0) {
+                    matchFailed("\"\\\\\"");
+                  }
+                }
+                if (result2 !== null) {
+                  if (input.length > pos) {
+                    result3 = input.charAt(pos);
+                    pos++;
+                  } else {
+                    result3 = null;
+                    if (reportFailures === 0) {
+                      matchFailed("any character");
+                    }
+                  }
+                  if (result3 !== null) {
+                    result2 = [result2, result3];
+                  } else {
+                    result2 = null;
+                    pos = pos3;
+                  }
+                } else {
+                  result2 = null;
+                  pos = pos3;
+                }
+                if (result2 !== null) {
+                  result2 = (function(offset, a, b) { return a + b; })(pos2, result2[0], result2[1]);
+                }
+                if (result2 === null) {
+                  pos = pos2;
+                }
+              }
+            }
+            if (result1 !== null) {
+              if (input.charCodeAt(pos) === 39) {
+                result2 = "'";
+                pos++;
+              } else {
+                result2 = null;
+                if (reportFailures === 0) {
+                  matchFailed("\"'\"");
+                }
+              }
+              if (result2 !== null) {
+                result0 = [result0, result1, result2];
+              } else {
+                result0 = null;
+                pos = pos1;
+              }
+            } else {
+              result0 = null;
+              pos = pos1;
+            }
+          } else {
+            result0 = null;
+            pos = pos1;
+          }
+          if (result0 !== null) {
+            result0 = (function(offset, d) {
+                  return { type: 'literal', value: strUnescape(d.join('')) };
+                })(pos0, result0[1]);
+          }
+          if (result0 === null) {
+            pos = pos0;
+          }
+        }
+        
+        cache[cacheKey] = {
+          nextPos: pos,
+          result:  result0
+        };
+        return result0;
+      }
+      
+      function parse_number() {
+        var cacheKey = "number@" + pos;
+        var cachedResult = cache[cacheKey];
+        if (cachedResult) {
+          pos = cachedResult.nextPos;
+          return cachedResult.result;
+        }
+        
+        var result0, result1, result2;
+        var pos0, pos1, pos2;
+        
+        pos0 = pos;
+        pos1 = pos;
+        pos2 = pos;
+        result0 = [];
+        if (/^[0-9]/.test(input.charAt(pos))) {
+          result1 = input.charAt(pos);
+          pos++;
+        } else {
+          result1 = null;
+          if (reportFailures === 0) {
+            matchFailed("[0-9]");
+          }
+        }
+        while (result1 !== null) {
+          result0.push(result1);
+          if (/^[0-9]/.test(input.charAt(pos))) {
+            result1 = input.charAt(pos);
+            pos++;
+          } else {
+            result1 = null;
+            if (reportFailures === 0) {
+              matchFailed("[0-9]");
+            }
+          }
+        }
+        if (result0 !== null) {
+          if (input.charCodeAt(pos) === 46) {
+            result1 = ".";
+            pos++;
+          } else {
+            result1 = null;
+            if (reportFailures === 0) {
+              matchFailed("\".\"");
+            }
+          }
+          if (result1 !== null) {
+            result0 = [result0, result1];
+          } else {
+            result0 = null;
+            pos = pos2;
+          }
+        } else {
+          result0 = null;
+          pos = pos2;
+        }
+        result0 = result0 !== null ? result0 : "";
+        if (result0 !== null) {
+          if (/^[0-9]/.test(input.charAt(pos))) {
+            result2 = input.charAt(pos);
+            pos++;
+          } else {
+            result2 = null;
+            if (reportFailures === 0) {
+              matchFailed("[0-9]");
+            }
+          }
+          if (result2 !== null) {
+            result1 = [];
+            while (result2 !== null) {
+              result1.push(result2);
+              if (/^[0-9]/.test(input.charAt(pos))) {
+                result2 = input.charAt(pos);
+                pos++;
+              } else {
+                result2 = null;
+                if (reportFailures === 0) {
+                  matchFailed("[0-9]");
+                }
+              }
+            }
+          } else {
+            result1 = null;
+          }
+          if (result1 !== null) {
+            result0 = [result0, result1];
+          } else {
+            result0 = null;
+            pos = pos1;
+          }
+        } else {
+          result0 = null;
+          pos = pos1;
+        }
+        if (result0 !== null) {
+          result0 = (function(offset, a, b) {
+                return { type: 'literal', value: parseFloat((a ? a.join('') : '') + b.join('')) };
+              })(pos0, result0[0], result0[1]);
+        }
+        if (result0 === null) {
+          pos = pos0;
+        }
+        
+        cache[cacheKey] = {
+          nextPos: pos,
+          result:  result0
+        };
+        return result0;
+      }
+      
+      function parse_path() {
+        var cacheKey = "path@" + pos;
+        var cachedResult = cache[cacheKey];
+        if (cachedResult) {
+          pos = cachedResult.nextPos;
+          return cachedResult.result;
+        }
+        
+        var result0;
+        var pos0;
+        
+        pos0 = pos;
+        result0 = parse_identifierName();
+        if (result0 !== null) {
+          result0 = (function(offset, i) { return { type: 'literal', value: i }; })(pos0, result0);
+        }
+        if (result0 === null) {
+          pos = pos0;
+        }
+        
+        cache[cacheKey] = {
+          nextPos: pos,
+          result:  result0
+        };
+        return result0;
+      }
+      
+      function parse_type() {
+        var cacheKey = "type@" + pos;
+        var cachedResult = cache[cacheKey];
+        if (cachedResult) {
+          pos = cachedResult.nextPos;
+          return cachedResult.result;
+        }
+        
+        var result0, result1, result2, result3, result4;
+        var pos0, pos1;
+        
+        pos0 = pos;
+        pos1 = pos;
+        if (input.substr(pos, 5) === "type(") {
+          result0 = "type(";
+          pos += 5;
+        } else {
+          result0 = null;
+          if (reportFailures === 0) {
+            matchFailed("\"type(\"");
+          }
+        }
+        if (result0 !== null) {
+          result1 = parse__();
+          if (result1 !== null) {
+            if (/^[^ )]/.test(input.charAt(pos))) {
+              result3 = input.charAt(pos);
+              pos++;
+            } else {
+              result3 = null;
+              if (reportFailures === 0) {
+                matchFailed("[^ )]");
+              }
+            }
+            if (result3 !== null) {
+              result2 = [];
+              while (result3 !== null) {
+                result2.push(result3);
+                if (/^[^ )]/.test(input.charAt(pos))) {
+                  result3 = input.charAt(pos);
+                  pos++;
+                } else {
+                  result3 = null;
+                  if (reportFailures === 0) {
+                    matchFailed("[^ )]");
+                  }
+                }
+              }
+            } else {
+              result2 = null;
+            }
+            if (result2 !== null) {
+              result3 = parse__();
+              if (result3 !== null) {
+                if (input.charCodeAt(pos) === 41) {
+                  result4 = ")";
+                  pos++;
+                } else {
+                  result4 = null;
+                  if (reportFailures === 0) {
+                    matchFailed("\")\"");
+                  }
+                }
+                if (result4 !== null) {
+                  result0 = [result0, result1, result2, result3, result4];
+                } else {
+                  result0 = null;
+                  pos = pos1;
+                }
+              } else {
+                result0 = null;
+                pos = pos1;
+              }
+            } else {
+              result0 = null;
+              pos = pos1;
+            }
+          } else {
+            result0 = null;
+            pos = pos1;
+          }
+        } else {
+          result0 = null;
+          pos = pos1;
+        }
+        if (result0 !== null) {
+          result0 = (function(offset, t) { return { type: 'type', value: t.join('') }; })(pos0, result0[2]);
+        }
+        if (result0 === null) {
+          pos = pos0;
+        }
+        
+        cache[cacheKey] = {
+          nextPos: pos,
+          result:  result0
+        };
+        return result0;
+      }
+      
+      function parse_regex() {
+        var cacheKey = "regex@" + pos;
+        var cachedResult = cache[cacheKey];
+        if (cachedResult) {
+          pos = cachedResult.nextPos;
+          return cachedResult.result;
+        }
+        
+        var result0, result1, result2;
+        var pos0, pos1;
+        
+        pos0 = pos;
+        pos1 = pos;
+        if (input.charCodeAt(pos) === 47) {
+          result0 = "/";
+          pos++;
+        } else {
+          result0 = null;
+          if (reportFailures === 0) {
+            matchFailed("\"/\"");
+          }
+        }
+        if (result0 !== null) {
+          if (/^[^\/]/.test(input.charAt(pos))) {
+            result2 = input.charAt(pos);
+            pos++;
+          } else {
+            result2 = null;
+            if (reportFailures === 0) {
+              matchFailed("[^\\/]");
+            }
+          }
+          if (result2 !== null) {
+            result1 = [];
+            while (result2 !== null) {
+              result1.push(result2);
+              if (/^[^\/]/.test(input.charAt(pos))) {
+                result2 = input.charAt(pos);
+                pos++;
+              } else {
+                result2 = null;
+                if (reportFailures === 0) {
+                  matchFailed("[^\\/]");
+                }
+              }
+            }
+          } else {
+            result1 = null;
+          }
+          if (result1 !== null) {
+            if (input.charCodeAt(pos) === 47) {
+              result2 = "/";
+              pos++;
+            } else {
+              result2 = null;
+              if (reportFailures === 0) {
+                matchFailed("\"/\"");
+              }
+            }
+            if (result2 !== null) {
+              result0 = [result0, result1, result2];
+            } else {
+              result0 = null;
+              pos = pos1;
+            }
+          } else {
+            result0 = null;
+            pos = pos1;
+          }
+        } else {
+          result0 = null;
+          pos = pos1;
+        }
+        if (result0 !== null) {
+          result0 = (function(offset, d) { return { type: 'regexp', value: new RegExp(d.join('')) }; })(pos0, result0[1]);
+        }
+        if (result0 === null) {
+          pos = pos0;
+        }
+        
+        cache[cacheKey] = {
+          nextPos: pos,
+          result:  result0
+        };
+        return result0;
+      }
+      
+      function parse_field() {
+        var cacheKey = "field@" + pos;
+        var cachedResult = cache[cacheKey];
+        if (cachedResult) {
+          pos = cachedResult.nextPos;
+          return cachedResult.result;
+        }
+        
+        var result0, result1, result2, result3, result4;
+        var pos0, pos1, pos2;
+        
+        pos0 = pos;
+        pos1 = pos;
+        if (input.charCodeAt(pos) === 46) {
+          result0 = ".";
+          pos++;
+        } else {
+          result0 = null;
+          if (reportFailures === 0) {
+            matchFailed("\".\"");
+          }
+        }
+        if (result0 !== null) {
+          result1 = parse_identifierName();
+          if (result1 !== null) {
+            result2 = [];
+            pos2 = pos;
+            if (input.charCodeAt(pos) === 46) {
+              result3 = ".";
+              pos++;
+            } else {
+              result3 = null;
+              if (reportFailures === 0) {
+                matchFailed("\".\"");
+              }
+            }
+            if (result3 !== null) {
+              result4 = parse_identifierName();
+              if (result4 !== null) {
+                result3 = [result3, result4];
+              } else {
+                result3 = null;
+                pos = pos2;
+              }
+            } else {
+              result3 = null;
+              pos = pos2;
+            }
+            while (result3 !== null) {
+              result2.push(result3);
+              pos2 = pos;
+              if (input.charCodeAt(pos) === 46) {
+                result3 = ".";
+                pos++;
+              } else {
+                result3 = null;
+                if (reportFailures === 0) {
+                  matchFailed("\".\"");
+                }
+              }
+              if (result3 !== null) {
+                result4 = parse_identifierName();
+                if (result4 !== null) {
+                  result3 = [result3, result4];
+                } else {
+                  result3 = null;
+                  pos = pos2;
+                }
+              } else {
+                result3 = null;
+                pos = pos2;
+              }
+            }
+            if (result2 !== null) {
+              result0 = [result0, result1, result2];
+            } else {
+              result0 = null;
+              pos = pos1;
+            }
+          } else {
+            result0 = null;
+            pos = pos1;
+          }
+        } else {
+          result0 = null;
+          pos = pos1;
+        }
+        if (result0 !== null) {
+          result0 = (function(offset, i, is) {
+          return { type: 'field', name: is.reduce(function(memo, p){ return memo + p[0] + p[1]; }, i)};
+        })(pos0, result0[1], result0[2]);
+        }
+        if (result0 === null) {
+          pos = pos0;
+        }
+        
+        cache[cacheKey] = {
+          nextPos: pos,
+          result:  result0
+        };
+        return result0;
+      }
+      
+      function parse_negation() {
+        var cacheKey = "negation@" + pos;
+        var cachedResult = cache[cacheKey];
+        if (cachedResult) {
+          pos = cachedResult.nextPos;
+          return cachedResult.result;
+        }
+        
+        var result0, result1, result2, result3, result4;
+        var pos0, pos1;
+        
+        pos0 = pos;
+        pos1 = pos;
+        if (input.substr(pos, 5) === ":not(") {
+          result0 = ":not(";
+          pos += 5;
+        } else {
+          result0 = null;
+          if (reportFailures === 0) {
+            matchFailed("\":not(\"");
+          }
+        }
+        if (result0 !== null) {
+          result1 = parse__();
+          if (result1 !== null) {
+            result2 = parse_selectors();
+            if (result2 !== null) {
+              result3 = parse__();
+              if (result3 !== null) {
+                if (input.charCodeAt(pos) === 41) {
+                  result4 = ")";
+                  pos++;
+                } else {
+                  result4 = null;
+                  if (reportFailures === 0) {
+                    matchFailed("\")\"");
+                  }
+                }
+                if (result4 !== null) {
+                  result0 = [result0, result1, result2, result3, result4];
+                } else {
+                  result0 = null;
+                  pos = pos1;
+                }
+              } else {
+                result0 = null;
+                pos = pos1;
+              }
+            } else {
+              result0 = null;
+              pos = pos1;
+            }
+          } else {
+            result0 = null;
+            pos = pos1;
+          }
+        } else {
+          result0 = null;
+          pos = pos1;
+        }
+        if (result0 !== null) {
+          result0 = (function(offset, ss) { return { type: 'not', selectors: ss }; })(pos0, result0[2]);
+        }
+        if (result0 === null) {
+          pos = pos0;
+        }
+        
+        cache[cacheKey] = {
+          nextPos: pos,
+          result:  result0
+        };
+        return result0;
+      }
+      
+      function parse_matches() {
+        var cacheKey = "matches@" + pos;
+        var cachedResult = cache[cacheKey];
+        if (cachedResult) {
+          pos = cachedResult.nextPos;
+          return cachedResult.result;
+        }
+        
+        var result0, result1, result2, result3, result4;
+        var pos0, pos1;
+        
+        pos0 = pos;
+        pos1 = pos;
+        if (input.substr(pos, 9) === ":matches(") {
+          result0 = ":matches(";
+          pos += 9;
+        } else {
+          result0 = null;
+          if (reportFailures === 0) {
+            matchFailed("\":matches(\"");
+          }
+        }
+        if (result0 !== null) {
+          result1 = parse__();
+          if (result1 !== null) {
+            result2 = parse_selectors();
+            if (result2 !== null) {
+              result3 = parse__();
+              if (result3 !== null) {
+                if (input.charCodeAt(pos) === 41) {
+                  result4 = ")";
+                  pos++;
+                } else {
+                  result4 = null;
+                  if (reportFailures === 0) {
+                    matchFailed("\")\"");
+                  }
+                }
+                if (result4 !== null) {
+                  result0 = [result0, result1, result2, result3, result4];
+                } else {
+                  result0 = null;
+                  pos = pos1;
+                }
+              } else {
+                result0 = null;
+                pos = pos1;
+              }
+            } else {
+              result0 = null;
+              pos = pos1;
+            }
+          } else {
+            result0 = null;
+            pos = pos1;
+          }
+        } else {
+          result0 = null;
+          pos = pos1;
+        }
+        if (result0 !== null) {
+          result0 = (function(offset, ss) { return { type: 'matches', selectors: ss }; })(pos0, result0[2]);
+        }
+        if (result0 === null) {
+          pos = pos0;
+        }
+        
+        cache[cacheKey] = {
+          nextPos: pos,
+          result:  result0
+        };
+        return result0;
+      }
+      
+      function parse_firstChild() {
+        var cacheKey = "firstChild@" + pos;
+        var cachedResult = cache[cacheKey];
+        if (cachedResult) {
+          pos = cachedResult.nextPos;
+          return cachedResult.result;
+        }
+        
+        var result0;
+        var pos0;
+        
+        pos0 = pos;
+        if (input.substr(pos, 12) === ":first-child") {
+          result0 = ":first-child";
+          pos += 12;
+        } else {
+          result0 = null;
+          if (reportFailures === 0) {
+            matchFailed("\":first-child\"");
+          }
+        }
+        if (result0 !== null) {
+          result0 = (function(offset) { return nth(1); })(pos0);
+        }
+        if (result0 === null) {
+          pos = pos0;
+        }
+        
+        cache[cacheKey] = {
+          nextPos: pos,
+          result:  result0
+        };
+        return result0;
+      }
+      
+      function parse_lastChild() {
+        var cacheKey = "lastChild@" + pos;
+        var cachedResult = cache[cacheKey];
+        if (cachedResult) {
+          pos = cachedResult.nextPos;
+          return cachedResult.result;
+        }
+        
+        var result0;
+        var pos0;
+        
+        pos0 = pos;
+        if (input.substr(pos, 11) === ":last-child") {
+          result0 = ":last-child";
+          pos += 11;
+        } else {
+          result0 = null;
+          if (reportFailures === 0) {
+            matchFailed("\":last-child\"");
+          }
+        }
+        if (result0 !== null) {
+          result0 = (function(offset) { return nthLast(1); })(pos0);
+        }
+        if (result0 === null) {
+          pos = pos0;
+        }
+        
+        cache[cacheKey] = {
+          nextPos: pos,
+          result:  result0
+        };
+        return result0;
+      }
+      
+      function parse_nthChild() {
+        var cacheKey = "nthChild@" + pos;
+        var cachedResult = cache[cacheKey];
+        if (cachedResult) {
+          pos = cachedResult.nextPos;
+          return cachedResult.result;
+        }
+        
+        var result0, result1, result2, result3, result4;
+        var pos0, pos1;
+        
+        pos0 = pos;
+        pos1 = pos;
+        if (input.substr(pos, 11) === ":nth-child(") {
+          result0 = ":nth-child(";
+          pos += 11;
+        } else {
+          result0 = null;
+          if (reportFailures === 0) {
+            matchFailed("\":nth-child(\"");
+          }
+        }
+        if (result0 !== null) {
+          result1 = parse__();
+          if (result1 !== null) {
+            if (/^[0-9]/.test(input.charAt(pos))) {
+              result3 = input.charAt(pos);
+              pos++;
+            } else {
+              result3 = null;
+              if (reportFailures === 0) {
+                matchFailed("[0-9]");
+              }
+            }
+            if (result3 !== null) {
+              result2 = [];
+              while (result3 !== null) {
+                result2.push(result3);
+                if (/^[0-9]/.test(input.charAt(pos))) {
+                  result3 = input.charAt(pos);
+                  pos++;
+                } else {
+                  result3 = null;
+                  if (reportFailures === 0) {
+                    matchFailed("[0-9]");
+                  }
+                }
+              }
+            } else {
+              result2 = null;
+            }
+            if (result2 !== null) {
+              result3 = parse__();
+              if (result3 !== null) {
+                if (input.charCodeAt(pos) === 41) {
+                  result4 = ")";
+                  pos++;
+                } else {
+                  result4 = null;
+                  if (reportFailures === 0) {
+                    matchFailed("\")\"");
+                  }
+                }
+                if (result4 !== null) {
+                  result0 = [result0, result1, result2, result3, result4];
+                } else {
+                  result0 = null;
+                  pos = pos1;
+                }
+              } else {
+                result0 = null;
+                pos = pos1;
+              }
+            } else {
+              result0 = null;
+              pos = pos1;
+            }
+          } else {
+            result0 = null;
+            pos = pos1;
+          }
+        } else {
+          result0 = null;
+          pos = pos1;
+        }
+        if (result0 !== null) {
+          result0 = (function(offset, n) { return nth(parseInt(n.join(''), 10)); })(pos0, result0[2]);
+        }
+        if (result0 === null) {
+          pos = pos0;
+        }
+        
+        cache[cacheKey] = {
+          nextPos: pos,
+          result:  result0
+        };
+        return result0;
+      }
+      
+      function parse_nthLastChild() {
+        var cacheKey = "nthLastChild@" + pos;
+        var cachedResult = cache[cacheKey];
+        if (cachedResult) {
+          pos = cachedResult.nextPos;
+          return cachedResult.result;
+        }
+        
+        var result0, result1, result2, result3, result4;
+        var pos0, pos1;
+        
+        pos0 = pos;
+        pos1 = pos;
+        if (input.substr(pos, 16) === ":nth-last-child(") {
+          result0 = ":nth-last-child(";
+          pos += 16;
+        } else {
+          result0 = null;
+          if (reportFailures === 0) {
+            matchFailed("\":nth-last-child(\"");
+          }
+        }
+        if (result0 !== null) {
+          result1 = parse__();
+          if (result1 !== null) {
+            if (/^[0-9]/.test(input.charAt(pos))) {
+              result3 = input.charAt(pos);
+              pos++;
+            } else {
+              result3 = null;
+              if (reportFailures === 0) {
+                matchFailed("[0-9]");
+              }
+            }
+            if (result3 !== null) {
+              result2 = [];
+              while (result3 !== null) {
+                result2.push(result3);
+                if (/^[0-9]/.test(input.charAt(pos))) {
+                  result3 = input.charAt(pos);
+                  pos++;
+                } else {
+                  result3 = null;
+                  if (reportFailures === 0) {
+                    matchFailed("[0-9]");
+                  }
+                }
+              }
+            } else {
+              result2 = null;
+            }
+            if (result2 !== null) {
+              result3 = parse__();
+              if (result3 !== null) {
+                if (input.charCodeAt(pos) === 41) {
+                  result4 = ")";
+                  pos++;
+                } else {
+                  result4 = null;
+                  if (reportFailures === 0) {
+                    matchFailed("\")\"");
+                  }
+                }
+                if (result4 !== null) {
+                  result0 = [result0, result1, result2, result3, result4];
+                } else {
+                  result0 = null;
+                  pos = pos1;
+                }
+              } else {
+                result0 = null;
+                pos = pos1;
+              }
+            } else {
+              result0 = null;
+              pos = pos1;
+            }
+          } else {
+            result0 = null;
+            pos = pos1;
+          }
+        } else {
+          result0 = null;
+          pos = pos1;
+        }
+        if (result0 !== null) {
+          result0 = (function(offset, n) { return nthLast(parseInt(n.join(''), 10)); })(pos0, result0[2]);
+        }
+        if (result0 === null) {
+          pos = pos0;
+        }
+        
+        cache[cacheKey] = {
+          nextPos: pos,
+          result:  result0
+        };
+        return result0;
+      }
+      
+      function parse_class() {
+        var cacheKey = "class@" + pos;
+        var cachedResult = cache[cacheKey];
+        if (cachedResult) {
+          pos = cachedResult.nextPos;
+          return cachedResult.result;
+        }
+        
+        var result0, result1;
+        var pos0, pos1;
+        
+        pos0 = pos;
+        pos1 = pos;
+        if (input.charCodeAt(pos) === 58) {
+          result0 = ":";
+          pos++;
+        } else {
+          result0 = null;
+          if (reportFailures === 0) {
+            matchFailed("\":\"");
+          }
+        }
+        if (result0 !== null) {
+          if (input.substr(pos, 9).toLowerCase() === "statement") {
+            result1 = input.substr(pos, 9);
+            pos += 9;
+          } else {
+            result1 = null;
+            if (reportFailures === 0) {
+              matchFailed("\"statement\"");
+            }
+          }
+          if (result1 === null) {
+            if (input.substr(pos, 10).toLowerCase() === "expression") {
+              result1 = input.substr(pos, 10);
+              pos += 10;
+            } else {
+              result1 = null;
+              if (reportFailures === 0) {
+                matchFailed("\"expression\"");
+              }
+            }
+            if (result1 === null) {
+              if (input.substr(pos, 11).toLowerCase() === "declaration") {
+                result1 = input.substr(pos, 11);
+                pos += 11;
+              } else {
+                result1 = null;
+                if (reportFailures === 0) {
+                  matchFailed("\"declaration\"");
+                }
+              }
+              if (result1 === null) {
+                if (input.substr(pos, 8).toLowerCase() === "function") {
+                  result1 = input.substr(pos, 8);
+                  pos += 8;
+                } else {
+                  result1 = null;
+                  if (reportFailures === 0) {
+                    matchFailed("\"function\"");
+                  }
+                }
+                if (result1 === null) {
+                  if (input.substr(pos, 7).toLowerCase() === "pattern") {
+                    result1 = input.substr(pos, 7);
+                    pos += 7;
+                  } else {
+                    result1 = null;
+                    if (reportFailures === 0) {
+                      matchFailed("\"pattern\"");
+                    }
+                  }
+                }
+              }
+            }
+          }
+          if (result1 !== null) {
+            result0 = [result0, result1];
+          } else {
+            result0 = null;
+            pos = pos1;
+          }
+        } else {
+          result0 = null;
+          pos = pos1;
+        }
+        if (result0 !== null) {
+          result0 = (function(offset, c) {
+          return { type: 'class', name: c };
+        })(pos0, result0[1]);
+        }
+        if (result0 === null) {
+          pos = pos0;
+        }
+        
+        cache[cacheKey] = {
+          nextPos: pos,
+          result:  result0
+        };
+        return result0;
+      }
+      
+      
+      function cleanupExpected(expected) {
+        expected.sort();
+        
+        var lastExpected = null;
+        var cleanExpected = [];
+        for (var i = 0; i < expected.length; i++) {
+          if (expected[i] !== lastExpected) {
+            cleanExpected.push(expected[i]);
+            lastExpected = expected[i];
+          }
+        }
+        return cleanExpected;
+      }
+      
+      function computeErrorPosition() {
+        /*
+         * The first idea was to use |String.split| to break the input up to the
+         * error position along newlines and derive the line and column from
+         * there. However IE's |split| implementation is so broken that it was
+         * enough to prevent it.
+         */
+        
+        var line = 1;
+        var column = 1;
+        var seenCR = false;
+        
+        for (var i = 0; i < Math.max(pos, rightmostFailuresPos); i++) {
+          var ch = input.charAt(i);
+          if (ch === "\n") {
+            if (!seenCR) { line++; }
+            column = 1;
+            seenCR = false;
+          } else if (ch === "\r" || ch === "\u2028" || ch === "\u2029") {
+            line++;
+            column = 1;
+            seenCR = true;
+          } else {
+            column++;
+            seenCR = false;
+          }
+        }
+        
+        return { line: line, column: column };
+      }
+      
+      
+        function nth(n) { return { type: 'nth-child', index: { type: 'literal', value: n } }; }
+        function nthLast(n) { return { type: 'nth-last-child', index: { type: 'literal', value: n } }; }
+        function strUnescape(s) {
+          return s.replace(/\\(.)/g, function(match, ch) {
+            switch(ch) {
+              case 'a': return '\a';
+              case 'b': return '\b';
+              case 'f': return '\f';
+              case 'n': return '\n';
+              case 'r': return '\r';
+              case 't': return '\t';
+              case 'v': return '\v';
+              default: return ch;
+            }
+          });
+        }
+      
+      
+      var result = parseFunctions[startRule]();
+      
+      /*
+       * The parser is now in one of the following three states:
+       *
+       * 1. The parser successfully parsed the whole input.
+       *
+       *    - |result !== null|
+       *    - |pos === input.length|
+       *    - |rightmostFailuresExpected| may or may not contain something
+       *
+       * 2. The parser successfully parsed only a part of the input.
+       *
+       *    - |result !== null|
+       *    - |pos < input.length|
+       *    - |rightmostFailuresExpected| may or may not contain something
+       *
+       * 3. The parser did not successfully parse any part of the input.
+       *
+       *   - |result === null|
+       *   - |pos === 0|
+       *   - |rightmostFailuresExpected| contains at least one failure
+       *
+       * All code following this comment (including called functions) must
+       * handle these states.
+       */
+      if (result === null || pos !== input.length) {
+        var offset = Math.max(pos, rightmostFailuresPos);
+        var found = offset < input.length ? input.charAt(offset) : null;
+        var errorPosition = computeErrorPosition();
+        
+        throw new this.SyntaxError(
+          cleanupExpected(rightmostFailuresExpected),
+          found,
+          offset,
+          errorPosition.line,
+          errorPosition.column
+        );
+      }
+      
+      return result;
+    },
+    
+    /* Returns the parser source code. */
+    toSource: function() { return this._source; }
+  };
+  
+  /* Thrown when a parser encounters a syntax error. */
+  
+  result.SyntaxError = function(expected, found, offset, line, column) {
+    function buildMessage(expected, found) {
+      var expectedHumanized, foundHumanized;
+      
+      switch (expected.length) {
+        case 0:
+          expectedHumanized = "end of input";
+          break;
+        case 1:
+          expectedHumanized = expected[0];
+          break;
+        default:
+          expectedHumanized = expected.slice(0, expected.length - 1).join(", ")
+            + " or "
+            + expected[expected.length - 1];
+      }
+      
+      foundHumanized = found ? quote(found) : "end of input";
+      
+      return "Expected " + expectedHumanized + " but " + foundHumanized + " found.";
+    }
+    
+    this.name = "SyntaxError";
+    this.expected = expected;
+    this.found = found;
+    this.message = buildMessage(expected, found);
+    this.offset = offset;
+    this.line = line;
+    this.column = column;
+  };
+  
+  result.SyntaxError.prototype = Error.prototype;
+  
+  return result;
+})();
+if (typeof define === "function" && define.amd) { define(function(){ return result; }); } else if (typeof module !== "undefined" && module.exports) { module.exports = result; } else { this.esquery = result; }
+
+},{}],133:[function(require,module,exports){
 /*
   Copyright (C) 2012-2013 Yusuke Suzuki <utatane.tea@gmail.com>
   Copyright (C) 2012 Ariya Hidayat <ariya.hidayat@gmail.com>
@@ -23365,7 +26283,7 @@ module.exports={
 }(exports));
 /* vim: set sw=4 ts=4 et tw=80 : */
 
-},{"./package.json":132}],132:[function(require,module,exports){
+},{"./package.json":134}],134:[function(require,module,exports){
 module.exports={
   "name": "estraverse",
   "description": "ECMAScript JS AST traversal functions",
@@ -23437,7 +26355,7 @@ module.exports={
   "_resolved": "https://registry.npmjs.org/estraverse/-/estraverse-4.2.0.tgz"
 }
 
-},{}],133:[function(require,module,exports){
+},{}],135:[function(require,module,exports){
 /*
   Copyright (C) 2013 Yusuke Suzuki <utatane.tea@gmail.com>
 
@@ -23583,7 +26501,7 @@ module.exports={
 }());
 /* vim: set sw=4 ts=4 et tw=80 : */
 
-},{}],134:[function(require,module,exports){
+},{}],136:[function(require,module,exports){
 /*
   Copyright (C) 2013-2014 Yusuke Suzuki <utatane.tea@gmail.com>
   Copyright (C) 2014 Ivan Nikulin <ifaaan@gmail.com>
@@ -23720,7 +26638,7 @@ module.exports={
 }());
 /* vim: set sw=4 ts=4 et tw=80 : */
 
-},{}],135:[function(require,module,exports){
+},{}],137:[function(require,module,exports){
 /*
   Copyright (C) 2013 Yusuke Suzuki <utatane.tea@gmail.com>
 
@@ -23887,7 +26805,7 @@ module.exports={
 }());
 /* vim: set sw=4 ts=4 et tw=80 : */
 
-},{"./code":134}],136:[function(require,module,exports){
+},{"./code":136}],138:[function(require,module,exports){
 /*
   Copyright (C) 2013 Yusuke Suzuki <utatane.tea@gmail.com>
 
@@ -23922,7 +26840,7 @@ module.exports={
 }());
 /* vim: set sw=4 ts=4 et tw=80 : */
 
-},{"./ast":133,"./code":134,"./keyword":135}],137:[function(require,module,exports){
+},{"./ast":135,"./code":136,"./keyword":137}],139:[function(require,module,exports){
 module.exports={
 	"builtin": {
 		"Array": false,
@@ -25214,10 +28132,10 @@ module.exports={
 	}
 }
 
-},{}],138:[function(require,module,exports){
+},{}],140:[function(require,module,exports){
 module.exports = require('./globals.json');
 
-},{"./globals.json":137}],139:[function(require,module,exports){
+},{"./globals.json":139}],141:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -25645,7 +28563,7 @@ if (process.env.IGNORE_TEST_WIN32 || process.platform === 'win32') {
 }
 
 }).call(this,require('_process'))
-},{"_process":7}],140:[function(require,module,exports){
+},{"_process":7}],142:[function(require,module,exports){
 exports['date-time'] = /^\d{4}-(?:0[0-9]{1}|1[0-2]{1})-[0-9]{2}[tT ]\d{2}:\d{2}:\d{2}(\.\d+)?([zZ]|[+-]\d{2}:\d{2})$/
 exports['date'] = /^\d{4}-(?:0[0-9]{1}|1[0-2]{1})-[0-9]{2}$/
 exports['time'] = /^\d{2}:\d{2}:\d{2}$/
@@ -25661,7 +28579,7 @@ exports['style'] = /\s*(.+?):\s*([^;]+);?/g
 exports['phone'] = /^\+(?:[0-9] ?){6,14}[0-9]$/
 exports['utc-millisec'] = /^[0-9]{1,15}\.?[0-9]{0,15}$/
 
-},{}],141:[function(require,module,exports){
+},{}],143:[function(require,module,exports){
 var genobj = require('generate-object-property')
 var genfun = require('generate-function')
 var jsonpointer = require('jsonpointer')
@@ -26253,7 +29171,7 @@ module.exports.filter = function(schema, opts) {
   }
 }
 
-},{"./formats":140,"generate-function":142,"generate-object-property":143,"jsonpointer":145,"xtend":146}],142:[function(require,module,exports){
+},{"./formats":142,"generate-function":144,"generate-object-property":145,"jsonpointer":147,"xtend":148}],144:[function(require,module,exports){
 var util = require('util')
 
 var INDENT_START = /[\{\[]/
@@ -26316,7 +29234,7 @@ module.exports = function() {
   return line
 }
 
-},{"util":10}],143:[function(require,module,exports){
+},{"util":10}],145:[function(require,module,exports){
 var isProperty = require('is-property')
 
 var gen = function(obj, prop) {
@@ -26330,13 +29248,13 @@ gen.property = function (prop) {
 
 module.exports = gen
 
-},{"is-property":144}],144:[function(require,module,exports){
+},{"is-property":146}],146:[function(require,module,exports){
 "use strict"
 function isProperty(str) {
   return /^[$A-Z\_a-z\xaa\xb5\xba\xc0-\xd6\xd8-\xf6\xf8-\u02c1\u02c6-\u02d1\u02e0-\u02e4\u02ec\u02ee\u0370-\u0374\u0376\u0377\u037a-\u037d\u0386\u0388-\u038a\u038c\u038e-\u03a1\u03a3-\u03f5\u03f7-\u0481\u048a-\u0527\u0531-\u0556\u0559\u0561-\u0587\u05d0-\u05ea\u05f0-\u05f2\u0620-\u064a\u066e\u066f\u0671-\u06d3\u06d5\u06e5\u06e6\u06ee\u06ef\u06fa-\u06fc\u06ff\u0710\u0712-\u072f\u074d-\u07a5\u07b1\u07ca-\u07ea\u07f4\u07f5\u07fa\u0800-\u0815\u081a\u0824\u0828\u0840-\u0858\u08a0\u08a2-\u08ac\u0904-\u0939\u093d\u0950\u0958-\u0961\u0971-\u0977\u0979-\u097f\u0985-\u098c\u098f\u0990\u0993-\u09a8\u09aa-\u09b0\u09b2\u09b6-\u09b9\u09bd\u09ce\u09dc\u09dd\u09df-\u09e1\u09f0\u09f1\u0a05-\u0a0a\u0a0f\u0a10\u0a13-\u0a28\u0a2a-\u0a30\u0a32\u0a33\u0a35\u0a36\u0a38\u0a39\u0a59-\u0a5c\u0a5e\u0a72-\u0a74\u0a85-\u0a8d\u0a8f-\u0a91\u0a93-\u0aa8\u0aaa-\u0ab0\u0ab2\u0ab3\u0ab5-\u0ab9\u0abd\u0ad0\u0ae0\u0ae1\u0b05-\u0b0c\u0b0f\u0b10\u0b13-\u0b28\u0b2a-\u0b30\u0b32\u0b33\u0b35-\u0b39\u0b3d\u0b5c\u0b5d\u0b5f-\u0b61\u0b71\u0b83\u0b85-\u0b8a\u0b8e-\u0b90\u0b92-\u0b95\u0b99\u0b9a\u0b9c\u0b9e\u0b9f\u0ba3\u0ba4\u0ba8-\u0baa\u0bae-\u0bb9\u0bd0\u0c05-\u0c0c\u0c0e-\u0c10\u0c12-\u0c28\u0c2a-\u0c33\u0c35-\u0c39\u0c3d\u0c58\u0c59\u0c60\u0c61\u0c85-\u0c8c\u0c8e-\u0c90\u0c92-\u0ca8\u0caa-\u0cb3\u0cb5-\u0cb9\u0cbd\u0cde\u0ce0\u0ce1\u0cf1\u0cf2\u0d05-\u0d0c\u0d0e-\u0d10\u0d12-\u0d3a\u0d3d\u0d4e\u0d60\u0d61\u0d7a-\u0d7f\u0d85-\u0d96\u0d9a-\u0db1\u0db3-\u0dbb\u0dbd\u0dc0-\u0dc6\u0e01-\u0e30\u0e32\u0e33\u0e40-\u0e46\u0e81\u0e82\u0e84\u0e87\u0e88\u0e8a\u0e8d\u0e94-\u0e97\u0e99-\u0e9f\u0ea1-\u0ea3\u0ea5\u0ea7\u0eaa\u0eab\u0ead-\u0eb0\u0eb2\u0eb3\u0ebd\u0ec0-\u0ec4\u0ec6\u0edc-\u0edf\u0f00\u0f40-\u0f47\u0f49-\u0f6c\u0f88-\u0f8c\u1000-\u102a\u103f\u1050-\u1055\u105a-\u105d\u1061\u1065\u1066\u106e-\u1070\u1075-\u1081\u108e\u10a0-\u10c5\u10c7\u10cd\u10d0-\u10fa\u10fc-\u1248\u124a-\u124d\u1250-\u1256\u1258\u125a-\u125d\u1260-\u1288\u128a-\u128d\u1290-\u12b0\u12b2-\u12b5\u12b8-\u12be\u12c0\u12c2-\u12c5\u12c8-\u12d6\u12d8-\u1310\u1312-\u1315\u1318-\u135a\u1380-\u138f\u13a0-\u13f4\u1401-\u166c\u166f-\u167f\u1681-\u169a\u16a0-\u16ea\u16ee-\u16f0\u1700-\u170c\u170e-\u1711\u1720-\u1731\u1740-\u1751\u1760-\u176c\u176e-\u1770\u1780-\u17b3\u17d7\u17dc\u1820-\u1877\u1880-\u18a8\u18aa\u18b0-\u18f5\u1900-\u191c\u1950-\u196d\u1970-\u1974\u1980-\u19ab\u19c1-\u19c7\u1a00-\u1a16\u1a20-\u1a54\u1aa7\u1b05-\u1b33\u1b45-\u1b4b\u1b83-\u1ba0\u1bae\u1baf\u1bba-\u1be5\u1c00-\u1c23\u1c4d-\u1c4f\u1c5a-\u1c7d\u1ce9-\u1cec\u1cee-\u1cf1\u1cf5\u1cf6\u1d00-\u1dbf\u1e00-\u1f15\u1f18-\u1f1d\u1f20-\u1f45\u1f48-\u1f4d\u1f50-\u1f57\u1f59\u1f5b\u1f5d\u1f5f-\u1f7d\u1f80-\u1fb4\u1fb6-\u1fbc\u1fbe\u1fc2-\u1fc4\u1fc6-\u1fcc\u1fd0-\u1fd3\u1fd6-\u1fdb\u1fe0-\u1fec\u1ff2-\u1ff4\u1ff6-\u1ffc\u2071\u207f\u2090-\u209c\u2102\u2107\u210a-\u2113\u2115\u2119-\u211d\u2124\u2126\u2128\u212a-\u212d\u212f-\u2139\u213c-\u213f\u2145-\u2149\u214e\u2160-\u2188\u2c00-\u2c2e\u2c30-\u2c5e\u2c60-\u2ce4\u2ceb-\u2cee\u2cf2\u2cf3\u2d00-\u2d25\u2d27\u2d2d\u2d30-\u2d67\u2d6f\u2d80-\u2d96\u2da0-\u2da6\u2da8-\u2dae\u2db0-\u2db6\u2db8-\u2dbe\u2dc0-\u2dc6\u2dc8-\u2dce\u2dd0-\u2dd6\u2dd8-\u2dde\u2e2f\u3005-\u3007\u3021-\u3029\u3031-\u3035\u3038-\u303c\u3041-\u3096\u309d-\u309f\u30a1-\u30fa\u30fc-\u30ff\u3105-\u312d\u3131-\u318e\u31a0-\u31ba\u31f0-\u31ff\u3400-\u4db5\u4e00-\u9fcc\ua000-\ua48c\ua4d0-\ua4fd\ua500-\ua60c\ua610-\ua61f\ua62a\ua62b\ua640-\ua66e\ua67f-\ua697\ua6a0-\ua6ef\ua717-\ua71f\ua722-\ua788\ua78b-\ua78e\ua790-\ua793\ua7a0-\ua7aa\ua7f8-\ua801\ua803-\ua805\ua807-\ua80a\ua80c-\ua822\ua840-\ua873\ua882-\ua8b3\ua8f2-\ua8f7\ua8fb\ua90a-\ua925\ua930-\ua946\ua960-\ua97c\ua984-\ua9b2\ua9cf\uaa00-\uaa28\uaa40-\uaa42\uaa44-\uaa4b\uaa60-\uaa76\uaa7a\uaa80-\uaaaf\uaab1\uaab5\uaab6\uaab9-\uaabd\uaac0\uaac2\uaadb-\uaadd\uaae0-\uaaea\uaaf2-\uaaf4\uab01-\uab06\uab09-\uab0e\uab11-\uab16\uab20-\uab26\uab28-\uab2e\uabc0-\uabe2\uac00-\ud7a3\ud7b0-\ud7c6\ud7cb-\ud7fb\uf900-\ufa6d\ufa70-\ufad9\ufb00-\ufb06\ufb13-\ufb17\ufb1d\ufb1f-\ufb28\ufb2a-\ufb36\ufb38-\ufb3c\ufb3e\ufb40\ufb41\ufb43\ufb44\ufb46-\ufbb1\ufbd3-\ufd3d\ufd50-\ufd8f\ufd92-\ufdc7\ufdf0-\ufdfb\ufe70-\ufe74\ufe76-\ufefc\uff21-\uff3a\uff41-\uff5a\uff66-\uffbe\uffc2-\uffc7\uffca-\uffcf\uffd2-\uffd7\uffda-\uffdc][$A-Z\_a-z\xaa\xb5\xba\xc0-\xd6\xd8-\xf6\xf8-\u02c1\u02c6-\u02d1\u02e0-\u02e4\u02ec\u02ee\u0370-\u0374\u0376\u0377\u037a-\u037d\u0386\u0388-\u038a\u038c\u038e-\u03a1\u03a3-\u03f5\u03f7-\u0481\u048a-\u0527\u0531-\u0556\u0559\u0561-\u0587\u05d0-\u05ea\u05f0-\u05f2\u0620-\u064a\u066e\u066f\u0671-\u06d3\u06d5\u06e5\u06e6\u06ee\u06ef\u06fa-\u06fc\u06ff\u0710\u0712-\u072f\u074d-\u07a5\u07b1\u07ca-\u07ea\u07f4\u07f5\u07fa\u0800-\u0815\u081a\u0824\u0828\u0840-\u0858\u08a0\u08a2-\u08ac\u0904-\u0939\u093d\u0950\u0958-\u0961\u0971-\u0977\u0979-\u097f\u0985-\u098c\u098f\u0990\u0993-\u09a8\u09aa-\u09b0\u09b2\u09b6-\u09b9\u09bd\u09ce\u09dc\u09dd\u09df-\u09e1\u09f0\u09f1\u0a05-\u0a0a\u0a0f\u0a10\u0a13-\u0a28\u0a2a-\u0a30\u0a32\u0a33\u0a35\u0a36\u0a38\u0a39\u0a59-\u0a5c\u0a5e\u0a72-\u0a74\u0a85-\u0a8d\u0a8f-\u0a91\u0a93-\u0aa8\u0aaa-\u0ab0\u0ab2\u0ab3\u0ab5-\u0ab9\u0abd\u0ad0\u0ae0\u0ae1\u0b05-\u0b0c\u0b0f\u0b10\u0b13-\u0b28\u0b2a-\u0b30\u0b32\u0b33\u0b35-\u0b39\u0b3d\u0b5c\u0b5d\u0b5f-\u0b61\u0b71\u0b83\u0b85-\u0b8a\u0b8e-\u0b90\u0b92-\u0b95\u0b99\u0b9a\u0b9c\u0b9e\u0b9f\u0ba3\u0ba4\u0ba8-\u0baa\u0bae-\u0bb9\u0bd0\u0c05-\u0c0c\u0c0e-\u0c10\u0c12-\u0c28\u0c2a-\u0c33\u0c35-\u0c39\u0c3d\u0c58\u0c59\u0c60\u0c61\u0c85-\u0c8c\u0c8e-\u0c90\u0c92-\u0ca8\u0caa-\u0cb3\u0cb5-\u0cb9\u0cbd\u0cde\u0ce0\u0ce1\u0cf1\u0cf2\u0d05-\u0d0c\u0d0e-\u0d10\u0d12-\u0d3a\u0d3d\u0d4e\u0d60\u0d61\u0d7a-\u0d7f\u0d85-\u0d96\u0d9a-\u0db1\u0db3-\u0dbb\u0dbd\u0dc0-\u0dc6\u0e01-\u0e30\u0e32\u0e33\u0e40-\u0e46\u0e81\u0e82\u0e84\u0e87\u0e88\u0e8a\u0e8d\u0e94-\u0e97\u0e99-\u0e9f\u0ea1-\u0ea3\u0ea5\u0ea7\u0eaa\u0eab\u0ead-\u0eb0\u0eb2\u0eb3\u0ebd\u0ec0-\u0ec4\u0ec6\u0edc-\u0edf\u0f00\u0f40-\u0f47\u0f49-\u0f6c\u0f88-\u0f8c\u1000-\u102a\u103f\u1050-\u1055\u105a-\u105d\u1061\u1065\u1066\u106e-\u1070\u1075-\u1081\u108e\u10a0-\u10c5\u10c7\u10cd\u10d0-\u10fa\u10fc-\u1248\u124a-\u124d\u1250-\u1256\u1258\u125a-\u125d\u1260-\u1288\u128a-\u128d\u1290-\u12b0\u12b2-\u12b5\u12b8-\u12be\u12c0\u12c2-\u12c5\u12c8-\u12d6\u12d8-\u1310\u1312-\u1315\u1318-\u135a\u1380-\u138f\u13a0-\u13f4\u1401-\u166c\u166f-\u167f\u1681-\u169a\u16a0-\u16ea\u16ee-\u16f0\u1700-\u170c\u170e-\u1711\u1720-\u1731\u1740-\u1751\u1760-\u176c\u176e-\u1770\u1780-\u17b3\u17d7\u17dc\u1820-\u1877\u1880-\u18a8\u18aa\u18b0-\u18f5\u1900-\u191c\u1950-\u196d\u1970-\u1974\u1980-\u19ab\u19c1-\u19c7\u1a00-\u1a16\u1a20-\u1a54\u1aa7\u1b05-\u1b33\u1b45-\u1b4b\u1b83-\u1ba0\u1bae\u1baf\u1bba-\u1be5\u1c00-\u1c23\u1c4d-\u1c4f\u1c5a-\u1c7d\u1ce9-\u1cec\u1cee-\u1cf1\u1cf5\u1cf6\u1d00-\u1dbf\u1e00-\u1f15\u1f18-\u1f1d\u1f20-\u1f45\u1f48-\u1f4d\u1f50-\u1f57\u1f59\u1f5b\u1f5d\u1f5f-\u1f7d\u1f80-\u1fb4\u1fb6-\u1fbc\u1fbe\u1fc2-\u1fc4\u1fc6-\u1fcc\u1fd0-\u1fd3\u1fd6-\u1fdb\u1fe0-\u1fec\u1ff2-\u1ff4\u1ff6-\u1ffc\u2071\u207f\u2090-\u209c\u2102\u2107\u210a-\u2113\u2115\u2119-\u211d\u2124\u2126\u2128\u212a-\u212d\u212f-\u2139\u213c-\u213f\u2145-\u2149\u214e\u2160-\u2188\u2c00-\u2c2e\u2c30-\u2c5e\u2c60-\u2ce4\u2ceb-\u2cee\u2cf2\u2cf3\u2d00-\u2d25\u2d27\u2d2d\u2d30-\u2d67\u2d6f\u2d80-\u2d96\u2da0-\u2da6\u2da8-\u2dae\u2db0-\u2db6\u2db8-\u2dbe\u2dc0-\u2dc6\u2dc8-\u2dce\u2dd0-\u2dd6\u2dd8-\u2dde\u2e2f\u3005-\u3007\u3021-\u3029\u3031-\u3035\u3038-\u303c\u3041-\u3096\u309d-\u309f\u30a1-\u30fa\u30fc-\u30ff\u3105-\u312d\u3131-\u318e\u31a0-\u31ba\u31f0-\u31ff\u3400-\u4db5\u4e00-\u9fcc\ua000-\ua48c\ua4d0-\ua4fd\ua500-\ua60c\ua610-\ua61f\ua62a\ua62b\ua640-\ua66e\ua67f-\ua697\ua6a0-\ua6ef\ua717-\ua71f\ua722-\ua788\ua78b-\ua78e\ua790-\ua793\ua7a0-\ua7aa\ua7f8-\ua801\ua803-\ua805\ua807-\ua80a\ua80c-\ua822\ua840-\ua873\ua882-\ua8b3\ua8f2-\ua8f7\ua8fb\ua90a-\ua925\ua930-\ua946\ua960-\ua97c\ua984-\ua9b2\ua9cf\uaa00-\uaa28\uaa40-\uaa42\uaa44-\uaa4b\uaa60-\uaa76\uaa7a\uaa80-\uaaaf\uaab1\uaab5\uaab6\uaab9-\uaabd\uaac0\uaac2\uaadb-\uaadd\uaae0-\uaaea\uaaf2-\uaaf4\uab01-\uab06\uab09-\uab0e\uab11-\uab16\uab20-\uab26\uab28-\uab2e\uabc0-\uabe2\uac00-\ud7a3\ud7b0-\ud7c6\ud7cb-\ud7fb\uf900-\ufa6d\ufa70-\ufad9\ufb00-\ufb06\ufb13-\ufb17\ufb1d\ufb1f-\ufb28\ufb2a-\ufb36\ufb38-\ufb3c\ufb3e\ufb40\ufb41\ufb43\ufb44\ufb46-\ufbb1\ufbd3-\ufd3d\ufd50-\ufd8f\ufd92-\ufdc7\ufdf0-\ufdfb\ufe70-\ufe74\ufe76-\ufefc\uff21-\uff3a\uff41-\uff5a\uff66-\uffbe\uffc2-\uffc7\uffca-\uffcf\uffd2-\uffd7\uffda-\uffdc0-9\u0300-\u036f\u0483-\u0487\u0591-\u05bd\u05bf\u05c1\u05c2\u05c4\u05c5\u05c7\u0610-\u061a\u064b-\u0669\u0670\u06d6-\u06dc\u06df-\u06e4\u06e7\u06e8\u06ea-\u06ed\u06f0-\u06f9\u0711\u0730-\u074a\u07a6-\u07b0\u07c0-\u07c9\u07eb-\u07f3\u0816-\u0819\u081b-\u0823\u0825-\u0827\u0829-\u082d\u0859-\u085b\u08e4-\u08fe\u0900-\u0903\u093a-\u093c\u093e-\u094f\u0951-\u0957\u0962\u0963\u0966-\u096f\u0981-\u0983\u09bc\u09be-\u09c4\u09c7\u09c8\u09cb-\u09cd\u09d7\u09e2\u09e3\u09e6-\u09ef\u0a01-\u0a03\u0a3c\u0a3e-\u0a42\u0a47\u0a48\u0a4b-\u0a4d\u0a51\u0a66-\u0a71\u0a75\u0a81-\u0a83\u0abc\u0abe-\u0ac5\u0ac7-\u0ac9\u0acb-\u0acd\u0ae2\u0ae3\u0ae6-\u0aef\u0b01-\u0b03\u0b3c\u0b3e-\u0b44\u0b47\u0b48\u0b4b-\u0b4d\u0b56\u0b57\u0b62\u0b63\u0b66-\u0b6f\u0b82\u0bbe-\u0bc2\u0bc6-\u0bc8\u0bca-\u0bcd\u0bd7\u0be6-\u0bef\u0c01-\u0c03\u0c3e-\u0c44\u0c46-\u0c48\u0c4a-\u0c4d\u0c55\u0c56\u0c62\u0c63\u0c66-\u0c6f\u0c82\u0c83\u0cbc\u0cbe-\u0cc4\u0cc6-\u0cc8\u0cca-\u0ccd\u0cd5\u0cd6\u0ce2\u0ce3\u0ce6-\u0cef\u0d02\u0d03\u0d3e-\u0d44\u0d46-\u0d48\u0d4a-\u0d4d\u0d57\u0d62\u0d63\u0d66-\u0d6f\u0d82\u0d83\u0dca\u0dcf-\u0dd4\u0dd6\u0dd8-\u0ddf\u0df2\u0df3\u0e31\u0e34-\u0e3a\u0e47-\u0e4e\u0e50-\u0e59\u0eb1\u0eb4-\u0eb9\u0ebb\u0ebc\u0ec8-\u0ecd\u0ed0-\u0ed9\u0f18\u0f19\u0f20-\u0f29\u0f35\u0f37\u0f39\u0f3e\u0f3f\u0f71-\u0f84\u0f86\u0f87\u0f8d-\u0f97\u0f99-\u0fbc\u0fc6\u102b-\u103e\u1040-\u1049\u1056-\u1059\u105e-\u1060\u1062-\u1064\u1067-\u106d\u1071-\u1074\u1082-\u108d\u108f-\u109d\u135d-\u135f\u1712-\u1714\u1732-\u1734\u1752\u1753\u1772\u1773\u17b4-\u17d3\u17dd\u17e0-\u17e9\u180b-\u180d\u1810-\u1819\u18a9\u1920-\u192b\u1930-\u193b\u1946-\u194f\u19b0-\u19c0\u19c8\u19c9\u19d0-\u19d9\u1a17-\u1a1b\u1a55-\u1a5e\u1a60-\u1a7c\u1a7f-\u1a89\u1a90-\u1a99\u1b00-\u1b04\u1b34-\u1b44\u1b50-\u1b59\u1b6b-\u1b73\u1b80-\u1b82\u1ba1-\u1bad\u1bb0-\u1bb9\u1be6-\u1bf3\u1c24-\u1c37\u1c40-\u1c49\u1c50-\u1c59\u1cd0-\u1cd2\u1cd4-\u1ce8\u1ced\u1cf2-\u1cf4\u1dc0-\u1de6\u1dfc-\u1dff\u200c\u200d\u203f\u2040\u2054\u20d0-\u20dc\u20e1\u20e5-\u20f0\u2cef-\u2cf1\u2d7f\u2de0-\u2dff\u302a-\u302f\u3099\u309a\ua620-\ua629\ua66f\ua674-\ua67d\ua69f\ua6f0\ua6f1\ua802\ua806\ua80b\ua823-\ua827\ua880\ua881\ua8b4-\ua8c4\ua8d0-\ua8d9\ua8e0-\ua8f1\ua900-\ua909\ua926-\ua92d\ua947-\ua953\ua980-\ua983\ua9b3-\ua9c0\ua9d0-\ua9d9\uaa29-\uaa36\uaa43\uaa4c\uaa4d\uaa50-\uaa59\uaa7b\uaab0\uaab2-\uaab4\uaab7\uaab8\uaabe\uaabf\uaac1\uaaeb-\uaaef\uaaf5\uaaf6\uabe3-\uabea\uabec\uabed\uabf0-\uabf9\ufb1e\ufe00-\ufe0f\ufe20-\ufe26\ufe33\ufe34\ufe4d-\ufe4f\uff10-\uff19\uff3f]*$/.test(str)
 }
 module.exports = isProperty
-},{}],145:[function(require,module,exports){
+},{}],147:[function(require,module,exports){
 var hasExcape = /~/
 var escapeMatcher = /~[01]/g
 function escapeReplacer (m) {
@@ -26431,7 +29349,7 @@ exports.get = get
 exports.set = set
 exports.compile = compile
 
-},{}],146:[function(require,module,exports){
+},{}],148:[function(require,module,exports){
 module.exports = extend
 
 var hasOwnProperty = Object.prototype.hasOwnProperty;
@@ -26452,7 +29370,7 @@ function extend() {
     return target
 }
 
-},{}],147:[function(require,module,exports){
+},{}],149:[function(require,module,exports){
 // Generated by LiveScript 1.4.0
 (function(){
   var parsedTypeCheck, types, toString$ = {}.toString;
@@ -26752,7 +29670,7 @@ function extend() {
   module.exports = typesCast;
 }).call(this);
 
-},{"type-check":157}],148:[function(require,module,exports){
+},{"type-check":159}],150:[function(require,module,exports){
 // Generated by LiveScript 1.4.0
 (function(){
   var parseString, cast, parseType, VERSION, parsedTypeParse, parse;
@@ -26776,7 +29694,7 @@ function extend() {
   };
 }).call(this);
 
-},{"./cast":147,"./parse-string":149,"type-check":157}],149:[function(require,module,exports){
+},{"./cast":149,"./parse-string":151,"type-check":159}],151:[function(require,module,exports){
 // Generated by LiveScript 1.4.0
 (function(){
   var reject, special, tokenRegex;
@@ -26891,7 +29809,7 @@ function extend() {
   function not$(x){ return !x; }
 }).call(this);
 
-},{"prelude-ls":155}],150:[function(require,module,exports){
+},{"prelude-ls":157}],152:[function(require,module,exports){
 // Generated by LiveScript 1.4.0
 var apply, curry, flip, fix, over, memoize, slice$ = [].slice, toString$ = {}.toString;
 apply = curry$(function(f, list){
@@ -26957,7 +29875,7 @@ function curry$(f, bound){
   };
   return _curry();
 }
-},{}],151:[function(require,module,exports){
+},{}],153:[function(require,module,exports){
 // Generated by LiveScript 1.4.0
 var each, map, compact, filter, reject, partition, find, head, first, tail, last, initial, empty, reverse, unique, uniqueBy, fold, foldl, fold1, foldl1, foldr, foldr1, unfoldr, concat, concatMap, flatten, difference, intersection, union, countBy, groupBy, andList, orList, any, all, sort, sortWith, sortBy, sum, product, mean, average, maximum, minimum, maximumBy, minimumBy, scan, scanl, scan1, scanl1, scanr, scanr1, slice, take, drop, splitAt, takeWhile, dropWhile, span, breakList, zip, zipWith, zipAll, zipAllWith, at, elemIndex, elemIndices, findIndex, findIndices, toString$ = {}.toString, slice$ = [].slice;
 each = curry$(function(f, xs){
@@ -27644,7 +30562,7 @@ function compose$() {
   };
 }
 function not$(x){ return !x; }
-},{}],152:[function(require,module,exports){
+},{}],154:[function(require,module,exports){
 // Generated by LiveScript 1.4.0
 var max, min, negate, abs, signum, quot, rem, div, mod, recip, pi, tau, exp, sqrt, ln, pow, sin, tan, cos, asin, acos, atan, atan2, truncate, round, ceiling, floor, isItNaN, even, odd, gcd, lcm;
 max = curry$(function(x$, y$){
@@ -27775,7 +30693,7 @@ function curry$(f, bound){
   };
   return _curry();
 }
-},{}],153:[function(require,module,exports){
+},{}],155:[function(require,module,exports){
 // Generated by LiveScript 1.4.0
 var values, keys, pairsToObj, objToPairs, listsToObj, objToLists, empty, each, map, compact, filter, reject, partition, find;
 values = function(object){
@@ -27930,7 +30848,7 @@ function curry$(f, bound){
   };
   return _curry();
 }
-},{}],154:[function(require,module,exports){
+},{}],156:[function(require,module,exports){
 // Generated by LiveScript 1.4.0
 var split, join, lines, unlines, words, unwords, chars, unchars, reverse, repeat, capitalize, camelize, dasherize;
 split = curry$(function(sep, str){
@@ -28023,7 +30941,7 @@ function curry$(f, bound){
   };
   return _curry();
 }
-},{}],155:[function(require,module,exports){
+},{}],157:[function(require,module,exports){
 // Generated by LiveScript 1.4.0
 var Func, List, Obj, Str, Num, id, isType, replicate, prelude, toString$ = {}.toString;
 Func = require('./Func.js');
@@ -28202,7 +31120,7 @@ function curry$(f, bound){
   };
   return _curry();
 }
-},{"./Func.js":150,"./List.js":151,"./Num.js":152,"./Obj.js":153,"./Str.js":154}],156:[function(require,module,exports){
+},{"./Func.js":152,"./List.js":153,"./Num.js":154,"./Obj.js":155,"./Str.js":156}],158:[function(require,module,exports){
 // Generated by LiveScript 1.4.0
 (function(){
   var ref$, any, all, isItNaN, types, defaultType, customTypes, toString$ = {}.toString;
@@ -28330,7 +31248,7 @@ function curry$(f, bound){
   };
 }).call(this);
 
-},{"prelude-ls":155}],157:[function(require,module,exports){
+},{"prelude-ls":157}],159:[function(require,module,exports){
 // Generated by LiveScript 1.4.0
 (function(){
   var VERSION, parseType, parsedTypeCheck, typeCheck;
@@ -28348,7 +31266,7 @@ function curry$(f, bound){
   };
 }).call(this);
 
-},{"./check":156,"./parse-type":158}],158:[function(require,module,exports){
+},{"./check":158,"./parse-type":160}],160:[function(require,module,exports){
 // Generated by LiveScript 1.4.0
 (function(){
   var identifierRegex, tokenRegex;
@@ -28546,7 +31464,7 @@ function curry$(f, bound){
   }
 }).call(this);
 
-},{}],159:[function(require,module,exports){
+},{}],161:[function(require,module,exports){
 (function (global){
 /**
  * @license
@@ -45634,7 +48552,7 @@ function curry$(f, bound){
 }.call(this));
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{}],160:[function(require,module,exports){
+},{}],162:[function(require,module,exports){
 
 
 
@@ -45693,10 +48611,10 @@ try {
 	String.naturalCompare = naturalCompare;
 }
 
-},{}],161:[function(require,module,exports){
+},{}],163:[function(require,module,exports){
 module.exports={
   "name": "eslint",
-  "version": "3.17.0",
+  "version": "3.17.1",
   "author": "Nicholas C. Zakas <nicholas+npm@nczconsulting.com>",
   "description": "An AST-based pattern checker for JavaScript.",
   "bin": {
@@ -45732,11 +48650,12 @@ module.exports={
   "dependencies": {
     "babel-code-frame": "^6.16.0",
     "chalk": "^1.1.3",
-    "concat-stream": "^1.4.6",
+    "concat-stream": "^1.5.2",
     "debug": "^2.1.1",
-    "doctrine": "^1.2.2",
+    "doctrine": "^2.0.0",
     "escope": "^3.6.0",
     "espree": "^3.4.0",
+    "esquery": "^1.0.0",
     "estraverse": "^4.2.0",
     "esutils": "^2.0.2",
     "file-entry-cache": "^2.0.0",
@@ -45793,7 +48712,7 @@ module.exports={
     "load-perf": "^0.2.0",
     "markdownlint": "^0.3.1",
     "mocha": "^2.4.5",
-    "mock-fs": "not-an-aardvark/mock-fs#06868bbd7724707f9324b237bdde28f05f7a01d5",
+    "mock-fs": "^4.2.0",
     "npm-license": "^0.3.2",
     "phantomjs-prebuilt": "^2.1.7",
     "proxyquire": "^1.7.10",
@@ -45816,7 +48735,7 @@ module.exports={
   }
 }
 
-},{}],162:[function(require,module,exports){
+},{}],164:[function(require,module,exports){
 /**
  * @fileoverview Common utils for AST.
  * @author Gyandeep Singh
@@ -47040,7 +49959,7 @@ module.exports = {
     }
 };
 
-},{"esutils":136}],163:[function(require,module,exports){
+},{"esutils":138}],165:[function(require,module,exports){
 /**
  * @fileoverview A class of the code path analyzer.
  * @author Toru Nagashima
@@ -47541,13 +50460,8 @@ function processCodePathToExit(analyzer, node) {
             break;
     }
 
-    /*
-     * Skip updating the current segment to avoid creating useless segments if
-     * the node type is the same as the parent node type.
-     */
-    if (!dontForward && (!node.parent || node.type !== node.parent.type)) {
-
-        // Emits onCodePathSegmentStart events if updated.
+    // Emits onCodePathSegmentStart events if updated.
+    if (!dontForward) {
         forwardCurrentToHead(analyzer, node);
     }
     debug.dumpState(node, state, true);
@@ -47696,7 +50610,7 @@ var CodePathAnalyzer = function () {
 
 module.exports = CodePathAnalyzer;
 
-},{"../ast-utils":162,"./code-path":166,"./code-path-segment":164,"./debug-helpers":167,"./id-generator":169,"assert":5}],164:[function(require,module,exports){
+},{"../ast-utils":164,"./code-path":168,"./code-path-segment":166,"./debug-helpers":169,"./id-generator":171,"assert":5}],166:[function(require,module,exports){
 /**
  * @fileoverview A class of the code path segment.
  * @author Toru Nagashima
@@ -47968,7 +50882,7 @@ var CodePathSegment = function () {
 
 module.exports = CodePathSegment;
 
-},{"./debug-helpers":167}],165:[function(require,module,exports){
+},{"./debug-helpers":169}],167:[function(require,module,exports){
 /**
  * @fileoverview A class to manage state of generating a code path.
  * @author Toru Nagashima
@@ -49487,7 +52401,7 @@ var CodePathState = function () {
 
 module.exports = CodePathState;
 
-},{"./code-path-segment":164,"./fork-context":168}],166:[function(require,module,exports){
+},{"./code-path-segment":166,"./fork-context":170}],168:[function(require,module,exports){
 /**
  * @fileoverview A class of the code path.
  * @author Toru Nagashima
@@ -49744,7 +52658,7 @@ var CodePath = function () {
 
 module.exports = CodePath;
 
-},{"./code-path-state":165,"./id-generator":169}],167:[function(require,module,exports){
+},{"./code-path-state":167,"./id-generator":171}],169:[function(require,module,exports){
 /**
  * @fileoverview Helpers to debug for code path analysis.
  * @author Toru Nagashima
@@ -49849,8 +52763,8 @@ module.exports = {
                 text += "style=\"rounded,dashed,filled\",fillcolor=\"#FF9800\",label=\"<<unreachable>>\\n";
             }
 
-            if (segment.internal.nodes.length > 0) {
-                text += segment.internal.nodes.map(function (node) {
+            if (segment.internal.nodes.length > 0 || segment.internal.exitNodes.length > 0) {
+                text += [].concat(segment.internal.nodes.map(function (node) {
                     switch (node.type) {
                         case "Identifier":
                             return node.type + " (" + node.name + ")";
@@ -49859,9 +52773,7 @@ module.exports = {
                         default:
                             return node.type;
                     }
-                }).join("\\n");
-            } else if (segment.internal.exitNodes.length > 0) {
-                text += segment.internal.exitNodes.map(function (node) {
+                }), segment.internal.exitNodes.map(function (node) {
                     switch (node.type) {
                         case "Identifier":
                             return node.type + ":exit (" + node.name + ")";
@@ -49870,7 +52782,7 @@ module.exports = {
                         default:
                             return node.type + ":exit";
                     }
-                }).join("\\n");
+                })).join("\\n");
             } else {
                 text += "????";
             }
@@ -49946,7 +52858,7 @@ module.exports = {
     }
 };
 
-},{"debug":12}],168:[function(require,module,exports){
+},{"debug":12}],170:[function(require,module,exports){
 /**
  * @fileoverview A class to operate forking.
  *
@@ -50250,7 +53162,7 @@ var ForkContext = function () {
 
 module.exports = ForkContext;
 
-},{"./code-path-segment":164,"assert":5}],169:[function(require,module,exports){
+},{"./code-path-segment":166,"assert":5}],171:[function(require,module,exports){
 /**
  * @fileoverview A class of identifiers generator for code path segments.
  *
@@ -50312,7 +53224,7 @@ var IdGenerator = function () {
 
 module.exports = IdGenerator;
 
-},{}],170:[function(require,module,exports){
+},{}],172:[function(require,module,exports){
 /**
  * @fileoverview Config file operations. This file must be usable in the browser,
  * so no Node-specific code can be here.
@@ -50597,7 +53509,7 @@ module.exports = {
     }
 };
 
-},{"./environments":172,"debug":12}],171:[function(require,module,exports){
+},{"./environments":174,"debug":12}],173:[function(require,module,exports){
 /**
  * @fileoverview Validates configs.
  * @author Brandon Mills
@@ -50770,7 +53682,7 @@ module.exports = {
     validateRuleOptions: validateRuleOptions
 };
 
-},{"../rules":176,"./environments":172,"is-my-json-valid":141,"util":10}],172:[function(require,module,exports){
+},{"../rules":178,"./environments":174,"is-my-json-valid":143,"util":10}],174:[function(require,module,exports){
 /**
  * @fileoverview Environments manager
  * @author Nicholas C. Zakas
@@ -50859,7 +53771,7 @@ module.exports = {
     }
 };
 
-},{"../../conf/environments":2}],173:[function(require,module,exports){
+},{"../../conf/environments":2}],175:[function(require,module,exports){
 /**
  * @fileoverview Main ESLint object.
  * @author Nicholas C. Zakas
@@ -51715,9 +54627,9 @@ module.exports = function () {
 
                     var rule = ruleCreator.create ? ruleCreator.create(ruleContext) : ruleCreator(ruleContext);
 
-                    // add all the node types as listeners
-                    Object.keys(rule).forEach(function (nodeType) {
-                        api.on(nodeType, timing.enabled ? timing.time(key, rule[nodeType]) : rule[nodeType]);
+                    // add all the selectors from the rule as listeners
+                    Object.keys(rule).forEach(function (selector) {
+                        api.on(selector, timing.enabled ? timing.time(key, rule[selector]) : rule[selector]);
                     });
                 } catch (ex) {
                     ex.message = "Error while loading rule '" + key + "': " + ex.message;
@@ -52071,7 +54983,7 @@ module.exports = function () {
     return api;
 }();
 
-},{"../conf/blank-script.json":1,"../conf/eslint-recommended":3,"../conf/replacements.json":4,"../package.json":161,"./code-path-analysis/code-path-analyzer":163,"./config/config-ops":170,"./config/config-validator":171,"./config/environments":172,"./rule-context":175,"./rules":176,"./timing":421,"./util/comment-event-generator":435,"./util/node-event-generator":438,"./util/source-code":441,"./util/traverser":442,"assert":5,"escope":20,"events":6,"levn":148}],174:[function(require,module,exports){
+},{"../conf/blank-script.json":1,"../conf/eslint-recommended":3,"../conf/replacements.json":4,"../package.json":163,"./code-path-analysis/code-path-analyzer":165,"./config/config-ops":172,"./config/config-validator":173,"./config/environments":174,"./rule-context":177,"./rules":178,"./timing":423,"./util/comment-event-generator":437,"./util/node-event-generator":440,"./util/source-code":443,"./util/traverser":444,"assert":5,"escope":20,"events":6,"levn":150}],176:[function(require,module,exports){
 "use strict";
 
 module.exports = function () {
@@ -52324,7 +55236,7 @@ module.exports = function () {
     return rules;
 };
 
-},{"./rules/accessor-pairs":177,"./rules/array-bracket-spacing":178,"./rules/array-callback-return":179,"./rules/arrow-body-style":180,"./rules/arrow-parens":181,"./rules/arrow-spacing":182,"./rules/block-scoped-var":183,"./rules/block-spacing":184,"./rules/brace-style":185,"./rules/callback-return":186,"./rules/camelcase":187,"./rules/capitalized-comments":188,"./rules/class-methods-use-this":189,"./rules/comma-dangle":190,"./rules/comma-spacing":191,"./rules/comma-style":192,"./rules/complexity":193,"./rules/computed-property-spacing":194,"./rules/consistent-return":195,"./rules/consistent-this":196,"./rules/constructor-super":197,"./rules/curly":198,"./rules/default-case":199,"./rules/dot-location":200,"./rules/dot-notation":201,"./rules/eol-last":202,"./rules/eqeqeq":203,"./rules/func-call-spacing":204,"./rules/func-name-matching":205,"./rules/func-names":206,"./rules/func-style":207,"./rules/generator-star-spacing":208,"./rules/global-require":209,"./rules/guard-for-in":210,"./rules/handle-callback-err":211,"./rules/id-blacklist":212,"./rules/id-length":213,"./rules/id-match":214,"./rules/indent":215,"./rules/init-declarations":216,"./rules/jsx-quotes":217,"./rules/key-spacing":218,"./rules/keyword-spacing":219,"./rules/line-comment-position":220,"./rules/linebreak-style":221,"./rules/lines-around-comment":222,"./rules/lines-around-directive":223,"./rules/max-depth":224,"./rules/max-len":225,"./rules/max-lines":226,"./rules/max-nested-callbacks":227,"./rules/max-params":228,"./rules/max-statements":230,"./rules/max-statements-per-line":229,"./rules/multiline-ternary":231,"./rules/new-cap":232,"./rules/new-parens":233,"./rules/newline-after-var":234,"./rules/newline-before-return":235,"./rules/newline-per-chained-call":236,"./rules/no-alert":237,"./rules/no-array-constructor":238,"./rules/no-await-in-loop":239,"./rules/no-bitwise":240,"./rules/no-caller":241,"./rules/no-case-declarations":242,"./rules/no-catch-shadow":243,"./rules/no-class-assign":244,"./rules/no-compare-neg-zero":245,"./rules/no-cond-assign":246,"./rules/no-confusing-arrow":247,"./rules/no-console":248,"./rules/no-const-assign":249,"./rules/no-constant-condition":250,"./rules/no-continue":251,"./rules/no-control-regex":252,"./rules/no-debugger":253,"./rules/no-delete-var":254,"./rules/no-div-regex":255,"./rules/no-dupe-args":256,"./rules/no-dupe-class-members":257,"./rules/no-dupe-keys":258,"./rules/no-duplicate-case":259,"./rules/no-duplicate-imports":260,"./rules/no-else-return":261,"./rules/no-empty":265,"./rules/no-empty-character-class":262,"./rules/no-empty-function":263,"./rules/no-empty-pattern":264,"./rules/no-eq-null":266,"./rules/no-eval":267,"./rules/no-ex-assign":268,"./rules/no-extend-native":269,"./rules/no-extra-bind":270,"./rules/no-extra-boolean-cast":271,"./rules/no-extra-label":272,"./rules/no-extra-parens":273,"./rules/no-extra-semi":274,"./rules/no-fallthrough":275,"./rules/no-floating-decimal":276,"./rules/no-func-assign":277,"./rules/no-global-assign":278,"./rules/no-implicit-coercion":279,"./rules/no-implicit-globals":280,"./rules/no-implied-eval":281,"./rules/no-inline-comments":282,"./rules/no-inner-declarations":283,"./rules/no-invalid-regexp":284,"./rules/no-invalid-this":285,"./rules/no-irregular-whitespace":286,"./rules/no-iterator":287,"./rules/no-label-var":288,"./rules/no-labels":289,"./rules/no-lone-blocks":290,"./rules/no-lonely-if":291,"./rules/no-loop-func":292,"./rules/no-magic-numbers":293,"./rules/no-mixed-operators":294,"./rules/no-mixed-requires":295,"./rules/no-mixed-spaces-and-tabs":296,"./rules/no-multi-assign":297,"./rules/no-multi-spaces":298,"./rules/no-multi-str":299,"./rules/no-multiple-empty-lines":300,"./rules/no-native-reassign":301,"./rules/no-negated-condition":302,"./rules/no-negated-in-lhs":303,"./rules/no-nested-ternary":304,"./rules/no-new":310,"./rules/no-new-func":305,"./rules/no-new-object":306,"./rules/no-new-require":307,"./rules/no-new-symbol":308,"./rules/no-new-wrappers":309,"./rules/no-obj-calls":311,"./rules/no-octal":313,"./rules/no-octal-escape":312,"./rules/no-param-reassign":314,"./rules/no-path-concat":315,"./rules/no-plusplus":316,"./rules/no-process-env":317,"./rules/no-process-exit":318,"./rules/no-proto":319,"./rules/no-prototype-builtins":320,"./rules/no-redeclare":321,"./rules/no-regex-spaces":322,"./rules/no-restricted-globals":323,"./rules/no-restricted-imports":324,"./rules/no-restricted-modules":325,"./rules/no-restricted-properties":326,"./rules/no-restricted-syntax":327,"./rules/no-return-assign":328,"./rules/no-return-await":329,"./rules/no-script-url":330,"./rules/no-self-assign":331,"./rules/no-self-compare":332,"./rules/no-sequences":333,"./rules/no-shadow":335,"./rules/no-shadow-restricted-names":334,"./rules/no-spaced-func":336,"./rules/no-sparse-arrays":337,"./rules/no-sync":338,"./rules/no-tabs":339,"./rules/no-template-curly-in-string":340,"./rules/no-ternary":341,"./rules/no-this-before-super":342,"./rules/no-throw-literal":343,"./rules/no-trailing-spaces":344,"./rules/no-undef":346,"./rules/no-undef-init":345,"./rules/no-undefined":347,"./rules/no-underscore-dangle":348,"./rules/no-unexpected-multiline":349,"./rules/no-unmodified-loop-condition":350,"./rules/no-unneeded-ternary":351,"./rules/no-unreachable":352,"./rules/no-unsafe-finally":353,"./rules/no-unsafe-negation":354,"./rules/no-unused-expressions":355,"./rules/no-unused-labels":356,"./rules/no-unused-vars":357,"./rules/no-use-before-define":358,"./rules/no-useless-call":359,"./rules/no-useless-computed-key":360,"./rules/no-useless-concat":361,"./rules/no-useless-constructor":362,"./rules/no-useless-escape":363,"./rules/no-useless-rename":364,"./rules/no-useless-return":365,"./rules/no-var":366,"./rules/no-void":367,"./rules/no-warning-comments":368,"./rules/no-whitespace-before-property":369,"./rules/no-with":370,"./rules/nonblock-statement-body-position":371,"./rules/object-curly-newline":372,"./rules/object-curly-spacing":373,"./rules/object-property-newline":374,"./rules/object-shorthand":375,"./rules/one-var":377,"./rules/one-var-declaration-per-line":376,"./rules/operator-assignment":378,"./rules/operator-linebreak":379,"./rules/padded-blocks":380,"./rules/prefer-arrow-callback":381,"./rules/prefer-const":382,"./rules/prefer-destructuring":383,"./rules/prefer-numeric-literals":384,"./rules/prefer-promise-reject-errors":385,"./rules/prefer-reflect":386,"./rules/prefer-rest-params":387,"./rules/prefer-spread":388,"./rules/prefer-template":389,"./rules/quote-props":390,"./rules/quotes":391,"./rules/radix":392,"./rules/require-await":393,"./rules/require-jsdoc":394,"./rules/require-yield":395,"./rules/rest-spread-spacing":396,"./rules/semi":398,"./rules/semi-spacing":397,"./rules/sort-imports":399,"./rules/sort-keys":400,"./rules/sort-vars":401,"./rules/space-before-blocks":402,"./rules/space-before-function-paren":403,"./rules/space-in-parens":404,"./rules/space-infix-ops":405,"./rules/space-unary-ops":406,"./rules/spaced-comment":407,"./rules/strict":408,"./rules/symbol-description":409,"./rules/template-curly-spacing":410,"./rules/template-tag-spacing":411,"./rules/unicode-bom":412,"./rules/use-isnan":413,"./rules/valid-jsdoc":414,"./rules/valid-typeof":415,"./rules/vars-on-top":416,"./rules/wrap-iife":417,"./rules/wrap-regex":418,"./rules/yield-star-spacing":419,"./rules/yoda":420}],175:[function(require,module,exports){
+},{"./rules/accessor-pairs":179,"./rules/array-bracket-spacing":180,"./rules/array-callback-return":181,"./rules/arrow-body-style":182,"./rules/arrow-parens":183,"./rules/arrow-spacing":184,"./rules/block-scoped-var":185,"./rules/block-spacing":186,"./rules/brace-style":187,"./rules/callback-return":188,"./rules/camelcase":189,"./rules/capitalized-comments":190,"./rules/class-methods-use-this":191,"./rules/comma-dangle":192,"./rules/comma-spacing":193,"./rules/comma-style":194,"./rules/complexity":195,"./rules/computed-property-spacing":196,"./rules/consistent-return":197,"./rules/consistent-this":198,"./rules/constructor-super":199,"./rules/curly":200,"./rules/default-case":201,"./rules/dot-location":202,"./rules/dot-notation":203,"./rules/eol-last":204,"./rules/eqeqeq":205,"./rules/func-call-spacing":206,"./rules/func-name-matching":207,"./rules/func-names":208,"./rules/func-style":209,"./rules/generator-star-spacing":210,"./rules/global-require":211,"./rules/guard-for-in":212,"./rules/handle-callback-err":213,"./rules/id-blacklist":214,"./rules/id-length":215,"./rules/id-match":216,"./rules/indent":217,"./rules/init-declarations":218,"./rules/jsx-quotes":219,"./rules/key-spacing":220,"./rules/keyword-spacing":221,"./rules/line-comment-position":222,"./rules/linebreak-style":223,"./rules/lines-around-comment":224,"./rules/lines-around-directive":225,"./rules/max-depth":226,"./rules/max-len":227,"./rules/max-lines":228,"./rules/max-nested-callbacks":229,"./rules/max-params":230,"./rules/max-statements":232,"./rules/max-statements-per-line":231,"./rules/multiline-ternary":233,"./rules/new-cap":234,"./rules/new-parens":235,"./rules/newline-after-var":236,"./rules/newline-before-return":237,"./rules/newline-per-chained-call":238,"./rules/no-alert":239,"./rules/no-array-constructor":240,"./rules/no-await-in-loop":241,"./rules/no-bitwise":242,"./rules/no-caller":243,"./rules/no-case-declarations":244,"./rules/no-catch-shadow":245,"./rules/no-class-assign":246,"./rules/no-compare-neg-zero":247,"./rules/no-cond-assign":248,"./rules/no-confusing-arrow":249,"./rules/no-console":250,"./rules/no-const-assign":251,"./rules/no-constant-condition":252,"./rules/no-continue":253,"./rules/no-control-regex":254,"./rules/no-debugger":255,"./rules/no-delete-var":256,"./rules/no-div-regex":257,"./rules/no-dupe-args":258,"./rules/no-dupe-class-members":259,"./rules/no-dupe-keys":260,"./rules/no-duplicate-case":261,"./rules/no-duplicate-imports":262,"./rules/no-else-return":263,"./rules/no-empty":267,"./rules/no-empty-character-class":264,"./rules/no-empty-function":265,"./rules/no-empty-pattern":266,"./rules/no-eq-null":268,"./rules/no-eval":269,"./rules/no-ex-assign":270,"./rules/no-extend-native":271,"./rules/no-extra-bind":272,"./rules/no-extra-boolean-cast":273,"./rules/no-extra-label":274,"./rules/no-extra-parens":275,"./rules/no-extra-semi":276,"./rules/no-fallthrough":277,"./rules/no-floating-decimal":278,"./rules/no-func-assign":279,"./rules/no-global-assign":280,"./rules/no-implicit-coercion":281,"./rules/no-implicit-globals":282,"./rules/no-implied-eval":283,"./rules/no-inline-comments":284,"./rules/no-inner-declarations":285,"./rules/no-invalid-regexp":286,"./rules/no-invalid-this":287,"./rules/no-irregular-whitespace":288,"./rules/no-iterator":289,"./rules/no-label-var":290,"./rules/no-labels":291,"./rules/no-lone-blocks":292,"./rules/no-lonely-if":293,"./rules/no-loop-func":294,"./rules/no-magic-numbers":295,"./rules/no-mixed-operators":296,"./rules/no-mixed-requires":297,"./rules/no-mixed-spaces-and-tabs":298,"./rules/no-multi-assign":299,"./rules/no-multi-spaces":300,"./rules/no-multi-str":301,"./rules/no-multiple-empty-lines":302,"./rules/no-native-reassign":303,"./rules/no-negated-condition":304,"./rules/no-negated-in-lhs":305,"./rules/no-nested-ternary":306,"./rules/no-new":312,"./rules/no-new-func":307,"./rules/no-new-object":308,"./rules/no-new-require":309,"./rules/no-new-symbol":310,"./rules/no-new-wrappers":311,"./rules/no-obj-calls":313,"./rules/no-octal":315,"./rules/no-octal-escape":314,"./rules/no-param-reassign":316,"./rules/no-path-concat":317,"./rules/no-plusplus":318,"./rules/no-process-env":319,"./rules/no-process-exit":320,"./rules/no-proto":321,"./rules/no-prototype-builtins":322,"./rules/no-redeclare":323,"./rules/no-regex-spaces":324,"./rules/no-restricted-globals":325,"./rules/no-restricted-imports":326,"./rules/no-restricted-modules":327,"./rules/no-restricted-properties":328,"./rules/no-restricted-syntax":329,"./rules/no-return-assign":330,"./rules/no-return-await":331,"./rules/no-script-url":332,"./rules/no-self-assign":333,"./rules/no-self-compare":334,"./rules/no-sequences":335,"./rules/no-shadow":337,"./rules/no-shadow-restricted-names":336,"./rules/no-spaced-func":338,"./rules/no-sparse-arrays":339,"./rules/no-sync":340,"./rules/no-tabs":341,"./rules/no-template-curly-in-string":342,"./rules/no-ternary":343,"./rules/no-this-before-super":344,"./rules/no-throw-literal":345,"./rules/no-trailing-spaces":346,"./rules/no-undef":348,"./rules/no-undef-init":347,"./rules/no-undefined":349,"./rules/no-underscore-dangle":350,"./rules/no-unexpected-multiline":351,"./rules/no-unmodified-loop-condition":352,"./rules/no-unneeded-ternary":353,"./rules/no-unreachable":354,"./rules/no-unsafe-finally":355,"./rules/no-unsafe-negation":356,"./rules/no-unused-expressions":357,"./rules/no-unused-labels":358,"./rules/no-unused-vars":359,"./rules/no-use-before-define":360,"./rules/no-useless-call":361,"./rules/no-useless-computed-key":362,"./rules/no-useless-concat":363,"./rules/no-useless-constructor":364,"./rules/no-useless-escape":365,"./rules/no-useless-rename":366,"./rules/no-useless-return":367,"./rules/no-var":368,"./rules/no-void":369,"./rules/no-warning-comments":370,"./rules/no-whitespace-before-property":371,"./rules/no-with":372,"./rules/nonblock-statement-body-position":373,"./rules/object-curly-newline":374,"./rules/object-curly-spacing":375,"./rules/object-property-newline":376,"./rules/object-shorthand":377,"./rules/one-var":379,"./rules/one-var-declaration-per-line":378,"./rules/operator-assignment":380,"./rules/operator-linebreak":381,"./rules/padded-blocks":382,"./rules/prefer-arrow-callback":383,"./rules/prefer-const":384,"./rules/prefer-destructuring":385,"./rules/prefer-numeric-literals":386,"./rules/prefer-promise-reject-errors":387,"./rules/prefer-reflect":388,"./rules/prefer-rest-params":389,"./rules/prefer-spread":390,"./rules/prefer-template":391,"./rules/quote-props":392,"./rules/quotes":393,"./rules/radix":394,"./rules/require-await":395,"./rules/require-jsdoc":396,"./rules/require-yield":397,"./rules/rest-spread-spacing":398,"./rules/semi":400,"./rules/semi-spacing":399,"./rules/sort-imports":401,"./rules/sort-keys":402,"./rules/sort-vars":403,"./rules/space-before-blocks":404,"./rules/space-before-function-paren":405,"./rules/space-in-parens":406,"./rules/space-infix-ops":407,"./rules/space-unary-ops":408,"./rules/spaced-comment":409,"./rules/strict":410,"./rules/symbol-description":411,"./rules/template-curly-spacing":412,"./rules/template-tag-spacing":413,"./rules/unicode-bom":414,"./rules/use-isnan":415,"./rules/valid-jsdoc":416,"./rules/valid-typeof":417,"./rules/vars-on-top":418,"./rules/wrap-iife":419,"./rules/wrap-regex":420,"./rules/yield-star-spacing":421,"./rules/yoda":422}],177:[function(require,module,exports){
 /**
  * @fileoverview RuleContext utility for rules
  * @author Nicholas C. Zakas
@@ -52469,7 +55381,7 @@ PASSTHROUGHS.forEach(function (name) {
 
 module.exports = RuleContext;
 
-},{"./util/rule-fixer":440}],176:[function(require,module,exports){
+},{"./util/rule-fixer":442}],178:[function(require,module,exports){
 /**
  * @fileoverview Defines a storage for rules.
  * @author Nicholas C. Zakas
@@ -52595,7 +55507,7 @@ module.exports = {
 // loads built-in rules
 load();
 
-},{"./load-rules":174}],177:[function(require,module,exports){
+},{"./load-rules":176}],179:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag wrapping non-iife in parens
  * @author Gyandeep Singh
@@ -52742,7 +55654,7 @@ module.exports = {
     }
 };
 
-},{}],178:[function(require,module,exports){
+},{}],180:[function(require,module,exports){
 /**
  * @fileoverview Disallows or enforces spaces inside of array brackets.
  * @author Jamund Ferguson
@@ -52960,7 +55872,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":162}],179:[function(require,module,exports){
+},{"../ast-utils":164}],181:[function(require,module,exports){
 /**
  * @fileoverview Rule to enforce return statements in callbacks of array's methods
  * @author Toru Nagashima
@@ -53176,7 +56088,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":162,"lodash":159}],180:[function(require,module,exports){
+},{"../ast-utils":164,"lodash":161}],182:[function(require,module,exports){
 /**
  * @fileoverview Rule to require braces in arrow function body.
  * @author Alberto Rodríguez
@@ -53325,7 +56237,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":162}],181:[function(require,module,exports){
+},{"../ast-utils":164}],183:[function(require,module,exports){
 /**
  * @fileoverview Rule to require parens in arrow function arguments.
  * @author Jxck
@@ -53446,7 +56358,7 @@ module.exports = {
     }
 };
 
-},{}],182:[function(require,module,exports){
+},{}],184:[function(require,module,exports){
 /**
  * @fileoverview Rule to define spacing before/after arrow function's arrow.
  * @author Jxck
@@ -53595,7 +56507,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":162}],183:[function(require,module,exports){
+},{"../ast-utils":164}],185:[function(require,module,exports){
 /**
  * @fileoverview Rule to check for "block scoped" variables by binding context
  * @author Matt DuVall <http://www.mattduvall.com>
@@ -53709,7 +56621,7 @@ module.exports = {
     }
 };
 
-},{}],184:[function(require,module,exports){
+},{}],186:[function(require,module,exports){
 /**
  * @fileoverview A rule to disallow or enforce spaces inside of single line blocks.
  * @author Toru Nagashima
@@ -53838,7 +56750,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":162}],185:[function(require,module,exports){
+},{"../ast-utils":164}],187:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag block statements that do not use the one true brace style
  * @author Ian Christian Myers
@@ -54027,7 +56939,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":162}],186:[function(require,module,exports){
+},{"../ast-utils":164}],188:[function(require,module,exports){
 /**
  * @fileoverview Enforce return after a callback.
  * @author Jamund Ferguson
@@ -54196,7 +57108,7 @@ module.exports = {
     }
 };
 
-},{}],187:[function(require,module,exports){
+},{}],189:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag non-camelcased identifiers
  * @author Nicholas C. Zakas
@@ -54329,7 +57241,7 @@ module.exports = {
     }
 };
 
-},{}],188:[function(require,module,exports){
+},{}],190:[function(require,module,exports){
 /**
  * @fileoverview enforce or disallow capitalization of the first letter of a comment
  * @author Kevin Partington
@@ -54614,7 +57526,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":162,"../util/patterns/letters":439}],189:[function(require,module,exports){
+},{"../ast-utils":164,"../util/patterns/letters":441}],191:[function(require,module,exports){
 /**
  * @fileoverview Rule to enforce that all class methods use 'this'.
  * @author Patrick Williams
@@ -54726,7 +57638,7 @@ module.exports = {
     }
 };
 
-},{}],190:[function(require,module,exports){
+},{}],192:[function(require,module,exports){
 /**
  * @fileoverview Rule to forbid or enforce dangling commas.
  * @author Ian Christian Myers
@@ -55050,7 +57962,7 @@ module.exports = {
     }
 };
 
-},{"lodash":159}],191:[function(require,module,exports){
+},{"lodash":161}],193:[function(require,module,exports){
 /**
  * @fileoverview Comma spacing - validates spacing before and after comma
  * @author Vignesh Anand aka vegetableman.
@@ -55237,7 +58149,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":162}],192:[function(require,module,exports){
+},{"../ast-utils":164}],194:[function(require,module,exports){
 /**
  * @fileoverview Comma style - enforces comma styles of two types: last and first
  * @author Vignesh Anand aka vegetableman
@@ -55527,7 +58439,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":162}],193:[function(require,module,exports){
+},{"../ast-utils":164}],195:[function(require,module,exports){
 /**
  * @fileoverview Counts the cyclomatic complexity of each function of the script. See http://en.wikipedia.org/wiki/Cyclomatic_complexity.
  * Counts the number of if, conditional, for, whilte, try, switch/case,
@@ -55693,7 +58605,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":162,"lodash":159}],194:[function(require,module,exports){
+},{"../ast-utils":164,"lodash":161}],196:[function(require,module,exports){
 /**
  * @fileoverview Disallows or enforces spaces inside computed properties.
  * @author Jamund Ferguson
@@ -55867,7 +58779,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":162}],195:[function(require,module,exports){
+},{"../ast-utils":164}],197:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag consistent return values
  * @author Nicholas C. Zakas
@@ -56048,7 +58960,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":162,"lodash":159}],196:[function(require,module,exports){
+},{"../ast-utils":164,"lodash":161}],198:[function(require,module,exports){
 /**
  * @fileoverview Rule to enforce consistent naming of "this" context variables
  * @author Raphael Pigulla
@@ -56187,7 +59099,7 @@ module.exports = {
     }
 };
 
-},{}],197:[function(require,module,exports){
+},{}],199:[function(require,module,exports){
 /**
  * @fileoverview A rule to verify `super()` callings in constructor.
  * @author Toru Nagashima
@@ -56565,7 +59477,7 @@ module.exports = {
     }
 };
 
-},{}],198:[function(require,module,exports){
+},{}],200:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag statements without curly braces
  * @author Nicholas C. Zakas
@@ -56948,7 +59860,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":162,"esutils":136}],199:[function(require,module,exports){
+},{"../ast-utils":164,"esutils":138}],201:[function(require,module,exports){
 /**
  * @fileoverview require default case in switch statements
  * @author Aliaksei Shytkin
@@ -57039,7 +59951,7 @@ module.exports = {
     }
 };
 
-},{}],200:[function(require,module,exports){
+},{}],202:[function(require,module,exports){
 /**
  * @fileoverview Validates newlines before and after dots
  * @author Greg Cochard
@@ -57131,7 +60043,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":162}],201:[function(require,module,exports){
+},{"../ast-utils":164}],203:[function(require,module,exports){
 /**
  * @fileoverview Rule to warn about using dot notation instead of square bracket notation when possible.
  * @author Josh Perez
@@ -57233,7 +60145,7 @@ module.exports = {
     }
 };
 
-},{"../util/keywords":437}],202:[function(require,module,exports){
+},{"../util/keywords":439}],204:[function(require,module,exports){
 /**
  * @fileoverview Require or disallow newline at the end of files
  * @author Nodeca Team <https://github.com/nodeca>
@@ -57327,7 +60239,7 @@ module.exports = {
     }
 };
 
-},{"lodash":159}],203:[function(require,module,exports){
+},{"lodash":161}],205:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag statements that use != and == instead of !== and ===
  * @author Nicholas C. Zakas
@@ -57496,7 +60408,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":162}],204:[function(require,module,exports){
+},{"../ast-utils":164}],206:[function(require,module,exports){
 /**
  * @fileoverview Rule to control spacing within function calls
  * @author Matt DuVall <http://www.mattduvall.com>
@@ -57646,7 +60558,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":162}],205:[function(require,module,exports){
+},{"../ast-utils":164}],207:[function(require,module,exports){
 /**
  * @fileoverview Rule to require function names to match the name of the variable or property to which they are assigned.
  * @author Annie Zhang, Pavel Strashkin
@@ -57783,13 +60695,22 @@ module.exports = {
             });
         }
 
+        /**
+         * Determines whether a given node is a string literal
+         * @param {ASTNode} node The node to check
+         * @returns {boolean} `true` if the node is a string literal
+         */
+        function isStringLiteral(node) {
+            return node.type === "Literal" && typeof node.value === "string";
+        }
+
         //--------------------------------------------------------------------------
         // Public
         //--------------------------------------------------------------------------
 
         return {
             VariableDeclarator: function VariableDeclarator(node) {
-                if (!node.init || node.init.type !== "FunctionExpression") {
+                if (!node.init || node.init.type !== "FunctionExpression" || node.id.type !== "Identifier") {
                     return;
                 }
                 if (node.init.id && shouldWarn(node.id.name, node.init.id.name)) {
@@ -57797,7 +60718,7 @@ module.exports = {
                 }
             },
             AssignmentExpression: function AssignmentExpression(node) {
-                if (node.right.type !== "FunctionExpression" || node.left.computed && node.left.property.type !== "Literal" || !includeModuleExports && isModuleExports(node.left)) {
+                if (node.right.type !== "FunctionExpression" || node.left.computed && node.left.property.type !== "Literal" || !includeModuleExports && isModuleExports(node.left) || node.left.type !== "Identifier" && node.left.type !== "MemberExpression") {
                     return;
                 }
 
@@ -57809,12 +60730,12 @@ module.exports = {
                 }
             },
             Property: function Property(node) {
-                if (node.value.type !== "FunctionExpression" || !node.value.id || node.computed && node.key.type !== "Literal") {
+                if (node.value.type !== "FunctionExpression" || !node.value.id || node.computed && !isStringLiteral(node.key)) {
                     return;
                 }
                 if (node.key.type === "Identifier" && shouldWarn(node.key.name, node.value.id.name)) {
                     report(node, node.key.name, node.value.id.name, true);
-                } else if (node.key.type === "Literal" && isIdentifier(node.key.value, ecmaVersion) && shouldWarn(node.key.value, node.value.id.name)) {
+                } else if (isStringLiteral(node.key) && isIdentifier(node.key.value, ecmaVersion) && shouldWarn(node.key.value, node.value.id.name)) {
                     report(node, node.key.value, node.value.id.name, true);
                 }
             }
@@ -57822,7 +60743,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":162,"esutils":136}],206:[function(require,module,exports){
+},{"../ast-utils":164,"esutils":138}],208:[function(require,module,exports){
 /**
  * @fileoverview Rule to warn when a function expression does not have a name.
  * @author Kyle T. Nunery
@@ -57925,7 +60846,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":162}],207:[function(require,module,exports){
+},{"../ast-utils":164}],209:[function(require,module,exports){
 /**
  * @fileoverview Rule to enforce a particular function style
  * @author Nicholas C. Zakas
@@ -58010,7 +60931,7 @@ module.exports = {
     }
 };
 
-},{}],208:[function(require,module,exports){
+},{}],210:[function(require,module,exports){
 /**
  * @fileoverview Rule to check the spacing around the * in generator functions.
  * @author Jamund Ferguson
@@ -58151,7 +61072,7 @@ module.exports = {
     }
 };
 
-},{}],209:[function(require,module,exports){
+},{}],211:[function(require,module,exports){
 /**
  * @fileoverview Rule for disallowing require() outside of the top-level module context
  * @author Jamund Ferguson
@@ -58221,7 +61142,7 @@ module.exports = {
     }
 };
 
-},{}],210:[function(require,module,exports){
+},{}],212:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag for-in loops without if statements inside
  * @author Nicholas C. Zakas
@@ -58263,7 +61184,7 @@ module.exports = {
     }
 };
 
-},{}],211:[function(require,module,exports){
+},{}],213:[function(require,module,exports){
 /**
  * @fileoverview Ensure handling of errors when we know they exist.
  * @author Jamund Ferguson
@@ -58353,7 +61274,7 @@ module.exports = {
     }
 };
 
-},{}],212:[function(require,module,exports){
+},{}],214:[function(require,module,exports){
 /**
  * @fileoverview Rule that warns when identifier names that are
  * blacklisted in the configuration are used.
@@ -58461,7 +61382,7 @@ module.exports = {
     }
 };
 
-},{}],213:[function(require,module,exports){
+},{}],215:[function(require,module,exports){
 /**
  * @fileoverview Rule that warns when identifier names are shorter or longer
  * than the values provided in configuration.
@@ -58573,7 +61494,7 @@ module.exports = {
     }
 };
 
-},{}],214:[function(require,module,exports){
+},{}],216:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag non-matching identifiers
  * @author Matthieu Larcher
@@ -58701,7 +61622,7 @@ module.exports = {
     }
 };
 
-},{}],215:[function(require,module,exports){
+},{}],217:[function(require,module,exports){
 /**
  * @fileoverview This option sets a specific tab width for your code
  *
@@ -59743,7 +62664,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":162}],216:[function(require,module,exports){
+},{"../ast-utils":164}],218:[function(require,module,exports){
 /**
  * @fileoverview A rule to control the style of variable initializations.
  * @author Colin Ihrig
@@ -59873,7 +62794,7 @@ module.exports = {
     }
 };
 
-},{}],217:[function(require,module,exports){
+},{}],219:[function(require,module,exports){
 /**
  * @fileoverview A rule to ensure consistent quotes used in jsx syntax.
  * @author Mathias Schreck <https://github.com/lo1tuma>
@@ -59962,7 +62883,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":162}],218:[function(require,module,exports){
+},{"../ast-utils":164}],220:[function(require,module,exports){
 /**
  * @fileoverview Rule to specify spacing of object literal keys and values
  * @author Brandon Mills
@@ -60583,7 +63504,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":162}],219:[function(require,module,exports){
+},{"../ast-utils":164}],221:[function(require,module,exports){
 /**
  * @fileoverview Rule to enforce spacing before and after keywords.
  * @author Toru Nagashima
@@ -61134,7 +64055,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":162,"../util/keywords":437}],220:[function(require,module,exports){
+},{"../ast-utils":164,"../util/keywords":439}],222:[function(require,module,exports){
 /**
  * @fileoverview Rule to enforce the position of line comments
  * @author Alberto Rodríguez
@@ -61241,7 +64162,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":162}],221:[function(require,module,exports){
+},{"../ast-utils":164}],223:[function(require,module,exports){
 /**
  * @fileoverview Rule to enforce a single linebreak style.
  * @author Erik Mueller
@@ -61337,7 +64258,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":162}],222:[function(require,module,exports){
+},{"../ast-utils":164}],224:[function(require,module,exports){
 /**
  * @fileoverview Enforces empty lines around comments.
  * @author Jamund Ferguson
@@ -61712,7 +64633,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":162,"lodash":159}],223:[function(require,module,exports){
+},{"../ast-utils":164,"lodash":161}],225:[function(require,module,exports){
 /**
  * @fileoverview Require or disallow newlines around directives.
  * @author Kai Cataldo
@@ -61893,7 +64814,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":162}],224:[function(require,module,exports){
+},{"../ast-utils":164}],226:[function(require,module,exports){
 /**
  * @fileoverview A rule to set the maximum depth block can be nested in a function.
  * @author Ian Christian Myers
@@ -62040,7 +64961,7 @@ module.exports = {
     }
 };
 
-},{}],225:[function(require,module,exports){
+},{}],227:[function(require,module,exports){
 /**
  * @fileoverview Rule to check for max length on a line.
  * @author Matt DuVall <http://www.mattduvall.com>
@@ -62394,7 +65315,7 @@ module.exports = {
     }
 };
 
-},{}],226:[function(require,module,exports){
+},{}],228:[function(require,module,exports){
 /**
  * @fileoverview enforce a maximum file length
  * @author Alberto Rodríguez
@@ -62545,7 +65466,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":162,"lodash":159}],227:[function(require,module,exports){
+},{"../ast-utils":164,"lodash":161}],229:[function(require,module,exports){
 /**
  * @fileoverview Rule to enforce a maximum number of nested callbacks.
  * @author Ian Christian Myers
@@ -62655,7 +65576,7 @@ module.exports = {
     }
 };
 
-},{}],228:[function(require,module,exports){
+},{}],230:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag when a function has too many parameters
  * @author Ilya Volodin
@@ -62749,7 +65670,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":162,"lodash":159}],229:[function(require,module,exports){
+},{"../ast-utils":164,"lodash":161}],231:[function(require,module,exports){
 /**
  * @fileoverview Specify the maximum number of statements allowed per line.
  * @author Kenneth Williams
@@ -62939,7 +65860,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":162}],230:[function(require,module,exports){
+},{"../ast-utils":164}],232:[function(require,module,exports){
 /**
  * @fileoverview A rule to set the maximum number of statements in a function.
  * @author Ian Christian Myers
@@ -63106,7 +66027,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":162,"lodash":159}],231:[function(require,module,exports){
+},{"../ast-utils":164,"lodash":161}],233:[function(require,module,exports){
 /**
  * @fileoverview Enforce newlines between operands of ternary expressions
  * @author Kai Cataldo
@@ -63189,7 +66110,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":162}],232:[function(require,module,exports){
+},{"../ast-utils":164}],234:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag use of constructors without capital letters
  * @author Nicholas C. Zakas
@@ -63447,7 +66368,7 @@ module.exports = {
     }
 };
 
-},{}],233:[function(require,module,exports){
+},{}],235:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag when using constructor without parentheses
  * @author Ilya Volodin
@@ -63524,7 +66445,7 @@ module.exports = {
     }
 };
 
-},{}],234:[function(require,module,exports){
+},{}],236:[function(require,module,exports){
 /**
  * @fileoverview Rule to check empty newline after "var" statement
  * @author Gopal Venkatesan
@@ -63765,7 +66686,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":162}],235:[function(require,module,exports){
+},{"../ast-utils":164}],237:[function(require,module,exports){
 /**
  * @fileoverview Rule to require newlines before `return` statement
  * @author Kai Cataldo
@@ -63968,7 +66889,7 @@ module.exports = {
     }
 };
 
-},{}],236:[function(require,module,exports){
+},{}],238:[function(require,module,exports){
 /**
  * @fileoverview Rule to ensure newline per method call when chaining calls
  * @author Rajendra Patil
@@ -64056,7 +66977,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":162}],237:[function(require,module,exports){
+},{"../ast-utils":164}],239:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag use of alert, confirm, prompt
  * @author Nicholas C. Zakas
@@ -64186,7 +67107,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":162}],238:[function(require,module,exports){
+},{"../ast-utils":164}],240:[function(require,module,exports){
 /**
  * @fileoverview Disallow construction of dense arrays using the Array constructor
  * @author Matt DuVall <http://www.mattduvall.com/>
@@ -64230,7 +67151,7 @@ module.exports = {
     }
 };
 
-},{}],239:[function(require,module,exports){
+},{}],241:[function(require,module,exports){
 /**
  * @fileoverview Rule to disallow uses of await inside of loops.
  * @author Nat Mote (nmote)
@@ -64294,7 +67215,7 @@ module.exports = {
     }
 };
 
-},{}],240:[function(require,module,exports){
+},{}],242:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag bitwise identifiers
  * @author Nicholas C. Zakas
@@ -64398,7 +67319,7 @@ module.exports = {
     }
 };
 
-},{}],241:[function(require,module,exports){
+},{}],243:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag use of arguments.callee and arguments.caller.
  * @author Nicholas C. Zakas
@@ -64436,7 +67357,7 @@ module.exports = {
     }
 };
 
-},{}],242:[function(require,module,exports){
+},{}],244:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag use of an lexical declarations inside a case clause
  * @author Erik Arvidsson
@@ -64494,7 +67415,7 @@ module.exports = {
     }
 };
 
-},{}],243:[function(require,module,exports){
+},{}],245:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag variable leak in CatchClauses in IE 8 and earlier
  * @author Ian Christian Myers
@@ -64561,7 +67482,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":162}],244:[function(require,module,exports){
+},{"../ast-utils":164}],246:[function(require,module,exports){
 /**
  * @fileoverview A rule to disallow modifying variables of class declarations
  * @author Toru Nagashima
@@ -64615,7 +67536,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":162}],245:[function(require,module,exports){
+},{"../ast-utils":164}],247:[function(require,module,exports){
 /**
  * @fileoverview The rule should warn against code that tries to compare against -0.
  * @author Aladdin-ADD <hh_2013@foxmail.com>
@@ -64670,7 +67591,7 @@ module.exports = {
     }
 };
 
-},{}],246:[function(require,module,exports){
+},{}],248:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag assignment in a conditional statement's test expression
  * @author Stephen Murray <spmurrayzzz>
@@ -64806,7 +67727,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":162}],247:[function(require,module,exports){
+},{"../ast-utils":164}],249:[function(require,module,exports){
 /**
  * @fileoverview A rule to warn against using arrow functions when they could be
  * confused with comparisions
@@ -64874,7 +67795,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils.js":162}],248:[function(require,module,exports){
+},{"../ast-utils.js":164}],250:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag use of console object
  * @author Nicholas C. Zakas
@@ -64996,7 +67917,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":162}],249:[function(require,module,exports){
+},{"../ast-utils":164}],251:[function(require,module,exports){
 /**
  * @fileoverview A rule to disallow modifying variables that are declared using `const`
  * @author Toru Nagashima
@@ -65044,7 +67965,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":162}],250:[function(require,module,exports){
+},{"../ast-utils":164}],252:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag use constant conditions
  * @author Christian Schulz <http://rndm.de>
@@ -65192,7 +68113,7 @@ module.exports = {
     }
 };
 
-},{}],251:[function(require,module,exports){
+},{}],253:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag use of continue statement
  * @author Borislav Zhivkov
@@ -65225,7 +68146,7 @@ module.exports = {
     }
 };
 
-},{}],252:[function(require,module,exports){
+},{}],254:[function(require,module,exports){
 /**
  * @fileoverview Rule to forbid control charactes from regular expressions.
  * @author Nicholas C. Zakas
@@ -65346,7 +68267,7 @@ module.exports = {
     }
 };
 
-},{}],253:[function(require,module,exports){
+},{}],255:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag use of a debugger statement
  * @author Nicholas C. Zakas
@@ -65379,7 +68300,7 @@ module.exports = {
     }
 };
 
-},{}],254:[function(require,module,exports){
+},{}],256:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag when deleting variables
  * @author Ilya Volodin
@@ -65414,7 +68335,7 @@ module.exports = {
     }
 };
 
-},{}],255:[function(require,module,exports){
+},{}],257:[function(require,module,exports){
 /**
  * @fileoverview Rule to check for ambiguous div operator in regexes
  * @author Matt DuVall <http://www.mattduvall.com>
@@ -65452,7 +68373,7 @@ module.exports = {
     }
 };
 
-},{}],256:[function(require,module,exports){
+},{}],258:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag duplicate arguments
  * @author Jamund Ferguson
@@ -65526,7 +68447,7 @@ module.exports = {
     }
 };
 
-},{}],257:[function(require,module,exports){
+},{}],259:[function(require,module,exports){
 /**
  * @fileoverview A rule to disallow duplicate name in class members.
  * @author Toru Nagashima
@@ -65643,7 +68564,7 @@ module.exports = {
     }
 };
 
-},{}],258:[function(require,module,exports){
+},{}],260:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag use of duplicate keys in an object.
  * @author Ian Christian Myers
@@ -65796,7 +68717,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":162}],259:[function(require,module,exports){
+},{"../ast-utils":164}],261:[function(require,module,exports){
 /**
  * @fileoverview Rule to disallow a duplicate case label.
  * @author Dieter Oberkofler
@@ -65841,7 +68762,7 @@ module.exports = {
     }
 };
 
-},{}],260:[function(require,module,exports){
+},{}],262:[function(require,module,exports){
 /**
  * @fileoverview Restrict usage of duplicate imports.
  * @author Simen Bekkhus
@@ -65981,7 +68902,7 @@ module.exports = {
     }
 };
 
-},{}],261:[function(require,module,exports){
+},{}],263:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag `else` after a `return` in `if`
  * @author Ian Christian Myers
@@ -66211,7 +69132,7 @@ module.exports = {
     }
 };
 
-},{"../util/fix-tracker":436}],262:[function(require,module,exports){
+},{"../util/fix-tracker":438}],264:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag the use of empty character classes in regular expressions
  * @author Ian Christian Myers
@@ -66268,7 +69189,7 @@ module.exports = {
     }
 };
 
-},{}],263:[function(require,module,exports){
+},{}],265:[function(require,module,exports){
 /**
  * @fileoverview Rule to disallow empty functions.
  * @author Toru Nagashima
@@ -66409,7 +69330,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":162}],264:[function(require,module,exports){
+},{"../ast-utils":164}],266:[function(require,module,exports){
 /**
  * @fileoverview Rule to disallow an empty pattern
  * @author Alberto Rodríguez
@@ -66447,7 +69368,7 @@ module.exports = {
     }
 };
 
-},{}],265:[function(require,module,exports){
+},{}],267:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag use of an empty block statement
  * @author Nicholas C. Zakas
@@ -66523,7 +69444,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":162}],266:[function(require,module,exports){
+},{"../ast-utils":164}],268:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag comparisons to null without a type-checking
  * operator.
@@ -66561,7 +69482,7 @@ module.exports = {
     }
 };
 
-},{}],267:[function(require,module,exports){
+},{}],269:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag use of eval() statement
  * @author Nicholas C. Zakas
@@ -66849,7 +69770,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":162}],268:[function(require,module,exports){
+},{"../ast-utils":164}],270:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag assignment of the exception parameter
  * @author Stephen Murray <spmurrayzzz>
@@ -66895,7 +69816,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":162}],269:[function(require,module,exports){
+},{"../ast-utils":164}],271:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag adding properties to native object's prototypes.
  * @author David Nelson
@@ -67008,7 +69929,7 @@ module.exports = {
     }
 };
 
-},{"globals":138}],270:[function(require,module,exports){
+},{"globals":140}],272:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag unnecessary bind calls
  * @author Bence Dányi <bence@danyi.me>
@@ -67146,7 +70067,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":162}],271:[function(require,module,exports){
+},{"../ast-utils":164}],273:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag unnecessary double negation in Boolean contexts
  * @author Brandon Mills
@@ -67255,7 +70176,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":162}],272:[function(require,module,exports){
+},{"../ast-utils":164}],274:[function(require,module,exports){
 /**
  * @fileoverview Rule to disallow unnecessary labels
  * @author Toru Nagashima
@@ -67399,7 +70320,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":162}],273:[function(require,module,exports){
+},{"../ast-utils":164}],275:[function(require,module,exports){
 /**
  * @fileoverview Disallow parenthesising higher precedence subexpressions.
  * @author Michael Ficarra
@@ -67461,6 +70382,8 @@ module.exports = {
         var NESTED_BINARY = ALL_NODES && context.options[1] && context.options[1].nestedBinaryExpressions === false;
         var EXCEPT_RETURN_ASSIGN = ALL_NODES && context.options[1] && context.options[1].returnAssign === false;
         var IGNORE_JSX = ALL_NODES && context.options[1] && context.options[1].ignoreJSX;
+        var PRECEDENCE_OF_ASSIGNMENT_EXPR = precedence({ type: "AssignmentExpression" });
+        var PRECEDENCE_OF_UPDATE_EXPR = precedence({ type: "UpdateExpression" });
 
         /**
          * Determines if this rule should be enforced for a node given the current configuration.
@@ -67748,7 +70671,7 @@ module.exports = {
          * @returns {void}
          * @private
          */
-        function dryUnaryUpdate(node) {
+        function checkUnaryUpdate(node) {
             if (node.type === "UnaryExpression" && node.argument.type === "BinaryExpression" && node.argument.operator === "**") {
                 return;
             }
@@ -67764,7 +70687,7 @@ module.exports = {
          * @returns {void}
          * @private
          */
-        function dryCallNew(node) {
+        function checkCallNew(node) {
             if (hasExcessParens(node.callee) && precedence(node.callee) >= precedence(node) && !(node.type === "CallExpression" && (node.callee.type === "FunctionExpression" || node.callee.type === "NewExpression" && !isNewExpressionWithParens(node.callee)) &&
 
             // One set of parentheses are allowed for a function expression
@@ -67772,12 +70695,12 @@ module.exports = {
                 report(node.callee);
             }
             if (node.arguments.length === 1) {
-                if (hasDoubleExcessParens(node.arguments[0]) && precedence(node.arguments[0]) >= precedence({ type: "AssignmentExpression" })) {
+                if (hasDoubleExcessParens(node.arguments[0]) && precedence(node.arguments[0]) >= PRECEDENCE_OF_ASSIGNMENT_EXPR) {
                     report(node.arguments[0]);
                 }
             } else {
                 [].forEach.call(node.arguments, function (arg) {
-                    if (hasExcessParens(arg) && precedence(arg) >= precedence({ type: "AssignmentExpression" })) {
+                    if (hasExcessParens(arg) && precedence(arg) >= PRECEDENCE_OF_ASSIGNMENT_EXPR) {
                         report(arg);
                     }
                 });
@@ -67790,7 +70713,7 @@ module.exports = {
          * @returns {void}
          * @private
          */
-        function dryBinaryLogical(node) {
+        function checkBinaryLogical(node) {
             var prec = precedence(node);
             var leftPrecedence = precedence(node.left);
             var rightPrecedence = precedence(node.right);
@@ -67806,10 +70729,42 @@ module.exports = {
             }
         }
 
+        /**
+         * Check the parentheses around the super class of the given class definition.
+         * @param {ASTNode} node The node of class declarations to check.
+         * @returns {void}
+         */
+        function checkClass(node) {
+            if (!node.superClass) {
+                return;
+            }
+
+            // If `node.superClass` is a LeftHandSideExpression, parentheses are extra.
+            // Otherwise, parentheses are needed.
+            var hasExtraParens = precedence(node.superClass) > PRECEDENCE_OF_UPDATE_EXPR ? hasExcessParens(node.superClass) : hasDoubleExcessParens(node.superClass);
+
+            if (hasExtraParens) {
+                report(node.superClass);
+            }
+        }
+
+        /**
+         * Check the parentheses around the argument of the given spread operator.
+         * @param {ASTNode} node The node of spread elements/properties to check.
+         * @returns {void}
+         */
+        function checkSpreadOperator(node) {
+            var hasExtraParens = precedence(node.argument) >= PRECEDENCE_OF_ASSIGNMENT_EXPR ? hasExcessParens(node.argument) : hasDoubleExcessParens(node.argument);
+
+            if (hasExtraParens) {
+                report(node.argument);
+            }
+        }
+
         return {
             ArrayExpression: function ArrayExpression(node) {
                 [].forEach.call(node.elements, function (e) {
-                    if (e && hasExcessParens(e) && precedence(e) >= precedence({ type: "AssignmentExpression" })) {
+                    if (e && hasExcessParens(e) && precedence(e) >= PRECEDENCE_OF_ASSIGNMENT_EXPR) {
                         report(e);
                     }
                 });
@@ -67820,7 +70775,7 @@ module.exports = {
                 }
 
                 if (node.body.type !== "BlockStatement") {
-                    if (sourceCode.getFirstToken(node.body).value !== "{" && hasExcessParens(node.body) && precedence(node.body) >= precedence({ type: "AssignmentExpression" })) {
+                    if (sourceCode.getFirstToken(node.body).value !== "{" && hasExcessParens(node.body) && precedence(node.body) >= PRECEDENCE_OF_ASSIGNMENT_EXPR) {
                         report(node.body);
                         return;
                     }
@@ -67842,8 +70797,8 @@ module.exports = {
             },
 
 
-            BinaryExpression: dryBinaryLogical,
-            CallExpression: dryCallNew,
+            BinaryExpression: checkBinaryLogical,
+            CallExpression: checkCallNew,
 
             ConditionalExpression: function ConditionalExpression(node) {
                 if (isReturnAssignException(node)) {
@@ -67854,11 +70809,11 @@ module.exports = {
                     report(node.test);
                 }
 
-                if (hasExcessParens(node.consequent) && precedence(node.consequent) >= precedence({ type: "AssignmentExpression" })) {
+                if (hasExcessParens(node.consequent) && precedence(node.consequent) >= PRECEDENCE_OF_ASSIGNMENT_EXPR) {
                     report(node.consequent);
                 }
 
-                if (hasExcessParens(node.alternate) && precedence(node.alternate) >= precedence({ type: "AssignmentExpression" })) {
+                if (hasExcessParens(node.alternate) && precedence(node.alternate) >= PRECEDENCE_OF_ASSIGNMENT_EXPR) {
                     report(node.alternate);
                 }
             },
@@ -67908,7 +70863,7 @@ module.exports = {
             },
 
 
-            LogicalExpression: dryBinaryLogical,
+            LogicalExpression: checkBinaryLogical,
 
             MemberExpression: function MemberExpression(node) {
                 if (hasExcessParens(node.object) && precedence(node.object) >= precedence(node) && (node.computed || !(node.object.type === "Literal" && typeof node.object.value === "number" && astUtils.isDecimalInteger(node.object) ||
@@ -67923,13 +70878,13 @@ module.exports = {
             },
 
 
-            NewExpression: dryCallNew,
+            NewExpression: checkCallNew,
 
             ObjectExpression: function ObjectExpression(node) {
                 [].forEach.call(node.properties, function (e) {
                     var v = e.value;
 
-                    if (v && hasExcessParens(v) && precedence(v) >= precedence({ type: "AssignmentExpression" })) {
+                    if (v && hasExcessParens(v) && precedence(v) >= PRECEDENCE_OF_ASSIGNMENT_EXPR) {
                         report(v);
                     }
                 });
@@ -67974,12 +70929,12 @@ module.exports = {
             },
 
 
-            UnaryExpression: dryUnaryUpdate,
-            UpdateExpression: dryUnaryUpdate,
-            AwaitExpression: dryUnaryUpdate,
+            UnaryExpression: checkUnaryUpdate,
+            UpdateExpression: checkUnaryUpdate,
+            AwaitExpression: checkUnaryUpdate,
 
             VariableDeclarator: function VariableDeclarator(node) {
-                if (node.init && hasExcessParens(node.init) && precedence(node.init) >= precedence({ type: "AssignmentExpression" }) &&
+                if (node.init && hasExcessParens(node.init) && precedence(node.init) >= PRECEDENCE_OF_ASSIGNMENT_EXPR &&
 
                 // RegExp literal is allowed to have parens (#1589)
                 !(node.init.type === "Literal" && node.init.regex)) {
@@ -68004,12 +70959,20 @@ module.exports = {
                         report(node.argument);
                     }
                 }
-            }
+            },
+
+
+            ClassDeclaration: checkClass,
+            ClassExpression: checkClass,
+
+            SpreadElement: checkSpreadOperator,
+            SpreadProperty: checkSpreadOperator,
+            ExperimentalSpreadProperty: checkSpreadOperator
         };
     }
 };
 
-},{"../ast-utils.js":162,"esutils":136}],274:[function(require,module,exports){
+},{"../ast-utils.js":164,"esutils":138}],276:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag use of unnecessary semicolons
  * @author Nicholas C. Zakas
@@ -68115,7 +71078,7 @@ module.exports = {
     }
 };
 
-},{"../util/fix-tracker":436}],275:[function(require,module,exports){
+},{"../util/fix-tracker":438}],277:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag fall-through cases in switch statements.
  * @author Matt DuVall <http://mattduvall.com/>
@@ -68246,7 +71209,7 @@ module.exports = {
     }
 };
 
-},{"lodash":159}],276:[function(require,module,exports){
+},{"lodash":161}],278:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag use of a leading/trailing decimal point in a numeric literal
  * @author James Allardice
@@ -68301,7 +71264,7 @@ module.exports = {
     }
 };
 
-},{}],277:[function(require,module,exports){
+},{}],279:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag use of function declaration identifiers as variables.
  * @author Ian Christian Myers
@@ -68366,7 +71329,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":162}],278:[function(require,module,exports){
+},{"../ast-utils":164}],280:[function(require,module,exports){
 /**
  * @fileoverview Rule to disallow assignments to native objects or read-only global variables
  * @author Ilya Volodin
@@ -68383,7 +71346,7 @@ module.exports = {
         docs: {
             description: "disallow assignments to native objects or read-only global variables",
             category: "Best Practices",
-            recommended: false
+            recommended: true
         },
 
         schema: [{
@@ -68447,7 +71410,7 @@ module.exports = {
     }
 };
 
-},{}],279:[function(require,module,exports){
+},{}],281:[function(require,module,exports){
 /**
  * @fileoverview A rule to disallow the type conversions with shorter notations.
  * @author Toru Nagashima
@@ -68709,7 +71672,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":162}],280:[function(require,module,exports){
+},{"../ast-utils":164}],282:[function(require,module,exports){
 /**
  * @fileoverview Rule to check for implicit global variables and functions.
  * @author Joshua Peek
@@ -68765,7 +71728,7 @@ module.exports = {
     }
 };
 
-},{}],281:[function(require,module,exports){
+},{}],283:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag use of implied eval via setTimeout and setInterval
  * @author James Allardice
@@ -68919,7 +71882,7 @@ module.exports = {
     }
 };
 
-},{}],282:[function(require,module,exports){
+},{}],284:[function(require,module,exports){
 /**
  * @fileoverview Enforces or disallows inline comments.
  * @author Greg Cochard
@@ -68985,7 +71948,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":162}],283:[function(require,module,exports){
+},{"../ast-utils":164}],285:[function(require,module,exports){
 /**
  * @fileoverview Rule to enforce declarations in program or function body root.
  * @author Brandon Mills
@@ -69065,7 +72028,7 @@ module.exports = {
     }
 };
 
-},{}],284:[function(require,module,exports){
+},{}],286:[function(require,module,exports){
 /**
  * @fileoverview Validate strings passed to the RegExp constructor
  * @author Michael Ficarra
@@ -69171,7 +72134,7 @@ module.exports = {
     }
 };
 
-},{"espree":"espree"}],285:[function(require,module,exports){
+},{"espree":"espree"}],287:[function(require,module,exports){
 /**
  * @fileoverview A rule to disallow `this` keywords outside of classes or class-like objects.
  * @author Toru Nagashima
@@ -69289,7 +72252,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":162}],286:[function(require,module,exports){
+},{"../ast-utils":164}],288:[function(require,module,exports){
 /**
  * @fileoverview Rule to disalow whitespace that is not a tab or space, whitespace inside strings and comments are allowed
  * @author Jonathan Kingston
@@ -69541,7 +72504,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":162}],287:[function(require,module,exports){
+},{"../ast-utils":164}],289:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag usage of __iterator__ property
  * @author Ian Christian Myers
@@ -69577,7 +72540,7 @@ module.exports = {
     }
 };
 
-},{}],288:[function(require,module,exports){
+},{}],290:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag labels that are the same as an identifier
  * @author Ian Christian Myers
@@ -69643,7 +72606,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":162}],289:[function(require,module,exports){
+},{"../ast-utils":164}],291:[function(require,module,exports){
 /**
  * @fileoverview Disallow Labeled Statements
  * @author Nicholas C. Zakas
@@ -69783,7 +72746,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":162}],290:[function(require,module,exports){
+},{"../ast-utils":164}],292:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag blocks with no reason to exist
  * @author Brandon Mills
@@ -69896,7 +72859,7 @@ module.exports = {
     }
 };
 
-},{}],291:[function(require,module,exports){
+},{}],293:[function(require,module,exports){
 /**
  * @fileoverview Rule to disallow if as the only statmenet in an else block
  * @author Brandon Mills
@@ -69965,7 +72928,7 @@ module.exports = {
     }
 };
 
-},{}],292:[function(require,module,exports){
+},{}],294:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag creation of function inside a loop
  * @author Ilya Volodin
@@ -70152,7 +73115,7 @@ module.exports = {
     }
 };
 
-},{}],293:[function(require,module,exports){
+},{}],295:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag statements that use magic numbers (adapted from https://github.com/danielstjules/buddy.js)
  * @author Vincent Lemeunier
@@ -70293,7 +73256,7 @@ module.exports = {
     }
 };
 
-},{}],294:[function(require,module,exports){
+},{}],296:[function(require,module,exports){
 /**
  * @fileoverview Rule to disallow mixed binary operators.
  * @author Toru Nagashima
@@ -70479,7 +73442,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils.js":162}],295:[function(require,module,exports){
+},{"../ast-utils.js":164}],297:[function(require,module,exports){
 /**
  * @fileoverview Rule to enforce grouped require statements for Node.JS
  * @author Raphael Pigulla
@@ -70675,7 +73638,7 @@ module.exports = {
     }
 };
 
-},{}],296:[function(require,module,exports){
+},{}],298:[function(require,module,exports){
 /**
  * @fileoverview Disallow mixed spaces and tabs for indentation
  * @author Jary Niebur
@@ -70814,7 +73777,7 @@ module.exports = {
     }
 };
 
-},{}],297:[function(require,module,exports){
+},{}],299:[function(require,module,exports){
 /**
  * @fileoverview Rule to check use of chained assignment expressions
  * @author Stewart Rand
@@ -70855,7 +73818,7 @@ module.exports = {
     }
 };
 
-},{}],298:[function(require,module,exports){
+},{}],300:[function(require,module,exports){
 /**
  * @fileoverview Disallow use of multiple spaces.
  * @author Nicholas C. Zakas
@@ -71003,7 +73966,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":162}],299:[function(require,module,exports){
+},{"../ast-utils":164}],301:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag when using multiline strings
  * @author Ilya Volodin
@@ -71058,7 +74021,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":162}],300:[function(require,module,exports){
+},{"../ast-utils":164}],302:[function(require,module,exports){
 /**
  * @fileoverview Disallows multiple blank lines.
  * implementation adapted from the no-trailing-spaces rule.
@@ -71183,7 +74146,7 @@ module.exports = {
     }
 };
 
-},{}],301:[function(require,module,exports){
+},{}],303:[function(require,module,exports){
 /**
  * @fileoverview Rule to disallow assignments to native objects or read-only global variables
  * @author Ilya Volodin
@@ -71268,7 +74231,7 @@ module.exports = {
     }
 };
 
-},{}],302:[function(require,module,exports){
+},{}],304:[function(require,module,exports){
 /**
  * @fileoverview Rule to disallow a negated condition
  * @author Alberto Rodríguez
@@ -71351,7 +74314,7 @@ module.exports = {
     }
 };
 
-},{}],303:[function(require,module,exports){
+},{}],305:[function(require,module,exports){
 /**
  * @fileoverview A rule to disallow negated left operands of the `in` operator
  * @author Michael Ficarra
@@ -71389,7 +74352,7 @@ module.exports = {
     }
 };
 
-},{}],304:[function(require,module,exports){
+},{}],306:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag nested ternary expressions
  * @author Ian Christian Myers
@@ -71424,7 +74387,7 @@ module.exports = {
     }
 };
 
-},{}],305:[function(require,module,exports){
+},{}],307:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag when using new Function
  * @author Ilya Volodin
@@ -71454,25 +74417,23 @@ module.exports = {
         //--------------------------------------------------------------------------
 
         /**
-         * Checks if the callee is the Function constructor, and if so, reports an issue.
-         * @param {ASTNode} node The node to check and report on
+         * Reports a node.
+         * @param {ASTNode} node The node to report
          * @returns {void}
          * @private
          */
-        function validateCallee(node) {
-            if (node.callee.name === "Function") {
-                context.report({ node: node, message: "The Function constructor is eval." });
-            }
+        function report(node) {
+            context.report({ node: node, message: "The Function constructor is eval." });
         }
 
         return {
-            NewExpression: validateCallee,
-            CallExpression: validateCallee
+            "NewExpression[callee.name = 'Function']": report,
+            "CallExpression[callee.name = 'Function']": report
         };
     }
 };
 
-},{}],306:[function(require,module,exports){
+},{}],308:[function(require,module,exports){
 /**
  * @fileoverview A rule to disallow calls to the Object constructor
  * @author Matt DuVall <http://www.mattduvall.com/>
@@ -71507,7 +74468,7 @@ module.exports = {
     }
 };
 
-},{}],307:[function(require,module,exports){
+},{}],309:[function(require,module,exports){
 /**
  * @fileoverview Rule to disallow use of new operator with the `require` function
  * @author Wil Moore III
@@ -71542,7 +74503,7 @@ module.exports = {
     }
 };
 
-},{}],308:[function(require,module,exports){
+},{}],310:[function(require,module,exports){
 /**
  * @fileoverview Rule to disallow use of the new operator with the `Symbol` object
  * @author Alberto Rodríguez
@@ -71586,7 +74547,7 @@ module.exports = {
     }
 };
 
-},{}],309:[function(require,module,exports){
+},{}],311:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag when using constructor for wrapper objects
  * @author Ilya Volodin
@@ -71623,7 +74584,7 @@ module.exports = {
     }
 };
 
-},{}],310:[function(require,module,exports){
+},{}],312:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag statements with function invocation preceded by
  * "new" and not part of assignment
@@ -71650,17 +74611,14 @@ module.exports = {
     create: function create(context) {
 
         return {
-            ExpressionStatement: function ExpressionStatement(node) {
-
-                if (node.expression.type === "NewExpression") {
-                    context.report({ node: node, message: "Do not use 'new' for side effects." });
-                }
+            "ExpressionStatement > NewExpression": function ExpressionStatementNewExpression(node) {
+                context.report({ node: node.parent, message: "Do not use 'new' for side effects." });
             }
         };
     }
 };
 
-},{}],311:[function(require,module,exports){
+},{}],313:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag use of an object property of the global object (Math and JSON) as a function
  * @author James Allardice
@@ -71700,7 +74658,7 @@ module.exports = {
     }
 };
 
-},{}],312:[function(require,module,exports){
+},{}],314:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag octal escape sequences in string literals.
  * @author Ian Christian Myers
@@ -71746,7 +74704,7 @@ module.exports = {
     }
 };
 
-},{}],313:[function(require,module,exports){
+},{}],315:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag when initializing octal literal
  * @author Ilya Volodin
@@ -71781,7 +74739,7 @@ module.exports = {
     }
 };
 
-},{}],314:[function(require,module,exports){
+},{}],316:[function(require,module,exports){
 /**
  * @fileoverview Disallow reassignment of function parameters.
  * @author Nat Burns
@@ -71939,7 +74897,7 @@ module.exports = {
     }
 };
 
-},{}],315:[function(require,module,exports){
+},{}],317:[function(require,module,exports){
 /**
  * @fileoverview Disallow string concatenation when using __dirname and __filename
  * @author Nicholas C. Zakas
@@ -71984,7 +74942,7 @@ module.exports = {
     }
 };
 
-},{}],316:[function(require,module,exports){
+},{}],318:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag use of unary increment and decrement operators.
  * @author Ian Christian Myers
@@ -72044,7 +75002,7 @@ module.exports = {
     }
 };
 
-},{}],317:[function(require,module,exports){
+},{}],319:[function(require,module,exports){
 /**
  * @fileoverview Disallow the use of process.env()
  * @author Vignesh Anand
@@ -72081,7 +75039,7 @@ module.exports = {
     }
 };
 
-},{}],318:[function(require,module,exports){
+},{}],320:[function(require,module,exports){
 /**
  * @fileoverview Disallow the use of process.exit()
  * @author Nicholas C. Zakas
@@ -72110,18 +75068,14 @@ module.exports = {
         //--------------------------------------------------------------------------
 
         return {
-            CallExpression: function CallExpression(node) {
-                var callee = node.callee;
-
-                if (callee.type === "MemberExpression" && callee.object.name === "process" && callee.property.name === "exit") {
-                    context.report({ node: node, message: "Don't use process.exit(); throw an error instead." });
-                }
+            "CallExpression > MemberExpression.callee[object.name = 'process'][property.name = 'exit']": function CallExpressionMemberExpressionCalleeObjectNameProcessPropertyNameExit(node) {
+                context.report({ node: node.parent, message: "Don't use process.exit(); throw an error instead." });
             }
         };
     }
 };
 
-},{}],319:[function(require,module,exports){
+},{}],321:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag usage of __proto__ property
  * @author Ilya Volodin
@@ -72157,7 +75111,7 @@ module.exports = {
     }
 };
 
-},{}],320:[function(require,module,exports){
+},{}],322:[function(require,module,exports){
 /**
  * @fileoverview Rule to disallow use of Object.prototype builtins on objects
  * @author Andrew Levine
@@ -72209,7 +75163,7 @@ module.exports = {
     }
 };
 
-},{}],321:[function(require,module,exports){
+},{}],323:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag when the same variable is declared more then once.
  * @author Ilya Volodin
@@ -72310,7 +75264,7 @@ module.exports = {
     }
 };
 
-},{}],322:[function(require,module,exports){
+},{}],324:[function(require,module,exports){
 /**
  * @fileoverview Rule to count multiple spaces in regular expressions
  * @author Matt DuVall <http://www.mattduvall.com/>
@@ -72422,7 +75376,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":162}],323:[function(require,module,exports){
+},{"../ast-utils":164}],325:[function(require,module,exports){
 /**
  * @fileoverview Restrict usage of specified globals.
  * @author Benoît Zugmeyer
@@ -72502,7 +75456,7 @@ module.exports = {
     }
 };
 
-},{}],324:[function(require,module,exports){
+},{}],326:[function(require,module,exports){
 /**
  * @fileoverview Restrict usage of specified node imports.
  * @author Guy Ellis
@@ -72588,7 +75542,7 @@ module.exports = {
     }
 };
 
-},{"ignore":139}],325:[function(require,module,exports){
+},{"ignore":141}],327:[function(require,module,exports){
 /**
  * @fileoverview Restrict usage of specified node modules.
  * @author Christian Schulz
@@ -72697,7 +75651,7 @@ module.exports = {
     }
 };
 
-},{"ignore":139}],326:[function(require,module,exports){
+},{"ignore":141}],328:[function(require,module,exports){
 /**
  * @fileoverview Rule to disallow certain object properties
  * @author Will Klein & Eli White
@@ -72863,7 +75817,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":162}],327:[function(require,module,exports){
+},{"../ast-utils":164}],329:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag use of certain node types
  * @author Burak Yigit Kaya
@@ -72874,7 +75828,7 @@ module.exports = {
 // Rule Definition
 //------------------------------------------------------------------------------
 
-var nodeTypes = require("espree").Syntax;
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 module.exports = {
     meta: {
@@ -72886,36 +75840,22 @@ module.exports = {
 
         schema: {
             type: "array",
-            items: [{
-                enum: Object.keys(nodeTypes).map(function (k) {
-                    return nodeTypes[k];
-                })
-            }],
+            items: [{ type: "string" }],
             uniqueItems: true,
             minItems: 0
         }
     },
 
     create: function create(context) {
-
-        /**
-         * Generates a warning from the provided node, saying that node type is not allowed.
-         * @param {ASTNode} node The node to warn on
-         * @returns {void}
-         */
-        function warn(node) {
-            context.report({ node: node, message: "Using '{{type}}' is not allowed.", data: node });
-        }
-
-        return context.options.reduce(function (result, nodeType) {
-            result[nodeType] = warn;
-
-            return result;
+        return context.options.reduce(function (result, selector) {
+            return Object.assign(result, _defineProperty({}, selector, function (node) {
+                context.report({ node: node, message: "Using '{{selector}}' is not allowed.", data: { selector: selector } });
+            }));
         }, {});
     }
 };
 
-},{"espree":"espree"}],328:[function(require,module,exports){
+},{}],330:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag when return statement contains assignment
  * @author Ilya Volodin
@@ -72986,7 +75926,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":162}],329:[function(require,module,exports){
+},{"../ast-utils":164}],331:[function(require,module,exports){
 /**
  * @fileoverview Disallows unnecessary `return await`
  * @author Jordan Harband
@@ -73081,7 +76021,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":162}],330:[function(require,module,exports){
+},{"../ast-utils":164}],332:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag when using javascript: urls
  * @author Ilya Volodin
@@ -73122,7 +76062,7 @@ module.exports = {
     }
 };
 
-},{}],331:[function(require,module,exports){
+},{}],333:[function(require,module,exports){
 /**
  * @fileoverview Rule to disallow assignments where both sides are exactly the same
  * @author Toru Nagashima
@@ -73298,7 +76238,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":162}],332:[function(require,module,exports){
+},{"../ast-utils":164}],334:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag comparison where left part is the same as the right
  * part.
@@ -73336,7 +76276,7 @@ module.exports = {
     }
 };
 
-},{}],333:[function(require,module,exports){
+},{}],335:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag use of comma operator
  * @author Brandon Mills
@@ -73443,7 +76383,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":162}],334:[function(require,module,exports){
+},{"../ast-utils":164}],336:[function(require,module,exports){
 /**
  * @fileoverview Disallow shadowing of NaN, undefined, and Infinity (ES5 section 15.1.1)
  * @author Michael Ficarra
@@ -73513,7 +76453,7 @@ module.exports = {
     }
 };
 
-},{}],335:[function(require,module,exports){
+},{}],337:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag on declaring variables already declared in the outer scope
  * @author Ilya Volodin
@@ -73682,7 +76622,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":162}],336:[function(require,module,exports){
+},{"../ast-utils":164}],338:[function(require,module,exports){
 /**
  * @fileoverview Rule to check that spaced function application
  * @author Matt DuVall <http://www.mattduvall.com>
@@ -73751,7 +76691,7 @@ module.exports = {
     }
 };
 
-},{}],337:[function(require,module,exports){
+},{}],339:[function(require,module,exports){
 /**
  * @fileoverview Disallow sparse arrays
  * @author Nicholas C. Zakas
@@ -73792,7 +76732,7 @@ module.exports = {
     }
 };
 
-},{}],338:[function(require,module,exports){
+},{}],340:[function(require,module,exports){
 /**
  * @fileoverview Rule to check for properties whose identifier ends with the string Sync
  * @author Matt DuVall<http://mattduvall.com/>
@@ -73820,25 +76760,20 @@ module.exports = {
     create: function create(context) {
 
         return {
-            MemberExpression: function MemberExpression(node) {
-                var propertyName = node.property.name,
-                    syncRegex = /.*Sync$/;
-
-                if (syncRegex.exec(propertyName) !== null) {
-                    context.report({
-                        node: node,
-                        message: "Unexpected sync method: '{{propertyName}}'.",
-                        data: {
-                            propertyName: propertyName
-                        }
-                    });
-                }
+            "MemberExpression[property.name=/.*Sync$/]": function MemberExpressionPropertyNameSync$(node) {
+                context.report({
+                    node: node,
+                    message: "Unexpected sync method: '{{propertyName}}'.",
+                    data: {
+                        propertyName: node.property.name
+                    }
+                });
             }
         };
     }
 };
 
-},{}],339:[function(require,module,exports){
+},{}],341:[function(require,module,exports){
 /**
  * @fileoverview Rule to check for tabs inside a file
  * @author Gyandeep Singh
@@ -73884,7 +76819,7 @@ module.exports = {
     }
 };
 
-},{}],340:[function(require,module,exports){
+},{}],342:[function(require,module,exports){
 /**
  * @fileoverview Warn when using template string syntax in regular strings
  * @author Jeroen Engels
@@ -73922,7 +76857,7 @@ module.exports = {
     }
 };
 
-},{}],341:[function(require,module,exports){
+},{}],343:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag use of ternary operators.
  * @author Ian Christian Myers
@@ -73955,7 +76890,7 @@ module.exports = {
     }
 };
 
-},{}],342:[function(require,module,exports){
+},{}],344:[function(require,module,exports){
 /**
  * @fileoverview A rule to disallow using `this`/`super` before `super()`.
  * @author Toru Nagashima
@@ -74244,7 +77179,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":162}],343:[function(require,module,exports){
+},{"../ast-utils":164}],345:[function(require,module,exports){
 /**
  * @fileoverview Rule to restrict what can be thrown as an exception.
  * @author Dieter Oberkofler
@@ -74285,7 +77220,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":162}],344:[function(require,module,exports){
+},{"../ast-utils":164}],346:[function(require,module,exports){
 /**
  * @fileoverview Disallow trailing spaces at the end of lines.
  * @author Nodeca Team <https://github.com/nodeca>
@@ -74419,7 +77354,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":162}],345:[function(require,module,exports){
+},{"../ast-utils":164}],347:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag when initializing to undefined
  * @author Ilya Volodin
@@ -74478,7 +77413,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":162}],346:[function(require,module,exports){
+},{"../ast-utils":164}],348:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag references to undeclared variables.
  * @author Mark Macdonald
@@ -74550,7 +77485,7 @@ module.exports = {
     }
 };
 
-},{}],347:[function(require,module,exports){
+},{}],349:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag references to the undefined variable.
  * @author Michael Ficarra
@@ -74632,7 +77567,7 @@ module.exports = {
     }
 };
 
-},{}],348:[function(require,module,exports){
+},{}],350:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag trailing underscores in variable declarations.
  * @author Matt DuVall <http://www.mattduvall.com>
@@ -74805,7 +77740,7 @@ module.exports = {
     }
 };
 
-},{}],349:[function(require,module,exports){
+},{}],351:[function(require,module,exports){
 /**
  * @fileoverview Rule to spot scenarios where a newline looks like it is ending a statement, but is not.
  * @author Glen Mailer
@@ -74885,7 +77820,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":162}],350:[function(require,module,exports){
+},{"../ast-utils":164}],352:[function(require,module,exports){
 /**
  * @fileoverview Rule to disallow use of unmodified expressions in loop conditions
  * @author Toru Nagashima
@@ -75242,7 +78177,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":162,"../util/traverser":442}],351:[function(require,module,exports){
+},{"../ast-utils":164,"../util/traverser":444}],353:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag no-unneeded-ternary
  * @author Gyandeep Singh
@@ -75381,7 +78316,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":162}],352:[function(require,module,exports){
+},{"../ast-utils":164}],354:[function(require,module,exports){
 /**
  * @fileoverview Checks for unreachable code due to return, throws, break, and continue.
  * @author Joel Feenstra
@@ -75621,7 +78556,7 @@ module.exports = {
     }
 };
 
-},{}],353:[function(require,module,exports){
+},{}],355:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag unsafe statements in finally block
  * @author Onur Temizkan
@@ -75726,7 +78661,7 @@ module.exports = {
     }
 };
 
-},{}],354:[function(require,module,exports){
+},{}],356:[function(require,module,exports){
 /**
  * @fileoverview Rule to disallow negating the left operand of relational operators
  * @author Toru Nagashima
@@ -75805,7 +78740,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":162}],355:[function(require,module,exports){
+},{"../ast-utils":164}],357:[function(require,module,exports){
 /**
  * @fileoverview Flag expressions in statement position that do not side effect
  * @author Michael Ficarra
@@ -75832,6 +78767,9 @@ module.exports = {
                 },
                 allowTernary: {
                     type: "boolean"
+                },
+                allowTaggedTemplates: {
+                    type: "boolean"
                 }
             },
             additionalProperties: false
@@ -75841,7 +78779,8 @@ module.exports = {
     create: function create(context) {
         var config = context.options[0] || {},
             allowShortCircuit = config.allowShortCircuit || false,
-            allowTernary = config.allowTernary || false;
+            allowTernary = config.allowTernary || false,
+            allowTaggedTemplates = config.allowTaggedTemplates || false;
 
         /**
          * @param {ASTNode} node - any node
@@ -75898,10 +78837,15 @@ module.exports = {
                     return isValidExpression(node.consequent) && isValidExpression(node.alternate);
                 }
             }
+
             if (allowShortCircuit) {
                 if (node.type === "LogicalExpression") {
                     return isValidExpression(node.right);
                 }
+            }
+
+            if (allowTaggedTemplates && node.type === "TaggedTemplateExpression") {
+                return true;
             }
 
             return (/^(?:Assignment|Call|New|Update|Yield|Await)Expression$/.test(node.type) || node.type === "UnaryExpression" && ["delete", "void"].indexOf(node.operator) >= 0
@@ -75918,7 +78862,7 @@ module.exports = {
     }
 };
 
-},{}],356:[function(require,module,exports){
+},{}],358:[function(require,module,exports){
 /**
  * @fileoverview Rule to disallow unused labels.
  * @author Toru Nagashima
@@ -76025,7 +78969,7 @@ module.exports = {
     }
 };
 
-},{}],357:[function(require,module,exports){
+},{}],359:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag declared but unused variables
  * @author Ilya Volodin
@@ -76600,7 +79544,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":162,"lodash":159}],358:[function(require,module,exports){
+},{"../ast-utils":164,"lodash":161}],360:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag use of variables before they are defined
  * @author Ilya Volodin
@@ -76847,7 +79791,7 @@ module.exports = {
     }
 };
 
-},{}],359:[function(require,module,exports){
+},{}],361:[function(require,module,exports){
 /**
  * @fileoverview A rule to disallow unnecessary `.call()` and `.apply()`.
  * @author Toru Nagashima
@@ -76943,7 +79887,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":162}],360:[function(require,module,exports){
+},{"../ast-utils":164}],362:[function(require,module,exports){
 /**
  * @fileoverview Rule to disallow unnecessary computed property keys in object literals
  * @author Burak Yigit Kaya
@@ -77014,7 +79958,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":162}],361:[function(require,module,exports){
+},{"../ast-utils":164}],363:[function(require,module,exports){
 /**
  * @fileoverview disallow unncessary concatenation of template strings
  * @author Henry Zhu
@@ -77121,7 +80065,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":162}],362:[function(require,module,exports){
+},{"../ast-utils":164}],364:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag the use of redundant constructors in classes.
  * @author Alberto Rodríguez
@@ -77278,7 +80222,7 @@ module.exports = {
     }
 };
 
-},{}],363:[function(require,module,exports){
+},{}],365:[function(require,module,exports){
 /**
  * @fileoverview Look for useless escapes in strings and regexes
  * @author Onur Temizkan
@@ -77441,7 +80385,7 @@ module.exports = {
         function check(node) {
             var isTemplateElement = node.type === "TemplateElement";
 
-            if (isTemplateElement && node.parent && node.parent.parent && node.parent.parent.type === "TaggedTemplateExpression") {
+            if (isTemplateElement && node.parent && node.parent.parent && node.parent.parent.type === "TaggedTemplateExpression" && node.parent === node.parent.parent.quasi) {
 
                 // Don't report tagged template literals, because the backslash character is accessible to the tag function.
                 return;
@@ -77511,7 +80455,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":162}],364:[function(require,module,exports){
+},{"../ast-utils":164}],366:[function(require,module,exports){
 /**
  * @fileoverview Disallow renaming import, export, and destructured assignments to the same name.
  * @author Kai Cataldo
@@ -77651,7 +80595,7 @@ module.exports = {
     }
 };
 
-},{}],365:[function(require,module,exports){
+},{}],367:[function(require,module,exports){
 /**
  * @fileoverview Disallow redundant return statements
  * @author Teddy Katz
@@ -78035,7 +80979,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":162,"../util/fix-tracker":436}],366:[function(require,module,exports){
+},{"../ast-utils":164,"../util/fix-tracker":438}],368:[function(require,module,exports){
 /**
  * @fileoverview Rule to check for the usage of var.
  * @author Jamund Ferguson
@@ -78344,7 +81288,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":162}],367:[function(require,module,exports){
+},{"../ast-utils":164}],369:[function(require,module,exports){
 /**
  * @fileoverview Rule to disallow use of void operator.
  * @author Mike Sidorov
@@ -78382,7 +81326,7 @@ module.exports = {
     }
 };
 
-},{}],368:[function(require,module,exports){
+},{}],370:[function(require,module,exports){
 /**
  * @fileoverview Rule that warns about used warning comments
  * @author Alexander Schmidt <https://github.com/lxanders>
@@ -78517,7 +81461,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":162}],369:[function(require,module,exports){
+},{"../ast-utils":164}],371:[function(require,module,exports){
 /**
  * @fileoverview Rule to disallow whitespace before properties
  * @author Kai Cataldo
@@ -78611,7 +81555,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":162}],370:[function(require,module,exports){
+},{"../ast-utils":164}],372:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag use of with statement
  * @author Nicholas C. Zakas
@@ -78644,7 +81588,7 @@ module.exports = {
     }
 };
 
-},{}],371:[function(require,module,exports){
+},{}],373:[function(require,module,exports){
 /**
  * @fileoverview enforce the location of single-line statements
  * @author Teddy Katz
@@ -78768,7 +81712,7 @@ module.exports = {
     }
 };
 
-},{}],372:[function(require,module,exports){
+},{}],374:[function(require,module,exports){
 /**
  * @fileoverview Rule to require or disallow line breaks inside braces.
  * @author Toru Nagashima
@@ -78958,7 +81902,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":162}],373:[function(require,module,exports){
+},{"../ast-utils":164}],375:[function(require,module,exports){
 /**
  * @fileoverview Disallows or enforces spaces inside of object literals.
  * @author Jamund Ferguson
@@ -79249,7 +82193,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":162}],374:[function(require,module,exports){
+},{"../ast-utils":164}],376:[function(require,module,exports){
 /**
  * @fileoverview Rule to enforce placing object properties on separate lines.
  * @author Vitor Balocco
@@ -79335,7 +82279,7 @@ module.exports = {
     }
 };
 
-},{}],375:[function(require,module,exports){
+},{}],377:[function(require,module,exports){
 /**
  * @fileoverview Rule to enforce concise object methods and properties.
  * @author Jamund Ferguson
@@ -79776,7 +82720,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":162}],376:[function(require,module,exports){
+},{"../ast-utils":164}],378:[function(require,module,exports){
 /**
  * @fileoverview Rule to check multiple var declarations per line
  * @author Alberto Rodríguez
@@ -79863,7 +82807,7 @@ module.exports = {
     }
 };
 
-},{}],377:[function(require,module,exports){
+},{}],379:[function(require,module,exports){
 /**
  * @fileoverview A rule to control the use of single variable declarations.
  * @author Ian Christian Myers
@@ -80228,7 +83172,7 @@ module.exports = {
     }
 };
 
-},{}],378:[function(require,module,exports){
+},{}],380:[function(require,module,exports){
 /**
  * @fileoverview Rule to replace assignment expressions with operator assignment
  * @author Brandon Mills
@@ -80418,7 +83362,7 @@ module.exports = {
     }
 };
 
-},{}],379:[function(require,module,exports){
+},{}],381:[function(require,module,exports){
 /**
  * @fileoverview Operator linebreak - enforces operator linebreak style of two types: after and before
  * @author Benoît Zugmeyer
@@ -80660,7 +83604,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":162}],380:[function(require,module,exports){
+},{"../ast-utils":164}],382:[function(require,module,exports){
 /**
  * @fileoverview A rule to ensure blank lines within blocks.
  * @author Mathias Schreck <https://github.com/lo1tuma>
@@ -80911,7 +83855,7 @@ module.exports = {
     }
 };
 
-},{}],381:[function(require,module,exports){
+},{}],383:[function(require,module,exports){
 /**
  * @fileoverview A rule to suggest using arrow functions as callbacks.
  * @author Toru Nagashima
@@ -81198,7 +84142,7 @@ module.exports = {
     }
 };
 
-},{}],382:[function(require,module,exports){
+},{}],384:[function(require,module,exports){
 /**
  * @fileoverview A rule to suggest using of const declaration for variables that are never reassigned after declared.
  * @author Toru Nagashima
@@ -81510,7 +84454,7 @@ module.exports = {
     }
 };
 
-},{}],383:[function(require,module,exports){
+},{}],385:[function(require,module,exports){
 /**
  * @fileoverview Prefer destructuring from arrays and objects
  * @author Alex LaFroscia
@@ -81683,7 +84627,7 @@ module.exports = {
     }
 };
 
-},{}],384:[function(require,module,exports){
+},{}],386:[function(require,module,exports){
 /**
  * @fileoverview Rule to disallow `parseInt()` in favor of binary, octal, and hexadecimal literals
  * @author Annie Zhang, Henry Zhu
@@ -81761,7 +84705,7 @@ module.exports = {
     }
 };
 
-},{}],385:[function(require,module,exports){
+},{}],387:[function(require,module,exports){
 /**
  * @fileoverview restrict values that can be used as Promise rejection reasons
  * @author Teddy Katz
@@ -81884,7 +84828,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":162}],386:[function(require,module,exports){
+},{"../ast-utils":164}],388:[function(require,module,exports){
 /**
  * @fileoverview Rule to suggest using "Reflect" api over Function/Object methods
  * @author Keith Cirkel <http://keithcirkel.co.uk>
@@ -81987,7 +84931,7 @@ module.exports = {
     }
 };
 
-},{}],387:[function(require,module,exports){
+},{}],389:[function(require,module,exports){
 /**
  * @fileoverview Rule to
  * @author Toru Nagashima
@@ -82092,7 +85036,7 @@ module.exports = {
     }
 };
 
-},{}],388:[function(require,module,exports){
+},{}],390:[function(require,module,exports){
 /**
  * @fileoverview A rule to suggest using of the spread operator instead of `.apply()`.
  * @author Toru Nagashima
@@ -82206,7 +85150,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":162}],389:[function(require,module,exports){
+},{"../ast-utils":164}],391:[function(require,module,exports){
 /**
  * @fileoverview A rule to suggest using template literals instead of string concatenation.
  * @author Toru Nagashima
@@ -82439,7 +85383,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":162}],390:[function(require,module,exports){
+},{"../ast-utils":164}],392:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag non-quoted property names in object literals.
  * @author Mathias Bynens <http://mathiasbynens.be/>
@@ -82738,7 +85682,7 @@ module.exports = {
     }
 };
 
-},{"../util/keywords":437,"espree":"espree"}],391:[function(require,module,exports){
+},{"../util/keywords":439,"espree":"espree"}],393:[function(require,module,exports){
 /**
  * @fileoverview A rule to choose between single and double quote marks
  * @author Matt DuVall <http://www.mattduvall.com/>, Brandon Payton
@@ -83019,7 +85963,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":162}],392:[function(require,module,exports){
+},{"../ast-utils":164}],394:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag use of parseInt without a radix argument
  * @author James Allardice
@@ -83182,7 +86126,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":162}],393:[function(require,module,exports){
+},{"../ast-utils":164}],395:[function(require,module,exports){
 /**
  * @fileoverview Rule to disallow async functions which have no `await` expression.
  * @author Toru Nagashima
@@ -83277,7 +86221,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":162}],394:[function(require,module,exports){
+},{"../ast-utils":164}],396:[function(require,module,exports){
 /**
  * @fileoverview Rule to check for jsdoc presence.
  * @author Gyandeep Singh
@@ -83389,7 +86333,7 @@ module.exports = {
     }
 };
 
-},{}],395:[function(require,module,exports){
+},{}],397:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag the generator functions that does not have yield.
  * @author Toru Nagashima
@@ -83462,7 +86406,7 @@ module.exports = {
     }
 };
 
-},{}],396:[function(require,module,exports){
+},{}],398:[function(require,module,exports){
 /**
  * @fileoverview Enforce spacing between rest and spread operators and their expressions.
  * @author Kai Cataldo
@@ -83569,7 +86513,7 @@ module.exports = {
     }
 };
 
-},{}],397:[function(require,module,exports){
+},{}],399:[function(require,module,exports){
 /**
  * @fileoverview Validates spacing before and after semicolon
  * @author Mathias Schreck
@@ -83791,7 +86735,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":162}],398:[function(require,module,exports){
+},{"../ast-utils":164}],400:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag missing semicolons.
  * @author Nicholas C. Zakas
@@ -84014,7 +86958,7 @@ module.exports = {
     }
 };
 
-},{"../util/fix-tracker":436}],399:[function(require,module,exports){
+},{"../util/fix-tracker":438}],401:[function(require,module,exports){
 /**
  * @fileoverview Rule to require sorting of import declarations
  * @author Christian Schuller
@@ -84205,7 +87149,7 @@ module.exports = {
     }
 };
 
-},{}],400:[function(require,module,exports){
+},{}],402:[function(require,module,exports){
 /**
  * @fileoverview Rule to require object keys to be sorted
  * @author Toru Nagashima
@@ -84357,7 +87301,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":162,"natural-compare":160}],401:[function(require,module,exports){
+},{"../ast-utils":164,"natural-compare":162}],403:[function(require,module,exports){
 /**
  * @fileoverview Rule to require sorting of variables within a single Variable Declaration block
  * @author Ilya Volodin
@@ -84395,11 +87339,11 @@ module.exports = {
 
         return {
             VariableDeclaration: function VariableDeclaration(node) {
-                node.declarations.reduce(function (memo, decl) {
-                    if (decl.id.type === "ObjectPattern" || decl.id.type === "ArrayPattern") {
-                        return memo;
-                    }
+                var idDeclarations = node.declarations.filter(function (decl) {
+                    return decl.id.type === "Identifier";
+                });
 
+                idDeclarations.slice(1).reduce(function (memo, decl) {
                     var lastVariableName = memo.id.name,
                         currenVariableName = decl.id.name;
 
@@ -84413,13 +87357,13 @@ module.exports = {
                         return memo;
                     }
                     return decl;
-                }, node.declarations[0]);
+                }, idDeclarations[0]);
             }
         };
     }
 };
 
-},{}],402:[function(require,module,exports){
+},{}],404:[function(require,module,exports){
 /**
  * @fileoverview A rule to ensure whitespace before blocks.
  * @author Mathias Schreck <https://github.com/lo1tuma>
@@ -84565,7 +87509,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":162}],403:[function(require,module,exports){
+},{"../ast-utils":164}],405:[function(require,module,exports){
 /**
  * @fileoverview Rule to validate spacing before function paren.
  * @author Mathias Schreck <https://github.com/lo1tuma>
@@ -84724,7 +87668,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":162}],404:[function(require,module,exports){
+},{"../ast-utils":164}],406:[function(require,module,exports){
 /**
  * @fileoverview Disallows or enforces spaces inside of parentheses.
  * @author Jonathan Rajavuori
@@ -84996,7 +87940,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":162}],405:[function(require,module,exports){
+},{"../ast-utils":164}],407:[function(require,module,exports){
 /**
  * @fileoverview Require spaces around infix operators
  * @author Michael Ficarra
@@ -85151,7 +88095,7 @@ module.exports = {
     }
 };
 
-},{}],406:[function(require,module,exports){
+},{}],408:[function(require,module,exports){
 /**
  * @fileoverview This rule shoud require or disallow spaces before or after unary operations.
  * @author Marcin Kumorek
@@ -85474,7 +88418,7 @@ module.exports = {
     }
 };
 
-},{}],407:[function(require,module,exports){
+},{}],409:[function(require,module,exports){
 /**
  * @fileoverview Source code for spaced-comments rule
  * @author Gyandeep Singh
@@ -85845,7 +88789,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":162,"lodash":159}],408:[function(require,module,exports){
+},{"../ast-utils":164,"lodash":161}],410:[function(require,module,exports){
 /**
  * @fileoverview Rule to control usage of strict mode directives.
  * @author Brandon Mills
@@ -86121,7 +89065,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":162}],409:[function(require,module,exports){
+},{"../ast-utils":164}],411:[function(require,module,exports){
 /**
  * @fileoverview Rule to enforce description with the `Symbol` object
  * @author Jarek Rencz
@@ -86188,7 +89132,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":162}],410:[function(require,module,exports){
+},{"../ast-utils":164}],412:[function(require,module,exports){
 /**
  * @fileoverview Rule to enforce spacing around embedded expressions of template strings
  * @author Toru Nagashima
@@ -86295,7 +89239,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":162}],411:[function(require,module,exports){
+},{"../ast-utils":164}],413:[function(require,module,exports){
 /**
  * @fileoverview Rule to check spacing between template tags and their literals
  * @author Jonathan Wilsson
@@ -86373,7 +89317,7 @@ module.exports = {
     }
 };
 
-},{}],412:[function(require,module,exports){
+},{}],414:[function(require,module,exports){
 /**
  * @fileoverview Require or disallow Unicode BOM
  * @author Andrew Johnston <https://github.com/ehjay>
@@ -86438,7 +89382,7 @@ module.exports = {
     }
 };
 
-},{}],413:[function(require,module,exports){
+},{}],415:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag comparisons to the value NaN
  * @author James Allardice
@@ -86473,7 +89417,7 @@ module.exports = {
     }
 };
 
-},{}],414:[function(require,module,exports){
+},{}],416:[function(require,module,exports){
 /**
  * @fileoverview Validates JSDoc comments are syntactically correct
  * @author Nicholas C. Zakas
@@ -86880,7 +89824,7 @@ module.exports = {
     }
 };
 
-},{"doctrine":14}],415:[function(require,module,exports){
+},{"doctrine":14}],417:[function(require,module,exports){
 /**
  * @fileoverview Ensures that the results of typeof are compared against a valid string
  * @author Ian Christian Myers
@@ -86954,7 +89898,7 @@ module.exports = {
     }
 };
 
-},{}],416:[function(require,module,exports){
+},{}],418:[function(require,module,exports){
 /**
  * @fileoverview Rule to enforce var declarations are only at the top of a function.
  * @author Danny Fritz
@@ -87095,7 +90039,7 @@ module.exports = {
     }
 };
 
-},{}],417:[function(require,module,exports){
+},{}],419:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag when IIFE is not wrapped in parens
  * @author Ilya Volodin
@@ -87233,7 +90177,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":162}],418:[function(require,module,exports){
+},{"../ast-utils":164}],420:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag when regex literals are not wrapped in parens
  * @author Matt DuVall <http://www.mattduvall.com>
@@ -87286,7 +90230,7 @@ module.exports = {
     }
 };
 
-},{}],419:[function(require,module,exports){
+},{}],421:[function(require,module,exports){
 /**
  * @fileoverview Rule to check the spacing around the * in yield* expressions.
  * @author Bryan Smith
@@ -87399,7 +90343,7 @@ module.exports = {
     }
 };
 
-},{}],420:[function(require,module,exports){
+},{}],422:[function(require,module,exports){
 /**
  * @fileoverview Rule to require or disallow yoda comparisons
  * @author Nicholas C. Zakas
@@ -87682,7 +90626,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":162}],421:[function(require,module,exports){
+},{"../ast-utils":164}],423:[function(require,module,exports){
 (function (process){
 /**
  * @fileoverview Tracks performance of individual rules.
@@ -87826,7 +90770,7 @@ module.exports = function () {
 }();
 
 }).call(this,require('_process'))
-},{"_process":7}],422:[function(require,module,exports){
+},{"_process":7}],424:[function(require,module,exports){
 /**
  * @fileoverview Define the cursor which iterates tokens and comments in reverse.
  * @author Toru Nagashima
@@ -87905,7 +90849,7 @@ module.exports = function (_Cursor) {
     return BackwardTokenCommentCursor;
 }(Cursor);
 
-},{"./cursor":424,"./utils":434}],423:[function(require,module,exports){
+},{"./cursor":426,"./utils":436}],425:[function(require,module,exports){
 /**
  * @fileoverview Define the cursor which iterates tokens only in reverse.
  * @author Toru Nagashima
@@ -87986,7 +90930,7 @@ module.exports = function (_Cursor) {
     return BackwardTokenCursor;
 }(Cursor);
 
-},{"./cursor":424,"./utils":434}],424:[function(require,module,exports){
+},{"./cursor":426,"./utils":436}],426:[function(require,module,exports){
 /**
  * @fileoverview Define the abstract class about cursors which iterate tokens.
  * @author Toru Nagashima
@@ -88085,7 +91029,7 @@ module.exports = function () {
   return Cursor;
 }();
 
-},{}],425:[function(require,module,exports){
+},{}],427:[function(require,module,exports){
 /**
  * @fileoverview Define 2 token factories; forward and backward.
  * @author Toru Nagashima
@@ -88196,7 +91140,7 @@ var CursorFactory = function () {
 exports.forward = new CursorFactory(ForwardTokenCursor, ForwardTokenCommentCursor);
 exports.backward = new CursorFactory(BackwardTokenCursor, BackwardTokenCommentCursor);
 
-},{"./backward-token-comment-cursor":422,"./backward-token-cursor":423,"./filter-cursor":427,"./forward-token-comment-cursor":428,"./forward-token-cursor":429,"./limit-cursor":431,"./skip-cursor":433}],426:[function(require,module,exports){
+},{"./backward-token-comment-cursor":424,"./backward-token-cursor":425,"./filter-cursor":429,"./forward-token-comment-cursor":430,"./forward-token-cursor":431,"./limit-cursor":433,"./skip-cursor":435}],428:[function(require,module,exports){
 /**
  * @fileoverview Define the abstract class about cursors which manipulate another cursor.
  * @author Toru Nagashima
@@ -88257,7 +91201,7 @@ module.exports = function (_Cursor) {
   return DecorativeCursor;
 }(Cursor);
 
-},{"./cursor":424}],427:[function(require,module,exports){
+},{"./cursor":426}],429:[function(require,module,exports){
 /**
  * @fileoverview Define the cursor which ignores specified tokens.
  * @author Toru Nagashima
@@ -88324,7 +91268,7 @@ module.exports = function (_DecorativeCursor) {
     return FilterCursor;
 }(DecorativeCursor);
 
-},{"./decorative-cursor":426}],428:[function(require,module,exports){
+},{"./decorative-cursor":428}],430:[function(require,module,exports){
 /**
  * @fileoverview Define the cursor which iterates tokens and comments.
  * @author Toru Nagashima
@@ -88403,7 +91347,7 @@ module.exports = function (_Cursor) {
     return ForwardTokenCommentCursor;
 }(Cursor);
 
-},{"./cursor":424,"./utils":434}],429:[function(require,module,exports){
+},{"./cursor":426,"./utils":436}],431:[function(require,module,exports){
 /**
  * @fileoverview Define the cursor which iterates tokens only.
  * @author Toru Nagashima
@@ -88492,7 +91436,7 @@ module.exports = function (_Cursor) {
     return ForwardTokenCursor;
 }(Cursor);
 
-},{"./cursor":424,"./utils":434}],430:[function(require,module,exports){
+},{"./cursor":426,"./utils":436}],432:[function(require,module,exports){
 /**
  * @fileoverview Object to handle access and retrieval of tokens.
  * @author Brandon Mills
@@ -89018,7 +91962,7 @@ module.exports = function () {
 
 module.exports.PUBLIC_METHODS = PUBLIC_METHODS;
 
-},{"./cursors":425,"./forward-token-cursor":429,"./padded-token-cursor":432,"assert":5}],431:[function(require,module,exports){
+},{"./cursors":427,"./forward-token-cursor":431,"./padded-token-cursor":434,"assert":5}],433:[function(require,module,exports){
 /**
  * @fileoverview Define the cursor which limits the number of tokens.
  * @author Toru Nagashima
@@ -89082,7 +92026,7 @@ module.exports = function (_DecorativeCursor) {
     return LimitCursor;
 }(DecorativeCursor);
 
-},{"./decorative-cursor":426}],432:[function(require,module,exports){
+},{"./decorative-cursor":428}],434:[function(require,module,exports){
 /**
  * @fileoverview Define the cursor which iterates tokens only, with inflated range.
  * @author Toru Nagashima
@@ -89135,7 +92079,7 @@ module.exports = function (_ForwardTokenCursor) {
   return PaddedTokenCursor;
 }(ForwardTokenCursor);
 
-},{"./forward-token-cursor":429}],433:[function(require,module,exports){
+},{"./forward-token-cursor":431}],435:[function(require,module,exports){
 /**
  * @fileoverview Define the cursor which ignores the first few tokens.
  * @author Toru Nagashima
@@ -89201,7 +92145,7 @@ module.exports = function (_DecorativeCursor) {
     return SkipCursor;
 }(DecorativeCursor);
 
-},{"./decorative-cursor":426}],434:[function(require,module,exports){
+},{"./decorative-cursor":428}],436:[function(require,module,exports){
 /**
  * @fileoverview Define utilify functions for token store.
  * @author Toru Nagashima
@@ -89299,7 +92243,7 @@ exports.getLastIndex = function getLastIndex(tokens, indexMap, endLoc) {
     return tokens.length - 1;
 };
 
-},{"lodash":159}],435:[function(require,module,exports){
+},{"lodash":161}],437:[function(require,module,exports){
 /**
  * @fileoverview The event generator for comments.
  * @author Toru Nagashima
@@ -89427,7 +92371,7 @@ var CommentEventGenerator = function () {
 
 module.exports = CommentEventGenerator;
 
-},{}],436:[function(require,module,exports){
+},{}],438:[function(require,module,exports){
 /**
  * @fileoverview Helper class to aid in constructing fix commands.
  * @author Alan Pierce
@@ -89567,7 +92511,7 @@ var FixTracker = function () {
 
 module.exports = FixTracker;
 
-},{"../ast-utils":162}],437:[function(require,module,exports){
+},{"../ast-utils":164}],439:[function(require,module,exports){
 /**
  * @fileoverview A shared list of ES3 keywords.
  * @author Josh Perez
@@ -89576,13 +92520,204 @@ module.exports = FixTracker;
 
 module.exports = ["abstract", "boolean", "break", "byte", "case", "catch", "char", "class", "const", "continue", "debugger", "default", "delete", "do", "double", "else", "enum", "export", "extends", "false", "final", "finally", "float", "for", "function", "goto", "if", "implements", "import", "in", "instanceof", "int", "interface", "long", "native", "new", "null", "package", "private", "protected", "public", "return", "short", "static", "super", "switch", "synchronized", "this", "throw", "throws", "transient", "true", "try", "typeof", "var", "void", "volatile", "while", "with"];
 
-},{}],438:[function(require,module,exports){
+},{}],440:[function(require,module,exports){
 /**
  * @fileoverview The event generator for AST nodes.
  * @author Toru Nagashima
  */
 
 "use strict";
+
+//------------------------------------------------------------------------------
+// Requirements
+//------------------------------------------------------------------------------
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var esquery = require("esquery");
+var lodash = require("lodash");
+
+//------------------------------------------------------------------------------
+// Typedefs
+//------------------------------------------------------------------------------
+
+/**
+ * An object describing an AST selector
+ * @typedef {Object} ASTSelector
+ * @property {string} rawSelector The string that was parsed into this selector
+ * @property {boolean} isExit `true` if this should be emitted when exiting the node rather than when entering
+ * @property {Object} parsedSelector An object (from esquery) describing the matching behavior of the selector
+ * @property {string[]|null} listenerTypes A list of node types that could possibly cause the selector to match,
+ * or `null` if all node types could cause a match
+ * @property {number} attributeCount The total number of classes, pseudo-classes, and attribute queries in this selector
+ * @property {number} identifierCount The total number of identifier queries in this selector
+ */
+
+//------------------------------------------------------------------------------
+// Helpers
+//------------------------------------------------------------------------------
+
+/**
+* Gets the possible types of a selector
+* @param {Object} parsedSelector An object (from esquery) describing the matching behavior of the selector
+* @returns {string[]|null} The node types that could possibly trigger this selector, or `null` if all node types could trigger it
+*/
+function getPossibleTypes(parsedSelector) {
+    switch (parsedSelector.type) {
+        case "identifier":
+            return [parsedSelector.value];
+
+        case "matches":
+            {
+                var typesForComponents = parsedSelector.selectors.map(getPossibleTypes);
+
+                if (typesForComponents.every(function (typesForComponent) {
+                    return typesForComponent;
+                })) {
+                    return lodash.union.apply(null, typesForComponents);
+                }
+                return null;
+            }
+
+        case "compound":
+            {
+                var _typesForComponents = parsedSelector.selectors.map(getPossibleTypes).filter(function (typesForComponent) {
+                    return typesForComponent;
+                });
+
+                // If all of the components could match any type, then the compound could also match any type.
+                if (!_typesForComponents.length) {
+                    return null;
+                }
+
+                /*
+                 * If at least one of the components could only match a particular type, the compound could only match
+                 * the intersection of those types.
+                 */
+                return lodash.intersection.apply(null, _typesForComponents);
+            }
+
+        case "child":
+        case "descendant":
+        case "sibling":
+        case "adjacent":
+            return getPossibleTypes(parsedSelector.right);
+
+        default:
+            return null;
+
+    }
+}
+
+/**
+ * Counts the number of class, pseudo-class, and attribute queries in this selector
+ * @param {Object} parsedSelector An object (from esquery) describing the selector's matching behavior
+ * @returns {number} The number of class, pseudo-class, and attribute queries in this selector
+ */
+function countClassAttributes(parsedSelector) {
+    switch (parsedSelector.type) {
+        case "child":
+        case "descendant":
+        case "sibling":
+        case "adjacent":
+            return countClassAttributes(parsedSelector.left) + countClassAttributes(parsedSelector.right);
+
+        case "compound":
+        case "not":
+        case "matches":
+            return parsedSelector.selectors.reduce(function (sum, childSelector) {
+                return sum + countClassAttributes(childSelector);
+            }, 0);
+
+        case "attribute":
+        case "field":
+        case "nth-child":
+        case "nth-last-child":
+            return 1;
+
+        default:
+            return 0;
+    }
+}
+
+/**
+ * Counts the number of identifier queries in this selector
+ * @param {Object} parsedSelector An object (from esquery) describing the selector's matching behavior
+ * @returns {number} The number of identifier queries
+ */
+function countIdentifiers(parsedSelector) {
+    switch (parsedSelector.type) {
+        case "child":
+        case "descendant":
+        case "sibling":
+        case "adjacent":
+            return countIdentifiers(parsedSelector.left) + countIdentifiers(parsedSelector.right);
+
+        case "compound":
+        case "not":
+        case "matches":
+            return parsedSelector.selectors.reduce(function (sum, childSelector) {
+                return sum + countIdentifiers(childSelector);
+            }, 0);
+
+        case "identifier":
+            return 1;
+
+        default:
+            return 0;
+    }
+}
+
+/**
+ * Compares the specificity of two selector objects, with CSS-like rules.
+ * @param {ASTSelector} selectorA An AST selector descriptor
+ * @param {ASTSelector} selectorB Another AST selector descriptor
+ * @returns {number}
+ * a value less than 0 if selectorA is less specific than selectorB
+ * a value greater than 0 if selectorA is more specific than selectorB
+ * a value less than 0 if selectorA and selectorB have the same specificity, and selectorA <= selectorB alphabetically
+ * a value greater than 0 if selectorA and selectorB have the same specificity, and selectorA > selectorB alphabetically
+ */
+function compareSpecificity(selectorA, selectorB) {
+    return selectorA.attributeCount - selectorB.attributeCount || selectorA.identifierCount - selectorB.identifierCount || (selectorA.rawSelector <= selectorB.rawSelector ? -1 : 1);
+}
+
+/**
+ * Parses a raw selector string, and throws a useful error if parsing fails.
+ * @param {string} rawSelector A raw AST selector
+ * @returns {Object} An object (from esquery) describing the matching behavior of this selector
+ * @throws {Error} An error if the selector is invalid
+ */
+function tryParseSelector(rawSelector) {
+    try {
+        return esquery.parse(rawSelector.replace(/:exit$/, ""));
+    } catch (err) {
+        if (typeof err.offset === "number") {
+            throw new Error("Syntax error in selector \"" + rawSelector + "\" at position " + err.offset + ": " + err.message);
+        }
+        throw err;
+    }
+}
+
+/**
+ * Parses a raw selector string, and returns the parsed selector along with specificity and type information.
+ * @param {string} rawSelector A raw AST selector
+ * @returns {ASTSelector} A selector descriptor
+ */
+var parseSelector = lodash.memoize(function (rawSelector) {
+    var parsedSelector = tryParseSelector(rawSelector);
+
+    return {
+        rawSelector: rawSelector,
+        isExit: rawSelector.endsWith(":exit"),
+        parsedSelector: parsedSelector,
+        listenerTypes: getPossibleTypes(parsedSelector),
+        attributeCount: countClassAttributes(parsedSelector),
+        identifierCount: countIdentifiers(parsedSelector)
+    };
+});
 
 //------------------------------------------------------------------------------
 // Public Interface
@@ -89601,53 +92736,148 @@ module.exports = ["abstract", "boolean", "break", "byte", "case", "catch", "char
  * ```
  */
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
 var NodeEventGenerator = function () {
 
-  /**
-   * @param {EventEmitter} emitter - An event emitter which is the destination of events.
-   */
-  function NodeEventGenerator(emitter) {
-    _classCallCheck(this, NodeEventGenerator);
+    /**
+    * @param {EventEmitter} emitter - An event emitter which is the destination of events. This emitter must already
+    * have registered listeners for all of the events that it needs to listen for.
+    * @returns {NodeEventGenerator} new instance
+    */
+    function NodeEventGenerator(emitter) {
+        var _this = this;
 
-    this.emitter = emitter;
-  }
+        _classCallCheck(this, NodeEventGenerator);
 
-  /**
-   * Emits an event of entering AST node.
-   * @param {ASTNode} node - A node which was entered.
-   * @returns {void}
-   */
+        this.emitter = emitter;
+        this.currentAncestry = [];
+        this.enterSelectorsByNodeType = new Map();
+        this.exitSelectorsByNodeType = new Map();
+        this.anyTypeEnterSelectors = [];
+        this.anyTypeExitSelectors = [];
 
+        var eventNames = typeof emitter.eventNames === "function"
 
-  _createClass(NodeEventGenerator, [{
-    key: "enterNode",
-    value: function enterNode(node) {
-      this.emitter.emit(node.type, node);
+        // Use the built-in eventNames() function if available (Node 6+)
+        ? emitter.eventNames()
+
+        /*
+         * Otherwise, use the private _events property.
+         * Using a private property isn't ideal here, but this seems to
+         * be the best way to get a list of event names without overriding
+         * addEventListener, which would hurt performance. This property
+         * is widely used and unlikely to be removed in a future version
+         * (see https://github.com/nodejs/node/issues/1817). Also, future
+         * node versions will have eventNames() anyway.
+         */
+        : Object.keys(emitter._events); // eslint-disable-line no-underscore-dangle
+
+        eventNames.forEach(function (rawSelector) {
+            var selector = parseSelector(rawSelector);
+
+            if (selector.listenerTypes) {
+                selector.listenerTypes.forEach(function (nodeType) {
+                    var typeMap = selector.isExit ? _this.exitSelectorsByNodeType : _this.enterSelectorsByNodeType;
+
+                    if (!typeMap.has(nodeType)) {
+                        typeMap.set(nodeType, []);
+                    }
+                    typeMap.get(nodeType).push(selector);
+                });
+            } else {
+                (selector.isExit ? _this.anyTypeExitSelectors : _this.anyTypeEnterSelectors).push(selector);
+            }
+        });
+
+        this.anyTypeEnterSelectors.sort(compareSpecificity);
+        this.anyTypeExitSelectors.sort(compareSpecificity);
+        this.enterSelectorsByNodeType.forEach(function (selectorList) {
+            return selectorList.sort(compareSpecificity);
+        });
+        this.exitSelectorsByNodeType.forEach(function (selectorList) {
+            return selectorList.sort(compareSpecificity);
+        });
     }
 
     /**
-     * Emits an event of leaving AST node.
-     * @param {ASTNode} node - A node which was left.
+     * Checks a selector against a node, and emits it if it matches
+     * @param {ASTNode} node The node to check
+     * @param {ASTSelector} selector An AST selector descriptor
      * @returns {void}
      */
 
-  }, {
-    key: "leaveNode",
-    value: function leaveNode(node) {
-      this.emitter.emit(node.type + ":exit", node);
-    }
-  }]);
 
-  return NodeEventGenerator;
+    _createClass(NodeEventGenerator, [{
+        key: "applySelector",
+        value: function applySelector(node, selector) {
+            if (esquery.matches(node, selector.parsedSelector, this.currentAncestry)) {
+                this.emitter.emit(selector.rawSelector, node);
+            }
+        }
+
+        /**
+         * Applies all appropriate selectors to a node, in specificity order
+         * @param {ASTNode} node The node to check
+         * @param {boolean} isExit `false` if the node is currently being entered, `true` if it's currently being exited
+         * @returns {void}
+         */
+
+    }, {
+        key: "applySelectors",
+        value: function applySelectors(node, isExit) {
+            var selectorsByNodeType = (isExit ? this.exitSelectorsByNodeType : this.enterSelectorsByNodeType).get(node.type) || [];
+            var anyTypeSelectors = isExit ? this.anyTypeExitSelectors : this.anyTypeEnterSelectors;
+
+            /*
+             * selectorsByNodeType and anyTypeSelectors were already sorted by specificity in the constructor.
+             * Iterate through each of them, applying selectors in the right order.
+             */
+            var selectorsByTypeIndex = 0;
+            var anyTypeSelectorsIndex = 0;
+
+            while (selectorsByTypeIndex < selectorsByNodeType.length || anyTypeSelectorsIndex < anyTypeSelectors.length) {
+                if (selectorsByTypeIndex >= selectorsByNodeType.length || anyTypeSelectorsIndex < anyTypeSelectors.length && compareSpecificity(anyTypeSelectors[anyTypeSelectorsIndex], selectorsByNodeType[selectorsByTypeIndex]) < 0) {
+                    this.applySelector(node, anyTypeSelectors[anyTypeSelectorsIndex++]);
+                } else {
+                    this.applySelector(node, selectorsByNodeType[selectorsByTypeIndex++]);
+                }
+            }
+        }
+
+        /**
+         * Emits an event of entering AST node.
+         * @param {ASTNode} node - A node which was entered.
+         * @returns {void}
+         */
+
+    }, {
+        key: "enterNode",
+        value: function enterNode(node) {
+            if (node.parent) {
+                this.currentAncestry.unshift(node.parent);
+            }
+            this.applySelectors(node, false);
+        }
+
+        /**
+         * Emits an event of leaving AST node.
+         * @param {ASTNode} node - A node which was left.
+         * @returns {void}
+         */
+
+    }, {
+        key: "leaveNode",
+        value: function leaveNode(node) {
+            this.applySelectors(node, true);
+            this.currentAncestry.shift();
+        }
+    }]);
+
+    return NodeEventGenerator;
 }();
 
 module.exports = NodeEventGenerator;
 
-},{}],439:[function(require,module,exports){
+},{"esquery":131,"lodash":161}],441:[function(require,module,exports){
 /**
  * @fileoverview Pattern for detecting any letter (even letters outside of ASCII).
  * NOTE: This file was generated using this script in JSCS based on the Unicode 7.0.0 standard: https://github.com/jscs-dev/node-jscs/blob/f5ed14427deb7e7aac84f3056a5aab2d9f3e563e/publish/helpers/generate-patterns.js
@@ -89685,7 +92915,7 @@ module.exports = NodeEventGenerator;
 
 module.exports = /[A-Za-z\xAA\xB5\xBA\xC0-\xD6\xD8-\xF6\xF8-\u02C1\u02C6-\u02D1\u02E0-\u02E4\u02EC\u02EE\u0370-\u0374\u0376\u0377\u037A-\u037D\u037F\u0386\u0388-\u038A\u038C\u038E-\u03A1\u03A3-\u03F5\u03F7-\u0481\u048A-\u052F\u0531-\u0556\u0559\u0561-\u0587\u05D0-\u05EA\u05F0-\u05F2\u0620-\u064A\u066E\u066F\u0671-\u06D3\u06D5\u06E5\u06E6\u06EE\u06EF\u06FA-\u06FC\u06FF\u0710\u0712-\u072F\u074D-\u07A5\u07B1\u07CA-\u07EA\u07F4\u07F5\u07FA\u0800-\u0815\u081A\u0824\u0828\u0840-\u0858\u08A0-\u08B2\u0904-\u0939\u093D\u0950\u0958-\u0961\u0971-\u0980\u0985-\u098C\u098F\u0990\u0993-\u09A8\u09AA-\u09B0\u09B2\u09B6-\u09B9\u09BD\u09CE\u09DC\u09DD\u09DF-\u09E1\u09F0\u09F1\u0A05-\u0A0A\u0A0F\u0A10\u0A13-\u0A28\u0A2A-\u0A30\u0A32\u0A33\u0A35\u0A36\u0A38\u0A39\u0A59-\u0A5C\u0A5E\u0A72-\u0A74\u0A85-\u0A8D\u0A8F-\u0A91\u0A93-\u0AA8\u0AAA-\u0AB0\u0AB2\u0AB3\u0AB5-\u0AB9\u0ABD\u0AD0\u0AE0\u0AE1\u0B05-\u0B0C\u0B0F\u0B10\u0B13-\u0B28\u0B2A-\u0B30\u0B32\u0B33\u0B35-\u0B39\u0B3D\u0B5C\u0B5D\u0B5F-\u0B61\u0B71\u0B83\u0B85-\u0B8A\u0B8E-\u0B90\u0B92-\u0B95\u0B99\u0B9A\u0B9C\u0B9E\u0B9F\u0BA3\u0BA4\u0BA8-\u0BAA\u0BAE-\u0BB9\u0BD0\u0C05-\u0C0C\u0C0E-\u0C10\u0C12-\u0C28\u0C2A-\u0C39\u0C3D\u0C58\u0C59\u0C60\u0C61\u0C85-\u0C8C\u0C8E-\u0C90\u0C92-\u0CA8\u0CAA-\u0CB3\u0CB5-\u0CB9\u0CBD\u0CDE\u0CE0\u0CE1\u0CF1\u0CF2\u0D05-\u0D0C\u0D0E-\u0D10\u0D12-\u0D3A\u0D3D\u0D4E\u0D60\u0D61\u0D7A-\u0D7F\u0D85-\u0D96\u0D9A-\u0DB1\u0DB3-\u0DBB\u0DBD\u0DC0-\u0DC6\u0E01-\u0E30\u0E32\u0E33\u0E40-\u0E46\u0E81\u0E82\u0E84\u0E87\u0E88\u0E8A\u0E8D\u0E94-\u0E97\u0E99-\u0E9F\u0EA1-\u0EA3\u0EA5\u0EA7\u0EAA\u0EAB\u0EAD-\u0EB0\u0EB2\u0EB3\u0EBD\u0EC0-\u0EC4\u0EC6\u0EDC-\u0EDF\u0F00\u0F40-\u0F47\u0F49-\u0F6C\u0F88-\u0F8C\u1000-\u102A\u103F\u1050-\u1055\u105A-\u105D\u1061\u1065\u1066\u106E-\u1070\u1075-\u1081\u108E\u10A0-\u10C5\u10C7\u10CD\u10D0-\u10FA\u10FC-\u1248\u124A-\u124D\u1250-\u1256\u1258\u125A-\u125D\u1260-\u1288\u128A-\u128D\u1290-\u12B0\u12B2-\u12B5\u12B8-\u12BE\u12C0\u12C2-\u12C5\u12C8-\u12D6\u12D8-\u1310\u1312-\u1315\u1318-\u135A\u1380-\u138F\u13A0-\u13F4\u1401-\u166C\u166F-\u167F\u1681-\u169A\u16A0-\u16EA\u16F1-\u16F8\u1700-\u170C\u170E-\u1711\u1720-\u1731\u1740-\u1751\u1760-\u176C\u176E-\u1770\u1780-\u17B3\u17D7\u17DC\u1820-\u1877\u1880-\u18A8\u18AA\u18B0-\u18F5\u1900-\u191E\u1950-\u196D\u1970-\u1974\u1980-\u19AB\u19C1-\u19C7\u1A00-\u1A16\u1A20-\u1A54\u1AA7\u1B05-\u1B33\u1B45-\u1B4B\u1B83-\u1BA0\u1BAE\u1BAF\u1BBA-\u1BE5\u1C00-\u1C23\u1C4D-\u1C4F\u1C5A-\u1C7D\u1CE9-\u1CEC\u1CEE-\u1CF1\u1CF5\u1CF6\u1D00-\u1DBF\u1E00-\u1F15\u1F18-\u1F1D\u1F20-\u1F45\u1F48-\u1F4D\u1F50-\u1F57\u1F59\u1F5B\u1F5D\u1F5F-\u1F7D\u1F80-\u1FB4\u1FB6-\u1FBC\u1FBE\u1FC2-\u1FC4\u1FC6-\u1FCC\u1FD0-\u1FD3\u1FD6-\u1FDB\u1FE0-\u1FEC\u1FF2-\u1FF4\u1FF6-\u1FFC\u2071\u207F\u2090-\u209C\u2102\u2107\u210A-\u2113\u2115\u2119-\u211D\u2124\u2126\u2128\u212A-\u212D\u212F-\u2139\u213C-\u213F\u2145-\u2149\u214E\u2183\u2184\u2C00-\u2C2E\u2C30-\u2C5E\u2C60-\u2CE4\u2CEB-\u2CEE\u2CF2\u2CF3\u2D00-\u2D25\u2D27\u2D2D\u2D30-\u2D67\u2D6F\u2D80-\u2D96\u2DA0-\u2DA6\u2DA8-\u2DAE\u2DB0-\u2DB6\u2DB8-\u2DBE\u2DC0-\u2DC6\u2DC8-\u2DCE\u2DD0-\u2DD6\u2DD8-\u2DDE\u2E2F\u3005\u3006\u3031-\u3035\u303B\u303C\u3041-\u3096\u309D-\u309F\u30A1-\u30FA\u30FC-\u30FF\u3105-\u312D\u3131-\u318E\u31A0-\u31BA\u31F0-\u31FF\u3400-\u4DB5\u4E00-\u9FCC\uA000-\uA48C\uA4D0-\uA4FD\uA500-\uA60C\uA610-\uA61F\uA62A\uA62B\uA640-\uA66E\uA67F-\uA69D\uA6A0-\uA6E5\uA717-\uA71F\uA722-\uA788\uA78B-\uA78E\uA790-\uA7AD\uA7B0\uA7B1\uA7F7-\uA801\uA803-\uA805\uA807-\uA80A\uA80C-\uA822\uA840-\uA873\uA882-\uA8B3\uA8F2-\uA8F7\uA8FB\uA90A-\uA925\uA930-\uA946\uA960-\uA97C\uA984-\uA9B2\uA9CF\uA9E0-\uA9E4\uA9E6-\uA9EF\uA9FA-\uA9FE\uAA00-\uAA28\uAA40-\uAA42\uAA44-\uAA4B\uAA60-\uAA76\uAA7A\uAA7E-\uAAAF\uAAB1\uAAB5\uAAB6\uAAB9-\uAABD\uAAC0\uAAC2\uAADB-\uAADD\uAAE0-\uAAEA\uAAF2-\uAAF4\uAB01-\uAB06\uAB09-\uAB0E\uAB11-\uAB16\uAB20-\uAB26\uAB28-\uAB2E\uAB30-\uAB5A\uAB5C-\uAB5F\uAB64\uAB65\uABC0-\uABE2\uAC00-\uD7A3\uD7B0-\uD7C6\uD7CB-\uD7FB\uF900-\uFA6D\uFA70-\uFAD9\uFB00-\uFB06\uFB13-\uFB17\uFB1D\uFB1F-\uFB28\uFB2A-\uFB36\uFB38-\uFB3C\uFB3E\uFB40\uFB41\uFB43\uFB44\uFB46-\uFBB1\uFBD3-\uFD3D\uFD50-\uFD8F\uFD92-\uFDC7\uFDF0-\uFDFB\uFE70-\uFE74\uFE76-\uFEFC\uFF21-\uFF3A\uFF41-\uFF5A\uFF66-\uFFBE\uFFC2-\uFFC7\uFFCA-\uFFCF\uFFD2-\uFFD7\uFFDA-\uFFDC]|\uD800[\uDC00-\uDC0B\uDC0D-\uDC26\uDC28-\uDC3A\uDC3C\uDC3D\uDC3F-\uDC4D\uDC50-\uDC5D\uDC80-\uDCFA\uDE80-\uDE9C\uDEA0-\uDED0\uDF00-\uDF1F\uDF30-\uDF40\uDF42-\uDF49\uDF50-\uDF75\uDF80-\uDF9D\uDFA0-\uDFC3\uDFC8-\uDFCF]|\uD801[\uDC00-\uDC9D\uDD00-\uDD27\uDD30-\uDD63\uDE00-\uDF36\uDF40-\uDF55\uDF60-\uDF67]|\uD802[\uDC00-\uDC05\uDC08\uDC0A-\uDC35\uDC37\uDC38\uDC3C\uDC3F-\uDC55\uDC60-\uDC76\uDC80-\uDC9E\uDD00-\uDD15\uDD20-\uDD39\uDD80-\uDDB7\uDDBE\uDDBF\uDE00\uDE10-\uDE13\uDE15-\uDE17\uDE19-\uDE33\uDE60-\uDE7C\uDE80-\uDE9C\uDEC0-\uDEC7\uDEC9-\uDEE4\uDF00-\uDF35\uDF40-\uDF55\uDF60-\uDF72\uDF80-\uDF91]|\uD803[\uDC00-\uDC48]|\uD804[\uDC03-\uDC37\uDC83-\uDCAF\uDCD0-\uDCE8\uDD03-\uDD26\uDD50-\uDD72\uDD76\uDD83-\uDDB2\uDDC1-\uDDC4\uDDDA\uDE00-\uDE11\uDE13-\uDE2B\uDEB0-\uDEDE\uDF05-\uDF0C\uDF0F\uDF10\uDF13-\uDF28\uDF2A-\uDF30\uDF32\uDF33\uDF35-\uDF39\uDF3D\uDF5D-\uDF61]|\uD805[\uDC80-\uDCAF\uDCC4\uDCC5\uDCC7\uDD80-\uDDAE\uDE00-\uDE2F\uDE44\uDE80-\uDEAA]|\uD806[\uDCA0-\uDCDF\uDCFF\uDEC0-\uDEF8]|\uD808[\uDC00-\uDF98]|[\uD80C\uD840-\uD868\uD86A-\uD86C][\uDC00-\uDFFF]|\uD80D[\uDC00-\uDC2E]|\uD81A[\uDC00-\uDE38\uDE40-\uDE5E\uDED0-\uDEED\uDF00-\uDF2F\uDF40-\uDF43\uDF63-\uDF77\uDF7D-\uDF8F]|\uD81B[\uDF00-\uDF44\uDF50\uDF93-\uDF9F]|\uD82C[\uDC00\uDC01]|\uD82F[\uDC00-\uDC6A\uDC70-\uDC7C\uDC80-\uDC88\uDC90-\uDC99]|\uD835[\uDC00-\uDC54\uDC56-\uDC9C\uDC9E\uDC9F\uDCA2\uDCA5\uDCA6\uDCA9-\uDCAC\uDCAE-\uDCB9\uDCBB\uDCBD-\uDCC3\uDCC5-\uDD05\uDD07-\uDD0A\uDD0D-\uDD14\uDD16-\uDD1C\uDD1E-\uDD39\uDD3B-\uDD3E\uDD40-\uDD44\uDD46\uDD4A-\uDD50\uDD52-\uDEA5\uDEA8-\uDEC0\uDEC2-\uDEDA\uDEDC-\uDEFA\uDEFC-\uDF14\uDF16-\uDF34\uDF36-\uDF4E\uDF50-\uDF6E\uDF70-\uDF88\uDF8A-\uDFA8\uDFAA-\uDFC2\uDFC4-\uDFCB]|\uD83A[\uDC00-\uDCC4]|\uD83B[\uDE00-\uDE03\uDE05-\uDE1F\uDE21\uDE22\uDE24\uDE27\uDE29-\uDE32\uDE34-\uDE37\uDE39\uDE3B\uDE42\uDE47\uDE49\uDE4B\uDE4D-\uDE4F\uDE51\uDE52\uDE54\uDE57\uDE59\uDE5B\uDE5D\uDE5F\uDE61\uDE62\uDE64\uDE67-\uDE6A\uDE6C-\uDE72\uDE74-\uDE77\uDE79-\uDE7C\uDE7E\uDE80-\uDE89\uDE8B-\uDE9B\uDEA1-\uDEA3\uDEA5-\uDEA9\uDEAB-\uDEBB]|\uD869[\uDC00-\uDED6\uDF00-\uDFFF]|\uD86D[\uDC00-\uDF34\uDF40-\uDFFF]|\uD86E[\uDC00-\uDC1D]|\uD87E[\uDC00-\uDE1D]/;
 
-},{}],440:[function(require,module,exports){
+},{}],442:[function(require,module,exports){
 /**
  * @fileoverview An object that creates fix commands for rules.
  * @author Nicholas C. Zakas
@@ -89833,7 +93063,7 @@ var ruleFixer = Object.freeze({
 
 module.exports = ruleFixer;
 
-},{}],441:[function(require,module,exports){
+},{}],443:[function(require,module,exports){
 /**
  * @fileoverview Abstraction of JavaScript source code.
  * @author Nicholas C. Zakas
@@ -90273,7 +93503,7 @@ SourceCode.prototype = {
 
 module.exports = SourceCode;
 
-},{"../ast-utils":162,"../token-store":430,"./traverser":442,"lodash":159}],442:[function(require,module,exports){
+},{"../ast-utils":164,"../token-store":432,"./traverser":444,"lodash":161}],444:[function(require,module,exports){
 /**
  * @fileoverview Wrapper around estraverse
  * @author Nicholas C. Zakas
@@ -90284,46 +93514,66 @@ module.exports = SourceCode;
 // Requirements
 //------------------------------------------------------------------------------
 
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _get = function get(object, property, receiver) { if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { return get(parent, property, receiver); } } else if ("value" in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } };
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
 var estraverse = require("estraverse");
 
 //------------------------------------------------------------------------------
 // Helpers
 //------------------------------------------------------------------------------
 
-var KEY_BLACKLIST = ["parent", "leadingComments", "trailingComments"];
+var KEY_BLACKLIST = new Set(["parent", "leadingComments", "trailingComments"]);
 
 /**
  * Wrapper around an estraverse controller that ensures the correct keys
  * are visited.
  * @constructor
  */
-function Traverser() {
 
-    var controller = Object.create(new estraverse.Controller()),
-        originalTraverse = controller.traverse;
+var Traverser = function (_estraverse$Controlle) {
+    _inherits(Traverser, _estraverse$Controlle);
 
-    // intercept call to traverse() and add the fallback key to the visitor
-    controller.traverse = function (node, visitor) {
-        visitor.fallback = Traverser.getKeys;
-        return originalTraverse.call(this, node, visitor);
-    };
+    function Traverser() {
+        _classCallCheck(this, Traverser);
 
-    return controller;
-}
+        return _possibleConstructorReturn(this, (Traverser.__proto__ || Object.getPrototypeOf(Traverser)).apply(this, arguments));
+    }
 
-/**
- * Calculates the keys to use for traversal.
- * @param {ASTNode} node The node to read keys from.
- * @returns {string[]} An array of keys to visit on the node.
- * @private
- */
-Traverser.getKeys = function (node) {
-    return Object.keys(node).filter(function (key) {
-        return KEY_BLACKLIST.indexOf(key) === -1;
-    });
-};
+    _createClass(Traverser, [{
+        key: "traverse",
+        value: function traverse(node, visitor) {
+            visitor.fallback = Traverser.getKeys;
+            return _get(Traverser.prototype.__proto__ || Object.getPrototypeOf(Traverser.prototype), "traverse", this).call(this, node, visitor);
+        }
+
+        /**
+         * Calculates the keys to use for traversal.
+         * @param {ASTNode} node The node to read keys from.
+         * @returns {string[]} An array of keys to visit on the node.
+         * @private
+         */
+
+    }], [{
+        key: "getKeys",
+        value: function getKeys(node) {
+            return Object.keys(node).filter(function (key) {
+                return !KEY_BLACKLIST.has(key);
+            });
+        }
+    }]);
+
+    return Traverser;
+}(estraverse.Controller);
 
 module.exports = Traverser;
 
-},{"estraverse":131}]},{},[173])(173)
+},{"estraverse":133}]},{},[175])(175)
 });
