@@ -153,3 +153,7 @@
 - url: https://www.tanda.co
   src: /img/logos/tanda.svg
   name: Tanda
+
+- url: https://netflix.com
+  src: /img/logos/netflix.svg
+  name: Netflix
