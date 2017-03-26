@@ -112,11 +112,12 @@ module.exports = {
 	comments: false,
 	attachComment: false,
 	tokens: false,
-	tolerant: true,
 	ecmaVersion: {
 		3: false,
 		5: false,
-		6: true
+		6: true,
+		7: false,
+		8: false
 	},
 	sourceType: {
 		script: false,
