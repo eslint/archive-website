@@ -1,6 +1,8 @@
+[![Build Status](https://travis-ci.org/eslint/eslint.github.io.svg?branch=master)](https://travis-ci.org/eslint/eslint.github.io)
+
 # ESLint Web Site
 
-This contains the code running on eslint.org.
+This contains the code running on [eslint.org](http://eslint.org).
 
 ## Pull Requests
 
