@@ -4,17 +4,17 @@ layout: demo
 ---
 <link rel="stylesheet" property="stylesheet" href="../styles/parser.css"/>
 
-<div class="parserRow">
-    <div class="parserPanel parserPanel-editor">
-        <textarea id="editor" class="codePanel">var foo = bar;</textarea>
+<div class="row">
+    <div class="col-md-6 parserPanel">
+        <textarea id="editor" class="codePanel" spellcheck="false" wrap="off">var foo = bar;</textarea>
     </div>
-    <div class="parserPanel parserPanel-results">
+    <div class="col-md-6 parserPanel">
         <pre id="results" class="resultsPanel">
         </pre>
     </div>
 </div>
 <div class="row">
-    <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+    <div class="col-md-12 panel-group" id="accordion" role="tablist" aria-multiselectable="true">
         <div class="panel panel-default">
             <div class="panel-heading" role="tab" id="headingOne">
                 <h4 class="panel-title">

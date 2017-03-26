@@ -1,35 +1,22 @@
-.parserRow {
-    padding-top: 0px;
-}
-
 .parserPanel {
     font-size: 12px;
     margin-bottom: 2em;
     height: 575px;
-    width: 48%;
-    display: inline-block;
     vertical-align: top
 }
 
 .codePanel, .resultsPanel {
     height: 100%;
     overflow: auto;
+    font-size: 12px;
 }
 
-.scrollable {
-    overflow: scroll;
-}
-
-.codePanel, .resultsPanel {
-     font-size: 12px;
+.codePanel {
+    resize: none;
 }
 
 .error {
     color: red;
-}
-
-.txtRight {
-    text-align: right;
 }
 
 pre {
