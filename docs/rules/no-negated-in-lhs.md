@@ -6,8 +6,6 @@ layout: doc
 
 # disallow negating the left operand in `in` expressions (no-negated-in-lhs)
 
-(recommended) The `"extends": "eslint:recommended"` property in a configuration file enables this rule.
-
 This rule was **deprecated** in ESLint v3.3.0 and replaced by the [no-unsafe-negation](no-unsafe-negation) rule.
 
 ## Rule Details

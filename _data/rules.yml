@@ -119,7 +119,7 @@ categories:
       - description: disallow negating the left operand of relational operators
         fixable: true
         name: no-unsafe-negation
-        recommended: false
+        recommended: true
       - description: require calls to `isNaN()` when checking for `NaN`
         fixable: false
         name: use-isnan
