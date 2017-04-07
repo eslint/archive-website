@@ -1,0 +1,226 @@
+---
+title: no-extra-parens - Rules
+layout: doc
+---
+<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
+
+# disallow unnecessary parentheses (no-extra-parens)
+
+(fixable) The `--fix` option on the [command line](../user-guide/command-line-interface#fix) can automatically fix some of the problems reported by this rule.
+
+This rule restricts the use of parentheses to only where they are necessary.
+
+## Rule Details
+
+This rule always ignores extra parentheses around the following:
+
+* RegExp literals such as `(/abc/).test(var)` to avoid conflicts with the [wrap-regex](wrap-regex) rule
+* immediately-invoked function expressions (also known as IIFEs) such as `var x = (function () {})();` and `((function foo() {return 1;})())` to avoid conflicts with the [wrap-iife](wrap-iife) rule
+
+## Options
+
+This rule has a string option:
+
+* `"all"` (default) disallows unnecessary parentheses around *any* expression
+* `"functions"` disallows unnecessary parentheses *only* around function expressions
+
+This rule has an object option for exceptions to the `"all"` option:
+
+* `"conditionalAssign": false` allows extra parentheses around assignments in conditional test expressions
+* `"returnAssign": false` allows extra parentheses around assignments in `return` statements
+* `"nestedBinaryExpressions": false` allows extra parentheses in nested binary expressions
+* `"ignoreJSX": "none|all|multi-line|single-line"` allows extra parentheses around no/all/multi-line/single-line JSX components. Defaults to `none`.
+
+### all
+
+Examples of **incorrect** code for this rule with the default `"all"` option:
+
+```js
+/* eslint no-extra-parens: "error" */
+
+a = (b * c);
+
+(a * b) + c;
+
+typeof (a);
+
+(function(){} ? a() : b());
+```
+
+Examples of **correct** code for this rule with the default `"all"` option:
+
+```js
+/* eslint no-extra-parens: "error" */
+
+(0).toString();
+
+(Object.prototype.toString.call());
+
+({}.toString.call());
+
+(function(){}) ? a() : b();
+
+(/^a$/).test(x);
+```
+
+### conditionalAssign
+
+Examples of **correct** code for this rule with the `"all"` and `{ "conditionalAssign": false }` options:
+
+```js
+/* eslint no-extra-parens: ["error", "all", { "conditionalAssign": false }] */
+
+while ((foo = bar())) {}
+
+if ((foo = bar())) {}
+
+do; while ((foo = bar()))
+
+for (;(a = b););
+```
+
+### returnAssign
+
+Examples of **correct** code for this rule with the `"all"` and `{ "returnAssign": false }` options:
+
+```js
+/* eslint no-extra-parens: ["error", "all", { "returnAssign": false }] */
+
+function a(b) {
+  return (b = 1);
+}
+
+function a(b) {
+  return b ? (c = d) : (c = e);
+}
+
+b => (b = 1);
+
+b => b ? (c = d) : (c = e);
+```
+
+### nestedBinaryExpressions
+
+Examples of **correct** code for this rule with the `"all"` and `{ "nestedBinaryExpressions": false }` options:
+
+```js
+/* eslint no-extra-parens: ["error", "all", { "nestedBinaryExpressions": false }] */
+
+x = a || (b && c);
+x = a + (b * c);
+x = (a * b) / c;
+```
+
+### ignoreJSX
+
+Examples of **correct** code for this rule with the `all` and `{ "ignoreJSX": "all" }` options:
+
+```js
+/* eslint no-extra-parens: ["error", "all", { ignoreJSX: "all" }] */
+const Component = (<div />)
+const Component = (
+    <div
+        prop={true}
+    />
+)
+```
+
+Examples of **incorrect** code for this rule with the `all` and `{ "ignoreJSX": "multi-line" }` options:
+
+```js
+/* eslint no-extra-parens: ["error", "all", { ignoreJSX: "multi-line" }] */
+const Component = (<div />)
+const Component = (<div><p /></div>)
+```
+
+Examples of **correct** code for this rule with the `all` and `{ "ignoreJSX": "multi-line" }` options:
+
+```js
+/* eslint no-extra-parens: ["error", "all", { ignoreJSX: "multi-line" }] */
+const Component = (
+    <div>
+        <p />
+    </div>
+)
+const Component = (
+    <div
+        prop={true}
+    />
+)
+```
+
+Examples of **incorrect** code for this rule with the `all` and `{ "ignoreJSX": "single-line" }` options:
+
+```js
+/* eslint no-extra-parens: ["error", "all", { ignoreJSX: "single-line" }] */
+const Component = (
+    <div>
+        <p />
+    </div>
+)
+const Component = (
+    <div
+        prop={true}
+    />
+)
+```
+
+Examples of **correct** code for this rule with the `all` and `{ "ignoreJSX": "single-line" }` options:
+
+```js
+/* eslint no-extra-parens: ["error", "all", { ignoreJSX: "single-line" }] */
+const Component = (<div />)
+const Component = (<div><p /></div>)
+```
+
+### functions
+
+Examples of **incorrect** code for this rule with the `"functions"` option:
+
+```js
+/* eslint no-extra-parens: ["error", "functions"] */
+
+((function foo() {}))();
+
+var y = (function () {return 1;});
+```
+
+Examples of **correct** code for this rule with the `"functions"` option:
+
+```js
+/* eslint no-extra-parens: ["error", "functions"] */
+
+(0).toString();
+
+(Object.prototype.toString.call());
+
+({}.toString.call());
+
+(function(){} ? a() : b());
+
+(/^a$/).test(x);
+
+a = (b * c);
+
+(a * b) + c;
+
+typeof (a);
+```
+
+## Further Reading
+
+* [MDN: Operator Precedence](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Operator_Precedence)
+
+## Related Rules
+
+* [no-cond-assign](no-cond-assign)
+* [no-return-assign](no-return-assign)
+
+## Version
+
+This rule was introduced in ESLint 0.1.4.
+
+## Resources
+
+* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/no-extra-parens.js)
+* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/no-extra-parens.md)
