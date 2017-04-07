@@ -4,3 +4,4 @@ _algolia_api_key
 Gemfile.lock
 .jekyll-metadata
 npm-debug.log
+main/*.css.map
