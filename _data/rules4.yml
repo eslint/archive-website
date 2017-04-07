@@ -9,7 +9,7 @@ categories:
       - description: disallow comparing against -0
         fixable: false
         name: no-compare-neg-zero
-        recommended: false
+        recommended: true
       - description: disallow assignment operators in conditional expressions
         fixable: false
         name: no-cond-assign
@@ -144,7 +144,7 @@ categories:
       - description: enforce `return` statements in callbacks of array methods
         fixable: false
         name: array-callback-return
-        recommended: false
+        recommended: true
       - description: enforce the use of variables within the scope they are defined
         fixable: false
         name: block-scoped-var
@@ -382,7 +382,7 @@ categories:
       - description: disallow unnecessary escape characters
         fixable: false
         name: no-useless-escape
-        recommended: false
+        recommended: true
       - description: disallow redundant return statements
         fixable: true
         name: no-useless-return
@@ -507,6 +507,10 @@ categories:
       - description: require error handling in callbacks
         fixable: false
         name: handle-callback-err
+        recommended: false
+      - description: disallow use of the Buffer() constructor
+        fixable: false
+        name: no-buffer-constructor
         recommended: false
       - description: >-
           disallow `require` calls to be mixed with regular variable
@@ -1040,6 +1044,9 @@ deprecated:
   description: 'These rules have been deprecated and replaced by newer rules:'
   name: Deprecated
   rules:
+    - name: indent-legacy
+      replacedBy:
+        - indent
     - name: no-native-reassign
       replacedBy:
         - no-global-assign
