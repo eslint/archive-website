@@ -7,12 +7,7 @@ body {
   padding-top: 80px;
 }
 /* Allow anchors to not be hidden by the fixed header */
-h1:target:before,
-h2:target:before,
-h3:target:before,
-h4:target:before,
-h5:target:before,
-h6:target:before {
+:target:before {
   content: "";
   display: block;
   margin-top: -80px;
