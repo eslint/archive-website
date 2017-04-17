@@ -8,8 +8,8 @@ var editor = document.querySelector('#editor');
 var results = document.querySelector('#results');
 var controls = document.querySelector('#configuration');
 
-function handleSelectChange(property, el) {
-	var selected = el.value;
+function handleSelectChange(property, el, typeFunc) {
+	var selected = typeFunc(el.value);
 	config[property] = selected;
 }
 
@@ -39,7 +39,7 @@ function drawCheckboxes(config, property) {
 
 }
 
-function drawSelectBoxes(config, property) {
+function drawSelectBoxes(config, property, typeFunc) {
 	var el = document.querySelector('.' + property);
 	var select = document.createElement('select');
 	var options = Object.keys(config).filter(function(option) {
@@ -50,12 +50,12 @@ function drawSelectBoxes(config, property) {
 	});
 	select.innerHTML = options;
 	select.onchange = function(event) {
-		handleSelectChange(property, event.target);
+		handleSelectChange(property, event.target, typeFunc);
 	};
 	el.appendChild(select);
 
 	// reset the config to take the currently selected value
-	handleSelectChange(property, select);
+	handleSelectChange(property, select, typeFunc);
 }
 
 function drawVersion() {
@@ -66,8 +66,8 @@ function setupControls() {
 	drawVersion();
 	drawCheckboxes(config);
 	drawCheckboxes(config.ecmaFeatures, "ecmaFeatures");
-	drawSelectBoxes(config.ecmaVersion, "ecmaVersion");
-	drawSelectBoxes(config.sourceType, "sourceType");
+	drawSelectBoxes(config.ecmaVersion, "ecmaVersion", Number);
+	drawSelectBoxes(config.sourceType, "sourceType", String);
 }
 
 function showError(error) {
