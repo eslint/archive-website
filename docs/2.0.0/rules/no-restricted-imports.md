@@ -36,7 +36,7 @@ import fs from 'fs'; /*error 'fs' import is restricted from being used.*/
 ```js
 /*eslint no-restricted-imports: [2, "cluster"]*/
 
-import cluster from ' cluster '; /*error 'cluster' import is restricted from being used.*/
+import cluster from 'cluster '; /*error 'cluster' import is restricted from being used.*/
 ```
 
 The following patterns are not considered problems:
