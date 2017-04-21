@@ -144,7 +144,7 @@ categories:
       - description: enforce `return` statements in callbacks of array methods
         fixable: false
         name: array-callback-return
-        recommended: true
+        recommended: false
       - description: enforce the use of variables within the scope they are defined
         fixable: false
         name: block-scoped-var
@@ -547,6 +547,10 @@ categories:
       subjective:
     name: Stylistic Issues
     rules:
+      - description: enforce linebreaks after opening and before closing array brackets
+        fixable: true
+        name: array-bracket-newline
+        recommended: false
       - description: enforce consistent spacing inside array brackets
         fixable: true
         name: array-bracket-spacing
@@ -929,7 +933,7 @@ categories:
         name: no-class-assign
         recommended: true
       - description: disallow arrow functions where they could be confused with comparisons
-        fixable: false
+        fixable: true
         name: no-confusing-arrow
         recommended: false
       - description: disallow reassigning `const` variables

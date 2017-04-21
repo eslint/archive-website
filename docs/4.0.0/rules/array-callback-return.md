@@ -6,8 +6,6 @@ layout: doc
 
 # Enforces return statements in callbacks of array's methods (array-callback-return)
 
-(recommended) The `"extends": "eslint:recommended"` property in a configuration file enables this rule.
-
 `Array` has several methods for filtering, mapping, and folding.
 If we forget to write `return` statement in a callback of those, it's probably a mistake.
 
