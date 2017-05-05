@@ -59,6 +59,8 @@ layout: doc
 
 … and many more published on npm with the [eslintplugin](https://www.npmjs.com/browse/keyword/eslintplugin) keyword.
 
+You can also use the [Local Rules plugin](https://github.com/cletusw/eslint-plugin-local-rules) to use project-specific rules stored alongside your code.
+
 ## Other Integration Lists
 
 You can find a curated list of other popular integrations for ESLint in the [awesome-eslint](https://github.com/dustinspecker/awesome-eslint) GitHub repository.
