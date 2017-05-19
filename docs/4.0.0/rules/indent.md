@@ -538,11 +538,10 @@ Examples of **incorrect** code for this rule with the default `4, { "flatTernary
 ```js
 /*eslint indent: ["error", 4, { "flatTernaryExpressions": false }]*/
 
-foo
-    ? bar
-    : baz
-    ? qux
-    : boop;
+var a =
+    foo ? bar :
+    baz ? qux :
+    boop;
 ```
 
 Examples of **correct** code for this rule with the default `4, { "flatTernaryExpressions": false }` option:
@@ -550,11 +549,10 @@ Examples of **correct** code for this rule with the default `4, { "flatTernaryEx
 ```js
 /*eslint indent: ["error", 4, { "flatTernaryExpressions": false }]*/
 
-foo
-    ? bar
-    : baz
-        ? qux
-        : boop;
+var a =
+    foo ? bar :
+        baz ? qux :
+            boop;
 ```
 
 Examples of **incorrect** code for this rule with the `4, { "flatTernaryExpressions": true }` option:
@@ -562,11 +560,10 @@ Examples of **incorrect** code for this rule with the `4, { "flatTernaryExpressi
 ```js
 /*eslint indent: ["error", 4, { "flatTernaryExpressions": true }]*/
 
-foo
-    ? bar
-    : baz
-        ? qux
-        : boop;
+var a =
+    foo ? bar :
+        baz ? qux :
+            boop;
 ```
 
 Examples of **correct** code for this rule with the `4, { "flatTernaryExpressions": true }` option:
@@ -574,11 +571,10 @@ Examples of **correct** code for this rule with the `4, { "flatTernaryExpression
 ```js
 /*eslint indent: ["error", 4, { "flatTernaryExpressions": true }]*/
 
-foo
-    ? bar
-    : baz
-    ? qux
-    : boop;
+var a =
+    foo ? bar :
+    baz ? qux :
+    boop;
 ```
 
 
