@@ -24,7 +24,10 @@ All of these options give you fine-grained control over how ESLint treats your c
 ESLint allows you to specify the JavaScript language options you want to support. By default, ESLint expects ECMAScript 5 syntax. You can override that setting to enable support for other ECMAScript versions as well as JSX by using parser options.
 
 Please note that supporting JSX syntax is not the same as supporting React. React applies specific semantics to JSX syntax that ESLint doesn't recognize. We recommend using [eslint-plugin-react](https://github.com/yannickcr/eslint-plugin-react) if you are using React and want React semantics.
-
+By the same token, supporting ES6 syntax is not the same as supporting new ES6 globals (e.g., new types such as
+`Set`).
+For ES6 syntax, use `{ "parserOptions": { "ecmaVersion": 6 } }`; for new ES6 global variables, use `{ "env":
+{ "es6": true } }` (this setting enables ES6 syntax automatically).
 Parser options are set in your `.eslintrc.*` file by using the `parserOptions` property. The available options are:
 
 * `ecmaVersion` - set to 3, 5 (default), 6, 7, or 8 to specify the version of ECMAScript syntax you want to use. You can also set to 2015 (same as 6), 2016 (same as 7), or 2017 (same as 8) to use the year-based naming.
@@ -79,6 +82,7 @@ The following parsers are compatible with ESLint:
 
 * [Esprima](https://npmjs.com/package/esprima)
 * [Babel-ESLint](https://npmjs.com/package/babel-eslint) - A wrapper around the [Babel](http://babeljs.io) parser that makes it compatible with ESLint.
+* [typescript-eslint-parser(Experimental)](https://npmjs.com/package/typescript-eslint-parser) - A parser that converts TypeScript into an ESTree-compatible form so it can be used in ESLint. The goal is to allow TypeScript files to be parsed by ESLint (though not necessarily pass all ESLint rules).
 
 Note when using a custom parser, the `parserOptions` configuration property is still required for ESLint to work properly with features not in ECMAScript 5 by default. Parsers are all passed `parserOptions` and may or may not use them to determine which features to enable.
 
@@ -528,7 +532,7 @@ And in YAML:
   root: true
 ```
 
-For example, consider `projectA` which has `"root": true` set in the `.eslintrc` file in the main project directory.  In this case, while linting `main.js`, the configurations within `lib/`will be used, but the `.eslintrc` file in `projectA/` will not.
+For example, consider `projectA` which has `"root": true` set in the `.eslintrc` file in the `lib/` directory.  In this case, while linting `main.js`, the configurations within `lib/` will be used, but the `.eslintrc` file in `projectA/` will not.
 
 ```text
 home
@@ -755,7 +759,7 @@ Globs are matched using [node-ignore](https://github.com/kaelzhang/node-ignore),
 
 In addition to any patterns in a `.eslintignore` file, ESLint always ignores files in `/node_modules/*` and `/bower_components/*`.
 
-For example, placing the following `.eslintignore` file in the current working directory will ignore all of `node_modules`, `bower_components`, any files with the extensions `.ts.js` or `.coffee.js` extension that might have been transpiled, and anything in the `build/` directory except `build/index.js`:
+For example, placing the following `.eslintignore` file in the current working directory will ignore all of `node_modules`, `bower_components` and anything in the `build/` directory except `build/index.js`:
 
 ```text
 # /node_modules/* and /bower_components/* ignored by default

@@ -40,6 +40,9 @@ let x = function() {}
 let x = function() {}
 x
 `hello`
+
+let x = foo
+/regex/g.test(bar)
 ```
 
 Examples of **correct** code for this rule:

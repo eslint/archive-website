@@ -2,6 +2,12 @@ categories:
   - description: 'These rules relate to possible syntax or logic errors in JavaScript code:'
     name: Possible Errors
     rules:
+      - description: >-
+          enforce "for" loop update clause moving the counter in the right
+          direction.
+        fixable: false
+        name: for-direction
+        recommended: false
       - description: disallow `await` inside of loops
         fixable: false
         name: no-await-in-loop
@@ -9,7 +15,7 @@ categories:
       - description: disallow comparing against -0
         fixable: false
         name: no-compare-neg-zero
-        recommended: false
+        recommended: true
       - description: disallow assignment operators in conditional expressions
         fixable: false
         name: no-cond-assign
@@ -27,7 +33,7 @@ categories:
         name: no-control-regex
         recommended: true
       - description: disallow the use of `debugger`
-        fixable: false
+        fixable: true
         name: no-debugger
         recommended: true
       - description: disallow duplicate arguments in `function` definitions
@@ -382,7 +388,7 @@ categories:
       - description: disallow unnecessary escape characters
         fixable: false
         name: no-useless-escape
-        recommended: false
+        recommended: true
       - description: disallow redundant return statements
         fixable: true
         name: no-useless-return
@@ -508,6 +514,10 @@ categories:
         fixable: false
         name: handle-callback-err
         recommended: false
+      - description: disallow use of the Buffer() constructor
+        fixable: false
+        name: no-buffer-constructor
+        recommended: false
       - description: >-
           disallow `require` calls to be mixed with regular variable
           declarations
@@ -543,9 +553,17 @@ categories:
       subjective:
     name: Stylistic Issues
     rules:
+      - description: enforce linebreaks after opening and before closing array brackets
+        fixable: true
+        name: array-bracket-newline
+        recommended: false
       - description: enforce consistent spacing inside array brackets
         fixable: true
         name: array-bracket-spacing
+        recommended: false
+      - description: enforce line breaks after each array element
+        fixable: true
+        name: array-element-newline
         recommended: false
       - description: enforce consistent spacing inside single-line blocks
         fixable: true
@@ -653,10 +671,6 @@ categories:
         fixable: true
         name: lines-around-comment
         recommended: false
-      - description: require or disallow newlines around directives
-        fixable: true
-        name: lines-around-directive
-        recommended: false
       - description: enforce a maximum depth that blocks can be nested
         fixable: false
         name: max-depth
@@ -696,14 +710,6 @@ categories:
       - description: require parentheses when invoking a constructor with no arguments
         fixable: true
         name: new-parens
-        recommended: false
-      - description: require or disallow an empty line after variable declarations
-        fixable: true
-        name: newline-after-var
-        recommended: false
-      - description: require an empty line before `return` statements
-        fixable: true
-        name: newline-before-return
         recommended: false
       - description: require a newline after each call in a method chain
         fixable: false
@@ -827,6 +833,10 @@ categories:
         fixable: true
         name: padded-blocks
         recommended: false
+      - description: require or disallow padding lines between statements
+        fixable: true
+        name: padding-line-between-statements
+        recommended: false
       - description: require quotes around object literal property names
         fixable: true
         name: quote-props
@@ -848,6 +858,10 @@ categories:
       - description: enforce consistent spacing before and after semicolons
         fixable: true
         name: semi-spacing
+        recommended: false
+      - description: enforce location of semicolons
+        fixable: true
+        name: semi-style
         recommended: false
       - description: require object keys to be sorted
         fixable: false
@@ -882,6 +896,10 @@ categories:
       - description: enforce consistent spacing after the `//` or `/*` in a comment
         fixable: true
         name: spaced-comment
+        recommended: false
+      - description: enforce spacing around colons of switch statements
+        fixable: true
+        name: switch-colon-spacing
         recommended: false
       - description: require or disallow spacing between template tags and their literals
         fixable: true
@@ -925,7 +943,7 @@ categories:
         name: no-class-assign
         recommended: true
       - description: disallow arrow functions where they could be confused with comparisons
-        fixable: false
+        fixable: true
         name: no-confusing-arrow
         recommended: false
       - description: disallow reassigning `const` variables
@@ -1040,6 +1058,18 @@ deprecated:
   description: 'These rules have been deprecated and replaced by newer rules:'
   name: Deprecated
   rules:
+    - name: indent-legacy
+      replacedBy:
+        - indent
+    - name: lines-around-directive
+      replacedBy:
+        - padding-line-between-statements
+    - name: newline-after-var
+      replacedBy:
+        - padding-line-between-statements
+    - name: newline-before-return
+      replacedBy:
+        - padding-line-between-statements
     - name: no-native-reassign
       replacedBy:
         - no-global-assign

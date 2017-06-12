@@ -6,6 +6,8 @@ layout: doc
 
 # Disallow unnecessary escape usage (no-useless-escape)
 
+(recommended) The `"extends": "eslint:recommended"` property in a configuration file enables this rule.
+
 Escaping non-special characters in strings, template literals, and regular expressions doesn't have any effect, as demonstrated in the following example:
 
 ```js
