@@ -1,6 +1,7 @@
 'use strict';
 
-define(['react', 'jsx!editor', 'jsx!messages', 'jsx!configuration', 'eslint'], function(React, Editor, Messages, Configuration, eslint) {
+define(['react', 'jsx!editor', 'jsx!messages', 'jsx!configuration', 'eslint'], function(React, Editor, Messages, Configuration, Linter) {
+    var eslint = new Linter();
     return React.createClass({
         displayName: 'App',
         getInitialState: function() {
