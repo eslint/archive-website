@@ -5,3 +5,4 @@ Gemfile.lock
 .jekyll-metadata
 npm-debug.log
 main/*.css.map
+.idea

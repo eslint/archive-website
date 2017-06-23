@@ -1,6 +1,6 @@
 'use strict';
 
-define(['react', 'jsx!editor', 'jsx!messages', 'jsx!configuration', 'eslint'], function(React, Editor, Messages, Configuration, Linter) {
+define(['react', 'jsx!editor', 'jsx!messages', 'jsx!fixedcode', 'jsx!configuration', 'eslint'], function(React, Editor, Messages, FixedCode, Configuration, Linter) {
     var eslint = new Linter();
     return React.createClass({
         displayName: 'App',
@@ -64,7 +64,9 @@ define(['react', 'jsx!editor', 'jsx!messages', 'jsx!configuration', 'eslint'], f
                     }
                 },
                 text: 'var foo = bar;',
-                docs: getDocs()
+                docs: getDocs(),
+                fix: false,
+                fixedText: 'var foo = bar;'
             };
         },
 
@@ -78,14 +80,35 @@ define(['react', 'jsx!editor', 'jsx!messages', 'jsx!configuration', 'eslint'], f
                 this.lint();
             });
         },
+        verify: function() {
+            var results = eslint.verify(this.state.text, this.state.options);
+            this.setState({
+                messages: results,
+                name: this.state.text
+            });
+        },
+        verifyAndFix: function() {
+            var results = eslint.verifyAndFix(this.state.text, this.state.options, { filename: "fixedcode.js" });
+            this.setState({
+                messages: results.messages,
+                fixedText: results.output
+            });
+        },
         lint: function() {
             setTimeout(function() {
-                var results = eslint.verify(this.state.text, this.state.options);
-                this.setState({
-                    messages: results,
-                    name: this.state.text
-                });                
+                if (this.state.fix) {
+                    this.verifyAndFix()
+                } else {
+                    this.verify();
+                }
             }.bind(this), 1);
+        },
+        componentDidMount: function() {
+            $('a[data-toggle="tab"]').on("shown.bs.tab", function (e) {
+                this.setState({
+                    fix: e.target.innerText === "Fixed Code"
+                });
+            }.bind(this))
         },
         render: function() {
             return (
@@ -95,7 +118,20 @@ define(['react', 'jsx!editor', 'jsx!messages', 'jsx!configuration', 'eslint'], f
                             <Editor onChange={this.handleChange} text="var foo = bar;" errors={this.state.messages} />
                         </div>
                         <div className="col-md-5">
-                            <Messages values={this.state.messages} />
+                            <ul className="nav nav-tabs" role="tablist">
+                                <li role="presentation" className="active"><a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">Messages</a></li>
+                                <li role="presentation"><a href="#fixedCode" aria-controls="fixedCode" role="tab" data-toggle="tab">Fixed Code</a></li>
+                            </ul>
+
+                            <div className="tab-content">
+                                <div role="tabpanel" className="tab-pane active" >
+                                    {
+                                        this.state.fix ?
+                                            <FixedCode values={this.state.fixedText} /> :
+                                            <Messages values={this.state.messages} />
+                                    }
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div className="row">
