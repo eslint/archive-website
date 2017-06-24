@@ -15,7 +15,7 @@ define(['react', 'jsx!editor', 'jsx!messages', 'jsx!fixedCode', 'jsx!configurati
                 return result;
             }
 
-            return {
+            var initialState = JSON.parse(window.localStorage.getItem('linterDemoState')) || {
                 messages: [],
                 options: {
                     parserOptions: {
@@ -68,6 +68,9 @@ define(['react', 'jsx!editor', 'jsx!messages', 'jsx!fixedCode', 'jsx!configurati
                 fix: false,
                 fixedText: 'var foo = bar;'
             };
+
+            this.initialText = initialState.text;
+            return initialState;
         },
 
         handleChange: function(event) {
@@ -110,12 +113,15 @@ define(['react', 'jsx!editor', 'jsx!messages', 'jsx!fixedCode', 'jsx!configurati
                 });
             }.bind(this))
         },
+        componentDidUpdate: function() {
+            window.localStorage.setItem('linterDemoState', JSON.stringify(this.state));
+        },
         render: function() {
             return (
                 <div className="container editorRow">
                     <div className="row">
                         <div className="col-md-7">
-                            <Editor onChange={this.handleChange} text="var foo = bar;" errors={this.state.messages} />
+                            <Editor onChange={this.handleChange} text={this.initialText} errors={this.state.messages} />
                         </div>
                         <div className="col-md-5">
                             <ul className="nav nav-tabs" role="tablist">
