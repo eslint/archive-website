@@ -105,8 +105,8 @@ define(['react', 'jsx!editor', 'jsx!messages', 'jsx!fixedCode', 'jsx!configurati
         },
         componentDidMount: function() {
             $('a[data-toggle="tab"]').on("shown.bs.tab", function (e) {
-                this.setState({
-                    fix: e.target.innerText === "Fixed Code"
+                this.setState({ fix: e.target.innerText === "Fixed Code" }, function() {
+                    this.lint();
                 });
             }.bind(this))
         },
