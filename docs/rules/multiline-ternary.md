@@ -74,7 +74,7 @@ foo > bar ?
 Examples of **incorrect** code for this rule with the `"always-multiline"` option:
 
 ```js
-/*eslint multiline-ternary: ["error", "always"]*/
+/*eslint multiline-ternary: ["error", "always-multiline"]*/
 
 foo > bar ? value1 :
     value2;
@@ -89,7 +89,7 @@ foo > bar &&
 Examples of **correct** code for this rule with the `"always-multiline"` option:
 
 ```js
-/*eslint multiline-ternary: ["error", "always"]*/
+/*eslint multiline-ternary: ["error", "always-multiline"]*/
 
 foo > bar ? value1 : value2;
 
