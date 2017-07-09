@@ -17,6 +17,8 @@ This rule always ignores extra parentheses around the following:
 * RegExp literals such as `(/abc/).test(var)` to avoid conflicts with the [wrap-regex](wrap-regex) rule
 * immediately-invoked function expressions (also known as IIFEs) such as `var x = (function () {})();` and `((function foo() {return 1;})())` to avoid conflicts with the [wrap-iife](wrap-iife) rule
 
+In addition, this rule ignores parentheses around arrow function arguments to avoid conflicts with the [arrow-parens](arrow-parens) rule.
+
 ## Options
 
 This rule has a string option:
@@ -225,6 +227,7 @@ typeof (a);
 
 ## Related Rules
 
+* [arrow-parens](arrow-parens)
 * [no-cond-assign](no-cond-assign)
 * [no-return-assign](no-return-assign)
 

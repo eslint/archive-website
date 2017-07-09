@@ -8,6 +8,10 @@ categories:
         fixable: false
         name: for-direction
         recommended: false
+      - description: enforce `return` statements in getters
+        fixable: false
+        name: getter-return
+        recommended: false
       - description: disallow `await` inside of loops
         fixable: false
         name: no-await-in-loop
