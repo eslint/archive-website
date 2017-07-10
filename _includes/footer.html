@@ -42,9 +42,9 @@
     $(document).ready(function() {
       anchors.add('.doc h2, .doc h3, .doc h4, .blog h2, .blog h3, .blog h4');
       // If there’s a typo in old versions of the docs,
-      // you’ll just have to live with it :)
+      // it can be edited on eslint/eslint.github.io
       if (location.pathname.match(/^\/docs\/[\d.]+/)) {
-        $('.edit-link').parent().remove()
+        $('.edit-link').attr('href', $('.edit-link').attr('href').replace('eslint.github.io', 'eslint'))
         $('.alert-outdated').removeClass('hidden')
       }
       {% if page.homepage %}
