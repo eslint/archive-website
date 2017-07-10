@@ -2,6 +2,13 @@
 {% include menu.html %}
 <main class="doc">
   <article class="container">
+    <div class="alert alert-warning hidden alert-outdated" role="alert">
+      <strong class="header">Heads up!</strong>
+      <p>
+        This document is for an old version of ESLint that is <em>no longer supported</em>.
+        Please <a class="alert-link" href="{{ site.url }}/docs/user-guide/migrating-to-4.0.0">upgrade</a> to a newer release!
+      </p>
+    </div>
     {{ content
       | replace: '<p>Examples of <strong>incorrect</strong> code', '<p class="incorrect icon">Examples of <strong>incorrect</strong> code'
       | replace: '<p>Example of <strong>incorrect</strong> code', '<p class="incorrect icon">Example of <strong>incorrect</strong> code'

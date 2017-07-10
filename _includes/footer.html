@@ -45,6 +45,7 @@
       // you’ll just have to live with it :)
       if (location.pathname.match(/^\/docs\/[\d.]+/)) {
         $('.edit-link').parent().remove()
+        $('.alert-outdated').removeClass('hidden')
       }
       {% if page.homepage %}
       function shuffleArray(array) {
