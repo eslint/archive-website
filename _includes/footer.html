@@ -58,7 +58,7 @@
         return array;
       }
 
-      var logos = [{% for logo in site.data.logos %}{ url: '{{ logo.url }}', src: '{{ logo.src }}', name: '{{ logo.name }}' }{% unless forloop.last %},{% endunless %}{% endfor %}];
+      var logos = [{% for logo in site.data.logos %}{ url: '{{ logo.url }}', src: '{{ site.url }}{{ logo.src }}', name: '{{ logo.name }}' }{% unless forloop.last %},{% endunless %}{% endfor %}];
       logos = shuffleArray(logos);
       for (var i = 0, l = logos.length; i<l; i++) {
         var logo = $('<div class="slide col-sm-4"><a href="' + logos[i].url + '"><img src="' + logos[i].src + '" alt="' + logos[i].name + '"></a></div>');
