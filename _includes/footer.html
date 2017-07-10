@@ -43,7 +43,7 @@
       anchors.add('.doc h2, .doc h3, .doc h4, .blog h2, .blog h3, .blog h4');
       // If there’s a typo in old versions of the docs,
       // it can be edited on eslint/eslint.github.io
-      if (location.pathname.match(/^\/docs\/[\d.]+/)) {
+      if (location.pathname.match(/\/docs\/[\d.]+/)) {
         $('.edit-link').attr('href', $('.edit-link').attr('href').replace('eslint.github.io', 'eslint'))
         $('.alert-outdated').removeClass('hidden')
       }
