@@ -1,6 +1,6 @@
 'use strict';
 
-define(['react', 'jsx!editor', 'jsx!messages', 'jsx!fixedCode', 'jsx!configuration', 'eslint'], function(React, Editor, Messages, FixedCode, Configuration, Linter) {
+define(['react', 'lodash', 'jsx!editor', 'jsx!messages', 'jsx!fixedCode', 'jsx!configuration', 'eslint'], function(React, lodash, Editor, Messages, FixedCode, Configuration, Linter) {
     var eslint = new Linter();
     return React.createClass({
         displayName: 'App',
@@ -15,7 +15,9 @@ define(['react', 'jsx!editor', 'jsx!messages', 'jsx!fixedCode', 'jsx!configurati
                 return result;
             }
 
-            var initialState = JSON.parse(window.localStorage.getItem('linterDemoState')) || {
+            var storedState = JSON.parse(window.localStorage.getItem('linterDemoState') || '{}');
+
+            var initialState = lodash.defaultsDeep(storedState, {
                 messages: [],
                 options: {
                     parserOptions: {
@@ -67,7 +69,7 @@ define(['react', 'jsx!editor', 'jsx!messages', 'jsx!fixedCode', 'jsx!configurati
                 docs: getDocs(),
                 fix: false,
                 fixedText: 'var foo = bar;'
-            };
+            });
 
             this.initialText = initialState.text;
             return initialState;
