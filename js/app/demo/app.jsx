@@ -19,6 +19,16 @@ define(['react', 'jsx!editor', 'jsx!messages', 'jsx!fixedCode', 'jsx!configurati
         return object;
     }
 
+    var hasLocalStorage = function() {
+        try {
+            window.localStorage.setItem('localStorageTest', 'foo');
+            window.localStorage.removeItem('localStorageTest');
+            return true;
+        } catch (_) {
+            return false;
+        }
+    }();
+
     var eslint = new Linter();
     return React.createClass({
         displayName: 'App',
@@ -134,7 +144,9 @@ define(['react', 'jsx!editor', 'jsx!messages', 'jsx!fixedCode', 'jsx!configurati
             }.bind(this))
         },
         componentDidUpdate: function() {
-            window.localStorage.setItem('linterDemoState', JSON.stringify(this.state));
+            if (hasLocalStorage) {
+                window.localStorage.setItem('linterDemoState', JSON.stringify(this.state));
+            }
         },
         render: function() {
             return (
