@@ -1,6 +1,24 @@
 'use strict';
 
-define(['react', 'lodash', 'jsx!editor', 'jsx!messages', 'jsx!fixedCode', 'jsx!configuration', 'eslint'], function(React, lodash, Editor, Messages, FixedCode, Configuration, Linter) {
+define(['react', 'jsx!editor', 'jsx!messages', 'jsx!fixedCode', 'jsx!configuration', 'eslint'], function(React, Editor, Messages, FixedCode, Configuration, Linter) {
+    function defaultsDeep(object, defaults) {
+        Object.keys(defaults).forEach(function(defaultKey) {
+            if (Object.prototype.hasOwnProperty.call(object, defaultKey)) {
+                if (
+                    object[defaultKey] &&
+                    typeof object[defaultKey] === 'object' &&
+                    defaults[defaultKey] &&
+                    typeof defaults[defaultKey] === 'object'
+                ) {
+                    defaultsDeep(object[defaultKey], defaults[defaultKey]);
+                }
+            } else {
+                object[defaultKey] = defaults[defaultKey];
+            }
+        });
+        return object;
+    }
+
     var eslint = new Linter();
     return React.createClass({
         displayName: 'App',
@@ -17,7 +35,7 @@ define(['react', 'lodash', 'jsx!editor', 'jsx!messages', 'jsx!fixedCode', 'jsx!c
 
             var storedState = JSON.parse(window.localStorage.getItem('linterDemoState') || '{}');
 
-            var initialState = lodash.defaultsDeep(storedState, {
+            var initialState = defaultsDeep(storedState, {
                 messages: [],
                 options: {
                     parserOptions: {
