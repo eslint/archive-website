@@ -1,6 +1,34 @@
 'use strict';
 
 define(['react', 'jsx!editor', 'jsx!messages', 'jsx!fixedCode', 'jsx!configuration', 'eslint'], function(React, Editor, Messages, FixedCode, Configuration, Linter) {
+    function defaultsDeep(object, defaults) {
+        Object.keys(defaults).forEach(function(defaultKey) {
+            if (Object.prototype.hasOwnProperty.call(object, defaultKey)) {
+                if (
+                    object[defaultKey] &&
+                    typeof object[defaultKey] === 'object' &&
+                    defaults[defaultKey] &&
+                    typeof defaults[defaultKey] === 'object'
+                ) {
+                    defaultsDeep(object[defaultKey], defaults[defaultKey]);
+                }
+            } else {
+                object[defaultKey] = defaults[defaultKey];
+            }
+        });
+        return object;
+    }
+
+    var hasLocalStorage = function() {
+        try {
+            window.localStorage.setItem('localStorageTest', 'foo');
+            window.localStorage.removeItem('localStorageTest');
+            return true;
+        } catch (_) {
+            return false;
+        }
+    }();
+
     var eslint = new Linter();
     return React.createClass({
         displayName: 'App',
@@ -15,7 +43,9 @@ define(['react', 'jsx!editor', 'jsx!messages', 'jsx!fixedCode', 'jsx!configurati
                 return result;
             }
 
-            return {
+            var storedState = JSON.parse(window.localStorage.getItem('linterDemoState') || '{}');
+
+            var initialState = defaultsDeep(storedState, {
                 messages: [],
                 options: {
                     parserOptions: {
@@ -67,7 +97,10 @@ define(['react', 'jsx!editor', 'jsx!messages', 'jsx!fixedCode', 'jsx!configurati
                 docs: getDocs(),
                 fix: false,
                 fixedText: 'var foo = bar;'
-            };
+            });
+
+            this.initialText = initialState.text;
+            return initialState;
         },
 
         handleChange: function(event) {
@@ -110,12 +143,17 @@ define(['react', 'jsx!editor', 'jsx!messages', 'jsx!fixedCode', 'jsx!configurati
                 });
             }.bind(this))
         },
+        componentDidUpdate: function() {
+            if (hasLocalStorage) {
+                window.localStorage.setItem('linterDemoState', JSON.stringify(this.state));
+            }
+        },
         render: function() {
             return (
                 <div className="container editorRow">
                     <div className="row">
                         <div className="col-md-7">
-                            <Editor onChange={this.handleChange} text="var foo = bar;" errors={this.state.messages} />
+                            <Editor onChange={this.handleChange} text={this.initialText} errors={this.state.messages} />
                         </div>
                         <div className="col-md-5">
                             <ul className="nav nav-tabs" role="tablist">
