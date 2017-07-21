@@ -1013,8 +1013,8 @@ categories:
         name: prefer-destructuring
         recommended: false
       - description: >-
-          disallow `parseInt()` in favor of binary, octal, and hexadecimal
-          literals
+          disallow `parseInt()` and `Number.parseInt()` in favor of binary,
+          octal, and hexadecimal literals
         fixable: true
         name: prefer-numeric-literals
         recommended: false
