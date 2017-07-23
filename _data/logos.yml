@@ -157,3 +157,7 @@
 - url: https://netflix.com
   src: /img/logos/netflix.svg
   name: Netflix
+
+- url: https://bluecore.com
+  src: /img/logos/bluecore.svg
+  name: Bluecore
