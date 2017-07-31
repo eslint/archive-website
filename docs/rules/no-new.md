@@ -1,9 +1,9 @@
 ---
 title: no-new - Rules
 layout: doc
+edit_link: https://github.com/eslint/eslint/edit/master/docs/rulesno-new.md
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
-
 # Disallow new For Side Effects (no-new)
 
 The goal of using `new` with a constructor is typically to create an object of a particular type and store that object in a variable, such as:

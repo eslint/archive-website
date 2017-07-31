@@ -1,9 +1,9 @@
 ---
 title: prefer-reflect - Rules
 layout: doc
+edit_link: https://github.com/eslint/eslint/edit/master/docs/rulesprefer-reflect.md
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
-
 # Suggest using Reflect methods where applicable (prefer-reflect)
 
 This rule was **deprecated** in ESLint v3.9.0 and will not be replaced. The original intent of this rule now seems misguided as we have come to understand that `Reflect` methods are not actually intended to replace the `Object` counterparts the rule suggests, but rather exist as low-level primitives to be used with proxies in order to replicate the default behavior of various previously existing functionality.

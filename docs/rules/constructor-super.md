@@ -1,9 +1,9 @@
 ---
 title: constructor-super - Rules
 layout: doc
+edit_link: https://github.com/eslint/eslint/edit/master/docs/rulesconstructor-super.md
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
-
 # Verify calls of `super()` in constructors (constructor-super)
 
 (recommended) The `"extends": "eslint:recommended"` property in a configuration file enables this rule.

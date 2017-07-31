@@ -1,9 +1,9 @@
 ---
 title: no-empty-class - Rules
 layout: doc
+edit_link: https://github.com/eslint/eslint/edit/master/docs/rulesno-empty-class.md
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
-
 # no-empty-class: disallow empty character classes in regular expressions
 
 (removed) This rule was **removed** in ESLint v1.0 and **replaced** by the [no-empty-character-class](no-empty-character-class) rule.

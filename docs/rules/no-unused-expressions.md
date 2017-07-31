@@ -1,9 +1,9 @@
 ---
 title: no-unused-expressions - Rules
 layout: doc
+edit_link: https://github.com/eslint/eslint/edit/master/docs/rulesno-unused-expressions.md
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
-
 # Disallow Unused Expressions (no-unused-expressions)
 
 An unused expression which has no effect on the state of the program indicates a logic error.

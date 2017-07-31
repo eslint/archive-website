@@ -1,9 +1,9 @@
 ---
 title: no-confusing-arrow - Rules
 layout: doc
+edit_link: https://github.com/eslint/eslint/edit/master/docs/rulesno-confusing-arrow.md
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
-
 # Disallow arrow functions where they could be confused with comparisons (no-confusing-arrow)
 
 (fixable) The `--fix` option on the [command line](../user-guide/command-line-interface#fix) can automatically fix some of the problems reported by this rule.

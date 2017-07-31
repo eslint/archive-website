@@ -1,9 +1,9 @@
 ---
 title: operator-assignment - Rules
 layout: doc
+edit_link: https://github.com/eslint/eslint/edit/master/docs/rulesoperator-assignment.md
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
-
 # require or disallow assignment operator shorthand where possible (operator-assignment)
 
 (fixable) The `--fix` option on the [command line](../user-guide/command-line-interface#fix) can automatically fix some of the problems reported by this rule.

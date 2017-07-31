@@ -1,9 +1,9 @@
 ---
 title: no-console - Rules
 layout: doc
+edit_link: https://github.com/eslint/eslint/edit/master/docs/rulesno-console.md
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
-
 # disallow the use of `console` (no-console)
 
 (recommended) The `"extends": "eslint:recommended"` property in a configuration file enables this rule.

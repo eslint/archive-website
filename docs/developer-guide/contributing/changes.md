@@ -1,6 +1,7 @@
 ---
 title: Change Requests
 layout: doc
+edit_link: https://github.com/eslint/eslint/edit/master/lib/rules/changes.js
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 

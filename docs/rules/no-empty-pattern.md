@@ -1,9 +1,9 @@
 ---
 title: no-empty-pattern - Rules
 layout: doc
+edit_link: https://github.com/eslint/eslint/edit/master/docs/rulesno-empty-pattern.md
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
-
 # Disallow empty destructuring patterns (no-empty-pattern)
 
 (recommended) The `"extends": "eslint:recommended"` property in a configuration file enables this rule.

@@ -1,9 +1,9 @@
 ---
 title: no-restricted-globals - Rules
 layout: doc
+edit_link: https://github.com/eslint/eslint/edit/master/docs/rulesno-restricted-globals.md
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
-
 # Disallow specific global variables (no-restricted-globals)
 
 Disallowing usage of specific global variables can be useful if you want to allow a set of global

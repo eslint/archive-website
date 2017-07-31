@@ -1,6 +1,7 @@
 ---
 title: Code Path Analysis Details
 layout: doc
+edit_link: https://github.com/eslint/eslint/edit/master/lib/rules/code-path-analysis.js
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 

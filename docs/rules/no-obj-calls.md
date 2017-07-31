@@ -1,9 +1,9 @@
 ---
 title: no-obj-calls - Rules
 layout: doc
+edit_link: https://github.com/eslint/eslint/edit/master/docs/rulesno-obj-calls.md
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
-
 # disallow calling global object properties as functions (no-obj-calls)
 
 (recommended) The `"extends": "eslint:recommended"` property in a configuration file enables this rule.

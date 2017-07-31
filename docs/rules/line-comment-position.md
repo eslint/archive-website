@@ -1,9 +1,9 @@
 ---
 title: line-comment-position - Rules
 layout: doc
+edit_link: https://github.com/eslint/eslint/edit/master/docs/rulesline-comment-position.md
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
-
 # enforce position of line comments (line-comment-position)
 
 Line comments can be positioned above or beside code. This rule helps teams maintain a consistent style.

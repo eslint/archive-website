@@ -1,9 +1,9 @@
 ---
 title: no-array-constructor - Rules
 layout: doc
+edit_link: https://github.com/eslint/eslint/edit/master/docs/rulesno-array-constructor.md
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
-
 # disallow `Array` constructors (no-array-constructor)
 
 Use of the `Array` constructor to construct a new array is generally

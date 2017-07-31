@@ -1,6 +1,7 @@
 ---
 title: Migrating to v3.0.0
 layout: doc
+edit_link: https://github.com/eslint/eslint/edit/master/lib/rules/migrating-to-3.0.0.js
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 

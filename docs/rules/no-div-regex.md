@@ -1,9 +1,9 @@
 ---
 title: no-div-regex - Rules
 layout: doc
+edit_link: https://github.com/eslint/eslint/edit/master/docs/rulesno-div-regex.md
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
-
 # Disallow Regexs That Look Like Division (no-div-regex)
 
 Require regex literals to escape division operators.

@@ -1,9 +1,9 @@
 ---
 title: for-direction - Rules
 layout: doc
+edit_link: https://github.com/eslint/eslint/edit/master/docs/rulesfor-direction.md
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
-
 # Enforce "for" loop update clause moving the counter in the right direction. (for-direction)
 
 ## Rule Details

@@ -1,9 +1,9 @@
 ---
 title: class-methods-use-this - Rules
 layout: doc
+edit_link: https://github.com/eslint/eslint/edit/master/docs/rulesclass-methods-use-this.md
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
-
 # Enforce that class methods utilize `this` (class-methods-use-this)
 
 If a class method does not use `this`, it can safely be made a static function.

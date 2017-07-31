@@ -1,9 +1,9 @@
 ---
 title: object-shorthand - Rules
 layout: doc
+edit_link: https://github.com/eslint/eslint/edit/master/docs/rulesobject-shorthand.md
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
-
 # Require Object Literal Shorthand Syntax (object-shorthand)
 
 (fixable) The `--fix` option on the [command line](../user-guide/command-line-interface#fix) can automatically fix some of the problems reported by this rule.

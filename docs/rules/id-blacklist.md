@@ -1,9 +1,9 @@
 ---
 title: id-blacklist - Rules
 layout: doc
+edit_link: https://github.com/eslint/eslint/edit/master/docs/rulesid-blacklist.md
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
-
 # disallow specified identifiers (id-blacklist)
 
 > "There are only two hard things in Computer Science: cache invalidation and naming things." — Phil Karlton

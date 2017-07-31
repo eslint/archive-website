@@ -1,9 +1,9 @@
 ---
 title: one-var-declaration-per-line - Rules
 layout: doc
+edit_link: https://github.com/eslint/eslint/edit/master/docs/rulesone-var-declaration-per-line.md
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
-
 # require or disallow newlines around variable declarations (one-var-declaration-per-line)
 
 (fixable) The `--fix` option on the [command line](../user-guide/command-line-interface#fix) can automatically fix some of the problems reported by this rule.

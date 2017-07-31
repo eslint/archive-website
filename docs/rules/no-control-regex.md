@@ -1,9 +1,9 @@
 ---
 title: no-control-regex - Rules
 layout: doc
+edit_link: https://github.com/eslint/eslint/edit/master/docs/rulesno-control-regex.md
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
-
 # disallow control characters in regular expressions (no-control-regex)
 
 (recommended) The `"extends": "eslint:recommended"` property in a configuration file enables this rule.

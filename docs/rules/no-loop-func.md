@@ -1,9 +1,9 @@
 ---
 title: no-loop-func - Rules
 layout: doc
+edit_link: https://github.com/eslint/eslint/edit/master/docs/rulesno-loop-func.md
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
-
 # Disallow Functions in Loops (no-loop-func)
 
 Writing functions within loops tends to result in errors due to the way the function creates a closure around the loop. For example:

@@ -1,9 +1,9 @@
 ---
 title: callback-return - Rules
 layout: doc
+edit_link: https://github.com/eslint/eslint/edit/master/docs/rulescallback-return.md
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
-
 # Enforce Return After Callback (callback-return)
 
 The callback pattern is at the heart of most I/O and event-driven programming

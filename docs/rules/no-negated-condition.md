@@ -1,9 +1,9 @@
 ---
 title: no-negated-condition - Rules
 layout: doc
+edit_link: https://github.com/eslint/eslint/edit/master/docs/rulesno-negated-condition.md
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
-
 # disallow negated conditions (no-negated-condition)
 
 Negated conditions are more difficult to understand. Code can be made more readable by inverting the condition instead.

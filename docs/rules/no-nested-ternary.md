@@ -1,9 +1,9 @@
 ---
 title: no-nested-ternary - Rules
 layout: doc
+edit_link: https://github.com/eslint/eslint/edit/master/docs/rulesno-nested-ternary.md
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
-
 # disallow nested ternary expressions (no-nested-ternary)
 
 Nesting ternary expressions can make code more difficult to understand.

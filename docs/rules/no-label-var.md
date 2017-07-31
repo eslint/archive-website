@@ -1,9 +1,9 @@
 ---
 title: no-label-var - Rules
 layout: doc
+edit_link: https://github.com/eslint/eslint/edit/master/docs/rulesno-label-var.md
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
-
 # Disallow Labels That Are Variables Names (no-label-var)
 
 ## Rule Details

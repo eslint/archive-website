@@ -1,9 +1,9 @@
 ---
 title: no-self-assign - Rules
 layout: doc
+edit_link: https://github.com/eslint/eslint/edit/master/docs/rulesno-self-assign.md
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
-
 # Disallow Self Assignment (no-self-assign)
 
 (recommended) The `"extends": "eslint:recommended"` property in a configuration file enables this rule.

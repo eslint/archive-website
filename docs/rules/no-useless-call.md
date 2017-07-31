@@ -1,9 +1,9 @@
 ---
 title: no-useless-call - Rules
 layout: doc
+edit_link: https://github.com/eslint/eslint/edit/master/docs/rulesno-useless-call.md
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
-
 # Disallow unnecessary `.call()` and `.apply()`. (no-useless-call)
 
 The function invocation can be written by `Function.prototype.call()` and `Function.prototype.apply()`.

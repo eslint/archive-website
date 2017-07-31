@@ -1,9 +1,9 @@
 ---
 title: no-negated-in-lhs - Rules
 layout: doc
+edit_link: https://github.com/eslint/eslint/edit/master/docs/rulesno-negated-in-lhs.md
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
-
 # disallow negating the left operand in `in` expressions (no-negated-in-lhs)
 
 This rule was **deprecated** in ESLint v3.3.0 and replaced by the [no-unsafe-negation](no-unsafe-negation) rule.

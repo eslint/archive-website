@@ -1,9 +1,9 @@
 ---
 title: no-duplicate-imports - Rules
 layout: doc
+edit_link: https://github.com/eslint/eslint/edit/master/docs/rulesno-duplicate-imports.md
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
-
 # Disallow duplicate imports (no-duplicate-imports)
 
 Using a single `import` statement per module will make the code clearer because you can see everything being imported from that module on one line.

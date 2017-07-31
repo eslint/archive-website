@@ -1,9 +1,9 @@
 ---
 title: no-case-declarations - Rules
 layout: doc
+edit_link: https://github.com/eslint/eslint/edit/master/docs/rulesno-case-declarations.md
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
-
 # Disallow lexical declarations in case/default clauses (no-case-declarations)
 
 (recommended) The `"extends": "eslint:recommended"` property in a configuration file enables this rule.

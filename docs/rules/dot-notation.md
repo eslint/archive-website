@@ -1,9 +1,9 @@
 ---
 title: dot-notation - Rules
 layout: doc
+edit_link: https://github.com/eslint/eslint/edit/master/docs/rulesdot-notation.md
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
-
 # Require Dot Notation (dot-notation)
 
 (fixable) The `--fix` option on the [command line](../user-guide/command-line-interface#fix) can automatically fix some of the problems reported by this rule.

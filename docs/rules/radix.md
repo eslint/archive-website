@@ -1,9 +1,9 @@
 ---
 title: radix - Rules
 layout: doc
+edit_link: https://github.com/eslint/eslint/edit/master/docs/rulesradix.md
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
-
 # Require Radix Parameter (radix)
 
 When using the `parseInt()` function it is common to omit the second argument, the radix, and let the function try to determine from the first argument what type of number it is. By default, `parseInt()` will autodetect decimal and hexadecimal (via `0x` prefix). Prior to ECMAScript 5, `parseInt()` also autodetected octal literals, which caused problems because many developers assumed a leading `0` would be ignored.

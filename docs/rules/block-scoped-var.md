@@ -1,9 +1,9 @@
 ---
 title: block-scoped-var - Rules
 layout: doc
+edit_link: https://github.com/eslint/eslint/edit/master/docs/rulesblock-scoped-var.md
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
-
 # Treat var as Block Scoped (block-scoped-var)
 
 The `block-scoped-var` rule generates warnings when variables are used outside of the block in which they were defined. This emulates C-style block scope.

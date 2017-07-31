@@ -1,9 +1,9 @@
 ---
 title: global-require - Rules
 layout: doc
+edit_link: https://github.com/eslint/eslint/edit/master/docs/rulesglobal-require.md
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
-
 # Enforce require() on the top-level module scope (global-require)
 
 In Node.js, module dependencies are included using the `require()` function, such as:

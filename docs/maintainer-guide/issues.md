@@ -1,6 +1,7 @@
 ---
 title: Managing Issues
 layout: doc
+edit_link: https://github.com/eslint/eslint/edit/master/lib/rules/issues.js
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 

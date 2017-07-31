@@ -1,9 +1,9 @@
 ---
 title: no-mixed-operators - Rules
 layout: doc
+edit_link: https://github.com/eslint/eslint/edit/master/docs/rulesno-mixed-operators.md
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
-
 # Disallow mixes of different operators (no-mixed-operators)
 
 Enclosing complex expressions by parentheses clarifies the developer's intention, which makes the code more readable.

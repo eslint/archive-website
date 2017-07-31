@@ -1,9 +1,9 @@
 ---
 title: no-empty-function - Rules
 layout: doc
+edit_link: https://github.com/eslint/eslint/edit/master/docs/rulesno-empty-function.md
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
-
 # Disallow empty functions (no-empty-function)
 
 Empty functions can reduce readability because readers need to guess whether it's intentional or not.

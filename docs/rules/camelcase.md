@@ -1,9 +1,9 @@
 ---
 title: camelcase - Rules
 layout: doc
+edit_link: https://github.com/eslint/eslint/edit/master/docs/rulescamelcase.md
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
-
 # Require Camelcase (camelcase)
 
 When it comes to naming variables, style guides generally fall into one of two camps: camelcase (`variableName`) and underscores (`variable_name`). This rule focuses on using the camelcase approach. If your style guide calls for camelcasing your variable names, then this rule is for you!

@@ -1,9 +1,9 @@
 ---
 title: require-yield - Rules
 layout: doc
+edit_link: https://github.com/eslint/eslint/edit/master/docs/rulesrequire-yield.md
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
-
 # Disallow generator functions that do not have `yield` (require-yield)
 
 (recommended) The `"extends": "eslint:recommended"` property in a configuration file enables this rule.

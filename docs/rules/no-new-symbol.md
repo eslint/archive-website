@@ -1,9 +1,9 @@
 ---
 title: no-new-symbol - Rules
 layout: doc
+edit_link: https://github.com/eslint/eslint/edit/master/docs/rulesno-new-symbol.md
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
-
 # Disallow Symbol Constructor (no-new-symbol)
 
 (recommended) The `"extends": "eslint:recommended"` property in a configuration file enables this rule.

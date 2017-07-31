@@ -1,9 +1,9 @@
 ---
 title: prefer-rest-params - Rules
 layout: doc
+edit_link: https://github.com/eslint/eslint/edit/master/docs/rulesprefer-rest-params.md
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
-
 # Suggest using the rest parameters instead of `arguments` (prefer-rest-params)
 
 There are rest parameters in ES2015.

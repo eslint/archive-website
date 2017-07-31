@@ -1,9 +1,9 @@
 ---
 title: valid-jsdoc - Rules
 layout: doc
+edit_link: https://github.com/eslint/eslint/edit/master/docs/rulesvalid-jsdoc.md
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
-
 # enforce valid JSDoc comments (valid-jsdoc)
 
 [JSDoc](http://usejsdoc.org) generates application programming interface (API) documentation from specially-formatted comments in JavaScript code. For example, this is a JSDoc comment for a function:
