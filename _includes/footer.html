@@ -5,8 +5,8 @@
 
       <footer>
         <ul class="list-inline">
-          {% if page.path contains 'docs' %}
-            <li><a href="https://github.com/eslint/eslint/edit/master/{{ page.path }}" class="edit-link">Edit this page</a></li>
+          {% if page.edit_link %}
+            <li><a href="{{ page.edit_link }}">Edit this page</a></li>
           {% else %}
             <li><a href="https://github.com/eslint/eslint.github.io/edit/master/{{ page.path }}">Edit this page</a></li>
           {% endif %}
@@ -41,11 +41,7 @@
   <script>
     $(document).ready(function() {
       anchors.add('.doc h2, .doc h3, .doc h4, .blog h2, .blog h3, .blog h4');
-      // If there’s a typo in old versions of the docs,
-      // it can be edited on eslint/eslint.github.io
-      if (location.pathname.match(/\/docs\/[\d.]+/)) {
-        $('.edit-link').attr('href', $('.edit-link').attr('href').replace('eslint.github.io', 'eslint'))
-      }
+
       {% if page.homepage %}
       function shuffleArray(array) {
         for (var i = array.length - 1; i > 0; i--) {
