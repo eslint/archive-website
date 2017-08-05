@@ -11530,7 +11530,9 @@ function convertTemplatePart(tokens, code) {
     }
 
     if (firstToken.range) {
-        token.range = [firstToken.range[0], lastTemplateToken.range[1]];
+        token.start = firstToken.range[0];
+        token.end = lastTemplateToken.range[1];
+        token.range = [token.start, token.end];
     }
 
     return token;
@@ -11703,7 +11705,7 @@ TokenTranslator.prototype = {
             // store new curly for later
             this._curlyBrace = token;
             return;
-        } else if (token.type === tt.template) {
+        } else if (token.type === tt.template || token.type === tt.invalidTemplate) {
             if (this._curlyBrace) {
                 templateTokens.push(this._curlyBrace);
                 this._curlyBrace = null;
@@ -11862,48 +11864,48 @@ module.exports={
   "_args": [
     [
       {
-        "raw": "espree@^3.4.3",
+        "raw": "espree@^3.5.0",
         "scope": null,
         "escapedName": "espree",
         "name": "espree",
-        "rawSpec": "^3.4.3",
-        "spec": ">=3.4.3 <4.0.0",
+        "rawSpec": "^3.5.0",
+        "spec": ">=3.5.0 <4.0.0",
         "type": "range"
       },
       "/var/lib/jenkins/workspace/Releases/ESLint Release/eslint"
     ]
   ],
-  "_from": "espree@>=3.4.3 <4.0.0",
-  "_id": "espree@3.4.3",
+  "_from": "espree@>=3.5.0 <4.0.0",
+  "_id": "espree@3.5.0",
   "_inCache": true,
   "_location": "/espree",
-  "_nodeVersion": "4.4.7",
+  "_nodeVersion": "6.11.1",
   "_npmOperationalInternal": {
-    "host": "packages-18-east.internal.npmjs.com",
-    "tmp": "tmp/espree-3.4.3.tgz_1494016113798_0.18147883261553943"
+    "host": "s3://npm-registry-packages",
+    "tmp": "tmp/espree-3.5.0.tgz_1501950320528_0.8152676953468472"
   },
   "_npmUser": {
     "name": "eslint",
     "email": "nicholas+eslint@nczconsulting.com"
   },
-  "_npmVersion": "2.15.8",
+  "_npmVersion": "3.10.10",
   "_phantomChildren": {},
   "_requested": {
-    "raw": "espree@^3.4.3",
+    "raw": "espree@^3.5.0",
     "scope": null,
     "escapedName": "espree",
     "name": "espree",
-    "rawSpec": "^3.4.3",
-    "spec": ">=3.4.3 <4.0.0",
+    "rawSpec": "^3.5.0",
+    "spec": ">=3.5.0 <4.0.0",
     "type": "range"
   },
   "_requiredBy": [
     "/"
   ],
-  "_resolved": "https://registry.npmjs.org/espree/-/espree-3.4.3.tgz",
-  "_shasum": "2910b5ccd49ce893c2ffffaab4fd8b3a31b82374",
+  "_resolved": "https://registry.npmjs.org/espree/-/espree-3.5.0.tgz",
+  "_shasum": "98358625bdd055861ea27e2867ea729faf463d8d",
   "_shrinkwrap": null,
-  "_spec": "espree@^3.4.3",
+  "_spec": "espree@^3.5.0",
   "_where": "/var/lib/jenkins/workspace/Releases/ESLint Release/eslint",
   "author": {
     "name": "Nicholas C. Zakas",
@@ -11913,7 +11915,7 @@ module.exports={
     "url": "http://github.com/eslint/espree.git"
   },
   "dependencies": {
-    "acorn": "^5.0.1",
+    "acorn": "^5.1.1",
     "acorn-jsx": "^3.0.0"
   },
   "description": "An Esprima-compatible JavaScript parser built on Acorn",
@@ -11936,8 +11938,8 @@ module.exports={
   },
   "directories": {},
   "dist": {
-    "shasum": "2910b5ccd49ce893c2ffffaab4fd8b3a31b82374",
-    "tarball": "https://registry.npmjs.org/espree/-/espree-3.4.3.tgz"
+    "shasum": "98358625bdd055861ea27e2867ea729faf463d8d",
+    "tarball": "https://registry.npmjs.org/espree/-/espree-3.5.0.tgz"
   },
   "engines": {
     "node": ">=0.10.0"
@@ -11946,7 +11948,7 @@ module.exports={
     "lib",
     "espree.js"
   ],
-  "gitHead": "ea086113d26c40b91647b2184e5e8aa9190db654",
+  "gitHead": "d9afabdb167ed7865c44ef1ef1ecbb30e639a0e7",
   "homepage": "https://github.com/eslint/espree",
   "keywords": [
     "ast",
@@ -11960,40 +11962,16 @@ module.exports={
   "main": "espree.js",
   "maintainers": [
     {
-      "name": "btmills",
-      "email": "mills.brandont@gmail.com"
-    },
-    {
       "name": "eslint",
       "email": "nicholas+eslint@nczconsulting.com"
-    },
-    {
-      "name": "gyandeeps",
-      "email": "gyandeeps@gmail.com"
-    },
-    {
-      "name": "ivolodin",
-      "email": "ivolodin@gmail.com"
-    },
-    {
-      "name": "kaicataldo",
-      "email": "kaicataldo@gmail.com"
-    },
-    {
-      "name": "mysticatea",
-      "email": "star.ctor@gmail.com"
-    },
-    {
-      "name": "not-an-aardvark",
-      "email": "notaardvark@gmail.com"
     },
     {
       "name": "nzakas",
       "email": "nicholas@nczconsulting.com"
     },
     {
-      "name": "sharpbites",
-      "email": "alberto.email@gmail.com"
+      "name": "ivolodin",
+      "email": "ivolodin@gmail.com"
     }
   ],
   "name": "espree",
@@ -12014,7 +11992,7 @@ module.exports={
     "release": "eslint-release",
     "test": "npm run-script lint && node Makefile.js test"
   },
-  "version": "3.4.3"
+  "version": "3.5.0"
 }
 
 },{}],"espree":[function(require,module,exports){
@@ -12135,7 +12113,8 @@ function resetExtra() {
 
 
 var tt = acorn.tokTypes,
-    getLineInfo = acorn.getLineInfo;
+    getLineInfo = acorn.getLineInfo,
+    lineBreak = acorn.lineBreak;
 
 // custom type for JSX attribute values
 tt.jsxAttrValueToken = {};
@@ -12161,6 +12140,7 @@ function normalizeEcmaVersion(ecmaVersion) {
             case 6:
             case 7:
             case 8:
+            case 9:
                 return version;
 
             default:
@@ -12447,9 +12427,13 @@ acorn.plugins.espree = function(instance) {
                 !prop.computed &&
                 prop.key.type === "Identifier" &&
                 prop.key.name === "async" &&
-                this.type !== tt.parenL &&
-                this.type !== tt.colon &&
-                !this.canInsertSemicolon()
+                (
+                    this.type === tt.name ||
+                    this.type === tt.num ||
+                    this.type === tt.string ||
+                    this.type === tt.bracketL
+                ) &&
+                !lineBreak.test(this.input.slice(this.lastTokEnd, this.start))
             ) {
                 this.parsePropertyName(prop, refShorthandDefaultPos);
                 isAsync = true;
@@ -12899,8 +12883,10 @@ var baseConfigProperties = {
     parserOptions: { type: "object" },
     plugins: { type: "array" },
     rules: { type: "object" },
-    settings: { type: "object" }
-};
+    settings: { type: "object" },
+
+    ecmaFeatures: { type: "object" // deprecated; logs a warning when used
+    } };
 
 var overrideProperties = Object.assign({}, baseConfigProperties, {
     files: {
@@ -48757,7 +48743,7 @@ function hasOwnProperty(obj, prop) {
 },{"./support/isBuffer":115,"_process":104,"inherits":114}],117:[function(require,module,exports){
 module.exports={
   "name": "eslint",
-  "version": "4.2.0",
+  "version": "4.3.0",
   "author": "Nicholas C. Zakas <nicholas+npm@nczconsulting.com>",
   "description": "An AST-based pattern checker for JavaScript.",
   "bin": {
@@ -48800,7 +48786,7 @@ module.exports={
     "debug": "^2.6.8",
     "doctrine": "^2.0.0",
     "eslint-scope": "^3.7.1",
-    "espree": "^3.4.3",
+    "espree": "^3.5.0",
     "esquery": "^1.0.0",
     "estraverse": "^4.2.0",
     "esutils": "^2.0.2",
@@ -48812,7 +48798,7 @@ module.exports={
     "imurmurhash": "^0.1.4",
     "inquirer": "^3.0.6",
     "is-resolvable": "^1.0.0",
-    "js-yaml": "^3.8.4",
+    "js-yaml": "^3.9.1",
     "json-stable-stringify": "^1.0.1",
     "levn": "^0.3.0",
     "lodash": "^4.17.4",
@@ -48841,7 +48827,7 @@ module.exports={
     "coveralls": "^2.13.1",
     "dateformat": "^2.0.0",
     "ejs": "^2.5.6",
-    "eslint-plugin-eslint-plugin": "^0.7.4",
+    "eslint-plugin-eslint-plugin": "^0.8.0",
     "eslint-plugin-node": "^5.1.0",
     "eslint-release": "^0.10.1",
     "eslump": "1.6.0",
@@ -53834,6 +53820,7 @@ module.exports = {
 //------------------------------------------------------------------------------
 
 var ajv = require("../util/ajv"),
+    lodash = require("lodash"),
     configSchema = require("../../conf/config-schema.js"),
     util = require("util");
 
@@ -54007,6 +53994,22 @@ function formatErrors(errors) {
 }
 
 /**
+ * Emits a deprecation warning containing a given filepath. A new deprecation warning is emitted
+ * for each unique file path, but repeated invocations with the same file path have no effect.
+ * No warnings are emitted if the `--no-deprecation` or `--no-warnings` Node runtime flags are active.
+ * @param {string} source The name of the configuration source to report the warning for.
+ * @returns {void}
+ */
+var emitEcmaFeaturesWarning = lodash.memoize(function (source) {
+
+    /*
+     * util.deprecate seems to be the only way to emit a warning in Node 4.x while respecting the --no-warnings flag.
+     * (In Node 6+, process.emitWarning could be used instead.)
+     */
+    util.deprecate(function () {}, "[eslint] The 'ecmaFeatures' config file property is deprecated, and has no effect. (found in " + source + ")")();
+});
+
+/**
  * Validates the top level properties of the config object.
  * @param {Object} config The config object to validate.
  * @param {string} source The name of the configuration source to report in any errors.
@@ -54016,7 +54019,11 @@ function validateConfigSchema(config, source) {
     validateSchema = validateSchema || ajv.compile(configSchema);
 
     if (!validateSchema(config)) {
-        throw new Error(source + ":\n\tESLint configuration is invalid:\n" + formatErrors(validateSchema.errors));
+        throw new Error("ESLint configuration in " + source + " is invalid:\n" + formatErrors(validateSchema.errors));
+    }
+
+    if (Object.prototype.hasOwnProperty.call(config, "ecmaFeatures")) {
+        emitEcmaFeaturesWarning(source);
     }
 }
 
@@ -54044,7 +54051,7 @@ module.exports = {
     validateRuleOptions: validateRuleOptions
 };
 
-},{"../../conf/config-schema.js":2,"../util/ajv":400,"util":116}],128:[function(require,module,exports){
+},{"../../conf/config-schema.js":2,"../util/ajv":400,"lodash":92,"util":116}],128:[function(require,module,exports){
 /**
  * @fileoverview Environments manager
  * @author Nicholas C. Zakas
@@ -54242,8 +54249,8 @@ function parseBooleanConfig(string, comment) {
         var value = void 0;
 
         if (pos !== -1) {
-            value = name.substring(pos + 1, name.length);
-            name = name.substring(0, pos);
+            value = name.slice(pos + 1);
+            name = name.slice(0, pos);
         }
 
         items[name] = {
@@ -54508,7 +54515,7 @@ function modifyConfigsFromComments(filename, ast, config, linterContext) {
         var match = /^(eslint(-\w+){0,3}|exported|globals?)(\s|$)/.exec(value);
 
         if (match) {
-            value = value.substring(match.index + match[1].length);
+            value = value.slice(match.index + match[1].length);
 
             if (comment.type === "Block") {
                 switch (match[1]) {
@@ -54689,8 +54696,11 @@ function createStubRule(message) {
      */
     function createRuleModule(context) {
         return {
-            Program: function Program(node) {
-                context.report(node, message);
+            Program: function Program() {
+                context.report({
+                    loc: { line: 1, column: 0 },
+                    message: message
+                });
             }
         };
     }
@@ -55494,13 +55504,19 @@ var externalMethods = {
 Object.keys(externalMethods).forEach(function (methodName) {
     var exMethodName = externalMethods[methodName];
 
-    // All functions expected to have less arguments than 5.
-    Linter.prototype[methodName] = function (a, b, c, d, e) {
-        if (this.sourceCode) {
-            return this.sourceCode[exMethodName](a, b, c, d, e);
-        }
-        return null;
-    };
+    // Applies the SourceCode methods to the Linter prototype
+    Object.defineProperty(Linter.prototype, methodName, {
+        value: function value() {
+            if (this.sourceCode) {
+                return this.sourceCode[exMethodName].apply(this.sourceCode, arguments);
+            }
+            return null;
+        },
+
+        configurable: true,
+        writable: true,
+        enumerable: false
+    });
 });
 
 module.exports = Linter;
@@ -55789,7 +55805,7 @@ var ruleFixer = require("./util/rule-fixer");
 // Constants
 //------------------------------------------------------------------------------
 
-var PASSTHROUGHS = ["getAncestors", "getDeclaredVariables", "getFilename", "getScope", "markVariableAsUsed",
+var PASSTHROUGHS = ["getAncestors", "getDeclaredVariables", "getFilename", "getScope", "getSourceCode", "markVariableAsUsed",
 
 // DEPRECATED
 "getAllComments", "getComments", "getFirstToken", "getFirstTokens", "getJSDocComment", "getLastToken", "getLastTokens", "getNodeByRangeIndex", "getSource", "getSourceLines", "getTokenAfter", "getTokenBefore", "getTokenByRangeStart", "getTokens", "getTokensAfter", "getTokensBefore", "getTokensBetween"];
@@ -55810,7 +55826,7 @@ var PASSTHROUGHS = ["getAncestors", "getDeclaredVariables", "getFilename", "getS
  */
 
 //------------------------------------------------------------------------------
-// Rule Definition
+// Module Definition
 //------------------------------------------------------------------------------
 
 /**
@@ -55906,14 +55922,14 @@ function getFix(descriptor, sourceCode) {
 
 /**
  * Rule context class
- * Acts as an abstraction layer between rules and the main eslint object.
+ * Acts as an abstraction layer between rules and the main linter object.
  */
 
 var RuleContext = function () {
 
     /**
      * @param {string} ruleId The ID of the rule using this object.
-     * @param {eslint} eslint The eslint object.
+     * @param {Linter} linter The linter object.
      * @param {number} severity The configured severity level of the rule.
      * @param {Array} options The configuration information to be added to the rule.
      * @param {Object} settings The configuration settings passed from the config file.
@@ -55922,7 +55938,7 @@ var RuleContext = function () {
      * @param {Object} meta The metadata of the rule
      * @param {Object} parserServices The parser services for the rule.
      */
-    function RuleContext(ruleId, eslint, severity, options, settings, parserOptions, parserPath, meta, parserServices) {
+    function RuleContext(ruleId, linter, severity, options, settings, parserOptions, parserPath, meta, parserServices) {
         _classCallCheck(this, RuleContext);
 
         // public.
@@ -55937,36 +55953,25 @@ var RuleContext = function () {
         this.parserServices = Object.freeze(Object.assign({}, parserServices));
 
         // private.
-        this.eslint = eslint;
-        this.severity = severity;
+        this._linter = linter;
+        this._severity = severity;
 
         Object.freeze(this);
     }
 
     /**
-     * Passthrough to eslint.getSourceCode().
-     * @returns {SourceCode} The SourceCode object for the code.
+     * Passthrough to Linter#report() that automatically assigns the rule ID and severity.
+     * @param {ASTNode|MessageDescriptor} nodeOrDescriptor The AST node related to the message or a message
+     *      descriptor.
+     * @param {Object=} location The location of the error.
+     * @param {string} message The message to display to the user.
+     * @param {Object} opts Optional template data which produces a formatted message
+     *     with symbols being replaced by this object's values.
+     * @returns {void}
      */
 
 
     _createClass(RuleContext, [{
-        key: "getSourceCode",
-        value: function getSourceCode() {
-            return this.eslint.getSourceCode();
-        }
-
-        /**
-         * Passthrough to eslint.report() that automatically assigns the rule ID and severity.
-         * @param {ASTNode|MessageDescriptor} nodeOrDescriptor The AST node related to the message or a message
-         *      descriptor.
-         * @param {Object=} location The location of the error.
-         * @param {string} message The message to display to the user.
-         * @param {Object} opts Optional template data which produces a formatted message
-         *     with symbols being replaced by this object's values.
-         * @returns {void}
-         */
-
-    }, {
         key: "report",
         value: function report(nodeOrDescriptor, location, message, opts) {
 
@@ -55975,27 +55980,39 @@ var RuleContext = function () {
                 var descriptor = nodeOrDescriptor;
                 var fix = getFix(descriptor, this.getSourceCode());
 
-                this.eslint.report(this.id, this.severity, descriptor.node, descriptor.loc || descriptor.node.loc.start, descriptor.message, descriptor.data, fix, this.meta);
+                if (descriptor.loc) {
+                    this._linter.report(this.id, this._severity, descriptor.node, descriptor.loc, descriptor.message, descriptor.data, fix, this.meta);
+                } else {
+                    this._linter.report(this.id, this._severity, descriptor.node,
 
-                return;
+                    /* loc not provided */
+                    descriptor.message, descriptor.data, fix, this.meta);
+                }
+            } else {
+
+                // old style call
+                this._linter.report(this.id, this._severity, nodeOrDescriptor, location, message, opts, this.meta);
             }
-
-            // old style call
-            this.eslint.report(this.id, this.severity, nodeOrDescriptor, location, message, opts, this.meta);
         }
     }]);
 
     return RuleContext;
 }();
 
-// Copy over passthrough methods. All functions will have 5 or fewer parameters.
+// Copy over passthrough methods.
 
 
 PASSTHROUGHS.forEach(function (name) {
-    this[name] = function (a, b, c, d, e) {
-        return this.eslint[name](a, b, c, d, e);
-    };
-}, RuleContext.prototype);
+    Object.defineProperty(RuleContext.prototype, name, {
+        value: function value() {
+            return this._linter[name].apply(this._linter, arguments);
+        },
+
+        configurable: true,
+        writable: true,
+        enumerable: false
+    });
+});
 
 module.exports = RuleContext;
 
@@ -57403,7 +57420,7 @@ module.exports = {
                 // https://github.com/eslint/eslint/issues/8834
                 var closingParenToken = sourceCode.getTokenAfter(paramToken, astUtils.isClosingParenToken);
                 var asyncToken = isAsync ? sourceCode.getTokenBefore(firstTokenOfParam) : null;
-                var shouldAddSpaceForAsync = asyncToken && asyncToken.end === firstTokenOfParam.start;
+                var shouldAddSpaceForAsync = asyncToken && asyncToken.range[1] === firstTokenOfParam.range[0];
 
                 return fixer.replaceTextRange([firstTokenOfParam.range[0], closingParenToken.range[1]], "" + (shouldAddSpaceForAsync ? " " : "") + paramToken.value);
             }
@@ -60806,7 +60823,7 @@ module.exports = {
 
                     // `do while` expressions sometimes need a space to be inserted after `do`.
                     // e.g. `do{foo()} while (bar)` should be corrected to `do foo() while (bar)`
-                    var needsPrecedingSpace = node.type === "DoWhileStatement" && sourceCode.getTokenBefore(bodyNode).end === bodyNode.start && !astUtils.canTokensBeAdjacent("do", sourceCode.getFirstToken(bodyNode, { skip: 1 }));
+                    var needsPrecedingSpace = node.type === "DoWhileStatement" && sourceCode.getTokenBefore(bodyNode).range[1] === bodyNode.range[0] && !astUtils.canTokensBeAdjacent("do", sourceCode.getFirstToken(bodyNode, { skip: 1 }));
 
                     var openingBracket = sourceCode.getFirstToken(bodyNode);
                     var closingBracket = sourceCode.getLastToken(bodyNode);
@@ -62309,6 +62326,7 @@ var astUtils = require("../ast-utils");
 //------------------------------------------------------------------------------
 // Helpers
 //------------------------------------------------------------------------------
+var TARGET_NODE_TYPE = /^(?:Arrow)?FunctionExpression$/;
 
 /**
  * Checks a given code path segment is reachable.
@@ -62390,20 +62408,41 @@ module.exports = {
             }
         }
 
+        /** Checks whether a node means a getter function.
+         * @param {ASTNode} node - a node to check.
+         * @returns {boolean} if node means a getter, return true; else return false.
+         */
+        function isGetter(node) {
+            var parent = node.parent;
+
+            if (TARGET_NODE_TYPE.test(node.type) && node.body.type === "BlockStatement") {
+                if (parent.kind === "get") {
+                    return true;
+                }
+                if (parent.type === "Property" && astUtils.getStaticPropertyName(parent) === "get" && parent.parent.type === "ObjectExpression") {
+
+                    // Object.defineProperty()
+                    if (parent.parent.parent.type === "CallExpression" && astUtils.getStaticPropertyName(parent.parent.parent.callee) === "defineProperty") {
+                        return true;
+                    }
+
+                    // Object.defineProperties()
+                    if (parent.parent.parent.type === "Property" && parent.parent.parent.parent.type === "ObjectExpression" && parent.parent.parent.parent.parent.type === "CallExpression" && astUtils.getStaticPropertyName(parent.parent.parent.parent.parent.callee) === "defineProperties") {
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
         return {
 
             // Stacks this function's information.
             onCodePathStart: function onCodePathStart(codePath, node) {
-                var parent = node.parent;
-
                 funcInfo = {
                     upper: funcInfo,
                     codePath: codePath,
                     hasReturn: false,
-                    shouldCheck: node.type === "FunctionExpression" && node.body.type === "BlockStatement" && (
-
-                    // check if it is a "getter", or a method named "get".
-                    parent.kind === "get" || astUtils.getStaticPropertyName(parent) === "get"),
+                    shouldCheck: isGetter(node),
                     node: node
                 };
             },
@@ -62435,7 +62474,8 @@ module.exports = {
 
 
             // Reports a given function if the last path is reachable.
-            "FunctionExpression:exit": checkLastSegment
+            "FunctionExpression:exit": checkLastSegment,
+            "ArrowFunctionExpression:exit": checkLastSegment
         };
     }
 };
@@ -62708,9 +62748,13 @@ module.exports = {
          * @private
          */
         function report(node) {
-            context.report({ node: node, message: "Identifier '{{name}}' is blacklisted.", data: {
+            context.report({
+                node: node,
+                message: "Identifier '{{name}}' is blacklisted.",
+                data: {
                     name: node.name
-                } });
+                }
+            });
         }
 
         return {
@@ -62935,10 +62979,14 @@ module.exports = {
          * @private
          */
         function report(node) {
-            context.report({ node: node, message: "Identifier '{{name}}' does not match the pattern '{{pattern}}'.", data: {
+            context.report({
+                node: node,
+                message: "Identifier '{{name}}' does not match the pattern '{{pattern}}'.",
+                data: {
                     name: node.name,
                     pattern: pattern
-                } });
+                }
+            });
         }
 
         return {
@@ -63662,7 +63710,7 @@ module.exports = {
                 if (!parentVarNode || parentVarNode.loc.start.line !== node.loc.start.line) {
                     if (parent.type !== "VariableDeclarator" || parentVarNode === parentVarNode.parent.declarations[0]) {
                         if (parent.type === "VariableDeclarator" && parentVarNode.loc.start.line === parent.loc.start.line) {
-                            nodeIndent = nodeIndent + indentSize * options.VariableDeclarator[parentVarNode.parent.kind];
+                            nodeIndent += indentSize * options.VariableDeclarator[parentVarNode.parent.kind];
                         } else if (parent.type === "ObjectExpression" || parent.type === "ArrayExpression") {
                             var parentElements = node.parent.type === "ObjectExpression" ? node.parent.properties : node.parent.elements;
 
@@ -63698,7 +63746,7 @@ module.exports = {
                         }
                     }
                 } else if (!parentVarNode && !isFirstArrayElementOnSameLine(parent) && parent.type !== "MemberExpression" && parent.type !== "ExpressionStatement" && parent.type !== "AssignmentExpression" && parent.type !== "Property") {
-                    nodeIndent = nodeIndent + indentSize;
+                    nodeIndent += indentSize;
                 }
 
                 checkFirstNodeLineIndent(node, nodeIndent);
@@ -64579,6 +64627,7 @@ module.exports = {
                 },
                 ArrayExpression: ELEMENT_LIST_SCHEMA,
                 ObjectExpression: ELEMENT_LIST_SCHEMA,
+                ImportDeclaration: ELEMENT_LIST_SCHEMA,
                 flatTernaryExpressions: {
                     type: "boolean"
                 }
@@ -64616,6 +64665,7 @@ module.exports = {
             MemberExpression: 1,
             ArrayExpression: 1,
             ObjectExpression: 1,
+            ImportDeclaration: 1,
             flatTernaryExpressions: false
         };
 
@@ -64951,10 +65001,16 @@ module.exports = {
 
         return {
             "ArrayExpression, ArrayPattern": function ArrayExpressionArrayPattern(node) {
-                addElementListIndent(node.elements, sourceCode.getFirstToken(node), sourceCode.getLastToken(node), options.ArrayExpression);
+                var openingBracket = sourceCode.getFirstToken(node);
+                var closingBracket = sourceCode.getTokenAfter(lodash.findLast(node.elements) || openingBracket, astUtils.isClosingBracketToken);
+
+                addElementListIndent(node.elements, openingBracket, closingBracket, options.ArrayExpression);
             },
             "ObjectExpression, ObjectPattern": function ObjectExpressionObjectPattern(node) {
-                addElementListIndent(node.properties, sourceCode.getFirstToken(node), sourceCode.getLastToken(node), options.ObjectExpression);
+                var openingCurly = sourceCode.getFirstToken(node);
+                var closingCurly = sourceCode.getTokenAfter(node.properties.length ? node.properties[node.properties.length - 1] : openingCurly, astUtils.isClosingBraceToken);
+
+                addElementListIndent(node.properties, openingCurly, closingCurly, options.ObjectExpression);
             },
             ArrowFunctionExpression: function ArrowFunctionExpression(node) {
                 var firstToken = sourceCode.getFirstToken(node);
@@ -65150,7 +65206,7 @@ module.exports = {
 
                     addElementListIndent(node.specifiers.filter(function (specifier) {
                         return specifier.type === "ImportSpecifier";
-                    }), openingCurly, closingCurly, 1);
+                    }), openingCurly, closingCurly, options.ImportDeclaration);
                 }
 
                 var fromToken = sourceCode.getLastToken(node, function (token) {
@@ -65217,7 +65273,7 @@ module.exports = {
                 }
             },
             Property: function Property(node) {
-                if (!node.computed && !node.shorthand && !node.method && node.kind === "init") {
+                if (!node.shorthand && !node.method && node.kind === "init") {
                     var colon = sourceCode.getFirstTokenBetween(node.key, node.value, astUtils.isColonToken);
 
                     offsets.ignoreToken(sourceCode.getTokenAfter(colon));
@@ -66035,9 +66091,9 @@ module.exports = {
 
                     // Remove whitespace
                     if (isKeySide) {
-                        range = [tokenBeforeColon.end, tokenBeforeColon.end + diffAbs];
+                        range = [tokenBeforeColon.range[1], tokenBeforeColon.range[1] + diffAbs];
                     } else {
-                        range = [tokenAfterColon.start - diffAbs, tokenAfterColon.start];
+                        range = [tokenAfterColon.range[0] - diffAbs, tokenAfterColon.range[0]];
                     }
                     fix = function fix(fixer) {
                         return fixer.removeRange(range);
@@ -70467,9 +70523,13 @@ module.exports = {
             var ancestor = findConditionalAncestor(node);
 
             if (ancestor) {
-                context.report({ node: ancestor, message: "Unexpected assignment within {{type}}.", data: {
+                context.report({
+                    node: ancestor,
+                    message: "Unexpected assignment within {{type}}.",
+                    data: {
                         type: NODE_DESCRIPTIONS[ancestor.type] || ancestor.type
-                    } });
+                    }
+                });
             }
         }
 
@@ -71845,7 +71905,7 @@ module.exports = {
                     // Extend the replacement range to include the entire
                     // function to avoid conflicting with no-useless-return.
                     // https://github.com/eslint/eslint/issues/8026
-                    return new FixTracker(fixer, sourceCode).retainEnclosingFunction(node).replaceTextRange([elseToken.start, node.end], fixedSource);
+                    return new FixTracker(fixer, sourceCode).retainEnclosingFunction(node).replaceTextRange([elseToken.range[0], node.range[1]], fixedSource);
                 }
             });
         }
@@ -73597,8 +73657,9 @@ module.exports = {
         function checkExpressionOrExportStatement(node) {
             var firstToken = isParenthesised(node) ? sourceCode.getTokenBefore(node) : sourceCode.getFirstToken(node);
             var secondToken = sourceCode.getTokenAfter(firstToken, astUtils.isNotOpeningParenToken);
+            var thirdToken = secondToken ? sourceCode.getTokenAfter(secondToken) : null;
 
-            if (astUtils.isOpeningParenToken(firstToken) && (astUtils.isOpeningBraceToken(secondToken) || secondToken.type === "Keyword" && (secondToken.value === "function" || secondToken.value === "class" || secondToken.value === "let" && astUtils.isOpeningBracketToken(sourceCode.getTokenAfter(secondToken, astUtils.isNotClosingParenToken))))) {
+            if (astUtils.isOpeningParenToken(firstToken) && (astUtils.isOpeningBraceToken(secondToken) || secondToken.type === "Keyword" && (secondToken.value === "function" || secondToken.value === "class" || secondToken.value === "let" && astUtils.isOpeningBracketToken(sourceCode.getTokenAfter(secondToken, astUtils.isNotClosingParenToken))) || secondToken && secondToken.type === "Identifier" && secondToken.value === "async" && thirdToken && thirdToken.type === "Keyword" && thirdToken.value === "function")) {
                 tokensToIgnore.add(secondToken);
             }
 
@@ -74889,10 +74950,14 @@ module.exports = {
                 valid = body.type === "Program" && body.distance === 1 || body.distance === 2;
 
             if (!valid) {
-                context.report({ node: node, message: "Move {{type}} declaration to {{body}} root.", data: {
+                context.report({
+                    node: node,
+                    message: "Move {{type}} declaration to {{body}} root.",
+                    data: {
                         type: node.type === "FunctionDeclaration" ? "function" : "variable",
                         body: body.type === "Program" ? "program" : "function body"
-                    } });
+                    }
+                });
             }
         }
 
@@ -76727,68 +76792,13 @@ module.exports = {
     },
 
     create: function create(context) {
-
-        // the index of the last comment that was checked
-        var sourceCode = context.getSourceCode(),
-            exceptions = { Property: true },
-            options = context.options[0] || {},
-            ignoreEOLComments = options.ignoreEOLComments;
-        var hasExceptions = true,
-            lastCommentIndex = 0;
-
-        if (options && options.exceptions) {
-            Object.keys(options.exceptions).forEach(function (key) {
-                if (options.exceptions[key]) {
-                    exceptions[key] = true;
-                } else {
-                    delete exceptions[key];
-                }
-            });
-            hasExceptions = Object.keys(exceptions).length > 0;
-        }
-
-        /**
-         * Checks if a given token is the last token of the line or not.
-         * @param {Token} token The token to check.
-         * @returns {boolean} Whether or not a token is at the end of the line it occurs in.
-         * @private
-         */
-        function isLastTokenOfLine(token) {
-            var nextToken = sourceCode.getTokenAfter(token, { includeComments: true });
-
-            // nextToken is null if the comment is the last token in the program.
-            if (!nextToken) {
-                return true;
-            }
-
-            return !astUtils.isTokenOnSameLine(token, nextToken);
-        }
-
-        /**
-         * Determines if a given source index is in a comment or not by checking
-         * the index against the comment range. Since the check goes straight
-         * through the file, once an index is passed a certain comment, we can
-         * go to the next comment to check that.
-         * @param {int} index The source index to check.
-         * @param {ASTNode[]} comments An array of comment nodes.
-         * @returns {boolean} True if the index is within a comment, false if not.
-         * @private
-         */
-        function isIndexInComment(index, comments) {
-            while (lastCommentIndex < comments.length) {
-                var comment = comments[lastCommentIndex];
-
-                if (comment.range[0] < index && index < comment.range[1]) {
-                    return true;
-                } else if (index > comment.range[1]) {
-                    lastCommentIndex++;
-                } else {
-                    break;
-                }
-            }
-
-            return false;
-        }
+        var sourceCode = context.getSourceCode();
+        var options = context.options[0] || {};
+        var ignoreEOLComments = options.ignoreEOLComments;
+        var exceptions = Object.assign({ Property: true }, options.exceptions);
+        var hasExceptions = Object.keys(exceptions).filter(function (key) {
+            return exceptions[key];
+        }).length > 0;
 
         /**
          * Formats value of given comment token for error message by truncating its length.
@@ -76799,22 +76809,9 @@ module.exports = {
         function formatReportedCommentValue(token) {
             var valueLines = token.value.split("\n");
             var value = valueLines[0];
-            var formattedValue = value.substring(0, 12) + "...";
+            var formattedValue = value.slice(0, 12) + "...";
 
             return valueLines.length === 1 && value.length <= 12 ? value : formattedValue;
-        }
-
-        /**
-         * Creates a fix function that removes the multiple spaces between the two tokens
-         * @param {Token} leftToken left token
-         * @param {Token} rightToken right token
-         * @returns {Function} fix function
-         * @private
-         */
-        function createFix(leftToken, rightToken) {
-            return function (fixer) {
-                return fixer.replaceTextRange([leftToken.range[1], rightToken.range[0]], " ");
-            };
         }
 
         //--------------------------------------------------------------------------
@@ -76823,50 +76820,51 @@ module.exports = {
 
         return {
             Program: function Program() {
+                sourceCode.tokensAndComments.forEach(function (leftToken, leftIndex, tokensAndComments) {
+                    if (leftIndex === tokensAndComments.length - 1) {
+                        return;
+                    }
+                    var rightToken = tokensAndComments[leftIndex + 1];
 
-                var source = sourceCode.getText(),
-                    allComments = sourceCode.getAllComments(),
-                    pattern = /[^\s].*? {2,}/g;
-                var parent = void 0;
+                    // Ignore tokens that have less than 2 spaces between them or are on different lines
+                    if (leftToken.range[1] + 2 > rightToken.range[0] || leftToken.loc.end.line < rightToken.loc.start.line) {
+                        return;
+                    }
 
-                while (pattern.test(source)) {
+                    // Ignore comments that are the last token on their line if `ignoreEOLComments` is active.
+                    if (ignoreEOLComments && astUtils.isCommentToken(rightToken) && (leftIndex === tokensAndComments.length - 2 || rightToken.loc.end.line < tokensAndComments[leftIndex + 2].loc.start.line)) {
+                        return;
+                    }
 
-                    // do not flag anything inside of comments
-                    if (!isIndexInComment(pattern.lastIndex, allComments)) {
+                    // Ignore tokens that are in a node in the "exceptions" object
+                    if (hasExceptions) {
+                        var parentNode = sourceCode.getNodeByRangeIndex(rightToken.range[0] - 1);
 
-                        var token = sourceCode.getTokenByRangeStart(pattern.lastIndex, { includeComments: true });
-
-                        if (token) {
-                            if (ignoreEOLComments && astUtils.isCommentToken(token) && isLastTokenOfLine(token)) {
-                                return;
-                            }
-
-                            var previousToken = sourceCode.getTokenBefore(token, { includeComments: true });
-
-                            if (hasExceptions) {
-                                parent = sourceCode.getNodeByRangeIndex(pattern.lastIndex - 1);
-                            }
-
-                            if (!parent || !exceptions[parent.type]) {
-                                var value = token.value;
-
-                                if (token.type === "Block") {
-                                    value = "/*" + formatReportedCommentValue(token) + "*/";
-                                } else if (token.type === "Line") {
-                                    value = "//" + formatReportedCommentValue(token);
-                                }
-
-                                context.report({
-                                    node: token,
-                                    loc: token.loc.start,
-                                    message: "Multiple spaces found before '{{value}}'.",
-                                    data: { value: value },
-                                    fix: createFix(previousToken, token)
-                                });
-                            }
+                        if (parentNode && exceptions[parentNode.type]) {
+                            return;
                         }
                     }
-                }
+
+                    var displayValue = void 0;
+
+                    if (rightToken.type === "Block") {
+                        displayValue = "/*" + formatReportedCommentValue(rightToken) + "*/";
+                    } else if (rightToken.type === "Line") {
+                        displayValue = "//" + formatReportedCommentValue(rightToken);
+                    } else {
+                        displayValue = rightToken.value;
+                    }
+
+                    context.report({
+                        node: rightToken,
+                        loc: rightToken.loc.start,
+                        message: "Multiple spaces found before '{{displayValue}}'.",
+                        data: { displayValue: displayValue },
+                        fix: function fix(fixer) {
+                            return fixer.replaceTextRange([leftToken.range[1], rightToken.range[0]], " ");
+                        }
+                    });
+                });
             }
         };
     }
@@ -78261,7 +78259,7 @@ module.exports = {
                 nodeValue = token.value;
 
             if (nodeType === "RegularExpression") {
-                checkRegex(node, nodeValue, token.start);
+                checkRegex(node, nodeValue, token.range[0]);
             }
         }
 
@@ -78287,7 +78285,7 @@ module.exports = {
             var shadowed = regExpVar && regExpVar.defs.length > 0;
 
             if (node.callee.type === "Identifier" && node.callee.name === "RegExp" && isString(node.arguments[0]) && !shadowed) {
-                checkRegex(node, node.arguments[0].value, node.arguments[0].start + 1);
+                checkRegex(node, node.arguments[0].value, node.arguments[0].range[0] + 1);
             }
         }
 
@@ -78720,20 +78718,28 @@ module.exports = {
             if (matchedObjectProperty) {
                 var message = matchedObjectProperty.message ? " " + matchedObjectProperty.message : "";
 
-                // eslint-disable-next-line eslint-plugin/report-message-format
-                context.report({ node: node, message: "'{{objectName}}.{{propertyName}}' is restricted from being used.{{message}}", data: {
+                context.report({
+                    node: node,
+                    // eslint-disable-next-line eslint-plugin/report-message-format
+                    message: "'{{objectName}}.{{propertyName}}' is restricted from being used.{{message}}",
+                    data: {
                         objectName: objectName,
                         propertyName: propertyName,
                         message: message
-                    } });
+                    }
+                });
             } else if (globalMatchedProperty) {
                 var _message = globalMatchedProperty.message ? " " + globalMatchedProperty.message : "";
 
-                // eslint-disable-next-line eslint-plugin/report-message-format
-                context.report({ node: node, message: "'{{propertyName}}' is restricted from being used.{{message}}", data: {
+                context.report({
+                    node: node,
+                    // eslint-disable-next-line eslint-plugin/report-message-format
+                    message: "'{{propertyName}}' is restricted from being used.{{message}}",
+                    data: {
                         propertyName: propertyName,
                         message: _message
-                    } });
+                    }
+                });
             }
         }
 
@@ -79814,10 +79820,14 @@ module.exports = {
                     var match = regex.exec(line);
 
                     if (match) {
-                        context.report({ node: node, loc: {
+                        context.report({
+                            node: node,
+                            loc: {
                                 line: index + 1,
                                 column: match.index + 1
-                            }, message: "Unexpected tab character." });
+                            },
+                            message: "Unexpected tab character."
+                        });
                     }
                 });
             }
@@ -85195,7 +85205,7 @@ module.exports = {
 
             if (astUtils.isTokenOnSameLine(penultimate, last)) {
                 var shouldCheckPenultimate = options.arraysInObjectsException && astUtils.isClosingBracketToken(penultimate) || options.objectsInObjectsException && astUtils.isClosingBraceToken(penultimate);
-                var penultimateType = shouldCheckPenultimate && sourceCode.getNodeByRangeIndex(penultimate.start).type;
+                var penultimateType = shouldCheckPenultimate && sourceCode.getNodeByRangeIndex(penultimate.range[0]).type;
 
                 var closingCurlyBraceMustBeSpaced = options.arraysInObjectsException && penultimateType === "ArrayExpression" || options.objectsInObjectsException && (penultimateType === "ObjectExpression" || penultimateType === "ObjectPattern") ? !options.spaced : options.spaced;
 
@@ -86940,7 +86950,7 @@ module.exports = {
                         node: node,
                         loc: { line: tokenBeforeFirst.loc.start.line, column: tokenBeforeFirst.loc.start.column },
                         fix: function fix(fixer) {
-                            return fixer.replaceTextRange([tokenBeforeFirst.end, firstBlockToken.start - firstBlockToken.loc.start.column], "\n");
+                            return fixer.replaceTextRange([tokenBeforeFirst.range[1], firstBlockToken.range[0] - firstBlockToken.loc.start.column], "\n");
                         },
 
                         message: NEVER_MESSAGE
@@ -86954,7 +86964,7 @@ module.exports = {
                         loc: { line: tokenAfterLast.loc.end.line, column: tokenAfterLast.loc.end.column - 1 },
                         message: NEVER_MESSAGE,
                         fix: function fix(fixer) {
-                            return fixer.replaceTextRange([lastBlockToken.end, tokenAfterLast.start - tokenAfterLast.loc.start.column], "\n");
+                            return fixer.replaceTextRange([lastBlockToken.range[1], tokenAfterLast.range[0] - tokenAfterLast.loc.start.column], "\n");
                         }
                     });
                 }
@@ -87094,7 +87104,7 @@ function isBlockLikeStatement(sourceCode, node) {
 
     // Checks the last token is a closing brace of blocks.
     var lastToken = sourceCode.getLastToken(node, astUtils.isNotSemicolonToken);
-    var belongingNode = astUtils.isClosingBraceToken(lastToken) ? sourceCode.getNodeByRangeIndex(lastToken.range[0]) : null;
+    var belongingNode = lastToken && astUtils.isClosingBraceToken(lastToken) ? sourceCode.getNodeByRangeIndex(lastToken.range[0]) : null;
 
     return Boolean(belongingNode) && (belongingNode.type === "BlockStatement" || belongingNode.type === "SwitchStatement");
 }
@@ -88670,10 +88680,14 @@ module.exports = {
          * @returns {void}
          */
         function report(node, existing, substitute) {
-            context.report({ node: node, message: "Avoid using {{existing}}, instead use {{substitute}}.", data: {
+            context.report({
+                node: node,
+                message: "Avoid using {{existing}}, instead use {{substitute}}.",
+                data: {
                     existing: existing,
                     substitute: substitute
-                } });
+                }
+            });
         }
 
         return {
@@ -88996,7 +89010,7 @@ function startsWithTemplateCurly(node) {
         return startsWithTemplateCurly(node.left);
     }
     if (node.type === "TemplateLiteral") {
-        return node.expressions.length && node.quasis.length && node.quasis[0].start === node.quasis[0].end;
+        return node.expressions.length && node.quasis.length && node.quasis[0].range[0] === node.quasis[0].range[1];
     }
     return node.type !== "Literal" || typeof node.value !== "string";
 }
@@ -89011,7 +89025,7 @@ function endsWithTemplateCurly(node) {
         return startsWithTemplateCurly(node.right);
     }
     if (node.type === "TemplateLiteral") {
-        return node.expressions.length && node.quasis.length && node.quasis[node.quasis.length - 1].start === node.quasis[node.quasis.length - 1].end;
+        return node.expressions.length && node.quasis.length && node.quasis[node.quasis.length - 1].range[0] === node.quasis[node.quasis.length - 1].range[1];
     }
     return node.type !== "Literal" || typeof node.value !== "string";
 }
@@ -91878,7 +91892,7 @@ module.exports = {
             var nonSpacedNode = getFirstNonSpacedToken(leftNode, rightNode);
 
             if (nonSpacedNode) {
-                if (!(int32Hint && sourceCode.getText(node).substr(-2) === "|0")) {
+                if (!(int32Hint && sourceCode.getText(node).endsWith("|0"))) {
                     report(node, nonSpacedNode);
                 }
             }
@@ -92551,9 +92565,9 @@ module.exports = {
                 node: node,
                 fix: function fix(fixer) {
                     if (requireSpace) {
-                        return fixer.insertTextAfterRange([node.start, node.end - 2], " ");
+                        return fixer.insertTextAfterRange([node.range[0], node.range[1] - 2], " ");
                     }
-                    var end = node.end - 2,
+                    var end = node.range[1] - 2,
                         start = end - match[0].length;
 
                     return fixer.replaceTextRange([start, end], "");
@@ -93745,14 +93759,22 @@ module.exports = {
                         // TODO(nzakas): Figure out logical things to do with destructured, default, rest params
                         if (param.type === "Identifier") {
                             if (jsdocParams[i] && name !== jsdocParams[i]) {
-                                context.report({ node: jsdocNode, message: "Expected JSDoc for '{{name}}' but found '{{jsdocName}}'.", data: {
+                                context.report({
+                                    node: jsdocNode,
+                                    message: "Expected JSDoc for '{{name}}' but found '{{jsdocName}}'.",
+                                    data: {
                                         name: name,
                                         jsdocName: jsdocParams[i]
-                                    } });
+                                    }
+                                });
                             } else if (!params[name] && !isOverride) {
-                                context.report({ node: jsdocNode, message: "Missing JSDoc for parameter '{{name}}'.", data: {
+                                context.report({
+                                    node: jsdocNode,
+                                    message: "Missing JSDoc for parameter '{{name}}'.",
+                                    data: {
                                         name: name
-                                    } });
+                                    }
+                                });
                             }
                         }
                     });
