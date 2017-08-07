@@ -48743,7 +48743,7 @@ function hasOwnProperty(obj, prop) {
 },{"./support/isBuffer":115,"_process":104,"inherits":114}],117:[function(require,module,exports){
 module.exports={
   "name": "eslint",
-  "version": "4.3.0",
+  "version": "4.4.0",
   "author": "Nicholas C. Zakas <nicholas+npm@nczconsulting.com>",
   "description": "An AST-based pattern checker for JavaScript.",
   "bin": {
@@ -76826,8 +76826,8 @@ module.exports = {
                     }
                     var rightToken = tokensAndComments[leftIndex + 1];
 
-                    // Ignore tokens that have less than 2 spaces between them or are on different lines
-                    if (leftToken.range[1] + 2 > rightToken.range[0] || leftToken.loc.end.line < rightToken.loc.start.line) {
+                    // Ignore tokens that don't have 2 spaces between them or are on different lines
+                    if (!sourceCode.text.slice(leftToken.range[1], rightToken.range[0]).includes("  ") || leftToken.loc.end.line < rightToken.loc.start.line) {
                         return;
                     }
 
