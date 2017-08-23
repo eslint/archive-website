@@ -29,11 +29,11 @@ define(['react', 'jsx!editor', 'jsx!messages', 'jsx!fixedCode', 'jsx!configurati
         }
     }();
 
-    var eslint = new Linter();
+    var linter = new Linter();
     return React.createClass({
         displayName: 'App',
         getInitialState: function() {
-            var rules = eslint.getRules();
+            var rules = linter.getRules();
             function getDocs() {
                 var map = rules;
                 var result = {};
@@ -46,7 +46,6 @@ define(['react', 'jsx!editor', 'jsx!messages', 'jsx!fixedCode', 'jsx!configurati
             var storedState = JSON.parse(window.localStorage.getItem('linterDemoState') || '{}');
 
             var initialState = defaultsDeep(storedState, {
-                messages: [],
                 options: {
                     parserOptions: {
                         ecmaVersion: 5,
@@ -96,7 +95,6 @@ define(['react', 'jsx!editor', 'jsx!messages', 'jsx!fixedCode', 'jsx!configurati
                 text: 'var foo = bar;',
                 docs: getDocs(),
                 fix: false,
-                fixedText: 'var foo = bar;'
             });
 
             this.initialText = initialState.text;
@@ -104,43 +102,17 @@ define(['react', 'jsx!editor', 'jsx!messages', 'jsx!fixedCode', 'jsx!configurati
         },
 
         handleChange: function(event) {
-            this.setState({ text: event.value }, function() {
-                this.lint();
-            });
+            this.setState({ text: event.value });
         },
         updateOptions: function(options) {
-            this.setState({options: options}, function() {
-                this.lint();
-            });
-        },
-        verify: function() {
-            var results = eslint.verify(this.state.text, this.state.options);
-            this.setState({
-                messages: results,
-                name: this.state.text
-            });
-        },
-        verifyAndFix: function() {
-            var results = eslint.verifyAndFix(this.state.text, this.state.options, { filename: "fixedcode.js" });
-            this.setState({
-                messages: results.messages,
-                fixedText: results.output
-            });
+            this.setState({ options: options });
         },
         lint: function() {
-            setTimeout(function() {
-                if (this.state.fix) {
-                    this.verifyAndFix()
-                } else {
-                    this.verify();
-                }
-            }.bind(this), 1);
+            return linter.verifyAndFix(this.state.text, this.state.options, { fix: this.state.fix });
         },
         componentDidMount: function() {
             $('a[data-toggle="tab"]').on("shown.bs.tab", function (e) {
-                this.setState({ fix: e.target.innerText === "Fixed Code" }, function() {
-                    this.lint();
-                });
+                this.setState({ fix: e.target.innerText === "Fixed Code" });
             }.bind(this))
         },
         componentDidUpdate: function() {
@@ -149,11 +121,12 @@ define(['react', 'jsx!editor', 'jsx!messages', 'jsx!fixedCode', 'jsx!configurati
             }
         },
         render: function() {
+            var results = this.lint();
             return (
                 <div className="container editorRow">
                     <div className="row">
                         <div className="col-md-7">
-                            <Editor onChange={this.handleChange} text={this.initialText} errors={this.state.messages} />
+                            <Editor onChange={this.handleChange} text={this.initialText} errors={results.messages} />
                         </div>
                         <div className="col-md-5">
                             <ul className="nav nav-tabs" role="tablist">
@@ -165,8 +138,8 @@ define(['react', 'jsx!editor', 'jsx!messages', 'jsx!fixedCode', 'jsx!configurati
                                 <div role="tabpanel" className="tab-pane active" >
                                     {
                                         this.state.fix ?
-                                            <FixedCode values={this.state.fixedText} /> :
-                                            <Messages values={this.state.messages} />
+                                            <FixedCode values={results.output} /> :
+                                            <Messages values={results.messages} />
                                     }
                                 </div>
                             </div>
