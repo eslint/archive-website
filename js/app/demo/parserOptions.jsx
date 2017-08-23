@@ -52,7 +52,7 @@ define(['react'], function(React) {
                                                     function(event) {
                                                         var updatedFeature = {};
                                                         updatedFeature[ecmaFeature] = event.target.checked;
-                                                        props.onChange(Object.assign({}, props.options, {
+                                                        props.onUpdate(Object.assign({}, props.options, {
                                                             ecmaFeatures: Object.assign({}, props.options.ecmaFeatures, updatedFeature)
                                                         }))
                                                     }
