@@ -115,6 +115,12 @@ define(['react', 'jsx!editor', 'jsx!messages', 'jsx!fixedCode', 'jsx!configurati
                 window.localStorage.setItem('linterDemoState', JSON.stringify(this.state));
             }
         },
+        enableFixMode: function() {
+            this.setState({ fix: true });
+        },
+        disableFixMode: function() {
+            this.setState({ fix: false });
+        },
         render: function() {
             var results = this.lint();
             return (
@@ -133,11 +139,7 @@ define(['react', 'jsx!editor', 'jsx!messages', 'jsx!fixedCode', 'jsx!configurati
                                         href="#messages"
                                         aria-controls="messages"
                                         role="tab"
-                                        onClick={
-                                            function() {
-                                                this.setState({ fix: false });
-                                            }.bind(this)
-                                        }
+                                        onClick={this.disableFixMode}
                                     >
                                         Messages
                                     </a>
@@ -151,11 +153,7 @@ define(['react', 'jsx!editor', 'jsx!messages', 'jsx!fixedCode', 'jsx!configurati
                                         aria-controls="fixedCode"
                                         role="tab"
                                         data-toggle="tab"
-                                        onClick={
-                                            function() {
-                                                this.setState({ fix: true });
-                                            }.bind(this)
-                                        }
+                                        onClick={this.enableFixMode}
                                     >
                                         Fixed Code
                                     </a>
