@@ -30,19 +30,18 @@ define(['react', 'jsx!editor', 'jsx!messages', 'jsx!fixedCode', 'jsx!configurati
     }();
 
     var linter = new Linter();
+    var rules = linter.getRules();
+    var docs = (function() {
+        var map = rules;
+        var result = {};
+        map.forEach(function(value, key) {
+            result[key] = value.meta;
+        });
+        return result;
+    })();
     return React.createClass({
         displayName: 'App',
         getInitialState: function() {
-            var rules = linter.getRules();
-            function getDocs() {
-                var map = rules;
-                var result = {};
-                map.forEach(function(value, key) {
-                    result[key] = value.meta;
-                });
-                return result;
-            }
-
             var storedState = JSON.parse(window.localStorage.getItem('linterDemoState') || '{}');
 
             var initialState = defaultsDeep(storedState, {
@@ -93,7 +92,6 @@ define(['react', 'jsx!editor', 'jsx!messages', 'jsx!fixedCode', 'jsx!configurati
                     }
                 },
                 text: 'var foo = bar;',
-                docs: getDocs(),
                 fix: false,
             });
 
@@ -146,7 +144,7 @@ define(['react', 'jsx!editor', 'jsx!messages', 'jsx!fixedCode', 'jsx!configurati
                         </div>
                     </div>
                     <div className="row">
-                        <Configuration options={this.state.options} docs={this.state.docs} onUpdate={this.updateOptions} />
+                        <Configuration options={this.state.options} docs={docs} onUpdate={this.updateOptions} />
                     </div>
                 </div>
             );
