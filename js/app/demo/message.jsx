@@ -13,7 +13,7 @@ define(['react', 'events'], function(React, events) {
                     {
                         !this.props.value.fatal && [
                             ' (',
-                            <a href={"http://eslint.org/docs/rules/" + this.props.value.ruleId}>{this.props.value.ruleId}</a>,
+                            <a href={"https://eslint.org/docs/rules/" + this.props.value.ruleId}>{this.props.value.ruleId}</a>,
                             ')'
                         ]
                     }
