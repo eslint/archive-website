@@ -110,11 +110,6 @@ define(['react', 'jsx!editor', 'jsx!messages', 'jsx!fixedCode', 'jsx!configurati
         lint: function() {
             return linter.verifyAndFix(this.state.text, this.state.options, { fix: this.state.fix });
         },
-        componentDidMount: function() {
-            $('a[data-toggle="tab"]').on("shown.bs.tab", function (e) {
-                this.setState({ fix: e.target.innerText === "Fixed Code" });
-            }.bind(this))
-        },
         componentDidUpdate: function() {
             if (hasLocalStorage) {
                 window.localStorage.setItem('linterDemoState', JSON.stringify(this.state));
@@ -130,8 +125,41 @@ define(['react', 'jsx!editor', 'jsx!messages', 'jsx!fixedCode', 'jsx!configurati
                         </div>
                         <div className="col-md-5">
                             <ul className="nav nav-tabs" role="tablist">
-                                <li role="presentation" className="active"><a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">Messages</a></li>
-                                <li role="presentation"><a href="#fixedCode" aria-controls="fixedCode" role="tab" data-toggle="tab">Fixed Code</a></li>
+                                <li
+                                    role="presentation"
+                                    className={this.state.fix ? "" : "active"}
+                                >
+                                    <a
+                                        href="#messages"
+                                        aria-controls="messages"
+                                        role="tab"
+                                        onClick={
+                                            function() {
+                                                this.setState({ fix: false });
+                                            }.bind(this)
+                                        }
+                                    >
+                                        Messages
+                                    </a>
+                                </li>
+                                <li
+                                    role="presentation"
+                                    className={this.state.fix ? "active" : ""}
+                                >
+                                    <a
+                                        href="#fixedCode"
+                                        aria-controls="fixedCode"
+                                        role="tab"
+                                        data-toggle="tab"
+                                        onClick={
+                                            function() {
+                                                this.setState({ fix: true });
+                                            }.bind(this)
+                                        }
+                                    >
+                                        Fixed Code
+                                    </a>
+                                </li>
                             </ul>
 
                             <div className="tab-content">
