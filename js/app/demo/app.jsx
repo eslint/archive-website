@@ -137,6 +137,7 @@ define(['react', 'jsx!editor', 'jsx!messages', 'jsx!fixedCode', 'jsx!configurati
                                         href="#messages"
                                         aria-controls="messages"
                                         role="tab"
+                                        data-toggle="tab"
                                         onClick={this.disableFixMode}
                                     >
                                         Messages
