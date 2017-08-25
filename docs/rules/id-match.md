@@ -1,9 +1,10 @@
 ---
 title: id-match - Rules
 layout: doc
-edit_link: https://github.com/eslint/eslint/edit/master/docs/rulesid-match.md
+edit_link: https://github.com/eslint/eslint/edit/master/docs/rules/id-match.md
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
+
 # require identifiers to match a specified regular expression (id-match)
 
 > "There are only two hard things in Computer Science: cache invalidation and naming things." — Phil Karlton

@@ -1,9 +1,10 @@
 ---
 title: handle-callback-err - Rules
 layout: doc
-edit_link: https://github.com/eslint/eslint/edit/master/docs/ruleshandle-callback-err.md
+edit_link: https://github.com/eslint/eslint/edit/master/docs/rules/handle-callback-err.md
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
+
 # Enforce Callback Error Handling (handle-callback-err)
 
 In Node.js, a common pattern for dealing with asynchronous behavior is called the callback pattern.

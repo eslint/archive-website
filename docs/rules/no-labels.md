@@ -1,9 +1,10 @@
 ---
 title: no-labels - Rules
 layout: doc
-edit_link: https://github.com/eslint/eslint/edit/master/docs/rulesno-labels.md
+edit_link: https://github.com/eslint/eslint/edit/master/docs/rules/no-labels.md
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
+
 # Disallow Labeled Statements (no-labels)
 
 Labeled statements in JavaScript are used in conjunction with `break` and `continue` to control flow around multiple loops. For example:

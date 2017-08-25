@@ -1,9 +1,10 @@
 ---
 title: no-with - Rules
 layout: doc
-edit_link: https://github.com/eslint/eslint/edit/master/docs/rulesno-with.md
+edit_link: https://github.com/eslint/eslint/edit/master/docs/rules/no-with.md
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
+
 # disallow `with` statements (no-with)
 
 The `with` statement is potentially problematic because it adds members of an object to the current scope, making it impossible to tell what a variable inside the block actually refers to.

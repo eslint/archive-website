@@ -1,9 +1,10 @@
 ---
 title: no-param-reassign - Rules
 layout: doc
-edit_link: https://github.com/eslint/eslint/edit/master/docs/rulesno-param-reassign.md
+edit_link: https://github.com/eslint/eslint/edit/master/docs/rules/no-param-reassign.md
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
+
 # Disallow Reassignment of Function Parameters (no-param-reassign)
 
 Assignment to variables declared as function parameters can be misleading and lead to confusing behavior, as modifying function parameters will also mutate the `arguments` object. Often, assignment to function parameters is unintended and indicative of a mistake or programmer error.

@@ -1,9 +1,10 @@
 ---
 title: no-extra-parens - Rules
 layout: doc
-edit_link: https://github.com/eslint/eslint/edit/master/docs/rulesno-extra-parens.md
+edit_link: https://github.com/eslint/eslint/edit/master/docs/rules/no-extra-parens.md
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
+
 # disallow unnecessary parentheses (no-extra-parens)
 
 (fixable) The `--fix` option on the [command line](../user-guide/command-line-interface#fix) can automatically fix some of the problems reported by this rule.

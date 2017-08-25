@@ -1,9 +1,10 @@
 ---
 title: no-throw-literal - Rules
 layout: doc
-edit_link: https://github.com/eslint/eslint/edit/master/docs/rulesno-throw-literal.md
+edit_link: https://github.com/eslint/eslint/edit/master/docs/rules/no-throw-literal.md
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
+
 # Restrict what can be thrown as an exception (no-throw-literal)
 
 It is considered good practice to only `throw` the `Error` object itself or an object using the `Error` object as base objects for user-defined exceptions.

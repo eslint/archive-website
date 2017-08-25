@@ -1,9 +1,10 @@
 ---
 title: no-underscore-dangle - Rules
 layout: doc
-edit_link: https://github.com/eslint/eslint/edit/master/docs/rulesno-underscore-dangle.md
+edit_link: https://github.com/eslint/eslint/edit/master/docs/rules/no-underscore-dangle.md
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
+
 # disallow dangling underscores in identifiers (no-underscore-dangle)
 
 As far as naming conventions for identifiers go, dangling underscores may be the most polarizing in JavaScript. Dangling underscores are underscores at either the beginning or end of an identifier, such as:

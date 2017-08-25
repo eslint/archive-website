@@ -1,9 +1,10 @@
 ---
 title: no-extra-boolean-cast - Rules
 layout: doc
-edit_link: https://github.com/eslint/eslint/edit/master/docs/rulesno-extra-boolean-cast.md
+edit_link: https://github.com/eslint/eslint/edit/master/docs/rules/no-extra-boolean-cast.md
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
+
 # disallow unnecessary boolean casts (no-extra-boolean-cast)
 
 (recommended) The `"extends": "eslint:recommended"` property in a configuration file enables this rule.

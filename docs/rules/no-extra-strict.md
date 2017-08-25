@@ -1,9 +1,10 @@
 ---
 title: no-extra-strict - Rules
 layout: doc
-edit_link: https://github.com/eslint/eslint/edit/master/docs/rulesno-extra-strict.md
+edit_link: https://github.com/eslint/eslint/edit/master/docs/rules/no-extra-strict.md
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
+
 # no-extra-strict: disallow strict mode directives when already in strict mode
 
 (removed) This rule was **removed** in ESLint v1.0 and **replaced** by the [strict](strict) rule. The `"global"` or `"function"` options in the new rule are similar to the removed rule.

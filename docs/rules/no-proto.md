@@ -1,9 +1,10 @@
 ---
 title: no-proto - Rules
 layout: doc
-edit_link: https://github.com/eslint/eslint/edit/master/docs/rulesno-proto.md
+edit_link: https://github.com/eslint/eslint/edit/master/docs/rules/no-proto.md
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
+
 # Disallow Use of `__proto__` (no-proto)
 
 `__proto__` property has been deprecated as of ECMAScript 3.1 and shouldn't be used in the code. Use `getPrototypeOf` method instead.

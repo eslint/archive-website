@@ -1,9 +1,10 @@
 ---
 title: no-restricted-syntax - Rules
 layout: doc
-edit_link: https://github.com/eslint/eslint/edit/master/docs/rulesno-restricted-syntax.md
+edit_link: https://github.com/eslint/eslint/edit/master/docs/rules/no-restricted-syntax.md
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
+
 # disallow specified syntax (no-restricted-syntax)
 
 JavaScript has a lot of language features, and not everyone likes all of them. As a result, some projects choose to disallow the use of certain language features altogether. For instance, you might decide to disallow the use of `try-catch` or `class`, or you might decide to disallow the use of the `in` operator.

@@ -1,9 +1,10 @@
 ---
 title: lines-around-directive - Rules
 layout: doc
-edit_link: https://github.com/eslint/eslint/edit/master/docs/ruleslines-around-directive.md
+edit_link: https://github.com/eslint/eslint/edit/master/docs/rules/lines-around-directive.md
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
+
 # require or disallow newlines around directives (lines-around-directive)
 
 (fixable) The `--fix` option on the [command line](../user-guide/command-line-interface#fix) can automatically fix some of the problems reported by this rule.

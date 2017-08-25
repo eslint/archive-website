@@ -1,9 +1,10 @@
 ---
 title: id-length - Rules
 layout: doc
-edit_link: https://github.com/eslint/eslint/edit/master/docs/rulesid-length.md
+edit_link: https://github.com/eslint/eslint/edit/master/docs/rules/id-length.md
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
+
 # enforce minimum and maximum identifier lengths (id-length)
 
 Very short identifier names like `e`, `x`, `_t` or very long ones like `hashGeneratorResultOutputContainerObject` can make code harder to read and potentially less maintainable. To prevent this, one may enforce a minimum and/or maximum identifier length.

@@ -1,9 +1,10 @@
 ---
 title: no-caller - Rules
 layout: doc
-edit_link: https://github.com/eslint/eslint/edit/master/docs/rulesno-caller.md
+edit_link: https://github.com/eslint/eslint/edit/master/docs/rules/no-caller.md
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
+
 # Disallow Use of caller/callee (no-caller)
 
 The use of `arguments.caller` and `arguments.callee` make several code optimizations impossible. They have been deprecated in future versions of JavaScript and their use is forbidden in ECMAScript 5 while in strict mode.

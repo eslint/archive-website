@@ -1,9 +1,10 @@
 ---
 title: prefer-arrow-callback - Rules
 layout: doc
-edit_link: https://github.com/eslint/eslint/edit/master/docs/rulesprefer-arrow-callback.md
+edit_link: https://github.com/eslint/eslint/edit/master/docs/rules/prefer-arrow-callback.md
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
+
 # Suggest using arrow functions as callbacks. (prefer-arrow-callback)
 
 (fixable) The `--fix` option on the [command line](../user-guide/command-line-interface#fix) can automatically fix some of the problems reported by this rule.

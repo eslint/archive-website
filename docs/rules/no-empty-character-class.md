@@ -1,9 +1,10 @@
 ---
 title: no-empty-character-class - Rules
 layout: doc
-edit_link: https://github.com/eslint/eslint/edit/master/docs/rulesno-empty-character-class.md
+edit_link: https://github.com/eslint/eslint/edit/master/docs/rules/no-empty-character-class.md
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
+
 # disallow empty character classes in regular expressions (no-empty-character-class)
 
 (recommended) The `"extends": "eslint:recommended"` property in a configuration file enables this rule.

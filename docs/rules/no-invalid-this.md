@@ -1,9 +1,10 @@
 ---
 title: no-invalid-this - Rules
 layout: doc
-edit_link: https://github.com/eslint/eslint/edit/master/docs/rulesno-invalid-this.md
+edit_link: https://github.com/eslint/eslint/edit/master/docs/rules/no-invalid-this.md
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
+
 # Disallow `this` keywords outside of classes or class-like objects. (no-invalid-this)
 
 Under the strict mode, `this` keywords outside of classes or class-like objects might be `undefined` and raise a `TypeError`.

@@ -1,9 +1,10 @@
 ---
 title: template-tag-spacing - Rules
 layout: doc
-edit_link: https://github.com/eslint/eslint/edit/master/docs/rulestemplate-tag-spacing.md
+edit_link: https://github.com/eslint/eslint/edit/master/docs/rules/template-tag-spacing.md
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
+
 # Require or disallow spacing between template tags and their literals (template-tag-spacing)
 
 (fixable) The `--fix` option on the [command line](../user-guide/command-line-interface#fix) can automatically fix some of the problems reported by this rule.

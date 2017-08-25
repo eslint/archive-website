@@ -1,9 +1,10 @@
 ---
 title: no-regex-spaces - Rules
 layout: doc
-edit_link: https://github.com/eslint/eslint/edit/master/docs/rulesno-regex-spaces.md
+edit_link: https://github.com/eslint/eslint/edit/master/docs/rules/no-regex-spaces.md
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
+
 # disallow multiple spaces in regular expression literals (no-regex-spaces)
 
 (recommended) The `"extends": "eslint:recommended"` property in a configuration file enables this rule.

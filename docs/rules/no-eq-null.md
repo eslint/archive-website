@@ -1,9 +1,10 @@
 ---
 title: no-eq-null - Rules
 layout: doc
-edit_link: https://github.com/eslint/eslint/edit/master/docs/rulesno-eq-null.md
+edit_link: https://github.com/eslint/eslint/edit/master/docs/rules/no-eq-null.md
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
+
 # Disallow Null Comparisons (no-eq-null)
 
 Comparing to `null` without a type-checking operator (`==` or `!=`), can have unintended results as the comparison will evaluate to true when comparing to not just a `null`, but also an `undefined` value.

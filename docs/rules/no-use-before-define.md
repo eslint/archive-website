@@ -1,9 +1,10 @@
 ---
 title: no-use-before-define - Rules
 layout: doc
-edit_link: https://github.com/eslint/eslint/edit/master/docs/rulesno-use-before-define.md
+edit_link: https://github.com/eslint/eslint/edit/master/docs/rules/no-use-before-define.md
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
+
 # Disallow Early Use (no-use-before-define)
 
 In JavaScript, prior to ES6, variable and function declarations are hoisted to the top of a scope, so it's possible to use identifiers before their formal declarations in code. This can be confusing and some believe it is best to always declare variables and functions before using them.

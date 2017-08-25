@@ -1,9 +1,10 @@
 ---
 title: consistent-return - Rules
 layout: doc
-edit_link: https://github.com/eslint/eslint/edit/master/docs/rulesconsistent-return.md
+edit_link: https://github.com/eslint/eslint/edit/master/docs/rules/consistent-return.md
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
+
 # require `return` statements to either always or never specify values (consistent-return)
 
 Unlike statically-typed languages which enforce that a function returns a specified type of value, JavaScript allows different code paths in a function to return different types of values.

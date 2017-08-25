@@ -1,9 +1,10 @@
 ---
 title: no-return-await - Rules
 layout: doc
-edit_link: https://github.com/eslint/eslint/edit/master/docs/rulesno-return-await.md
+edit_link: https://github.com/eslint/eslint/edit/master/docs/rules/no-return-await.md
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
+
 # Disallows unnecessary `return await` (no-return-await)
 
 Inside an `async function`, `return await` is useless. Since the return value of an `async function` is always wrapped in `Promise.resolve`, `return await` doesn't actually do anything except add extra time before the overarching Promise resolves or rejects. This pattern is almost certainly due to programmer ignorance of the return semantics of `async function`s.

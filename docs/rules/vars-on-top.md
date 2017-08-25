@@ -1,9 +1,10 @@
 ---
 title: vars-on-top - Rules
 layout: doc
-edit_link: https://github.com/eslint/eslint/edit/master/docs/rulesvars-on-top.md
+edit_link: https://github.com/eslint/eslint/edit/master/docs/rules/vars-on-top.md
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
+
 # Require Variable Declarations to be at the top of their scope (vars-on-top)
 
 The `vars-on-top` rule generates warnings when variable declarations are not used serially at the top of a function scope or the top of a program.

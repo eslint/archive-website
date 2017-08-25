@@ -1,9 +1,10 @@
 ---
 title: complexity - Rules
 layout: doc
-edit_link: https://github.com/eslint/eslint/edit/master/docs/rulescomplexity.md
+edit_link: https://github.com/eslint/eslint/edit/master/docs/rules/complexity.md
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
+
 # Limit Cyclomatic Complexity (complexity)
 
 Cyclomatic complexity measures the number of linearly independent paths through a program's source code. This rule allows setting a cyclomatic complexity threshold.

@@ -1,9 +1,10 @@
 ---
 title: no-octal-escape - Rules
 layout: doc
-edit_link: https://github.com/eslint/eslint/edit/master/docs/rulesno-octal-escape.md
+edit_link: https://github.com/eslint/eslint/edit/master/docs/rules/no-octal-escape.md
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
+
 # disallow octal escape sequences in string literals (no-octal-escape)
 
 As of the ECMAScript 5 specification, octal escape sequences in string literals are deprecated and should not be used. Unicode escape sequences should be used instead.

@@ -1,9 +1,10 @@
 ---
 title: no-useless-rename - Rules
 layout: doc
-edit_link: https://github.com/eslint/eslint/edit/master/docs/rulesno-useless-rename.md
+edit_link: https://github.com/eslint/eslint/edit/master/docs/rules/no-useless-rename.md
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
+
 # Disallow renaming import, export, and destructured assignments to the same name (no-useless-rename)
 
 (fixable) The `--fix` option on the [command line](../user-guide/command-line-interface#fix) can automatically fix some of the problems reported by this rule.

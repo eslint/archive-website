@@ -1,9 +1,10 @@
 ---
 title: no-tabs - Rules
 layout: doc
-edit_link: https://github.com/eslint/eslint/edit/master/docs/rulesno-tabs.md
+edit_link: https://github.com/eslint/eslint/edit/master/docs/rules/no-tabs.md
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
+
 # disallow all tabs (no-tabs)
 
 Some style guides don't allow the use of tab characters at all, including within comments.

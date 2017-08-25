@@ -1,9 +1,10 @@
 ---
 title: no-implicit-coercion - Rules
 layout: doc
-edit_link: https://github.com/eslint/eslint/edit/master/docs/rulesno-implicit-coercion.md
+edit_link: https://github.com/eslint/eslint/edit/master/docs/rules/no-implicit-coercion.md
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
+
 # Disallow the type conversion with shorter notations. (no-implicit-coercion)
 
 (fixable) The `--fix` option on the [command line](../user-guide/command-line-interface#fix) can automatically fix some of the problems reported by this rule.

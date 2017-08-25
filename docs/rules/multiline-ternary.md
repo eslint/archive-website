@@ -1,9 +1,10 @@
 ---
 title: multiline-ternary - Rules
 layout: doc
-edit_link: https://github.com/eslint/eslint/edit/master/docs/rulesmultiline-ternary.md
+edit_link: https://github.com/eslint/eslint/edit/master/docs/rules/multiline-ternary.md
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
+
 # Enforce or disallow newlines between operands of ternary expressions (multiline-ternary)
 
 JavaScript allows operands of ternary expressions to be separated by newlines, which can improve the readability of your program.

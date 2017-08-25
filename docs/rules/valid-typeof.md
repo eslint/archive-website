@@ -1,9 +1,10 @@
 ---
 title: valid-typeof - Rules
 layout: doc
-edit_link: https://github.com/eslint/eslint/edit/master/docs/rulesvalid-typeof.md
+edit_link: https://github.com/eslint/eslint/edit/master/docs/rules/valid-typeof.md
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
+
 # enforce comparing `typeof` expressions against valid strings (valid-typeof)
 
 (recommended) The `"extends": "eslint:recommended"` property in a configuration file enables this rule.

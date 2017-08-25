@@ -1,9 +1,10 @@
 ---
 title: no-new-require - Rules
 layout: doc
-edit_link: https://github.com/eslint/eslint/edit/master/docs/rulesno-new-require.md
+edit_link: https://github.com/eslint/eslint/edit/master/docs/rules/no-new-require.md
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
+
 # Disallow new require (no-new-require)
 
 The `require` function is used to include modules that exist in separate files, such as:

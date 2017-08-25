@@ -1,9 +1,10 @@
 ---
 title: no-debugger - Rules
 layout: doc
-edit_link: https://github.com/eslint/eslint/edit/master/docs/rulesno-debugger.md
+edit_link: https://github.com/eslint/eslint/edit/master/docs/rules/no-debugger.md
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
+
 # disallow the use of `debugger` (no-debugger)
 
 (recommended) The `"extends": "eslint:recommended"` property in a configuration file enables this rule.

@@ -1,9 +1,10 @@
 ---
 title: space-in-brackets - Rules
 layout: doc
-edit_link: https://github.com/eslint/eslint/edit/master/docs/rulesspace-in-brackets.md
+edit_link: https://github.com/eslint/eslint/edit/master/docs/rules/space-in-brackets.md
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
+
 # space-in-brackets: enforce consistent spacing inside braces of object literals and brackets of array literals
 
 (removed) This rule was **removed** in ESLint v1.0 and **replaced** by the [object-curly-spacing](object-curly-spacing) and [array-bracket-spacing](array-bracket-spacing) rules.

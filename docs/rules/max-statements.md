@@ -1,9 +1,10 @@
 ---
 title: max-statements - Rules
 layout: doc
-edit_link: https://github.com/eslint/eslint/edit/master/docs/rulesmax-statements.md
+edit_link: https://github.com/eslint/eslint/edit/master/docs/rules/max-statements.md
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
+
 # enforce a maximum number of statements allowed in function blocks (max-statements)
 
 The `max-statements` rule allows you to specify the maximum number of statements allowed in a function.

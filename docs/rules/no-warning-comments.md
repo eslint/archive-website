@@ -1,9 +1,10 @@
 ---
 title: no-warning-comments - Rules
 layout: doc
-edit_link: https://github.com/eslint/eslint/edit/master/docs/rulesno-warning-comments.md
+edit_link: https://github.com/eslint/eslint/edit/master/docs/rules/no-warning-comments.md
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
+
 # Disallow Warning Comments (no-warning-comments)
 
 Developers often add comments to code which is not complete or needs review. Most likely you want to fix or review the code, and then remove the comment, before you consider the code to be production ready.

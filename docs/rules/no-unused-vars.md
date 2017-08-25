@@ -1,9 +1,10 @@
 ---
 title: no-unused-vars - Rules
 layout: doc
-edit_link: https://github.com/eslint/eslint/edit/master/docs/rulesno-unused-vars.md
+edit_link: https://github.com/eslint/eslint/edit/master/docs/rules/no-unused-vars.md
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
+
 # Disallow Unused Variables (no-unused-vars)
 
 (recommended) The `"extends": "eslint:recommended"` property in a configuration file enables this rule.

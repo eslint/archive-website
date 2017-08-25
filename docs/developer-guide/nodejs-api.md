@@ -1,7 +1,7 @@
 ---
 title: Node.js API
 layout: doc
-edit_link: https://github.com/eslint/eslint/edit/master/lib/rules/nodejs-api.js
+edit_link: https://github.com/eslint/eslint/edit/master/docs/developer-guide/nodejs-api.md
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 

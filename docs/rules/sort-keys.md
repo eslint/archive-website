@@ -1,9 +1,10 @@
 ---
 title: sort-keys - Rules
 layout: doc
-edit_link: https://github.com/eslint/eslint/edit/master/docs/rulessort-keys.md
+edit_link: https://github.com/eslint/eslint/edit/master/docs/rules/sort-keys.md
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
+
 # require object keys to be sorted (sort-keys)
 
 When declaring multiple properties, some developers prefer to sort property names alphabetically to be able to find necessary property easier at the later time. Others feel that it adds complexity and becomes burden to maintain.

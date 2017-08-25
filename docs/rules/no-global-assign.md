@@ -1,9 +1,10 @@
 ---
 title: no-global-assign - Rules
 layout: doc
-edit_link: https://github.com/eslint/eslint/edit/master/docs/rulesno-global-assign.md
+edit_link: https://github.com/eslint/eslint/edit/master/docs/rules/no-global-assign.md
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
+
 # Disallow assignment to native objects or read-only global variables (no-global-assign)
 
 (recommended) The `"extends": "eslint:recommended"` property in a configuration file enables this rule.

@@ -1,9 +1,10 @@
 ---
 title: no-shadow-restricted-names - Rules
 layout: doc
-edit_link: https://github.com/eslint/eslint/edit/master/docs/rulesno-shadow-restricted-names.md
+edit_link: https://github.com/eslint/eslint/edit/master/docs/rules/no-shadow-restricted-names.md
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
+
 # Disallow Shadowing of Restricted Names (no-shadow-restricted-names)
 
 ES5 §15.1.1 Value Properties of the Global Object (`NaN`, `Infinity`, `undefined`) as well as strict mode restricted identifiers `eval` and `arguments` are considered to be restricted names in JavaScript. Defining them to mean something else can have unintended consequences and confuse others reading the code. For example, there's nothing prevent you from writing:

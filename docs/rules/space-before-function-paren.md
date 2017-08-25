@@ -1,9 +1,10 @@
 ---
 title: space-before-function-paren - Rules
 layout: doc
-edit_link: https://github.com/eslint/eslint/edit/master/docs/rulesspace-before-function-paren.md
+edit_link: https://github.com/eslint/eslint/edit/master/docs/rules/space-before-function-paren.md
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
+
 # Require or disallow a space before function parenthesis (space-before-function-paren)
 
 (fixable) The `--fix` option on the [command line](../user-guide/command-line-interface#fix) can automatically fix some of the problems reported by this rule.

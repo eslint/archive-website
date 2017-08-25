@@ -1,9 +1,10 @@
 ---
 title: no-empty-label - Rules
 layout: doc
-edit_link: https://github.com/eslint/eslint/edit/master/docs/rulesno-empty-label.md
+edit_link: https://github.com/eslint/eslint/edit/master/docs/rules/no-empty-label.md
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
+
 # no-empty-label: disallow labels for anything other than loops and switches
 
 (removed) This rule was **removed** in ESLint v2.0 and **replaced** by the [no-labels](no-labels) rule.

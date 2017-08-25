@@ -1,9 +1,10 @@
 ---
 title: no-delete-var - Rules
 layout: doc
-edit_link: https://github.com/eslint/eslint/edit/master/docs/rulesno-delete-var.md
+edit_link: https://github.com/eslint/eslint/edit/master/docs/rules/no-delete-var.md
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
+
 # disallow deleting variables (no-delete-var)
 
 (recommended) The `"extends": "eslint:recommended"` property in a configuration file enables this rule.

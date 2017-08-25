@@ -1,9 +1,10 @@
 ---
 title: no-useless-escape - Rules
 layout: doc
-edit_link: https://github.com/eslint/eslint/edit/master/docs/rulesno-useless-escape.md
+edit_link: https://github.com/eslint/eslint/edit/master/docs/rules/no-useless-escape.md
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
+
 # Disallow unnecessary escape usage (no-useless-escape)
 
 (recommended) The `"extends": "eslint:recommended"` property in a configuration file enables this rule.

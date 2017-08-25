@@ -1,9 +1,10 @@
 ---
 title: symbol-description - Rules
 layout: doc
-edit_link: https://github.com/eslint/eslint/edit/master/docs/rulessymbol-description.md
+edit_link: https://github.com/eslint/eslint/edit/master/docs/rules/symbol-description.md
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
+
 # require symbol description (symbol-description)
 
 The `Symbol` function may have optional description:

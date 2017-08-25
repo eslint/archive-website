@@ -1,9 +1,10 @@
 ---
 title: no-new-object - Rules
 layout: doc
-edit_link: https://github.com/eslint/eslint/edit/master/docs/rulesno-new-object.md
+edit_link: https://github.com/eslint/eslint/edit/master/docs/rules/no-new-object.md
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
+
 # disallow `Object` constructors (no-new-object)
 
 The `Object` constructor is used to create new generic objects in JavaScript, such as:

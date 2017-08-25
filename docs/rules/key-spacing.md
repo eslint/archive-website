@@ -1,9 +1,10 @@
 ---
 title: key-spacing - Rules
 layout: doc
-edit_link: https://github.com/eslint/eslint/edit/master/docs/ruleskey-spacing.md
+edit_link: https://github.com/eslint/eslint/edit/master/docs/rules/key-spacing.md
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
+
 # enforce consistent spacing between keys and values in object literal properties (key-spacing)
 
 (fixable) The `--fix` option on the [command line](../user-guide/command-line-interface#fix) can automatically fix some of the problems reported by this rule.

@@ -1,9 +1,10 @@
 ---
 title: no-await-in-loop - Rules
 layout: doc
-edit_link: https://github.com/eslint/eslint/edit/master/docs/rulesno-await-in-loop.md
+edit_link: https://github.com/eslint/eslint/edit/master/docs/rules/no-await-in-loop.md
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
+
 # Disallow `await` inside of loops (no-await-in-loop)
 
 Performing an operation on each element of an iterable is a common task. However, performing an

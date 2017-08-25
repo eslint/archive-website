@@ -1,9 +1,10 @@
 ---
 title: func-call-spacing - Rules
 layout: doc
-edit_link: https://github.com/eslint/eslint/edit/master/docs/rulesfunc-call-spacing.md
+edit_link: https://github.com/eslint/eslint/edit/master/docs/rules/func-call-spacing.md
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
+
 # require or disallow spacing between function identifiers and their invocations (func-call-spacing)
 
 (fixable) The `--fix` option on the [command line](../user-guide/command-line-interface#fix) can automatically fix some of the problems reported by this rule.

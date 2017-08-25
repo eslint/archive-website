@@ -1,9 +1,10 @@
 ---
 title: no-comma-dangle - Rules
 layout: doc
-edit_link: https://github.com/eslint/eslint/edit/master/docs/rulesno-comma-dangle.md
+edit_link: https://github.com/eslint/eslint/edit/master/docs/rules/no-comma-dangle.md
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
+
 # no-comma-dangle: disallow trailing commas in object and array literals
 
 (removed) This rule was **removed** in ESLint v1.0 and **replaced** by the [comma-dangle](comma-dangle) rule.

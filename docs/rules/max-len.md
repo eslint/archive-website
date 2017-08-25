@@ -1,9 +1,10 @@
 ---
 title: max-len - Rules
 layout: doc
-edit_link: https://github.com/eslint/eslint/edit/master/docs/rulesmax-len.md
+edit_link: https://github.com/eslint/eslint/edit/master/docs/rules/max-len.md
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
+
 # enforce a maximum line length (max-len)
 
 Very long lines of code in any language can be difficult to read. In order to aid in readability and maintainability many coders have developed a convention to limit lines of code to X number of characters (traditionally 80 characters).

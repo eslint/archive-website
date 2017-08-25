@@ -1,9 +1,10 @@
 ---
 title: no-dupe-keys - Rules
 layout: doc
-edit_link: https://github.com/eslint/eslint/edit/master/docs/rulesno-dupe-keys.md
+edit_link: https://github.com/eslint/eslint/edit/master/docs/rules/no-dupe-keys.md
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
+
 # disallow duplicate keys in object literals (no-dupe-keys)
 
 (recommended) The `"extends": "eslint:recommended"` property in a configuration file enables this rule.

@@ -1,9 +1,10 @@
 ---
 title: padding-line-between-statements - Rules
 layout: doc
-edit_link: https://github.com/eslint/eslint/edit/master/docs/rulespadding-line-between-statements.md
+edit_link: https://github.com/eslint/eslint/edit/master/docs/rules/padding-line-between-statements.md
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
+
 # Require or disallow padding lines between statements (padding-line-between-statements)
 
 (fixable) The `--fix` option on the [command line](../user-guide/command-line-interface#fix) can automatically fix some of the problems reported by this rule.

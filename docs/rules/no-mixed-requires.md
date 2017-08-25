@@ -1,9 +1,10 @@
 ---
 title: no-mixed-requires - Rules
 layout: doc
-edit_link: https://github.com/eslint/eslint/edit/master/docs/rulesno-mixed-requires.md
+edit_link: https://github.com/eslint/eslint/edit/master/docs/rules/no-mixed-requires.md
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
+
 # disallow `require` calls to be mixed with regular variable declarations (no-mixed-requires)
 
 In the Node.js community it is often customary to separate initializations with calls to `require` modules from other variable declarations, sometimes also grouping them by the type of module. This rule helps you enforce this convention.

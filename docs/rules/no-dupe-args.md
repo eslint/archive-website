@@ -1,9 +1,10 @@
 ---
 title: no-dupe-args - Rules
 layout: doc
-edit_link: https://github.com/eslint/eslint/edit/master/docs/rulesno-dupe-args.md
+edit_link: https://github.com/eslint/eslint/edit/master/docs/rules/no-dupe-args.md
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
+
 # disallow duplicate arguments in `function` definitions (no-dupe-args)
 
 (recommended) The `"extends": "eslint:recommended"` property in a configuration file enables this rule.

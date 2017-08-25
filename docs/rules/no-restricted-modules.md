@@ -1,9 +1,10 @@
 ---
 title: no-restricted-modules - Rules
 layout: doc
-edit_link: https://github.com/eslint/eslint/edit/master/docs/rulesno-restricted-modules.md
+edit_link: https://github.com/eslint/eslint/edit/master/docs/rules/no-restricted-modules.md
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
+
 # Disallow Node.js modules (no-restricted-modules)
 
 Disallowing usage of specific Node.js modules can be useful if you want to control the available methods, a developer can
