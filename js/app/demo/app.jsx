@@ -86,12 +86,7 @@ define(['react', 'jsx!editor', 'jsx!messages', 'jsx!fixedCode', 'jsx!configurati
                     parserOptions: {
                         ecmaVersion: 5,
                         sourceType: 'script',
-                        ecmaFeatures: {
-                            jsx: false,
-                            globalReturn: false,
-                            impliedStrict: false,
-                            experimentalObjectRestSpread: false
-                        }
+                        ecmaFeatures: {}
                     },
                     rules: (function() {
                         var result = {};

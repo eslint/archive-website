@@ -50,11 +50,13 @@ define(['react'], function(React) {
                                                 id={ecmaFeature}
                                                 onChange={
                                                     function(event) {
-                                                        var updatedFeature = {};
-                                                        updatedFeature[ecmaFeature] = event.target.checked;
-                                                        props.onUpdate(Object.assign({}, props.options, {
-                                                            ecmaFeatures: Object.assign({}, props.options.ecmaFeatures, updatedFeature)
-                                                        }))
+                                                        var updatedFeatures = Object.assign({}, props.options.ecmaFeatures);
+                                                        if (event.target.checked) {
+                                                            updatedFeatures[ecmaFeature] = true;
+                                                        } else {
+                                                            delete updatedFeatures[ecmaFeature];
+                                                        }
+                                                        props.onUpdate(Object.assign({}, props.options, { ecmaFeatures: updatedFeatures }))
                                                     }
                                                 }
                                             />
