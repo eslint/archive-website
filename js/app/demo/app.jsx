@@ -31,6 +31,7 @@ define(['react', 'jsx!editor', 'jsx!messages', 'jsx!fixedCode', 'jsx!configurati
 
     var linter = new Linter();
     var rules = linter.getRules();
+    var ruleNames = Array.from(rules.keys());
     var docs = (function() {
         var map = rules;
         var result = {};
@@ -39,12 +40,48 @@ define(['react', 'jsx!editor', 'jsx!messages', 'jsx!fixedCode', 'jsx!configurati
         });
         return result;
     })();
+
+    var ENV_NAMES = [
+        "browser",
+        "node",
+        "commonjs",
+        "shared-node-browser",
+        "worker",
+        "amd",
+        "mocha",
+        "jasmine",
+        "jest",
+        "phantomjs",
+        "jquery",
+        "qunit",
+        "prototypejs",
+        "shelljs",
+        "meteor",
+        "mongo",
+        "protractor",
+        "applescript",
+        "nashorn",
+        "serviceworker",
+        "atomtest",
+        "embertest",
+        "webextensions",
+        "es6",
+        "greasemonkey"
+    ];
+
     return React.createClass({
         displayName: 'App',
         getInitialState: function() {
             var storedState = JSON.parse(window.localStorage.getItem('linterDemoState') || '{}');
+            var urlState = (function() {
+                try {
+                    return JSON.parse(window.atob(window.location.hash.replace(/^#/, "")));
+                } catch (err) {
+                    return null;
+                }
+            }());
 
-            var initialState = defaultsDeep(storedState, {
+            var initialState = defaultsDeep(urlState || storedState, {
                 options: {
                     parserOptions: {
                         ecmaVersion: 5,
@@ -58,38 +95,14 @@ define(['react', 'jsx!editor', 'jsx!messages', 'jsx!fixedCode', 'jsx!configurati
                     },
                     rules: (function() {
                         var result = {};
-                        rules.forEach(function(value, key) {
-                            result[key] = value.meta.docs.recommended ? "error" : "off"
+                        rules.forEach(function(rule, ruleId) {
+                            if (rule.meta.docs.recommended) {
+                                result[ruleId] = "error";
+                            }
                         });
                         return result;
                     }()),
-                    env: {
-                        browser: false,
-                        node: false,
-                        commonjs: false,
-                        "shared-node-browser": false,
-                        worker: false,
-                        amd: false,
-                        mocha: false,
-                        jasmine: false,
-                        jest: false,
-                        phantomjs: false,
-                        jquery: false,
-                        qunit: false,
-                        prototypejs: false,
-                        shelljs: false,
-                        meteor: false,
-                        mongo: false,
-                        protractor: false,
-                        applescript: false,
-                        nashorn: false,
-                        serviceworker: false,
-                        atomtest: false,
-                        embertest: false,
-                        webextensions: false,
-                        es6: false,
-                        greasemonkey: false
-                    }
+                    env: {}
                 },
                 text: 'var foo = bar;',
                 fix: false,
@@ -100,18 +113,23 @@ define(['react', 'jsx!editor', 'jsx!messages', 'jsx!fixedCode', 'jsx!configurati
         },
 
         handleChange: function(event) {
-            this.setState({ text: event.value });
+            // Avoid storing the state on the initial pageload
+            if (event.value !== this.state.text) {
+                this.setState({ text: event.value }, this.storeState);
+            }
         },
         updateOptions: function(options) {
-            this.setState({ options: options });
+            this.setState({ options: options }, this.storeState);
         },
         lint: function() {
             return linter.verifyAndFix(this.state.text, this.state.options, { fix: this.state.fix });
         },
-        componentDidUpdate: function() {
+        storeState: function() {
+            var serializedState = JSON.stringify({ text: this.state.text, options: this.state.options });
             if (hasLocalStorage) {
-                window.localStorage.setItem('linterDemoState', JSON.stringify(this.state));
+                window.localStorage.setItem('linterDemoState', serializedState);
             }
+            window.location.hash = window.btoa(serializedState);
         },
         enableFixMode: function() {
             this.setState({ fix: true });
@@ -171,7 +189,13 @@ define(['react', 'jsx!editor', 'jsx!messages', 'jsx!fixedCode', 'jsx!configurati
                         </div>
                     </div>
                     <div className="row">
-                        <Configuration options={this.state.options} docs={docs} onUpdate={this.updateOptions} />
+                        <Configuration
+                            ruleNames={ruleNames}
+                            envNames={ENV_NAMES}
+                            options={this.state.options}
+                            docs={docs}
+                            onUpdate={this.updateOptions}
+                        />
                     </div>
                 </div>
             );
