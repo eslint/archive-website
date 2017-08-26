@@ -22,55 +22,44 @@ define(['react'], function(React) {
         );
     }
 
-    return React.createClass({
-        displayName: 'RulesConfig',
-        getInitialState: function() {
-            return this.props.config;
-        },
-        shouldBeChecked(rule) {
-            var ruleValue = this.state[rule];
-            return typeof ruleValue === 'string' ? ruleValue !== 'off' : ruleValue[0] !== 'off';
-        },
-        getRow(i) {
-            var rules = Object.keys(this.state);
-            var limit = Math.ceil(rules.length / 3);
+    return function RulesConfig(props) {
+        function shouldBeChecked(rule) {
+            return props.config[rule] && props.config[rule] !== "off" && props.config[rule] !== 0;
+        }
+        function getRow(i) {
+            var limit = Math.ceil(props.ruleNames.length / 3);
             const start = limit * i;
             return Array(limit).fill('').map(function(item, index) {
-                var rule = rules[start + index];
-                return rule && <Rule key={rule} rule={rule} docs={this.props.docs[rule].docs} isChecked={this.shouldBeChecked(rule)} handleChange={this.handleChange} />
-            }, this);
-        },
-        renderRules() {
+                var rule = props.ruleNames[start + index];
+                return rule && <Rule key={rule} rule={rule} docs={props.docs[rule].docs} isChecked={shouldBeChecked(rule)} handleChange={handleChange} />
+            });
+        }
+        function renderRules() {
             return [0, 1, 2].map(function(i) {
                 return (
                     <div className="col-md-4" key={i}>
-                        {this.getRow(i)}
+                        {getRow(i)}
                     </div>
                 );
-            }, this);
-        },
-        handleChange: function(e, key) {
-            var change = {};
-            var value = e.target.checked ? 'error' : 'off';
-            if (typeof this.state[key] === 'string') {
-                change[key] = value;
-            } else {
-                change[key] = this.state[key];
-                change[key][0] = value;
-            }
-            this.setState(change, function() {
-                this.props.onUpdate(this.state)
             });
-        },
-        render: function() {
-            return (
-                <div className="row rules">
-                    <div className="container">
-                        <div className="row"><div className="col-md-12"><h3>Rules</h3></div></div>
-                        <div className="row">{this.renderRules()}</div>
-                    </div>
-                </div>
-            );
         }
-    });
+        function handleChange(e, key) {
+            var updatedConfig = Object.assign({}, props.config);
+            if (e.target.checked) {
+                updatedConfig[key] = "error";
+            } else {
+                delete updatedConfig[key];
+            }
+            props.onUpdate(updatedConfig);
+        }
+
+        return (
+            <div className="row rules">
+                <div className="container">
+                    <div className="row"><div className="col-md-12"><h3>Rules</h3></div></div>
+                    <div className="row">{renderRules()}</div>
+                </div>
+            </div>
+        );
+    };
 });

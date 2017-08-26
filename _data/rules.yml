@@ -1059,7 +1059,9 @@ categories:
         name: yield-star-spacing
         recommended: false
 deprecated:
-  description: 'These rules have been deprecated and replaced by newer rules:'
+  description: >-
+    These rules have been deprecated in accordance with the [deprecation
+    policy](/docs/user-guide/rule-deprecation), and replaced by newer rules:
   name: Deprecated
   rules:
     - name: indent-legacy
@@ -1086,7 +1088,10 @@ deprecated:
     - name: prefer-reflect
       replacedBy: []
 removed:
-  description: 'These rules from older versions of ESLint have been replaced by newer rules:'
+  description: >-
+    These rules from older versions of ESLint (before the [deprecation
+    policy](/docs/user-guide/rule-deprecation) existed) have been replaced by
+    newer rules:
   name: Removed
   rules:
     - removed: generator-star
