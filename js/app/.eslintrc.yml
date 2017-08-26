@@ -2,10 +2,12 @@ root: true
 
 plugins:
     - react
+    - jsx-a11y
 
 extends:
     - eslint
     - plugin:react/recommended
+    - plugin:jsx-a11y/recommended
 
 parserOptions:
     ecmaVersion: 5
@@ -30,6 +32,7 @@ rules:
 
     # Disable rules that the codebase doesn't currently follow.
     # It might be a good idea to enable these in the future.
+    jsx-a11y/no-onchange: off
     react/prop-types: off
     require-jsdoc: off
 

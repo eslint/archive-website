@@ -42,7 +42,7 @@ define(["react"], function(React) {
                             ["jsx", "globalReturn", "impliedStrict", "experimentalObjectRestSpread"].map(function(ecmaFeature) {
                                 return (
                                     <div className="checkbox" key={ecmaFeature}>
-                                        <label>
+                                        <label htmlFor={ecmaFeature}>
                                             <input
                                                 type="checkbox"
                                                 checked={props.options.ecmaFeatures[ecmaFeature]}

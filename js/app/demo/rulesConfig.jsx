@@ -15,7 +15,14 @@ define(["react", "jsx!selectAllCheckbox"], function(React, SelectAllCheckbox) {
 
         return (
             <div className="checkbox">
-                <label onMouseEnter={showPopover} onMouseLeave={hidePopover} data-toggle="popover" data-content={ref.docs.description} title={ref.rule}>
+                <label
+                    htmlFor={ref.rule}
+                    onMouseEnter={showPopover}
+                    onMouseLeave={hidePopover}
+                    data-toggle="popover"
+                    data-content={ref.docs.description}
+                    title={ref.rule}
+                >
                     <input type="checkbox" checked={ref.isChecked} id={ref.rule} onChange={handler} />
                     {ref.rule}
                 </label>

@@ -49,7 +49,7 @@ define(["react", "jsx!selectAllCheckbox"], function(React, SelectAllCheckbox) {
                                             .map(function(envName) {
                                                 return (
                                                     <div className="checkbox" key={envName}>
-                                                        <label>
+                                                        <label htmlFor={envName}>
                                                             <input
                                                                 type="checkbox"
                                                                 checked={props.env[envName]}
