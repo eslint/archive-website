@@ -46,7 +46,7 @@ define(['react'], function(React) {
         function handleChange(e, key) {
             var updatedConfig = Object.assign({}, props.config);
             if (e.target.checked) {
-                updatedConfig[key] = "error";
+                updatedConfig[key] = 2;
             } else {
                 delete updatedConfig[key];
             }

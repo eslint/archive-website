@@ -92,7 +92,7 @@ define(['react', 'jsx!editor', 'jsx!messages', 'jsx!fixedCode', 'jsx!configurati
                         var result = {};
                         rules.forEach(function(rule, ruleId) {
                             if (rule.meta.docs.recommended) {
-                                result[ruleId] = "error";
+                                result[ruleId] = 2;
                             }
                         });
                         return result;
