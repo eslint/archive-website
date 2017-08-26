@@ -24,15 +24,13 @@ define(['react'], function(React) {
 
     return function RulesConfig(props) {
         function shouldBeChecked(rule) {
-            var ruleValue = props.config[rule];
-            return typeof ruleValue === 'string' ? ruleValue !== 'off' : ruleValue[0] !== 'off';
+            return props.config[rule] && props.config[rule] !== "off" && props.config[rule] !== 0;
         }
         function getRow(i) {
-            var rules = Object.keys(props.config);
-            var limit = Math.ceil(rules.length / 3);
+            var limit = Math.ceil(props.ruleNames.length / 3);
             const start = limit * i;
             return Array(limit).fill('').map(function(item, index) {
-                var rule = rules[start + index];
+                var rule = props.ruleNames[start + index];
                 return rule && <Rule key={rule} rule={rule} docs={props.docs[rule].docs} isChecked={shouldBeChecked(rule)} handleChange={handleChange} />
             });
         }
@@ -46,15 +44,13 @@ define(['react'], function(React) {
             });
         }
         function handleChange(e, key) {
-            var change = {};
-            var value = e.target.checked ? 'error' : 'off';
-            if (typeof props.config[key] === 'string') {
-                change[key] = value;
+            var updatedConfig = Object.assign({}, props.config);
+            if (e.target.checked) {
+                updatedConfig[key] = "error";
             } else {
-                change[key] = props.config[key];
-                change[key][0] = value;
+                delete updatedConfig[key];
             }
-            props.onUpdate(Object.assign({}, props.config, change));
+            props.onUpdate(updatedConfig);
         }
 
         return (

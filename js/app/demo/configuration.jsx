@@ -25,6 +25,7 @@ define(['react', 'jsx!parserOptions', 'jsx!environments', 'jsx!rulesConfig'], fu
                             <hr />
                             <Environments
                                 env={props.options.env}
+                                envNames={props.envNames}
                                 onUpdate={
                                     function(env) {
                                         props.onUpdate(Object.assign({}, props.options, { env: env }))
@@ -34,6 +35,7 @@ define(['react', 'jsx!parserOptions', 'jsx!environments', 'jsx!rulesConfig'], fu
                             <hr />
                             <RulesConfig
                                 config={props.options.rules}
+                                ruleNames={props.ruleNames}
                                 docs={props.docs}
                                 onUpdate={
                                     function(rules) {

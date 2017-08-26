@@ -2,9 +2,8 @@
 
 define(['react'], function(React) {
     return function Environments(props) {
-        var envNames = Object.keys(props.env);
         var columnLimit = 3;
-        var rowLimit = Math.ceil(envNames.length / columnLimit);
+        var rowLimit = Math.ceil(props.envNames.length / columnLimit);
         return (
             <div className="row">
                 <div className="container">
@@ -18,7 +17,7 @@ define(['react'], function(React) {
                             return (
                                 <div className="col-md-4" key={columnIndex}>
                                     {
-                                        envNames.slice(columnIndex * rowLimit, (columnIndex + 1) * rowLimit)
+                                        props.envNames.slice(columnIndex * rowLimit, (columnIndex + 1) * rowLimit)
                                             .map(function(envName) {
                                                 return (
                                                     <div className="checkbox" key={envName}>
