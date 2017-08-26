@@ -1,6 +1,6 @@
-'use strict';
+"use strict";
 
-define(['react'], function(React) {
+define(["react"], function(React) {
     return function ParserOptions(props) {
         return (
             <div className="row">
@@ -39,9 +39,9 @@ define(['react'], function(React) {
                     <h3>ECMA Features</h3>
                     <div className="ecmaFeatures list">
                         {
-                            ['jsx', 'globalReturn', 'impliedStrict', 'experimentalObjectRestSpread'].map(function(ecmaFeature) {
+                            ["jsx", "globalReturn", "impliedStrict", "experimentalObjectRestSpread"].map(function(ecmaFeature) {
                                 return (
-                                    <div className="checkbox">
+                                    <div className="checkbox" key={ecmaFeature}>
                                         <label>
                                             <input
                                                 type="checkbox"
@@ -51,12 +51,13 @@ define(['react'], function(React) {
                                                 onChange={
                                                     function(event) {
                                                         var updatedFeatures = Object.assign({}, props.options.ecmaFeatures);
+
                                                         if (event.target.checked) {
                                                             updatedFeatures[ecmaFeature] = true;
                                                         } else {
                                                             delete updatedFeatures[ecmaFeature];
                                                         }
-                                                        props.onUpdate(Object.assign({}, props.options, { ecmaFeatures: updatedFeatures }))
+                                                        props.onUpdate(Object.assign({}, props.options, { ecmaFeatures: updatedFeatures }));
                                                     }
                                                 }
                                             />

@@ -1,15 +1,15 @@
-'use strict';
+"use strict";
 
-define(['react', 'jsx!editor', 'jsx!messages', 'jsx!fixedCode', 'jsx!configuration', 'eslint'], function(React, Editor, Messages, FixedCode, Configuration, Linter) {
-    var hasLocalStorage = function() {
+define(["react", "jsx!editor", "jsx!messages", "jsx!fixedCode", "jsx!configuration", "eslint"], function(React, Editor, Messages, FixedCode, Configuration, Linter) {
+    var hasLocalStorage = (function() {
         try {
-            window.localStorage.setItem('localStorageTest', 'foo');
-            window.localStorage.removeItem('localStorageTest');
+            window.localStorage.setItem("localStorageTest", "foo");
+            window.localStorage.removeItem("localStorageTest");
             return true;
         } catch (_) {
             return false;
         }
-    }();
+    }());
 
     var linter = new Linter();
     var rules = linter.getRules();
@@ -17,11 +17,12 @@ define(['react', 'jsx!editor', 'jsx!messages', 'jsx!fixedCode', 'jsx!configurati
     var docs = (function() {
         var map = rules;
         var result = {};
+
         map.forEach(function(value, key) {
             result[key] = value.meta;
         });
         return result;
-    })();
+    }());
 
     var ENV_NAMES = [
         "browser",
@@ -52,9 +53,9 @@ define(['react', 'jsx!editor', 'jsx!messages', 'jsx!fixedCode', 'jsx!configurati
     ];
 
     return React.createClass({
-        displayName: 'App',
+        displayName: "App",
         getInitialState: function() {
-            var storedState = JSON.parse(window.localStorage.getItem('linterDemoState') || null);
+            var storedState = JSON.parse(window.localStorage.getItem("linterDemoState") || null);
             var urlState = (function() {
                 try {
                     return JSON.parse(window.atob(window.location.hash.replace(/^#/, "")));
@@ -69,11 +70,12 @@ define(['react', 'jsx!editor', 'jsx!messages', 'jsx!fixedCode', 'jsx!configurati
                     options: {
                         parserOptions: {
                             ecmaVersion: 5,
-                            sourceType: 'script',
+                            sourceType: "script",
                             ecmaFeatures: {}
                         },
                         rules: (function() {
                             var result = {};
+
                             rules.forEach(function(rule, ruleId) {
                                 if (rule.meta.docs.recommended) {
                                     result[ruleId] = 2;
@@ -83,7 +85,7 @@ define(['react', 'jsx!editor', 'jsx!messages', 'jsx!fixedCode', 'jsx!configurati
                         }()),
                         env: {}
                     },
-                    text: 'var foo = bar;',
+                    text: "var foo = bar;"
                 }
             );
 
@@ -92,6 +94,7 @@ define(['react', 'jsx!editor', 'jsx!messages', 'jsx!fixedCode', 'jsx!configurati
         },
 
         handleChange: function(event) {
+
             // Avoid storing the state on the initial pageload
             if (event.value !== this.state.text) {
                 this.setState({ text: event.value }, this.storeState);
@@ -105,8 +108,9 @@ define(['react', 'jsx!editor', 'jsx!messages', 'jsx!fixedCode', 'jsx!configurati
         },
         storeState: function() {
             var serializedState = JSON.stringify({ text: this.state.text, options: this.state.options });
+
             if (hasLocalStorage) {
-                window.localStorage.setItem('linterDemoState', serializedState);
+                window.localStorage.setItem("linterDemoState", serializedState);
             }
             window.location.hash = window.btoa(serializedState);
         },
@@ -116,8 +120,9 @@ define(['react', 'jsx!editor', 'jsx!messages', 'jsx!fixedCode', 'jsx!configurati
         disableFixMode: function() {
             this.setState({ fix: false });
         },
-        render: function() {
+        render: function App() {
             var results = this.lint();
+
             return (
                 <div className="container editorRow">
                     <div className="row">
@@ -159,9 +164,9 @@ define(['react', 'jsx!editor', 'jsx!messages', 'jsx!fixedCode', 'jsx!configurati
                             <div className="tab-content">
                                 <div role="tabpanel" className="tab-pane active" >
                                     {
-                                        this.state.fix ?
-                                            <FixedCode values={results.output} /> :
-                                            <Messages values={results.messages} />
+                                        this.state.fix
+                                            ? <FixedCode values={results.output} />
+                                            : <Messages values={results.messages} />
                                     }
                                 </div>
                             </div>

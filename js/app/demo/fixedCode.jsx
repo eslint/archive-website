@@ -1,13 +1,18 @@
-'use strict';
+"use strict";
 
-define(['react'], function(React) {
+define(["react"], function(React) {
     var height = 304;
-    return React.createClass({
-        displayName: 'FixedCode',
-        render: function() {
-            return (
-                <pre id="fixedEditor" class="editor" data-editor-lang="js" style={{height: height + 'px'}}>{this.props.values}</pre>
-            );
-        }
-    });
+
+    return function FixedCode(props) {
+        return (
+            <pre
+                id="fixedEditor"
+                className="editor"
+                data-editor-lang="js"
+                style={{ height: height + "px" }}
+            >
+                {props.values}
+            </pre>
+        );
+    };
 });
