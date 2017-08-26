@@ -31,25 +31,20 @@ define(["react", "orion", "reactDom", "events"], function(React, orion, ReactDOM
         editor: null,
         componentDidMount: function() {
             this.editor = orion(this.element);
-
-            var update = debounce(function() {
+            this.editor.getTextView().onModify = debounce(function() {
                 this.props.onChange({ value: this.editor.getModel().getText() });
             }.bind(this), 500);
-
-            this.editor.getTextView().onModify = function() {
-                update();
-            };
-
-            this.props.onChange({ value: this.editor.getModel().getText() });
 
             events.on("showError", function(line, column) {
                 this.editor.onGotoLine(line - 1, column - 1, column - 1);
             }.bind(this));
+
+            this.showProblems();
         },
 
-        componentWillReceiveProps: function(nextProps) {
-            if (nextProps.errors) {
-                this.editor.showProblems(nextProps.errors.map(function(error) {
+        showProblems: function() {
+            if (this.props.errors) {
+                this.editor.showProblems(this.props.errors.map(function(error) {
                     return {
                         line: error.line,
                         start: error.column,
@@ -59,6 +54,10 @@ define(["react", "orion", "reactDom", "events"], function(React, orion, ReactDOM
                     };
                 }));
             }
+        },
+
+        componentDidUpdate: function() {
+            this.showProblems();
         },
 
         render: function Editor() {

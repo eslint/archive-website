@@ -94,11 +94,7 @@ define(["react", "jsx!editor", "jsx!messages", "jsx!fixedCode", "jsx!configurati
         },
 
         handleChange: function(event) {
-
-            // Avoid storing the state on the initial pageload
-            if (event.value !== this.state.text) {
-                this.setState({ text: event.value }, this.storeState);
-            }
+            this.setState({ text: event.value }, this.storeState);
         },
         updateOptions: function(options) {
             this.setState({ options: options }, this.storeState);
