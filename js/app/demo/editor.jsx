@@ -30,9 +30,7 @@ define(["react", "orion", "reactDom", "events"], function(React, orion, ReactDOM
         displayName: "Editor",
         editor: null,
         componentDidMount: function() {
-            var element = ReactDOM.findDOMNode(this); // eslint-disable-line react/no-find-dom-node
-
-            this.editor = orion(element);
+            this.editor = orion(this.element);
 
             var update = debounce(function() {
                 this.props.onChange({ value: this.editor.getModel().getText() });
@@ -65,7 +63,18 @@ define(["react", "orion", "reactDom", "events"], function(React, orion, ReactDOM
 
         render: function Editor() {
             return (
-                <pre id="editor" data-editor-lang="js" style={{ height: height + "px" }}>{this.props.text}</pre>
+                <pre
+                    id="editor"
+                    data-editor-lang="js"
+                    style={{ height: height + "px" }}
+                    ref={
+                        function(element) {
+                            this.element = element;
+                        }.bind(this)
+                    }
+                >
+                    {this.props.text}
+                </pre>
             );
         }
     });
