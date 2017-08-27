@@ -1,6 +1,6 @@
 'use strict';
 
-define(['react'], function(React) {
+define(['react', 'jsx!selectAllCheckbox'], function(React, SelectAllCheckbox) {
 
     function Rule(ref) {
         var handler = function(e) {
@@ -57,6 +57,33 @@ define(['react'], function(React) {
             <div className="row rules">
                 <div className="container">
                     <div className="row"><div className="col-md-12"><h3>Rules</h3></div></div>
+                    <div className="checkbox">
+                        <label htmlFor="select-all-rules">
+                            <SelectAllCheckbox
+                                id="select-all-rules"
+                                selectedCount={
+                                    props.ruleNames.filter(function(ruleName) {
+                                        return props.config[ruleName] && props.config[ruleName] !== "off";
+                                    }).length
+                                }
+                                totalCount={props.ruleNames.length}
+                                onSelectAll={
+                                    function() {
+                                        props.onUpdate(props.ruleNames.reduce(function(updatedConfig, ruleName) {
+                                            updatedConfig[ruleName] = 2;
+                                            return updatedConfig;
+                                        }, {}));
+                                    }
+                                }
+                                onDeselectAll={
+                                    function() {
+                                        props.onUpdate({});
+                                    }
+                                }
+                            />
+                            {" "}Enable all rules
+                        </label>
+                    </div>
                     <div className="row">{renderRules()}</div>
                 </div>
             </div>
