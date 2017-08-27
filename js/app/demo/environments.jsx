@@ -1,6 +1,6 @@
 'use strict';
 
-define(['react'], function(React) {
+define(['react', 'jsx!selectAllCheckbox'], function(React, SelectAllCheckbox) {
     return function Environments(props) {
         var columnLimit = 3;
         var rowLimit = Math.ceil(props.envNames.length / columnLimit);
@@ -11,6 +11,33 @@ define(['react'], function(React) {
                         <div className="col-md-12">
                             <h3>Environments</h3>
                         </div>
+                    </div>
+                    <div className="checkbox">
+                        <label htmlFor="select-all-environments">
+                            <SelectAllCheckbox
+                                id="select-all-environments"
+                                selectedCount={
+                                    props.envNames.filter(function(envName) {
+                                        return props.env[envName];
+                                    }).length
+                                }
+                                totalCount={Object.keys(props.envNames).length}
+                                onSelectAll={
+                                    function() {
+                                        props.onUpdate(props.envNames.reduce(function(updatedEnv, envName) {
+                                            updatedEnv[envName] = true;
+                                            return updatedEnv;
+                                        }, {}));
+                                    }
+                                }
+                                onDeselectAll={
+                                    function() {
+                                        props.onUpdate({});
+                                    }
+                                }
+                            />
+                            {" "}Enable globals from all environments
+                        </label>
                     </div>
                     {
                         Array(columnLimit).fill().map(function(_, columnIndex) {
