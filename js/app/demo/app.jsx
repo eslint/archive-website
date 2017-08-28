@@ -1,24 +1,6 @@
 'use strict';
 
 define(['react', 'jsx!editor', 'jsx!messages', 'jsx!fixedCode', 'jsx!configuration', 'eslint'], function(React, Editor, Messages, FixedCode, Configuration, Linter) {
-    function defaultsDeep(object, defaults) {
-        Object.keys(defaults).forEach(function(defaultKey) {
-            if (Object.prototype.hasOwnProperty.call(object, defaultKey)) {
-                if (
-                    object[defaultKey] &&
-                    typeof object[defaultKey] === 'object' &&
-                    defaults[defaultKey] &&
-                    typeof defaults[defaultKey] === 'object'
-                ) {
-                    defaultsDeep(object[defaultKey], defaults[defaultKey]);
-                }
-            } else {
-                object[defaultKey] = defaults[defaultKey];
-            }
-        });
-        return object;
-    }
-
     var hasLocalStorage = function() {
         try {
             window.localStorage.setItem('localStorageTest', 'foo');
@@ -81,7 +63,7 @@ define(['react', 'jsx!editor', 'jsx!messages', 'jsx!fixedCode', 'jsx!configurati
                 }
             }());
 
-            var initialState = defaultsDeep(urlState || storedState, {
+            var initialState = urlState || storedState || {
                 options: {
                     parserOptions: {
                         ecmaVersion: 5,
@@ -101,7 +83,7 @@ define(['react', 'jsx!editor', 'jsx!messages', 'jsx!fixedCode', 'jsx!configurati
                 },
                 text: 'var foo = bar;',
                 fix: false,
-            });
+            };
 
             this.initialText = initialState.text;
             return initialState;
