@@ -63,27 +63,29 @@ define(['react', 'jsx!editor', 'jsx!messages', 'jsx!fixedCode', 'jsx!configurati
                 }
             }());
 
-            var initialState = urlState || storedState || {
-                options: {
-                    parserOptions: {
-                        ecmaVersion: 5,
-                        sourceType: 'script',
-                        ecmaFeatures: {}
+            var initialState = Object.assign(
+                { fix: false },
+                urlState || storedState || {
+                    options: {
+                        parserOptions: {
+                            ecmaVersion: 5,
+                            sourceType: 'script',
+                            ecmaFeatures: {}
+                        },
+                        rules: (function() {
+                            var result = {};
+                            rules.forEach(function(rule, ruleId) {
+                                if (rule.meta.docs.recommended) {
+                                    result[ruleId] = 2;
+                                }
+                            });
+                            return result;
+                        }()),
+                        env: {}
                     },
-                    rules: (function() {
-                        var result = {};
-                        rules.forEach(function(rule, ruleId) {
-                            if (rule.meta.docs.recommended) {
-                                result[ruleId] = 2;
-                            }
-                        });
-                        return result;
-                    }()),
-                    env: {}
-                },
-                text: 'var foo = bar;',
-                fix: false,
-            };
+                    text: 'var foo = bar;',
+                }
+            );
 
             this.initialText = initialState.text;
             return initialState;
