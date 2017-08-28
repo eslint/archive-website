@@ -54,7 +54,7 @@ define(['react', 'jsx!editor', 'jsx!messages', 'jsx!fixedCode', 'jsx!configurati
     return React.createClass({
         displayName: 'App',
         getInitialState: function() {
-            var storedState = JSON.parse(window.localStorage.getItem('linterDemoState') || '{}');
+            var storedState = JSON.parse(window.localStorage.getItem('linterDemoState') || null);
             var urlState = (function() {
                 try {
                     return JSON.parse(window.atob(window.location.hash.replace(/^#/, "")));
