@@ -43,6 +43,16 @@ define(["react", "jsx!parserOptions", "jsx!environments", "jsx!rulesConfig"], fu
                                     }
                                 }
                             />
+                            <hr />
+                            <a
+                                download=".eslintrc.json"
+                                href={
+                                    "data:application/json;charset=utf-8," +
+                                    encodeURIComponent(JSON.stringify(props.options, null, 4))
+                                }
+                            >
+                                Download <code className="highlighter-rouge">.eslintrc.json</code> file with this configuration
+                            </a>
                         </div>
                     </div>
                 </div>
