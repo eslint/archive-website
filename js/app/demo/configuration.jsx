@@ -1,6 +1,6 @@
-'use strict';
+"use strict";
 
-define(['react', 'jsx!parserOptions', 'jsx!environments', 'jsx!rulesConfig'], function(React, ParserOptions, Environments, RulesConfig) {
+define(["react", "jsx!parserOptions", "jsx!environments", "jsx!rulesConfig"], function(React, ParserOptions, Environments, RulesConfig) {
     return function Configuration(props) {
         return (
             <div className="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
@@ -28,7 +28,7 @@ define(['react', 'jsx!parserOptions', 'jsx!environments', 'jsx!rulesConfig'], fu
                                 envNames={props.envNames}
                                 onUpdate={
                                     function(env) {
-                                        props.onUpdate(Object.assign({}, props.options, { env: env }))
+                                        props.onUpdate(Object.assign({}, props.options, { env: env }));
                                     }
                                 }
                             />
@@ -39,7 +39,7 @@ define(['react', 'jsx!parserOptions', 'jsx!environments', 'jsx!rulesConfig'], fu
                                 docs={props.docs}
                                 onUpdate={
                                     function(rules) {
-                                        props.onUpdate(Object.assign({}, props.options, { rules: rules }))
+                                        props.onUpdate(Object.assign({}, props.options, { rules: rules }));
                                     }
                                 }
                             />

@@ -1,9 +1,10 @@
-'use strict';
+"use strict";
 
-define(['react', 'jsx!selectAllCheckbox'], function(React, SelectAllCheckbox) {
+define(["react", "jsx!selectAllCheckbox"], function(React, SelectAllCheckbox) {
     return function Environments(props) {
         var columnLimit = 3;
         var rowLimit = Math.ceil(props.envNames.length / columnLimit);
+
         return (
             <div className="row">
                 <div className="container">
@@ -48,7 +49,7 @@ define(['react', 'jsx!selectAllCheckbox'], function(React, SelectAllCheckbox) {
                                             .map(function(envName) {
                                                 return (
                                                     <div className="checkbox" key={envName}>
-                                                        <label>
+                                                        <label htmlFor={envName}>
                                                             <input
                                                                 type="checkbox"
                                                                 checked={props.env[envName]}
@@ -56,6 +57,7 @@ define(['react', 'jsx!selectAllCheckbox'], function(React, SelectAllCheckbox) {
                                                                 onChange={
                                                                     function(event) {
                                                                         var updatedEnv = {};
+
                                                                         updatedEnv[envName] = event.target.checked;
                                                                         props.onUpdate(
                                                                             Object.assign({}, props.env, updatedEnv)

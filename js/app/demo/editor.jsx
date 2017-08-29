@@ -1,42 +1,48 @@
-'use strict';
+"use strict";
 
 var height = 350;
 
 function debounce(func, wait, immediate) {
     var timeout;
+
     return function() {
-        var context = this,
+        var context = this, // eslint-disable-line no-invalid-this
             args = arguments;
-        var later = function() {
+
+        function later() {
             timeout = null;
-            if (!immediate) func.apply(context, args);
-        };
+            if (!immediate) {
+                func.apply(context, args);
+            }
+        }
         var callNow = immediate && !timeout;
+
         clearTimeout(timeout);
         timeout = setTimeout(later, wait);
-        if (callNow) func.apply(context, args);
+        if (callNow) {
+            func.apply(context, args);
+        }
     };
 }
 
-define(['react', 'orion', 'reactDom', 'events'], function(React, orion, ReactDOM, events) {
+define(["react", "orion", "reactDom", "events"], function(React, orion, ReactDOM, events) {
     return React.createClass({
-        displayName: 'Editor',
+        displayName: "Editor",
         editor: null,
         componentDidMount: function() {
-            var element = ReactDOM.findDOMNode(this);
-            this.editor = orion(element);
-            
+            this.editor = orion(this.element);
+
             var update = debounce(function() {
                 this.props.onChange({ value: this.editor.getModel().getText() });
             }.bind(this), 500);
-            
+
             this.editor.getTextView().onModify = function() {
                 update();
-            }.bind(this);
-            
+            };
+
             this.props.onChange({ value: this.editor.getModel().getText() });
 
-            events.on('showError', function(line, column) {
+            events.on("showError", function(line, column) {
                 this.editor.onGotoLine(line - 1, column - 1, column - 1);
             }.bind(this));
         },
@@ -48,16 +54,27 @@ define(['react', 'orion', 'reactDom', 'events'], function(React, orion, ReactDOM
                         line: error.line,
                         start: error.column,
                         end: error.column + 1,
-                        description: error.message + ' (' + error.ruleId + ')',
-                        severity: error.severity === 2 ? 'error' : 'warning'
+                        description: error.message + " (" + error.ruleId + ")",
+                        severity: error.severity === 2 ? "error" : "warning"
                     };
                 }));
             }
         },
 
-        render: function() {
+        render: function Editor() {
             return (
-                <pre id="editor" data-editor-lang="js" style={{height: height + 'px'}}>{this.props.text}</pre>
+                <pre
+                    id="editor"
+                    data-editor-lang="js"
+                    style={{ height: height + "px" }}
+                    ref={
+                        function(element) {
+                            this.element = element;
+                        }.bind(this)
+                    }
+                >
+                    {this.props.text}
+                </pre>
             );
         }
     });
