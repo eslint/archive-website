@@ -45,14 +45,28 @@ define(["react", "orion", "reactDom", "events"], function(React, orion, ReactDOM
         showProblems: function() {
             if (this.props.errors) {
                 this.editor.showProblems(this.props.errors.map(function(error) {
+                    if (error.fatal) {
+                        return {
+                            line: error.line,
+                            start: error.column,
+                            end: error.column + 1,
+                            description: error.message,
+                            severity: "error"
+                        };
+                    }
+                    var start = this.props.getIndexFromLoc({ line: error.line, column: error.column - 1 });
+                    var end = this.props.getIndexFromLoc({
+                        line: error.endLine || error.line,
+                        column: (error.endColumn || error.column) - 1
+                    });
+
                     return {
-                        line: error.line,
-                        start: error.column,
-                        end: error.column + 1,
+                        start: start,
+                        end: start === end ? end + 1 : end,
                         description: error.message + " (" + error.ruleId + ")",
                         severity: error.severity === 2 ? "error" : "warning"
                     };
-                }));
+                }, this));
             }
         },
 

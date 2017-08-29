@@ -118,12 +118,18 @@ define(["react", "jsx!editor", "jsx!messages", "jsx!fixedCode", "jsx!configurati
         },
         render: function App() {
             var results = this.lint();
+            var sourceCode = linter.getSourceCode();
 
             return (
                 <div className="container editorRow">
                     <div className="row">
                         <div className="col-md-7">
-                            <Editor onChange={this.handleChange} text={this.initialText} errors={results.messages} />
+                            <Editor
+                                onChange={this.handleChange}
+                                text={this.initialText}
+                                errors={results.messages}
+                                getIndexFromLoc={sourceCode && sourceCode.getIndexFromLoc.bind(sourceCode)}
+                            />
                         </div>
                         <div className="col-md-5">
                             <ul className="nav nav-tabs" role="tablist">
