@@ -1,7 +1,7 @@
 ---
 title: space-infix-ops - Rules
 layout: doc
-https://github.com/eslint/eslint/edit/master/docs/rules/space-infix-ops.md
+edit_link: https://github.com/eslint/eslint/edit/master/docs/rules/space-infix-ops.md
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 

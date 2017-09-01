@@ -1,7 +1,7 @@
 ---
 title: func-names - Rules
 layout: doc
-https://github.com/eslint/eslint/edit/master/docs/rules/func-names.md
+edit_link: https://github.com/eslint/eslint/edit/master/docs/rules/func-names.md
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 

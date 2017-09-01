@@ -1,7 +1,7 @@
 ---
 title: handle-callback-err - Rules
 layout: doc
-https://github.com/eslint/eslint/edit/master/docs/rules/handle-callback-err.md
+edit_link: https://github.com/eslint/eslint/edit/master/docs/rules/handle-callback-err.md
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 

@@ -1,7 +1,7 @@
 ---
 title: no-regex-spaces - Rules
 layout: doc
-https://github.com/eslint/eslint/edit/master/docs/rules/no-regex-spaces.md
+edit_link: https://github.com/eslint/eslint/edit/master/docs/rules/no-regex-spaces.md
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 

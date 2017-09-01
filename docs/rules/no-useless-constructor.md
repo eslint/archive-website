@@ -1,7 +1,7 @@
 ---
 title: no-useless-constructor - Rules
 layout: doc
-https://github.com/eslint/eslint/edit/master/docs/rules/no-useless-constructor.md
+edit_link: https://github.com/eslint/eslint/edit/master/docs/rules/no-useless-constructor.md
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 

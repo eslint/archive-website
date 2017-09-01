@@ -1,7 +1,7 @@
 ---
 title: no-shadow-restricted-names - Rules
 layout: doc
-https://github.com/eslint/eslint/edit/master/docs/rules/no-shadow-restricted-names.md
+edit_link: https://github.com/eslint/eslint/edit/master/docs/rules/no-shadow-restricted-names.md
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
