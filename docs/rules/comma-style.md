@@ -1,7 +1,7 @@
 ---
 title: comma-style - Rules
 layout: doc
-https://github.com/eslint/eslint/edit/master/docs/rules/comma-style.md
+edit_link: https://github.com/eslint/eslint/edit/master/docs/rules/comma-style.md
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 

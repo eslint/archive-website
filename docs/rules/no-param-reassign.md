@@ -1,7 +1,7 @@
 ---
 title: no-param-reassign - Rules
 layout: doc
-https://github.com/eslint/eslint/edit/master/docs/rules/no-param-reassign.md
+edit_link: https://github.com/eslint/eslint/edit/master/docs/rules/no-param-reassign.md
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 

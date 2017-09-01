@@ -1,7 +1,7 @@
 ---
 title: no-implicit-globals - Rules
 layout: doc
-https://github.com/eslint/eslint/edit/master/docs/rules/no-implicit-globals.md
+edit_link: https://github.com/eslint/eslint/edit/master/docs/rules/no-implicit-globals.md
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 

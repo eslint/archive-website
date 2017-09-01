@@ -1,7 +1,7 @@
 ---
 title: no-implicit-coercion - Rules
 layout: doc
-https://github.com/eslint/eslint/edit/master/docs/rules/no-implicit-coercion.md
+edit_link: https://github.com/eslint/eslint/edit/master/docs/rules/no-implicit-coercion.md
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 

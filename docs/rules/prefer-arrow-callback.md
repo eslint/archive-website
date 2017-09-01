@@ -1,7 +1,7 @@
 ---
 title: prefer-arrow-callback - Rules
 layout: doc
-https://github.com/eslint/eslint/edit/master/docs/rules/prefer-arrow-callback.md
+edit_link: https://github.com/eslint/eslint/edit/master/docs/rules/prefer-arrow-callback.md
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 

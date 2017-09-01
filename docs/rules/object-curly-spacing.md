@@ -1,7 +1,7 @@
 ---
 title: object-curly-spacing - Rules
 layout: doc
-https://github.com/eslint/eslint/edit/master/docs/rules/object-curly-spacing.md
+edit_link: https://github.com/eslint/eslint/edit/master/docs/rules/object-curly-spacing.md
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 

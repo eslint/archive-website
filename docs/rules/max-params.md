@@ -1,7 +1,7 @@
 ---
 title: max-params - Rules
 layout: doc
-https://github.com/eslint/eslint/edit/master/docs/rules/max-params.md
+edit_link: https://github.com/eslint/eslint/edit/master/docs/rules/max-params.md
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 

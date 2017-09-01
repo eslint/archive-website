@@ -1,7 +1,7 @@
 ---
 title: no-extra-semi - Rules
 layout: doc
-https://github.com/eslint/eslint/edit/master/docs/rules/no-extra-semi.md
+edit_link: https://github.com/eslint/eslint/edit/master/docs/rules/no-extra-semi.md
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
