@@ -1,6 +1,7 @@
 ---
 title: Integrations
 layout: doc
+https://github.com/eslint/eslint/edit/master/docs/user-guide/integrations.md
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 

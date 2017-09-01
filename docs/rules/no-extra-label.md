@@ -1,6 +1,7 @@
 ---
 title: no-extra-label - Rules
 layout: doc
+https://github.com/eslint/eslint/edit/master/docs/rules/no-extra-label.md
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 

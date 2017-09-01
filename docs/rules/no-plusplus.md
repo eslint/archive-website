@@ -1,6 +1,7 @@
 ---
 title: no-plusplus - Rules
 layout: doc
+https://github.com/eslint/eslint/edit/master/docs/rules/no-plusplus.md
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 

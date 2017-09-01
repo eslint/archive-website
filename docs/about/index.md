@@ -1,6 +1,7 @@
 ---
 title: About
 layout: doc
+https://github.com/eslint/eslint/edit/master/docs/about/index.md
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 

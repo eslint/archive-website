@@ -1,6 +1,7 @@
 ---
 title: no-tabs - Rules
 layout: doc
+https://github.com/eslint/eslint/edit/master/docs/rules/no-tabs.md
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 

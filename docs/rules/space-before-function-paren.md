@@ -1,6 +1,7 @@
 ---
 title: space-before-function-paren - Rules
 layout: doc
+https://github.com/eslint/eslint/edit/master/docs/rules/space-before-function-paren.md
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 

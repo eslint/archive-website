@@ -1,6 +1,7 @@
 ---
 title: newline-after-var - Rules
 layout: doc
+https://github.com/eslint/eslint/edit/master/docs/rules/newline-after-var.md
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 

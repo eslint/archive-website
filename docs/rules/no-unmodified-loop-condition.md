@@ -1,6 +1,7 @@
 ---
 title: no-unmodified-loop-condition - Rules
 layout: doc
+https://github.com/eslint/eslint/edit/master/docs/rules/no-unmodified-loop-condition.md
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 

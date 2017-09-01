@@ -1,6 +1,7 @@
 ---
 title: one-var-declaration-per-line - Rules
 layout: doc
+https://github.com/eslint/eslint/edit/master/docs/rules/one-var-declaration-per-line.md
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 

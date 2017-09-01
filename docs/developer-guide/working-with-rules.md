@@ -1,6 +1,7 @@
 ---
 title: Working with Rules
 layout: doc
+https://github.com/eslint/eslint/edit/master/docs/developer-guide/working-with-rules.md
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 

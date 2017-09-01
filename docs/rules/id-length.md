@@ -1,6 +1,7 @@
 ---
 title: id-length - Rules
 layout: doc
+https://github.com/eslint/eslint/edit/master/docs/rules/id-length.md
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
