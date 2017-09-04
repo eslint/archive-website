@@ -1,6 +1,9 @@
 {
   "name": "eslint.github.io",
   "version": "1.0.0",
+  "engines": {
+    "node": ">=8.0"
+  },
   "private": true,
   "description": "This contains the code running on eslint.org.",
   "main": "index.js",
@@ -8,11 +11,14 @@
     "doc": "docs"
   },
   "scripts": {
-    "build": "browserify -x espree js/app/parser/index.js > js/app/parser/index.built.js",
-    "start": "bundle exec jekyll serve --watch --incremental",
-    "lint": "eslint js/app/ --ext=.js,.jsx",
+    "build": "rimraf js/dist && webpack -p",
+    "start": "npm run watch-jekyll & npm run watch-webpack",
+    "watch-webpack": "webpack -w",
+    "watch-jekyll": "bundle exec jekyll serve --watch --incremental",
+    "lint": "eslint js/app webpack.config.js --ext=.js,.jsx",
     "test": "npm run lint",
-    "less": "lessc styles/less/main.less styles/main.css -x --source-map=styles/main.css.map"
+    "less": "lessc styles/less/main.less styles/main.css -x --source-map=styles/main.css.map",
+    "precommit": "npm run build"
   },
   "repository": {
     "type": "git",
@@ -24,16 +30,25 @@
     "url": "https://github.com/eslint/eslint.github.io/issues"
   },
   "homepage": "https://github.com/eslint/eslint.github.io#readme",
-  "dependencies": {},
+  "dependencies": {
+    "espree": "^3.5.0",
+    "react": "^15.6.1",
+    "react-dom": "^15.6.1"
+  },
   "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-polyfill": "^6.26.0",
+    "babel-preset-env": "^1.6.0",
+    "babel-preset-react": "^6.24.1",
     "bootstrap": "^3.3.6",
-    "browserify": "^11.0.1",
-    "eslint": "^4.5.0",
+    "eslint": "^4.6.1",
     "eslint-config-eslint": "^4.0.0",
     "eslint-plugin-jsx-a11y": "^6.0.2",
     "eslint-plugin-react": "^7.3.0",
-    "json-loader": "^0.5.2",
+    "husky": "^0.14.3",
     "less": "^2.7.1",
-    "node-libs-browser": "^0.5.2"
+    "rimraf": "^2.6.1",
+    "webpack": "^3.5.5"
   }
 }
