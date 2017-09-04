@@ -53,6 +53,7 @@ Examples of **incorrect** code for this rule with the default `"double"` option:
 
 var single = 'single';
 var unescaped = 'a string containing "double" quotes';
+var backtick = `back\ntick`; // you can use \n in single or double quoted strings
 ```
 
 Examples of **correct** code for this rule with the default `"double"` option:
@@ -62,7 +63,8 @@ Examples of **correct** code for this rule with the default `"double"` option:
 /*eslint-env es6*/
 
 var double = "double";
-var backtick = `back\ntick`;  // backticks are allowed due to newline
+var backtick = `back
+tick`;  // backticks are allowed due to newline
 var backtick = tag`backtick`; // backticks are allowed due to tag
 ```
 

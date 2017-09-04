@@ -631,6 +631,10 @@ categories:
         fixable: false
         name: func-style
         recommended: false
+      - description: enforce consistent line breaks inside function parentheses
+        fixable: true
+        name: function-paren-newline
+        recommended: false
       - description: disallow specified identifiers
         fixable: false
         name: id-blacklist
@@ -998,7 +1002,7 @@ categories:
         fixable: true
         name: object-shorthand
         recommended: false
-      - description: require arrow functions as callbacks
+      - description: require using arrow functions for callbacks
         fixable: true
         name: prefer-arrow-callback
         recommended: false

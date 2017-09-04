@@ -1,20 +1,28 @@
-'use strict';
+"use strict";
 
-define(['react'], function(React) {
+define(["react", "jsx!selectAllCheckbox"], function(React, SelectAllCheckbox) {
 
     function Rule(ref) {
-        var handler = function(e) {
+        function handler(e) {
             ref.handleChange(e, ref.rule);
-        };
-        var showPopover = function(e) {
-            $(e.currentTarget).popover('show');
-        };
-        var hidePopover = function(e) {
-            $(e.currentTarget).popover('hide');
-        };
+        }
+        function showPopover(e) {
+            $(e.currentTarget).popover("show");
+        }
+        function hidePopover(e) {
+            $(e.currentTarget).popover("hide");
+        }
+
         return (
             <div className="checkbox">
-                <label onMouseEnter={showPopover} onMouseLeave={hidePopover} data-toggle="popover" data-content={ref.docs.description} title={ref.rule}>
+                <label
+                    htmlFor={ref.rule}
+                    onMouseEnter={showPopover}
+                    onMouseLeave={hidePopover}
+                    data-toggle="popover"
+                    data-content={ref.docs.description}
+                    title={ref.rule}
+                >
                     <input type="checkbox" checked={ref.isChecked} id={ref.rule} onChange={handler} />
                     {ref.rule}
                 </label>
@@ -26,12 +34,24 @@ define(['react'], function(React) {
         function shouldBeChecked(rule) {
             return props.config[rule] && props.config[rule] !== "off" && props.config[rule] !== 0;
         }
+        function handleChange(e, key) {
+            var updatedConfig = Object.assign({}, props.config);
+
+            if (e.target.checked) {
+                updatedConfig[key] = 2;
+            } else {
+                delete updatedConfig[key];
+            }
+            props.onUpdate(updatedConfig);
+        }
         function getRow(i) {
             var limit = Math.ceil(props.ruleNames.length / 3);
-            const start = limit * i;
-            return Array(limit).fill('').map(function(item, index) {
+            var start = limit * i;
+
+            return Array(limit).fill("").map(function(item, index) {
                 var rule = props.ruleNames[start + index];
-                return rule && <Rule key={rule} rule={rule} docs={props.docs[rule].docs} isChecked={shouldBeChecked(rule)} handleChange={handleChange} />
+
+                return rule && <Rule key={rule} rule={rule} docs={props.docs[rule].docs} isChecked={shouldBeChecked(rule)} handleChange={handleChange} />;
             });
         }
         function renderRules() {
@@ -43,20 +63,38 @@ define(['react'], function(React) {
                 );
             });
         }
-        function handleChange(e, key) {
-            var updatedConfig = Object.assign({}, props.config);
-            if (e.target.checked) {
-                updatedConfig[key] = "error";
-            } else {
-                delete updatedConfig[key];
-            }
-            props.onUpdate(updatedConfig);
-        }
 
         return (
             <div className="row rules">
                 <div className="container">
                     <div className="row"><div className="col-md-12"><h3>Rules</h3></div></div>
+                    <div className="checkbox">
+                        <label htmlFor="select-all-rules">
+                            <SelectAllCheckbox
+                                id="select-all-rules"
+                                selectedCount={
+                                    props.ruleNames.filter(function(ruleName) {
+                                        return props.config[ruleName] && props.config[ruleName] !== "off";
+                                    }).length
+                                }
+                                totalCount={props.ruleNames.length}
+                                onSelectAll={
+                                    function() {
+                                        props.onUpdate(props.ruleNames.reduce(function(updatedConfig, ruleName) {
+                                            updatedConfig[ruleName] = 2;
+                                            return updatedConfig;
+                                        }, {}));
+                                    }
+                                }
+                                onDeselectAll={
+                                    function() {
+                                        props.onUpdate({});
+                                    }
+                                }
+                            />
+                            {" "}Enable all rules
+                        </label>
+                    </div>
                     <div className="row">{renderRules()}</div>
                 </div>
             </div>

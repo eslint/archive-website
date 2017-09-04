@@ -1,63 +1,93 @@
-'use strict';
+"use strict";
 
 var height = 350;
 
 function debounce(func, wait, immediate) {
     var timeout;
+
     return function() {
-        var context = this,
+        var context = this, // eslint-disable-line no-invalid-this
             args = arguments;
-        var later = function() {
+
+        function later() {
             timeout = null;
-            if (!immediate) func.apply(context, args);
-        };
+            if (!immediate) {
+                func.apply(context, args);
+            }
+        }
         var callNow = immediate && !timeout;
+
         clearTimeout(timeout);
         timeout = setTimeout(later, wait);
-        if (callNow) func.apply(context, args);
+        if (callNow) {
+            func.apply(context, args);
+        }
     };
 }
 
-define(['react', 'orion', 'reactDom', 'events'], function(React, orion, ReactDOM, events) {
+define(["react", "orion", "reactDom", "events"], function(React, orion, ReactDOM, events) {
     return React.createClass({
-        displayName: 'Editor',
+        displayName: "Editor",
         editor: null,
         componentDidMount: function() {
-            var element = ReactDOM.findDOMNode(this);
-            this.editor = orion(element);
-            
-            var update = debounce(function() {
+            this.editor = orion(this.element);
+            this.editor.getTextView().onModify = debounce(function() {
                 this.props.onChange({ value: this.editor.getModel().getText() });
             }.bind(this), 500);
-            
-            this.editor.getTextView().onModify = function() {
-                update();
-            }.bind(this);
-            
-            this.props.onChange({ value: this.editor.getModel().getText() });
 
-            events.on('showError', function(line, column) {
+            events.on("showError", function(line, column) {
                 this.editor.onGotoLine(line - 1, column - 1, column - 1);
             }.bind(this));
+
+            this.showProblems();
         },
 
-        componentWillReceiveProps: function(nextProps) {
-            if (nextProps.errors) {
-                this.editor.showProblems(nextProps.errors.map(function(error) {
+        showProblems: function() {
+            if (this.props.errors) {
+                this.editor.showProblems(this.props.errors.map(function(error) {
+                    if (error.fatal) {
+                        return {
+                            line: error.line,
+                            start: error.column,
+                            end: error.column + 1,
+                            description: error.message,
+                            severity: "error"
+                        };
+                    }
+                    var start = this.props.getIndexFromLoc({ line: error.line, column: error.column - 1 });
+                    var end = this.props.getIndexFromLoc({
+                        line: error.endLine || error.line,
+                        column: (error.endColumn || error.column) - 1
+                    });
+
                     return {
-                        line: error.line,
-                        start: error.column,
-                        end: error.column + 1,
-                        description: error.message + ' (' + error.ruleId + ')',
-                        severity: error.severity === 2 ? 'error' : 'warning'
+                        start: start,
+                        end: start === end ? end + 1 : end,
+                        description: error.message + " (" + error.ruleId + ")",
+                        severity: error.severity === 2 ? "error" : "warning"
                     };
-                }));
+                }, this));
             }
         },
 
-        render: function() {
+        componentDidUpdate: function() {
+            this.showProblems();
+        },
+
+        render: function Editor() {
             return (
-                <pre id="editor" data-editor-lang="js" style={{height: height + 'px'}}>{this.props.text}</pre>
+                <pre
+                    id="editor"
+                    data-editor-lang="js"
+                    style={{ height: height + "px" }}
+                    ref={
+                        function(element) {
+                            this.element = element;
+                        }.bind(this)
+                    }
+                >
+                    {this.props.text}
+                </pre>
             );
         }
     });

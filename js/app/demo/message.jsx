@@ -1,24 +1,28 @@
-'use strict';
+"use strict";
 
-define(['react', 'events'], function(React, events) {
-    return React.createClass({
-        displayName: 'Message',
-        handleClick: function() {
-            events.trigger('showError', this.props.value.line, this.props.value.column);
-        },
-        render: function() {
-            return (
-                <div className={"alert alert-" + (this.props.value.fatal || this.props.value.severity === 2 ? "danger" : "warning" )} title={this.props.value.message} onClick={this.handleClick}>
-                    {this.props.value.line}:{this.props.value.column} - {this.props.value.message}
-                    {
-                        !this.props.value.fatal && [
-                            ' (',
-                            <a href={"https://eslint.org/docs/rules/" + this.props.value.ruleId}>{this.props.value.ruleId}</a>,
-                            ')'
-                        ]
+define(["react", "events"], function(React, events) {
+    return function Message(props) {
+        var isError = props.value.fatal || props.value.severity === 2;
+
+        return (
+            <button
+                className={"alert btn-block report-message-alert alert-" + (isError ? "danger" : "warning")}
+                title={props.value.message}
+                onClick={
+                    function() {
+                        events.trigger("showError", props.value.line, props.value.column);
                     }
-                </div>
-            );
-        }
-    });
+                }
+            >
+                {props.value.line}:{props.value.column} - {props.value.message}
+                {
+                    !props.value.fatal && [
+                        " (",
+                        <a key="ruleLink" href={"https://eslint.org/docs/rules/" + props.value.ruleId}>{props.value.ruleId}</a>,
+                        ")"
+                    ]
+                }
+            </button>
+        );
+    };
 });
