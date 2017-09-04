@@ -1,0 +1,35 @@
+.four-oh-four-header {
+  font-size: 10em;
+  white-space: nowrap;
+
+  @media (max-width: (@screen-xs-max * (2 / 3))) {
+    font-size: 8em;
+
+    ~ h2 {
+      font-size: 1.5em;
+    }
+    ~ h3 {
+      font-size: 1.25em;
+    }
+  }
+
+  &, ~ h2, ~ h3, ~ h4, ~ h5, ~ h6 {
+    text-align: center;
+
+    .anchorjs-link {
+      display: none;
+    }
+  }
+
+  ~ p .btn-getting-started {
+    max-width: 21em;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  img {
+    height: 0.8em;
+    vertical-align: baseline;
+    margin-bottom: -0.07em;
+  }
+}

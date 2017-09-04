@@ -5,6 +5,11 @@
 
       <footer>
         <ul class="list-inline">
+          {% if page.edit_link %}
+            <li><a href="{{ page.edit_link }}">Edit this page</a></li>
+          {% else %}
+            <li><a href="https://github.com/eslint/eslint.github.io/edit/master/{{ page.path }}">Edit this page</a></li>
+          {% endif %}
           <li><a href="https://groups.google.com/group/eslint">Mailing List</a></li>
           <li><a href="https://github.com/eslint/eslint">GitHub</a></li>
           <li><a href="https://twitter.com/geteslint">Twitter</a></li>
@@ -32,10 +37,11 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.4/js/bootstrap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/1.1.1/anchor.min.js"></script>
-  <script src="/js/app/search.js"></script>
+  <script src="{{ site.url }}/js/app/search.js"></script>
   <script>
     $(document).ready(function() {
       anchors.add('.doc h2, .doc h3, .doc h4, .blog h2, .blog h3, .blog h4');
+
       {% if page.homepage %}
       function shuffleArray(array) {
         for (var i = array.length - 1; i > 0; i--) {
@@ -47,7 +53,7 @@
         return array;
       }
 
-      var logos = [{% for logo in site.data.logos %}{ url: '{{ logo.url }}', src: '{{ logo.src }}', name: '{{ logo.name }}' }{% unless forloop.last %},{% endunless %}{% endfor %}];
+      var logos = [{% for logo in site.data.logos %}{ url: '{{ logo.url }}', src: '{{ site.url }}{{ logo.src }}', name: '{{ logo.name }}' }{% unless forloop.last %},{% endunless %}{% endfor %}];
       logos = shuffleArray(logos);
       for (var i = 0, l = logos.length; i<l; i++) {
         var logo = $('<div class="slide col-sm-4"><a href="' + logos[i].url + '"><img src="' + logos[i].src + '" alt="' + logos[i].name + '"></a></div>');
