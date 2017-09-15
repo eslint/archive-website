@@ -1,10 +1,5 @@
-
-
-"use strict";
-
-// requires
-var config = require("./parser.config");
-var lib = require("./lib");
+import config from "./parser.config";
+import lib from "./lib";
 
 // DOM stuff
 var editor = document.querySelector("#editor");

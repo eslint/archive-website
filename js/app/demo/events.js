@@ -1,27 +1,23 @@
-"use strict";
+function EventBus() {
+    this.handlers = {};
+}
 
-define([], function() {
-    function EventBus() {
-        this.handlers = {};
+EventBus.prototype.on = function(name, callback) {
+    if (!this.handlers[name]) {
+        this.handlers[name] = [];
     }
 
-    EventBus.prototype.on = function(name, callback) {
-        if (!this.handlers[name]) {
-            this.handlers[name] = [];
-        }
+    this.handlers[name].push(callback);
+};
 
-        this.handlers[name].push(callback);
-    };
+EventBus.prototype.trigger = function(name) {
+    if (this.handlers[name]) {
+        var args = Array.prototype.slice.call(arguments, 1);
 
-    EventBus.prototype.trigger = function(name) {
-        if (this.handlers[name]) {
-            var args = Array.prototype.slice.call(arguments, 1);
+        this.handlers[name].forEach(function(callback) {
+            callback.apply(this, args);
+        }, this);
+    }
+};
 
-            this.handlers[name].forEach(function(callback) {
-                callback.apply(this, args);
-            }, this);
-        }
-    };
-
-    return new EventBus();
-});
+export default new EventBus();

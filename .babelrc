@@ -1,0 +1,11 @@
+{
+  "presets": [
+    "react",
+    ["env", {
+      "targets": {
+        "forceAllTransforms": true
+      },
+      "modules": false
+    }]
+  ]
+}
