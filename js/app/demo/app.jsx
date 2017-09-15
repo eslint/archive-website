@@ -181,6 +181,7 @@ define(["react", "jsx!editor", "jsx!messages", "jsx!fixedCode", "jsx!configurati
                             options={this.state.options}
                             docs={docs}
                             onUpdate={this.updateOptions}
+                            eslintVersion={linter.version}
                         />
                     </div>
                 </div>
