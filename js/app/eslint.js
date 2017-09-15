@@ -8456,15 +8456,15 @@ var types = {
   eq: new TokenType("=", {beforeExpr: true, isAssign: true}),
   assign: new TokenType("_=", {beforeExpr: true, isAssign: true}),
   incDec: new TokenType("++/--", {prefix: true, postfix: true, startsExpr: true}),
-  prefix: new TokenType("prefix", {beforeExpr: true, prefix: true, startsExpr: true}),
+  prefix: new TokenType("!/~", {beforeExpr: true, prefix: true, startsExpr: true}),
   logicalOR: binop("||", 1),
   logicalAND: binop("&&", 2),
   bitwiseOR: binop("|", 3),
   bitwiseXOR: binop("^", 4),
   bitwiseAND: binop("&", 5),
-  equality: binop("==/!=", 6),
-  relational: binop("</>", 7),
-  bitShift: binop("<</>>", 8),
+  equality: binop("==/!=/===/!==", 6),
+  relational: binop("</>/<=/>=", 7),
+  bitShift: binop("<</>>/>>>", 8),
   plusMin: new TokenType("+/-", {beforeExpr: true, binop: 9, prefix: true, startsExpr: true}),
   modulo: binop("%", 10),
   star: binop("*", 10),
@@ -8814,7 +8814,7 @@ var pp = Parser.prototype;
 
 // ## Parser utilities
 
-var literal = /^(?:'((?:[^']|\.)*)'|"((?:[^"]|\.)*)"|;)/;
+var literal = /^(?:'((?:\\.|[^'])*?)'|"((?:\\.|[^"])*?)"|;)/;
 pp.strictDirective = function(start) {
   var this$1 = this;
 
@@ -10528,7 +10528,7 @@ pp$3.parseTemplate = function(ref) {
 
 pp$3.isAsyncProp = function(prop) {
   return !prop.computed && prop.key.type === "Identifier" && prop.key.name === "async" &&
-    (this.type === types.name || this.type === types.num || this.type === types.string || this.type === types.bracketL) &&
+    (this.type === types.name || this.type === types.num || this.type === types.string || this.type === types.bracketL || this.type.keyword) &&
     !lineBreak.test(this.input.slice(this.lastTokEnd, this.start))
 };
 
@@ -11404,7 +11404,7 @@ pp$8.readToken_caret = function() { // '^'
 pp$8.readToken_plus_min = function(code) { // '+-'
   var next = this.input.charCodeAt(this.pos + 1);
   if (next === code) {
-    if (next == 45 && this.input.charCodeAt(this.pos + 2) == 62 &&
+    if (next == 45 && !this.inModule && this.input.charCodeAt(this.pos + 2) == 62 &&
         (this.lastTokEnd === 0 || lineBreak.test(this.input.slice(this.lastTokEnd, this.pos)))) {
       // A `-->` line comment
       this.skipLineComment(3);
@@ -11425,9 +11425,8 @@ pp$8.readToken_lt_gt = function(code) { // '<>'
     if (this.input.charCodeAt(this.pos + size) === 61) { return this.finishOp(types.assign, size + 1) }
     return this.finishOp(types.bitShift, size)
   }
-  if (next == 33 && code == 60 && this.input.charCodeAt(this.pos + 2) == 45 &&
+  if (next == 33 && code == 60 && !this.inModule && this.input.charCodeAt(this.pos + 2) == 45 &&
       this.input.charCodeAt(this.pos + 3) == 45) {
-    if (this.inModule) { this.unexpected(); }
     // `<!--`, an XML-style comment that should be interpreted as a line comment
     this.skipLineComment(4);
     this.skipSpace();
@@ -11924,7 +11923,7 @@ pp$8.readWord = function() {
 // [dammit]: acorn_loose.js
 // [walk]: util/walk.js
 
-var version = "5.1.1";
+var version = "5.1.2";
 
 // The main exported interface (under `self.acorn` when in the
 // browser) is a `parse` function that takes a code string and
@@ -12664,25 +12663,25 @@ module.exports={
   "_args": [
     [
       {
-        "raw": "espree@^3.5.0",
+        "raw": "espree@^3.5.1",
         "scope": null,
         "escapedName": "espree",
         "name": "espree",
-        "rawSpec": "^3.5.0",
-        "spec": ">=3.5.0 <4.0.0",
+        "rawSpec": "^3.5.1",
+        "spec": ">=3.5.1 <4.0.0",
         "type": "range"
       },
       "/var/lib/jenkins/workspace/Releases/ESLint Release/eslint"
     ]
   ],
-  "_from": "espree@>=3.5.0 <4.0.0",
-  "_id": "espree@3.5.0",
+  "_from": "espree@>=3.5.1 <4.0.0",
+  "_id": "espree@3.5.1",
   "_inCache": true,
   "_location": "/espree",
   "_nodeVersion": "6.11.1",
   "_npmOperationalInternal": {
     "host": "s3://npm-registry-packages",
-    "tmp": "tmp/espree-3.5.0.tgz_1501950320528_0.8152676953468472"
+    "tmp": "tmp/espree-3.5.1.tgz_1505504611365_0.3040659427642822"
   },
   "_npmUser": {
     "name": "eslint",
@@ -12691,21 +12690,21 @@ module.exports={
   "_npmVersion": "3.10.10",
   "_phantomChildren": {},
   "_requested": {
-    "raw": "espree@^3.5.0",
+    "raw": "espree@^3.5.1",
     "scope": null,
     "escapedName": "espree",
     "name": "espree",
-    "rawSpec": "^3.5.0",
-    "spec": ">=3.5.0 <4.0.0",
+    "rawSpec": "^3.5.1",
+    "spec": ">=3.5.1 <4.0.0",
     "type": "range"
   },
   "_requiredBy": [
     "/"
   ],
-  "_resolved": "https://registry.npmjs.org/espree/-/espree-3.5.0.tgz",
-  "_shasum": "98358625bdd055861ea27e2867ea729faf463d8d",
+  "_resolved": "https://registry.npmjs.org/espree/-/espree-3.5.1.tgz",
+  "_shasum": "0c988b8ab46db53100a1954ae4ba995ddd27d87e",
   "_shrinkwrap": null,
-  "_spec": "espree@^3.5.0",
+  "_spec": "espree@^3.5.1",
   "_where": "/var/lib/jenkins/workspace/Releases/ESLint Release/eslint",
   "author": {
     "name": "Nicholas C. Zakas",
@@ -12738,8 +12737,8 @@ module.exports={
   },
   "directories": {},
   "dist": {
-    "shasum": "98358625bdd055861ea27e2867ea729faf463d8d",
-    "tarball": "https://registry.npmjs.org/espree/-/espree-3.5.0.tgz"
+    "shasum": "0c988b8ab46db53100a1954ae4ba995ddd27d87e",
+    "tarball": "https://registry.npmjs.org/espree/-/espree-3.5.1.tgz"
   },
   "engines": {
     "node": ">=0.10.0"
@@ -12748,7 +12747,7 @@ module.exports={
     "lib",
     "espree.js"
   ],
-  "gitHead": "d9afabdb167ed7865c44ef1ef1ecbb30e639a0e7",
+  "gitHead": "f64f6bba4b920beea1cb6fe752edf0255df24eb6",
   "homepage": "https://github.com/eslint/espree",
   "keywords": [
     "ast",
@@ -12792,7 +12791,7 @@ module.exports={
     "release": "eslint-release",
     "test": "npm run-script lint && node Makefile.js test"
   },
-  "version": "3.5.0"
+  "version": "3.5.1"
 }
 
 },{}],"espree":[function(require,module,exports){
@@ -13231,7 +13230,8 @@ acorn.plugins.espree = function(instance) {
                     this.type === tt.name ||
                     this.type === tt.num ||
                     this.type === tt.string ||
-                    this.type === tt.bracketL
+                    this.type === tt.bracketL ||
+                    this.type.keyword
                 ) &&
                 !lineBreak.test(this.input.slice(this.lastTokEnd, this.start))
             ) {
@@ -20344,7 +20344,7 @@ exports.storage = 'undefined' != typeof chrome && 'undefined' != typeof chrome.s
  * Colors.
  */
 
-exports.colors = ['lightseagreen', 'forestgreen', 'goldenrod', 'dodgerblue', 'darkorchid', 'crimson'];
+exports.colors = ['#0000CC', '#0000FF', '#0033CC', '#0033FF', '#0066CC', '#0066FF', '#0099CC', '#0099FF', '#00CC00', '#00CC33', '#00CC66', '#00CC99', '#00CCCC', '#00CCFF', '#3300CC', '#3300FF', '#3333CC', '#3333FF', '#3366CC', '#3366FF', '#3399CC', '#3399FF', '#33CC00', '#33CC33', '#33CC66', '#33CC99', '#33CCCC', '#33CCFF', '#6600CC', '#6600FF', '#6633CC', '#6633FF', '#66CC00', '#66CC33', '#9900CC', '#9900FF', '#9933CC', '#9933FF', '#99CC00', '#99CC33', '#CC0000', '#CC0033', '#CC0066', '#CC0099', '#CC00CC', '#CC00FF', '#CC3300', '#CC3333', '#CC3366', '#CC3399', '#CC33CC', '#CC33FF', '#CC6600', '#CC6633', '#CC9900', '#CC9933', '#CCCC00', '#CCCC33', '#FF0000', '#FF0033', '#FF0066', '#FF0099', '#FF00CC', '#FF00FF', '#FF3300', '#FF3333', '#FF3366', '#FF3399', '#FF33CC', '#FF33FF', '#FF6600', '#FF6633', '#FF9900', '#FF9933', '#FFCC00', '#FFCC33'];
 
 /**
  * Currently only WebKit-based Web Inspectors, Firefox >= v31,
@@ -20360,6 +20360,11 @@ function useColors() {
   // explicitly
   if (typeof window !== 'undefined' && window.process && window.process.type === 'renderer') {
     return true;
+  }
+
+  // Internet Explorer and Edge do not support colors.
+  if (typeof navigator !== 'undefined' && navigator.userAgent && navigator.userAgent.toLowerCase().match(/(edge|trident)\/(\d+)/)) {
+    return false;
   }
 
   // is webkit? http://stackoverflow.com/a/16459606/376773
@@ -20513,6 +20518,11 @@ exports.enabled = enabled;
 exports.humanize = require('ms');
 
 /**
+ * Active `debug` instances.
+ */
+exports.instances = [];
+
+/**
  * The currently active debug mode names, and names to skip.
  */
 
@@ -20526,12 +20536,6 @@ exports.skips = [];
  */
 
 exports.formatters = {};
-
-/**
- * Previous log timestamp.
- */
-
-var prevTime;
 
 /**
  * Select a color.
@@ -20561,6 +20565,8 @@ function selectColor(namespace) {
  */
 
 function createDebug(namespace) {
+
+  var prevTime;
 
   function debug() {
     // disabled?
@@ -20618,13 +20624,26 @@ function createDebug(namespace) {
   debug.enabled = exports.enabled(namespace);
   debug.useColors = exports.useColors();
   debug.color = selectColor(namespace);
+  debug.destroy = destroy;
 
   // env-specific initialization logic for debug instances
   if ('function' === typeof exports.init) {
     exports.init(debug);
   }
 
+  exports.instances.push(debug);
+
   return debug;
+}
+
+function destroy() {
+  var index = exports.instances.indexOf(this);
+  if (index !== -1) {
+    exports.instances.splice(index, 1);
+    return true;
+  } else {
+    return false;
+  }
 }
 
 /**
@@ -20641,10 +20660,11 @@ function enable(namespaces) {
   exports.names = [];
   exports.skips = [];
 
+  var i;
   var split = (typeof namespaces === 'string' ? namespaces : '').split(/[\s,]+/);
   var len = split.length;
 
-  for (var i = 0; i < len; i++) {
+  for (i = 0; i < len; i++) {
     if (!split[i]) continue; // ignore empty strings
     namespaces = split[i].replace(/\*/g, '.*?');
     if (namespaces[0] === '-') {
@@ -20652,6 +20672,11 @@ function enable(namespaces) {
     } else {
       exports.names.push(new RegExp('^' + namespaces + '$'));
     }
+  }
+
+  for (i = 0; i < exports.instances.length; i++) {
+    var instance = exports.instances[i];
+    instance.enabled = exports.enabled(instance.namespace);
   }
 }
 
@@ -20674,6 +20699,9 @@ function disable() {
  */
 
 function enabled(name) {
+  if (name[name.length - 1] === '*') {
+    return true;
+  }
   var i, len;
   for (i = 0, len = exports.skips.length; i < len; i++) {
     if (exports.skips[i].test(name)) {
@@ -49542,7 +49570,7 @@ function hasOwnProperty(obj, prop) {
 },{"./support/isBuffer":115,"_process":104,"inherits":114}],117:[function(require,module,exports){
 module.exports={
   "name": "eslint",
-  "version": "4.6.0",
+  "version": "4.7.0",
   "author": "Nicholas C. Zakas <nicholas+npm@nczconsulting.com>",
   "description": "An AST-based pattern checker for JavaScript.",
   "bin": {
@@ -49582,10 +49610,10 @@ module.exports={
     "chalk": "^2.1.0",
     "concat-stream": "^1.6.0",
     "cross-spawn": "^5.1.0",
-    "debug": "^2.6.8",
+    "debug": "^3.0.1",
     "doctrine": "^2.0.0",
     "eslint-scope": "^3.7.1",
-    "espree": "^3.5.0",
+    "espree": "^3.5.1",
     "esquery": "^1.0.0",
     "estraverse": "^4.2.0",
     "esutils": "^2.0.2",
@@ -49606,7 +49634,7 @@ module.exports={
     "natural-compare": "^1.4.0",
     "optionator": "^0.8.2",
     "path-is-inside": "^1.0.2",
-    "pluralize": "^4.0.0",
+    "pluralize": "^7.0.0",
     "progress": "^2.0.0",
     "require-uncached": "^1.0.3",
     "semver": "^5.3.0",
@@ -49627,11 +49655,11 @@ module.exports={
     "coveralls": "^2.13.1",
     "dateformat": "^2.0.0",
     "ejs": "^2.5.6",
-    "eslint-plugin-eslint-plugin": "^0.8.0",
+    "eslint-plugin-eslint-plugin": "^1.2.0",
     "eslint-plugin-node": "^5.1.0",
     "eslint-release": "^0.10.1",
     "eslump": "1.6.0",
-    "esprima": "^3.1.3",
+    "esprima": "^4.0.0",
     "esprima-fb": "^15001.1001.0-dev-harmony-fb",
     "istanbul": "^0.4.5",
     "jsdoc": "^3.4.3",
@@ -49642,7 +49670,7 @@ module.exports={
     "karma-phantomjs-launcher": "^1.0.4",
     "leche": "^2.1.2",
     "load-perf": "^0.2.0",
-    "markdownlint": "^0.5.0",
+    "markdownlint": "^0.6.1",
     "mocha": "^3.4.2",
     "mock-fs": "^4.3.0",
     "npm-license": "^0.3.3",
@@ -49650,7 +49678,7 @@ module.exports={
     "proxyquire": "^1.8.0",
     "shelljs": "^0.7.7",
     "shelljs-nodecli": "~0.1.1",
-    "sinon": "^2.3.2",
+    "sinon": "^3.2.1",
     "temp": "^0.8.3",
     "through": "^2.3.8"
   },
@@ -50270,6 +50298,9 @@ module.exports = {
                 //     // setup...
                 //     return function foo() { ... };
                 //   })();
+                //   obj.foo = (() =>
+                //     function foo() { ... }
+                //   )();
                 case "ReturnStatement":
                     {
                         var func = getUpperFunction(parent);
@@ -50280,6 +50311,12 @@ module.exports = {
                         node = func.parent;
                         break;
                     }
+                case "ArrowFunctionExpression":
+                    if (node !== parent.body || !isCallee(parent)) {
+                        return true;
+                    }
+                    node = parent.parent;
+                    break;
 
                 // e.g.
                 //   var obj = { foo() { ... } };
@@ -52729,16 +52766,15 @@ var CodePathState = function () {
              * This segment will leave at the end of this finally block.
              */
             var segments = forkContext.makeNext(-1, -1);
-            var j = void 0;
 
             for (var i = 0; i < forkContext.count; ++i) {
                 var prevSegsOfLeavingSegment = [headOfLeavingSegments[i]];
 
-                for (j = 0; j < returned.segmentsList.length; ++j) {
+                for (var j = 0; j < returned.segmentsList.length; ++j) {
                     prevSegsOfLeavingSegment.push(returned.segmentsList[j][i]);
                 }
-                for (j = 0; j < thrown.segmentsList.length; ++j) {
-                    prevSegsOfLeavingSegment.push(thrown.segmentsList[j][i]);
+                for (var _j = 0; _j < thrown.segmentsList.length; ++_j) {
+                    prevSegsOfLeavingSegment.push(thrown.segmentsList[_j][i]);
                 }
 
                 segments.push(CodePathSegment.newNext(this.idGenerator.next(), prevSegsOfLeavingSegment));
@@ -52872,7 +52908,6 @@ var CodePathState = function () {
 
             var forkContext = this.forkContext;
             var brokenForkContext = this.popBreakContext().brokenForkContext;
-            var choiceContext = void 0;
 
             // Creates a looped path.
             switch (context.type) {
@@ -52884,7 +52919,7 @@ var CodePathState = function () {
 
                 case "DoWhileStatement":
                     {
-                        choiceContext = this.popChoiceContext();
+                        var choiceContext = this.popChoiceContext();
 
                         if (!choiceContext.processed) {
                             choiceContext.trueForkContext.add(forkContext.head);
@@ -53535,7 +53570,7 @@ var CodePath = function () {
 
                     // Call the callback when the first time.
                     if (!skippedSegment) {
-                        callback.call(this, segment, controller); // eslint-disable-line callback-return
+                        callback.call(this, segment, controller);
                         if (segment === lastSegment) {
                             controller.skip();
                         }
@@ -54393,25 +54428,25 @@ module.exports = {
     },
 
     /**
-     * Converts new-style severity settings (off, warn, error) into old-style
-     * severity settings (0, 1, 2) for all rules. Assumption is that severity
-     * values have already been validated as correct.
-     * @param {Object} config The config object to normalize.
-     * @returns {void}
+     * Normalizes the severity value of a rule's configuration to a number
+     * @param {(number|string|[number, ...*]|[string, ...*])} ruleConfig A rule's configuration value, generally
+     * received from the user. A valid config value is either 0, 1, 2, the string "off" (treated the same as 0),
+     * the string "warn" (treated the same as 1), the string "error" (treated the same as 2), or an array
+     * whose first element is one of the above values. Strings are matched case-insensitively.
+     * @returns {(0|1|2)} The numeric severity value if the config value was valid, otherwise 0.
      */
-    normalize: function normalize(config) {
+    getRuleSeverity: function getRuleSeverity(ruleConfig) {
+        var severityValue = Array.isArray(ruleConfig) ? ruleConfig[0] : ruleConfig;
 
-        if (config.rules) {
-            Object.keys(config.rules).forEach(function (ruleId) {
-                var ruleConfig = config.rules[ruleId];
-
-                if (typeof ruleConfig === "string") {
-                    config.rules[ruleId] = RULE_SEVERITY[ruleConfig.toLowerCase()] || 0;
-                } else if (Array.isArray(ruleConfig) && typeof ruleConfig[0] === "string") {
-                    ruleConfig[0] = RULE_SEVERITY[ruleConfig[0].toLowerCase()] || 0;
-                }
-            });
+        if (severityValue === 0 || severityValue === 1 || severityValue === 2) {
+            return severityValue;
         }
+
+        if (typeof severityValue === "string") {
+            return RULE_SEVERITY[severityValue.toLowerCase()] || 0;
+        }
+
+        return 0;
     },
 
 
@@ -54985,11 +55020,11 @@ var EventEmitter = require("events").EventEmitter,
     lodash = require("lodash"),
     blankScriptAST = require("../conf/blank-script.json"),
     defaultConfig = require("../conf/default-config-options.js"),
-    replacements = require("../conf/replacements.json"),
     CodePathAnalyzer = require("./code-path-analysis/code-path-analyzer"),
     ConfigOps = require("./config/config-ops"),
     validator = require("./config/config-validator"),
     Environments = require("./config/environments"),
+    applyDisableDirectives = require("./util/apply-disable-directives"),
     NodeEventGenerator = require("./util/node-event-generator"),
     SourceCode = require("./util/source-code"),
     Traverser = require("./util/traverser"),
@@ -55114,17 +55149,15 @@ function parseJsonConfig(string, location) {
  */
 function parseListConfig(string) {
     var items = {};
+    var reg = /[\w\-/]+/g;
+    var elementMatches = string.match(reg);
 
-    // Collapse whitespace around ,
-    string = string.replace(/\s*,\s*/g, ",");
+    if (elementMatches) {
+        elementMatches.forEach(function (name) {
+            items[name] = true;
+        });
+    }
 
-    string.split(/,+/).forEach(function (name) {
-        name = name.trim();
-        if (!name) {
-            return;
-        }
-        items[name] = true;
-    });
     return items;
 }
 
@@ -55221,68 +55254,25 @@ function addDeclaredGlobals(program, globalScope, config, envContext) {
 }
 
 /**
- * Add data to reporting configuration to disable reporting for list of rules
- * starting from start location
- * @param  {Object[]} reportingConfig Current reporting configuration
- * @param  {Object} start Position to start
- * @param  {string[]} rulesToDisable List of rules
- * @returns {void}
+ * Creates a collection of disable directives from a comment
+ * @param {("disable"|"enable"|"disable-line"|"disable-next-line")} type The type of directive comment
+ * @param {{line: number, column: number}} loc The 0-based location of the comment token
+ * @param {string} value The value after the directive in the comment
+ * comment specified no specific rules, so it applies to all rules (e.g. `eslint-disable`)
+ * @returns {{
+ *     type: ("disable"|"enable"|"disable-line"|"disable-next-line"),
+ *     line: number,
+ *     column: number,
+ *     ruleId: (string|null)
+ * }[]} Directives from the comment
  */
-function disableReporting(reportingConfig, start, rulesToDisable) {
+function createDisableDirectives(type, loc, value) {
+    var ruleIds = Object.keys(parseListConfig(value));
+    var directiveRules = ruleIds.length ? ruleIds : [null];
 
-    if (rulesToDisable.length) {
-        rulesToDisable.forEach(function (rule) {
-            reportingConfig.push({
-                start: start,
-                end: null,
-                rule: rule
-            });
-        });
-    } else {
-        reportingConfig.push({
-            start: start,
-            end: null,
-            rule: null
-        });
-    }
-}
-
-/**
- * Add data to reporting configuration to enable reporting for list of rules
- * starting from start location
- * @param  {Object[]} reportingConfig Current reporting configuration
- * @param  {Object} start Position to start
- * @param  {string[]} rulesToEnable List of rules
- * @returns {void}
- */
-function enableReporting(reportingConfig, start, rulesToEnable) {
-    var i = void 0;
-
-    if (rulesToEnable.length) {
-        rulesToEnable.forEach(function (rule) {
-            for (i = reportingConfig.length - 1; i >= 0; i--) {
-                if (!reportingConfig[i].end && reportingConfig[i].rule === rule) {
-                    reportingConfig[i].end = start;
-                    break;
-                }
-            }
-        });
-    } else {
-
-        // find all previous disabled locations if they was started as list of rules
-        var prevStart = void 0;
-
-        for (i = reportingConfig.length - 1; i >= 0; i--) {
-            if (prevStart && prevStart !== reportingConfig[i].start) {
-                break;
-            }
-
-            if (!reportingConfig[i].end) {
-                reportingConfig[i].end = start;
-                prevStart = reportingConfig[i].start;
-            }
-        }
-    }
+    return directiveRules.map(function (ruleId) {
+        return { type: type, line: loc.line, column: loc.column + 1, ruleId: ruleId };
+    });
 }
 
 /**
@@ -55293,7 +55283,16 @@ function enableReporting(reportingConfig, start, rulesToEnable) {
  * @param {ASTNode} ast The top node of the AST.
  * @param {Object} config The existing configuration data.
  * @param {Linter} linterContext Linter context object
- * @returns {{config: Object, problems: Problem[]}} Modified config object, along with any problems encountered
+ * @returns {{
+ *      config: Object,
+ *      problems: Problem[],
+ *      disableDirectives: {
+ *          type: ("disable"|"enable"|"disable-line"|"disable-next-line"),
+ *          line: number,
+ *          column: number,
+ *          ruleId: (string|null)
+ *      }[]
+ * }} Modified config object, along with any problems encountered
  * while parsing config comments
  */
 function modifyConfigsFromComments(filename, ast, config, linterContext) {
@@ -55306,9 +55305,11 @@ function modifyConfigsFromComments(filename, ast, config, linterContext) {
     };
     var commentRules = {};
     var problems = [];
-    var reportingConfig = linterContext.reportingConfig;
+    var disableDirectives = [];
 
-    ast.comments.forEach(function (comment) {
+    ast.comments.filter(function (token) {
+        return token.type !== "Shebang";
+    }).forEach(function (comment) {
 
         var value = comment.value.trim();
         var match = /^(eslint(-\w+){0,3}|exported|globals?)(\s|$)/.exec(value);
@@ -55332,11 +55333,11 @@ function modifyConfigsFromComments(filename, ast, config, linterContext) {
                         break;
 
                     case "eslint-disable":
-                        disableReporting(reportingConfig, comment.loc.start, Object.keys(parseListConfig(value)));
+                        [].push.apply(disableDirectives, createDisableDirectives("disable", comment.loc.start, value));
                         break;
 
                     case "eslint-enable":
-                        enableReporting(reportingConfig, comment.loc.start, Object.keys(parseListConfig(value)));
+                        [].push.apply(disableDirectives, createDisableDirectives("enable", comment.loc.start, value));
                         break;
 
                     case "eslint":
@@ -55362,11 +55363,9 @@ function modifyConfigsFromComments(filename, ast, config, linterContext) {
             } else {
                 // comment.type === "Line"
                 if (match[1] === "eslint-disable-line") {
-                    disableReporting(reportingConfig, { line: comment.loc.start.line, column: 0 }, Object.keys(parseListConfig(value)));
-                    enableReporting(reportingConfig, comment.loc.end, Object.keys(parseListConfig(value)));
+                    [].push.apply(disableDirectives, createDisableDirectives("disable-line", comment.loc.start, value));
                 } else if (match[1] === "eslint-disable-next-line") {
-                    disableReporting(reportingConfig, comment.loc.start, Object.keys(parseListConfig(value)));
-                    enableReporting(reportingConfig, { line: comment.loc.start.line + 2 }, Object.keys(parseListConfig(value)));
+                    [].push.apply(disableDirectives, createDisableDirectives("disable-next-line", comment.loc.start, value));
                 }
             }
         }
@@ -55384,29 +55383,9 @@ function modifyConfigsFromComments(filename, ast, config, linterContext) {
 
     return {
         config: ConfigOps.merge(config, commentConfig),
-        problems: problems
+        problems: problems,
+        disableDirectives: disableDirectives
     };
-}
-
-/**
- * Check if message of rule with ruleId should be ignored in location
- * @param  {Object[]} reportingConfig  Collection of ignore records
- * @param  {string} ruleId   Id of rule
- * @param  {Object} location 1-indexed location of message
- * @returns {boolean}          True if message should be ignored, false otherwise
- */
-function isDisabledByReportingConfig(reportingConfig, ruleId, location) {
-
-    for (var i = 0, c = reportingConfig.length; i < c; i++) {
-
-        var ignore = reportingConfig[i];
-
-        if ((!ignore.rule || ignore.rule === ruleId) && (location.line > ignore.start.line || location.line === ignore.start.line && location.column > ignore.start.column) && (!ignore.end || location.line < ignore.end.line || location.line === ignore.end.line && location.column - 1 <= ignore.end.column)) {
-            return true;
-        }
-    }
-
-    return false;
 }
 
 /**
@@ -55489,52 +55468,6 @@ function prepareConfig(config, envContext) {
     return preparedConfig;
 }
 
-/**
- * Provide a stub rule with a given message
- * @param  {string} message The message to be displayed for the rule
- * @returns {Function}      Stub rule function
- */
-function createStubRule(message) {
-
-    /**
-     * Creates a fake rule object
-     * @param {Object} context context object for each rule
-     * @returns {Object} collection of node to listen on
-     */
-    function createRuleModule(context) {
-        return {
-            Program: function Program() {
-                context.report({
-                    loc: { line: 1, column: 0 },
-                    message: message
-                });
-            }
-        };
-    }
-
-    if (message) {
-        return createRuleModule;
-    }
-
-    /* istanbul ignore next */
-    throw new Error("No message passed to stub rule");
-}
-
-/**
- * Provide a rule replacement message
- * @param  {string} ruleId Name of the rule
- * @returns {string}       Message detailing rule replacement
- */
-function getRuleReplacementMessage(ruleId) {
-    if (ruleId in replacements.rules) {
-        var newRules = replacements.rules[ruleId];
-
-        return "Rule '" + ruleId + "' was removed and replaced by: " + newRules.join(", ");
-    }
-
-    return null;
-}
-
 var eslintEnvPattern = /\/\*\s*eslint-env\s(.+?)\*\//g;
 
 /**
@@ -55572,16 +55505,6 @@ function stripUnicodeBOM(text) {
         return text.slice(1);
     }
     return text;
-}
-
-/**
- * Get the severity level of a rule (0 - none, 1 - warning, 2 - error)
- * Returns 0 if the rule config is not valid (an Array or a number)
- * @param {Array|number} ruleConfig rule configuration
- * @returns {number} 0, 1, or 2, indicating rule severity
- */
-function getRuleSeverity(ruleConfig) {
-    return Array.isArray(ruleConfig) ? ruleConfig[0] : ruleConfig;
 }
 
 /**
@@ -55681,6 +55604,86 @@ function parse(text, providedParserOptions, parserName, filePath) {
     }
 }
 
+/**
+ * Gets the scope for the current node
+ * @param {ScopeManager} scopeManager The scope manager for this AST
+ * @param {ASTNode} currentNode The node to get the scope of
+ * @param {number} ecmaVersion The `ecmaVersion` setting that this code was parsed with
+ * @returns {eslint-scope.Scope} The scope information for this node
+ */
+function _getScope(scopeManager, currentNode, ecmaVersion) {
+    var initialNode = void 0;
+
+    // if current node introduces a scope, add it to the list
+    if (["FunctionDeclaration", "FunctionExpression", "ArrowFunctionExpression"].indexOf(currentNode.type) >= 0 || ecmaVersion >= 6 && ["BlockStatement", "SwitchStatement", "CatchClause"].indexOf(currentNode.type) >= 0) {
+        initialNode = currentNode;
+    } else {
+        initialNode = currentNode.parent;
+    }
+
+    // Ascend the current node's parents
+    for (var node = initialNode; node; node = node.parent) {
+
+        // Get the innermost scope
+        var scope = scopeManager.acquire(node, true);
+
+        if (scope) {
+            if (scope.type === "function-expression-name") {
+                return scope.childScopes[0];
+            }
+            return scope;
+        }
+    }
+
+    return scopeManager.scopes[0];
+}
+
+/**
+ * Marks a variable as used in the current scope
+ * @param {ScopeManager} scopeManager The scope manager for this AST. The scope may be mutated by this function.
+ * @param {ASTNode} currentNode The node currently being traversed
+ * @param {Object} parserOptions The options used to parse this text
+ * @param {string} name The name of the variable that should be marked as used.
+ * @returns {boolean} True if the variable was found and marked as used, false if not.
+ */
+function _markVariableAsUsed(scopeManager, currentNode, parserOptions, name) {
+    var hasGlobalReturn = parserOptions.ecmaFeatures && parserOptions.ecmaFeatures.globalReturn;
+    var specialScope = hasGlobalReturn || parserOptions.sourceType === "module";
+    var currentScope = _getScope(scopeManager, currentNode, parserOptions.ecmaVersion);
+
+    // Special Node.js scope means we need to start one level deeper
+    var initialScope = currentScope.type === "global" && specialScope ? currentScope.childScopes[0] : currentScope;
+
+    for (var scope = initialScope; scope; scope = scope.upper) {
+        var variable = scope.variables.find(function (scopeVar) {
+            return scopeVar.name === name;
+        });
+
+        if (variable) {
+            variable.eslintUsed = true;
+            return true;
+        }
+    }
+
+    return false;
+}
+
+/**
+ * Gets all the ancestors of a given node
+ * @param {ASTNode} node The node
+ * @returns {ASTNode[]} All the ancestor nodes in the AST, not including the provided node, starting
+ * from the root node and going inwards to the parent node.
+ */
+function _getAncestors(node) {
+    if (node.parent) {
+        var parentAncestors = _getAncestors(node.parent);
+
+        parentAncestors.push(node.parent);
+        return parentAncestors;
+    }
+    return [];
+}
+
 // methods that exist on SourceCode object
 var DEPRECATED_SOURCECODE_PASSTHROUGHS = {
     getSource: "getText",
@@ -55721,17 +55724,10 @@ var BASE_TRAVERSAL_CONTEXT = Object.freeze(Object.keys(DEPRECATED_SOURCECODE_PAS
  * Object that is responsible for verifying JavaScript text
  * @name eslint
  */
-
-var Linter = function () {
+module.exports = function () {
     function Linter() {
         _classCallCheck(this, Linter);
 
-        this.messages = [];
-        this.currentConfig = null;
-        this.scopeManager = null;
-        this.currentFilename = null;
-        this.traverser = null;
-        this.reportingConfig = [];
         this.sourceCode = null;
         this.version = pkg.version;
 
@@ -55740,55 +55736,48 @@ var Linter = function () {
     }
 
     /**
-     * Resets the internal state of the object.
-     * @returns {void}
+     * Configuration object for the `verify` API. A JS representation of the eslintrc files.
+     * @typedef {Object} ESLintConfig
+     * @property {Object} rules The rule configuration to verify against.
+     * @property {string} [parser] Parser to use when generatig the AST.
+     * @property {Object} [parserOptions] Options for the parsed used.
+     * @property {Object} [settings] Global settings passed to each rule.
+     * @property {Object} [env] The environment to verify in.
+     * @property {Object} [globals] Available globals to the code.
+     */
+
+    /**
+     * Same as linter.verify, except without support for processors.
+     * @param {string|SourceCode} textOrSourceCode The text to parse or a SourceCode object.
+     * @param {ESLintConfig} config An ESLintConfig instance to configure everything.
+     * @param {(string|Object)} [filenameOrOptions] The optional filename of the file being checked.
+     *      If this is not set, the filename will default to '<input>' in the rule context. If
+     *      an object, then it has "filename", "saveState", and "allowInlineConfig" properties.
+     * @param {boolean} [filenameOrOptions.allowInlineConfig] Allow/disallow inline comments' ability to change config once it is set. Defaults to true if not supplied.
+     *      Useful if you want to validate JS without comments overriding rules.
+     * @returns {Object[]} The results as an array of messages or null if no messages.
      */
 
 
     _createClass(Linter, [{
-        key: "reset",
-        value: function reset() {
-            this.messages = [];
-            this.currentConfig = null;
-            this.scopeManager = null;
-            this.traverser = null;
-            this.reportingConfig = [];
-            this.sourceCode = null;
-        }
-
-        /**
-         * Configuration object for the `verify` API. A JS representation of the eslintrc files.
-         * @typedef {Object} ESLintConfig
-         * @property {Object} rules The rule configuration to verify against.
-         * @property {string} [parser] Parser to use when generatig the AST.
-         * @property {Object} [parserOptions] Options for the parsed used.
-         * @property {Object} [settings] Global settings passed to each rule.
-         * @property {Object} [env] The environment to verify in.
-         * @property {Object} [globals] Available globals to the code.
-         */
-
-        /**
-         * Verifies the text against the rules specified by the second argument.
-         * @param {string|SourceCode} textOrSourceCode The text to parse or a SourceCode object.
-         * @param {ESLintConfig} config An ESLintConfig instance to configure everything.
-         * @param {(string|Object)} [filenameOrOptions] The optional filename of the file being checked.
-         *      If this is not set, the filename will default to '<input>' in the rule context. If
-         *      an object, then it has "filename", "saveState", and "allowInlineConfig" properties.
-         * @param {boolean} [saveState] Indicates if the state from the last run should be saved.
-         *      Mostly useful for testing purposes.
-         * @param {boolean} [filenameOrOptions.allowInlineConfig] Allow/disallow inline comments' ability to change config once it is set. Defaults to true if not supplied.
-         *      Useful if you want to validate JS without comments overriding rules.
-         * @returns {Object[]} The results as an array of messages or null if no messages.
-         */
-
-    }, {
-        key: "verify",
-        value: function verify(textOrSourceCode, config, filenameOrOptions, saveState) {
+        key: "_verifyWithoutProcessors",
+        value: function _verifyWithoutProcessors(textOrSourceCode, config, filenameOrOptions) {
             var _this = this;
 
             var text = void 0,
                 parserServices = void 0,
-                allowInlineConfig = void 0;
+                allowInlineConfig = void 0,
+                providedFilename = void 0;
+
+            // evaluate arguments
+            if ((typeof filenameOrOptions === "undefined" ? "undefined" : _typeof(filenameOrOptions)) === "object") {
+                providedFilename = filenameOrOptions.filename;
+                allowInlineConfig = filenameOrOptions.allowInlineConfig;
+            } else {
+                providedFilename = filenameOrOptions;
+            }
+
+            var filename = typeof providedFilename === "string" ? providedFilename : "<input>";
 
             if (typeof textOrSourceCode === "string") {
                 this.sourceCode = null;
@@ -55796,19 +55785,6 @@ var Linter = function () {
             } else {
                 this.sourceCode = textOrSourceCode;
                 text = this.sourceCode.text;
-            }
-
-            // evaluate arguments
-            if ((typeof filenameOrOptions === "undefined" ? "undefined" : _typeof(filenameOrOptions)) === "object") {
-                this.currentFilename = filenameOrOptions.filename;
-                allowInlineConfig = filenameOrOptions.allowInlineConfig;
-                saveState = filenameOrOptions.saveState;
-            } else {
-                this.currentFilename = filenameOrOptions;
-            }
-
-            if (!saveState) {
-                this.reset();
             }
 
             // search and apply "eslint-env *".
@@ -55839,7 +55815,7 @@ var Linter = function () {
 
                 var parseResult = parse(stripUnicodeBOM(text).replace(astUtils.SHEBANG_MATCHER, function (match, captured) {
                     return "//" + captured;
-                }), config.parserOptions, config.parser, this.currentFilename);
+                }), config.parserOptions, config.parser, filename);
 
                 if (!parseResult.success) {
                     return [parseResult.error];
@@ -55849,20 +55825,47 @@ var Linter = function () {
                 this.sourceCode = new SourceCode(text, parseResult.ast);
             }
 
+            var problems = [];
+            var sourceCode = this.sourceCode;
+            var disableDirectives = void 0;
+
             // parse global comments and modify config
             if (allowInlineConfig !== false) {
-                var modifyConfigResult = modifyConfigsFromComments(this.currentFilename, this.sourceCode.ast, config, this);
+                var modifyConfigResult = modifyConfigsFromComments(filename, sourceCode.ast, config, this);
 
                 config = modifyConfigResult.config;
                 modifyConfigResult.problems.forEach(function (problem) {
-                    return _this.messages.push(problem);
+                    return problems.push(problem);
                 });
+                disableDirectives = modifyConfigResult.disableDirectives;
+            } else {
+                disableDirectives = [];
             }
 
-            // ensure that severities are normalized in the config
-            ConfigOps.normalize(config);
-
             var emitter = new EventEmitter().setMaxListeners(Infinity);
+            var ecmaFeatures = config.parserOptions.ecmaFeatures || {};
+            var ecmaVersion = config.parserOptions.ecmaVersion || 5;
+            var scopeManager = eslintScope.analyze(sourceCode.ast, {
+                ignoreEval: true,
+                nodejsScope: ecmaFeatures.globalReturn,
+                impliedStrict: ecmaFeatures.impliedStrict,
+                ecmaVersion: ecmaVersion,
+                sourceType: config.parserOptions.sourceType || "script",
+                fallback: Traverser.getKeys
+            });
+
+            var currentNode = sourceCode.ast;
+            var nodeQueue = [];
+
+            new Traverser().traverse(sourceCode.ast, {
+                enter: function enter(node, parent) {
+                    node.parent = parent;
+                    nodeQueue.push({ isEntering: true, node: node });
+                },
+                leave: function leave(node) {
+                    nodeQueue.push({ isEntering: false, node: node });
+                }
+            });
 
             /*
              * Create a frozen object with the ruleContext properties and methods that are shared by all rules.
@@ -55870,14 +55873,22 @@ var Linter = function () {
              * properties once for each rule.
              */
             var sharedTraversalContext = Object.freeze(Object.assign(Object.create(BASE_TRAVERSAL_CONTEXT), {
-                getAncestors: this.getAncestors.bind(this),
-                getDeclaredVariables: this.getDeclaredVariables.bind(this),
-                getFilename: this.getFilename.bind(this),
-                getScope: this.getScope.bind(this),
-                getSourceCode: function getSourceCode() {
-                    return _this.sourceCode;
+                getAncestors: function getAncestors() {
+                    return _getAncestors(currentNode);
                 },
-                markVariableAsUsed: this.markVariableAsUsed.bind(this),
+                getDeclaredVariables: scopeManager.getDeclaredVariables.bind(scopeManager),
+                getFilename: function getFilename() {
+                    return filename;
+                },
+                getScope: function getScope() {
+                    return _getScope(scopeManager, currentNode, config.parserOptions.ecmaVersion);
+                },
+                getSourceCode: function getSourceCode() {
+                    return sourceCode;
+                },
+                markVariableAsUsed: function markVariableAsUsed(name) {
+                    return _markVariableAsUsed(scopeManager, currentNode, config.parserOptions, name);
+                },
                 parserOptions: config.parserOptions,
                 parserPath: config.parser,
                 parserServices: parserServices,
@@ -55899,33 +55910,39 @@ var Linter = function () {
             }));
 
             // enable appropriate rules
-            Object.keys(config.rules).filter(function (ruleId) {
-                return getRuleSeverity(config.rules[ruleId]) > 0;
-            }).forEach(function (ruleId) {
-                var ruleCreator = _this.rules.get(ruleId);
+            Object.keys(config.rules).forEach(function (ruleId) {
+                var severity = ConfigOps.getRuleSeverity(config.rules[ruleId]);
 
-                if (!ruleCreator) {
-                    var replacementMsg = getRuleReplacementMessage(ruleId);
-
-                    if (replacementMsg) {
-                        ruleCreator = createStubRule(replacementMsg);
-                    } else {
-                        ruleCreator = createStubRule("Definition for rule '" + ruleId + "' was not found");
-                    }
-                    _this.rules.define(ruleId, ruleCreator);
+                if (severity === 0) {
+                    return;
                 }
 
-                var severity = getRuleSeverity(config.rules[ruleId]);
+                var rule = _this.rules.get(ruleId);
+                var reportTranslator = null;
                 var ruleContext = Object.freeze(Object.assign(Object.create(sharedTraversalContext), {
                     id: ruleId,
                     options: getRuleOptions(config.rules[ruleId]),
-                    report: lodash.flow([createReportTranslator({ ruleId: ruleId, severity: severity, sourceCode: _this.sourceCode }), function (problem) {
-                        if (problem.fix && ruleCreator.meta && !ruleCreator.meta.fixable) {
+                    report: function report() {
+
+                        /*
+                         * Create a report translator lazily.
+                         * In a vast majority of cases, any given rule reports zero errors on a given
+                         * piece of code. Creating a translator lazily avoids the performance cost of
+                         * creating a new translator function for each rule that usually doesn't get
+                         * called.
+                         *
+                         * Using lazy report translators improves end-to-end performance by about 3%
+                         * with Node 8.4.0.
+                         */
+                        if (reportTranslator === null) {
+                            reportTranslator = createReportTranslator({ ruleId: ruleId, severity: severity, sourceCode: sourceCode });
+                        }
+                        var problem = reportTranslator.apply(null, arguments);
+
+                        if (problem.fix && rule.meta && !rule.meta.fixable) {
                             throw new Error("Fixable rules should export a `meta.fixable` property.");
                         }
-                        if (!isDisabledByReportingConfig(_this.reportingConfig, ruleId, problem)) {
-                            _this.messages.push(problem);
-                        }
+                        problems.push(problem);
 
                         /*
                          * This is used to avoid breaking rules that used monkeypatch Linter, and relied on
@@ -55939,16 +55956,16 @@ var Linter = function () {
                          * https://github.com/eslint/eslint/issues/9193
                          */
                         sharedTraversalContext._linter.report( // eslint-disable-line no-underscore-dangle
-                        ruleId, severity, { loc: { start: { line: problem.line, column: problem.column - 1 } } }, problem.message);
-                    }])
+                        problem.ruleId, problem.severity, { loc: { start: { line: problem.line, column: problem.column - 1 } } }, problem.message);
+                    }
                 }));
 
                 try {
-                    var rule = ruleCreator.create ? ruleCreator.create(ruleContext) : ruleCreator(ruleContext);
+                    var ruleListeners = rule.create(ruleContext);
 
                     // add all the selectors from the rule as listeners
-                    Object.keys(rule).forEach(function (selector) {
-                        emitter.on(selector, timing.enabled ? timing.time(ruleId, rule[selector]) : rule[selector]);
+                    Object.keys(ruleListeners).forEach(function (selector) {
+                        emitter.on(selector, timing.enabled ? timing.time(ruleId, ruleListeners[selector]) : ruleListeners[selector]);
                     });
                 } catch (ex) {
                     ex.message = "Error while loading rule '" + ruleId + "': " + ex.message;
@@ -55956,55 +55973,61 @@ var Linter = function () {
                 }
             });
 
-            // save config so rules can access as necessary
-            this.currentConfig = config;
-            this.traverser = new Traverser();
-
-            var ecmaFeatures = this.currentConfig.parserOptions.ecmaFeatures || {};
-            var ecmaVersion = this.currentConfig.parserOptions.ecmaVersion || 5;
-
-            // gather scope data that may be needed by the rules
-            this.scopeManager = eslintScope.analyze(this.sourceCode.ast, {
-                ignoreEval: true,
-                nodejsScope: ecmaFeatures.globalReturn,
-                impliedStrict: ecmaFeatures.impliedStrict,
-                ecmaVersion: ecmaVersion,
-                sourceType: this.currentConfig.parserOptions.sourceType || "script",
-                fallback: Traverser.getKeys
-            });
-
             // augment global scope with declared global variables
-            addDeclaredGlobals(this.sourceCode.ast, this.scopeManager.scopes[0], this.currentConfig, this.environments);
+            addDeclaredGlobals(sourceCode.ast, scopeManager.scopes[0], config, this.environments);
 
             var eventGenerator = new CodePathAnalyzer(new NodeEventGenerator(emitter));
 
-            /*
-             * Each node has a type property. Whenever a particular type of
-             * node is found, an event is fired. This allows any listeners to
-             * automatically be informed that this type of node has been found
-             * and react accordingly.
-             */
-            this.traverser.traverse(this.sourceCode.ast, {
-                enter: function enter(node, parent) {
-                    node.parent = parent;
-                    eventGenerator.enterNode(node);
-                },
-                leave: function leave(node) {
-                    eventGenerator.leaveNode(node);
+            nodeQueue.forEach(function (traversalInfo) {
+                currentNode = traversalInfo.node;
+
+                if (traversalInfo.isEntering) {
+                    eventGenerator.enterNode(currentNode);
+                } else {
+                    eventGenerator.leaveNode(currentNode);
                 }
             });
 
-            // sort by line and column
-            this.messages.sort(function (a, b) {
-                var lineDiff = a.line - b.line;
-
-                if (lineDiff === 0) {
-                    return a.column - b.column;
-                }
-                return lineDiff;
+            return applyDisableDirectives({
+                directives: disableDirectives,
+                problems: problems.sort(function (problemA, problemB) {
+                    return problemA.line - problemB.line || problemA.column - problemB.column;
+                })
             });
+        }
 
-            return this.messages;
+        /**
+         * Verifies the text against the rules specified by the second argument.
+         * @param {string|SourceCode} textOrSourceCode The text to parse or a SourceCode object.
+         * @param {ESLintConfig} config An ESLintConfig instance to configure everything.
+         * @param {(string|Object)} [filenameOrOptions] The optional filename of the file being checked.
+         *      If this is not set, the filename will default to '<input>' in the rule context. If
+         *      an object, then it has "filename", "saveState", and "allowInlineConfig" properties.
+         * @param {boolean} [saveState] Indicates if the state from the last run should be saved.
+         *      Mostly useful for testing purposes.
+         * @param {boolean} [filenameOrOptions.allowInlineConfig] Allow/disallow inline comments' ability to change config once it is set. Defaults to true if not supplied.
+         *      Useful if you want to validate JS without comments overriding rules.
+         * @param {function(string): string[]} [filenameOrOptions.preprocess] preprocessor for source text. If provided,
+         *      this should accept a string of source text, and return an array of code blocks to lint.
+         * @param {function(Array<Object[]>): Object[]} [filenameOrOptions.postprocess] postprocessor for report messages. If provided,
+         *      this should accept an array of the message lists for each code block returned from the preprocessor,
+         *      apply a mapping to the messages as appropriate, and return a one-dimensional array of messages
+         * @returns {Object[]} The results as an array of messages or null if no messages.
+         */
+
+    }, {
+        key: "verify",
+        value: function verify(textOrSourceCode, config, filenameOrOptions) {
+            var _this2 = this;
+
+            var preprocess = filenameOrOptions && filenameOrOptions.preprocess || function (rawText) {
+                return [rawText];
+            };
+            var postprocess = filenameOrOptions && filenameOrOptions.postprocess || lodash.flatten;
+
+            return postprocess(preprocess(textOrSourceCode).map(function (textBlock) {
+                return _this2._verifyWithoutProcessors(textBlock, config, filenameOrOptions);
+            }));
         }
 
         /**
@@ -56016,111 +56039,6 @@ var Linter = function () {
         key: "getSourceCode",
         value: function getSourceCode() {
             return this.sourceCode;
-        }
-
-        /**
-         * Gets nodes that are ancestors of current node.
-         * @returns {ASTNode[]} Array of objects representing ancestors.
-         */
-
-    }, {
-        key: "getAncestors",
-        value: function getAncestors() {
-            return this.traverser.parents();
-        }
-
-        /**
-         * Gets the scope for the current node.
-         * @returns {Object} An object representing the current node's scope.
-         */
-
-    }, {
-        key: "getScope",
-        value: function getScope() {
-            var parents = this.traverser.parents();
-
-            // Don't do this for Program nodes - they have no parents
-            if (parents.length) {
-
-                // if current node introduces a scope, add it to the list
-                var current = this.traverser.current();
-
-                if (this.currentConfig.parserOptions.ecmaVersion >= 6) {
-                    if (["BlockStatement", "SwitchStatement", "CatchClause", "FunctionDeclaration", "FunctionExpression", "ArrowFunctionExpression"].indexOf(current.type) >= 0) {
-                        parents.push(current);
-                    }
-                } else {
-                    if (["FunctionDeclaration", "FunctionExpression", "ArrowFunctionExpression"].indexOf(current.type) >= 0) {
-                        parents.push(current);
-                    }
-                }
-
-                // Ascend the current node's parents
-                for (var i = parents.length - 1; i >= 0; --i) {
-
-                    // Get the innermost scope
-                    var scope = this.scopeManager.acquire(parents[i], true);
-
-                    if (scope) {
-                        if (scope.type === "function-expression-name") {
-                            return scope.childScopes[0];
-                        }
-                        return scope;
-                    }
-                }
-            }
-
-            return this.scopeManager.scopes[0];
-        }
-
-        /**
-         * Record that a particular variable has been used in code
-         * @param {string} name The name of the variable to mark as used
-         * @returns {boolean} True if the variable was found and marked as used,
-         *      false if not.
-         */
-
-    }, {
-        key: "markVariableAsUsed",
-        value: function markVariableAsUsed(name) {
-            var hasGlobalReturn = this.currentConfig.parserOptions.ecmaFeatures && this.currentConfig.parserOptions.ecmaFeatures.globalReturn,
-                specialScope = hasGlobalReturn || this.currentConfig.parserOptions.sourceType === "module";
-            var scope = this.getScope(),
-                i = void 0,
-                len = void 0;
-
-            // Special Node.js scope means we need to start one level deeper
-            if (scope.type === "global" && specialScope) {
-                scope = scope.childScopes[0];
-            }
-
-            do {
-                var variables = scope.variables;
-
-                for (i = 0, len = variables.length; i < len; i++) {
-                    if (variables[i].name === name) {
-                        variables[i].eslintUsed = true;
-                        return true;
-                    }
-                }
-            } while (scope = scope.upper);
-
-            return false;
-        }
-
-        /**
-         * Gets the filename for the currently parsed source.
-         * @returns {string} The filename associated with the source being parsed.
-         *     Defaults to "<input>" if no filename info is present.
-         */
-
-    }, {
-        key: "getFilename",
-        value: function getFilename() {
-            if (typeof this.currentFilename === "string") {
-                return this.currentFilename;
-            }
-            return "<input>";
         }
 
         /**
@@ -56145,23 +56063,11 @@ var Linter = function () {
     }, {
         key: "defineRules",
         value: function defineRules(rulesToDefine) {
-            var _this2 = this;
+            var _this3 = this;
 
             Object.getOwnPropertyNames(rulesToDefine).forEach(function (ruleId) {
-                _this2.defineRule(ruleId, rulesToDefine[ruleId]);
+                _this3.defineRule(ruleId, rulesToDefine[ruleId]);
             });
-        }
-
-        /**
-         * Gets the default eslint configuration.
-         * @returns {Object} Object mapping rule IDs to their default configurations
-         */
-
-    }, {
-        key: "defaults",
-        value: function defaults() {
-            // eslint-disable-line class-methods-use-this
-            return defaultConfig;
         }
 
         /**
@@ -56176,32 +56082,6 @@ var Linter = function () {
         }
 
         /**
-         * Gets variables that are declared by a specified node.
-         *
-         * The variables are its `defs[].node` or `defs[].parent` is same as the specified node.
-         * Specifically, below:
-         *
-         * - `VariableDeclaration` - variables of its all declarators.
-         * - `VariableDeclarator` - variables.
-         * - `FunctionDeclaration`/`FunctionExpression` - its function name and parameters.
-         * - `ArrowFunctionExpression` - its parameters.
-         * - `ClassDeclaration`/`ClassExpression` - its class name.
-         * - `CatchClause` - variables of its exception.
-         * - `ImportDeclaration` - variables of  its all specifiers.
-         * - `ImportSpecifier`/`ImportDefaultSpecifier`/`ImportNamespaceSpecifier` - a variable.
-         * - others - always an empty array.
-         *
-         * @param {ASTNode} node A node to get.
-         * @returns {eslint-scope.Variable[]} Variables that are declared by the node.
-         */
-
-    }, {
-        key: "getDeclaredVariables",
-        value: function getDeclaredVariables(node) {
-            return this.scopeManager && this.scopeManager.getDeclaredVariables(node) || [];
-        }
-
-        /**
          * Performs multiple autofix passes over the text until as many fixes as possible
          * have been applied.
          * @param {string} text The source text to apply fixes to.
@@ -56211,6 +56091,11 @@ var Linter = function () {
          * @param {boolean} options.allowInlineConfig Flag indicating if inline comments
          *      should be allowed.
          * @param {boolean|Function} options.fix Determines whether fixes should be applied
+         * @param {Function} options.preprocess preprocessor for source text. If provided, this should
+         *      accept a string of source text, and return an array of code blocks to lint.
+         * @param {Function} options.postprocess postprocessor for report messages. If provided,
+         *      this should accept an array of the message lists for each code block returned from the preprocessor,
+         *      apply a mapping to the messages as appropriate, and return a one-dimensional array of messages
          * @returns {Object} The result of the fix operation as returned from the
          *      SourceCodeFixer.
          */
@@ -56275,27 +56160,7 @@ var Linter = function () {
     return Linter;
 }();
 
-Object.keys(DEPRECATED_SOURCECODE_PASSTHROUGHS).forEach(function (methodName) {
-    var exMethodName = DEPRECATED_SOURCECODE_PASSTHROUGHS[methodName];
-
-    // Applies the SourceCode methods to the Linter prototype
-    Object.defineProperty(Linter.prototype, methodName, {
-        value: function value() {
-            if (this.sourceCode) {
-                return this.sourceCode[exMethodName].apply(this.sourceCode, arguments);
-            }
-            return null;
-        },
-
-        configurable: true,
-        writable: true,
-        enumerable: false
-    });
-});
-
-module.exports = Linter;
-
-},{"../conf/blank-script.json":1,"../conf/default-config-options.js":3,"../conf/replacements.json":5,"../package.json":117,"./ast-utils":118,"./code-path-analysis/code-path-analyzer":119,"./config/config-ops":126,"./config/config-validator":127,"./config/environments":128,"./report-translator":131,"./rules":132,"./timing":387,"./util/node-event-generator":404,"./util/source-code":408,"./util/source-code-fixer":407,"./util/traverser":409,"debug":52,"eslint-scope":59,"events":77,"levn":90,"lodash":92}],130:[function(require,module,exports){
+},{"../conf/blank-script.json":1,"../conf/default-config-options.js":3,"../package.json":117,"./ast-utils":118,"./code-path-analysis/code-path-analyzer":119,"./config/config-ops":126,"./config/config-validator":127,"./config/environments":128,"./report-translator":131,"./rules":132,"./timing":387,"./util/apply-disable-directives":402,"./util/node-event-generator":405,"./util/source-code":409,"./util/source-code-fixer":408,"./util/traverser":410,"debug":52,"eslint-scope":59,"events":77,"levn":90,"lodash":92}],130:[function(require,module,exports){
 "use strict";
 
 module.exports = function () {
@@ -56858,7 +56723,7 @@ module.exports = function createReportTranslator(metadata) {
     };
 };
 
-},{"./util/rule-fixer":406,"assert":47}],132:[function(require,module,exports){
+},{"./util/rule-fixer":407,"assert":47}],132:[function(require,module,exports){
 /**
  * @fileoverview Defines a storage for rules.
  * @author Nicholas C. Zakas
@@ -56874,7 +56739,48 @@ var _createClass = function () { function defineProperties(target, props) { for 
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
+var lodash = require("lodash");
 var loadRules = require("./load-rules");
+var ruleReplacements = require("../conf/replacements").rules;
+
+//------------------------------------------------------------------------------
+// Helpers
+//------------------------------------------------------------------------------
+
+/**
+ * Creates a stub rule that gets used when a rule with a given ID is not found.
+ * @param {string} ruleId The ID of the missing rule
+ * @returns {{create: function(RuleContext): Object}} A rule that reports an error at the first location
+ * in the program. The report has the message `Definition for rule '${ruleId}' was not found` if the rule is unknown,
+ * or `Rule '${ruleId}' was removed and replaced by: ${replacements.join(", ")}` if the rule is known to have been
+ * replaced.
+ */
+var createMissingRule = lodash.memoize(function (ruleId) {
+    var message = Object.prototype.hasOwnProperty.call(ruleReplacements, ruleId) ? "Rule '" + ruleId + "' was removed and replaced by: " + ruleReplacements[ruleId].join(", ") : "Definition for rule '" + ruleId + "' was not found";
+
+    return {
+        create: function create(context) {
+            return {
+                Program: function Program() {
+                    context.report({
+                        loc: { line: 1, column: 0 },
+                        message: message
+                    });
+                }
+            };
+        }
+    };
+});
+
+/**
+ * Normalizes a rule module to the new-style API
+ * @param {(Function|{create: Function})} rule A rule object, which can either be a function
+ * ("old-style") or an object with a `create` method ("new-style")
+ * @returns {{create: Function}} A new-style rule.
+ */
+function normalizeRule(rule) {
+    return typeof rule === "function" ? Object.assign({ create: rule }, rule) : rule;
+}
 
 //------------------------------------------------------------------------------
 // Public Interface
@@ -56900,7 +56806,7 @@ var Rules = function () {
     _createClass(Rules, [{
         key: "define",
         value: function define(ruleId, ruleModule) {
-            this._rules[ruleId] = ruleModule;
+            this._rules[ruleId] = normalizeRule(ruleModule);
         }
 
         /**
@@ -56947,14 +56853,18 @@ var Rules = function () {
         /**
          * Access rule handler by id (file name).
          * @param {string} ruleId Rule id (file name).
-         * @returns {Function} Rule handler.
+         * @returns {{create: Function, schema: JsonSchema[]}}
+         * A rule. This is normalized to always have the new-style shape with a `create` method.
          */
 
     }, {
         key: "get",
         value: function get(ruleId) {
+            if (!Object.prototype.hasOwnProperty.call(this._rules, ruleId)) {
+                return createMissingRule(ruleId);
+            }
             if (typeof this._rules[ruleId] === "string") {
-                return require(this._rules[ruleId]);
+                return normalizeRule(require(this._rules[ruleId]));
             }
             return this._rules[ruleId];
         }
@@ -56985,7 +56895,7 @@ var Rules = function () {
 
 module.exports = Rules;
 
-},{"./load-rules":130}],133:[function(require,module,exports){
+},{"../conf/replacements":5,"./load-rules":130,"lodash":92}],133:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag wrapping non-iife in parens
  * @author Gyandeep Singh
@@ -59498,7 +59408,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":118,"../util/patterns/letters":405}],147:[function(require,module,exports){
+},{"../ast-utils":118,"../util/patterns/letters":406}],147:[function(require,module,exports){
 /**
  * @fileoverview Rule to enforce that all class methods use 'this'.
  * @author Patrick Williams
@@ -62117,7 +62027,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":118,"../util/keywords":403}],160:[function(require,module,exports){
+},{"../ast-utils":118,"../util/keywords":404}],160:[function(require,module,exports){
 /**
  * @fileoverview Require or disallow newline at the end of files
  * @author Nodeca Team <https://github.com/nodeca>
@@ -65116,7 +65026,7 @@ module.exports = {
 
                 var checkNodes = [node.property];
 
-                var dot = context.getTokenBefore(node.property);
+                var dot = sourceCode.getTokenBefore(node.property);
 
                 if (dot.type === "Punctuator" && dot.value === ".") {
                     checkNodes.push(dot);
@@ -66100,12 +66010,12 @@ module.exports = {
         }
 
         /**
-         * Check whether the given token is the first token of a statement.
+         * Check whether the given token is on the first line of a statement.
          * @param {Token} token The token to check.
          * @param {ASTNode} leafNode The expression node that the token belongs directly.
-         * @returns {boolean} `true` if the token is the first token of a statement.
+         * @returns {boolean} `true` if the token is on the first line of a statement.
          */
-        function isFirstTokenOfStatement(token, leafNode) {
+        function isOnFirstLineOfStatement(token, leafNode) {
             var node = leafNode;
 
             while (node.parent && !node.parent.type.endsWith("Statement") && !node.parent.type.endsWith("Declaration")) {
@@ -66113,7 +66023,7 @@ module.exports = {
             }
             node = node.parent;
 
-            return !node || node.range[0] === token.range[0];
+            return !node || node.loc.start.line === token.loc.start.line;
         }
 
         var baseOffsetListeners = {
@@ -66219,7 +66129,7 @@ module.exports = {
                 //     foo > 0 ? bar :
                 //     foo < 0 ? baz :
                 //     /*else*/ qiz ;
-                if (!options.flatTernaryExpressions || !astUtils.isTokenOnSameLine(node.test, node.consequent) || isFirstTokenOfStatement(firstToken, node)) {
+                if (!options.flatTernaryExpressions || !astUtils.isTokenOnSameLine(node.test, node.consequent) || isOnFirstLineOfStatement(firstToken, node)) {
                     var questionMarkToken = sourceCode.getFirstTokenBetween(node.test, node.consequent, function (token) {
                         return token.type === "Punctuator" && token.value === "?";
                     });
@@ -67265,9 +67175,10 @@ module.exports = {
                 isExtra = diff > 0,
                 diffAbs = Math.abs(diff),
                 spaces = Array(diffAbs + 1).join(" ");
-            var fix = void 0;
 
             if ((diff && mode === "strict" || diff < 0 && mode === "minimum" || diff > 0 && !expected && mode === "minimum") && !(expected && containsLineTerminator(whitespace))) {
+                var fix = void 0;
+
                 if (isExtra) {
                     var range = void 0;
 
@@ -68029,7 +67940,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":118,"../util/keywords":403}],182:[function(require,module,exports){
+},{"../ast-utils":118,"../util/keywords":404}],182:[function(require,module,exports){
 /**
  * @fileoverview Rule to enforce the position of line comments
  * @author Alberto Rodríguez
@@ -70883,7 +70794,7 @@ module.exports = {
             category: "Stylistic Issues",
             recommended: false
         },
-
+        fixable: "whitespace",
         schema: [{
             type: "object",
             properties: {
@@ -70905,6 +70816,18 @@ module.exports = {
         var sourceCode = context.getSourceCode();
 
         /**
+         * Get the prefix of a given MemberExpression node.
+         * If the MemberExpression node is a computed value it returns a
+         * left bracket. If not it returns a period.
+         *
+         * @param  {ASTNode} node - A MemberExpression node to get
+         * @returns {string} The prefix of the node.
+         */
+        function getPrefix(node) {
+            return node.computed ? "[" : ".";
+        }
+
+        /**
          * Gets the property text of a given MemberExpression node.
          * If the text is multiline, this returns only the first line.
          *
@@ -70912,7 +70835,7 @@ module.exports = {
          * @returns {string} The property text of the node.
          */
         function getPropertyText(node) {
-            var prefix = node.computed ? "[" : ".";
+            var prefix = getPrefix(node);
             var lines = sourceCode.getText(node.property).split(astUtils.LINEBREAK_MATCHER);
             var suffix = node.computed && lines.length === 1 ? "]" : "";
 
@@ -70934,13 +70857,18 @@ module.exports = {
                     parent = parent.callee.object;
                 }
 
-                if (depth > ignoreChainWithDepth && callee.property.loc.start.line === callee.object.loc.end.line) {
+                if (depth > ignoreChainWithDepth && astUtils.isTokenOnSameLine(callee.object, callee.property)) {
                     context.report({
                         node: callee.property,
                         loc: callee.property.loc.start,
                         message: "Expected line break before `{{callee}}`.",
                         data: {
                             callee: getPropertyText(callee)
+                        },
+                        fix: function fix(fixer) {
+                            var firstTokenAfterObject = sourceCode.getTokenAfter(callee.object, astUtils.isNotClosingParenToken);
+
+                            return fixer.insertTextBefore(firstTokenAfterObject, "\n");
                         }
                     });
                 }
@@ -73219,7 +73147,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":118,"../util/fix-tracker":402}],225:[function(require,module,exports){
+},{"../ast-utils":118,"../util/fix-tracker":403}],225:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag the use of empty character classes in regular expressions
  * @author Ian Christian Myers
@@ -74767,16 +74695,39 @@ module.exports = {
         }
 
         /**
+         * Check if a member expression contains a call expression
+         * @param {ASTNode} node MemberExpression node to evaluate
+         * @returns {boolean} true if found, false if not
+         */
+        function doesMemberExpressionContainCallExpression(node) {
+            var currentNode = node.object;
+            var currentNodeType = node.object.type;
+
+            while (currentNodeType === "MemberExpression") {
+                currentNode = currentNode.object;
+                currentNodeType = currentNode.type;
+            }
+
+            return currentNodeType === "CallExpression";
+        }
+
+        /**
          * Evaluate a new call
          * @param {ASTNode} node node to evaluate
          * @returns {void}
          * @private
          */
         function checkCallNew(node) {
-            if (hasExcessParens(node.callee) && precedence(node.callee) >= precedence(node)) {
-                var hasNewParensException = node.callee.type === "NewExpression" && !isNewExpressionWithParens(node.callee);
+            var callee = node.callee;
 
-                if (hasDoubleExcessParens(node.callee) || !isIIFE(node) && !hasNewParensException) {
+            if (hasExcessParens(callee) && precedence(callee) >= precedence(node)) {
+                var hasNewParensException = callee.type === "NewExpression" && !isNewExpressionWithParens(callee);
+
+                if (hasDoubleExcessParens(callee) || !isIIFE(node) && !hasNewParensException && !(
+
+                // Allow extra parens around a new expression if
+                // there are intervening parentheses.
+                callee.type === "MemberExpression" && doesMemberExpressionContainCallExpression(callee))) {
                     report(node.callee);
                 }
             }
@@ -74982,12 +74933,19 @@ module.exports = {
             LogicalExpression: checkBinaryLogical,
 
             MemberExpression: function MemberExpression(node) {
-                if (hasExcessParens(node.object) && precedence(node.object) >= precedence(node) && (node.computed || !(astUtils.isDecimalInteger(node.object) ||
+                var nodeObjHasExcessParens = hasExcessParens(node.object);
+
+                if (nodeObjHasExcessParens && precedence(node.object) >= precedence(node) && (node.computed || !(astUtils.isDecimalInteger(node.object) ||
 
                 // RegExp literal is allowed to have parens (#1589)
                 node.object.type === "Literal" && node.object.regex))) {
                     report(node.object);
                 }
+
+                if (nodeObjHasExcessParens && node.object.type === "CallExpression" && node.parent.type !== "NewExpression") {
+                    report(node.object);
+                }
+
                 if (node.computed && hasExcessParens(node.property)) {
                     report(node.property);
                 }
@@ -75193,7 +75151,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":118,"../util/fix-tracker":402}],238:[function(require,module,exports){
+},{"../ast-utils":118,"../util/fix-tracker":403}],238:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag fall-through cases in switch statements.
  * @author Matt DuVall <http://mattduvall.com/>
@@ -81008,7 +80966,7 @@ module.exports = {
     create: function create(context) {
         return {
             Program: function Program(node) {
-                context.getSourceLines().forEach(function (line, index) {
+                context.getSourceCode().getLines().forEach(function (line, index) {
                     var match = regex.exec(line);
 
                     if (match) {
@@ -81634,6 +81592,10 @@ module.exports = {
                         message: "It's not necessary to initialize '{{name}}' to undefined.",
                         data: { name: name },
                         fix: function fix(fixer) {
+                            if (node.parent.kind === "var") {
+                                return null;
+                            }
+
                             if (node.id.type === "ArrayPattern" || node.id.type === "ObjectPattern") {
 
                                 // Don't fix destructuring assignment to `undefined`.
@@ -82308,14 +82270,14 @@ function getEncloseFunctionDeclaration(reference) {
  * @returns {void}
  */
 function updateModifiedFlag(conditions, modifiers) {
-    var funcNode = void 0,
-        funcVar = void 0;
 
     for (var i = 0; i < conditions.length; ++i) {
         var condition = conditions[i];
 
         for (var j = 0; !condition.modified && j < modifiers.length; ++j) {
             var modifier = modifiers[j];
+            var funcNode = void 0,
+                funcVar = void 0;
 
             /*
              * Besides checking for the condition being in the loop, we want to
@@ -82452,7 +82414,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":118,"../util/traverser":409}],314:[function(require,module,exports){
+},{"../ast-utils":118,"../util/traverser":410}],314:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag no-unneeded-ternary
  * @author Gyandeep Singh
@@ -85311,7 +85273,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":118,"../util/fix-tracker":402}],329:[function(require,module,exports){
+},{"../ast-utils":118,"../util/fix-tracker":403}],329:[function(require,module,exports){
 /**
  * @fileoverview Rule to check for the usage of var.
  * @author Jamund Ferguson
@@ -90524,13 +90486,14 @@ module.exports = {
          */
         function checkUnnecessaryQuotes(node) {
             var key = node.key;
-            var tokens = void 0;
 
             if (node.method || node.computed || node.shorthand) {
                 return;
             }
 
             if (key.type === "Literal" && typeof key.value === "string") {
+                var tokens = void 0;
+
                 try {
                     tokens = espree.tokenize(key.value);
                 } catch (e) {
@@ -90612,7 +90575,6 @@ module.exports = {
 
             node.properties.forEach(function (property) {
                 var key = property.key;
-                var tokens = void 0;
 
                 if (!key || property.method || property.computed || property.shorthand) {
                     return;
@@ -90623,6 +90585,8 @@ module.exports = {
                     quotedProps.push(property);
 
                     if (checkQuotesRedundancy) {
+                        var tokens = void 0;
+
                         try {
                             tokens = espree.tokenize(key.value);
                         } catch (e) {
@@ -90697,7 +90661,7 @@ module.exports = {
     }
 };
 
-},{"../util/keywords":403,"espree":"espree"}],355:[function(require,module,exports){
+},{"../util/keywords":404,"espree":"espree"}],355:[function(require,module,exports){
 /**
  * @fileoverview A rule to choose between single and double quote marks
  * @author Matt DuVall <http://www.mattduvall.com/>, Brandon Payton
@@ -90920,10 +90884,9 @@ module.exports = {
             Literal: function Literal(node) {
                 var val = node.value,
                     rawVal = node.raw;
-                var isValid = void 0;
 
                 if (settings && typeof val === "string") {
-                    isValid = quoteOption === "backtick" && isAllowedAsNonBacktick(node) || isJSXLiteral(node) || astUtils.isSurroundedBy(rawVal, settings.quote);
+                    var isValid = quoteOption === "backtick" && isAllowedAsNonBacktick(node) || isJSXLiteral(node) || astUtils.isSurroundedBy(rawVal, settings.quote);
 
                     if (!isValid && avoidEscape) {
                         isValid = astUtils.isSurroundedBy(rawVal, settings.alternateQuote) && rawVal.indexOf(settings.quote) >= 0;
@@ -92063,7 +92026,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":118,"../util/fix-tracker":402}],364:[function(require,module,exports){
+},{"../ast-utils":118,"../util/fix-tracker":403}],364:[function(require,module,exports){
 /**
  * @fileoverview Rule to require sorting of import declarations
  * @author Christian Schuller
@@ -92550,11 +92513,11 @@ module.exports = {
          */
         function checkPrecedingSpace(node) {
             var precedingToken = sourceCode.getTokenBefore(node);
-            var requireSpace = void 0;
 
             if (precedingToken && !isConflicted(precedingToken) && astUtils.isTokenOnSameLine(precedingToken, node)) {
                 var hasSpace = sourceCode.isSpaceBetweenTokens(precedingToken, node);
                 var parent = context.getAncestors().pop();
+                var requireSpace = void 0;
 
                 if (parent.type === "FunctionExpression" || parent.type === "FunctionDeclaration") {
                     requireSpace = checkFunctions;
@@ -94862,11 +94825,11 @@ module.exports = {
                 hasConstructor = false,
                 isInterface = false,
                 isOverride = false,
-                isAbstract = false,
-                jsdoc = void 0;
+                isAbstract = false;
 
             // make sure only to validate JSDoc comments
             if (jsdocNode) {
+                var jsdoc = void 0;
 
                 try {
                     jsdoc = doctrine.parse(jsdocNode.value, {
@@ -97538,6 +97501,132 @@ module.exports = ajv;
 
 },{"ajv":7,"ajv/lib/refs/json-schema-draft-04.json":45}],402:[function(require,module,exports){
 /**
+ * @fileoverview A module that filters reported problems based on `eslint-disable` and `eslint-enable` comments
+ * @author Teddy Katz
+ */
+
+"use strict";
+
+var lodash = require("lodash");
+
+/**
+ * Compares the locations of two objects in a source file
+ * @param {{line: number, column: number}} itemA The first object
+ * @param {{line: number, column: number}} itemB The second object
+ * @returns {number} A value less than 1 if itemA appears before itemB in the source file, greater than 1 if
+ * itemA appears after itemB in the source file, or 0 if itemA and itemB have the same location.
+ */
+function compareLocations(itemA, itemB) {
+    return itemA.line - itemB.line || itemA.column - itemB.column;
+}
+
+/**
+ * Given a list of directive comments (i.e. metadata about eslint-disable and eslint-enable comments) and a list
+ * of reported problems, determines which problems should be reported.
+ * @param {Object} options Information about directives and problems
+ * @param {{
+ *      type: ("disable"|"enable"|"disable-line"|"disable-next-line"),
+ *      ruleId: (string|null),
+ *      line: number,
+ *      column: number
+ * }} options.directives Directive comments found in the file, with one-based columns.
+ * Two directive comments can only have the same location if they also have the same type (e.g. a single eslint-disable
+ * comment for two different rules is represented as two directives).
+ * @param {{ruleId: (string|null), line: number, column: number}[]} options.problems
+ * A list of problems reported by rules, sorted by increasing location in the file, with one-based columns.
+ * @returns {{ruleId: (string|null), line: number, column: number}[]}
+ * A list of reported problems that were not disabled by the directive comments.
+ */
+module.exports = function (options) {
+    var processedDirectives = lodash.flatMap(options.directives, function (directive) {
+        switch (directive.type) {
+            case "disable":
+            case "enable":
+                return [directive];
+
+            case "disable-line":
+                return [{ type: "disable", line: directive.line, column: 1, ruleId: directive.ruleId }, { type: "enable", line: directive.line + 1, column: 1, ruleId: directive.ruleId }];
+
+            case "disable-next-line":
+                return [{ type: "disable", line: directive.line + 1, column: 1, ruleId: directive.ruleId }, { type: "enable", line: directive.line + 2, column: 1, ruleId: directive.ruleId }];
+
+            default:
+                throw new TypeError("Unrecognized directive type '" + directive.type + "'");
+        }
+    }).sort(compareLocations);
+
+    var problems = [];
+    var nextDirectiveIndex = 0;
+    var globalDisableActive = false;
+
+    // disabledRules is only used when there is no active global /* eslint-disable */ comment.
+    var disabledRules = new Set();
+
+    // enabledRules is only used when there is an active global /* eslint-disable */ comment.
+    var enabledRules = new Set();
+
+    var _iteratorNormalCompletion = true;
+    var _didIteratorError = false;
+    var _iteratorError = undefined;
+
+    try {
+        for (var _iterator = options.problems[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+            var problem = _step.value;
+
+            while (nextDirectiveIndex < processedDirectives.length && compareLocations(processedDirectives[nextDirectiveIndex], problem) <= 0) {
+                var directive = processedDirectives[nextDirectiveIndex++];
+
+                switch (directive.type) {
+                    case "disable":
+                        if (directive.ruleId === null) {
+                            globalDisableActive = true;
+                            enabledRules.clear();
+                        } else if (globalDisableActive) {
+                            enabledRules.delete(directive.ruleId);
+                        } else {
+                            disabledRules.add(directive.ruleId);
+                        }
+                        break;
+
+                    case "enable":
+                        if (directive.ruleId === null) {
+                            globalDisableActive = false;
+                            disabledRules.clear();
+                        } else if (globalDisableActive) {
+                            enabledRules.add(directive.ruleId);
+                        } else {
+                            disabledRules.delete(directive.ruleId);
+                        }
+                        break;
+
+                    // no default
+                }
+            }
+
+            if (globalDisableActive && enabledRules.has(problem.ruleId) || !globalDisableActive && !disabledRules.has(problem.ruleId)) {
+                problems.push(problem);
+            }
+        }
+    } catch (err) {
+        _didIteratorError = true;
+        _iteratorError = err;
+    } finally {
+        try {
+            if (!_iteratorNormalCompletion && _iterator.return) {
+                _iterator.return();
+            }
+        } finally {
+            if (_didIteratorError) {
+                throw _iteratorError;
+            }
+        }
+    }
+
+    return problems;
+};
+
+},{"lodash":92}],403:[function(require,module,exports){
+/**
  * @fileoverview Helper class to aid in constructing fix commands.
  * @author Alan Pierce
  */
@@ -97676,7 +97765,7 @@ var FixTracker = function () {
 
 module.exports = FixTracker;
 
-},{"../ast-utils":118}],403:[function(require,module,exports){
+},{"../ast-utils":118}],404:[function(require,module,exports){
 /**
  * @fileoverview A shared list of ES3 keywords.
  * @author Josh Perez
@@ -97685,7 +97774,7 @@ module.exports = FixTracker;
 
 module.exports = ["abstract", "boolean", "break", "byte", "case", "catch", "char", "class", "const", "continue", "debugger", "default", "delete", "do", "double", "else", "enum", "export", "extends", "false", "final", "finally", "float", "for", "function", "goto", "if", "implements", "import", "in", "instanceof", "int", "interface", "long", "native", "new", "null", "package", "private", "protected", "public", "return", "short", "static", "super", "switch", "synchronized", "this", "throw", "throws", "transient", "true", "try", "typeof", "var", "void", "volatile", "while", "with"];
 
-},{}],404:[function(require,module,exports){
+},{}],405:[function(require,module,exports){
 /**
  * @fileoverview The event generator for AST nodes.
  * @author Toru Nagashima
@@ -98042,7 +98131,7 @@ var NodeEventGenerator = function () {
 
 module.exports = NodeEventGenerator;
 
-},{"esquery":67,"lodash":92}],405:[function(require,module,exports){
+},{"esquery":67,"lodash":92}],406:[function(require,module,exports){
 /**
  * @fileoverview Pattern for detecting any letter (even letters outside of ASCII).
  * NOTE: This file was generated using this script in JSCS based on the Unicode 7.0.0 standard: https://github.com/jscs-dev/node-jscs/blob/f5ed14427deb7e7aac84f3056a5aab2d9f3e563e/publish/helpers/generate-patterns.js
@@ -98080,7 +98169,7 @@ module.exports = NodeEventGenerator;
 
 module.exports = /[A-Za-z\xAA\xB5\xBA\xC0-\xD6\xD8-\xF6\xF8-\u02C1\u02C6-\u02D1\u02E0-\u02E4\u02EC\u02EE\u0370-\u0374\u0376\u0377\u037A-\u037D\u037F\u0386\u0388-\u038A\u038C\u038E-\u03A1\u03A3-\u03F5\u03F7-\u0481\u048A-\u052F\u0531-\u0556\u0559\u0561-\u0587\u05D0-\u05EA\u05F0-\u05F2\u0620-\u064A\u066E\u066F\u0671-\u06D3\u06D5\u06E5\u06E6\u06EE\u06EF\u06FA-\u06FC\u06FF\u0710\u0712-\u072F\u074D-\u07A5\u07B1\u07CA-\u07EA\u07F4\u07F5\u07FA\u0800-\u0815\u081A\u0824\u0828\u0840-\u0858\u08A0-\u08B2\u0904-\u0939\u093D\u0950\u0958-\u0961\u0971-\u0980\u0985-\u098C\u098F\u0990\u0993-\u09A8\u09AA-\u09B0\u09B2\u09B6-\u09B9\u09BD\u09CE\u09DC\u09DD\u09DF-\u09E1\u09F0\u09F1\u0A05-\u0A0A\u0A0F\u0A10\u0A13-\u0A28\u0A2A-\u0A30\u0A32\u0A33\u0A35\u0A36\u0A38\u0A39\u0A59-\u0A5C\u0A5E\u0A72-\u0A74\u0A85-\u0A8D\u0A8F-\u0A91\u0A93-\u0AA8\u0AAA-\u0AB0\u0AB2\u0AB3\u0AB5-\u0AB9\u0ABD\u0AD0\u0AE0\u0AE1\u0B05-\u0B0C\u0B0F\u0B10\u0B13-\u0B28\u0B2A-\u0B30\u0B32\u0B33\u0B35-\u0B39\u0B3D\u0B5C\u0B5D\u0B5F-\u0B61\u0B71\u0B83\u0B85-\u0B8A\u0B8E-\u0B90\u0B92-\u0B95\u0B99\u0B9A\u0B9C\u0B9E\u0B9F\u0BA3\u0BA4\u0BA8-\u0BAA\u0BAE-\u0BB9\u0BD0\u0C05-\u0C0C\u0C0E-\u0C10\u0C12-\u0C28\u0C2A-\u0C39\u0C3D\u0C58\u0C59\u0C60\u0C61\u0C85-\u0C8C\u0C8E-\u0C90\u0C92-\u0CA8\u0CAA-\u0CB3\u0CB5-\u0CB9\u0CBD\u0CDE\u0CE0\u0CE1\u0CF1\u0CF2\u0D05-\u0D0C\u0D0E-\u0D10\u0D12-\u0D3A\u0D3D\u0D4E\u0D60\u0D61\u0D7A-\u0D7F\u0D85-\u0D96\u0D9A-\u0DB1\u0DB3-\u0DBB\u0DBD\u0DC0-\u0DC6\u0E01-\u0E30\u0E32\u0E33\u0E40-\u0E46\u0E81\u0E82\u0E84\u0E87\u0E88\u0E8A\u0E8D\u0E94-\u0E97\u0E99-\u0E9F\u0EA1-\u0EA3\u0EA5\u0EA7\u0EAA\u0EAB\u0EAD-\u0EB0\u0EB2\u0EB3\u0EBD\u0EC0-\u0EC4\u0EC6\u0EDC-\u0EDF\u0F00\u0F40-\u0F47\u0F49-\u0F6C\u0F88-\u0F8C\u1000-\u102A\u103F\u1050-\u1055\u105A-\u105D\u1061\u1065\u1066\u106E-\u1070\u1075-\u1081\u108E\u10A0-\u10C5\u10C7\u10CD\u10D0-\u10FA\u10FC-\u1248\u124A-\u124D\u1250-\u1256\u1258\u125A-\u125D\u1260-\u1288\u128A-\u128D\u1290-\u12B0\u12B2-\u12B5\u12B8-\u12BE\u12C0\u12C2-\u12C5\u12C8-\u12D6\u12D8-\u1310\u1312-\u1315\u1318-\u135A\u1380-\u138F\u13A0-\u13F4\u1401-\u166C\u166F-\u167F\u1681-\u169A\u16A0-\u16EA\u16F1-\u16F8\u1700-\u170C\u170E-\u1711\u1720-\u1731\u1740-\u1751\u1760-\u176C\u176E-\u1770\u1780-\u17B3\u17D7\u17DC\u1820-\u1877\u1880-\u18A8\u18AA\u18B0-\u18F5\u1900-\u191E\u1950-\u196D\u1970-\u1974\u1980-\u19AB\u19C1-\u19C7\u1A00-\u1A16\u1A20-\u1A54\u1AA7\u1B05-\u1B33\u1B45-\u1B4B\u1B83-\u1BA0\u1BAE\u1BAF\u1BBA-\u1BE5\u1C00-\u1C23\u1C4D-\u1C4F\u1C5A-\u1C7D\u1CE9-\u1CEC\u1CEE-\u1CF1\u1CF5\u1CF6\u1D00-\u1DBF\u1E00-\u1F15\u1F18-\u1F1D\u1F20-\u1F45\u1F48-\u1F4D\u1F50-\u1F57\u1F59\u1F5B\u1F5D\u1F5F-\u1F7D\u1F80-\u1FB4\u1FB6-\u1FBC\u1FBE\u1FC2-\u1FC4\u1FC6-\u1FCC\u1FD0-\u1FD3\u1FD6-\u1FDB\u1FE0-\u1FEC\u1FF2-\u1FF4\u1FF6-\u1FFC\u2071\u207F\u2090-\u209C\u2102\u2107\u210A-\u2113\u2115\u2119-\u211D\u2124\u2126\u2128\u212A-\u212D\u212F-\u2139\u213C-\u213F\u2145-\u2149\u214E\u2183\u2184\u2C00-\u2C2E\u2C30-\u2C5E\u2C60-\u2CE4\u2CEB-\u2CEE\u2CF2\u2CF3\u2D00-\u2D25\u2D27\u2D2D\u2D30-\u2D67\u2D6F\u2D80-\u2D96\u2DA0-\u2DA6\u2DA8-\u2DAE\u2DB0-\u2DB6\u2DB8-\u2DBE\u2DC0-\u2DC6\u2DC8-\u2DCE\u2DD0-\u2DD6\u2DD8-\u2DDE\u2E2F\u3005\u3006\u3031-\u3035\u303B\u303C\u3041-\u3096\u309D-\u309F\u30A1-\u30FA\u30FC-\u30FF\u3105-\u312D\u3131-\u318E\u31A0-\u31BA\u31F0-\u31FF\u3400-\u4DB5\u4E00-\u9FCC\uA000-\uA48C\uA4D0-\uA4FD\uA500-\uA60C\uA610-\uA61F\uA62A\uA62B\uA640-\uA66E\uA67F-\uA69D\uA6A0-\uA6E5\uA717-\uA71F\uA722-\uA788\uA78B-\uA78E\uA790-\uA7AD\uA7B0\uA7B1\uA7F7-\uA801\uA803-\uA805\uA807-\uA80A\uA80C-\uA822\uA840-\uA873\uA882-\uA8B3\uA8F2-\uA8F7\uA8FB\uA90A-\uA925\uA930-\uA946\uA960-\uA97C\uA984-\uA9B2\uA9CF\uA9E0-\uA9E4\uA9E6-\uA9EF\uA9FA-\uA9FE\uAA00-\uAA28\uAA40-\uAA42\uAA44-\uAA4B\uAA60-\uAA76\uAA7A\uAA7E-\uAAAF\uAAB1\uAAB5\uAAB6\uAAB9-\uAABD\uAAC0\uAAC2\uAADB-\uAADD\uAAE0-\uAAEA\uAAF2-\uAAF4\uAB01-\uAB06\uAB09-\uAB0E\uAB11-\uAB16\uAB20-\uAB26\uAB28-\uAB2E\uAB30-\uAB5A\uAB5C-\uAB5F\uAB64\uAB65\uABC0-\uABE2\uAC00-\uD7A3\uD7B0-\uD7C6\uD7CB-\uD7FB\uF900-\uFA6D\uFA70-\uFAD9\uFB00-\uFB06\uFB13-\uFB17\uFB1D\uFB1F-\uFB28\uFB2A-\uFB36\uFB38-\uFB3C\uFB3E\uFB40\uFB41\uFB43\uFB44\uFB46-\uFBB1\uFBD3-\uFD3D\uFD50-\uFD8F\uFD92-\uFDC7\uFDF0-\uFDFB\uFE70-\uFE74\uFE76-\uFEFC\uFF21-\uFF3A\uFF41-\uFF5A\uFF66-\uFFBE\uFFC2-\uFFC7\uFFCA-\uFFCF\uFFD2-\uFFD7\uFFDA-\uFFDC]|\uD800[\uDC00-\uDC0B\uDC0D-\uDC26\uDC28-\uDC3A\uDC3C\uDC3D\uDC3F-\uDC4D\uDC50-\uDC5D\uDC80-\uDCFA\uDE80-\uDE9C\uDEA0-\uDED0\uDF00-\uDF1F\uDF30-\uDF40\uDF42-\uDF49\uDF50-\uDF75\uDF80-\uDF9D\uDFA0-\uDFC3\uDFC8-\uDFCF]|\uD801[\uDC00-\uDC9D\uDD00-\uDD27\uDD30-\uDD63\uDE00-\uDF36\uDF40-\uDF55\uDF60-\uDF67]|\uD802[\uDC00-\uDC05\uDC08\uDC0A-\uDC35\uDC37\uDC38\uDC3C\uDC3F-\uDC55\uDC60-\uDC76\uDC80-\uDC9E\uDD00-\uDD15\uDD20-\uDD39\uDD80-\uDDB7\uDDBE\uDDBF\uDE00\uDE10-\uDE13\uDE15-\uDE17\uDE19-\uDE33\uDE60-\uDE7C\uDE80-\uDE9C\uDEC0-\uDEC7\uDEC9-\uDEE4\uDF00-\uDF35\uDF40-\uDF55\uDF60-\uDF72\uDF80-\uDF91]|\uD803[\uDC00-\uDC48]|\uD804[\uDC03-\uDC37\uDC83-\uDCAF\uDCD0-\uDCE8\uDD03-\uDD26\uDD50-\uDD72\uDD76\uDD83-\uDDB2\uDDC1-\uDDC4\uDDDA\uDE00-\uDE11\uDE13-\uDE2B\uDEB0-\uDEDE\uDF05-\uDF0C\uDF0F\uDF10\uDF13-\uDF28\uDF2A-\uDF30\uDF32\uDF33\uDF35-\uDF39\uDF3D\uDF5D-\uDF61]|\uD805[\uDC80-\uDCAF\uDCC4\uDCC5\uDCC7\uDD80-\uDDAE\uDE00-\uDE2F\uDE44\uDE80-\uDEAA]|\uD806[\uDCA0-\uDCDF\uDCFF\uDEC0-\uDEF8]|\uD808[\uDC00-\uDF98]|[\uD80C\uD840-\uD868\uD86A-\uD86C][\uDC00-\uDFFF]|\uD80D[\uDC00-\uDC2E]|\uD81A[\uDC00-\uDE38\uDE40-\uDE5E\uDED0-\uDEED\uDF00-\uDF2F\uDF40-\uDF43\uDF63-\uDF77\uDF7D-\uDF8F]|\uD81B[\uDF00-\uDF44\uDF50\uDF93-\uDF9F]|\uD82C[\uDC00\uDC01]|\uD82F[\uDC00-\uDC6A\uDC70-\uDC7C\uDC80-\uDC88\uDC90-\uDC99]|\uD835[\uDC00-\uDC54\uDC56-\uDC9C\uDC9E\uDC9F\uDCA2\uDCA5\uDCA6\uDCA9-\uDCAC\uDCAE-\uDCB9\uDCBB\uDCBD-\uDCC3\uDCC5-\uDD05\uDD07-\uDD0A\uDD0D-\uDD14\uDD16-\uDD1C\uDD1E-\uDD39\uDD3B-\uDD3E\uDD40-\uDD44\uDD46\uDD4A-\uDD50\uDD52-\uDEA5\uDEA8-\uDEC0\uDEC2-\uDEDA\uDEDC-\uDEFA\uDEFC-\uDF14\uDF16-\uDF34\uDF36-\uDF4E\uDF50-\uDF6E\uDF70-\uDF88\uDF8A-\uDFA8\uDFAA-\uDFC2\uDFC4-\uDFCB]|\uD83A[\uDC00-\uDCC4]|\uD83B[\uDE00-\uDE03\uDE05-\uDE1F\uDE21\uDE22\uDE24\uDE27\uDE29-\uDE32\uDE34-\uDE37\uDE39\uDE3B\uDE42\uDE47\uDE49\uDE4B\uDE4D-\uDE4F\uDE51\uDE52\uDE54\uDE57\uDE59\uDE5B\uDE5D\uDE5F\uDE61\uDE62\uDE64\uDE67-\uDE6A\uDE6C-\uDE72\uDE74-\uDE77\uDE79-\uDE7C\uDE7E\uDE80-\uDE89\uDE8B-\uDE9B\uDEA1-\uDEA3\uDEA5-\uDEA9\uDEAB-\uDEBB]|\uD869[\uDC00-\uDED6\uDF00-\uDFFF]|\uD86D[\uDC00-\uDF34\uDF40-\uDFFF]|\uD86E[\uDC00-\uDC1D]|\uD87E[\uDC00-\uDE1D]/;
 
-},{}],406:[function(require,module,exports){
+},{}],407:[function(require,module,exports){
 /**
  * @fileoverview An object that creates fix commands for rules.
  * @author Nicholas C. Zakas
@@ -98228,7 +98317,7 @@ var ruleFixer = Object.freeze({
 
 module.exports = ruleFixer;
 
-},{}],407:[function(require,module,exports){
+},{}],408:[function(require,module,exports){
 /**
  * @fileoverview An object that caches and applies source code fixes.
  * @author Nicholas C. Zakas
@@ -98401,7 +98490,7 @@ SourceCodeFixer.applyFixes = function (sourceText, messages, shouldFix) {
 
 module.exports = SourceCodeFixer;
 
-},{"debug":52}],408:[function(require,module,exports){
+},{"debug":52}],409:[function(require,module,exports){
 /**
  * @fileoverview Abstraction of JavaScript source code.
  * @author Nicholas C. Zakas
@@ -98777,15 +98866,13 @@ var SourceCode = function (_TokenStore) {
     }, {
         key: "getNodeByRangeIndex",
         value: function getNodeByRangeIndex(index) {
-            var result = null,
-                resultParent = null;
+            var result = null;
             var traverser = new Traverser();
 
             traverser.traverse(this.ast, {
-                enter: function enter(node, parent) {
+                enter: function enter(node) {
                     if (node.range[0] <= index && index < node.range[1]) {
                         result = node;
-                        resultParent = parent;
                     } else {
                         this.skip();
                     }
@@ -98797,7 +98884,7 @@ var SourceCode = function (_TokenStore) {
                 }
             });
 
-            return result ? Object.assign({ parent: resultParent }, result) : null;
+            return result;
         }
 
         /**
@@ -98909,7 +98996,7 @@ var SourceCode = function (_TokenStore) {
 
 module.exports = SourceCode;
 
-},{"../ast-utils":118,"../token-store":396,"./traverser":409,"lodash":92}],409:[function(require,module,exports){
+},{"../ast-utils":118,"../token-store":396,"./traverser":410,"lodash":92}],410:[function(require,module,exports){
 /**
  * @fileoverview Wrapper around estraverse
  * @author Nicholas C. Zakas

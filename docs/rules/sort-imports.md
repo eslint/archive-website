@@ -71,8 +71,8 @@ Examples of **correct** code for this rule when using default options:
 ```js
 /*eslint sort-imports: "error"*/
 import 'module-without-export.js';
-import * as foo from 'foo.js';
 import * as bar from 'bar.js';
+import * as foo from 'foo.js';
 import {alpha, beta} from 'alpha.js';
 import {delta, gamma} from 'delta.js';
 import a from 'baz.js';
@@ -85,7 +85,7 @@ import c from 'baz.js';
 
 /*eslint sort-imports: "error"*/
 import 'foo.js'
-import * from 'bar.js';
+import * as bar from 'bar.js';
 import {a, b} from 'baz.js';
 import c from 'qux.js';
 

@@ -720,7 +720,7 @@ categories:
         name: new-parens
         recommended: false
       - description: require a newline after each call in a method chain
-        fixable: false
+        fixable: true
         name: newline-per-chained-call
         recommended: false
       - description: disallow `Array` constructors

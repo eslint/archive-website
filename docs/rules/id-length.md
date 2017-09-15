@@ -199,7 +199,7 @@ data["y"] = 3;  // excused because of calculated property access
 Examples of **incorrect** code for this rule with the `{ "max": 10 }` option:
 
 ```js
-/*eslint id-length: ["error", { "max": "10" }]*/
+/*eslint id-length: ["error", { "max": 10 }]*/
 /*eslint-env es6*/
 
 var reallyLongVarName = 5;
@@ -217,7 +217,7 @@ try {
 Examples of **correct** code for this rule with the `{ "max": 10 }` option:
 
 ```js
-/*eslint id-length: ["error", { "max": "10" }]*/
+/*eslint id-length: ["error", { "max": 10 }]*/
 /*eslint-env es6*/
 
 var varName = 5;
