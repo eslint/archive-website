@@ -49570,7 +49570,7 @@ function hasOwnProperty(obj, prop) {
 },{"./support/isBuffer":115,"_process":104,"inherits":114}],117:[function(require,module,exports){
 module.exports={
   "name": "eslint",
-  "version": "4.7.0",
+  "version": "4.7.1",
   "author": "Nicholas C. Zakas <nicholas+npm@nczconsulting.com>",
   "description": "An AST-based pattern checker for JavaScript.",
   "bin": {
@@ -55149,15 +55149,17 @@ function parseJsonConfig(string, location) {
  */
 function parseListConfig(string) {
     var items = {};
-    var reg = /[\w\-/]+/g;
-    var elementMatches = string.match(reg);
 
-    if (elementMatches) {
-        elementMatches.forEach(function (name) {
-            items[name] = true;
-        });
-    }
+    // Collapse whitespace around ,
+    string = string.replace(/\s*,\s*/g, ",");
 
+    string.split(/,+/).forEach(function (name) {
+        name = name.trim();
+        if (!name) {
+            return;
+        }
+        items[name] = true;
+    });
     return items;
 }
 
@@ -97521,40 +97523,11 @@ function compareLocations(itemA, itemB) {
 }
 
 /**
- * Given a list of directive comments (i.e. metadata about eslint-disable and eslint-enable comments) and a list
- * of reported problems, determines which problems should be reported.
- * @param {Object} options Information about directives and problems
- * @param {{
- *      type: ("disable"|"enable"|"disable-line"|"disable-next-line"),
- *      ruleId: (string|null),
- *      line: number,
- *      column: number
- * }} options.directives Directive comments found in the file, with one-based columns.
- * Two directive comments can only have the same location if they also have the same type (e.g. a single eslint-disable
- * comment for two different rules is represented as two directives).
- * @param {{ruleId: (string|null), line: number, column: number}[]} options.problems
- * A list of problems reported by rules, sorted by increasing location in the file, with one-based columns.
- * @returns {{ruleId: (string|null), line: number, column: number}[]}
- * A list of reported problems that were not disabled by the directive comments.
+ * This is the same as the exported function, except that it doesn't handle disable-line and disable-next-line directives.
+ * @param {Object} options options (see the exported function)
+ * @returns {Problem[]} Filtered problems (see the exported function)
  */
-module.exports = function (options) {
-    var processedDirectives = lodash.flatMap(options.directives, function (directive) {
-        switch (directive.type) {
-            case "disable":
-            case "enable":
-                return [directive];
-
-            case "disable-line":
-                return [{ type: "disable", line: directive.line, column: 1, ruleId: directive.ruleId }, { type: "enable", line: directive.line + 1, column: 1, ruleId: directive.ruleId }];
-
-            case "disable-next-line":
-                return [{ type: "disable", line: directive.line + 1, column: 1, ruleId: directive.ruleId }, { type: "enable", line: directive.line + 2, column: 1, ruleId: directive.ruleId }];
-
-            default:
-                throw new TypeError("Unrecognized directive type '" + directive.type + "'");
-        }
-    }).sort(compareLocations);
-
+function applyDirectives(options) {
     var problems = [];
     var nextDirectiveIndex = 0;
     var globalDisableActive = false;
@@ -97573,8 +97546,8 @@ module.exports = function (options) {
         for (var _iterator = options.problems[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
             var problem = _step.value;
 
-            while (nextDirectiveIndex < processedDirectives.length && compareLocations(processedDirectives[nextDirectiveIndex], problem) <= 0) {
-                var directive = processedDirectives[nextDirectiveIndex++];
+            while (nextDirectiveIndex < options.directives.length && compareLocations(options.directives[nextDirectiveIndex], problem) <= 0) {
+                var directive = options.directives[nextDirectiveIndex++];
 
                 switch (directive.type) {
                     case "disable":
@@ -97623,6 +97596,51 @@ module.exports = function (options) {
     }
 
     return problems;
+}
+
+/**
+ * Given a list of directive comments (i.e. metadata about eslint-disable and eslint-enable comments) and a list
+ * of reported problems, determines which problems should be reported.
+ * @param {Object} options Information about directives and problems
+ * @param {{
+ *      type: ("disable"|"enable"|"disable-line"|"disable-next-line"),
+ *      ruleId: (string|null),
+ *      line: number,
+ *      column: number
+ * }} options.directives Directive comments found in the file, with one-based columns.
+ * Two directive comments can only have the same location if they also have the same type (e.g. a single eslint-disable
+ * comment for two different rules is represented as two directives).
+ * @param {{ruleId: (string|null), line: number, column: number}[]} options.problems
+ * A list of problems reported by rules, sorted by increasing location in the file, with one-based columns.
+ * @returns {{ruleId: (string|null), line: number, column: number}[]}
+ * A list of reported problems that were not disabled by the directive comments.
+ */
+module.exports = function (options) {
+    var blockDirectives = options.directives.filter(function (directive) {
+        return directive.type === "disable" || directive.type === "enable";
+    }).sort(compareLocations);
+
+    var lineDirectives = lodash.flatMap(options.directives, function (directive) {
+        switch (directive.type) {
+            case "disable":
+            case "enable":
+                return [];
+
+            case "disable-line":
+                return [{ type: "disable", line: directive.line, column: 1, ruleId: directive.ruleId }, { type: "enable", line: directive.line + 1, column: 0, ruleId: directive.ruleId }];
+
+            case "disable-next-line":
+                return [{ type: "disable", line: directive.line + 1, column: 1, ruleId: directive.ruleId }, { type: "enable", line: directive.line + 2, column: 0, ruleId: directive.ruleId }];
+
+            default:
+                throw new TypeError("Unrecognized directive type '" + directive.type + "'");
+        }
+    }).sort(compareLocations);
+
+    var problemsAfterBlockDirectives = applyDirectives({ problems: options.problems, directives: blockDirectives });
+    var problemsAfterLineDirectives = applyDirectives({ problems: problemsAfterBlockDirectives, directives: lineDirectives });
+
+    return problemsAfterLineDirectives.sort(compareLocations);
 };
 
 },{"lodash":92}],403:[function(require,module,exports){
