@@ -1,4 +1,4 @@
- - algolia.svg 10.7KB 391x124
+ - algolia.svg 4.4KB 1366x362
  - alianza.png 5.95KB 500x200
  - angular-formly.png 8.81KB 200x200
  - atlassian.svg 8.36KB 792x168
