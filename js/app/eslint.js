@@ -49570,7 +49570,7 @@ function hasOwnProperty(obj, prop) {
 },{"./support/isBuffer":115,"_process":104,"inherits":114}],117:[function(require,module,exports){
 module.exports={
   "name": "eslint",
-  "version": "4.7.1",
+  "version": "4.7.2",
   "author": "Nicholas C. Zakas <nicholas+npm@nczconsulting.com>",
   "description": "An AST-based pattern checker for JavaScript.",
   "bin": {
@@ -55670,22 +55670,6 @@ function _markVariableAsUsed(scopeManager, currentNode, parserOptions, name) {
     return false;
 }
 
-/**
- * Gets all the ancestors of a given node
- * @param {ASTNode} node The node
- * @returns {ASTNode[]} All the ancestor nodes in the AST, not including the provided node, starting
- * from the root node and going inwards to the parent node.
- */
-function _getAncestors(node) {
-    if (node.parent) {
-        var parentAncestors = _getAncestors(node.parent);
-
-        parentAncestors.push(node.parent);
-        return parentAncestors;
-    }
-    return [];
-}
-
 // methods that exist on SourceCode object
 var DEPRECATED_SOURCECODE_PASSTHROUGHS = {
     getSource: "getText",
@@ -55845,6 +55829,7 @@ module.exports = function () {
             }
 
             var emitter = new EventEmitter().setMaxListeners(Infinity);
+            var traverser = new Traverser();
             var ecmaFeatures = config.parserOptions.ecmaFeatures || {};
             var ecmaVersion = config.parserOptions.ecmaVersion || 5;
             var scopeManager = eslintScope.analyze(sourceCode.ast, {
@@ -55856,19 +55841,6 @@ module.exports = function () {
                 fallback: Traverser.getKeys
             });
 
-            var currentNode = sourceCode.ast;
-            var nodeQueue = [];
-
-            new Traverser().traverse(sourceCode.ast, {
-                enter: function enter(node, parent) {
-                    node.parent = parent;
-                    nodeQueue.push({ isEntering: true, node: node });
-                },
-                leave: function leave(node) {
-                    nodeQueue.push({ isEntering: false, node: node });
-                }
-            });
-
             /*
              * Create a frozen object with the ruleContext properties and methods that are shared by all rules.
              * All rule contexts will inherit from this object. This avoids the performance penalty of copying all the
@@ -55876,20 +55848,20 @@ module.exports = function () {
              */
             var sharedTraversalContext = Object.freeze(Object.assign(Object.create(BASE_TRAVERSAL_CONTEXT), {
                 getAncestors: function getAncestors() {
-                    return _getAncestors(currentNode);
+                    return traverser.parents();
                 },
                 getDeclaredVariables: scopeManager.getDeclaredVariables.bind(scopeManager),
                 getFilename: function getFilename() {
                     return filename;
                 },
                 getScope: function getScope() {
-                    return _getScope(scopeManager, currentNode, config.parserOptions.ecmaVersion);
+                    return _getScope(scopeManager, traverser.current(), config.parserOptions.ecmaVersion);
                 },
                 getSourceCode: function getSourceCode() {
                     return sourceCode;
                 },
                 markVariableAsUsed: function markVariableAsUsed(name) {
-                    return _markVariableAsUsed(scopeManager, currentNode, config.parserOptions, name);
+                    return _markVariableAsUsed(scopeManager, traverser.current(), config.parserOptions, name);
                 },
                 parserOptions: config.parserOptions,
                 parserPath: config.parser,
@@ -55980,13 +55952,19 @@ module.exports = function () {
 
             var eventGenerator = new CodePathAnalyzer(new NodeEventGenerator(emitter));
 
-            nodeQueue.forEach(function (traversalInfo) {
-                currentNode = traversalInfo.node;
-
-                if (traversalInfo.isEntering) {
-                    eventGenerator.enterNode(currentNode);
-                } else {
-                    eventGenerator.leaveNode(currentNode);
+            /*
+             * Each node has a type property. Whenever a particular type of
+             * node is found, an event is fired. This allows any listeners to
+             * automatically be informed that this type of node has been found
+             * and react accordingly.
+             */
+            traverser.traverse(sourceCode.ast, {
+                enter: function enter(node, parent) {
+                    node.parent = parent;
+                    eventGenerator.enterNode(node);
+                },
+                leave: function leave(node) {
+                    eventGenerator.leaveNode(node);
                 }
             });
 
@@ -98884,13 +98862,15 @@ var SourceCode = function (_TokenStore) {
     }, {
         key: "getNodeByRangeIndex",
         value: function getNodeByRangeIndex(index) {
-            var result = null;
+            var result = null,
+                resultParent = null;
             var traverser = new Traverser();
 
             traverser.traverse(this.ast, {
-                enter: function enter(node) {
+                enter: function enter(node, parent) {
                     if (node.range[0] <= index && index < node.range[1]) {
                         result = node;
+                        resultParent = parent;
                     } else {
                         this.skip();
                     }
@@ -98902,7 +98882,7 @@ var SourceCode = function (_TokenStore) {
                 }
             });
 
-            return result;
+            return result ? Object.assign({ parent: resultParent }, result) : null;
         }
 
         /**
