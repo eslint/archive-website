@@ -19,7 +19,7 @@
       </footer>
     </div><!-- /.container -->
 
-
+  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600" rel="stylesheet">
   <script id="suggestion-item-template" type="text/template">
   {%raw %}
   {{#isCategoryHeader}}<div class="suggestion-category">{{{category}}}</div>{{/isCategoryHeader}}
@@ -31,12 +31,12 @@
       <div class="suggestion-text">{{{text}}}</div>
     </div>
   </div>
-  {% endraw %}
+  {% endraw %}-
   </script>
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap.native/2.0.15/bootstrap-native.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/1.1.1/anchor.min.js"></script>
-  <script src="/js/app/search.js"></script>
+  <script src="https://cdn.jsdelivr.net/g/lodash@3.10.1,hogan.js@3.0.2,algoliasearch@3.8.1,autocomplete.js@0.12.0(autocomplete.min.js)" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap.native/2.0.15/bootstrap-native.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/1.1.1/anchor.min.js" defer></script>
+  <script src="/js/app/search.js" defer></script>
   <script>
     document.addEventListener('DOMContentLoaded', function() {
       anchors.add('.doc h2, .doc h3, .doc h4, .blog h2, .blog h3, .blog h4');
@@ -89,6 +89,16 @@
       });
     {% endif %}
     });
+  </script>
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-60915033-1', 'eslint.org');
+    ga('send', 'pageview');
+
   </script>
 </body>
 </html>
