@@ -34,15 +34,22 @@
   {% endraw %}
   </script>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.4/js/bootstrap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap.native/2.0.15/bootstrap-native.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/1.1.1/anchor.min.js"></script>
-  <script src="{{ site.url }}/js/app/search.js"></script>
+  <script src="/js/app/search.js"></script>
   <script>
-    $(document).ready(function() {
+    document.addEventListener('DOMContentLoaded', function() {
       anchors.add('.doc h2, .doc h3, .doc h4, .blog h2, .blog h3, .blog h4');
 
       {% if page.homepage %}
+      var hasClass = function(element, className) {
+        return document.querySelector(element).classList.contains(className);
+      };
+      var createNode = function (html) {
+        var range = document.createRange();
+        range.selectNode(document.getElementsByTagName('div').item(0));
+        return range.createContextualFragment(html);
+      };
       function shuffleArray(array) {
         for (var i = array.length - 1; i > 0; i--) {
           var j = Math.floor(Math.random() * (i + 1));
@@ -53,20 +60,31 @@
         return array;
       }
 
+      var logosNode = document.querySelector('.logos');
       var logos = [{% for logo in site.data.logos %}{ url: '{{ logo.url }}', src: '{{ site.url }}{{ logo.src }}', name: '{{ logo.name }}' }{% unless forloop.last %},{% endunless %}{% endfor %}];
       logos = shuffleArray(logos);
       for (var i = 0, l = logos.length; i<l; i++) {
-        var logo = $('<div class="slide col-sm-4"><a href="' + logos[i].url + '"><img src="' + logos[i].src + '" alt="' + logos[i].name + '"></a></div>');
-        $('.logos').append(logo);
+        var logo = createNode('' +
+          '<div>' +
+            '<div class="slide col-sm-4">' +
+              '<a href="' + logos[i].url + '">' +
+                '<img src="' + logos[i].src + '" alt="' + logos[i].name + '">' +
+              '</a>' +
+            '</div>' +
+          '</div>');
+        logosNode.appendChild(logo);
       }
 
-      $('.expender').click(function() {
-        if ($('.logos').hasClass('expended')) {
-          $('.logos').removeClass('expended').css('max-height', '150px');
-          $('.expender').html('see more <span class="caret"/>');
+      var expenderNode = document.querySelector('.expender');
+      expenderNode.addEventListener('click', function() {
+        if (hasClass('.logos', 'expended')) {
+          logosNode.classList.remove('expended');
+          logosNode.style['max-height'] = '150px';
+          expenderNode.innerHTML = 'see more <span class="caret"/>';
         } else {
-          $('.logos').addClass('expended').css('max-height', 5000);
-          $('.expender').html('see less <span class="dropup"><span class="caret"></span></span>');
+          logosNode.classList.add('expended');
+          logosNode.style['max-height'] = '5000px';
+          expenderNode.innerHTML = 'see less <span class="dropup"><span class="caret"></span></span>';
         }
       });
     {% endif %}
