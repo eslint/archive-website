@@ -57,7 +57,7 @@ The rule creator function and the rule options schema are still present in this 
 
 The object also has a `meta` property that contains additional meta data for the rule, including the rule options schema. Additionally, there is a `docs` object that contains information used in our documentation generation and the `fixable` property, which is present only if a rule is fixable (knowing that a rule is fixable ahead of time allows us to optimize the autofixing process as well as call this out in documentation).
 
-You can read more about the new format in [Working with Rules](http://eslint.org/docs/developer-guide/working-with-rules).
+You can read more about the new format in [Working with Rules](https://eslint.org/docs/developer-guide/working-with-rules).
 
 ## Automatic Transformation
 
