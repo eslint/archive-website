@@ -37,7 +37,7 @@ This rule also accepts an additional `exceptions` object:
     * `"ObjectExpression": true` ignores comma style in object literals
     * `"VariableDeclaration": true` ignores comma style in variable declarations
 
-A way to determine the node types as defined by [ESTree](https://github.com/estree/estree) is to use the [online demo](http://eslint.org/parser).
+A way to determine the node types as defined by [ESTree](https://github.com/estree/estree) is to use the [online demo](https://eslint.org/parser).
 
 ### last
 

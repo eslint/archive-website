@@ -11,7 +11,7 @@ This guide is intended for anyone who wants to contribute to an ESLint project. 
 
 ## [Signing the CLA](/cla)
 
-In order to submit code or documentation to an ESLint project, please electronically sign the [Contributor License Agreement](http://eslint.org/cla). The CLA is you giving us permission to use your contribution.
+In order to submit code or documentation to an ESLint project, please electronically sign the [Contributor License Agreement](https://eslint.org/cla). The CLA is you giving us permission to use your contribution.
 
 ## [Bug Reporting](reporting-bugs)
 
