@@ -31,7 +31,7 @@
       <div class="suggestion-text">{{{text}}}</div>
     </div>
   </div>
-  {% endraw %}-
+  {% endraw %}
   </script>
   <script src="https://cdn.jsdelivr.net/g/lodash@3.10.1,hogan.js@3.0.2,algoliasearch@3.8.1,autocomplete.js@0.12.0(autocomplete.min.js)" defer></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap.native/2.0.15/bootstrap-native.min.js" defer></script>
@@ -43,12 +43,10 @@
   <script>
     document.addEventListener('DOMContentLoaded', function() {
 
-      if ("serviceWorker" in navigator) {
-        navigator.serviceWorker.register("/sw.js").catch(function(e) {
-          console.error("Error during service worker registration:", e);
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('/sw.js').catch(function(e) {
+          console.error('Error during service worker registration:', e);
         });
-      } else {
-        console.log("service worker is not supported");
       }
 
       anchors.add('.doc h2, .doc h3, .doc h4, .blog h2, .blog h3, .blog h4');
