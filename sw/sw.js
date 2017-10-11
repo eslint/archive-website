@@ -1,4 +1,4 @@
-importScripts('workbox-sw.prod.v2.0.3.js');
+importScripts('https://cdn.jsdelivr.net/npm/workbox-sw@2.1.0/build/importScripts/workbox-sw.prod.v2.1.0.min.js');
 const workboxSW = new self.WorkboxSW();
 workboxSW.precache([]);
 
