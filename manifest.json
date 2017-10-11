@@ -1,0 +1,15 @@
+{
+  "name": "ESLint - The pluggable linting utility for JavaScript and JSX",
+  "short_name": "ESLint",
+  "start_url": "/",
+  "display": "standalone",
+  "theme_color": "#463fd4",
+  "background_color": "#463fd4",
+  "icons": [
+    {
+      "src": "img/favicon.512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
