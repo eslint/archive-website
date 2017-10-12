@@ -1,4 +1,4 @@
-/* global jQuery, algoliasearch, autocomplete */
+/* global algoliasearch, autocomplete */
 
 "use strict";
 
@@ -72,7 +72,7 @@
         {
             source: autocompleteSource,
             displayKey: function() {
-                return $searchInput.val();
+                return $searchInput.value;
             },
             templates: {
                 suggestion: function(suggestion) {
