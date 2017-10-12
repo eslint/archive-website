@@ -2,11 +2,11 @@
 
 "use strict";
 
-(function() {
+(function($) {
     var client = algoliasearch("XWXG7MEBSB", "653e00f423bee91f9863571eed16f2f5");
-    var suggestionTemplate = window.Hogan.compile(document.querySelector("#suggestion-item-template").innerHTML);
+    var suggestionTemplate = window.Hogan.compile($("#suggestion-item-template").text());
     var searchInputSelector = "#eslint-search-input";
-    var $searchInput = document.querySelector(searchInputSelector);
+    var $searchInput = $(searchInputSelector);
     var suggestionFooter = "<a class=\"suggestion-footer\" href=\"https://www.algolia.com/?utm_source=eslint\" target=\"_blank\">powered by <span class=\"suggestion-footer-logo\">Algolia</span></a>";
 
     // Reorder hits to group them by section
@@ -89,24 +89,23 @@
     });
 
     // Init autocomplete
-    var htmlClassList = document.documentElement.classList;
+    $(function() {
+        $("html").removeClass("no-js").addClass("js");
 
-    htmlClassList.remove("no-js");
-    htmlClassList.add("js");
+        // Toggle and focus the search bar when clicking on the magnifying glass on
+        // small devices. This is achieved through a label and corresponding
+        // checkbox.
+        // This could have been done in complete HTML except that it does not work
+        // on iOS (focus can only be triggered from user interaction), so we need to
+        // replicate the behavior using JavaScript.
+        var $toggleCheckbox = $("#eslint-toggle-search");
+        var $toggleLabels = $(".eslint-toggle-search-open");
 
-    // Toggle and focus the search bar when clicking on the magnifying glass on
-    // small devices. This is achieved through a label and corresponding
-    // checkbox.
-    // This could have been done in complete HTML except that it does not work
-    // on iOS (focus can only be triggered from user interaction), so we need to
-    // replicate the behavior using JavaScript.
-    var $toggleCheckbox = document.querySelector("#eslint-toggle-search");
-    var $toggleLabels = document.querySelector(".eslint-toggle-search-open");
-
-    $toggleLabels.addEventListener("click", function(e) {
-        $toggleCheckbox.click();
-        $searchInput.focus();
-        e.preventDefault();
+        $toggleLabels.on("click", function(e) {
+            $toggleCheckbox.click();
+            $searchInput.focus();
+            e.preventDefault();
+        });
     });
-})();
+}(jQuery));
 
