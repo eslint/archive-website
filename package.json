@@ -13,7 +13,7 @@
     "lint": "eslint js/app/ --ext=.js,.jsx",
     "test": "npm run lint",
     "less": "lessc styles/less/main.less styles/main.css -x --source-map=styles/main.css.map",
-    "generate-sw": "workbox inject:manifest"
+    "generate-sw": "rm -rf _site && bundle exec jekyll build && workbox inject:manifest"
   },
   "repository": {
     "type": "git",
