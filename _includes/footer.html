@@ -36,15 +36,15 @@
   <script src="https://cdn.jsdelivr.net/g/lodash@3.10.1,hogan.js@3.0.2,algoliasearch@3.8.1,autocomplete.js@0.12.0(autocomplete.min.js)" defer></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap.native/2.0.15/bootstrap-native.min.js" defer></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.1.0/anchor.min.js" defer></script>
-  <script src="/js/app/search.js" defer></script>
+  <script src="{{ site.url }}/js/app/search.js" defer></script>
   {% if page.homepage %}
-  <script src="/js/app/image-lazy-loader.js" defer></script>
+  <script src="{{ site.url }}/js/app/image-lazy-loader.js" defer></script>
   {% endif %}
   <script>
     document.addEventListener('DOMContentLoaded', function() {
 
       if ('serviceWorker' in navigator) {
-        navigator.serviceWorker.register('/sw.js').catch(function(e) {
+        navigator.serviceWorker.register('{{ site.url }}/sw.js').catch(function(e) {
           console.error('Error during service worker registration:', e);
         });
       }
@@ -119,7 +119,7 @@
 
   </script>
   {% if page.demopage %}
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.15/require.min.js" data-main="/js/app/demo/requireConfig" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.15/require.min.js" data-main="{{ site.url }}/js/app/demo/requireConfig" defer></script>
   {% endif %}
 </body>
 </html>
