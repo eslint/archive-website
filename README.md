@@ -7,6 +7,7 @@ This contains the code running on [eslint.org](http://eslint.org).
 ## Pull Requests
 
 Please note that all HTML documentation is split between this repository and the main [ESLint repository](https://github.com/eslint/eslint). Documentation for rules and APIs is located in the core repository, the rest is located in this repository. You can easily determine if original documentation file is native to website repository by checking for `<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->` comment just below the header of the markdown file. If that header is present, this file is located in the core ESLint repository and any pull requests should be sent there. Otherwise, file is native to this site repository and can be fixed by creating a pull request in this repository.
+We are using [PWA](https://developers.google.com/web/progressive-web-apps/) approach, so after adding changes new [service-worker](https://developer.mozilla.org/ru/docs/Web/API/Service_Worker_API) file has to be added. Just run `npm run generate-sw` and commit new changes.
 
 ## How to add your company/project logo to the site
 
