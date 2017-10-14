@@ -5,13 +5,13 @@ edit_link: https://github.com/eslint/eslint/edit/master/docs/rules/block-spacing
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
-# Disallow or enforce spaces inside of single line blocks (block-spacing)
+# Disallow or enforce spaces inside of blocks after opening block and before closing block (block-spacing)
 
 (fixable) The `--fix` option on the [command line](../user-guide/command-line-interface#fix) can automatically fix some of the problems reported by this rule.
 
 ## Rule Details
 
-This rule enforces consistent spacing inside single-line blocks.
+This rule enforces consistent spacing inside an open block token and the next token on the same line. This rule also enforces consistent spacing inside a close block token and previous token on the same line.
 
 ## Options
 
@@ -29,6 +29,9 @@ Examples of **incorrect** code for this rule with the default `"always"` option:
 
 function foo() {return true;}
 if (foo) { bar = 0;}
+function baz() {let i = 0;
+    return i;
+}
 ```
 
 Examples of **correct** code for this rule with the default `"always"` option:

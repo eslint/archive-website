@@ -9,7 +9,7 @@ One of the great things about open source projects is that anyone can contribute
 
 This guide is intended for anyone who wants to contribute to an ESLint project. Please read it carefully as it answers a lot of the questions many newcomers have when first working with our projects.
 
-In order to submit code or documentation to an ESLint project, please electronically sign the [Contributor License Agreement](http://eslint.org/cla). It is very important that you read and understand the CLA, as it gives us the right to use your contribution.
+In order to submit code or documentation to an ESLint project, please electronically sign the [Contributor License Agreement](https://eslint.org/cla). It is very important that you read and understand the CLA, as it gives us the right to use your contribution.
 
 ## Ways to Contribute
 
@@ -18,7 +18,7 @@ There are many different ways you can contribute:
 * **Filing issues** - if you find a bug or want to request an enhancement, [file an issue](https://github.com/eslint/eslint/issues/new).
 * **Working on issues** - if you have coding skills and want to contribute, you're welcome to pick up [any open issue](https://github.com/eslint/eslint/issues/).
 * **Documentation** - if you enjoy writing and want to improve our documentation, it's all in [our repo](https://github.com/eslint/eslint/tree/master/docs) as well.
-* **Graphic/web design** - if you want to help improve [eslint.org](http://eslint.org), our HTML, CSS, and JavaScript is all in a [separate repo](https://github.com/eslint/eslint.github.io)
+* **Graphic/web design** - if you want to help improve [eslint.org](https://eslint.org), our HTML, CSS, and JavaScript is all in a [separate repo](https://github.com/eslint/eslint.github.io)
 * **Integrations** - if you'd like ESLint support in your favorite text editor, build system, or other software, we could use your help in creating plugins and addons.
 
 For each way to contribute, there are some specific guidelines to keep in mind.
@@ -77,7 +77,7 @@ No one will blame you for backing out of an issue if you are unable to complete 
 
 ### Documentation
 
-We treat documentation the same as we do code, and that means you are welcome to improve upon it. The documentation is located in [our repo](https://github.com/eslint/eslint/tree/master/docs). All of this documentation gets converted into HTML and pushed to [eslint.org](http://eslint.org) with each release.
+We treat documentation the same as we do code, and that means you are welcome to improve upon it. The documentation is located in [our repo](https://github.com/eslint/eslint/tree/master/docs). All of this documentation gets converted into HTML and pushed to [eslint.org](https://eslint.org) with each release.
 
 There are lots of ways to help:
 
@@ -89,11 +89,11 @@ The ESLint project is committed to having great documentation as we believe that
 
 ### Graphic/Web Design
 
-Our site, [eslint.org](http://eslint.org) is our public face. It was started by designers and developers who donated their time and energy to getting it off the ground, and in the spirit of open source, we have shared the code in a [separate repo](https://github.com/eslint/eslint.github.io).
+Our site, [eslint.org](https://eslint.org) is our public face. It was started by designers and developers who donated their time and energy to getting it off the ground, and in the spirit of open source, we have shared the code in a [separate repo](https://github.com/eslint/eslint.github.io).
 
 If you want to help, please check the [site issues](https://github.com/eslint/eslint.github.io/issues) to see where your help is most needed. In addition, we are always looking to improve our layout, design, and information architecture. Just as with the main ESLint project, you should feel free to file and work on issues.
 
-**Important:** The documentation (everything under http://eslint.org/docs/) actually resides in the [main repo](https://github.com/eslint/eslint/tree/master/docs). Changes to that content must be made there. These pages are auto-generated on [eslint.org](http://eslint.org) with each release.
+**Important:** The documentation (everything under https://eslint.org/docs/) actually resides in the [main repo](https://github.com/eslint/eslint/tree/master/docs). Changes to that content must be made there. These pages are auto-generated on [eslint.org](https://eslint.org) with each release.
 
 ### Integrations
 

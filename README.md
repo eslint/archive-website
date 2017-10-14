@@ -2,7 +2,7 @@
 
 # ESLint Web Site
 
-This contains the code running on [eslint.org](http://eslint.org).
+This contains the code running on [eslint.org](https://eslint.org).
 
 ## Pull Requests
 

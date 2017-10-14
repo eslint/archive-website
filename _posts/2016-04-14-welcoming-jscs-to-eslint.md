@@ -18,7 +18,7 @@ Below you'll find more details about how we'll move forward as a single team and
 
 ## Welcoming the JSCS Team
 
-I'm happy to announce that, effectively immediately, the JSCS team is now part of the ESLint team. I'd like to invite everyone to welcome Marat Dulin, Oleg Gaidarenko, Mike Sherov, Alexej Yaroshevich, and Henry Zhu, and we're looking forward to working with them all. All of the JSCS team members will be joining ESLint as committers (based on our [governance policy](http://eslint.org/docs/maintainer-guide/governance.html#committers)) for appreciation of their work on JSCS.
+I'm happy to announce that, effectively immediately, the JSCS team is now part of the ESLint team. I'd like to invite everyone to welcome Marat Dulin, Oleg Gaidarenko, Mike Sherov, Alexej Yaroshevich, and Henry Zhu, and we're looking forward to working with them all. All of the JSCS team members will be joining ESLint as committers (based on our [governance policy](https://eslint.org/docs/maintainer-guide/governance.html#committers)) for appreciation of their work on JSCS.
 
 Joel Kemp has decided to focus on other work and won't be joining ESLint. I, and the rest of the team, would also like to thank Joel for his many contributions to JSCS over the years.
 
