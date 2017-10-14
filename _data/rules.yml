@@ -569,7 +569,9 @@ categories:
         fixable: true
         name: array-element-newline
         recommended: false
-      - description: enforce consistent spacing inside single-line blocks
+      - description: >-
+          disallow or enforce spaces inside of blocks after opening block and
+          before closing block
         fixable: true
         name: block-spacing
         recommended: false
@@ -679,6 +681,10 @@ categories:
         fixable: true
         name: lines-around-comment
         recommended: false
+      - description: require or disallow an empty line between class members
+        fixable: true
+        name: lines-between-class-members
+        recommended: false
       - description: enforce a maximum depth that blocks can be nested
         fixable: false
         name: max-depth
@@ -706,6 +712,10 @@ categories:
       - description: enforce a maximum number of statements allowed per line
         fixable: false
         name: max-statements-per-line
+        recommended: false
+      - description: enforce a particular style for multiline comments
+        fixable: true
+        name: multiline-comment-style
         recommended: false
       - description: enforce newlines between operands of ternary expressions
         fixable: false

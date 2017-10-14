@@ -364,6 +364,11 @@ if (a) {
 
 You can turn this rule off if you are not concerned with the consistency of padding within blocks.
 
+## Related Rules
+
+* [lines-between-class-members](lines-between-class-members)
+* [padding-line-between-statement](padding-line-between-statement)
+
 ## Version
 
 This rule was introduced in ESLint 0.9.0.
