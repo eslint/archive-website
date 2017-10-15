@@ -3,6 +3,10 @@ var ImageObserver = (function() {
 
     function createObserver() {
 
+        if (!("IntersectionObserver" in window)) {
+            return;
+        }
+
         // small polyfill for Microsoft Edge 15 isIntersecting property
         // see https://github.com/WICG/IntersectionObserver/issues/211#issuecomment-309144669
         if ("IntersectionObserver" in window &&
@@ -34,8 +38,13 @@ var ImageObserver = (function() {
 
     function observe() {
         var imgElements = document.querySelectorAll(".lazyload");
+
         imgElements.forEach(function(img) {
-            observer.observe(img);
+            if (observer) {
+                observer.observe(img);
+            } else {
+                img.src = img.dataset.src;
+            }
         });
     }
 
