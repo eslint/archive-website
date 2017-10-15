@@ -42,15 +42,6 @@
   {% endif %}
   <script>
     document.addEventListener('DOMContentLoaded', function() {
-
-      if ("serviceWorker" in navigator) {
-        navigator.serviceWorker.register("/sw.js").catch(function(e) {
-          console.error("Error during service worker registration:", e);
-        });
-      } else {
-        console.log("service worker is not supported");
-      }
-
       anchors.add('.doc h2, .doc h3, .doc h4, .blog h2, .blog h3, .blog h4');
 
       {% if page.homepage %}
