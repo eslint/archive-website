@@ -1,6 +1,6 @@
 "use strict";
 
-define(["react", "jsx!editor", "jsx!messages", "jsx!fixedCode", "jsx!configuration", "eslint"], function(React, Editor, Messages, FixedCode, Configuration, Linter) {
+define(["react", "jsx!editor", "jsx!messages", "jsx!fixedCode", "jsx!configuration", "eslint", "unicode"], function(React, Editor, Messages, FixedCode, Configuration, Linter, Unicode) {
     var hasLocalStorage = (function() {
         try {
             window.localStorage.setItem("localStorageTest", "foo");
@@ -58,7 +58,7 @@ define(["react", "jsx!editor", "jsx!messages", "jsx!fixedCode", "jsx!configurati
             var storedState = JSON.parse(window.localStorage.getItem("linterDemoState") || null);
             var urlState = (function() {
                 try {
-                    return JSON.parse(window.atob(window.location.hash.replace(/^#/, "")));
+                    return JSON.parse(Unicode.decodeFromBase64(window.location.hash.replace(/^#/, "")));
                 } catch (err) {
                     return null;
                 }
@@ -108,7 +108,7 @@ define(["react", "jsx!editor", "jsx!messages", "jsx!fixedCode", "jsx!configurati
             if (hasLocalStorage) {
                 window.localStorage.setItem("linterDemoState", serializedState);
             }
-            window.location.hash = window.btoa(serializedState);
+            window.location.hash = Unicode.encodeToBase64(serializedState);
         },
         enableFixMode: function() {
             this.setState({ fix: true });
