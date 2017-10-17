@@ -1,12 +1,12 @@
-/* global jQuery, algoliasearch, autocomplete */
+/* global algoliasearch, autocomplete */
 
 "use strict";
 
-(function($) {
+(function() {
     var client = algoliasearch("XWXG7MEBSB", "653e00f423bee91f9863571eed16f2f5");
-    var suggestionTemplate = window.Hogan.compile($("#suggestion-item-template").text());
+    var suggestionTemplate = window.Hogan.compile(document.querySelector("#suggestion-item-template").innerHTML);
     var searchInputSelector = "#eslint-search-input";
-    var $searchInput = $(searchInputSelector);
+    var $searchInput = document.querySelector(searchInputSelector);
     var suggestionFooter = "<a class=\"suggestion-footer\" href=\"https://www.algolia.com/?utm_source=eslint\" target=\"_blank\">powered by <span class=\"suggestion-footer-logo\">Algolia</span></a>";
 
     // Reorder hits to group them by section
@@ -72,7 +72,7 @@
         {
             source: autocompleteSource,
             displayKey: function() {
-                return $searchInput.val();
+                return $searchInput.value;
             },
             templates: {
                 suggestion: function(suggestion) {
@@ -89,23 +89,24 @@
     });
 
     // Init autocomplete
-    $(function() {
-        $("html").removeClass("no-js").addClass("js");
+    var htmlClassList = document.documentElement.classList;
 
-        // Toggle and focus the search bar when clicking on the magnifying glass on
-        // small devices. This is achieved through a label and corresponding
-        // checkbox.
-        // This could have been done in complete HTML except that it does not work
-        // on iOS (focus can only be triggered from user interaction), so we need to
-        // replicate the behavior using JavaScript.
-        var $toggleCheckbox = $("#eslint-toggle-search");
-        var $toggleLabels = $(".eslint-toggle-search-open");
+    htmlClassList.remove("no-js");
+    htmlClassList.add("js");
 
-        $toggleLabels.on("click", function(e) {
-            $toggleCheckbox.click();
-            $searchInput.focus();
-            e.preventDefault();
-        });
+    // Toggle and focus the search bar when clicking on the magnifying glass on
+    // small devices. This is achieved through a label and corresponding
+    // checkbox.
+    // This could have been done in complete HTML except that it does not work
+    // on iOS (focus can only be triggered from user interaction), so we need to
+    // replicate the behavior using JavaScript.
+    var $toggleCheckbox = document.querySelector("#eslint-toggle-search");
+    var $toggleLabels = document.querySelector(".eslint-toggle-search-open");
+
+    $toggleLabels.addEventListener("click", function(e) {
+        $toggleCheckbox.click();
+        $searchInput.focus();
+        e.preventDefault();
     });
-}(jQuery));
+})();
 
