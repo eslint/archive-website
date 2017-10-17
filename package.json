@@ -12,8 +12,7 @@
     "start": "bundle exec jekyll serve --watch --incremental",
     "lint": "eslint js/app/ --ext=.js,.jsx",
     "test": "npm run lint",
-    "less": "lessc styles/less/main.less styles/main.css -x --source-map=styles/main.css.map",
-    "generate-sw": "rm -rf _site && bundle exec jekyll build && workbox inject:manifest"
+    "less": "lessc styles/less/main.less styles/main.css -x --source-map=styles/main.css.map"
   },
   "repository": {
     "type": "git",
@@ -35,7 +34,6 @@
     "eslint-plugin-react": "^7.3.0",
     "json-loader": "^0.5.2",
     "less": "^2.7.1",
-    "node-libs-browser": "^0.5.2",
-    "workbox-cli": "^2.0.3"
+    "node-libs-browser": "^0.5.2"
   }
 }
