@@ -9,7 +9,7 @@ edit_link: https://github.com/eslint/eslint/edit/master/docs/rules/object-shorth
 
 (fixable) The `--fix` option on the [command line](../user-guide/command-line-interface#fix) can automatically fix some of the problems reported by this rule.
 
-EcmaScript 6 provides a concise form for defining object literal methods and properties. This
+ECMAScript 6 provides a concise form for defining object literal methods and properties. This
 syntax can make defining complex object literals much cleaner.
 
 Here are a few common examples using the ES5 syntax:

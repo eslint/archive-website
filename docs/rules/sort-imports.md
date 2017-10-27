@@ -212,8 +212,8 @@ This rule is a formatting preference and not following it won't negatively affec
 
 ## Related Rules
 
-* [sort-keys](https://eslint.org/docs/rules/sort-keys)
-* [sort-vars](https://eslint.org/docs/rules/sort-vars)
+* [sort-keys](sort-keys)
+* [sort-vars](sort-vars)
 
 ## Version
 

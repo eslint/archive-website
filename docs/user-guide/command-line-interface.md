@@ -161,11 +161,11 @@ Examples:
 
 #### `--parser`
 
-This option allows you to specify a parser to be used by eslint. By default, `espree` will be used.
+This option allows you to specify a parser to be used by ESLint. By default, `espree` will be used.
 
 #### `--parser-options`
 
-This option allows you to specify parser options to be used by eslint. Note that the available parser options are determined by the parser being used.
+This option allows you to specify parser options to be used by ESLint. Note that the available parser options are determined by the parser being used.
 
 Examples:
 
@@ -317,18 +317,18 @@ When specified, the given format is output into the provided file name.
 
 This option specifies the output format for the console. Possible formats are:
 
-* [checkstyle](formatters/#checkstyle)
-* [codeframe](formatters/#codeframe)
-* [compact](formatters/#compact)
-* [html](formatters/#html)
-* [jslint-xml](formatters/#jslint-xml)
-* [json](formatters/#json)
-* [junit](formatters/#junit)
-* [stylish](formatters/#stylish) (the default)
-* [table](formatters/#table)
-* [tap](formatters/#tap)
-* [unix](formatters/#unix)
-* [visualstudio](formatters/#visualstudio)
+* [checkstyle](formatters)
+* [codeframe](formatters)
+* [compact](formatters)
+* [html](formatters)
+* [jslint-xml](formatters)
+* [json](formatters)
+* [junit](formatters)
+* [stylish](formatters) (the default)
+* [table](formatters)
+* [tap](formatters)
+* [unix](formatters)
+* [visualstudio](formatters)
 
 Example:
 
@@ -439,4 +439,4 @@ ESLint supports `.eslintignore` files to exclude files from the linting process 
     node_modules/*
     **/vendor/*.js
 
-A more detailed breakdown of supported patterns and directories ESLint ignores by default can be found in [Configuring ESLint](https://eslint.org/docs/user-guide/configuring#ignoring-files-and-directories).
+A more detailed breakdown of supported patterns and directories ESLint ignores by default can be found in [Configuring ESLint](configuring).

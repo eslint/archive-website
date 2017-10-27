@@ -74,9 +74,9 @@ The most important method on `Linter` is `verify()`, which initiates linting of 
     * **Note**: If you want to lint text and have your configuration be read and processed, use CLIEngine's [`executeOnFiles`](#executeonfiles) or [`executeOnText`](#executeontext) instead.
 * `options` - (optional) Additional options for this run.
     * `filename` - (optional) the filename to associate with the source code.
-    * `preprocess` - (optional) A function that accepts a string containing source text, and returns an array of strings containing blocks of code to lint. Also see: [Processors in Plugins](/docs/developer-guide/working-with-plugins#processors-in-plugins)
-    * `postprocess` - (optional) A function that accepts an array of problem lists (one list of problems for each block of code from `preprocess`), and returns a one-dimensional array of problems containing problems for the original, unprocessed text. Also see: [Processors in Plugins](/docs/developer-guide/working-with-plugins#processors-in-plugins)
-    * `allowInlineConfig` - (optional) set to `false` to disable inline comments from changing eslint rules.
+    * `preprocess` - (optional) A function that accepts a string containing source text, and returns an array of strings containing blocks of code to lint. Also see: [Processors in Plugins](/docs/developer-guide/working-with-plugins)
+    * `postprocess` - (optional) A function that accepts an array of problem lists (one list of problems for each block of code from `preprocess`), and returns a one-dimensional array of problems containing problems for the original, unprocessed text. Also see: [Processors in Plugins](/docs/developer-guide/working-with-plugins)
+    * `allowInlineConfig` - (optional) set to `false` to disable inline comments from changing ESLint rules.
     * `reportUnusedDisableDirectives` - (optional) when set to `true`, adds reported errors for unused `eslint-disable` directives when no problems would be reported in the disabled area anyway.
 
 If the third argument is a string, it is interpreted as the `filename`.
@@ -713,8 +713,8 @@ Example usage:
 ```js
 "use strict";
 
-const rule = require("../../../lib/rules/my-rule");
-const RuleTester = require("eslint").RuleTester;
+const rule = require("../../../lib/rules/my-rule"),
+    RuleTester = require("eslint").RuleTester;
 
 const ruleTester = new RuleTester();
 
@@ -796,9 +796,9 @@ Example of customizing `RuleTester`:
 ```js
 "use strict";
 
-const RuleTester = require("eslint").RuleTester;
-const test = require("my-test-runner");
-const myRule = require("../../../lib/rules/my-rule");
+const RuleTester = require("eslint").RuleTester,
+    test = require("my-test-runner"),
+    myRule = require("../../../lib/rules/my-rule");
 
 RuleTester.describe = function(text, method) {
     RuleTester.it.title = text;

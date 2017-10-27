@@ -9,7 +9,7 @@ edit_link: https://github.com/eslint/eslint/edit/master/docs/rules/function-pare
 
 (fixable) The `--fix` option on the [command line](../user-guide/command-line-interface#fix) can automatically fix some of the problems reported by this rule.
 
-Many styleguides require or disallow newlines inside of function parentheses.
+Many style guides require or disallow newlines inside of function parentheses.
 
 ## Rule Details
 

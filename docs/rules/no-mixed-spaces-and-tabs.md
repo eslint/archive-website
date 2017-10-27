@@ -71,7 +71,7 @@ function main() {
 
 ## Further Reading
 
-* [Smart Tabs](http://www.emacswiki.org/emacs/SmartTabs)
+* [Smart Tabs](https://www.emacswiki.org/emacs/SmartTabs)
 
 ## Version
 

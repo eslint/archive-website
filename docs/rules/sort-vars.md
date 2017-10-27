@@ -81,8 +81,8 @@ This rule is a formatting preference and not following it won't negatively affec
 
 ## Related Rules
 
-* [sort-keys](https://eslint.org/docs/rules/sort-keys)
-* [sort-imports](https://eslint.org/docs/rules/sort-imports)
+* [sort-keys](sort-keys)
+* [sort-imports](sort-imports)
 
 ## Version
 
