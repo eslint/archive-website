@@ -10,17 +10,8 @@ const routes = {
   jsdelivr: 'https://cdn.jsdelivr.net/(.*)'
 };
 
-const registerRoute = function (route, cacheName) {
-  console.log(route);
-  workboxSW.router.registerRoute(route,
-    workboxSW.strategies.cacheFirst({
-      cacheName: cacheName,
-      cacheableResponse: {
-        statuses: [0, 200]
-      },
-      networkTimeoutSeconds: 4
-    })
-  );
+const registerRoute = function (route) {
+  workboxSW.router.registerRoute(route, workboxSW.strategies.networkFirst());
 };
 
 for (let routeName in routes) {
