@@ -38,6 +38,7 @@ var ImageObserver = (function() {
 
     function observe() {
         var imgElements = document.querySelectorAll(".lazyload");
+
         imgElements.forEach(function(img) {
             if (observer) {
                 observer.observe(img);
@@ -46,7 +47,6 @@ var ImageObserver = (function() {
             }
         });
     }
-
 
     return {
         createObserver: createObserver,

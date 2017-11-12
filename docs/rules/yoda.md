@@ -157,7 +157,7 @@ if (-1 < str.indexOf(substr)) {
 
 ## Further Reading
 
-* [Yoda Conditions](http://en.wikipedia.org/wiki/Yoda_conditions)
+* [Yoda Conditions](https://en.wikipedia.org/wiki/Yoda_conditions)
 * [Yoda Notation and Safe Switching](http://thomas.tuerke.net/on/design/?with=1249091668#msg1146181680)
 
 ## Version

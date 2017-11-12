@@ -1,65 +1,80 @@
 "use strict";
 
 define(["react", "jsx!parserOptions", "jsx!environments", "jsx!rulesConfig"], function(React, ParserOptions, Environments, RulesConfig) {
-    return function Configuration(props) {
-        return (
-            <div className="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-                <div className="panel panel-default">
-                    <div className="panel-heading demo-config-bar" role="tab" id="headingOne">
-                        <h4 className="panel-title">
-                            <a data-toggle="collapse" data-parent="#accordion" href="#configuration" aria-expanded="true" aria-controls="configuration">
+    return React.createClass({
+        displayName: "Configuration",
+        getInitialState: function() {
+            return { showingConfig: false };
+        },
+        toggleShowingConfig: function() {
+            this.setState(function(state) {
+                return { showingConfig: !state.showingConfig };
+            });
+        },
+        render: function Configuration() {
+            return (
+                <div className="panel-group" id="accordion">
+                    <div className="panel panel-default">
+                        <button
+                            className="panel-heading demo-config-bar"
+                            tabIndex={0}
+                            onClick={this.toggleShowingConfig}
+                        >
+                            <h4 className="panel-title">
                                 Rules Configuration
-                            </a>
-                        </h4>
-                        <div className="eslint-version-info">
-                            ESLint v{props.eslintVersion}
-                        </div>
-                    </div>
-                    <div id="configuration" className="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
-                        <div className="panel-body">
-                            <ParserOptions
-                                options={props.options.parserOptions}
-                                onUpdate={
-                                    function(parserOptions) {
-                                        props.onUpdate(Object.assign({}, props.options, { parserOptions: parserOptions }));
-                                    }
-                                }
-                            />
-                            <hr />
-                            <Environments
-                                env={props.options.env}
-                                envNames={props.envNames}
-                                onUpdate={
-                                    function(env) {
-                                        props.onUpdate(Object.assign({}, props.options, { env: env }));
-                                    }
-                                }
-                            />
-                            <hr />
-                            <RulesConfig
-                                config={props.options.rules}
-                                ruleNames={props.ruleNames}
-                                docs={props.docs}
-                                onUpdate={
-                                    function(rules) {
-                                        props.onUpdate(Object.assign({}, props.options, { rules: rules }));
-                                    }
-                                }
-                            />
-                            <hr />
-                            <a
-                                download=".eslintrc.json"
-                                href={
-                                    "data:application/json;charset=utf-8," +
-                                    encodeURIComponent(JSON.stringify(props.options, null, 4))
-                                }
-                            >
-                                Download <code className="highlighter-rouge">.eslintrc.json</code> file with this configuration
-                            </a>
-                        </div>
+                            </h4>
+                            <div className="eslint-version-info">
+                                ESLint v{this.props.eslintVersion}
+                            </div>
+                        </button>
+                        {
+                            this.state.showingConfig && <div>
+                                <div className="panel-body">
+                                    <ParserOptions
+                                        options={this.props.options.parserOptions}
+                                        onUpdate={
+                                            function(parserOptions) {
+                                                this.props.onUpdate(Object.assign({}, this.props.options, { parserOptions: parserOptions }));
+                                            }.bind(this)
+                                        }
+                                    />
+                                    <hr />
+                                    <Environments
+                                        env={this.props.options.env}
+                                        envNames={this.props.envNames}
+                                        onUpdate={
+                                            function(env) {
+                                                this.props.onUpdate(Object.assign({}, this.props.options, { env: env }));
+                                            }.bind(this)
+                                        }
+                                    />
+                                    <hr />
+                                    <RulesConfig
+                                        config={this.props.options.rules}
+                                        ruleNames={this.props.ruleNames}
+                                        docs={this.props.docs}
+                                        onUpdate={
+                                            function(rules) {
+                                                this.props.onUpdate(Object.assign({}, this.props.options, { rules: rules }));
+                                            }.bind(this)
+                                        }
+                                    />
+                                    <hr />
+                                    <a
+                                        download=".eslintrc.json"
+                                        href={
+                                            "data:application/json;charset=utf-8," +
+                                                encodeURIComponent(JSON.stringify(this.props.options, null, 4))
+                                        }
+                                    >
+                                        Download <code className="highlighter-rouge">.eslintrc.json</code> file with this configuration
+                                    </a>
+                                </div>
+                            </div>
+                        }
                     </div>
                 </div>
-            </div>
-        );
-    };
+            );
+        }
+    });
 });

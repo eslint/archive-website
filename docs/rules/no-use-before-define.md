@@ -32,7 +32,6 @@ function g() {
 }
 var b = 1;
 
-// With blockBindings: true
 {
     alert(c);
     let c = 1;
@@ -57,9 +56,8 @@ function g() {
     return b;
 }
 
-// With blockBindings: true
 {
-    let C;
+    let c;
     c++;
 }
 ```

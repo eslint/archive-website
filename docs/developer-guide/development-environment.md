@@ -13,7 +13,7 @@ ESLint has a very lightweight development environment that makes updating code f
 
 Go to <http://nodejs.org/> to download and install the latest stable version for your operating system.
 
-Most of the installers come with [npm](http://npmjs.org/) already installed, but if for some reason it doesn't work on your system, you can install it manually using the instructions on the website.
+Most of the installers come with [npm](https://www.npmjs.com/) already installed, but if for some reason it doesn't work on your system, you can install it manually using the instructions on the site.
 
 ## Step 2: Fork and checkout your own ESLint repository
 
@@ -27,8 +27,6 @@ $ npm install
 ```
 
 You must be connected to the Internet for this step to work. You'll see a lot of utilities being downloaded.
-
-If you have an ESLint configuration file in your home directory (such as `~/.eslintrc.js`), either delete or rename it. This will help ensure that all the tests in Step 5 pass. It will also prevent ESLint from running with an incorrect configuration in case the configuration file in your development environment becomes misnamed, moved, or deleted.
 
 ## Step 3: Add the upstream source
 
