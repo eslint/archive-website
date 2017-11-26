@@ -7,6 +7,8 @@ edit_link: https://github.com/eslint/eslint/edit/master/docs/rules/sort-vars.md
 
 # Variable Sorting (sort-vars)
 
+(fixable) The `--fix` option on the [command line](../user-guide/command-line-interface#fix) can automatically fix some of the problems reported by this rule.
+
 When declaring multiple variables within the same block, some developers prefer to sort variable names alphabetically to be able to find necessary variable easier at the later time. Others feel that it adds complexity and becomes burden to maintain.
 
 ## Rule Details

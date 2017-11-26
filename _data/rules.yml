@@ -649,6 +649,10 @@ categories:
         fixable: false
         name: id-match
         recommended: false
+      - description: enforce the location of arrow function bodies
+        fixable: true
+        name: implicit-arrow-linebreak
+        recommended: false
       - description: enforce consistent indentation
         fixable: true
         name: indent
@@ -886,7 +890,7 @@ categories:
         name: sort-keys
         recommended: false
       - description: require variables within the same declaration block to be sorted
-        fixable: false
+        fixable: true
         name: sort-vars
         recommended: false
       - description: enforce consistent spacing before blocks
