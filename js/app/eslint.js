@@ -48927,7 +48927,7 @@ function hasOwnProperty(obj, prop) {
 },{"./support/isBuffer":110,"_process":99,"inherits":109}],112:[function(require,module,exports){
 module.exports={
   "name": "eslint",
-  "version": "4.12.0",
+  "version": "4.12.1",
   "author": "Nicholas C. Zakas <nicholas+npm@nczconsulting.com>",
   "description": "An AST-based pattern checker for JavaScript.",
   "bin": {
