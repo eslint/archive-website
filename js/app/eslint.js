@@ -14118,7 +14118,7 @@ function addSchema(schema, key, _skipValidation, _meta) {
   if (Array.isArray(schema)) {
     for (var i = 0; i < schema.length; i++) {
       this.addSchema(schema[i], undefined, _skipValidation, _meta);
-    }return;
+    }return this;
   }
   var id = this._getId(schema);
   if (id !== undefined && typeof id != 'string') throw new Error('schema id must be string');
@@ -48927,7 +48927,7 @@ function hasOwnProperty(obj, prop) {
 },{"./support/isBuffer":110,"_process":99,"inherits":109}],112:[function(require,module,exports){
 module.exports={
   "name": "eslint",
-  "version": "4.12.1",
+  "version": "4.13.0",
   "author": "Nicholas C. Zakas <nicholas+npm@nczconsulting.com>",
   "description": "An AST-based pattern checker for JavaScript.",
   "bin": {
@@ -58514,19 +58514,37 @@ module.exports = {
                         report(node);
                     }
 
-                    // Properties have their own rules
-                } else if (node.parent.type === "Property") {
+                    /*
+                     * Properties have their own rules, and
+                     * AssignmentPattern nodes can be treated like Properties:
+                     * e.g.: const { no_camelcased = false } = bar;
+                     */
+                } else if (node.parent.type === "Property" || node.parent.type === "AssignmentPattern") {
+
+                    if (node.parent.parent && node.parent.parent.type === "ObjectPattern") {
+
+                        if (node.parent.shorthand && node.parent.value.left && isUnderscored(node.parent.value.left.name)) {
+
+                            report(node);
+                        }
+
+                        // prevent checking righthand side of destructured object
+                        if (node.parent.key === node && node.parent.value !== node) {
+                            return;
+                        }
+
+                        if (node.parent.value.name && isUnderscored(node.parent.value.name)) {
+                            report(node);
+                        }
+                    }
 
                     // "never" check properties
                     if (properties === "never") {
                         return;
                     }
 
-                    if (node.parent.parent && node.parent.parent.type === "ObjectPattern" && node.parent.key === node && node.parent.value !== node) {
-                        return;
-                    }
-
-                    if (isUnderscored(name) && !ALLOWED_PARENT_TYPES.has(effectiveParent.type)) {
+                    // don't check right hand side of AssignmentExpression to prevent duplicate warnings
+                    if (isUnderscored(name) && !ALLOWED_PARENT_TYPES.has(effectiveParent.type) && !(node.parent.right === node)) {
                         report(node);
                     }
 
