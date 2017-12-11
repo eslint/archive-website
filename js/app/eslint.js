@@ -31784,10 +31784,10 @@ module.exports={
 		"BeforeUnloadEvent": false,
 		"BiquadFilterNode": false,
 		"Blob": false,
-		"blur": false,
-		"btoa": false,
 		"BlobEvent": false,
+		"blur": false,
 		"BroadcastChannel": false,
+		"btoa": false,
 		"BudgetService": false,
 		"ByteLengthQueuingStrategy": false,
 		"Cache": false,
@@ -31815,12 +31815,12 @@ module.exports={
 		"console": false,
 		"ConstantSourceNode": false,
 		"ConvolverNode": false,
+		"CountQueuingStrategy": false,
 		"createImageBitmap": false,
 		"Credential": false,
 		"CredentialsContainer": false,
-		"CountQueuingStrategy": false,
-		"Crypto": false,
 		"crypto": false,
+		"Crypto": false,
 		"CryptoKey": false,
 		"CSS": false,
 		"CSSConditionRule": false,
@@ -31844,8 +31844,8 @@ module.exports={
 		"DataTransfer": false,
 		"DataTransferItem": false,
 		"DataTransferItemList": false,
-		"defaultStatus": false,
 		"defaultstatus": false,
+		"defaultStatus": false,
 		"DelayNode": false,
 		"DeviceMotionEvent": false,
 		"DeviceOrientationEvent": false,
@@ -32025,9 +32025,9 @@ module.exports={
 		"MediaList": false,
 		"MediaQueryList": false,
 		"MediaQueryListEvent": false,
-		"MediaSource": false,
 		"MediaRecorder": false,
 		"MediaSettingsRange": false,
+		"MediaSource": false,
 		"MediaStream": false,
 		"MediaStreamAudioDestinationNode": false,
 		"MediaStreamAudioSourceNode": false,
@@ -32068,6 +32068,7 @@ module.exports={
 		"OfflineAudioCompletionEvent": false,
 		"OfflineAudioContext": false,
 		"offscreenBuffering": false,
+		"OffscreenCanvas": true,
 		"onabort": true,
 		"onafterprint": true,
 		"onanimationend": true,
@@ -32224,8 +32225,8 @@ module.exports={
 		"RadioNodeList": false,
 		"Range": false,
 		"ReadableStream": false,
-		"removeEventListener": false,
 		"RemotePlayback": false,
+		"removeEventListener": false,
 		"Request": false,
 		"requestAnimationFrame": false,
 		"requestIdleCallback": false,
@@ -32407,8 +32408,8 @@ module.exports={
 		"URL": false,
 		"URLSearchParams": false,
 		"ValidityState": false,
-		"VisualViewport": false,
 		"visualViewport": false,
+		"VisualViewport": false,
 		"VTTCue": false,
 		"WaveShaperNode": false,
 		"WebAssembly": false,
@@ -32431,8 +32432,8 @@ module.exports={
 		"WebGLVertexArrayObject": false,
 		"WebSocket": false,
 		"WheelEvent": false,
-		"Window": false,
 		"window": false,
+		"Window": false,
 		"Worker": false,
 		"WritableStream": false,
 		"XMLDocument": false,
@@ -32534,9 +32535,9 @@ module.exports={
 	},
 	"commonjs": {
 		"exports": true,
+		"global": false,
 		"module": false,
-		"require": false,
-		"global": false
+		"require": false
 	},
 	"amd": {
 		"define": false,
@@ -32592,9 +32593,9 @@ module.exports={
 		"beforeEach": false,
 		"describe": false,
 		"expect": false,
-		"it": false,
 		"fdescribe": false,
 		"fit": false,
+		"it": false,
 		"jest": false,
 		"pit": false,
 		"require": false,
@@ -32674,8 +32675,8 @@ module.exports={
 		"com": false,
 		"edu": false,
 		"exit": false,
-		"Java": false,
 		"java": false,
+		"Java": false,
 		"javafx": false,
 		"JavaImporter": false,
 		"javax": false,
@@ -32723,8 +32724,8 @@ module.exports={
 		"exit": false,
 		"find": false,
 		"grep": false,
-		"ls": false,
 		"ln": false,
+		"ls": false,
 		"mkdir": false,
 		"mv": false,
 		"popd": false,
@@ -32780,20 +32781,20 @@ module.exports={
 		"Try": false
 	},
 	"meteor": {
-		"$": false,
 		"_": false,
+		"$": false,
 		"Accounts": false,
 		"AccountsClient": false,
-		"AccountsServer": false,
 		"AccountsCommon": false,
+		"AccountsServer": false,
 		"App": false,
 		"Assets": false,
 		"Blaze": false,
 		"check": false,
 		"Cordova": false,
 		"DDP": false,
-		"DDPServer": false,
 		"DDPRateLimiter": false,
+		"DDPServer": false,
 		"Deps": false,
 		"EJSON": false,
 		"Email": false,
@@ -32870,8 +32871,8 @@ module.exports={
 		"Ref": false
 	},
 	"serviceworker": {
-		"caches": false,
 		"Cache": false,
+		"caches": false,
 		"CacheStorage": false,
 		"Client": false,
 		"clients": false,
@@ -32919,8 +32920,8 @@ module.exports={
 		"$": false,
 		"$$": false,
 		"browser": false,
-		"By": false,
 		"by": false,
+		"By": false,
 		"DartObject": false,
 		"element": false,
 		"protractor": false
@@ -32956,13 +32957,13 @@ module.exports={
 	},
 	"devtools": {
 		"$": false,
+		"$_": false,
 		"$$": false,
 		"$0": false,
 		"$1": false,
 		"$2": false,
 		"$3": false,
 		"$4": false,
-		"$_": false,
 		"$x": false,
 		"chrome": false,
 		"clear": false,
@@ -48927,7 +48928,7 @@ function hasOwnProperty(obj, prop) {
 },{"./support/isBuffer":110,"_process":99,"inherits":109}],112:[function(require,module,exports){
 module.exports={
   "name": "eslint",
-  "version": "4.13.0",
+  "version": "4.13.1",
   "author": "Nicholas C. Zakas <nicholas+npm@nczconsulting.com>",
   "description": "An AST-based pattern checker for JavaScript.",
   "bin": {
@@ -58523,7 +58524,7 @@ module.exports = {
 
                     if (node.parent.parent && node.parent.parent.type === "ObjectPattern") {
 
-                        if (node.parent.shorthand && node.parent.value.left && isUnderscored(node.parent.value.left.name)) {
+                        if (node.parent.shorthand && node.parent.value.left && isUnderscored(name)) {
 
                             report(node);
                         }
@@ -58533,7 +58534,7 @@ module.exports = {
                             return;
                         }
 
-                        if (node.parent.value.name && isUnderscored(node.parent.value.name)) {
+                        if (node.parent.value.name && isUnderscored(name)) {
                             report(node);
                         }
                     }
@@ -61539,6 +61540,14 @@ module.exports = {
                     LF = "\n",
                     CRLF = "\r" + LF,
                     endsWithNewline = lodash.endsWith(src, LF);
+
+                /*
+                 * Empty source is always valid: No content in file so we don't
+                 * need to lint for a newline on the last line of content.
+                 */
+                if (!src.length) {
+                    return;
+                }
 
                 var mode = context.options[0] || "always",
                     appendCRLF = false;
