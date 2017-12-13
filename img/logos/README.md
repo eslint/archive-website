@@ -3,6 +3,7 @@
  - angular-formly.png 8.81KB 200x200
  - atlassian.svg 8.36KB 792x168
  - box.png 16KB 800x441
+ - buddy.svg 4KB 570x168
  - brigade.svg 2.44KB 250x137
  - cerner.png 3KB 240x65
  - cocktailjs.png 4.78KB 228x150
