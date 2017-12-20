@@ -15,6 +15,7 @@
  - fingerproof.png 2.32KB 200x200
  - geekpark.png 12.5KB 800x172
  - getable.png 22.3KB 785x200
+ - hasura.svg 20KB 500x200
  - kahoot.png 11.4KB 800x600
  - millenium.svg 2.83KB 1745x513
  - paypal.png 11.3KB 800x260

@@ -177,3 +177,7 @@
 - url: https://buddy.works
   src: /img/logos/buddy.svg
   name: Buddy
+
+- url: https://hasura.io
+  src: /img/logos/hasura.svg
+  name: Hasura
