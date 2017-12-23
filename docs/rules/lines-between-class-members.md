@@ -48,13 +48,13 @@ This rule has a string option and an object option.
 
 String option:
 
-* `"always"`(default) require an empty line after after class members
-* `"never"` disallows an empty line after after class members
+* `"always"`(default) require an empty line after class members
+* `"never"` disallows an empty line after class members
 
 Object option:
 
-* `"exceptAfterSingleLine": false`(default) **do not** skip checking empty lines after singleline class members
-* `"exceptAfterSingleLine": true` skip checking empty lines after singleline class members
+* `"exceptAfterSingleLine": false`(default) **do not** skip checking empty lines after single-line class members
+* `"exceptAfterSingleLine": true` skip checking empty lines after single-line class members
 
 Examples of **incorrect** code for this rule with the string option:
 

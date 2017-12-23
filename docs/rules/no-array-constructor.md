@@ -8,7 +8,7 @@ edit_link: https://github.com/eslint/eslint/edit/master/docs/rules/no-array-cons
 # disallow `Array` constructors (no-array-constructor)
 
 Use of the `Array` constructor to construct a new array is generally
-discouraged in favour of array literal notation because of the single-argument
+discouraged in favor of array literal notation because of the single-argument
 pitfall and because the `Array` global may be redefined. The exception is when
 the Array constructor is used to intentionally create sparse arrays of a
 specified size by giving the constructor a single numeric argument.

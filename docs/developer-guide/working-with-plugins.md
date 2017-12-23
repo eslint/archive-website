@@ -115,7 +115,7 @@ By default, ESLint will not perform autofixes when a processor is used, even whe
 
     The `range` property contains two indexes in the code, referring to the start and end location of a contiguous section of text that will be replaced. The `text` property refers to the text that will replace the given range.
 
-    In the initial list of problems, the `fix` property will refer refer to a fix in the processed JavaScript. The `postprocess` method should transform the object to refer to a fix in the original, unprocessed file.
+    In the initial list of problems, the `fix` property will refer to a fix in the processed JavaScript. The `postprocess` method should transform the object to refer to a fix in the original, unprocessed file.
 
 2. Add a `supportsAutofix: true` property to the processor.
 
@@ -175,7 +175,12 @@ Add these keywords into your `package.json` file to make it easy for others to f
 
 ## Working with Custom Parsers
 
-If you want to use your own parser and provide additional capabilities for your rules, you can specify your own custom parser. If a `parseForESLint` method is exposed on the parser, this method will be used to parse the code. Otherwise, the `parse` method will be used. Both methods should take in the the source code as the first argument, and an optional configuration object as the second argument (provided as `parserOptions` in a config file). The `parse` method should simply return the AST. The `parseForESLint` method should return an object that contains the required property `ast` and an optional `services` property. `ast` should contain the AST. The `services` property can contain any parser-dependent services (such as type checkers for nodes). The value of the `services` property is available to rules as `context.parserServices`.
+If you want to use your own parser and provide additional capabilities for your rules, you can specify your own custom parser. If a `parseForESLint` method is exposed on the parser, this method will be used to parse the code. Otherwise, the `parse` method will be used. Both methods should take in the source code as the first argument, and an optional configuration object as the second argument (provided as `parserOptions` in a config file). The `parse` method should simply return the AST. The `parseForESLint` method should return an object that contains the required property `ast` and an optional properties `services`, `scopeManager`, and `visitorKeys`.
+
+* `ast` should contain the AST.
+* `services` can contain any parser-dependent services (such as type checkers for nodes). The value of the `services` property is available to rules as `context.parserServices`. Default is an empty object.
+* `scopeManager` can be a [ScopeManager](./scope-manager-interface) object. Custom parsers can use customized scope analysis for experimental/enhancement syntaxes. Default is the `ScopeManager` object which is created by [eslint-scope](https://github.com/eslint/eslint-scope).
+* `visitorKeys` can be an object to customize AST traversal. The keys of the object are the type of AST nodes. Each value is an array of the property names which should be traversed. Default is [KEYS of `eslint-visitor-keys`](https://github.com/eslint/eslint-visitor-keys#evkkeys).
 
 You can find an ESLint parser project [here](https://github.com/eslint/typescript-eslint-parser).
 
@@ -194,7 +199,9 @@ exports.parseForESLint = function(code, options) {
             foo: function() {
                 console.log("foo");
             }
-        }
+        },
+        scopeManager: null,
+        visitorKeys: null
     };
 };
 

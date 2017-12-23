@@ -121,10 +121,10 @@ The `context` object contains additional functionality that is helpful for rules
 Additionally, the `context` object has the following methods:
 
 * `getAncestors()` - returns an array of the ancestors of the currently-traversed node, starting at the root of the AST and continuing through the direct parent of the current node. This array does not include the currently-traversed node itself.
-* `getDeclaredVariables(node)` - returns a list of [variables](https://estools.github.io/escope/Variable.html) declared by the given node. This information can be used to track references to variables.
+* `getDeclaredVariables(node)` - returns a list of [variables](./scope-manager-interface) declared by the given node. This information can be used to track references to variables.
     * If the node is a `VariableDeclaration`, all variables declared in the declaration are returned.
     * If the node is a `VariableDeclarator`, all variables declared in the declarator are returned.
-    * If the node is a `FunctionDeclaration` or `FunctionExpression`, the variable for the function name is returned,in addition to variables for the function parameters.
+    * If the node is a `FunctionDeclaration` or `FunctionExpression`, the variable for the function name is returned, in addition to variables for the function parameters.
     * If the node is an `ArrowFunctionExpression`, variables for the parameters are returned.
     * If the node is a `ClassDeclaration` or a `ClassExpression`, the variable for the class name is returned.
     * If the node is a `CatchClause`, the variable for the exception is returned.
@@ -132,7 +132,7 @@ Additionally, the `context` object has the following methods:
     * If the node is an `ImportSpecifier`, `ImportDefaultSpecifier`, or `ImportNamespaceSpecifier`, the declared variable is returned.
     * Otherwise, if the node does not declare any variables, an empty array is returned.
 * `getFilename()` - returns the filename associated with the source.
-* `getScope()` - returns the [scope](https://estools.github.io/escope/Scope.html) of the currently-traversed node. This information can be used track references to variables.
+* `getScope()` - returns the [scope](./scope-manager-interface) of the currently-traversed node. This information can be used track references to variables.
 * `getSourceCode()` - returns a [`SourceCode`](#contextgetsourcecode) object that you can use to work with the source that was passed to ESLint.
 * `markVariableAsUsed(name)` - marks a variable with the given name in the current scope as used. This affects the [no-unused-vars](../rules/no-unused-vars) rule. Returns `true` if a variable with the given name was found and marked as used, otherwise `false`.
 * `report(descriptor)` - reports a problem in the code (see the [dedicated section](#contextreport)).
@@ -334,6 +334,8 @@ There are also some properties you can access:
 * `hasBOM` - the flag to indicate whether or not the source code has Unicode BOM.
 * `text` - the full text of the code being linted. Unicode BOM has been stripped from this text.
 * `ast` - the `Program` node of the AST for the code being linted.
+* `scopeManager` - the [ScopeManager](./scope-manager-interface) object of the code.
+* `visitorKeys` - the visitor keys to traverse this AST.
 * `lines` - an array of lines, split according to the specification's definition of line breaks.
 
 You should use a `SourceCode` object whenever you need to get more information about the code being linted.
@@ -380,7 +382,7 @@ In the preceding example, the error level is assumed to be the first argument. I
 
 To learn more about JSON Schema, we recommend looking at some [examples](http://json-schema.org/examples.html) to start, and also reading [Understanding JSON Schema](http://spacetelescope.github.io/understanding-json-schema/) (a free ebook).
 
-**Note:** Currently you need to use full JSON Schema object rather than array in case your schema has references ($ref), because in case of array format eslint transforms this array into a single schema without updating references that makes them incorrect (they are ignored).
+**Note:** Currently you need to use full JSON Schema object rather than array in case your schema has references ($ref), because in case of array format ESLint transforms this array into a single schema without updating references that makes them incorrect (they are ignored).
 
 ### Getting the Source
 
