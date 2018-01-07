@@ -8268,7 +8268,7 @@ module.exports = {
 (function (global, factory) {
 	typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports) :
 	typeof define === 'function' && define.amd ? define(['exports'], factory) :
-	(factory((global.acorn = global.acorn || {})));
+	(factory((global.acorn = {})));
 }(this, (function (exports) { 'use strict';
 
 // Reserved word lists for various dialects of the language
@@ -8289,6 +8289,8 @@ var keywords = {
   5: ecma5AndLessKeywords,
   6: ecma5AndLessKeywords + " const class extends export import super"
 };
+
+var keywordRelationalOperator = /^in(stanceof)?$/;
 
 // ## Character categories
 
@@ -8843,13 +8845,15 @@ pp.eat = function(type) {
 // Tests whether parsed token is a contextual keyword.
 
 pp.isContextual = function(name) {
-  return this.type === types.name && this.value === name
+  return this.type === types.name && this.value === name && !this.containsEsc
 };
 
 // Consumes contextual keyword if possible.
 
 pp.eatContextual = function(name) {
-  return this.value === name && this.eat(types.name)
+  if (!this.isContextual(name)) { return false }
+  this.next();
+  return true
 };
 
 // Asserts that following token is given contextual keyword.
@@ -8909,6 +8913,7 @@ function DestructuringErrors() {
   this.trailingComma =
   this.parenthesizedAssign =
   this.parenthesizedBind =
+  this.doubleProto =
     -1;
 }
 
@@ -8921,9 +8926,14 @@ pp.checkPatternErrors = function(refDestructuringErrors, isAssign) {
 };
 
 pp.checkExpressionErrors = function(refDestructuringErrors, andThrow) {
-  var pos = refDestructuringErrors ? refDestructuringErrors.shorthandAssign : -1;
-  if (!andThrow) { return pos >= 0 }
-  if (pos > -1) { this.raise(pos, "Shorthand property assignments are valid only in destructuring patterns"); }
+  if (!refDestructuringErrors) { return false }
+  var shorthandAssign = refDestructuringErrors.shorthandAssign;
+  var doubleProto = refDestructuringErrors.doubleProto;
+  if (!andThrow) { return shorthandAssign >= 0 || doubleProto >= 0 }
+  if (shorthandAssign >= 0)
+    { this.raise(shorthandAssign, "Shorthand property assignments are valid only in destructuring patterns"); }
+  if (doubleProto >= 0)
+    { this.raiseRecoverable(doubleProto, "Redefinition of __proto__ property"); }
 };
 
 pp.checkYieldAwaitInDefaultParams = function() {
@@ -8969,7 +8979,7 @@ var loopLabel = {kind: "loop"};
 var switchLabel = {kind: "switch"};
 
 pp$1.isLet = function() {
-  if (this.type !== types.name || this.options.ecmaVersion < 6 || this.value != "let") { return false }
+  if (this.options.ecmaVersion < 6 || !this.isContextual("let")) { return false }
   skipWhiteSpace.lastIndex = this.pos;
   var skip = skipWhiteSpace.exec(this.input);
   var next = this.pos + skip[0].length, nextCh = this.input.charCodeAt(next);
@@ -8978,7 +8988,7 @@ pp$1.isLet = function() {
     var pos = next + 1;
     while (isIdentifierChar(this.input.charCodeAt(pos), true)) { ++pos; }
     var ident = this.input.slice(next, pos);
-    if (!this.isKeyword(ident)) { return true }
+    if (!keywordRelationalOperator.test(ident)) { return true }
   }
   return false
 };
@@ -8987,7 +8997,7 @@ pp$1.isLet = function() {
 // - 'async /*foo*/ function' is OK.
 // - 'async /*\n*/ function' is invalid.
 pp$1.isAsyncFunction = function() {
-  if (this.type !== types.name || this.options.ecmaVersion < 8 || this.value != "async")
+  if (this.options.ecmaVersion < 8 || !this.isContextual("async"))
     { return false }
 
   skipWhiteSpace.lastIndex = this.pos;
@@ -9057,7 +9067,8 @@ pp$1.parseStatement = function(declaration, topLevel, exports) {
     // next token is a colon and the expression was a simple
     // Identifier node, we switch to interpreting it as a label.
   default:
-    if (this.isAsyncFunction() && declaration) {
+    if (this.isAsyncFunction()) {
+      if (!declaration) { this.unexpected(); }
       this.next();
       return this.parseFunctionStatement(node, true)
     }
@@ -9143,9 +9154,8 @@ pp$1.parseForStatement = function(node) {
   var refDestructuringErrors = new DestructuringErrors;
   var init = this.parseExpression(true, refDestructuringErrors);
   if (this.type === types._in || (this.options.ecmaVersion >= 6 && this.isContextual("of"))) {
-    this.toAssignable(init);
+    this.toAssignable(init, false, refDestructuringErrors);
     this.checkLVal(init);
-    this.checkPatternErrors(refDestructuringErrors, true);
     return this.parseForIn(node, init)
   } else {
     this.checkExpressionErrors(refDestructuringErrors, true);
@@ -9158,16 +9168,12 @@ pp$1.parseFunctionStatement = function(node, isAsync) {
   return this.parseFunction(node, true, false, isAsync)
 };
 
-pp$1.isFunction = function() {
-  return this.type === types._function || this.isAsyncFunction()
-};
-
 pp$1.parseIfStatement = function(node) {
   this.next();
   node.test = this.parseParenExpression();
   // allow function declarations in branches, but only in non-strict mode
-  node.consequent = this.parseStatement(!this.strict && this.isFunction());
-  node.alternate = this.eat(types._else) ? this.parseStatement(!this.strict && this.isFunction()) : null;
+  node.consequent = this.parseStatement(!this.strict && this.type == types._function);
+  node.alternate = this.eat(types._else) ? this.parseStatement(!this.strict && this.type == types._function) : null;
   return this.finishNode(node, "IfStatement")
 };
 
@@ -9305,6 +9311,7 @@ pp$1.parseLabeledStatement = function(node, maybeName, expr) {
   for (var i = this.labels.length - 1; i >= 0; i--) {
     var label$1 = this$1.labels[i];
     if (label$1.statementStart == node.start) {
+      // Update information about previous labels on this node
       label$1.statementStart = this$1.start;
       label$1.kind = kind;
     } else { break }
@@ -9373,8 +9380,14 @@ pp$1.parseFor = function(node, init) {
 pp$1.parseForIn = function(node, init) {
   var type = this.type === types._in ? "ForInStatement" : "ForOfStatement";
   this.next();
+  if (type == "ForInStatement") {
+    if (init.type === "AssignmentPattern" ||
+      (init.type === "VariableDeclaration" && init.declarations[0].init != null &&
+       (this.strict || init.declarations[0].id.type !== "Identifier")))
+      { this.raise(init.start, "Invalid assignment in for-in loop head"); }
+  }
   node.left = init;
-  node.right = this.parseExpression();
+  node.right = type == "ForInStatement" ? this.parseExpression() : this.parseMaybeAssign();
   this.expect(types.parenR);
   this.exitLexicalScope();
   node.body = this.parseStatement(false);
@@ -9473,60 +9486,68 @@ pp$1.parseClass = function(node, isStatement) {
   classBody.body = [];
   this.expect(types.braceL);
   while (!this.eat(types.braceR)) {
-    if (this$1.eat(types.semi)) { continue }
-    var method = this$1.startNode();
-    var isGenerator = this$1.eat(types.star);
-    var isAsync = false;
-    var isMaybeStatic = this$1.type === types.name && this$1.value === "static";
-    this$1.parsePropertyName(method);
-    method.static = isMaybeStatic && this$1.type !== types.parenL;
-    if (method.static) {
-      if (isGenerator) { this$1.unexpected(); }
-      isGenerator = this$1.eat(types.star);
-      this$1.parsePropertyName(method);
-    }
-    if (this$1.options.ecmaVersion >= 8 && !isGenerator && !method.computed &&
-        method.key.type === "Identifier" && method.key.name === "async" && this$1.type !== types.parenL &&
-        !this$1.canInsertSemicolon()) {
-      isAsync = true;
-      this$1.parsePropertyName(method);
-    }
-    method.kind = "method";
-    var isGetSet = false;
-    if (!method.computed) {
-      var key = method.key;
-      if (!isGenerator && !isAsync && key.type === "Identifier" && this$1.type !== types.parenL && (key.name === "get" || key.name === "set")) {
-        isGetSet = true;
-        method.kind = key.name;
-        key = this$1.parsePropertyName(method);
-      }
-      if (!method.static && (key.type === "Identifier" && key.name === "constructor" ||
-          key.type === "Literal" && key.value === "constructor")) {
-        if (hadConstructor) { this$1.raise(key.start, "Duplicate constructor in the same class"); }
-        if (isGetSet) { this$1.raise(key.start, "Constructor can't have get/set modifier"); }
-        if (isGenerator) { this$1.raise(key.start, "Constructor can't be a generator"); }
-        if (isAsync) { this$1.raise(key.start, "Constructor can't be an async method"); }
-        method.kind = "constructor";
-        hadConstructor = true;
-      }
-    }
-    this$1.parseClassMethod(classBody, method, isGenerator, isAsync);
-    if (isGetSet) {
-      var paramCount = method.kind === "get" ? 0 : 1;
-      if (method.value.params.length !== paramCount) {
-        var start = method.value.start;
-        if (method.kind === "get")
-          { this$1.raiseRecoverable(start, "getter should have no params"); }
-        else
-          { this$1.raiseRecoverable(start, "setter should have exactly one param"); }
-      } else {
-        if (method.kind === "set" && method.value.params[0].type === "RestElement")
-          { this$1.raiseRecoverable(method.value.params[0].start, "Setter cannot use rest params"); }
-      }
+    var member = this$1.parseClassMember(classBody);
+    if (member && member.type === "MethodDefinition" && member.kind === "constructor") {
+      if (hadConstructor) { this$1.raise(member.start, "Duplicate constructor in the same class"); }
+      hadConstructor = true;
     }
   }
   node.body = this.finishNode(classBody, "ClassBody");
   return this.finishNode(node, isStatement ? "ClassDeclaration" : "ClassExpression")
+};
+
+pp$1.parseClassMember = function(classBody) {
+  var this$1 = this;
+
+  if (this.eat(types.semi)) { return null }
+
+  var method = this.startNode();
+  var tryContextual = function (k, noLineBreak) {
+    if ( noLineBreak === void 0 ) noLineBreak = false;
+
+    var start = this$1.start, startLoc = this$1.startLoc;
+    if (!this$1.eatContextual(k)) { return false }
+    if (this$1.type !== types.parenL && (!noLineBreak || !this$1.canInsertSemicolon())) { return true }
+    if (method.key) { this$1.unexpected(); }
+    method.computed = false;
+    method.key = this$1.startNodeAt(start, startLoc);
+    method.key.name = k;
+    this$1.finishNode(method.key, "Identifier");
+    return false
+  };
+
+  method.kind = "method";
+  method.static = tryContextual("static");
+  var isGenerator = this.eat(types.star);
+  var isAsync = false;
+  if (!isGenerator) {
+    if (this.options.ecmaVersion >= 8 && tryContextual("async", true)) {
+      isAsync = true;
+    } else if (tryContextual("get")) {
+      method.kind = "get";
+    } else if (tryContextual("set")) {
+      method.kind = "set";
+    }
+  }
+  if (!method.key) { this.parsePropertyName(method); }
+  var key = method.key;
+  if (!method.computed && !method.static && (key.type === "Identifier" && key.name === "constructor" ||
+      key.type === "Literal" && key.value === "constructor")) {
+    if (method.kind !== "method") { this.raise(key.start, "Constructor can't have get/set modifier"); }
+    if (isGenerator) { this.raise(key.start, "Constructor can't be a generator"); }
+    if (isAsync) { this.raise(key.start, "Constructor can't be an async method"); }
+    method.kind = "constructor";
+  } else if (method.static && key.type === "Identifier" && key.name === "prototype") {
+    this.raise(key.start, "Classes may not have a static property named prototype");
+  }
+  this.parseClassMethod(classBody, method, isGenerator, isAsync);
+  if (method.kind === "get" && method.value.params.length !== 0)
+    { this.raiseRecoverable(method.value.start, "getter should have no params"); }
+  if (method.kind === "set" && method.value.params.length !== 1)
+    { this.raiseRecoverable(method.value.start, "setter should have exactly one param"); }
+  if (method.kind === "set" && method.value.params[0].type === "RestElement")
+    { this.raiseRecoverable(method.value.params[0].start, "Setter cannot use rest params"); }
+  return method
 };
 
 pp$1.parseClassMethod = function(classBody, method, isGenerator, isAsync) {
@@ -9551,7 +9572,8 @@ pp$1.parseExport = function(node, exports) {
   // export * from '...'
   if (this.eat(types.star)) {
     this.expectContextual("from");
-    node.source = this.type === types.string ? this.parseExprAtom() : this.unexpected();
+    if (this.type !== types.string) { this.unexpected(); }
+    node.source = this.parseExprAtom();
     this.semicolon();
     return this.finishNode(node, "ExportAllDeclaration")
   }
@@ -9585,7 +9607,8 @@ pp$1.parseExport = function(node, exports) {
     node.declaration = null;
     node.specifiers = this.parseExportSpecifiers(exports);
     if (this.eatContextual("from")) {
-      node.source = this.type === types.string ? this.parseExprAtom() : this.unexpected();
+      if (this.type !== types.string) { this.unexpected(); }
+      node.source = this.parseExprAtom();
     } else {
       // check for keywords used as local names
       for (var i = 0, list = node.specifiers; i < list.length; i += 1) {
@@ -9759,7 +9782,7 @@ var pp$2 = Parser.prototype;
 // Convert existing expression atom to assignable pattern
 // if possible.
 
-pp$2.toAssignable = function(node, isBinding) {
+pp$2.toAssignable = function(node, isBinding, refDestructuringErrors) {
   var this$1 = this;
 
   if (this.options.ecmaVersion >= 6 && node) {
@@ -9771,33 +9794,45 @@ pp$2.toAssignable = function(node, isBinding) {
 
     case "ObjectPattern":
     case "ArrayPattern":
+    case "RestElement":
       break
 
     case "ObjectExpression":
       node.type = "ObjectPattern";
-      for (var i = 0, list = node.properties; i < list.length; i += 1) {
-        var prop = list[i];
+      if (refDestructuringErrors) { this.checkPatternErrors(refDestructuringErrors, true); }
+      for (var i = 0, list = node.properties; i < list.length; i += 1)
+        {
+      var prop = list[i];
 
-      if (prop.kind !== "init") { this$1.raise(prop.key.start, "Object pattern can't contain getter or setter"); }
-        this$1.toAssignable(prop.value, isBinding);
-      }
+      this$1.toAssignable(prop, isBinding);
+    }
+      break
+
+    case "Property":
+      // AssignmentProperty has type == "Property"
+      if (node.kind !== "init") { this.raise(node.key.start, "Object pattern can't contain getter or setter"); }
+      this.toAssignable(node.value, isBinding);
       break
 
     case "ArrayExpression":
       node.type = "ArrayPattern";
+      if (refDestructuringErrors) { this.checkPatternErrors(refDestructuringErrors, true); }
       this.toAssignableList(node.elements, isBinding);
       break
 
+    case "SpreadElement":
+      node.type = "RestElement";
+      this.toAssignable(node.argument, isBinding);
+      if (node.argument.type === "AssignmentPattern")
+        { this.raise(node.argument.start, "Rest elements cannot have a default value"); }
+      break
+
     case "AssignmentExpression":
-      if (node.operator === "=") {
-        node.type = "AssignmentPattern";
-        delete node.operator;
-        this.toAssignable(node.left, isBinding);
-        // falls through to AssignmentPattern
-      } else {
-        this.raise(node.left.end, "Only '=' operator can be used for specifying default value.");
-        break
-      }
+      if (node.operator !== "=") { this.raise(node.left.end, "Only '=' operator can be used for specifying default value."); }
+      node.type = "AssignmentPattern";
+      delete node.operator;
+      this.toAssignable(node.left, isBinding);
+      // falls through to AssignmentPattern
 
     case "AssignmentPattern":
       break
@@ -9812,7 +9847,7 @@ pp$2.toAssignable = function(node, isBinding) {
     default:
       this.raise(node.start, "Assigning to rvalue");
     }
-  }
+  } else if (refDestructuringErrors) { this.checkPatternErrors(refDestructuringErrors, true); }
   return node
 };
 
@@ -9822,23 +9857,14 @@ pp$2.toAssignableList = function(exprList, isBinding) {
   var this$1 = this;
 
   var end = exprList.length;
-  if (end) {
-    var last = exprList[end - 1];
-    if (last && last.type == "RestElement") {
-      --end;
-    } else if (last && last.type == "SpreadElement") {
-      last.type = "RestElement";
-      var arg = last.argument;
-      this.toAssignable(arg, isBinding);
-      --end;
-    }
-
-    if (this.options.ecmaVersion === 6 && isBinding && last && last.type === "RestElement" && last.argument.type !== "Identifier")
-      { this.unexpected(last.argument.start); }
-  }
   for (var i = 0; i < end; i++) {
     var elt = exprList[i];
     if (elt) { this$1.toAssignable(elt, isBinding); }
+  }
+  if (end) {
+    var last = exprList[end - 1];
+    if (this.options.ecmaVersion === 6 && isBinding && last && last.type === "RestElement" && last.argument.type !== "Identifier")
+      { this.unexpected(last.argument.start); }
   }
   return exprList
 };
@@ -9960,7 +9986,7 @@ pp$2.checkLVal = function(expr, bindingType, checkClashes) {
     break
 
   case "MemberExpression":
-    if (bindingType) { this.raiseRecoverable(expr.start, (bindingType ? "Binding" : "Assigning to") + " member expression"); }
+    if (bindingType) { this.raiseRecoverable(expr.start, "Binding member expression"); }
     break
 
   case "ObjectPattern":
@@ -9968,8 +9994,13 @@ pp$2.checkLVal = function(expr, bindingType, checkClashes) {
       {
     var prop = list[i];
 
-    this$1.checkLVal(prop.value, bindingType, checkClashes);
+    this$1.checkLVal(prop, bindingType, checkClashes);
   }
+    break
+
+  case "Property":
+    // AssignmentProperty has type == "Property"
+    this.checkLVal(expr.value, bindingType, checkClashes);
     break
 
   case "ArrayPattern":
@@ -10022,7 +10053,7 @@ var pp$3 = Parser.prototype;
 // either with each other or with an init property — and in
 // strict mode, init properties are also not allowed to be repeated.
 
-pp$3.checkPropClash = function(prop, propHash) {
+pp$3.checkPropClash = function(prop, propHash, refDestructuringErrors) {
   if (this.options.ecmaVersion >= 6 && (prop.computed || prop.method || prop.shorthand))
     { return }
   var key = prop.key;
@@ -10035,7 +10066,11 @@ pp$3.checkPropClash = function(prop, propHash) {
   var kind = prop.kind;
   if (this.options.ecmaVersion >= 6) {
     if (name === "__proto__" && kind === "init") {
-      if (propHash.proto) { this.raiseRecoverable(key.start, "Redefinition of __proto__ property"); }
+      if (propHash.proto) {
+        if (refDestructuringErrors && refDestructuringErrors.doubleProto < 0) { refDestructuringErrors.doubleProto = key.start; }
+        // Backwards-compat kludge. Can be removed in version 6.0
+        else { this.raiseRecoverable(key.start, "Redefinition of __proto__ property"); }
+      }
       propHash.proto = true;
     }
     return
@@ -10112,11 +10147,10 @@ pp$3.parseMaybeAssign = function(noIn, refDestructuringErrors, afterLeftParse) {
   var left = this.parseMaybeConditional(noIn, refDestructuringErrors);
   if (afterLeftParse) { left = afterLeftParse.call(this, left, startPos, startLoc); }
   if (this.type.isAssign) {
-    this.checkPatternErrors(refDestructuringErrors, true);
-    if (!ownDestructuringErrors) { DestructuringErrors.call(refDestructuringErrors); }
     var node = this.startNodeAt(startPos, startLoc);
     node.operator = this.value;
-    node.left = this.type === types.eq ? this.toAssignable(left) : left;
+    node.left = this.type === types.eq ? this.toAssignable(left, false, refDestructuringErrors) : left;
+    if (!ownDestructuringErrors) { DestructuringErrors.call(refDestructuringErrors); }
     refDestructuringErrors.shorthandAssign = -1; // reset because shorthand default was used correctly
     this.checkLVal(left);
     this.next();
@@ -10247,7 +10281,7 @@ pp$3.parseSubscripts = function(base, startPos, startLoc, noCalls) {
   var this$1 = this;
 
   var maybeAsyncArrow = this.options.ecmaVersion >= 8 && base.type === "Identifier" && base.name === "async" &&
-      this.lastTokEnd == base.end && !this.canInsertSemicolon();
+      this.lastTokEnd == base.end && !this.canInsertSemicolon() && this.input.slice(base.start, base.end) === "async";
   for (var computed = (void 0);;) {
     if ((computed = this$1.eat(types.bracketL)) || this$1.eat(types.dot)) {
       var node = this$1.startNodeAt(startPos, startLoc);
@@ -10315,14 +10349,14 @@ pp$3.parseExprAtom = function(refDestructuringErrors) {
     return this.finishNode(node, "ThisExpression")
 
   case types.name:
-    var startPos = this.start, startLoc = this.startLoc;
+    var startPos = this.start, startLoc = this.startLoc, containsEsc = this.containsEsc;
     var id = this.parseIdent(this.type !== types.name);
-    if (this.options.ecmaVersion >= 8 && id.name === "async" && !this.canInsertSemicolon() && this.eat(types._function))
+    if (this.options.ecmaVersion >= 8 && !containsEsc && id.name === "async" && !this.canInsertSemicolon() && this.eat(types._function))
       { return this.parseFunction(this.startNodeAt(startPos, startLoc), false, false, true) }
     if (canBeArrow && !this.canInsertSemicolon()) {
       if (this.eat(types.arrow))
         { return this.parseArrowExpression(this.startNodeAt(startPos, startLoc), [id], false) }
-      if (this.options.ecmaVersion >= 8 && id.name === "async" && this.type === types.name) {
+      if (this.options.ecmaVersion >= 8 && id.name === "async" && this.type === types.name && !containsEsc) {
         id = this.parseIdent();
         if (this.canInsertSemicolon() || !this.eat(types.arrow))
           { this.unexpected(); }
@@ -10409,7 +10443,7 @@ pp$3.parseParenAndDistinguishExpression = function(canBeArrow) {
 
     var innerStartPos = this.start, innerStartLoc = this.startLoc;
     var exprList = [], first = true, lastIsComma = false;
-    var refDestructuringErrors = new DestructuringErrors, oldYieldPos = this.yieldPos, oldAwaitPos = this.awaitPos, spreadStart, innerParenStart;
+    var refDestructuringErrors = new DestructuringErrors, oldYieldPos = this.yieldPos, oldAwaitPos = this.awaitPos, spreadStart;
     this.yieldPos = 0;
     this.awaitPos = 0;
     while (this.type !== types.parenR) {
@@ -10423,9 +10457,6 @@ pp$3.parseParenAndDistinguishExpression = function(canBeArrow) {
         if (this$1.type === types.comma) { this$1.raise(this$1.start, "Comma is not permitted after the rest element"); }
         break
       } else {
-        if (this$1.type === types.parenL && !innerParenStart) {
-          innerParenStart = this$1.start;
-        }
         exprList.push(this$1.parseMaybeAssign(false, refDestructuringErrors, this$1.parseParenItem));
       }
     }
@@ -10435,7 +10466,6 @@ pp$3.parseParenAndDistinguishExpression = function(canBeArrow) {
     if (canBeArrow && !this.canInsertSemicolon() && this.eat(types.arrow)) {
       this.checkPatternErrors(refDestructuringErrors, false);
       this.checkYieldAwaitInDefaultParams();
-      if (innerParenStart) { this.unexpected(innerParenStart); }
       this.yieldPos = oldYieldPos;
       this.awaitPos = oldAwaitPos;
       return this.parseParenArrowList(startPos, startLoc, exprList)
@@ -10488,8 +10518,9 @@ pp$3.parseNew = function() {
   var meta = this.parseIdent(true);
   if (this.options.ecmaVersion >= 6 && this.eat(types.dot)) {
     node.meta = meta;
+    var containsEsc = this.containsEsc;
     node.property = this.parseIdent(true);
-    if (node.property.name !== "target")
+    if (node.property.name !== "target" || containsEsc)
       { this.raiseRecoverable(node.property.start, "The only valid meta property for new is new.target"); }
     if (!this.inFunction)
       { this.raiseRecoverable(node.start, "new.target can only be used in functions"); }
@@ -10568,7 +10599,7 @@ pp$3.parseObj = function(isPattern, refDestructuringErrors) {
     } else { first = false; }
 
     var prop = this$1.parseProperty(isPattern, refDestructuringErrors);
-    this$1.checkPropClash(prop, propHash);
+    if (!isPattern) { this$1.checkPropClash(prop, propHash, refDestructuringErrors); }
     node.properties.push(prop);
   }
   return this.finishNode(node, isPattern ? "ObjectPattern" : "ObjectExpression")
@@ -10586,18 +10617,19 @@ pp$3.parseProperty = function(isPattern, refDestructuringErrors) {
     if (!isPattern)
       { isGenerator = this.eat(types.star); }
   }
+  var containsEsc = this.containsEsc;
   this.parsePropertyName(prop);
-  if (!isPattern && this.options.ecmaVersion >= 8 && !isGenerator && this.isAsyncProp(prop)) {
+  if (!isPattern && !containsEsc && this.options.ecmaVersion >= 8 && !isGenerator && this.isAsyncProp(prop)) {
     isAsync = true;
     this.parsePropertyName(prop, refDestructuringErrors);
   } else {
     isAsync = false;
   }
-  this.parsePropertyValue(prop, isPattern, isGenerator, isAsync, startPos, startLoc, refDestructuringErrors);
+  this.parsePropertyValue(prop, isPattern, isGenerator, isAsync, startPos, startLoc, refDestructuringErrors, containsEsc);
   return this.finishNode(prop, "Property")
 };
 
-pp$3.parsePropertyValue = function(prop, isPattern, isGenerator, isAsync, startPos, startLoc, refDestructuringErrors) {
+pp$3.parsePropertyValue = function(prop, isPattern, isGenerator, isAsync, startPos, startLoc, refDestructuringErrors, containsEsc) {
   if ((isGenerator || isAsync) && this.type === types.colon)
     { this.unexpected(); }
 
@@ -10609,7 +10641,7 @@ pp$3.parsePropertyValue = function(prop, isPattern, isGenerator, isAsync, startP
     prop.kind = "init";
     prop.method = true;
     prop.value = this.parseMethod(isGenerator, isAsync);
-  } else if (!isPattern &&
+  } else if (!isPattern && !containsEsc &&
              this.options.ecmaVersion >= 5 && !prop.computed && prop.key.type === "Identifier" &&
              (prop.key.name === "get" || prop.key.name === "set") &&
              (this.type != types.comma && this.type != types.braceR)) {
@@ -10843,8 +10875,11 @@ pp$3.checkUnreserved = function(ref) {
   if (this.options.ecmaVersion < 6 &&
     this.input.slice(start, end).indexOf("\\") != -1) { return }
   var re = this.strict ? this.reservedWordsStrict : this.reservedWords;
-  if (re.test(name))
-    { this.raiseRecoverable(start, ("The keyword '" + name + "' is reserved")); }
+  if (re.test(name)) {
+    if (!this.inAsync && name === "await")
+      { this.raiseRecoverable(start, "Can not use keyword 'await' outside an async function"); }
+    this.raiseRecoverable(start, ("The keyword '" + name + "' is reserved"));
+  }
 };
 
 // Parse the next token as an identifier. If `liberal` is true (used
@@ -10859,7 +10894,7 @@ pp$3.parseIdent = function(liberal, isBinding) {
   } else if (this.type.keyword) {
     node.name = this.type.keyword;
 
-    // To fix https://github.com/ternjs/acorn/issues/575
+    // To fix https://github.com/acornjs/acorn/issues/575
     // `class` and `function` keywords push new context into this.context.
     // But there is no chance to pop the context if the keyword is consumed as an identifier such as a property name.
     // If the previous token is a dot, this does not apply because the context-managing code already ignored the keyword
@@ -11487,12 +11522,12 @@ pp$8.readToken_eq_excl = function(code) { // '=!'
 
 pp$8.getTokenFromCode = function(code) {
   switch (code) {
-    // The interpretation of a dot depends on whether it is followed
-    // by a digit or another two dots.
+  // The interpretation of a dot depends on whether it is followed
+  // by a digit or another two dots.
   case 46: // '.'
     return this.readToken_dot()
 
-    // Punctuation tokens.
+  // Punctuation tokens.
   case 40: ++this.pos; return this.finishToken(types.parenL)
   case 41: ++this.pos; return this.finishToken(types.parenR)
   case 59: ++this.pos; return this.finishToken(types.semi)
@@ -11516,19 +11551,20 @@ pp$8.getTokenFromCode = function(code) {
       if (next === 111 || next === 79) { return this.readRadixNumber(8) } // '0o', '0O' - octal number
       if (next === 98 || next === 66) { return this.readRadixNumber(2) } // '0b', '0B' - binary number
     }
-    // Anything else beginning with a digit is an integer, octal
-    // number, or float.
+
+  // Anything else beginning with a digit is an integer, octal
+  // number, or float.
   case 49: case 50: case 51: case 52: case 53: case 54: case 55: case 56: case 57: // 1-9
     return this.readNumber(false)
 
-    // Quotes produce strings.
+  // Quotes produce strings.
   case 34: case 39: // '"', "'"
     return this.readString(code)
 
-    // Operators are parsed inline in tiny state machines. '=' (61) is
-    // often referred to. `finishOp` simply skips the amount of
-    // characters it is given as second argument, and returns a token
-    // of the type given by its first argument.
+  // Operators are parsed inline in tiny state machines. '=' (61) is
+  // often referred to. `finishOp` simply skips the amount of
+  // characters it is given as second argument, and returns a token
+  // of the type given by its first argument.
 
   case 47: // '/'
     return this.readToken_slash()
@@ -11605,6 +11641,7 @@ pp$8.readRegexp = function() {
   if (mods) {
     var validFlags = /^[gim]*$/;
     if (this.options.ecmaVersion >= 6) { validFlags = /^[gimuy]*$/; }
+    if (this.options.ecmaVersion >= 9) { validFlags = /^[gimsuy]*$/; }
     if (!validFlags.test(mods)) { this.raise(start, "Invalid regular expression flag"); }
     if (mods.indexOf("u") >= 0) {
       if (regexpUnicodeSupport) {
@@ -11675,30 +11712,26 @@ pp$8.readRadixNumber = function(radix) {
 // Read an integer, octal integer, or floating-point number.
 
 pp$8.readNumber = function(startsWithDot) {
-  var start = this.pos, isFloat = false, octal = this.input.charCodeAt(this.pos) === 48;
+  var start = this.pos;
   if (!startsWithDot && this.readInt(10) === null) { this.raise(start, "Invalid number"); }
-  if (octal && this.pos == start + 1) { octal = false; }
+  var octal = this.pos - start >= 2 && this.input.charCodeAt(start) === 48;
+  if (octal && this.strict) { this.raise(start, "Invalid number"); }
+  if (octal && /[89]/.test(this.input.slice(start, this.pos))) { octal = false; }
   var next = this.input.charCodeAt(this.pos);
   if (next === 46 && !octal) { // '.'
     ++this.pos;
     this.readInt(10);
-    isFloat = true;
     next = this.input.charCodeAt(this.pos);
   }
   if ((next === 69 || next === 101) && !octal) { // 'eE'
     next = this.input.charCodeAt(++this.pos);
     if (next === 43 || next === 45) { ++this.pos; } // '+-'
     if (this.readInt(10) === null) { this.raise(start, "Invalid number"); }
-    isFloat = true;
   }
   if (isIdentifierStart(this.fullCharCodeAtPos())) { this.raise(this.pos, "Identifier directly after number"); }
 
-  var str = this.input.slice(start, this.pos), val;
-  if (isFloat) { val = parseFloat(str); }
-  else if (!octal || str.length === 1) { val = parseInt(str, 10); }
-  else if (this.strict) { this.raise(start, "Invalid number"); }
-  else if (/[89]/.test(str)) { val = parseInt(str, 10); }
-  else { val = parseInt(str, 8); }
+  var str = this.input.slice(start, this.pos);
+  var val = octal ? parseInt(str, 8) : parseFloat(str);
   return this.finishToken(types.num, val)
 };
 
@@ -11949,11 +11982,11 @@ pp$8.readWord = function() {
 // Git repositories for Acorn are available at
 //
 //     http://marijnhaverbeke.nl/git/acorn
-//     https://github.com/ternjs/acorn.git
+//     https://github.com/acornjs/acorn.git
 //
 // Please use the [github bug tracker][ghbt] to report issues.
 //
-// [ghbt]: https://github.com/ternjs/acorn/issues
+// [ghbt]: https://github.com/acornjs/acorn/issues
 //
 // This file defines the main parser interface. The library also comes
 // with a [error-tolerant parser][dammit] and an
@@ -11962,7 +11995,7 @@ pp$8.readWord = function() {
 // [dammit]: acorn_loose.js
 // [walk]: util/walk.js
 
-var version = "5.2.1";
+var version = "5.3.0";
 
 // The main exported interface (under `self.acorn` when in the
 // browser) is a `parse` function that takes a code string and
@@ -20909,65 +20942,55 @@ function coerce(val) {
         return isTypeParameterRequired(title) || title === 'throws' || title === 'const' || title === 'constant' || title === 'namespace' || title === 'member' || title === 'var' || title === 'module' || title === 'constructor' || title === 'class' || title === 'extends' || title === 'augments' || title === 'public' || title === 'private' || title === 'protected';
     }
 
+    // A regex character class that contains all whitespace except linebreak characters (\r, \n, \u2028, \u2029)
+    var WHITESPACE = '[ \\f\\t\\v\\u00a0\\u1680\\u180e\\u2000-\\u200a\\u202f\\u205f\\u3000\\ufeff]';
+
+    var STAR_MATCHER = '(' + WHITESPACE + '*(?:\\*' + WHITESPACE + '?)?)(.+|[\r\n\u2028\u2029])';
+
     function unwrapComment(doc) {
         // JSDoc comment is following form
         //   /**
         //    * .......
         //    */
-        // remove /**, */ and *
-        var BEFORE_STAR = 0,
-            STAR = 1,
-            AFTER_STAR = 2,
-            index,
-            len,
-            mode,
-            result,
-            ch;
 
-        doc = doc.replace(/^\/\*\*?/, '').replace(/\*\/$/, '');
-        index = 0;
-        len = doc.length;
-        mode = BEFORE_STAR;
-        result = '';
+        return doc.
+        // remove /**
+        replace(/^\/\*\*?/, '').
+        // remove */
+        replace(/\*\/$/, '').
+        // remove ' * ' at the beginning of a line
+        replace(new RegExp(STAR_MATCHER, 'g'), '$2').
+        // remove trailing whitespace
+        replace(/\s*$/, '');
+    }
 
-        while (index < len) {
-            ch = doc.charCodeAt(index);
-            switch (mode) {
-                case BEFORE_STAR:
-                    if (esutils.code.isLineTerminator(ch)) {
-                        result += String.fromCharCode(ch);
-                    } else if (ch === 0x2A /* '*' */) {
-                            mode = STAR;
-                        } else if (!esutils.code.isWhiteSpace(ch)) {
-                        result += String.fromCharCode(ch);
-                        mode = AFTER_STAR;
-                    }
-                    break;
+    /**
+     * Converts an index in an "unwrapped" JSDoc comment to the corresponding index in the original "wrapped" version
+     * @param {string} originalSource The original wrapped comment
+     * @param {number} unwrappedIndex The index of a character in the unwrapped string
+     * @returns {number} The index of the corresponding character in the original wrapped string
+     */
+    function convertUnwrappedCommentIndex(originalSource, unwrappedIndex) {
+        var replacedSource = originalSource.replace(/^\/\*\*?/, '');
+        var numSkippedChars = 0;
+        var matcher = new RegExp(STAR_MATCHER, 'g');
+        var match;
 
-                case STAR:
-                    if (!esutils.code.isWhiteSpace(ch)) {
-                        result += String.fromCharCode(ch);
-                    }
-                    mode = esutils.code.isLineTerminator(ch) ? BEFORE_STAR : AFTER_STAR;
-                    break;
+        while (match = matcher.exec(replacedSource)) {
+            numSkippedChars += match[1].length;
 
-                case AFTER_STAR:
-                    result += String.fromCharCode(ch);
-                    if (esutils.code.isLineTerminator(ch)) {
-                        mode = BEFORE_STAR;
-                    }
-                    break;
+            if (match.index + match[0].length > unwrappedIndex + numSkippedChars) {
+                return unwrappedIndex + numSkippedChars + originalSource.length - replacedSource.length;
             }
-            index += 1;
         }
 
-        return result.replace(/\s+$/, '');
+        return originalSource.replace(/\*\/$/, '').replace(/\s*$/, '').length;
     }
 
     // JSDoc Tag Parser
 
     (function (exports) {
-        var Rules, index, lineNumber, length, source, recoverable, sloppy, strict;
+        var Rules, index, lineNumber, length, source, originalSource, recoverable, sloppy, strict;
 
         function advance() {
             var ch = source.charCodeAt(index);
@@ -21017,10 +21040,11 @@ function coerce(val) {
         // { { ok: string } }
         //
         // therefore, scanning type expression with balancing braces.
-        function parseType(title, last) {
+        function parseType(title, last, addRange) {
             var ch,
                 brace,
                 type,
+                startIndex,
                 direct = false;
 
             // search '{'
@@ -21059,6 +21083,9 @@ function coerce(val) {
                         } else if (ch === 0x7B /* '{' */) {
                             brace += 1;
                         }
+                    if (type === '') {
+                        startIndex = index;
+                    }
                     type += advance();
                 }
             }
@@ -21069,10 +21096,10 @@ function coerce(val) {
             }
 
             if (isAllowedOptional(title)) {
-                return typed.parseParamType(type);
+                return typed.parseParamType(type, { startIndex: convertIndex(startIndex), range: addRange });
             }
 
-            return typed.parseType(type);
+            return typed.parseType(type, { startIndex: convertIndex(startIndex), range: addRange });
         }
 
         function scanIdentifier(last) {
@@ -21207,6 +21234,13 @@ function coerce(val) {
             return true;
         }
 
+        function convertIndex(rangeIndex) {
+            if (source === originalSource) {
+                return rangeIndex;
+            }
+            return convertUnwrappedCommentIndex(originalSource, rangeIndex);
+        }
+
         function TagParser(options, title) {
             this._options = options;
             this._title = title.toLowerCase();
@@ -21217,6 +21251,7 @@ function coerce(val) {
             if (this._options.lineNumbers) {
                 this._tag.lineNumber = lineNumber;
             }
+            this._first = index - title.length - 1;
             this._last = 0;
             // space to save special information for title parsers.
             this._extra = {};
@@ -21244,7 +21279,7 @@ function coerce(val) {
             // type required titles
             if (isTypeParameterRequired(this._title)) {
                 try {
-                    this._tag.type = parseType(this._title, this._last);
+                    this._tag.type = parseType(this._title, this._last, this._options.range);
                     if (!this._tag.type) {
                         if (!isParamTitle(this._title) && !isReturnTitle(this._title)) {
                             if (!this.addError('Missing or invalid tag type')) {
@@ -21261,7 +21296,7 @@ function coerce(val) {
             } else if (isAllowedType(this._title)) {
                 // optional types
                 try {
-                    this._tag.type = parseType(this._title, this._last);
+                    this._tag.type = parseType(this._title, this._last, this._options.range);
                 } catch (e) {
                     //For optional types, lets drop the thrown error when we hit the end of the file
                 }
@@ -21549,6 +21584,10 @@ function coerce(val) {
             // Seek to content last index.
             this._last = seekContent(this._title);
 
+            if (this._options.range) {
+                this._tag.range = [this._first, source.slice(0, this._last).replace(/\s*$/, '').length].map(convertIndex);
+            }
+
             if (hasOwnProperty(Rules, this._title)) {
                 sequences = Rules[this._title];
             } else {
@@ -21636,6 +21675,8 @@ function coerce(val) {
                 source = comment;
             }
 
+            originalSource = comment;
+
             // array of relevant tags
             if (options.tags) {
                 if (Array.isArray(options.tags)) {
@@ -21710,7 +21751,7 @@ function coerce(val) {
 (function () {
     'use strict';
 
-    var Syntax, Token, source, length, index, previous, token, value, esutils, utility;
+    var Syntax, Token, source, length, index, previous, token, value, esutils, utility, rangeOffset, addRange;
 
     esutils = require('esutils');
     utility = require('./utility');
@@ -21784,6 +21825,13 @@ function coerce(val) {
     Context.save = function () {
         return new Context(previous, index, token, value);
     };
+
+    function maybeAddRange(node, range) {
+        if (addRange) {
+            node.range = [range[0] + rangeOffset, range[1] + rangeOffset];
+        }
+        return node;
+    }
 
     function advance() {
         var ch = source.charAt(index);
@@ -22222,7 +22270,8 @@ function coerce(val) {
     //     TypeExpression
     //   | TypeExpression '|' NonemptyTypeUnionList
     function parseUnionType() {
-        var elements;
+        var elements,
+            startIndex = index - 1;
         consume(Token.LPAREN, 'UnionType should start with (');
         elements = [];
         if (token !== Token.RPAREN) {
@@ -22235,10 +22284,10 @@ function coerce(val) {
             }
         }
         consume(Token.RPAREN, 'UnionType should end with )');
-        return {
+        return maybeAddRange({
             type: Syntax.UnionType,
             elements: elements
-        };
+        }, [startIndex, previous]);
     }
 
     // ArrayType := '[' ElementTypeList ']'
@@ -22249,16 +22298,19 @@ function coerce(val) {
     //  | '...' TypeExpression
     //  | TypeExpression ',' ElementTypeList
     function parseArrayType() {
-        var elements;
+        var elements,
+            startIndex = index - 1,
+            restStartIndex;
         consume(Token.LBRACK, 'ArrayType should start with [');
         elements = [];
         while (token !== Token.RBRACK) {
             if (token === Token.REST) {
+                restStartIndex = index - 3;
                 consume(Token.REST);
-                elements.push({
+                elements.push(maybeAddRange({
                     type: Syntax.RestType,
                     expression: parseTypeExpression()
-                });
+                }, [restStartIndex, previous]));
                 break;
             } else {
                 elements.push(parseTypeExpression());
@@ -22268,10 +22320,10 @@ function coerce(val) {
             }
         }
         expect(Token.RBRACK);
-        return {
+        return maybeAddRange({
             type: Syntax.ArrayType,
             elements: elements
-        };
+        }, [startIndex, previous]);
     }
 
     function parseFieldName() {
@@ -22299,22 +22351,23 @@ function coerce(val) {
     //   | NumberLiteral
     //   | ReservedIdentifier
     function parseFieldType() {
-        var key;
+        var key,
+            rangeStart = previous;
 
         key = parseFieldName();
         if (token === Token.COLON) {
             consume(Token.COLON);
-            return {
+            return maybeAddRange({
                 type: Syntax.FieldType,
                 key: key,
                 value: parseTypeExpression()
-            };
+            }, [rangeStart, previous]);
         }
-        return {
+        return maybeAddRange({
             type: Syntax.FieldType,
             key: key,
             value: null
-        };
+        }, [rangeStart, previous]);
     }
 
     // RecordType := '{' FieldTypeList '}'
@@ -22324,7 +22377,9 @@ function coerce(val) {
     //   | FieldType
     //   | FieldType ',' FieldTypeList
     function parseRecordType() {
-        var fields;
+        var fields,
+            rangeStart = index - 1,
+            rangeEnd;
 
         consume(Token.LBRACE, 'RecordType should start with {');
         fields = [];
@@ -22338,11 +22393,12 @@ function coerce(val) {
                 }
             }
         }
+        rangeEnd = index;
         expect(Token.RBRACE);
-        return {
+        return maybeAddRange({
             type: Syntax.RecordType,
             fields: fields
-        };
+        }, [rangeStart, rangeEnd]);
     }
 
     // NameExpression :=
@@ -22353,7 +22409,8 @@ function coerce(val) {
     // Identifier is the same as Token.NAME, including any dots, something like
     // namespace.module.MyClass
     function parseNameExpression() {
-        var name = value;
+        var name = value,
+            rangeStart = index - name.length;
         expect(Token.NAME);
 
         if (token === Token.COLON && (name === 'module' || name === 'external' || name === 'event')) {
@@ -22362,10 +22419,10 @@ function coerce(val) {
             expect(Token.NAME);
         }
 
-        return {
+        return maybeAddRange({
             type: Syntax.NameExpression,
             name: name
-        };
+        }, [rangeStart, previous]);
     }
 
     // TypeExpressionList :=
@@ -22390,18 +22447,20 @@ function coerce(val) {
     //     '.<' TypeExpressionList '>'
     //   | '<' TypeExpressionList '>'   // this is extension of doctrine
     function parseTypeName() {
-        var expr, applications;
+        var expr,
+            applications,
+            startIndex = index - value.length;
 
         expr = parseNameExpression();
         if (token === Token.DOT_LT || token === Token.LT) {
             next();
             applications = parseTypeExpressionList();
             expect(Token.GT);
-            return {
+            return maybeAddRange({
                 type: Syntax.TypeApplication,
                 expression: expr,
                 applications: applications
-            };
+            }, [startIndex, previous]);
         }
         return expr;
     }
@@ -22451,7 +22510,10 @@ function coerce(val) {
         var params = [],
             optionalSequence = false,
             expr,
-            rest = false;
+            rest = false,
+            startIndex,
+            restStartIndex = index - 3,
+            nameStartIndex;
 
         while (token !== Token.RPAREN) {
             if (token === Token.REST) {
@@ -22460,22 +22522,25 @@ function coerce(val) {
                 rest = true;
             }
 
+            startIndex = previous;
+
             expr = parseTypeExpression();
             if (expr.type === Syntax.NameExpression && token === Token.COLON) {
+                nameStartIndex = previous - expr.name.length;
                 // Identifier ':' TypeExpression
                 consume(Token.COLON);
-                expr = {
+                expr = maybeAddRange({
                     type: Syntax.ParameterType,
                     name: expr.name,
                     expression: parseTypeExpression()
-                };
+                }, [nameStartIndex, previous]);
             }
             if (token === Token.EQUAL) {
                 consume(Token.EQUAL);
-                expr = {
+                expr = maybeAddRange({
                     type: Syntax.OptionalType,
                     expression: expr
-                };
+                }, [startIndex, previous]);
                 optionalSequence = true;
             } else {
                 if (optionalSequence) {
@@ -22483,10 +22548,10 @@ function coerce(val) {
                 }
             }
             if (rest) {
-                expr = {
+                expr = maybeAddRange({
                     type: Syntax.RestType,
                     expression: expr
-                };
+                }, [restStartIndex, previous]);
             }
             params.push(expr);
             if (token !== Token.RPAREN) {
@@ -22504,7 +22569,12 @@ function coerce(val) {
     //   | TypeParameters '(' 'this' ':' TypeName ')' ResultType
     //   | TypeParameters '(' 'this' ':' TypeName ',' ParametersType ')' ResultType
     function parseFunctionType() {
-        var isNew, thisBinding, params, result, fnType;
+        var isNew,
+            thisBinding,
+            params,
+            result,
+            fnType,
+            startIndex = index - value.length;
         utility.assert(token === Token.NAME && value === 'function', 'FunctionType should start with \'function\'');
         consume(Token.NAME);
 
@@ -22540,11 +22610,11 @@ function coerce(val) {
             result = parseResultType();
         }
 
-        fnType = {
+        fnType = maybeAddRange({
             type: Syntax.FunctionType,
             params: params,
             result: result
-        };
+        }, [startIndex, previous]);
         if (thisBinding) {
             // avoid adding null 'new' and 'this' properties
             fnType['this'] = thisBinding;
@@ -22565,13 +22635,13 @@ function coerce(val) {
     //   | RecordType
     //   | ArrayType
     function parseBasicTypeExpression() {
-        var context;
+        var context, startIndex;
         switch (token) {
             case Token.STAR:
                 consume(Token.STAR);
-                return {
+                return maybeAddRange({
                     type: Syntax.AllLiteral
-                };
+                }, [previous - 1, previous]);
 
             case Token.LPAREN:
                 return parseUnionType();
@@ -22583,26 +22653,28 @@ function coerce(val) {
                 return parseRecordType();
 
             case Token.NAME:
+                startIndex = index - value.length;
+
                 if (value === 'null') {
                     consume(Token.NAME);
-                    return {
+                    return maybeAddRange({
                         type: Syntax.NullLiteral
-                    };
+                    }, [startIndex, previous]);
                 }
 
                 if (value === 'undefined') {
                     consume(Token.NAME);
-                    return {
+                    return maybeAddRange({
                         type: Syntax.UndefinedLiteral
-                    };
+                    }, [startIndex, previous]);
                 }
 
                 if (value === 'true' || value === 'false') {
                     consume(Token.NAME);
-                    return {
+                    return maybeAddRange({
                         type: Syntax.BooleanLiteralType,
                         value: value === 'true'
-                    };
+                    }, [startIndex, previous]);
                 }
 
                 context = Context.save();
@@ -22618,17 +22690,17 @@ function coerce(val) {
 
             case Token.STRING:
                 next();
-                return {
+                return maybeAddRange({
                     type: Syntax.StringLiteralType,
                     value: value
-                };
+                }, [previous - value.length - 2, previous]);
 
             case Token.NUMBER:
                 next();
-                return {
+                return maybeAddRange({
                     type: Syntax.NumericLiteralType,
                     value: value
-                };
+                }, [previous - String(value).length, previous]);
 
             default:
                 utility.throwError('unexpected token');
@@ -22644,61 +22716,63 @@ function coerce(val) {
     //   | '?'
     //   | BasicTypeExpression '[]'
     function parseTypeExpression() {
-        var expr;
+        var expr, rangeStart;
 
         if (token === Token.QUESTION) {
+            rangeStart = index - 1;
             consume(Token.QUESTION);
             if (token === Token.COMMA || token === Token.EQUAL || token === Token.RBRACE || token === Token.RPAREN || token === Token.PIPE || token === Token.EOF || token === Token.RBRACK || token === Token.GT) {
-                return {
+                return maybeAddRange({
                     type: Syntax.NullableLiteral
-                };
+                }, [rangeStart, previous]);
             }
-            return {
+            return maybeAddRange({
                 type: Syntax.NullableType,
                 expression: parseBasicTypeExpression(),
                 prefix: true
-            };
-        }
-
-        if (token === Token.BANG) {
+            }, [rangeStart, previous]);
+        } else if (token === Token.BANG) {
+            rangeStart = index - 1;
             consume(Token.BANG);
-            return {
+            return maybeAddRange({
                 type: Syntax.NonNullableType,
                 expression: parseBasicTypeExpression(),
                 prefix: true
-            };
+            }, [rangeStart, previous]);
+        } else {
+            rangeStart = previous;
         }
 
         expr = parseBasicTypeExpression();
         if (token === Token.BANG) {
             consume(Token.BANG);
-            return {
+            return maybeAddRange({
                 type: Syntax.NonNullableType,
                 expression: expr,
                 prefix: false
-            };
+            }, [rangeStart, previous]);
         }
 
         if (token === Token.QUESTION) {
             consume(Token.QUESTION);
-            return {
+            return maybeAddRange({
                 type: Syntax.NullableType,
                 expression: expr,
                 prefix: false
-            };
+            }, [rangeStart, previous]);
         }
 
         if (token === Token.LBRACK) {
             consume(Token.LBRACK);
             expect(Token.RBRACK, 'expected an array-style type declaration (' + value + '[])');
-            return {
+            return maybeAddRange({
                 type: Syntax.TypeApplication,
-                expression: {
+                expression: maybeAddRange({
                     type: Syntax.NameExpression,
                     name: 'Array'
-                },
+                }, [rangeStart, previous]),
                 applications: [expr]
-            };
+            }, [rangeStart, previous]);
         }
 
         return expr;
@@ -22731,10 +22805,10 @@ function coerce(val) {
             consume(Token.PIPE);
         }
 
-        return {
+        return maybeAddRange({
             type: Syntax.UnionType,
             elements: elements
-        };
+        }, [0, index]);
     }
 
     function parseTopParamType() {
@@ -22742,19 +22816,19 @@ function coerce(val) {
 
         if (token === Token.REST) {
             consume(Token.REST);
-            return {
+            return maybeAddRange({
                 type: Syntax.RestType,
                 expression: parseTop()
-            };
+            }, [0, index]);
         }
 
         expr = parseTop();
         if (token === Token.EQUAL) {
             consume(Token.EQUAL);
-            return {
+            return maybeAddRange({
                 type: Syntax.OptionalType,
                 expression: expr
-            };
+            }, [0, index]);
         }
 
         return expr;
@@ -22767,6 +22841,8 @@ function coerce(val) {
         length = source.length;
         index = 0;
         previous = 0;
+        addRange = opt && opt.range;
+        rangeOffset = opt && opt.startIndex || 0;
 
         next();
         expr = parseTop();
@@ -22792,6 +22868,8 @@ function coerce(val) {
         length = source.length;
         index = 0;
         previous = 0;
+        addRange = opt && opt.range;
+        rangeOffset = opt && opt.startIndex || 0;
 
         next();
         expr = parseTopParamType();
@@ -23034,9 +23112,9 @@ function coerce(val) {
 },{"../package.json":57,"assert":47}],57:[function(require,module,exports){
 module.exports={
   "_from": "doctrine@^2.0.2",
-  "_id": "doctrine@2.0.2",
+  "_id": "doctrine@2.1.0",
   "_inBundle": false,
-  "_integrity": "sha512-y0tm5Pq6ywp3qSTZ1vPgVdAnbDEoeoc5wlOHXoY1c4Wug/a7JvqHIl7BTvwodaHmejWkK/9dSb3sCYfyo/om8A==",
+  "_integrity": "sha512-35mSku4ZXK0vfCuHEDAwt55dg2jNajHZ1odvF+8SSr82EsZY4QmXfuWso8oEd8zRhVObSN18aM0CjSdoBX7zIw==",
   "_location": "/doctrine",
   "_phantomChildren": {},
   "_requested": {
@@ -23052,8 +23130,8 @@ module.exports={
   "_requiredBy": [
     "/"
   ],
-  "_resolved": "https://registry.npmjs.org/doctrine/-/doctrine-2.0.2.tgz",
-  "_shasum": "68f96ce8efc56cc42651f1faadb4f175273b0075",
+  "_resolved": "https://registry.npmjs.org/doctrine/-/doctrine-2.1.0.tgz",
+  "_shasum": "5cd01fc101621b42c4cd7f5d1a66243716d3f39d",
   "_spec": "doctrine@^2.0.2",
   "_where": "/var/lib/jenkins/workspace/Releases/ESLint Release/eslint",
   "bugs": {
@@ -23118,7 +23196,7 @@ module.exports={
     "release": "eslint-release",
     "test": "nyc mocha"
   },
-  "version": "2.0.2"
+  "version": "2.1.0"
 }
 
 },{}],58:[function(require,module,exports){
@@ -49350,7 +49428,7 @@ function hasOwnProperty(obj, prop) {
 },{"./support/isBuffer":112,"_process":101,"inherits":111}],114:[function(require,module,exports){
 module.exports={
   "name": "eslint",
-  "version": "4.14.0",
+  "version": "4.15.0",
   "author": "Nicholas C. Zakas <nicholas+npm@nczconsulting.com>",
   "description": "An AST-based pattern checker for JavaScript.",
   "bin": {
@@ -55764,6 +55842,7 @@ module.exports = function () {
                 }
 
                 var rule = _this.rules.get(ruleId);
+                var messageIds = rule && rule.meta && rule.meta.messages;
                 var reportTranslator = null;
                 var ruleContext = Object.freeze(Object.assign(Object.create(sharedTraversalContext), {
                     id: ruleId,
@@ -55781,7 +55860,7 @@ module.exports = function () {
                          * with Node 8.4.0.
                          */
                         if (reportTranslator === null) {
-                            reportTranslator = createReportTranslator({ ruleId: ruleId, severity: severity, sourceCode: sourceCode });
+                            reportTranslator = createReportTranslator({ ruleId: ruleId, severity: severity, sourceCode: sourceCode, messageIds: messageIds });
                         }
                         var problem = reportTranslator.apply(null, arguments);
 
@@ -56030,7 +56109,7 @@ module.exports = function () {
     return Linter;
 }();
 
-},{"../conf/blank-script.json":1,"../conf/default-config-options.js":3,"../package.json":114,"./ast-utils":115,"./code-path-analysis/code-path-analyzer":116,"./config/config-ops":123,"./config/config-validator":124,"./config/environments":125,"./report-translator":128,"./rules":129,"./timing":387,"./util/apply-disable-directives":402,"./util/node-event-generator":405,"./util/safe-emitter":408,"./util/source-code":410,"./util/source-code-fixer":409,"./util/traverser":411,"debug":52,"eslint-scope":59,"eslint-visitor-keys":67,"levn":87,"lodash":89}],127:[function(require,module,exports){
+},{"../conf/blank-script.json":1,"../conf/default-config-options.js":3,"../package.json":114,"./ast-utils":115,"./code-path-analysis/code-path-analyzer":116,"./config/config-ops":123,"./config/config-validator":124,"./config/environments":125,"./report-translator":128,"./rules":129,"./timing":387,"./util/apply-disable-directives":402,"./util/node-event-generator":406,"./util/safe-emitter":409,"./util/source-code":411,"./util/source-code-fixer":410,"./util/traverser":412,"debug":52,"eslint-scope":59,"eslint-visitor-keys":67,"levn":87,"lodash":89}],127:[function(require,module,exports){
 "use strict";
 
 module.exports = function () {
@@ -56312,6 +56391,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
 var assert = require("assert");
 var ruleFixer = require("./util/rule-fixer");
+var interpolate = require("./util/interpolate");
 
 //------------------------------------------------------------------------------
 // Typedefs
@@ -56342,7 +56422,9 @@ function normalizeMultiArgReportCall() {
 
     // If there is one argument, it is considered to be a new-style call already.
     if (arguments.length === 1) {
-        return arguments[0];
+
+        // Shallow clone the object to avoid surprises if reusing the descriptor
+        return Object.assign({}, arguments[0]);
     }
 
     // If the second argument is a string, the arguments are interpreted as [node, message, data, fix].
@@ -56401,16 +56483,7 @@ function normalizeReportLoc(descriptor) {
  * @returns {string} The interpolated message for the descriptor
  */
 function normalizeMessagePlaceholders(descriptor) {
-    if (!descriptor.data) {
-        return descriptor.message;
-    }
-    return descriptor.message.replace(/\{\{\s*([^{}]+?)\s*\}\}/g, function (fullMatch, term) {
-        if (term in descriptor.data) {
-            return descriptor.data[term];
-        }
-
-        return fullMatch;
-    });
+    return interpolate(descriptor.message, descriptor.data);
 }
 
 /**
@@ -56539,6 +56612,14 @@ function createProblem(options) {
         source: options.sourceLines[options.loc.start.line - 1] || ""
     };
 
+    /*
+     * If this isn’t in the conditional, some of the tests fail
+     * because `messageId` is present in the problem object
+     */
+    if (options.messageId) {
+        problem.messageId = options.messageId;
+    }
+
     if (options.loc.end) {
         problem.endLine = options.loc.end.line;
         problem.endColumn = options.loc.end.column + 1;
@@ -56554,12 +56635,13 @@ function createProblem(options) {
 /**
  * Returns a function that converts the arguments of a `context.report` call from a rule into a reported
  * problem for the Node.js API.
- * @param {{ruleId: string, severity: number, sourceCode: SourceCode}} metadata Metadata for the reported problem
+ * @param {{ruleId: string, severity: number, sourceCode: SourceCode, messageIds: Object}} metadata Metadata for the reported problem
  * @param {SourceCode} sourceCode The `SourceCode` instance for the text being linted
  * @returns {function(...args): {
  *      ruleId: string,
  *      severity: (0|1|2),
- *      message: string,
+ *      message: (string|undefined),
+ *      messageId: (string|undefined),
  *      line: number,
  *      column: number,
  *      endLine: (number|undefined),
@@ -56584,11 +56666,28 @@ module.exports = function createReportTranslator(metadata) {
 
         assertValidNodeInfo(descriptor);
 
+        if (descriptor.messageId) {
+            if (!metadata.messageIds) {
+                throw new TypeError("context.report() called with a messageId, but no messages were present in the rule metadata.");
+            }
+            var id = descriptor.messageId;
+            var messages = metadata.messageIds;
+
+            if (descriptor.message) {
+                throw new TypeError("context.report() called with a message and a messageId. Please only pass one.");
+            }
+            if (!messages || !Object.prototype.hasOwnProperty.call(messages, id)) {
+                throw new TypeError("context.report() called with a messageId of '" + id + "' which is not present in the 'messages' config: " + JSON.stringify(messages, null, 2));
+            }
+            descriptor.message = messages[id];
+        }
+
         return createProblem({
             ruleId: metadata.ruleId,
             severity: metadata.severity,
             node: descriptor.node,
             message: normalizeMessagePlaceholders(descriptor),
+            messageId: descriptor.messageId,
             loc: normalizeReportLoc(descriptor),
             fix: normalizeFixes(descriptor, metadata.sourceCode),
             sourceLines: metadata.sourceCode.lines
@@ -56596,7 +56695,7 @@ module.exports = function createReportTranslator(metadata) {
     };
 };
 
-},{"./util/rule-fixer":407,"assert":47}],129:[function(require,module,exports){
+},{"./util/interpolate":404,"./util/rule-fixer":408,"assert":47}],129:[function(require,module,exports){
 /**
  * @fileoverview Defines a storage for rules.
  * @author Nicholas C. Zakas
@@ -56835,7 +56934,8 @@ module.exports = {
         docs: {
             description: "enforce getter and setter pairs in objects",
             category: "Best Practices",
-            recommended: false
+            recommended: false,
+            url: "https://eslint.org/docs/rules/accessor-pairs"
         },
         schema: [{
             type: "object",
@@ -56934,7 +57034,8 @@ module.exports = {
         docs: {
             description: "enforce linebreaks after opening and before closing array brackets",
             category: "Stylistic Issues",
-            recommended: false
+            recommended: false,
+            url: "https://eslint.org/docs/rules/array-bracket-newline"
         },
         fixable: "whitespace",
         schema: [{
@@ -57161,7 +57262,8 @@ module.exports = {
         docs: {
             description: "enforce consistent spacing inside array brackets",
             category: "Stylistic Issues",
-            recommended: false
+            recommended: false,
+            url: "https://eslint.org/docs/rules/array-bracket-spacing"
         },
         fixable: "whitespace",
         schema: [{
@@ -57498,7 +57600,8 @@ module.exports = {
         docs: {
             description: "enforce `return` statements in callbacks of array methods",
             category: "Best Practices",
-            recommended: false
+            recommended: false,
+            url: "https://eslint.org/docs/rules/array-callback-return"
         },
 
         schema: [{
@@ -57612,7 +57715,8 @@ module.exports = {
         docs: {
             description: "enforce line breaks after each array element",
             category: "Stylistic Issues",
-            recommended: false
+            recommended: false,
+            url: "https://eslint.org/docs/rules/array-element-newline"
         },
         fixable: "whitespace",
         schema: [{
@@ -57837,7 +57941,8 @@ module.exports = {
         docs: {
             description: "require braces around arrow function bodies",
             category: "ECMAScript 6",
-            recommended: false
+            recommended: false,
+            url: "https://eslint.org/docs/rules/arrow-body-style"
         },
 
         schema: {
@@ -58034,7 +58139,8 @@ module.exports = {
         docs: {
             description: "require parentheses around arrow function arguments",
             category: "ECMAScript 6",
-            recommended: false
+            recommended: false,
+            url: "https://eslint.org/docs/rules/arrow-parens"
         },
 
         fixable: "code",
@@ -58171,7 +58277,8 @@ module.exports = {
         docs: {
             description: "enforce consistent spacing before and after the arrow in arrow functions",
             category: "ECMAScript 6",
-            recommended: false
+            recommended: false,
+            url: "https://eslint.org/docs/rules/arrow-spacing"
         },
 
         fixable: "whitespace",
@@ -58314,7 +58421,8 @@ module.exports = {
         docs: {
             description: "enforce the use of variables within the scope they are defined",
             category: "Best Practices",
-            recommended: false
+            recommended: false,
+            url: "https://eslint.org/docs/rules/block-scoped-var"
         },
 
         schema: []
@@ -58431,7 +58539,8 @@ module.exports = {
         docs: {
             description: "disallow or enforce spaces inside of blocks after opening block and before closing block",
             category: "Stylistic Issues",
-            recommended: false
+            recommended: false,
+            url: "https://eslint.org/docs/rules/block-spacing"
         },
 
         fixable: "whitespace",
@@ -58560,7 +58669,8 @@ module.exports = {
         docs: {
             description: "enforce consistent brace style for blocks",
             category: "Stylistic Issues",
-            recommended: false
+            recommended: false,
+            url: "https://eslint.org/docs/rules/brace-style"
         },
 
         schema: [{
@@ -58748,7 +58858,8 @@ module.exports = {
         docs: {
             description: "require `return` statements after callbacks",
             category: "Node.js and CommonJS",
-            recommended: false
+            recommended: false,
+            url: "https://eslint.org/docs/rules/callback-return"
         },
 
         schema: [{
@@ -58919,7 +59030,8 @@ module.exports = {
         docs: {
             description: "enforce camelcase naming convention",
             category: "Stylistic Issues",
-            recommended: false
+            recommended: false,
+            url: "https://eslint.org/docs/rules/camelcase"
         },
 
         schema: [{
@@ -59170,7 +59282,8 @@ module.exports = {
         docs: {
             description: "enforce or disallow capitalization of the first letter of a comment",
             category: "Stylistic Issues",
-            recommended: false
+            recommended: false,
+            url: "https://eslint.org/docs/rules/capitalized-comments"
         },
         fixable: "code",
         schema: [{ enum: ["always", "never"] }, {
@@ -59341,7 +59454,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":115,"../util/patterns/letters":406}],144:[function(require,module,exports){
+},{"../ast-utils":115,"../util/patterns/letters":407}],144:[function(require,module,exports){
 /**
  * @fileoverview Rule to enforce that all class methods use 'this'.
  * @author Patrick Williams
@@ -59358,7 +59471,8 @@ module.exports = {
         docs: {
             description: "enforce that class methods utilize `this`",
             category: "Best Practices",
-            recommended: false
+            recommended: false,
+            url: "https://eslint.org/docs/rules/class-methods-use-this"
         },
         schema: [{
             type: "object",
@@ -59533,7 +59647,8 @@ module.exports = {
         docs: {
             description: "require or disallow trailing commas",
             category: "Stylistic Issues",
-            recommended: false
+            recommended: false,
+            url: "https://eslint.org/docs/rules/comma-dangle"
         },
         fixable: "code",
         schema: {
@@ -59793,7 +59908,8 @@ module.exports = {
         docs: {
             description: "enforce consistent spacing before and after commas",
             category: "Stylistic Issues",
-            recommended: false
+            recommended: false,
+            url: "https://eslint.org/docs/rules/comma-spacing"
         },
 
         fixable: "whitespace",
@@ -59971,7 +60087,8 @@ module.exports = {
         docs: {
             description: "enforce consistent comma style",
             category: "Stylistic Issues",
-            recommended: false
+            recommended: false,
+            url: "https://eslint.org/docs/rules/comma-style"
         },
         fixable: "code",
         schema: [{
@@ -60264,7 +60381,8 @@ module.exports = {
         docs: {
             description: "enforce a maximum cyclomatic complexity allowed in a program",
             category: "Best Practices",
-            recommended: false
+            recommended: false,
+            url: "https://eslint.org/docs/rules/complexity"
         },
 
         schema: [{
@@ -60406,7 +60524,8 @@ module.exports = {
         docs: {
             description: "enforce consistent spacing inside computed property brackets",
             category: "Stylistic Issues",
-            recommended: false
+            recommended: false,
+            url: "https://eslint.org/docs/rules/computed-property-spacing"
         },
 
         fixable: "whitespace",
@@ -60618,7 +60737,8 @@ module.exports = {
         docs: {
             description: "require `return` statements to either always or never specify values",
             category: "Best Practices",
-            recommended: false
+            recommended: false,
+            url: "https://eslint.org/docs/rules/consistent-return"
         },
 
         schema: [{
@@ -60759,7 +60879,8 @@ module.exports = {
         docs: {
             description: "enforce consistent naming when capturing the current execution context",
             category: "Stylistic Issues",
-            recommended: false
+            recommended: false,
+            url: "https://eslint.org/docs/rules/consistent-this"
         },
 
         schema: {
@@ -60974,7 +61095,8 @@ module.exports = {
         docs: {
             description: "require `super()` calls in constructors",
             category: "ECMAScript 6",
-            recommended: true
+            recommended: true,
+            url: "https://eslint.org/docs/rules/constructor-super"
         },
 
         schema: []
@@ -61284,7 +61406,8 @@ module.exports = {
         docs: {
             description: "enforce consistent brace style for all control statements",
             category: "Best Practices",
-            recommended: false
+            recommended: false,
+            url: "https://eslint.org/docs/rules/curly"
         },
 
         schema: {
@@ -61666,7 +61789,8 @@ module.exports = {
         docs: {
             description: "require `default` cases in `switch` statements",
             category: "Best Practices",
-            recommended: false
+            recommended: false,
+            url: "https://eslint.org/docs/rules/default-case"
         },
 
         schema: [{
@@ -61758,7 +61882,8 @@ module.exports = {
         docs: {
             description: "enforce consistent newlines before and after dots",
             category: "Best Practices",
-            recommended: false
+            recommended: false,
+            url: "https://eslint.org/docs/rules/dot-location"
         },
 
         schema: [{
@@ -61856,7 +61981,8 @@ module.exports = {
         docs: {
             description: "enforce dot notation whenever possible",
             category: "Best Practices",
-            recommended: false
+            recommended: false,
+            url: "https://eslint.org/docs/rules/dot-notation"
         },
 
         schema: [{
@@ -61967,7 +62093,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":115,"../util/keywords":404}],157:[function(require,module,exports){
+},{"../ast-utils":115,"../util/keywords":405}],157:[function(require,module,exports){
 /**
  * @fileoverview Require or disallow newline at the end of files
  * @author Nodeca Team <https://github.com/nodeca>
@@ -61989,7 +62115,8 @@ module.exports = {
         docs: {
             description: "require or disallow newline at the end of files",
             category: "Stylistic Issues",
-            recommended: false
+            recommended: false,
+            url: "https://eslint.org/docs/rules/eol-last"
         },
         fixable: "whitespace",
         schema: [{
@@ -62094,7 +62221,8 @@ module.exports = {
         docs: {
             description: "require the use of `===` and `!==`",
             category: "Best Practices",
-            recommended: false
+            recommended: false,
+            url: "https://eslint.org/docs/rules/eqeqeq"
         },
 
         schema: {
@@ -62255,7 +62383,8 @@ module.exports = {
         docs: {
             description: "enforce \"for\" loop update clause moving the counter in the right direction.",
             category: "Possible Errors",
-            recommended: false
+            recommended: false,
+            url: "https://eslint.org/docs/rules/for-direction"
         },
         fixable: null,
         schema: []
@@ -62368,7 +62497,8 @@ module.exports = {
         docs: {
             description: "require or disallow spacing between function identifiers and their invocations",
             category: "Stylistic Issues",
-            recommended: false
+            recommended: false,
+            url: "https://eslint.org/docs/rules/func-call-spacing"
         },
 
         fixable: "whitespace",
@@ -62572,7 +62702,8 @@ module.exports = {
         docs: {
             description: "require function names to match the name of the variable or property to which they are assigned",
             category: "Stylistic Issues",
-            recommended: false
+            recommended: false,
+            url: "https://eslint.org/docs/rules/func-name-matching"
         },
 
         schema: {
@@ -62714,7 +62845,8 @@ module.exports = {
         docs: {
             description: "require or disallow named `function` expressions",
             category: "Stylistic Issues",
-            recommended: false
+            recommended: false,
+            url: "https://eslint.org/docs/rules/func-names"
         },
 
         schema: [{
@@ -62801,7 +62933,8 @@ module.exports = {
         docs: {
             description: "enforce the consistent use of either `function` declarations or expressions",
             category: "Stylistic Issues",
-            recommended: false
+            recommended: false,
+            url: "https://eslint.org/docs/rules/func-style"
         },
 
         schema: [{
@@ -62894,7 +63027,8 @@ module.exports = {
         docs: {
             description: "enforce consistent line breaks inside function parentheses",
             category: "Stylistic Issues",
-            recommended: false
+            recommended: false,
+            url: "https://eslint.org/docs/rules/function-paren-newline"
         },
         fixable: "whitespace",
         schema: [{
@@ -63121,7 +63255,8 @@ module.exports = {
         docs: {
             description: "enforce consistent spacing around `*` operators in generator functions",
             category: "ECMAScript 6",
-            recommended: false
+            recommended: false,
+            url: "https://eslint.org/docs/rules/generator-star-spacing"
         },
 
         fixable: "whitespace",
@@ -63328,7 +63463,8 @@ module.exports = {
         docs: {
             description: "enforce `return` statements in getters",
             category: "Possible Errors",
-            recommended: false
+            recommended: false,
+            url: "https://eslint.org/docs/rules/getter-return"
         },
         fixable: null,
         schema: [{
@@ -63495,7 +63631,8 @@ module.exports = {
         docs: {
             description: "require `require()` calls to be placed at top-level module scope",
             category: "Node.js and CommonJS",
-            recommended: false
+            recommended: false,
+            url: "https://eslint.org/docs/rules/global-require"
         },
 
         schema: []
@@ -63537,7 +63674,8 @@ module.exports = {
         docs: {
             description: "require `for-in` loops to include an `if` statement",
             category: "Best Practices",
-            recommended: false
+            recommended: false,
+            url: "https://eslint.org/docs/rules/guard-for-in"
         },
 
         schema: []
@@ -63579,7 +63717,8 @@ module.exports = {
         docs: {
             description: "require error handling in callbacks",
             category: "Node.js and CommonJS",
-            recommended: false
+            recommended: false,
+            url: "https://eslint.org/docs/rules/handle-callback-err"
         },
 
         schema: [{
@@ -63670,7 +63809,8 @@ module.exports = {
         docs: {
             description: "disallow specified identifiers",
             category: "Stylistic Issues",
-            recommended: false
+            recommended: false,
+            url: "https://eslint.org/docs/rules/id-blacklist"
         },
 
         schema: {
@@ -63782,7 +63922,8 @@ module.exports = {
         docs: {
             description: "enforce minimum and maximum identifier lengths",
             category: "Stylistic Issues",
-            recommended: false
+            recommended: false,
+            url: "https://eslint.org/docs/rules/id-length"
         },
 
         schema: [{
@@ -63893,7 +64034,8 @@ module.exports = {
         docs: {
             description: "require identifiers to match a specified regular expression",
             category: "Stylistic Issues",
-            recommended: false
+            recommended: false,
+            url: "https://eslint.org/docs/rules/id-match"
         },
 
         schema: [{
@@ -64024,7 +64166,8 @@ module.exports = {
         docs: {
             description: "enforce the location of arrow function bodies",
             category: "Stylistic Issues",
-            recommended: false
+            recommended: false,
+            url: "https://eslint.org/docs/rules/implicit-arrow-linebreak"
         },
         fixable: "whitespace",
         schema: [{
@@ -64133,7 +64276,8 @@ module.exports = {
             description: "enforce consistent indentation",
             category: "Stylistic Issues",
             recommended: false,
-            replacedBy: ["indent"]
+            replacedBy: ["indent"],
+            url: "https://eslint.org/docs/rules/indent-legacy"
         },
 
         deprecated: true,
@@ -65621,7 +65765,8 @@ module.exports = {
         docs: {
             description: "enforce consistent indentation",
             category: "Stylistic Issues",
-            recommended: false
+            recommended: false,
+            url: "https://eslint.org/docs/rules/indent"
         },
 
         fixable: "whitespace",
@@ -65718,6 +65863,9 @@ module.exports = {
                             pattern: ":exit$"
                         }
                     }
+                },
+                ignoreComments: {
+                    type: "boolean"
                 }
             },
             additionalProperties: false
@@ -65755,7 +65903,8 @@ module.exports = {
             ObjectExpression: 1,
             ImportDeclaration: 1,
             flatTernaryExpressions: false,
-            ignoredNodes: []
+            ignoredNodes: [],
+            ignoreComments: false
         };
 
         if (context.options.length) {
@@ -66542,6 +66691,13 @@ module.exports = {
             },
             "Program:exit": function ProgramExit() {
 
+                // If ignoreComments option is enabled, ignore all comment tokens.
+                if (options.ignoreComments) {
+                    sourceCode.getAllComments().forEach(function (comment) {
+                        return offsets.ignoreToken(comment);
+                    });
+                }
+
                 // Invoke the queued offset listeners for the nodes that aren't ignored.
                 listenerCallQueue.filter(function (nodeInfo) {
                     return !ignoredNodes.has(nodeInfo.node);
@@ -66653,7 +66809,8 @@ module.exports = {
         docs: {
             description: "require or disallow initialization in variable declarations",
             category: "Variables",
-            recommended: false
+            recommended: false,
+            url: "https://eslint.org/docs/rules/init-declarations"
         },
 
         schema: {
@@ -66778,7 +66935,8 @@ module.exports = {
         docs: {
             description: "enforce the consistent use of either double or single quotes in JSX attributes",
             category: "Stylistic Issues",
-            recommended: false
+            recommended: false,
+            url: "https://eslint.org/docs/rules/jsx-quotes"
         },
 
         fixable: "whitespace",
@@ -66960,7 +67118,8 @@ module.exports = {
         docs: {
             description: "enforce consistent spacing between keys and values in object literal properties",
             category: "Stylistic Issues",
-            recommended: false
+            recommended: false,
+            url: "https://eslint.org/docs/rules/key-spacing"
         },
 
         fixable: "whitespace",
@@ -67518,7 +67677,8 @@ module.exports = {
         docs: {
             description: "enforce consistent spacing before and after keywords",
             category: "Stylistic Issues",
-            recommended: false
+            recommended: false,
+            url: "https://eslint.org/docs/rules/keyword-spacing"
         },
 
         fixable: "whitespace",
@@ -67998,7 +68158,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":115,"../util/keywords":404}],180:[function(require,module,exports){
+},{"../ast-utils":115,"../util/keywords":405}],180:[function(require,module,exports){
 /**
  * @fileoverview Rule to enforce the position of line comments
  * @author Alberto Rodríguez
@@ -68016,7 +68176,8 @@ module.exports = {
         docs: {
             description: "enforce position of line comments",
             category: "Stylistic Issues",
-            recommended: false
+            recommended: false,
+            url: "https://eslint.org/docs/rules/line-comment-position"
         },
 
         schema: [{
@@ -68134,7 +68295,8 @@ module.exports = {
         docs: {
             description: "enforce consistent linebreak style",
             category: "Stylistic Issues",
-            recommended: false
+            recommended: false,
+            url: "https://eslint.org/docs/rules/linebreak-style"
         },
 
         fixable: "whitespace",
@@ -68271,7 +68433,8 @@ module.exports = {
         docs: {
             description: "require empty lines around comments",
             category: "Stylistic Issues",
-            recommended: false
+            recommended: false,
+            url: "https://eslint.org/docs/rules/lines-around-comment"
         },
 
         fixable: "whitespace",
@@ -68620,7 +68783,8 @@ module.exports = {
             description: "require or disallow newlines around directives",
             category: "Stylistic Issues",
             recommended: false,
-            replacedBy: ["padding-line-between-statements"]
+            replacedBy: ["padding-line-between-statements"],
+            url: "https://eslint.org/docs/rules/lines-around-directive"
         },
         schema: [{
             oneOf: [{
@@ -68802,7 +68966,8 @@ module.exports = {
         docs: {
             description: "require or disallow an empty line between class members",
             category: "Stylistic Issues",
-            recommended: false
+            recommended: false,
+            url: "https://eslint.org/docs/rules/lines-between-class-members"
         },
 
         fixable: "whitespace",
@@ -68940,7 +69105,8 @@ module.exports = {
         docs: {
             description: "enforce a maximum depth that blocks can be nested",
             category: "Stylistic Issues",
-            recommended: false
+            recommended: false,
+            url: "https://eslint.org/docs/rules/max-depth"
         },
 
         schema: [{
@@ -69138,7 +69304,8 @@ module.exports = {
         docs: {
             description: "enforce a maximum line length",
             category: "Stylistic Issues",
-            recommended: false
+            recommended: false,
+            url: "https://eslint.org/docs/rules/max-len"
         },
 
         schema: [OPTIONS_OR_INTEGER_SCHEMA, OPTIONS_OR_INTEGER_SCHEMA, OPTIONS_SCHEMA]
@@ -69449,7 +69616,8 @@ module.exports = {
         docs: {
             description: "enforce a maximum number of lines per file",
             category: "Stylistic Issues",
-            recommended: false
+            recommended: false,
+            url: "https://eslint.org/docs/rules/max-lines"
         },
 
         schema: [{
@@ -69594,7 +69762,8 @@ module.exports = {
         docs: {
             description: "enforce a maximum depth that callbacks can be nested",
             category: "Stylistic Issues",
-            recommended: false
+            recommended: false,
+            url: "https://eslint.org/docs/rules/max-nested-callbacks"
         },
 
         schema: [{
@@ -69712,7 +69881,8 @@ module.exports = {
         docs: {
             description: "enforce a maximum number of parameters in function definitions",
             category: "Stylistic Issues",
-            recommended: false
+            recommended: false,
+            url: "https://eslint.org/docs/rules/max-params"
         },
 
         schema: [{
@@ -69801,7 +69971,8 @@ module.exports = {
         docs: {
             description: "enforce a maximum number of statements allowed per line",
             category: "Stylistic Issues",
-            recommended: false
+            recommended: false,
+            url: "https://eslint.org/docs/rules/max-statements-per-line"
         },
 
         schema: [{
@@ -69998,7 +70169,8 @@ module.exports = {
         docs: {
             description: "enforce a maximum number of statements allowed in function blocks",
             category: "Stylistic Issues",
-            recommended: false
+            recommended: false,
+            url: "https://eslint.org/docs/rules/max-statements"
         },
 
         schema: [{
@@ -70156,7 +70328,8 @@ module.exports = {
         docs: {
             description: "enforce a particular style for multiline comments",
             category: "Stylistic Issues",
-            recommended: false
+            recommended: false,
+            url: "https://eslint.org/docs/rules/multiline-comment-style"
         },
         fixable: "whitespace",
         schema: [{ enum: ["starred-block", "separate-lines", "bare-block"] }]
@@ -70476,7 +70649,8 @@ module.exports = {
         docs: {
             description: "enforce newlines between operands of ternary expressions",
             category: "Stylistic Issues",
-            recommended: false
+            recommended: false,
+            url: "https://eslint.org/docs/rules/multiline-ternary"
         },
         schema: [{
             enum: ["always", "always-multiline", "never"]
@@ -70615,7 +70789,8 @@ module.exports = {
         docs: {
             description: "require constructor names to begin with a capital letter",
             category: "Stylistic Issues",
-            recommended: false
+            recommended: false,
+            url: "https://eslint.org/docs/rules/new-cap"
         },
 
         schema: [{
@@ -70832,7 +71007,8 @@ module.exports = {
         docs: {
             description: "require parentheses when invoking a constructor with no arguments",
             category: "Stylistic Issues",
-            recommended: false
+            recommended: false,
+            url: "https://eslint.org/docs/rules/new-parens"
         },
 
         schema: [],
@@ -70892,7 +71068,8 @@ module.exports = {
             description: "require or disallow an empty line after variable declarations",
             category: "Stylistic Issues",
             recommended: false,
-            replacedBy: ["padding-line-between-statements"]
+            replacedBy: ["padding-line-between-statements"],
+            url: "https://eslint.org/docs/rules/newline-after-var"
         },
 
         schema: [{
@@ -71132,7 +71309,8 @@ module.exports = {
             description: "require an empty line before `return` statements",
             category: "Stylistic Issues",
             recommended: false,
-            replacedBy: ["padding-line-between-statements"]
+            replacedBy: ["padding-line-between-statements"],
+            url: "https://eslint.org/docs/rules/newline-before-return"
         },
         fixable: "whitespace",
         schema: [],
@@ -71344,7 +71522,8 @@ module.exports = {
         docs: {
             description: "require a newline after each call in a method chain",
             category: "Stylistic Issues",
-            recommended: false
+            recommended: false,
+            url: "https://eslint.org/docs/rules/newline-per-chained-call"
         },
         fixable: "whitespace",
         schema: [{
@@ -71522,7 +71701,8 @@ module.exports = {
         docs: {
             description: "disallow the use of `alert`, `confirm`, and `prompt`",
             category: "Best Practices",
-            recommended: false
+            recommended: false,
+            url: "https://eslint.org/docs/rules/no-alert"
         },
 
         schema: []
@@ -71570,7 +71750,8 @@ module.exports = {
         docs: {
             description: "disallow `Array` constructors",
             category: "Stylistic Issues",
-            recommended: false
+            recommended: false,
+            url: "https://eslint.org/docs/rules/no-array-constructor"
         },
 
         schema: []
@@ -71619,7 +71800,8 @@ module.exports = {
         docs: {
             description: "disallow `await` inside of loops",
             category: "Possible Errors",
-            recommended: false
+            recommended: false,
+            url: "https://eslint.org/docs/rules/no-await-in-loop"
         },
         schema: []
     },
@@ -71694,7 +71876,8 @@ module.exports = {
         docs: {
             description: "disallow bitwise operators",
             category: "Stylistic Issues",
-            recommended: false
+            recommended: false,
+            url: "https://eslint.org/docs/rules/no-bitwise"
         },
 
         schema: [{
@@ -71791,7 +71974,8 @@ module.exports = {
         docs: {
             description: "disallow use of the Buffer() constructor",
             category: "Node.js and CommonJS",
-            recommended: false
+            recommended: false,
+            url: "https://eslint.org/docs/rules/no-buffer-constructor"
         },
         schema: []
     },
@@ -71831,7 +72015,8 @@ module.exports = {
         docs: {
             description: "disallow the use of `arguments.caller` or `arguments.callee`",
             category: "Best Practices",
-            recommended: false
+            recommended: false,
+            url: "https://eslint.org/docs/rules/no-caller"
         },
 
         schema: []
@@ -71868,7 +72053,8 @@ module.exports = {
         docs: {
             description: "disallow lexical declarations in case clauses",
             category: "Best Practices",
-            recommended: true
+            recommended: true,
+            url: "https://eslint.org/docs/rules/no-case-declarations"
         },
 
         schema: []
@@ -71933,7 +72119,8 @@ module.exports = {
         docs: {
             description: "disallow `catch` clause parameters from shadowing variables in the outer scope",
             category: "Variables",
-            recommended: false
+            recommended: false,
+            url: "https://eslint.org/docs/rules/no-catch-shadow"
         },
 
         schema: []
@@ -71998,7 +72185,8 @@ module.exports = {
         docs: {
             description: "disallow reassigning class members",
             category: "ECMAScript 6",
-            recommended: true
+            recommended: true,
+            url: "https://eslint.org/docs/rules/no-class-assign"
         },
 
         schema: []
@@ -72049,7 +72237,8 @@ module.exports = {
         docs: {
             description: "disallow comparing against -0",
             category: "Possible Errors",
-            recommended: true
+            recommended: true,
+            url: "https://eslint.org/docs/rules/no-compare-neg-zero"
         },
         fixable: null,
         schema: []
@@ -72113,7 +72302,8 @@ module.exports = {
         docs: {
             description: "disallow assignment operators in conditional expressions",
             category: "Possible Errors",
-            recommended: true
+            recommended: true,
+            url: "https://eslint.org/docs/rules/no-cond-assign"
         },
 
         schema: [{
@@ -72249,7 +72439,8 @@ module.exports = {
         docs: {
             description: "disallow arrow functions where they could be confused with comparisons",
             category: "ECMAScript 6",
-            recommended: false
+            recommended: false,
+            url: "https://eslint.org/docs/rules/no-confusing-arrow"
         },
 
         fixable: "code",
@@ -72317,7 +72508,8 @@ module.exports = {
         docs: {
             description: "disallow the use of `console`",
             category: "Possible Errors",
-            recommended: true
+            recommended: true,
+            url: "https://eslint.org/docs/rules/no-console"
         },
 
         schema: [{
@@ -72436,7 +72628,8 @@ module.exports = {
         docs: {
             description: "disallow reassigning `const` variables",
             category: "ECMAScript 6",
-            recommended: true
+            recommended: true,
+            url: "https://eslint.org/docs/rules/no-const-assign"
         },
 
         schema: []
@@ -72482,7 +72675,8 @@ module.exports = {
         docs: {
             description: "disallow constant expressions in conditions",
             category: "Possible Errors",
-            recommended: true
+            recommended: true,
+            url: "https://eslint.org/docs/rules/no-constant-condition"
         },
 
         schema: [{
@@ -72690,7 +72884,8 @@ module.exports = {
         docs: {
             description: "disallow `continue` statements",
             category: "Stylistic Issues",
-            recommended: false
+            recommended: false,
+            url: "https://eslint.org/docs/rules/no-continue"
         },
 
         schema: []
@@ -72723,7 +72918,8 @@ module.exports = {
         docs: {
             description: "disallow control characters in regular expressions",
             category: "Possible Errors",
-            recommended: true
+            recommended: true,
+            url: "https://eslint.org/docs/rules/no-control-regex"
         },
 
         schema: []
@@ -72847,7 +73043,8 @@ module.exports = {
         docs: {
             description: "disallow the use of `debugger`",
             category: "Possible Errors",
-            recommended: true
+            recommended: true,
+            url: "https://eslint.org/docs/rules/no-debugger"
         },
         fixable: "code",
         schema: []
@@ -72889,7 +73086,8 @@ module.exports = {
         docs: {
             description: "disallow deleting variables",
             category: "Variables",
-            recommended: true
+            recommended: true,
+            url: "https://eslint.org/docs/rules/no-delete-var"
         },
 
         schema: []
@@ -72924,7 +73122,8 @@ module.exports = {
         docs: {
             description: "disallow division operators explicitly at the beginning of regular expressions",
             category: "Best Practices",
-            recommended: false
+            recommended: false,
+            url: "https://eslint.org/docs/rules/no-div-regex"
         },
 
         schema: []
@@ -72962,7 +73161,8 @@ module.exports = {
         docs: {
             description: "disallow duplicate arguments in `function` definitions",
             category: "Possible Errors",
-            recommended: true
+            recommended: true,
+            url: "https://eslint.org/docs/rules/no-dupe-args"
         },
 
         schema: []
@@ -73036,7 +73236,8 @@ module.exports = {
         docs: {
             description: "disallow duplicate class members",
             category: "ECMAScript 6",
-            recommended: true
+            recommended: true,
+            url: "https://eslint.org/docs/rules/no-dupe-class-members"
         },
 
         schema: []
@@ -73243,7 +73444,8 @@ module.exports = {
         docs: {
             description: "disallow duplicate keys in object literals",
             category: "Possible Errors",
-            recommended: true
+            recommended: true,
+            url: "https://eslint.org/docs/rules/no-dupe-keys"
         },
 
         schema: []
@@ -73307,7 +73509,8 @@ module.exports = {
         docs: {
             description: "disallow duplicate case labels",
             category: "Possible Errors",
-            recommended: true
+            recommended: true,
+            url: "https://eslint.org/docs/rules/no-duplicate-case"
         },
 
         schema: []
@@ -73442,7 +73645,8 @@ module.exports = {
         docs: {
             description: "disallow duplicate module imports",
             category: "ECMAScript 6",
-            recommended: false
+            recommended: false,
+            url: "https://eslint.org/docs/rules/no-duplicate-imports"
         },
 
         schema: [{
@@ -73498,7 +73702,8 @@ module.exports = {
         docs: {
             description: "disallow `else` blocks after `return` statements in `if` statements",
             category: "Best Practices",
-            recommended: false
+            recommended: false,
+            url: "https://eslint.org/docs/rules/no-else-return"
         },
 
         schema: [{
@@ -73782,7 +73987,8 @@ module.exports = {
         docs: {
             description: "disallow empty character classes in regular expressions",
             category: "Possible Errors",
-            recommended: true
+            recommended: true,
+            url: "https://eslint.org/docs/rules/no-empty-character-class"
         },
 
         schema: []
@@ -73888,7 +74094,8 @@ module.exports = {
         docs: {
             description: "disallow empty functions",
             category: "Best Practices",
-            recommended: false
+            recommended: false,
+            url: "https://eslint.org/docs/rules/no-empty-function"
         },
 
         schema: [{
@@ -73964,7 +74171,8 @@ module.exports = {
         docs: {
             description: "disallow empty destructuring patterns",
             category: "Best Practices",
-            recommended: true
+            recommended: true,
+            url: "https://eslint.org/docs/rules/no-empty-pattern"
         },
 
         schema: []
@@ -74008,7 +74216,8 @@ module.exports = {
         docs: {
             description: "disallow empty block statements",
             category: "Possible Errors",
-            recommended: true
+            recommended: true,
+            url: "https://eslint.org/docs/rules/no-empty"
         },
 
         schema: [{
@@ -74080,7 +74289,8 @@ module.exports = {
         docs: {
             description: "disallow `null` comparisons without type-checking operators",
             category: "Best Practices",
-            recommended: false
+            recommended: false,
+            url: "https://eslint.org/docs/rules/no-eq-null"
         },
 
         schema: []
@@ -74173,7 +74383,8 @@ module.exports = {
         docs: {
             description: "disallow the use of `eval()`",
             category: "Best Practices",
-            recommended: false
+            recommended: false,
+            url: "https://eslint.org/docs/rules/no-eval"
         },
 
         schema: [{
@@ -74407,7 +74618,8 @@ module.exports = {
         docs: {
             description: "disallow reassigning exceptions in `catch` clauses",
             category: "Possible Errors",
-            recommended: true
+            recommended: true,
+            url: "https://eslint.org/docs/rules/no-ex-assign"
         },
 
         schema: []
@@ -74464,7 +74676,8 @@ module.exports = {
         docs: {
             description: "disallow extending native types",
             category: "Best Practices",
-            recommended: false
+            recommended: false,
+            url: "https://eslint.org/docs/rules/no-extend-native"
         },
 
         schema: [{
@@ -74608,7 +74821,8 @@ module.exports = {
         docs: {
             description: "disallow unnecessary calls to `.bind()`",
             category: "Best Practices",
-            recommended: false
+            recommended: false,
+            url: "https://eslint.org/docs/rules/no-extra-bind"
         },
 
         schema: [],
@@ -74747,7 +74961,8 @@ module.exports = {
         docs: {
             description: "disallow unnecessary boolean casts",
             category: "Possible Errors",
-            recommended: true
+            recommended: true,
+            url: "https://eslint.org/docs/rules/no-extra-boolean-cast"
         },
 
         schema: [],
@@ -74856,7 +75071,8 @@ module.exports = {
         docs: {
             description: "disallow unnecessary labels",
             category: "Best Practices",
-            recommended: false
+            recommended: false,
+            url: "https://eslint.org/docs/rules/no-extra-label"
         },
 
         schema: [],
@@ -74995,7 +75211,8 @@ module.exports = {
         docs: {
             description: "disallow unnecessary parentheses",
             category: "Possible Errors",
-            recommended: false
+            recommended: false,
+            url: "https://eslint.org/docs/rules/no-extra-parens"
         },
 
         fixable: "code",
@@ -75513,7 +75730,7 @@ module.exports = {
                         tokensToIgnore.add(firstLeftToken);
                     }
                 }
-                if (hasExcessParens(node.right)) {
+                if (!(node.type === "ForOfStatement" && node.right.type === "SequenceExpression") && hasExcessParens(node.right)) {
                     report(node.right);
                 }
                 if (hasExcessParens(node.left)) {
@@ -75678,7 +75895,8 @@ module.exports = {
         docs: {
             description: "disallow unnecessary semicolons",
             category: "Possible Errors",
-            recommended: true
+            recommended: true,
+            url: "https://eslint.org/docs/rules/no-extra-semi"
         },
 
         fixable: "code",
@@ -75824,7 +76042,8 @@ module.exports = {
         docs: {
             description: "disallow fallthrough of `case` statements",
             category: "Best Practices",
-            recommended: true
+            recommended: true,
+            url: "https://eslint.org/docs/rules/no-fallthrough"
         },
 
         schema: [{
@@ -75917,7 +76136,8 @@ module.exports = {
         docs: {
             description: "disallow leading or trailing decimal points in numeric literals",
             category: "Best Practices",
-            recommended: false
+            recommended: false,
+            url: "https://eslint.org/docs/rules/no-floating-decimal"
         },
 
         schema: [],
@@ -75978,7 +76198,8 @@ module.exports = {
         docs: {
             description: "disallow reassigning `function` declarations",
             category: "Possible Errors",
-            recommended: true
+            recommended: true,
+            url: "https://eslint.org/docs/rules/no-func-assign"
         },
 
         schema: []
@@ -76041,7 +76262,8 @@ module.exports = {
         docs: {
             description: "disallow assignments to native objects or read-only global variables",
             category: "Best Practices",
-            recommended: true
+            recommended: true,
+            url: "https://eslint.org/docs/rules/no-global-assign"
         },
 
         schema: [{
@@ -76243,7 +76465,8 @@ module.exports = {
         docs: {
             description: "disallow shorthand type conversions",
             category: "Best Practices",
-            recommended: false
+            recommended: false,
+            url: "https://eslint.org/docs/rules/no-implicit-coercion"
         },
 
         fixable: "code",
@@ -76391,7 +76614,8 @@ module.exports = {
         docs: {
             description: "disallow variable and `function` declarations in the global scope",
             category: "Best Practices",
-            recommended: false
+            recommended: false,
+            url: "https://eslint.org/docs/rules/no-implicit-globals"
         },
 
         schema: []
@@ -76447,7 +76671,8 @@ module.exports = {
         docs: {
             description: "disallow the use of `eval()`-like methods",
             category: "Best Practices",
-            recommended: false
+            recommended: false,
+            url: "https://eslint.org/docs/rules/no-implied-eval"
         },
 
         schema: []
@@ -76603,7 +76828,8 @@ module.exports = {
         docs: {
             description: "disallow inline comments after code",
             category: "Stylistic Issues",
-            recommended: false
+            recommended: false,
+            url: "https://eslint.org/docs/rules/no-inline-comments"
         },
 
         schema: []
@@ -76671,7 +76897,8 @@ module.exports = {
         docs: {
             description: "disallow variable or `function` declarations in nested blocks",
             category: "Possible Errors",
-            recommended: true
+            recommended: true,
+            url: "https://eslint.org/docs/rules/no-inner-declarations"
         },
 
         schema: [{
@@ -76760,7 +76987,8 @@ module.exports = {
         docs: {
             description: "disallow invalid regular expression strings in `RegExp` constructors",
             category: "Possible Errors",
-            recommended: true
+            recommended: true,
+            url: "https://eslint.org/docs/rules/no-invalid-regexp"
         },
 
         schema: [{
@@ -76867,7 +77095,8 @@ module.exports = {
         docs: {
             description: "disallow `this` keywords outside of classes or class-like objects",
             category: "Best Practices",
-            recommended: false
+            recommended: false,
+            url: "https://eslint.org/docs/rules/no-invalid-this"
         },
 
         schema: []
@@ -76995,7 +77224,8 @@ module.exports = {
         docs: {
             description: "disallow irregular whitespace outside of strings and comments",
             category: "Possible Errors",
-            recommended: true
+            recommended: true,
+            url: "https://eslint.org/docs/rules/no-irregular-whitespace"
         },
 
         schema: [{
@@ -77215,7 +77445,8 @@ module.exports = {
         docs: {
             description: "disallow the use of the `__iterator__` property",
             category: "Best Practices",
-            recommended: false
+            recommended: false,
+            url: "https://eslint.org/docs/rules/no-iterator"
         },
 
         schema: []
@@ -77257,7 +77488,8 @@ module.exports = {
         docs: {
             description: "disallow labels that share a name with a variable",
             category: "Variables",
-            recommended: false
+            recommended: false,
+            url: "https://eslint.org/docs/rules/no-label-var"
         },
 
         schema: []
@@ -77324,7 +77556,8 @@ module.exports = {
         docs: {
             description: "disallow labeled statements",
             category: "Best Practices",
-            recommended: false
+            recommended: false,
+            url: "https://eslint.org/docs/rules/no-labels"
         },
 
         schema: [{
@@ -77459,7 +77692,8 @@ module.exports = {
         docs: {
             description: "disallow unnecessary nested blocks",
             category: "Best Practices",
-            recommended: false
+            recommended: false,
+            url: "https://eslint.org/docs/rules/no-lone-blocks"
         },
 
         schema: []
@@ -77571,7 +77805,8 @@ module.exports = {
         docs: {
             description: "disallow `if` statements as the only statement in `else` blocks",
             category: "Stylistic Issues",
-            recommended: false
+            recommended: false,
+            url: "https://eslint.org/docs/rules/no-lonely-if"
         },
 
         schema: [],
@@ -77775,7 +78010,8 @@ module.exports = {
         docs: {
             description: "disallow `function` declarations and expressions inside loop statements",
             category: "Best Practices",
-            recommended: false
+            recommended: false,
+            url: "https://eslint.org/docs/rules/no-loop-func"
         },
 
         schema: []
@@ -77831,7 +78067,8 @@ module.exports = {
         docs: {
             description: "disallow magic numbers",
             category: "Best Practices",
-            recommended: false
+            recommended: false,
+            url: "https://eslint.org/docs/rules/no-magic-numbers"
         },
 
         schema: [{
@@ -78022,7 +78259,8 @@ module.exports = {
         docs: {
             description: "disallow mixed binary operators",
             category: "Stylistic Issues",
-            recommended: false
+            recommended: false,
+            url: "https://eslint.org/docs/rules/no-mixed-operators"
         },
         schema: [{
             type: "object",
@@ -78160,7 +78398,8 @@ module.exports = {
         docs: {
             description: "disallow `require` calls to be mixed with regular variable declarations",
             category: "Node.js and CommonJS",
-            recommended: false
+            recommended: false,
+            url: "https://eslint.org/docs/rules/no-mixed-requires"
         },
 
         schema: [{
@@ -78357,7 +78596,8 @@ module.exports = {
         docs: {
             description: "disallow mixed spaces and tabs for indentation",
             category: "Stylistic Issues",
-            recommended: true
+            recommended: true,
+            url: "https://eslint.org/docs/rules/no-mixed-spaces-and-tabs"
         },
 
         schema: [{
@@ -78497,7 +78737,8 @@ module.exports = {
         docs: {
             description: "disallow use of chained assignment expressions",
             category: "Stylistic Issues",
-            recommended: false
+            recommended: false,
+            url: "https://eslint.org/docs/rules/no-multi-assign"
         },
         schema: []
     },
@@ -78540,7 +78781,8 @@ module.exports = {
         docs: {
             description: "disallow multiple spaces",
             category: "Best Practices",
-            recommended: false
+            recommended: false,
+            url: "https://eslint.org/docs/rules/no-multi-spaces"
         },
 
         fixable: "whitespace",
@@ -78667,7 +78909,8 @@ module.exports = {
         docs: {
             description: "disallow multiline strings",
             category: "Best Practices",
-            recommended: false
+            recommended: false,
+            url: "https://eslint.org/docs/rules/no-multi-str"
         },
 
         schema: []
@@ -78716,7 +78959,8 @@ module.exports = {
         docs: {
             description: "disallow multiple empty lines",
             category: "Stylistic Issues",
-            recommended: false
+            recommended: false,
+            url: "https://eslint.org/docs/rules/no-multiple-empty-lines"
         },
 
         fixable: "whitespace",
@@ -78853,7 +79097,8 @@ module.exports = {
             description: "disallow assignments to native objects or read-only global variables",
             category: "Best Practices",
             recommended: false,
-            replacedBy: ["no-global-assign"]
+            replacedBy: ["no-global-assign"],
+            url: "https://eslint.org/docs/rules/no-native-reassign"
         },
 
         deprecated: true,
@@ -78937,7 +79182,8 @@ module.exports = {
         docs: {
             description: "disallow negated conditions",
             category: "Stylistic Issues",
-            recommended: false
+            recommended: false,
+            url: "https://eslint.org/docs/rules/no-negated-condition"
         },
 
         schema: []
@@ -79023,7 +79269,8 @@ module.exports = {
             description: "disallow negating the left operand in `in` expressions",
             category: "Possible Errors",
             recommended: false,
-            replacedBy: ["no-unsafe-negation"]
+            replacedBy: ["no-unsafe-negation"],
+            url: "https://eslint.org/docs/rules/no-negated-in-lhs"
         },
         deprecated: true,
 
@@ -79059,7 +79306,8 @@ module.exports = {
         docs: {
             description: "disallow nested ternary expressions",
             category: "Stylistic Issues",
-            recommended: false
+            recommended: false,
+            url: "https://eslint.org/docs/rules/no-nested-ternary"
         },
 
         schema: []
@@ -79094,7 +79342,8 @@ module.exports = {
         docs: {
             description: "disallow `new` operators with the `Function` object",
             category: "Best Practices",
-            recommended: false
+            recommended: false,
+            url: "https://eslint.org/docs/rules/no-new-func"
         },
 
         schema: []
@@ -79140,7 +79389,8 @@ module.exports = {
         docs: {
             description: "disallow `Object` constructors",
             category: "Stylistic Issues",
-            recommended: false
+            recommended: false,
+            url: "https://eslint.org/docs/rules/no-new-object"
         },
 
         schema: []
@@ -79175,7 +79425,8 @@ module.exports = {
         docs: {
             description: "disallow `new` operators with calls to `require`",
             category: "Node.js and CommonJS",
-            recommended: false
+            recommended: false,
+            url: "https://eslint.org/docs/rules/no-new-require"
         },
 
         schema: []
@@ -79210,7 +79461,8 @@ module.exports = {
         docs: {
             description: "disallow `new` operators with the `Symbol` object",
             category: "ECMAScript 6",
-            recommended: true
+            recommended: true,
+            url: "https://eslint.org/docs/rules/no-new-symbol"
         },
 
         schema: []
@@ -79254,7 +79506,8 @@ module.exports = {
         docs: {
             description: "disallow `new` operators with the `String`, `Number`, and `Boolean` objects",
             category: "Best Practices",
-            recommended: false
+            recommended: false,
+            url: "https://eslint.org/docs/rules/no-new-wrappers"
         },
 
         schema: []
@@ -79292,7 +79545,8 @@ module.exports = {
         docs: {
             description: "disallow `new` operators outside of assignments or comparisons",
             category: "Best Practices",
-            recommended: false
+            recommended: false,
+            url: "https://eslint.org/docs/rules/no-new"
         },
 
         schema: []
@@ -79325,7 +79579,8 @@ module.exports = {
         docs: {
             description: "disallow calling global object properties as functions",
             category: "Possible Errors",
-            recommended: true
+            recommended: true,
+            url: "https://eslint.org/docs/rules/no-obj-calls"
         },
 
         schema: []
@@ -79365,7 +79620,8 @@ module.exports = {
         docs: {
             description: "disallow octal escape sequences in string literals",
             category: "Best Practices",
-            recommended: false
+            recommended: false,
+            url: "https://eslint.org/docs/rules/no-octal-escape"
         },
 
         schema: []
@@ -79411,7 +79667,8 @@ module.exports = {
         docs: {
             description: "disallow octal literals",
             category: "Best Practices",
-            recommended: true
+            recommended: true,
+            url: "https://eslint.org/docs/rules/no-octal"
         },
 
         schema: []
@@ -79447,7 +79704,8 @@ module.exports = {
         docs: {
             description: "disallow reassigning `function` parameters",
             category: "Best Practices",
-            recommended: false
+            recommended: false,
+            url: "https://eslint.org/docs/rules/no-param-reassign"
         },
 
         schema: [{
@@ -79612,7 +79870,8 @@ module.exports = {
         docs: {
             description: "disallow string concatenation with `__dirname` and `__filename`",
             category: "Node.js and CommonJS",
-            recommended: false
+            recommended: false,
+            url: "https://eslint.org/docs/rules/no-path-concat"
         },
 
         schema: []
@@ -79661,7 +79920,8 @@ module.exports = {
         docs: {
             description: "disallow the unary operators `++` and `--`",
             category: "Stylistic Issues",
-            recommended: false
+            recommended: false,
+            url: "https://eslint.org/docs/rules/no-plusplus"
         },
 
         schema: [{
@@ -79717,7 +79977,8 @@ module.exports = {
         docs: {
             description: "disallow the use of `process.env`",
             category: "Node.js and CommonJS",
-            recommended: false
+            recommended: false,
+            url: "https://eslint.org/docs/rules/no-process-env"
         },
 
         schema: []
@@ -79754,7 +80015,8 @@ module.exports = {
         docs: {
             description: "disallow the use of `process.exit()`",
             category: "Node.js and CommonJS",
-            recommended: false
+            recommended: false,
+            url: "https://eslint.org/docs/rules/no-process-exit"
         },
 
         schema: []
@@ -79791,7 +80053,8 @@ module.exports = {
         docs: {
             description: "disallow the use of the `__proto__` property",
             category: "Best Practices",
-            recommended: false
+            recommended: false,
+            url: "https://eslint.org/docs/rules/no-proto"
         },
 
         schema: []
@@ -79826,7 +80089,8 @@ module.exports = {
         docs: {
             description: "disallow calling some `Object.prototype` methods directly on objects",
             category: "Possible Errors",
-            recommended: false
+            recommended: false,
+            url: "https://eslint.org/docs/rules/no-prototype-builtins"
         },
 
         schema: []
@@ -79879,7 +80143,8 @@ module.exports = {
         docs: {
             description: "disallow variable redeclaration",
             category: "Best Practices",
-            recommended: true
+            recommended: true,
+            url: "https://eslint.org/docs/rules/no-redeclare"
         },
 
         schema: [{
@@ -79982,7 +80247,8 @@ module.exports = {
         docs: {
             description: "disallow multiple spaces in regular expressions",
             category: "Possible Errors",
-            recommended: true
+            recommended: true,
+            url: "https://eslint.org/docs/rules/no-regex-spaces"
         },
 
         schema: [],
@@ -80098,7 +80364,8 @@ module.exports = {
         docs: {
             description: "disallow specified global variables",
             category: "Variables",
-            recommended: false
+            recommended: false,
+            url: "https://eslint.org/docs/rules/no-restricted-globals"
         },
 
         schema: {
@@ -80249,7 +80516,8 @@ module.exports = {
         docs: {
             description: "disallow specified modules when loaded by `import`",
             category: "ECMAScript 6",
-            recommended: false
+            recommended: false,
+            url: "https://eslint.org/docs/rules/no-restricted-imports"
         },
 
         schema: {
@@ -80498,7 +80766,8 @@ module.exports = {
         docs: {
             description: "disallow specified modules when loaded by `require`",
             category: "Node.js and CommonJS",
-            recommended: false
+            recommended: false,
+            url: "https://eslint.org/docs/rules/no-restricted-modules"
         },
 
         schema: {
@@ -80635,7 +80904,8 @@ module.exports = {
         docs: {
             description: "disallow certain properties on certain objects",
             category: "Best Practices",
-            recommended: false
+            recommended: false,
+            url: "https://eslint.org/docs/rules/no-restricted-properties"
         },
 
         schema: {
@@ -80808,7 +81078,8 @@ module.exports = {
         docs: {
             description: "disallow specified syntax",
             category: "Stylistic Issues",
-            recommended: false
+            recommended: false,
+            url: "https://eslint.org/docs/rules/no-restricted-syntax"
         },
 
         schema: {
@@ -80878,7 +81149,8 @@ module.exports = {
         docs: {
             description: "disallow assignment operators in `return` statements",
             category: "Best Practices",
-            recommended: false
+            recommended: false,
+            url: "https://eslint.org/docs/rules/no-return-assign"
         },
 
         schema: [{
@@ -80941,7 +81213,11 @@ module.exports = {
         docs: {
             description: "disallow unnecessary `return await`",
             category: "Best Practices",
-            recommended: false // TODO: set to true
+
+            // TODO: set to true
+            recommended: false,
+
+            url: "https://eslint.org/docs/rules/no-return-await"
         },
         fixable: null,
         schema: []
@@ -81035,7 +81311,8 @@ module.exports = {
         docs: {
             description: "disallow `javascript:` urls",
             category: "Best Practices",
-            recommended: false
+            recommended: false,
+            url: "https://eslint.org/docs/rules/no-script-url"
         },
 
         schema: []
@@ -81190,7 +81467,8 @@ module.exports = {
         docs: {
             description: "disallow assignments where both sides are exactly the same",
             category: "Best Practices",
-            recommended: true
+            recommended: true,
+            url: "https://eslint.org/docs/rules/no-self-assign"
         },
 
         schema: [{
@@ -81253,7 +81531,8 @@ module.exports = {
         docs: {
             description: "disallow comparisons where both sides are exactly the same",
             category: "Best Practices",
-            recommended: false
+            recommended: false,
+            url: "https://eslint.org/docs/rules/no-self-compare"
         },
 
         schema: []
@@ -81312,7 +81591,8 @@ module.exports = {
         docs: {
             description: "disallow comma operators",
             category: "Best Practices",
-            recommended: false
+            recommended: false,
+            url: "https://eslint.org/docs/rules/no-sequences"
         },
 
         schema: []
@@ -81414,7 +81694,8 @@ module.exports = {
         docs: {
             description: "disallow identifiers from shadowing restricted names",
             category: "Variables",
-            recommended: false
+            recommended: false,
+            url: "https://eslint.org/docs/rules/no-shadow-restricted-names"
         },
 
         schema: []
@@ -81491,7 +81772,8 @@ module.exports = {
         docs: {
             description: "disallow variable declarations from shadowing variables declared in the outer scope",
             category: "Variables",
-            recommended: false
+            recommended: false,
+            url: "https://eslint.org/docs/rules/no-shadow"
         },
 
         schema: [{
@@ -81656,7 +81938,8 @@ module.exports = {
             description: "disallow spacing between function identifiers and their applications (deprecated)",
             category: "Stylistic Issues",
             recommended: false,
-            replacedBy: ["func-call-spacing"]
+            replacedBy: ["func-call-spacing"],
+            url: "https://eslint.org/docs/rules/no-spaced-func"
         },
 
         deprecated: true,
@@ -81722,7 +82005,8 @@ module.exports = {
         docs: {
             description: "disallow sparse arrays",
             category: "Possible Errors",
-            recommended: true
+            recommended: true,
+            url: "https://eslint.org/docs/rules/no-sparse-arrays"
         },
 
         schema: []
@@ -81768,7 +82052,8 @@ module.exports = {
         docs: {
             description: "disallow synchronous methods",
             category: "Node.js and CommonJS",
-            recommended: false
+            recommended: false,
+            url: "https://eslint.org/docs/rules/no-sync"
         },
 
         schema: [{
@@ -81820,7 +82105,8 @@ module.exports = {
         docs: {
             description: "disallow all tabs",
             category: "Stylistic Issues",
-            recommended: false
+            recommended: false,
+            url: "https://eslint.org/docs/rules/no-tabs"
         },
         schema: []
     },
@@ -81863,7 +82149,8 @@ module.exports = {
         docs: {
             description: "disallow template literal placeholder syntax in regular strings",
             category: "Possible Errors",
-            recommended: false
+            recommended: false,
+            url: "https://eslint.org/docs/rules/no-template-curly-in-string"
         },
 
         schema: []
@@ -81902,7 +82189,8 @@ module.exports = {
         docs: {
             description: "disallow ternary operators",
             category: "Stylistic Issues",
-            recommended: false
+            recommended: false,
+            url: "https://eslint.org/docs/rules/no-ternary"
         },
 
         schema: []
@@ -81956,7 +82244,8 @@ module.exports = {
         docs: {
             description: "disallow `this`/`super` before calling `super()` in constructors",
             category: "ECMAScript 6",
-            recommended: true
+            recommended: true,
+            url: "https://eslint.org/docs/rules/no-this-before-super"
         },
 
         schema: []
@@ -82226,7 +82515,8 @@ module.exports = {
         docs: {
             description: "disallow throwing literals as exceptions",
             category: "Best Practices",
-            recommended: false
+            recommended: false,
+            url: "https://eslint.org/docs/rules/no-throw-literal"
         },
 
         schema: []
@@ -82270,7 +82560,8 @@ module.exports = {
         docs: {
             description: "disallow trailing whitespace at the end of lines",
             category: "Stylistic Issues",
-            recommended: false
+            recommended: false,
+            url: "https://eslint.org/docs/rules/no-trailing-spaces"
         },
 
         fixable: "whitespace",
@@ -82434,7 +82725,8 @@ module.exports = {
         docs: {
             description: "disallow initializing variables to `undefined`",
             category: "Variables",
-            recommended: false
+            recommended: false,
+            url: "https://eslint.org/docs/rules/no-undef-init"
         },
 
         schema: [],
@@ -82510,7 +82802,8 @@ module.exports = {
         docs: {
             description: "disallow the use of undeclared variables unless mentioned in `/*global */` comments",
             category: "Variables",
-            recommended: true
+            recommended: true,
+            url: "https://eslint.org/docs/rules/no-undef"
         },
 
         schema: [{
@@ -82566,7 +82859,8 @@ module.exports = {
         docs: {
             description: "disallow the use of `undefined` as an identifier",
             category: "Variables",
-            recommended: false
+            recommended: false,
+            url: "https://eslint.org/docs/rules/no-undefined"
         },
 
         schema: []
@@ -82649,7 +82943,8 @@ module.exports = {
         docs: {
             description: "disallow dangling underscores in identifiers",
             category: "Stylistic Issues",
-            recommended: false
+            recommended: false,
+            url: "https://eslint.org/docs/rules/no-underscore-dangle"
         },
 
         schema: [{
@@ -82854,7 +83149,8 @@ module.exports = {
         docs: {
             description: "disallow confusing multiline expressions",
             category: "Possible Errors",
-            recommended: true
+            recommended: true,
+            url: "https://eslint.org/docs/rules/no-unexpected-multiline"
         },
 
         schema: []
@@ -83091,7 +83387,8 @@ module.exports = {
         docs: {
             description: "disallow unmodified loop conditions",
             category: "Best Practices",
-            recommended: false
+            recommended: false,
+            url: "https://eslint.org/docs/rules/no-unmodified-loop-condition"
         },
 
         schema: []
@@ -83283,7 +83580,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":115,"../util/traverser":411}],314:[function(require,module,exports){
+},{"../ast-utils":115,"../util/traverser":412}],314:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag no-unneeded-ternary
  * @author Gyandeep Singh
@@ -83313,7 +83610,8 @@ module.exports = {
         docs: {
             description: "disallow ternary operators when simpler alternatives exist",
             category: "Stylistic Issues",
-            recommended: false
+            recommended: false,
+            url: "https://eslint.org/docs/rules/no-unneeded-ternary"
         },
 
         schema: [{
@@ -83565,7 +83863,8 @@ module.exports = {
         docs: {
             description: "disallow unreachable code after `return`, `throw`, `continue`, and `break` statements",
             category: "Possible Errors",
-            recommended: true
+            recommended: true,
+            url: "https://eslint.org/docs/rules/no-unreachable"
         },
 
         schema: []
@@ -83698,7 +83997,8 @@ module.exports = {
         docs: {
             description: "disallow control flow statements in `finally` blocks",
             category: "Possible Errors",
-            recommended: true
+            recommended: true,
+            url: "https://eslint.org/docs/rules/no-unsafe-finally"
         },
 
         schema: []
@@ -83825,7 +84125,8 @@ module.exports = {
         docs: {
             description: "disallow negating the left operand of relational operators",
             category: "Possible Errors",
-            recommended: true
+            recommended: true,
+            url: "https://eslint.org/docs/rules/no-unsafe-negation"
         },
         schema: [],
         fixable: "code"
@@ -83873,7 +84174,8 @@ module.exports = {
         docs: {
             description: "disallow unused expressions",
             category: "Best Practices",
-            recommended: false
+            recommended: false,
+            url: "https://eslint.org/docs/rules/no-unused-expressions"
         },
 
         schema: [{
@@ -83996,7 +84298,8 @@ module.exports = {
         docs: {
             description: "disallow unused labels",
             category: "Best Practices",
-            recommended: true
+            recommended: true,
+            url: "https://eslint.org/docs/rules/no-unused-labels"
         },
 
         schema: [],
@@ -84110,7 +84413,8 @@ module.exports = {
         docs: {
             description: "disallow unused variables",
             category: "Variables",
-            recommended: true
+            recommended: true,
+            url: "https://eslint.org/docs/rules/no-unused-vars"
         },
 
         schema: [{
@@ -84189,24 +84493,19 @@ module.exports = {
          * @returns {string} The warning message to be used with this unused variable.
          */
         function getDefinedMessage(unusedVar) {
+            var defType = unusedVar.defs && unusedVar.defs[0] && unusedVar.defs[0].type;
             var type = void 0;
             var pattern = void 0;
 
-            if (config.varsIgnorePattern) {
+            if (defType === "CatchClause" && config.caughtErrorsIgnorePattern) {
+                type = "args";
+                pattern = config.caughtErrorsIgnorePattern.toString();
+            } else if (defType === "Parameter" && config.argsIgnorePattern) {
+                type = "args";
+                pattern = config.argsIgnorePattern.toString();
+            } else if (defType !== "Parameter" && config.varsIgnorePattern) {
                 type = "vars";
                 pattern = config.varsIgnorePattern.toString();
-            }
-
-            if (unusedVar.defs && unusedVar.defs[0] && unusedVar.defs[0].type) {
-                var defType = unusedVar.defs[0].type;
-
-                if (defType === "CatchClause" && config.caughtErrorsIgnorePattern) {
-                    type = "args";
-                    pattern = config.caughtErrorsIgnorePattern.toString();
-                } else if (defType === "Parameter" && config.argsIgnorePattern) {
-                    type = "args";
-                    pattern = config.argsIgnorePattern.toString();
-                }
             }
 
             var additional = type ? " Allowed unused " + type + " must match " + pattern + "." : "";
@@ -84838,7 +85137,8 @@ module.exports = {
         docs: {
             description: "disallow the use of variables before they are defined",
             category: "Variables",
-            recommended: false
+            recommended: false,
+            url: "https://eslint.org/docs/rules/no-use-before-define"
         },
 
         schema: [{
@@ -84997,7 +85297,8 @@ module.exports = {
         docs: {
             description: "disallow unnecessary calls to `.call()` and `.apply()`",
             category: "Best Practices",
-            recommended: false
+            recommended: false,
+            url: "https://eslint.org/docs/rules/no-useless-call"
         },
 
         schema: []
@@ -85050,7 +85351,8 @@ module.exports = {
         docs: {
             description: "disallow unnecessary computed property keys in object literals",
             category: "ECMAScript 6",
-            recommended: false
+            recommended: false,
+            url: "https://eslint.org/docs/rules/no-useless-computed-key"
         },
 
         schema: [],
@@ -85175,7 +85477,8 @@ module.exports = {
         docs: {
             description: "disallow unnecessary concatenation of literals or template literals",
             category: "Best Practices",
-            recommended: false
+            recommended: false,
+            url: "https://eslint.org/docs/rules/no-useless-concat"
         },
 
         schema: []
@@ -85331,7 +85634,8 @@ module.exports = {
         docs: {
             description: "disallow unnecessary constructors",
             category: "ECMAScript 6",
-            recommended: false
+            recommended: false,
+            url: "https://eslint.org/docs/rules/no-useless-constructor"
         },
 
         schema: []
@@ -85465,7 +85769,8 @@ module.exports = {
         docs: {
             description: "disallow unnecessary escape characters",
             category: "Best Practices",
-            recommended: true
+            recommended: true,
+            url: "https://eslint.org/docs/rules/no-useless-escape"
         },
 
         schema: []
@@ -85625,7 +85930,8 @@ module.exports = {
         docs: {
             description: "disallow renaming import, export, and destructured assignments to the same name",
             category: "ECMAScript 6",
-            recommended: false
+            recommended: false,
+            url: "https://eslint.org/docs/rules/no-useless-rename"
         },
         fixable: "code",
         schema: [{
@@ -85827,7 +86133,8 @@ module.exports = {
         docs: {
             description: "disallow redundant return statements",
             category: "Best Practices",
-            recommended: false
+            recommended: false,
+            url: "https://eslint.org/docs/rules/no-useless-return"
         },
         fixable: "code",
         schema: []
@@ -86322,7 +86629,8 @@ module.exports = {
         docs: {
             description: "require `let` or `const` instead of `var`",
             category: "ECMAScript 6",
-            recommended: false
+            recommended: false,
+            url: "https://eslint.org/docs/rules/no-var"
         },
 
         schema: [],
@@ -86473,7 +86781,8 @@ module.exports = {
         docs: {
             description: "disallow `void` operators",
             category: "Best Practices",
-            recommended: false
+            recommended: false,
+            url: "https://eslint.org/docs/rules/no-void"
         },
 
         schema: []
@@ -86514,7 +86823,8 @@ module.exports = {
         docs: {
             description: "disallow specified warning terms in comments",
             category: "Best Practices",
-            recommended: false
+            recommended: false,
+            url: "https://eslint.org/docs/rules/no-warning-comments"
         },
 
         schema: [{
@@ -86658,7 +86968,8 @@ module.exports = {
         docs: {
             description: "disallow whitespace before properties",
             category: "Stylistic Issues",
-            recommended: false
+            recommended: false,
+            url: "https://eslint.org/docs/rules/no-whitespace-before-property"
         },
 
         fixable: "whitespace",
@@ -86749,7 +87060,8 @@ module.exports = {
         docs: {
             description: "disallow `with` statements",
             category: "Best Practices",
-            recommended: false
+            recommended: false,
+            url: "https://eslint.org/docs/rules/no-with"
         },
 
         schema: []
@@ -86783,7 +87095,8 @@ module.exports = {
         docs: {
             description: "enforce the location of single-line statements",
             category: "Stylistic Issues",
-            recommended: false
+            recommended: false,
+            url: "https://eslint.org/docs/rules/nonblock-statement-body-position"
         },
         fixable: "whitespace",
         schema: [POSITION_SCHEMA, {
@@ -86986,7 +87299,8 @@ module.exports = {
         docs: {
             description: "enforce consistent line breaks inside braces",
             category: "Stylistic Issues",
-            recommended: false
+            recommended: false,
+            url: "https://eslint.org/docs/rules/object-curly-newline"
         },
         fixable: "whitespace",
         schema: [{
@@ -87133,7 +87447,8 @@ module.exports = {
         docs: {
             description: "enforce consistent spacing inside braces",
             category: "Stylistic Issues",
-            recommended: false
+            recommended: false,
+            url: "https://eslint.org/docs/rules/object-curly-spacing"
         },
 
         fixable: "whitespace",
@@ -87423,7 +87738,8 @@ module.exports = {
         docs: {
             description: "enforce placing object properties on separate lines",
             category: "Stylistic Issues",
-            recommended: false
+            recommended: false,
+            url: "https://eslint.org/docs/rules/object-property-newline"
         },
 
         schema: [{
@@ -87522,7 +87838,8 @@ module.exports = {
         docs: {
             description: "require or disallow method and property shorthand syntax for object literals",
             category: "ECMAScript 6",
-            recommended: false
+            recommended: false,
+            url: "https://eslint.org/docs/rules/object-shorthand"
         },
 
         fixable: "code",
@@ -87957,7 +88274,8 @@ module.exports = {
         docs: {
             description: "require or disallow newlines around variable declarations",
             category: "Stylistic Issues",
-            recommended: false
+            recommended: false,
+            url: "https://eslint.org/docs/rules/one-var-declaration-per-line"
         },
 
         schema: [{
@@ -88047,7 +88365,8 @@ module.exports = {
         docs: {
             description: "enforce variables to be declared either together or separately in functions",
             category: "Stylistic Issues",
-            recommended: false
+            recommended: false,
+            url: "https://eslint.org/docs/rules/one-var"
         },
 
         schema: [{
@@ -88521,7 +88840,8 @@ module.exports = {
         docs: {
             description: "require or disallow assignment operator shorthand where possible",
             category: "Stylistic Issues",
-            recommended: false
+            recommended: false,
+            url: "https://eslint.org/docs/rules/operator-assignment"
         },
 
         schema: [{
@@ -88653,7 +88973,8 @@ module.exports = {
         docs: {
             description: "enforce consistent linebreak style for operators",
             category: "Stylistic Issues",
-            recommended: false
+            recommended: false,
+            url: "https://eslint.org/docs/rules/operator-linebreak"
         },
 
         schema: [{
@@ -88892,7 +89213,8 @@ module.exports = {
         docs: {
             description: "require or disallow padding within blocks",
             category: "Stylistic Issues",
-            recommended: false
+            recommended: false,
+            url: "https://eslint.org/docs/rules/padded-blocks"
         },
 
         fixable: "whitespace",
@@ -89521,7 +89843,8 @@ module.exports = {
         docs: {
             description: "require or disallow padding lines between statements",
             category: "Stylistic Issues",
-            recommended: false
+            recommended: false,
+            url: "https://eslint.org/docs/rules/padding-line-between-statements"
         },
         fixable: "whitespace",
         schema: {
@@ -89837,7 +90160,8 @@ module.exports = {
         docs: {
             description: "require using arrow functions for callbacks",
             category: "ECMAScript 6",
-            recommended: false
+            recommended: false,
+            url: "https://eslint.org/docs/rules/prefer-arrow-callback"
         },
 
         schema: [{
@@ -90221,7 +90545,8 @@ module.exports = {
         docs: {
             description: "require `const` declarations for variables that are never reassigned after declared",
             category: "ECMAScript 6",
-            recommended: false
+            recommended: false,
+            url: "https://eslint.org/docs/rules/prefer-const"
         },
 
         fixable: "code",
@@ -90325,7 +90650,8 @@ module.exports = {
         docs: {
             description: "require destructuring from arrays and/or objects",
             category: "ECMAScript 6",
-            recommended: false
+            recommended: false,
+            url: "https://eslint.org/docs/rules/prefer-destructuring"
         },
         schema: [{
 
@@ -90559,7 +90885,8 @@ module.exports = {
         docs: {
             description: "disallow `parseInt()` and `Number.parseInt()` in favor of binary, octal, and hexadecimal literals",
             category: "ECMAScript 6",
-            recommended: false
+            recommended: false,
+            url: "https://eslint.org/docs/rules/prefer-numeric-literals"
         },
 
         schema: [],
@@ -90643,7 +90970,8 @@ module.exports = {
         docs: {
             description: "require using Error objects as Promise rejection reasons",
             category: "Best Practices",
-            recommended: false
+            recommended: false,
+            url: "https://eslint.org/docs/rules/prefer-promise-reject-errors"
         },
         fixable: null,
         schema: [{
@@ -90766,7 +91094,8 @@ module.exports = {
             description: "require `Reflect` methods where applicable",
             category: "ECMAScript 6",
             recommended: false,
-            replacedBy: []
+            replacedBy: [],
+            url: "https://eslint.org/docs/rules/prefer-reflect"
         },
 
         deprecated: true,
@@ -90920,7 +91249,8 @@ module.exports = {
         docs: {
             description: "require rest parameters instead of `arguments`",
             category: "ECMAScript 6",
-            recommended: false
+            recommended: false,
+            url: "https://eslint.org/docs/rules/prefer-rest-params"
         },
 
         schema: []
@@ -91008,7 +91338,8 @@ module.exports = {
         docs: {
             description: "require spread operators instead of `.apply()`",
             category: "ECMAScript 6",
-            recommended: false
+            recommended: false,
+            url: "https://eslint.org/docs/rules/prefer-spread"
         },
 
         schema: [],
@@ -91159,7 +91490,8 @@ module.exports = {
         docs: {
             description: "require template literals instead of string concatenation",
             category: "ECMAScript 6",
-            recommended: false
+            recommended: false,
+            url: "https://eslint.org/docs/rules/prefer-template"
         },
 
         schema: [],
@@ -91313,7 +91645,8 @@ module.exports = {
         docs: {
             description: "require quotes around object literal property names",
             category: "Stylistic Issues",
-            recommended: false
+            recommended: false,
+            url: "https://eslint.org/docs/rules/quote-props"
         },
 
         schema: {
@@ -91591,7 +91924,7 @@ module.exports = {
     }
 };
 
-},{"../util/keywords":404,"espree":"espree"}],355:[function(require,module,exports){
+},{"../util/keywords":405,"espree":"espree"}],355:[function(require,module,exports){
 /**
  * @fileoverview A rule to choose between single and double quote marks
  * @author Matt DuVall <http://www.mattduvall.com/>, Brandon Payton
@@ -91675,7 +92008,8 @@ module.exports = {
         docs: {
             description: "enforce the consistent use of either backticks, double, or single quotes",
             category: "Stylistic Issues",
-            recommended: false
+            recommended: false,
+            url: "https://eslint.org/docs/rules/quotes"
         },
 
         fixable: "code",
@@ -91948,7 +92282,8 @@ module.exports = {
         docs: {
             description: "enforce the consistent use of the radix argument when using `parseInt()`",
             category: "Best Practices",
-            recommended: false
+            recommended: false,
+            url: "https://eslint.org/docs/rules/radix"
         },
 
         schema: [{
@@ -92072,7 +92407,8 @@ module.exports = {
         docs: {
             description: "disallow async functions which have no `await` expression",
             category: "Best Practices",
-            recommended: false
+            recommended: false,
+            url: "https://eslint.org/docs/rules/require-await"
         },
         schema: []
     },
@@ -92142,7 +92478,8 @@ module.exports = {
         docs: {
             description: "require JSDoc comments",
             category: "Stylistic Issues",
-            recommended: false
+            recommended: false,
+            url: "https://eslint.org/docs/rules/require-jsdoc"
         },
 
         schema: [{
@@ -92249,7 +92586,8 @@ module.exports = {
         docs: {
             description: "require generator functions to contain `yield`",
             category: "ECMAScript 6",
-            recommended: true
+            recommended: true,
+            url: "https://eslint.org/docs/rules/require-yield"
         },
 
         schema: []
@@ -92322,7 +92660,8 @@ module.exports = {
         docs: {
             description: "enforce spacing between rest and spread operators and their expressions",
             category: "ECMAScript 6",
-            recommended: false
+            recommended: false,
+            url: "https://eslint.org/docs/rules/rest-spread-spacing"
         },
         fixable: "whitespace",
         schema: [{
@@ -92433,7 +92772,8 @@ module.exports = {
         docs: {
             description: "enforce consistent spacing before and after semicolons",
             category: "Stylistic Issues",
-            recommended: false
+            recommended: false,
+            url: "https://eslint.org/docs/rules/semi-spacing"
         },
 
         fixable: "whitespace",
@@ -92692,7 +93032,8 @@ module.exports = {
         docs: {
             description: "enforce location of semicolons",
             category: "Stylistic Issues",
-            recommended: false
+            recommended: false,
+            url: "https://eslint.org/docs/rules/semi-style"
         },
         schema: [{ enum: ["last", "first"] }],
         fixable: "whitespace"
@@ -92785,7 +93126,8 @@ module.exports = {
         docs: {
             description: "require or disallow semicolons instead of ASI",
             category: "Stylistic Issues",
-            recommended: false
+            recommended: false,
+            url: "https://eslint.org/docs/rules/semi"
         },
 
         fixable: "code",
@@ -93069,7 +93411,8 @@ module.exports = {
         docs: {
             description: "enforce sorted import declarations within modules",
             category: "ECMAScript 6",
-            recommended: false
+            recommended: false,
+            url: "https://eslint.org/docs/rules/sort-imports"
         },
 
         schema: [{
@@ -93326,7 +93669,8 @@ module.exports = {
         docs: {
             description: "require object keys to be sorted",
             category: "Stylistic Issues",
-            recommended: false
+            recommended: false,
+            url: "https://eslint.org/docs/rules/sort-keys"
         },
         schema: [{
             enum: ["asc", "desc"]
@@ -93416,7 +93760,8 @@ module.exports = {
         docs: {
             description: "require variables within the same declaration block to be sorted",
             category: "Stylistic Issues",
-            recommended: false
+            recommended: false,
+            url: "https://eslint.org/docs/rules/sort-vars"
         },
 
         schema: [{
@@ -93517,7 +93862,8 @@ module.exports = {
         docs: {
             description: "enforce consistent spacing before blocks",
             category: "Stylistic Issues",
-            recommended: false
+            recommended: false,
+            url: "https://eslint.org/docs/rules/space-before-blocks"
         },
 
         fixable: "whitespace",
@@ -93666,7 +94012,8 @@ module.exports = {
         docs: {
             description: "enforce consistent spacing before `function` definition opening parenthesis",
             category: "Stylistic Issues",
-            recommended: false
+            recommended: false,
+            url: "https://eslint.org/docs/rules/space-before-function-paren"
         },
 
         fixable: "whitespace",
@@ -93798,7 +94145,8 @@ module.exports = {
         docs: {
             description: "enforce consistent spacing inside parentheses",
             category: "Stylistic Issues",
-            recommended: false
+            recommended: false,
+            url: "https://eslint.org/docs/rules/space-in-parens"
         },
 
         fixable: "whitespace",
@@ -94064,7 +94412,8 @@ module.exports = {
         docs: {
             description: "require spacing around infix operators",
             category: "Stylistic Issues",
-            recommended: false
+            recommended: false,
+            url: "https://eslint.org/docs/rules/space-infix-ops"
         },
 
         fixable: "whitespace",
@@ -94227,7 +94576,8 @@ module.exports = {
         docs: {
             description: "enforce consistent spacing before or after unary operators",
             category: "Stylistic Issues",
-            recommended: false
+            recommended: false,
+            url: "https://eslint.org/docs/rules/space-unary-ops"
         },
 
         fixable: "whitespace",
@@ -94681,7 +95031,8 @@ module.exports = {
         docs: {
             description: "enforce consistent spacing after the `//` or `/*` in a comment",
             category: "Stylistic Issues",
-            recommended: false
+            recommended: false,
+            url: "https://eslint.org/docs/rules/spaced-comment"
         },
 
         fixable: "whitespace",
@@ -94978,7 +95329,8 @@ module.exports = {
         docs: {
             description: "require or disallow strict mode directives",
             category: "Strict Mode",
-            recommended: false
+            recommended: false,
+            url: "https://eslint.org/docs/rules/strict"
         },
 
         schema: [{
@@ -95195,7 +95547,8 @@ module.exports = {
         docs: {
             description: "enforce spacing around colons of switch statements",
             category: "Stylistic Issues",
-            recommended: false
+            recommended: false,
+            url: "https://eslint.org/docs/rules/switch-colon-spacing"
         },
         schema: [{
             type: "object",
@@ -95325,7 +95678,8 @@ module.exports = {
         docs: {
             description: "require symbol descriptions",
             category: "ECMAScript 6",
-            recommended: false
+            recommended: false,
+            url: "https://eslint.org/docs/rules/symbol-description"
         },
 
         schema: []
@@ -95398,7 +95752,8 @@ module.exports = {
         docs: {
             description: "require or disallow spacing around embedded expressions of template strings",
             category: "ECMAScript 6",
-            recommended: false
+            recommended: false,
+            url: "https://eslint.org/docs/rules/template-curly-spacing"
         },
 
         fixable: "whitespace",
@@ -95492,7 +95847,8 @@ module.exports = {
         docs: {
             description: "require or disallow spacing between template tags and their literals",
             category: "Stylistic Issues",
-            recommended: false
+            recommended: false,
+            url: "https://eslint.org/docs/rules/template-tag-spacing"
         },
 
         fixable: "whitespace",
@@ -95569,7 +95925,8 @@ module.exports = {
         docs: {
             description: "require or disallow Unicode byte order mark (BOM)",
             category: "Stylistic Issues",
-            recommended: false
+            recommended: false,
+            url: "https://eslint.org/docs/rules/unicode-bom"
         },
 
         fixable: "whitespace",
@@ -95635,7 +95992,8 @@ module.exports = {
         docs: {
             description: "require calls to `isNaN()` when checking for `NaN`",
             category: "Possible Errors",
-            recommended: true
+            recommended: true,
+            url: "https://eslint.org/docs/rules/use-isnan"
         },
 
         schema: []
@@ -95675,7 +96033,8 @@ module.exports = {
         docs: {
             description: "enforce valid JSDoc comments",
             category: "Possible Errors",
-            recommended: false
+            recommended: false,
+            url: "https://eslint.org/docs/rules/valid-jsdoc"
         },
 
         schema: [{
@@ -96090,7 +96449,8 @@ module.exports = {
         docs: {
             description: "enforce comparing `typeof` expressions against valid strings",
             category: "Possible Errors",
-            recommended: true
+            recommended: true,
+            url: "https://eslint.org/docs/rules/valid-typeof"
         },
 
         schema: [{
@@ -96165,7 +96525,8 @@ module.exports = {
         docs: {
             description: "require `var` declarations be placed at the top of their containing scope",
             category: "Best Practices",
-            recommended: false
+            recommended: false,
+            url: "https://eslint.org/docs/rules/vars-on-top"
         },
 
         schema: []
@@ -96312,7 +96673,8 @@ module.exports = {
         docs: {
             description: "require parentheses around immediate `function` invocations",
             category: "Best Practices",
-            recommended: false
+            recommended: false,
+            url: "https://eslint.org/docs/rules/wrap-iife"
         },
 
         schema: [{
@@ -96444,7 +96806,8 @@ module.exports = {
         docs: {
             description: "require parenthesis around regex literals",
             category: "Stylistic Issues",
-            recommended: false
+            recommended: false,
+            url: "https://eslint.org/docs/rules/wrap-regex"
         },
 
         schema: [],
@@ -96497,7 +96860,8 @@ module.exports = {
         docs: {
             description: "require or disallow spacing around the `*` in `yield*` expressions",
             category: "ECMAScript 6",
-            recommended: false
+            recommended: false,
+            url: "https://eslint.org/docs/rules/yield-star-spacing"
         },
 
         fixable: "whitespace",
@@ -96743,7 +97107,8 @@ module.exports = {
         docs: {
             description: "require or disallow \"Yoda\" conditions",
             category: "Best Practices",
-            recommended: false
+            recommended: false,
+            url: "https://eslint.org/docs/rules/yoda"
         },
 
         schema: [{
@@ -98890,6 +99255,32 @@ module.exports = FixTracker;
 
 },{"../ast-utils":115}],404:[function(require,module,exports){
 /**
+ * @fileoverview Interpolate keys from an object into a string with {{ }} markers.
+ * @author Jed Fox
+ */
+
+"use strict";
+
+//------------------------------------------------------------------------------
+// Public Interface
+//------------------------------------------------------------------------------
+
+module.exports = function (text, data) {
+    if (!data) {
+        return text;
+    }
+    return text.replace(/\{\{\s*([^{}]+?)\s*\}\}/g, function (fullMatch, term) {
+        if (term in data) {
+            return data[term];
+        }
+
+        // Preserve old behavior: If parameter name not provided, don't replace it.
+        return fullMatch;
+    });
+};
+
+},{}],405:[function(require,module,exports){
+/**
  * @fileoverview A shared list of ES3 keywords.
  * @author Josh Perez
  */
@@ -98897,7 +99288,7 @@ module.exports = FixTracker;
 
 module.exports = ["abstract", "boolean", "break", "byte", "case", "catch", "char", "class", "const", "continue", "debugger", "default", "delete", "do", "double", "else", "enum", "export", "extends", "false", "final", "finally", "float", "for", "function", "goto", "if", "implements", "import", "in", "instanceof", "int", "interface", "long", "native", "new", "null", "package", "private", "protected", "public", "return", "short", "static", "super", "switch", "synchronized", "this", "throw", "throws", "transient", "true", "try", "typeof", "var", "void", "volatile", "while", "with"];
 
-},{}],405:[function(require,module,exports){
+},{}],406:[function(require,module,exports){
 /**
  * @fileoverview The event generator for AST nodes.
  * @author Toru Nagashima
@@ -99240,7 +99631,7 @@ var NodeEventGenerator = function () {
 
 module.exports = NodeEventGenerator;
 
-},{"esquery":69,"lodash":89}],406:[function(require,module,exports){
+},{"esquery":69,"lodash":89}],407:[function(require,module,exports){
 /**
  * @fileoverview Pattern for detecting any letter (even letters outside of ASCII).
  * NOTE: This file was generated using this script in JSCS based on the Unicode 7.0.0 standard: https://github.com/jscs-dev/node-jscs/blob/f5ed14427deb7e7aac84f3056a5aab2d9f3e563e/publish/helpers/generate-patterns.js
@@ -99278,7 +99669,7 @@ module.exports = NodeEventGenerator;
 
 module.exports = /[A-Za-z\xAA\xB5\xBA\xC0-\xD6\xD8-\xF6\xF8-\u02C1\u02C6-\u02D1\u02E0-\u02E4\u02EC\u02EE\u0370-\u0374\u0376\u0377\u037A-\u037D\u037F\u0386\u0388-\u038A\u038C\u038E-\u03A1\u03A3-\u03F5\u03F7-\u0481\u048A-\u052F\u0531-\u0556\u0559\u0561-\u0587\u05D0-\u05EA\u05F0-\u05F2\u0620-\u064A\u066E\u066F\u0671-\u06D3\u06D5\u06E5\u06E6\u06EE\u06EF\u06FA-\u06FC\u06FF\u0710\u0712-\u072F\u074D-\u07A5\u07B1\u07CA-\u07EA\u07F4\u07F5\u07FA\u0800-\u0815\u081A\u0824\u0828\u0840-\u0858\u08A0-\u08B2\u0904-\u0939\u093D\u0950\u0958-\u0961\u0971-\u0980\u0985-\u098C\u098F\u0990\u0993-\u09A8\u09AA-\u09B0\u09B2\u09B6-\u09B9\u09BD\u09CE\u09DC\u09DD\u09DF-\u09E1\u09F0\u09F1\u0A05-\u0A0A\u0A0F\u0A10\u0A13-\u0A28\u0A2A-\u0A30\u0A32\u0A33\u0A35\u0A36\u0A38\u0A39\u0A59-\u0A5C\u0A5E\u0A72-\u0A74\u0A85-\u0A8D\u0A8F-\u0A91\u0A93-\u0AA8\u0AAA-\u0AB0\u0AB2\u0AB3\u0AB5-\u0AB9\u0ABD\u0AD0\u0AE0\u0AE1\u0B05-\u0B0C\u0B0F\u0B10\u0B13-\u0B28\u0B2A-\u0B30\u0B32\u0B33\u0B35-\u0B39\u0B3D\u0B5C\u0B5D\u0B5F-\u0B61\u0B71\u0B83\u0B85-\u0B8A\u0B8E-\u0B90\u0B92-\u0B95\u0B99\u0B9A\u0B9C\u0B9E\u0B9F\u0BA3\u0BA4\u0BA8-\u0BAA\u0BAE-\u0BB9\u0BD0\u0C05-\u0C0C\u0C0E-\u0C10\u0C12-\u0C28\u0C2A-\u0C39\u0C3D\u0C58\u0C59\u0C60\u0C61\u0C85-\u0C8C\u0C8E-\u0C90\u0C92-\u0CA8\u0CAA-\u0CB3\u0CB5-\u0CB9\u0CBD\u0CDE\u0CE0\u0CE1\u0CF1\u0CF2\u0D05-\u0D0C\u0D0E-\u0D10\u0D12-\u0D3A\u0D3D\u0D4E\u0D60\u0D61\u0D7A-\u0D7F\u0D85-\u0D96\u0D9A-\u0DB1\u0DB3-\u0DBB\u0DBD\u0DC0-\u0DC6\u0E01-\u0E30\u0E32\u0E33\u0E40-\u0E46\u0E81\u0E82\u0E84\u0E87\u0E88\u0E8A\u0E8D\u0E94-\u0E97\u0E99-\u0E9F\u0EA1-\u0EA3\u0EA5\u0EA7\u0EAA\u0EAB\u0EAD-\u0EB0\u0EB2\u0EB3\u0EBD\u0EC0-\u0EC4\u0EC6\u0EDC-\u0EDF\u0F00\u0F40-\u0F47\u0F49-\u0F6C\u0F88-\u0F8C\u1000-\u102A\u103F\u1050-\u1055\u105A-\u105D\u1061\u1065\u1066\u106E-\u1070\u1075-\u1081\u108E\u10A0-\u10C5\u10C7\u10CD\u10D0-\u10FA\u10FC-\u1248\u124A-\u124D\u1250-\u1256\u1258\u125A-\u125D\u1260-\u1288\u128A-\u128D\u1290-\u12B0\u12B2-\u12B5\u12B8-\u12BE\u12C0\u12C2-\u12C5\u12C8-\u12D6\u12D8-\u1310\u1312-\u1315\u1318-\u135A\u1380-\u138F\u13A0-\u13F4\u1401-\u166C\u166F-\u167F\u1681-\u169A\u16A0-\u16EA\u16F1-\u16F8\u1700-\u170C\u170E-\u1711\u1720-\u1731\u1740-\u1751\u1760-\u176C\u176E-\u1770\u1780-\u17B3\u17D7\u17DC\u1820-\u1877\u1880-\u18A8\u18AA\u18B0-\u18F5\u1900-\u191E\u1950-\u196D\u1970-\u1974\u1980-\u19AB\u19C1-\u19C7\u1A00-\u1A16\u1A20-\u1A54\u1AA7\u1B05-\u1B33\u1B45-\u1B4B\u1B83-\u1BA0\u1BAE\u1BAF\u1BBA-\u1BE5\u1C00-\u1C23\u1C4D-\u1C4F\u1C5A-\u1C7D\u1CE9-\u1CEC\u1CEE-\u1CF1\u1CF5\u1CF6\u1D00-\u1DBF\u1E00-\u1F15\u1F18-\u1F1D\u1F20-\u1F45\u1F48-\u1F4D\u1F50-\u1F57\u1F59\u1F5B\u1F5D\u1F5F-\u1F7D\u1F80-\u1FB4\u1FB6-\u1FBC\u1FBE\u1FC2-\u1FC4\u1FC6-\u1FCC\u1FD0-\u1FD3\u1FD6-\u1FDB\u1FE0-\u1FEC\u1FF2-\u1FF4\u1FF6-\u1FFC\u2071\u207F\u2090-\u209C\u2102\u2107\u210A-\u2113\u2115\u2119-\u211D\u2124\u2126\u2128\u212A-\u212D\u212F-\u2139\u213C-\u213F\u2145-\u2149\u214E\u2183\u2184\u2C00-\u2C2E\u2C30-\u2C5E\u2C60-\u2CE4\u2CEB-\u2CEE\u2CF2\u2CF3\u2D00-\u2D25\u2D27\u2D2D\u2D30-\u2D67\u2D6F\u2D80-\u2D96\u2DA0-\u2DA6\u2DA8-\u2DAE\u2DB0-\u2DB6\u2DB8-\u2DBE\u2DC0-\u2DC6\u2DC8-\u2DCE\u2DD0-\u2DD6\u2DD8-\u2DDE\u2E2F\u3005\u3006\u3031-\u3035\u303B\u303C\u3041-\u3096\u309D-\u309F\u30A1-\u30FA\u30FC-\u30FF\u3105-\u312D\u3131-\u318E\u31A0-\u31BA\u31F0-\u31FF\u3400-\u4DB5\u4E00-\u9FCC\uA000-\uA48C\uA4D0-\uA4FD\uA500-\uA60C\uA610-\uA61F\uA62A\uA62B\uA640-\uA66E\uA67F-\uA69D\uA6A0-\uA6E5\uA717-\uA71F\uA722-\uA788\uA78B-\uA78E\uA790-\uA7AD\uA7B0\uA7B1\uA7F7-\uA801\uA803-\uA805\uA807-\uA80A\uA80C-\uA822\uA840-\uA873\uA882-\uA8B3\uA8F2-\uA8F7\uA8FB\uA90A-\uA925\uA930-\uA946\uA960-\uA97C\uA984-\uA9B2\uA9CF\uA9E0-\uA9E4\uA9E6-\uA9EF\uA9FA-\uA9FE\uAA00-\uAA28\uAA40-\uAA42\uAA44-\uAA4B\uAA60-\uAA76\uAA7A\uAA7E-\uAAAF\uAAB1\uAAB5\uAAB6\uAAB9-\uAABD\uAAC0\uAAC2\uAADB-\uAADD\uAAE0-\uAAEA\uAAF2-\uAAF4\uAB01-\uAB06\uAB09-\uAB0E\uAB11-\uAB16\uAB20-\uAB26\uAB28-\uAB2E\uAB30-\uAB5A\uAB5C-\uAB5F\uAB64\uAB65\uABC0-\uABE2\uAC00-\uD7A3\uD7B0-\uD7C6\uD7CB-\uD7FB\uF900-\uFA6D\uFA70-\uFAD9\uFB00-\uFB06\uFB13-\uFB17\uFB1D\uFB1F-\uFB28\uFB2A-\uFB36\uFB38-\uFB3C\uFB3E\uFB40\uFB41\uFB43\uFB44\uFB46-\uFBB1\uFBD3-\uFD3D\uFD50-\uFD8F\uFD92-\uFDC7\uFDF0-\uFDFB\uFE70-\uFE74\uFE76-\uFEFC\uFF21-\uFF3A\uFF41-\uFF5A\uFF66-\uFFBE\uFFC2-\uFFC7\uFFCA-\uFFCF\uFFD2-\uFFD7\uFFDA-\uFFDC]|\uD800[\uDC00-\uDC0B\uDC0D-\uDC26\uDC28-\uDC3A\uDC3C\uDC3D\uDC3F-\uDC4D\uDC50-\uDC5D\uDC80-\uDCFA\uDE80-\uDE9C\uDEA0-\uDED0\uDF00-\uDF1F\uDF30-\uDF40\uDF42-\uDF49\uDF50-\uDF75\uDF80-\uDF9D\uDFA0-\uDFC3\uDFC8-\uDFCF]|\uD801[\uDC00-\uDC9D\uDD00-\uDD27\uDD30-\uDD63\uDE00-\uDF36\uDF40-\uDF55\uDF60-\uDF67]|\uD802[\uDC00-\uDC05\uDC08\uDC0A-\uDC35\uDC37\uDC38\uDC3C\uDC3F-\uDC55\uDC60-\uDC76\uDC80-\uDC9E\uDD00-\uDD15\uDD20-\uDD39\uDD80-\uDDB7\uDDBE\uDDBF\uDE00\uDE10-\uDE13\uDE15-\uDE17\uDE19-\uDE33\uDE60-\uDE7C\uDE80-\uDE9C\uDEC0-\uDEC7\uDEC9-\uDEE4\uDF00-\uDF35\uDF40-\uDF55\uDF60-\uDF72\uDF80-\uDF91]|\uD803[\uDC00-\uDC48]|\uD804[\uDC03-\uDC37\uDC83-\uDCAF\uDCD0-\uDCE8\uDD03-\uDD26\uDD50-\uDD72\uDD76\uDD83-\uDDB2\uDDC1-\uDDC4\uDDDA\uDE00-\uDE11\uDE13-\uDE2B\uDEB0-\uDEDE\uDF05-\uDF0C\uDF0F\uDF10\uDF13-\uDF28\uDF2A-\uDF30\uDF32\uDF33\uDF35-\uDF39\uDF3D\uDF5D-\uDF61]|\uD805[\uDC80-\uDCAF\uDCC4\uDCC5\uDCC7\uDD80-\uDDAE\uDE00-\uDE2F\uDE44\uDE80-\uDEAA]|\uD806[\uDCA0-\uDCDF\uDCFF\uDEC0-\uDEF8]|\uD808[\uDC00-\uDF98]|[\uD80C\uD840-\uD868\uD86A-\uD86C][\uDC00-\uDFFF]|\uD80D[\uDC00-\uDC2E]|\uD81A[\uDC00-\uDE38\uDE40-\uDE5E\uDED0-\uDEED\uDF00-\uDF2F\uDF40-\uDF43\uDF63-\uDF77\uDF7D-\uDF8F]|\uD81B[\uDF00-\uDF44\uDF50\uDF93-\uDF9F]|\uD82C[\uDC00\uDC01]|\uD82F[\uDC00-\uDC6A\uDC70-\uDC7C\uDC80-\uDC88\uDC90-\uDC99]|\uD835[\uDC00-\uDC54\uDC56-\uDC9C\uDC9E\uDC9F\uDCA2\uDCA5\uDCA6\uDCA9-\uDCAC\uDCAE-\uDCB9\uDCBB\uDCBD-\uDCC3\uDCC5-\uDD05\uDD07-\uDD0A\uDD0D-\uDD14\uDD16-\uDD1C\uDD1E-\uDD39\uDD3B-\uDD3E\uDD40-\uDD44\uDD46\uDD4A-\uDD50\uDD52-\uDEA5\uDEA8-\uDEC0\uDEC2-\uDEDA\uDEDC-\uDEFA\uDEFC-\uDF14\uDF16-\uDF34\uDF36-\uDF4E\uDF50-\uDF6E\uDF70-\uDF88\uDF8A-\uDFA8\uDFAA-\uDFC2\uDFC4-\uDFCB]|\uD83A[\uDC00-\uDCC4]|\uD83B[\uDE00-\uDE03\uDE05-\uDE1F\uDE21\uDE22\uDE24\uDE27\uDE29-\uDE32\uDE34-\uDE37\uDE39\uDE3B\uDE42\uDE47\uDE49\uDE4B\uDE4D-\uDE4F\uDE51\uDE52\uDE54\uDE57\uDE59\uDE5B\uDE5D\uDE5F\uDE61\uDE62\uDE64\uDE67-\uDE6A\uDE6C-\uDE72\uDE74-\uDE77\uDE79-\uDE7C\uDE7E\uDE80-\uDE89\uDE8B-\uDE9B\uDEA1-\uDEA3\uDEA5-\uDEA9\uDEAB-\uDEBB]|\uD869[\uDC00-\uDED6\uDF00-\uDFFF]|\uD86D[\uDC00-\uDF34\uDF40-\uDFFF]|\uD86E[\uDC00-\uDC1D]|\uD87E[\uDC00-\uDE1D]/;
 
-},{}],407:[function(require,module,exports){
+},{}],408:[function(require,module,exports){
 /**
  * @fileoverview An object that creates fix commands for rules.
  * @author Nicholas C. Zakas
@@ -99426,7 +99817,7 @@ var ruleFixer = Object.freeze({
 
 module.exports = ruleFixer;
 
-},{}],408:[function(require,module,exports){
+},{}],409:[function(require,module,exports){
 /**
  * @fileoverview A variant of EventEmitter which does not give listeners information about each other
  * @author Teddy Katz
@@ -99485,7 +99876,7 @@ module.exports = function () {
     });
 };
 
-},{}],409:[function(require,module,exports){
+},{}],410:[function(require,module,exports){
 /**
  * @fileoverview An object that caches and applies source code fixes.
  * @author Nicholas C. Zakas
@@ -99660,7 +100051,7 @@ SourceCodeFixer.applyFixes = function (sourceText, messages, shouldFix) {
 
 module.exports = SourceCodeFixer;
 
-},{"debug":52}],410:[function(require,module,exports){
+},{"debug":52}],411:[function(require,module,exports){
 /**
  * @fileoverview Abstraction of JavaScript source code.
  * @author Nicholas C. Zakas
@@ -100203,7 +100594,7 @@ var SourceCode = function (_TokenStore) {
 
 module.exports = SourceCode;
 
-},{"../ast-utils":115,"../token-store":396,"./traverser":411,"lodash":89}],411:[function(require,module,exports){
+},{"../ast-utils":115,"../token-store":396,"./traverser":412,"lodash":89}],412:[function(require,module,exports){
 /**
  * @fileoverview Traverser to traverse AST trees.
  * @author Nicholas C. Zakas
