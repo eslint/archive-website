@@ -181,3 +181,7 @@
 - url: https://hasura.io
   src: /img/logos/hasura.svg
   name: Hasura
+
+- url: https://www.mongodb.com/
+  src: /img/logos/mongodb.svg
+  name: MongoDB
