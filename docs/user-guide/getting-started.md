@@ -18,6 +18,17 @@ ESLint is a tool for identifying and reporting on patterns found in ECMAScript/J
 <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/hppJw2REb8g?rel=0" frameborder="0" allowfullscreen></iframe>
 *Why ESLint* @0:00, *Installing and using ESLint* @2:20.  <a href="https://www.pluralsight.com/courses/eslint-better-code-quality?utm_source=eslint-dot-org&utm_medium=video&utm_campaign=authordemo" target="_blank">Full ESLint Course at Pluralsight</a>
 
+## Migrating from an Earlier Version
+
+If you are coming from an earlier version, please follow the migration guides below as needed:
+
+* [1.0.0](migrating-to-1.0.0)
+* [2.0.0](migrating-to-2.0.0)
+* [3.0.0](migrating-to-3.0.0)
+* [4.0.0](migrating-to-4.0.0)
+
+Otherwise, please keep reading.
+
 ## Installation and Usage
 
 Prerequisites: [Node.js](https://nodejs.org/en/) (>=4.x), npm version 2+.
@@ -72,9 +83,7 @@ Any plugins or shareable configs that you use must also be installed globally to
 
 ## Configuration
 
-**Note:** If you are coming from a version before 1.0.0 please see the [migration guide](migrating-to-1.0.0).
-
-After running `eslint --init`, you'll have a `.eslintrc` file in your directory. In it, you'll see some rules configured like this:
+After running `eslint --init`, you'll have a `.eslintrc.*` (.js, .json, or .yml) file in current working directory directory. In it, you'll see some rules configured like this:
 
 ```json
 {
@@ -91,9 +100,11 @@ The names `"semi"` and `"quotes"` are the names of [rules](/docs/rules) in ESLin
 * `"warn"` or `1` - turn the rule on as a warning (doesn't affect exit code)
 * `"error"` or `2` - turn the rule on as an error (exit code will be 1)
 
+Any extra values after the first are rule options. Each rule has its own set of options; some rules have no options besides the error level.
+
 The three error levels allow you fine-grained control over how ESLint applies rules (for more configuration options and details, see the [configuration docs](configuring)).
 
-Your `.eslintrc` configuration file will also include the line:
+Your `.eslintrc.*` configuration file will also include the line:
 
 ```json
     "extends": "eslint:recommended"
