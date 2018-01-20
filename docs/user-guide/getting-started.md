@@ -18,17 +18,6 @@ ESLint is a tool for identifying and reporting on patterns found in ECMAScript/J
 <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/hppJw2REb8g?rel=0" frameborder="0" allowfullscreen></iframe>
 *Why ESLint* @0:00, *Installing and using ESLint* @2:20.  <a href="https://www.pluralsight.com/courses/eslint-better-code-quality?utm_source=eslint-dot-org&utm_medium=video&utm_campaign=authordemo" target="_blank">Full ESLint Course at Pluralsight</a>
 
-## Migrating from an Earlier Version
-
-If you are coming from an earlier version, please follow the migration guides below as needed:
-
-* [1.0.0](migrating-to-1.0.0)
-* [2.0.0](migrating-to-2.0.0)
-* [3.0.0](migrating-to-3.0.0)
-* [4.0.0](migrating-to-4.0.0)
-
-Otherwise, please keep reading.
-
 ## Installation and Usage
 
 Prerequisites: [Node.js](https://nodejs.org/en/) (>=4.x), npm version 2+.
