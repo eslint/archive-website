@@ -135,7 +135,7 @@ categories:
         name: use-isnan
         recommended: true
       - description: enforce valid JSDoc comments
-        fixable: false
+        fixable: true
         name: valid-jsdoc
         recommended: false
       - description: enforce comparing `typeof` expressions against valid strings

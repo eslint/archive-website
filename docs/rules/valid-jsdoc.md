@@ -7,6 +7,8 @@ edit_link: https://github.com/eslint/eslint/edit/master/docs/rules/valid-jsdoc.m
 
 # enforce valid JSDoc comments (valid-jsdoc)
 
+(fixable) The `--fix` option on the [command line](../user-guide/command-line-interface#fix) can automatically fix some of the problems reported by this rule.
+
 [JSDoc](http://usejsdoc.org) generates application programming interface (API) documentation from specially-formatted comments in JavaScript code. For example, this is a JSDoc comment for a function:
 
 ```js

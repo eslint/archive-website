@@ -23111,7 +23111,7 @@ function coerce(val) {
 
 },{"../package.json":57,"assert":47}],57:[function(require,module,exports){
 module.exports={
-  "_from": "doctrine@^2.0.2",
+  "_from": "doctrine@^2.1.0",
   "_id": "doctrine@2.1.0",
   "_inBundle": false,
   "_integrity": "sha512-35mSku4ZXK0vfCuHEDAwt55dg2jNajHZ1odvF+8SSr82EsZY4QmXfuWso8oEd8zRhVObSN18aM0CjSdoBX7zIw==",
@@ -23120,19 +23120,19 @@ module.exports={
   "_requested": {
     "type": "range",
     "registry": true,
-    "raw": "doctrine@^2.0.2",
+    "raw": "doctrine@^2.1.0",
     "name": "doctrine",
     "escapedName": "doctrine",
-    "rawSpec": "^2.0.2",
+    "rawSpec": "^2.1.0",
     "saveSpec": null,
-    "fetchSpec": "^2.0.2"
+    "fetchSpec": "^2.1.0"
   },
   "_requiredBy": [
     "/"
   ],
   "_resolved": "https://registry.npmjs.org/doctrine/-/doctrine-2.1.0.tgz",
   "_shasum": "5cd01fc101621b42c4cd7f5d1a66243716d3f39d",
-  "_spec": "doctrine@^2.0.2",
+  "_spec": "doctrine@^2.1.0",
   "_where": "/var/lib/jenkins/workspace/Releases/ESLint Release/eslint",
   "bugs": {
     "url": "https://github.com/eslint/doctrine/issues"
@@ -49428,7 +49428,7 @@ function hasOwnProperty(obj, prop) {
 },{"./support/isBuffer":112,"_process":101,"inherits":111}],114:[function(require,module,exports){
 module.exports={
   "name": "eslint",
-  "version": "4.15.0",
+  "version": "4.16.0",
   "author": "Nicholas C. Zakas <nicholas+npm@nczconsulting.com>",
   "description": "An AST-based pattern checker for JavaScript.",
   "bin": {
@@ -49468,7 +49468,7 @@ module.exports={
     "concat-stream": "^1.6.0",
     "cross-spawn": "^5.1.0",
     "debug": "^3.1.0",
-    "doctrine": "^2.0.2",
+    "doctrine": "^2.1.0",
     "eslint-scope": "^3.7.1",
     "eslint-visitor-keys": "^1.0.0",
     "espree": "^3.5.2",
@@ -54650,7 +54650,8 @@ function validateRuleSchema(rule, localOptions) {
  * @param {{create: Function}|null} rule The rule that the config is being validated for
  * @param {string} ruleId The rule's unique name.
  * @param {array|number} options The given options for the rule.
- * @param {string} source The name of the configuration source to report in any errors.
+ * @param {string|null} source The name of the configuration source to report in any errors. If null or undefined,
+ * no source is prepended to the message.
  * @returns {void}
  */
 function validateRuleOptions(rule, ruleId, options, source) {
@@ -54664,7 +54665,13 @@ function validateRuleOptions(rule, ruleId, options, source) {
             validateRuleSchema(rule, Array.isArray(options) ? options.slice(1) : []);
         }
     } catch (err) {
-        throw new Error(source + ":\n\tConfiguration for rule \"" + ruleId + "\" is invalid:\n" + err.message);
+        var enhancedMessage = "Configuration for rule \"" + ruleId + "\" is invalid:\n" + err.message;
+
+        if (typeof source === "string") {
+            throw new Error(source + ":\n\t" + enhancedMessage);
+        } else {
+            throw new Error(enhancedMessage);
+        }
     }
 }
 
@@ -54968,6 +54975,14 @@ var MAX_AUTOFIX_PASSES = 10;
  * @property {Object|null} visitorKeys The visitor keys to traverse this AST.
  */
 
+/**
+ * @typedef {Object} DisableDirective
+ * @property {("disable"|"enable"|"disable-line"|"disable-next-line")} type
+ * @property {number} line
+ * @property {number} column
+ * @property {(string|null)} ruleId
+ */
+
 //------------------------------------------------------------------------------
 // Helpers
 //------------------------------------------------------------------------------
@@ -55180,12 +55195,7 @@ function addDeclaredGlobals(globalScope, config, envContext) {
  * @param {{line: number, column: number}} loc The 0-based location of the comment token
  * @param {string} value The value after the directive in the comment
  * comment specified no specific rules, so it applies to all rules (e.g. `eslint-disable`)
- * @returns {{
- *     type: ("disable"|"enable"|"disable-line"|"disable-next-line"),
- *     line: number,
- *     column: number,
- *     ruleId: (string|null)
- * }[]} Directives from the comment
+ * @returns {DisableDirective[]} Directives from the comment
  */
 function createDisableDirectives(type, loc, value) {
     var ruleIds = Object.keys(parseListConfig(value));
@@ -55204,17 +55214,8 @@ function createDisableDirectives(type, loc, value) {
  * @param {ASTNode} ast The top node of the AST.
  * @param {Object} config The existing configuration data.
  * @param {function(string): {create: Function}} ruleMapper A map from rule IDs to defined rules
- * @returns {{
- *      config: Object,
- *      problems: Problem[],
- *      disableDirectives: {
- *          type: ("disable"|"enable"|"disable-line"|"disable-next-line"),
- *          line: number,
- *          column: number,
- *          ruleId: (string|null)
- *      }[]
- * }} Modified config object, along with any problems encountered
- * while parsing config comments
+ * @returns {{config: Object, problems: Problem[], disableDirectives: DisableDirective[]}}
+ * Modified config object, along with any problems encountered while parsing config comments
  */
 function modifyConfigsFromComments(filename, ast, config, ruleMapper) {
 
@@ -55265,7 +55266,21 @@ function modifyConfigsFromComments(filename, ast, config, ruleMapper) {
                                 Object.keys(parseResult.config).forEach(function (name) {
                                     var ruleValue = parseResult.config[name];
 
-                                    validator.validateRuleOptions(ruleMapper(name), name, ruleValue, filename + " line " + comment.loc.start.line);
+                                    try {
+                                        validator.validateRuleOptions(ruleMapper(name), name, ruleValue);
+                                    } catch (err) {
+                                        problems.push({
+                                            ruleId: name,
+                                            severity: 2,
+                                            source: null,
+                                            message: err.message,
+                                            line: comment.loc.start.line,
+                                            column: comment.loc.start.column + 1,
+                                            endLine: comment.loc.end.line,
+                                            endColumn: comment.loc.end.column + 1,
+                                            nodeType: null
+                                        });
+                                    }
                                     commentRules[name] = ruleValue;
                                 });
                             } else {
@@ -56408,6 +56423,22 @@ var interpolate = require("./util/interpolate");
  * @property {Function} [fix] The function to call that creates a fix command.
  */
 
+/**
+ * Information about the report
+ * @typedef {Object} ReportInfo
+ * @property {string} ruleId
+ * @property {(0|1|2)} severity
+ * @property {(string|undefined)} message
+ * @property {(string|undefined)} messageId
+ * @property {number} line
+ * @property {number} column
+ * @property {(number|undefined)} endLine
+ * @property {(number|undefined)} endColumn
+ * @property {(string|null)} nodeType
+ * @property {string} source
+ * @property {({text: string, range: (number[]|null)}|null)} fix
+ */
+
 //------------------------------------------------------------------------------
 // Module Definition
 //------------------------------------------------------------------------------
@@ -56501,7 +56532,7 @@ function compareFixesByRange(a, b) {
  * Merges the given fixes array into one.
  * @param {Fix[]} fixes The fixes to merge.
  * @param {SourceCode} sourceCode The source code object to get the text between fixes.
- * @returns {{text: string, range: [number, number]}} The merged fixes
+ * @returns {{text: string, range: number[]}} The merged fixes
  */
 function mergeFixes(fixes, sourceCode) {
     if (fixes.length === 0) {
@@ -56560,7 +56591,7 @@ function mergeFixes(fixes, sourceCode) {
  * If the descriptor retrieves multiple fixes, this merges those to one.
  * @param {MessageDescriptor} descriptor The report descriptor.
  * @param {SourceCode} sourceCode The source code object to get text between fixes.
- * @returns {({text: string, range: [number, number]}|null)} The fix for the descriptor
+ * @returns {({text: string, range: number[]}|null)} The fix for the descriptor
  */
 function normalizeFixes(descriptor, sourceCode) {
     if (typeof descriptor.fix !== "function") {
@@ -56579,27 +56610,15 @@ function normalizeFixes(descriptor, sourceCode) {
 
 /**
  * Creates information about the report from a descriptor
- * @param {{
- *     ruleId: string,
- *     severity: (0|1|2),
- *     node: (ASTNode|null),
- *     message: string,
- *     loc: {start: SourceLocation, end: (SourceLocation|null)},
- *     fix: ({text: string, range: [number, number]}|null),
- *     sourceLines: string[]
- * }} options Information about the problem
- * @returns {function(...args): {
- *      ruleId: string,
- *      severity: (0|1|2),
- *      message: string,
- *      line: number,
- *      column: number,
- *      endLine: (number|undefined),
- *      endColumn: (number|undefined),
- *      nodeType: (string|null),
- *      source: string,
- *      fix: ({text: string, range: [number, number]}|null)
- * }} Information about the report
+ * @param {Object} options Information about the problem
+ * @param {string} options.ruleId Rule ID
+ * @param {(0|1|2)} options.severity Rule severity
+ * @param {(ASTNode|null)} options.node Node
+ * @param {string} options.message Error message
+ * @param {{start: SourceLocation, end: (SourceLocation|null)}} options.loc Start and end location
+ * @param {{text: string, range: (number[]|null)}} options.fix The fix object
+ * @param {string[]} options.sourceLines Source lines
+ * @returns {function(...args): ReportInfo} Function that returns information about the report
  */
 function createProblem(options) {
     var problem = {
@@ -56637,20 +56656,7 @@ function createProblem(options) {
  * problem for the Node.js API.
  * @param {{ruleId: string, severity: number, sourceCode: SourceCode, messageIds: Object}} metadata Metadata for the reported problem
  * @param {SourceCode} sourceCode The `SourceCode` instance for the text being linted
- * @returns {function(...args): {
- *      ruleId: string,
- *      severity: (0|1|2),
- *      message: (string|undefined),
- *      messageId: (string|undefined),
- *      line: number,
- *      column: number,
- *      endLine: (number|undefined),
- *      endColumn: (number|undefined),
- *      nodeType: (string|null),
- *      source: string,
- *      fix: ({text: string, range: [number, number]}|null)
- * }}
- * Information about the report
+ * @returns {function(...args): ReportInfo} Function that returns information about the report
  */
 
 module.exports = function createReportTranslator(metadata) {
@@ -60117,7 +60123,8 @@ module.exports = {
             FunctionDeclaration: true,
             FunctionExpression: true,
             ImportDeclaration: true,
-            ObjectPattern: true
+            ObjectPattern: true,
+            NewExpression: true
         };
 
         if (context.options.length === 2 && context.options[1].hasOwnProperty("exceptions")) {
@@ -60346,6 +60353,11 @@ module.exports = {
         if (!exceptions.ImportDeclaration) {
             nodes.ImportDeclaration = function (node) {
                 validateComma(node, "specifiers");
+            };
+        }
+        if (!exceptions.NewExpression) {
+            nodes.NewExpression = function (node) {
+                validateComma(node, "arguments");
             };
         }
 
@@ -63685,16 +63697,44 @@ module.exports = {
 
         return {
             ForInStatement: function ForInStatement(node) {
+                var body = node.body;
 
-                /*
-                 * If the for-in statement has {}, then the real body is the body
-                 * of the BlockStatement. Otherwise, just use body as provided.
-                 */
-                var body = node.body.type === "BlockStatement" ? node.body.body[0] : node.body;
-
-                if (body && body.type !== "IfStatement") {
-                    context.report({ node: node, message: "The body of a for-in should be wrapped in an if statement to filter unwanted properties from the prototype." });
+                // empty statement
+                if (body.type === "EmptyStatement") {
+                    return;
                 }
+
+                // if statement
+                if (body.type === "IfStatement") {
+                    return;
+                }
+
+                // empty block
+                if (body.type === "BlockStatement" && body.body.length === 0) {
+                    return;
+                }
+
+                // block with just if statement
+                if (body.type === "BlockStatement" && body.body.length === 1 && body.body[0].type === "IfStatement") {
+                    return;
+                }
+
+                // block that starts with if statement
+                if (body.type === "BlockStatement" && body.body.length >= 1 && body.body[0].type === "IfStatement") {
+                    var i = body.body[0];
+
+                    // ... whose consequent is a continue
+                    if (i.consequent.type === "ContinueStatement") {
+                        return;
+                    }
+
+                    // ... whose consequent is a block that contains only a continue
+                    if (i.consequent.type === "BlockStatement" && i.consequent.body.length === 1 && i.consequent.body[0].type === "ContinueStatement") {
+                        return;
+                    }
+                }
+
+                context.report({ node: node, message: "The body of a for-in should be wrapped in an if statement to filter unwanted properties from the prototype." });
             }
         };
     }
@@ -65713,7 +65753,7 @@ var OffsetStorage = function () {
                     this._indentType.repeat(firstToken.loc.start.column - this._tokenInfo.getFirstTokenOfLine(firstToken).loc.start.column));
                 } else {
                     var offsetInfo = this._getOffsetDescriptor(token);
-                    var offset = offsetInfo.from && offsetInfo.from.loc.start.line === token.loc.start.line && !offsetInfo.force ? 0 : offsetInfo.offset * this._indentSize;
+                    var offset = offsetInfo.from && offsetInfo.from.loc.start.line === token.loc.start.line && !/^\s*?\n/.test(token.value) && !offsetInfo.force ? 0 : offsetInfo.offset * this._indentSize;
 
                     this._desiredIndentCache.set(token, (offsetInfo.from ? this.getDesiredIndent(offsetInfo.from) : "") + this._indentType.repeat(offset));
                 }
@@ -66091,7 +66131,7 @@ module.exports = {
                     var previousElement = elements[index - 1];
                     var firstTokenOfPreviousElement = previousElement && getFirstToken(previousElement);
 
-                    if (previousElement && sourceCode.getLastToken(previousElement).loc.start.line > startToken.loc.end.line) {
+                    if (previousElement && sourceCode.getLastToken(previousElement).loc.end.line > startToken.loc.end.line) {
                         offsets.setDesiredOffsets(element.range, firstTokenOfPreviousElement, 0);
                     }
                 }
@@ -66342,8 +66382,8 @@ module.exports = {
                         return token.type === "Punctuator" && token.value === ":";
                     });
 
-                    var firstConsequentToken = sourceCode.getTokenAfter(questionMarkToken, { includeComments: true });
-                    var lastConsequentToken = sourceCode.getTokenBefore(colonToken, { includeComments: true });
+                    var firstConsequentToken = sourceCode.getTokenAfter(questionMarkToken);
+                    var lastConsequentToken = sourceCode.getTokenBefore(colonToken);
                     var firstAlternateToken = sourceCode.getTokenAfter(colonToken);
 
                     offsets.setDesiredOffset(questionMarkToken, firstToken, 1);
@@ -74303,7 +74343,7 @@ module.exports = {
                 var badOperator = node.operator === "==" || node.operator === "!=";
 
                 if (node.right.type === "Literal" && node.right.raw === "null" && badOperator || node.left.type === "Literal" && node.left.raw === "null" && badOperator) {
-                    context.report({ node: node, message: "Use ‘===’ to compare with ‘null’." });
+                    context.report({ node: node, message: "Use '===' to compare with null." });
                 }
             }
         };
@@ -87745,7 +87785,10 @@ module.exports = {
         schema: [{
             type: "object",
             properties: {
-                allowMultiplePropertiesPerLine: {
+                allowAllPropertiesOnSameLine: {
+                    type: "boolean"
+                },
+                allowMultiplePropertiesPerLine: { // Deprecated
                     type: "boolean"
                 }
             },
@@ -87756,7 +87799,8 @@ module.exports = {
     },
 
     create: function create(context) {
-        var allowSameLine = context.options[0] && Boolean(context.options[0].allowMultiplePropertiesPerLine);
+        var allowSameLine = context.options[0] && (Boolean(context.options[0].allowAllPropertiesOnSameLine) || Boolean(context.options[0].allowMultiplePropertiesPerLine) // Deprecated
+        );
         var errorMessage = allowSameLine ? "Object properties must go on a new line if they aren't all on the same line." : "Object properties must go on a new line.";
 
         var sourceCode = context.getSourceCode();
@@ -90792,7 +90836,7 @@ module.exports = {
             if (shouldCheck(reportNode.type, "object")) {
                 var property = rightNode.property;
 
-                if (property.type === "Literal" && leftNode.name === property.value || property.type === "Identifier" && leftNode.name === property.name) {
+                if (property.type === "Literal" && leftNode.name === property.value || property.type === "Identifier" && leftNode.name === property.name && !rightNode.computed) {
                     report(reportNode, "object");
                 }
             }
@@ -96069,7 +96113,9 @@ module.exports = {
                 }
             },
             additionalProperties: false
-        }]
+        }],
+
+        fixable: "code"
     },
 
     create: function create(context) {
@@ -96157,23 +96203,35 @@ module.exports = {
         /**
          * Extract the current and expected type based on the input type object
          * @param {Object} type JSDoc tag
-         * @returns {Object} current and expected type object
+         * @returns {{currentType: Doctrine.Type, expectedTypeName: string}} The current type annotation and
+         * the expected name of the annotation
          * @private
          */
         function getCurrentExpectedTypes(type) {
             var currentType = void 0;
 
             if (type.name) {
-                currentType = type.name;
+                currentType = type;
             } else if (type.expression) {
-                currentType = type.expression.name;
+                currentType = type.expression;
             }
-
-            var expectedType = currentType && preferType[currentType];
 
             return {
                 currentType: currentType,
-                expectedType: expectedType
+                expectedTypeName: currentType && preferType[currentType.name]
+            };
+        }
+
+        /**
+         * Gets the location of a JSDoc node in a file
+         * @param {Token} jsdocComment The comment that this node is parsed from
+         * @param {{range: number[]}} parsedJsdocNode A tag or other node which was parsed from this comment
+         * @returns {{start: SourceLocation, end: SourceLocation}} The 0-based source location for the tag
+         */
+        function getAbsoluteRange(jsdocComment, parsedJsdocNode) {
+            return {
+                start: sourceCode.getLocFromIndex(jsdocComment.range[0] + 2 + parsedJsdocNode.range[0]),
+                end: sourceCode.getLocFromIndex(jsdocComment.range[0] + 2 + parsedJsdocNode.range[1])
             };
         }
 
@@ -96220,13 +96278,19 @@ module.exports = {
             elements.forEach(validateType.bind(null, jsdocNode));
 
             typesToCheck.forEach(function (typeToCheck) {
-                if (typeToCheck.expectedType && typeToCheck.expectedType !== typeToCheck.currentType) {
+                if (typeToCheck.expectedTypeName && typeToCheck.expectedTypeName !== typeToCheck.currentType.name) {
                     context.report({
                         node: jsdocNode,
-                        message: "Use '{{expectedType}}' instead of '{{currentType}}'.",
+                        message: "Use '{{expectedTypeName}}' instead of '{{currentTypeName}}'.",
+                        loc: getAbsoluteRange(jsdocNode, typeToCheck.currentType),
                         data: {
-                            currentType: typeToCheck.currentType,
-                            expectedType: typeToCheck.expectedType
+                            currentTypeName: typeToCheck.currentType.name,
+                            expectedTypeName: typeToCheck.expectedTypeName
+                        },
+                        fix: function fix(fixer) {
+                            return fixer.replaceTextRange(typeToCheck.currentType.range.map(function (indexInComment) {
+                                return jsdocNode.range[0] + 2 + indexInComment;
+                            }), typeToCheck.expectedTypeName);
                         }
                     });
                 }
@@ -96242,8 +96306,8 @@ module.exports = {
         function checkJSDoc(node) {
             var jsdocNode = sourceCode.getJSDocComment(node),
                 functionData = fns.pop(),
-                params = Object.create(null),
-                paramsTags = [];
+                paramTagsByName = Object.create(null),
+                paramTags = [];
             var hasReturns = false,
                 returnsTag = void 0,
                 hasConstructor = false,
@@ -96259,7 +96323,8 @@ module.exports = {
                     jsdoc = doctrine.parse(jsdocNode.value, {
                         strict: true,
                         unwrap: true,
-                        sloppy: true
+                        sloppy: true,
+                        range: true
                     });
                 } catch (ex) {
 
@@ -96279,7 +96344,7 @@ module.exports = {
                         case "param":
                         case "arg":
                         case "argument":
-                            paramsTags.push(tag);
+                            paramTags.push(tag);
                             break;
 
                         case "return":
@@ -96312,7 +96377,23 @@ module.exports = {
 
                     // check tag preferences
                     if (prefer.hasOwnProperty(tag.title) && tag.title !== prefer[tag.title]) {
-                        context.report({ node: jsdocNode, message: "Use @{{name}} instead.", data: { name: prefer[tag.title] } });
+                        var entireTagRange = getAbsoluteRange(jsdocNode, tag);
+
+                        context.report({
+                            node: jsdocNode,
+                            message: "Use @{{name}} instead.",
+                            loc: {
+                                start: entireTagRange.start,
+                                end: {
+                                    line: entireTagRange.start.line,
+                                    column: entireTagRange.start.column + ("@" + tag.title).length
+                                }
+                            },
+                            data: { name: prefer[tag.title] },
+                            fix: function fix(fixer) {
+                                return fixer.replaceTextRange([jsdocNode.range[0] + tag.range[0] + 3, jsdocNode.range[0] + tag.range[0] + tag.title.length + 3], prefer[tag.title]);
+                            }
+                        });
                     }
 
                     // validate the types
@@ -96321,17 +96402,32 @@ module.exports = {
                     }
                 });
 
-                paramsTags.forEach(function (param) {
+                paramTags.forEach(function (param) {
                     if (!param.type) {
-                        context.report({ node: jsdocNode, message: "Missing JSDoc parameter type for '{{name}}'.", data: { name: param.name } });
+                        context.report({
+                            node: jsdocNode,
+                            message: "Missing JSDoc parameter type for '{{name}}'.",
+                            loc: getAbsoluteRange(jsdocNode, param),
+                            data: { name: param.name }
+                        });
                     }
                     if (!param.description && requireParamDescription) {
-                        context.report({ node: jsdocNode, message: "Missing JSDoc parameter description for '{{name}}'.", data: { name: param.name } });
+                        context.report({
+                            node: jsdocNode,
+                            message: "Missing JSDoc parameter description for '{{name}}'.",
+                            loc: getAbsoluteRange(jsdocNode, param),
+                            data: { name: param.name }
+                        });
                     }
-                    if (params[param.name]) {
-                        context.report({ node: jsdocNode, message: "Duplicate JSDoc parameter '{{name}}'.", data: { name: param.name } });
+                    if (paramTagsByName[param.name]) {
+                        context.report({
+                            node: jsdocNode,
+                            message: "Duplicate JSDoc parameter '{{name}}'.",
+                            loc: getAbsoluteRange(jsdocNode, param),
+                            data: { name: param.name }
+                        });
                     } else if (param.name.indexOf(".") === -1) {
-                        params[param.name] = 1;
+                        paramTagsByName[param.name] = param;
                     }
                 });
 
@@ -96340,6 +96436,7 @@ module.exports = {
                         context.report({
                             node: jsdocNode,
                             message: "Unexpected @{{title}} tag; function has no return statement.",
+                            loc: getAbsoluteRange(jsdocNode, returnsTag),
                             data: {
                                 title: returnsTag.title
                             }
@@ -96369,10 +96466,10 @@ module.exports = {
                 }
 
                 // check the parameters
-                var jsdocParams = Object.keys(params);
+                var jsdocParamNames = Object.keys(paramTagsByName);
 
                 if (node.params) {
-                    node.params.forEach(function (param, i) {
+                    node.params.forEach(function (param, paramsIndex) {
                         if (param.type === "AssignmentPattern") {
                             param = param.left;
                         }
@@ -96381,16 +96478,17 @@ module.exports = {
 
                         // TODO(nzakas): Figure out logical things to do with destructured, default, rest params
                         if (param.type === "Identifier") {
-                            if (jsdocParams[i] && name !== jsdocParams[i]) {
+                            if (jsdocParamNames[paramsIndex] && name !== jsdocParamNames[paramsIndex]) {
                                 context.report({
                                     node: jsdocNode,
                                     message: "Expected JSDoc for '{{name}}' but found '{{jsdocName}}'.",
+                                    loc: getAbsoluteRange(jsdocNode, paramTagsByName[jsdocParamNames[paramsIndex]]),
                                     data: {
                                         name: name,
-                                        jsdocName: jsdocParams[i]
+                                        jsdocName: jsdocParamNames[paramsIndex]
                                     }
                                 });
-                            } else if (!params[name] && !isOverride) {
+                            } else if (!paramTagsByName[name] && !isOverride) {
                                 context.report({
                                     node: jsdocNode,
                                     message: "Missing JSDoc for parameter '{{name}}'.",
