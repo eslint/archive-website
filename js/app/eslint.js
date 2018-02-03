@@ -9136,10 +9136,14 @@ pp$1.parseDoStatement = function(node) {
 
 pp$1.parseForStatement = function(node) {
   this.next();
+  var awaitAt = (this.options.ecmaVersion >= 9 && this.inAsync && this.eatContextual("await")) ? this.lastTokStart : -1;
   this.labels.push(loopLabel);
   this.enterLexicalScope();
   this.expect(types.parenL);
-  if (this.type === types.semi) { return this.parseFor(node, null) }
+  if (this.type === types.semi) {
+    if (awaitAt > -1) { this.unexpected(awaitAt); }
+    return this.parseFor(node, null)
+  }
   var isLet = this.isLet();
   if (this.type === types._var || this.type === types._const || isLet) {
     var init$1 = this.startNode(), kind = isLet ? "let" : this.value;
@@ -9147,19 +9151,32 @@ pp$1.parseForStatement = function(node) {
     this.parseVar(init$1, true, kind);
     this.finishNode(init$1, "VariableDeclaration");
     if ((this.type === types._in || (this.options.ecmaVersion >= 6 && this.isContextual("of"))) && init$1.declarations.length === 1 &&
-        !(kind !== "var" && init$1.declarations[0].init))
-      { return this.parseForIn(node, init$1) }
+        !(kind !== "var" && init$1.declarations[0].init)) {
+      if (this.options.ecmaVersion >= 9) {
+        if (this.type === types._in) {
+          if (awaitAt > -1) { this.unexpected(awaitAt); }
+        } else { node.await = awaitAt > -1; }
+      }
+      return this.parseForIn(node, init$1)
+    }
+    if (awaitAt > -1) { this.unexpected(awaitAt); }
     return this.parseFor(node, init$1)
   }
   var refDestructuringErrors = new DestructuringErrors;
   var init = this.parseExpression(true, refDestructuringErrors);
   if (this.type === types._in || (this.options.ecmaVersion >= 6 && this.isContextual("of"))) {
+    if (this.options.ecmaVersion >= 9) {
+      if (this.type === types._in) {
+        if (awaitAt > -1) { this.unexpected(awaitAt); }
+      } else { node.await = awaitAt > -1; }
+    }
     this.toAssignable(init, false, refDestructuringErrors);
     this.checkLVal(init);
     return this.parseForIn(node, init)
   } else {
     this.checkExpressionErrors(refDestructuringErrors, true);
   }
+  if (awaitAt > -1) { this.unexpected(awaitAt); }
   return this.parseFor(node, init)
 };
 
@@ -9430,7 +9447,7 @@ pp$1.parseVarId = function(decl, kind) {
 
 pp$1.parseFunction = function(node, isStatement, allowExpressionBody, isAsync) {
   this.initFunction(node);
-  if (this.options.ecmaVersion >= 6 && !isAsync)
+  if (this.options.ecmaVersion >= 9 || this.options.ecmaVersion >= 6 && !isAsync)
     { node.generator = this.eat(types.star); }
   if (this.options.ecmaVersion >= 8)
     { node.async = !!isAsync; }
@@ -9523,6 +9540,7 @@ pp$1.parseClassMember = function(classBody) {
   if (!isGenerator) {
     if (this.options.ecmaVersion >= 8 && tryContextual("async", true)) {
       isAsync = true;
+      isGenerator = this.options.ecmaVersion >= 9 && this.eat(types.star);
     } else if (tryContextual("get")) {
       method.kind = "get";
     } else if (tryContextual("set")) {
@@ -9642,7 +9660,7 @@ pp$1.checkPatternExport = function(exports, pat) {
       {
         var prop = list[i];
 
-        this$1.checkPatternExport(exports, prop.value);
+        this$1.checkPatternExport(exports, prop);
       } }
   else if (type == "ArrayPattern")
     { for (var i$1 = 0, list$1 = pat.elements; i$1 < list$1.length; i$1 += 1) {
@@ -9650,8 +9668,12 @@ pp$1.checkPatternExport = function(exports, pat) {
 
         if (elt) { this$1.checkPatternExport(exports, elt); }
     } }
+  else if (type == "Property")
+    { this.checkPatternExport(exports, pat.value); }
   else if (type == "AssignmentPattern")
     { this.checkPatternExport(exports, pat.left); }
+  else if (type == "RestElement")
+    { this.checkPatternExport(exports, pat.argument); }
   else if (type == "ParenthesizedExpression")
     { this.checkPatternExport(exports, pat.expression); }
 };
@@ -9800,12 +9822,22 @@ pp$2.toAssignable = function(node, isBinding, refDestructuringErrors) {
     case "ObjectExpression":
       node.type = "ObjectPattern";
       if (refDestructuringErrors) { this.checkPatternErrors(refDestructuringErrors, true); }
-      for (var i = 0, list = node.properties; i < list.length; i += 1)
-        {
-      var prop = list[i];
+      for (var i = 0, list = node.properties; i < list.length; i += 1) {
+        var prop = list[i];
 
       this$1.toAssignable(prop, isBinding);
-    }
+        // Early error:
+        //   AssignmentRestProperty[Yield, Await] :
+        //     `...` DestructuringAssignmentTarget[Yield, Await]
+        //
+        //   It is a Syntax Error if |DestructuringAssignmentTarget| is an |ArrayLiteral| or an |ObjectLiteral|.
+        if (
+          prop.type === "RestElement" &&
+          (prop.argument.type === "ArrayPattern" || prop.argument.type === "ObjectPattern")
+        ) {
+          this$1.raise(prop.argument.start, "Unexpected token");
+        }
+      }
       break
 
     case "Property":
@@ -10054,6 +10086,8 @@ var pp$3 = Parser.prototype;
 // strict mode, init properties are also not allowed to be repeated.
 
 pp$3.checkPropClash = function(prop, propHash, refDestructuringErrors) {
+  if (this.options.ecmaVersion >= 9 && prop.type === "SpreadElement")
+    { return }
   if (this.options.ecmaVersion >= 6 && (prop.computed || prop.method || prop.shorthand))
     { return }
   var key = prop.key;
@@ -10580,7 +10614,7 @@ pp$3.parseTemplate = function(ref) {
 
 pp$3.isAsyncProp = function(prop) {
   return !prop.computed && prop.key.type === "Identifier" && prop.key.name === "async" &&
-    (this.type === types.name || this.type === types.num || this.type === types.string || this.type === types.bracketL || this.type.keyword) &&
+    (this.type === types.name || this.type === types.num || this.type === types.string || this.type === types.bracketL || this.type.keyword || (this.options.ecmaVersion >= 9 && this.type === types.star)) &&
     !lineBreak.test(this.input.slice(this.lastTokEnd, this.start))
 };
 
@@ -10607,6 +10641,32 @@ pp$3.parseObj = function(isPattern, refDestructuringErrors) {
 
 pp$3.parseProperty = function(isPattern, refDestructuringErrors) {
   var prop = this.startNode(), isGenerator, isAsync, startPos, startLoc;
+  if (this.options.ecmaVersion >= 9 && this.eat(types.ellipsis)) {
+    if (isPattern) {
+      prop.argument = this.parseIdent(false);
+      if (this.type === types.comma) {
+        this.raise(this.start, "Comma is not permitted after the rest element");
+      }
+      return this.finishNode(prop, "RestElement")
+    }
+    // To disallow parenthesized identifier via `this.toAssignable()`.
+    if (this.type === types.parenL && refDestructuringErrors) {
+      if (refDestructuringErrors.parenthesizedAssign < 0) {
+        refDestructuringErrors.parenthesizedAssign = this.start;
+      }
+      if (refDestructuringErrors.parenthesizedBind < 0) {
+        refDestructuringErrors.parenthesizedBind = this.start;
+      }
+    }
+    // Parse argument.
+    prop.argument = this.parseMaybeAssign(false, refDestructuringErrors);
+    // To disallow trailing comma via `this.toAssignable()`.
+    if (this.type === types.comma && refDestructuringErrors && refDestructuringErrors.trailingComma < 0) {
+      refDestructuringErrors.trailingComma = this.start;
+    }
+    // Finish
+    return this.finishNode(prop, "SpreadElement")
+  }
   if (this.options.ecmaVersion >= 6) {
     prop.method = false;
     prop.shorthand = false;
@@ -10621,6 +10681,7 @@ pp$3.parseProperty = function(isPattern, refDestructuringErrors) {
   this.parsePropertyName(prop);
   if (!isPattern && !containsEsc && this.options.ecmaVersion >= 8 && !isGenerator && this.isAsyncProp(prop)) {
     isAsync = true;
+    isGenerator = this.options.ecmaVersion >= 9 && this.eat(types.star);
     this.parsePropertyName(prop, refDestructuringErrors);
   } else {
     isAsync = false;
@@ -11634,15 +11695,20 @@ pp$8.readRegexp = function() {
   }
   var content = this.input.slice(start, this.pos);
   ++this.pos;
-  // Need to use `readWord1` because '\uXXXX' sequences are allowed
-  // here (don't ask).
+  var flagsStart = this.pos;
   var mods = this.readWord1();
+  if (this.containsEsc) { this.unexpected(flagsStart); }
+
   var tmp = content, tmpFlags = "";
   if (mods) {
-    var validFlags = /^[gim]*$/;
-    if (this.options.ecmaVersion >= 6) { validFlags = /^[gimuy]*$/; }
-    if (this.options.ecmaVersion >= 9) { validFlags = /^[gimsuy]*$/; }
-    if (!validFlags.test(mods)) { this.raise(start, "Invalid regular expression flag"); }
+    var validFlags = "gim";
+    if (this.options.ecmaVersion >= 6) { validFlags += "uy"; }
+    if (this.options.ecmaVersion >= 9) { validFlags += "s"; }
+    for (var i = 0; i < mods.length; i++) {
+      var mod = mods.charAt(i);
+      if (validFlags.indexOf(mod) == -1) { this$1.raise(start, "Invalid regular expression flag"); }
+      if (mods.indexOf(mod, i + 1) > -1) { this$1.raise(start, "Duplicate regular expression flag"); }
+    }
     if (mods.indexOf("u") >= 0) {
       if (regexpUnicodeSupport) {
         tmpFlags = "u";
@@ -11906,10 +11972,11 @@ pp$8.readEscapedChar = function(inTemplate) {
         octalStr = octalStr.slice(0, -1);
         octal = parseInt(octalStr, 8);
       }
-      if (octalStr !== "0" && (this.strict || inTemplate)) {
-        this.invalidStringToken(this.pos - 2, "Octal literal in strict mode");
-      }
       this.pos += octalStr.length - 1;
+      ch = this.input.charCodeAt(this.pos);
+      if ((octalStr !== "0" || ch == 56 || ch == 57) && (this.strict || inTemplate)) {
+        this.invalidStringToken(this.pos - 1 - octalStr.length, "Octal literal in strict mode");
+      }
       return String.fromCharCode(octal)
     }
     return String.fromCharCode(ch)
@@ -11995,7 +12062,7 @@ pp$8.readWord = function() {
 // [dammit]: acorn_loose.js
 // [walk]: util/walk.js
 
-var version = "5.3.0";
+var version = "5.4.1";
 
 // The main exported interface (under `self.acorn` when in the
 // browser) is a `parse` function that takes a code string and
@@ -12733,9 +12800,9 @@ module.exports = {
 },{}],8:[function(require,module,exports){
 module.exports={
   "_from": "espree@^3.5.2",
-  "_id": "espree@3.5.2",
+  "_id": "espree@3.5.3",
   "_inBundle": false,
-  "_integrity": "sha512-sadKeYwaR/aJ3stC2CdvgXu1T16TdYN+qwCpcWbMnGJ8s0zNWemzrvb2GbD4OhmJ/fwpJjudThAlLobGbWZbCQ==",
+  "_integrity": "sha512-Zy3tAJDORxQZLl2baguiRU1syPERAIg0L+JB2MWorORgTu/CplzvxS9WWA7Xh4+Q+eOQihNs/1o1Xep8cvCxWQ==",
   "_location": "/espree",
   "_phantomChildren": {},
   "_requested": {
@@ -12751,8 +12818,8 @@ module.exports={
   "_requiredBy": [
     "/"
   ],
-  "_resolved": "https://registry.npmjs.org/espree/-/espree-3.5.2.tgz",
-  "_shasum": "756ada8b979e9dcfcdb30aad8d1a9304a905e1ca",
+  "_resolved": "https://registry.npmjs.org/espree/-/espree-3.5.3.tgz",
+  "_shasum": "931e0af64e7fbbed26b050a29daad1fc64799fa6",
   "_spec": "espree@^3.5.2",
   "_where": "/var/lib/jenkins/workspace/Releases/ESLint Release/eslint",
   "author": {
@@ -12764,7 +12831,7 @@ module.exports={
   },
   "bundleDependencies": false,
   "dependencies": {
-    "acorn": "^5.2.1",
+    "acorn": "^5.4.0",
     "acorn-jsx": "^3.0.0"
   },
   "deprecated": false,
@@ -12820,7 +12887,7 @@ module.exports={
     "release": "eslint-release",
     "test": "npm run-script lint && node Makefile.js test"
   },
-  "version": "3.5.2"
+  "version": "3.5.3"
 }
 
 },{}],"espree":[function(require,module,exports){
@@ -13144,7 +13211,7 @@ acorn.plugins.espree = function(instance) {
 
     instance.extend("toAssignable", function(toAssignable) {
 
-        return /** @this acorn.Parser */ function(node, isBinding) {
+        return /** @this acorn.Parser */ function(node, isBinding, refDestructuringErrors) {
 
             if (extra.ecmaFeatures.experimentalObjectRestSpread &&
                     node.type === "ObjectExpression"
@@ -13165,7 +13232,7 @@ acorn.plugins.espree = function(instance) {
 
                 return node;
             } else {
-                return toAssignable.call(this, node, isBinding);
+                return toAssignable.call(this, node, isBinding, refDestructuringErrors);
             }
         };
 
@@ -13219,14 +13286,15 @@ acorn.plugins.espree = function(instance) {
          * Override `checkPropClash` method to avoid clash on rest/spread properties.
          * @param {ASTNode} prop A property node to check.
          * @param {Object} propHash Names map.
+         * @param {Object} refDestructuringErrors Destructuring error information.
          * @returns {void}
          * @this acorn.Parser
          */
-        return function(prop, propHash) {
+        return function(prop, propHash, refDestructuringErrors) {
             if (prop.type === "ExperimentalRestProperty" || prop.type === "ExperimentalSpreadProperty") {
                 return;
             }
-            checkPropClash.call(this, prop, propHash);
+            checkPropClash.call(this, prop, propHash, refDestructuringErrors);
         };
     });
 
@@ -32253,6 +32321,8 @@ module.exports={
 		"WeakSet": false
 	},
 	"browser": {
+		"AbortController": false,
+		"AbortSignal": false,
 		"addEventListener": false,
 		"alert": false,
 		"AnalyserNode": false,
@@ -32738,13 +32808,19 @@ module.exports={
 		"RTCCertificate": false,
 		"RTCDataChannel": false,
 		"RTCDataChannelEvent": false,
+		"RTCDtlsTransport": false,
 		"RTCIceCandidate": false,
+		"RTCIceGatherer": false,
+		"RTCIceTransport": false,
 		"RTCPeerConnection": false,
 		"RTCPeerConnectionIceEvent": false,
 		"RTCRtpContributingSource": false,
 		"RTCRtpReceiver": false,
+		"RTCRtpSender": false,
+		"RTCSctpTransport": false,
 		"RTCSessionDescription": false,
 		"RTCStatsReport": false,
+		"RTCTrackEvent": false,
 		"screen": false,
 		"Screen": false,
 		"screenLeft": false,
@@ -49428,7 +49504,7 @@ function hasOwnProperty(obj, prop) {
 },{"./support/isBuffer":112,"_process":101,"inherits":111}],114:[function(require,module,exports){
 module.exports={
   "name": "eslint",
-  "version": "4.16.0",
+  "version": "4.17.0",
   "author": "Nicholas C. Zakas <nicholas+npm@nczconsulting.com>",
   "description": "An AST-based pattern checker for JavaScript.",
   "bin": {
@@ -56954,7 +57030,11 @@ module.exports = {
                 }
             },
             additionalProperties: false
-        }]
+        }],
+        messages: {
+            getter: "Getter is not present.",
+            setter: "Setter is not present."
+        }
     },
     create: function create(context) {
         var config = context.options[0] || {};
@@ -57005,9 +57085,9 @@ module.exports = {
             }
 
             if (checkSetWithoutGet && isSetPresent && !isGetPresent) {
-                context.report({ node: node, message: "Getter is not present." });
+                context.report({ node: node, messageId: "getter" });
             } else if (checkGetWithoutSet && isGetPresent && !isSetPresent) {
-                context.report({ node: node, message: "Setter is not present." });
+                context.report({ node: node, messageId: "setter" });
             }
         }
 
@@ -57060,7 +57140,13 @@ module.exports = {
                 },
                 additionalProperties: false
             }]
-        }]
+        }],
+        messages: {
+            unexpectedOpeningLinebreak: "There should be no linebreak after '['.",
+            unexpectedClosingLinebreak: "There should be no linebreak before ']'.",
+            missingOpeningLinebreak: "A linebreak is required after '['.",
+            missingClosingLinebreak: "A linebreak is required before ']'."
+        }
     },
 
     create: function create(context) {
@@ -57124,7 +57210,7 @@ module.exports = {
             context.report({
                 node: node,
                 loc: token.loc,
-                message: "There should be no linebreak after '['.",
+                messageId: "unexpectedOpeningLinebreak",
                 fix: function fix(fixer) {
                     var nextToken = sourceCode.getTokenAfter(token, { includeComments: true });
 
@@ -57147,7 +57233,7 @@ module.exports = {
             context.report({
                 node: node,
                 loc: token.loc,
-                message: "There should be no linebreak before ']'.",
+                messageId: "unexpectedClosingLinebreak",
                 fix: function fix(fixer) {
                     var previousToken = sourceCode.getTokenBefore(token, { includeComments: true });
 
@@ -57170,7 +57256,7 @@ module.exports = {
             context.report({
                 node: node,
                 loc: token.loc,
-                message: "A linebreak is required after '['.",
+                messageId: "missingOpeningLinebreak",
                 fix: function fix(fixer) {
                     return fixer.insertTextAfter(token, "\n");
                 }
@@ -57187,7 +57273,7 @@ module.exports = {
             context.report({
                 node: node,
                 loc: token.loc,
-                message: "A linebreak is required before ']'.",
+                messageId: "missingClosingLinebreak",
                 fix: function fix(fixer) {
                     return fixer.insertTextBefore(token, "\n");
                 }
@@ -57288,7 +57374,13 @@ module.exports = {
                 }
             },
             additionalProperties: false
-        }]
+        }],
+        messages: {
+            unexpectedSpaceAfter: "There should be no space after '{{tokenValue}}'.",
+            unexpectedSpaceBefore: "There should be no space before '{{tokenValue}}'.",
+            missingSpaceAfter: "A space is required after '{{tokenValue}}'.",
+            missingSpaceBefore: "A space is required before '{{tokenValue}}'."
+        }
     },
     create: function create(context) {
         var spaced = context.options[0] === "always",
@@ -57326,7 +57418,7 @@ module.exports = {
             context.report({
                 node: node,
                 loc: token.loc.start,
-                message: "There should be no space after '{{tokenValue}}'.",
+                messageId: "unexpectedSpaceAfter",
                 data: {
                     tokenValue: token.value
                 },
@@ -57348,7 +57440,7 @@ module.exports = {
             context.report({
                 node: node,
                 loc: token.loc.start,
-                message: "There should be no space before '{{tokenValue}}'.",
+                messageId: "unexpectedSpaceBefore",
                 data: {
                     tokenValue: token.value
                 },
@@ -57370,7 +57462,7 @@ module.exports = {
             context.report({
                 node: node,
                 loc: token.loc.start,
-                message: "A space is required after '{{tokenValue}}'.",
+                messageId: "missingSpaceAfter",
                 data: {
                     tokenValue: token.value
                 },
@@ -57390,7 +57482,7 @@ module.exports = {
             context.report({
                 node: node,
                 loc: token.loc.start,
-                message: "A space is required before '{{tokenValue}}'.",
+                messageId: "missingSpaceBefore",
                 data: {
                     tokenValue: token.value
                 },
@@ -57618,7 +57710,13 @@ module.exports = {
                 }
             },
             additionalProperties: false
-        }]
+        }],
+
+        messages: {
+            expectedAtEnd: "Expected to return a value at the end of {{name}}.",
+            expectedInside: "Expected to return a value in {{name}}.",
+            expectedReturnValue: "{{name}} expected a return value."
+        }
     },
 
     create: function create(context) {
@@ -57648,7 +57746,7 @@ module.exports = {
                 context.report({
                     node: node,
                     loc: getLocation(node, context.getSourceCode()).loc.start,
-                    message: funcInfo.hasReturn ? "Expected to return a value at the end of {{name}}." : "Expected to return a value in {{name}}.",
+                    messageId: funcInfo.hasReturn ? "expectedAtEnd" : "expectedInside",
                     data: {
                         name: astUtils.getFunctionNameWithKind(funcInfo.node)
                     }
@@ -57685,7 +57783,7 @@ module.exports = {
                     if (!options.allowImplicit && !node.argument) {
                         context.report({
                             node: node,
-                            message: "{{name}} expected a return value.",
+                            messageId: "expectedReturnValue",
                             data: {
                                 name: lodash.upperFirst(astUtils.getFunctionNameWithKind(funcInfo.node))
                             }
@@ -57741,7 +57839,12 @@ module.exports = {
                 },
                 additionalProperties: false
             }]
-        }]
+        }],
+
+        messages: {
+            unexpectedLineBreak: "There should be no linebreak here.",
+            missingLineBreak: "There should be a linebreak after this element."
+        }
     },
 
     create: function create(context) {
@@ -57800,7 +57903,7 @@ module.exports = {
                     start: tokenBefore.loc.end,
                     end: token.loc.start
                 },
-                message: "There should be no linebreak here.",
+                messageId: "unexpectedLineBreak",
                 fix: function fix(fixer) {
                     if (astUtils.isCommentToken(tokenBefore)) {
                         return null;
@@ -57848,7 +57951,7 @@ module.exports = {
                     start: tokenBefore.loc.end,
                     end: token.loc.start
                 },
-                message: "There should be a linebreak after this element.",
+                messageId: "missingLineBreak",
                 fix: function fix(fixer) {
                     return fixer.replaceTextRange([tokenBefore.range[1], token.range[0]], "\n");
                 }
@@ -57975,7 +58078,15 @@ module.exports = {
             }]
         },
 
-        fixable: "code"
+        fixable: "code",
+
+        messages: {
+            unexpectedOtherBlock: "Unexpected block statement surrounding arrow body.",
+            unexpectedEmptyBlock: "Unexpected block statement surrounding arrow body; put a value of `undefined` immediately after the `=>`.",
+            unexpectedObjectBlock: "Unexpected block statement surrounding arrow body; parenthesize the returned value and move it immediately after the `=>`.",
+            unexpectedSingleBlock: "Unexpected block statement surrounding arrow body; move the returned value immediately after the `=>`.",
+            expectedBlock: "Expected block statement surrounding arrow body."
+        }
     },
 
     create: function create(context) {
@@ -58029,22 +58140,22 @@ module.exports = {
                 }
 
                 if (never || asNeeded && blockBody[0].type === "ReturnStatement") {
-                    var message = void 0;
+                    var messageId = void 0;
 
                     if (blockBody.length === 0) {
-                        message = "Unexpected block statement surrounding arrow body; put a value of `undefined` immediately after the `=>`.";
+                        messageId = "unexpectedEmptyBlock";
                     } else if (blockBody.length > 1) {
-                        message = "Unexpected block statement surrounding arrow body.";
+                        messageId = "unexpectedOtherBlock";
                     } else if (astUtils.isOpeningBraceToken(sourceCode.getFirstToken(blockBody[0], { skip: 1 }))) {
-                        message = "Unexpected block statement surrounding arrow body; parenthesize the returned value and move it immediately after the `=>`.";
+                        messageId = "unexpectedObjectBlock";
                     } else {
-                        message = "Unexpected block statement surrounding arrow body; move the returned value immediately after the `=>`.";
+                        messageId = "unexpectedSingleBlock";
                     }
 
                     context.report({
                         node: node,
                         loc: arrowBody.loc.start,
-                        message: message,
+                        messageId: messageId,
                         fix: function fix(fixer) {
                             var fixes = [];
 
@@ -58094,7 +58205,7 @@ module.exports = {
                     context.report({
                         node: node,
                         loc: arrowBody.loc.start,
-                        message: "Expected block statement surrounding arrow body.",
+                        messageId: "expectedBlock",
                         fix: function fix(fixer) {
                             var fixes = [];
                             var arrowToken = sourceCode.getTokenBefore(arrowBody, astUtils.isArrowToken);
@@ -58161,15 +58272,19 @@ module.exports = {
                 }
             },
             additionalProperties: false
-        }]
+        }],
+
+        messages: {
+            unexpectedParens: "Unexpected parentheses around single function argument.",
+            expectedParens: "Expected parentheses around arrow function argument.",
+
+            unexpectedParensInline: "Unexpected parentheses around single function argument having a body with no curly braces.",
+            expectedParensBlock: "Expected parentheses around arrow function argument having a body with curly braces."
+        }
     },
 
     create: function create(context) {
-        var message = "Expected parentheses around arrow function argument.";
-        var asNeededMessage = "Unexpected parentheses around single function argument.";
         var asNeeded = context.options[0] === "as-needed";
-        var requireForBlockBodyMessage = "Unexpected parentheses around single function argument having a body with no curly braces";
-        var requireForBlockBodyNoParensMessage = "Expected parentheses around arrow function argument having a body with curly braces.";
         var requireForBlockBody = asNeeded && context.options[1] && context.options[1].requireForBlockBody === true;
 
         var sourceCode = context.getSourceCode();
@@ -58207,7 +58322,7 @@ module.exports = {
                 if (astUtils.isOpeningParenToken(firstTokenOfParam)) {
                     context.report({
                         node: node,
-                        message: requireForBlockBodyMessage,
+                        messageId: "unexpectedParensInline",
                         fix: fixParamsWithParenthesis
                     });
                 }
@@ -58218,7 +58333,7 @@ module.exports = {
                 if (!astUtils.isOpeningParenToken(firstTokenOfParam)) {
                     context.report({
                         node: node,
-                        message: requireForBlockBodyNoParensMessage,
+                        messageId: "expectedParensBlock",
                         fix: function fix(fixer) {
                             return fixer.replaceText(firstTokenOfParam, "(" + firstTokenOfParam.value + ")");
                         }
@@ -58232,7 +58347,7 @@ module.exports = {
                 if (astUtils.isOpeningParenToken(firstTokenOfParam)) {
                     context.report({
                         node: node,
-                        message: asNeededMessage,
+                        messageId: "unexpectedParens",
                         fix: fixParamsWithParenthesis
                     });
                 }
@@ -58246,7 +58361,7 @@ module.exports = {
                 if (after.value !== ")") {
                     context.report({
                         node: node,
-                        message: message,
+                        messageId: "expectedParens",
                         fix: function fix(fixer) {
                             return fixer.replaceText(firstTokenOfParam, "(" + firstTokenOfParam.value + ")");
                         }
@@ -58300,7 +58415,15 @@ module.exports = {
                 }
             },
             additionalProperties: false
-        }]
+        }],
+
+        messages: {
+            expectedBefore: "Missing space before =>.",
+            unexpectedBefore: "Unexpected space before =>.",
+
+            expectedAfter: "Missing space after =>.",
+            unexpectedAfter: "Unexpected space after =>."
+        }
     },
 
     create: function create(context) {
@@ -58358,7 +58481,7 @@ module.exports = {
                 if (countSpace.before === 0) {
                     context.report({
                         node: tokens.before,
-                        message: "Missing space before =>.",
+                        messageId: "expectedBefore",
                         fix: function fix(fixer) {
                             return fixer.insertTextBefore(tokens.arrow, " ");
                         }
@@ -58370,7 +58493,7 @@ module.exports = {
                 if (countSpace.before > 0) {
                     context.report({
                         node: tokens.before,
-                        message: "Unexpected space before =>.",
+                        messageId: "unexpectedBefore",
                         fix: function fix(fixer) {
                             return fixer.removeRange([tokens.before.range[1], tokens.arrow.range[0]]);
                         }
@@ -58384,7 +58507,7 @@ module.exports = {
                 if (countSpace.after === 0) {
                     context.report({
                         node: tokens.after,
-                        message: "Missing space after =>.",
+                        messageId: "expectedAfter",
                         fix: function fix(fixer) {
                             return fixer.insertTextAfter(tokens.arrow, " ");
                         }
@@ -58396,7 +58519,7 @@ module.exports = {
                 if (countSpace.after > 0) {
                     context.report({
                         node: tokens.after,
-                        message: "Unexpected space after =>.",
+                        messageId: "unexpectedAfter",
                         fix: function fix(fixer) {
                             return fixer.removeRange([tokens.arrow.range[1], tokens.after.range[0]]);
                         }
@@ -58431,7 +58554,11 @@ module.exports = {
             url: "https://eslint.org/docs/rules/block-scoped-var"
         },
 
-        schema: []
+        schema: [],
+
+        messages: {
+            outOfScope: "'{{name}}' used outside of binding context."
+        }
     },
 
     create: function create(context) {
@@ -58462,7 +58589,7 @@ module.exports = {
         function report(reference) {
             var identifier = reference.identifier;
 
-            context.report({ node: identifier, message: "'{{name}}' used outside of binding context.", data: { name: identifier.name } });
+            context.report({ node: identifier, messageId: "outOfScope", data: { name: identifier.name } });
         }
 
         /**
@@ -58551,12 +58678,17 @@ module.exports = {
 
         fixable: "whitespace",
 
-        schema: [{ enum: ["always", "never"] }]
+        schema: [{ enum: ["always", "never"] }],
+
+        messages: {
+            missing: "Requires a space {{location}} '{{token}}'",
+            extra: "Unexpected space(s) {{location}} '{{token}}'"
+        }
     },
 
     create: function create(context) {
         var always = context.options[0] !== "never",
-            message = always ? "Requires a space" : "Unexpected space(s)",
+            messageId = always ? "missing" : "extra",
             sourceCode = context.getSourceCode();
 
         /**
@@ -58617,9 +58749,10 @@ module.exports = {
                 context.report({
                     node: node,
                     loc: openBrace.loc.start,
-                    message: "{{message}} after '{'.",
+                    messageId: messageId,
                     data: {
-                        message: message
+                        location: "after",
+                        token: openBrace.value
                     },
                     fix: function fix(fixer) {
                         if (always) {
@@ -58634,9 +58767,10 @@ module.exports = {
                 context.report({
                     node: node,
                     loc: closeBrace.loc.start,
-                    message: "{{message}} before '}'.",
+                    messageId: messageId,
                     data: {
-                        message: message
+                        location: "before",
+                        token: closeBrace.value
                     },
                     fix: function fix(fixer) {
                         if (always) {
@@ -58691,20 +58825,22 @@ module.exports = {
             additionalProperties: false
         }],
 
-        fixable: "whitespace"
+        fixable: "whitespace",
+
+        messages: {
+            nextLineOpen: "Opening curly brace does not appear on the same line as controlling statement.",
+            sameLineOpen: "Opening curly brace appears on the same line as controlling statement.",
+            blockSameLine: "Statement inside of curly braces should be on next line.",
+            nextLineClose: "Closing curly brace does not appear on the same line as the subsequent block.",
+            singleLineClose: "Closing curly brace should be on the same line as opening curly brace or on the line after the previous block.",
+            sameLineClose: "Closing curly brace appears on the same line as the subsequent block."
+        }
     },
 
     create: function create(context) {
         var style = context.options[0] || "1tbs",
             params = context.options[1] || {},
             sourceCode = context.getSourceCode();
-
-        var OPEN_MESSAGE = "Opening curly brace does not appear on the same line as controlling statement.",
-            OPEN_MESSAGE_ALLMAN = "Opening curly brace appears on the same line as controlling statement.",
-            BODY_MESSAGE = "Statement inside of curly braces should be on next line.",
-            CLOSE_MESSAGE = "Closing curly brace does not appear on the same line as the subsequent block.",
-            CLOSE_MESSAGE_SINGLE = "Closing curly brace should be on the same line as opening curly brace or on the line after the previous block.",
-            CLOSE_MESSAGE_STROUSTRUP_ALLMAN = "Closing curly brace appears on the same line as the subsequent block.";
 
         //--------------------------------------------------------------------------
         // Helpers
@@ -58744,7 +58880,7 @@ module.exports = {
             if (style !== "allman" && !astUtils.isTokenOnSameLine(tokenBeforeOpeningCurly, openingCurly)) {
                 context.report({
                     node: openingCurly,
-                    message: OPEN_MESSAGE,
+                    messageId: "nextLineOpen",
                     fix: removeNewlineBetween(tokenBeforeOpeningCurly, openingCurly)
                 });
             }
@@ -58752,7 +58888,7 @@ module.exports = {
             if (style === "allman" && astUtils.isTokenOnSameLine(tokenBeforeOpeningCurly, openingCurly) && !singleLineException) {
                 context.report({
                     node: openingCurly,
-                    message: OPEN_MESSAGE_ALLMAN,
+                    messageId: "sameLineOpen",
                     fix: function fix(fixer) {
                         return fixer.insertTextBefore(openingCurly, "\n");
                     }
@@ -58762,7 +58898,7 @@ module.exports = {
             if (astUtils.isTokenOnSameLine(openingCurly, tokenAfterOpeningCurly) && tokenAfterOpeningCurly !== closingCurly && !singleLineException) {
                 context.report({
                     node: openingCurly,
-                    message: BODY_MESSAGE,
+                    messageId: "blockSameLine",
                     fix: function fix(fixer) {
                         return fixer.insertTextAfter(openingCurly, "\n");
                     }
@@ -58772,7 +58908,7 @@ module.exports = {
             if (tokenBeforeClosingCurly !== openingCurly && !singleLineException && astUtils.isTokenOnSameLine(tokenBeforeClosingCurly, closingCurly)) {
                 context.report({
                     node: closingCurly,
-                    message: CLOSE_MESSAGE_SINGLE,
+                    messageId: "singleLineClose",
                     fix: function fix(fixer) {
                         return fixer.insertTextBefore(closingCurly, "\n");
                     }
@@ -58791,7 +58927,7 @@ module.exports = {
             if (style === "1tbs" && !astUtils.isTokenOnSameLine(curlyToken, keywordToken)) {
                 context.report({
                     node: curlyToken,
-                    message: CLOSE_MESSAGE,
+                    messageId: "nextLineClose",
                     fix: removeNewlineBetween(curlyToken, keywordToken)
                 });
             }
@@ -58799,7 +58935,7 @@ module.exports = {
             if (style !== "1tbs" && astUtils.isTokenOnSameLine(curlyToken, keywordToken)) {
                 context.report({
                     node: curlyToken,
-                    message: CLOSE_MESSAGE_STROUSTRUP_ALLMAN,
+                    messageId: "sameLineClose",
                     fix: function fix(fixer) {
                         return fixer.insertTextAfter(curlyToken, "\n");
                     }
@@ -58871,7 +59007,11 @@ module.exports = {
         schema: [{
             type: "array",
             items: { type: "string" }
-        }]
+        }],
+
+        messages: {
+            missingReturn: "Expected return with your callback function."
+        }
     },
 
     create: function create(context) {
@@ -59012,7 +59152,7 @@ module.exports = {
 
                 // as long as you're the child of a function at this point you should be asked to return
                 if (findClosestParentOfType(node, ["FunctionDeclaration", "FunctionExpression", "ArrowFunctionExpression"])) {
-                    context.report({ node: node, message: "Expected return with your callback function." });
+                    context.report({ node: node, messageId: "missingReturn" });
                 }
             }
         };
@@ -59048,7 +59188,11 @@ module.exports = {
                 }
             },
             additionalProperties: false
-        }]
+        }],
+
+        messages: {
+            notCamelCase: "Identifier '{{name}}' is not in camel case."
+        }
     },
 
     create: function create(context) {
@@ -59082,7 +59226,7 @@ module.exports = {
         function report(node) {
             if (reported.indexOf(node) < 0) {
                 reported.push(node);
-                context.report({ node: node, message: "Identifier '{{name}}' is not in camel case.", data: { name: node.name } });
+                context.report({ node: node, messageId: "notCamelCase", data: { name: node.name } });
             }
         }
 
@@ -59189,9 +59333,7 @@ var astUtils = require("../ast-utils");
 // Helpers
 //------------------------------------------------------------------------------
 
-var ALWAYS_MESSAGE = "Comments should not begin with a lowercase character",
-    NEVER_MESSAGE = "Comments should not begin with an uppercase character",
-    DEFAULT_IGNORE_PATTERN = astUtils.COMMENTS_IGNORE_PATTERN,
+var DEFAULT_IGNORE_PATTERN = astUtils.COMMENTS_IGNORE_PATTERN,
     WHITESPACE = /\s/g,
     MAYBE_URL = /^\s*[^:/?#\s]+:\/\/[^?#]/,
     // TODO: Combine w/ max-len pattern?
@@ -59301,7 +59443,12 @@ module.exports = {
                 },
                 additionalProperties: false
             }]
-        }]
+        }],
+
+        messages: {
+            unexpectedLowercaseComment: "Comments should not begin with a lowercase character",
+            unexpectedUppercaseComment: "Comments should not begin with an uppercase character"
+        }
     },
 
     create: function create(context) {
@@ -59426,12 +59573,12 @@ module.exports = {
                 commentValid = isCommentValid(comment, options);
 
             if (!commentValid) {
-                var message = capitalize === "always" ? ALWAYS_MESSAGE : NEVER_MESSAGE;
+                var messageId = capitalize === "always" ? "unexpectedLowercaseComment" : "unexpectedUppercaseComment";
 
                 context.report({
                     node: null, // Intentionally using loc instead
                     loc: comment.loc,
-                    message: message,
+                    messageId: messageId,
                     fix: function fix(fixer) {
                         var match = comment.value.match(LETTER_PATTERN);
 
@@ -59491,7 +59638,11 @@ module.exports = {
                 }
             },
             additionalProperties: false
-        }]
+        }],
+
+        messages: {
+            missingThis: "Expected 'this' to be used by class method '{{name}}'."
+        }
     },
     create: function create(context) {
         var config = context.options[0] ? Object.assign({}, context.options[0]) : {};
@@ -59543,9 +59694,9 @@ module.exports = {
             if (isIncludedInstanceMethod(node.parent) && !methodUsesThis) {
                 context.report({
                     node: node,
-                    message: "Expected 'this' to be used by class method '{{classMethod}}'.",
+                    messageId: "missingThis",
                     data: {
-                        classMethod: node.parent.key.name
+                        name: node.parent.key.name
                     }
                 });
             }
@@ -59682,14 +59833,17 @@ module.exports = {
                     additionalProperties: false
                 }]
             }]
+        },
+
+        messages: {
+            unexpected: "Unexpected trailing comma.",
+            missing: "Missing trailing comma."
         }
     },
 
     create: function create(context) {
         var options = normalizeOptions(context.options[0]);
         var sourceCode = context.getSourceCode();
-        var UNEXPECTED_MESSAGE = "Unexpected trailing comma.";
-        var MISSING_MESSAGE = "Missing trailing comma.";
 
         /**
          * Gets the last item of the given node.
@@ -59789,7 +59943,7 @@ module.exports = {
                 context.report({
                     node: lastItem,
                     loc: trailingToken.loc.start,
-                    message: UNEXPECTED_MESSAGE,
+                    messageId: "unexpected",
                     fix: function fix(fixer) {
                         return fixer.remove(trailingToken);
                     }
@@ -59826,7 +59980,7 @@ module.exports = {
                 context.report({
                     node: lastItem,
                     loc: trailingToken.loc.end,
-                    message: MISSING_MESSAGE,
+                    messageId: "missing",
                     fix: function fix(fixer) {
                         return fixer.insertTextAfter(trailingToken, ",");
                     }
@@ -59931,7 +60085,12 @@ module.exports = {
                 }
             },
             additionalProperties: false
-        }]
+        }],
+
+        messages: {
+            missing: "A space is required {{loc}} ','.",
+            unexpected: "There should be no space {{loc}} ','."
+        }
     },
 
     create: function create(context) {
@@ -59954,17 +60113,17 @@ module.exports = {
         /**
          * Reports a spacing error with an appropriate message.
          * @param {ASTNode} node The binary expression node to report.
-         * @param {string} dir Is the error "before" or "after" the comma?
+         * @param {string} loc Is the error "before" or "after" the comma?
          * @param {ASTNode} otherNode The node at the left or right of `node`
          * @returns {void}
          * @private
          */
-        function report(node, dir, otherNode) {
+        function report(node, loc, otherNode) {
             context.report({
                 node: node,
                 fix: function fix(fixer) {
-                    if (options[dir]) {
-                        if (dir === "before") {
+                    if (options[loc]) {
+                        if (loc === "before") {
                             return fixer.insertTextBefore(node, " ");
                         }
                         return fixer.insertTextAfter(node, " ");
@@ -59973,7 +60132,7 @@ module.exports = {
                         end = void 0;
                     var newText = "";
 
-                    if (dir === "before") {
+                    if (loc === "before") {
                         start = otherNode.range[1];
                         end = node.range[0];
                     } else {
@@ -59984,9 +60143,9 @@ module.exports = {
                     return fixer.replaceTextRange([start, end], newText);
                 },
 
-                message: options[dir] ? "A space is required {{dir}} ','." : "There should be no space {{dir}} ','.",
+                messageId: options[loc] ? "missing" : "unexpected",
                 data: {
-                    dir: dir
+                    loc: loc
                 }
             });
         }
@@ -60110,7 +60269,12 @@ module.exports = {
                 }
             },
             additionalProperties: false
-        }]
+        }],
+        messages: {
+            unexpectedLineBeforeAndAfterComma: "Bad line breaking before and after ','.",
+            expectedCommaFirst: "',' should be placed first.",
+            expectedCommaLast: "',' should be placed last."
+        }
     },
 
     create: function create(context) {
@@ -60205,14 +60369,14 @@ module.exports = {
                         line: commaToken.loc.end.line,
                         column: commaToken.loc.start.column
                     },
-                    message: "Bad line breaking before and after ','.",
+                    messageId: "unexpectedLineBeforeAndAfterComma",
                     fix: getFixerFunction("between", previousItemToken, commaToken, currentItemToken)
                 });
             } else if (style === "first" && !astUtils.isTokenOnSameLine(commaToken, currentItemToken)) {
 
                 context.report({
                     node: reportItem,
-                    message: "',' should be placed first.",
+                    messageId: "expectedCommaFirst",
                     fix: getFixerFunction(style, previousItemToken, commaToken, currentItemToken)
                 });
             } else if (style === "last" && astUtils.isTokenOnSameLine(commaToken, currentItemToken)) {
@@ -60223,7 +60387,7 @@ module.exports = {
                         line: commaToken.loc.end.line,
                         column: commaToken.loc.end.column
                     },
-                    message: "',' should be placed last.",
+                    messageId: "expectedCommaLast",
                     fix: getFixerFunction(style, previousItemToken, commaToken, currentItemToken)
                 });
             }
@@ -60415,7 +60579,11 @@ module.exports = {
                 },
                 additionalProperties: false
             }]
-        }]
+        }],
+
+        messages: {
+            complex: "{{name}} has a complexity of {{complexity}}."
+        }
     },
 
     create: function create(context) {
@@ -60461,7 +60629,7 @@ module.exports = {
             if (complexity > THRESHOLD) {
                 context.report({
                     node: node,
-                    message: "{{name}} has a complexity of {{complexity}}.",
+                    messageId: "complex",
                     data: { name: name, complexity: complexity }
                 });
             }
@@ -60544,7 +60712,15 @@ module.exports = {
 
         schema: [{
             enum: ["always", "never"]
-        }]
+        }],
+
+        messages: {
+            unexpectedSpaceBefore: "There should be no space before '{{tokenValue}}'.",
+            unexpectedSpaceAfter: "There should be no space after '{{tokenValue}}'.",
+
+            missingSpaceBefore: "A space is required before '{{tokenValue}}'.",
+            missingSpaceAfter: "A space is required after '{{tokenValue}}'."
+        }
     },
 
     create: function create(context) {
@@ -60566,7 +60742,7 @@ module.exports = {
             context.report({
                 node: node,
                 loc: token.loc.start,
-                message: "There should be no space after '{{tokenValue}}'.",
+                messageId: "unexpectedSpaceAfter",
                 data: {
                     tokenValue: token.value
                 },
@@ -60587,7 +60763,7 @@ module.exports = {
             context.report({
                 node: node,
                 loc: token.loc.start,
-                message: "There should be no space before '{{tokenValue}}'.",
+                messageId: "unexpectedSpaceBefore",
                 data: {
                     tokenValue: token.value
                 },
@@ -60607,7 +60783,7 @@ module.exports = {
             context.report({
                 node: node,
                 loc: token.loc.start,
-                message: "A space is required after '{{tokenValue}}'.",
+                messageId: "missingSpaceAfter",
                 data: {
                     tokenValue: token.value
                 },
@@ -60627,7 +60803,7 @@ module.exports = {
             context.report({
                 node: node,
                 loc: token.loc.start,
-                message: "A space is required before '{{tokenValue}}'.",
+                messageId: "missingSpaceBefore",
                 data: {
                     tokenValue: token.value
                 },
@@ -60761,7 +60937,13 @@ module.exports = {
                 }
             },
             additionalProperties: false
-        }]
+        }],
+
+        messages: {
+            missingReturn: "Expected to return a value at the end of {{name}}.",
+            missingReturnValue: "{{name}} expected a return value.",
+            unexpectedReturnValue: "{{name}} expected no return value."
+        }
     },
 
     create: function create(context) {
@@ -60816,7 +60998,7 @@ module.exports = {
             context.report({
                 node: node,
                 loc: loc,
-                message: "Expected to return a value at the end of {{name}}.",
+                messageId: "missingReturn",
                 data: { name: name }
             });
         }
@@ -60830,7 +61012,7 @@ module.exports = {
                     codePath: codePath,
                     hasReturn: false,
                     hasReturnValue: false,
-                    message: "",
+                    messageId: "",
                     node: node
                 };
             },
@@ -60851,15 +61033,14 @@ module.exports = {
                 if (!funcInfo.hasReturn) {
                     funcInfo.hasReturn = true;
                     funcInfo.hasReturnValue = hasReturnValue;
-                    funcInfo.message = "{{name}} expected {{which}} return value.";
+                    funcInfo.messageId = hasReturnValue ? "missingReturnValue" : "unexpectedReturnValue";
                     funcInfo.data = {
-                        name: funcInfo.node.type === "Program" ? "Program" : lodash.upperFirst(astUtils.getFunctionNameWithKind(funcInfo.node)),
-                        which: hasReturnValue ? "a" : "no"
+                        name: funcInfo.node.type === "Program" ? "Program" : lodash.upperFirst(astUtils.getFunctionNameWithKind(funcInfo.node))
                     };
                 } else if (funcInfo.hasReturnValue !== hasReturnValue) {
                     context.report({
                         node: node,
-                        message: funcInfo.message,
+                        messageId: funcInfo.messageId,
                         data: funcInfo.data
                     });
                 }
@@ -60902,6 +61083,11 @@ module.exports = {
                 minLength: 1
             },
             uniqueItems: true
+        },
+
+        messages: {
+            aliasNotAssignedToThis: "Designated alias '{{name}}' is not assigned to 'this'.",
+            unexpectedAlias: "Unexpected alias '{{name}}' for 'this'."
         }
     },
 
@@ -60918,11 +61104,11 @@ module.exports = {
          * Reports that a variable declarator or assignment expression is assigning
          * a non-'this' value to the specified alias.
          * @param {ASTNode} node - The assigning node.
-         * @param {string} alias - the name of the alias that was incorrectly used.
+         * @param {string}  name - the name of the alias that was incorrectly used.
          * @returns {void}
          */
-        function reportBadAssignment(node, alias) {
-            context.report({ node: node, message: "Designated alias '{{alias}}' is not assigned to 'this'.", data: { alias: alias } });
+        function reportBadAssignment(node, name) {
+            context.report({ node: node, messageId: "aliasNotAssignedToThis", data: { name: name } });
         }
 
         /**
@@ -60941,7 +61127,7 @@ module.exports = {
                     reportBadAssignment(node, name);
                 }
             } else if (isThis) {
-                context.report({ node: node, message: "Unexpected alias '{{name}}' for 'this'.", data: { name: name } });
+                context.report({ node: node, messageId: "unexpectedAlias", data: { name: name } });
             }
         }
 
@@ -61111,7 +61297,16 @@ module.exports = {
             url: "https://eslint.org/docs/rules/constructor-super"
         },
 
-        schema: []
+        schema: [],
+
+        messages: {
+            missingSome: "Lacked a call of 'super()' in some code paths.",
+            missingAll: "Expected to call 'super()'.",
+
+            duplicate: "Unexpected duplicate 'super()'.",
+            badSuper: "Unexpected 'super()' because 'super' is not a constructor.",
+            unexpected: "Unexpected 'super()'."
+        }
     },
 
     create: function create(context) {
@@ -61221,7 +61416,7 @@ module.exports = {
 
                 if (!calledInEveryPaths) {
                     context.report({
-                        message: calledInSomePaths ? "Lacked a call of 'super()' in some code paths." : "Expected to call 'super()'.",
+                        messageId: calledInSomePaths ? "missingSome" : "missingAll",
                         node: node.parent
                     });
                 }
@@ -61290,7 +61485,7 @@ module.exports = {
                             var node = nodes[i];
 
                             context.report({
-                                message: "Unexpected duplicate 'super()'.",
+                                messageId: "duplicate",
                                 node: node
                             });
                         }
@@ -61334,12 +61529,12 @@ module.exports = {
                     if (info) {
                         if (duplicate) {
                             context.report({
-                                message: "Unexpected duplicate 'super()'.",
+                                messageId: "duplicate",
                                 node: node
                             });
                         } else if (!funcInfo.superIsConstructor) {
                             context.report({
-                                message: "Unexpected 'super()' because 'super' is not a constructor.",
+                                messageId: "badSuper",
                                 node: node
                             });
                         } else {
@@ -61348,7 +61543,7 @@ module.exports = {
                     }
                 } else if (funcInfo.codePath.currentSegments.some(isReachable)) {
                     context.report({
-                        message: "Unexpected 'super()'.",
+                        messageId: "unexpected",
                         node: node
                     });
                 }
@@ -61442,7 +61637,14 @@ module.exports = {
             }]
         },
 
-        fixable: "code"
+        fixable: "code",
+
+        messages: {
+            missingCurlyAfter: "Expected { after '{{name}}'.",
+            missingCurlyAfterCondition: "Expected { after '{{name}}' condition.",
+            unexpectedCurlyAfter: "Unnecessary { after '{{name}}'.",
+            unexpectedCurlyAfterCondition: "Unnecessary { after '{{name}}' condition."
+        }
     },
 
     create: function create(context) {
@@ -61534,30 +61736,6 @@ module.exports = {
         }
 
         /**
-         * Reports "Expected { after ..." error
-         * @param {ASTNode} node The node to report.
-         * @param {ASTNode} bodyNode The body node that is incorrectly missing curly brackets
-         * @param {string} name The name to report.
-         * @param {string} suffix Additional string to add to the end of a report.
-         * @returns {void}
-         * @private
-         */
-        function reportExpectedBraceError(node, bodyNode, name, suffix) {
-            context.report({
-                node: node,
-                loc: (name !== "else" ? node : getElseKeyword(node)).loc.start,
-                message: "Expected { after '{{name}}'{{suffix}}.",
-                data: {
-                    name: name,
-                    suffix: suffix ? " " + suffix : ""
-                },
-                fix: function fix(fixer) {
-                    return fixer.replaceText(bodyNode, "{" + sourceCode.getText(bodyNode) + "}");
-                }
-            });
-        }
-
-        /**
          * Determines if a semicolon needs to be inserted after removing a set of curly brackets, in order to avoid a SyntaxError.
          * @param {Token} closingBracket The } token
          * @returns {boolean} `true` if a semicolon needs to be inserted after the last statement in the block.
@@ -61612,57 +61790,11 @@ module.exports = {
         }
 
         /**
-         * Reports "Unnecessary { after ..." error
-         * @param {ASTNode} node The node to report.
-         * @param {ASTNode} bodyNode The block statement that is incorrectly surrounded by parens
-         * @param {string} name The name to report.
-         * @param {string} suffix Additional string to add to the end of a report.
-         * @returns {void}
-         * @private
-         */
-        function reportUnnecessaryBraceError(node, bodyNode, name, suffix) {
-            context.report({
-                node: node,
-                loc: (name !== "else" ? node : getElseKeyword(node)).loc.start,
-                message: "Unnecessary { after '{{name}}'{{suffix}}.",
-                data: {
-                    name: name,
-                    suffix: suffix ? " " + suffix : ""
-                },
-                fix: function fix(fixer) {
-
-                    /*
-                     * `do while` expressions sometimes need a space to be inserted after `do`.
-                     * e.g. `do{foo()} while (bar)` should be corrected to `do foo() while (bar)`
-                     */
-                    var needsPrecedingSpace = node.type === "DoWhileStatement" && sourceCode.getTokenBefore(bodyNode).range[1] === bodyNode.range[0] && !astUtils.canTokensBeAdjacent("do", sourceCode.getFirstToken(bodyNode, { skip: 1 }));
-
-                    var openingBracket = sourceCode.getFirstToken(bodyNode);
-                    var closingBracket = sourceCode.getLastToken(bodyNode);
-                    var lastTokenInBlock = sourceCode.getTokenBefore(closingBracket);
-
-                    if (needsSemicolon(closingBracket)) {
-
-                        /*
-                         * If removing braces would cause a SyntaxError due to multiple statements on the same line (or
-                         * change the semantics of the code due to ASI), don't perform a fix.
-                         */
-                        return null;
-                    }
-
-                    var resultingBodyText = sourceCode.getText().slice(openingBracket.range[1], lastTokenInBlock.range[0]) + sourceCode.getText(lastTokenInBlock) + sourceCode.getText().slice(lastTokenInBlock.range[1], closingBracket.range[0]);
-
-                    return fixer.replaceText(bodyNode, (needsPrecedingSpace ? " " : "") + resultingBodyText);
-                }
-            });
-        }
-
-        /**
          * Prepares to check the body of a node to see if it's a block statement.
          * @param {ASTNode} node The node to report if there's a problem.
          * @param {ASTNode} body The body node to check for blocks.
          * @param {string} name The name to report if there's a problem.
-         * @param {string} suffix Additional string to add to the end of a report.
+         * @param {{ condition: boolean }} opts Options to pass to the report functions
          * @returns {Object} a prepared check object, with "actual", "expected", "check" properties.
          *   "actual" will be `true` or `false` whether the body is already a block statement.
          *   "expected" will be `true` or `false` if the body should be a block statement or not, or
@@ -61671,7 +61803,7 @@ module.exports = {
          *   "check" will be a function reporting appropriate problems depending on the other
          *   properties.
          */
-        function prepareCheck(node, body, name, suffix) {
+        function prepareCheck(node, body, name, opts) {
             var hasBlock = body.type === "BlockStatement";
             var expected = null;
 
@@ -61703,9 +61835,51 @@ module.exports = {
                 check: function check() {
                     if (this.expected !== null && this.expected !== this.actual) {
                         if (this.expected) {
-                            reportExpectedBraceError(node, body, name, suffix);
+                            context.report({
+                                node: node,
+                                loc: (name !== "else" ? node : getElseKeyword(node)).loc.start,
+                                messageId: opts && opts.condition ? "missingCurlyAfterCondition" : "missingCurlyAfter",
+                                data: {
+                                    name: name
+                                },
+                                fix: function fix(fixer) {
+                                    return fixer.replaceText(body, "{" + sourceCode.getText(body) + "}");
+                                }
+                            });
                         } else {
-                            reportUnnecessaryBraceError(node, body, name, suffix);
+                            context.report({
+                                node: node,
+                                loc: (name !== "else" ? node : getElseKeyword(node)).loc.start,
+                                messageId: opts && opts.condition ? "unexpectedCurlyAfterCondition" : "unexpectedCurlyAfter",
+                                data: {
+                                    name: name
+                                },
+                                fix: function fix(fixer) {
+
+                                    /*
+                                     * `do while` expressions sometimes need a space to be inserted after `do`.
+                                     * e.g. `do{foo()} while (bar)` should be corrected to `do foo() while (bar)`
+                                     */
+                                    var needsPrecedingSpace = node.type === "DoWhileStatement" && sourceCode.getTokenBefore(body).range[1] === body.range[0] && !astUtils.canTokensBeAdjacent("do", sourceCode.getFirstToken(body, { skip: 1 }));
+
+                                    var openingBracket = sourceCode.getFirstToken(body);
+                                    var closingBracket = sourceCode.getLastToken(body);
+                                    var lastTokenInBlock = sourceCode.getTokenBefore(closingBracket);
+
+                                    if (needsSemicolon(closingBracket)) {
+
+                                        /*
+                                         * If removing braces would cause a SyntaxError due to multiple statements on the same line (or
+                                         * change the semantics of the code due to ASI), don't perform a fix.
+                                         */
+                                        return null;
+                                    }
+
+                                    var resultingBodyText = sourceCode.getText().slice(openingBracket.range[1], lastTokenInBlock.range[0]) + sourceCode.getText(lastTokenInBlock) + sourceCode.getText().slice(lastTokenInBlock.range[1], closingBracket.range[0]);
+
+                                    return fixer.replaceText(body, (needsPrecedingSpace ? " " : "") + resultingBodyText);
+                                }
+                            });
                         }
                     }
                 }
@@ -61722,7 +61896,7 @@ module.exports = {
             var preparedChecks = [];
 
             do {
-                preparedChecks.push(prepareCheck(node, node.consequent, "if", "condition"));
+                preparedChecks.push(prepareCheck(node, node.consequent, "if", { condition: true }));
                 if (node.alternate && node.alternate.type !== "IfStatement") {
                     preparedChecks.push(prepareCheck(node, node.alternate, "else"));
                     break;
@@ -61765,13 +61939,13 @@ module.exports = {
                 }
             },
             WhileStatement: function WhileStatement(node) {
-                prepareCheck(node, node.body, "while", "condition").check();
+                prepareCheck(node, node.body, "while", { condition: true }).check();
             },
             DoWhileStatement: function DoWhileStatement(node) {
                 prepareCheck(node, node.body, "do").check();
             },
             ForStatement: function ForStatement(node) {
-                prepareCheck(node, node.body, "for", "condition").check();
+                prepareCheck(node, node.body, "for", { condition: true }).check();
             },
             ForInStatement: function ForInStatement(node) {
                 prepareCheck(node, node.body, "for-in").check();
@@ -61813,7 +61987,11 @@ module.exports = {
                 }
             },
             additionalProperties: false
-        }]
+        }],
+
+        messages: {
+            missingDefaultCase: "Expected a default case."
+        }
     },
 
     create: function create(context) {
@@ -61867,7 +62045,7 @@ module.exports = {
                     }
 
                     if (!comment || !commentPattern.test(comment.value.trim())) {
-                        context.report({ node: node, message: "Expected a default case." });
+                        context.report({ node: node, messageId: "missingDefaultCase" });
                     }
                 }
             }
@@ -61902,7 +62080,12 @@ module.exports = {
             enum: ["object", "property"]
         }],
 
-        fixable: "code"
+        fixable: "code",
+
+        messages: {
+            expectedDotAfterObject: "Expected dot to be on same line as object.",
+            expectedDotBeforeProperty: "Expected dot to be on same line as property."
+        }
     },
 
     create: function create(context) {
@@ -61934,7 +62117,7 @@ module.exports = {
                         context.report({
                             node: node,
                             loc: dot.loc.start,
-                            message: "Expected dot to be on same line as object.",
+                            messageId: "expectedDotAfterObject",
                             fix: function fix(fixer) {
                                 return fixer.replaceTextRange([obj.range[1], prop.range[0]], neededTextAfterObj + "." + textBeforeDot + textAfterDot);
                             }
@@ -61944,7 +62127,7 @@ module.exports = {
                     context.report({
                         node: node,
                         loc: dot.loc.start,
-                        message: "Expected dot to be on same line as property.",
+                        messageId: "expectedDotBeforeProperty",
                         fix: function fix(fixer) {
                             return fixer.replaceTextRange([obj.range[1], prop.range[0]], "" + textBeforeDot + textAfterDot + ".");
                         }
@@ -62010,7 +62193,12 @@ module.exports = {
             additionalProperties: false
         }],
 
-        fixable: "code"
+        fixable: "code",
+
+        messages: {
+            useDot: "[{{key}}] is better written in dot notation.",
+            useBrackets: ".{{key}} is a syntax error."
+        }
     },
 
     create: function create(context) {
@@ -62036,9 +62224,9 @@ module.exports = {
 
                 context.report({
                     node: node.property,
-                    message: "[{{propertyValue}}] is better written in dot notation.",
+                    messageId: "useDot",
                     data: {
-                        propertyValue: formattedValue
+                        key: formattedValue
                     },
                     fix: function fix(fixer) {
                         var leftBracket = sourceCode.getTokenAfter(node.object, astUtils.isOpeningBracketToken);
@@ -62073,9 +62261,9 @@ module.exports = {
                 if (!allowKeywords && !node.computed && keywords.indexOf(String(node.property.name)) !== -1) {
                     context.report({
                         node: node.property,
-                        message: ".{{propertyName}} is a syntax error.",
+                        messageId: "useBrackets",
                         data: {
-                            propertyName: node.property.name
+                            key: node.property.name
                         },
                         fix: function fix(fixer) {
                             var dot = sourceCode.getTokenBefore(node.property);
@@ -62133,7 +62321,11 @@ module.exports = {
         fixable: "whitespace",
         schema: [{
             enum: ["always", "never", "unix", "windows"]
-        }]
+        }],
+        messages: {
+            missing: "Newline required at end of file but not found.",
+            unexpected: "Newline not allowed at end of file."
+        }
     },
     create: function create(context) {
 
@@ -62181,7 +62373,7 @@ module.exports = {
                     context.report({
                         node: node,
                         loc: location,
-                        message: "Newline required at end of file but not found.",
+                        messageId: "missing",
                         fix: function fix(fixer) {
                             return fixer.insertTextAfterRange([0, src.length], appendCRLF ? CRLF : LF);
                         }
@@ -62192,7 +62384,7 @@ module.exports = {
                     context.report({
                         node: node,
                         loc: location,
-                        message: "Newline not allowed at end of file.",
+                        messageId: "unexpected",
                         fix: function fix(fixer) {
                             var finalEOLs = /(?:\r?\n)+$/,
                                 match = finalEOLs.exec(sourceCode.text),
@@ -62261,7 +62453,11 @@ module.exports = {
             }]
         },
 
-        fixable: "code"
+        fixable: "code",
+
+        messages: {
+            unexpected: "Expected '{{expectedOperator}}' and instead saw '{{actualOperator}}'."
+        }
     },
 
     create: function create(context) {
@@ -62336,7 +62532,7 @@ module.exports = {
             context.report({
                 node: node,
                 loc: getOperatorLocation(node),
-                message: "Expected '{{expectedOperator}}' and instead saw '{{actualOperator}}'.",
+                messageId: "unexpected",
                 data: { expectedOperator: expectedOperator, actualOperator: node.operator },
                 fix: function fix(fixer) {
 
@@ -71676,17 +71872,6 @@ function isProhibitedIdentifier(name) {
 }
 
 /**
- * Reports the given node and identifier name.
- * @param {RuleContext} context The ESLint rule context.
- * @param {ASTNode} node The node to report on.
- * @param {string} identifierName The name of the identifier.
- * @returns {void}
- */
-function report(context, node, identifierName) {
-    context.report(node, "Unexpected {{name}}.", { name: identifierName });
-}
-
-/**
  * Finds the eslint-scope reference in the given scope.
  * @param {Object} scope The scope to search.
  * @param {ASTNode} node The identifier node.
@@ -71745,7 +71930,11 @@ module.exports = {
             url: "https://eslint.org/docs/rules/no-alert"
         },
 
-        schema: []
+        schema: [],
+
+        messages: {
+            unexpected: "Unexpected {{name}}."
+        }
     },
 
     create: function create(context) {
@@ -71756,16 +71945,24 @@ module.exports = {
 
                 // without window.
                 if (callee.type === "Identifier") {
-                    var identifierName = callee.name;
+                    var name = callee.name;
 
                     if (!isShadowed(currentScope, callee) && isProhibitedIdentifier(callee.name)) {
-                        report(context, node, identifierName);
+                        context.report({
+                            node: node,
+                            messageId: "unexpected",
+                            data: { name: name }
+                        });
                     }
                 } else if (callee.type === "MemberExpression" && isGlobalThisReferenceOrGlobalWindow(currentScope, callee.object)) {
-                    var _identifierName = getPropertyName(callee);
+                    var _name = getPropertyName(callee);
 
-                    if (isProhibitedIdentifier(_identifierName)) {
-                        report(context, node, _identifierName);
+                    if (isProhibitedIdentifier(_name)) {
+                        context.report({
+                            node: node,
+                            messageId: "unexpected",
+                            data: { name: _name }
+                        });
                     }
                 }
             }
@@ -71794,7 +71991,11 @@ module.exports = {
             url: "https://eslint.org/docs/rules/no-array-constructor"
         },
 
-        schema: []
+        schema: [],
+
+        messages: {
+            preferLiteral: "The array literal notation [] is preferable."
+        }
     },
 
     create: function create(context) {
@@ -71807,7 +72008,7 @@ module.exports = {
          */
         function check(node) {
             if (node.arguments.length !== 1 && node.callee.type === "Identifier" && node.callee.name === "Array") {
-                context.report({ node: node, message: "The array literal notation [] is preferrable." });
+                context.report({ node: node, messageId: "preferLiteral" });
             }
         }
 
@@ -71843,7 +72044,10 @@ module.exports = {
             recommended: false,
             url: "https://eslint.org/docs/rules/no-await-in-loop"
         },
-        schema: []
+        schema: [],
+        messages: {
+            unexpectedAwait: "Unexpected `await` inside a loop."
+        }
     },
     create: function create(context) {
         return {
@@ -71880,7 +72084,7 @@ module.exports = {
                         if (ancestorSet.has(ancestor.body) || ancestorSet.has(ancestor.test) || ancestorSet.has(ancestor.update)) {
                             context.report({
                                 node: node,
-                                message: "Unexpected `await` inside a loop."
+                                messageId: "unexpectedAwait"
                             });
                             return;
                         }
@@ -71935,7 +72139,11 @@ module.exports = {
                 }
             },
             additionalProperties: false
-        }]
+        }],
+
+        messages: {
+            unexpected: "Unexpected use of '{{operator}}'."
+        }
     },
 
     create: function create(context) {
@@ -71949,7 +72157,7 @@ module.exports = {
          * @returns {void}
          */
         function report(node) {
-            context.report({ node: node, message: "Unexpected use of '{{operator}}'.", data: { operator: node.operator } });
+            context.report({ node: node, messageId: "unexpected", data: { operator: node.operator } });
         }
 
         /**
@@ -72017,7 +72225,10 @@ module.exports = {
             recommended: false,
             url: "https://eslint.org/docs/rules/no-buffer-constructor"
         },
-        schema: []
+        schema: [],
+        messages: {
+            deprecated: "{{expr}} is deprecated. Use Buffer.from(), Buffer.alloc(), or Buffer.allocUnsafe() instead."
+        }
     },
 
     create: function create(context) {
@@ -72030,8 +72241,8 @@ module.exports = {
             "CallExpression[callee.name='Buffer'], NewExpression[callee.name='Buffer']": function CallExpressionCalleeNameBufferNewExpressionCalleeNameBuffer(node) {
                 context.report({
                     node: node,
-                    message: "{{example}} is deprecated. Use Buffer.from(), Buffer.alloc(), or Buffer.allocUnsafe() instead.",
-                    data: { example: node.type === "CallExpression" ? "Buffer()" : "new Buffer()" }
+                    messageId: "deprecated",
+                    data: { expr: node.type === "CallExpression" ? "Buffer()" : "new Buffer()" }
                 });
             }
         };
@@ -72059,7 +72270,11 @@ module.exports = {
             url: "https://eslint.org/docs/rules/no-caller"
         },
 
-        schema: []
+        schema: [],
+
+        messages: {
+            unexpected: "Avoid arguments.{{prop}}."
+        }
     },
 
     create: function create(context) {
@@ -72070,7 +72285,7 @@ module.exports = {
                     propertyName = node.property.name;
 
                 if (objectName === "arguments" && !node.computed && propertyName && propertyName.match(/^calle[er]$/)) {
-                    context.report({ node: node, message: "Avoid arguments.{{property}}.", data: { property: propertyName } });
+                    context.report({ node: node, messageId: "unexpected", data: { prop: propertyName } });
                 }
             }
         };
@@ -72097,7 +72312,11 @@ module.exports = {
             url: "https://eslint.org/docs/rules/no-case-declarations"
         },
 
-        schema: []
+        schema: [],
+
+        messages: {
+            unexpected: "Unexpected lexical declaration in case block."
+        }
     },
 
     create: function create(context) {
@@ -72127,7 +72346,7 @@ module.exports = {
                     if (isLexicalDeclaration(statement)) {
                         context.report({
                             node: node,
-                            message: "Unexpected lexical declaration in case block."
+                            messageId: "unexpected"
                         });
                     }
                 }
@@ -72163,7 +72382,11 @@ module.exports = {
             url: "https://eslint.org/docs/rules/no-catch-shadow"
         },
 
-        schema: []
+        schema: [],
+
+        messages: {
+            mutable: "Value of '{{name}}' may be overwritten in IE 8 and earlier."
+        }
     },
 
     create: function create(context) {
@@ -72199,7 +72422,7 @@ module.exports = {
                 }
 
                 if (paramIsShadowing(scope, node.param.name)) {
-                    context.report({ node: node, message: "Value of '{{name}}' may be overwritten in IE 8 and earlier.", data: { name: node.param.name } });
+                    context.report({ node: node, messageId: "mutable", data: { name: node.param.name } });
                 }
             }
         };
@@ -72229,7 +72452,11 @@ module.exports = {
             url: "https://eslint.org/docs/rules/no-class-assign"
         },
 
-        schema: []
+        schema: [],
+
+        messages: {
+            class: "'{{name}}' is a class."
+        }
     },
 
     create: function create(context) {
@@ -72241,7 +72468,7 @@ module.exports = {
          */
         function checkVariable(variable) {
             astUtils.getModifyingReferences(variable.references).forEach(function (reference) {
-                context.report({ node: reference.identifier, message: "'{{name}}' is a class.", data: { name: reference.identifier.name } });
+                context.report({ node: reference.identifier, messageId: "class", data: { name: reference.identifier.name } });
             });
         }
 
@@ -72281,7 +72508,10 @@ module.exports = {
             url: "https://eslint.org/docs/rules/no-compare-neg-zero"
         },
         fixable: null,
-        schema: []
+        schema: [],
+        messages: {
+            unexpected: "Do not use the '{{operator}}' operator to compare against -0."
+        }
     },
 
     create: function create(context) {
@@ -72307,7 +72537,7 @@ module.exports = {
                     if (isNegZero(node.left) || isNegZero(node.right)) {
                         context.report({
                             node: node,
-                            message: "Do not use the '{{operator}}' operator to compare against -0.",
+                            messageId: "unexpected",
                             data: { operator: node.operator }
                         });
                     }
@@ -72348,7 +72578,14 @@ module.exports = {
 
         schema: [{
             enum: ["except-parens", "always"]
-        }]
+        }],
+
+        messages: {
+            unexpected: "Unexpected assignment within {{type}}.",
+
+            // must match JSHint's error message
+            missing: "Expected a conditional expression and instead saw an assignment."
+        }
     },
 
     create: function create(context) {
@@ -72403,11 +72640,10 @@ module.exports = {
         function testForAssign(node) {
             if (node.test && node.test.type === "AssignmentExpression" && (node.type === "ForStatement" ? !astUtils.isParenthesised(sourceCode, node.test) : !isParenthesisedTwice(node.test))) {
 
-                // must match JSHint's error message
                 context.report({
                     node: node,
                     loc: node.test.loc.start,
-                    message: "Expected a conditional expression and instead saw an assignment."
+                    messageId: "missing"
                 });
             }
         }
@@ -72423,7 +72659,7 @@ module.exports = {
             if (ancestor) {
                 context.report({
                     node: ancestor,
-                    message: "Unexpected assignment within {{type}}.",
+                    messageId: "unexpected",
                     data: {
                         type: NODE_DESCRIPTIONS[ancestor.type] || ancestor.type
                     }
@@ -72491,7 +72727,11 @@ module.exports = {
                 allowParens: { type: "boolean" }
             },
             additionalProperties: false
-        }]
+        }],
+
+        messages: {
+            confusing: "Arrow function used ambiguously with a conditional expression."
+        }
     },
 
     create: function create(context) {
@@ -72509,7 +72749,7 @@ module.exports = {
             if (isConditional(body) && !(config.allowParens && astUtils.isParenthesised(sourceCode, body))) {
                 context.report({
                     node: node,
-                    message: "Arrow function used ambiguously with a conditional expression.",
+                    messageId: "confusing",
                     fix: function fix(fixer) {
 
                         // if `allowParens` is not set to true dont bother wrapping in parens
@@ -72565,7 +72805,11 @@ module.exports = {
                 }
             },
             additionalProperties: false
-        }]
+        }],
+
+        messages: {
+            unexpected: "Unexpected console statement."
+        }
     },
 
     create: function create(context) {
@@ -72624,7 +72868,7 @@ module.exports = {
             context.report({
                 node: node,
                 loc: node.loc,
-                message: "Unexpected console statement."
+                messageId: "unexpected"
             });
         }
 
@@ -72672,7 +72916,11 @@ module.exports = {
             url: "https://eslint.org/docs/rules/no-const-assign"
         },
 
-        schema: []
+        schema: [],
+
+        messages: {
+            const: "'{{name}}' is constant."
+        }
     },
 
     create: function create(context) {
@@ -72684,7 +72932,7 @@ module.exports = {
          */
         function checkVariable(variable) {
             astUtils.getModifyingReferences(variable.references).forEach(function (reference) {
-                context.report({ node: reference.identifier, message: "'{{name}}' is constant.", data: { name: reference.identifier.name } });
+                context.report({ node: reference.identifier, messageId: "const", data: { name: reference.identifier.name } });
             });
         }
 
@@ -72727,7 +72975,11 @@ module.exports = {
                 }
             },
             additionalProperties: false
-        }]
+        }],
+
+        messages: {
+            unexpected: "Unexpected constant condition."
+        }
     },
 
     create: function create(context) {
@@ -72833,7 +73085,7 @@ module.exports = {
         function checkConstantConditionLoopInSet(node) {
             if (loopsInCurrentScope.has(node)) {
                 loopsInCurrentScope.delete(node);
-                context.report({ node: node.test, message: "Unexpected constant condition." });
+                context.report({ node: node.test, messageId: "unexpected" });
             }
         }
 
@@ -72845,7 +73097,7 @@ module.exports = {
          */
         function reportIfConstant(node) {
             if (node.test && isConstant(node.test, true)) {
-                context.report({ node: node.test, message: "Unexpected constant condition." });
+                context.report({ node: node.test, messageId: "unexpected" });
             }
         }
 
@@ -72928,14 +73180,18 @@ module.exports = {
             url: "https://eslint.org/docs/rules/no-continue"
         },
 
-        schema: []
+        schema: [],
+
+        messages: {
+            unexpected: "Unexpected use of continue statement."
+        }
     },
 
     create: function create(context) {
 
         return {
             ContinueStatement: function ContinueStatement(node) {
-                context.report({ node: node, message: "Unexpected use of continue statement." });
+                context.report({ node: node, messageId: "unexpected" });
             }
         };
     }
@@ -72962,7 +73218,11 @@ module.exports = {
             url: "https://eslint.org/docs/rules/no-control-regex"
         },
 
-        schema: []
+        schema: [],
+
+        messages: {
+            unexpected: "Unexpected control character(s) in regular expression: {{controlChars}}."
+        }
     },
 
     create: function create(context) {
@@ -72970,7 +73230,7 @@ module.exports = {
         /**
          * Get the regex expression
          * @param {ASTNode} node node to evaluate
-         * @returns {*} Regex if found else null
+         * @returns {RegExp|null} Regex if found else null
          * @private
          */
         function getRegExp(node) {
@@ -73052,7 +73312,7 @@ module.exports = {
                     if (controlCharacters.length > 0) {
                         context.report({
                             node: node,
-                            message: "Unexpected control character(s) in regular expression: {{controlChars}}.",
+                            messageId: "unexpected",
                             data: {
                                 controlChars: controlCharacters.join(", ")
                             }
@@ -73087,7 +73347,10 @@ module.exports = {
             url: "https://eslint.org/docs/rules/no-debugger"
         },
         fixable: "code",
-        schema: []
+        schema: [],
+        messages: {
+            unexpected: "Unexpected 'debugger' statement."
+        }
     },
 
     create: function create(context) {
@@ -73096,7 +73359,7 @@ module.exports = {
             DebuggerStatement: function DebuggerStatement(node) {
                 context.report({
                     node: node,
-                    message: "Unexpected 'debugger' statement.",
+                    messageId: "unexpected",
                     fix: function fix(fixer) {
                         if (astUtils.STATEMENT_LIST_PARENTS.has(node.parent.type)) {
                             return fixer.remove(node);
@@ -73130,7 +73393,11 @@ module.exports = {
             url: "https://eslint.org/docs/rules/no-delete-var"
         },
 
-        schema: []
+        schema: [],
+
+        messages: {
+            unexpected: "Variables should not be deleted."
+        }
     },
 
     create: function create(context) {
@@ -73138,7 +73405,7 @@ module.exports = {
         return {
             UnaryExpression: function UnaryExpression(node) {
                 if (node.operator === "delete" && node.argument.type === "Identifier") {
-                    context.report({ node: node, message: "Variables should not be deleted." });
+                    context.report({ node: node, messageId: "unexpected" });
                 }
             }
         };
@@ -73166,7 +73433,11 @@ module.exports = {
             url: "https://eslint.org/docs/rules/no-div-regex"
         },
 
-        schema: []
+        schema: [],
+
+        messages: {
+            unexpected: "A regular expression literal can be confused with '/='."
+        }
     },
 
     create: function create(context) {
@@ -73177,7 +73448,7 @@ module.exports = {
                 var token = sourceCode.getFirstToken(node);
 
                 if (token.type === "RegularExpression" && token.value[1] === "=") {
-                    context.report({ node: node, message: "A regular expression literal can be confused with '/='." });
+                    context.report({ node: node, messageId: "unexpected" });
                 }
             }
         };
@@ -73205,7 +73476,11 @@ module.exports = {
             url: "https://eslint.org/docs/rules/no-dupe-args"
         },
 
-        schema: []
+        schema: [],
+
+        messages: {
+            unexpected: "Duplicate param '{{name}}'."
+        }
     },
 
     create: function create(context) {
@@ -73241,7 +73516,7 @@ module.exports = {
                 if (defs.length >= 2) {
                     context.report({
                         node: node,
-                        message: "Duplicate param '{{name}}'.",
+                        messageId: "unexpected",
                         data: { name: variable.name }
                     });
                 }
@@ -73280,7 +73555,11 @@ module.exports = {
             url: "https://eslint.org/docs/rules/no-dupe-class-members"
         },
 
-        schema: []
+        schema: [],
+
+        messages: {
+            unexpected: "Duplicate name '{{name}}'."
+        }
     },
 
     create: function create(context) {
@@ -73370,7 +73649,7 @@ module.exports = {
                 }
 
                 if (isDuplicate) {
-                    context.report({ node: node, message: "Duplicate name '{{name}}'.", data: { name: name } });
+                    context.report({ node: node, messageId: "unexpected", data: { name: name } });
                 }
             }
         };
@@ -73488,7 +73767,11 @@ module.exports = {
             url: "https://eslint.org/docs/rules/no-dupe-keys"
         },
 
-        schema: []
+        schema: [],
+
+        messages: {
+            unexpected: "Duplicate key '{{name}}'."
+        }
     },
 
     create: function create(context) {
@@ -73519,7 +73802,7 @@ module.exports = {
                     context.report({
                         node: info.node,
                         loc: node.key.loc,
-                        message: "Duplicate key '{{name}}'.",
+                        messageId: "unexpected",
                         data: { name: name }
                     });
                 }
@@ -73553,7 +73836,11 @@ module.exports = {
             url: "https://eslint.org/docs/rules/no-duplicate-case"
         },
 
-        schema: []
+        schema: [],
+
+        messages: {
+            unexpected: "Duplicate case label."
+        }
     },
 
     create: function create(context) {
@@ -73567,7 +73854,7 @@ module.exports = {
                     var key = sourceCode.getText(switchCase.test);
 
                     if (mapping[key]) {
-                        context.report({ node: switchCase, message: "Duplicate case label." });
+                        context.report({ node: switchCase, messageId: "unexpected" });
                     } else {
                         mapping[key] = switchCase;
                     }
@@ -73755,7 +74042,12 @@ module.exports = {
             },
             additionalProperties: false
         }],
-        fixable: "code"
+
+        fixable: "code",
+
+        messages: {
+            unexpected: "Unnecessary 'else' after 'return'."
+        }
     },
 
     create: function create(context) {
@@ -73773,7 +74065,7 @@ module.exports = {
         function displayReport(node) {
             context.report({
                 node: node,
-                message: "Unnecessary 'else' after 'return'.",
+                messageId: "unexpected",
                 fix: function fix(fixer) {
                     var sourceCode = context.getSourceCode();
                     var startToken = sourceCode.getFirstToken(node);
@@ -74031,7 +74323,11 @@ module.exports = {
             url: "https://eslint.org/docs/rules/no-empty-character-class"
         },
 
-        schema: []
+        schema: [],
+
+        messages: {
+            unexpected: "Empty class."
+        }
     },
 
     create: function create(context) {
@@ -74042,7 +74338,7 @@ module.exports = {
                 var token = sourceCode.getFirstToken(node);
 
                 if (token.type === "RegularExpression" && !regex.test(token.value)) {
-                    context.report({ node: node, message: "Empty class." });
+                    context.report({ node: node, messageId: "unexpected" });
                 }
             }
         };
@@ -74148,7 +74444,11 @@ module.exports = {
                 }
             },
             additionalProperties: false
-        }]
+        }],
+
+        messages: {
+            unexpected: "Unexpected empty {{name}}."
+        }
     },
 
     create: function create(context) {
@@ -74181,7 +74481,7 @@ module.exports = {
                 context.report({
                     node: node,
                     loc: node.body.loc.start,
-                    message: "Unexpected empty {{name}}.",
+                    messageId: "unexpected",
                     data: { name: name }
                 });
             }
@@ -74215,19 +74515,23 @@ module.exports = {
             url: "https://eslint.org/docs/rules/no-empty-pattern"
         },
 
-        schema: []
+        schema: [],
+
+        messages: {
+            unexpected: "Unexpected empty {{type}} pattern."
+        }
     },
 
     create: function create(context) {
         return {
             ObjectPattern: function ObjectPattern(node) {
                 if (node.properties.length === 0) {
-                    context.report({ node: node, message: "Unexpected empty object pattern." });
+                    context.report({ node: node, messageId: "unexpected", data: { type: "object" } });
                 }
             },
             ArrayPattern: function ArrayPattern(node) {
                 if (node.elements.length === 0) {
-                    context.report({ node: node, message: "Unexpected empty array pattern." });
+                    context.report({ node: node, messageId: "unexpected", data: { type: "array" } });
                 }
             }
         };
@@ -74268,7 +74572,11 @@ module.exports = {
                 }
             },
             additionalProperties: false
-        }]
+        }],
+
+        messages: {
+            unexpected: "Empty {{type}} statement."
+        }
     },
 
     create: function create(context) {
@@ -74299,12 +74607,12 @@ module.exports = {
                     return;
                 }
 
-                context.report({ node: node, message: "Empty block statement." });
+                context.report({ node: node, messageId: "unexpected", data: { type: "block" } });
             },
             SwitchStatement: function SwitchStatement(node) {
 
                 if (typeof node.cases === "undefined" || node.cases.length === 0) {
-                    context.report({ node: node, message: "Empty switch statement." });
+                    context.report({ node: node, messageId: "unexpected", data: { type: "switch" } });
                 }
             }
         };
@@ -74333,7 +74641,11 @@ module.exports = {
             url: "https://eslint.org/docs/rules/no-eq-null"
         },
 
-        schema: []
+        schema: [],
+
+        messages: {
+            unexpected: "Use '===' to compare with null."
+        }
     },
 
     create: function create(context) {
@@ -74343,7 +74655,7 @@ module.exports = {
                 var badOperator = node.operator === "==" || node.operator === "!=";
 
                 if (node.right.type === "Literal" && node.right.raw === "null" && badOperator || node.left.type === "Literal" && node.left.raw === "null" && badOperator) {
-                    context.report({ node: node, message: "Use '===' to compare with null." });
+                    context.report({ node: node, messageId: "unexpected" });
                 }
             }
         };
@@ -74433,7 +74745,11 @@ module.exports = {
                 allowIndirect: { type: "boolean" }
             },
             additionalProperties: false
-        }]
+        }],
+
+        messages: {
+            unexpected: "eval can be harmful."
+        }
     },
 
     create: function create(context) {
@@ -74499,7 +74815,7 @@ module.exports = {
             context.report({
                 node: node,
                 loc: locationNode.loc.start,
-                message: "eval can be harmful."
+                messageId: "unexpected"
             });
         }
 
@@ -74662,7 +74978,11 @@ module.exports = {
             url: "https://eslint.org/docs/rules/no-ex-assign"
         },
 
-        schema: []
+        schema: [],
+
+        messages: {
+            unexpected: "Do not assign to the exception parameter."
+        }
     },
 
     create: function create(context) {
@@ -74674,7 +74994,7 @@ module.exports = {
          */
         function checkVariable(variable) {
             astUtils.getModifyingReferences(variable.references).forEach(function (reference) {
-                context.report({ node: reference.identifier, message: "Do not assign to the exception parameter." });
+                context.report({ node: reference.identifier, messageId: "unexpected" });
             });
         }
 
@@ -74732,7 +75052,11 @@ module.exports = {
                 }
             },
             additionalProperties: false
-        }]
+        }],
+
+        messages: {
+            unexpected: "{{builtin}} prototype is read only, properties should not be added."
+        }
     },
 
     create: function create(context) {
@@ -74754,7 +75078,7 @@ module.exports = {
         function reportNode(node, builtin) {
             context.report({
                 node: node,
-                message: "{{builtin}} prototype is read only, properties should not be added.",
+                messageId: "unexpected",
                 data: {
                     builtin: builtin
                 }
@@ -74867,7 +75191,11 @@ module.exports = {
 
         schema: [],
 
-        fixable: "code"
+        fixable: "code",
+
+        messages: {
+            unexpected: "The function binding is unnecessary."
+        }
     },
 
     create: function create(context) {
@@ -74883,7 +75211,7 @@ module.exports = {
         function report(node) {
             context.report({
                 node: node.parent.parent,
-                message: "The function binding is unnecessary.",
+                messageId: "unexpected",
                 loc: node.parent.property.loc.start,
                 fix: function fix(fixer) {
                     var firstTokenToRemove = context.getSourceCode().getFirstTokenBetween(node.parent.object, node.parent.property, astUtils.isNotClosingParenToken);
@@ -75007,7 +75335,12 @@ module.exports = {
 
         schema: [],
 
-        fixable: "code"
+        fixable: "code",
+
+        messages: {
+            unexpectedCall: "Redundant Boolean call.",
+            unexpectedNegation: "Redundant double negation."
+        }
     },
 
     create: function create(context) {
@@ -75047,7 +75380,7 @@ module.exports = {
                 (grandparent.type === "CallExpression" || grandparent.type === "NewExpression") && grandparent.callee.type === "Identifier" && grandparent.callee.name === "Boolean") {
                     context.report({
                         node: node,
-                        message: "Redundant double negation.",
+                        messageId: "unexpectedNegation",
                         fix: function fix(fixer) {
                             return fixer.replaceText(parent, sourceCode.getText(node.argument));
                         }
@@ -75064,7 +75397,7 @@ module.exports = {
                 if (isInBooleanContext(node, parent)) {
                     context.report({
                         node: node,
-                        message: "Redundant Boolean call.",
+                        messageId: "unexpectedCall",
                         fix: function fix(fixer) {
                             if (!node.arguments.length) {
                                 return fixer.replaceText(parent, "true");
@@ -75117,7 +75450,11 @@ module.exports = {
 
         schema: [],
 
-        fixable: "code"
+        fixable: "code",
+
+        messages: {
+            unexpected: "This label '{{name}}' is unnecessary."
+        }
     },
 
     create: function create(context) {
@@ -75200,7 +75537,7 @@ module.exports = {
                     if (info.breakable && info.label && info.label.name === labelNode.name) {
                         context.report({
                             node: labelNode,
-                            message: "This label '{{name}}' is unnecessary.",
+                            messageId: "unexpected",
                             data: labelNode,
                             fix: function fix(fixer) {
                                 return fixer.removeRange([sourceCode.getFirstToken(node).range[1], labelNode.range[1]]);
@@ -75283,6 +75620,10 @@ module.exports = {
                 minItems: 0,
                 maxItems: 2
             }]
+        },
+
+        messages: {
+            unexpected: "Gratuitous parentheses around expression."
         }
     },
 
@@ -75528,7 +75869,7 @@ module.exports = {
             context.report({
                 node: node,
                 loc: leftParenToken.loc.start,
-                message: "Gratuitous parentheses around expression.",
+                messageId: "unexpected",
                 fix: function fix(fixer) {
                     var parenthesizedSource = sourceCode.text.slice(leftParenToken.range[1], rightParenToken.range[0]);
 
@@ -75940,7 +76281,11 @@ module.exports = {
         },
 
         fixable: "code",
-        schema: []
+        schema: [],
+
+        messages: {
+            unexpected: "Unnecessary semicolon."
+        }
     },
 
     create: function create(context) {
@@ -75954,7 +76299,7 @@ module.exports = {
         function report(nodeOrToken) {
             context.report({
                 node: nodeOrToken,
-                message: "Unnecessary semicolon.",
+                messageId: "unexpected",
                 fix: function fix(fixer) {
 
                     /*
@@ -89851,6 +90196,11 @@ var StatementTypes = {
             return node.loc.start.line !== node.loc.end.line && isBlockLikeStatement(sourceCode, node);
         }
     },
+    "multiline-expression": {
+        test: function test(node, sourceCode) {
+            return node.loc.start.line !== node.loc.end.line && node.type === "ExpressionStatement" && !isDirectivePrologue(node, sourceCode);
+        }
+    },
 
     block: newNodeTypeTester("BlockStatement"),
     empty: newNodeTypeTester("EmptyStatement"),
@@ -94665,15 +95015,6 @@ module.exports = {
         }
 
         /**
-         * Check if the node's child argument is an "ObjectExpression"
-         * @param {ASTnode} node AST node
-         * @returns {boolean} Whether or not the argument's type is "ObjectExpression"
-         */
-        function isArgumentObjectExpression(node) {
-            return node.argument && node.argument.type && node.argument.type === "ObjectExpression";
-        }
-
-        /**
          * Checks if an override exists for a given operator.
          * @param {string} operator Operator
          * @returns {boolean} Whether or not an override has been provided for the operator
@@ -94723,7 +95064,7 @@ module.exports = {
          * @returns {void}
          */
         function verifyWordDoesntHaveSpaces(node, firstToken, secondToken, word) {
-            if (isArgumentObjectExpression(node)) {
+            if (astUtils.canTokensBeAdjacent(firstToken, secondToken)) {
                 if (secondToken.range[0] > firstToken.range[1]) {
                     context.report({
                         node: node,

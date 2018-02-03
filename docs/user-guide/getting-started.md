@@ -72,7 +72,9 @@ Any plugins or shareable configs that you use must also be installed globally to
 
 ## Configuration
 
-After running `eslint --init`, you'll have a `.eslintrc.*` (.js, .json, or .yml) file in current working directory directory. In it, you'll see some rules configured like this:
+**Note:** If you are coming from a version before 1.0.0 please see the [migration guide](migrating-to-1.0.0).
+
+After running `eslint --init`, you'll have a `.eslintrc` file in your directory. In it, you'll see some rules configured like this:
 
 ```json
 {
@@ -89,11 +91,9 @@ The names `"semi"` and `"quotes"` are the names of [rules](/docs/rules) in ESLin
 * `"warn"` or `1` - turn the rule on as a warning (doesn't affect exit code)
 * `"error"` or `2` - turn the rule on as an error (exit code will be 1)
 
-Any extra values after the first are rule options. Each rule has its own set of options; some rules have no options besides the error level.
-
 The three error levels allow you fine-grained control over how ESLint applies rules (for more configuration options and details, see the [configuration docs](configuring)).
 
-Your `.eslintrc.*` configuration file will also include the line:
+Your `.eslintrc` configuration file will also include the line:
 
 ```json
     "extends": "eslint:recommended"

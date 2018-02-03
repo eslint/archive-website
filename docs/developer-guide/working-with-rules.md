@@ -229,23 +229,26 @@ var foo = 2;
 //  ^ error: Avoid using variables named 'foo'
 
 // In your tests:
-var rule = require('../../../lib/rules/no-insecure-random');
-var RuleTester = require('eslint').RuleTester;
+var rule = require("../../../lib/rules/my-rule");
+var RuleTester = require("eslint").RuleTester;
 
 var ruleTester = new RuleTester();
-ruleTester.run('my-rule', rule, {
-  valid: ['bar', 'baz'],
+ruleTester.run("my-rule", rule, {
+    valid: ["bar", "baz"],
 
-  invalid: [
-    {
-      code: 'foo',
-      errors: [
+    invalid: [
         {
-          messageId: 'foo',
+            code: "foo",
+            errors: [
+                {
+                    messageId: "avoidName",
+                    data: {
+                        name: "foo"
+                    }
+                }
+            ]
         }
-      ]
-    }
-  ]
+    ]
 });
 {% endraw %}
 ```
@@ -571,7 +574,6 @@ The rule naming conventions for ESLint are fairly simple:
 
 * If your rule is disallowing something, prefix it with `no-` such as `no-eval` for disallowing `eval()` and `no-debugger` for disallowing `debugger`.
 * If your rule is enforcing the inclusion of something, use a short name without a special prefix.
-* Keep your rule names as short as possible, use abbreviations where appropriate, and no more than four words.
 * Use dashes between words.
 
 ## Runtime Rules

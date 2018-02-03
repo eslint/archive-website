@@ -68,7 +68,7 @@ This rule has three options:
 
 In this case, spacing will be disallowed after a `new` operator and required before/after a `++` operator.
 
-Examples of **incorrect** code for this rule with the `{"words": true, "nonwords": false}` option:
+Examples of **incorrect** code for this rule with the default `{"words": true, "nonwords": false}` option:
 
 ```js
 /*eslint space-unary-ops: "error"*/
@@ -96,6 +96,14 @@ foo --;
 
 function *foo() {
     yield(0)
+}
+```
+
+```js
+/*eslint space-unary-ops: "error"*/
+
+async function foo() {
+    await(bar);
 }
 ```
 
@@ -132,6 +140,14 @@ foo--;
 
 function *foo() {
     yield (0)
+}
+```
+
+```js
+/*eslint space-unary-ops: "error"*/
+
+async function foo() {
+    await (bar);
 }
 ```
 
