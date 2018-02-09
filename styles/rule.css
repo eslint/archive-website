@@ -1,0 +1,7 @@
+p.incorrect+div pre {
+    background-color: #ffeeee;
+}
+
+p.correct+div pre {
+    background-color: #eeffee;
+}
