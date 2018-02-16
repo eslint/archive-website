@@ -503,7 +503,7 @@ If the operation ends with a parsing error, you will get a single message for th
             warningCount: 0,
             fixableErrorCount: 0,
             fixableWarningCount: 0,
-            source: "fucntion foo() {}"
+            source: "function foo() {}"
         }
     ],
     errorCount: 1,
