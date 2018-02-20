@@ -49478,7 +49478,7 @@ function hasOwnProperty(obj, prop) {
 },{"./support/isBuffer":112,"_process":101,"inherits":111}],114:[function(require,module,exports){
 module.exports={
   "name": "eslint",
-  "version": "4.18.0",
+  "version": "4.18.1",
   "author": "Nicholas C. Zakas <nicholas+npm@nczconsulting.com>",
   "description": "An AST-based pattern checker for JavaScript.",
   "bin": {
@@ -72089,7 +72089,7 @@ module.exports = {
             while (parent && !isBoundary(parent)) {
                 if (isLooped(node, parent)) {
                     context.report({
-                        node: node,
+                        node: awaitNode,
                         messageId: "unexpectedAwait"
                     });
                     return;
