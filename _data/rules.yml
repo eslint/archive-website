@@ -518,7 +518,7 @@ categories:
         fixable: false
         name: handle-callback-err
         recommended: false
-      - description: disallow use of the Buffer() constructor
+      - description: disallow use of the `Buffer()` constructor
         fixable: false
         name: no-buffer-constructor
         recommended: false
