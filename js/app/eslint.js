@@ -55200,7 +55200,7 @@ function hasOwnProperty(obj, prop) {
 },{"./support/isBuffer":111,"_process":99,"inherits":110}],113:[function(require,module,exports){
 module.exports={
   "name": "eslint",
-  "version": "4.19.0",
+  "version": "4.19.1",
   "author": "Nicholas C. Zakas <nicholas+npm@nczconsulting.com>",
   "description": "An AST-based pattern checker for JavaScript.",
   "bin": {
@@ -83132,17 +83132,14 @@ module.exports = {
                     return;
                 }
                 var pattern = node.arguments[0].value;
-                var flags = "";
+                var flags = isString(node.arguments[1]) ? node.arguments[1].value : "";
 
-                if (node.arguments[1]) {
-                    flags = isString(node.arguments[1]) ? node.arguments[1].value : null;
-                    if (allowedFlags) {
-                        flags = flags.replace(allowedFlags, "");
-                    }
+                if (allowedFlags) {
+                    flags = flags.replace(allowedFlags, "");
                 }
 
                 // If flags are unknown, check both are errored or not.
-                var message = validateRegExpFlags(flags) || (flags === null ? validateRegExpPattern(pattern, true) && validateRegExpPattern(pattern, false) : validateRegExpPattern(pattern, flags.indexOf("u") !== -1));
+                var message = validateRegExpFlags(flags) || (flags ? validateRegExpPattern(pattern, flags.indexOf("u") !== -1) : validateRegExpPattern(pattern, true) && validateRegExpPattern(pattern, false));
 
                 if (message) {
                     context.report({
@@ -93406,7 +93403,9 @@ function areLineBreaksRequired(node, options, first, last) {
     } else {
 
         // is ImportDeclaration or ExportNamedDeclaration
-        objectProperties = node.specifiers;
+        objectProperties = node.specifiers.filter(function (s) {
+            return s.type === "ImportSpecifier" || s.type === "ExportSpecifier";
+        });
     }
 
     return objectProperties.length >= options.minProperties || options.multiline && objectProperties.length > 0 && first.loc.start.line !== last.loc.end.line;
