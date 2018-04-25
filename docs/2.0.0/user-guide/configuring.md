@@ -41,7 +41,7 @@ Here's an example `.eslintrc.json` file:
         "sourceType": "module",
         "ecmaFeatures": {
             "jsx": true
-        },
+        }
     },
     "rules": {
         "semi": 2
