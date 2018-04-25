@@ -11,32 +11,6 @@ permalink: /blog/:year/:month/:title
 gems:
     - jekyll-sitemap
     - jekyll-redirect-from
-    - algoliasearch-jekyll
 kramdown:
   input: GFM
   toc_levels: 2..3
-algolia:
-  application_id: 'XWXG7MEBSB'
-  index_name:     'eslint'
-  record_css_selector: p,li,tr,h1,h2,h3,h4,h5,h6
-  settings:
-    advancedSyntax: true
-    highlightPostTag: </mark>
-    highlightPreTag: <mark>
-    minWordSizefor1Typo: 3
-    minWordSizefor2Typos: 7
-    attributesToIndex:
-      - title
-      - text
-      - category,subcategory,display_title # Needed for the highlight
-    attributesToHighlight:
-      - category
-      - subcategory
-      - display_title
-      - text
-    customRanking:
-      - desc(weight.type)
-      - desc(weight.tag_name)
-      - asc(weight.position)
-    attributesToSnippet:
-      - text:20
