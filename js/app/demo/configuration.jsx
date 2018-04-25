@@ -1,5 +1,7 @@
 "use strict";
 
+/* global Popover */
+
 define(["react", "jsx!parserOptions", "jsx!environments", "jsx!rulesConfig"], function(React, ParserOptions, Environments, RulesConfig) {
     return React.createClass({
         displayName: "Configuration",
@@ -10,7 +12,7 @@ define(["react", "jsx!parserOptions", "jsx!environments", "jsx!rulesConfig"], fu
             var popoverElements = document.querySelectorAll("[data-toggle=\"popover\"]");
 
             for (var i = 0; i < popoverElements.length; ++i) {
-                // eslint-disable-next-line no-new, no-undef
+                // eslint-disable-next-line no-new
                 new Popover(popoverElements[i]);
             }
         },
