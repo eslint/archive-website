@@ -7,11 +7,11 @@ categories:
           direction.
         fixable: false
         name: for-direction
-        recommended: false
+        recommended: true
       - description: enforce `return` statements in getters
         fixable: false
         name: getter-return
-        recommended: false
+        recommended: true
       - description: disallow `await` inside of loops
         fixable: false
         name: no-await-in-loop

@@ -14,6 +14,7 @@ The lists below are ordered roughly by the number of users each change is expect
 ### Breaking changes for users
 
 1. [Node.js 4 is no longer supported](#drop-node-4)
+1. [New rules have been added to `eslint:recommended`](#eslint-recommended-changes)
 1. [The `experimentalObjectRestSpread` option has been deprecated](#experimental-object-rest-spread)
 1. [Linting nonexistent files from the command line is now a fatal error](#nonexistent-files)
 1. [Deprecated globals have been removed from the `node`, `browser`, and `jest` environments](#deprecated-globals)
@@ -24,6 +25,7 @@ The lists below are ordered roughly by the number of users each change is expect
 
 1. [The `parent` property of AST nodes is now set before rules start running](#parent-before-rules)
 1. [When using the default parser, text nodes in JSX elements now have type `JSXText`](#jsx-text-nodes)
+1. [The `context.getScope()` method now returns more proper scopes](#context-get-scope)
 1. [The `_linter` property on rule context objects has been removed](#no-context-linter)
 1. [`RuleTester` now uses strict equality checks in its assertions](#rule-tester-equality)
 1. [Rules are now required to provide messages along with reports](#required-report-messages)
@@ -45,6 +47,26 @@ As of April 30th, 2018, Node.js 4 will be at EOL and will no longer be receiving
 * Anything above Node.js 9.10.0
 
 **To address:** Make sure you upgrade to at least Node.js 6 when using ESLint v5. If you are unable to upgrade, we recommend continuing to use ESLint v4.x until you are able to upgrade Node.js.
+
+## <a name="eslint-recommended-changes"/> `eslint:recommended` changes
+
+Two new rules have been added to the [`eslint:recommended`](https://eslint.org/docs/user-guide/configuring#using-eslintrecommended) config:
+
+* [`for-direction`](/docs/rules/for-direction) enforces that a `for` loop update clause moves the counter in the right direction.
+* [`getter-return`](/docs/rules/getter-return) enforces that a `return` statement is present in property getters.
+
+**To address:** To mimic the `eslint:recommended` behavior from 4.x, you can disable these rules in a config file:
+
+```json
+{
+  "extends": "eslint:recommended",
+
+  "rules": {
+    "for-direction": "off",
+    "getter-return": "off"
+  }
+}
+```
 
 ## <a name="experimental-object-rest-spread"></a> The `experimentalObjectRestSpread` option has been deprecated
 
@@ -140,7 +162,7 @@ When it encounters a plugin name in a config starting with `@`, ESLint v5 will r
 
 Previously, ESLint would set the `parent` property on each AST node immediately before running rule listeners for that node. This caused some confusion for rule authors, because the `parent` property would not initially be present on any nodes, and it was sometimes necessary to complicate the structure of a rule to ensure that the `parent` property of a given node would be available when needed.
 
-In ESLint v5, the `parent` property is set on all AST nodes before any rules have access to the AST. This makes it easier to write some rules, because the `parent` property is always available rather than being mutated behind the scenes. However, as a side-effect of having `parent` properties, the AST object has a circular structure the first time a rule sees it (previously, it only had a circular structure after the first rule listeners were called). As a result, a custom rule that enumerates all properties of an node in order to traverse the AST might now loop forever or run out of memory if it does not check for cycles properly.
+In ESLint v5, the `parent` property is set on all AST nodes before any rules have access to the AST. This makes it easier to write some rules, because the `parent` property is always available rather than being mutated behind the scenes. However, as a side-effect of having `parent` properties, the AST object has a circular structure the first time a rule sees it (previously, it only had a circular structure after the first rule listeners were called). As a result, a custom rule that enumerates all properties of a node in order to traverse the AST might now loop forever or run out of memory if it does not check for cycles properly.
 
 **To address:** If you have written a custom rule that enumerates all properties of an AST node, consider excluding the `parent` property or implementing cycle detection to ensure that you obtain the correct result.
 
@@ -149,6 +171,16 @@ In ESLint v5, the `parent` property is set on all AST nodes before any rules hav
 When parsing JSX code like `<a>foo</a>`, the default parser will now give the `foo` AST node the `JSXText` type, rather than the `Literal` type. This makes the AST compliant with a recent update to the JSX spec.
 
 **To address:** If you have written a custom rule that relies on text nodes in JSX elements having the `Literal` type, you should update it to also work with nodes that have the `JSXText` type.
+
+## <a name="context-get-scope"></a> The `context.getScope()` method now returns more proper scopes
+
+Previously, the `context.getScope()` method changed its behavior based on the `parserOptions.ecmaVersion` property. However, this could cause confusing behavior when using a parser that doesn't respond to the `ecmaVersion` option, such as `babel-eslint`.
+
+Additionally, `context.getScope()` incorrectly returned the parent scope of the proper scope on `CatchClause` (in ES5), `ForStatement` (in ≧ES2015), `ForInStatement` (in ≧ES2015), `ForOfStatement`, and `WithStatement` nodes.
+
+In ESLint v5, the `context.getScope()` method has the same behavior regardless of `parserOptions.ecmaVersion` and returns the proper scope. See [the documentation](../developer-guide/working-with-rules#contextgetscope) for more details on which scopes are returned.
+
+**To address:** If you have written a custom rule that uses the `context.getScope()` method in node handlers, you may need to update it to account for the modified scope information.
 
 ## <a name="no-context-linter"></a> The `_linter` property on rule context objects has been removed
 

@@ -7,6 +7,8 @@ edit_link: https://github.com/eslint/eslint/edit/master/docs/rules/getter-return
 
 # Enforces that a return statement is present in property getters (getter-return)
 
+(recommended) The `"extends": "eslint:recommended"` property in a configuration file enables this rule.
+
 The get syntax binds an object property to a function that will be called when that property is looked up. It was first introduced in ECMAScript 5:
 
 ```js
@@ -81,7 +83,7 @@ class P{
 
 This rule has an object option:
 
-* `"allowImplicit": false` (default) disallows implicitly returning undefined with a return; statement.
+* `"allowImplicit": false` (default) disallows implicitly returning `undefined` with a `return` statement.
 
 Examples of **correct** code for the `{ "allowImplicit": true }` option:
 
