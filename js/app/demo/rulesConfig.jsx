@@ -3,14 +3,15 @@
 define(["react", "jsx!selectAllCheckbox"], function(React, SelectAllCheckbox) {
 
     function Rule(ref) {
+
         function handler(e) {
             ref.handleChange(e, ref.rule);
         }
         function showPopover(e) {
-            $(e.currentTarget).popover("show");
+            e.currentTarget.Popover.show();
         }
         function hidePopover(e) {
-            $(e.currentTarget).popover("hide");
+            e.currentTarget.Popover.hide();
         }
 
         return (

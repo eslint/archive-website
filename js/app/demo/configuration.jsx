@@ -1,15 +1,34 @@
 "use strict";
 
+/* global Popover */
+
 define(["react", "jsx!parserOptions", "jsx!environments", "jsx!rulesConfig"], function(React, ParserOptions, Environments, RulesConfig) {
     return React.createClass({
         displayName: "Configuration",
         getInitialState: function() {
             return { showingConfig: false };
         },
+        initPopovers: function() {
+            var popoverElements = document.querySelectorAll("[data-toggle=\"popover\"]");
+
+            for (var i = 0; i < popoverElements.length; ++i) {
+                // eslint-disable-next-line no-new
+                new Popover(popoverElements[i]);
+            }
+        },
         toggleShowingConfig: function() {
-            this.setState(function(state) {
-                return { showingConfig: !state.showingConfig };
-            });
+            var obj = this;
+
+            this.setState(
+                function(state) {
+                    return { showingConfig: !state.showingConfig };
+                },
+                function() {
+                    if (obj.state.showingConfig) {
+                        obj.initPopovers();
+                    }
+                }
+            );
         },
         render: function Configuration() {
             return (
