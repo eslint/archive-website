@@ -1,4 +1,6 @@
-var ImageObserver = (function() {
+"use strict";
+
+window.ImageObserver = (function() {
     var observer;
 
     function createObserver() {
@@ -14,16 +16,11 @@ var ImageObserver = (function() {
           "intersectionRatio" in window.IntersectionObserverEntry.prototype &&
           !("isIntersecting" in IntersectionObserverEntry.prototype)) {
             Object.defineProperty(window.IntersectionObserverEntry.prototype, "isIntersecting", {
-                get: function () {
+                get: function() {
                     return this.intersectionRatio > 0;
                 }
             });
         }
-
-        observer = new IntersectionObserver(onChange, {
-            rootMargin: "250px 0px",
-            threshold: 0.01
-        });
 
         function onChange(changes) {
             changes.forEach(function(change) {
@@ -34,6 +31,11 @@ var ImageObserver = (function() {
                 }
             });
         }
+
+        observer = new IntersectionObserver(onChange, {
+            rootMargin: "250px 0px",
+            threshold: 0.01
+        });
     }
 
     function observe() {
@@ -52,4 +54,4 @@ var ImageObserver = (function() {
         createObserver: createObserver,
         observe: observe
     };
-})();
+}());
