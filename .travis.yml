@@ -1,9 +1,10 @@
 language: ruby
 cache: bundler
-branches:
-  only:
-    - master
-script: 
-  - bundle exec jekyll algolia
+before_script:
+  - nvm install --lts
+script:
+  - npm run lint
+after_success:
+  - if [ "$TRAVIS_BRANCH" = "master" ]; then bundle exec jekyll algolia; fi
 rvm:
  - 2.5
