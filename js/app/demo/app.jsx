@@ -110,10 +110,12 @@ define(["react", "jsx!editor", "jsx!messages", "jsx!fixedCode", "jsx!configurati
             }
             window.location.hash = Unicode.encodeToBase64(serializedState);
         },
-        enableFixMode: function() {
+        enableFixMode: function(event) {
+            event.preventDefault();
             this.setState({ fix: true });
         },
-        disableFixMode: function() {
+        disableFixMode: function(event) {
+            event.preventDefault();
             this.setState({ fix: false });
         },
         render: function App() {
