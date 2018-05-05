@@ -13,7 +13,8 @@ module.exports = {
         5: false,
         6: true,
         7: false,
-        8: false
+        8: false,
+        9: false
     },
     sourceType: {
         script: false,
