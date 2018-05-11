@@ -195,6 +195,10 @@ categories:
         fixable: false
         name: guard-for-in
         recommended: false
+      - description: enforce a maximum number of classes per file
+        fixable: false
+        name: max-classes-per-file
+        recommended: false
       - description: 'disallow the use of `alert`, `confirm`, and `prompt`'
         fixable: false
         name: no-alert
@@ -836,7 +840,7 @@ categories:
       - description: >-
           enforce variables to be declared either together or separately in
           functions
-        fixable: false
+        fixable: true
         name: one-var
         recommended: false
       - description: require or disallow newlines around variable declarations
@@ -858,6 +862,12 @@ categories:
       - description: require or disallow padding lines between statements
         fixable: true
         name: padding-line-between-statements
+        recommended: false
+      - description: >-
+          disallow using Object.assign with an object literal as the first
+          argument and prefer the use of object spread instead.
+        fixable: true
+        name: prefer-object-spread
         recommended: false
       - description: require quotes around object literal property names
         fixable: true
