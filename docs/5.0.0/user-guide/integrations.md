@@ -34,7 +34,7 @@ edit_link: https://github.com/eslint/eslint/edit/master/docs/user-guide/integrat
 * Rollup: [rollup-plugin-eslint](https://www.npmjs.com/package/rollup-plugin-eslint)
 * Ember-cli: [ember-cli-eslint](https://www.npmjs.com/package/ember-cli-eslint)
 * Sails.js: [sails-hook-lint](https://www.npmjs.com/package/sails-hook-lint), [sails-eslint](https://www.npmjs.com/package/sails-eslint)
-* Start: [start-eslint](https://www.npmjs.com/package/start-eslint)
+* Start: [@start/plugin-lib-eslint](https://www.npmjs.com/package/@start/plugin-lib-eslint)
 * Brunch: [eslint-brunch](https://www.npmjs.com/package/eslint-brunch)
 
 ## Command Line Tools
