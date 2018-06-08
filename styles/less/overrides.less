@@ -69,6 +69,11 @@ p {
     left: -1.5em; /* negative padding-left of ul */
     font-family: "Glyphicons Halflings";
     color: #4d4d4d; /* hsl(0,0%,30%) is 10% lighter gray than text */
+
+    @media (max-width: @screen-xs-max) {
+      position: static;
+      margin-right: 0.5em;
+    }
   }
 
   &.removed ~ p.fixable:before {
