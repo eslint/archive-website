@@ -705,6 +705,10 @@ categories:
         fixable: false
         name: max-lines
         recommended: false
+      - description: enforce a maximum number of line of code in a function
+        fixable: false
+        name: max-lines-per-function
+        recommended: false
       - description: enforce a maximum depth that callbacks can be nested
         fixable: false
         name: max-nested-callbacks

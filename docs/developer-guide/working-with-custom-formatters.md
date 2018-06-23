@@ -14,7 +14,7 @@ The simplest formatter will be something like:
 ```javascript
 //my-awesome-formatter.js
 module.exports = function (results) {
-    console.log(JSON.stringify(results, null, 2));
+    return JSON.stringify(results, null, 2);
 }
 ```
 
@@ -37,8 +37,7 @@ The output of the previous command will be something like this
                 "message": "Expected { after 'if' condition.",
                 "line": 2,
                 "column": 1,
-                "nodeType": "IfStatement",
-                "source": "if (err) console.log('failed tests: ' + err);"
+                "nodeType": "IfStatement"
             },
             {
                 "ruleId": "no-process-exit",
@@ -46,19 +45,22 @@ The output of the previous command will be something like this
                 "message": "Don't use process.exit(); throw an error instead.",
                 "line": 3,
                 "column": 1,
-                "nodeType": "CallExpression",
-                "source": "process.exit(1);"
+                "nodeType": "CallExpression"
             }
         ],
         "errorCount": 2,
         "warningCount": 0,
+        "fixableErrorCount": 0,
+        "fixableWarningCount": 0,
         "source": "var err = doStuff();\nif (err) console.log('failed tests: ' + err);\nprocess.exit(1);\n"
     },
     {
         "filePath": "Gruntfile.js",
         "messages": [],
         "errorCount": 0,
-        "warningCount": 0
+        "warningCount": 0,
+        "fixableErrorCount": 0,
+        "fixableWarningCount": 0
     }
 ]
 ```
@@ -89,9 +91,6 @@ The following are the fields of the result object:
 - **line**: the line where the issue is located.
 - **column**: the column where the issue is located.
 - **nodeType**: the type of the node in the [AST](https://github.com/estree/estree/blob/master/spec.md#node-objects)
-- **source**: an extract of the code the line where the failure happened.
-
-**Please note**: the `source` property will be removed from the message object in an upcoming breaking release. If you depend on this property, you should now use the `source` or `output` properties from [the result object](#the-result-object) instead.
 
 ## Examples
 
@@ -101,7 +100,6 @@ A formatter that only cares about the total count of errors and warnings will lo
 
 ```javascript
 module.exports = function ( results ) {
-    var results = results || [ ];
 
     // accumulate the errors and warnings
     var summary = results.reduce( function ( seq, current ) {
@@ -111,8 +109,10 @@ module.exports = function ( results ) {
     }, { errors: 0, warnings: 0 } );
 
     if ( summary.errors > 0 || summary.warnings > 0 ) {
-        console.log( 'Errors: ' + summary.errors + ', Warnings: ' + summary.warnings + '\n' );
+        return 'Errors: ' + summary.errors + ', Warnings: ' + summary.warnings + '\n';
     }
+
+    return '';
 };
 ```
 
@@ -144,8 +144,7 @@ module.exports = function ( results ) {
                 ruleId: msg.ruleId,
                 message: msg.message,
                 line: msg.line,
-                column: msg.column,
-                source: msg.source
+                column: msg.column
             };
 
             if ( msg.severity === 1 ) {
@@ -214,8 +213,7 @@ module.exports = function ( results ) {
                 ruleId: msg.ruleId,
                 message: msg.message,
                 line: msg.line,
-                column: msg.column,
-                source: msg.source
+                column: msg.column
             };
 
             if ( msg.severity === 1 ) {
@@ -268,7 +266,7 @@ It is a bit more complicated, but using a simple formatter we can get the raw ou
 ```javascript
 // json.js
 module.exports = function ( results ) {
-    console.log( JSON.stringify( results ) );
+    return JSON.stringify( results );
 }
 ```
 

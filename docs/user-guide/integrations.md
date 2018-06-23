@@ -12,7 +12,9 @@ edit_link: https://github.com/eslint/eslint/edit/master/docs/user-guide/integrat
 * Sublime Text 3:
     * [SublimeLinter-eslint](https://github.com/roadhump/SublimeLinter-eslint)
     * [Build Next](https://github.com/albertosantini/sublimetext-buildnext)
-* [Vim](https://github.com/vim-syntastic/syntastic/tree/master/syntax_checkers/javascript)
+* Vim:
+    * [ALE](https://github.com/w0rp/ale)
+    * [Syntastic](https://github.com/vim-syntastic/syntastic/tree/master/syntax_checkers/javascript)
 * Emacs: [Flycheck](http://www.flycheck.org/) supports ESLint with the [javascript-eslint](http://www.flycheck.org/en/latest/languages.html#javascript) checker.
 * Eclipse Orion: ESLint is the [default linter](https://dev.eclipse.org/mhonarc/lists/orion-dev/msg02718.html)
 * Eclipse IDE with [Tern ESLint linter](https://github.com/angelozerr/tern.java/wiki/Tern-Linter-ESLint)
@@ -32,7 +34,7 @@ edit_link: https://github.com/eslint/eslint/edit/master/docs/user-guide/integrat
 * Rollup: [rollup-plugin-eslint](https://www.npmjs.com/package/rollup-plugin-eslint)
 * Ember-cli: [ember-cli-eslint](https://www.npmjs.com/package/ember-cli-eslint)
 * Sails.js: [sails-hook-lint](https://www.npmjs.com/package/sails-hook-lint), [sails-eslint](https://www.npmjs.com/package/sails-eslint)
-* Start: [start-eslint](https://www.npmjs.com/package/start-eslint)
+* Start: [@start/plugin-lib-eslint](https://www.npmjs.com/package/@start/plugin-lib-eslint)
 * Brunch: [eslint-brunch](https://www.npmjs.com/package/eslint-brunch)
 
 ## Command Line Tools

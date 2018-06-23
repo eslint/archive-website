@@ -123,6 +123,7 @@ You can turn this rule off if you are not concerned with the number of lines in 
 
 * [complexity](complexity)
 * [max-depth](max-depth)
+* [max-lines-per-function](max-lines-per-function)
 * [max-nested-callbacks](max-nested-callbacks)
 * [max-params](max-params)
 * [max-statements](max-statements)

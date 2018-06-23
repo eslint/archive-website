@@ -142,6 +142,31 @@ Additionally, the `context` object has the following methods:
 
 **Note:** Earlier versions of ESLint supported additional methods on the `context` object. Those methods were removed in the new format and should not be relied upon.
 
+### context.getScope()
+
+This method returns the scope which has the following types:
+
+| AST Node Type             | Scope Type |
+|:--------------------------|:-----------|
+| `Program`                 | `global`   |
+| `FunctionDeclaration`     | `function` |
+| `FunctionExpression`      | `function` |
+| `ArrowFunctionExpression` | `function` |
+| `ClassDeclaration`        | `class`    |
+| `ClassExpression`         | `class`    |
+| `BlockStatement` ※1      | `block`    |
+| `SwitchStatement` ※1     | `switch`   |
+| `ForStatement` ※2        | `for`      |
+| `ForInStatement` ※2      | `for`      |
+| `ForOfStatement` ※2      | `for`      |
+| `WithStatement`           | `with`     |
+| `CatchClause`             | `catch`    |
+| others                    | ※3        |
+
+**※1** Only if the configured parser provided the block-scope feature. The default parser provides the block-scope feature if `parserOptions.ecmaVersion` is not less than `6`.<br>
+**※2** Only if the `for` statement defines the iteration variable as a block-scoped variable (E.g., `for (let i = 0;;) {}`).<br>
+**※3** The scope of the closest ancestor node which has own scope. If the closest ancestor node has multiple scopes then it chooses the innermost scope (E.g., the `Program` node has a `global` scope and a `module` scope if `Program#sourceType` is `"module"`. The innermost scope is the `module` scope.).
+
 ### context.report()
 
 The main method you'll use is `context.report()`, which publishes a warning or error (depending on the configuration being used). This method accepts a single argument, which is an object containing the following properties:
@@ -235,16 +260,12 @@ var RuleTester = require("eslint").RuleTester;
 var ruleTester = new RuleTester();
 ruleTester.run("my-rule", rule, {
     valid: ["bar", "baz"],
-
     invalid: [
         {
             code: "foo",
             errors: [
                 {
-                    messageId: "avoidName",
-                    data: {
-                        name: "foo"
-                    }
+                    messageId: "avoidName"
                 }
             ]
         }
@@ -382,17 +403,17 @@ Once you have an instance of `SourceCode`, you can use the methods on it to work
 * `commentsExistBetween(nodeOrToken1, nodeOrToken2)` - returns `true` if comments exist between two nodes.
 
 > `skipOptions` is an object which has 3 properties; `skip`, `includeComments`, and `filter`. Default is `{skip: 0, includeComments: false, filter: null}`.
-> - `skip` is a positive integer, the number of skipping tokens. If `filter` option is given at the same time, it doesn't count filtered tokens as skipped.
-> - `includeComments` is a boolean value, the flag to include comment tokens into the result.
-> - `filter` is a function which gets a token as the first argument, if the function returns `false` then the result excludes the token.
+> * `skip` is a positive integer, the number of skipping tokens. If `filter` option is given at the same time, it doesn't count filtered tokens as skipped.
+> * `includeComments` is a boolean value, the flag to include comment tokens into the result.
+> * `filter` is a function which gets a token as the first argument, if the function returns `false` then the result excludes the token.
 >
 > `countOptions` is an object which has 3 properties; `count`, `includeComments`, and `filter`. Default is `{count: 0, includeComments: false, filter: null}`.
-> - `count` is a positive integer, the maximum number of returning tokens.
-> - `includeComments` is a boolean value, the flag to include comment tokens into the result.
-> - `filter` is a function which gets a token as the first argument, if the function returns `false` then the result excludes the token.
+> * `count` is a positive integer, the maximum number of returning tokens.
+> * `includeComments` is a boolean value, the flag to include comment tokens into the result.
+> * `filter` is a function which gets a token as the first argument, if the function returns `false` then the result excludes the token.
 >
 > `rangeOptions` is an object which has 1 property: `includeComments`.
-> - `includeComments` is a boolean value, the flag to include comment tokens into the result.
+> * `includeComments` is a boolean value, the flag to include comment tokens into the result.
 
 There are also some properties you can access:
 
@@ -438,7 +459,7 @@ module.exports = {
                 },
                 "additionalProperties": false
             }
-        ];
+        ]
     },
 };
 ```
