@@ -57419,7 +57419,7 @@ arguments[4][49][0].apply(exports,arguments)
 },{"./support/isBuffer":148,"_process":130,"dup":49,"inherits":108}],150:[function(require,module,exports){
 module.exports={
   "name": "eslint",
-  "version": "5.0.0",
+  "version": "5.0.1",
   "author": "Nicholas C. Zakas <nicholas+npm@nczconsulting.com>",
   "description": "An AST-based pattern checker for JavaScript.",
   "bin": {
@@ -105730,7 +105730,7 @@ module.exports = {
 
                 // check for functions missing @returns
                 if (!isOverride && !hasReturns && !hasConstructor && !isInterface && node.parent.kind !== "get" && node.parent.kind !== "constructor" && node.parent.kind !== "set" && !isTypeClass(node)) {
-                    if (requireReturn || functionData.returnPresent) {
+                    if (requireReturn || functionData.returnPresent && !node.async) {
                         context.report({
                             node: jsdocNode,
                             message: "Missing JSDoc @{{returns}} for function.",
