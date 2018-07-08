@@ -133,7 +133,7 @@ If you don't want to enforce a particular style for multiline comments, you can 
 
 ## Version
 
-This rule was introduced in ESLint 4.10.0.
+This rule was introduced in ESLint 4.9.0.
 
 ## Resources
 
