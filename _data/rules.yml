@@ -37,7 +37,7 @@ categories:
         name: no-control-regex
         recommended: true
       - description: disallow the use of `debugger`
-        fixable: true
+        fixable: false
         name: no-debugger
         recommended: true
       - description: disallow duplicate arguments in `function` definitions
@@ -454,12 +454,6 @@ categories:
       - description: require or disallow initialization in variable declarations
         fixable: false
         name: init-declarations
-        recommended: false
-      - description: >-
-          disallow `catch` clause parameters from shadowing variables in the
-          outer scope
-        fixable: false
-        name: no-catch-shadow
         recommended: false
       - description: disallow deleting variables
         fixable: false
@@ -1108,6 +1102,9 @@ deprecated:
     - name: newline-before-return
       replacedBy:
         - padding-line-between-statements
+    - name: no-catch-shadow
+      replacedBy:
+        - no-shadow
     - name: no-native-reassign
       replacedBy:
         - no-global-assign

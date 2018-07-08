@@ -9,8 +9,6 @@ edit_link: https://github.com/eslint/eslint/edit/master/docs/rules/no-debugger.m
 
 (recommended) The `"extends": "eslint:recommended"` property in a configuration file enables this rule.
 
-(fixable) The `--fix` option on the [command line](../user-guide/command-line-interface#fix) can automatically fix some of the problems reported by this rule.
-
 The `debugger` statement is used to tell the executing JavaScript environment to stop execution and start up a debugger at the current point in the code. This has fallen out of favor as a good practice with the advent of modern debugging and development tools. Production code should definitely not contain `debugger`, as it will cause the browser to stop executing code and open an appropriate debugger.
 
 ## Rule Details
