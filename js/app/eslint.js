@@ -57289,7 +57289,7 @@ arguments[4][49][0].apply(exports,arguments)
 },{"./support/isBuffer":109,"_process":103,"dup":49,"inherits":87}],111:[function(require,module,exports){
 module.exports={
   "name": "eslint",
-  "version": "5.0.1",
+  "version": "5.1.0",
   "author": "Nicholas C. Zakas <nicholas+npm@nczconsulting.com>",
   "description": "An AST-based pattern checker for JavaScript.",
   "bin": {
