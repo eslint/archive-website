@@ -54,5 +54,5 @@ With the hindsight of this incident, we have a few recommendations for npm packa
 
 ## Links
 
-- Original report: https://github.com/eslint/eslint-scope/issues/39
-- npm Status: https://status.npmjs.org/incidents/dn7c1fgrr7ng
+- Original report: [eslint/eslint-scope#39](https://github.com/eslint/eslint-scope/issues/39)
+- [npm Status](https://status.npmjs.org/incidents/dn7c1fgrr7ng)
