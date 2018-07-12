@@ -24,6 +24,8 @@ The maintainer whose account was compromised had reused their npm password on se
 * [`eslint-scope@3.7`](https://github.com/eslint/eslint-scope), a scope analysis library, is a dependency of several popular packages, including some older versions of [`eslint`](https://github.com/eslint/eslint) and the latest versions of [`babel-eslint`](https://github.com/babel/babel-eslint) and [`webpack`](https://github.com/webpack/webpack).
 * [`eslint-config-eslint@5.0`](https://github.com/eslint/eslint/tree/9aaf195ca691d307e8896096cefffe975218c701/packages/eslint-config-eslint) is a configuration used internally by the ESLint team, with very little usage elsewhere.
 
+If you run your own npm registry, you should unpublish the malicious versions of each package. They have already been unpublished from the npmjs.com registry.
+
 ## Attack Method
 
 Further details on the attack can be found [here](https://gist.github.com/hzoo/51cb84afdc50b14bffa6c6dc49826b3e).
