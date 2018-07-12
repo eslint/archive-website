@@ -33,7 +33,7 @@ Further details on the attack can be found [here](https://gist.github.com/hzoo/5
 With the hindsight of this incident, we have a few recommendations for npm package maintainers and users in the future:
 
 - Package maintainers and users should avoid reusing the same password across multiple different sites. A password manager like [1Password](https://1password.com/) or [LastPass](https://www.lastpass.com/) can help with this.
-- Package maintainers should [enable npm two-factor authentication](https://docs.npmjs.com/getting-started/using-two-factor-authentication). Visit https://www.npmjs.com/settings/~/tfa.
+- Package maintainers should [enable npm two-factor authentication](https://www.npmjs.com/settings/~/tfa). npm has a guide [here](https://docs.npmjs.com/getting-started/using-two-factor-authentication).
   - If you use Lerna, you can follow this [issue](https://github.com/lerna/lerna/issues/1091).
 - Package maintainers should audit and limit the number of people who have access to publish on npm.
 - Package maintainers should be careful with using any services that auto-merge dependency upgrades.
