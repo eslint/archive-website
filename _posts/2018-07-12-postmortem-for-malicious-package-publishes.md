@@ -26,7 +26,7 @@ The maintainer whose account was compromised had reused their npm password on se
 
 ## Attack Method
 
-Further details on the attack can be found [here]( https://gist.github.com/hzoo/51cb84afdc50b14bffa6c6dc49826b3e).
+Further details on the attack can be found [here](https://gist.github.com/hzoo/51cb84afdc50b14bffa6c6dc49826b3e).
 
 ## Recommendations
 
