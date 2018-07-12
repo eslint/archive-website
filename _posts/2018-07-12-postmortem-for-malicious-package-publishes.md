@@ -1,4 +1,4 @@
-# Postmortem for malicious package publishes
+# Postmortem for Malicious Packages Published on July 12th, 2018
 
 ## Summary
 
