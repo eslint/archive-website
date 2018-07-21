@@ -185,3 +185,7 @@
 - url: https://www.mongodb.com/
   src: /img/logos/mongodb.svg
   name: MongoDB
+  
+- url: https://www.directlyrics.com/
+  src: /img/logos/directlyrics.svg
+  name: Directlyrics
