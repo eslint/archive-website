@@ -14310,7 +14310,7 @@ module.exports={
   "_resolved": "https://registry.npmjs.org/espree/-/espree-4.0.0.tgz",
   "_shasum": "253998f20a0f82db5d866385799d912a83a36634",
   "_spec": "espree@^4.0.0",
-  "_where": "/Users/tkatz/code/eslint",
+  "_where": "/var/lib/jenkins/workspace/Releases/ESLint Release/eslint",
   "author": {
     "name": "Nicholas C. Zakas",
     "email": "nicholas+npm@nczconsulting.com"
@@ -24712,7 +24712,7 @@ module.exports={
   "_resolved": "https://registry.npmjs.org/doctrine/-/doctrine-2.1.0.tgz",
   "_shasum": "5cd01fc101621b42c4cd7f5d1a66243716d3f39d",
   "_spec": "doctrine@^2.1.0",
-  "_where": "/Users/tkatz/code/eslint",
+  "_where": "/var/lib/jenkins/workspace/Releases/ESLint Release/eslint",
   "bugs": {
     "url": "https://github.com/eslint/doctrine/issues"
   },
@@ -27323,7 +27323,7 @@ module.exports={
   "_resolved": "https://registry.npmjs.org/eslint-scope/-/eslint-scope-4.0.0.tgz",
   "_shasum": "50bf3071e9338bcdc43331794a0cb533f0136172",
   "_spec": "eslint-scope@^4.0.0",
-  "_where": "/Users/tkatz/code/eslint",
+  "_where": "/var/lib/jenkins/workspace/Releases/ESLint Release/eslint",
   "bugs": {
     "url": "https://github.com/eslint/eslint-scope/issues"
   },
@@ -33307,7 +33307,7 @@ module.exports={
   "_resolved": "https://registry.npmjs.org/esrecurse/-/esrecurse-4.2.1.tgz",
   "_shasum": "007a3b9fdbc2b3bb87e4879ea19c92fdbd3942cf",
   "_spec": "esrecurse@^4.1.0",
-  "_where": "/Users/tkatz/code/eslint/node_modules/eslint-scope",
+  "_where": "/var/lib/jenkins/workspace/Releases/ESLint Release/eslint/node_modules/eslint-scope",
   "babel": {
     "presets": [
       "es2015"
@@ -34227,7 +34227,7 @@ module.exports={
   "_resolved": "https://registry.npmjs.org/estraverse/-/estraverse-4.2.0.tgz",
   "_shasum": "0dee3fed31fcd469618ce7342099fc1afa0bdb13",
   "_spec": "estraverse@^4.1.1",
-  "_where": "/Users/tkatz/code/eslint/node_modules/eslint-scope",
+  "_where": "/var/lib/jenkins/workspace/Releases/ESLint Release/eslint/node_modules/eslint-scope",
   "bugs": {
     "url": "https://github.com/estools/estraverse/issues"
   },
@@ -37380,25 +37380,9 @@ module.exports = require('./globals.json');
 (function (process){
 'use strict';
 
-var _createClass = function () {
-  function defineProperties(target, props) {
-    for (var i = 0; i < props.length; i++) {
-      var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);
-    }
-  }return function (Constructor, protoProps, staticProps) {
-    if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;
-  };
-}();
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-function _classCallCheck(instance, Constructor) {
-  if (!(instance instanceof Constructor)) {
-    throw new TypeError("Cannot call a class as a function");
-  }
-}
-
-module.exports = function () {
-  return new IgnoreBase();
-};
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 // A simple implementation of make-array
 function make_array(subject) {
@@ -37406,19 +37390,303 @@ function make_array(subject) {
 }
 
 var REGEX_BLANK_LINE = /^\s+$/;
-var REGEX_LEADING_EXCAPED_EXCLAMATION = /^\\\!/;
+var REGEX_LEADING_EXCAPED_EXCLAMATION = /^\\!/;
 var REGEX_LEADING_EXCAPED_HASH = /^\\#/;
 var SLASH = '/';
 var KEY_IGNORE = typeof Symbol !== 'undefined' ? Symbol.for('node-ignore')
 /* istanbul ignore next */
 : 'node-ignore';
 
+var define = function define(object, key, value) {
+  return Object.defineProperty(object, key, { value: value });
+};
+
+var REGEX_REGEXP_RANGE = /([0-z])-([0-z])/g;
+
+// Sanitize the range of a regular expression
+// The cases are complicated, see test cases for details
+var sanitizeRange = function sanitizeRange(range) {
+  return range.replace(REGEX_REGEXP_RANGE, function (match, from, to) {
+    return from.charCodeAt(0) <= to.charCodeAt(0) ? match
+    // Invalid range (out of order) which is ok for gitignore rules but
+    //   fatal for JavaScript regular expression, so eliminate it.
+    : '';
+  });
+};
+
+// > If the pattern ends with a slash,
+// > it is removed for the purpose of the following description,
+// > but it would only find a match with a directory.
+// > In other words, foo/ will match a directory foo and paths underneath it,
+// > but will not match a regular file or a symbolic link foo
+// >  (this is consistent with the way how pathspec works in general in Git).
+// '`foo/`' will not match regular file '`foo`' or symbolic link '`foo`'
+// -> ignore-rules will not deal with it, because it costs extra `fs.stat` call
+//      you could use option `mark: true` with `glob`
+
+// '`foo/`' should not continue with the '`..`'
+var DEFAULT_REPLACER_PREFIX = [
+
+// > Trailing spaces are ignored unless they are quoted with backslash ("\")
+[
+// (a\ ) -> (a )
+// (a  ) -> (a)
+// (a \ ) -> (a  )
+/\\?\s+$/, function (match) {
+  return match.indexOf('\\') === 0 ? ' ' : '';
+}],
+
+// replace (\ ) with ' '
+[/\\\s/g, function () {
+  return ' ';
+}],
+
+// Escape metacharacters
+// which is written down by users but means special for regular expressions.
+
+// > There are 12 characters with special meanings:
+// > - the backslash \,
+// > - the caret ^,
+// > - the dollar sign $,
+// > - the period or dot .,
+// > - the vertical bar or pipe symbol |,
+// > - the question mark ?,
+// > - the asterisk or star *,
+// > - the plus sign +,
+// > - the opening parenthesis (,
+// > - the closing parenthesis ),
+// > - and the opening square bracket [,
+// > - the opening curly brace {,
+// > These special characters are often called "metacharacters".
+[/[\\^$.|*+(){]/g, function (match) {
+  return '\\' + match;
+}], [
+// > [abc] matches any character inside the brackets
+// >    (in this case a, b, or c);
+/\[([^\]/]*)($|\])/g, function (match, p1, p2) {
+  return p2 === ']' ? '[' + sanitizeRange(p1) + ']' : '\\' + match;
+}], [
+// > a question mark (?) matches a single character
+/(?!\\)\?/g, function () {
+  return '[^/]';
+}],
+
+// leading slash
+[
+
+// > A leading slash matches the beginning of the pathname.
+// > For example, "/*.c" matches "cat-file.c" but not "mozilla-sha1/sha1.c".
+// A leading slash matches the beginning of the pathname
+/^\//, function () {
+  return '^';
+}],
+
+// replace special metacharacter slash after the leading slash
+[/\//g, function () {
+  return '\\/';
+}], [
+// > A leading "**" followed by a slash means match in all directories.
+// > For example, "**/foo" matches file or directory "foo" anywhere,
+// > the same as pattern "foo".
+// > "**/foo/bar" matches file or directory "bar" anywhere that is directly
+// >   under directory "foo".
+// Notice that the '*'s have been replaced as '\\*'
+/^\^*\\\*\\\*\\\//,
+
+// '**/foo' <-> 'foo'
+function () {
+  return '^(?:.*\\/)?';
+}]];
+
+var DEFAULT_REPLACER_SUFFIX = [
+// starting
+[
+// there will be no leading '/'
+//   (which has been replaced by section "leading slash")
+// If starts with '**', adding a '^' to the regular expression also works
+/^(?=[^^])/, function startingReplacer() {
+  return !/\/(?!$)/.test(this)
+  // > If the pattern does not contain a slash /,
+  // >   Git treats it as a shell glob pattern
+  // Actually, if there is only a trailing slash,
+  //   git also treats it as a shell glob pattern
+  ? '(?:^|\\/)'
+
+  // > Otherwise, Git treats the pattern as a shell glob suitable for
+  // >   consumption by fnmatch(3)
+  : '^';
+}],
+
+// two globstars
+[
+// Use lookahead assertions so that we could match more than one `'/**'`
+/\\\/\\\*\\\*(?=\\\/|$)/g,
+
+// Zero, one or several directories
+// should not use '*', or it will be replaced by the next replacer
+
+// Check if it is not the last `'/**'`
+function (match, index, str) {
+  return index + 6 < str.length
+
+  // case: /**/
+  // > A slash followed by two consecutive asterisks then a slash matches
+  // >   zero or more directories.
+  // > For example, "a/**/b" matches "a/b", "a/x/b", "a/x/y/b" and so on.
+  // '/**/'
+  ? '(?:\\/[^\\/]+)*'
+
+  // case: /**
+  // > A trailing `"/**"` matches everything inside.
+
+  // #21: everything inside but it should not include the current folder
+  : '\\/.+';
+}],
+
+// intermediate wildcards
+[
+// Never replace escaped '*'
+// ignore rule '\*' will match the path '*'
+
+// 'abc.*/' -> go
+// 'abc.*'  -> skip this rule
+/(^|[^\\]+)\\\*(?=.+)/g,
+
+// '*.js' matches '.js'
+// '*.js' doesn't match 'abc'
+function (match, p1) {
+  return p1 + '[^\\/]*';
+}],
+
+// trailing wildcard
+[/(\^|\\\/)?\\\*$/, function (match, p1) {
+  var prefix = p1
+  // '\^':
+  // '/*' does not match ''
+  // '/*' does not match everything
+
+  // '\\\/':
+  // 'abc/*' does not match 'abc/'
+  ? p1 + '[^/]+'
+
+  // 'a*' matches 'a'
+  // 'a*' matches 'aa'
+  : '[^/]*';
+
+  return prefix + '(?=$|\\/$)';
+}], [
+// unescape
+/\\\\\\/g, function () {
+  return '\\';
+}]];
+
+var POSITIVE_REPLACERS = [].concat(DEFAULT_REPLACER_PREFIX, [
+
+// 'f'
+// matches
+// - /f(end)
+// - /f/
+// - (start)f(end)
+// - (start)f/
+// doesn't match
+// - oof
+// - foo
+// pseudo:
+// -> (^|/)f(/|$)
+
+// ending
+[
+// 'js' will not match 'js.'
+// 'ab' will not match 'abc'
+/(?:[^*/])$/,
+
+// 'js*' will not match 'a.js'
+// 'js/' will not match 'a.js'
+// 'js' will match 'a.js' and 'a.js/'
+function (match) {
+  return match + '(?=$|\\/)';
+}]], DEFAULT_REPLACER_SUFFIX);
+
+var NEGATIVE_REPLACERS = [].concat(DEFAULT_REPLACER_PREFIX, [
+
+// #24, #38
+// The MISSING rule of [gitignore docs](https://git-scm.com/docs/gitignore)
+// A negative pattern without a trailing wildcard should not
+// re-include the things inside that directory.
+
+// eg:
+// ['node_modules/*', '!node_modules']
+// should ignore `node_modules/a.js`
+[/(?:[^*])$/, function (match) {
+  return match + '(?=$|\\/$)';
+}]], DEFAULT_REPLACER_SUFFIX);
+
+// A simple cache, because an ignore rule only has only one certain meaning
+var cache = {};
+
+// @param {pattern}
+var make_regex = function make_regex(pattern, negative, ignorecase) {
+  var r = cache[pattern];
+  if (r) {
+    return r;
+  }
+
+  var replacers = negative ? NEGATIVE_REPLACERS : POSITIVE_REPLACERS;
+
+  var source = replacers.reduce(function (prev, current) {
+    return prev.replace(current[0], current[1].bind(pattern));
+  }, pattern);
+
+  return cache[pattern] = ignorecase ? new RegExp(source, 'i') : new RegExp(source);
+};
+
+// > A blank line matches no files, so it can serve as a separator for readability.
+var checkPattern = function checkPattern(pattern) {
+  return pattern && typeof pattern === 'string' && !REGEX_BLANK_LINE.test(pattern)
+
+  // > A line starting with # serves as a comment.
+  && pattern.indexOf('#') !== 0;
+};
+
+var createRule = function createRule(pattern, ignorecase) {
+  var origin = pattern;
+  var negative = false;
+
+  // > An optional prefix "!" which negates the pattern;
+  if (pattern.indexOf('!') === 0) {
+    negative = true;
+    pattern = pattern.substr(1);
+  }
+
+  pattern = pattern
+  // > Put a backslash ("\") in front of the first "!" for patterns that
+  // >   begin with a literal "!", for example, `"\!important!.txt"`.
+  .replace(REGEX_LEADING_EXCAPED_EXCLAMATION, '!')
+  // > Put a backslash ("\") in front of the first hash for patterns that
+  // >   begin with a hash.
+  .replace(REGEX_LEADING_EXCAPED_HASH, '#');
+
+  var regex = make_regex(pattern, negative, ignorecase);
+
+  return {
+    origin: origin,
+    pattern: pattern,
+    negative: negative,
+    regex: regex
+  };
+};
+
 var IgnoreBase = function () {
   function IgnoreBase() {
+    var _ref = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
+        _ref$ignorecase = _ref.ignorecase,
+        ignorecase = _ref$ignorecase === undefined ? true : _ref$ignorecase;
+
     _classCallCheck(this, IgnoreBase);
 
     this._rules = [];
-    this[KEY_IGNORE] = true;
+    this._ignorecase = ignorecase;
+    define(this, KEY_IGNORE, true);
     this._initCache();
   }
 
@@ -37467,20 +37735,11 @@ var IgnoreBase = function () {
         return;
       }
 
-      if (this._checkPattern(pattern)) {
-        var rule = this._createRule(pattern);
+      if (checkPattern(pattern)) {
+        var rule = createRule(pattern, this._ignorecase);
         this._added = true;
         this._rules.push(rule);
       }
-    }
-  }, {
-    key: '_checkPattern',
-    value: function _checkPattern(pattern) {
-      // > A blank line matches no files, so it can serve as a separator for readability.
-      return pattern && typeof pattern === 'string' && !REGEX_BLANK_LINE.test(pattern)
-
-      // > A line starting with # serves as a comment.
-      && pattern.indexOf('#') !== 0;
     }
   }, {
     key: 'filter',
@@ -37505,33 +37764,6 @@ var IgnoreBase = function () {
     value: function ignores(path) {
       return !this._filter(path);
     }
-  }, {
-    key: '_createRule',
-    value: function _createRule(pattern) {
-      var origin = pattern;
-      var negative = false;
-
-      // > An optional prefix "!" which negates the pattern;
-      if (pattern.indexOf('!') === 0) {
-        negative = true;
-        pattern = pattern.substr(1);
-      }
-
-      pattern = pattern
-      // > Put a backslash ("\") in front of the first "!" for patterns that begin with a literal "!", for example, `"\!important!.txt"`.
-      .replace(REGEX_LEADING_EXCAPED_EXCLAMATION, '!')
-      // > Put a backslash ("\") in front of the first hash for patterns that begin with a hash.
-      .replace(REGEX_LEADING_EXCAPED_HASH, '#');
-
-      var regex = make_regex(pattern, negative);
-
-      return {
-        origin: origin,
-        pattern: pattern,
-        negative: negative,
-        regex: regex
-      };
-    }
 
     // @returns `Boolean` true if the `path` is NOT ignored
 
@@ -37555,7 +37787,8 @@ var IgnoreBase = function () {
       slices.pop();
 
       return this._cache[path] = slices.length
-      // > It is not possible to re-include a file if a parent directory of that file is excluded.
+      // > It is not possible to re-include a file if a parent directory of
+      // >   that file is excluded.
       // If the path contains a parent directory, check the parent first
       ? this._filter(slices.join(SLASH) + SLASH, slices) && this._test(path)
 
@@ -37586,235 +37819,31 @@ var IgnoreBase = function () {
   return IgnoreBase;
 }();
 
-// > If the pattern ends with a slash,
-// > it is removed for the purpose of the following description,
-// > but it would only find a match with a directory.
-// > In other words, foo/ will match a directory foo and paths underneath it,
-// > but will not match a regular file or a symbolic link foo
-// >  (this is consistent with the way how pathspec works in general in Git).
-// '`foo/`' will not match regular file '`foo`' or symbolic link '`foo`'
-// -> ignore-rules will not deal with it, because it costs extra `fs.stat` call
-//      you could use option `mark: true` with `glob`
-
-// '`foo/`' should not continue with the '`..`'
-
-
-var DEFAULT_REPLACER_PREFIX = [
-
-// > Trailing spaces are ignored unless they are quoted with backslash ("\")
-[
-// (a\ ) -> (a )
-// (a  ) -> (a)
-// (a \ ) -> (a  )
-/\\?\s+$/, function (match) {
-  return match.indexOf('\\') === 0 ? ' ' : '';
-}],
-
-// replace (\ ) with ' '
-[/\\\s/g, function () {
-  return ' ';
-}],
-
-// Escape metacharacters
-// which is written down by users but means special for regular expressions.
-
-// > There are 12 characters with special meanings:
-// > - the backslash \,
-// > - the caret ^,
-// > - the dollar sign $,
-// > - the period or dot .,
-// > - the vertical bar or pipe symbol |,
-// > - the question mark ?,
-// > - the asterisk or star *,
-// > - the plus sign +,
-// > - the opening parenthesis (,
-// > - the closing parenthesis ),
-// > - and the opening square bracket [,
-// > - the opening curly brace {,
-// > These special characters are often called "metacharacters".
-[/[\\\^$.|?*+()\[{]/g, function (match) {
-  return '\\' + match;
-}],
-
-// leading slash
-[
-
-// > A leading slash matches the beginning of the pathname.
-// > For example, "/*.c" matches "cat-file.c" but not "mozilla-sha1/sha1.c".
-// A leading slash matches the beginning of the pathname
-/^\//, function () {
-  return '^';
-}],
-
-// replace special metacharacter slash after the leading slash
-[/\//g, function () {
-  return '\\/';
-}], [
-// > A leading "**" followed by a slash means match in all directories.
-// > For example, "**/foo" matches file or directory "foo" anywhere,
-// > the same as pattern "foo".
-// > "**/foo/bar" matches file or directory "bar" anywhere that is directly under directory "foo".
-// Notice that the '*'s have been replaced as '\\*'
-/^\^*\\\*\\\*\\\//,
-
-// '**/foo' <-> 'foo'
-function () {
-  return '^(?:.*\\/)?';
-}]];
-
-var DEFAULT_REPLACER_SUFFIX = [
-// starting
-[
-// there will be no leading '/' (which has been replaced by section "leading slash")
-// If starts with '**', adding a '^' to the regular expression also works
-/^(?=[^\^])/, function () {
-  return !/\/(?!$)/.test(this)
-  // > If the pattern does not contain a slash /, Git treats it as a shell glob pattern
-  // Actually, if there is only a trailing slash, git also treats it as a shell glob pattern
-  ? '(?:^|\\/)'
-
-  // > Otherwise, Git treats the pattern as a shell glob suitable for consumption by fnmatch(3)
-  : '^';
-}],
-
-// two globstars
-[
-// Use lookahead assertions so that we could match more than one `'/**'`
-/\\\/\\\*\\\*(?=\\\/|$)/g,
-
-// Zero, one or several directories
-// should not use '*', or it will be replaced by the next replacer
-
-// Check if it is not the last `'/**'`
-function (match, index, str) {
-  return index + 6 < str.length
-
-  // case: /**/
-  // > A slash followed by two consecutive asterisks then a slash matches zero or more directories.
-  // > For example, "a/**/b" matches "a/b", "a/x/b", "a/x/y/b" and so on.
-  // '/**/'
-  ? '(?:\\/[^\\/]+)*'
-
-  // case: /**
-  // > A trailing `"/**"` matches everything inside.
-
-  // #21: everything inside but it should not include the current folder
-  : '\\/.+';
-}],
-
-// intermediate wildcards
-[
-// Never replace escaped '*'
-// ignore rule '\*' will match the path '*'
-
-// 'abc.*/' -> go
-// 'abc.*'  -> skip this rule
-/(^|[^\\]+)\\\*(?=.+)/g,
-
-// '*.js' matches '.js'
-// '*.js' doesn't match 'abc'
-function (match, p1) {
-  return p1 + '[^\\/]*';
-}],
-
-// trailing wildcard
-[/(\^|\\\/)?\\\*$/, function (match, p1) {
-  return (p1
-  // '\^':
-  // '/*' does not match ''
-  // '/*' does not match everything
-
-  // '\\\/':
-  // 'abc/*' does not match 'abc/'
-  ? p1 + '[^/]+'
-
-  // 'a*' matches 'a'
-  // 'a*' matches 'aa'
-  : '[^/]*') + '(?=$|\\/$)';
-}], [
-// unescape
-/\\\\\\/g, function () {
-  return '\\';
-}]];
-
-var POSITIVE_REPLACERS = [].concat(DEFAULT_REPLACER_PREFIX, [
-
-// 'f'
-// matches
-// - /f(end)
-// - /f/
-// - (start)f(end)
-// - (start)f/
-// doesn't match
-// - oof
-// - foo
-// pseudo:
-// -> (^|/)f(/|$)
-
-// ending
-[
-// 'js' will not match 'js.'
-// 'ab' will not match 'abc'
-/(?:[^*\/])$/,
-
-// 'js*' will not match 'a.js'
-// 'js/' will not match 'a.js'
-// 'js' will match 'a.js' and 'a.js/'
-function (match) {
-  return match + '(?=$|\\/)';
-}]], DEFAULT_REPLACER_SUFFIX);
-
-var NEGATIVE_REPLACERS = [].concat(DEFAULT_REPLACER_PREFIX, [
-
-// #24, #38
-// The MISSING rule of [gitignore docs](https://git-scm.com/docs/gitignore)
-// A negative pattern without a trailing wildcard should not
-// re-include the things inside that directory.
-
-// eg:
-// ['node_modules/*', '!node_modules']
-// should ignore `node_modules/a.js`
-[/(?:[^*])$/, function (match) {
-  return match + '(?=$|\\/$)';
-}]], DEFAULT_REPLACER_SUFFIX);
-
-// A simple cache, because an ignore rule only has only one certain meaning
-var cache = {};
-
-// @param {pattern}
-function make_regex(pattern, negative) {
-  var r = cache[pattern];
-  if (r) {
-    return r;
-  }
-
-  var replacers = negative ? NEGATIVE_REPLACERS : POSITIVE_REPLACERS;
-
-  var source = replacers.reduce(function (prev, current) {
-    return prev.replace(current[0], current[1].bind(pattern));
-  }, pattern);
-
-  return cache[pattern] = new RegExp(source, 'i');
-}
-
 // Windows
 // --------------------------------------------------------------
 /* istanbul ignore if  */
+
+
 if (
 // Detect `process` so that it can run in browsers.
 typeof process !== 'undefined' && (process.env && process.env.IGNORE_TEST_WIN32 || process.platform === 'win32')) {
-
   var filter = IgnoreBase.prototype._filter;
+
+  /* eslint no-control-regex: "off" */
   var make_posix = function make_posix(str) {
     return (/^\\\\\?\\/.test(str) || /[^\x00-\x80]+/.test(str) ? str : str.replace(/\\/g, '/')
     );
   };
 
-  IgnoreBase.prototype._filter = function (path, slices) {
+  IgnoreBase.prototype._filter = function filterWin32(path, slices) {
     path = make_posix(path);
     return filter.call(this, path, slices);
   };
 }
+
+module.exports = function (options) {
+  return new IgnoreBase(options);
+};
 
 }).call(this,require('_process'))
 },{"_process":103}],87:[function(require,module,exports){
@@ -57289,7 +57318,7 @@ arguments[4][49][0].apply(exports,arguments)
 },{"./support/isBuffer":109,"_process":103,"dup":49,"inherits":87}],111:[function(require,module,exports){
 module.exports={
   "name": "eslint",
-  "version": "5.1.0",
+  "version": "5.2.0",
   "author": "Nicholas C. Zakas <nicholas+npm@nczconsulting.com>",
   "description": "An AST-based pattern checker for JavaScript.",
   "bin": {
@@ -57340,7 +57369,7 @@ module.exports={
     "functional-red-black-tree": "^1.0.1",
     "glob": "^7.1.2",
     "globals": "^11.7.0",
-    "ignore": "^3.3.3",
+    "ignore": "^4.0.2",
     "imurmurhash": "^0.1.4",
     "inquirer": "^5.2.0",
     "is-resolvable": "^1.1.0",
@@ -57378,7 +57407,7 @@ module.exports={
     "dateformat": "^3.0.3",
     "ejs": "^2.6.1",
     "eslint-plugin-eslint-plugin": "^1.2.0",
-    "eslint-plugin-node": "^6.0.1",
+    "eslint-plugin-node": "^7.0.1",
     "eslint-plugin-rulesdir": "^0.1.0",
     "eslint-release": "^0.11.1",
     "eslint-rule-composer": "^0.3.0",
@@ -62713,7 +62742,7 @@ module.exports = {
 };
 
 }).call(this,require('_process'))
-},{"../../conf/config-schema.js":1,"../util/ajv":401,"_process":103,"lodash":92,"path":96,"util":110}],122:[function(require,module,exports){
+},{"../../conf/config-schema.js":1,"../util/ajv":400,"_process":103,"lodash":92,"path":96,"util":110}],122:[function(require,module,exports){
 /**
  * @fileoverview Environments manager
  * @author Nicholas C. Zakas
@@ -62865,7 +62894,7 @@ var eslintScope = require("eslint-scope"),
     Traverser = require("./util/traverser"),
     createReportTranslator = require("./report-translator"),
     Rules = require("./rules"),
-    timing = require("./timing"),
+    timing = require("./util/timing"),
     astUtils = require("./ast-utils"),
     pkg = require("../package.json"),
     SourceCodeFixer = require("./util/source-code-fixer");
@@ -63308,11 +63337,11 @@ function resolveParserOptions(parserName, providedOptions, enabledEnvironments) 
  * @returns {Object} The resolved globals object
  */
 function resolveGlobals(providedGlobals, enabledEnvironments) {
-    return Object.assign.apply(null, [{}].concat(enabledEnvironments.filter(function (env) {
+    return Object.assign.apply(Object, [{}].concat(_toConsumableArray(enabledEnvironments.filter(function (env) {
         return env.globals;
     }).map(function (env) {
         return env.globals;
-    })).concat(providedGlobals));
+    })), [providedGlobals]));
 }
 
 /**
@@ -64024,7 +64053,7 @@ module.exports = function () {
     return Linter;
 }();
 
-},{"../package.json":111,"./ast-utils":112,"./code-path-analysis/code-path-analyzer":113,"./config/config-ops":120,"./config/config-validator":121,"./config/environments":122,"./report-translator":125,"./rules":126,"./timing":387,"./util/apply-disable-directives":402,"./util/node-event-generator":406,"./util/safe-emitter":409,"./util/source-code":411,"./util/source-code-fixer":410,"./util/traverser":412,"debug":53,"eslint-scope":60,"eslint-visitor-keys":69,"levn":90,"lodash":92}],124:[function(require,module,exports){
+},{"../package.json":111,"./ast-utils":112,"./code-path-analysis/code-path-analyzer":113,"./config/config-ops":120,"./config/config-validator":121,"./config/environments":122,"./report-translator":125,"./rules":126,"./util/apply-disable-directives":401,"./util/node-event-generator":405,"./util/safe-emitter":408,"./util/source-code":410,"./util/source-code-fixer":409,"./util/timing":411,"./util/traverser":412,"debug":53,"eslint-scope":60,"eslint-visitor-keys":69,"levn":90,"lodash":92}],124:[function(require,module,exports){
 "use strict";
 
 module.exports = function () {
@@ -64599,7 +64628,7 @@ module.exports = function createReportTranslator(metadata) {
     };
 };
 
-},{"./util/interpolate":404,"./util/rule-fixer":408,"assert":46}],126:[function(require,module,exports){
+},{"./util/interpolate":403,"./util/rule-fixer":407,"assert":46}],126:[function(require,module,exports){
 /**
  * @fileoverview Defines a storage for rules.
  * @author Nicholas C. Zakas
@@ -67482,7 +67511,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":112,"../util/patterns/letters":407}],141:[function(require,module,exports){
+},{"../ast-utils":112,"../util/patterns/letters":406}],141:[function(require,module,exports){
 /**
  * @fileoverview Rule to enforce that all class methods use 'this'.
  * @author Patrick Williams
@@ -70159,7 +70188,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":112,"../util/keywords":405}],154:[function(require,module,exports){
+},{"../ast-utils":112,"../util/keywords":404}],154:[function(require,module,exports){
 /**
  * @fileoverview Require or disallow newline at the end of files
  * @author Nodeca Team <https://github.com/nodeca>
@@ -76309,7 +76338,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":112,"../util/keywords":405}],177:[function(require,module,exports){
+},{"../ast-utils":112,"../util/keywords":404}],177:[function(require,module,exports){
 /**
  * @fileoverview Rule to enforce the position of line comments
  * @author Alberto Rodríguez
@@ -82483,7 +82512,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":112,"../util/fix-tracker":403}],224:[function(require,module,exports){
+},{"../ast-utils":112,"../util/fix-tracker":402}],224:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag the use of empty character classes in regular expressions
  * @author Ian Christian Myers
@@ -84560,7 +84589,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":112,"../util/fix-tracker":403}],237:[function(require,module,exports){
+},{"../ast-utils":112,"../util/fix-tracker":402}],237:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag fall-through cases in switch statements.
  * @author Matt DuVall <http://mattduvall.com/>
@@ -95005,7 +95034,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":112,"../util/fix-tracker":403}],328:[function(require,module,exports){
+},{"../ast-utils":112,"../util/fix-tracker":402}],328:[function(require,module,exports){
 /**
  * @fileoverview Rule to check for the usage of var.
  * @author Jamund Ferguson
@@ -101255,7 +101284,7 @@ module.exports = {
     }
 };
 
-},{"../util/keywords":405,"espree":"espree"}],355:[function(require,module,exports){
+},{"../util/keywords":404,"espree":"espree"}],355:[function(require,module,exports){
 /**
  * @fileoverview A rule to choose between single and double quote marks
  * @author Matt DuVall <http://www.mattduvall.com/>, Brandon Payton
@@ -102737,7 +102766,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":112,"../util/fix-tracker":403}],364:[function(require,module,exports){
+},{"../ast-utils":112,"../util/fix-tracker":402}],364:[function(require,module,exports){
 /**
  * @fileoverview Rule to require sorting of import declarations
  * @author Christian Schuller
@@ -106622,148 +106651,6 @@ module.exports = {
 };
 
 },{"../ast-utils":112}],387:[function(require,module,exports){
-(function (process){
-/**
- * @fileoverview Tracks performance of individual rules.
- * @author Brandon Mills
- */
-
-"use strict";
-
-//------------------------------------------------------------------------------
-// Helpers
-//------------------------------------------------------------------------------
-
-/* istanbul ignore next */
-/**
- * Align the string to left
- * @param {string} str string to evaluate
- * @param {int} len length of the string
- * @param {string} ch delimiter character
- * @returns {string} modified string
- * @private
- */
-
-function alignLeft(str, len, ch) {
-    return str + new Array(len - str.length + 1).join(ch || " ");
-}
-
-/* istanbul ignore next */
-/**
- * Align the string to right
- * @param {string} str string to evaluate
- * @param {int} len length of the string
- * @param {string} ch delimiter character
- * @returns {string} modified string
- * @private
- */
-function alignRight(str, len, ch) {
-    return new Array(len - str.length + 1).join(ch || " ") + str;
-}
-
-//------------------------------------------------------------------------------
-// Module definition
-//------------------------------------------------------------------------------
-
-var enabled = !!process.env.TIMING;
-
-var HEADERS = ["Rule", "Time (ms)", "Relative"];
-var ALIGN = [alignLeft, alignRight, alignRight];
-
-/* istanbul ignore next */
-/**
- * display the data
- * @param {Object} data Data object to be displayed
- * @returns {string} modified string
- * @private
- */
-function display(data) {
-    var total = 0;
-    var rows = Object.keys(data).map(function (key) {
-        var time = data[key];
-
-        total += time;
-        return [key, time];
-    }).sort(function (a, b) {
-        return b[1] - a[1];
-    }).slice(0, 10);
-
-    rows.forEach(function (row) {
-        row.push((row[1] * 100 / total).toFixed(1) + "%");
-        row[1] = row[1].toFixed(3);
-    });
-
-    rows.unshift(HEADERS);
-
-    var widths = [];
-
-    rows.forEach(function (row) {
-        var len = row.length;
-
-        for (var i = 0; i < len; i++) {
-            var n = row[i].length;
-
-            if (!widths[i] || n > widths[i]) {
-                widths[i] = n;
-            }
-        }
-    });
-
-    var table = rows.map(function (row) {
-        return row.map(function (cell, index) {
-            return ALIGN[index](cell, widths[index]);
-        }).join(" | ");
-    });
-
-    table.splice(1, 0, widths.map(function (width, index) {
-        var extraAlignment = index !== 0 && index !== widths.length - 1 ? 2 : 1;
-
-        return ALIGN[index](":", width + extraAlignment, "-");
-    }).join("|"));
-
-    console.log(table.join("\n")); // eslint-disable-line no-console
-}
-
-/* istanbul ignore next */
-module.exports = function () {
-
-    var data = Object.create(null);
-
-    /**
-     * Time the run
-     * @param {*} key key from the data object
-     * @param {Function} fn function to be called
-     * @returns {Function} function to be executed
-     * @private
-     */
-    function time(key, fn) {
-        if (typeof data[key] === "undefined") {
-            data[key] = 0;
-        }
-
-        return function () {
-            var t = process.hrtime();
-
-            fn.apply(undefined, arguments);
-            t = process.hrtime(t);
-            data[key] += t[0] * 1e3 + t[1] / 1e6;
-        };
-    }
-
-    if (enabled) {
-        process.on("exit", function () {
-            display(data);
-        });
-    }
-
-    return {
-        time: time,
-        enabled: enabled
-    };
-}();
-
-}).call(this,require('_process'))
-},{"_process":103}],388:[function(require,module,exports){
 /**
  * @fileoverview Define the cursor which iterates tokens and comments in reverse.
  * @author Toru Nagashima
@@ -106842,7 +106729,7 @@ module.exports = function (_Cursor) {
     return BackwardTokenCommentCursor;
 }(Cursor);
 
-},{"./cursor":390,"./utils":400}],389:[function(require,module,exports){
+},{"./cursor":389,"./utils":399}],388:[function(require,module,exports){
 /**
  * @fileoverview Define the cursor which iterates tokens only in reverse.
  * @author Toru Nagashima
@@ -106925,7 +106812,7 @@ module.exports = function (_Cursor) {
     return BackwardTokenCursor;
 }(Cursor);
 
-},{"./cursor":390,"./utils":400}],390:[function(require,module,exports){
+},{"./cursor":389,"./utils":399}],389:[function(require,module,exports){
 /**
  * @fileoverview Define the abstract class about cursors which iterate tokens.
  * @author Toru Nagashima
@@ -107024,7 +106911,7 @@ module.exports = function () {
   return Cursor;
 }();
 
-},{}],391:[function(require,module,exports){
+},{}],390:[function(require,module,exports){
 /**
  * @fileoverview Define 2 token factories; forward and backward.
  * @author Toru Nagashima
@@ -107135,7 +107022,7 @@ var CursorFactory = function () {
 exports.forward = new CursorFactory(ForwardTokenCursor, ForwardTokenCommentCursor);
 exports.backward = new CursorFactory(BackwardTokenCursor, BackwardTokenCommentCursor);
 
-},{"./backward-token-comment-cursor":388,"./backward-token-cursor":389,"./filter-cursor":393,"./forward-token-comment-cursor":394,"./forward-token-cursor":395,"./limit-cursor":397,"./skip-cursor":399}],392:[function(require,module,exports){
+},{"./backward-token-comment-cursor":387,"./backward-token-cursor":388,"./filter-cursor":392,"./forward-token-comment-cursor":393,"./forward-token-cursor":394,"./limit-cursor":396,"./skip-cursor":398}],391:[function(require,module,exports){
 /**
  * @fileoverview Define the abstract class about cursors which manipulate another cursor.
  * @author Toru Nagashima
@@ -107196,7 +107083,7 @@ module.exports = function (_Cursor) {
   return DecorativeCursor;
 }(Cursor);
 
-},{"./cursor":390}],393:[function(require,module,exports){
+},{"./cursor":389}],392:[function(require,module,exports){
 /**
  * @fileoverview Define the cursor which ignores specified tokens.
  * @author Toru Nagashima
@@ -107263,7 +107150,7 @@ module.exports = function (_DecorativeCursor) {
     return FilterCursor;
 }(DecorativeCursor);
 
-},{"./decorative-cursor":392}],394:[function(require,module,exports){
+},{"./decorative-cursor":391}],393:[function(require,module,exports){
 /**
  * @fileoverview Define the cursor which iterates tokens and comments.
  * @author Toru Nagashima
@@ -107342,7 +107229,7 @@ module.exports = function (_Cursor) {
     return ForwardTokenCommentCursor;
 }(Cursor);
 
-},{"./cursor":390,"./utils":400}],395:[function(require,module,exports){
+},{"./cursor":389,"./utils":399}],394:[function(require,module,exports){
 /**
  * @fileoverview Define the cursor which iterates tokens only.
  * @author Toru Nagashima
@@ -107433,7 +107320,7 @@ module.exports = function (_Cursor) {
     return ForwardTokenCursor;
 }(Cursor);
 
-},{"./cursor":390,"./utils":400}],396:[function(require,module,exports){
+},{"./cursor":389,"./utils":399}],395:[function(require,module,exports){
 /**
  * @fileoverview Object to handle access and retrieval of tokens.
  * @author Brandon Mills
@@ -108003,7 +107890,7 @@ module.exports = function () {
     return TokenStore;
 }();
 
-},{"../ast-utils":112,"./cursors":391,"./forward-token-cursor":395,"./padded-token-cursor":398,"./utils":400,"assert":46}],397:[function(require,module,exports){
+},{"../ast-utils":112,"./cursors":390,"./forward-token-cursor":394,"./padded-token-cursor":397,"./utils":399,"assert":46}],396:[function(require,module,exports){
 /**
  * @fileoverview Define the cursor which limits the number of tokens.
  * @author Toru Nagashima
@@ -108067,7 +107954,7 @@ module.exports = function (_DecorativeCursor) {
     return LimitCursor;
 }(DecorativeCursor);
 
-},{"./decorative-cursor":392}],398:[function(require,module,exports){
+},{"./decorative-cursor":391}],397:[function(require,module,exports){
 /**
  * @fileoverview Define the cursor which iterates tokens only, with inflated range.
  * @author Toru Nagashima
@@ -108120,7 +108007,7 @@ module.exports = function (_ForwardTokenCursor) {
   return PaddedTokenCursor;
 }(ForwardTokenCursor);
 
-},{"./forward-token-cursor":395}],399:[function(require,module,exports){
+},{"./forward-token-cursor":394}],398:[function(require,module,exports){
 /**
  * @fileoverview Define the cursor which ignores the first few tokens.
  * @author Toru Nagashima
@@ -108186,7 +108073,7 @@ module.exports = function (_DecorativeCursor) {
     return SkipCursor;
 }(DecorativeCursor);
 
-},{"./decorative-cursor":392}],400:[function(require,module,exports){
+},{"./decorative-cursor":391}],399:[function(require,module,exports){
 /**
  * @fileoverview Define utilify functions for token store.
  * @author Toru Nagashima
@@ -108288,7 +108175,7 @@ exports.getLastIndex = function getLastIndex(tokens, indexMap, endLoc) {
     return tokens.length - 1;
 };
 
-},{"lodash":92}],401:[function(require,module,exports){
+},{"lodash":92}],400:[function(require,module,exports){
 /**
  * @fileoverview The instance of Ajv validator.
  * @author Evgeny Poberezkin
@@ -108320,7 +108207,7 @@ ajv._opts.defaultMeta = metaSchema.id;
 
 module.exports = ajv;
 
-},{"ajv":4,"ajv/lib/refs/json-schema-draft-04.json":44}],402:[function(require,module,exports){
+},{"ajv":4,"ajv/lib/refs/json-schema-draft-04.json":44}],401:[function(require,module,exports){
 /**
  * @fileoverview A module that filters reported problems based on `eslint-disable` and `eslint-enable` comments
  * @author Teddy Katz
@@ -108489,7 +108376,7 @@ module.exports = function (options) {
     return options.reportUnusedDisableDirectives ? lineDirectivesResult.problems.concat(blockDirectivesResult.unusedDisableDirectives).concat(lineDirectivesResult.unusedDisableDirectives).sort(compareLocations) : lineDirectivesResult.problems;
 };
 
-},{"lodash":92}],403:[function(require,module,exports){
+},{"lodash":92}],402:[function(require,module,exports){
 /**
  * @fileoverview Helper class to aid in constructing fix commands.
  * @author Alan Pierce
@@ -108629,7 +108516,7 @@ var FixTracker = function () {
 
 module.exports = FixTracker;
 
-},{"../ast-utils":112}],404:[function(require,module,exports){
+},{"../ast-utils":112}],403:[function(require,module,exports){
 /**
  * @fileoverview Interpolate keys from an object into a string with {{ }} markers.
  * @author Jed Fox
@@ -108659,7 +108546,7 @@ module.exports = function (text, data) {
     });
 };
 
-},{}],405:[function(require,module,exports){
+},{}],404:[function(require,module,exports){
 /**
  * @fileoverview A shared list of ES3 keywords.
  * @author Josh Perez
@@ -108668,7 +108555,7 @@ module.exports = function (text, data) {
 
 module.exports = ["abstract", "boolean", "break", "byte", "case", "catch", "char", "class", "const", "continue", "debugger", "default", "delete", "do", "double", "else", "enum", "export", "extends", "false", "final", "finally", "float", "for", "function", "goto", "if", "implements", "import", "in", "instanceof", "int", "interface", "long", "native", "new", "null", "package", "private", "protected", "public", "return", "short", "static", "super", "switch", "synchronized", "this", "throw", "throws", "transient", "true", "try", "typeof", "var", "void", "volatile", "while", "with"];
 
-},{}],406:[function(require,module,exports){
+},{}],405:[function(require,module,exports){
 /**
  * @fileoverview The event generator for AST nodes.
  * @author Toru Nagashima
@@ -109011,7 +108898,7 @@ var NodeEventGenerator = function () {
 
 module.exports = NodeEventGenerator;
 
-},{"esquery":71,"lodash":92}],407:[function(require,module,exports){
+},{"esquery":71,"lodash":92}],406:[function(require,module,exports){
 /**
  * @fileoverview Pattern for detecting any letter (even letters outside of ASCII).
  * NOTE: This file was generated using this script in JSCS based on the Unicode 7.0.0 standard: https://github.com/jscs-dev/node-jscs/blob/f5ed14427deb7e7aac84f3056a5aab2d9f3e563e/publish/helpers/generate-patterns.js
@@ -109049,7 +108936,7 @@ module.exports = NodeEventGenerator;
 
 module.exports = /[A-Za-z\xAA\xB5\xBA\xC0-\xD6\xD8-\xF6\xF8-\u02C1\u02C6-\u02D1\u02E0-\u02E4\u02EC\u02EE\u0370-\u0374\u0376\u0377\u037A-\u037D\u037F\u0386\u0388-\u038A\u038C\u038E-\u03A1\u03A3-\u03F5\u03F7-\u0481\u048A-\u052F\u0531-\u0556\u0559\u0561-\u0587\u05D0-\u05EA\u05F0-\u05F2\u0620-\u064A\u066E\u066F\u0671-\u06D3\u06D5\u06E5\u06E6\u06EE\u06EF\u06FA-\u06FC\u06FF\u0710\u0712-\u072F\u074D-\u07A5\u07B1\u07CA-\u07EA\u07F4\u07F5\u07FA\u0800-\u0815\u081A\u0824\u0828\u0840-\u0858\u08A0-\u08B2\u0904-\u0939\u093D\u0950\u0958-\u0961\u0971-\u0980\u0985-\u098C\u098F\u0990\u0993-\u09A8\u09AA-\u09B0\u09B2\u09B6-\u09B9\u09BD\u09CE\u09DC\u09DD\u09DF-\u09E1\u09F0\u09F1\u0A05-\u0A0A\u0A0F\u0A10\u0A13-\u0A28\u0A2A-\u0A30\u0A32\u0A33\u0A35\u0A36\u0A38\u0A39\u0A59-\u0A5C\u0A5E\u0A72-\u0A74\u0A85-\u0A8D\u0A8F-\u0A91\u0A93-\u0AA8\u0AAA-\u0AB0\u0AB2\u0AB3\u0AB5-\u0AB9\u0ABD\u0AD0\u0AE0\u0AE1\u0B05-\u0B0C\u0B0F\u0B10\u0B13-\u0B28\u0B2A-\u0B30\u0B32\u0B33\u0B35-\u0B39\u0B3D\u0B5C\u0B5D\u0B5F-\u0B61\u0B71\u0B83\u0B85-\u0B8A\u0B8E-\u0B90\u0B92-\u0B95\u0B99\u0B9A\u0B9C\u0B9E\u0B9F\u0BA3\u0BA4\u0BA8-\u0BAA\u0BAE-\u0BB9\u0BD0\u0C05-\u0C0C\u0C0E-\u0C10\u0C12-\u0C28\u0C2A-\u0C39\u0C3D\u0C58\u0C59\u0C60\u0C61\u0C85-\u0C8C\u0C8E-\u0C90\u0C92-\u0CA8\u0CAA-\u0CB3\u0CB5-\u0CB9\u0CBD\u0CDE\u0CE0\u0CE1\u0CF1\u0CF2\u0D05-\u0D0C\u0D0E-\u0D10\u0D12-\u0D3A\u0D3D\u0D4E\u0D60\u0D61\u0D7A-\u0D7F\u0D85-\u0D96\u0D9A-\u0DB1\u0DB3-\u0DBB\u0DBD\u0DC0-\u0DC6\u0E01-\u0E30\u0E32\u0E33\u0E40-\u0E46\u0E81\u0E82\u0E84\u0E87\u0E88\u0E8A\u0E8D\u0E94-\u0E97\u0E99-\u0E9F\u0EA1-\u0EA3\u0EA5\u0EA7\u0EAA\u0EAB\u0EAD-\u0EB0\u0EB2\u0EB3\u0EBD\u0EC0-\u0EC4\u0EC6\u0EDC-\u0EDF\u0F00\u0F40-\u0F47\u0F49-\u0F6C\u0F88-\u0F8C\u1000-\u102A\u103F\u1050-\u1055\u105A-\u105D\u1061\u1065\u1066\u106E-\u1070\u1075-\u1081\u108E\u10A0-\u10C5\u10C7\u10CD\u10D0-\u10FA\u10FC-\u1248\u124A-\u124D\u1250-\u1256\u1258\u125A-\u125D\u1260-\u1288\u128A-\u128D\u1290-\u12B0\u12B2-\u12B5\u12B8-\u12BE\u12C0\u12C2-\u12C5\u12C8-\u12D6\u12D8-\u1310\u1312-\u1315\u1318-\u135A\u1380-\u138F\u13A0-\u13F4\u1401-\u166C\u166F-\u167F\u1681-\u169A\u16A0-\u16EA\u16F1-\u16F8\u1700-\u170C\u170E-\u1711\u1720-\u1731\u1740-\u1751\u1760-\u176C\u176E-\u1770\u1780-\u17B3\u17D7\u17DC\u1820-\u1877\u1880-\u18A8\u18AA\u18B0-\u18F5\u1900-\u191E\u1950-\u196D\u1970-\u1974\u1980-\u19AB\u19C1-\u19C7\u1A00-\u1A16\u1A20-\u1A54\u1AA7\u1B05-\u1B33\u1B45-\u1B4B\u1B83-\u1BA0\u1BAE\u1BAF\u1BBA-\u1BE5\u1C00-\u1C23\u1C4D-\u1C4F\u1C5A-\u1C7D\u1CE9-\u1CEC\u1CEE-\u1CF1\u1CF5\u1CF6\u1D00-\u1DBF\u1E00-\u1F15\u1F18-\u1F1D\u1F20-\u1F45\u1F48-\u1F4D\u1F50-\u1F57\u1F59\u1F5B\u1F5D\u1F5F-\u1F7D\u1F80-\u1FB4\u1FB6-\u1FBC\u1FBE\u1FC2-\u1FC4\u1FC6-\u1FCC\u1FD0-\u1FD3\u1FD6-\u1FDB\u1FE0-\u1FEC\u1FF2-\u1FF4\u1FF6-\u1FFC\u2071\u207F\u2090-\u209C\u2102\u2107\u210A-\u2113\u2115\u2119-\u211D\u2124\u2126\u2128\u212A-\u212D\u212F-\u2139\u213C-\u213F\u2145-\u2149\u214E\u2183\u2184\u2C00-\u2C2E\u2C30-\u2C5E\u2C60-\u2CE4\u2CEB-\u2CEE\u2CF2\u2CF3\u2D00-\u2D25\u2D27\u2D2D\u2D30-\u2D67\u2D6F\u2D80-\u2D96\u2DA0-\u2DA6\u2DA8-\u2DAE\u2DB0-\u2DB6\u2DB8-\u2DBE\u2DC0-\u2DC6\u2DC8-\u2DCE\u2DD0-\u2DD6\u2DD8-\u2DDE\u2E2F\u3005\u3006\u3031-\u3035\u303B\u303C\u3041-\u3096\u309D-\u309F\u30A1-\u30FA\u30FC-\u30FF\u3105-\u312D\u3131-\u318E\u31A0-\u31BA\u31F0-\u31FF\u3400-\u4DB5\u4E00-\u9FCC\uA000-\uA48C\uA4D0-\uA4FD\uA500-\uA60C\uA610-\uA61F\uA62A\uA62B\uA640-\uA66E\uA67F-\uA69D\uA6A0-\uA6E5\uA717-\uA71F\uA722-\uA788\uA78B-\uA78E\uA790-\uA7AD\uA7B0\uA7B1\uA7F7-\uA801\uA803-\uA805\uA807-\uA80A\uA80C-\uA822\uA840-\uA873\uA882-\uA8B3\uA8F2-\uA8F7\uA8FB\uA90A-\uA925\uA930-\uA946\uA960-\uA97C\uA984-\uA9B2\uA9CF\uA9E0-\uA9E4\uA9E6-\uA9EF\uA9FA-\uA9FE\uAA00-\uAA28\uAA40-\uAA42\uAA44-\uAA4B\uAA60-\uAA76\uAA7A\uAA7E-\uAAAF\uAAB1\uAAB5\uAAB6\uAAB9-\uAABD\uAAC0\uAAC2\uAADB-\uAADD\uAAE0-\uAAEA\uAAF2-\uAAF4\uAB01-\uAB06\uAB09-\uAB0E\uAB11-\uAB16\uAB20-\uAB26\uAB28-\uAB2E\uAB30-\uAB5A\uAB5C-\uAB5F\uAB64\uAB65\uABC0-\uABE2\uAC00-\uD7A3\uD7B0-\uD7C6\uD7CB-\uD7FB\uF900-\uFA6D\uFA70-\uFAD9\uFB00-\uFB06\uFB13-\uFB17\uFB1D\uFB1F-\uFB28\uFB2A-\uFB36\uFB38-\uFB3C\uFB3E\uFB40\uFB41\uFB43\uFB44\uFB46-\uFBB1\uFBD3-\uFD3D\uFD50-\uFD8F\uFD92-\uFDC7\uFDF0-\uFDFB\uFE70-\uFE74\uFE76-\uFEFC\uFF21-\uFF3A\uFF41-\uFF5A\uFF66-\uFFBE\uFFC2-\uFFC7\uFFCA-\uFFCF\uFFD2-\uFFD7\uFFDA-\uFFDC]|\uD800[\uDC00-\uDC0B\uDC0D-\uDC26\uDC28-\uDC3A\uDC3C\uDC3D\uDC3F-\uDC4D\uDC50-\uDC5D\uDC80-\uDCFA\uDE80-\uDE9C\uDEA0-\uDED0\uDF00-\uDF1F\uDF30-\uDF40\uDF42-\uDF49\uDF50-\uDF75\uDF80-\uDF9D\uDFA0-\uDFC3\uDFC8-\uDFCF]|\uD801[\uDC00-\uDC9D\uDD00-\uDD27\uDD30-\uDD63\uDE00-\uDF36\uDF40-\uDF55\uDF60-\uDF67]|\uD802[\uDC00-\uDC05\uDC08\uDC0A-\uDC35\uDC37\uDC38\uDC3C\uDC3F-\uDC55\uDC60-\uDC76\uDC80-\uDC9E\uDD00-\uDD15\uDD20-\uDD39\uDD80-\uDDB7\uDDBE\uDDBF\uDE00\uDE10-\uDE13\uDE15-\uDE17\uDE19-\uDE33\uDE60-\uDE7C\uDE80-\uDE9C\uDEC0-\uDEC7\uDEC9-\uDEE4\uDF00-\uDF35\uDF40-\uDF55\uDF60-\uDF72\uDF80-\uDF91]|\uD803[\uDC00-\uDC48]|\uD804[\uDC03-\uDC37\uDC83-\uDCAF\uDCD0-\uDCE8\uDD03-\uDD26\uDD50-\uDD72\uDD76\uDD83-\uDDB2\uDDC1-\uDDC4\uDDDA\uDE00-\uDE11\uDE13-\uDE2B\uDEB0-\uDEDE\uDF05-\uDF0C\uDF0F\uDF10\uDF13-\uDF28\uDF2A-\uDF30\uDF32\uDF33\uDF35-\uDF39\uDF3D\uDF5D-\uDF61]|\uD805[\uDC80-\uDCAF\uDCC4\uDCC5\uDCC7\uDD80-\uDDAE\uDE00-\uDE2F\uDE44\uDE80-\uDEAA]|\uD806[\uDCA0-\uDCDF\uDCFF\uDEC0-\uDEF8]|\uD808[\uDC00-\uDF98]|[\uD80C\uD840-\uD868\uD86A-\uD86C][\uDC00-\uDFFF]|\uD80D[\uDC00-\uDC2E]|\uD81A[\uDC00-\uDE38\uDE40-\uDE5E\uDED0-\uDEED\uDF00-\uDF2F\uDF40-\uDF43\uDF63-\uDF77\uDF7D-\uDF8F]|\uD81B[\uDF00-\uDF44\uDF50\uDF93-\uDF9F]|\uD82C[\uDC00\uDC01]|\uD82F[\uDC00-\uDC6A\uDC70-\uDC7C\uDC80-\uDC88\uDC90-\uDC99]|\uD835[\uDC00-\uDC54\uDC56-\uDC9C\uDC9E\uDC9F\uDCA2\uDCA5\uDCA6\uDCA9-\uDCAC\uDCAE-\uDCB9\uDCBB\uDCBD-\uDCC3\uDCC5-\uDD05\uDD07-\uDD0A\uDD0D-\uDD14\uDD16-\uDD1C\uDD1E-\uDD39\uDD3B-\uDD3E\uDD40-\uDD44\uDD46\uDD4A-\uDD50\uDD52-\uDEA5\uDEA8-\uDEC0\uDEC2-\uDEDA\uDEDC-\uDEFA\uDEFC-\uDF14\uDF16-\uDF34\uDF36-\uDF4E\uDF50-\uDF6E\uDF70-\uDF88\uDF8A-\uDFA8\uDFAA-\uDFC2\uDFC4-\uDFCB]|\uD83A[\uDC00-\uDCC4]|\uD83B[\uDE00-\uDE03\uDE05-\uDE1F\uDE21\uDE22\uDE24\uDE27\uDE29-\uDE32\uDE34-\uDE37\uDE39\uDE3B\uDE42\uDE47\uDE49\uDE4B\uDE4D-\uDE4F\uDE51\uDE52\uDE54\uDE57\uDE59\uDE5B\uDE5D\uDE5F\uDE61\uDE62\uDE64\uDE67-\uDE6A\uDE6C-\uDE72\uDE74-\uDE77\uDE79-\uDE7C\uDE7E\uDE80-\uDE89\uDE8B-\uDE9B\uDEA1-\uDEA3\uDEA5-\uDEA9\uDEAB-\uDEBB]|\uD869[\uDC00-\uDED6\uDF00-\uDFFF]|\uD86D[\uDC00-\uDF34\uDF40-\uDFFF]|\uD86E[\uDC00-\uDC1D]|\uD87E[\uDC00-\uDE1D]/;
 
-},{}],408:[function(require,module,exports){
+},{}],407:[function(require,module,exports){
 /**
  * @fileoverview An object that creates fix commands for rules.
  * @author Nicholas C. Zakas
@@ -109197,7 +109084,7 @@ var ruleFixer = Object.freeze({
 
 module.exports = ruleFixer;
 
-},{}],409:[function(require,module,exports){
+},{}],408:[function(require,module,exports){
 /**
  * @fileoverview A variant of EventEmitter which does not give listeners information about each other
  * @author Teddy Katz
@@ -109258,7 +109145,7 @@ module.exports = function () {
     });
 };
 
-},{}],410:[function(require,module,exports){
+},{}],409:[function(require,module,exports){
 /**
  * @fileoverview An object that caches and applies source code fixes.
  * @author Nicholas C. Zakas
@@ -109433,7 +109320,7 @@ SourceCodeFixer.applyFixes = function (sourceText, messages, shouldFix) {
 
 module.exports = SourceCodeFixer;
 
-},{"debug":53}],411:[function(require,module,exports){
+},{"debug":53}],410:[function(require,module,exports){
 /**
  * @fileoverview Abstraction of JavaScript source code.
  * @author Nicholas C. Zakas
@@ -109976,7 +109863,149 @@ var SourceCode = function (_TokenStore) {
 
 module.exports = SourceCode;
 
-},{"../ast-utils":112,"../token-store":396,"./traverser":412,"lodash":92}],412:[function(require,module,exports){
+},{"../ast-utils":112,"../token-store":395,"./traverser":412,"lodash":92}],411:[function(require,module,exports){
+(function (process){
+/**
+ * @fileoverview Tracks performance of individual rules.
+ * @author Brandon Mills
+ */
+
+"use strict";
+
+//------------------------------------------------------------------------------
+// Helpers
+//------------------------------------------------------------------------------
+
+/* istanbul ignore next */
+/**
+ * Align the string to left
+ * @param {string} str string to evaluate
+ * @param {int} len length of the string
+ * @param {string} ch delimiter character
+ * @returns {string} modified string
+ * @private
+ */
+
+function alignLeft(str, len, ch) {
+    return str + new Array(len - str.length + 1).join(ch || " ");
+}
+
+/* istanbul ignore next */
+/**
+ * Align the string to right
+ * @param {string} str string to evaluate
+ * @param {int} len length of the string
+ * @param {string} ch delimiter character
+ * @returns {string} modified string
+ * @private
+ */
+function alignRight(str, len, ch) {
+    return new Array(len - str.length + 1).join(ch || " ") + str;
+}
+
+//------------------------------------------------------------------------------
+// Module definition
+//------------------------------------------------------------------------------
+
+var enabled = !!process.env.TIMING;
+
+var HEADERS = ["Rule", "Time (ms)", "Relative"];
+var ALIGN = [alignLeft, alignRight, alignRight];
+
+/* istanbul ignore next */
+/**
+ * display the data
+ * @param {Object} data Data object to be displayed
+ * @returns {string} modified string
+ * @private
+ */
+function display(data) {
+    var total = 0;
+    var rows = Object.keys(data).map(function (key) {
+        var time = data[key];
+
+        total += time;
+        return [key, time];
+    }).sort(function (a, b) {
+        return b[1] - a[1];
+    }).slice(0, 10);
+
+    rows.forEach(function (row) {
+        row.push((row[1] * 100 / total).toFixed(1) + "%");
+        row[1] = row[1].toFixed(3);
+    });
+
+    rows.unshift(HEADERS);
+
+    var widths = [];
+
+    rows.forEach(function (row) {
+        var len = row.length;
+
+        for (var i = 0; i < len; i++) {
+            var n = row[i].length;
+
+            if (!widths[i] || n > widths[i]) {
+                widths[i] = n;
+            }
+        }
+    });
+
+    var table = rows.map(function (row) {
+        return row.map(function (cell, index) {
+            return ALIGN[index](cell, widths[index]);
+        }).join(" | ");
+    });
+
+    table.splice(1, 0, widths.map(function (width, index) {
+        var extraAlignment = index !== 0 && index !== widths.length - 1 ? 2 : 1;
+
+        return ALIGN[index](":", width + extraAlignment, "-");
+    }).join("|"));
+
+    console.log(table.join("\n")); // eslint-disable-line no-console
+}
+
+/* istanbul ignore next */
+module.exports = function () {
+
+    var data = Object.create(null);
+
+    /**
+     * Time the run
+     * @param {*} key key from the data object
+     * @param {Function} fn function to be called
+     * @returns {Function} function to be executed
+     * @private
+     */
+    function time(key, fn) {
+        if (typeof data[key] === "undefined") {
+            data[key] = 0;
+        }
+
+        return function () {
+            var t = process.hrtime();
+
+            fn.apply(undefined, arguments);
+            t = process.hrtime(t);
+            data[key] += t[0] * 1e3 + t[1] / 1e6;
+        };
+    }
+
+    if (enabled) {
+        process.on("exit", function () {
+            display(data);
+        });
+    }
+
+    return {
+        time: time,
+        enabled: enabled
+    };
+}();
+
+}).call(this,require('_process'))
+},{"_process":103}],412:[function(require,module,exports){
 /**
  * @fileoverview Traverser to traverse AST trees.
  * @author Nicholas C. Zakas
