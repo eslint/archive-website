@@ -153,7 +153,7 @@ You can safely disable this rule if you do not have any strict conventions about
 
 ## Compatibility
 
-* **JSCS**: [requireMultiLineTernary](http://jscs.info/rule/requireMultiLineTernary)
+* **JSCS**: `requireMultiLineTernary`
 
 ## Version
 

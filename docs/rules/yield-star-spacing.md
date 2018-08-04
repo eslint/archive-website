@@ -7,14 +7,14 @@ edit_link: https://github.com/eslint/eslint/edit/master/docs/rules/yield-star-sp
 
 # Enforce spacing around the `*` in `yield*` expressions (yield-star-spacing)
 
-(fixable) The `--fix` option on the [command line](../user-guide/command-line-interface#fix) can automatically fix some of the problems reported by this rule.
+(fixable) The `--fix` option on the [command line](../user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
 
 ## Rule Details
 
 This rule enforces spacing around the `*` in `yield*` expressions.
 
-To use this rule you either need to [use the `es6` environment](../user-guide/configuring) or
-[set `ecmaVersion` to `6` in `parserOptions`](../user-guide/configuring).
+To use this rule you either need to [use the `es6` environment](../user-guide/configuring#specifying-environments) or
+[set `ecmaVersion` to `6` in `parserOptions`](../user-guide/configuring#specifying-parser-options).
 
 ## Options
 

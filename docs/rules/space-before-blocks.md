@@ -7,7 +7,7 @@ edit_link: https://github.com/eslint/eslint/edit/master/docs/rules/space-before-
 
 # Require Or Disallow Space Before Blocks (space-before-blocks)
 
-(fixable) The `--fix` option on the [command line](../user-guide/command-line-interface#fix) can automatically fix some of the problems reported by this rule.
+(fixable) The `--fix` option on the [command line](../user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
 
 Consistency is an important part of any style guide.
 While it is a personal preference where to put the opening brace of blocks,

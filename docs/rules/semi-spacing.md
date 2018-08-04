@@ -7,7 +7,7 @@ edit_link: https://github.com/eslint/eslint/edit/master/docs/rules/semi-spacing.
 
 # Enforce spacing before and after semicolons (semi-spacing)
 
-(fixable) The `--fix` option on the [command line](../user-guide/command-line-interface#fix) can automatically fix some of the problems reported by this rule.
+(fixable) The `--fix` option on the [command line](../user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
 
 JavaScript allows you to place unnecessary spaces before or after a semicolon.
 

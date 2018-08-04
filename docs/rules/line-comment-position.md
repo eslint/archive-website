@@ -110,7 +110,7 @@ If you aren't concerned about having different line comment styles, then you can
 
 ## Compatibility
 
-**JSCS**: [validateCommentPosition](http://jscs.info/rule/validateCommentPosition)
+**JSCS**: `validateCommentPosition`
 
 ## Version
 

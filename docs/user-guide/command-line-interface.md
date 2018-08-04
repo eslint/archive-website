@@ -322,18 +322,18 @@ When specified, the given format is output into the provided file name.
 
 This option specifies the output format for the console. Possible formats are:
 
-* [checkstyle](formatters)
-* [codeframe](formatters)
-* [compact](formatters)
-* [html](formatters)
-* [jslint-xml](formatters)
-* [json](formatters)
-* [junit](formatters)
-* [stylish](formatters) (the default)
-* [table](formatters)
-* [tap](formatters)
-* [unix](formatters)
-* [visualstudio](formatters)
+* [checkstyle](formatters/#checkstyle)
+* [codeframe](formatters/#codeframe)
+* [compact](formatters/#compact)
+* [html](formatters/#html)
+* [jslint-xml](formatters/#jslint-xml)
+* [json](formatters/#json)
+* [junit](formatters/#junit)
+* [stylish](formatters/#stylish) (the default)
+* [table](formatters/#table)
+* [tap](formatters/#tap)
+* [unix](formatters/#unix)
+* [visualstudio](formatters/#visualstudio)
 
 Example:
 
@@ -462,7 +462,7 @@ ESLint supports `.eslintignore` files to exclude files from the linting process 
     node_modules/*
     **/vendor/*.js
 
-A more detailed breakdown of supported patterns and directories ESLint ignores by default can be found in [Configuring ESLint](configuring).
+A more detailed breakdown of supported patterns and directories ESLint ignores by default can be found in [Configuring ESLint](configuring#ignoring-files-and-directories).
 
 ## Exit codes
 

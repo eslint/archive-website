@@ -50934,15 +50934,2727 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 Object.defineProperty(exports, '__esModule', { value: true });
 
-var ast = Object.freeze({});
+var ast = /*#__PURE__*/Object.freeze({});
 
-function assert(condition, message) {
-    if (!condition) {
-        throw new Error(message || "AssertionError");
-    }
+function isIdStart(cp) {
+    if (cp < 0x41) return false;
+    if (cp < 0x5b) return true;
+    if (cp < 0x61) return false;
+    if (cp < 0x7b) return true;
+    return isLargeIdStart(cp);
 }
-function last(xs) {
-    return xs.length === 0 ? undefined : xs[xs.length - 1];
+function isIdContinue(cp) {
+    if (cp < 0x30) return false;
+    if (cp < 0x3a) return true;
+    if (cp < 0x41) return false;
+    if (cp < 0x5b) return true;
+    if (cp === 0x5f) return true;
+    if (cp < 0x61) return false;
+    if (cp < 0x7b) return true;
+    return isLargeIdStart(cp) || isLargeIdContinue(cp);
+}
+function isLargeIdStart(cp) {
+    if (cp < 0x30a1) {
+        if (cp < 0xec0) {
+            if (cp < 0xa35) {
+                if (cp < 0x6e5) {
+                    if (cp < 0x37a) {
+                        if (cp < 0x294) {
+                            if (cp < 0xf8) {
+                                if (cp === 0xaa) return true;
+                                if (cp === 0xb5) return true;
+                                if (cp === 0xba) return true;
+                                if (cp < 0xc0) return false;
+                                if (cp < 0xd7) return true;
+                                if (cp < 0xd8) return false;
+                                if (cp < 0xf7) return true;
+                                return false;
+                            }
+                            if (cp < 0x1bb) return true;
+                            if (cp === 0x1bb) return true;
+                            if (cp < 0x1bc) return false;
+                            if (cp < 0x1c0) return true;
+                            if (cp < 0x1c0) return false;
+                            if (cp < 0x1c4) return true;
+                            if (cp < 0x1c4) return false;
+                            if (cp < 0x294) return true;
+                            return false;
+                        }
+                        if (cp < 0x2ec) {
+                            if (cp === 0x294) return true;
+                            if (cp < 0x295) return false;
+                            if (cp < 0x2b0) return true;
+                            if (cp < 0x2b0) return false;
+                            if (cp < 0x2c2) return true;
+                            if (cp < 0x2c6) return false;
+                            if (cp < 0x2d2) return true;
+                            if (cp < 0x2e0) return false;
+                            if (cp < 0x2e5) return true;
+                            return false;
+                        }
+                        if (cp === 0x2ec) return true;
+                        if (cp === 0x2ee) return true;
+                        if (cp < 0x370) return false;
+                        if (cp < 0x374) return true;
+                        if (cp === 0x374) return true;
+                        if (cp < 0x376) return false;
+                        if (cp < 0x378) return true;
+                        return false;
+                    }
+                    if (cp < 0x531) {
+                        if (cp < 0x38c) {
+                            if (cp === 0x37a) return true;
+                            if (cp < 0x37b) return false;
+                            if (cp < 0x37e) return true;
+                            if (cp === 0x37f) return true;
+                            if (cp === 0x386) return true;
+                            if (cp < 0x388) return false;
+                            if (cp < 0x38b) return true;
+                            return false;
+                        }
+                        if (cp === 0x38c) return true;
+                        if (cp < 0x38e) return false;
+                        if (cp < 0x3a2) return true;
+                        if (cp < 0x3a3) return false;
+                        if (cp < 0x3f6) return true;
+                        if (cp < 0x3f7) return false;
+                        if (cp < 0x482) return true;
+                        if (cp < 0x48a) return false;
+                        if (cp < 0x530) return true;
+                        return false;
+                    }
+                    if (cp < 0x620) {
+                        if (cp < 0x531) return false;
+                        if (cp < 0x557) return true;
+                        if (cp === 0x559) return true;
+                        if (cp < 0x560) return false;
+                        if (cp < 0x589) return true;
+                        if (cp < 0x5d0) return false;
+                        if (cp < 0x5eb) return true;
+                        if (cp < 0x5ef) return false;
+                        if (cp < 0x5f3) return true;
+                        return false;
+                    }
+                    if (cp < 0x640) return true;
+                    if (cp === 0x640) return true;
+                    if (cp < 0x641) return false;
+                    if (cp < 0x64b) return true;
+                    if (cp < 0x66e) return false;
+                    if (cp < 0x670) return true;
+                    if (cp < 0x671) return false;
+                    if (cp < 0x6d4) return true;
+                    if (cp === 0x6d5) return true;
+                    return false;
+                }
+                if (cp < 0x950) {
+                    if (cp < 0x7fa) {
+                        if (cp < 0x712) {
+                            if (cp < 0x6e5) return false;
+                            if (cp < 0x6e7) return true;
+                            if (cp < 0x6ee) return false;
+                            if (cp < 0x6f0) return true;
+                            if (cp < 0x6fa) return false;
+                            if (cp < 0x6fd) return true;
+                            if (cp === 0x6ff) return true;
+                            if (cp === 0x710) return true;
+                            return false;
+                        }
+                        if (cp < 0x730) return true;
+                        if (cp < 0x74d) return false;
+                        if (cp < 0x7a6) return true;
+                        if (cp === 0x7b1) return true;
+                        if (cp < 0x7ca) return false;
+                        if (cp < 0x7eb) return true;
+                        if (cp < 0x7f4) return false;
+                        if (cp < 0x7f6) return true;
+                        return false;
+                    }
+                    if (cp < 0x840) {
+                        if (cp === 0x7fa) return true;
+                        if (cp < 0x800) return false;
+                        if (cp < 0x816) return true;
+                        if (cp === 0x81a) return true;
+                        if (cp === 0x824) return true;
+                        if (cp === 0x828) return true;
+                        return false;
+                    }
+                    if (cp < 0x859) return true;
+                    if (cp < 0x860) return false;
+                    if (cp < 0x86b) return true;
+                    if (cp < 0x8a0) return false;
+                    if (cp < 0x8b5) return true;
+                    if (cp < 0x8b6) return false;
+                    if (cp < 0x8be) return true;
+                    if (cp < 0x904) return false;
+                    if (cp < 0x93a) return true;
+                    if (cp === 0x93d) return true;
+                    return false;
+                }
+                if (cp < 0x9bd) {
+                    if (cp < 0x98f) {
+                        if (cp === 0x950) return true;
+                        if (cp < 0x958) return false;
+                        if (cp < 0x962) return true;
+                        if (cp === 0x971) return true;
+                        if (cp < 0x972) return false;
+                        if (cp < 0x981) return true;
+                        if (cp < 0x985) return false;
+                        if (cp < 0x98d) return true;
+                        return false;
+                    }
+                    if (cp < 0x991) return true;
+                    if (cp < 0x993) return false;
+                    if (cp < 0x9a9) return true;
+                    if (cp < 0x9aa) return false;
+                    if (cp < 0x9b1) return true;
+                    if (cp === 0x9b2) return true;
+                    if (cp < 0x9b6) return false;
+                    if (cp < 0x9ba) return true;
+                    return false;
+                }
+                if (cp < 0x9fc) {
+                    if (cp === 0x9bd) return true;
+                    if (cp === 0x9ce) return true;
+                    if (cp < 0x9dc) return false;
+                    if (cp < 0x9de) return true;
+                    if (cp < 0x9df) return false;
+                    if (cp < 0x9e2) return true;
+                    if (cp < 0x9f0) return false;
+                    if (cp < 0x9f2) return true;
+                    return false;
+                }
+                if (cp === 0x9fc) return true;
+                if (cp < 0xa05) return false;
+                if (cp < 0xa0b) return true;
+                if (cp < 0xa0f) return false;
+                if (cp < 0xa11) return true;
+                if (cp < 0xa13) return false;
+                if (cp < 0xa29) return true;
+                if (cp < 0xa2a) return false;
+                if (cp < 0xa31) return true;
+                if (cp < 0xa32) return false;
+                if (cp < 0xa34) return true;
+                return false;
+            }
+            if (cp < 0xc60) {
+                if (cp < 0xb3d) {
+                    if (cp < 0xab5) {
+                        if (cp < 0xa85) {
+                            if (cp < 0xa35) return false;
+                            if (cp < 0xa37) return true;
+                            if (cp < 0xa38) return false;
+                            if (cp < 0xa3a) return true;
+                            if (cp < 0xa59) return false;
+                            if (cp < 0xa5d) return true;
+                            if (cp === 0xa5e) return true;
+                            if (cp < 0xa72) return false;
+                            if (cp < 0xa75) return true;
+                            return false;
+                        }
+                        if (cp < 0xa8e) return true;
+                        if (cp < 0xa8f) return false;
+                        if (cp < 0xa92) return true;
+                        if (cp < 0xa93) return false;
+                        if (cp < 0xaa9) return true;
+                        if (cp < 0xaaa) return false;
+                        if (cp < 0xab1) return true;
+                        if (cp < 0xab2) return false;
+                        if (cp < 0xab4) return true;
+                        return false;
+                    }
+                    if (cp < 0xb05) {
+                        if (cp < 0xab5) return false;
+                        if (cp < 0xaba) return true;
+                        if (cp === 0xabd) return true;
+                        if (cp === 0xad0) return true;
+                        if (cp < 0xae0) return false;
+                        if (cp < 0xae2) return true;
+                        if (cp === 0xaf9) return true;
+                        return false;
+                    }
+                    if (cp < 0xb0d) return true;
+                    if (cp < 0xb0f) return false;
+                    if (cp < 0xb11) return true;
+                    if (cp < 0xb13) return false;
+                    if (cp < 0xb29) return true;
+                    if (cp < 0xb2a) return false;
+                    if (cp < 0xb31) return true;
+                    if (cp < 0xb32) return false;
+                    if (cp < 0xb34) return true;
+                    if (cp < 0xb35) return false;
+                    if (cp < 0xb3a) return true;
+                    return false;
+                }
+                if (cp < 0xb9e) {
+                    if (cp < 0xb85) {
+                        if (cp === 0xb3d) return true;
+                        if (cp < 0xb5c) return false;
+                        if (cp < 0xb5e) return true;
+                        if (cp < 0xb5f) return false;
+                        if (cp < 0xb62) return true;
+                        if (cp === 0xb71) return true;
+                        if (cp === 0xb83) return true;
+                        return false;
+                    }
+                    if (cp < 0xb8b) return true;
+                    if (cp < 0xb8e) return false;
+                    if (cp < 0xb91) return true;
+                    if (cp < 0xb92) return false;
+                    if (cp < 0xb96) return true;
+                    if (cp < 0xb99) return false;
+                    if (cp < 0xb9b) return true;
+                    if (cp === 0xb9c) return true;
+                    return false;
+                }
+                if (cp < 0xc05) {
+                    if (cp < 0xb9e) return false;
+                    if (cp < 0xba0) return true;
+                    if (cp < 0xba3) return false;
+                    if (cp < 0xba5) return true;
+                    if (cp < 0xba8) return false;
+                    if (cp < 0xbab) return true;
+                    if (cp < 0xbae) return false;
+                    if (cp < 0xbba) return true;
+                    if (cp === 0xbd0) return true;
+                    return false;
+                }
+                if (cp < 0xc0d) return true;
+                if (cp < 0xc0e) return false;
+                if (cp < 0xc11) return true;
+                if (cp < 0xc12) return false;
+                if (cp < 0xc29) return true;
+                if (cp < 0xc2a) return false;
+                if (cp < 0xc3a) return true;
+                if (cp === 0xc3d) return true;
+                if (cp < 0xc58) return false;
+                if (cp < 0xc5b) return true;
+                return false;
+            }
+            if (cp < 0xdb3) {
+                if (cp < 0xcf1) {
+                    if (cp < 0xcaa) {
+                        if (cp < 0xc60) return false;
+                        if (cp < 0xc62) return true;
+                        if (cp === 0xc80) return true;
+                        if (cp < 0xc85) return false;
+                        if (cp < 0xc8d) return true;
+                        if (cp < 0xc8e) return false;
+                        if (cp < 0xc91) return true;
+                        if (cp < 0xc92) return false;
+                        if (cp < 0xca9) return true;
+                        return false;
+                    }
+                    if (cp < 0xcb4) return true;
+                    if (cp < 0xcb5) return false;
+                    if (cp < 0xcba) return true;
+                    if (cp === 0xcbd) return true;
+                    if (cp === 0xcde) return true;
+                    if (cp < 0xce0) return false;
+                    if (cp < 0xce2) return true;
+                    return false;
+                }
+                if (cp < 0xd4e) {
+                    if (cp < 0xcf1) return false;
+                    if (cp < 0xcf3) return true;
+                    if (cp < 0xd05) return false;
+                    if (cp < 0xd0d) return true;
+                    if (cp < 0xd0e) return false;
+                    if (cp < 0xd11) return true;
+                    if (cp < 0xd12) return false;
+                    if (cp < 0xd3b) return true;
+                    if (cp === 0xd3d) return true;
+                    return false;
+                }
+                if (cp === 0xd4e) return true;
+                if (cp < 0xd54) return false;
+                if (cp < 0xd57) return true;
+                if (cp < 0xd5f) return false;
+                if (cp < 0xd62) return true;
+                if (cp < 0xd7a) return false;
+                if (cp < 0xd80) return true;
+                if (cp < 0xd85) return false;
+                if (cp < 0xd97) return true;
+                if (cp < 0xd9a) return false;
+                if (cp < 0xdb2) return true;
+                return false;
+            }
+            if (cp < 0xe8a) {
+                if (cp < 0xe40) {
+                    if (cp < 0xdb3) return false;
+                    if (cp < 0xdbc) return true;
+                    if (cp === 0xdbd) return true;
+                    if (cp < 0xdc0) return false;
+                    if (cp < 0xdc7) return true;
+                    if (cp < 0xe01) return false;
+                    if (cp < 0xe31) return true;
+                    if (cp < 0xe32) return false;
+                    if (cp < 0xe34) return true;
+                    return false;
+                }
+                if (cp < 0xe46) return true;
+                if (cp === 0xe46) return true;
+                if (cp < 0xe81) return false;
+                if (cp < 0xe83) return true;
+                if (cp === 0xe84) return true;
+                if (cp < 0xe87) return false;
+                if (cp < 0xe89) return true;
+                return false;
+            }
+            if (cp < 0xea5) {
+                if (cp === 0xe8a) return true;
+                if (cp === 0xe8d) return true;
+                if (cp < 0xe94) return false;
+                if (cp < 0xe98) return true;
+                if (cp < 0xe99) return false;
+                if (cp < 0xea0) return true;
+                if (cp < 0xea1) return false;
+                if (cp < 0xea4) return true;
+                return false;
+            }
+            if (cp === 0xea5) return true;
+            if (cp === 0xea7) return true;
+            if (cp < 0xeaa) return false;
+            if (cp < 0xeac) return true;
+            if (cp < 0xead) return false;
+            if (cp < 0xeb1) return true;
+            if (cp < 0xeb2) return false;
+            if (cp < 0xeb4) return true;
+            if (cp === 0xebd) return true;
+            return false;
+        }
+        if (cp < 0x1ce9) {
+            if (cp < 0x166f) {
+                if (cp < 0x10fd) {
+                    if (cp < 0x105a) {
+                        if (cp < 0xf49) {
+                            if (cp < 0xec0) return false;
+                            if (cp < 0xec5) return true;
+                            if (cp === 0xec6) return true;
+                            if (cp < 0xedc) return false;
+                            if (cp < 0xee0) return true;
+                            if (cp === 0xf00) return true;
+                            if (cp < 0xf40) return false;
+                            if (cp < 0xf48) return true;
+                            return false;
+                        }
+                        if (cp < 0xf6d) return true;
+                        if (cp < 0xf88) return false;
+                        if (cp < 0xf8d) return true;
+                        if (cp < 0x1000) return false;
+                        if (cp < 0x102b) return true;
+                        if (cp === 0x103f) return true;
+                        if (cp < 0x1050) return false;
+                        if (cp < 0x1056) return true;
+                        return false;
+                    }
+                    if (cp < 0x108e) {
+                        if (cp < 0x105a) return false;
+                        if (cp < 0x105e) return true;
+                        if (cp === 0x1061) return true;
+                        if (cp < 0x1065) return false;
+                        if (cp < 0x1067) return true;
+                        if (cp < 0x106e) return false;
+                        if (cp < 0x1071) return true;
+                        if (cp < 0x1075) return false;
+                        if (cp < 0x1082) return true;
+                        return false;
+                    }
+                    if (cp === 0x108e) return true;
+                    if (cp < 0x10a0) return false;
+                    if (cp < 0x10c6) return true;
+                    if (cp === 0x10c7) return true;
+                    if (cp === 0x10cd) return true;
+                    if (cp < 0x10d0) return false;
+                    if (cp < 0x10fb) return true;
+                    if (cp === 0x10fc) return true;
+                    return false;
+                }
+                if (cp < 0x12b8) {
+                    if (cp < 0x125a) {
+                        if (cp < 0x10fd) return false;
+                        if (cp < 0x1100) return true;
+                        if (cp < 0x1100) return false;
+                        if (cp < 0x1249) return true;
+                        if (cp < 0x124a) return false;
+                        if (cp < 0x124e) return true;
+                        if (cp < 0x1250) return false;
+                        if (cp < 0x1257) return true;
+                        if (cp === 0x1258) return true;
+                        return false;
+                    }
+                    if (cp < 0x125e) return true;
+                    if (cp < 0x1260) return false;
+                    if (cp < 0x1289) return true;
+                    if (cp < 0x128a) return false;
+                    if (cp < 0x128e) return true;
+                    if (cp < 0x1290) return false;
+                    if (cp < 0x12b1) return true;
+                    if (cp < 0x12b2) return false;
+                    if (cp < 0x12b6) return true;
+                    return false;
+                }
+                if (cp < 0x1312) {
+                    if (cp < 0x12b8) return false;
+                    if (cp < 0x12bf) return true;
+                    if (cp === 0x12c0) return true;
+                    if (cp < 0x12c2) return false;
+                    if (cp < 0x12c6) return true;
+                    if (cp < 0x12c8) return false;
+                    if (cp < 0x12d7) return true;
+                    if (cp < 0x12d8) return false;
+                    if (cp < 0x1311) return true;
+                    return false;
+                }
+                if (cp < 0x1316) return true;
+                if (cp < 0x1318) return false;
+                if (cp < 0x135b) return true;
+                if (cp < 0x1380) return false;
+                if (cp < 0x1390) return true;
+                if (cp < 0x13a0) return false;
+                if (cp < 0x13f6) return true;
+                if (cp < 0x13f8) return false;
+                if (cp < 0x13fe) return true;
+                if (cp < 0x1401) return false;
+                if (cp < 0x166d) return true;
+                return false;
+            }
+            if (cp < 0x18b0) {
+                if (cp < 0x176e) {
+                    if (cp < 0x1700) {
+                        if (cp < 0x166f) return false;
+                        if (cp < 0x1680) return true;
+                        if (cp < 0x1681) return false;
+                        if (cp < 0x169b) return true;
+                        if (cp < 0x16a0) return false;
+                        if (cp < 0x16eb) return true;
+                        if (cp < 0x16ee) return false;
+                        if (cp < 0x16f1) return true;
+                        if (cp < 0x16f1) return false;
+                        if (cp < 0x16f9) return true;
+                        return false;
+                    }
+                    if (cp < 0x170d) return true;
+                    if (cp < 0x170e) return false;
+                    if (cp < 0x1712) return true;
+                    if (cp < 0x1720) return false;
+                    if (cp < 0x1732) return true;
+                    if (cp < 0x1740) return false;
+                    if (cp < 0x1752) return true;
+                    if (cp < 0x1760) return false;
+                    if (cp < 0x176d) return true;
+                    return false;
+                }
+                if (cp < 0x1843) {
+                    if (cp < 0x176e) return false;
+                    if (cp < 0x1771) return true;
+                    if (cp < 0x1780) return false;
+                    if (cp < 0x17b4) return true;
+                    if (cp === 0x17d7) return true;
+                    if (cp === 0x17dc) return true;
+                    if (cp < 0x1820) return false;
+                    if (cp < 0x1843) return true;
+                    return false;
+                }
+                if (cp === 0x1843) return true;
+                if (cp < 0x1844) return false;
+                if (cp < 0x1879) return true;
+                if (cp < 0x1880) return false;
+                if (cp < 0x1885) return true;
+                if (cp < 0x1885) return false;
+                if (cp < 0x1887) return true;
+                if (cp < 0x1887) return false;
+                if (cp < 0x18a9) return true;
+                if (cp === 0x18aa) return true;
+                return false;
+            }
+            if (cp < 0x1b45) {
+                if (cp < 0x19b0) {
+                    if (cp < 0x18b0) return false;
+                    if (cp < 0x18f6) return true;
+                    if (cp < 0x1900) return false;
+                    if (cp < 0x191f) return true;
+                    if (cp < 0x1950) return false;
+                    if (cp < 0x196e) return true;
+                    if (cp < 0x1970) return false;
+                    if (cp < 0x1975) return true;
+                    if (cp < 0x1980) return false;
+                    if (cp < 0x19ac) return true;
+                    return false;
+                }
+                if (cp < 0x19ca) return true;
+                if (cp < 0x1a00) return false;
+                if (cp < 0x1a17) return true;
+                if (cp < 0x1a20) return false;
+                if (cp < 0x1a55) return true;
+                if (cp === 0x1aa7) return true;
+                if (cp < 0x1b05) return false;
+                if (cp < 0x1b34) return true;
+                return false;
+            }
+            if (cp < 0x1c4d) {
+                if (cp < 0x1b45) return false;
+                if (cp < 0x1b4c) return true;
+                if (cp < 0x1b83) return false;
+                if (cp < 0x1ba1) return true;
+                if (cp < 0x1bae) return false;
+                if (cp < 0x1bb0) return true;
+                if (cp < 0x1bba) return false;
+                if (cp < 0x1be6) return true;
+                if (cp < 0x1c00) return false;
+                if (cp < 0x1c24) return true;
+                return false;
+            }
+            if (cp < 0x1c50) return true;
+            if (cp < 0x1c5a) return false;
+            if (cp < 0x1c78) return true;
+            if (cp < 0x1c78) return false;
+            if (cp < 0x1c7e) return true;
+            if (cp < 0x1c80) return false;
+            if (cp < 0x1c89) return true;
+            if (cp < 0x1c90) return false;
+            if (cp < 0x1cbb) return true;
+            if (cp < 0x1cbd) return false;
+            if (cp < 0x1cc0) return true;
+            return false;
+        }
+        if (cp < 0x212f) {
+            if (cp < 0x1fc2) {
+                if (cp < 0x1f18) {
+                    if (cp < 0x1d6b) {
+                        if (cp < 0x1ce9) return false;
+                        if (cp < 0x1ced) return true;
+                        if (cp < 0x1cee) return false;
+                        if (cp < 0x1cf2) return true;
+                        if (cp < 0x1cf5) return false;
+                        if (cp < 0x1cf7) return true;
+                        if (cp < 0x1d00) return false;
+                        if (cp < 0x1d2c) return true;
+                        if (cp < 0x1d2c) return false;
+                        if (cp < 0x1d6b) return true;
+                        return false;
+                    }
+                    if (cp < 0x1d78) return true;
+                    if (cp === 0x1d78) return true;
+                    if (cp < 0x1d79) return false;
+                    if (cp < 0x1d9b) return true;
+                    if (cp < 0x1d9b) return false;
+                    if (cp < 0x1dc0) return true;
+                    if (cp < 0x1e00) return false;
+                    if (cp < 0x1f16) return true;
+                    return false;
+                }
+                if (cp < 0x1f5b) {
+                    if (cp < 0x1f18) return false;
+                    if (cp < 0x1f1e) return true;
+                    if (cp < 0x1f20) return false;
+                    if (cp < 0x1f46) return true;
+                    if (cp < 0x1f48) return false;
+                    if (cp < 0x1f4e) return true;
+                    if (cp < 0x1f50) return false;
+                    if (cp < 0x1f58) return true;
+                    if (cp === 0x1f59) return true;
+                    return false;
+                }
+                if (cp === 0x1f5b) return true;
+                if (cp === 0x1f5d) return true;
+                if (cp < 0x1f5f) return false;
+                if (cp < 0x1f7e) return true;
+                if (cp < 0x1f80) return false;
+                if (cp < 0x1fb5) return true;
+                if (cp < 0x1fb6) return false;
+                if (cp < 0x1fbd) return true;
+                if (cp === 0x1fbe) return true;
+                return false;
+            }
+            if (cp < 0x2102) {
+                if (cp < 0x1ff2) {
+                    if (cp < 0x1fc2) return false;
+                    if (cp < 0x1fc5) return true;
+                    if (cp < 0x1fc6) return false;
+                    if (cp < 0x1fcd) return true;
+                    if (cp < 0x1fd0) return false;
+                    if (cp < 0x1fd4) return true;
+                    if (cp < 0x1fd6) return false;
+                    if (cp < 0x1fdc) return true;
+                    if (cp < 0x1fe0) return false;
+                    if (cp < 0x1fed) return true;
+                    return false;
+                }
+                if (cp < 0x1ff5) return true;
+                if (cp < 0x1ff6) return false;
+                if (cp < 0x1ffd) return true;
+                if (cp === 0x2071) return true;
+                if (cp === 0x207f) return true;
+                if (cp < 0x2090) return false;
+                if (cp < 0x209d) return true;
+                return false;
+            }
+            if (cp < 0x2119) {
+                if (cp === 0x2102) return true;
+                if (cp === 0x2107) return true;
+                if (cp < 0x210a) return false;
+                if (cp < 0x2114) return true;
+                if (cp === 0x2115) return true;
+                if (cp === 0x2118) return true;
+                return false;
+            }
+            if (cp < 0x211e) return true;
+            if (cp === 0x2124) return true;
+            if (cp === 0x2126) return true;
+            if (cp === 0x2128) return true;
+            if (cp < 0x212a) return false;
+            if (cp < 0x212e) return true;
+            if (cp === 0x212e) return true;
+            return false;
+        }
+        if (cp < 0x2d80) {
+            if (cp < 0x2c30) {
+                if (cp < 0x214e) {
+                    if (cp < 0x212f) return false;
+                    if (cp < 0x2135) return true;
+                    if (cp < 0x2135) return false;
+                    if (cp < 0x2139) return true;
+                    if (cp === 0x2139) return true;
+                    if (cp < 0x213c) return false;
+                    if (cp < 0x2140) return true;
+                    if (cp < 0x2145) return false;
+                    if (cp < 0x214a) return true;
+                    return false;
+                }
+                if (cp === 0x214e) return true;
+                if (cp < 0x2160) return false;
+                if (cp < 0x2183) return true;
+                if (cp < 0x2183) return false;
+                if (cp < 0x2185) return true;
+                if (cp < 0x2185) return false;
+                if (cp < 0x2189) return true;
+                if (cp < 0x2c00) return false;
+                if (cp < 0x2c2f) return true;
+                return false;
+            }
+            if (cp < 0x2cf2) {
+                if (cp < 0x2c30) return false;
+                if (cp < 0x2c5f) return true;
+                if (cp < 0x2c60) return false;
+                if (cp < 0x2c7c) return true;
+                if (cp < 0x2c7c) return false;
+                if (cp < 0x2c7e) return true;
+                if (cp < 0x2c7e) return false;
+                if (cp < 0x2ce5) return true;
+                if (cp < 0x2ceb) return false;
+                if (cp < 0x2cef) return true;
+                return false;
+            }
+            if (cp < 0x2cf4) return true;
+            if (cp < 0x2d00) return false;
+            if (cp < 0x2d26) return true;
+            if (cp === 0x2d27) return true;
+            if (cp === 0x2d2d) return true;
+            if (cp < 0x2d30) return false;
+            if (cp < 0x2d68) return true;
+            if (cp === 0x2d6f) return true;
+            return false;
+        }
+        if (cp < 0x3006) {
+            if (cp < 0x2dc0) {
+                if (cp < 0x2d80) return false;
+                if (cp < 0x2d97) return true;
+                if (cp < 0x2da0) return false;
+                if (cp < 0x2da7) return true;
+                if (cp < 0x2da8) return false;
+                if (cp < 0x2daf) return true;
+                if (cp < 0x2db0) return false;
+                if (cp < 0x2db7) return true;
+                if (cp < 0x2db8) return false;
+                if (cp < 0x2dbf) return true;
+                return false;
+            }
+            if (cp < 0x2dc7) return true;
+            if (cp < 0x2dc8) return false;
+            if (cp < 0x2dcf) return true;
+            if (cp < 0x2dd0) return false;
+            if (cp < 0x2dd7) return true;
+            if (cp < 0x2dd8) return false;
+            if (cp < 0x2ddf) return true;
+            if (cp === 0x3005) return true;
+            return false;
+        }
+        if (cp < 0x303b) {
+            if (cp === 0x3006) return true;
+            if (cp === 0x3007) return true;
+            if (cp < 0x3021) return false;
+            if (cp < 0x302a) return true;
+            if (cp < 0x3031) return false;
+            if (cp < 0x3036) return true;
+            if (cp < 0x3038) return false;
+            if (cp < 0x303b) return true;
+            return false;
+        }
+        if (cp === 0x303b) return true;
+        if (cp === 0x303c) return true;
+        if (cp < 0x3041) return false;
+        if (cp < 0x3097) return true;
+        if (cp < 0x309b) return false;
+        if (cp < 0x309d) return true;
+        if (cp < 0x309d) return false;
+        if (cp < 0x309f) return true;
+        if (cp === 0x309f) return true;
+        return false;
+    }
+    if (cp < 0x10b60) {
+        if (cp < 0xd7b0) {
+            if (cp < 0xa882) {
+                if (cp < 0xa67f) {
+                    if (cp < 0xa015) {
+                        if (cp < 0x31a0) {
+                            if (cp < 0x30a1) return false;
+                            if (cp < 0x30fb) return true;
+                            if (cp < 0x30fc) return false;
+                            if (cp < 0x30ff) return true;
+                            if (cp === 0x30ff) return true;
+                            if (cp < 0x3105) return false;
+                            if (cp < 0x3130) return true;
+                            if (cp < 0x3131) return false;
+                            if (cp < 0x318f) return true;
+                            return false;
+                        }
+                        if (cp < 0x31bb) return true;
+                        if (cp < 0x31f0) return false;
+                        if (cp < 0x3200) return true;
+                        if (cp < 0x3400) return false;
+                        if (cp < 0x4db6) return true;
+                        if (cp < 0x4e00) return false;
+                        if (cp < 0x9ff0) return true;
+                        if (cp < 0xa000) return false;
+                        if (cp < 0xa015) return true;
+                        return false;
+                    }
+                    if (cp < 0xa60c) {
+                        if (cp === 0xa015) return true;
+                        if (cp < 0xa016) return false;
+                        if (cp < 0xa48d) return true;
+                        if (cp < 0xa4d0) return false;
+                        if (cp < 0xa4f8) return true;
+                        if (cp < 0xa4f8) return false;
+                        if (cp < 0xa4fe) return true;
+                        if (cp < 0xa500) return false;
+                        if (cp < 0xa60c) return true;
+                        return false;
+                    }
+                    if (cp === 0xa60c) return true;
+                    if (cp < 0xa610) return false;
+                    if (cp < 0xa620) return true;
+                    if (cp < 0xa62a) return false;
+                    if (cp < 0xa62c) return true;
+                    if (cp < 0xa640) return false;
+                    if (cp < 0xa66e) return true;
+                    if (cp === 0xa66e) return true;
+                    return false;
+                }
+                if (cp < 0xa78b) {
+                    if (cp < 0xa717) {
+                        if (cp === 0xa67f) return true;
+                        if (cp < 0xa680) return false;
+                        if (cp < 0xa69c) return true;
+                        if (cp < 0xa69c) return false;
+                        if (cp < 0xa69e) return true;
+                        if (cp < 0xa6a0) return false;
+                        if (cp < 0xa6e6) return true;
+                        if (cp < 0xa6e6) return false;
+                        if (cp < 0xa6f0) return true;
+                        return false;
+                    }
+                    if (cp < 0xa720) return true;
+                    if (cp < 0xa722) return false;
+                    if (cp < 0xa770) return true;
+                    if (cp === 0xa770) return true;
+                    if (cp < 0xa771) return false;
+                    if (cp < 0xa788) return true;
+                    if (cp === 0xa788) return true;
+                    return false;
+                }
+                if (cp < 0xa7fa) {
+                    if (cp < 0xa78b) return false;
+                    if (cp < 0xa78f) return true;
+                    if (cp === 0xa78f) return true;
+                    if (cp < 0xa790) return false;
+                    if (cp < 0xa7ba) return true;
+                    if (cp === 0xa7f7) return true;
+                    if (cp < 0xa7f8) return false;
+                    if (cp < 0xa7fa) return true;
+                    return false;
+                }
+                if (cp === 0xa7fa) return true;
+                if (cp < 0xa7fb) return false;
+                if (cp < 0xa802) return true;
+                if (cp < 0xa803) return false;
+                if (cp < 0xa806) return true;
+                if (cp < 0xa807) return false;
+                if (cp < 0xa80b) return true;
+                if (cp < 0xa80c) return false;
+                if (cp < 0xa823) return true;
+                if (cp < 0xa840) return false;
+                if (cp < 0xa874) return true;
+                return false;
+            }
+            if (cp < 0xaab1) {
+                if (cp < 0xa9e6) {
+                    if (cp < 0xa930) {
+                        if (cp < 0xa882) return false;
+                        if (cp < 0xa8b4) return true;
+                        if (cp < 0xa8f2) return false;
+                        if (cp < 0xa8f8) return true;
+                        if (cp === 0xa8fb) return true;
+                        if (cp < 0xa8fd) return false;
+                        if (cp < 0xa8ff) return true;
+                        if (cp < 0xa90a) return false;
+                        if (cp < 0xa926) return true;
+                        return false;
+                    }
+                    if (cp < 0xa947) return true;
+                    if (cp < 0xa960) return false;
+                    if (cp < 0xa97d) return true;
+                    if (cp < 0xa984) return false;
+                    if (cp < 0xa9b3) return true;
+                    if (cp === 0xa9cf) return true;
+                    if (cp < 0xa9e0) return false;
+                    if (cp < 0xa9e5) return true;
+                    return false;
+                }
+                if (cp < 0xaa44) {
+                    if (cp === 0xa9e6) return true;
+                    if (cp < 0xa9e7) return false;
+                    if (cp < 0xa9f0) return true;
+                    if (cp < 0xa9fa) return false;
+                    if (cp < 0xa9ff) return true;
+                    if (cp < 0xaa00) return false;
+                    if (cp < 0xaa29) return true;
+                    if (cp < 0xaa40) return false;
+                    if (cp < 0xaa43) return true;
+                    return false;
+                }
+                if (cp < 0xaa4c) return true;
+                if (cp < 0xaa60) return false;
+                if (cp < 0xaa70) return true;
+                if (cp === 0xaa70) return true;
+                if (cp < 0xaa71) return false;
+                if (cp < 0xaa77) return true;
+                if (cp === 0xaa7a) return true;
+                if (cp < 0xaa7e) return false;
+                if (cp < 0xaab0) return true;
+                return false;
+            }
+            if (cp < 0xab01) {
+                if (cp < 0xaadb) {
+                    if (cp === 0xaab1) return true;
+                    if (cp < 0xaab5) return false;
+                    if (cp < 0xaab7) return true;
+                    if (cp < 0xaab9) return false;
+                    if (cp < 0xaabe) return true;
+                    if (cp === 0xaac0) return true;
+                    if (cp === 0xaac2) return true;
+                    return false;
+                }
+                if (cp < 0xaadd) return true;
+                if (cp === 0xaadd) return true;
+                if (cp < 0xaae0) return false;
+                if (cp < 0xaaeb) return true;
+                if (cp === 0xaaf2) return true;
+                if (cp < 0xaaf3) return false;
+                if (cp < 0xaaf5) return true;
+                return false;
+            }
+            if (cp < 0xab30) {
+                if (cp < 0xab01) return false;
+                if (cp < 0xab07) return true;
+                if (cp < 0xab09) return false;
+                if (cp < 0xab0f) return true;
+                if (cp < 0xab11) return false;
+                if (cp < 0xab17) return true;
+                if (cp < 0xab20) return false;
+                if (cp < 0xab27) return true;
+                if (cp < 0xab28) return false;
+                if (cp < 0xab2f) return true;
+                return false;
+            }
+            if (cp < 0xab5b) return true;
+            if (cp < 0xab5c) return false;
+            if (cp < 0xab60) return true;
+            if (cp < 0xab60) return false;
+            if (cp < 0xab66) return true;
+            if (cp < 0xab70) return false;
+            if (cp < 0xabc0) return true;
+            if (cp < 0xabc0) return false;
+            if (cp < 0xabe3) return true;
+            if (cp < 0xac00) return false;
+            if (cp < 0xd7a4) return true;
+            return false;
+        }
+        if (cp < 0x1032d) {
+            if (cp < 0xff41) {
+                if (cp < 0xfb3e) {
+                    if (cp < 0xfb13) {
+                        if (cp < 0xd7b0) return false;
+                        if (cp < 0xd7c7) return true;
+                        if (cp < 0xd7cb) return false;
+                        if (cp < 0xd7fc) return true;
+                        if (cp < 0xf900) return false;
+                        if (cp < 0xfa6e) return true;
+                        if (cp < 0xfa70) return false;
+                        if (cp < 0xfada) return true;
+                        if (cp < 0xfb00) return false;
+                        if (cp < 0xfb07) return true;
+                        return false;
+                    }
+                    if (cp < 0xfb18) return true;
+                    if (cp === 0xfb1d) return true;
+                    if (cp < 0xfb1f) return false;
+                    if (cp < 0xfb29) return true;
+                    if (cp < 0xfb2a) return false;
+                    if (cp < 0xfb37) return true;
+                    if (cp < 0xfb38) return false;
+                    if (cp < 0xfb3d) return true;
+                    return false;
+                }
+                if (cp < 0xfd50) {
+                    if (cp === 0xfb3e) return true;
+                    if (cp < 0xfb40) return false;
+                    if (cp < 0xfb42) return true;
+                    if (cp < 0xfb43) return false;
+                    if (cp < 0xfb45) return true;
+                    if (cp < 0xfb46) return false;
+                    if (cp < 0xfbb2) return true;
+                    if (cp < 0xfbd3) return false;
+                    if (cp < 0xfd3e) return true;
+                    return false;
+                }
+                if (cp < 0xfd90) return true;
+                if (cp < 0xfd92) return false;
+                if (cp < 0xfdc8) return true;
+                if (cp < 0xfdf0) return false;
+                if (cp < 0xfdfc) return true;
+                if (cp < 0xfe70) return false;
+                if (cp < 0xfe75) return true;
+                if (cp < 0xfe76) return false;
+                if (cp < 0xfefd) return true;
+                if (cp < 0xff21) return false;
+                if (cp < 0xff3b) return true;
+                return false;
+            }
+            if (cp < 0x10000) {
+                if (cp < 0xffa0) {
+                    if (cp < 0xff41) return false;
+                    if (cp < 0xff5b) return true;
+                    if (cp < 0xff66) return false;
+                    if (cp < 0xff70) return true;
+                    if (cp === 0xff70) return true;
+                    if (cp < 0xff71) return false;
+                    if (cp < 0xff9e) return true;
+                    if (cp < 0xff9e) return false;
+                    if (cp < 0xffa0) return true;
+                    return false;
+                }
+                if (cp < 0xffbf) return true;
+                if (cp < 0xffc2) return false;
+                if (cp < 0xffc8) return true;
+                if (cp < 0xffca) return false;
+                if (cp < 0xffd0) return true;
+                if (cp < 0xffd2) return false;
+                if (cp < 0xffd8) return true;
+                if (cp < 0xffda) return false;
+                if (cp < 0xffdd) return true;
+                return false;
+            }
+            if (cp < 0x10050) {
+                if (cp < 0x10000) return false;
+                if (cp < 0x1000c) return true;
+                if (cp < 0x1000d) return false;
+                if (cp < 0x10027) return true;
+                if (cp < 0x10028) return false;
+                if (cp < 0x1003b) return true;
+                if (cp < 0x1003c) return false;
+                if (cp < 0x1003e) return true;
+                if (cp < 0x1003f) return false;
+                if (cp < 0x1004e) return true;
+                return false;
+            }
+            if (cp < 0x1005e) return true;
+            if (cp < 0x10080) return false;
+            if (cp < 0x100fb) return true;
+            if (cp < 0x10140) return false;
+            if (cp < 0x10175) return true;
+            if (cp < 0x10280) return false;
+            if (cp < 0x1029d) return true;
+            if (cp < 0x102a0) return false;
+            if (cp < 0x102d1) return true;
+            if (cp < 0x10300) return false;
+            if (cp < 0x10320) return true;
+            return false;
+        }
+        if (cp < 0x10837) {
+            if (cp < 0x10450) {
+                if (cp < 0x10380) {
+                    if (cp < 0x1032d) return false;
+                    if (cp < 0x10341) return true;
+                    if (cp === 0x10341) return true;
+                    if (cp < 0x10342) return false;
+                    if (cp < 0x1034a) return true;
+                    if (cp === 0x1034a) return true;
+                    if (cp < 0x10350) return false;
+                    if (cp < 0x10376) return true;
+                    return false;
+                }
+                if (cp < 0x1039e) return true;
+                if (cp < 0x103a0) return false;
+                if (cp < 0x103c4) return true;
+                if (cp < 0x103c8) return false;
+                if (cp < 0x103d0) return true;
+                if (cp < 0x103d1) return false;
+                if (cp < 0x103d6) return true;
+                if (cp < 0x10400) return false;
+                if (cp < 0x10450) return true;
+                return false;
+            }
+            if (cp < 0x10600) {
+                if (cp < 0x10450) return false;
+                if (cp < 0x1049e) return true;
+                if (cp < 0x104b0) return false;
+                if (cp < 0x104d4) return true;
+                if (cp < 0x104d8) return false;
+                if (cp < 0x104fc) return true;
+                if (cp < 0x10500) return false;
+                if (cp < 0x10528) return true;
+                if (cp < 0x10530) return false;
+                if (cp < 0x10564) return true;
+                return false;
+            }
+            if (cp < 0x10737) return true;
+            if (cp < 0x10740) return false;
+            if (cp < 0x10756) return true;
+            if (cp < 0x10760) return false;
+            if (cp < 0x10768) return true;
+            if (cp < 0x10800) return false;
+            if (cp < 0x10806) return true;
+            if (cp === 0x10808) return true;
+            if (cp < 0x1080a) return false;
+            if (cp < 0x10836) return true;
+            return false;
+        }
+        if (cp < 0x109be) {
+            if (cp < 0x108e0) {
+                if (cp < 0x10837) return false;
+                if (cp < 0x10839) return true;
+                if (cp === 0x1083c) return true;
+                if (cp < 0x1083f) return false;
+                if (cp < 0x10856) return true;
+                if (cp < 0x10860) return false;
+                if (cp < 0x10877) return true;
+                if (cp < 0x10880) return false;
+                if (cp < 0x1089f) return true;
+                return false;
+            }
+            if (cp < 0x108f3) return true;
+            if (cp < 0x108f4) return false;
+            if (cp < 0x108f6) return true;
+            if (cp < 0x10900) return false;
+            if (cp < 0x10916) return true;
+            if (cp < 0x10920) return false;
+            if (cp < 0x1093a) return true;
+            if (cp < 0x10980) return false;
+            if (cp < 0x109b8) return true;
+            return false;
+        }
+        if (cp < 0x10a60) {
+            if (cp < 0x109be) return false;
+            if (cp < 0x109c0) return true;
+            if (cp === 0x10a00) return true;
+            if (cp < 0x10a10) return false;
+            if (cp < 0x10a14) return true;
+            if (cp < 0x10a15) return false;
+            if (cp < 0x10a18) return true;
+            if (cp < 0x10a19) return false;
+            if (cp < 0x10a36) return true;
+            return false;
+        }
+        if (cp < 0x10a7d) return true;
+        if (cp < 0x10a80) return false;
+        if (cp < 0x10a9d) return true;
+        if (cp < 0x10ac0) return false;
+        if (cp < 0x10ac8) return true;
+        if (cp < 0x10ac9) return false;
+        if (cp < 0x10ae5) return true;
+        if (cp < 0x10b00) return false;
+        if (cp < 0x10b36) return true;
+        if (cp < 0x10b40) return false;
+        if (cp < 0x10b56) return true;
+        return false;
+    }
+    if (cp < 0x16e40) {
+        if (cp < 0x11580) {
+            if (cp < 0x11213) {
+                if (cp < 0x11083) {
+                    if (cp < 0x10d00) {
+                        if (cp < 0x10b60) return false;
+                        if (cp < 0x10b73) return true;
+                        if (cp < 0x10b80) return false;
+                        if (cp < 0x10b92) return true;
+                        if (cp < 0x10c00) return false;
+                        if (cp < 0x10c49) return true;
+                        if (cp < 0x10c80) return false;
+                        if (cp < 0x10cb3) return true;
+                        if (cp < 0x10cc0) return false;
+                        if (cp < 0x10cf3) return true;
+                        return false;
+                    }
+                    if (cp < 0x10d24) return true;
+                    if (cp < 0x10f00) return false;
+                    if (cp < 0x10f1d) return true;
+                    if (cp === 0x10f27) return true;
+                    if (cp < 0x10f30) return false;
+                    if (cp < 0x10f46) return true;
+                    if (cp < 0x11003) return false;
+                    if (cp < 0x11038) return true;
+                    return false;
+                }
+                if (cp < 0x11176) {
+                    if (cp < 0x11083) return false;
+                    if (cp < 0x110b0) return true;
+                    if (cp < 0x110d0) return false;
+                    if (cp < 0x110e9) return true;
+                    if (cp < 0x11103) return false;
+                    if (cp < 0x11127) return true;
+                    if (cp === 0x11144) return true;
+                    if (cp < 0x11150) return false;
+                    if (cp < 0x11173) return true;
+                    return false;
+                }
+                if (cp === 0x11176) return true;
+                if (cp < 0x11183) return false;
+                if (cp < 0x111b3) return true;
+                if (cp < 0x111c1) return false;
+                if (cp < 0x111c5) return true;
+                if (cp === 0x111da) return true;
+                if (cp === 0x111dc) return true;
+                if (cp < 0x11200) return false;
+                if (cp < 0x11212) return true;
+                return false;
+            }
+            if (cp < 0x1132a) {
+                if (cp < 0x1129f) {
+                    if (cp < 0x11213) return false;
+                    if (cp < 0x1122c) return true;
+                    if (cp < 0x11280) return false;
+                    if (cp < 0x11287) return true;
+                    if (cp === 0x11288) return true;
+                    if (cp < 0x1128a) return false;
+                    if (cp < 0x1128e) return true;
+                    if (cp < 0x1128f) return false;
+                    if (cp < 0x1129e) return true;
+                    return false;
+                }
+                if (cp < 0x112a9) return true;
+                if (cp < 0x112b0) return false;
+                if (cp < 0x112df) return true;
+                if (cp < 0x11305) return false;
+                if (cp < 0x1130d) return true;
+                if (cp < 0x1130f) return false;
+                if (cp < 0x11311) return true;
+                if (cp < 0x11313) return false;
+                if (cp < 0x11329) return true;
+                return false;
+            }
+            if (cp < 0x1135d) {
+                if (cp < 0x1132a) return false;
+                if (cp < 0x11331) return true;
+                if (cp < 0x11332) return false;
+                if (cp < 0x11334) return true;
+                if (cp < 0x11335) return false;
+                if (cp < 0x1133a) return true;
+                if (cp === 0x1133d) return true;
+                if (cp === 0x11350) return true;
+                return false;
+            }
+            if (cp < 0x11362) return true;
+            if (cp < 0x11400) return false;
+            if (cp < 0x11435) return true;
+            if (cp < 0x11447) return false;
+            if (cp < 0x1144b) return true;
+            if (cp < 0x11480) return false;
+            if (cp < 0x114b0) return true;
+            if (cp < 0x114c4) return false;
+            if (cp < 0x114c6) return true;
+            if (cp === 0x114c7) return true;
+            return false;
+        }
+        if (cp < 0x11d00) {
+            if (cp < 0x11a0b) {
+                if (cp < 0x11700) {
+                    if (cp < 0x11580) return false;
+                    if (cp < 0x115af) return true;
+                    if (cp < 0x115d8) return false;
+                    if (cp < 0x115dc) return true;
+                    if (cp < 0x11600) return false;
+                    if (cp < 0x11630) return true;
+                    if (cp === 0x11644) return true;
+                    if (cp < 0x11680) return false;
+                    if (cp < 0x116ab) return true;
+                    return false;
+                }
+                if (cp < 0x1171b) return true;
+                if (cp < 0x11800) return false;
+                if (cp < 0x1182c) return true;
+                if (cp < 0x118a0) return false;
+                if (cp < 0x118e0) return true;
+                if (cp === 0x118ff) return true;
+                if (cp === 0x11a00) return true;
+                return false;
+            }
+            if (cp < 0x11a9d) {
+                if (cp < 0x11a0b) return false;
+                if (cp < 0x11a33) return true;
+                if (cp === 0x11a3a) return true;
+                if (cp === 0x11a50) return true;
+                if (cp < 0x11a5c) return false;
+                if (cp < 0x11a84) return true;
+                if (cp < 0x11a86) return false;
+                if (cp < 0x11a8a) return true;
+                return false;
+            }
+            if (cp === 0x11a9d) return true;
+            if (cp < 0x11ac0) return false;
+            if (cp < 0x11af9) return true;
+            if (cp < 0x11c00) return false;
+            if (cp < 0x11c09) return true;
+            if (cp < 0x11c0a) return false;
+            if (cp < 0x11c2f) return true;
+            if (cp === 0x11c40) return true;
+            if (cp < 0x11c72) return false;
+            if (cp < 0x11c90) return true;
+            return false;
+        }
+        if (cp < 0x12400) {
+            if (cp < 0x11d67) {
+                if (cp < 0x11d00) return false;
+                if (cp < 0x11d07) return true;
+                if (cp < 0x11d08) return false;
+                if (cp < 0x11d0a) return true;
+                if (cp < 0x11d0b) return false;
+                if (cp < 0x11d31) return true;
+                if (cp === 0x11d46) return true;
+                if (cp < 0x11d60) return false;
+                if (cp < 0x11d66) return true;
+                return false;
+            }
+            if (cp < 0x11d69) return true;
+            if (cp < 0x11d6a) return false;
+            if (cp < 0x11d8a) return true;
+            if (cp === 0x11d98) return true;
+            if (cp < 0x11ee0) return false;
+            if (cp < 0x11ef3) return true;
+            if (cp < 0x12000) return false;
+            if (cp < 0x1239a) return true;
+            return false;
+        }
+        if (cp < 0x16a40) {
+            if (cp < 0x12400) return false;
+            if (cp < 0x1246f) return true;
+            if (cp < 0x12480) return false;
+            if (cp < 0x12544) return true;
+            if (cp < 0x13000) return false;
+            if (cp < 0x1342f) return true;
+            if (cp < 0x14400) return false;
+            if (cp < 0x14647) return true;
+            if (cp < 0x16800) return false;
+            if (cp < 0x16a39) return true;
+            return false;
+        }
+        if (cp < 0x16a5f) return true;
+        if (cp < 0x16ad0) return false;
+        if (cp < 0x16aee) return true;
+        if (cp < 0x16b00) return false;
+        if (cp < 0x16b30) return true;
+        if (cp < 0x16b40) return false;
+        if (cp < 0x16b44) return true;
+        if (cp < 0x16b63) return false;
+        if (cp < 0x16b78) return true;
+        if (cp < 0x16b7d) return false;
+        if (cp < 0x16b90) return true;
+        return false;
+    }
+    if (cp < 0x1d7c4) {
+        if (cp < 0x1d4bd) {
+            if (cp < 0x1bc70) {
+                if (cp < 0x17000) {
+                    if (cp < 0x16e40) return false;
+                    if (cp < 0x16e80) return true;
+                    if (cp < 0x16f00) return false;
+                    if (cp < 0x16f45) return true;
+                    if (cp === 0x16f50) return true;
+                    if (cp < 0x16f93) return false;
+                    if (cp < 0x16fa0) return true;
+                    if (cp < 0x16fe0) return false;
+                    if (cp < 0x16fe2) return true;
+                    return false;
+                }
+                if (cp < 0x187f2) return true;
+                if (cp < 0x18800) return false;
+                if (cp < 0x18af3) return true;
+                if (cp < 0x1b000) return false;
+                if (cp < 0x1b11f) return true;
+                if (cp < 0x1b170) return false;
+                if (cp < 0x1b2fc) return true;
+                if (cp < 0x1bc00) return false;
+                if (cp < 0x1bc6b) return true;
+                return false;
+            }
+            if (cp < 0x1d49e) {
+                if (cp < 0x1bc70) return false;
+                if (cp < 0x1bc7d) return true;
+                if (cp < 0x1bc80) return false;
+                if (cp < 0x1bc89) return true;
+                if (cp < 0x1bc90) return false;
+                if (cp < 0x1bc9a) return true;
+                if (cp < 0x1d400) return false;
+                if (cp < 0x1d455) return true;
+                if (cp < 0x1d456) return false;
+                if (cp < 0x1d49d) return true;
+                return false;
+            }
+            if (cp < 0x1d4a0) return true;
+            if (cp === 0x1d4a2) return true;
+            if (cp < 0x1d4a5) return false;
+            if (cp < 0x1d4a7) return true;
+            if (cp < 0x1d4a9) return false;
+            if (cp < 0x1d4ad) return true;
+            if (cp < 0x1d4ae) return false;
+            if (cp < 0x1d4ba) return true;
+            if (cp === 0x1d4bb) return true;
+            return false;
+        }
+        if (cp < 0x1d552) {
+            if (cp < 0x1d51e) {
+                if (cp < 0x1d4bd) return false;
+                if (cp < 0x1d4c4) return true;
+                if (cp < 0x1d4c5) return false;
+                if (cp < 0x1d506) return true;
+                if (cp < 0x1d507) return false;
+                if (cp < 0x1d50b) return true;
+                if (cp < 0x1d50d) return false;
+                if (cp < 0x1d515) return true;
+                if (cp < 0x1d516) return false;
+                if (cp < 0x1d51d) return true;
+                return false;
+            }
+            if (cp < 0x1d53a) return true;
+            if (cp < 0x1d53b) return false;
+            if (cp < 0x1d53f) return true;
+            if (cp < 0x1d540) return false;
+            if (cp < 0x1d545) return true;
+            if (cp === 0x1d546) return true;
+            if (cp < 0x1d54a) return false;
+            if (cp < 0x1d551) return true;
+            return false;
+        }
+        if (cp < 0x1d716) {
+            if (cp < 0x1d552) return false;
+            if (cp < 0x1d6a6) return true;
+            if (cp < 0x1d6a8) return false;
+            if (cp < 0x1d6c1) return true;
+            if (cp < 0x1d6c2) return false;
+            if (cp < 0x1d6db) return true;
+            if (cp < 0x1d6dc) return false;
+            if (cp < 0x1d6fb) return true;
+            if (cp < 0x1d6fc) return false;
+            if (cp < 0x1d715) return true;
+            return false;
+        }
+        if (cp < 0x1d735) return true;
+        if (cp < 0x1d736) return false;
+        if (cp < 0x1d74f) return true;
+        if (cp < 0x1d750) return false;
+        if (cp < 0x1d76f) return true;
+        if (cp < 0x1d770) return false;
+        if (cp < 0x1d789) return true;
+        if (cp < 0x1d78a) return false;
+        if (cp < 0x1d7a9) return true;
+        if (cp < 0x1d7aa) return false;
+        if (cp < 0x1d7c3) return true;
+        return false;
+    }
+    if (cp < 0x1ee5b) {
+        if (cp < 0x1ee39) {
+            if (cp < 0x1ee21) {
+                if (cp < 0x1d7c4) return false;
+                if (cp < 0x1d7cc) return true;
+                if (cp < 0x1e800) return false;
+                if (cp < 0x1e8c5) return true;
+                if (cp < 0x1e900) return false;
+                if (cp < 0x1e944) return true;
+                if (cp < 0x1ee00) return false;
+                if (cp < 0x1ee04) return true;
+                if (cp < 0x1ee05) return false;
+                if (cp < 0x1ee20) return true;
+                return false;
+            }
+            if (cp < 0x1ee23) return true;
+            if (cp === 0x1ee24) return true;
+            if (cp === 0x1ee27) return true;
+            if (cp < 0x1ee29) return false;
+            if (cp < 0x1ee33) return true;
+            if (cp < 0x1ee34) return false;
+            if (cp < 0x1ee38) return true;
+            return false;
+        }
+        if (cp < 0x1ee4b) {
+            if (cp === 0x1ee39) return true;
+            if (cp === 0x1ee3b) return true;
+            if (cp === 0x1ee42) return true;
+            if (cp === 0x1ee47) return true;
+            if (cp === 0x1ee49) return true;
+            return false;
+        }
+        if (cp === 0x1ee4b) return true;
+        if (cp < 0x1ee4d) return false;
+        if (cp < 0x1ee50) return true;
+        if (cp < 0x1ee51) return false;
+        if (cp < 0x1ee53) return true;
+        if (cp === 0x1ee54) return true;
+        if (cp === 0x1ee57) return true;
+        if (cp === 0x1ee59) return true;
+        return false;
+    }
+    if (cp < 0x1ee80) {
+        if (cp < 0x1ee67) {
+            if (cp === 0x1ee5b) return true;
+            if (cp === 0x1ee5d) return true;
+            if (cp === 0x1ee5f) return true;
+            if (cp < 0x1ee61) return false;
+            if (cp < 0x1ee63) return true;
+            if (cp === 0x1ee64) return true;
+            return false;
+        }
+        if (cp < 0x1ee6b) return true;
+        if (cp < 0x1ee6c) return false;
+        if (cp < 0x1ee73) return true;
+        if (cp < 0x1ee74) return false;
+        if (cp < 0x1ee78) return true;
+        if (cp < 0x1ee79) return false;
+        if (cp < 0x1ee7d) return true;
+        if (cp === 0x1ee7e) return true;
+        return false;
+    }
+    if (cp < 0x20000) {
+        if (cp < 0x1ee80) return false;
+        if (cp < 0x1ee8a) return true;
+        if (cp < 0x1ee8b) return false;
+        if (cp < 0x1ee9c) return true;
+        if (cp < 0x1eea1) return false;
+        if (cp < 0x1eea4) return true;
+        if (cp < 0x1eea5) return false;
+        if (cp < 0x1eeaa) return true;
+        if (cp < 0x1eeab) return false;
+        if (cp < 0x1eebc) return true;
+        return false;
+    }
+    if (cp < 0x2a6d7) return true;
+    if (cp < 0x2a700) return false;
+    if (cp < 0x2b735) return true;
+    if (cp < 0x2b740) return false;
+    if (cp < 0x2b81e) return true;
+    if (cp < 0x2b820) return false;
+    if (cp < 0x2cea2) return true;
+    if (cp < 0x2ceb0) return false;
+    if (cp < 0x2ebe1) return true;
+    if (cp < 0x2f800) return false;
+    if (cp < 0x2fa1e) return true;
+    return false;
+}
+function isLargeIdContinue(cp) {
+    if (cp < 0x1cd0) {
+        if (cp < 0xd82) {
+            if (cp < 0xa83) {
+                if (cp < 0x93b) {
+                    if (cp < 0x6ea) {
+                        if (cp < 0x5c7) {
+                            if (cp === 0xb7) return true;
+                            if (cp < 0x300) return false;
+                            if (cp < 0x370) return true;
+                            if (cp === 0x387) return true;
+                            if (cp < 0x483) return false;
+                            if (cp < 0x488) return true;
+                            if (cp < 0x591) return false;
+                            if (cp < 0x5be) return true;
+                            if (cp === 0x5bf) return true;
+                            if (cp < 0x5c1) return false;
+                            if (cp < 0x5c3) return true;
+                            if (cp < 0x5c4) return false;
+                            if (cp < 0x5c6) return true;
+                            return false;
+                        }
+                        if (cp === 0x5c7) return true;
+                        if (cp < 0x610) return false;
+                        if (cp < 0x61b) return true;
+                        if (cp < 0x64b) return false;
+                        if (cp < 0x660) return true;
+                        if (cp < 0x660) return false;
+                        if (cp < 0x66a) return true;
+                        if (cp === 0x670) return true;
+                        if (cp < 0x6d6) return false;
+                        if (cp < 0x6dd) return true;
+                        if (cp < 0x6df) return false;
+                        if (cp < 0x6e5) return true;
+                        if (cp < 0x6e7) return false;
+                        if (cp < 0x6e9) return true;
+                        return false;
+                    }
+                    if (cp < 0x816) {
+                        if (cp < 0x6ea) return false;
+                        if (cp < 0x6ee) return true;
+                        if (cp < 0x6f0) return false;
+                        if (cp < 0x6fa) return true;
+                        if (cp === 0x711) return true;
+                        if (cp < 0x730) return false;
+                        if (cp < 0x74b) return true;
+                        if (cp < 0x7a6) return false;
+                        if (cp < 0x7b1) return true;
+                        if (cp < 0x7c0) return false;
+                        if (cp < 0x7ca) return true;
+                        if (cp < 0x7eb) return false;
+                        if (cp < 0x7f4) return true;
+                        if (cp === 0x7fd) return true;
+                        return false;
+                    }
+                    if (cp < 0x81a) return true;
+                    if (cp < 0x81b) return false;
+                    if (cp < 0x824) return true;
+                    if (cp < 0x825) return false;
+                    if (cp < 0x828) return true;
+                    if (cp < 0x829) return false;
+                    if (cp < 0x82e) return true;
+                    if (cp < 0x859) return false;
+                    if (cp < 0x85c) return true;
+                    if (cp < 0x8d3) return false;
+                    if (cp < 0x8e2) return true;
+                    if (cp < 0x8e3) return false;
+                    if (cp < 0x903) return true;
+                    if (cp === 0x903) return true;
+                    if (cp === 0x93a) return true;
+                    return false;
+                }
+                if (cp < 0x9cd) {
+                    if (cp < 0x962) {
+                        if (cp === 0x93b) return true;
+                        if (cp === 0x93c) return true;
+                        if (cp < 0x93e) return false;
+                        if (cp < 0x941) return true;
+                        if (cp < 0x941) return false;
+                        if (cp < 0x949) return true;
+                        if (cp < 0x949) return false;
+                        if (cp < 0x94d) return true;
+                        if (cp === 0x94d) return true;
+                        if (cp < 0x94e) return false;
+                        if (cp < 0x950) return true;
+                        if (cp < 0x951) return false;
+                        if (cp < 0x958) return true;
+                        return false;
+                    }
+                    if (cp < 0x964) return true;
+                    if (cp < 0x966) return false;
+                    if (cp < 0x970) return true;
+                    if (cp === 0x981) return true;
+                    if (cp < 0x982) return false;
+                    if (cp < 0x984) return true;
+                    if (cp === 0x9bc) return true;
+                    if (cp < 0x9be) return false;
+                    if (cp < 0x9c1) return true;
+                    if (cp < 0x9c1) return false;
+                    if (cp < 0x9c5) return true;
+                    if (cp < 0x9c7) return false;
+                    if (cp < 0x9c9) return true;
+                    if (cp < 0x9cb) return false;
+                    if (cp < 0x9cd) return true;
+                    return false;
+                }
+                if (cp < 0xa3e) {
+                    if (cp === 0x9cd) return true;
+                    if (cp === 0x9d7) return true;
+                    if (cp < 0x9e2) return false;
+                    if (cp < 0x9e4) return true;
+                    if (cp < 0x9e6) return false;
+                    if (cp < 0x9f0) return true;
+                    if (cp === 0x9fe) return true;
+                    if (cp < 0xa01) return false;
+                    if (cp < 0xa03) return true;
+                    if (cp === 0xa03) return true;
+                    if (cp === 0xa3c) return true;
+                    return false;
+                }
+                if (cp < 0xa41) return true;
+                if (cp < 0xa41) return false;
+                if (cp < 0xa43) return true;
+                if (cp < 0xa47) return false;
+                if (cp < 0xa49) return true;
+                if (cp < 0xa4b) return false;
+                if (cp < 0xa4e) return true;
+                if (cp === 0xa51) return true;
+                if (cp < 0xa66) return false;
+                if (cp < 0xa70) return true;
+                if (cp < 0xa70) return false;
+                if (cp < 0xa72) return true;
+                if (cp === 0xa75) return true;
+                if (cp < 0xa81) return false;
+                if (cp < 0xa83) return true;
+                return false;
+            }
+            if (cp < 0xc00) {
+                if (cp < 0xb41) {
+                    if (cp < 0xae2) {
+                        if (cp === 0xa83) return true;
+                        if (cp === 0xabc) return true;
+                        if (cp < 0xabe) return false;
+                        if (cp < 0xac1) return true;
+                        if (cp < 0xac1) return false;
+                        if (cp < 0xac6) return true;
+                        if (cp < 0xac7) return false;
+                        if (cp < 0xac9) return true;
+                        if (cp === 0xac9) return true;
+                        if (cp < 0xacb) return false;
+                        if (cp < 0xacd) return true;
+                        if (cp === 0xacd) return true;
+                        return false;
+                    }
+                    if (cp < 0xae4) return true;
+                    if (cp < 0xae6) return false;
+                    if (cp < 0xaf0) return true;
+                    if (cp < 0xafa) return false;
+                    if (cp < 0xb00) return true;
+                    if (cp === 0xb01) return true;
+                    if (cp < 0xb02) return false;
+                    if (cp < 0xb04) return true;
+                    if (cp === 0xb3c) return true;
+                    if (cp === 0xb3e) return true;
+                    if (cp === 0xb3f) return true;
+                    if (cp === 0xb40) return true;
+                    return false;
+                }
+                if (cp < 0xb82) {
+                    if (cp < 0xb41) return false;
+                    if (cp < 0xb45) return true;
+                    if (cp < 0xb47) return false;
+                    if (cp < 0xb49) return true;
+                    if (cp < 0xb4b) return false;
+                    if (cp < 0xb4d) return true;
+                    if (cp === 0xb4d) return true;
+                    if (cp === 0xb56) return true;
+                    if (cp === 0xb57) return true;
+                    if (cp < 0xb62) return false;
+                    if (cp < 0xb64) return true;
+                    if (cp < 0xb66) return false;
+                    if (cp < 0xb70) return true;
+                    return false;
+                }
+                if (cp === 0xb82) return true;
+                if (cp < 0xbbe) return false;
+                if (cp < 0xbc0) return true;
+                if (cp === 0xbc0) return true;
+                if (cp < 0xbc1) return false;
+                if (cp < 0xbc3) return true;
+                if (cp < 0xbc6) return false;
+                if (cp < 0xbc9) return true;
+                if (cp < 0xbca) return false;
+                if (cp < 0xbcd) return true;
+                if (cp === 0xbcd) return true;
+                if (cp === 0xbd7) return true;
+                if (cp < 0xbe6) return false;
+                if (cp < 0xbf0) return true;
+                return false;
+            }
+            if (cp < 0xcc7) {
+                if (cp < 0xc62) {
+                    if (cp === 0xc00) return true;
+                    if (cp < 0xc01) return false;
+                    if (cp < 0xc04) return true;
+                    if (cp === 0xc04) return true;
+                    if (cp < 0xc3e) return false;
+                    if (cp < 0xc41) return true;
+                    if (cp < 0xc41) return false;
+                    if (cp < 0xc45) return true;
+                    if (cp < 0xc46) return false;
+                    if (cp < 0xc49) return true;
+                    if (cp < 0xc4a) return false;
+                    if (cp < 0xc4e) return true;
+                    if (cp < 0xc55) return false;
+                    if (cp < 0xc57) return true;
+                    return false;
+                }
+                if (cp < 0xc64) return true;
+                if (cp < 0xc66) return false;
+                if (cp < 0xc70) return true;
+                if (cp === 0xc81) return true;
+                if (cp < 0xc82) return false;
+                if (cp < 0xc84) return true;
+                if (cp === 0xcbc) return true;
+                if (cp === 0xcbe) return true;
+                if (cp === 0xcbf) return true;
+                if (cp < 0xcc0) return false;
+                if (cp < 0xcc5) return true;
+                if (cp === 0xcc6) return true;
+                return false;
+            }
+            if (cp < 0xd3b) {
+                if (cp < 0xcc7) return false;
+                if (cp < 0xcc9) return true;
+                if (cp < 0xcca) return false;
+                if (cp < 0xccc) return true;
+                if (cp < 0xccc) return false;
+                if (cp < 0xcce) return true;
+                if (cp < 0xcd5) return false;
+                if (cp < 0xcd7) return true;
+                if (cp < 0xce2) return false;
+                if (cp < 0xce4) return true;
+                if (cp < 0xce6) return false;
+                if (cp < 0xcf0) return true;
+                if (cp < 0xd00) return false;
+                if (cp < 0xd02) return true;
+                if (cp < 0xd02) return false;
+                if (cp < 0xd04) return true;
+                return false;
+            }
+            if (cp < 0xd3d) return true;
+            if (cp < 0xd3e) return false;
+            if (cp < 0xd41) return true;
+            if (cp < 0xd41) return false;
+            if (cp < 0xd45) return true;
+            if (cp < 0xd46) return false;
+            if (cp < 0xd49) return true;
+            if (cp < 0xd4a) return false;
+            if (cp < 0xd4d) return true;
+            if (cp === 0xd4d) return true;
+            if (cp === 0xd57) return true;
+            if (cp < 0xd62) return false;
+            if (cp < 0xd64) return true;
+            if (cp < 0xd66) return false;
+            if (cp < 0xd70) return true;
+            return false;
+        }
+        if (cp < 0x17e0) {
+            if (cp < 0x1038) {
+                if (cp < 0xf18) {
+                    if (cp < 0xe31) {
+                        if (cp < 0xd82) return false;
+                        if (cp < 0xd84) return true;
+                        if (cp === 0xdca) return true;
+                        if (cp < 0xdcf) return false;
+                        if (cp < 0xdd2) return true;
+                        if (cp < 0xdd2) return false;
+                        if (cp < 0xdd5) return true;
+                        if (cp === 0xdd6) return true;
+                        if (cp < 0xdd8) return false;
+                        if (cp < 0xde0) return true;
+                        if (cp < 0xde6) return false;
+                        if (cp < 0xdf0) return true;
+                        if (cp < 0xdf2) return false;
+                        if (cp < 0xdf4) return true;
+                        return false;
+                    }
+                    if (cp === 0xe31) return true;
+                    if (cp < 0xe34) return false;
+                    if (cp < 0xe3b) return true;
+                    if (cp < 0xe47) return false;
+                    if (cp < 0xe4f) return true;
+                    if (cp < 0xe50) return false;
+                    if (cp < 0xe5a) return true;
+                    if (cp === 0xeb1) return true;
+                    if (cp < 0xeb4) return false;
+                    if (cp < 0xeba) return true;
+                    if (cp < 0xebb) return false;
+                    if (cp < 0xebd) return true;
+                    if (cp < 0xec8) return false;
+                    if (cp < 0xece) return true;
+                    if (cp < 0xed0) return false;
+                    if (cp < 0xeda) return true;
+                    return false;
+                }
+                if (cp < 0xf80) {
+                    if (cp < 0xf18) return false;
+                    if (cp < 0xf1a) return true;
+                    if (cp < 0xf20) return false;
+                    if (cp < 0xf2a) return true;
+                    if (cp === 0xf35) return true;
+                    if (cp === 0xf37) return true;
+                    if (cp === 0xf39) return true;
+                    if (cp < 0xf3e) return false;
+                    if (cp < 0xf40) return true;
+                    if (cp < 0xf71) return false;
+                    if (cp < 0xf7f) return true;
+                    if (cp === 0xf7f) return true;
+                    return false;
+                }
+                if (cp < 0xf85) return true;
+                if (cp < 0xf86) return false;
+                if (cp < 0xf88) return true;
+                if (cp < 0xf8d) return false;
+                if (cp < 0xf98) return true;
+                if (cp < 0xf99) return false;
+                if (cp < 0xfbd) return true;
+                if (cp === 0xfc6) return true;
+                if (cp < 0x102b) return false;
+                if (cp < 0x102d) return true;
+                if (cp < 0x102d) return false;
+                if (cp < 0x1031) return true;
+                if (cp === 0x1031) return true;
+                if (cp < 0x1032) return false;
+                if (cp < 0x1038) return true;
+                return false;
+            }
+            if (cp < 0x1090) {
+                if (cp < 0x1062) {
+                    if (cp === 0x1038) return true;
+                    if (cp < 0x1039) return false;
+                    if (cp < 0x103b) return true;
+                    if (cp < 0x103b) return false;
+                    if (cp < 0x103d) return true;
+                    if (cp < 0x103d) return false;
+                    if (cp < 0x103f) return true;
+                    if (cp < 0x1040) return false;
+                    if (cp < 0x104a) return true;
+                    if (cp < 0x1056) return false;
+                    if (cp < 0x1058) return true;
+                    if (cp < 0x1058) return false;
+                    if (cp < 0x105a) return true;
+                    if (cp < 0x105e) return false;
+                    if (cp < 0x1061) return true;
+                    return false;
+                }
+                if (cp < 0x1065) return true;
+                if (cp < 0x1067) return false;
+                if (cp < 0x106e) return true;
+                if (cp < 0x1071) return false;
+                if (cp < 0x1075) return true;
+                if (cp === 0x1082) return true;
+                if (cp < 0x1083) return false;
+                if (cp < 0x1085) return true;
+                if (cp < 0x1085) return false;
+                if (cp < 0x1087) return true;
+                if (cp < 0x1087) return false;
+                if (cp < 0x108d) return true;
+                if (cp === 0x108d) return true;
+                if (cp === 0x108f) return true;
+                return false;
+            }
+            if (cp < 0x1772) {
+                if (cp < 0x1090) return false;
+                if (cp < 0x109a) return true;
+                if (cp < 0x109a) return false;
+                if (cp < 0x109d) return true;
+                if (cp === 0x109d) return true;
+                if (cp < 0x135d) return false;
+                if (cp < 0x1360) return true;
+                if (cp < 0x1369) return false;
+                if (cp < 0x1372) return true;
+                if (cp < 0x1712) return false;
+                if (cp < 0x1715) return true;
+                if (cp < 0x1732) return false;
+                if (cp < 0x1735) return true;
+                if (cp < 0x1752) return false;
+                if (cp < 0x1754) return true;
+                return false;
+            }
+            if (cp < 0x1774) return true;
+            if (cp < 0x17b4) return false;
+            if (cp < 0x17b6) return true;
+            if (cp === 0x17b6) return true;
+            if (cp < 0x17b7) return false;
+            if (cp < 0x17be) return true;
+            if (cp < 0x17be) return false;
+            if (cp < 0x17c6) return true;
+            if (cp === 0x17c6) return true;
+            if (cp < 0x17c7) return false;
+            if (cp < 0x17c9) return true;
+            if (cp < 0x17c9) return false;
+            if (cp < 0x17d4) return true;
+            if (cp === 0x17dd) return true;
+            return false;
+        }
+        if (cp < 0x1b04) {
+            if (cp < 0x1a1b) {
+                if (cp < 0x1930) {
+                    if (cp < 0x17e0) return false;
+                    if (cp < 0x17ea) return true;
+                    if (cp < 0x180b) return false;
+                    if (cp < 0x180e) return true;
+                    if (cp < 0x1810) return false;
+                    if (cp < 0x181a) return true;
+                    if (cp === 0x18a9) return true;
+                    if (cp < 0x1920) return false;
+                    if (cp < 0x1923) return true;
+                    if (cp < 0x1923) return false;
+                    if (cp < 0x1927) return true;
+                    if (cp < 0x1927) return false;
+                    if (cp < 0x1929) return true;
+                    if (cp < 0x1929) return false;
+                    if (cp < 0x192c) return true;
+                    return false;
+                }
+                if (cp < 0x1932) return true;
+                if (cp === 0x1932) return true;
+                if (cp < 0x1933) return false;
+                if (cp < 0x1939) return true;
+                if (cp < 0x1939) return false;
+                if (cp < 0x193c) return true;
+                if (cp < 0x1946) return false;
+                if (cp < 0x1950) return true;
+                if (cp < 0x19d0) return false;
+                if (cp < 0x19da) return true;
+                if (cp === 0x19da) return true;
+                if (cp < 0x1a17) return false;
+                if (cp < 0x1a19) return true;
+                if (cp < 0x1a19) return false;
+                if (cp < 0x1a1b) return true;
+                return false;
+            }
+            if (cp < 0x1a63) {
+                if (cp === 0x1a1b) return true;
+                if (cp === 0x1a55) return true;
+                if (cp === 0x1a56) return true;
+                if (cp === 0x1a57) return true;
+                if (cp < 0x1a58) return false;
+                if (cp < 0x1a5f) return true;
+                if (cp === 0x1a60) return true;
+                if (cp === 0x1a61) return true;
+                if (cp === 0x1a62) return true;
+                return false;
+            }
+            if (cp < 0x1a65) return true;
+            if (cp < 0x1a65) return false;
+            if (cp < 0x1a6d) return true;
+            if (cp < 0x1a6d) return false;
+            if (cp < 0x1a73) return true;
+            if (cp < 0x1a73) return false;
+            if (cp < 0x1a7d) return true;
+            if (cp === 0x1a7f) return true;
+            if (cp < 0x1a80) return false;
+            if (cp < 0x1a8a) return true;
+            if (cp < 0x1a90) return false;
+            if (cp < 0x1a9a) return true;
+            if (cp < 0x1ab0) return false;
+            if (cp < 0x1abe) return true;
+            if (cp < 0x1b00) return false;
+            if (cp < 0x1b04) return true;
+            return false;
+        }
+        if (cp < 0x1baa) {
+            if (cp < 0x1b43) {
+                if (cp === 0x1b04) return true;
+                if (cp === 0x1b34) return true;
+                if (cp === 0x1b35) return true;
+                if (cp < 0x1b36) return false;
+                if (cp < 0x1b3b) return true;
+                if (cp === 0x1b3b) return true;
+                if (cp === 0x1b3c) return true;
+                if (cp < 0x1b3d) return false;
+                if (cp < 0x1b42) return true;
+                if (cp === 0x1b42) return true;
+                return false;
+            }
+            if (cp < 0x1b45) return true;
+            if (cp < 0x1b50) return false;
+            if (cp < 0x1b5a) return true;
+            if (cp < 0x1b6b) return false;
+            if (cp < 0x1b74) return true;
+            if (cp < 0x1b80) return false;
+            if (cp < 0x1b82) return true;
+            if (cp === 0x1b82) return true;
+            if (cp === 0x1ba1) return true;
+            if (cp < 0x1ba2) return false;
+            if (cp < 0x1ba6) return true;
+            if (cp < 0x1ba6) return false;
+            if (cp < 0x1ba8) return true;
+            if (cp < 0x1ba8) return false;
+            if (cp < 0x1baa) return true;
+            return false;
+        }
+        if (cp < 0x1bee) {
+            if (cp === 0x1baa) return true;
+            if (cp < 0x1bab) return false;
+            if (cp < 0x1bae) return true;
+            if (cp < 0x1bb0) return false;
+            if (cp < 0x1bba) return true;
+            if (cp === 0x1be6) return true;
+            if (cp === 0x1be7) return true;
+            if (cp < 0x1be8) return false;
+            if (cp < 0x1bea) return true;
+            if (cp < 0x1bea) return false;
+            if (cp < 0x1bed) return true;
+            if (cp === 0x1bed) return true;
+            return false;
+        }
+        if (cp === 0x1bee) return true;
+        if (cp < 0x1bef) return false;
+        if (cp < 0x1bf2) return true;
+        if (cp < 0x1bf2) return false;
+        if (cp < 0x1bf4) return true;
+        if (cp < 0x1c24) return false;
+        if (cp < 0x1c2c) return true;
+        if (cp < 0x1c2c) return false;
+        if (cp < 0x1c34) return true;
+        if (cp < 0x1c34) return false;
+        if (cp < 0x1c36) return true;
+        if (cp < 0x1c36) return false;
+        if (cp < 0x1c38) return true;
+        if (cp < 0x1c40) return false;
+        if (cp < 0x1c4a) return true;
+        if (cp < 0x1c50) return false;
+        if (cp < 0x1c5a) return true;
+        return false;
+    }
+    if (cp < 0x1123e) {
+        if (cp < 0xaab7) {
+            if (cp < 0xa8b4) {
+                if (cp < 0x2d7f) {
+                    if (cp < 0x1cf8) {
+                        if (cp < 0x1cd0) return false;
+                        if (cp < 0x1cd3) return true;
+                        if (cp < 0x1cd4) return false;
+                        if (cp < 0x1ce1) return true;
+                        if (cp === 0x1ce1) return true;
+                        if (cp < 0x1ce2) return false;
+                        if (cp < 0x1ce9) return true;
+                        if (cp === 0x1ced) return true;
+                        if (cp < 0x1cf2) return false;
+                        if (cp < 0x1cf4) return true;
+                        if (cp === 0x1cf4) return true;
+                        if (cp === 0x1cf7) return true;
+                        return false;
+                    }
+                    if (cp < 0x1cfa) return true;
+                    if (cp < 0x1dc0) return false;
+                    if (cp < 0x1dfa) return true;
+                    if (cp < 0x1dfb) return false;
+                    if (cp < 0x1e00) return true;
+                    if (cp < 0x203f) return false;
+                    if (cp < 0x2041) return true;
+                    if (cp === 0x2054) return true;
+                    if (cp < 0x20d0) return false;
+                    if (cp < 0x20dd) return true;
+                    if (cp === 0x20e1) return true;
+                    if (cp < 0x20e5) return false;
+                    if (cp < 0x20f1) return true;
+                    if (cp < 0x2cef) return false;
+                    if (cp < 0x2cf2) return true;
+                    return false;
+                }
+                if (cp < 0xa69e) {
+                    if (cp === 0x2d7f) return true;
+                    if (cp < 0x2de0) return false;
+                    if (cp < 0x2e00) return true;
+                    if (cp < 0x302a) return false;
+                    if (cp < 0x302e) return true;
+                    if (cp < 0x302e) return false;
+                    if (cp < 0x3030) return true;
+                    if (cp < 0x3099) return false;
+                    if (cp < 0x309b) return true;
+                    if (cp < 0xa620) return false;
+                    if (cp < 0xa62a) return true;
+                    if (cp === 0xa66f) return true;
+                    if (cp < 0xa674) return false;
+                    if (cp < 0xa67e) return true;
+                    return false;
+                }
+                if (cp < 0xa6a0) return true;
+                if (cp < 0xa6f0) return false;
+                if (cp < 0xa6f2) return true;
+                if (cp === 0xa802) return true;
+                if (cp === 0xa806) return true;
+                if (cp === 0xa80b) return true;
+                if (cp < 0xa823) return false;
+                if (cp < 0xa825) return true;
+                if (cp < 0xa825) return false;
+                if (cp < 0xa827) return true;
+                if (cp === 0xa827) return true;
+                if (cp < 0xa880) return false;
+                if (cp < 0xa882) return true;
+                return false;
+            }
+            if (cp < 0xa9d0) {
+                if (cp < 0xa952) {
+                    if (cp < 0xa8b4) return false;
+                    if (cp < 0xa8c4) return true;
+                    if (cp < 0xa8c4) return false;
+                    if (cp < 0xa8c6) return true;
+                    if (cp < 0xa8d0) return false;
+                    if (cp < 0xa8da) return true;
+                    if (cp < 0xa8e0) return false;
+                    if (cp < 0xa8f2) return true;
+                    if (cp === 0xa8ff) return true;
+                    if (cp < 0xa900) return false;
+                    if (cp < 0xa90a) return true;
+                    if (cp < 0xa926) return false;
+                    if (cp < 0xa92e) return true;
+                    if (cp < 0xa947) return false;
+                    if (cp < 0xa952) return true;
+                    return false;
+                }
+                if (cp < 0xa954) return true;
+                if (cp < 0xa980) return false;
+                if (cp < 0xa983) return true;
+                if (cp === 0xa983) return true;
+                if (cp === 0xa9b3) return true;
+                if (cp < 0xa9b4) return false;
+                if (cp < 0xa9b6) return true;
+                if (cp < 0xa9b6) return false;
+                if (cp < 0xa9ba) return true;
+                if (cp < 0xa9ba) return false;
+                if (cp < 0xa9bc) return true;
+                if (cp === 0xa9bc) return true;
+                if (cp < 0xa9bd) return false;
+                if (cp < 0xa9c1) return true;
+                return false;
+            }
+            if (cp < 0xaa43) {
+                if (cp < 0xa9d0) return false;
+                if (cp < 0xa9da) return true;
+                if (cp === 0xa9e5) return true;
+                if (cp < 0xa9f0) return false;
+                if (cp < 0xa9fa) return true;
+                if (cp < 0xaa29) return false;
+                if (cp < 0xaa2f) return true;
+                if (cp < 0xaa2f) return false;
+                if (cp < 0xaa31) return true;
+                if (cp < 0xaa31) return false;
+                if (cp < 0xaa33) return true;
+                if (cp < 0xaa33) return false;
+                if (cp < 0xaa35) return true;
+                if (cp < 0xaa35) return false;
+                if (cp < 0xaa37) return true;
+                return false;
+            }
+            if (cp === 0xaa43) return true;
+            if (cp === 0xaa4c) return true;
+            if (cp === 0xaa4d) return true;
+            if (cp < 0xaa50) return false;
+            if (cp < 0xaa5a) return true;
+            if (cp === 0xaa7b) return true;
+            if (cp === 0xaa7c) return true;
+            if (cp === 0xaa7d) return true;
+            if (cp === 0xaab0) return true;
+            if (cp < 0xaab2) return false;
+            if (cp < 0xaab5) return true;
+            return false;
+        }
+        if (cp < 0x10d30) {
+            if (cp < 0xfe00) {
+                if (cp < 0xabe3) {
+                    if (cp < 0xaab7) return false;
+                    if (cp < 0xaab9) return true;
+                    if (cp < 0xaabe) return false;
+                    if (cp < 0xaac0) return true;
+                    if (cp === 0xaac1) return true;
+                    if (cp === 0xaaeb) return true;
+                    if (cp < 0xaaec) return false;
+                    if (cp < 0xaaee) return true;
+                    if (cp < 0xaaee) return false;
+                    if (cp < 0xaaf0) return true;
+                    if (cp === 0xaaf5) return true;
+                    if (cp === 0xaaf6) return true;
+                    return false;
+                }
+                if (cp < 0xabe5) return true;
+                if (cp === 0xabe5) return true;
+                if (cp < 0xabe6) return false;
+                if (cp < 0xabe8) return true;
+                if (cp === 0xabe8) return true;
+                if (cp < 0xabe9) return false;
+                if (cp < 0xabeb) return true;
+                if (cp === 0xabec) return true;
+                if (cp === 0xabed) return true;
+                if (cp < 0xabf0) return false;
+                if (cp < 0xabfa) return true;
+                if (cp === 0xfb1e) return true;
+                return false;
+            }
+            if (cp < 0x10376) {
+                if (cp < 0xfe00) return false;
+                if (cp < 0xfe10) return true;
+                if (cp < 0xfe20) return false;
+                if (cp < 0xfe30) return true;
+                if (cp < 0xfe33) return false;
+                if (cp < 0xfe35) return true;
+                if (cp < 0xfe4d) return false;
+                if (cp < 0xfe50) return true;
+                if (cp < 0xff10) return false;
+                if (cp < 0xff1a) return true;
+                if (cp === 0xff3f) return true;
+                if (cp === 0x101fd) return true;
+                if (cp === 0x102e0) return true;
+                return false;
+            }
+            if (cp < 0x1037b) return true;
+            if (cp < 0x104a0) return false;
+            if (cp < 0x104aa) return true;
+            if (cp < 0x10a01) return false;
+            if (cp < 0x10a04) return true;
+            if (cp < 0x10a05) return false;
+            if (cp < 0x10a07) return true;
+            if (cp < 0x10a0c) return false;
+            if (cp < 0x10a10) return true;
+            if (cp < 0x10a38) return false;
+            if (cp < 0x10a3b) return true;
+            if (cp === 0x10a3f) return true;
+            if (cp < 0x10ae5) return false;
+            if (cp < 0x10ae7) return true;
+            if (cp < 0x10d24) return false;
+            if (cp < 0x10d28) return true;
+            return false;
+        }
+        if (cp < 0x1112d) {
+            if (cp < 0x11082) {
+                if (cp < 0x10d30) return false;
+                if (cp < 0x10d3a) return true;
+                if (cp < 0x10f46) return false;
+                if (cp < 0x10f51) return true;
+                if (cp === 0x11000) return true;
+                if (cp === 0x11001) return true;
+                if (cp === 0x11002) return true;
+                if (cp < 0x11038) return false;
+                if (cp < 0x11047) return true;
+                if (cp < 0x11066) return false;
+                if (cp < 0x11070) return true;
+                if (cp < 0x1107f) return false;
+                if (cp < 0x11082) return true;
+                return false;
+            }
+            if (cp === 0x11082) return true;
+            if (cp < 0x110b0) return false;
+            if (cp < 0x110b3) return true;
+            if (cp < 0x110b3) return false;
+            if (cp < 0x110b7) return true;
+            if (cp < 0x110b7) return false;
+            if (cp < 0x110b9) return true;
+            if (cp < 0x110b9) return false;
+            if (cp < 0x110bb) return true;
+            if (cp < 0x110f0) return false;
+            if (cp < 0x110fa) return true;
+            if (cp < 0x11100) return false;
+            if (cp < 0x11103) return true;
+            if (cp < 0x11127) return false;
+            if (cp < 0x1112c) return true;
+            if (cp === 0x1112c) return true;
+            return false;
+        }
+        if (cp < 0x111bf) {
+            if (cp < 0x1112d) return false;
+            if (cp < 0x11135) return true;
+            if (cp < 0x11136) return false;
+            if (cp < 0x11140) return true;
+            if (cp < 0x11145) return false;
+            if (cp < 0x11147) return true;
+            if (cp === 0x11173) return true;
+            if (cp < 0x11180) return false;
+            if (cp < 0x11182) return true;
+            if (cp === 0x11182) return true;
+            if (cp < 0x111b3) return false;
+            if (cp < 0x111b6) return true;
+            if (cp < 0x111b6) return false;
+            if (cp < 0x111bf) return true;
+            return false;
+        }
+        if (cp < 0x111c1) return true;
+        if (cp < 0x111c9) return false;
+        if (cp < 0x111cd) return true;
+        if (cp < 0x111d0) return false;
+        if (cp < 0x111da) return true;
+        if (cp < 0x1122c) return false;
+        if (cp < 0x1122f) return true;
+        if (cp < 0x1122f) return false;
+        if (cp < 0x11232) return true;
+        if (cp < 0x11232) return false;
+        if (cp < 0x11234) return true;
+        if (cp === 0x11234) return true;
+        if (cp === 0x11235) return true;
+        if (cp < 0x11236) return false;
+        if (cp < 0x11238) return true;
+        return false;
+    }
+    if (cp < 0x11a33) {
+        if (cp < 0x115af) {
+            if (cp < 0x11435) {
+                if (cp < 0x1133e) {
+                    if (cp === 0x1123e) return true;
+                    if (cp === 0x112df) return true;
+                    if (cp < 0x112e0) return false;
+                    if (cp < 0x112e3) return true;
+                    if (cp < 0x112e3) return false;
+                    if (cp < 0x112eb) return true;
+                    if (cp < 0x112f0) return false;
+                    if (cp < 0x112fa) return true;
+                    if (cp < 0x11300) return false;
+                    if (cp < 0x11302) return true;
+                    if (cp < 0x11302) return false;
+                    if (cp < 0x11304) return true;
+                    if (cp < 0x1133b) return false;
+                    if (cp < 0x1133d) return true;
+                    return false;
+                }
+                if (cp < 0x11340) return true;
+                if (cp === 0x11340) return true;
+                if (cp < 0x11341) return false;
+                if (cp < 0x11345) return true;
+                if (cp < 0x11347) return false;
+                if (cp < 0x11349) return true;
+                if (cp < 0x1134b) return false;
+                if (cp < 0x1134e) return true;
+                if (cp === 0x11357) return true;
+                if (cp < 0x11362) return false;
+                if (cp < 0x11364) return true;
+                if (cp < 0x11366) return false;
+                if (cp < 0x1136d) return true;
+                if (cp < 0x11370) return false;
+                if (cp < 0x11375) return true;
+                return false;
+            }
+            if (cp < 0x114b0) {
+                if (cp < 0x11435) return false;
+                if (cp < 0x11438) return true;
+                if (cp < 0x11438) return false;
+                if (cp < 0x11440) return true;
+                if (cp < 0x11440) return false;
+                if (cp < 0x11442) return true;
+                if (cp < 0x11442) return false;
+                if (cp < 0x11445) return true;
+                if (cp === 0x11445) return true;
+                if (cp === 0x11446) return true;
+                if (cp < 0x11450) return false;
+                if (cp < 0x1145a) return true;
+                if (cp === 0x1145e) return true;
+                return false;
+            }
+            if (cp < 0x114b3) return true;
+            if (cp < 0x114b3) return false;
+            if (cp < 0x114b9) return true;
+            if (cp === 0x114b9) return true;
+            if (cp === 0x114ba) return true;
+            if (cp < 0x114bb) return false;
+            if (cp < 0x114bf) return true;
+            if (cp < 0x114bf) return false;
+            if (cp < 0x114c1) return true;
+            if (cp === 0x114c1) return true;
+            if (cp < 0x114c2) return false;
+            if (cp < 0x114c4) return true;
+            if (cp < 0x114d0) return false;
+            if (cp < 0x114da) return true;
+            return false;
+        }
+        if (cp < 0x116ae) {
+            if (cp < 0x11633) {
+                if (cp < 0x115af) return false;
+                if (cp < 0x115b2) return true;
+                if (cp < 0x115b2) return false;
+                if (cp < 0x115b6) return true;
+                if (cp < 0x115b8) return false;
+                if (cp < 0x115bc) return true;
+                if (cp < 0x115bc) return false;
+                if (cp < 0x115be) return true;
+                if (cp === 0x115be) return true;
+                if (cp < 0x115bf) return false;
+                if (cp < 0x115c1) return true;
+                if (cp < 0x115dc) return false;
+                if (cp < 0x115de) return true;
+                if (cp < 0x11630) return false;
+                if (cp < 0x11633) return true;
+                return false;
+            }
+            if (cp < 0x1163b) return true;
+            if (cp < 0x1163b) return false;
+            if (cp < 0x1163d) return true;
+            if (cp === 0x1163d) return true;
+            if (cp === 0x1163e) return true;
+            if (cp < 0x1163f) return false;
+            if (cp < 0x11641) return true;
+            if (cp < 0x11650) return false;
+            if (cp < 0x1165a) return true;
+            if (cp === 0x116ab) return true;
+            if (cp === 0x116ac) return true;
+            if (cp === 0x116ad) return true;
+            return false;
+        }
+        if (cp < 0x11726) {
+            if (cp < 0x116ae) return false;
+            if (cp < 0x116b0) return true;
+            if (cp < 0x116b0) return false;
+            if (cp < 0x116b6) return true;
+            if (cp === 0x116b6) return true;
+            if (cp === 0x116b7) return true;
+            if (cp < 0x116c0) return false;
+            if (cp < 0x116ca) return true;
+            if (cp < 0x1171d) return false;
+            if (cp < 0x11720) return true;
+            if (cp < 0x11720) return false;
+            if (cp < 0x11722) return true;
+            if (cp < 0x11722) return false;
+            if (cp < 0x11726) return true;
+            return false;
+        }
+        if (cp === 0x11726) return true;
+        if (cp < 0x11727) return false;
+        if (cp < 0x1172c) return true;
+        if (cp < 0x11730) return false;
+        if (cp < 0x1173a) return true;
+        if (cp < 0x1182c) return false;
+        if (cp < 0x1182f) return true;
+        if (cp < 0x1182f) return false;
+        if (cp < 0x11838) return true;
+        if (cp === 0x11838) return true;
+        if (cp < 0x11839) return false;
+        if (cp < 0x1183b) return true;
+        if (cp < 0x118e0) return false;
+        if (cp < 0x118ea) return true;
+        if (cp < 0x11a01) return false;
+        if (cp < 0x11a0b) return true;
+        return false;
+    }
+    if (cp < 0x11d97) {
+        if (cp < 0x11ca9) {
+            if (cp < 0x11a97) {
+                if (cp < 0x11a33) return false;
+                if (cp < 0x11a39) return true;
+                if (cp === 0x11a39) return true;
+                if (cp < 0x11a3b) return false;
+                if (cp < 0x11a3f) return true;
+                if (cp === 0x11a47) return true;
+                if (cp < 0x11a51) return false;
+                if (cp < 0x11a57) return true;
+                if (cp < 0x11a57) return false;
+                if (cp < 0x11a59) return true;
+                if (cp < 0x11a59) return false;
+                if (cp < 0x11a5c) return true;
+                if (cp < 0x11a8a) return false;
+                if (cp < 0x11a97) return true;
+                return false;
+            }
+            if (cp === 0x11a97) return true;
+            if (cp < 0x11a98) return false;
+            if (cp < 0x11a9a) return true;
+            if (cp === 0x11c2f) return true;
+            if (cp < 0x11c30) return false;
+            if (cp < 0x11c37) return true;
+            if (cp < 0x11c38) return false;
+            if (cp < 0x11c3e) return true;
+            if (cp === 0x11c3e) return true;
+            if (cp === 0x11c3f) return true;
+            if (cp < 0x11c50) return false;
+            if (cp < 0x11c5a) return true;
+            if (cp < 0x11c92) return false;
+            if (cp < 0x11ca8) return true;
+            return false;
+        }
+        if (cp < 0x11d3c) {
+            if (cp === 0x11ca9) return true;
+            if (cp < 0x11caa) return false;
+            if (cp < 0x11cb1) return true;
+            if (cp === 0x11cb1) return true;
+            if (cp < 0x11cb2) return false;
+            if (cp < 0x11cb4) return true;
+            if (cp === 0x11cb4) return true;
+            if (cp < 0x11cb5) return false;
+            if (cp < 0x11cb7) return true;
+            if (cp < 0x11d31) return false;
+            if (cp < 0x11d37) return true;
+            if (cp === 0x11d3a) return true;
+            return false;
+        }
+        if (cp < 0x11d3e) return true;
+        if (cp < 0x11d3f) return false;
+        if (cp < 0x11d46) return true;
+        if (cp === 0x11d47) return true;
+        if (cp < 0x11d50) return false;
+        if (cp < 0x11d5a) return true;
+        if (cp < 0x11d8a) return false;
+        if (cp < 0x11d8f) return true;
+        if (cp < 0x11d90) return false;
+        if (cp < 0x11d92) return true;
+        if (cp < 0x11d93) return false;
+        if (cp < 0x11d95) return true;
+        if (cp === 0x11d95) return true;
+        if (cp === 0x11d96) return true;
+        return false;
+    }
+    if (cp < 0x1d242) {
+        if (cp < 0x16f51) {
+            if (cp === 0x11d97) return true;
+            if (cp < 0x11da0) return false;
+            if (cp < 0x11daa) return true;
+            if (cp < 0x11ef3) return false;
+            if (cp < 0x11ef5) return true;
+            if (cp < 0x11ef5) return false;
+            if (cp < 0x11ef7) return true;
+            if (cp < 0x16a60) return false;
+            if (cp < 0x16a6a) return true;
+            if (cp < 0x16af0) return false;
+            if (cp < 0x16af5) return true;
+            if (cp < 0x16b30) return false;
+            if (cp < 0x16b37) return true;
+            if (cp < 0x16b50) return false;
+            if (cp < 0x16b5a) return true;
+            return false;
+        }
+        if (cp < 0x16f7f) return true;
+        if (cp < 0x16f8f) return false;
+        if (cp < 0x16f93) return true;
+        if (cp < 0x1bc9d) return false;
+        if (cp < 0x1bc9f) return true;
+        if (cp < 0x1d165) return false;
+        if (cp < 0x1d167) return true;
+        if (cp < 0x1d167) return false;
+        if (cp < 0x1d16a) return true;
+        if (cp < 0x1d16d) return false;
+        if (cp < 0x1d173) return true;
+        if (cp < 0x1d17b) return false;
+        if (cp < 0x1d183) return true;
+        if (cp < 0x1d185) return false;
+        if (cp < 0x1d18c) return true;
+        if (cp < 0x1d1aa) return false;
+        if (cp < 0x1d1ae) return true;
+        return false;
+    }
+    if (cp < 0x1e000) {
+        if (cp < 0x1d242) return false;
+        if (cp < 0x1d245) return true;
+        if (cp < 0x1d7ce) return false;
+        if (cp < 0x1d800) return true;
+        if (cp < 0x1da00) return false;
+        if (cp < 0x1da37) return true;
+        if (cp < 0x1da3b) return false;
+        if (cp < 0x1da6d) return true;
+        if (cp === 0x1da75) return true;
+        if (cp === 0x1da84) return true;
+        if (cp < 0x1da9b) return false;
+        if (cp < 0x1daa0) return true;
+        if (cp < 0x1daa1) return false;
+        if (cp < 0x1dab0) return true;
+        return false;
+    }
+    if (cp < 0x1e007) return true;
+    if (cp < 0x1e008) return false;
+    if (cp < 0x1e019) return true;
+    if (cp < 0x1e01b) return false;
+    if (cp < 0x1e022) return true;
+    if (cp < 0x1e023) return false;
+    if (cp < 0x1e025) return true;
+    if (cp < 0x1e026) return false;
+    if (cp < 0x1e02b) return true;
+    if (cp < 0x1e8d0) return false;
+    if (cp < 0x1e8d7) return true;
+    if (cp < 0x1e944) return false;
+    if (cp < 0x1e94b) return true;
+    if (cp < 0x1e950) return false;
+    if (cp < 0x1e95a) return true;
+    if (cp < 0xe0100) return false;
+    if (cp < 0xe01f0) return true;
+    return false;
+}
+
+var PropertyData = {
+    $LONE: new Set(["ASCII", "ASCII_Hex_Digit", "AHex", "Alphabetic", "Alpha", "Any", "Assigned", "Bidi_Control", "Bidi_C", "Bidi_Mirrored", "Bidi_M", "Case_Ignorable", "CI", "Cased", "Changes_When_Casefolded", "CWCF", "Changes_When_Casemapped", "CWCM", "Changes_When_Lowercased", "CWL", "Changes_When_NFKC_Casefolded", "CWKCF", "Changes_When_Titlecased", "CWT", "Changes_When_Uppercased", "CWU", "Dash", "Default_Ignorable_Code_Point", "DI", "Deprecated", "Dep", "Diacritic", "Dia", "Emoji", "Emoji_Component", "Emoji_Modifier", "Emoji_Modifier_Base", "Emoji_Presentation", "Extender", "Ext", "Grapheme_Base", "Gr_Base", "Grapheme_Extend", "Gr_Ext", "Hex_Digit", "Hex", "IDS_Binary_Operator", "IDSB", "IDS_Trinary_Operator", "IDST", "ID_Continue", "IDC", "ID_Start", "IDS", "Ideographic", "Ideo", "Join_Control", "Join_C", "Logical_Order_Exception", "LOE", "Lowercase", "Lower", "Math", "Noncharacter_Code_Point", "NChar", "Pattern_Syntax", "Pat_Syn", "Pattern_White_Space", "Pat_WS", "Quotation_Mark", "QMark", "Radical", "Regional_Indicator", "RI", "Sentence_Terminal", "STerm", "Soft_Dotted", "SD", "Terminal_Punctuation", "Term", "Unified_Ideograph", "UIdeo", "Uppercase", "Upper", "Variation_Selector", "VS", "White_Space", "space", "XID_Continue", "XIDC", "XID_Start", "XIDS"]),
+    General_Category: new Set(["Cased_Letter", "LC", "Close_Punctuation", "Pe", "Connector_Punctuation", "Pc", "Control", "Cc", "cntrl", "Currency_Symbol", "Sc", "Dash_Punctuation", "Pd", "Decimal_Number", "Nd", "digit", "Enclosing_Mark", "Me", "Final_Punctuation", "Pf", "Format", "Cf", "Initial_Punctuation", "Pi", "Letter", "L", "Letter_Number", "Nl", "Line_Separator", "Zl", "Lowercase_Letter", "Ll", "Mark", "M", "Combining_Mark", "Math_Symbol", "Sm", "Modifier_Letter", "Lm", "Modifier_Symbol", "Sk", "Nonspacing_Mark", "Mn", "Number", "N", "Open_Punctuation", "Ps", "Other", "C", "Other_Letter", "Lo", "Other_Number", "No", "Other_Punctuation", "Po", "Other_Symbol", "So", "Paragraph_Separator", "Zp", "Private_Use", "Co", "Punctuation", "P", "punct", "Separator", "Z", "Space_Separator", "Zs", "Spacing_Mark", "Mc", "Surrogate", "Cs", "Symbol", "S", "Titlecase_Letter", "Lt", "Unassigned", "Cn", "Uppercase_Letter", "Lu"]),
+    Script: new Set(["Adlam", "Adlm", "Ahom", "Anatolian_Hieroglyphs", "Hluw", "Arabic", "Arab", "Armenian", "Armn", "Avestan", "Avst", "Balinese", "Bali", "Bamum", "Bamu", "Bassa_Vah", "Bass", "Batak", "Batk", "Bengali", "Beng", "Bhaiksuki", "Bhks", "Bopomofo", "Bopo", "Brahmi", "Brah", "Braille", "Brai", "Buginese", "Bugi", "Buhid", "Buhd", "Canadian_Aboriginal", "Cans", "Carian", "Cari", "Caucasian_Albanian", "Aghb", "Chakma", "Cakm", "Cham", "Cherokee", "Cher", "Common", "Zyyy", "Coptic", "Copt", "Qaac", "Cuneiform", "Xsux", "Cypriot", "Cprt", "Cyrillic", "Cyrl", "Deseret", "Dsrt", "Devanagari", "Deva", "Duployan", "Dupl", "Egyptian_Hieroglyphs", "Egyp", "Elbasan", "Elba", "Ethiopic", "Ethi", "Georgian", "Geor", "Glagolitic", "Glag", "Gothic", "Goth", "Grantha", "Gran", "Greek", "Grek", "Gujarati", "Gujr", "Gurmukhi", "Guru", "Han", "Hani", "Hangul", "Hang", "Hanunoo", "Hano", "Hatran", "Hatr", "Hebrew", "Hebr", "Hiragana", "Hira", "Imperial_Aramaic", "Armi", "Inherited", "Zinh", "Qaai", "Inscriptional_Pahlavi", "Phli", "Inscriptional_Parthian", "Prti", "Javanese", "Java", "Kaithi", "Kthi", "Kannada", "Knda", "Katakana", "Kana", "Kayah_Li", "Kali", "Kharoshthi", "Khar", "Khmer", "Khmr", "Khojki", "Khoj", "Khudawadi", "Sind", "Lao", "Laoo", "Latin", "Latn", "Lepcha", "Lepc", "Limbu", "Limb", "Linear_A", "Lina", "Linear_B", "Linb", "Lisu", "Lycian", "Lyci", "Lydian", "Lydi", "Mahajani", "Mahj", "Malayalam", "Mlym", "Mandaic", "Mand", "Manichaean", "Mani", "Marchen", "Marc", "Masaram_Gondi", "Gonm", "Meetei_Mayek", "Mtei", "Mende_Kikakui", "Mend", "Meroitic_Cursive", "Merc", "Meroitic_Hieroglyphs", "Mero", "Miao", "Plrd", "Modi", "Mongolian", "Mong", "Mro", "Mroo", "Multani", "Mult", "Myanmar", "Mymr", "Nabataean", "Nbat", "New_Tai_Lue", "Talu", "Newa", "Nko", "Nkoo", "Nushu", "Nshu", "Ogham", "Ogam", "Ol_Chiki", "Olck", "Old_Hungarian", "Hung", "Old_Italic", "Ital", "Old_North_Arabian", "Narb", "Old_Permic", "Perm", "Old_Persian", "Xpeo", "Old_South_Arabian", "Sarb", "Old_Turkic", "Orkh", "Oriya", "Orya", "Osage", "Osge", "Osmanya", "Osma", "Pahawh_Hmong", "Hmng", "Palmyrene", "Palm", "Pau_Cin_Hau", "Pauc", "Phags_Pa", "Phag", "Phoenician", "Phnx", "Psalter_Pahlavi", "Phlp", "Rejang", "Rjng", "Runic", "Runr", "Samaritan", "Samr", "Saurashtra", "Saur", "Sharada", "Shrd", "Shavian", "Shaw", "Siddham", "Sidd", "SignWriting", "Sgnw", "Sinhala", "Sinh", "Sora_Sompeng", "Sora", "Soyombo", "Soyo", "Sundanese", "Sund", "Syloti_Nagri", "Sylo", "Syriac", "Syrc", "Tagalog", "Tglg", "Tagbanwa", "Tagb", "Tai_Le", "Tale", "Tai_Tham", "Lana", "Tai_Viet", "Tavt", "Takri", "Takr", "Tamil", "Taml", "Tangut", "Tang", "Telugu", "Telu", "Thaana", "Thaa", "Thai", "Tibetan", "Tibt", "Tifinagh", "Tfng", "Tirhuta", "Tirh", "Ugaritic", "Ugar", "Vai", "Vaii", "Warang_Citi", "Wara", "Yi", "Yiii", "Zanabazar_Square", "Zanb"])
+};
+PropertyData.gc = PropertyData.General_Category;
+PropertyData.sc = PropertyData.Script_Extensions = PropertyData.scx = PropertyData.Script;
+
+var Backspace = 0x08;
+var CharacterTabulation = 0x09;
+var LineFeed = 0x0a;
+var LineTabulation = 0x0b;
+var FormFeed = 0x0c;
+var CarriageReturn = 0x0d;
+var ExclamationMark = 0x21;
+var DollarSign = 0x24;
+var LeftParenthesis = 0x28;
+var RightParenthesis = 0x29;
+var Asterisk = 0x2a;
+var PlusSign = 0x2b;
+var Comma = 0x2c;
+var HyphenMinus = 0x2d;
+var FullStop = 0x2e;
+var Solidus = 0x2f;
+var DigitZero = 0x30;
+var DigitOne = 0x31;
+var DigitSeven = 0x37;
+var DigitNine = 0x39;
+var Colon = 0x3a;
+var LessThanSign = 0x3c;
+var EqualsSign = 0x3d;
+var GreaterThanSign = 0x3e;
+var QuestionMark = 0x3f;
+var LatinCapitalLetterA = 0x41;
+var LatinCapitalLetterB = 0x42;
+var LatinCapitalLetterD = 0x44;
+var LatinCapitalLetterF = 0x46;
+var LatinCapitalLetterP = 0x50;
+var LatinCapitalLetterS = 0x53;
+var LatinCapitalLetterW = 0x57;
+var LatinCapitalLetterZ = 0x5a;
+var LowLine = 0x5f;
+var LatinSmallLetterA = 0x61;
+var LatinSmallLetterB = 0x62;
+var LatinSmallLetterC = 0x63;
+var LatinSmallLetterD = 0x64;
+var LatinSmallLetterF = 0x66;
+var LatinSmallLetterG = 0x67;
+var LatinSmallLetterI = 0x69;
+var LatinSmallLetterK = 0x6b;
+var LatinSmallLetterM = 0x6d;
+var LatinSmallLetterN = 0x6e;
+var LatinSmallLetterP = 0x70;
+var LatinSmallLetterR = 0x72;
+var LatinSmallLetterS = 0x73;
+var LatinSmallLetterT = 0x74;
+var LatinSmallLetterU = 0x75;
+var LatinSmallLetterV = 0x76;
+var LatinSmallLetterW = 0x77;
+var LatinSmallLetterX = 0x78;
+var LatinSmallLetterY = 0x79;
+var LatinSmallLetterZ = 0x7a;
+var LeftSquareBracket = 0x5b;
+var ReverseSolidus = 0x5c;
+var RightSquareBracket = 0x5d;
+var CircumflexAccent = 0x5e;
+var LeftCurlyBracket = 0x7b;
+var VerticalLine = 0x7c;
+var RightCurlyBracket = 0x7d;
+var ZeroWidthNonJoiner = 0x200c;
+var ZeroWidthJoiner = 0x200d;
+var LineSeparator = 0x2028;
+var ParagraphSeparator = 0x2029;
+var MinCodePoint = 0x00;
+var MaxCodePoint = 0x10ffff;
+function isLatinLetter(code) {
+    return code >= LatinCapitalLetterA && code <= LatinCapitalLetterZ || code >= LatinSmallLetterA && code <= LatinSmallLetterZ;
+}
+function isDecimalDigit(code) {
+    return code >= DigitZero && code <= DigitNine;
+}
+function isOctalDigit(code) {
+    return code >= DigitZero && code <= DigitSeven;
+}
+function isHexDigit(code) {
+    return code >= DigitZero && code <= DigitNine || code >= LatinCapitalLetterA && code <= LatinCapitalLetterF || code >= LatinSmallLetterA && code <= LatinSmallLetterF;
+}
+function isLineTerminator(code) {
+    return code === LineFeed || code === CarriageReturn || code === LineSeparator || code === ParagraphSeparator;
+}
+function isValidUnicode(code) {
+    return code >= MinCodePoint && code <= MaxCodePoint;
+}
+function digitToInt(code) {
+    if (code >= LatinSmallLetterA && code <= LatinSmallLetterF) {
+        return code - LatinSmallLetterA + 10;
+    }
+    if (code >= LatinCapitalLetterA && code <= LatinCapitalLetterF) {
+        return code - LatinCapitalLetterA + 10;
+    }
+    return code - DigitZero;
 }
 
 var legacyImpl = {
@@ -51101,2672 +53813,6 @@ var RegExpSyntaxError = function (_SyntaxError) {
 
     return RegExpSyntaxError;
 }(SyntaxError);
-
-function isIdStart(cp) {
-    if (cp < 0x41) return false;
-    if (cp < 0x5b) return true;
-    if (cp < 0x61) return false;
-    if (cp < 0x7b) return true;
-    return isLargeIdStart(cp);
-}
-function isIdContinue(cp) {
-    if (cp < 0x30) return false;
-    if (cp < 0x3a) return true;
-    if (cp < 0x41) return false;
-    if (cp < 0x5b) return true;
-    if (cp === 0x5f) return true;
-    if (cp < 0x61) return false;
-    if (cp < 0x7b) return true;
-    return isLargeIdStart(cp) || isLargeIdContinue(cp);
-}
-function isLargeIdStart(cp) {
-    if (cp < 0x303c) {
-        if (cp < 0xeaa) {
-            if (cp < 0xa2a) {
-                if (cp < 0x6d5) {
-                    if (cp < 0x37a) {
-                        if (cp < 0x294) {
-                            if (cp < 0xf8) {
-                                if (cp === 0xaa) return true;
-                                if (cp === 0xb5) return true;
-                                if (cp === 0xba) return true;
-                                if (cp < 0xc0) return false;
-                                if (cp < 0xd7) return true;
-                                if (cp < 0xd8) return false;
-                                if (cp < 0xf7) return true;
-                                return false;
-                            }
-                            if (cp < 0x1bb) return true;
-                            if (cp === 0x1bb) return true;
-                            if (cp < 0x1bc) return false;
-                            if (cp < 0x1c0) return true;
-                            if (cp < 0x1c0) return false;
-                            if (cp < 0x1c4) return true;
-                            if (cp < 0x1c4) return false;
-                            if (cp < 0x294) return true;
-                            return false;
-                        }
-                        if (cp < 0x2ec) {
-                            if (cp === 0x294) return true;
-                            if (cp < 0x295) return false;
-                            if (cp < 0x2b0) return true;
-                            if (cp < 0x2b0) return false;
-                            if (cp < 0x2c2) return true;
-                            if (cp < 0x2c6) return false;
-                            if (cp < 0x2d2) return true;
-                            if (cp < 0x2e0) return false;
-                            if (cp < 0x2e5) return true;
-                            return false;
-                        }
-                        if (cp === 0x2ec) return true;
-                        if (cp === 0x2ee) return true;
-                        if (cp < 0x370) return false;
-                        if (cp < 0x374) return true;
-                        if (cp === 0x374) return true;
-                        if (cp < 0x376) return false;
-                        if (cp < 0x378) return true;
-                        return false;
-                    }
-                    if (cp < 0x531) {
-                        if (cp < 0x38c) {
-                            if (cp === 0x37a) return true;
-                            if (cp < 0x37b) return false;
-                            if (cp < 0x37e) return true;
-                            if (cp === 0x37f) return true;
-                            if (cp === 0x386) return true;
-                            if (cp < 0x388) return false;
-                            if (cp < 0x38b) return true;
-                            return false;
-                        }
-                        if (cp === 0x38c) return true;
-                        if (cp < 0x38e) return false;
-                        if (cp < 0x3a2) return true;
-                        if (cp < 0x3a3) return false;
-                        if (cp < 0x3f6) return true;
-                        if (cp < 0x3f7) return false;
-                        if (cp < 0x482) return true;
-                        if (cp < 0x48a) return false;
-                        if (cp < 0x530) return true;
-                        return false;
-                    }
-                    if (cp < 0x620) {
-                        if (cp < 0x531) return false;
-                        if (cp < 0x557) return true;
-                        if (cp === 0x559) return true;
-                        if (cp < 0x561) return false;
-                        if (cp < 0x588) return true;
-                        if (cp < 0x5d0) return false;
-                        if (cp < 0x5eb) return true;
-                        if (cp < 0x5f0) return false;
-                        if (cp < 0x5f3) return true;
-                        return false;
-                    }
-                    if (cp < 0x640) return true;
-                    if (cp === 0x640) return true;
-                    if (cp < 0x641) return false;
-                    if (cp < 0x64b) return true;
-                    if (cp < 0x66e) return false;
-                    if (cp < 0x670) return true;
-                    if (cp < 0x671) return false;
-                    if (cp < 0x6d4) return true;
-                    return false;
-                }
-                if (cp < 0x904) {
-                    if (cp < 0x7f4) {
-                        if (cp < 0x710) {
-                            if (cp === 0x6d5) return true;
-                            if (cp < 0x6e5) return false;
-                            if (cp < 0x6e7) return true;
-                            if (cp < 0x6ee) return false;
-                            if (cp < 0x6f0) return true;
-                            if (cp < 0x6fa) return false;
-                            if (cp < 0x6fd) return true;
-                            if (cp === 0x6ff) return true;
-                            return false;
-                        }
-                        if (cp === 0x710) return true;
-                        if (cp < 0x712) return false;
-                        if (cp < 0x730) return true;
-                        if (cp < 0x74d) return false;
-                        if (cp < 0x7a6) return true;
-                        if (cp === 0x7b1) return true;
-                        if (cp < 0x7ca) return false;
-                        if (cp < 0x7eb) return true;
-                        return false;
-                    }
-                    if (cp < 0x828) {
-                        if (cp < 0x7f4) return false;
-                        if (cp < 0x7f6) return true;
-                        if (cp === 0x7fa) return true;
-                        if (cp < 0x800) return false;
-                        if (cp < 0x816) return true;
-                        if (cp === 0x81a) return true;
-                        if (cp === 0x824) return true;
-                        return false;
-                    }
-                    if (cp === 0x828) return true;
-                    if (cp < 0x840) return false;
-                    if (cp < 0x859) return true;
-                    if (cp < 0x860) return false;
-                    if (cp < 0x86b) return true;
-                    if (cp < 0x8a0) return false;
-                    if (cp < 0x8b5) return true;
-                    if (cp < 0x8b6) return false;
-                    if (cp < 0x8be) return true;
-                    return false;
-                }
-                if (cp < 0x9b2) {
-                    if (cp < 0x972) {
-                        if (cp < 0x904) return false;
-                        if (cp < 0x93a) return true;
-                        if (cp === 0x93d) return true;
-                        if (cp === 0x950) return true;
-                        if (cp < 0x958) return false;
-                        if (cp < 0x962) return true;
-                        if (cp === 0x971) return true;
-                        return false;
-                    }
-                    if (cp < 0x981) return true;
-                    if (cp < 0x985) return false;
-                    if (cp < 0x98d) return true;
-                    if (cp < 0x98f) return false;
-                    if (cp < 0x991) return true;
-                    if (cp < 0x993) return false;
-                    if (cp < 0x9a9) return true;
-                    if (cp < 0x9aa) return false;
-                    if (cp < 0x9b1) return true;
-                    return false;
-                }
-                if (cp < 0x9df) {
-                    if (cp === 0x9b2) return true;
-                    if (cp < 0x9b6) return false;
-                    if (cp < 0x9ba) return true;
-                    if (cp === 0x9bd) return true;
-                    if (cp === 0x9ce) return true;
-                    if (cp < 0x9dc) return false;
-                    if (cp < 0x9de) return true;
-                    return false;
-                }
-                if (cp < 0x9e2) return true;
-                if (cp < 0x9f0) return false;
-                if (cp < 0x9f2) return true;
-                if (cp === 0x9fc) return true;
-                if (cp < 0xa05) return false;
-                if (cp < 0xa0b) return true;
-                if (cp < 0xa0f) return false;
-                if (cp < 0xa11) return true;
-                if (cp < 0xa13) return false;
-                if (cp < 0xa29) return true;
-                return false;
-            }
-            if (cp < 0xc2a) {
-                if (cp < 0xb2a) {
-                    if (cp < 0xaaa) {
-                        if (cp < 0xa5e) {
-                            if (cp < 0xa2a) return false;
-                            if (cp < 0xa31) return true;
-                            if (cp < 0xa32) return false;
-                            if (cp < 0xa34) return true;
-                            if (cp < 0xa35) return false;
-                            if (cp < 0xa37) return true;
-                            if (cp < 0xa38) return false;
-                            if (cp < 0xa3a) return true;
-                            if (cp < 0xa59) return false;
-                            if (cp < 0xa5d) return true;
-                            return false;
-                        }
-                        if (cp === 0xa5e) return true;
-                        if (cp < 0xa72) return false;
-                        if (cp < 0xa75) return true;
-                        if (cp < 0xa85) return false;
-                        if (cp < 0xa8e) return true;
-                        if (cp < 0xa8f) return false;
-                        if (cp < 0xa92) return true;
-                        if (cp < 0xa93) return false;
-                        if (cp < 0xaa9) return true;
-                        return false;
-                    }
-                    if (cp < 0xae0) {
-                        if (cp < 0xaaa) return false;
-                        if (cp < 0xab1) return true;
-                        if (cp < 0xab2) return false;
-                        if (cp < 0xab4) return true;
-                        if (cp < 0xab5) return false;
-                        if (cp < 0xaba) return true;
-                        if (cp === 0xabd) return true;
-                        if (cp === 0xad0) return true;
-                        return false;
-                    }
-                    if (cp < 0xae2) return true;
-                    if (cp === 0xaf9) return true;
-                    if (cp < 0xb05) return false;
-                    if (cp < 0xb0d) return true;
-                    if (cp < 0xb0f) return false;
-                    if (cp < 0xb11) return true;
-                    if (cp < 0xb13) return false;
-                    if (cp < 0xb29) return true;
-                    return false;
-                }
-                if (cp < 0xb92) {
-                    if (cp < 0xb5f) {
-                        if (cp < 0xb2a) return false;
-                        if (cp < 0xb31) return true;
-                        if (cp < 0xb32) return false;
-                        if (cp < 0xb34) return true;
-                        if (cp < 0xb35) return false;
-                        if (cp < 0xb3a) return true;
-                        if (cp === 0xb3d) return true;
-                        if (cp < 0xb5c) return false;
-                        if (cp < 0xb5e) return true;
-                        return false;
-                    }
-                    if (cp < 0xb62) return true;
-                    if (cp === 0xb71) return true;
-                    if (cp === 0xb83) return true;
-                    if (cp < 0xb85) return false;
-                    if (cp < 0xb8b) return true;
-                    if (cp < 0xb8e) return false;
-                    if (cp < 0xb91) return true;
-                    return false;
-                }
-                if (cp < 0xba8) {
-                    if (cp < 0xb92) return false;
-                    if (cp < 0xb96) return true;
-                    if (cp < 0xb99) return false;
-                    if (cp < 0xb9b) return true;
-                    if (cp === 0xb9c) return true;
-                    if (cp < 0xb9e) return false;
-                    if (cp < 0xba0) return true;
-                    if (cp < 0xba3) return false;
-                    if (cp < 0xba5) return true;
-                    return false;
-                }
-                if (cp < 0xbab) return true;
-                if (cp < 0xbae) return false;
-                if (cp < 0xbba) return true;
-                if (cp === 0xbd0) return true;
-                if (cp < 0xc05) return false;
-                if (cp < 0xc0d) return true;
-                if (cp < 0xc0e) return false;
-                if (cp < 0xc11) return true;
-                if (cp < 0xc12) return false;
-                if (cp < 0xc29) return true;
-                return false;
-            }
-            if (cp < 0xd5f) {
-                if (cp < 0xcbd) {
-                    if (cp < 0xc85) {
-                        if (cp < 0xc2a) return false;
-                        if (cp < 0xc3a) return true;
-                        if (cp === 0xc3d) return true;
-                        if (cp < 0xc58) return false;
-                        if (cp < 0xc5b) return true;
-                        if (cp < 0xc60) return false;
-                        if (cp < 0xc62) return true;
-                        if (cp === 0xc80) return true;
-                        return false;
-                    }
-                    if (cp < 0xc8d) return true;
-                    if (cp < 0xc8e) return false;
-                    if (cp < 0xc91) return true;
-                    if (cp < 0xc92) return false;
-                    if (cp < 0xca9) return true;
-                    if (cp < 0xcaa) return false;
-                    if (cp < 0xcb4) return true;
-                    if (cp < 0xcb5) return false;
-                    if (cp < 0xcba) return true;
-                    return false;
-                }
-                if (cp < 0xd0e) {
-                    if (cp === 0xcbd) return true;
-                    if (cp === 0xcde) return true;
-                    if (cp < 0xce0) return false;
-                    if (cp < 0xce2) return true;
-                    if (cp < 0xcf1) return false;
-                    if (cp < 0xcf3) return true;
-                    if (cp < 0xd05) return false;
-                    if (cp < 0xd0d) return true;
-                    return false;
-                }
-                if (cp < 0xd11) return true;
-                if (cp < 0xd12) return false;
-                if (cp < 0xd3b) return true;
-                if (cp === 0xd3d) return true;
-                if (cp === 0xd4e) return true;
-                if (cp < 0xd54) return false;
-                if (cp < 0xd57) return true;
-                return false;
-            }
-            if (cp < 0xe46) {
-                if (cp < 0xdbd) {
-                    if (cp < 0xd5f) return false;
-                    if (cp < 0xd62) return true;
-                    if (cp < 0xd7a) return false;
-                    if (cp < 0xd80) return true;
-                    if (cp < 0xd85) return false;
-                    if (cp < 0xd97) return true;
-                    if (cp < 0xd9a) return false;
-                    if (cp < 0xdb2) return true;
-                    if (cp < 0xdb3) return false;
-                    if (cp < 0xdbc) return true;
-                    return false;
-                }
-                if (cp === 0xdbd) return true;
-                if (cp < 0xdc0) return false;
-                if (cp < 0xdc7) return true;
-                if (cp < 0xe01) return false;
-                if (cp < 0xe31) return true;
-                if (cp < 0xe32) return false;
-                if (cp < 0xe34) return true;
-                if (cp < 0xe40) return false;
-                if (cp < 0xe46) return true;
-                return false;
-            }
-            if (cp < 0xe8d) {
-                if (cp === 0xe46) return true;
-                if (cp < 0xe81) return false;
-                if (cp < 0xe83) return true;
-                if (cp === 0xe84) return true;
-                if (cp < 0xe87) return false;
-                if (cp < 0xe89) return true;
-                if (cp === 0xe8a) return true;
-                return false;
-            }
-            if (cp === 0xe8d) return true;
-            if (cp < 0xe94) return false;
-            if (cp < 0xe98) return true;
-            if (cp < 0xe99) return false;
-            if (cp < 0xea0) return true;
-            if (cp < 0xea1) return false;
-            if (cp < 0xea4) return true;
-            if (cp === 0xea5) return true;
-            if (cp === 0xea7) return true;
-            return false;
-        }
-        if (cp < 0x1c5a) {
-            if (cp < 0x1380) {
-                if (cp < 0x10a0) {
-                    if (cp < 0xf88) {
-                        if (cp < 0xec6) {
-                            if (cp < 0xeaa) return false;
-                            if (cp < 0xeac) return true;
-                            if (cp < 0xead) return false;
-                            if (cp < 0xeb1) return true;
-                            if (cp < 0xeb2) return false;
-                            if (cp < 0xeb4) return true;
-                            if (cp === 0xebd) return true;
-                            if (cp < 0xec0) return false;
-                            if (cp < 0xec5) return true;
-                            return false;
-                        }
-                        if (cp === 0xec6) return true;
-                        if (cp < 0xedc) return false;
-                        if (cp < 0xee0) return true;
-                        if (cp === 0xf00) return true;
-                        if (cp < 0xf40) return false;
-                        if (cp < 0xf48) return true;
-                        if (cp < 0xf49) return false;
-                        if (cp < 0xf6d) return true;
-                        return false;
-                    }
-                    if (cp < 0x1061) {
-                        if (cp < 0xf88) return false;
-                        if (cp < 0xf8d) return true;
-                        if (cp < 0x1000) return false;
-                        if (cp < 0x102b) return true;
-                        if (cp === 0x103f) return true;
-                        if (cp < 0x1050) return false;
-                        if (cp < 0x1056) return true;
-                        if (cp < 0x105a) return false;
-                        if (cp < 0x105e) return true;
-                        return false;
-                    }
-                    if (cp === 0x1061) return true;
-                    if (cp < 0x1065) return false;
-                    if (cp < 0x1067) return true;
-                    if (cp < 0x106e) return false;
-                    if (cp < 0x1071) return true;
-                    if (cp < 0x1075) return false;
-                    if (cp < 0x1082) return true;
-                    if (cp === 0x108e) return true;
-                    return false;
-                }
-                if (cp < 0x1260) {
-                    if (cp < 0x10fd) {
-                        if (cp < 0x10a0) return false;
-                        if (cp < 0x10c6) return true;
-                        if (cp === 0x10c7) return true;
-                        if (cp === 0x10cd) return true;
-                        if (cp < 0x10d0) return false;
-                        if (cp < 0x10fb) return true;
-                        if (cp === 0x10fc) return true;
-                        return false;
-                    }
-                    if (cp < 0x1249) return true;
-                    if (cp < 0x124a) return false;
-                    if (cp < 0x124e) return true;
-                    if (cp < 0x1250) return false;
-                    if (cp < 0x1257) return true;
-                    if (cp === 0x1258) return true;
-                    if (cp < 0x125a) return false;
-                    if (cp < 0x125e) return true;
-                    return false;
-                }
-                if (cp < 0x12c0) {
-                    if (cp < 0x1260) return false;
-                    if (cp < 0x1289) return true;
-                    if (cp < 0x128a) return false;
-                    if (cp < 0x128e) return true;
-                    if (cp < 0x1290) return false;
-                    if (cp < 0x12b1) return true;
-                    if (cp < 0x12b2) return false;
-                    if (cp < 0x12b6) return true;
-                    if (cp < 0x12b8) return false;
-                    if (cp < 0x12bf) return true;
-                    return false;
-                }
-                if (cp === 0x12c0) return true;
-                if (cp < 0x12c2) return false;
-                if (cp < 0x12c6) return true;
-                if (cp < 0x12c8) return false;
-                if (cp < 0x12d7) return true;
-                if (cp < 0x12d8) return false;
-                if (cp < 0x1311) return true;
-                if (cp < 0x1312) return false;
-                if (cp < 0x1316) return true;
-                if (cp < 0x1318) return false;
-                if (cp < 0x135b) return true;
-                return false;
-            }
-            if (cp < 0x1844) {
-                if (cp < 0x170e) {
-                    if (cp < 0x1681) {
-                        if (cp < 0x1380) return false;
-                        if (cp < 0x1390) return true;
-                        if (cp < 0x13a0) return false;
-                        if (cp < 0x13f6) return true;
-                        if (cp < 0x13f8) return false;
-                        if (cp < 0x13fe) return true;
-                        if (cp < 0x1401) return false;
-                        if (cp < 0x166d) return true;
-                        if (cp < 0x166f) return false;
-                        if (cp < 0x1680) return true;
-                        return false;
-                    }
-                    if (cp < 0x169b) return true;
-                    if (cp < 0x16a0) return false;
-                    if (cp < 0x16eb) return true;
-                    if (cp < 0x16ee) return false;
-                    if (cp < 0x16f1) return true;
-                    if (cp < 0x16f1) return false;
-                    if (cp < 0x16f9) return true;
-                    if (cp < 0x1700) return false;
-                    if (cp < 0x170d) return true;
-                    return false;
-                }
-                if (cp < 0x1780) {
-                    if (cp < 0x170e) return false;
-                    if (cp < 0x1712) return true;
-                    if (cp < 0x1720) return false;
-                    if (cp < 0x1732) return true;
-                    if (cp < 0x1740) return false;
-                    if (cp < 0x1752) return true;
-                    if (cp < 0x1760) return false;
-                    if (cp < 0x176d) return true;
-                    if (cp < 0x176e) return false;
-                    if (cp < 0x1771) return true;
-                    return false;
-                }
-                if (cp < 0x17b4) return true;
-                if (cp === 0x17d7) return true;
-                if (cp === 0x17dc) return true;
-                if (cp < 0x1820) return false;
-                if (cp < 0x1843) return true;
-                if (cp === 0x1843) return true;
-                return false;
-            }
-            if (cp < 0x19b0) {
-                if (cp < 0x18b0) {
-                    if (cp < 0x1844) return false;
-                    if (cp < 0x1878) return true;
-                    if (cp < 0x1880) return false;
-                    if (cp < 0x1885) return true;
-                    if (cp < 0x1885) return false;
-                    if (cp < 0x1887) return true;
-                    if (cp < 0x1887) return false;
-                    if (cp < 0x18a9) return true;
-                    if (cp === 0x18aa) return true;
-                    return false;
-                }
-                if (cp < 0x18f6) return true;
-                if (cp < 0x1900) return false;
-                if (cp < 0x191f) return true;
-                if (cp < 0x1950) return false;
-                if (cp < 0x196e) return true;
-                if (cp < 0x1970) return false;
-                if (cp < 0x1975) return true;
-                if (cp < 0x1980) return false;
-                if (cp < 0x19ac) return true;
-                return false;
-            }
-            if (cp < 0x1b45) {
-                if (cp < 0x19b0) return false;
-                if (cp < 0x19ca) return true;
-                if (cp < 0x1a00) return false;
-                if (cp < 0x1a17) return true;
-                if (cp < 0x1a20) return false;
-                if (cp < 0x1a55) return true;
-                if (cp === 0x1aa7) return true;
-                if (cp < 0x1b05) return false;
-                if (cp < 0x1b34) return true;
-                return false;
-            }
-            if (cp < 0x1b4c) return true;
-            if (cp < 0x1b83) return false;
-            if (cp < 0x1ba1) return true;
-            if (cp < 0x1bae) return false;
-            if (cp < 0x1bb0) return true;
-            if (cp < 0x1bba) return false;
-            if (cp < 0x1be6) return true;
-            if (cp < 0x1c00) return false;
-            if (cp < 0x1c24) return true;
-            if (cp < 0x1c4d) return false;
-            if (cp < 0x1c50) return true;
-            return false;
-        }
-        if (cp < 0x2126) {
-            if (cp < 0x1f5f) {
-                if (cp < 0x1d79) {
-                    if (cp < 0x1cf5) {
-                        if (cp < 0x1c5a) return false;
-                        if (cp < 0x1c78) return true;
-                        if (cp < 0x1c78) return false;
-                        if (cp < 0x1c7e) return true;
-                        if (cp < 0x1c80) return false;
-                        if (cp < 0x1c89) return true;
-                        if (cp < 0x1ce9) return false;
-                        if (cp < 0x1ced) return true;
-                        if (cp < 0x1cee) return false;
-                        if (cp < 0x1cf2) return true;
-                        return false;
-                    }
-                    if (cp < 0x1cf7) return true;
-                    if (cp < 0x1d00) return false;
-                    if (cp < 0x1d2c) return true;
-                    if (cp < 0x1d2c) return false;
-                    if (cp < 0x1d6b) return true;
-                    if (cp < 0x1d6b) return false;
-                    if (cp < 0x1d78) return true;
-                    if (cp === 0x1d78) return true;
-                    return false;
-                }
-                if (cp < 0x1f48) {
-                    if (cp < 0x1d79) return false;
-                    if (cp < 0x1d9b) return true;
-                    if (cp < 0x1d9b) return false;
-                    if (cp < 0x1dc0) return true;
-                    if (cp < 0x1e00) return false;
-                    if (cp < 0x1f16) return true;
-                    if (cp < 0x1f18) return false;
-                    if (cp < 0x1f1e) return true;
-                    if (cp < 0x1f20) return false;
-                    if (cp < 0x1f46) return true;
-                    return false;
-                }
-                if (cp < 0x1f4e) return true;
-                if (cp < 0x1f50) return false;
-                if (cp < 0x1f58) return true;
-                if (cp === 0x1f59) return true;
-                if (cp === 0x1f5b) return true;
-                if (cp === 0x1f5d) return true;
-                return false;
-            }
-            if (cp < 0x1ff6) {
-                if (cp < 0x1fc6) {
-                    if (cp < 0x1f5f) return false;
-                    if (cp < 0x1f7e) return true;
-                    if (cp < 0x1f80) return false;
-                    if (cp < 0x1fb5) return true;
-                    if (cp < 0x1fb6) return false;
-                    if (cp < 0x1fbd) return true;
-                    if (cp === 0x1fbe) return true;
-                    if (cp < 0x1fc2) return false;
-                    if (cp < 0x1fc5) return true;
-                    return false;
-                }
-                if (cp < 0x1fcd) return true;
-                if (cp < 0x1fd0) return false;
-                if (cp < 0x1fd4) return true;
-                if (cp < 0x1fd6) return false;
-                if (cp < 0x1fdc) return true;
-                if (cp < 0x1fe0) return false;
-                if (cp < 0x1fed) return true;
-                if (cp < 0x1ff2) return false;
-                if (cp < 0x1ff5) return true;
-                return false;
-            }
-            if (cp < 0x2107) {
-                if (cp < 0x1ff6) return false;
-                if (cp < 0x1ffd) return true;
-                if (cp === 0x2071) return true;
-                if (cp === 0x207f) return true;
-                if (cp < 0x2090) return false;
-                if (cp < 0x209d) return true;
-                if (cp === 0x2102) return true;
-                return false;
-            }
-            if (cp === 0x2107) return true;
-            if (cp < 0x210a) return false;
-            if (cp < 0x2114) return true;
-            if (cp === 0x2115) return true;
-            if (cp === 0x2118) return true;
-            if (cp < 0x2119) return false;
-            if (cp < 0x211e) return true;
-            if (cp === 0x2124) return true;
-            return false;
-        }
-        if (cp < 0x2d00) {
-            if (cp < 0x2160) {
-                if (cp < 0x2135) {
-                    if (cp === 0x2126) return true;
-                    if (cp === 0x2128) return true;
-                    if (cp < 0x212a) return false;
-                    if (cp < 0x212e) return true;
-                    if (cp === 0x212e) return true;
-                    if (cp < 0x212f) return false;
-                    if (cp < 0x2135) return true;
-                    return false;
-                }
-                if (cp < 0x2139) return true;
-                if (cp === 0x2139) return true;
-                if (cp < 0x213c) return false;
-                if (cp < 0x2140) return true;
-                if (cp < 0x2145) return false;
-                if (cp < 0x214a) return true;
-                if (cp === 0x214e) return true;
-                return false;
-            }
-            if (cp < 0x2c60) {
-                if (cp < 0x2160) return false;
-                if (cp < 0x2183) return true;
-                if (cp < 0x2183) return false;
-                if (cp < 0x2185) return true;
-                if (cp < 0x2185) return false;
-                if (cp < 0x2189) return true;
-                if (cp < 0x2c00) return false;
-                if (cp < 0x2c2f) return true;
-                if (cp < 0x2c30) return false;
-                if (cp < 0x2c5f) return true;
-                return false;
-            }
-            if (cp < 0x2c7c) return true;
-            if (cp < 0x2c7c) return false;
-            if (cp < 0x2c7e) return true;
-            if (cp < 0x2c7e) return false;
-            if (cp < 0x2ce5) return true;
-            if (cp < 0x2ceb) return false;
-            if (cp < 0x2cef) return true;
-            if (cp < 0x2cf2) return false;
-            if (cp < 0x2cf4) return true;
-            return false;
-        }
-        if (cp < 0x2dc0) {
-            if (cp < 0x2d80) {
-                if (cp < 0x2d00) return false;
-                if (cp < 0x2d26) return true;
-                if (cp === 0x2d27) return true;
-                if (cp === 0x2d2d) return true;
-                if (cp < 0x2d30) return false;
-                if (cp < 0x2d68) return true;
-                if (cp === 0x2d6f) return true;
-                return false;
-            }
-            if (cp < 0x2d97) return true;
-            if (cp < 0x2da0) return false;
-            if (cp < 0x2da7) return true;
-            if (cp < 0x2da8) return false;
-            if (cp < 0x2daf) return true;
-            if (cp < 0x2db0) return false;
-            if (cp < 0x2db7) return true;
-            if (cp < 0x2db8) return false;
-            if (cp < 0x2dbf) return true;
-            return false;
-        }
-        if (cp < 0x3006) {
-            if (cp < 0x2dc0) return false;
-            if (cp < 0x2dc7) return true;
-            if (cp < 0x2dc8) return false;
-            if (cp < 0x2dcf) return true;
-            if (cp < 0x2dd0) return false;
-            if (cp < 0x2dd7) return true;
-            if (cp < 0x2dd8) return false;
-            if (cp < 0x2ddf) return true;
-            if (cp === 0x3005) return true;
-            return false;
-        }
-        if (cp === 0x3006) return true;
-        if (cp === 0x3007) return true;
-        if (cp < 0x3021) return false;
-        if (cp < 0x302a) return true;
-        if (cp < 0x3031) return false;
-        if (cp < 0x3036) return true;
-        if (cp < 0x3038) return false;
-        if (cp < 0x303b) return true;
-        if (cp === 0x303b) return true;
-        return false;
-    }
-    if (cp < 0x10a10) {
-        if (cp < 0xab28) {
-            if (cp < 0xa7fa) {
-                if (cp < 0xa60c) {
-                    if (cp < 0x31a0) {
-                        if (cp < 0x30a1) {
-                            if (cp === 0x303c) return true;
-                            if (cp < 0x3041) return false;
-                            if (cp < 0x3097) return true;
-                            if (cp < 0x309b) return false;
-                            if (cp < 0x309d) return true;
-                            if (cp < 0x309d) return false;
-                            if (cp < 0x309f) return true;
-                            if (cp === 0x309f) return true;
-                            return false;
-                        }
-                        if (cp < 0x30fb) return true;
-                        if (cp < 0x30fc) return false;
-                        if (cp < 0x30ff) return true;
-                        if (cp === 0x30ff) return true;
-                        if (cp < 0x3105) return false;
-                        if (cp < 0x312f) return true;
-                        if (cp < 0x3131) return false;
-                        if (cp < 0x318f) return true;
-                        return false;
-                    }
-                    if (cp < 0xa015) {
-                        if (cp < 0x31a0) return false;
-                        if (cp < 0x31bb) return true;
-                        if (cp < 0x31f0) return false;
-                        if (cp < 0x3200) return true;
-                        if (cp < 0x3400) return false;
-                        if (cp < 0x4db6) return true;
-                        if (cp < 0x4e00) return false;
-                        if (cp < 0x9feb) return true;
-                        if (cp < 0xa000) return false;
-                        if (cp < 0xa015) return true;
-                        return false;
-                    }
-                    if (cp === 0xa015) return true;
-                    if (cp < 0xa016) return false;
-                    if (cp < 0xa48d) return true;
-                    if (cp < 0xa4d0) return false;
-                    if (cp < 0xa4f8) return true;
-                    if (cp < 0xa4f8) return false;
-                    if (cp < 0xa4fe) return true;
-                    if (cp < 0xa500) return false;
-                    if (cp < 0xa60c) return true;
-                    return false;
-                }
-                if (cp < 0xa717) {
-                    if (cp < 0xa67f) {
-                        if (cp === 0xa60c) return true;
-                        if (cp < 0xa610) return false;
-                        if (cp < 0xa620) return true;
-                        if (cp < 0xa62a) return false;
-                        if (cp < 0xa62c) return true;
-                        if (cp < 0xa640) return false;
-                        if (cp < 0xa66e) return true;
-                        if (cp === 0xa66e) return true;
-                        return false;
-                    }
-                    if (cp === 0xa67f) return true;
-                    if (cp < 0xa680) return false;
-                    if (cp < 0xa69c) return true;
-                    if (cp < 0xa69c) return false;
-                    if (cp < 0xa69e) return true;
-                    if (cp < 0xa6a0) return false;
-                    if (cp < 0xa6e6) return true;
-                    if (cp < 0xa6e6) return false;
-                    if (cp < 0xa6f0) return true;
-                    return false;
-                }
-                if (cp < 0xa78b) {
-                    if (cp < 0xa717) return false;
-                    if (cp < 0xa720) return true;
-                    if (cp < 0xa722) return false;
-                    if (cp < 0xa770) return true;
-                    if (cp === 0xa770) return true;
-                    if (cp < 0xa771) return false;
-                    if (cp < 0xa788) return true;
-                    if (cp === 0xa788) return true;
-                    return false;
-                }
-                if (cp < 0xa78f) return true;
-                if (cp === 0xa78f) return true;
-                if (cp < 0xa790) return false;
-                if (cp < 0xa7af) return true;
-                if (cp < 0xa7b0) return false;
-                if (cp < 0xa7b8) return true;
-                if (cp === 0xa7f7) return true;
-                if (cp < 0xa7f8) return false;
-                if (cp < 0xa7fa) return true;
-                return false;
-            }
-            if (cp < 0xaa40) {
-                if (cp < 0xa90a) {
-                    if (cp < 0xa840) {
-                        if (cp === 0xa7fa) return true;
-                        if (cp < 0xa7fb) return false;
-                        if (cp < 0xa802) return true;
-                        if (cp < 0xa803) return false;
-                        if (cp < 0xa806) return true;
-                        if (cp < 0xa807) return false;
-                        if (cp < 0xa80b) return true;
-                        if (cp < 0xa80c) return false;
-                        if (cp < 0xa823) return true;
-                        return false;
-                    }
-                    if (cp < 0xa874) return true;
-                    if (cp < 0xa882) return false;
-                    if (cp < 0xa8b4) return true;
-                    if (cp < 0xa8f2) return false;
-                    if (cp < 0xa8f8) return true;
-                    if (cp === 0xa8fb) return true;
-                    if (cp === 0xa8fd) return true;
-                    return false;
-                }
-                if (cp < 0xa9e0) {
-                    if (cp < 0xa90a) return false;
-                    if (cp < 0xa926) return true;
-                    if (cp < 0xa930) return false;
-                    if (cp < 0xa947) return true;
-                    if (cp < 0xa960) return false;
-                    if (cp < 0xa97d) return true;
-                    if (cp < 0xa984) return false;
-                    if (cp < 0xa9b3) return true;
-                    if (cp === 0xa9cf) return true;
-                    return false;
-                }
-                if (cp < 0xa9e5) return true;
-                if (cp === 0xa9e6) return true;
-                if (cp < 0xa9e7) return false;
-                if (cp < 0xa9f0) return true;
-                if (cp < 0xa9fa) return false;
-                if (cp < 0xa9ff) return true;
-                if (cp < 0xaa00) return false;
-                if (cp < 0xaa29) return true;
-                return false;
-            }
-            if (cp < 0xaac0) {
-                if (cp < 0xaa7a) {
-                    if (cp < 0xaa40) return false;
-                    if (cp < 0xaa43) return true;
-                    if (cp < 0xaa44) return false;
-                    if (cp < 0xaa4c) return true;
-                    if (cp < 0xaa60) return false;
-                    if (cp < 0xaa70) return true;
-                    if (cp === 0xaa70) return true;
-                    if (cp < 0xaa71) return false;
-                    if (cp < 0xaa77) return true;
-                    return false;
-                }
-                if (cp === 0xaa7a) return true;
-                if (cp < 0xaa7e) return false;
-                if (cp < 0xaab0) return true;
-                if (cp === 0xaab1) return true;
-                if (cp < 0xaab5) return false;
-                if (cp < 0xaab7) return true;
-                if (cp < 0xaab9) return false;
-                if (cp < 0xaabe) return true;
-                return false;
-            }
-            if (cp < 0xaaf2) {
-                if (cp === 0xaac0) return true;
-                if (cp === 0xaac2) return true;
-                if (cp < 0xaadb) return false;
-                if (cp < 0xaadd) return true;
-                if (cp === 0xaadd) return true;
-                if (cp < 0xaae0) return false;
-                if (cp < 0xaaeb) return true;
-                return false;
-            }
-            if (cp === 0xaaf2) return true;
-            if (cp < 0xaaf3) return false;
-            if (cp < 0xaaf5) return true;
-            if (cp < 0xab01) return false;
-            if (cp < 0xab07) return true;
-            if (cp < 0xab09) return false;
-            if (cp < 0xab0f) return true;
-            if (cp < 0xab11) return false;
-            if (cp < 0xab17) return true;
-            if (cp < 0xab20) return false;
-            if (cp < 0xab27) return true;
-            return false;
-        }
-        if (cp < 0x1003c) {
-            if (cp < 0xfb46) {
-                if (cp < 0xfa70) {
-                    if (cp < 0xabc0) {
-                        if (cp < 0xab28) return false;
-                        if (cp < 0xab2f) return true;
-                        if (cp < 0xab30) return false;
-                        if (cp < 0xab5b) return true;
-                        if (cp < 0xab5c) return false;
-                        if (cp < 0xab60) return true;
-                        if (cp < 0xab60) return false;
-                        if (cp < 0xab66) return true;
-                        if (cp < 0xab70) return false;
-                        if (cp < 0xabc0) return true;
-                        return false;
-                    }
-                    if (cp < 0xabe3) return true;
-                    if (cp < 0xac00) return false;
-                    if (cp < 0xd7a4) return true;
-                    if (cp < 0xd7b0) return false;
-                    if (cp < 0xd7c7) return true;
-                    if (cp < 0xd7cb) return false;
-                    if (cp < 0xd7fc) return true;
-                    if (cp < 0xf900) return false;
-                    if (cp < 0xfa6e) return true;
-                    return false;
-                }
-                if (cp < 0xfb2a) {
-                    if (cp < 0xfa70) return false;
-                    if (cp < 0xfada) return true;
-                    if (cp < 0xfb00) return false;
-                    if (cp < 0xfb07) return true;
-                    if (cp < 0xfb13) return false;
-                    if (cp < 0xfb18) return true;
-                    if (cp === 0xfb1d) return true;
-                    if (cp < 0xfb1f) return false;
-                    if (cp < 0xfb29) return true;
-                    return false;
-                }
-                if (cp < 0xfb37) return true;
-                if (cp < 0xfb38) return false;
-                if (cp < 0xfb3d) return true;
-                if (cp === 0xfb3e) return true;
-                if (cp < 0xfb40) return false;
-                if (cp < 0xfb42) return true;
-                if (cp < 0xfb43) return false;
-                if (cp < 0xfb45) return true;
-                return false;
-            }
-            if (cp < 0xff70) {
-                if (cp < 0xfe70) {
-                    if (cp < 0xfb46) return false;
-                    if (cp < 0xfbb2) return true;
-                    if (cp < 0xfbd3) return false;
-                    if (cp < 0xfd3e) return true;
-                    if (cp < 0xfd50) return false;
-                    if (cp < 0xfd90) return true;
-                    if (cp < 0xfd92) return false;
-                    if (cp < 0xfdc8) return true;
-                    if (cp < 0xfdf0) return false;
-                    if (cp < 0xfdfc) return true;
-                    return false;
-                }
-                if (cp < 0xfe75) return true;
-                if (cp < 0xfe76) return false;
-                if (cp < 0xfefd) return true;
-                if (cp < 0xff21) return false;
-                if (cp < 0xff3b) return true;
-                if (cp < 0xff41) return false;
-                if (cp < 0xff5b) return true;
-                if (cp < 0xff66) return false;
-                if (cp < 0xff70) return true;
-                return false;
-            }
-            if (cp < 0xffca) {
-                if (cp === 0xff70) return true;
-                if (cp < 0xff71) return false;
-                if (cp < 0xff9e) return true;
-                if (cp < 0xff9e) return false;
-                if (cp < 0xffa0) return true;
-                if (cp < 0xffa0) return false;
-                if (cp < 0xffbf) return true;
-                if (cp < 0xffc2) return false;
-                if (cp < 0xffc8) return true;
-                return false;
-            }
-            if (cp < 0xffd0) return true;
-            if (cp < 0xffd2) return false;
-            if (cp < 0xffd8) return true;
-            if (cp < 0xffda) return false;
-            if (cp < 0xffdd) return true;
-            if (cp < 0x10000) return false;
-            if (cp < 0x1000c) return true;
-            if (cp < 0x1000d) return false;
-            if (cp < 0x10027) return true;
-            if (cp < 0x10028) return false;
-            if (cp < 0x1003b) return true;
-            return false;
-        }
-        if (cp < 0x104d8) {
-            if (cp < 0x10342) {
-                if (cp < 0x10280) {
-                    if (cp < 0x1003c) return false;
-                    if (cp < 0x1003e) return true;
-                    if (cp < 0x1003f) return false;
-                    if (cp < 0x1004e) return true;
-                    if (cp < 0x10050) return false;
-                    if (cp < 0x1005e) return true;
-                    if (cp < 0x10080) return false;
-                    if (cp < 0x100fb) return true;
-                    if (cp < 0x10140) return false;
-                    if (cp < 0x10175) return true;
-                    return false;
-                }
-                if (cp < 0x1029d) return true;
-                if (cp < 0x102a0) return false;
-                if (cp < 0x102d1) return true;
-                if (cp < 0x10300) return false;
-                if (cp < 0x10320) return true;
-                if (cp < 0x1032d) return false;
-                if (cp < 0x10341) return true;
-                if (cp === 0x10341) return true;
-                return false;
-            }
-            if (cp < 0x103c8) {
-                if (cp < 0x10342) return false;
-                if (cp < 0x1034a) return true;
-                if (cp === 0x1034a) return true;
-                if (cp < 0x10350) return false;
-                if (cp < 0x10376) return true;
-                if (cp < 0x10380) return false;
-                if (cp < 0x1039e) return true;
-                if (cp < 0x103a0) return false;
-                if (cp < 0x103c4) return true;
-                return false;
-            }
-            if (cp < 0x103d0) return true;
-            if (cp < 0x103d1) return false;
-            if (cp < 0x103d6) return true;
-            if (cp < 0x10400) return false;
-            if (cp < 0x10450) return true;
-            if (cp < 0x10450) return false;
-            if (cp < 0x1049e) return true;
-            if (cp < 0x104b0) return false;
-            if (cp < 0x104d4) return true;
-            return false;
-        }
-        if (cp < 0x1083c) {
-            if (cp < 0x10760) {
-                if (cp < 0x104d8) return false;
-                if (cp < 0x104fc) return true;
-                if (cp < 0x10500) return false;
-                if (cp < 0x10528) return true;
-                if (cp < 0x10530) return false;
-                if (cp < 0x10564) return true;
-                if (cp < 0x10600) return false;
-                if (cp < 0x10737) return true;
-                if (cp < 0x10740) return false;
-                if (cp < 0x10756) return true;
-                return false;
-            }
-            if (cp < 0x10768) return true;
-            if (cp < 0x10800) return false;
-            if (cp < 0x10806) return true;
-            if (cp === 0x10808) return true;
-            if (cp < 0x1080a) return false;
-            if (cp < 0x10836) return true;
-            if (cp < 0x10837) return false;
-            if (cp < 0x10839) return true;
-            return false;
-        }
-        if (cp < 0x108f4) {
-            if (cp === 0x1083c) return true;
-            if (cp < 0x1083f) return false;
-            if (cp < 0x10856) return true;
-            if (cp < 0x10860) return false;
-            if (cp < 0x10877) return true;
-            if (cp < 0x10880) return false;
-            if (cp < 0x1089f) return true;
-            if (cp < 0x108e0) return false;
-            if (cp < 0x108f3) return true;
-            return false;
-        }
-        if (cp < 0x108f6) return true;
-        if (cp < 0x10900) return false;
-        if (cp < 0x10916) return true;
-        if (cp < 0x10920) return false;
-        if (cp < 0x1093a) return true;
-        if (cp < 0x10980) return false;
-        if (cp < 0x109b8) return true;
-        if (cp < 0x109be) return false;
-        if (cp < 0x109c0) return true;
-        if (cp === 0x10a00) return true;
-        return false;
-    }
-    if (cp < 0x16f50) {
-        if (cp < 0x11400) {
-            if (cp < 0x11183) {
-                if (cp < 0x10b80) {
-                    if (cp < 0x10ac0) {
-                        if (cp < 0x10a10) return false;
-                        if (cp < 0x10a14) return true;
-                        if (cp < 0x10a15) return false;
-                        if (cp < 0x10a18) return true;
-                        if (cp < 0x10a19) return false;
-                        if (cp < 0x10a34) return true;
-                        if (cp < 0x10a60) return false;
-                        if (cp < 0x10a7d) return true;
-                        if (cp < 0x10a80) return false;
-                        if (cp < 0x10a9d) return true;
-                        return false;
-                    }
-                    if (cp < 0x10ac8) return true;
-                    if (cp < 0x10ac9) return false;
-                    if (cp < 0x10ae5) return true;
-                    if (cp < 0x10b00) return false;
-                    if (cp < 0x10b36) return true;
-                    if (cp < 0x10b40) return false;
-                    if (cp < 0x10b56) return true;
-                    if (cp < 0x10b60) return false;
-                    if (cp < 0x10b73) return true;
-                    return false;
-                }
-                if (cp < 0x11083) {
-                    if (cp < 0x10b80) return false;
-                    if (cp < 0x10b92) return true;
-                    if (cp < 0x10c00) return false;
-                    if (cp < 0x10c49) return true;
-                    if (cp < 0x10c80) return false;
-                    if (cp < 0x10cb3) return true;
-                    if (cp < 0x10cc0) return false;
-                    if (cp < 0x10cf3) return true;
-                    if (cp < 0x11003) return false;
-                    if (cp < 0x11038) return true;
-                    return false;
-                }
-                if (cp < 0x110b0) return true;
-                if (cp < 0x110d0) return false;
-                if (cp < 0x110e9) return true;
-                if (cp < 0x11103) return false;
-                if (cp < 0x11127) return true;
-                if (cp < 0x11150) return false;
-                if (cp < 0x11173) return true;
-                if (cp === 0x11176) return true;
-                return false;
-            }
-            if (cp < 0x1129f) {
-                if (cp < 0x11213) {
-                    if (cp < 0x11183) return false;
-                    if (cp < 0x111b3) return true;
-                    if (cp < 0x111c1) return false;
-                    if (cp < 0x111c5) return true;
-                    if (cp === 0x111da) return true;
-                    if (cp === 0x111dc) return true;
-                    if (cp < 0x11200) return false;
-                    if (cp < 0x11212) return true;
-                    return false;
-                }
-                if (cp < 0x1122c) return true;
-                if (cp < 0x11280) return false;
-                if (cp < 0x11287) return true;
-                if (cp === 0x11288) return true;
-                if (cp < 0x1128a) return false;
-                if (cp < 0x1128e) return true;
-                if (cp < 0x1128f) return false;
-                if (cp < 0x1129e) return true;
-                return false;
-            }
-            if (cp < 0x1132a) {
-                if (cp < 0x1129f) return false;
-                if (cp < 0x112a9) return true;
-                if (cp < 0x112b0) return false;
-                if (cp < 0x112df) return true;
-                if (cp < 0x11305) return false;
-                if (cp < 0x1130d) return true;
-                if (cp < 0x1130f) return false;
-                if (cp < 0x11311) return true;
-                if (cp < 0x11313) return false;
-                if (cp < 0x11329) return true;
-                return false;
-            }
-            if (cp < 0x11331) return true;
-            if (cp < 0x11332) return false;
-            if (cp < 0x11334) return true;
-            if (cp < 0x11335) return false;
-            if (cp < 0x1133a) return true;
-            if (cp === 0x1133d) return true;
-            if (cp === 0x11350) return true;
-            if (cp < 0x1135d) return false;
-            if (cp < 0x11362) return true;
-            return false;
-        }
-        if (cp < 0x11c00) {
-            if (cp < 0x11700) {
-                if (cp < 0x11580) {
-                    if (cp < 0x11400) return false;
-                    if (cp < 0x11435) return true;
-                    if (cp < 0x11447) return false;
-                    if (cp < 0x1144b) return true;
-                    if (cp < 0x11480) return false;
-                    if (cp < 0x114b0) return true;
-                    if (cp < 0x114c4) return false;
-                    if (cp < 0x114c6) return true;
-                    if (cp === 0x114c7) return true;
-                    return false;
-                }
-                if (cp < 0x115af) return true;
-                if (cp < 0x115d8) return false;
-                if (cp < 0x115dc) return true;
-                if (cp < 0x11600) return false;
-                if (cp < 0x11630) return true;
-                if (cp === 0x11644) return true;
-                if (cp < 0x11680) return false;
-                if (cp < 0x116ab) return true;
-                return false;
-            }
-            if (cp < 0x11a3a) {
-                if (cp < 0x11700) return false;
-                if (cp < 0x1171a) return true;
-                if (cp < 0x118a0) return false;
-                if (cp < 0x118e0) return true;
-                if (cp === 0x118ff) return true;
-                if (cp === 0x11a00) return true;
-                if (cp < 0x11a0b) return false;
-                if (cp < 0x11a33) return true;
-                return false;
-            }
-            if (cp === 0x11a3a) return true;
-            if (cp === 0x11a50) return true;
-            if (cp < 0x11a5c) return false;
-            if (cp < 0x11a84) return true;
-            if (cp < 0x11a86) return false;
-            if (cp < 0x11a8a) return true;
-            if (cp < 0x11ac0) return false;
-            if (cp < 0x11af9) return true;
-            return false;
-        }
-        if (cp < 0x12480) {
-            if (cp < 0x11d08) {
-                if (cp < 0x11c00) return false;
-                if (cp < 0x11c09) return true;
-                if (cp < 0x11c0a) return false;
-                if (cp < 0x11c2f) return true;
-                if (cp === 0x11c40) return true;
-                if (cp < 0x11c72) return false;
-                if (cp < 0x11c90) return true;
-                if (cp < 0x11d00) return false;
-                if (cp < 0x11d07) return true;
-                return false;
-            }
-            if (cp < 0x11d0a) return true;
-            if (cp < 0x11d0b) return false;
-            if (cp < 0x11d31) return true;
-            if (cp === 0x11d46) return true;
-            if (cp < 0x12000) return false;
-            if (cp < 0x1239a) return true;
-            if (cp < 0x12400) return false;
-            if (cp < 0x1246f) return true;
-            return false;
-        }
-        if (cp < 0x16ad0) {
-            if (cp < 0x12480) return false;
-            if (cp < 0x12544) return true;
-            if (cp < 0x13000) return false;
-            if (cp < 0x1342f) return true;
-            if (cp < 0x14400) return false;
-            if (cp < 0x14647) return true;
-            if (cp < 0x16800) return false;
-            if (cp < 0x16a39) return true;
-            if (cp < 0x16a40) return false;
-            if (cp < 0x16a5f) return true;
-            return false;
-        }
-        if (cp < 0x16aee) return true;
-        if (cp < 0x16b00) return false;
-        if (cp < 0x16b30) return true;
-        if (cp < 0x16b40) return false;
-        if (cp < 0x16b44) return true;
-        if (cp < 0x16b63) return false;
-        if (cp < 0x16b78) return true;
-        if (cp < 0x16b7d) return false;
-        if (cp < 0x16b90) return true;
-        if (cp < 0x16f00) return false;
-        if (cp < 0x16f45) return true;
-        return false;
-    }
-    if (cp < 0x1e800) {
-        if (cp < 0x1d4c5) {
-            if (cp < 0x1bc90) {
-                if (cp < 0x1b000) {
-                    if (cp === 0x16f50) return true;
-                    if (cp < 0x16f93) return false;
-                    if (cp < 0x16fa0) return true;
-                    if (cp < 0x16fe0) return false;
-                    if (cp < 0x16fe2) return true;
-                    if (cp < 0x17000) return false;
-                    if (cp < 0x187ed) return true;
-                    if (cp < 0x18800) return false;
-                    if (cp < 0x18af3) return true;
-                    return false;
-                }
-                if (cp < 0x1b11f) return true;
-                if (cp < 0x1b170) return false;
-                if (cp < 0x1b2fc) return true;
-                if (cp < 0x1bc00) return false;
-                if (cp < 0x1bc6b) return true;
-                if (cp < 0x1bc70) return false;
-                if (cp < 0x1bc7d) return true;
-                if (cp < 0x1bc80) return false;
-                if (cp < 0x1bc89) return true;
-                return false;
-            }
-            if (cp < 0x1d4a5) {
-                if (cp < 0x1bc90) return false;
-                if (cp < 0x1bc9a) return true;
-                if (cp < 0x1d400) return false;
-                if (cp < 0x1d455) return true;
-                if (cp < 0x1d456) return false;
-                if (cp < 0x1d49d) return true;
-                if (cp < 0x1d49e) return false;
-                if (cp < 0x1d4a0) return true;
-                if (cp === 0x1d4a2) return true;
-                return false;
-            }
-            if (cp < 0x1d4a7) return true;
-            if (cp < 0x1d4a9) return false;
-            if (cp < 0x1d4ad) return true;
-            if (cp < 0x1d4ae) return false;
-            if (cp < 0x1d4ba) return true;
-            if (cp === 0x1d4bb) return true;
-            if (cp < 0x1d4bd) return false;
-            if (cp < 0x1d4c4) return true;
-            return false;
-        }
-        if (cp < 0x1d6a8) {
-            if (cp < 0x1d53b) {
-                if (cp < 0x1d4c5) return false;
-                if (cp < 0x1d506) return true;
-                if (cp < 0x1d507) return false;
-                if (cp < 0x1d50b) return true;
-                if (cp < 0x1d50d) return false;
-                if (cp < 0x1d515) return true;
-                if (cp < 0x1d516) return false;
-                if (cp < 0x1d51d) return true;
-                if (cp < 0x1d51e) return false;
-                if (cp < 0x1d53a) return true;
-                return false;
-            }
-            if (cp < 0x1d53f) return true;
-            if (cp < 0x1d540) return false;
-            if (cp < 0x1d545) return true;
-            if (cp === 0x1d546) return true;
-            if (cp < 0x1d54a) return false;
-            if (cp < 0x1d551) return true;
-            if (cp < 0x1d552) return false;
-            if (cp < 0x1d6a6) return true;
-            return false;
-        }
-        if (cp < 0x1d736) {
-            if (cp < 0x1d6a8) return false;
-            if (cp < 0x1d6c1) return true;
-            if (cp < 0x1d6c2) return false;
-            if (cp < 0x1d6db) return true;
-            if (cp < 0x1d6dc) return false;
-            if (cp < 0x1d6fb) return true;
-            if (cp < 0x1d6fc) return false;
-            if (cp < 0x1d715) return true;
-            if (cp < 0x1d716) return false;
-            if (cp < 0x1d735) return true;
-            return false;
-        }
-        if (cp < 0x1d74f) return true;
-        if (cp < 0x1d750) return false;
-        if (cp < 0x1d76f) return true;
-        if (cp < 0x1d770) return false;
-        if (cp < 0x1d789) return true;
-        if (cp < 0x1d78a) return false;
-        if (cp < 0x1d7a9) return true;
-        if (cp < 0x1d7aa) return false;
-        if (cp < 0x1d7c3) return true;
-        if (cp < 0x1d7c4) return false;
-        if (cp < 0x1d7cc) return true;
-        return false;
-    }
-    if (cp < 0x1ee5b) {
-        if (cp < 0x1ee3b) {
-            if (cp < 0x1ee24) {
-                if (cp < 0x1e800) return false;
-                if (cp < 0x1e8c5) return true;
-                if (cp < 0x1e900) return false;
-                if (cp < 0x1e944) return true;
-                if (cp < 0x1ee00) return false;
-                if (cp < 0x1ee04) return true;
-                if (cp < 0x1ee05) return false;
-                if (cp < 0x1ee20) return true;
-                if (cp < 0x1ee21) return false;
-                if (cp < 0x1ee23) return true;
-                return false;
-            }
-            if (cp === 0x1ee24) return true;
-            if (cp === 0x1ee27) return true;
-            if (cp < 0x1ee29) return false;
-            if (cp < 0x1ee33) return true;
-            if (cp < 0x1ee34) return false;
-            if (cp < 0x1ee38) return true;
-            if (cp === 0x1ee39) return true;
-            return false;
-        }
-        if (cp < 0x1ee4d) {
-            if (cp === 0x1ee3b) return true;
-            if (cp === 0x1ee42) return true;
-            if (cp === 0x1ee47) return true;
-            if (cp === 0x1ee49) return true;
-            if (cp === 0x1ee4b) return true;
-            return false;
-        }
-        if (cp < 0x1ee50) return true;
-        if (cp < 0x1ee51) return false;
-        if (cp < 0x1ee53) return true;
-        if (cp === 0x1ee54) return true;
-        if (cp === 0x1ee57) return true;
-        if (cp === 0x1ee59) return true;
-        return false;
-    }
-    if (cp < 0x1ee80) {
-        if (cp < 0x1ee67) {
-            if (cp === 0x1ee5b) return true;
-            if (cp === 0x1ee5d) return true;
-            if (cp === 0x1ee5f) return true;
-            if (cp < 0x1ee61) return false;
-            if (cp < 0x1ee63) return true;
-            if (cp === 0x1ee64) return true;
-            return false;
-        }
-        if (cp < 0x1ee6b) return true;
-        if (cp < 0x1ee6c) return false;
-        if (cp < 0x1ee73) return true;
-        if (cp < 0x1ee74) return false;
-        if (cp < 0x1ee78) return true;
-        if (cp < 0x1ee79) return false;
-        if (cp < 0x1ee7d) return true;
-        if (cp === 0x1ee7e) return true;
-        return false;
-    }
-    if (cp < 0x20000) {
-        if (cp < 0x1ee80) return false;
-        if (cp < 0x1ee8a) return true;
-        if (cp < 0x1ee8b) return false;
-        if (cp < 0x1ee9c) return true;
-        if (cp < 0x1eea1) return false;
-        if (cp < 0x1eea4) return true;
-        if (cp < 0x1eea5) return false;
-        if (cp < 0x1eeaa) return true;
-        if (cp < 0x1eeab) return false;
-        if (cp < 0x1eebc) return true;
-        return false;
-    }
-    if (cp < 0x2a6d7) return true;
-    if (cp < 0x2a700) return false;
-    if (cp < 0x2b735) return true;
-    if (cp < 0x2b740) return false;
-    if (cp < 0x2b81e) return true;
-    if (cp < 0x2b820) return false;
-    if (cp < 0x2cea2) return true;
-    if (cp < 0x2ceb0) return false;
-    if (cp < 0x2ebe1) return true;
-    if (cp < 0x2f800) return false;
-    if (cp < 0x2fa1e) return true;
-    return false;
-}
-function isLargeIdContinue(cp) {
-    if (cp < 0x1bf2) {
-        if (cp < 0xd62) {
-            if (cp < 0xa83) {
-                if (cp < 0x93b) {
-                    if (cp < 0x6ea) {
-                        if (cp < 0x5c7) {
-                            if (cp === 0xb7) return true;
-                            if (cp < 0x300) return false;
-                            if (cp < 0x370) return true;
-                            if (cp === 0x387) return true;
-                            if (cp < 0x483) return false;
-                            if (cp < 0x488) return true;
-                            if (cp < 0x591) return false;
-                            if (cp < 0x5be) return true;
-                            if (cp === 0x5bf) return true;
-                            if (cp < 0x5c1) return false;
-                            if (cp < 0x5c3) return true;
-                            if (cp < 0x5c4) return false;
-                            if (cp < 0x5c6) return true;
-                            return false;
-                        }
-                        if (cp === 0x5c7) return true;
-                        if (cp < 0x610) return false;
-                        if (cp < 0x61b) return true;
-                        if (cp < 0x64b) return false;
-                        if (cp < 0x660) return true;
-                        if (cp < 0x660) return false;
-                        if (cp < 0x66a) return true;
-                        if (cp === 0x670) return true;
-                        if (cp < 0x6d6) return false;
-                        if (cp < 0x6dd) return true;
-                        if (cp < 0x6df) return false;
-                        if (cp < 0x6e5) return true;
-                        if (cp < 0x6e7) return false;
-                        if (cp < 0x6e9) return true;
-                        return false;
-                    }
-                    if (cp < 0x81b) {
-                        if (cp < 0x6ea) return false;
-                        if (cp < 0x6ee) return true;
-                        if (cp < 0x6f0) return false;
-                        if (cp < 0x6fa) return true;
-                        if (cp === 0x711) return true;
-                        if (cp < 0x730) return false;
-                        if (cp < 0x74b) return true;
-                        if (cp < 0x7a6) return false;
-                        if (cp < 0x7b1) return true;
-                        if (cp < 0x7c0) return false;
-                        if (cp < 0x7ca) return true;
-                        if (cp < 0x7eb) return false;
-                        if (cp < 0x7f4) return true;
-                        if (cp < 0x816) return false;
-                        if (cp < 0x81a) return true;
-                        return false;
-                    }
-                    if (cp < 0x824) return true;
-                    if (cp < 0x825) return false;
-                    if (cp < 0x828) return true;
-                    if (cp < 0x829) return false;
-                    if (cp < 0x82e) return true;
-                    if (cp < 0x859) return false;
-                    if (cp < 0x85c) return true;
-                    if (cp < 0x8d4) return false;
-                    if (cp < 0x8e2) return true;
-                    if (cp < 0x8e3) return false;
-                    if (cp < 0x903) return true;
-                    if (cp === 0x903) return true;
-                    if (cp === 0x93a) return true;
-                    return false;
-                }
-                if (cp < 0x9cb) {
-                    if (cp < 0x962) {
-                        if (cp === 0x93b) return true;
-                        if (cp === 0x93c) return true;
-                        if (cp < 0x93e) return false;
-                        if (cp < 0x941) return true;
-                        if (cp < 0x941) return false;
-                        if (cp < 0x949) return true;
-                        if (cp < 0x949) return false;
-                        if (cp < 0x94d) return true;
-                        if (cp === 0x94d) return true;
-                        if (cp < 0x94e) return false;
-                        if (cp < 0x950) return true;
-                        if (cp < 0x951) return false;
-                        if (cp < 0x958) return true;
-                        return false;
-                    }
-                    if (cp < 0x964) return true;
-                    if (cp < 0x966) return false;
-                    if (cp < 0x970) return true;
-                    if (cp === 0x981) return true;
-                    if (cp < 0x982) return false;
-                    if (cp < 0x984) return true;
-                    if (cp === 0x9bc) return true;
-                    if (cp < 0x9be) return false;
-                    if (cp < 0x9c1) return true;
-                    if (cp < 0x9c1) return false;
-                    if (cp < 0x9c5) return true;
-                    if (cp < 0x9c7) return false;
-                    if (cp < 0x9c9) return true;
-                    return false;
-                }
-                if (cp < 0xa3e) {
-                    if (cp < 0x9cb) return false;
-                    if (cp < 0x9cd) return true;
-                    if (cp === 0x9cd) return true;
-                    if (cp === 0x9d7) return true;
-                    if (cp < 0x9e2) return false;
-                    if (cp < 0x9e4) return true;
-                    if (cp < 0x9e6) return false;
-                    if (cp < 0x9f0) return true;
-                    if (cp < 0xa01) return false;
-                    if (cp < 0xa03) return true;
-                    if (cp === 0xa03) return true;
-                    if (cp === 0xa3c) return true;
-                    return false;
-                }
-                if (cp < 0xa41) return true;
-                if (cp < 0xa41) return false;
-                if (cp < 0xa43) return true;
-                if (cp < 0xa47) return false;
-                if (cp < 0xa49) return true;
-                if (cp < 0xa4b) return false;
-                if (cp < 0xa4e) return true;
-                if (cp === 0xa51) return true;
-                if (cp < 0xa66) return false;
-                if (cp < 0xa70) return true;
-                if (cp < 0xa70) return false;
-                if (cp < 0xa72) return true;
-                if (cp === 0xa75) return true;
-                if (cp < 0xa81) return false;
-                if (cp < 0xa83) return true;
-                return false;
-            }
-            if (cp < 0xbd7) {
-                if (cp < 0xb40) {
-                    if (cp < 0xae2) {
-                        if (cp === 0xa83) return true;
-                        if (cp === 0xabc) return true;
-                        if (cp < 0xabe) return false;
-                        if (cp < 0xac1) return true;
-                        if (cp < 0xac1) return false;
-                        if (cp < 0xac6) return true;
-                        if (cp < 0xac7) return false;
-                        if (cp < 0xac9) return true;
-                        if (cp === 0xac9) return true;
-                        if (cp < 0xacb) return false;
-                        if (cp < 0xacd) return true;
-                        if (cp === 0xacd) return true;
-                        return false;
-                    }
-                    if (cp < 0xae4) return true;
-                    if (cp < 0xae6) return false;
-                    if (cp < 0xaf0) return true;
-                    if (cp < 0xafa) return false;
-                    if (cp < 0xb00) return true;
-                    if (cp === 0xb01) return true;
-                    if (cp < 0xb02) return false;
-                    if (cp < 0xb04) return true;
-                    if (cp === 0xb3c) return true;
-                    if (cp === 0xb3e) return true;
-                    if (cp === 0xb3f) return true;
-                    return false;
-                }
-                if (cp < 0xb66) {
-                    if (cp === 0xb40) return true;
-                    if (cp < 0xb41) return false;
-                    if (cp < 0xb45) return true;
-                    if (cp < 0xb47) return false;
-                    if (cp < 0xb49) return true;
-                    if (cp < 0xb4b) return false;
-                    if (cp < 0xb4d) return true;
-                    if (cp === 0xb4d) return true;
-                    if (cp === 0xb56) return true;
-                    if (cp === 0xb57) return true;
-                    if (cp < 0xb62) return false;
-                    if (cp < 0xb64) return true;
-                    return false;
-                }
-                if (cp < 0xb70) return true;
-                if (cp === 0xb82) return true;
-                if (cp < 0xbbe) return false;
-                if (cp < 0xbc0) return true;
-                if (cp === 0xbc0) return true;
-                if (cp < 0xbc1) return false;
-                if (cp < 0xbc3) return true;
-                if (cp < 0xbc6) return false;
-                if (cp < 0xbc9) return true;
-                if (cp < 0xbca) return false;
-                if (cp < 0xbcd) return true;
-                if (cp === 0xbcd) return true;
-                return false;
-            }
-            if (cp < 0xcc0) {
-                if (cp < 0xc55) {
-                    if (cp === 0xbd7) return true;
-                    if (cp < 0xbe6) return false;
-                    if (cp < 0xbf0) return true;
-                    if (cp === 0xc00) return true;
-                    if (cp < 0xc01) return false;
-                    if (cp < 0xc04) return true;
-                    if (cp < 0xc3e) return false;
-                    if (cp < 0xc41) return true;
-                    if (cp < 0xc41) return false;
-                    if (cp < 0xc45) return true;
-                    if (cp < 0xc46) return false;
-                    if (cp < 0xc49) return true;
-                    if (cp < 0xc4a) return false;
-                    if (cp < 0xc4e) return true;
-                    return false;
-                }
-                if (cp < 0xc57) return true;
-                if (cp < 0xc62) return false;
-                if (cp < 0xc64) return true;
-                if (cp < 0xc66) return false;
-                if (cp < 0xc70) return true;
-                if (cp === 0xc81) return true;
-                if (cp < 0xc82) return false;
-                if (cp < 0xc84) return true;
-                if (cp === 0xcbc) return true;
-                if (cp === 0xcbe) return true;
-                if (cp === 0xcbf) return true;
-                return false;
-            }
-            if (cp < 0xd00) {
-                if (cp < 0xcc0) return false;
-                if (cp < 0xcc5) return true;
-                if (cp === 0xcc6) return true;
-                if (cp < 0xcc7) return false;
-                if (cp < 0xcc9) return true;
-                if (cp < 0xcca) return false;
-                if (cp < 0xccc) return true;
-                if (cp < 0xccc) return false;
-                if (cp < 0xcce) return true;
-                if (cp < 0xcd5) return false;
-                if (cp < 0xcd7) return true;
-                if (cp < 0xce2) return false;
-                if (cp < 0xce4) return true;
-                if (cp < 0xce6) return false;
-                if (cp < 0xcf0) return true;
-                return false;
-            }
-            if (cp < 0xd02) return true;
-            if (cp < 0xd02) return false;
-            if (cp < 0xd04) return true;
-            if (cp < 0xd3b) return false;
-            if (cp < 0xd3d) return true;
-            if (cp < 0xd3e) return false;
-            if (cp < 0xd41) return true;
-            if (cp < 0xd41) return false;
-            if (cp < 0xd45) return true;
-            if (cp < 0xd46) return false;
-            if (cp < 0xd49) return true;
-            if (cp < 0xd4a) return false;
-            if (cp < 0xd4d) return true;
-            if (cp === 0xd4d) return true;
-            if (cp === 0xd57) return true;
-            return false;
-        }
-        if (cp < 0x17be) {
-            if (cp < 0x102b) {
-                if (cp < 0xebb) {
-                    if (cp < 0xde6) {
-                        if (cp < 0xd62) return false;
-                        if (cp < 0xd64) return true;
-                        if (cp < 0xd66) return false;
-                        if (cp < 0xd70) return true;
-                        if (cp < 0xd82) return false;
-                        if (cp < 0xd84) return true;
-                        if (cp === 0xdca) return true;
-                        if (cp < 0xdcf) return false;
-                        if (cp < 0xdd2) return true;
-                        if (cp < 0xdd2) return false;
-                        if (cp < 0xdd5) return true;
-                        if (cp === 0xdd6) return true;
-                        if (cp < 0xdd8) return false;
-                        if (cp < 0xde0) return true;
-                        return false;
-                    }
-                    if (cp < 0xdf0) return true;
-                    if (cp < 0xdf2) return false;
-                    if (cp < 0xdf4) return true;
-                    if (cp === 0xe31) return true;
-                    if (cp < 0xe34) return false;
-                    if (cp < 0xe3b) return true;
-                    if (cp < 0xe47) return false;
-                    if (cp < 0xe4f) return true;
-                    if (cp < 0xe50) return false;
-                    if (cp < 0xe5a) return true;
-                    if (cp === 0xeb1) return true;
-                    if (cp < 0xeb4) return false;
-                    if (cp < 0xeba) return true;
-                    return false;
-                }
-                if (cp < 0xf3e) {
-                    if (cp < 0xebb) return false;
-                    if (cp < 0xebd) return true;
-                    if (cp < 0xec8) return false;
-                    if (cp < 0xece) return true;
-                    if (cp < 0xed0) return false;
-                    if (cp < 0xeda) return true;
-                    if (cp < 0xf18) return false;
-                    if (cp < 0xf1a) return true;
-                    if (cp < 0xf20) return false;
-                    if (cp < 0xf2a) return true;
-                    if (cp === 0xf35) return true;
-                    if (cp === 0xf37) return true;
-                    if (cp === 0xf39) return true;
-                    return false;
-                }
-                if (cp < 0xf40) return true;
-                if (cp < 0xf71) return false;
-                if (cp < 0xf7f) return true;
-                if (cp === 0xf7f) return true;
-                if (cp < 0xf80) return false;
-                if (cp < 0xf85) return true;
-                if (cp < 0xf86) return false;
-                if (cp < 0xf88) return true;
-                if (cp < 0xf8d) return false;
-                if (cp < 0xf98) return true;
-                if (cp < 0xf99) return false;
-                if (cp < 0xfbd) return true;
-                if (cp === 0xfc6) return true;
-                return false;
-            }
-            if (cp < 0x1083) {
-                if (cp < 0x1040) {
-                    if (cp < 0x102b) return false;
-                    if (cp < 0x102d) return true;
-                    if (cp < 0x102d) return false;
-                    if (cp < 0x1031) return true;
-                    if (cp === 0x1031) return true;
-                    if (cp < 0x1032) return false;
-                    if (cp < 0x1038) return true;
-                    if (cp === 0x1038) return true;
-                    if (cp < 0x1039) return false;
-                    if (cp < 0x103b) return true;
-                    if (cp < 0x103b) return false;
-                    if (cp < 0x103d) return true;
-                    if (cp < 0x103d) return false;
-                    if (cp < 0x103f) return true;
-                    return false;
-                }
-                if (cp < 0x104a) return true;
-                if (cp < 0x1056) return false;
-                if (cp < 0x1058) return true;
-                if (cp < 0x1058) return false;
-                if (cp < 0x105a) return true;
-                if (cp < 0x105e) return false;
-                if (cp < 0x1061) return true;
-                if (cp < 0x1062) return false;
-                if (cp < 0x1065) return true;
-                if (cp < 0x1067) return false;
-                if (cp < 0x106e) return true;
-                if (cp < 0x1071) return false;
-                if (cp < 0x1075) return true;
-                if (cp === 0x1082) return true;
-                return false;
-            }
-            if (cp < 0x135d) {
-                if (cp < 0x1083) return false;
-                if (cp < 0x1085) return true;
-                if (cp < 0x1085) return false;
-                if (cp < 0x1087) return true;
-                if (cp < 0x1087) return false;
-                if (cp < 0x108d) return true;
-                if (cp === 0x108d) return true;
-                if (cp === 0x108f) return true;
-                if (cp < 0x1090) return false;
-                if (cp < 0x109a) return true;
-                if (cp < 0x109a) return false;
-                if (cp < 0x109d) return true;
-                if (cp === 0x109d) return true;
-                return false;
-            }
-            if (cp < 0x1360) return true;
-            if (cp < 0x1369) return false;
-            if (cp < 0x1372) return true;
-            if (cp < 0x1712) return false;
-            if (cp < 0x1715) return true;
-            if (cp < 0x1732) return false;
-            if (cp < 0x1735) return true;
-            if (cp < 0x1752) return false;
-            if (cp < 0x1754) return true;
-            if (cp < 0x1772) return false;
-            if (cp < 0x1774) return true;
-            if (cp < 0x17b4) return false;
-            if (cp < 0x17b6) return true;
-            if (cp === 0x17b6) return true;
-            if (cp < 0x17b7) return false;
-            if (cp < 0x17be) return true;
-            return false;
-        }
-        if (cp < 0x1a73) {
-            if (cp < 0x1939) {
-                if (cp < 0x18a9) {
-                    if (cp < 0x17be) return false;
-                    if (cp < 0x17c6) return true;
-                    if (cp === 0x17c6) return true;
-                    if (cp < 0x17c7) return false;
-                    if (cp < 0x17c9) return true;
-                    if (cp < 0x17c9) return false;
-                    if (cp < 0x17d4) return true;
-                    if (cp === 0x17dd) return true;
-                    if (cp < 0x17e0) return false;
-                    if (cp < 0x17ea) return true;
-                    if (cp < 0x180b) return false;
-                    if (cp < 0x180e) return true;
-                    if (cp < 0x1810) return false;
-                    if (cp < 0x181a) return true;
-                    return false;
-                }
-                if (cp === 0x18a9) return true;
-                if (cp < 0x1920) return false;
-                if (cp < 0x1923) return true;
-                if (cp < 0x1923) return false;
-                if (cp < 0x1927) return true;
-                if (cp < 0x1927) return false;
-                if (cp < 0x1929) return true;
-                if (cp < 0x1929) return false;
-                if (cp < 0x192c) return true;
-                if (cp < 0x1930) return false;
-                if (cp < 0x1932) return true;
-                if (cp === 0x1932) return true;
-                if (cp < 0x1933) return false;
-                if (cp < 0x1939) return true;
-                return false;
-            }
-            if (cp < 0x1a56) {
-                if (cp < 0x1939) return false;
-                if (cp < 0x193c) return true;
-                if (cp < 0x1946) return false;
-                if (cp < 0x1950) return true;
-                if (cp < 0x19d0) return false;
-                if (cp < 0x19da) return true;
-                if (cp === 0x19da) return true;
-                if (cp < 0x1a17) return false;
-                if (cp < 0x1a19) return true;
-                if (cp < 0x1a19) return false;
-                if (cp < 0x1a1b) return true;
-                if (cp === 0x1a1b) return true;
-                if (cp === 0x1a55) return true;
-                return false;
-            }
-            if (cp === 0x1a56) return true;
-            if (cp === 0x1a57) return true;
-            if (cp < 0x1a58) return false;
-            if (cp < 0x1a5f) return true;
-            if (cp === 0x1a60) return true;
-            if (cp === 0x1a61) return true;
-            if (cp === 0x1a62) return true;
-            if (cp < 0x1a63) return false;
-            if (cp < 0x1a65) return true;
-            if (cp < 0x1a65) return false;
-            if (cp < 0x1a6d) return true;
-            if (cp < 0x1a6d) return false;
-            if (cp < 0x1a73) return true;
-            return false;
-        }
-        if (cp < 0x1b6b) {
-            if (cp < 0x1b35) {
-                if (cp < 0x1a73) return false;
-                if (cp < 0x1a7d) return true;
-                if (cp === 0x1a7f) return true;
-                if (cp < 0x1a80) return false;
-                if (cp < 0x1a8a) return true;
-                if (cp < 0x1a90) return false;
-                if (cp < 0x1a9a) return true;
-                if (cp < 0x1ab0) return false;
-                if (cp < 0x1abe) return true;
-                if (cp < 0x1b00) return false;
-                if (cp < 0x1b04) return true;
-                if (cp === 0x1b04) return true;
-                if (cp === 0x1b34) return true;
-                return false;
-            }
-            if (cp === 0x1b35) return true;
-            if (cp < 0x1b36) return false;
-            if (cp < 0x1b3b) return true;
-            if (cp === 0x1b3b) return true;
-            if (cp === 0x1b3c) return true;
-            if (cp < 0x1b3d) return false;
-            if (cp < 0x1b42) return true;
-            if (cp === 0x1b42) return true;
-            if (cp < 0x1b43) return false;
-            if (cp < 0x1b45) return true;
-            if (cp < 0x1b50) return false;
-            if (cp < 0x1b5a) return true;
-            return false;
-        }
-        if (cp < 0x1bab) {
-            if (cp < 0x1b6b) return false;
-            if (cp < 0x1b74) return true;
-            if (cp < 0x1b80) return false;
-            if (cp < 0x1b82) return true;
-            if (cp === 0x1b82) return true;
-            if (cp === 0x1ba1) return true;
-            if (cp < 0x1ba2) return false;
-            if (cp < 0x1ba6) return true;
-            if (cp < 0x1ba6) return false;
-            if (cp < 0x1ba8) return true;
-            if (cp < 0x1ba8) return false;
-            if (cp < 0x1baa) return true;
-            if (cp === 0x1baa) return true;
-            return false;
-        }
-        if (cp < 0x1bae) return true;
-        if (cp < 0x1bb0) return false;
-        if (cp < 0x1bba) return true;
-        if (cp === 0x1be6) return true;
-        if (cp === 0x1be7) return true;
-        if (cp < 0x1be8) return false;
-        if (cp < 0x1bea) return true;
-        if (cp < 0x1bea) return false;
-        if (cp < 0x1bed) return true;
-        if (cp === 0x1bed) return true;
-        if (cp === 0x1bee) return true;
-        if (cp < 0x1bef) return false;
-        if (cp < 0x1bf2) return true;
-        return false;
-    }
-    if (cp < 0x111d0) {
-        if (cp < 0xaa43) {
-            if (cp < 0xa69e) {
-                if (cp < 0x1dc0) {
-                    if (cp < 0x1cd4) {
-                        if (cp < 0x1bf2) return false;
-                        if (cp < 0x1bf4) return true;
-                        if (cp < 0x1c24) return false;
-                        if (cp < 0x1c2c) return true;
-                        if (cp < 0x1c2c) return false;
-                        if (cp < 0x1c34) return true;
-                        if (cp < 0x1c34) return false;
-                        if (cp < 0x1c36) return true;
-                        if (cp < 0x1c36) return false;
-                        if (cp < 0x1c38) return true;
-                        if (cp < 0x1c40) return false;
-                        if (cp < 0x1c4a) return true;
-                        if (cp < 0x1c50) return false;
-                        if (cp < 0x1c5a) return true;
-                        if (cp < 0x1cd0) return false;
-                        if (cp < 0x1cd3) return true;
-                        return false;
-                    }
-                    if (cp < 0x1ce1) return true;
-                    if (cp === 0x1ce1) return true;
-                    if (cp < 0x1ce2) return false;
-                    if (cp < 0x1ce9) return true;
-                    if (cp === 0x1ced) return true;
-                    if (cp < 0x1cf2) return false;
-                    if (cp < 0x1cf4) return true;
-                    if (cp === 0x1cf4) return true;
-                    if (cp === 0x1cf7) return true;
-                    if (cp < 0x1cf8) return false;
-                    if (cp < 0x1cfa) return true;
-                    return false;
-                }
-                if (cp < 0x2d7f) {
-                    if (cp < 0x1dc0) return false;
-                    if (cp < 0x1dfa) return true;
-                    if (cp < 0x1dfb) return false;
-                    if (cp < 0x1e00) return true;
-                    if (cp < 0x203f) return false;
-                    if (cp < 0x2041) return true;
-                    if (cp === 0x2054) return true;
-                    if (cp < 0x20d0) return false;
-                    if (cp < 0x20dd) return true;
-                    if (cp === 0x20e1) return true;
-                    if (cp < 0x20e5) return false;
-                    if (cp < 0x20f1) return true;
-                    if (cp < 0x2cef) return false;
-                    if (cp < 0x2cf2) return true;
-                    return false;
-                }
-                if (cp === 0x2d7f) return true;
-                if (cp < 0x2de0) return false;
-                if (cp < 0x2e00) return true;
-                if (cp < 0x302a) return false;
-                if (cp < 0x302e) return true;
-                if (cp < 0x302e) return false;
-                if (cp < 0x3030) return true;
-                if (cp < 0x3099) return false;
-                if (cp < 0x309b) return true;
-                if (cp < 0xa620) return false;
-                if (cp < 0xa62a) return true;
-                if (cp === 0xa66f) return true;
-                if (cp < 0xa674) return false;
-                if (cp < 0xa67e) return true;
-                return false;
-            }
-            if (cp < 0xa952) {
-                if (cp < 0xa880) {
-                    if (cp < 0xa69e) return false;
-                    if (cp < 0xa6a0) return true;
-                    if (cp < 0xa6f0) return false;
-                    if (cp < 0xa6f2) return true;
-                    if (cp === 0xa802) return true;
-                    if (cp === 0xa806) return true;
-                    if (cp === 0xa80b) return true;
-                    if (cp < 0xa823) return false;
-                    if (cp < 0xa825) return true;
-                    if (cp < 0xa825) return false;
-                    if (cp < 0xa827) return true;
-                    if (cp === 0xa827) return true;
-                    return false;
-                }
-                if (cp < 0xa882) return true;
-                if (cp < 0xa8b4) return false;
-                if (cp < 0xa8c4) return true;
-                if (cp < 0xa8c4) return false;
-                if (cp < 0xa8c6) return true;
-                if (cp < 0xa8d0) return false;
-                if (cp < 0xa8da) return true;
-                if (cp < 0xa8e0) return false;
-                if (cp < 0xa8f2) return true;
-                if (cp < 0xa900) return false;
-                if (cp < 0xa90a) return true;
-                if (cp < 0xa926) return false;
-                if (cp < 0xa92e) return true;
-                if (cp < 0xa947) return false;
-                if (cp < 0xa952) return true;
-                return false;
-            }
-            if (cp < 0xa9bd) {
-                if (cp < 0xa952) return false;
-                if (cp < 0xa954) return true;
-                if (cp < 0xa980) return false;
-                if (cp < 0xa983) return true;
-                if (cp === 0xa983) return true;
-                if (cp === 0xa9b3) return true;
-                if (cp < 0xa9b4) return false;
-                if (cp < 0xa9b6) return true;
-                if (cp < 0xa9b6) return false;
-                if (cp < 0xa9ba) return true;
-                if (cp < 0xa9ba) return false;
-                if (cp < 0xa9bc) return true;
-                if (cp === 0xa9bc) return true;
-                return false;
-            }
-            if (cp < 0xa9c1) return true;
-            if (cp < 0xa9d0) return false;
-            if (cp < 0xa9da) return true;
-            if (cp === 0xa9e5) return true;
-            if (cp < 0xa9f0) return false;
-            if (cp < 0xa9fa) return true;
-            if (cp < 0xaa29) return false;
-            if (cp < 0xaa2f) return true;
-            if (cp < 0xaa2f) return false;
-            if (cp < 0xaa31) return true;
-            if (cp < 0xaa31) return false;
-            if (cp < 0xaa33) return true;
-            if (cp < 0xaa33) return false;
-            if (cp < 0xaa35) return true;
-            if (cp < 0xaa35) return false;
-            if (cp < 0xaa37) return true;
-            return false;
-        }
-        if (cp < 0x102e0) {
-            if (cp < 0xaaf6) {
-                if (cp < 0xaab2) {
-                    if (cp === 0xaa43) return true;
-                    if (cp === 0xaa4c) return true;
-                    if (cp === 0xaa4d) return true;
-                    if (cp < 0xaa50) return false;
-                    if (cp < 0xaa5a) return true;
-                    if (cp === 0xaa7b) return true;
-                    if (cp === 0xaa7c) return true;
-                    if (cp === 0xaa7d) return true;
-                    if (cp === 0xaab0) return true;
-                    return false;
-                }
-                if (cp < 0xaab5) return true;
-                if (cp < 0xaab7) return false;
-                if (cp < 0xaab9) return true;
-                if (cp < 0xaabe) return false;
-                if (cp < 0xaac0) return true;
-                if (cp === 0xaac1) return true;
-                if (cp === 0xaaeb) return true;
-                if (cp < 0xaaec) return false;
-                if (cp < 0xaaee) return true;
-                if (cp < 0xaaee) return false;
-                if (cp < 0xaaf0) return true;
-                if (cp === 0xaaf5) return true;
-                return false;
-            }
-            if (cp < 0xabf0) {
-                if (cp === 0xaaf6) return true;
-                if (cp < 0xabe3) return false;
-                if (cp < 0xabe5) return true;
-                if (cp === 0xabe5) return true;
-                if (cp < 0xabe6) return false;
-                if (cp < 0xabe8) return true;
-                if (cp === 0xabe8) return true;
-                if (cp < 0xabe9) return false;
-                if (cp < 0xabeb) return true;
-                if (cp === 0xabec) return true;
-                if (cp === 0xabed) return true;
-                return false;
-            }
-            if (cp < 0xabfa) return true;
-            if (cp === 0xfb1e) return true;
-            if (cp < 0xfe00) return false;
-            if (cp < 0xfe10) return true;
-            if (cp < 0xfe20) return false;
-            if (cp < 0xfe30) return true;
-            if (cp < 0xfe33) return false;
-            if (cp < 0xfe35) return true;
-            if (cp < 0xfe4d) return false;
-            if (cp < 0xfe50) return true;
-            if (cp < 0xff10) return false;
-            if (cp < 0xff1a) return true;
-            if (cp === 0xff3f) return true;
-            if (cp === 0x101fd) return true;
-            return false;
-        }
-        if (cp < 0x110b0) {
-            if (cp < 0x10ae5) {
-                if (cp === 0x102e0) return true;
-                if (cp < 0x10376) return false;
-                if (cp < 0x1037b) return true;
-                if (cp < 0x104a0) return false;
-                if (cp < 0x104aa) return true;
-                if (cp < 0x10a01) return false;
-                if (cp < 0x10a04) return true;
-                if (cp < 0x10a05) return false;
-                if (cp < 0x10a07) return true;
-                if (cp < 0x10a0c) return false;
-                if (cp < 0x10a10) return true;
-                if (cp < 0x10a38) return false;
-                if (cp < 0x10a3b) return true;
-                if (cp === 0x10a3f) return true;
-                return false;
-            }
-            if (cp < 0x10ae7) return true;
-            if (cp === 0x11000) return true;
-            if (cp === 0x11001) return true;
-            if (cp === 0x11002) return true;
-            if (cp < 0x11038) return false;
-            if (cp < 0x11047) return true;
-            if (cp < 0x11066) return false;
-            if (cp < 0x11070) return true;
-            if (cp < 0x1107f) return false;
-            if (cp < 0x11082) return true;
-            if (cp === 0x11082) return true;
-            return false;
-        }
-        if (cp < 0x1112d) {
-            if (cp < 0x110b0) return false;
-            if (cp < 0x110b3) return true;
-            if (cp < 0x110b3) return false;
-            if (cp < 0x110b7) return true;
-            if (cp < 0x110b7) return false;
-            if (cp < 0x110b9) return true;
-            if (cp < 0x110b9) return false;
-            if (cp < 0x110bb) return true;
-            if (cp < 0x110f0) return false;
-            if (cp < 0x110fa) return true;
-            if (cp < 0x11100) return false;
-            if (cp < 0x11103) return true;
-            if (cp < 0x11127) return false;
-            if (cp < 0x1112c) return true;
-            if (cp === 0x1112c) return true;
-            return false;
-        }
-        if (cp < 0x11135) return true;
-        if (cp < 0x11136) return false;
-        if (cp < 0x11140) return true;
-        if (cp === 0x11173) return true;
-        if (cp < 0x11180) return false;
-        if (cp < 0x11182) return true;
-        if (cp === 0x11182) return true;
-        if (cp < 0x111b3) return false;
-        if (cp < 0x111b6) return true;
-        if (cp < 0x111b6) return false;
-        if (cp < 0x111bf) return true;
-        if (cp < 0x111bf) return false;
-        if (cp < 0x111c1) return true;
-        if (cp < 0x111ca) return false;
-        if (cp < 0x111cd) return true;
-        return false;
-    }
-    if (cp < 0x11726) {
-        if (cp < 0x114b3) {
-            if (cp < 0x11340) {
-                if (cp < 0x112df) {
-                    if (cp < 0x111d0) return false;
-                    if (cp < 0x111da) return true;
-                    if (cp < 0x1122c) return false;
-                    if (cp < 0x1122f) return true;
-                    if (cp < 0x1122f) return false;
-                    if (cp < 0x11232) return true;
-                    if (cp < 0x11232) return false;
-                    if (cp < 0x11234) return true;
-                    if (cp === 0x11234) return true;
-                    if (cp === 0x11235) return true;
-                    if (cp < 0x11236) return false;
-                    if (cp < 0x11238) return true;
-                    if (cp === 0x1123e) return true;
-                    return false;
-                }
-                if (cp === 0x112df) return true;
-                if (cp < 0x112e0) return false;
-                if (cp < 0x112e3) return true;
-                if (cp < 0x112e3) return false;
-                if (cp < 0x112eb) return true;
-                if (cp < 0x112f0) return false;
-                if (cp < 0x112fa) return true;
-                if (cp < 0x11300) return false;
-                if (cp < 0x11302) return true;
-                if (cp < 0x11302) return false;
-                if (cp < 0x11304) return true;
-                if (cp === 0x1133c) return true;
-                if (cp < 0x1133e) return false;
-                if (cp < 0x11340) return true;
-                return false;
-            }
-            if (cp < 0x11435) {
-                if (cp === 0x11340) return true;
-                if (cp < 0x11341) return false;
-                if (cp < 0x11345) return true;
-                if (cp < 0x11347) return false;
-                if (cp < 0x11349) return true;
-                if (cp < 0x1134b) return false;
-                if (cp < 0x1134e) return true;
-                if (cp === 0x11357) return true;
-                if (cp < 0x11362) return false;
-                if (cp < 0x11364) return true;
-                if (cp < 0x11366) return false;
-                if (cp < 0x1136d) return true;
-                if (cp < 0x11370) return false;
-                if (cp < 0x11375) return true;
-                return false;
-            }
-            if (cp < 0x11438) return true;
-            if (cp < 0x11438) return false;
-            if (cp < 0x11440) return true;
-            if (cp < 0x11440) return false;
-            if (cp < 0x11442) return true;
-            if (cp < 0x11442) return false;
-            if (cp < 0x11445) return true;
-            if (cp === 0x11445) return true;
-            if (cp === 0x11446) return true;
-            if (cp < 0x11450) return false;
-            if (cp < 0x1145a) return true;
-            if (cp < 0x114b0) return false;
-            if (cp < 0x114b3) return true;
-            return false;
-        }
-        if (cp < 0x11633) {
-            if (cp < 0x115af) {
-                if (cp < 0x114b3) return false;
-                if (cp < 0x114b9) return true;
-                if (cp === 0x114b9) return true;
-                if (cp === 0x114ba) return true;
-                if (cp < 0x114bb) return false;
-                if (cp < 0x114bf) return true;
-                if (cp < 0x114bf) return false;
-                if (cp < 0x114c1) return true;
-                if (cp === 0x114c1) return true;
-                if (cp < 0x114c2) return false;
-                if (cp < 0x114c4) return true;
-                if (cp < 0x114d0) return false;
-                if (cp < 0x114da) return true;
-                return false;
-            }
-            if (cp < 0x115b2) return true;
-            if (cp < 0x115b2) return false;
-            if (cp < 0x115b6) return true;
-            if (cp < 0x115b8) return false;
-            if (cp < 0x115bc) return true;
-            if (cp < 0x115bc) return false;
-            if (cp < 0x115be) return true;
-            if (cp === 0x115be) return true;
-            if (cp < 0x115bf) return false;
-            if (cp < 0x115c1) return true;
-            if (cp < 0x115dc) return false;
-            if (cp < 0x115de) return true;
-            if (cp < 0x11630) return false;
-            if (cp < 0x11633) return true;
-            return false;
-        }
-        if (cp < 0x116ad) {
-            if (cp < 0x11633) return false;
-            if (cp < 0x1163b) return true;
-            if (cp < 0x1163b) return false;
-            if (cp < 0x1163d) return true;
-            if (cp === 0x1163d) return true;
-            if (cp === 0x1163e) return true;
-            if (cp < 0x1163f) return false;
-            if (cp < 0x11641) return true;
-            if (cp < 0x11650) return false;
-            if (cp < 0x1165a) return true;
-            if (cp === 0x116ab) return true;
-            if (cp === 0x116ac) return true;
-            return false;
-        }
-        if (cp === 0x116ad) return true;
-        if (cp < 0x116ae) return false;
-        if (cp < 0x116b0) return true;
-        if (cp < 0x116b0) return false;
-        if (cp < 0x116b6) return true;
-        if (cp === 0x116b6) return true;
-        if (cp === 0x116b7) return true;
-        if (cp < 0x116c0) return false;
-        if (cp < 0x116ca) return true;
-        if (cp < 0x1171d) return false;
-        if (cp < 0x11720) return true;
-        if (cp < 0x11720) return false;
-        if (cp < 0x11722) return true;
-        if (cp < 0x11722) return false;
-        if (cp < 0x11726) return true;
-        return false;
-    }
-    if (cp < 0x11d3f) {
-        if (cp < 0x11a98) {
-            if (cp < 0x11a39) {
-                if (cp === 0x11726) return true;
-                if (cp < 0x11727) return false;
-                if (cp < 0x1172c) return true;
-                if (cp < 0x11730) return false;
-                if (cp < 0x1173a) return true;
-                if (cp < 0x118e0) return false;
-                if (cp < 0x118ea) return true;
-                if (cp < 0x11a01) return false;
-                if (cp < 0x11a07) return true;
-                if (cp < 0x11a07) return false;
-                if (cp < 0x11a09) return true;
-                if (cp < 0x11a09) return false;
-                if (cp < 0x11a0b) return true;
-                if (cp < 0x11a33) return false;
-                if (cp < 0x11a39) return true;
-                return false;
-            }
-            if (cp === 0x11a39) return true;
-            if (cp < 0x11a3b) return false;
-            if (cp < 0x11a3f) return true;
-            if (cp === 0x11a47) return true;
-            if (cp < 0x11a51) return false;
-            if (cp < 0x11a57) return true;
-            if (cp < 0x11a57) return false;
-            if (cp < 0x11a59) return true;
-            if (cp < 0x11a59) return false;
-            if (cp < 0x11a5c) return true;
-            if (cp < 0x11a8a) return false;
-            if (cp < 0x11a97) return true;
-            if (cp === 0x11a97) return true;
-            return false;
-        }
-        if (cp < 0x11ca9) {
-            if (cp < 0x11a98) return false;
-            if (cp < 0x11a9a) return true;
-            if (cp === 0x11c2f) return true;
-            if (cp < 0x11c30) return false;
-            if (cp < 0x11c37) return true;
-            if (cp < 0x11c38) return false;
-            if (cp < 0x11c3e) return true;
-            if (cp === 0x11c3e) return true;
-            if (cp === 0x11c3f) return true;
-            if (cp < 0x11c50) return false;
-            if (cp < 0x11c5a) return true;
-            if (cp < 0x11c92) return false;
-            if (cp < 0x11ca8) return true;
-            return false;
-        }
-        if (cp === 0x11ca9) return true;
-        if (cp < 0x11caa) return false;
-        if (cp < 0x11cb1) return true;
-        if (cp === 0x11cb1) return true;
-        if (cp < 0x11cb2) return false;
-        if (cp < 0x11cb4) return true;
-        if (cp === 0x11cb4) return true;
-        if (cp < 0x11cb5) return false;
-        if (cp < 0x11cb7) return true;
-        if (cp < 0x11d31) return false;
-        if (cp < 0x11d37) return true;
-        if (cp === 0x11d3a) return true;
-        if (cp < 0x11d3c) return false;
-        if (cp < 0x11d3e) return true;
-        return false;
-    }
-    if (cp < 0x1d242) {
-        if (cp < 0x16f8f) {
-            if (cp < 0x11d3f) return false;
-            if (cp < 0x11d46) return true;
-            if (cp === 0x11d47) return true;
-            if (cp < 0x11d50) return false;
-            if (cp < 0x11d5a) return true;
-            if (cp < 0x16a60) return false;
-            if (cp < 0x16a6a) return true;
-            if (cp < 0x16af0) return false;
-            if (cp < 0x16af5) return true;
-            if (cp < 0x16b30) return false;
-            if (cp < 0x16b37) return true;
-            if (cp < 0x16b50) return false;
-            if (cp < 0x16b5a) return true;
-            if (cp < 0x16f51) return false;
-            if (cp < 0x16f7f) return true;
-            return false;
-        }
-        if (cp < 0x16f93) return true;
-        if (cp < 0x1bc9d) return false;
-        if (cp < 0x1bc9f) return true;
-        if (cp < 0x1d165) return false;
-        if (cp < 0x1d167) return true;
-        if (cp < 0x1d167) return false;
-        if (cp < 0x1d16a) return true;
-        if (cp < 0x1d16d) return false;
-        if (cp < 0x1d173) return true;
-        if (cp < 0x1d17b) return false;
-        if (cp < 0x1d183) return true;
-        if (cp < 0x1d185) return false;
-        if (cp < 0x1d18c) return true;
-        if (cp < 0x1d1aa) return false;
-        if (cp < 0x1d1ae) return true;
-        return false;
-    }
-    if (cp < 0x1e000) {
-        if (cp < 0x1d242) return false;
-        if (cp < 0x1d245) return true;
-        if (cp < 0x1d7ce) return false;
-        if (cp < 0x1d800) return true;
-        if (cp < 0x1da00) return false;
-        if (cp < 0x1da37) return true;
-        if (cp < 0x1da3b) return false;
-        if (cp < 0x1da6d) return true;
-        if (cp === 0x1da75) return true;
-        if (cp === 0x1da84) return true;
-        if (cp < 0x1da9b) return false;
-        if (cp < 0x1daa0) return true;
-        if (cp < 0x1daa1) return false;
-        if (cp < 0x1dab0) return true;
-        return false;
-    }
-    if (cp < 0x1e007) return true;
-    if (cp < 0x1e008) return false;
-    if (cp < 0x1e019) return true;
-    if (cp < 0x1e01b) return false;
-    if (cp < 0x1e022) return true;
-    if (cp < 0x1e023) return false;
-    if (cp < 0x1e025) return true;
-    if (cp < 0x1e026) return false;
-    if (cp < 0x1e02b) return true;
-    if (cp < 0x1e8d0) return false;
-    if (cp < 0x1e8d7) return true;
-    if (cp < 0x1e944) return false;
-    if (cp < 0x1e94b) return true;
-    if (cp < 0x1e950) return false;
-    if (cp < 0x1e95a) return true;
-    if (cp < 0xe0100) return false;
-    if (cp < 0xe01f0) return true;
-    return false;
-}
-
-var PropertyData = {
-    $LONE: new Set(["ASCII", "ASCII_Hex_Digit", "AHex", "Alphabetic", "Alpha", "Any", "Assigned", "Bidi_Control", "Bidi_C", "Bidi_Mirrored", "Bidi_M", "Case_Ignorable", "CI", "Cased", "Changes_When_Casefolded", "CWCF", "Changes_When_Casemapped", "CWCM", "Changes_When_Lowercased", "CWL", "Changes_When_NFKC_Casefolded", "CWKCF", "Changes_When_Titlecased", "CWT", "Changes_When_Uppercased", "CWU", "Dash", "Default_Ignorable_Code_Point", "DI", "Deprecated", "Dep", "Diacritic", "Dia", "Emoji", "Emoji_Component", "Emoji_Modifier", "Emoji_Modifier_Base", "Emoji_Presentation", "Extender", "Ext", "Grapheme_Base", "Gr_Base", "Grapheme_Extend", "Gr_Ext", "Hex_Digit", "Hex", "IDS_Binary_Operator", "IDSB", "IDS_Trinary_Operator", "IDST", "ID_Continue", "IDC", "ID_Start", "IDS", "Ideographic", "Ideo", "Join_Control", "Join_C", "Logical_Order_Exception", "LOE", "Lowercase", "Lower", "Math", "Noncharacter_Code_Point", "NChar", "Pattern_Syntax", "Pat_Syn", "Pattern_White_Space", "Pat_WS", "Quotation_Mark", "QMark", "Radical", "Regional_Indicator", "RI", "Sentence_Terminal", "STerm", "Soft_Dotted", "SD", "Terminal_Punctuation", "Term", "Unified_Ideograph", "UIdeo", "Uppercase", "Upper", "Variation_Selector", "VS", "White_Space", "space", "XID_Continue", "XIDC", "XID_Start", "XIDS"]),
-    General_Category: new Set(["Cased_Letter", "LC", "Close_Punctuation", "Pe", "Connector_Punctuation", "Pc", "Control", "Cc", "cntrl", "Currency_Symbol", "Sc", "Dash_Punctuation", "Pd", "Decimal_Number", "Nd", "digit", "Enclosing_Mark", "Me", "Final_Punctuation", "Pf", "Format", "Cf", "Initial_Punctuation", "Pi", "Letter", "L", "Letter_Number", "Nl", "Line_Separator", "Zl", "Lowercase_Letter", "Ll", "Mark", "M", "Combining_Mark", "Math_Symbol", "Sm", "Modifier_Letter", "Lm", "Modifier_Symbol", "Sk", "Nonspacing_Mark", "Mn", "Number", "N", "Open_Punctuation", "Ps", "Other", "C", "Other_Letter", "Lo", "Other_Number", "No", "Other_Punctuation", "Po", "Other_Symbol", "So", "Paragraph_Separator", "Zp", "Private_Use", "Co", "Punctuation", "P", "punct", "Separator", "Z", "Space_Separator", "Zs", "Spacing_Mark", "Mc", "Surrogate", "Cs", "Symbol", "S", "Titlecase_Letter", "Lt", "Unassigned", "Cn", "Uppercase_Letter", "Lu"]),
-    Script: new Set(["Adlam", "Adlm", "Ahom", "Anatolian_Hieroglyphs", "Hluw", "Arabic", "Arab", "Armenian", "Armn", "Avestan", "Avst", "Balinese", "Bali", "Bamum", "Bamu", "Bassa_Vah", "Bass", "Batak", "Batk", "Bengali", "Beng", "Bhaiksuki", "Bhks", "Bopomofo", "Bopo", "Brahmi", "Brah", "Braille", "Brai", "Buginese", "Bugi", "Buhid", "Buhd", "Canadian_Aboriginal", "Cans", "Carian", "Cari", "Caucasian_Albanian", "Aghb", "Chakma", "Cakm", "Cham", "Cherokee", "Cher", "Common", "Zyyy", "Coptic", "Copt", "Qaac", "Cuneiform", "Xsux", "Cypriot", "Cprt", "Cyrillic", "Cyrl", "Deseret", "Dsrt", "Devanagari", "Deva", "Duployan", "Dupl", "Egyptian_Hieroglyphs", "Egyp", "Elbasan", "Elba", "Ethiopic", "Ethi", "Georgian", "Geor", "Glagolitic", "Glag", "Gothic", "Goth", "Grantha", "Gran", "Greek", "Grek", "Gujarati", "Gujr", "Gurmukhi", "Guru", "Han", "Hani", "Hangul", "Hang", "Hanunoo", "Hano", "Hatran", "Hatr", "Hebrew", "Hebr", "Hiragana", "Hira", "Imperial_Aramaic", "Armi", "Inherited", "Zinh", "Qaai", "Inscriptional_Pahlavi", "Phli", "Inscriptional_Parthian", "Prti", "Javanese", "Java", "Kaithi", "Kthi", "Kannada", "Knda", "Katakana", "Kana", "Kayah_Li", "Kali", "Kharoshthi", "Khar", "Khmer", "Khmr", "Khojki", "Khoj", "Khudawadi", "Sind", "Lao", "Laoo", "Latin", "Latn", "Lepcha", "Lepc", "Limbu", "Limb", "Linear_A", "Lina", "Linear_B", "Linb", "Lisu", "Lycian", "Lyci", "Lydian", "Lydi", "Mahajani", "Mahj", "Malayalam", "Mlym", "Mandaic", "Mand", "Manichaean", "Mani", "Marchen", "Marc", "Masaram_Gondi", "Gonm", "Meetei_Mayek", "Mtei", "Mende_Kikakui", "Mend", "Meroitic_Cursive", "Merc", "Meroitic_Hieroglyphs", "Mero", "Miao", "Plrd", "Modi", "Mongolian", "Mong", "Mro", "Mroo", "Multani", "Mult", "Myanmar", "Mymr", "Nabataean", "Nbat", "New_Tai_Lue", "Talu", "Newa", "Nko", "Nkoo", "Nushu", "Nshu", "Ogham", "Ogam", "Ol_Chiki", "Olck", "Old_Hungarian", "Hung", "Old_Italic", "Ital", "Old_North_Arabian", "Narb", "Old_Permic", "Perm", "Old_Persian", "Xpeo", "Old_South_Arabian", "Sarb", "Old_Turkic", "Orkh", "Oriya", "Orya", "Osage", "Osge", "Osmanya", "Osma", "Pahawh_Hmong", "Hmng", "Palmyrene", "Palm", "Pau_Cin_Hau", "Pauc", "Phags_Pa", "Phag", "Phoenician", "Phnx", "Psalter_Pahlavi", "Phlp", "Rejang", "Rjng", "Runic", "Runr", "Samaritan", "Samr", "Saurashtra", "Saur", "Sharada", "Shrd", "Shavian", "Shaw", "Siddham", "Sidd", "SignWriting", "Sgnw", "Sinhala", "Sinh", "Sora_Sompeng", "Sora", "Soyombo", "Soyo", "Sundanese", "Sund", "Syloti_Nagri", "Sylo", "Syriac", "Syrc", "Tagalog", "Tglg", "Tagbanwa", "Tagb", "Tai_Le", "Tale", "Tai_Tham", "Lana", "Tai_Viet", "Tavt", "Takri", "Takr", "Tamil", "Taml", "Tangut", "Tang", "Telugu", "Telu", "Thaana", "Thaa", "Thai", "Tibetan", "Tibt", "Tifinagh", "Tfng", "Tirhuta", "Tirh", "Ugaritic", "Ugar", "Vai", "Vaii", "Warang_Citi", "Wara", "Yi", "Yiii", "Zanabazar_Square", "Zanb"])
-};
-PropertyData.gc = PropertyData.General_Category;
-PropertyData.sc = PropertyData.Script_Extensions = PropertyData.scx = PropertyData.Script;
-
-var Backspace = 0x08;
-var CharacterTabulation = 0x09;
-var LineFeed = 0x0a;
-var LineTabulation = 0x0b;
-var FormFeed = 0x0c;
-var CarriageReturn = 0x0d;
-var ExclamationMark = 0x21;
-var DollarSign = 0x24;
-var LeftParenthesis = 0x28;
-var RightParenthesis = 0x29;
-var Asterisk = 0x2a;
-var PlusSign = 0x2b;
-var Comma = 0x2c;
-var HyphenMinus = 0x2d;
-var FullStop = 0x2e;
-var Solidus = 0x2f;
-var DigitZero = 0x30;
-var DigitOne = 0x31;
-var DigitSeven = 0x37;
-var DigitNine = 0x39;
-var Colon = 0x3a;
-var LessThanSign = 0x3c;
-var EqualsSign = 0x3d;
-var GreaterThanSign = 0x3e;
-var QuestionMark = 0x3f;
-var LatinCapitalLetterA = 0x41;
-var LatinCapitalLetterB = 0x42;
-var LatinCapitalLetterD = 0x44;
-var LatinCapitalLetterF = 0x46;
-var LatinCapitalLetterP = 0x50;
-var LatinCapitalLetterS = 0x53;
-var LatinCapitalLetterW = 0x57;
-var LatinCapitalLetterZ = 0x5a;
-var LowLine = 0x5f;
-var LatinSmallLetterA = 0x61;
-var LatinSmallLetterB = 0x62;
-var LatinSmallLetterC = 0x63;
-var LatinSmallLetterD = 0x64;
-var LatinSmallLetterF = 0x66;
-var LatinSmallLetterG = 0x67;
-var LatinSmallLetterI = 0x69;
-var LatinSmallLetterK = 0x6b;
-var LatinSmallLetterM = 0x6d;
-var LatinSmallLetterN = 0x6e;
-var LatinSmallLetterP = 0x70;
-var LatinSmallLetterR = 0x72;
-var LatinSmallLetterS = 0x73;
-var LatinSmallLetterT = 0x74;
-var LatinSmallLetterU = 0x75;
-var LatinSmallLetterV = 0x76;
-var LatinSmallLetterW = 0x77;
-var LatinSmallLetterX = 0x78;
-var LatinSmallLetterY = 0x79;
-var LatinSmallLetterZ = 0x7a;
-var LeftSquareBracket = 0x5b;
-var ReverseSolidus = 0x5c;
-var RightSquareBracket = 0x5d;
-var CircumflexAccent = 0x5e;
-var LeftCurlyBracket = 0x7b;
-var VerticalLine = 0x7c;
-var RightCurlyBracket = 0x7d;
-var ZeroWidthNonJoiner = 0x200c;
-var ZeroWidthJoiner = 0x200d;
-var LineSeparator = 0x2028;
-var ParagraphSeparator = 0x2029;
-var MinCodePoint = 0x00;
-var MaxCodePoint = 0x10ffff;
-function isLatinLetter(code) {
-    return code >= LatinCapitalLetterA && code <= LatinCapitalLetterZ || code >= LatinSmallLetterA && code <= LatinSmallLetterZ;
-}
-function isDecimalDigit(code) {
-    return code >= DigitZero && code <= DigitNine;
-}
-function isOctalDigit(code) {
-    return code >= DigitZero && code <= DigitSeven;
-}
-function isHexDigit(code) {
-    return code >= DigitZero && code <= DigitNine || code >= LatinCapitalLetterA && code <= LatinCapitalLetterF || code >= LatinSmallLetterA && code <= LatinSmallLetterF;
-}
-function isLineTerminator(code) {
-    return code === LineFeed || code === CarriageReturn || code === LineSeparator || code === ParagraphSeparator;
-}
-function isValidUnicode(code) {
-    return code >= MinCodePoint && code <= MaxCodePoint;
-}
-function digitToInt(code) {
-    if (code >= LatinSmallLetterA && code <= LatinSmallLetterF) {
-        return code - LatinSmallLetterA + 10;
-    }
-    if (code >= LatinCapitalLetterA && code <= LatinCapitalLetterF) {
-        return code - LatinCapitalLetterA + 10;
-    }
-    return code - DigitZero;
-}
 
 function isSyntaxCharacter(cp) {
     return cp === CircumflexAccent || cp === DollarSign || cp === ReverseSolidus || cp === FullStop || cp === Asterisk || cp === PlusSign || cp === QuestionMark || cp === LeftParenthesis || cp === RightParenthesis || cp === LeftSquareBracket || cp === RightSquareBracket || cp === LeftCurlyBracket || cp === RightCurlyBracket || cp === VerticalLine;
@@ -54133,8 +54179,6 @@ var RegExpValidator = function () {
     }, {
         key: 'pattern',
         value: function pattern() {
-            var _this2 = this;
-
             var start = this.index;
             this._numCapturingParens = this.countCapturingParens();
             this._groupNames.clear();
@@ -54152,11 +54196,33 @@ var RegExpValidator = function () {
                 var c = String.fromCodePoint(cp);
                 this.raise('Unexpected character \'' + c + '\'');
             }
-            this._backreferenceNames.forEach(function (name) {
-                if (!_this2._groupNames.has(name)) {
-                    _this2.raise("Invalid named capture referenced");
+            var _iteratorNormalCompletion = true;
+            var _didIteratorError = false;
+            var _iteratorError = undefined;
+
+            try {
+                for (var _iterator = this._backreferenceNames[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+                    var name = _step.value;
+
+                    if (!this._groupNames.has(name)) {
+                        this.raise("Invalid named capture referenced");
+                    }
                 }
-            });
+            } catch (err) {
+                _didIteratorError = true;
+                _iteratorError = err;
+            } finally {
+                try {
+                    if (!_iteratorNormalCompletion && _iterator.return) {
+                        _iterator.return();
+                    }
+                } finally {
+                    if (_didIteratorError) {
+                        throw _iteratorError;
+                    }
+                }
+            }
+
             this.onPatternLeave(start, this.index);
         }
     }, {
@@ -55023,51 +55089,6 @@ var RegExpValidator = function () {
 var DummyPattern = {};
 var DummyFlags = {};
 var DummyCapturingGroup = {};
-function elementsToAlternative(elements, parent) {
-    var _iteratorNormalCompletion = true;
-    var _didIteratorError = false;
-    var _iteratorError = undefined;
-
-    try {
-        for (var _iterator = elements[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-            var element = _step.value;
-
-            assert(element.type !== "Disjunction");
-            element.parent = parent;
-        }
-    } catch (err) {
-        _didIteratorError = true;
-        _iteratorError = err;
-    } finally {
-        try {
-            if (!_iteratorNormalCompletion && _iterator.return) {
-                _iterator.return();
-            }
-        } finally {
-            if (_didIteratorError) {
-                throw _iteratorError;
-            }
-        }
-    }
-
-    return elements;
-}
-function addAlternativeElement(parent, node) {
-    if (parent.type === "Disjunction") {
-        last(parent.alternatives).push(node);
-    } else {
-        parent.elements.push(node);
-    }
-}
-function addCommonElement(parent, node) {
-    if (parent.type === "Disjunction") {
-        last(parent.alternatives).push(node);
-    } else if (parent.type === "CharacterClass") {
-        parent.elements.push(node);
-    } else {
-        parent.elements.push(node);
-    }
-}
 
 var RegExpParserState = function () {
     function RegExpParserState(options) {
@@ -55075,7 +55096,6 @@ var RegExpParserState = function () {
 
         this._node = DummyPattern;
         this._flags = DummyFlags;
-        this._disjunctionStartStack = [];
         this._backreferences = [];
         this._capturingGroups = [];
         this.source = "";
@@ -55109,7 +55129,7 @@ var RegExpParserState = function () {
                 start: start,
                 end: start,
                 raw: "",
-                elements: []
+                alternatives: []
             };
             this._backreferences.length = 0;
             this._capturingGroups.length = 0;
@@ -55117,7 +55137,7 @@ var RegExpParserState = function () {
     }, {
         key: 'onPatternLeave',
         value: function onPatternLeave(start, end) {
-            var _this3 = this;
+            var _this2 = this;
 
             this._node.end = end;
             this._node.raw = this.source.slice(start, end);
@@ -55130,7 +55150,7 @@ var RegExpParserState = function () {
                     var reference = _step2.value;
 
                     var ref = reference.ref;
-                    var group = typeof ref === "number" ? _this3._capturingGroups[ref - 1] : _this3._capturingGroups.find(function (g) {
+                    var group = typeof ref === "number" ? _this2._capturingGroups[ref - 1] : _this2._capturingGroups.find(function (g) {
                         return g.name === ref;
                     });
                     reference.resolved = group;
@@ -55156,163 +55176,157 @@ var RegExpParserState = function () {
             }
         }
     }, {
-        key: 'onDisjunctionEnter',
-        value: function onDisjunctionEnter(start) {
-            this._disjunctionStartStack.push(start);
-        }
-    }, {
-        key: 'onDisjunctionLeave',
-        value: function onDisjunctionLeave(start, end) {
-            this._disjunctionStartStack.pop();
-        }
-    }, {
         key: 'onAlternativeEnter',
-        value: function onAlternativeEnter(start, index) {
-            if (index === 0) {
-                return;
-            }
-            var parentNode = this._node;
-            if (parentNode.type === "Disjunction" || parentNode.type === "CharacterClass") {
-                throw new Error("UnknownError");
-            }
-            var prevNode = last(parentNode.elements);
-            if (prevNode != null && prevNode.type === "Disjunction") {
-                this._node = prevNode;
-                prevNode.alternatives.push([]);
-            } else {
-                this._node = {
-                    type: "Disjunction",
-                    parent: parentNode,
-                    start: last(this._disjunctionStartStack),
-                    end: start,
-                    raw: "",
-                    alternatives: []
-                };
-                var elements = elementsToAlternative(parentNode.elements, this._node);
-                this._node.alternatives.push(elements, []);
-                parentNode.elements = [this._node];
-            }
-        }
-    }, {
-        key: 'onAlternativeLeave',
-        value: function onAlternativeLeave(start, end, index) {
-            if (index === 0) {
-                return;
-            }
-            this._node.end = end;
-            this._node.raw = this.source.slice(this._node.start, end);
-            this._node = this._node.parent;
-        }
-    }, {
-        key: 'onGroupEnter',
-        value: function onGroupEnter(start) {
-            var parentNode = this._node;
-            if (parentNode.type === "CharacterClass") {
+        value: function onAlternativeEnter(start) {
+            var parent = this._node;
+            if (parent.type !== "Assertion" && parent.type !== "CapturingGroup" && parent.type !== "Group" && parent.type !== "Pattern") {
                 throw new Error("UnknownError");
             }
             this._node = {
-                type: "Group",
-                parent: parentNode,
+                type: "Alternative",
+                parent: parent,
                 start: start,
                 end: start,
                 raw: "",
                 elements: []
             };
-            addAlternativeElement(parentNode, this._node);
+            parent.alternatives.push(this._node);
+        }
+    }, {
+        key: 'onAlternativeLeave',
+        value: function onAlternativeLeave(start, end) {
+            var node = this._node;
+            if (node.type !== "Alternative") {
+                throw new Error("UnknownError");
+            }
+            node.end = end;
+            node.raw = this.source.slice(start, end);
+            this._node = node.parent;
+        }
+    }, {
+        key: 'onGroupEnter',
+        value: function onGroupEnter(start) {
+            var parent = this._node;
+            if (parent.type !== "Alternative") {
+                throw new Error("UnknownError");
+            }
+            this._node = {
+                type: "Group",
+                parent: parent,
+                start: start,
+                end: start,
+                raw: "",
+                alternatives: []
+            };
+            parent.elements.push(this._node);
         }
     }, {
         key: 'onGroupLeave',
         value: function onGroupLeave(start, end) {
-            this._node.end = end;
-            this._node.raw = this.source.slice(start, end);
-            this._node = this._node.parent;
+            var node = this._node;
+            if (node.type !== "Group" || node.parent.type !== "Alternative") {
+                throw new Error("UnknownError");
+            }
+            node.end = end;
+            node.raw = this.source.slice(start, end);
+            this._node = node.parent;
         }
     }, {
         key: 'onCapturingGroupEnter',
         value: function onCapturingGroupEnter(start, name) {
-            var parentNode = this._node;
-            if (parentNode.type === "CharacterClass") {
+            var parent = this._node;
+            if (parent.type !== "Alternative") {
                 throw new Error("UnknownError");
             }
             this._node = {
                 type: "CapturingGroup",
-                parent: parentNode,
+                parent: parent,
                 start: start,
                 end: start,
                 raw: "",
                 name: name,
-                elements: [],
+                alternatives: [],
                 references: []
             };
-            addAlternativeElement(parentNode, this._node);
+            parent.elements.push(this._node);
             this._capturingGroups.push(this._node);
         }
     }, {
         key: 'onCapturingGroupLeave',
-        value: function onCapturingGroupLeave(start, end, name) {
-            this._node.end = end;
-            this._node.raw = this.source.slice(start, end);
-            this._node = this._node.parent;
+        value: function onCapturingGroupLeave(start, end) {
+            var node = this._node;
+            if (node.type !== "CapturingGroup" || node.parent.type !== "Alternative") {
+                throw new Error("UnknownError");
+            }
+            node.end = end;
+            node.raw = this.source.slice(start, end);
+            this._node = node.parent;
         }
     }, {
         key: 'onQuantifier',
         value: function onQuantifier(start, end, min, max, greedy) {
-            var parentNode = this._node;
-            if (parentNode.type === "CharacterClass") {
+            var parent = this._node;
+            if (parent.type !== "Alternative") {
                 throw new Error("UnknownError");
             }
-            var elements = parentNode.type === "Disjunction" ? last(parentNode.alternatives) : parentNode.elements;
-            var prevNode = elements.pop();
+            var element = parent.elements.pop();
+            if (element == null || element.type === "Quantifier" || element.type === "Assertion" && element.kind !== "lookahead") {
+                throw new Error("UnknownError");
+            }
             var node = {
                 type: "Quantifier",
-                parent: parentNode,
-                start: start,
+                parent: parent,
+                start: element.start,
                 end: end,
-                raw: this.source.slice(start, end),
+                raw: this.source.slice(element.start, end),
                 min: min,
                 max: max,
                 greedy: greedy,
-                element: prevNode
+                element: element
             };
-            elements.push(node);
-            prevNode.parent = node;
+            parent.elements.push(node);
+            element.parent = node;
         }
     }, {
         key: 'onLookaroundAssertionEnter',
         value: function onLookaroundAssertionEnter(start, kind, negate) {
-            var parentNode = this._node;
-            if (parentNode.type === "CharacterClass") {
+            var parent = this._node;
+            if (parent.type !== "Alternative") {
                 throw new Error("UnknownError");
             }
             this._node = {
                 type: "Assertion",
-                parent: parentNode,
+                parent: parent,
                 start: start,
                 end: start,
                 raw: "",
                 kind: kind,
                 negate: negate,
-                elements: []
+                alternatives: []
             };
-            addAlternativeElement(parentNode, this._node);
+            parent.elements.push(this._node);
         }
     }, {
         key: 'onLookaroundAssertionLeave',
-        value: function onLookaroundAssertionLeave(start, end, kind, negate) {
-            this._node.end = end;
-            this._node.raw = this.source.slice(start, end);
-            this._node = this._node.parent;
+        value: function onLookaroundAssertionLeave(start, end) {
+            var node = this._node;
+            if (node.type !== "Assertion" || node.parent.type !== "Alternative") {
+                throw new Error("UnknownError");
+            }
+            node.end = end;
+            node.raw = this.source.slice(start, end);
+            this._node = node.parent;
         }
     }, {
         key: 'onEdgeAssertion',
         value: function onEdgeAssertion(start, end, kind) {
-            var parentNode = this._node;
-            if (parentNode.type === "CharacterClass") {
+            var parent = this._node;
+            if (parent.type !== "Alternative") {
                 throw new Error("UnknownError");
             }
-            addAlternativeElement(parentNode, {
+            parent.elements.push({
                 type: "Assertion",
-                parent: parentNode,
+                parent: parent,
                 start: start,
                 end: end,
                 raw: this.source.slice(start, end),
@@ -55322,13 +55336,13 @@ var RegExpParserState = function () {
     }, {
         key: 'onWordBoundaryAssertion',
         value: function onWordBoundaryAssertion(start, end, kind, negate) {
-            var parentNode = this._node;
-            if (parentNode.type === "CharacterClass") {
+            var parent = this._node;
+            if (parent.type !== "Alternative") {
                 throw new Error("UnknownError");
             }
-            addAlternativeElement(parentNode, {
+            parent.elements.push({
                 type: "Assertion",
-                parent: parentNode,
+                parent: parent,
                 start: start,
                 end: end,
                 raw: this.source.slice(start, end),
@@ -55339,13 +55353,13 @@ var RegExpParserState = function () {
     }, {
         key: 'onAnyCharacterSet',
         value: function onAnyCharacterSet(start, end, kind) {
-            var parentNode = this._node;
-            if (parentNode.type === "CharacterClass") {
+            var parent = this._node;
+            if (parent.type !== "Alternative") {
                 throw new Error("UnknownError");
             }
-            addAlternativeElement(parentNode, {
+            parent.elements.push({
                 type: "CharacterSet",
-                parent: parentNode,
+                parent: parent,
                 start: start,
                 end: end,
                 raw: this.source.slice(start, end),
@@ -55355,9 +55369,13 @@ var RegExpParserState = function () {
     }, {
         key: 'onEscapeCharacterSet',
         value: function onEscapeCharacterSet(start, end, kind, negate) {
-            addCommonElement(this._node, {
+            var parent = this._node;
+            if (parent.type !== "Alternative" && parent.type !== "CharacterClass") {
+                throw new Error("UnknownError");
+            }
+            parent.elements.push({
                 type: "CharacterSet",
-                parent: this._node,
+                parent: parent,
                 start: start,
                 end: end,
                 raw: this.source.slice(start, end),
@@ -55368,9 +55386,13 @@ var RegExpParserState = function () {
     }, {
         key: 'onUnicodePropertyCharacterSet',
         value: function onUnicodePropertyCharacterSet(start, end, kind, key, value, negate) {
-            addCommonElement(this._node, {
+            var parent = this._node;
+            if (parent.type !== "Alternative" && parent.type !== "CharacterClass") {
+                throw new Error("UnknownError");
+            }
+            parent.elements.push({
                 type: "CharacterSet",
-                parent: this._node,
+                parent: parent,
                 start: start,
                 end: end,
                 raw: this.source.slice(start, end),
@@ -55383,9 +55405,13 @@ var RegExpParserState = function () {
     }, {
         key: 'onCharacter',
         value: function onCharacter(start, end, value) {
-            addCommonElement(this._node, {
+            var parent = this._node;
+            if (parent.type !== "Alternative" && parent.type !== "CharacterClass") {
+                throw new Error("UnknownError");
+            }
+            parent.elements.push({
                 type: "Character",
-                parent: this._node,
+                parent: parent,
                 start: start,
                 end: end,
                 raw: this.source.slice(start, end),
@@ -55395,71 +55421,76 @@ var RegExpParserState = function () {
     }, {
         key: 'onBackreference',
         value: function onBackreference(start, end, ref) {
-            var parentNode = this._node;
-            if (parentNode.type === "CharacterClass") {
+            var parent = this._node;
+            if (parent.type !== "Alternative") {
                 throw new Error("UnknownError");
             }
             var node = {
                 type: "Backreference",
-                parent: parentNode,
+                parent: parent,
                 start: start,
                 end: end,
                 raw: this.source.slice(start, end),
                 ref: ref,
                 resolved: DummyCapturingGroup
             };
-            addAlternativeElement(parentNode, node);
+            parent.elements.push(node);
             this._backreferences.push(node);
         }
     }, {
         key: 'onCharacterClassEnter',
         value: function onCharacterClassEnter(start, negate) {
-            var parentNode = this._node;
-            if (parentNode.type === "CharacterClass") {
+            var parent = this._node;
+            if (parent.type !== "Alternative") {
                 throw new Error("UnknownError");
             }
             this._node = {
                 type: "CharacterClass",
-                parent: parentNode,
+                parent: parent,
                 start: start,
                 end: start,
                 raw: "",
                 negate: negate,
                 elements: []
             };
-            addAlternativeElement(parentNode, this._node);
+            parent.elements.push(this._node);
         }
     }, {
         key: 'onCharacterClassLeave',
-        value: function onCharacterClassLeave(start, end, negate) {
-            this._node.end = end;
-            this._node.raw = this.source.slice(start, end);
-            this._node = this._node.parent;
+        value: function onCharacterClassLeave(start, end) {
+            var node = this._node;
+            if (node.type !== "CharacterClass" || node.parent.type !== "Alternative") {
+                throw new Error("UnknownError");
+            }
+            node.end = end;
+            node.raw = this.source.slice(start, end);
+            this._node = node.parent;
         }
     }, {
         key: 'onCharacterClassRange',
-        value: function onCharacterClassRange(start, end, min, max) {
-            var parentNode = this._node;
-            if (parentNode.type !== "CharacterClass") {
+        value: function onCharacterClassRange(start, end) {
+            var parent = this._node;
+            if (parent.type !== "CharacterClass") {
                 throw new Error("UnknownError");
             }
-            var elements = parentNode.elements;
-            var rightNode = elements.pop();
-            elements.pop();
-            var leftNode = elements.pop();
+            var elements = parent.elements;
+            var max = elements.pop();
+            var hyphen = elements.pop();
+            var min = elements.pop();
+            if (!min || !max || !hyphen || min.type !== "Character" || max.type !== "Character" || hyphen.type !== "Character" || hyphen.value !== HyphenMinus) {
+                throw new Error("UnknownError");
+            }
             var node = {
                 type: "CharacterClassRange",
-                parent: parentNode,
+                parent: parent,
                 start: start,
                 end: end,
                 raw: this.source.slice(start, end),
-                min: leftNode,
-                max: rightNode
+                min: min,
+                max: max
             };
-            assert(leftNode != null && leftNode.type === "Character");
-            assert(rightNode != null && rightNode.type === "Character");
-            leftNode.parent = node;
-            rightNode.parent = node;
+            min.parent = node;
+            max.parent = node;
             elements.push(node);
         }
     }, {
@@ -55540,11 +55571,216 @@ var RegExpParser = function () {
     return RegExpParser;
 }();
 
+var RegExpVisitor = function () {
+    function RegExpVisitor(handlers) {
+        _classCallCheck(this, RegExpVisitor);
+
+        this._handlers = handlers;
+    }
+
+    _createClass(RegExpVisitor, [{
+        key: 'visit',
+        value: function visit(node) {
+            switch (node.type) {
+                case "Alternative":
+                    this.visitAlternative(node);
+                    break;
+                case "Assertion":
+                    this.visitAssertion(node);
+                    break;
+                case "Backreference":
+                    this.visitBackreference(node);
+                    break;
+                case "CapturingGroup":
+                    this.visitCapturingGroup(node);
+                    break;
+                case "Character":
+                    this.visitCharacter(node);
+                    break;
+                case "CharacterClass":
+                    this.visitCharacterClass(node);
+                    break;
+                case "CharacterClassRange":
+                    this.visitCharacterClassRange(node);
+                    break;
+                case "CharacterSet":
+                    this.visitCharacterSet(node);
+                    break;
+                case "Flags":
+                    this.visitFlags(node);
+                    break;
+                case "Group":
+                    this.visitGroup(node);
+                    break;
+                case "Pattern":
+                    this.visitPattern(node);
+                    break;
+                case "Quantifier":
+                    this.visitQuantifier(node);
+                    break;
+                case "RegExpLiteral":
+                    this.visitRegExpLiteral(node);
+                    break;
+                default:
+                    throw new Error('Unknown type: ' + node.type);
+            }
+        }
+    }, {
+        key: 'visitAlternative',
+        value: function visitAlternative(node) {
+            if (this._handlers.onAlternativeEnter) {
+                this._handlers.onAlternativeEnter(node);
+            }
+            node.elements.forEach(this.visit, this);
+            if (this._handlers.onAlternativeLeave) {
+                this._handlers.onAlternativeLeave(node);
+            }
+        }
+    }, {
+        key: 'visitAssertion',
+        value: function visitAssertion(node) {
+            if (this._handlers.onAssertionEnter) {
+                this._handlers.onAssertionEnter(node);
+            }
+            if (node.kind === "lookahead" || node.kind === "lookbehind") {
+                node.alternatives.forEach(this.visit, this);
+            }
+            if (this._handlers.onAssertionLeave) {
+                this._handlers.onAssertionLeave(node);
+            }
+        }
+    }, {
+        key: 'visitBackreference',
+        value: function visitBackreference(node) {
+            if (this._handlers.onBackreferenceEnter) {
+                this._handlers.onBackreferenceEnter(node);
+            }
+            if (this._handlers.onBackreferenceLeave) {
+                this._handlers.onBackreferenceLeave(node);
+            }
+        }
+    }, {
+        key: 'visitCapturingGroup',
+        value: function visitCapturingGroup(node) {
+            if (this._handlers.onCapturingGroupEnter) {
+                this._handlers.onCapturingGroupEnter(node);
+            }
+            node.alternatives.forEach(this.visit, this);
+            if (this._handlers.onCapturingGroupLeave) {
+                this._handlers.onCapturingGroupLeave(node);
+            }
+        }
+    }, {
+        key: 'visitCharacter',
+        value: function visitCharacter(node) {
+            if (this._handlers.onCharacterEnter) {
+                this._handlers.onCharacterEnter(node);
+            }
+            if (this._handlers.onCharacterLeave) {
+                this._handlers.onCharacterLeave(node);
+            }
+        }
+    }, {
+        key: 'visitCharacterClass',
+        value: function visitCharacterClass(node) {
+            if (this._handlers.onCharacterClassEnter) {
+                this._handlers.onCharacterClassEnter(node);
+            }
+            node.elements.forEach(this.visit, this);
+            if (this._handlers.onCharacterClassLeave) {
+                this._handlers.onCharacterClassLeave(node);
+            }
+        }
+    }, {
+        key: 'visitCharacterClassRange',
+        value: function visitCharacterClassRange(node) {
+            if (this._handlers.onCharacterClassRangeEnter) {
+                this._handlers.onCharacterClassRangeEnter(node);
+            }
+            this.visitCharacter(node.min);
+            this.visitCharacter(node.max);
+            if (this._handlers.onCharacterClassRangeLeave) {
+                this._handlers.onCharacterClassRangeLeave(node);
+            }
+        }
+    }, {
+        key: 'visitCharacterSet',
+        value: function visitCharacterSet(node) {
+            if (this._handlers.onCharacterSetEnter) {
+                this._handlers.onCharacterSetEnter(node);
+            }
+            if (this._handlers.onCharacterSetLeave) {
+                this._handlers.onCharacterSetLeave(node);
+            }
+        }
+    }, {
+        key: 'visitFlags',
+        value: function visitFlags(node) {
+            if (this._handlers.onFlagsEnter) {
+                this._handlers.onFlagsEnter(node);
+            }
+            if (this._handlers.onFlagsLeave) {
+                this._handlers.onFlagsLeave(node);
+            }
+        }
+    }, {
+        key: 'visitGroup',
+        value: function visitGroup(node) {
+            if (this._handlers.onGroupEnter) {
+                this._handlers.onGroupEnter(node);
+            }
+            node.alternatives.forEach(this.visit, this);
+            if (this._handlers.onGroupLeave) {
+                this._handlers.onGroupLeave(node);
+            }
+        }
+    }, {
+        key: 'visitPattern',
+        value: function visitPattern(node) {
+            if (this._handlers.onPatternEnter) {
+                this._handlers.onPatternEnter(node);
+            }
+            node.alternatives.forEach(this.visit, this);
+            if (this._handlers.onPatternLeave) {
+                this._handlers.onPatternLeave(node);
+            }
+        }
+    }, {
+        key: 'visitQuantifier',
+        value: function visitQuantifier(node) {
+            if (this._handlers.onQuantifierEnter) {
+                this._handlers.onQuantifierEnter(node);
+            }
+            this.visit(node.element);
+            if (this._handlers.onQuantifierLeave) {
+                this._handlers.onQuantifierLeave(node);
+            }
+        }
+    }, {
+        key: 'visitRegExpLiteral',
+        value: function visitRegExpLiteral(node) {
+            if (this._handlers.onRegExpLiteralEnter) {
+                this._handlers.onRegExpLiteralEnter(node);
+            }
+            this.visitPattern(node.pattern);
+            this.visitFlags(node.flags);
+            if (this._handlers.onRegExpLiteralLeave) {
+                this._handlers.onRegExpLiteralLeave(node);
+            }
+        }
+    }]);
+
+    return RegExpVisitor;
+}();
+
 function parseRegExpLiteral(source, options) {
-    return new RegExpParser(options).parseLiteral(source);
+    return new RegExpParser(options).parseLiteral(String(source));
 }
 function validateRegExpLiteral(source, options) {
     return new RegExpValidator(options).validateLiteral(source);
+}
+function visitRegExpAST(node, handlers) {
+    new RegExpVisitor(handlers).visit(node);
 }
 
 exports.AST = ast;
@@ -55552,6 +55788,7 @@ exports.RegExpParser = RegExpParser;
 exports.RegExpValidator = RegExpValidator;
 exports.parseRegExpLiteral = parseRegExpLiteral;
 exports.validateRegExpLiteral = validateRegExpLiteral;
+exports.visitRegExpAST = visitRegExpAST;
 
 
 },{}],105:[function(require,module,exports){
@@ -57318,7 +57555,7 @@ arguments[4][49][0].apply(exports,arguments)
 },{"./support/isBuffer":109,"_process":103,"dup":49,"inherits":87}],111:[function(require,module,exports){
 module.exports={
   "name": "eslint",
-  "version": "5.2.0",
+  "version": "5.3.0",
   "author": "Nicholas C. Zakas <nicholas+npm@nczconsulting.com>",
   "description": "An AST-based pattern checker for JavaScript.",
   "bin": {
@@ -57384,7 +57621,7 @@ module.exports={
     "path-is-inside": "^1.0.2",
     "pluralize": "^7.0.0",
     "progress": "^2.0.0",
-    "regexpp": "^1.1.0",
+    "regexpp": "^2.0.0",
     "require-uncached": "^1.0.3",
     "semver": "^5.5.0",
     "string.prototype.matchall": "^2.0.0",
@@ -57448,1308 +57685,6 @@ module.exports={
 
 },{}],112:[function(require,module,exports){
 /**
- * @fileoverview Common utils for AST.
- * @author Gyandeep Singh
- */
-
-"use strict";
-
-//------------------------------------------------------------------------------
-// Requirements
-//------------------------------------------------------------------------------
-
-var esutils = require("esutils");
-var espree = require("espree");
-
-//------------------------------------------------------------------------------
-// Helpers
-//------------------------------------------------------------------------------
-
-var anyFunctionPattern = /^(?:Function(?:Declaration|Expression)|ArrowFunctionExpression)$/;
-var anyLoopPattern = /^(?:DoWhile|For|ForIn|ForOf|While)Statement$/;
-var arrayOrTypedArrayPattern = /Array$/;
-var arrayMethodPattern = /^(?:every|filter|find|findIndex|forEach|map|some)$/;
-var bindOrCallOrApplyPattern = /^(?:bind|call|apply)$/;
-var breakableTypePattern = /^(?:(?:Do)?While|For(?:In|Of)?|Switch)Statement$/;
-var thisTagPattern = /^[\s*]*@this/m;
-
-var COMMENTS_IGNORE_PATTERN = /^\s*(?:eslint|jshint\s+|jslint\s+|istanbul\s+|globals?\s+|exported\s+|jscs)/;
-var LINEBREAKS = new Set(["\r\n", "\r", "\n", "\u2028", "\u2029"]);
-var LINEBREAK_MATCHER = /\r\n|[\r\n\u2028\u2029]/;
-var SHEBANG_MATCHER = /^#!([^\r\n]+)/;
-
-// A set of node types that can contain a list of statements
-var STATEMENT_LIST_PARENTS = new Set(["Program", "BlockStatement", "SwitchCase"]);
-
-/**
- * Checks reference if is non initializer and writable.
- * @param {Reference} reference - A reference to check.
- * @param {int} index - The index of the reference in the references.
- * @param {Reference[]} references - The array that the reference belongs to.
- * @returns {boolean} Success/Failure
- * @private
- */
-function isModifyingReference(reference, index, references) {
-    var identifier = reference.identifier;
-
-    /*
-     * Destructuring assignments can have multiple default value, so
-     * possibly there are multiple writeable references for the same
-     * identifier.
-     */
-    var modifyingDifferentIdentifier = index === 0 || references[index - 1].identifier !== identifier;
-
-    return identifier && reference.init === false && reference.isWrite() && modifyingDifferentIdentifier;
-}
-
-/**
- * Checks whether the given string starts with uppercase or not.
- *
- * @param {string} s - The string to check.
- * @returns {boolean} `true` if the string starts with uppercase.
- */
-function startsWithUpperCase(s) {
-    return s[0] !== s[0].toLocaleLowerCase();
-}
-
-/**
- * Checks whether or not a node is a constructor.
- * @param {ASTNode} node - A function node to check.
- * @returns {boolean} Wehether or not a node is a constructor.
- */
-function isES5Constructor(node) {
-    return node.id && startsWithUpperCase(node.id.name);
-}
-
-/**
- * Finds a function node from ancestors of a node.
- * @param {ASTNode} node - A start node to find.
- * @returns {Node|null} A found function node.
- */
-function getUpperFunction(node) {
-    for (var currentNode = node; currentNode; currentNode = currentNode.parent) {
-        if (anyFunctionPattern.test(currentNode.type)) {
-            return currentNode;
-        }
-    }
-    return null;
-}
-
-/**
- * Checks whether a given node is a function node or not.
- * The following types are function nodes:
- *
- * - ArrowFunctionExpression
- * - FunctionDeclaration
- * - FunctionExpression
- *
- * @param {ASTNode|null} node - A node to check.
- * @returns {boolean} `true` if the node is a function node.
- */
-function isFunction(node) {
-    return Boolean(node && anyFunctionPattern.test(node.type));
-}
-
-/**
- * Checks whether a given node is a loop node or not.
- * The following types are loop nodes:
- *
- * - DoWhileStatement
- * - ForInStatement
- * - ForOfStatement
- * - ForStatement
- * - WhileStatement
- *
- * @param {ASTNode|null} node - A node to check.
- * @returns {boolean} `true` if the node is a loop node.
- */
-function isLoop(node) {
-    return Boolean(node && anyLoopPattern.test(node.type));
-}
-
-/**
- * Checks whether the given node is in a loop or not.
- *
- * @param {ASTNode} node - The node to check.
- * @returns {boolean} `true` if the node is in a loop.
- */
-function isInLoop(node) {
-    for (var currentNode = node; currentNode && !isFunction(currentNode); currentNode = currentNode.parent) {
-        if (isLoop(currentNode)) {
-            return true;
-        }
-    }
-
-    return false;
-}
-
-/**
- * Checks whether or not a node is `null` or `undefined`.
- * @param {ASTNode} node - A node to check.
- * @returns {boolean} Whether or not the node is a `null` or `undefined`.
- * @public
- */
-function isNullOrUndefined(node) {
-    return module.exports.isNullLiteral(node) || node.type === "Identifier" && node.name === "undefined" || node.type === "UnaryExpression" && node.operator === "void";
-}
-
-/**
- * Checks whether or not a node is callee.
- * @param {ASTNode} node - A node to check.
- * @returns {boolean} Whether or not the node is callee.
- */
-function isCallee(node) {
-    return node.parent.type === "CallExpression" && node.parent.callee === node;
-}
-
-/**
- * Checks whether or not a node is `Reflect.apply`.
- * @param {ASTNode} node - A node to check.
- * @returns {boolean} Whether or not the node is a `Reflect.apply`.
- */
-function isReflectApply(node) {
-    return node.type === "MemberExpression" && node.object.type === "Identifier" && node.object.name === "Reflect" && node.property.type === "Identifier" && node.property.name === "apply" && node.computed === false;
-}
-
-/**
- * Checks whether or not a node is `Array.from`.
- * @param {ASTNode} node - A node to check.
- * @returns {boolean} Whether or not the node is a `Array.from`.
- */
-function isArrayFromMethod(node) {
-    return node.type === "MemberExpression" && node.object.type === "Identifier" && arrayOrTypedArrayPattern.test(node.object.name) && node.property.type === "Identifier" && node.property.name === "from" && node.computed === false;
-}
-
-/**
- * Checks whether or not a node is a method which has `thisArg`.
- * @param {ASTNode} node - A node to check.
- * @returns {boolean} Whether or not the node is a method which has `thisArg`.
- */
-function isMethodWhichHasThisArg(node) {
-    for (var currentNode = node; currentNode.type === "MemberExpression" && !currentNode.computed; currentNode = currentNode.property) {
-        if (currentNode.property.type === "Identifier") {
-            return arrayMethodPattern.test(currentNode.property.name);
-        }
-    }
-
-    return false;
-}
-
-/**
- * Creates the negate function of the given function.
- * @param {Function} f - The function to negate.
- * @returns {Function} Negated function.
- */
-function negate(f) {
-    return function (token) {
-        return !f(token);
-    };
-}
-
-/**
- * Checks whether or not a node has a `@this` tag in its comments.
- * @param {ASTNode} node - A node to check.
- * @param {SourceCode} sourceCode - A SourceCode instance to get comments.
- * @returns {boolean} Whether or not the node has a `@this` tag in its comments.
- */
-function hasJSDocThisTag(node, sourceCode) {
-    var jsdocComment = sourceCode.getJSDocComment(node);
-
-    if (jsdocComment && thisTagPattern.test(jsdocComment.value)) {
-        return true;
-    }
-
-    // Checks `@this` in its leading comments for callbacks,
-    // because callbacks don't have its JSDoc comment.
-    // e.g.
-    //     sinon.test(/* @this sinon.Sandbox */function() { this.spy(); });
-    return sourceCode.getCommentsBefore(node).some(function (comment) {
-        return thisTagPattern.test(comment.value);
-    });
-}
-
-/**
- * Determines if a node is surrounded by parentheses.
- * @param {SourceCode} sourceCode The ESLint source code object
- * @param {ASTNode} node The node to be checked.
- * @returns {boolean} True if the node is parenthesised.
- * @private
- */
-function isParenthesised(sourceCode, node) {
-    var previousToken = sourceCode.getTokenBefore(node),
-        nextToken = sourceCode.getTokenAfter(node);
-
-    return Boolean(previousToken && nextToken) && previousToken.value === "(" && previousToken.range[1] <= node.range[0] && nextToken.value === ")" && nextToken.range[0] >= node.range[1];
-}
-
-/**
- * Checks if the given token is an arrow token or not.
- *
- * @param {Token} token - The token to check.
- * @returns {boolean} `true` if the token is an arrow token.
- */
-function isArrowToken(token) {
-    return token.value === "=>" && token.type === "Punctuator";
-}
-
-/**
- * Checks if the given token is a comma token or not.
- *
- * @param {Token} token - The token to check.
- * @returns {boolean} `true` if the token is a comma token.
- */
-function isCommaToken(token) {
-    return token.value === "," && token.type === "Punctuator";
-}
-
-/**
- * Checks if the given token is a semicolon token or not.
- *
- * @param {Token} token - The token to check.
- * @returns {boolean} `true` if the token is a semicolon token.
- */
-function isSemicolonToken(token) {
-    return token.value === ";" && token.type === "Punctuator";
-}
-
-/**
- * Checks if the given token is a colon token or not.
- *
- * @param {Token} token - The token to check.
- * @returns {boolean} `true` if the token is a colon token.
- */
-function isColonToken(token) {
-    return token.value === ":" && token.type === "Punctuator";
-}
-
-/**
- * Checks if the given token is an opening parenthesis token or not.
- *
- * @param {Token} token - The token to check.
- * @returns {boolean} `true` if the token is an opening parenthesis token.
- */
-function isOpeningParenToken(token) {
-    return token.value === "(" && token.type === "Punctuator";
-}
-
-/**
- * Checks if the given token is a closing parenthesis token or not.
- *
- * @param {Token} token - The token to check.
- * @returns {boolean} `true` if the token is a closing parenthesis token.
- */
-function isClosingParenToken(token) {
-    return token.value === ")" && token.type === "Punctuator";
-}
-
-/**
- * Checks if the given token is an opening square bracket token or not.
- *
- * @param {Token} token - The token to check.
- * @returns {boolean} `true` if the token is an opening square bracket token.
- */
-function isOpeningBracketToken(token) {
-    return token.value === "[" && token.type === "Punctuator";
-}
-
-/**
- * Checks if the given token is a closing square bracket token or not.
- *
- * @param {Token} token - The token to check.
- * @returns {boolean} `true` if the token is a closing square bracket token.
- */
-function isClosingBracketToken(token) {
-    return token.value === "]" && token.type === "Punctuator";
-}
-
-/**
- * Checks if the given token is an opening brace token or not.
- *
- * @param {Token} token - The token to check.
- * @returns {boolean} `true` if the token is an opening brace token.
- */
-function isOpeningBraceToken(token) {
-    return token.value === "{" && token.type === "Punctuator";
-}
-
-/**
- * Checks if the given token is a closing brace token or not.
- *
- * @param {Token} token - The token to check.
- * @returns {boolean} `true` if the token is a closing brace token.
- */
-function isClosingBraceToken(token) {
-    return token.value === "}" && token.type === "Punctuator";
-}
-
-/**
- * Checks if the given token is a comment token or not.
- *
- * @param {Token} token - The token to check.
- * @returns {boolean} `true` if the token is a comment token.
- */
-function isCommentToken(token) {
-    return token.type === "Line" || token.type === "Block" || token.type === "Shebang";
-}
-
-/**
- * Checks if the given token is a keyword token or not.
- *
- * @param {Token} token - The token to check.
- * @returns {boolean} `true` if the token is a keyword token.
- */
-function isKeywordToken(token) {
-    return token.type === "Keyword";
-}
-
-/**
- * Gets the `(` token of the given function node.
- *
- * @param {ASTNode} node - The function node to get.
- * @param {SourceCode} sourceCode - The source code object to get tokens.
- * @returns {Token} `(` token.
- */
-function getOpeningParenOfParams(node, sourceCode) {
-    return node.id ? sourceCode.getTokenAfter(node.id, isOpeningParenToken) : sourceCode.getFirstToken(node, isOpeningParenToken);
-}
-
-/**
- * Creates a version of the LINEBREAK_MATCHER regex with the global flag.
- * Global regexes are mutable, so this needs to be a function instead of a constant.
- * @returns {RegExp} A global regular expression that matches line terminators
- */
-function createGlobalLinebreakMatcher() {
-    return new RegExp(LINEBREAK_MATCHER.source, "g");
-}
-
-/**
- * Checks whether or not the tokens of two given nodes are same.
- * @param {ASTNode} left - A node 1 to compare.
- * @param {ASTNode} right - A node 2 to compare.
- * @param {SourceCode} sourceCode - The ESLint source code object.
- * @returns {boolean} the source code for the given node.
- */
-function equalTokens(left, right, sourceCode) {
-    var tokensL = sourceCode.getTokens(left);
-    var tokensR = sourceCode.getTokens(right);
-
-    if (tokensL.length !== tokensR.length) {
-        return false;
-    }
-    for (var i = 0; i < tokensL.length; ++i) {
-        if (tokensL[i].type !== tokensR[i].type || tokensL[i].value !== tokensR[i].value) {
-            return false;
-        }
-    }
-
-    return true;
-}
-
-//------------------------------------------------------------------------------
-// Public Interface
-//------------------------------------------------------------------------------
-
-module.exports = {
-    COMMENTS_IGNORE_PATTERN: COMMENTS_IGNORE_PATTERN,
-    LINEBREAKS: LINEBREAKS,
-    LINEBREAK_MATCHER: LINEBREAK_MATCHER,
-    SHEBANG_MATCHER: SHEBANG_MATCHER,
-    STATEMENT_LIST_PARENTS: STATEMENT_LIST_PARENTS,
-
-    /**
-     * Determines whether two adjacent tokens are on the same line.
-     * @param {Object} left - The left token object.
-     * @param {Object} right - The right token object.
-     * @returns {boolean} Whether or not the tokens are on the same line.
-     * @public
-     */
-    isTokenOnSameLine: function isTokenOnSameLine(left, right) {
-        return left.loc.end.line === right.loc.start.line;
-    },
-
-
-    isNullOrUndefined: isNullOrUndefined,
-    isCallee: isCallee,
-    isES5Constructor: isES5Constructor,
-    getUpperFunction: getUpperFunction,
-    isFunction: isFunction,
-    isLoop: isLoop,
-    isInLoop: isInLoop,
-    isArrayFromMethod: isArrayFromMethod,
-    isParenthesised: isParenthesised,
-    createGlobalLinebreakMatcher: createGlobalLinebreakMatcher,
-    equalTokens: equalTokens,
-
-    isArrowToken: isArrowToken,
-    isClosingBraceToken: isClosingBraceToken,
-    isClosingBracketToken: isClosingBracketToken,
-    isClosingParenToken: isClosingParenToken,
-    isColonToken: isColonToken,
-    isCommaToken: isCommaToken,
-    isCommentToken: isCommentToken,
-    isKeywordToken: isKeywordToken,
-    isNotClosingBraceToken: negate(isClosingBraceToken),
-    isNotClosingBracketToken: negate(isClosingBracketToken),
-    isNotClosingParenToken: negate(isClosingParenToken),
-    isNotColonToken: negate(isColonToken),
-    isNotCommaToken: negate(isCommaToken),
-    isNotOpeningBraceToken: negate(isOpeningBraceToken),
-    isNotOpeningBracketToken: negate(isOpeningBracketToken),
-    isNotOpeningParenToken: negate(isOpeningParenToken),
-    isNotSemicolonToken: negate(isSemicolonToken),
-    isOpeningBraceToken: isOpeningBraceToken,
-    isOpeningBracketToken: isOpeningBracketToken,
-    isOpeningParenToken: isOpeningParenToken,
-    isSemicolonToken: isSemicolonToken,
-
-    /**
-     * Checks whether or not a given node is a string literal.
-     * @param {ASTNode} node - A node to check.
-     * @returns {boolean} `true` if the node is a string literal.
-     */
-    isStringLiteral: function isStringLiteral(node) {
-        return node.type === "Literal" && typeof node.value === "string" || node.type === "TemplateLiteral";
-    },
-
-
-    /**
-     * Checks whether a given node is a breakable statement or not.
-     * The node is breakable if the node is one of the following type:
-     *
-     * - DoWhileStatement
-     * - ForInStatement
-     * - ForOfStatement
-     * - ForStatement
-     * - SwitchStatement
-     * - WhileStatement
-     *
-     * @param {ASTNode} node - A node to check.
-     * @returns {boolean} `true` if the node is breakable.
-     */
-    isBreakableStatement: function isBreakableStatement(node) {
-        return breakableTypePattern.test(node.type);
-    },
-
-
-    /**
-     * Gets the label if the parent node of a given node is a LabeledStatement.
-     *
-     * @param {ASTNode} node - A node to get.
-     * @returns {string|null} The label or `null`.
-     */
-    getLabel: function getLabel(node) {
-        if (node.parent.type === "LabeledStatement") {
-            return node.parent.label.name;
-        }
-        return null;
-    },
-
-
-    /**
-     * Gets references which are non initializer and writable.
-     * @param {Reference[]} references - An array of references.
-     * @returns {Reference[]} An array of only references which are non initializer and writable.
-     * @public
-     */
-    getModifyingReferences: function getModifyingReferences(references) {
-        return references.filter(isModifyingReference);
-    },
-
-
-    /**
-     * Validate that a string passed in is surrounded by the specified character
-     * @param  {string} val The text to check.
-     * @param  {string} character The character to see if it's surrounded by.
-     * @returns {boolean} True if the text is surrounded by the character, false if not.
-     * @private
-     */
-    isSurroundedBy: function isSurroundedBy(val, character) {
-        return val[0] === character && val[val.length - 1] === character;
-    },
-
-
-    /**
-     * Returns whether the provided node is an ESLint directive comment or not
-     * @param {Line|Block} node The comment token to be checked
-     * @returns {boolean} `true` if the node is an ESLint directive comment
-     */
-    isDirectiveComment: function isDirectiveComment(node) {
-        var comment = node.value.trim();
-
-        return node.type === "Line" && comment.indexOf("eslint-") === 0 || node.type === "Block" && (comment.indexOf("global ") === 0 || comment.indexOf("eslint ") === 0 || comment.indexOf("eslint-") === 0);
-    },
-
-
-    /**
-     * Gets the trailing statement of a given node.
-     *
-     *     if (code)
-     *         consequent;
-     *
-     * When taking this `IfStatement`, returns `consequent;` statement.
-     *
-     * @param {ASTNode} A node to get.
-     * @returns {ASTNode|null} The trailing statement's node.
-     */
-    getTrailingStatement: esutils.ast.trailingStatement,
-
-    /**
-     * Finds the variable by a given name in a given scope and its upper scopes.
-     *
-     * @param {eslint-scope.Scope} initScope - A scope to start find.
-     * @param {string} name - A variable name to find.
-     * @returns {eslint-scope.Variable|null} A found variable or `null`.
-     */
-    getVariableByName: function getVariableByName(initScope, name) {
-        var scope = initScope;
-
-        while (scope) {
-            var variable = scope.set.get(name);
-
-            if (variable) {
-                return variable;
-            }
-
-            scope = scope.upper;
-        }
-
-        return null;
-    },
-
-
-    /**
-     * Checks whether or not a given function node is the default `this` binding.
-     *
-     * First, this checks the node:
-     *
-     * - The function name does not start with uppercase (it's a constructor).
-     * - The function does not have a JSDoc comment that has a @this tag.
-     *
-     * Next, this checks the location of the node.
-     * If the location is below, this judges `this` is valid.
-     *
-     * - The location is not on an object literal.
-     * - The location is not assigned to a variable which starts with an uppercase letter.
-     * - The location is not on an ES2015 class.
-     * - Its `bind`/`call`/`apply` method is not called directly.
-     * - The function is not a callback of array methods (such as `.forEach()`) if `thisArg` is given.
-     *
-     * @param {ASTNode} node - A function node to check.
-     * @param {SourceCode} sourceCode - A SourceCode instance to get comments.
-     * @returns {boolean} The function node is the default `this` binding.
-     */
-    isDefaultThisBinding: function isDefaultThisBinding(node, sourceCode) {
-        if (isES5Constructor(node) || hasJSDocThisTag(node, sourceCode)) {
-            return false;
-        }
-        var isAnonymous = node.id === null;
-        var currentNode = node;
-
-        while (currentNode) {
-            var parent = currentNode.parent;
-
-            switch (parent.type) {
-
-                /*
-                 * Looks up the destination.
-                 * e.g., obj.foo = nativeFoo || function foo() { ... };
-                 */
-                case "LogicalExpression":
-                case "ConditionalExpression":
-                    currentNode = parent;
-                    break;
-
-                /*
-                 * If the upper function is IIFE, checks the destination of the return value.
-                 * e.g.
-                 *   obj.foo = (function() {
-                 *     // setup...
-                 *     return function foo() { ... };
-                 *   })();
-                 *   obj.foo = (() =>
-                 *     function foo() { ... }
-                 *   )();
-                 */
-                case "ReturnStatement":
-                    {
-                        var func = getUpperFunction(parent);
-
-                        if (func === null || !isCallee(func)) {
-                            return true;
-                        }
-                        currentNode = func.parent;
-                        break;
-                    }
-                case "ArrowFunctionExpression":
-                    if (currentNode !== parent.body || !isCallee(parent)) {
-                        return true;
-                    }
-                    currentNode = parent.parent;
-                    break;
-
-                /*
-                 * e.g.
-                 *   var obj = { foo() { ... } };
-                 *   var obj = { foo: function() { ... } };
-                 *   class A { constructor() { ... } }
-                 *   class A { foo() { ... } }
-                 *   class A { get foo() { ... } }
-                 *   class A { set foo() { ... } }
-                 *   class A { static foo() { ... } }
-                 */
-                case "Property":
-                case "MethodDefinition":
-                    return parent.value !== currentNode;
-
-                /*
-                 * e.g.
-                 *   obj.foo = function foo() { ... };
-                 *   Foo = function() { ... };
-                 *   [obj.foo = function foo() { ... }] = a;
-                 *   [Foo = function() { ... }] = a;
-                 */
-                case "AssignmentExpression":
-                case "AssignmentPattern":
-                    if (parent.left.type === "MemberExpression") {
-                        return false;
-                    }
-                    if (isAnonymous && parent.left.type === "Identifier" && startsWithUpperCase(parent.left.name)) {
-                        return false;
-                    }
-                    return true;
-
-                /*
-                 * e.g.
-                 *   var Foo = function() { ... };
-                 */
-                case "VariableDeclarator":
-                    return !(isAnonymous && parent.init === currentNode && parent.id.type === "Identifier" && startsWithUpperCase(parent.id.name));
-
-                /*
-                 * e.g.
-                 *   var foo = function foo() { ... }.bind(obj);
-                 *   (function foo() { ... }).call(obj);
-                 *   (function foo() { ... }).apply(obj, []);
-                 */
-                case "MemberExpression":
-                    return parent.object !== currentNode || parent.property.type !== "Identifier" || !bindOrCallOrApplyPattern.test(parent.property.name) || !isCallee(parent) || parent.parent.arguments.length === 0 || isNullOrUndefined(parent.parent.arguments[0]);
-
-                /*
-                 * e.g.
-                 *   Reflect.apply(function() {}, obj, []);
-                 *   Array.from([], function() {}, obj);
-                 *   list.forEach(function() {}, obj);
-                 */
-                case "CallExpression":
-                    if (isReflectApply(parent.callee)) {
-                        return parent.arguments.length !== 3 || parent.arguments[0] !== currentNode || isNullOrUndefined(parent.arguments[1]);
-                    }
-                    if (isArrayFromMethod(parent.callee)) {
-                        return parent.arguments.length !== 3 || parent.arguments[1] !== currentNode || isNullOrUndefined(parent.arguments[2]);
-                    }
-                    if (isMethodWhichHasThisArg(parent.callee)) {
-                        return parent.arguments.length !== 2 || parent.arguments[0] !== currentNode || isNullOrUndefined(parent.arguments[1]);
-                    }
-                    return true;
-
-                // Otherwise `this` is default.
-                default:
-                    return true;
-            }
-        }
-
-        /* istanbul ignore next */
-        return true;
-    },
-
-
-    /**
-     * Get the precedence level based on the node type
-     * @param {ASTNode} node node to evaluate
-     * @returns {int} precedence level
-     * @private
-     */
-    getPrecedence: function getPrecedence(node) {
-        switch (node.type) {
-            case "SequenceExpression":
-                return 0;
-
-            case "AssignmentExpression":
-            case "ArrowFunctionExpression":
-            case "YieldExpression":
-                return 1;
-
-            case "ConditionalExpression":
-                return 3;
-
-            case "LogicalExpression":
-                switch (node.operator) {
-                    case "||":
-                        return 4;
-                    case "&&":
-                        return 5;
-
-                    // no default
-                }
-
-            /* falls through */
-
-            case "BinaryExpression":
-
-                switch (node.operator) {
-                    case "|":
-                        return 6;
-                    case "^":
-                        return 7;
-                    case "&":
-                        return 8;
-                    case "==":
-                    case "!=":
-                    case "===":
-                    case "!==":
-                        return 9;
-                    case "<":
-                    case "<=":
-                    case ">":
-                    case ">=":
-                    case "in":
-                    case "instanceof":
-                        return 10;
-                    case "<<":
-                    case ">>":
-                    case ">>>":
-                        return 11;
-                    case "+":
-                    case "-":
-                        return 12;
-                    case "*":
-                    case "/":
-                    case "%":
-                        return 13;
-                    case "**":
-                        return 15;
-
-                    // no default
-                }
-
-            /* falls through */
-
-            case "UnaryExpression":
-            case "AwaitExpression":
-                return 16;
-
-            case "UpdateExpression":
-                return 17;
-
-            case "CallExpression":
-                return 18;
-
-            case "NewExpression":
-                return 19;
-
-            default:
-                return 20;
-        }
-    },
-
-
-    /**
-     * Checks whether the given node is an empty block node or not.
-     *
-     * @param {ASTNode|null} node - The node to check.
-     * @returns {boolean} `true` if the node is an empty block.
-     */
-    isEmptyBlock: function isEmptyBlock(node) {
-        return Boolean(node && node.type === "BlockStatement" && node.body.length === 0);
-    },
-
-
-    /**
-     * Checks whether the given node is an empty function node or not.
-     *
-     * @param {ASTNode|null} node - The node to check.
-     * @returns {boolean} `true` if the node is an empty function.
-     */
-    isEmptyFunction: function isEmptyFunction(node) {
-        return isFunction(node) && module.exports.isEmptyBlock(node.body);
-    },
-
-
-    /**
-     * Gets the property name of a given node.
-     * The node can be a MemberExpression, a Property, or a MethodDefinition.
-     *
-     * If the name is dynamic, this returns `null`.
-     *
-     * For examples:
-     *
-     *     a.b           // => "b"
-     *     a["b"]        // => "b"
-     *     a['b']        // => "b"
-     *     a[`b`]        // => "b"
-     *     a[100]        // => "100"
-     *     a[b]          // => null
-     *     a["a" + "b"]  // => null
-     *     a[tag`b`]     // => null
-     *     a[`${b}`]     // => null
-     *
-     *     let a = {b: 1}            // => "b"
-     *     let a = {["b"]: 1}        // => "b"
-     *     let a = {['b']: 1}        // => "b"
-     *     let a = {[`b`]: 1}        // => "b"
-     *     let a = {[100]: 1}        // => "100"
-     *     let a = {[b]: 1}          // => null
-     *     let a = {["a" + "b"]: 1}  // => null
-     *     let a = {[tag`b`]: 1}     // => null
-     *     let a = {[`${b}`]: 1}     // => null
-     *
-     * @param {ASTNode} node - The node to get.
-     * @returns {string|null} The property name if static. Otherwise, null.
-     */
-    getStaticPropertyName: function getStaticPropertyName(node) {
-        var prop = void 0;
-
-        switch (node && node.type) {
-            case "Property":
-            case "MethodDefinition":
-                prop = node.key;
-                break;
-
-            case "MemberExpression":
-                prop = node.property;
-                break;
-
-            // no default
-        }
-
-        switch (prop && prop.type) {
-            case "Literal":
-                return String(prop.value);
-
-            case "TemplateLiteral":
-                if (prop.expressions.length === 0 && prop.quasis.length === 1) {
-                    return prop.quasis[0].value.cooked;
-                }
-                break;
-
-            case "Identifier":
-                if (!node.computed) {
-                    return prop.name;
-                }
-                break;
-
-            // no default
-        }
-
-        return null;
-    },
-
-
-    /**
-     * Get directives from directive prologue of a Program or Function node.
-     * @param {ASTNode} node - The node to check.
-     * @returns {ASTNode[]} The directives found in the directive prologue.
-     */
-    getDirectivePrologue: function getDirectivePrologue(node) {
-        var directives = [];
-
-        // Directive prologues only occur at the top of files or functions.
-        if (node.type === "Program" || node.type === "FunctionDeclaration" || node.type === "FunctionExpression" ||
-
-        /*
-         * Do not check arrow functions with implicit return.
-         * `() => "use strict";` returns the string `"use strict"`.
-         */
-        node.type === "ArrowFunctionExpression" && node.body.type === "BlockStatement") {
-            var statements = node.type === "Program" ? node.body : node.body.body;
-
-            var _iteratorNormalCompletion = true;
-            var _didIteratorError = false;
-            var _iteratorError = undefined;
-
-            try {
-                for (var _iterator = statements[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-                    var statement = _step.value;
-
-                    if (statement.type === "ExpressionStatement" && statement.expression.type === "Literal") {
-                        directives.push(statement);
-                    } else {
-                        break;
-                    }
-                }
-            } catch (err) {
-                _didIteratorError = true;
-                _iteratorError = err;
-            } finally {
-                try {
-                    if (!_iteratorNormalCompletion && _iterator.return) {
-                        _iterator.return();
-                    }
-                } finally {
-                    if (_didIteratorError) {
-                        throw _iteratorError;
-                    }
-                }
-            }
-        }
-
-        return directives;
-    },
-
-
-    /**
-     * Determines whether this node is a decimal integer literal. If a node is a decimal integer literal, a dot added
-     * after the node will be parsed as a decimal point, rather than a property-access dot.
-     * @param {ASTNode} node - The node to check.
-     * @returns {boolean} `true` if this node is a decimal integer.
-     * @example
-     *
-     * 5       // true
-     * 5.      // false
-     * 5.0     // false
-     * 05      // false
-     * 0x5     // false
-     * 0b101   // false
-     * 0o5     // false
-     * 5e0     // false
-     * '5'     // false
-     */
-    isDecimalInteger: function isDecimalInteger(node) {
-        return node.type === "Literal" && typeof node.value === "number" && /^(0|[1-9]\d*)$/.test(node.raw);
-    },
-
-
-    /**
-     * Gets the name and kind of the given function node.
-     *
-     * - `function foo() {}`  .................... `function 'foo'`
-     * - `(function foo() {})`  .................. `function 'foo'`
-     * - `(function() {})`  ...................... `function`
-     * - `function* foo() {}`  ................... `generator function 'foo'`
-     * - `(function* foo() {})`  ................. `generator function 'foo'`
-     * - `(function*() {})`  ..................... `generator function`
-     * - `() => {}`  ............................. `arrow function`
-     * - `async () => {}`  ....................... `async arrow function`
-     * - `({ foo: function foo() {} })`  ......... `method 'foo'`
-     * - `({ foo: function() {} })`  ............. `method 'foo'`
-     * - `({ ['foo']: function() {} })`  ......... `method 'foo'`
-     * - `({ [foo]: function() {} })`  ........... `method`
-     * - `({ foo() {} })`  ....................... `method 'foo'`
-     * - `({ foo: function* foo() {} })`  ........ `generator method 'foo'`
-     * - `({ foo: function*() {} })`  ............ `generator method 'foo'`
-     * - `({ ['foo']: function*() {} })`  ........ `generator method 'foo'`
-     * - `({ [foo]: function*() {} })`  .......... `generator method`
-     * - `({ *foo() {} })`  ...................... `generator method 'foo'`
-     * - `({ foo: async function foo() {} })`  ... `async method 'foo'`
-     * - `({ foo: async function() {} })`  ....... `async method 'foo'`
-     * - `({ ['foo']: async function() {} })`  ... `async method 'foo'`
-     * - `({ [foo]: async function() {} })`  ..... `async method`
-     * - `({ async foo() {} })`  ................. `async method 'foo'`
-     * - `({ get foo() {} })`  ................... `getter 'foo'`
-     * - `({ set foo(a) {} })`  .................. `setter 'foo'`
-     * - `class A { constructor() {} }`  ......... `constructor`
-     * - `class A { foo() {} }`  ................. `method 'foo'`
-     * - `class A { *foo() {} }`  ................ `generator method 'foo'`
-     * - `class A { async foo() {} }`  ........... `async method 'foo'`
-     * - `class A { ['foo']() {} }`  ............. `method 'foo'`
-     * - `class A { *['foo']() {} }`  ............ `generator method 'foo'`
-     * - `class A { async ['foo']() {} }`  ....... `async method 'foo'`
-     * - `class A { [foo]() {} }`  ............... `method`
-     * - `class A { *[foo]() {} }`  .............. `generator method`
-     * - `class A { async [foo]() {} }`  ......... `async method`
-     * - `class A { get foo() {} }`  ............. `getter 'foo'`
-     * - `class A { set foo(a) {} }`  ............ `setter 'foo'`
-     * - `class A { static foo() {} }`  .......... `static method 'foo'`
-     * - `class A { static *foo() {} }`  ......... `static generator method 'foo'`
-     * - `class A { static async foo() {} }`  .... `static async method 'foo'`
-     * - `class A { static get foo() {} }`  ...... `static getter 'foo'`
-     * - `class A { static set foo(a) {} }`  ..... `static setter 'foo'`
-     *
-     * @param {ASTNode} node - The function node to get.
-     * @returns {string} The name and kind of the function node.
-     */
-    getFunctionNameWithKind: function getFunctionNameWithKind(node) {
-        var parent = node.parent;
-        var tokens = [];
-
-        if (parent.type === "MethodDefinition" && parent.static) {
-            tokens.push("static");
-        }
-        if (node.async) {
-            tokens.push("async");
-        }
-        if (node.generator) {
-            tokens.push("generator");
-        }
-
-        if (node.type === "ArrowFunctionExpression") {
-            tokens.push("arrow", "function");
-        } else if (parent.type === "Property" || parent.type === "MethodDefinition") {
-            if (parent.kind === "constructor") {
-                return "constructor";
-            }
-            if (parent.kind === "get") {
-                tokens.push("getter");
-            } else if (parent.kind === "set") {
-                tokens.push("setter");
-            } else {
-                tokens.push("method");
-            }
-        } else {
-            tokens.push("function");
-        }
-
-        if (node.id) {
-            tokens.push("'" + node.id.name + "'");
-        } else {
-            var name = module.exports.getStaticPropertyName(parent);
-
-            if (name) {
-                tokens.push("'" + name + "'");
-            }
-        }
-
-        return tokens.join(" ");
-    },
-
-
-    /**
-     * Gets the location of the given function node for reporting.
-     *
-     * - `function foo() {}`
-     *    ^^^^^^^^^^^^
-     * - `(function foo() {})`
-     *     ^^^^^^^^^^^^
-     * - `(function() {})`
-     *     ^^^^^^^^
-     * - `function* foo() {}`
-     *    ^^^^^^^^^^^^^
-     * - `(function* foo() {})`
-     *     ^^^^^^^^^^^^^
-     * - `(function*() {})`
-     *     ^^^^^^^^^
-     * - `() => {}`
-     *       ^^
-     * - `async () => {}`
-     *             ^^
-     * - `({ foo: function foo() {} })`
-     *       ^^^^^^^^^^^^^^^^^
-     * - `({ foo: function() {} })`
-     *       ^^^^^^^^^^^^^
-     * - `({ ['foo']: function() {} })`
-     *       ^^^^^^^^^^^^^^^^^
-     * - `({ [foo]: function() {} })`
-     *       ^^^^^^^^^^^^^^^
-     * - `({ foo() {} })`
-     *       ^^^
-     * - `({ foo: function* foo() {} })`
-     *       ^^^^^^^^^^^^^^^^^^
-     * - `({ foo: function*() {} })`
-     *       ^^^^^^^^^^^^^^
-     * - `({ ['foo']: function*() {} })`
-     *       ^^^^^^^^^^^^^^^^^^
-     * - `({ [foo]: function*() {} })`
-     *       ^^^^^^^^^^^^^^^^
-     * - `({ *foo() {} })`
-     *       ^^^^
-     * - `({ foo: async function foo() {} })`
-     *       ^^^^^^^^^^^^^^^^^^^^^^^
-     * - `({ foo: async function() {} })`
-     *       ^^^^^^^^^^^^^^^^^^^
-     * - `({ ['foo']: async function() {} })`
-     *       ^^^^^^^^^^^^^^^^^^^^^^^
-     * - `({ [foo]: async function() {} })`
-     *       ^^^^^^^^^^^^^^^^^^^^^
-     * - `({ async foo() {} })`
-     *       ^^^^^^^^^
-     * - `({ get foo() {} })`
-     *       ^^^^^^^
-     * - `({ set foo(a) {} })`
-     *       ^^^^^^^
-     * - `class A { constructor() {} }`
-     *              ^^^^^^^^^^^
-     * - `class A { foo() {} }`
-     *              ^^^
-     * - `class A { *foo() {} }`
-     *              ^^^^
-     * - `class A { async foo() {} }`
-     *              ^^^^^^^^^
-     * - `class A { ['foo']() {} }`
-     *              ^^^^^^^
-     * - `class A { *['foo']() {} }`
-     *              ^^^^^^^^
-     * - `class A { async ['foo']() {} }`
-     *              ^^^^^^^^^^^^^
-     * - `class A { [foo]() {} }`
-     *              ^^^^^
-     * - `class A { *[foo]() {} }`
-     *              ^^^^^^
-     * - `class A { async [foo]() {} }`
-     *              ^^^^^^^^^^^
-     * - `class A { get foo() {} }`
-     *              ^^^^^^^
-     * - `class A { set foo(a) {} }`
-     *              ^^^^^^^
-     * - `class A { static foo() {} }`
-     *              ^^^^^^^^^^
-     * - `class A { static *foo() {} }`
-     *              ^^^^^^^^^^^
-     * - `class A { static async foo() {} }`
-     *              ^^^^^^^^^^^^^^^^
-     * - `class A { static get foo() {} }`
-     *              ^^^^^^^^^^^^^^
-     * - `class A { static set foo(a) {} }`
-     *              ^^^^^^^^^^^^^^
-     *
-     * @param {ASTNode} node - The function node to get.
-     * @param {SourceCode} sourceCode - The source code object to get tokens.
-     * @returns {string} The location of the function node for reporting.
-     */
-    getFunctionHeadLoc: function getFunctionHeadLoc(node, sourceCode) {
-        var parent = node.parent;
-        var start = null;
-        var end = null;
-
-        if (node.type === "ArrowFunctionExpression") {
-            var arrowToken = sourceCode.getTokenBefore(node.body, isArrowToken);
-
-            start = arrowToken.loc.start;
-            end = arrowToken.loc.end;
-        } else if (parent.type === "Property" || parent.type === "MethodDefinition") {
-            start = parent.loc.start;
-            end = getOpeningParenOfParams(node, sourceCode).loc.start;
-        } else {
-            start = node.loc.start;
-            end = getOpeningParenOfParams(node, sourceCode).loc.start;
-        }
-
-        return {
-            start: Object.assign({}, start),
-            end: Object.assign({}, end)
-        };
-    },
-
-
-    /**
-     * Gets the parenthesized text of a node. This is similar to sourceCode.getText(node), but it also includes any parentheses
-     * surrounding the node.
-     * @param {SourceCode} sourceCode The source code object
-     * @param {ASTNode} node An expression node
-     * @returns {string} The text representing the node, with all surrounding parentheses included
-     */
-    getParenthesisedText: function getParenthesisedText(sourceCode, node) {
-        var leftToken = sourceCode.getFirstToken(node);
-        var rightToken = sourceCode.getLastToken(node);
-
-        while (sourceCode.getTokenBefore(leftToken) && sourceCode.getTokenBefore(leftToken).type === "Punctuator" && sourceCode.getTokenBefore(leftToken).value === "(" && sourceCode.getTokenAfter(rightToken) && sourceCode.getTokenAfter(rightToken).type === "Punctuator" && sourceCode.getTokenAfter(rightToken).value === ")") {
-            leftToken = sourceCode.getTokenBefore(leftToken);
-            rightToken = sourceCode.getTokenAfter(rightToken);
-        }
-
-        return sourceCode.getText().slice(leftToken.range[0], rightToken.range[1]);
-    },
-
-
-    /*
-     * Determine if a node has a possiblity to be an Error object
-     * @param  {ASTNode} node  ASTNode to check
-     * @returns {boolean} True if there is a chance it contains an Error obj
-     */
-    couldBeError: function couldBeError(node) {
-        switch (node.type) {
-            case "Identifier":
-            case "CallExpression":
-            case "NewExpression":
-            case "MemberExpression":
-            case "TaggedTemplateExpression":
-            case "YieldExpression":
-            case "AwaitExpression":
-                return true; // possibly an error object.
-
-            case "AssignmentExpression":
-                return module.exports.couldBeError(node.right);
-
-            case "SequenceExpression":
-                {
-                    var exprs = node.expressions;
-
-                    return exprs.length !== 0 && module.exports.couldBeError(exprs[exprs.length - 1]);
-                }
-
-            case "LogicalExpression":
-                return module.exports.couldBeError(node.left) || module.exports.couldBeError(node.right);
-
-            case "ConditionalExpression":
-                return module.exports.couldBeError(node.consequent) || module.exports.couldBeError(node.alternate);
-
-            default:
-                return false;
-        }
-    },
-
-
-    /**
-     * Determines whether the given node is a `null` literal.
-     * @param {ASTNode} node The node to check
-     * @returns {boolean} `true` if the node is a `null` literal
-     */
-    isNullLiteral: function isNullLiteral(node) {
-
-        /*
-         * Checking `node.value === null` does not guarantee that a literal is a null literal.
-         * When parsing values that cannot be represented in the current environment (e.g. unicode
-         * regexes in Node 4), `node.value` is set to `null` because it wouldn't be possible to
-         * set `node.value` to a unicode regex. To make sure a literal is actually `null`, check
-         * `node.regex` instead. Also see: https://github.com/eslint/eslint/issues/8020
-         */
-        return node.type === "Literal" && node.value === null && !node.regex;
-    },
-
-
-    /**
-     * Determines whether two tokens can safely be placed next to each other without merging into a single token
-     * @param {Token|string} leftValue The left token. If this is a string, it will be tokenized and the last token will be used.
-     * @param {Token|string} rightValue The right token. If this is a string, it will be tokenized and the first token will be used.
-     * @returns {boolean} If the tokens cannot be safely placed next to each other, returns `false`. If the tokens can be placed
-     * next to each other, behavior is undefined (although it should return `true` in most cases).
-     */
-    canTokensBeAdjacent: function canTokensBeAdjacent(leftValue, rightValue) {
-        var leftToken = void 0;
-
-        if (typeof leftValue === "string") {
-            var leftTokens = espree.tokenize(leftValue, { ecmaVersion: 2015 });
-
-            leftToken = leftTokens[leftTokens.length - 1];
-        } else {
-            leftToken = leftValue;
-        }
-
-        var rightToken = typeof rightValue === "string" ? espree.tokenize(rightValue, { ecmaVersion: 2015 })[0] : rightValue;
-
-        if (leftToken.type === "Punctuator" || rightToken.type === "Punctuator") {
-            if (leftToken.type === "Punctuator" && rightToken.type === "Punctuator") {
-                var PLUS_TOKENS = new Set(["+", "++"]);
-                var MINUS_TOKENS = new Set(["-", "--"]);
-
-                return !(PLUS_TOKENS.has(leftToken.value) && PLUS_TOKENS.has(rightToken.value) || MINUS_TOKENS.has(leftToken.value) && MINUS_TOKENS.has(rightToken.value));
-            }
-            return true;
-        }
-
-        if (leftToken.type === "String" || rightToken.type === "String" || leftToken.type === "Template" || rightToken.type === "Template") {
-            return true;
-        }
-
-        if (leftToken.type !== "Numeric" && rightToken.type === "Numeric" && rightToken.value.startsWith(".")) {
-            return true;
-        }
-
-        return false;
-    }
-};
-
-},{"espree":"espree","esutils":80}],113:[function(require,module,exports){
-/**
  * @fileoverview A class of the code path analyzer.
  * @author Toru Nagashima
  */
@@ -58769,7 +57704,7 @@ var assert = require("assert"),
     CodePathSegment = require("./code-path-segment"),
     IdGenerator = require("./id-generator"),
     debug = require("./debug-helpers"),
-    astUtils = require("../ast-utils");
+    astUtils = require("../util/ast-utils");
 
 //------------------------------------------------------------------------------
 // Helpers
@@ -59421,7 +58356,7 @@ var CodePathAnalyzer = function () {
 
 module.exports = CodePathAnalyzer;
 
-},{"../ast-utils":112,"./code-path":116,"./code-path-segment":114,"./debug-helpers":117,"./id-generator":119,"assert":46}],114:[function(require,module,exports){
+},{"../util/ast-utils":405,"./code-path":115,"./code-path-segment":113,"./debug-helpers":116,"./id-generator":118,"assert":46}],113:[function(require,module,exports){
 /**
  * @fileoverview A class of the code path segment.
  * @author Toru Nagashima
@@ -59698,7 +58633,7 @@ var CodePathSegment = function () {
 
 module.exports = CodePathSegment;
 
-},{"./debug-helpers":117}],115:[function(require,module,exports){
+},{"./debug-helpers":116}],114:[function(require,module,exports){
 /**
  * @fileoverview A class to manage state of generating a code path.
  * @author Toru Nagashima
@@ -61220,7 +60155,7 @@ var CodePathState = function () {
 
 module.exports = CodePathState;
 
-},{"./code-path-segment":114,"./fork-context":118}],116:[function(require,module,exports){
+},{"./code-path-segment":113,"./fork-context":117}],115:[function(require,module,exports){
 /**
  * @fileoverview A class of the code path.
  * @author Toru Nagashima
@@ -61482,7 +60417,7 @@ var CodePath = function () {
 
 module.exports = CodePath;
 
-},{"./code-path-state":115,"./id-generator":119}],117:[function(require,module,exports){
+},{"./code-path-state":114,"./id-generator":118}],116:[function(require,module,exports){
 /**
  * @fileoverview Helpers to debug for code path analysis.
  * @author Toru Nagashima
@@ -61682,7 +60617,7 @@ module.exports = {
     }
 };
 
-},{"debug":53}],118:[function(require,module,exports){
+},{"debug":53}],117:[function(require,module,exports){
 /**
  * @fileoverview A class to operate forking.
  *
@@ -61984,7 +60919,7 @@ var ForkContext = function () {
 
 module.exports = ForkContext;
 
-},{"./code-path-segment":114,"assert":46}],119:[function(require,module,exports){
+},{"./code-path-segment":113,"assert":46}],118:[function(require,module,exports){
 /**
  * @fileoverview A class of identifiers generator for code path segments.
  *
@@ -62046,7 +60981,7 @@ var IdGenerator = function () {
 
 module.exports = IdGenerator;
 
-},{}],120:[function(require,module,exports){
+},{}],119:[function(require,module,exports){
 /**
  * @fileoverview Config file operations. This file must be usable in the browser,
  * so no Node-specific code can be here.
@@ -62447,7 +61382,7 @@ module.exports = {
     }
 };
 
-},{"debug":53,"minimatch":93,"path":96}],121:[function(require,module,exports){
+},{"debug":53,"minimatch":93,"path":96}],120:[function(require,module,exports){
 (function (process){
 /**
  * @fileoverview Validates configs.
@@ -62742,7 +61677,7 @@ module.exports = {
 };
 
 }).call(this,require('_process'))
-},{"../../conf/config-schema.js":1,"../util/ajv":400,"_process":103,"lodash":92,"path":96,"util":110}],122:[function(require,module,exports){
+},{"../../conf/config-schema.js":1,"../util/ajv":403,"_process":103,"lodash":92,"path":96,"util":110}],121:[function(require,module,exports){
 /**
  * @fileoverview Environments manager
  * @author Nicholas C. Zakas
@@ -62857,7 +61792,7 @@ var Environments = function () {
 
 module.exports = Environments;
 
-},{"../../conf/environments":2}],123:[function(require,module,exports){
+},{"../../conf/environments":2}],122:[function(require,module,exports){
 /**
  * @fileoverview Main Linter Class
  * @author Gyandeep Singh
@@ -62895,7 +61830,7 @@ var eslintScope = require("eslint-scope"),
     createReportTranslator = require("./report-translator"),
     Rules = require("./rules"),
     timing = require("./util/timing"),
-    astUtils = require("./ast-utils"),
+    astUtils = require("./util/ast-utils"),
     pkg = require("../package.json"),
     SourceCodeFixer = require("./util/source-code-fixer");
 
@@ -64053,7 +62988,7 @@ module.exports = function () {
     return Linter;
 }();
 
-},{"../package.json":111,"./ast-utils":112,"./code-path-analysis/code-path-analyzer":113,"./config/config-ops":120,"./config/config-validator":121,"./config/environments":122,"./report-translator":125,"./rules":126,"./util/apply-disable-directives":401,"./util/node-event-generator":405,"./util/safe-emitter":408,"./util/source-code":410,"./util/source-code-fixer":409,"./util/timing":411,"./util/traverser":412,"debug":53,"eslint-scope":60,"eslint-visitor-keys":69,"levn":90,"lodash":92}],124:[function(require,module,exports){
+},{"../package.json":111,"./code-path-analysis/code-path-analyzer":112,"./config/config-ops":119,"./config/config-validator":120,"./config/environments":121,"./report-translator":124,"./rules":125,"./util/apply-disable-directives":404,"./util/ast-utils":405,"./util/node-event-generator":409,"./util/safe-emitter":412,"./util/source-code":414,"./util/source-code-fixer":413,"./util/timing":415,"./util/traverser":416,"debug":53,"eslint-scope":60,"eslint-visitor-keys":69,"levn":90,"lodash":92}],123:[function(require,module,exports){
 "use strict";
 
 module.exports = function () {
@@ -64131,6 +63066,7 @@ module.exports = function () {
     rules["newline-per-chained-call"] = require("./rules/newline-per-chained-call");
     rules["no-alert"] = require("./rules/no-alert");
     rules["no-array-constructor"] = require("./rules/no-array-constructor");
+    rules["no-async-promise-executor"] = require("./rules/no-async-promise-executor");
     rules["no-await-in-loop"] = require("./rules/no-await-in-loop");
     rules["no-bitwise"] = require("./rules/no-bitwise");
     rules["no-buffer-constructor"] = require("./rules/no-buffer-constructor");
@@ -64187,6 +63123,7 @@ module.exports = function () {
     rules["no-lonely-if"] = require("./rules/no-lonely-if");
     rules["no-loop-func"] = require("./rules/no-loop-func");
     rules["no-magic-numbers"] = require("./rules/no-magic-numbers");
+    rules["no-misleading-character-class"] = require("./rules/no-misleading-character-class");
     rules["no-mixed-operators"] = require("./rules/no-mixed-operators");
     rules["no-mixed-requires"] = require("./rules/no-mixed-requires");
     rules["no-mixed-spaces-and-tabs"] = require("./rules/no-mixed-spaces-and-tabs");
@@ -64288,8 +63225,10 @@ module.exports = function () {
     rules["quote-props"] = require("./rules/quote-props");
     rules["quotes"] = require("./rules/quotes");
     rules["radix"] = require("./rules/radix");
+    rules["require-atomic-updates"] = require("./rules/require-atomic-updates");
     rules["require-await"] = require("./rules/require-await");
     rules["require-jsdoc"] = require("./rules/require-jsdoc");
+    rules["require-unicode-regexp"] = require("./rules/require-unicode-regexp");
     rules["require-yield"] = require("./rules/require-yield");
     rules["rest-spread-spacing"] = require("./rules/rest-spread-spacing");
     rules["semi-spacing"] = require("./rules/semi-spacing");
@@ -64322,7 +63261,7 @@ module.exports = function () {
     return rules;
 };
 
-},{"./rules/accessor-pairs":127,"./rules/array-bracket-newline":128,"./rules/array-bracket-spacing":129,"./rules/array-callback-return":130,"./rules/array-element-newline":131,"./rules/arrow-body-style":132,"./rules/arrow-parens":133,"./rules/arrow-spacing":134,"./rules/block-scoped-var":135,"./rules/block-spacing":136,"./rules/brace-style":137,"./rules/callback-return":138,"./rules/camelcase":139,"./rules/capitalized-comments":140,"./rules/class-methods-use-this":141,"./rules/comma-dangle":142,"./rules/comma-spacing":143,"./rules/comma-style":144,"./rules/complexity":145,"./rules/computed-property-spacing":146,"./rules/consistent-return":147,"./rules/consistent-this":148,"./rules/constructor-super":149,"./rules/curly":150,"./rules/default-case":151,"./rules/dot-location":152,"./rules/dot-notation":153,"./rules/eol-last":154,"./rules/eqeqeq":155,"./rules/for-direction":156,"./rules/func-call-spacing":157,"./rules/func-name-matching":158,"./rules/func-names":159,"./rules/func-style":160,"./rules/function-paren-newline":161,"./rules/generator-star-spacing":162,"./rules/getter-return":163,"./rules/global-require":164,"./rules/guard-for-in":165,"./rules/handle-callback-err":166,"./rules/id-blacklist":167,"./rules/id-length":168,"./rules/id-match":169,"./rules/implicit-arrow-linebreak":170,"./rules/indent":172,"./rules/indent-legacy":171,"./rules/init-declarations":173,"./rules/jsx-quotes":174,"./rules/key-spacing":175,"./rules/keyword-spacing":176,"./rules/line-comment-position":177,"./rules/linebreak-style":178,"./rules/lines-around-comment":179,"./rules/lines-around-directive":180,"./rules/lines-between-class-members":181,"./rules/max-classes-per-file":182,"./rules/max-depth":183,"./rules/max-len":184,"./rules/max-lines":186,"./rules/max-lines-per-function":185,"./rules/max-nested-callbacks":187,"./rules/max-params":188,"./rules/max-statements":190,"./rules/max-statements-per-line":189,"./rules/multiline-comment-style":191,"./rules/multiline-ternary":192,"./rules/new-cap":193,"./rules/new-parens":194,"./rules/newline-after-var":195,"./rules/newline-before-return":196,"./rules/newline-per-chained-call":197,"./rules/no-alert":198,"./rules/no-array-constructor":199,"./rules/no-await-in-loop":200,"./rules/no-bitwise":201,"./rules/no-buffer-constructor":202,"./rules/no-caller":203,"./rules/no-case-declarations":204,"./rules/no-catch-shadow":205,"./rules/no-class-assign":206,"./rules/no-compare-neg-zero":207,"./rules/no-cond-assign":208,"./rules/no-confusing-arrow":209,"./rules/no-console":210,"./rules/no-const-assign":211,"./rules/no-constant-condition":212,"./rules/no-continue":213,"./rules/no-control-regex":214,"./rules/no-debugger":215,"./rules/no-delete-var":216,"./rules/no-div-regex":217,"./rules/no-dupe-args":218,"./rules/no-dupe-class-members":219,"./rules/no-dupe-keys":220,"./rules/no-duplicate-case":221,"./rules/no-duplicate-imports":222,"./rules/no-else-return":223,"./rules/no-empty":227,"./rules/no-empty-character-class":224,"./rules/no-empty-function":225,"./rules/no-empty-pattern":226,"./rules/no-eq-null":228,"./rules/no-eval":229,"./rules/no-ex-assign":230,"./rules/no-extend-native":231,"./rules/no-extra-bind":232,"./rules/no-extra-boolean-cast":233,"./rules/no-extra-label":234,"./rules/no-extra-parens":235,"./rules/no-extra-semi":236,"./rules/no-fallthrough":237,"./rules/no-floating-decimal":238,"./rules/no-func-assign":239,"./rules/no-global-assign":240,"./rules/no-implicit-coercion":241,"./rules/no-implicit-globals":242,"./rules/no-implied-eval":243,"./rules/no-inline-comments":244,"./rules/no-inner-declarations":245,"./rules/no-invalid-regexp":246,"./rules/no-invalid-this":247,"./rules/no-irregular-whitespace":248,"./rules/no-iterator":249,"./rules/no-label-var":250,"./rules/no-labels":251,"./rules/no-lone-blocks":252,"./rules/no-lonely-if":253,"./rules/no-loop-func":254,"./rules/no-magic-numbers":255,"./rules/no-mixed-operators":256,"./rules/no-mixed-requires":257,"./rules/no-mixed-spaces-and-tabs":258,"./rules/no-multi-assign":259,"./rules/no-multi-spaces":260,"./rules/no-multi-str":261,"./rules/no-multiple-empty-lines":262,"./rules/no-native-reassign":263,"./rules/no-negated-condition":264,"./rules/no-negated-in-lhs":265,"./rules/no-nested-ternary":266,"./rules/no-new":272,"./rules/no-new-func":267,"./rules/no-new-object":268,"./rules/no-new-require":269,"./rules/no-new-symbol":270,"./rules/no-new-wrappers":271,"./rules/no-obj-calls":273,"./rules/no-octal":275,"./rules/no-octal-escape":274,"./rules/no-param-reassign":276,"./rules/no-path-concat":277,"./rules/no-plusplus":278,"./rules/no-process-env":279,"./rules/no-process-exit":280,"./rules/no-proto":281,"./rules/no-prototype-builtins":282,"./rules/no-redeclare":283,"./rules/no-regex-spaces":284,"./rules/no-restricted-globals":285,"./rules/no-restricted-imports":286,"./rules/no-restricted-modules":287,"./rules/no-restricted-properties":288,"./rules/no-restricted-syntax":289,"./rules/no-return-assign":290,"./rules/no-return-await":291,"./rules/no-script-url":292,"./rules/no-self-assign":293,"./rules/no-self-compare":294,"./rules/no-sequences":295,"./rules/no-shadow":297,"./rules/no-shadow-restricted-names":296,"./rules/no-spaced-func":298,"./rules/no-sparse-arrays":299,"./rules/no-sync":300,"./rules/no-tabs":301,"./rules/no-template-curly-in-string":302,"./rules/no-ternary":303,"./rules/no-this-before-super":304,"./rules/no-throw-literal":305,"./rules/no-trailing-spaces":306,"./rules/no-undef":308,"./rules/no-undef-init":307,"./rules/no-undefined":309,"./rules/no-underscore-dangle":310,"./rules/no-unexpected-multiline":311,"./rules/no-unmodified-loop-condition":312,"./rules/no-unneeded-ternary":313,"./rules/no-unreachable":314,"./rules/no-unsafe-finally":315,"./rules/no-unsafe-negation":316,"./rules/no-unused-expressions":317,"./rules/no-unused-labels":318,"./rules/no-unused-vars":319,"./rules/no-use-before-define":320,"./rules/no-useless-call":321,"./rules/no-useless-computed-key":322,"./rules/no-useless-concat":323,"./rules/no-useless-constructor":324,"./rules/no-useless-escape":325,"./rules/no-useless-rename":326,"./rules/no-useless-return":327,"./rules/no-var":328,"./rules/no-void":329,"./rules/no-warning-comments":330,"./rules/no-whitespace-before-property":331,"./rules/no-with":332,"./rules/nonblock-statement-body-position":333,"./rules/object-curly-newline":334,"./rules/object-curly-spacing":335,"./rules/object-property-newline":336,"./rules/object-shorthand":337,"./rules/one-var":339,"./rules/one-var-declaration-per-line":338,"./rules/operator-assignment":340,"./rules/operator-linebreak":341,"./rules/padded-blocks":342,"./rules/padding-line-between-statements":343,"./rules/prefer-arrow-callback":344,"./rules/prefer-const":345,"./rules/prefer-destructuring":346,"./rules/prefer-numeric-literals":347,"./rules/prefer-object-spread":348,"./rules/prefer-promise-reject-errors":349,"./rules/prefer-reflect":350,"./rules/prefer-rest-params":351,"./rules/prefer-spread":352,"./rules/prefer-template":353,"./rules/quote-props":354,"./rules/quotes":355,"./rules/radix":356,"./rules/require-await":357,"./rules/require-jsdoc":358,"./rules/require-yield":359,"./rules/rest-spread-spacing":360,"./rules/semi":363,"./rules/semi-spacing":361,"./rules/semi-style":362,"./rules/sort-imports":364,"./rules/sort-keys":365,"./rules/sort-vars":366,"./rules/space-before-blocks":367,"./rules/space-before-function-paren":368,"./rules/space-in-parens":369,"./rules/space-infix-ops":370,"./rules/space-unary-ops":371,"./rules/spaced-comment":372,"./rules/strict":373,"./rules/switch-colon-spacing":374,"./rules/symbol-description":375,"./rules/template-curly-spacing":376,"./rules/template-tag-spacing":377,"./rules/unicode-bom":378,"./rules/use-isnan":379,"./rules/valid-jsdoc":380,"./rules/valid-typeof":381,"./rules/vars-on-top":382,"./rules/wrap-iife":383,"./rules/wrap-regex":384,"./rules/yield-star-spacing":385,"./rules/yoda":386}],125:[function(require,module,exports){
+},{"./rules/accessor-pairs":126,"./rules/array-bracket-newline":127,"./rules/array-bracket-spacing":128,"./rules/array-callback-return":129,"./rules/array-element-newline":130,"./rules/arrow-body-style":131,"./rules/arrow-parens":132,"./rules/arrow-spacing":133,"./rules/block-scoped-var":134,"./rules/block-spacing":135,"./rules/brace-style":136,"./rules/callback-return":137,"./rules/camelcase":138,"./rules/capitalized-comments":139,"./rules/class-methods-use-this":140,"./rules/comma-dangle":141,"./rules/comma-spacing":142,"./rules/comma-style":143,"./rules/complexity":144,"./rules/computed-property-spacing":145,"./rules/consistent-return":146,"./rules/consistent-this":147,"./rules/constructor-super":148,"./rules/curly":149,"./rules/default-case":150,"./rules/dot-location":151,"./rules/dot-notation":152,"./rules/eol-last":153,"./rules/eqeqeq":154,"./rules/for-direction":155,"./rules/func-call-spacing":156,"./rules/func-name-matching":157,"./rules/func-names":158,"./rules/func-style":159,"./rules/function-paren-newline":160,"./rules/generator-star-spacing":161,"./rules/getter-return":162,"./rules/global-require":163,"./rules/guard-for-in":164,"./rules/handle-callback-err":165,"./rules/id-blacklist":166,"./rules/id-length":167,"./rules/id-match":168,"./rules/implicit-arrow-linebreak":169,"./rules/indent":171,"./rules/indent-legacy":170,"./rules/init-declarations":172,"./rules/jsx-quotes":173,"./rules/key-spacing":174,"./rules/keyword-spacing":175,"./rules/line-comment-position":176,"./rules/linebreak-style":177,"./rules/lines-around-comment":178,"./rules/lines-around-directive":179,"./rules/lines-between-class-members":180,"./rules/max-classes-per-file":181,"./rules/max-depth":182,"./rules/max-len":183,"./rules/max-lines":185,"./rules/max-lines-per-function":184,"./rules/max-nested-callbacks":186,"./rules/max-params":187,"./rules/max-statements":189,"./rules/max-statements-per-line":188,"./rules/multiline-comment-style":190,"./rules/multiline-ternary":191,"./rules/new-cap":192,"./rules/new-parens":193,"./rules/newline-after-var":194,"./rules/newline-before-return":195,"./rules/newline-per-chained-call":196,"./rules/no-alert":197,"./rules/no-array-constructor":198,"./rules/no-async-promise-executor":199,"./rules/no-await-in-loop":200,"./rules/no-bitwise":201,"./rules/no-buffer-constructor":202,"./rules/no-caller":203,"./rules/no-case-declarations":204,"./rules/no-catch-shadow":205,"./rules/no-class-assign":206,"./rules/no-compare-neg-zero":207,"./rules/no-cond-assign":208,"./rules/no-confusing-arrow":209,"./rules/no-console":210,"./rules/no-const-assign":211,"./rules/no-constant-condition":212,"./rules/no-continue":213,"./rules/no-control-regex":214,"./rules/no-debugger":215,"./rules/no-delete-var":216,"./rules/no-div-regex":217,"./rules/no-dupe-args":218,"./rules/no-dupe-class-members":219,"./rules/no-dupe-keys":220,"./rules/no-duplicate-case":221,"./rules/no-duplicate-imports":222,"./rules/no-else-return":223,"./rules/no-empty":227,"./rules/no-empty-character-class":224,"./rules/no-empty-function":225,"./rules/no-empty-pattern":226,"./rules/no-eq-null":228,"./rules/no-eval":229,"./rules/no-ex-assign":230,"./rules/no-extend-native":231,"./rules/no-extra-bind":232,"./rules/no-extra-boolean-cast":233,"./rules/no-extra-label":234,"./rules/no-extra-parens":235,"./rules/no-extra-semi":236,"./rules/no-fallthrough":237,"./rules/no-floating-decimal":238,"./rules/no-func-assign":239,"./rules/no-global-assign":240,"./rules/no-implicit-coercion":241,"./rules/no-implicit-globals":242,"./rules/no-implied-eval":243,"./rules/no-inline-comments":244,"./rules/no-inner-declarations":245,"./rules/no-invalid-regexp":246,"./rules/no-invalid-this":247,"./rules/no-irregular-whitespace":248,"./rules/no-iterator":249,"./rules/no-label-var":250,"./rules/no-labels":251,"./rules/no-lone-blocks":252,"./rules/no-lonely-if":253,"./rules/no-loop-func":254,"./rules/no-magic-numbers":255,"./rules/no-misleading-character-class":256,"./rules/no-mixed-operators":257,"./rules/no-mixed-requires":258,"./rules/no-mixed-spaces-and-tabs":259,"./rules/no-multi-assign":260,"./rules/no-multi-spaces":261,"./rules/no-multi-str":262,"./rules/no-multiple-empty-lines":263,"./rules/no-native-reassign":264,"./rules/no-negated-condition":265,"./rules/no-negated-in-lhs":266,"./rules/no-nested-ternary":267,"./rules/no-new":273,"./rules/no-new-func":268,"./rules/no-new-object":269,"./rules/no-new-require":270,"./rules/no-new-symbol":271,"./rules/no-new-wrappers":272,"./rules/no-obj-calls":274,"./rules/no-octal":276,"./rules/no-octal-escape":275,"./rules/no-param-reassign":277,"./rules/no-path-concat":278,"./rules/no-plusplus":279,"./rules/no-process-env":280,"./rules/no-process-exit":281,"./rules/no-proto":282,"./rules/no-prototype-builtins":283,"./rules/no-redeclare":284,"./rules/no-regex-spaces":285,"./rules/no-restricted-globals":286,"./rules/no-restricted-imports":287,"./rules/no-restricted-modules":288,"./rules/no-restricted-properties":289,"./rules/no-restricted-syntax":290,"./rules/no-return-assign":291,"./rules/no-return-await":292,"./rules/no-script-url":293,"./rules/no-self-assign":294,"./rules/no-self-compare":295,"./rules/no-sequences":296,"./rules/no-shadow":298,"./rules/no-shadow-restricted-names":297,"./rules/no-spaced-func":299,"./rules/no-sparse-arrays":300,"./rules/no-sync":301,"./rules/no-tabs":302,"./rules/no-template-curly-in-string":303,"./rules/no-ternary":304,"./rules/no-this-before-super":305,"./rules/no-throw-literal":306,"./rules/no-trailing-spaces":307,"./rules/no-undef":309,"./rules/no-undef-init":308,"./rules/no-undefined":310,"./rules/no-underscore-dangle":311,"./rules/no-unexpected-multiline":312,"./rules/no-unmodified-loop-condition":313,"./rules/no-unneeded-ternary":314,"./rules/no-unreachable":315,"./rules/no-unsafe-finally":316,"./rules/no-unsafe-negation":317,"./rules/no-unused-expressions":318,"./rules/no-unused-labels":319,"./rules/no-unused-vars":320,"./rules/no-use-before-define":321,"./rules/no-useless-call":322,"./rules/no-useless-computed-key":323,"./rules/no-useless-concat":324,"./rules/no-useless-constructor":325,"./rules/no-useless-escape":326,"./rules/no-useless-rename":327,"./rules/no-useless-return":328,"./rules/no-var":329,"./rules/no-void":330,"./rules/no-warning-comments":331,"./rules/no-whitespace-before-property":332,"./rules/no-with":333,"./rules/nonblock-statement-body-position":334,"./rules/object-curly-newline":335,"./rules/object-curly-spacing":336,"./rules/object-property-newline":337,"./rules/object-shorthand":338,"./rules/one-var":340,"./rules/one-var-declaration-per-line":339,"./rules/operator-assignment":341,"./rules/operator-linebreak":342,"./rules/padded-blocks":343,"./rules/padding-line-between-statements":344,"./rules/prefer-arrow-callback":345,"./rules/prefer-const":346,"./rules/prefer-destructuring":347,"./rules/prefer-numeric-literals":348,"./rules/prefer-object-spread":349,"./rules/prefer-promise-reject-errors":350,"./rules/prefer-reflect":351,"./rules/prefer-rest-params":352,"./rules/prefer-spread":353,"./rules/prefer-template":354,"./rules/quote-props":355,"./rules/quotes":356,"./rules/radix":357,"./rules/require-atomic-updates":358,"./rules/require-await":359,"./rules/require-jsdoc":360,"./rules/require-unicode-regexp":361,"./rules/require-yield":362,"./rules/rest-spread-spacing":363,"./rules/semi":366,"./rules/semi-spacing":364,"./rules/semi-style":365,"./rules/sort-imports":367,"./rules/sort-keys":368,"./rules/sort-vars":369,"./rules/space-before-blocks":370,"./rules/space-before-function-paren":371,"./rules/space-in-parens":372,"./rules/space-infix-ops":373,"./rules/space-unary-ops":374,"./rules/spaced-comment":375,"./rules/strict":376,"./rules/switch-colon-spacing":377,"./rules/symbol-description":378,"./rules/template-curly-spacing":379,"./rules/template-tag-spacing":380,"./rules/unicode-bom":381,"./rules/use-isnan":382,"./rules/valid-jsdoc":383,"./rules/valid-typeof":384,"./rules/vars-on-top":385,"./rules/wrap-iife":386,"./rules/wrap-regex":387,"./rules/yield-star-spacing":388,"./rules/yoda":389}],124:[function(require,module,exports){
 /**
  * @fileoverview A helper that translates context.report() calls from the rule API into generic problem objects
  * @author Teddy Katz
@@ -64628,7 +63567,7 @@ module.exports = function createReportTranslator(metadata) {
     };
 };
 
-},{"./util/interpolate":403,"./util/rule-fixer":407,"assert":46}],126:[function(require,module,exports){
+},{"./util/interpolate":407,"./util/rule-fixer":411,"assert":46}],125:[function(require,module,exports){
 /**
  * @fileoverview Defines a storage for rules.
  * @author Nicholas C. Zakas
@@ -64800,7 +63739,7 @@ var Rules = function () {
 
 module.exports = Rules;
 
-},{"../conf/replacements":3,"./load-rules":124,"lodash":92}],127:[function(require,module,exports){
+},{"../conf/replacements":3,"./load-rules":123,"lodash":92}],126:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag wrapping non-iife in parens
  * @author Gyandeep Singh
@@ -64952,7 +63891,7 @@ module.exports = {
     }
 };
 
-},{}],128:[function(require,module,exports){
+},{}],127:[function(require,module,exports){
 /**
  * @fileoverview Rule to enforce linebreaks after open and before close array brackets
  * @author Jan Peer Stöcklmair <https://github.com/JPeer264>
@@ -64960,7 +63899,7 @@ module.exports = {
 
 "use strict";
 
-var astUtils = require("../ast-utils");
+var astUtils = require("../util/ast-utils");
 
 //------------------------------------------------------------------------------
 // Rule Definition
@@ -65187,14 +64126,14 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":112}],129:[function(require,module,exports){
+},{"../util/ast-utils":405}],128:[function(require,module,exports){
 /**
  * @fileoverview Disallows or enforces spaces inside of array brackets.
  * @author Jamund Ferguson
  */
 "use strict";
 
-var astUtils = require("../ast-utils");
+var astUtils = require("../util/ast-utils");
 
 //------------------------------------------------------------------------------
 // Rule Definition
@@ -65412,7 +64351,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":112}],130:[function(require,module,exports){
+},{"../util/ast-utils":405}],129:[function(require,module,exports){
 /**
  * @fileoverview Rule to enforce return statements in callbacks of array's methods
  * @author Toru Nagashima
@@ -65426,7 +64365,7 @@ module.exports = {
 
 var lodash = require("lodash");
 
-var astUtils = require("../ast-utils");
+var astUtils = require("../util/ast-utils");
 
 //------------------------------------------------------------------------------
 // Helpers
@@ -65653,7 +64592,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":112,"lodash":92}],131:[function(require,module,exports){
+},{"../util/ast-utils":405,"lodash":92}],130:[function(require,module,exports){
 /**
  * @fileoverview Rule to enforce line breaks after each array element
  * @author Jan Peer Stöcklmair <https://github.com/JPeer264>
@@ -65661,7 +64600,7 @@ module.exports = {
 
 "use strict";
 
-var astUtils = require("../ast-utils");
+var astUtils = require("../util/ast-utils");
 
 //------------------------------------------------------------------------------
 // Rule Definition
@@ -65901,7 +64840,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":112}],132:[function(require,module,exports){
+},{"../util/ast-utils":405}],131:[function(require,module,exports){
 /**
  * @fileoverview Rule to require braces in arrow function body.
  * @author Alberto Rodríguez
@@ -65912,7 +64851,7 @@ module.exports = {
 // Requirements
 //------------------------------------------------------------------------------
 
-var astUtils = require("../ast-utils");
+var astUtils = require("../util/ast-utils");
 
 //------------------------------------------------------------------------------
 // Rule Definition
@@ -66109,7 +65048,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":112}],133:[function(require,module,exports){
+},{"../util/ast-utils":405}],132:[function(require,module,exports){
 /**
  * @fileoverview Rule to require parens in arrow function arguments.
  * @author Jxck
@@ -66120,7 +65059,7 @@ module.exports = {
 // Requirements
 //------------------------------------------------------------------------------
 
-var astUtils = require("../ast-utils");
+var astUtils = require("../util/ast-utils");
 
 //------------------------------------------------------------------------------
 // Rule Definition
@@ -66251,7 +65190,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":112}],134:[function(require,module,exports){
+},{"../util/ast-utils":405}],133:[function(require,module,exports){
 /**
  * @fileoverview Rule to define spacing before/after arrow function's arrow.
  * @author Jxck
@@ -66262,7 +65201,7 @@ module.exports = {
 // Requirements
 //------------------------------------------------------------------------------
 
-var astUtils = require("../ast-utils");
+var astUtils = require("../util/ast-utils");
 
 //------------------------------------------------------------------------------
 // Rule Definition
@@ -66409,7 +65348,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":112}],135:[function(require,module,exports){
+},{"../util/ast-utils":405}],134:[function(require,module,exports){
 /**
  * @fileoverview Rule to check for "block scoped" variables by binding context
  * @author Matt DuVall <http://www.mattduvall.com>
@@ -66528,7 +65467,7 @@ module.exports = {
     }
 };
 
-},{}],136:[function(require,module,exports){
+},{}],135:[function(require,module,exports){
 /**
  * @fileoverview A rule to disallow or enforce spaces inside of single line blocks.
  * @author Toru Nagashima
@@ -66536,7 +65475,7 @@ module.exports = {
 
 "use strict";
 
-var util = require("../ast-utils");
+var util = require("../util/ast-utils");
 
 //------------------------------------------------------------------------------
 // Rule Definition
@@ -66665,7 +65604,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":112}],137:[function(require,module,exports){
+},{"../util/ast-utils":405}],136:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag block statements that do not use the one true brace style
  * @author Ian Christian Myers
@@ -66673,7 +65612,7 @@ module.exports = {
 
 "use strict";
 
-var astUtils = require("../ast-utils");
+var astUtils = require("../util/ast-utils");
 
 //------------------------------------------------------------------------------
 // Rule Definition
@@ -66859,7 +65798,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":112}],138:[function(require,module,exports){
+},{"../util/ast-utils":405}],137:[function(require,module,exports){
 /**
  * @fileoverview Enforce return after a callback.
  * @author Jamund Ferguson
@@ -67034,7 +65973,7 @@ module.exports = {
     }
 };
 
-},{}],139:[function(require,module,exports){
+},{}],138:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag non-camelcased identifiers
  * @author Nicholas C. Zakas
@@ -67219,7 +66158,7 @@ module.exports = {
     }
 };
 
-},{}],140:[function(require,module,exports){
+},{}],139:[function(require,module,exports){
 /**
  * @fileoverview enforce or disallow capitalization of the first letter of a comment
  * @author Kevin Partington
@@ -67231,7 +66170,7 @@ module.exports = {
 //------------------------------------------------------------------------------
 
 var LETTER_PATTERN = require("../util/patterns/letters");
-var astUtils = require("../ast-utils");
+var astUtils = require("../util/ast-utils");
 
 //------------------------------------------------------------------------------
 // Helpers
@@ -67511,7 +66450,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":112,"../util/patterns/letters":406}],141:[function(require,module,exports){
+},{"../util/ast-utils":405,"../util/patterns/letters":410}],140:[function(require,module,exports){
 /**
  * @fileoverview Rule to enforce that all class methods use 'this'.
  * @author Patrick Williams
@@ -67628,7 +66567,7 @@ module.exports = {
     }
 };
 
-},{}],142:[function(require,module,exports){
+},{}],141:[function(require,module,exports){
 /**
  * @fileoverview Rule to forbid or enforce dangling commas.
  * @author Ian Christian Myers
@@ -67643,7 +66582,7 @@ module.exports = {
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 var lodash = require("lodash");
-var astUtils = require("../ast-utils");
+var astUtils = require("../util/ast-utils");
 
 //------------------------------------------------------------------------------
 // Helpers
@@ -67954,14 +66893,14 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":112,"lodash":92}],143:[function(require,module,exports){
+},{"../util/ast-utils":405,"lodash":92}],142:[function(require,module,exports){
 /**
  * @fileoverview Comma spacing - validates spacing before and after comma
  * @author Vignesh Anand aka vegetableman.
  */
 "use strict";
 
-var astUtils = require("../ast-utils");
+var astUtils = require("../util/ast-utils");
 
 //------------------------------------------------------------------------------
 // Rule Definition
@@ -68137,7 +67076,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":112}],144:[function(require,module,exports){
+},{"../util/ast-utils":405}],143:[function(require,module,exports){
 /**
  * @fileoverview Comma style - enforces comma styles of two types: last and first
  * @author Vignesh Anand aka vegetableman
@@ -68145,7 +67084,7 @@ module.exports = {
 
 "use strict";
 
-var astUtils = require("../ast-utils");
+var astUtils = require("../util/ast-utils");
 
 //------------------------------------------------------------------------------
 // Rule Definition
@@ -68427,7 +67366,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":112}],145:[function(require,module,exports){
+},{"../util/ast-utils":405}],144:[function(require,module,exports){
 /**
  * @fileoverview Counts the cyclomatic complexity of each function of the script. See http://en.wikipedia.org/wiki/Cyclomatic_complexity.
  * Counts the number of if, conditional, for, whilte, try, switch/case,
@@ -68444,7 +67383,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
 var lodash = require("lodash");
 
-var astUtils = require("../ast-utils");
+var astUtils = require("../util/ast-utils");
 
 //------------------------------------------------------------------------------
 // Rule Definition
@@ -68584,14 +67523,14 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":112,"lodash":92}],146:[function(require,module,exports){
+},{"../util/ast-utils":405,"lodash":92}],145:[function(require,module,exports){
 /**
  * @fileoverview Disallows or enforces spaces inside computed properties.
  * @author Jamund Ferguson
  */
 "use strict";
 
-var astUtils = require("../ast-utils");
+var astUtils = require("../util/ast-utils");
 
 //------------------------------------------------------------------------------
 // Rule Definition
@@ -68767,7 +67706,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":112}],147:[function(require,module,exports){
+},{"../util/ast-utils":405}],146:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag consistent return values
  * @author Nicholas C. Zakas
@@ -68780,7 +67719,7 @@ module.exports = {
 
 var lodash = require("lodash");
 
-var astUtils = require("../ast-utils");
+var astUtils = require("../util/ast-utils");
 
 //------------------------------------------------------------------------------
 // Helpers
@@ -68954,7 +67893,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":112,"lodash":92}],148:[function(require,module,exports){
+},{"../util/ast-utils":405,"lodash":92}],147:[function(require,module,exports){
 /**
  * @fileoverview Rule to enforce consistent naming of "this" context variables
  * @author Raphael Pigulla
@@ -69101,7 +68040,7 @@ module.exports = {
     }
 };
 
-},{}],149:[function(require,module,exports){
+},{}],148:[function(require,module,exports){
 /**
  * @fileoverview A rule to verify `super()` callings in constructor.
  * @author Toru Nagashima
@@ -69489,7 +68428,7 @@ module.exports = {
     }
 };
 
-},{}],150:[function(require,module,exports){
+},{}],149:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag statements without curly braces
  * @author Nicholas C. Zakas
@@ -69500,7 +68439,7 @@ module.exports = {
 // Requirements
 //------------------------------------------------------------------------------
 
-var astUtils = require("../ast-utils");
+var astUtils = require("../util/ast-utils");
 
 //------------------------------------------------------------------------------
 // Rule Definition
@@ -69852,7 +68791,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":112}],151:[function(require,module,exports){
+},{"../util/ast-utils":405}],150:[function(require,module,exports){
 /**
  * @fileoverview require default case in switch statements
  * @author Aliaksei Shytkin
@@ -69948,7 +68887,7 @@ module.exports = {
     }
 };
 
-},{}],152:[function(require,module,exports){
+},{}],151:[function(require,module,exports){
 /**
  * @fileoverview Validates newlines before and after dots
  * @author Greg Cochard
@@ -69956,7 +68895,7 @@ module.exports = {
 
 "use strict";
 
-var astUtils = require("../ast-utils");
+var astUtils = require("../util/ast-utils");
 
 //------------------------------------------------------------------------------
 // Rule Definition
@@ -70046,7 +68985,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":112}],153:[function(require,module,exports){
+},{"../util/ast-utils":405}],152:[function(require,module,exports){
 /**
  * @fileoverview Rule to warn about using dot notation instead of square bracket notation when possible.
  * @author Josh Perez
@@ -70057,7 +68996,7 @@ module.exports = {
 // Requirements
 //------------------------------------------------------------------------------
 
-var astUtils = require("../ast-utils");
+var astUtils = require("../util/ast-utils");
 
 //------------------------------------------------------------------------------
 // Rule Definition
@@ -70188,7 +69127,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":112,"../util/keywords":404}],154:[function(require,module,exports){
+},{"../util/ast-utils":405,"../util/keywords":408}],153:[function(require,module,exports){
 /**
  * @fileoverview Require or disallow newline at the end of files
  * @author Nodeca Team <https://github.com/nodeca>
@@ -70295,7 +69234,7 @@ module.exports = {
     }
 };
 
-},{"lodash":92}],155:[function(require,module,exports){
+},{"lodash":92}],154:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag statements that use != and == instead of !== and ===
  * @author Nicholas C. Zakas
@@ -70309,7 +69248,7 @@ module.exports = {
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
-var astUtils = require("../ast-utils");
+var astUtils = require("../util/ast-utils");
 
 //------------------------------------------------------------------------------
 // Rule Definition
@@ -70469,7 +69408,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":112}],156:[function(require,module,exports){
+},{"../util/ast-utils":405}],155:[function(require,module,exports){
 /**
  * @fileoverview enforce "for" loop update clause moving the counter in the right direction.(for-direction)
  * @author Aladdin-ADD<hh_2013@foxmail.com>
@@ -70577,7 +69516,7 @@ module.exports = {
     }
 };
 
-},{}],157:[function(require,module,exports){
+},{}],156:[function(require,module,exports){
 /**
  * @fileoverview Rule to control spacing within function calls
  * @author Matt DuVall <http://www.mattduvall.com>
@@ -70589,7 +69528,7 @@ module.exports = {
 // Requirements
 //------------------------------------------------------------------------------
 
-var astUtils = require("../ast-utils");
+var astUtils = require("../util/ast-utils");
 
 //------------------------------------------------------------------------------
 // Rule Definition
@@ -70730,7 +69669,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":112}],158:[function(require,module,exports){
+},{"../util/ast-utils":405}],157:[function(require,module,exports){
 /**
  * @fileoverview Rule to require function names to match the name of the variable or property to which they are assigned.
  * @author Annie Zhang, Pavel Strashkin
@@ -70744,7 +69683,7 @@ module.exports = {
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
-var astUtils = require("../ast-utils");
+var astUtils = require("../util/ast-utils");
 var esutils = require("esutils");
 
 //--------------------------------------------------------------------------
@@ -70963,7 +69902,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":112,"esutils":80}],159:[function(require,module,exports){
+},{"../util/ast-utils":405,"esutils":80}],158:[function(require,module,exports){
 /**
  * @fileoverview Rule to warn when a function expression does not have a name.
  * @author Kyle T. Nunery
@@ -70975,7 +69914,7 @@ module.exports = {
 // Requirements
 //------------------------------------------------------------------------------
 
-var astUtils = require("../ast-utils");
+var astUtils = require("../util/ast-utils");
 
 /**
  * Checks whether or not a given variable is a function name.
@@ -71067,7 +70006,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":112}],160:[function(require,module,exports){
+},{"../util/ast-utils":405}],159:[function(require,module,exports){
 /**
  * @fileoverview Rule to enforce a particular function style
  * @author Nicholas C. Zakas
@@ -71153,7 +70092,7 @@ module.exports = {
     }
 };
 
-},{}],161:[function(require,module,exports){
+},{}],160:[function(require,module,exports){
 /**
  * @fileoverview enforce consistent line breaks inside function parentheses
  * @author Teddy Katz
@@ -71166,7 +70105,7 @@ module.exports = {
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
-var astUtils = require("../ast-utils");
+var astUtils = require("../util/ast-utils");
 
 //------------------------------------------------------------------------------
 // Rule Definition
@@ -71375,7 +70314,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":112}],162:[function(require,module,exports){
+},{"../util/ast-utils":405}],161:[function(require,module,exports){
 /**
  * @fileoverview Rule to check the spacing around the * in generator functions.
  * @author Jamund Ferguson
@@ -71562,7 +70501,7 @@ module.exports = {
     }
 };
 
-},{}],163:[function(require,module,exports){
+},{}],162:[function(require,module,exports){
 /**
  * @fileoverview Enforces that a return statement is present in property getters.
  * @author Aladdin-ADD(hh_2013@foxmail.com)
@@ -71574,7 +70513,7 @@ module.exports = {
 // Requirements
 //------------------------------------------------------------------------------
 
-var astUtils = require("../ast-utils");
+var astUtils = require("../util/ast-utils");
 
 //------------------------------------------------------------------------------
 // Helpers
@@ -71735,7 +70674,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":112}],164:[function(require,module,exports){
+},{"../util/ast-utils":405}],163:[function(require,module,exports){
 /**
  * @fileoverview Rule for disallowing require() outside of the top-level module context
  * @author Jamund Ferguson
@@ -71806,7 +70745,7 @@ module.exports = {
     }
 };
 
-},{}],165:[function(require,module,exports){
+},{}],164:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag for-in loops without if statements inside
  * @author Nicholas C. Zakas
@@ -71877,7 +70816,7 @@ module.exports = {
     }
 };
 
-},{}],166:[function(require,module,exports){
+},{}],165:[function(require,module,exports){
 /**
  * @fileoverview Ensure handling of errors when we know they exist.
  * @author Jamund Ferguson
@@ -71968,7 +70907,7 @@ module.exports = {
     }
 };
 
-},{}],167:[function(require,module,exports){
+},{}],166:[function(require,module,exports){
 /**
  * @fileoverview Rule that warns when identifier names that are
  * blacklisted in the configuration are used.
@@ -72081,7 +71020,7 @@ module.exports = {
     }
 };
 
-},{}],168:[function(require,module,exports){
+},{}],167:[function(require,module,exports){
 /**
  * @fileoverview Rule that warns when identifier names are shorter or longer
  * than the values provided in configuration.
@@ -72194,7 +71133,7 @@ module.exports = {
     }
 };
 
-},{}],169:[function(require,module,exports){
+},{}],168:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag non-matching identifiers
  * @author Matthieu Larcher
@@ -72327,7 +71266,7 @@ module.exports = {
     }
 };
 
-},{}],170:[function(require,module,exports){
+},{}],169:[function(require,module,exports){
 /**
  * @fileoverview enforce the location of arrow function bodies
  * @author Sharmila Jesupaul
@@ -72423,7 +71362,7 @@ module.exports = {
     }
 };
 
-},{}],171:[function(require,module,exports){
+},{}],170:[function(require,module,exports){
 /**
  * @fileoverview This option sets a specific tab width for your code
  *
@@ -72440,7 +71379,7 @@ module.exports = {
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
-var astUtils = require("../ast-utils");
+var astUtils = require("../util/ast-utils");
 
 //------------------------------------------------------------------------------
 // Rule Definition
@@ -73472,9 +72411,9 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":112}],172:[function(require,module,exports){
+},{"../util/ast-utils":405}],171:[function(require,module,exports){
 /**
- * @fileoverview This option sets a specific tab width for your code
+ * @fileoverview This rule sets a specific indentation style and width for your code
  *
  * @author Teddy Katz
  * @author Vitaly Puzrin
@@ -73494,7 +72433,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 var lodash = require("lodash");
-var astUtils = require("../ast-utils");
+var astUtils = require("../util/ast-utils");
 var createTree = require("functional-red-black-tree");
 
 //------------------------------------------------------------------------------
@@ -74278,7 +73217,7 @@ module.exports = {
                     var previousElementLastToken = previousElement && sourceCode.getLastToken(previousElement);
 
                     if (previousElement && previousElementLastToken.loc.end.line - countTrailingLinebreaks(previousElementLastToken.value) > startToken.loc.end.line) {
-                        offsets.setDesiredOffsets(element.range, firstTokenOfPreviousElement, 0);
+                        offsets.setDesiredOffsets([previousElement.range[1], element.range[1]], firstTokenOfPreviousElement, 0);
                     }
                 }
             });
@@ -74415,6 +73354,31 @@ module.exports = {
             node = node.parent;
 
             return !node || node.loc.start.line === token.loc.start.line;
+        }
+
+        /**
+         * Check whether there are any blank (whitespace-only) lines between
+         * two tokens on separate lines.
+         * @param {Token} firstToken The first token.
+         * @param {Token} secondToken The second token.
+         * @returns {boolean} `true` if the tokens are on separate lines and
+         *   there exists a blank line between them, `false` otherwise.
+         */
+        function hasBlankLinesBetween(firstToken, secondToken) {
+            var firstTokenLine = firstToken.loc.end.line;
+            var secondTokenLine = secondToken.loc.start.line;
+
+            if (firstTokenLine === secondTokenLine || firstTokenLine === secondTokenLine - 1) {
+                return false;
+            }
+
+            for (var line = firstTokenLine + 1; line < secondTokenLine; ++line) {
+                if (!tokenInfo.firstTokensByLineNumber.has(line)) {
+                    return true;
+                }
+            }
+
+            return false;
         }
 
         var ignoredNodeFirstTokens = new Set();
@@ -74932,8 +73896,11 @@ module.exports = {
                         var tokenBefore = precedingTokens.get(firstTokenOfLine);
                         var tokenAfter = tokenBefore ? sourceCode.getTokenAfter(tokenBefore) : sourceCode.ast.tokens[0];
 
+                        var mayAlignWithBefore = tokenBefore && !hasBlankLinesBetween(tokenBefore, firstTokenOfLine);
+                        var mayAlignWithAfter = tokenAfter && !hasBlankLinesBetween(firstTokenOfLine, tokenAfter);
+
                         // If a comment matches the expected indentation of the token immediately before or after, don't report it.
-                        if (tokenBefore && validateTokenIndent(firstTokenOfLine, offsets.getDesiredIndent(tokenBefore)) || tokenAfter && validateTokenIndent(firstTokenOfLine, offsets.getDesiredIndent(tokenAfter))) {
+                        if (mayAlignWithBefore && validateTokenIndent(firstTokenOfLine, offsets.getDesiredIndent(tokenBefore)) || mayAlignWithAfter && validateTokenIndent(firstTokenOfLine, offsets.getDesiredIndent(tokenAfter))) {
                             return;
                         }
                     }
@@ -74946,7 +73913,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":112,"functional-red-black-tree":83,"lodash":92}],173:[function(require,module,exports){
+},{"../util/ast-utils":405,"functional-red-black-tree":83,"lodash":92}],172:[function(require,module,exports){
 /**
  * @fileoverview A rule to control the style of variable initializations.
  * @author Colin Ihrig
@@ -75077,7 +74044,7 @@ module.exports = {
     }
 };
 
-},{}],174:[function(require,module,exports){
+},{}],173:[function(require,module,exports){
 /**
  * @fileoverview A rule to ensure consistent quotes used in jsx syntax.
  * @author Mathias Schreck <https://github.com/lo1tuma>
@@ -75089,7 +74056,7 @@ module.exports = {
 // Requirements
 //------------------------------------------------------------------------------
 
-var astUtils = require("../ast-utils");
+var astUtils = require("../util/ast-utils");
 
 //------------------------------------------------------------------------------
 // Constants
@@ -75167,7 +74134,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":112}],175:[function(require,module,exports){
+},{"../util/ast-utils":405}],174:[function(require,module,exports){
 /**
  * @fileoverview Rule to specify spacing of object literal keys and values
  * @author Brandon Mills
@@ -75180,7 +74147,9 @@ module.exports = {
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
-var astUtils = require("../ast-utils");
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
+var astUtils = require("../util/ast-utils");
 
 //------------------------------------------------------------------------------
 // Helpers
@@ -75687,7 +74656,7 @@ module.exports = {
                 widths = properties.map(getKeyWidth),
                 // Width of keys, including quotes
             align = alignmentOptions.on; // "value" or "colon"
-            var targetWidth = Math.max.apply(null, widths),
+            var targetWidth = Math.max.apply(Math, _toConsumableArray(widths)),
                 beforeColon = void 0,
                 afterColon = void 0,
                 mode = void 0;
@@ -75793,7 +74762,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":112}],176:[function(require,module,exports){
+},{"../util/ast-utils":405}],175:[function(require,module,exports){
 /**
  * @fileoverview Rule to enforce spacing before and after keywords.
  * @author Toru Nagashima
@@ -75805,7 +74774,7 @@ module.exports = {
 // Requirements
 //------------------------------------------------------------------------------
 
-var astUtils = require("../ast-utils"),
+var astUtils = require("../util/ast-utils"),
     keywords = require("../util/keywords");
 
 //------------------------------------------------------------------------------
@@ -76338,14 +75307,14 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":112,"../util/keywords":404}],177:[function(require,module,exports){
+},{"../util/ast-utils":405,"../util/keywords":408}],176:[function(require,module,exports){
 /**
  * @fileoverview Rule to enforce the position of line comments
  * @author Alberto Rodríguez
  */
 "use strict";
 
-var astUtils = require("../ast-utils");
+var astUtils = require("../util/ast-utils");
 
 //------------------------------------------------------------------------------
 // Rule Definition
@@ -76394,7 +75363,7 @@ module.exports = {
         if (!options || typeof options === "string") {
             above = !options || options === "above";
         } else {
-            above = options.position === "above";
+            above = !options.position || options.position === "above";
             ignorePattern = options.ignorePattern;
 
             if (options.hasOwnProperty("applyDefaultIgnorePatterns")) {
@@ -76452,7 +75421,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":112}],178:[function(require,module,exports){
+},{"../util/ast-utils":405}],177:[function(require,module,exports){
 /**
  * @fileoverview Rule to enforce a single linebreak style.
  * @author Erik Mueller
@@ -76464,7 +75433,7 @@ module.exports = {
 // Requirements
 //------------------------------------------------------------------------------
 
-var astUtils = require("../ast-utils");
+var astUtils = require("../util/ast-utils");
 
 //------------------------------------------------------------------------------
 // Rule Definition
@@ -76549,7 +75518,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":112}],179:[function(require,module,exports){
+},{"../util/ast-utils":405}],178:[function(require,module,exports){
 /**
  * @fileoverview Enforces empty lines around comments.
  * @author Jamund Ferguson
@@ -76561,7 +75530,7 @@ module.exports = {
 //------------------------------------------------------------------------------
 
 var lodash = require("lodash"),
-    astUtils = require("../ast-utils");
+    astUtils = require("../util/ast-utils");
 
 //------------------------------------------------------------------------------
 // Helpers
@@ -76942,7 +75911,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":112,"lodash":92}],180:[function(require,module,exports){
+},{"../util/ast-utils":405,"lodash":92}],179:[function(require,module,exports){
 /**
  * @fileoverview Require or disallow newlines around directives.
  * @author Kai Cataldo
@@ -76951,7 +75920,7 @@ module.exports = {
 
 "use strict";
 
-var astUtils = require("../ast-utils");
+var astUtils = require("../util/ast-utils");
 
 //------------------------------------------------------------------------------
 // Rule Definition
@@ -77128,14 +76097,14 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":112}],181:[function(require,module,exports){
+},{"../util/ast-utils":405}],180:[function(require,module,exports){
 /**
  * @fileoverview Rule to check empty newline between class members
  * @author 薛定谔的猫<hh_2013@foxmail.com>
  */
 "use strict";
 
-var astUtils = require("../ast-utils");
+var astUtils = require("../util/ast-utils");
 
 //------------------------------------------------------------------------------
 // Rule Definition
@@ -77266,7 +76235,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":112}],182:[function(require,module,exports){
+},{"../util/ast-utils":405}],181:[function(require,module,exports){
 /**
  * @fileoverview Enforce a maximum number of classes per file
  * @author James Garbutt <https://github.com/43081j>
@@ -77326,7 +76295,7 @@ module.exports = {
     }
 };
 
-},{}],183:[function(require,module,exports){
+},{}],182:[function(require,module,exports){
 /**
  * @fileoverview A rule to set the maximum depth block can be nested in a function.
  * @author Ian Christian Myers
@@ -77474,7 +76443,7 @@ module.exports = {
     }
 };
 
-},{}],184:[function(require,module,exports){
+},{}],183:[function(require,module,exports){
 /**
  * @fileoverview Rule to check for max length on a line.
  * @author Matt DuVall <http://www.mattduvall.com>
@@ -77837,7 +76806,7 @@ module.exports = {
     }
 };
 
-},{}],185:[function(require,module,exports){
+},{}],184:[function(require,module,exports){
 /**
  * @fileoverview A rule to set the maximum number of line of code in a function.
  * @author Pete Ward <peteward44@gmail.com>
@@ -77850,7 +76819,7 @@ module.exports = {
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
-var astUtils = require("../ast-utils");
+var astUtils = require("../util/ast-utils");
 
 //------------------------------------------------------------------------------
 // Constants
@@ -78052,7 +77021,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":112}],186:[function(require,module,exports){
+},{"../util/ast-utils":405}],185:[function(require,module,exports){
 /**
  * @fileoverview enforce a maximum file length
  * @author Alberto Rodríguez
@@ -78066,7 +77035,7 @@ module.exports = {
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 var lodash = require("lodash");
-var astUtils = require("../ast-utils");
+var astUtils = require("../util/ast-utils");
 
 //------------------------------------------------------------------------------
 // Rule Definition
@@ -78204,7 +77173,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":112,"lodash":92}],187:[function(require,module,exports){
+},{"../util/ast-utils":405,"lodash":92}],186:[function(require,module,exports){
 /**
  * @fileoverview Rule to enforce a maximum number of nested callbacks.
  * @author Ian Christian Myers
@@ -78315,7 +77284,7 @@ module.exports = {
     }
 };
 
-},{}],188:[function(require,module,exports){
+},{}],187:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag when a function has too many parameters
  * @author Ilya Volodin
@@ -78331,7 +77300,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
 var lodash = require("lodash");
 
-var astUtils = require("../ast-utils");
+var astUtils = require("../util/ast-utils");
 
 //------------------------------------------------------------------------------
 // Rule Definition
@@ -78410,7 +77379,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":112,"lodash":92}],189:[function(require,module,exports){
+},{"../util/ast-utils":405,"lodash":92}],188:[function(require,module,exports){
 /**
  * @fileoverview Specify the maximum number of statements allowed per line.
  * @author Kenneth Williams
@@ -78421,7 +77390,7 @@ module.exports = {
 // Requirements
 //------------------------------------------------------------------------------
 
-var astUtils = require("../ast-utils");
+var astUtils = require("../util/ast-utils");
 
 //------------------------------------------------------------------------------
 // Rule Definition
@@ -78603,7 +77572,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":112}],190:[function(require,module,exports){
+},{"../util/ast-utils":405}],189:[function(require,module,exports){
 /**
  * @fileoverview A rule to set the maximum number of statements in a function.
  * @author Ian Christian Myers
@@ -78619,7 +77588,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
 var lodash = require("lodash");
 
-var astUtils = require("../ast-utils");
+var astUtils = require("../util/ast-utils");
 
 //------------------------------------------------------------------------------
 // Rule Definition
@@ -78771,14 +77740,14 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":112,"lodash":92}],191:[function(require,module,exports){
+},{"../util/ast-utils":405,"lodash":92}],190:[function(require,module,exports){
 /**
  * @fileoverview enforce a particular style for multiline comments
  * @author Teddy Katz
  */
 "use strict";
 
-var astUtils = require("../ast-utils");
+var astUtils = require("../util/ast-utils");
 
 //------------------------------------------------------------------------------
 // Rule Definition
@@ -79091,7 +78060,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":112}],192:[function(require,module,exports){
+},{"../util/ast-utils":405}],191:[function(require,module,exports){
 /**
  * @fileoverview Enforce newlines between operands of ternary expressions
  * @author Kai Cataldo
@@ -79099,7 +78068,7 @@ module.exports = {
 
 "use strict";
 
-var astUtils = require("../ast-utils");
+var astUtils = require("../util/ast-utils");
 
 //------------------------------------------------------------------------------
 // Rule Definition
@@ -79181,7 +78150,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":112}],193:[function(require,module,exports){
+},{"../util/ast-utils":405}],192:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag use of constructors without capital letters
  * @author Nicholas C. Zakas
@@ -79441,7 +78410,7 @@ module.exports = {
     }
 };
 
-},{}],194:[function(require,module,exports){
+},{}],193:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag when using constructor without parentheses
  * @author Ilya Volodin
@@ -79453,7 +78422,7 @@ module.exports = {
 // Requirements
 //------------------------------------------------------------------------------
 
-var astUtils = require("../ast-utils");
+var astUtils = require("../util/ast-utils");
 
 //------------------------------------------------------------------------------
 // Helpers
@@ -79504,7 +78473,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":112}],195:[function(require,module,exports){
+},{"../util/ast-utils":405}],194:[function(require,module,exports){
 /**
  * @fileoverview Rule to check empty newline after "var" statement
  * @author Gopal Venkatesan
@@ -79517,7 +78486,7 @@ module.exports = {
 // Requirements
 //------------------------------------------------------------------------------
 
-var astUtils = require("../ast-utils");
+var astUtils = require("../util/ast-utils");
 
 //------------------------------------------------------------------------------
 // Rule Definition
@@ -79752,7 +78721,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":112}],196:[function(require,module,exports){
+},{"../util/ast-utils":405}],195:[function(require,module,exports){
 /**
  * @fileoverview Rule to require newlines before `return` statement
  * @author Kai Cataldo
@@ -79963,7 +78932,7 @@ module.exports = {
     }
 };
 
-},{}],197:[function(require,module,exports){
+},{}],196:[function(require,module,exports){
 /**
  * @fileoverview Rule to ensure newline per method call when chaining calls
  * @author Rajendra Patil
@@ -79972,7 +78941,7 @@ module.exports = {
 
 "use strict";
 
-var astUtils = require("../ast-utils");
+var astUtils = require("../util/ast-utils");
 
 //------------------------------------------------------------------------------
 // Rule Definition
@@ -80069,7 +79038,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":112}],198:[function(require,module,exports){
+},{"../util/ast-utils":405}],197:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag use of alert, confirm, prompt
  * @author Nicholas C. Zakas
@@ -80080,7 +79049,7 @@ module.exports = {
 // Requirements
 //------------------------------------------------------------------------------
 
-var getPropertyName = require("../ast-utils").getStaticPropertyName;
+var getPropertyName = require("../util/ast-utils").getStaticPropertyName;
 
 //------------------------------------------------------------------------------
 // Helpers
@@ -80195,7 +79164,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":112}],199:[function(require,module,exports){
+},{"../util/ast-utils":405}],198:[function(require,module,exports){
 /**
  * @fileoverview Disallow construction of dense arrays using the Array constructor
  * @author Matt DuVall <http://www.mattduvall.com/>
@@ -80240,6 +79209,43 @@ module.exports = {
         return {
             CallExpression: check,
             NewExpression: check
+        };
+    }
+};
+
+},{}],199:[function(require,module,exports){
+/**
+ * @fileoverview disallow using an async function as a Promise executor
+ * @author Teddy Katz
+ */
+"use strict";
+
+//------------------------------------------------------------------------------
+// Rule Definition
+//------------------------------------------------------------------------------
+
+module.exports = {
+    meta: {
+        docs: {
+            description: "disallow using an async function as a Promise executor",
+            category: "Possible Errors",
+            recommended: false,
+            url: "https://eslint.org/docs/rules/no-async-promise-executor"
+        },
+        fixable: null,
+        schema: []
+    },
+
+    create: function create(context) {
+        return {
+            "NewExpression[callee.name='Promise'][arguments.0.async=true]": function NewExpressionCalleeNamePromiseArguments0AsyncTrue(node) {
+                context.report({
+                    node: context.getSourceCode().getFirstToken(node.arguments[0], function (token) {
+                        return token.value === "async";
+                    }),
+                    message: "Promise executor functions should not be async."
+                });
+            }
         };
     }
 };
@@ -80614,7 +79620,7 @@ module.exports = {
 // Requirements
 //------------------------------------------------------------------------------
 
-var astUtils = require("../ast-utils");
+var astUtils = require("../util/ast-utils");
 
 //------------------------------------------------------------------------------
 // Rule Definition
@@ -80678,7 +79684,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":112}],206:[function(require,module,exports){
+},{"../util/ast-utils":405}],206:[function(require,module,exports){
 /**
  * @fileoverview A rule to disallow modifying variables of class declarations
  * @author Toru Nagashima
@@ -80686,7 +79692,7 @@ module.exports = {
 
 "use strict";
 
-var astUtils = require("../ast-utils");
+var astUtils = require("../util/ast-utils");
 
 //------------------------------------------------------------------------------
 // Rule Definition
@@ -80737,7 +79743,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":112}],207:[function(require,module,exports){
+},{"../util/ast-utils":405}],207:[function(require,module,exports){
 /**
  * @fileoverview The rule should warn against code that tries to compare against -0.
  * @author Aladdin-ADD <hh_2013@foxmail.com>
@@ -80803,7 +79809,7 @@ module.exports = {
  */
 "use strict";
 
-var astUtils = require("../ast-utils");
+var astUtils = require("../util/ast-utils");
 
 var NODE_DESCRIPTIONS = {
     DoWhileStatement: "a 'do...while' statement",
@@ -80932,7 +79938,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":112}],209:[function(require,module,exports){
+},{"../util/ast-utils":405}],209:[function(require,module,exports){
 /**
  * @fileoverview A rule to warn against using arrow functions when they could be
  * confused with comparisions
@@ -80941,7 +79947,7 @@ module.exports = {
 
 "use strict";
 
-var astUtils = require("../ast-utils.js");
+var astUtils = require("../util/ast-utils.js");
 
 //------------------------------------------------------------------------------
 // Helpers
@@ -81015,7 +80021,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils.js":112}],210:[function(require,module,exports){
+},{"../util/ast-utils.js":405}],210:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag use of console object
  * @author Nicholas C. Zakas
@@ -81027,7 +80033,7 @@ module.exports = {
 // Requirements
 //------------------------------------------------------------------------------
 
-var astUtils = require("../ast-utils");
+var astUtils = require("../util/ast-utils");
 
 //------------------------------------------------------------------------------
 // Rule Definition
@@ -81143,7 +80149,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":112}],211:[function(require,module,exports){
+},{"../util/ast-utils":405}],211:[function(require,module,exports){
 /**
  * @fileoverview A rule to disallow modifying variables that are declared using `const`
  * @author Toru Nagashima
@@ -81151,7 +80157,7 @@ module.exports = {
 
 "use strict";
 
-var astUtils = require("../ast-utils");
+var astUtils = require("../util/ast-utils");
 
 //------------------------------------------------------------------------------
 // Rule Definition
@@ -81196,7 +80202,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":112}],212:[function(require,module,exports){
+},{"../util/ast-utils":405}],212:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag use constant conditions
  * @author Christian Schulz <http://rndm.de>
@@ -81900,7 +80906,7 @@ var _createClass = function () { function defineProperties(target, props) { for 
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-var astUtils = require("../ast-utils");
+var astUtils = require("../util/ast-utils");
 
 //------------------------------------------------------------------------------
 // Helpers
@@ -82042,7 +81048,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":112}],221:[function(require,module,exports){
+},{"../util/ast-utils":405}],221:[function(require,module,exports){
 /**
  * @fileoverview Rule to disallow a duplicate case label.
  * @author Dieter Oberkofler
@@ -82245,7 +81251,7 @@ module.exports = {
 // Requirements
 //------------------------------------------------------------------------------
 
-var astUtils = require("../ast-utils");
+var astUtils = require("../util/ast-utils");
 var FixTracker = require("../util/fix-tracker");
 
 //------------------------------------------------------------------------------
@@ -82512,7 +81518,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":112,"../util/fix-tracker":402}],224:[function(require,module,exports){
+},{"../util/ast-utils":405,"../util/fix-tracker":406}],224:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag the use of empty character classes in regular expressions
  * @author Ian Christian Myers
@@ -82586,7 +81592,7 @@ module.exports = {
 // Requirements
 //------------------------------------------------------------------------------
 
-var astUtils = require("../ast-utils");
+var astUtils = require("../util/ast-utils");
 
 //------------------------------------------------------------------------------
 // Helpers
@@ -82724,7 +81730,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":112}],226:[function(require,module,exports){
+},{"../util/ast-utils":405}],226:[function(require,module,exports){
 /**
  * @fileoverview Rule to disallow an empty pattern
  * @author Alberto Rodríguez
@@ -82778,7 +81784,7 @@ module.exports = {
 // Requirements
 //------------------------------------------------------------------------------
 
-var astUtils = require("../ast-utils");
+var astUtils = require("../util/ast-utils");
 
 //------------------------------------------------------------------------------
 // Rule Definition
@@ -82848,7 +81854,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":112}],228:[function(require,module,exports){
+},{"../util/ast-utils":405}],228:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag comparisons to null without a type-checking
  * operator.
@@ -82903,7 +81909,7 @@ module.exports = {
 // Requirements
 //------------------------------------------------------------------------------
 
-var astUtils = require("../ast-utils");
+var astUtils = require("../util/ast-utils");
 
 //------------------------------------------------------------------------------
 // Helpers
@@ -83179,7 +82185,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":112}],230:[function(require,module,exports){
+},{"../util/ast-utils":405}],230:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag assignment of the exception parameter
  * @author Stephen Murray <spmurrayzzz>
@@ -83187,7 +82193,7 @@ module.exports = {
 
 "use strict";
 
-var astUtils = require("../ast-utils");
+var astUtils = require("../util/ast-utils");
 
 //------------------------------------------------------------------------------
 // Rule Definition
@@ -83230,7 +82236,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":112}],231:[function(require,module,exports){
+},{"../util/ast-utils":405}],231:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag adding properties to native object's prototypes.
  * @author David Nelson
@@ -83242,7 +82248,7 @@ module.exports = {
 // Requirements
 //------------------------------------------------------------------------------
 
-var astUtils = require("../ast-utils");
+var astUtils = require("../util/ast-utils");
 var globals = require("globals");
 
 //------------------------------------------------------------------------------
@@ -83387,7 +82393,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":112,"globals":85}],232:[function(require,module,exports){
+},{"../util/ast-utils":405,"globals":85}],232:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag unnecessary bind calls
  * @author Bence Dányi <bence@danyi.me>
@@ -83398,7 +82404,7 @@ module.exports = {
 // Requirements
 //------------------------------------------------------------------------------
 
-var astUtils = require("../ast-utils");
+var astUtils = require("../util/ast-utils");
 
 //------------------------------------------------------------------------------
 // Rule Definition
@@ -83530,7 +82536,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":112}],233:[function(require,module,exports){
+},{"../util/ast-utils":405}],233:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag unnecessary double negation in Boolean contexts
  * @author Brandon Mills
@@ -83542,7 +82548,7 @@ module.exports = {
 // Requirements
 //------------------------------------------------------------------------------
 
-var astUtils = require("../ast-utils");
+var astUtils = require("../util/ast-utils");
 
 //------------------------------------------------------------------------------
 // Rule Definition
@@ -83645,7 +82651,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":112}],234:[function(require,module,exports){
+},{"../util/ast-utils":405}],234:[function(require,module,exports){
 /**
  * @fileoverview Rule to disallow unnecessary labels
  * @author Toru Nagashima
@@ -83657,7 +82663,7 @@ module.exports = {
 // Requirements
 //------------------------------------------------------------------------------
 
-var astUtils = require("../ast-utils");
+var astUtils = require("../util/ast-utils");
 
 //------------------------------------------------------------------------------
 // Rule Definition
@@ -83794,7 +82800,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":112}],235:[function(require,module,exports){
+},{"../util/ast-utils":405}],235:[function(require,module,exports){
 /**
  * @fileoverview Disallow parenthesising higher precedence subexpressions.
  * @author Michael Ficarra
@@ -83805,7 +82811,7 @@ module.exports = {
 // Rule Definition
 //------------------------------------------------------------------------------
 
-var astUtils = require("../ast-utils.js");
+var astUtils = require("../util/ast-utils.js");
 
 module.exports = {
     meta: {
@@ -84475,7 +83481,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils.js":112}],236:[function(require,module,exports){
+},{"../util/ast-utils.js":405}],236:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag use of unnecessary semicolons
  * @author Nicholas C. Zakas
@@ -84488,7 +83494,7 @@ module.exports = {
 //------------------------------------------------------------------------------
 
 var FixTracker = require("../util/fix-tracker");
-var astUtils = require("../ast-utils");
+var astUtils = require("../util/ast-utils");
 
 //------------------------------------------------------------------------------
 // Rule Definition
@@ -84589,7 +83595,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":112,"../util/fix-tracker":402}],237:[function(require,module,exports){
+},{"../util/ast-utils":405,"../util/fix-tracker":406}],237:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag fall-through cases in switch statements.
  * @author Matt DuVall <http://mattduvall.com/>
@@ -84733,7 +83739,7 @@ module.exports = {
 // Requirements
 //------------------------------------------------------------------------------
 
-var astUtils = require("../ast-utils");
+var astUtils = require("../util/ast-utils");
 
 //------------------------------------------------------------------------------
 // Rule Definition
@@ -84787,7 +83793,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":112}],239:[function(require,module,exports){
+},{"../util/ast-utils":405}],239:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag use of function declaration identifiers as variables.
  * @author Ian Christian Myers
@@ -84795,7 +83801,7 @@ module.exports = {
 
 "use strict";
 
-var astUtils = require("../ast-utils");
+var astUtils = require("../util/ast-utils");
 
 //------------------------------------------------------------------------------
 // Rule Definition
@@ -84853,7 +83859,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":112}],240:[function(require,module,exports){
+},{"../util/ast-utils":405}],240:[function(require,module,exports){
 /**
  * @fileoverview Rule to disallow assignments to native objects or read-only global variables
  * @author Ilya Volodin
@@ -84945,7 +83951,7 @@ module.exports = {
 
 "use strict";
 
-var astUtils = require("../ast-utils");
+var astUtils = require("../util/ast-utils");
 
 //------------------------------------------------------------------------------
 // Helpers
@@ -85202,7 +84208,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":112}],242:[function(require,module,exports){
+},{"../util/ast-utils":405}],242:[function(require,module,exports){
 /**
  * @fileoverview Rule to check for implicit global variables and functions.
  * @author Joshua Peek
@@ -85422,7 +84428,7 @@ module.exports = {
  */
 "use strict";
 
-var astUtils = require("../ast-utils");
+var astUtils = require("../util/ast-utils");
 
 //------------------------------------------------------------------------------
 // Rule Definition
@@ -85485,7 +84491,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":112}],245:[function(require,module,exports){
+},{"../util/ast-utils":405}],245:[function(require,module,exports){
 /**
  * @fileoverview Rule to enforce declarations in program or function body root.
  * @author Brandon Mills
@@ -85704,7 +84710,7 @@ module.exports = {
 // Requirements
 //------------------------------------------------------------------------------
 
-var astUtils = require("../ast-utils");
+var astUtils = require("../util/ast-utils");
 
 //------------------------------------------------------------------------------
 // Rule Definition
@@ -85811,7 +84817,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":112}],248:[function(require,module,exports){
+},{"../util/ast-utils":405}],248:[function(require,module,exports){
 /**
  * @fileoverview Rule to disalow whitespace that is not a tab or space, whitespace inside strings and comments are allowed
  * @author Jonathan Kingston
@@ -85826,7 +84832,7 @@ module.exports = {
 
 function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 
-var astUtils = require("../ast-utils");
+var astUtils = require("../util/ast-utils");
 
 //------------------------------------------------------------------------------
 // Constants
@@ -86050,7 +85056,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":112}],249:[function(require,module,exports){
+},{"../util/ast-utils":405}],249:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag usage of __iterator__ property
  * @author Ian Christian Myers
@@ -86099,7 +85105,7 @@ module.exports = {
 // Requirements
 //------------------------------------------------------------------------------
 
-var astUtils = require("../ast-utils");
+var astUtils = require("../util/ast-utils");
 
 //------------------------------------------------------------------------------
 // Rule Definition
@@ -86156,7 +85162,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":112}],251:[function(require,module,exports){
+},{"../util/ast-utils":405}],251:[function(require,module,exports){
 /**
  * @fileoverview Disallow Labeled Statements
  * @author Nicholas C. Zakas
@@ -86167,7 +85173,7 @@ module.exports = {
 // Requirements
 //------------------------------------------------------------------------------
 
-var astUtils = require("../ast-utils");
+var astUtils = require("../util/ast-utils");
 
 //------------------------------------------------------------------------------
 // Rule Definition
@@ -86297,7 +85303,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":112}],252:[function(require,module,exports){
+},{"../util/ast-utils":405}],252:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag blocks with no reason to exist
  * @author Brandon Mills
@@ -86821,6 +85827,366 @@ module.exports = {
 
 },{}],256:[function(require,module,exports){
 /**
+ * @author Toru Nagashima <https://github.com/mysticatea>
+ */
+"use strict";
+
+var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+var _marked = /*#__PURE__*/regeneratorRuntime.mark(iterateCharacterSequence);
+
+var _require = require("eslint-utils"),
+    CALL = _require.CALL,
+    CONSTRUCT = _require.CONSTRUCT,
+    ReferenceTracker = _require.ReferenceTracker,
+    getStringIfConstant = _require.getStringIfConstant;
+
+var _require2 = require("regexpp"),
+    RegExpParser = _require2.RegExpParser,
+    visitRegExpAST = _require2.visitRegExpAST;
+
+var _require3 = require("../util/unicode"),
+    isCombiningCharacter = _require3.isCombiningCharacter,
+    isEmojiModifier = _require3.isEmojiModifier,
+    isRegionalIndicatorSymbol = _require3.isRegionalIndicatorSymbol,
+    isSurrogatePair = _require3.isSurrogatePair;
+
+//------------------------------------------------------------------------------
+// Helpers
+//------------------------------------------------------------------------------
+
+/**
+ * Iterate character sequences of a given nodes.
+ *
+ * CharacterClassRange syntax can steal a part of character sequence,
+ * so this function reverts CharacterClassRange syntax and restore the sequence.
+ *
+ * @param {regexpp.AST.CharacterClassElement[]} nodes The node list to iterate character sequences.
+ * @returns {IterableIterator<number[]>} The list of character sequences.
+ */
+
+
+function iterateCharacterSequence(nodes) {
+    var seq, _iteratorNormalCompletion, _didIteratorError, _iteratorError, _iterator, _step, node;
+
+    return regeneratorRuntime.wrap(function iterateCharacterSequence$(_context) {
+        while (1) {
+            switch (_context.prev = _context.next) {
+                case 0:
+                    seq = [];
+                    _iteratorNormalCompletion = true;
+                    _didIteratorError = false;
+                    _iteratorError = undefined;
+                    _context.prev = 4;
+                    _iterator = nodes[Symbol.iterator]();
+
+                case 6:
+                    if (_iteratorNormalCompletion = (_step = _iterator.next()).done) {
+                        _context.next = 26;
+                        break;
+                    }
+
+                    node = _step.value;
+                    _context.t0 = node.type;
+                    _context.next = _context.t0 === "Character" ? 11 : _context.t0 === "CharacterClassRange" ? 13 : _context.t0 === "CharacterSet" ? 18 : 23;
+                    break;
+
+                case 11:
+                    seq.push(node.value);
+                    return _context.abrupt("break", 23);
+
+                case 13:
+                    seq.push(node.min.value);
+                    _context.next = 16;
+                    return seq;
+
+                case 16:
+                    seq = [node.max.value];
+                    return _context.abrupt("break", 23);
+
+                case 18:
+                    if (!(seq.length > 0)) {
+                        _context.next = 22;
+                        break;
+                    }
+
+                    _context.next = 21;
+                    return seq;
+
+                case 21:
+                    seq = [];
+
+                case 22:
+                    return _context.abrupt("break", 23);
+
+                case 23:
+                    _iteratorNormalCompletion = true;
+                    _context.next = 6;
+                    break;
+
+                case 26:
+                    _context.next = 32;
+                    break;
+
+                case 28:
+                    _context.prev = 28;
+                    _context.t1 = _context["catch"](4);
+                    _didIteratorError = true;
+                    _iteratorError = _context.t1;
+
+                case 32:
+                    _context.prev = 32;
+                    _context.prev = 33;
+
+                    if (!_iteratorNormalCompletion && _iterator.return) {
+                        _iterator.return();
+                    }
+
+                case 35:
+                    _context.prev = 35;
+
+                    if (!_didIteratorError) {
+                        _context.next = 38;
+                        break;
+                    }
+
+                    throw _iteratorError;
+
+                case 38:
+                    return _context.finish(35);
+
+                case 39:
+                    return _context.finish(32);
+
+                case 40:
+                    if (!(seq.length > 0)) {
+                        _context.next = 43;
+                        break;
+                    }
+
+                    _context.next = 43;
+                    return seq;
+
+                case 43:
+                case "end":
+                    return _context.stop();
+            }
+        }
+    }, _marked, this, [[4, 28, 32, 40], [33,, 35, 39]]);
+}
+
+var hasCharacterSequence = {
+    surrogatePairWithoutUFlag: function surrogatePairWithoutUFlag(chars) {
+        return chars.some(function (c, i) {
+            return i !== 0 && isSurrogatePair(chars[i - 1], c);
+        });
+    },
+    combiningClass: function combiningClass(chars) {
+        return chars.some(function (c, i) {
+            return i !== 0 && isCombiningCharacter(c) && !isCombiningCharacter(chars[i - 1]);
+        });
+    },
+    emojiModifier: function emojiModifier(chars) {
+        return chars.some(function (c, i) {
+            return i !== 0 && isEmojiModifier(c) && !isEmojiModifier(chars[i - 1]);
+        });
+    },
+    regionalIndicatorSymbol: function regionalIndicatorSymbol(chars) {
+        return chars.some(function (c, i) {
+            return i !== 0 && isRegionalIndicatorSymbol(c) && isRegionalIndicatorSymbol(chars[i - 1]);
+        });
+    },
+    zwj: function zwj(chars) {
+        var lastIndex = chars.length - 1;
+
+        return chars.some(function (c, i) {
+            return i !== 0 && i !== lastIndex && c === 0x200d && chars[i - 1] !== 0x200d && chars[i + 1] !== 0x200d;
+        });
+    }
+};
+
+var kinds = Object.keys(hasCharacterSequence);
+
+//------------------------------------------------------------------------------
+// Rule Definition
+//------------------------------------------------------------------------------
+
+module.exports = {
+    meta: {
+        docs: {
+            description: "disallow characters which are made with multiple code points in character class syntax",
+            category: "Possible Errors",
+            recommended: false,
+            url: "https://eslint.org/docs/rules/no-misleading-character-class"
+        },
+        schema: [],
+        messages: {
+            surrogatePairWithoutUFlag: "Unexpected surrogate pair in character class. Use 'u' flag.",
+            combiningClass: "Unexpected combined character in character class.",
+            emojiModifier: "Unexpected modified Emoji in character class.",
+            regionalIndicatorSymbol: "Unexpected national flag in character class.",
+            zwj: "Unexpected joined character sequence in character class."
+        }
+    },
+    create: function create(context) {
+        var parser = new RegExpParser();
+
+        /**
+         * Verify a given regular expression.
+         * @param {Node} node The node to report.
+         * @param {string} pattern The regular expression pattern to verify.
+         * @param {string} flags The flags of the regular expression.
+         * @returns {void}
+         */
+        function verify(node, pattern, flags) {
+            var patternNode = parser.parsePattern(pattern, 0, pattern.length, flags.includes("u"));
+            var has = {
+                surrogatePairWithoutUFlag: false,
+                combiningClass: false,
+                variationSelector: false,
+                emojiModifier: false,
+                regionalIndicatorSymbol: false,
+                zwj: false
+            };
+
+            visitRegExpAST(patternNode, {
+                onCharacterClassEnter: function onCharacterClassEnter(ccNode) {
+                    var _iteratorNormalCompletion2 = true;
+                    var _didIteratorError2 = false;
+                    var _iteratorError2 = undefined;
+
+                    try {
+                        for (var _iterator2 = iterateCharacterSequence(ccNode.elements)[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
+                            var chars = _step2.value;
+                            var _iteratorNormalCompletion3 = true;
+                            var _didIteratorError3 = false;
+                            var _iteratorError3 = undefined;
+
+                            try {
+                                for (var _iterator3 = kinds[Symbol.iterator](), _step3; !(_iteratorNormalCompletion3 = (_step3 = _iterator3.next()).done); _iteratorNormalCompletion3 = true) {
+                                    var kind = _step3.value;
+
+                                    has[kind] = has[kind] || hasCharacterSequence[kind](chars);
+                                }
+                            } catch (err) {
+                                _didIteratorError3 = true;
+                                _iteratorError3 = err;
+                            } finally {
+                                try {
+                                    if (!_iteratorNormalCompletion3 && _iterator3.return) {
+                                        _iterator3.return();
+                                    }
+                                } finally {
+                                    if (_didIteratorError3) {
+                                        throw _iteratorError3;
+                                    }
+                                }
+                            }
+                        }
+                    } catch (err) {
+                        _didIteratorError2 = true;
+                        _iteratorError2 = err;
+                    } finally {
+                        try {
+                            if (!_iteratorNormalCompletion2 && _iterator2.return) {
+                                _iterator2.return();
+                            }
+                        } finally {
+                            if (_didIteratorError2) {
+                                throw _iteratorError2;
+                            }
+                        }
+                    }
+                }
+            });
+
+            var _iteratorNormalCompletion4 = true;
+            var _didIteratorError4 = false;
+            var _iteratorError4 = undefined;
+
+            try {
+                for (var _iterator4 = kinds[Symbol.iterator](), _step4; !(_iteratorNormalCompletion4 = (_step4 = _iterator4.next()).done); _iteratorNormalCompletion4 = true) {
+                    var kind = _step4.value;
+
+                    if (has[kind]) {
+                        context.report({ node: node, messageId: kind });
+                    }
+                }
+            } catch (err) {
+                _didIteratorError4 = true;
+                _iteratorError4 = err;
+            } finally {
+                try {
+                    if (!_iteratorNormalCompletion4 && _iterator4.return) {
+                        _iterator4.return();
+                    }
+                } finally {
+                    if (_didIteratorError4) {
+                        throw _iteratorError4;
+                    }
+                }
+            }
+        }
+
+        return {
+            "Literal[regex]": function LiteralRegex(node) {
+                verify(node, node.regex.pattern, node.regex.flags);
+            },
+            "Program": function Program() {
+                var scope = context.getScope();
+                var tracker = new ReferenceTracker(scope);
+
+                /*
+                 * Iterate calls of RegExp.
+                 * E.g., `new RegExp()`, `RegExp()`, `new window.RegExp()`,
+                 *       `const {RegExp: a} = window; new a()`, etc...
+                 */
+                var _iteratorNormalCompletion5 = true;
+                var _didIteratorError5 = false;
+                var _iteratorError5 = undefined;
+
+                try {
+                    for (var _iterator5 = tracker.iterateGlobalReferences({
+                        RegExp: (_RegExp = {}, _defineProperty(_RegExp, CALL, true), _defineProperty(_RegExp, CONSTRUCT, true), _RegExp)
+                    })[Symbol.iterator](), _step5; !(_iteratorNormalCompletion5 = (_step5 = _iterator5.next()).done); _iteratorNormalCompletion5 = true) {
+                        var _RegExp;
+
+                        var node = _step5.value.node;
+
+                        var _node$arguments = _slicedToArray(node.arguments, 2),
+                            patternNode = _node$arguments[0],
+                            flagsNode = _node$arguments[1];
+
+                        var pattern = getStringIfConstant(patternNode, scope);
+                        var flags = getStringIfConstant(flagsNode, scope);
+
+                        if (typeof pattern === "string") {
+                            verify(node, pattern, flags || "");
+                        }
+                    }
+                } catch (err) {
+                    _didIteratorError5 = true;
+                    _iteratorError5 = err;
+                } finally {
+                    try {
+                        if (!_iteratorNormalCompletion5 && _iterator5.return) {
+                            _iterator5.return();
+                        }
+                    } finally {
+                        if (_didIteratorError5) {
+                            throw _iteratorError5;
+                        }
+                    }
+                }
+            }
+        };
+    }
+};
+
+},{"../util/unicode":417,"eslint-utils":68,"regexpp":104}],257:[function(require,module,exports){
+/**
  * @fileoverview Rule to disallow mixed binary operators.
  * @author Toru Nagashima
  */
@@ -86831,7 +86197,7 @@ module.exports = {
 // Requirements
 //------------------------------------------------------------------------------
 
-var astUtils = require("../ast-utils.js");
+var astUtils = require("../util/ast-utils.js");
 
 //------------------------------------------------------------------------------
 // Helpers
@@ -87006,7 +86372,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils.js":112}],257:[function(require,module,exports){
+},{"../util/ast-utils.js":405}],258:[function(require,module,exports){
 /**
  * @fileoverview Rule to enforce grouped require statements for Node.JS
  * @author Raphael Pigulla
@@ -87207,7 +86573,7 @@ module.exports = {
     }
 };
 
-},{}],258:[function(require,module,exports){
+},{}],259:[function(require,module,exports){
 /**
  * @fileoverview Disallow mixed spaces and tabs for indentation
  * @author Jary Niebur
@@ -87347,7 +86713,7 @@ module.exports = {
     }
 };
 
-},{}],259:[function(require,module,exports){
+},{}],260:[function(require,module,exports){
 /**
  * @fileoverview Rule to check use of chained assignment expressions
  * @author Stewart Rand
@@ -87389,7 +86755,7 @@ module.exports = {
     }
 };
 
-},{}],260:[function(require,module,exports){
+},{}],261:[function(require,module,exports){
 /**
  * @fileoverview Disallow use of multiple spaces.
  * @author Nicholas C. Zakas
@@ -87397,7 +86763,7 @@ module.exports = {
 
 "use strict";
 
-var astUtils = require("../ast-utils");
+var astUtils = require("../util/ast-utils");
 
 //------------------------------------------------------------------------------
 // Rule Definition
@@ -87513,7 +86879,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":112}],261:[function(require,module,exports){
+},{"../util/ast-utils":405}],262:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag when using multiline strings
  * @author Ilya Volodin
@@ -87525,7 +86891,7 @@ module.exports = {
 // Requirements
 //------------------------------------------------------------------------------
 
-var astUtils = require("../ast-utils");
+var astUtils = require("../util/ast-utils");
 
 //------------------------------------------------------------------------------
 // Rule Definition
@@ -87569,7 +86935,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":112}],262:[function(require,module,exports){
+},{"../util/ast-utils":405}],263:[function(require,module,exports){
 /**
  * @fileoverview Disallows multiple blank lines.
  * implementation adapted from the no-trailing-spaces rule.
@@ -87705,7 +87071,7 @@ module.exports = {
     }
 };
 
-},{}],263:[function(require,module,exports){
+},{}],264:[function(require,module,exports){
 /**
  * @fileoverview Rule to disallow assignments to native objects or read-only global variables
  * @author Ilya Volodin
@@ -87793,7 +87159,7 @@ module.exports = {
     }
 };
 
-},{}],264:[function(require,module,exports){
+},{}],265:[function(require,module,exports){
 /**
  * @fileoverview Rule to disallow a negated condition
  * @author Alberto Rodríguez
@@ -87877,7 +87243,7 @@ module.exports = {
     }
 };
 
-},{}],265:[function(require,module,exports){
+},{}],266:[function(require,module,exports){
 /**
  * @fileoverview A rule to disallow negated left operands of the `in` operator
  * @author Michael Ficarra
@@ -87916,7 +87282,7 @@ module.exports = {
     }
 };
 
-},{}],266:[function(require,module,exports){
+},{}],267:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag nested ternary expressions
  * @author Ian Christian Myers
@@ -87952,7 +87318,7 @@ module.exports = {
     }
 };
 
-},{}],267:[function(require,module,exports){
+},{}],268:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag when using new Function
  * @author Ilya Volodin
@@ -87999,7 +87365,7 @@ module.exports = {
     }
 };
 
-},{}],268:[function(require,module,exports){
+},{}],269:[function(require,module,exports){
 /**
  * @fileoverview A rule to disallow calls to the Object constructor
  * @author Matt DuVall <http://www.mattduvall.com/>
@@ -88035,7 +87401,7 @@ module.exports = {
     }
 };
 
-},{}],269:[function(require,module,exports){
+},{}],270:[function(require,module,exports){
 /**
  * @fileoverview Rule to disallow use of new operator with the `require` function
  * @author Wil Moore III
@@ -88071,7 +87437,7 @@ module.exports = {
     }
 };
 
-},{}],270:[function(require,module,exports){
+},{}],271:[function(require,module,exports){
 /**
  * @fileoverview Rule to disallow use of the new operator with the `Symbol` object
  * @author Alberto Rodríguez
@@ -88116,7 +87482,7 @@ module.exports = {
     }
 };
 
-},{}],271:[function(require,module,exports){
+},{}],272:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag when using constructor for wrapper objects
  * @author Ilya Volodin
@@ -88154,7 +87520,7 @@ module.exports = {
     }
 };
 
-},{}],272:[function(require,module,exports){
+},{}],273:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag statements with function invocation preceded by
  * "new" and not part of assignment
@@ -88189,7 +87555,7 @@ module.exports = {
     }
 };
 
-},{}],273:[function(require,module,exports){
+},{}],274:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag use of an object property of the global object (Math and JSON) as a function
  * @author James Allardice
@@ -88230,7 +87596,7 @@ module.exports = {
     }
 };
 
-},{}],274:[function(require,module,exports){
+},{}],275:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag octal escape sequences in string literals.
  * @author Ian Christian Myers
@@ -88277,7 +87643,7 @@ module.exports = {
     }
 };
 
-},{}],275:[function(require,module,exports){
+},{}],276:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag when initializing octal literal
  * @author Ilya Volodin
@@ -88313,7 +87679,7 @@ module.exports = {
     }
 };
 
-},{}],276:[function(require,module,exports){
+},{}],277:[function(require,module,exports){
 /**
  * @fileoverview Disallow reassignment of function parameters.
  * @author Nat Burns
@@ -88481,7 +87847,7 @@ module.exports = {
     }
 };
 
-},{}],277:[function(require,module,exports){
+},{}],278:[function(require,module,exports){
 /**
  * @fileoverview Disallow string concatenation when using __dirname and __filename
  * @author Nicholas C. Zakas
@@ -88527,7 +87893,7 @@ module.exports = {
     }
 };
 
-},{}],278:[function(require,module,exports){
+},{}],279:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag use of unary increment and decrement operators.
  * @author Ian Christian Myers
@@ -88588,7 +87954,7 @@ module.exports = {
     }
 };
 
-},{}],279:[function(require,module,exports){
+},{}],280:[function(require,module,exports){
 /**
  * @fileoverview Disallow the use of process.env()
  * @author Vignesh Anand
@@ -88626,7 +87992,7 @@ module.exports = {
     }
 };
 
-},{}],280:[function(require,module,exports){
+},{}],281:[function(require,module,exports){
 /**
  * @fileoverview Disallow the use of process.exit()
  * @author Nicholas C. Zakas
@@ -88663,7 +88029,7 @@ module.exports = {
     }
 };
 
-},{}],281:[function(require,module,exports){
+},{}],282:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag usage of __proto__ property
  * @author Ilya Volodin
@@ -88700,7 +88066,7 @@ module.exports = {
     }
 };
 
-},{}],282:[function(require,module,exports){
+},{}],283:[function(require,module,exports){
 /**
  * @fileoverview Rule to disallow use of Object.prototype builtins on objects
  * @author Andrew Levine
@@ -88753,7 +88119,7 @@ module.exports = {
     }
 };
 
-},{}],283:[function(require,module,exports){
+},{}],284:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag when the same variable is declared more then once.
  * @author Ilya Volodin
@@ -88855,7 +88221,7 @@ module.exports = {
     }
 };
 
-},{}],284:[function(require,module,exports){
+},{}],285:[function(require,module,exports){
 /**
  * @fileoverview Rule to count multiple spaces in regular expressions
  * @author Matt DuVall <http://www.mattduvall.com/>
@@ -88863,7 +88229,7 @@ module.exports = {
 
 "use strict";
 
-var astUtils = require("../ast-utils");
+var astUtils = require("../util/ast-utils");
 
 //------------------------------------------------------------------------------
 // Rule Definition
@@ -88968,7 +88334,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":112}],285:[function(require,module,exports){
+},{"../util/ast-utils":405}],286:[function(require,module,exports){
 /**
  * @fileoverview Restrict usage of specified globals.
  * @author Benoît Zugmeyer
@@ -89085,7 +88451,7 @@ module.exports = {
     }
 };
 
-},{}],286:[function(require,module,exports){
+},{}],287:[function(require,module,exports){
 /**
  * @fileoverview Restrict usage of specified node imports.
  * @author Guy Ellis
@@ -89341,7 +88707,7 @@ module.exports = {
     }
 };
 
-},{"ignore":86}],287:[function(require,module,exports){
+},{"ignore":86}],288:[function(require,module,exports){
 /**
  * @fileoverview Restrict usage of specified node modules.
  * @author Christian Schulz
@@ -89512,7 +88878,7 @@ module.exports = {
     }
 };
 
-},{"ignore":86}],288:[function(require,module,exports){
+},{"ignore":86}],289:[function(require,module,exports){
 /**
  * @fileoverview Rule to disallow certain object properties
  * @author Will Klein & Eli White
@@ -89520,7 +88886,7 @@ module.exports = {
 
 "use strict";
 
-var astUtils = require("../ast-utils");
+var astUtils = require("../util/ast-utils");
 
 //------------------------------------------------------------------------------
 // Rule Definition
@@ -89687,7 +89053,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":112}],289:[function(require,module,exports){
+},{"../util/ast-utils":405}],290:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag use of certain node types
  * @author Burak Yigit Kaya
@@ -89748,7 +89114,7 @@ module.exports = {
     }
 };
 
-},{}],290:[function(require,module,exports){
+},{}],291:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag when return statement contains assignment
  * @author Ilya Volodin
@@ -89759,7 +89125,7 @@ module.exports = {
 // Requirements
 //------------------------------------------------------------------------------
 
-var astUtils = require("../ast-utils");
+var astUtils = require("../util/ast-utils");
 
 //------------------------------------------------------------------------------
 // Helpers
@@ -89821,14 +89187,14 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":112}],291:[function(require,module,exports){
+},{"../util/ast-utils":405}],292:[function(require,module,exports){
 /**
  * @fileoverview Disallows unnecessary `return await`
  * @author Jordan Harband
  */
 "use strict";
 
-var astUtils = require("../ast-utils");
+var astUtils = require("../util/ast-utils");
 
 //------------------------------------------------------------------------------
 // Rule Definition
@@ -89919,7 +89285,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":112}],292:[function(require,module,exports){
+},{"../util/ast-utils":405}],293:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag when using javascript: urls
  * @author Ilya Volodin
@@ -89961,7 +89327,7 @@ module.exports = {
     }
 };
 
-},{}],293:[function(require,module,exports){
+},{}],294:[function(require,module,exports){
 /**
  * @fileoverview Rule to disallow assignments where both sides are exactly the same
  * @author Toru Nagashima
@@ -89975,7 +89341,7 @@ module.exports = {
 
 var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
 
-var astUtils = require("../ast-utils");
+var astUtils = require("../util/ast-utils");
 
 //------------------------------------------------------------------------------
 // Helpers
@@ -90150,7 +89516,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":112}],294:[function(require,module,exports){
+},{"../util/ast-utils":405}],295:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag comparison where left part is the same as the right
  * part.
@@ -90205,7 +89571,7 @@ module.exports = {
     }
 };
 
-},{}],295:[function(require,module,exports){
+},{}],296:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag use of comma operator
  * @author Brandon Mills
@@ -90217,7 +89583,7 @@ module.exports = {
 // Requirements
 //------------------------------------------------------------------------------
 
-var astUtils = require("../ast-utils");
+var astUtils = require("../util/ast-utils");
 
 //------------------------------------------------------------------------------
 // Rule Definition
@@ -90315,7 +89681,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":112}],296:[function(require,module,exports){
+},{"../util/ast-utils":405}],297:[function(require,module,exports){
 /**
  * @fileoverview Disallow shadowing of NaN, undefined, and Infinity (ES5 section 15.1.1)
  * @author Michael Ficarra
@@ -90381,7 +89747,7 @@ module.exports = {
     }
 };
 
-},{}],297:[function(require,module,exports){
+},{}],298:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag on declaring variables already declared in the outer scope
  * @author Ilya Volodin
@@ -90395,7 +89761,7 @@ module.exports = {
 
 function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 
-var astUtils = require("../ast-utils");
+var astUtils = require("../util/ast-utils");
 
 //------------------------------------------------------------------------------
 // Rule Definition
@@ -90553,7 +89919,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":112}],298:[function(require,module,exports){
+},{"../util/ast-utils":405}],299:[function(require,module,exports){
 /**
  * @fileoverview Rule to check that spaced function application
  * @author Matt DuVall <http://www.mattduvall.com>
@@ -90623,7 +89989,7 @@ module.exports = {
     }
 };
 
-},{}],299:[function(require,module,exports){
+},{}],300:[function(require,module,exports){
 /**
  * @fileoverview Disallow sparse arrays
  * @author Nicholas C. Zakas
@@ -90665,7 +90031,7 @@ module.exports = {
     }
 };
 
-},{}],300:[function(require,module,exports){
+},{}],301:[function(require,module,exports){
 /**
  * @fileoverview Rule to check for properties whose identifier ends with the string Sync
  * @author Matt DuVall<http://mattduvall.com/>
@@ -90716,7 +90082,7 @@ module.exports = {
     }
 };
 
-},{}],301:[function(require,module,exports){
+},{}],302:[function(require,module,exports){
 /**
  * @fileoverview Rule to check for tabs inside a file
  * @author Gyandeep Singh
@@ -90767,7 +90133,7 @@ module.exports = {
     }
 };
 
-},{}],302:[function(require,module,exports){
+},{}],303:[function(require,module,exports){
 /**
  * @fileoverview Warn when using template string syntax in regular strings
  * @author Jeroen Engels
@@ -90806,7 +90172,7 @@ module.exports = {
     }
 };
 
-},{}],303:[function(require,module,exports){
+},{}],304:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag use of ternary operators.
  * @author Ian Christian Myers
@@ -90840,7 +90206,7 @@ module.exports = {
     }
 };
 
-},{}],304:[function(require,module,exports){
+},{}],305:[function(require,module,exports){
 /**
  * @fileoverview A rule to disallow using `this`/`super` before `super()`.
  * @author Toru Nagashima
@@ -90852,7 +90218,7 @@ module.exports = {
 // Requirements
 //------------------------------------------------------------------------------
 
-var astUtils = require("../ast-utils");
+var astUtils = require("../util/ast-utils");
 
 //------------------------------------------------------------------------------
 // Helpers
@@ -91130,7 +90496,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":112}],305:[function(require,module,exports){
+},{"../util/ast-utils":405}],306:[function(require,module,exports){
 /**
  * @fileoverview Rule to restrict what can be thrown as an exception.
  * @author Dieter Oberkofler
@@ -91138,7 +90504,7 @@ module.exports = {
 
 "use strict";
 
-var astUtils = require("../ast-utils");
+var astUtils = require("../util/ast-utils");
 
 //------------------------------------------------------------------------------
 // Rule Definition
@@ -91172,7 +90538,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":112}],306:[function(require,module,exports){
+},{"../util/ast-utils":405}],307:[function(require,module,exports){
 /**
  * @fileoverview Disallow trailing spaces at the end of lines.
  * @author Nodeca Team <https://github.com/nodeca>
@@ -91183,7 +90549,7 @@ module.exports = {
 // Requirements
 //------------------------------------------------------------------------------
 
-var astUtils = require("../ast-utils");
+var astUtils = require("../util/ast-utils");
 
 //------------------------------------------------------------------------------
 // Rule Definition
@@ -91340,7 +90706,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":112}],307:[function(require,module,exports){
+},{"../util/ast-utils":405}],308:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag when initializing to undefined
  * @author Ilya Volodin
@@ -91348,7 +90714,7 @@ module.exports = {
 
 "use strict";
 
-var astUtils = require("../ast-utils");
+var astUtils = require("../util/ast-utils");
 
 //------------------------------------------------------------------------------
 // Rule Definition
@@ -91404,7 +90770,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":112}],308:[function(require,module,exports){
+},{"../util/ast-utils":405}],309:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag references to undeclared variables.
  * @author Mark Macdonald
@@ -91477,7 +90843,7 @@ module.exports = {
     }
 };
 
-},{}],309:[function(require,module,exports){
+},{}],310:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag references to the undefined variable.
  * @author Michael Ficarra
@@ -91562,7 +90928,7 @@ module.exports = {
     }
 };
 
-},{}],310:[function(require,module,exports){
+},{}],311:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag trailing underscores in variable declarations.
  * @author Matt DuVall <http://www.mattduvall.com>
@@ -91763,7 +91129,7 @@ module.exports = {
     }
 };
 
-},{}],311:[function(require,module,exports){
+},{}],312:[function(require,module,exports){
 /**
  * @fileoverview Rule to spot scenarios where a newline looks like it is ending a statement, but is not.
  * @author Glen Mailer
@@ -91774,7 +91140,7 @@ module.exports = {
 // Requirements
 //------------------------------------------------------------------------------
 
-var astUtils = require("../ast-utils");
+var astUtils = require("../util/ast-utils");
 
 //------------------------------------------------------------------------------
 // Rule Definition
@@ -91857,7 +91223,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":112}],312:[function(require,module,exports){
+},{"../util/ast-utils":405}],313:[function(require,module,exports){
 /**
  * @fileoverview Rule to disallow use of unmodified expressions in loop conditions
  * @author Toru Nagashima
@@ -91869,14 +91235,15 @@ module.exports = {
 // Requirements
 //------------------------------------------------------------------------------
 
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
 var Traverser = require("../util/traverser"),
-    astUtils = require("../ast-utils");
+    astUtils = require("../util/ast-utils");
 
 //------------------------------------------------------------------------------
 // Helpers
 //------------------------------------------------------------------------------
 
-var pushAll = Function.apply.bind(Array.prototype.push);
 var SENTINEL_PATTERN = /(?:(?:Call|Class|Function|Member|New|Yield)Expression|Statement|Declaration)$/;
 var LOOP_PATTERN = /^(?:DoWhile|For|While)Statement$/; // for-in/of statements don't have `test` property.
 var GROUP_PATTERN = /^(?:BinaryExpression|ConditionalExpression)$/;
@@ -92205,7 +91572,7 @@ module.exports = {
                 var scope = void 0;
 
                 while (scope = queue.pop()) {
-                    pushAll(queue, scope.childScopes);
+                    queue.push.apply(queue, _toConsumableArray(scope.childScopes));
                     scope.variables.forEach(checkReferences);
                 }
 
@@ -92216,7 +91583,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":112,"../util/traverser":412}],313:[function(require,module,exports){
+},{"../util/ast-utils":405,"../util/traverser":416}],314:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag no-unneeded-ternary
  * @author Gyandeep Singh
@@ -92224,7 +91591,7 @@ module.exports = {
 
 "use strict";
 
-var astUtils = require("../ast-utils");
+var astUtils = require("../util/ast-utils");
 
 // Operators that always result in a boolean value
 var BOOLEAN_OPERATORS = new Set(["==", "===", "!=", "!==", ">", ">=", "<", "<=", "in", "instanceof"]);
@@ -92365,7 +91732,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":112}],314:[function(require,module,exports){
+},{"../util/ast-utils":405}],315:[function(require,module,exports){
 /**
  * @fileoverview Checks for unreachable code due to return, throws, break, and continue.
  * @author Joel Feenstra
@@ -92608,7 +91975,7 @@ module.exports = {
     }
 };
 
-},{}],315:[function(require,module,exports){
+},{}],316:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag unsafe statements in finally block
  * @author Onur Temizkan
@@ -92713,7 +92080,7 @@ module.exports = {
     }
 };
 
-},{}],316:[function(require,module,exports){
+},{}],317:[function(require,module,exports){
 /**
  * @fileoverview Rule to disallow negating the left operand of relational operators
  * @author Toru Nagashima
@@ -92725,7 +92092,7 @@ module.exports = {
 // Requirements
 //------------------------------------------------------------------------------
 
-var astUtils = require("../ast-utils");
+var astUtils = require("../util/ast-utils");
 
 //------------------------------------------------------------------------------
 // Helpers
@@ -92793,7 +92160,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":112}],317:[function(require,module,exports){
+},{"../util/ast-utils":405}],318:[function(require,module,exports){
 /**
  * @fileoverview Flag expressions in statement position that do not side effect
  * @author Michael Ficarra
@@ -92916,7 +92283,7 @@ module.exports = {
     }
 };
 
-},{}],318:[function(require,module,exports){
+},{}],319:[function(require,module,exports){
 /**
  * @fileoverview Rule to disallow unused labels.
  * @author Toru Nagashima
@@ -93024,7 +92391,7 @@ module.exports = {
     }
 };
 
-},{}],319:[function(require,module,exports){
+},{}],320:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag declared but unused variables
  * @author Ilya Volodin
@@ -93037,7 +92404,7 @@ module.exports = {
 //------------------------------------------------------------------------------
 
 var lodash = require("lodash");
-var astUtils = require("../ast-utils");
+var astUtils = require("../util/ast-utils");
 
 //------------------------------------------------------------------------------
 // Rule Definition
@@ -93625,7 +92992,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":112,"lodash":92}],320:[function(require,module,exports){
+},{"../util/ast-utils":405,"lodash":92}],321:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag use of variables before they are defined
  * @author Ilya Volodin
@@ -93843,7 +93210,7 @@ module.exports = {
     }
 };
 
-},{}],321:[function(require,module,exports){
+},{}],322:[function(require,module,exports){
 /**
  * @fileoverview A rule to disallow unnecessary `.call()` and `.apply()`.
  * @author Toru Nagashima
@@ -93851,7 +93218,7 @@ module.exports = {
 
 "use strict";
 
-var astUtils = require("../ast-utils");
+var astUtils = require("../util/ast-utils");
 
 //------------------------------------------------------------------------------
 // Helpers
@@ -93917,7 +93284,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":112}],322:[function(require,module,exports){
+},{"../util/ast-utils":405}],323:[function(require,module,exports){
 /**
  * @fileoverview Rule to disallow unnecessary computed property keys in object literals
  * @author Burak Yigit Kaya
@@ -93930,7 +93297,7 @@ module.exports = {
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
-var astUtils = require("../ast-utils");
+var astUtils = require("../util/ast-utils");
 
 //------------------------------------------------------------------------------
 // Rule Definition
@@ -93997,7 +93364,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":112}],323:[function(require,module,exports){
+},{"../util/ast-utils":405}],324:[function(require,module,exports){
 /**
  * @fileoverview disallow unncessary concatenation of template strings
  * @author Henry Zhu
@@ -94008,7 +93375,7 @@ module.exports = {
 // Requirements
 //------------------------------------------------------------------------------
 
-var astUtils = require("../ast-utils");
+var astUtils = require("../util/ast-utils");
 
 //------------------------------------------------------------------------------
 // Helpers
@@ -94105,7 +93472,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":112}],324:[function(require,module,exports){
+},{"../util/ast-utils":405}],325:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag the use of redundant constructors in classes.
  * @author Alberto Rodríguez
@@ -94263,7 +93630,7 @@ module.exports = {
     }
 };
 
-},{}],325:[function(require,module,exports){
+},{}],326:[function(require,module,exports){
 /**
  * @fileoverview Look for useless escapes in strings and regexes
  * @author Onur Temizkan
@@ -94271,7 +93638,7 @@ module.exports = {
 
 "use strict";
 
-var astUtils = require("../ast-utils");
+var astUtils = require("../util/ast-utils");
 
 //------------------------------------------------------------------------------
 // Rule Definition
@@ -94505,7 +93872,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":112}],326:[function(require,module,exports){
+},{"../util/ast-utils":405}],327:[function(require,module,exports){
 /**
  * @fileoverview Disallow renaming import, export, and destructured assignments to the same name.
  * @author Kai Cataldo
@@ -94646,7 +94013,7 @@ module.exports = {
     }
 };
 
-},{}],327:[function(require,module,exports){
+},{}],328:[function(require,module,exports){
 /**
  * @fileoverview Disallow redundant return statements
  * @author Teddy Katz
@@ -94657,21 +94024,14 @@ module.exports = {
 // Requirements
 //------------------------------------------------------------------------------
 
-var astUtils = require("../ast-utils"),
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
+var astUtils = require("../util/ast-utils"),
     FixTracker = require("../util/fix-tracker");
 
 //------------------------------------------------------------------------------
 // Helpers
 //------------------------------------------------------------------------------
-
-/**
- * Adds all elements of 2nd argument into 1st argument.
- *
- * @param {Array} array - The destination array to add.
- * @param {Array} elements - The source array to add.
- * @returns {void}
- */
-var pushAll = Function.apply.bind(Array.prototype.push);
 
 /**
  * Removes the given element from the array.
@@ -94785,7 +94145,7 @@ module.exports = {
                         continue;
                     }
 
-                    pushAll(uselessReturns, segmentInfoMap.get(segment).uselessReturns);
+                    uselessReturns.push.apply(uselessReturns, _toConsumableArray(segmentInfoMap.get(segment).uselessReturns));
                 }
             } catch (err) {
                 _didIteratorError = true;
@@ -95034,7 +94394,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":112,"../util/fix-tracker":402}],328:[function(require,module,exports){
+},{"../util/ast-utils":405,"../util/fix-tracker":406}],329:[function(require,module,exports){
 /**
  * @fileoverview Rule to check for the usage of var.
  * @author Jamund Ferguson
@@ -95046,7 +94406,7 @@ module.exports = {
 // Requirements
 //------------------------------------------------------------------------------
 
-var astUtils = require("../ast-utils");
+var astUtils = require("../util/ast-utils");
 
 //------------------------------------------------------------------------------
 // Helpers
@@ -95354,7 +94714,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":112}],329:[function(require,module,exports){
+},{"../util/ast-utils":405}],330:[function(require,module,exports){
 /**
  * @fileoverview Rule to disallow use of void operator.
  * @author Mike Sidorov
@@ -95393,7 +94753,7 @@ module.exports = {
     }
 };
 
-},{}],330:[function(require,module,exports){
+},{}],331:[function(require,module,exports){
 /**
  * @fileoverview Rule that warns about used warning comments
  * @author Alexander Schmidt <https://github.com/lxanders>
@@ -95401,7 +94761,7 @@ module.exports = {
 
 "use strict";
 
-var astUtils = require("../ast-utils");
+var astUtils = require("../util/ast-utils");
 
 //------------------------------------------------------------------------------
 // Rule Definition
@@ -95552,7 +94912,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":112}],331:[function(require,module,exports){
+},{"../util/ast-utils":405}],332:[function(require,module,exports){
 /**
  * @fileoverview Rule to disallow whitespace before properties
  * @author Kai Cataldo
@@ -95563,7 +94923,7 @@ module.exports = {
 // Requirements
 //------------------------------------------------------------------------------
 
-var astUtils = require("../ast-utils");
+var astUtils = require("../util/ast-utils");
 
 //------------------------------------------------------------------------------
 // Rule Definition
@@ -95649,7 +95009,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":112}],332:[function(require,module,exports){
+},{"../util/ast-utils":405}],333:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag use of with statement
  * @author Nicholas C. Zakas
@@ -95683,7 +95043,7 @@ module.exports = {
     }
 };
 
-},{}],333:[function(require,module,exports){
+},{}],334:[function(require,module,exports){
 /**
  * @fileoverview enforce the location of single-line statements
  * @author Teddy Katz
@@ -95808,7 +95168,7 @@ module.exports = {
     }
 };
 
-},{}],334:[function(require,module,exports){
+},{}],335:[function(require,module,exports){
 /**
  * @fileoverview Rule to require or disallow line breaks inside braces.
  * @author Toru Nagashima
@@ -95820,7 +95180,7 @@ module.exports = {
 // Requirements
 //------------------------------------------------------------------------------
 
-var astUtils = require("../ast-utils");
+var astUtils = require("../util/ast-utils");
 var lodash = require("lodash");
 
 //------------------------------------------------------------------------------
@@ -96088,14 +95448,14 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":112,"lodash":92}],335:[function(require,module,exports){
+},{"../util/ast-utils":405,"lodash":92}],336:[function(require,module,exports){
 /**
  * @fileoverview Disallows or enforces spaces inside of object literals.
  * @author Jamund Ferguson
  */
 "use strict";
 
-var astUtils = require("../ast-utils");
+var astUtils = require("../util/ast-utils");
 
 //------------------------------------------------------------------------------
 // Rule Definition
@@ -96380,7 +95740,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":112}],336:[function(require,module,exports){
+},{"../util/ast-utils":405}],337:[function(require,module,exports){
 /**
  * @fileoverview Rule to enforce placing object properties on separate lines.
  * @author Vitor Balocco
@@ -96471,7 +95831,7 @@ module.exports = {
     }
 };
 
-},{}],337:[function(require,module,exports){
+},{}],338:[function(require,module,exports){
 /**
  * @fileoverview Rule to enforce concise object methods and properties.
  * @author Jamund Ferguson
@@ -96491,7 +95851,7 @@ var OPTIONS = {
 //------------------------------------------------------------------------------
 // Requirements
 //------------------------------------------------------------------------------
-var astUtils = require("../ast-utils");
+var astUtils = require("../util/ast-utils");
 
 //------------------------------------------------------------------------------
 // Rule Definition
@@ -96927,7 +96287,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":112}],338:[function(require,module,exports){
+},{"../util/ast-utils":405}],339:[function(require,module,exports){
 /**
  * @fileoverview Rule to check multiple var declarations per line
  * @author Alberto Rodríguez
@@ -97015,7 +96375,7 @@ module.exports = {
     }
 };
 
-},{}],339:[function(require,module,exports){
+},{}],340:[function(require,module,exports){
 /**
  * @fileoverview A rule to control the use of single variable declarations.
  * @author Ian Christian Myers
@@ -97547,7 +96907,7 @@ module.exports = {
     }
 };
 
-},{}],340:[function(require,module,exports){
+},{}],341:[function(require,module,exports){
 /**
  * @fileoverview Rule to replace assignment expressions with operator assignment
  * @author Brandon Mills
@@ -97558,7 +96918,7 @@ module.exports = {
 // Requirements
 //------------------------------------------------------------------------------
 
-var astUtils = require("../ast-utils");
+var astUtils = require("../util/ast-utils");
 
 //------------------------------------------------------------------------------
 // Helpers
@@ -97751,7 +97111,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":112}],341:[function(require,module,exports){
+},{"../util/ast-utils":405}],342:[function(require,module,exports){
 /**
  * @fileoverview Operator linebreak - enforces operator linebreak style of two types: after and before
  * @author Benoît Zugmeyer
@@ -97763,7 +97123,7 @@ module.exports = {
 // Requirements
 //------------------------------------------------------------------------------
 
-var astUtils = require("../ast-utils");
+var astUtils = require("../util/ast-utils");
 
 //------------------------------------------------------------------------------
 // Rule Definition
@@ -97997,7 +97357,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":112}],342:[function(require,module,exports){
+},{"../util/ast-utils":405}],343:[function(require,module,exports){
 /**
  * @fileoverview A rule to ensure blank lines within blocks.
  * @author Mathias Schreck <https://github.com/lo1tuma>
@@ -98253,7 +97613,7 @@ module.exports = {
     }
 };
 
-},{}],343:[function(require,module,exports){
+},{}],344:[function(require,module,exports){
 /**
  * @fileoverview Rule to require or disallow newlines between statements
  * @author Toru Nagashima
@@ -98269,7 +97629,7 @@ var _templateObject = _taggedTemplateLiteral(["^(s*?", ")s*", "(s*;?)$"], ["^(\\
 
 function _taggedTemplateLiteral(strings, raw) { return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
-var astUtils = require("../ast-utils");
+var astUtils = require("../util/ast-utils");
 
 //------------------------------------------------------------------------------
 // Helpers
@@ -98616,6 +97976,7 @@ var StatementTypes = {
 
     block: newNodeTypeTester("BlockStatement"),
     empty: newNodeTypeTester("EmptyStatement"),
+    function: newNodeTypeTester("FunctionDeclaration"),
 
     break: newKeywordTester("break"),
     case: newKeywordTester("case"),
@@ -98627,7 +97988,6 @@ var StatementTypes = {
     do: newKeywordTester("do"),
     export: newKeywordTester("export"),
     for: newKeywordTester("for"),
-    function: newKeywordTester("function"),
     if: newKeywordTester("if"),
     import: newKeywordTester("import"),
     let: newKeywordTester("let"),
@@ -98835,7 +98195,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":112}],344:[function(require,module,exports){
+},{"../util/ast-utils":405}],345:[function(require,module,exports){
 /**
  * @fileoverview A rule to suggest using arrow functions as callbacks.
  * @author Toru Nagashima
@@ -99133,7 +98493,7 @@ module.exports = {
     }
 };
 
-},{}],345:[function(require,module,exports){
+},{}],346:[function(require,module,exports){
 /**
  * @fileoverview A rule to suggest using of const declaration for variables that are never reassigned after declared.
  * @author Toru Nagashima
@@ -99141,7 +98501,9 @@ module.exports = {
 
 "use strict";
 
-var astUtils = require("../ast-utils");
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
+var astUtils = require("../util/ast-utils");
 
 //------------------------------------------------------------------------------
 // Helpers
@@ -99150,15 +98512,6 @@ var astUtils = require("../ast-utils");
 var PATTERN_TYPE = /^(?:.+?Pattern|RestElement|SpreadProperty|ExperimentalRestProperty|Property)$/;
 var DECLARATION_HOST_TYPE = /^(?:Program|BlockStatement|SwitchCase)$/;
 var DESTRUCTURING_HOST_TYPE = /^(?:VariableDeclarator|AssignmentExpression)$/;
-
-/**
- * Adds multiple items to the tail of an array.
- *
- * @param {any[]} array - A destination to add.
- * @param {any[]} values - Items to be added.
- * @returns {void}
- */
-var pushAll = Function.apply.bind(Array.prototype.push);
 
 /**
  * Checks whether a given node is located at `ForStatement.init` or not.
@@ -99495,14 +98848,14 @@ module.exports = {
             },
             VariableDeclaration: function VariableDeclaration(node) {
                 if (node.kind === "let" && !isInitOfForStatement(node)) {
-                    pushAll(variables, context.getDeclaredVariables(node));
+                    variables.push.apply(variables, _toConsumableArray(context.getDeclaredVariables(node)));
                 }
             }
         };
     }
 };
 
-},{"../ast-utils":112}],346:[function(require,module,exports){
+},{"../util/ast-utils":405}],347:[function(require,module,exports){
 /**
  * @fileoverview Prefer destructuring from arrays and objects
  * @author Alex LaFroscia
@@ -99711,7 +99064,7 @@ module.exports = {
     }
 };
 
-},{}],347:[function(require,module,exports){
+},{}],348:[function(require,module,exports){
 /**
  * @fileoverview Rule to disallow `parseInt()` in favor of binary, octal, and hexadecimal literals
  * @author Annie Zhang, Henry Zhu
@@ -99820,7 +99173,7 @@ module.exports = {
     }
 };
 
-},{}],348:[function(require,module,exports){
+},{}],349:[function(require,module,exports){
 /**
  * @fileoverview Prefers object spread property over Object.assign
  * @author Sharmila Jesupaul
@@ -99835,7 +99188,7 @@ var _require = require("eslint-utils"),
     CALL = _require.CALL,
     ReferenceTracker = _require.ReferenceTracker;
 
-var _require2 = require("../ast-utils"),
+var _require2 = require("../util/ast-utils"),
     isCommaToken = _require2.isCommaToken,
     isOpeningParenToken = _require2.isOpeningParenToken,
     isClosingParenToken = _require2.isClosingParenToken,
@@ -99973,7 +99326,7 @@ function getEndWithSpaces(token, sourceCode) {
  */
 function defineFixer(node, sourceCode) {
     return (/*#__PURE__*/regeneratorRuntime.mark(function _callee(fixer) {
-            var leftParen, rightParen, _iteratorNormalCompletion, _didIteratorError, _iteratorError, _iterator, _step, argNode, innerParens, left, right, maybeTrailingComma, maybeArgumentComma, _iteratorNormalCompletion2, _didIteratorError2, _iteratorError2, _iterator2, _step2, innerParen;
+            var leftParen, rightParen, _iteratorNormalCompletion, _didIteratorError, _iteratorError, _iterator, _step, argNode, innerParens, left, right, maybeTrailingComma, maybeArgumentComma, _iteratorNormalCompletion2, _didIteratorError2, _iteratorError2, _iterator2, _step2, innerParen, leftRange, rightRange;
 
             return regeneratorRuntime.wrap(function _callee$(_context) {
                 while (1) {
@@ -100023,7 +99376,7 @@ function defineFixer(node, sourceCode) {
 
                         case 20:
                             if (_iteratorNormalCompletion = (_step = _iterator.next()).done) {
-                                _context.next = 75;
+                                _context.next = 77;
                                 break;
                             }
 
@@ -100033,7 +99386,7 @@ function defineFixer(node, sourceCode) {
                             right = innerParens.pop();
 
                             if (!(argNode.type === "ObjectExpression")) {
-                                _context.next = 63;
+                                _context.next = 65;
                                 break;
                             }
 
@@ -100101,92 +99454,95 @@ function defineFixer(node, sourceCode) {
                             return _context.finish(46);
 
                         case 54:
-                            _context.next = 56;
-                            return fixer.removeRange([left.range[0], getEndWithSpaces(left, sourceCode)]);
-
-                        case 56:
+                            leftRange = [left.range[0], getEndWithSpaces(left, sourceCode)];
+                            rightRange = [Math.max(getStartWithSpaces(right, sourceCode), leftRange[1]), // Ensure ranges don't overlap
+                            right.range[1]];
                             _context.next = 58;
-                            return fixer.removeRange([getStartWithSpaces(right, sourceCode), right.range[1]]);
+                            return fixer.removeRange(leftRange);
 
                         case 58:
+                            _context.next = 60;
+                            return fixer.removeRange(rightRange);
+
+                        case 60:
                             if (!((argNode.properties.length === 0 || isCommaToken(maybeTrailingComma)) && isCommaToken(maybeArgumentComma))) {
-                                _context.next = 61;
+                                _context.next = 63;
                                 break;
                             }
 
-                            _context.next = 61;
+                            _context.next = 63;
                             return fixer.remove(maybeArgumentComma);
 
-                        case 61:
-                            _context.next = 72;
+                        case 63:
+                            _context.next = 74;
                             break;
 
-                        case 63:
+                        case 65:
                             if (!argNeedsParens(argNode, sourceCode)) {
-                                _context.next = 70;
+                                _context.next = 72;
                                 break;
                             }
 
-                            _context.next = 66;
+                            _context.next = 68;
                             return fixer.insertTextBefore(left, "...(");
 
-                        case 66:
-                            _context.next = 68;
+                        case 68:
+                            _context.next = 70;
                             return fixer.insertTextAfter(right, ")");
 
-                        case 68:
-                            _context.next = 72;
+                        case 70:
+                            _context.next = 74;
                             break;
 
-                        case 70:
-                            _context.next = 72;
+                        case 72:
+                            _context.next = 74;
                             return fixer.insertTextBefore(left, "...");
 
-                        case 72:
+                        case 74:
                             _iteratorNormalCompletion = true;
                             _context.next = 20;
                             break;
 
-                        case 75:
-                            _context.next = 81;
+                        case 77:
+                            _context.next = 83;
                             break;
 
-                        case 77:
-                            _context.prev = 77;
+                        case 79:
+                            _context.prev = 79;
                             _context.t1 = _context["catch"](18);
                             _didIteratorError = true;
                             _iteratorError = _context.t1;
 
-                        case 81:
-                            _context.prev = 81;
-                            _context.prev = 82;
+                        case 83:
+                            _context.prev = 83;
+                            _context.prev = 84;
 
                             if (!_iteratorNormalCompletion && _iterator.return) {
                                 _iterator.return();
                             }
 
-                        case 84:
-                            _context.prev = 84;
+                        case 86:
+                            _context.prev = 86;
 
                             if (!_didIteratorError) {
-                                _context.next = 87;
+                                _context.next = 89;
                                 break;
                             }
 
                             throw _iteratorError;
 
-                        case 87:
-                            return _context.finish(84);
-
-                        case 88:
-                            return _context.finish(81);
-
                         case 89:
+                            return _context.finish(86);
+
+                        case 90:
+                            return _context.finish(83);
+
+                        case 91:
                         case "end":
                             return _context.stop();
                     }
                 }
-            }, _callee, this, [[18, 77, 81, 89], [31, 42, 46, 54], [47,, 49, 53], [82,, 84, 88]]);
+            }, _callee, this, [[18, 79, 83, 91], [31, 42, 46, 54], [47,, 49, 53], [84,, 86, 90]]);
         })
     );
 }
@@ -100255,14 +99611,14 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":112,"eslint-utils":68}],349:[function(require,module,exports){
+},{"../util/ast-utils":405,"eslint-utils":68}],350:[function(require,module,exports){
 /**
  * @fileoverview restrict values that can be used as Promise rejection reasons
  * @author Teddy Katz
  */
 "use strict";
 
-var astUtils = require("../ast-utils");
+var astUtils = require("../util/ast-utils");
 
 //------------------------------------------------------------------------------
 // Rule Definition
@@ -100379,7 +99735,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":112}],350:[function(require,module,exports){
+},{"../util/ast-utils":405}],351:[function(require,module,exports){
 /**
  * @fileoverview Rule to suggest using "Reflect" api over Function/Object methods
  * @author Keith Cirkel <http://keithcirkel.co.uk>
@@ -100487,7 +99843,7 @@ module.exports = {
     }
 };
 
-},{}],351:[function(require,module,exports){
+},{}],352:[function(require,module,exports){
 /**
  * @fileoverview Rule to
  * @author Toru Nagashima
@@ -100595,7 +99951,7 @@ module.exports = {
     }
 };
 
-},{}],352:[function(require,module,exports){
+},{}],353:[function(require,module,exports){
 /**
  * @fileoverview A rule to suggest using of the spread operator instead of `.apply()`.
  * @author Toru Nagashima
@@ -100603,7 +99959,7 @@ module.exports = {
 
 "use strict";
 
-var astUtils = require("../ast-utils");
+var astUtils = require("../util/ast-utils");
 
 //------------------------------------------------------------------------------
 // Helpers
@@ -100687,7 +100043,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":112}],353:[function(require,module,exports){
+},{"../util/ast-utils":405}],354:[function(require,module,exports){
 /**
  * @fileoverview A rule to suggest using template literals instead of string concatenation.
  * @author Toru Nagashima
@@ -100699,7 +100055,7 @@ module.exports = {
 // Requirements
 //------------------------------------------------------------------------------
 
-var astUtils = require("../ast-utils");
+var astUtils = require("../util/ast-utils");
 
 //------------------------------------------------------------------------------
 // Helpers
@@ -100982,7 +100338,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":112}],354:[function(require,module,exports){
+},{"../util/ast-utils":405}],355:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag non-quoted property names in object literals.
  * @author Mathias Bynens <http://mathiasbynens.be/>
@@ -101284,7 +100640,7 @@ module.exports = {
     }
 };
 
-},{"../util/keywords":404,"espree":"espree"}],355:[function(require,module,exports){
+},{"../util/keywords":408,"espree":"espree"}],356:[function(require,module,exports){
 /**
  * @fileoverview A rule to choose between single and double quote marks
  * @author Matt DuVall <http://www.mattduvall.com/>, Brandon Payton
@@ -101300,7 +100656,7 @@ var _templateObject = _taggedTemplateLiteral(["(^|[^\\])(\\\\)*[", "]"], ["(^|[^
 
 function _taggedTemplateLiteral(strings, raw) { return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
-var astUtils = require("../ast-utils");
+var astUtils = require("../util/ast-utils");
 
 //------------------------------------------------------------------------------
 // Constants
@@ -101567,7 +100923,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":112}],356:[function(require,module,exports){
+},{"../util/ast-utils":405}],357:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag use of parseInt without a radix argument
  * @author James Allardice
@@ -101579,7 +100935,7 @@ module.exports = {
 // Requirements
 //------------------------------------------------------------------------------
 
-var astUtils = require("../ast-utils");
+var astUtils = require("../util/ast-utils");
 
 //------------------------------------------------------------------------------
 // Helpers
@@ -101731,7 +101087,242 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":112}],357:[function(require,module,exports){
+},{"../util/ast-utils":405}],358:[function(require,module,exports){
+/**
+ * @fileoverview disallow assignments that can lead to race conditions due to usage of `await` or `yield`
+ * @author Teddy Katz
+ */
+"use strict";
+
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
+var astUtils = require("../util/ast-utils");
+
+//------------------------------------------------------------------------------
+// Rule Definition
+//------------------------------------------------------------------------------
+
+module.exports = {
+    meta: {
+        docs: {
+            description: "disallow assignments that can lead to race conditions due to usage of `await` or `yield`",
+            category: "Possible Errors",
+            recommended: false,
+            url: "https://eslint.org/docs/rules/require-atomic-updates"
+        },
+        fixable: null,
+        schema: [],
+        messages: {
+            nonAtomicUpdate: "Possible race condition: `{{value}}` might be reassigned based on an outdated value of `{{value}}`."
+        }
+    },
+
+    create: function create(context) {
+        var sourceCode = context.getSourceCode();
+        var identifierToSurroundingFunctionMap = new WeakMap();
+        var expressionsByCodePathSegment = new Map();
+
+        //----------------------------------------------------------------------
+        // Helpers
+        //----------------------------------------------------------------------
+
+        var resolvedVariableCache = new WeakMap();
+
+        /**
+         * Gets the variable scope around this variable reference
+         * @param {ASTNode} identifier An `Identifier` AST node
+         * @returns {Scope|null} An escope Scope
+         */
+        function getScope(identifier) {
+            for (var currentNode = identifier; currentNode; currentNode = currentNode.parent) {
+                var scope = sourceCode.scopeManager.acquire(currentNode, true);
+
+                if (scope) {
+                    return scope;
+                }
+            }
+            return null;
+        }
+
+        /**
+         * Resolves a given identifier to a given scope
+         * @param {ASTNode} identifier An `Identifier` AST node
+         * @param {Scope} scope An escope Scope
+         * @returns {Variable|null} An escope Variable corresponding to the given identifier
+         */
+        function resolveVariableInScope(identifier, scope) {
+            return scope.variables.find(function (variable) {
+                return variable.name === identifier.name;
+            }) || (scope.upper ? resolveVariableInScope(identifier, scope.upper) : null);
+        }
+
+        /**
+         * Resolves an identifier to a variable
+         * @param {ASTNode} identifier An identifier node
+         * @returns {Variable|null} The escope Variable that uses this identifier
+         */
+        function resolveVariable(identifier) {
+            if (!resolvedVariableCache.has(identifier)) {
+                var surroundingScope = getScope(identifier);
+
+                if (surroundingScope) {
+                    resolvedVariableCache.set(identifier, resolveVariableInScope(identifier, surroundingScope));
+                } else {
+                    resolvedVariableCache.set(identifier, null);
+                }
+            }
+
+            return resolvedVariableCache.get(identifier);
+        }
+
+        /**
+         * Checks if an expression is a variable that can only be observed within the given function.
+         * @param {ASTNode} expression The expression to check
+         * @param {ASTNode} surroundingFunction The function node
+         * @returns {boolean} `true` if the expression is a variable which is local to the given function, and is never
+         * referenced in a closure.
+         */
+        function isLocalVariableWithoutEscape(expression, surroundingFunction) {
+            if (expression.type !== "Identifier") {
+                return false;
+            }
+
+            var variable = resolveVariable(expression);
+
+            if (!variable) {
+                return false;
+            }
+
+            return variable.references.every(function (reference) {
+                return identifierToSurroundingFunctionMap.get(reference.identifier) === surroundingFunction;
+            }) && variable.defs.every(function (def) {
+                return identifierToSurroundingFunctionMap.get(def.name) === surroundingFunction;
+            });
+        }
+
+        /**
+         * Reports an AssignmentExpression node that has a non-atomic update
+         * @param {ASTNode} assignmentExpression The assignment that is potentially unsafe
+         * @returns {void}
+         */
+        function reportAssignment(assignmentExpression) {
+            context.report({
+                node: assignmentExpression,
+                messageId: "nonAtomicUpdate",
+                data: {
+                    value: sourceCode.getText(assignmentExpression.left)
+                }
+            });
+        }
+
+        /**
+         * If the control flow graph of a function enters an assignment expression, then does the
+         * both of the following steps in order (possibly with other steps in between) before exiting the
+         * assignment expression, then the assignment might be using an outdated value.
+         * 1. Enters a read of the variable or property assigned in the expression (not necessary if operator assignment is used)
+         * 2. Exits an `await` or `yield` expression
+         *
+         * This function checks for the outdated values and reports them.
+         * @param {CodePathSegment} codePathSegment The current code path segment to traverse
+         * @param {ASTNode} surroundingFunction The function node containing the code path segment
+         * @returns {void}
+         */
+        function findOutdatedReads(codePathSegment, surroundingFunction) {
+            var _ref = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {},
+                _ref$seenSegments = _ref.seenSegments,
+                seenSegments = _ref$seenSegments === undefined ? new Set() : _ref$seenSegments,
+                _ref$openAssignmentsW = _ref.openAssignmentsWithoutReads,
+                openAssignmentsWithoutReads = _ref$openAssignmentsW === undefined ? new Set() : _ref$openAssignmentsW,
+                _ref$openAssignmentsW2 = _ref.openAssignmentsWithReads,
+                openAssignmentsWithReads = _ref$openAssignmentsW2 === undefined ? new Set() : _ref$openAssignmentsW2;
+
+            if (seenSegments.has(codePathSegment)) {
+
+                // An AssignmentExpression can't contain loops, so it's not necessary to reenter them with new state.
+                return;
+            }
+
+            expressionsByCodePathSegment.get(codePathSegment).forEach(function (_ref2) {
+                var entering = _ref2.entering,
+                    node = _ref2.node;
+
+                if (node.type === "AssignmentExpression") {
+                    if (entering) {
+                        (node.operator === "=" ? openAssignmentsWithoutReads : openAssignmentsWithReads).add(node);
+                    } else {
+                        openAssignmentsWithoutReads.delete(node);
+                        openAssignmentsWithReads.delete(node);
+                    }
+                } else if (!entering && (node.type === "AwaitExpression" || node.type === "YieldExpression")) {
+                    [].concat(_toConsumableArray(openAssignmentsWithReads)).filter(function (assignment) {
+                        return !isLocalVariableWithoutEscape(assignment.left, surroundingFunction);
+                    }).forEach(reportAssignment);
+
+                    openAssignmentsWithReads.clear();
+                } else if (!entering && (node.type === "Identifier" || node.type === "MemberExpression")) {
+                    [].concat(_toConsumableArray(openAssignmentsWithoutReads)).filter(function (assignment) {
+                        return assignment.left !== node && assignment.left.type === node.type && astUtils.equalTokens(assignment.left, node, sourceCode);
+                    }).forEach(function (assignment) {
+                        openAssignmentsWithoutReads.delete(assignment);
+                        openAssignmentsWithReads.add(assignment);
+                    });
+                }
+            });
+
+            codePathSegment.nextSegments.forEach(function (nextSegment) {
+                findOutdatedReads(nextSegment, surroundingFunction, {
+                    seenSegments: new Set(seenSegments).add(codePathSegment),
+                    openAssignmentsWithoutReads: new Set(openAssignmentsWithoutReads),
+                    openAssignmentsWithReads: new Set(openAssignmentsWithReads)
+                });
+            });
+        }
+
+        //----------------------------------------------------------------------
+        // Public
+        //----------------------------------------------------------------------
+
+        var currentCodePathSegmentStack = [];
+        var currentCodePathSegment = null;
+        var functionStack = [];
+
+        return {
+            onCodePathStart: function onCodePathStart() {
+                currentCodePathSegmentStack.push(currentCodePathSegment);
+            },
+            onCodePathEnd: function onCodePathEnd(codePath, node) {
+                currentCodePathSegment = currentCodePathSegmentStack.pop();
+
+                if (astUtils.isFunction(node) && (node.async || node.generator)) {
+                    findOutdatedReads(codePath.initialSegment, node);
+                }
+            },
+            onCodePathSegmentStart: function onCodePathSegmentStart(segment) {
+                currentCodePathSegment = segment;
+                expressionsByCodePathSegment.set(segment, []);
+            },
+            "AssignmentExpression, Identifier, MemberExpression, AwaitExpression, YieldExpression": function AssignmentExpressionIdentifierMemberExpressionAwaitExpressionYieldExpression(node) {
+                expressionsByCodePathSegment.get(currentCodePathSegment).push({ entering: true, node: node });
+            },
+            "AssignmentExpression, Identifier, MemberExpression, AwaitExpression, YieldExpression:exit": function AssignmentExpressionIdentifierMemberExpressionAwaitExpressionYieldExpressionExit(node) {
+                expressionsByCodePathSegment.get(currentCodePathSegment).push({ entering: false, node: node });
+            },
+            ":function": function _function(node) {
+                functionStack.push(node);
+            },
+            ":function:exit": function functionExit() {
+                functionStack.pop();
+            },
+            Identifier: function Identifier(node) {
+                if (functionStack.length) {
+                    identifierToSurroundingFunctionMap.set(node, functionStack[functionStack.length - 1]);
+                }
+            }
+        };
+    }
+};
+
+},{"../util/ast-utils":405}],359:[function(require,module,exports){
 /**
  * @fileoverview Rule to disallow async functions which have no `await` expression.
  * @author Toru Nagashima
@@ -101743,7 +101334,7 @@ module.exports = {
 // Requirements
 //------------------------------------------------------------------------------
 
-var astUtils = require("../ast-utils");
+var astUtils = require("../util/ast-utils");
 
 //------------------------------------------------------------------------------
 // Helpers
@@ -101832,7 +101423,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":112}],358:[function(require,module,exports){
+},{"../util/ast-utils":405}],360:[function(require,module,exports){
 /**
  * @fileoverview Rule to check for jsdoc presence.
  * @author Gyandeep Singh
@@ -101935,7 +101526,97 @@ module.exports = {
     }
 };
 
-},{}],359:[function(require,module,exports){
+},{}],361:[function(require,module,exports){
+/**
+ * @fileoverview Rule to enforce the use of `u` flag on RegExp.
+ * @author Toru Nagashima
+ */
+
+"use strict";
+
+//------------------------------------------------------------------------------
+// Requirements
+//------------------------------------------------------------------------------
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+var _require = require("eslint-utils"),
+    CALL = _require.CALL,
+    CONSTRUCT = _require.CONSTRUCT,
+    ReferenceTracker = _require.ReferenceTracker,
+    getStringIfConstant = _require.getStringIfConstant;
+
+//------------------------------------------------------------------------------
+// Rule Definition
+//------------------------------------------------------------------------------
+
+module.exports = {
+    meta: {
+        docs: {
+            description: "enforce the use of `u` flag on RegExp",
+            category: "Best Practices",
+            recommended: false,
+            url: "https://eslint.org/docs/rules/require-unicode-regexp"
+        },
+        messages: {
+            requireUFlag: "Use the 'u' flag."
+        },
+        schema: []
+    },
+
+    create: function create(context) {
+        return {
+            "Literal[regex]": function LiteralRegex(node) {
+                var flags = node.regex.flags || "";
+
+                if (!flags.includes("u")) {
+                    context.report({ node: node, messageId: "requireUFlag" });
+                }
+            },
+            Program: function Program() {
+                var _RegExp;
+
+                var scope = context.getScope();
+                var tracker = new ReferenceTracker(scope);
+                var trackMap = {
+                    RegExp: (_RegExp = {}, _defineProperty(_RegExp, CALL, true), _defineProperty(_RegExp, CONSTRUCT, true), _RegExp)
+                };
+
+                var _iteratorNormalCompletion = true;
+                var _didIteratorError = false;
+                var _iteratorError = undefined;
+
+                try {
+                    for (var _iterator = tracker.iterateGlobalReferences(trackMap)[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+                        var node = _step.value.node;
+
+                        var flagsNode = node.arguments[1];
+                        var flags = getStringIfConstant(flagsNode, scope);
+
+                        if (!flagsNode || typeof flags === "string" && !flags.includes("u")) {
+                            context.report({ node: node, messageId: "requireUFlag" });
+                        }
+                    }
+                } catch (err) {
+                    _didIteratorError = true;
+                    _iteratorError = err;
+                } finally {
+                    try {
+                        if (!_iteratorNormalCompletion && _iterator.return) {
+                            _iterator.return();
+                        }
+                    } finally {
+                        if (_didIteratorError) {
+                            throw _iteratorError;
+                        }
+                    }
+                }
+            }
+        };
+    }
+};
+
+},{"eslint-utils":68}],362:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag the generator functions that does not have yield.
  * @author Toru Nagashima
@@ -102009,7 +101690,7 @@ module.exports = {
     }
 };
 
-},{}],360:[function(require,module,exports){
+},{}],363:[function(require,module,exports){
 /**
  * @fileoverview Enforce spacing between rest and spread operators and their expressions.
  * @author Kai Cataldo
@@ -102123,7 +101804,7 @@ module.exports = {
     }
 };
 
-},{}],361:[function(require,module,exports){
+},{}],364:[function(require,module,exports){
 /**
  * @fileoverview Validates spacing before and after semicolon
  * @author Mathias Schreck
@@ -102133,7 +101814,7 @@ module.exports = {
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
-var astUtils = require("../ast-utils");
+var astUtils = require("../util/ast-utils");
 
 //------------------------------------------------------------------------------
 // Rule Definition
@@ -102337,7 +102018,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":112}],362:[function(require,module,exports){
+},{"../util/ast-utils":405}],365:[function(require,module,exports){
 /**
  * @fileoverview Rule to enforce location of semicolons.
  * @author Toru Nagashima
@@ -102351,7 +102032,7 @@ module.exports = {
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-var astUtils = require("../ast-utils");
+var astUtils = require("../util/ast-utils");
 
 //------------------------------------------------------------------------------
 // Rule Definition
@@ -102475,7 +102156,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":112}],363:[function(require,module,exports){
+},{"../util/ast-utils":405}],366:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag missing semicolons.
  * @author Nicholas C. Zakas
@@ -102487,7 +102168,7 @@ module.exports = {
 //------------------------------------------------------------------------------
 
 var FixTracker = require("../util/fix-tracker");
-var astUtils = require("../ast-utils");
+var astUtils = require("../util/ast-utils");
 
 //------------------------------------------------------------------------------
 // Rule Definition
@@ -102766,7 +102447,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":112,"../util/fix-tracker":402}],364:[function(require,module,exports){
+},{"../util/ast-utils":405,"../util/fix-tracker":406}],367:[function(require,module,exports){
 /**
  * @fileoverview Rule to require sorting of import declarations
  * @author Christian Schuller
@@ -102962,7 +102643,7 @@ module.exports = {
     }
 };
 
-},{}],365:[function(require,module,exports){
+},{}],368:[function(require,module,exports){
 /**
  * @fileoverview Rule to require object keys to be sorted
  * @author Toru Nagashima
@@ -102974,7 +102655,7 @@ module.exports = {
 // Requirements
 //------------------------------------------------------------------------------
 
-var astUtils = require("../ast-utils"),
+var astUtils = require("../util/ast-utils"),
     naturalCompare = require("natural-compare");
 
 //------------------------------------------------------------------------------
@@ -103117,7 +102798,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":112,"natural-compare":95}],366:[function(require,module,exports){
+},{"../util/ast-utils":405,"natural-compare":95}],369:[function(require,module,exports){
 /**
  * @fileoverview Rule to require sorting of variables within a single Variable Declaration block
  * @author Ilya Volodin
@@ -103215,7 +102896,7 @@ module.exports = {
     }
 };
 
-},{}],367:[function(require,module,exports){
+},{}],370:[function(require,module,exports){
 /**
  * @fileoverview A rule to ensure whitespace before blocks.
  * @author Mathias Schreck <https://github.com/lo1tuma>
@@ -103225,7 +102906,7 @@ module.exports = {
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
-var astUtils = require("../ast-utils");
+var astUtils = require("../util/ast-utils");
 
 //------------------------------------------------------------------------------
 // Rule Definition
@@ -103362,7 +103043,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":112}],368:[function(require,module,exports){
+},{"../util/ast-utils":405}],371:[function(require,module,exports){
 /**
  * @fileoverview Rule to validate spacing before function paren.
  * @author Mathias Schreck <https://github.com/lo1tuma>
@@ -103375,7 +103056,7 @@ module.exports = {
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
-var astUtils = require("../ast-utils");
+var astUtils = require("../util/ast-utils");
 
 //------------------------------------------------------------------------------
 // Rule Definition
@@ -103501,14 +103182,14 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":112}],369:[function(require,module,exports){
+},{"../util/ast-utils":405}],372:[function(require,module,exports){
 /**
  * @fileoverview Disallows or enforces spaces inside of parentheses.
  * @author Jonathan Rajavuori
  */
 "use strict";
 
-var astUtils = require("../ast-utils");
+var astUtils = require("../util/ast-utils");
 
 //------------------------------------------------------------------------------
 // Rule Definition
@@ -103770,7 +103451,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":112}],370:[function(require,module,exports){
+},{"../util/ast-utils":405}],373:[function(require,module,exports){
 /**
  * @fileoverview Require spaces around infix operators
  * @author Michael Ficarra
@@ -103928,7 +103609,7 @@ module.exports = {
     }
 };
 
-},{}],371:[function(require,module,exports){
+},{}],374:[function(require,module,exports){
 /**
  * @fileoverview This rule shoud require or disallow spaces before or after unary operations.
  * @author Marcin Kumorek
@@ -103939,7 +103620,7 @@ module.exports = {
 // Requirements
 //------------------------------------------------------------------------------
 
-var astUtils = require("../ast-utils");
+var astUtils = require("../util/ast-utils");
 
 //------------------------------------------------------------------------------
 // Rule Definition
@@ -104233,7 +103914,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":112}],372:[function(require,module,exports){
+},{"../util/ast-utils":405}],375:[function(require,module,exports){
 /**
  * @fileoverview Source code for spaced-comments rule
  * @author Gyandeep Singh
@@ -104241,7 +103922,7 @@ module.exports = {
 "use strict";
 
 var lodash = require("lodash");
-var astUtils = require("../ast-utils");
+var astUtils = require("../util/ast-utils");
 
 //------------------------------------------------------------------------------
 // Helpers
@@ -104606,7 +104287,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":112,"lodash":92}],373:[function(require,module,exports){
+},{"../util/ast-utils":405,"lodash":92}],376:[function(require,module,exports){
 /**
  * @fileoverview Rule to control usage of strict mode directives.
  * @author Brandon Mills
@@ -104618,7 +104299,7 @@ module.exports = {
 // Requirements
 //------------------------------------------------------------------------------
 
-var astUtils = require("../ast-utils");
+var astUtils = require("../util/ast-utils");
 
 //------------------------------------------------------------------------------
 // Helpers
@@ -104883,7 +104564,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":112}],374:[function(require,module,exports){
+},{"../util/ast-utils":405}],377:[function(require,module,exports){
 /**
  * @fileoverview Rule to enforce spacing around colons of switch statements.
  * @author Toru Nagashima
@@ -104895,7 +104576,7 @@ module.exports = {
 // Requirements
 //------------------------------------------------------------------------------
 
-var astUtils = require("../ast-utils");
+var astUtils = require("../util/ast-utils");
 
 //------------------------------------------------------------------------------
 // Rule Definition
@@ -105013,7 +104694,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":112}],375:[function(require,module,exports){
+},{"../util/ast-utils":405}],378:[function(require,module,exports){
 /**
  * @fileoverview Rule to enforce description with the `Symbol` object
  * @author Jarek Rencz
@@ -105025,7 +104706,7 @@ module.exports = {
 // Requirements
 //------------------------------------------------------------------------------
 
-var astUtils = require("../ast-utils");
+var astUtils = require("../util/ast-utils");
 
 //------------------------------------------------------------------------------
 // Rule Definition
@@ -105081,7 +104762,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":112}],376:[function(require,module,exports){
+},{"../util/ast-utils":405}],379:[function(require,module,exports){
 /**
  * @fileoverview Rule to enforce spacing around embedded expressions of template strings
  * @author Toru Nagashima
@@ -105093,7 +104774,7 @@ module.exports = {
 // Requirements
 //------------------------------------------------------------------------------
 
-var astUtils = require("../ast-utils");
+var astUtils = require("../util/ast-utils");
 
 //------------------------------------------------------------------------------
 // Helpers
@@ -105189,7 +104870,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":112}],377:[function(require,module,exports){
+},{"../util/ast-utils":405}],380:[function(require,module,exports){
 /**
  * @fileoverview Rule to check spacing between template tags and their literals
  * @author Jonathan Wilsson
@@ -105268,7 +104949,7 @@ module.exports = {
     }
 };
 
-},{}],378:[function(require,module,exports){
+},{}],381:[function(require,module,exports){
 /**
  * @fileoverview Require or disallow Unicode BOM
  * @author Andrew Johnston <https://github.com/ehjay>
@@ -105334,7 +105015,7 @@ module.exports = {
     }
 };
 
-},{}],379:[function(require,module,exports){
+},{}],382:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag comparisons to the value NaN
  * @author James Allardice
@@ -105370,7 +105051,7 @@ module.exports = {
     }
 };
 
-},{}],380:[function(require,module,exports){
+},{}],383:[function(require,module,exports){
 /**
  * @fileoverview Validates JSDoc comments are syntactically correct
  * @author Nicholas C. Zakas
@@ -105848,7 +105529,7 @@ module.exports = {
     }
 };
 
-},{"doctrine":55}],381:[function(require,module,exports){
+},{"doctrine":55}],384:[function(require,module,exports){
 /**
  * @fileoverview Ensures that the results of typeof are compared against a valid string
  * @author Ian Christian Myers
@@ -105923,7 +105604,7 @@ module.exports = {
     }
 };
 
-},{}],382:[function(require,module,exports){
+},{}],385:[function(require,module,exports){
 /**
  * @fileoverview Rule to enforce var declarations are only at the top of a function.
  * @author Danny Fritz
@@ -106053,7 +105734,7 @@ module.exports = {
     }
 };
 
-},{}],383:[function(require,module,exports){
+},{}],386:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag when IIFE is not wrapped in parens
  * @author Ilya Volodin
@@ -106065,7 +105746,7 @@ module.exports = {
 // Requirements
 //------------------------------------------------------------------------------
 
-var astUtils = require("../ast-utils");
+var astUtils = require("../util/ast-utils");
 
 //------------------------------------------------------------------------------
 // Rule Definition
@@ -106192,7 +105873,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":112}],384:[function(require,module,exports){
+},{"../util/ast-utils":405}],387:[function(require,module,exports){
 /**
  * @fileoverview Rule to flag when regex literals are not wrapped in parens
  * @author Matt DuVall <http://www.mattduvall.com>
@@ -106250,7 +105931,7 @@ module.exports = {
     }
 };
 
-},{}],385:[function(require,module,exports){
+},{}],388:[function(require,module,exports){
 /**
  * @fileoverview Rule to check the spacing around the * in yield* expressions.
  * @author Bryan Smith
@@ -106364,7 +106045,7 @@ module.exports = {
     }
 };
 
-},{}],386:[function(require,module,exports){
+},{}],389:[function(require,module,exports){
 /**
  * @fileoverview Rule to require or disallow yoda comparisons
  * @author Nicholas C. Zakas
@@ -106375,7 +106056,7 @@ module.exports = {
 // Requirements
 //--------------------------------------------------------------------------
 
-var astUtils = require("../ast-utils");
+var astUtils = require("../util/ast-utils");
 
 //--------------------------------------------------------------------------
 // Helpers
@@ -106650,7 +106331,7 @@ module.exports = {
     }
 };
 
-},{"../ast-utils":112}],387:[function(require,module,exports){
+},{"../util/ast-utils":405}],390:[function(require,module,exports){
 /**
  * @fileoverview Define the cursor which iterates tokens and comments in reverse.
  * @author Toru Nagashima
@@ -106729,7 +106410,7 @@ module.exports = function (_Cursor) {
     return BackwardTokenCommentCursor;
 }(Cursor);
 
-},{"./cursor":389,"./utils":399}],388:[function(require,module,exports){
+},{"./cursor":392,"./utils":402}],391:[function(require,module,exports){
 /**
  * @fileoverview Define the cursor which iterates tokens only in reverse.
  * @author Toru Nagashima
@@ -106812,7 +106493,7 @@ module.exports = function (_Cursor) {
     return BackwardTokenCursor;
 }(Cursor);
 
-},{"./cursor":389,"./utils":399}],389:[function(require,module,exports){
+},{"./cursor":392,"./utils":402}],392:[function(require,module,exports){
 /**
  * @fileoverview Define the abstract class about cursors which iterate tokens.
  * @author Toru Nagashima
@@ -106911,7 +106592,7 @@ module.exports = function () {
   return Cursor;
 }();
 
-},{}],390:[function(require,module,exports){
+},{}],393:[function(require,module,exports){
 /**
  * @fileoverview Define 2 token factories; forward and backward.
  * @author Toru Nagashima
@@ -107022,7 +106703,7 @@ var CursorFactory = function () {
 exports.forward = new CursorFactory(ForwardTokenCursor, ForwardTokenCommentCursor);
 exports.backward = new CursorFactory(BackwardTokenCursor, BackwardTokenCommentCursor);
 
-},{"./backward-token-comment-cursor":387,"./backward-token-cursor":388,"./filter-cursor":392,"./forward-token-comment-cursor":393,"./forward-token-cursor":394,"./limit-cursor":396,"./skip-cursor":398}],391:[function(require,module,exports){
+},{"./backward-token-comment-cursor":390,"./backward-token-cursor":391,"./filter-cursor":395,"./forward-token-comment-cursor":396,"./forward-token-cursor":397,"./limit-cursor":399,"./skip-cursor":401}],394:[function(require,module,exports){
 /**
  * @fileoverview Define the abstract class about cursors which manipulate another cursor.
  * @author Toru Nagashima
@@ -107083,7 +106764,7 @@ module.exports = function (_Cursor) {
   return DecorativeCursor;
 }(Cursor);
 
-},{"./cursor":389}],392:[function(require,module,exports){
+},{"./cursor":392}],395:[function(require,module,exports){
 /**
  * @fileoverview Define the cursor which ignores specified tokens.
  * @author Toru Nagashima
@@ -107150,7 +106831,7 @@ module.exports = function (_DecorativeCursor) {
     return FilterCursor;
 }(DecorativeCursor);
 
-},{"./decorative-cursor":391}],393:[function(require,module,exports){
+},{"./decorative-cursor":394}],396:[function(require,module,exports){
 /**
  * @fileoverview Define the cursor which iterates tokens and comments.
  * @author Toru Nagashima
@@ -107229,7 +106910,7 @@ module.exports = function (_Cursor) {
     return ForwardTokenCommentCursor;
 }(Cursor);
 
-},{"./cursor":389,"./utils":399}],394:[function(require,module,exports){
+},{"./cursor":392,"./utils":402}],397:[function(require,module,exports){
 /**
  * @fileoverview Define the cursor which iterates tokens only.
  * @author Toru Nagashima
@@ -107320,7 +107001,7 @@ module.exports = function (_Cursor) {
     return ForwardTokenCursor;
 }(Cursor);
 
-},{"./cursor":389,"./utils":399}],395:[function(require,module,exports){
+},{"./cursor":392,"./utils":402}],398:[function(require,module,exports){
 /**
  * @fileoverview Object to handle access and retrieval of tokens.
  * @author Brandon Mills
@@ -107340,7 +107021,7 @@ var cursors = require("./cursors");
 var ForwardTokenCursor = require("./forward-token-cursor");
 var PaddedTokenCursor = require("./padded-token-cursor");
 var utils = require("./utils");
-var astUtils = require("../ast-utils");
+var astUtils = require("../util/ast-utils");
 
 //------------------------------------------------------------------------------
 // Helpers
@@ -107890,7 +107571,7 @@ module.exports = function () {
     return TokenStore;
 }();
 
-},{"../ast-utils":112,"./cursors":390,"./forward-token-cursor":394,"./padded-token-cursor":397,"./utils":399,"assert":46}],396:[function(require,module,exports){
+},{"../util/ast-utils":405,"./cursors":393,"./forward-token-cursor":397,"./padded-token-cursor":400,"./utils":402,"assert":46}],399:[function(require,module,exports){
 /**
  * @fileoverview Define the cursor which limits the number of tokens.
  * @author Toru Nagashima
@@ -107954,7 +107635,7 @@ module.exports = function (_DecorativeCursor) {
     return LimitCursor;
 }(DecorativeCursor);
 
-},{"./decorative-cursor":391}],397:[function(require,module,exports){
+},{"./decorative-cursor":394}],400:[function(require,module,exports){
 /**
  * @fileoverview Define the cursor which iterates tokens only, with inflated range.
  * @author Toru Nagashima
@@ -108007,7 +107688,7 @@ module.exports = function (_ForwardTokenCursor) {
   return PaddedTokenCursor;
 }(ForwardTokenCursor);
 
-},{"./forward-token-cursor":394}],398:[function(require,module,exports){
+},{"./forward-token-cursor":397}],401:[function(require,module,exports){
 /**
  * @fileoverview Define the cursor which ignores the first few tokens.
  * @author Toru Nagashima
@@ -108073,7 +107754,7 @@ module.exports = function (_DecorativeCursor) {
     return SkipCursor;
 }(DecorativeCursor);
 
-},{"./decorative-cursor":391}],399:[function(require,module,exports){
+},{"./decorative-cursor":394}],402:[function(require,module,exports){
 /**
  * @fileoverview Define utilify functions for token store.
  * @author Toru Nagashima
@@ -108175,7 +107856,7 @@ exports.getLastIndex = function getLastIndex(tokens, indexMap, endLoc) {
     return tokens.length - 1;
 };
 
-},{"lodash":92}],400:[function(require,module,exports){
+},{"lodash":92}],403:[function(require,module,exports){
 /**
  * @fileoverview The instance of Ajv validator.
  * @author Evgeny Poberezkin
@@ -108207,7 +107888,7 @@ ajv._opts.defaultMeta = metaSchema.id;
 
 module.exports = ajv;
 
-},{"ajv":4,"ajv/lib/refs/json-schema-draft-04.json":44}],401:[function(require,module,exports){
+},{"ajv":4,"ajv/lib/refs/json-schema-draft-04.json":44}],404:[function(require,module,exports){
 /**
  * @fileoverview A module that filters reported problems based on `eslint-disable` and `eslint-enable` comments
  * @author Teddy Katz
@@ -108376,7 +108057,1309 @@ module.exports = function (options) {
     return options.reportUnusedDisableDirectives ? lineDirectivesResult.problems.concat(blockDirectivesResult.unusedDisableDirectives).concat(lineDirectivesResult.unusedDisableDirectives).sort(compareLocations) : lineDirectivesResult.problems;
 };
 
-},{"lodash":92}],402:[function(require,module,exports){
+},{"lodash":92}],405:[function(require,module,exports){
+/**
+ * @fileoverview Common utils for AST.
+ * @author Gyandeep Singh
+ */
+
+"use strict";
+
+//------------------------------------------------------------------------------
+// Requirements
+//------------------------------------------------------------------------------
+
+var esutils = require("esutils");
+var espree = require("espree");
+
+//------------------------------------------------------------------------------
+// Helpers
+//------------------------------------------------------------------------------
+
+var anyFunctionPattern = /^(?:Function(?:Declaration|Expression)|ArrowFunctionExpression)$/;
+var anyLoopPattern = /^(?:DoWhile|For|ForIn|ForOf|While)Statement$/;
+var arrayOrTypedArrayPattern = /Array$/;
+var arrayMethodPattern = /^(?:every|filter|find|findIndex|forEach|map|some)$/;
+var bindOrCallOrApplyPattern = /^(?:bind|call|apply)$/;
+var breakableTypePattern = /^(?:(?:Do)?While|For(?:In|Of)?|Switch)Statement$/;
+var thisTagPattern = /^[\s*]*@this/m;
+
+var COMMENTS_IGNORE_PATTERN = /^\s*(?:eslint|jshint\s+|jslint\s+|istanbul\s+|globals?\s+|exported\s+|jscs)/;
+var LINEBREAKS = new Set(["\r\n", "\r", "\n", "\u2028", "\u2029"]);
+var LINEBREAK_MATCHER = /\r\n|[\r\n\u2028\u2029]/;
+var SHEBANG_MATCHER = /^#!([^\r\n]+)/;
+
+// A set of node types that can contain a list of statements
+var STATEMENT_LIST_PARENTS = new Set(["Program", "BlockStatement", "SwitchCase"]);
+
+/**
+ * Checks reference if is non initializer and writable.
+ * @param {Reference} reference - A reference to check.
+ * @param {int} index - The index of the reference in the references.
+ * @param {Reference[]} references - The array that the reference belongs to.
+ * @returns {boolean} Success/Failure
+ * @private
+ */
+function isModifyingReference(reference, index, references) {
+    var identifier = reference.identifier;
+
+    /*
+     * Destructuring assignments can have multiple default value, so
+     * possibly there are multiple writeable references for the same
+     * identifier.
+     */
+    var modifyingDifferentIdentifier = index === 0 || references[index - 1].identifier !== identifier;
+
+    return identifier && reference.init === false && reference.isWrite() && modifyingDifferentIdentifier;
+}
+
+/**
+ * Checks whether the given string starts with uppercase or not.
+ *
+ * @param {string} s - The string to check.
+ * @returns {boolean} `true` if the string starts with uppercase.
+ */
+function startsWithUpperCase(s) {
+    return s[0] !== s[0].toLocaleLowerCase();
+}
+
+/**
+ * Checks whether or not a node is a constructor.
+ * @param {ASTNode} node - A function node to check.
+ * @returns {boolean} Wehether or not a node is a constructor.
+ */
+function isES5Constructor(node) {
+    return node.id && startsWithUpperCase(node.id.name);
+}
+
+/**
+ * Finds a function node from ancestors of a node.
+ * @param {ASTNode} node - A start node to find.
+ * @returns {Node|null} A found function node.
+ */
+function getUpperFunction(node) {
+    for (var currentNode = node; currentNode; currentNode = currentNode.parent) {
+        if (anyFunctionPattern.test(currentNode.type)) {
+            return currentNode;
+        }
+    }
+    return null;
+}
+
+/**
+ * Checks whether a given node is a function node or not.
+ * The following types are function nodes:
+ *
+ * - ArrowFunctionExpression
+ * - FunctionDeclaration
+ * - FunctionExpression
+ *
+ * @param {ASTNode|null} node - A node to check.
+ * @returns {boolean} `true` if the node is a function node.
+ */
+function isFunction(node) {
+    return Boolean(node && anyFunctionPattern.test(node.type));
+}
+
+/**
+ * Checks whether a given node is a loop node or not.
+ * The following types are loop nodes:
+ *
+ * - DoWhileStatement
+ * - ForInStatement
+ * - ForOfStatement
+ * - ForStatement
+ * - WhileStatement
+ *
+ * @param {ASTNode|null} node - A node to check.
+ * @returns {boolean} `true` if the node is a loop node.
+ */
+function isLoop(node) {
+    return Boolean(node && anyLoopPattern.test(node.type));
+}
+
+/**
+ * Checks whether the given node is in a loop or not.
+ *
+ * @param {ASTNode} node - The node to check.
+ * @returns {boolean} `true` if the node is in a loop.
+ */
+function isInLoop(node) {
+    for (var currentNode = node; currentNode && !isFunction(currentNode); currentNode = currentNode.parent) {
+        if (isLoop(currentNode)) {
+            return true;
+        }
+    }
+
+    return false;
+}
+
+/**
+ * Checks whether or not a node is `null` or `undefined`.
+ * @param {ASTNode} node - A node to check.
+ * @returns {boolean} Whether or not the node is a `null` or `undefined`.
+ * @public
+ */
+function isNullOrUndefined(node) {
+    return module.exports.isNullLiteral(node) || node.type === "Identifier" && node.name === "undefined" || node.type === "UnaryExpression" && node.operator === "void";
+}
+
+/**
+ * Checks whether or not a node is callee.
+ * @param {ASTNode} node - A node to check.
+ * @returns {boolean} Whether or not the node is callee.
+ */
+function isCallee(node) {
+    return node.parent.type === "CallExpression" && node.parent.callee === node;
+}
+
+/**
+ * Checks whether or not a node is `Reflect.apply`.
+ * @param {ASTNode} node - A node to check.
+ * @returns {boolean} Whether or not the node is a `Reflect.apply`.
+ */
+function isReflectApply(node) {
+    return node.type === "MemberExpression" && node.object.type === "Identifier" && node.object.name === "Reflect" && node.property.type === "Identifier" && node.property.name === "apply" && node.computed === false;
+}
+
+/**
+ * Checks whether or not a node is `Array.from`.
+ * @param {ASTNode} node - A node to check.
+ * @returns {boolean} Whether or not the node is a `Array.from`.
+ */
+function isArrayFromMethod(node) {
+    return node.type === "MemberExpression" && node.object.type === "Identifier" && arrayOrTypedArrayPattern.test(node.object.name) && node.property.type === "Identifier" && node.property.name === "from" && node.computed === false;
+}
+
+/**
+ * Checks whether or not a node is a method which has `thisArg`.
+ * @param {ASTNode} node - A node to check.
+ * @returns {boolean} Whether or not the node is a method which has `thisArg`.
+ */
+function isMethodWhichHasThisArg(node) {
+    for (var currentNode = node; currentNode.type === "MemberExpression" && !currentNode.computed; currentNode = currentNode.property) {
+        if (currentNode.property.type === "Identifier") {
+            return arrayMethodPattern.test(currentNode.property.name);
+        }
+    }
+
+    return false;
+}
+
+/**
+ * Creates the negate function of the given function.
+ * @param {Function} f - The function to negate.
+ * @returns {Function} Negated function.
+ */
+function negate(f) {
+    return function (token) {
+        return !f(token);
+    };
+}
+
+/**
+ * Checks whether or not a node has a `@this` tag in its comments.
+ * @param {ASTNode} node - A node to check.
+ * @param {SourceCode} sourceCode - A SourceCode instance to get comments.
+ * @returns {boolean} Whether or not the node has a `@this` tag in its comments.
+ */
+function hasJSDocThisTag(node, sourceCode) {
+    var jsdocComment = sourceCode.getJSDocComment(node);
+
+    if (jsdocComment && thisTagPattern.test(jsdocComment.value)) {
+        return true;
+    }
+
+    // Checks `@this` in its leading comments for callbacks,
+    // because callbacks don't have its JSDoc comment.
+    // e.g.
+    //     sinon.test(/* @this sinon.Sandbox */function() { this.spy(); });
+    return sourceCode.getCommentsBefore(node).some(function (comment) {
+        return thisTagPattern.test(comment.value);
+    });
+}
+
+/**
+ * Determines if a node is surrounded by parentheses.
+ * @param {SourceCode} sourceCode The ESLint source code object
+ * @param {ASTNode} node The node to be checked.
+ * @returns {boolean} True if the node is parenthesised.
+ * @private
+ */
+function isParenthesised(sourceCode, node) {
+    var previousToken = sourceCode.getTokenBefore(node),
+        nextToken = sourceCode.getTokenAfter(node);
+
+    return Boolean(previousToken && nextToken) && previousToken.value === "(" && previousToken.range[1] <= node.range[0] && nextToken.value === ")" && nextToken.range[0] >= node.range[1];
+}
+
+/**
+ * Checks if the given token is an arrow token or not.
+ *
+ * @param {Token} token - The token to check.
+ * @returns {boolean} `true` if the token is an arrow token.
+ */
+function isArrowToken(token) {
+    return token.value === "=>" && token.type === "Punctuator";
+}
+
+/**
+ * Checks if the given token is a comma token or not.
+ *
+ * @param {Token} token - The token to check.
+ * @returns {boolean} `true` if the token is a comma token.
+ */
+function isCommaToken(token) {
+    return token.value === "," && token.type === "Punctuator";
+}
+
+/**
+ * Checks if the given token is a semicolon token or not.
+ *
+ * @param {Token} token - The token to check.
+ * @returns {boolean} `true` if the token is a semicolon token.
+ */
+function isSemicolonToken(token) {
+    return token.value === ";" && token.type === "Punctuator";
+}
+
+/**
+ * Checks if the given token is a colon token or not.
+ *
+ * @param {Token} token - The token to check.
+ * @returns {boolean} `true` if the token is a colon token.
+ */
+function isColonToken(token) {
+    return token.value === ":" && token.type === "Punctuator";
+}
+
+/**
+ * Checks if the given token is an opening parenthesis token or not.
+ *
+ * @param {Token} token - The token to check.
+ * @returns {boolean} `true` if the token is an opening parenthesis token.
+ */
+function isOpeningParenToken(token) {
+    return token.value === "(" && token.type === "Punctuator";
+}
+
+/**
+ * Checks if the given token is a closing parenthesis token or not.
+ *
+ * @param {Token} token - The token to check.
+ * @returns {boolean} `true` if the token is a closing parenthesis token.
+ */
+function isClosingParenToken(token) {
+    return token.value === ")" && token.type === "Punctuator";
+}
+
+/**
+ * Checks if the given token is an opening square bracket token or not.
+ *
+ * @param {Token} token - The token to check.
+ * @returns {boolean} `true` if the token is an opening square bracket token.
+ */
+function isOpeningBracketToken(token) {
+    return token.value === "[" && token.type === "Punctuator";
+}
+
+/**
+ * Checks if the given token is a closing square bracket token or not.
+ *
+ * @param {Token} token - The token to check.
+ * @returns {boolean} `true` if the token is a closing square bracket token.
+ */
+function isClosingBracketToken(token) {
+    return token.value === "]" && token.type === "Punctuator";
+}
+
+/**
+ * Checks if the given token is an opening brace token or not.
+ *
+ * @param {Token} token - The token to check.
+ * @returns {boolean} `true` if the token is an opening brace token.
+ */
+function isOpeningBraceToken(token) {
+    return token.value === "{" && token.type === "Punctuator";
+}
+
+/**
+ * Checks if the given token is a closing brace token or not.
+ *
+ * @param {Token} token - The token to check.
+ * @returns {boolean} `true` if the token is a closing brace token.
+ */
+function isClosingBraceToken(token) {
+    return token.value === "}" && token.type === "Punctuator";
+}
+
+/**
+ * Checks if the given token is a comment token or not.
+ *
+ * @param {Token} token - The token to check.
+ * @returns {boolean} `true` if the token is a comment token.
+ */
+function isCommentToken(token) {
+    return token.type === "Line" || token.type === "Block" || token.type === "Shebang";
+}
+
+/**
+ * Checks if the given token is a keyword token or not.
+ *
+ * @param {Token} token - The token to check.
+ * @returns {boolean} `true` if the token is a keyword token.
+ */
+function isKeywordToken(token) {
+    return token.type === "Keyword";
+}
+
+/**
+ * Gets the `(` token of the given function node.
+ *
+ * @param {ASTNode} node - The function node to get.
+ * @param {SourceCode} sourceCode - The source code object to get tokens.
+ * @returns {Token} `(` token.
+ */
+function getOpeningParenOfParams(node, sourceCode) {
+    return node.id ? sourceCode.getTokenAfter(node.id, isOpeningParenToken) : sourceCode.getFirstToken(node, isOpeningParenToken);
+}
+
+/**
+ * Creates a version of the LINEBREAK_MATCHER regex with the global flag.
+ * Global regexes are mutable, so this needs to be a function instead of a constant.
+ * @returns {RegExp} A global regular expression that matches line terminators
+ */
+function createGlobalLinebreakMatcher() {
+    return new RegExp(LINEBREAK_MATCHER.source, "g");
+}
+
+/**
+ * Checks whether or not the tokens of two given nodes are same.
+ * @param {ASTNode} left - A node 1 to compare.
+ * @param {ASTNode} right - A node 2 to compare.
+ * @param {SourceCode} sourceCode - The ESLint source code object.
+ * @returns {boolean} the source code for the given node.
+ */
+function equalTokens(left, right, sourceCode) {
+    var tokensL = sourceCode.getTokens(left);
+    var tokensR = sourceCode.getTokens(right);
+
+    if (tokensL.length !== tokensR.length) {
+        return false;
+    }
+    for (var i = 0; i < tokensL.length; ++i) {
+        if (tokensL[i].type !== tokensR[i].type || tokensL[i].value !== tokensR[i].value) {
+            return false;
+        }
+    }
+
+    return true;
+}
+
+//------------------------------------------------------------------------------
+// Public Interface
+//------------------------------------------------------------------------------
+
+module.exports = {
+    COMMENTS_IGNORE_PATTERN: COMMENTS_IGNORE_PATTERN,
+    LINEBREAKS: LINEBREAKS,
+    LINEBREAK_MATCHER: LINEBREAK_MATCHER,
+    SHEBANG_MATCHER: SHEBANG_MATCHER,
+    STATEMENT_LIST_PARENTS: STATEMENT_LIST_PARENTS,
+
+    /**
+     * Determines whether two adjacent tokens are on the same line.
+     * @param {Object} left - The left token object.
+     * @param {Object} right - The right token object.
+     * @returns {boolean} Whether or not the tokens are on the same line.
+     * @public
+     */
+    isTokenOnSameLine: function isTokenOnSameLine(left, right) {
+        return left.loc.end.line === right.loc.start.line;
+    },
+
+
+    isNullOrUndefined: isNullOrUndefined,
+    isCallee: isCallee,
+    isES5Constructor: isES5Constructor,
+    getUpperFunction: getUpperFunction,
+    isFunction: isFunction,
+    isLoop: isLoop,
+    isInLoop: isInLoop,
+    isArrayFromMethod: isArrayFromMethod,
+    isParenthesised: isParenthesised,
+    createGlobalLinebreakMatcher: createGlobalLinebreakMatcher,
+    equalTokens: equalTokens,
+
+    isArrowToken: isArrowToken,
+    isClosingBraceToken: isClosingBraceToken,
+    isClosingBracketToken: isClosingBracketToken,
+    isClosingParenToken: isClosingParenToken,
+    isColonToken: isColonToken,
+    isCommaToken: isCommaToken,
+    isCommentToken: isCommentToken,
+    isKeywordToken: isKeywordToken,
+    isNotClosingBraceToken: negate(isClosingBraceToken),
+    isNotClosingBracketToken: negate(isClosingBracketToken),
+    isNotClosingParenToken: negate(isClosingParenToken),
+    isNotColonToken: negate(isColonToken),
+    isNotCommaToken: negate(isCommaToken),
+    isNotOpeningBraceToken: negate(isOpeningBraceToken),
+    isNotOpeningBracketToken: negate(isOpeningBracketToken),
+    isNotOpeningParenToken: negate(isOpeningParenToken),
+    isNotSemicolonToken: negate(isSemicolonToken),
+    isOpeningBraceToken: isOpeningBraceToken,
+    isOpeningBracketToken: isOpeningBracketToken,
+    isOpeningParenToken: isOpeningParenToken,
+    isSemicolonToken: isSemicolonToken,
+
+    /**
+     * Checks whether or not a given node is a string literal.
+     * @param {ASTNode} node - A node to check.
+     * @returns {boolean} `true` if the node is a string literal.
+     */
+    isStringLiteral: function isStringLiteral(node) {
+        return node.type === "Literal" && typeof node.value === "string" || node.type === "TemplateLiteral";
+    },
+
+
+    /**
+     * Checks whether a given node is a breakable statement or not.
+     * The node is breakable if the node is one of the following type:
+     *
+     * - DoWhileStatement
+     * - ForInStatement
+     * - ForOfStatement
+     * - ForStatement
+     * - SwitchStatement
+     * - WhileStatement
+     *
+     * @param {ASTNode} node - A node to check.
+     * @returns {boolean} `true` if the node is breakable.
+     */
+    isBreakableStatement: function isBreakableStatement(node) {
+        return breakableTypePattern.test(node.type);
+    },
+
+
+    /**
+     * Gets the label if the parent node of a given node is a LabeledStatement.
+     *
+     * @param {ASTNode} node - A node to get.
+     * @returns {string|null} The label or `null`.
+     */
+    getLabel: function getLabel(node) {
+        if (node.parent.type === "LabeledStatement") {
+            return node.parent.label.name;
+        }
+        return null;
+    },
+
+
+    /**
+     * Gets references which are non initializer and writable.
+     * @param {Reference[]} references - An array of references.
+     * @returns {Reference[]} An array of only references which are non initializer and writable.
+     * @public
+     */
+    getModifyingReferences: function getModifyingReferences(references) {
+        return references.filter(isModifyingReference);
+    },
+
+
+    /**
+     * Validate that a string passed in is surrounded by the specified character
+     * @param  {string} val The text to check.
+     * @param  {string} character The character to see if it's surrounded by.
+     * @returns {boolean} True if the text is surrounded by the character, false if not.
+     * @private
+     */
+    isSurroundedBy: function isSurroundedBy(val, character) {
+        return val[0] === character && val[val.length - 1] === character;
+    },
+
+
+    /**
+     * Returns whether the provided node is an ESLint directive comment or not
+     * @param {Line|Block} node The comment token to be checked
+     * @returns {boolean} `true` if the node is an ESLint directive comment
+     */
+    isDirectiveComment: function isDirectiveComment(node) {
+        var comment = node.value.trim();
+
+        return node.type === "Line" && comment.indexOf("eslint-") === 0 || node.type === "Block" && (comment.indexOf("global ") === 0 || comment.indexOf("eslint ") === 0 || comment.indexOf("eslint-") === 0);
+    },
+
+
+    /**
+     * Gets the trailing statement of a given node.
+     *
+     *     if (code)
+     *         consequent;
+     *
+     * When taking this `IfStatement`, returns `consequent;` statement.
+     *
+     * @param {ASTNode} A node to get.
+     * @returns {ASTNode|null} The trailing statement's node.
+     */
+    getTrailingStatement: esutils.ast.trailingStatement,
+
+    /**
+     * Finds the variable by a given name in a given scope and its upper scopes.
+     *
+     * @param {eslint-scope.Scope} initScope - A scope to start find.
+     * @param {string} name - A variable name to find.
+     * @returns {eslint-scope.Variable|null} A found variable or `null`.
+     */
+    getVariableByName: function getVariableByName(initScope, name) {
+        var scope = initScope;
+
+        while (scope) {
+            var variable = scope.set.get(name);
+
+            if (variable) {
+                return variable;
+            }
+
+            scope = scope.upper;
+        }
+
+        return null;
+    },
+
+
+    /**
+     * Checks whether or not a given function node is the default `this` binding.
+     *
+     * First, this checks the node:
+     *
+     * - The function name does not start with uppercase (it's a constructor).
+     * - The function does not have a JSDoc comment that has a @this tag.
+     *
+     * Next, this checks the location of the node.
+     * If the location is below, this judges `this` is valid.
+     *
+     * - The location is not on an object literal.
+     * - The location is not assigned to a variable which starts with an uppercase letter.
+     * - The location is not on an ES2015 class.
+     * - Its `bind`/`call`/`apply` method is not called directly.
+     * - The function is not a callback of array methods (such as `.forEach()`) if `thisArg` is given.
+     *
+     * @param {ASTNode} node - A function node to check.
+     * @param {SourceCode} sourceCode - A SourceCode instance to get comments.
+     * @returns {boolean} The function node is the default `this` binding.
+     */
+    isDefaultThisBinding: function isDefaultThisBinding(node, sourceCode) {
+        if (isES5Constructor(node) || hasJSDocThisTag(node, sourceCode)) {
+            return false;
+        }
+        var isAnonymous = node.id === null;
+        var currentNode = node;
+
+        while (currentNode) {
+            var parent = currentNode.parent;
+
+            switch (parent.type) {
+
+                /*
+                 * Looks up the destination.
+                 * e.g., obj.foo = nativeFoo || function foo() { ... };
+                 */
+                case "LogicalExpression":
+                case "ConditionalExpression":
+                    currentNode = parent;
+                    break;
+
+                /*
+                 * If the upper function is IIFE, checks the destination of the return value.
+                 * e.g.
+                 *   obj.foo = (function() {
+                 *     // setup...
+                 *     return function foo() { ... };
+                 *   })();
+                 *   obj.foo = (() =>
+                 *     function foo() { ... }
+                 *   )();
+                 */
+                case "ReturnStatement":
+                    {
+                        var func = getUpperFunction(parent);
+
+                        if (func === null || !isCallee(func)) {
+                            return true;
+                        }
+                        currentNode = func.parent;
+                        break;
+                    }
+                case "ArrowFunctionExpression":
+                    if (currentNode !== parent.body || !isCallee(parent)) {
+                        return true;
+                    }
+                    currentNode = parent.parent;
+                    break;
+
+                /*
+                 * e.g.
+                 *   var obj = { foo() { ... } };
+                 *   var obj = { foo: function() { ... } };
+                 *   class A { constructor() { ... } }
+                 *   class A { foo() { ... } }
+                 *   class A { get foo() { ... } }
+                 *   class A { set foo() { ... } }
+                 *   class A { static foo() { ... } }
+                 */
+                case "Property":
+                case "MethodDefinition":
+                    return parent.value !== currentNode;
+
+                /*
+                 * e.g.
+                 *   obj.foo = function foo() { ... };
+                 *   Foo = function() { ... };
+                 *   [obj.foo = function foo() { ... }] = a;
+                 *   [Foo = function() { ... }] = a;
+                 */
+                case "AssignmentExpression":
+                case "AssignmentPattern":
+                    if (parent.left.type === "MemberExpression") {
+                        return false;
+                    }
+                    if (isAnonymous && parent.left.type === "Identifier" && startsWithUpperCase(parent.left.name)) {
+                        return false;
+                    }
+                    return true;
+
+                /*
+                 * e.g.
+                 *   var Foo = function() { ... };
+                 */
+                case "VariableDeclarator":
+                    return !(isAnonymous && parent.init === currentNode && parent.id.type === "Identifier" && startsWithUpperCase(parent.id.name));
+
+                /*
+                 * e.g.
+                 *   var foo = function foo() { ... }.bind(obj);
+                 *   (function foo() { ... }).call(obj);
+                 *   (function foo() { ... }).apply(obj, []);
+                 */
+                case "MemberExpression":
+                    return parent.object !== currentNode || parent.property.type !== "Identifier" || !bindOrCallOrApplyPattern.test(parent.property.name) || !isCallee(parent) || parent.parent.arguments.length === 0 || isNullOrUndefined(parent.parent.arguments[0]);
+
+                /*
+                 * e.g.
+                 *   Reflect.apply(function() {}, obj, []);
+                 *   Array.from([], function() {}, obj);
+                 *   list.forEach(function() {}, obj);
+                 */
+                case "CallExpression":
+                    if (isReflectApply(parent.callee)) {
+                        return parent.arguments.length !== 3 || parent.arguments[0] !== currentNode || isNullOrUndefined(parent.arguments[1]);
+                    }
+                    if (isArrayFromMethod(parent.callee)) {
+                        return parent.arguments.length !== 3 || parent.arguments[1] !== currentNode || isNullOrUndefined(parent.arguments[2]);
+                    }
+                    if (isMethodWhichHasThisArg(parent.callee)) {
+                        return parent.arguments.length !== 2 || parent.arguments[0] !== currentNode || isNullOrUndefined(parent.arguments[1]);
+                    }
+                    return true;
+
+                // Otherwise `this` is default.
+                default:
+                    return true;
+            }
+        }
+
+        /* istanbul ignore next */
+        return true;
+    },
+
+
+    /**
+     * Get the precedence level based on the node type
+     * @param {ASTNode} node node to evaluate
+     * @returns {int} precedence level
+     * @private
+     */
+    getPrecedence: function getPrecedence(node) {
+        switch (node.type) {
+            case "SequenceExpression":
+                return 0;
+
+            case "AssignmentExpression":
+            case "ArrowFunctionExpression":
+            case "YieldExpression":
+                return 1;
+
+            case "ConditionalExpression":
+                return 3;
+
+            case "LogicalExpression":
+                switch (node.operator) {
+                    case "||":
+                        return 4;
+                    case "&&":
+                        return 5;
+
+                    // no default
+                }
+
+            /* falls through */
+
+            case "BinaryExpression":
+
+                switch (node.operator) {
+                    case "|":
+                        return 6;
+                    case "^":
+                        return 7;
+                    case "&":
+                        return 8;
+                    case "==":
+                    case "!=":
+                    case "===":
+                    case "!==":
+                        return 9;
+                    case "<":
+                    case "<=":
+                    case ">":
+                    case ">=":
+                    case "in":
+                    case "instanceof":
+                        return 10;
+                    case "<<":
+                    case ">>":
+                    case ">>>":
+                        return 11;
+                    case "+":
+                    case "-":
+                        return 12;
+                    case "*":
+                    case "/":
+                    case "%":
+                        return 13;
+                    case "**":
+                        return 15;
+
+                    // no default
+                }
+
+            /* falls through */
+
+            case "UnaryExpression":
+            case "AwaitExpression":
+                return 16;
+
+            case "UpdateExpression":
+                return 17;
+
+            case "CallExpression":
+                return 18;
+
+            case "NewExpression":
+                return 19;
+
+            default:
+                return 20;
+        }
+    },
+
+
+    /**
+     * Checks whether the given node is an empty block node or not.
+     *
+     * @param {ASTNode|null} node - The node to check.
+     * @returns {boolean} `true` if the node is an empty block.
+     */
+    isEmptyBlock: function isEmptyBlock(node) {
+        return Boolean(node && node.type === "BlockStatement" && node.body.length === 0);
+    },
+
+
+    /**
+     * Checks whether the given node is an empty function node or not.
+     *
+     * @param {ASTNode|null} node - The node to check.
+     * @returns {boolean} `true` if the node is an empty function.
+     */
+    isEmptyFunction: function isEmptyFunction(node) {
+        return isFunction(node) && module.exports.isEmptyBlock(node.body);
+    },
+
+
+    /**
+     * Gets the property name of a given node.
+     * The node can be a MemberExpression, a Property, or a MethodDefinition.
+     *
+     * If the name is dynamic, this returns `null`.
+     *
+     * For examples:
+     *
+     *     a.b           // => "b"
+     *     a["b"]        // => "b"
+     *     a['b']        // => "b"
+     *     a[`b`]        // => "b"
+     *     a[100]        // => "100"
+     *     a[b]          // => null
+     *     a["a" + "b"]  // => null
+     *     a[tag`b`]     // => null
+     *     a[`${b}`]     // => null
+     *
+     *     let a = {b: 1}            // => "b"
+     *     let a = {["b"]: 1}        // => "b"
+     *     let a = {['b']: 1}        // => "b"
+     *     let a = {[`b`]: 1}        // => "b"
+     *     let a = {[100]: 1}        // => "100"
+     *     let a = {[b]: 1}          // => null
+     *     let a = {["a" + "b"]: 1}  // => null
+     *     let a = {[tag`b`]: 1}     // => null
+     *     let a = {[`${b}`]: 1}     // => null
+     *
+     * @param {ASTNode} node - The node to get.
+     * @returns {string|null} The property name if static. Otherwise, null.
+     */
+    getStaticPropertyName: function getStaticPropertyName(node) {
+        var prop = void 0;
+
+        switch (node && node.type) {
+            case "Property":
+            case "MethodDefinition":
+                prop = node.key;
+                break;
+
+            case "MemberExpression":
+                prop = node.property;
+                break;
+
+            // no default
+        }
+
+        switch (prop && prop.type) {
+            case "Literal":
+                return String(prop.value);
+
+            case "TemplateLiteral":
+                if (prop.expressions.length === 0 && prop.quasis.length === 1) {
+                    return prop.quasis[0].value.cooked;
+                }
+                break;
+
+            case "Identifier":
+                if (!node.computed) {
+                    return prop.name;
+                }
+                break;
+
+            // no default
+        }
+
+        return null;
+    },
+
+
+    /**
+     * Get directives from directive prologue of a Program or Function node.
+     * @param {ASTNode} node - The node to check.
+     * @returns {ASTNode[]} The directives found in the directive prologue.
+     */
+    getDirectivePrologue: function getDirectivePrologue(node) {
+        var directives = [];
+
+        // Directive prologues only occur at the top of files or functions.
+        if (node.type === "Program" || node.type === "FunctionDeclaration" || node.type === "FunctionExpression" ||
+
+        /*
+         * Do not check arrow functions with implicit return.
+         * `() => "use strict";` returns the string `"use strict"`.
+         */
+        node.type === "ArrowFunctionExpression" && node.body.type === "BlockStatement") {
+            var statements = node.type === "Program" ? node.body : node.body.body;
+
+            var _iteratorNormalCompletion = true;
+            var _didIteratorError = false;
+            var _iteratorError = undefined;
+
+            try {
+                for (var _iterator = statements[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+                    var statement = _step.value;
+
+                    if (statement.type === "ExpressionStatement" && statement.expression.type === "Literal") {
+                        directives.push(statement);
+                    } else {
+                        break;
+                    }
+                }
+            } catch (err) {
+                _didIteratorError = true;
+                _iteratorError = err;
+            } finally {
+                try {
+                    if (!_iteratorNormalCompletion && _iterator.return) {
+                        _iterator.return();
+                    }
+                } finally {
+                    if (_didIteratorError) {
+                        throw _iteratorError;
+                    }
+                }
+            }
+        }
+
+        return directives;
+    },
+
+
+    /**
+     * Determines whether this node is a decimal integer literal. If a node is a decimal integer literal, a dot added
+     * after the node will be parsed as a decimal point, rather than a property-access dot.
+     * @param {ASTNode} node - The node to check.
+     * @returns {boolean} `true` if this node is a decimal integer.
+     * @example
+     *
+     * 5       // true
+     * 5.      // false
+     * 5.0     // false
+     * 05      // false
+     * 0x5     // false
+     * 0b101   // false
+     * 0o5     // false
+     * 5e0     // false
+     * '5'     // false
+     */
+    isDecimalInteger: function isDecimalInteger(node) {
+        return node.type === "Literal" && typeof node.value === "number" && /^(0|[1-9]\d*)$/.test(node.raw);
+    },
+
+
+    /**
+     * Gets the name and kind of the given function node.
+     *
+     * - `function foo() {}`  .................... `function 'foo'`
+     * - `(function foo() {})`  .................. `function 'foo'`
+     * - `(function() {})`  ...................... `function`
+     * - `function* foo() {}`  ................... `generator function 'foo'`
+     * - `(function* foo() {})`  ................. `generator function 'foo'`
+     * - `(function*() {})`  ..................... `generator function`
+     * - `() => {}`  ............................. `arrow function`
+     * - `async () => {}`  ....................... `async arrow function`
+     * - `({ foo: function foo() {} })`  ......... `method 'foo'`
+     * - `({ foo: function() {} })`  ............. `method 'foo'`
+     * - `({ ['foo']: function() {} })`  ......... `method 'foo'`
+     * - `({ [foo]: function() {} })`  ........... `method`
+     * - `({ foo() {} })`  ....................... `method 'foo'`
+     * - `({ foo: function* foo() {} })`  ........ `generator method 'foo'`
+     * - `({ foo: function*() {} })`  ............ `generator method 'foo'`
+     * - `({ ['foo']: function*() {} })`  ........ `generator method 'foo'`
+     * - `({ [foo]: function*() {} })`  .......... `generator method`
+     * - `({ *foo() {} })`  ...................... `generator method 'foo'`
+     * - `({ foo: async function foo() {} })`  ... `async method 'foo'`
+     * - `({ foo: async function() {} })`  ....... `async method 'foo'`
+     * - `({ ['foo']: async function() {} })`  ... `async method 'foo'`
+     * - `({ [foo]: async function() {} })`  ..... `async method`
+     * - `({ async foo() {} })`  ................. `async method 'foo'`
+     * - `({ get foo() {} })`  ................... `getter 'foo'`
+     * - `({ set foo(a) {} })`  .................. `setter 'foo'`
+     * - `class A { constructor() {} }`  ......... `constructor`
+     * - `class A { foo() {} }`  ................. `method 'foo'`
+     * - `class A { *foo() {} }`  ................ `generator method 'foo'`
+     * - `class A { async foo() {} }`  ........... `async method 'foo'`
+     * - `class A { ['foo']() {} }`  ............. `method 'foo'`
+     * - `class A { *['foo']() {} }`  ............ `generator method 'foo'`
+     * - `class A { async ['foo']() {} }`  ....... `async method 'foo'`
+     * - `class A { [foo]() {} }`  ............... `method`
+     * - `class A { *[foo]() {} }`  .............. `generator method`
+     * - `class A { async [foo]() {} }`  ......... `async method`
+     * - `class A { get foo() {} }`  ............. `getter 'foo'`
+     * - `class A { set foo(a) {} }`  ............ `setter 'foo'`
+     * - `class A { static foo() {} }`  .......... `static method 'foo'`
+     * - `class A { static *foo() {} }`  ......... `static generator method 'foo'`
+     * - `class A { static async foo() {} }`  .... `static async method 'foo'`
+     * - `class A { static get foo() {} }`  ...... `static getter 'foo'`
+     * - `class A { static set foo(a) {} }`  ..... `static setter 'foo'`
+     *
+     * @param {ASTNode} node - The function node to get.
+     * @returns {string} The name and kind of the function node.
+     */
+    getFunctionNameWithKind: function getFunctionNameWithKind(node) {
+        var parent = node.parent;
+        var tokens = [];
+
+        if (parent.type === "MethodDefinition" && parent.static) {
+            tokens.push("static");
+        }
+        if (node.async) {
+            tokens.push("async");
+        }
+        if (node.generator) {
+            tokens.push("generator");
+        }
+
+        if (node.type === "ArrowFunctionExpression") {
+            tokens.push("arrow", "function");
+        } else if (parent.type === "Property" || parent.type === "MethodDefinition") {
+            if (parent.kind === "constructor") {
+                return "constructor";
+            }
+            if (parent.kind === "get") {
+                tokens.push("getter");
+            } else if (parent.kind === "set") {
+                tokens.push("setter");
+            } else {
+                tokens.push("method");
+            }
+        } else {
+            tokens.push("function");
+        }
+
+        if (node.id) {
+            tokens.push("'" + node.id.name + "'");
+        } else {
+            var name = module.exports.getStaticPropertyName(parent);
+
+            if (name) {
+                tokens.push("'" + name + "'");
+            }
+        }
+
+        return tokens.join(" ");
+    },
+
+
+    /**
+     * Gets the location of the given function node for reporting.
+     *
+     * - `function foo() {}`
+     *    ^^^^^^^^^^^^
+     * - `(function foo() {})`
+     *     ^^^^^^^^^^^^
+     * - `(function() {})`
+     *     ^^^^^^^^
+     * - `function* foo() {}`
+     *    ^^^^^^^^^^^^^
+     * - `(function* foo() {})`
+     *     ^^^^^^^^^^^^^
+     * - `(function*() {})`
+     *     ^^^^^^^^^
+     * - `() => {}`
+     *       ^^
+     * - `async () => {}`
+     *             ^^
+     * - `({ foo: function foo() {} })`
+     *       ^^^^^^^^^^^^^^^^^
+     * - `({ foo: function() {} })`
+     *       ^^^^^^^^^^^^^
+     * - `({ ['foo']: function() {} })`
+     *       ^^^^^^^^^^^^^^^^^
+     * - `({ [foo]: function() {} })`
+     *       ^^^^^^^^^^^^^^^
+     * - `({ foo() {} })`
+     *       ^^^
+     * - `({ foo: function* foo() {} })`
+     *       ^^^^^^^^^^^^^^^^^^
+     * - `({ foo: function*() {} })`
+     *       ^^^^^^^^^^^^^^
+     * - `({ ['foo']: function*() {} })`
+     *       ^^^^^^^^^^^^^^^^^^
+     * - `({ [foo]: function*() {} })`
+     *       ^^^^^^^^^^^^^^^^
+     * - `({ *foo() {} })`
+     *       ^^^^
+     * - `({ foo: async function foo() {} })`
+     *       ^^^^^^^^^^^^^^^^^^^^^^^
+     * - `({ foo: async function() {} })`
+     *       ^^^^^^^^^^^^^^^^^^^
+     * - `({ ['foo']: async function() {} })`
+     *       ^^^^^^^^^^^^^^^^^^^^^^^
+     * - `({ [foo]: async function() {} })`
+     *       ^^^^^^^^^^^^^^^^^^^^^
+     * - `({ async foo() {} })`
+     *       ^^^^^^^^^
+     * - `({ get foo() {} })`
+     *       ^^^^^^^
+     * - `({ set foo(a) {} })`
+     *       ^^^^^^^
+     * - `class A { constructor() {} }`
+     *              ^^^^^^^^^^^
+     * - `class A { foo() {} }`
+     *              ^^^
+     * - `class A { *foo() {} }`
+     *              ^^^^
+     * - `class A { async foo() {} }`
+     *              ^^^^^^^^^
+     * - `class A { ['foo']() {} }`
+     *              ^^^^^^^
+     * - `class A { *['foo']() {} }`
+     *              ^^^^^^^^
+     * - `class A { async ['foo']() {} }`
+     *              ^^^^^^^^^^^^^
+     * - `class A { [foo]() {} }`
+     *              ^^^^^
+     * - `class A { *[foo]() {} }`
+     *              ^^^^^^
+     * - `class A { async [foo]() {} }`
+     *              ^^^^^^^^^^^
+     * - `class A { get foo() {} }`
+     *              ^^^^^^^
+     * - `class A { set foo(a) {} }`
+     *              ^^^^^^^
+     * - `class A { static foo() {} }`
+     *              ^^^^^^^^^^
+     * - `class A { static *foo() {} }`
+     *              ^^^^^^^^^^^
+     * - `class A { static async foo() {} }`
+     *              ^^^^^^^^^^^^^^^^
+     * - `class A { static get foo() {} }`
+     *              ^^^^^^^^^^^^^^
+     * - `class A { static set foo(a) {} }`
+     *              ^^^^^^^^^^^^^^
+     *
+     * @param {ASTNode} node - The function node to get.
+     * @param {SourceCode} sourceCode - The source code object to get tokens.
+     * @returns {string} The location of the function node for reporting.
+     */
+    getFunctionHeadLoc: function getFunctionHeadLoc(node, sourceCode) {
+        var parent = node.parent;
+        var start = null;
+        var end = null;
+
+        if (node.type === "ArrowFunctionExpression") {
+            var arrowToken = sourceCode.getTokenBefore(node.body, isArrowToken);
+
+            start = arrowToken.loc.start;
+            end = arrowToken.loc.end;
+        } else if (parent.type === "Property" || parent.type === "MethodDefinition") {
+            start = parent.loc.start;
+            end = getOpeningParenOfParams(node, sourceCode).loc.start;
+        } else {
+            start = node.loc.start;
+            end = getOpeningParenOfParams(node, sourceCode).loc.start;
+        }
+
+        return {
+            start: Object.assign({}, start),
+            end: Object.assign({}, end)
+        };
+    },
+
+
+    /**
+     * Gets the parenthesized text of a node. This is similar to sourceCode.getText(node), but it also includes any parentheses
+     * surrounding the node.
+     * @param {SourceCode} sourceCode The source code object
+     * @param {ASTNode} node An expression node
+     * @returns {string} The text representing the node, with all surrounding parentheses included
+     */
+    getParenthesisedText: function getParenthesisedText(sourceCode, node) {
+        var leftToken = sourceCode.getFirstToken(node);
+        var rightToken = sourceCode.getLastToken(node);
+
+        while (sourceCode.getTokenBefore(leftToken) && sourceCode.getTokenBefore(leftToken).type === "Punctuator" && sourceCode.getTokenBefore(leftToken).value === "(" && sourceCode.getTokenAfter(rightToken) && sourceCode.getTokenAfter(rightToken).type === "Punctuator" && sourceCode.getTokenAfter(rightToken).value === ")") {
+            leftToken = sourceCode.getTokenBefore(leftToken);
+            rightToken = sourceCode.getTokenAfter(rightToken);
+        }
+
+        return sourceCode.getText().slice(leftToken.range[0], rightToken.range[1]);
+    },
+
+
+    /*
+     * Determine if a node has a possiblity to be an Error object
+     * @param  {ASTNode} node  ASTNode to check
+     * @returns {boolean} True if there is a chance it contains an Error obj
+     */
+    couldBeError: function couldBeError(node) {
+        switch (node.type) {
+            case "Identifier":
+            case "CallExpression":
+            case "NewExpression":
+            case "MemberExpression":
+            case "TaggedTemplateExpression":
+            case "YieldExpression":
+            case "AwaitExpression":
+                return true; // possibly an error object.
+
+            case "AssignmentExpression":
+                return module.exports.couldBeError(node.right);
+
+            case "SequenceExpression":
+                {
+                    var exprs = node.expressions;
+
+                    return exprs.length !== 0 && module.exports.couldBeError(exprs[exprs.length - 1]);
+                }
+
+            case "LogicalExpression":
+                return module.exports.couldBeError(node.left) || module.exports.couldBeError(node.right);
+
+            case "ConditionalExpression":
+                return module.exports.couldBeError(node.consequent) || module.exports.couldBeError(node.alternate);
+
+            default:
+                return false;
+        }
+    },
+
+
+    /**
+     * Determines whether the given node is a `null` literal.
+     * @param {ASTNode} node The node to check
+     * @returns {boolean} `true` if the node is a `null` literal
+     */
+    isNullLiteral: function isNullLiteral(node) {
+
+        /*
+         * Checking `node.value === null` does not guarantee that a literal is a null literal.
+         * When parsing values that cannot be represented in the current environment (e.g. unicode
+         * regexes in Node 4), `node.value` is set to `null` because it wouldn't be possible to
+         * set `node.value` to a unicode regex. To make sure a literal is actually `null`, check
+         * `node.regex` instead. Also see: https://github.com/eslint/eslint/issues/8020
+         */
+        return node.type === "Literal" && node.value === null && !node.regex;
+    },
+
+
+    /**
+     * Determines whether two tokens can safely be placed next to each other without merging into a single token
+     * @param {Token|string} leftValue The left token. If this is a string, it will be tokenized and the last token will be used.
+     * @param {Token|string} rightValue The right token. If this is a string, it will be tokenized and the first token will be used.
+     * @returns {boolean} If the tokens cannot be safely placed next to each other, returns `false`. If the tokens can be placed
+     * next to each other, behavior is undefined (although it should return `true` in most cases).
+     */
+    canTokensBeAdjacent: function canTokensBeAdjacent(leftValue, rightValue) {
+        var leftToken = void 0;
+
+        if (typeof leftValue === "string") {
+            var leftTokens = espree.tokenize(leftValue, { ecmaVersion: 2015 });
+
+            leftToken = leftTokens[leftTokens.length - 1];
+        } else {
+            leftToken = leftValue;
+        }
+
+        var rightToken = typeof rightValue === "string" ? espree.tokenize(rightValue, { ecmaVersion: 2015 })[0] : rightValue;
+
+        if (leftToken.type === "Punctuator" || rightToken.type === "Punctuator") {
+            if (leftToken.type === "Punctuator" && rightToken.type === "Punctuator") {
+                var PLUS_TOKENS = new Set(["+", "++"]);
+                var MINUS_TOKENS = new Set(["-", "--"]);
+
+                return !(PLUS_TOKENS.has(leftToken.value) && PLUS_TOKENS.has(rightToken.value) || MINUS_TOKENS.has(leftToken.value) && MINUS_TOKENS.has(rightToken.value));
+            }
+            return true;
+        }
+
+        if (leftToken.type === "String" || rightToken.type === "String" || leftToken.type === "Template" || rightToken.type === "Template") {
+            return true;
+        }
+
+        if (leftToken.type !== "Numeric" && rightToken.type === "Numeric" && rightToken.value.startsWith(".")) {
+            return true;
+        }
+
+        return false;
+    }
+};
+
+},{"espree":"espree","esutils":80}],406:[function(require,module,exports){
 /**
  * @fileoverview Helper class to aid in constructing fix commands.
  * @author Alan Pierce
@@ -108391,7 +109374,7 @@ var _createClass = function () { function defineProperties(target, props) { for 
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-var astUtils = require("../ast-utils");
+var astUtils = require("../util/ast-utils");
 
 //------------------------------------------------------------------------------
 // Public Interface
@@ -108516,7 +109499,7 @@ var FixTracker = function () {
 
 module.exports = FixTracker;
 
-},{"../ast-utils":112}],403:[function(require,module,exports){
+},{"../util/ast-utils":405}],407:[function(require,module,exports){
 /**
  * @fileoverview Interpolate keys from an object into a string with {{ }} markers.
  * @author Jed Fox
@@ -108546,7 +109529,7 @@ module.exports = function (text, data) {
     });
 };
 
-},{}],404:[function(require,module,exports){
+},{}],408:[function(require,module,exports){
 /**
  * @fileoverview A shared list of ES3 keywords.
  * @author Josh Perez
@@ -108555,7 +109538,7 @@ module.exports = function (text, data) {
 
 module.exports = ["abstract", "boolean", "break", "byte", "case", "catch", "char", "class", "const", "continue", "debugger", "default", "delete", "do", "double", "else", "enum", "export", "extends", "false", "final", "finally", "float", "for", "function", "goto", "if", "implements", "import", "in", "instanceof", "int", "interface", "long", "native", "new", "null", "package", "private", "protected", "public", "return", "short", "static", "super", "switch", "synchronized", "this", "throw", "throws", "transient", "true", "try", "typeof", "var", "void", "volatile", "while", "with"];
 
-},{}],405:[function(require,module,exports){
+},{}],409:[function(require,module,exports){
 /**
  * @fileoverview The event generator for AST nodes.
  * @author Toru Nagashima
@@ -108570,6 +109553,8 @@ module.exports = ["abstract", "boolean", "break", "byte", "case", "catch", "char
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 
 var esquery = require("esquery");
 var lodash = require("lodash");
@@ -108608,10 +109593,8 @@ function getPossibleTypes(parsedSelector) {
             {
                 var typesForComponents = parsedSelector.selectors.map(getPossibleTypes);
 
-                if (typesForComponents.every(function (typesForComponent) {
-                    return typesForComponent;
-                })) {
-                    return lodash.union.apply(null, typesForComponents);
+                if (typesForComponents.every(Boolean)) {
+                    return lodash.union.apply(lodash, _toConsumableArray(typesForComponents));
                 }
                 return null;
             }
@@ -108631,7 +109614,7 @@ function getPossibleTypes(parsedSelector) {
                  * If at least one of the components could only match a particular type, the compound could only match
                  * the intersection of those types.
                  */
-                return lodash.intersection.apply(null, _typesForComponents);
+                return lodash.intersection.apply(lodash, _toConsumableArray(_typesForComponents));
             }
 
         case "child":
@@ -108898,7 +109881,7 @@ var NodeEventGenerator = function () {
 
 module.exports = NodeEventGenerator;
 
-},{"esquery":71,"lodash":92}],406:[function(require,module,exports){
+},{"esquery":71,"lodash":92}],410:[function(require,module,exports){
 /**
  * @fileoverview Pattern for detecting any letter (even letters outside of ASCII).
  * NOTE: This file was generated using this script in JSCS based on the Unicode 7.0.0 standard: https://github.com/jscs-dev/node-jscs/blob/f5ed14427deb7e7aac84f3056a5aab2d9f3e563e/publish/helpers/generate-patterns.js
@@ -108936,7 +109919,7 @@ module.exports = NodeEventGenerator;
 
 module.exports = /[A-Za-z\xAA\xB5\xBA\xC0-\xD6\xD8-\xF6\xF8-\u02C1\u02C6-\u02D1\u02E0-\u02E4\u02EC\u02EE\u0370-\u0374\u0376\u0377\u037A-\u037D\u037F\u0386\u0388-\u038A\u038C\u038E-\u03A1\u03A3-\u03F5\u03F7-\u0481\u048A-\u052F\u0531-\u0556\u0559\u0561-\u0587\u05D0-\u05EA\u05F0-\u05F2\u0620-\u064A\u066E\u066F\u0671-\u06D3\u06D5\u06E5\u06E6\u06EE\u06EF\u06FA-\u06FC\u06FF\u0710\u0712-\u072F\u074D-\u07A5\u07B1\u07CA-\u07EA\u07F4\u07F5\u07FA\u0800-\u0815\u081A\u0824\u0828\u0840-\u0858\u08A0-\u08B2\u0904-\u0939\u093D\u0950\u0958-\u0961\u0971-\u0980\u0985-\u098C\u098F\u0990\u0993-\u09A8\u09AA-\u09B0\u09B2\u09B6-\u09B9\u09BD\u09CE\u09DC\u09DD\u09DF-\u09E1\u09F0\u09F1\u0A05-\u0A0A\u0A0F\u0A10\u0A13-\u0A28\u0A2A-\u0A30\u0A32\u0A33\u0A35\u0A36\u0A38\u0A39\u0A59-\u0A5C\u0A5E\u0A72-\u0A74\u0A85-\u0A8D\u0A8F-\u0A91\u0A93-\u0AA8\u0AAA-\u0AB0\u0AB2\u0AB3\u0AB5-\u0AB9\u0ABD\u0AD0\u0AE0\u0AE1\u0B05-\u0B0C\u0B0F\u0B10\u0B13-\u0B28\u0B2A-\u0B30\u0B32\u0B33\u0B35-\u0B39\u0B3D\u0B5C\u0B5D\u0B5F-\u0B61\u0B71\u0B83\u0B85-\u0B8A\u0B8E-\u0B90\u0B92-\u0B95\u0B99\u0B9A\u0B9C\u0B9E\u0B9F\u0BA3\u0BA4\u0BA8-\u0BAA\u0BAE-\u0BB9\u0BD0\u0C05-\u0C0C\u0C0E-\u0C10\u0C12-\u0C28\u0C2A-\u0C39\u0C3D\u0C58\u0C59\u0C60\u0C61\u0C85-\u0C8C\u0C8E-\u0C90\u0C92-\u0CA8\u0CAA-\u0CB3\u0CB5-\u0CB9\u0CBD\u0CDE\u0CE0\u0CE1\u0CF1\u0CF2\u0D05-\u0D0C\u0D0E-\u0D10\u0D12-\u0D3A\u0D3D\u0D4E\u0D60\u0D61\u0D7A-\u0D7F\u0D85-\u0D96\u0D9A-\u0DB1\u0DB3-\u0DBB\u0DBD\u0DC0-\u0DC6\u0E01-\u0E30\u0E32\u0E33\u0E40-\u0E46\u0E81\u0E82\u0E84\u0E87\u0E88\u0E8A\u0E8D\u0E94-\u0E97\u0E99-\u0E9F\u0EA1-\u0EA3\u0EA5\u0EA7\u0EAA\u0EAB\u0EAD-\u0EB0\u0EB2\u0EB3\u0EBD\u0EC0-\u0EC4\u0EC6\u0EDC-\u0EDF\u0F00\u0F40-\u0F47\u0F49-\u0F6C\u0F88-\u0F8C\u1000-\u102A\u103F\u1050-\u1055\u105A-\u105D\u1061\u1065\u1066\u106E-\u1070\u1075-\u1081\u108E\u10A0-\u10C5\u10C7\u10CD\u10D0-\u10FA\u10FC-\u1248\u124A-\u124D\u1250-\u1256\u1258\u125A-\u125D\u1260-\u1288\u128A-\u128D\u1290-\u12B0\u12B2-\u12B5\u12B8-\u12BE\u12C0\u12C2-\u12C5\u12C8-\u12D6\u12D8-\u1310\u1312-\u1315\u1318-\u135A\u1380-\u138F\u13A0-\u13F4\u1401-\u166C\u166F-\u167F\u1681-\u169A\u16A0-\u16EA\u16F1-\u16F8\u1700-\u170C\u170E-\u1711\u1720-\u1731\u1740-\u1751\u1760-\u176C\u176E-\u1770\u1780-\u17B3\u17D7\u17DC\u1820-\u1877\u1880-\u18A8\u18AA\u18B0-\u18F5\u1900-\u191E\u1950-\u196D\u1970-\u1974\u1980-\u19AB\u19C1-\u19C7\u1A00-\u1A16\u1A20-\u1A54\u1AA7\u1B05-\u1B33\u1B45-\u1B4B\u1B83-\u1BA0\u1BAE\u1BAF\u1BBA-\u1BE5\u1C00-\u1C23\u1C4D-\u1C4F\u1C5A-\u1C7D\u1CE9-\u1CEC\u1CEE-\u1CF1\u1CF5\u1CF6\u1D00-\u1DBF\u1E00-\u1F15\u1F18-\u1F1D\u1F20-\u1F45\u1F48-\u1F4D\u1F50-\u1F57\u1F59\u1F5B\u1F5D\u1F5F-\u1F7D\u1F80-\u1FB4\u1FB6-\u1FBC\u1FBE\u1FC2-\u1FC4\u1FC6-\u1FCC\u1FD0-\u1FD3\u1FD6-\u1FDB\u1FE0-\u1FEC\u1FF2-\u1FF4\u1FF6-\u1FFC\u2071\u207F\u2090-\u209C\u2102\u2107\u210A-\u2113\u2115\u2119-\u211D\u2124\u2126\u2128\u212A-\u212D\u212F-\u2139\u213C-\u213F\u2145-\u2149\u214E\u2183\u2184\u2C00-\u2C2E\u2C30-\u2C5E\u2C60-\u2CE4\u2CEB-\u2CEE\u2CF2\u2CF3\u2D00-\u2D25\u2D27\u2D2D\u2D30-\u2D67\u2D6F\u2D80-\u2D96\u2DA0-\u2DA6\u2DA8-\u2DAE\u2DB0-\u2DB6\u2DB8-\u2DBE\u2DC0-\u2DC6\u2DC8-\u2DCE\u2DD0-\u2DD6\u2DD8-\u2DDE\u2E2F\u3005\u3006\u3031-\u3035\u303B\u303C\u3041-\u3096\u309D-\u309F\u30A1-\u30FA\u30FC-\u30FF\u3105-\u312D\u3131-\u318E\u31A0-\u31BA\u31F0-\u31FF\u3400-\u4DB5\u4E00-\u9FCC\uA000-\uA48C\uA4D0-\uA4FD\uA500-\uA60C\uA610-\uA61F\uA62A\uA62B\uA640-\uA66E\uA67F-\uA69D\uA6A0-\uA6E5\uA717-\uA71F\uA722-\uA788\uA78B-\uA78E\uA790-\uA7AD\uA7B0\uA7B1\uA7F7-\uA801\uA803-\uA805\uA807-\uA80A\uA80C-\uA822\uA840-\uA873\uA882-\uA8B3\uA8F2-\uA8F7\uA8FB\uA90A-\uA925\uA930-\uA946\uA960-\uA97C\uA984-\uA9B2\uA9CF\uA9E0-\uA9E4\uA9E6-\uA9EF\uA9FA-\uA9FE\uAA00-\uAA28\uAA40-\uAA42\uAA44-\uAA4B\uAA60-\uAA76\uAA7A\uAA7E-\uAAAF\uAAB1\uAAB5\uAAB6\uAAB9-\uAABD\uAAC0\uAAC2\uAADB-\uAADD\uAAE0-\uAAEA\uAAF2-\uAAF4\uAB01-\uAB06\uAB09-\uAB0E\uAB11-\uAB16\uAB20-\uAB26\uAB28-\uAB2E\uAB30-\uAB5A\uAB5C-\uAB5F\uAB64\uAB65\uABC0-\uABE2\uAC00-\uD7A3\uD7B0-\uD7C6\uD7CB-\uD7FB\uF900-\uFA6D\uFA70-\uFAD9\uFB00-\uFB06\uFB13-\uFB17\uFB1D\uFB1F-\uFB28\uFB2A-\uFB36\uFB38-\uFB3C\uFB3E\uFB40\uFB41\uFB43\uFB44\uFB46-\uFBB1\uFBD3-\uFD3D\uFD50-\uFD8F\uFD92-\uFDC7\uFDF0-\uFDFB\uFE70-\uFE74\uFE76-\uFEFC\uFF21-\uFF3A\uFF41-\uFF5A\uFF66-\uFFBE\uFFC2-\uFFC7\uFFCA-\uFFCF\uFFD2-\uFFD7\uFFDA-\uFFDC]|\uD800[\uDC00-\uDC0B\uDC0D-\uDC26\uDC28-\uDC3A\uDC3C\uDC3D\uDC3F-\uDC4D\uDC50-\uDC5D\uDC80-\uDCFA\uDE80-\uDE9C\uDEA0-\uDED0\uDF00-\uDF1F\uDF30-\uDF40\uDF42-\uDF49\uDF50-\uDF75\uDF80-\uDF9D\uDFA0-\uDFC3\uDFC8-\uDFCF]|\uD801[\uDC00-\uDC9D\uDD00-\uDD27\uDD30-\uDD63\uDE00-\uDF36\uDF40-\uDF55\uDF60-\uDF67]|\uD802[\uDC00-\uDC05\uDC08\uDC0A-\uDC35\uDC37\uDC38\uDC3C\uDC3F-\uDC55\uDC60-\uDC76\uDC80-\uDC9E\uDD00-\uDD15\uDD20-\uDD39\uDD80-\uDDB7\uDDBE\uDDBF\uDE00\uDE10-\uDE13\uDE15-\uDE17\uDE19-\uDE33\uDE60-\uDE7C\uDE80-\uDE9C\uDEC0-\uDEC7\uDEC9-\uDEE4\uDF00-\uDF35\uDF40-\uDF55\uDF60-\uDF72\uDF80-\uDF91]|\uD803[\uDC00-\uDC48]|\uD804[\uDC03-\uDC37\uDC83-\uDCAF\uDCD0-\uDCE8\uDD03-\uDD26\uDD50-\uDD72\uDD76\uDD83-\uDDB2\uDDC1-\uDDC4\uDDDA\uDE00-\uDE11\uDE13-\uDE2B\uDEB0-\uDEDE\uDF05-\uDF0C\uDF0F\uDF10\uDF13-\uDF28\uDF2A-\uDF30\uDF32\uDF33\uDF35-\uDF39\uDF3D\uDF5D-\uDF61]|\uD805[\uDC80-\uDCAF\uDCC4\uDCC5\uDCC7\uDD80-\uDDAE\uDE00-\uDE2F\uDE44\uDE80-\uDEAA]|\uD806[\uDCA0-\uDCDF\uDCFF\uDEC0-\uDEF8]|\uD808[\uDC00-\uDF98]|[\uD80C\uD840-\uD868\uD86A-\uD86C][\uDC00-\uDFFF]|\uD80D[\uDC00-\uDC2E]|\uD81A[\uDC00-\uDE38\uDE40-\uDE5E\uDED0-\uDEED\uDF00-\uDF2F\uDF40-\uDF43\uDF63-\uDF77\uDF7D-\uDF8F]|\uD81B[\uDF00-\uDF44\uDF50\uDF93-\uDF9F]|\uD82C[\uDC00\uDC01]|\uD82F[\uDC00-\uDC6A\uDC70-\uDC7C\uDC80-\uDC88\uDC90-\uDC99]|\uD835[\uDC00-\uDC54\uDC56-\uDC9C\uDC9E\uDC9F\uDCA2\uDCA5\uDCA6\uDCA9-\uDCAC\uDCAE-\uDCB9\uDCBB\uDCBD-\uDCC3\uDCC5-\uDD05\uDD07-\uDD0A\uDD0D-\uDD14\uDD16-\uDD1C\uDD1E-\uDD39\uDD3B-\uDD3E\uDD40-\uDD44\uDD46\uDD4A-\uDD50\uDD52-\uDEA5\uDEA8-\uDEC0\uDEC2-\uDEDA\uDEDC-\uDEFA\uDEFC-\uDF14\uDF16-\uDF34\uDF36-\uDF4E\uDF50-\uDF6E\uDF70-\uDF88\uDF8A-\uDFA8\uDFAA-\uDFC2\uDFC4-\uDFCB]|\uD83A[\uDC00-\uDCC4]|\uD83B[\uDE00-\uDE03\uDE05-\uDE1F\uDE21\uDE22\uDE24\uDE27\uDE29-\uDE32\uDE34-\uDE37\uDE39\uDE3B\uDE42\uDE47\uDE49\uDE4B\uDE4D-\uDE4F\uDE51\uDE52\uDE54\uDE57\uDE59\uDE5B\uDE5D\uDE5F\uDE61\uDE62\uDE64\uDE67-\uDE6A\uDE6C-\uDE72\uDE74-\uDE77\uDE79-\uDE7C\uDE7E\uDE80-\uDE89\uDE8B-\uDE9B\uDEA1-\uDEA3\uDEA5-\uDEA9\uDEAB-\uDEBB]|\uD869[\uDC00-\uDED6\uDF00-\uDFFF]|\uD86D[\uDC00-\uDF34\uDF40-\uDFFF]|\uD86E[\uDC00-\uDC1D]|\uD87E[\uDC00-\uDE1D]/;
 
-},{}],407:[function(require,module,exports){
+},{}],411:[function(require,module,exports){
 /**
  * @fileoverview An object that creates fix commands for rules.
  * @author Nicholas C. Zakas
@@ -109084,7 +110067,7 @@ var ruleFixer = Object.freeze({
 
 module.exports = ruleFixer;
 
-},{}],408:[function(require,module,exports){
+},{}],412:[function(require,module,exports){
 /**
  * @fileoverview A variant of EventEmitter which does not give listeners information about each other
  * @author Teddy Katz
@@ -109145,7 +110128,7 @@ module.exports = function () {
     });
 };
 
-},{}],409:[function(require,module,exports){
+},{}],413:[function(require,module,exports){
 /**
  * @fileoverview An object that caches and applies source code fixes.
  * @author Nicholas C. Zakas
@@ -109320,7 +110303,7 @@ SourceCodeFixer.applyFixes = function (sourceText, messages, shouldFix) {
 
 module.exports = SourceCodeFixer;
 
-},{"debug":53}],410:[function(require,module,exports){
+},{"debug":53}],414:[function(require,module,exports){
 /**
  * @fileoverview Abstraction of JavaScript source code.
  * @author Nicholas C. Zakas
@@ -109343,7 +110326,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 var TokenStore = require("../token-store"),
     Traverser = require("./traverser"),
-    astUtils = require("../ast-utils"),
+    astUtils = require("../util/ast-utils"),
     lodash = require("lodash");
 
 //------------------------------------------------------------------------------
@@ -109863,7 +110846,7 @@ var SourceCode = function (_TokenStore) {
 
 module.exports = SourceCode;
 
-},{"../ast-utils":112,"../token-store":395,"./traverser":412,"lodash":92}],411:[function(require,module,exports){
+},{"../token-store":398,"../util/ast-utils":405,"./traverser":416,"lodash":92}],415:[function(require,module,exports){
 (function (process){
 /**
  * @fileoverview Tracks performance of individual rules.
@@ -110005,7 +110988,7 @@ module.exports = function () {
 }();
 
 }).call(this,require('_process'))
-},{"_process":103}],412:[function(require,module,exports){
+},{"_process":103}],416:[function(require,module,exports){
 /**
  * @fileoverview Traverser to traverse AST trees.
  * @author Nicholas C. Zakas
@@ -110240,5 +111223,82 @@ var Traverser = function () {
 
 module.exports = Traverser;
 
-},{"debug":53,"eslint-visitor-keys":69}]},{},[123])(123)
+},{"debug":53,"eslint-visitor-keys":69}],417:[function(require,module,exports){
+/**
+ * @author Toru Nagashima <https://github.com/mysticatea>
+ */
+"use strict";
+
+module.exports = {
+    isCombiningCharacter: require("./is-combining-character"),
+    isEmojiModifier: require("./is-emoji-modifier"),
+    isRegionalIndicatorSymbol: require("./is-regional-indicator-symbol"),
+    isSurrogatePair: require("./is-surrogate-pair")
+};
+
+},{"./is-combining-character":418,"./is-emoji-modifier":419,"./is-regional-indicator-symbol":420,"./is-surrogate-pair":421}],418:[function(require,module,exports){
+// THIS FILE WAS GENERATED BY 'tools/update-unicode-utils.js'
+"use strict";
+
+var combiningChars = new Set([768, 769, 770, 771, 772, 773, 774, 775, 776, 777, 778, 779, 780, 781, 782, 783, 784, 785, 786, 787, 788, 789, 790, 791, 792, 793, 794, 795, 796, 797, 798, 799, 800, 801, 802, 803, 804, 805, 806, 807, 808, 809, 810, 811, 812, 813, 814, 815, 816, 817, 818, 819, 820, 821, 822, 823, 824, 825, 826, 827, 828, 829, 830, 831, 832, 833, 834, 835, 836, 837, 838, 839, 840, 841, 842, 843, 844, 845, 846, 847, 848, 849, 850, 851, 852, 853, 854, 855, 856, 857, 858, 859, 860, 861, 862, 863, 864, 865, 866, 867, 868, 869, 870, 871, 872, 873, 874, 875, 876, 877, 878, 879, 1155, 1156, 1157, 1158, 1159, 1160, 1161, 1425, 1426, 1427, 1428, 1429, 1430, 1431, 1432, 1433, 1434, 1435, 1436, 1437, 1438, 1439, 1440, 1441, 1442, 1443, 1444, 1445, 1446, 1447, 1448, 1449, 1450, 1451, 1452, 1453, 1454, 1455, 1456, 1457, 1458, 1459, 1460, 1461, 1462, 1463, 1464, 1465, 1466, 1467, 1468, 1469, 1471, 1473, 1474, 1476, 1477, 1479, 1552, 1553, 1554, 1555, 1556, 1557, 1558, 1559, 1560, 1561, 1562, 1611, 1612, 1613, 1614, 1615, 1616, 1617, 1618, 1619, 1620, 1621, 1622, 1623, 1624, 1625, 1626, 1627, 1628, 1629, 1630, 1631, 1648, 1750, 1751, 1752, 1753, 1754, 1755, 1756, 1759, 1760, 1761, 1762, 1763, 1764, 1767, 1768, 1770, 1771, 1772, 1773, 1809, 1840, 1841, 1842, 1843, 1844, 1845, 1846, 1847, 1848, 1849, 1850, 1851, 1852, 1853, 1854, 1855, 1856, 1857, 1858, 1859, 1860, 1861, 1862, 1863, 1864, 1865, 1866, 1958, 1959, 1960, 1961, 1962, 1963, 1964, 1965, 1966, 1967, 1968, 2027, 2028, 2029, 2030, 2031, 2032, 2033, 2034, 2035, 2070, 2071, 2072, 2073, 2075, 2076, 2077, 2078, 2079, 2080, 2081, 2082, 2083, 2085, 2086, 2087, 2089, 2090, 2091, 2092, 2093, 2137, 2138, 2139, 2260, 2261, 2262, 2263, 2264, 2265, 2266, 2267, 2268, 2269, 2270, 2271, 2272, 2273, 2275, 2276, 2277, 2278, 2279, 2280, 2281, 2282, 2283, 2284, 2285, 2286, 2287, 2288, 2289, 2290, 2291, 2292, 2293, 2294, 2295, 2296, 2297, 2298, 2299, 2300, 2301, 2302, 2303, 2304, 2305, 2306, 2307, 2362, 2363, 2364, 2366, 2367, 2368, 2369, 2370, 2371, 2372, 2373, 2374, 2375, 2376, 2377, 2378, 2379, 2380, 2381, 2382, 2383, 2385, 2386, 2387, 2388, 2389, 2390, 2391, 2402, 2403, 2433, 2434, 2435, 2492, 2494, 2495, 2496, 2497, 2498, 2499, 2500, 2503, 2504, 2507, 2508, 2509, 2519, 2530, 2531, 2561, 2562, 2563, 2620, 2622, 2623, 2624, 2625, 2626, 2631, 2632, 2635, 2636, 2637, 2641, 2672, 2673, 2677, 2689, 2690, 2691, 2748, 2750, 2751, 2752, 2753, 2754, 2755, 2756, 2757, 2759, 2760, 2761, 2763, 2764, 2765, 2786, 2787, 2810, 2811, 2812, 2813, 2814, 2815, 2817, 2818, 2819, 2876, 2878, 2879, 2880, 2881, 2882, 2883, 2884, 2887, 2888, 2891, 2892, 2893, 2902, 2903, 2914, 2915, 2946, 3006, 3007, 3008, 3009, 3010, 3014, 3015, 3016, 3018, 3019, 3020, 3021, 3031, 3072, 3073, 3074, 3075, 3134, 3135, 3136, 3137, 3138, 3139, 3140, 3142, 3143, 3144, 3146, 3147, 3148, 3149, 3157, 3158, 3170, 3171, 3201, 3202, 3203, 3260, 3262, 3263, 3264, 3265, 3266, 3267, 3268, 3270, 3271, 3272, 3274, 3275, 3276, 3277, 3285, 3286, 3298, 3299, 3328, 3329, 3330, 3331, 3387, 3388, 3390, 3391, 3392, 3393, 3394, 3395, 3396, 3398, 3399, 3400, 3402, 3403, 3404, 3405, 3415, 3426, 3427, 3458, 3459, 3530, 3535, 3536, 3537, 3538, 3539, 3540, 3542, 3544, 3545, 3546, 3547, 3548, 3549, 3550, 3551, 3570, 3571, 3633, 3636, 3637, 3638, 3639, 3640, 3641, 3642, 3655, 3656, 3657, 3658, 3659, 3660, 3661, 3662, 3761, 3764, 3765, 3766, 3767, 3768, 3769, 3771, 3772, 3784, 3785, 3786, 3787, 3788, 3789, 3864, 3865, 3893, 3895, 3897, 3902, 3903, 3953, 3954, 3955, 3956, 3957, 3958, 3959, 3960, 3961, 3962, 3963, 3964, 3965, 3966, 3967, 3968, 3969, 3970, 3971, 3972, 3974, 3975, 3981, 3982, 3983, 3984, 3985, 3986, 3987, 3988, 3989, 3990, 3991, 3993, 3994, 3995, 3996, 3997, 3998, 3999, 4000, 4001, 4002, 4003, 4004, 4005, 4006, 4007, 4008, 4009, 4010, 4011, 4012, 4013, 4014, 4015, 4016, 4017, 4018, 4019, 4020, 4021, 4022, 4023, 4024, 4025, 4026, 4027, 4028, 4038, 4139, 4140, 4141, 4142, 4143, 4144, 4145, 4146, 4147, 4148, 4149, 4150, 4151, 4152, 4153, 4154, 4155, 4156, 4157, 4158, 4182, 4183, 4184, 4185, 4190, 4191, 4192, 4194, 4195, 4196, 4199, 4200, 4201, 4202, 4203, 4204, 4205, 4209, 4210, 4211, 4212, 4226, 4227, 4228, 4229, 4230, 4231, 4232, 4233, 4234, 4235, 4236, 4237, 4239, 4250, 4251, 4252, 4253, 4957, 4958, 4959, 5906, 5907, 5908, 5938, 5939, 5940, 5970, 5971, 6002, 6003, 6068, 6069, 6070, 6071, 6072, 6073, 6074, 6075, 6076, 6077, 6078, 6079, 6080, 6081, 6082, 6083, 6084, 6085, 6086, 6087, 6088, 6089, 6090, 6091, 6092, 6093, 6094, 6095, 6096, 6097, 6098, 6099, 6109, 6155, 6156, 6157, 6277, 6278, 6313, 6432, 6433, 6434, 6435, 6436, 6437, 6438, 6439, 6440, 6441, 6442, 6443, 6448, 6449, 6450, 6451, 6452, 6453, 6454, 6455, 6456, 6457, 6458, 6459, 6679, 6680, 6681, 6682, 6683, 6741, 6742, 6743, 6744, 6745, 6746, 6747, 6748, 6749, 6750, 6752, 6753, 6754, 6755, 6756, 6757, 6758, 6759, 6760, 6761, 6762, 6763, 6764, 6765, 6766, 6767, 6768, 6769, 6770, 6771, 6772, 6773, 6774, 6775, 6776, 6777, 6778, 6779, 6780, 6783, 6832, 6833, 6834, 6835, 6836, 6837, 6838, 6839, 6840, 6841, 6842, 6843, 6844, 6845, 6846, 6912, 6913, 6914, 6915, 6916, 6964, 6965, 6966, 6967, 6968, 6969, 6970, 6971, 6972, 6973, 6974, 6975, 6976, 6977, 6978, 6979, 6980, 7019, 7020, 7021, 7022, 7023, 7024, 7025, 7026, 7027, 7040, 7041, 7042, 7073, 7074, 7075, 7076, 7077, 7078, 7079, 7080, 7081, 7082, 7083, 7084, 7085, 7142, 7143, 7144, 7145, 7146, 7147, 7148, 7149, 7150, 7151, 7152, 7153, 7154, 7155, 7204, 7205, 7206, 7207, 7208, 7209, 7210, 7211, 7212, 7213, 7214, 7215, 7216, 7217, 7218, 7219, 7220, 7221, 7222, 7223, 7376, 7377, 7378, 7380, 7381, 7382, 7383, 7384, 7385, 7386, 7387, 7388, 7389, 7390, 7391, 7392, 7393, 7394, 7395, 7396, 7397, 7398, 7399, 7400, 7405, 7410, 7411, 7412, 7415, 7416, 7417, 7616, 7617, 7618, 7619, 7620, 7621, 7622, 7623, 7624, 7625, 7626, 7627, 7628, 7629, 7630, 7631, 7632, 7633, 7634, 7635, 7636, 7637, 7638, 7639, 7640, 7641, 7642, 7643, 7644, 7645, 7646, 7647, 7648, 7649, 7650, 7651, 7652, 7653, 7654, 7655, 7656, 7657, 7658, 7659, 7660, 7661, 7662, 7663, 7664, 7665, 7666, 7667, 7668, 7669, 7670, 7671, 7672, 7673, 7675, 7676, 7677, 7678, 7679, 8400, 8401, 8402, 8403, 8404, 8405, 8406, 8407, 8408, 8409, 8410, 8411, 8412, 8413, 8414, 8415, 8416, 8417, 8418, 8419, 8420, 8421, 8422, 8423, 8424, 8425, 8426, 8427, 8428, 8429, 8430, 8431, 8432, 11503, 11504, 11505, 11647, 11744, 11745, 11746, 11747, 11748, 11749, 11750, 11751, 11752, 11753, 11754, 11755, 11756, 11757, 11758, 11759, 11760, 11761, 11762, 11763, 11764, 11765, 11766, 11767, 11768, 11769, 11770, 11771, 11772, 11773, 11774, 11775, 12330, 12331, 12332, 12333, 12334, 12335, 12441, 12442, 42607, 42608, 42609, 42610, 42612, 42613, 42614, 42615, 42616, 42617, 42618, 42619, 42620, 42621, 42654, 42655, 42736, 42737, 43010, 43014, 43019, 43043, 43044, 43045, 43046, 43047, 43136, 43137, 43188, 43189, 43190, 43191, 43192, 43193, 43194, 43195, 43196, 43197, 43198, 43199, 43200, 43201, 43202, 43203, 43204, 43205, 43232, 43233, 43234, 43235, 43236, 43237, 43238, 43239, 43240, 43241, 43242, 43243, 43244, 43245, 43246, 43247, 43248, 43249, 43302, 43303, 43304, 43305, 43306, 43307, 43308, 43309, 43335, 43336, 43337, 43338, 43339, 43340, 43341, 43342, 43343, 43344, 43345, 43346, 43347, 43392, 43393, 43394, 43395, 43443, 43444, 43445, 43446, 43447, 43448, 43449, 43450, 43451, 43452, 43453, 43454, 43455, 43456, 43493, 43561, 43562, 43563, 43564, 43565, 43566, 43567, 43568, 43569, 43570, 43571, 43572, 43573, 43574, 43587, 43596, 43597, 43643, 43644, 43645, 43696, 43698, 43699, 43700, 43703, 43704, 43710, 43711, 43713, 43755, 43756, 43757, 43758, 43759, 43765, 43766, 44003, 44004, 44005, 44006, 44007, 44008, 44009, 44010, 44012, 44013, 64286, 65024, 65025, 65026, 65027, 65028, 65029, 65030, 65031, 65032, 65033, 65034, 65035, 65036, 65037, 65038, 65039, 65056, 65057, 65058, 65059, 65060, 65061, 65062, 65063, 65064, 65065, 65066, 65067, 65068, 65069, 65070, 65071, 66045, 66272, 66422, 66423, 66424, 66425, 66426, 68097, 68098, 68099, 68101, 68102, 68108, 68109, 68110, 68111, 68152, 68153, 68154, 68159, 68325, 68326, 69632, 69633, 69634, 69688, 69689, 69690, 69691, 69692, 69693, 69694, 69695, 69696, 69697, 69698, 69699, 69700, 69701, 69702, 69759, 69760, 69761, 69762, 69808, 69809, 69810, 69811, 69812, 69813, 69814, 69815, 69816, 69817, 69818, 69888, 69889, 69890, 69927, 69928, 69929, 69930, 69931, 69932, 69933, 69934, 69935, 69936, 69937, 69938, 69939, 69940, 70003, 70016, 70017, 70018, 70067, 70068, 70069, 70070, 70071, 70072, 70073, 70074, 70075, 70076, 70077, 70078, 70079, 70080, 70090, 70091, 70092, 70188, 70189, 70190, 70191, 70192, 70193, 70194, 70195, 70196, 70197, 70198, 70199, 70206, 70367, 70368, 70369, 70370, 70371, 70372, 70373, 70374, 70375, 70376, 70377, 70378, 70400, 70401, 70402, 70403, 70460, 70462, 70463, 70464, 70465, 70466, 70467, 70468, 70471, 70472, 70475, 70476, 70477, 70487, 70498, 70499, 70502, 70503, 70504, 70505, 70506, 70507, 70508, 70512, 70513, 70514, 70515, 70516, 70709, 70710, 70711, 70712, 70713, 70714, 70715, 70716, 70717, 70718, 70719, 70720, 70721, 70722, 70723, 70724, 70725, 70726, 70832, 70833, 70834, 70835, 70836, 70837, 70838, 70839, 70840, 70841, 70842, 70843, 70844, 70845, 70846, 70847, 70848, 70849, 70850, 70851, 71087, 71088, 71089, 71090, 71091, 71092, 71093, 71096, 71097, 71098, 71099, 71100, 71101, 71102, 71103, 71104, 71132, 71133, 71216, 71217, 71218, 71219, 71220, 71221, 71222, 71223, 71224, 71225, 71226, 71227, 71228, 71229, 71230, 71231, 71232, 71339, 71340, 71341, 71342, 71343, 71344, 71345, 71346, 71347, 71348, 71349, 71350, 71351, 71453, 71454, 71455, 71456, 71457, 71458, 71459, 71460, 71461, 71462, 71463, 71464, 71465, 71466, 71467, 72193, 72194, 72195, 72196, 72197, 72198, 72199, 72200, 72201, 72202, 72243, 72244, 72245, 72246, 72247, 72248, 72249, 72251, 72252, 72253, 72254, 72263, 72273, 72274, 72275, 72276, 72277, 72278, 72279, 72280, 72281, 72282, 72283, 72330, 72331, 72332, 72333, 72334, 72335, 72336, 72337, 72338, 72339, 72340, 72341, 72342, 72343, 72344, 72345, 72751, 72752, 72753, 72754, 72755, 72756, 72757, 72758, 72760, 72761, 72762, 72763, 72764, 72765, 72766, 72767, 72850, 72851, 72852, 72853, 72854, 72855, 72856, 72857, 72858, 72859, 72860, 72861, 72862, 72863, 72864, 72865, 72866, 72867, 72868, 72869, 72870, 72871, 72873, 72874, 72875, 72876, 72877, 72878, 72879, 72880, 72881, 72882, 72883, 72884, 72885, 72886, 73009, 73010, 73011, 73012, 73013, 73014, 73018, 73020, 73021, 73023, 73024, 73025, 73026, 73027, 73028, 73029, 73031, 92912, 92913, 92914, 92915, 92916, 92976, 92977, 92978, 92979, 92980, 92981, 92982, 94033, 94034, 94035, 94036, 94037, 94038, 94039, 94040, 94041, 94042, 94043, 94044, 94045, 94046, 94047, 94048, 94049, 94050, 94051, 94052, 94053, 94054, 94055, 94056, 94057, 94058, 94059, 94060, 94061, 94062, 94063, 94064, 94065, 94066, 94067, 94068, 94069, 94070, 94071, 94072, 94073, 94074, 94075, 94076, 94077, 94078, 94095, 94096, 94097, 94098, 113821, 113822, 119141, 119142, 119143, 119144, 119145, 119149, 119150, 119151, 119152, 119153, 119154, 119163, 119164, 119165, 119166, 119167, 119168, 119169, 119170, 119173, 119174, 119175, 119176, 119177, 119178, 119179, 119210, 119211, 119212, 119213, 119362, 119363, 119364, 121344, 121345, 121346, 121347, 121348, 121349, 121350, 121351, 121352, 121353, 121354, 121355, 121356, 121357, 121358, 121359, 121360, 121361, 121362, 121363, 121364, 121365, 121366, 121367, 121368, 121369, 121370, 121371, 121372, 121373, 121374, 121375, 121376, 121377, 121378, 121379, 121380, 121381, 121382, 121383, 121384, 121385, 121386, 121387, 121388, 121389, 121390, 121391, 121392, 121393, 121394, 121395, 121396, 121397, 121398, 121403, 121404, 121405, 121406, 121407, 121408, 121409, 121410, 121411, 121412, 121413, 121414, 121415, 121416, 121417, 121418, 121419, 121420, 121421, 121422, 121423, 121424, 121425, 121426, 121427, 121428, 121429, 121430, 121431, 121432, 121433, 121434, 121435, 121436, 121437, 121438, 121439, 121440, 121441, 121442, 121443, 121444, 121445, 121446, 121447, 121448, 121449, 121450, 121451, 121452, 121461, 121476, 121499, 121500, 121501, 121502, 121503, 121505, 121506, 121507, 121508, 121509, 121510, 121511, 121512, 121513, 121514, 121515, 121516, 121517, 121518, 121519, 122880, 122881, 122882, 122883, 122884, 122885, 122886, 122888, 122889, 122890, 122891, 122892, 122893, 122894, 122895, 122896, 122897, 122898, 122899, 122900, 122901, 122902, 122903, 122904, 122907, 122908, 122909, 122910, 122911, 122912, 122913, 122915, 122916, 122918, 122919, 122920, 122921, 122922, 125136, 125137, 125138, 125139, 125140, 125141, 125142, 125252, 125253, 125254, 125255, 125256, 125257, 125258, 917760, 917761, 917762, 917763, 917764, 917765, 917766, 917767, 917768, 917769, 917770, 917771, 917772, 917773, 917774, 917775, 917776, 917777, 917778, 917779, 917780, 917781, 917782, 917783, 917784, 917785, 917786, 917787, 917788, 917789, 917790, 917791, 917792, 917793, 917794, 917795, 917796, 917797, 917798, 917799, 917800, 917801, 917802, 917803, 917804, 917805, 917806, 917807, 917808, 917809, 917810, 917811, 917812, 917813, 917814, 917815, 917816, 917817, 917818, 917819, 917820, 917821, 917822, 917823, 917824, 917825, 917826, 917827, 917828, 917829, 917830, 917831, 917832, 917833, 917834, 917835, 917836, 917837, 917838, 917839, 917840, 917841, 917842, 917843, 917844, 917845, 917846, 917847, 917848, 917849, 917850, 917851, 917852, 917853, 917854, 917855, 917856, 917857, 917858, 917859, 917860, 917861, 917862, 917863, 917864, 917865, 917866, 917867, 917868, 917869, 917870, 917871, 917872, 917873, 917874, 917875, 917876, 917877, 917878, 917879, 917880, 917881, 917882, 917883, 917884, 917885, 917886, 917887, 917888, 917889, 917890, 917891, 917892, 917893, 917894, 917895, 917896, 917897, 917898, 917899, 917900, 917901, 917902, 917903, 917904, 917905, 917906, 917907, 917908, 917909, 917910, 917911, 917912, 917913, 917914, 917915, 917916, 917917, 917918, 917919, 917920, 917921, 917922, 917923, 917924, 917925, 917926, 917927, 917928, 917929, 917930, 917931, 917932, 917933, 917934, 917935, 917936, 917937, 917938, 917939, 917940, 917941, 917942, 917943, 917944, 917945, 917946, 917947, 917948, 917949, 917950, 917951, 917952, 917953, 917954, 917955, 917956, 917957, 917958, 917959, 917960, 917961, 917962, 917963, 917964, 917965, 917966, 917967, 917968, 917969, 917970, 917971, 917972, 917973, 917974, 917975, 917976, 917977, 917978, 917979, 917980, 917981, 917982, 917983, 917984, 917985, 917986, 917987, 917988, 917989, 917990, 917991, 917992, 917993, 917994, 917995, 917996, 917997, 917998, 917999]);
+
+/**
+ * Check whether a given character is a combining mark or not.
+ * @param {number} c The character code to check.
+ * @returns {boolean} `true` if the character belongs to the category, one of `Mc`, `Me`, and `Mn`.
+ */
+module.exports = function isCombiningCharacter(c) {
+  return combiningChars.has(c);
+};
+
+},{}],419:[function(require,module,exports){
+/**
+ * @author Toru Nagashima <https://github.com/mysticatea>
+ */
+"use strict";
+
+/**
+ * Check whether a given character is an emoji modifier.
+ * @param {number} code The character code to check.
+ * @returns {boolean} `true` if the character is an emoji modifier.
+ */
+
+module.exports = function isEmojiModifier(code) {
+  return code >= 0x1F3FB && code <= 0x1F3FF;
+};
+
+},{}],420:[function(require,module,exports){
+/**
+ * @author Toru Nagashima <https://github.com/mysticatea>
+ */
+"use strict";
+
+/**
+ * Check whether a given character is a regional indicator symbol.
+ * @param {number} code The character code to check.
+ * @returns {boolean} `true` if the character is a regional indicator symbol.
+ */
+
+module.exports = function isRegionalIndicatorSymbol(code) {
+  return code >= 0x1F1E6 && code <= 0x1F1FF;
+};
+
+},{}],421:[function(require,module,exports){
+/**
+ * @author Toru Nagashima <https://github.com/mysticatea>
+ */
+"use strict";
+
+/**
+ * Check whether given two characters are a surrogate pair.
+ * @param {number} lead The code of the lead character.
+ * @param {number} tail The code of the tail character.
+ * @returns {boolean} `true` if the character pair is a surrogate pair.
+ */
+
+module.exports = function isSurrogatePair(lead, tail) {
+  return lead >= 0xD800 && lead < 0xDC00 && tail >= 0xDC00 && tail < 0xE000;
+};
+
+},{}]},{},[122])(122)
 });

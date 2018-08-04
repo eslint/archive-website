@@ -7,7 +7,7 @@ edit_link: https://github.com/eslint/eslint/edit/master/docs/rules/prefer-numeri
 
 # disallow `parseInt()` and `Number.parseInt()` in favor of binary, octal, and hexadecimal literals (prefer-numeric-literals)
 
-(fixable) The `--fix` option on the [command line](../user-guide/command-line-interface#fix) can automatically fix some of the problems reported by this rule.
+(fixable) The `--fix` option on the [command line](../user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
 
 The `parseInt()` and `Number.parseInt()` functions can be used to turn binary, octal, and hexadecimal strings into integers. As binary, octal, and hexadecimal literals are supported in ES6, this rule encourages use of those numeric literals instead of `parseInt()` or `Number.parseInt()`.
 
@@ -62,7 +62,7 @@ If you want to allow use of `parseInt()` or `Number.parseInt()` for binary, octa
 
 ## Compatibility
 
-* **JSCS**: [requireNumericLiterals](http://jscs.info/rule/requireNumericLiterals)
+* **JSCS**: `requireNumericLiterals`
 
 ## Version
 

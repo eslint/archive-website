@@ -7,7 +7,7 @@ edit_link: https://github.com/eslint/eslint/edit/master/docs/rules/object-curly-
 
 # enforce consistent spacing inside braces (object-curly-spacing)
 
-(fixable) The `--fix` option on the [command line](../user-guide/command-line-interface#fix) can automatically fix some of the problems reported by this rule.
+(fixable) The `--fix` option on the [command line](../user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
 
 While formatting preferences are very personal, a number of style guides require
 or disallow spaces between curly braces in the following situations:

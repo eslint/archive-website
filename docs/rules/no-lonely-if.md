@@ -7,7 +7,7 @@ edit_link: https://github.com/eslint/eslint/edit/master/docs/rules/no-lonely-if.
 
 # disallow `if` statements as the only statement in `else` blocks (no-lonely-if)
 
-(fixable) The `--fix` option on the [command line](../user-guide/command-line-interface#fix) can automatically fix some of the problems reported by this rule.
+(fixable) The `--fix` option on the [command line](../user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
 
 If an `if` statement is the only statement in the `else` block, it is often clearer to use an `else if` form.
 

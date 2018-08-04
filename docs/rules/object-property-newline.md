@@ -7,7 +7,7 @@ edit_link: https://github.com/eslint/eslint/edit/master/docs/rules/object-proper
 
 # enforce placing object properties on separate lines (object-property-newline)
 
-(fixable) The `--fix` option on the [command line](../user-guide/command-line-interface#fix) can automatically fix some of the problems reported by this rule.
+(fixable) The `--fix` option on the [command line](../user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
 
 This rule permits you to restrict the locations of property specifications in object literals. You may prohibit any part of any property specification from appearing on the same line as any part of any other property specification. You may make this prohibition absolute, or, by invoking an object option, you may allow an exception, permitting an object literal to have all parts of all of its property specifications on a single line.
 
@@ -269,7 +269,7 @@ You can turn this rule off if you want to decide, case-by-case, whether to place
 
 ## Compatibility
 
-- **JSCS**: This rule provides partial compatibility with [requireObjectKeysOnNewLine](http://jscs.info/rule/requireObjectKeysOnNewLine).
+- **JSCS**: This rule provides partial compatibility with `requireObjectKeysOnNewLine`.
 
 ## Related Rules
 

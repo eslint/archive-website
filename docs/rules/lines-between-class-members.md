@@ -7,7 +7,7 @@ edit_link: https://github.com/eslint/eslint/edit/master/docs/rules/lines-between
 
 # require or disallow an empty line between class members (lines-between-class-members)
 
-(fixable) The `--fix` option on the [command line](../user-guide/command-line-interface#fix) can automatically fix some of the problems reported by this rule.
+(fixable) The `--fix` option on the [command line](../user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
 
 This rule improves readability by enforcing lines between class members. It will not check empty lines before the first member and after the last member, since that is already taken care of by padded-blocks.
 
@@ -112,8 +112,11 @@ If you don't want to enforce empty lines between class members, you can disable 
 
 * [padded-blocks](padded-blocks)
 * [padding-line-between-statements](padding-line-between-statements)
-* [requirePaddingNewLinesAfterBlocks](http://jscs.info/rule/requirePaddingNewLinesAfterBlocks)
-* [disallowPaddingNewLinesAfterBlocks](http://jscs.info/rule/disallowPaddingNewLinesAfterBlocks)
+
+## Compatibility
+
+* **JSCS**: `requirePaddingNewLinesAfterBlocks`
+* **JSCS**: `disallowPaddingNewLinesAfterBlocks`
 
 ## Version
 

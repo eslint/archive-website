@@ -7,7 +7,7 @@ edit_link: https://github.com/eslint/eslint/edit/master/docs/rules/array-bracket
 
 # enforce line breaks after opening and before closing array brackets (array-bracket-newline)
 
-(fixable) The `--fix` option on the [command line](../user-guide/command-line-interface#fix) can automatically fix some of the problems reported by this rule.
+(fixable) The `--fix` option on the [command line](../user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
 
 A number of style guides require or disallow line breaks inside of array brackets.
 
@@ -283,7 +283,7 @@ If you don't want to enforce line breaks after opening and before closing array 
 
 ## Compatibility
 
-* **JSCS:** [validateNewlineAfterArrayElements](http://jscs.info/rule/validateNewlineAfterArrayElements)
+* **JSCS:** `validateNewlineAfterArrayElements`
 
 ## Related Rules
 

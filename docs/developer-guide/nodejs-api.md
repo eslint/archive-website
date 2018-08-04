@@ -103,8 +103,8 @@ The most important method on `Linter` is `verify()`, which initiates linting of 
     * **Note**: If you want to lint text and have your configuration be read and processed, use CLIEngine's [`executeOnFiles`](#cliengineexecuteonfiles) or [`executeOnText`](#cliengineexecuteontext) instead.
 * `options` - (optional) Additional options for this run.
     * `filename` - (optional) the filename to associate with the source code.
-    * `preprocess` - (optional) A function that accepts a string containing source text, and returns an array of strings containing blocks of code to lint. Also see: [Processors in Plugins](/docs/developer-guide/working-with-plugins)
-    * `postprocess` - (optional) A function that accepts an array of problem lists (one list of problems for each block of code from `preprocess`), and returns a one-dimensional array of problems containing problems for the original, unprocessed text. Also see: [Processors in Plugins](/docs/developer-guide/working-with-plugins)
+    * `preprocess` - (optional) A function that accepts a string containing source text, and returns an array of strings containing blocks of code to lint. Also see: [Processors in Plugins](/docs/developer-guide/working-with-plugins#processors-in-plugins)
+    * `postprocess` - (optional) A function that accepts an array of problem lists (one list of problems for each block of code from `preprocess`), and returns a one-dimensional array of problems containing problems for the original, unprocessed text. Also see: [Processors in Plugins](/docs/developer-guide/working-with-plugins#processors-in-plugins)
     * `allowInlineConfig` - (optional) set to `false` to disable inline comments from changing ESLint rules.
     * `reportUnusedDisableDirectives` - (optional) when set to `true`, adds reported errors for unused `eslint-disable` directives when no problems would be reported in the disabled area anyway.
 
@@ -280,7 +280,7 @@ Map {
 ### Linter#defineParser
 
 Each instance of `Linter` holds a map of custom parsers. If you want to define a parser programmatically you can add this function
-with the name of the parser as first argument and the [parser object](/docs/developer-guide/working-with-plugins) as second argument.
+with the name of the parser as first argument and the [parser object](/docs/developer-guide/working-with-plugins#working-with-custom-parsers) as second argument.
 
 If during linting the parser is not found, it will fallback to `require(parserId)`.
 
@@ -337,7 +337,7 @@ var CLIEngine = require("eslint").CLIEngine;
 The `CLIEngine` is a constructor, and you can create a new instance by passing in the options you want to use. The available options are:
 
 * `allowInlineConfig` - Set to `false` to disable the use of configuration comments (such as `/*eslint-disable*/`). Corresponds to `--no-inline-config`.
-* `baseConfig` - Set to false to disable use of base config. Could be set to an object to override default base config as well.
+* `baseConfig` - Can optionally be set to a config object. This will used as a default config, and will be merged with any configuration defined in `.eslintrc.*` files, with the `.eslintrc.*` files having precedence.
 * `cache` - Operate only on changed files (default: `false`). Corresponds to `--cache`.
 * `cacheFile` - Name of the file where the cache will be stored (default: `.eslintcache`). Corresponds to `--cache-file`. Deprecated: use `cacheLocation` instead.
 * `cacheLocation` - Name of the file or directory where the cache will be stored (default: `.eslintcache`). Corresponds to `--cache-location`.

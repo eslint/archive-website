@@ -7,7 +7,7 @@ edit_link: https://github.com/eslint/eslint/edit/master/docs/rules/lines-around-
 
 # require or disallow newlines around directives (lines-around-directive)
 
-(fixable) The `--fix` option on the [command line](../user-guide/command-line-interface#fix) can automatically fix some of the problems reported by this rule.
+(fixable) The `--fix` option on the [command line](../user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
 
 This rule was **deprecated** in ESLint v4.0.0 and replaced by the [padding-line-between-statements](padding-line-between-statements) rule.
 
@@ -327,8 +327,8 @@ You can safely disable this rule if you do not have any strict conventions about
 
 ## Compatibility
 
-* **JSCS**: [requirePaddingNewLinesAfterUseStrict](http://jscs.info/rule/requirePaddingNewLinesAfterUseStrict)
-* **JSCS**: [disallowPaddingNewLinesAfterUseStrict](http://jscs.info/rule/disallowPaddingNewLinesAfterUseStrict)
+* **JSCS**: `requirePaddingNewLinesAfterUseStrict`
+* **JSCS**: `disallowPaddingNewLinesAfterUseStrict`
 
 ## Version
 

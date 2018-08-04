@@ -75,7 +75,7 @@ The `Tag` is one of the following:
 * `Upgrade` - for a dependency upgrade.
 * `Chore` - for refactoring, adding tests, etc. (anything that isn't user-facing).
 
-Use the [labels of the issue you are working on](working-on-issues) to determine the best tag.
+Use the [labels of the issue you are working on](working-on-issues#issue-labels) to determine the best tag.
 
 The message summary should be a one-sentence description of the change, and it must be 72 characters in length or shorter. If the pull request addresses an issue, then the issue number should be mentioned at the end. If the commit doesn't completely fix the issue, then use `(refs #1234)` instead of `(fixes #1234)`.
 

@@ -7,7 +7,7 @@ edit_link: https://github.com/eslint/eslint/edit/master/docs/rules/object-curly-
 
 # enforce consistent line breaks inside braces (object-curly-newline)
 
-(fixable) The `--fix` option on the [command line](../user-guide/command-line-interface#fix) can automatically fix some of the problems reported by this rule.
+(fixable) The `--fix` option on the [command line](../user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
 
 A number of style guides require or disallow line breaks inside of object braces and other tokens.
 
@@ -520,7 +520,8 @@ export { foo as f, bar } from 'foo-bar';
 
 ## Compatibility
 
-* **JSCS**: [requirePaddingNewLinesInObjects](http://jscs.info/rule/requirePaddingNewLinesInObjects) and [disallowPaddingNewLinesInObjects](http://jscs.info/rule/disallowPaddingNewLinesInObjects)
+* **JSCS**: `requirePaddingNewLinesInObjects`
+* **JSCS**: `disallowPaddingNewLinesInObjects`
 
 ## When Not To Use It
 

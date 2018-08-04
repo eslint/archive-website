@@ -7,7 +7,7 @@ edit_link: https://github.com/eslint/eslint/edit/master/docs/rules/array-element
 
 # enforce line breaks between array elements (array-element-newline)
 
-(fixable) The `--fix` option on the [command line](../user-guide/command-line-interface#fix) can automatically fix some of the problems reported by this rule.
+(fixable) The `--fix` option on the [command line](../user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
 
 A number of style guides require or disallow line breaks between array elements.
 
@@ -299,7 +299,7 @@ If you don't want to enforce linebreaks between array elements, don't enable thi
 
 ## Compatibility
 
-* **JSCS:** [validateNewlineAfterArrayElements](http://jscs.info/rule/validateNewlineAfterArrayElements)
+* **JSCS:** `validateNewlineAfterArrayElements`
 
 ## Related Rules
 

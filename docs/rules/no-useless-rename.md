@@ -7,7 +7,7 @@ edit_link: https://github.com/eslint/eslint/edit/master/docs/rules/no-useless-re
 
 # Disallow renaming import, export, and destructured assignments to the same name (no-useless-rename)
 
-(fixable) The `--fix` option on the [command line](../user-guide/command-line-interface#fix) can automatically fix some of the problems reported by this rule.
+(fixable) The `--fix` option on the [command line](../user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
 
 ES2015 allows for the renaming of references in import and export statements as well as destructuring assignments. This gives programmers a concise syntax for performing these operations while renaming these references:
 
@@ -126,7 +126,7 @@ You can safely disable this rule if you do not care about redundantly renaming i
 
 ## Compatibility
 
-* **JSCS**: [disallowIdenticalDestructuringNames](http://jscs.info/rule/disallowIdenticalDestructuringNames)
+* **JSCS**: `disallowIdenticalDestructuringNames`
 
 ## Version
 

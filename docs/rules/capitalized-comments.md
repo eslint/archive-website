@@ -7,7 +7,7 @@ edit_link: https://github.com/eslint/eslint/edit/master/docs/rules/capitalized-c
 
 # enforce or disallow capitalization of the first letter of a comment (capitalized-comments)
 
-(fixable) The `--fix` option on the [command line](../user-guide/command-line-interface#fix) can automatically fix some of the problems reported by this rule.
+(fixable) The `--fix` option on the [command line](../user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
 
 Comments are useful for leaving information for future developers. In order for that information to be useful and not distracting, it is sometimes desirable for comments to follow a particular style. One element of comment formatting styles is whether the first word of a comment should be capitalized or lowercase.
 
@@ -254,7 +254,8 @@ This rule can be disabled if you do not care about the grammatical style of comm
 
 ## Compatibility
 
-* **JSCS**: [requireCapitalizedComments](http://jscs.info/rule/requireCapitalizedComments) and [disallowCapitalizedComments](http://jscs.info/rule/disallowCapitalizedComments)
+* **JSCS**: `requireCapitalizedComments`
+* **JSCS**: `disallowCapitalizedComments`
 
 ## Version
 

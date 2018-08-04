@@ -7,7 +7,7 @@ edit_link: https://github.com/eslint/eslint/edit/master/docs/rules/one-var.md
 
 # enforce variables to be declared either together or separately in functions (one-var)
 
-(fixable) The `--fix` option on the [command line](../user-guide/command-line-interface#fix) can automatically fix some of the problems reported by this rule.
+(fixable) The `--fix` option on the [command line](../user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
 
 Variables can be declared at any point in JavaScript code using `var`, `let`, or `const`. There are many styles and preferences related to the declaration of variables, and one of those is deciding on how many variable declarations should be allowed in a single function.
 
@@ -545,8 +545,8 @@ function foo() {
 ## Compatibility
 
 * **JSHint**: This rule maps to the `onevar` JSHint rule, but allows `let` and `const` to be configured separately.
-* **JSCS**: This rule roughly maps to [disallowMultipleVarDecl](http://jscs.info/rule/disallowMultipleVarDecl).
-* **JSCS**: This rule option `separateRequires` roughly maps to [requireMultipleVarDecl](http://jscs.info/rule/requireMultipleVarDecl).
+* **JSCS**: This rule roughly maps to `disallowMultipleVarDecl`.
+* **JSCS**: This rule option `separateRequires` roughly maps to `requireMultipleVarDecl`.
 
 ## Version
 

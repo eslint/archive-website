@@ -7,7 +7,7 @@ edit_link: https://github.com/eslint/eslint/edit/master/docs/rules/indent.md
 
 # enforce consistent indentation (indent)
 
-(fixable) The `--fix` option on the [command line](../user-guide/command-line-interface#fix) can automatically fix some of the problems reported by this rule.
+(fixable) The `--fix` option on the [command line](../user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
 
 There are several common guidelines which require specific indentation of nested blocks and statements, like:
 
@@ -670,7 +670,7 @@ if (foo) {
 ## Compatibility
 
 * **JSHint**: `indent`
-* **JSCS**: [validateIndentation](http://jscs.info/rule/validateIndentation)
+* **JSCS**: `validateIndentation`
 
 ## Version
 

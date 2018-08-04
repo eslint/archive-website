@@ -7,9 +7,11 @@ edit_link: https://github.com/eslint/eslint/edit/master/docs/rules/prefer-object
 
 # Prefer use of an object spread over `Object.assign` (prefer-object-spread)
 
-(fixable) The `--fix` option on the [command line](../user-guide/command-line-interface#fix) can automatically fix some of the problems reported by this rule.
+(fixable) The `--fix` option on the [command line](../user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
 
 When Object.assign is called using an object literal as the first argument, this rule requires using the object spread syntax instead. This rule also warns on cases where an `Object.assign` call is made using a single argument that is an object literal, in this case, the `Object.assign` call is not needed.
+
+Object spread is a declarative alternative which may perform better than the more dynamic, imperative `Object.assign`.
 
 ## Rule Details
 
@@ -53,7 +55,7 @@ Object.assign(foo, { ...baz });
 
 ## When Not To Use It
 
-When you don't care about syntactic sugar added by the object spread property.
+When object spread is not available in your codebase.
 
 ## Version
 

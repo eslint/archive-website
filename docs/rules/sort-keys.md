@@ -185,7 +185,7 @@ If you don't want to notify about properties' order, then it's safe to disable t
 
 ## Compatibility
 
-* **JSCS:** [validateOrderInObjectKeys](http://jscs.info/rule/validateOrderInObjectKeys)
+* **JSCS:** `validateOrderInObjectKeys`
 
 ## Version
 

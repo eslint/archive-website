@@ -7,7 +7,7 @@ edit_link: https://github.com/eslint/eslint/edit/master/docs/rules/nonblock-stat
 
 # enforce the location of single-line statements (nonblock-statement-body-position)
 
-(fixable) The `--fix` option on the [command line](../user-guide/command-line-interface#fix) can automatically fix some of the problems reported by this rule.
+(fixable) The `--fix` option on the [command line](../user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
 
 When writing `if`, `else`, `while`, `do-while`, and `for` statements, the body can be a single statement instead of a block. It can be useful to enforce a consistent location for these single statements.
 
@@ -164,7 +164,7 @@ If you're not concerned about consistent locations of single-line statements, yo
 
 ## Further Reading
 
-* JSCS: [requireNewlineBeforeSingleStatementsInIf](http://jscs.info/rule/requireNewlineBeforeSingleStatementsInIf)
+* JSCS: `requireNewlineBeforeSingleStatementsInIf`
 
 ## Version
 

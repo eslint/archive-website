@@ -7,7 +7,7 @@ edit_link: https://github.com/eslint/eslint/edit/master/docs/rules/no-return-awa
 
 # Disallows unnecessary `return await` (no-return-await)
 
-Inside an `async function`, `return await` is useless. Since the return value of an `async function` is always wrapped in `Promise.resolve`, `return await` doesn't actually do anything except add extra time before the overarching Promise resolves or rejects. This pattern is almost certainly due to programmer ignorance of the return semantics of `async function`s.
+Inside an `async function`, `return await` is seldom useful. Since the return value of an `async function` is always wrapped in `Promise.resolve`, `return await` doesn’t actually do anything except add extra time before the overarching Promise resolves or rejects. The only valid exception is if `return await` is used in a try/catch statement to catch errors from another Promise-based function.
 
 ## Rule Details
 
@@ -17,7 +17,7 @@ The following patterns are considered warnings:
 
 ```js
 async function foo() {
-  return await bar();
+    return await bar();
 }
 ```
 
@@ -25,23 +25,23 @@ The following patterns are not warnings:
 
 ```js
 async function foo() {
-  return bar();
+    return bar();
 }
 
 async function foo() {
-  await bar();
-  return;
+    await bar();
+    return;
 }
 
 async function foo() {
-  const x = await bar();
-  return x;
+    const x = await bar();
+    return x;
 }
 
 async function foo() {
-  try {
-    return await bar();
-  } catch (error) {}
+    try {
+        return await bar();
+    } catch (error) {}
 }
 ```
 

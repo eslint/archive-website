@@ -7,7 +7,7 @@ edit_link: https://github.com/eslint/eslint/edit/master/docs/rules/no-else-retur
 
 # Disallow return before else (no-else-return)
 
-(fixable) The `--fix` option on the [command line](../user-guide/command-line-interface#fix) can automatically fix some of the problems reported by this rule.
+(fixable) The `--fix` option on the [command line](../user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
 
 If an `if` block contains a `return` statement, the `else` block becomes unnecessary. Its contents can be placed outside of the block.
 
@@ -28,14 +28,6 @@ This rule is aimed at highlighting an unnecessary block of code following an `if
 ## Options
 
 This rule has an object option:
-
-```json
-{
-    "no-else-return": ["error", { "allowElseIf": true }],
-    // or
-    "no-else-return": ["error", { "allowElseIf": false }]
-}
-```
 
 * `allowElseIf: true` (default) allows `else if` blocks after a return
 * `allowElseIf: false` disallows `else if` blocks after a return

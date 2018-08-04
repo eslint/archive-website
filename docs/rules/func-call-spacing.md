@@ -7,7 +7,7 @@ edit_link: https://github.com/eslint/eslint/edit/master/docs/rules/func-call-spa
 
 # require or disallow spacing between function identifiers and their invocations (func-call-spacing)
 
-(fixable) The `--fix` option on the [command line](../user-guide/command-line-interface#fix) can automatically fix some of the problems reported by this rule.
+(fixable) The `--fix` option on the [command line](../user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
 
 When calling a function, developers may insert optional whitespace between the function's name and the parentheses that invoke it. The following pairs of function calls are equivalent:
 
@@ -110,8 +110,8 @@ This rule can safely be turned off if your project does not care about enforcing
 
 ## Compatibility
 
-- **JSCS**: [disallowSpacesInCallExpression](http://jscs.info/rule/disallowSpacesInCallExpression)
-- **JSCS**: [requireSpacesInCallExpression](http://jscs.info/rule/requireSpacesInCallExpression)
+- **JSCS**: `disallowSpacesInCallExpression`
+- **JSCS**: `requireSpacesInCallExpression`
 
 ## Version
 

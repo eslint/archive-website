@@ -7,7 +7,7 @@ edit_link: https://github.com/eslint/eslint/edit/master/docs/rules/indent-legacy
 
 # enforce consistent indentation (indent-legacy)
 
-(fixable) The `--fix` option on the [command line](../user-guide/command-line-interface#fix) can automatically fix some of the problems reported by this rule.
+(fixable) The `--fix` option on the [command line](../user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
 
 ESLint 4.0.0 introduced a rewrite of the [`indent`](/docs/rules/indent) rule, which now reports more errors than it did in previous versions. To ease the process of migrating to 4.0.0, the `indent-legacy` rule was introduced as a snapshot of the `indent` rule from ESLint 3.x. If your build is failing after the upgrade to 4.0.0, you can disable `indent` and enable `indent-legacy` as a quick fix. Eventually, you should switch back to the `indent` rule to get bugfixes and improvements in future versions.
 
@@ -539,7 +539,7 @@ var foo = { bar: 1,
 ## Compatibility
 
 * **JSHint**: `indent`
-* **JSCS**: [validateIndentation](http://jscs.info/rule/validateIndentation)
+* **JSCS**: `validateIndentation`
 
 ## Version
 

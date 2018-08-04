@@ -7,7 +7,7 @@ edit_link: https://github.com/eslint/eslint/edit/master/docs/rules/linebreak-sty
 
 # enforce consistent linebreak style (linebreak-style)
 
-(fixable) The `--fix` option on the [command line](../user-guide/command-line-interface#fix) can automatically fix some of the problems reported by this rule.
+(fixable) The `--fix` option on the [command line](../user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
 
 When developing with a lot of people all having different editors, VCS applications and operating systems it may occur that
 different line endings are written by either of the mentioned (might especially happen when using the windows and mac versions of SourceTree together).
@@ -92,7 +92,7 @@ If you aren't concerned about having different line endings within your code, th
 
 ## Compatibility
 
-* **JSCS**: [validateLineBreaks](http://jscs.info/rule/validateLineBreaks)
+* **JSCS**: `validateLineBreaks`
 
 ## Version
 

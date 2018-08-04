@@ -130,7 +130,7 @@ You can turn this rule off if you are not concerned with the number of lines in 
 
 ## Compatibility
 
-* **JSCS**: [maximumNumberOfLines](http://jscs.info/rule/maximumNumberOfLines)
+* **JSCS**: `maximumNumberOfLines`
 
 ## Version
 

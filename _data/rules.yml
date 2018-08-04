@@ -12,6 +12,10 @@ categories:
         fixable: false
         name: getter-return
         recommended: true
+      - description: disallow using an async function as a Promise executor
+        fixable: false
+        name: no-async-promise-executor
+        recommended: false
       - description: disallow `await` inside of loops
         fixable: false
         name: no-await-in-loop
@@ -92,6 +96,12 @@ categories:
         fixable: false
         name: no-irregular-whitespace
         recommended: true
+      - description: >-
+          disallow characters which are made with multiple code points in
+          character class syntax
+        fixable: false
+        name: no-misleading-character-class
+        recommended: false
       - description: disallow calling global object properties as functions
         fixable: false
         name: no-obj-calls
@@ -130,6 +140,12 @@ categories:
         fixable: true
         name: no-unsafe-negation
         recommended: true
+      - description: >-
+          disallow assignments that can lead to race conditions due to usage of
+          `await` or `yield`
+        fixable: false
+        name: require-atomic-updates
+        recommended: false
       - description: require calls to `isNaN()` when checking for `NaN`
         fixable: false
         name: use-isnan
@@ -426,6 +442,10 @@ categories:
       - description: disallow async functions which have no `await` expression
         fixable: false
         name: require-await
+        recommended: false
+      - description: enforce the use of `u` flag on RegExp
+        fixable: false
+        name: require-unicode-regexp
         recommended: false
       - description: >-
           require `var` declarations be placed at the top of their containing
