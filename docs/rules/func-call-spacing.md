@@ -110,8 +110,8 @@ This rule can safely be turned off if your project does not care about enforcing
 
 ## Compatibility
 
-- **JSCS**: `disallowSpacesInCallExpression`
-- **JSCS**: `requireSpacesInCallExpression`
+- **JSCS**: [disallowSpacesInCallExpression](https://jscs-dev.github.io/rule/disallowSpacesInCallExpression)
+- **JSCS**: [requireSpacesInCallExpression](https://jscs-dev.github.io/rule/requireSpacesInCallExpression)
 
 ## Version
 

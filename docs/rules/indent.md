@@ -670,7 +670,7 @@ if (foo) {
 ## Compatibility
 
 * **JSHint**: `indent`
-* **JSCS**: `validateIndentation`
+* **JSCS**: [validateIndentation](https://jscs-dev.github.io/rule/validateIndentation)
 
 ## Version
 

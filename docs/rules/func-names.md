@@ -114,8 +114,8 @@ Foo.prototype.bar = function() {};
 
 ## Compatibility
 
-* **JSCS**: `requireAnonymousFunctions`
-* **JSCS**: `disallowAnonymousFunctions`
+* **JSCS**: [requireAnonymousFunctions](https://jscs-dev.github.io/rule/requireAnonymousFunctions)
+* **JSCS**: [disallowAnonymousFunctions](https://jscs-dev.github.io/rule/disallowAnonymousFunctions)
 
 ## Version
 

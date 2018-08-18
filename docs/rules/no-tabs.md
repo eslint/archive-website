@@ -45,7 +45,7 @@ If you have established a standard where having tabs is fine.
 
 ## Compatibility
 
-* **JSCS**: `disallowTabs`
+* **JSCS**: [disallowTabs](https://jscs-dev.github.io/rule/disallowTabs)
 
 ## Version
 

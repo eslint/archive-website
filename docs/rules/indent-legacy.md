@@ -535,11 +535,10 @@ var foo = { bar: 1,
             baz: 2 };
 ```
 
-
 ## Compatibility
 
 * **JSHint**: `indent`
-* **JSCS**: `validateIndentation`
+* **JSCS**: [validateIndentation](https://jscs-dev.github.io/rule/validateIndentation)
 
 ## Version
 

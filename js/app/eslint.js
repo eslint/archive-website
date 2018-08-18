@@ -37622,7 +37622,7 @@ var NEGATIVE_REPLACERS = [].concat(DEFAULT_REPLACER_PREFIX, [
 }]], DEFAULT_REPLACER_SUFFIX);
 
 // A simple cache, because an ignore rule only has only one certain meaning
-var cache = {};
+var cache = Object.create(null);
 
 // @param {pattern}
 var make_regex = function make_regex(pattern, negative, ignorecase) {
@@ -37693,7 +37693,7 @@ var IgnoreBase = function () {
   _createClass(IgnoreBase, [{
     key: '_initCache',
     value: function _initCache() {
-      this._cache = {};
+      this._cache = Object.create(null);
     }
 
     // @param {Array.<string>|string|Ignore} pattern
@@ -57555,7 +57555,7 @@ arguments[4][49][0].apply(exports,arguments)
 },{"./support/isBuffer":109,"_process":103,"dup":49,"inherits":87}],111:[function(require,module,exports){
 module.exports={
   "name": "eslint",
-  "version": "5.3.0",
+  "version": "5.4.0",
   "author": "Nicholas C. Zakas <nicholas+npm@nczconsulting.com>",
   "description": "An AST-based pattern checker for JavaScript.",
   "bin": {
@@ -57624,7 +57624,6 @@ module.exports={
     "regexpp": "^2.0.0",
     "require-uncached": "^1.0.3",
     "semver": "^5.5.0",
-    "string.prototype.matchall": "^2.0.0",
     "strip-ansi": "^4.0.0",
     "strip-json-comments": "^2.0.1",
     "table": "^4.0.3",
@@ -67134,7 +67133,7 @@ module.exports = {
             NewExpression: true
         };
 
-        if (context.options.length === 2 && context.options[1].hasOwnProperty("exceptions")) {
+        if (context.options.length === 2 && Object.prototype.hasOwnProperty.call(context.options[1], "exceptions")) {
             var keys = Object.keys(context.options[1].exceptions);
 
             for (var i = 0; i < keys.length; i++) {
@@ -67427,10 +67426,10 @@ module.exports = {
         var option = context.options[0];
         var THRESHOLD = 20;
 
-        if ((typeof option === "undefined" ? "undefined" : _typeof(option)) === "object" && option.hasOwnProperty("maximum") && typeof option.maximum === "number") {
+        if ((typeof option === "undefined" ? "undefined" : _typeof(option)) === "object" && Object.prototype.hasOwnProperty.call(option, "maximum") && typeof option.maximum === "number") {
             THRESHOLD = option.maximum;
         }
-        if ((typeof option === "undefined" ? "undefined" : _typeof(option)) === "object" && option.hasOwnProperty("max") && typeof option.max === "number") {
+        if ((typeof option === "undefined" ? "undefined" : _typeof(option)) === "object" && Object.prototype.hasOwnProperty.call(option, "max") && typeof option.max === "number") {
             THRESHOLD = option.max;
         }
         if (typeof option === "number") {
@@ -73682,7 +73681,7 @@ module.exports = {
                 });
             },
             VariableDeclaration: function VariableDeclaration(node) {
-                var variableIndent = options.VariableDeclarator.hasOwnProperty(node.kind) ? options.VariableDeclarator[node.kind] : DEFAULT_VARIABLE_INDENT;
+                var variableIndent = Object.prototype.hasOwnProperty.call(options.VariableDeclarator, node.kind) ? options.VariableDeclarator[node.kind] : DEFAULT_VARIABLE_INDENT;
 
                 if (node.declarations[node.declarations.length - 1].loc.start.line > node.loc.start.line) {
 
@@ -75366,7 +75365,7 @@ module.exports = {
             above = !options.position || options.position === "above";
             ignorePattern = options.ignorePattern;
 
-            if (options.hasOwnProperty("applyDefaultIgnorePatterns")) {
+            if (Object.prototype.hasOwnProperty.call(options, "applyDefaultIgnorePatterns")) {
                 applyDefaultIgnorePatterns = options.applyDefaultIgnorePatterns !== false;
             } else {
                 applyDefaultIgnorePatterns = options.applyDefaultPatterns !== false;
@@ -76349,10 +76348,10 @@ module.exports = {
             option = context.options[0];
         var maxDepth = 4;
 
-        if ((typeof option === "undefined" ? "undefined" : _typeof(option)) === "object" && option.hasOwnProperty("maximum") && typeof option.maximum === "number") {
+        if ((typeof option === "undefined" ? "undefined" : _typeof(option)) === "object" && Object.prototype.hasOwnProperty.call(option, "maximum") && typeof option.maximum === "number") {
             maxDepth = option.maximum;
         }
-        if ((typeof option === "undefined" ? "undefined" : _typeof(option)) === "object" && option.hasOwnProperty("max") && typeof option.max === "number") {
+        if ((typeof option === "undefined" ? "undefined" : _typeof(option)) === "object" && Object.prototype.hasOwnProperty.call(option, "max") && typeof option.max === "number") {
             maxDepth = option.max;
         }
         if (typeof option === "number") {
@@ -77077,7 +77076,7 @@ module.exports = {
         var option = context.options[0];
         var max = 300;
 
-        if ((typeof option === "undefined" ? "undefined" : _typeof(option)) === "object" && option.hasOwnProperty("max") && typeof option.max === "number") {
+        if ((typeof option === "undefined" ? "undefined" : _typeof(option)) === "object" && Object.prototype.hasOwnProperty.call(option, "max") && typeof option.max === "number") {
             max = option.max;
         }
 
@@ -77225,10 +77224,10 @@ module.exports = {
         var option = context.options[0];
         var THRESHOLD = 10;
 
-        if ((typeof option === "undefined" ? "undefined" : _typeof(option)) === "object" && option.hasOwnProperty("maximum") && typeof option.maximum === "number") {
+        if ((typeof option === "undefined" ? "undefined" : _typeof(option)) === "object" && Object.prototype.hasOwnProperty.call(option, "maximum") && typeof option.maximum === "number") {
             THRESHOLD = option.maximum;
         }
-        if ((typeof option === "undefined" ? "undefined" : _typeof(option)) === "object" && option.hasOwnProperty("max") && typeof option.max === "number") {
+        if ((typeof option === "undefined" ? "undefined" : _typeof(option)) === "object" && Object.prototype.hasOwnProperty.call(option, "max") && typeof option.max === "number") {
             THRESHOLD = option.max;
         }
         if (typeof option === "number") {
@@ -77341,10 +77340,10 @@ module.exports = {
         var option = context.options[0];
         var numParams = 3;
 
-        if ((typeof option === "undefined" ? "undefined" : _typeof(option)) === "object" && option.hasOwnProperty("maximum") && typeof option.maximum === "number") {
+        if ((typeof option === "undefined" ? "undefined" : _typeof(option)) === "object" && Object.prototype.hasOwnProperty.call(option, "maximum") && typeof option.maximum === "number") {
             numParams = option.maximum;
         }
-        if ((typeof option === "undefined" ? "undefined" : _typeof(option)) === "object" && option.hasOwnProperty("max") && typeof option.max === "number") {
+        if ((typeof option === "undefined" ? "undefined" : _typeof(option)) === "object" && Object.prototype.hasOwnProperty.call(option, "max") && typeof option.max === "number") {
             numParams = option.max;
         }
         if (typeof option === "number") {
@@ -77644,10 +77643,10 @@ module.exports = {
             topLevelFunctions = [];
         var maxStatements = 10;
 
-        if ((typeof option === "undefined" ? "undefined" : _typeof(option)) === "object" && option.hasOwnProperty("maximum") && typeof option.maximum === "number") {
+        if ((typeof option === "undefined" ? "undefined" : _typeof(option)) === "object" && Object.prototype.hasOwnProperty.call(option, "maximum") && typeof option.maximum === "number") {
             maxStatements = option.maximum;
         }
-        if ((typeof option === "undefined" ? "undefined" : _typeof(option)) === "object" && option.hasOwnProperty("max") && typeof option.max === "number") {
+        if ((typeof option === "undefined" ? "undefined" : _typeof(option)) === "object" && Object.prototype.hasOwnProperty.call(option, "max") && typeof option.max === "number") {
             maxStatements = option.max;
         }
         if (typeof option === "number") {
@@ -82853,7 +82852,7 @@ module.exports = {
         },
 
         messages: {
-            unexpected: "Gratuitous parentheses around expression."
+            unexpected: "Unnecessary parentheses around expression."
         }
     },
 
@@ -88426,7 +88425,7 @@ module.exports = {
          * @private
          */
         function isRestricted(name) {
-            return restrictedGlobalMessages.hasOwnProperty(name);
+            return Object.prototype.hasOwnProperty.call(restrictedGlobalMessages, name);
         }
 
         return {
@@ -88531,7 +88530,7 @@ module.exports = {
 
     create: function create(context) {
         var options = Array.isArray(context.options) ? context.options : [];
-        var isPathAndPatternsObject = _typeof(options[0]) === "object" && (options[0].hasOwnProperty("paths") || options[0].hasOwnProperty("patterns"));
+        var isPathAndPatternsObject = _typeof(options[0]) === "object" && (Object.prototype.hasOwnProperty.call(options[0], "paths") || Object.prototype.hasOwnProperty.call(options[0], "patterns"));
 
         var restrictedPaths = (isPathAndPatternsObject ? options[0].paths : context.options) || [];
         var restrictedPatterns = (isPathAndPatternsObject ? options[0].patterns : []) || [];
@@ -88781,7 +88780,7 @@ module.exports = {
 
     create: function create(context) {
         var options = Array.isArray(context.options) ? context.options : [];
-        var isPathAndPatternsObject = _typeof(options[0]) === "object" && (options[0].hasOwnProperty("paths") || options[0].hasOwnProperty("patterns"));
+        var isPathAndPatternsObject = _typeof(options[0]) === "object" && (Object.prototype.hasOwnProperty.call(options[0], "paths") || Object.prototype.hasOwnProperty.call(options[0], "patterns"));
 
         var restrictedPaths = (isPathAndPatternsObject ? options[0].paths : context.options) || [];
         var restrictedPatterns = (isPathAndPatternsObject ? options[0].patterns : []) || [];
@@ -96450,19 +96449,19 @@ module.exports = {
             options.const = { uninitialized: mode, initialized: mode };
         } else if ((typeof mode === "undefined" ? "undefined" : _typeof(mode)) === "object") {
             // options configuration is an object
-            if (mode.hasOwnProperty("separateRequires")) {
+            if (Object.prototype.hasOwnProperty.call(mode, "separateRequires")) {
                 options.separateRequires = !!mode.separateRequires;
             }
-            if (mode.hasOwnProperty("var")) {
+            if (Object.prototype.hasOwnProperty.call(mode, "var")) {
                 options.var = { uninitialized: mode.var, initialized: mode.var };
             }
-            if (mode.hasOwnProperty("let")) {
+            if (Object.prototype.hasOwnProperty.call(mode, "let")) {
                 options.let = { uninitialized: mode.let, initialized: mode.let };
             }
-            if (mode.hasOwnProperty("const")) {
+            if (Object.prototype.hasOwnProperty.call(mode, "const")) {
                 options.const = { uninitialized: mode.const, initialized: mode.const };
             }
-            if (mode.hasOwnProperty("uninitialized")) {
+            if (Object.prototype.hasOwnProperty.call(mode, "uninitialized")) {
                 if (!options.var) {
                     options.var = {};
                 }
@@ -96476,7 +96475,7 @@ module.exports = {
                 options.let.uninitialized = mode.uninitialized;
                 options.const.uninitialized = mode.uninitialized;
             }
-            if (mode.hasOwnProperty("initialized")) {
+            if (Object.prototype.hasOwnProperty.call(mode, "initialized")) {
                 if (!options.var) {
                     options.var = {};
                 }
@@ -97413,13 +97412,13 @@ module.exports = {
             options.switches = shouldHavePadding;
             options.classes = shouldHavePadding;
         } else {
-            if (config.hasOwnProperty("blocks")) {
+            if (Object.prototype.hasOwnProperty.call(config, "blocks")) {
                 options.blocks = config.blocks === "always";
             }
-            if (config.hasOwnProperty("switches")) {
+            if (Object.prototype.hasOwnProperty.call(config, "switches")) {
                 options.switches = config.switches === "always";
             }
-            if (config.hasOwnProperty("classes")) {
+            if (Object.prototype.hasOwnProperty.call(config, "classes")) {
                 options.classes = config.classes === "always";
             }
         }
@@ -97582,7 +97581,7 @@ module.exports = {
 
         var rule = {};
 
-        if (options.hasOwnProperty("switches")) {
+        if (Object.prototype.hasOwnProperty.call(options, "switches")) {
             rule.SwitchStatement = function (node) {
                 if (node.cases.length === 0) {
                     return;
@@ -97591,7 +97590,7 @@ module.exports = {
             };
         }
 
-        if (options.hasOwnProperty("blocks")) {
+        if (Object.prototype.hasOwnProperty.call(options, "blocks")) {
             rule.BlockStatement = function (node) {
                 if (node.body.length === 0) {
                     return;
@@ -97600,7 +97599,7 @@ module.exports = {
             };
         }
 
-        if (options.hasOwnProperty("classes")) {
+        if (Object.prototype.hasOwnProperty.call(options, "classes")) {
             rule.ClassBody = function (node) {
                 if (node.body.length === 0) {
                     return;
@@ -99823,7 +99822,7 @@ module.exports = {
             CallExpression: function CallExpression(node) {
                 var methodName = (node.callee.property || {}).name;
                 var isReflectCall = (node.callee.object || {}).name === "Reflect";
-                var hasReflectSubsitute = reflectSubsitutes.hasOwnProperty(methodName);
+                var hasReflectSubsitute = Object.prototype.hasOwnProperty.call(reflectSubsitutes, methodName);
                 var userConfiguredException = exceptions.indexOf(methodName) !== -1;
 
                 if (hasReflectSubsitute && !isReflectCall && !userConfiguredException) {
@@ -101853,10 +101852,10 @@ module.exports = {
             requireSpaceAfter = true;
 
         if ((typeof config === "undefined" ? "undefined" : _typeof(config)) === "object") {
-            if (config.hasOwnProperty("before")) {
+            if (Object.prototype.hasOwnProperty.call(config, "before")) {
                 requireSpaceBefore = config.before;
             }
-            if (config.hasOwnProperty("after")) {
+            if (Object.prototype.hasOwnProperty.call(config, "after")) {
                 requireSpaceAfter = config.after;
             }
         }
@@ -103681,7 +103680,7 @@ module.exports = {
          * @returns {boolean} Whether or not an override has been provided for the operator
          */
         function overrideExistsForOperator(operator) {
-            return options.overrides && options.overrides.hasOwnProperty(operator);
+            return options.overrides && Object.prototype.hasOwnProperty.call(options.overrides, operator);
         }
 
         /**
@@ -105376,7 +105375,7 @@ module.exports = {
                     }
 
                     // check tag preferences
-                    if (prefer.hasOwnProperty(tag.title) && tag.title !== prefer[tag.title]) {
+                    if (Object.prototype.hasOwnProperty.call(prefer, tag.title) && tag.title !== prefer[tag.title]) {
                         var entireTagRange = getAbsoluteRange(jsdocNode, tag);
 
                         context.report({
@@ -110238,7 +110237,7 @@ SourceCodeFixer.applyFixes = function (sourceText, messages, shouldFix) {
     }
 
     messages.forEach(function (problem) {
-        if (problem.hasOwnProperty("fix")) {
+        if (Object.prototype.hasOwnProperty.call(problem, "fix")) {
             fixes.push(problem);
         } else {
             remainingMessages.push(problem);
