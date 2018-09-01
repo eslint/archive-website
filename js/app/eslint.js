@@ -9158,7 +9158,7 @@ pp$1.parseDoStatement = function(node) {
 
 pp$1.parseForStatement = function(node) {
   this.next();
-  var awaitAt = (this.options.ecmaVersion >= 9 && this.inAsync && this.eatContextual("await")) ? this.lastTokStart : -1;
+  var awaitAt = (this.options.ecmaVersion >= 9 && (this.inAsync || (!this.inFunction && this.options.allowAwaitOutsideFunction)) && this.eatContextual("await")) ? this.lastTokStart : -1;
   this.labels.push(loopLabel);
   this.enterLexicalScope();
   this.expect(types.parenL);
@@ -9364,7 +9364,7 @@ pp$1.parseLabeledStatement = function(node, maybeName, expr) {
   node.body = this.parseStatement(true);
   if (node.body.type === "ClassDeclaration" ||
       node.body.type === "VariableDeclaration" && node.body.kind !== "var" ||
-      node.body.type === "FunctionDeclaration" && (this.strict || node.body.generator))
+      node.body.type === "FunctionDeclaration" && (this.strict || node.body.generator || node.body.async))
     { this.raiseRecoverable(node.body.start, "Invalid labeled declaration"); }
   this.labels.pop();
   node.label = expr;
@@ -9482,7 +9482,7 @@ pp$1.parseFunction = function(node, isStatement, allowExpressionBody, isAsync) {
   if (isStatement) {
     node.id = isStatement === "nullableID" && this.type !== types.name ? null : this.parseIdent();
     if (node.id) {
-      this.checkLVal(node.id, "var");
+      this.checkLVal(node.id, this.inModule && !this.inFunction ? "let" : "var");
     }
   }
 
@@ -13557,7 +13557,7 @@ pp$8.readWord = function() {
 // [dammit]: acorn_loose.js
 // [walk]: util/walk.js
 
-var version = "5.7.1";
+var version = "5.7.2";
 
 // The main exported interface (under `self.acorn` when in the
 // browser) is a `parse` function that takes a code string and
@@ -57555,7 +57555,7 @@ arguments[4][49][0].apply(exports,arguments)
 },{"./support/isBuffer":109,"_process":103,"dup":49,"inherits":87}],111:[function(require,module,exports){
 module.exports={
   "name": "eslint",
-  "version": "5.4.0",
+  "version": "5.5.0",
   "author": "Nicholas C. Zakas <nicholas+npm@nczconsulting.com>",
   "description": "An AST-based pattern checker for JavaScript.",
   "bin": {
@@ -57590,8 +57590,8 @@ module.exports={
   "homepage": "https://eslint.org",
   "bugs": "https://github.com/eslint/eslint/issues/",
   "dependencies": {
-    "ajv": "^6.5.0",
-    "babel-code-frame": "^6.26.0",
+    "@babel/code-frame": "^7.0.0",
+    "ajv": "^6.5.3",
     "chalk": "^2.1.0",
     "cross-spawn": "^6.0.5",
     "debug": "^3.1.0",
@@ -57606,11 +57606,11 @@ module.exports={
     "functional-red-black-tree": "^1.0.1",
     "glob": "^7.1.2",
     "globals": "^11.7.0",
-    "ignore": "^4.0.2",
+    "ignore": "^4.0.6",
     "imurmurhash": "^0.1.4",
-    "inquirer": "^5.2.0",
+    "inquirer": "^6.1.0",
     "is-resolvable": "^1.1.0",
-    "js-yaml": "^3.11.0",
+    "js-yaml": "^3.12.0",
     "json-stable-stringify-without-jsonify": "^1.0.1",
     "levn": "^0.3.0",
     "lodash": "^4.17.5",
@@ -57623,7 +57623,7 @@ module.exports={
     "progress": "^2.0.0",
     "regexpp": "^2.0.0",
     "require-uncached": "^1.0.3",
-    "semver": "^5.5.0",
+    "semver": "^5.5.1",
     "strip-ansi": "^4.0.0",
     "strip-json-comments": "^2.0.1",
     "table": "^4.0.3",
@@ -57635,7 +57635,7 @@ module.exports={
     "babel-preset-es2015": "^6.24.1",
     "babelify": "^8.0.0",
     "beefy": "^2.1.8",
-    "brfs": "^1.5.0",
+    "brfs": "^2.0.0",
     "browserify": "^16.2.2",
     "chai": "^4.0.1",
     "cheerio": "^0.22.0",
@@ -57648,19 +57648,19 @@ module.exports={
     "eslint-release": "^0.11.1",
     "eslint-rule-composer": "^0.3.0",
     "eslump": "^1.6.2",
-    "esprima": "^4.0.0",
+    "esprima": "^4.0.1",
     "istanbul": "^0.4.5",
     "jsdoc": "^3.5.5",
-    "karma": "^2.0.0",
+    "karma": "^3.0.0",
     "karma-babel-preprocessor": "^7.0.0",
     "karma-mocha": "^1.3.0",
     "karma-mocha-reporter": "^2.2.3",
     "karma-phantomjs-launcher": "^1.0.4",
     "leche": "^2.2.3",
     "load-perf": "^0.2.0",
-    "markdownlint": "^0.8.1",
+    "markdownlint": "^0.11.0",
     "mocha": "^5.0.5",
-    "mock-fs": "^4.5.0",
+    "mock-fs": "^4.6.0",
     "npm-license": "^0.3.3",
     "phantomjs-prebuilt": "^2.1.16",
     "proxyquire": "^2.0.1",
@@ -66118,7 +66118,7 @@ module.exports = {
                         var assignmentKeyEqualsValue = node.parent.key.name === node.parent.value.name;
 
                         // prevent checking righthand side of destructured object
-                        if (!assignmentKeyEqualsValue && node.parent.key === node) {
+                        if (node.parent.key === node && node.parent.value !== node) {
                             return;
                         }
 
@@ -69428,7 +69428,10 @@ module.exports = {
             url: "https://eslint.org/docs/rules/for-direction"
         },
         fixable: null,
-        schema: []
+        schema: [],
+        messages: {
+            incorrectDirection: "The update clause in this loop moves the variable in the wrong direction."
+        }
     },
 
     create: function create(context) {
@@ -69441,7 +69444,7 @@ module.exports = {
         function report(node) {
             context.report({
                 node: node,
-                message: "The update clause in this loop moves the variable in the wrong direction."
+                messageId: "incorrectDirection"
             });
         }
 
@@ -69567,6 +69570,10 @@ module.exports = {
                 minItems: 0,
                 maxItems: 2
             }]
+        },
+        messages: {
+            unexpected: "Unexpected newline between function name and paren.",
+            missing: "Missing space between function name and paren."
         }
     },
 
@@ -69626,7 +69633,7 @@ module.exports = {
                 context.report({
                     node: node,
                     loc: lastCalleeToken.loc.start,
-                    message: "Unexpected space between function name and paren.",
+                    messageId: "unexpected",
                     fix: function fix(fixer) {
 
                         /*
@@ -69644,7 +69651,7 @@ module.exports = {
                 context.report({
                     node: node,
                     loc: lastCalleeToken.loc.start,
-                    message: "Missing space between function name and paren.",
+                    messageId: "missing",
                     fix: function fix(fixer) {
                         return fixer.insertTextBefore(parenToken, " ");
                     }
@@ -69653,7 +69660,7 @@ module.exports = {
                 context.report({
                     node: node,
                     loc: lastCalleeToken.loc.start,
-                    message: "Unexpected newline between function name and paren.",
+                    messageId: "unexpected",
                     fix: function fix(fixer) {
                         return fixer.replaceTextRange([prevToken.range[1], parenToken.range[0]], " ");
                     }
@@ -69760,6 +69767,12 @@ module.exports = {
                 additionalItems: false,
                 items: [optionsObject]
             }]
+        },
+        messages: {
+            matchProperty: "Function name `{{funcName}}` should match property name `{{name}}`",
+            matchVariable: "Function name `{{funcName}}` should match variable name `{{name}}`",
+            notMatchProperty: "Function name `{{funcName}}` should not match property name `{{name}}`",
+            notMatchVariable: "Function name `{{funcName}}` should not match variable name `{{name}}`"
         }
     },
 
@@ -69803,20 +69816,20 @@ module.exports = {
          * @returns {void}
          */
         function report(node, name, funcName, isProp) {
-            var message = void 0;
+            var messageId = void 0;
 
             if (nameMatches === "always" && isProp) {
-                message = "Function name `{{funcName}}` should match property name `{{name}}`";
+                messageId = "matchProperty";
             } else if (nameMatches === "always") {
-                message = "Function name `{{funcName}}` should match variable name `{{name}}`";
+                messageId = "matchVariable";
             } else if (isProp) {
-                message = "Function name `{{funcName}}` should not match property name `{{name}}`";
+                messageId = "notMatchProperty";
             } else {
-                message = "Function name `{{funcName}}` should not match variable name `{{name}}`";
+                messageId = "notMatchVariable";
             }
             context.report({
                 node: node,
-                message: message,
+                messageId: messageId,
                 data: {
                     name: name,
                     funcName: funcName
@@ -69939,7 +69952,11 @@ module.exports = {
 
         schema: [{
             enum: ["always", "as-needed", "never"]
-        }]
+        }],
+        messages: {
+            unnamed: "Unexpected unnamed {{name}}.",
+            named: "Unexpected named {{name}}."
+        }
     },
 
     create: function create(context) {
@@ -69987,7 +70004,7 @@ module.exports = {
                     if (hasName) {
                         context.report({
                             node: node,
-                            message: "Unexpected named {{name}}.",
+                            messageId: "named",
                             data: { name: name }
                         });
                     }
@@ -69995,7 +70012,7 @@ module.exports = {
                     if (!hasName && (asNeeded ? !hasInferredName(node) : !isObjectOrClassMethod(node))) {
                         context.report({
                             node: node,
-                            message: "Unexpected unnamed {{name}}.",
+                            messageId: "unnamed",
                             data: { name: name }
                         });
                     }
@@ -70035,7 +70052,11 @@ module.exports = {
                 }
             },
             additionalProperties: false
-        }]
+        }],
+        messages: {
+            expression: "Expected a function expression.",
+            declaration: "Expected a function declaration."
+        }
     },
 
     create: function create(context) {
@@ -70050,7 +70071,7 @@ module.exports = {
                 stack.push(false);
 
                 if (!enforceDeclarations && node.parent.type !== "ExportDefaultDeclaration") {
-                    context.report({ node: node, message: "Expected a function expression." });
+                    context.report({ node: node, messageId: "expression" });
                 }
             },
             "FunctionDeclaration:exit": function FunctionDeclarationExit() {
@@ -70060,7 +70081,7 @@ module.exports = {
                 stack.push(false);
 
                 if (enforceDeclarations && node.parent.type === "VariableDeclarator") {
-                    context.report({ node: node.parent, message: "Expected a function declaration." });
+                    context.report({ node: node.parent, messageId: "declaration" });
                 }
             },
             "FunctionExpression:exit": function FunctionExpressionExit() {
@@ -70082,7 +70103,7 @@ module.exports = {
                 var hasThisExpr = stack.pop();
 
                 if (enforceDeclarations && !hasThisExpr && node.parent.type === "VariableDeclarator") {
-                    context.report({ node: node.parent, message: "Expected a function declaration." });
+                    context.report({ node: node.parent, messageId: "declaration" });
                 }
             };
         }
@@ -70132,7 +70153,13 @@ module.exports = {
                 },
                 additionalProperties: false
             }]
-        }]
+        }],
+        messages: {
+            expectedBefore: "Expected newline before ')'.",
+            expectedAfter: "Expected newline after '('.",
+            unexpectedBefore: "Unexpected newline before '('.",
+            unexpectedAfter: "Unexpected newline after ')'."
+        }
     },
 
     create: function create(context) {
@@ -70192,7 +70219,7 @@ module.exports = {
             if (hasLeftNewline && !needsNewlines) {
                 context.report({
                     node: leftParen,
-                    message: "Unexpected newline after '('.",
+                    messageId: "unexpectedAfter",
                     fix: function fix(fixer) {
                         return sourceCode.getText().slice(leftParen.range[1], tokenAfterLeftParen.range[0]).trim()
 
@@ -70203,7 +70230,7 @@ module.exports = {
             } else if (!hasLeftNewline && needsNewlines) {
                 context.report({
                     node: leftParen,
-                    message: "Expected a newline after '('.",
+                    messageId: "expectedAfter",
                     fix: function fix(fixer) {
                         return fixer.insertTextAfter(leftParen, "\n");
                     }
@@ -70213,7 +70240,7 @@ module.exports = {
             if (hasRightNewline && !needsNewlines) {
                 context.report({
                     node: rightParen,
-                    message: "Unexpected newline before ')'.",
+                    messageId: "unexpectedBefore",
                     fix: function fix(fixer) {
                         return sourceCode.getText().slice(tokenBeforeRightParen.range[1], rightParen.range[0]).trim()
 
@@ -70224,7 +70251,7 @@ module.exports = {
             } else if (!hasRightNewline && needsNewlines) {
                 context.report({
                     node: rightParen,
-                    message: "Expected a newline before ')'.",
+                    messageId: "expectedBefore",
                     fix: function fix(fixer) {
                         return fixer.insertTextBefore(rightParen, "\n");
                     }
@@ -70363,7 +70390,13 @@ module.exports = {
                 },
                 additionalProperties: false
             }]
-        }]
+        }],
+        messages: {
+            missingBefore: "Missing space before *.",
+            missingAfter: "Missing space after *.",
+            unexpectedBefore: "Unexpected space before *.",
+            unexpectedAfter: "Unexpected space after *."
+        }
     },
 
     create: function create(context) {
@@ -70423,6 +70456,15 @@ module.exports = {
         }
 
         /**
+         * capitalize a given string.
+         * @param {string} str the given string.
+         * @returns {string} the capitalized string.
+         */
+        function capitalize(str) {
+            return str[0].toUpperCase() + str.slice(1);
+        }
+
+        /**
          * Checks the spacing between two tokens before or after the star token.
          *
          * @param {string} kind Either "named", "anonymous", or "method"
@@ -70438,17 +70480,11 @@ module.exports = {
                 var after = leftToken.value === "*";
                 var spaceRequired = modes[kind][side];
                 var node = after ? leftToken : rightToken;
-                var type = spaceRequired ? "Missing" : "Unexpected";
-                var message = "{{type}} space {{side}} *.";
-                var data = {
-                    type: type,
-                    side: side
-                };
+                var messageId = "" + (spaceRequired ? "missing" : "unexpected") + capitalize(side);
 
                 context.report({
                     node: node,
-                    message: message,
-                    data: data,
+                    messageId: messageId,
                     fix: function fix(fixer) {
                         if (spaceRequired) {
                             if (after) {
@@ -70562,7 +70598,11 @@ module.exports = {
                 }
             },
             additionalProperties: false
-        }]
+        }],
+        messages: {
+            expected: "Expected to return a value in {{name}}.",
+            expectedAlways: "Expected {{name}} to always return a value."
+        }
     },
 
     create: function create(context) {
@@ -70592,7 +70632,7 @@ module.exports = {
                 context.report({
                     node: node,
                     loc: getId(node).loc.start,
-                    message: funcInfo.hasReturn ? "Expected {{name}} to always return a value." : "Expected to return a value in {{name}}.",
+                    messageId: funcInfo.hasReturn ? "expectedAlways" : "expected",
                     data: {
                         name: astUtils.getFunctionNameWithKind(funcInfo.node)
                     }
@@ -70656,7 +70696,7 @@ module.exports = {
                     if (!options.allowImplicit && !node.argument) {
                         context.report({
                             node: node,
-                            message: "Expected to return a value in {{name}}.",
+                            messageId: "expected",
                             data: {
                                 name: astUtils.getFunctionNameWithKind(funcInfo.node)
                             }
@@ -77336,7 +77376,7 @@ module.exports = {
     },
 
     create: function create(context) {
-
+        var sourceCode = context.getSourceCode();
         var option = context.options[0];
         var numParams = 3;
 
@@ -77359,6 +77399,7 @@ module.exports = {
         function checkFunction(node) {
             if (node.params.length > numParams) {
                 context.report({
+                    loc: astUtils.getFunctionHeadLoc(node, sourceCode),
                     node: node,
                     message: "{{name}} has too many parameters ({{count}}). Maximum allowed is {{max}}.",
                     data: {
@@ -85717,7 +85758,11 @@ module.exports = {
                 }
             },
             additionalProperties: false
-        }]
+        }],
+        messages: {
+            useConst: "Number constants declarations must use 'const'.",
+            noMagic: "No magic number: {{raw}}."
+        }
     },
 
     create: function create(context) {
@@ -85807,13 +85852,13 @@ module.exports = {
                     if (enforceConst && parent.parent.kind !== "const") {
                         context.report({
                             node: fullNumberNode,
-                            message: "Number constants declarations must use 'const'."
+                            messageId: "useConst"
                         });
                     }
                 } else if (okTypes.indexOf(parent.type) === -1 || parent.type === "AssignmentExpression" && parent.left.type === "Identifier") {
                     context.report({
                         node: fullNumberNode,
-                        message: "No magic number: {{raw}}.",
+                        messageId: "noMagic",
                         data: {
                             raw: raw
                         }
