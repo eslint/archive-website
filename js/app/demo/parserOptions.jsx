@@ -40,7 +40,7 @@ define(["react"], function(React) {
                     <h3>ECMA Features</h3>
                     <div className="ecmaFeatures list">
                         {
-                            ["jsx", "globalReturn", "impliedStrict", "experimentalObjectRestSpread"].map(function(ecmaFeature) {
+                            ["jsx", "globalReturn", "impliedStrict"].map(function(ecmaFeature) {
                                 return (
                                     <div className="checkbox" key={ecmaFeature}>
                                         <label htmlFor={ecmaFeature}>
