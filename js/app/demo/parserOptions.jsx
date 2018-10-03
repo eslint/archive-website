@@ -7,7 +7,7 @@ define(["react"], function(React) {
                 <div className="col-md-4">
                     <h3>ECMA Version</h3>
                     <select
-                        value={props.options.ecmaVersion + (props.options.ecmaVersion < 2015 ? 2009 : 0)}
+                        value={props.options.ecmaVersion}
                         onChange={
                             function(event) {
                                 props.onUpdate(Object.assign({}, props.options, { ecmaVersion: +event.target.value }));
@@ -16,10 +16,10 @@ define(["react"], function(React) {
                     >
                         <option value="3">3</option>
                         <option value="5">5</option>
-                        <option value="2015">2015</option>
-                        <option value="2016">2016</option>
-                        <option value="2017">2017</option>
-                        <option value="2018">2018</option>
+                        <option value="6">2015</option>
+                        <option value="7">2016</option>
+                        <option value="8">2017</option>
+                        <option value="9">2018</option>
                     </select>
                 </div>
                 <div className="col-md-4">
