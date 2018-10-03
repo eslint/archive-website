@@ -89,6 +89,18 @@ define(["react", "jsx!editor", "jsx!messages", "jsx!fixedCode", "jsx!configurati
                 }
             );
 
+            if (
+                initialState &&
+                initialState.options &&
+                initialState.options.parserOptions &&
+                initialState.options.parserOptions.ecmaFeatures &&
+                initialState.options.parserOptions.ecmaFeatures.experimentalObjectRestSpread
+            ) {
+
+                // Delete the `experimentalObjectRestSpread` option from old states created when the demo supported the option.
+                delete initialState.options.parserOptions.ecmaFeatures.experimentalObjectRestSpread;
+            }
+
             this.initialText = initialState.text;
             return initialState;
         },
