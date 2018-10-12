@@ -83,6 +83,10 @@ var {a = 0} = bar;
 function foo(a = 0) { }
 ```
 
+## When Not To Use It
+
+You can turn this rule off if you are not concerned with the consistency of spacing around infix operators.
+
 ## Version
 
 This rule was introduced in ESLint 0.2.0.

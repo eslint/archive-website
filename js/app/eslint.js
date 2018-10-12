@@ -22223,6 +22223,8 @@ formatters.j = function (v) {
 },{"./common":54,"_process":103}],54:[function(require,module,exports){
 'use strict';
 
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
 /**
  * This is the common logic for both the Node.js and web browser
  * implementations of `debug()`.
@@ -22415,10 +22417,15 @@ function setup(env) {
 	/**
  * Disable debug output.
  *
+ * @return {String} namespaces
  * @api public
  */
 	function disable() {
+		var namespaces = [].concat(_toConsumableArray(createDebug.names.map(toNamespace)), _toConsumableArray(createDebug.skips.map(toNamespace).map(function (namespace) {
+			return '-' + namespace;
+		}))).join(',');
 		createDebug.enable('');
+		return namespaces;
 	}
 
 	/**
@@ -22449,6 +22456,17 @@ function setup(env) {
 		}
 
 		return false;
+	}
+
+	/**
+ * Convert regexp to namespace
+ *
+ * @param {RegExp} regxep
+ * @return {String} namespace
+ * @api private
+ */
+	function toNamespace(regexp) {
+		return regexp.toString().substring(2, regexp.toString().length - 2).replace(/\.\*\?$/, '*');
 	}
 
 	/**
@@ -36926,6 +36944,7 @@ module.exports={
 		"URLSearchParams": false,
 		"WebSocket": false,
 		"Worker": false,
+		"WorkerGlobalScope": false,
 		"XMLHttpRequest": false
 	},
 	"node": {
@@ -37121,7 +37140,8 @@ module.exports={
 		"jQuery": false
 	},
 	"yui": {
-		"Y": false,
+		"YAHOO": false,
+		"YAHOO_config": false,
 		"YUI": false,
 		"YUI_config": false
 	},
@@ -54238,6 +54258,9 @@ var RegExpValidator = function () {
                 if (cp === RightParenthesis) {
                     this.raise("Unmatched ')'");
                 }
+                if (cp === ReverseSolidus) {
+                    this.raise("\\ at end of pattern");
+                }
                 if (cp === RightSquareBracket || cp === RightCurlyBracket) {
                     this.raise("Lone quantifier brackets");
                 }
@@ -54500,7 +54523,18 @@ var RegExpValidator = function () {
     }, {
         key: 'eatExtendedAtom',
         value: function eatExtendedAtom() {
-            return this.eatDot() || this.eatReverseSolidusAtomEscape() || this.eatCharacterClass() || this.eatUncapturingGroup() || this.eatCapturingGroup() || this.eatInvalidBracedQuantifier() || this.eatExtendedPatternCharacter();
+            return this.eatDot() || this.eatReverseSolidusAtomEscape() || this.eatReverseSolidusFollowedByC() || this.eatCharacterClass() || this.eatUncapturingGroup() || this.eatCapturingGroup() || this.eatInvalidBracedQuantifier() || this.eatExtendedPatternCharacter();
+        }
+    }, {
+        key: 'eatReverseSolidusFollowedByC',
+        value: function eatReverseSolidusFollowedByC() {
+            if (this.currentCodePoint === ReverseSolidus && this.nextCodePoint === LatinSmallLetterC) {
+                this._lastIntValue = this.currentCodePoint;
+                this.advance();
+                this.onCharacter(this.index - 1, this.index, ReverseSolidus);
+                return true;
+            }
+            return false;
         }
     }, {
         key: 'eatInvalidBracedQuantifier',
@@ -54537,7 +54571,7 @@ var RegExpValidator = function () {
         value: function eatExtendedPatternCharacter() {
             var start = this.index;
             var cp = this.currentCodePoint;
-            if (cp !== -1 && cp !== CircumflexAccent && cp !== DollarSign && cp !== FullStop && cp !== Asterisk && cp !== PlusSign && cp !== QuestionMark && cp !== LeftParenthesis && cp !== RightParenthesis && cp !== LeftSquareBracket && cp !== VerticalLine) {
+            if (cp !== -1 && cp !== CircumflexAccent && cp !== DollarSign && cp !== ReverseSolidus && cp !== FullStop && cp !== Asterisk && cp !== PlusSign && cp !== QuestionMark && cp !== LeftParenthesis && cp !== RightParenthesis && cp !== LeftSquareBracket && cp !== VerticalLine) {
                 this.advance();
                 this.onCharacter(start, this.index, cp);
                 return true;
@@ -57603,7 +57637,7 @@ arguments[4][49][0].apply(exports,arguments)
 },{"./support/isBuffer":109,"_process":103,"dup":49,"inherits":87}],111:[function(require,module,exports){
 module.exports={
   "name": "eslint",
-  "version": "5.6.1",
+  "version": "5.7.0",
   "author": "Nicholas C. Zakas <nicholas+npm@nczconsulting.com>",
   "description": "An AST-based pattern checker for JavaScript.",
   "bin": {
@@ -57669,12 +57703,12 @@ module.exports={
     "path-is-inside": "^1.0.2",
     "pluralize": "^7.0.0",
     "progress": "^2.0.0",
-    "regexpp": "^2.0.0",
+    "regexpp": "^2.0.1",
     "require-uncached": "^1.0.3",
     "semver": "^5.5.1",
     "strip-ansi": "^4.0.0",
     "strip-json-comments": "^2.0.1",
-    "table": "^4.0.3",
+    "table": "^5.0.2",
     "text-table": "^0.2.0"
   },
   "devDependencies": {
@@ -66049,6 +66083,14 @@ module.exports = {
                 },
                 properties: {
                     enum: ["always", "never"]
+                },
+                allow: {
+                    type: "array",
+                    items: [{
+                        type: "string"
+                    }],
+                    minItems: 0,
+                    uniqueItems: true
                 }
             },
             additionalProperties: false
@@ -66060,6 +66102,15 @@ module.exports = {
     },
 
     create: function create(context) {
+
+        var options = context.options[0] || {};
+        var properties = options.properties || "";
+        var ignoreDestructuring = options.ignoreDestructuring || false;
+        var allow = options.allow || [];
+
+        if (properties !== "always" && properties !== "never") {
+            properties = "always";
+        }
 
         //--------------------------------------------------------------------------
         // Helpers
@@ -66079,6 +66130,18 @@ module.exports = {
 
             // if there's an underscore, it might be A_CONSTANT, which is okay
             return name.indexOf("_") > -1 && name !== name.toUpperCase();
+        }
+
+        /**
+         * Checks if a string match the ignore list
+         * @param {string} name The string to check.
+         * @returns {boolean} if the string is ignored
+         * @private
+         */
+        function isAllowed(name) {
+            return allow.findIndex(function (entry) {
+                return name === entry || name.match(new RegExp(entry));
+            }) !== -1;
         }
 
         /**
@@ -66115,14 +66178,6 @@ module.exports = {
             }
         }
 
-        var options = context.options[0] || {};
-        var properties = options.properties || "";
-        var ignoreDestructuring = options.ignoreDestructuring || false;
-
-        if (properties !== "always" && properties !== "never") {
-            properties = "always";
-        }
-
         return {
             Identifier: function Identifier(node) {
 
@@ -66132,6 +66187,11 @@ module.exports = {
                  */
                 var name = node.name.replace(/^_+|_+$/g, ""),
                     effectiveParent = node.parent.type === "MemberExpression" ? node.parent.parent : node.parent;
+
+                // First, we ignore the node if it match the ignore list
+                if (isAllowed(name)) {
+                    return;
+                }
 
                 // MemberExpressions get special rules
                 if (node.parent.type === "MemberExpression") {
@@ -82545,6 +82605,12 @@ module.exports = {
 var astUtils = require("../util/ast-utils");
 
 //------------------------------------------------------------------------------
+// Helpers
+//------------------------------------------------------------------------------
+
+var SIDE_EFFECT_FREE_NODE_TYPES = new Set(["Literal", "Identifier", "ThisExpression", "FunctionExpression"]);
+
+//------------------------------------------------------------------------------
 // Rule Definition
 //------------------------------------------------------------------------------
 
@@ -82570,6 +82636,18 @@ module.exports = {
         var scopeInfo = null;
 
         /**
+         * Checks if a node is free of side effects.
+         *
+         * This check is stricter than it needs to be, in order to keep the implementation simple.
+         *
+         * @param {ASTNode} node A node to check.
+         * @returns {boolean} True if the node is known to be side-effect free, false otherwise.
+         */
+        function isSideEffectFree(node) {
+            return SIDE_EFFECT_FREE_NODE_TYPES.has(node.type);
+        }
+
+        /**
          * Reports a given function node.
          *
          * @param {ASTNode} node - A node to report. This is a FunctionExpression or
@@ -82582,6 +82660,10 @@ module.exports = {
                 messageId: "unexpected",
                 loc: node.parent.property.loc.start,
                 fix: function fix(fixer) {
+                    if (node.parent.parent.arguments.length && !isSideEffectFree(node.parent.parent.arguments[0])) {
+                        return null;
+                    }
+
                     var firstTokenToRemove = context.getSourceCode().getFirstTokenBetween(node.parent.object, node.parent.property, astUtils.isNotClosingParenToken);
 
                     return fixer.removeRange([firstTokenToRemove.range[0], node.parent.parent.range[1]]);
@@ -90236,7 +90318,8 @@ module.exports = {
 // Helpers
 //------------------------------------------------------------------------------
 
-var regex = /\t/;
+var tabRegex = /\t+/g;
+var anyNonWhitespaceRegex = /\S/;
 
 //------------------------------------------------------------------------------
 // Public Interface
@@ -90250,21 +90333,36 @@ module.exports = {
             recommended: false,
             url: "https://eslint.org/docs/rules/no-tabs"
         },
-        schema: []
+        schema: [{
+            type: "object",
+            properties: {
+                allowIndentationTabs: {
+                    type: "boolean"
+                }
+            },
+            additionalProperties: false
+        }]
     },
 
     create: function create(context) {
+        var sourceCode = context.getSourceCode();
+        var allowIndentationTabs = context.options && context.options[0] && context.options[0].allowIndentationTabs;
+
         return {
             Program: function Program(node) {
-                context.getSourceCode().getLines().forEach(function (line, index) {
-                    var match = regex.exec(line);
+                sourceCode.getLines().forEach(function (line, index) {
+                    var match = void 0;
 
-                    if (match) {
+                    while ((match = tabRegex.exec(line)) !== null) {
+                        if (allowIndentationTabs && !anyNonWhitespaceRegex.test(line.slice(0, match.index))) {
+                            continue;
+                        }
+
                         context.report({
                             node: node,
                             loc: {
                                 line: index + 1,
-                                column: match.index + 1
+                                column: match.index
                             },
                             message: "Unexpected tab character."
                         });
@@ -92971,7 +93069,7 @@ module.exports = {
 
             // If any used parameters occur after this parameter, do not report.
             return !posteriorParams.some(function (v) {
-                return v.references.length > 0;
+                return v.references.length > 0 || v.eslintUsed;
             });
         }
 
@@ -96835,6 +96933,11 @@ module.exports = {
             return function (fixer) {
                 return declaration.declarations.map(function (declarator) {
                     var tokenAfterDeclarator = sourceCode.getTokenAfter(declarator);
+
+                    if (tokenAfterDeclarator === null) {
+                        return null;
+                    }
+
                     var afterComma = sourceCode.getTokenAfter(tokenAfterDeclarator, { includeComments: true });
 
                     if (tokenAfterDeclarator.value !== ",") {
@@ -98105,6 +98208,9 @@ var StatementTypes = {
         test: function test(node, sourceCode) {
             return node.type === "ExpressionStatement" && !isDirectivePrologue(node, sourceCode);
         }
+    },
+    iife: {
+        test: isIIFEStatement
     },
     "multiline-block-like": {
         test: function test(node, sourceCode) {
@@ -103716,28 +103822,27 @@ module.exports = {
 
     create: function create(context) {
         var int32Hint = context.options[0] ? context.options[0].int32Hint === true : false;
-
-        var OPERATORS = ["*", "/", "%", "+", "-", "<<", ">>", ">>>", "<", "<=", ">", ">=", "in", "instanceof", "==", "!=", "===", "!==", "&", "^", "|", "&&", "||", "=", "+=", "-=", "*=", "/=", "%=", "<<=", ">>=", ">>>=", "&=", "^=", "|=", "?", ":", ",", "**"];
-
         var sourceCode = context.getSourceCode();
 
         /**
          * Returns the first token which violates the rule
          * @param {ASTNode} left - The left node of the main node
          * @param {ASTNode} right - The right node of the main node
+         * @param {string} op - The operator of the main node
          * @returns {Object} The violator token or null
          * @private
          */
-        function getFirstNonSpacedToken(left, right) {
-            var tokens = sourceCode.getTokensBetween(left, right, 1);
+        function getFirstNonSpacedToken(left, right, op) {
+            var operator = sourceCode.getFirstTokenBetween(left, right, function (token) {
+                return token.value === op;
+            });
+            var prev = sourceCode.getTokenBefore(operator);
+            var next = sourceCode.getTokenAfter(operator);
 
-            for (var i = 1, l = tokens.length - 1; i < l; ++i) {
-                var op = tokens[i];
-
-                if ((op.type === "Punctuator" || op.type === "Keyword") && OPERATORS.indexOf(op.value) >= 0 && (tokens[i - 1].range[1] >= op.range[0] || op.range[1] >= tokens[i + 1].range[0])) {
-                    return op;
-                }
+            if (!sourceCode.isSpaceBetweenTokens(prev, operator) || !sourceCode.isSpaceBetweenTokens(operator, next)) {
+                return operator;
             }
+
             return null;
         }
 
@@ -103783,7 +103888,10 @@ module.exports = {
             var leftNode = node.left.typeAnnotation ? node.left.typeAnnotation : node.left;
             var rightNode = node.right;
 
-            var nonSpacedNode = getFirstNonSpacedToken(leftNode, rightNode);
+            // search for = in AssignmentPattern nodes
+            var operator = node.operator || "=";
+
+            var nonSpacedNode = getFirstNonSpacedToken(leftNode, rightNode, operator);
 
             if (nonSpacedNode) {
                 if (!(int32Hint && sourceCode.getText(node).endsWith("|0"))) {
@@ -103799,8 +103907,8 @@ module.exports = {
          * @private
          */
         function checkConditional(node) {
-            var nonSpacedConsequesntNode = getFirstNonSpacedToken(node.test, node.consequent);
-            var nonSpacedAlternateNode = getFirstNonSpacedToken(node.consequent, node.alternate);
+            var nonSpacedConsequesntNode = getFirstNonSpacedToken(node.test, node.consequent, "?");
+            var nonSpacedAlternateNode = getFirstNonSpacedToken(node.consequent, node.alternate, ":");
 
             if (nonSpacedConsequesntNode) {
                 report(node, nonSpacedConsequesntNode);
@@ -103820,7 +103928,7 @@ module.exports = {
             var rightNode = node.init;
 
             if (rightNode) {
-                var nonSpacedNode = getFirstNonSpacedToken(leftNode, rightNode);
+                var nonSpacedNode = getFirstNonSpacedToken(leftNode, rightNode, "=");
 
                 if (nonSpacedNode) {
                     report(node, nonSpacedNode);
