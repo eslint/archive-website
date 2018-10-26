@@ -160,7 +160,7 @@ Examples of **correct** code for this rule with the `{ "ignoreMemberSort": true 
 
 ```js
 /*eslint sort-imports: ["error", { "ignoreMemberSort": true }]*/
-import {b, a, c} from 'foo.js'
+import {a, b, c} from 'foo.js'
 ```
 
 Default is `false`.
