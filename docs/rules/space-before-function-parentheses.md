@@ -2,6 +2,7 @@
 title: space-before-function-parentheses - Rules
 layout: doc
 edit_link: https://github.com/eslint/eslint/edit/master/docs/rules/space-before-function-parentheses.md
+
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 

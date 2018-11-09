@@ -2,6 +2,7 @@
 title: no-underscore-dangle - Rules
 layout: doc
 edit_link: https://github.com/eslint/eslint/edit/master/docs/rules/no-underscore-dangle.md
+rule_type: suggestion
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 

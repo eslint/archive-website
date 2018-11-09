@@ -2,6 +2,7 @@
 title: space-before-blocks - Rules
 layout: doc
 edit_link: https://github.com/eslint/eslint/edit/master/docs/rules/space-before-blocks.md
+rule_type: layout
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
@@ -26,7 +27,7 @@ This rule will enforce consistency of spacing before blocks. It is only applied 
 This rule takes one argument. If it is `"always"` then blocks must always have at least one preceding space. If `"never"`
 then all blocks should never have any preceding space. If different spacing is desired for function
 blocks, keyword blocks and classes, an optional configuration object can be passed as the rule argument to
-configure the cases separately.
+configure the cases separately. If any value in the configuration object is `"off"`, then neither style will be enforced for blocks of that kind.
 
 ( e.g. `{ "functions": "never", "keywords": "always", "classes": "always" }` )
 

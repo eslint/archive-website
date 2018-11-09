@@ -2,6 +2,7 @@
 title: id-match - Rules
 layout: doc
 edit_link: https://github.com/eslint/eslint/edit/master/docs/rules/id-match.md
+rule_type: suggestion
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
@@ -65,6 +66,9 @@ This rule has an object option:
 
 * `"properties": true` requires object properties to match the specified regular expression
 * `"onlyDeclarations": true` requires only `var`, `function`, and `class` declarations to match the specified regular expression
+* `"onlyDeclarations": false` requires all variable names to match the specified regular expression
+* `"ignoreDestructuring": false` (default) enforces `id-match` for destructured identifiers
+* `"ignoreDestructuring": true` does not check destructured identifiers
 
 ### properties
 
@@ -86,6 +90,48 @@ Examples of **correct** code for this rule with the `"^[a-z]+([A-Z][a-z]+)*$", {
 /*eslint id-match: [2, "^[a-z]+([A-Z][a-z]+)*$", { "onlyDeclarations": true }]*/
 
 do_something(__dirname);
+```
+
+### ignoreDestructuring: false
+
+Examples of **incorrect** code for this rule with the default `"^[^_]+$", { "ignoreDestructuring": false }` option:
+
+```js
+/*eslint id-match: [2, "^[^_]+$", { "ignoreDestructuring": false }]*/
+
+var { category_id } = query;
+
+var { category_id = 1 } = query;
+
+var { category_id: category_id } = query;
+
+var { category_id: category_alias } = query;
+
+var { category_id: categoryId, ...other_props } = query;
+```
+
+### ignoreDestructuring: true
+
+Examples of **incorrect** code for this rule with the `"^[^_]+$", { "ignoreDestructuring": true }` option:
+
+```js
+/*eslint id-match: [2, "^[^_]+$", { "ignoreDestructuring": true }]*/
+
+var { category_id: category_alias } = query;
+
+var { category_id, ...other_props } = query;
+```
+
+Examples of **correct** code for this rule with the `"^[^_]+$", { "ignoreDestructuring": true }` option:
+
+```js
+/*eslint id-match: [2, "^[^_]+$", { "ignoreDestructuring": true }]*/
+
+var { category_id } = query;
+
+var { category_id = 1 } = query;
+
+var { category_id: category_id } = query;
 ```
 
 ## When Not To Use It

@@ -2,12 +2,30 @@
 title: require-await - Rules
 layout: doc
 edit_link: https://github.com/eslint/eslint/edit/master/docs/rules/require-await.md
+rule_type: suggestion
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
 # Disallow async functions which have no `await` expression (require-await)
 
-Async functions which have no `await` expression may be the unintentional result of refactoring.
+Asynchronous functions in JavaScript behave differently than other functions in two important ways:
+
+1. The return value is always a `Promise`.
+2. You can use the `await` operator inside of them.
+
+The primary reason to use asynchronous functions is typically to use the `await` operator, such as this:
+
+```js
+async function fetchData(processDataItem) {
+    const response = await fetch(DATA_URL);
+    const data = await response.json();
+
+    return data.map(processDataItem);
+}
+```
+
+Asynchronous functions that don't use `await` might not need to be asynchronous functions and could be the unintentional result of refactoring.
+
 
 ## Rule Details
 
@@ -54,7 +72,22 @@ async function noop() {}
 
 ## When Not To Use It
 
-If you don't want to notify async functions which have no `await` expression, then it's safe to disable this rule.
+Asynchronous functions are designed to work with promises such that throwing an error will cause a promise's rejection handler (such as `catch()`) to be called. For example:
+
+```js
+async function fail() {
+    throw new Error("Failure!");
+}
+
+fail().catch(error => {
+    console.log(error.message);
+});
+```
+
+In this case, the `fail()` function throws an error that is intended to be caught by the `catch()` handler assigned later. Converting the `fail()` function into a synchronous function would require the call to `fail()` to be refactored to use a `try-catch` statement instead of a promise.
+
+If you are throwing an error inside of an asynchronous function for this purpose, then you may want to disable this rule.
+
 
 ## Related Rules
 

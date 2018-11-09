@@ -2,6 +2,7 @@
 title: no-extra-parens - Rules
 layout: doc
 edit_link: https://github.com/eslint/eslint/edit/master/docs/rules/no-extra-parens.md
+rule_type: layout
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 

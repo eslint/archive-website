@@ -2,6 +2,7 @@
 title: no-multiple-empty-lines - Rules
 layout: doc
 edit_link: https://github.com/eslint/eslint/edit/master/docs/rules/no-multiple-empty-lines.md
+rule_type: layout
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 

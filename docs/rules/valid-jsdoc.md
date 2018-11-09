@@ -2,6 +2,7 @@
 title: valid-jsdoc - Rules
 layout: doc
 edit_link: https://github.com/eslint/eslint/edit/master/docs/rules/valid-jsdoc.md
+rule_type: suggestion
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 

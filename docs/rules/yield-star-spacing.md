@@ -2,6 +2,7 @@
 title: yield-star-spacing - Rules
 layout: doc
 edit_link: https://github.com/eslint/eslint/edit/master/docs/rules/yield-star-spacing.md
+rule_type: layout
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 

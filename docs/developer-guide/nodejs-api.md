@@ -2,6 +2,7 @@
 title: Node.js API
 layout: doc
 edit_link: https://github.com/eslint/eslint/edit/master/docs/developer-guide/nodejs-api.md
+
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
@@ -354,7 +355,8 @@ The `CLIEngine` is a constructor, and you can create a new instance by passing i
 * `cwd` - Path to a directory that should be considered as the current working directory.
 * `envs` - An array of environments to load (default: empty array). Corresponds to `--env`.
 * `extensions` - An array of filename extensions that should be checked for code. The default is an array containing just `".js"`. Corresponds to `--ext`. It is only used in conjunction with directories, not with filenames or glob patterns.
-* `fix` - This can be a boolean or a function which will be provided each linting message and should return a boolean. True indicates that fixes should be included with the output report, and that errors and warnings should not be listed if they can be fixed. However, the files on disk will not be changed. To persist changes to disk, call [`outputFixes()`](#cliengineoutputfixes).
+* `fix` - A boolean or a function (default: `false`). If a function, it will be passed each linting message and should return a boolean indicating whether the fix should be included with the output report (errors and warnings will not be listed if fixed). Files on disk are never changed regardless of the value of `fix`. To persist changes to disk, call [`outputFixes()`](#cliengineoutputfixes).
+* `fixTypes` - An array of rule types for which fixes should be applied (default: `null`). This array acts like a filter, only allowing rules of the given types to apply fixes. Possible array values are `"problem"`, `"suggestion"`, and `"layout"`.
 * `globals` - An array of global variables to declare (default: empty array). Corresponds to `--global`.
 * `ignore` - False disables use of `.eslintignore`, `ignorePath` and `ignorePattern` (default: true). Corresponds to `--no-ignore`.
 * `ignorePath` - The ignore file to use instead of `.eslintignore` (default: null). Corresponds to `--ignore-path`.
@@ -431,7 +433,8 @@ The return value is an object containing the results of the linting operation. H
     errorCount: 1,
     warningCount: 0,
     fixableErrorCount: 1,
-    fixableWarningCount: 0
+    fixableWarningCount: 0,
+    usedDeprecatedRules: []
 }
 ```
 
@@ -489,6 +492,7 @@ var report = cli.executeOnFiles(["myfile.js", "lib/"]);
     warningCount: 0,
     fixableErrorCount: 1,
     fixableWarningCount: 0,
+    usedDeprecatedRules: []
 }
 ```
 
@@ -520,6 +524,7 @@ If the operation ends with a parsing error, you will get a single message for th
     warningCount: 0,
     fixableErrorCount: 0,
     fixableWarningCount: 0,
+    usedDeprecatedRules: []
 }
 ```
 
@@ -531,7 +536,10 @@ The top-level report object has a `results` array containing all linting results
 * `source` - The source code for the given file. This property is omitted if this file has no errors/warnings or if the `output` property is present.
 * `output` - The source code for the given file with as many fixes applied as possible, so you can use that to rewrite the files if necessary. This property is omitted if no fix is available.
 
-The top-level report object also has `errorCount` and `warningCount` which give the exact number of errors and warnings respectively on all the files.
+The top-level report object also has `errorCount` and `warningCount` which give the exact number of errors and warnings respectively on all the files. Additionally, `usedDeprecatedRules` signals any deprecated rules used and their replacement (if available). Specifically, it is array of objects with properties like so:
+
+* `ruleId` - The name of the rule (e.g. `indent-legacy`).
+* `replacedBy` - An array of rules that replace the deprecated rule (e.g. `["indent"]`).
 
 Once you get a report object, it's up to you to determine how to output the results. Fixes will not be automatically applied to the files, even if you set `fix: true` when constructing the `CLIEngine` instance. To apply fixes to the files, call [`outputFixes`](#cliengineoutputfixes).
 
