@@ -62,13 +62,20 @@ p {
 
   &.icon {
     position:relative;
+
+    &.correct:before {
+      color: #228b22; /* use green color stand for *correct* */
+    }
+
+    &.incorrect:before {
+      color: #dc143c; /* use red color stand for *incorrect* */
+    }
   }
 
   &.icon:before {
     position: absolute;
     left: -1.5em; /* negative padding-left of ul */
     font-family: "Glyphicons Halflings";
-    color: #4d4d4d; /* hsl(0,0%,30%) is 10% lighter gray than text */
 
     @media (max-width: @screen-xs-max) {
       position: static;
