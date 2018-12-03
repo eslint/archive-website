@@ -39,7 +39,7 @@
         {
             "username": "kaicataldo",
             "name": "Kai Cataldo",
-            "website": "https://kaicataldo.com",
+            "website": "",
             "avatar_url": "https://avatars2.githubusercontent.com/u/7041728?v=4"
         },
         {
@@ -147,12 +147,6 @@
             "name": "薛定谔的猫",
             "website": "",
             "avatar_url": "https://avatars2.githubusercontent.com/u/13050025?v=4"
-        },
-        {
-            "username": "eslintbot",
-            "name": "ESLint Bot",
-            "website": "https://eslint.org",
-            "avatar_url": "https://avatars0.githubusercontent.com/u/13383618?v=4"
         }
     ]
 }
