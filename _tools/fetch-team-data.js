@@ -1,6 +1,6 @@
 /**
  * @fileoverview Script to fetch team data from GitHub. Call using:
- *     node fetch-team-data.js
+ *     node _tools/fetch-team-data.js
  * @author Nicholas C. Zakas
  */
 
