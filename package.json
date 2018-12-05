@@ -26,6 +26,7 @@
   "homepage": "https://github.com/eslint/eslint.github.io#readme",
   "dependencies": {},
   "devDependencies": {
+    "@octokit/rest": "^16.1.0",
     "bootstrap": "^3.3.6",
     "browserify": "^11.0.1",
     "eslint": "^4.5.0",
