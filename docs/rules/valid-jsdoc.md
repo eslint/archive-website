@@ -10,6 +10,8 @@ rule_type: suggestion
 
 (fixable) The `--fix` option on the [command line](../user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
 
+This rule was **deprecated** in ESLint v5.10.0.
+
 [JSDoc](http://usejsdoc.org) generates application programming interface (API) documentation from specially-formatted comments in JavaScript code. For example, this is a JSDoc comment for a function:
 
 ```js
