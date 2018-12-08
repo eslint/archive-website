@@ -150,10 +150,6 @@ categories:
         fixable: false
         name: use-isnan
         recommended: true
-      - description: enforce valid JSDoc comments
-        fixable: true
-        name: valid-jsdoc
-        recommended: false
       - description: enforce comparing `typeof` expressions against valid strings
         fixable: false
         name: valid-typeof
@@ -897,10 +893,6 @@ categories:
         fixable: true
         name: quotes
         recommended: false
-      - description: require JSDoc comments
-        fixable: false
-        name: require-jsdoc
-        recommended: false
       - description: require or disallow semicolons instead of ASI
         fixable: true
         name: semi
@@ -1135,6 +1127,10 @@ deprecated:
       replacedBy:
         - func-call-spacing
     - name: prefer-reflect
+      replacedBy: []
+    - name: require-jsdoc
+      replacedBy: []
+    - name: valid-jsdoc
       replacedBy: []
 removed:
   description: >-
