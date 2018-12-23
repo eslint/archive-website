@@ -92,7 +92,7 @@ categories:
         fixable: false
         name: no-invalid-regexp
         recommended: true
-      - description: disallow irregular whitespace outside of strings and comments
+      - description: disallow irregular whitespace
         fixable: false
         name: no-irregular-whitespace
         recommended: true
@@ -400,6 +400,10 @@ categories:
       - description: disallow unnecessary calls to `.call()` and `.apply()`
         fixable: false
         name: no-useless-call
+        recommended: false
+      - description: disallow unnecessary `catch` clauses
+        fixable: false
+        name: no-useless-catch
         recommended: false
       - description: disallow unnecessary concatenation of literals or template literals
         fixable: false
