@@ -20,7 +20,7 @@ JSDoc support in ESLint currently consists of:
 * Maintaining the [Doctrine](https://github.com/eslint/doctrine) JSDoc comment parser
 * The [`require-jsdoc`](https://eslint.org/docs/rules/require-jsdoc) rule
 * The [`valid-jsdoc`](https://eslint.org/docs/rules/valid-jsdoc) rule
-* The [`SourceCode#getJSDocComment()`](https://eslint.org/docs/developer-guide/working-with-rules-new#contextgetsourcecode) method
+* The [`SourceCode#getJSDocComment()`](https://eslint.org/docs/developer-guide/working-with-rules#contextgetsourcecode) method
 
 To support JSDoc in ESLint, we had been spending an outsized amount of time maintaining Doctrine and the `valid-jsdoc rule` as compared to the effort required to maintain the rest of the project. Those two parts, in addition to the `require-jsdoc` rule and `SourceCode#getJSDocComment()` are being end-of-lifed beginning today.
 
