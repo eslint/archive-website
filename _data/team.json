@@ -45,7 +45,7 @@
         {
             "username": "not-an-aardvark",
             "name": "Teddy Katz",
-            "website": "",
+            "website": "https://twitter.com/not_aardvark",
             "avatar_url": "https://avatars2.githubusercontent.com/u/11638619?v=4"
         }
     ],
@@ -143,10 +143,16 @@
     ],
     "committers": [
         {
-            "username": "Aladdin-ADD",
+            "username": "aladdin-add",
             "name": "薛定谔的猫",
             "website": "",
             "avatar_url": "https://avatars2.githubusercontent.com/u/13050025?v=4"
+        },
+        {
+            "username": "g-plane",
+            "name": "Pig Fang",
+            "website": "https://gplane.win",
+            "avatar_url": "https://avatars1.githubusercontent.com/u/17216317?v=4"
         }
     ]
 }
