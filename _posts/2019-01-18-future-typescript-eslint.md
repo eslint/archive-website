@@ -32,8 +32,6 @@ While the ESLint team won't be formally involved in the new project, we are full
 
 ## What this means going forward
 
-All of this means a few things that are important to understand:
-
 1. The ESLint team will no longer be maintaining `typescript-eslint-parser`
     * The repository will be archived as of today
     * There will be no further releases of `typescript-eslint-parser` on npm
