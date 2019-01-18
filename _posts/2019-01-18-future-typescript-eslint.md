@@ -28,7 +28,7 @@ We, just like a lot of the JavaScript and TypeScript communities, were very exci
 
 James Henry, who has long been the driving force behind TypeScript compatibility for ESLint, has started the [`typescript-eslint`](https://github.com/typescript-eslint/typescript-eslint) project as a centralized repository for all things related to TypeScript ESLint compatibility. This will be the new home of the TypeScript parser, `eslint-plugin-typescript`, and any other utilities that will make the TypeScript ESLint experience as seamless as possible.
 
-While the ESLint team won't be formally involved in the new project, we are fully supportive of James' efforts and will be keeping lines of communication openly to ensure the best ESLint experience for TypeScript developers.
+While the ESLint team won't be formally involved in the new project, we are fully supportive of James' efforts and will be keeping lines of communication open to ensure the best ESLint experience for TypeScript developers.
 
 ## What this means going forward
 
