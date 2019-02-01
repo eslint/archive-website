@@ -34,7 +34,7 @@ This rule aims to disallow async Promise executor functions.
 Examples of **incorrect** code for this rule:
 
 ```js
-const result = new Promise(async (resolve, reject) => {
+const foo = new Promise(async (resolve, reject) => {
   readFile('foo.txt', function(err, result) {
     if (err) {
       reject(err);
@@ -52,7 +52,7 @@ const result = new Promise(async (resolve, reject) => {
 Examples of **correct** code for this rule:
 
 ```js
-const result = new Promise((resolve, reject) => {
+const foo = new Promise((resolve, reject) => {
   readFile('foo.txt', function(err, result) {
     if (err) {
       reject(err);
