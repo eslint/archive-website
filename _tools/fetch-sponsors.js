@@ -58,8 +58,6 @@ const sponsors = {
                 sponsors.silver.push(sponsor);
                 break;
 
-            // Open Collective bug, need to check for both
-            case "sponsor":
             case "bronze-sponsor":
                 sponsors.bronze.push(sponsor);
                 break;
