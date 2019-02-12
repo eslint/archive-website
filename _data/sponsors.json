@@ -35,6 +35,18 @@
             "totalDonations": 500
         },
         {
+            "name": "Alexey Raspopov",
+            "url": "https://alexeyraspopov.com",
+            "image": "https://images.opencollective.com/proxy/images/?src=https%3A%2F%2Fopencollective-production.s3-us-west-1.amazonaws.com%2F9332be90-5abb-11e7-9ef0-6343e38e2883.png&height=96",
+            "totalDonations": 500
+        },
+        {
+            "name": "",
+            "url": null,
+            "image": null,
+            "totalDonations": 500
+        },
+        {
             "name": "Benjamin Piouffle",
             "url": "https://benjamin.piouffle.com",
             "image": "https://images.opencollective.com/proxy/images/?src=https%3A%2F%2Fopencollective-production.s3-us-west-1.amazonaws.com%2F7d515580-cde4-11e8-b995-51bda63ba608.png&height=96",
