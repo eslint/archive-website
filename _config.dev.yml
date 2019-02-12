@@ -1,0 +1,27 @@
+# only generate a subset of posts
+limit_posts: 10
+
+# watch for changes and regenerate
+incremental: true
+
+# show unpublished posts
+future: true
+
+# Don't generate this stuff
+exclude:
+  - README.md
+  - CNAME
+  - Gemfile
+  - Gemfile.lock
+  - package.json
+  - node_modules
+  - sitemap.xml
+  - feed.xml
+  - docs/0.24.1
+  - docs/1.0.0
+  - docs/1.10.3
+  - docs/2.0.0
+  - docs/2.13.1
+  - docs/3.0.0
+  - docs/4.0.0
+  - docs/5.0.0

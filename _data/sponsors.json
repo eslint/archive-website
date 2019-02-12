@@ -1,0 +1,38 @@
+{
+    "gold": [
+        {
+            "name": "Facebook Open Source",
+            "url": "https://code.facebook.com/projects/",
+            "image": "https://images.opencollective.com/proxy/images/?src=https%3A%2F%2Fres.cloudinary.com%2Fopencollective%2Fimage%2Fupload%2Fv1508519428%2FS9gk78AS_400x400_fulq2l.jpg&height=96",
+            "totalDonations": 100000
+        },
+        {
+            "name": "Airbnb",
+            "url": "https://www.airbnb.com/",
+            "image": "https://images.opencollective.com/proxy/images/?src=https%3A%2F%2Fopencollective-production.s3-us-west-1.amazonaws.com%2F098e3bd0-4d57-11e8-9324-0f6cc1f92bf1.png&height=96",
+            "totalDonations": 100000
+        }
+    ],
+    "silver": [],
+    "bronze": [],
+    "backers": [
+        {
+            "name": "Jordan Harband",
+            "url": "https://twitter.com/LJHarb",
+            "image": "https://images.opencollective.com/proxy/images/?src=https%3A%2F%2Fd1ts43dypk8bqh.cloudfront.net%2Fv1%2Favatars%2Fa44cdffa-865c-4edd-9a89-c3717b27674e&height=96",
+            "totalDonations": 500
+        },
+        {
+            "name": "Benjamin Piouffle",
+            "url": "https://benjamin.piouffle.com",
+            "image": "https://images.opencollective.com/proxy/images/?src=https%3A%2F%2Fopencollective-production.s3-us-west-1.amazonaws.com%2F7d515580-cde4-11e8-b995-51bda63ba608.png&height=96",
+            "totalDonations": 300
+        },
+        {
+            "name": "Open Collective Inc.",
+            "url": "https://opencollective.com",
+            "image": "https://images.opencollective.com/proxy/images/?src=https%3A%2F%2Fopencollective-production.s3-us-west-1.amazonaws.com%2F8aa714c0-79fa-11e7-9a37-35a8ed456d67.png&height=96",
+            "totalDonations": 300
+        }
+    ]
+}

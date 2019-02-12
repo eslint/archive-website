@@ -64,12 +64,20 @@ homepage: true
 
 <div class="row">
   <div class="col-sm-12">
-    <h2 class="text-center">Who's using ESLint?</h2>
-    <div class="logos row">
-    </div>
-    <div class="expender row text-center">
-      see more <span class="caret"></span>
-    </div>
+    <h2 class="text-center">Sponsors</h2>
+    <p class="text-center">The following companies, organizations, and individuals support ESLint's ongoing maintenance and development.</p>
+    {% assign tiers = "gold,silver,bronze" | split: "," %}
+    {% for tier in tiers %}
+        {% if site.data.sponsors[tier].size > 0 %}
+        <h3 class="text-center">{{ tier | capitalize }} Sponsors</h3>
+        <div class="sponsors text-center">
+            {% for sponsor in site.data.sponsors[tier] %}
+                <a href="{{ sponsor.url }}" rel="noopener nofollow" target="_blank"><img class="lazyload {{ tier }}-sponsor" data-src="{{ sponsor.image }}" alt="{{ sponsor.name }}"></a>
+            {% endfor %}
+        </div>
+        <p class="text-center"><a class="btn btn-default" href="https://opencollective.com/eslint">Become a Sponsor</a></p>
+        {% endif %}
+    {% endfor %}
   </div>
 </div>
 
