@@ -26,7 +26,7 @@ Today, we are happy to announce the [ESLint Collective](https://opencollective.c
 Some of the benefits of working with Open Collective include:
 
 * **Full Transparency.** Everyone gets to see where money is coming from and where it's going.
-* **Individual and Corporate Sponsors.** Open Collective makes it easy to for both individuals and companies to sponsor open source projects.
+* **Individual and Corporate Sponsors.** Open Collective makes it easy for both individuals and companies to sponsor open source projects.
 * **Potential Tax Benefits.** Because funds are paid to the Open Source Collective, a 501(c)(6) organization in the U.S., there may be tax benefits for some donors (please check with your accountant).
 * **Automatic Invoicing.** For corporate sponsors, Open Collective automatically generates and sends invoices for tracking purposes.
 * **Open Participation.** Anyone can request reimbursement for funds spent helping the ESLint project and ESLint can pay out to anyone.
