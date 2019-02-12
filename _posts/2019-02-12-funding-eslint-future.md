@@ -49,13 +49,16 @@ In order to achieve everything we have in mind, we believe that we will need $20
 
 <p class="text-center">
     <a href="https://facebook.com"><img src="/img/logos/facebook.png" alt="Facebook" height="96"></a>
-    <a href="https://airbnb.com"><img src="/img/logos/airbnb.png" alt="Airbnb" height="96"></a><br>
-    <a href="https://frontendmasters.com"><img src="https://static.frontendmasters.com/assets/fm/js/frontendmasters.0e71088726.svg" alt="Frontend Masters" height="32"></a>
+    <a href="https://airbnb.com"><img src="/img/logos/airbnb.png" alt="Airbnb" height="96"></a>
 </p>
 
 We're also excited to announce our first sponsors. [Facebook](https://facebook.com) and [Airbnb](https://airbnb.com) have both pledged $1,000 per month to support ESLint.
 
-Additionally, [Frontend Masters](https://frontendmasters.com) has pledged $200 per month to support ESLint.
+<p class="text-center">
+    <a href="https://frontendmasters.com"><img src="https://static.frontendmasters.com/assets/fm/js/frontendmasters.0e71088726.svg" alt="Frontend Masters" height="32"></a>
+</p>
+
+Additionally, [Frontend Masters](https://frontendmasters.com) has donated $200 to support ESLint.
 
 If your company also uses ESLint to find and fix problems in your JavaScript code, please ask them to join these fantastic companies in [sponsoring ESLint](https://opencollective.com/eslint). (All sponsors above $200 per month get their logos on both the ESLint README and on the homepage of eslint.org.)
 
