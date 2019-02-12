@@ -47,6 +47,18 @@
             "totalDonations": 500
         },
         {
+            "name": "Nubz Ltd",
+            "url": "http://nubz.com",
+            "image": "https://images.opencollective.com/proxy/images/?src=https%3A%2F%2Flogo.clearbit.com%2Fnubz.com&height=96",
+            "totalDonations": 500
+        },
+        {
+            "name": "Dale Price",
+            "url": "https://twitter.com/eatyrghost",
+            "image": "https://images.opencollective.com/proxy/images/?src=https%3A%2F%2Fwww.gravatar.com%2Favatar%2Fae8864231858f9762c3f5c12f83c42f9%3Fdefault%3D404&height=96",
+            "totalDonations": 500
+        },
+        {
             "name": "Benjamin Piouffle",
             "url": "https://benjamin.piouffle.com",
             "image": "https://images.opencollective.com/proxy/images/?src=https%3A%2F%2Fopencollective-production.s3-us-west-1.amazonaws.com%2F7d515580-cde4-11e8-b995-51bda63ba608.png&height=96",
