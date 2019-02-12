@@ -72,7 +72,7 @@ homepage: true
         <h3 class="text-center">{{ tier | capitalize }} Sponsors</h3>
         <div class="sponsors text-center">
             {% for sponsor in site.data.sponsors[tier] %}
-                <a href="{{ sponsor.url }}" rel="noopener nofollow" target="_blank"><img class="lazyload {{ tier }}-sponsor" data-src="{{ sponsor.image }}" alt="{{ sponsor.name }}"></a>
+                <a href="{{ sponsor.url }}" title="alt="{{ sponsor.name }}" rel="noopener nofollow" target="_blank"><img class="lazyload {{ tier }}-sponsor" data-src="{{ sponsor.image }}" alt="{{ sponsor.name }}"></a>
             {% endfor %}
         </div>
         <p class="text-center"><a class="btn btn-default" href="https://opencollective.com/eslint">Become a Sponsor</a></p>
