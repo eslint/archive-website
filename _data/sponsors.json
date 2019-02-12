@@ -14,21 +14,14 @@
         }
     ],
     "silver": [],
-    "bronze": [
+    "bronze": [],
+    "backers": [
         {
             "name": "Frontend Masters",
             "url": "https://FrontendMasters.com",
             "image": "https://images.opencollective.com/proxy/images/?src=https%3A%2F%2Fopencollective-production.s3-us-west-1.amazonaws.com%2F5e18b6b0-83b4-11e8-97c9-03259cc8bf2b.png&height=96",
             "totalDonations": 20000
         },
-        {
-            "name": "Open Collective Inc.",
-            "url": "https://opencollective.com",
-            "image": "https://images.opencollective.com/proxy/images/?src=https%3A%2F%2Fopencollective-production.s3-us-west-1.amazonaws.com%2F8aa714c0-79fa-11e7-9a37-35a8ed456d67.png&height=96",
-            "totalDonations": 300
-        }
-    ],
-    "backers": [
         {
             "name": "Jordan Harband",
             "url": "https://twitter.com/LJHarb",
@@ -39,6 +32,12 @@
             "name": "Benjamin Piouffle",
             "url": "https://benjamin.piouffle.com",
             "image": "https://images.opencollective.com/proxy/images/?src=https%3A%2F%2Fopencollective-production.s3-us-west-1.amazonaws.com%2F7d515580-cde4-11e8-b995-51bda63ba608.png&height=96",
+            "totalDonations": 300
+        },
+        {
+            "name": "Open Collective Inc.",
+            "url": "https://opencollective.com",
+            "image": "https://images.opencollective.com/proxy/images/?src=https%3A%2F%2Fopencollective-production.s3-us-west-1.amazonaws.com%2F8aa714c0-79fa-11e7-9a37-35a8ed456d67.png&height=96",
             "totalDonations": 300
         }
     ]
