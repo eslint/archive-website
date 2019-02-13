@@ -77,6 +77,12 @@
             "totalDonations": 500
         },
         {
+            "name": "Pawel Grzybek",
+            "url": "https://pawelgrzybek.com/",
+            "image": "https://images.opencollective.com/proxy/images/?src=https%3A%2F%2Fopencollective-production.s3-us-west-1.amazonaws.com%2Fc8bd1650-2f5d-11e9-9004-2b850be986d3.jpg&height=96",
+            "totalDonations": 500
+        },
+        {
             "name": "Benjamin Piouffle",
             "url": "https://benjamin.piouffle.com",
             "image": "https://images.opencollective.com/proxy/images/?src=https%3A%2F%2Fopencollective-production.s3-us-west-1.amazonaws.com%2F7d515580-cde4-11e8-b995-51bda63ba608.png&height=96",
