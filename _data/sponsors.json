@@ -14,7 +14,14 @@
         }
     ],
     "silver": [],
-    "bronze": [],
+    "bronze": [
+        {
+            "name": "Faithlife",
+            "url": "http://faithlife.com/ref/about",
+            "image": "https://images.opencollective.com/proxy/images/?src=https%3A%2F%2Flogo.clearbit.com%2Ffaithlife.com&height=96",
+            "totalDonations": 20000
+        }
+    ],
     "backers": [
         {
             "name": "Frontend Masters",
