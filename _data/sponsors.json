@@ -13,7 +13,14 @@
             "totalDonations": 100000
         }
     ],
-    "silver": [],
+    "silver": [
+        {
+            "name": "AMP Project",
+            "url": "https://www.ampproject.org/",
+            "image": "https://images.opencollective.com/proxy/images/?src=https%3A%2F%2Fopencollective-production.s3-us-west-1.amazonaws.com%2F68ed8b70-ebf2-11e6-9958-cb7e79408c56.png&height=96",
+            "totalDonations": 50000
+        }
+    ],
     "bronze": [
         {
             "name": "Faithlife",
