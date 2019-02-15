@@ -109,6 +109,12 @@
             "totalDonations": 500
         },
         {
+            "name": "Kevin Lamping",
+            "url": "http://klamp.in",
+            "image": "https://images.opencollective.com/proxy/images/?src=https%3A%2F%2Fopencollective-production.s3-us-west-1.amazonaws.com%2Fd80b4ca0-30af-11e9-83fe-6d2c2c189dcd.jpg&height=96",
+            "totalDonations": 500
+        },
+        {
             "name": "Benjamin Piouffle",
             "url": "https://benjamin.piouffle.com",
             "image": "https://images.opencollective.com/proxy/images/?src=https%3A%2F%2Fopencollective-production.s3-us-west-1.amazonaws.com%2F7d515580-cde4-11e8-b995-51bda63ba608.png&height=96",
