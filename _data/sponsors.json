@@ -49,6 +49,18 @@
             "totalDonations": 5000
         },
         {
+            "name": "Scott Koenig",
+            "url": null,
+            "image": null,
+            "totalDonations": 5000
+        },
+        {
+            "name": "Triplebyte",
+            "url": "https://triplebyte.com/os/opencollective",
+            "image": "https://images.opencollective.com/proxy/images/?src=https%3A%2F%2Fopencollective-production.s3-us-west-1.amazonaws.com%2F02f87560-b2f1-11e8-85a0-75f200a0e2db.png&height=96",
+            "totalDonations": 5000
+        },
+        {
             "name": "Neovation Learning Solutions",
             "url": "https://www.neovation.com",
             "image": "https://images.opencollective.com/proxy/images/?src=https%3A%2F%2Flogo.clearbit.com%2Fneovation.com&height=96",
