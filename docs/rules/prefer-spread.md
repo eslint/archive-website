@@ -6,9 +6,7 @@ rule_type: suggestion
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
-# Suggest using the spread operator instead of `.apply()`. (prefer-spread)
-
-(fixable) The `--fix` option on the [command line](../user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
+# Suggest using spread syntax instead of `.apply()`. (prefer-spread)
 
 Before ES2015, one must use `Function.prototype.apply()` to call variadic functions.
 
@@ -17,7 +15,7 @@ var args = [1, 2, 3, 4];
 Math.max.apply(Math, args);
 ```
 
-In ES2015, one can use the spread operator to call variadic functions.
+In ES2015, one can use spread syntax to call variadic functions.
 
 ```js
 /*eslint-env es6*/
@@ -28,7 +26,7 @@ Math.max(...args);
 
 ## Rule Details
 
-This rule is aimed to flag usage of `Function.prototype.apply()` in situations where the spread operator could be used instead.
+This rule is aimed to flag usage of `Function.prototype.apply()` in situations where spread syntax could be used instead.
 
 ## Examples
 
@@ -47,7 +45,7 @@ Examples of **correct** code for this rule:
 ```js
 /*eslint prefer-spread: "error"*/
 
-// Using the spread operator
+// Using spread syntax
 foo(...args);
 obj.foo(...args);
 

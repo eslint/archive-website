@@ -10,7 +10,7 @@ rule_type: suggestion
 
 (fixable) The `--fix` option on the [command line](../user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
 
-The `bind()` method is used to create functions with specific `this` values and, optionally, binds arguments to specific values. When used to specify the value of `this`, it's important that the function actually use `this` in its function body. For example:
+The `bind()` method is used to create functions with specific `this` values and, optionally, binds arguments to specific values. When used to specify the value of `this`, it's important that the function actually uses `this` in its function body. For example:
 
 ```js
 var boundGetName = (function getName() {

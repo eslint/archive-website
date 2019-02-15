@@ -30,7 +30,7 @@ export { foo };
 
 ## Rule Details
 
-This rule enforce consistent spacing inside braces of object literals, destructuring assignments, and import/export specifiers.
+This rule enforces consistent spacing inside braces of object literals, destructuring assignments, and import/export specifiers.
 
 ## Options
 

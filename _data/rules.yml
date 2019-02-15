@@ -1051,7 +1051,7 @@ categories:
         name: prefer-const
         recommended: false
       - description: require destructuring from arrays and/or objects
-        fixable: false
+        fixable: true
         name: prefer-destructuring
         recommended: false
       - description: >-
@@ -1065,7 +1065,7 @@ categories:
         name: prefer-rest-params
         recommended: false
       - description: require spread operators instead of `.apply()`
-        fixable: true
+        fixable: false
         name: prefer-spread
         recommended: false
       - description: require template literals instead of string concatenation

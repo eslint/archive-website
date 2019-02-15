@@ -30,7 +30,10 @@ This rule enforces consistent empty line padding within blocks.
 
 ## Options
 
-This rule has one option, which can be a string option or an object option.
+This rule has two options, the first one can be a string option or an object option.
+The second one is an object option, it can allow exceptions.
+
+### First option
 
 String option:
 
@@ -42,6 +45,10 @@ Object option:
 * `"blocks"` require or disallow padding within block statements
 * `"classes"` require or disallow padding within classes
 * `"switches"` require or disallow padding within `switch` statements
+
+### Second option
+
+* `"allowSingleLineBlocks": true` allows single-line blocks
 
 ### always
 
@@ -348,6 +355,42 @@ Examples of **correct** code for this rule with the `{ "switches": "never" }` op
 switch (a) {
     case 0: foo();
 }
+
+if (a) {
+
+    b();
+
+}
+```
+
+### always + allowSingleLineBlocks
+
+Examples of **incorrect** code for this rule with the `"always", {"allowSingleLineBlocks": true}` options:
+
+```js
+/*eslint padded-blocks: ["error", "always", { allowSingleLineBlocks: true }]*/
+
+if (a) {
+    b();
+}
+
+if (a) {
+
+    b();
+}
+
+if (a) {
+    b();
+
+}
+```
+
+Examples of **correct** code for this rule with the `"always", {"allowSingleLineBlocks": true}` options:
+
+```js
+/*eslint padded-blocks: ["error", "always", { allowSingleLineBlocks: true }]*/
+
+if (a) { b(); }
 
 if (a) {
 
