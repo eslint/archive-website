@@ -127,6 +127,12 @@
             "totalDonations": 500
         },
         {
+            "name": "Matan Kushner",
+            "url": "http://matchai.me",
+            "image": "https://images.opencollective.com/proxy/images/?src=https%3A%2F%2Fopencollective-production.s3-us-west-1.amazonaws.com%2F051690c0-24bb-11e9-b372-6b1a73f011d0.png&height=96",
+            "totalDonations": 500
+        },
+        {
             "name": "Benjamin Piouffle",
             "url": "https://benjamin.piouffle.com",
             "image": "https://images.opencollective.com/proxy/images/?src=https%3A%2F%2Fopencollective-production.s3-us-west-1.amazonaws.com%2F7d515580-cde4-11e8-b995-51bda63ba608.png&height=96",
