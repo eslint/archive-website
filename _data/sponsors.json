@@ -133,6 +133,12 @@
             "totalDonations": 500
         },
         {
+            "name": "Thomas Hermann",
+            "url": null,
+            "image": "https://images.opencollective.com/proxy/images/?src=https%3A%2F%2Fd1ts43dypk8bqh.cloudfront.net%2Fv1%2Favatars%2Fa3b05fb8-7b12-4062-9d6f-05e3905bc9c0&height=96",
+            "totalDonations": 500
+        },
+        {
             "name": "Benjamin Piouffle",
             "url": "https://benjamin.piouffle.com",
             "image": "https://images.opencollective.com/proxy/images/?src=https%3A%2F%2Fopencollective-production.s3-us-west-1.amazonaws.com%2F7d515580-cde4-11e8-b995-51bda63ba608.png&height=96",
