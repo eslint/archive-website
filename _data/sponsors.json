@@ -73,6 +73,12 @@
             "totalDonations": 2500
         },
         {
+            "name": "Summit Media",
+            "url": "https://www.summit.co.uk/",
+            "image": "https://images.opencollective.com/proxy/images/?src=https%3A%2F%2Flogo.clearbit.com%2Fsummit.co.uk&height=96",
+            "totalDonations": 1000
+        },
+        {
             "name": "Sergey Bondar",
             "url": null,
             "image": "https://images.opencollective.com/proxy/images/?src=https%3A%2F%2Fwww.gravatar.com%2Favatar%2Ffa901150af7d0bb0e3bbd4acd61f8e49%3Fdefault%3D404&height=96",
