@@ -43,6 +43,12 @@
             "totalDonations": 7500
         },
         {
+            "name": "Triplebyte",
+            "url": "https://triplebyte.com/os/opencollective",
+            "image": "https://images.opencollective.com/proxy/images/?src=https%3A%2F%2Fopencollective-production.s3-us-west-1.amazonaws.com%2F02f87560-b2f1-11e8-85a0-75f200a0e2db.png&height=96",
+            "totalDonations": 6000
+        },
+        {
             "name": "daniel meyer",
             "url": null,
             "image": null,
@@ -52,12 +58,6 @@
             "name": "Scott Koenig",
             "url": null,
             "image": null,
-            "totalDonations": 5000
-        },
-        {
-            "name": "Triplebyte",
-            "url": "https://triplebyte.com/os/opencollective",
-            "image": "https://images.opencollective.com/proxy/images/?src=https%3A%2F%2Fopencollective-production.s3-us-west-1.amazonaws.com%2F02f87560-b2f1-11e8-85a0-75f200a0e2db.png&height=96",
             "totalDonations": 5000
         },
         {
@@ -76,6 +76,12 @@
             "name": "Summit Media",
             "url": "https://www.summit.co.uk/",
             "image": "https://images.opencollective.com/proxy/images/?src=https%3A%2F%2Flogo.clearbit.com%2Fsummit.co.uk&height=96",
+            "totalDonations": 1000
+        },
+        {
+            "name": "Michael Neth",
+            "url": null,
+            "image": null,
             "totalDonations": 1000
         },
         {
