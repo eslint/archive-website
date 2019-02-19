@@ -163,6 +163,12 @@
             "totalDonations": 500
         },
         {
+            "name": "Gavin Mogan",
+            "url": "https://www.gavinmogan.com",
+            "image": "https://images.opencollective.com/proxy/images/?src=https%3A%2F%2Fopencollective-production.s3-us-west-1.amazonaws.com%2FuQiEdvYx_normaljpg_6e91d460-17c0-11e7-a2ff-df948e4c489f.jpeg&height=96",
+            "totalDonations": 500
+        },
+        {
             "name": "Benjamin Piouffle",
             "url": "https://benjamin.piouffle.com",
             "image": "https://images.opencollective.com/proxy/images/?src=https%3A%2F%2Fopencollective-production.s3-us-west-1.amazonaws.com%2F7d515580-cde4-11e8-b995-51bda63ba608.png&height=96",
