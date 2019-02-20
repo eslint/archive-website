@@ -205,6 +205,12 @@
             "totalDonations": 500
         },
         {
+            "name": "Maisonette Inc",
+            "url": "https://www.maisonette.com",
+            "image": "https://images.opencollective.com/proxy/images/?src=https%3A%2F%2Flogo.clearbit.com%2Fmaisonette.com&height=96",
+            "totalDonations": 500
+        },
+        {
             "name": "Benjamin Piouffle",
             "url": "https://benjamin.piouffle.com",
             "image": "https://images.opencollective.com/proxy/images/?src=https%3A%2F%2Fopencollective-production.s3-us-west-1.amazonaws.com%2F7d515580-cde4-11e8-b995-51bda63ba608.png&height=96",
