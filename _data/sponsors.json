@@ -31,6 +31,12 @@
     ],
     "backers": [
         {
+            "name": "Addy Osmani",
+            "url": "http://www.addyosmani.com",
+            "image": "https://images.opencollective.com/proxy/images/?src=https%3A%2F%2Fopencollective-production.s3-us-west-1.amazonaws.com%2Fe39ad01c67b948f1b9a139a219f2e3d6_a0854b90-b5bf-11e6-9f3b-115a2450f71e.jpeg&height=96",
+            "totalDonations": 50000
+        },
+        {
             "name": "Frontend Masters",
             "url": "https://FrontendMasters.com",
             "image": "https://images.opencollective.com/proxy/images/?src=https%3A%2F%2Fopencollective-production.s3-us-west-1.amazonaws.com%2F5e18b6b0-83b4-11e8-97c9-03259cc8bf2b.png&height=96",
