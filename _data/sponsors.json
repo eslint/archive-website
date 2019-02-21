@@ -91,6 +91,12 @@
             "totalDonations": 1000
         },
         {
+            "name": "David Johnston",
+            "url": "https://blacksheepcode.com",
+            "image": "https://images.opencollective.com/proxy/images/?src=https%3A%2F%2Fopencollective-production.s3-us-west-1.amazonaws.com%2Fb42892d0-b881-11e8-b4ab-519dd68ec9a0.jpg&height=96",
+            "totalDonations": 1000
+        },
+        {
             "name": "Sergey Bondar",
             "url": null,
             "image": "https://images.opencollective.com/proxy/images/?src=https%3A%2F%2Fwww.gravatar.com%2Favatar%2Ffa901150af7d0bb0e3bbd4acd61f8e49%3Fdefault%3D404&height=96",
