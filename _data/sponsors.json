@@ -11,6 +11,12 @@
             "url": "https://code.facebook.com/projects/",
             "image": "https://images.opencollective.com/proxy/images/?src=https%3A%2F%2Fres.cloudinary.com%2Fopencollective%2Fimage%2Fupload%2Fv1508519428%2FS9gk78AS_400x400_fulq2l.jpg&height=96",
             "totalDonations": 100000
+        },
+        {
+            "name": "Badoo",
+            "url": "https://badoo.com/team?utm_source=eslint",
+            "image": "https://images.opencollective.com/proxy/images/?src=https%3A%2F%2Flogo.clearbit.com%2Fbadoo.com&height=96",
+            "totalDonations": 100000
         }
     ],
     "silver": [
@@ -232,6 +238,12 @@
             "name": "Martin K.",
             "url": "https://kluska.cz",
             "image": "https://images.opencollective.com/proxy/images/?src=https%3A%2F%2Fwww.gravatar.com%2Favatar%2Fd24fd0f59e722427d9db1b7f9699857c%3Fdefault%3D404&height=96",
+            "totalDonations": 500
+        },
+        {
+            "name": "Third Iron",
+            "url": "https://thirdiron.com",
+            "image": "https://images.opencollective.com/proxy/images/?src=https%3A%2F%2Fopencollective-production.s3-us-west-1.amazonaws.com%2F352bb130-32eb-11e9-9423-e9873eff8639.png&height=96",
             "totalDonations": 500
         },
         {
