@@ -429,6 +429,10 @@ categories:
         fixable: false
         name: no-with
         recommended: false
+      - description: enforce using named capture group in regular expression
+        fixable: false
+        name: prefer-named-capture-group
+        recommended: false
       - description: require using Error objects as Promise rejection reasons
         fixable: false
         name: prefer-promise-reject-errors
