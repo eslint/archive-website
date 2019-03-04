@@ -259,6 +259,12 @@
             "totalDonations": 500
         },
         {
+            "name": "Andrew Rota",
+            "url": "https://twitter.com/andrewrota",
+            "image": "https://images.opencollective.com/proxy/images/?src=https%3A%2F%2Fopencollective-production.s3-us-west-1.amazonaws.com%2F9d49f4a608c14193bd954892efa50b54_ca9c0d80-99d4-11e6-8650-f92e594d5de8.jpeg&height=96",
+            "totalDonations": 500
+        },
+        {
             "name": "Ramnik Sodhi",
             "url": null,
             "image": "https://images.opencollective.com/proxy/images/?src=https%3A%2F%2Fd1ts43dypk8bqh.cloudfront.net%2Fv1%2Favatars%2Fc20cca8b-dfdc-4351-b057-0a4ee26ba1a5&height=96",
