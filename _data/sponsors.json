@@ -49,6 +49,12 @@
             "totalDonations": 20000
         },
         {
+            "name": "JSHeroes ",
+            "url": "https://jsheroes.io/",
+            "image": "https://images.opencollective.com/proxy/images/?src=https%3A%2F%2Flogo.clearbit.com%2Fjsheroes.io&height=96",
+            "totalDonations": 20000
+        },
+        {
             "name": "Stanislav Cherenkov",
             "url": null,
             "image": "https://images.opencollective.com/proxy/images/?src=https%3A%2F%2Fwww.gravatar.com%2Favatar%2F6cb417c6561ad25d227fbde0e312c678%3Fdefault%3D404&height=96",
