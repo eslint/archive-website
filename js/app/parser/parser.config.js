@@ -1,8 +1,4 @@
-/* eslint-env commonjs */
-
-"use strict";
-
-module.exports = {
+export default {
     range: false,
     loc: false,
     comments: false,
