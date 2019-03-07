@@ -3,7 +3,7 @@
 "use strict";
 
 // requires
-var espree = require("espree");
+var espree = require("../espree");
 
 exports.parse = function(code, config) {
     var ast = espree.parse(code, config); // throws...
