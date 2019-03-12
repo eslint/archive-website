@@ -97,6 +97,18 @@
             "totalDonations": 2000
         },
         {
+            "name": "Benjamin Piouffle",
+            "url": "https://benjamin.piouffle.com",
+            "image": "https://images.opencollective.com/proxy/images/?src=https%3A%2F%2Fopencollective-production.s3-us-west-1.amazonaws.com%2F7d515580-cde4-11e8-b995-51bda63ba608.png&height=96",
+            "totalDonations": 1600
+        },
+        {
+            "name": "Open Collective Inc.",
+            "url": "https://opencollective.com",
+            "image": "https://images.opencollective.com/proxy/images/?src=https%3A%2F%2Fopencollective-production.s3-us-west-1.amazonaws.com%2F8aa714c0-79fa-11e7-9a37-35a8ed456d67.png&height=96",
+            "totalDonations": 1600
+        },
+        {
             "name": "Matan Kushner",
             "url": "http://matchai.me",
             "image": "https://images.opencollective.com/proxy/images/?src=https%3A%2F%2Fopencollective-production.s3-us-west-1.amazonaws.com%2F051690c0-24bb-11e9-b372-6b1a73f011d0.png&height=96",
@@ -245,18 +257,6 @@
             "url": "https://thirdiron.com",
             "image": "https://images.opencollective.com/proxy/images/?src=https%3A%2F%2Fopencollective-production.s3-us-west-1.amazonaws.com%2F352bb130-32eb-11e9-9423-e9873eff8639.png&height=96",
             "totalDonations": 1000
-        },
-        {
-            "name": "Benjamin Piouffle",
-            "url": "https://benjamin.piouffle.com",
-            "image": "https://images.opencollective.com/proxy/images/?src=https%3A%2F%2Fopencollective-production.s3-us-west-1.amazonaws.com%2F7d515580-cde4-11e8-b995-51bda63ba608.png&height=96",
-            "totalDonations": 600
-        },
-        {
-            "name": "Open Collective Inc.",
-            "url": "https://opencollective.com",
-            "image": "https://images.opencollective.com/proxy/images/?src=https%3A%2F%2Fopencollective-production.s3-us-west-1.amazonaws.com%2F8aa714c0-79fa-11e7-9a37-35a8ed456d67.png&height=96",
-            "totalDonations": 600
         },
         {
             "name": "Deepak Jayaram",
