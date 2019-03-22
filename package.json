@@ -25,7 +25,9 @@
     "url": "https://github.com/eslint/eslint.github.io/issues"
   },
   "homepage": "https://github.com/eslint/eslint.github.io#readme",
-  "dependencies": {},
+  "dependencies": {
+    "moment": "^2.24.0"
+  },
   "devDependencies": {
     "@octokit/rest": "^16.16.0",
     "bootstrap": "^3.4.1",
