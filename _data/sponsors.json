@@ -196,18 +196,18 @@
             "totalDonations": 1000
         },
         {
-            "name": "AJ Klein",
-            "url": "https://twitter.com/jumbleofideas",
-            "image": "https://images.opencollective.com/proxy/images/?src=https%3A%2F%2Fopencollective-production.s3-us-west-1.amazonaws.com%2F6c5aac30-3b68-11e9-9537-ad85092287b8.jpg&height=96",
-            "monthlyDonation": 500,
-            "totalDonations": 500
-        },
-        {
-            "name": "Kevin Lamping",
-            "url": "http://klamp.in",
-            "image": "https://images.opencollective.com/proxy/images/?src=https%3A%2F%2Fopencollective-production.s3-us-west-1.amazonaws.com%2Fd80b4ca0-30af-11e9-83fe-6d2c2c189dcd.jpg&height=96",
+            "name": "Pawel Grzybek",
+            "url": "https://pawelgrzybek.com/",
+            "image": "https://images.opencollective.com/proxy/images/?src=https%3A%2F%2Fopencollective-production.s3-us-west-1.amazonaws.com%2Fc8bd1650-2f5d-11e9-9004-2b850be986d3.jpg&height=96",
             "monthlyDonation": 500,
             "totalDonations": 1000
+        },
+        {
+            "name": "Mikko Piuhola",
+            "url": null,
+            "image": null,
+            "monthlyDonation": 500,
+            "totalDonations": 500
         },
         {
             "name": "Thomas Hermann",
@@ -252,9 +252,9 @@
             "totalDonations": 1000
         },
         {
-            "name": "Mikko Piuhola",
-            "url": null,
-            "image": null,
+            "name": "Eric Lanehart",
+            "url": "http://pushred.co",
+            "image": "https://images.opencollective.com/proxy/images/?src=https%3A%2F%2Flogo.clearbit.com%2Fpushred.co&height=96",
             "monthlyDonation": 500,
             "totalDonations": 500
         },
@@ -273,9 +273,9 @@
             "totalDonations": 1000
         },
         {
-            "name": "Pawel Grzybek",
-            "url": "https://pawelgrzybek.com/",
-            "image": "https://images.opencollective.com/proxy/images/?src=https%3A%2F%2Fopencollective-production.s3-us-west-1.amazonaws.com%2Fc8bd1650-2f5d-11e9-9004-2b850be986d3.jpg&height=96",
+            "name": "Kevin Lamping",
+            "url": "http://klamp.in",
+            "image": "https://images.opencollective.com/proxy/images/?src=https%3A%2F%2Fopencollective-production.s3-us-west-1.amazonaws.com%2Fd80b4ca0-30af-11e9-83fe-6d2c2c189dcd.jpg&height=96",
             "monthlyDonation": 500,
             "totalDonations": 1000
         },
@@ -287,9 +287,9 @@
             "totalDonations": 1000
         },
         {
-            "name": "Eric Lanehart",
-            "url": "http://pushred.co",
-            "image": "https://images.opencollective.com/proxy/images/?src=https%3A%2F%2Flogo.clearbit.com%2Fpushred.co&height=96",
+            "name": "Schalk Neethling",
+            "url": null,
+            "image": null,
             "monthlyDonation": 500,
             "totalDonations": 500
         },
@@ -318,6 +318,13 @@
             "name": "Will McAuliff",
             "url": null,
             "image": "https://images.opencollective.com/proxy/images/?src=https%3A%2F%2Fwww.gravatar.com%2Favatar%2Fe275c5b848e4b9a1d340acfeb2c51934%3Fdefault%3D404&height=96",
+            "monthlyDonation": 500,
+            "totalDonations": 500
+        },
+        {
+            "name": "AJ Klein",
+            "url": "https://twitter.com/jumbleofideas",
+            "image": "https://images.opencollective.com/proxy/images/?src=https%3A%2F%2Fopencollective-production.s3-us-west-1.amazonaws.com%2F6c5aac30-3b68-11e9-9537-ad85092287b8.jpg&height=96",
             "monthlyDonation": 500,
             "totalDonations": 500
         },
