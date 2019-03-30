@@ -63,7 +63,7 @@ This rule has a string option:
 
 This rule has an object option for an exception:
 
-* `"allowArrowFunctions": true` (default `false`) allows the use of arrow functions
+* `"allowArrowFunctions": true` (default `false`) allows the use of arrow functions (honoured only when using `declaration`)
 
 ### expression
 
