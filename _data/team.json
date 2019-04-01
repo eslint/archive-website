@@ -147,14 +147,15 @@
             "avatar_url": "https://avatars1.githubusercontent.com/u/11862657?v=4"
         }
     ],
-    "reviewers": [],
-    "committers": [
+    "reviewers": [
         {
             "username": "aladdin-add",
             "name": "薛定谔的猫",
             "website": "",
             "avatar_url": "https://avatars2.githubusercontent.com/u/13050025?v=4"
-        },
+        }
+    ],
+    "committers": [
         {
             "username": "g-plane",
             "name": "Pig Fang",
