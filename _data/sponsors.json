@@ -1,6 +1,13 @@
 {
     "gold": [
         {
+            "name": "GitKraken",
+            "url": "https://www.gitkraken.com/",
+            "image": "https://images.opencollective.com/proxy/images/?src=https%3A%2F%2Flogo.clearbit.com%2Fgitkraken.com&height=96",
+            "monthlyDonation": 110000,
+            "totalDonations": 110000
+        },
+        {
             "name": "Airbnb",
             "url": "https://www.airbnb.com/",
             "image": "https://images.opencollective.com/proxy/images/?src=https%3A%2F%2Fopencollective-production.s3-us-west-1.amazonaws.com%2F098e3bd0-4d57-11e8-9324-0f6cc1f92bf1.png&height=96",
