@@ -34,11 +34,13 @@ if (!ESLINT_GITHUB_TOKEN) {
 const ALUMNI_TEAM_ID = "3005888";
 const TSC_TEAM_ID = "2060414";
 const COMMITTERS_TEAM_ID = "1054435";
+const REVIEWERS_TEAM_ID = "3162426";
 
 // lookup table mapping Github team IDs to JSON keys
 const teamIds = {
     [TSC_TEAM_ID]: "tsc",
     [COMMITTERS_TEAM_ID]: "committers",
+    [REVIEWERS_TEAM_ID]: "reviewers",
     [ALUMNI_TEAM_ID]: "alumni"
 };
 
@@ -46,6 +48,7 @@ const teamIds = {
 const team = {
     tsc: [],
     alumni: [],
+    reviewers: [],
     committers: []
 };
 
@@ -60,7 +63,7 @@ const team = {
         token: ESLINT_GITHUB_TOKEN
     });
 
-    for (const teamId of [TSC_TEAM_ID, ALUMNI_TEAM_ID, COMMITTERS_TEAM_ID]) {
+    for (const teamId of [TSC_TEAM_ID, ALUMNI_TEAM_ID, COMMITTERS_TEAM_ID, REVIEWERS_TEAM_ID]) {
         const { data: result } = await octokit.teams.listMembers({
             team_id: teamId,
             per_page: 100
@@ -80,8 +83,11 @@ const team = {
 
     }
 
-    // filter out TSC members from committers list
-    team.committers = team.committers.filter(user => !team.tsc.find(tscmember => tscmember.username === user.username));
+    // filter out TSC members and reviewers from committers list
+    team.committers = team.committers.filter(user => {
+        return !team.tsc.find(tscmember => tscmember.username === user.username)
+            && !team.reviewers.find(tscmember => tscmember.username === user.username);
+    });
 
     fs.writeFileSync(filename, JSON.stringify(team, null, "    "), { encoding: "utf8" });
 })();
