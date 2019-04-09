@@ -20,6 +20,13 @@
             "image": "https://images.opencollective.com/proxy/images/?src=https%3A%2F%2Fopencollective-production.s3-us-west-1.amazonaws.com%2Fbbdb9cc0-3b5d-11e9-9537-ad85092287b8.png&height=96",
             "monthlyDonation": 100000,
             "totalDonations": 300000
+        },
+        {
+            "name": "Salesforce",
+            "url": "http://salesforce.com",
+            "image": "https://images.opencollective.com/proxy/images/?src=https%3A%2F%2Flogo.clearbit.com%2Fsalesforce.com&height=96",
+            "monthlyDonation": 100000,
+            "totalDonations": 100000
         }
     ],
     "silver": [
