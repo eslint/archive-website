@@ -8,13 +8,6 @@
             "totalDonations": 110000
         },
         {
-            "name": "Airbnb",
-            "url": "https://www.airbnb.com/",
-            "image": "https://images.opencollective.com/proxy/images/?src=https%3A%2F%2Fopencollective-production.s3-us-west-1.amazonaws.com%2F098e3bd0-4d57-11e8-9324-0f6cc1f92bf1.png&height=96",
-            "monthlyDonation": 100333,
-            "totalDonations": 301000
-        },
-        {
             "name": "Facebook Open Source",
             "url": "https://code.facebook.com/projects/",
             "image": "https://images.opencollective.com/proxy/images/?src=https%3A%2F%2Fres.cloudinary.com%2Fopencollective%2Fimage%2Fupload%2Fv1508519428%2FS9gk78AS_400x400_fulq2l.jpg&height=96",
@@ -73,9 +66,23 @@
             "image": "https://images.opencollective.com/proxy/images/?src=https%3A%2F%2Flogo.clearbit.com%2Fmarfeel.com&height=96",
             "monthlyDonation": 20000,
             "totalDonations": 20000
+        },
+        {
+            "name": "Usave",
+            "url": "https://usave.co.uk/utilities/broadband/",
+            "image": "https://images.opencollective.com/proxy/images/?src=https%3A%2F%2Flogo.clearbit.com%2Fusave.co.uk&height=96",
+            "monthlyDonation": 20000,
+            "totalDonations": 20000
         }
     ],
     "backers": [
+        {
+            "name": "Airbnb",
+            "url": "https://www.airbnb.com/",
+            "image": "https://images.opencollective.com/proxy/images/?src=https%3A%2F%2Fopencollective-production.s3-us-west-1.amazonaws.com%2F098e3bd0-4d57-11e8-9324-0f6cc1f92bf1.png&height=96",
+            "monthlyDonation": 100333,
+            "totalDonations": 301000
+        },
         {
             "name": "Addy Osmani",
             "url": "http://www.addyosmani.com",
@@ -126,13 +133,6 @@
             "totalDonations": 7500
         },
         {
-            "name": "Brie Bunge",
-            "url": null,
-            "image": null,
-            "monthlyDonation": 1000,
-            "totalDonations": 1000
-        },
-        {
             "name": "David Johnston",
             "url": "https://blacksheepcode.com",
             "image": "https://images.opencollective.com/proxy/images/?src=https%3A%2F%2Fopencollective-production.s3-us-west-1.amazonaws.com%2Fb42892d0-b881-11e8-b4ab-519dd68ec9a0.jpg&height=96",
@@ -141,6 +141,13 @@
         },
         {
             "name": "Michael Neth",
+            "url": null,
+            "image": null,
+            "monthlyDonation": 1000,
+            "totalDonations": 1000
+        },
+        {
+            "name": "Brie Bunge",
             "url": null,
             "image": null,
             "monthlyDonation": 1000,
@@ -238,9 +245,9 @@
             "totalDonations": 1500
         },
         {
-            "name": "Deepak Jayaram",
+            "name": "Schalk Neethling",
             "url": null,
-            "image": "https://images.opencollective.com/proxy/images/?src=https%3A%2F%2Fwww.gravatar.com%2Favatar%2Fe43c688b523d6822aafaab1545be2565%3Fdefault%3D404&height=96",
+            "image": null,
             "monthlyDonation": 500,
             "totalDonations": 500
         },
@@ -315,9 +322,9 @@
             "totalDonations": 1500
         },
         {
-            "name": "Schalk Neethling",
+            "name": "Deepak Jayaram",
             "url": null,
-            "image": null,
+            "image": "https://images.opencollective.com/proxy/images/?src=https%3A%2F%2Fwww.gravatar.com%2Favatar%2Fe43c688b523d6822aafaab1545be2565%3Fdefault%3D404&height=96",
             "monthlyDonation": 500,
             "totalDonations": 500
         },
@@ -385,13 +392,6 @@
             "totalDonations": 200
         },
         {
-            "name": "Frontend Masters",
-            "url": "https://FrontendMasters.com",
-            "image": "https://images.opencollective.com/proxy/images/?src=https%3A%2F%2Fopencollective-production.s3-us-west-1.amazonaws.com%2F5e18b6b0-83b4-11e8-97c9-03259cc8bf2b.png&height=96",
-            "monthlyDonation": 0,
-            "totalDonations": 20000
-        },
-        {
             "name": "Open Collective Inc.",
             "url": "https://opencollective.com",
             "image": "https://images.opencollective.com/proxy/images/?src=https%3A%2F%2Fopencollective-production.s3-us-west-1.amazonaws.com%2F8aa714c0-79fa-11e7-9a37-35a8ed456d67.png&height=96",
@@ -404,6 +404,13 @@
             "image": "https://images.opencollective.com/proxy/images/?src=https%3A%2F%2Fopencollective-production.s3-us-west-1.amazonaws.com%2F02f87560-b2f1-11e8-85a0-75f200a0e2db.png&height=96",
             "monthlyDonation": 0,
             "totalDonations": 6000
+        },
+        {
+            "name": "Frontend Masters",
+            "url": "https://FrontendMasters.com",
+            "image": "https://images.opencollective.com/proxy/images/?src=https%3A%2F%2Fopencollective-production.s3-us-west-1.amazonaws.com%2F5e18b6b0-83b4-11e8-97c9-03259cc8bf2b.png&height=96",
+            "monthlyDonation": 0,
+            "totalDonations": 20000
         }
     ]
 }
