@@ -66,6 +66,13 @@
             "image": "https://images.opencollective.com/proxy/images/?src=https%3A%2F%2Flogo.clearbit.com%2Ffiresticktricks.com&height=96",
             "monthlyDonation": 20000,
             "totalDonations": 20000
+        },
+        {
+            "name": "Marfeel",
+            "url": "https://www.marfeel.com/",
+            "image": "https://images.opencollective.com/proxy/images/?src=https%3A%2F%2Flogo.clearbit.com%2Fmarfeel.com&height=96",
+            "monthlyDonation": 20000,
+            "totalDonations": 20000
         }
     ],
     "backers": [
