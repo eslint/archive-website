@@ -193,3 +193,7 @@
 - url: https://www.gandi.net/
   src: /img/logos/gandi.svg
   name: Gandi.net
+
+- url: https://weave.works/
+  src: /img/logos/weaveworks.svg
+  name: Weaveworks
