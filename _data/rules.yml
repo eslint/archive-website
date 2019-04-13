@@ -302,8 +302,8 @@ categories:
         name: no-lone-blocks
         recommended: false
       - description: >-
-          disallow `function` declarations and expressions inside loop
-          statements
+          disallow function declarations that contain unsafe references inside
+          loop statements
         fixable: false
         name: no-loop-func
         recommended: false
