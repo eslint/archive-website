@@ -70,7 +70,7 @@
         {
             "name": "Marfeel",
             "url": "https://www.marfeel.com/",
-            "image": "https://images.opencollective.com/proxy/images/?src=https%3A%2F%2Flogo.clearbit.com%2Fmarfeel.com&height=96",
+            "image": "https://images.opencollective.com/proxy/images/?src=https%3A%2F%2Fopencollective-production.s3-us-west-1.amazonaws.com%2F1ca2c7f0-6024-11e9-8c74-1fca6b09a659.png&height=96",
             "monthlyDonation": 20000,
             "totalDonations": 20000
         },
