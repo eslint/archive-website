@@ -182,9 +182,9 @@
             "totalDonations": 1800
         },
         {
-            "name": "Pawel Grzybek",
-            "url": "https://pawelgrzybek.com/",
-            "image": "https://images.opencollective.com/proxy/images/?src=https%3A%2F%2Fopencollective-production.s3-us-west-1.amazonaws.com%2Fc8bd1650-2f5d-11e9-9004-2b850be986d3.jpg&height=96",
+            "name": "Kevin Lamping",
+            "url": "http://klamp.in",
+            "image": "https://images.opencollective.com/proxy/images/?src=https%3A%2F%2Fopencollective-production.s3-us-west-1.amazonaws.com%2Fd80b4ca0-30af-11e9-83fe-6d2c2c189dcd.jpg&height=96",
             "monthlyDonation": 500,
             "totalDonations": 1500
         },
@@ -231,18 +231,18 @@
             "totalDonations": 1500
         },
         {
-            "name": "Schalk Neethling",
-            "url": null,
-            "image": null,
-            "monthlyDonation": 500,
-            "totalDonations": 500
-        },
-        {
-            "name": "Kevin Lamping",
-            "url": "http://klamp.in",
-            "image": "https://images.opencollective.com/proxy/images/?src=https%3A%2F%2Fopencollective-production.s3-us-west-1.amazonaws.com%2Fd80b4ca0-30af-11e9-83fe-6d2c2c189dcd.jpg&height=96",
+            "name": "Pawel Grzybek",
+            "url": "https://pawelgrzybek.com/",
+            "image": "https://images.opencollective.com/proxy/images/?src=https%3A%2F%2Fopencollective-production.s3-us-west-1.amazonaws.com%2Fc8bd1650-2f5d-11e9-9004-2b850be986d3.jpg&height=96",
             "monthlyDonation": 500,
             "totalDonations": 1500
+        },
+        {
+            "name": "Jb Landry",
+            "url": "https://jblandry.info",
+            "image": "https://images.opencollective.com/proxy/images/?src=https%3A%2F%2Fopencollective-production.s3-us-west-1.amazonaws.com%2Fbc1671d0-5a28-11e9-8dad-7f85a11ca6d9.jpg&height=96",
+            "monthlyDonation": 500,
+            "totalDonations": 500
         },
         {
             "name": "Thomas Hermann",
@@ -315,9 +315,9 @@
             "totalDonations": 1500
         },
         {
-            "name": "Jb Landry",
-            "url": "https://jblandry.info",
-            "image": "https://images.opencollective.com/proxy/images/?src=https%3A%2F%2Fopencollective-production.s3-us-west-1.amazonaws.com%2Fbc1671d0-5a28-11e9-8dad-7f85a11ca6d9.jpg&height=96",
+            "name": "Alexandre Morgaut",
+            "url": "https://www.quora.com/profile/Alexandre-Morgaut",
+            "image": "https://images.opencollective.com/proxy/images/?src=https%3A%2F%2Fwww.gravatar.com%2Favatar%2Fdbb390eeae629eeb7e68c00e260c2c26%3Fdefault%3D404&height=96",
             "monthlyDonation": 500,
             "totalDonations": 500
         },
@@ -381,6 +381,13 @@
             "name": "Deepak Jayaram",
             "url": null,
             "image": "https://images.opencollective.com/proxy/images/?src=https%3A%2F%2Fwww.gravatar.com%2Favatar%2Fe43c688b523d6822aafaab1545be2565%3Fdefault%3D404&height=96",
+            "monthlyDonation": 500,
+            "totalDonations": 500
+        },
+        {
+            "name": "Schalk Neethling",
+            "url": null,
+            "image": null,
             "monthlyDonation": 500,
             "totalDonations": 500
         },
