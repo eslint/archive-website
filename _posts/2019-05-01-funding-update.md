@@ -1,7 +1,6 @@
 ---
 layout: post
 title: "Funding ESLint's Future: An Update"
-date: 2019-05-01
 tags:
   - Open Source
   - Funding
