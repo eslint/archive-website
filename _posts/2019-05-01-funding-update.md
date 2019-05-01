@@ -23,7 +23,7 @@ In the past three months, we are happy to share that our monthly donations have 
     <a href="http://salesforce.com" title="Salesforce" rel="noopener nofollow" target="_blank"><img class="lazyload gold-sponsor" data-src="https://images.opencollective.com/proxy/images/?src=https%3A%2F%2Flogo.clearbit.com%2Fsalesforce.com&amp;height=96" alt="Salesforce" src="https://images.opencollective.com/proxy/images/?src=https%3A%2F%2Flogo.clearbit.com%2Fsalesforce.com&amp;height=96"></a>
 </p>
 
-We are happy to share that the following sponsors have joined the ESLint Collective at the  gold sponsor level, donating $1,000 or more per month:
+We are happy to share that the following sponsors have joined the ESLint Collective at the gold sponsor level, donating $1,000 or more per month:
 
 * [**GitKraken**](https://www.gitkraken.com/) - $1,100
 * [**Badoo**](https://badoo.com/team) - $1,000
