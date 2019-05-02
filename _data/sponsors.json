@@ -41,7 +41,7 @@
     "bronze": [
         {
             "name": "Faithlife",
-            "url": "http://faithlife.com/ref/about",
+            "url": "https://faithlife.com/ref/about",
             "image": "https://images.opencollective.com/proxy/images/?src=https%3A%2F%2Flogo.clearbit.com%2Ffaithlife.com&height=96",
             "monthlyDonation": 20000,
             "totalDonations": 80000
