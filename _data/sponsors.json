@@ -210,6 +210,13 @@
             "totalDonations": 2000
         },
         {
+            "name": "Joseph Percy",
+            "url": null,
+            "image": null,
+            "monthlyDonation": 500,
+            "totalDonations": 2000
+        },
+        {
             "name": "Alexey Raspopov",
             "url": "https://alexeyraspopov.com",
             "image": "https://images.opencollective.com/proxy/images/?src=https%3A%2F%2Fopencollective-production.s3-us-west-1.amazonaws.com%2F9332be90-5abb-11e7-9ef0-6343e38e2883.png&height=96",
@@ -259,18 +266,18 @@
             "totalDonations": 2000
         },
         {
-            "name": "Jarrod Davis",
-            "url": "https://jarrodldavis.com/",
-            "image": "https://images.opencollective.com/proxy/images/?src=https%3A%2F%2Fopencollective-production.s3-us-west-1.amazonaws.com%2F9c483ae0-33b4-11e9-9a9b-9398d916264d.JPG&height=96",
-            "monthlyDonation": 500,
-            "totalDonations": 2000
-        },
-        {
             "name": "Jb Landry",
             "url": "https://jblandry.info",
             "image": "https://images.opencollective.com/proxy/images/?src=https%3A%2F%2Fopencollective-production.s3-us-west-1.amazonaws.com%2Fbc1671d0-5a28-11e9-8dad-7f85a11ca6d9.jpg&height=96",
             "monthlyDonation": 500,
             "totalDonations": 1000
+        },
+        {
+            "name": "Gavin Mogan",
+            "url": "https://www.gavinmogan.com",
+            "image": "https://images.opencollective.com/proxy/images/?src=https%3A%2F%2Fopencollective-production.s3-us-west-1.amazonaws.com%2FuQiEdvYx_normaljpg_6e91d460-17c0-11e7-a2ff-df948e4c489f.jpeg&height=96",
+            "monthlyDonation": 500,
+            "totalDonations": 2000
         },
         {
             "name": "Chih-Hsuan Fan",
@@ -329,13 +336,6 @@
             "totalDonations": 500
         },
         {
-            "name": "Joseph Percy",
-            "url": null,
-            "image": null,
-            "monthlyDonation": 500,
-            "totalDonations": 1500
-        },
-        {
             "name": "",
             "url": null,
             "image": null,
@@ -392,9 +392,9 @@
             "totalDonations": 1500
         },
         {
-            "name": "Gavin Mogan",
-            "url": "https://www.gavinmogan.com",
-            "image": "https://images.opencollective.com/proxy/images/?src=https%3A%2F%2Fopencollective-production.s3-us-west-1.amazonaws.com%2FuQiEdvYx_normaljpg_6e91d460-17c0-11e7-a2ff-df948e4c489f.jpeg&height=96",
+            "name": "Jarrod Davis",
+            "url": "https://jarrodldavis.com/",
+            "image": "https://images.opencollective.com/proxy/images/?src=https%3A%2F%2Fopencollective-production.s3-us-west-1.amazonaws.com%2F9c483ae0-33b4-11e9-9a9b-9398d916264d.JPG&height=96",
             "monthlyDonation": 500,
             "totalDonations": 2000
         },
