@@ -214,7 +214,14 @@
             "url": null,
             "image": "https://images.opencollective.com/proxy/images/?src=https%3A%2F%2Fwww.gravatar.com%2Favatar%2Ffa901150af7d0bb0e3bbd4acd61f8e49%3Fdefault%3D404&height=96",
             "monthlyDonation": 600,
-            "totalDonations": 1800
+            "totalDonations": 2400
+        },
+        {
+            "name": "Alexandre Morgaut",
+            "url": "https://www.quora.com/profile/Alexandre-Morgaut",
+            "image": "https://images.opencollective.com/proxy/images/?src=https%3A%2F%2Fwww.gravatar.com%2Favatar%2Fdbb390eeae629eeb7e68c00e260c2c26%3Fdefault%3D404&height=96",
+            "monthlyDonation": 500,
+            "totalDonations": 1000
         },
         {
             "name": "Jordan Harband",
@@ -266,18 +273,18 @@
             "totalDonations": 2000
         },
         {
-            "name": "Kevin Lamping",
-            "url": "http://klamp.in",
-            "image": "https://images.opencollective.com/proxy/images/?src=https%3A%2F%2Fopencollective-production.s3-us-west-1.amazonaws.com%2Fd80b4ca0-30af-11e9-83fe-6d2c2c189dcd.jpg&height=96",
-            "monthlyDonation": 500,
-            "totalDonations": 2000
-        },
-        {
             "name": "Jb Landry",
             "url": "https://jblandry.info",
             "image": "https://images.opencollective.com/proxy/images/?src=https%3A%2F%2Fopencollective-production.s3-us-west-1.amazonaws.com%2Fbc1671d0-5a28-11e9-8dad-7f85a11ca6d9.jpg&height=96",
             "monthlyDonation": 500,
             "totalDonations": 1000
+        },
+        {
+            "name": "Thomas Hermann",
+            "url": null,
+            "image": "https://images.opencollective.com/proxy/images/?src=https%3A%2F%2Fd1ts43dypk8bqh.cloudfront.net%2Fv1%2Favatars%2Fa3b05fb8-7b12-4062-9d6f-05e3905bc9c0&height=96",
+            "monthlyDonation": 500,
+            "totalDonations": 2000
         },
         {
             "name": "Jarrod Davis",
@@ -341,13 +348,6 @@
             "image": "https://images.opencollective.com/proxy/images/?src=https%3A%2F%2Fopencollective-production.s3-us-west-1.amazonaws.com%2F352bb130-32eb-11e9-9423-e9873eff8639.png&height=96",
             "monthlyDonation": 500,
             "totalDonations": 2000
-        },
-        {
-            "name": "Alexandre Morgaut",
-            "url": "https://www.quora.com/profile/Alexandre-Morgaut",
-            "image": "https://images.opencollective.com/proxy/images/?src=https%3A%2F%2Fwww.gravatar.com%2Favatar%2Fdbb390eeae629eeb7e68c00e260c2c26%3Fdefault%3D404&height=96",
-            "monthlyDonation": 500,
-            "totalDonations": 1000
         },
         {
             "name": "",
@@ -420,9 +420,9 @@
             "totalDonations": 500
         },
         {
-            "name": "Thomas Hermann",
-            "url": null,
-            "image": "https://images.opencollective.com/proxy/images/?src=https%3A%2F%2Fd1ts43dypk8bqh.cloudfront.net%2Fv1%2Favatars%2Fa3b05fb8-7b12-4062-9d6f-05e3905bc9c0&height=96",
+            "name": "Kevin Lamping",
+            "url": "http://klamp.in",
+            "image": "https://images.opencollective.com/proxy/images/?src=https%3A%2F%2Fopencollective-production.s3-us-west-1.amazonaws.com%2Fd80b4ca0-30af-11e9-83fe-6d2c2c189dcd.jpg&height=96",
             "monthlyDonation": 500,
             "totalDonations": 2000
         },
