@@ -20,6 +20,7 @@ define(["react"], function(React) {
                         <option value="7">2016</option>
                         <option value="8">2017</option>
                         <option value="9">2018</option>
+                        <option value="10">2019</option>
                     </select>
                 </div>
                 <div className="col-md-4">
