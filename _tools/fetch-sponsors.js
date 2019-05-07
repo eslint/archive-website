@@ -14,7 +14,6 @@
 
 const fs = require("fs");
 const fetch = require("node-fetch");
-const moment = require("moment");
 
 //-----------------------------------------------------------------------------
 // Data
@@ -31,6 +30,33 @@ const sponsors = {
     backers: []
 };
 
+const graphqlEndpoint = 'https://api.opencollective.com/graphql/v2';
+
+const graphqlQuery = `{
+  account(slug: "eslint") {
+    orders(status: ACTIVE) {
+      totalCount
+      nodes {
+        fromAccount {
+          name
+          website
+          imageUrl
+        }
+        amount {
+          value
+        }
+        tier {
+          slug
+        }
+        frequency
+        totalDonations {
+          value
+        }
+      }
+    }
+  }
+}`;
+
 //-----------------------------------------------------------------------------
 // Main
 //-----------------------------------------------------------------------------
@@ -38,38 +64,31 @@ const sponsors = {
 (async() => {
 
     // fetch the data
-    const result = await fetch("https://opencollective.com/api/groups/eslint/backers");
-    const backers = await result.json();
+    const result = await fetch(graphqlEndpoint, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ query: graphqlQuery }),
+    });
+    const orders = await result.json().then(res => res.data.account.orders.nodes);
 
     // process into a useful format
-    for (const backer of backers) {
-
-        // anyone who is in the list has donated at least one month
-        let months = 1;
-        
-        // if the donation dates are different, it's at least two months
-        if (backer.firstDonation !== backer.lastDonation) {
-            const firstDonationDate = moment(backer.firstDonation);
-            const lastDonationDate = moment(backer.lastDonation);
-
-            months += 1;
-            months += lastDonationDate.diff(firstDonationDate, "months");
-        }
+    for (const order of orders) {
 
         const sponsor = {
-            name: backer.name,
-            url: backer.website,
-            image: backer.avatar,
-            // "sponsor" means one-time donation
-            monthlyDonation: backer.tier !== "sponsor" ? Math.round(backer.totalDonations / months) : 0, 
-            totalDonations: backer.totalDonations
+            name: order.fromAccount.name,
+            url: order.fromAccount.website,
+            image: order.fromAccount.imageUrl,
+            monthlyDonation: order.frequency === 'year' ? Math.round(order.amount.value * 100 / 12) : order.amount.value * 100,
+            totalDonations: order.totalDonations.value * 100
         };
 
-        switch (backer.tier) {
+        const tierSlug = order.tier ? order.tier.slug : null;
+
+        switch (tierSlug) {
             case "gold-sponsor":
                 sponsors.gold.push(sponsor);
                 break;
-                
+
             case "silver-sponsor":
                 sponsors.silver.push(sponsor);
                 break;
