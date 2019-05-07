@@ -126,37 +126,9 @@
             "totalDonations": 2400
         },
         {
-            "name": "Alexandre Morgaut",
-            "url": "https://www.quora.com/profile/Alexandre-Morgaut",
-            "image": "https://images.opencollective.com/alexandre-morgaut/avatar.png",
-            "monthlyDonation": 500,
-            "totalDonations": 1000
-        },
-        {
-            "name": "Jordan Harband",
-            "url": "https://twitter.com/LJHarb",
-            "image": "https://images.opencollective.com/ljharb/avatar.png",
-            "monthlyDonation": 500,
-            "totalDonations": 2000
-        },
-        {
-            "name": "Joseph Percy",
-            "url": null,
-            "image": "https://images.opencollective.com/joseph-percy/avatar.png",
-            "monthlyDonation": 500,
-            "totalDonations": 2000
-        },
-        {
-            "name": "Alexey Raspopov",
-            "url": "https://alexeyraspopov.com",
-            "image": "https://images.opencollective.com/alexeyraspopov/avatar.png",
-            "monthlyDonation": 500,
-            "totalDonations": 2000
-        },
-        {
-            "name": "Nubz Ltd",
-            "url": "http://nubz.com",
-            "image": "https://images.opencollective.com/nubz/logo.png",
+            "name": "Simon Korzun",
+            "url": "http://korzun.com",
+            "image": "https://images.opencollective.com/simon-korzun/avatar.png",
             "monthlyDonation": 500,
             "totalDonations": 2000
         },
@@ -189,6 +161,20 @@
             "totalDonations": 2000
         },
         {
+            "name": "Joseph Percy",
+            "url": null,
+            "image": "https://images.opencollective.com/joseph-percy/avatar.png",
+            "monthlyDonation": 500,
+            "totalDonations": 2000
+        },
+        {
+            "name": "Alexey Raspopov",
+            "url": "https://alexeyraspopov.com",
+            "image": "https://images.opencollective.com/alexeyraspopov/avatar.png",
+            "monthlyDonation": 500,
+            "totalDonations": 2000
+        },
+        {
             "name": "Jarrod Davis",
             "url": "https://jarrodldavis.com/",
             "image": "https://images.opencollective.com/jarrodldavis/avatar.png",
@@ -210,9 +196,9 @@
             "totalDonations": 2000
         },
         {
-            "name": "Simon Korzun",
-            "url": "http://korzun.com",
-            "image": "https://images.opencollective.com/simon-korzun/avatar.png",
+            "name": "Jordan Harband",
+            "url": "https://twitter.com/LJHarb",
+            "image": "https://images.opencollective.com/ljharb/avatar.png",
             "monthlyDonation": 500,
             "totalDonations": 2000
         },
@@ -278,6 +264,20 @@
             "image": "https://images.opencollective.com/mikko-piuhola/avatar.png",
             "monthlyDonation": 500,
             "totalDonations": 1500
+        },
+        {
+            "name": "Nubz Ltd",
+            "url": "http://nubz.com",
+            "image": "https://images.opencollective.com/nubz/logo.png",
+            "monthlyDonation": 500,
+            "totalDonations": 2000
+        },
+        {
+            "name": "Alexandre Morgaut",
+            "url": "https://www.quora.com/profile/Alexandre-Morgaut",
+            "image": "https://images.opencollective.com/alexandre-morgaut/avatar.png",
+            "monthlyDonation": 500,
+            "totalDonations": 1000
         },
         {
             "name": "Eric Lanehart",
