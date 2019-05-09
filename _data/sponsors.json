@@ -252,6 +252,13 @@
             "totalDonations": 1500
         },
         {
+            "name": "Oliver Sieweke",
+            "url": null,
+            "image": "https://images.opencollective.com/oliver-sieweke/avatar.png",
+            "monthlyDonation": 500,
+            "totalDonations": 500
+        },
+        {
             "name": "Andrew Rota",
             "url": "https://twitter.com/andrewrota",
             "image": "https://images.opencollective.com/andrewrota/avatar.png",
