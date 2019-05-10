@@ -133,9 +133,9 @@
             "totalDonations": 2400
         },
         {
-            "name": "Simon Korzun",
-            "url": "http://korzun.com",
-            "image": "https://images.opencollective.com/simon-korzun/avatar.png",
+            "name": "Dan Foley",
+            "url": "http://cantremember.com",
+            "image": "https://images.opencollective.com/cantremember/avatar.png",
             "monthlyDonation": 500,
             "totalDonations": 2000
         },
@@ -203,16 +203,16 @@
             "totalDonations": 2000
         },
         {
-            "name": "Jordan Harband",
-            "url": "https://twitter.com/LJHarb",
-            "image": "https://images.opencollective.com/ljharb/avatar.png",
+            "name": "Simon Korzun",
+            "url": "http://korzun.com",
+            "image": "https://images.opencollective.com/simon-korzun/avatar.png",
             "monthlyDonation": 500,
             "totalDonations": 2000
         },
         {
-            "name": "Dan Foley",
-            "url": "http://cantremember.com",
-            "image": "https://images.opencollective.com/cantremember/avatar.png",
+            "name": "Jordan Harband",
+            "url": "https://twitter.com/LJHarb",
+            "image": "https://images.opencollective.com/ljharb/avatar.png",
             "monthlyDonation": 500,
             "totalDonations": 2000
         },
@@ -250,6 +250,13 @@
             "image": "https://images.opencollective.com/ivanandsickle/avatar.png",
             "monthlyDonation": 500,
             "totalDonations": 1500
+        },
+        {
+            "name": "Misaka Network, Inc.",
+            "url": "https://misaka.io",
+            "image": "https://images.opencollective.com/misaka/logo.png",
+            "monthlyDonation": 500,
+            "totalDonations": 500
         },
         {
             "name": "Oliver Sieweke",
