@@ -8,6 +8,8 @@ rule_type: suggestion
 
 # disallow `with` statements (no-with)
 
+(recommended) The `"extends": "eslint:recommended"` property in a configuration file enables this rule.
+
 The `with` statement is potentially problematic because it adds members of an object to the current scope, making it impossible to tell what a variable inside the block actually refers to.
 
 ## Rule Details

@@ -8,6 +8,8 @@ rule_type: problem
 
 # disallow using an async function as a Promise executor (no-async-promise-executor)
 
+(recommended) The `"extends": "eslint:recommended"` property in a configuration file enables this rule.
+
 The `new Promise` constructor accepts an *executor* function as an argument, which has `resolve` and `reject` parameters that can be used to control the state of the created Promise. For example:
 
 ```js
