@@ -82,6 +82,13 @@
             "totalDonations": 40000
         },
         {
+            "name": "clay",
+            "url": "https://clay.global",
+            "image": "https://images.opencollective.com/clayglobal/logo.png",
+            "monthlyDonation": 20000,
+            "totalDonations": 20000
+        },
+        {
             "name": "Discord",
             "url": "https://discordapp.com",
             "image": "https://images.opencollective.com/discordapp/logo.png",
