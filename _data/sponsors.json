@@ -27,6 +27,13 @@
             "image": "https://images.opencollective.com/badoo/logo.png",
             "monthlyDonation": 100000,
             "totalDonations": 400000
+        },
+        {
+            "name": "Shopify",
+            "url": "https://www.shopify.com",
+            "image": "https://images.opencollective.com/shopify/logo.png",
+            "monthlyDonation": 100000,
+            "totalDonations": 100000
         }
     ],
     "silver": [
