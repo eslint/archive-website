@@ -42,3 +42,5 @@ If you were using a prior version of ESLint, you can get help with the transitio
 - [migrating-to-2.0.0](migrating-to-2.0.0)
 - [migrating-to-3.0.0](migrating-to-3.0.0)
 - [migrating-to-4.0.0](migrating-to-4.0.0)
+- [migrating-to-5.0.0](migrating-to-5.0.0)
+- [migrating-to-6.0.0](migrating-to-6.0.0)

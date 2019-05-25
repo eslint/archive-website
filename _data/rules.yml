@@ -226,7 +226,7 @@ categories:
       - description: >-
           disallow division operators explicitly at the beginning of regular
           expressions
-        fixable: false
+        fixable: true
         name: no-div-regex
         recommended: false
       - description: disallow `else` blocks after `return` statements in `if` statements
@@ -755,7 +755,9 @@ categories:
         fixable: false
         name: new-cap
         recommended: false
-      - description: require parentheses when invoking a constructor with no arguments
+      - description: >-
+          enforce or disallow parentheses when invoking a constructor with no
+          arguments
         fixable: true
         name: new-parens
         recommended: false
