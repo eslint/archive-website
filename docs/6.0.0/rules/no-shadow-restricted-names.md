@@ -8,6 +8,8 @@ rule_type: suggestion
 
 # Disallow Shadowing of Restricted Names (no-shadow-restricted-names)
 
+(recommended) The `"extends": "eslint:recommended"` property in a configuration file enables this rule.
+
 ES5 §15.1.1 Value Properties of the Global Object (`NaN`, `Infinity`, `undefined`) as well as strict mode restricted identifiers `eval` and `arguments` are considered to be restricted names in JavaScript. Defining them to mean something else can have unintended consequences and confuse others reading the code. For example, there's nothing preventing you from writing:
 
 ```js

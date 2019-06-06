@@ -8,6 +8,8 @@ rule_type: suggestion
 
 # Disallow Regular Expressions That Look Like Division (no-div-regex)
 
+(fixable) The `--fix` option on the [command line](../user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
+
 Require regex literals to escape division operators.
 
 ```js
@@ -31,7 +33,7 @@ Examples of **correct** code for this rule:
 ```js
 /*eslint no-div-regex: "error"*/
 
-function bar() { return /\=foo/; }
+function bar() { return /[=]foo/; }
 ```
 
 ## Related Rules
