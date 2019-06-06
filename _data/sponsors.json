@@ -147,9 +147,9 @@
             "totalDonations": 3000
         },
         {
-            "name": "Dan Foley",
-            "url": "http://cantremember.com",
-            "image": "https://images.opencollective.com/cantremember/avatar.png",
+            "name": "Maisonette Inc",
+            "url": "https://www.maisonette.com",
+            "image": "https://images.opencollective.com/maisonetteworld/logo.png",
             "monthlyDonation": 500,
             "totalDonations": 2500
         },
@@ -217,16 +217,16 @@
             "totalDonations": 2500
         },
         {
-            "name": "Jordan Harband",
-            "url": "https://twitter.com/LJHarb",
-            "image": "https://images.opencollective.com/ljharb/avatar.png",
+            "name": "Dan Foley",
+            "url": "http://cantremember.com",
+            "image": "https://images.opencollective.com/cantremember/avatar.png",
             "monthlyDonation": 500,
             "totalDonations": 2500
         },
         {
-            "name": "Maisonette Inc",
-            "url": "https://www.maisonette.com",
-            "image": "https://images.opencollective.com/maisonetteworld/logo.png",
+            "name": "Jordan Harband",
+            "url": "https://twitter.com/LJHarb",
+            "image": "https://images.opencollective.com/ljharb/avatar.png",
             "monthlyDonation": 500,
             "totalDonations": 2500
         },
@@ -278,6 +278,13 @@
             "image": "https://images.opencollective.com/misaka/logo.png",
             "monthlyDonation": 500,
             "totalDonations": 1000
+        },
+        {
+            "name": "Jay Merrifield",
+            "url": "https://github.com/fracmak",
+            "image": "https://images.opencollective.com/jay-merrifield/avatar.png",
+            "monthlyDonation": 500,
+            "totalDonations": 500
         },
         {
             "name": "Oliver Sieweke",
