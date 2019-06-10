@@ -10,7 +10,7 @@ rule_type: problem
 
 (recommended) The `"extends": "eslint:recommended"` property in a configuration file enables this rule.
 
-For a vast majority of use cases, the result of the `typeof` operator is one of the following string literals: `"undefined"`, `"object"`, `"boolean"`, `"number"`, `"string"`, `"function"` and `"symbol"`. It is usually a typing mistake to compare the result of a `typeof` operator to other string literals.
+For a vast majority of use cases, the result of the `typeof` operator is one of the following string literals: `"undefined"`, `"object"`, `"boolean"`, `"number"`, `"string"`, `"function"`, `"symbol"`, and `"bigint"`. It is usually a typing mistake to compare the result of a `typeof` operator to other string literals.
 
 ## Rule Details
 
@@ -67,6 +67,10 @@ typeof bar === typeof qux
 ## When Not To Use It
 
 You may want to turn this rule off if you will be using the `typeof` operator on host objects.
+
+## Further Reading
+
+* [MDN: `typeof` documentation](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/typeof)
 
 ## Version
 
