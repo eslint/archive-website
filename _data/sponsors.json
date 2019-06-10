@@ -147,16 +147,23 @@
             "totalDonations": 3000
         },
         {
-            "name": "Simon Korzun",
-            "url": "http://korzun.com",
-            "image": "https://images.opencollective.com/simon-korzun/avatar.png",
+            "name": "Dan Foley",
+            "url": "http://cantremember.com",
+            "image": "https://images.opencollective.com/cantremember/avatar.png",
             "monthlyDonation": 500,
             "totalDonations": 2500
         },
         {
-            "name": "Jay Merrifield",
-            "url": "https://github.com/fracmak",
-            "image": "https://images.opencollective.com/jay-merrifield/avatar.png",
+            "name": "Ivan Miskovic",
+            "url": "https://twitter.com/ivanandsickle",
+            "image": "https://images.opencollective.com/ivanandsickle/avatar.png",
+            "monthlyDonation": 500,
+            "totalDonations": 2000
+        },
+        {
+            "name": "1337 Lawyers",
+            "url": "https://www.1337lawyers.com",
+            "image": "https://images.opencollective.com/1337lawyers/logo.png",
             "monthlyDonation": 500,
             "totalDonations": 500
         },
@@ -168,9 +175,9 @@
             "totalDonations": 2000
         },
         {
-            "name": "Oliver Sieweke",
-            "url": null,
-            "image": "https://images.opencollective.com/oliver-sieweke/avatar.png",
+            "name": "Misaka Network, Inc.",
+            "url": "https://www.misaka.io/dns/?utm_source=opencollective",
+            "image": "https://images.opencollective.com/misaka/logo.png",
             "monthlyDonation": 500,
             "totalDonations": 1000
         },
@@ -217,18 +224,18 @@
             "totalDonations": 2500
         },
         {
-            "name": "Dan Foley",
-            "url": "http://cantremember.com",
-            "image": "https://images.opencollective.com/cantremember/avatar.png",
+            "name": "Jay Merrifield",
+            "url": "https://github.com/fracmak",
+            "image": "https://images.opencollective.com/jay-merrifield/avatar.png",
             "monthlyDonation": 500,
-            "totalDonations": 2500
+            "totalDonations": 500
         },
         {
-            "name": "Misaka Network, Inc.",
-            "url": "https://www.misaka.io/dns/?utm_source=opencollective",
-            "image": "https://images.opencollective.com/misaka/logo.png",
+            "name": "Simon Korzun",
+            "url": "http://korzun.com",
+            "image": "https://images.opencollective.com/simon-korzun/avatar.png",
             "monthlyDonation": 500,
-            "totalDonations": 1000
+            "totalDonations": 2500
         },
         {
             "name": "Mariusz Nowak",
@@ -259,16 +266,16 @@
             "totalDonations": 2500
         },
         {
+            "name": "Oliver Sieweke",
+            "url": null,
+            "image": "https://images.opencollective.com/oliver-sieweke/avatar.png",
+            "monthlyDonation": 500,
+            "totalDonations": 1000
+        },
+        {
             "name": "Alexandre Morgaut",
             "url": "https://www.quora.com/profile/Alexandre-Morgaut",
             "image": "https://images.opencollective.com/alexandre-morgaut/avatar.png",
-            "monthlyDonation": 500,
-            "totalDonations": 1500
-        },
-        {
-            "name": "Jb Landry",
-            "url": "https://jblandry.info",
-            "image": "https://images.opencollective.com/jblandry/avatar.png",
             "monthlyDonation": 500,
             "totalDonations": 1500
         },
@@ -301,11 +308,11 @@
             "totalDonations": 2500
         },
         {
-            "name": "Ivan Miskovic",
-            "url": "https://twitter.com/ivanandsickle",
-            "image": "https://images.opencollective.com/ivanandsickle/avatar.png",
+            "name": "Jb Landry",
+            "url": "https://jblandry.info",
+            "image": "https://images.opencollective.com/jblandry/avatar.png",
             "monthlyDonation": 500,
-            "totalDonations": 2000
+            "totalDonations": 1500
         },
         {
             "name": "Nubz Ltd",
