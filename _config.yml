@@ -1,4 +1,4 @@
-name: "ESLint - Pluggable JavaScript linter"
+title: "ESLint - Pluggable JavaScript linter"
 repository: "eslint/eslint.github.io"
 exclude: [
   'node_modules',
