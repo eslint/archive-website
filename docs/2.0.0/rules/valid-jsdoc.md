@@ -221,6 +221,7 @@ In the example below, it will expect the "object" to start with an uppercase and
 
 The following patterns are considered problems with option `preferType` setup as above:
 
+{% raw %}
 ```js
 /**
  * Adds two numbers together.
@@ -250,9 +251,11 @@ function foo(param1) {
     return {a: param1};
 }
 ```
+{% endraw %}
 
 The following patterns are not considered problems with option `preferType` setup as above:
 
+{% raw %}
 ```js
 /**
  * Adds two numbers together.
@@ -282,6 +285,7 @@ function foo(param1) {
     return {a: param1};
 }
 ```
+{% endraw %}
 
 ## When Not To Use It
 
