@@ -119,6 +119,13 @@
             "totalDonations": 12500
         },
         {
+            "name": "Ed Bentley",
+            "url": "https://twitter.com/ed_s_bentley",
+            "image": "https://images.opencollective.com/edward-bentley/avatar.png",
+            "monthlyDonation": 2000,
+            "totalDonations": 2000
+        },
+        {
             "name": "Benjamin Piouffle",
             "url": "https://benjamin.piouffle.com",
             "image": "https://images.opencollective.com/betree/avatar.png",
@@ -140,11 +147,11 @@
             "totalDonations": 3000
         },
         {
-            "name": "Dan Foley",
-            "url": "http://cantremember.com",
-            "image": "https://images.opencollective.com/cantremember/avatar.png",
+            "name": "Jb Landry",
+            "url": "https://jblandry.info",
+            "image": "https://images.opencollective.com/jblandry/avatar.png",
             "monthlyDonation": 500,
-            "totalDonations": 2500
+            "totalDonations": 1500
         },
         {
             "name": "Ivan Miskovic",
@@ -154,11 +161,11 @@
             "totalDonations": 2000
         },
         {
-            "name": "1337 Lawyers",
-            "url": "https://www.1337lawyers.com",
-            "image": "https://images.opencollective.com/1337lawyers/logo.png",
+            "name": "Jordan Harband",
+            "url": "https://twitter.com/LJHarb",
+            "image": "https://images.opencollective.com/ljharb/avatar.png",
             "monthlyDonation": 500,
-            "totalDonations": 500
+            "totalDonations": 2500
         },
         {
             "name": "Eric Lanehart",
@@ -168,11 +175,11 @@
             "totalDonations": 2000
         },
         {
-            "name": "Misaka Network, Inc.",
-            "url": "https://www.misaka.io/dns/?utm_source=opencollective",
-            "image": "https://images.opencollective.com/misaka/logo.png",
+            "name": "Jay Merrifield",
+            "url": "https://github.com/fracmak",
+            "image": "https://images.opencollective.com/jay-merrifield/avatar.png",
             "monthlyDonation": 500,
-            "totalDonations": 1000
+            "totalDonations": 500
         },
         {
             "name": "AJ Klein",
@@ -217,9 +224,9 @@
             "totalDonations": 2500
         },
         {
-            "name": "Jay Merrifield",
-            "url": "https://github.com/fracmak",
-            "image": "https://images.opencollective.com/jay-merrifield/avatar.png",
+            "name": "1337 Lawyers",
+            "url": "https://www.1337lawyers.com",
+            "image": "https://images.opencollective.com/1337lawyers/logo.png",
             "monthlyDonation": 500,
             "totalDonations": 500
         },
@@ -259,18 +266,18 @@
             "totalDonations": 2500
         },
         {
+            "name": "Misaka Network, Inc.",
+            "url": "https://www.misaka.io/dns/?utm_source=opencollective",
+            "image": "https://images.opencollective.com/misaka/logo.png",
+            "monthlyDonation": 500,
+            "totalDonations": 1000
+        },
+        {
             "name": "Oliver Sieweke",
             "url": null,
             "image": "https://images.opencollective.com/oliver-sieweke/avatar.png",
             "monthlyDonation": 500,
             "totalDonations": 1000
-        },
-        {
-            "name": "Alexandre Morgaut",
-            "url": "https://www.quora.com/profile/Alexandre-Morgaut",
-            "image": "https://images.opencollective.com/alexandre-morgaut/avatar.png",
-            "monthlyDonation": 500,
-            "totalDonations": 1500
         },
         {
             "name": "Thomas Hermann",
@@ -301,9 +308,9 @@
             "totalDonations": 2500
         },
         {
-            "name": "Jb Landry",
-            "url": "https://jblandry.info",
-            "image": "https://images.opencollective.com/jblandry/avatar.png",
+            "name": "Alexandre Morgaut",
+            "url": "https://www.quora.com/profile/Alexandre-Morgaut",
+            "image": "https://images.opencollective.com/alexandre-morgaut/avatar.png",
             "monthlyDonation": 500,
             "totalDonations": 1500
         },
@@ -322,9 +329,9 @@
             "totalDonations": 2500
         },
         {
-            "name": "Jordan Harband",
-            "url": "https://twitter.com/LJHarb",
-            "image": "https://images.opencollective.com/ljharb/avatar.png",
+            "name": "Dan Foley",
+            "url": "http://cantremember.com",
+            "image": "https://images.opencollective.com/cantremember/avatar.png",
             "monthlyDonation": 500,
             "totalDonations": 2500
         },
