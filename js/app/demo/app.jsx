@@ -1,6 +1,6 @@
 "use strict";
 
-define(["react", "jsx!editor", "jsx!messages", "jsx!fixedCode", "jsx!configuration", "eslint", "unicode"], function(React, Editor, Messages, FixedCode, Configuration, Linter, Unicode) {
+define(["react", "jsx!editor", "jsx!messages", "jsx!fixedCode", "jsx!configuration", "eslint", "unicode"], function(React, Editor, Messages, FixedCode, Configuration, linterModule, Unicode) {
     var hasLocalStorage = (function() {
         try {
             window.localStorage.setItem("localStorageTest", "foo");
@@ -11,7 +11,7 @@ define(["react", "jsx!editor", "jsx!messages", "jsx!fixedCode", "jsx!configurati
         }
     }());
 
-    var linter = new Linter();
+    var linter = new linterModule.Linter();
     var rules = linter.getRules();
     var ruleNames = Array.from(rules.keys());
     var docs = (function() {
