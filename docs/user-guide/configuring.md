@@ -60,17 +60,12 @@ Here's an example `.eslintrc.json` file:
 
 Setting parser options helps ESLint determine what is a parsing error. All language options are `false` by default.
 
-### Deprecated
-
-* `ecmaFeatures.experimentalObjectRestSpread` - enable support for the experimental [object rest/spread properties](https://github.com/tc39/proposal-object-rest-spread). This syntax has been supported in `ecmaVersion: 2018`. This option will be removed in the future.
-
 ## Specifying Parser
 
 By default, ESLint uses [Espree](https://github.com/eslint/espree) as its parser. You can optionally specify that a different parser should be used in your configuration file so long as the parser meets the following requirements:
 
-1. It must be an npm module installed locally.
-1. It must have an Esprima-compatible interface (it must export a `parse()` method).
-1. It must produce Esprima-compatible AST and token objects.
+1. It must be a Node module loadable from the config file where it appears. Usually, this means you should install the parser package separately using npm.
+1. It must conform to the [parser interface](/docs/developer-guide/working-with-plugins#working-with-custom-parsers).
 
 Note that even with these compatibilities, there are no guarantees that an external parser will work correctly with ESLint and ESLint will not fix bugs related to incompatibilities with other parsers.
 
@@ -92,6 +87,55 @@ The following parsers are compatible with ESLint:
 * [@typescript-eslint/parser](https://www.npmjs.com/package/@typescript-eslint/parser) - A parser that converts TypeScript into an ESTree-compatible form so it can be used in ESLint.
 
 Note when using a custom parser, the `parserOptions` configuration property is still required for ESLint to work properly with features not in ECMAScript 5 by default. Parsers are all passed `parserOptions` and may or may not use them to determine which features to enable.
+
+## Specifying Processor
+
+Plugins may provide processors. Processors can extract JavaScript code from another kind of files, then lets ESLint lint the JavaScript code. Or processors can convert JavaScript code in preprocessing for some purpose.
+
+To specify processors in a configuration file, use the `processor` key with the concatenated string of a plugin name and a processor name by a slash. For example, the following enables the processor `a-processor` that the plugin `a-plugin` provided:
+
+```json
+{
+    "plugins": ["a-plugin"],
+    "processor": "a-plugin/a-processor"
+}
+```
+
+To specify processors for a specific kind of files, use the combination of the `overrides` key and the `processor` key. For example, the following uses the processor `a-plugin/markdown` for `*.md` files.
+
+```json
+{
+    "plugins": ["a-plugin"],
+    "overrides": [
+        {
+            "files": ["*.md"],
+            "processor": "a-plugin/markdown"
+        }
+    ]
+}
+```
+
+Processors may make named code blocks such as `0.js` and `1.js`. ESLint handles such a named code block as a child file of the original file. You can specify additional configurations for named code blocks in the `overrides` section of the config. For example, the following disables `strict` rule for the named code blocks which end with `.js` in markdown files.
+
+```json
+{
+    "plugins": ["a-plugin"],
+    "overrides": [
+        {
+            "files": ["*.md"],
+            "processor": "a-plugin/markdown"
+        },
+        {
+            "files": ["**/*.md/*.js"],
+            "rules": {
+                "strict": "off"
+            }
+        }
+    ]
+}
+```
+
+ESLint checks the file extension of named code blocks then ignores those if [`--ext` CLI option](../user-guide/command-line-interface#--ext) didn't include the file extension. Be sure to specify the `--ext` option if you wanted to lint named code blocks other than `*.js`.
 
 ## Specifying Environments
 
@@ -263,7 +307,7 @@ For historical reasons, the boolean value `false` and the string value `"readabl
 
 ## Configuring Plugins
 
-ESLint supports the use of third-party plugins. Before using the plugin you have to install it using npm.
+ESLint supports the use of third-party plugins. Before using the plugin, you have to install it using npm.
 
 To configure plugins inside of a configuration file, use the `plugins` key, which contains a list of plugin names. The `eslint-plugin-` prefix can be omitted from the plugin name.
 
@@ -285,7 +329,7 @@ And in YAML:
     - eslint-plugin-plugin2
 ```
 
-**Note:** Due to the behavior of Node's `require` function, a globally-installed instance of ESLint can only use globally-installed ESLint plugins, and locally-installed version can only use *locally-installed* plugins. Mixing local and global plugins is not supported.
+**Note:** Plugins are resolved relative to the current working directory of the ESLint process. In other words, ESLint will load the same plugin as a user would obtain by running `require('eslint-plugin-pluginname')` in a Node REPL from their project root.
 
 ## Configuring Rules
 
@@ -633,10 +677,10 @@ A configuration file can extend the set of enabled rules from base configuration
 
 The `extends` property value is either:
 
-* a string that specifies a configuration
+* a string that specifies a configuration (either a path to a config file, the name of a shareable config, `eslint:recommended`, or `eslint:all`)
 * an array of strings: each additional configuration extends the preceding configurations
 
-ESLint extends configurations recursively so a base configuration can also have an `extends` property.
+ESLint extends configurations recursively, so a base configuration can also have an `extends` property. Relative paths and shareable config names in an `extends` property are resolved from the location of the config file where they appear.
 
 The `rules` property can do any of the following to extend (or override) the set of rules:
 
@@ -731,9 +775,7 @@ Example of a configuration file in JSON format:
 
 ### Using a configuration file
 
-The `extends` property value can be an absolute or relative path to a base [configuration file](#using-configuration-files).
-
-ESLint resolves a relative path to a base configuration file relative to the configuration file that uses it **unless** that file is in your home directory or a directory that isn't an ancestor to the directory in which ESLint is installed (either locally or globally). In those cases, ESLint resolves the relative path to the base file relative to the linted **project** directory (typically the current working directory).
+The `extends` property value can be an absolute or relative path to a base [configuration file](#using-configuration-files). ESLint resolves a relative path to a base configuration file relative to the configuration file that uses it.
 
 Example of a configuration file in JSON format:
 
@@ -790,10 +832,11 @@ module.exports = {
 
 ### How it works
 
-* Glob pattern overrides can only be configured within config files (`.eslintrc.*` or `package.json`).
 * The patterns are applied against the file path relative to the directory of the config file. For example, if your config file has the path `/Users/john/workspace/any-project/.eslintrc.js` and the file you want to lint has the path `/Users/john/workspace/any-project/lib/util.js`, then the pattern provided in `.eslintrc.js` will be executed against the relative path `lib/util.js`.
 * Glob pattern overrides have higher precedence than the regular configuration in the same config file. Multiple overrides within the same config are applied in order. That is, the last override block in a config file always has the highest precedence.
-* A glob specific configuration works almost the same as any other ESLint config. Override blocks can contain any configuration options that are valid in a regular config, with the exception of `extends`, `overrides`, and `root`.
+* A glob specific configuration works almost the same as any other ESLint config. Override blocks can contain any configuration options that are valid in a regular config, with the exception of `root`.
+    * A glob specific configuration can have `extends` setting, but the `root` property in the extended configs is ignored.
+    * Nested `overrides` setting will be applied only if the glob patterns of both of the parent config and the child config matched. This is the same when the extended configs have `overrides` setting.
 * Multiple glob patterns can be provided within a single override block. A file must match at least one of the supplied patterns for the configuration to apply.
 * Override blocks can also specify patterns to exclude from matches. If a file matches any of the excluded patterns, the configuration won't apply.
 
