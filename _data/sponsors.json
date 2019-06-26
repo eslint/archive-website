@@ -154,6 +154,13 @@
             "totalDonations": 2500
         },
         {
+            "name": "Alexandre Morgaut",
+            "url": "https://www.quora.com/profile/Alexandre-Morgaut",
+            "image": "https://images.opencollective.com/alexandre-morgaut/avatar.png",
+            "monthlyDonation": 500,
+            "totalDonations": 1500
+        },
+        {
             "name": "Jb Landry",
             "url": "https://jblandry.info",
             "image": "https://images.opencollective.com/jblandry/avatar.png",
@@ -168,9 +175,9 @@
             "totalDonations": 2000
         },
         {
-            "name": "verdaccio",
-            "url": "https://verdaccio.org/",
-            "image": "https://images.opencollective.com/verdaccio/logo.png",
+            "name": "Martin Desrumaux",
+            "url": null,
+            "image": "https://images.opencollective.com/martin-desrumaux/avatar.png",
             "monthlyDonation": 500,
             "totalDonations": 500
         },
@@ -224,9 +231,9 @@
             "totalDonations": 2500
         },
         {
-            "name": "Jay Merrifield",
-            "url": "https://github.com/fracmak",
-            "image": "https://images.opencollective.com/jay-merrifield/avatar.png",
+            "name": "verdaccio",
+            "url": "https://verdaccio.org/",
+            "image": "https://images.opencollective.com/verdaccio/logo.png",
             "monthlyDonation": 500,
             "totalDonations": 500
         },
@@ -273,16 +280,16 @@
             "totalDonations": 2500
         },
         {
+            "name": "Jay Merrifield",
+            "url": "https://github.com/fracmak",
+            "image": "https://images.opencollective.com/jay-merrifield/avatar.png",
+            "monthlyDonation": 500,
+            "totalDonations": 500
+        },
+        {
             "name": "Misaka Network, Inc.",
             "url": "https://www.misaka.io/dns/?utm_source=opencollective",
             "image": "https://images.opencollective.com/misaka/logo.png",
-            "monthlyDonation": 500,
-            "totalDonations": 1000
-        },
-        {
-            "name": "Oliver Sieweke",
-            "url": null,
-            "image": "https://images.opencollective.com/oliver-sieweke/avatar.png",
             "monthlyDonation": 500,
             "totalDonations": 1000
         },
@@ -315,11 +322,11 @@
             "totalDonations": 2500
         },
         {
-            "name": "Alexandre Morgaut",
-            "url": "https://www.quora.com/profile/Alexandre-Morgaut",
-            "image": "https://images.opencollective.com/alexandre-morgaut/avatar.png",
+            "name": "Oliver Sieweke",
+            "url": null,
+            "image": "https://images.opencollective.com/oliver-sieweke/avatar.png",
             "monthlyDonation": 500,
-            "totalDonations": 1500
+            "totalDonations": 1000
         },
         {
             "name": "Nubz Ltd",
