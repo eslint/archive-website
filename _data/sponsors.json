@@ -126,6 +126,13 @@
             "totalDonations": 2000
         },
         {
+            "name": "Kevin Partington",
+            "url": null,
+            "image": "https://images.opencollective.com/kevin-partington/avatar.png",
+            "monthlyDonation": 1000,
+            "totalDonations": 1000
+        },
+        {
             "name": "Benjamin Piouffle",
             "url": "https://benjamin.piouffle.com",
             "image": "https://images.opencollective.com/betree/avatar.png",
@@ -147,11 +154,11 @@
             "totalDonations": 3000
         },
         {
-            "name": "Maisonette Inc",
-            "url": "https://www.maisonette.com",
-            "image": "https://images.opencollective.com/maisonetteworld/logo.png",
+            "name": "Oliver Sieweke",
+            "url": null,
+            "image": "https://images.opencollective.com/oliver-sieweke/avatar.png",
             "monthlyDonation": 500,
-            "totalDonations": 2500
+            "totalDonations": 1000
         },
         {
             "name": "Alexandre Morgaut",
@@ -175,9 +182,9 @@
             "totalDonations": 2000
         },
         {
-            "name": "Martin Desrumaux",
-            "url": null,
-            "image": "https://images.opencollective.com/martin-desrumaux/avatar.png",
+            "name": "verdaccio",
+            "url": "https://verdaccio.org/",
+            "image": "https://images.opencollective.com/verdaccio/logo.png",
             "monthlyDonation": 500,
             "totalDonations": 500
         },
@@ -189,11 +196,11 @@
             "totalDonations": 2000
         },
         {
-            "name": "1337 Lawyers",
-            "url": "https://www.1337lawyers.com",
-            "image": "https://images.opencollective.com/1337lawyers/logo.png",
+            "name": "Jordan Harband",
+            "url": "https://twitter.com/LJHarb",
+            "image": "https://images.opencollective.com/ljharb/avatar.png",
             "monthlyDonation": 500,
-            "totalDonations": 500
+            "totalDonations": 2500
         },
         {
             "name": "AJ Klein",
@@ -224,18 +231,18 @@
             "totalDonations": 2500
         },
         {
-            "name": "Martin K.",
-            "url": "https://kluska.cz",
-            "image": "https://images.opencollective.com/martin-kluska/avatar.png",
-            "monthlyDonation": 500,
-            "totalDonations": 2500
-        },
-        {
-            "name": "verdaccio",
-            "url": "https://verdaccio.org/",
-            "image": "https://images.opencollective.com/verdaccio/logo.png",
+            "name": "Martin Desrumaux",
+            "url": null,
+            "image": "https://images.opencollective.com/martin-desrumaux/avatar.png",
             "monthlyDonation": 500,
             "totalDonations": 500
+        },
+        {
+            "name": "Maisonette Inc",
+            "url": "https://www.maisonette.com",
+            "image": "https://images.opencollective.com/maisonetteworld/logo.png",
+            "monthlyDonation": 500,
+            "totalDonations": 2500
         },
         {
             "name": "Dan Foley",
@@ -280,18 +287,18 @@
             "totalDonations": 2500
         },
         {
+            "name": "1337 Lawyers",
+            "url": "https://www.1337lawyers.com",
+            "image": "https://images.opencollective.com/1337lawyers/logo.png",
+            "monthlyDonation": 500,
+            "totalDonations": 500
+        },
+        {
             "name": "Jay Merrifield",
             "url": "https://github.com/fracmak",
             "image": "https://images.opencollective.com/jay-merrifield/avatar.png",
             "monthlyDonation": 500,
             "totalDonations": 500
-        },
-        {
-            "name": "Misaka Network, Inc.",
-            "url": "https://www.misaka.io/dns/?utm_source=opencollective",
-            "image": "https://images.opencollective.com/misaka/logo.png",
-            "monthlyDonation": 500,
-            "totalDonations": 1000
         },
         {
             "name": "Thomas Hermann",
@@ -322,9 +329,9 @@
             "totalDonations": 2500
         },
         {
-            "name": "Oliver Sieweke",
-            "url": null,
-            "image": "https://images.opencollective.com/oliver-sieweke/avatar.png",
+            "name": "Misaka Network, Inc.",
+            "url": "https://www.misaka.io/dns/?utm_source=opencollective",
+            "image": "https://images.opencollective.com/misaka/logo.png",
             "monthlyDonation": 500,
             "totalDonations": 1000
         },
@@ -343,9 +350,9 @@
             "totalDonations": 2500
         },
         {
-            "name": "Jordan Harband",
-            "url": "https://twitter.com/LJHarb",
-            "image": "https://images.opencollective.com/ljharb/avatar.png",
+            "name": "Martin K.",
+            "url": "https://kluska.cz",
+            "image": "https://images.opencollective.com/martin-kluska/avatar.png",
             "monthlyDonation": 500,
             "totalDonations": 2500
         },
