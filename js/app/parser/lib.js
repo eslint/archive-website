@@ -1,16 +1,13 @@
-/* eslint-env commonjs */
+import espree from "../espree";
 
-"use strict";
-
-// requires
-var espree = require("../espree");
-
-exports.parse = function(code, config) {
-    var ast = espree.parse(code, config); // throws...
+function parse(code, config) {
+    var ast = espree.parse(code, config);
 
     return JSON.stringify(ast, null, "  ");
-};
+}
 
-exports.getVersion = function() {
+function getVersion() {
     return espree.version;
-};
+}
+
+export default { parse, getVersion };

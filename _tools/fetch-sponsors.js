@@ -13,7 +13,7 @@
 //-----------------------------------------------------------------------------
 
 const fs = require("fs");
-const fetch = require("node-fetch");
+const fetch = require("node-fetch"); // eslint-disable-line node/no-unpublished-require
 
 //-----------------------------------------------------------------------------
 // Data
@@ -30,7 +30,7 @@ const sponsors = {
     backers: []
 };
 
-const graphqlEndpoint = 'https://api.opencollective.com/graphql/v2';
+const graphqlEndpoint = "https://api.opencollective.com/graphql/v2";
 
 const graphqlQuery = `{
   account(slug: "eslint") {
@@ -65,9 +65,9 @@ const graphqlQuery = `{
 
     // fetch the data
     const result = await fetch(graphqlEndpoint, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ query: graphqlQuery }),
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ query: graphqlQuery })
     });
     const orders = await result.json().then(res => res.data.account.orders.nodes);
 
@@ -78,7 +78,7 @@ const graphqlQuery = `{
             name: order.fromAccount.name,
             url: order.fromAccount.website,
             image: order.fromAccount.imageUrl,
-            monthlyDonation: order.frequency === 'year' ? Math.round(order.amount.value * 100 / 12) : order.amount.value * 100,
+            monthlyDonation: order.frequency === "year" ? Math.round(order.amount.value * 100 / 12) : order.amount.value * 100,
             totalDonations: order.totalDonations.value * 100
         };
 

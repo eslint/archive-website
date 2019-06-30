@@ -1,3 +1,7 @@
+_site
+node_modules
+js/dist
+js/vendor
 js/app/eslint.js
 js/app/espree.js
-js/app/parser/index.built.js
+!.*.js

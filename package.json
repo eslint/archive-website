@@ -7,13 +7,17 @@
   "directories": {
     "doc": "docs"
   },
+  "engines": {
+    "node": ">=8.0.0"
+  },
   "scripts": {
-    "serve": "bundle exec jekyll serve --config _config.yml,_config.dev.yml",
-    "build": "browserify js/app/parser/index.js > js/app/parser/index.built.js",
-    "start": "bundle exec jekyll serve --config _config.yml,_config.dev.yml",
-    "lint": "eslint js/app/ --ext=.js,.jsx",
-    "test": "npm run lint",
-    "less": "lessc styles/less/main.less styles/main.css -x --source-map=styles/main.css.map"
+    "less": "lessc styles/less/main.less styles/main.css -x --source-map=styles/main.css.map",
+    "build": "npm run less && webpack -p && bundle exec jekyll build",
+    "serve": "npm run less & webpack -w --mode=development & bundle exec jekyll serve --config _config.yml,_config.dev.yml",
+    "start": "npm run serve",
+    "lint": "eslint --ext=.js,.jsx .",
+    "lint:fix": "npm run lint -- --fix",
+    "test": "npm run lint"
   },
   "repository": {
     "type": "git",
@@ -26,19 +30,28 @@
   },
   "homepage": "https://github.com/eslint/eslint.github.io#readme",
   "dependencies": {
-    "moment": "^2.24.0"
+    "moment": "^2.24.0",
+    "react": "^15.0.1",
+    "react-dom": "^15.0.1"
   },
   "devDependencies": {
-    "@octokit/rest": "^16.16.0",
+    "@babel/core": "^7.4.5",
+    "@babel/preset-env": "^7.4.5",
+    "@babel/preset-react": "^7.0.0",
+    "@octokit/rest": "^16.28.2",
+    "babel-loader": "^8.0.6",
     "bootstrap": "^3.4.1",
-    "browserify": "^16.2.3",
-    "eslint": "^4.5.0",
-    "eslint-config-eslint": "^4.0.0",
+    "core-js": "^3.1.4",
+    "eslint": "^6.0.1",
+    "eslint-config-eslint": "^5.0.1",
     "eslint-plugin-jsx-a11y": "^6.2.1",
-    "eslint-plugin-react": "^7.12.4",
+    "eslint-plugin-node": "^9.1.0",
+    "eslint-plugin-react": "^7.14.2",
     "json-loader": "^0.5.2",
     "less": "^3.9.0",
-    "node-fetch": "^2.3.0",
-    "node-libs-browser": "^0.5.2"
+    "node-fetch": "^2.6.0",
+    "regenerator-runtime": "^0.13.2",
+    "webpack": "^4.35.0",
+    "webpack-cli": "^3.3.5"
   }
 }

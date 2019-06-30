@@ -1,8 +1,5 @@
-"use strict";
-
-// requires
-var config = require("./parser.config");
-var lib = require("./lib");
+import config from "./parser.config";
+import lib from "./lib";
 
 // DOM stuff
 var editor = document.querySelector("#editor");
@@ -10,6 +7,11 @@ var results = document.querySelector("#results");
 
 function handleSelectChange(property, el) {
     var selected = el.value;
+
+    // espree validates that ecmaVersion is a number
+    if (property === "ecmaVersion") {
+        selected = parseInt(selected, 10);
+    }
 
     config[property] = selected;
 }
