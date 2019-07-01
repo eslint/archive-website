@@ -1,7 +1,8 @@
 title: "ESLint - Pluggable JavaScript linter"
 repository: "eslint/eslint.github.io"
 exclude: [
-  'node_modules'
+  'node_modules',
+  'src'
 ]
 description: "A pluggable and configurable linter tool for identifying and reporting on patterns in JavaScript. Maintain your code quality with ease."
 permalink: /blog/:year/:month/:title

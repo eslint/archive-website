@@ -8,7 +8,7 @@ module.exports = {
     },
     overrides: [
         {
-            files: ["js/app/{demo,parser}/**/*.{js,jsx}"],
+            files: ["src/js/**/*.{js,jsx}"],
             plugins: ["react", "jsx-a11y"],
             extends: ["plugin:react/recommended", "plugin:jsx-a11y/recommended"],
             parserOptions: {
@@ -27,22 +27,18 @@ module.exports = {
                 // Disable rules that the codebase doesn't currently follow.
                 // It might be a good idea to enable these in the future.
                 "jsx-a11y/no-onchange": "off",
-                "react/prop-types": "off",
-                "require-jsdoc": "off"
+                "react/prop-types": "off"
             }
         },
         {
-            files: ["js/app/image-lazy-loader.js"],
+            files: ["assets/js/*.js"],
             parserOptions: {
                 ecmaVersion: 5,
                 sourceType: "script"
-            },
-            rules: {
-                "require-jsdoc": "off"
             }
         },
         {
-            files: ["js/app/**/*.{js,jsx}"],
+            files: ["assets/js/*.js", "src/js/**/*.{js,jsx}"],
             env: {
                 browser: true,
                 node: false
@@ -71,7 +67,10 @@ module.exports = {
                 "node/shebang": "off",
                 "node/no-extraneous-import": "off",
                 "node/no-missing-import": "off",
-                "node/no-unpublished-import": "off"
+                "node/no-unpublished-import": "off",
+
+                // Disable rules that the codebase doesn't currently follow.
+                "require-jsdoc": "off"
             }
         }
     ]

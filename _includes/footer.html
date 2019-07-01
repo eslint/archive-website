@@ -36,7 +36,7 @@
   htmlClassList.add("js");
   </script>
   {% if page.homepage %}
-  <script src="{{ site.url }}/js/app/image-lazy-loader.js" defer></script>
+  <script src="{{ site.url }}/assets/js/image-lazy-loader.js" defer></script>
   {% endif %}
   <script>
     document.addEventListener('DOMContentLoaded', function() {
@@ -110,7 +110,7 @@
   </script>
 
   {% if page.demopage %}
-    <script src="/js/dist/demo.js"></script>
+    <script src="{{ site.url }}/assets/build/js/demo.js"></script>
   {% endif %}
 </body>
 </html>

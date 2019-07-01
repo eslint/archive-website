@@ -1,5 +1,5 @@
 import React from "react";
-import orion from "../../vendor/orion/editor/built-editor";
+import orion from "../vendor/orion/editor/built-editor";
 import events from "./events";
 
 var height = 350;

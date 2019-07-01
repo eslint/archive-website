@@ -11,10 +11,13 @@
     "node": ">=8.0.0"
   },
   "scripts": {
-    "less": "lessc styles/less/main.less styles/main.css -x --source-map=styles/main.css.map",
-    "build": "npm run less && webpack -p && bundle exec jekyll build",
-    "serve": "npm run less & webpack -w --mode=development & bundle exec jekyll serve --config _config.yml,_config.dev.yml",
-    "start": "npm run serve",
+    "build:js": "webpack --mode=production",
+    "build:styles": "lessc src/styles/main.less assets/build/styles/main.css -x --source-map=assets/build/styles/main.css.map",
+    "build:jekyll": "bundle exec jekyll build",
+    "build": "npm run build:styles && npm run build:js && npm run build:site",
+    "start:js": "webpack -w --mode=development",
+    "start:jekyll": "bundle exec jekyll serve --config _config.yml,_config.dev.yml",
+    "start": "npm run build:styles && npm run start:jekyll",
     "lint": "eslint --ext=.js,.jsx .",
     "lint:fix": "npm run lint -- --fix",
     "test": "npm run lint"

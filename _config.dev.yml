@@ -15,8 +15,7 @@ exclude:
   - Gemfile.lock
   - package.json
   - node_modules
-  - js/app
-  - js/vendor
+  - src
   - sitemap.xml
   - feed.xml
   - docs/0.24.1

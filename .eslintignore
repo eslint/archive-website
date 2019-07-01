@@ -1,7 +1,7 @@
 _site
 node_modules
-js/dist
-js/vendor
-js/app/eslint.js
-js/app/espree.js
+assets/build
+src/js/vendor
+src/js/eslint.js
+src/js/espree.js
 !.*.js

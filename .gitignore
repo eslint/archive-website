@@ -1,8 +1,8 @@
 node_modules/
 _site/
+assets/build
 Gemfile.lock
 .jekyll-metadata
 npm-debug.log
 main/*.css.map
 .idea
-js/dist

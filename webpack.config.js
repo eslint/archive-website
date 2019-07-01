@@ -4,11 +4,11 @@ const path = require("path");
 
 module.exports = {
     entry: {
-        demo: ["core-js/stable", "regenerator-runtime/runtime", path.join(__dirname, "js/app/demo/index.js")],
-        parser: ["core-js/stable", "regenerator-runtime/runtime", path.join(__dirname, "js/app/parser/index.js")]
+        demo: ["core-js/stable", "regenerator-runtime/runtime", path.join(__dirname, "src/js/demo/index.js")],
+        parser: ["core-js/stable", "regenerator-runtime/runtime", path.join(__dirname, "src/js/parser/index.js")]
     },
     output: {
-        path: path.join(__dirname, "js/dist"),
+        path: path.join(__dirname, "assets/build/js"),
         filename: "[name].js"
     },
     module: {
@@ -16,8 +16,8 @@ module.exports = {
             {
                 test: /\.jsx?$/,
                 loaders: ["babel-loader"],
-                include: path.join(__dirname, "js/app"),
-                exclude: /node_modules|js\/vendor/
+                include: path.join(__dirname, "src/js"),
+                exclude: /node_modules|src\/js\/vendor/
             }
         ]
     },
