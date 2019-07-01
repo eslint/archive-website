@@ -147,11 +147,11 @@
             "totalDonations": 6000
         },
         {
-            "name": "Sergey Bondar",
-            "url": null,
-            "image": "https://images.opencollective.com/marapper/avatar.png",
-            "monthlyDonation": 600,
-            "totalDonations": 3000
+            "name": "Misaka Network, Inc.",
+            "url": "https://www.misaka.io/dns/?utm_source=opencollective",
+            "image": "https://images.opencollective.com/misaka/logo.png",
+            "monthlyDonation": 500,
+            "totalDonations": 1500
         },
         {
             "name": "Oliver Sieweke",
@@ -294,13 +294,6 @@
             "totalDonations": 1000
         },
         {
-            "name": "Jay Merrifield",
-            "url": "https://github.com/fracmak",
-            "image": "https://images.opencollective.com/jay-merrifield/avatar.png",
-            "monthlyDonation": 500,
-            "totalDonations": 1000
-        },
-        {
             "name": "Thomas Hermann",
             "url": null,
             "image": "https://images.opencollective.com/novascreen/avatar.png",
@@ -329,11 +322,11 @@
             "totalDonations": 3000
         },
         {
-            "name": "Misaka Network, Inc.",
-            "url": "https://www.misaka.io/dns/?utm_source=opencollective",
-            "image": "https://images.opencollective.com/misaka/logo.png",
+            "name": "Jay Merrifield",
+            "url": "https://github.com/fracmak",
+            "image": "https://images.opencollective.com/jay-merrifield/avatar.png",
             "monthlyDonation": 500,
-            "totalDonations": 1500
+            "totalDonations": 1000
         },
         {
             "name": "Nubz Ltd",
