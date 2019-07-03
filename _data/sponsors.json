@@ -105,6 +105,13 @@
     ],
     "backers": [
         {
+            "name": "Yannick Croissant",
+            "url": "https://yannick.cr",
+            "image": "https://images.opencollective.com/yannickcr/avatar.png",
+            "monthlyDonation": 10000,
+            "totalDonations": 10000
+        },
+        {
             "name": "Sebastian Software GmbH",
             "url": "http://sebastian-software.de/",
             "image": "https://images.opencollective.com/sebastiansoft/logo.png",
@@ -126,18 +133,18 @@
             "totalDonations": 4000
         },
         {
-            "name": "Kevin Partington",
-            "url": null,
-            "image": "https://images.opencollective.com/kevin-partington/avatar.png",
-            "monthlyDonation": 1000,
-            "totalDonations": 2000
-        },
-        {
             "name": "Benjamin Piouffle",
             "url": "https://benjamin.piouffle.com",
             "image": "https://images.opencollective.com/betree/avatar.png",
             "monthlyDonation": 1000,
             "totalDonations": 5600
+        },
+        {
+            "name": "Kevin Partington",
+            "url": null,
+            "image": "https://images.opencollective.com/kevin-partington/avatar.png",
+            "monthlyDonation": 1000,
+            "totalDonations": 2000
         },
         {
             "name": "Summit",
@@ -182,9 +189,9 @@
             "totalDonations": 2500
         },
         {
-            "name": "verdaccio",
-            "url": "https://verdaccio.org/",
-            "image": "https://images.opencollective.com/verdaccio/logo.png",
+            "name": "Martin Desrumaux",
+            "url": null,
+            "image": "https://images.opencollective.com/martin-desrumaux/avatar.png",
             "monthlyDonation": 500,
             "totalDonations": 1000
         },
@@ -196,11 +203,11 @@
             "totalDonations": 2500
         },
         {
-            "name": "Jordan Harband",
-            "url": "https://twitter.com/LJHarb",
-            "image": "https://images.opencollective.com/ljharb/avatar.png",
+            "name": "verdaccio",
+            "url": "https://verdaccio.org/",
+            "image": "https://images.opencollective.com/verdaccio/logo.png",
             "monthlyDonation": 500,
-            "totalDonations": 3000
+            "totalDonations": 1000
         },
         {
             "name": "AJ Klein",
@@ -224,18 +231,18 @@
             "totalDonations": 2500
         },
         {
-            "name": "Third Iron",
-            "url": "https://thirdiron.com",
-            "image": "https://images.opencollective.com/third_iron/logo.png",
+            "name": "Jordan Harband",
+            "url": "https://twitter.com/LJHarb",
+            "image": "https://images.opencollective.com/ljharb/avatar.png",
             "monthlyDonation": 500,
             "totalDonations": 3000
         },
         {
-            "name": "Martin Desrumaux",
-            "url": null,
-            "image": "https://images.opencollective.com/martin-desrumaux/avatar.png",
+            "name": "Martin K.",
+            "url": "https://kluska.cz",
+            "image": "https://images.opencollective.com/martin-kluska/avatar.png",
             "monthlyDonation": 500,
-            "totalDonations": 1000
+            "totalDonations": 3000
         },
         {
             "name": "Maisonette Inc",
@@ -343,9 +350,9 @@
             "totalDonations": 3000
         },
         {
-            "name": "Martin K.",
-            "url": "https://kluska.cz",
-            "image": "https://images.opencollective.com/martin-kluska/avatar.png",
+            "name": "Third Iron",
+            "url": "https://thirdiron.com",
+            "image": "https://images.opencollective.com/third_iron/logo.png",
             "monthlyDonation": 500,
             "totalDonations": 3000
         },
