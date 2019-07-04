@@ -33,6 +33,7 @@
   },
   "homepage": "https://github.com/eslint/eslint.github.io#readme",
   "dependencies": {
+    "codemirror": "^5.48.0",
     "moment": "^2.24.0",
     "react": "^15.0.1",
     "react-dom": "^15.0.1"

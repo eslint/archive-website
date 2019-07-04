@@ -1,8 +1,9 @@
 import React from "react";
-import orion from "../vendor/orion/editor/built-editor";
+import CodeMirror from "codemirror";
+import "codemirror/mode/javascript/javascript";
+import "codemirror/addon/edit/matchbrackets";
+import "codemirror/addon/selection/active-line";
 import events from "./events";
-
-var height = 350;
 
 function debounce(func, wait, immediate) {
     var timeout;
@@ -27,68 +28,91 @@ function debounce(func, wait, immediate) {
     };
 }
 
-export default React.createClass({
-    displayName: "Editor",
-    editor: null,
-    componentDidMount: function() {
-        this.editor = orion(this.element);
-        this.editor.getTextView().onModify = debounce(function() {
-            this.props.onChange({ value: this.editor.getModel().getText() });
-        }.bind(this), 500);
+export default class Editor extends React.Component {
+    constructor(props) {
+        super(props);
+        this._editor = null;
+        this._textMarkers = [];
+        this._editorRef = null;
+        this._setEditorRef = this._setEditorRef.bind(this);
+    }
 
-        events.on("showError", function(line, column) {
-            this.editor.onGotoLine(line - 1, column - 1, column - 1);
-        }.bind(this));
+    _clearTextMarkers() {
+        if (this._textMarkers.length) {
+            this._textMarkers.forEach(marker => {
+                marker.clear();
+            });
+            this._textMarkers = [];
+        }
+    }
 
-        this.showProblems();
-    },
-
-    showProblems: function() {
+    _showProblems() {
         if (this.props.errors) {
-            this.editor.showProblems(this.props.errors.map(function(error) {
+            this._clearTextMarkers();
+            this._textMarkers = this.props.errors.map(error => {
+                let from = {
+                    line: error.line - 1,
+                    ch: error.column - 1
+                };
+                let to = {
+                    line: (error.endLine || error.line) - 1,
+                    ch: (error.endColumn || error.column) - 1
+                };
+
                 if (error.fatal) {
-                    return {
-                        line: error.line,
-                        start: error.column,
-                        end: error.column + 1,
-                        description: error.message,
-                        severity: "error"
+                    from = {
+                        line: error.line - 1,
+                        ch: error.column - 1
+                    };
+                    to = {
+                        line: error.line - 1,
+                        ch: error.column
                     };
                 }
-                var start = this.props.getIndexFromLoc({ line: error.line, column: error.column - 1 });
-                var end = this.props.getIndexFromLoc({
-                    line: error.endLine || error.line,
-                    column: (error.endColumn || error.column) - 1
-                });
 
-                return {
-                    start: start,
-                    end: start === end ? end + 1 : end,
-                    description: error.message + " (" + error.ruleId + ")",
-                    severity: error.severity === 2 ? "error" : "warning"
-                };
-            }, this));
+                return this._editor.markText(from, to, { className: "editor-error" });
+            });
         }
-    },
+    }
 
-    componentDidUpdate: function() {
-        this.showProblems();
-    },
+    _setEditorRef(element) {
+        this._editorRef = element;
+    }
 
-    render: function Editor() {
+    componentDidMount() {
+        this._editor = CodeMirror.fromTextArea(this._editorRef, {
+            mode: "javascript",
+            lineNumbers: true,
+            showCursorWhenSelecting: true,
+            styleActiveLine: true,
+            matchBrackets: true
+        });
+
+        this._editor.on("change", debounce(() => {
+            this.props.onChange({ value: this._editor.getValue() });
+        }, 500));
+
+        events.on("showError", (line, column) => {
+            this._editor.setCursor({ line: line - 1, ch: column - 1 });
+            this._editor.focus();
+        });
+
+        this._showProblems();
+    }
+
+    componentDidUpdate() {
+        this._showProblems();
+    }
+
+    render() {
         return (
-            <pre
-                id="editor"
-                data-editor-lang="js"
-                style={{ height: height + "px" }}
-                ref={
-                    function(element) {
-                        this.element = element;
-                    }.bind(this)
-                }
+            <textarea
+                readOnly
+                autoComplete="off"
+                ref={this._setEditorRef}
+                value={this.props.text}
             >
-                {this.props.text}
-            </pre>
+            </textarea>
         );
     }
-});
+}

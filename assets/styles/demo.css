@@ -1,3 +1,17 @@
+.CodeMirror {
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin: 0 0 12px;
+    font-size: 14px;
+    line-height: 1.42857143;
+    color: #333;
+    height: 350px;
+}
+
+.editor-error {
+    text-decoration: underline dashed red;
+}
+
 .editorRow {
     padding-top: 30px;
 }

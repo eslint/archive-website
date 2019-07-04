@@ -1,1 +1,0 @@
-This directory contains Eclipse Orion Editor 15.0.0S2 (downloaded from [here](http://download.eclipse.org/orion/)). It is released under the [Eclipse Public License v1.0](https://www.eclipse.org/legal/epl-v10.html) and the [Eclipse Distribution License v1.0](https://www.eclipse.org/org/documents/edl-v10.php).
