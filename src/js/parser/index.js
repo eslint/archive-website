@@ -1,5 +1,6 @@
 import config from "./parser.config";
 import lib from "./lib";
+import "../../styles/parser.less";
 
 // DOM stuff
 var editor = document.querySelector("#editor");

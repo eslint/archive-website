@@ -11,13 +11,13 @@
     "node": ">=8.0.0"
   },
   "scripts": {
-    "build:js": "webpack --mode=production",
-    "build:styles": "lessc src/styles/main.less assets/build/styles/main.css -x --source-map=assets/build/styles/main.css.map",
     "build:jekyll": "bundle exec jekyll build",
-    "build": "npm run build:styles && npm run build:js && npm run build:site",
-    "start:js": "webpack -w --mode=development",
+    "build:webpack": "webpack --mode=production",
+    "build:less": "lessc src/styles/main.less assets/build/styles/main.css --clean-css --source-map=assets/build/styles/main.css.map",
+    "build": "npm run build:less && npm run build:webpack && npm run build:site",
+    "start:webpack": "webpack -w --mode=development",
     "start:jekyll": "bundle exec jekyll serve --config _config.yml,_config.dev.yml",
-    "start": "npm run build:styles && npm run start:jekyll",
+    "start": "npm run build:less && npm run start:jekyll",
     "lint": "eslint --ext=.js,.jsx .",
     "lint:fix": "npm run lint -- --fix",
     "test": "npm run lint"
@@ -46,6 +46,7 @@
     "babel-loader": "^8.0.6",
     "bootstrap": "^3.4.1",
     "core-js": "^3.1.4",
+    "css-loader": "^3.0.0",
     "eslint": "^6.0.1",
     "eslint-config-eslint": "^5.0.1",
     "eslint-plugin-jsx-a11y": "^6.2.1",
@@ -53,8 +54,11 @@
     "eslint-plugin-react": "^7.14.2",
     "json-loader": "^0.5.2",
     "less": "^3.9.0",
+    "less-loader": "^5.0.0",
+    "less-plugin-clean-css": "^1.5.1",
     "node-fetch": "^2.6.0",
     "regenerator-runtime": "^0.13.2",
+    "style-loader": "^0.23.1",
     "webpack": "^4.35.0",
     "webpack-cli": "^3.3.5"
   }

@@ -1,6 +1,7 @@
 "use strict";
 
 const path = require("path");
+const CleanCSSPlugin = require('less-plugin-clean-css');
 
 module.exports = {
     entry: {
@@ -18,6 +19,25 @@ module.exports = {
                 loaders: ["babel-loader"],
                 include: path.join(__dirname, "src/js"),
                 exclude: /node_modules|src\/js\/vendor/
+            },
+            {
+                test: /\.less$/,
+                use: [
+                    {
+                        loader: 'style-loader',
+                    },
+                    {
+                        loader: 'css-loader',
+                    },
+                    {
+                        loader: 'less-loader',
+                        options: {
+                            plugins: [
+                                new CleanCSSPlugin()
+                            ]
+                        }
+                    }
+                ]
             }
         ]
     },
