@@ -47,8 +47,9 @@ export default class Editor extends React.Component {
     }
 
     _showProblems() {
+        this._clearTextMarkers();
+
         if (this.props.errors) {
-            this._clearTextMarkers();
             this._textMarkers = this.props.errors.map(error => {
                 let from = {
                     line: error.line - 1,
