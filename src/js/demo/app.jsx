@@ -140,7 +140,7 @@ export default React.createClass({
         var sourceCode = linter.getSourceCode();
 
         return (
-            <div className="container editorRow">
+            <div className="container editor-row">
                 <div className="row">
                     <div className="col-md-7">
                         <Editor
