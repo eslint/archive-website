@@ -197,3 +197,7 @@
 - url: https://weave.works/
   src: /img/logos/weaveworks.svg
   name: Weaveworks
+
+- url: https://www.openbravo.com
+  src: /img/logos/openbravo.svg
+  name: Openbravo
