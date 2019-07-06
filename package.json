@@ -14,7 +14,7 @@
     "build:jekyll": "bundle exec jekyll build",
     "build:webpack": "webpack --mode=production",
     "build:less": "lessc src/styles/main.less assets/build/styles/main.css --clean-css --source-map=assets/build/styles/main.css.map",
-    "build": "npm run build:less && npm run build:webpack && npm run build:site",
+    "build": "npm run build:less && npm run build:webpack && npm run build:jekyll",
     "start:jekyll": "bundle exec jekyll serve --config _config.yml,_config.dev.yml",
     "start:webpack": "webpack -w --mode=development",
     "start": "npm run build:less && npm run start:jekyll",

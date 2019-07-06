@@ -1,7 +1,7 @@
 "use strict";
 
 const path = require("path");
-const CleanCSSPlugin = require('less-plugin-clean-css');
+const CleanCSSPlugin = require("less-plugin-clean-css"); // eslint-disable-line node/no-unpublished-require
 
 module.exports = {
     entry: {
@@ -24,13 +24,13 @@ module.exports = {
                 test: /\.less$/,
                 use: [
                     {
-                        loader: 'style-loader',
+                        loader: "style-loader"
                     },
                     {
-                        loader: 'css-loader',
+                        loader: "css-loader"
                     },
                     {
-                        loader: 'less-loader',
+                        loader: "less-loader",
                         options: {
                             plugins: [
                                 new CleanCSSPlugin()
@@ -42,7 +42,6 @@ module.exports = {
         ]
     },
     resolve: {
-        extensions: [".js", ".jsx"],
-        modules: [path.resolve(__dirname, "js"), "node_modules"]
+        extensions: [".js", ".jsx"]
     }
 };
