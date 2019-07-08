@@ -133,13 +133,6 @@
             "totalDonations": 4000
         },
         {
-            "name": "Benjamin Piouffle",
-            "url": "https://benjamin.piouffle.com",
-            "image": "https://images.opencollective.com/betree/avatar.png",
-            "monthlyDonation": 1000,
-            "totalDonations": 5600
-        },
-        {
             "name": "Kevin Partington",
             "url": null,
             "image": "https://images.opencollective.com/kevin-partington/avatar.png",
@@ -147,11 +140,25 @@
             "totalDonations": 2000
         },
         {
+            "name": "Benjamin Piouffle",
+            "url": "https://benjamin.piouffle.com",
+            "image": "https://images.opencollective.com/betree/avatar.png",
+            "monthlyDonation": 1000,
+            "totalDonations": 5600
+        },
+        {
             "name": "Summit",
             "url": "https://www.summit.co.uk/",
             "image": "https://images.opencollective.com/summitmedia/logo.png",
             "monthlyDonation": 1000,
             "totalDonations": 6000
+        },
+        {
+            "name": "Third Iron",
+            "url": "https://thirdiron.com",
+            "image": "https://images.opencollective.com/third_iron/logo.png",
+            "monthlyDonation": 500,
+            "totalDonations": 3000
         },
         {
             "name": "Misaka Network, Inc.",
@@ -231,11 +238,11 @@
             "totalDonations": 2500
         },
         {
-            "name": "Jordan Harband",
-            "url": "https://twitter.com/LJHarb",
-            "image": "https://images.opencollective.com/ljharb/avatar.png",
+            "name": "Eliseu Monar dos Santos",
+            "url": "https://medium.com/@eliseumds",
+            "image": "https://images.opencollective.com/eliseumds1/avatar.png",
             "monthlyDonation": 500,
-            "totalDonations": 3000
+            "totalDonations": 500
         },
         {
             "name": "Martin K.",
@@ -350,9 +357,9 @@
             "totalDonations": 3000
         },
         {
-            "name": "Third Iron",
-            "url": "https://thirdiron.com",
-            "image": "https://images.opencollective.com/third_iron/logo.png",
+            "name": "Jordan Harband",
+            "url": "https://twitter.com/LJHarb",
+            "image": "https://images.opencollective.com/ljharb/avatar.png",
             "monthlyDonation": 500,
             "totalDonations": 3000
         },
