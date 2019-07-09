@@ -112,6 +112,13 @@
             "totalDonations": 10000
         },
         {
+            "name": "Eventbot",
+            "url": "https://geteventbot.com/",
+            "image": "https://images.opencollective.com/geteventbot1/logo.png",
+            "monthlyDonation": 3000,
+            "totalDonations": 3000
+        },
+        {
             "name": "Sebastian Software GmbH",
             "url": "http://sebastian-software.de/",
             "image": "https://images.opencollective.com/sebastiansoft/logo.png",
@@ -154,11 +161,11 @@
             "totalDonations": 6000
         },
         {
-            "name": "Third Iron",
-            "url": "https://thirdiron.com",
-            "image": "https://images.opencollective.com/third_iron/logo.png",
+            "name": "Jay Merrifield",
+            "url": "https://github.com/fracmak",
+            "image": "https://images.opencollective.com/jay-merrifield/avatar.png",
             "monthlyDonation": 500,
-            "totalDonations": 3000
+            "totalDonations": 1000
         },
         {
             "name": "Misaka Network, Inc.",
@@ -231,18 +238,18 @@
             "totalDonations": 2500
         },
         {
-            "name": "Andrew Rota",
-            "url": "https://twitter.com/andrewrota",
-            "image": "https://images.opencollective.com/andrewrota/avatar.png",
-            "monthlyDonation": 500,
-            "totalDonations": 2500
-        },
-        {
             "name": "Eliseu Monar dos Santos",
             "url": "https://medium.com/@eliseumds",
             "image": "https://images.opencollective.com/eliseumds1/avatar.png",
             "monthlyDonation": 500,
             "totalDonations": 500
+        },
+        {
+            "name": "Third Iron",
+            "url": "https://thirdiron.com",
+            "image": "https://images.opencollective.com/third_iron/logo.png",
+            "monthlyDonation": 500,
+            "totalDonations": 3000
         },
         {
             "name": "Martin K.",
@@ -301,11 +308,11 @@
             "totalDonations": 3000
         },
         {
-            "name": "1337 Lawyers",
-            "url": "https://www.1337lawyers.com",
-            "image": "https://images.opencollective.com/1337lawyers/logo.png",
+            "name": "Jordan Harband",
+            "url": "https://twitter.com/LJHarb",
+            "image": "https://images.opencollective.com/ljharb/avatar.png",
             "monthlyDonation": 500,
-            "totalDonations": 1000
+            "totalDonations": 3000
         },
         {
             "name": "Thomas Hermann",
@@ -336,9 +343,9 @@
             "totalDonations": 3000
         },
         {
-            "name": "Jay Merrifield",
-            "url": "https://github.com/fracmak",
-            "image": "https://images.opencollective.com/jay-merrifield/avatar.png",
+            "name": "1337 Lawyers",
+            "url": "https://www.1337lawyers.com",
+            "image": "https://images.opencollective.com/1337lawyers/logo.png",
             "monthlyDonation": 500,
             "totalDonations": 1000
         },
@@ -357,11 +364,11 @@
             "totalDonations": 3000
         },
         {
-            "name": "Jordan Harband",
-            "url": "https://twitter.com/LJHarb",
-            "image": "https://images.opencollective.com/ljharb/avatar.png",
+            "name": "Andrew Rota",
+            "url": "https://twitter.com/andrewrota",
+            "image": "https://images.opencollective.com/andrewrota/avatar.png",
             "monthlyDonation": 500,
-            "totalDonations": 3000
+            "totalDonations": 2500
         },
         {
             "name": "qnyp",
