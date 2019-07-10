@@ -6,6 +6,27 @@ module.exports = {
     parserOptions: {
         ecmaVersion: 2019
     },
+    rules: {
+
+        // Disable eslint-plugin-node rules from eslint-config-eslint
+        "no-process-exit": "off",
+        "node/no-deprecated-api": "off",
+        "node/no-extraneous-require": "off",
+        "node/no-missing-require": "off",
+        "node/no-unpublished-bin": "off",
+        "node/no-unpublished-require": "off",
+        "node/no-unsupported-features/es-builtins": "off",
+        "node/no-unsupported-features/es-syntax": "off",
+        "node/no-unsupported-features/node-builtins": "off",
+        "node/process-exit-as-throw": "off",
+        "node/shebang": "off",
+        "node/no-extraneous-import": "off",
+        "node/no-missing-import": "off",
+        "node/no-unpublished-import": "off",
+
+        // Disable rules that the codebase doesn't currently follow.
+        "require-jsdoc": "off"
+    },
     overrides: [
         {
             files: ["src/js/**/*.{js,jsx}"],
@@ -51,26 +72,7 @@ module.exports = {
                 "object-shorthand": "off",
                 "prefer-arrow-callback": "off",
                 "prefer-rest-params": "off",
-                "prefer-template": "off",
-
-                // Disable eslint-plugin-node rules from eslint-config-eslint
-                "no-process-exit": "off",
-                "node/no-deprecated-api": "off",
-                "node/no-extraneous-require": "off",
-                "node/no-missing-require": "off",
-                "node/no-unpublished-bin": "off",
-                "node/no-unpublished-require": "off",
-                "node/no-unsupported-features/es-builtins": "off",
-                "node/no-unsupported-features/es-syntax": "off",
-                "node/no-unsupported-features/node-builtins": "off",
-                "node/process-exit-as-throw": "off",
-                "node/shebang": "off",
-                "node/no-extraneous-import": "off",
-                "node/no-missing-import": "off",
-                "node/no-unpublished-import": "off",
-
-                // Disable rules that the codebase doesn't currently follow.
-                "require-jsdoc": "off"
+                "prefer-template": "off"
             }
         }
     ]

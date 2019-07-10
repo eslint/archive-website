@@ -13,7 +13,7 @@
 //-----------------------------------------------------------------------------
 
 const fs = require("fs");
-const fetch = require("node-fetch"); // eslint-disable-line node/no-unpublished-require
+const fetch = require("node-fetch");
 
 //-----------------------------------------------------------------------------
 // Data

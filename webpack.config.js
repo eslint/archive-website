@@ -1,7 +1,7 @@
 "use strict";
 
 const path = require("path");
-const CleanCSSPlugin = require("less-plugin-clean-css"); // eslint-disable-line node/no-unpublished-require
+const CleanCSSPlugin = require("less-plugin-clean-css");
 
 module.exports = {
     entry: {

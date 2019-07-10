@@ -13,7 +13,7 @@
 //-----------------------------------------------------------------------------
 
 const fs = require("fs");
-const octokit = require("@octokit/rest")(); // eslint-disable-line node/no-unpublished-require
+const octokit = require("@octokit/rest")();
 
 //-----------------------------------------------------------------------------
 // Data
