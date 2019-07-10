@@ -76,8 +76,8 @@ If you can't determine an appropriate complexity limit for your code, then it's 
 
 ## Further Reading
 
-* [About Complexity](http://jscomplexity.org/complexity)
-* [Complexity Analysis of JavaScript Code](http://ariya.ofilabs.com/2012/12/complexity-analysis-of-javascript-code.html)
+* [About Complexity](https://web.archive.org/web/20160808115119/http://jscomplexity.org:80/complexity)
+* [Complexity Analysis of JavaScript Code](https://ariya.io/2012/12/complexity-analysis-of-javascript-code)
 
 ## Related Rules
 
