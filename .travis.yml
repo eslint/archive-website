@@ -5,5 +5,8 @@ cache: bundler
 branches:
   only:
     - master
+before_install:
+  - nvm install 8
+  - npm install
 script:
-  - bundle exec jekyll build
+  - npm run lint && npm run build

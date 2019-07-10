@@ -11,14 +11,14 @@
   <meta property="og:site_name" content="{{ site.title }}">
   <meta property="og:title" content="{{ page.title }}">
   <meta property="og:url" content="{{ site.url }}{{ page.url }}">
-  <meta property="og:image" content="{{ site.url }}/img/favicon.512x512.png">
+  <meta property="og:image" content="{{ site.url }}/assets/img/favicon.512x512.png">
 
   <meta name="twitter:site" content="@geteslint">
   <meta name="twitter:title" content="{{ page.title }}">
   <meta name="twitter:description" content="{{ site.description }}">
   <meta name="twitter:url" content="{{ site.url }}{{ page.url }}">
   <meta name="twitter:card" content="summary">
-  <meta name="twitter:image" content="{{ site.url }}/img/favicon.512x512.png">
+  <meta name="twitter:image" content="{{ site.url }}/assets/img/favicon.512x512.png">
 {% if page.title != site.title %}
     {% if page.title != "ESLint" %}
         <title>{{ page.title }} - {{ site.title }}</title>
@@ -30,9 +30,9 @@
 {% endif %}
   <link rel="preconnect" href="https://www.google-analytics.com">
   <link href="{{ site.url }}{{ page.url }}" rel="canonical" />
-  <link rel="stylesheet" href="{{ site.url }}/styles/main.css"/>
+  <link rel="stylesheet" href="{{ site.url }}/assets/build/styles/main.css"/>
   <link rel='manifest' href='{{ site.url }}/manifest.json'>
-  <link rel="icon" href="{{ site.url }}/img/favicon.512x512.png">
+  <link rel="icon" href="{{ site.url }}/assets/img/favicon.512x512.png">
   <link rel="alternate" type="application/rss+xml" title="{{ site.title }}" href="{{ site.url }}/feed.xml">
   <!-- at the end of the HEAD -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.css" />

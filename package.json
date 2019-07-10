@@ -7,13 +7,20 @@
   "directories": {
     "doc": "docs"
   },
+  "engines": {
+    "node": ">=8.0.0"
+  },
   "scripts": {
-    "serve": "bundle exec jekyll serve --config _config.yml,_config.dev.yml",
-    "build": "browserify js/app/parser/index.js > js/app/parser/index.built.js",
-    "start": "bundle exec jekyll serve --config _config.yml,_config.dev.yml",
-    "lint": "eslint js/app/ --ext=.js,.jsx",
-    "test": "npm run lint",
-    "less": "lessc styles/less/main.less styles/main.css -x --source-map=styles/main.css.map"
+    "build:jekyll": "bundle exec jekyll build",
+    "build:webpack": "webpack --mode=production",
+    "build:less": "lessc src/styles/main.less assets/build/styles/main.css --clean-css --source-map=assets/build/styles/main.css.map",
+    "build": "npm run build:less && npm run build:webpack && npm run build:jekyll",
+    "start:jekyll": "bundle exec jekyll serve --config _config.yml,_config.dev.yml",
+    "start:webpack": "webpack -w --mode=development",
+    "start": "npm run build:less && npm run start:jekyll",
+    "lint": "eslint --ext=.js,.jsx .",
+    "lint:fix": "npm run lint -- --fix",
+    "test": "npm run lint"
   },
   "repository": {
     "type": "git",
@@ -26,19 +33,32 @@
   },
   "homepage": "https://github.com/eslint/eslint.github.io#readme",
   "dependencies": {
-    "moment": "^2.24.0"
+    "codemirror": "^5.48.0",
+    "react": "^15.0.1",
+    "react-dom": "^15.0.1"
   },
   "devDependencies": {
-    "@octokit/rest": "^16.16.0",
+    "@babel/core": "^7.4.5",
+    "@babel/preset-env": "^7.4.5",
+    "@babel/preset-react": "^7.0.0",
+    "@octokit/rest": "^16.28.2",
+    "babel-loader": "^8.0.6",
     "bootstrap": "^3.4.1",
-    "browserify": "^16.2.3",
-    "eslint": "^4.5.0",
-    "eslint-config-eslint": "^4.0.0",
+    "core-js": "^3.1.4",
+    "css-loader": "^3.0.0",
+    "eslint": "^6.0.1",
+    "eslint-config-eslint": "^5.0.1",
     "eslint-plugin-jsx-a11y": "^6.2.1",
-    "eslint-plugin-react": "^7.12.4",
+    "eslint-plugin-node": "^9.1.0",
+    "eslint-plugin-react": "^7.14.2",
     "json-loader": "^0.5.2",
     "less": "^3.9.0",
-    "node-fetch": "^2.3.0",
-    "node-libs-browser": "^0.5.2"
+    "less-loader": "^5.0.0",
+    "less-plugin-clean-css": "^1.5.1",
+    "node-fetch": "^2.6.0",
+    "regenerator-runtime": "^0.13.2",
+    "style-loader": "^0.23.1",
+    "webpack": "^4.35.0",
+    "webpack-cli": "^3.3.5"
   }
 }

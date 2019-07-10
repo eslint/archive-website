@@ -1,0 +1,52 @@
+@import "../../node_modules/codemirror/lib/codemirror.css";
+
+.editor-row {
+    padding-top: 30px;
+}
+
+.CodeMirror {
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin: 0 0 12px;
+    font-size: 14px;
+    line-height: 1.42857143;
+    color: #333;
+    height: 350px;
+}
+
+.editor-error {
+    text-decoration: underline dashed red;
+}
+
+@media(min-width: 992px) {
+    .results {
+        max-height: 350px;
+        overflow-y: auto;
+    }
+}
+
+.list label {
+    font-weight: 400;
+}
+
+.rules .popover {
+    min-width: 250px;
+}
+
+.rules .popover-content {
+    font-size: 12px;
+}
+
+.rules .radio+.radio, .rules .checkbox+.checkbox {
+    margin-top: inherit;
+}
+
+.demo-config-bar {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.eslint-version-info {
+    color: grey;
+}

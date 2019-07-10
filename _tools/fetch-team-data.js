@@ -84,10 +84,8 @@ const team = {
     }
 
     // filter out TSC members and reviewers from committers list
-    team.committers = team.committers.filter(user => {
-        return !team.tsc.find(tscmember => tscmember.username === user.username)
-            && !team.reviewers.find(tscmember => tscmember.username === user.username);
-    });
+    team.committers = team.committers.filter(user => !team.tsc.find(tscmember => tscmember.username === user.username) &&
+            !team.reviewers.find(tscmember => tscmember.username === user.username));
 
     fs.writeFileSync(filename, JSON.stringify(team, null, "    "), { encoding: "utf8" });
 })();
