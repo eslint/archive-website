@@ -1,5 +1,5 @@
 SHELL   := /usr/bin/env bash
-LOGODIR := img/logos
+LOGODIR := assets/img/logos
 
 .PHONY: save-logo-stats
 save-logo-stats:
