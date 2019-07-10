@@ -48,8 +48,8 @@ In order to achieve everything we have in mind, we believe that we will need $20
 ## Introducing our first sponsors
 
 <p class="text-center">
-    <a href="https://facebook.com"><img src="/img/logos/facebook.png" alt="Facebook" height="96"></a>
-    <a href="https://airbnb.com"><img src="/img/logos/airbnb.png" alt="Airbnb" height="96"></a>
+    <a href="https://facebook.com"><img src="/assets/img/logos/facebook.png" alt="Facebook" height="96"></a>
+    <a href="https://airbnb.com"><img src="/assets/img/logos/airbnb.png" alt="Airbnb" height="96"></a>
 </p>
 
 We're also excited to announce our first sponsors. [Facebook](https://facebook.com) and [Airbnb](https://airbnb.com) have both pledged $1,000 per month to support ESLint.

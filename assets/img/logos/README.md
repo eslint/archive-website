@@ -28,4 +28,4 @@
  - valor-software-sm.png 10.1KB 333x250
  - windsorcircle.png 25.4KB 800x192
  - 2gis.svg 2.29KB 313x150
-312K	img/logos
+312K	assets/img/logos
