@@ -14,7 +14,8 @@ These are the companies and organizations who use ESLint to keep their JavaScrip
 {% for logo in logos %}
     <div>
         <div class="slide col-sm-4">
-            <a href="{{ logo.url }}" rel="noopener nofollow" target="_blank">            <img src="{{ logo.src }}" alt="{{ logo.name }}" lazyload>
+            <a href="{{ logo.url }}" rel="noopener nofollow" target="_blank">
+                <img src="{{ logo.src }}" alt="{{ logo.name }}" lazyload>
             </a>
         </div>
     </div>

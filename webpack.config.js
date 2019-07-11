@@ -6,7 +6,8 @@ const CleanCSSPlugin = require("less-plugin-clean-css");
 module.exports = {
     entry: {
         demo: ["core-js/stable", "regenerator-runtime/runtime", path.join(__dirname, "src/js/demo/index.js")],
-        parser: ["core-js/stable", "regenerator-runtime/runtime", path.join(__dirname, "src/js/parser/index.js")]
+        parser: ["core-js/stable", "regenerator-runtime/runtime", path.join(__dirname, "src/js/parser/index.js")],
+        main: ["core-js/stable", "regenerator-runtime/runtime", path.join(__dirname, "src/js/main/index.js")]
     },
     output: {
         path: path.join(__dirname, "assets/build/js"),
