@@ -33,7 +33,9 @@
   },
   "homepage": "https://github.com/eslint/eslint.github.io#readme",
   "dependencies": {
+    "anchor-js": "^4.2.0",
     "codemirror": "^5.48.0",
+    "docsearch.js": "^2.6.3",
     "react": "^15.0.1",
     "react-dom": "^15.0.1"
   },
