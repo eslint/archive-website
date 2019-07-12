@@ -2,6 +2,8 @@
     "presets": [
       "@babel/preset-react",
       ["@babel/preset-env", {
+        "useBuiltIns": "entry",
+        "corejs": 3,
         "modules": false,
         "targets": {
           "browsers": ["last 3 versions"]

@@ -1,3 +1,6 @@
+import "core-js/stable";
+import "regenerator-runtime/runtime";
+
 import docsearch from "docsearch.js";
 import AnchorJS from "anchor-js";
 import ImageObserver from "./image-lazy-loader";

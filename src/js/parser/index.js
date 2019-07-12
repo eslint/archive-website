@@ -1,3 +1,6 @@
+import "core-js/stable";
+import "regenerator-runtime/runtime";
+
 import config from "./parser.config";
 import lib from "./lib";
 import "../../styles/parser.less";
