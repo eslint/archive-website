@@ -16,7 +16,7 @@ docsearch({
     debug: false // Set debug to true if you want to inspect the dropdown
 });
 
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", () => {
 
     // Initialize deep anchor links for headings
     const anchors = new AnchorJS();
@@ -25,7 +25,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
     // Initialize lazy loading images
     ImageObserver.createObserver();
-    window.addEventListener("load", function() {
+    window.addEventListener("load", () => {
         ImageObserver.observe();
     }, false);
 });

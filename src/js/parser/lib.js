@@ -1,7 +1,7 @@
 import espree from "../espree";
 
 function parse(code, config) {
-    var ast = espree.parse(code, config);
+    const ast = espree.parse(code, config);
 
     return JSON.stringify(ast, null, "  ");
 }

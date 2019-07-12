@@ -14,8 +14,8 @@ export default React.createClass({
         return (
             <div id="results">
                 {
-                    this.props.values.map(function(message) {
-                        var key = "" + message.line + ":" + message.column + ":" + message.ruleId;
+                    this.props.values.map(message => {
+                        const key = `${message.line}:${message.column}:${message.ruleId}`;
 
                         return <Message key={key} value={message} />;
                     })

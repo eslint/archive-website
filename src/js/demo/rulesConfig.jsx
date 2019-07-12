@@ -35,7 +35,7 @@ export default function RulesConfig(props) {
         return props.config[rule] && props.config[rule] !== "off" && props.config[rule] !== 0;
     }
     function handleChange(e, key) {
-        var updatedConfig = Object.assign({}, props.config);
+        const updatedConfig = Object.assign({}, props.config);
 
         if (e.target.checked) {
             updatedConfig[key] = 2;
@@ -45,23 +45,21 @@ export default function RulesConfig(props) {
         props.onUpdate(updatedConfig);
     }
     function getRow(i) {
-        var limit = Math.ceil(props.ruleNames.length / 3);
-        var start = limit * i;
+        const limit = Math.ceil(props.ruleNames.length / 3);
+        const start = limit * i;
 
-        return Array(limit).fill("").map(function(item, index) {
-            var rule = props.ruleNames[start + index];
+        return Array(limit).fill("").map((item, index) => {
+            const rule = props.ruleNames[start + index];
 
             return rule && <Rule key={rule} rule={rule} docs={props.docs[rule].docs} isChecked={shouldBeChecked(rule)} handleChange={handleChange} />;
         });
     }
     function renderRules() {
-        return [0, 1, 2].map(function(i) {
-            return (
-                <div className="col-md-4" key={i}>
-                    {getRow(i)}
-                </div>
-            );
-        });
+        return [0, 1, 2].map(i => (
+            <div className="col-md-4" key={i}>
+                {getRow(i)}
+            </div>
+        ));
     }
 
     return (
@@ -73,14 +71,12 @@ export default function RulesConfig(props) {
                         <SelectAllCheckbox
                             id="select-all-rules"
                             selectedCount={
-                                props.ruleNames.filter(function(ruleName) {
-                                    return props.config[ruleName] && props.config[ruleName] !== "off";
-                                }).length
+                                props.ruleNames.filter(ruleName => props.config[ruleName] && props.config[ruleName] !== "off").length
                             }
                             totalCount={props.ruleNames.length}
                             onSelectAll={
                                 function() {
-                                    props.onUpdate(props.ruleNames.reduce(function(updatedConfig, ruleName) {
+                                    props.onUpdate(props.ruleNames.reduce((updatedConfig, ruleName) => {
                                         updatedConfig[ruleName] = 2;
                                         return updatedConfig;
                                     }, {}));
