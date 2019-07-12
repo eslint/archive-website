@@ -34,7 +34,6 @@
   "homepage": "https://github.com/eslint/eslint.github.io#readme",
   "dependencies": {
     "anchor-js": "^4.2.0",
-    "bootstrap.native": "^2.0.26",
     "codemirror": "^5.48.0",
     "docsearch.js": "^2.6.3",
     "react": "^15.0.1",
