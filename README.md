@@ -28,6 +28,12 @@ Once you have setup a local environment, you can run a copy of the website local
 $ npm start
 ```
 
+To run webpack to bundle the JavaScript and styles, you can run the following:
+
+```
+$ npm run start:webpack
+```
+
 ## License
 
 MIT

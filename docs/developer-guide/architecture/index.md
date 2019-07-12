@@ -8,7 +8,7 @@ edit_link: https://github.com/eslint/eslint/edit/master/docs/developer-guide/arc
 
 # Architecture
 
-<center><img alt="dependency graph" src="./architecture/dependency.svg"></center>
+<center><img alt="dependency graph" src="./dependency.svg"></center>
 
 At a high level, there are a few key parts to ESLint:
 
