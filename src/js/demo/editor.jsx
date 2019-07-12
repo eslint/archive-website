@@ -6,11 +6,10 @@ import "codemirror/addon/selection/active-line";
 import events from "./events";
 
 function debounce(func, wait, immediate) {
-    var timeout;
+    let timeout;
 
-    return function() {
-        var context = this, // eslint-disable-line no-invalid-this
-            args = arguments;
+    return function(...args) {
+        const context = this; // eslint-disable-line no-invalid-this
 
         function later() {
             timeout = null;
@@ -18,7 +17,7 @@ function debounce(func, wait, immediate) {
                 func.apply(context, args);
             }
         }
-        var callNow = immediate && !timeout;
+        const callNow = immediate && !timeout;
 
         clearTimeout(timeout);
         timeout = setTimeout(later, wait);

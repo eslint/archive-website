@@ -40,33 +40,31 @@ export default function ParserOptions(props) {
                 <h3>ECMA Features</h3>
                 <div className="ecmaFeatures list">
                     {
-                        ["jsx", "globalReturn", "impliedStrict"].map(function(ecmaFeature) {
-                            return (
-                                <div className="checkbox" key={ecmaFeature}>
-                                    <label htmlFor={ecmaFeature}>
-                                        <input
-                                            type="checkbox"
-                                            checked={props.options.ecmaFeatures[ecmaFeature]}
-                                            className="option-checkbox"
-                                            id={ecmaFeature}
-                                            onChange={
-                                                function(event) {
-                                                    var updatedFeatures = Object.assign({}, props.options.ecmaFeatures);
+                        ["jsx", "globalReturn", "impliedStrict"].map(ecmaFeature => (
+                            <div className="checkbox" key={ecmaFeature}>
+                                <label htmlFor={ecmaFeature}>
+                                    <input
+                                        type="checkbox"
+                                        checked={props.options.ecmaFeatures[ecmaFeature]}
+                                        className="option-checkbox"
+                                        id={ecmaFeature}
+                                        onChange={
+                                            function(event) {
+                                                const updatedFeatures = Object.assign({}, props.options.ecmaFeatures);
 
-                                                    if (event.target.checked) {
-                                                        updatedFeatures[ecmaFeature] = true;
-                                                    } else {
-                                                        delete updatedFeatures[ecmaFeature];
-                                                    }
-                                                    props.onUpdate(Object.assign({}, props.options, { ecmaFeatures: updatedFeatures }));
+                                                if (event.target.checked) {
+                                                    updatedFeatures[ecmaFeature] = true;
+                                                } else {
+                                                    delete updatedFeatures[ecmaFeature];
                                                 }
+                                                props.onUpdate(Object.assign({}, props.options, { ecmaFeatures: updatedFeatures }));
                                             }
-                                        />
-                                        {ecmaFeature}
-                                    </label>
-                                </div>
-                            );
-                        })
+                                        }
+                                    />
+                                    {ecmaFeature}
+                                </label>
+                            </div>
+                        ))
                     }
                 </div>
             </div>

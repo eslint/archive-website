@@ -12,14 +12,14 @@ function createObserver() {
         "intersectionRatio" in window.IntersectionObserverEntry.prototype &&
         !("isIntersecting" in IntersectionObserverEntry.prototype)) {
         Object.defineProperty(window.IntersectionObserverEntry.prototype, "isIntersecting", {
-            get: function() {
+            get() {
                 return this.intersectionRatio > 0;
             }
         });
     }
 
     function onChange(changes) {
-        changes.forEach(function(change) {
+        changes.forEach(change => {
             if (change.isIntersecting) {
                 change.target.classList.add("visible");
                 change.target.src = change.target.dataset.src;
@@ -37,7 +37,7 @@ function createObserver() {
 function observe() {
     const imgElements = document.querySelectorAll(".lazyload");
 
-    imgElements.forEach(function(img) {
+    imgElements.forEach(img => {
         if (observer) {
             observer.observe(img);
         } else {

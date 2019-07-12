@@ -7,25 +7,23 @@ import RulesConfig from "./rulesConfig";
 
 export default React.createClass({
     displayName: "Configuration",
-    getInitialState: function() {
+    getInitialState() {
         return { showingConfig: false };
     },
-    initPopovers: function() {
-        var popoverElements = document.querySelectorAll("[data-toggle=\"popover\"]");
+    initPopovers() {
+        const popoverElements = document.querySelectorAll("[data-toggle=\"popover\"]");
 
-        for (var i = 0; i < popoverElements.length; ++i) {
+        for (let i = 0; i < popoverElements.length; ++i) {
             // eslint-disable-next-line no-new
             new Popover(popoverElements[i]);
         }
     },
-    toggleShowingConfig: function() {
-        var obj = this;
+    toggleShowingConfig() {
+        const obj = this;
 
         this.setState(
-            function(state) {
-                return { showingConfig: !state.showingConfig };
-            },
-            function() {
+            state => ({ showingConfig: !state.showingConfig }),
+            () => {
                 if (obj.state.showingConfig) {
                     obj.initPopovers();
                 }
@@ -55,7 +53,7 @@ export default React.createClass({
                                     options={this.props.options.parserOptions}
                                     onUpdate={
                                         function(parserOptions) {
-                                            this.props.onUpdate(Object.assign({}, this.props.options, { parserOptions: parserOptions }));
+                                            this.props.onUpdate(Object.assign({}, this.props.options, { parserOptions }));
                                         }.bind(this)
                                     }
                                 />
@@ -65,7 +63,7 @@ export default React.createClass({
                                     envNames={this.props.envNames}
                                     onUpdate={
                                         function(env) {
-                                            this.props.onUpdate(Object.assign({}, this.props.options, { env: env }));
+                                            this.props.onUpdate(Object.assign({}, this.props.options, { env }));
                                         }.bind(this)
                                     }
                                 />
@@ -76,7 +74,7 @@ export default React.createClass({
                                     docs={this.props.docs}
                                     onUpdate={
                                         function(rules) {
-                                            this.props.onUpdate(Object.assign({}, this.props.options, { rules: rules }));
+                                            this.props.onUpdate(Object.assign({}, this.props.options, { rules }));
                                         }.bind(this)
                                     }
                                 />
@@ -84,8 +82,8 @@ export default React.createClass({
                                 <a
                                     download=".eslintrc.json"
                                     href={
-                                        "data:application/json;charset=utf-8," +
-                                            encodeURIComponent(JSON.stringify(this.props.options, null, 4))
+                                        `data:application/json;charset=utf-8,${
+                                            encodeURIComponent(JSON.stringify(this.props.options, null, 4))}`
                                     }
                                 >
                                     Download <code className="highlighter-rouge">.eslintrc.json</code> file with this configuration

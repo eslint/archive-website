@@ -6,7 +6,7 @@ import Configuration from "./configuration";
 import Unicode from "./unicode";
 import linterModule from "../eslint";
 
-var hasLocalStorage = (function() {
+const hasLocalStorage = (function() {
     try {
         window.localStorage.setItem("localStorageTest", "foo");
         window.localStorage.removeItem("localStorageTest");
@@ -16,20 +16,20 @@ var hasLocalStorage = (function() {
     }
 }());
 
-var linter = new linterModule.Linter();
-var rules = linter.getRules();
-var ruleNames = Array.from(rules.keys());
-var docs = (function() {
-    var map = rules;
-    var result = {};
+const linter = new linterModule.Linter();
+const rules = linter.getRules();
+const ruleNames = Array.from(rules.keys());
+const docs = (function() {
+    const map = rules;
+    const result = {};
 
-    map.forEach(function(value, key) {
+    map.forEach((value, key) => {
         result[key] = value.meta;
     });
     return result;
 }());
 
-var ENV_NAMES = [
+const ENV_NAMES = [
     "browser",
     "node",
     "commonjs",
@@ -59,9 +59,9 @@ var ENV_NAMES = [
 
 export default React.createClass({
     displayName: "App",
-    getInitialState: function() {
-        var storedState = JSON.parse(window.localStorage.getItem("linterDemoState") || null);
-        var urlState = (function() {
+    getInitialState() {
+        const storedState = JSON.parse(window.localStorage.getItem("linterDemoState") || null);
+        const urlState = (function() {
             try {
                 return JSON.parse(Unicode.decodeFromBase64(window.location.hash.replace(/^#/, "")));
             } catch (err) {
@@ -69,7 +69,7 @@ export default React.createClass({
             }
         }());
 
-        var initialState = Object.assign(
+        const initialState = Object.assign(
             { fix: false },
             urlState || storedState || {
                 options: {
@@ -79,9 +79,9 @@ export default React.createClass({
                         ecmaFeatures: {}
                     },
                     rules: (function() {
-                        var result = {};
+                        const result = {};
 
-                        rules.forEach(function(rule, ruleId) {
+                        rules.forEach((rule, ruleId) => {
                             if (rule.meta.docs.recommended) {
                                 result[ruleId] = 2;
                             }
@@ -110,34 +110,34 @@ export default React.createClass({
         return initialState;
     },
 
-    handleChange: function(event) {
+    handleChange(event) {
         this.setState({ text: event.value }, this.storeState);
     },
-    updateOptions: function(options) {
-        this.setState({ options: options }, this.storeState);
+    updateOptions(options) {
+        this.setState({ options }, this.storeState);
     },
-    lint: function() {
+    lint() {
         return linter.verifyAndFix(this.state.text, this.state.options, { fix: this.state.fix });
     },
-    storeState: function() {
-        var serializedState = JSON.stringify({ text: this.state.text, options: this.state.options });
+    storeState() {
+        const serializedState = JSON.stringify({ text: this.state.text, options: this.state.options });
 
         if (hasLocalStorage) {
             window.localStorage.setItem("linterDemoState", serializedState);
         }
         window.location.hash = Unicode.encodeToBase64(serializedState);
     },
-    enableFixMode: function(event) {
+    enableFixMode(event) {
         event.preventDefault();
         this.setState({ fix: true });
     },
-    disableFixMode: function(event) {
+    disableFixMode(event) {
         event.preventDefault();
         this.setState({ fix: false });
     },
     render: function App() {
-        var results = this.lint();
-        var sourceCode = linter.getSourceCode();
+        const results = this.lint();
+        const sourceCode = linter.getSourceCode();
 
         return (
             <div className="container editor-row">

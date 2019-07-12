@@ -3,11 +3,11 @@ import lib from "./lib";
 import "../../styles/parser.less";
 
 // DOM stuff
-var editor = document.querySelector("#editor");
-var results = document.querySelector("#results");
+const editor = document.querySelector("#editor");
+const results = document.querySelector("#results");
 
 function handleSelectChange(property, el) {
-    var selected = el.value;
+    let selected = el.value;
 
     // espree validates that ecmaVersion is a number
     if (property === "ecmaVersion") {
@@ -26,15 +26,13 @@ function toggleOption(option, property) {
 }
 
 function drawCheckboxes(boxesConfig, property) {
-    var el = document.querySelector("." + (property || "options"));
+    const el = document.querySelector(`.${property || "options"}`);
 
     // convert the list of options into checkboxes
-    var checkboxes = Object.keys(boxesConfig).filter(function(option) {
-        return typeof boxesConfig[option] === "boolean";
-    }).map(function(option) {
-        var checked = boxesConfig[option] ? " checked " : " ";
+    const checkboxes = Object.keys(boxesConfig).filter(option => typeof boxesConfig[option] === "boolean").map(option => {
+        const checked = boxesConfig[option] ? " checked " : " ";
 
-        return "<div class=\"checkbox\"><label><input" + checked + "type=\"checkbox\" class=\"option-checkbox\" id=\"" + option + "\" />" + option + "</label></div>";
+        return `<div class="checkbox"><label><input${checked}type="checkbox" class="option-checkbox" id="${option}" />${option}</label></div>`;
     });
 
     el.innerHTML = checkboxes.join("");
@@ -45,14 +43,12 @@ function drawCheckboxes(boxesConfig, property) {
 }
 
 function drawSelectBoxes(boxesConfig, property) {
-    var el = document.querySelector("." + property);
-    var select = document.createElement("select");
-    var options = Object.keys(boxesConfig).filter(function(option) {
-        return typeof boxesConfig[option] === "boolean";
-    }).map(function(option) {
-        var selected = boxesConfig[option] ? " selected " : " ";
+    const el = document.querySelector(`.${property}`);
+    const select = document.createElement("select");
+    const options = Object.keys(boxesConfig).filter(option => typeof boxesConfig[option] === "boolean").map(option => {
+        const selected = boxesConfig[option] ? " selected " : " ";
 
-        return "<option " + selected + " value=\"" + option + "\">" + option + "</option>";
+        return `<option ${selected} value="${option}">${option}</option>`;
     });
 
     select.innerHTML = options;
@@ -84,7 +80,7 @@ function showError(error) {
 }
 
 function parseForever() {
-    var ast;
+    let ast;
 
     try {
         ast = lib.parse(editor.value, config);

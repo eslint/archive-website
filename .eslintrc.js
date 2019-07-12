@@ -63,16 +63,6 @@ module.exports = {
             env: {
                 browser: true,
                 node: false
-            },
-            rules: {
-
-                // Disable rules that assume an ES6 environment.
-                // This is not a complete list. More rules should be added as problems are encountered.
-                "no-var": "off",
-                "object-shorthand": "off",
-                "prefer-arrow-callback": "off",
-                "prefer-rest-params": "off",
-                "prefer-template": "off"
             }
         }
     ]

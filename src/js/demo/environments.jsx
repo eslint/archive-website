@@ -2,8 +2,8 @@ import React from "react";
 import SelectAllCheckbox from "./selectAllCheckbox";
 
 export default function Environments(props) {
-    var columnLimit = 3;
-    var rowLimit = Math.ceil(props.envNames.length / columnLimit);
+    const columnLimit = 3;
+    const rowLimit = Math.ceil(props.envNames.length / columnLimit);
 
     return (
         <div className="row">
@@ -18,14 +18,12 @@ export default function Environments(props) {
                         <SelectAllCheckbox
                             id="select-all-environments"
                             selectedCount={
-                                props.envNames.filter(function(envName) {
-                                    return props.env[envName];
-                                }).length
+                                props.envNames.filter(envName => props.env[envName]).length
                             }
                             totalCount={Object.keys(props.envNames).length}
                             onSelectAll={
                                 function() {
-                                    props.onUpdate(props.envNames.reduce(function(updatedEnv, envName) {
+                                    props.onUpdate(props.envNames.reduce((updatedEnv, envName) => {
                                         updatedEnv[envName] = true;
                                         return updatedEnv;
                                     }, {}));
@@ -41,40 +39,35 @@ export default function Environments(props) {
                     </label>
                 </div>
                 {
-                    Array(columnLimit).fill().map(function(_, columnIndex) {
-                        return (
-                            <div className="col-md-4" key={columnIndex}>
-                                {
-                                    props.envNames.slice(columnIndex * rowLimit, (columnIndex + 1) * rowLimit)
-                                        .map(function(envName) {
-                                            return (
-                                                <div className="checkbox" key={envName}>
-                                                    <label htmlFor={envName}>
-                                                        <input
-                                                            type="checkbox"
-                                                            checked={props.env[envName]}
-                                                            id={envName}
-                                                            onChange={
-                                                                function(event) {
-                                                                    var updatedEnv = {};
+                    Array(columnLimit).fill().map((_, columnIndex) => (
+                        <div className="col-md-4" key={columnIndex}>
+                            {
+                                props.envNames.slice(columnIndex * rowLimit, (columnIndex + 1) * rowLimit)
+                                    .map(envName => (
+                                        <div className="checkbox" key={envName}>
+                                            <label htmlFor={envName}>
+                                                <input
+                                                    type="checkbox"
+                                                    checked={props.env[envName]}
+                                                    id={envName}
+                                                    onChange={
+                                                        function(event) {
+                                                            const updatedEnv = {};
 
-                                                                    updatedEnv[envName] = event.target.checked;
-                                                                    props.onUpdate(
-                                                                        Object.assign({}, props.env, updatedEnv)
-                                                                    );
-                                                                }
-                                                            }
-                                                        />
-                                                        {envName}
-                                                    </label>
-                                                </div>
-                                            );
-                                        })
-                                }
-                            </div>
-                        );
-
-                    })
+                                                            updatedEnv[envName] = event.target.checked;
+                                                            props.onUpdate(
+                                                                Object.assign({}, props.env, updatedEnv)
+                                                            );
+                                                        }
+                                                    }
+                                                />
+                                                {envName}
+                                            </label>
+                                        </div>
+                                    ))
+                            }
+                        </div>
+                    ))
                 }
             </div>
         </div>

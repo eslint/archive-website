@@ -10,10 +10,8 @@ EventBus.prototype.on = function(name, callback) {
     this.handlers[name].push(callback);
 };
 
-EventBus.prototype.trigger = function(name) {
+EventBus.prototype.trigger = function(name, ...args) {
     if (this.handlers[name]) {
-        var args = Array.prototype.slice.call(arguments, 1);
-
         this.handlers[name].forEach(function(callback) {
             callback.apply(this, args);
         }, this);
