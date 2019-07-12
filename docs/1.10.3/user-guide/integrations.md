@@ -1,7 +1,6 @@
 ---
 title: Integrations
 layout: doc
-redirect_from: "/docs/integrations/"
 ---
 
 # Integrations

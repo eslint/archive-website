@@ -1,7 +1,6 @@
 ---
 title: Integrations
 layout: doc
-redirect_from: "/docs/integrations/"
 ---
 
 # Integrations
@@ -30,7 +29,7 @@ redirect_from: "/docs/integrations/"
 * **Broccoli:**
     * [broccoli-eslint](https://www.npmjs.org/package/broccoli-eslint)
 * **Webpack:**
-    * [eslint-loader](https://www.npmjs.org/package/eslint-loader) 
+    * [eslint-loader](https://www.npmjs.org/package/eslint-loader)
 * **Ember-cli**
     * [ember-cli-eslint](https://www.npmjs.com/package/ember-cli-eslint)
 * **Sails.js**

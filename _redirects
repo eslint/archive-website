@@ -1,0 +1,36 @@
+# Netlify Redirect Rules
+# https://www.netlify.com/docs/redirects/
+
+# Redirect default Netlify subdomain to primary domain
+https://eslint.netlify.com/* https://eslint.org/:splat 301!
+
+/docs                               /
+/docs/user-guide/rules              /docs/rules
+/cla                                https://cla.js.foundation/eslint/eslint
+
+/docs/0.24.1/command-line-interface /docs/user-guide/command-line-interface
+/docs/0.24.1/configuring            /docs/user-guide/configuring
+/docs/0.24.1/integrations           /docs/integrations
+/docs/0.24.1/user-guide/rules       /docs/rules
+
+/docs/1.0.0/command-line-interface  /docs/user-guide/command-line-interface
+/docs/1.0.0/configuring             /docs/user-guide/configuring
+/docs/1.0.0/integrations            /docs/integrations
+/docs/1.0.0/user-guide/rules        /docs/rules
+
+/docs/1.10.3/command-line-interface /docs/user-guide/command-line-interface
+/docs/1.10.3/configuring            /docs/user-guide/configuring
+/docs/1.10.3/integrations           /docs/integrations
+/docs/1.10.3/user-guide/rules       /docs/rules
+
+/docs/2.0.0/command-line-interface  /docs/user-guide/command-line-interface
+/docs/2.0.0/configuring             /docs/user-guide/configuring
+/docs/2.0.0/integrations            /docs/integrations
+/docs/2.0.0/user-guide/rules        /docs/rules
+
+/docs/2.13.1/command-line-interface /docs/user-guide/command-line-interface
+/docs/2.13.1/configuring            /docs/user-guide/configuring
+/docs/2.13.1/integrations           /docs/integrations
+/docs/2.13.1/user-guide/rules       /docs/rules
+
+/docs/3.0.0/user-guide/rules        /docs/rules
