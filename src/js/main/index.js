@@ -1,6 +1,12 @@
 import "core-js/stable";
 import "regenerator-runtime/runtime";
 
+/*
+ * bootstrap.native automatically initializes components.
+ * Elements that are not on the page when this script loads
+ * will require manual initialization.
+ */
+import "bootstrap.native";
 import docsearch from "docsearch.js";
 import AnchorJS from "anchor-js";
 import ImageObserver from "./image-lazy-loader";
@@ -9,6 +15,10 @@ const htmlClassList = document.documentElement.classList;
 
 htmlClassList.remove("no-js");
 htmlClassList.add("js");
+
+// The menu dropdown toggles are also links
+document.querySelectorAll("[data-toggle=\"dropdown\"]")
+    .forEach(el => el.addEventListener("click", e => e.preventDefault()));
 
 // Initialize DocSearch
 docsearch({

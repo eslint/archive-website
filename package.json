@@ -34,6 +34,8 @@
   "homepage": "https://github.com/eslint/eslint.github.io#readme",
   "dependencies": {
     "anchor-js": "^4.2.0",
+    "bootstrap": "^3.4.1",
+    "bootstrap.native": "^2.0.26",
     "codemirror": "^5.48.0",
     "docsearch.js": "^2.6.3",
     "react": "^15.0.1",
@@ -45,7 +47,6 @@
     "@babel/preset-react": "^7.0.0",
     "@octokit/rest": "^16.28.2",
     "babel-loader": "^8.0.6",
-    "bootstrap": "^3.4.1",
     "core-js": "^3.1.4",
     "css-loader": "^3.0.0",
     "eslint": "^6.0.1",
