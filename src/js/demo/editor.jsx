@@ -8,9 +8,8 @@ import events from "./events";
 function debounce(func, wait, immediate) {
     let timeout;
 
-    return function() {
-        const context = this, // eslint-disable-line no-invalid-this
-            args = arguments;
+    return function(...args) {
+        const context = this; // eslint-disable-line no-invalid-this
 
         function later() {
             timeout = null;
