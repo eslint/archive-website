@@ -161,6 +161,13 @@
             "totalDonations": 6000
         },
         {
+            "name": "Andrew Rota",
+            "url": "https://twitter.com/andrewrota",
+            "image": "https://images.opencollective.com/andrewrota/avatar.png",
+            "monthlyDonation": 500,
+            "totalDonations": 2500
+        },
+        {
             "name": "Jay Merrifield",
             "url": "https://github.com/fracmak",
             "image": "https://images.opencollective.com/jay-merrifield/avatar.png",
@@ -203,11 +210,11 @@
             "totalDonations": 2500
         },
         {
-            "name": "Martin Desrumaux",
-            "url": null,
-            "image": "https://images.opencollective.com/martin-desrumaux/avatar.png",
+            "name": "Eliseu Monar dos Santos",
+            "url": "https://medium.com/@eliseumds",
+            "image": "https://images.opencollective.com/eliseumds1/avatar.png",
             "monthlyDonation": 500,
-            "totalDonations": 1000
+            "totalDonations": 500
         },
         {
             "name": "Eric Lanehart",
@@ -217,9 +224,9 @@
             "totalDonations": 2500
         },
         {
-            "name": "verdaccio",
-            "url": "https://verdaccio.org/",
-            "image": "https://images.opencollective.com/verdaccio/logo.png",
+            "name": "Martin Desrumaux",
+            "url": null,
+            "image": "https://images.opencollective.com/martin-desrumaux/avatar.png",
             "monthlyDonation": 500,
             "totalDonations": 1000
         },
@@ -231,18 +238,11 @@
             "totalDonations": 2500
         },
         {
-            "name": "Will McAuliff",
-            "url": "https://twitter.com/womcauliff",
-            "image": "https://images.opencollective.com/womcauliff/avatar.png",
+            "name": "verdaccio",
+            "url": "https://verdaccio.org/",
+            "image": "https://images.opencollective.com/verdaccio/logo.png",
             "monthlyDonation": 500,
-            "totalDonations": 2500
-        },
-        {
-            "name": "Eliseu Monar dos Santos",
-            "url": "https://medium.com/@eliseumds",
-            "image": "https://images.opencollective.com/eliseumds1/avatar.png",
-            "monthlyDonation": 500,
-            "totalDonations": 500
+            "totalDonations": 1000
         },
         {
             "name": "Third Iron",
@@ -364,10 +364,10 @@
             "totalDonations": 3000
         },
         {
-            "name": "Andrew Rota",
-            "url": "https://twitter.com/andrewrota",
-            "image": "https://images.opencollective.com/andrewrota/avatar.png",
-            "monthlyDonation": 500,
+            "name": "Will McAuliff",
+            "url": "https://twitter.com/womcauliff",
+            "image": "https://images.opencollective.com/womcauliff/avatar.png",
+            "monthlyDonation": 300,
             "totalDonations": 2500
         },
         {
