@@ -1,6 +1,5 @@
-/* global Popover */
-
 import React from "react";
+import { Popover } from "bootstrap.native";
 import ParserOptions from "./parserOptions";
 import Environments from "./environments";
 import RulesConfig from "./rulesConfig";
