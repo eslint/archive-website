@@ -160,7 +160,6 @@ export default React.createClass({
                                     href="#messages"
                                     aria-controls="messages"
                                     role="tab"
-                                    data-toggle="tab"
                                     onClick={this.disableFixMode}
                                 >
                                     Messages
@@ -174,7 +173,6 @@ export default React.createClass({
                                     href="#fixedCode"
                                     aria-controls="fixedCode"
                                     role="tab"
-                                    data-toggle="tab"
                                     onClick={this.enableFixMode}
                                 >
                                     Fixed Code
