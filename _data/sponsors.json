@@ -168,6 +168,13 @@
             "totalDonations": 2500
         },
         {
+            "name": "1337 Lawyers",
+            "url": "https://www.1337lawyers.com",
+            "image": "https://images.opencollective.com/1337lawyers/logo.png",
+            "monthlyDonation": 500,
+            "totalDonations": 1000
+        },
+        {
             "name": "Jay Merrifield",
             "url": "https://github.com/fracmak",
             "image": "https://images.opencollective.com/jay-merrifield/avatar.png",
@@ -238,11 +245,11 @@
             "totalDonations": 2500
         },
         {
-            "name": "verdaccio",
-            "url": "https://verdaccio.org/",
-            "image": "https://images.opencollective.com/verdaccio/logo.png",
+            "name": "Joseph Percy",
+            "url": null,
+            "image": "https://images.opencollective.com/joseph-percy/avatar.png",
             "monthlyDonation": 500,
-            "totalDonations": 1000
+            "totalDonations": 3000
         },
         {
             "name": "Third Iron",
@@ -308,11 +315,11 @@
             "totalDonations": 3000
         },
         {
-            "name": "Jordan Harband",
-            "url": "https://twitter.com/LJHarb",
-            "image": "https://images.opencollective.com/ljharb/avatar.png",
+            "name": "verdaccio",
+            "url": "https://verdaccio.org/",
+            "image": "https://images.opencollective.com/verdaccio/logo.png",
             "monthlyDonation": 500,
-            "totalDonations": 3000
+            "totalDonations": 1000
         },
         {
             "name": "Thomas Hermann",
@@ -336,18 +343,18 @@
             "totalDonations": 3000
         },
         {
-            "name": "Joseph Percy",
-            "url": null,
-            "image": "https://images.opencollective.com/joseph-percy/avatar.png",
+            "name": "Alexey Raspopov",
+            "url": "https://alexeyraspopov.com",
+            "image": "https://images.opencollective.com/alexeyraspopov/avatar.png",
             "monthlyDonation": 500,
             "totalDonations": 3000
         },
         {
-            "name": "1337 Lawyers",
-            "url": "https://www.1337lawyers.com",
-            "image": "https://images.opencollective.com/1337lawyers/logo.png",
+            "name": "Jordan Harband",
+            "url": "https://twitter.com/LJHarb",
+            "image": "https://images.opencollective.com/ljharb/avatar.png",
             "monthlyDonation": 500,
-            "totalDonations": 1000
+            "totalDonations": 3000
         },
         {
             "name": "Nubz Ltd",
@@ -357,18 +364,18 @@
             "totalDonations": 3000
         },
         {
-            "name": "Alexey Raspopov",
-            "url": "https://alexeyraspopov.com",
-            "image": "https://images.opencollective.com/alexeyraspopov/avatar.png",
-            "monthlyDonation": 500,
-            "totalDonations": 3000
-        },
-        {
             "name": "Will McAuliff",
             "url": "https://twitter.com/womcauliff",
             "image": "https://images.opencollective.com/womcauliff/avatar.png",
             "monthlyDonation": 300,
             "totalDonations": 2500
+        },
+        {
+            "name": "Kyle Smith",
+            "url": "https://ksmith.io",
+            "image": "https://images.opencollective.com/knksmith57/avatar.png",
+            "monthlyDonation": 300,
+            "totalDonations": 500
         },
         {
             "name": "qnyp",
