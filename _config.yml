@@ -10,7 +10,6 @@ exclude:
 permalink: /blog/:year/:month/:title
 plugins:
     - jekyll-sitemap
-    - jekyll-redirect-from
 kramdown:
   input: GFM
   toc_levels: 2..3
