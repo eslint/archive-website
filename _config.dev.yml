@@ -9,13 +9,16 @@ future: true
 
 # Don't generate this stuff
 exclude:
-  - README.md
-  - CNAME
-  - Gemfile
-  - Gemfile.lock
-  - package.json
   - node_modules
   - src
+  - Gemfile
+  - Gemfile.lock
+  - LICENSE
+  - Makefile
+  - package-lock.json
+  - package.json
+  - README.md
+  - webpack.config.js
   - sitemap.xml
   - feed.xml
   - docs/0.24.1
