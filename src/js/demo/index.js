@@ -3,7 +3,7 @@ import "regenerator-runtime/runtime";
 
 import React from "react";
 import ReactDOM from "react-dom";
-import App from "./app";
+import App from "./components/App";
 import "../../styles/demo.less";
 
 ReactDOM.render(

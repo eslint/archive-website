@@ -1,5 +1,5 @@
 import React from "react";
-import SelectAllCheckbox from "./selectAllCheckbox";
+import SelectAllCheckbox from "./SelectAllCheckbox";
 
 export default function Environments(props) {
     const columnLimit = 3;

@@ -1,14 +1,15 @@
 import React from "react";
-import SelectAllCheckbox from "./selectAllCheckbox";
+import SelectAllCheckbox from "./SelectAllCheckbox";
 
 function Rule(ref) {
-
     function handler(e) {
         ref.handleChange(e, ref.rule);
     }
+
     function showPopover(e) {
         e.currentTarget.Popover.show();
     }
+
     function hidePopover(e) {
         e.currentTarget.Popover.hide();
     }
@@ -34,6 +35,7 @@ export default function RulesConfig(props) {
     function shouldBeChecked(rule) {
         return props.config[rule] && props.config[rule] !== "off" && props.config[rule] !== 0;
     }
+
     function handleChange(e, key) {
         const updatedConfig = Object.assign({}, props.config);
 
@@ -44,6 +46,7 @@ export default function RulesConfig(props) {
         }
         props.onUpdate(updatedConfig);
     }
+
     function getRow(i) {
         const limit = Math.ceil(props.ruleNames.length / 3);
         const start = limit * i;
@@ -54,6 +57,7 @@ export default function RulesConfig(props) {
             return rule && <Rule key={rule} rule={rule} docs={props.docs[rule].docs} isChecked={shouldBeChecked(rule)} handleChange={handleChange} />;
         });
     }
+
     function renderRules() {
         return [0, 1, 2].map(i => (
             <div className="col-md-4" key={i}>
