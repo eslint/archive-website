@@ -38,6 +38,10 @@ module.exports = {
                     jsx: true
                 }
             },
+            env: {
+                browser: true,
+                node: false
+            },
             settings: {
                 react: {
                     version: "15.0.1"
@@ -49,20 +53,6 @@ module.exports = {
                 // It might be a good idea to enable these in the future.
                 "jsx-a11y/no-onchange": "off",
                 "react/prop-types": "off"
-            }
-        },
-        {
-            files: ["assets/js/*.js"],
-            parserOptions: {
-                ecmaVersion: 5,
-                sourceType: "script"
-            }
-        },
-        {
-            files: ["assets/js/*.js", "src/js/**/*.{js,jsx}"],
-            env: {
-                browser: true,
-                node: false
             }
         }
     ]
