@@ -1,9 +1,9 @@
-import React from "react";
+import React, { Component } from "react";
 import CodeMirror from "codemirror";
 import "codemirror/mode/javascript/javascript";
 import "codemirror/addon/edit/matchbrackets";
 import "codemirror/addon/selection/active-line";
-import events from "./events";
+import events from "../utils/events";
 
 function debounce(func, wait, immediate) {
     let timeout;
@@ -27,13 +27,12 @@ function debounce(func, wait, immediate) {
     };
 }
 
-export default class Editor extends React.Component {
+export default class Editor extends Component {
     constructor(props) {
         super(props);
         this._editor = null;
         this._textMarkers = [];
-        this._editorRef = null;
-        this._setEditorRef = this._setEditorRef.bind(this);
+        this._editorRef = React.createRef();
     }
 
     _clearTextMarkers() {
@@ -60,14 +59,23 @@ export default class Editor extends React.Component {
                 };
 
                 if (error.fatal) {
-                    from = {
-                        line: error.line - 1,
-                        ch: error.column - 1
-                    };
-                    to = {
-                        line: error.line - 1,
-                        ch: error.column
-                    };
+
+                    // line and column are undefined when parsing cannot occur (e.g. misconfiguration)
+                    if (typeof error.line === "number" && typeof error.column === "number") {
+                        to = {
+                            line: error.line - 1,
+                            ch: error.column
+                        };
+                    } else {
+                        from = {
+                            line: 0,
+                            ch: 0
+                        };
+                        to = {
+                            line: 0,
+                            ch: 0
+                        };
+                    }
                 }
 
                 return this._editor.markText(from, to, { className: "editor-error" });
@@ -75,12 +83,8 @@ export default class Editor extends React.Component {
         }
     }
 
-    _setEditorRef(element) {
-        this._editorRef = element;
-    }
-
     componentDidMount() {
-        this._editor = CodeMirror.fromTextArea(this._editorRef, {
+        this._editor = CodeMirror.fromTextArea(this._editorRef.current, {
             mode: "javascript",
             lineNumbers: true,
             showCursorWhenSelecting: true,
@@ -93,7 +97,13 @@ export default class Editor extends React.Component {
         }, 500));
 
         events.on("showError", (line, column) => {
-            this._editor.setCursor({ line: line - 1, ch: column - 1 });
+
+            // line and column are undefined when parsing cannot occur (e.g. misconfiguration)
+            const cursorLoc = (typeof line === "number" && typeof column === "number")
+                ? { line: line - 1, ch: column - 1 }
+                : { line: 0, ch: 0 };
+
+            this._editor.setCursor(cursorLoc);
             this._editor.focus();
         });
 
@@ -109,7 +119,7 @@ export default class Editor extends React.Component {
             <textarea
                 readOnly
                 autoComplete="off"
-                ref={this._setEditorRef}
+                ref={this._editorRef}
                 value={this.props.text}
             >
             </textarea>

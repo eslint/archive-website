@@ -1,35 +1,36 @@
-import React from "react";
+import React, { Component } from "react";
 import { Popover } from "bootstrap.native";
-import ParserOptions from "./parserOptions";
-import Environments from "./environments";
-import RulesConfig from "./rulesConfig";
+import ParserOptions from "./ParserOptions";
+import Environments from "./Environments";
+import RulesConfig from "./RulesConfig";
 
-export default React.createClass({
-    displayName: "Configuration",
-    getInitialState() {
-        return { showingConfig: false };
-    },
-    initPopovers() {
-        const popoverElements = document.querySelectorAll("[data-toggle=\"popover\"]");
+function initPopovers() {
+    const popoverElements = document.querySelectorAll("[data-toggle=\"popover\"]");
 
-        for (let i = 0; i < popoverElements.length; ++i) {
-            // eslint-disable-next-line no-new
-            new Popover(popoverElements[i]);
-        }
-    },
+    for (let i = 0; i < popoverElements.length; ++i) {
+        // eslint-disable-next-line no-new
+        new Popover(popoverElements[i]);
+    }
+}
+
+export default class Configuration extends Component {
+    constructor(props) {
+        super(props);
+        this.state = { showingConfig: false };
+        this.toggleShowingConfig = this.toggleShowingConfig.bind(this);
+    }
+
     toggleShowingConfig() {
-        const obj = this;
+        this.setState({ showingConfig: !this.state.showingConfig });
+    }
 
-        this.setState(
-            state => ({ showingConfig: !state.showingConfig }),
-            () => {
-                if (obj.state.showingConfig) {
-                    obj.initPopovers();
-                }
-            }
-        );
-    },
-    render: function Configuration() {
+    componentDidUpdate() {
+        if (this.state.showingConfig) {
+            initPopovers();
+        }
+    }
+
+    render() {
         return (
             <div className="panel-group" id="accordion">
                 <div className="panel panel-default">
@@ -51,9 +52,9 @@ export default React.createClass({
                                 <ParserOptions
                                     options={this.props.options.parserOptions}
                                     onUpdate={
-                                        function(parserOptions) {
+                                        parserOptions => {
                                             this.props.onUpdate(Object.assign({}, this.props.options, { parserOptions }));
-                                        }.bind(this)
+                                        }
                                     }
                                 />
                                 <hr />
@@ -61,9 +62,9 @@ export default React.createClass({
                                     env={this.props.options.env}
                                     envNames={this.props.envNames}
                                     onUpdate={
-                                        function(env) {
+                                        env => {
                                             this.props.onUpdate(Object.assign({}, this.props.options, { env }));
-                                        }.bind(this)
+                                        }
                                     }
                                 />
                                 <hr />
@@ -72,9 +73,9 @@ export default React.createClass({
                                     ruleNames={this.props.ruleNames}
                                     docs={this.props.docs}
                                     onUpdate={
-                                        function(rules) {
+                                        rules => {
                                             this.props.onUpdate(Object.assign({}, this.props.options, { rules }));
-                                        }.bind(this)
+                                        }
                                     }
                                 />
                                 <hr />
@@ -94,4 +95,4 @@ export default React.createClass({
             </div>
         );
     }
-});
+}

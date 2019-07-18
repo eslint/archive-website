@@ -1,10 +1,18 @@
-import React from "react";
-import Editor from "./editor";
-import Messages from "./messages";
-import FixedCode from "./fixedCode";
-import Configuration from "./configuration";
-import Unicode from "./unicode";
-import linterModule from "../eslint";
+import React, { Component } from "react";
+import Editor from "./Editor";
+import Messages from "./Messages";
+import FixedCode from "./FixedCode";
+import Configuration from "./Configuration";
+import Unicode from "../utils/unicode";
+import linterModule from "../../eslint";
+
+function getUrlState() {
+    try {
+        return JSON.parse(Unicode.decodeFromBase64(window.location.hash.replace(/^#/, "")));
+    } catch (err) {
+        return null;
+    }
+}
 
 const hasLocalStorage = (function() {
     try {
@@ -57,18 +65,12 @@ const ENV_NAMES = [
     "greasemonkey"
 ];
 
-export default React.createClass({
-    displayName: "App",
-    getInitialState() {
-        const storedState = JSON.parse(window.localStorage.getItem("linterDemoState") || null);
-        const urlState = (function() {
-            try {
-                return JSON.parse(Unicode.decodeFromBase64(window.location.hash.replace(/^#/, "")));
-            } catch (err) {
-                return null;
-            }
-        }());
+export default class App extends Component {
+    constructor(props) {
+        super(props);
 
+        const storedState = JSON.parse(window.localStorage.getItem("linterDemoState") || null);
+        const urlState = getUrlState();
         const initialState = Object.assign(
             { fix: false },
             urlState || storedState || {
@@ -106,19 +108,25 @@ export default React.createClass({
             delete initialState.options.parserOptions.ecmaFeatures.experimentalObjectRestSpread;
         }
 
-        this.initialText = initialState.text;
-        return initialState;
-    },
+        this.state = initialState;
+        this.handleChange = this.handleChange.bind(this);
+        this.updateOptions = this.updateOptions.bind(this);
+        this.enableFixMode = this.enableFixMode.bind(this);
+        this.disableFixMode = this.disableFixMode.bind(this);
+    }
 
     handleChange(event) {
         this.setState({ text: event.value }, this.storeState);
-    },
+    }
+
     updateOptions(options) {
         this.setState({ options }, this.storeState);
-    },
+    }
+
     lint() {
         return linter.verifyAndFix(this.state.text, this.state.options, { fix: this.state.fix });
-    },
+    }
+
     storeState() {
         const serializedState = JSON.stringify({ text: this.state.text, options: this.state.options });
 
@@ -126,18 +134,22 @@ export default React.createClass({
             window.localStorage.setItem("linterDemoState", serializedState);
         }
         window.location.hash = Unicode.encodeToBase64(serializedState);
-    },
+    }
+
     enableFixMode(event) {
         event.preventDefault();
         this.setState({ fix: true });
-    },
+    }
+
     disableFixMode(event) {
         event.preventDefault();
         this.setState({ fix: false });
-    },
-    render: function App() {
+    }
+
+    render() {
         const results = this.lint();
         const sourceCode = linter.getSourceCode();
+        const { text, fix, options } = this.state;
 
         return (
             <div className="container editor-row">
@@ -145,7 +157,7 @@ export default React.createClass({
                     <div className="col-md-7">
                         <Editor
                             onChange={this.handleChange}
-                            text={this.initialText}
+                            text={text}
                             errors={results.messages}
                             getIndexFromLoc={sourceCode && sourceCode.getIndexFromLoc.bind(sourceCode)}
                         />
@@ -154,7 +166,7 @@ export default React.createClass({
                         <ul className="nav nav-tabs" role="tablist">
                             <li
                                 role="presentation"
-                                className={this.state.fix ? "" : "active"}
+                                className={fix ? "" : "active"}
                             >
                                 <a
                                     href="#messages"
@@ -167,7 +179,7 @@ export default React.createClass({
                             </li>
                             <li
                                 role="presentation"
-                                className={this.state.fix ? "active" : ""}
+                                className={fix ? "active" : ""}
                             >
                                 <a
                                     href="#fixedCode"
@@ -183,7 +195,7 @@ export default React.createClass({
                         <div className="tab-content">
                             <div role="tabpanel" className="tab-pane active" >
                                 {
-                                    this.state.fix
+                                    fix
                                         ? <FixedCode values={results.output} />
                                         : <Messages values={results.messages} />
                                 }
@@ -195,7 +207,7 @@ export default React.createClass({
                     <Configuration
                         ruleNames={ruleNames}
                         envNames={ENV_NAMES}
-                        options={this.state.options}
+                        options={options}
                         docs={docs}
                         onUpdate={this.updateOptions}
                         eslintVersion={linter.version}
@@ -204,4 +216,4 @@ export default React.createClass({
             </div>
         );
     }
-});
+}

@@ -1,5 +1,15 @@
 import React from "react";
-import events from "./events";
+import events from "../utils/events";
+
+function formatMessage({ line, column, message }) {
+
+    // line and column are undefined when parsing cannot occur (e.g. misconfiguration)
+    if (typeof line === "number" && typeof column === "number") {
+        return `${line}:${column} - ${message}`;
+    }
+
+    return message;
+}
 
 export default function Message(props) {
     const isError = props.value.fatal || props.value.severity === 2;
@@ -14,7 +24,7 @@ export default function Message(props) {
                 }
             }
         >
-            {props.value.line}:{props.value.column} - {props.value.message}
+            {formatMessage(props.value)}
             {
                 !props.value.fatal && [
                     " (",
