@@ -6,7 +6,7 @@ rule_type: layout
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
-# Require parentheses when invoking a constructor with no arguments (new-parens)
+# require parentheses when invoking a constructor with no arguments (new-parens)
 
 (fixable) The `--fix` option on the [command line](../user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
 

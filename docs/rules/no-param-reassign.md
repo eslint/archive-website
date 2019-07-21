@@ -28,6 +28,14 @@ function foo(bar) {
 function foo(bar) {
     bar++;
 }
+
+function foo(bar) {
+    for (bar in baz) {}
+}
+
+function foo(bar) {
+    for (bar of baz) {}
+}
 ```
 
 Examples of **correct** code for this rule:
@@ -62,6 +70,14 @@ function foo(bar) {
 function foo(bar) {
     bar.aaa++;
 }
+
+function foo(bar) {
+    for (bar.aaa in baz) {}
+}
+
+function foo(bar) {
+    for (bar.aaa of baz) {}
+}
 ```
 
 Examples of **incorrect** code for the `{ "props": true }` option:
@@ -80,6 +96,14 @@ function foo(bar) {
 function foo(bar) {
     bar.aaa++;
 }
+
+function foo(bar) {
+    for (bar.aaa in baz) {}
+}
+
+function foo(bar) {
+    for (bar.aaa of baz) {}
+}
 ```
 
 Examples of **correct** code for the `{ "props": true }` option with `"ignorePropertyModificationsFor"` set:
@@ -97,6 +121,14 @@ function foo(bar) {
 
 function foo(bar) {
     bar.aaa++;
+}
+
+function foo(bar) {
+    for (bar.aaa in baz) {}
+}
+
+function foo(bar) {
+    for (bar.aaa of baz) {}
 }
 ```
 
