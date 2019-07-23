@@ -201,3 +201,7 @@
 - url: https://www.openbravo.com
   src: /assets/img/logos/openbravo.svg
   name: Openbravo
+
+- url: https://www.minutemedia.com
+  src: /assets/img/logos/minutemedia.svg
+  name: MinuteMedia
