@@ -168,9 +168,16 @@
             "totalDonations": 2500
         },
         {
-            "name": "Eliseu Monar dos Santos",
-            "url": "https://medium.com/@eliseumds",
-            "image": "https://images.opencollective.com/eliseumds1/f4e6dad/avatar.png",
+            "name": "verdaccio",
+            "url": "https://verdaccio.org/",
+            "image": "https://images.opencollective.com/verdaccio/2d6ef61/logo.png",
+            "monthlyDonation": 500,
+            "totalDonations": 1000
+        },
+        {
+            "name": "Jack Cross",
+            "url": null,
+            "image": "https://images.opencollective.com/jack-cross/7b02eda/avatar.png",
             "monthlyDonation": 500,
             "totalDonations": 500
         },
@@ -224,11 +231,11 @@
             "totalDonations": 2500
         },
         {
-            "name": "Joseph Percy",
-            "url": null,
-            "image": "https://images.opencollective.com/joseph-percy/avatar.png",
+            "name": "Eliseu Monar dos Santos",
+            "url": "https://medium.com/@eliseumds",
+            "image": "https://images.opencollective.com/eliseumds1/f4e6dad/avatar.png",
             "monthlyDonation": 500,
-            "totalDonations": 3000
+            "totalDonations": 500
         },
         {
             "name": "Eric Lanehart",
@@ -238,18 +245,18 @@
             "totalDonations": 2500
         },
         {
+            "name": "Joseph Percy",
+            "url": null,
+            "image": "https://images.opencollective.com/joseph-percy/avatar.png",
+            "monthlyDonation": 500,
+            "totalDonations": 3000
+        },
+        {
             "name": "James Sherwood-Jones",
             "url": null,
             "image": "https://images.opencollective.com/james-sherwood-jones/avatar.png",
             "monthlyDonation": 500,
             "totalDonations": 500
-        },
-        {
-            "name": "Alexey Raspopov",
-            "url": "https://alexeyraspopov.com",
-            "image": "https://images.opencollective.com/alexeyraspopov/d8c7a67/avatar.png",
-            "monthlyDonation": 500,
-            "totalDonations": 3000
         },
         {
             "name": "Andrew Rota",
@@ -322,11 +329,11 @@
             "totalDonations": 3000
         },
         {
-            "name": "Martin Desrumaux",
-            "url": null,
-            "image": "https://images.opencollective.com/martin-desrumaux/avatar.png",
+            "name": "Alexey Raspopov",
+            "url": "https://alexeyraspopov.com",
+            "image": "https://images.opencollective.com/alexeyraspopov/d8c7a67/avatar.png",
             "monthlyDonation": 500,
-            "totalDonations": 1000
+            "totalDonations": 3000
         },
         {
             "name": "Thomas Hermann",
@@ -357,9 +364,9 @@
             "totalDonations": 3000
         },
         {
-            "name": "verdaccio",
-            "url": "https://verdaccio.org/",
-            "image": "https://images.opencollective.com/verdaccio/2d6ef61/logo.png",
+            "name": "Martin Desrumaux",
+            "url": null,
+            "image": "https://images.opencollective.com/martin-desrumaux/avatar.png",
             "monthlyDonation": 500,
             "totalDonations": 1000
         },
@@ -371,18 +378,18 @@
             "totalDonations": 3000
         },
         {
-            "name": "Kyle Smith",
-            "url": "https://ksmith.io",
-            "image": "https://images.opencollective.com/knksmith57/1b834b2/avatar.png",
-            "monthlyDonation": 300,
-            "totalDonations": 500
-        },
-        {
             "name": "Will McAuliff",
             "url": "https://twitter.com/womcauliff",
             "image": "https://images.opencollective.com/womcauliff/2be6f36/avatar.png",
             "monthlyDonation": 300,
             "totalDonations": 2500
+        },
+        {
+            "name": "Kyle Smith",
+            "url": "https://ksmith.io",
+            "image": "https://images.opencollective.com/knksmith57/1b834b2/avatar.png",
+            "monthlyDonation": 300,
+            "totalDonations": 500
         },
         {
             "name": "qnyp",
