@@ -47,6 +47,13 @@
     ],
     "bronze": [
         {
+            "name": "UX Top 5",
+            "url": "https://uxplanet.org/top-ui-ux-design-agencies-user-experience-firms-8c54697e290",
+            "image": "https://images.opencollective.com/ux-top-5/cae5dfe/logo.png",
+            "monthlyDonation": 20000,
+            "totalDonations": 20000
+        },
+        {
             "name": "clay",
             "url": "https://clay.global",
             "image": "https://images.opencollective.com/clayglobal/2468f34/logo.png",
