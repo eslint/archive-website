@@ -200,7 +200,7 @@
             "url": "https://www.1337lawyers.com",
             "image": "https://images.opencollective.com/1337lawyers/logo.png",
             "monthlyDonation": 500,
-            "totalDonations": 1000
+            "totalDonations": 1500
         },
         {
             "name": "Jay Merrifield",
@@ -215,13 +215,6 @@
             "image": "https://images.opencollective.com/misaka/60c568f/logo.png",
             "monthlyDonation": 500,
             "totalDonations": 2000
-        },
-        {
-            "name": "Oliver Sieweke",
-            "url": null,
-            "image": "https://images.opencollective.com/oliver-sieweke/avatar.png",
-            "monthlyDonation": 500,
-            "totalDonations": 1500
         },
         {
             "name": "Alexandre Morgaut",
