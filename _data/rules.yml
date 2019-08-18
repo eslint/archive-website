@@ -655,6 +655,10 @@ categories:
         fixable: false
         name: func-style
         recommended: false
+      - description: enforce line breaks between arguments of a function call
+        fixable: true
+        name: function-call-argument-newline
+        recommended: false
       - description: enforce consistent line breaks inside function parentheses
         fixable: true
         name: function-paren-newline
