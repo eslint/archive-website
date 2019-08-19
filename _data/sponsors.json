@@ -175,9 +175,9 @@
             "totalDonations": 7000
         },
         {
-            "name": "AJ Klein",
-            "url": "https://twitter.com/jumbleofideas",
-            "image": "https://images.opencollective.com/aj-klein/b63b472/avatar.png",
+            "name": "Andrew Rota",
+            "url": "https://twitter.com/andrewrota",
+            "image": "https://images.opencollective.com/andrewrota/a124847/avatar.png",
             "monthlyDonation": 500,
             "totalDonations": 3000
         },
@@ -199,13 +199,6 @@
             "name": "1337 Lawyers",
             "url": "https://www.1337lawyers.com",
             "image": "https://images.opencollective.com/1337lawyers/logo.png",
-            "monthlyDonation": 500,
-            "totalDonations": 1500
-        },
-        {
-            "name": "Jay Merrifield",
-            "url": "https://github.com/fracmak",
-            "image": "https://images.opencollective.com/jay-merrifield/01ca6df/avatar.png",
             "monthlyDonation": 500,
             "totalDonations": 1500
         },
@@ -259,18 +252,18 @@
             "totalDonations": 3500
         },
         {
+            "name": "AJ Klein",
+            "url": "https://twitter.com/jumbleofideas",
+            "image": "https://images.opencollective.com/aj-klein/b63b472/avatar.png",
+            "monthlyDonation": 500,
+            "totalDonations": 3000
+        },
+        {
             "name": "James Sherwood-Jones",
             "url": null,
             "image": "https://images.opencollective.com/james-sherwood-jones/avatar.png",
             "monthlyDonation": 500,
             "totalDonations": 1000
-        },
-        {
-            "name": "Andrew Rota",
-            "url": "https://twitter.com/andrewrota",
-            "image": "https://images.opencollective.com/andrewrota/a124847/avatar.png",
-            "monthlyDonation": 500,
-            "totalDonations": 3000
         },
         {
             "name": "Third Iron",
