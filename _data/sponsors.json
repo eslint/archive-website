@@ -47,9 +47,16 @@
     ],
     "bronze": [
         {
-            "name": "Free Icons by Icons8",
-            "url": "https://icons8.com",
-            "image": "https://images.opencollective.com/icons8/0b37d14/logo.png",
+            "name": "ThemeIsle",
+            "url": "https://themeisle.com",
+            "image": "https://images.opencollective.com/themeisle/logo.png",
+            "monthlyDonation": 20000,
+            "totalDonations": 100000
+        },
+        {
+            "name": "VPS Server",
+            "url": "https://www.vpsserver.com",
+            "image": "https://images.opencollective.com/vpsservercom/logo.png",
             "monthlyDonation": 20000,
             "totalDonations": 20000
         },
@@ -75,11 +82,11 @@
             "totalDonations": 80000
         },
         {
-            "name": "ThemeIsle",
-            "url": "https://themeisle.com",
-            "image": "https://images.opencollective.com/themeisle/logo.png",
+            "name": "Free Icons by Icons8",
+            "url": "https://icons8.com",
+            "image": "https://images.opencollective.com/icons8/0b37d14/logo.png",
             "monthlyDonation": 20000,
-            "totalDonations": 100000
+            "totalDonations": 20000
         },
         {
             "name": "TekHattan",
