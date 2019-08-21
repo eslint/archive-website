@@ -182,11 +182,18 @@
             "totalDonations": 7000
         },
         {
-            "name": "Andrew Rota",
-            "url": "https://twitter.com/andrewrota",
-            "image": "https://images.opencollective.com/andrewrota/a124847/avatar.png",
+            "name": "AJ Klein",
+            "url": "https://twitter.com/jumbleofideas",
+            "image": "https://images.opencollective.com/aj-klein/b63b472/avatar.png",
             "monthlyDonation": 500,
             "totalDonations": 3000
+        },
+        {
+            "name": "Martin Desrumaux",
+            "url": null,
+            "image": "https://images.opencollective.com/martin-desrumaux/avatar.png",
+            "monthlyDonation": 500,
+            "totalDonations": 1500
         },
         {
             "name": "verdaccio",
@@ -196,11 +203,11 @@
             "totalDonations": 1500
         },
         {
-            "name": "Jack Cross",
-            "url": null,
-            "image": "https://images.opencollective.com/jack-cross/7b02eda/avatar.png",
+            "name": "Alexey Raspopov",
+            "url": "https://alexeyraspopov.com",
+            "image": "https://images.opencollective.com/alexeyraspopov/d8c7a67/avatar.png",
             "monthlyDonation": 500,
-            "totalDonations": 1000
+            "totalDonations": 3500
         },
         {
             "name": "1337 Lawyers",
@@ -238,11 +245,11 @@
             "totalDonations": 3000
         },
         {
-            "name": "Eliseu Monar dos Santos",
-            "url": "https://medium.com/@eliseumds",
-            "image": "https://images.opencollective.com/eliseumds1/f4e6dad/avatar.png",
+            "name": "Matter",
+            "url": "https://matterapp.com",
+            "image": "https://images.opencollective.com/matter_hq/ac0a719/logo.png",
             "monthlyDonation": 500,
-            "totalDonations": 1000
+            "totalDonations": 500
         },
         {
             "name": "Eric Lanehart",
@@ -252,25 +259,25 @@
             "totalDonations": 3000
         },
         {
-            "name": "Joseph Percy",
-            "url": null,
-            "image": "https://images.opencollective.com/joseph-percy/avatar.png",
-            "monthlyDonation": 500,
-            "totalDonations": 3500
-        },
-        {
-            "name": "AJ Klein",
-            "url": "https://twitter.com/jumbleofideas",
-            "image": "https://images.opencollective.com/aj-klein/b63b472/avatar.png",
-            "monthlyDonation": 500,
-            "totalDonations": 3000
-        },
-        {
-            "name": "James Sherwood-Jones",
-            "url": null,
-            "image": "https://images.opencollective.com/james-sherwood-jones/avatar.png",
+            "name": "Eliseu Monar dos Santos",
+            "url": "https://medium.com/@eliseumds",
+            "image": "https://images.opencollective.com/eliseumds1/f4e6dad/avatar.png",
             "monthlyDonation": 500,
             "totalDonations": 1000
+        },
+        {
+            "name": "Jack Cross",
+            "url": null,
+            "image": "https://images.opencollective.com/jack-cross/7b02eda/avatar.png",
+            "monthlyDonation": 500,
+            "totalDonations": 1000
+        },
+        {
+            "name": "Andrew Rota",
+            "url": "https://twitter.com/andrewrota",
+            "image": "https://images.opencollective.com/andrewrota/a124847/avatar.png",
+            "monthlyDonation": 500,
+            "totalDonations": 3000
         },
         {
             "name": "Third Iron",
@@ -336,11 +343,11 @@
             "totalDonations": 3500
         },
         {
-            "name": "Alexey Raspopov",
-            "url": "https://alexeyraspopov.com",
-            "image": "https://images.opencollective.com/alexeyraspopov/d8c7a67/avatar.png",
+            "name": "James Sherwood-Jones",
+            "url": null,
+            "image": "https://images.opencollective.com/james-sherwood-jones/avatar.png",
             "monthlyDonation": 500,
-            "totalDonations": 3500
+            "totalDonations": 1000
         },
         {
             "name": "Thomas Hermann",
@@ -371,11 +378,11 @@
             "totalDonations": 3500
         },
         {
-            "name": "Martin Desrumaux",
+            "name": "Joseph Percy",
             "url": null,
-            "image": "https://images.opencollective.com/martin-desrumaux/avatar.png",
+            "image": "https://images.opencollective.com/joseph-percy/avatar.png",
             "monthlyDonation": 500,
-            "totalDonations": 1500
+            "totalDonations": 3500
         },
         {
             "name": "Jordan Harband",
