@@ -9,8 +9,8 @@
         },
         {
             "name": "Salesforce",
-            "url": "http://salesforce.com",
-            "image": "https://images.opencollective.com/salesforce/853ecef/logo.png",
+            "url": "http://engineering.salesforce.com",
+            "image": "https://images.opencollective.com/salesforce/d1b37c4/logo.png",
             "monthlyDonation": 100000,
             "totalDonations": 500000
         },
