@@ -47,16 +47,16 @@
     ],
     "bronze": [
         {
-            "name": "ThemeIsle",
-            "url": "https://themeisle.com",
-            "image": "https://images.opencollective.com/themeisle/logo.png",
-            "monthlyDonation": 20000,
-            "totalDonations": 100000
-        },
-        {
             "name": "VPS Server",
             "url": "https://www.vpsserver.com",
             "image": "https://images.opencollective.com/vpsservercom/logo.png",
+            "monthlyDonation": 20000,
+            "totalDonations": 20000
+        },
+        {
+            "name": "Free Icons by Icons8",
+            "url": "https://icons8.com",
+            "image": "https://images.opencollective.com/icons8/0b37d14/logo.png",
             "monthlyDonation": 20000,
             "totalDonations": 20000
         },
@@ -82,11 +82,11 @@
             "totalDonations": 80000
         },
         {
-            "name": "Free Icons by Icons8",
-            "url": "https://icons8.com",
-            "image": "https://images.opencollective.com/icons8/0b37d14/logo.png",
+            "name": "ThemeIsle",
+            "url": "https://themeisle.com",
+            "image": "https://images.opencollective.com/themeisle/logo.png",
             "monthlyDonation": 20000,
-            "totalDonations": 20000
+            "totalDonations": 100000
         },
         {
             "name": "TekHattan",
@@ -115,13 +115,6 @@
             "image": "https://images.opencollective.com/jsheroes1/9fedf0b/logo.png",
             "monthlyDonation": 20000,
             "totalDonations": 120000
-        },
-        {
-            "name": "Faithlife",
-            "url": "https://faithlife.com/ref/about",
-            "image": "https://images.opencollective.com/faithlife/534b832/logo.png",
-            "monthlyDonation": 20000,
-            "totalDonations": 140000
         }
     ],
     "backers": [
