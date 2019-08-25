@@ -182,6 +182,13 @@
             "totalDonations": 3000
         },
         {
+            "name": "James Sherwood-Jones",
+            "url": null,
+            "image": "https://images.opencollective.com/james-sherwood-jones/avatar.png",
+            "monthlyDonation": 500,
+            "totalDonations": 1000
+        },
+        {
             "name": "Martin Desrumaux",
             "url": null,
             "image": "https://images.opencollective.com/martin-desrumaux/avatar.png",
@@ -196,9 +203,9 @@
             "totalDonations": 1500
         },
         {
-            "name": "Alexey Raspopov",
-            "url": "https://alexeyraspopov.com",
-            "image": "https://images.opencollective.com/alexeyraspopov/d8c7a67/avatar.png",
+            "name": "Joseph Percy",
+            "url": null,
+            "image": "https://images.opencollective.com/joseph-percy/avatar.png",
             "monthlyDonation": 500,
             "totalDonations": 3500
         },
@@ -238,11 +245,11 @@
             "totalDonations": 3000
         },
         {
-            "name": "Matter",
-            "url": "https://matterapp.com",
-            "image": "https://images.opencollective.com/matter_hq/ac0a719/logo.png",
+            "name": "Alexey Raspopov",
+            "url": "https://alexeyraspopov.com",
+            "image": "https://images.opencollective.com/alexeyraspopov/d8c7a67/avatar.png",
             "monthlyDonation": 500,
-            "totalDonations": 500
+            "totalDonations": 3500
         },
         {
             "name": "Eric Lanehart",
@@ -252,18 +259,18 @@
             "totalDonations": 3000
         },
         {
-            "name": "Eliseu Monar dos Santos",
-            "url": "https://medium.com/@eliseumds",
-            "image": "https://images.opencollective.com/eliseumds1/f4e6dad/avatar.png",
+            "name": "Addison Shaw",
+            "url": "https://yardfights.com",
+            "image": "https://images.opencollective.com/addison-shaw/ff5d8b9/avatar.png",
             "monthlyDonation": 500,
-            "totalDonations": 1000
+            "totalDonations": 500
         },
         {
-            "name": "Jack Cross",
-            "url": null,
-            "image": "https://images.opencollective.com/jack-cross/7b02eda/avatar.png",
+            "name": "Matter",
+            "url": "https://matterapp.com",
+            "image": "https://images.opencollective.com/matter_hq/ac0a719/logo.png",
             "monthlyDonation": 500,
-            "totalDonations": 1000
+            "totalDonations": 500
         },
         {
             "name": "Andrew Rota",
@@ -336,9 +343,9 @@
             "totalDonations": 3500
         },
         {
-            "name": "James Sherwood-Jones",
-            "url": null,
-            "image": "https://images.opencollective.com/james-sherwood-jones/avatar.png",
+            "name": "Eliseu Monar dos Santos",
+            "url": "https://medium.com/@eliseumds",
+            "image": "https://images.opencollective.com/eliseumds1/f4e6dad/avatar.png",
             "monthlyDonation": 500,
             "totalDonations": 1000
         },
@@ -371,11 +378,11 @@
             "totalDonations": 3500
         },
         {
-            "name": "Joseph Percy",
+            "name": "Jack Cross",
             "url": null,
-            "image": "https://images.opencollective.com/joseph-percy/avatar.png",
+            "image": "https://images.opencollective.com/jack-cross/7b02eda/avatar.png",
             "monthlyDonation": 500,
-            "totalDonations": 3500
+            "totalDonations": 1000
         },
         {
             "name": "Jordan Harband",
