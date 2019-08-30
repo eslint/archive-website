@@ -16,7 +16,7 @@ class A {
     }
 }
 
-class A extends B {
+class B extends A {
     constructor (value) {
       super(value);
     }
@@ -40,7 +40,7 @@ class A {
     }
 }
 
-class A extends B {
+class B extends A {
     constructor (...args) {
       super(...args);
     }
@@ -60,13 +60,13 @@ class A {
     }
 }
 
-class A extends B {
+class B extends A {
     constructor() {
         super('foo');
     }
 }
 
-class A extends B {
+class B extends A {
     constructor() {
         super();
         doSomething();
