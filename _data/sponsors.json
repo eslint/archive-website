@@ -147,18 +147,18 @@
             "totalDonations": 8000
         },
         {
-            "name": "Benjamin Piouffle",
-            "url": "https://benjamin.piouffle.com",
-            "image": "https://images.opencollective.com/betree/6c68f43/avatar.png",
-            "monthlyDonation": 1000,
-            "totalDonations": 7600
-        },
-        {
             "name": "Kevin Partington",
             "url": null,
             "image": "https://images.opencollective.com/kevin-partington/54f2124/avatar.png",
             "monthlyDonation": 1000,
             "totalDonations": 4000
+        },
+        {
+            "name": "Benjamin Piouffle",
+            "url": "https://benjamin.piouffle.com",
+            "image": "https://images.opencollective.com/betree/6c68f43/avatar.png",
+            "monthlyDonation": 1000,
+            "totalDonations": 7600
         },
         {
             "name": "Summit",
@@ -168,11 +168,11 @@
             "totalDonations": 8000
         },
         {
-            "name": "Jack Cross",
-            "url": null,
-            "image": "https://images.opencollective.com/jack-cross/7b02eda/avatar.png",
+            "name": "AJ Klein",
+            "url": "https://twitter.com/jumbleofideas",
+            "image": "https://images.opencollective.com/aj-klein/b63b472/avatar.png",
             "monthlyDonation": 500,
-            "totalDonations": 1500
+            "totalDonations": 3500
         },
         {
             "name": "James Sherwood-Jones",
@@ -252,18 +252,18 @@
             "totalDonations": 3500
         },
         {
+            "name": "Addison Shaw",
+            "url": "https://yardfights.com",
+            "image": "https://images.opencollective.com/addison-shaw/ff5d8b9/avatar.png",
+            "monthlyDonation": 500,
+            "totalDonations": 1000
+        },
+        {
             "name": "Matter",
             "url": "https://matterapp.com",
             "image": "https://images.opencollective.com/matter_hq/ac0a719/logo.png",
             "monthlyDonation": 500,
             "totalDonations": 1000
-        },
-        {
-            "name": "AJ Klein",
-            "url": "https://twitter.com/jumbleofideas",
-            "image": "https://images.opencollective.com/aj-klein/b63b472/avatar.png",
-            "monthlyDonation": 500,
-            "totalDonations": 3500
         },
         {
             "name": "Andrew Rota",
@@ -336,11 +336,11 @@
             "totalDonations": 4000
         },
         {
-            "name": "Addison Shaw",
-            "url": "https://yardfights.com",
-            "image": "https://images.opencollective.com/addison-shaw/ff5d8b9/avatar.png",
+            "name": "Eliseu Monar dos Santos",
+            "url": "https://medium.com/@eliseumds",
+            "image": "https://images.opencollective.com/eliseumds1/f4e6dad/avatar.png",
             "monthlyDonation": 500,
-            "totalDonations": 1000
+            "totalDonations": 1500
         },
         {
             "name": "Thomas Hermann",
@@ -364,9 +364,16 @@
             "totalDonations": 4000
         },
         {
-            "name": "Eliseu Monar dos Santos",
-            "url": "https://medium.com/@eliseumds",
-            "image": "https://images.opencollective.com/eliseumds1/f4e6dad/avatar.png",
+            "name": "Nubz Ltd",
+            "url": "http://nubz.com",
+            "image": "https://images.opencollective.com/nubz/logo.png",
+            "monthlyDonation": 500,
+            "totalDonations": 4000
+        },
+        {
+            "name": "Jack Cross",
+            "url": null,
+            "image": "https://images.opencollective.com/jack-cross/7b02eda/avatar.png",
             "monthlyDonation": 500,
             "totalDonations": 1500
         },
