@@ -30,6 +30,10 @@
   src: /assets/img/logos/facebook.png
   name: Facebook
 
+- url: https://codingsans.com
+  src: /assets/img/logos/codingsans.png
+  name: Coding Sans
+
 - url: https://www.paypal.com
   src: /assets/img/logos/paypal.svg
   name: PayPal
