@@ -84,6 +84,10 @@ categories:
         fixable: false
         name: no-func-assign
         recommended: true
+      - description: disallow assigning to imported bindings
+        fixable: false
+        name: no-import-assign
+        recommended: false
       - description: disallow variable or `function` declarations in nested blocks
         fixable: false
         name: no-inner-declarations
@@ -137,7 +141,7 @@ categories:
         name: no-unsafe-finally
         recommended: true
       - description: disallow negating the left operand of relational operators
-        fixable: true
+        fixable: false
         name: no-unsafe-negation
         recommended: true
       - description: >-
@@ -159,7 +163,7 @@ categories:
       problems:
     name: Best Practices
     rules:
-      - description: enforce getter and setter pairs in objects
+      - description: enforce getter and setter pairs in objects and classes
         fixable: false
         name: accessor-pairs
         recommended: false
@@ -190,6 +194,10 @@ categories:
       - description: require `default` cases in `switch` statements
         fixable: false
         name: default-case
+        recommended: false
+      - description: enforce default parameters to be last
+        fixable: false
+        name: default-param-last
         recommended: false
       - description: enforce consistent newlines before and after dots
         fixable: true
@@ -436,6 +444,12 @@ categories:
       - description: require using Error objects as Promise rejection reasons
         fixable: false
         name: prefer-promise-reject-errors
+        recommended: false
+      - description: >-
+          disallow use of the `RegExp` constructor in favor of regular
+          expression literals
+        fixable: false
+        name: prefer-regex-literals
         recommended: false
       - description: >-
           enforce the consistent use of the radix argument when using
