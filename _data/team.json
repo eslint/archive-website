@@ -37,12 +37,6 @@
             "avatar_url": "https://avatars2.githubusercontent.com/u/5554486?v=4"
         },
         {
-            "username": "kaicataldo",
-            "name": "Kai Cataldo",
-            "website": "kaicataldo.com",
-            "avatar_url": "https://avatars2.githubusercontent.com/u/7041728?v=4"
-        },
-        {
             "username": "not-an-aardvark",
             "name": "Teddy Katz",
             "website": "https://twitter.com/not_aardvark",
@@ -156,6 +150,12 @@
         }
     ],
     "committers": [
+        {
+            "username": "kaicataldo",
+            "name": "Kai Cataldo",
+            "website": "kaicataldo.com",
+            "avatar_url": "https://avatars2.githubusercontent.com/u/7041728?v=4"
+        },
         {
             "username": "g-plane",
             "name": "Pig Fang",
