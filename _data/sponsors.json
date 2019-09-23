@@ -47,11 +47,18 @@
     ],
     "bronze": [
         {
-            "name": "VPS Server",
-            "url": "https://www.vpsserver.com",
-            "image": "https://images.opencollective.com/vpsservercom/logo.png",
+            "name": "Discord",
+            "url": "https://discordapp.com",
+            "image": "https://images.opencollective.com/discordapp/7e3d9a9/logo.png",
             "monthlyDonation": 20000,
-            "totalDonations": 40000
+            "totalDonations": 100000
+        },
+        {
+            "name": "Mixpanel",
+            "url": "https://mixpanel.com",
+            "image": "https://images.opencollective.com/mixpanel/c35a9d7/logo.png",
+            "monthlyDonation": 20000,
+            "totalDonations": 20000
         },
         {
             "name": "Free Icons by Icons8",
@@ -75,11 +82,11 @@
             "totalDonations": 100000
         },
         {
-            "name": "Discord",
-            "url": "https://discordapp.com",
-            "image": "https://images.opencollective.com/discordapp/7e3d9a9/logo.png",
+            "name": "VPS Server",
+            "url": "https://www.vpsserver.com",
+            "image": "https://images.opencollective.com/vpsservercom/logo.png",
             "monthlyDonation": 20000,
-            "totalDonations": 100000
+            "totalDonations": 40000
         },
         {
             "name": "ThemeIsle",
