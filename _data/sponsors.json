@@ -40,18 +40,25 @@
     ],
     "bronze": [
         {
-            "name": "Discord",
-            "url": "https://discordapp.com",
-            "image": "https://images.opencollective.com/discordapp/7e3d9a9/logo.png",
+            "name": "clay",
+            "url": "https://clay.global",
+            "image": "https://images.opencollective.com/clayglobal/2468f34/logo.png",
             "monthlyDonation": 20000,
             "totalDonations": 120000
         },
         {
-            "name": "Codacy",
-            "url": "https://www.codacy.com/?utm_source=eslint&utm_medium=cpm&utm_campaign=eslint-sponsorship",
-            "image": "https://images.opencollective.com/codacy/ed22716/logo.png",
+            "name": "MiniTool Software Ltd",
+            "url": "https://www.minitool.com",
+            "image": "https://images.opencollective.com/minitool-software-ltd/6d68e16/logo.png",
             "monthlyDonation": 20000,
             "totalDonations": 20000
+        },
+        {
+            "name": "Mixpanel",
+            "url": "https://mixpanel.com",
+            "image": "https://images.opencollective.com/mixpanel/cd682f7/logo.png",
+            "monthlyDonation": 20000,
+            "totalDonations": 40000
         },
         {
             "name": "VPS Server",
@@ -75,18 +82,18 @@
             "totalDonations": 60000
         },
         {
-            "name": "clay",
-            "url": "https://clay.global",
-            "image": "https://images.opencollective.com/clayglobal/2468f34/logo.png",
+            "name": "Codacy",
+            "url": "https://www.codacy.com/?utm_source=eslint&utm_medium=cpm&utm_campaign=eslint-sponsorship",
+            "image": "https://images.opencollective.com/codacy/ed22716/logo.png",
             "monthlyDonation": 20000,
-            "totalDonations": 120000
+            "totalDonations": 20000
         },
         {
-            "name": "Mixpanel",
-            "url": "https://mixpanel.com",
-            "image": "https://images.opencollective.com/mixpanel/cd682f7/logo.png",
+            "name": "Discord",
+            "url": "https://discordapp.com",
+            "image": "https://images.opencollective.com/discordapp/7e3d9a9/logo.png",
             "monthlyDonation": 20000,
-            "totalDonations": 40000
+            "totalDonations": 120000
         },
         {
             "name": "ThemeIsle",
