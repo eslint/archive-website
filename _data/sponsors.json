@@ -47,11 +47,18 @@
             "totalDonations": 120000
         },
         {
-            "name": "Mixpanel",
-            "url": "https://mixpanel.com",
-            "image": "https://images.opencollective.com/mixpanel/cd682f7/logo.png",
+            "name": "Codacy",
+            "url": "https://www.codacy.com/?utm_source=eslint&utm_medium=cpm&utm_campaign=eslint-sponsorship",
+            "image": "https://images.opencollective.com/codacy/ed22716/logo.png",
             "monthlyDonation": 20000,
-            "totalDonations": 40000
+            "totalDonations": 20000
+        },
+        {
+            "name": "VPS Server",
+            "url": "https://www.vpsserver.com",
+            "image": "https://images.opencollective.com/vpsservercom/logo.png",
+            "monthlyDonation": 20000,
+            "totalDonations": 60000
         },
         {
             "name": "Free Icons by Icons8",
@@ -75,11 +82,11 @@
             "totalDonations": 120000
         },
         {
-            "name": "VPS Server",
-            "url": "https://www.vpsserver.com",
-            "image": "https://images.opencollective.com/vpsservercom/logo.png",
+            "name": "Mixpanel",
+            "url": "https://mixpanel.com",
+            "image": "https://images.opencollective.com/mixpanel/cd682f7/logo.png",
             "monthlyDonation": 20000,
-            "totalDonations": 60000
+            "totalDonations": 40000
         },
         {
             "name": "ThemeIsle",
