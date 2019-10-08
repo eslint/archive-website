@@ -15,6 +15,13 @@
             "totalDonations": 700000
         },
         {
+            "name": "Badoo",
+            "url": "https://badoo.com/team?utm_source=eslint",
+            "image": "https://images.opencollective.com/badoo/2826a3b/logo.png",
+            "monthlyDonation": 100000,
+            "totalDonations": 900000
+        },
+        {
             "name": "Airbnb",
             "url": "https://www.airbnb.com/",
             "image": "https://images.opencollective.com/airbnb/d327d66/logo.png",
