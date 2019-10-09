@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import Editor from "./Editor";
 import Messages from "./Messages";
 import FixedCode from "./FixedCode";
+import BugReport from "./BugReport";
+import Crash from "./Crash";
 import Configuration from "./Configuration";
 import Unicode from "../utils/unicode";
 import linterModule from "../../eslint";
@@ -124,7 +126,19 @@ export default class App extends Component {
     }
 
     lint() {
-        return linter.verifyAndFix(this.state.text, this.state.options, { fix: this.state.fix });
+        try {
+            return {
+                results: linter.verifyAndFix(this.state.text, this.state.options, { fix: this.state.fix })
+            };
+        } catch (error) {
+            return {
+                results: {
+                    messages: [],
+                    output: this.state.text
+                },
+                error
+            };
+        }
     }
 
     storeState() {
@@ -147,9 +161,11 @@ export default class App extends Component {
     }
 
     render() {
-        const results = this.lint();
+        const { results: { messages, output }, error } = this.lint();
         const sourceCode = linter.getSourceCode();
         const { text, fix, options } = this.state;
+        const isInvalidAutofix = !error && fix && text !== output &&
+            messages && messages.length && messages[0].fatal;
 
         return (
             <div className="container editor-row">
@@ -158,7 +174,7 @@ export default class App extends Component {
                         <Editor
                             onChange={this.handleChange}
                             text={text}
-                            errors={results.messages}
+                            errors={messages}
                             getIndexFromLoc={sourceCode && sourceCode.getIndexFromLoc.bind(sourceCode)}
                         />
                     </div>
@@ -195,9 +211,12 @@ export default class App extends Component {
                         <div className="tab-content">
                             <div role="tabpanel" className="tab-pane active" >
                                 {
-                                    fix
-                                        ? <FixedCode values={results.output} />
-                                        : <Messages values={results.messages} />
+                                    isInvalidAutofix && <BugReport message={`Invalid autofix! ${messages[0].message}`} />
+                                }
+                                {
+                                    error && <Crash error={error} /> ||
+                                    fix && <FixedCode values={output} /> ||
+                                    <Messages values={messages} />
                                 }
                             </div>
                         </div>
