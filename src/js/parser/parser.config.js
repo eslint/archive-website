@@ -11,7 +11,8 @@ export default {
         7: false,
         8: false,
         9: false,
-        10: false
+        10: false,
+        11: false
     },
     sourceType: {
         script: false,
