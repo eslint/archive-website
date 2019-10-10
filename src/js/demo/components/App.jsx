@@ -127,15 +127,21 @@ export default class App extends Component {
 
     lint() {
         try {
+            const { messages, output } = linter.verifyAndFix(this.state.text, this.state.options, { fix: this.state.fix });
+            let fatalMessage;
+
+            if (messages && messages.length > 0 && messages[0].fatal) {
+                fatalMessage = messages[0];
+            }
             return {
-                results: linter.verifyAndFix(this.state.text, this.state.options, { fix: this.state.fix })
+                messages,
+                output,
+                fatalMessage
             };
         } catch (error) {
             return {
-                results: {
-                    messages: [],
-                    output: this.state.text
-                },
+                messages: [],
+                output: this.state.text,
                 error
             };
         }
@@ -161,11 +167,10 @@ export default class App extends Component {
     }
 
     render() {
-        const { results: { messages, output }, error } = this.lint();
-        const sourceCode = linter.getSourceCode();
         const { text, fix, options } = this.state;
-        const isInvalidAutofix = !error && fix && text !== output &&
-            messages && messages.length && messages[0].fatal;
+        const { messages, output, fatalMessage, error } = this.lint();
+        const isInvalidAutofix = fatalMessage && text !== output;
+        const sourceCode = linter.getSourceCode();
 
         return (
             <div className="container editor-row">
@@ -211,7 +216,7 @@ export default class App extends Component {
                         <div className="tab-content">
                             <div role="tabpanel" className="tab-pane active" >
                                 {
-                                    isInvalidAutofix && <BugReport message={`Invalid autofix! ${messages[0].message}`} />
+                                    isInvalidAutofix && <BugReport message={`Invalid autofix! ${fatalMessage.message}`} />
                                 }
                                 {
                                     error && <Crash error={error} /> ||
