@@ -30,6 +30,11 @@ export default class Configuration extends Component {
         }
     }
 
+    shouldComponentUpdate(nextProps, nextState) {
+        return this.state.showingConfig !== nextState.showingConfig ||
+            JSON.stringify(this.props.options) !== JSON.stringify(nextProps.options);
+    }
+
     render() {
         return (
             <div className="panel-group" id="accordion">
