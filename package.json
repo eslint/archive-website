@@ -17,6 +17,7 @@
     "build": "npm run build:less && npm run build:webpack && npm run build:jekyll",
     "start:jekyll": "bundle exec jekyll serve --config _config.yml,_config.dev.yml",
     "start:webpack": "webpack -w --mode=development",
+    "start:docker": "npm run build:less && docker run --rm -v `pwd`:/srv/jekyll -p 4000:4000 -it jekyll/jekyll:3.8 jekyll serve -V --config _config.yml,_config.dev.yml",
     "start": "npm run build:less && npm run start:jekyll",
     "lint": "eslint --ext=.js,.jsx .",
     "lint:fix": "npm run lint -- --fix",
