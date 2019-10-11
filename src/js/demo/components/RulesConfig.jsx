@@ -33,7 +33,7 @@ function Rule(ref) {
 
 export default function RulesConfig(props) {
     function shouldBeChecked(rule) {
-        return props.config[rule] && props.config[rule] !== "off" && props.config[rule] !== 0;
+        return Boolean(props.config[rule]) && props.config[rule] !== "off" && props.config[rule] !== 0;
     }
 
     function handleChange(e, key) {
