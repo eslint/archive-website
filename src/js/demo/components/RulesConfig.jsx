@@ -6,20 +6,10 @@ function Rule(ref) {
         ref.handleChange(e, ref.rule);
     }
 
-    function showPopover(e) {
-        e.currentTarget.Popover.show();
-    }
-
-    function hidePopover(e) {
-        e.currentTarget.Popover.hide();
-    }
-
     return (
         <div className="checkbox">
             <label
                 htmlFor={ref.rule}
-                onMouseEnter={showPopover}
-                onMouseLeave={hidePopover}
                 data-toggle="popover"
                 data-content={ref.docs.description}
                 title={ref.rule}
