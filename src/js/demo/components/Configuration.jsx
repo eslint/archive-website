@@ -8,8 +8,10 @@ function initPopovers() {
     const popoverElements = document.querySelectorAll("[data-toggle=\"popover\"]");
 
     for (let i = 0; i < popoverElements.length; ++i) {
-        // eslint-disable-next-line no-new
-        new Popover(popoverElements[i]);
+        if (!popoverElements[i].Popover) {
+            // eslint-disable-next-line no-new
+            new Popover(popoverElements[i]);
+        }
     }
 }
 
