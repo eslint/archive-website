@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
 import { Popover } from "bootstrap.native";
 import ParserOptions from "./ParserOptions";
 import Environments from "./Environments";
@@ -13,11 +13,14 @@ function initPopovers() {
     }
 }
 
-export default class Configuration extends Component {
+export default class Configuration extends PureComponent {
     constructor(props) {
         super(props);
         this.state = { showingConfig: false };
         this.toggleShowingConfig = this.toggleShowingConfig.bind(this);
+        this.handleParserOptionsUpdate = this.handleParserOptionsUpdate.bind(this);
+        this.handleEnvironmentsUpdate = this.handleEnvironmentsUpdate.bind(this);
+        this.handleRulesConfigUpdate = this.handleRulesConfigUpdate.bind(this);
     }
 
     toggleShowingConfig() {
@@ -28,6 +31,18 @@ export default class Configuration extends Component {
         if (this.state.showingConfig) {
             initPopovers();
         }
+    }
+
+    handleParserOptionsUpdate(parserOptions) {
+        this.props.onUpdate(Object.assign({}, this.props.options, { parserOptions }));
+    }
+
+    handleEnvironmentsUpdate(env) {
+        this.props.onUpdate(Object.assign({}, this.props.options, { env }));
+    }
+
+    handleRulesConfigUpdate(rules) {
+        this.props.onUpdate(Object.assign({}, this.props.options, { rules }));
     }
 
     render() {
@@ -51,32 +66,20 @@ export default class Configuration extends Component {
                             <div className="panel-body">
                                 <ParserOptions
                                     options={this.props.options.parserOptions}
-                                    onUpdate={
-                                        parserOptions => {
-                                            this.props.onUpdate(Object.assign({}, this.props.options, { parserOptions }));
-                                        }
-                                    }
+                                    onUpdate={this.handleParserOptionsUpdate}
                                 />
                                 <hr />
                                 <Environments
                                     env={this.props.options.env}
                                     envNames={this.props.envNames}
-                                    onUpdate={
-                                        env => {
-                                            this.props.onUpdate(Object.assign({}, this.props.options, { env }));
-                                        }
-                                    }
+                                    onUpdate={this.handleEnvironmentsUpdate}
                                 />
                                 <hr />
                                 <RulesConfig
                                     config={this.props.options.rules}
                                     ruleNames={this.props.ruleNames}
                                     docs={this.props.docs}
-                                    onUpdate={
-                                        rules => {
-                                            this.props.onUpdate(Object.assign({}, this.props.options, { rules }));
-                                        }
-                                    }
+                                    onUpdate={this.handleRulesConfigUpdate}
                                 />
                                 <hr />
                                 <a

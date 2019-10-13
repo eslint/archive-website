@@ -1,7 +1,7 @@
 import React from "react";
 import SelectAllCheckbox from "./SelectAllCheckbox";
 
-export default function Environments(props) {
+function Environments(props) {
     const columnLimit = 3;
     const rowLimit = Math.ceil(props.envNames.length / columnLimit);
 
@@ -73,3 +73,5 @@ export default function Environments(props) {
         </div>
     );
 }
+
+export default React.memo(Environments);

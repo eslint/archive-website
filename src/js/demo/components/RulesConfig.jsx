@@ -1,92 +1,89 @@
-import React from "react";
+import React, { PureComponent } from "react";
 import SelectAllCheckbox from "./SelectAllCheckbox";
+import Rule from "./Rule";
 
-function Rule(ref) {
-    function handler(e) {
-        ref.handleChange(e, ref.rule);
+export default class RulesConfig extends PureComponent {
+    constructor(props) {
+        super(props);
+        this.handleSingleChange = this.handleSingleChange.bind(this);
+        this.handleSelectAll = this.handleSelectAll.bind(this);
+        this.handleDeselectAll = this.handleDeselectAll.bind(this);
     }
 
-    return (
-        <div className="checkbox">
-            <label
-                htmlFor={ref.rule}
-                data-toggle="popover"
-                data-content={ref.docs.description}
-                title={ref.rule}
-            >
-                <input type="checkbox" checked={ref.isChecked} id={ref.rule} onChange={handler} />
-                {ref.rule}
-            </label>
-        </div>
-    );
-}
-
-export default function RulesConfig(props) {
-    function shouldBeChecked(rule) {
-        return Boolean(props.config[rule]) && props.config[rule] !== "off" && props.config[rule] !== 0;
+    shouldBeChecked(rule) {
+        return Boolean(this.props.config[rule]) && this.props.config[rule] !== "off" && this.props.config[rule] !== 0;
     }
 
-    function handleChange(e, key) {
-        const updatedConfig = Object.assign({}, props.config);
+    handleSingleChange(e, key) {
+        const updatedConfig = Object.assign({}, this.props.config);
 
         if (e.target.checked) {
             updatedConfig[key] = 2;
         } else {
             delete updatedConfig[key];
         }
-        props.onUpdate(updatedConfig);
+        this.props.onUpdate(updatedConfig);
     }
 
-    function getRow(i) {
-        const limit = Math.ceil(props.ruleNames.length / 3);
+    handleSelectAll() {
+        this.props.onUpdate(this.props.ruleNames.reduce((updatedConfig, ruleName) => {
+            updatedConfig[ruleName] = 2;
+            return updatedConfig;
+        }, {}));
+    }
+
+    handleDeselectAll() {
+        this.props.onUpdate({});
+    }
+
+    getRow(i) {
+        const limit = Math.ceil(this.props.ruleNames.length / 3);
         const start = limit * i;
 
         return Array(limit).fill("").map((item, index) => {
-            const rule = props.ruleNames[start + index];
+            const rule = this.props.ruleNames[start + index];
 
-            return rule && <Rule key={rule} rule={rule} docs={props.docs[rule].docs} isChecked={shouldBeChecked(rule)} handleChange={handleChange} />;
+            return rule &&
+                <Rule
+                    key={rule}
+                    rule={rule}
+                    docs={this.props.docs[rule].docs}
+                    isChecked={this.shouldBeChecked(rule)}
+                    onChange={this.handleSingleChange}
+                />;
         });
     }
 
-    function renderRules() {
+    renderRules() {
         return [0, 1, 2].map(i => (
             <div className="col-md-4" key={i}>
-                {getRow(i)}
+                {this.getRow(i)}
             </div>
         ));
     }
 
-    return (
-        <div className="row rules">
-            <div className="container">
-                <div className="row"><div className="col-md-12"><h3>Rules</h3></div></div>
-                <div className="checkbox">
-                    <label htmlFor="select-all-rules">
-                        <SelectAllCheckbox
-                            id="select-all-rules"
-                            selectedCount={
-                                props.ruleNames.filter(ruleName => props.config[ruleName] && props.config[ruleName] !== "off").length
-                            }
-                            totalCount={props.ruleNames.length}
-                            onSelectAll={
-                                function() {
-                                    props.onUpdate(props.ruleNames.reduce((updatedConfig, ruleName) => {
-                                        updatedConfig[ruleName] = 2;
-                                        return updatedConfig;
-                                    }, {}));
+    render() {
+        return (
+            <div className="row rules">
+                <div className="container">
+                    <div className="row"><div className="col-md-12"><h3>Rules</h3></div></div>
+                    <div className="checkbox">
+                        <label htmlFor="select-all-rules">
+                            <SelectAllCheckbox
+                                id="select-all-rules"
+                                selectedCount={
+                                    this.props.ruleNames.filter(ruleName => this.props.config[ruleName] && this.props.config[ruleName] !== "off").length
                                 }
-                            }
-                            onDeselectAll={
-                                function() {
-                                    props.onUpdate({});
-                                }
-                            }
-                        />
-                        {" "}Enable all rules
-                    </label>
+                                totalCount={this.props.ruleNames.length}
+                                onSelectAll={this.handleSelectAll}
+                                onDeselectAll={this.handleDeselectAll}
+                            />
+                            {" "}Enable all rules
+                        </label>
+                    </div>
+                    <div className="row">{this.renderRules()}</div>
                 </div>
-                <div className="row">{renderRules()}</div>
             </div>
-        </div>
-    );
+        );
+    }
 }
