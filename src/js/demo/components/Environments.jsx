@@ -48,7 +48,7 @@ function Environments(props) {
                                             <label htmlFor={envName}>
                                                 <input
                                                     type="checkbox"
-                                                    checked={props.env[envName]}
+                                                    checked={!!props.env[envName]}
                                                     id={envName}
                                                     onChange={
                                                         function(event) {
