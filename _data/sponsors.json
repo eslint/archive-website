@@ -189,11 +189,11 @@
             "totalDonations": 5000
         },
         {
-            "name": "Summit",
-            "url": "https://www.summit.co.uk/",
-            "image": "https://images.opencollective.com/summitmedia/7ebf36e/logo.png",
-            "monthlyDonation": 1000,
-            "totalDonations": 9000
+            "name": "Alexey Raspopov",
+            "url": "https://alexeyraspopov.com",
+            "image": "https://images.opencollective.com/alexeyraspopov/d8c7a67/avatar.png",
+            "monthlyDonation": 500,
+            "totalDonations": 4500
         },
         {
             "name": "Ryan",
@@ -371,13 +371,6 @@
             "totalDonations": 4500
         },
         {
-            "name": "Joseph Percy",
-            "url": null,
-            "image": "https://images.opencollective.com/joseph-percy/avatar.png",
-            "monthlyDonation": 500,
-            "totalDonations": 4500
-        },
-        {
             "name": "Thomas Hermann",
             "url": null,
             "image": "https://images.opencollective.com/novascreen/ef6acf0/avatar.png",
@@ -406,9 +399,9 @@
             "totalDonations": 4500
         },
         {
-            "name": "Alexey Raspopov",
-            "url": "https://alexeyraspopov.com",
-            "image": "https://images.opencollective.com/alexeyraspopov/d8c7a67/avatar.png",
+            "name": "Joseph Percy",
+            "url": null,
+            "image": "https://images.opencollective.com/joseph-percy/avatar.png",
             "monthlyDonation": 500,
             "totalDonations": 4500
         },
