@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function ParserOptions(props) {
+function ParserOptions(props) {
     return (
         <div className="row">
             <div className="col-md-4">
@@ -72,3 +72,5 @@ export default function ParserOptions(props) {
         </div>
     );
 }
+
+export default React.memo(ParserOptions);
