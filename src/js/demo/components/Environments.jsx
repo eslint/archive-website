@@ -22,18 +22,12 @@ function Environments(props) {
                             }
                             totalCount={Object.keys(props.envNames).length}
                             onSelectAll={
-                                function() {
-                                    props.onUpdate(props.envNames.reduce((updatedEnv, envName) => {
-                                        updatedEnv[envName] = true;
-                                        return updatedEnv;
-                                    }, {}));
-                                }
+                                () => props.onUpdate(props.envNames.reduce((updatedEnv, envName) => {
+                                    updatedEnv[envName] = true;
+                                    return updatedEnv;
+                                }, {}))
                             }
-                            onDeselectAll={
-                                function() {
-                                    props.onUpdate({});
-                                }
-                            }
+                            onDeselectAll={() => props.onUpdate({})}
                         />
                         {" "}Enable globals from all environments
                     </label>
@@ -51,7 +45,7 @@ function Environments(props) {
                                                     checked={props.env[envName]}
                                                     id={envName}
                                                     onChange={
-                                                        function(event) {
+                                                        event => {
                                                             const updatedEnv = {};
 
                                                             updatedEnv[envName] = event.target.checked;

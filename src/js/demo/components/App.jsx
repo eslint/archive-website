@@ -29,15 +29,10 @@ const hasLocalStorage = (function() {
 const linter = new linterModule.Linter();
 const rules = linter.getRules();
 const ruleNames = Array.from(rules.keys());
-const docs = (function() {
-    const map = rules;
-    const result = {};
-
-    map.forEach((value, key) => {
-        result[key] = value.meta;
-    });
+const docs = Array.from(rules.entries()).reduce((result, [key, value]) => {
+    result[key] = value.meta;
     return result;
-}());
+}, {});
 
 const ENV_NAMES = [
     "browser",
@@ -82,16 +77,12 @@ export default class App extends Component {
                         sourceType: "script",
                         ecmaFeatures: {}
                     },
-                    rules: (function() {
-                        const result = {};
-
-                        rules.forEach((rule, ruleId) => {
-                            if (rule.meta.docs.recommended) {
-                                result[ruleId] = 2;
-                            }
-                        });
+                    rules: rules.reduce((result, rule, ruleId) => {
+                        if (rule.meta.docs.recommended) {
+                            result[ruleId] = 2;
+                        }
                         return result;
-                    }()),
+                    }, {}),
                     env: {}
                 },
                 text: "var foo = bar;"

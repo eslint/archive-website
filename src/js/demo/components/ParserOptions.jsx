@@ -8,9 +8,7 @@ function ParserOptions(props) {
                 <select
                     value={props.options.ecmaVersion}
                     onChange={
-                        function(event) {
-                            props.onUpdate(Object.assign({}, props.options, { ecmaVersion: +event.target.value }));
-                        }
+                        event => props.onUpdate(Object.assign({}, props.options, { ecmaVersion: +event.target.value }))
                     }
                 >
                     <option value="3">3</option>
@@ -28,9 +26,7 @@ function ParserOptions(props) {
                 <select
                     value={props.options.sourceType}
                     onChange={
-                        function(event) {
-                            props.onUpdate(Object.assign({}, props.options, { sourceType: event.target.value }));
-                        }
+                        event => props.onUpdate(Object.assign({}, props.options, { sourceType: event.target.value }))
                     }
                 >
                     <option value="module">module</option>
@@ -50,7 +46,7 @@ function ParserOptions(props) {
                                         className="option-checkbox"
                                         id={ecmaFeature}
                                         onChange={
-                                            function(event) {
+                                            event => {
                                                 const updatedFeatures = Object.assign({}, props.options.ecmaFeatures);
 
                                                 if (event.target.checked) {
