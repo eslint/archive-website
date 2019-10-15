@@ -77,7 +77,7 @@ export default class App extends Component {
                         sourceType: "script",
                         ecmaFeatures: {}
                     },
-                    rules: rules.reduce((result, rule, ruleId) => {
+                    rules: [...rules.entries()].reduce((result, [ruleId, rule]) => {
                         if (rule.meta.docs.recommended) {
                             result[ruleId] = 2;
                         }
