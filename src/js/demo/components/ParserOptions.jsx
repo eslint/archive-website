@@ -42,7 +42,7 @@ function ParserOptions(props) {
                                 <label htmlFor={ecmaFeature}>
                                     <input
                                         type="checkbox"
-                                        checked={props.options.ecmaFeatures[ecmaFeature]}
+                                        checked={!!props.options.ecmaFeatures[ecmaFeature]}
                                         className="option-checkbox"
                                         id={ecmaFeature}
                                         onChange={
