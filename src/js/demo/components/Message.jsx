@@ -19,9 +19,7 @@ export default function Message(props) {
             className={`alert btn-block report-message-alert alert-${isError ? "danger" : "warning"}`}
             title={props.value.message}
             onClick={
-                function() {
-                    events.trigger("showError", props.value.line, props.value.column);
-                }
+                () => events.trigger("showError", props.value.line, props.value.column)
             }
         >
             {formatMessage(props.value)}
