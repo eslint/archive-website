@@ -54,9 +54,16 @@
             "totalDonations": 120000
         },
         {
-            "name": "MiniTool Software Ltd",
-            "url": "https://www.minitool.com",
-            "image": "https://images.opencollective.com/minitool-software-ltd/6d68e16/logo.png",
+            "name": "Crosswordsolver",
+            "url": "https://www.crosswordsolver.com",
+            "image": "https://images.opencollective.com/crosswordsolver/d4481d6/logo.png",
+            "monthlyDonation": 20000,
+            "totalDonations": 20000
+        },
+        {
+            "name": "Codacy",
+            "url": "https://www.codacy.com/?utm_source=eslint&utm_medium=cpm&utm_campaign=eslint-sponsorship",
+            "image": "https://images.opencollective.com/codacy/ed22716/logo.png",
             "monthlyDonation": 20000,
             "totalDonations": 20000
         },
@@ -89,9 +96,9 @@
             "totalDonations": 60000
         },
         {
-            "name": "Codacy",
-            "url": "https://www.codacy.com/?utm_source=eslint&utm_medium=cpm&utm_campaign=eslint-sponsorship",
-            "image": "https://images.opencollective.com/codacy/ed22716/logo.png",
+            "name": "MiniTool Software Ltd",
+            "url": "https://www.minitool.com",
+            "image": "https://images.opencollective.com/minitool-software-ltd/6d68e16/logo.png",
             "monthlyDonation": 20000,
             "totalDonations": 20000
         },
