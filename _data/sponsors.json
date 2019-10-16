@@ -182,11 +182,11 @@
             "totalDonations": 10000
         },
         {
-            "name": "Benjamin Piouffle",
-            "url": "https://benjamin.piouffle.com",
-            "image": "https://images.opencollective.com/betree/6c68f43/avatar.png",
+            "name": "Moxio",
+            "url": "https://moxio.com",
+            "image": "https://images.opencollective.com/moxio/9fa53c1/logo.png",
             "monthlyDonation": 1000,
-            "totalDonations": 8600
+            "totalDonations": 1000
         },
         {
             "name": "Kevin Partington",
@@ -196,6 +196,13 @@
             "totalDonations": 5000
         },
         {
+            "name": "Benjamin Piouffle",
+            "url": "https://benjamin.piouffle.com",
+            "image": "https://images.opencollective.com/betree/6c68f43/avatar.png",
+            "monthlyDonation": 1000,
+            "totalDonations": 8600
+        },
+        {
             "name": "Alexey Raspopov",
             "url": "https://alexeyraspopov.com",
             "image": "https://images.opencollective.com/alexeyraspopov/d8c7a67/avatar.png",
@@ -203,11 +210,11 @@
             "totalDonations": 4500
         },
         {
-            "name": "Ryan",
-            "url": null,
-            "image": "https://images.opencollective.com/ryan1/avatar.png",
+            "name": "Jordan Harband",
+            "url": "https://twitter.com/LJHarb",
+            "image": "https://images.opencollective.com/ljharb/b75a3f8/avatar.png",
             "monthlyDonation": 500,
-            "totalDonations": 500
+            "totalDonations": 4500
         },
         {
             "name": "Eliseu Monar dos Santos",
@@ -217,18 +224,18 @@
             "totalDonations": 2000
         },
         {
+            "name": "0x Tracker",
+            "url": "https://0xtracker.com",
+            "image": "https://images.opencollective.com/0xtracker/b6f999b/logo.png",
+            "monthlyDonation": 500,
+            "totalDonations": 1000
+        },
+        {
             "name": "Namecoinnews",
             "url": "https://www.namecoinnews.com/",
             "image": "https://images.opencollective.com/namecoinnews/cce1efd/logo.png",
             "monthlyDonation": 500,
             "totalDonations": 1000
-        },
-        {
-            "name": "Matter",
-            "url": "https://matterapp.com",
-            "image": "https://images.opencollective.com/matter_hq/ac0a719/logo.png",
-            "monthlyDonation": 500,
-            "totalDonations": 1500
         },
         {
             "name": "Martin Desrumaux",
@@ -245,11 +252,11 @@
             "totalDonations": 2500
         },
         {
-            "name": "Jack Cross",
-            "url": null,
-            "image": "https://images.opencollective.com/jack-cross/7b02eda/avatar.png",
+            "name": "Matter",
+            "url": "https://matterapp.com",
+            "image": "https://images.opencollective.com/matter_hq/ac0a719/logo.png",
             "monthlyDonation": 500,
-            "totalDonations": 2000
+            "totalDonations": 1500
         },
         {
             "name": "Misaka Network, Inc.",
@@ -280,25 +287,25 @@
             "totalDonations": 4000
         },
         {
+            "name": "Jack Cross",
+            "url": null,
+            "image": "https://images.opencollective.com/jack-cross/7b02eda/avatar.png",
+            "monthlyDonation": 500,
+            "totalDonations": 2000
+        },
+        {
+            "name": "Ryan",
+            "url": null,
+            "image": "https://images.opencollective.com/ryan1/avatar.png",
+            "monthlyDonation": 500,
+            "totalDonations": 500
+        },
+        {
             "name": "James Sherwood-Jones",
             "url": null,
             "image": "https://images.opencollective.com/james-sherwood-jones/avatar.png",
             "monthlyDonation": 500,
             "totalDonations": 2000
-        },
-        {
-            "name": "Eric Lanehart",
-            "url": "http://pushred.co",
-            "image": "https://images.opencollective.com/pushred/506ad8d/avatar.png",
-            "monthlyDonation": 500,
-            "totalDonations": 4000
-        },
-        {
-            "name": "0x Tracker",
-            "url": "https://0xtracker.com",
-            "image": "https://images.opencollective.com/0xtracker/b6f999b/logo.png",
-            "monthlyDonation": 500,
-            "totalDonations": 1000
         },
         {
             "name": "AJ Klein",
@@ -413,11 +420,11 @@
             "totalDonations": 4500
         },
         {
-            "name": "Jordan Harband",
-            "url": "https://twitter.com/LJHarb",
-            "image": "https://images.opencollective.com/ljharb/b75a3f8/avatar.png",
+            "name": "Eric Lanehart",
+            "url": "http://pushred.co",
+            "image": "https://images.opencollective.com/pushred/506ad8d/avatar.png",
             "monthlyDonation": 500,
-            "totalDonations": 4500
+            "totalDonations": 4000
         },
         {
             "name": "Will McAuliff",
