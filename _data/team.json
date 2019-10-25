@@ -143,6 +143,12 @@
     ],
     "reviewers": [
         {
+            "username": "kaicataldo",
+            "name": "Kai Cataldo",
+            "website": "kaicataldo.com",
+            "avatar_url": "https://avatars2.githubusercontent.com/u/7041728?v=4"
+        },
+        {
             "username": "aladdin-add",
             "name": "薛定谔的猫",
             "website": "",
@@ -150,12 +156,6 @@
         }
     ],
     "committers": [
-        {
-            "username": "kaicataldo",
-            "name": "Kai Cataldo",
-            "website": "kaicataldo.com",
-            "avatar_url": "https://avatars2.githubusercontent.com/u/7041728?v=4"
-        },
         {
             "username": "g-plane",
             "name": "Pig Fang",
