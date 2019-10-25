@@ -32,14 +32,14 @@ Examples of **incorrect** code for this rule with the default `{ "max": 4 }` opt
 
 function foo() {
     for (;;) { // Nested 1 deep
-        let val = () => (param) => { // Nested 2 deep
+        while (true) { // Nested 2 deep
             if (true) { // Nested 3 deep
                 if (true) { // Nested 4 deep
                     if (true) { // Nested 5 deep
                     }
                 }
             }
-        };
+        }
     }
 }
 ```
@@ -52,12 +52,12 @@ Examples of **correct** code for this rule with the default `{ "max": 4 }` optio
 
 function foo() {
     for (;;) { // Nested 1 deep
-        let val = () => (param) => { // Nested 2 deep
-           if (true) { // Nested 3 deep
+        while (true) { // Nested 2 deep
+            if (true) { // Nested 3 deep
                 if (true) { // Nested 4 deep
                 }
             }
-        };
+        }
     }
 }
 ```
