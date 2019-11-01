@@ -210,11 +210,11 @@
             "totalDonations": 9600
         },
         {
-            "name": "Third Iron",
-            "url": "https://thirdiron.com",
-            "image": "https://images.opencollective.com/third_iron/fa6ec4d/logo.png",
+            "name": "Andrew Rota",
+            "url": "https://twitter.com/andrewrota",
+            "image": "https://images.opencollective.com/andrewrota/a124847/avatar.png",
             "monthlyDonation": 500,
-            "totalDonations": 5000
+            "totalDonations": 4500
         },
         {
             "name": "Jordan Harband",
@@ -284,7 +284,7 @@
             "url": "https://jblandry.info",
             "image": "https://images.opencollective.com/jblandry/e968bf5/avatar.png",
             "monthlyDonation": 500,
-            "totalDonations": 3500
+            "totalDonations": 4000
         },
         {
             "name": "Ivan Miskovic",
@@ -305,7 +305,7 @@
             "url": "http://pushred.co",
             "image": "https://images.opencollective.com/pushred/506ad8d/avatar.png",
             "monthlyDonation": 500,
-            "totalDonations": 4000
+            "totalDonations": 4500
         },
         {
             "name": "Namecoinnews",
@@ -322,16 +322,16 @@
             "totalDonations": 4500
         },
         {
-            "name": "Andrew Rota",
-            "url": "https://twitter.com/andrewrota",
-            "image": "https://images.opencollective.com/andrewrota/a124847/avatar.png",
-            "monthlyDonation": 500,
-            "totalDonations": 4500
-        },
-        {
             "name": "Alexey Raspopov",
             "url": "https://alexeyraspopov.com",
             "image": "https://images.opencollective.com/alexeyraspopov/d8c7a67/avatar.png",
+            "monthlyDonation": 500,
+            "totalDonations": 5000
+        },
+        {
+            "name": "Third Iron",
+            "url": "https://thirdiron.com",
+            "image": "https://images.opencollective.com/third_iron/fa6ec4d/logo.png",
             "monthlyDonation": 500,
             "totalDonations": 5000
         },
@@ -374,13 +374,6 @@
             "name": "Gavin Mogan",
             "url": "https://www.gavinmogan.com",
             "image": "https://images.opencollective.com/gavinmogan/305e987/avatar.png",
-            "monthlyDonation": 500,
-            "totalDonations": 5000
-        },
-        {
-            "name": "Jarrod Davis",
-            "url": "https://jarrodldavis.com/",
-            "image": "https://images.opencollective.com/jarrodldavis/c3c908f/avatar.png",
             "monthlyDonation": 500,
             "totalDonations": 5000
         },
