@@ -210,13 +210,6 @@
             "totalDonations": 4000
         },
         {
-            "name": "Alexey Raspopov",
-            "url": "https://alexeyraspopov.com",
-            "image": "https://images.opencollective.com/alexeyraspopov/d8c7a67/avatar.png",
-            "monthlyDonation": 500,
-            "totalDonations": 4500
-        },
-        {
             "name": "Jordan Harband",
             "url": "https://twitter.com/LJHarb",
             "image": "https://images.opencollective.com/ljharb/b75a3f8/avatar.png",
@@ -231,16 +224,16 @@
             "totalDonations": 2000
         },
         {
-            "name": "Ryan",
-            "url": null,
-            "image": "https://images.opencollective.com/ryan1/avatar.png",
-            "monthlyDonation": 500,
-            "totalDonations": 500
-        },
-        {
             "name": "0x Tracker",
             "url": "https://0xtracker.com",
             "image": "https://images.opencollective.com/0xtracker/b6f999b/logo.png",
+            "monthlyDonation": 500,
+            "totalDonations": 1000
+        },
+        {
+            "name": "Namecoinnews",
+            "url": "https://www.namecoinnews.com/",
+            "image": "https://images.opencollective.com/namecoinnews/cce1efd/logo.png",
             "monthlyDonation": 500,
             "totalDonations": 1000
         },
@@ -259,11 +252,11 @@
             "totalDonations": 2500
         },
         {
-            "name": "Namecoinnews",
-            "url": "https://www.namecoinnews.com/",
-            "image": "https://images.opencollective.com/namecoinnews/cce1efd/logo.png",
+            "name": "Matter",
+            "url": "https://matterapp.com",
+            "image": "https://images.opencollective.com/matter_hq/ac0a719/logo.png",
             "monthlyDonation": 500,
-            "totalDonations": 1000
+            "totalDonations": 1500
         },
         {
             "name": "Misaka Network, Inc.",
@@ -294,13 +287,6 @@
             "totalDonations": 4000
         },
         {
-            "name": "Matter",
-            "url": "https://matterapp.com",
-            "image": "https://images.opencollective.com/matter_hq/ac0a719/logo.png",
-            "monthlyDonation": 500,
-            "totalDonations": 1500
-        },
-        {
             "name": "Jack Cross",
             "url": null,
             "image": "https://images.opencollective.com/jack-cross/7b02eda/avatar.png",
@@ -313,6 +299,13 @@
             "image": "https://images.opencollective.com/james-sherwood-jones/avatar.png",
             "monthlyDonation": 500,
             "totalDonations": 2000
+        },
+        {
+            "name": "Joseph Percy",
+            "url": null,
+            "image": "https://images.opencollective.com/joseph-percy/avatar.png",
+            "monthlyDonation": 500,
+            "totalDonations": 4500
         },
         {
             "name": "AJ Klein",
@@ -420,9 +413,9 @@
             "totalDonations": 4500
         },
         {
-            "name": "Joseph Percy",
-            "url": null,
-            "image": "https://images.opencollective.com/joseph-percy/avatar.png",
+            "name": "Alexey Raspopov",
+            "url": "https://alexeyraspopov.com",
+            "image": "https://images.opencollective.com/alexeyraspopov/d8c7a67/avatar.png",
             "monthlyDonation": 500,
             "totalDonations": 4500
         },
@@ -438,7 +431,7 @@
             "url": "https://ksmith.io",
             "image": "https://images.opencollective.com/knksmith57/1b834b2/avatar.png",
             "monthlyDonation": 300,
-            "totalDonations": 1400
+            "totalDonations": 1700
         },
         {
             "name": "qnyp",
