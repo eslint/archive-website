@@ -210,11 +210,11 @@
             "totalDonations": 9600
         },
         {
-            "name": "Andrew Rota",
-            "url": "https://twitter.com/andrewrota",
-            "image": "https://images.opencollective.com/andrewrota/a124847/avatar.png",
+            "name": "Third Iron",
+            "url": "https://thirdiron.com",
+            "image": "https://images.opencollective.com/third_iron/fa6ec4d/logo.png",
             "monthlyDonation": 500,
-            "totalDonations": 4500
+            "totalDonations": 5000
         },
         {
             "name": "Jordan Harband",
@@ -322,16 +322,16 @@
             "totalDonations": 4500
         },
         {
+            "name": "Andrew Rota",
+            "url": "https://twitter.com/andrewrota",
+            "image": "https://images.opencollective.com/andrewrota/a124847/avatar.png",
+            "monthlyDonation": 500,
+            "totalDonations": 4500
+        },
+        {
             "name": "Alexey Raspopov",
             "url": "https://alexeyraspopov.com",
             "image": "https://images.opencollective.com/alexeyraspopov/d8c7a67/avatar.png",
-            "monthlyDonation": 500,
-            "totalDonations": 5000
-        },
-        {
-            "name": "Third Iron",
-            "url": "https://thirdiron.com",
-            "image": "https://images.opencollective.com/third_iron/fa6ec4d/logo.png",
             "monthlyDonation": 500,
             "totalDonations": 5000
         },
@@ -360,6 +360,13 @@
             "name": "Simon Korzun",
             "url": "http://korzun.com",
             "image": "https://images.opencollective.com/simon-korzun/cbdefdd/avatar.png",
+            "monthlyDonation": 500,
+            "totalDonations": 5000
+        },
+        {
+            "name": "Mariusz Nowak",
+            "url": "https://medikoo.com",
+            "image": "https://images.opencollective.com/medikoo/f16a7ea/avatar.png",
             "monthlyDonation": 500,
             "totalDonations": 5000
         },
