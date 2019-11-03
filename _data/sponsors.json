@@ -210,16 +210,23 @@
             "totalDonations": 9600
         },
         {
-            "name": "Third Iron",
-            "url": "https://thirdiron.com",
-            "image": "https://images.opencollective.com/third_iron/fa6ec4d/logo.png",
+            "name": "Alexey Raspopov",
+            "url": "https://alexeyraspopov.com",
+            "image": "https://images.opencollective.com/alexeyraspopov/d8c7a67/avatar.png",
             "monthlyDonation": 500,
             "totalDonations": 5000
         },
         {
-            "name": "Jordan Harband",
-            "url": "https://twitter.com/LJHarb",
-            "image": "https://images.opencollective.com/ljharb/b75a3f8/avatar.png",
+            "name": "Nubz Ltd",
+            "url": "http://nubz.com",
+            "image": "https://images.opencollective.com/nubz/logo.png",
+            "monthlyDonation": 500,
+            "totalDonations": 5000
+        },
+        {
+            "name": "Joseph Percy",
+            "url": null,
+            "image": "https://images.opencollective.com/joseph-percy/avatar.png",
             "monthlyDonation": 500,
             "totalDonations": 5000
         },
@@ -231,18 +238,18 @@
             "totalDonations": 2500
         },
         {
-            "name": "James Sherwood-Jones",
+            "name": "Oliver Sieweke",
             "url": null,
-            "image": "https://images.opencollective.com/james-sherwood-jones/avatar.png",
+            "image": "https://images.opencollective.com/oliver-sieweke/avatar.png",
             "monthlyDonation": 500,
-            "totalDonations": 2500
+            "totalDonations": 2000
         },
         {
-            "name": "Jack Cross",
-            "url": null,
-            "image": "https://images.opencollective.com/jack-cross/7b02eda/avatar.png",
+            "name": "0x Tracker",
+            "url": "https://0xtracker.com",
+            "image": "https://images.opencollective.com/0xtracker/b6f999b/logo.png",
             "monthlyDonation": 500,
-            "totalDonations": 2500
+            "totalDonations": 1500
         },
         {
             "name": "Martin Desrumaux",
@@ -259,11 +266,11 @@
             "totalDonations": 3000
         },
         {
-            "name": "Matter",
-            "url": "https://matterapp.com",
-            "image": "https://images.opencollective.com/matter_hq/ac0a719/logo.png",
+            "name": "Namecoinnews",
+            "url": "https://www.namecoinnews.com/",
+            "image": "https://images.opencollective.com/namecoinnews/cce1efd/logo.png",
             "monthlyDonation": 500,
-            "totalDonations": 2000
+            "totalDonations": 1500
         },
         {
             "name": "Misaka Network, Inc.",
@@ -294,11 +301,11 @@
             "totalDonations": 4500
         },
         {
-            "name": "Joseph Percy",
-            "url": null,
-            "image": "https://images.opencollective.com/joseph-percy/avatar.png",
+            "name": "Matter",
+            "url": "https://matterapp.com",
+            "image": "https://images.opencollective.com/matter_hq/ac0a719/logo.png",
             "monthlyDonation": 500,
-            "totalDonations": 5000
+            "totalDonations": 2000
         },
         {
             "name": "Eric Lanehart",
@@ -308,11 +315,11 @@
             "totalDonations": 4500
         },
         {
-            "name": "Namecoinnews",
-            "url": "https://www.namecoinnews.com/",
-            "image": "https://images.opencollective.com/namecoinnews/cce1efd/logo.png",
+            "name": "Jack Cross",
+            "url": null,
+            "image": "https://images.opencollective.com/jack-cross/7b02eda/avatar.png",
             "monthlyDonation": 500,
-            "totalDonations": 1500
+            "totalDonations": 2500
         },
         {
             "name": "AJ Klein",
@@ -329,9 +336,9 @@
             "totalDonations": 4500
         },
         {
-            "name": "Alexey Raspopov",
-            "url": "https://alexeyraspopov.com",
-            "image": "https://images.opencollective.com/alexeyraspopov/d8c7a67/avatar.png",
+            "name": "Third Iron",
+            "url": "https://thirdiron.com",
+            "image": "https://images.opencollective.com/third_iron/fa6ec4d/logo.png",
             "monthlyDonation": 500,
             "totalDonations": 5000
         },
@@ -406,25 +413,18 @@
             "totalDonations": 5000
         },
         {
-            "name": "Nubz Ltd",
-            "url": "http://nubz.com",
-            "image": "https://images.opencollective.com/nubz/logo.png",
+            "name": "James Sherwood-Jones",
+            "url": null,
+            "image": "https://images.opencollective.com/james-sherwood-jones/avatar.png",
+            "monthlyDonation": 500,
+            "totalDonations": 2500
+        },
+        {
+            "name": "Jordan Harband",
+            "url": "https://twitter.com/LJHarb",
+            "image": "https://images.opencollective.com/ljharb/b75a3f8/avatar.png",
             "monthlyDonation": 500,
             "totalDonations": 5000
-        },
-        {
-            "name": "0x Tracker",
-            "url": "https://0xtracker.com",
-            "image": "https://images.opencollective.com/0xtracker/b6f999b/logo.png",
-            "monthlyDonation": 500,
-            "totalDonations": 1500
-        },
-        {
-            "name": "Kyle Smith",
-            "url": "https://ksmith.io",
-            "image": "https://images.opencollective.com/knksmith57/1b834b2/avatar.png",
-            "monthlyDonation": 300,
-            "totalDonations": 1700
         },
         {
             "name": "Will McAuliff",
@@ -432,6 +432,13 @@
             "image": "https://images.opencollective.com/womcauliff/2be6f36/avatar.png",
             "monthlyDonation": 300,
             "totalDonations": 3700
+        },
+        {
+            "name": "Kyle Smith",
+            "url": "https://ksmith.io",
+            "image": "https://images.opencollective.com/knksmith57/1b834b2/avatar.png",
+            "monthlyDonation": 300,
+            "totalDonations": 1700
         },
         {
             "name": "qnyp",
