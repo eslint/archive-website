@@ -6,57 +6,17 @@ homepage: true
 ---
 
 <div class="row">
-    <div class="col-md-12">
-        <h3>Welcome</h3>
-
-        <p class="lead">ESLint is an open source project originally created by <a href="http://nczonline.net">Nicholas
-            C. Zakas</a> in June 2013. Its goal is to provide a pluggable linting utility for JavaScript.</p>
-
-        <h3>Latest News</h3>
-        {% assign post = site.posts.first %}
-        <ul>
-            <li class="{{ post.popular }} {{ post.new }}">
-                <a href="{{ post.url }}">{{ post.title }}</a>
-                <span class="date">{{ post.date | date: "%-d %B %Y" }}</span>
-            </li>
-        </ul>
+    <div class="col-md-4">
+        <h3>Find Problems</h3>
+        <p>ESLint statically analyzes your code to quickly find problems. ESLint is built into most text editors and you can run ESLint as part of your continuous integration pipeline.</p>
     </div>
-</div>
-
-<hr class="hr-near-above">
-
-<div class="row">
-    <div class="col-sm-6 col-md-6">
-        <h3>About</h3>
-
-        <p>Learn more about ESLint and why it came about and the general philosophy behind it. </p>
-
-        <p><a class="btn btn-default" href="{{ site.url }}/docs/about/" role="button">Learn More »</a></p>
+    <div class="col-md-4">
+        <h3>Fix Automatically</h3>
+        <p>Many problems ESLint finds can be automatically fixed. ESLint fixes are syntax-aware so you won't experience errors introduced by traditional find-and-replace algorithms.</p>
     </div>
-    <div class="col-sm-6 col-md-6">
-        <h3>Rules</h3>
-
-        <p>ESLint comes with a bunch of default rules to get you started. This is the complete list. </p>
-
-        <p><a class="btn btn-default" href="{{ site.url }}/docs/rules/" role="button">See List »</a></p>
-    </div>
-</div>
-
-<div class="row">
-    <div class="col-sm-6 col-md-6">
-        <h3>Command Line Interface</h3>
-
-        <p>ESLint is written to be used primarily on the command line. Learn about its usage here. </p>
-
-        <p><a class="btn btn-default" href="{{ site.url }}/docs/user-guide/command-line-interface" role="button">CLI Details
-            »</a></p>
-    </div>
-    <div class="col-sm-6 col-md-6">
-        <h3>Developer Guide</h3>
-
-        <p>Love ESLint and want to help make it even awesomer? We've got all the details to get you started.</p>
-
-        <p><a class="btn btn-default" href="{{ site.url }}/docs/developer-guide/" role="button">Start Hacking »</a></p>
+    <div class="col-md-4">
+        <h3>Customize</h3>
+        <p>Preprocess code, use custom parsers, and write your own rules that work alongside ESLint's built-in rules. You can customize ESLint to work exactly the way you need it for your project.</p>
     </div>
 </div>
 
