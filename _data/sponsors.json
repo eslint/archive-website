@@ -182,6 +182,20 @@
             "totalDonations": 12000
         },
         {
+            "name": "Ben Truyman",
+            "url": "https://github.com/bentruyman",
+            "image": "https://images.opencollective.com/bentruyman/9dc2d16/avatar.png",
+            "monthlyDonation": 1000,
+            "totalDonations": 1000
+        },
+        {
+            "name": "Patrick",
+            "url": "https://twitter.com/PatrickMWalther",
+            "image": "https://images.opencollective.com/patrick1/a9f87be/avatar.png",
+            "monthlyDonation": 1000,
+            "totalDonations": 1000
+        },
+        {
             "name": "Moxio",
             "url": "https://moxio.com",
             "image": "https://images.opencollective.com/moxio/9fa53c1/logo.png",
@@ -194,13 +208,6 @@
             "image": "https://images.opencollective.com/kevin-partington/54f2124/avatar.png",
             "monthlyDonation": 1000,
             "totalDonations": 6000
-        },
-        {
-            "name": "Patrick",
-            "url": "https://twitter.com/PatrickMWalther",
-            "image": "https://images.opencollective.com/patrick1/a9f87be/avatar.png",
-            "monthlyDonation": 1000,
-            "totalDonations": 1000
         },
         {
             "name": "Benjamin Piouffle",
@@ -238,11 +245,11 @@
             "totalDonations": 2500
         },
         {
-            "name": "Oliver Sieweke",
-            "url": null,
-            "image": "https://images.opencollective.com/oliver-sieweke/avatar.png",
+            "name": "Jordan Harband",
+            "url": "https://twitter.com/LJHarb",
+            "image": "https://images.opencollective.com/ljharb/b75a3f8/avatar.png",
             "monthlyDonation": 500,
-            "totalDonations": 2000
+            "totalDonations": 5000
         },
         {
             "name": "0x Tracker",
@@ -294,11 +301,11 @@
             "totalDonations": 4000
         },
         {
-            "name": "Ivan Miskovic",
-            "url": "https://twitter.com/ivanandsickle",
-            "image": "https://images.opencollective.com/ivanandsickle/avatar.png",
+            "name": "Oliver Sieweke",
+            "url": null,
+            "image": "https://images.opencollective.com/oliver-sieweke/avatar.png",
             "monthlyDonation": 500,
-            "totalDonations": 4500
+            "totalDonations": 2000
         },
         {
             "name": "Matter",
@@ -420,11 +427,11 @@
             "totalDonations": 2500
         },
         {
-            "name": "Jordan Harband",
-            "url": "https://twitter.com/LJHarb",
-            "image": "https://images.opencollective.com/ljharb/b75a3f8/avatar.png",
+            "name": "Ivan Miskovic",
+            "url": "https://twitter.com/ivanandsickle",
+            "image": "https://images.opencollective.com/ivanandsickle/avatar.png",
             "monthlyDonation": 500,
-            "totalDonations": 5000
+            "totalDonations": 4500
         },
         {
             "name": "Will McAuliff",
