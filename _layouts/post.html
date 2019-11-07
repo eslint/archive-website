@@ -1,11 +1,30 @@
 {% include header.html %}
 {% include menu.html %}
-<main class="blog">
-  <article class="container">
-    {{ content }}
-    <footer>
-      <p class="text-center">ESLint depends on the support of individuals and companies. <a class="btn btn-default" href="https://opencollective.com/eslint">Become a Sponsor</a></p>
-    </footer>
-  </article>
-</main>
+<div class="container">
+  <div class="row">
+    <div class="col-md-8">
+      <main class="blog">
+        <article>
+          {{ content }}
+          <footer>
+            <p class="text-center">ESLint depends on the support of individuals and companies. <a class="btn btn-default" href="https://opencollective.com/eslint">Become a Sponsor</a></p>
+          </footer>
+        </article>
+      </main>
+    </div>
+    <div class="col-md-4 hidden-xs hidden-sm">
+      <h2>Recent Posts</h2>
+      <ul class="posts">
+        {% for post in site.posts limit: 25 %}
+          {% if post.url != page.url %}
+            <li class="{{ post.popular }} {{ post.new }}">
+              <a href="{{ post.url }}">{{ post.title }}</a><br>
+              <span class="date">{{ post.date | date: "%-d %B %Y" }}</span>
+            </li>
+          {% endif %}
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+</div>
 {% include footer.html %}
