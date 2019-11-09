@@ -182,16 +182,30 @@
             "totalDonations": 12000
         },
         {
-            "name": "Ben Truyman",
-            "url": "https://github.com/bentruyman",
-            "image": "https://images.opencollective.com/bentruyman/9dc2d16/avatar.png",
+            "name": "Benjamin Piouffle",
+            "url": "https://benjamin.piouffle.com",
+            "image": "https://images.opencollective.com/betree/6c68f43/avatar.png",
             "monthlyDonation": 1000,
-            "totalDonations": 1000
+            "totalDonations": 9600
         },
         {
             "name": "Patrick",
             "url": "https://twitter.com/PatrickMWalther",
             "image": "https://images.opencollective.com/patrick1/a9f87be/avatar.png",
+            "monthlyDonation": 1000,
+            "totalDonations": 1000
+        },
+        {
+            "name": "Kevin Partington",
+            "url": null,
+            "image": "https://images.opencollective.com/kevin-partington/54f2124/avatar.png",
+            "monthlyDonation": 1000,
+            "totalDonations": 6000
+        },
+        {
+            "name": "Ben Truyman",
+            "url": "https://github.com/bentruyman",
+            "image": "https://images.opencollective.com/bentruyman/9dc2d16/avatar.png",
             "monthlyDonation": 1000,
             "totalDonations": 1000
         },
@@ -203,46 +217,11 @@
             "totalDonations": 21000
         },
         {
-            "name": "Kevin Partington",
-            "url": null,
-            "image": "https://images.opencollective.com/kevin-partington/54f2124/avatar.png",
-            "monthlyDonation": 1000,
-            "totalDonations": 6000
-        },
-        {
-            "name": "Benjamin Piouffle",
-            "url": "https://benjamin.piouffle.com",
-            "image": "https://images.opencollective.com/betree/6c68f43/avatar.png",
-            "monthlyDonation": 1000,
-            "totalDonations": 9600
-        },
-        {
-            "name": "Alexey Raspopov",
-            "url": "https://alexeyraspopov.com",
-            "image": "https://images.opencollective.com/alexeyraspopov/d8c7a67/avatar.png",
+            "name": "Third Iron",
+            "url": "https://thirdiron.com",
+            "image": "https://images.opencollective.com/third_iron/fa6ec4d/logo.png",
             "monthlyDonation": 500,
             "totalDonations": 5000
-        },
-        {
-            "name": "Nubz Ltd",
-            "url": "http://nubz.com",
-            "image": "https://images.opencollective.com/nubz/logo.png",
-            "monthlyDonation": 500,
-            "totalDonations": 5000
-        },
-        {
-            "name": "Joseph Percy",
-            "url": null,
-            "image": "https://images.opencollective.com/joseph-percy/avatar.png",
-            "monthlyDonation": 500,
-            "totalDonations": 5000
-        },
-        {
-            "name": "Eliseu Monar dos Santos",
-            "url": "https://medium.com/@eliseumds",
-            "image": "https://images.opencollective.com/eliseu/f4e6dad/avatar.png",
-            "monthlyDonation": 500,
-            "totalDonations": 2500
         },
         {
             "name": "Jordan Harband",
@@ -252,11 +231,32 @@
             "totalDonations": 5000
         },
         {
-            "name": "0x Tracker",
-            "url": "https://0xtracker.com",
-            "image": "https://images.opencollective.com/0xtracker/b6f999b/logo.png",
+            "name": "James Sherwood-Jones",
+            "url": null,
+            "image": "https://images.opencollective.com/james-sherwood-jones/avatar.png",
             "monthlyDonation": 500,
-            "totalDonations": 1500
+            "totalDonations": 2500
+        },
+        {
+            "name": "Eliseu Monar dos Santos",
+            "url": "https://medium.com/@eliseumds",
+            "image": "https://images.opencollective.com/eliseu/f4e6dad/avatar.png",
+            "monthlyDonation": 500,
+            "totalDonations": 2500
+        },
+        {
+            "name": "Jack Cross",
+            "url": null,
+            "image": "https://images.opencollective.com/jack-cross/7b02eda/avatar.png",
+            "monthlyDonation": 500,
+            "totalDonations": 2500
+        },
+        {
+            "name": "Matter",
+            "url": "https://matterapp.com",
+            "image": "https://images.opencollective.com/matter_hq/ac0a719/logo.png",
+            "monthlyDonation": 500,
+            "totalDonations": 2000
         },
         {
             "name": "Martin Desrumaux",
@@ -280,13 +280,6 @@
             "totalDonations": 1500
         },
         {
-            "name": "Misaka Network, Inc.",
-            "url": "https://www.misaka.io/dns/?utm_source=opencollective",
-            "image": "https://images.opencollective.com/misaka/60c568f/logo.png",
-            "monthlyDonation": 500,
-            "totalDonations": 3500
-        },
-        {
             "name": "Alexandre Morgaut",
             "url": "https://www.quora.com/profile/Alexandre-Morgaut",
             "image": "https://images.opencollective.com/alexandre-morgaut/6e3c8d4/avatar.png",
@@ -301,16 +294,16 @@
             "totalDonations": 4000
         },
         {
+            "name": "Ivan Miskovic",
+            "url": "https://twitter.com/ivanandsickle",
+            "image": "https://images.opencollective.com/ivanandsickle/avatar.png",
+            "monthlyDonation": 500,
+            "totalDonations": 4500
+        },
+        {
             "name": "Oliver Sieweke",
             "url": null,
             "image": "https://images.opencollective.com/oliver-sieweke/avatar.png",
-            "monthlyDonation": 500,
-            "totalDonations": 2000
-        },
-        {
-            "name": "Matter",
-            "url": "https://matterapp.com",
-            "image": "https://images.opencollective.com/matter_hq/ac0a719/logo.png",
             "monthlyDonation": 500,
             "totalDonations": 2000
         },
@@ -322,11 +315,11 @@
             "totalDonations": 4500
         },
         {
-            "name": "Jack Cross",
-            "url": null,
-            "image": "https://images.opencollective.com/jack-cross/7b02eda/avatar.png",
+            "name": "0x Tracker",
+            "url": "https://0xtracker.com",
+            "image": "https://images.opencollective.com/0xtracker/b6f999b/logo.png",
             "monthlyDonation": 500,
-            "totalDonations": 2500
+            "totalDonations": 1500
         },
         {
             "name": "AJ Klein",
@@ -343,9 +336,9 @@
             "totalDonations": 4500
         },
         {
-            "name": "Third Iron",
-            "url": "https://thirdiron.com",
-            "image": "https://images.opencollective.com/third_iron/fa6ec4d/logo.png",
+            "name": "Joseph Percy",
+            "url": null,
+            "image": "https://images.opencollective.com/joseph-percy/avatar.png",
             "monthlyDonation": 500,
             "totalDonations": 5000
         },
@@ -420,18 +413,18 @@
             "totalDonations": 5000
         },
         {
-            "name": "James Sherwood-Jones",
-            "url": null,
-            "image": "https://images.opencollective.com/james-sherwood-jones/avatar.png",
+            "name": "Alexey Raspopov",
+            "url": "https://alexeyraspopov.com",
+            "image": "https://images.opencollective.com/alexeyraspopov/d8c7a67/avatar.png",
             "monthlyDonation": 500,
-            "totalDonations": 2500
+            "totalDonations": 5000
         },
         {
-            "name": "Ivan Miskovic",
-            "url": "https://twitter.com/ivanandsickle",
-            "image": "https://images.opencollective.com/ivanandsickle/avatar.png",
+            "name": "Nubz Ltd",
+            "url": "http://nubz.com",
+            "image": "https://images.opencollective.com/nubz/logo.png",
             "monthlyDonation": 500,
-            "totalDonations": 4500
+            "totalDonations": 5000
         },
         {
             "name": "Will McAuliff",
@@ -448,18 +441,18 @@
             "totalDonations": 1700
         },
         {
-            "name": "qnyp",
-            "url": "https://qnyp.com",
-            "image": "https://images.opencollective.com/qnyp/4da3762/logo.png",
-            "monthlyDonation": 200,
-            "totalDonations": 3200
-        },
-        {
             "name": "Anton Alexandrenok",
             "url": "https://github.com/the-spyke",
             "image": "https://images.opencollective.com/antonalexandrenok/c561172/avatar.png",
             "monthlyDonation": 200,
             "totalDonations": 200
+        },
+        {
+            "name": "qnyp",
+            "url": "https://qnyp.com",
+            "image": "https://images.opencollective.com/qnyp/4da3762/logo.png",
+            "monthlyDonation": 200,
+            "totalDonations": 3200
         }
     ]
 }
