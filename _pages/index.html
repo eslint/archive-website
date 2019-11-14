@@ -21,11 +21,23 @@ homepage: true
 </div>
 
 <hr class="hr-near-below">
+{% assign tiers = "gold,silver,bronze,backers" | split: "," %}
+{% assign monthlyTotal = 0 %}
+{% assign supportersCount = 0 %}
+{% for tier in tiers %}
+    {% if site.data.sponsors[tier].size > 0 %}
+        {% for sponsor in site.data.sponsors[tier] %}
+            {% assign supportersCount = supportersCount | plus: 1 %}
+            {% assign monthlyTotal = monthlyTotal | plus: sponsor.monthlyDonation %}
+        {% endfor %}
+    {% endif %}
+{% endfor %}
+{% assign monthlyTotal = monthlyTotal | divided_by: 100 %}
 
 <div class="row">
   <div class="col-sm-12">
     <h2 class="text-center">Sponsors</h2>
-    <p class="text-center">The following companies, organizations, and individuals support ESLint's ongoing maintenance and development.</p>
+    <p class="text-center">{{ supportersCount }} companies, organizations, and individuals are currently contributing <b>${{ monthlyTotal }}</b> each month to support ESLint's ongoing maintenance and development.</p>
     {% assign tiers = "gold,silver,bronze" | split: "," %}
     {% for tier in tiers %}
         {% if site.data.sponsors[tier].size > 0 %}
