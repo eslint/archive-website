@@ -231,16 +231,16 @@
             "totalDonations": 5000
         },
         {
-            "name": "James Sherwood-Jones",
-            "url": null,
-            "image": "https://images.opencollective.com/james-sherwood-jones/avatar.png",
+            "name": "Eliseu Monar dos Santos",
+            "url": "https://medium.com/@eliseumds",
+            "image": "https://images.opencollective.com/eliseu/f4e6dad/avatar.png",
             "monthlyDonation": 500,
             "totalDonations": 2500
         },
         {
-            "name": "Eliseu Monar dos Santos",
-            "url": "https://medium.com/@eliseumds",
-            "image": "https://images.opencollective.com/eliseu/f4e6dad/avatar.png",
+            "name": "James Sherwood-Jones",
+            "url": null,
+            "image": "https://images.opencollective.com/james-sherwood-jones/avatar.png",
             "monthlyDonation": 500,
             "totalDonations": 2500
         },
@@ -250,13 +250,6 @@
             "image": "https://images.opencollective.com/jack-cross/7b02eda/avatar.png",
             "monthlyDonation": 500,
             "totalDonations": 2500
-        },
-        {
-            "name": "Matter",
-            "url": "https://matterapp.com",
-            "image": "https://images.opencollective.com/matter_hq/ac0a719/logo.png",
-            "monthlyDonation": 500,
-            "totalDonations": 2000
         },
         {
             "name": "Martin Desrumaux",
@@ -273,11 +266,11 @@
             "totalDonations": 3000
         },
         {
-            "name": "Namecoinnews",
-            "url": "https://www.namecoinnews.com/",
-            "image": "https://images.opencollective.com/namecoinnews/cce1efd/logo.png",
+            "name": "Matter",
+            "url": "https://matterapp.com",
+            "image": "https://images.opencollective.com/matter_hq/ac0a719/logo.png",
             "monthlyDonation": 500,
-            "totalDonations": 1500
+            "totalDonations": 2000
         },
         {
             "name": "Alexandre Morgaut",
@@ -427,18 +420,18 @@
             "totalDonations": 5000
         },
         {
-            "name": "Will McAuliff",
-            "url": "https://twitter.com/womcauliff",
-            "image": "https://images.opencollective.com/womcauliff/2be6f36/avatar.png",
-            "monthlyDonation": 300,
-            "totalDonations": 3700
-        },
-        {
             "name": "Kyle Smith",
             "url": "https://ksmith.io",
             "image": "https://images.opencollective.com/knksmith57/1b834b2/avatar.png",
             "monthlyDonation": 300,
             "totalDonations": 1700
+        },
+        {
+            "name": "Will McAuliff",
+            "url": "https://twitter.com/womcauliff",
+            "image": "https://images.opencollective.com/womcauliff/2be6f36/avatar.png",
+            "monthlyDonation": 300,
+            "totalDonations": 3700
         },
         {
             "name": "Anton Alexandrenok",
