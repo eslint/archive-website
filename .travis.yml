@@ -1,12 +1,6 @@
-language: ruby
-rvm:
- - 2.5
-cache: bundler
+language: node_js
 branches:
   only:
     - master
-before_install:
-  - nvm install 8
-  - npm install
 script:
   - npm run lint && npm run build

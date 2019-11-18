@@ -11,14 +11,13 @@
     "node": ">=8.0.0"
   },
   "scripts": {
-    "build:jekyll": "bundle exec jekyll build",
+    "build:eleventy": "eleventy",
     "build:webpack": "webpack --mode=production",
     "build:less": "lessc src/styles/main.less assets/build/styles/main.css --clean-css --source-map=assets/build/styles/main.css.map",
-    "build": "npm run build:less && npm run build:webpack && npm run build:jekyll",
-    "start:jekyll": "bundle exec jekyll serve --config _config.yml,_config.dev.yml",
+    "build": "npm run build:less && npm run build:webpack && npm run build:eleventy",
+    "start:eleventy": "eleventy --serve",
     "start:webpack": "webpack -w --mode=development",
-    "start:docker": "npm run build:less && docker run --rm -v `pwd`:/srv/jekyll -p 4000:4000 -it jekyll/jekyll:3.8 jekyll serve -V --config _config.yml,_config.dev.yml",
-    "start": "npm run build:less && npm run start:jekyll",
+    "start": "npm run build:less && npm run start:eleventy",
     "lint": "eslint --ext=.js,.jsx .",
     "lint:fix": "npm run lint -- --fix",
     "test": "npm run lint"
@@ -43,6 +42,7 @@
     "react-dom": "^16.8.6"
   },
   "devDependencies": {
+    "@11ty/eleventy": "^0.9.0",
     "@babel/core": "^7.4.5",
     "@babel/preset-env": "^7.4.5",
     "@babel/preset-react": "^7.0.0",

@@ -1,7 +1,7 @@
 ---
 title: "Who's Using ESLint?"
 layout: doc
-permalink: /users
+permalink: /users/index.html
 edit_link: https://github.com/eslint/eslint.github.io/edit/master/_pages/users.md
 ---
 

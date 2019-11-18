@@ -1,7 +1,7 @@
 ---
 title: Team
 layout: doc
-permalink: /team
+permalink: /team/index.html
 edit_link: https://github.com/eslint/eslint.github.io/edit/master/_pages/team.md
 ---
 
