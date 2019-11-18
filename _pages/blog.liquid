@@ -1,0 +1,16 @@
+---
+title: ESLint Blog
+layout: doc
+permalink: /blog/index.html
+edit_link: https://github.com/eslint/eslint.github.io/edit/master/_pages/blog.html
+---
+<br/>
+<ul class="posts">
+{% for post in collections.posts %}
+  <li>
+    <a href="{{ post.url | url }}">{{ post.data.title }}</a>
+    <span class="date">{{ post.date | date: "D MMMM YYYY" }}</span>
+    <span class="num-words"><em>{{ post.templateContent | numberOfWords }}</em> words</span>
+  </li>
+{% endfor %}
+</ul>
