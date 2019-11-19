@@ -4,10 +4,16 @@ const fs = require("fs");
 const { addFilters } = require("./_11ty/filters");
 
 module.exports = function(eleventyConfig) {
+
+    // Add filters to be used in templates.
     addFilters(eleventyConfig);
 
+    // Add collection of blog posts.
     eleventyConfig.addCollection("posts", collection => collection.getFilteredByGlob("_posts/*.md").reverse());
+
+    // Copy over static assets.
     eleventyConfig.addPassthroughCopy("assets");
+    eleventyConfig.addPassthroughCopy({ "public/*": "." });
     eleventyConfig.addPassthroughCopy("docs/**/*.svg");
 
     // Handle 404s when developing locally.
