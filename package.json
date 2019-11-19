@@ -24,8 +24,8 @@
     "start:webpack": "webpack -w --mode=development",
     "start": "npm run build:less && npm run start:eleventy",
     "lint": "eslint --ext=.js,.jsx .",
-    "lint:fix": "npm run lint -- --fix",
-    "test": "npm run lint"
+    "test": "npm run lint",
+    "fix": "npm run lint -- --fix"
   },
   "dependencies": {
     "anchor-js": "^4.2.0",
