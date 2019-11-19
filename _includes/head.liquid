@@ -7,18 +7,18 @@
   <meta name="theme-color" content="#463fd4"/>
   <meta property="og:locale" content="en_US">
   <meta property="og:site_name" content="{{ site.title }}">
-  <meta property="og:title" content="{{ page.data.title }}">
+  <meta property="og:title" content="{{ title }}">
   <meta property="og:url" content="{{ page.url }}">
   <meta property="og:image" content="/assets/img/favicon.512x512.png">
   <meta name="twitter:site" content="@geteslint">
-  <meta name="twitter:title" content="{{ page.data.title }}">
+  <meta name="twitter:title" content="{{ title }}">
   <meta name="twitter:description" content="{{ site.description }}">
   <meta name="twitter:url" content="{{ page.url }}">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:image" content="/assets/img/favicon.512x512.png">
-  {% if page.data.title != site.title %}
-      {% if page.data.title != "ESLint" %}
-          <title>{{ page.data.title }} - {{ site.title }}</title>
+  {% if title != site.title %}
+      {% if title != "ESLint" %}
+          <title>{{ title }} - {{ site.title }}</title>
       {% else %}
           <title>{{ site.title }}</title>
       {% endif %}
