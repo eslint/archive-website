@@ -13,7 +13,7 @@
   },
   "homepage": "https://github.com/eslint/eslint.github.io#readme",
   "engines": {
-    "node": ">=8.0.0"
+    "node": ">=12.0.0"
   },
   "scripts": {
     "build:eleventy": "eleventy",
