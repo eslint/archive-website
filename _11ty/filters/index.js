@@ -45,7 +45,7 @@ const filters = {
         parser.parseComplete(templateContent);
         return htmlTextContent.trim().split(/\s+/).length;
     }
-}
+};
 
 module.exports = {
     addFilters(eleventyConfig) {
@@ -53,4 +53,4 @@ module.exports = {
             eleventyConfig.addFilter(name, filter);
         }
     }
-}
+};
