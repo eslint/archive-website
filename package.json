@@ -1,12 +1,17 @@
 {
   "name": "eslint.github.io",
-  "version": "1.0.0",
   "private": true,
+  "version": "1.0.0",
   "description": "This contains the code running on eslint.org.",
-  "main": "index.js",
-  "directories": {
-    "doc": "docs"
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/eslint/eslint.github.io.git"
   },
+  "bugs": {
+    "url": "https://github.com/eslint/eslint.github.io/issues"
+  },
+  "homepage": "https://github.com/eslint/eslint.github.io#readme",
   "engines": {
     "node": ">=8.0.0"
   },
@@ -22,16 +27,6 @@
     "lint:fix": "npm run lint -- --fix",
     "test": "npm run lint"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/eslint/eslint.github.io.git"
-  },
-  "author": "",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/eslint/eslint.github.io/issues"
-  },
-  "homepage": "https://github.com/eslint/eslint.github.io#readme",
   "dependencies": {
     "anchor-js": "^4.2.0",
     "bootstrap": "^3.4.1",
