@@ -1,0 +1,63 @@
+---
+title: Team
+layout: doc
+permalink: /team/index.html
+edit_link: https://github.com/eslint/eslint.github.io/edit/master/_pages/team.md
+---
+
+<h1>Team</h1>
+<p>These are the people who build and maintain ESLint.</p>
+<h2>Technical Steering Committee</h2>
+<p>The people who manage releases, review feature requests, and meet regularly to ensure ESLint is properly maintained.</p>
+<div class="container-fluid">
+    <div class="row">
+        {% for person in team.tsc %}
+            <div class="col-xs-6 col-sm-4 col-md-3 text-center" style="margin-bottom: 2rem">
+            <a href="https://github.com/{{ person.username }}"><img src="https://github.com/{{person.username}}.png?s=150" width="150"></a><br>
+            {{ person.name }}<br><a href="https://github.com/{{ person.username }}">@{{ person.username }}</a>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+{% if team.reviewers.size > 0 %}
+    <h2>Reviewers</h2>
+    <p>The people who review and implement new features.</p>
+    <div class="container-fluid">
+        <div class="row">
+            {% for person in team.reviewers %}
+                <div class="col-xs-6 col-sm-4 col-md-3 text-center" style="margin-bottom: 2rem">
+                <a href="https://github.com/{{ person.username }}"><img src="https://github.com/{{person.username}}.png?s=150" width="150"></a><br>
+                {{ person.name }}<br><a href="https://github.com/{{ person.username }}">@{{ person.username }}</a>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endif %}
+{% if team.committers.size > 0 %}
+    <h2>Committers</h2>
+    <p>The people who review and fix bugs and help triage issues.</p>
+    <div class="container-fluid">
+        <div class="row">
+            {% for person in team.committers %}
+                <div class="col-xs-6 col-sm-4 col-md-3 text-center" style="margin-bottom: 2rem">
+                <a href="https://github.com/{{ person.username }}"><img src="https://github.com/{{person.username}}.png?s=150" width="150"></a><br>
+                {{ person.name }}<br><a href="https://github.com/{{ person.username }}">@{{ person.username }}</a>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endif %}
+{% if team.alumni.size > 0 %}
+    <h2>Alumni</h2>
+    <p>Former TSC members and committers who previously helped maintain ESLint.</p>
+    <div class="container-fluid">
+        <div class="row">
+        {% for person in team.alumni %}
+            <div class="col-xs-6 col-sm-4 col-md-3 text-center" style="margin-bottom: 2rem">
+            <a href="https://github.com/{{ person.username }}"><img src="https://github.com/{{person.username}}.png?s=150" width="150"></a><br>
+            {{ person.name }}<br><a href="https://github.com/{{ person.username }}">@{{ person.username }}</a>
+            </div>
+        {% endfor %}
+        </div>
+    </div>
+{% endif %}

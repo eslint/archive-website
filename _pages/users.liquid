@@ -1,0 +1,20 @@
+---
+title: "Who's Using ESLint?"
+layout: doc
+permalink: /users/index.html
+edit_link: https://github.com/eslint/eslint.github.io/edit/master/_pages/users.md
+---
+
+<h1>Who's Using ESLint?</h1>
+<p>These are the companies and organizations who use ESLint to keep their JavaScript code lint-free!</p>
+<div class="logos row">
+    {% for logo in logos %}
+        <div>
+            <div class="slide col-sm-4">
+                <a href="{{ logo.url }}" rel="noopener nofollow" target="_blank">
+                    <img src="{{ logo.src }}" alt="{{ logo.name }}" lazyload>
+                </a>
+            </div>
+        </div>
+    {% endfor %}
+</div>

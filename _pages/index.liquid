@@ -25,8 +25,8 @@ homepage: true
 {% assign monthlyTotal = 0 %}
 {% assign supportersCount = 0 %}
 {% for tier in tiers %}
-    {% if site.data.sponsors[tier].size > 0 %}
-        {% for sponsor in site.data.sponsors[tier] %}
+    {% if sponsors[tier].size > 0 %}
+        {% for sponsor in sponsors[tier] %}
             {% assign supportersCount = supportersCount | plus: 1 %}
             {% assign monthlyTotal = monthlyTotal | plus: sponsor.monthlyDonation %}
         {% endfor %}
@@ -40,14 +40,14 @@ homepage: true
     <p class="text-center">{{ supportersCount }} companies, organizations, and individuals are currently contributing <b>${{ monthlyTotal }}</b> each month to support ESLint's ongoing maintenance and development.</p>
     {% assign tiers = "gold,silver,bronze" | split: "," %}
     {% for tier in tiers %}
-        {% if site.data.sponsors[tier].size > 0 %}
-        <h3 class="text-center">{{ tier | capitalize }} Sponsors</h3>
-        <div class="sponsors text-center">
-            {% for sponsor in site.data.sponsors[tier] %}
-                <a href="{{ sponsor.url }}" title="{{ sponsor.name }}" rel="noopener nofollow" target="_blank"><img class="lazyload {{ tier }}-sponsor" data-src="{{ sponsor.image }}" alt="{{ sponsor.name }}"></a>
-            {% endfor %}
-        </div>
-        <p class="text-center"><a class="btn btn-default" href="https://opencollective.com/eslint">Become a Sponsor</a></p>
+        {% if sponsors[tier].size > 0 %}
+            <h3 class="text-center">{{ tier | capitalize }} Sponsors</h3>
+            <div class="sponsors text-center">
+                {% for sponsor in sponsors[tier] %}
+                    <a href="{{ sponsor.url }}" title="{{ sponsor.name }}" rel="noopener nofollow" target="_blank"><img class="lazyload {{ tier }}-sponsor" data-src="{{ sponsor.image }}" alt="{{ sponsor.name }}"></a>
+                {% endfor %}
+            </div>
+            <p class="text-center"><a class="btn btn-default" href="https://opencollective.com/eslint">Become a Sponsor</a></p>
         {% endif %}
     {% endfor %}
     <h3 class="text-center">Hosting</h3>

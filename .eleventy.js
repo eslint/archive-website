@@ -8,6 +8,7 @@ module.exports = function(eleventyConfig) {
 
     eleventyConfig.addCollection("posts", collection => collection.getFilteredByGlob("_posts/*.md").reverse());
     eleventyConfig.addPassthroughCopy("assets");
+    eleventyConfig.addPassthroughCopy("docs/**/*.svg");
 
     // Handle 404s when developing locally.
     eleventyConfig.setBrowserSyncConfig({
