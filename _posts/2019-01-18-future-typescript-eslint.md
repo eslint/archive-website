@@ -1,5 +1,4 @@
 ---
-layout: post
 title: "The future of TypeScript on ESLint"
 tags:
   - typescript

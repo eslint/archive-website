@@ -1,5 +1,4 @@
 ---
-layout: post
 title: ESLint's New Rule Format
 tags:
   - rules
@@ -74,6 +73,3 @@ $ eslint-transforms new-rule-format path/to/rules/ rule.js
 ```
 
 You can pass in as many files or directories as necessary to transform. See the [repo](https://github.com/eslint/eslint-transforms) for more information.
-
-
-

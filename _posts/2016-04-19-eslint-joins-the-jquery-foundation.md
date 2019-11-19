@@ -1,5 +1,4 @@
 ---
-layout: post
 title: ESLint Joins The jQuery Foundation
 date: 2016-04-19
 tags:

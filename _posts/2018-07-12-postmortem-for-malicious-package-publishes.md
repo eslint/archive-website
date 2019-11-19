@@ -1,5 +1,4 @@
 ---
-layout: post
 title: Postmortem for Malicious Packages Published on July 12th, 2018
 tags:
   - security
@@ -49,7 +48,7 @@ With the hindsight of this incident, we have a few recommendations for npm packa
 * **2018-07-12 10:25 UTC**: The attacker unpublished `eslint-config-eslint@5.0.2`.
 * **2018-07-12 10:40 UTC**: The attacker published `eslint-scope@3.7.2`, which contained the same malicious `postinstall` script.
 * **2018-07-12 11:17 UTC**: A user posted [eslint/eslint-scope#39](https://github.com/eslint/eslint-scope/issues/39), notifying the ESLint team of the issue.
-* **2018-07-12 12:27 UTC**: The pastebin.com link containing malicious code was taken down. 
+* **2018-07-12 12:27 UTC**: The pastebin.com link containing malicious code was taken down.
 * **2018-07-12 12:37 UTC**: The npm team unpublished `eslint-scope@3.7.2` after being contacted by an ESLint maintainer.
 * **2018-07-12 17:41 UTC**: The ESLint team published `eslint-scope@3.7.3` with the code from `eslint-scope@3.7.1` so that caches could pick up the new version.
 * **2018-07-12 18:42 UTC**: npm revoked all access tokens generated before 2018-07-12 12:30 UTC.

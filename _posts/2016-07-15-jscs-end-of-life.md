@@ -1,5 +1,4 @@
 ---
-layout: post
 title: JSCS End of Life
 tags:
   - jscs

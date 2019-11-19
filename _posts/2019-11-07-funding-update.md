@@ -1,5 +1,4 @@
 ---
-layout: post
 title: "Funding ESLint's Future: November Update"
 tags:
   - Open Source
@@ -44,16 +43,16 @@ One of our initial sponsors, [Facebook](https://facebook.com), also makes use of
 Another of our initial sponsors, [Salesforce](https://salesforce.com), makes extensive use of ESLint as part of their larger development ecosystem:
 
 > We have been using ESLint for many years, specially on our core platform, where it has become one of the most fundamental pieces of our pipeline.
-> 
+>
 > To name some of our most important use cases of ESLint:
-> 
+>
 > - We use it to validate and enforce specific rules and semantics every time a customer pushes components to our platform. That helps us scale and guarantee correctness on all the code that we serve.
 > - We use it to give all our developers a recommended set of rules, patterns and stylistic principles that allow us to keep a healthy and maintainable code base.
 > - We use it to guard specific API usages that will prevent the code from running in different conditions or host environments.
 > - We use it to help our customers write performant code, specially in IE11 where we have rules to prevent specific grammar that will transpile down to very inefficient code (ex. async-await, default function parameters).
-> 
+>
 > Given that ESLint is such a core part of our platform and ecosystem, we are really proud to be part of the community by sponsoring and contributing in any way we can to the future of an amazing project.
-> 
+>
 > -- Diego Ferreiro Val, Principal Architect at Salesforce
 
 ## Help us reach our goal

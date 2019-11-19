@@ -1,5 +1,4 @@
 ---
-layout: post
 title: Welcoming JSCS To ESLint
 date: 2016-04-14 17:13:45
 tags:

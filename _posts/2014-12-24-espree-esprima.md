@@ -1,5 +1,4 @@
 ---
-layout: post
 title: Introducing Espree, an Esprima alternative
 tags:
   - ES6

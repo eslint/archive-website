@@ -5,7 +5,6 @@ const moment = require("moment");
 const htmlparser2 = require("htmlparser2");
 
 module.exports = function(eleventyConfig) {
-    eleventyConfig.addCollection("posts", collection => collection.getFilteredByGlob("_posts/*.md").reverse());
 
     // https://www.11ty.io/docs/dates/#dates-off-by-one-day
     eleventyConfig.addFilter("date", (date, format) => moment(date.toUTCString()).format(format));
@@ -42,6 +41,7 @@ module.exports = function(eleventyConfig) {
         parser.parseComplete(templateContent);
         return htmlTextContent.trim().split(/\s+/).length;
     });
+    eleventyConfig.addCollection("posts", collection => collection.getFilteredByGlob("_posts/*.md").reverse());
     eleventyConfig.addPassthroughCopy("assets");
     eleventyConfig.setBrowserSyncConfig({
         callbacks: {
