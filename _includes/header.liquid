@@ -9,16 +9,16 @@
   <meta name="theme-color" content="#463fd4"/>
   <meta property="og:locale" content="en_US">
   <meta property="og:site_name" content="{{ site.title }}">
-  <meta property="og:title" content="{{ page.title }}">
-  <meta property="og:url" content="{{ site.url }}{{ page.url }}">
-  <meta property="og:image" content="{{ site.url }}/assets/img/favicon.512x512.png">
+  <meta property="og:title" content="{{ page.data.title }}">
+  <meta property="og:url" content="{{ page.url }}">
+  <meta property="og:image" content="/assets/img/favicon.512x512.png">
 
   <meta name="twitter:site" content="@geteslint">
   <meta name="twitter:title" content="{{ page.title }}">
   <meta name="twitter:description" content="{{ site.description }}">
-  <meta name="twitter:url" content="{{ site.url }}{{ page.url }}">
+  <meta name="twitter:url" content="{{ page.url }}">
   <meta name="twitter:card" content="summary">
-  <meta name="twitter:image" content="{{ site.url }}/assets/img/favicon.512x512.png">
+  <meta name="twitter:image" content="/assets/img/favicon.512x512.png">
 {% if page.title != site.title %}
     {% if page.title != "ESLint" %}
         <title>{{ page.title }} - {{ site.title }}</title>
@@ -29,12 +29,12 @@
   <title>{{ site.title }}</title>
 {% endif %}
   <link rel="preconnect" href="https://www.google-analytics.com">
-  <link href="{{ site.url }}{{ page.url }}" rel="canonical" />
+  <link href="{{ page.url }}" rel="canonical" />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600">
-  <link rel="stylesheet" href="{{ site.url }}/assets/build/styles/main.css"/>
-  <link rel='manifest' href='{{ site.url }}/manifest.json'>
-  <link rel="icon" href="{{ site.url }}/assets/img/favicon.512x512.png">
-  <link rel="alternate" type="application/rss+xml" title="{{ site.title }}" href="{{ site.url }}/feed.xml">
+  <link rel="stylesheet" href="/assets/build/styles/main.css"/>
+  <link rel='manifest' href='/manifest.json'>
+  <link rel="icon" href="/assets/img/favicon.512x512.png">
+  <link rel="alternate" type="application/rss+xml" title="{{ site.title }}" href="/feed.xml">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.css" />
 </head>
 <body>
