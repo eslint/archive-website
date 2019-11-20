@@ -15,7 +15,7 @@ Please note that all HTML documentation is split between this repository and the
 * Clone it locally
 * Create a new branch
 * Add your logo image to `/assets/img/logos/` directory. Logo should be at least 150px of height. Name your logo with your company/project name.
-* Update `/_data/logos.yml` file and add an entry for your company with the name, url and src (should point to the logo you just added).
+* Update `/_data/logos.json` file and add an entry for your company with the name, url and src (should point to the logo you just added).
 * Commit your changes to your fork and create a pull request into the main repository.
 
 ## Developer Setup
@@ -29,7 +29,11 @@ To set up a local development environment, install [Node.js](https://nodejs.org/
 ```sh
 # Clone the repository
 git clone git@github.com:eslint/website.git eslint-website
+
+# Navigate to the root directory
 cd eslint-website
+
+# Install dependencies
 npm install
 ```
 
@@ -38,6 +42,8 @@ Once you have set up a local environment, you can run a copy of the website loca
 ```sh
 $ npm start
 ```
+
+The site will be hosted locally at `http://localhost:8080/`.
 
 ## License
 
