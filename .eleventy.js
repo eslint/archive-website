@@ -1,6 +1,5 @@
 "use strict";
 
-const fs = require("fs");
 const { addPlugins, addFilters, addTransforms } = require("./_11ty");
 
 module.exports = function(eleventyConfig) {

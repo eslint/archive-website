@@ -36,5 +36,5 @@ app.use((req, res) => res.status(404).sendFile(path.resolve(__dirname, "../_site
 app.listen(PORT, () => {
     spawnChildProcess("npm", ["run", "start:eleventy"]);
     spawnChildProcess("npm", ["run", "start:webpack"]);
-    console.log(`Listening on port ${PORT}\n`);
+    console.log(`Local version of eslint.org can be accessed at http://localhost:${PORT}\n`);
 });
