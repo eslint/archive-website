@@ -2,6 +2,7 @@
 
 const plugins = require("./plugins");
 const filters = require("./filters");
+const transforms = require("./transforms");
 
 function addPlugins(eleventyConfig) {
     for (const plugin of Object.values(plugins)) {
@@ -15,7 +16,14 @@ function addFilters(eleventyConfig) {
     }
 }
 
+function addTransforms(eleventyConfig) {
+    for (const [name, transform] of Object.entries(transforms)) {
+        eleventyConfig.addTransform(name, transform);
+    }
+}
+
 module.exports = {
     addPlugins,
-    addFilters
+    addFilters,
+    addTransforms
 };

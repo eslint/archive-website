@@ -1,7 +1,7 @@
 "use strict";
 
 const fs = require("fs");
-const { addPlugins, addFilters } = require("./_11ty");
+const { addPlugins, addFilters, addTransforms } = require("./_11ty");
 
 module.exports = function(eleventyConfig) {
 
@@ -10,6 +10,9 @@ module.exports = function(eleventyConfig) {
 
     // Add filters.
     addFilters(eleventyConfig);
+
+    // Add transforms.
+    addTransforms(eleventyConfig);
 
     // Add collection of blog posts.
     eleventyConfig.addCollection("posts", collection => collection.getFilteredByGlob("_posts/*.md").reverse());
