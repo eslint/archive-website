@@ -12,4 +12,4 @@ module.exports = function minifyHtml(content, outputPath) {
     }
 
     return content;
-}
+};
