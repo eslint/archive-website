@@ -37,13 +37,21 @@ cd eslint-website
 npm install
 ```
 
-Once you have set up a local environment, you can run a copy of the website locally using this command:
+Once you have set up your environment, you can run a copy of the website locally using this command:
 
 ```sh
 $ npm start
 ```
 
 The site will be hosted locally at `http://localhost:8080/`.
+
+### JavaScript assets
+
+To run webpack to watch and bundle the JavaScript and style assets, you can run the following:
+
+```
+$ npm run start:webpack
+```
 
 ## License
 
