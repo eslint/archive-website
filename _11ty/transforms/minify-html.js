@@ -3,7 +3,7 @@
 const htmlmin = require("html-minifier");
 
 module.exports = function minifyHtml(content, outputPath) {
-    if ([".html", ".xml"].some(ext => outputPath.endsWith(ext))) {
+    if (outputPath.endsWith(".html")) {
         return htmlmin.minify(content, {
             useShortDoctype: true,
             removeComments: true,
