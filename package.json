@@ -18,8 +18,8 @@
   "scripts": {
     "build:eleventy": "eleventy",
     "build:webpack": "webpack --mode=production",
-    "build:less": "lessc src/styles/main.less assets/build/styles/main.css --clean-css --source-map=assets/build/styles/main.css.map",
-    "build": "npm run build:less && npm run build:webpack && npm run build:eleventy",
+    "build:less": "lessc src/styles/main.less _site/assets/styles/main.css --clean-css --source-map=_site/assets/styles/main.css.map",
+    "build": "npm run build:eleventy && npm run build:less && npm run build:webpack",
     "start:eleventy": "eleventy --watch",
     "start:webpack": "webpack -w --mode=development",
     "start": "npm run build:less && node _tools/dev-server.js",

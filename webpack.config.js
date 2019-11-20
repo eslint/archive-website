@@ -10,7 +10,7 @@ module.exports = {
         main: path.join(__dirname, "src/js/main/index.js")
     },
     output: {
-        path: path.join(__dirname, "assets/build/js"),
+        path: path.join(__dirname, "_site/assets/js"),
         filename: "[name].js"
     },
     module: {
