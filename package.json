@@ -22,7 +22,7 @@
     "build": "npm run build:eleventy && npm run build:less && npm run build:webpack",
     "start:eleventy": "eleventy --watch",
     "start:webpack": "webpack -w --mode=development",
-    "start": "npm run build:less && node _tools/dev-server.js",
+    "start": "node _tools/dev-server.js",
     "lint": "eslint --ext=.js,.jsx .",
     "test": "npm run lint",
     "fix": "npm run lint -- --fix"
@@ -45,6 +45,7 @@
     "@octokit/graphql": "^4.3.1",
     "@octokit/rest": "^16.28.2",
     "babel-loader": "^8.0.6",
+    "chokidar": "^3.3.0",
     "core-js": "^3.1.4",
     "css-loader": "^3.0.0",
     "eslint": "^6.0.1",
