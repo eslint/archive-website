@@ -1,4 +1,4 @@
 ---
-layout: redirect
+layout: content-only
 sitemap: false
 ---

@@ -1,3 +1,5 @@
 "use strict";
 
-module.exports = require("require-directory")(module);
+module.exports = {
+    syntaxHighlighting: require("./syntax-highlighting")
+};
