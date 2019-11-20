@@ -134,7 +134,9 @@ if (x === 0) {
 
 ## Related Rules
 
-* [no-extra-parens](no-extra-parens)
+* [no-extra-parens-1](no-extra-parens)
+* [no-extra-parens-2](./no-extra-parens)
+* [no-extra-parens-3](../no-extra-parens)
 
 ## Version
 
