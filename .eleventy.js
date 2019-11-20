@@ -4,14 +4,8 @@ const fs = require("fs");
 const { addPlugins, addFilters, addTransforms } = require("./_11ty");
 
 module.exports = function(eleventyConfig) {
-
-    // Add plugins.
     addPlugins(eleventyConfig);
-
-    // Add filters.
     addFilters(eleventyConfig);
-
-    // Add transforms.
     addTransforms(eleventyConfig);
 
     // Add collection of blog posts.
