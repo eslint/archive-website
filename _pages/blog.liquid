@@ -9,7 +9,7 @@ edit_link: https://github.com/eslint/eslint.github.io/edit/master/_pages/blog.ht
 {% for post in collections.posts %}
   <li>
     <a href="{{ post.url | url }}">{{ post.data.title }}</a>
-    <span class="date">{{ post.date | dateFormat: "D MMMM YYYY" }}</span>
+    <span class="date">{{ post.date | dateFormat: "d LLLL yyyy" }}</span>
     <span class="num-words"><em>{{ post.templateContent | numberOfWords }}</em> words</span>
   </li>
 {% endfor %}

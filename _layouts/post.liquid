@@ -22,7 +22,7 @@
             {% if post.url != page.url %}
               <li>
                 <a href="{{ post.url }}">{{ post.data.title }}</a><br>
-                <span class="date">{{ post.date | dateFormat: "D MMMM YYYY" }}</span>
+                <span class="date">{{ post.date | dateFormat: "d LLLL yyyy" }}</span>
               </li>
             {% endif %}
           {% endfor %}
