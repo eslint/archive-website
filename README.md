@@ -43,15 +43,7 @@ Once you have set up your environment, you can run a copy of the website locally
 $ npm start
 ```
 
-The site will be hosted locally at `http://localhost:8080/`.
-
-### JavaScript assets
-
-To run webpack to watch and bundle the JavaScript and style assets, you can run the following:
-
-```
-$ npm run start:webpack
-```
+This will watch for changes to the source code and rebuild the website, which will be hosted at `http://localhost:8080/`.
 
 ## License
 
