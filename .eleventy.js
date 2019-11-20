@@ -1,11 +1,15 @@
 "use strict";
 
 const fs = require("fs");
-const { addFilters } = require("./_11ty/filters");
+const addFilters = require("./_11ty/filters");
+const addPlugins = require("./_11ty/plugins");
 
 module.exports = function(eleventyConfig) {
 
-    // Add filters to be used in templates.
+    // Add plugins.
+    addPlugins(eleventyConfig);
+
+    // Add filters.
     addFilters(eleventyConfig);
 
     // Add collection of blog posts.
