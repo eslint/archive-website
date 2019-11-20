@@ -20,9 +20,9 @@
     "build:webpack": "webpack --mode=production",
     "build:less": "lessc src/styles/main.less assets/build/styles/main.css --clean-css --source-map=assets/build/styles/main.css.map",
     "build": "npm run build:less && npm run build:webpack && npm run build:eleventy",
-    "start:eleventy": "eleventy --serve",
+    "start:eleventy": "eleventy --watch",
     "start:webpack": "webpack -w --mode=development",
-    "start": "npm run build:less && npm run start:eleventy",
+    "start": "npm run build:less && node _tools/dev-server.js",
     "lint": "eslint --ext=.js,.jsx .",
     "test": "npm run lint",
     "fix": "npm run lint -- --fix"
