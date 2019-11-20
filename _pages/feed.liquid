@@ -11,8 +11,8 @@ permalink: feed.xml
     <atom:link href="{{ site.url }}/feed.xml" rel="self" type="application/rss+xml" />
     {% for post in collections.posts limit:10 %}
       <item>
-        <title>{{ post.title | xmlEscape }}</title>
-        <description>{{ post.content | xmlEscape }}</description>
+        <title>{{ post.data.title | xmlEscape }}</title>
+        <description>{{ post.templateContent | xmlEscape }}</description>
         {% comment %} https://html.spec.whatwg.org/multipage/common-microsyntaxes.html#valid-date-string {% endcomment %}
         <pubDate>{{ post.date | dateFormat: "yyyy-LL-dd" }}</pubDate>
         <link>{{ site.url }}{{ post.url }}</link>

@@ -1,7 +1,7 @@
 "use strict";
 
-const { AllHtmlEntities } = require("html-entities");
+const { XmlEntities } = require("html-entities");
 
 module.exports = function xmlEscape(text) {
-    return new AllHtmlEntities().decode(text);
+    return new XmlEntities().encode(text);
 };
