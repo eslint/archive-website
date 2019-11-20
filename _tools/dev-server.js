@@ -9,7 +9,7 @@
 "use strict";
 
 const path = require("path");
-const { spawn, exec } = require("child_process");
+const { spawn } = require("child_process");
 const express = require("express");
 const chokidar = require("chokidar");
 
@@ -53,5 +53,5 @@ app.listen(PORT, () => {
 
     spawnChildProcess("npm", ["run", "start:eleventy"]);
     spawnChildProcess("npm", ["run", "start:webpack"]);
-    console.log(`Local version of eslint.org can be accessed at http://localhost:${PORT}\n`);
+    console.log(`Local version of eslint.org can be accessed at http://localhost:${PORT}.\n`);
 });
