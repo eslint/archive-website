@@ -60,6 +60,7 @@
     "moment": "^2.24.0",
     "node-fetch": "^2.6.0",
     "regenerator-runtime": "^0.13.2",
+    "require-directory": "^2.1.1",
     "style-loader": "^0.23.1",
     "webpack": "^4.35.0",
     "webpack-cli": "^3.3.5"

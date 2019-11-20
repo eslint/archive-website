@@ -1,8 +1,7 @@
 "use strict";
 
 const fs = require("fs");
-const addFilters = require("./_11ty/filters");
-const addPlugins = require("./_11ty/plugins");
+const { addPlugins, addFilters } = require("./_11ty");
 
 module.exports = function(eleventyConfig) {
 
