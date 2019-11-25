@@ -51,28 +51,34 @@ function spawnChildProcess(command, args) {
  * and can use `express.static()` directly instead.
  */
 app.get("*", (req, res, next) => {
-    const reqUrl = path.join(__dirname, "../_site", req.url);
+    const reqPath = path.join(__dirname, "../_site", req.url);
 
-    for (const filePath of [reqUrl, `${reqUrl}.html`]) {
-        if (fs.existsSync(filePath)) {
-            let filePathStats = null;
-
-            try {
-                filePathStats = fs.statSync(filePath);
-            } catch (err) {
-                console.error(err);
-            }
-
-            if (filePathStats && filePathStats.isDirectory()) {
-                if (!req.url.endsWith("/")) {
-                    return res.redirect(301, `${req.url}/`);
-                }
-
-                return res.sendFile(path.join(filePath, "index.html"));
-            }
-
-            return res.sendFile(filePath);
+    if (fs.existsSync(`${reqPath}.html`)) {
+        if (req.url.endsWith("/")) {
+            return res.redirect(301, req.url.replace(/\/$/u, ""));
         }
+
+        return res.sendFile(`${reqPath}.html`);
+    }
+
+    if (fs.existsSync(reqPath)) {
+        let filePathStats = null;
+
+        try {
+            filePathStats = fs.statSync(reqPath);
+        } catch (err) {
+            console.error(err);
+        }
+
+        if (filePathStats && filePathStats.isDirectory()) {
+            if (!req.url.endsWith("/")) {
+                return res.redirect(301, `${req.url}/`);
+            }
+
+            return res.sendFile(path.join(reqPath, "index.html"));
+        }
+
+        return res.sendFile(reqPath);
     }
 
     return next();
