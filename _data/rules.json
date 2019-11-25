@@ -71,6 +71,12 @@
           "recommended": true
         },
         {
+          "description": "disallow duplicate conditions in if-else-if chains",
+          "fixable": false,
+          "name": "no-dupe-else-if",
+          "recommended": false
+        },
+        {
           "description": "disallow duplicate keys in object literals",
           "fixable": false,
           "name": "no-dupe-keys",
@@ -171,6 +177,12 @@
           "fixable": true,
           "name": "no-regex-spaces",
           "recommended": true
+        },
+        {
+          "description": "disallow returning values from setters",
+          "fixable": false,
+          "name": "no-setter-return",
+          "recommended": false
         },
         {
           "description": "disallow sparse arrays",
@@ -305,6 +317,12 @@
           "recommended": false
         },
         {
+          "description": "require grouped accessor pairs in object literals and classes",
+          "fixable": false,
+          "name": "grouped-accessor-pairs",
+          "recommended": false
+        },
+        {
           "description": "require `for-in` loops to include an `if` statement",
           "fixable": false,
           "name": "guard-for-in",
@@ -333,6 +351,12 @@
           "fixable": false,
           "name": "no-case-declarations",
           "recommended": true
+        },
+        {
+          "description": "disallow returning value from constructor",
+          "fixable": false,
+          "name": "no-constructor-return",
+          "recommended": false
         },
         {
           "description": "disallow division operators explicitly at the beginning of regular expressions",
@@ -413,7 +437,7 @@
           "recommended": false
         },
         {
-          "description": "disallow variable and `function` declarations in the global scope",
+          "description": "disallow declarations in the global scope",
           "fixable": false,
           "name": "no-implicit-globals",
           "recommended": false
@@ -1295,6 +1319,12 @@
           "recommended": false
         },
         {
+          "description": "disallow the use of `Math.pow` in favor of the `**` operator",
+          "fixable": true,
+          "name": "prefer-exponentiation-operator",
+          "recommended": false
+        },
+        {
           "description": "disallow using Object.assign with an object literal as the first argument and prefer the use of object spread instead.",
           "fixable": true,
           "name": "prefer-object-spread",
@@ -1487,7 +1517,7 @@
           "recommended": true
         },
         {
-          "description": "disallow unnecessary computed property keys in object literals",
+          "description": "disallow unnecessary computed property keys in objects and classes",
           "fixable": true,
           "name": "no-useless-computed-key",
           "recommended": false
