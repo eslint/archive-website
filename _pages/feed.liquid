@@ -15,8 +15,8 @@ permalink: feed.xml
         <description>{{ post.templateContent | xmlEscape }}</description>
         {% comment %} https://html.spec.whatwg.org/multipage/common-microsyntaxes.html#valid-date-string {% endcomment %}
         <pubDate>{{ post.date | dateFormat: "yyyy-LL-dd" }}</pubDate>
-        <link>{{ site.url }}{{ post.url }}</link>
-        <guid isPermaLink="true">{{ site.url }}{{ post.url }}</guid>
+        <link>{{ site.url }}{{ post.url | replace: '.html', '' }}</link>
+        <guid isPermaLink="true">{{ site.url }}{{ post.url | replace: '.html', '' }}</guid>
       </item>
     {% endfor %}
   </channel>

@@ -25,7 +25,7 @@ const fsPromises = fs.promises;
 // Data
 //-----------------------------------------------------------------------------
 
-const PORT = 8080;
+const PORT = process.env.DEV_PORT || 8080;
 const ROOT_DIR = path.resolve(__dirname, "..");
 
 //-----------------------------------------------------------------------------
