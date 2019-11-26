@@ -24,7 +24,7 @@ This website is built with [Eleventy](https://www.11ty.io) and is hosted on [Net
 
 ### Local development
 
-To set up a local development environment, install [Node.js](https://nodejs.org/en/) (be sure to follow the instructions for your platform) and follow the steps below:
+To set up a local development environment, install [Node.js](https://nodejs.org/) (be sure to follow the instructions for your platform) and follow the steps below:
 
 ```sh
 # Clone the repository
