@@ -1,6 +1,5 @@
 /**
- * @fileoverview Script to fetch sponsor data from Open Collective and GitHub.
- * Call using:
+ * @fileoverview Script to fetch sponsor data from Open Collective. Call using:
  *     node _tools/fetch-sponsors.js
  * @author Nicholas C. Zakas
  */
@@ -15,147 +14,48 @@
 
 const fs = require("fs");
 const fetch = require("node-fetch");
-const { graphql: githubGraphQL } = require("@octokit/graphql");
 
 //-----------------------------------------------------------------------------
 // Data
 //-----------------------------------------------------------------------------
 
-// filename to output sponsors to
-const sponsorsFilename = "./_data/sponsors.json";
+// filename to output to
+const filename = "./_data/sponsors.json";
 
 // simplified data structure
-const tierSponsors = {
+const sponsors = {
     gold: [],
     silver: [],
     bronze: [],
     backers: []
 };
 
-const { ESLINT_GITHUB_TOKEN } = process.env;
+const graphqlEndpoint = "https://api.opencollective.com/graphql/v2";
 
-if (!ESLINT_GITHUB_TOKEN) {
-    throw new Error("Missing ESLINT_GITHUB_TOKEN.");
-}
-
-//-----------------------------------------------------------------------------
-// Helpers
-//-----------------------------------------------------------------------------
-
-/**
- * Returns the tier ID for a given donation amount.
- * @param {int} monthlyDonation The monthly donation in dollars.
- * @returns {string} The ID of the tier the donation belongs to.
- */
-function getTierSlug(monthlyDonation) {
-    if (monthlyDonation >= 1000) {
-        return "gold-sponsor";
-    }
-
-    if (monthlyDonation >= 500) {
-        return "silver-sponsor";
-    }
-
-    if (monthlyDonation >= 200) {
-        return "bronze-sponsor";
-    }
-
-    return "backer";
-}
-
-/**
- * Fetch order data from Open Collective using the GraphQL API.
- * @returns {Array} An array of sponsors.
- */
-async function fetchOpenCollectiveSponsors() {
-
-    const endpoint = "https://api.opencollective.com/graphql/v2";
-
-    const query = `{
-        account(slug: "eslint") {
-          orders(status: ACTIVE) {
-            totalCount
-            nodes {
-              fromAccount {
-                name
-                website
-                imageUrl
-              }
-              amount {
-                value
-              }
-              tier {
-                slug
-              }
-              frequency
-              totalDonations {
-                value
-              }
-            }
-          }
+const graphqlQuery = `{
+  account(slug: "eslint") {
+    orders(status: ACTIVE) {
+      totalCount
+      nodes {
+        fromAccount {
+          name
+          website
+          imageUrl
         }
-      }`;
-
-    const result = await fetch(endpoint, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ query })
-    });
-
-    const payload = await result.json();
-
-    return payload.data.account.orders.nodes.map(order => ({
-        name: order.fromAccount.name,
-        url: order.fromAccount.website,
-        image: order.fromAccount.imageUrl,
-        monthlyDonation: order.frequency === "year" ? Math.round(order.amount.value * 100 / 12) : order.amount.value * 100,
-        totalDonations: order.totalDonations.value * 100,
-        source: "opencollective",
-        tier: order.tier ? order.tier.slug : null
-    }));
-
-}
-
-/**
- * Fetches GitHub Sponsors data using the GraphQL API.
- * @returns {Array} An array of sponsors.
- */
-async function fetchGitHubSponsors() {
-
-    const { organization } = await githubGraphQL(`query {
-        organization(login: "eslint") {
-          sponsorshipsAsMaintainer (first: 100) {
-            nodes {
-              sponsor {
-                name,
-                login,
-                avatarUrl,
-                url,
-                websiteUrl
-              },
-              tier {
-                monthlyPriceInDollars
-              }
-            }
-          }
+        amount {
+          value
         }
-      }`, {
-        headers: {
-            authorization: `token ${ESLINT_GITHUB_TOKEN}`
+        tier {
+          slug
         }
-    });
-
-    // return an array in the same format as Open Collective
-    return organization.sponsorshipsAsMaintainer.nodes.map(({ sponsor, tier }) => ({
-        name: sponsor.name,
-        image: sponsor.avatarUrl,
-        url: sponsor.websiteUrl || sponsor.url,
-        monthlyDonation: tier.monthlyPriceInDollars * 100,
-        source: "github",
-        tier: getTierSlug(tier.monthlyPriceInDollars)
-    }));
-
-}
+        frequency
+        totalDonations {
+          value
+        }
+      }
+    }
+  }
+}`;
 
 //-----------------------------------------------------------------------------
 // Main
@@ -163,39 +63,50 @@ async function fetchGitHubSponsors() {
 
 (async() => {
 
-    const [openCollectiveSponsors, githubSponsors] = await Promise.all([
-        fetchOpenCollectiveSponsors(),
-        fetchGitHubSponsors()
-    ]);
-
-    const sponsors = openCollectiveSponsors.concat(githubSponsors);
+    // fetch the data
+    const result = await fetch(graphqlEndpoint, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ query: graphqlQuery })
+    });
+    const orders = await result.json().then(res => res.data.account.orders.nodes);
 
     // process into a useful format
-    for (const sponsor of sponsors) {
+    for (const order of orders) {
 
-        switch (sponsor.tier) {
+        const sponsor = {
+            name: order.fromAccount.name,
+            url: order.fromAccount.website,
+            image: order.fromAccount.imageUrl,
+            monthlyDonation: order.frequency === "year" ? Math.round(order.amount.value * 100 / 12) : order.amount.value * 100,
+            totalDonations: order.totalDonations.value * 100
+        };
+
+        const tierSlug = order.tier ? order.tier.slug : null;
+
+        switch (tierSlug) {
             case "gold-sponsor":
-                tierSponsors.gold.push(sponsor);
+                sponsors.gold.push(sponsor);
                 break;
 
             case "silver-sponsor":
-                tierSponsors.silver.push(sponsor);
+                sponsors.silver.push(sponsor);
                 break;
 
             case "bronze-sponsor":
-                tierSponsors.bronze.push(sponsor);
+                sponsors.bronze.push(sponsor);
                 break;
 
             default:
-                tierSponsors.backers.push(sponsor);
+                sponsors.backers.push(sponsor);
 
         }
     }
 
     // sort order based on total donations
-    for (const key of Object.keys(tierSponsors)) {
-        tierSponsors[key].sort((a, b) => b.monthlyDonation - a.monthlyDonation);
+    for (const key of Object.keys(sponsors)) {
+        sponsors[key].sort((a, b) => b.monthlyDonation - a.monthlyDonation);
     }
 
-    fs.writeFileSync(sponsorsFilename, JSON.stringify(tierSponsors, null, "    "), { encoding: "utf8" });
+    fs.writeFileSync(filename, JSON.stringify(sponsors, null, "    "), { encoding: "utf8" });
 })();
