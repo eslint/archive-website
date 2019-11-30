@@ -29,7 +29,7 @@ const fsPromises = fs.promises;
         process.exit(1);
     }
 
-    console.log(`Converting YAML found with glob "${globPath}" to JSON.`);
+    console.log(`Converting YAML files found with glob "${globPath}" to JSON.`);
 
     const files = await glob(globPath);
 
