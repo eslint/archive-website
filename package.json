@@ -20,13 +20,13 @@
     "build:webpack": "webpack --mode=production",
     "build:less": "lessc src/styles/main.less _site/assets/styles/main.css --clean-css --source-map=_site/assets/styles/main.css.map",
     "build": "npm run build:eleventy && npm run build:less && npm run build:webpack",
-    "start:eleventy": "npm run convert-yaml && NODE_ENV=development eleventy --watch",
+    "start:eleventy": "npm run convert-yaml && cross-env NODE_ENV=development eleventy --watch",
     "start:webpack": "webpack -w --mode=development",
     "start": "node _tools/dev-server.js",
     "lint": "eslint --ext=.js,.jsx .",
     "test": "npm run lint",
     "fix": "npm run lint -- --fix",
-    "convert-yaml": "node _tools/yaml-to-json.js '_data/*.yml'"
+    "convert-yaml": "node _tools/yaml-to-json.js \"_data/*.yml\""
   },
   "dependencies": {
     "anchor-js": "^4.2.0",
@@ -47,6 +47,7 @@
     "babel-loader": "^8.0.6",
     "chokidar": "^3.3.0",
     "core-js": "^3.1.4",
+    "cross-env": "^6.0.3",
     "css-loader": "^3.0.0",
     "eslint": "^6.0.1",
     "eslint-config-eslint": "^5.0.1",
