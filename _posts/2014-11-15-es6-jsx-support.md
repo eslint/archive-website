@@ -1,5 +1,4 @@
 ---
-layout: post
 title: Announcing ES6 and JSX Support
 tags:
   - ES6

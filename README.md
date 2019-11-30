@@ -20,41 +20,30 @@ Please note that all HTML documentation is split between this repository and the
 
 ## Developer Setup
 
-This website is built with [Jekyll](https://jekyllrb.com) and is hosted on [Netlify](https://www.netlify.com).
+This website is built with [Eleventy](https://www.11ty.io) and is hosted on [Netlify](https://www.netlify.com).
 
 ### Local development
 
-To set up a local development environment, please follow [GitHub's instructions](https://help.github.com/articles/setting-up-your-github-pages-site-locally-with-jekyll) (be sure to follow the instructions for your platform).
+To set up a local development environment, install [Node.js](https://nodejs.org/) (be sure to follow the instructions for your platform) and follow the steps below:
 
-Once you have set up a local environment, you can run a copy of the website locally using this command:
+```sh
+# Clone the repository
+git clone git@github.com:eslint/website.git eslint-website
+
+# Navigate to the root directory
+cd eslint-website
+
+# Install dependencies
+npm install
+```
+
+Once you have set up your environment, you can run a copy of the website locally using this command:
 
 ```sh
 $ npm start
 ```
 
-### Development using Docker
-
-If you have [Docker](https://www.docker.com) installed, you can run the following:
-
-```sh
-$ npm run start:docker
-```
-
-This will run the following command, creating a temporary container that builds and serves the site and watches for local changes:
-
-```sh
-$ docker run --rm \
-    -v `pwd`:/srv/jekyll \
-    -p 4000:4000 \
-    -it jekyll/jekyll:3.8 \
-    jekyll serve -V --config _config.yml,_config.dev.yml
-```
-
-To run webpack to bundle the JavaScript and style assets, you can run the following:
-
-```
-$ npm run start:webpack
-```
+This will watch for changes to the source code and rebuild the website, which will be hosted at `http://localhost:8080/`.
 
 ## License
 

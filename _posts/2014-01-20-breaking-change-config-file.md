@@ -1,5 +1,4 @@
 ---
-layout: post
 title: Breaking change to ESLint config files
 tags:
   - breaking change

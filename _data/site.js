@@ -1,0 +1,21 @@
+"use strict";
+
+const PORT = process.env.DEV_PORT || 8080;
+
+function calculateUrl() {
+    if (process.env.NODE_ENV === "development") {
+        return `localhost:${PORT}`;
+    }
+
+    /*
+     * Netlify sets the following environment variables
+     * https://www.netlify.com/docs/continuous-deployment/#environment-variables
+     */
+    return process.env.CONTEXT === "production" ? process.env.URL : process.env.DEPLOY_PRIME_URL;
+}
+
+module.exports = {
+    title: "ESLint - Pluggable JavaScript linter",
+    description: "A pluggable and configurable linter tool for identifying and reporting on patterns in JavaScript. Maintain your code quality with ease.",
+    url: calculateUrl()
+};

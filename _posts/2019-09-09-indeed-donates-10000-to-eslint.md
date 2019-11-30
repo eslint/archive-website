@@ -1,5 +1,4 @@
 ---
-layout: post
 title: "Indeed donates $10,000 to ESLint"
 tags:
   - Open Source

@@ -1,5 +1,4 @@
 ---
-layout: post
 title: Formatter Breaking Change
 tags:
   - breaking change

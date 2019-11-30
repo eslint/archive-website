@@ -1,5 +1,4 @@
 ---
-layout: post
 title: Breaking change to ESLint default formatter
 tags:
   - breaking change
@@ -38,4 +37,3 @@ eslint -f compact foo.js
 This works equally well with older and new versions of ESLint, and will continue to work going forward.
 
 In general, it is always best to specify the formatter that you want when processing output, rather than relying on the default (which may change, as in this case). The current set of formatters is considered stable and none of them will be removed in the future, so it's safe to rely on them.
-

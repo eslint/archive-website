@@ -1,5 +1,4 @@
 ---
-layout: post
 title: Espree v3.0.0 Alpha 1 released
 tags:
   - release

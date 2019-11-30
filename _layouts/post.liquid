@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+{% include head %}
+<body>
+  {% include menu %}
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8">
+        <main class="blog">
+          <article>
+            {{ content }}
+            <footer>
+              <p class="text-center">ESLint depends on the support of individuals and companies. <a class="btn btn-default" href="https://opencollective.com/eslint">Become a Sponsor</a></p>
+            </footer>
+          </article>
+        </main>
+      </div>
+      <div class="col-md-4 hidden-xs hidden-sm">
+        <h2>Recent Posts</h2>
+        <ul class="posts">
+          {% for post in collections.posts limit: 25 %}
+            {% if post.url != page.url %}
+              <li>
+                <a href="{{ post.url | replace: '.html', '' }}">{{ post.data.title }}</a><br>
+                <span class="date">{{ post.date | dateFormat: "d LLLL yyyy" }}</span>
+              </li>
+            {% endif %}
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+  </div>
+  {% include footer %}
+</body>
+</html>
