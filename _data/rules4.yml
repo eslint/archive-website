@@ -1,0 +1,1143 @@
+categories:
+  - description: 'These rules relate to possible syntax or logic errors in JavaScript code:'
+    name: Possible Errors
+    rules:
+      - description: >-
+          enforce "for" loop update clause moving the counter in the right
+          direction.
+        fixable: false
+        name: for-direction
+        recommended: false
+      - description: disallow `await` inside of loops
+        fixable: false
+        name: no-await-in-loop
+        recommended: false
+      - description: disallow comparing against -0
+        fixable: false
+        name: no-compare-neg-zero
+        recommended: true
+      - description: disallow assignment operators in conditional expressions
+        fixable: false
+        name: no-cond-assign
+        recommended: true
+      - description: disallow the use of `console`
+        fixable: false
+        name: no-console
+        recommended: true
+      - description: disallow constant expressions in conditions
+        fixable: false
+        name: no-constant-condition
+        recommended: true
+      - description: disallow control characters in regular expressions
+        fixable: false
+        name: no-control-regex
+        recommended: true
+      - description: disallow the use of `debugger`
+        fixable: true
+        name: no-debugger
+        recommended: true
+      - description: disallow duplicate arguments in `function` definitions
+        fixable: false
+        name: no-dupe-args
+        recommended: true
+      - description: disallow duplicate keys in object literals
+        fixable: false
+        name: no-dupe-keys
+        recommended: true
+      - description: disallow duplicate case labels
+        fixable: false
+        name: no-duplicate-case
+        recommended: true
+      - description: disallow empty block statements
+        fixable: false
+        name: no-empty
+        recommended: true
+      - description: disallow empty character classes in regular expressions
+        fixable: false
+        name: no-empty-character-class
+        recommended: true
+      - description: disallow reassigning exceptions in `catch` clauses
+        fixable: false
+        name: no-ex-assign
+        recommended: true
+      - description: disallow unnecessary boolean casts
+        fixable: true
+        name: no-extra-boolean-cast
+        recommended: true
+      - description: disallow unnecessary parentheses
+        fixable: true
+        name: no-extra-parens
+        recommended: false
+      - description: disallow unnecessary semicolons
+        fixable: true
+        name: no-extra-semi
+        recommended: true
+      - description: disallow reassigning `function` declarations
+        fixable: false
+        name: no-func-assign
+        recommended: true
+      - description: disallow variable or `function` declarations in nested blocks
+        fixable: false
+        name: no-inner-declarations
+        recommended: true
+      - description: disallow invalid regular expression strings in `RegExp` constructors
+        fixable: false
+        name: no-invalid-regexp
+        recommended: true
+      - description: disallow irregular whitespace outside of strings and comments
+        fixable: false
+        name: no-irregular-whitespace
+        recommended: true
+      - description: disallow calling global object properties as functions
+        fixable: false
+        name: no-obj-calls
+        recommended: true
+      - description: disallow calling some `Object.prototype` methods directly on objects
+        fixable: false
+        name: no-prototype-builtins
+        recommended: false
+      - description: disallow multiple spaces in regular expressions
+        fixable: true
+        name: no-regex-spaces
+        recommended: true
+      - description: disallow sparse arrays
+        fixable: false
+        name: no-sparse-arrays
+        recommended: true
+      - description: disallow template literal placeholder syntax in regular strings
+        fixable: false
+        name: no-template-curly-in-string
+        recommended: false
+      - description: disallow confusing multiline expressions
+        fixable: false
+        name: no-unexpected-multiline
+        recommended: true
+      - description: >-
+          disallow unreachable code after `return`, `throw`, `continue`, and
+          `break` statements
+        fixable: false
+        name: no-unreachable
+        recommended: true
+      - description: disallow control flow statements in `finally` blocks
+        fixable: false
+        name: no-unsafe-finally
+        recommended: true
+      - description: disallow negating the left operand of relational operators
+        fixable: true
+        name: no-unsafe-negation
+        recommended: true
+      - description: require calls to `isNaN()` when checking for `NaN`
+        fixable: false
+        name: use-isnan
+        recommended: true
+      - description: enforce valid JSDoc comments
+        fixable: false
+        name: valid-jsdoc
+        recommended: false
+      - description: enforce comparing `typeof` expressions against valid strings
+        fixable: false
+        name: valid-typeof
+        recommended: true
+  - description: >-
+      These rules relate to better ways of doing things to help you avoid
+      problems:
+    name: Best Practices
+    rules:
+      - description: enforce getter and setter pairs in objects
+        fixable: false
+        name: accessor-pairs
+        recommended: false
+      - description: enforce `return` statements in callbacks of array methods
+        fixable: false
+        name: array-callback-return
+        recommended: false
+      - description: enforce the use of variables within the scope they are defined
+        fixable: false
+        name: block-scoped-var
+        recommended: false
+      - description: enforce that class methods utilize `this`
+        fixable: false
+        name: class-methods-use-this
+        recommended: false
+      - description: enforce a maximum cyclomatic complexity allowed in a program
+        fixable: false
+        name: complexity
+        recommended: false
+      - description: require `return` statements to either always or never specify values
+        fixable: false
+        name: consistent-return
+        recommended: false
+      - description: enforce consistent brace style for all control statements
+        fixable: true
+        name: curly
+        recommended: false
+      - description: require `default` cases in `switch` statements
+        fixable: false
+        name: default-case
+        recommended: false
+      - description: enforce consistent newlines before and after dots
+        fixable: true
+        name: dot-location
+        recommended: false
+      - description: enforce dot notation whenever possible
+        fixable: true
+        name: dot-notation
+        recommended: false
+      - description: require the use of `===` and `!==`
+        fixable: true
+        name: eqeqeq
+        recommended: false
+      - description: require `for-in` loops to include an `if` statement
+        fixable: false
+        name: guard-for-in
+        recommended: false
+      - description: 'disallow the use of `alert`, `confirm`, and `prompt`'
+        fixable: false
+        name: no-alert
+        recommended: false
+      - description: disallow the use of `arguments.caller` or `arguments.callee`
+        fixable: false
+        name: no-caller
+        recommended: false
+      - description: disallow lexical declarations in case clauses
+        fixable: false
+        name: no-case-declarations
+        recommended: true
+      - description: >-
+          disallow division operators explicitly at the beginning of regular
+          expressions
+        fixable: false
+        name: no-div-regex
+        recommended: false
+      - description: disallow `else` blocks after `return` statements in `if` statements
+        fixable: true
+        name: no-else-return
+        recommended: false
+      - description: disallow empty functions
+        fixable: false
+        name: no-empty-function
+        recommended: false
+      - description: disallow empty destructuring patterns
+        fixable: false
+        name: no-empty-pattern
+        recommended: true
+      - description: disallow `null` comparisons without type-checking operators
+        fixable: false
+        name: no-eq-null
+        recommended: false
+      - description: disallow the use of `eval()`
+        fixable: false
+        name: no-eval
+        recommended: false
+      - description: disallow extending native types
+        fixable: false
+        name: no-extend-native
+        recommended: false
+      - description: disallow unnecessary calls to `.bind()`
+        fixable: true
+        name: no-extra-bind
+        recommended: false
+      - description: disallow unnecessary labels
+        fixable: true
+        name: no-extra-label
+        recommended: false
+      - description: disallow fallthrough of `case` statements
+        fixable: false
+        name: no-fallthrough
+        recommended: true
+      - description: disallow leading or trailing decimal points in numeric literals
+        fixable: true
+        name: no-floating-decimal
+        recommended: false
+      - description: disallow assignments to native objects or read-only global variables
+        fixable: false
+        name: no-global-assign
+        recommended: true
+      - description: disallow shorthand type conversions
+        fixable: true
+        name: no-implicit-coercion
+        recommended: false
+      - description: disallow variable and `function` declarations in the global scope
+        fixable: false
+        name: no-implicit-globals
+        recommended: false
+      - description: disallow the use of `eval()`-like methods
+        fixable: false
+        name: no-implied-eval
+        recommended: false
+      - description: disallow `this` keywords outside of classes or class-like objects
+        fixable: false
+        name: no-invalid-this
+        recommended: false
+      - description: disallow the use of the `__iterator__` property
+        fixable: false
+        name: no-iterator
+        recommended: false
+      - description: disallow labeled statements
+        fixable: false
+        name: no-labels
+        recommended: false
+      - description: disallow unnecessary nested blocks
+        fixable: false
+        name: no-lone-blocks
+        recommended: false
+      - description: >-
+          disallow `function` declarations and expressions inside loop
+          statements
+        fixable: false
+        name: no-loop-func
+        recommended: false
+      - description: disallow magic numbers
+        fixable: false
+        name: no-magic-numbers
+        recommended: false
+      - description: disallow multiple spaces
+        fixable: true
+        name: no-multi-spaces
+        recommended: false
+      - description: disallow multiline strings
+        fixable: false
+        name: no-multi-str
+        recommended: false
+      - description: disallow `new` operators outside of assignments or comparisons
+        fixable: false
+        name: no-new
+        recommended: false
+      - description: disallow `new` operators with the `Function` object
+        fixable: false
+        name: no-new-func
+        recommended: false
+      - description: >-
+          disallow `new` operators with the `String`, `Number`, and `Boolean`
+          objects
+        fixable: false
+        name: no-new-wrappers
+        recommended: false
+      - description: disallow octal literals
+        fixable: false
+        name: no-octal
+        recommended: true
+      - description: disallow octal escape sequences in string literals
+        fixable: false
+        name: no-octal-escape
+        recommended: false
+      - description: disallow reassigning `function` parameters
+        fixable: false
+        name: no-param-reassign
+        recommended: false
+      - description: disallow the use of the `__proto__` property
+        fixable: false
+        name: no-proto
+        recommended: false
+      - description: disallow variable redeclaration
+        fixable: false
+        name: no-redeclare
+        recommended: true
+      - description: disallow certain properties on certain objects
+        fixable: false
+        name: no-restricted-properties
+        recommended: false
+      - description: disallow assignment operators in `return` statements
+        fixable: false
+        name: no-return-assign
+        recommended: false
+      - description: disallow unnecessary `return await`
+        fixable: false
+        name: no-return-await
+        recommended: false
+      - description: 'disallow `javascript:` urls'
+        fixable: false
+        name: no-script-url
+        recommended: false
+      - description: disallow assignments where both sides are exactly the same
+        fixable: false
+        name: no-self-assign
+        recommended: true
+      - description: disallow comparisons where both sides are exactly the same
+        fixable: false
+        name: no-self-compare
+        recommended: false
+      - description: disallow comma operators
+        fixable: false
+        name: no-sequences
+        recommended: false
+      - description: disallow throwing literals as exceptions
+        fixable: false
+        name: no-throw-literal
+        recommended: false
+      - description: disallow unmodified loop conditions
+        fixable: false
+        name: no-unmodified-loop-condition
+        recommended: false
+      - description: disallow unused expressions
+        fixable: false
+        name: no-unused-expressions
+        recommended: false
+      - description: disallow unused labels
+        fixable: true
+        name: no-unused-labels
+        recommended: true
+      - description: disallow unnecessary calls to `.call()` and `.apply()`
+        fixable: false
+        name: no-useless-call
+        recommended: false
+      - description: disallow unnecessary concatenation of literals or template literals
+        fixable: false
+        name: no-useless-concat
+        recommended: false
+      - description: disallow unnecessary escape characters
+        fixable: false
+        name: no-useless-escape
+        recommended: true
+      - description: disallow redundant return statements
+        fixable: true
+        name: no-useless-return
+        recommended: false
+      - description: disallow `void` operators
+        fixable: false
+        name: no-void
+        recommended: false
+      - description: disallow specified warning terms in comments
+        fixable: false
+        name: no-warning-comments
+        recommended: false
+      - description: disallow `with` statements
+        fixable: false
+        name: no-with
+        recommended: false
+      - description: require using Error objects as Promise rejection reasons
+        fixable: false
+        name: prefer-promise-reject-errors
+        recommended: false
+      - description: >-
+          enforce the consistent use of the radix argument when using
+          `parseInt()`
+        fixable: false
+        name: radix
+        recommended: false
+      - description: disallow async functions which have no `await` expression
+        fixable: false
+        name: require-await
+        recommended: false
+      - description: >-
+          require `var` declarations be placed at the top of their containing
+          scope
+        fixable: false
+        name: vars-on-top
+        recommended: false
+      - description: require parentheses around immediate `function` invocations
+        fixable: true
+        name: wrap-iife
+        recommended: false
+      - description: require or disallow "Yoda" conditions
+        fixable: true
+        name: yoda
+        recommended: false
+  - description: 'These rules relate to strict mode directives:'
+    name: Strict Mode
+    rules:
+      - description: require or disallow strict mode directives
+        fixable: true
+        name: strict
+        recommended: false
+  - description: 'These rules relate to variable declarations:'
+    name: Variables
+    rules:
+      - description: require or disallow initialization in variable declarations
+        fixable: false
+        name: init-declarations
+        recommended: false
+      - description: >-
+          disallow `catch` clause parameters from shadowing variables in the
+          outer scope
+        fixable: false
+        name: no-catch-shadow
+        recommended: false
+      - description: disallow deleting variables
+        fixable: false
+        name: no-delete-var
+        recommended: true
+      - description: disallow labels that share a name with a variable
+        fixable: false
+        name: no-label-var
+        recommended: false
+      - description: disallow specified global variables
+        fixable: false
+        name: no-restricted-globals
+        recommended: false
+      - description: >-
+          disallow variable declarations from shadowing variables declared in
+          the outer scope
+        fixable: false
+        name: no-shadow
+        recommended: false
+      - description: disallow identifiers from shadowing restricted names
+        fixable: false
+        name: no-shadow-restricted-names
+        recommended: false
+      - description: >-
+          disallow the use of undeclared variables unless mentioned in `/*global
+          */` comments
+        fixable: false
+        name: no-undef
+        recommended: true
+      - description: disallow initializing variables to `undefined`
+        fixable: true
+        name: no-undef-init
+        recommended: false
+      - description: disallow the use of `undefined` as an identifier
+        fixable: false
+        name: no-undefined
+        recommended: false
+      - description: disallow unused variables
+        fixable: false
+        name: no-unused-vars
+        recommended: true
+      - description: disallow the use of variables before they are defined
+        fixable: false
+        name: no-use-before-define
+        recommended: false
+  - description: >-
+      These rules relate to code running in Node.js, or in browsers with
+      CommonJS:
+    name: Node.js and CommonJS
+    rules:
+      - description: require `return` statements after callbacks
+        fixable: false
+        name: callback-return
+        recommended: false
+      - description: require `require()` calls to be placed at top-level module scope
+        fixable: false
+        name: global-require
+        recommended: false
+      - description: require error handling in callbacks
+        fixable: false
+        name: handle-callback-err
+        recommended: false
+      - description: disallow use of the Buffer() constructor
+        fixable: false
+        name: no-buffer-constructor
+        recommended: false
+      - description: >-
+          disallow `require` calls to be mixed with regular variable
+          declarations
+        fixable: false
+        name: no-mixed-requires
+        recommended: false
+      - description: disallow `new` operators with calls to `require`
+        fixable: false
+        name: no-new-require
+        recommended: false
+      - description: disallow string concatenation with `__dirname` and `__filename`
+        fixable: false
+        name: no-path-concat
+        recommended: false
+      - description: disallow the use of `process.env`
+        fixable: false
+        name: no-process-env
+        recommended: false
+      - description: disallow the use of `process.exit()`
+        fixable: false
+        name: no-process-exit
+        recommended: false
+      - description: disallow specified modules when loaded by `require`
+        fixable: false
+        name: no-restricted-modules
+        recommended: false
+      - description: disallow synchronous methods
+        fixable: false
+        name: no-sync
+        recommended: false
+  - description: >-
+      These rules relate to style guidelines, and are therefore quite
+      subjective:
+    name: Stylistic Issues
+    rules:
+      - description: enforce linebreaks after opening and before closing array brackets
+        fixable: true
+        name: array-bracket-newline
+        recommended: false
+      - description: enforce consistent spacing inside array brackets
+        fixable: true
+        name: array-bracket-spacing
+        recommended: false
+      - description: enforce line breaks after each array element
+        fixable: true
+        name: array-element-newline
+        recommended: false
+      - description: enforce consistent spacing inside single-line blocks
+        fixable: true
+        name: block-spacing
+        recommended: false
+      - description: enforce consistent brace style for blocks
+        fixable: true
+        name: brace-style
+        recommended: false
+      - description: enforce camelcase naming convention
+        fixable: false
+        name: camelcase
+        recommended: false
+      - description: enforce or disallow capitalization of the first letter of a comment
+        fixable: true
+        name: capitalized-comments
+        recommended: false
+      - description: require or disallow trailing commas
+        fixable: true
+        name: comma-dangle
+        recommended: false
+      - description: enforce consistent spacing before and after commas
+        fixable: true
+        name: comma-spacing
+        recommended: false
+      - description: enforce consistent comma style
+        fixable: true
+        name: comma-style
+        recommended: false
+      - description: enforce consistent spacing inside computed property brackets
+        fixable: true
+        name: computed-property-spacing
+        recommended: false
+      - description: enforce consistent naming when capturing the current execution context
+        fixable: false
+        name: consistent-this
+        recommended: false
+      - description: require or disallow newline at the end of files
+        fixable: true
+        name: eol-last
+        recommended: false
+      - description: >-
+          require or disallow spacing between function identifiers and their
+          invocations
+        fixable: true
+        name: func-call-spacing
+        recommended: false
+      - description: >-
+          require function names to match the name of the variable or property
+          to which they are assigned
+        fixable: false
+        name: func-name-matching
+        recommended: false
+      - description: require or disallow named `function` expressions
+        fixable: false
+        name: func-names
+        recommended: false
+      - description: >-
+          enforce the consistent use of either `function` declarations or
+          expressions
+        fixable: false
+        name: func-style
+        recommended: false
+      - description: disallow specified identifiers
+        fixable: false
+        name: id-blacklist
+        recommended: false
+      - description: enforce minimum and maximum identifier lengths
+        fixable: false
+        name: id-length
+        recommended: false
+      - description: require identifiers to match a specified regular expression
+        fixable: false
+        name: id-match
+        recommended: false
+      - description: enforce consistent indentation
+        fixable: true
+        name: indent
+        recommended: false
+      - description: >-
+          enforce the consistent use of either double or single quotes in JSX
+          attributes
+        fixable: true
+        name: jsx-quotes
+        recommended: false
+      - description: >-
+          enforce consistent spacing between keys and values in object literal
+          properties
+        fixable: true
+        name: key-spacing
+        recommended: false
+      - description: enforce consistent spacing before and after keywords
+        fixable: true
+        name: keyword-spacing
+        recommended: false
+      - description: enforce position of line comments
+        fixable: false
+        name: line-comment-position
+        recommended: false
+      - description: enforce consistent linebreak style
+        fixable: true
+        name: linebreak-style
+        recommended: false
+      - description: require empty lines around comments
+        fixable: true
+        name: lines-around-comment
+        recommended: false
+      - description: enforce a maximum depth that blocks can be nested
+        fixable: false
+        name: max-depth
+        recommended: false
+      - description: enforce a maximum line length
+        fixable: false
+        name: max-len
+        recommended: false
+      - description: enforce a maximum number of lines per file
+        fixable: false
+        name: max-lines
+        recommended: false
+      - description: enforce a maximum depth that callbacks can be nested
+        fixable: false
+        name: max-nested-callbacks
+        recommended: false
+      - description: enforce a maximum number of parameters in function definitions
+        fixable: false
+        name: max-params
+        recommended: false
+      - description: enforce a maximum number of statements allowed in function blocks
+        fixable: false
+        name: max-statements
+        recommended: false
+      - description: enforce a maximum number of statements allowed per line
+        fixable: false
+        name: max-statements-per-line
+        recommended: false
+      - description: enforce newlines between operands of ternary expressions
+        fixable: false
+        name: multiline-ternary
+        recommended: false
+      - description: require constructor names to begin with a capital letter
+        fixable: false
+        name: new-cap
+        recommended: false
+      - description: require parentheses when invoking a constructor with no arguments
+        fixable: true
+        name: new-parens
+        recommended: false
+      - description: require a newline after each call in a method chain
+        fixable: false
+        name: newline-per-chained-call
+        recommended: false
+      - description: disallow `Array` constructors
+        fixable: false
+        name: no-array-constructor
+        recommended: false
+      - description: disallow bitwise operators
+        fixable: false
+        name: no-bitwise
+        recommended: false
+      - description: disallow `continue` statements
+        fixable: false
+        name: no-continue
+        recommended: false
+      - description: disallow inline comments after code
+        fixable: false
+        name: no-inline-comments
+        recommended: false
+      - description: disallow `if` statements as the only statement in `else` blocks
+        fixable: true
+        name: no-lonely-if
+        recommended: false
+      - description: disallow mixed binary operators
+        fixable: false
+        name: no-mixed-operators
+        recommended: false
+      - description: disallow mixed spaces and tabs for indentation
+        fixable: false
+        name: no-mixed-spaces-and-tabs
+        recommended: true
+      - description: disallow use of chained assignment expressions
+        fixable: false
+        name: no-multi-assign
+        recommended: false
+      - description: disallow multiple empty lines
+        fixable: true
+        name: no-multiple-empty-lines
+        recommended: false
+      - description: disallow negated conditions
+        fixable: false
+        name: no-negated-condition
+        recommended: false
+      - description: disallow nested ternary expressions
+        fixable: false
+        name: no-nested-ternary
+        recommended: false
+      - description: disallow `Object` constructors
+        fixable: false
+        name: no-new-object
+        recommended: false
+      - description: disallow the unary operators `++` and `--`
+        fixable: false
+        name: no-plusplus
+        recommended: false
+      - description: disallow specified syntax
+        fixable: false
+        name: no-restricted-syntax
+        recommended: false
+      - description: disallow all tabs
+        fixable: false
+        name: no-tabs
+        recommended: false
+      - description: disallow ternary operators
+        fixable: false
+        name: no-ternary
+        recommended: false
+      - description: disallow trailing whitespace at the end of lines
+        fixable: true
+        name: no-trailing-spaces
+        recommended: false
+      - description: disallow dangling underscores in identifiers
+        fixable: false
+        name: no-underscore-dangle
+        recommended: false
+      - description: disallow ternary operators when simpler alternatives exist
+        fixable: true
+        name: no-unneeded-ternary
+        recommended: false
+      - description: disallow whitespace before properties
+        fixable: true
+        name: no-whitespace-before-property
+        recommended: false
+      - description: enforce the location of single-line statements
+        fixable: true
+        name: nonblock-statement-body-position
+        recommended: false
+      - description: enforce consistent line breaks inside braces
+        fixable: true
+        name: object-curly-newline
+        recommended: false
+      - description: enforce consistent spacing inside braces
+        fixable: true
+        name: object-curly-spacing
+        recommended: false
+      - description: enforce placing object properties on separate lines
+        fixable: true
+        name: object-property-newline
+        recommended: false
+      - description: >-
+          enforce variables to be declared either together or separately in
+          functions
+        fixable: false
+        name: one-var
+        recommended: false
+      - description: require or disallow newlines around variable declarations
+        fixable: true
+        name: one-var-declaration-per-line
+        recommended: false
+      - description: require or disallow assignment operator shorthand where possible
+        fixable: true
+        name: operator-assignment
+        recommended: false
+      - description: enforce consistent linebreak style for operators
+        fixable: true
+        name: operator-linebreak
+        recommended: false
+      - description: require or disallow padding within blocks
+        fixable: true
+        name: padded-blocks
+        recommended: false
+      - description: require or disallow padding lines between statements
+        fixable: true
+        name: padding-line-between-statements
+        recommended: false
+      - description: require quotes around object literal property names
+        fixable: true
+        name: quote-props
+        recommended: false
+      - description: >-
+          enforce the consistent use of either backticks, double, or single
+          quotes
+        fixable: true
+        name: quotes
+        recommended: false
+      - description: require JSDoc comments
+        fixable: false
+        name: require-jsdoc
+        recommended: false
+      - description: require or disallow semicolons instead of ASI
+        fixable: true
+        name: semi
+        recommended: false
+      - description: enforce consistent spacing before and after semicolons
+        fixable: true
+        name: semi-spacing
+        recommended: false
+      - description: enforce location of semicolons
+        fixable: true
+        name: semi-style
+        recommended: false
+      - description: require object keys to be sorted
+        fixable: false
+        name: sort-keys
+        recommended: false
+      - description: require variables within the same declaration block to be sorted
+        fixable: false
+        name: sort-vars
+        recommended: false
+      - description: enforce consistent spacing before blocks
+        fixable: true
+        name: space-before-blocks
+        recommended: false
+      - description: >-
+          enforce consistent spacing before `function` definition opening
+          parenthesis
+        fixable: true
+        name: space-before-function-paren
+        recommended: false
+      - description: enforce consistent spacing inside parentheses
+        fixable: true
+        name: space-in-parens
+        recommended: false
+      - description: require spacing around infix operators
+        fixable: true
+        name: space-infix-ops
+        recommended: false
+      - description: enforce consistent spacing before or after unary operators
+        fixable: true
+        name: space-unary-ops
+        recommended: false
+      - description: enforce consistent spacing after the `//` or `/*` in a comment
+        fixable: true
+        name: spaced-comment
+        recommended: false
+      - description: enforce spacing around colons of switch statements
+        fixable: true
+        name: switch-colon-spacing
+        recommended: false
+      - description: require or disallow spacing between template tags and their literals
+        fixable: true
+        name: template-tag-spacing
+        recommended: false
+      - description: require or disallow Unicode byte order mark (BOM)
+        fixable: true
+        name: unicode-bom
+        recommended: false
+      - description: require parenthesis around regex literals
+        fixable: true
+        name: wrap-regex
+        recommended: false
+  - description: 'These rules relate to ES6, also known as ES2015:'
+    name: ECMAScript 6
+    rules:
+      - description: require braces around arrow function bodies
+        fixable: true
+        name: arrow-body-style
+        recommended: false
+      - description: require parentheses around arrow function arguments
+        fixable: true
+        name: arrow-parens
+        recommended: false
+      - description: >-
+          enforce consistent spacing before and after the arrow in arrow
+          functions
+        fixable: true
+        name: arrow-spacing
+        recommended: false
+      - description: require `super()` calls in constructors
+        fixable: false
+        name: constructor-super
+        recommended: true
+      - description: enforce consistent spacing around `*` operators in generator functions
+        fixable: true
+        name: generator-star-spacing
+        recommended: false
+      - description: disallow reassigning class members
+        fixable: false
+        name: no-class-assign
+        recommended: true
+      - description: disallow arrow functions where they could be confused with comparisons
+        fixable: true
+        name: no-confusing-arrow
+        recommended: false
+      - description: disallow reassigning `const` variables
+        fixable: false
+        name: no-const-assign
+        recommended: true
+      - description: disallow duplicate class members
+        fixable: false
+        name: no-dupe-class-members
+        recommended: true
+      - description: disallow duplicate module imports
+        fixable: false
+        name: no-duplicate-imports
+        recommended: false
+      - description: disallow `new` operators with the `Symbol` object
+        fixable: false
+        name: no-new-symbol
+        recommended: true
+      - description: disallow specified modules when loaded by `import`
+        fixable: false
+        name: no-restricted-imports
+        recommended: false
+      - description: disallow `this`/`super` before calling `super()` in constructors
+        fixable: false
+        name: no-this-before-super
+        recommended: true
+      - description: disallow unnecessary computed property keys in object literals
+        fixable: true
+        name: no-useless-computed-key
+        recommended: false
+      - description: disallow unnecessary constructors
+        fixable: false
+        name: no-useless-constructor
+        recommended: false
+      - description: >-
+          disallow renaming import, export, and destructured assignments to the
+          same name
+        fixable: true
+        name: no-useless-rename
+        recommended: false
+      - description: require `let` or `const` instead of `var`
+        fixable: true
+        name: no-var
+        recommended: false
+      - description: >-
+          require or disallow method and property shorthand syntax for object
+          literals
+        fixable: true
+        name: object-shorthand
+        recommended: false
+      - description: require arrow functions as callbacks
+        fixable: true
+        name: prefer-arrow-callback
+        recommended: false
+      - description: >-
+          require `const` declarations for variables that are never reassigned
+          after declared
+        fixable: true
+        name: prefer-const
+        recommended: false
+      - description: require destructuring from arrays and/or objects
+        fixable: false
+        name: prefer-destructuring
+        recommended: false
+      - description: >-
+          disallow `parseInt()` in favor of binary, octal, and hexadecimal
+          literals
+        fixable: true
+        name: prefer-numeric-literals
+        recommended: false
+      - description: require rest parameters instead of `arguments`
+        fixable: false
+        name: prefer-rest-params
+        recommended: false
+      - description: require spread operators instead of `.apply()`
+        fixable: true
+        name: prefer-spread
+        recommended: false
+      - description: require template literals instead of string concatenation
+        fixable: true
+        name: prefer-template
+        recommended: false
+      - description: require generator functions to contain `yield`
+        fixable: false
+        name: require-yield
+        recommended: true
+      - description: >-
+          enforce spacing between rest and spread operators and their
+          expressions
+        fixable: true
+        name: rest-spread-spacing
+        recommended: false
+      - description: enforce sorted import declarations within modules
+        fixable: true
+        name: sort-imports
+        recommended: false
+      - description: require symbol descriptions
+        fixable: false
+        name: symbol-description
+        recommended: false
+      - description: >-
+          require or disallow spacing around embedded expressions of template
+          strings
+        fixable: true
+        name: template-curly-spacing
+        recommended: false
+      - description: require or disallow spacing around the `*` in `yield*` expressions
+        fixable: true
+        name: yield-star-spacing
+        recommended: false
+deprecated:
+  description: 'These rules have been deprecated and replaced by newer rules:'
+  name: Deprecated
+  rules:
+    - name: indent-legacy
+      replacedBy:
+        - indent
+    - name: lines-around-directive
+      replacedBy:
+        - padding-line-between-statements
+    - name: newline-after-var
+      replacedBy:
+        - padding-line-between-statements
+    - name: newline-before-return
+      replacedBy:
+        - padding-line-between-statements
+    - name: no-native-reassign
+      replacedBy:
+        - no-global-assign
+    - name: no-negated-in-lhs
+      replacedBy:
+        - no-unsafe-negation
+    - name: no-spaced-func
+      replacedBy:
+        - func-call-spacing
+    - name: prefer-reflect
+      replacedBy: []
+removed:
+  description: 'These rules from older versions of ESLint have been replaced by newer rules:'
+  name: Removed
+  rules:
+    - removed: generator-star
+      replacedBy:
+        - generator-star-spacing
+    - removed: global-strict
+      replacedBy:
+        - strict
+    - removed: no-arrow-condition
+      replacedBy:
+        - no-confusing-arrow
+        - no-constant-condition
+    - removed: no-comma-dangle
+      replacedBy:
+        - comma-dangle
+    - removed: no-empty-class
+      replacedBy:
+        - no-empty-character-class
+    - removed: no-empty-label
+      replacedBy:
+        - no-labels
+    - removed: no-extra-strict
+      replacedBy:
+        - strict
+    - removed: no-reserved-keys
+      replacedBy:
+        - quote-props
+    - removed: no-space-before-semi
+      replacedBy:
+        - semi-spacing
+    - removed: no-wrap-func
+      replacedBy:
+        - no-extra-parens
+    - removed: space-after-function-name
+      replacedBy:
+        - space-before-function-paren
+    - removed: space-after-keywords
+      replacedBy:
+        - keyword-spacing
+    - removed: space-before-function-parentheses
+      replacedBy:
+        - space-before-function-paren
+    - removed: space-before-keywords
+      replacedBy:
+        - keyword-spacing
+    - removed: space-in-brackets
+      replacedBy:
+        - object-curly-spacing
+        - array-bracket-spacing
+    - removed: space-return-throw-case
+      replacedBy:
+        - keyword-spacing
+    - removed: space-unary-word-ops
+      replacedBy:
+        - space-unary-ops
+    - removed: spaced-line-comment
+      replacedBy:
+        - spaced-comment

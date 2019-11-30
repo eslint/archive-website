@@ -1,0 +1,211 @@
+- url: https://daofx.com
+  src: /assets/img/logos/daofx.svg
+  name: DaoFx Inc.
+
+- url: https://sina.cn
+  src: /assets/img/logos/sina-mobile.png
+  name: Sina News
+
+- url: http://m.sm.cn
+  src: /assets/img/logos/sm.png
+  name: sm.cn
+
+- url: https://www.adroll.com
+  src: /assets/img/logos/adroll.svg
+  name: AdRoll
+
+- url: https://www.zendesk.com
+  src: /assets/img/logos/zendesk.svg
+  name: Zendesk
+
+- url: http://www.domain.com.au
+  src: /assets/img/logos/domain.svg
+  name: Domain
+
+- url: https://www.box.com
+  src: /assets/img/logos/box.png
+  name: Box
+
+- url: https://www.facebook.com
+  src: /assets/img/logos/facebook.png
+  name: Facebook
+
+- url: https://codingsans.com
+  src: /assets/img/logos/codingsans.png
+  name: Coding Sans
+
+- url: https://www.paypal.com
+  src: /assets/img/logos/paypal.svg
+  name: PayPal
+
+- url: http://www.thenativeweb.io
+  src: /assets/img/logos/the-native-web.png
+  name: The Native Web
+
+- url: http://www.windsorcircle.com
+  src: /assets/img/logos/windsorcircle.png
+  name: Windsor Circle
+
+- url: http://www.geekpark.net
+  src: /assets/img/logos/geekpark.png
+  name: GeekPark
+
+- url: http://www.atlassian.com
+  src: /assets/img/logos/atlassian.svg
+  name: Atlassian
+
+- url: http://www.alianza.com
+  src: /assets/img/logos/alianza.png
+  name: Alianza Inc.
+
+- url: http://angular-formly.com
+  src: /assets/img/logos/angular-formly.png
+  name: angular-formly
+
+- url: http://www.millenium.org
+  src: /assets/img/logos/millenium.svg
+  name: Millenium
+
+- url: https://disqus.com
+  src: /assets/img/logos/disqus.svg
+  name: Disqus
+
+- url: http://2gis.ru
+  src: /assets/img/logos/2gis.svg
+  name: 2GIS
+
+- url: https://www.brigade.com
+  src: /assets/img/logos/brigade.svg
+  name: Brigade
+
+- url: https://github.com/valor-software
+  src: /assets/img/logos/valor-software-sm.png
+  name: Valor Software
+
+- url: https://getkahoot.com
+  src: /assets/img/logos/kahoot.png
+  name: Kahoot!
+
+- url: http://www.cerner.com
+  src: /assets/img/logos/cerner.png
+  name: Cerner
+
+- url: https://codinum.com
+  src: /assets/img/logos/codinum.png
+  name: Codinum
+
+- url: https://www.qualitybath.com
+  src: /assets/img/logos/qualitybath.png
+  name: QualityBath.com
+
+- url: http://cocktailjs.github.io
+  src: /assets/img/logos/cocktailjs.png
+  name: CocktailJS
+
+- url: http://www.schibsted.com/
+  src: /assets/img/logos/schibsted.png
+  name: Schibsted
+
+- url: http://www.computerbase.de/
+  src: /assets/img/logos/computerbase.svg
+  name: ComputerBase
+
+- url: https://github.com/fingerproof
+  src: /assets/img/logos/fingerproof.png
+  name: fingerproof
+
+- url: http://www.simplifield.com/
+  src: /assets/img/logos/simplifield.png
+  name: SimpliField
+
+- url: https://www.getable.com/
+  src: /assets/img/logos/getable.png
+  name: Getable
+
+- url: https://www.algolia.com/
+  src: /assets/img/logos/algolia.svg
+  name: Algolia
+
+- url: https://www.transloadit.com/
+  src: /assets/img/logos/transloadit.png
+  name: Transloadit
+
+- url: https://www.paperlesspost.com/
+  src: /assets/img/logos/paperlesspost.png
+  name: Paperless Post
+
+- url: https://www.airbnb.com
+  src: /assets/img/logos/airbnb.png
+  name: Airbnb
+
+- url: https://read.douban.com
+  src: /assets/img/logos/ark.svg
+  name: Ark Reading
+
+- url: http://phoenixrobotix.com
+  src: /assets/img/logos/phoenixrobotix.png
+  name: Phoenix Robotix
+
+- url: http://www.jeuxvideo.com/
+  src: /assets/img/logos/jeuxvideo.com.svg
+  name: JeuxVideo.com
+
+- url: https://www.airhelp.com/
+  src: /assets/img/logos/airhelp.png
+  name: AirHelp
+
+- url: https://www.squarespace.com
+  src: /assets/img/logos/squarespace.png
+  name: Squarespace
+
+- url: https://www.microsoft.com/
+  src: /assets/img/logos/microsoft.svg
+  name: Microsoft
+
+- url: https://www.tanda.co
+  src: /assets/img/logos/tanda.svg
+  name: Tanda
+
+- url: https://netflix.com
+  src: /assets/img/logos/netflix.svg
+  name: Netflix
+
+- url: https://bluecore.com
+  src: /assets/img/logos/bluecore.svg
+  name: Bluecore
+
+- url: https://camptocamp.com
+  src: /assets/img/logos/camptocamp.svg
+  name: Camptocamp
+
+- url: https://buddy.works
+  src: /assets/img/logos/buddy.svg
+  name: Buddy
+
+- url: https://hasura.io
+  src: /assets/img/logos/hasura.svg
+  name: Hasura
+
+- url: https://www.mongodb.com/
+  src: /assets/img/logos/mongodb.svg
+  name: MongoDB
+
+- url: https://www.directlyrics.com/
+  src: /assets/img/logos/directlyrics.svg
+  name: Directlyrics
+
+- url: https://www.gandi.net/
+  src: /assets/img/logos/gandi.svg
+  name: Gandi.net
+
+- url: https://weave.works/
+  src: /assets/img/logos/weaveworks.svg
+  name: Weaveworks
+
+- url: https://www.openbravo.com
+  src: /assets/img/logos/openbravo.svg
+  name: Openbravo
+
+- url: https://www.minutemedia.com
+  src: /assets/img/logos/minutemedia.svg
+  name: MinuteMedia

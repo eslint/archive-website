@@ -3,3 +3,6 @@ _site/
 npm-debug.log
 assets/build
 .idea
+_data/logos.json
+_data/rules.json
+_data/rules4.json

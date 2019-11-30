@@ -16,16 +16,17 @@
     "node": ">=12.0.0"
   },
   "scripts": {
-    "build:eleventy": "eleventy",
+    "build:eleventy": "npm run convert-yaml && eleventy",
     "build:webpack": "webpack --mode=production",
     "build:less": "lessc src/styles/main.less _site/assets/styles/main.css --clean-css --source-map=_site/assets/styles/main.css.map",
     "build": "npm run build:eleventy && npm run build:less && npm run build:webpack",
-    "start:eleventy": "NODE_ENV=development eleventy --watch",
+    "start:eleventy": "npm run convert-yaml && NODE_ENV=development eleventy --watch",
     "start:webpack": "webpack -w --mode=development",
     "start": "node _tools/dev-server.js",
     "lint": "eslint --ext=.js,.jsx .",
     "test": "npm run lint",
-    "fix": "npm run lint -- --fix"
+    "fix": "npm run lint -- --fix",
+    "convert-yaml": "node _tools/yaml-to-json.js '_data/*.yml'"
   },
   "dependencies": {
     "anchor-js": "^4.2.0",
@@ -53,9 +54,11 @@
     "eslint-plugin-node": "^9.1.0",
     "eslint-plugin-react": "^7.14.2",
     "express": "^4.17.1",
+    "glob-promise": "^3.4.0",
     "html-entities": "^1.2.1",
     "html-minifier": "^4.0.0",
     "htmlparser2": "^4.0.0",
+    "js-yaml": "^3.13.1",
     "json-loader": "^0.5.2",
     "less": "^3.9.0",
     "less-loader": "^5.0.0",

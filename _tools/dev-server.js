@@ -153,14 +153,19 @@ app.use((req, res) => res.status(404).sendFile(path.join(__dirname, "../_site/40
 app.listen(PORT, () => {
 
     // Less dosen't have a maintained watcher.
-    chokidar.watch(path.resolve(ROOT_DIR, "src/styles/**/*.less"))
+    chokidar.watch(["_data/*.yml", "src/styles/**/*.less"])
         .on("change", filePath => {
-            console.log(`\n${filePath} changed. Recompiling styles.`);
-            spawnChildProcess("npm", ["run", "build:less"]);
-        })
-        .on("ready", () => spawnChildProcess("npm", ["run", "build:less"]));
+            if (path.extname(filePath) === ".yml") {
+                console.log(`\n${filePath} changed. Converting YAML to JSON.`);
+                spawnChildProcess("npm", ["run", "convert-yaml"]);
+            } else if (path.extname(filePath) === ".less") {
+                console.log(`\n${filePath} changed. Recompiling styles.`);
+                spawnChildProcess("npm", ["run", "build:less"]);
+            }
+        });
 
-    spawnChildProcess("npm", ["run", "start:eleventy"]);
+    spawnChildProcess("npm", ["run", "build:less"]);
     spawnChildProcess("npm", ["run", "start:webpack"]);
+    spawnChildProcess("npm", ["run", "start:eleventy"]);
     console.log(`Local version of eslint.org can be accessed at http://localhost:${PORT}.\n`);
 });
