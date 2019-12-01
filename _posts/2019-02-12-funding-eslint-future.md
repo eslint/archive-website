@@ -18,7 +18,7 @@ In short, we've realized that in order for ESLint to continue to grow and evolve
 
 ## The ESLint Collective
 
-<p class="text-center"><a href="https://opencollective.com/eslint"><img src="/img/posts/eslint-collective.png" alt="ESLint Collective Logo" style="max-width: 100%"></a><br><a href="https://opencollective.com/eslint" class="btn btn-default">Become a Sponsor</a></p>
+<p class="text-center"><a href="https://opencollective.com/eslint"><img src="/assets/img/posts/eslint-collective.png" alt="ESLint Collective Logo" style="max-width: 100%"></a><br><a href="https://opencollective.com/eslint" class="btn btn-default">Become a Sponsor</a></p>
 
 Today, we are happy to announce the [ESLint Collective](https://opencollective.com/eslint) on Open Collective. Open Collective is a secure way for people to sustain and support open source projects. The funds taken in and paid out are publicly available on each collective's page, so there is 100% transparency around the money a collective uses. Open Collective has already helped other JavaScript ecosystem projects such as [Webpack](https://opencollective.com/webpack) and [Babel](https://opencollective.com/babel) to fund their ongoing development, and the ESLint team is happy to join them on what has proven to be a great option for open source sustainability.
 
