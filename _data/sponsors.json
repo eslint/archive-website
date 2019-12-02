@@ -117,7 +117,7 @@
             "url": "https://icons8.com",
             "image": "https://images.opencollective.com/icons8/0b37d14/logo.png",
             "monthlyDonation": 20000,
-            "totalDonations": 80000,
+            "totalDonations": 100000,
             "source": "opencollective",
             "tier": "bronze-sponsor"
         },
@@ -341,7 +341,7 @@
             "url": "https://verdaccio.org/",
             "image": "https://images.opencollective.com/verdaccio/2d6ef61/logo.png",
             "monthlyDonation": 500,
-            "totalDonations": 3000,
+            "totalDonations": 3500,
             "source": "opencollective",
             "tier": "backer"
         },
@@ -485,7 +485,7 @@
             "url": "https://pymaster.tw",
             "image": "https://images.opencollective.com/pc035860/8fed8ae/avatar.png",
             "monthlyDonation": 500,
-            "totalDonations": 5000,
+            "totalDonations": 5500,
             "source": "opencollective",
             "tier": "backer"
         },
