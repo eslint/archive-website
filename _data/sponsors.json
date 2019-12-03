@@ -99,7 +99,7 @@
             "url": "https://mixpanel.com",
             "image": "https://images.opencollective.com/mixpanel/cd682f7/logo.png",
             "monthlyDonation": 20000,
-            "totalDonations": 60000,
+            "totalDonations": 80000,
             "source": "opencollective",
             "tier": "bronze-sponsor"
         },
@@ -189,7 +189,7 @@
             "url": "https://jsheroes.io/",
             "image": "https://images.opencollective.com/jsheroes1/9fedf0b/logo.png",
             "monthlyDonation": 20000,
-            "totalDonations": 180000,
+            "totalDonations": 200000,
             "source": "opencollective",
             "tier": "bronze-sponsor"
         }
@@ -218,7 +218,7 @@
             "url": "http://sebastian-software.de/",
             "image": "https://images.opencollective.com/sebastiansoft/74395cd/logo.png",
             "monthlyDonation": 2500,
-            "totalDonations": 22500,
+            "totalDonations": 25000,
             "source": "opencollective",
             "tier": "backer"
         },
@@ -394,7 +394,7 @@
             "url": "http://pushred.co",
             "image": "https://images.opencollective.com/pushred/506ad8d/avatar.png",
             "monthlyDonation": 500,
-            "totalDonations": 4500,
+            "totalDonations": 5000,
             "source": "opencollective",
             "tier": "backer"
         },
@@ -403,16 +403,7 @@
             "url": "https://twitter.com/jumbleofideas",
             "image": "https://images.opencollective.com/aj-klein/b63b472/avatar.png",
             "monthlyDonation": 500,
-            "totalDonations": 4500,
-            "source": "opencollective",
-            "tier": "backer"
-        },
-        {
-            "name": "Andrew Rota",
-            "url": "https://twitter.com/andrewrota",
-            "image": "https://images.opencollective.com/andrewrota/a124847/avatar.png",
-            "monthlyDonation": 500,
-            "totalDonations": 4500,
+            "totalDonations": 5000,
             "source": "opencollective",
             "tier": "backer"
         },
@@ -421,7 +412,16 @@
             "url": null,
             "image": "https://images.opencollective.com/oliver-sieweke/avatar.png",
             "monthlyDonation": 500,
-            "totalDonations": 2000,
+            "totalDonations": 2500,
+            "source": "opencollective",
+            "tier": "backer"
+        },
+        {
+            "name": "Third Iron",
+            "url": "https://thirdiron.com",
+            "image": "https://images.opencollective.com/third_iron/fa6ec4d/logo.png",
+            "monthlyDonation": 500,
+            "totalDonations": 5500,
             "source": "opencollective",
             "tier": "backer"
         },
@@ -448,7 +448,7 @@
             "url": "http://cantremember.com",
             "image": "https://images.opencollective.com/cantremember/avatar.png",
             "monthlyDonation": 500,
-            "totalDonations": 5000,
+            "totalDonations": 5500,
             "source": "opencollective",
             "tier": "backer"
         },
@@ -458,15 +458,6 @@
             "image": "https://images.opencollective.com/simon-korzun/cbdefdd/avatar.png",
             "monthlyDonation": 500,
             "totalDonations": 5500,
-            "source": "opencollective",
-            "tier": "backer"
-        },
-        {
-            "name": "Mariusz Nowak",
-            "url": "https://medikoo.com",
-            "image": "https://images.opencollective.com/medikoo/f16a7ea/avatar.png",
-            "monthlyDonation": 500,
-            "totalDonations": 5000,
             "source": "opencollective",
             "tier": "backer"
         },
@@ -520,7 +511,7 @@
             "url": null,
             "image": "https://images.opencollective.com/james-sherwood-jones/avatar.png",
             "monthlyDonation": 500,
-            "totalDonations": 2500,
+            "totalDonations": 3000,
             "source": "opencollective",
             "tier": "backer"
         },
@@ -529,7 +520,7 @@
             "url": "http://nubz.com",
             "image": "https://images.opencollective.com/nubz/logo.png",
             "monthlyDonation": 500,
-            "totalDonations": 5000,
+            "totalDonations": 5500,
             "source": "opencollective",
             "tier": "backer"
         },
@@ -556,7 +547,7 @@
             "url": "https://twitter.com/LJHarb",
             "image": "https://images.opencollective.com/ljharb/b75a3f8/avatar.png",
             "monthlyDonation": 500,
-            "totalDonations": 5000,
+            "totalDonations": 5500,
             "source": "opencollective",
             "tier": "backer"
         },
@@ -601,9 +592,9 @@
             "tier": "backer"
         },
         {
-            "name": "Third Iron",
-            "url": "https://thirdiron.com",
-            "image": "https://images.opencollective.com/third_iron/fa6ec4d/logo.png",
+            "name": "Andrew Rota",
+            "url": "https://twitter.com/andrewrota",
+            "image": "https://images.opencollective.com/andrewrota/a124847/avatar.png",
             "monthlyDonation": 500,
             "totalDonations": 5000,
             "source": "opencollective",
