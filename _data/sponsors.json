@@ -286,17 +286,17 @@
             "tier": "backer"
         },
         {
-            "name": "Ivan Demidov",
-            "image": "https://avatars0.githubusercontent.com/u/2789192?v=4",
-            "url": "https://twitter.com/Scrum_",
+            "name": "Evan Hirsh",
+            "image": "https://avatars2.githubusercontent.com/u/4483135?v=4",
+            "url": "http://www.ehirsh.com",
             "monthlyDonation": 500,
             "source": "github",
             "tier": "backer"
         },
         {
-            "name": "Kelp",
-            "image": "https://avatars3.githubusercontent.com/u/1680868?v=4",
-            "url": "https://meetpet.org",
+            "name": "Ivan Demidov",
+            "image": "https://avatars0.githubusercontent.com/u/2789192?v=4",
+            "url": "https://twitter.com/Scrum_",
             "monthlyDonation": 500,
             "source": "github",
             "tier": "backer"
@@ -320,9 +320,9 @@
             "tier": "backer"
         },
         {
-            "name": "Evan Hirsh",
-            "image": "https://avatars2.githubusercontent.com/u/4483135?v=4",
-            "url": "http://www.ehirsh.com",
+            "name": "Matan Kushner",
+            "image": "https://avatars0.githubusercontent.com/u/4658208?v=4",
+            "url": "https://twitter.com/matchai",
             "monthlyDonation": 500,
             "source": "github",
             "tier": "backer"
@@ -508,15 +508,6 @@
             "tier": "backer"
         },
         {
-            "name": "Matan Kushner",
-            "url": "http://matchai.me",
-            "image": "https://images.opencollective.com/matchai/e1d9969/avatar.png",
-            "monthlyDonation": 500,
-            "totalDonations": 6000,
-            "source": "opencollective",
-            "tier": "backer"
-        },
-        {
             "name": "Kevin Lamping",
             "url": "http://klamp.in",
             "image": "https://images.opencollective.com/klamping/26de35c/avatar.png",
@@ -606,6 +597,14 @@
             "name": "Jonny Burger",
             "image": "https://avatars2.githubusercontent.com/u/1629785?v=4",
             "url": "https://jonny.io",
+            "monthlyDonation": 500,
+            "source": "github",
+            "tier": "backer"
+        },
+        {
+            "name": "Kelp",
+            "image": "https://avatars3.githubusercontent.com/u/1680868?v=4",
+            "url": "https://meetpet.org",
             "monthlyDonation": 500,
             "source": "github",
             "tier": "backer"
