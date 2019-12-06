@@ -6,7 +6,6 @@ const CleanCSSPlugin = require("less-plugin-clean-css");
 module.exports = {
     entry: {
         demo: path.join(__dirname, "src/js/demo/index.js"),
-        parser: path.join(__dirname, "src/js/parser/index.js"),
         main: path.join(__dirname, "src/js/main/index.js")
     },
     output: {
