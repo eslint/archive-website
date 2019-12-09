@@ -68,11 +68,20 @@
             "tier": "bronze-sponsor"
         },
         {
-            "name": "EduBirdie",
-            "url": "https://edubirdie.com/",
-            "image": "https://images.opencollective.com/edubirdie2/b1d51ab/logo.png",
+            "name": "Top Web Design Agencies",
+            "url": "https://medium.com/@niksundin/best-web-design-companies-1872e445775f",
+            "image": "https://images.opencollective.com/top-web-design-agencies/d92d747/logo.png",
             "monthlyDonation": 20000,
             "totalDonations": 20000,
+            "source": "opencollective",
+            "tier": "bronze-sponsor"
+        },
+        {
+            "name": "Bugsnag Stability Monitoring",
+            "url": "https://www.bugsnag.com/platforms?utm_source=Open Collective&utm_medium=Website&utm_content=open-source&utm_campaign=2019-community&utm_term=",
+            "image": "https://images.opencollective.com/bugsnag-stability-monitoring/c2cef36/logo.png",
+            "monthlyDonation": 20000,
+            "totalDonations": 40000,
             "source": "opencollective",
             "tier": "bronze-sponsor"
         },
@@ -122,11 +131,11 @@
             "tier": "bronze-sponsor"
         },
         {
-            "name": "Bugsnag Stability Monitoring",
-            "url": "https://www.bugsnag.com/platforms?utm_source=Open Collective&utm_medium=Website&utm_content=open-source&utm_campaign=2019-community&utm_term=",
-            "image": "https://images.opencollective.com/bugsnag-stability-monitoring/c2cef36/logo.png",
+            "name": "EduBirdie",
+            "url": "https://edubirdie.com/",
+            "image": "https://images.opencollective.com/edubirdie2/b1d51ab/logo.png",
             "monthlyDonation": 20000,
-            "totalDonations": 40000,
+            "totalDonations": 20000,
             "source": "opencollective",
             "tier": "bronze-sponsor"
         },
