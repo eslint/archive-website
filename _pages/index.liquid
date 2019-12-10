@@ -40,7 +40,7 @@ homepage: true
     <p class="sponsor-desc text-center">{{ supportersCount }} companies, organizations, and individuals are currently contributing <b>${{ monthlyTotal }}</b> each month to support ESLint's ongoing maintenance and development.</p>
     <p class="sponsor-btn text-center"><a class="btn btn-default" href="https://opencollective.com/eslint">Become a Sponsor today!</a></p>
     <div class="sponsor-tiers">
-      {% assign tiers = "gold,silver,bronze" | split: "," %}
+      {% assign tiers = "platinum,gold,silver,bronze" | split: "," %}
       {% for tier in tiers %}
           {% if sponsors[tier].size > 0 %}
               <h4 class="sponsor-heading text-center">{{ tier | capitalize }} Sponsors</h4>

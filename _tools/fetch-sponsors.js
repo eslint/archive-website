@@ -26,6 +26,7 @@ const sponsorsFilename = "./_data/sponsors.json";
 
 // simplified data structure
 const tierSponsors = {
+    platinum: [],
     gold: [],
     silver: [],
     bronze: [],
@@ -48,6 +49,10 @@ if (!ESLINT_GITHUB_TOKEN) {
  * @returns {string} The ID of the tier the donation belongs to.
  */
 function getTierSlug(monthlyDonation) {
+    if (monthlyDonation >= 2000) {
+        return "platinum-sponsor";
+    }
+
     if (monthlyDonation >= 1000) {
         return "gold-sponsor";
     }
@@ -174,6 +179,10 @@ async function fetchGitHubSponsors() {
     for (const sponsor of sponsors) {
 
         switch (sponsor.tier) {
+            case "platinum-sponsor":
+                tierSponsors.platinum.push(sponsor);
+                break;
+
             case "gold-sponsor":
                 tierSponsors.gold.push(sponsor);
                 break;
