@@ -34,28 +34,35 @@ homepage: true
 {% endfor %}
 {% assign monthlyTotal = monthlyTotal | divided_by: 100 %}
 
-<div class="row">
+<div class="sponsors row">
   <div class="col-sm-12">
     <h2 class="text-center">Sponsors</h2>
-    <p class="text-center">{{ supportersCount }} companies, organizations, and individuals are currently contributing <b>${{ monthlyTotal }}</b> each month to support ESLint's ongoing maintenance and development.</p>
-    {% assign tiers = "gold,silver,bronze" | split: "," %}
-    {% for tier in tiers %}
-        {% if sponsors[tier].size > 0 %}
-            <h3 class="text-center">{{ tier | capitalize }} Sponsors</h3>
-            <div class="sponsors text-center">
-                {% for sponsor in sponsors[tier] %}
-                    <a href="{{ sponsor.url }}" title="{{ sponsor.name }}" rel="noopener nofollow" target="_blank"><img class="lazyload {{ tier }}-sponsor" data-src="{{ sponsor.image }}" alt="{{ sponsor.name }}"></a>
-                {% endfor %}
-            </div>
-            <p class="text-center"><a class="btn btn-default" href="https://opencollective.com/eslint">Become a Sponsor</a></p>
-        {% endif %}
-    {% endfor %}
-    <h3 class="text-center">Hosting</h3>
-    <div class="sponsors text-center">
-        <a href="https://www.netlify.com" rel="noopener nofollow" target="_blank">
-            <img src="https://www.netlify.com/img/global/badges/netlify-color-accent.svg"/>
-        </a>
+    <p class="sponsor-desc text-center">{{ supportersCount }} companies, organizations, and individuals are currently contributing <b>${{ monthlyTotal }}</b> each month to support ESLint's ongoing maintenance and development.</p>
+    <p class="sponsor-btn text-center"><a class="btn btn-default" href="https://opencollective.com/eslint">Become a Sponsor today!</a></p>
+    <div class="sponsor-tiers">
+      {% assign tiers = "gold,silver,bronze" | split: "," %}
+      {% for tier in tiers %}
+          {% if sponsors[tier].size > 0 %}
+              <h4 class="sponsor-heading text-center">{{ tier | capitalize }} Sponsors</h4>
+              <div class="sponsor-tier text-center">
+                  {% for sponsor in sponsors[tier] %}
+                    <a href="{{ sponsor.url }}" title="{{ sponsor.name }}" rel="noopener nofollow" target="_blank">
+                      <div class="sponsor {{ tier }}-sponsor">
+                        <img class="lazyload" data-src="{{ sponsor.image }}" alt="{{ sponsor.name }}">
+                      </div>
+                    </a>
+                  {% endfor %}
+              </div>
+          {% endif %}
+      {% endfor %}
+      <h4 class="sponsor-heading text-center">Hosting</h4>
+      <div class="sponsor-tier text-center">
+          <a href="https://www.netlify.com" rel="noopener nofollow" target="_blank">
+              <img src="https://www.netlify.com/img/global/badges/netlify-color-accent.svg"/>
+          </a>
+      </div>
     </div>
+    <p class="sponsor-btn text-center"><a class="btn btn-default" href="https://opencollective.com/eslint">Become a Sponsor today!</a></p>
   </div>
 </div>
 

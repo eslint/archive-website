@@ -1,17 +1,56 @@
 .sponsors {
-    margin-bottom: 12px;
+    .sponsor-desc {
+        margin: 24px auto 36px;
+        max-width: 768px;
+    }
+
+    .sponsor-heading {
+        font-weight: bold;
+    }
+
+    .sponsor-tiers {
+      margin: 36px auto;
+    }
+
+    .sponsor-tier {
+        margin: 0 auto 24px;
+    }
+
+    .sponsor {
+        display: inline-block;
+        border-radius: 50%;
+        overflow: hidden;
+        position: relative;
+
+        img {
+            width: 100%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+    }
 
     .gold-sponsor {
         height: 96px;
+        width: 96px;
+        margin: 0 3px;
     }
 
     .silver-sponsor {
         height: 64px;
-        max-width: 192px;
+        width: 64px;
+        margin: 0 2px;
     }
 
     .bronze-sponsor {
         height: 32px;
-        max-width: 96px;
+        width: 32px;
+        margin: 0 1px;
+    }
+
+    .sponsor-btn .btn {
+        font-size: 22px;
+        font-weight: bold;
     }
 }
