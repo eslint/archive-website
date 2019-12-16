@@ -303,9 +303,9 @@
             "tier": "backer"
         },
         {
-            "name": "Ivan Demidov",
-            "image": "https://avatars0.githubusercontent.com/u/2789192?v=4",
-            "url": "https://twitter.com/Scrum_",
+            "name": "Kelp",
+            "image": "https://avatars3.githubusercontent.com/u/1680868?v=4",
+            "url": "https://meetpet.org",
             "monthlyDonation": 500,
             "source": "github",
             "tier": "backer"
@@ -606,14 +606,6 @@
             "name": "Jonny Burger",
             "image": "https://avatars2.githubusercontent.com/u/1629785?v=4",
             "url": "https://jonny.io",
-            "monthlyDonation": 500,
-            "source": "github",
-            "tier": "backer"
-        },
-        {
-            "name": "Kelp",
-            "image": "https://avatars3.githubusercontent.com/u/1680868?v=4",
-            "url": "https://meetpet.org",
             "monthlyDonation": 500,
             "source": "github",
             "tier": "backer"
