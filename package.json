@@ -1,17 +1,17 @@
 {
-  "name": "eslint.github.io",
+  "name": "eslint-website",
   "private": true,
   "version": "1.0.0",
-  "description": "This contains the code running on eslint.org.",
+  "description": "The codebase for the ESLint website (eslint.org)",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/eslint/eslint.github.io.git"
+    "url": "git+https://github.com/eslint/website.git"
   },
   "bugs": {
-    "url": "https://github.com/eslint/eslint.github.io/issues"
+    "url": "https://github.com/eslint/website/issues"
   },
-  "homepage": "https://github.com/eslint/eslint.github.io#readme",
+  "homepage": "https://github.com/eslint/website#readme",
   "engines": {
     "node": ">=12.0.0"
   },
@@ -26,7 +26,8 @@
     "lint": "eslint --ext=.js,.jsx .",
     "test": "npm run lint",
     "fix": "npm run lint -- --fix",
-    "convert-yaml": "node _tools/yaml-to-json.js \"_data/*.yml\""
+    "convert-yaml": "node _tools/yaml-to-json.js \"_data/*.yml\"",
+    "postinstall": "cd src/js/demo && npm install --no-package-lock"
   },
   "dependencies": {
     "anchor-js": "^4.2.0",

@@ -1,0 +1,10 @@
+{
+  "name": "eslint-website-demo",
+  "private": true,
+  "version": "1.0.0",
+  "description": "The codebase for the ESLint Demo (eslint.org/demo)",
+  "license": "MIT",
+  "dependencies": {
+    "eslint": "latest"
+  }
+}

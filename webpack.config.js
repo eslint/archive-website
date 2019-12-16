@@ -5,20 +5,26 @@ const CleanCSSPlugin = require("less-plugin-clean-css");
 
 module.exports = {
     entry: {
-        demo: path.join(__dirname, "src/js/demo/index.js"),
-        main: path.join(__dirname, "src/js/main/index.js")
+        demo: path.resolve(__dirname, "src/js/demo/index.js"),
+        main: path.resolve(__dirname, "src/js/main/index.js")
     },
     output: {
-        path: path.join(__dirname, "_site/assets/js"),
+        path: path.resolve(__dirname, "_site/assets/js"),
         filename: "[name].js"
     },
     module: {
         rules: [
             {
                 test: /\.jsx?$/,
-                loaders: ["babel-loader"],
-                include: path.join(__dirname, "src/js"),
-                exclude: /node_modules|src\/js\/vendor/
+                loader: "babel-loader",
+                include: path.resolve(__dirname, "src/js"),
+                exclude: [
+                    path.resolve(__dirname, "node_modules"),
+                    path.resolve(__dirname, "src/js/demo/node_modules/lodash")
+                ],
+                options: {
+                    configFile: path.resolve(__dirname, ".babelrc")
+                }
             },
             {
                 test: /\.less$/,
@@ -43,5 +49,6 @@ module.exports = {
     },
     resolve: {
         extensions: [".js", ".jsx"]
-    }
+    },
+    stats: "errors-only"
 };

@@ -6,7 +6,7 @@ import BugReport from "./BugReport";
 import Crash from "./Crash";
 import Configuration from "./Configuration";
 import Unicode from "../utils/unicode";
-import linterModule from "../../eslint";
+import linterModule from "../node_modules/eslint/lib/linter/linter";
 
 function getUrlState() {
     try {
