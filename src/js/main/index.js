@@ -53,3 +53,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 window.ga("create", "UA-60915033-1", "eslint.org");
 window.ga("send", "pageview");
+document.querySelectorAll(".sponsor-link").forEach(
+    el => el.addEventListener("click",
+        () => window.ga("send", "event", "Logos", "click", el.title || ""))
+);
