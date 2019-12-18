@@ -296,18 +296,18 @@
             "tier": "backer"
         },
         {
-            "name": "AJ Klein",
-            "url": "https://twitter.com/jumbleofideas",
-            "image": "https://images.opencollective.com/aj-klein/b63b472/avatar.png",
+            "name": "Andrew Rota",
+            "url": "https://twitter.com/andrewrota",
+            "image": "https://images.opencollective.com/andrewrota/a124847/avatar.png",
             "monthlyDonation": 500,
             "totalDonations": 5000,
             "source": "opencollective",
             "tier": "backer"
         },
         {
-            "name": "Kelp",
-            "image": "https://avatars3.githubusercontent.com/u/1680868?v=4",
-            "url": "https://meetpet.org",
+            "name": "Andrew LeTourneau",
+            "image": "https://avatars0.githubusercontent.com/u/2807807?v=4",
+            "url": "https://andyletourneau.com",
             "monthlyDonation": 500,
             "source": "github",
             "tier": "backer"
@@ -429,20 +429,20 @@
             "tier": "backer"
         },
         {
+            "name": "AJ Klein",
+            "url": "https://twitter.com/jumbleofideas",
+            "image": "https://images.opencollective.com/aj-klein/b63b472/avatar.png",
+            "monthlyDonation": 500,
+            "totalDonations": 5000,
+            "source": "opencollective",
+            "tier": "backer"
+        },
+        {
             "name": "James Sherwood-Jones",
             "url": null,
             "image": "https://images.opencollective.com/james-sherwood-jones/avatar.png",
             "monthlyDonation": 500,
             "totalDonations": 3000,
-            "source": "opencollective",
-            "tier": "backer"
-        },
-        {
-            "name": "Andrew Rota",
-            "url": "https://twitter.com/andrewrota",
-            "image": "https://images.opencollective.com/andrewrota/a124847/avatar.png",
-            "monthlyDonation": 500,
-            "totalDonations": 5000,
             "source": "opencollective",
             "tier": "backer"
         },
@@ -616,6 +616,14 @@
             "name": "Jonny Burger",
             "image": "https://avatars2.githubusercontent.com/u/1629785?v=4",
             "url": "https://jonny.io",
+            "monthlyDonation": 500,
+            "source": "github",
+            "tier": "backer"
+        },
+        {
+            "name": "Kelp",
+            "image": "https://avatars3.githubusercontent.com/u/1680868?v=4",
+            "url": "https://meetpet.org",
             "monthlyDonation": 500,
             "source": "github",
             "tier": "backer"
