@@ -46,7 +46,7 @@ homepage: true
               <h4 class="sponsor-heading text-center">{{ tier | capitalize }} Sponsors</h4>
               <div class="sponsor-tier text-center">
                   {% for sponsor in sponsors[tier] %}
-                    <a href="{{ sponsor.url }}" title="{{ sponsor.name }}" rel="noopener nofollow" target="_blank">
+                    <a class="sponsor-link" href="{{ sponsor.url }}" title="{{ sponsor.name }}" rel="noopener nofollow" target="_blank">
                       <div class="sponsor {{ tier }}-sponsor">
                         <img class="lazyload" data-src="{{ sponsor.image }}" alt="{{ sponsor.name }}">
                       </div>
