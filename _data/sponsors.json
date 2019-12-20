@@ -224,20 +224,20 @@
             "tier": null
         },
         {
-            "name": "Neovation Learning Solutions",
-            "url": "https://www.neovation.com",
-            "image": "https://images.opencollective.com/neovationcorp/30d1cf7/logo.png",
-            "monthlyDonation": 2500,
-            "totalDonations": 27500,
-            "source": "opencollective",
-            "tier": "backer"
-        },
-        {
             "name": "Sebastian Software GmbH",
             "url": "http://sebastian-software.de/",
             "image": "https://images.opencollective.com/sebastiansoft/74395cd/logo.png",
             "monthlyDonation": 2500,
             "totalDonations": 25000,
+            "source": "opencollective",
+            "tier": "backer"
+        },
+        {
+            "name": "Neovation Learning Solutions",
+            "url": "https://www.neovation.com",
+            "image": "https://images.opencollective.com/neovationcorp/30d1cf7/logo.png",
+            "monthlyDonation": 2500,
+            "totalDonations": 27500,
             "source": "opencollective",
             "tier": "backer"
         },
@@ -251,9 +251,18 @@
             "tier": "backer"
         },
         {
-            "name": "Patrick",
-            "url": "https://twitter.com/PatrickMWalther",
-            "image": "https://images.opencollective.com/patrick1/a9f87be/avatar.png",
+            "name": "Moxio",
+            "url": "https://moxio.com",
+            "image": "https://images.opencollective.com/moxio/9fa53c1/logo.png",
+            "monthlyDonation": 1000,
+            "totalDonations": 22000,
+            "source": "opencollective",
+            "tier": "backer"
+        },
+        {
+            "name": "Ben Truyman",
+            "url": "https://github.com/bentruyman",
+            "image": "https://images.opencollective.com/bentruyman/9dc2d16/avatar.png",
             "monthlyDonation": 1000,
             "totalDonations": 2000,
             "source": "opencollective",
@@ -269,11 +278,11 @@
             "tier": "backer"
         },
         {
-            "name": "Moxio",
-            "url": "https://moxio.com",
-            "image": "https://images.opencollective.com/moxio/9fa53c1/logo.png",
+            "name": "Patrick",
+            "url": "https://twitter.com/PatrickMWalther",
+            "image": "https://images.opencollective.com/patrick1/a9f87be/avatar.png",
             "monthlyDonation": 1000,
-            "totalDonations": 22000,
+            "totalDonations": 2000,
             "source": "opencollective",
             "tier": "backer"
         },
@@ -287,21 +296,20 @@
             "tier": "backer"
         },
         {
-            "name": "Ben Truyman",
-            "url": "https://github.com/bentruyman",
-            "image": "https://images.opencollective.com/bentruyman/9dc2d16/avatar.png",
-            "monthlyDonation": 1000,
-            "totalDonations": 2000,
+            "name": "AJ Klein",
+            "url": "https://twitter.com/jumbleofideas",
+            "image": "https://images.opencollective.com/aj-klein/b63b472/avatar.png",
+            "monthlyDonation": 500,
+            "totalDonations": 5000,
             "source": "opencollective",
             "tier": "backer"
         },
         {
-            "name": "Andrew Rota",
-            "url": "https://twitter.com/andrewrota",
-            "image": "https://images.opencollective.com/andrewrota/a124847/avatar.png",
+            "name": "Evan Hirsh",
+            "image": "https://avatars2.githubusercontent.com/u/4483135?v=4",
+            "url": "http://www.ehirsh.com",
             "monthlyDonation": 500,
-            "totalDonations": 5000,
-            "source": "opencollective",
+            "source": "github",
             "tier": "backer"
         },
         {
@@ -313,9 +321,9 @@
             "tier": "backer"
         },
         {
-            "name": "Jeremy Combs",
-            "url": "https://twitter.com/dreinidaho",
-            "image": "https://images.opencollective.com/jmcombs/22a314a/avatar.png",
+            "name": "David Carroll",
+            "url": null,
+            "image": "https://images.opencollective.com/david-carroll/avatar.png",
             "monthlyDonation": 500,
             "totalDonations": 500,
             "source": "opencollective",
@@ -429,20 +437,20 @@
             "tier": "backer"
         },
         {
-            "name": "AJ Klein",
-            "url": "https://twitter.com/jumbleofideas",
-            "image": "https://images.opencollective.com/aj-klein/b63b472/avatar.png",
+            "name": "Jeremy Combs",
+            "url": "https://twitter.com/dreinidaho",
+            "image": "https://images.opencollective.com/jmcombs/22a314a/avatar.png",
             "monthlyDonation": 500,
-            "totalDonations": 5000,
+            "totalDonations": 500,
             "source": "opencollective",
             "tier": "backer"
         },
         {
-            "name": "James Sherwood-Jones",
-            "url": null,
-            "image": "https://images.opencollective.com/james-sherwood-jones/avatar.png",
+            "name": "Andrew Rota",
+            "url": "https://twitter.com/andrewrota",
+            "image": "https://images.opencollective.com/andrewrota/a124847/avatar.png",
             "monthlyDonation": 500,
-            "totalDonations": 3000,
+            "totalDonations": 5000,
             "source": "opencollective",
             "tier": "backer"
         },
@@ -537,11 +545,12 @@
             "tier": "backer"
         },
         {
-            "name": "Evan Hirsh",
-            "image": "https://avatars2.githubusercontent.com/u/4483135?v=4",
-            "url": "http://www.ehirsh.com",
+            "name": "James Sherwood-Jones",
+            "url": null,
+            "image": "https://images.opencollective.com/james-sherwood-jones/avatar.png",
             "monthlyDonation": 500,
-            "source": "github",
+            "totalDonations": 3000,
+            "source": "opencollective",
             "tier": "backer"
         },
         {
