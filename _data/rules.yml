@@ -157,7 +157,7 @@ categories:
           `await` or `yield`
         fixable: false
         name: require-atomic-updates
-        recommended: true
+        recommended: false
       - description: require calls to `isNaN()` when checking for `NaN`
         fixable: false
         name: use-isnan

@@ -8,8 +8,6 @@ rule_type: problem
 
 # Disallow assignments that can lead to race conditions due to usage of `await` or `yield` (require-atomic-updates)
 
-(recommended) The `"extends": "eslint:recommended"` property in a configuration file enables this rule.
-
 When writing asynchronous code, it is possible to create subtle race condition bugs. Consider the following example:
 
 ```js
