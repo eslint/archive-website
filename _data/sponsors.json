@@ -296,9 +296,9 @@
             "tier": "backer"
         },
         {
-            "name": "AJ Klein",
-            "url": "https://twitter.com/jumbleofideas",
-            "image": "https://images.opencollective.com/aj-klein/b63b472/avatar.png",
+            "name": "Andrew Rota",
+            "url": "https://twitter.com/andrewrota",
+            "image": "https://images.opencollective.com/andrewrota/a124847/avatar.png",
             "monthlyDonation": 500,
             "totalDonations": 5000,
             "source": "opencollective",
@@ -437,20 +437,20 @@
             "tier": "backer"
         },
         {
+            "name": "AJ Klein",
+            "url": "https://twitter.com/jumbleofideas",
+            "image": "https://images.opencollective.com/aj-klein/b63b472/avatar.png",
+            "monthlyDonation": 500,
+            "totalDonations": 5000,
+            "source": "opencollective",
+            "tier": "backer"
+        },
+        {
             "name": "Jeremy Combs",
             "url": "https://twitter.com/dreinidaho",
             "image": "https://images.opencollective.com/jmcombs/22a314a/avatar.png",
             "monthlyDonation": 500,
             "totalDonations": 500,
-            "source": "opencollective",
-            "tier": "backer"
-        },
-        {
-            "name": "Andrew Rota",
-            "url": "https://twitter.com/andrewrota",
-            "image": "https://images.opencollective.com/andrewrota/a124847/avatar.png",
-            "monthlyDonation": 500,
-            "totalDonations": 5000,
             "source": "opencollective",
             "tier": "backer"
         },
@@ -587,6 +587,14 @@
             "monthlyDonation": 500,
             "totalDonations": 5500,
             "source": "opencollective",
+            "tier": "backer"
+        },
+        {
+            "name": "Oliver Steele",
+            "image": "https://avatars2.githubusercontent.com/u/674?v=4",
+            "url": "https://code.osteele.com/",
+            "monthlyDonation": 500,
+            "source": "github",
             "tier": "backer"
         },
         {
