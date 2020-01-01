@@ -59,6 +59,8 @@ const ENV_NAMES = [
     "embertest",
     "webextensions",
     "es6",
+    "es2017",
+    "es2020",
     "greasemonkey"
 ];
 
