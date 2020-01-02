@@ -127,7 +127,7 @@
             "url": "https://icons8.com",
             "image": "https://images.opencollective.com/icons8/0b37d14/logo.png",
             "monthlyDonation": 20000,
-            "totalDonations": 100000,
+            "totalDonations": 120000,
             "source": "opencollective",
             "tier": "bronze-sponsor"
         },
@@ -378,7 +378,7 @@
             "url": "https://verdaccio.org/",
             "image": "https://images.opencollective.com/verdaccio/2d6ef61/logo.png",
             "monthlyDonation": 500,
-            "totalDonations": 3500,
+            "totalDonations": 4000,
             "source": "opencollective",
             "tier": "backer"
         },
