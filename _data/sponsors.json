@@ -251,6 +251,15 @@
             "tier": "backer"
         },
         {
+            "name": "incognito",
+            "url": null,
+            "image": "https://images.opencollective.com/incognito-97d2b095/avatar.png",
+            "monthlyDonation": 1200,
+            "totalDonations": 1200,
+            "source": "opencollective",
+            "tier": null
+        },
+        {
             "name": "Ben Truyman",
             "url": "https://github.com/bentruyman",
             "image": "https://images.opencollective.com/bentruyman/9dc2d16/avatar.png",
@@ -287,11 +296,11 @@
             "tier": "backer"
         },
         {
-            "name": "AJ Klein",
-            "url": "https://twitter.com/jumbleofideas",
-            "image": "https://images.opencollective.com/aj-klein/b63b472/avatar.png",
+            "name": "Jack Cross",
+            "url": null,
+            "image": "https://images.opencollective.com/jack-cross/7b02eda/avatar.png",
             "monthlyDonation": 500,
-            "totalDonations": 5500,
+            "totalDonations": 3500,
             "source": "opencollective",
             "tier": "backer"
         },
@@ -321,11 +330,12 @@
             "tier": "backer"
         },
         {
-            "name": "Montana Mendy",
-            "image": "https://avatars3.githubusercontent.com/u/20936398?v=4",
-            "url": "https://www.mmendy.com",
+            "name": "Jeremy Combs",
+            "url": "https://twitter.com/dreinidaho",
+            "image": "https://images.opencollective.com/jmcombs/22a314a/avatar.png",
             "monthlyDonation": 500,
-            "source": "github",
+            "totalDonations": 1000,
+            "source": "opencollective",
             "tier": "backer"
         },
         {
@@ -338,20 +348,20 @@
             "tier": "backer"
         },
         {
+            "name": "Montana Mendy",
+            "image": "https://avatars3.githubusercontent.com/u/20936398?v=4",
+            "url": "https://www.mmendy.com",
+            "monthlyDonation": 500,
+            "source": "github",
+            "tier": "backer"
+        },
+        {
             "name": "Oliver Sieweke",
             "url": null,
             "image": "https://images.opencollective.com/oliver-sieweke/avatar.png",
             "monthlyDonation": 500,
             "totalDonations": 3000,
             "source": "opencollective",
-            "tier": "backer"
-        },
-        {
-            "name": "Matan Kushner",
-            "image": "https://avatars0.githubusercontent.com/u/4658208?v=4",
-            "url": "https://matchai.dev",
-            "monthlyDonation": 500,
-            "source": "github",
             "tier": "backer"
         },
         {
@@ -373,12 +383,11 @@
             "tier": "backer"
         },
         {
-            "name": "Jeremy Combs",
-            "url": "https://twitter.com/dreinidaho",
-            "image": "https://images.opencollective.com/jmcombs/22a314a/avatar.png",
+            "name": "Matan Kushner",
+            "image": "https://avatars0.githubusercontent.com/u/4658208?v=4",
+            "url": "https://matchai.dev",
             "monthlyDonation": 500,
-            "totalDonations": 1000,
-            "source": "opencollective",
+            "source": "github",
             "tier": "backer"
         },
         {
@@ -409,11 +418,11 @@
             "tier": "backer"
         },
         {
-            "name": "0x Tracker",
-            "url": "https://0xtracker.com",
-            "image": "https://images.opencollective.com/0xtracker/b6f999b/logo.png",
+            "name": "David Carroll",
+            "url": null,
+            "image": "https://images.opencollective.com/david-carroll/avatar.png",
             "monthlyDonation": 500,
-            "totalDonations": 2500,
+            "totalDonations": 500,
             "source": "opencollective",
             "tier": "backer"
         },
@@ -427,21 +436,20 @@
             "tier": "backer"
         },
         {
-            "name": "Matter",
-            "url": "https://matterapp.com",
-            "image": "https://images.opencollective.com/matter_hq/ac0a719/logo.png",
+            "name": "0x Tracker",
+            "url": "https://0xtracker.com",
+            "image": "https://images.opencollective.com/0xtracker/b6f999b/logo.png",
             "monthlyDonation": 500,
-            "totalDonations": 3000,
+            "totalDonations": 2500,
             "source": "opencollective",
             "tier": "backer"
         },
         {
-            "name": "David Carroll",
-            "url": null,
-            "image": "https://images.opencollective.com/david-carroll/avatar.png",
+            "name": "Kelp",
+            "image": "https://avatars3.githubusercontent.com/u/1680868?v=4",
+            "url": "https://meetpet.org",
             "monthlyDonation": 500,
-            "totalDonations": 500,
-            "source": "opencollective",
+            "source": "github",
             "tier": "backer"
         },
         {
@@ -535,11 +543,11 @@
             "tier": "backer"
         },
         {
-            "name": "Jack Cross",
-            "url": null,
-            "image": "https://images.opencollective.com/jack-cross/7b02eda/avatar.png",
+            "name": "Matter",
+            "url": "https://matterapp.com",
+            "image": "https://images.opencollective.com/matter_hq/ac0a719/logo.png",
             "monthlyDonation": 500,
-            "totalDonations": 3500,
+            "totalDonations": 3000,
             "source": "opencollective",
             "tier": "backer"
         },
@@ -628,11 +636,12 @@
             "tier": "backer"
         },
         {
-            "name": "Kelp",
-            "image": "https://avatars3.githubusercontent.com/u/1680868?v=4",
-            "url": "https://meetpet.org",
+            "name": "AJ Klein",
+            "url": "https://twitter.com/jumbleofideas",
+            "image": "https://images.opencollective.com/aj-klein/b63b472/avatar.png",
             "monthlyDonation": 500,
-            "source": "github",
+            "totalDonations": 5500,
+            "source": "opencollective",
             "tier": "backer"
         },
         {
