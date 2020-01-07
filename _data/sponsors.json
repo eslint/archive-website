@@ -445,20 +445,20 @@
             "tier": "backer"
         },
         {
+            "name": "AJ Klein",
+            "url": "https://twitter.com/jumbleofideas",
+            "image": "https://images.opencollective.com/aj-klein/b63b472/avatar.png",
+            "monthlyDonation": 500,
+            "totalDonations": 5500,
+            "source": "opencollective",
+            "tier": "backer"
+        },
+        {
             "name": "Kelp",
             "image": "https://avatars3.githubusercontent.com/u/1680868?v=4",
             "url": "https://meetpet.org",
             "monthlyDonation": 500,
             "source": "github",
-            "tier": "backer"
-        },
-        {
-            "name": "Andrew Rota",
-            "url": "https://twitter.com/andrewrota",
-            "image": "https://images.opencollective.com/andrewrota/a124847/avatar.png",
-            "monthlyDonation": 500,
-            "totalDonations": 5500,
-            "source": "opencollective",
             "tier": "backer"
         },
         {
@@ -621,6 +621,14 @@
             "tier": "backer"
         },
         {
+            "name": "Marcel Eichner",
+            "image": "https://avatars1.githubusercontent.com/u/73654?v=4",
+            "url": "http://www.marceleichner.de",
+            "monthlyDonation": 500,
+            "source": "github",
+            "tier": "backer"
+        },
+        {
             "name": "Marais Rossouw",
             "image": "https://avatars2.githubusercontent.com/u/599459?v=4",
             "url": "https://marais.io/",
@@ -645,9 +653,9 @@
             "tier": "backer"
         },
         {
-            "name": "AJ Klein",
-            "url": "https://twitter.com/jumbleofideas",
-            "image": "https://images.opencollective.com/aj-klein/b63b472/avatar.png",
+            "name": "Andrew Rota",
+            "url": "https://twitter.com/andrewrota",
+            "image": "https://images.opencollective.com/andrewrota/a124847/avatar.png",
             "monthlyDonation": 500,
             "totalDonations": 5500,
             "source": "opencollective",
