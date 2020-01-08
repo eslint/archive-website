@@ -15,7 +15,7 @@ module.exports = {
     module: {
         rules: [
             {
-                test: /\.jsx?$/,
+                test: /\.jsx?$/u,
                 loader: "babel-loader",
                 include: path.resolve(__dirname, "src/js"),
                 exclude: [
@@ -27,7 +27,7 @@ module.exports = {
                 }
             },
             {
-                test: /\.less$/,
+                test: /\.less$/u,
                 use: [
                     {
                         loader: "style-loader"
