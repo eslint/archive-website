@@ -20,7 +20,7 @@ module.exports = {
                 include: path.resolve(__dirname, "src/js"),
                 exclude: [
                     path.resolve(__dirname, "node_modules"),
-                    path.resolve(__dirname, "src/js/demo/node_modules/lodash")
+                    path.resolve(__dirname, "src/js/demo/node_modules")
                 ],
                 options: {
                     configFile: path.resolve(__dirname, ".babelrc")
