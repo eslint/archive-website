@@ -57,7 +57,6 @@
     "eslint-plugin-node": "^11.0.0",
     "eslint-plugin-react": "^7.17.0",
     "express": "^4.17.1",
-    "glob-promise": "^3.4.0",
     "html-entities": "^1.2.1",
     "html-minifier": "^4.0.0",
     "htmlparser2": "^4.0.0",
