@@ -19,7 +19,7 @@
     "build:eleventy": "npm run convert-yaml && eleventy",
     "build:webpack": "webpack --mode=production",
     "build:less": "lessc src/styles/main.less _site/assets/styles/main.css --clean-css --source-map=_site/assets/styles/main.css.map",
-    "build": "npm run build:eleventy && npm run build:less && npm run build:webpack",
+    "build": "npm run build:eleventy && npm run build:less && npm run build:webpack && sleep 500",
     "start:eleventy": "npm run convert-yaml && cross-env NODE_ENV=development eleventy --watch",
     "start:webpack": "webpack -w --mode=development",
     "start": "node _tools/dev-server.js",
