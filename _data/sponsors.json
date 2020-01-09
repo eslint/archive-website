@@ -224,20 +224,20 @@
             "tier": null
         },
         {
-            "name": "Sebastian Software GmbH",
-            "url": "http://sebastian-software.de/",
-            "image": "https://images.opencollective.com/sebastiansoft/74395cd/logo.png",
-            "monthlyDonation": 2500,
-            "totalDonations": 27500,
-            "source": "opencollective",
-            "tier": "backer"
-        },
-        {
             "name": "Neovation Learning Solutions",
             "url": "https://www.neovation.com",
             "image": "https://images.opencollective.com/neovationcorp/30d1cf7/logo.png",
             "monthlyDonation": 2500,
             "totalDonations": 30000,
+            "source": "opencollective",
+            "tier": "backer"
+        },
+        {
+            "name": "Sebastian Software GmbH",
+            "url": "http://sebastian-software.de/",
+            "image": "https://images.opencollective.com/sebastiansoft/74395cd/logo.png",
+            "monthlyDonation": 2500,
+            "totalDonations": 27500,
             "source": "opencollective",
             "tier": "backer"
         },
@@ -260,11 +260,11 @@
             "tier": null
         },
         {
-            "name": "Ben Truyman",
-            "url": "https://github.com/bentruyman",
-            "image": "https://images.opencollective.com/bentruyman/9dc2d16/avatar.png",
+            "name": "Kevin Partington",
+            "url": null,
+            "image": "https://images.opencollective.com/kevin-partington/54f2124/avatar.png",
             "monthlyDonation": 1000,
-            "totalDonations": 3000,
+            "totalDonations": 8000,
             "source": "opencollective",
             "tier": "backer"
         },
@@ -278,20 +278,29 @@
             "tier": "backer"
         },
         {
-            "name": "Kevin Partington",
-            "url": null,
-            "image": "https://images.opencollective.com/kevin-partington/54f2124/avatar.png",
-            "monthlyDonation": 1000,
-            "totalDonations": 8000,
-            "source": "opencollective",
-            "tier": "backer"
-        },
-        {
             "name": "Benjamin Piouffle",
             "url": "https://benjamin.piouffle.com",
             "image": "https://images.opencollective.com/betree/6c68f43/avatar.png",
             "monthlyDonation": 1000,
             "totalDonations": 11600,
+            "source": "opencollective",
+            "tier": "backer"
+        },
+        {
+            "name": "Ben Truyman",
+            "url": "https://github.com/bentruyman",
+            "image": "https://images.opencollective.com/bentruyman/9dc2d16/avatar.png",
+            "monthlyDonation": 1000,
+            "totalDonations": 3000,
+            "source": "opencollective",
+            "tier": "backer"
+        },
+        {
+            "name": "Andrew Rota",
+            "url": "https://twitter.com/andrewrota",
+            "image": "https://images.opencollective.com/andrewrota/a124847/avatar.png",
+            "monthlyDonation": 500,
+            "totalDonations": 5500,
             "source": "opencollective",
             "tier": "backer"
         },
@@ -314,14 +323,6 @@
             "tier": "backer"
         },
         {
-            "name": "Matan Kushner",
-            "image": "https://avatars0.githubusercontent.com/u/4658208?v=4",
-            "url": "https://matchai.dev",
-            "monthlyDonation": 500,
-            "source": "github",
-            "tier": "backer"
-        },
-        {
             "name": "Evan Hirsh",
             "image": "https://avatars2.githubusercontent.com/u/4483135?v=4",
             "url": "http://www.ehirsh.com",
@@ -330,11 +331,19 @@
             "tier": "backer"
         },
         {
-            "name": "Jeremy Combs",
-            "url": "https://twitter.com/dreinidaho",
-            "image": "https://images.opencollective.com/jmcombs/22a314a/avatar.png",
+            "name": "Andrew LeTourneau",
+            "image": "https://avatars0.githubusercontent.com/u/2807807?v=4",
+            "url": "https://andyletourneau.com",
             "monthlyDonation": 500,
-            "totalDonations": 1000,
+            "source": "github",
+            "tier": "backer"
+        },
+        {
+            "name": "David Carroll",
+            "url": null,
+            "image": "https://images.opencollective.com/david-carroll/avatar.png",
+            "monthlyDonation": 500,
+            "totalDonations": 500,
             "source": "opencollective",
             "tier": "backer"
         },
@@ -348,19 +357,20 @@
             "tier": "backer"
         },
         {
-            "name": "Montana Mendy",
-            "image": "https://avatars3.githubusercontent.com/u/20936398?v=4",
-            "url": "https://www.mmendy.com",
+            "name": "Jeremy Combs",
+            "url": "https://twitter.com/dreinidaho",
+            "image": "https://images.opencollective.com/jmcombs/22a314a/avatar.png",
             "monthlyDonation": 500,
-            "source": "github",
+            "totalDonations": 1000,
+            "source": "opencollective",
             "tier": "backer"
         },
         {
-            "name": "Oliver Sieweke",
-            "url": null,
-            "image": "https://images.opencollective.com/oliver-sieweke/avatar.png",
+            "name": "Peter deHaan",
+            "url": "http://about.me/peterdehaan",
+            "image": "https://images.opencollective.com/pdehaan/4437929/avatar.png",
             "monthlyDonation": 500,
-            "totalDonations": 3000,
+            "totalDonations": 500,
             "source": "opencollective",
             "tier": "backer"
         },
@@ -383,11 +393,12 @@
             "tier": "backer"
         },
         {
-            "name": "Tommy",
-            "image": "https://avatars2.githubusercontent.com/u/16768208?v=4",
-            "url": "https://github.com/baronTommy",
+            "name": "Oliver Sieweke",
+            "url": null,
+            "image": "https://images.opencollective.com/oliver-sieweke/avatar.png",
             "monthlyDonation": 500,
-            "source": "github",
+            "totalDonations": 3000,
+            "source": "opencollective",
             "tier": "backer"
         },
         {
@@ -418,12 +429,11 @@
             "tier": "backer"
         },
         {
-            "name": "David Carroll",
-            "url": null,
-            "image": "https://images.opencollective.com/david-carroll/avatar.png",
+            "name": "Matan Kushner",
+            "image": "https://avatars0.githubusercontent.com/u/4658208?v=4",
+            "url": "https://matchai.dev",
             "monthlyDonation": 500,
-            "totalDonations": 500,
-            "source": "opencollective",
+            "source": "github",
             "tier": "backer"
         },
         {
@@ -436,12 +446,11 @@
             "tier": "backer"
         },
         {
-            "name": "0x Tracker",
-            "url": "https://0xtracker.com",
-            "image": "https://images.opencollective.com/0xtracker/b6f999b/logo.png",
+            "name": "Tommy",
+            "image": "https://avatars2.githubusercontent.com/u/16768208?v=4",
+            "url": "https://github.com/baronTommy",
             "monthlyDonation": 500,
-            "totalDonations": 2500,
-            "source": "opencollective",
+            "source": "github",
             "tier": "backer"
         },
         {
@@ -454,11 +463,12 @@
             "tier": "backer"
         },
         {
-            "name": "Andrew LeTourneau",
-            "image": "https://avatars0.githubusercontent.com/u/2807807?v=4",
-            "url": "https://andyletourneau.com",
+            "name": "0x Tracker",
+            "url": "https://0xtracker.com",
+            "image": "https://images.opencollective.com/0xtracker/b6f999b/logo.png",
             "monthlyDonation": 500,
-            "source": "github",
+            "totalDonations": 2500,
+            "source": "opencollective",
             "tier": "backer"
         },
         {
@@ -661,12 +671,11 @@
             "tier": "backer"
         },
         {
-            "name": "Andrew Rota",
-            "url": "https://twitter.com/andrewrota",
-            "image": "https://images.opencollective.com/andrewrota/a124847/avatar.png",
+            "name": "Montana Mendy",
+            "image": "https://avatars3.githubusercontent.com/u/20936398?v=4",
+            "url": "https://www.mmendy.com",
             "monthlyDonation": 500,
-            "totalDonations": 5500,
-            "source": "opencollective",
+            "source": "github",
             "tier": "backer"
         },
         {
