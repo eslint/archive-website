@@ -60,18 +60,27 @@
     ],
     "bronze": [
         {
-            "name": "UI UX Design Agencies",
-            "url": "https://uxplanet.org/top-ui-ux-design-agencies-user-experience-firms-8c54697e290",
-            "image": "https://images.opencollective.com/ui-ux-design-agencies/cae5dfe/logo.png",
+            "name": "Free Icons by Icons8",
+            "url": "https://icons8.com",
+            "image": "https://images.opencollective.com/icons8/0b37d14/logo.png",
             "monthlyDonation": 20000,
             "totalDonations": 120000,
             "source": "opencollective",
             "tier": "bronze-sponsor"
         },
         {
-            "name": "Top Web Design Agencies",
-            "url": "https://medium.com/@niksundin/best-web-design-companies-1872e445775f",
-            "image": "https://images.opencollective.com/top-web-design-agencies/d92d747/logo.png",
+            "name": "BonusFinder Deutschland",
+            "url": "https://www.bonus.com.de/freispiele",
+            "image": "https://images.opencollective.com/bonusfinder-deutschland/646169e/logo.png",
+            "monthlyDonation": 20000,
+            "totalDonations": 20000,
+            "source": "opencollective",
+            "tier": "bronze-sponsor"
+        },
+        {
+            "name": "EduBirdie",
+            "url": "https://edubirdie.com/",
+            "image": "https://images.opencollective.com/edubirdie2/b1d51ab/logo.png",
             "monthlyDonation": 20000,
             "totalDonations": 40000,
             "source": "opencollective",
@@ -123,20 +132,20 @@
             "tier": "bronze-sponsor"
         },
         {
-            "name": "Free Icons by Icons8",
-            "url": "https://icons8.com",
-            "image": "https://images.opencollective.com/icons8/0b37d14/logo.png",
+            "name": "Top Web Design Agencies",
+            "url": "https://medium.com/@niksundin/best-web-design-companies-1872e445775f",
+            "image": "https://images.opencollective.com/top-web-design-agencies/d92d747/logo.png",
             "monthlyDonation": 20000,
-            "totalDonations": 120000,
+            "totalDonations": 40000,
             "source": "opencollective",
             "tier": "bronze-sponsor"
         },
         {
-            "name": "EduBirdie",
-            "url": "https://edubirdie.com/",
-            "image": "https://images.opencollective.com/edubirdie2/b1d51ab/logo.png",
+            "name": "UI UX Design Agencies",
+            "url": "https://uxplanet.org/top-ui-ux-design-agencies-user-experience-firms-8c54697e290",
+            "image": "https://images.opencollective.com/ui-ux-design-agencies/cae5dfe/logo.png",
             "monthlyDonation": 20000,
-            "totalDonations": 40000,
+            "totalDonations": 120000,
             "source": "opencollective",
             "tier": "bronze-sponsor"
         },
