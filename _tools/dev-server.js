@@ -153,12 +153,9 @@ app.use((req, res) => res.status(404).sendFile(path.join(__dirname, "../_site/40
 app.listen(PORT, () => {
 
     // Less dosen't have a maintained watcher.
-    chokidar.watch(["_data/*.yml", "src/styles/**/*.less"])
+    chokidar.watch(["src/styles/**/*.less"])
         .on("change", filePath => {
-            if (path.extname(filePath) === ".yml") {
-                console.log(`\n${filePath} changed. Converting YAML to JSON.`);
-                spawnChildProcess("npm", ["run", "convert-yaml"]);
-            } else if (path.extname(filePath) === ".less") {
+            if (path.extname(filePath) === ".less") {
                 console.log(`\n${filePath} changed. Recompiling styles.`);
                 spawnChildProcess("npm", ["run", "build:less"]);
             }

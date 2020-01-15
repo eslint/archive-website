@@ -17,7 +17,7 @@ module.exports = function numberOfWords(templateContent) {
             ontext(text) {
 
                 // Ignore code examples and filter out punctuation.
-                if (isInCodeBlock || !/[\w\d]/.test(text)) {
+                if (isInCodeBlock || !/[\w\d]/u.test(text)) {
                     return;
                 }
                 htmlTextContent += ` ${text.trim()}`;
@@ -33,5 +33,5 @@ module.exports = function numberOfWords(templateContent) {
     );
 
     parser.parseComplete(templateContent);
-    return htmlTextContent.trim().split(/\s+/).length;
+    return htmlTextContent.trim().split(/\s+/u).length;
 };

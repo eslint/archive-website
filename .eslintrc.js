@@ -25,7 +25,7 @@ module.exports = {
         "node/no-unpublished-import": "off",
 
         // Disable rules that the codebase doesn't currently follow.
-        "require-jsdoc": "off"
+        "jsdoc/require-jsdoc": "off"
     },
     overrides: [
         {

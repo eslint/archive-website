@@ -10,7 +10,7 @@ import linterModule from "../node_modules/eslint/lib/linter/linter";
 
 function getUrlState() {
     try {
-        return JSON.parse(Unicode.decodeFromBase64(window.location.hash.replace(/^#/, "")));
+        return JSON.parse(Unicode.decodeFromBase64(window.location.hash.replace(/^#/u, "")));
     } catch (err) {
         return null;
     }
