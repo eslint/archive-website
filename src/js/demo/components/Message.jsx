@@ -26,7 +26,14 @@ export default function Message(props) {
             {
                 !props.value.fatal && [
                     " (",
-                    <a key="ruleLink" href={`https://eslint.org/docs/rules/${props.value.ruleId}`}>{props.value.ruleId}</a>,
+                    <a
+                        key="ruleLink"
+                        href={`https://eslint.org/docs/rules/${props.value.ruleId}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        {props.value.ruleId}
+                    </a>,
                     ")"
                 ]
             }
