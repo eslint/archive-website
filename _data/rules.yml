@@ -152,6 +152,10 @@ categories:
         fixable: false
         name: no-unsafe-negation
         recommended: true
+      - description: disallow useless backreferences in regular expressions
+        fixable: false
+        name: no-useless-backreference
+        recommended: false
       - description: >-
           disallow assignments that can lead to race conditions due to usage of
           `await` or `yield`
@@ -202,6 +206,10 @@ categories:
       - description: require `default` cases in `switch` statements
         fixable: false
         name: default-case
+        recommended: false
+      - description: enforce default clauses in switch statements to be last
+        fixable: false
+        name: default-case-last
         recommended: false
       - description: enforce default parameters to be last
         fixable: false
@@ -1052,6 +1060,10 @@ categories:
         fixable: false
         name: no-new-symbol
         recommended: true
+      - description: disallow specified names in exports
+        fixable: false
+        name: no-restricted-exports
+        recommended: false
       - description: disallow specified modules when loaded by `import`
         fixable: false
         name: no-restricted-imports
