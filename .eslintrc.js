@@ -48,6 +48,7 @@ module.exports = {
                 }
             },
             rules: {
+                "react/jsx-no-target-blank": "error",
 
                 // Disable rules that the codebase doesn't currently follow.
                 // It might be a good idea to enable these in the future.
