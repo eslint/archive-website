@@ -16,7 +16,7 @@
     "node": ">=12.0.0"
   },
   "scripts": {
-    "build:eleventy": "eleventy",
+    "build:eleventy": "eleventy --quiet",
     "build:webpack": "webpack --mode=production",
     "build:less": "lessc src/styles/main.less _site/assets/styles/main.css --clean-css --source-map=_site/assets/styles/main.css.map",
     "build": "npm run build:eleventy && npm run build:less && npm run build:webpack",
