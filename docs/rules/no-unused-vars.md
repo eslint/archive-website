@@ -142,14 +142,14 @@ Examples of **correct** code for the `{ "vars": "local" }` option:
 some_unused_var = 42;
 ```
 
-### varsIgnorePattern
+### argsIgnorePattern
 
-The `varsIgnorePattern` option specifies exceptions not to check for usage: variables whose names match a regexp pattern. For example, variables whose names contain `ignored` or `Ignored`.
+The `argsIgnorePattern` option specifies exceptions not to check for usage: variables whose names match a regexp pattern. For example, variables whose names contain `ignored` or `Ignored`.
 
-Examples of **correct** code for the `{ "varsIgnorePattern": "[iI]gnored" }` option:
+Examples of **correct** code for the `{ "argsIgnorePattern": "[iI]gnored" }` option:
 
 ```js
-/*eslint no-unused-vars: ["error", { "varsIgnorePattern": "[iI]gnored" }]*/
+/*eslint no-unused-vars: ["error", { "argsIgnorePattern": "[iI]gnored" }]*/
 
 var firstVarIgnored = 1;
 var secondVar = 2;
