@@ -224,20 +224,20 @@
             "tier": null
         },
         {
-            "name": "Neovation Learning Solutions",
-            "url": "https://www.neovation.com",
-            "image": "https://images.opencollective.com/neovationcorp/30d1cf7/logo.png",
-            "monthlyDonation": 2500,
-            "totalDonations": 30000,
-            "source": "opencollective",
-            "tier": "backer"
-        },
-        {
             "name": "Sebastian Software GmbH",
             "url": "http://sebastian-software.de/",
             "image": "https://images.opencollective.com/sebastiansoft/74395cd/logo.png",
             "monthlyDonation": 2500,
             "totalDonations": 27500,
+            "source": "opencollective",
+            "tier": "backer"
+        },
+        {
+            "name": "Neovation Learning Solutions",
+            "url": "https://www.neovation.com",
+            "image": "https://images.opencollective.com/neovationcorp/30d1cf7/logo.png",
+            "monthlyDonation": 2500,
+            "totalDonations": 30000,
             "source": "opencollective",
             "tier": "backer"
         },
@@ -269,29 +269,11 @@
             "tier": "backer"
         },
         {
-            "name": "John Dorlus",
-            "url": "http:/www.powercoder.tech",
-            "image": "https://images.opencollective.com/john-dorlus/f6d79b4/avatar.png",
-            "monthlyDonation": 1000,
-            "totalDonations": 1000,
-            "source": "opencollective",
-            "tier": "backer"
-        },
-        {
             "name": "Ben Truyman",
             "url": "https://github.com/bentruyman",
             "image": "https://images.opencollective.com/bentruyman/9dc2d16/avatar.png",
             "monthlyDonation": 1000,
             "totalDonations": 3000,
-            "source": "opencollective",
-            "tier": "backer"
-        },
-        {
-            "name": "Benjamin Piouffle",
-            "url": "https://benjamin.piouffle.com",
-            "image": "https://images.opencollective.com/betree/6c68f43/avatar.png",
-            "monthlyDonation": 1000,
-            "totalDonations": 11600,
             "source": "opencollective",
             "tier": "backer"
         },
@@ -310,6 +292,33 @@
             "image": "https://images.opencollective.com/kevin-partington/54f2124/avatar.png",
             "monthlyDonation": 1000,
             "totalDonations": 8000,
+            "source": "opencollective",
+            "tier": "backer"
+        },
+        {
+            "name": "Benjamin Piouffle",
+            "url": "https://benjamin.piouffle.com",
+            "image": "https://images.opencollective.com/betree/6c68f43/avatar.png",
+            "monthlyDonation": 1000,
+            "totalDonations": 11600,
+            "source": "opencollective",
+            "tier": "backer"
+        },
+        {
+            "name": "John Dorlus",
+            "url": "http:/www.powercoder.tech",
+            "image": "https://images.opencollective.com/john-dorlus/f6d79b4/avatar.png",
+            "monthlyDonation": 1000,
+            "totalDonations": 1000,
+            "source": "opencollective",
+            "tier": "backer"
+        },
+        {
+            "name": "AJ Klein",
+            "url": "https://twitter.com/jumbleofideas",
+            "image": "https://images.opencollective.com/aj-klein/b63b472/avatar.png",
+            "monthlyDonation": 500,
+            "totalDonations": 5500,
             "source": "opencollective",
             "tier": "backer"
         },
@@ -463,11 +472,12 @@
             "tier": "backer"
         },
         {
-            "name": "Montana Mendy",
-            "image": "https://avatars3.githubusercontent.com/u/20936398?v=4",
-            "url": "https://www.mmendy.com",
+            "name": "Derk-Jan Karrenbeld @SleeplessByte",
+            "url": "https://derk-jan.com",
+            "image": "https://images.opencollective.com/derk-jan/a131479/avatar.png",
             "monthlyDonation": 500,
-            "source": "github",
+            "totalDonations": 500,
+            "source": "opencollective",
             "tier": "backer"
         },
         {
@@ -679,12 +689,11 @@
             "tier": "backer"
         },
         {
-            "name": "AJ Klein",
-            "url": "https://twitter.com/jumbleofideas",
-            "image": "https://images.opencollective.com/aj-klein/b63b472/avatar.png",
+            "name": "Montana Mendy",
+            "image": "https://avatars3.githubusercontent.com/u/20936398?v=4",
+            "url": "https://www.mmendy.com",
             "monthlyDonation": 500,
-            "totalDonations": 5500,
-            "source": "opencollective",
+            "source": "github",
             "tier": "backer"
         },
         {
