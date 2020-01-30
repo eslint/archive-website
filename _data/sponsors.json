@@ -673,6 +673,14 @@
             "tier": "backer"
         },
         {
+            "name": "Whymarrh Whitby",
+            "image": "https://avatars1.githubusercontent.com/u/1623628?v=4",
+            "url": "https://whymarrh.com",
+            "monthlyDonation": 500,
+            "source": "github",
+            "tier": "backer"
+        },
+        {
             "name": "Jonny Burger",
             "image": "https://avatars2.githubusercontent.com/u/1629785?v=4",
             "url": "https://jonny.io",
