@@ -20,9 +20,9 @@
             "tier": "gold-sponsor"
         },
         {
-            "name": "Badoo",
-            "url": "https://badoo.com/team?utm_source=eslint",
-            "image": "https://images.opencollective.com/badoo/2826a3b/logo.png",
+            "name": "MagicLab",
+            "url": "https://magiclab.co/?utm_source=eslint",
+            "image": "https://images.opencollective.com/magiclab/bbf6345/logo.png",
             "monthlyDonation": 100000,
             "totalDonations": 1200000,
             "source": "opencollective",
