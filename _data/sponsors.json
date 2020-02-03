@@ -206,15 +206,6 @@
             "tier": null
         },
         {
-            "name": "Sebastian Software GmbH",
-            "url": "http://sebastian-software.de/",
-            "image": "https://images.opencollective.com/sebastiansoft/74395cd/logo.png",
-            "monthlyDonation": 2500,
-            "totalDonations": 30000,
-            "source": "opencollective",
-            "tier": "backer"
-        },
-        {
             "name": "Neovation Learning Solutions",
             "url": "https://www.neovation.com",
             "image": "https://images.opencollective.com/neovationcorp/30d1cf7/logo.png",
