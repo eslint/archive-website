@@ -96,15 +96,6 @@
             "tier": "bronze-sponsor"
         },
         {
-            "name": "Codacy",
-            "url": "https://www.codacy.com/?utm_source=eslint&utm_medium=cpm&utm_campaign=eslint-sponsorship",
-            "image": "https://images.opencollective.com/codacy/ed22716/logo.png",
-            "monthlyDonation": 20000,
-            "totalDonations": 100000,
-            "source": "opencollective",
-            "tier": "bronze-sponsor"
-        },
-        {
             "name": "Mixpanel",
             "url": "https://mixpanel.com",
             "image": "https://images.opencollective.com/mixpanel/cd682f7/logo.png",
