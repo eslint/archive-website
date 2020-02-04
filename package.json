@@ -16,17 +16,18 @@
     "node": ">=12.0.0"
   },
   "scripts": {
+    "install:demo": "cd src/js/demo && npm install --no-package-lock",
     "build:eleventy": "eleventy --quiet",
     "build:webpack": "webpack --mode=production",
     "build:less": "lessc src/styles/main.less _site/assets/styles/main.css --clean-css --source-map=_site/assets/styles/main.css.map",
-    "build": "npm run build:eleventy && npm run build:less && npm run build:webpack",
+    "build": "npm run install:demo && npm run build:eleventy && npm run build:less && npm run build:webpack",
     "start:eleventy": "cross-env NODE_ENV=development eleventy --watch",
     "start:webpack": "webpack -w --mode=development",
     "start": "node _tools/dev-server.js",
     "lint": "eslint --ext=.js,.jsx .",
     "test": "npm run lint",
     "fix": "npm run lint -- --fix",
-    "postinstall": "cd src/js/demo && npm install --no-package-lock"
+    "postinstall": "npm run install:demo"
   },
   "dependencies": {
     "anchor-js": "^4.2.2",
