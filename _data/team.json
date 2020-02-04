@@ -7,18 +7,6 @@
             "avatar_url": "https://avatars3.githubusercontent.com/u/38546?v=4"
         },
         {
-            "username": "platinumazure",
-            "name": "Kevin Partington",
-            "website": "",
-            "avatar_url": "https://avatars0.githubusercontent.com/u/284282?v=4"
-        },
-        {
-            "username": "ilyavolodin",
-            "name": "Ilya Volodin",
-            "website": "",
-            "avatar_url": "https://avatars1.githubusercontent.com/u/1380062?v=4"
-        },
-        {
             "username": "btmills",
             "name": "Brandon Mills",
             "website": "https://bmills.net",
@@ -35,12 +23,6 @@
             "name": "Kai Cataldo",
             "website": "kaicataldo.com",
             "avatar_url": "https://avatars2.githubusercontent.com/u/7041728?v=4"
-        },
-        {
-            "username": "not-an-aardvark",
-            "name": "Teddy Katz",
-            "website": "https://blog.teddykatz.com",
-            "avatar_url": "https://avatars2.githubusercontent.com/u/11638619?v=4"
         }
     ],
     "alumni": [
@@ -73,6 +55,12 @@
             "name": "Jamund Ferguson",
             "website": "http://www.jamund.com",
             "avatar_url": "https://avatars3.githubusercontent.com/u/246143?v=4"
+        },
+        {
+            "username": "platinumazure",
+            "name": "Kevin Partington",
+            "website": "",
+            "avatar_url": "https://avatars0.githubusercontent.com/u/284282?v=4"
         },
         {
             "username": "mikesherov",
@@ -117,6 +105,12 @@
             "avatar_url": "https://avatars3.githubusercontent.com/u/1000759?v=4"
         },
         {
+            "username": "ilyavolodin",
+            "name": "Ilya Volodin",
+            "website": "",
+            "avatar_url": "https://avatars1.githubusercontent.com/u/1380062?v=4"
+        },
+        {
             "username": "soda0289",
             "name": "Reyad Attiyat",
             "website": "",
@@ -141,6 +135,12 @@
             "avatar_url": "https://avatars2.githubusercontent.com/u/5554486?v=4"
         },
         {
+            "username": "not-an-aardvark",
+            "name": "Teddy Katz",
+            "website": "https://blog.teddykatz.com",
+            "avatar_url": "https://avatars2.githubusercontent.com/u/11638619?v=4"
+        },
+        {
             "username": "pedrottimark",
             "name": "Mark Pedrotti",
             "website": "http://twitter.com/ittordepam",
@@ -157,16 +157,16 @@
     ],
     "committers": [
         {
-            "username": "gyandeeps",
-            "name": "Gyandeep Singh",
-            "website": "https://gyandeeps.com",
-            "avatar_url": "https://avatars2.githubusercontent.com/u/5554486?v=4"
-        },
-        {
             "username": "g-plane",
             "name": "Pig Fang",
             "website": "https://gplane.win",
             "avatar_url": "https://avatars1.githubusercontent.com/u/17216317?v=4"
+        },
+        {
+            "username": "yeonjuan",
+            "name": "YeonJuan",
+            "website": "https://yeon-js.tistory.com/",
+            "avatar_url": "https://avatars3.githubusercontent.com/u/41323220?v=4"
         },
         {
             "username": "mdjermanovic",
