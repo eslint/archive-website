@@ -105,6 +105,15 @@
             "tier": "bronze-sponsor"
         },
         {
+            "name": "VPS Server",
+            "url": "https://www.vpsserver.com",
+            "image": "https://images.opencollective.com/vpsservercom/logo.png",
+            "monthlyDonation": 20000,
+            "totalDonations": 140000,
+            "source": "opencollective",
+            "tier": "bronze-sponsor"
+        },
+        {
             "name": "Free Icons by Icons8",
             "url": "https://icons8.com",
             "image": "https://images.opencollective.com/icons8/0b37d14/logo.png",
