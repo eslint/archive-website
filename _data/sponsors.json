@@ -287,6 +287,15 @@
             "tier": "backer"
         },
         {
+            "name": "Thomas Lohner",
+            "url": null,
+            "image": "https://images.opencollective.com/thomas-lohner/avatar.png",
+            "monthlyDonation": 500,
+            "totalDonations": 500,
+            "source": "opencollective",
+            "tier": "backer"
+        },
+        {
             "name": "Derk-Jan Karrenbeld @SleeplessByte",
             "url": "https://derk-jan.com",
             "image": "https://images.opencollective.com/derk-jan/a131479/avatar.png",
