@@ -61,6 +61,14 @@ if ("red" === color) {
     // ...
 }
 
+if (`red` === color) {
+    // ...
+}
+
+if (`red` === `${color}`) {
+    // ...
+}
+
 if (true == flag) {
     // ...
 }
@@ -90,6 +98,14 @@ if (5 & value) {
 if (value === "red") {
     // ...
 }
+
+if (value === `red`) {
+    // ...
+}
+
+if (`${value}` === `red`) {
+
+}
 ```
 
 ### exceptRange
@@ -111,6 +127,10 @@ if (count < 10 && (0 <= rand && rand < 1)) {
     // ...
 }
 
+if (`blue` < x && x < `green`) {
+    // ...
+}
+
 function howLong(arr) {
     return (0 <= arr.length && arr.length < 10) ? "short" : "long";
 }
@@ -128,6 +148,9 @@ if (x < -1 || 9 < x) {
 
 if (x !== 'foo' && 'bar' != x) {
 }
+
+if (x !== `foo` && `bar` != x) {
+}
 ```
 
 ### always
@@ -140,6 +163,10 @@ Examples of **incorrect** code for the `"always"` option:
 if (color == "blue") {
     // ...
 }
+
+if (color == `blue`) {
+    // ...
+}
 ```
 
 Examples of **correct** code for the `"always"` option:
@@ -148,6 +175,14 @@ Examples of **correct** code for the `"always"` option:
 /*eslint yoda: ["error", "always"]*/
 
 if ("blue" == value) {
+    // ...
+}
+
+if (`blue` == value) {
+    // ...
+}
+
+if (`blue` == `${value}`) {
     // ...
 }
 
