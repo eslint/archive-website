@@ -58,9 +58,9 @@ Directive comment descriptions allow you to leave a note to yourself and other d
 
 You can read more in the [RFC](https://github.com/eslint/rfcs/pull/33).
 
-### Deprecating `~/.eslintrc`
+### Warnings for using `~/.eslintrc`
 
-Config files in your home directory are deprecated in v7.0.0. This feature has long been a source of confusion for ESLint users, especially because ESLint only looks for a config file in the home directory if no other config file is found. The configuration system in ESLint has changed a lot since home directory config files were introduced, and with the additional flexibility we feel there are plenty of other options for configuring ESLint that are clearer than the home directory config file.
+Config files in your home directory were deprecated in v6.7.0 and v7.0.0 will warn when one is used. This feature has long been a source of confusion for ESLint users, especially because ESLint only looks for a config file in the home directory if no other config file is found. The configuration system in ESLint has changed a lot since home directory config files were introduced, and with the additional flexibility we feel there are plenty of other options for configuring ESLint that are clearer than the home directory config file.
 
 Support for home directory config files will be removed in v8.0.0. You can read more in the [RFC](https://github.com/eslint/rfcs/pull/32).
 
@@ -68,6 +68,9 @@ Support for home directory config files will be removed in v8.0.0. You can read 
 
 In versions prior to v7.0.0, ESLint would resolve references inside of config files or ignore files relative to the file location passed to `--config` or `--ignore-path`. This didn't make much sense and was a source of confusion and unexpected behaviors for users. In v7.0.0, config files and ignore files passed using `--config` or `--ignore-path` use the current working directory as their base path. You can read more in the [RFC](https://github.com/eslint/rfcs/pull/37).
 
+### Plugins loaded from config file directory
+
+ESLint has long had a problem loading plugins from shared configs due to the way plugin loading was handled. This problem required using peer dependencies and a post-install script to allow shared configs to reference plugins. In v7.0.0, plugins will be loaded relative to the configs that reference them, allowing shared configs to include plugins as dependencies directly. You can read more in the [RFC](https://github.com/eslint/rfcs/pull/47).
 
 ### File extensions in config files
 
@@ -102,4 +105,4 @@ If you'd like to test v7.0.0 as it's developed, you can install from npm using t
 npm i eslint@next --save-dev
 ```
 
-Preview releases are published to the `next` tag every two weeks until the final v7.0.0 release. Keep in mind that preview releases do not contain all of the changes planned for v7.0.0 and are designed primarily to help us discover bugs and problems upgrading from v6.x.
+Preview releases are published to the `next` tag periodically until the final v7.0.0 release. Keep in mind that preview releases do not contain all of the changes planned for v7.0.0 and are designed primarily to help us discover bugs and problems upgrading from v6.x.
