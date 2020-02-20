@@ -71,7 +71,7 @@ In versions prior to v7.0.0, ESLint would resolve references inside of config fi
 
 ### File extensions in config files
 
-ESLint v7.0.0 now reads the glob patterns in the `overrides` section of your config to determine while files to lint. Prior to v7.0.0, you would need to provide the `--ext` command line flag to specify the additional files to lint. You can read more in the [RFC](https://github.com/eslint/rfcs/pull/20).
+ESLint v7.0.0 now reads the glob patterns in the `overrides` section of your config to determine which files to lint. Prior to v7.0.0, you would need to provide the `--ext` command line flag to specify the additional files to lint. You can read more in the [RFC](https://github.com/eslint/rfcs/pull/20).
 
 ### Updated default ignore patterns
 
