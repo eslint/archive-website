@@ -75,7 +75,7 @@ ESLint v7.0.0 now reads the glob patterns in the `overrides` section of your con
 
 ### Updated default ignore patterns
 
-The default ignore patterns for ESLint will be changed to:
+In addition to the current defaults, the default ignore patterns for ESLint will be changed to:
 
 * unignore `.eslintrc.js`
 * unignore `/bower_components/*`
