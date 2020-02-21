@@ -695,6 +695,14 @@
             "tier": "backer"
         },
         {
+            "name": "Matt Conrad",
+            "image": "https://avatars2.githubusercontent.com/u/59346612?v=4",
+            "url": "https://mconrad.io",
+            "monthlyDonation": 500,
+            "source": "github",
+            "tier": "backer"
+        },
+        {
             "name": "Kyle Smith",
             "url": "https://ksmith.io",
             "image": "https://images.opencollective.com/knksmith57/1b834b2/avatar.png",
