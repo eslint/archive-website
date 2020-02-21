@@ -70,7 +70,7 @@ In versions prior to v7.0.0, ESLint would resolve references inside of config fi
 
 ### Plugins loaded from config file directory
 
-ESLint has long had a problem loading plugins from shared configs due to the way plugin loading was handled. This problem required using peer dependencies and a post-install script to allow shared configs to reference plugins. In v7.0.0, plugins will be loaded relative to the configs that reference them, allowing shared configs to include plugins as dependencies directly. You can read more in the [RFC](https://github.com/eslint/rfcs/pull/47).
+In v7.0.0, plugins will be loaded relative to the configs that reference them. You can read more in the [RFC](https://github.com/eslint/rfcs/pull/47).
 
 ### File extensions in config files
 
