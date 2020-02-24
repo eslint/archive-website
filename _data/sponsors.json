@@ -705,6 +705,14 @@
             "tier": "backer"
         },
         {
+            "name": "Rayan Alkhelaiwi",
+            "image": "https://avatars3.githubusercontent.com/u/23465319?v=4",
+            "url": "https://rayan.dev",
+            "monthlyDonation": 500,
+            "source": "github",
+            "tier": "backer"
+        },
+        {
             "name": "Robert Abreu",
             "image": "https://avatars1.githubusercontent.com/u/43736556?v=4",
             "url": "https://github.com/FiveEightyEight",
