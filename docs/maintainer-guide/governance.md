@@ -26,9 +26,9 @@ Contributors have read-only access to source code and so submit changes via pull
 
 As Contributors gain experience and familiarity with the project, their profile within, and commitment to, the community will increase. At some stage, they may find themselves being nominated for committership by an existing Committer.
 
-### Committers
+### Committersd
 
-Committers are community members who have shown that they are committed to the continued development of the project through ongoing engagement with the community. Committers are given push access to the project's GitHub repos and must abide by the project's [Contribution Guidelines](contributing).
+Committers are community members who have shown that they are committed to the continued development of the project through ongoing engagement with the community. Committers are given push access to the project's GitHub repos and must abide by the project's [Contribution Guidelines](../developer-guide/contributing).
 
 Committers:
 

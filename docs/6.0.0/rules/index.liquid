@@ -1,0 +1,105 @@
+---
+title: List of available rules
+layout: doc
+---
+
+<h1>Rules</h1>
+<p>Rules in ESLint are grouped by category to help you understand their purpose.</p>
+<p>No rules are enabled by default. The <code>"extends": "eslint:recommended"</code> property in a <a href="../user-guide/configuring#extending-configuration-files">configuration file</a> enables rules that report common problems, which have a check mark (recommended) below.</p>
+<p>The `--fix` option on the <a href="../user-guide/command-line-interface#fix">command line</a> automatically fixes problems (currently mostly whitespace) reported by rules which have a wrench (fixable) below.</p>
+{% for category in rules.categories %}
+  <h2>{{ category.name }}</h2>
+  {{ category.description }}
+  <table class="rule-list table table-striped">
+    <colgroup>
+      <col class="recommended" />
+      <col class="fixable" />
+      <col class="name" />
+      <col class="description" />
+    </colgroup>
+    <tbody>
+      {% for rule in category.rules %}
+        <tr>
+        <td>{% if rule.recommended %}(recommended){% endif %}</td>
+        <td>{% if rule.fixable %}(fixable){% endif %}</td>
+        <td markdown="1"><a href="{{ rule.name }}">{{ rule.name }}</a> </td>
+        <td markdown="1">{{ rule.description }} </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endfor %}
+{% if rules.deprecated %}
+  <h2>{{ rules.deprecated.name }}</h2>
+  {{ rules.deprecated.description }}
+  <div class="rule-list deprecated-rules">
+    <table class="table table-striped">
+      <colgroup>
+        <col class="name" />
+        <col class="replaced-by" />
+      </colgroup>
+      <thead>
+        <tr>
+          <th>Deprecated rule</th>
+          <th>Replaced by</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for rule in rules.deprecated.rules %}
+          <tr>
+            <td markdown="1">
+              <a href="{{ rule.name }}">{{ rule.name }}</a>
+            </td>
+            {% if rule.replacedBy.size > 0 %}
+              <td class="replaced-by" markdown="1">
+                {% for replaced in rule.replacedBy %}
+                <a href="{{ replaced }}">{{ replaced }}</a>
+                {% endfor %}
+              </td>
+            {% else %}
+              <td class="replaced-by" markdown="1">
+                <p class="text-muted">(no replacement)</p>
+              </td>
+            {% endif %}
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    </div>
+  {% endif %}
+  <h2>{{ rules.removed.name }}</h2>
+  {{ rules.removed.description }}
+  <div class="rule-list removed-rules">
+  <table class="table table-striped">
+    <colgroup>
+      <col class="name" />
+      <col class="replaced-by" />
+    </colgroup>
+    <thead>
+      <tr>
+        <th>Removed rule</th>
+        <th>Replaced by</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for rule in rules.removed.rules %}
+        <tr>
+          <td markdown="1">
+            <a href="{{ rule.removed }}">{{ rule.removed }}</a>
+          </td>
+          {% if rule.replacedBy.size > 0 %}
+            <td class="replaced-by" markdown="1">
+              {% for replaced in rule.replacedBy %}
+               <a href="{{ replaced }}">{{ replaced }}</a>
+              {% endfor %}
+            </td>
+          {% else %}
+            <td class="replaced-by" markdown="1">
+              <p class="text-muted">(no replacement)</p>
+            </td>
+          {% endif %}
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
