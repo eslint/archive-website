@@ -51,7 +51,7 @@ categories:
       - description: disallow duplicate conditions in if-else-if chains
         fixable: false
         name: no-dupe-else-if
-        recommended: false
+        recommended: true
       - description: disallow duplicate keys in object literals
         fixable: false
         name: no-dupe-keys
@@ -91,7 +91,7 @@ categories:
       - description: disallow assigning to imported bindings
         fixable: false
         name: no-import-assign
-        recommended: false
+        recommended: true
       - description: disallow variable or `function` declarations in nested blocks
         fixable: false
         name: no-inner-declarations
@@ -125,7 +125,7 @@ categories:
       - description: disallow returning values from setters
         fixable: false
         name: no-setter-return
-        recommended: false
+        recommended: true
       - description: disallow sparse arrays
         fixable: false
         name: no-sparse-arrays
@@ -1158,8 +1158,9 @@ categories:
         recommended: false
 deprecated:
   description: >-
-    These rules have been deprecated in accordance with the <a href="/docs/user-guide/rule-deprecation">deprecation
-    policy</a>, and replaced by newer rules:
+    These rules have been deprecated in accordance with the <a
+    href="/docs/user-guide/rule-deprecation">deprecation policy</a>, and
+    replaced by newer rules:
   name: Deprecated
   rules:
     - name: indent-legacy
@@ -1194,9 +1195,9 @@ deprecated:
       replacedBy: []
 removed:
   description: >-
-    These rules from older versions of ESLint (before the <a href="/docs/user-guide/rule-deprecation">deprecation
-    policy</a> existed) have been replaced by
-    newer rules:
+    These rules from older versions of ESLint (before the <a
+    href="/docs/user-guide/rule-deprecation">deprecation policy</a> existed)
+    have been replaced by newer rules:
   name: Removed
   rules:
     - removed: generator-star

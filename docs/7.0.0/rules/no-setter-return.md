@@ -8,6 +8,8 @@ rule_type: problem
 
 # Disallow returning values from setters (no-setter-return)
 
+(recommended) The `"extends": "eslint:recommended"` property in a configuration file enables this rule.
+
 Setters cannot return values.
 
 While returning a value from a setter does not produce an error, the returned value is being ignored. Therefore, returning a value from a setter is either unnecessary or a possible error, since the returned value cannot be used.
