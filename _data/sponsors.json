@@ -305,6 +305,15 @@
             "tier": "backer"
         },
         {
+            "name": "RemoteTeam.com",
+            "url": "https://www.remoteteam.com",
+            "image": "https://images.opencollective.com/remoteteamcom/b04dbd3/logo.png",
+            "monthlyDonation": 500,
+            "totalDonations": 500,
+            "source": "opencollective",
+            "tier": "backer"
+        },
+        {
             "name": "Andreas Sander",
             "url": "https://www.andi1984.de",
             "image": "https://images.opencollective.com/andi1984/9e69ae8/avatar.png",
