@@ -127,7 +127,7 @@
             "url": "https://icons8.com",
             "image": "https://images.opencollective.com/icons8/0b37d14/logo.png",
             "monthlyDonation": 20000,
-            "totalDonations": 140000,
+            "totalDonations": 160000,
             "source": "opencollective",
             "tier": "bronze-sponsor"
         },
@@ -190,7 +190,7 @@
             "url": "http://www.firesticktricks.com",
             "image": "https://images.opencollective.com/fire-stick-tricks/b8fbe2c/logo.png",
             "monthlyDonation": 20000,
-            "totalDonations": 220000,
+            "totalDonations": 240000,
             "source": "opencollective",
             "tier": "bronze-sponsor"
         },
@@ -323,15 +323,6 @@
             "tier": "backer"
         },
         {
-            "name": "Thomas Lohner",
-            "url": null,
-            "image": "https://images.opencollective.com/thomas-lohner/avatar.png",
-            "monthlyDonation": 500,
-            "totalDonations": 500,
-            "source": "opencollective",
-            "tier": "backer"
-        },
-        {
             "name": "Derk-Jan Karrenbeld @SleeplessByte",
             "url": "https://derk-jan.com",
             "image": "https://images.opencollective.com/derk-jan/a131479/avatar.png",
@@ -363,7 +354,7 @@
             "url": "https://twitter.com/dreinidaho",
             "image": "https://images.opencollective.com/jmcombs/22a314a/avatar.png",
             "monthlyDonation": 500,
-            "totalDonations": 1500,
+            "totalDonations": 2000,
             "source": "opencollective",
             "tier": "backer"
         },
@@ -408,7 +399,7 @@
             "url": "https://medium.com/@eliseumds",
             "image": "https://images.opencollective.com/eliseu/f4e6dad/avatar.png",
             "monthlyDonation": 500,
-            "totalDonations": 4000,
+            "totalDonations": 4500,
             "source": "opencollective",
             "tier": "backer"
         },
@@ -759,7 +750,7 @@
             "url": null,
             "image": "https://images.opencollective.com/incognito-1c913a59/avatar.png",
             "monthlyDonation": 200,
-            "totalDonations": 200,
+            "totalDonations": 400,
             "source": "opencollective",
             "tier": null
         },
