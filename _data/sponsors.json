@@ -224,6 +224,15 @@
             "tier": "backer"
         },
         {
+            "name": "Ed Bentley",
+            "url": "https://twitter.com/ed_s_bentley",
+            "image": "https://images.opencollective.com/edward-bentley/avatar.png",
+            "monthlyDonation": 2000,
+            "totalDonations": 20000,
+            "source": "opencollective",
+            "tier": "backer"
+        },
+        {
             "name": "incognito",
             "url": null,
             "image": "https://images.opencollective.com/incognito-97d2b095/avatar.png",
@@ -310,6 +319,15 @@
             "image": "https://images.opencollective.com/andi1984/9e69ae8/avatar.png",
             "monthlyDonation": 500,
             "totalDonations": 500,
+            "source": "opencollective",
+            "tier": "backer"
+        },
+        {
+            "name": "Thomas Lohner",
+            "url": null,
+            "image": "https://images.opencollective.com/thomas-lohner/avatar.png",
+            "monthlyDonation": 500,
+            "totalDonations": 1000,
             "source": "opencollective",
             "tier": "backer"
         },
