@@ -43,7 +43,7 @@ Now, the remote `upstream` points to the upstream source.
 
 ## Step 4: Install the Yeoman Generator
 
-[Yeoman](http://yeoman.io) is a scaffold generator that ESLint uses to help streamline development of new rules. If you don't already have Yeoman installed, you can install it via npm:
+[Yeoman](http://yeoman.io) is a scaffold generator that ESLint uses to help streamline the development of new rules. If you don't already have Yeoman installed, you can install it via npm:
 
     npm install -g yo
 
@@ -71,7 +71,7 @@ Once you have your development environment installed, you can make and submit ch
 
 ### Build Scripts
 
-ESLint has several build scripts that help with various parts of development.
+ESLint has several build scripts that help with various parts of the development.
 
 #### npm test
 

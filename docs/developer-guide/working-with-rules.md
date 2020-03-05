@@ -66,7 +66,7 @@ The source file for a rule exports an object with the following properties.
 
 * `docs` (object) is required for core rules of ESLint:
 
-    * `description` (string) provides the short description of the rule in the [rules index](../rules/)
+    * `description` (string) provides a short description of the rule in the [rules index](../rules/)
     * `category` (string) specifies the heading under which the rule is listed in the [rules index](../rules/)
     * `recommended` (boolean) is whether the `"extends": "eslint:recommended"` property in a [configuration file](../user-guide/configuring#extending-configuration-files) enables the rule
     * `url` (string) specifies the URL at which the full documentation can be accessed
@@ -96,7 +96,7 @@ Here are methods for the [array-callback-return](../rules/array-callback-return)
 
 ```js
 function checkLastSegment (node) {
-    // report problem for function if last code path segment is reachable
+    // report problem for function if the last code path segment is reachable
 }
 
 module.exports = {
@@ -129,7 +129,7 @@ The `context` object contains additional functionality that is helpful for rules
 * `id` - the rule ID.
 * `options` - an array of the [configured options](/docs/user-guide/configuring#configuring-rules) for this rule. This array does not include the rule severity. For more information, see [here](#contextoptions).
 * `settings` - the [shared settings](/docs/user-guide/configuring#adding-shared-settings) from configuration.
-* `parserPath` - the name of the `parser` from configuration.
+* `parserPath` - the name of the `parser` from the configuration.
 * `parserServices` - an object containing parser-provided services for rules. The default parser does not provide any services. However, if a rule is intended to be used with a custom parser, it could use `parserServices` to access anything provided by that parser. (For example, a TypeScript parser could provide the ability to get the computed type of a given node.)
 
 Additionally, the `context` object has the following methods:
@@ -233,7 +233,7 @@ context.report({
 
 Note that leading and trailing whitespace is optional in message parameters.
 
-The node contains all of the information necessary to figure out the line and column number of the offending text as well the source text representing the node.
+The node contains all of the information necessary to figure out the line and column number of the offending text as well as the source text representing the node.
 
 ### `messageId`s
 
@@ -329,7 +329,7 @@ The `fix()` function can return the following values:
 * An array which includes `fixing` objects.
 * An iterable object which enumerates `fixing` objects. Especially, the `fix()` function can be a generator.
 
-If you make a `fix()` function which returns multiple `fixing` objects, those `fixing` objects must not be overlapped.
+If you make a `fix()` function that returns multiple `fixing` objects, those `fixing` objects must not be overlapped.
 
 Best practices for fixes:
 
