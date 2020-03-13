@@ -232,10 +232,10 @@ var { type, ...coords } = data;
 
 The `argsIgnorePattern` option specifies exceptions not to check for usage: arguments whose names match a regexp pattern. For example, variables whose names begin with an underscore.
 
-Examples of **correct** code for the `{ "argsIgnorePattern": "^_" }` option:
+Examples of **correct** code for the `{ "argsIgnorePattern": /^_/ }` option:
 
 ```js
-/*eslint no-unused-vars: ["error", { "argsIgnorePattern": "^_" }]*/
+/*eslint no-unused-vars: ["error", { "argsIgnorePattern": /^_/ }]*/
 
 function foo(x, _y) {
     return x + 1;
