@@ -105,15 +105,6 @@
             "tier": "bronze-sponsor"
         },
         {
-            "name": "Crosswordsolver",
-            "url": "https://www.crosswordsolver.com",
-            "image": "https://images.opencollective.com/crosswordsolver/d4481d6/logo.png",
-            "monthlyDonation": 20000,
-            "totalDonations": 100000,
-            "source": "opencollective",
-            "tier": "bronze-sponsor"
-        },
-        {
             "name": "Mixpanel",
             "url": "https://mixpanel.com",
             "image": "https://images.opencollective.com/mixpanel/cd682f7/logo.png",
