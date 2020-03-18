@@ -35,7 +35,7 @@
     "bootstrap.native": "^2.0.27",
     "codemirror": "^5.50.2",
     "docsearch.js": "^2.6.3",
-    "highlight.js": "^9.17.1",
+    "highlight.js": "^9.18.1",
     "react": "^16.12.0",
     "react-dom": "^16.12.0"
   },
