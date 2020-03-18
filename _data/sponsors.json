@@ -193,15 +193,6 @@
             "totalDonations": 240000,
             "source": "opencollective",
             "tier": "bronze-sponsor"
-        },
-        {
-            "name": "JSHeroes ",
-            "url": "https://jsheroes.io/",
-            "image": "https://images.opencollective.com/jsheroes1/9fedf0b/logo.png",
-            "monthlyDonation": 20000,
-            "totalDonations": 260000,
-            "source": "opencollective",
-            "tier": "bronze-sponsor"
         }
     ],
     "backers": [
