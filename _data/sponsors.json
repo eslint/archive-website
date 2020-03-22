@@ -748,20 +748,20 @@
             "tier": "backer"
         },
         {
+            "name": "incognito",
+            "url": null,
+            "image": "https://images.opencollective.com/incognito-1c913a59/avatar.png",
+            "monthlyDonation": 200,
+            "totalDonations": 600,
+            "source": "opencollective",
+            "tier": null
+        },
+        {
             "name": "Anton Alexandrenok",
             "url": "https://github.com/the-spyke",
             "image": "https://images.opencollective.com/antonalexandrenok/c561172/avatar.png",
             "monthlyDonation": 200,
             "totalDonations": 1000,
-            "source": "opencollective",
-            "tier": null
-        },
-        {
-            "name": "incognito",
-            "url": null,
-            "image": "https://images.opencollective.com/incognito-1c913a59/avatar.png",
-            "monthlyDonation": 100,
-            "totalDonations": 400,
             "source": "opencollective",
             "tier": null
         },
