@@ -48,7 +48,10 @@ module.exports = {
         ]
     },
     resolve: {
-        extensions: [".js", ".jsx"]
+        extensions: [".js", ".jsx"],
+        alias: {
+            esquery: path.resolve(__dirname, "src/js/demo/node_modules/esquery/dist/esquery.js")
+        }
     },
     stats: "errors-only"
 };
