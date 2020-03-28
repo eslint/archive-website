@@ -81,7 +81,7 @@
             "avatar_url": "https://avatars2.githubusercontent.com/u/626038?v=4"
         },
         {
-            "username": "zxqfox",
+            "username": "qfox",
             "name": "Alexej Yaroshevich",
             "website": "http://about.me/yaroshevich",
             "avatar_url": "https://avatars3.githubusercontent.com/u/677518?v=4"
@@ -153,6 +153,12 @@
             "name": "薛定谔的猫",
             "website": "",
             "avatar_url": "https://avatars2.githubusercontent.com/u/13050025?v=4"
+        },
+        {
+            "username": "mdjermanovic",
+            "name": "Milos Djermanovic",
+            "website": "",
+            "avatar_url": "https://avatars0.githubusercontent.com/u/44349756?v=4"
         }
     ],
     "committers": [
@@ -167,12 +173,6 @@
             "name": "YeonJuan",
             "website": "",
             "avatar_url": "https://avatars3.githubusercontent.com/u/41323220?v=4"
-        },
-        {
-            "username": "mdjermanovic",
-            "name": "Milos Djermanovic",
-            "website": "",
-            "avatar_url": "https://avatars0.githubusercontent.com/u/44349756?v=4"
         }
     ]
 }
