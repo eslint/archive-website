@@ -209,3 +209,7 @@
 - url: https://www.minutemedia.com
   src: /assets/img/logos/minutemedia.svg
   name: MinuteMedia
+
+- url: https://housinganywhere.com/
+  src: /assets/img/logos/housinganywhere.svg
+  name: HousingAnywhere
