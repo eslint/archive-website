@@ -51,6 +51,15 @@
     ],
     "bronze": [
         {
+            "name": "vpn netflix",
+            "url": "https://cooltechzone.com/netflix-vpn",
+            "image": "https://images.opencollective.com/vpn-netflix/c2e4653/logo.png",
+            "monthlyDonation": 20000,
+            "totalDonations": 20000,
+            "source": "opencollective",
+            "tier": "bronze-sponsor"
+        },
+        {
             "name": "Kasinot.fi",
             "url": "https://www.kasinot.fi",
             "image": "https://images.opencollective.com/kasinot-fi/e09aa2e/logo.png",
