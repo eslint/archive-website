@@ -233,15 +233,6 @@
             "tier": "backer"
         },
         {
-            "name": "Eventbot",
-            "url": "https://geteventbot.com/",
-            "image": "https://images.opencollective.com/geteventbot1/446b860/logo.png",
-            "monthlyDonation": 3000,
-            "totalDonations": 30000,
-            "source": "opencollective",
-            "tier": null
-        },
-        {
             "name": "Neovation Learning Solutions",
             "url": "https://www.neovation.com",
             "image": "https://images.opencollective.com/neovationcorp/30d1cf7/logo.png",
