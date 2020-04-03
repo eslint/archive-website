@@ -243,7 +243,7 @@
         },
         {
             "name": "Ed Bentley",
-            "url": "https://twitter.com/ed_s_bentley",
+            "url": null,
             "image": "https://images.opencollective.com/edward-bentley/avatar.png",
             "monthlyDonation": 2000,
             "totalDonations": 22000,
@@ -740,7 +740,7 @@
         },
         {
             "name": "Will McAuliff",
-            "url": "https://twitter.com/womcauliff",
+            "url": null,
             "image": "https://images.opencollective.com/womcauliff/2be6f36/avatar.png",
             "monthlyDonation": 300,
             "totalDonations": 5200,
