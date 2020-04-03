@@ -51,6 +51,15 @@
     ],
     "bronze": [
         {
+            "name": "Anagram Solver",
+            "url": "https://www.crosswordsolver.org/anagram-solver/",
+            "image": "https://images.opencollective.com/anagram-solver/2666271/logo.png",
+            "monthlyDonation": 20000,
+            "totalDonations": 20000,
+            "source": "opencollective",
+            "tier": "bronze-sponsor"
+        },
+        {
             "name": "vpn netflix",
             "url": "https://cooltechzone.com/netflix-vpn",
             "image": "https://images.opencollective.com/vpn-netflix/4850160/logo.png",
