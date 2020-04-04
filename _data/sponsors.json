@@ -748,6 +748,15 @@
             "tier": "backer"
         },
         {
+            "name": "Shunfan Du",
+            "url": "https://twitter.com/shunf4n",
+            "image": "https://images.opencollective.com/shunfan/ca1c537/avatar.png",
+            "monthlyDonation": 200,
+            "totalDonations": 400,
+            "source": "opencollective",
+            "tier": null
+        },
+        {
             "name": "incognito",
             "url": null,
             "image": "https://images.opencollective.com/incognito-1c913a59/avatar.png",
@@ -762,15 +771,6 @@
             "image": "https://images.opencollective.com/antonalexandrenok/c561172/avatar.png",
             "monthlyDonation": 200,
             "totalDonations": 1200,
-            "source": "opencollective",
-            "tier": null
-        },
-        {
-            "name": "Shunfan Du",
-            "url": "https://twitter.com/shunf4n",
-            "image": "https://images.opencollective.com/shunfan/ca1c537/avatar.png",
-            "monthlyDonation": 100,
-            "totalDonations": 400,
             "source": "opencollective",
             "tier": null
         }
