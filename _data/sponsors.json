@@ -386,6 +386,15 @@
             "tier": "backer"
         },
         {
+            "name": "0x Tracker",
+            "url": "https://0xtracker.com",
+            "image": "https://images.opencollective.com/0xtracker/b6f999b/logo.png",
+            "monthlyDonation": 500,
+            "totalDonations": 4000,
+            "source": "opencollective",
+            "tier": "backer"
+        },
+        {
             "name": "Matter",
             "url": "https://matterapp.com",
             "image": "https://images.opencollective.com/matter_hq/ac0a719/logo.png",
