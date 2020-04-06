@@ -325,7 +325,7 @@ Keep in mind that comments are technically not a part of the AST and are only at
 ESLint analyzes code paths while traversing AST.
 You can access that code path objects with five events related to code paths.
 
-[details here](./code-path-analysis)
+[details here](./code-path-analysis.html)
 
 ## Rule Unit Tests
 
