@@ -323,6 +323,15 @@
             "tier": "backer"
         },
         {
+            "name": "Bratteng Solutions AS",
+            "url": "https://bratteng.solutions/",
+            "image": "https://images.opencollective.com/bratteng-solutions-as/4b20839/logo.png",
+            "monthlyDonation": 500,
+            "totalDonations": 500,
+            "source": "opencollective",
+            "tier": "backer"
+        },
+        {
             "name": "Kristof Michiels",
             "url": null,
             "image": "https://images.opencollective.com/kristof-michiels/avatar.png",
