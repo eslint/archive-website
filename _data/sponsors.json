@@ -11,11 +11,11 @@
             "tier": "gold-sponsor"
         },
         {
-            "name": "Salesforce",
-            "url": "http://engineering.salesforce.com",
+            "name": "Heroku",
+            "url": "https://www.heroku.com/",
             "image": "https://images.opencollective.com/salesforce/ca8f997/logo.png",
             "monthlyDonation": 100000,
-            "totalDonations": 1308500,
+            "totalDonations": 1310000,
             "source": "opencollective",
             "tier": "gold-sponsor"
         },
