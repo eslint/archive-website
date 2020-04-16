@@ -11,8 +11,8 @@
             "tier": "gold-sponsor"
         },
         {
-            "name": "Heroku",
-            "url": "https://www.heroku.com/",
+            "name": "Salesforce",
+            "url": "https://www.salesforce.com",
             "image": "https://images.opencollective.com/salesforce/ca8f997/logo.png",
             "monthlyDonation": 100000,
             "totalDonations": 1313000,
