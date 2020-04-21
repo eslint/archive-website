@@ -379,7 +379,7 @@ your-project
   └── test.js
 ```
 
-If there is an `.eslintrc` and a `package.json` file found in the same directory, both will be used, with the `.eslintrc` having the higher precendence.
+If there is an `.eslintrc` and a `package.json` file found in the same directory, both will be used, with the `.eslintrc` having the higher precedence.
 
 By default, ESLint will look for configuration files in all parent folders up to the root directory. This can be useful if you want all of your projects to follow a certain convention, but can sometimes lead to unexpected results. To limit ESLint to a specific project, place `"root": true` inside the `eslintConfig` field of the `package.json` file or in the `.eslintrc` file at your project's root level.  ESLint will stop looking in parent folders once it finds a configuration with `"root": true`.
 
@@ -431,7 +431,7 @@ The complete configuration hierarchy, from highest precedence to lowest preceden
 
 If you want to extend a specific configuration file, you can use the `extends` property and specify the path to the file. The path can be either relative or absolute.
 
-The extended configuration provides base rules, which can be overriden by the configuration that references it. For example:
+The extended configuration provides base rules, which can be overridden by the configuration that references it. For example:
 
 ```js
 {

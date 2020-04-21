@@ -376,7 +376,7 @@ your-project
   └── test.js
 ```
 
-If there is an `.eslintrc` and a `package.json` file found in the same directory, both will be used, with the `.eslintrc` having the higher precendence.
+If there is an `.eslintrc` and a `package.json` file found in the same directory, both will be used, with the `.eslintrc` having the higher precedence.
 
 The complete configuration hierarchy, from highest precedence to lowest precedence, is as follows:
 
@@ -404,7 +404,7 @@ The complete configuration hierarchy, from highest precedence to lowest preceden
 
 If you want to extend a specific configuration file, you can use the `extends` property and specify the path to the file. The path can be either relative or absolute.
 
-The extended configuration provides base rules, which can be overriden by the configuration that references it. For example:
+The extended configuration provides base rules, which can be overridden by the configuration that references it. For example:
 
 ```js
 {

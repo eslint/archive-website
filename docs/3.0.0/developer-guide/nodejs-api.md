@@ -314,7 +314,7 @@ If the operation ends with a parsing error, you will get a single message for th
                     ruleId: null,
                     fatal: true,
                     severity: 2,
-                    source: "fucntion foo() {}",
+                    source: "function foo() {}",
                     message: "Parsing error: Unexpected token foo",
                     line: 1,
                     column: 10
@@ -322,7 +322,7 @@ If the operation ends with a parsing error, you will get a single message for th
             ],
             errorCount: 1,
             warningCount: 0,
-            source: "fucntion foo() {}"
+            source: "function foo() {}"
         }
     ],
     errorCount: 1,

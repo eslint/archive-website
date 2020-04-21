@@ -14,7 +14,7 @@ var count = people.length;
 var enoughFood = count > sandwhiches.length;
 
 if (enoughFood) {
-    var count = sandwhiches.length; // accidently overriding the count variable
+    var count = sandwhiches.length; // accidentally overriding the count variable
     console.log("We have " + count + " sandwhiches for everyone. Plenty for all!");
 }
 

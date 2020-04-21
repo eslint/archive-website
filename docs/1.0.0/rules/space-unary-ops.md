@@ -45,13 +45,13 @@ Unary operator "++" should not be followed by whitespace.
 ++ foo
 ```
 
-Unary operator "--" should not be preceeded by whitespace.
+Unary operator "--" should not be preceded by whitespace.
 
 ```js
 foo --
 ```
 
-Unary operator "-" should not be preceeded by whitespace.
+Unary operator "-" should not be preceded by whitespace.
 
 ```js
 - 1
@@ -83,7 +83,7 @@ Unary operator "++" is not followed by whitespace.
 ++foo
 ```
 
-Unary operator "--" is not preceeded by whitespace.
+Unary operator "--" is not preceded by whitespace.
 
 ```js
 foo--

@@ -75,7 +75,7 @@ Configure each declaration type individually. Defaults to `"always"` if key not 
 }]
 ```
 
-Configure uninitialized and initialized seperately. Defaults to `"always"` if key not present.
+Configure uninitialized and initialized separately. Defaults to `"always"` if key not present.
 
 ```json
 "one-var": [2, {

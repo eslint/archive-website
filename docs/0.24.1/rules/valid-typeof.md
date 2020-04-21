@@ -17,7 +17,7 @@ The following patterns are considered warnings:
 typeof foo === "strnig"
 typeof foo == "undefimed"
 typeof bar != "nunber"
-typeof bar !== "fucntion"
+typeof bar !== "function"
 ```
 
 The following patterns are not warnings:

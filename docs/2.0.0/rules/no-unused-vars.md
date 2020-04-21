@@ -23,10 +23,10 @@ The following patterns are considered problems:
 
 ```js
 /*eslint no-unused-vars: 2*/
-/*global some_unsed_var */   /*error 'some_unsed_var' is defined but never used*/
+/*global some_used_var */   /*error 'some_used_var' is defined but never used*/
 
 //It checks variables you have defined as global
-some_unsed_var = 42;
+some_used_var = 42;
 
 var x;                       /*error 'x' is defined but never used*/
 

@@ -19,7 +19,7 @@ The following patterns are considered problems:
 typeof foo === "strnig"   /*error Invalid typeof comparison value*/
 typeof foo == "undefimed" /*error Invalid typeof comparison value*/
 typeof bar != "nunber"    /*error Invalid typeof comparison value*/
-typeof bar !== "fucntion" /*error Invalid typeof comparison value*/
+typeof bar !== "function" /*error Invalid typeof comparison value*/
 ```
 
 The following patterns are not considered problems:

@@ -67,7 +67,7 @@ You can configure the rule as follows:
         "const": "never" // Exactly one declarator per const declaration per block
     }]
 
-    // Configure uninitialized and initialized seperately. Defaults to "always" if key not present.
+    // Configure uninitialized and initialized separately. Defaults to "always" if key not present.
     "one-var": [2, {
         "uninitialized": "always", // Exactly one declaration for uninitialized variables per function (var) or block (let or const)
         "initialized": "never" // Exactly one declarator per initialized variable declaration per function (var) or block (let or const)
