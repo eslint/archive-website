@@ -20,15 +20,6 @@
             "tier": "gold-sponsor"
         },
         {
-            "name": "MagicLab",
-            "url": "https://magiclab.co/?utm_source=eslint",
-            "image": "https://images.opencollective.com/magiclab/bbf6345/logo.png",
-            "monthlyDonation": 100000,
-            "totalDonations": 1500000,
-            "source": "opencollective",
-            "tier": "gold-sponsor"
-        },
-        {
             "name": "Airbnb",
             "url": "https://www.airbnb.com/",
             "image": "https://images.opencollective.com/airbnb/d327d66/logo.png",
