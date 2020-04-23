@@ -260,6 +260,15 @@
             "tier": "backer"
         },
         {
+            "name": "Roman Nazarenko",
+            "url": null,
+            "image": "https://images.opencollective.com/roman-nazarenko/avatar.png",
+            "monthlyDonation": 2000,
+            "totalDonations": 2000,
+            "source": "opencollective",
+            "tier": null
+        },
+        {
             "name": "Ed Bentley",
             "url": null,
             "image": "https://images.opencollective.com/edward-bentley/avatar.png",
