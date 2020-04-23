@@ -42,6 +42,24 @@
     ],
     "bronze": [
         {
+            "name": "CasinoTop.com",
+            "url": "https://www.casinotop.com/",
+            "image": "https://images.opencollective.com/casinotop-com/10fd95b/logo.png",
+            "monthlyDonation": 20000,
+            "totalDonations": 20000,
+            "source": "opencollective",
+            "tier": "bronze-sponsor"
+        },
+        {
+            "name": "Casino Topp",
+            "url": "https://www.casinotopp.net/",
+            "image": "https://images.opencollective.com/casino-topp/1dd399a/logo.png",
+            "monthlyDonation": 20000,
+            "totalDonations": 20000,
+            "source": "opencollective",
+            "tier": "bronze-sponsor"
+        },
+        {
             "name": "Writers Per Hour",
             "url": "https://writersperhour.com/urgent-essay-writing-service",
             "image": "https://images.opencollective.com/writersperhour/5787d4b/logo.png",
@@ -685,7 +703,7 @@
         {
             "name": "Evan Hirsh",
             "image": "https://avatars3.githubusercontent.com/u/4483135?u=821d211528dffcb99367f5ad369972c749d77f25&v=4",
-            "url": "http://www.ehirsh.com",
+            "url": "https://www.ehirsh.com",
             "monthlyDonation": 500,
             "source": "github",
             "tier": "backer"
