@@ -8,6 +8,8 @@ rule_type: suggestion
 
 # Enforce require() on the top-level module scope (global-require)
 
+This rule was **deprecated** in ESLint v7.0.0. Please use the corresponding rule in [`eslint-plugin-node`](https://github.com/mysticatea/eslint-plugin-node).
+
 In Node.js, module dependencies are included using the `require()` function, such as:
 
 ```js

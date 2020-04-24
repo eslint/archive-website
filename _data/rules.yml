@@ -565,53 +565,6 @@ categories:
       These rules relate to code running in Node.js, or in browsers with
       CommonJS:
     name: Node.js and CommonJS
-    rules:
-      - description: require `return` statements after callbacks
-        fixable: false
-        name: callback-return
-        recommended: false
-      - description: require `require()` calls to be placed at top-level module scope
-        fixable: false
-        name: global-require
-        recommended: false
-      - description: require error handling in callbacks
-        fixable: false
-        name: handle-callback-err
-        recommended: false
-      - description: disallow use of the `Buffer()` constructor
-        fixable: false
-        name: no-buffer-constructor
-        recommended: false
-      - description: >-
-          disallow `require` calls to be mixed with regular variable
-          declarations
-        fixable: false
-        name: no-mixed-requires
-        recommended: false
-      - description: disallow `new` operators with calls to `require`
-        fixable: false
-        name: no-new-require
-        recommended: false
-      - description: disallow string concatenation with `__dirname` and `__filename`
-        fixable: false
-        name: no-path-concat
-        recommended: false
-      - description: disallow the use of `process.env`
-        fixable: false
-        name: no-process-env
-        recommended: false
-      - description: disallow the use of `process.exit()`
-        fixable: false
-        name: no-process-exit
-        recommended: false
-      - description: disallow specified modules when loaded by `require`
-        fixable: false
-        name: no-restricted-modules
-        recommended: false
-      - description: disallow synchronous methods
-        fixable: false
-        name: no-sync
-        recommended: false
   - description: >-
       These rules relate to style guidelines, and are therefore quite
       subjective:
@@ -1163,6 +1116,15 @@ deprecated:
     replaced by newer rules:
   name: Deprecated
   rules:
+    - name: callback-return
+      replacedBy:
+        - node/callback-return
+    - name: global-require
+      replacedBy:
+        - node/global-require
+    - name: handle-callback-err
+      replacedBy:
+        - node/handle-callback-err
     - name: indent-legacy
       replacedBy:
         - indent
@@ -1175,18 +1137,42 @@ deprecated:
     - name: newline-before-return
       replacedBy:
         - padding-line-between-statements
+    - name: no-buffer-constructor
+      replacedBy:
+        - node/no-deprecated-api
     - name: no-catch-shadow
       replacedBy:
         - no-shadow
+    - name: no-mixed-requires
+      replacedBy:
+        - node/no-mixed-requires
     - name: no-native-reassign
       replacedBy:
         - no-global-assign
     - name: no-negated-in-lhs
       replacedBy:
         - no-unsafe-negation
+    - name: no-new-require
+      replacedBy:
+        - node/no-new-require
+    - name: no-path-concat
+      replacedBy:
+        - node/no-path-concat
+    - name: no-process-env
+      replacedBy:
+        - node/no-process-env
+    - name: no-process-exit
+      replacedBy:
+        - node/no-process-exit
+    - name: no-restricted-modules
+      replacedBy:
+        - node/no-restricted-require
     - name: no-spaced-func
       replacedBy:
         - func-call-spacing
+    - name: no-sync
+      replacedBy:
+        - node/no-sync
     - name: prefer-reflect
       replacedBy: []
     - name: require-jsdoc
