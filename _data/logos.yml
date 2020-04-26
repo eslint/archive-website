@@ -213,3 +213,7 @@
 - url: https://housinganywhere.com/
   src: /assets/img/logos/housinganywhere.svg
   name: HousingAnywhere
+  
+- url: https://swissdevjobs.ch/jobs/JavaScript/All
+  src: /assets/img/logos/swissdev-javascript-jobs-logo.svg
+  name: SwissDev JS Jobs
