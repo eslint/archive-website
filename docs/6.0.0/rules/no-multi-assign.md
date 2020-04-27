@@ -11,7 +11,11 @@ rule_type: suggestion
 Chaining the assignment of variables can lead to unexpected results and be difficult to read.
 
 ```js
-a = b = c = d;
+(function() {
+    const foo = bar = 0; // Did you mean `foo = bar == 0`?
+    bar = 1;             // This will not fail since `bar` is not constant.
+})();
+console.log(bar);        // This will output 1 since `bar` is not scoped.
 ```
 
 ## Rule Details
@@ -25,9 +29,9 @@ Examples of **incorrect** code for this rule:
 
 var a = b = c = 5;
 
-var foo = bar = "baz";
+const foo = bar = "baz";
 
-var a =
+let a =
     b =
     c;
 ```
@@ -40,11 +44,11 @@ var a = 5;
 var b = 5;
 var c = 5;
 
-var foo = "baz";
-var bar = "baz";
+const foo = "baz";
+const bar = "baz";
 
-var a = c;
-var b = c;
+let a = c;
+let b = c;
 ```
 
 ## Related Rules
