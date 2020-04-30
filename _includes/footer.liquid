@@ -2,8 +2,8 @@
 <div class="container">
   <footer>
     <ul class="list-inline">
-      {% if page.edit_link %}
-        <li><a href="{{ page.edit_link }}">Edit this page</a></li>
+      {% if edit_link %}
+        <li><a href="{{ edit_link }}">Edit this page</a></li>
       {% else %}
         <li><a href="https://github.com/eslint/website/edit/master/{{ page.inputPath }}">Edit this page</a></li>
       {% endif %}
