@@ -341,6 +341,15 @@
             "tier": "backer"
         },
         {
+            "name": "MonoVM",
+            "url": "https://MonoVM.com",
+            "image": "https://images.opencollective.com/monovm/a15d0ab/logo.png",
+            "monthlyDonation": 500,
+            "totalDonations": 500,
+            "source": "opencollective",
+            "tier": "backer"
+        },
+        {
             "name": "Bratteng Solutions AS",
             "url": "https://bratteng.solutions/",
             "image": "https://images.opencollective.com/bratteng-solutions-as/4b20839/logo.png",
@@ -802,7 +811,7 @@
             "url": null,
             "image": "https://images.opencollective.com/womcauliff/2be6f36/avatar.png",
             "monthlyDonation": 300,
-            "totalDonations": 5200,
+            "totalDonations": 5500,
             "source": "opencollective",
             "tier": "backer"
         },
