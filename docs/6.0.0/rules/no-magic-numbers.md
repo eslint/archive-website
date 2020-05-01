@@ -8,7 +8,7 @@ rule_type: suggestion
 
 # Disallow Magic Numbers (no-magic-numbers)
 
-'Magic numbers' are numbers that occur multiple time in code without an explicit meaning.
+'Magic numbers' are numbers that occur multiple times in code without an explicit meaning.
 They should preferably be replaced by named constants.
 
 ```js

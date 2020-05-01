@@ -139,6 +139,27 @@ if (foo) { bar(); }
 if (foo) { bar(); } else { baz(); }
 
 try { somethingRisky(); } catch(e) { handleError(); }
+
+if (foo) { baz(); } else {
+  boom();
+}
+
+if (foo) { baz(); } else if (bar) {
+  boom();
+}
+
+if (foo) { baz(); } else
+if (bar) {
+  boom();
+}
+
+if (foo) { baz); } else if (bar) {
+  boom();
+}
+
+try { somethingRisky(); } catch(e) {
+  handleError();
+}
 ```
 
 ### stroustrup

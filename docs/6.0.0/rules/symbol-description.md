@@ -8,7 +8,7 @@ rule_type: suggestion
 
 # require symbol description (symbol-description)
 
-The `Symbol` function may have optional description:
+The `Symbol` function may have an optional description:
 
 ```js
 var foo = Symbol("some description");
