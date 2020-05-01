@@ -562,10 +562,6 @@ categories:
         name: no-use-before-define
         recommended: false
   - description: >-
-      These rules relate to code running in Node.js, or in browsers with
-      CommonJS:
-    name: Node.js and CommonJS
-  - description: >-
       These rules relate to style guidelines, and are therefore quite
       subjective:
     name: Stylistic Issues
