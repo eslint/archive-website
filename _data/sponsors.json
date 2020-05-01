@@ -100,7 +100,7 @@
             "url": "https://www.pelisivut.com",
             "image": "https://images.opencollective.com/pelisivut/04f08f2/logo.png",
             "monthlyDonation": 20000,
-            "totalDonations": 40000,
+            "totalDonations": 60000,
             "source": "opencollective",
             "tier": "bronze-sponsor"
         },
@@ -208,7 +208,7 @@
             "url": "https://tekhattan.com",
             "image": "https://images.opencollective.com/tekhattan/bc73c28/logo.png",
             "monthlyDonation": 20000,
-            "totalDonations": 260000,
+            "totalDonations": 280000,
             "source": "opencollective",
             "tier": "bronze-sponsor"
         },
@@ -395,20 +395,11 @@
             "tier": "backer"
         },
         {
-            "name": "Peter deHaan",
-            "url": "http://about.me/peterdehaan",
-            "image": "https://images.opencollective.com/pdehaan/4437929/avatar.png",
-            "monthlyDonation": 500,
-            "totalDonations": 2000,
-            "source": "opencollective",
-            "tier": "backer"
-        },
-        {
             "name": "David Carroll",
             "url": null,
             "image": "https://images.opencollective.com/david-carroll/avatar.png",
             "monthlyDonation": 500,
-            "totalDonations": 2000,
+            "totalDonations": 2500,
             "source": "opencollective",
             "tier": "backer"
         },
@@ -426,7 +417,7 @@
             "url": "https://matterapp.com",
             "image": "https://images.opencollective.com/matter_hq/ac0a719/logo.png",
             "monthlyDonation": 500,
-            "totalDonations": 4500,
+            "totalDonations": 5000,
             "source": "opencollective",
             "tier": "backer"
         },
@@ -444,7 +435,7 @@
             "url": null,
             "image": "https://images.opencollective.com/james-sherwood-jones/avatar.png",
             "monthlyDonation": 500,
-            "totalDonations": 5000,
+            "totalDonations": 5500,
             "source": "opencollective",
             "tier": "backer"
         },
@@ -498,7 +489,7 @@
             "url": "http://pushred.co",
             "image": "https://images.opencollective.com/pushred/506ad8d/avatar.png",
             "monthlyDonation": 500,
-            "totalDonations": 7000,
+            "totalDonations": 7500,
             "source": "opencollective",
             "tier": "backer"
         },
@@ -606,7 +597,7 @@
             "url": "http://nubz.com",
             "image": "https://images.opencollective.com/nubz/logo.png",
             "monthlyDonation": 500,
-            "totalDonations": 7500,
+            "totalDonations": 8000,
             "source": "opencollective",
             "tier": "backer"
         },
