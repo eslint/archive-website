@@ -242,6 +242,15 @@
             "tier": null
         },
         {
+            "name": "ESLint",
+            "url": "https://eslint.org/",
+            "image": "https://images.opencollective.com/eslint/96b09dc/logo.png",
+            "monthlyDonation": 10000,
+            "totalDonations": 10000,
+            "source": "opencollective",
+            "tier": "supporter"
+        },
+        {
             "name": "Yannick Croissant",
             "url": "https://yannick.cr",
             "image": "https://images.opencollective.com/yannickcr/765f06f/avatar.png",
