@@ -509,6 +509,9 @@ import {
     bar
 } from 'foo-bar';
 import {
+    foo, bar
+} from 'foo-bar';
+import {
     foo as f,
     bar
 } from 'foo-bar';

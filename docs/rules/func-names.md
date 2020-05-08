@@ -37,6 +37,8 @@ This rule has an object option:
 
 When a value for `generators` is not provided the behavior for generator functions falls back to the base option.
 
+Please note that `"always"` and `"as-needed"` require function expressions and function declarations in `export default` declarations to have a name.
+
 ### always
 
 Examples of **incorrect** code for this rule with the default `"always"` option:
@@ -53,6 +55,8 @@ const cat = {
 (function() {
     // ...
 }())
+
+export default function() {}
 ```
 
 Examples of **correct** code for this rule with the default `"always"` option:
@@ -69,6 +73,8 @@ const cat = {
 (function bar() {
     // ...
 }())
+
+export default function foo() {}
 ```
 
 ### as-needed
@@ -85,6 +91,8 @@ Foo.prototype.bar = function() {};
 (function() {
     // ...
 }())
+
+export default function() {}
 ```
 
 Examples of **correct** code for this rule with the `"as-needed"` option:
@@ -101,6 +109,8 @@ const cat = {
 (function bar() {
     // ...
 }())
+
+export default function foo() {}
 ```
 
 ### never

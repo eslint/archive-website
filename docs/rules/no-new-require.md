@@ -8,6 +8,8 @@ rule_type: suggestion
 
 # Disallow new require (no-new-require)
 
+This rule was **deprecated** in ESLint v7.0.0. Please use the corresponding rule in [`eslint-plugin-node`](https://github.com/mysticatea/eslint-plugin-node).
+
 The `require` function is used to include modules that exist in separate files, such as:
 
 ```js

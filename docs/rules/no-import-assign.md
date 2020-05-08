@@ -8,6 +8,8 @@ rule_type: problem
 
 # disallow assigning to imported bindings (no-import-assign)
 
+(recommended) The `"extends": "eslint:recommended"` property in a configuration file enables this rule.
+
 The updates of imported bindings by ES Modules cause runtime errors.
 
 ## Rule Details

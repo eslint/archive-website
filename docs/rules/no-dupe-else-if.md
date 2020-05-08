@@ -8,6 +8,8 @@ rule_type: problem
 
 # Disallow duplicate conditions in `if-else-if` chains (no-dupe-else-if)
 
+(recommended) The `"extends": "eslint:recommended"` property in a configuration file enables this rule.
+
 `if-else-if` chains are commonly used when there is a need to execute only one branch (or at most one branch) out of several possible branches, based on certain conditions.
 
 ```js
