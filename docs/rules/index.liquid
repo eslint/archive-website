@@ -50,17 +50,22 @@ layout: doc
             <td markdown="1">
               <a href="{{ rule.name }}">{{ rule.name }}</a>
             </td>
-            {% if rule.replacedBy.size > 0 %}
-              <td class="replaced-by" markdown="1">
-                {% for replaced in rule.replacedBy %}
-                <a href="{{ replaced }}">{{ replaced }}</a>
-                {% endfor %}
-              </td>
-            {% else %}
-              <td class="replaced-by" markdown="1">
-                <p class="text-muted">(no replacement)</p>
-              </td>
-            {% endif %}
+            <td class="replaced-by" markdown="1">
+              {% assign hasReplacement = false %}
+              {% if rule.replacedBy.size > 0 %}
+                  {% for replaced in rule.replacedBy %}
+                    {% comment %} Do not link to rule docs in 3rd party plugins. {% endcomment %}
+                    {% assign ruleNameSegments = replaced | split: "/" %}
+                    {% if ruleNameSegments.size == 1 %}
+                      <a href="{{ replaced }}">{{ replaced }}</a>
+                      {% assign hasReplacement = true %}
+                    {% endif %}
+                  {% endfor %}
+              {% endif %}
+              {% if hasReplacement == false %}
+                  <p class="text-muted">(no replacement)</p>
+              {% endif %}
+            </td>
           </tr>
         {% endfor %}
       </tbody>
