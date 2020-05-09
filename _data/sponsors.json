@@ -799,6 +799,14 @@
             "tier": "backer"
         },
         {
+            "name": "Tobias Möritz",
+            "image": "https://avatars0.githubusercontent.com/u/29142128?u=715cf48694c41837e3edad4b2144526d2e360505&v=4",
+            "url": "moeritz.cc",
+            "monthlyDonation": 500,
+            "source": "github",
+            "tier": "backer"
+        },
+        {
             "name": "Oliver Sieweke",
             "image": "https://avatars3.githubusercontent.com/u/30631513?u=fbbb709bd6feec2525869ed071b241d52ff87148&v=4",
             "url": "www.oliversieweke.com",
