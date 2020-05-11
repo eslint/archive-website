@@ -123,15 +123,6 @@
             "tier": "bronze-sponsor"
         },
         {
-            "name": "Top Web Design Agencies",
-            "url": "https://medium.com/@niksundin/best-web-design-companies-1872e445775f",
-            "image": "https://images.opencollective.com/top-web-design-agencies/d92d747/logo.png",
-            "monthlyDonation": 20000,
-            "totalDonations": 120000,
-            "source": "opencollective",
-            "tier": "bronze-sponsor"
-        },
-        {
             "name": "Bugsnag Stability Monitoring",
             "url": "https://www.bugsnag.com/platforms?utm_source=Open Collective&utm_medium=Website&utm_content=open-source&utm_campaign=2019-community&utm_term=",
             "image": "https://images.opencollective.com/bugsnag-stability-monitoring/c2cef36/logo.png",
@@ -164,24 +155,6 @@
             "image": "https://images.opencollective.com/icons8/0b37d14/logo.png",
             "monthlyDonation": 20000,
             "totalDonations": 200000,
-            "source": "opencollective",
-            "tier": "bronze-sponsor"
-        },
-        {
-            "name": "UI UX Design Agencies",
-            "url": "https://uxplanet.org/top-ui-ux-design-agencies-user-experience-firms-8c54697e290",
-            "image": "https://images.opencollective.com/ui-ux-design-agencies/cae5dfe/logo.png",
-            "monthlyDonation": 20000,
-            "totalDonations": 200000,
-            "source": "opencollective",
-            "tier": "bronze-sponsor"
-        },
-        {
-            "name": "clay",
-            "url": "https://clay.global",
-            "image": "https://images.opencollective.com/clayglobal/2468f34/logo.png",
-            "monthlyDonation": 20000,
-            "totalDonations": 260000,
             "source": "opencollective",
             "tier": "bronze-sponsor"
         },
