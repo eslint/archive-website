@@ -661,6 +661,14 @@
             "tier": "backer"
         },
         {
+            "name": "Tsuyoshi Tokuda",
+            "image": "https://avatars3.githubusercontent.com/u/108762?v=4",
+            "url": "https://dev.to/tokuda109",
+            "monthlyDonation": 500,
+            "source": "github",
+            "tier": "backer"
+        },
+        {
             "name": "Alan Mendelevich",
             "image": "https://avatars1.githubusercontent.com/u/179076?u=97951e8b8995b1a8556dd0eca3f380c719da383b&v=4",
             "url": "https://blog.ailon.org",
