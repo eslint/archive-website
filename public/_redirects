@@ -7,6 +7,7 @@ https://eslint.netlify.com/* https://eslint.org/:splat 301!
 /docs                               / 301!
 /docs/user-guide/rules              /docs/rules 301!
 /cla                                https://cla.js.foundation/eslint/eslint 302!
+/conduct                            https://code-of-conduct.openjsf.org/ 302!
 
 /docs/0.24.1/command-line-interface /docs/user-guide/command-line-interface 301!
 /docs/0.24.1/configuring            /docs/user-guide/configuring 301!
