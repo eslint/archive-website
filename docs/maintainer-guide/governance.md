@@ -56,7 +56,7 @@ A Committer who shows an above-average level of contribution to the project, par
 1. Send email congratulating the new committer and confirming that they would like to accept. This should also outline the responsibilities of a committer with a link to the maintainer guide.
 1. Add the GitHub user to the "ESLint Team" team
 1. Add committer email to the ESLint team mailing list
-1. Invite to Gitter team chatroom
+1. Invite to Discord team chatroom
 1. Tweet congratulations to the new committer from the ESLint Twitter account
 
 ### Reviewers
@@ -121,7 +121,7 @@ A Reviewer is invited to become a TSC member by existing TSC members. A nominati
 1. Add the GitHub user to the "ESLint TSC" GitHub team
 1. Set the GitHub user to be have the "Owner" role for the ESLint organization
 1. Send a welcome email with a link to the [maintainer guide](./) and the [npm 2FA guide](./npm-2fa).
-1. Invite to the Gitter TSC chatroom
+1. Invite to the Discord TSC chatroom
 1. Make the TSC member an admin on the ESLint team mailing list
 1. Add the TSC member to the recurring TSC meeting event on Google Calendar
 1. Add the TSC member as an admin to ESLint Twitter Account on Tweetdeck

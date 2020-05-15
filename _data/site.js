@@ -17,5 +17,12 @@ function calculateUrl() {
 module.exports = {
     title: "ESLint - Pluggable JavaScript linter",
     description: "A pluggable and configurable linter tool for identifying and reporting on patterns in JavaScript. Maintain your code quality with ease.",
-    url: calculateUrl()
+    url: calculateUrl(),
+    links: {
+        chat: "/chat",
+        codeOfConduct: "/conduct",
+        mailingList: "https://groups.google.com/group/eslint",
+        github: "https://github.com/eslint/eslint",
+        twitter: "https://twitter.com/geteslint"
+    }
 };
