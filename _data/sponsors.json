@@ -42,6 +42,15 @@
     ],
     "bronze": [
         {
+            "name": "Bruce",
+            "url": "https://bruce.agency",
+            "image": "https://images.opencollective.com/brucemade/0c70c59/logo.png",
+            "monthlyDonation": 20000,
+            "totalDonations": 20000,
+            "source": "opencollective",
+            "tier": "bronze-sponsor"
+        },
+        {
             "name": "EduBirdie",
             "url": "https://edubirdie.com/",
             "image": "https://images.opencollective.com/edubirdie2/b1d51ab/logo.png",
