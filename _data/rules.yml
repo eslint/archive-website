@@ -104,6 +104,10 @@ categories:
         fixable: false
         name: no-irregular-whitespace
         recommended: true
+      - description: disallow literal numbers that lose precision
+        fixable: false
+        name: no-loss-of-precision
+        recommended: false
       - description: >-
           disallow characters which are made with multiple code points in
           character class syntax
@@ -1113,14 +1117,11 @@ deprecated:
   name: Deprecated
   rules:
     - name: callback-return
-      replacedBy:
-        - node/callback-return
+      replacedBy: []
     - name: global-require
-      replacedBy:
-        - node/global-require
+      replacedBy: []
     - name: handle-callback-err
-      replacedBy:
-        - node/handle-callback-err
+      replacedBy: []
     - name: indent-legacy
       replacedBy:
         - indent
@@ -1134,14 +1135,12 @@ deprecated:
       replacedBy:
         - padding-line-between-statements
     - name: no-buffer-constructor
-      replacedBy:
-        - node/no-deprecated-api
+      replacedBy: []
     - name: no-catch-shadow
       replacedBy:
         - no-shadow
     - name: no-mixed-requires
-      replacedBy:
-        - node/no-mixed-requires
+      replacedBy: []
     - name: no-native-reassign
       replacedBy:
         - no-global-assign
@@ -1149,26 +1148,20 @@ deprecated:
       replacedBy:
         - no-unsafe-negation
     - name: no-new-require
-      replacedBy:
-        - node/no-new-require
+      replacedBy: []
     - name: no-path-concat
-      replacedBy:
-        - node/no-path-concat
+      replacedBy: []
     - name: no-process-env
-      replacedBy:
-        - node/no-process-env
+      replacedBy: []
     - name: no-process-exit
-      replacedBy:
-        - node/no-process-exit
+      replacedBy: []
     - name: no-restricted-modules
-      replacedBy:
-        - node/no-restricted-require
+      replacedBy: []
     - name: no-spaced-func
       replacedBy:
         - func-call-spacing
     - name: no-sync
-      replacedBy:
-        - node/no-sync
+      replacedBy: []
     - name: prefer-reflect
       replacedBy: []
     - name: require-jsdoc
