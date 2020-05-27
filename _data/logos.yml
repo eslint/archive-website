@@ -217,3 +217,7 @@
 - url: https://swissdevjobs.ch/jobs/JavaScript/All
   src: /assets/img/logos/swissdev-javascript-jobs-logo.svg
   name: SwissDev JS Jobs
+
+- url: https://www.toptal.com
+  src: /assets/img/logos/toptal.svg
+  name: Toptal
