@@ -15,7 +15,7 @@
             "url": "https://www.salesforce.com",
             "image": "https://images.opencollective.com/salesforce/ca8f997/logo.png",
             "monthlyDonation": 100000,
-            "totalDonations": 1414500,
+            "totalDonations": 1514500,
             "source": "opencollective",
             "tier": "gold-sponsor"
         },
@@ -100,7 +100,7 @@
             "url": "https://www.crosswordsolver.org/anagram-solver/",
             "image": "https://images.opencollective.com/anagram-solver/2666271/logo.png",
             "monthlyDonation": 20000,
-            "totalDonations": 40000,
+            "totalDonations": 60000,
             "source": "opencollective",
             "tier": "bronze-sponsor"
         },
@@ -336,7 +336,7 @@
             "url": "https://benjamin.piouffle.com",
             "image": "https://images.opencollective.com/betree/6c68f43/avatar.png",
             "monthlyDonation": 1000,
-            "totalDonations": 15600,
+            "totalDonations": 16600,
             "source": "opencollective",
             "tier": "backer"
         },
@@ -633,7 +633,7 @@
             "url": "https://twitter.com/LJHarb",
             "image": "https://images.opencollective.com/ljharb/b75a3f8/avatar.png",
             "monthlyDonation": 500,
-            "totalDonations": 8000,
+            "totalDonations": 8500,
             "source": "opencollective",
             "tier": "backer"
         },
@@ -884,7 +884,7 @@
             "url": "https://twitter.com/shunf4n",
             "image": "https://images.opencollective.com/shunfan/ca1c537/avatar.png",
             "monthlyDonation": 200,
-            "totalDonations": 600,
+            "totalDonations": 800,
             "source": "opencollective",
             "tier": null
         },
