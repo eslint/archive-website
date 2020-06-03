@@ -64,7 +64,7 @@
             "url": "https://edubirdie.com/",
             "image": "https://images.opencollective.com/edubirdie2/b1d51ab/logo.png",
             "monthlyDonation": 20000,
-            "totalDonations": 60000,
+            "totalDonations": 80000,
             "source": "opencollective",
             "tier": "bronze-sponsor"
         },
@@ -73,7 +73,7 @@
             "url": "https://www.casinotop.com/",
             "image": "https://images.opencollective.com/casinotop-com/10fd95b/logo.png",
             "monthlyDonation": 20000,
-            "totalDonations": 20000,
+            "totalDonations": 40000,
             "source": "opencollective",
             "tier": "bronze-sponsor"
         },
@@ -82,7 +82,7 @@
             "url": "https://www.casinotopp.net/",
             "image": "https://images.opencollective.com/casino-topp/1dd399a/logo.png",
             "monthlyDonation": 20000,
-            "totalDonations": 20000,
+            "totalDonations": 40000,
             "source": "opencollective",
             "tier": "bronze-sponsor"
         },
@@ -91,7 +91,7 @@
             "url": "https://writersperhour.com/write-my-essay",
             "image": "https://images.opencollective.com/writersperhour/5787d4b/logo.png",
             "monthlyDonation": 20000,
-            "totalDonations": 40000,
+            "totalDonations": 60000,
             "source": "opencollective",
             "tier": "bronze-sponsor"
         },
@@ -109,7 +109,7 @@
             "url": "https://cooltechzone.com/netflix-vpn",
             "image": "https://images.opencollective.com/vpn-netflix/4850160/logo.png",
             "monthlyDonation": 20000,
-            "totalDonations": 40000,
+            "totalDonations": 60000,
             "source": "opencollective",
             "tier": "bronze-sponsor"
         },
@@ -190,7 +190,7 @@
             "url": "https://discordapp.com",
             "image": "https://images.opencollective.com/discordapp/7e3d9a9/logo.png",
             "monthlyDonation": 20000,
-            "totalDonations": 260000,
+            "totalDonations": 280000,
             "source": "opencollective",
             "tier": "bronze-sponsor"
         },
@@ -237,7 +237,7 @@
             "url": "https://eslint.org/",
             "image": "https://images.opencollective.com/eslint/96b09dc/logo.png",
             "monthlyDonation": 10000,
-            "totalDonations": 10000,
+            "totalDonations": 20000,
             "source": "opencollective",
             "tier": "supporter"
         },
@@ -291,7 +291,7 @@
             "url": "http:/www.powercoder.tech",
             "image": "https://images.opencollective.com/john-dorlus/f6d79b4/avatar.png",
             "monthlyDonation": 1000,
-            "totalDonations": 4000,
+            "totalDonations": 5000,
             "source": "opencollective",
             "tier": "backer"
         },
@@ -350,20 +350,11 @@
             "tier": "backer"
         },
         {
-            "name": "MonoVM",
-            "url": "https://MonoVM.com",
-            "image": "https://images.opencollective.com/monovm/a15d0ab/logo.png",
-            "monthlyDonation": 500,
-            "totalDonations": 500,
-            "source": "opencollective",
-            "tier": "backer"
-        },
-        {
             "name": "Bratteng Solutions AS",
             "url": "https://bratteng.solutions/",
             "image": "https://images.opencollective.com/bratteng-solutions-as/4b20839/logo.png",
             "monthlyDonation": 500,
-            "totalDonations": 1000,
+            "totalDonations": 1500,
             "source": "opencollective",
             "tier": "backer"
         },
@@ -435,7 +426,7 @@
             "url": "https://twitter.com/dreinidaho",
             "image": "https://images.opencollective.com/jmcombs/22a314a/avatar.png",
             "monthlyDonation": 500,
-            "totalDonations": 3000,
+            "totalDonations": 3500,
             "source": "opencollective",
             "tier": "backer"
         },
@@ -552,7 +543,7 @@
             "url": "http://korzun.com",
             "image": "https://images.opencollective.com/simon-korzun/cbdefdd/avatar.png",
             "monthlyDonation": 500,
-            "totalDonations": 8000,
+            "totalDonations": 8500,
             "source": "opencollective",
             "tier": "backer"
         },
@@ -588,7 +579,7 @@
             "url": null,
             "image": "https://images.opencollective.com/novascreen/ef6acf0/avatar.png",
             "monthlyDonation": 500,
-            "totalDonations": 8000,
+            "totalDonations": 8500,
             "source": "opencollective",
             "tier": "backer"
         },
@@ -875,7 +866,7 @@
             "url": null,
             "image": "https://images.opencollective.com/womcauliff/2be6f36/avatar.png",
             "monthlyDonation": 300,
-            "totalDonations": 5500,
+            "totalDonations": 5800,
             "source": "opencollective",
             "tier": "backer"
         },
