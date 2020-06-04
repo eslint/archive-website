@@ -530,6 +530,15 @@
             "tier": "backer"
         },
         {
+            "name": "Maisonette Inc",
+            "url": "https://www.maisonette.com",
+            "image": "https://images.opencollective.com/maisonetteworld/c170bfc/logo.png",
+            "monthlyDonation": 500,
+            "totalDonations": 8500,
+            "source": "opencollective",
+            "tier": "backer"
+        },
+        {
             "name": "Dan Foley",
             "url": "http://cantremember.com",
             "image": "https://images.opencollective.com/cantremember/avatar.png",
