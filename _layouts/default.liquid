@@ -1,7 +1,11 @@
 <!DOCTYPE html>
 <html lang="en" class="no-js">
 {% include head %}
-<body>
+{% if site.banner.text %}
+  <body class="banner-displayed">
+{% else %}
+  <body>
+{% endif %}
     <div itemscope itemtype="http://schema.org/SoftwareApplication">
     {% include menu %}
         {% include jumbotron %}

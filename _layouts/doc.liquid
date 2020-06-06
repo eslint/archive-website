@@ -1,7 +1,11 @@
 <!DOCTYPE html>
 <html lang="en" class="no-js">
 {% include head %}
-<body>
+{% if site.banner.text %}
+  <body class="banner-displayed">
+{% else %}
+  <body>
+{% endif %}
   {% include menu %}
   <main class="doc">
     <article class="container">
