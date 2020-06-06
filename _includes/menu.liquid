@@ -1,5 +1,10 @@
 <input type="checkbox" id="eslint-toggle-search" class="eslint-toggle-search-checkbox" />
 <header class="navbar navbar-default navbar-demo navbar-fixed-top eslint-nav" id="top" role="banner">
+  {% if site.banner.text %}
+    <div class="eslint-banner" style="color: {{ site.banner.foregroundColor }}; background-color: {{ site.banner.backgroundColor }}">
+      <p>{{ site.banner.text }}</p>
+    </div>
+  {% endif %}
   <div class="container">
     <a href="/" class="navbar-brand"><img alt="ESLint" src="/assets/img/logo.svg" itemprop="image">ESLint</a>
     <div class="eslint-navbar-toggles">
