@@ -18,9 +18,9 @@ module.exports = {
     title: "ESLint - Pluggable JavaScript linter",
     description: "A pluggable and configurable linter tool for identifying and reporting on patterns in JavaScript. Maintain your code quality with ease.",
     banner: {
-        text: null,
+        text: "Black Lives Matter. <a href='https://support.eji.org/give/153413/#!/donation/checkout' style='color: #a486df'>Donate to the Equal Justice Initiative.</a>",
         foregroundColor: "#ffffff",
-        backgroundColor: "#000000"
+        backgroundColor: "#150b29"
     },
     url: calculateUrl(),
     links: {
