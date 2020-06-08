@@ -38,9 +38,11 @@ module.exports = {
                     {
                         loader: "less-loader",
                         options: {
-                            plugins: [
-                                new CleanCSSPlugin()
-                            ]
+                            lessOptions: {
+                                plugins: [
+                                    new CleanCSSPlugin()
+                                ]
+                            }
                         }
                     }
                 ]
