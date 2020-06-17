@@ -907,6 +907,15 @@
             "totalDonations": 1600,
             "source": "opencollective",
             "tier": null
+        },
+        {
+            "name": "Till Sanders",
+            "url": null,
+            "image": "https://images.opencollective.com/tillsanders/1c9743b/avatar.png",
+            "monthlyDonation": 100,
+            "totalDonations": 100,
+            "source": "opencollective",
+            "tier": null
         }
     ]
 }
