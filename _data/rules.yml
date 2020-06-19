@@ -118,6 +118,10 @@ categories:
         fixable: false
         name: no-obj-calls
         recommended: true
+      - description: disallow returning values from Promise executor functions
+        fixable: false
+        name: no-promise-executor-return
+        recommended: false
       - description: disallow calling some `Object.prototype` methods directly on objects
         fixable: false
         name: no-prototype-builtins
@@ -148,6 +152,10 @@ categories:
         fixable: false
         name: no-unreachable
         recommended: true
+      - description: disallow loops with a body that allows only one iteration
+        fixable: false
+        name: no-unreachable-loop
+        recommended: false
       - description: disallow control flow statements in `finally` blocks
         fixable: false
         name: no-unsafe-finally
