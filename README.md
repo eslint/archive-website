@@ -11,9 +11,9 @@ Please note that all HTML documentation is split between this repository and the
 
 ## How to add your company/project logo to the site
 
-* Create a fork of this repository
-* Clone it locally
-* Create a new branch
+* Create a fork of this repository.
+* Clone it locally.
+* Create a new branch.
 * Add your logo image to `/assets/img/logos/` directory. Logo should be at least 150px of height. Name your logo with your company/project name.
 * Update `/_data/logos.yml` file and add an entry for your company with the name, url and src (should point to the logo you just added).
 * Commit your changes to your fork and create a pull request into the main repository.
@@ -47,4 +47,4 @@ This will watch for changes to the source code and rebuild the website, which wi
 
 ## License
 
-MIT
+[MIT License](LICENSE)
