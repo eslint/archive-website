@@ -901,8 +901,8 @@
         },
         {
             "name": "Anton Alexandrenok",
-            "url": "https://github.com/the-spyke",
-            "image": "https://images.opencollective.com/antonalexandrenok/c561172/avatar.png",
+            "url": null,
+            "image": "https://images.opencollective.com/spyke/c561172/avatar.png",
             "monthlyDonation": 200,
             "totalDonations": 1600,
             "source": "opencollective",
