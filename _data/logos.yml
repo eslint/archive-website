@@ -221,3 +221,7 @@
 - url: https://www.toptal.com
   src: /assets/img/logos/toptal.svg
   name: Toptal
+
+- url: https://atomist.com
+  src: /assets/img/logos/atomist.svg
+  name: Atomist
