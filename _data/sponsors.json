@@ -51,6 +51,15 @@
     ],
     "bronze": [
         {
+            "name": "My True Media",
+            "url": "https://mytruemedia.com",
+            "image": "https://images.opencollective.com/my-true-media/03e2168/logo.png",
+            "monthlyDonation": 20000,
+            "totalDonations": 20000,
+            "source": "opencollective",
+            "tier": "bronze-sponsor"
+        },
+        {
             "name": "Norgekasino",
             "url": "https://www.norgekasino.com",
             "image": "https://images.opencollective.com/norgekasino/ecfd57a/logo.png",
