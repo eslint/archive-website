@@ -24,7 +24,7 @@
             "url": "https://www.airbnb.com/",
             "image": "https://images.opencollective.com/airbnb/d327d66/logo.png",
             "monthlyDonation": 100000,
-            "totalDonations": 1741000,
+            "totalDonations": 1841000,
             "source": "opencollective",
             "tier": "gold-sponsor"
         }
@@ -44,7 +44,7 @@
             "url": "https://www.ampproject.org/",
             "image": "https://images.opencollective.com/amp/c8a3b25/logo.png",
             "monthlyDonation": 50000,
-            "totalDonations": 850000,
+            "totalDonations": 900000,
             "source": "opencollective",
             "tier": "silver-sponsor"
         }
@@ -181,7 +181,7 @@
             "url": "https://www.bugsnag.com/platforms?utm_source=Open Collective&utm_medium=Website&utm_content=open-source&utm_campaign=2019-community&utm_term=",
             "image": "https://images.opencollective.com/bugsnag-stability-monitoring/c2cef36/logo.png",
             "monthlyDonation": 20000,
-            "totalDonations": 160000,
+            "totalDonations": 180000,
             "source": "opencollective",
             "tier": "bronze-sponsor"
         },
@@ -291,7 +291,7 @@
             "url": "https://www.neovation.com",
             "image": "https://images.opencollective.com/neovationcorp/30d1cf7/logo.png",
             "monthlyDonation": 2500,
-            "totalDonations": 42500,
+            "totalDonations": 45000,
             "source": "opencollective",
             "tier": "backer"
         },
@@ -503,15 +503,6 @@
             "tier": "backer"
         },
         {
-            "name": "Alexandre Morgaut",
-            "url": "https://www.quora.com/profile/Alexandre-Morgaut",
-            "image": "https://images.opencollective.com/alexandre-morgaut/6e3c8d4/avatar.png",
-            "monthlyDonation": 500,
-            "totalDonations": 7500,
-            "source": "opencollective",
-            "tier": "backer"
-        },
-        {
             "name": "Jb Landry",
             "url": "https://jblandry.info",
             "image": "https://images.opencollective.com/jblandry/e968bf5/avatar.png",
@@ -642,7 +633,7 @@
             "url": "https://alexeyraspopov.com",
             "image": "https://images.opencollective.com/alexeyraspopov/d8c7a67/avatar.png",
             "monthlyDonation": 500,
-            "totalDonations": 8500,
+            "totalDonations": 9000,
             "source": "opencollective",
             "tier": "backer"
         },
@@ -877,7 +868,7 @@
             "url": "https://ksmith.io",
             "image": "https://images.opencollective.com/knksmith57/1b834b2/avatar.png",
             "monthlyDonation": 300,
-            "totalDonations": 3800,
+            "totalDonations": 4100,
             "source": "opencollective",
             "tier": "backer"
         },
