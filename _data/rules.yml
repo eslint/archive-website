@@ -664,7 +664,7 @@ categories:
         recommended: false
       - description: disallow specified identifiers
         fixable: false
-        name: id-blacklist
+        name: id-denylist
         recommended: false
       - description: enforce minimum and maximum identifier lengths
         fixable: false
