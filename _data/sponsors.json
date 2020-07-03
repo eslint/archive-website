@@ -287,6 +287,14 @@
             "tier": "backer"
         },
         {
+            "name": "Paul",
+            "image": "https://avatars1.githubusercontent.com/u/7229568?u=3e0379848f28ce8d09fbc0656cc64a698f091768&v=4",
+            "url": "http://www.goforyt.com",
+            "monthlyDonation": 2500,
+            "source": "github",
+            "tier": "backer"
+        },
+        {
             "name": "Roman Nazarenko",
             "url": null,
             "image": "https://images.opencollective.com/roman-nazarenko/avatar.png",
