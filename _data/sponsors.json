@@ -775,14 +775,6 @@
             "tier": "backer"
         },
         {
-            "name": "Evan Hirsh",
-            "image": "https://avatars3.githubusercontent.com/u/4483135?u=821d211528dffcb99367f5ad369972c749d77f25&v=4",
-            "url": "https://www.ehirsh.com",
-            "monthlyDonation": 500,
-            "source": "github",
-            "tier": "backer"
-        },
-        {
             "name": "Matan Kushner",
             "image": "https://avatars3.githubusercontent.com/u/4658208?u=887d888c45d991a2dbde8ca6f317bf22bc133468&v=4",
             "url": "matchai.dev",
