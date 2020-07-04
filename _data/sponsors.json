@@ -35,7 +35,7 @@
             "url": "https://liftoff.io/",
             "image": "https://images.opencollective.com/liftoff/5c4fa84/logo.png",
             "monthlyDonation": 50000,
-            "totalDonations": 50000,
+            "totalDonations": 100000,
             "source": "opencollective",
             "tier": "silver-sponsor"
         },
@@ -78,20 +78,11 @@
             "tier": "bronze-sponsor"
         },
         {
-            "name": "Bruce",
-            "url": "https://bruce.agency",
-            "image": "https://images.opencollective.com/brucemade/0c70c59/logo.png",
-            "monthlyDonation": 20000,
-            "totalDonations": 20000,
-            "source": "opencollective",
-            "tier": "bronze-sponsor"
-        },
-        {
             "name": "EduBirdie",
             "url": "https://edubirdie.com/",
             "image": "https://images.opencollective.com/edubirdie2/b1d51ab/logo.png",
             "monthlyDonation": 20000,
-            "totalDonations": 80000,
+            "totalDonations": 100000,
             "source": "opencollective",
             "tier": "bronze-sponsor"
         },
@@ -264,7 +255,7 @@
             "url": "https://eslint.org/",
             "image": "https://images.opencollective.com/eslint/96b09dc/logo.png",
             "monthlyDonation": 10000,
-            "totalDonations": 20000,
+            "totalDonations": 30000,
             "source": "opencollective",
             "tier": "supporter"
         },
@@ -417,6 +408,15 @@
             "image": "https://images.opencollective.com/andi1984/9e69ae8/avatar.png",
             "monthlyDonation": 500,
             "totalDonations": 2500,
+            "source": "opencollective",
+            "tier": "backer"
+        },
+        {
+            "name": "Thomas Lohner",
+            "url": null,
+            "image": "https://images.opencollective.com/thomas-lohner/avatar.png",
+            "monthlyDonation": 500,
+            "totalDonations": 3000,
             "source": "opencollective",
             "tier": "backer"
         },
