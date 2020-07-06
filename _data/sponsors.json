@@ -367,6 +367,15 @@
             "tier": "backer"
         },
         {
+            "name": "Nettcasinobonus.com",
+            "url": "https://nettcasinobonus.com/",
+            "image": "https://images.opencollective.com/nettcasinobonus-com1/cda67bd/logo.png",
+            "monthlyDonation": 500,
+            "totalDonations": 500,
+            "source": "opencollective",
+            "tier": "backer"
+        },
+        {
             "name": "David Johnston",
             "url": "https://blacksheepcode.com",
             "image": "https://images.opencollective.com/blacksheepcode/976d69a/avatar.png",
