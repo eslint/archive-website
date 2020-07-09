@@ -1,0 +1,20 @@
+[
+    {
+        "name": "Netlify",
+        "url": "https://netlify.com",
+        "image": "/assets/img/logos/netlify.png",
+        "donation": "hosting"
+    },    
+    {
+        "name": "Algolia",
+        "url": "https://algolia.com",
+        "image": "/assets/img/logos/algolia.jpg",
+        "donation": "search"
+    },        
+    {
+        "name": "1Password",
+        "url": "https://1password.com",
+        "image": "/assets/img/logos/1password.png",
+        "donation": "password management"
+    }        
+]

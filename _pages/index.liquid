@@ -55,11 +55,17 @@ homepage: true
               </div>
           {% endif %}
       {% endfor %}
-      <h4 class="sponsor-heading text-center">Hosting</h4>
+      <h4 class="sponsor-heading text-center">Technology Sponsors</h4>
       <div class="sponsor-tier text-center">
-          <a href="https://www.netlify.com" rel="noopener nofollow" target="_blank">
-              <img src="https://www.netlify.com/img/global/badges/netlify-color-accent.svg"/>
-          </a>
+        {% for sponsor in techsponsors %}
+        <a class="sponsor-link" href="{{ sponsor.url }}" title="{{ sponsor.name }}" rel="noopener nofollow" target="_blank">
+            <div class="sponsor silver-sponsor">
+            <img class="lazyload" data-src="{{ sponsor.image }}"
+                alt="{{ sponsor.donation | capitalize }} provided by {{ sponsor.name }}"
+                title="{{ sponsor.donation | capitalize }} provided by {{ sponsor.name }}">
+            </div>
+        </a>
+        {% endfor %}
       </div>
     </div>
     <p class="sponsor-btn text-center"><a class="btn btn-default" href="https://opencollective.com/eslint">Become a Sponsor today!</a></p>
