@@ -27,6 +27,14 @@
             "totalDonations": 1841000,
             "source": "opencollective",
             "tier": "gold-sponsor"
+        },
+        {
+            "name": "Microsoft FOSS Fund Sponsorships",
+            "image": "https://avatars1.githubusercontent.com/u/67931232?u=7fddc652a464d7151b97e8f108392af7d54fa3e8&v=4",
+            "url": "https://aka.ms/microsoftfossfund",
+            "monthlyDonation": 100000,
+            "source": "github",
+            "tier": "gold-sponsor"
         }
     ],
     "silver": [
