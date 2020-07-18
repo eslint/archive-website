@@ -1130,6 +1130,9 @@ deprecated:
       replacedBy: []
     - name: handle-callback-err
       replacedBy: []
+    - name: id-blacklist
+      replacedBy:
+        - id-denylist
     - name: indent-legacy
       replacedBy:
         - indent
