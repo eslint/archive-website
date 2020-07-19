@@ -393,6 +393,15 @@
             "tier": "backer"
         },
         {
+            "name": "Justin Noel",
+            "url": "https://justinnoel.dev",
+            "image": "https://images.opencollective.com/justinnoel/avatar.png",
+            "monthlyDonation": 500,
+            "totalDonations": 500,
+            "source": "opencollective",
+            "tier": "backer"
+        },
+        {
             "name": "Nettcasinobonus.com",
             "url": "https://nettcasinobonus.com/",
             "image": "https://images.opencollective.com/nettcasinobonus-com1/cda67bd/logo.png",
