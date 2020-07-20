@@ -286,6 +286,15 @@
             "tier": "backer"
         },
         {
+            "name": "Principal Financial Group",
+            "url": "https://www.principal.com/about-us",
+            "image": "https://images.opencollective.com/principal/431e690/logo.png",
+            "monthlyDonation": 5000,
+            "totalDonations": 5000,
+            "source": "opencollective",
+            "tier": null
+        },
+        {
             "name": "Neovation Learning Solutions",
             "url": "https://www.neovation.com",
             "image": "https://images.opencollective.com/neovationcorp/30d1cf7/logo.png",
