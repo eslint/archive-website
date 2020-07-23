@@ -339,6 +339,15 @@
             "tier": null
         },
         {
+            "name": "SiMedia",
+            "url": "https://www.simedia.com/",
+            "image": "https://images.opencollective.com/simedia/848efc9/logo.png",
+            "monthlyDonation": 1000,
+            "totalDonations": 1000,
+            "source": "opencollective",
+            "tier": null
+        },
+        {
             "name": "John Hamilton",
             "url": null,
             "image": "https://images.opencollective.com/john-hamilton/avatar.png",
