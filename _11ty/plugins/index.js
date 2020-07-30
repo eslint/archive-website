@@ -1,5 +1,5 @@
 "use strict";
 
 module.exports = {
-    syntaxHighlighting: require("./syntax-highlighting")
+    markdownPlugins: require("./markdown-plugins")
 };
