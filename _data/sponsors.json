@@ -420,6 +420,14 @@
             "tier": "backer"
         },
         {
+            "name": "Miles Johnson",
+            "image": "https://avatars0.githubusercontent.com/u/143744?u=607f78bff115711401a90892804c08a55205dea3&v=4",
+            "url": "https://github.com/milesj",
+            "monthlyDonation": 1000,
+            "source": "github",
+            "tier": "backer"
+        },
+        {
             "name": "Justin Noel",
             "url": "https://justinnoel.dev",
             "image": "https://images.opencollective.com/justinnoel/avatar.png",
