@@ -925,6 +925,14 @@
             "tier": "backer"
         },
         {
+            "name": "Gabriel Taveira",
+            "image": "https://avatars2.githubusercontent.com/u/50031755?u=027016e343765a203a298ef02db3857c4c91e68d&v=4",
+            "url": "https://www.linkedin.com/in/gabrieltaveira/",
+            "monthlyDonation": 500,
+            "source": "github",
+            "tier": "backer"
+        },
+        {
             "name": "Standard Resume Sponsors",
             "image": "https://avatars0.githubusercontent.com/u/65968828?u=059fb65476f5c27fc1a38cb2e6391ad05105fde5&v=4",
             "url": "https://standardresume.co",
