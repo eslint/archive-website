@@ -2,15 +2,6 @@
     "platinum": [],
     "gold": [
         {
-            "name": "Shopify",
-            "url": "https://www.shopify.com",
-            "image": "https://images.opencollective.com/shopify/e780cd4/logo.png",
-            "monthlyDonation": 100000,
-            "totalDonations": 1500000,
-            "source": "opencollective",
-            "tier": "gold-sponsor"
-        },
-        {
             "name": "Salesforce",
             "url": "https://www.salesforce.com",
             "image": "https://images.opencollective.com/salesforce/ca8f997/logo.png",
@@ -207,7 +198,7 @@
             "url": "https://mixpanel.com",
             "image": "https://images.opencollective.com/mixpanel/cd682f7/logo.png",
             "monthlyDonation": 20000,
-            "totalDonations": 220000,
+            "totalDonations": 240000,
             "source": "opencollective",
             "tier": "bronze-sponsor"
         },
@@ -216,7 +207,7 @@
             "url": "https://www.vpsserver.com",
             "image": "https://images.opencollective.com/vpsservercom/logo.png",
             "monthlyDonation": 20000,
-            "totalDonations": 240000,
+            "totalDonations": 260000,
             "source": "opencollective",
             "tier": "bronze-sponsor"
         },
@@ -290,7 +281,7 @@
             "url": "https://yannick.cr",
             "image": "https://images.opencollective.com/yannickcr/765f06f/avatar.png",
             "monthlyDonation": 10000,
-            "totalDonations": 130000,
+            "totalDonations": 140000,
             "source": "opencollective",
             "tier": "backer"
         },
@@ -603,7 +594,7 @@
             "url": "https://thirdiron.com",
             "image": "https://images.opencollective.com/third_iron/fa6ec4d/logo.png",
             "monthlyDonation": 500,
-            "totalDonations": 9000,
+            "totalDonations": 9500,
             "source": "opencollective",
             "tier": "backer"
         },
@@ -612,7 +603,7 @@
             "url": "https://kluska.cz",
             "image": "https://images.opencollective.com/martin-kluska/588a7ff/avatar.png",
             "monthlyDonation": 500,
-            "totalDonations": 9000,
+            "totalDonations": 9500,
             "source": "opencollective",
             "tier": "backer"
         },
@@ -980,7 +971,7 @@
             "url": null,
             "image": "https://images.opencollective.com/spyke/c561172/avatar.png",
             "monthlyDonation": 200,
-            "totalDonations": 1800,
+            "totalDonations": 2000,
             "source": "opencollective",
             "tier": null
         },
