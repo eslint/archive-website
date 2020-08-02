@@ -72,7 +72,7 @@
             "url": "https://mytruemedia.com/",
             "image": "https://images.opencollective.com/my-true-media/03e2168/logo.png",
             "monthlyDonation": 20000,
-            "totalDonations": 20000,
+            "totalDonations": 40000,
             "source": "opencollective",
             "tier": "bronze-sponsor"
         },
@@ -81,7 +81,7 @@
             "url": "https://www.norgekasino.com",
             "image": "https://images.opencollective.com/norgekasino/ecfd57a/logo.png",
             "monthlyDonation": 20000,
-            "totalDonations": 40000,
+            "totalDonations": 60000,
             "source": "opencollective",
             "tier": "bronze-sponsor"
         },
@@ -90,7 +90,7 @@
             "url": "https://www.japanesecasino.com/",
             "image": "https://images.opencollective.com/japanesecasino/b0ffe3c/logo.png",
             "monthlyDonation": 20000,
-            "totalDonations": 40000,
+            "totalDonations": 60000,
             "source": "opencollective",
             "tier": "bronze-sponsor"
         },
@@ -246,15 +246,6 @@
             "totalDonations": 340000,
             "source": "opencollective",
             "tier": "bronze-sponsor"
-        },
-        {
-            "name": "Fire Stick Tricks",
-            "url": "http://www.firesticktricks.com",
-            "image": "https://images.opencollective.com/fire-stick-tricks/b8fbe2c/logo.png",
-            "monthlyDonation": 20000,
-            "totalDonations": 320000,
-            "source": "opencollective",
-            "tier": "bronze-sponsor"
         }
     ],
     "backers": [
@@ -263,7 +254,7 @@
             "url": "https://www.gatsbyjs.com",
             "image": "https://images.opencollective.com/gatsbyjs/2aecbd6/logo.png",
             "monthlyDonation": 50000,
-            "totalDonations": 300000,
+            "totalDonations": 350000,
             "source": "opencollective",
             "tier": null
         },
@@ -388,7 +379,7 @@
             "url": "https://moxio.com",
             "image": "https://images.opencollective.com/moxio/9fa53c1/logo.png",
             "monthlyDonation": 1000,
-            "totalDonations": 29000,
+            "totalDonations": 30000,
             "source": "opencollective",
             "tier": "backer"
         },
@@ -504,7 +495,7 @@
             "url": "http://about.me/peterdehaan",
             "image": "https://images.opencollective.com/pdehaan/4437929/avatar.png",
             "monthlyDonation": 500,
-            "totalDonations": 3500,
+            "totalDonations": 4000,
             "source": "opencollective",
             "tier": "backer"
         },
@@ -540,7 +531,7 @@
             "url": "https://medium.com/@eliseumds",
             "image": "https://images.opencollective.com/eliseu/f4e6dad/avatar.png",
             "monthlyDonation": 500,
-            "totalDonations": 6500,
+            "totalDonations": 7000,
             "source": "opencollective",
             "tier": "backer"
         },
@@ -621,7 +612,7 @@
             "url": "http://cantremember.com",
             "image": "https://images.opencollective.com/cantremember/avatar.png",
             "monthlyDonation": 500,
-            "totalDonations": 9000,
+            "totalDonations": 9500,
             "source": "opencollective",
             "tier": "backer"
         },
@@ -684,7 +675,7 @@
             "url": "http://nubz.com",
             "image": "https://images.opencollective.com/nubz/logo.png",
             "monthlyDonation": 500,
-            "totalDonations": 9000,
+            "totalDonations": 9500,
             "source": "opencollective",
             "tier": "backer"
         },
@@ -989,7 +980,7 @@
             "url": null,
             "image": "https://images.opencollective.com/tillsanders/1c9743b/avatar.png",
             "monthlyDonation": 100,
-            "totalDonations": 100,
+            "totalDonations": 200,
             "source": "opencollective",
             "tier": null
         }
