@@ -23,6 +23,12 @@
             "name": "Kai Cataldo",
             "website": "kaicataldo.com",
             "avatar_url": "https://avatars2.githubusercontent.com/u/7041728?v=4"
+        },
+        {
+            "username": "mdjermanovic",
+            "name": "Milos Djermanovic",
+            "website": "",
+            "avatar_url": "https://avatars0.githubusercontent.com/u/44349756?v=4"
         }
     ],
     "alumni": [
@@ -47,7 +53,7 @@
         {
             "username": "michaelficarra",
             "name": "Michael Ficarra",
-            "website": "https://twitter.com/jspedant",
+            "website": "https://justgrahamthings.tumblr.com",
             "avatar_url": "https://avatars1.githubusercontent.com/u/218840?v=4"
         },
         {
@@ -119,7 +125,7 @@
         {
             "username": "VictorHom",
             "name": "Victor Hom",
-            "website": "https://twitter.com/victorhomburger",
+            "website": "",
             "avatar_url": "https://avatars1.githubusercontent.com/u/3211873?v=4"
         },
         {
@@ -153,12 +159,6 @@
             "name": "薛定谔的猫",
             "website": "",
             "avatar_url": "https://avatars2.githubusercontent.com/u/13050025?v=4"
-        },
-        {
-            "username": "mdjermanovic",
-            "name": "Milos Djermanovic",
-            "website": "",
-            "avatar_url": "https://avatars0.githubusercontent.com/u/44349756?v=4"
         }
     ],
     "committers": [
@@ -167,6 +167,12 @@
             "name": "Pig Fang",
             "website": "https://gplane.win",
             "avatar_url": "https://avatars1.githubusercontent.com/u/17216317?v=4"
+        },
+        {
+            "username": "anikethsaha",
+            "name": "Anix",
+            "website": "",
+            "avatar_url": "https://avatars1.githubusercontent.com/u/26347874?v=4"
         },
         {
             "username": "yeonjuan",

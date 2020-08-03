@@ -13,7 +13,7 @@
 //-----------------------------------------------------------------------------
 
 const fs = require("fs");
-const octokit = require("@octokit/rest")();
+const { Octokit } = require("@octokit/rest");
 
 //-----------------------------------------------------------------------------
 // Data
@@ -30,18 +30,18 @@ if (!ESLINT_GITHUB_TOKEN) {
     throw new Error("Missing ESLINT_GITHUB_TOKEN.");
 }
 
-// Github IDs for teams
-const ALUMNI_TEAM_ID = "3005888";
-const TSC_TEAM_ID = "2060414";
-const COMMITTERS_TEAM_ID = "1054435";
-const REVIEWERS_TEAM_ID = "3162426";
+// Github slugs for teams
+const TSC_TEAM_SLUG = "eslint-tsc";
+const REVIEWERS_TEAM_SLUG = "eslint-reviewers";
+const COMMITTERS_TEAM_SLUG = "eslint-team";
+const ALUMNI_TEAM_SLUG = "eslint-alumni";
 
 // lookup table mapping Github team IDs to JSON keys
 const teamIds = {
-    [TSC_TEAM_ID]: "tsc",
-    [COMMITTERS_TEAM_ID]: "committers",
-    [REVIEWERS_TEAM_ID]: "reviewers",
-    [ALUMNI_TEAM_ID]: "alumni"
+    [TSC_TEAM_SLUG]: "tsc",
+    [COMMITTERS_TEAM_SLUG]: "committers",
+    [REVIEWERS_TEAM_SLUG]: "reviewers",
+    [ALUMNI_TEAM_SLUG]: "alumni"
 };
 
 // final data structure
@@ -57,15 +57,15 @@ const team = {
 //-----------------------------------------------------------------------------
 
 (async() => {
-
-    octokit.authenticate({
-        type: "oauth",
-        token: ESLINT_GITHUB_TOKEN
+    const octokit = new Octokit({
+        userAgent: "ESLint Website",
+        auth: ESLINT_GITHUB_TOKEN
     });
 
-    for (const teamId of [TSC_TEAM_ID, ALUMNI_TEAM_ID, COMMITTERS_TEAM_ID, REVIEWERS_TEAM_ID]) {
-        const { data: result } = await octokit.teams.listMembers({
-            team_id: teamId,
+    for (const teamId of [TSC_TEAM_SLUG, ALUMNI_TEAM_SLUG, COMMITTERS_TEAM_SLUG, REVIEWERS_TEAM_SLUG]) {
+        const { data: result } = await octokit.teams.listMembersInOrg({
+            org: "eslint",
+            team_slug: teamId,
             per_page: 100
         });
 
