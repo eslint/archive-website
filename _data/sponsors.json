@@ -6,7 +6,7 @@
             "url": "https://www.salesforce.com",
             "image": "https://images.opencollective.com/salesforce/ca8f997/logo.png",
             "monthlyDonation": 100000,
-            "totalDonations": 1616100,
+            "totalDonations": 1716100,
             "source": "opencollective",
             "tier": "gold-sponsor"
         },
@@ -117,7 +117,7 @@
             "url": "https://www.casinotop.com/",
             "image": "https://images.opencollective.com/casinotop-com/10fd95b/logo.png",
             "monthlyDonation": 20000,
-            "totalDonations": 60000,
+            "totalDonations": 80000,
             "source": "opencollective",
             "tier": "bronze-sponsor"
         },
@@ -126,7 +126,7 @@
             "url": "https://www.casinotopp.net/",
             "image": "https://images.opencollective.com/casino-topp/1dd399a/logo.png",
             "monthlyDonation": 20000,
-            "totalDonations": 60000,
+            "totalDonations": 80000,
             "source": "opencollective",
             "tier": "bronze-sponsor"
         },
@@ -397,7 +397,7 @@
             "url": "https://benjamin.piouffle.com",
             "image": "https://images.opencollective.com/betree/6c68f43/avatar.png",
             "monthlyDonation": 1000,
-            "totalDonations": 17600,
+            "totalDonations": 18600,
             "source": "opencollective",
             "tier": "backer"
         },
@@ -478,15 +478,6 @@
             "image": "https://images.opencollective.com/thomas-lohner/avatar.png",
             "monthlyDonation": 500,
             "totalDonations": 3500,
-            "source": "opencollective",
-            "tier": "backer"
-        },
-        {
-            "name": "Derk-Jan Karrenbeld @SleeplessByte",
-            "url": "https://derk-jan.com",
-            "image": "https://images.opencollective.com/derk-jan/a131479/avatar.png",
-            "monthlyDonation": 500,
-            "totalDonations": 3000,
             "source": "opencollective",
             "tier": "backer"
         },
@@ -702,7 +693,7 @@
             "url": "https://twitter.com/LJHarb",
             "image": "https://images.opencollective.com/ljharb/b75a3f8/avatar.png",
             "monthlyDonation": 500,
-            "totalDonations": 9000,
+            "totalDonations": 9500,
             "source": "opencollective",
             "tier": "backer"
         },
@@ -953,7 +944,7 @@
             "url": "https://twitter.com/shunf4n",
             "image": "https://images.opencollective.com/shunfan/ca1c537/avatar.png",
             "monthlyDonation": 200,
-            "totalDonations": 1000,
+            "totalDonations": 1200,
             "source": "opencollective",
             "tier": null
         },
