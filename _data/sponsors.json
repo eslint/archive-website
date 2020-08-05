@@ -50,6 +50,15 @@
     ],
     "bronze": [
         {
+            "name": "vpn for netflix",
+            "url": "https://vpn-review.com/netflix-vpn",
+            "image": "https://images.opencollective.com/vpn-for-netflix/logo.png",
+            "monthlyDonation": 20000,
+            "totalDonations": 20000,
+            "source": "opencollective",
+            "tier": "bronze-sponsor"
+        },
+        {
             "name": "Nettikasinolista.com",
             "url": "https://nettikasinolista.com",
             "image": "https://images.opencollective.com/nettikasinolista/fd361ee/logo.png",
