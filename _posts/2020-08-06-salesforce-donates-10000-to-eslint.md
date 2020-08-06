@@ -10,7 +10,7 @@ tags:
 # Salesforce donates $10,000 to ESLint
 
 <p class="text-center">
-    <a href="https://indeed.com/" title="Salesforce" rel="noopener nofollow" target="_blank"><img class="lazyload" width="200" data-src="/assets/img/logos/salesforce.png" alt="Indeed" src="/assets/img/logos/salesforce.png"></a>
+    <a href="https://www.salesforce.com/" title="Salesforce" rel="noopener nofollow" target="_blank"><img class="lazyload" width="200" data-src="/assets/img/logos/salesforce.png" alt="Salesforce" src="/assets/img/logos/salesforce.png"></a>
     <a href="https://eslint.org/" title="ESLint" target="_blank"><img class="lazyload" width="200" data-src="/assets/img/logo.svg" alt="ESLint" src="/assets/img/logo.svg"></a>
 </p>
 
@@ -22,4 +22,4 @@ Here's what Médédé Raymond KPATCHAA, who nominated ESLint, had to say:
 
 We are grateful to Médédé for nominating ESLint this quarter and to the Salesforce employees who voted for ESLint. Financial support from companies like Salesforce is why ESLint has been able to keep up with the changing JavaScript ecosystem for the past seven years.
 
-[salesforce-post]: #todo
+[salesforce-post]: https://engineering.salesforce.com/giving-back-through-our-foss-fund-38754167c00d
