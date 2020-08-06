@@ -22,4 +22,4 @@ Here's what Médédé Raymond KPATCHAA, who nominated ESLint, had to say:
 
 We are grateful to Médédé for nominating ESLint this quarter and to the Salesforce employees who voted for ESLint. Financial support from companies like Salesforce is why ESLint has been able to keep up with the changing JavaScript ecosystem for the past seven years.
 
-[salesforce-post]: #todo
+[salesforce-post]: https://engineering.salesforce.com/giving-back-through-our-foss-fund-38754167c00d
