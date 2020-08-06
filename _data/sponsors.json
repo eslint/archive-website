@@ -122,6 +122,15 @@
             "tier": "bronze-sponsor"
         },
         {
+            "name": "EduBirdie",
+            "url": "https://edubirdie.com/",
+            "image": "https://images.opencollective.com/edubirdie2/b1d51ab/logo.png",
+            "monthlyDonation": 20000,
+            "totalDonations": 120000,
+            "source": "opencollective",
+            "tier": "bronze-sponsor"
+        },
+        {
             "name": "CasinoTop.com",
             "url": "https://www.casinotop.com/",
             "image": "https://images.opencollective.com/casinotop-com/10fd95b/logo.png",
