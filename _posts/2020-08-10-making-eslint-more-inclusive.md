@@ -23,7 +23,7 @@ Going forward, we will be avoiding the use of the following terms:
 * Master
 * Slave
 
-While not all of these words trace back to racist origins, they do all have negative connotations that make people uncomfortable and perpetuate unconscious bias. We want ESLint to be a project that everyone is comfortable participating in, and proud of contributing to, and using more inclusive language helps.
+While not all of these words trace back to racist origins, they do all have negative connotations that can make people uncomfortable and perpetuate unconscious bias. We want ESLint to be a project that everyone is comfortable participating in, and proud of contributing to, and using more inclusive language helps.
 
 ## What about the master branch?
 
