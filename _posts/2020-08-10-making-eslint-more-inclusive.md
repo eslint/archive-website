@@ -12,7 +12,7 @@ From its beginning, the ESLint project has sought to be a place that is welcomin
 
 ## Eliminating problematic terminology
 
-One of the areas where we've made changes in the project is through the use of more inclusive terminology. We recently did an audit of our codebase to look for words with negative connotations. In doing so, we discovered that we had a lot of instances of the word "blacklist" in the project, not just inside of code but also in the name of the `id-blacklist` rule.
+One of the areas where we've made changes in the project is through the use of more inclusive terminology. We recently did an audit of our codebase to look for words with negative connotations. In doing so, we discovered that we had a few instances of the word "blacklist" in the project, not just inside of code but also in the name of the `id-blacklist` rule.
 
 In v7.4.0 we renamed the `id-blacklist` rule to [`id-denylist`](https://eslint.org/docs/rules/id-denylist) while providing a fallback so existing ESLint configs wouldn't break. In v7.5.0 we officially deprecated the `id-blacklist` rule. It's our policy not to remove deprecated rules, but we will no longer be maintaining the `id-blacklist` rule. Any further changes will be made only on the `id-denylist` rule.
 
