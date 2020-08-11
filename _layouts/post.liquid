@@ -20,6 +20,7 @@
         </main>
       </div>
       <div class="col-md-4 hidden-xs hidden-sm">
+        {%include ad %}
         <h2>Recent Posts</h2>
         <ul class="posts">
           {% for post in collections.posts limit: 25 %}
