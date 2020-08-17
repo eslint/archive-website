@@ -9,6 +9,10 @@
   {% include menu %}
   <main class="rule doc">
     <article class="container">
+        <div class="eslint-ad-float hidden-xs hidden-sm">
+          {%include ad %}
+        </div>
+
       {{ content
         | replace: '<p>Examples of <strong>incorrect</strong> code', '<p class="incorrect icon">Examples of <strong>incorrect</strong> code'
         | replace: '<p>Example of <strong>incorrect</strong> code', '<p class="incorrect icon">Example of <strong>incorrect</strong> code'
