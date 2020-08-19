@@ -195,7 +195,7 @@
         },
         {
             "name": "Bugsnag Stability Monitoring",
-            "url": "https://www.bugsnag.com/platforms?utm_source=Open Collective&utm_medium=Website&utm_content=open-source&utm_campaign=2019-community&utm_term=",
+            "url": null,
             "image": "https://images.opencollective.com/bugsnag-stability-monitoring/c2cef36/logo.png",
             "monthlyDonation": 20000,
             "totalDonations": 200000,
@@ -367,7 +367,7 @@
         },
         {
             "name": "John Dorlus",
-            "url": "http:/www.powercoder.tech",
+            "url": "https://http:/www.powercoder.tech",
             "image": "https://images.opencollective.com/john-dorlus/f6d79b4/avatar.png",
             "monthlyDonation": 1000,
             "totalDonations": 7000,
