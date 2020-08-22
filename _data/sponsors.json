@@ -942,6 +942,15 @@
             "tier": "backer"
         },
         {
+            "name": "Bastien Crettenand",
+            "url": "https://www.neptium.ch",
+            "image": "https://images.opencollective.com/crbast/ef3a1d2/avatar.png",
+            "monthlyDonation": 200,
+            "totalDonations": 200,
+            "source": "opencollective",
+            "tier": null
+        },
+        {
             "name": "Shunfan Du",
             "url": "https://twitter.com/shunf4n",
             "image": "https://images.opencollective.com/shunfan/ca1c537/avatar.png",
