@@ -59,15 +59,6 @@
             "tier": "bronze-sponsor"
         },
         {
-            "name": "Nettikasinolista.com",
-            "url": "https://nettikasinolista.com",
-            "image": "https://images.opencollective.com/nettikasinolista/fd361ee/logo.png",
-            "monthlyDonation": 20000,
-            "totalDonations": 20000,
-            "source": "opencollective",
-            "tier": "bronze-sponsor"
-        },
-        {
             "name": "Veikkaajat.com",
             "url": "https://www.veikkaajat.com",
             "image": "https://images.opencollective.com/veikkaajat/b92b427/logo.png",
