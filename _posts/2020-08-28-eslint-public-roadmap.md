@@ -14,7 +14,7 @@ When ESLint [first started accepting donations](https://eslint.org/blog/2019/02/
 * **Paying team members for maintenance and development.** We hired our first part-time maintainer, [Kai Cataldo](https://github.com/kaicataldo), and started paying TSC members on a per-hour basis up to $1,000 each month (the maximum we can afford at the moment).
 * **Rewarding contributions from the community.** We have given spot bonuses to people who have made significant contributions to ESLint.
 * **Improve documentation.** We are participating in the [2020 Google Season of Docs](https://eslint.org/blog/2020/08/eslint-google-season-of-docs-project-writer) to improve our documentation.
-* **Better communication and support.** Paying team members has allowed us to participate in the monthly TC-39 tooling meeting and allowed us to pay contributors to help answer questions both in GitHub and in Discord.
+* **Better communication and support.** Paying team members has allowed us to participate in the monthly TC39 tooling meeting and allowed us to pay contributors to help answer questions both in GitHub and in Discord.
 * **Developing a Roadmap.** Today, we are announcing our first public roadmap!
 
 That last bullet point, developing a roadmap, is something we've been working hard to figure out for several months. Paying contributors has helped give us insights into how much development time we have each month and what we can reasonably expect in the future. Our roadmap is published as a [GitHub project](https://github.com/orgs/eslint/projects/1) so you can check to see the status of everything we're working on. Here's an overview:
