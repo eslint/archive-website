@@ -46,6 +46,24 @@
             "totalDonations": 950000,
             "source": "opencollective",
             "tier": "silver-sponsor"
+        },
+        {
+            "name": "ESLint",
+            "url": "https://eslint.org/",
+            "image": "https://images.opencollective.com/eslint/96b09dc/logo.png",
+            "monthlyDonation": 10000,
+            "totalDonations": 10000,
+            "source": "opencollective",
+            "tier": "silver-sponsor"
+        },
+        {
+            "name": "ESLint",
+            "url": "https://eslint.org/",
+            "image": "https://images.opencollective.com/eslint/96b09dc/logo.png",
+            "monthlyDonation": 10000,
+            "totalDonations": 10000,
+            "source": "opencollective",
+            "tier": "silver-sponsor"
         }
     ],
     "bronze": [
@@ -53,15 +71,6 @@
             "name": "vpn for netflix",
             "url": "https://vpn-review.com/netflix-vpn",
             "image": "https://images.opencollective.com/vpn-for-netflix/4887627/logo.png",
-            "monthlyDonation": 20000,
-            "totalDonations": 20000,
-            "source": "opencollective",
-            "tier": "bronze-sponsor"
-        },
-        {
-            "name": "Nettikasinolista.com",
-            "url": "https://nettikasinolista.com",
-            "image": "https://images.opencollective.com/nettikasinolista/fd361ee/logo.png",
             "monthlyDonation": 20000,
             "totalDonations": 20000,
             "source": "opencollective",
@@ -346,6 +355,15 @@
             "totalDonations": 1200,
             "source": "opencollective",
             "tier": null
+        },
+        {
+            "name": "hollandsegokken.nl",
+            "url": "https://hollandsegokken.nl/",
+            "image": "https://images.opencollective.com/hollandsegokken-nl/aec9d5b/logo.png",
+            "monthlyDonation": 1000,
+            "totalDonations": 1000,
+            "source": "opencollective",
+            "tier": "backer"
         },
         {
             "name": "SiMedia",
@@ -803,6 +821,14 @@
             "tier": "backer"
         },
         {
+            "name": "Mijaíl Rondón",
+            "image": "https://avatars3.githubusercontent.com/u/1911813?u=27cf14f22ae78aff5897881b8f9416cfc98a2ec2&v=4",
+            "url": "https://mijailr.com",
+            "monthlyDonation": 500,
+            "source": "github",
+            "tier": "backer"
+        },
+        {
             "name": "Andrew LeTourneau",
             "image": "https://avatars0.githubusercontent.com/u/2807807?v=4",
             "url": "https://andyletourneau.com",
@@ -836,8 +862,8 @@
         },
         {
             "name": "Ben Otte",
-            "image": "https://avatars1.githubusercontent.com/u/5076085?u=b948be46717c5e4f8dfb0c84d6ddb98796549132&v=4",
-            "url": "https://www.linkedin.com/in/otteben",
+            "image": "https://avatars3.githubusercontent.com/u/5076085?u=f45be64f25d8f1a91d30a20afcf492711c2c93eb&v=4",
+            "url": "https://github.com/ahtee",
             "monthlyDonation": 500,
             "source": "github",
             "tier": "backer"
@@ -870,6 +896,14 @@
             "name": "Maya Kaczorowski",
             "image": "https://avatars1.githubusercontent.com/u/15946341?u=9a8c989d2ebd91a9507560fda2d61e99c4aa04d7&v=4",
             "url": "www.mayakaczorowski.com",
+            "monthlyDonation": 500,
+            "source": "github",
+            "tier": "backer"
+        },
+        {
+            "name": "Evgeny Markov",
+            "image": "https://avatars2.githubusercontent.com/u/16443248?u=d798bcd00334de7405318d4084eae92aae4fe399&v=4",
+            "url": "https://github.com/evgenymarkov",
             "monthlyDonation": 500,
             "source": "github",
             "tier": "backer"
@@ -933,6 +967,15 @@
             "tier": "backer"
         },
         {
+            "name": "Bastien Crettenand",
+            "url": "https://www.neptium.ch",
+            "image": "https://images.opencollective.com/crbast/ef3a1d2/avatar.png",
+            "monthlyDonation": 200,
+            "totalDonations": 200,
+            "source": "opencollective",
+            "tier": null
+        },
+        {
             "name": "Shunfan Du",
             "url": "https://twitter.com/shunf4n",
             "image": "https://images.opencollective.com/shunfan/ca1c537/avatar.png",
@@ -947,6 +990,15 @@
             "image": "https://images.opencollective.com/spyke/c561172/avatar.png",
             "monthlyDonation": 200,
             "totalDonations": 2000,
+            "source": "opencollective",
+            "tier": null
+        },
+        {
+            "name": "Виктор Виктор",
+            "url": null,
+            "image": "https://images.opencollective.com/toptalo/237a912/avatar.png",
+            "monthlyDonation": 100,
+            "totalDonations": 100,
             "source": "opencollective",
             "tier": null
         },
