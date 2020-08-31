@@ -78,7 +78,7 @@ async function fetchOpenCollectiveSponsors() {
 
     const query = `{
         account(slug: "eslint") {
-          orders(status: ACTIVE) {
+          orders(status: ACTIVE, filter: INCOMING) {
             totalCount
             nodes {
               fromAccount {
