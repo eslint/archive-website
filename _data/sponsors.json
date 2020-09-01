@@ -46,24 +46,6 @@
             "totalDonations": 950000,
             "source": "opencollective",
             "tier": "silver-sponsor"
-        },
-        {
-            "name": "ESLint",
-            "url": "https://eslint.org/",
-            "image": "https://images.opencollective.com/eslint/96b09dc/logo.png",
-            "monthlyDonation": 10000,
-            "totalDonations": 10000,
-            "source": "opencollective",
-            "tier": "silver-sponsor"
-        },
-        {
-            "name": "ESLint",
-            "url": "https://eslint.org/",
-            "image": "https://images.opencollective.com/eslint/96b09dc/logo.png",
-            "monthlyDonation": 10000,
-            "totalDonations": 10000,
-            "source": "opencollective",
-            "tier": "silver-sponsor"
         }
     ],
     "bronze": [
@@ -284,15 +266,6 @@
             "totalDonations": 350000,
             "source": "opencollective",
             "tier": null
-        },
-        {
-            "name": "ESLint",
-            "url": "https://eslint.org/",
-            "image": "https://images.opencollective.com/eslint/96b09dc/logo.png",
-            "monthlyDonation": 10000,
-            "totalDonations": 40000,
-            "source": "opencollective",
-            "tier": "supporter"
         },
         {
             "name": "Yannick Croissant",
