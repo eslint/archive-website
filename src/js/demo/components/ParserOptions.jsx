@@ -19,6 +19,7 @@ function ParserOptions(props) {
                     <option value="9">2018</option>
                     <option value="10">2019</option>
                     <option value="11">2020</option>
+                    <option value="12">2021</option>
                 </select>
             </div>
             <div className="col-md-4">

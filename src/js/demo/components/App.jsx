@@ -61,6 +61,7 @@ const ENV_NAMES = [
     "es6",
     "es2017",
     "es2020",
+    "es2021",
     "greasemonkey"
 ];
 

@@ -20,6 +20,7 @@ JavaScript provides shorthand operators that combine variable assignment and som
  x *= y    | x = x * y
  x /= y    | x = x / y
  x %= y    | x = x % y
+ x **= y   | x = x ** y
  x <<= y   | x = x << y
  x >>= y   | x = x >> y
  x >>>= y  | x = x >>> y
@@ -31,6 +32,8 @@ JavaScript provides shorthand operators that combine variable assignment and som
 ## Rule Details
 
 This rule requires or disallows assignment operator shorthand where possible.
+
+The rule applies to the operators listed in the above table. It does not report the logical assignment operators `&&=`, `||=`, and `??=` because their short-circuiting behavior is different from the other assignment operators.
 
 ## Options
 
