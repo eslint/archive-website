@@ -95,15 +95,6 @@
             "tier": "bronze-sponsor"
         },
         {
-            "name": "Bruce",
-            "url": "https://bruce.agency",
-            "image": "https://images.opencollective.com/brucemade/0c70c59/logo.png",
-            "monthlyDonation": 20000,
-            "totalDonations": 80000,
-            "source": "opencollective",
-            "tier": "bronze-sponsor"
-        },
-        {
             "name": "CasinoTop.com",
             "url": "https://www.casinotop.com/",
             "image": "https://images.opencollective.com/casinotop-com/10fd95b/logo.png",
@@ -424,6 +415,15 @@
             "image": "https://images.opencollective.com/blacksheepcode/976d69a/avatar.png",
             "monthlyDonation": 500,
             "totalDonations": 4000,
+            "source": "opencollective",
+            "tier": "backer"
+        },
+        {
+            "name": "Bruce",
+            "url": "https://bruce.agency",
+            "image": "https://images.opencollective.com/brucemade/0c70c59/logo.png",
+            "monthlyDonation": 500,
+            "totalDonations": 80000,
             "source": "opencollective",
             "tier": "backer"
         },
