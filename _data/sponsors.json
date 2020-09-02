@@ -113,15 +113,6 @@
             "tier": "bronze-sponsor"
         },
         {
-            "name": "Writers Per Hour",
-            "url": "https://writersperhour.com/write-my-essay",
-            "image": "https://images.opencollective.com/writersperhour/5787d4b/logo.png",
-            "monthlyDonation": 20000,
-            "totalDonations": 60000,
-            "source": "opencollective",
-            "tier": "bronze-sponsor"
-        },
-        {
             "name": "Anagram Solver",
             "url": "https://www.crosswordsolver.org/anagram-solver/",
             "image": "https://images.opencollective.com/anagram-solver/2666271/logo.png",
