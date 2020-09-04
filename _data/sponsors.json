@@ -914,6 +914,15 @@
             "tier": "backer"
         },
         {
+            "name": "Kostas Bariotis",
+            "url": "https://kostasbariotis.com",
+            "image": "https://images.opencollective.com/konmpar/6f12288/avatar.png",
+            "monthlyDonation": 200,
+            "totalDonations": 200,
+            "source": "opencollective",
+            "tier": null
+        },
+        {
             "name": "Bastien Crettenand",
             "url": "https://www.neptium.ch",
             "image": "https://images.opencollective.com/crbast/ef3a1d2/avatar.png",
