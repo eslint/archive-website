@@ -219,6 +219,15 @@
             "totalDonations": 360000,
             "source": "opencollective",
             "tier": "bronze-sponsor"
+        },
+        {
+            "name": "Fire Stick Tricks",
+            "url": "https://www.firesticktricks.com",
+            "image": "https://images.opencollective.com/fire-stick-tricks/b8fbe2c/logo.png",
+            "monthlyDonation": 20000,
+            "totalDonations": 360000,
+            "source": "opencollective",
+            "tier": "bronze-sponsor"
         }
     ],
     "backers": [
