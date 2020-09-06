@@ -401,6 +401,15 @@
             "tier": "backer"
         },
         {
+            "name": "Say Yup",
+            "url": "https://www.sayyup.nl",
+            "image": "https://images.opencollective.com/sayyup/4c61ffd/avatar.png",
+            "monthlyDonation": 500,
+            "totalDonations": 500,
+            "source": "opencollective",
+            "tier": "backer"
+        },
+        {
             "name": "Justin Noel",
             "url": "https://justinnoel.dev",
             "image": "https://images.opencollective.com/justinnoel/avatar.png",
