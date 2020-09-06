@@ -923,6 +923,15 @@
             "tier": "backer"
         },
         {
+            "name": "Alexey",
+            "url": null,
+            "image": "https://images.opencollective.com/alexey2/06b1a2d/avatar.png",
+            "monthlyDonation": 200,
+            "totalDonations": 200,
+            "source": "opencollective",
+            "tier": null
+        },
+        {
             "name": "Kostas Bariotis",
             "url": "https://kostasbariotis.com",
             "image": "https://images.opencollective.com/konmpar/6f12288/avatar.png",
