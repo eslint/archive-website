@@ -2,11 +2,10 @@
 
 const markdownIt = require("markdown-it");
 const highlightJS = require("highlight.js");
-const GitHubSlugger = require("github-slugger");
+const { slug } = require("github-slugger");
 
 module.exports = function syntaxHighlighting(eleventyConfig) {
 
-    const slugger = new GitHubSlugger();
     let md = markdownIt({
 
         // https://github.com/markdown-it/markdown-it#syntax-highlighting
@@ -31,7 +30,7 @@ module.exports = function syntaxHighlighting(eleventyConfig) {
         slugify(text) {
 
             // need to replace all the characters GitHub replaces
-            return slugger.slug(text.replace(/[<>()[\]{}]/gu, ""))
+            return slug(text.replace(/[<>()[\]{}]/gu, ""))
 
                 // non-ASCII characters are a pain to fix
                 // first replace them all with dashes
