@@ -401,6 +401,15 @@
             "tier": "backer"
         },
         {
+            "name": "Alexandre Morgaut",
+            "url": "https://www.quora.com/profile/Alexandre-Morgaut",
+            "image": "https://images.opencollective.com/alexandre-morgaut/6e3c8d4/avatar.png",
+            "monthlyDonation": 500,
+            "totalDonations": 8000,
+            "source": "opencollective",
+            "tier": "backer"
+        },
+        {
             "name": "Say Yup",
             "url": "https://www.sayyup.nl",
             "image": "https://images.opencollective.com/sayyup/4c61ffd/avatar.png",
