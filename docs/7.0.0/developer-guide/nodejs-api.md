@@ -656,7 +656,7 @@ const Linter = require("eslint").Linter;
 const linter = new Linter();
 
 linter.defineParser("my-custom-parser", {
-    parse(code, options) {
+    parseForESLint(code, options) {
         // ...
     }
 });
