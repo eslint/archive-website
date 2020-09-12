@@ -188,7 +188,7 @@ module.exports = {
             env: ["node"],
             rules: {
                 "myPlugin/my-rule": "off",
-                "eslint-plugin-myPlugin/another-rule": "off"
+                "eslint-plugin-myPlugin/another-rule": "off",
                 "eslint-plugin-myPlugin/yet-another-rule": "error"
             }
         }
