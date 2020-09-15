@@ -16,7 +16,7 @@ Today we are happy to announce that we've started donating $100/month to each of
 
 * [Ajv](https://npmjs.com/package/ajv) is a JSON schema validator that ESLint uses to validate configuration.
 * [Eleventy](https://www.11ty.dev/) is a Node.js-based static site generator that we use to create [eslint.org](http://eslint.org).
-* [Sindre Sorhus](https://sindresorhus.com/) is a prolific open source developer, and ESLint uses several of his modules, including [`chalk`](https://npmjs.com/package/chalk), [`globals`](https://npmjs.com/package/globals), [`import-fresh](https://npmjs.com/package/import-fresh), [`strip-ansi`](https://npmjs.com/package/strip-ansi), and [`strip-json-comments`](https://npmjs.com/package/strip-json-comments).
+* [Sindre Sorhus](https://sindresorhus.com/) is a prolific open source developer, and ESLint uses several of his modules, including [`chalk`](https://npmjs.com/package/chalk), [`globals`](https://npmjs.com/package/globals), [`import-fresh`](https://npmjs.com/package/import-fresh), [`strip-ansi`](https://npmjs.com/package/strip-ansi), and [`strip-json-comments`](https://npmjs.com/package/strip-json-comments).
 
 We're grateful to these projects, and all of our dependencies, for allowing us to build ESLint.
 
