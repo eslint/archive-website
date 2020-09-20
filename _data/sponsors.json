@@ -50,6 +50,15 @@
     ],
     "bronze": [
         {
+            "name": "Beta Calendars",
+            "url": "https://www.betacalendars.com/printable-calendar",
+            "image": "https://images.opencollective.com/betacalendars/9334b33/logo.png",
+            "monthlyDonation": 20000,
+            "totalDonations": 20000,
+            "source": "opencollective",
+            "tier": "bronze-sponsor"
+        },
+        {
             "name": "Buy.Fineproxy.Org",
             "url": "https://buy.fineproxy.org/eng/",
             "image": "https://images.opencollective.com/buy-fineproxy-org/2002c40/logo.png",
