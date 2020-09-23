@@ -995,6 +995,15 @@
             "tier": null
         },
         {
+            "name": "Matthew Woods",
+            "url": "https://matthew.codes",
+            "image": "https://images.opencollective.com/mxttwoods/avatar.png",
+            "monthlyDonation": 100,
+            "totalDonations": 100,
+            "source": "opencollective",
+            "tier": null
+        },
+        {
             "name": "Виктор Виктор",
             "url": null,
             "image": "https://images.opencollective.com/toptalo/237a912/avatar.png",
