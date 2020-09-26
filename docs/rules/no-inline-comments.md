@@ -96,6 +96,28 @@ var quux = (
 )
 ```
 
+## Options
+
+### ignorePattern
+
+To make this rule ignore specific comments, set the `ignorePattern` option to a string pattern that will be passed to the [`RegExp` constructor](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp/RegExp).
+
+Examples of **correct** code for the `ignorePattern` option:
+
+```js
+/*eslint no-inline-comments: ["error", { "ignorePattern": "webpackChunkName:\\s.+" }]*/
+
+import(/* webpackChunkName: "my-chunk-name" */ './locale/en');
+```
+
+Examples of **incorrect** code for the `ignorePattern` option:
+
+```js
+/*eslint no-inline-comments: ["error", { "ignorePattern": "something" }] */
+
+var foo = 4; // other thing
+```
+
 ## Version
 
 This rule was introduced in ESLint 0.10.0.
