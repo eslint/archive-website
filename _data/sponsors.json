@@ -34,7 +34,7 @@
             "url": "https://liftoff.io/",
             "image": "https://images.opencollective.com/liftoff/5c4fa84/logo.png",
             "monthlyDonation": 50000,
-            "totalDonations": 200000,
+            "totalDonations": 250000,
             "source": "opencollective",
             "tier": "silver-sponsor"
         },
@@ -72,7 +72,7 @@
             "url": "https://www.veikkaajat.com",
             "image": "https://images.opencollective.com/veikkaajat/b92b427/logo.png",
             "monthlyDonation": 20000,
-            "totalDonations": 40000,
+            "totalDonations": 60000,
             "source": "opencollective",
             "tier": "bronze-sponsor"
         },
@@ -81,7 +81,7 @@
             "url": "https://www.nettikasinot.media/",
             "image": "https://images.opencollective.com/nettikasinot-media/2dba7da/logo.png",
             "monthlyDonation": 20000,
-            "totalDonations": 40000,
+            "totalDonations": 60000,
             "source": "opencollective",
             "tier": "bronze-sponsor"
         },
@@ -126,7 +126,7 @@
             "url": "https://www.crosswordsolver.org/anagram-solver/",
             "image": "https://images.opencollective.com/anagram-solver/2666271/logo.png",
             "monthlyDonation": 20000,
-            "totalDonations": 120000,
+            "totalDonations": 140000,
             "source": "opencollective",
             "tier": "bronze-sponsor"
         },
@@ -263,7 +263,7 @@
             "url": "https://www.principal.com/about-us",
             "image": "https://images.opencollective.com/principal/431e690/logo.png",
             "monthlyDonation": 5000,
-            "totalDonations": 10000,
+            "totalDonations": 15000,
             "source": "opencollective",
             "tier": null
         },
@@ -294,15 +294,6 @@
             "tier": null
         },
         {
-            "name": "Ed Bentley",
-            "url": null,
-            "image": "https://images.opencollective.com/edward-bentley/avatar.png",
-            "monthlyDonation": 2000,
-            "totalDonations": 32000,
-            "source": "opencollective",
-            "tier": "backer"
-        },
-        {
             "name": "incognito",
             "url": null,
             "image": "https://images.opencollective.com/incognito-97d2b095/avatar.png",
@@ -316,7 +307,7 @@
             "url": "https://www.simedia.com/",
             "image": "https://images.opencollective.com/simedia/848efc9/logo.png",
             "monthlyDonation": 1000,
-            "totalDonations": 2000,
+            "totalDonations": 3000,
             "source": "opencollective",
             "tier": null
         },
@@ -325,7 +316,7 @@
             "url": null,
             "image": "https://images.opencollective.com/john-hamilton/avatar.png",
             "monthlyDonation": 1000,
-            "totalDonations": 3000,
+            "totalDonations": 4000,
             "source": "opencollective",
             "tier": "backer"
         },
@@ -414,7 +405,7 @@
             "url": "https://justinnoel.dev",
             "image": "https://images.opencollective.com/justinnoel/avatar.png",
             "monthlyDonation": 500,
-            "totalDonations": 1000,
+            "totalDonations": 1500,
             "source": "opencollective",
             "tier": "backer"
         },
@@ -477,7 +468,7 @@
             "url": "https://twitter.com/dreinidaho",
             "image": "https://images.opencollective.com/jmcombs/22a314a/avatar.png",
             "monthlyDonation": 500,
-            "totalDonations": 5000,
+            "totalDonations": 5500,
             "source": "opencollective",
             "tier": "backer"
         },
@@ -666,7 +657,7 @@
             "url": null,
             "image": "https://images.opencollective.com/joseph-percy/avatar.png",
             "monthlyDonation": 500,
-            "totalDonations": 10000,
+            "totalDonations": 10500,
             "source": "opencollective",
             "tier": "backer"
         },
