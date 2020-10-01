@@ -958,6 +958,15 @@
             "totalDonations": 100,
             "source": "opencollective",
             "tier": null
+        },
+        {
+            "name": "Kristof Michiels",
+            "url": null,
+            "image": "https://images.opencollective.com/kristof-michiels/avatar.png",
+            "monthlyDonation": 100,
+            "totalDonations": 3500,
+            "source": "opencollective",
+            "tier": null
         }
     ]
 }
