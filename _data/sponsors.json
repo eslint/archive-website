@@ -86,15 +86,6 @@
             "tier": "bronze-sponsor"
         },
         {
-            "name": "My True Media",
-            "url": "https://mytruemedia.com/",
-            "image": "https://images.opencollective.com/my-true-media/03e2168/logo.png",
-            "monthlyDonation": 20000,
-            "totalDonations": 60000,
-            "source": "opencollective",
-            "tier": "bronze-sponsor"
-        },
-        {
             "name": "Norgekasino",
             "url": "https://www.norgekasino.com",
             "image": "https://images.opencollective.com/norgekasino/ecfd57a/logo.png",
@@ -144,7 +135,7 @@
             "url": "https://www.kasinot.fi",
             "image": "https://images.opencollective.com/kasinot-fi/e09aa2e/logo.png",
             "monthlyDonation": 20000,
-            "totalDonations": 140000,
+            "totalDonations": 160000,
             "source": "opencollective",
             "tier": "bronze-sponsor"
         },
@@ -153,7 +144,7 @@
             "url": "https://www.pelisivut.com",
             "image": "https://images.opencollective.com/pelisivut/04f08f2/logo.png",
             "monthlyDonation": 20000,
-            "totalDonations": 140000,
+            "totalDonations": 160000,
             "source": "opencollective",
             "tier": "bronze-sponsor"
         },
@@ -162,7 +153,7 @@
             "url": "https://www.nettikasinot.org",
             "image": "https://images.opencollective.com/nettikasinot-org/53a4b44/logo.png",
             "monthlyDonation": 20000,
-            "totalDonations": 140000,
+            "totalDonations": 160000,
             "source": "opencollective",
             "tier": "bronze-sponsor"
         },
@@ -171,7 +162,7 @@
             "url": "https://www.bonus.com.de/freispiele",
             "image": "https://images.opencollective.com/bonusfinder-deutschland/646169e/logo.png",
             "monthlyDonation": 20000,
-            "totalDonations": 180000,
+            "totalDonations": 200000,
             "source": "opencollective",
             "tier": "bronze-sponsor"
         },
@@ -207,7 +198,7 @@
             "url": "https://icons8.com",
             "image": "https://images.opencollective.com/icons8/7fa1641/logo.png",
             "monthlyDonation": 20000,
-            "totalDonations": 280000,
+            "totalDonations": 300000,
             "source": "opencollective",
             "tier": "bronze-sponsor"
         },
@@ -234,7 +225,7 @@
             "url": "https://www.marfeel.com/",
             "image": "https://images.opencollective.com/marfeel/4b88e30/logo.png",
             "monthlyDonation": 20000,
-            "totalDonations": 360000,
+            "totalDonations": 380000,
             "source": "opencollective",
             "tier": "bronze-sponsor"
         },
@@ -352,7 +343,7 @@
             "url": "https://n8n.io",
             "image": "https://images.opencollective.com/n8n/dca2f0c/logo.png",
             "monthlyDonation": 1000,
-            "totalDonations": 9000,
+            "totalDonations": 10000,
             "source": "opencollective",
             "tier": "backer"
         },
@@ -361,7 +352,7 @@
             "url": "https://github.com/bentruyman",
             "image": "https://images.opencollective.com/bentruyman/9dc2d16/avatar.png",
             "monthlyDonation": 1000,
-            "totalDonations": 11000,
+            "totalDonations": 12000,
             "source": "opencollective",
             "tier": "backer"
         },
@@ -477,7 +468,7 @@
             "url": null,
             "image": "https://images.opencollective.com/thomas-lohner/avatar.png",
             "monthlyDonation": 500,
-            "totalDonations": 4000,
+            "totalDonations": 4500,
             "source": "opencollective",
             "tier": "backer"
         },
@@ -513,7 +504,7 @@
             "url": null,
             "image": "https://images.opencollective.com/james-sherwood-jones/avatar.png",
             "monthlyDonation": 500,
-            "totalDonations": 7500,
+            "totalDonations": 8000,
             "source": "opencollective",
             "tier": "backer"
         },
@@ -567,7 +558,7 @@
             "url": "https://twitter.com/jumbleofideas",
             "image": "https://images.opencollective.com/aj-klein/b63b472/avatar.png",
             "monthlyDonation": 500,
-            "totalDonations": 9500,
+            "totalDonations": 10000,
             "source": "opencollective",
             "tier": "backer"
         },
