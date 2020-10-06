@@ -50,6 +50,15 @@
     ],
     "bronze": [
         {
+            "name": "Writers Per Hour",
+            "url": "https://writersperhour.com/write-my-essay",
+            "image": "https://images.opencollective.com/writersperhour/5787d4b/logo.png",
+            "monthlyDonation": 20000,
+            "totalDonations": 80000,
+            "source": "opencollective",
+            "tier": "bronze-sponsor"
+        },
+        {
             "name": "2021 calendar",
             "url": "https://www.betacalendars.com/printable-calendar",
             "image": "https://images.opencollective.com/betacalendars/9334b33/logo.png",
