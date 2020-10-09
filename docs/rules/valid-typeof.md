@@ -47,6 +47,8 @@ typeof bar === typeof qux
 Examples of **incorrect** code with the `{ "requireStringLiterals": true }` option:
 
 ```js
+/*eslint valid-typeof: ["error", { "requireStringLiterals": true }]*/
+
 typeof foo === undefined
 typeof bar == Object
 typeof baz === "strnig"
@@ -58,6 +60,8 @@ typeof foo == 5
 Examples of **correct** code with the `{ "requireStringLiterals": true }` option:
 
 ```js
+/*eslint valid-typeof: ["error", { "requireStringLiterals": true }]*/
+
 typeof foo === "undefined"
 typeof bar == "object"
 typeof baz === "string"

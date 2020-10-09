@@ -37,6 +37,10 @@ If a reference is inside of a dynamic expression (e.g. `CallExpression`,
 Examples of **incorrect** code for this rule:
 
 ```js
+/*eslint no-unmodified-loop-condition: "error"*/
+
+var node = something;
+
 while (node) {
     doSomething(node);
 }
@@ -54,6 +58,8 @@ while (node !== root) {
 Examples of **correct** code for this rule:
 
 ```js
+/*eslint no-unmodified-loop-condition: "error"*/
+
 while (node) {
     doSomething(node);
     node = node.parent;
