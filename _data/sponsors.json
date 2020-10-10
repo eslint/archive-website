@@ -401,6 +401,15 @@
             "tier": "backer"
         },
         {
+            "name": "PLANFRED",
+            "url": "https://www.planfred.com",
+            "image": "https://images.opencollective.com/planfredapp/4ae56a1/logo.png",
+            "monthlyDonation": 500,
+            "totalDonations": 500,
+            "source": "opencollective",
+            "tier": null
+        },
+        {
             "name": "Lex Webb",
             "url": null,
             "image": "https://images.opencollective.com/lex-webb/e94811a/avatar.png",
