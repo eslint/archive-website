@@ -2,6 +2,15 @@
     "platinum": [],
     "gold": [
         {
+            "name": "Shopify",
+            "url": "https://www.shopify.com",
+            "image": "https://images.opencollective.com/shopify/e780cd4/logo.png",
+            "monthlyDonation": 100000,
+            "totalDonations": 1600000,
+            "source": "opencollective",
+            "tier": "gold-sponsor"
+        },
+        {
             "name": "Salesforce",
             "url": "https://www.salesforce.com",
             "image": "https://images.opencollective.com/salesforce/ca8f997/logo.png",
