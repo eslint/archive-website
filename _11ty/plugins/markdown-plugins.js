@@ -38,7 +38,8 @@ module.exports = function syntaxHighlighting(eleventyConfig) {
 
                 // then replace all -- with -
                 .replace(/-+/gu, "-");
-        }
+        },
+        uniqueSlugStartIndex: 1
     });
 
     eleventyConfig.setLibrary("md", md);
