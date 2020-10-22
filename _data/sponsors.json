@@ -1,5 +1,15 @@
 {
-    "platinum": [],
+    "platinum": [
+        {
+            "name": "Automattic",
+            "url": "https://automattic.com",
+            "image": "https://images.opencollective.com/photomatt/ff91f0b/logo.png",
+            "monthlyDonation": 200000,
+            "totalDonations": 200000,
+            "source": "opencollective",
+            "tier": "platinum-sponsor"
+        }
+    ],
     "gold": [
         {
             "name": "Shopify",
