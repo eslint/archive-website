@@ -168,24 +168,6 @@
             "tier": "bronze-sponsor"
         },
         {
-            "name": "Kasinot.fi",
-            "url": "https://www.kasinot.fi",
-            "image": "https://images.opencollective.com/kasinot-fi/e09aa2e/logo.png",
-            "monthlyDonation": 20000,
-            "totalDonations": 160000,
-            "source": "opencollective",
-            "tier": "bronze-sponsor"
-        },
-        {
-            "name": "Pelisivut",
-            "url": "https://www.pelisivut.com",
-            "image": "https://images.opencollective.com/pelisivut/04f08f2/logo.png",
-            "monthlyDonation": 20000,
-            "totalDonations": 160000,
-            "source": "opencollective",
-            "tier": "bronze-sponsor"
-        },
-        {
             "name": "Nettikasinot.org",
             "url": "https://www.nettikasinot.org",
             "image": "https://images.opencollective.com/nettikasinot-org/53a4b44/logo.png",
