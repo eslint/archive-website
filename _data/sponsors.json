@@ -114,74 +114,11 @@
             "tier": "bronze-sponsor"
         },
         {
-            "name": "Nettikasinot.media",
-            "url": "https://www.nettikasinot.media/",
-            "image": "https://images.opencollective.com/nettikasinot-media/2dba7da/logo.png",
-            "monthlyDonation": 20000,
-            "totalDonations": 60000,
-            "source": "opencollective",
-            "tier": "bronze-sponsor"
-        },
-        {
-            "name": "Norgekasino",
-            "url": "https://www.norgekasino.com",
-            "image": "https://images.opencollective.com/norgekasino/ecfd57a/logo.png",
-            "monthlyDonation": 20000,
-            "totalDonations": 100000,
-            "source": "opencollective",
-            "tier": "bronze-sponsor"
-        },
-        {
-            "name": "Japanesecasino",
-            "url": "https://www.japanesecasino.com/",
-            "image": "https://images.opencollective.com/japanesecasino/b0ffe3c/logo.png",
-            "monthlyDonation": 20000,
-            "totalDonations": 100000,
-            "source": "opencollective",
-            "tier": "bronze-sponsor"
-        },
-        {
-            "name": "CasinoTop.com",
-            "url": "https://www.casinotop.com/",
-            "image": "https://images.opencollective.com/casinotop-com/10fd95b/logo.png",
-            "monthlyDonation": 20000,
-            "totalDonations": 120000,
-            "source": "opencollective",
-            "tier": "bronze-sponsor"
-        },
-        {
-            "name": "Casino Topp",
-            "url": "https://www.casinotopp.net/",
-            "image": "https://images.opencollective.com/casino-topp/1dd399a/logo.png",
-            "monthlyDonation": 20000,
-            "totalDonations": 120000,
-            "source": "opencollective",
-            "tier": "bronze-sponsor"
-        },
-        {
             "name": "Anagram Solver",
             "url": "https://www.crosswordsolver.org/anagram-solver/",
             "image": "https://images.opencollective.com/anagram-solver/2666271/logo.png",
             "monthlyDonation": 20000,
             "totalDonations": 140000,
-            "source": "opencollective",
-            "tier": "bronze-sponsor"
-        },
-        {
-            "name": "Nettikasinot.org",
-            "url": "https://www.nettikasinot.org",
-            "image": "https://images.opencollective.com/nettikasinot-org/53a4b44/logo.png",
-            "monthlyDonation": 20000,
-            "totalDonations": 160000,
-            "source": "opencollective",
-            "tier": "bronze-sponsor"
-        },
-        {
-            "name": "BonusFinder Deutschland",
-            "url": "https://www.bonus.com.de/freispiele",
-            "image": "https://images.opencollective.com/bonusfinder-deutschland/646169e/logo.png",
-            "monthlyDonation": 20000,
-            "totalDonations": 200000,
             "source": "opencollective",
             "tier": "bronze-sponsor"
         },
