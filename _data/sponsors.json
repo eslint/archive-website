@@ -735,6 +735,14 @@
             "tier": "backer"
         },
         {
+            "name": "Ryan Macy",
+            "image": "https://avatars1.githubusercontent.com/u/829581?u=7126d6768d3e200ee5dfd3485cd50465cb8e85f4&v=4",
+            "url": "https://macy.dev",
+            "monthlyDonation": 500,
+            "source": "github",
+            "tier": "backer"
+        },
+        {
             "name": "Titus",
             "image": "https://avatars0.githubusercontent.com/u/944406?u=bf58f56aeb97f8b1616d8a3d9a84bd3e16ab803b&v=4",
             "url": "wooorm.com",
