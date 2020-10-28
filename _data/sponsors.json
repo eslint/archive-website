@@ -188,15 +188,6 @@
     ],
     "backers": [
         {
-            "name": "GatsbyJS",
-            "url": "https://www.gatsbyjs.com",
-            "image": "https://images.opencollective.com/gatsbyjs/2aecbd6/logo.png",
-            "monthlyDonation": 50000,
-            "totalDonations": 450000,
-            "source": "opencollective",
-            "tier": null
-        },
-        {
             "name": "Yannick Croissant",
             "url": "https://yannick.cr",
             "image": "https://images.opencollective.com/yannickcr/765f06f/avatar.png",
