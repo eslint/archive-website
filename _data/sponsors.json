@@ -127,7 +127,7 @@
             "url": "https://mixpanel.com",
             "image": "https://images.opencollective.com/mixpanel/cd682f7/logo.png",
             "monthlyDonation": 20000,
-            "totalDonations": 280000,
+            "totalDonations": 300000,
             "source": "opencollective",
             "tier": "bronze-sponsor"
         },
@@ -361,7 +361,7 @@
             "url": null,
             "image": "https://images.opencollective.com/lex-webb/e94811a/avatar.png",
             "monthlyDonation": 500,
-            "totalDonations": 500,
+            "totalDonations": 1000,
             "source": "opencollective",
             "tier": "backer"
         },
@@ -370,7 +370,7 @@
             "url": null,
             "image": "https://images.opencollective.com/brianpeiris/68fdb65/avatar.png",
             "monthlyDonation": 500,
-            "totalDonations": 500,
+            "totalDonations": 1000,
             "source": "opencollective",
             "tier": "backer"
         },
@@ -379,7 +379,7 @@
             "url": "https://www.quora.com/profile/Alexandre-Morgaut",
             "image": "https://images.opencollective.com/alexandre-morgaut/6e3c8d4/avatar.png",
             "monthlyDonation": 500,
-            "totalDonations": 8500,
+            "totalDonations": 9000,
             "source": "opencollective",
             "tier": "backer"
         },
@@ -406,7 +406,7 @@
             "url": "https://blacksheepcode.com",
             "image": "https://images.opencollective.com/blacksheepcode/976d69a/avatar.png",
             "monthlyDonation": 500,
-            "totalDonations": 5000,
+            "totalDonations": 5500,
             "source": "opencollective",
             "tier": "backer"
         },
@@ -935,7 +935,7 @@
             "url": null,
             "image": "https://images.opencollective.com/spyke/c561172/avatar.png",
             "monthlyDonation": 200,
-            "totalDonations": 2400,
+            "totalDonations": 2600,
             "source": "opencollective",
             "tier": null
         },
