@@ -91,7 +91,7 @@
             "url": "https://buy.fineproxy.org/eng/",
             "image": "https://images.opencollective.com/buy-fineproxy-org/b282e39/logo.png",
             "monthlyDonation": 20000,
-            "totalDonations": 40000,
+            "totalDonations": 60000,
             "source": "opencollective",
             "tier": "bronze-sponsor"
         },
@@ -388,7 +388,7 @@
             "url": "https://www.sayyup.nl",
             "image": "https://images.opencollective.com/sayyup/4c61ffd/avatar.png",
             "monthlyDonation": 500,
-            "totalDonations": 1000,
+            "totalDonations": 1500,
             "source": "opencollective",
             "tier": "backer"
         },
@@ -908,7 +908,7 @@
             "url": null,
             "image": "https://images.opencollective.com/alexey2/06b1a2d/avatar.png",
             "monthlyDonation": 200,
-            "totalDonations": 400,
+            "totalDonations": 600,
             "source": "opencollective",
             "tier": null
         },
@@ -952,15 +952,6 @@
             "name": "Matthew Woods",
             "url": "https://matthew.codes",
             "image": "https://images.opencollective.com/mxttwoods/avatar.png",
-            "monthlyDonation": 100,
-            "totalDonations": 200,
-            "source": "opencollective",
-            "tier": null
-        },
-        {
-            "name": "Виктор Виктор",
-            "url": null,
-            "image": "https://images.opencollective.com/toptalo/237a912/avatar.png",
             "monthlyDonation": 100,
             "totalDonations": 200,
             "source": "opencollective",
