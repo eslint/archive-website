@@ -741,6 +741,14 @@
             "tier": "backer"
         },
         {
+            "name": "Peter Hozák",
+            "image": "https://avatars3.githubusercontent.com/u/1087670?u=5a6738983bae1f3a10243aa603a5e9caa641d93d&v=4",
+            "url": "http://peter.hozak.info/",
+            "monthlyDonation": 500,
+            "source": "github",
+            "tier": "backer"
+        },
+        {
             "name": "Jonny Burger",
             "image": "https://avatars1.githubusercontent.com/u/1629785?u=12eb94da6070d00fc924761ce06e3a428d01b7e9&v=4",
             "url": "https://jonny.io",
