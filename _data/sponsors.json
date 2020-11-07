@@ -483,15 +483,6 @@
             "tier": "backer"
         },
         {
-            "name": "verdaccio",
-            "url": "https://verdaccio.org/",
-            "image": "https://images.opencollective.com/verdaccio/2d6ef61/logo.png",
-            "monthlyDonation": 500,
-            "totalDonations": 9000,
-            "source": "opencollective",
-            "tier": "backer"
-        },
-        {
             "name": "Jb Landry",
             "url": "https://jblandry.info",
             "image": "https://images.opencollective.com/jblandry/e968bf5/avatar.png",
