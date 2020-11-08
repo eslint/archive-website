@@ -668,6 +668,14 @@
             "tier": "backer"
         },
         {
+            "name": "Eduardo Quagliato",
+            "image": "https://avatars3.githubusercontent.com/u/220744?u=08ea3b73b85144bfd9c5c11dc8c152fa50759c4f&v=4",
+            "url": "https://quagliato.me",
+            "monthlyDonation": 500,
+            "source": "github",
+            "tier": "backer"
+        },
+        {
             "name": "Lukas Spieß",
             "image": "https://avatars2.githubusercontent.com/u/406937?u=4c04c9c3536a2e9f7b91266270da9d9e55f2b455&v=4",
             "url": "https://github.com/lumaxis",
