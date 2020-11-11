@@ -165,7 +165,7 @@ var obj = { "foo": [ "baz", "bar" ]};
 ```
 
 In the case of the `"never"` option, set `arraysInObjects` exception to `true` to enforce
-the following style (with a space between the `]` and  `}` at the end:
+the following style (with a space between the `]` and  `}` at the end):
 
 ```js
 var obj = {"foo": [ 1, 2 ] };
