@@ -12,6 +12,15 @@
     ],
     "gold": [
         {
+            "name": "Chrome's Web Framework & Tools Performance Fund",
+            "url": "https://google.com/chrome",
+            "image": "https://images.opencollective.com/chrome/dc55bd4/logo.png",
+            "monthlyDonation": 100000,
+            "totalDonations": 100000,
+            "source": "opencollective",
+            "tier": "gold-sponsor"
+        },
+        {
             "name": "Shopify",
             "url": "https://www.shopify.com",
             "image": "https://images.opencollective.com/shopify/e780cd4/logo.png",
