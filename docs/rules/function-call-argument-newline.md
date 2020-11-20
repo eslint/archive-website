@@ -82,7 +82,7 @@ baz(
 
 ### never
 
-Examples of **incorrect** code for this rule with the default `"never"` option:
+Examples of **incorrect** code for this rule with the `"never"` option:
 
 ```js
 /*eslint function-call-argument-newline: ["error", "never"]*/
@@ -133,7 +133,7 @@ baz("one", "two", (x) => {
 
 ### consistent
 
-Examples of **incorrect** code for this rule with the default `"consistent"` option:
+Examples of **incorrect** code for this rule with the `"consistent"` option:
 
 ```js
 /*eslint function-call-argument-newline: ["error", "consistent"]*/
@@ -153,7 +153,7 @@ baz("one", "two",
 );
 ```
 
-Examples of **correct** code for this rule with the default `"consistent"` option:
+Examples of **correct** code for this rule with the `"consistent"` option:
 
 ```js
 /*eslint function-call-argument-newline: ["error", "consistent"]*/

@@ -377,6 +377,10 @@ categories:
         fixable: false
         name: no-new-wrappers
         recommended: false
+      - description: disallow `\8` and `\9` escape sequences in string literals
+        fixable: false
+        name: no-nonoctal-decimal-escape
+        recommended: false
       - description: disallow octal literals
         fixable: false
         name: no-octal

@@ -203,7 +203,7 @@ module.exports = function(results, data) {
                 var logMessage = {
                     filePath: current.filePath,
                     ruleId: msg.ruleId,
-                    ruleUrl: data.rulesMeta[msg.ruleId].url,
+                    ruleUrl: data.rulesMeta[msg.ruleId].docs.url,
                     message: msg.message,
                     line: msg.line,
                     column: msg.column
@@ -234,7 +234,7 @@ module.exports = function(results, data) {
                     "\n" +
                     msg.type +
                     " " +
-                    msg.ruleId + (msg.ruleUrl ? " (" + msg.ruleUrl + ")" : ""
+                    msg.ruleId + (msg.ruleUrl ? " (" + msg.ruleUrl + ")" : "") +
                     "\n  " +
                     msg.filePath +
                     ":" +
