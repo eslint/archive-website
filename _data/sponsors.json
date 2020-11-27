@@ -700,6 +700,14 @@
             "tier": "backer"
         },
         {
+            "name": "Rithish",
+            "image": "https://avatars3.githubusercontent.com/u/674539?v=4",
+            "url": "https://github.com/rithish",
+            "monthlyDonation": 500,
+            "source": "github",
+            "tier": "backer"
+        },
+        {
             "name": "Jeffrey Dang",
             "image": "https://avatars0.githubusercontent.com/u/721579?v=4",
             "url": "https://github.com/jcdang",
