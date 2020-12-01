@@ -62,7 +62,7 @@
             "url": "https://liftoff.io/",
             "image": "https://images.opencollective.com/liftoff/5c4fa84/logo.png",
             "monthlyDonation": 50000,
-            "totalDonations": 300000,
+            "totalDonations": 350000,
             "source": "opencollective",
             "tier": "silver-sponsor"
         },
@@ -342,7 +342,7 @@
             "url": "http://www.nfriedly.com",
             "image": "https://images.opencollective.com/nfriedly/c7be1d5/avatar.png",
             "monthlyDonation": 500,
-            "totalDonations": 1000,
+            "totalDonations": 1500,
             "source": "opencollective",
             "tier": "backer"
         },
@@ -414,7 +414,7 @@
             "url": "https://bruce.agency",
             "image": "https://images.opencollective.com/brucemade/0c70c59/logo.png",
             "monthlyDonation": 500,
-            "totalDonations": 81000,
+            "totalDonations": 81500,
             "source": "opencollective",
             "tier": "backer"
         },
@@ -630,7 +630,7 @@
             "url": null,
             "image": "https://images.opencollective.com/joseph-percy/avatar.png",
             "monthlyDonation": 500,
-            "totalDonations": 11000,
+            "totalDonations": 11500,
             "source": "opencollective",
             "tier": "backer"
         },
