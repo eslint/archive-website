@@ -5,7 +5,7 @@
             "url": "https://automattic.com",
             "image": "https://images.opencollective.com/photomatt/ff91f0b/logo.png",
             "monthlyDonation": 200000,
-            "totalDonations": 200000,
+            "totalDonations": 400000,
             "source": "opencollective",
             "tier": "platinum-sponsor"
         }
@@ -163,7 +163,7 @@
             "url": "https://discordapp.com",
             "image": "https://images.opencollective.com/discordapp/7e3d9a9/logo.png",
             "monthlyDonation": 20000,
-            "totalDonations": 380000,
+            "totalDonations": 400000,
             "source": "opencollective",
             "tier": "bronze-sponsor"
         },
@@ -540,7 +540,7 @@
             "url": "https://www.maisonette.com",
             "image": "https://images.opencollective.com/maisonetteworld/c170bfc/logo.png",
             "monthlyDonation": 500,
-            "totalDonations": 11000,
+            "totalDonations": 11500,
             "source": "opencollective",
             "tier": "backer"
         },
@@ -558,7 +558,7 @@
             "url": "https://korzun.com",
             "image": "https://images.opencollective.com/simon-korzun/cbdefdd/avatar.png",
             "monthlyDonation": 500,
-            "totalDonations": 11000,
+            "totalDonations": 11500,
             "source": "opencollective",
             "tier": "backer"
         },
@@ -639,7 +639,7 @@
             "url": "https://twitter.com/LJHarb",
             "image": "https://images.opencollective.com/ljharb/b75a3f8/avatar.png",
             "monthlyDonation": 500,
-            "totalDonations": 11000,
+            "totalDonations": 11500,
             "source": "opencollective",
             "tier": "backer"
         },
@@ -912,7 +912,7 @@
             "url": "https://ksmith.io",
             "image": "https://images.opencollective.com/knksmith57/1b834b2/avatar.png",
             "monthlyDonation": 300,
-            "totalDonations": 5300,
+            "totalDonations": 5600,
             "source": "opencollective",
             "tier": "backer"
         },
