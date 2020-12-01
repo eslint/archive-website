@@ -131,12 +131,14 @@ async function fetchGitHubSponsors() {
         organization(login: "eslint") {
           sponsorshipsAsMaintainer (first: 100) {
             nodes {
-              sponsor {
-                name,
-                login,
-                avatarUrl,
-                url,
-                websiteUrl
+              sponsor: sponsorEntity {
+                ...on User {
+                  name,
+                 login,
+                 avatarUrl,
+                 url,
+                 websiteUrl
+                }
               },
               tier {
                 monthlyPriceInDollars
