@@ -136,7 +136,7 @@
             "url": "https://mixpanel.com",
             "image": "https://images.opencollective.com/mixpanel/cd682f7/logo.png",
             "monthlyDonation": 20000,
-            "totalDonations": 300000,
+            "totalDonations": 320000,
             "source": "opencollective",
             "tier": "bronze-sponsor"
         },
@@ -369,7 +369,7 @@
             "url": null,
             "image": "https://images.opencollective.com/brianpeiris/68fdb65/avatar.png",
             "monthlyDonation": 500,
-            "totalDonations": 1000,
+            "totalDonations": 1500,
             "source": "opencollective",
             "tier": "backer"
         },
@@ -378,7 +378,7 @@
             "url": "https://www.quora.com/profile/Alexandre-Morgaut",
             "image": "https://images.opencollective.com/alexandre-morgaut/6e3c8d4/avatar.png",
             "monthlyDonation": 500,
-            "totalDonations": 9000,
+            "totalDonations": 9500,
             "source": "opencollective",
             "tier": "backer"
         },
@@ -405,7 +405,7 @@
             "url": "https://blacksheepcode.com",
             "image": "https://images.opencollective.com/blacksheepcode/976d69a/avatar.png",
             "monthlyDonation": 500,
-            "totalDonations": 5500,
+            "totalDonations": 6000,
             "source": "opencollective",
             "tier": "backer"
         },
@@ -957,7 +957,7 @@
             "url": null,
             "image": "https://images.opencollective.com/spyke/c561172/avatar.png",
             "monthlyDonation": 200,
-            "totalDonations": 2600,
+            "totalDonations": 2800,
             "source": "opencollective",
             "tier": null
         },
