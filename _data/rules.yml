@@ -164,6 +164,12 @@ categories:
         fixable: false
         name: no-unsafe-negation
         recommended: true
+      - description: >-
+          disallow use of optional chaining in contexts where the `undefined`
+          value is not allowed
+        fixable: false
+        name: no-unsafe-optional-chaining
+        recommended: false
       - description: disallow useless backreferences in regular expressions
         fixable: false
         name: no-useless-backreference
