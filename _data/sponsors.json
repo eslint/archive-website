@@ -223,6 +223,14 @@
             "tier": "backer"
         },
         {
+            "name": "Guilherme Henrique",
+            "image": "https://avatars1.githubusercontent.com/u/69128540?u=7e8611b6850ba34a6517b1153f45f4ec3b4f200e&v=4",
+            "url": "https://github.com/GuiLP102",
+            "monthlyDonation": 2500,
+            "source": "github",
+            "tier": "backer"
+        },
+        {
             "name": "Roman Nazarenko",
             "url": null,
             "image": "https://images.opencollective.com/roman-nazarenko/avatar.png",
