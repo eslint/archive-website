@@ -852,6 +852,14 @@
             "tier": "backer"
         },
         {
+            "name": null,
+            "image": "https://avatars3.githubusercontent.com/u/7140974?u=b29e67b56eee25cff614fdcfc47ae9810d1966ba&v=4",
+            "url": "https://github.com/stonegray",
+            "monthlyDonation": 500,
+            "source": "github",
+            "tier": "backer"
+        },
+        {
             "name": "James Hay",
             "image": "https://avatars2.githubusercontent.com/u/7937480?u=54287fafb0a0c782bc8f68b6635d80e4a0944f74&v=4",
             "url": "https://github.com/flagpoonage",
