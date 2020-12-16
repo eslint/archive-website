@@ -934,6 +934,11 @@
             "tier": "backer"
         },
         {
+            "monthlyDonation": 500,
+            "source": "github",
+            "tier": "backer"
+        },
+        {
             "name": "Standard Resume Sponsors",
             "image": "https://avatars0.githubusercontent.com/u/65968828?u=059fb65476f5c27fc1a38cb2e6391ad05105fde5&v=4",
             "url": "https://standardresume.co",
