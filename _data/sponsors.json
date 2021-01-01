@@ -365,6 +365,15 @@
             "tier": "backer"
         },
         {
+            "name": "Sasha Sushko",
+            "url": "https://sushko.me",
+            "image": "https://images.opencollective.com/sashasushko/f3730a9/avatar.png",
+            "monthlyDonation": 500,
+            "totalDonations": 500,
+            "source": "opencollective",
+            "tier": "backer"
+        },
+        {
             "name": "Ayush Sachdeva",
             "url": null,
             "image": "https://images.opencollective.com/ayush000/avatar.png",
