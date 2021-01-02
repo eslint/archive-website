@@ -761,7 +761,7 @@ categories:
         name: multiline-comment-style
         recommended: false
       - description: enforce newlines between operands of ternary expressions
-        fixable: false
+        fixable: true
         name: multiline-ternary
         recommended: false
       - description: require constructor names to begin with a capital letter

@@ -38,6 +38,14 @@ if (void x) {
     doSomethingUnfinished();
 }
 
+if (x &&= false) {
+    doSomethingNever();
+}
+
+if (x ||= true) {
+    doSomethingAlways();
+}
+
 for (;-2;) {
     doSomethingForever();
 }

@@ -8,6 +8,8 @@ rule_type: layout
 
 # Enforce or disallow newlines between operands of ternary expressions (multiline-ternary)
 
+(fixable) The `--fix` option on the [command line](../user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
+
 JavaScript allows operands of ternary expressions to be separated by newlines, which can improve the readability of your program.
 
 For example:
