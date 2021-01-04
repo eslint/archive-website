@@ -5,7 +5,7 @@
             "url": "https://automattic.com",
             "image": "https://images.opencollective.com/photomatt/ff91f0b/logo.png",
             "monthlyDonation": 200000,
-            "totalDonations": 400000,
+            "totalDonations": 600000,
             "source": "opencollective",
             "tier": "platinum-sponsor"
         }
@@ -91,7 +91,7 @@
             "url": "https://writersperhour.com",
             "image": "https://images.opencollective.com/writersperhour/5787d4b/logo.png",
             "monthlyDonation": 20000,
-            "totalDonations": 120000,
+            "totalDonations": 140000,
             "source": "opencollective",
             "tier": "bronze-sponsor"
         },
@@ -567,7 +567,7 @@
             "url": "https://www.maisonette.com",
             "image": "https://images.opencollective.com/maisonetteworld/c170bfc/logo.png",
             "monthlyDonation": 500,
-            "totalDonations": 11500,
+            "totalDonations": 12000,
             "source": "opencollective",
             "tier": "backer"
         },
@@ -630,7 +630,7 @@
             "url": "https://klamp.in",
             "image": "https://images.opencollective.com/klamping/26de35c/avatar.png",
             "monthlyDonation": 500,
-            "totalDonations": 11500,
+            "totalDonations": 12000,
             "source": "opencollective",
             "tier": "backer"
         },
@@ -656,6 +656,15 @@
             "name": "Joseph Percy",
             "url": null,
             "image": "https://images.opencollective.com/joseph-percy/avatar.png",
+            "monthlyDonation": 500,
+            "totalDonations": 11500,
+            "source": "opencollective",
+            "tier": "backer"
+        },
+        {
+            "name": "Jordan Harband",
+            "url": "https://twitter.com/LJHarb",
+            "image": "https://images.opencollective.com/ljharb/b75a3f8/avatar.png",
             "monthlyDonation": 500,
             "totalDonations": 11500,
             "source": "opencollective",
@@ -980,7 +989,7 @@
             "url": "https://ksmith.io",
             "image": "https://images.opencollective.com/knksmith57/1b834b2/avatar.png",
             "monthlyDonation": 300,
-            "totalDonations": 5600,
+            "totalDonations": 5900,
             "source": "opencollective",
             "tier": "backer"
         },
@@ -1061,7 +1070,7 @@
             "url": null,
             "image": "https://images.opencollective.com/kristof-michiels/avatar.png",
             "monthlyDonation": 100,
-            "totalDonations": 3800,
+            "totalDonations": 3900,
             "source": "opencollective",
             "tier": null
         }
