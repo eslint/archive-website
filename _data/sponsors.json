@@ -249,15 +249,6 @@
             "tier": null
         },
         {
-            "name": "incognito",
-            "url": null,
-            "image": "https://images.opencollective.com/incognito-97d2b095/avatar.png",
-            "monthlyDonation": 1200,
-            "totalDonations": 1200,
-            "source": "opencollective",
-            "tier": null
-        },
-        {
             "name": "Squeeble",
             "url": "https://www.squeeble.ink",
             "image": "https://images.opencollective.com/squeeble/ed0997d/logo.png",
@@ -298,7 +289,7 @@
             "url": "https://n8n.io",
             "image": "https://images.opencollective.com/n8n/dca2f0c/logo.png",
             "monthlyDonation": 1000,
-            "totalDonations": 12000,
+            "totalDonations": 13000,
             "source": "opencollective",
             "tier": "backer"
         },
