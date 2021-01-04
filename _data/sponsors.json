@@ -662,15 +662,6 @@
             "tier": "backer"
         },
         {
-            "name": "Jordan Harband",
-            "url": "https://twitter.com/LJHarb",
-            "image": "https://images.opencollective.com/ljharb/b75a3f8/avatar.png",
-            "monthlyDonation": 500,
-            "totalDonations": 11500,
-            "source": "opencollective",
-            "tier": "backer"
-        },
-        {
             "name": "Oliver Steele",
             "image": "https://avatars2.githubusercontent.com/u/674?v=4",
             "url": "https://code.osteele.com/",
