@@ -154,7 +154,7 @@
             "url": "https://icons8.com",
             "image": "https://images.opencollective.com/icons8/7fa1641/logo.png",
             "monthlyDonation": 20000,
-            "totalDonations": 340000,
+            "totalDonations": 360000,
             "source": "opencollective",
             "tier": "bronze-sponsor"
         },
@@ -289,7 +289,7 @@
             "url": "https://github.com/bentruyman",
             "image": "https://images.opencollective.com/bentruyman/9dc2d16/avatar.png",
             "monthlyDonation": 1000,
-            "totalDonations": 14000,
+            "totalDonations": 15000,
             "source": "opencollective",
             "tier": "backer"
         },
@@ -307,7 +307,7 @@
             "url": null,
             "image": "https://images.opencollective.com/kevin-partington/54f2124/avatar.png",
             "monthlyDonation": 1000,
-            "totalDonations": 19000,
+            "totalDonations": 20000,
             "source": "opencollective",
             "tier": "backer"
         },
@@ -459,15 +459,6 @@
             "url": "https://www.remoteteam.com",
             "image": "https://images.opencollective.com/remoteteamcom/b04dbd3/logo.png",
             "monthlyDonation": 500,
-            "totalDonations": 5000,
-            "source": "opencollective",
-            "tier": "backer"
-        },
-        {
-            "name": "Thomas Lohner",
-            "url": null,
-            "image": "https://images.opencollective.com/thomas-lohner/avatar.png",
-            "monthlyDonation": 500,
             "totalDonations": 5500,
             "source": "opencollective",
             "tier": "backer"
@@ -504,7 +495,7 @@
             "url": null,
             "image": "https://images.opencollective.com/james-sherwood-jones/avatar.png",
             "monthlyDonation": 500,
-            "totalDonations": 9000,
+            "totalDonations": 9500,
             "source": "opencollective",
             "tier": "backer"
         },
