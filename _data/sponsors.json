@@ -16,7 +16,7 @@
             "url": "https://google.com/chrome",
             "image": "https://images.opencollective.com/chrome/dc55bd4/logo.png",
             "monthlyDonation": 100000,
-            "totalDonations": 200000,
+            "totalDonations": 300000,
             "source": "opencollective",
             "tier": "gold-sponsor"
         },
@@ -43,7 +43,7 @@
             "url": "https://www.airbnb.com/",
             "image": "https://images.opencollective.com/airbnb/d327d66/logo.png",
             "monthlyDonation": 100000,
-            "totalDonations": 2361000,
+            "totalDonations": 2461000,
             "source": "opencollective",
             "tier": "gold-sponsor"
         },
@@ -100,7 +100,7 @@
             "url": "https://buy.fineproxy.org/eng/",
             "image": "https://images.opencollective.com/buy-fineproxy-org/b282e39/logo.png",
             "monthlyDonation": 20000,
-            "totalDonations": 80000,
+            "totalDonations": 100000,
             "source": "opencollective",
             "tier": "bronze-sponsor"
         },
@@ -522,7 +522,7 @@
             "url": "https://jblandry.info",
             "image": "https://images.opencollective.com/jblandry/e968bf5/avatar.png",
             "monthlyDonation": 500,
-            "totalDonations": 10500,
+            "totalDonations": 11000,
             "source": "opencollective",
             "tier": "backer"
         },
@@ -648,7 +648,7 @@
             "url": "https://alexeyraspopov.com",
             "image": "https://images.opencollective.com/alexeyraspopov/d8c7a67/avatar.png",
             "monthlyDonation": 500,
-            "totalDonations": 11500,
+            "totalDonations": 12000,
             "source": "opencollective",
             "tier": "backer"
         },
