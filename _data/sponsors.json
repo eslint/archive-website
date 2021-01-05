@@ -145,7 +145,7 @@
             "url": "https://www.vpsserver.com",
             "image": "https://images.opencollective.com/vpsservercom/logo.png",
             "monthlyDonation": 20000,
-            "totalDonations": 340000,
+            "totalDonations": 360000,
             "source": "opencollective",
             "tier": "bronze-sponsor"
         },
@@ -187,15 +187,6 @@
         }
     ],
     "backers": [
-        {
-            "name": "Yannick Croissant",
-            "url": "https://yannick.cr",
-            "image": "https://images.opencollective.com/yannickcr/765f06f/avatar.png",
-            "monthlyDonation": 10000,
-            "totalDonations": 180000,
-            "source": "opencollective",
-            "tier": "backer"
-        },
         {
             "name": "Principal Financial Group",
             "url": "https://www.principal.com/about-us",
@@ -513,7 +504,7 @@
             "url": null,
             "image": "https://images.opencollective.com/martin-desrumaux/avatar.png",
             "monthlyDonation": 500,
-            "totalDonations": 9500,
+            "totalDonations": 10000,
             "source": "opencollective",
             "tier": "backer"
         },
@@ -558,7 +549,7 @@
             "url": "https://kluska.cz",
             "image": "https://images.opencollective.com/martin-kluska/588a7ff/avatar.png",
             "monthlyDonation": 500,
-            "totalDonations": 11500,
+            "totalDonations": 12000,
             "source": "opencollective",
             "tier": "backer"
         },
@@ -576,7 +567,7 @@
             "url": "https://cantremember.com",
             "image": "https://images.opencollective.com/cantremember/avatar.png",
             "monthlyDonation": 500,
-            "totalDonations": 11500,
+            "totalDonations": 12000,
             "source": "opencollective",
             "tier": "backer"
         },
@@ -603,7 +594,7 @@
             "url": "https://pymaster.tw",
             "image": "https://images.opencollective.com/pc035860/8fed8ae/avatar.png",
             "monthlyDonation": 500,
-            "totalDonations": 11500,
+            "totalDonations": 12000,
             "source": "opencollective",
             "tier": "backer"
         },
