@@ -96,6 +96,15 @@
             "tier": "bronze-sponsor"
         },
         {
+            "name": "2021 calendar",
+            "url": "https://www.betacalendars.com/printable-calendar",
+            "image": "https://images.opencollective.com/betacalendars/9334b33/logo.png",
+            "monthlyDonation": 20000,
+            "totalDonations": 80000,
+            "source": "opencollective",
+            "tier": "bronze-sponsor"
+        },
+        {
             "name": "Buy.Fineproxy.Org",
             "url": "https://buy.fineproxy.org/eng/",
             "image": "https://images.opencollective.com/buy-fineproxy-org/b282e39/logo.png",
@@ -657,7 +666,7 @@
             "url": "https://twitter.com/LJHarb",
             "image": "https://images.opencollective.com/ljharb/b75a3f8/avatar.png",
             "monthlyDonation": 500,
-            "totalDonations": 11500,
+            "totalDonations": 12000,
             "source": "opencollective",
             "tier": "backer"
         },
