@@ -911,6 +911,14 @@
             "tier": "backer"
         },
         {
+            "name": "Carlos Rufo",
+            "image": "https://avatars1.githubusercontent.com/u/9881700?u=c92e4a0ccc0bff241e50582bce914b179b6d89b6&v=4",
+            "url": "https://github.com/swcarlosrj",
+            "monthlyDonation": 500,
+            "source": "github",
+            "tier": "backer"
+        },
+        {
             "name": "Johannes Konings",
             "image": "https://avatars2.githubusercontent.com/u/14806640?u=3586bd6e631a350aec9ff1f2cc31615f72233244&v=4",
             "url": "https://johanneskonings.dev/",
