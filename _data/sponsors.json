@@ -240,6 +240,15 @@
             "tier": null
         },
         {
+            "name": "incognito",
+            "url": null,
+            "image": "https://images.opencollective.com/incognito-97d2b095/avatar.png",
+            "monthlyDonation": 1200,
+            "totalDonations": 2400,
+            "source": "opencollective",
+            "tier": null
+        },
+        {
             "name": "Squeeble",
             "url": "https://www.squeeble.ink",
             "image": "https://images.opencollective.com/squeeble/ed0997d/logo.png",
