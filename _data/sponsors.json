@@ -123,15 +123,6 @@
             "tier": "bronze-sponsor"
         },
         {
-            "name": "Veikkaajat.com",
-            "url": "https://www.veikkaajat.com",
-            "image": "https://images.opencollective.com/veikkaajat/3777f94/logo.png",
-            "monthlyDonation": 20000,
-            "totalDonations": 120000,
-            "source": "opencollective",
-            "tier": "bronze-sponsor"
-        },
-        {
             "name": "Anagram Solver",
             "url": "https://www.crosswordsolver.org/anagram-solver/",
             "image": "https://images.opencollective.com/anagram-solver/2666271/logo.png",
