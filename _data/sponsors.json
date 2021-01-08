@@ -34,7 +34,7 @@
             "url": "https://www.salesforce.com",
             "image": "https://images.opencollective.com/salesforce/ca8f997/logo.png",
             "monthlyDonation": 100000,
-            "totalDonations": 3328100,
+            "totalDonations": 3333100,
             "source": "opencollective",
             "tier": "gold-sponsor"
         },
@@ -77,24 +77,6 @@
         }
     ],
     "bronze": [
-        {
-            "name": "VPNyhteys.org",
-            "url": "https://www.vpnyhteys.org/",
-            "image": "https://images.opencollective.com/vpnyhteys-org/c4185c0/logo.png",
-            "monthlyDonation": 20000,
-            "totalDonations": 20000,
-            "source": "opencollective",
-            "tier": "bronze-sponsor"
-        },
-        {
-            "name": "Forex In Thai",
-            "url": "https://www.forexinthai.com",
-            "image": "https://images.opencollective.com/forex-in-thai/76afa76/logo.png",
-            "monthlyDonation": 20000,
-            "totalDonations": 20000,
-            "source": "opencollective",
-            "tier": "bronze-sponsor"
-        },
         {
             "name": "The Standard Daily",
             "url": "https://thestandarddaily.com/",
