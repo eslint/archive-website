@@ -250,6 +250,15 @@
             "tier": null
         },
         {
+            "name": "Raider.IO",
+            "url": "https://raider.io",
+            "image": "https://images.opencollective.com/raiderio_wow/7a380a3/logo.png",
+            "monthlyDonation": 1000,
+            "totalDonations": 1000,
+            "source": "opencollective",
+            "tier": "backer"
+        },
+        {
             "name": "Squeeble",
             "url": "https://www.squeeble.ink",
             "image": "https://images.opencollective.com/squeeble/ed0997d/logo.png",
