@@ -225,3 +225,7 @@
 - url: https://atomist.com
   src: /assets/img/logos/atomist.svg
   name: Atomist
+
+- url: https://nethunt.com
+  src: /assets/img/logos/nethunt.png
+  name: NetHunt CRM
