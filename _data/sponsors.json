@@ -58,6 +58,15 @@
     ],
     "silver": [
         {
+            "name": "Retool",
+            "url": "https://retool.com/",
+            "image": "https://images.opencollective.com/retool/98ea68e/logo.png",
+            "monthlyDonation": 50000,
+            "totalDonations": 50000,
+            "source": "opencollective",
+            "tier": "silver-sponsor"
+        },
+        {
             "name": "Liftoff",
             "url": "https://liftoff.io/",
             "image": "https://images.opencollective.com/liftoff/5c4fa84/logo.png",
