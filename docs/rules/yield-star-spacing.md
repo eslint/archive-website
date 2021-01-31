@@ -14,9 +14,6 @@ rule_type: layout
 
 This rule enforces spacing around the `*` in `yield*` expressions.
 
-To use this rule you either need to [use the `es6` environment](../user-guide/configuring#specifying-environments) or
-[set `ecmaVersion` to `6` in `parserOptions`](../user-guide/configuring#specifying-parser-options).
-
 ## Options
 
 The rule takes one option, an object, which has two keys `before` and `after` having boolean values `true` or `false`.

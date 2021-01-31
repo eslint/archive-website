@@ -100,6 +100,8 @@ obj?.foo();
 
 obj?.foo.bar;
 
+obj.foo?.bar;
+
 foo?.()?.bar;
 
 (obj?.foo ?? bar)`template`;
