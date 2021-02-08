@@ -3,7 +3,7 @@
         {
             "name": "Automattic",
             "url": "https://automattic.com",
-            "image": "https://images.opencollective.com/photomatt/ff91f0b/logo.png",
+            "image": "https://images.opencollective.com/photomatt/d0ef3e1/logo.png",
             "monthlyDonation": 200000,
             "totalDonations": 800000,
             "source": "opencollective",
@@ -96,15 +96,6 @@
     ],
     "bronze": [
         {
-            "name": "Streamat",
-            "url": "https://streamat.se",
-            "image": "https://images.opencollective.com/streamat/46890db/logo.png",
-            "monthlyDonation": 20000,
-            "totalDonations": 20000,
-            "source": "opencollective",
-            "tier": "bronze-sponsor"
-        },
-        {
             "name": "Writers Per Hour",
             "url": "https://writersperhour.com",
             "image": "https://images.opencollective.com/writersperhour/5787d4b/logo.png",
@@ -114,8 +105,8 @@
             "tier": "bronze-sponsor"
         },
         {
-            "name": "February 2021 calendar",
-            "url": "https://www.betacalendars.com/february-calendar.html",
+            "name": "March 2021 calendar",
+            "url": "https://www.betacalendars.com/march-calendar.html",
             "image": "https://images.opencollective.com/betacalendars/9334b33/logo.png",
             "monthlyDonation": 20000,
             "totalDonations": 100000,
@@ -136,7 +127,7 @@
             "url": "https://www.crosswordsolver.org/anagram-solver/",
             "image": "https://images.opencollective.com/anagram-solver/2666271/logo.png",
             "monthlyDonation": 20000,
-            "totalDonations": 200000,
+            "totalDonations": 220000,
             "source": "opencollective",
             "tier": "bronze-sponsor"
         },
@@ -199,7 +190,7 @@
             "url": "https://www.firesticktricks.com",
             "image": "https://images.opencollective.com/fire-stick-tricks/b8fbe2c/logo.png",
             "monthlyDonation": 20000,
-            "totalDonations": 440000,
+            "totalDonations": 460000,
             "source": "opencollective",
             "tier": "bronze-sponsor"
         }
@@ -233,7 +224,7 @@
             "url": "https://www.neovation.com",
             "image": "https://images.opencollective.com/neovationcorp/30d1cf7/logo.png",
             "monthlyDonation": 2500,
-            "totalDonations": 60000,
+            "totalDonations": 62500,
             "source": "opencollective",
             "tier": "backer"
         },
@@ -275,7 +266,7 @@
         {
             "name": "Squeeble",
             "url": "https://www.squeeble.ink",
-            "image": "https://images.opencollective.com/squeeble/ed0997d/logo.png",
+            "image": "https://images.opencollective.com/squeeble/e2c1bf2/logo.png",
             "monthlyDonation": 1000,
             "totalDonations": 2000,
             "source": "opencollective",
@@ -420,7 +411,7 @@
             "url": "http://www.nfriedly.com",
             "image": "https://images.opencollective.com/nfriedly/c7be1d5/avatar.png",
             "monthlyDonation": 500,
-            "totalDonations": 2000,
+            "totalDonations": 2500,
             "source": "opencollective",
             "tier": "backer"
         },
@@ -492,7 +483,7 @@
             "url": "https://bruce.agency",
             "image": "https://images.opencollective.com/brucemade/0c70c59/logo.png",
             "monthlyDonation": 500,
-            "totalDonations": 82000,
+            "totalDonations": 82500,
             "source": "opencollective",
             "tier": "backer"
         },
@@ -519,7 +510,7 @@
             "url": "https://wwjcdo.com",
             "image": "https://images.opencollective.com/jmcombs/22a314a/avatar.png",
             "monthlyDonation": 500,
-            "totalDonations": 7000,
+            "totalDonations": 7500,
             "source": "opencollective",
             "tier": "backer"
         },
@@ -546,7 +537,7 @@
             "url": "https://medium.com/@eliseumds",
             "image": "https://images.opencollective.com/eliseu/f4e6dad/avatar.png",
             "monthlyDonation": 500,
-            "totalDonations": 9500,
+            "totalDonations": 10000,
             "source": "opencollective",
             "tier": "backer"
         },
@@ -654,7 +645,7 @@
             "url": "https://www.gavinmogan.com",
             "image": "https://images.opencollective.com/gavinmogan/305e987/avatar.png",
             "monthlyDonation": 500,
-            "totalDonations": 12000,
+            "totalDonations": 12500,
             "source": "opencollective",
             "tier": "backer"
         },
@@ -699,7 +690,7 @@
             "url": null,
             "image": "https://images.opencollective.com/joseph-percy/avatar.png",
             "monthlyDonation": 500,
-            "totalDonations": 12000,
+            "totalDonations": 12500,
             "source": "opencollective",
             "tier": "backer"
         },
@@ -708,7 +699,7 @@
             "url": "https://twitter.com/LJHarb",
             "image": "https://images.opencollective.com/ljharb/b75a3f8/avatar.png",
             "monthlyDonation": 500,
-            "totalDonations": 12000,
+            "totalDonations": 12500,
             "source": "opencollective",
             "tier": "backer"
         },
@@ -929,6 +920,14 @@
             "tier": "backer"
         },
         {
+            "name": "Nicolas Charpentier",
+            "image": "https://avatars.githubusercontent.com/u/7189823?u=f7558a0f6828f45f1082970880aefbeab9596d0b&v=4",
+            "url": "https://medium.com/@charpeni",
+            "monthlyDonation": 500,
+            "source": "github",
+            "tier": "backer"
+        },
+        {
             "name": "David Liu",
             "image": "https://avatars.githubusercontent.com/u/7227589?u=317a5815e90dbb6d1f6bbc494a425de364ee13ea&v=4",
             "url": "https://davidkhala.github.io/",
@@ -1021,7 +1020,7 @@
         {
             "name": "Standard Resume Sponsors",
             "image": "https://avatars.githubusercontent.com/u/65968828?u=059fb65476f5c27fc1a38cb2e6391ad05105fde5&v=4",
-            "url": "https://standardresume.co",
+            "url": "https://standardresume.co/tech",
             "monthlyDonation": 500,
             "source": "github",
             "tier": "backer"
