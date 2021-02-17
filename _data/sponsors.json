@@ -57,6 +57,11 @@
             "tier": "gold-sponsor"
         },
         {
+            "monthlyDonation": 100000,
+            "source": "github",
+            "tier": "gold-sponsor"
+        },
+        {
             "name": "Microsoft FOSS Fund Sponsorships",
             "image": "https://avatars.githubusercontent.com/u/67931232?u=7fddc652a464d7151b97e8f108392af7d54fa3e8&v=4",
             "url": "https://aka.ms/microsoftfossfund",
@@ -95,6 +100,24 @@
         }
     ],
     "bronze": [
+        {
+            "name": "Papersowl",
+            "url": "https://papersowl.com/write-my-essay-please",
+            "image": "https://images.opencollective.com/papersowl2/9ef85ac/logo.png",
+            "monthlyDonation": 20000,
+            "totalDonations": 40000,
+            "source": "opencollective",
+            "tier": "bronze-sponsor"
+        },
+        {
+            "name": "Papersowl",
+            "url": "https://papersowl.com/write-my-essay-please",
+            "image": "https://images.opencollective.com/papersowl2/9ef85ac/logo.png",
+            "monthlyDonation": 20000,
+            "totalDonations": 40000,
+            "source": "opencollective",
+            "tier": "bronze-sponsor"
+        },
         {
             "name": "Writers Per Hour",
             "url": "https://writersperhour.com",
@@ -761,7 +784,7 @@
         },
         {
             "name": "Justin Duke",
-            "image": "https://avatars.githubusercontent.com/u/461046?u=2ad80af3b2638718be7028ea85c0eeaf78c21e74&v=4",
+            "image": "https://avatars.githubusercontent.com/u/461046?u=1f9a13559d572173272118d4bcbab17937178f6e&v=4",
             "url": "arcana.computer",
             "monthlyDonation": 500,
             "source": "github",
@@ -939,6 +962,14 @@
             "name": "James Hay",
             "image": "https://avatars.githubusercontent.com/u/7937480?u=54287fafb0a0c782bc8f68b6635d80e4a0944f74&v=4",
             "url": "https://github.com/flagpoonage",
+            "monthlyDonation": 500,
+            "source": "github",
+            "tier": "backer"
+        },
+        {
+            "name": null,
+            "image": "https://avatars.githubusercontent.com/u/8572152?v=4",
+            "url": "https://github.com/per1234",
             "monthlyDonation": 500,
             "source": "github",
             "tier": "backer"
