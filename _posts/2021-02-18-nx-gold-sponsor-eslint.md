@@ -14,7 +14,7 @@ tags:
     <a href="https://eslint.org/" title="ESLint" target="_blank"><img class="lazyload" width="200" data-src="/assets/img/logo.svg" alt="ESLint" src="/assets/img/logo.svg"></a>
 </p>
 
-We are happy to share that [Nx](https://nx.dev/) has become an ESLint gold sponsor sponsor, donating $1,000 each month for the ongoing maintenance and development of ESLint! Nx is a front-end focused set of tools for working with web applications, with a special focus on monorepo setups.
+We are happy to share that [Nx](https://nx.dev/) has become an ESLint gold sponsor, donating $1,000 each month for the ongoing maintenance and development of ESLint! Nx is a front-end focused set of tools for working with web applications, with a special focus on monorepo setups.
 
 Here's what the folks at Nx had to say about ESLint:
 
