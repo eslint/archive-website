@@ -57,6 +57,9 @@
             "tier": "gold-sponsor"
         },
         {
+            "name": "Substack",
+            "image": "https://avatars.githubusercontent.com/u/53023767?v=4",
+            "url": "https://substack.com/",
             "monthlyDonation": 100000,
             "source": "github",
             "tier": "gold-sponsor"
@@ -229,6 +232,9 @@
             "tier": null
         },
         {
+            "name": "Digital Attitude",
+            "image": "https://avatars.githubusercontent.com/u/27516055?v=4",
+            "url": "https://digitalattitude.com",
             "monthlyDonation": 5000,
             "source": "github",
             "tier": "backer"
@@ -367,11 +373,17 @@
             "tier": "backer"
         },
         {
+            "name": "OpenCraft",
+            "image": "https://avatars.githubusercontent.com/u/7414786?v=4",
+            "url": "https://opencraft.com/",
             "monthlyDonation": 1000,
             "source": "github",
             "tier": "backer"
         },
         {
+            "name": "ILPT GmbH",
+            "image": "https://avatars.githubusercontent.com/u/8994317?v=4",
+            "url": "http://www.ilpt.de",
             "monthlyDonation": 1000,
             "source": "github",
             "tier": "backer"
@@ -1014,6 +1026,9 @@
             "tier": "backer"
         },
         {
+            "name": "Zentered",
+            "image": "https://avatars.githubusercontent.com/u/32449351?v=4",
+            "url": "https://zentered.co",
             "monthlyDonation": 500,
             "source": "github",
             "tier": "backer"
