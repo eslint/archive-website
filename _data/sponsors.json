@@ -1050,6 +1050,14 @@
             "tier": "backer"
         },
         {
+            "name": "Nacht Faust",
+            "image": "https://avatars.githubusercontent.com/u/55499177?u=801972eab54947fe4ad6cd2803b9c3d7c2f2263b&v=4",
+            "url": "https://blackclover.fandom.com/wiki/Nacht_Faust",
+            "monthlyDonation": 500,
+            "source": "github",
+            "tier": "backer"
+        },
+        {
             "name": "Standard Resume Sponsors",
             "image": "https://avatars.githubusercontent.com/u/65968828?u=059fb65476f5c27fc1a38cb2e6391ad05105fde5&v=4",
             "url": "https://standardresume.co/tech",
