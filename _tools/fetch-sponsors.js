@@ -134,10 +134,17 @@ async function fetchGitHubSponsors() {
               sponsor: sponsorEntity {
                 ...on User {
                   name,
-                 login,
-                 avatarUrl,
-                 url,
-                 websiteUrl
+                  login,
+                  avatarUrl,
+                  url,
+                  websiteUrl
+                }
+                ...on Organization {
+                  name,
+                  login,
+                  avatarUrl,
+                  url,
+                  websiteUrl
                 }
               },
               tier {
