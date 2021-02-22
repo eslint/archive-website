@@ -1083,6 +1083,14 @@
             "tier": "backer"
         },
         {
+            "name": "Team-Avalon",
+            "image": "https://avatars.githubusercontent.com/u/78931833?v=4",
+            "url": "https//enterprise.githubsupport.com",
+            "monthlyDonation": 500,
+            "source": "github",
+            "tier": "backer"
+        },
+        {
             "name": "Kyle Smith",
             "url": "https://ksmith.io",
             "image": "https://images.opencollective.com/knksmith57/1b834b2/avatar.png",
