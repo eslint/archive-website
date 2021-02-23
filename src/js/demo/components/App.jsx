@@ -7,6 +7,7 @@ import Crash from "./Crash";
 import Configuration from "./Configuration";
 import Unicode from "../utils/unicode";
 import linterModule from "../node_modules/eslint/lib/linter/linter";
+import espree from "espree";
 
 function getUrlState() {
     try {
@@ -76,7 +77,7 @@ export default class App extends Component {
             urlState || storedState || {
                 options: {
                     parserOptions: {
-                        ecmaVersion: 5,
+                        ecmaVersion: espree.latestEcmaVersion,
                         sourceType: "script",
                         ecmaFeatures: {}
                     },
