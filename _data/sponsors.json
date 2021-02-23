@@ -275,6 +275,15 @@
             "tier": null
         },
         {
+            "name": "Extremely Heavy",
+            "url": "https://xh.io",
+            "image": "https://images.opencollective.com/xh/cec0963/logo.png",
+            "monthlyDonation": 1000,
+            "totalDonations": 1000,
+            "source": "opencollective",
+            "tier": "backer"
+        },
+        {
             "name": "Raider.IO",
             "url": "https://raider.io",
             "image": "https://images.opencollective.com/raiderio_wow/7a380a3/logo.png",
