@@ -1,10 +1,10 @@
 "use strict";
 
 const path = require("path");
-const webpack = require("webpack");
+const NodePolyfillPlugin = require("node-polyfill-webpack-plugin");
 const CleanCSSPlugin = require("less-plugin-clean-css");
 
-/** @type {webpack.Configuration} */
+/** @type {import("webpack").Configuration} */
 module.exports = {
     entry: {
         demo: path.resolve(__dirname, "src/js/demo/index.js"),
@@ -52,15 +52,10 @@ module.exports = {
         ]
     },
     plugins: [
-        new webpack.ProvidePlugin({
-            process: "process/browser"
-        })
+        new NodePolyfillPlugin()
     ],
     resolve: {
         extensions: [".js", ".jsx"],
-        fallback: {
-            path: "path-browserify"
-        },
         mainFields: ["browser", "main", "module"]
     },
     stats: "errors-only"
