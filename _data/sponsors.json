@@ -275,15 +275,6 @@
             "tier": null
         },
         {
-            "name": "Anbefalt Casino",
-            "url": "https://anbefaltcasino.com/",
-            "image": "https://images.opencollective.com/anbefalt-casino/27c2557/logo.png",
-            "monthlyDonation": 1000,
-            "totalDonations": 2000,
-            "source": "opencollective",
-            "tier": "backer"
-        },
-        {
             "name": "Extremely Heavy",
             "url": "https://xh.io",
             "image": "https://images.opencollective.com/xh/cec0963/logo.png",
