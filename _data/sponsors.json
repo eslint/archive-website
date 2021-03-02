@@ -104,29 +104,11 @@
             "tier": "bronze-sponsor"
         },
         {
-            "name": "Papersowl",
-            "url": "https://papersowl.com/pay-for-research-paper",
-            "image": "https://images.opencollective.com/papersowl2/9ef85ac/logo.png",
-            "monthlyDonation": 20000,
-            "totalDonations": 60000,
-            "source": "opencollective",
-            "tier": "bronze-sponsor"
-        },
-        {
             "name": "Writers Per Hour",
             "url": "https://writersperhour.com",
             "image": "https://images.opencollective.com/writersperhour/5787d4b/logo.png",
             "monthlyDonation": 20000,
             "totalDonations": 180000,
-            "source": "opencollective",
-            "tier": "bronze-sponsor"
-        },
-        {
-            "name": "March 2021 calendar",
-            "url": "https://www.betacalendars.com/march-calendar.html",
-            "image": "https://images.opencollective.com/betacalendars/9334b33/logo.png",
-            "monthlyDonation": 20000,
-            "totalDonations": 120000,
             "source": "opencollective",
             "tier": "bronze-sponsor"
         },
