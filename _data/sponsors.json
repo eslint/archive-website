@@ -405,6 +405,15 @@
             "tier": "backer"
         },
         {
+            "name": "Tripwire, Inc.",
+            "url": "https://tripwire.com",
+            "image": "https://images.opencollective.com/tripwire/7599e30/logo.png",
+            "monthlyDonation": 500,
+            "totalDonations": 500,
+            "source": "opencollective",
+            "tier": "backer"
+        },
+        {
             "name": "Sebastian Silbermann",
             "url": "https://solverfox.dev",
             "image": "https://images.opencollective.com/eps1lon/4200608/avatar.png",
