@@ -196,6 +196,15 @@
     ],
     "backers": [
         {
+            "name": "Yannick Croissant",
+            "url": "https://yannick.cr",
+            "image": "https://images.opencollective.com/yannickcr/765f06f/avatar.png",
+            "monthlyDonation": 10000,
+            "totalDonations": 210000,
+            "source": "opencollective",
+            "tier": "backer"
+        },
+        {
             "name": "Principal Financial Group",
             "url": "https://www.principal.com/about-us",
             "image": "https://images.opencollective.com/principal/431e690/logo.png",
