@@ -95,6 +95,15 @@
     ],
     "bronze": [
         {
+            "name": "Nuevos Casinos",
+            "url": "https://www.nuevoscasinos.com",
+            "image": "https://images.opencollective.com/nuevos-casinos/047055c/logo.png",
+            "monthlyDonation": 20000,
+            "totalDonations": 20000,
+            "source": "opencollective",
+            "tier": "bronze-sponsor"
+        },
+        {
             "name": "May 2021 Calendar",
             "url": "https://www.123calendars.com/may-calendar.html",
             "image": "https://images.opencollective.com/may-2021-calendar/2565c23/logo.png",
