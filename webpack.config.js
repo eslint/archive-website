@@ -1,8 +1,10 @@
 "use strict";
 
 const path = require("path");
+const NodePolyfillPlugin = require("node-polyfill-webpack-plugin");
 const CleanCSSPlugin = require("less-plugin-clean-css");
 
+/** @type {import("webpack").Configuration} */
 module.exports = {
     entry: {
         demo: path.resolve(__dirname, "src/js/demo/index.js"),
@@ -49,6 +51,9 @@ module.exports = {
             }
         ]
     },
+    plugins: [
+        new NodePolyfillPlugin()
+    ],
     resolve: {
         extensions: [".js", ".jsx"],
         mainFields: ["browser", "main", "module"]
