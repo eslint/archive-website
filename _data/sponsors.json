@@ -370,6 +370,14 @@
             "tier": "backer"
         },
         {
+            "name": "Kamal Mukkamala",
+            "image": "https://avatars.githubusercontent.com/u/12810203?v=4",
+            "url": "https://kamalnrf.com",
+            "monthlyDonation": 1000,
+            "source": "github",
+            "tier": "backer"
+        },
+        {
             "name": "JingAn Chen",
             "image": "https://avatars.githubusercontent.com/u/20711476?u=50dd3eee96b1fe353e626849d1c031d0bbcca255&v=4",
             "url": "https://www.linkedin.com/in/jingan-chen-68835b61",
@@ -972,14 +980,6 @@
             "name": "Carlos Rufo",
             "image": "https://avatars.githubusercontent.com/u/9881700?u=c92e4a0ccc0bff241e50582bce914b179b6d89b6&v=4",
             "url": "https://github.com/swcarlosrj",
-            "monthlyDonation": 500,
-            "source": "github",
-            "tier": "backer"
-        },
-        {
-            "name": "Kamal Mukkamala",
-            "image": "https://avatars.githubusercontent.com/u/12810203?v=4",
-            "url": "https://kamalnrf.com",
             "monthlyDonation": 500,
             "source": "github",
             "tier": "backer"
