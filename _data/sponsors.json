@@ -858,6 +858,14 @@
             "tier": "backer"
         },
         {
+            "name": "Frédéric Harper",
+            "image": "https://avatars.githubusercontent.com/u/1170989?u=763b5b04f6ac70447e0a76c0f0830e5e9aa8e6a3&v=4",
+            "url": "https://fred.dev",
+            "monthlyDonation": 500,
+            "source": "github",
+            "tier": "backer"
+        },
+        {
             "name": "Jonny Burger",
             "image": "https://avatars.githubusercontent.com/u/1629785?u=12eb94da6070d00fc924761ce06e3a428d01b7e9&v=4",
             "url": "https://jonny.io",
