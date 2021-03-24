@@ -1025,6 +1025,14 @@
             "tier": "backer"
         },
         {
+            "name": "The GraphQL Guide",
+            "image": "https://avatars.githubusercontent.com/u/23441982?v=4",
+            "url": "https://graphql.guide",
+            "monthlyDonation": 500,
+            "source": "github",
+            "tier": "backer"
+        },
+        {
             "name": "Oliver Sieweke",
             "image": "https://avatars.githubusercontent.com/u/30631513?u=fbbb709bd6feec2525869ed071b241d52ff87148&v=4",
             "url": "www.oliversieweke.com",
