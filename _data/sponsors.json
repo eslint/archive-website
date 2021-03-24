@@ -386,6 +386,15 @@
             "tier": "backer"
         },
         {
+            "name": "GoMage",
+            "url": "https://www.gomage.com/",
+            "image": "https://images.opencollective.com/gomage/e0a6e78/logo.png",
+            "monthlyDonation": 500,
+            "totalDonations": 500,
+            "source": "opencollective",
+            "tier": "backer"
+        },
+        {
             "name": "Tripwire, Inc.",
             "url": "https://tripwire.com",
             "image": "https://images.opencollective.com/tripwire/7599e30/logo.png",
