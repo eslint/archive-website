@@ -239,6 +239,15 @@
             "tier": null
         },
         {
+            "name": "Balsa",
+            "url": "https://balsa.com",
+            "image": "https://images.opencollective.com/balsa/77de498/logo.png",
+            "monthlyDonation": 1000,
+            "totalDonations": 1000,
+            "source": "opencollective",
+            "tier": "backer"
+        },
+        {
             "name": "Extremely Heavy",
             "url": "https://xh.io",
             "image": "https://images.opencollective.com/xh/cec0963/logo.png",
