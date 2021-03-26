@@ -42,6 +42,13 @@ function doTryCatch() {
         var f = build;
     }
 }
+
+function doFor() {
+    for (var x = 1; x < 10; x++) {
+        var y = f(x);
+    }
+    console.log(y);
+}
 ```
 
 Examples of **correct** code for this rule:
@@ -77,6 +84,13 @@ function doTryCatch() {
         build = 1;
     } catch (e) {
         f = build;
+    }
+}
+
+function doFor() {
+    for (var x = 1; x < 10; x++) {
+        var y = f(x);
+        console.log(y);
     }
 }
 ```

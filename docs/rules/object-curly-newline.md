@@ -6,7 +6,7 @@ rule_type: layout
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
-# enforce consistent line breaks inside braces (object-curly-newline)
+# enforce consistent line breaks after opening and before closing braces (object-curly-newline)
 
 (fixable) The `--fix` option on the [command line](../user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
 
@@ -14,14 +14,14 @@ A number of style guides require or disallow line breaks inside of object braces
 
 ## Rule Details
 
-This rule enforces consistent line breaks inside braces of object literals or destructuring assignments.
+This rule requires or disallows a line break between `{` and its following token, and between `}` and its preceding token of object literals or destructuring assignments.
 
 ## Options
 
 This rule has either a string option:
 
-* `"always"` requires line breaks inside braces
-* `"never"` disallows line breaks inside braces
+* `"always"` requires line breaks after opening and before closing braces
+* `"never"` disallows line breaks after opening and before closing braces
 
 Or an object option:
 
@@ -548,7 +548,7 @@ export { foo as f, bar } from 'foo-bar';
 
 ## When Not To Use It
 
-If you don't want to enforce consistent line breaks inside braces, then it's safe to disable this rule.
+If you don't want to enforce consistent line breaks after opening and before closing braces, then it's safe to disable this rule.
 
 ## Related Rules
 
