@@ -395,6 +395,15 @@
             "tier": "backer"
         },
         {
+            "name": "Morgane Dubus",
+            "url": null,
+            "image": "https://images.opencollective.com/morgane-dubus/avatar.png",
+            "monthlyDonation": 500,
+            "totalDonations": 500,
+            "source": "opencollective",
+            "tier": "backer"
+        },
+        {
             "name": "GoMage",
             "url": "https://www.gomage.com/",
             "image": "https://images.opencollective.com/gomage/e0a6e78/logo.png",
