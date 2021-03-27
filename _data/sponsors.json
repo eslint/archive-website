@@ -395,6 +395,14 @@
             "tier": "backer"
         },
         {
+            "name": "cvermand",
+            "image": "https://avatars.githubusercontent.com/u/33010418?u=92fcf1932c437d7d7909c0df3552c5efad5467d9&v=4",
+            "url": "http://meilisearch.com/",
+            "monthlyDonation": 1000,
+            "source": "github",
+            "tier": "backer"
+        },
+        {
             "name": "Morgane Dubus",
             "url": null,
             "image": "https://images.opencollective.com/morgane-dubus/avatar.png",
