@@ -153,7 +153,7 @@
             "url": "https://discordapp.com",
             "image": "https://images.opencollective.com/discordapp/7e3d9a9/logo.png",
             "monthlyDonation": 20000,
-            "totalDonations": 460000,
+            "totalDonations": 480000,
             "source": "opencollective",
             "tier": "bronze-sponsor"
         },
@@ -219,6 +219,15 @@
             "monthlyDonation": 2500,
             "source": "github",
             "tier": "backer"
+        },
+        {
+            "name": "Roman Nazarenko",
+            "url": null,
+            "image": "https://images.opencollective.com/roman-nazarenko/avatar.png",
+            "monthlyDonation": 2000,
+            "totalDonations": 2000,
+            "source": "opencollective",
+            "tier": null
         },
         {
             "name": "incognito",
@@ -677,7 +686,7 @@
             "url": "https://korzun.com",
             "image": "https://images.opencollective.com/simon-korzun/cbdefdd/avatar.png",
             "monthlyDonation": 500,
-            "totalDonations": 13000,
+            "totalDonations": 13500,
             "source": "opencollective",
             "tier": "backer"
         },
@@ -1162,7 +1171,7 @@
             "url": "https://kostasbariotis.com",
             "image": "https://images.opencollective.com/konmpar/6f12288/avatar.png",
             "monthlyDonation": 200,
-            "totalDonations": 1400,
+            "totalDonations": 1600,
             "source": "opencollective",
             "tier": null
         },
