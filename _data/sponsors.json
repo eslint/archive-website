@@ -25,7 +25,7 @@
             "url": "https://google.com/chrome",
             "image": "https://images.opencollective.com/chrome/dc55bd4/logo.png",
             "monthlyDonation": 100000,
-            "totalDonations": 500000,
+            "totalDonations": 600000,
             "source": "opencollective",
             "tier": "gold-sponsor"
         },
@@ -306,7 +306,7 @@
             "url": "https://n8n.io",
             "image": "https://images.opencollective.com/n8n/dca2f0c/logo.png",
             "monthlyDonation": 1000,
-            "totalDonations": 15000,
+            "totalDonations": 16000,
             "source": "opencollective",
             "tier": "backer"
         },
@@ -324,7 +324,7 @@
             "url": "https://moxio.com",
             "image": "https://images.opencollective.com/moxio/9fa53c1/logo.png",
             "monthlyDonation": 1000,
-            "totalDonations": 37000,
+            "totalDonations": 38000,
             "source": "opencollective",
             "tier": "backer"
         },
@@ -333,7 +333,7 @@
             "url": null,
             "image": "https://images.opencollective.com/kevin-partington/54f2124/avatar.png",
             "monthlyDonation": 1000,
-            "totalDonations": 22000,
+            "totalDonations": 23000,
             "source": "opencollective",
             "tier": "backer"
         },
@@ -524,7 +524,7 @@
             "url": "https://www.sayyup.nl",
             "image": "https://images.opencollective.com/sayyup/4c61ffd/avatar.png",
             "monthlyDonation": 500,
-            "totalDonations": 3500,
+            "totalDonations": 4000,
             "source": "opencollective",
             "tier": "backer"
         },
@@ -596,7 +596,7 @@
             "url": null,
             "image": "https://images.opencollective.com/james-sherwood-jones/avatar.png",
             "monthlyDonation": 500,
-            "totalDonations": 10500,
+            "totalDonations": 11000,
             "source": "opencollective",
             "tier": "backer"
         },
