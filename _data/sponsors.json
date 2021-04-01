@@ -126,7 +126,7 @@
             "url": "https://mixpanel.com",
             "image": "https://images.opencollective.com/mixpanel/cd682f7/logo.png",
             "monthlyDonation": 20000,
-            "totalDonations": 380000,
+            "totalDonations": 400000,
             "source": "opencollective",
             "tier": "bronze-sponsor"
         },
@@ -135,7 +135,7 @@
             "url": "https://www.vpsserver.com",
             "image": "https://images.opencollective.com/vpsservercom/logo.png",
             "monthlyDonation": 20000,
-            "totalDonations": 400000,
+            "totalDonations": 420000,
             "source": "opencollective",
             "tier": "bronze-sponsor"
         },
@@ -587,7 +587,7 @@
             "url": "https://matterapp.com",
             "image": "https://images.opencollective.com/matter_hq/ac0a719/logo.png",
             "monthlyDonation": 500,
-            "totalDonations": 10000,
+            "totalDonations": 10500,
             "source": "opencollective",
             "tier": "backer"
         },
@@ -614,7 +614,7 @@
             "url": null,
             "image": "https://images.opencollective.com/martin-desrumaux/avatar.png",
             "monthlyDonation": 500,
-            "totalDonations": 11000,
+            "totalDonations": 11500,
             "source": "opencollective",
             "tier": "backer"
         },
@@ -704,7 +704,7 @@
             "url": "https://pymaster.tw",
             "image": "https://images.opencollective.com/pc035860/8fed8ae/avatar.png",
             "monthlyDonation": 500,
-            "totalDonations": 13000,
+            "totalDonations": 13500,
             "source": "opencollective",
             "tier": "backer"
         },
@@ -1144,7 +1144,7 @@
             "url": "https://ksmith.io",
             "image": "https://images.opencollective.com/knksmith57/1b834b2/avatar.png",
             "monthlyDonation": 300,
-            "totalDonations": 6500,
+            "totalDonations": 6800,
             "source": "opencollective",
             "tier": "backer"
         },
