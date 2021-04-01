@@ -43,7 +43,7 @@
             "url": "https://www.salesforce.com",
             "image": "https://images.opencollective.com/salesforce/ca8f997/logo.png",
             "monthlyDonation": 100000,
-            "totalDonations": 3533100,
+            "totalDonations": 3633100,
             "source": "opencollective",
             "tier": "gold-sponsor"
         },
@@ -219,15 +219,6 @@
             "monthlyDonation": 2500,
             "source": "github",
             "tier": "backer"
-        },
-        {
-            "name": "Roman Nazarenko",
-            "url": null,
-            "image": "https://images.opencollective.com/roman-nazarenko/avatar.png",
-            "monthlyDonation": 2000,
-            "totalDonations": 2000,
-            "source": "opencollective",
-            "tier": null
         },
         {
             "name": "incognito",
