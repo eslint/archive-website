@@ -1084,6 +1084,14 @@
             "tier": "backer"
         },
         {
+            "name": "Jonathan Pollock",
+            "image": "https://avatars.githubusercontent.com/u/29420046?u=4abd4069b4fef966d4ce3f6fbff4f14f2bc6080f&v=4",
+            "url": "https://www.darkrushphotography.com/",
+            "monthlyDonation": 500,
+            "source": "github",
+            "tier": "backer"
+        },
+        {
             "name": "Oliver Sieweke",
             "image": "https://avatars.githubusercontent.com/u/30631513?u=fbbb709bd6feec2525869ed071b241d52ff87148&v=4",
             "url": "www.oliversieweke.com",
