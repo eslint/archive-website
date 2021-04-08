@@ -204,6 +204,15 @@
             "tier": "backer"
         },
         {
+            "name": "Balsa",
+            "url": "https://balsa.com",
+            "image": "https://images.opencollective.com/balsa/77de498/logo.png",
+            "monthlyDonation": 2500,
+            "totalDonations": 1000,
+            "source": "opencollective",
+            "tier": "backer"
+        },
+        {
             "name": "Neovation Learning Solutions",
             "url": "https://www.neovation.com",
             "image": "https://images.opencollective.com/neovationcorp/30d1cf7/logo.png",
@@ -237,15 +246,6 @@
             "totalDonations": 2400,
             "source": "opencollective",
             "tier": null
-        },
-        {
-            "name": "Balsa",
-            "url": "https://balsa.com",
-            "image": "https://images.opencollective.com/balsa/77de498/logo.png",
-            "monthlyDonation": 1000,
-            "totalDonations": 1000,
-            "source": "opencollective",
-            "tier": "backer"
         },
         {
             "name": "Extremely Heavy",
