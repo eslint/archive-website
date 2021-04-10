@@ -538,6 +538,15 @@
             "tier": "backer"
         },
         {
+            "name": "Francesc Rosas",
+            "url": null,
+            "image": "https://images.opencollective.com/francescrosas/avatar.png",
+            "monthlyDonation": 500,
+            "totalDonations": 100,
+            "source": "opencollective",
+            "tier": "backer"
+        },
+        {
             "name": "David Johnston",
             "url": "https://blacksheepcode.com",
             "image": "https://images.opencollective.com/blacksheepcode/976d69a/avatar.png",
@@ -1207,15 +1216,6 @@
             "image": "https://images.opencollective.com/toptalo/237a912/avatar.png",
             "monthlyDonation": 100,
             "totalDonations": 800,
-            "source": "opencollective",
-            "tier": null
-        },
-        {
-            "name": "Francesc Rosas",
-            "url": null,
-            "image": "https://images.opencollective.com/francescrosas/avatar.png",
-            "monthlyDonation": 100,
-            "totalDonations": 100,
             "source": "opencollective",
             "tier": null
         },
