@@ -55,65 +55,111 @@
     margin: 2.5rem 0 2.5rem 1.5rem;
 }
 
+.jumbotron .eslint-ad-float {
+    margin: 0;
+}
+
 #carbonads * {
   margin: initial;
   padding: initial;
 }
-#carbonads {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
-    Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', Helvetica, Arial,
-    sans-serif;
-}
 
 #carbonads {
-  display: flex;
-  max-width: 330px;
+  display: block;
+  margin: 0 24px;
+  padding: .6em;
+
+  font-size: 16px;
+  line-height: 1.35;
+  overflow: hidden;
+  border-radius: 4px;
   background-color: hsl(0, 0%, 98%);
   box-shadow: 0 1px 4px 1px hsla(0, 0%, 0%, 0.1);
-  z-index: 100;
 }
+
+.jumbotron #carbonads {
+  border: solid 1px hsla(250, 20%, 50%, .6);
+  background-color: hsla(0, 0%, 70%, .15);
+}
+
 #carbonads a {
+  font-weight: 500;
   color: inherit;
-  text-decoration: none;
 }
+
 #carbonads a:hover {
+  text-decoration: none;
   color: inherit;
 }
+
+.jumbotron #carbonads a {
+  color: #eee;
+}
+
+.jumbotron #carbonads a:hover {
+  color: #ccc;
+}
+
 #carbonads span {
-  position: relative;
   display: block;
+  position: relative;
+
   overflow: hidden;
 }
+
 #carbonads .carbon-wrap {
   display: flex;
+
+  flex-direction: column;
+  max-width: 130px;
 }
-#carbonads .carbon-img {
-  display: block;
-  margin: 0;
-  line-height: 1;
-}
+
 #carbonads .carbon-img img {
   display: block;
 }
+
 #carbonads .carbon-text {
-  font-size: 13px;
-  padding: 10px;
-  margin-bottom: 16px;
-  line-height: 1.5;
+  margin-top: 10px;
+
+  font-size: 14px;
   text-align: left;
 }
+
 #carbonads .carbon-poweredby {
   display: block;
-  padding: 6px 8px;
-  background: #f1f1f2;
-  text-align: center;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  font-weight: 600;
-  font-size: 8px;
+  margin-top: 10px;
+  font-size: 10px;
   line-height: 1;
-  border-top-left-radius: 3px;
-  position: absolute;
-  bottom: 0;
-  right: 0;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+@media only screen and (min-width: 320px) and (max-width: 759px) {
+  #carbonads {
+    margin-top: 0;
+
+    font-size: 12px;
+  }
+
+  #carbonads .carbon-wrap {
+    display: flex;
+
+    flex-direction: row;
+    max-width: 330px;
+  }
+
+  #carbonads .carbon-text {
+    margin: 0 0 14px 10px;
+
+    font-size: 14px;
+    text-align: left;
+  }
+
+  #carbonads .carbon-poweredby {
+    position: absolute;
+    bottom: 0;
+    left: 142px;
+
+    font-size: 8px;
+  }
 }
