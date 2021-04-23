@@ -150,7 +150,7 @@
         },
         {
             "name": "Discord",
-            "url": "https://discordapp.com",
+            "url": "https://discord.com",
             "image": "https://images.opencollective.com/discordapp/7e3d9a9/logo.png",
             "monthlyDonation": 20000,
             "totalDonations": 480000,
@@ -411,18 +411,18 @@
             "tier": "backer"
         },
         {
-            "name": "Morgane Dubus",
+            "name": "Arnaud Drain",
             "url": null,
-            "image": "https://images.opencollective.com/morgane-dubus/avatar.png",
+            "image": "https://images.opencollective.com/arnaud-drain/d7165f2/avatar.png",
             "monthlyDonation": 500,
             "totalDonations": 500,
             "source": "opencollective",
             "tier": "backer"
         },
         {
-            "name": "GoMage",
-            "url": "https://www.gomage.com/",
-            "image": "https://images.opencollective.com/gomage/e0a6e78/logo.png",
+            "name": "Morgane Dubus",
+            "url": null,
+            "image": "https://images.opencollective.com/morgane-dubus/avatar.png",
             "monthlyDonation": 500,
             "totalDonations": 500,
             "source": "opencollective",
@@ -917,6 +917,14 @@
             "tier": "backer"
         },
         {
+            "name": "Andrei Gec",
+            "image": "https://avatars.githubusercontent.com/u/1860848?v=4",
+            "url": "gec.dev",
+            "monthlyDonation": 500,
+            "source": "github",
+            "tier": "backer"
+        },
+        {
             "name": "Logan McCamon",
             "image": "https://avatars.githubusercontent.com/u/2434012?v=4",
             "url": "https://github.com/loganom",
@@ -1101,7 +1109,7 @@
             "tier": "backer"
         },
         {
-            "name": "Milan Pollock",
+            "name": "Jonathan Milan Pollock, MS",
             "image": "https://avatars.githubusercontent.com/u/29420046?u=4abd4069b4fef966d4ce3f6fbff4f14f2bc6080f&v=4",
             "url": "https://www.darkrushphotography.com/",
             "monthlyDonation": 500,
@@ -1197,15 +1205,6 @@
             "image": "https://images.opencollective.com/konmpar/6f12288/avatar.png",
             "monthlyDonation": 200,
             "totalDonations": 1600,
-            "source": "opencollective",
-            "tier": null
-        },
-        {
-            "name": "Anton Alexandrenok",
-            "url": null,
-            "image": "https://images.opencollective.com/spyke/c561172/avatar.png",
-            "monthlyDonation": 200,
-            "totalDonations": 3600,
             "source": "opencollective",
             "tier": null
         },
