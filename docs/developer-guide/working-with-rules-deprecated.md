@@ -1,12 +1,14 @@
 ---
-title: Working with Rules
+title: Working with Rules (Deprecated)
 layout: doc
 edit_link: https://github.com/eslint/eslint/edit/master/docs/developer-guide/working-with-rules-deprecated.md
 
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
-# Working with Rules
+# Working with Rules (Deprecated)
+
+**Note:** This page covers the deprecated rule format for ESLint <= 2.13.1. [This is the most recent rule format](./working-with-rules).
 
 Each rule in ESLint has two files named with its identifier (for example, `no-extra-semi`).
 

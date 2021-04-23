@@ -47,6 +47,8 @@ switch (val = foo(), val) {}
 while (val = foo(), val < 42);
 
 with (doSomething(), val) {}
+
+const foo = (val) => (console.log('bar'), val);
 ```
 
 Examples of **correct** code for this rule:
@@ -69,6 +71,8 @@ switch ((val = foo(), val)) {}
 while ((val = foo(), val < 42));
 
 with ((doSomething(), val)) {}
+
+const foo = (val) => ((console.log('bar'), val));
 ```
 
 ## Options
@@ -99,6 +103,8 @@ switch ((val = foo(), val)) {}
 while ((val = foo(), val < 42));
 
 with ((doSomething(), val)) {}
+
+const foo = (val) => ((console.log('bar'), val));
 ```
 
 Examples of **correct** code for this rule with the `{ "allowInParentheses": false }` option:
