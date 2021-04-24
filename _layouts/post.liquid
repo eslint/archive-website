@@ -20,18 +20,22 @@
         </main>
       </div>
       <div class="col-md-4 hidden-xs hidden-sm">
+        <div class="eslint-ad-float-left">
         {%include ad %}
-        <h2>Recent Posts</h2>
-        <ul class="posts">
-          {% for post in collections.posts limit: 25 %}
-            {% if post.url != page.url %}
-              <li>
-                <a href="{{ post.url | replace: '.html', '' }}">{{ post.data.title }}</a><br>
-                <span class="date">{{ post.date | dateFormat: "d LLLL yyyy" }}</span>
-              </li>
-            {% endif %}
-          {% endfor %}
-        </ul>
+        </div>
+        <div>
+          <h2>Recent Posts</h2>
+          <ul class="posts">
+            {% for post in collections.posts limit: 25 %}
+              {% if post.url != page.url %}
+                <li>
+                  <a href="{{ post.url | replace: '.html', '' }}">{{ post.data.title }}</a><br>
+                  <span class="date">{{ post.date | dateFormat: "d LLLL yyyy" }}</span>
+                </li>
+              {% endif %}
+            {% endfor %}
+          </ul>
+        </div>
       </div>
     </div>
   </div>
