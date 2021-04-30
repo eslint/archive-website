@@ -274,15 +274,6 @@
             "tier": "backer"
         },
         {
-            "name": "Squeeble",
-            "url": "https://www.squeeble.ink",
-            "image": "https://images.opencollective.com/squeeble/e2c1bf2/logo.png",
-            "monthlyDonation": 1000,
-            "totalDonations": 4000,
-            "source": "opencollective",
-            "tier": "backer"
-        },
-        {
             "name": "SiMedia",
             "url": "https://www.simedia.com/",
             "image": "https://images.opencollective.com/simedia/848efc9/logo.png",
