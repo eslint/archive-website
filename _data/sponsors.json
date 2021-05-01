@@ -153,7 +153,7 @@
             "url": "https://discord.com",
             "image": "https://images.opencollective.com/discordapp/7e3d9a9/logo.png",
             "monthlyDonation": 20000,
-            "totalDonations": 480000,
+            "totalDonations": 500000,
             "source": "opencollective",
             "tier": "bronze-sponsor"
         },
@@ -640,7 +640,7 @@
             "url": "https://pushred.co",
             "image": "https://images.opencollective.com/pushred/506ad8d/avatar.png",
             "monthlyDonation": 500,
-            "totalDonations": 13000,
+            "totalDonations": 13500,
             "source": "opencollective",
             "tier": "backer"
         },
@@ -694,7 +694,7 @@
             "url": "https://korzun.com",
             "image": "https://images.opencollective.com/simon-korzun/cbdefdd/avatar.png",
             "monthlyDonation": 500,
-            "totalDonations": 13500,
+            "totalDonations": 14000,
             "source": "opencollective",
             "tier": "backer"
         },
@@ -775,7 +775,7 @@
             "url": "https://twitter.com/LJHarb",
             "image": "https://images.opencollective.com/ljharb/b75a3f8/avatar.png",
             "monthlyDonation": 500,
-            "totalDonations": 13500,
+            "totalDonations": 14000,
             "source": "opencollective",
             "tier": "backer"
         },
@@ -1211,7 +1211,7 @@
             "url": "https://kostasbariotis.com",
             "image": "https://images.opencollective.com/konmpar/6f12288/avatar.png",
             "monthlyDonation": 200,
-            "totalDonations": 1600,
+            "totalDonations": 1800,
             "source": "opencollective",
             "tier": null
         },
