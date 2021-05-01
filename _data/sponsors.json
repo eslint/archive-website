@@ -5,7 +5,7 @@
             "url": "https://automattic.com",
             "image": "https://images.opencollective.com/photomatt/d0ef3e1/logo.png",
             "monthlyDonation": 200000,
-            "totalDonations": 1200000,
+            "totalDonations": 1400000,
             "source": "opencollective",
             "tier": "platinum-sponsor"
         }
@@ -108,7 +108,7 @@
             "url": "https://www.crosswordsolver.org/anagram-solver/",
             "image": "https://images.opencollective.com/anagram-solver/2666271/logo.png",
             "monthlyDonation": 20000,
-            "totalDonations": 260000,
+            "totalDonations": 280000,
             "source": "opencollective",
             "tier": "bronze-sponsor"
         },
@@ -469,7 +469,7 @@
             "url": null,
             "image": "https://images.opencollective.com/ayush000/avatar.png",
             "monthlyDonation": 500,
-            "totalDonations": 2000,
+            "totalDonations": 2500,
             "source": "opencollective",
             "tier": "backer"
         },
@@ -496,7 +496,7 @@
             "url": null,
             "image": "https://images.opencollective.com/lex-webb/e94811a/avatar.png",
             "monthlyDonation": 500,
-            "totalDonations": 3500,
+            "totalDonations": 4000,
             "source": "opencollective",
             "tier": "backer"
         },
@@ -505,7 +505,7 @@
             "url": null,
             "image": "https://images.opencollective.com/brianpeiris/68fdb65/avatar.png",
             "monthlyDonation": 500,
-            "totalDonations": 3500,
+            "totalDonations": 4000,
             "source": "opencollective",
             "tier": "backer"
         },
@@ -586,7 +586,7 @@
             "url": "https://wwjcdo.com",
             "image": "https://images.opencollective.com/jmcombs/22a314a/avatar.png",
             "monthlyDonation": 500,
-            "totalDonations": 8500,
+            "totalDonations": 9000,
             "source": "opencollective",
             "tier": "backer"
         },
@@ -676,7 +676,7 @@
             "url": "https://www.maisonette.com",
             "image": "https://images.opencollective.com/maisonetteworld/c170bfc/logo.png",
             "monthlyDonation": 500,
-            "totalDonations": 13500,
+            "totalDonations": 14000,
             "source": "opencollective",
             "tier": "backer"
         },
@@ -1221,15 +1221,6 @@
             "image": "https://images.opencollective.com/tillsanders/1c9743b/avatar.png",
             "monthlyDonation": 100,
             "totalDonations": 900,
-            "source": "opencollective",
-            "tier": null
-        },
-        {
-            "name": "Виктор Виктор",
-            "url": null,
-            "image": "https://images.opencollective.com/toptalo/237a912/avatar.png",
-            "monthlyDonation": 100,
-            "totalDonations": 800,
             "source": "opencollective",
             "tier": null
         },
