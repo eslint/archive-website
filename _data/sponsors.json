@@ -787,6 +787,14 @@
             "tier": "backer"
         },
         {
+            "name": "Marcel Eichner",
+            "image": "https://avatars.githubusercontent.com/u/73654?u=cad7f6e133b38d6825e04625940d565cd47a4e32&v=4",
+            "url": "http://www.marceleichner.de",
+            "monthlyDonation": 500,
+            "source": "github",
+            "tier": "backer"
+        },
+        {
             "name": "Tsuyoshi Tokuda",
             "image": "https://avatars.githubusercontent.com/u/108762?v=4",
             "url": "https://dev.to/tokuda109",
