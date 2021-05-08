@@ -155,6 +155,12 @@
     ],
     "reviewers": [
         {
+            "username": "mysticatea",
+            "name": "Toru Nagashima",
+            "website": "",
+            "avatar_url": "https://avatars.githubusercontent.com/u/1937871?v=4"
+        },
+        {
             "username": "aladdin-add",
             "name": "薛定谔的猫",
             "website": "",
