@@ -939,6 +939,14 @@
             "tier": "backer"
         },
         {
+            "name": "Maarten Van Hoof",
+            "image": "https://avatars.githubusercontent.com/u/2543633?u=b4bd36605dd71a3213acdb5d9d2ff27216d9c7a4&v=4",
+            "url": "mrtnvh.com",
+            "monthlyDonation": 500,
+            "source": "github",
+            "tier": "backer"
+        },
+        {
             "name": "Andrew LeTourneau",
             "image": "https://avatars.githubusercontent.com/u/2807807?v=4",
             "url": "https://andyletourneau.com",
@@ -1142,6 +1150,14 @@
             "name": "Zentered",
             "image": "https://avatars.githubusercontent.com/u/32449351?v=4",
             "url": "https://zentered.co",
+            "monthlyDonation": 500,
+            "source": "github",
+            "tier": "backer"
+        },
+        {
+            "name": "Jonas Wanner",
+            "image": "https://avatars.githubusercontent.com/u/38656104?u=a4130fab0577a0a2eaa5d667114ccd2e7207aeb4&v=4",
+            "url": "https://github.com/jwanner83",
             "monthlyDonation": 500,
             "source": "github",
             "tier": "backer"
