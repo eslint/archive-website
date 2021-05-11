@@ -169,6 +169,15 @@
     ],
     "backers": [
         {
+            "name": "Drake Costa",
+            "url": null,
+            "image": "https://images.opencollective.com/drake-costa/avatar.png",
+            "monthlyDonation": 10000,
+            "totalDonations": 10000,
+            "source": "opencollective",
+            "tier": null
+        },
+        {
             "name": "Yannick Croissant",
             "url": "https://yannick.cr",
             "image": "https://images.opencollective.com/yannickcr/765f06f/avatar.png",
