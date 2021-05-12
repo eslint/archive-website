@@ -844,6 +844,14 @@
             "tier": "backer"
         },
         {
+            "name": "Forrest Desjardins",
+            "image": "https://avatars.githubusercontent.com/u/502491?u=1658efb692d4da77a8f68251b9dd8d7a3bdf7aab&v=4",
+            "url": "https://github.com/fdesjardins",
+            "monthlyDonation": 500,
+            "source": "github",
+            "tier": "backer"
+        },
+        {
             "name": "Loëck Vézien",
             "image": "https://avatars.githubusercontent.com/u/582703?u=a831045fcea633942aee6996b982c27b20e35e2d&v=4",
             "url": "https://loeck.me/",
