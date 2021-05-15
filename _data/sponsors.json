@@ -402,6 +402,14 @@
             "tier": "backer"
         },
         {
+            "name": "ProjectDiscovery",
+            "image": "https://avatars.githubusercontent.com/u/50994705?v=4",
+            "url": "https://projectdiscovery.io",
+            "monthlyDonation": 1000,
+            "source": "github",
+            "tier": "backer"
+        },
+        {
             "name": "Spaceship",
             "image": "https://avatars.githubusercontent.com/u/58706594?v=4",
             "url": "https://spaceship.run",
