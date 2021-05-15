@@ -48,14 +48,6 @@
             "tier": "gold-sponsor"
         },
         {
-            "name": "Microsoft",
-            "image": "https://avatars.githubusercontent.com/u/6154722?v=4",
-            "url": "https://opensource.microsoft.com",
-            "monthlyDonation": 100000,
-            "source": "github",
-            "tier": "gold-sponsor"
-        },
-        {
             "name": "Substack",
             "image": "https://avatars.githubusercontent.com/u/53023767?v=4",
             "url": "https://substack.com/",
