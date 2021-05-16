@@ -78,15 +78,6 @@
     ],
     "bronze": [
         {
-            "name": "Buy.Fineproxy.Org",
-            "url": "https://buy.fineproxy.org/eng/",
-            "image": "https://images.opencollective.com/buy-fineproxy-org/b282e39/logo.png",
-            "monthlyDonation": 20000,
-            "totalDonations": 180000,
-            "source": "opencollective",
-            "tier": "bronze-sponsor"
-        },
-        {
             "name": "Anagram Solver",
             "url": "https://www.crosswordsolver.org/anagram-solver/",
             "image": "https://images.opencollective.com/anagram-solver/2666271/logo.png",
