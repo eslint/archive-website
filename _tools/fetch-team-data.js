@@ -56,7 +56,7 @@ const team = {
 // Main
 //-----------------------------------------------------------------------------
 
-(async() => {
+(async () => {
     const octokit = new Octokit({
         userAgent: "ESLint Website",
         auth: ESLINT_GITHUB_TOKEN
