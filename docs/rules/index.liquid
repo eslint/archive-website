@@ -4,12 +4,12 @@ layout: doc
 ---
 
 <h1>Rules</h1>
-<p>Rules in ESLint are grouped by category to help you understand their purpose.</p>
+<p>Rules in ESLint are grouped by type to help you understand their purpose.</p>
 <p>No rules are enabled by default. The <code>"extends": "eslint:recommended"</code> property in a <a href="../user-guide/configuring#extending-configuration-files">configuration file</a> enables rules that report common problems, which have a check mark (recommended) below.</p>
 <p>The <code>--fix</code> option on the <a href="../user-guide/command-line-interface#fix">command line</a> automatically fixes problems (currently mostly whitespace) reported by rules which have a wrench (fixable) below.</p>
-{% for category in rules.categories %}
-  <h2>{{ category.name }}</h2>
-  {{ category.description }}
+{% for type in rules.types %}
+  <h2>{{ type.displayName }}</h2>
+  {{ type.description }}
   <table class="rule-list table table-striped">
     <colgroup>
       <col class="recommended" />
@@ -18,7 +18,7 @@ layout: doc
       <col class="description" />
     </colgroup>
     <tbody>
-      {% for rule in category.rules %}
+      {% for rule in type.rules %}
         <tr>
         <td>{% if rule.recommended %}(recommended){% endif %}</td>
         <td>{% if rule.fixable %}(fixable){% endif %}</td>
