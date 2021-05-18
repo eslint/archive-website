@@ -13,7 +13,7 @@ module.exports = function syntaxHighlighting(eleventyConfig) {
             if (lang && highlightJS.getLanguage(lang)) {
                 try {
                     return `<pre class="hljs highlight-${lang}"><code>${highlightJS.highlight(lang, text, true).value}</code></pre>`;
-                } catch (err) {
+                } catch {
 
                     // Default to escaping HTML if highlighting throws an error.
                 }

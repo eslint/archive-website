@@ -11,7 +11,7 @@ import linterModule from "../node_modules/eslint/lib/linter/linter";
 function getUrlState() {
     try {
         return JSON.parse(Unicode.decodeFromBase64(window.location.hash.replace(/^#/u, "")));
-    } catch (err) {
+    } catch {
         return null;
     }
 }
@@ -21,7 +21,7 @@ const hasLocalStorage = (function() {
         window.localStorage.setItem("localStorageTest", "foo");
         window.localStorage.removeItem("localStorageTest");
         return true;
-    } catch (e) {
+    } catch {
         return false;
     }
 }());

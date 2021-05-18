@@ -107,7 +107,7 @@ app.use(morgan("tiny"));
  * TODO: Figure out why this is so that we don't have to create this custom route handler
  * and can use `express.static()` directly instead.
  */
-app.get("*", async(req, res, next) => {
+app.get("*", async (req, res, next) => {
     const reqPath = path.join(__dirname, "../_site", removeTrailingSlash(req.url));
 
     if (await filePathExists(reqPath)) {
