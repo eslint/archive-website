@@ -203,8 +203,6 @@ bar();
 ### To check whether or not this is reachable
 
 ```js
-var last = require("lodash").last;
-
 function isReachable(segment) {
     return segment.reachable;
 }
@@ -223,7 +221,7 @@ module.exports = function(context) {
 
         // Checks reachable or not.
         "ExpressionStatement": function(node) {
-            var codePath = last(codePathStack);
+            var codePath = codePathStack[codePathStack.length - 1];
 
             // Checks the current code path segments.
             if (!codePath.currentSegments.some(isReachable)) {
@@ -247,8 +245,6 @@ So a rule must not modify those instances.
 Please use a map of information instead.
 
 ```js
-var last = require("lodash").last;
-
 function hasCb(node, context) {
     if (node.type.indexOf("Function") !== -1) {
         return context.getDeclaredVariables(node).some(function(v) {
@@ -293,8 +289,10 @@ module.exports = function(context) {
 
         // Manages state of code paths.
         "onCodePathSegmentStart": function(segment) {
+            var funcInfo = funcInfoStack[funcInfoStack - 1];
+
             // Ignores if `cb` doesn't exist.
-            if (!last(funcInfoStack).hasCb) {
+            if (!funcInfo.hasCb) {
                 return;
             }
 
@@ -312,7 +310,7 @@ module.exports = function(context) {
 
         // Checks reachable or not.
         "CallExpression": function(node) {
-            var funcInfo = last(funcInfoStack);
+            var funcInfo = funcInfoStack[funcInfoStack - 1];
 
             // Ignores if `cb` doesn't exist.
             if (!funcInfo.hasCb) {
