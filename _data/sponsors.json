@@ -5,7 +5,7 @@
             "url": "https://automattic.com",
             "image": "https://images.opencollective.com/photomatt/d0ef3e1/logo.png",
             "monthlyDonation": 200000,
-            "totalDonations": 1400000,
+            "totalDonations": 1600000,
             "source": "opencollective",
             "tier": "platinum-sponsor"
         }
@@ -498,15 +498,6 @@
             "tier": "backer"
         },
         {
-            "name": "Ayush Sachdeva",
-            "url": null,
-            "image": "https://images.opencollective.com/ayush000/avatar.png",
-            "monthlyDonation": 500,
-            "totalDonations": 2500,
-            "source": "opencollective",
-            "tier": "backer"
-        },
-        {
             "name": "Nathan Friedly",
             "url": "http://www.nfriedly.com",
             "image": "https://images.opencollective.com/nfriedly/c7be1d5/avatar.png",
@@ -592,7 +583,7 @@
             "url": "https://bruce.agency",
             "image": "https://images.opencollective.com/brucemade/0c70c59/logo.png",
             "monthlyDonation": 500,
-            "totalDonations": 84000,
+            "totalDonations": 84500,
             "source": "opencollective",
             "tier": "backer"
         },
@@ -709,7 +700,7 @@
             "url": "https://www.maisonette.com",
             "image": "https://images.opencollective.com/maisonetteworld/c170bfc/logo.png",
             "monthlyDonation": 500,
-            "totalDonations": 14000,
+            "totalDonations": 14500,
             "source": "opencollective",
             "tier": "backer"
         },
