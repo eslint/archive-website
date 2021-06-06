@@ -498,6 +498,15 @@
             "tier": "backer"
         },
         {
+            "name": "Ayush Sachdeva",
+            "url": null,
+            "image": "https://images.opencollective.com/ayush000/avatar.png",
+            "monthlyDonation": 500,
+            "totalDonations": 2500,
+            "source": "opencollective",
+            "tier": "backer"
+        },
+        {
             "name": "Nathan Friedly",
             "url": "http://www.nfriedly.com",
             "image": "https://images.opencollective.com/nfriedly/c7be1d5/avatar.png",
@@ -1231,6 +1240,14 @@
             "name": "Robert Abreu",
             "image": "https://avatars.githubusercontent.com/u/43736556?u=69372d9d764901d05ed272f1d02c7bc020b65f7f&v=4",
             "url": "https://github.com/FiveEightyEight",
+            "monthlyDonation": 500,
+            "source": "github",
+            "tier": "backer"
+        },
+        {
+            "name": "Stephen A Brooks",
+            "image": "https://avatars.githubusercontent.com/u/46081327?v=4",
+            "url": "https://github.com/StephenBrooks220413",
             "monthlyDonation": 500,
             "source": "github",
             "tier": "backer"
