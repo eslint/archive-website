@@ -15,9 +15,9 @@ We want to share with you the significant changes that will be coming in v8.0.0 
 
 The following changes are important to understand as we move towards v8.0.0.
 
-### Dropping support for Node.js v10.x and 13.x
+### Dropping support for Node.js v10.x, 13.x, and 15.x
 
-Node.js v10.x end-of-life was April 30, 2021 and Node.js v13.x end-of-life was June 1, 2021. As a result, ESLint v8.0.0 [removes support](https://github.com/eslint/eslint/issues/14023) for both of these Node.js versions.
+Node.js v10.x end-of-life was April 30, 2021, Node.js v13.x end-of-life was June 1, 2020, and Node.js v15.x end-of-life is this month (June 2021). As a result, ESLint v8.0.0 [removes support](https://github.com/eslint/eslint/issues/14023) for all three of these Node.js versions.
 
 ### Removing the `codeframe` and `table` formatters
 
@@ -33,7 +33,7 @@ Beginning in ESLint v8.0.0, rules that provide suggestions [must include a `meta
 
 ### Fixable rules now require `meta.fixable` property
 
-In ESLint v7.0.0 and earlier, it was possible to write a rule as a function instead of an object and to provide fixes without specifying a `meta.fixable` property. Beginning in v8.0.0, ESLint requires all rules that provide fixes to be specified in object format and [include `meta.fixable: true`](https://github.com/eslint/eslint/issues/13349).
+In ESLint v7.0.0 and earlier, it was possible to write a rule as a function instead of an object and to provide fixes without specifying a `meta.fixable` property. Beginning in v8.0.0, ESLint requires all rules that provide fixes to be specified in object format and [include `meta.fixable: code|whitespace`](https://github.com/eslint/eslint/issues/13349).
 
 ### Unused disable directives are now fixable
 
@@ -51,7 +51,7 @@ With an [upgrade to Ajv 8](https://github.com/eslint/eslint/issues/13888), ESLin
 
 ESLint v8.0.0 [defines an `exports` field](https://github.com/eslint/eslint/issues/13654) to remove access to undocumented internal APIs that some packages were accessing.
 
-As part of this change, we have removed the deprecated `CLIEngine` class to encourage adoption of the replacement `ESLint` class. `CLIEngine` was [deprecated in 2020]() and we can't continue to support it as we move forward with more ambitious features for ESLint.
+As part of this change, we have removed the deprecated `CLIEngine` class to encourage adoption of the replacement `ESLint` class. `CLIEngine` was [deprecated in 2020](https://eslint.org/blog/2020/05/eslint-v7.0.0-released#new-eslint-class) and we can't continue to support it as we move forward with more ambitious features for ESLint.
 
 ## When to expect ESLint v8.0.0
 
