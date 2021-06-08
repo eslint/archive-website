@@ -588,9 +588,9 @@
             "tier": "backer"
         },
         {
-            "name": "Bruce",
-            "url": "https://bruce.agency",
-            "image": "https://images.opencollective.com/brucemade/0c70c59/logo.png",
+            "name": "Touchless",
+            "url": null,
+            "image": "https://images.opencollective.com/touchless/8efea29/logo.png",
             "monthlyDonation": 500,
             "totalDonations": 84500,
             "source": "opencollective",
