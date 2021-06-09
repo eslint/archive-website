@@ -203,6 +203,15 @@
             "tier": "backer"
         },
         {
+            "name": "STORIS",
+            "url": "https://www.storis.com/",
+            "image": "https://images.opencollective.com/storis/dfb0e13/logo.png",
+            "monthlyDonation": 2500,
+            "totalDonations": 2500,
+            "source": "opencollective",
+            "tier": null
+        },
+        {
             "name": "Balsa",
             "url": "https://balsa.com",
             "image": "https://images.opencollective.com/balsa/77de498/logo.png",
