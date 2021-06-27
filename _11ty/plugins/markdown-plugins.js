@@ -33,11 +33,8 @@ module.exports = function syntaxHighlighting(eleventyConfig) {
             return slug(text.replace(/[<>()[\]{}]/gu, ""))
 
                 // non-ASCII characters are a pain to fix
-                // first replace them all with dashes
-                .replace(/[^\u{00}-\u{FF}]/gu, "-")
-
-                // then replace all -- with -
-                .replace(/-+/gu, "-");
+                // remove them
+                .replace(/[^\u{00}-\u{FF}]/gu, "");
         },
         uniqueSlugStartIndex: 1
     });
