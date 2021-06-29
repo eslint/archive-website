@@ -32,8 +32,7 @@ module.exports = function syntaxHighlighting(eleventyConfig) {
             // need to replace all the characters GitHub replaces
             return slug(text.replace(/[<>()[\]{}]/gu, ""))
 
-                // non-ASCII characters are a pain to fix
-                // remove them
+                // remove non-ASCII characters
                 .replace(/[^\u{00}-\u{FF}]/gu, "");
         },
         uniqueSlugStartIndex: 1
