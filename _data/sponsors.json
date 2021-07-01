@@ -16,7 +16,7 @@
             "url": "https://nx.dev",
             "image": "https://images.opencollective.com/nx/0efbe42/logo.png",
             "monthlyDonation": 100000,
-            "totalDonations": 500000,
+            "totalDonations": 600000,
             "source": "opencollective",
             "tier": "gold-sponsor"
         },
@@ -70,7 +70,7 @@
             "url": "https://retool.com/",
             "image": "https://images.opencollective.com/retool/98ea68e/logo.png",
             "monthlyDonation": 50000,
-            "totalDonations": 250000,
+            "totalDonations": 300000,
             "source": "opencollective",
             "tier": "silver-sponsor"
         },
@@ -144,7 +144,7 @@
             "url": "https://themeisle.com",
             "image": "https://images.opencollective.com/themeisle/d5592fe/logo.png",
             "monthlyDonation": 20000,
-            "totalDonations": 540000,
+            "totalDonations": 560000,
             "source": "opencollective",
             "tier": "bronze-sponsor"
         },
@@ -508,7 +508,7 @@
             "url": "https://joealden.com",
             "image": "https://images.opencollective.com/joealden/44a6738/avatar.png",
             "monthlyDonation": 500,
-            "totalDonations": 2000,
+            "totalDonations": 2500,
             "source": "opencollective",
             "tier": "backer"
         },
@@ -517,7 +517,7 @@
             "url": "https://batch.com",
             "image": "https://images.opencollective.com/batch/3ccdb8f/logo.png",
             "monthlyDonation": 500,
-            "totalDonations": 2500,
+            "totalDonations": 3000,
             "source": "opencollective",
             "tier": "backer"
         },
