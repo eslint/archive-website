@@ -6,7 +6,7 @@ rule_type: problem
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
-# disallow variable or `function` declarations in nested blocks  (no-inner-declarations)
+# disallow variable or `function` declarations in nested blocks (no-inner-declarations)
 
 (recommended) The `"extends": "eslint:recommended"` property in a configuration file enables this rule.
 
