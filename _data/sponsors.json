@@ -477,15 +477,6 @@
             "tier": "backer"
         },
         {
-            "name": "Morgane Dubus",
-            "url": null,
-            "image": "https://images.opencollective.com/morgane-dubus/avatar.png",
-            "monthlyDonation": 500,
-            "totalDonations": 1500,
-            "source": "opencollective",
-            "tier": "backer"
-        },
-        {
             "name": "Tripwire, Inc.",
             "url": "https://tripwire.com",
             "image": "https://images.opencollective.com/tripwire/7599e30/logo.png",
@@ -626,15 +617,6 @@
             "image": "https://images.opencollective.com/touchless/8efea29/logo.png",
             "monthlyDonation": 500,
             "totalDonations": 85000,
-            "source": "opencollective",
-            "tier": "backer"
-        },
-        {
-            "name": "RemoteTeam.com",
-            "url": "https://www.remoteteam.com",
-            "image": "https://images.opencollective.com/remoteteamcom/b04dbd3/logo.png",
-            "monthlyDonation": 500,
-            "totalDonations": 8500,
             "source": "opencollective",
             "tier": "backer"
         },
