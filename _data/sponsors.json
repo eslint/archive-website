@@ -232,7 +232,7 @@
             "url": "https://balsa.com",
             "image": "https://images.opencollective.com/balsa/77de498/logo.png",
             "monthlyDonation": 2500,
-            "totalDonations": 6000,
+            "totalDonations": 8500,
             "source": "opencollective",
             "tier": "backer"
         },
@@ -241,7 +241,7 @@
             "url": "https://www.neovation.com",
             "image": "https://images.opencollective.com/neovationcorp/30d1cf7/logo.png",
             "monthlyDonation": 2500,
-            "totalDonations": 72500,
+            "totalDonations": 75000,
             "source": "opencollective",
             "tier": "backer"
         },
@@ -472,7 +472,7 @@
             "url": null,
             "image": "https://images.opencollective.com/arnaud-drain/d7165f2/avatar.png",
             "monthlyDonation": 500,
-            "totalDonations": 1500,
+            "totalDonations": 2000,
             "source": "opencollective",
             "tier": "backer"
         },
@@ -490,7 +490,7 @@
             "url": "https://solverfox.dev",
             "image": "https://images.opencollective.com/eps1lon/4200608/avatar.png",
             "monthlyDonation": 500,
-            "totalDonations": 2000,
+            "totalDonations": 2500,
             "source": "opencollective",
             "tier": "backer"
         },
@@ -747,15 +747,6 @@
             "tier": "backer"
         },
         {
-            "name": "Mariusz Nowak",
-            "url": "https://medikoo.com",
-            "image": "https://images.opencollective.com/medikoo/f16a7ea/avatar.png",
-            "monthlyDonation": 500,
-            "totalDonations": 14500,
-            "source": "opencollective",
-            "tier": "backer"
-        },
-        {
             "name": "Chih-Hsuan Fan",
             "url": "https://pymaster.tw",
             "image": "https://images.opencollective.com/pc035860/8fed8ae/avatar.png",
@@ -814,7 +805,7 @@
             "url": null,
             "image": "https://images.opencollective.com/joseph-percy/avatar.png",
             "monthlyDonation": 500,
-            "totalDonations": 14500,
+            "totalDonations": 15000,
             "source": "opencollective",
             "tier": "backer"
         },
