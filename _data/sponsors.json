@@ -181,7 +181,7 @@
             "url": "https://yannick.cr",
             "image": "https://images.opencollective.com/yannickcr/765f06f/avatar.png",
             "monthlyDonation": 10000,
-            "totalDonations": 240000,
+            "totalDonations": 250000,
             "source": "opencollective",
             "tier": "backer"
         },
@@ -477,11 +477,20 @@
             "tier": "backer"
         },
         {
+            "name": "Morgane Dubus",
+            "url": null,
+            "image": "https://images.opencollective.com/morgane-dubus/avatar.png",
+            "monthlyDonation": 500,
+            "totalDonations": 1500,
+            "source": "opencollective",
+            "tier": "backer"
+        },
+        {
             "name": "Tripwire, Inc.",
             "url": "https://tripwire.com",
             "image": "https://images.opencollective.com/tripwire/7599e30/logo.png",
             "monthlyDonation": 500,
-            "totalDonations": 2000,
+            "totalDonations": 2500,
             "source": "opencollective",
             "tier": "backer"
         },
