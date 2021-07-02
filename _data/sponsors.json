@@ -756,6 +756,15 @@
             "tier": "backer"
         },
         {
+            "name": "Mariusz Nowak",
+            "url": "https://medikoo.com",
+            "image": "https://images.opencollective.com/medikoo/f16a7ea/avatar.png",
+            "monthlyDonation": 500,
+            "totalDonations": 15000,
+            "source": "opencollective",
+            "tier": "backer"
+        },
+        {
             "name": "Chih-Hsuan Fan",
             "url": "https://pymaster.tw",
             "image": "https://images.opencollective.com/pc035860/8fed8ae/avatar.png",
