@@ -973,6 +973,14 @@
             "tier": "backer"
         },
         {
+            "name": "Zhigang Fang",
+            "image": "https://avatars.githubusercontent.com/u/1057756?u=15c3cdff1c715ac27bbc63ccb8f0a1c27eeb3784&v=4",
+            "url": "https://reily.app",
+            "monthlyDonation": 500,
+            "source": "github",
+            "tier": "backer"
+        },
+        {
             "name": "Peter Hozák",
             "image": "https://avatars.githubusercontent.com/u/1087670?u=5a6738983bae1f3a10243aa603a5e9caa641d93d&v=4",
             "url": "http://peter.hozak.info/",
