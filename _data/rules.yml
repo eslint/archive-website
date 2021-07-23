@@ -164,6 +164,7 @@ categories:
         fixable: false
         name: no-unsafe-negation
         recommended: true
+        hasSuggestions: true
       - description: >-
           disallow use of optional chaining in contexts where the `undefined`
           value is not allowed
@@ -387,6 +388,7 @@ categories:
         fixable: false
         name: no-nonoctal-decimal-escape
         recommended: false
+        hasSuggestions: true
       - description: disallow octal literals
         fixable: false
         name: no-octal
@@ -467,6 +469,7 @@ categories:
         fixable: false
         name: no-useless-escape
         recommended: true
+        hasSuggestions: true
       - description: disallow redundant return statements
         fixable: true
         name: no-useless-return
@@ -503,6 +506,7 @@ categories:
         fixable: false
         name: radix
         recommended: false
+        hasSuggestions: true
       - description: disallow async functions which have no `await` expression
         fixable: false
         name: require-await

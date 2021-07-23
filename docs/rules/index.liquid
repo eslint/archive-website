@@ -14,6 +14,7 @@ layout: doc
     <colgroup>
       <col class="recommended" />
       <col class="fixable" />
+      <col class="hasSuggestions" />
       <col class="name" />
       <col class="description" />
     </colgroup>
@@ -22,6 +23,7 @@ layout: doc
         <tr>
         <td>{% if rule.recommended %}(recommended){% endif %}</td>
         <td>{% if rule.fixable %}(fixable){% endif %}</td>
+        <td>{% if rule.hasSuggestions %}(hasSuggestions){% endif %}</td>
         <td markdown="1"><a href="{{ rule.name }}">{{ rule.name }}</a> </td>
         <td markdown="1">{{ rule.description }} </td>
         </tr>
