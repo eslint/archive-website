@@ -450,6 +450,15 @@
             "tier": "backer"
         },
         {
+            "name": "Mesh Payments",
+            "url": "https://meshpayments.com/",
+            "image": "https://images.opencollective.com/meshpayments/e216d5a/logo.png",
+            "monthlyDonation": 500,
+            "totalDonations": 500,
+            "source": "opencollective",
+            "tier": "backer"
+        },
+        {
             "name": "Cui Mingda",
             "url": "https://mingda.net",
             "image": "https://images.opencollective.com/cuimingda/1faca0f/avatar.png",
