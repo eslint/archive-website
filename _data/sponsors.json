@@ -450,6 +450,15 @@
             "tier": "backer"
         },
         {
+            "name": "Cui Mingda",
+            "url": "https://mingda.net",
+            "image": "https://images.opencollective.com/cuimingda/1faca0f/avatar.png",
+            "monthlyDonation": 500,
+            "totalDonations": 500,
+            "source": "opencollective",
+            "tier": "backer"
+        },
+        {
             "name": "Toan Nguyen",
             "url": null,
             "image": "https://images.opencollective.com/toan-nguyen1/avatar.png",
