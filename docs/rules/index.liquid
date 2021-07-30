@@ -4,9 +4,10 @@ layout: doc
 ---
 
 <h1>Rules</h1>
-<p>Rules in ESLint are grouped by category to help you understand their purpose.</p>
-<p>No rules are enabled by default. The <code>"extends": "eslint:recommended"</code> property in a <a href="../user-guide/configuring#extending-configuration-files">configuration file</a> enables rules that report common problems, which have a check mark (recommended) below.</p>
-<p>The <code>--fix</code> option on the <a href="../user-guide/command-line-interface#--fix">command line</a> automatically fixes problems (currently mostly whitespace) reported by rules which have a wrench (fixable) below.</p>
+<p>Rules in ESLint are grouped by category to help you understand their purpose. Each rule has emojis denoting:</p>
+<p>(recommended) if the <code>"extends": "eslint:recommended"</code> property in a <a href="../user-guide/configuring#extending-configuration-files">configuration file</a> enables the rule</p>
+<p>(fixable) if some problems reported by the rule are automatically fixable by the <code>--fix</code> <a href="../user-guide/command-line-interface#--fix">command line</a> option</p>
+<p>(hasSuggestions) if some problems reported by the rule are manually fixable by editor <a href="../developer-guide/working-with-rules#providing-suggestions">suggestions</a></p>
 {% for category in rules.categories %}
   <h2>{{ category.name }}</h2>
   {{ category.description }}
@@ -14,6 +15,7 @@ layout: doc
     <colgroup>
       <col class="recommended" />
       <col class="fixable" />
+      <col class="hasSuggestions" />
       <col class="name" />
       <col class="description" />
     </colgroup>
@@ -22,6 +24,7 @@ layout: doc
         <tr>
         <td>{% if rule.recommended %}(recommended){% endif %}</td>
         <td>{% if rule.fixable %}(fixable){% endif %}</td>
+        <td>{% if rule.hasSuggestions %}(hasSuggestions){% endif %}</td>
         <td markdown="1"><a href="{{ rule.name }}">{{ rule.name }}</a> </td>
         <td markdown="1">{{ rule.description }} </td>
         </tr>

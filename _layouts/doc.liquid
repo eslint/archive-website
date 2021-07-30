@@ -28,8 +28,10 @@
         | replace: '<p>(recommended) ', '<p class="recommended icon">'
         | replace: '<p>(removed) ', '<p class="removed icon">'
         | replace: '<p>(fixable) ', '<p class="fixable icon">'
+        | replace: '<p>(hasSuggestions) ', '<p class="hasSuggestions icon">'
         | replace: '(recommended)', '<span title="recommended" aria-label="recommended">✓</span>'
         | replace: '(fixable)', '<span title="fixable" aria-label="fixable">🔧</span>'
+        | replace: '(hasSuggestions)', '<span title="hasSuggestions" aria-label="hasSuggestions">💡</span>'
       }}
     </article>
   </main>

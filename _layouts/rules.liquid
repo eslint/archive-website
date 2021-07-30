@@ -16,6 +16,7 @@
       {{ content
         | replace: '(recommended)', '<span title="recommended" aria-label="recommended">✓</span>'
         | replace: '(fixable)', '<span title="fixable" aria-label="fixable">🔧</span>'
+        | replace: '(hasSuggestions)', '<span title="hasSuggestions" aria-label="hasSuggestions">💡</span>'
       }}
     </article>
   </main>

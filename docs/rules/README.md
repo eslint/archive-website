@@ -1,10 +1,10 @@
 # Rules
 
-Rules in ESLint are grouped by category to help you understand their purpose.
+Rules in ESLint are grouped by category to help you understand their purpose. Each rule has emojis denoting:
 
-No rules are enabled by default. The `"extends": "eslint:recommended"` property in a [configuration file](../user-guide/configuring#extending-configuration-files) enables rules that report common problems, which have a check mark (recommended) below.
-
-The `--fix` option on the [command line](../user-guide/command-line-interface#fix) automatically fixes problems (currently mostly whitespace) reported by rules which have a wrench (fixable) below.
+* (recommended) if the `"extends": "eslint:recommended"` property in a [configuration file](../user-guide/configuring#extending-configuration-files) enables the rule
+* (fixable) if some problems reported by the rule are automatically fixable by the `--fix` [command line](../user-guide/command-line-interface#--fix) option
+* (hasSuggestions) if some problems reported by the rule are manually fixable by editor [suggestions](../developer-guide/working-with-rules#providing-suggestions)
 
 ## Possible Errors
 
