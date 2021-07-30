@@ -10,6 +10,8 @@ rule_type: suggestion
 
 (recommended) The `"extends": "eslint:recommended"` property in a configuration file enables this rule.
 
+(hasSuggestions) Some problems reported by this rule are manually fixable by editor [suggestions](../developer-guide/working-with-rules#providing-suggestions).
+
 Escaping non-special characters in strings, template literals, and regular expressions doesn't have any effect, as demonstrated in the following example:
 
 ```js

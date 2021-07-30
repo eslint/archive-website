@@ -10,6 +10,8 @@ rule_type: problem
 
 (recommended) The `"extends": "eslint:recommended"` property in a configuration file enables this rule.
 
+(hasSuggestions) Some problems reported by this rule are manually fixable by editor [suggestions](../developer-guide/working-with-rules#providing-suggestions).
+
 Just as developers might type `-a + b` when they mean `-(a + b)` for the negative of a sum, they might type `!key in object` by mistake when they almost certainly mean `!(key in object)` to test that a key is not in an object. `!obj instanceof Ctor` is similar.
 
 ## Rule Details
