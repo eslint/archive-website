@@ -86,6 +86,15 @@
     ],
     "bronze": [
         {
+            "name": "Mobilen",
+            "url": "https://mobilen.nu",
+            "image": "https://images.opencollective.com/mobilen/e19860d/logo.png",
+            "monthlyDonation": 20000,
+            "totalDonations": 20000,
+            "source": "opencollective",
+            "tier": "bronze-sponsor"
+        },
+        {
             "name": "Anagram Solver",
             "url": "https://www.crosswordsolver.org/anagram-solver/",
             "image": "https://images.opencollective.com/anagram-solver/2666271/logo.png",
