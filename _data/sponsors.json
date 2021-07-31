@@ -186,14 +186,6 @@
             "tier": "backer"
         },
         {
-            "name": "New Relic",
-            "image": "https://avatars.githubusercontent.com/u/31739?v=4",
-            "url": "https://opensource.newrelic.com",
-            "monthlyDonation": 10000,
-            "source": "github",
-            "tier": "backer"
-        },
-        {
             "name": "Principal Financial Group",
             "url": "https://www.principal.com/about-us",
             "image": "https://images.opencollective.com/principal/431e690/logo.png",
