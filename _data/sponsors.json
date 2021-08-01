@@ -117,7 +117,7 @@
             "url": "https://mixpanel.com",
             "image": "https://images.opencollective.com/mixpanel/cd682f7/logo.png",
             "monthlyDonation": 20000,
-            "totalDonations": 460000,
+            "totalDonations": 480000,
             "source": "opencollective",
             "tier": "bronze-sponsor"
         },
@@ -126,7 +126,7 @@
             "url": "https://www.vpsserver.com",
             "image": "https://images.opencollective.com/vpsservercom/logo.png",
             "monthlyDonation": 20000,
-            "totalDonations": 480000,
+            "totalDonations": 500000,
             "source": "opencollective",
             "tier": "bronze-sponsor"
         },
@@ -322,7 +322,7 @@
             "url": "https://n8n.io",
             "image": "https://images.opencollective.com/n8n/dca2f0c/logo.png",
             "monthlyDonation": 1000,
-            "totalDonations": 19000,
+            "totalDonations": 20000,
             "source": "opencollective",
             "tier": "backer"
         },
@@ -340,7 +340,7 @@
             "url": "https://moxio.com",
             "image": "https://images.opencollective.com/moxio/9fa53c1/logo.png",
             "monthlyDonation": 1000,
-            "totalDonations": 41000,
+            "totalDonations": 42000,
             "source": "opencollective",
             "tier": "backer"
         },
@@ -707,7 +707,7 @@
             "url": null,
             "image": "https://images.opencollective.com/martin-desrumaux/avatar.png",
             "monthlyDonation": 500,
-            "totalDonations": 13000,
+            "totalDonations": 13500,
             "source": "opencollective",
             "tier": "backer"
         },
@@ -797,7 +797,7 @@
             "url": "https://pymaster.tw",
             "image": "https://images.opencollective.com/pc035860/8fed8ae/avatar.png",
             "monthlyDonation": 500,
-            "totalDonations": 15000,
+            "totalDonations": 15500,
             "source": "opencollective",
             "tier": "backer"
         },
