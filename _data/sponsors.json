@@ -268,7 +268,7 @@
             "url": "https://xh.io",
             "image": "https://images.opencollective.com/xh/cec0963/logo.png",
             "monthlyDonation": 1000,
-            "totalDonations": 5000,
+            "totalDonations": 6000,
             "source": "opencollective",
             "tier": "backer"
         },
@@ -1121,7 +1121,7 @@
         },
         {
             "name": "Mattia Richetto",
-            "image": "https://avatars.githubusercontent.com/u/6423261?u=9aaf95f3b725bd8cd62e98b0b078380b44aa52a7&v=4",
+            "image": "https://avatars.githubusercontent.com/u/6423261?u=2db1047889c8130effccc2366f55ec63e1124f94&v=4",
             "url": "https://medium.com/@mattiaerre",
             "monthlyDonation": 500,
             "source": "github",
