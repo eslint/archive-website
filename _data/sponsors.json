@@ -12,15 +12,6 @@
     ],
     "gold": [
         {
-            "name": "Nx (by Nrwl)",
-            "url": "https://nx.dev",
-            "image": "https://images.opencollective.com/nx/0efbe42/logo.png",
-            "monthlyDonation": 100000,
-            "totalDonations": 600000,
-            "source": "opencollective",
-            "tier": "gold-sponsor"
-        },
-        {
             "name": "Chrome's Web Framework & Tools Performance Fund",
             "url": "https://google.com/chrome",
             "image": "https://images.opencollective.com/chrome/dc55bd4/logo.png",
@@ -70,7 +61,7 @@
             "url": "https://retool.com/",
             "image": "https://images.opencollective.com/retool/98ea68e/logo.png",
             "monthlyDonation": 50000,
-            "totalDonations": 300000,
+            "totalDonations": 350000,
             "source": "opencollective",
             "tier": "silver-sponsor"
         },
@@ -153,7 +144,7 @@
             "url": "https://themeisle.com",
             "image": "https://images.opencollective.com/themeisle/d5592fe/logo.png",
             "monthlyDonation": 20000,
-            "totalDonations": 560000,
+            "totalDonations": 580000,
             "source": "opencollective",
             "tier": "bronze-sponsor"
         },
@@ -286,7 +277,7 @@
             "url": "https://raider.io",
             "image": "https://images.opencollective.com/raiderio_wow/7a380a3/logo.png",
             "monthlyDonation": 1000,
-            "totalDonations": 6000,
+            "totalDonations": 7000,
             "source": "opencollective",
             "tier": "backer"
         },
@@ -536,7 +527,7 @@
             "url": "https://joealden.com",
             "image": "https://images.opencollective.com/joealden/44a6738/avatar.png",
             "monthlyDonation": 500,
-            "totalDonations": 2500,
+            "totalDonations": 3000,
             "source": "opencollective",
             "tier": "backer"
         },
@@ -545,7 +536,7 @@
             "url": "https://batch.com",
             "image": "https://images.opencollective.com/batch/3ccdb8f/logo.png",
             "monthlyDonation": 500,
-            "totalDonations": 3000,
+            "totalDonations": 3500,
             "source": "opencollective",
             "tier": "backer"
         },
