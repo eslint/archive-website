@@ -349,7 +349,7 @@
             "url": "https://benjamin.piouffle.com",
             "image": "https://images.opencollective.com/betree/6c68f43/avatar.png",
             "monthlyDonation": 1000,
-            "totalDonations": 29800,
+            "totalDonations": 30800,
             "source": "opencollective",
             "tier": "backer"
         },
@@ -473,7 +473,7 @@
             "url": "https://linnertmedia.de",
             "image": "https://images.opencollective.com/alinnert/9126453/avatar.png",
             "monthlyDonation": 500,
-            "totalDonations": 1000,
+            "totalDonations": 1500,
             "source": "opencollective",
             "tier": "backer"
         },
@@ -546,15 +546,6 @@
             "image": "https://images.opencollective.com/sashasushko/5b221d8/avatar.png",
             "monthlyDonation": 500,
             "totalDonations": 4000,
-            "source": "opencollective",
-            "tier": "backer"
-        },
-        {
-            "name": "Ayush Sachdeva",
-            "url": null,
-            "image": "https://images.opencollective.com/ayush000/avatar.png",
-            "monthlyDonation": 500,
-            "totalDonations": 3500,
             "source": "opencollective",
             "tier": "backer"
         },
@@ -851,7 +842,7 @@
             "url": "https://twitter.com/LJHarb",
             "image": "https://images.opencollective.com/ljharb/b75a3f8/avatar.png",
             "monthlyDonation": 500,
-            "totalDonations": 15000,
+            "totalDonations": 15500,
             "source": "opencollective",
             "tier": "backer"
         },
