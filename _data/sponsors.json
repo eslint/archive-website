@@ -500,7 +500,7 @@
             "url": null,
             "image": "https://images.opencollective.com/morgane-dubus/avatar.png",
             "monthlyDonation": 500,
-            "totalDonations": 2000,
+            "totalDonations": 2500,
             "source": "opencollective",
             "tier": "backer"
         },
@@ -762,15 +762,6 @@
             "image": "https://images.opencollective.com/simon-korzun/cbdefdd/avatar.png",
             "monthlyDonation": 500,
             "totalDonations": 15500,
-            "source": "opencollective",
-            "tier": "backer"
-        },
-        {
-            "name": "Mariusz Nowak",
-            "url": "https://medikoo.com",
-            "image": "https://images.opencollective.com/medikoo/f16a7ea/avatar.png",
-            "monthlyDonation": 500,
-            "totalDonations": 15000,
             "source": "opencollective",
             "tier": "backer"
         },
