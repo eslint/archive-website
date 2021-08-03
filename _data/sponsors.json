@@ -12,6 +12,15 @@
     ],
     "gold": [
         {
+            "name": "Nx (by Nrwl)",
+            "url": "https://nx.dev",
+            "image": "https://images.opencollective.com/nx/0efbe42/logo.png",
+            "monthlyDonation": 100000,
+            "totalDonations": 700000,
+            "source": "opencollective",
+            "tier": "gold-sponsor"
+        },
+        {
             "name": "Chrome's Web Framework & Tools Performance Fund",
             "url": "https://google.com/chrome",
             "image": "https://images.opencollective.com/chrome/dc55bd4/logo.png",
