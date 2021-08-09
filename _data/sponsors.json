@@ -86,9 +86,9 @@
     ],
     "bronze": [
         {
-            "name": "Troy",
+            "name": "TROYPOINT",
             "url": "https://troypoint.com",
-            "image": "https://images.opencollective.com/troy3/080f96f/avatar.png",
+            "image": "https://images.opencollective.com/troypoint/080f96f/avatar.png",
             "monthlyDonation": 20000,
             "totalDonations": 20000,
             "source": "opencollective",
