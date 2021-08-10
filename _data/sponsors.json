@@ -452,14 +452,6 @@
             "tier": "backer"
         },
         {
-            "name": "Spaceship",
-            "image": "https://avatars.githubusercontent.com/u/58706594?v=4",
-            "url": "https://spaceship.run",
-            "monthlyDonation": 1000,
-            "source": "github",
-            "tier": "backer"
-        },
-        {
             "name": "Mesh Payments",
             "url": "https://meshpayments.com/",
             "image": "https://images.opencollective.com/meshpayments/e216d5a/logo.png",
