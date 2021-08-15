@@ -396,6 +396,14 @@
             "tier": "backer"
         },
         {
+            "name": "Nobutaka OSHIRO",
+            "image": "https://avatars.githubusercontent.com/u/3583286?u=cf4c1f3e26e13c58dd86227213feedc1d5e2984f&v=4",
+            "url": "https://notakaos.com",
+            "monthlyDonation": 1000,
+            "source": "github",
+            "tier": "backer"
+        },
+        {
             "name": "OpenCraft",
             "image": "https://avatars.githubusercontent.com/u/7414786?v=4",
             "url": "https://opencraft.com/",
