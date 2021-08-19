@@ -460,6 +460,14 @@
             "tier": "backer"
         },
         {
+            "name": "Buttondown",
+            "image": "https://avatars.githubusercontent.com/u/48390753?v=4",
+            "url": "buttondown.email",
+            "monthlyDonation": 1000,
+            "source": "github",
+            "tier": "backer"
+        },
+        {
             "name": "ProjectDiscovery",
             "image": "https://avatars.githubusercontent.com/u/50994705?v=4",
             "url": "https://projectdiscovery.io",
