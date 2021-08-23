@@ -1034,6 +1034,14 @@
             "tier": "backer"
         },
         {
+            "name": "Charles Severance",
+            "image": "https://avatars.githubusercontent.com/u/1197222?u=d6dc85c064736ab851c6d9e3318dcdd1be00fb2c&v=4",
+            "url": "http://www.dr-chuck.com/",
+            "monthlyDonation": 500,
+            "source": "github",
+            "tier": "backer"
+        },
+        {
             "name": "Jonny Burger",
             "image": "https://avatars.githubusercontent.com/u/1629785?u=12eb94da6070d00fc924761ce06e3a428d01b7e9&v=4",
             "url": "https://jonny.io",
