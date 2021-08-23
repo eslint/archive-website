@@ -163,6 +163,18 @@
     ],
     "committers": [
         {
+            "username": "brettz9",
+            "name": "Brett Zamir",
+            "website": "http://brett-zamir.me",
+            "avatar_url": "https://avatars.githubusercontent.com/u/20234?v=4"
+        },
+        {
+            "username": "bmish",
+            "name": "Bryan Mishkin",
+            "website": "http://www.linkedin.com/in/bmish",
+            "avatar_url": "https://avatars.githubusercontent.com/u/698306?v=4"
+        },
+        {
             "username": "g-plane",
             "name": "Pig Fang",
             "website": "https://gplane.win",

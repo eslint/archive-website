@@ -1,0 +1,47 @@
+---
+title: Unit Tests
+layout: doc
+edit_link: https://github.com/eslint/eslint/edit/master/docs/developer-guide/unit-tests.md
+
+---
+<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
+
+# Unit Tests
+
+Most parts of ESLint have unit tests associated with them. Unit tests are written using [Mocha](https://mochajs.org/) and are required when making contributions to ESLint. You'll find all of the unit tests in the `tests` directory.
+
+When you first get the source code, you need to run `npm install` once initially to set ESLint for development. Once you've done that, you can run the tests via:
+
+    npm test
+
+This automatically starts Mocha and runs all tests in the `tests` directory. You need only add yours and it will automatically be picked up when running tests.
+
+## Running Individual Tests
+
+If you want to quickly run just one test file, you can do so by running Mocha directly and passing in the filename. For example:
+
+    npm run test:cli tests/lib/rules/no-wrap-func.js
+
+If you want to run just one or a subset of `RuleTester` test cases, add `only: true` to each test case or wrap the test case in `RuleTester.only(...)` to add it automatically:
+
+```js
+ruleTester.run("my-rule", myRule, {
+    valid: [
+        RuleTester.only("const valid = 42;"),
+        // Other valid cases
+    ],
+    invalid: [
+        {
+            code: "const invalid = 42;",
+            only: true,
+        },
+        // Other invalid cases
+    ]
+})
+```
+
+Running individual tests is useful when you're working on a specific bug and iterating on the solution. You should be sure to run `npm test` before submitting a pull request. `npm test` uses Mocha's `--forbid-only` option to prevent `only` tests from passing full test runs.
+
+## More Control on Unit Testing
+
+`npm run test:cli` is an alias of the Mocha cli in `./node_modules/.bin/mocha`. [Options](https://mochajs.org/#command-line-usage) are available to be provided to help to better control the test to run.

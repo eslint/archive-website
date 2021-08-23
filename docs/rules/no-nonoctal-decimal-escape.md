@@ -8,6 +8,8 @@ rule_type: suggestion
 
 # Disallow `\8` and `\9` escape sequences in string literals (no-nonoctal-decimal-escape)
 
+(hasSuggestions) Some problems reported by this rule are manually fixable by editor [suggestions](../developer-guide/working-with-rules#providing-suggestions).
+
 Although not being specified in the language until ECMAScript 2021, `\8` and `\9` escape sequences in string literals were allowed in most JavaScript engines, and treated as "useless" escapes:
 
 ```js
