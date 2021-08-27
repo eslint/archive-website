@@ -23,6 +23,10 @@ obj.foo = function bar() {};
 obj['foo'] = function bar() {};
 var obj = {foo: function bar() {}};
 ({['foo']: function bar() {}});
+
+class C {
+    foo = function bar() {};
+}
 ```
 
 ```js
@@ -34,6 +38,10 @@ obj.foo = function foo() {};
 obj['foo'] = function foo() {};
 var obj = {foo: function foo() {}};
 ({['foo']: function foo() {}});
+
+class C {
+    foo = function foo() {};
+}
 ```
 
 Examples of **correct** code for this rule:
@@ -62,6 +70,21 @@ obj['x' + 2] = function bar(){};
 var [ bar ] = [ function bar(){} ];
 ({[foo]: function bar() {}})
 
+class C {
+    foo = function foo() {};
+    baz = function() {};
+}
+
+// private names are ignored
+class D {
+    #foo = function foo() {};
+    #bar = function foo() {};
+    baz() {
+        this.#foo = function foo() {};
+        this.#foo = function bar() {};
+    }
+}
+
 module.exports = function foo(name) {};
 module['exports'] = function foo(name) {};
 ```
@@ -88,6 +111,21 @@ var obj = {foo: function() {}};
 obj['x' + 2] = function bar(){};
 var [ bar ] = [ function bar(){} ];
 ({[foo]: function bar() {}})
+
+class C {
+    foo = function bar() {};
+    baz = function() {};
+}
+
+// private names are ignored
+class D {
+    #foo = function foo() {};
+    #bar = function foo() {};
+    baz() {
+        this.#foo = function foo() {};
+        this.#foo = function bar() {};
+    }
+}
 
 module.exports = function foo(name) {};
 module['exports'] = function foo(name) {};
