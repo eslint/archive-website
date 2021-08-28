@@ -476,6 +476,15 @@
             "tier": "backer"
         },
         {
+            "name": "Jellypepper",
+            "url": "https://jellypepper.com/",
+            "image": "https://images.opencollective.com/jellypepperhq/3de4023/logo.png",
+            "monthlyDonation": 500,
+            "totalDonations": 500,
+            "source": "opencollective",
+            "tier": "backer"
+        },
+        {
             "name": "Mesh Payments",
             "url": "https://meshpayments.com/",
             "image": "https://images.opencollective.com/meshpayments/e216d5a/logo.png",
