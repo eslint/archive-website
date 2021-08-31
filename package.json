@@ -33,7 +33,7 @@
     "anchor-js": "^4.2.2",
     "bootstrap": "^3.4.1",
     "bootstrap.native": "^2.0.27",
-    "codemirror": "^5.54.0",
+    "codemirror": "^5.58.2",
     "docsearch.js": "^2.6.3",
     "highlight.js": "^10.4.1",
     "react": "^16.13.1",
