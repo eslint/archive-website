@@ -601,15 +601,6 @@
             "tier": "backer"
         },
         {
-            "name": "Ayush Sachdeva",
-            "url": null,
-            "image": "https://images.opencollective.com/ayush000/avatar.png",
-            "monthlyDonation": 500,
-            "totalDonations": 4000,
-            "source": "opencollective",
-            "tier": "backer"
-        },
-        {
             "name": "Nathan Friedly",
             "url": "http://www.nfriedly.com",
             "image": "https://images.opencollective.com/nfriedly/c7be1d5/avatar.png",
@@ -893,7 +884,7 @@
             "url": "https://twitter.com/LJHarb",
             "image": "https://images.opencollective.com/ljharb/b75a3f8/avatar.png",
             "monthlyDonation": 500,
-            "totalDonations": 15500,
+            "totalDonations": 16000,
             "source": "opencollective",
             "tier": "backer"
         },
