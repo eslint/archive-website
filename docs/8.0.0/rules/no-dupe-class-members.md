@@ -35,7 +35,6 @@ Examples of **incorrect** code for this rule:
 
 ```js
 /*eslint no-dupe-class-members: "error"*/
-/*eslint-env es6*/
 
 class Foo {
   bar() { }
@@ -45,6 +44,16 @@ class Foo {
 class Foo {
   bar() { }
   get bar() { }
+}
+
+class Foo {
+  bar;
+  bar;
+}
+
+class Foo {
+  bar;
+  bar() { }
 }
 
 class Foo {
@@ -57,7 +66,6 @@ Examples of **correct** code for this rule:
 
 ```js
 /*eslint no-dupe-class-members: "error"*/
-/*eslint-env es6*/
 
 class Foo {
   bar() { }
@@ -67,6 +75,16 @@ class Foo {
 class Foo {
   get bar() { }
   set bar(value) { }
+}
+
+class Foo {
+  bar;
+  qux;
+}
+
+class Foo {
+  bar;
+  qux() { }
 }
 
 class Foo {
