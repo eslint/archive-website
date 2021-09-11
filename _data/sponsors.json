@@ -1218,6 +1218,14 @@
             "tier": "backer"
         },
         {
+            "name": "Tim Bowersox",
+            "image": "https://avatars.githubusercontent.com/u/11789189?u=0760478a177e2a5e0795749d408a222960e33c54&v=4",
+            "url": "https://www.linkedin.com/in/t-bowersox",
+            "monthlyDonation": 500,
+            "source": "github",
+            "tier": "backer"
+        },
+        {
             "name": "Michael Rotarius",
             "image": "https://avatars.githubusercontent.com/u/13236924?u=c07053c05ab6ed3abd3a11a303186219b60c8adf&v=4",
             "url": "https://github.com/Mirobit",
