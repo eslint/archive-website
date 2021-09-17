@@ -56,6 +56,14 @@
             "tier": "gold-sponsor"
         },
         {
+            "name": "American Express",
+            "image": "https://avatars.githubusercontent.com/u/3853301?v=4",
+            "url": "https://americanexpress.io",
+            "monthlyDonation": 100000,
+            "source": "github",
+            "tier": "gold-sponsor"
+        },
+        {
             "name": "Substack",
             "image": "https://avatars.githubusercontent.com/u/53023767?v=4",
             "url": "https://substack.com/",
