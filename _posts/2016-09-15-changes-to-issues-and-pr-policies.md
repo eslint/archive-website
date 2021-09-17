@@ -3,8 +3,11 @@ title: Changes to Issue and Pull Request Policies
 tags:
   - release
   - minor
+blogDate: 15 September 2016
 ---
 # Changes to Issue and Pull Request Policies
+
+_15 September 2016_
 
 We've recently made some changes to our policies around issues and pull requests that we're happy to share with you.
 
