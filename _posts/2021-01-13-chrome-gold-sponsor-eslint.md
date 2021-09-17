@@ -6,8 +6,12 @@ tags:
   - Open Collective
   - Sponsors
   - Backers
+blogDate: 13 January 2021
 ---
+
 # Google Chrome becomes ESLint gold sponsor
+
+_13 January 2021_
 
 <p class="text-center">
     <a href="https://www.google.com/chrome" title="Google Chrome" rel="noopener nofollow" target="_blank"><img class="lazyload" width="170" data-src="/assets/img/logos/chrome.svg" alt="Google Chrome" src="/assets/img/logos/chrome.svg"></a>
