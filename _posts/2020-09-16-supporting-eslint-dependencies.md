@@ -4,9 +4,12 @@ tags:
   - Sponsorships
   - Donations
   - Dependencies
+blogDate: 16 September 2020
 ---
 
 # Supporting ESLint's dependencies
+
+_16 September 2020_
 
 When ESLint first started accepting donations, it was with the explicit goal of creating a sustainable future for the project. In the short term, that meant ensuring we could compensate those who spent a significant amount of time on the project, but we always intended that to be a starting point and not an end. There is so much more that goes into open source sustainability and we wanted to be mindful of that as we continued to grow. That's why we're excited to announce that we're now supporting several of the projects that ESLint itself is built upon.
 
