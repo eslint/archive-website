@@ -6,6 +6,8 @@ tags:
 ---
 # Introducing Espree, an Esprima alternative
 
+_24 December 2014_
+
 Since ESLint's very first release, we've built on top of the open source [Esprima](http://esprima.org) parser. Doing so allowed us to get a drop-in, production-ready parser on which we could built the linter of our dreams. That meant we could spend less time worrying about parsing JavaScript code and more time figuring out the best ways to work with that code. ESLint is built around the SpiderMonkey AST produced by Esprima and that decision served us well up until this point.
 
 Earlier this year as we were attempting to include ECMAScript 6 and JSX support in ESLint, we ran into a lot of problems. Esprima's ECMAScript 6 support hadn't been published and there hadn't been a new release in several months. In the meantime, Facebook had created its own fork that had both ECMAScript 6 and JSX support, and so we attempted to use that instead, hoping for a drop-in replacement. Unfortunately, we found several key disparities between the way it worked and Esprima 1.2.2, the version upon which ESLint is currently based. These made it impossible to continue forward because it would have required massive changes not only to our own code base, but also to third-party plugins in the ESLint ecosystem. We tried filing bugs to get answers to these issues and unfortunately were unable to resolve them.
