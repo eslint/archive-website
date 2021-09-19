@@ -8,10 +8,6 @@ tags:
 blogDate: 28 August 2020
 ---
 
-# Announcing ESLint's public roadmap
-
-_28 August 2020_
-
 When ESLint [first started accepting donations](https://eslint.org/blog/2019/02/funding-eslint-future), we listed several ways that the project intended to spend the money donated:
 
 * **Paying team members for maintenance and development.** We hired our first part-time maintainer, [Kai Cataldo](https://github.com/kaicataldo), and started paying TSC members on a per-hour basis up to $1,000 each month (the maximum we can afford at the moment).

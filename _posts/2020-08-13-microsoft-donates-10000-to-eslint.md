@@ -9,10 +9,6 @@ tags:
 blogDate: 13 August 2020
 ---
 
-# Microsoft donates $10,000 to ESLint as first FOSS Fund recipient
-
-_13 August 2020_
-
 <p class="text-center">
     <a href="https://www.microsoft.com/" title="Microsoft" rel="noopener nofollow" target="_blank"><img class="lazyload" width="170" data-src="/assets/img/logos/microsoft.png" alt="Microsoft" src="/assets/img/logos/microsoft.png"></a>
     <a href="https://eslint.org/" title="ESLint" target="_blank"><img class="lazyload" width="200" data-src="/assets/img/logo.svg" alt="ESLint" src="/assets/img/logo.svg"></a>

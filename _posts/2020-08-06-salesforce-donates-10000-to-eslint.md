@@ -9,10 +9,6 @@ tags:
 blogDate: 6 August 2020
 ---
 
-# Salesforce donates $10,000 to ESLint
-
-_6 August 2020_
-
 <p class="text-center">
     <a href="https://www.salesforce.com/" title="Salesforce" rel="noopener nofollow" target="_blank"><img class="lazyload" width="200" data-src="/assets/img/logos/salesforce.png" alt="Salesforce" src="/assets/img/logos/salesforce.png"></a>
     <a href="https://eslint.org/" title="ESLint" target="_blank"><img class="lazyload" width="200" data-src="/assets/img/logo.svg" alt="ESLint" src="/assets/img/logo.svg"></a>
