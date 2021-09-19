@@ -5,9 +5,6 @@ tags:
   - parser
 blogDate: 18 January 2019
 ---
-# The future of TypeScript on ESLint
-
-_18 January 2019_
 
 A couple of weeks ago, the TypeScript team shared their [roadmap](https://github.com/Microsoft/TypeScript/issues/29288) in which they described formally adopting ESLint in their repo and working to improve TypeScript compatibility for ESLint:
 

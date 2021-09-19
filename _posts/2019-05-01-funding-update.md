@@ -9,10 +9,6 @@ tags:
 blogDate: 1 May 2019
 ---
 
-# Funding ESLint's Future: An Update
-
-_1 May 2019_
-
 Back in February, we [announced](https://eslint.org/blog/2019/02/funding-eslint-future) the creation of the [ESLint Collective](https://opencollective.com/eslint) to raise funds for the ongoing maintenance and development of ESLint. At the time, we were grateful to have both [Facebook Open Source](https://code.facebook.com/projects/) and [Airbnb](https://airbnb.com) as our first two gold sponsors, each donating $1,000 per month.
 
 In the past three months, we are happy to share that our monthly donations have reached over $7,000, 35% of the way towards our $20,000 goal. That's an amazing achievement in such a short amount of time, and we are humbled that so many have reached out to support ESLint.

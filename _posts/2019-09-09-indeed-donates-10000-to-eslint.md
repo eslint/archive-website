@@ -8,9 +8,6 @@ tags:
   - Backers
 blogDate: 9 September 2019
 ---
-# Indeed donates $10,000 to ESLint
-
-_9 September 2019_
 
 <p class="text-center">
     <a href="https://indeed.com/" title="Indeed" rel="noopener nofollow" target="_blank"><img class="lazyload" width="200" data-src="/assets/img/logos/indeed.svg" alt="Indeed" src="/assets/img/logos/indeed.svg"></a>
