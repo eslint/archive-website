@@ -9,10 +9,6 @@ tags:
 blogDate: 18 February 2021
 ---
 
-# Nx becomes ESLint gold sponsor
-
-_18 February 2021_
-
 <p class="text-center">
     <a href="https://nx.dev" title="Nx" rel="noopener nofollow" target="_blank"><img class="lazyload" width="170" data-src="/assets/img/logos/nx.svg" alt="Nx" src="/assets/img/logos/nx.svg"></a>
     <a href="https://eslint.org/" title="ESLint" target="_blank"><img class="lazyload" width="200" data-src="/assets/img/logo.svg" alt="ESLint" src="/assets/img/logo.svg"></a>
