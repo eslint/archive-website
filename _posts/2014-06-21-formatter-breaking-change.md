@@ -3,10 +3,8 @@ title: Formatter Breaking Change
 tags:
   - breaking change
   - formatter
+blogDate: 21 June 2014
 ---
-# Formatter Breaking Change
-
-_21 June 2014_
 
 In the next minor release of ESLint (which will be 0.7.1 due to us incorrectly pushing 0.6.2 as 0.7.0 last month), there will be a breaking change to the way formatters operate.
 
