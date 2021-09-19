@@ -7,10 +7,6 @@ tags:
 blogDate: 27 November 2018
 ---
 
-# End-of-Life for Built-in JSDoc Support in ESLint
-
-_27 November 2018_
-
 Over the past few years, the ESLint project has grown in size and scope. What originally consisted of a single executable package has grown into a project with multiple packages including several parsers and other utilities. Although the project has grown, the size of the team has not, and as such we’ve had to make some tough decisions about how to continue maintaining the ESLint project as a whole using an all-volunteer team.
 
 As part of a recent review, we've decided to end-of-life the built-in support for JSDoc in the ESLint project. This post contains the details of that decision and what happens next.
