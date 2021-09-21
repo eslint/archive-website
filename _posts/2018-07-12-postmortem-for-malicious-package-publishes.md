@@ -2,7 +2,6 @@
 title: Postmortem for Malicious Packages Published on July 12th, 2018
 tags:
   - security
-blogDate: 12 July 2018
 ---
 
 ## Summary

@@ -3,7 +3,6 @@ title: Breaking change to ESLint config files
 tags:
   - breaking change
   - config file
-blogDate: 20 January 2014
 ---
 
 In previous versions of ESLint, it was possible to use JavaScript files as configuration files on the command line, such as:

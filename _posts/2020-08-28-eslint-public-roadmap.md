@@ -5,7 +5,6 @@ tags:
   - Donations
   - Roadmap
   - Planning
-blogDate: 28 August 2020
 ---
 
 When ESLint [first started accepting donations](https://eslint.org/blog/2019/02/funding-eslint-future), we listed several ways that the project intended to spend the money donated:

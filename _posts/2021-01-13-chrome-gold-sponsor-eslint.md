@@ -6,7 +6,6 @@ tags:
   - Open Collective
   - Sponsors
   - Backers
-blogDate: 13 January 2021
 ---
 
 <p class="text-center">
