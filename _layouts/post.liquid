@@ -13,11 +13,7 @@
         <main class="blog">
           <article>
             <h1>{{ title }}</h1>
-            {% for post in collections.posts %}
-              {% if title == post.data.title %}
-                <em>{{ post.date | dateFormat: "d LLLL yyyy" }}</em>
-              {% endif %}
-            {% endfor %}
+            <em>{{ page.date | dateFormat: "d LLLL yyyy" }}</em>
             <br />
             <br />
             {{ content }}
