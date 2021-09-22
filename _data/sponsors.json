@@ -501,15 +501,6 @@
             "tier": "backer"
         },
         {
-            "name": "Incognito",
-            "url": null,
-            "image": "https://images.opencollective.com/incognito-7f2c1979/avatar.png",
-            "monthlyDonation": 500,
-            "totalDonations": 500,
-            "source": "opencollective",
-            "tier": "backer"
-        },
-        {
             "name": "Jellypepper",
             "url": "https://jellypepper.com/",
             "image": "https://images.opencollective.com/jellypepperhq/3de4023/logo.png",
