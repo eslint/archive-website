@@ -6,8 +6,6 @@ tags:
   - Dependencies
 ---
 
-# Supporting ESLint's dependencies
-
 When ESLint first started accepting donations, it was with the explicit goal of creating a sustainable future for the project. In the short term, that meant ensuring we could compensate those who spent a significant amount of time on the project, but we always intended that to be a starting point and not an end. There is so much more that goes into open source sustainability and we wanted to be mindful of that as we continued to grow. That's why we're excited to announce that we're now supporting several of the projects that ESLint itself is built upon.
 
 Sponsors choose to support ESLint because they have come to depend on ESLint, and as such, want to ensure that the project continues. Similarly, ESLint is built on top of smaller open source projects, and we feel like it is our responsibility to also help those projects thrive. We're grateful to our sponsors for helping us get to 50% of our $20,000/month goal, and we feel that it's time to spread some of that success to our dependencies. As such, we've budgeted part of our donations for our dependencies.

@@ -7,8 +7,6 @@ tags:
 - plans
 ---
 
-# Welcoming JSCS to ESLint
-
 ESLint and [JSCS](https://jscs-dev.github.io/) started out at roughly the same time, just three weeks apart in 2013. Both teams had a similar idea: leverage the ecosystem of ESTree-compatible tools such as Esprima to create the next generation of static analysis tools for JavaScript. While ESLint's primary goal was to create a linter with pluggable rules, JSCS's primary goal was to codify style guides for easy verification and fixing. Both projects grew and became popular, and soon, we found ourselves playing catch up with each other for features.
 
 For nearly three years now, both teams have been working on solving the same types of issues: how to share configurations, how to autofix some problems, and how to enable the respective ecosystems to grow and thrive. We've been doing a lot of the same work in parallel, and recently the teams met to talk about that. We all came to the conclusion that it would be better to be one team, working together on solving these problems, rather than continuing to compete with one another.

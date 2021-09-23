@@ -8,8 +8,6 @@ tags:
   - Backers
 ---
 
-# Funding ESLint's Future: An Update
-
 Back in February, we [announced](https://eslint.org/blog/2019/02/funding-eslint-future) the creation of the [ESLint Collective](https://opencollective.com/eslint) to raise funds for the ongoing maintenance and development of ESLint. Our goal was to raise $20,000 each month to support the project, and since then, we've been grateful for contributions from nearly 150 companies, projects, and individuals towards that goal.
 
 We are happy to share that we are currently sponsored at just under $10,000 per month, almost 50% of our goal! At this level, we've been able to start paying team members for their time (more about this below), ensuring ESLint gets the ongoing support it needs.

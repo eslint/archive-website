@@ -7,7 +7,6 @@ tags:
   - Sponsors
   - Backers
 ---
-# Nx becomes ESLint gold sponsor
 
 <p class="text-center">
     <a href="https://nx.dev" title="Nx" rel="noopener nofollow" target="_blank"><img class="lazyload" width="170" data-src="/assets/img/logos/nx.svg" alt="Nx" src="/assets/img/logos/nx.svg"></a>

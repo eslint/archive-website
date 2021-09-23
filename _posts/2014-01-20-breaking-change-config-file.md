@@ -5,8 +5,6 @@ tags:
   - config file
 ---
 
-# Breaking change to ESLint config files
-
 In previous versions of ESLint, it was possible to use JavaScript files as configuration files on the command line, such as:
 
 ```

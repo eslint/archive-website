@@ -7,7 +7,6 @@ tags:
   - Sponsors
   - Backers
 ---
-# Salesforce donates $10,000 to ESLint
 
 <p class="text-center">
     <a href="https://www.salesforce.com/" title="Salesforce" rel="noopener nofollow" target="_blank"><img class="lazyload" width="200" data-src="/assets/img/logos/salesforce.png" alt="Salesforce" src="/assets/img/logos/salesforce.png"></a>

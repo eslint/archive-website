@@ -4,7 +4,6 @@ tags:
   - rules
   - development
 ---
-# ESLint's New Rule Format
 
 When ESLint began three years ago, it was a much smaller project with a much smaller user base. The project has grown a lot since that time and, in order to help the project scale, we've invested a lot of time into automating as many processes as possible. For instance, our release process is now completely automated, including deciding what the next version number should be based on the commits going into the release. When we looked over the processes that are still manual, there was one that jumped out as a big pain point: keeping rule documentation in sync. This wasn't a big problem when there were a dozen rules, but with over 200, this repeated process has become a big time commitment.
 

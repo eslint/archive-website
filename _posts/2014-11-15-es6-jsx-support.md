@@ -4,7 +4,6 @@ tags:
   - ES6
   - JSX
 ---
-# Announcing ES6 and JSX support
 
 We've been working on [#1291](https://github.com/eslint/eslint/issues/1291) for a while to see how we could add support for ECMAScript 6 and JSX into ESLint. While we were investigating adding ES6 support, we were also getting a fair amount of requests to add JSX support. We soon realized that Facebook's Esprima fork that supports both ES6 and JSX would be the easiest way to move forward.
 

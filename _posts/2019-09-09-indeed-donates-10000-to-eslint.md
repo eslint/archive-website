@@ -7,7 +7,6 @@ tags:
   - Sponsors
   - Backers
 ---
-# Indeed donates $10,000 to ESLint
 
 <p class="text-center">
     <a href="https://indeed.com/" title="Indeed" rel="noopener nofollow" target="_blank"><img class="lazyload" width="200" data-src="/assets/img/logos/indeed.svg" alt="Indeed" src="/assets/img/logos/indeed.svg"></a>

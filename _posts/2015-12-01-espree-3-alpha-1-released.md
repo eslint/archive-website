@@ -6,8 +6,6 @@ tags:
   - alpha
 ---
 
-# Espree v3.0.0 Alpha 1 released
-
 We are pleased to share that we've just pushed the first alpha release of Espree v3.0.0. This is a major release with breaking changes, so please be sure to read this post thoroughly.
 
 ## Installation

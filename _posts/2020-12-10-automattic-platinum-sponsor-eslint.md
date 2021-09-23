@@ -7,7 +7,6 @@ tags:
   - Sponsors
   - Backers
 ---
-# Automattic becomes ESLint's first platinum sponsor
 
 <p class="text-center" style="margin-top: 100px; margin-bottom: 100px">
     <a href="https://automattic.com/" title="Automattic" rel="noopener nofollow" target="_blank"><img class="lazyload" width="400" data-src="/assets/img/logos/automattic.svg" alt="Indeed" src="/assets/img/logos/automattic.svg"></a>

@@ -7,7 +7,6 @@ tags:
   - Sponsors
   - Backers
 ---
-# Google Chrome becomes ESLint gold sponsor
 
 <p class="text-center">
     <a href="https://www.google.com/chrome" title="Google Chrome" rel="noopener nofollow" target="_blank"><img class="lazyload" width="170" data-src="/assets/img/logos/chrome.svg" alt="Google Chrome" src="/assets/img/logos/chrome.svg"></a>

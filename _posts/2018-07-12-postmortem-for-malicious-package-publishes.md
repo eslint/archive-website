@@ -4,8 +4,6 @@ tags:
   - security
 ---
 
-# Postmortem for Malicious Packages Published on July 12th, 2018
-
 ## Summary
 
 On July 12th, 2018, an attacker compromised the npm account of an ESLint maintainer and published malicious versions of the [`eslint-scope`](https://github.com/eslint/eslint-scope) and [`eslint-config-eslint`](https://github.com/eslint/eslint/tree/9aaf195ca691d307e8896096cefffe975218c701/packages/eslint-config-eslint) packages to the npm registry. On installation, the malicious packages downloaded and executed code from `pastebin.com` which sent the contents of the user's `.npmrc` file to the attacker. An `.npmrc` file typically contains access tokens for publishing to npm.

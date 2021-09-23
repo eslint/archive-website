@@ -6,8 +6,6 @@ tags:
   - Code of Conduct
 ---
 
-# Making ESLint more inclusive
-
 From its beginning, the ESLint project has sought to be a place that is welcoming and inclusive of everyone. We adopted a code of conduct before doing so was common (even before we joined the jQuery Foundation, now the OpenJS Foundation) and the project has been maintained by a group of developers from all around the world, representing a variety of ethnicities, cultures, and countries. Even so, we understand that inclusivity is a process that must be adapted as we learn and grow. There is always some way to be more welcoming, and today we're happy to share with you some of our recent efforts.
 
 ## Eliminating problematic terminology

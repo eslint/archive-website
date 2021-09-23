@@ -4,7 +4,6 @@ tags:
   - release
   - minor
 ---
-# Changes to Issue and Pull Request Policies
 
 We've recently made some changes to our policies around issues and pull requests that we're happy to share with you.
 

@@ -8,8 +8,6 @@ tags:
   - Backers
 ---
 
-# Funding ESLint's Future
-
 June 2019 will mark six years since ESLint was first released. What began as a side project for a very narrow use case has grown into the most popular JavaScript linter in the world, with over 6.5 million npm downloads *every week*. ESLint is now used by both large companies and individual developers to help find and fix problems with JavaScript code every day. In addition, ESLint has been flexible enough to work with languages derived from JavaScript, such as [Flow](https://www.npmjs.com/package/eslint-plugin-flowtype) and [TypeScript](https://typescript-eslint.io), and even helps mobile developers by linting [React Native](https://www.npmjs.com/package/eslint-plugin-react-native).
 
 All of this means that ESLint has become an important part of the JavaScript ecosystem. It's a tool that the JavaScript community depends on and expects to be available, performant, and secure. These expectations are currently being met by an all-volunteer team who spends their free time during lunch breaks, nights, and weekends maintaining ESLint. And while that has worked well for normal maintenance, it's grown difficult to deal with more involved issues such as roadmap planning and security issues.

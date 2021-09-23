@@ -4,7 +4,6 @@ tags:
   - ES6
   - JSX
 ---
-# Introducing Espree, an Esprima alternative
 
 Since ESLint's very first release, we've built on top of the open source [Esprima](http://esprima.org) parser. Doing so allowed us to get a drop-in, production-ready parser on which we could built the linter of our dreams. That meant we could spend less time worrying about parsing JavaScript code and more time figuring out the best ways to work with that code. ESLint is built around the SpiderMonkey AST produced by Esprima and that decision served us well up until this point.
 
