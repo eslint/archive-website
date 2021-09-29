@@ -113,7 +113,7 @@ async function fetchOpenCollectiveSponsors() {
         name: order.fromAccount.name,
         url: order.fromAccount.website,
         image: order.fromAccount.imageUrl,
-        monthlyDonation: order.frequency === "year" ? Math.round(order.amount.value * 100 / 12) : order.amount.value * 100,
+        monthlyDonation: order.frequency === "YEARLY" ? Math.round(order.amount.value * 100 / 12) : order.amount.value * 100,
         totalDonations: order.totalDonations.value * 100,
         source: "opencollective",
         tier: order.tier ? order.tier.slug : null
