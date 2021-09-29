@@ -185,15 +185,6 @@
     ],
     "backers": [
         {
-            "name": "Drake Costa",
-            "url": null,
-            "image": "https://images.opencollective.com/drake-costa/avatar.png",
-            "monthlyDonation": 10000,
-            "totalDonations": 10000,
-            "source": "opencollective",
-            "tier": null
-        },
-        {
             "name": "Yannick Croissant",
             "url": "https://yannick.cr",
             "image": "https://images.opencollective.com/yannickcr/765f06f/avatar.png",
@@ -269,24 +260,6 @@
             "monthlyDonation": 2500,
             "source": "github",
             "tier": "backer"
-        },
-        {
-            "name": "Roman Nazarenko",
-            "url": null,
-            "image": "https://images.opencollective.com/roman-nazarenko/avatar.png",
-            "monthlyDonation": 2000,
-            "totalDonations": 4000,
-            "source": "opencollective",
-            "tier": null
-        },
-        {
-            "name": "incognito",
-            "url": null,
-            "image": "https://images.opencollective.com/incognito-97d2b095/avatar.png",
-            "monthlyDonation": 1200,
-            "totalDonations": 2400,
-            "source": "opencollective",
-            "tier": null
         },
         {
             "name": "Oleksii Myzgin",
@@ -492,6 +465,15 @@
             "tier": "backer"
         },
         {
+            "name": "Drake Costa",
+            "url": null,
+            "image": "https://images.opencollective.com/drake-costa/avatar.png",
+            "monthlyDonation": 833,
+            "totalDonations": 10000,
+            "source": "opencollective",
+            "tier": null
+        },
+        {
             "name": "Jellypepper",
             "url": "https://jellypepper.com/",
             "image": "https://images.opencollective.com/jellypepperhq/3de4023/logo.png",
@@ -627,15 +609,6 @@
             "tier": "backer"
         },
         {
-            "name": "PLANFRED",
-            "url": "https://www.planfred.com",
-            "image": "https://images.opencollective.com/planfredapp/4ae56a1/logo.png",
-            "monthlyDonation": 500,
-            "totalDonations": 500,
-            "source": "opencollective",
-            "tier": null
-        },
-        {
             "name": "Lex Webb",
             "url": null,
             "image": "https://images.opencollective.com/lex-webb/e94811a/avatar.png",
@@ -677,15 +650,6 @@
             "image": "https://images.opencollective.com/justinnoel/7c4d721/avatar.png",
             "monthlyDonation": 500,
             "totalDonations": 7000,
-            "source": "opencollective",
-            "tier": "backer"
-        },
-        {
-            "name": "Francesc Rosas",
-            "url": null,
-            "image": "https://images.opencollective.com/francescrosas/avatar.png",
-            "monthlyDonation": 500,
-            "totalDonations": 600,
             "source": "opencollective",
             "tier": "backer"
         },
@@ -1413,11 +1377,29 @@
             "tier": null
         },
         {
+            "name": "Roman Nazarenko",
+            "url": null,
+            "image": "https://images.opencollective.com/roman-nazarenko/avatar.png",
+            "monthlyDonation": 167,
+            "totalDonations": 4000,
+            "source": "opencollective",
+            "tier": null
+        },
+        {
             "name": "Guest",
             "url": null,
             "image": "https://images.opencollective.com/guest-e7e936cc/avatar.png",
             "monthlyDonation": 100,
             "totalDonations": 100,
+            "source": "opencollective",
+            "tier": null
+        },
+        {
+            "name": "incognito",
+            "url": null,
+            "image": "https://images.opencollective.com/incognito-97d2b095/avatar.png",
+            "monthlyDonation": 100,
+            "totalDonations": 2400,
             "source": "opencollective",
             "tier": null
         },
@@ -1447,6 +1429,24 @@
             "totalDonations": 4700,
             "source": "opencollective",
             "tier": null
+        },
+        {
+            "name": "PLANFRED",
+            "url": "https://www.planfred.com",
+            "image": "https://images.opencollective.com/planfredapp/4ae56a1/logo.png",
+            "monthlyDonation": 42,
+            "totalDonations": 500,
+            "source": "opencollective",
+            "tier": null
+        },
+        {
+            "name": "Francesc Rosas",
+            "url": null,
+            "image": "https://images.opencollective.com/francescrosas/avatar.png",
+            "monthlyDonation": 42,
+            "totalDonations": 600,
+            "source": "opencollective",
+            "tier": "backer"
         }
     ]
 }
