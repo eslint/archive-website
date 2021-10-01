@@ -125,7 +125,7 @@
             "url": "https://mixpanel.com",
             "image": "https://images.opencollective.com/mixpanel/cd682f7/logo.png",
             "monthlyDonation": 20000,
-            "totalDonations": 500000,
+            "totalDonations": 520000,
             "source": "opencollective",
             "tier": "bronze-sponsor"
         },
@@ -694,7 +694,7 @@
             "url": "https://matterapp.com",
             "image": "https://images.opencollective.com/matter_hq/ac0a719/logo.png",
             "monthlyDonation": 500,
-            "totalDonations": 13000,
+            "totalDonations": 13500,
             "source": "opencollective",
             "tier": "backer"
         },
