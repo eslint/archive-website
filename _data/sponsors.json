@@ -87,7 +87,7 @@
         {
             "name": "launchdarkly",
             "url": "https://launchdarkly.com",
-            "image": "https://images.opencollective.com/launchdarkly/d54f997/logo.png",
+            "image": "https://images.opencollective.com/launchdarkly/574bb9e/logo.png",
             "monthlyDonation": 20000,
             "totalDonations": 20000,
             "source": "opencollective",
@@ -125,7 +125,7 @@
             "url": null,
             "image": "https://images.opencollective.com/bugsnag-stability-monitoring/c2cef36/logo.png",
             "monthlyDonation": 20000,
-            "totalDonations": 460000,
+            "totalDonations": 480000,
             "source": "opencollective",
             "tier": "bronze-sponsor"
         },
@@ -595,7 +595,7 @@
             "url": "https://sushko.me",
             "image": "https://images.opencollective.com/sashasushko/5b221d8/avatar.png",
             "monthlyDonation": 500,
-            "totalDonations": 4500,
+            "totalDonations": 5000,
             "source": "opencollective",
             "tier": "backer"
         },
