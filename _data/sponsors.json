@@ -78,12 +78,21 @@
             "url": "https://liftoff.io/",
             "image": "https://images.opencollective.com/liftoff/5c4fa84/logo.png",
             "monthlyDonation": 50000,
-            "totalDonations": 800000,
+            "totalDonations": 850000,
             "source": "opencollective",
             "tier": "silver-sponsor"
         }
     ],
     "bronze": [
+        {
+            "name": "launchdarkly",
+            "url": "https://launchdarkly.com",
+            "image": "https://images.opencollective.com/launchdarkly/d54f997/logo.png",
+            "monthlyDonation": 20000,
+            "totalDonations": 20000,
+            "source": "opencollective",
+            "tier": "bronze-sponsor"
+        },
         {
             "name": "TROYPOINT",
             "url": "https://troypoint.com",
@@ -143,7 +152,7 @@
             "url": "https://icons8.com",
             "image": "https://images.opencollective.com/icons8/7fa1641/logo.png",
             "monthlyDonation": 20000,
-            "totalDonations": 520000,
+            "totalDonations": 540000,
             "source": "opencollective",
             "tier": "bronze-sponsor"
         },
@@ -739,7 +748,7 @@
             "url": "https://twitter.com/jumbleofideas",
             "image": "https://images.opencollective.com/aj-klein/b63b472/avatar.png",
             "monthlyDonation": 500,
-            "totalDonations": 15500,
+            "totalDonations": 16000,
             "source": "opencollective",
             "tier": "backer"
         },
@@ -749,15 +758,6 @@
             "image": "https://images.opencollective.com/third_iron/fa6ec4d/logo.png",
             "monthlyDonation": 500,
             "totalDonations": 16500,
-            "source": "opencollective",
-            "tier": "backer"
-        },
-        {
-            "name": "Martin K.",
-            "url": "https://kluska.cz",
-            "image": "https://images.opencollective.com/martin-kluska/588a7ff/avatar.png",
-            "monthlyDonation": 500,
-            "totalDonations": 16000,
             "source": "opencollective",
             "tier": "backer"
         },
