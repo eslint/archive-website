@@ -34,7 +34,7 @@
             "url": "https://www.salesforce.com",
             "image": "https://images.opencollective.com/salesforce/ca8f997/logo.png",
             "monthlyDonation": 100000,
-            "totalDonations": 4134100,
+            "totalDonations": 4234100,
             "source": "opencollective",
             "tier": "gold-sponsor"
         },
@@ -712,7 +712,7 @@
             "url": "https://medium.com/@eliseumds",
             "image": "https://images.opencollective.com/eliseu/fe16988/avatar.png",
             "monthlyDonation": 500,
-            "totalDonations": 13500,
+            "totalDonations": 14000,
             "source": "opencollective",
             "tier": "backer"
         },
@@ -1435,7 +1435,7 @@
             "url": "https://www.planfred.com",
             "image": "https://images.opencollective.com/planfredapp/4ae56a1/logo.png",
             "monthlyDonation": 42,
-            "totalDonations": 500,
+            "totalDonations": 1000,
             "source": "opencollective",
             "tier": null
         },
