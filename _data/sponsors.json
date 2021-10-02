@@ -98,7 +98,7 @@
             "url": "https://troypoint.com",
             "image": "https://images.opencollective.com/troypoint/080f96f/avatar.png",
             "monthlyDonation": 20000,
-            "totalDonations": 40000,
+            "totalDonations": 60000,
             "source": "opencollective",
             "tier": "bronze-sponsor"
         },
@@ -487,7 +487,7 @@
             "url": "https://jellypepper.com/",
             "image": "https://images.opencollective.com/jellypepperhq/3de4023/logo.png",
             "monthlyDonation": 500,
-            "totalDonations": 500,
+            "totalDonations": 1000,
             "source": "opencollective",
             "tier": "backer"
         },
