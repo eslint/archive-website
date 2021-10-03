@@ -934,6 +934,14 @@
             "tier": "backer"
         },
         {
+            "name": "Kobayashi Kazuhiro",
+            "image": "https://avatars.githubusercontent.com/u/548508?v=4",
+            "url": "https://kzhrk.dev/",
+            "monthlyDonation": 500,
+            "source": "github",
+            "tier": "backer"
+        },
+        {
             "name": "Loëck Vézien",
             "image": "https://avatars.githubusercontent.com/u/582703?u=a831045fcea633942aee6996b982c27b20e35e2d&v=4",
             "url": "https://loeck.me/",
