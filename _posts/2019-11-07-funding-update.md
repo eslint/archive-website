@@ -6,6 +6,7 @@ tags:
   - Open Collective
   - Sponsors
   - Backers
+authors: kaicataldo, nzakas
 ---
 
 Back in February, we [announced](https://eslint.org/blog/2019/02/funding-eslint-future) the creation of the [ESLint Collective](https://opencollective.com/eslint) to raise funds for the ongoing maintenance and development of ESLint. Our goal was to raise $20,000 each month to support the project, and since then, we've been grateful for contributions from nearly 150 companies, projects, and individuals towards that goal.
