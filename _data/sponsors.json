@@ -1373,6 +1373,14 @@
             "tier": "backer"
         },
         {
+            "name": "CORE Multi-Chain Framework",
+            "image": "https://avatars.githubusercontent.com/u/79542011?v=4",
+            "url": "coremultichain.com",
+            "monthlyDonation": 500,
+            "source": "github",
+            "tier": "backer"
+        },
+        {
             "name": "Will McAuliff",
             "url": null,
             "image": "https://images.opencollective.com/womcauliff/2be6f36/avatar.png",
