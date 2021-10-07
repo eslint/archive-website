@@ -6,6 +6,7 @@ tags:
   - Open Collective
   - Sponsors
   - Backers
+author: nzakas
 ---
 
 <p class="text-center" style="margin-top: 100px; margin-bottom: 100px">

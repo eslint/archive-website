@@ -4,6 +4,7 @@ title: What's coming in ESLint v7.0.0
 tags:
   - major
   - breaking changes
+author: nzakas
 ---
 
 Last week, the Technical Steering Committee (TSC) met to finalize the features for ESLint v7.0.0. This feature set had not yet been locked down even as v7.0.0 work began and so this represented an important milestone that allows us to focus on getting this next major release shipped. You can see everything that is planned for v7.0.0 on our [project board](https://github.com/eslint/eslint/projects/6).

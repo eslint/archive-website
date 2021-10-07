@@ -3,6 +3,7 @@ title: "Introducing the ESLint Google Season of Docs project and technical write
 tags:
   - Google Season of Docs
   - Technical Writing
+author: nzakas
 ---
 
 This year, ESLint was accepted into the Google Season of Docs (GSoD) program for the first time (thanks, in large part, to our [sponsors](https://opencollective.com/eslint)). The ESLint team has always placed a high value on quality documentation for the project and we came up with a [list of projects](https://github.com/eslint/eslint/issues/13130#issuecomment-614916040) that we thought could improve our documentation. We received more than 20 applications through GSoD, and after a lot of time grading and reviewing applications, we finally ended up with our technical writer!

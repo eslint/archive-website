@@ -4,6 +4,7 @@ title: Changes to our rules policies
 tags:
   - rules
   - policies
+authors: nzakas, btmills
 ---
 
 When ESLint was first created, the idea was to have a small set of 20-30 core rules that could get everyone started, and then to let the community build out its own rules to fill in any remaining gaps. We did, however, continue implementing core rules as it seemed helpful to the point where today there are 280 core rules. At any given time, more than half of open issues and pull requests are related to rules that take up a significant portion of the team's time.
