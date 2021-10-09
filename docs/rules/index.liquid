@@ -4,13 +4,13 @@ layout: doc
 ---
 
 <h1>Rules</h1>
-<p>Rules in ESLint are grouped by category to help you understand their purpose. Each rule has emojis denoting:</p>
+<p>Rules in ESLint are grouped by type to help you understand their purpose. Each rule has emojis denoting:</p>
 <p>(recommended) if the <code>"extends": "eslint:recommended"</code> property in a <a href="../user-guide/configuring#extending-configuration-files">configuration file</a> enables the rule</p>
 <p>(fixable) if some problems reported by the rule are automatically fixable by the <code>--fix</code> <a href="../user-guide/command-line-interface#--fix">command line</a> option</p>
 <p>(hasSuggestions) if some problems reported by the rule are manually fixable by editor <a href="../developer-guide/working-with-rules#providing-suggestions">suggestions</a></p>
-{% for category in rules.categories %}
-  <h2>{{ category.name }}</h2>
-  {{ category.description }}
+{% for type in rules.types %}
+  <h2>{{ type.displayName }}</h2>
+  {{ type.description }}
   <table class="rule-list table table-striped">
     <colgroup>
       <col class="recommended" />
@@ -20,7 +20,7 @@ layout: doc
       <col class="description" />
     </colgroup>
     <tbody>
-      {% for rule in category.rules %}
+      {% for rule in type.rules %}
         <tr>
         <td>{% if rule.recommended %}(recommended){% endif %}</td>
         <td>{% if rule.fixable %}(fixable){% endif %}</td>
