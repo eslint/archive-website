@@ -8,6 +8,8 @@ rule_type: problem
 
 # disallow use of optional chaining in contexts where the `undefined` value is not allowed (no-unsafe-optional-chaining)
 
+(recommended) The `"extends": "eslint:recommended"` property in a configuration file enables this rule.
+
 The optional chaining (`?.`) expression can short-circuit with a return value of `undefined`. Therefore, treating an evaluated optional chaining expression as a function, object, number, etc., can cause TypeError or unexpected results. For example:
 
 ```js

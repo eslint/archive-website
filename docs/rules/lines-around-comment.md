@@ -10,6 +10,8 @@ rule_type: layout
 
 (fixable) The `--fix` option on the [command line](../user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
 
+This rule was **deprecated** in ESLint v4.0.0 and replaced by the [`padding-line-between-statements`](padding-line-between-statements) rule.
+
 Many style guides require empty lines before or after comments. The primary goal
 of these rules is to make the comments easier to read and improve readability of the code.
 

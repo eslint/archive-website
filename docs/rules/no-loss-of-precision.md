@@ -8,6 +8,8 @@ rule_type: problem
 
 # Disallow Number Literals That Lose Precision (no-loss-of-precision)
 
+(recommended) The `"extends": "eslint:recommended"` property in a configuration file enables this rule.
+
 This rule would disallow the use of number literals that immediately lose precision at runtime when converted to a JS `Number` due to 64-bit floating-point rounding.
 
 ## Rule Details

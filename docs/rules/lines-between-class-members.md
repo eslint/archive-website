@@ -19,6 +19,7 @@ Examples of **incorrect** code for this rule:
 ```js
 /* eslint lines-between-class-members: ["error", "always"]*/
 class MyClass {
+  x;
   foo() {
     //...
   }
@@ -33,6 +34,8 @@ Examples of **correct** code for this rule:
 ```js
 /* eslint lines-between-class-members: ["error", "always"]*/
 class MyClass {
+  x;
+
   foo() {
     //...
   }
@@ -40,6 +43,17 @@ class MyClass {
   bar() {
     //...
   }
+}
+```
+
+Examples of additional **correct** code for this rule:
+
+```js
+/* eslint lines-between-class-members: ["error", "always"]*/
+class MyClass {
+  x = 1
+
+  ;in = 2
 }
 ```
 
@@ -62,12 +76,15 @@ Examples of **incorrect** code for this rule with the string option:
 ```js
 /* eslint lines-between-class-members: ["error", "always"]*/
 class Foo{
+  x;
   bar(){}
   baz(){}
 }
 
 /* eslint lines-between-class-members: ["error", "never"]*/
 class Foo{
+  x;
+
   bar(){}
 
   baz(){}
@@ -79,6 +96,8 @@ Examples of **correct** code for this rule with the string option:
 ```js
 /* eslint lines-between-class-members: ["error", "always"]*/
 class Foo{
+  x;
+
   bar(){}
 
   baz(){}
@@ -86,6 +105,7 @@ class Foo{
 
 /* eslint lines-between-class-members: ["error", "never"]*/
 class Foo{
+  x;
   bar(){}
   baz(){}
 }
@@ -96,6 +116,7 @@ Examples of **correct** code for this rule with the object option:
 ```js
 /* eslint lines-between-class-members: ["error", "always", { "exceptAfterSingleLine": true }]*/
 class Foo{
+  x; // single line class member
   bar(){} // single line class member
   baz(){
     // multi line class member

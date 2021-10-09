@@ -55,7 +55,7 @@ Specifying rules and plugins:
 Fixing problems:
   --fix                          Automatically fix problems
   --fix-dry-run                  Automatically fix problems without saving the changes to the file system
-  --fix-type Array               Specify the types of fixes to apply (problem, suggestion, layout)
+  --fix-type Array               Specify the types of fixes to apply (directive, problem, suggestion, layout)
 
 Ignoring files:
   --ignore-path path::String     Specify path of ignore file
@@ -248,11 +248,12 @@ This flag can be useful for integrations (e.g. editor plugins) which need to aut
 
 #### `--fix-type`
 
-This option allows you to specify the type of fixes to apply when using either `--fix` or `--fix-dry-run`. The three types of fixes are:
+This option allows you to specify the type of fixes to apply when using either `--fix` or `--fix-dry-run`. The four types of fixes are:
 
 1. `problem` - fix potential errors in the code
 1. `suggestion` - apply fixes to the code that improve it
 1. `layout` - apply fixes that do not change the program structure (AST)
+1. `directive` - apply fixes to inline directives such as `// eslint-disable`
 
 You can specify one or more fix type on the command line. Here are some examples:
 
@@ -346,14 +347,12 @@ When specified, the given format is output into the provided file name.
 This option specifies the output format for the console. Possible formats are:
 
 * [checkstyle](formatters/#checkstyle)
-* [codeframe](formatters/#codeframe)
 * [compact](formatters/#compact)
 * [html](formatters/#html)
 * [jslint-xml](formatters/#jslint-xml)
 * [json](formatters/#json)
 * [junit](formatters/#junit)
 * [stylish](formatters/#stylish) (the default)
-* [table](formatters/#table)
 * [tap](formatters/#tap)
 * [unix](formatters/#unix)
 * [visualstudio](formatters/#visualstudio)
