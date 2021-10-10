@@ -483,6 +483,15 @@
             "tier": null
         },
         {
+            "name": "Stefan Milenkovic",
+            "url": "https://stefan-milenkovic.com",
+            "image": "https://images.opencollective.com/stefan-milenkovic/1fd866a/avatar.png",
+            "monthlyDonation": 500,
+            "totalDonations": 500,
+            "source": "opencollective",
+            "tier": "backer"
+        },
+        {
             "name": "Jellypepper",
             "url": "https://jellypepper.com/",
             "image": "https://images.opencollective.com/jellypepperhq/3de4023/logo.png",
