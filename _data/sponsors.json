@@ -1262,6 +1262,14 @@
             "tier": "backer"
         },
         {
+            "name": "Solomon Gugsa",
+            "image": "https://avatars.githubusercontent.com/u/18420937?u=f30f430bd3fe58e00242741e5f0506572935864d&v=4",
+            "url": "https://github.com/soulsolomon",
+            "monthlyDonation": 500,
+            "source": "github",
+            "tier": "backer"
+        },
+        {
             "name": "BrightCrowd",
             "image": "https://avatars.githubusercontent.com/u/19253501?v=4",
             "url": "https://brightcrowd.com",
