@@ -76,7 +76,7 @@ export default class App extends Component {
             urlState || storedState || {
                 options: {
                     parserOptions: {
-                        ecmaVersion: 12,
+                        ecmaVersion: 13,
                         sourceType: "script",
                         ecmaFeatures: {}
                     },
