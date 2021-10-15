@@ -402,14 +402,6 @@
             "tier": "backer"
         },
         {
-            "name": "OpenCraft",
-            "image": "https://avatars.githubusercontent.com/u/7414786?v=4",
-            "url": "https://opencraft.com/",
-            "monthlyDonation": 1000,
-            "source": "github",
-            "tier": "backer"
-        },
-        {
             "name": "ILPT GmbH",
             "image": "https://avatars.githubusercontent.com/u/8994317?v=4",
             "url": "http://www.ilpt.de",
