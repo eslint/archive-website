@@ -475,6 +475,14 @@
             "tier": null
         },
         {
+            "name": null,
+            "image": "https://avatars.githubusercontent.com/u/20731068?v=4",
+            "url": "https://github.com/sentry",
+            "monthlyDonation": 800,
+            "source": "github",
+            "tier": "backer"
+        },
+        {
             "name": "Stefan Milenkovic",
             "url": "https://stefan-milenkovic.com",
             "image": "https://images.opencollective.com/stefan-milenkovic/1fd866a/avatar.png",
