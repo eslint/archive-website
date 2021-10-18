@@ -998,6 +998,14 @@
             "tier": "backer"
         },
         {
+            "name": null,
+            "image": "https://avatars.githubusercontent.com/u/950573?u=e39cd137ba9f5e90740611e24625eba0948b8b52&v=4",
+            "url": "https://berlysia.net/",
+            "monthlyDonation": 500,
+            "source": "github",
+            "tier": "backer"
+        },
+        {
             "name": "Andrey",
             "image": "https://avatars.githubusercontent.com/u/967317?u=cb59b08ee99dfe8aa4f314ee06a664a17e8963f1&v=4",
             "url": "https://akv.io",
