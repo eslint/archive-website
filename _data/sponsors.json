@@ -475,6 +475,14 @@
             "tier": null
         },
         {
+            "name": "Sentry",
+            "image": "https://avatars.githubusercontent.com/u/1396951?v=4",
+            "url": "https://sentry.io",
+            "monthlyDonation": 800,
+            "source": "github",
+            "tier": "backer"
+        },
+        {
             "name": null,
             "image": "https://avatars.githubusercontent.com/u/20731068?v=4",
             "url": "https://github.com/sentry",
