@@ -3,6 +3,7 @@ title: Preparing for 1.0.0
 tags:
   - release
   - announcement
+authors: nzakas, kaicataldo
 ---
 
 With 0.24.0 being released, we're now preparing for the 1.0.0 release. This has been a long time coming, and we're excited to be taking this important step. Here's a brief overview of what will happen next.
