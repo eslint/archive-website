@@ -13,7 +13,11 @@
         <main class="blog">
           <article>
             <h1>{{ title }}</h1>
-            by <b>{{ author }}</b><em> - {{ page.date | dateFormat: "d LLLL yyyy" }}</em>
+            {% if author != null %}
+            by <b>{{ author }}</b><em> - </em>
+            {% elsif authors != null %}
+            by <b>{{ authors }}</b><em> - </em>
+            {% endif %}<em>{{ page.date | dateFormat: "d LLLL yyyy" }}</em>
             <br />
             <br />
             {{ content }}
