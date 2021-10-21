@@ -8,7 +8,11 @@ function ParserOptions(props) {
                 <select
                     value={props.options.ecmaVersion}
                     onChange={
-                        event => props.onUpdate(Object.assign({}, props.options, { ecmaVersion: +event.target.value }))
+                        event => {
+                            const ecmaVersion = event.target.value === "latest" ? "latest" : +event.target.value;
+
+                            props.onUpdate(Object.assign({}, props.options, { ecmaVersion }));
+                        }
                     }
                 >
                     <option value="3">3</option>
@@ -21,6 +25,7 @@ function ParserOptions(props) {
                     <option value="11">2020</option>
                     <option value="12">2021</option>
                     <option value="13">2022</option>
+                    <option value="latest">latest</option>
                 </select>
             </div>
             <div className="col-md-4">
