@@ -1,26 +1,74 @@
 {
-    "kaicataldo": "Kai Cataldo",
-    "mdjermanovic": "Milos Djermanovic",
-    "btmills": "Brandon Mills",
-    "nzakas": "Nicholas C. Zakas",
-    "not-an-aardvark": "Teddy Katz",
-    "Munter": "Peter Müller",
-    "ilyavolodin": "Ilya Volodin",
-    "platinumazure": "Kevin Partington",
-    "mysticatea": "Toru Nagashima",
-    "hzoo": "Henry Zhu",
-    "pauljmartinez": "Kevin Partington",
-    "arzyu": "arzyu",
-    "gyandeeps": "Gyandeep Singh",
-    "wdhorton": "William Horton",
-    "balupton": "Benjamin Lupton",
-    "vitorbal": "Vitor Balocco",
-    "bytesnz": "Jack Farley",
-    "IanVS": "Ian VanSchooten",
-    "mjomble": "Andres Kalle",
-    "dotJoel": "Joel Byrnes",
-    "gcochard": "Greg Cochard",
-    "cvrebert": "Chris Rebert",
-    "zpao": "Paul O’Shannessy",
-    "okuryu": "Ryuichi Okumura"
+    "kaicataldo": {
+        "name": "Kai Cataldo"
+    },
+    "mdjermanovic": {
+        "name": "Milos Djermanovic"
+    },
+    "btmills": {
+        "name": "Brandon Mills"
+    },
+    "nzakas": {
+        "name": "Nicholas C. Zakas"
+    },
+    "not-an-aardvark": {
+        "name": "Teddy Katz"
+    },
+    "Munter": {
+        "name": "Peter Müller"
+    },
+    "ilyavolodin": {
+        "name": "Ilya Volodin"
+    },
+    "platinumazure": {
+        "name": "Kevin Partington"
+    },
+    "mysticatea": {
+        "name": "Toru Nagashima"
+    },
+    "hzoo": {
+        "name": "Henry Zhu"
+    },
+    "pauljmartinez": {
+        "name": "Paul J. Martinez"
+    },
+    "arzyu": {
+        "name": "arzyu"
+    },
+    "gyandeeps": {
+        "name": "Gyandeep Singh"
+    },
+    "wdhorton": {
+        "name": "William Horton"
+    },
+    "balupton": {
+        "name": "Benjamin Lupton"
+    },
+    "vitorbal": {
+        "name": "Vitor Balocco"
+    },
+    "bytesnz": {
+        "name": "Jack Farley"
+    },
+    "IanVS": {
+        "name": "Ian VanSchooten"
+    },
+    "mjomble": {
+        "name": "Andres Kalle"
+    },
+    "dotJoel": {
+        "name": "Joel Byrnes"
+    },
+    "gcochard": {
+        "name": "Greg Cochard"
+    },
+    "cvrebert": {
+        "name": "Chris Rebert"
+    },
+    "zpao": {
+        "name": "Paul O’Shannessy"
+    },
+    "okuryu": {
+        "name": "Ryuichi Okumura"
+    }
 }
