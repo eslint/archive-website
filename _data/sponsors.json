@@ -271,6 +271,14 @@
             "tier": "backer"
         },
         {
+            "name": "Apify",
+            "image": "https://avatars.githubusercontent.com/u/24586296?v=4",
+            "url": "https://apify.com/",
+            "monthlyDonation": 2500,
+            "source": "github",
+            "tier": "backer"
+        },
+        {
             "name": "Oleksii Myzgin",
             "url": null,
             "image": "https://images.opencollective.com/guest-fb34b9dc/avatar.png",
