@@ -1,7 +1,7 @@
 ---
 title: Code Path Analysis Details
 layout: doc
-edit_link: https://github.com/eslint/eslint/edit/master/docs/developer-guide/code-path-analysis.md
+edit_link: https://github.com/eslint/eslint/edit/main/docs/developer-guide/code-path-analysis.md
 
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
@@ -234,9 +234,9 @@ module.exports = function(context) {
 ```
 
 See Also:
-[no-unreachable](https://github.com/eslint/eslint/blob/master/lib/rules/no-unreachable.js),
-[no-fallthrough](https://github.com/eslint/eslint/blob/master/lib/rules/no-fallthrough.js),
-[consistent-return](https://github.com/eslint/eslint/blob/master/lib/rules/consistent-return.js)
+[no-unreachable](https://github.com/eslint/eslint/blob/HEAD/lib/rules/no-unreachable.js),
+[no-fallthrough](https://github.com/eslint/eslint/blob/HEAD/lib/rules/no-fallthrough.js),
+[consistent-return](https://github.com/eslint/eslint/blob/HEAD/lib/rules/consistent-return.js)
 
 ### To check state of a code path
 
@@ -332,8 +332,8 @@ module.exports = function(context) {
 ```
 
 See Also:
-[constructor-super](https://github.com/eslint/eslint/blob/master/lib/rules/constructor-super.js),
-[no-this-before-super](https://github.com/eslint/eslint/blob/master/lib/rules/no-this-before-super.js)
+[constructor-super](https://github.com/eslint/eslint/blob/HEAD/lib/rules/constructor-super.js),
+[no-this-before-super](https://github.com/eslint/eslint/blob/HEAD/lib/rules/no-this-before-super.js)
 
 ## Code Path Examples
 

@@ -1,7 +1,7 @@
 ---
 title: lines-around-comment - Rules
 layout: doc
-edit_link: https://github.com/eslint/eslint/edit/master/docs/rules/lines-around-comment.md
+edit_link: https://github.com/eslint/eslint/edit/main/docs/rules/lines-around-comment.md
 rule_type: layout
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
@@ -515,5 +515,5 @@ This rule was introduced in ESLint 0.22.0.
 
 ## Resources
 
-* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/lines-around-comment.js)
-* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/lines-around-comment.md)
+* [Rule source](https://github.com/eslint/eslint/tree/HEAD/lib/rules/lines-around-comment.js)
+* [Documentation source](https://github.com/eslint/eslint/tree/HEAD/docs/rules/lines-around-comment.md)

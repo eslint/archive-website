@@ -1,7 +1,7 @@
 ---
 title: function-call-argument-newline - Rules
 layout: doc
-edit_link: https://github.com/eslint/eslint/edit/master/docs/rules/function-call-argument-newline.md
+edit_link: https://github.com/eslint/eslint/edit/main/docs/rules/function-call-argument-newline.md
 rule_type: layout
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
@@ -217,5 +217,5 @@ This rule was introduced in ESLint 6.2.0.
 
 ## Resources
 
-* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/function-call-argument-newline.js)
-* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/function-call-argument-newline.md)
+* [Rule source](https://github.com/eslint/eslint/tree/HEAD/lib/rules/function-call-argument-newline.js)
+* [Documentation source](https://github.com/eslint/eslint/tree/HEAD/docs/rules/function-call-argument-newline.md)

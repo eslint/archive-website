@@ -1,7 +1,7 @@
 ---
 title: template-curly-spacing - Rules
 layout: doc
-edit_link: https://github.com/eslint/eslint/edit/master/docs/rules/template-curly-spacing.md
+edit_link: https://github.com/eslint/eslint/edit/main/docs/rules/template-curly-spacing.md
 rule_type: layout
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
@@ -97,5 +97,5 @@ This rule was introduced in ESLint 2.0.0-rc.0.
 
 ## Resources
 
-* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/template-curly-spacing.js)
-* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/template-curly-spacing.md)
+* [Rule source](https://github.com/eslint/eslint/tree/HEAD/lib/rules/template-curly-spacing.js)
+* [Documentation source](https://github.com/eslint/eslint/tree/HEAD/docs/rules/template-curly-spacing.md)

@@ -1,7 +1,7 @@
 ---
 title: Architecture
 layout: doc
-edit_link: https://github.com/eslint/eslint/edit/master/docs/developer-guide/architecture.md
+edit_link: https://github.com/eslint/eslint/edit/main/docs/developer-guide/architecture.md
 
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->

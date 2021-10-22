@@ -1,7 +1,7 @@
 ---
 title: Working with Rules (Deprecated)
 layout: doc
-edit_link: https://github.com/eslint/eslint/edit/master/docs/developer-guide/working-with-rules-deprecated.md
+edit_link: https://github.com/eslint/eslint/edit/main/docs/developer-guide/working-with-rules-deprecated.md
 
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
@@ -501,8 +501,8 @@ To keep the linting process efficient and unobtrusive, it is useful to verify th
 The `npm run perf` command gives a high-level overview of ESLint running time with default rules (`eslint:recommended`) enabled.
 
 ```bash
-$ git checkout master
-Switched to branch 'master'
+$ git checkout main
+Switched to branch 'main'
 
 $ npm run perf
 CPU Speed is 2200 with multiplier 7500000

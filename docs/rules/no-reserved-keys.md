@@ -1,7 +1,7 @@
 ---
 title: no-reserved-keys - Rules
 layout: doc
-edit_link: https://github.com/eslint/eslint/edit/master/docs/rules/no-reserved-keys.md
+edit_link: https://github.com/eslint/eslint/edit/main/docs/rules/no-reserved-keys.md
 
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
@@ -66,4 +66,4 @@ This rule was introduced in ESLint 0.8.0 and removed in 1.0.0.
 
 ## Resources
 
-* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/no-reserved-keys.md)
+* [Documentation source](https://github.com/eslint/eslint/tree/HEAD/docs/rules/no-reserved-keys.md)

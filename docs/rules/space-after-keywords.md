@@ -1,7 +1,7 @@
 ---
 title: space-after-keywords - Rules
 layout: doc
-edit_link: https://github.com/eslint/eslint/edit/master/docs/rules/space-after-keywords.md
+edit_link: https://github.com/eslint/eslint/edit/main/docs/rules/space-after-keywords.md
 
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
@@ -75,4 +75,4 @@ This rule was introduced in ESLint 0.6.0 and removed in 2.0.0-beta.3.
 
 ## Resources
 
-* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/space-after-keywords.md)
+* [Documentation source](https://github.com/eslint/eslint/tree/HEAD/docs/rules/space-after-keywords.md)

@@ -1,7 +1,7 @@
 ---
 title: no-sparse-arrays - Rules
 layout: doc
-edit_link: https://github.com/eslint/eslint/edit/master/docs/rules/no-sparse-arrays.md
+edit_link: https://github.com/eslint/eslint/edit/main/docs/rules/no-sparse-arrays.md
 rule_type: problem
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
@@ -65,5 +65,5 @@ This rule was introduced in ESLint 0.4.0.
 
 ## Resources
 
-* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/no-sparse-arrays.js)
-* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/no-sparse-arrays.md)
+* [Rule source](https://github.com/eslint/eslint/tree/HEAD/lib/rules/no-sparse-arrays.js)
+* [Documentation source](https://github.com/eslint/eslint/tree/HEAD/docs/rules/no-sparse-arrays.md)

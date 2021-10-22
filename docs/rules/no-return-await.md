@@ -1,7 +1,7 @@
 ---
 title: no-return-await - Rules
 layout: doc
-edit_link: https://github.com/eslint/eslint/edit/master/docs/rules/no-return-await.md
+edit_link: https://github.com/eslint/eslint/edit/main/docs/rules/no-return-await.md
 rule_type: suggestion
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
@@ -74,5 +74,5 @@ This rule was introduced in ESLint 3.10.0.
 
 ## Resources
 
-* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/no-return-await.js)
-* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/no-return-await.md)
+* [Rule source](https://github.com/eslint/eslint/tree/HEAD/lib/rules/no-return-await.js)
+* [Documentation source](https://github.com/eslint/eslint/tree/HEAD/docs/rules/no-return-await.md)

@@ -1,7 +1,7 @@
 ---
 title: semi-style - Rules
 layout: doc
-edit_link: https://github.com/eslint/eslint/edit/master/docs/rules/semi-style.md
+edit_link: https://github.com/eslint/eslint/edit/main/docs/rules/semi-style.md
 rule_type: layout
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
@@ -111,5 +111,5 @@ This rule was introduced in ESLint 4.0.0-beta.0.
 
 ## Resources
 
-* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/semi-style.js)
-* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/semi-style.md)
+* [Rule source](https://github.com/eslint/eslint/tree/HEAD/lib/rules/semi-style.js)
+* [Documentation source](https://github.com/eslint/eslint/tree/HEAD/docs/rules/semi-style.md)

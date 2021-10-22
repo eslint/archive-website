@@ -1,7 +1,7 @@
 ---
 title: no-lonely-if - Rules
 layout: doc
-edit_link: https://github.com/eslint/eslint/edit/master/docs/rules/no-lonely-if.md
+edit_link: https://github.com/eslint/eslint/edit/main/docs/rules/no-lonely-if.md
 rule_type: suggestion
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
@@ -99,5 +99,5 @@ This rule was introduced in ESLint 0.6.0.
 
 ## Resources
 
-* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/no-lonely-if.js)
-* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/no-lonely-if.md)
+* [Rule source](https://github.com/eslint/eslint/tree/HEAD/lib/rules/no-lonely-if.js)
+* [Documentation source](https://github.com/eslint/eslint/tree/HEAD/docs/rules/no-lonely-if.md)

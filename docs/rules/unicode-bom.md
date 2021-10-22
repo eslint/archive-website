@@ -1,7 +1,7 @@
 ---
 title: unicode-bom - Rules
 layout: doc
-edit_link: https://github.com/eslint/eslint/edit/master/docs/rules/unicode-bom.md
+edit_link: https://github.com/eslint/eslint/edit/main/docs/rules/unicode-bom.md
 rule_type: layout
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
@@ -78,5 +78,5 @@ This rule was introduced in ESLint 2.11.0.
 
 ## Resources
 
-* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/unicode-bom.js)
-* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/unicode-bom.md)
+* [Rule source](https://github.com/eslint/eslint/tree/HEAD/lib/rules/unicode-bom.js)
+* [Documentation source](https://github.com/eslint/eslint/tree/HEAD/docs/rules/unicode-bom.md)

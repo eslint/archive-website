@@ -1,7 +1,7 @@
 ---
 title: newline-before-return - Rules
 layout: doc
-edit_link: https://github.com/eslint/eslint/edit/master/docs/rules/newline-before-return.md
+edit_link: https://github.com/eslint/eslint/edit/main/docs/rules/newline-before-return.md
 rule_type: layout
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
@@ -131,5 +131,5 @@ This rule was introduced in ESLint 2.3.0.
 
 ## Resources
 
-* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/newline-before-return.js)
-* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/newline-before-return.md)
+* [Rule source](https://github.com/eslint/eslint/tree/HEAD/lib/rules/newline-before-return.js)
+* [Documentation source](https://github.com/eslint/eslint/tree/HEAD/docs/rules/newline-before-return.md)

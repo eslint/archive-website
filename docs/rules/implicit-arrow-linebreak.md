@@ -1,7 +1,7 @@
 ---
 title: implicit-arrow-linebreak - Rules
 layout: doc
-edit_link: https://github.com/eslint/eslint/edit/master/docs/rules/implicit-arrow-linebreak.md
+edit_link: https://github.com/eslint/eslint/edit/main/docs/rules/implicit-arrow-linebreak.md
 rule_type: layout
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
@@ -116,5 +116,5 @@ This rule was introduced in ESLint 4.12.0.
 
 ## Resources
 
-* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/implicit-arrow-linebreak.js)
-* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/implicit-arrow-linebreak.md)
+* [Rule source](https://github.com/eslint/eslint/tree/HEAD/lib/rules/implicit-arrow-linebreak.js)
+* [Documentation source](https://github.com/eslint/eslint/tree/HEAD/docs/rules/implicit-arrow-linebreak.md)

@@ -1,7 +1,7 @@
 ---
 title: prefer-regex-literals - Rules
 layout: doc
-edit_link: https://github.com/eslint/eslint/edit/master/docs/rules/prefer-regex-literals.md
+edit_link: https://github.com/eslint/eslint/edit/main/docs/rules/prefer-regex-literals.md
 rule_type: suggestion
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
@@ -139,5 +139,5 @@ This rule was introduced in ESLint 6.4.0.
 
 ## Resources
 
-* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/prefer-regex-literals.js)
-* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/prefer-regex-literals.md)
+* [Rule source](https://github.com/eslint/eslint/tree/HEAD/lib/rules/prefer-regex-literals.js)
+* [Documentation source](https://github.com/eslint/eslint/tree/HEAD/docs/rules/prefer-regex-literals.md)

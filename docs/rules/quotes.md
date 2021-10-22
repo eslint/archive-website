@@ -1,7 +1,7 @@
 ---
 title: quotes - Rules
 layout: doc
-edit_link: https://github.com/eslint/eslint/edit/master/docs/rules/quotes.md
+edit_link: https://github.com/eslint/eslint/edit/main/docs/rules/quotes.md
 rule_type: layout
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
@@ -169,5 +169,5 @@ This rule was introduced in ESLint 0.0.7.
 
 ## Resources
 
-* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/quotes.js)
-* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/quotes.md)
+* [Rule source](https://github.com/eslint/eslint/tree/HEAD/lib/rules/quotes.js)
+* [Documentation source](https://github.com/eslint/eslint/tree/HEAD/docs/rules/quotes.md)

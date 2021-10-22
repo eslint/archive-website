@@ -1,7 +1,7 @@
 ---
 title: func-call-spacing - Rules
 layout: doc
-edit_link: https://github.com/eslint/eslint/edit/master/docs/rules/func-call-spacing.md
+edit_link: https://github.com/eslint/eslint/edit/main/docs/rules/func-call-spacing.md
 rule_type: layout
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
@@ -120,5 +120,5 @@ This rule was introduced in ESLint 3.3.0.
 
 ## Resources
 
-* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/func-call-spacing.js)
-* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/func-call-spacing.md)
+* [Rule source](https://github.com/eslint/eslint/tree/HEAD/lib/rules/func-call-spacing.js)
+* [Documentation source](https://github.com/eslint/eslint/tree/HEAD/docs/rules/func-call-spacing.md)

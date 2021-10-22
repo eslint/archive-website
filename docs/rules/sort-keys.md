@@ -1,7 +1,7 @@
 ---
 title: sort-keys - Rules
 layout: doc
-edit_link: https://github.com/eslint/eslint/edit/master/docs/rules/sort-keys.md
+edit_link: https://github.com/eslint/eslint/edit/main/docs/rules/sort-keys.md
 rule_type: suggestion
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
@@ -241,5 +241,5 @@ This rule was introduced in ESLint 3.3.0.
 
 ## Resources
 
-* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/sort-keys.js)
-* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/sort-keys.md)
+* [Rule source](https://github.com/eslint/eslint/tree/HEAD/lib/rules/sort-keys.js)
+* [Documentation source](https://github.com/eslint/eslint/tree/HEAD/docs/rules/sort-keys.md)

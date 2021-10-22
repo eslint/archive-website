@@ -1,7 +1,7 @@
 ---
 title: max-params - Rules
 layout: doc
-edit_link: https://github.com/eslint/eslint/edit/master/docs/rules/max-params.md
+edit_link: https://github.com/eslint/eslint/edit/main/docs/rules/max-params.md
 rule_type: suggestion
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
@@ -76,5 +76,5 @@ This rule was introduced in ESLint 0.0.9.
 
 ## Resources
 
-* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/max-params.js)
-* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/max-params.md)
+* [Rule source](https://github.com/eslint/eslint/tree/HEAD/lib/rules/max-params.js)
+* [Documentation source](https://github.com/eslint/eslint/tree/HEAD/docs/rules/max-params.md)

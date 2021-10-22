@@ -1,7 +1,7 @@
 ---
 title: eol-last - Rules
 layout: doc
-edit_link: https://github.com/eslint/eslint/edit/master/docs/rules/eol-last.md
+edit_link: https://github.com/eslint/eslint/edit/main/docs/rules/eol-last.md
 rule_type: layout
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
@@ -61,5 +61,5 @@ This rule was introduced in ESLint 0.7.1.
 
 ## Resources
 
-* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/eol-last.js)
-* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/eol-last.md)
+* [Rule source](https://github.com/eslint/eslint/tree/HEAD/lib/rules/eol-last.js)
+* [Documentation source](https://github.com/eslint/eslint/tree/HEAD/docs/rules/eol-last.md)

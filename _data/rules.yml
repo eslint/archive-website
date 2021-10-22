@@ -383,6 +383,11 @@ types:
         hasSuggestions: false
         name: no-unsafe-optional-chaining
         recommended: true
+      - description: disallow unused private class members
+        fixable: false
+        hasSuggestions: false
+        name: no-unused-private-class-members
+        recommended: false
       - description: disallow unused variables
         fixable: false
         hasSuggestions: false

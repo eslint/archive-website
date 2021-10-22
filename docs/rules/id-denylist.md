@@ -1,7 +1,7 @@
 ---
 title: id-denylist - Rules
 layout: doc
-edit_link: https://github.com/eslint/eslint/edit/master/docs/rules/id-denylist.md
+edit_link: https://github.com/eslint/eslint/edit/main/docs/rules/id-denylist.md
 rule_type: suggestion
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
@@ -129,5 +129,5 @@ This rule was introduced in ESLint 7.4.0.
 
 ## Resources
 
-* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/id-denylist.js)
-* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/id-denylist.md)
+* [Rule source](https://github.com/eslint/eslint/tree/HEAD/lib/rules/id-denylist.js)
+* [Documentation source](https://github.com/eslint/eslint/tree/HEAD/docs/rules/id-denylist.md)

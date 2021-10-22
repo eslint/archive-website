@@ -1,7 +1,7 @@
 ---
 title: newline-after-var - Rules
 layout: doc
-edit_link: https://github.com/eslint/eslint/edit/master/docs/rules/newline-after-var.md
+edit_link: https://github.com/eslint/eslint/edit/main/docs/rules/newline-after-var.md
 rule_type: layout
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
@@ -157,5 +157,5 @@ This rule was introduced in ESLint 0.18.0.
 
 ## Resources
 
-* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/newline-after-var.js)
-* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/newline-after-var.md)
+* [Rule source](https://github.com/eslint/eslint/tree/HEAD/lib/rules/newline-after-var.js)
+* [Documentation source](https://github.com/eslint/eslint/tree/HEAD/docs/rules/newline-after-var.md)

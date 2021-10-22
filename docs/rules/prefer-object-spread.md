@@ -1,7 +1,7 @@
 ---
 title: prefer-object-spread - Rules
 layout: doc
-edit_link: https://github.com/eslint/eslint/edit/master/docs/rules/prefer-object-spread.md
+edit_link: https://github.com/eslint/eslint/edit/main/docs/rules/prefer-object-spread.md
 rule_type: suggestion
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
@@ -66,5 +66,5 @@ This rule was introduced in ESLint 5.0.0-alpha.3.
 
 ## Resources
 
-* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/prefer-object-spread.js)
-* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/prefer-object-spread.md)
+* [Rule source](https://github.com/eslint/eslint/tree/HEAD/lib/rules/prefer-object-spread.js)
+* [Documentation source](https://github.com/eslint/eslint/tree/HEAD/docs/rules/prefer-object-spread.md)

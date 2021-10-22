@@ -1,7 +1,7 @@
 ---
 title: no-control-regex - Rules
 layout: doc
-edit_link: https://github.com/eslint/eslint/edit/master/docs/rules/no-control-regex.md
+edit_link: https://github.com/eslint/eslint/edit/main/docs/rules/no-control-regex.md
 rule_type: problem
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
@@ -49,5 +49,5 @@ This rule was introduced in ESLint 0.1.0.
 
 ## Resources
 
-* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/no-control-regex.js)
-* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/no-control-regex.md)
+* [Rule source](https://github.com/eslint/eslint/tree/HEAD/lib/rules/no-control-regex.js)
+* [Documentation source](https://github.com/eslint/eslint/tree/HEAD/docs/rules/no-control-regex.md)

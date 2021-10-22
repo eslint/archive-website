@@ -1,7 +1,7 @@
 ---
 title: Managing Releases
 layout: doc
-edit_link: https://github.com/eslint/eslint/edit/master/docs/maintainer-guide/releases.md
+edit_link: https://github.com/eslint/eslint/edit/main/docs/maintainer-guide/releases.md
 
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->

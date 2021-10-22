@@ -1,7 +1,7 @@
 ---
 title: no-class-assign - Rules
 layout: doc
-edit_link: https://github.com/eslint/eslint/edit/master/docs/rules/no-class-assign.md
+edit_link: https://github.com/eslint/eslint/edit/main/docs/rules/no-class-assign.md
 rule_type: problem
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
@@ -108,5 +108,5 @@ This rule was introduced in ESLint 1.0.0-rc-1.
 
 ## Resources
 
-* [Rule source](https://github.com/eslint/eslint/tree/master/lib/rules/no-class-assign.js)
-* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/no-class-assign.md)
+* [Rule source](https://github.com/eslint/eslint/tree/HEAD/lib/rules/no-class-assign.js)
+* [Documentation source](https://github.com/eslint/eslint/tree/HEAD/docs/rules/no-class-assign.md)

@@ -1,7 +1,7 @@
 ---
 title: no-arrow-condition - Rules
 layout: doc
-edit_link: https://github.com/eslint/eslint/edit/master/docs/rules/no-arrow-condition.md
+edit_link: https://github.com/eslint/eslint/edit/main/docs/rules/no-arrow-condition.md
 
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
@@ -61,4 +61,4 @@ This rule was introduced in ESLint 1.8.0 and removed in 2.0.0-beta.3.
 
 ## Resources
 
-* [Documentation source](https://github.com/eslint/eslint/tree/master/docs/rules/no-arrow-condition.md)
+* [Documentation source](https://github.com/eslint/eslint/tree/HEAD/docs/rules/no-arrow-condition.md)
