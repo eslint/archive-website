@@ -6,6 +6,7 @@ tags:
   - Open Collective
   - Sponsors
   - Backers
+authors: nzakas, mdjermanovic
 ---
 
 <p class="text-center">

@@ -13,7 +13,20 @@
         <main class="blog">
           <article>
             <h1>{{ title }}</h1>
-            <em>{{ page.date | dateFormat: "d LLLL yyyy" }}</em>
+            {% if author != null %}
+              by <a href="https://github.com/{{ author }}"><b>{{ contributors[author].name }}</b></a><em> - </em>
+            {% elsif authors != null %}
+              by 
+                {% assign members = authors | split: ", " %}
+                  {% for member in members %}
+                    {% if forloop.last == true %}
+                      <a href="https://github.com/{{ member }}"><b>{{ contributors[member].name }}</b></a>
+                    {% else %}
+                      <a href="https://github.com/{{ member }}"><b>{{ contributors[member].name }},</b></a>
+                    {% endif %}
+                  {% endfor %}
+              <em> - </em>
+            {% endif %}<em>{{ page.date | dateFormat: "d LLLL yyyy" }}</em>
             <br />
             <br />
             {{ content }}

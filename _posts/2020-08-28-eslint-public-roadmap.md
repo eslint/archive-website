@@ -5,6 +5,7 @@ tags:
   - Donations
   - Roadmap
   - Planning
+author: nzakas
 ---
 
 When ESLint [first started accepting donations](https://eslint.org/blog/2019/02/funding-eslint-future), we listed several ways that the project intended to spend the money donated:

@@ -3,6 +3,7 @@ title: Updated Rule Policy
 tags:
   - information
   - rules
+authors: nzakas, not-an-aardvark, kaicataldo
 ---
 
 Rules have been at the core of ESLint since the very first release. We've gone through several development cycles of rules, first trying to replicate JSHint rules, creating ECMAScript 6 rules as best practices were being uncovered, shooting for feature parity with JSCS rules, and so on. Now, almost three years after ESLint was first created, we have over [200 rules](https://eslint.org/docs/rules/) in the core and continue to get new rule proposals every week.
