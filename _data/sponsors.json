@@ -926,6 +926,14 @@
             "tier": "backer"
         },
         {
+            "name": "Kah Wai Liew",
+            "image": "https://avatars.githubusercontent.com/u/289419?v=4",
+            "url": "https://github.com/tureki",
+            "monthlyDonation": 500,
+            "source": "github",
+            "tier": "backer"
+        },
+        {
             "name": "Christophe Hurpeau",
             "image": "https://avatars.githubusercontent.com/u/302891?u=425d1bd46e8899798b80b2dbc5173fa0cf61f33a&v=4",
             "url": "https://christophe.hurpeau.com",
