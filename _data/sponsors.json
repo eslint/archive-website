@@ -130,15 +130,6 @@
             "tier": "bronze-sponsor"
         },
         {
-            "name": "Mixpanel",
-            "url": "https://mixpanel.com",
-            "image": "https://images.opencollective.com/mixpanel/cd682f7/logo.png",
-            "monthlyDonation": 20000,
-            "totalDonations": 520000,
-            "source": "opencollective",
-            "tier": "bronze-sponsor"
-        },
-        {
             "name": "VPS Server",
             "url": "https://www.vpsserver.com",
             "image": "https://images.opencollective.com/vpsservercom/logo.png",
