@@ -25,7 +25,7 @@
             "url": "https://google.com/chrome",
             "image": "https://images.opencollective.com/chrome/dc55bd4/logo.png",
             "monthlyDonation": 100000,
-            "totalDonations": 1200000,
+            "totalDonations": 1300000,
             "source": "opencollective",
             "tier": "gold-sponsor"
         },
@@ -89,7 +89,7 @@
             "url": "https://launchdarkly.com",
             "image": "https://images.opencollective.com/launchdarkly/574bb9e/logo.png",
             "monthlyDonation": 20000,
-            "totalDonations": 20000,
+            "totalDonations": 40000,
             "source": "opencollective",
             "tier": "bronze-sponsor"
         },
@@ -134,7 +134,7 @@
             "url": "https://www.vpsserver.com",
             "image": "https://images.opencollective.com/vpsservercom/logo.png",
             "monthlyDonation": 20000,
-            "totalDonations": 540000,
+            "totalDonations": 560000,
             "source": "opencollective",
             "tier": "bronze-sponsor"
         },
@@ -328,7 +328,7 @@
             "url": "https://n8n.io",
             "image": "https://images.opencollective.com/n8n/dca2f0c/logo.png",
             "monthlyDonation": 1000,
-            "totalDonations": 22000,
+            "totalDonations": 23000,
             "source": "opencollective",
             "tier": "backer"
         },
@@ -648,7 +648,7 @@
             "url": "https://www.sayyup.nl",
             "image": "https://images.opencollective.com/sayyup/4c61ffd/avatar.png",
             "monthlyDonation": 500,
-            "totalDonations": 7000,
+            "totalDonations": 7500,
             "source": "opencollective",
             "tier": "backer"
         },
@@ -801,7 +801,7 @@
             "url": "https://pymaster.tw",
             "image": "https://images.opencollective.com/pc035860/8fed8ae/avatar.png",
             "monthlyDonation": 500,
-            "totalDonations": 16500,
+            "totalDonations": 17000,
             "source": "opencollective",
             "tier": "backer"
         },
