@@ -152,7 +152,7 @@
             "url": "https://themeisle.com",
             "image": "https://images.opencollective.com/themeisle/d5592fe/logo.png",
             "monthlyDonation": 20000,
-            "totalDonations": 620000,
+            "totalDonations": 640000,
             "source": "opencollective",
             "tier": "bronze-sponsor"
         },
@@ -283,7 +283,7 @@
             "url": "https://raider.io",
             "image": "https://images.opencollective.com/raiderio_wow/7a380a3/logo.png",
             "monthlyDonation": 1000,
-            "totalDonations": 9000,
+            "totalDonations": 10000,
             "source": "opencollective",
             "tier": "backer"
         },
@@ -572,20 +572,11 @@
             "tier": "backer"
         },
         {
-            "name": "Joe Alden",
-            "url": "https://joealden.com",
-            "image": "https://images.opencollective.com/joealden/44a6738/avatar.png",
-            "monthlyDonation": 500,
-            "totalDonations": 4000,
-            "source": "opencollective",
-            "tier": "backer"
-        },
-        {
             "name": "Batch",
             "url": "https://batch.com",
             "image": "https://images.opencollective.com/batch/3ccdb8f/logo.png",
             "monthlyDonation": 500,
-            "totalDonations": 4500,
+            "totalDonations": 5000,
             "source": "opencollective",
             "tier": "backer"
         },
