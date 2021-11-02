@@ -16,7 +16,7 @@
             "url": "https://nx.dev",
             "image": "https://images.opencollective.com/nx/0efbe42/logo.png",
             "monthlyDonation": 100000,
-            "totalDonations": 900000,
+            "totalDonations": 1000000,
             "source": "opencollective",
             "tier": "gold-sponsor"
         },
@@ -98,7 +98,7 @@
             "url": "https://troypoint.com",
             "image": "https://images.opencollective.com/troypoint/080f96f/avatar.png",
             "monthlyDonation": 20000,
-            "totalDonations": 60000,
+            "totalDonations": 80000,
             "source": "opencollective",
             "tier": "bronze-sponsor"
         },
@@ -107,7 +107,7 @@
             "url": "https://mobilen.nu",
             "image": "https://images.opencollective.com/mobilen/e19860d/logo.png",
             "monthlyDonation": 20000,
-            "totalDonations": 60000,
+            "totalDonations": 80000,
             "source": "opencollective",
             "tier": "bronze-sponsor"
         },
@@ -337,7 +337,7 @@
             "url": "https://moxio.com",
             "image": "https://images.opencollective.com/moxio/9fa53c1/logo.png",
             "monthlyDonation": 1000,
-            "totalDonations": 44000,
+            "totalDonations": 45000,
             "source": "opencollective",
             "tier": "backer"
         },
@@ -355,7 +355,7 @@
             "url": "https://benjamin.piouffle.com",
             "image": "https://images.opencollective.com/betree/6c68f43/avatar.png",
             "monthlyDonation": 1000,
-            "totalDonations": 32800,
+            "totalDonations": 33800,
             "source": "opencollective",
             "tier": "backer"
         },
@@ -470,6 +470,15 @@
             "url": "https://sentry.io",
             "monthlyDonation": 800,
             "source": "github",
+            "tier": "backer"
+        },
+        {
+            "name": "Philip Ermish",
+            "url": null,
+            "image": "https://images.opencollective.com/philip-ermish/54d5051/avatar.png",
+            "monthlyDonation": 500,
+            "totalDonations": 500,
+            "source": "opencollective",
             "tier": "backer"
         },
         {
@@ -765,7 +774,7 @@
             "url": "https://medikoo.com",
             "image": "https://images.opencollective.com/medikoo/f16a7ea/avatar.png",
             "monthlyDonation": 500,
-            "totalDonations": 16500,
+            "totalDonations": 17000,
             "source": "opencollective",
             "tier": "backer"
         },
