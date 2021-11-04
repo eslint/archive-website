@@ -26,9 +26,8 @@
     <title>{{ site.title }}</title>
   {% endif %}
   <link rel="preconnect" href="https://www.google-analytics.com">
-  <link rel="canonical" href="{{ page.original.url }}">
-  {% if page.original %} 
-    <link rel="canonical" href="{{ page.original.url }}">
+  {% if original %} 
+    <link rel="canonical" href="{{ original.url }}">
   {% else %}  
     <link rel="canonical" href="{{ page.url | replace: '.html', '' }}">
   {% endif %}  
