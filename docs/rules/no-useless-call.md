@@ -87,4 +87,5 @@ This rule was introduced in ESLint 1.0.0-rc-1.
 ## Resources
 
 * [Rule source](https://github.com/eslint/eslint/tree/HEAD/lib/rules/no-useless-call.js)
+* [Test source](https://github.com/eslint/eslint/tree/HEAD/tests/lib/rules/no-useless-call.js)
 * [Documentation source](https://github.com/eslint/eslint/tree/HEAD/docs/rules/no-useless-call.md)

@@ -61,4 +61,5 @@ This rule was introduced in ESLint 1.0.0-rc-1.
 ## Resources
 
 * [Rule source](https://github.com/eslint/eslint/tree/HEAD/lib/rules/require-yield.js)
+* [Test source](https://github.com/eslint/eslint/tree/HEAD/tests/lib/rules/require-yield.js)
 * [Documentation source](https://github.com/eslint/eslint/tree/HEAD/docs/rules/require-yield.md)

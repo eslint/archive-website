@@ -139,4 +139,5 @@ This rule was introduced in ESLint 4.10.0.
 ## Resources
 
 * [Rule source](https://github.com/eslint/eslint/tree/HEAD/lib/rules/multiline-comment-style.js)
+* [Test source](https://github.com/eslint/eslint/tree/HEAD/tests/lib/rules/multiline-comment-style.js)
 * [Documentation source](https://github.com/eslint/eslint/tree/HEAD/docs/rules/multiline-comment-style.md)

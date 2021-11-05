@@ -303,4 +303,5 @@ This rule was introduced in ESLint 0.23.0.
 ## Resources
 
 * [Rule source](https://github.com/eslint/eslint/tree/HEAD/lib/rules/spaced-comment.js)
+* [Test source](https://github.com/eslint/eslint/tree/HEAD/tests/lib/rules/spaced-comment.js)
 * [Documentation source](https://github.com/eslint/eslint/tree/HEAD/docs/rules/spaced-comment.md)

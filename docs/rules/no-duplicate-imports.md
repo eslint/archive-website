@@ -98,4 +98,5 @@ This rule was introduced in ESLint 2.5.0.
 ## Resources
 
 * [Rule source](https://github.com/eslint/eslint/tree/HEAD/lib/rules/no-duplicate-imports.js)
+* [Test source](https://github.com/eslint/eslint/tree/HEAD/tests/lib/rules/no-duplicate-imports.js)
 * [Documentation source](https://github.com/eslint/eslint/tree/HEAD/docs/rules/no-duplicate-imports.md)

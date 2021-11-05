@@ -164,4 +164,5 @@ This rule was introduced in ESLint 0.10.0.
 ## Resources
 
 * [Rule source](https://github.com/eslint/eslint/tree/HEAD/lib/rules/space-unary-ops.js)
+* [Test source](https://github.com/eslint/eslint/tree/HEAD/tests/lib/rules/space-unary-ops.js)
 * [Documentation source](https://github.com/eslint/eslint/tree/HEAD/docs/rules/space-unary-ops.md)

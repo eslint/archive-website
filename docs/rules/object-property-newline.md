@@ -286,4 +286,5 @@ This rule was introduced in ESLint 2.10.0.
 ## Resources
 
 * [Rule source](https://github.com/eslint/eslint/tree/HEAD/lib/rules/object-property-newline.js)
+* [Test source](https://github.com/eslint/eslint/tree/HEAD/tests/lib/rules/object-property-newline.js)
 * [Documentation source](https://github.com/eslint/eslint/tree/HEAD/docs/rules/object-property-newline.md)

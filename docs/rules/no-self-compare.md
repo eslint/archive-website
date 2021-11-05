@@ -34,4 +34,5 @@ This rule was introduced in ESLint 0.0.9.
 ## Resources
 
 * [Rule source](https://github.com/eslint/eslint/tree/HEAD/lib/rules/no-self-compare.js)
+* [Test source](https://github.com/eslint/eslint/tree/HEAD/tests/lib/rules/no-self-compare.js)
 * [Documentation source](https://github.com/eslint/eslint/tree/HEAD/docs/rules/no-self-compare.md)

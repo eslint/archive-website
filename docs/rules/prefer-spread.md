@@ -92,4 +92,5 @@ This rule was introduced in ESLint 1.0.0-rc-1.
 ## Resources
 
 * [Rule source](https://github.com/eslint/eslint/tree/HEAD/lib/rules/prefer-spread.js)
+* [Test source](https://github.com/eslint/eslint/tree/HEAD/tests/lib/rules/prefer-spread.js)
 * [Documentation source](https://github.com/eslint/eslint/tree/HEAD/docs/rules/prefer-spread.md)

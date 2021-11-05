@@ -110,4 +110,5 @@ This rule was introduced in ESLint 7.3.0.
 ## Resources
 
 * [Rule source](https://github.com/eslint/eslint/tree/HEAD/lib/rules/no-promise-executor-return.js)
+* [Test source](https://github.com/eslint/eslint/tree/HEAD/tests/lib/rules/no-promise-executor-return.js)
 * [Documentation source](https://github.com/eslint/eslint/tree/HEAD/docs/rules/no-promise-executor-return.md)

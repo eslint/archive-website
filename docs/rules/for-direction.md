@@ -40,4 +40,5 @@ This rule was introduced in ESLint 4.0.0-beta.0.
 ## Resources
 
 * [Rule source](https://github.com/eslint/eslint/tree/HEAD/lib/rules/for-direction.js)
+* [Test source](https://github.com/eslint/eslint/tree/HEAD/tests/lib/rules/for-direction.js)
 * [Documentation source](https://github.com/eslint/eslint/tree/HEAD/docs/rules/for-direction.md)

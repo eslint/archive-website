@@ -158,4 +158,5 @@ This rule was introduced in ESLint 0.18.0.
 ## Resources
 
 * [Rule source](https://github.com/eslint/eslint/tree/HEAD/lib/rules/newline-after-var.js)
+* [Test source](https://github.com/eslint/eslint/tree/HEAD/tests/lib/rules/newline-after-var.js)
 * [Documentation source](https://github.com/eslint/eslint/tree/HEAD/docs/rules/newline-after-var.md)

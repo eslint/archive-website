@@ -185,4 +185,5 @@ This rule was introduced in ESLint 1.0.0.
 ## Resources
 
 * [Rule source](https://github.com/eslint/eslint/tree/HEAD/lib/rules/id-match.js)
+* [Test source](https://github.com/eslint/eslint/tree/HEAD/tests/lib/rules/id-match.js)
 * [Documentation source](https://github.com/eslint/eslint/tree/HEAD/docs/rules/id-match.md)

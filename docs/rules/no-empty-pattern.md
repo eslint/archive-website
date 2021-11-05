@@ -70,4 +70,5 @@ This rule was introduced in ESLint 1.7.0.
 ## Resources
 
 * [Rule source](https://github.com/eslint/eslint/tree/HEAD/lib/rules/no-empty-pattern.js)
+* [Test source](https://github.com/eslint/eslint/tree/HEAD/tests/lib/rules/no-empty-pattern.js)
 * [Documentation source](https://github.com/eslint/eslint/tree/HEAD/docs/rules/no-empty-pattern.md)

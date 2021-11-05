@@ -92,4 +92,5 @@ This rule was introduced in ESLint 3.15.0.
 ## Resources
 
 * [Rule source](https://github.com/eslint/eslint/tree/HEAD/lib/rules/template-tag-spacing.js)
+* [Test source](https://github.com/eslint/eslint/tree/HEAD/tests/lib/rules/template-tag-spacing.js)
 * [Documentation source](https://github.com/eslint/eslint/tree/HEAD/docs/rules/template-tag-spacing.md)

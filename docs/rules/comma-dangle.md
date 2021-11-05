@@ -331,4 +331,5 @@ This rule was introduced in ESLint 0.16.0.
 ## Resources
 
 * [Rule source](https://github.com/eslint/eslint/tree/HEAD/lib/rules/comma-dangle.js)
+* [Test source](https://github.com/eslint/eslint/tree/HEAD/tests/lib/rules/comma-dangle.js)
 * [Documentation source](https://github.com/eslint/eslint/tree/HEAD/docs/rules/comma-dangle.md)

@@ -75,4 +75,5 @@ This rule was introduced in ESLint 3.2.0.
 ## Resources
 
 * [Rule source](https://github.com/eslint/eslint/tree/HEAD/lib/rules/no-tabs.js)
+* [Test source](https://github.com/eslint/eslint/tree/HEAD/tests/lib/rules/no-tabs.js)
 * [Documentation source](https://github.com/eslint/eslint/tree/HEAD/docs/rules/no-tabs.md)

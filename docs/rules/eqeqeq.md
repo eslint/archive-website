@@ -141,4 +141,5 @@ This rule was introduced in ESLint 0.0.2.
 ## Resources
 
 * [Rule source](https://github.com/eslint/eslint/tree/HEAD/lib/rules/eqeqeq.js)
+* [Test source](https://github.com/eslint/eslint/tree/HEAD/tests/lib/rules/eqeqeq.js)
 * [Documentation source](https://github.com/eslint/eslint/tree/HEAD/docs/rules/eqeqeq.md)

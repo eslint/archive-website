@@ -156,4 +156,5 @@ This rule was introduced in ESLint 1.8.0.
 ## Resources
 
 * [Rule source](https://github.com/eslint/eslint/tree/HEAD/lib/rules/arrow-body-style.js)
+* [Test source](https://github.com/eslint/eslint/tree/HEAD/tests/lib/rules/arrow-body-style.js)
 * [Documentation source](https://github.com/eslint/eslint/tree/HEAD/docs/rules/arrow-body-style.md)

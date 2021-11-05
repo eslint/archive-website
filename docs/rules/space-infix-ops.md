@@ -95,4 +95,5 @@ This rule was introduced in ESLint 0.2.0.
 ## Resources
 
 * [Rule source](https://github.com/eslint/eslint/tree/HEAD/lib/rules/space-infix-ops.js)
+* [Test source](https://github.com/eslint/eslint/tree/HEAD/tests/lib/rules/space-infix-ops.js)
 * [Documentation source](https://github.com/eslint/eslint/tree/HEAD/docs/rules/space-infix-ops.md)

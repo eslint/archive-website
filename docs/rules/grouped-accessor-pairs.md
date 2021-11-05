@@ -340,4 +340,5 @@ This rule was introduced in ESLint 6.7.0.
 ## Resources
 
 * [Rule source](https://github.com/eslint/eslint/tree/HEAD/lib/rules/grouped-accessor-pairs.js)
+* [Test source](https://github.com/eslint/eslint/tree/HEAD/tests/lib/rules/grouped-accessor-pairs.js)
 * [Documentation source](https://github.com/eslint/eslint/tree/HEAD/docs/rules/grouped-accessor-pairs.md)

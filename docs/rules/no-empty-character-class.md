@@ -60,4 +60,5 @@ This rule was introduced in ESLint 0.22.0.
 ## Resources
 
 * [Rule source](https://github.com/eslint/eslint/tree/HEAD/lib/rules/no-empty-character-class.js)
+* [Test source](https://github.com/eslint/eslint/tree/HEAD/tests/lib/rules/no-empty-character-class.js)
 * [Documentation source](https://github.com/eslint/eslint/tree/HEAD/docs/rules/no-empty-character-class.md)

@@ -140,4 +140,5 @@ This rule was introduced in ESLint 6.4.0.
 ## Resources
 
 * [Rule source](https://github.com/eslint/eslint/tree/HEAD/lib/rules/prefer-regex-literals.js)
+* [Test source](https://github.com/eslint/eslint/tree/HEAD/tests/lib/rules/prefer-regex-literals.js)
 * [Documentation source](https://github.com/eslint/eslint/tree/HEAD/docs/rules/prefer-regex-literals.md)

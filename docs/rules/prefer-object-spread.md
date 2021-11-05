@@ -67,4 +67,5 @@ This rule was introduced in ESLint 5.0.0-alpha.3.
 ## Resources
 
 * [Rule source](https://github.com/eslint/eslint/tree/HEAD/lib/rules/prefer-object-spread.js)
+* [Test source](https://github.com/eslint/eslint/tree/HEAD/tests/lib/rules/prefer-object-spread.js)
 * [Documentation source](https://github.com/eslint/eslint/tree/HEAD/docs/rules/prefer-object-spread.md)

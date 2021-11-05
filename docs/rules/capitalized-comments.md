@@ -265,4 +265,5 @@ This rule was introduced in ESLint 3.11.0.
 ## Resources
 
 * [Rule source](https://github.com/eslint/eslint/tree/HEAD/lib/rules/capitalized-comments.js)
+* [Test source](https://github.com/eslint/eslint/tree/HEAD/tests/lib/rules/capitalized-comments.js)
 * [Documentation source](https://github.com/eslint/eslint/tree/HEAD/docs/rules/capitalized-comments.md)

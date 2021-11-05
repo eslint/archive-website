@@ -558,4 +558,5 @@ This rule was introduced in ESLint 0.0.9.
 ## Resources
 
 * [Rule source](https://github.com/eslint/eslint/tree/HEAD/lib/rules/one-var.js)
+* [Test source](https://github.com/eslint/eslint/tree/HEAD/tests/lib/rules/one-var.js)
 * [Documentation source](https://github.com/eslint/eslint/tree/HEAD/docs/rules/one-var.md)

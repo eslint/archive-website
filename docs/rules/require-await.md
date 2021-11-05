@@ -101,4 +101,5 @@ This rule was introduced in ESLint 3.11.0.
 ## Resources
 
 * [Rule source](https://github.com/eslint/eslint/tree/HEAD/lib/rules/require-await.js)
+* [Test source](https://github.com/eslint/eslint/tree/HEAD/tests/lib/rules/require-await.js)
 * [Documentation source](https://github.com/eslint/eslint/tree/HEAD/docs/rules/require-await.md)

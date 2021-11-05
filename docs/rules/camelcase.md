@@ -284,4 +284,5 @@ This rule was introduced in ESLint 0.0.2.
 ## Resources
 
 * [Rule source](https://github.com/eslint/eslint/tree/HEAD/lib/rules/camelcase.js)
+* [Test source](https://github.com/eslint/eslint/tree/HEAD/tests/lib/rules/camelcase.js)
 * [Documentation source](https://github.com/eslint/eslint/tree/HEAD/docs/rules/camelcase.md)

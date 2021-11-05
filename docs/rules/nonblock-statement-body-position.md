@@ -174,4 +174,5 @@ This rule was introduced in ESLint 3.17.0.
 ## Resources
 
 * [Rule source](https://github.com/eslint/eslint/tree/HEAD/lib/rules/nonblock-statement-body-position.js)
+* [Test source](https://github.com/eslint/eslint/tree/HEAD/tests/lib/rules/nonblock-statement-body-position.js)
 * [Documentation source](https://github.com/eslint/eslint/tree/HEAD/docs/rules/nonblock-statement-body-position.md)

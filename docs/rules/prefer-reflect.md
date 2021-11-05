@@ -353,4 +353,5 @@ This rule was introduced in ESLint 1.0.0-rc-2.
 ## Resources
 
 * [Rule source](https://github.com/eslint/eslint/tree/HEAD/lib/rules/prefer-reflect.js)
+* [Test source](https://github.com/eslint/eslint/tree/HEAD/tests/lib/rules/prefer-reflect.js)
 * [Documentation source](https://github.com/eslint/eslint/tree/HEAD/docs/rules/prefer-reflect.md)

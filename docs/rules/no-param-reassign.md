@@ -174,4 +174,5 @@ This rule was introduced in ESLint 0.18.0.
 ## Resources
 
 * [Rule source](https://github.com/eslint/eslint/tree/HEAD/lib/rules/no-param-reassign.js)
+* [Test source](https://github.com/eslint/eslint/tree/HEAD/tests/lib/rules/no-param-reassign.js)
 * [Documentation source](https://github.com/eslint/eslint/tree/HEAD/docs/rules/no-param-reassign.md)

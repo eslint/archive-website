@@ -49,4 +49,5 @@ This rule was introduced in ESLint 6.4.0.
 ## Resources
 
 * [Rule source](https://github.com/eslint/eslint/tree/HEAD/lib/rules/default-param-last.js)
+* [Test source](https://github.com/eslint/eslint/tree/HEAD/tests/lib/rules/default-param-last.js)
 * [Documentation source](https://github.com/eslint/eslint/tree/HEAD/docs/rules/default-param-last.md)

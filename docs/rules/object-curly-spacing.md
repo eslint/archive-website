@@ -172,4 +172,5 @@ This rule was introduced in ESLint 0.22.0.
 ## Resources
 
 * [Rule source](https://github.com/eslint/eslint/tree/HEAD/lib/rules/object-curly-spacing.js)
+* [Test source](https://github.com/eslint/eslint/tree/HEAD/tests/lib/rules/object-curly-spacing.js)
 * [Documentation source](https://github.com/eslint/eslint/tree/HEAD/docs/rules/object-curly-spacing.md)

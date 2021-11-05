@@ -308,4 +308,5 @@ This rule was introduced in ESLint 0.8.0.
 ## Resources
 
 * [Rule source](https://github.com/eslint/eslint/tree/HEAD/lib/rules/space-in-parens.js)
+* [Test source](https://github.com/eslint/eslint/tree/HEAD/tests/lib/rules/space-in-parens.js)
 * [Documentation source](https://github.com/eslint/eslint/tree/HEAD/docs/rules/space-in-parens.md)

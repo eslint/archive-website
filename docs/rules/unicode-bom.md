@@ -79,4 +79,5 @@ This rule was introduced in ESLint 2.11.0.
 ## Resources
 
 * [Rule source](https://github.com/eslint/eslint/tree/HEAD/lib/rules/unicode-bom.js)
+* [Test source](https://github.com/eslint/eslint/tree/HEAD/tests/lib/rules/unicode-bom.js)
 * [Documentation source](https://github.com/eslint/eslint/tree/HEAD/docs/rules/unicode-bom.md)

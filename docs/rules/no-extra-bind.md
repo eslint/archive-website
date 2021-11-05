@@ -102,4 +102,5 @@ This rule was introduced in ESLint 0.8.0.
 ## Resources
 
 * [Rule source](https://github.com/eslint/eslint/tree/HEAD/lib/rules/no-extra-bind.js)
+* [Test source](https://github.com/eslint/eslint/tree/HEAD/tests/lib/rules/no-extra-bind.js)
 * [Documentation source](https://github.com/eslint/eslint/tree/HEAD/docs/rules/no-extra-bind.md)

@@ -231,4 +231,5 @@ This rule was introduced in ESLint 0.4.0.
 ## Resources
 
 * [Rule source](https://github.com/eslint/eslint/tree/HEAD/lib/rules/func-names.js)
+* [Test source](https://github.com/eslint/eslint/tree/HEAD/tests/lib/rules/func-names.js)
 * [Documentation source](https://github.com/eslint/eslint/tree/HEAD/docs/rules/func-names.md)

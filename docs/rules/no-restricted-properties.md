@@ -139,4 +139,5 @@ This rule was introduced in ESLint 3.5.0.
 ## Resources
 
 * [Rule source](https://github.com/eslint/eslint/tree/HEAD/lib/rules/no-restricted-properties.js)
+* [Test source](https://github.com/eslint/eslint/tree/HEAD/tests/lib/rules/no-restricted-properties.js)
 * [Documentation source](https://github.com/eslint/eslint/tree/HEAD/docs/rules/no-restricted-properties.md)

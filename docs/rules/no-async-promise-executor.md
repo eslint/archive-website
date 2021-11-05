@@ -78,4 +78,5 @@ This rule was introduced in ESLint 5.3.0.
 ## Resources
 
 * [Rule source](https://github.com/eslint/eslint/tree/HEAD/lib/rules/no-async-promise-executor.js)
+* [Test source](https://github.com/eslint/eslint/tree/HEAD/tests/lib/rules/no-async-promise-executor.js)
 * [Documentation source](https://github.com/eslint/eslint/tree/HEAD/docs/rules/no-async-promise-executor.md)

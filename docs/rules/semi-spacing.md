@@ -125,4 +125,5 @@ This rule was introduced in ESLint 0.16.0.
 ## Resources
 
 * [Rule source](https://github.com/eslint/eslint/tree/HEAD/lib/rules/semi-spacing.js)
+* [Test source](https://github.com/eslint/eslint/tree/HEAD/tests/lib/rules/semi-spacing.js)
 * [Documentation source](https://github.com/eslint/eslint/tree/HEAD/docs/rules/semi-spacing.md)

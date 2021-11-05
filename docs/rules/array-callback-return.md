@@ -168,4 +168,5 @@ This rule was introduced in ESLint 2.0.0-alpha-1.
 ## Resources
 
 * [Rule source](https://github.com/eslint/eslint/tree/HEAD/lib/rules/array-callback-return.js)
+* [Test source](https://github.com/eslint/eslint/tree/HEAD/tests/lib/rules/array-callback-return.js)
 * [Documentation source](https://github.com/eslint/eslint/tree/HEAD/docs/rules/array-callback-return.md)

@@ -111,4 +111,5 @@ This rule was introduced in ESLint 5.3.0.
 ## Resources
 
 * [Rule source](https://github.com/eslint/eslint/tree/HEAD/lib/rules/require-atomic-updates.js)
+* [Test source](https://github.com/eslint/eslint/tree/HEAD/tests/lib/rules/require-atomic-updates.js)
 * [Documentation source](https://github.com/eslint/eslint/tree/HEAD/docs/rules/require-atomic-updates.md)

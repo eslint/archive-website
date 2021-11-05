@@ -140,4 +140,5 @@ This rule was introduced in ESLint 0.0.9.
 ## Resources
 
 * [Rule source](https://github.com/eslint/eslint/tree/HEAD/lib/rules/no-mixed-requires.js)
+* [Test source](https://github.com/eslint/eslint/tree/HEAD/tests/lib/rules/no-mixed-requires.js)
 * [Documentation source](https://github.com/eslint/eslint/tree/HEAD/docs/rules/no-mixed-requires.md)

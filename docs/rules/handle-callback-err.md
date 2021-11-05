@@ -97,4 +97,5 @@ This rule was introduced in ESLint 0.4.5.
 ## Resources
 
 * [Rule source](https://github.com/eslint/eslint/tree/HEAD/lib/rules/handle-callback-err.js)
+* [Test source](https://github.com/eslint/eslint/tree/HEAD/tests/lib/rules/handle-callback-err.js)
 * [Documentation source](https://github.com/eslint/eslint/tree/HEAD/docs/rules/handle-callback-err.md)

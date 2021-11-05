@@ -139,4 +139,5 @@ This rule was introduced in ESLint 7.0.0-alpha.0.
 ## Resources
 
 * [Rule source](https://github.com/eslint/eslint/tree/HEAD/lib/rules/default-case-last.js)
+* [Test source](https://github.com/eslint/eslint/tree/HEAD/tests/lib/rules/default-case-last.js)
 * [Documentation source](https://github.com/eslint/eslint/tree/HEAD/docs/rules/default-case-last.md)

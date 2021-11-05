@@ -113,4 +113,5 @@ This rule was introduced in ESLint 4.2.0.
 ## Resources
 
 * [Rule source](https://github.com/eslint/eslint/tree/HEAD/lib/rules/getter-return.js)
+* [Test source](https://github.com/eslint/eslint/tree/HEAD/tests/lib/rules/getter-return.js)
 * [Documentation source](https://github.com/eslint/eslint/tree/HEAD/docs/rules/getter-return.md)

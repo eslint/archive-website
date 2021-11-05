@@ -80,4 +80,5 @@ This rule was introduced in ESLint 7.14.0.
 ## Resources
 
 * [Rule source](https://github.com/eslint/eslint/tree/HEAD/lib/rules/no-nonoctal-decimal-escape.js)
+* [Test source](https://github.com/eslint/eslint/tree/HEAD/tests/lib/rules/no-nonoctal-decimal-escape.js)
 * [Documentation source](https://github.com/eslint/eslint/tree/HEAD/docs/rules/no-nonoctal-decimal-escape.md)

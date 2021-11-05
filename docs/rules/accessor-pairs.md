@@ -303,4 +303,5 @@ This rule was introduced in ESLint 0.22.0.
 ## Resources
 
 * [Rule source](https://github.com/eslint/eslint/tree/HEAD/lib/rules/accessor-pairs.js)
+* [Test source](https://github.com/eslint/eslint/tree/HEAD/tests/lib/rules/accessor-pairs.js)
 * [Documentation source](https://github.com/eslint/eslint/tree/HEAD/docs/rules/accessor-pairs.md)

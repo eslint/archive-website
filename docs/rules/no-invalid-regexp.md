@@ -73,4 +73,5 @@ This rule was introduced in ESLint 0.1.4.
 ## Resources
 
 * [Rule source](https://github.com/eslint/eslint/tree/HEAD/lib/rules/no-invalid-regexp.js)
+* [Test source](https://github.com/eslint/eslint/tree/HEAD/tests/lib/rules/no-invalid-regexp.js)
 * [Documentation source](https://github.com/eslint/eslint/tree/HEAD/docs/rules/no-invalid-regexp.md)

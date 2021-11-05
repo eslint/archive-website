@@ -92,4 +92,5 @@ This rule was introduced in ESLint 5.0.0-alpha.3.
 ## Resources
 
 * [Rule source](https://github.com/eslint/eslint/tree/HEAD/lib/rules/max-classes-per-file.js)
+* [Test source](https://github.com/eslint/eslint/tree/HEAD/tests/lib/rules/max-classes-per-file.js)
 * [Documentation source](https://github.com/eslint/eslint/tree/HEAD/docs/rules/max-classes-per-file.md)

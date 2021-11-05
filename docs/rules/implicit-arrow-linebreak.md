@@ -117,4 +117,5 @@ This rule was introduced in ESLint 4.12.0.
 ## Resources
 
 * [Rule source](https://github.com/eslint/eslint/tree/HEAD/lib/rules/implicit-arrow-linebreak.js)
+* [Test source](https://github.com/eslint/eslint/tree/HEAD/tests/lib/rules/implicit-arrow-linebreak.js)
 * [Documentation source](https://github.com/eslint/eslint/tree/HEAD/docs/rules/implicit-arrow-linebreak.md)

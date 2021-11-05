@@ -105,4 +105,5 @@ This rule was introduced in ESLint 3.3.0.
 ## Resources
 
 * [Rule source](https://github.com/eslint/eslint/tree/HEAD/lib/rules/no-global-assign.js)
+* [Test source](https://github.com/eslint/eslint/tree/HEAD/tests/lib/rules/no-global-assign.js)
 * [Documentation source](https://github.com/eslint/eslint/tree/HEAD/docs/rules/no-global-assign.md)

@@ -81,4 +81,5 @@ This rule was introduced in ESLint 0.7.1.
 ## Resources
 
 * [Rule source](https://github.com/eslint/eslint/tree/HEAD/lib/rules/no-mixed-spaces-and-tabs.js)
+* [Test source](https://github.com/eslint/eslint/tree/HEAD/tests/lib/rules/no-mixed-spaces-and-tabs.js)
 * [Documentation source](https://github.com/eslint/eslint/tree/HEAD/docs/rules/no-mixed-spaces-and-tabs.md)

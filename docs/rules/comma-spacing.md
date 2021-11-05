@@ -145,4 +145,5 @@ This rule was introduced in ESLint 0.9.0.
 ## Resources
 
 * [Rule source](https://github.com/eslint/eslint/tree/HEAD/lib/rules/comma-spacing.js)
+* [Test source](https://github.com/eslint/eslint/tree/HEAD/tests/lib/rules/comma-spacing.js)
 * [Documentation source](https://github.com/eslint/eslint/tree/HEAD/docs/rules/comma-spacing.md)

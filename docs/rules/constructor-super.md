@@ -76,4 +76,5 @@ This rule was introduced in ESLint 0.24.0.
 ## Resources
 
 * [Rule source](https://github.com/eslint/eslint/tree/HEAD/lib/rules/constructor-super.js)
+* [Test source](https://github.com/eslint/eslint/tree/HEAD/tests/lib/rules/constructor-super.js)
 * [Documentation source](https://github.com/eslint/eslint/tree/HEAD/docs/rules/constructor-super.md)

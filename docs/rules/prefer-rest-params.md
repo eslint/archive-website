@@ -79,4 +79,5 @@ This rule was introduced in ESLint 2.0.0-alpha-1.
 ## Resources
 
 * [Rule source](https://github.com/eslint/eslint/tree/HEAD/lib/rules/prefer-rest-params.js)
+* [Test source](https://github.com/eslint/eslint/tree/HEAD/tests/lib/rules/prefer-rest-params.js)
 * [Documentation source](https://github.com/eslint/eslint/tree/HEAD/docs/rules/prefer-rest-params.md)

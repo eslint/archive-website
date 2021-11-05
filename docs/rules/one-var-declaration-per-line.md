@@ -105,4 +105,5 @@ This rule was introduced in ESLint 2.0.0-beta.3.
 ## Resources
 
 * [Rule source](https://github.com/eslint/eslint/tree/HEAD/lib/rules/one-var-declaration-per-line.js)
+* [Test source](https://github.com/eslint/eslint/tree/HEAD/tests/lib/rules/one-var-declaration-per-line.js)
 * [Documentation source](https://github.com/eslint/eslint/tree/HEAD/docs/rules/one-var-declaration-per-line.md)

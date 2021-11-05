@@ -102,4 +102,5 @@ This rule was introduced in ESLint 0.8.0.
 ## Resources
 
 * [Rule source](https://github.com/eslint/eslint/tree/HEAD/lib/rules/vars-on-top.js)
+* [Test source](https://github.com/eslint/eslint/tree/HEAD/tests/lib/rules/vars-on-top.js)
 * [Documentation source](https://github.com/eslint/eslint/tree/HEAD/docs/rules/vars-on-top.md)

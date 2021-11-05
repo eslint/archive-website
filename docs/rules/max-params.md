@@ -77,4 +77,5 @@ This rule was introduced in ESLint 0.0.9.
 ## Resources
 
 * [Rule source](https://github.com/eslint/eslint/tree/HEAD/lib/rules/max-params.js)
+* [Test source](https://github.com/eslint/eslint/tree/HEAD/tests/lib/rules/max-params.js)
 * [Documentation source](https://github.com/eslint/eslint/tree/HEAD/docs/rules/max-params.md)

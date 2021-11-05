@@ -156,4 +156,5 @@ This rule was introduced in ESLint 2.12.0.
 ## Resources
 
 * [Rule source](https://github.com/eslint/eslint/tree/HEAD/lib/rules/rest-spread-spacing.js)
+* [Test source](https://github.com/eslint/eslint/tree/HEAD/tests/lib/rules/rest-spread-spacing.js)
 * [Documentation source](https://github.com/eslint/eslint/tree/HEAD/docs/rules/rest-spread-spacing.md)

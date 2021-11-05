@@ -107,4 +107,5 @@ This rule was introduced in ESLint 0.17.0.
 ## Resources
 
 * [Rule source](https://github.com/eslint/eslint/tree/HEAD/lib/rules/no-duplicate-case.js)
+* [Test source](https://github.com/eslint/eslint/tree/HEAD/tests/lib/rules/no-duplicate-case.js)
 * [Documentation source](https://github.com/eslint/eslint/tree/HEAD/docs/rules/no-duplicate-case.md)

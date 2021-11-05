@@ -57,4 +57,5 @@ This rule was introduced in ESLint 4.0.0-alpha.0.
 ## Resources
 
 * [Rule source](https://github.com/eslint/eslint/tree/HEAD/lib/rules/no-buffer-constructor.js)
+* [Test source](https://github.com/eslint/eslint/tree/HEAD/tests/lib/rules/no-buffer-constructor.js)
 * [Documentation source](https://github.com/eslint/eslint/tree/HEAD/docs/rules/no-buffer-constructor.md)

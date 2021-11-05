@@ -62,4 +62,5 @@ This rule was introduced in ESLint 6.4.0.
 ## Resources
 
 * [Rule source](https://github.com/eslint/eslint/tree/HEAD/lib/rules/no-import-assign.js)
+* [Test source](https://github.com/eslint/eslint/tree/HEAD/tests/lib/rules/no-import-assign.js)
 * [Documentation source](https://github.com/eslint/eslint/tree/HEAD/docs/rules/no-import-assign.md)

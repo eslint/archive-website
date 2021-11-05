@@ -83,4 +83,5 @@ This rule was introduced in ESLint 0.5.0.
 ## Resources
 
 * [Rule source](https://github.com/eslint/eslint/tree/HEAD/lib/rules/valid-typeof.js)
+* [Test source](https://github.com/eslint/eslint/tree/HEAD/tests/lib/rules/valid-typeof.js)
 * [Documentation source](https://github.com/eslint/eslint/tree/HEAD/docs/rules/valid-typeof.md)

@@ -194,4 +194,5 @@ This rule was introduced in ESLint 6.7.0.
 ## Resources
 
 * [Rule source](https://github.com/eslint/eslint/tree/HEAD/lib/rules/no-dupe-else-if.js)
+* [Test source](https://github.com/eslint/eslint/tree/HEAD/tests/lib/rules/no-dupe-else-if.js)
 * [Documentation source](https://github.com/eslint/eslint/tree/HEAD/docs/rules/no-dupe-else-if.md)

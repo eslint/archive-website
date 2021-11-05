@@ -177,4 +177,5 @@ This rule was introduced in ESLint 1.0.0-rc-2.
 ## Resources
 
 * [Rule source](https://github.com/eslint/eslint/tree/HEAD/lib/rules/no-implicit-coercion.js)
+* [Test source](https://github.com/eslint/eslint/tree/HEAD/tests/lib/rules/no-implicit-coercion.js)
 * [Documentation source](https://github.com/eslint/eslint/tree/HEAD/docs/rules/no-implicit-coercion.md)

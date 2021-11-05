@@ -98,4 +98,5 @@ This rule was introduced in ESLint 0.0.9.
 ## Resources
 
 * [Rule source](https://github.com/eslint/eslint/tree/HEAD/lib/rules/consistent-this.js)
+* [Test source](https://github.com/eslint/eslint/tree/HEAD/tests/lib/rules/consistent-this.js)
 * [Documentation source](https://github.com/eslint/eslint/tree/HEAD/docs/rules/consistent-this.md)

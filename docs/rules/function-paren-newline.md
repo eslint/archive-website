@@ -344,4 +344,5 @@ This rule was introduced in ESLint 4.6.0.
 ## Resources
 
 * [Rule source](https://github.com/eslint/eslint/tree/HEAD/lib/rules/function-paren-newline.js)
+* [Test source](https://github.com/eslint/eslint/tree/HEAD/tests/lib/rules/function-paren-newline.js)
 * [Documentation source](https://github.com/eslint/eslint/tree/HEAD/docs/rules/function-paren-newline.md)

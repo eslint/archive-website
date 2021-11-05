@@ -169,4 +169,5 @@ This rule was introduced in ESLint 3.1.0.
 ## Resources
 
 * [Rule source](https://github.com/eslint/eslint/tree/HEAD/lib/rules/multiline-ternary.js)
+* [Test source](https://github.com/eslint/eslint/tree/HEAD/tests/lib/rules/multiline-ternary.js)
 * [Documentation source](https://github.com/eslint/eslint/tree/HEAD/docs/rules/multiline-ternary.md)

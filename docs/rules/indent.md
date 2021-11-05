@@ -813,4 +813,5 @@ This rule was introduced in ESLint 0.14.0.
 ## Resources
 
 * [Rule source](https://github.com/eslint/eslint/tree/HEAD/lib/rules/indent.js)
+* [Test source](https://github.com/eslint/eslint/tree/HEAD/tests/lib/rules/indent.js)
 * [Documentation source](https://github.com/eslint/eslint/tree/HEAD/docs/rules/indent.md)

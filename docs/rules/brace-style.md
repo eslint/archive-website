@@ -341,4 +341,5 @@ This rule was introduced in ESLint 0.0.7.
 ## Resources
 
 * [Rule source](https://github.com/eslint/eslint/tree/HEAD/lib/rules/brace-style.js)
+* [Test source](https://github.com/eslint/eslint/tree/HEAD/tests/lib/rules/brace-style.js)
 * [Documentation source](https://github.com/eslint/eslint/tree/HEAD/docs/rules/brace-style.md)

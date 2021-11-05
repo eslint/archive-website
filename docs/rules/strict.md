@@ -288,4 +288,5 @@ This rule was introduced in ESLint 0.1.0.
 ## Resources
 
 * [Rule source](https://github.com/eslint/eslint/tree/HEAD/lib/rules/strict.js)
+* [Test source](https://github.com/eslint/eslint/tree/HEAD/tests/lib/rules/strict.js)
 * [Documentation source](https://github.com/eslint/eslint/tree/HEAD/docs/rules/strict.md)

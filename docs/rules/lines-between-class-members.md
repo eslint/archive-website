@@ -147,4 +147,5 @@ This rule was introduced in ESLint 4.9.0.
 ## Resources
 
 * [Rule source](https://github.com/eslint/eslint/tree/HEAD/lib/rules/lines-between-class-members.js)
+* [Test source](https://github.com/eslint/eslint/tree/HEAD/tests/lib/rules/lines-between-class-members.js)
 * [Documentation source](https://github.com/eslint/eslint/tree/HEAD/docs/rules/lines-between-class-members.md)

@@ -415,4 +415,5 @@ This rule was introduced in ESLint 0.9.0.
 ## Resources
 
 * [Rule source](https://github.com/eslint/eslint/tree/HEAD/lib/rules/padded-blocks.js)
+* [Test source](https://github.com/eslint/eslint/tree/HEAD/tests/lib/rules/padded-blocks.js)
 * [Documentation source](https://github.com/eslint/eslint/tree/HEAD/docs/rules/padded-blocks.md)

@@ -265,4 +265,5 @@ This rule was introduced in ESLint 1.0.0-rc-2.
 ## Resources
 
 * [Rule source](https://github.com/eslint/eslint/tree/HEAD/lib/rules/no-invalid-this.js)
+* [Test source](https://github.com/eslint/eslint/tree/HEAD/tests/lib/rules/no-invalid-this.js)
 * [Documentation source](https://github.com/eslint/eslint/tree/HEAD/docs/rules/no-invalid-this.md)

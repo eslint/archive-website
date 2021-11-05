@@ -17,4 +17,5 @@ This rule was introduced in ESLint 2.0.0-beta.2.
 ## Resources
 
 * [Rule source](https://github.com/eslint/eslint/tree/HEAD/lib/rules/id-blacklist.js)
+* [Test source](https://github.com/eslint/eslint/tree/HEAD/tests/lib/rules/id-blacklist.js)
 * [Documentation source](https://github.com/eslint/eslint/tree/HEAD/docs/rules/id-blacklist.md)

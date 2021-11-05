@@ -391,4 +391,5 @@ This rule was introduced in ESLint 4.0.0-rc.0.
 ## Resources
 
 * [Rule source](https://github.com/eslint/eslint/tree/HEAD/lib/rules/array-element-newline.js)
+* [Test source](https://github.com/eslint/eslint/tree/HEAD/tests/lib/rules/array-element-newline.js)
 * [Documentation source](https://github.com/eslint/eslint/tree/HEAD/docs/rules/array-element-newline.md)

@@ -213,4 +213,5 @@ This rule was introduced in ESLint 5.0.0.
 ## Resources
 
 * [Rule source](https://github.com/eslint/eslint/tree/HEAD/lib/rules/max-lines-per-function.js)
+* [Test source](https://github.com/eslint/eslint/tree/HEAD/tests/lib/rules/max-lines-per-function.js)
 * [Documentation source](https://github.com/eslint/eslint/tree/HEAD/docs/rules/max-lines-per-function.md)

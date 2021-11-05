@@ -231,4 +231,5 @@ This rule was introduced in ESLint 0.9.0.
 ## Resources
 
 * [Rule source](https://github.com/eslint/eslint/tree/HEAD/lib/rules/space-before-blocks.js)
+* [Test source](https://github.com/eslint/eslint/tree/HEAD/tests/lib/rules/space-before-blocks.js)
 * [Documentation source](https://github.com/eslint/eslint/tree/HEAD/docs/rules/space-before-blocks.md)

@@ -50,4 +50,5 @@ This rule was introduced in ESLint 7.1.0.
 ## Resources
 
 * [Rule source](https://github.com/eslint/eslint/tree/HEAD/lib/rules/no-loss-of-precision.js)
+* [Test source](https://github.com/eslint/eslint/tree/HEAD/tests/lib/rules/no-loss-of-precision.js)
 * [Documentation source](https://github.com/eslint/eslint/tree/HEAD/docs/rules/no-loss-of-precision.md)

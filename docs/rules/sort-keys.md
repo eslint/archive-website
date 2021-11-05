@@ -242,4 +242,5 @@ This rule was introduced in ESLint 3.3.0.
 ## Resources
 
 * [Rule source](https://github.com/eslint/eslint/tree/HEAD/lib/rules/sort-keys.js)
+* [Test source](https://github.com/eslint/eslint/tree/HEAD/tests/lib/rules/sort-keys.js)
 * [Documentation source](https://github.com/eslint/eslint/tree/HEAD/docs/rules/sort-keys.md)

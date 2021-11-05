@@ -240,4 +240,5 @@ This rule was introduced in ESLint 2.0.0-alpha-1.
 ## Resources
 
 * [Rule source](https://github.com/eslint/eslint/tree/HEAD/lib/rules/no-implicit-globals.js)
+* [Test source](https://github.com/eslint/eslint/tree/HEAD/tests/lib/rules/no-implicit-globals.js)
 * [Documentation source](https://github.com/eslint/eslint/tree/HEAD/docs/rules/no-implicit-globals.md)

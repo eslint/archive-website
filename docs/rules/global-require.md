@@ -105,4 +105,5 @@ This rule was introduced in ESLint 1.4.0.
 ## Resources
 
 * [Rule source](https://github.com/eslint/eslint/tree/HEAD/lib/rules/global-require.js)
+* [Test source](https://github.com/eslint/eslint/tree/HEAD/tests/lib/rules/global-require.js)
 * [Documentation source](https://github.com/eslint/eslint/tree/HEAD/docs/rules/global-require.md)

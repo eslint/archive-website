@@ -113,4 +113,5 @@ This rule was introduced in ESLint 3.14.0.
 ## Resources
 
 * [Rule source](https://github.com/eslint/eslint/tree/HEAD/lib/rules/no-multi-assign.js)
+* [Test source](https://github.com/eslint/eslint/tree/HEAD/tests/lib/rules/no-multi-assign.js)
 * [Documentation source](https://github.com/eslint/eslint/tree/HEAD/docs/rules/no-multi-assign.md)

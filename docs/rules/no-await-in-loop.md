@@ -93,4 +93,5 @@ This rule was introduced in ESLint 3.12.0.
 ## Resources
 
 * [Rule source](https://github.com/eslint/eslint/tree/HEAD/lib/rules/no-await-in-loop.js)
+* [Test source](https://github.com/eslint/eslint/tree/HEAD/tests/lib/rules/no-await-in-loop.js)
 * [Documentation source](https://github.com/eslint/eslint/tree/HEAD/docs/rules/no-await-in-loop.md)

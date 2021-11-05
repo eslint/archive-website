@@ -145,4 +145,5 @@ This rule was introduced in ESLint 1.0.0-rc-1.
 ## Resources
 
 * [Rule source](https://github.com/eslint/eslint/tree/HEAD/lib/rules/init-declarations.js)
+* [Test source](https://github.com/eslint/eslint/tree/HEAD/tests/lib/rules/init-declarations.js)
 * [Documentation source](https://github.com/eslint/eslint/tree/HEAD/docs/rules/init-declarations.md)

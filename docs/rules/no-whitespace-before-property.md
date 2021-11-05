@@ -83,4 +83,5 @@ This rule was introduced in ESLint 2.0.0-beta.1.
 ## Resources
 
 * [Rule source](https://github.com/eslint/eslint/tree/HEAD/lib/rules/no-whitespace-before-property.js)
+* [Test source](https://github.com/eslint/eslint/tree/HEAD/tests/lib/rules/no-whitespace-before-property.js)
 * [Documentation source](https://github.com/eslint/eslint/tree/HEAD/docs/rules/no-whitespace-before-property.md)

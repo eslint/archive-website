@@ -141,4 +141,5 @@ This rule was introduced in ESLint 2.12.0.
 ## Resources
 
 * [Rule source](https://github.com/eslint/eslint/tree/HEAD/lib/rules/max-lines.js)
+* [Test source](https://github.com/eslint/eslint/tree/HEAD/tests/lib/rules/max-lines.js)
 * [Documentation source](https://github.com/eslint/eslint/tree/HEAD/docs/rules/max-lines.md)

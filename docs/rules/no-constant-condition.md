@@ -125,4 +125,5 @@ This rule was introduced in ESLint 0.4.1.
 ## Resources
 
 * [Rule source](https://github.com/eslint/eslint/tree/HEAD/lib/rules/no-constant-condition.js)
+* [Test source](https://github.com/eslint/eslint/tree/HEAD/tests/lib/rules/no-constant-condition.js)
 * [Documentation source](https://github.com/eslint/eslint/tree/HEAD/docs/rules/no-constant-condition.md)

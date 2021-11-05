@@ -190,4 +190,5 @@ This rule was introduced in ESLint 1.0.0-rc-1.
 ## Resources
 
 * [Rule source](https://github.com/eslint/eslint/tree/HEAD/lib/rules/callback-return.js)
+* [Test source](https://github.com/eslint/eslint/tree/HEAD/tests/lib/rules/callback-return.js)
 * [Documentation source](https://github.com/eslint/eslint/tree/HEAD/docs/rules/callback-return.md)

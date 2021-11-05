@@ -137,4 +137,5 @@ This rule was introduced in ESLint 0.4.0.
 ## Resources
 
 * [Rule source](https://github.com/eslint/eslint/tree/HEAD/lib/rules/no-labels.js)
+* [Test source](https://github.com/eslint/eslint/tree/HEAD/tests/lib/rules/no-labels.js)
 * [Documentation source](https://github.com/eslint/eslint/tree/HEAD/docs/rules/no-labels.md)

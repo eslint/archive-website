@@ -59,4 +59,5 @@ This rule was introduced in ESLint 0.0.6.
 ## Resources
 
 * [Rule source](https://github.com/eslint/eslint/tree/HEAD/lib/rules/no-floating-decimal.js)
+* [Test source](https://github.com/eslint/eslint/tree/HEAD/tests/lib/rules/no-floating-decimal.js)
 * [Documentation source](https://github.com/eslint/eslint/tree/HEAD/docs/rules/no-floating-decimal.md)

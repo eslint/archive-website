@@ -317,4 +317,5 @@ This rule was introduced in ESLint 0.0.2.
 ## Resources
 
 * [Rule source](https://github.com/eslint/eslint/tree/HEAD/lib/rules/curly.js)
+* [Test source](https://github.com/eslint/eslint/tree/HEAD/tests/lib/rules/curly.js)
 * [Documentation source](https://github.com/eslint/eslint/tree/HEAD/docs/rules/curly.md)

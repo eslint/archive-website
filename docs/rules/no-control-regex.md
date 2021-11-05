@@ -50,4 +50,5 @@ This rule was introduced in ESLint 0.1.0.
 ## Resources
 
 * [Rule source](https://github.com/eslint/eslint/tree/HEAD/lib/rules/no-control-regex.js)
+* [Test source](https://github.com/eslint/eslint/tree/HEAD/tests/lib/rules/no-control-regex.js)
 * [Documentation source](https://github.com/eslint/eslint/tree/HEAD/docs/rules/no-control-regex.md)

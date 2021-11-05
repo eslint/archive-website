@@ -120,4 +120,5 @@ This rule was introduced in ESLint 3.5.0.
 ## Resources
 
 * [Rule source](https://github.com/eslint/eslint/tree/HEAD/lib/rules/line-comment-position.js)
+* [Test source](https://github.com/eslint/eslint/tree/HEAD/tests/lib/rules/line-comment-position.js)
 * [Documentation source](https://github.com/eslint/eslint/tree/HEAD/docs/rules/line-comment-position.md)

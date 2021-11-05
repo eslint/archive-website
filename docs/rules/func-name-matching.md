@@ -192,4 +192,5 @@ This rule was introduced in ESLint 3.8.0.
 ## Resources
 
 * [Rule source](https://github.com/eslint/eslint/tree/HEAD/lib/rules/func-name-matching.js)
+* [Test source](https://github.com/eslint/eslint/tree/HEAD/tests/lib/rules/func-name-matching.js)
 * [Documentation source](https://github.com/eslint/eslint/tree/HEAD/docs/rules/func-name-matching.md)

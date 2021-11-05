@@ -265,4 +265,5 @@ This rule was introduced in ESLint 0.0.6.
 ## Resources
 
 * [Rule source](https://github.com/eslint/eslint/tree/HEAD/lib/rules/use-isnan.js)
+* [Test source](https://github.com/eslint/eslint/tree/HEAD/tests/lib/rules/use-isnan.js)
 * [Documentation source](https://github.com/eslint/eslint/tree/HEAD/docs/rules/use-isnan.md)

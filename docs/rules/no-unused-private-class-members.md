@@ -92,4 +92,5 @@ This rule was introduced in ESLint 8.1.0.
 ## Resources
 
 * [Rule source](https://github.com/eslint/eslint/tree/HEAD/lib/rules/no-unused-private-class-members.js)
+* [Test source](https://github.com/eslint/eslint/tree/HEAD/tests/lib/rules/no-unused-private-class-members.js)
 * [Documentation source](https://github.com/eslint/eslint/tree/HEAD/docs/rules/no-unused-private-class-members.md)

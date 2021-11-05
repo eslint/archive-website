@@ -89,4 +89,5 @@ This rule was introduced in ESLint 1.4.0.
 ## Resources
 
 * [Rule source](https://github.com/eslint/eslint/tree/HEAD/lib/rules/jsx-quotes.js)
+* [Test source](https://github.com/eslint/eslint/tree/HEAD/tests/lib/rules/jsx-quotes.js)
 * [Documentation source](https://github.com/eslint/eslint/tree/HEAD/docs/rules/jsx-quotes.md)

@@ -120,4 +120,5 @@ This rule was introduced in ESLint 7.0.0-alpha.0.
 ## Resources
 
 * [Rule source](https://github.com/eslint/eslint/tree/HEAD/lib/rules/no-restricted-exports.js)
+* [Test source](https://github.com/eslint/eslint/tree/HEAD/tests/lib/rules/no-restricted-exports.js)
 * [Documentation source](https://github.com/eslint/eslint/tree/HEAD/docs/rules/no-restricted-exports.md)

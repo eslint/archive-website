@@ -48,4 +48,5 @@ This rule was introduced in ESLint 0.0.9.
 ## Resources
 
 * [Rule source](https://github.com/eslint/eslint/tree/HEAD/lib/rules/no-multi-str.js)
+* [Test source](https://github.com/eslint/eslint/tree/HEAD/tests/lib/rules/no-multi-str.js)
 * [Documentation source](https://github.com/eslint/eslint/tree/HEAD/docs/rules/no-multi-str.md)

@@ -384,4 +384,5 @@ This rule was introduced in ESLint 0.18.0.
 ## Resources
 
 * [Rule source](https://github.com/eslint/eslint/tree/HEAD/lib/rules/space-before-function-paren.js)
+* [Test source](https://github.com/eslint/eslint/tree/HEAD/tests/lib/rules/space-before-function-paren.js)
 * [Documentation source](https://github.com/eslint/eslint/tree/HEAD/docs/rules/space-before-function-paren.md)

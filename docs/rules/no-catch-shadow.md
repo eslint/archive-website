@@ -87,4 +87,5 @@ This rule was introduced in ESLint 0.0.9.
 ## Resources
 
 * [Rule source](https://github.com/eslint/eslint/tree/HEAD/lib/rules/no-catch-shadow.js)
+* [Test source](https://github.com/eslint/eslint/tree/HEAD/tests/lib/rules/no-catch-shadow.js)
 * [Documentation source](https://github.com/eslint/eslint/tree/HEAD/docs/rules/no-catch-shadow.md)

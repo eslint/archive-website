@@ -132,4 +132,5 @@ This rule was introduced in ESLint 2.3.0.
 ## Resources
 
 * [Rule source](https://github.com/eslint/eslint/tree/HEAD/lib/rules/newline-before-return.js)
+* [Test source](https://github.com/eslint/eslint/tree/HEAD/tests/lib/rules/newline-before-return.js)
 * [Documentation source](https://github.com/eslint/eslint/tree/HEAD/docs/rules/newline-before-return.md)

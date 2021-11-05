@@ -104,4 +104,5 @@ This rule was introduced in ESLint 2.3.0.
 ## Resources
 
 * [Rule source](https://github.com/eslint/eslint/tree/HEAD/lib/rules/no-restricted-globals.js)
+* [Test source](https://github.com/eslint/eslint/tree/HEAD/tests/lib/rules/no-restricted-globals.js)
 * [Documentation source](https://github.com/eslint/eslint/tree/HEAD/docs/rules/no-restricted-globals.md)

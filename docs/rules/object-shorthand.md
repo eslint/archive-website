@@ -268,4 +268,5 @@ This rule was introduced in ESLint 0.20.0.
 ## Resources
 
 * [Rule source](https://github.com/eslint/eslint/tree/HEAD/lib/rules/object-shorthand.js)
+* [Test source](https://github.com/eslint/eslint/tree/HEAD/tests/lib/rules/object-shorthand.js)
 * [Documentation source](https://github.com/eslint/eslint/tree/HEAD/docs/rules/object-shorthand.md)

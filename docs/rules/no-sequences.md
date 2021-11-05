@@ -157,4 +157,5 @@ This rule was introduced in ESLint 0.5.1.
 ## Resources
 
 * [Rule source](https://github.com/eslint/eslint/tree/HEAD/lib/rules/no-sequences.js)
+* [Test source](https://github.com/eslint/eslint/tree/HEAD/tests/lib/rules/no-sequences.js)
 * [Documentation source](https://github.com/eslint/eslint/tree/HEAD/docs/rules/no-sequences.md)

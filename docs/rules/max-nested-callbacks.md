@@ -99,4 +99,5 @@ This rule was introduced in ESLint 0.2.0.
 ## Resources
 
 * [Rule source](https://github.com/eslint/eslint/tree/HEAD/lib/rules/max-nested-callbacks.js)
+* [Test source](https://github.com/eslint/eslint/tree/HEAD/tests/lib/rules/max-nested-callbacks.js)
 * [Documentation source](https://github.com/eslint/eslint/tree/HEAD/docs/rules/max-nested-callbacks.md)

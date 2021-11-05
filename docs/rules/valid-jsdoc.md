@@ -409,4 +409,5 @@ This rule was introduced in ESLint 0.4.0.
 ## Resources
 
 * [Rule source](https://github.com/eslint/eslint/tree/HEAD/lib/rules/valid-jsdoc.js)
+* [Test source](https://github.com/eslint/eslint/tree/HEAD/tests/lib/rules/valid-jsdoc.js)
 * [Documentation source](https://github.com/eslint/eslint/tree/HEAD/docs/rules/valid-jsdoc.md)

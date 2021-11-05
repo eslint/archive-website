@@ -207,4 +207,5 @@ This rule was introduced in ESLint 0.0.7.
 ## Resources
 
 * [Rule source](https://github.com/eslint/eslint/tree/HEAD/lib/rules/no-fallthrough.js)
+* [Test source](https://github.com/eslint/eslint/tree/HEAD/tests/lib/rules/no-fallthrough.js)
 * [Documentation source](https://github.com/eslint/eslint/tree/HEAD/docs/rules/no-fallthrough.md)

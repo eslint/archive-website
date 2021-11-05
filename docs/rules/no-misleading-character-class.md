@@ -89,4 +89,5 @@ This rule was introduced in ESLint 5.3.0.
 ## Resources
 
 * [Rule source](https://github.com/eslint/eslint/tree/HEAD/lib/rules/no-misleading-character-class.js)
+* [Test source](https://github.com/eslint/eslint/tree/HEAD/tests/lib/rules/no-misleading-character-class.js)
 * [Documentation source](https://github.com/eslint/eslint/tree/HEAD/docs/rules/no-misleading-character-class.md)
