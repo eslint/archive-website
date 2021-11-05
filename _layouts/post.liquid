@@ -30,7 +30,7 @@
             <br />
             {% if original %}
             <br />
-              This post originally appeared on {{ original.site.name }} on {{ original.date | dateFormat: "d LLLL yyyy" }}.
+              This post originally appeared on <a href={{original.site.url}}>{{ original.site.name }}</a> on <a href={{original.url}}>{{ original.date | dateFormat: "d LLLL yyyy" }}</a>.
             <br />
             {% endif %}
             <br />
