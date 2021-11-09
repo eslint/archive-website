@@ -28,6 +28,11 @@
               <em> - </em>
             {% endif %}<em>{{ page.date | dateFormat: "d LLLL yyyy" }}</em>
             <br />
+            {% if original %}
+            <br />
+              This post originally appeared on <a href={{original.site.url}}>{{ original.site.name }}</a> on <a href={{original.url}}>{{ original.date | dateFormat: "d LLLL yyyy" }}</a>.
+            <br />
+            {% endif %}
             <br />
             {{ content }}
             <footer>

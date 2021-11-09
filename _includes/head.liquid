@@ -26,7 +26,11 @@
     <title>{{ site.title }}</title>
   {% endif %}
   <link rel="preconnect" href="https://www.google-analytics.com">
-  <link rel="canonical" href="{{ page.url | replace: '.html', '' }}">
+  {% if original %} 
+    <link rel="canonical" href="{{ original.url }}">
+  {% else %}  
+    <link rel="canonical" href="{{ page.url | replace: '.html', '' }}">
+  {% endif %}  
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600">
   <link rel="stylesheet" href="/assets/styles/main.css">
   <link rel='manifest' href='/manifest.json'>
