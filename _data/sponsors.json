@@ -324,15 +324,6 @@
             "tier": "backer"
         },
         {
-            "name": "Moxio",
-            "url": "https://moxio.com",
-            "image": "https://images.opencollective.com/moxio/9fa53c1/logo.png",
-            "monthlyDonation": 1000,
-            "totalDonations": 45000,
-            "source": "opencollective",
-            "tier": "backer"
-        },
-        {
             "name": "Kevin Partington",
             "url": null,
             "image": "https://images.opencollective.com/kevin-partington/54f2124/avatar.png",
@@ -378,6 +369,14 @@
             "name": "Nobutaka OSHIRO",
             "image": "https://avatars.githubusercontent.com/u/3583286?u=cf4c1f3e26e13c58dd86227213feedc1d5e2984f&v=4",
             "url": "https://notakaos.com",
+            "monthlyDonation": 1000,
+            "source": "github",
+            "tier": "backer"
+        },
+        {
+            "name": "Moxio",
+            "image": "https://avatars.githubusercontent.com/u/4497863?v=4",
+            "url": "https://moxio.com",
             "monthlyDonation": 1000,
             "source": "github",
             "tier": "backer"
