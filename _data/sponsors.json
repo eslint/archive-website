@@ -1361,6 +1361,14 @@
             "tier": "backer"
         },
         {
+            "name": "Timo",
+            "image": "https://avatars.githubusercontent.com/u/57319535?u=0779baf202817c4190a45289e3a767043e7d455d&v=4",
+            "url": "timokluser.ch",
+            "monthlyDonation": 500,
+            "source": "github",
+            "tier": "backer"
+        },
+        {
             "name": "Standard Resume Sponsors",
             "image": "https://avatars.githubusercontent.com/u/65968828?u=059fb65476f5c27fc1a38cb2e6391ad05105fde5&v=4",
             "url": "https://standardresume.co/tech",
