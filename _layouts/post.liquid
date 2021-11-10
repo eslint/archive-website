@@ -34,6 +34,9 @@
             <br />
             {% endif %}
             <br />
+            {% if teaser %}
+            <p>{{ teaser }}</p>
+            {% endif %}
             {{ content }}
             <footer>
               <p class="text-center">ESLint depends on the support of individuals and companies. <a class="btn btn-default" href="https://opencollective.com/eslint">Become a Sponsor</a></p>
