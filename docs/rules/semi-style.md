@@ -42,6 +42,13 @@ for (
 ) {
     foo()
 }
+
+class C {
+    static {
+        foo()
+        ;bar()
+    }
+}
 ```
 
 Examples of **correct** code for this rule with `"last"` option:
@@ -58,6 +65,13 @@ for (
     ++i
 ) {
     foo()
+}
+
+class C {
+    static {
+        foo();
+        bar()
+    }
 }
 ```
 
@@ -76,6 +90,13 @@ for (
 ) {
     foo()
 }
+
+class C {
+    static {
+        foo();
+        bar()
+    }
+}
 ```
 
 Examples of **correct** code for this rule with `"first"` option:
@@ -92,6 +113,13 @@ for (
     ++i
 ) {
     foo()
+}
+
+class C {
+    static {
+        foo()
+        ;bar()
+    }
 }
 ```
 

@@ -76,7 +76,6 @@ Examples of **incorrect** code for this rule with the default `"always"` option:
 
 ```js
 /*eslint one-var: ["error", "always"]*/
-/*eslint-env es6*/
 
 function foo() {
     var bar;
@@ -99,13 +98,31 @@ function foo() {
         var qux = true;
     }
 }
+
+class C {
+    static {
+        var foo;
+        var bar;
+    }
+
+    static {
+        var foo;
+        if (bar) {
+            var baz = true;
+        }
+    }
+
+    static {
+        let foo;
+        let bar;
+    }
+}
 ```
 
 Examples of **correct** code for this rule with the default `"always"` option:
 
 ```js
 /*eslint one-var: ["error", "always"]*/
-/*eslint-env es6*/
 
 function foo() {
     var bar,
@@ -137,6 +154,30 @@ function foo(){
         let qux;
     }
 }
+
+class C {
+    static {
+        var foo, bar;
+    }
+
+    static {
+        var foo, baz;
+        if (bar) {
+            baz = true;
+        }
+    }
+
+    static {
+        let foo, bar;
+    }
+
+    static {
+        let foo;
+        if (bar) {
+            let baz;
+        }
+    }
+}
 ```
 
 ### never
@@ -145,7 +186,6 @@ Examples of **incorrect** code for this rule with the `"never"` option:
 
 ```js
 /*eslint one-var: ["error", "never"]*/
-/*eslint-env es6*/
 
 function foo() {
     var bar,
@@ -167,13 +207,19 @@ function foo(){
     let bar = true,
         baz = false;
 }
+
+class C {
+    static {
+        var foo, bar;
+        let baz, qux;
+    }
+}
 ```
 
 Examples of **correct** code for this rule with the `"never"` option:
 
 ```js
 /*eslint one-var: ["error", "never"]*/
-/*eslint-env es6*/
 
 function foo() {
     var bar;
@@ -195,6 +241,15 @@ function foo() {
         let qux = true;
     }
 }
+
+class C {
+    static {
+        var foo;
+        var bar;
+        let baz;
+        let qux;
+    }
+}
 ```
 
 ### consecutive
@@ -203,7 +258,6 @@ Examples of **incorrect** code for this rule with the `"consecutive"` option:
 
 ```js
 /*eslint one-var: ["error", "consecutive"]*/
-/*eslint-env es6*/
 
 function foo() {
     var bar;
@@ -219,14 +273,21 @@ function foo(){
     var qux = 3;
     var quux;
 }
+
+class C {
+    static {
+        var foo;
+        var bar;
+        let baz;
+        let qux;
+    }
+}
 ```
 
 Examples of **correct** code for this rule with the `"consecutive"` option:
 
 ```js
 /*eslint one-var: ["error", "consecutive"]*/
-/*eslint-env es6*/
-
 
 function foo() {
     var bar,
@@ -241,6 +302,16 @@ function foo(){
 
     var qux = 3,
         quux;
+}
+
+class C {
+    static {
+        var foo, bar;
+        let baz, qux;
+        doSomething();
+        let quux;
+        var quuux;
+    }
 }
 ```
 

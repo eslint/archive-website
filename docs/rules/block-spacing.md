@@ -33,6 +33,10 @@ if (foo) { bar = 0;}
 function baz() {let i = 0;
     return i;
 }
+
+class C {
+    static {this.bar = 0;}
+}
 ```
 
 Examples of **correct** code for this rule with the default `"always"` option:
@@ -42,6 +46,10 @@ Examples of **correct** code for this rule with the default `"always"` option:
 
 function foo() { return true; }
 if (foo) { bar = 0; }
+
+class C {
+    static { this.bar = 0; }
+}
 ```
 
 ### never
@@ -53,6 +61,10 @@ Examples of **incorrect** code for this rule with the `"never"` option:
 
 function foo() { return true; }
 if (foo) { bar = 0;}
+
+class C {
+    static { this.bar = 0; }
+}
 ```
 
 Examples of **correct** code for this rule with the `"never"` option:
@@ -62,6 +74,10 @@ Examples of **correct** code for this rule with the `"never"` option:
 
 function foo() {return true;}
 if (foo) {bar = 0;}
+
+class C {
+    static {this.bar = 0;}
+}
 ```
 
 ## When Not To Use It

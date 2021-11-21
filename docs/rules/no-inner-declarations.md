@@ -66,7 +66,7 @@ function doSomething() {
 
 ## Rule Details
 
-This rule requires that function declarations and, optionally, variable declarations be in the root of a program or the body of a function.
+This rule requires that function declarations and, optionally, variable declarations be in the root of a program, or in the root of the body of a function, or in the root of the body of a class static block.
 
 ## Options
 
@@ -93,6 +93,14 @@ function doSomethingElse() {
 }
 
 if (foo) function f(){}
+
+class C {
+    static {
+        if (test) {
+            function doSomething() { }
+        }
+    }
+}
 ```
 
 Examples of **correct** code for this rule with the default `"functions"` option:
@@ -104,6 +112,12 @@ function doSomething() { }
 
 function doSomethingElse() {
     function doAnotherThing() { }
+}
+
+class C {
+    static {
+        function doSomething() { }
+    }
 }
 
 if (test) {
@@ -135,17 +149,23 @@ function doAnotherThing() {
     }
 }
 
-
 if (foo) var a;
 
 if (foo) function f(){}
+
+class C {
+    static {
+        if (test) {
+            var something;
+        }
+    }
+}
 ```
 
 Examples of **correct** code for this rule with the `"both"` option:
 
 ```js
 /*eslint no-inner-declarations: ["error", "both"]*/
-/*eslint-env es6*/
 
 var bar = 42;
 
@@ -155,6 +175,12 @@ if (test) {
 
 function doAnotherThing() {
     var baz = 81;
+}
+
+class C {
+    static {
+        var something;
+    }
 }
 ```
 

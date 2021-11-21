@@ -53,6 +53,14 @@ var b = 1;
         static x = C;
     }
 }
+
+{
+    const C = class {
+        static {
+            C.x = "foo";
+        }
+    }
+}
 ```
 
 Examples of **correct** code for this rule:
@@ -94,13 +102,21 @@ function g() {
         x = C;
     }
 }
+
+{
+    const C = class C {
+        static {
+            C.x = "foo";
+        }
+    }
+}
 ```
 
 ## Options
 
 ```json
 {
-    "no-use-before-define": ["error", { "functions": true, "classes": true }]
+    "no-use-before-define": ["error", { "functions": true, "classes": true, "variables": true }]
 }
 ```
 
@@ -164,6 +180,15 @@ class A {
         [C.x]() {}
     }
 }
+
+{
+    class C {
+        static {
+            new D();
+        }
+    }
+    class D {}
+}
 ```
 
 Examples of **correct** code for the `{ "classes": false }` option:
@@ -204,6 +229,15 @@ const g = function() {};
 {
     const C = class {
         static x = foo;
+    }
+    const foo = 1;
+}
+
+{
+    class C {
+        static {
+            this.x = foo;
+        }
     }
     const foo = 1;
 }

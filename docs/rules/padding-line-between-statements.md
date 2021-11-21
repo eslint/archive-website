@@ -157,6 +157,13 @@ function foo() {
     const a = 0;
     bar();
 }
+
+class C {
+    static {
+        let a = 0;
+        bar();
+    }
+}
 ```
 
 Examples of **correct** code for the `[{ blankLine: "always", prev: ["const", "let", "var"], next: "*"}, { blankLine: "any", prev: ["const", "let", "var"], next: ["const", "let", "var"]}]` configuration:
@@ -187,6 +194,15 @@ function foo() {
     const b = 0;
 
     bar();
+}
+
+class C {
+    static {
+        let a = 0;
+        let b = 0;
+
+        bar();
+    }
 }
 ```
 

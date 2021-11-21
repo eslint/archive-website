@@ -50,6 +50,14 @@ function bar() {
     aLabel: {
     }
 }
+
+class C {
+    static {
+        {
+            foo();
+        }
+    }
+}
 ```
 
 Examples of **correct** code for this rule with ES6 environment:
@@ -85,6 +93,18 @@ function bar() {
 }
 
 aLabel: {
+}
+
+class C {
+    static {
+        lbl: {
+            if (something) {
+                break lbl;
+            }
+
+            foo();
+        }
+    }
 }
 ```
 

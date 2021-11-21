@@ -91,6 +91,10 @@ class A {
     static foo() {
         // OK. static methods aren't expected to use this.
     }
+
+    static {
+        // OK. static blocks are exempt.
+    }
 }
 ```
 

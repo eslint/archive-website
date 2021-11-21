@@ -95,6 +95,14 @@ if (foo) {
 else {
   baz();
 }
+
+class C
+{
+    static
+    {
+        foo();
+    }
+}
 ```
 
 Examples of **correct** code for this rule with the default `"1tbs"` option:
@@ -120,6 +128,12 @@ try {
   somethingRisky();
 } catch(e) {
   handleError();
+}
+
+class C {
+    static {
+        foo();
+    }
 }
 
 // when there are no braces, there are no problems
@@ -160,6 +174,12 @@ if (foo) { baz(); } else if (bar) {
 try { somethingRisky(); } catch(e) {
   handleError();
 }
+
+class C {
+    static { foo(); }
+}
+
+class D { static { foo(); } }
 ```
 
 ### stroustrup
@@ -185,6 +205,14 @@ try
 } catch(e)
 {
   handleError();
+}
+
+class C
+{
+    static
+    {
+        foo();
+    }
 }
 
 if (foo) {
@@ -221,6 +249,12 @@ catch(e) {
   handleError();
 }
 
+class C {
+    static {
+        foo();
+    }
+}
+
 // when there are no braces, there are no problems
 if (foo) bar();
 else if (baz) boom();
@@ -240,6 +274,12 @@ else { baz(); }
 
 try { somethingRisky(); }
 catch(e) { handleError(); }
+
+class C {
+    static { foo(); }
+}
+
+class D { static { foo(); } }
 ```
 
 ### allman
@@ -263,6 +303,12 @@ try
 } catch(e)
 {
   handleError();
+}
+
+class C {
+    static {
+        foo();
+    }
 }
 
 if (foo) {
@@ -305,6 +351,14 @@ catch(e)
   handleError();
 }
 
+class C
+{
+    static
+    {
+        foo();
+    }
+}
+
 // when there are no braces, there are no problems
 if (foo) bar();
 else if (baz) boom();
@@ -324,6 +378,16 @@ else { baz(); }
 
 try { somethingRisky(); }
 catch(e) { handleError(); }
+
+class C
+{
+    static { foo(); }
+
+    static
+    { foo(); }
+}
+
+class D { static { foo(); } }
 ```
 
 ## When Not To Use It
