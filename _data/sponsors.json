@@ -455,15 +455,6 @@
             "tier": "backer"
         },
         {
-            "name": "Litecoin Casino",
-            "url": "https://www.cryptosnacks.org/litecoin-casino/",
-            "image": "https://images.opencollective.com/litecoin-casino/61e9d2e/logo.png",
-            "monthlyDonation": 500,
-            "totalDonations": 500,
-            "source": "opencollective",
-            "tier": "backer"
-        },
-        {
             "name": "Stefan Milenkovic",
             "url": "https://stefan-milenkovic.com",
             "image": "https://images.opencollective.com/stefan-milenkovic/1fd866a/avatar.png",
