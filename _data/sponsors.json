@@ -3,7 +3,7 @@
         {
             "name": "Automattic",
             "url": "https://automattic.com",
-            "image": "https://images.opencollective.com/photomatt/d0ef3e1/logo.png",
+            "image": "https://images.opencollective.com/automattic/d0ef3e1/logo.png",
             "monthlyDonation": 200000,
             "totalDonations": 2600000,
             "source": "opencollective",
@@ -11,15 +11,6 @@
         }
     ],
     "gold": [
-        {
-            "name": "Contra",
-            "url": "https://contra.com",
-            "image": "https://images.opencollective.com/contra1/c70f93f/logo.png",
-            "monthlyDonation": 100000,
-            "totalDonations": 100000,
-            "source": "opencollective",
-            "tier": "gold-sponsor"
-        },
         {
             "name": "Nx (by Nrwl)",
             "url": "https://nx.dev",
