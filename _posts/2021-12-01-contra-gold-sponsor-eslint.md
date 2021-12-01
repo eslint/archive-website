@@ -1,6 +1,6 @@
 ---
 title: "Contra becomes ESLint gold sponsor"
-tags:
+categories:
   - Sponsorships
 authors:
   - nzakas
