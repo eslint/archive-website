@@ -464,15 +464,6 @@
             "tier": "backer"
         },
         {
-            "name": "Jellypepper",
-            "url": "https://jellypepper.com/",
-            "image": "https://images.opencollective.com/jellypepperhq/3de4023/logo.png",
-            "monthlyDonation": 500,
-            "totalDonations": 1500,
-            "source": "opencollective",
-            "tier": "backer"
-        },
-        {
             "name": "Mesh Payments",
             "url": "https://meshpayments.com/",
             "image": "https://images.opencollective.com/meshpayments/e216d5a/logo.png",
@@ -531,7 +522,7 @@
             "url": "https://tripwire.com",
             "image": "https://images.opencollective.com/tripwire/7599e30/logo.png",
             "monthlyDonation": 500,
-            "totalDonations": 4500,
+            "totalDonations": 5000,
             "source": "opencollective",
             "tier": "backer"
         },
