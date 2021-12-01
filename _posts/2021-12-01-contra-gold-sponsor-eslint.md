@@ -11,7 +11,7 @@ authors:
     <a href="https://eslint.org/" title="ESLint" target="_blank"><img class="lazyload" width="200" data-src="/assets/img/logo.svg" alt="ESLint" src="/assets/img/logo.svg"></a>
 </p>
 
-We are happy to share that [Contra](https://nx.dev/) has become an ESLint gold sponsor, donating $1,000 each month for the ongoing maintenance and development of ESLint! Contra is a professional network built around independent work, allowing designers, developers, and more, to live and work the way they want.
+We are happy to share that [Contra](https://contra.com/) has become an ESLint gold sponsor, donating $1,000 each month for the ongoing maintenance and development of ESLint! Contra is a professional network built around independent work, allowing designers, developers, and more, to live and work the way they want.
 
 Here's what the folks at Contra had to say about ESLint:
 
