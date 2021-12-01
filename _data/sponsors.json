@@ -193,15 +193,6 @@
             "tier": "backer"
         },
         {
-            "name": "Principal Financial Group",
-            "url": "https://www.principal.com/about-us",
-            "image": "https://images.opencollective.com/principal/431e690/logo.png",
-            "monthlyDonation": 5000,
-            "totalDonations": 80000,
-            "source": "opencollective",
-            "tier": null
-        },
-        {
             "name": "Josh Goldberg",
             "image": "https://avatars.githubusercontent.com/u/3335181?u=bcc591417a50454dffef85a2d537e293ca7df827&v=4",
             "url": "http://www.joshuakgoldberg.com",
@@ -240,7 +231,7 @@
             "url": "https://www.neovation.com",
             "image": "https://images.opencollective.com/neovationcorp/30d1cf7/logo.png",
             "monthlyDonation": 2500,
-            "totalDonations": 85000,
+            "totalDonations": 87500,
             "source": "opencollective",
             "tier": "backer"
         },
@@ -274,7 +265,7 @@
             "url": "https://xh.io",
             "image": "https://images.opencollective.com/xh/cec0963/logo.png",
             "monthlyDonation": 1000,
-            "totalDonations": 9000,
+            "totalDonations": 10000,
             "source": "opencollective",
             "tier": "backer"
         },
@@ -711,7 +702,7 @@
             "url": "https://twitter.com/jumbleofideas",
             "image": "https://images.opencollective.com/aj-klein/b63b472/avatar.png",
             "monthlyDonation": 500,
-            "totalDonations": 16500,
+            "totalDonations": 17000,
             "source": "opencollective",
             "tier": "backer"
         },
@@ -720,7 +711,7 @@
             "url": "https://thirdiron.com",
             "image": "https://images.opencollective.com/third_iron/fa6ec4d/logo.png",
             "monthlyDonation": 500,
-            "totalDonations": 17000,
+            "totalDonations": 17500,
             "source": "opencollective",
             "tier": "backer"
         },
@@ -729,7 +720,7 @@
             "url": "https://www.maisonette.com",
             "image": "https://images.opencollective.com/maisonetteworld/c170bfc/logo.png",
             "monthlyDonation": 500,
-            "totalDonations": 17000,
+            "totalDonations": 17500,
             "source": "opencollective",
             "tier": "backer"
         },
@@ -747,7 +738,7 @@
             "url": "https://korzun.com",
             "image": "https://images.opencollective.com/simon-korzun/cbdefdd/avatar.png",
             "monthlyDonation": 500,
-            "totalDonations": 17000,
+            "totalDonations": 17500,
             "source": "opencollective",
             "tier": "backer"
         },
@@ -801,7 +792,7 @@
             "url": "https://nubz.com",
             "image": "https://images.opencollective.com/nubz/logo.png",
             "monthlyDonation": 500,
-            "totalDonations": 17000,
+            "totalDonations": 17500,
             "source": "opencollective",
             "tier": "backer"
         },
@@ -819,7 +810,7 @@
             "url": null,
             "image": "https://images.opencollective.com/joseph-percy/avatar.png",
             "monthlyDonation": 500,
-            "totalDonations": 17000,
+            "totalDonations": 17500,
             "source": "opencollective",
             "tier": "backer"
         },
