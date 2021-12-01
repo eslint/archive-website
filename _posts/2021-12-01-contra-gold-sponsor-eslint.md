@@ -7,7 +7,7 @@ authors:
 ---
 
 <p class="text-center">
-    <a href="https://contra.com" title="Nx" rel="noopener nofollow" target="_blank"><img class="lazyload" width="170" data-src="/assets/img/logos/contra.jpg" alt="Contra" src="/assets/img/logos/contra.jpg"></a>
+    <a href="https://contra.com" title="Contra" rel="noopener nofollow" target="_blank"><img class="lazyload" width="170" data-src="/assets/img/logos/contra.jpg" alt="Contra" src="/assets/img/logos/contra.jpg"></a>
     <a href="https://eslint.org/" title="ESLint" target="_blank"><img class="lazyload" width="200" data-src="/assets/img/logo.svg" alt="ESLint" src="/assets/img/logo.svg"></a>
 </p>
 
