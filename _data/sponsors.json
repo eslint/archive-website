@@ -125,7 +125,7 @@
             "url": "https://www.vpsserver.com",
             "image": "https://images.opencollective.com/vpsservercom/logo.png",
             "monthlyDonation": 20000,
-            "totalDonations": 560000,
+            "totalDonations": 580000,
             "source": "opencollective",
             "tier": "bronze-sponsor"
         },
@@ -491,15 +491,6 @@
             "tier": "backer"
         },
         {
-            "name": "Cui Mingda",
-            "url": "https://mingda.net",
-            "image": "https://images.opencollective.com/cuimingda/1faca0f/avatar.png",
-            "monthlyDonation": 500,
-            "totalDonations": 2000,
-            "source": "opencollective",
-            "tier": "backer"
-        },
-        {
             "name": "Toan Nguyen",
             "url": null,
             "image": "https://images.opencollective.com/toan-nguyen1/avatar.png",
@@ -558,7 +549,7 @@
             "url": "https://solverfox.dev",
             "image": "https://images.opencollective.com/eps1lon/4200608/avatar.png",
             "monthlyDonation": 500,
-            "totalDonations": 4500,
+            "totalDonations": 5000,
             "source": "opencollective",
             "tier": "backer"
         },
@@ -630,7 +621,7 @@
             "url": "https://justinnoel.dev",
             "image": "https://images.opencollective.com/justinnoel/7c4d721/avatar.png",
             "monthlyDonation": 500,
-            "totalDonations": 8000,
+            "totalDonations": 8500,
             "source": "opencollective",
             "tier": "backer"
         },
@@ -639,7 +630,7 @@
             "url": "https://blacksheepcode.com",
             "image": "https://images.opencollective.com/blacksheepcode/976d69a/avatar.png",
             "monthlyDonation": 500,
-            "totalDonations": 11500,
+            "totalDonations": 12000,
             "source": "opencollective",
             "tier": "backer"
         },
@@ -675,7 +666,7 @@
             "url": "https://matterapp.com",
             "image": "https://images.opencollective.com/matter_hq/ac0a719/logo.png",
             "monthlyDonation": 500,
-            "totalDonations": 14000,
+            "totalDonations": 14500,
             "source": "opencollective",
             "tier": "backer"
         },
@@ -747,7 +738,7 @@
             "url": "https://cantremember.com",
             "image": "https://images.opencollective.com/cantremember/avatar.png",
             "monthlyDonation": 500,
-            "totalDonations": 17000,
+            "totalDonations": 17500,
             "source": "opencollective",
             "tier": "backer"
         },
@@ -1382,7 +1373,7 @@
             "url": null,
             "image": "https://images.opencollective.com/womcauliff/2be6f36/avatar.png",
             "monthlyDonation": 300,
-            "totalDonations": 10900,
+            "totalDonations": 11200,
             "source": "opencollective",
             "tier": "backer"
         },
