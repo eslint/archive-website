@@ -103,15 +103,6 @@
             "tier": "bronze-sponsor"
         },
         {
-            "name": "launchdarkly",
-            "url": "https://launchdarkly.com",
-            "image": "https://images.opencollective.com/launchdarkly/574bb9e/logo.png",
-            "monthlyDonation": 20000,
-            "totalDonations": 40000,
-            "source": "opencollective",
-            "tier": "bronze-sponsor"
-        },
-        {
             "name": "Anagram Solver",
             "url": "https://www.crosswordsolver.org/anagram-solver/",
             "image": "https://images.opencollective.com/anagram-solver/2666271/logo.png",
