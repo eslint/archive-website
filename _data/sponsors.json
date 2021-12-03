@@ -184,6 +184,15 @@
             "tier": "backer"
         },
         {
+            "name": "Principal Financial Group",
+            "url": "https://www.principal.com/about-us",
+            "image": "https://images.opencollective.com/principal/431e690/logo.png",
+            "monthlyDonation": 5000,
+            "totalDonations": 85000,
+            "source": "opencollective",
+            "tier": null
+        },
+        {
             "name": "Josh Goldberg",
             "image": "https://avatars.githubusercontent.com/u/3335181?u=bcc591417a50454dffef85a2d537e293ca7df827&v=4",
             "url": "http://www.joshuakgoldberg.com",
