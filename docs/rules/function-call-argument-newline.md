@@ -24,7 +24,6 @@ This rule has a string option:
 * `"never"` disallows line breaks between arguments
 * `"consistent"` requires consistent usage of line breaks between arguments
 
-
 ### always
 
 Examples of **incorrect** code for this rule with the default `"always"` option:
@@ -78,7 +77,6 @@ baz(
     }
 );
 ```
-
 
 ### never
 
@@ -198,7 +196,6 @@ baz(
     }
 );
 ```
-
 
 ## When Not To Use It
 

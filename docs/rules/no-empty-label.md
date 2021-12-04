@@ -12,7 +12,6 @@ edit_link: https://github.com/eslint/eslint/edit/main/docs/rules/no-empty-label.
 
 Labeled statements are only used in conjunction with labeled break and continue statements. ECMAScript has no goto statement.
 
-
 ## Rule Details
 
 This error occurs when a label is used to mark a statement that is not an iteration or switch

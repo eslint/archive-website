@@ -8,7 +8,6 @@ edit_link: https://github.com/eslint/eslint/edit/main/docs/user-guide/configurin
 
 # Plugins
 
-
 * [Specifying Parser](#specifying-parser)
 * [Specifying Processor](#specifying-processor)
 * [Configuring Plugins](#configuring-plugins)

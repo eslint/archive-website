@@ -188,7 +188,7 @@ This rule has an option to allow specific kinds of functions to be empty.
     * `"asyncFunctions"` - Async functions.
     * `"asyncMethods"` - Async class methods and method shorthands of object literals.
 
-#### allow: functions
+### allow: functions
 
 Examples of **correct** code for the `{ "allow": ["functions"] }` option:
 
@@ -204,7 +204,7 @@ var obj = {
 };
 ```
 
-#### allow: arrowFunctions
+### allow: arrowFunctions
 
 Examples of **correct** code for the `{ "allow": ["arrowFunctions"] }` option:
 
@@ -215,7 +215,7 @@ Examples of **correct** code for the `{ "allow": ["arrowFunctions"] }` option:
 var foo = () => {};
 ```
 
-#### allow: generatorFunctions
+### allow: generatorFunctions
 
 Examples of **correct** code for the `{ "allow": ["generatorFunctions"] }` option:
 
@@ -232,7 +232,7 @@ var obj = {
 };
 ```
 
-#### allow: methods
+### allow: methods
 
 Examples of **correct** code for the `{ "allow": ["methods"] }` option:
 
@@ -250,7 +250,7 @@ class A {
 }
 ```
 
-#### allow: generatorMethods
+### allow: generatorMethods
 
 Examples of **correct** code for the `{ "allow": ["generatorMethods"] }` option:
 
@@ -268,7 +268,7 @@ class A {
 }
 ```
 
-#### allow: getters
+### allow: getters
 
 Examples of **correct** code for the `{ "allow": ["getters"] }` option:
 
@@ -286,7 +286,7 @@ class A {
 }
 ```
 
-#### allow: setters
+### allow: setters
 
 Examples of **correct** code for the `{ "allow": ["setters"] }` option:
 
@@ -304,7 +304,7 @@ class A {
 }
 ```
 
-#### allow: constructors
+### allow: constructors
 
 Examples of **correct** code for the `{ "allow": ["constructors"] }` option:
 
@@ -317,7 +317,7 @@ class A {
 }
 ```
 
-#### allow: asyncFunctions
+### allow: asyncFunctions
 
 Examples of **correct** code for the `{ "allow": ["asyncFunctions"] }` options:
 
@@ -328,7 +328,7 @@ Examples of **correct** code for the `{ "allow": ["asyncFunctions"] }` options:
 async function a(){}
 ```
 
-#### allow: asyncMethods
+### allow: asyncMethods
 
 Examples of **correct** code for the `{ "allow": ["asyncMethods"] }` options:
 

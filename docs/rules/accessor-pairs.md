@@ -240,7 +240,6 @@ const Quux = class {
 }
 ```
 
-
 ## Known Limitations
 
 Due to the limits of static analysis, this rule does not account for possible side effects and in certain cases

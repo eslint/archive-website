@@ -30,7 +30,6 @@ This rule has 2 options that are boolean value.
 - `"before": true` requires one or more spaces before colons.
 - `"before": false` (Default) disallows before colons.
 
-
 Examples of **incorrect** code for this rule:
 
 ```js

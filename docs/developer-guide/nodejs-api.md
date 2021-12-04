@@ -412,7 +412,7 @@ This edit information means replacing the range of the `range` property by the `
 
 The `Formatter` value is the object to convert the [LintResult] objects to text. The [eslint.loadFormatter()][eslint-loadformatter] method returns it. It has the following method:
 
-* `format` (`(results: LintResult[]) => string`)<br>
+* `format` (`(results: LintResult[]) => string | Promise<string>`)<br>
   The method to convert the [LintResult] objects to text.
 
 ---
@@ -481,7 +481,7 @@ const linter2 = new Linter();
 ```
 
 In this example, rules run on `linter1` will get `path/to/project` when calling `context.getCwd()`.
-Those run on `linter2` will get `process.cwd()` if the global `process` object is defined or `undefined` otherwise (e.g. on the browser https://eslint.org/demo).
+Those run on `linter2` will get `process.cwd()` if the global `process` object is defined or `undefined` otherwise (e.g. on the browser <https://eslint.org/demo>).
 
 ### Linter#verify
 
@@ -791,7 +791,7 @@ Any additional properties of a test case will be passed directly to the linter a
 
 If a valid test case only uses the `code` property, it can optionally be provided as a string containing the code, rather than an object with a `code` key.
 
-#### Testing errors with `messageId`
+### Testing errors with `messageId`
 
 If the rule under test uses `messageId`s, you can use `messageId` property in a test case to assert reported error's `messageId` instead of its `message`.
 
@@ -813,7 +813,7 @@ For messages with placeholders, a test case can also use `data` property to addi
 
 Please note that `data` in a test case does not assert `data` passed to `context.report`. Instead, it is used to form the expected message text which is then compared with the received `message`.
 
-#### Testing Suggestions
+### Testing Suggestions
 
 Suggestions can be tested by defining a `suggestions` key on an errors object. The options to check for the suggestions are the following (all are optional):
 

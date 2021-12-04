@@ -79,7 +79,7 @@ var bar = 3;
 
 **Incorrect**:
 
-```
+```js
 1    /*eslint no-multiple-empty-lines: ["error", { "max": 2, "maxEOF": 0 }]*/⏎
 2    ⏎
 3    var foo = 5;⏎
@@ -92,7 +92,7 @@ var bar = 3;
 
 **Correct**:
 
-```
+```js
 1    /*eslint no-multiple-empty-lines: ["error", { "max": 2, "maxEOF": 0 }]*/⏎
 2    ⏎
 3    var foo = 5;⏎

@@ -8,7 +8,6 @@ edit_link: https://github.com/eslint/eslint/edit/main/docs/user-guide/configurin
 
 # Ignoring Code
 
-
 * [`ignorePatterns` in Config Files](#ignorepatterns-in-config-files)
 * [The `.eslintignore` File](#the-eslintignore-file)
 * [Using an Alternate File](#using-an-alternate-file)

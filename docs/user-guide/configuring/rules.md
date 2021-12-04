@@ -8,7 +8,6 @@ edit_link: https://github.com/eslint/eslint/edit/main/docs/user-guide/configurin
 
 # Rules
 
-
 * [Configuring Rules](#configuring-rules)
 * [Disabling Rules](#disabling-rules)
 
