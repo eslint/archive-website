@@ -14,7 +14,7 @@ function Rule(props) {
                 title={props.rule}
             >
                 <input type="checkbox" checked={props.isChecked} id={props.rule} onChange={handler} />
-                {props.rule}
+                {props.rule} {props.isDeprecated ? "(deprecated)" : ""}
             </label>
         </div>
     );
