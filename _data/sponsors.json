@@ -464,6 +464,15 @@
             "tier": "backer"
         },
         {
+            "name": "Corellium",
+            "url": "https://www.corellium.com",
+            "image": "https://images.opencollective.com/corellium/aa8c228/logo.png",
+            "monthlyDonation": 500,
+            "totalDonations": 500,
+            "source": "opencollective",
+            "tier": "backer"
+        },
+        {
             "name": "Nicolò Ribaudo",
             "url": null,
             "image": "https://images.opencollective.com/nicoloribaudo/924f189/avatar.png",
