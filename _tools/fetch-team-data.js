@@ -77,7 +77,11 @@ const team = {
                 username: user.login,
                 name: profile.name,
                 website: profile.blog,
-                avatar_url: profile.avatar_url
+                avatar_url: profile.avatar_url,
+                bio: profile.bio,
+                twitter_username: profile.twitter_username,
+                github_username: user.login,
+                location: profile.location
             });
         }
 
