@@ -48,6 +48,7 @@ export default class RulesConfig extends PureComponent {
                     key={rule}
                     rule={rule}
                     docs={this.props.docs[rule].docs}
+                    isDeprecated={this.props.docs[rule].deprecated}
                     isChecked={this.shouldBeChecked(rule)}
                     onChange={this.handleSingleChange}
                 />;
