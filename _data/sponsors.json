@@ -1202,6 +1202,14 @@
             "tier": "backer"
         },
         {
+            "name": "Dallas Baker",
+            "image": "https://avatars.githubusercontent.com/u/13825473?u=618c4d8f747579b0de65c170ba115af736f7a4ad&v=4",
+            "url": "blog.sheldyn.io",
+            "monthlyDonation": 500,
+            "source": "github",
+            "tier": "backer"
+        },
+        {
             "name": "Johannes Konings",
             "image": "https://avatars.githubusercontent.com/u/14806640?u=3586bd6e631a350aec9ff1f2cc31615f72233244&v=4",
             "url": "https://johanneskonings.dev/",
