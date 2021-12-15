@@ -167,6 +167,15 @@
     ],
     "backers": [
         {
+            "name": "Cybozu, Inc.",
+            "url": "https://cybozu.co.jp/",
+            "image": "https://images.opencollective.com/cybozu/933e46d/logo.png",
+            "monthlyDonation": 15725,
+            "totalDonations": 833600,
+            "source": "opencollective",
+            "tier": null
+        },
+        {
             "name": "Yannick Croissant",
             "url": "https://yannick.cr",
             "image": "https://images.opencollective.com/yannickcr/765f06f/avatar.png",
