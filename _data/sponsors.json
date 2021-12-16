@@ -1219,6 +1219,14 @@
             "tier": "backer"
         },
         {
+            "name": "Daniil Orain",
+            "image": "https://avatars.githubusercontent.com/u/13982759?u=2e68ef5c601f388ddd3dff25ed3473c5f7019990&v=4",
+            "url": "https://github.com/ungarson",
+            "monthlyDonation": 500,
+            "source": "github",
+            "tier": "backer"
+        },
+        {
             "name": "Johannes Konings",
             "image": "https://avatars.githubusercontent.com/u/14806640?u=3586bd6e631a350aec9ff1f2cc31615f72233244&v=4",
             "url": "https://johanneskonings.dev/",
