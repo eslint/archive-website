@@ -7,7 +7,8 @@ tags:
   - Open Collective
   - Sponsors
   - Backers
-author: nzakas
+authors:
+  - nzakas
 ---
 
 <p class="text-center">
