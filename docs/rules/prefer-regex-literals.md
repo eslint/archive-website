@@ -8,6 +8,8 @@ rule_type: suggestion
 
 # Disallow use of the `RegExp` constructor in favor of regular expression literals (prefer-regex-literals)
 
+(hasSuggestions) Some problems reported by this rule are manually fixable by editor [suggestions](../developer-guide/working-with-rules#providing-suggestions).
+
 There are two ways to create a regular expression:
 
 * Regular expression literals, e.g., `/abc/u`.

@@ -1072,6 +1072,13 @@ types:
         name: prefer-numeric-literals
         recommended: false
       - description: >-
+          disallow use of `Object.prototype.hasOwnProperty.call()` and prefer
+          use of `Object.hasOwn()`
+        fixable: true
+        hasSuggestions: false
+        name: prefer-object-has-own
+        recommended: false
+      - description: >-
           disallow using Object.assign with an object literal as the first
           argument and prefer the use of object spread instead.
         fixable: true
@@ -1087,7 +1094,7 @@ types:
           disallow use of the `RegExp` constructor in favor of regular
           expression literals
         fixable: false
-        hasSuggestions: false
+        hasSuggestions: true
         name: prefer-regex-literals
         recommended: false
       - description: require rest parameters instead of `arguments`
