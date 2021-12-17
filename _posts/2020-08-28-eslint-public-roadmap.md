@@ -1,5 +1,6 @@
 ---
-title: "Announcing ESLint's public roadmap"
+layout: post
+title: Announcing ESLint's public roadmap
 tags:
   - Sponsorships
   - Donations

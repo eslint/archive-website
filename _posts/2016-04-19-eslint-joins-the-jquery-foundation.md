@@ -1,9 +1,10 @@
 ---
+layout: post
 title: ESLint Joins The jQuery Foundation
 date: 2016-04-19
 tags:
-- jQuery Foundation
-- Open Source
+  - jQuery Foundation
+  - Open Source
 authors: nzakas, kaicataldo
 ---
 

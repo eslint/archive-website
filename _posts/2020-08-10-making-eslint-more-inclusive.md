@@ -1,5 +1,6 @@
 ---
-title: "Making ESLint more inclusive"
+layout: post
+title: Making ESLint more inclusive
 tags:
   - Inclusivity
   - Diversity

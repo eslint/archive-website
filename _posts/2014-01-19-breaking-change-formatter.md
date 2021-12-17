@@ -1,4 +1,5 @@
 ---
+layout: post
 title: Breaking change to ESLint default formatter
 tags:
   - breaking change

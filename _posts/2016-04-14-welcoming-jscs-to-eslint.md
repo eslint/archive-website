@@ -1,10 +1,11 @@
 ---
+layout: post
 title: Welcoming JSCS To ESLint
 date: 2016-04-14 17:13:45
 tags:
-- jscs
-- future
-- plans
+  - jscs
+  - future
+  - plans
 authors: nzakas, hzoo, not-an-aardvark, bytesnz, kaicataldo
 ---
 

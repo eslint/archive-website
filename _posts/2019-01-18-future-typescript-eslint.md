@@ -1,5 +1,6 @@
 ---
-title: "The future of TypeScript on ESLint"
+layout: post
+title: The future of TypeScript on ESLint
 tags:
   - typescript
   - parser

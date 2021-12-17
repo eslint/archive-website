@@ -1,5 +1,6 @@
 ---
-title: "Introducing the ESLint Google Season of Docs project and technical writer"
+layout: post
+title: Introducing the ESLint Google Season of Docs project and technical writer
 tags:
   - Google Season of Docs
   - Technical Writing

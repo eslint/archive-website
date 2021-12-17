@@ -1,4 +1,5 @@
 ---
+layout: post
 title: ESLint's New Rule Format
 tags:
   - rules

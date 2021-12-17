@@ -1,5 +1,6 @@
 ---
-title: "Supporting ESLint's dependencies"
+layout: post
+title: Supporting ESLint's dependencies
 tags:
   - Sponsorships
   - Donations

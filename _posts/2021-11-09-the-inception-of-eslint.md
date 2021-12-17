@@ -1,9 +1,9 @@
 ---
 layout: post
-title: "The inception of ESLint"
+title: The inception of ESLint
 teaser: The story of how one bug at work spawned the pluggable linter.
 categories:
-- Storytime
+  - Storytime
 author: nzakas
 original:
   url: https://humanwhocodes.com/blog/2018/02/the-inception-of-eslint/

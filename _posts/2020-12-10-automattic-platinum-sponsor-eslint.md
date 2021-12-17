@@ -1,5 +1,6 @@
 ---
-title: "Automattic becomes ESLint's first platinum sponsor"
+layout: post
+title: Automattic becomes ESLint's first platinum sponsor
 tags:
   - Open Source
   - Funding

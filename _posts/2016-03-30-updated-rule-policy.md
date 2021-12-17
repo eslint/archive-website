@@ -1,4 +1,5 @@
 ---
+layout: post
 title: Updated Rule Policy
 tags:
   - information

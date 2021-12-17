@@ -1,5 +1,6 @@
 ---
-title: "A year of paying contributors: Review"
+layout: post
+title: 'A year of paying contributors: Review'
 tags:
   - Sponsorships
   - Donations

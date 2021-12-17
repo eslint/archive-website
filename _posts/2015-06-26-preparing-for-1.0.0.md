@@ -1,4 +1,5 @@
 ---
+layout: post
 title: Preparing for 1.0.0
 tags:
   - release

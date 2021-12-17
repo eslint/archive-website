@@ -1,4 +1,5 @@
 ---
+layout: post
 title: Changes to Issue and Pull Request Policies
 tags:
   - release

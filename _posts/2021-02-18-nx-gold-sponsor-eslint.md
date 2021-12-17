@@ -1,5 +1,6 @@
 ---
-title: "Nx becomes ESLint gold sponsor"
+layout: post
+title: Nx becomes ESLint gold sponsor
 tags:
   - Open Source
   - Funding

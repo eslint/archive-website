@@ -1,5 +1,6 @@
 ---
-title: "End-of-Life for Built-in JSDoc Support in ESLint"
+layout: post
+title: End-of-Life for Built-in JSDoc Support in ESLint
 tags:
   - eol
   - jsdoc

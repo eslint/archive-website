@@ -1,5 +1,6 @@
 ---
-title: "Salesforce donates $10,000 to ESLint"
+layout: post
+title: Salesforce donates $10,000 to ESLint
 tags:
   - Open Source
   - Funding

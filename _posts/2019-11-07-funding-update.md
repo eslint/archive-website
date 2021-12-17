@@ -1,5 +1,6 @@
 ---
-title: "Funding ESLint's Future: November Update"
+layout: post
+title: 'Funding ESLint''s Future: November Update'
 tags:
   - Open Source
   - Funding
