@@ -1203,6 +1203,14 @@
             "tier": "backer"
         },
         {
+            "name": "James Ives",
+            "image": "https://avatars.githubusercontent.com/u/10888441?u=3697a970165c060691e8436ec9ed8cab3b1bb5b2&v=4",
+            "url": "https://jamesiv.es",
+            "monthlyDonation": 500,
+            "source": "github",
+            "tier": "backer"
+        },
+        {
             "name": "Michael Rotarius",
             "image": "https://avatars.githubusercontent.com/u/13236924?u=c07053c05ab6ed3abd3a11a303186219b60c8adf&v=4",
             "url": "https://github.com/Mirobit",
