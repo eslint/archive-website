@@ -1,8 +1,12 @@
 ---
+layout: post
 title: Postmortem for Malicious Packages Published on July 12th, 2018
 tags:
   - security
-authors: hzoo, btmills, kaicataldo
+authors:
+  - hzoo
+  - btmills
+  - kaicataldo
 ---
 
 ## Summary

@@ -1,12 +1,15 @@
 ---
-title: "Funding ESLint's Future: An Update"
+layout: post
+title: 'Funding ESLint''s Future: An Update'
 tags:
   - Open Source
   - Funding
   - Open Collective
   - Sponsors
   - Backers
-authors: nzakas, kaicataldo
+authors:
+  - nzakas
+  - kaicataldo
 ---
 
 Back in February, we [announced](https://eslint.org/blog/2019/02/funding-eslint-future) the creation of the [ESLint Collective](https://opencollective.com/eslint) to raise funds for the ongoing maintenance and development of ESLint. At the time, we were grateful to have both [Facebook Open Source](https://code.facebook.com/projects/) and [Airbnb](https://airbnb.com) as our first two gold sponsors, each donating $1,000 per month.

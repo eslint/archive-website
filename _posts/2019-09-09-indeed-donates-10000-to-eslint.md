@@ -1,12 +1,14 @@
 ---
-title: "Indeed donates $10,000 to ESLint"
+layout: post
+title: Indeed donates $10,000 to ESLint
 tags:
   - Open Source
   - Funding
   - Open Collective
   - Sponsors
   - Backers
-author: nzakas
+authors:
+  - nzakas
 ---
 
 <p class="text-center">

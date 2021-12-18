@@ -1,12 +1,14 @@
 ---
-title: "Automattic becomes ESLint's first platinum sponsor"
+layout: post
+title: Automattic becomes ESLint's first platinum sponsor
 tags:
   - Open Source
   - Funding
   - Open Collective
   - Sponsors
   - Backers
-author: nzakas
+authors:
+  - nzakas
 ---
 
 <p class="text-center" style="margin-top: 100px; margin-bottom: 100px">
