@@ -7,6 +7,8 @@ tags:
 authors:
   - nzakas
   - kaicataldo
+categories:
+  - Policy Updates
 ---
 
 We've recently made some changes to our policies around issues and pull requests that we're happy to share with you.
