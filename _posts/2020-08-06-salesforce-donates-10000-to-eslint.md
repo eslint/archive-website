@@ -10,6 +10,8 @@ tags:
 authors:
   - nzakas
   - mdjermanovic
+categories: 
+  - Sponsorships
 ---
 
 <p class="text-center">

@@ -9,6 +9,8 @@ tags:
   - Backers
 authors:
   - nzakas
+categories:
+  - Sponsorships
 ---
 
 <p class="text-center">

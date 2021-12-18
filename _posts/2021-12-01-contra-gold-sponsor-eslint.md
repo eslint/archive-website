@@ -1,10 +1,10 @@
 ---
 layout: post
 title: Contra becomes ESLint gold sponsor
-categories:
-  - Sponsorships
 authors:
   - nzakas
+categories:
+  - Sponsorships
 ---
 
 <p class="text-center">

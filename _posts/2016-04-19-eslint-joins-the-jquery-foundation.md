@@ -8,6 +8,8 @@ tags:
 authors:
   - nzakas
   - kaicataldo
+categories:
+  - Announcements
 ---
 
 I've believed for a while that once an open source project reaches a certain level of ubiquity, the maintainers have a responsibility to ensure its survival for the good of the community. Over the past couple of years, I watched as important projects hit roadblocks: YUI abruptly shut down, Node.js splintered before merging back together, and Express was left in a state of disarray. Communities were left scrambling, unsure what to rely on. During this time, I started formulating a plan for how to keep ESLint from falling into the same pattern.

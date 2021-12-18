@@ -7,6 +7,8 @@ tags:
 authors:
   - nzakas
   - kaicataldo
+categories:
+  - API Changes
 ---
 
 In the next minor release of ESLint (which will be 0.7.1 due to us incorrectly pushing 0.6.2 as 0.7.0 last month), there will be a breaking change to the way formatters operate.

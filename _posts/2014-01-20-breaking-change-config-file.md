@@ -7,6 +7,8 @@ tags:
 authors:
   - nzakas
   - kaicataldo
+categories:
+  - API Changes
 ---
 
 In previous versions of ESLint, it was possible to use JavaScript files as configuration files on the command line, such as:

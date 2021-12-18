@@ -7,6 +7,8 @@ tags:
 authors:
   - nzakas
   - kaicataldo
+categories:
+  - API Changes
 ---
 
 In the next version of ESLint, scheduled for release next week, there is a breaking change to the default formatter. Up until this point, the default formatter was the "compact" formatter, which outputs data such as:

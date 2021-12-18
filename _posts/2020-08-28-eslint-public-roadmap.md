@@ -7,7 +7,9 @@ tags:
   - Roadmap
   - Planning
 authors:
-  - nzakas
+  - nzakas 
+categories:
+  - Announcements
 ---
 
 When ESLint [first started accepting donations](https://eslint.org/blog/2019/02/funding-eslint-future), we listed several ways that the project intended to spend the money donated:
