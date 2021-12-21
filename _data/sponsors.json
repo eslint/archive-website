@@ -94,6 +94,15 @@
     ],
     "bronze": [
         {
+            "name": "launchdarkly",
+            "url": "https://launchdarkly.com",
+            "image": "https://images.opencollective.com/launchdarkly/574bb9e/logo.png",
+            "monthlyDonation": 20000,
+            "totalDonations": 60000,
+            "source": "opencollective",
+            "tier": "bronze-sponsor"
+        },
+        {
             "name": "SumatoSoft",
             "url": "https://sumatosoft.com/",
             "image": "https://images.opencollective.com/sumatosoft1/cab6013/logo.png",
