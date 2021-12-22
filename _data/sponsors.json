@@ -103,15 +103,6 @@
             "tier": "bronze-sponsor"
         },
         {
-            "name": "SumatoSoft",
-            "url": "https://sumatosoft.com/",
-            "image": "https://images.opencollective.com/sumatosoft1/cab6013/logo.png",
-            "monthlyDonation": 20000,
-            "totalDonations": 20000,
-            "source": "opencollective",
-            "tier": "bronze-sponsor"
-        },
-        {
             "name": "Anagram Solver",
             "url": "https://www.crosswordsolver.org/anagram-solver/",
             "image": "https://images.opencollective.com/anagram-solver/2666271/logo.png",
