@@ -14,8 +14,6 @@ categories:
   - Release Notes
 ---
 
-We are pleased to share that we've just pushed the second alpha release of Espree v3.0.0. This is a major release with breaking changes, so please be sure to read this post thoroughly.
-
 ## Installation
 
 Since Espree v3.0.0 is a prerelease version, you'll need to install it using the `@next` tag:
