@@ -368,6 +368,14 @@
             "tier": "backer"
         },
         {
+            "name": "Jarrod Davis",
+            "image": "https://avatars.githubusercontent.com/u/235875?v=4",
+            "url": "https://jarrodldavis.com",
+            "monthlyDonation": 1000,
+            "source": "github",
+            "tier": "backer"
+        },
+        {
             "name": "Bryan Mishkin",
             "image": "https://avatars.githubusercontent.com/u/698306?v=4",
             "url": "http://www.linkedin.com/in/bmish",
