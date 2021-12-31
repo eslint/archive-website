@@ -384,10 +384,6 @@ var [i = function foo() {
 
 If you don't want to enforce linebreaks between array elements, don't enable this rule.
 
-## Compatibility
-
-* **JSCS:** [validateNewlineAfterArrayElements](https://jscs-dev.github.io/rule/validateNewlineAfterArrayElements)
-
 ## Related Rules
 
 * [array-bracket-spacing](array-bracket-spacing)
@@ -398,6 +394,10 @@ If you don't want to enforce linebreaks between array elements, don't enable thi
 * [max-statements-per-line](max-statements-per-line)
 * [block-spacing](block-spacing)
 * [brace-style](brace-style)
+
+## Compatibility
+
+* **JSCS:** [validateNewlineAfterArrayElements](https://jscs-dev.github.io/rule/validateNewlineAfterArrayElements)
 
 ## Version
 

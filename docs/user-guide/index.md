@@ -38,10 +38,10 @@ The ESLint team is committed to making upgrading as easy and painless as possibl
 
 If you were using a prior version of ESLint, you can get help with the transition by reading:
 
-- [migrating-to-1.0.0](migrating-to-1.0.0)
-- [migrating-to-2.0.0](migrating-to-2.0.0)
-- [migrating-to-3.0.0](migrating-to-3.0.0)
-- [migrating-to-4.0.0](migrating-to-4.0.0)
-- [migrating-to-5.0.0](migrating-to-5.0.0)
-- [migrating-to-6.0.0](migrating-to-6.0.0)
-- [migrating-to-7.0.0](migrating-to-7.0.0)
+* [migrating-to-1.0.0](migrating-to-1.0.0)
+* [migrating-to-2.0.0](migrating-to-2.0.0)
+* [migrating-to-3.0.0](migrating-to-3.0.0)
+* [migrating-to-4.0.0](migrating-to-4.0.0)
+* [migrating-to-5.0.0](migrating-to-5.0.0)
+* [migrating-to-6.0.0](migrating-to-6.0.0)
+* [migrating-to-7.0.0](migrating-to-7.0.0)

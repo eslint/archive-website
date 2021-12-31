@@ -321,17 +321,17 @@ See [no-dupe-keys](no-dupe-keys) if you also want to disallow duplicate keys in 
 
 See [no-dupe-class-members](no-dupe-class-members) if you also want to disallow duplicate names in class definitions.
 
-## Further Reading
-
-* [Object Setters](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/set)
-* [Object Getters](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/get)
-* [Classes](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes)
-
 ## Related Rules
 
 * [accessor-pairs](accessor-pairs)
 * [no-dupe-keys](no-dupe-keys)
 * [no-dupe-class-members](no-dupe-class-members)
+
+## Further Reading
+
+* [Object Setters](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/set)
+* [Object Getters](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/get)
+* [Classes](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes)
 
 ## Version
 

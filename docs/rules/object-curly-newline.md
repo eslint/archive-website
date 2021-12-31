@@ -541,11 +541,6 @@ export { foo, bar } from 'foo-bar';
 export { foo as f, bar } from 'foo-bar';
 ```
 
-## Compatibility
-
-* **JSCS**: [requirePaddingNewLinesInObjects](https://jscs-dev.github.io/rule/requirePaddingNewLinesInObjects)
-* **JSCS**: [disallowPaddingNewLinesInObjects](https://jscs-dev.github.io/rule/disallowPaddingNewLinesInObjects)
-
 ## When Not To Use It
 
 If you don't want to enforce consistent line breaks after opening and before closing braces, then it's safe to disable this rule.
@@ -556,6 +551,11 @@ If you don't want to enforce consistent line breaks after opening and before clo
 * [key-spacing](key-spacing)
 * [object-curly-spacing](object-curly-spacing)
 * [object-property-newline](object-property-newline)
+
+## Compatibility
+
+* **JSCS**: [requirePaddingNewLinesInObjects](https://jscs-dev.github.io/rule/requirePaddingNewLinesInObjects)
+* **JSCS**: [disallowPaddingNewLinesInObjects](https://jscs-dev.github.io/rule/disallowPaddingNewLinesInObjects)
 
 ## Version
 

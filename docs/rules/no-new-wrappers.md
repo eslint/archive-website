@@ -76,14 +76,14 @@ var object = new MyString();
 
 If you want to allow the use of primitive wrapper objects, then you can safely disable this rule.
 
-## Further Reading
-
-* [Wrapper objects](https://www.inkling.com/read/javascript-definitive-guide-david-flanagan-6th/chapter-3/wrapper-objects)
-
 ## Related Rules
 
 * [no-array-constructor](no-array-constructor)
 * [no-new-object](no-new-object)
+
+## Further Reading
+
+* [Wrapper objects](https://www.inkling.com/read/javascript-definitive-guide-david-flanagan-6th/chapter-3/wrapper-objects)
 
 ## Version
 

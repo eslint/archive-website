@@ -104,15 +104,15 @@ void someFunction();
 
 If you intentionally use the `void` operator then you can disable this rule.
 
-## Further Reading
-
-* [Mozilla Developer Network](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/void)
-* [Bad Parts: Appendix B - JavaScript: The Good Parts by Douglas Crockford](https://oreilly.com/javascript/excerpts/javascript-good-parts/bad-parts.html)
-
 ## Related Rules
 
 * [no-undef-init](no-undef-init)
 * [no-undefined](no-undefined)
+
+## Further Reading
+
+* [Mozilla Developer Network](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/void)
+* [Bad Parts: Appendix B - JavaScript: The Good Parts by Douglas Crockford](https://oreilly.com/javascript/excerpts/javascript-good-parts/bad-parts.html)
 
 ## Version
 

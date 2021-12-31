@@ -95,13 +95,13 @@ new Promise((resolve, reject) => {
 Promise.resolve(1);
 ```
 
-## Further Reading
-
-* [MDN Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise)
-
 ## Related Rules
 
 * [no-async-promise-executor](no-async-promise-executor)
+
+## Further Reading
+
+* [MDN Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise)
 
 ## Version
 

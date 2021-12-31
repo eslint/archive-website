@@ -394,13 +394,13 @@ function add(num1, num2) {
 
 If you aren't using JSDoc, then you can safely turn this rule off.
 
-## Further Reading
-
-* [JSDoc](http://usejsdoc.org)
-
 ## Related Rules
 
 * [require-jsdoc](require-jsdoc)
+
+## Further Reading
+
+* [JSDoc](http://usejsdoc.org)
 
 ## Version
 

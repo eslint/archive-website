@@ -76,12 +76,6 @@ function handleFoo4() {
 }
 ```
 
-## Further Reading
-
-* [Control flow in Node.js](http://book.mixu.net/node/ch7.html)
-* [Control Flow in Node](https://howtonode.org/control-flow)
-* [Control Flow in Node Part II](https://howtonode.org/control-flow-part-ii)
-
 ## Related Rules
 
 * [complexity](complexity)
@@ -91,6 +85,12 @@ function handleFoo4() {
 * [max-lines-per-function](max-lines-per-function)
 * [max-params](max-params)
 * [max-statements](max-statements)
+
+## Further Reading
+
+* [Control flow in Node.js](http://book.mixu.net/node/ch7.html)
+* [Control Flow in Node](https://howtonode.org/control-flow)
+* [Control Flow in Node Part II](https://howtonode.org/control-flow-part-ii)
 
 ## Version
 

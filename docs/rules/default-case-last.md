@@ -124,13 +124,13 @@ if (foo !== 0) {
 doSomethingAnyway();
 ```
 
-## Further Reading
-
-* [MDN switch statement](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/switch)
-
 ## Related Rules
 
 * [default-case](default-case)
+
+## Further Reading
+
+* [MDN switch statement](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/switch)
 
 ## Version
 

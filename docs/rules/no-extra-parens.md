@@ -299,15 +299,15 @@ a = (b * c);
 typeof (a);
 ```
 
-## Further Reading
-
-* [MDN: Operator Precedence](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Operator_Precedence)
-
 ## Related Rules
 
 * [arrow-parens](arrow-parens)
 * [no-cond-assign](no-cond-assign)
 * [no-return-assign](no-return-assign)
+
+## Further Reading
+
+* [MDN: Operator Precedence](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Operator_Precedence)
 
 ## Version
 
