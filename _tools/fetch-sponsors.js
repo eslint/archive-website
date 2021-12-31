@@ -175,7 +175,7 @@ async function fetchGitHubSponsors() {
 // Main
 //-----------------------------------------------------------------------------
 
-(async () => {
+(async() => {
 
     const [openCollectiveSponsors, githubSponsors] = await Promise.all([
         fetchOpenCollectiveSponsors(),
