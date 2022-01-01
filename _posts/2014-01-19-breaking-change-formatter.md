@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Breaking change to ESLint default formatter
+teaser: "In the next version of ESLint, scheduled for release next week, there is a breaking change to the default formatter."
 tags:
   - breaking change
   - formatter
@@ -11,7 +12,7 @@ categories:
   - API Changes
 ---
 
-In the next version of ESLint, scheduled for release next week, there is a breaking change to the default formatter. Up until this point, the default formatter was the "compact" formatter, which outputs data such as:
+Up until this point, the default formatter was the "compact" formatter, which outputs data such as:
 
 ```
 foo.js: line 5, col 10, Error - Unexpected foo. (foo)

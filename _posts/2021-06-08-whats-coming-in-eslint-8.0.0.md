@@ -1,6 +1,7 @@
 ---
 layout: post
 title: What's coming in ESLint v8.0.0
+teaser: "We want to share with you the significant changes that will be coming in v8.0.0 so you can better prepare for the changes and understand why the changes are necessary."
 tags:
   - major
   - breaking changes
@@ -11,8 +12,6 @@ categories:
 ---
 
 Last week, the Technical Steering Committee (TSC) met to finalize the features for ESLint v8.0.0. This feature set had not yet been locked down even as v8.0.0 work began and so this represented an important milestone that allows us to focus on getting this next major release shipped. You can see everything that is planned for v8.0.0 on our [project board](https://github.com/eslint/eslint/projects/8).
-
-We want to share with you the significant changes that will be coming in v8.0.0 so you can better prepare for the changes and understand why the changes are necessary.
 
 ## Significant changes in v8.0.0
 
