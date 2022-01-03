@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Welcoming JSCS To ESLint
+teaser: "We are happy to announce that, effectively immediately, the JSCS team is now part of the ESLint team. We would like to invite everyone to welcome Marat Dulin, Oleg Gaidarenko, Mike Sherov, Alexej Yaroshevich, and Henry Zhu, and we're looking forward to working with them all."
 date: 2016-04-14 17:13:45
 tags:
   - jscs

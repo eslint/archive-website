@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Changes to Issue and Pull Request Policies
+teaser: "We've recently made some changes to our policies around issues and pull requests that we're happy to share with you."
 tags:
   - release
   - minor
@@ -10,8 +11,6 @@ authors:
 categories:
   - Policy Updates
 ---
-
-We've recently made some changes to our policies around issues and pull requests that we're happy to share with you.
 
 From the beginning of the project, ESLint has always required issues for every pull request containing code. There were a number of reasons for that, mostly related to how we were triaging and handling incoming requests as well as the limitations the GitHub issue tracker imposed on us. Since that time, there have been a lot of improvements to the GitHub issue and pull request trackers, and as such, we've been able to make some changes.
 

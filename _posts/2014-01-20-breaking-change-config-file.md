@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Breaking change to ESLint config files
+teaser: "In the next version of ESLint, there is a breaking change to remove the capability to use JavaScript files as configuration files. All configuration files must be in JSON format."
 tags:
   - breaking change
   - config file
