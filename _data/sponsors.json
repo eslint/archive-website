@@ -148,15 +148,6 @@
             "tier": "bronze-sponsor"
         },
         {
-            "name": "Fire Stick Tricks",
-            "url": "https://www.firesticktricks.com",
-            "image": "https://images.opencollective.com/fire-stick-tricks/b8fbe2c/logo.png",
-            "monthlyDonation": 20000,
-            "totalDonations": 680000,
-            "source": "opencollective",
-            "tier": "bronze-sponsor"
-        },
-        {
             "name": "Practice Ignition",
             "image": "https://avatars.githubusercontent.com/u/5753491?v=4",
             "url": "https://www.practiceignition.com",
@@ -630,7 +621,7 @@
             "url": "https://www.quora.com/profile/Alexandre-Morgaut",
             "image": "https://images.opencollective.com/alexandre-morgaut/6e3c8d4/avatar.png",
             "monthlyDonation": 500,
-            "totalDonations": 15500,
+            "totalDonations": 16000,
             "source": "opencollective",
             "tier": "backer"
         },
@@ -657,7 +648,7 @@
             "url": "https://blacksheepcode.com",
             "image": "https://images.opencollective.com/blacksheepcode/976d69a/avatar.png",
             "monthlyDonation": 500,
-            "totalDonations": 12000,
+            "totalDonations": 12500,
             "source": "opencollective",
             "tier": "backer"
         },
@@ -675,7 +666,7 @@
             "url": "https://about.me/peterdehaan",
             "image": "https://images.opencollective.com/pdehaan/4437929/avatar.png",
             "monthlyDonation": 500,
-            "totalDonations": 12000,
+            "totalDonations": 12500,
             "source": "opencollective",
             "tier": "backer"
         },
