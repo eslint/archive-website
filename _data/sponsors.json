@@ -43,7 +43,7 @@
             "url": "https://www.salesforce.com",
             "image": "https://images.opencollective.com/salesforce/ca8f997/logo.png",
             "monthlyDonation": 100000,
-            "totalDonations": 4434100,
+            "totalDonations": 4534100,
             "source": "opencollective",
             "tier": "gold-sponsor"
         },
@@ -685,15 +685,6 @@
             "image": "https://images.opencollective.com/jmcombs/22a314a/avatar.png",
             "monthlyDonation": 500,
             "totalDonations": 13000,
-            "source": "opencollective",
-            "tier": "backer"
-        },
-        {
-            "name": "Matter",
-            "url": "https://matterapp.com",
-            "image": "https://images.opencollective.com/matter_hq/ac0a719/logo.png",
-            "monthlyDonation": 500,
-            "totalDonations": 15000,
             "source": "opencollective",
             "tier": "backer"
         },
