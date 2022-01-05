@@ -87,7 +87,7 @@
             "url": "https://liftoff.io/",
             "image": "https://images.opencollective.com/liftoff/5c4fa84/logo.png",
             "monthlyDonation": 50000,
-            "totalDonations": 950000,
+            "totalDonations": 1000000,
             "source": "opencollective",
             "tier": "silver-sponsor"
         }
@@ -125,7 +125,7 @@
             "url": "https://icons8.com",
             "image": "https://images.opencollective.com/icons8/7fa1641/logo.png",
             "monthlyDonation": 20000,
-            "totalDonations": 580000,
+            "totalDonations": 600000,
             "source": "opencollective",
             "tier": "bronze-sponsor"
         },
@@ -729,7 +729,7 @@
             "url": "https://twitter.com/jumbleofideas",
             "image": "https://images.opencollective.com/aj-klein/b63b472/avatar.png",
             "monthlyDonation": 500,
-            "totalDonations": 17000,
+            "totalDonations": 17500,
             "source": "opencollective",
             "tier": "backer"
         },
