@@ -5,7 +5,7 @@
             "url": "https://automattic.com",
             "image": "https://images.opencollective.com/automattic/d0ef3e1/logo.png",
             "monthlyDonation": 200000,
-            "totalDonations": 2800000,
+            "totalDonations": 3000000,
             "source": "opencollective",
             "tier": "platinum-sponsor"
         }
@@ -666,7 +666,7 @@
             "url": null,
             "image": "https://images.opencollective.com/touchless/8efea29/logo.png",
             "monthlyDonation": 500,
-            "totalDonations": 87500,
+            "totalDonations": 88000,
             "source": "opencollective",
             "tier": "backer"
         },
@@ -756,7 +756,7 @@
             "url": "https://www.maisonette.com",
             "image": "https://images.opencollective.com/maisonetteworld/c170bfc/logo.png",
             "monthlyDonation": 500,
-            "totalDonations": 17500,
+            "totalDonations": 18000,
             "source": "opencollective",
             "tier": "backer"
         },
@@ -1453,7 +1453,7 @@
             "url": null,
             "image": "https://images.opencollective.com/incognito-97d2b095/avatar.png",
             "monthlyDonation": 100,
-            "totalDonations": 2400,
+            "totalDonations": 3600,
             "source": "opencollective",
             "tier": null
         },
