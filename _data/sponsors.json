@@ -464,6 +464,15 @@
             "tier": "backer"
         },
         {
+            "name": "Julio Jordán",
+            "url": null,
+            "image": "https://images.opencollective.com/juliojordan/avatar.png",
+            "monthlyDonation": 500,
+            "totalDonations": 500,
+            "source": "opencollective",
+            "tier": "backer"
+        },
+        {
             "name": "Min Chen",
             "url": null,
             "image": "https://images.opencollective.com/min-chen/61f2fcb/avatar.png",
