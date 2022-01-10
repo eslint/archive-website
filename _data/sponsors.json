@@ -504,7 +504,7 @@
             "url": "https://stefan-milenkovic.com",
             "image": "https://images.opencollective.com/stefan-milenkovic/1fd866a/avatar.png",
             "monthlyDonation": 500,
-            "totalDonations": 1500,
+            "totalDonations": 2000,
             "source": "opencollective",
             "tier": "backer"
         },
@@ -955,6 +955,14 @@
             "tier": "backer"
         },
         {
+            "name": "Jirka Svoboda",
+            "image": "https://avatars.githubusercontent.com/u/761766?u=1771454e0852904ddf71fe74e493e228331dd27a&v=4",
+            "url": "https://github.com/svobik7",
+            "monthlyDonation": 500,
+            "source": "github",
+            "tier": "backer"
+        },
+        {
             "name": "Ryan Macy",
             "image": "https://avatars.githubusercontent.com/u/829581?u=7126d6768d3e200ee5dfd3485cd50465cb8e85f4&v=4",
             "url": "https://macy.dev",
@@ -1342,14 +1350,6 @@
             "name": "Brock Davis",
             "image": "https://avatars.githubusercontent.com/u/42578556?u=ce7d15736d73accbfa8e295b38fd56c5e6660bb9&v=4",
             "url": "https://github.com/brockneedscoffee",
-            "monthlyDonation": 500,
-            "source": "github",
-            "tier": "backer"
-        },
-        {
-            "name": "Timo",
-            "image": "https://avatars.githubusercontent.com/u/57319535?u=0779baf202817c4190a45289e3a767043e7d455d&v=4",
-            "url": "timokluser.ch",
             "monthlyDonation": 500,
             "source": "github",
             "tier": "backer"
