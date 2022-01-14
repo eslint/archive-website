@@ -176,6 +176,15 @@
             "tier": "backer"
         },
         {
+            "name": "GitBook",
+            "url": "https://www.gitbook.com",
+            "image": "https://images.opencollective.com/gitbook/d35a8e7/logo.png",
+            "monthlyDonation": 5000,
+            "totalDonations": 5000,
+            "source": "opencollective",
+            "tier": "backer"
+        },
+        {
             "name": "Principal Financial Group",
             "url": "https://www.principal.com/about-us",
             "image": "https://images.opencollective.com/principal/431e690/logo.png",
