@@ -20,7 +20,7 @@ Prerequisites: [Node.js](https://nodejs.org/en/) (`^12.22.0`, `^14.17.0`, or `>=
 
 You can install ESLint using npm or yarn:
 
-```sh
+```shell
 npm install eslint --save-dev
 
 # or
@@ -28,21 +28,21 @@ npm install eslint --save-dev
 yarn add eslint --dev
 ```
 
-You should then set up a configuration file, and the easiest way to do that is to use the `--init` flag:
+You should then set up a configuration file, and the easiest way to do that is:
 
-```sh
-$ npx eslint --init
+```shell
+$ npm init @eslint/config
 
 # or
 
-$ yarn run eslint --init
+$ yarn create @eslint/config
 ```
 
-**Note:** `--init` assumes you have a `package.json` file already. If you don't, make sure to run `npm init` or `yarn init` beforehand.
+**Note:** `npm init @eslint/config` assumes you have a `package.json` file already. If you don't, make sure to run `npm init` or `yarn init` beforehand.
 
 After that, you can run ESLint on any file or directory like this:
 
-```sh
+```shell
 $ npx eslint yourfile.js
 
 # or
@@ -56,7 +56,7 @@ It is also possible to install ESLint globally rather than locally (using `npm i
 
 **Note:** If you are coming from a version before 1.0.0 please see the [migration guide](migrating-to-1.0.0).
 
-After running `eslint --init`, you'll have a `.eslintrc.{js,yml,json}` file in your directory. In it, you'll see some rules configured like this:
+After running `npm init @eslint/config`, you'll have a `.eslintrc.{js,yml,json}` file in your directory. In it, you'll see some rules configured like this:
 
 ```json
 {

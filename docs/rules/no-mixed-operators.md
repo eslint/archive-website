@@ -28,7 +28,7 @@ var foo = a && b || c || d;
 
 will generate
 
-```sh
+```shell
 1:13  Unexpected mix of '&&' and '||'. (no-mixed-operators)
 1:18  Unexpected mix of '&&' and '||'. (no-mixed-operators)
 ```
@@ -39,7 +39,7 @@ var foo = a && b ? c : d;
 
 will generate
 
-```sh
+```shell
 1:13  Unexpected mix of '&&' and '?:'. (no-mixed-operators)
 1:18  Unexpected mix of '&&' and '?:'. (no-mixed-operators)
 ```

@@ -26,7 +26,7 @@ Examples of **incorrect** code for this rule:
 
 ```js
 /*eslint no-restricted-exports: ["error", {
-    "restrictedNamedExports": ["foo", "bar", "Baz", "a", "b", "c", "d"]
+    "restrictedNamedExports": ["foo", "bar", "Baz", "a", "b", "c", "d", "e", "👍"]
 }]*/
 
 export const foo = 1;
@@ -41,16 +41,20 @@ export { a };
 function someFunction() {}
 export { someFunction as b };
 
-export { c } from 'some_module';
+export { c } from "some_module";
 
-export { something as d } from 'some_module';
+export { "d" } from "some_module";
+
+export { something as e } from "some_module";
+
+export { "👍" } from "some_module";
 ```
 
 Examples of **correct** code for this rule:
 
 ```js
 /*eslint no-restricted-exports: ["error", {
-    "restrictedNamedExports": ["foo", "bar", "Baz", "a", "b", "c", "d"]
+    "restrictedNamedExports": ["foo", "bar", "Baz", "a", "b", "c", "d", "e", "👍"]
 }]*/
 
 export const quux = 1;
@@ -65,9 +69,13 @@ export { a as myObject };
 function someFunction() {}
 export { someFunction };
 
-export { c as someName } from 'some_module';
+export { c as someName } from "some_module";
 
-export { something } from 'some_module';
+export { "d" as " d " } from "some_module";
+
+export { something } from "some_module";
+
+export { "👍" as thumbsUp } from "some_module";
 ```
 
 ### Default exports
@@ -87,7 +95,7 @@ export { foo as default };
 ```js
 /*eslint no-restricted-exports: ["error", { "restrictedNamedExports": ["default"] }]*/
 
-export { default } from 'some_module';
+export { default } from "some_module";
 ```
 
 Examples of additional **correct** code for this rule:
@@ -110,7 +118,7 @@ export function foo() {}
 //----- my_module.js -----
 /*eslint no-restricted-exports: ["error", { "restrictedNamedExports": ["foo"] }]*/
 
-export * from 'some_module'; // allowed, although this declaration exports "foo" from my_module
+export * from "some_module"; // allowed, although this declaration exports "foo" from my_module
 ```
 
 ## Version
