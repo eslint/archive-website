@@ -202,14 +202,6 @@
             "tier": "backer"
         },
         {
-            "name": "Digital Attitude",
-            "image": "https://avatars.githubusercontent.com/u/27516055?v=4",
-            "url": "https://digitalattitude.com",
-            "monthlyDonation": 5000,
-            "source": "github",
-            "tier": "backer"
-        },
-        {
             "name": "STORIS",
             "url": "https://www.storis.com/",
             "image": "https://images.opencollective.com/storis/dfb0e13/logo.png",
