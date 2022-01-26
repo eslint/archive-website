@@ -473,6 +473,15 @@
             "tier": "backer"
         },
         {
+            "name": "StateTax.io",
+            "url": "https://statetax.io/",
+            "image": "https://images.opencollective.com/statetax/0a380bd/logo.png",
+            "monthlyDonation": 500,
+            "totalDonations": 500,
+            "source": "opencollective",
+            "tier": "backer"
+        },
+        {
             "name": "Julio Jordán",
             "url": null,
             "image": "https://images.opencollective.com/juliojordan/avatar.png",
