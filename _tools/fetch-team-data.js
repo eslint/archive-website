@@ -141,7 +141,7 @@ async function fetchBlogAuthors() {
 // Main
 //-----------------------------------------------------------------------------
 
-(async() => {
+(async () => {
 
     const [team, authors] = await Promise.all([
         fetchTeamMembers(),
