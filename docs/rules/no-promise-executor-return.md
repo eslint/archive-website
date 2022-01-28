@@ -6,7 +6,9 @@ rule_type: problem
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
-# Disallow returning values from Promise executor functions (no-promise-executor-return)
+# no-promise-executor-return
+
+Disallows returning values from Promise executor functions.
 
 The `new Promise` constructor accepts a single argument, called an *executor*.
 

@@ -6,9 +6,11 @@ rule_type: layout
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
-# Require or disallow padding lines between statements (padding-line-between-statements)
+# padding-line-between-statements
 
 (fixable) The `--fix` option on the [command line](../user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
+
+Requires or disallows padding lines between statements.
 
 This rule requires or disallows blank lines between the given 2 kinds of statements.
 Properly blank lines help developers to understand the code.

@@ -6,9 +6,11 @@ rule_type: layout
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
-# Enforce location of semicolons (semi-style)
+# semi-style
 
 (fixable) The `--fix` option on the [command line](../user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
+
+Enforces location of semicolons.
 
 Generally, semicolons are at the end of lines. However, in semicolon-less style, semicolons are at the beginning of lines. This rule enforces that semicolons are at the configured location.
 

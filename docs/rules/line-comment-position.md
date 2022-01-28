@@ -6,7 +6,9 @@ rule_type: layout
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
-# enforce position of line comments (line-comment-position)
+# line-comment-position
+
+Enforces position of line comments.
 
 Line comments can be positioned above or beside code. This rule helps teams maintain a consistent style.
 

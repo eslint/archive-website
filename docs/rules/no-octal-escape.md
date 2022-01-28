@@ -6,7 +6,9 @@ rule_type: suggestion
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
-# disallow octal escape sequences in string literals (no-octal-escape)
+# no-octal-escape
+
+Disallows octal escape sequences in string literals.
 
 As of the ECMAScript 5 specification, octal escape sequences in string literals are deprecated and should not be used. Unicode escape sequences should be used instead.
 

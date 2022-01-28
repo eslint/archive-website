@@ -6,9 +6,11 @@ rule_type: layout
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
-# require spacing around infix operators (space-infix-ops)
+# space-infix-ops
 
 (fixable) The `--fix` option on the [command line](../user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
+
+Requires spacing around infix operators.
 
 While formatting preferences are very personal, a number of style guides require spaces around operators, such as:
 

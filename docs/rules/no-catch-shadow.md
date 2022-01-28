@@ -6,7 +6,9 @@ rule_type: suggestion
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
-# Disallow Shadowing of Variables Inside of catch (no-catch-shadow)
+# no-catch-shadow
+
+Disallows shadowing of variables inside of catch.
 
 This rule was **deprecated** in ESLint v5.1.0.
 

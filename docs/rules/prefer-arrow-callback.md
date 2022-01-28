@@ -6,9 +6,11 @@ rule_type: suggestion
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
-# Require using arrow functions for callbacks (prefer-arrow-callback)
+# prefer-arrow-callback
 
 (fixable) The `--fix` option on the [command line](../user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
+
+Requires using arrow functions for callbacks.
 
 Arrow functions can be an attractive alternative to function expressions for callbacks or function arguments.
 

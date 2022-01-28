@@ -6,9 +6,11 @@ rule_type: layout
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
-# require or disallow spacing between function identifiers and their invocations (func-call-spacing)
+# func-call-spacing
 
 (fixable) The `--fix` option on the [command line](../user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
+
+Requires or disallows spacing between function identifiers and their invocations.
 
 When calling a function, developers may insert optional whitespace between the function's name and the parentheses that invoke it. The following pairs of function calls are equivalent:
 

@@ -6,9 +6,11 @@ rule_type: suggestion
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
-# Require Object Literal Shorthand Syntax (object-shorthand)
+# object-shorthand
 
 (fixable) The `--fix` option on the [command line](../user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
+
+Requires or disallows method and property shorthand syntax for object literals.
 
 ECMAScript 6 provides a concise form for defining object literal methods and properties. This
 syntax can make defining complex object literals much cleaner.

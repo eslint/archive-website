@@ -6,9 +6,11 @@ rule_type: suggestion
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
-# Disallow Regular Expressions That Look Like Division (no-div-regex)
+# no-div-regex
 
 (fixable) The `--fix` option on the [command line](../user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
+
+Disallows regular expressions that look like division.
 
 Require regex literals to escape division operators.
 

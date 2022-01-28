@@ -6,9 +6,11 @@ rule_type: suggestion
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
-# enforce or disallow capitalization of the first letter of a comment (capitalized-comments)
+# capitalized-comments
 
 (fixable) The `--fix` option on the [command line](../user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
+
+Enforces or disallows capitalization of the first letter of a comment.
 
 Comments are useful for leaving information for future developers. In order for that information to be useful and not distracting, it is sometimes desirable for comments to follow a particular style. One element of comment formatting styles is whether the first word of a comment should be capitalized or lowercase.
 

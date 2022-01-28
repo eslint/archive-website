@@ -6,9 +6,11 @@ rule_type: layout
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
-# enforce line breaks between array elements (array-element-newline)
+# array-element-newline
 
 (fixable) The `--fix` option on the [command line](../user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
+
+Enforces line breaks between array elements.
 
 A number of style guides require or disallow line breaks between array elements.
 

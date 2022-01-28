@@ -6,7 +6,9 @@ rule_type: suggestion
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
-# Require grouped accessor pairs in object literals and classes (grouped-accessor-pairs)
+# grouped-accessor-pairs
+
+Requires grouped accessor pairs in object literals and classes.
 
 A getter and setter for the same property don't necessarily have to be defined adjacent to each other.
 

@@ -6,7 +6,9 @@ rule_type: suggestion
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
-# Disallow mixes of different operators (no-mixed-operators)
+# no-mixed-operators
+
+Disallows mixes of different operators.
 
 Enclosing complex expressions by parentheses clarifies the developer's intention, which makes the code more readable.
 This rule warns when different operators are used consecutively without parentheses in an expression.

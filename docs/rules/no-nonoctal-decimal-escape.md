@@ -6,11 +6,13 @@ rule_type: suggestion
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
-# Disallow `\8` and `\9` escape sequences in string literals (no-nonoctal-decimal-escape)
+# no-nonoctal-decimal-escape
 
 (recommended) The `"extends": "eslint:recommended"` property in a configuration file enables this rule.
 
 (hasSuggestions) Some problems reported by this rule are manually fixable by editor [suggestions](../developer-guide/working-with-rules#providing-suggestions).
+
+Disallows `\8` and `\9` escape sequences in string literals.
 
 Although not being specified in the language until ECMAScript 2021, `\8` and `\9` escape sequences in string literals were allowed in most JavaScript engines, and treated as "useless" escapes:
 

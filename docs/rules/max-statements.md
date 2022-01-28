@@ -6,7 +6,9 @@ rule_type: suggestion
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
-# enforce a maximum number of statements allowed in function blocks (max-statements)
+# max-statements
+
+Enforces a maximum number of statements allowed in function blocks.
 
 The `max-statements` rule allows you to specify the maximum number of statements allowed in a function.
 

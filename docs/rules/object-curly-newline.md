@@ -6,9 +6,11 @@ rule_type: layout
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
-# enforce consistent line breaks after opening and before closing braces (object-curly-newline)
+# object-curly-newline
 
 (fixable) The `--fix` option on the [command line](../user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
+
+Enforces consistent line breaks after opening and before closing braces.
 
 A number of style guides require or disallow line breaks inside of object braces and other tokens.
 

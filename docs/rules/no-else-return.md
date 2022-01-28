@@ -6,9 +6,11 @@ rule_type: suggestion
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
-# Disallow return before else (no-else-return)
+# no-else-return
 
 (fixable) The `--fix` option on the [command line](../user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
+
+Disallows `return` before `else`.
 
 If an `if` block contains a `return` statement, the `else` block becomes unnecessary. Its contents can be placed outside of the block.
 

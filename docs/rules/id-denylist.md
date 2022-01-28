@@ -6,7 +6,9 @@ rule_type: suggestion
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
-# disallow specified identifiers (id-denylist)
+# id-denylist
+
+Disallows specified identifiers.
 
 > "There are only two hard things in Computer Science: cache invalidation and naming things." — Phil Karlton
 

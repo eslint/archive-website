@@ -6,7 +6,9 @@ rule_type: suggestion
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
-# Restrict what can be thrown as an exception (no-throw-literal)
+# no-throw-literal
+
+Restricts what can be thrown as an exception.
 
 It is considered good practice to only `throw` the `Error` object itself or an object using the `Error` object as base objects for user-defined exceptions.
 The fundamental benefit of `Error` objects is that they automatically keep track of where they were built and originated.

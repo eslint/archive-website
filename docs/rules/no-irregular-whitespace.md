@@ -6,9 +6,11 @@ rule_type: problem
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
-# disallow irregular whitespace (no-irregular-whitespace)
+# no-irregular-whitespace
 
 (recommended) The `"extends": "eslint:recommended"` property in a configuration file enables this rule.
+
+Disallows irregular whitespace characters.
 
 Invalid or irregular whitespace causes issues with ECMAScript 5 parsers and also makes code harder to debug in a similar nature to mixed tabs and spaces.
 

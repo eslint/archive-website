@@ -6,9 +6,11 @@ rule_type: suggestion
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
-# disallow deleting variables (no-delete-var)
+# no-delete-var
 
 (recommended) The `"extends": "eslint:recommended"` property in a configuration file enables this rule.
+
+Disallows deleting variables.
 
 The purpose of the `delete` operator is to remove a property from an object. Using the `delete` operator on a variable might lead to unexpected behavior.
 

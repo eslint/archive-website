@@ -6,9 +6,11 @@ rule_type: layout
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
-# Enforce spacing around colons of switch statements (switch-colon-spacing)
+# switch-colon-spacing
 
 (fixable) The `--fix` option on the [command line](../user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
+
+Enforces spacing around colons of switch statements.
 
 Spacing around colons improves readability of `case`/`default` clauses.
 

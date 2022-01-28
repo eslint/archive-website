@@ -6,9 +6,11 @@ rule_type: suggestion
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
-# Disallow generator functions that do not have `yield` (require-yield)
+# require-yield
 
 (recommended) The `"extends": "eslint:recommended"` property in a configuration file enables this rule.
+
+Disallows generator functions that do not have `yield`.
 
 ## Rule Details
 

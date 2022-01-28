@@ -6,9 +6,11 @@ rule_type: problem
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
-# Disallow modifying variables of class declarations (no-class-assign)
+# no-class-assign
 
 (recommended) The `"extends": "eslint:recommended"` property in a configuration file enables this rule.
+
+Disallows modifying variables of class declarations.
 
 `ClassDeclaration` creates a variable, and we can modify the variable.
 

@@ -6,7 +6,9 @@ rule_type: problem
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
-# Disallow Unused Private Class Members (no-unused-private-class-members)
+# no-unused-private-class-members
+
+Disallows unused private class members.
 
 Private class members that are declared and not used anywhere in the code are most likely an error due to incomplete refactoring. Such class members take up space in the code and can lead to confusion by readers.
 

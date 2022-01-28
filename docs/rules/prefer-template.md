@@ -6,9 +6,11 @@ rule_type: suggestion
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
-# Suggest using template literals instead of string concatenation. (prefer-template)
+# prefer-template
 
 (fixable) The `--fix` option on the [command line](../user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
+
+Suggests using template literals instead of string concatenation.
 
 In ES2015 (ES6), we can use template literals instead of string concatenation.
 

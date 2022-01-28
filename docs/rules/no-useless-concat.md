@@ -6,7 +6,9 @@ rule_type: suggestion
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
-# Disallow unnecessary concatenation of strings (no-useless-concat)
+# no-useless-concat
+
+Disallows unnecessary concatenation of strings.
 
 It's unnecessary to concatenate two strings together, such as:
 

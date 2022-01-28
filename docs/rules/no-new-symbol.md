@@ -6,9 +6,11 @@ rule_type: problem
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
-# Disallow Symbol Constructor (no-new-symbol)
+# no-new-symbol
 
 (recommended) The `"extends": "eslint:recommended"` property in a configuration file enables this rule.
+
+Disallows `new` operators with the `Symbol` object.
 
 `Symbol` is not intended to be used with the `new` operator, but to be called as a function.
 

@@ -6,7 +6,9 @@ rule_type: suggestion
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
-# Disallow Labeled Statements (no-labels)
+# no-labels
+
+Disallows labeled statements.
 
 Labeled statements in JavaScript are used in conjunction with `break` and `continue` to control flow around multiple loops. For example:
 

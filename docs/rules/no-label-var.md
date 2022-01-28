@@ -6,7 +6,9 @@ rule_type: suggestion
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
-# Disallow Labels That Are Variables Names (no-label-var)
+# no-label-var
+
+Disallows labels that are variable names.
 
 ## Rule Details
 

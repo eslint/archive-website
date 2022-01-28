@@ -6,9 +6,11 @@ rule_type: suggestion
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
-# Prefer `Object.hasOwn()` over `Object.prototype.hasOwnProperty.call()` (prefer-object-has-own)
+# prefer-object-has-own
 
 (fixable) The `--fix` option on the [command line](../user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
+
+Prefer `Object.hasOwn()` over `Object.prototype.hasOwnProperty.call()`.
 
 It is very common to write code like:
 

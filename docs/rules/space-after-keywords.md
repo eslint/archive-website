@@ -6,7 +6,9 @@ edit_link: https://github.com/eslint/eslint/edit/main/docs/rules/space-after-key
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
-# space-after-keywords: enforce consistent spacing after keywords
+# space-after-keywords
+
+Enforces consistent spacing after keywords.
 
 (removed) This rule was **removed** in ESLint v2.0 and replaced by the [keyword-spacing](keyword-spacing) rule.
 

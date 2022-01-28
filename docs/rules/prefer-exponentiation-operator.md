@@ -6,9 +6,11 @@ rule_type: suggestion
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
-# Disallow the use of `Math.pow` in favor of the `**` operator (prefer-exponentiation-operator)
+# prefer-exponentiation-operator
 
 (fixable) The `--fix` option on the [command line](../user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
+
+Disallows the use of `Math.pow` in favor of the `**` operator.
 
 Introduced in ES2016, the infix exponentiation operator `**` is an alternative for the standard `Math.pow` function.
 

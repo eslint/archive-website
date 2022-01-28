@@ -6,7 +6,9 @@ rule_type: suggestion
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
-# Disallow empty functions (no-empty-function)
+# no-empty-function
+
+Disallows empty functions.
 
 Empty functions can reduce readability because readers need to guess whether it's intentional or not.
 So writing a clear comment for empty functions is a good practice.

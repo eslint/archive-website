@@ -6,9 +6,11 @@ rule_type: problem
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
-# Disallow duplicate name in class members (no-dupe-class-members)
+# no-dupe-class-members
 
 (recommended) The `"extends": "eslint:recommended"` property in a configuration file enables this rule.
+
+Disallows duplicate name in class members.
 
 If there are declarations of the same name in class members, the last declaration overwrites other declarations silently.
 It can cause unexpected behaviors.

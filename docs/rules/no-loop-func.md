@@ -6,7 +6,9 @@ rule_type: suggestion
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
-# Disallow Functions in Loops (no-loop-func)
+# no-loop-func
+
+Disallows functions in loops.
 
 Writing functions within loops tends to result in errors due to the way the function creates a closure around the loop. For example:
 

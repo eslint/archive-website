@@ -6,7 +6,9 @@ rule_type: suggestion
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
-# disallow ternary operators (no-ternary)
+# no-ternary
+
+Disallows ternary operators.
 
 The ternary operator is used to conditionally assign a value to a variable. Some believe that the use of ternary operators leads to unclear code.
 

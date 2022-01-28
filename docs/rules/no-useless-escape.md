@@ -6,11 +6,13 @@ rule_type: suggestion
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
-# Disallow unnecessary escape usage (no-useless-escape)
+# no-useless-escape
 
 (recommended) The `"extends": "eslint:recommended"` property in a configuration file enables this rule.
 
 (hasSuggestions) Some problems reported by this rule are manually fixable by editor [suggestions](../developer-guide/working-with-rules#providing-suggestions).
+
+Disallows unnecessary escape characters.
 
 Escaping non-special characters in strings, template literals, and regular expressions doesn't have any effect, as demonstrated in the following example:
 

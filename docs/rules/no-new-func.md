@@ -6,7 +6,9 @@ rule_type: suggestion
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
-# Disallow Function Constructor (no-new-func)
+# no-new-func
+
+Disallows `new` operators with the `Function` object.
 
 It's possible to create functions in JavaScript from strings at runtime using the `Function` constructor, such as:
 

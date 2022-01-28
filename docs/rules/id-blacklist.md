@@ -6,7 +6,9 @@ rule_type: suggestion
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
-# disallow specified identifiers (id-blacklist)
+# id-blacklist
+
+Disallows specified identifiers.
 
 This rule was **deprecated** in ESLint v7.5.0 and replaced by the [id-denylist](id-denylist) rule.
 

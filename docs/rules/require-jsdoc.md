@@ -6,7 +6,9 @@ rule_type: suggestion
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
-# require JSDoc comments (require-jsdoc)
+# require-jsdoc
+
+Requires JSDoc comments.
 
 This rule was [**deprecated**](https://eslint.org/blog/2018/11/jsdoc-end-of-life) in ESLint v5.10.0.
 

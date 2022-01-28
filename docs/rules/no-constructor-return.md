@@ -6,7 +6,9 @@ rule_type: problem
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
-# Disallow returning value in constructor (no-constructor-return)
+# no-constructor-return
+
+Disallows returning values in constructor.
 
 In JavaScript, returning a value in the constructor of a class may be a mistake. Forbidding this pattern prevents mistakes resulting from unfamiliarity with the language or a copy-paste error.
 

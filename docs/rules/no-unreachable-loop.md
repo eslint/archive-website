@@ -6,7 +6,9 @@ rule_type: problem
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
-# Disallow loops with a body that allows only one iteration (no-unreachable-loop)
+# no-unreachable-loop
+
+Disallows loops with a body that allows only one iteration.
 
 A loop that can never reach the second iteration is a possible error in the code.
 

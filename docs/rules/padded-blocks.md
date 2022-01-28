@@ -6,9 +6,11 @@ rule_type: layout
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
-# require or disallow padding within blocks (padded-blocks)
+# padded-blocks
 
 (fixable) The `--fix` option on the [command line](../user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
+
+Requires or disallows padding within blocks.
 
 Some style guides require block statements to start and end with blank lines. The goal is
 to improve readability by visually separating the block content and the surrounding code.

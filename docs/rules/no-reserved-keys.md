@@ -6,7 +6,9 @@ edit_link: https://github.com/eslint/eslint/edit/main/docs/rules/no-reserved-key
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
-# no-reserved-keys: disallow unquoted reserved words as property names in object literals
+# no-reserved-keys
+
+Disallows unquoted reserved words as property names in object literals.
 
 (removed) This rule was **removed** in ESLint v1.0 and **replaced** by the [quote-props](quote-props) rule.
 

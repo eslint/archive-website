@@ -6,7 +6,9 @@ edit_link: https://github.com/eslint/eslint/edit/main/docs/rules/space-return-th
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
-# space-return-throw-case: require spaces after `return`, `throw`, and `case` keywords
+# space-return-throw-case
+
+Requires spaces after `return`, `throw`, and `case` keywords.
 
 (removed) This rule was **removed** in ESLint v2.0 and **replaced** by the [keyword-spacing](keyword-spacing) rule.
 

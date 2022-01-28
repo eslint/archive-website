@@ -6,7 +6,9 @@ rule_type: layout
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
-# disallow all tabs (no-tabs)
+# no-tabs
+
+Disallows all tabs.
 
 Some style guides don't allow the use of tab characters at all, including within comments.
 

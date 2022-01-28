@@ -6,9 +6,11 @@ rule_type: problem
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
-# disallow sparse arrays (no-sparse-arrays)
+# no-sparse-arrays
 
 (recommended) The `"extends": "eslint:recommended"` property in a configuration file enables this rule.
+
+Disallows sparse arrays.
 
 Sparse arrays contain empty slots, most frequently due to multiple commas being used in an array literal, such as:
 

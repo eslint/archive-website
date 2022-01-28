@@ -6,7 +6,9 @@ rule_type: suggestion
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
-# require symbol description (symbol-description)
+# symbol-description
+
+Requires symbol descriptions.
 
 The `Symbol` function may have an optional description:
 

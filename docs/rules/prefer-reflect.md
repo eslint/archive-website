@@ -6,7 +6,9 @@ rule_type: suggestion
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
-# Suggest using Reflect methods where applicable (prefer-reflect)
+# prefer-reflect
+
+Suggest using Reflect methods where applicable.
 
 This rule was **deprecated** in ESLint v3.9.0 and will not be replaced. The original intent of this rule now seems misguided as we have come to understand that `Reflect` methods are not actually intended to replace the `Object` counterparts the rule suggests, but rather exist as low-level primitives to be used with proxies in order to replicate the default behavior of various previously existing functionality.
 

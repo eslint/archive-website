@@ -6,7 +6,9 @@ rule_type: suggestion
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
-# Suggest using the rest parameters instead of `arguments` (prefer-rest-params)
+# prefer-rest-params
+
+Suggests using rest parameters instead of `arguments`.
 
 There are rest parameters in ES2015.
 We can use that feature for variadic functions instead of the `arguments` variable.

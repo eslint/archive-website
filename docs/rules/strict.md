@@ -6,9 +6,11 @@ rule_type: suggestion
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
-# require or disallow strict mode directives (strict)
+# strict
 
 (fixable) The `--fix` option on the [command line](../user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
+
+Requires or disallow strict mode directives.
 
 A strict mode directive is a `"use strict"` literal at the beginning of a script or function body. It enables strict mode semantics.
 

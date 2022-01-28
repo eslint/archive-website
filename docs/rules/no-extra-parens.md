@@ -6,9 +6,11 @@ rule_type: layout
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
-# disallow unnecessary parentheses (no-extra-parens)
+# no-extra-parens
 
 (fixable) The `--fix` option on the [command line](../user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
+
+Disallows unnecessary parentheses.
 
 This rule restricts the use of parentheses to only where they are necessary.
 

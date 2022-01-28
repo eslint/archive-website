@@ -6,7 +6,9 @@ edit_link: https://github.com/eslint/eslint/edit/main/docs/rules/space-after-fun
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
-# space-after-function-name: enforce consistent spacing after name in function definitions
+# space-after-function-name
+
+Enforces consistent spacing after name in function definitions.
 
 (removed) This rule was **removed** in ESLint v1.0 and **replaced** by the [space-before-function-paren](space-before-function-paren) rule.
 

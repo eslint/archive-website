@@ -6,7 +6,9 @@ rule_type: suggestion
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
-# Suggest using spread syntax instead of `.apply()`. (prefer-spread)
+# prefer-spread
+
+Suggests using spread syntax instead of `.apply()`.
 
 Before ES2015, one must use `Function.prototype.apply()` to call variadic functions.
 

@@ -6,7 +6,9 @@ rule_type: suggestion
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
-# require `return` statements to either always or never specify values (consistent-return)
+# consistent-return
+
+Requires `return` statements to either always or never specify values.
 
 Unlike statically-typed languages which enforce that a function returns a specified type of value, JavaScript allows different code paths in a function to return different types of values.
 

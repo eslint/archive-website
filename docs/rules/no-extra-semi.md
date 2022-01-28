@@ -6,11 +6,13 @@ rule_type: suggestion
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
-# disallow unnecessary semicolons (no-extra-semi)
+# no-extra-semi
 
 (recommended) The `"extends": "eslint:recommended"` property in a configuration file enables this rule.
 
 (fixable) The `--fix` option on the [command line](../user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
+
+Disallows unnecessary semicolons.
 
 Typing mistakes and misunderstandings about where semicolons are required can lead to semicolons that are unnecessary. While not technically an error, extra semicolons can cause confusion when reading code.
 

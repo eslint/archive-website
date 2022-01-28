@@ -6,9 +6,11 @@ rule_type: layout
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
-# Require Brace Style (brace-style)
+# brace-style
 
 (fixable) The `--fix` option on the [command line](../user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
+
+Enforces consistent brace style for blocks.
 
 Brace style is closely related to [indent style](https://en.wikipedia.org/wiki/Indent_style) in programming and describes the placement of braces relative to their control statement and body. There are probably a dozen, if not more, brace styles in the world.
 

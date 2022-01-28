@@ -6,9 +6,11 @@ rule_type: layout
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
-# enforce the location of single-line statements (nonblock-statement-body-position)
+# nonblock-statement-body-position
 
 (fixable) The `--fix` option on the [command line](../user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
+
+Enforces the location of single-line statements.
 
 When writing `if`, `else`, `while`, `do-while`, and `for` statements, the body can be a single statement instead of a block. It can be useful to enforce a consistent location for these single statements.
 

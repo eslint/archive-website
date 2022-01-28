@@ -6,9 +6,11 @@ rule_type: problem
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
-# Enforces that a return statement is present in property getters (getter-return)
+# getter-return
 
 (recommended) The `"extends": "eslint:recommended"` property in a configuration file enables this rule.
+
+Enforces that a `return` statement is present in property getters.
 
 The get syntax binds an object property to a function that will be called when that property is looked up. It was first introduced in ECMAScript 5:
 

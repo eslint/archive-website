@@ -6,9 +6,11 @@ rule_type: layout
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
-# enforce the consistent use of either double or single quotes in JSX attributes (jsx-quotes)
+# jsx-quotes
 
 (fixable) The `--fix` option on the [command line](../user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
+
+Enforces the consistent use of either double or single quotes in JSX attributes.
 
 JSX attribute values can contain string literals, which are delimited with single or double quotes.
 

@@ -6,9 +6,11 @@ rule_type: layout
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
-# enforce consistent spacing before and after keywords (keyword-spacing)
+# keyword-spacing
 
 (fixable) The `--fix` option on the [command line](../user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
+
+Enforces consistent spacing before and after keywords.
 
 Keywords are syntax elements of JavaScript, such as `try` and `if`.
 These keywords have special meaning to the language and so often appear in a different color in code editors.

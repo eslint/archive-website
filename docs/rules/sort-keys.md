@@ -6,7 +6,9 @@ rule_type: suggestion
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
-# require object keys to be sorted (sort-keys)
+# sort-keys
+
+Requires object keys to be sorted.
 
 When declaring multiple properties, some developers prefer to sort property names alphabetically to more easily find and/or diff necessary properties at a later time. Others feel that it adds complexity and becomes burden to maintain.
 

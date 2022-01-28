@@ -6,7 +6,9 @@ edit_link: https://github.com/eslint/eslint/edit/main/docs/rules/generator-star.
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
-# generator-star: enforce consistent spacing around the asterisk in generator functions
+# generator-star
+
+Enforces consistent spacing around the asterisk in generator functions.
 
 (removed) This rule was **removed** in ESLint v1.0 and **replaced** by the [generator-star-spacing](generator-star-spacing) rule.
 

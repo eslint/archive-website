@@ -6,9 +6,11 @@ rule_type: problem
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
-# disallow unreachable code after `return`, `throw`, `continue`, and `break` statements (no-unreachable)
+# no-unreachable
 
 (recommended) The `"extends": "eslint:recommended"` property in a configuration file enables this rule.
+
+Disallows unreachable code after `return`, `throw`, `continue`, and `break` statements.
 
 Because the `return`, `throw`, `break`, and `continue` statements unconditionally exit a block of code, any statements after them cannot be executed. Unreachable statements are usually a mistake.
 

@@ -6,7 +6,9 @@ rule_type: suggestion
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
-# Suggest using named capture group in regular expression (prefer-named-capture-group)
+# prefer-named-capture-group
+
+Suggest using named capture group in regular expression.
 
 ## Rule Details
 

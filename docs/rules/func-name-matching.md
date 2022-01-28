@@ -6,7 +6,9 @@ rule_type: suggestion
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
-# require function names to match the name of the variable or property to which they are assigned (func-name-matching)
+# func-name-matching
+
+Requires function names to match the name of the variable or property to which they are assigned.
 
 ## Rule Details
 

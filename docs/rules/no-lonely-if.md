@@ -6,9 +6,11 @@ rule_type: suggestion
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
-# disallow `if` statements as the only statement in `else` blocks (no-lonely-if)
+# no-lonely-if
 
 (fixable) The `--fix` option on the [command line](../user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
+
+Disallows `if` statements as the only statement in `else` blocks.
 
 If an `if` statement is the only statement in the `else` block, it is often clearer to use an `else if` form.
 

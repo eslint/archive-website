@@ -6,9 +6,11 @@ rule_type: problem
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
-# enforce comparing `typeof` expressions against valid strings (valid-typeof)
+# valid-typeof
 
 (recommended) The `"extends": "eslint:recommended"` property in a configuration file enables this rule.
+
+Enforces comparing `typeof` expressions against valid strings.
 
 For a vast majority of use cases, the result of the `typeof` operator is one of the following string literals: `"undefined"`, `"object"`, `"boolean"`, `"number"`, `"string"`, `"function"`, `"symbol"`, and `"bigint"`. It is usually a typing mistake to compare the result of a `typeof` operator to other string literals.
 

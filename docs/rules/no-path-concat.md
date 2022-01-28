@@ -6,7 +6,9 @@ rule_type: suggestion
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
-# Disallow string concatenation when using `__dirname` and `__filename` (no-path-concat)
+# no-path-concat
+
+Disallows string concatenation when using `__dirname` and `__filename`.
 
 This rule was **deprecated** in ESLint v7.0.0. Please use the corresponding rule in [`eslint-plugin-node`](https://github.com/mysticatea/eslint-plugin-node).
 

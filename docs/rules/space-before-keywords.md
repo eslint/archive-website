@@ -6,7 +6,9 @@ edit_link: https://github.com/eslint/eslint/edit/main/docs/rules/space-before-ke
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
-# space-before-keywords: enforce consistent spacing before keywords
+# space-before-keywords
+
+Enforces consistent spacing before keywords.
 
 (removed) This rule was **removed** in ESLint v2.0 and **replaced** by the [keyword-spacing](keyword-spacing) rule.
 

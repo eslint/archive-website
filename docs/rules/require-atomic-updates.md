@@ -6,7 +6,9 @@ rule_type: problem
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
-# Disallow assignments that can lead to race conditions due to usage of `await` or `yield` (require-atomic-updates)
+# require-atomic-updates
+
+Disallows assignments that can lead to race conditions due to usage of `await` or `yield`.
 
 When writing asynchronous code, it is possible to create subtle race condition bugs. Consider the following example:
 

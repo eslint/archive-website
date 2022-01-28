@@ -6,11 +6,13 @@ rule_type: suggestion
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
-# disallow unnecessary boolean casts (no-extra-boolean-cast)
+# no-extra-boolean-cast
 
 (recommended) The `"extends": "eslint:recommended"` property in a configuration file enables this rule.
 
 (fixable) The `--fix` option on the [command line](../user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
+
+Disallows unnecessary boolean casts.
 
 In contexts such as an `if` statement's test where the result of the expression will already be coerced to a Boolean, casting to a Boolean via double negation (`!!`) or a `Boolean` call is unnecessary. For example, these `if` statements are equivalent:
 

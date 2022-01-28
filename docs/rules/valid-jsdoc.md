@@ -6,9 +6,11 @@ rule_type: suggestion
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
-# enforce valid JSDoc comments (valid-jsdoc)
+# valid-jsdoc
 
 (fixable) The `--fix` option on the [command line](../user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
+
+Enforces valid JSDoc comments.
 
 This rule was [**deprecated**](https://eslint.org/blog/2018/11/jsdoc-end-of-life) in ESLint v5.10.0.
 

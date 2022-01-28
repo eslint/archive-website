@@ -6,7 +6,9 @@ rule_type: suggestion
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
-# Disallow declarations in the global scope (no-implicit-globals)
+# no-implicit-globals
+
+Disallows declarations in the global scope.
 
 It is the best practice to avoid 'polluting' the global scope with variables that are intended to be local to the script.
 

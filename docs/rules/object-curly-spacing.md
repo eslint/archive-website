@@ -6,9 +6,11 @@ rule_type: layout
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
-# enforce consistent spacing inside braces (object-curly-spacing)
+# object-curly-spacing
 
 (fixable) The `--fix` option on the [command line](../user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
+
+Enforces consistent spacing inside braces.
 
 While formatting preferences are very personal, a number of style guides require
 or disallow spaces between curly braces in the following situations:

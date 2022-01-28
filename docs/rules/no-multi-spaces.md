@@ -6,9 +6,11 @@ rule_type: layout
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
-# Disallow multiple spaces (no-multi-spaces)
+# no-multi-spaces
 
 (fixable) The `--fix` option on the [command line](../user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
+
+Disallows multiple consecutive spaces.
 
 Multiple spaces in a row that are not used for indentation are typically mistakes. For example:
 

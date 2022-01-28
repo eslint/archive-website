@@ -6,9 +6,11 @@ rule_type: problem
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
-# Disallow modifying variables that are declared using `const` (no-const-assign)
+# no-const-assign
 
 (recommended) The `"extends": "eslint:recommended"` property in a configuration file enables this rule.
+
+Disallows modifying variables that are declared using `const`.
 
 We cannot modify variables that are declared using `const` keyword.
 It will raise a runtime error.

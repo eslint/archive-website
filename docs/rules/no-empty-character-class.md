@@ -6,9 +6,11 @@ rule_type: problem
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
-# disallow empty character classes in regular expressions (no-empty-character-class)
+# no-empty-character-class
 
 (recommended) The `"extends": "eslint:recommended"` property in a configuration file enables this rule.
+
+Disallows empty character classes in regular expressions.
 
 Because empty character classes in regular expressions do not match anything, they might be typing mistakes.
 

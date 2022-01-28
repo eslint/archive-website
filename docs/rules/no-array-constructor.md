@@ -6,7 +6,9 @@ rule_type: suggestion
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
-# disallow `Array` constructors (no-array-constructor)
+# no-array-constructor
+
+Disallows `Array` constructors.
 
 Use of the `Array` constructor to construct a new array is generally
 discouraged in favor of array literal notation because of the single-argument

@@ -6,7 +6,9 @@ rule_type: suggestion
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
-# Require or disallow named `function` expressions (func-names)
+# func-names
+
+Requires or disallows named `function` expressions.
 
 A pattern that's becoming more common is to give function expressions names to aid in debugging. For example:
 

@@ -6,7 +6,9 @@ rule_type: suggestion
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
-# disallow negated conditions (no-negated-condition)
+# no-negated-condition
+
+Disallows negated conditions.
 
 Negated conditions are more difficult to understand. Code can be made more readable by inverting the condition instead.
 

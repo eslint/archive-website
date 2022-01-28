@@ -6,9 +6,11 @@ rule_type: layout
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
-# disallow whitespace before properties (no-whitespace-before-property)
+# no-whitespace-before-property
 
 (fixable) The `--fix` option on the [command line](../user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
+
+Disallows whitespace before properties.
 
 JavaScript allows whitespace between objects and their properties. However, inconsistent spacing can make code harder to read and can lead to errors.
 

@@ -6,9 +6,11 @@ rule_type: layout
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
-# Require or disallow the Unicode Byte Order Mark (BOM) (unicode-bom)
+# unicode-bom
 
 (fixable) The `--fix` option on the [command line](../user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
+
+Requires or disallows the Unicode Byte Order Mark (BOM).
 
 The Unicode Byte Order Mark (BOM) is used to specify whether code units are big
 endian or little endian. That is, whether the most significant or least

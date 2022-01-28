@@ -6,7 +6,9 @@ rule_type: suggestion
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
-# Disallow async functions which have no `await` expression (require-await)
+# require-await
+
+Disallows async functions which have no `await` expression.
 
 Asynchronous functions in JavaScript behave differently than other functions in two important ways:
 

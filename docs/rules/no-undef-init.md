@@ -6,9 +6,11 @@ rule_type: suggestion
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
-# Disallow Initializing to undefined (no-undef-init)
+# no-undef-init
 
 (fixable) The `--fix` option on the [command line](../user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
+
+Disallows initializing variables to `undefined`.
 
 In JavaScript, a variable that is declared and not initialized to any value automatically gets the value of `undefined`. For example:
 

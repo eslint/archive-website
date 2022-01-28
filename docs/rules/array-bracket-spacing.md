@@ -6,9 +6,11 @@ rule_type: layout
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
-# Disallow or enforce spaces inside of brackets (array-bracket-spacing)
+# array-bracket-spacing
 
 (fixable) The `--fix` option on the [command line](../user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
+
+Disallows or enforce spaces inside of brackets.
 
 A number of style guides require or disallow spaces between array brackets and other tokens. This rule
 applies to both array literals and destructuring assignments (ECMAScript 6).

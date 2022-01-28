@@ -6,9 +6,11 @@ rule_type: layout
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
-# require empty lines around comments (lines-around-comment)
+# lines-around-comment
 
 (fixable) The `--fix` option on the [command line](../user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
+
+Requires empty lines around comments.
 
 Many style guides require empty lines before or after comments. The primary goal
 of these rules is to make the comments easier to read and improve readability of the code.

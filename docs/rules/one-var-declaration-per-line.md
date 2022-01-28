@@ -6,9 +6,11 @@ rule_type: suggestion
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
-# require or disallow newlines around variable declarations (one-var-declaration-per-line)
+# one-var-declaration-per-line
 
 (fixable) The `--fix` option on the [command line](../user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
+
+Requires or disallows newlines around variable declarations.
 
 Some developers declare multiple var statements on the same line:
 

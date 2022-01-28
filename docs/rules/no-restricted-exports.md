@@ -6,7 +6,9 @@ rule_type: suggestion
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
-# Disallow specified names in exports (no-restricted-exports)
+# no-restricted-exports
+
+Disallows specified names in exports.
 
 In a project, certain names may be disallowed from being used as exported names for various reasons.
 

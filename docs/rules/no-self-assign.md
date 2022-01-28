@@ -6,9 +6,11 @@ rule_type: problem
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
-# Disallow Self Assignment (no-self-assign)
+# no-self-assign
 
 (recommended) The `"extends": "eslint:recommended"` property in a configuration file enables this rule.
+
+Disallows assignments where both sides are exactly the same.
 
 Self assignments have no effect, so probably those are an error due to incomplete refactoring.
 Those indicate that what you should do is still remaining.

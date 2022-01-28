@@ -6,9 +6,11 @@ rule_type: suggestion
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
-# disallow octal literals (no-octal)
+# no-octal
 
 (recommended) The `"extends": "eslint:recommended"` property in a configuration file enables this rule.
+
+Disallows octal literals.
 
 Octal literals are numerals that begin with a leading zero, such as:
 

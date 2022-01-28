@@ -6,9 +6,11 @@ rule_type: layout
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
-# Require Or Disallow Space Before Blocks (space-before-blocks)
+# space-before-blocks
 
 (fixable) The `--fix` option on the [command line](../user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
+
+Requires Or disallows space before blocks.
 
 Consistency is an important part of any style guide.
 While it is a personal preference where to put the opening brace of blocks,

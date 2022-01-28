@@ -6,7 +6,9 @@ rule_type: suggestion
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
-# enforce a maximum depth that blocks can be nested (max-depth)
+# max-depth
+
+Enforces a maximum depth that blocks can be nested.
 
 Many developers consider code difficult to read if blocks are nested beyond a certain depth.
 

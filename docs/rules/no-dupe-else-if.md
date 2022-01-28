@@ -6,9 +6,11 @@ rule_type: problem
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
-# Disallow duplicate conditions in `if-else-if` chains (no-dupe-else-if)
+# no-dupe-else-if
 
 (recommended) The `"extends": "eslint:recommended"` property in a configuration file enables this rule.
+
+Disallows duplicate conditions in `if-else-if` chains.
 
 `if-else-if` chains are commonly used when there is a need to execute only one branch (or at most one branch) out of several possible branches, based on certain conditions.
 

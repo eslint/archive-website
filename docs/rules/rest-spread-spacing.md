@@ -6,9 +6,11 @@ rule_type: layout
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
-# Enforce spacing between rest and spread operators and their expressions (rest-spread-spacing)
+# rest-spread-spacing
 
 (fixable) The `--fix` option on the [command line](../user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
+
+Enforces spacing between rest and spread operators and their expressions.
 
 ES2015 introduced the rest and spread operators, which expand an iterable structure into its individual parts. Some examples of their usage are as follows:
 

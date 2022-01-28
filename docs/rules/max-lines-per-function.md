@@ -6,7 +6,9 @@ rule_type: suggestion
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
-# enforce a maximum function length (max-lines-per-function)
+# max-lines-per-function
+
+Enforces a maximum function length.
 
 Some people consider large functions a code smell. Large functions tend to do a lot of things and can make it hard following what's going on. Many coding style guides dictate a limit of the number of lines that a function can comprise of. This rule can help enforce that style.
 

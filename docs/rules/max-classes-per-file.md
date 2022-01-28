@@ -6,7 +6,9 @@ rule_type: suggestion
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
-# enforce a maximum number of classes per file (max-classes-per-file)
+# max-classes-per-file
+
+Enforces a maximum number of classes per file.
 
 Files containing multiple classes can often result in a less navigable
 and poorly structured codebase. Best practice is to keep each file

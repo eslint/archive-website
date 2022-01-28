@@ -6,9 +6,11 @@ rule_type: layout
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
-# enforce consistent line breaks inside function parentheses (function-paren-newline)
+# function-paren-newline
 
 (fixable) The `--fix` option on the [command line](../user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
+
+Enforces consistent line breaks inside function parentheses.
 
 Many style guides require or disallow newlines inside of function parentheses.
 

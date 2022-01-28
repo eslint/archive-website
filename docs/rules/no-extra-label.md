@@ -6,9 +6,11 @@ rule_type: suggestion
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
-# Disallow Unnecessary Labels (no-extra-label)
+# no-extra-label
 
 (fixable) The `--fix` option on the [command line](../user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
+
+Disallows unnecessary labels.
 
 If a loop contains no nested loops or switches, labeling the loop is unnecessary.
 

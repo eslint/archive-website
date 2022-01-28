@@ -6,9 +6,11 @@ rule_type: layout
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
-# Enforce spacing around the * in generator functions (generator-star-spacing)
+# generator-star-spacing
 
 (fixable) The `--fix` option on the [command line](../user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
+
+Enforces spacing around the `*` in generator functions.
 
 Generators are a new type of function in ECMAScript 6 that can return multiple values over time.
 These special functions are indicated by placing an `*` after the `function` keyword.

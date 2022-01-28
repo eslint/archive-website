@@ -6,9 +6,11 @@ rule_type: layout
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
-# Require Regex Literals to be Wrapped (wrap-regex)
+# wrap-regex
 
 (fixable) The `--fix` option on the [command line](../user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
+
+Requires regex literals to be wrapped.
 
 When a regular expression is used in certain situations, it can end up looking like a division operator. For example:
 

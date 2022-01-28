@@ -6,7 +6,9 @@ rule_type: suggestion
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
-# Disallow specific global variables (no-restricted-globals)
+# no-restricted-globals
+
+Disallows specific global variables.
 
 Disallowing usage of specific global variables can be useful if you want to allow a set of global
 variables by enabling an environment, but still want to disallow some of those.

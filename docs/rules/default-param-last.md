@@ -6,7 +6,9 @@ rule_type: suggestion
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
-# enforce default parameters to be last (default-param-last)
+# default-param-last
+
+Enforces default parameters to be last.
 
 Putting default parameter at last allows function calls to omit optional tail arguments.
 

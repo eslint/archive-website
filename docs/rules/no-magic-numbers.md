@@ -6,7 +6,9 @@ rule_type: suggestion
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
-# Disallow Magic Numbers (no-magic-numbers)
+# no-magic-numbers
+
+Disallows magic numbers.
 
 'Magic numbers' are numbers that occur multiple times in code without an explicit meaning.
 They should preferably be replaced by named constants.

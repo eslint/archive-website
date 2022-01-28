@@ -6,9 +6,11 @@ rule_type: suggestion
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
-# Import Sorting (sort-imports)
+# sort-imports
 
 (fixable) The `--fix` option on the [command line](../user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
+
+Enforces sorted import declarations within modules.
 
 The import statement is used to import members (functions, objects or primitives) that have been exported from an external module. Using a specific member syntax:
 

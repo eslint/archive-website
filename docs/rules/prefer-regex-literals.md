@@ -6,9 +6,11 @@ rule_type: suggestion
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
-# Disallow use of the `RegExp` constructor in favor of regular expression literals (prefer-regex-literals)
+# prefer-regex-literals
 
 (hasSuggestions) Some problems reported by this rule are manually fixable by editor [suggestions](../developer-guide/working-with-rules#providing-suggestions).
+
+Disallows use of the `RegExp` constructor in favor of regular expression literals.
 
 There are two ways to create a regular expression:
 

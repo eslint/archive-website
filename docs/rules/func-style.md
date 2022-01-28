@@ -6,7 +6,9 @@ rule_type: suggestion
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
-# enforce the consistent use of either `function` declarations or expressions (func-style)
+# func-style
+
+Enforces the consistent use of either `function` declarations or expressions.
 
 There are two ways of defining functions in JavaScript: `function` declarations and `function` expressions. Declarations contain the `function` keyword first, followed by a name and then its arguments and the function body, for example:
 

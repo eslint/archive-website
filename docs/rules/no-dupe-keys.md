@@ -6,9 +6,11 @@ rule_type: problem
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
-# disallow duplicate keys in object literals (no-dupe-keys)
+# no-dupe-keys
 
 (recommended) The `"extends": "eslint:recommended"` property in a configuration file enables this rule.
+
+Disallows duplicate keys in object literals.
 
 Multiple properties with the same key in object literals can cause unexpected behavior in your application.
 

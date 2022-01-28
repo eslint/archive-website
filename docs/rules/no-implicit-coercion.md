@@ -6,9 +6,11 @@ rule_type: suggestion
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
-# Disallow the type conversion with shorter notations. (no-implicit-coercion)
+# no-implicit-coercion
 
 (fixable) The `--fix` option on the [command line](../user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
+
+Disallows shorthand type conversions.
 
 In JavaScript, there are a lot of different ways to convert value types.
 Some of them might be hard to read and understand.
