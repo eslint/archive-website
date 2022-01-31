@@ -57,14 +57,6 @@
             "tier": "gold-sponsor"
         },
         {
-            "name": "Coinbase",
-            "image": "https://avatars.githubusercontent.com/u/1885080?v=4",
-            "url": "https://coinbase.com",
-            "monthlyDonation": 100000,
-            "source": "github",
-            "tier": "gold-sponsor"
-        },
-        {
             "name": "American Express",
             "image": "https://avatars.githubusercontent.com/u/3853301?v=4",
             "url": "https://americanexpress.io",
