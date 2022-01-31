@@ -1,6 +1,7 @@
 ---
 layout: post
 title: 'A year of paying contributors: Review'
+teaser: "As part of the goals of the ESLint Collective, we have been paying contributors over the past year. We share the different approaches we tried and their results. We value the time of our contributors and we are continuously finding better ways to reward their work."
 tags:
   - Sponsorships
   - Donations

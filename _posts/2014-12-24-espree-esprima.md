@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Introducing Espree, an Esprima alternative
+teaser: "As part of integrating ES6 and JSX, we have released our own parser, Espree, based on Esprima. Feature flags have been introduced to configure language options while maintaining backwards compatibility. We also share how you can help and what we are planning for future releases."
 tags:
   - ES6
   - JSX

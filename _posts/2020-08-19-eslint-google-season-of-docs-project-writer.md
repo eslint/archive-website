@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Introducing the ESLint Google Season of Docs project and technical writer
+teaser: "We are happy to announce that ESLint was accepted into the Google Season of Docs program. It is with pleasure that we introduce our technical writer for 2020, Khawar Latif Khan. We are looking forward to working with him on his proposed project for our configuration documentation."
 tags:
   - Google Season of Docs
   - Technical Writing

@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Nx becomes ESLint gold sponsor
+teaser: "We are happy to announce that Nx is a gold sponsor of ESLint. It is an honor to be supported by Nx. We are grateful to Jeff Cross, Co-founder and Principal Architect, and Victor Savkin, Co-founder, and to the Nx team."
 tags:
   - Open Source
   - Funding

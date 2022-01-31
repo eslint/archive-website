@@ -1,6 +1,7 @@
 ---
 layout: post
 title: ESLint's New Rule Format
+teaser: "As part of automating the process of generating rules documentation, ESLint rules now have a new format. We explain the elements of this new format and how you can automatically transform rules from the old format to the new one. If you're a plugin author, it is recommended to update your custom rules accordingly."
 tags:
   - rules
   - development

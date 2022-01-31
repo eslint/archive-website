@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Funding ESLint's Future
+teaser: "With ESLint being an important part of the JS ecosystem, we are happy to announce the launch of the ESLint Collective. We share what this means and our goals and plans, and we introduce our first sponsors. Thanks to the ESLint community, we can make ESLint's development more sustainable."
 tags:
   - Open Source
   - Funding

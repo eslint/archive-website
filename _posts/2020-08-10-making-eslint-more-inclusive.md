@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Making ESLint more inclusive
+teaser: "As part of our efforts to make ESLint more inclusive, we are happy to share with you changes we've made in the project. ESLint is maintained by a diverse team, and we want everyone to feel empowered, welcome, safe, proud, and included, when contributing. Moving forward, we are looking to do even more, and we hope to inspire other open source projects."
 tags:
   - Inclusivity
   - Diversity

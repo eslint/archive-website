@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Announcing ESLint's public roadmap
+teaser: "We are happy to announce the first public roadmap of ESLint. Thanks to donations and involved contributors, we have been able to plan development time and future expectations. We hope that this will help to give a better idea of our ongoing resource allocation and how your donations contribute to the project."
 tags:
   - Sponsorships
   - Donations

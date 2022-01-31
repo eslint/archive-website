@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Supporting ESLint's dependencies
+teaser: "As part of our goal for open source sustainability, we are happy to announce that we're starting to support ESLint's dependencies. We're grateful to the projects upon which ESLint is built and we want to share our success with them. Thanks to our sponsors, we're able to help them, and we hope to extend this to more dependencies."
 tags:
   - Sponsorships
   - Donations
