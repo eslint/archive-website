@@ -1061,6 +1061,14 @@
             "tier": "backer"
         },
         {
+            "name": "dr.dimitru",
+            "image": "https://avatars.githubusercontent.com/u/1686778?u=90d2cecf76132f5e33422ca09c64640ad03b87d3&v=4",
+            "url": "https://veliovgroup.com",
+            "monthlyDonation": 500,
+            "source": "github",
+            "tier": "backer"
+        },
+        {
             "name": "Maarten Van Hoof",
             "image": "https://avatars.githubusercontent.com/u/2543633?u=b4bd36605dd71a3213acdb5d9d2ff27216d9c7a4&v=4",
             "url": "mrtnvh.com",
