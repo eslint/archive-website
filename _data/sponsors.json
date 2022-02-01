@@ -34,7 +34,7 @@
             "url": "https://google.com/chrome",
             "image": "https://images.opencollective.com/chrome/dc55bd4/logo.png",
             "monthlyDonation": 100000,
-            "totalDonations": 1500000,
+            "totalDonations": 1600000,
             "source": "opencollective",
             "tier": "gold-sponsor"
         },
@@ -108,7 +108,7 @@
             "url": "https://www.vpsserver.com",
             "image": "https://images.opencollective.com/vpsservercom/logo.png",
             "monthlyDonation": 20000,
-            "totalDonations": 600000,
+            "totalDonations": 620000,
             "source": "opencollective",
             "tier": "bronze-sponsor"
         },
@@ -304,7 +304,7 @@
             "url": "https://n8n.io",
             "image": "https://images.opencollective.com/n8n/dca2f0c/logo.png",
             "monthlyDonation": 1000,
-            "totalDonations": 25000,
+            "totalDonations": 26000,
             "source": "opencollective",
             "tier": "backer"
         },
@@ -322,7 +322,7 @@
             "url": null,
             "image": "https://images.opencollective.com/kevin-partington/54f2124/avatar.png",
             "monthlyDonation": 1000,
-            "totalDonations": 32000,
+            "totalDonations": 33000,
             "source": "opencollective",
             "tier": "backer"
         },
@@ -703,7 +703,7 @@
             "url": null,
             "image": "https://images.opencollective.com/james-sherwood-jones/avatar.png",
             "monthlyDonation": 500,
-            "totalDonations": 15500,
+            "totalDonations": 16000,
             "source": "opencollective",
             "tier": "backer"
         },
