@@ -5,7 +5,7 @@
             "url": "https://automattic.com",
             "image": "https://images.opencollective.com/automattic/d0ef3e1/logo.png",
             "monthlyDonation": 200000,
-            "totalDonations": 3000000,
+            "totalDonations": 3200000,
             "source": "opencollective",
             "tier": "platinum-sponsor"
         }
@@ -172,7 +172,7 @@
             "url": "https://www.gitbook.com",
             "image": "https://images.opencollective.com/gitbook/d35a8e7/logo.png",
             "monthlyDonation": 5000,
-            "totalDonations": 5000,
+            "totalDonations": 10000,
             "source": "opencollective",
             "tier": "backer"
         },
@@ -676,7 +676,7 @@
             "url": null,
             "image": "https://images.opencollective.com/touchless/8efea29/logo.png",
             "monthlyDonation": 500,
-            "totalDonations": 88000,
+            "totalDonations": 88500,
             "source": "opencollective",
             "tier": "backer"
         },
@@ -757,7 +757,7 @@
             "url": "https://www.maisonette.com",
             "image": "https://images.opencollective.com/maisonetteworld/c170bfc/logo.png",
             "monthlyDonation": 500,
-            "totalDonations": 18000,
+            "totalDonations": 18500,
             "source": "opencollective",
             "tier": "backer"
         },
