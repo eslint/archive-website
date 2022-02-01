@@ -43,7 +43,7 @@
             "url": "https://www.salesforce.com",
             "image": "https://images.opencollective.com/salesforce/ca8f997/logo.png",
             "monthlyDonation": 100000,
-            "totalDonations": 4534100,
+            "totalDonations": 4634100,
             "source": "opencollective",
             "tier": "gold-sponsor"
         },
@@ -79,7 +79,7 @@
             "url": "https://liftoff.io/",
             "image": "https://images.opencollective.com/liftoff/5c4fa84/logo.png",
             "monthlyDonation": 50000,
-            "totalDonations": 1000000,
+            "totalDonations": 1050000,
             "source": "opencollective",
             "tier": "silver-sponsor"
         }
@@ -739,7 +739,7 @@
             "url": "https://twitter.com/jumbleofideas",
             "image": "https://images.opencollective.com/aj-klein/b63b472/avatar.png",
             "monthlyDonation": 500,
-            "totalDonations": 17500,
+            "totalDonations": 18000,
             "source": "opencollective",
             "tier": "backer"
         },
