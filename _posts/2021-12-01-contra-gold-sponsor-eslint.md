@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Contra becomes ESLint gold sponsor
+teaser: "We are happy to announce that Contra is a gold sponsor of ESLint. It is an honor to be supported by Contra. We are grateful to Gajus Kuizinas, Co-Founder/CTO, and to the Contra team."
 authors:
   - nzakas
 categories:

@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Announcing ES6 and JSX Support
+teaser: "We are starting work on integrating ES6 and JSX. A prerelease version is available for testing. We also share how you can further contribute and what we are planning for the release."
 tags:
   - ES6
   - JSX

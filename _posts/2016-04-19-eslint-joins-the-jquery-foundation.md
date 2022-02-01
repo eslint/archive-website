@@ -1,6 +1,7 @@
 ---
 layout: post
 title: ESLint Joins The jQuery Foundation
+teaser: "We are happy to announce that ESLint is now part of the jQuery Foundation. This is a huge step and we share what this means for the project. We're also looking forward to its growth throughout the open source community."
 date: 2016-04-19
 tags:
   - jQuery Foundation

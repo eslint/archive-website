@@ -1,6 +1,7 @@
 ---
 layout: post
 title: The future of TypeScript on ESLint
+teaser: "We are excited that the TypeScript team has decided to officially work on improving the TypeScript ESLint experience. The driving force behind TypeScript compatibility for ESLint, James Henry, will work with the TypeScript team on this new project. We share what this means for the ESLint team and for TypeScript users."
 tags:
   - typescript
   - parser

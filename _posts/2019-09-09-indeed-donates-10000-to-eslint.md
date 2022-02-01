@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Indeed donates $10,000 to ESLint
+teaser: "We are happy to announce that Indeed has donated $10,000 to ESLint, as part of their FOSS Contributor Fund. It is an honor to be supported by Indeed. We are grateful to the head of Open Source, Duane O'Brien, and the employees who contributed to and nominated ESLint."
 tags:
   - Open Source
   - Funding

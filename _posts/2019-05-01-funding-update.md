@@ -1,6 +1,7 @@
 ---
 layout: post
 title: 'Funding ESLint''s Future: An Update'
+teaser: "We are happy to announce that we are currently sponsored at over $7,000 per month. In the last quarter, since the launch of the ESLint Collective, numerous sponsors have reached out. We are humbled that so many have contributed to raise funds to help support the team developing ESLint."
 tags:
   - Open Source
   - Funding

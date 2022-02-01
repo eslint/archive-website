@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Salesforce donates $10,000 to ESLint
+teaser: "We are happy to announce that Salesforce has donated $10,000 to ESLint, as part of their FOSS Contributor Fund. It is an honor to be supported by Salesforce. We are grateful to the technical architect, Médédé Raymond Kpatchaa, for nominating ESLint, and the employees who voted for us."
 tags:
   - Open Source
   - Funding

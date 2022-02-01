@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Microsoft donates $10,000 to ESLint as first FOSS Fund recipient
+teaser: "We are happy to announce that Microsoft has donated $10,000 to ESLint, as part of their FOSS Contributor Fund. It is an honor to be supported by Microsoft and to be their first recipient. We are grateful to the software engineers, Jan Pilzer and Steve Faulkner, for nominating ESLint, and the employees who voted for us."
 tags:
   - Open Source
   - Funding

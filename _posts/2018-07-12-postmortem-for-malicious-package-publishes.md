@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Postmortem for Malicious Packages Published on July 12th, 2018
+teaser: "Malicious versions of some ESLint packages were published (now unpublished) and we are sorry about this. We share details of the attack and our precautionary recommendations for package maintainers. Please check that you are not using the affected packages."
 tags:
   - security
 authors:
