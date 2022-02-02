@@ -582,15 +582,6 @@
             "tier": "backer"
         },
         {
-            "name": "Sebastian Silbermann",
-            "url": "https://solverfox.dev",
-            "image": "https://images.opencollective.com/eps1lon/4200608/avatar.png",
-            "monthlyDonation": 500,
-            "totalDonations": 6000,
-            "source": "opencollective",
-            "tier": "backer"
-        },
-        {
             "name": "Batch",
             "url": "https://batch.com",
             "image": "https://images.opencollective.com/batch/3ccdb8f/logo.png",
@@ -1216,6 +1207,14 @@
             "name": "James Ives",
             "image": "https://avatars.githubusercontent.com/u/10888441?u=61f6af1b0be0b5e9a15908ef45168b9242798486&v=4",
             "url": "https://jamesiv.es",
+            "monthlyDonation": 500,
+            "source": "github",
+            "tier": "backer"
+        },
+        {
+            "name": "Sebastian Silbermann",
+            "image": "https://avatars.githubusercontent.com/u/12292047?u=b680d2aedb93269d597e78306e6e136c8ebaf328&v=4",
+            "url": "https://solverfox.dev",
             "monthlyDonation": 500,
             "source": "github",
             "tier": "backer"
