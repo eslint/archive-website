@@ -640,7 +640,7 @@
             "url": "https://www.quora.com/profile/Alexandre-Morgaut",
             "image": "https://images.opencollective.com/alexandre-morgaut/6e3c8d4/avatar.png",
             "monthlyDonation": 500,
-            "totalDonations": 16000,
+            "totalDonations": 16500,
             "source": "opencollective",
             "tier": "backer"
         },
@@ -649,7 +649,7 @@
             "url": "https://www.sayyup.nl",
             "image": "https://images.opencollective.com/sayyup/4c61ffd/avatar.png",
             "monthlyDonation": 500,
-            "totalDonations": 8500,
+            "totalDonations": 9000,
             "source": "opencollective",
             "tier": "backer"
         },
@@ -1435,7 +1435,7 @@
             "url": "https://kostasbariotis.com",
             "image": "https://images.opencollective.com/konmpar/6f12288/avatar.png",
             "monthlyDonation": 200,
-            "totalDonations": 3400,
+            "totalDonations": 3600,
             "source": "opencollective",
             "tier": null
         },
@@ -1472,15 +1472,6 @@
             "image": "https://images.opencollective.com/tillsanders/1c9743b/avatar.png",
             "monthlyDonation": 100,
             "totalDonations": 1900,
-            "source": "opencollective",
-            "tier": null
-        },
-        {
-            "name": "Виктор Виктор",
-            "url": null,
-            "image": "https://images.opencollective.com/toptalo/237a912/avatar.png",
-            "monthlyDonation": 100,
-            "totalDonations": 1700,
             "source": "opencollective",
             "tier": null
         },
