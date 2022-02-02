@@ -17,8 +17,7 @@
               by <a href="https://github.com/{{ author }}"><b>{{ contributors[author].name }}</b></a><em> - </em>
             {% elsif authors != null %}
               by 
-                {% assign members = authors | split: ", " %}
-                  {% for member in members %}
+                  {% for member in authors %}
                     {% if forloop.last == true %}
                       <a href="https://github.com/{{ member }}"><b>{{ contributors[member].name }}</b></a>
                     {% else %}
