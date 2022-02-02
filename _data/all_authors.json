@@ -1,0 +1,242 @@
+{
+    "nzakas": {
+        "username": "nzakas",
+        "name": "Nicholas C. Zakas",
+        "website": "https://humanwhocodes.com",
+        "avatar_url": "https://avatars.githubusercontent.com/u/38546?v=4",
+        "bio": "Creator of ESLint, independent software developer, consultant, coach, and author.",
+        "twitter_username": "slicknet",
+        "github_username": "nzakas",
+        "location": "Mountain View, CA"
+    },
+    "kaicataldo": {
+        "username": "kaicataldo",
+        "name": "Kai Cataldo",
+        "website": "kaicataldo.com",
+        "avatar_url": "https://avatars.githubusercontent.com/u/7041728?v=4",
+        "bio": "💻 🎺 🎮 ⌨️ 🐕 • he/him",
+        "twitter_username": "kai_cataldo",
+        "github_username": "kaicataldo",
+        "location": "Brooklyn, NY"
+    },
+    "not-an-aardvark": {
+        "username": "not-an-aardvark",
+        "name": "Teddy Katz",
+        "website": "https://blog.teddykatz.com",
+        "avatar_url": "https://avatars.githubusercontent.com/u/11638619?v=4",
+        "bio": null,
+        "twitter_username": "not_an_aardvark",
+        "github_username": "not-an-aardvark",
+        "location": "New York, NY"
+    },
+    "ilyavolodin": {
+        "username": "ilyavolodin",
+        "name": "Ilya Volodin",
+        "website": "",
+        "avatar_url": "https://avatars.githubusercontent.com/u/1380062?v=4",
+        "bio": null,
+        "twitter_username": null,
+        "github_username": "ilyavolodin",
+        "location": null
+    },
+    "okuryu": {
+        "username": "okuryu",
+        "name": "Ryuichi Okumura",
+        "website": "https://www.okuryu.com/",
+        "avatar_url": "https://avatars.githubusercontent.com/u/34588?v=4",
+        "bio": "Contributor at @yahoo, @formatjs, @nodejs, and @yui.",
+        "twitter_username": "okuryu",
+        "github_username": "okuryu",
+        "location": "Tokyo"
+    },
+    "zpao": {
+        "username": "zpao",
+        "name": "Paul O’Shannessy",
+        "website": "https://zpao.com",
+        "avatar_url": "https://avatars.githubusercontent.com/u/8445?v=4",
+        "bio": "I do open source things at @facebook.",
+        "twitter_username": "zpao",
+        "github_username": "zpao",
+        "location": "Seattle, WA"
+    },
+    "cvrebert": {
+        "username": "cvrebert",
+        "name": "Chris Rebert",
+        "website": "http://chrisrebert.com",
+        "avatar_url": "https://avatars.githubusercontent.com/u/419884?v=4",
+        "bio": "@twbs Bootstrap Core Team member.\r\nWeb browser hater.\r\nPLT enthusiast.\r\nBeliever in infrastructure.",
+        "twitter_username": null,
+        "github_username": "cvrebert",
+        "location": "SF Bay Area, California, USA"
+    },
+    "gcochard": {
+        "username": "gcochard",
+        "name": "Greg Cochard",
+        "website": "http://gregcochard.com/about",
+        "avatar_url": "https://avatars.githubusercontent.com/u/2836237?v=4",
+        "bio": "Full stack engineer",
+        "twitter_username": null,
+        "github_username": "gcochard",
+        "location": "Orange County, California"
+    },
+    "dotJoel": {
+        "username": "dotJoel",
+        "name": "Joel Byrnes",
+        "website": "http://www.joelbyrnes.com",
+        "avatar_url": "https://avatars.githubusercontent.com/u/64779?v=4",
+        "bio": "mild-mannered software engineer",
+        "twitter_username": null,
+        "github_username": "dotJoel",
+        "location": "NY"
+    },
+    "IanVS": {
+        "username": "IanVS",
+        "name": "Ian VanSchooten",
+        "website": "",
+        "avatar_url": "https://avatars.githubusercontent.com/u/4616705?v=4",
+        "bio": "I build front-ends and raise 🦆, 🐝 & two boys.",
+        "twitter_username": "ianvanschooten",
+        "github_username": "IanVS",
+        "location": "Ann Arbor, MI"
+    },
+    "mysticatea": {
+        "username": "mysticatea",
+        "name": "Toru Nagashima",
+        "website": "",
+        "avatar_url": "https://avatars.githubusercontent.com/u/1937871?v=4",
+        "bio": "A member of ESLint, Babel, and Vue.js.",
+        "twitter_username": null,
+        "github_username": "mysticatea",
+        "location": "Shizuoka, Japan"
+    },
+    "mjomble": {
+        "username": "mjomble",
+        "name": "Andres Kalle",
+        "website": "",
+        "avatar_url": "https://avatars.githubusercontent.com/u/2202751?v=4",
+        "bio": null,
+        "twitter_username": null,
+        "github_username": "mjomble",
+        "location": "Estonia"
+    },
+    "hzoo": {
+        "username": "hzoo",
+        "name": "Henry Zhu",
+        "website": "https://henryzoo.com",
+        "avatar_url": "https://avatars.githubusercontent.com/u/588473?v=4",
+        "bio": "Learning to maintain stuff",
+        "twitter_username": "left_pad",
+        "github_username": "hzoo",
+        "location": null
+    },
+    "bytesnz": {
+        "username": "bytesnz",
+        "name": "Jack Farley",
+        "website": "http://bytes.nz",
+        "avatar_url": "https://avatars.githubusercontent.com/u/1755886?v=4",
+        "bio": "I am a great fan of Node.js and responsive web sites. I think if you design your site well, there is no need for a mobile web site or, in most cases, an app",
+        "twitter_username": null,
+        "github_username": "bytesnz",
+        "location": "Wellington, NZ"
+    },
+    "btmills": {
+        "username": "btmills",
+        "name": "Brandon Mills",
+        "website": "https://bmills.net",
+        "avatar_url": "https://avatars.githubusercontent.com/u/1709537?v=4",
+        "bio": "I lead engineering @drivecapital and help maintain @eslint.",
+        "twitter_username": null,
+        "github_username": "btmills",
+        "location": "Columbus, Ohio"
+    },
+    "gyandeeps": {
+        "username": "gyandeeps",
+        "name": "Gyandeep Singh",
+        "website": "https://gyandeeps.com",
+        "avatar_url": "https://avatars.githubusercontent.com/u/5554486?v=4",
+        "bio": "Talk--; Code++;",
+        "twitter_username": "gyandeeps",
+        "github_username": "gyandeeps",
+        "location": "Kansas City, USA"
+    },
+    "balupton": {
+        "username": "balupton",
+        "name": "Benjamin Lupton",
+        "website": "https://balupton.com",
+        "avatar_url": "https://avatars.githubusercontent.com/u/61148?v=4",
+        "bio": "Alive since 1989, coder since 1998, JavaScript & PHP since 2005, JavaScript & Node.js since 2010, philosophy since 2017. Founder @bevry.",
+        "twitter_username": "balupton",
+        "github_username": "balupton",
+        "location": "Perth, Australia"
+    },
+    "vitorbal": {
+        "username": "vitorbal",
+        "name": "Vitor Balocco",
+        "website": "https://twitter.com/vitorbal",
+        "avatar_url": "https://avatars.githubusercontent.com/u/626038?v=4",
+        "bio": "Carioca living in Madrid 🇧🇷  ✈️ 🇪🇸",
+        "twitter_username": null,
+        "github_username": "vitorbal",
+        "location": "Madrid"
+    },
+    "wdhorton": {
+        "username": "wdhorton",
+        "name": "William Horton",
+        "website": "",
+        "avatar_url": "https://avatars.githubusercontent.com/u/13503072?v=4",
+        "bio": "Machine Learning Engineer",
+        "twitter_username": "hortonhearsafoo",
+        "github_username": "wdhorton",
+        "location": "New York, NY"
+    },
+    "platinumazure": {
+        "username": "platinumazure",
+        "name": "Kevin Partington",
+        "website": "",
+        "avatar_url": "https://avatars.githubusercontent.com/u/284282?v=4",
+        "bio": "@eslint team alumnus. Currently stepping back a bit to try to get my life in order.",
+        "twitter_username": null,
+        "github_username": "platinumazure",
+        "location": null
+    },
+    "pauljmartinez": {
+        "username": "pauljmartinez",
+        "name": "Paul J. Martinez",
+        "website": "https://www.pauljmartinez.com/",
+        "avatar_url": "https://avatars.githubusercontent.com/u/112419?v=4",
+        "bio": null,
+        "twitter_username": "pauljmartinez",
+        "github_username": "pauljmartinez",
+        "location": "Oakland, CA"
+    },
+    "arzyu": {
+        "username": "arzyu",
+        "name": null,
+        "website": "https://arzx.org",
+        "avatar_url": "https://avatars.githubusercontent.com/u/1270145?v=4",
+        "bio": null,
+        "twitter_username": null,
+        "github_username": "arzyu",
+        "location": "Shanghai, China"
+    },
+    "Munter": {
+        "username": "Munter",
+        "name": "Peter Müller",
+        "website": "https://mntr.dk",
+        "avatar_url": "https://avatars.githubusercontent.com/u/331790?v=4",
+        "bio": "CTO @ heap.dk\r\n\r\nWeb developer with a special interest in tooling for web performance and workflow optimization",
+        "twitter_username": "_munter_",
+        "github_username": "Munter",
+        "location": "Copenhagen, Denmark"
+    },
+    "mdjermanovic": {
+        "username": "mdjermanovic",
+        "name": "Milos Djermanovic",
+        "website": "",
+        "avatar_url": "https://avatars.githubusercontent.com/u/44349756?v=4",
+        "bio": null,
+        "twitter_username": null,
+        "github_username": "mdjermanovic",
+        "location": null
+    }
+}

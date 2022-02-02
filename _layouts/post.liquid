@@ -14,14 +14,14 @@
           <article>
             <h1>{{ title }}</h1>
             {% if author != null %}
-              by <a href="https://github.com/{{ author }}"><b>{{ contributors[author].name }}</b></a><em> - </em>
+              by <a href="https://github.com/{{ author }}"><b>{{ all_authors[author].name }}</b></a><em> - </em>
             {% elsif authors != null %}
               by 
                   {% for member in authors %}
                     {% if forloop.last == true %}
-                      <a href="https://github.com/{{ member }}"><b>{{ contributors[member].name }}</b></a>
+                      <a href="https://github.com/{{ member }}"><b>{{ all_authors[member].name }}</b></a>
                     {% else %}
-                      <a href="https://github.com/{{ member }}"><b>{{ contributors[member].name }},</b></a>
+                      <a href="https://github.com/{{ member }}"><b>{{ all_authors[member].name }},</b></a>
                     {% endif %}
                   {% endfor %}
               <em> - </em>
