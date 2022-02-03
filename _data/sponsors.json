@@ -1092,6 +1092,14 @@
             "tier": "backer"
         },
         {
+            "name": "Zac Rosenbauer",
+            "image": "https://avatars.githubusercontent.com/u/3486461?u=cee42ca0ec5cb598e9a2e717976eb36caaf62874&v=4",
+            "url": "https://zacrosenbauer.com",
+            "monthlyDonation": 500,
+            "source": "github",
+            "tier": "backer"
+        },
+        {
             "name": "Raymond Schweers",
             "image": "https://avatars.githubusercontent.com/u/4108685?u=bdd564c34ff380d86efd09da600ec945338dc522&v=4",
             "url": "www.hetwebbureau.nl",
