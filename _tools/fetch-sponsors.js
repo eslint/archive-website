@@ -33,6 +33,10 @@ const tierSponsors = {
     backers: []
 };
 
+let annualDonations = 0;
+let monthlyDonations = 0;
+let sponsorCount = 0;
+
 const { ESLINT_GITHUB_TOKEN } = process.env;
 
 if (!ESLINT_GITHUB_TOKEN) {
@@ -187,6 +191,11 @@ async function fetchGitHubSponsors() {
     // process into a useful format
     for (const sponsor of sponsors) {
 
+        // calculate totals
+        sponsorCount++;
+        annualDonations += sponsor.monthlyDonation / 100 * 12;
+        monthlyDonations += sponsor.monthlyDonation / 100;
+
         switch (sponsor.tier) {
             case "platinum-sponsor":
                 tierSponsors.platinum.push(sponsor);
@@ -215,5 +224,12 @@ async function fetchGitHubSponsors() {
         tierSponsors[key].sort((a, b) => b.monthlyDonation - a.monthlyDonation);
     }
 
-    fs.writeFileSync(sponsorsFilename, JSON.stringify(tierSponsors, null, "    "), { encoding: "utf8" });
+    fs.writeFileSync(sponsorsFilename, JSON.stringify({
+        totals: {
+            annualDonations,
+            monthlyDonations,
+            sponsorCount
+        },
+        ...tierSponsors
+    }, null, "    "), { encoding: "utf8" });
 })();
