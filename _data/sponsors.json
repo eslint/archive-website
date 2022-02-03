@@ -1028,6 +1028,14 @@
             "tier": "backer"
         },
         {
+            "name": "Will Sams",
+            "image": "https://avatars.githubusercontent.com/u/1405154?u=0d1446a2d645cdffaca60004bf53fa8ed92cfaf5&v=4",
+            "url": "http://samswebs.com",
+            "monthlyDonation": 500,
+            "source": "github",
+            "tier": "backer"
+        },
+        {
             "name": "Carl Topham",
             "image": "https://avatars.githubusercontent.com/u/1415767?u=524a719c7778e24a1651fd22e3685696e999a991&v=4",
             "url": "https://carl-topham.com",
