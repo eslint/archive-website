@@ -3,6 +3,7 @@
         {
             "username": "nzakas",
             "name": "Nicholas C. Zakas",
+            "title": "ESLint Technical Steering Committee",
             "website": "https://humanwhocodes.com",
             "avatar_url": "https://avatars.githubusercontent.com/u/38546?v=4",
             "bio": "Creator of ESLint, independent software developer, consultant, coach, and author.",
@@ -13,6 +14,7 @@
         {
             "username": "btmills",
             "name": "Brandon Mills",
+            "title": "ESLint Technical Steering Committee",
             "website": "https://bmills.net",
             "avatar_url": "https://avatars.githubusercontent.com/u/1709537?v=4",
             "bio": "I lead engineering @drivecapital and help maintain @eslint.",
@@ -23,6 +25,7 @@
         {
             "username": "mdjermanovic",
             "name": "Milos Djermanovic",
+            "title": "ESLint Technical Steering Committee",
             "website": "",
             "avatar_url": "https://avatars.githubusercontent.com/u/44349756?v=4",
             "bio": null,
@@ -35,6 +38,7 @@
         {
             "username": "alberto",
             "name": "alberto",
+            "title": "ESLint Alumnus",
             "website": "http://www.sharpbites.com",
             "avatar_url": "https://avatars.githubusercontent.com/u/72561?v=4",
             "bio": null,
@@ -45,6 +49,7 @@
         {
             "username": "BYK",
             "name": "Burak Yigit Kaya",
+            "title": "ESLint Alumnus",
             "website": "http://byk.im",
             "avatar_url": "https://avatars.githubusercontent.com/u/126780?v=4",
             "bio": "Tries to automate himself out. Developer Tooling @formsort. Formerly @getsentry, @facebook, @disqus, always a Mozillian\r\n",
@@ -55,6 +60,7 @@
         {
             "username": "lo1tuma",
             "name": "Mathias Schreck",
+            "title": "ESLint Alumnus",
             "website": "",
             "avatar_url": "https://avatars.githubusercontent.com/u/169170?v=4",
             "bio": null,
@@ -65,6 +71,7 @@
         {
             "username": "michaelficarra",
             "name": "Michael Ficarra",
+            "title": "ESLint Alumnus",
             "website": "https://justgrahamthings.tumblr.com",
             "avatar_url": "https://avatars.githubusercontent.com/u/218840?v=4",
             "bio": null,
@@ -75,6 +82,7 @@
         {
             "username": "xjamundx",
             "name": "Jamund Ferguson",
+            "title": "ESLint Alumnus",
             "website": "http://www.jamund.com",
             "avatar_url": "https://avatars.githubusercontent.com/u/246143?v=4",
             "bio": "Developer relations engineer @ PayPal",
@@ -85,6 +93,7 @@
         {
             "username": "platinumazure",
             "name": "Kevin Partington",
+            "title": "ESLint Alumnus",
             "website": "",
             "avatar_url": "https://avatars.githubusercontent.com/u/284282?v=4",
             "bio": "@eslint team alumnus. Currently stepping back a bit to try to get my life in order.",
@@ -95,6 +104,7 @@
         {
             "username": "mikesherov",
             "name": "Mike Sherov",
+            "title": "ESLint Alumnus",
             "website": "",
             "avatar_url": "https://avatars.githubusercontent.com/u/364532?v=4",
             "bio": null,
@@ -105,6 +115,7 @@
         {
             "username": "hzoo",
             "name": "Henry Zhu",
+            "title": "ESLint Alumnus",
             "website": "https://henryzoo.com",
             "avatar_url": "https://avatars.githubusercontent.com/u/588473?v=4",
             "bio": "Learning to maintain stuff",
@@ -115,6 +126,7 @@
         {
             "username": "vitorbal",
             "name": "Vitor Balocco",
+            "title": "ESLint Alumnus",
             "website": "https://twitter.com/vitorbal",
             "avatar_url": "https://avatars.githubusercontent.com/u/626038?v=4",
             "bio": "Carioca living in Madrid 🇧🇷  ✈️ 🇪🇸",
@@ -125,6 +137,7 @@
         {
             "username": "qfox",
             "name": "Alexej Yaroshevich",
+            "title": "ESLint Alumnus",
             "website": "http://about.me/yaroshevich",
             "avatar_url": "https://avatars.githubusercontent.com/u/677518?v=4",
             "bio": null,
@@ -135,6 +148,7 @@
         {
             "username": "JamesHenry",
             "name": "James Henry",
+            "title": "ESLint Alumnus",
             "website": "https://jameshenry.blog",
             "avatar_url": "https://avatars.githubusercontent.com/u/900523?v=4",
             "bio": "Consultant Architect @nrwl. 4x MVP for TypeScript @microsoft. Creator of @typescript-eslint and @angular-eslint. Member of the ESLint, Babel and Prettier Teams.",
@@ -145,6 +159,7 @@
         {
             "username": "markelog",
             "name": "Oleg Gaidarenko",
+            "title": "ESLint Alumnus",
             "website": "",
             "avatar_url": "https://avatars.githubusercontent.com/u/945528?v=4",
             "bio": "Pass the Courvoisi'!",
@@ -155,6 +170,7 @@
         {
             "username": "faceleg",
             "name": "Michael Robinson",
+            "title": "ESLint Alumnus",
             "website": "",
             "avatar_url": "https://avatars.githubusercontent.com/u/1000759?v=4",
             "bio": null,
@@ -165,6 +181,7 @@
         {
             "username": "ilyavolodin",
             "name": "Ilya Volodin",
+            "title": "ESLint Alumnus",
             "website": "",
             "avatar_url": "https://avatars.githubusercontent.com/u/1380062?v=4",
             "bio": null,
@@ -175,6 +192,7 @@
         {
             "username": "soda0289",
             "name": "Reyad Attiyat",
+            "title": "ESLint Alumnus",
             "website": "",
             "avatar_url": "https://avatars.githubusercontent.com/u/2373964?v=4",
             "bio": null,
@@ -185,6 +203,7 @@
         {
             "username": "VictorHom",
             "name": "Victor Hom",
+            "title": "ESLint Alumnus",
             "website": "",
             "avatar_url": "https://avatars.githubusercontent.com/u/3211873?v=4",
             "bio": "\r\n    👋\r\n",
@@ -195,6 +214,7 @@
         {
             "username": "IanVS",
             "name": "Ian VanSchooten",
+            "title": "ESLint Alumnus",
             "website": "",
             "avatar_url": "https://avatars.githubusercontent.com/u/4616705?v=4",
             "bio": "I build front-ends and raise 🦆, 🐝 & two boys.",
@@ -205,6 +225,7 @@
         {
             "username": "gyandeeps",
             "name": "Gyandeep Singh",
+            "title": "ESLint Alumnus",
             "website": "https://gyandeeps.com",
             "avatar_url": "https://avatars.githubusercontent.com/u/5554486?v=4",
             "bio": "Talk--; Code++;",
@@ -215,6 +236,7 @@
         {
             "username": "kaicataldo",
             "name": "Kai Cataldo",
+            "title": "ESLint Alumnus",
             "website": "kaicataldo.com",
             "avatar_url": "https://avatars.githubusercontent.com/u/7041728?v=4",
             "bio": "💻 🎺 🎮 ⌨️ 🐕 • he/him",
@@ -225,6 +247,7 @@
         {
             "username": "not-an-aardvark",
             "name": "Teddy Katz",
+            "title": "ESLint Alumnus",
             "website": "https://blog.teddykatz.com",
             "avatar_url": "https://avatars.githubusercontent.com/u/11638619?v=4",
             "bio": null,
@@ -235,6 +258,7 @@
         {
             "username": "pedrottimark",
             "name": "Mark Pedrotti",
+            "title": "ESLint Alumnus",
             "website": "",
             "avatar_url": "https://avatars.githubusercontent.com/u/11862657?v=4",
             "bio": "Working where content, markup, style, and code intersect so ordinary people benefit from technology. Soli Deo gloria.",
@@ -247,6 +271,7 @@
         {
             "username": "mysticatea",
             "name": "Toru Nagashima",
+            "title": "ESLint Reviewer",
             "website": "",
             "avatar_url": "https://avatars.githubusercontent.com/u/1937871?v=4",
             "bio": "A member of ESLint, Babel, and Vue.js.",
@@ -257,6 +282,7 @@
         {
             "username": "aladdin-add",
             "name": "唯然",
+            "title": "ESLint Reviewer",
             "website": "",
             "avatar_url": "https://avatars.githubusercontent.com/u/13050025?v=4",
             "bio": null,
@@ -269,6 +295,7 @@
         {
             "username": "brettz9",
             "name": "Brett Zamir",
+            "title": "ESLint Committer",
             "website": "http://brett-zamir.me",
             "avatar_url": "https://avatars.githubusercontent.com/u/20234?v=4",
             "bio": null,
@@ -279,6 +306,7 @@
         {
             "username": "bmish",
             "name": "Bryan Mishkin",
+            "title": "ESLint Committer",
             "website": "http://www.linkedin.com/in/bmish",
             "avatar_url": "https://avatars.githubusercontent.com/u/698306?v=4",
             "bio": "Software Engineer. Passionate about open source and helping developers maximize their productivity.",
@@ -289,6 +317,7 @@
         {
             "username": "g-plane",
             "name": "Pig Fang",
+            "title": "ESLint Committer",
             "website": "https://gplane.win",
             "avatar_url": "https://avatars.githubusercontent.com/u/17216317?v=4",
             "bio": "https://www.buymeacoffee.com/gplane",
@@ -299,6 +328,7 @@
         {
             "username": "anikethsaha",
             "name": "Anix",
+            "title": "ESLint Committer",
             "website": "",
             "avatar_url": "https://avatars.githubusercontent.com/u/26347874?v=4",
             "bio": "❤️ Open Source | works mainly with javascript | always bet on plugins",
@@ -309,6 +339,7 @@
         {
             "username": "yeonjuan",
             "name": "YeonJuan",
+            "title": "ESLint Committer",
             "website": "https://github.com/yeonjuan/dev-blog",
             "avatar_url": "https://avatars.githubusercontent.com/u/41323220?v=4",
             "bio": "Developer",
@@ -319,9 +350,10 @@
         {
             "username": "snitin315",
             "name": "Nitin Kumar",
+            "title": "ESLint Committer",
             "website": "https://snitin315.dev/",
             "avatar_url": "https://avatars.githubusercontent.com/u/46647141?v=4",
-            "bio": "Frontend Engineer @Razorpay || Helping maintain @webpack and @eslint",
+            "bio": "Helping maintain @webpack and @eslint",
             "twitter_username": "snitin315",
             "github_username": "snitin315",
             "location": "INDIA"
