@@ -8,7 +8,6 @@ tags:
   - Open Source
 authors:
   - nzakas
-  - kaicataldo
 categories:
   - Announcements
 ---

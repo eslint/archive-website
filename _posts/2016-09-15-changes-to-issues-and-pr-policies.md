@@ -7,7 +7,6 @@ tags:
   - minor
 authors:
   - nzakas
-  - kaicataldo
 categories:
   - Policy Updates
 ---

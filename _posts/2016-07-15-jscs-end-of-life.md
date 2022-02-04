@@ -7,8 +7,6 @@ tags:
   - end of life
 authors:
   - nzakas
-  - not-an-aardvark
-  - kaicataldo
 categories:
   - Announcements
 ---

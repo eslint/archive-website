@@ -7,8 +7,6 @@ tags:
   - rules
 authors:
   - nzakas
-  - not-an-aardvark
-  - kaicataldo
 categories:
   - Policy Updates
 ---

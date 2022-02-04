@@ -9,7 +9,6 @@ tags:
   - alpha
 authors:
   - nzakas
-  - kaicataldo
 categories:
   - Release Notes
 ---

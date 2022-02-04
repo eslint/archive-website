@@ -10,7 +10,6 @@ tags:
   - Backers
 authors:
   - nzakas
-  - mdjermanovic
 categories: 
   - Sponsorships
 ---

@@ -6,8 +6,6 @@ tags:
   - security
 authors:
   - hzoo
-  - btmills
-  - kaicataldo
 categories:
   - Postmortems
 ---

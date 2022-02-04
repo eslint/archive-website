@@ -8,9 +8,6 @@ tags:
   - doctrine
 authors:
   - nzakas
-  - kaicataldo
-  - mysticatea
-  - not-an-aardvark
 categories:
   - Announcements
 ---
