@@ -10,8 +10,6 @@ tags:
   - Backers
 authors:
   - nzakas
-  - kaicataldo
-  - Munter
 categories:
   - Sponsorships
 ---

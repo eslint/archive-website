@@ -7,7 +7,6 @@ tags:
   - JSX
 authors:
   - nzakas
-  - kaicataldo
 categories:
   - Announcements
 ---

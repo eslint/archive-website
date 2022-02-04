@@ -8,7 +8,6 @@ tags:
   - Code of Conduct
 authors:
   - nzakas
-  - kaicataldo
 categories:
   - Announcements
 ---

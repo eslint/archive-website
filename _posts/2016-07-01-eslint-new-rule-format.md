@@ -7,8 +7,6 @@ tags:
   - development
 authors:
   - nzakas
-  - not-an-aardvark
-  - kaicataldo
 categories:
   - API Changes
 ---

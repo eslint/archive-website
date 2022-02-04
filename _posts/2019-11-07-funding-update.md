@@ -10,7 +10,6 @@ tags:
   - Backers
 authors:
   - kaicataldo
-  - nzakas
 categories:
   - Financials
 ---

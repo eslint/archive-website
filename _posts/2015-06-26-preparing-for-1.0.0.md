@@ -7,7 +7,6 @@ tags:
   - announcement
 authors:
   - nzakas
-  - kaicataldo
 categories:
   - Announcements
 ---

@@ -9,10 +9,6 @@ tags:
   - plans
 authors:
   - nzakas
-  - hzoo
-  - not-an-aardvark
-  - bytesnz
-  - kaicataldo
 categories:
   - Announcements
 ---

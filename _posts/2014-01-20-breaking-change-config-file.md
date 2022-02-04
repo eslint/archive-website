@@ -7,7 +7,6 @@ tags:
   - config file
 authors:
   - nzakas
-  - kaicataldo
 categories:
   - API Changes
 ---

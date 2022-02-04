@@ -7,7 +7,6 @@ tags:
   - formatter
 authors:
   - nzakas
-  - kaicataldo
 categories:
   - API Changes
 ---
