@@ -1,8 +1,8 @@
 {
     "totals": {
-        "annualDonations": 147409.07999999996,
-        "monthlyDonations": 12284.09,
-        "sponsorCount": 178
+        "annualDonations": 148009.07999999996,
+        "monthlyDonations": 12334.09,
+        "sponsorCount": 179
     },
     "platinum": [
         {
@@ -1228,14 +1228,6 @@
             "name": "James Ives",
             "image": "https://avatars.githubusercontent.com/u/10888441?u=61f6af1b0be0b5e9a15908ef45168b9242798486&v=4",
             "url": "https://jamesiv.es",
-            "monthlyDonation": 500,
-            "source": "github",
-            "tier": "backer"
-        },
-        {
-            "name": "Sebastian Silbermann",
-            "image": "https://avatars.githubusercontent.com/u/12292047?u=b680d2aedb93269d597e78306e6e136c8ebaf328&v=4",
-            "url": "https://solverfox.dev",
             "monthlyDonation": 500,
             "source": "github",
             "tier": "backer"
