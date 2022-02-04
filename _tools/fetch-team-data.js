@@ -48,6 +48,14 @@ const teamIds = {
     [ALUMNI_TEAM_SLUG]: "alumni"
 };
 
+// lookup table mapping Github team IDs to member titles
+const teamMemberTitles = {
+    tsc: "ESLint Technical Steering Committee",
+    committers: "ESLint Committer",
+    reviewers: "ESLint Reviewer",
+    alumni: "ESLint Alumnus"
+};
+
 // blog post authors
 const users = new Map();
 
@@ -72,6 +80,7 @@ async function fetchUserProfile(username) {
     const result = {
         username: profile.login,
         name: profile.name,
+        title: "Guest Author",
         website: profile.blog,
         avatar_url: profile.avatar_url,
         bio: profile.bio,
@@ -114,6 +123,13 @@ async function fetchTeamMembers() {
     // filter out TSC members and reviewers from committers list
     team.committers = team.committers.filter(user => !team.tsc.find(tscmember => tscmember.username === user.username) &&
         !team.reviewers.find(tscmember => tscmember.username === user.username));
+
+    // add appropriate titles
+    for (const [teamName, members] of Object.entries(team)) {
+        members.forEach(member => {
+            member.title = teamMemberTitles[teamName];
+        });
+    }
 
     return team;
 }
