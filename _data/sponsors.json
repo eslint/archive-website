@@ -194,6 +194,14 @@
             "tier": "backer"
         },
         {
+            "name": "AX Semantics",
+            "image": "https://avatars.githubusercontent.com/u/13435721?v=4",
+            "url": "https://www.ax-semantics.com",
+            "monthlyDonation": 5000,
+            "source": "github",
+            "tier": "backer"
+        },
+        {
             "name": "STORIS",
             "url": "https://www.storis.com/",
             "image": "https://images.opencollective.com/storis/dfb0e13/logo.png",
