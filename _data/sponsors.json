@@ -1,8 +1,8 @@
 {
     "totals": {
-        "annualDonations": 147949.07999999996,
-        "monthlyDonations": 12329.09,
-        "sponsorCount": 178
+        "annualDonations": 147961.07999999996,
+        "monthlyDonations": 12330.09,
+        "sponsorCount": 179
     },
     "platinum": [
         {
@@ -1493,6 +1493,15 @@
             "image": "https://images.opencollective.com/tillsanders/1c9743b/avatar.png",
             "monthlyDonation": 100,
             "totalDonations": 1900,
+            "source": "opencollective",
+            "tier": null
+        },
+        {
+            "name": "Виктор Виктор",
+            "url": null,
+            "image": "https://images.opencollective.com/toptalo/237a912/avatar.png",
+            "monthlyDonation": 100,
+            "totalDonations": 1800,
             "source": "opencollective",
             "tier": null
         },
