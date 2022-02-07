@@ -1,8 +1,8 @@
 {
     "totals": {
-        "annualDonations": 147961.07999999996,
-        "monthlyDonations": 12330.09,
-        "sponsorCount": 179
+        "annualDonations": 147901.07999999996,
+        "monthlyDonations": 12325.09,
+        "sponsorCount": 178
     },
     "platinum": [
         {
@@ -1324,14 +1324,6 @@
             "name": "The GraphQL Guide",
             "image": "https://avatars.githubusercontent.com/u/23441982?v=4",
             "url": "https://graphql.guide",
-            "monthlyDonation": 500,
-            "source": "github",
-            "tier": "backer"
-        },
-        {
-            "name": "Hugh",
-            "image": "https://avatars.githubusercontent.com/u/24587702?u=004f9f0717317bf07948bf53475435af69e8196c&v=4",
-            "url": "hugh.sh",
             "monthlyDonation": 500,
             "source": "github",
             "tier": "backer"
