@@ -1,8 +1,8 @@
 {
     "totals": {
-        "annualDonations": 147901.07999999996,
-        "monthlyDonations": 12325.09,
-        "sponsorCount": 178
+        "annualDonations": 147961.07999999996,
+        "monthlyDonations": 12330.09,
+        "sponsorCount": 179
     },
     "platinum": [
         {
@@ -948,6 +948,14 @@
             "name": "Will Stone",
             "image": "https://avatars.githubusercontent.com/u/654103?u=87566f3bc8fcd2ee9946dd64d32a99f59d0775c4&v=4",
             "url": "https://wstone.uk",
+            "monthlyDonation": 500,
+            "source": "github",
+            "tier": "backer"
+        },
+        {
+            "name": "Rithish",
+            "image": "https://avatars.githubusercontent.com/u/674539?v=4",
+            "url": "https://github.com/rithish",
             "monthlyDonation": 500,
             "source": "github",
             "tier": "backer"
