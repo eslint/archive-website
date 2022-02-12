@@ -102,6 +102,21 @@ switch (a) {
 }
 ```
 
+## When Not To Use It
+
+In rare cases where identical test expressions in `case` clauses produce different values, which necessarily means that the expressions are causing and relying on side effects, you will have to disable this rule.
+
+```js
+switch (a) {
+    case i++:
+        foo();
+        break;
+    case i++: // eslint-disable-line no-duplicate-case
+        bar();
+        break;
+}
+```
+
 ## Version
 
 This rule was introduced in ESLint 0.17.0.
