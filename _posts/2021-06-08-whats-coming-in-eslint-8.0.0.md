@@ -43,7 +43,7 @@ ESLint v8.0.0 will now automatically [remove unused disable directives](https://
 
 ### Line comment directives
 
-ESLint v8.0.0 now allows [line comment directives](https://github.com/eslint/eslint/issues/14575) for all directives that previously required block comments.
+~~ESLint v8.0.0 now allows [line comment directives](https://github.com/eslint/eslint/issues/14575) for all directives that previously required block comments.~~ This was [reverted](https://github.com/eslint/eslint/issues/14960) in v8.0.0-beta.1 due to compatibility problems.
 
 ### Stricter rule schema validation
 
