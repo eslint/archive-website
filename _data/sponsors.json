@@ -1,8 +1,8 @@
 {
     "totals": {
-        "annualDonations": 148021.07999999996,
-        "monthlyDonations": 12335.09,
-        "sponsorCount": 180
+        "annualDonations": 148053.12,
+        "monthlyDonations": 12337.76,
+        "sponsorCount": 181
     },
     "platinum": [
         {
@@ -1440,6 +1440,15 @@
             "totalDonations": 11800,
             "source": "opencollective",
             "tier": "backer"
+        },
+        {
+            "name": "Matt Welke",
+            "url": "https://mattwelke.com",
+            "image": "https://images.opencollective.com/mattwelke/avatar.png",
+            "monthlyDonation": 267,
+            "totalDonations": 267,
+            "source": "opencollective",
+            "tier": null
         },
         {
             "name": "Shunfan Du",
