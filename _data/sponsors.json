@@ -1,7 +1,7 @@
 {
     "totals": {
-        "annualDonations": 148053.12,
-        "monthlyDonations": 12337.76,
+        "annualDonations": 171993.12,
+        "monthlyDonations": 14332.76,
         "sponsorCount": 181
     },
     "platinum": [
@@ -12,6 +12,14 @@
             "monthlyDonation": 200000,
             "totalDonations": 3200000,
             "source": "opencollective",
+            "tier": "platinum-sponsor"
+        },
+        {
+            "name": "Flux Industries",
+            "image": "https://avatars.githubusercontent.com/u/88303769?u=1af1d13b48676ab5918770999361829fc90847c4&v=4",
+            "url": "https://flux.industries",
+            "monthlyDonation": 200000,
+            "source": "github",
             "tier": "platinum-sponsor"
         }
     ],
@@ -1412,14 +1420,6 @@
             "name": "Cretia",
             "image": "https://avatars.githubusercontent.com/u/79467215?v=4",
             "url": "https://www.cretia.app",
-            "monthlyDonation": 500,
-            "source": "github",
-            "tier": "backer"
-        },
-        {
-            "name": "Flux Industries",
-            "image": "https://avatars.githubusercontent.com/u/88303769?u=1af1d13b48676ab5918770999361829fc90847c4&v=4",
-            "url": "https://flux.industries",
             "monthlyDonation": 500,
             "source": "github",
             "tier": "backer"
