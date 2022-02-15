@@ -1,8 +1,8 @@
 {
     "totals": {
-        "annualDonations": 171993.12,
-        "monthlyDonations": 14332.76,
-        "sponsorCount": 181
+        "annualDonations": 172053.12,
+        "monthlyDonations": 14337.76,
+        "sponsorCount": 182
     },
     "platinum": [
         {
@@ -1084,6 +1084,14 @@
             "name": "dr.dimitru",
             "image": "https://avatars.githubusercontent.com/u/1686778?u=90d2cecf76132f5e33422ca09c64640ad03b87d3&v=4",
             "url": "https://veliovgroup.com",
+            "monthlyDonation": 500,
+            "source": "github",
+            "tier": "backer"
+        },
+        {
+            "name": "Dan",
+            "image": "https://avatars.githubusercontent.com/u/2481552?v=4",
+            "url": "https://danminkevitch.com",
             "monthlyDonation": 500,
             "source": "github",
             "tier": "backer"
