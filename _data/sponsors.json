@@ -1,8 +1,8 @@
 {
     "totals": {
-        "annualDonations": 172053.12,
-        "monthlyDonations": 14337.76,
-        "sponsorCount": 182
+        "annualDonations": 172113.12,
+        "monthlyDonations": 14342.76,
+        "sponsorCount": 183
     },
     "platinum": [
         {
@@ -1372,6 +1372,14 @@
             "name": "Zentered",
             "image": "https://avatars.githubusercontent.com/u/32449351?v=4",
             "url": "https://zentered.co",
+            "monthlyDonation": 500,
+            "source": "github",
+            "tier": "backer"
+        },
+        {
+            "name": "tera_ny",
+            "image": "https://avatars.githubusercontent.com/u/33125821?u=e2911b49e3bf868390ded98f56a4ef0843eb812b&v=4",
+            "url": "https://zenn.dev/tera_ny",
             "monthlyDonation": 500,
             "source": "github",
             "tier": "backer"
