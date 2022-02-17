@@ -1,8 +1,8 @@
 {
     "totals": {
-        "annualDonations": 172113.12,
-        "monthlyDonations": 14342.76,
-        "sponsorCount": 183
+        "annualDonations": 148113.12,
+        "monthlyDonations": 12342.76,
+        "sponsorCount": 182
     },
     "platinum": [
         {
@@ -12,14 +12,6 @@
             "monthlyDonation": 200000,
             "totalDonations": 3200000,
             "source": "opencollective",
-            "tier": "platinum-sponsor"
-        },
-        {
-            "name": "Flux Industries",
-            "image": "https://avatars.githubusercontent.com/u/88303769?u=1af1d13b48676ab5918770999361829fc90847c4&v=4",
-            "url": "https://flux.industries",
-            "monthlyDonation": 200000,
-            "source": "github",
             "tier": "platinum-sponsor"
         }
     ],
