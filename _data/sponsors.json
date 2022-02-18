@@ -1,8 +1,8 @@
 {
     "totals": {
-        "annualDonations": 148113.12,
-        "monthlyDonations": 12342.76,
-        "sponsorCount": 182
+        "annualDonations": 148053.12,
+        "monthlyDonations": 12337.76,
+        "sponsorCount": 181
     },
     "platinum": [
         {
@@ -1092,14 +1092,6 @@
             "name": "Maarten Van Hoof",
             "image": "https://avatars.githubusercontent.com/u/2543633?u=b4bd36605dd71a3213acdb5d9d2ff27216d9c7a4&v=4",
             "url": "mrtnvh.com",
-            "monthlyDonation": 500,
-            "source": "github",
-            "tier": "backer"
-        },
-        {
-            "name": "Andrew LeTourneau",
-            "image": "https://avatars.githubusercontent.com/u/2807807?v=4",
-            "url": "https://andyletourneau.com",
             "monthlyDonation": 500,
             "source": "github",
             "tier": "backer"
