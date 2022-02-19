@@ -1,8 +1,8 @@
 {
     "totals": {
-        "annualDonations": 148053.12,
-        "monthlyDonations": 12337.76,
-        "sponsorCount": 181
+        "annualDonations": 148113.12,
+        "monthlyDonations": 12342.76,
+        "sponsorCount": 182
     },
     "platinum": [
         {
@@ -1212,6 +1212,14 @@
             "name": "Roman Eckert",
             "image": "https://avatars.githubusercontent.com/u/9392031?u=18c737b16bba6a4373b9b2dc63f7609819dfb5bb&v=4",
             "url": "https://github.com/romaneckert",
+            "monthlyDonation": 500,
+            "source": "github",
+            "tier": "backer"
+        },
+        {
+            "name": "mizdra",
+            "image": "https://avatars.githubusercontent.com/u/9639995?u=dd5dac271b000f6c7883880c1796ce2a95a971b2&v=4",
+            "url": "https://mizdra.net",
             "monthlyDonation": 500,
             "source": "github",
             "tier": "backer"
