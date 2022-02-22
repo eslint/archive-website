@@ -47,7 +47,7 @@ In 2021, we awarded over $6,000 to outside contributors, and we look forward to 
 
 ### Supporting our dependencies
 
-As we [announced in 2020](https://eslint.org/blog/2020/09/supporting-eslint-dependencies), we actively seek out and donate to our dependencies. In general, any project we directly depend on that has an Open Collective account will receive a donation from ESLint. We are currently supporting five of our dependencies with monthly donations of $150:
+As we [announced in 2020](https://eslint.org/blog/2020/09/supporting-eslint-dependencies), we actively seek out and donate to our dependencies. In general, any project we directly depend on that has an Open Collective account will be considered to receive a donation from ESLint. We are currently supporting five of our dependencies with monthly donations of $150:
 
 * [Ajv](https://npmjs.com/package/ajv) is a JSON schema validator that ESLint uses to validate configuration.
 * [Eleventy](https://www.11ty.dev/) is a Node.js-based static site generator that we use to create [eslint.org](http://eslint.org).
