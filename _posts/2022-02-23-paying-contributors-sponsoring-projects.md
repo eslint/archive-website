@@ -61,7 +61,7 @@ You can always check to see which projects ESLint is supporting on our [Open Col
 
 ### Supporting the community
 
-Once we started supporting our upstream dependencies, we though, what about the downstream dependencies? There are a lot of projects related to ESLint that make the ESLint ecosystem better. Whether that be a different set of rules, a custom parser, or anything that makes ESLint better to use. We are currently donating $150 per month to these projects:
+Once we started supporting our upstream dependencies, we thought, what about the downstream dependencies? There are a lot of projects related to ESLint that enrich the ESLint ecosystem, whether that be a different set of rules, a custom parser, or anything that makes ESLint better to use. We are currently donating $150 per month to these projects:
 
 * [typescript-eslint](https://github.com/typescript-eslint) is the plugin that makes ESLint work with TypeScript.
 * [eslint-plugin-import](https://npmjs.com/package/eslint-plugin-import) is a plugin to help you manage your module imports.
