@@ -73,7 +73,7 @@ Going forward, we are looking to continue supporting community projects like the
 
 The last way we decided to spend money is on what we playfully called "big projects." These are projects that take a lot of time and effort, and that the team doesn't have the time, interest, or expertise to accomplish on our own. Every project has a backlog of tasks that seem too big to ever accomplish, and we realized that we could start making our way through that list by hiring professionals to do the work.
 
-The first of our big projects is an ambitious project to redesign the ESLint website. We had wanted to redesign our website for several years, and tried at least three separate times to do it in the spirit of open source, which volunteers and designing by consensus. Each of those times the efforts failed, and so we decided it was time to hire some folks to help us out.
+The first of our big projects is an ambitious project to redesign the ESLint website. We had wanted to redesign our website for several years, and tried at least three separate times to do it in the spirit of open source, with volunteers and designing by consensus. Each of those times the efforts failed, and so we decided it was time to hire some folks to help us out.
 
 The entire scope of the project is fairly large and includes:
 
