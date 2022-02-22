@@ -39,7 +39,7 @@ Right now, the per-hour rate for Technical Steering Committee (TSC) members and 
 
 ### The contributor pool
 
-One of the things we struggled with was how to fairly pay outside contributors for working on ESLint. We didn't think a standard per-hour rate made much sense because 1) people might contribute without knowing to track their hours ahead of time and 2) trusting people you don't know to accurately report their hours spend is a a system that is too easy to exploit. Still, we felt like it wasn't fair for us to pay for team member contributions but not for outside contributions, and so we created the contributor pool.
+One of the things we struggled with was how to fairly pay outside contributors for working on ESLint. We didn't think a standard per-hour rate made much sense because 1) people might contribute without knowing to track their hours ahead of time and 2) trusting people you don't know to accurately report their hours spend is a system that is too easy to exploit. Still, we felt like it wasn't fair for us to pay for team member contributions but not for outside contributions, and so we created the contributor pool.
 
 Each month, we set aside $1,000 specifically to give to outside contributors for any contributions to ESLint. The TSC reviews outside contributions at the end of each month and awards at least $100 to every outside contributor who has made a non-trivial contribution to ESLint. Once again, these contributions are not limited to coding, but can be anything that positively impacts the project. The contributors don't need to apply ahead of time or ask for permission; if you make a significant contribution, you'll get an email from the TSC letting you know how to collect your payment.
 
