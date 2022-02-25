@@ -86,6 +86,11 @@ class C {
 
 If you don't want to be notified about spacing style inside of blocks, you can safely disable this rule.
 
+## Related Rules
+
+* [space-before-blocks](space-before-blocks)
+* [brace-style](brace-style)
+
 ## Version
 
 This rule was introduced in ESLint 1.2.0.

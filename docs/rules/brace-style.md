@@ -396,6 +396,11 @@ class D { static { foo(); } }
 
 If you don't want to enforce a particular brace style, don't enable this rule.
 
+## Related Rules
+
+* [block-spacing](block-spacing)
+* [space-before-blocks](space-before-blocks)
+
 ## Further Reading
 
 * [Indent style](https://en.wikipedia.org/wiki/Indent_style)
