@@ -1,8 +1,8 @@
 {
     "totals": {
-        "annualDonations": 148113.12,
-        "monthlyDonations": 12342.76,
-        "sponsorCount": 182
+        "annualDonations": 136113.12,
+        "monthlyDonations": 11342.76,
+        "sponsorCount": 181
     },
     "platinum": [
         {
@@ -31,15 +31,6 @@
             "image": "https://images.opencollective.com/nx/0efbe42/logo.png",
             "monthlyDonation": 100000,
             "totalDonations": 1300000,
-            "source": "opencollective",
-            "tier": "gold-sponsor"
-        },
-        {
-            "name": "Chrome's Web Framework & Tools Performance Fund",
-            "url": "https://google.com/chrome",
-            "image": "https://images.opencollective.com/chrome/dc55bd4/logo.png",
-            "monthlyDonation": 100000,
-            "totalDonations": 1600000,
             "source": "opencollective",
             "tier": "gold-sponsor"
         },
@@ -113,7 +104,7 @@
             "url": "https://www.vpsserver.com",
             "image": "https://images.opencollective.com/vpsservercom/logo.png",
             "monthlyDonation": 20000,
-            "totalDonations": 620000,
+            "totalDonations": 640000,
             "source": "opencollective",
             "tier": "bronze-sponsor"
         },
@@ -317,7 +308,7 @@
             "url": "https://n8n.io",
             "image": "https://images.opencollective.com/n8n/dca2f0c/logo.png",
             "monthlyDonation": 1000,
-            "totalDonations": 26000,
+            "totalDonations": 27000,
             "source": "opencollective",
             "tier": "backer"
         },
@@ -335,7 +326,7 @@
             "url": null,
             "image": "https://images.opencollective.com/kevin-partington/54f2124/avatar.png",
             "monthlyDonation": 1000,
-            "totalDonations": 33000,
+            "totalDonations": 34000,
             "source": "opencollective",
             "tier": "backer"
         },
@@ -707,7 +698,7 @@
             "url": null,
             "image": "https://images.opencollective.com/james-sherwood-jones/avatar.png",
             "monthlyDonation": 500,
-            "totalDonations": 16000,
+            "totalDonations": 16500,
             "source": "opencollective",
             "tier": "backer"
         },
