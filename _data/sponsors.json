@@ -1,8 +1,8 @@
 {
     "totals": {
-        "annualDonations": 135993.12,
-        "monthlyDonations": 11332.76,
-        "sponsorCount": 179
+        "annualDonations": 135933.12,
+        "monthlyDonations": 11327.76,
+        "sponsorCount": 178
     },
     "platinum": [
         {
@@ -21,7 +21,7 @@
             "url": "https://contra.com",
             "image": "https://images.opencollective.com/contra1/c70f93f/logo.png",
             "monthlyDonation": 100000,
-            "totalDonations": 400000,
+            "totalDonations": 500000,
             "source": "opencollective",
             "tier": "gold-sponsor"
         },
@@ -86,7 +86,7 @@
             "url": "https://launchdarkly.com",
             "image": "https://images.opencollective.com/launchdarkly/574bb9e/logo.png",
             "monthlyDonation": 20000,
-            "totalDonations": 80000,
+            "totalDonations": 100000,
             "source": "opencollective",
             "tier": "bronze-sponsor"
         },
@@ -481,15 +481,6 @@
             "name": "Julio Jordán",
             "url": null,
             "image": "https://images.opencollective.com/juliojordan/avatar.png",
-            "monthlyDonation": 500,
-            "totalDonations": 1000,
-            "source": "opencollective",
-            "tier": "backer"
-        },
-        {
-            "name": "Min Chen",
-            "url": null,
-            "image": "https://images.opencollective.com/min-chen/61f2fcb/avatar.png",
             "monthlyDonation": 500,
             "totalDonations": 1000,
             "source": "opencollective",
