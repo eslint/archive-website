@@ -1,8 +1,8 @@
 {
     "totals": {
-        "annualDonations": 136113.12,
-        "monthlyDonations": 11342.76,
-        "sponsorCount": 181
+        "annualDonations": 135993.12,
+        "monthlyDonations": 11332.76,
+        "sponsorCount": 179
     },
     "platinum": [
         {
@@ -10,7 +10,7 @@
             "url": "https://automattic.com",
             "image": "https://images.opencollective.com/automattic/d0ef3e1/logo.png",
             "monthlyDonation": 200000,
-            "totalDonations": 3200000,
+            "totalDonations": 3400000,
             "source": "opencollective",
             "tier": "platinum-sponsor"
         }
@@ -168,7 +168,7 @@
             "url": "https://www.gitbook.com",
             "image": "https://images.opencollective.com/gitbook/d35a8e7/logo.png",
             "monthlyDonation": 5000,
-            "totalDonations": 10000,
+            "totalDonations": 15000,
             "source": "opencollective",
             "tier": "backer"
         },
@@ -667,15 +667,6 @@
             "tier": "backer"
         },
         {
-            "name": "Touchless",
-            "url": null,
-            "image": "https://images.opencollective.com/touchless/8efea29/logo.png",
-            "monthlyDonation": 500,
-            "totalDonations": 88500,
-            "source": "opencollective",
-            "tier": "backer"
-        },
-        {
             "name": "Peter deHaan",
             "url": "https://about.me/peterdehaan",
             "image": "https://images.opencollective.com/pdehaan/4437929/avatar.png",
@@ -744,15 +735,6 @@
             "image": "https://images.opencollective.com/third_iron/fa6ec4d/logo.png",
             "monthlyDonation": 500,
             "totalDonations": 19000,
-            "source": "opencollective",
-            "tier": "backer"
-        },
-        {
-            "name": "Maisonette Inc",
-            "url": "https://www.maisonette.com",
-            "image": "https://images.opencollective.com/maisonetteworld/c170bfc/logo.png",
-            "monthlyDonation": 500,
-            "totalDonations": 18500,
             "source": "opencollective",
             "tier": "backer"
         },
