@@ -177,7 +177,7 @@
             "url": "https://www.principal.com/about-us",
             "image": "https://images.opencollective.com/principal/431e690/logo.png",
             "monthlyDonation": 5000,
-            "totalDonations": 95000,
+            "totalDonations": 100000,
             "source": "opencollective",
             "tier": null
         },
@@ -281,7 +281,7 @@
             "url": "https://www.simedia.com/",
             "image": "https://images.opencollective.com/simedia/848efc9/logo.png",
             "monthlyDonation": 1000,
-            "totalDonations": 19000,
+            "totalDonations": 20000,
             "source": "opencollective",
             "tier": null
         },
@@ -290,7 +290,7 @@
             "url": null,
             "image": "https://images.opencollective.com/john-hamilton/avatar.png",
             "monthlyDonation": 1000,
-            "totalDonations": 20000,
+            "totalDonations": 21000,
             "source": "opencollective",
             "tier": "backer"
         },
@@ -644,7 +644,7 @@
             "url": "https://justinnoel.dev",
             "image": "https://images.opencollective.com/justinnoel/7c4d721/avatar.png",
             "monthlyDonation": 500,
-            "totalDonations": 9500,
+            "totalDonations": 10000,
             "source": "opencollective",
             "tier": "backer"
         },
