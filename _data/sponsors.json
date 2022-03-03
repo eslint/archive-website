@@ -1,7 +1,7 @@
 {
     "totals": {
-        "annualDonations": 136041.12,
-        "monthlyDonations": 11336.76,
+        "annualDonations": 135801.12,
+        "monthlyDonations": 11316.76,
         "sponsorCount": 179
     },
     "platinum": [
@@ -222,14 +222,6 @@
             "monthlyDonation": 2500,
             "totalDonations": 95000,
             "source": "opencollective",
-            "tier": "backer"
-        },
-        {
-            "name": "Paul Foryt",
-            "image": "https://avatars.githubusercontent.com/u/7229568?u=479eec3115957259c1a11cc5093d2b3244d94e6c&v=4",
-            "url": "https://foryt.com",
-            "monthlyDonation": 2500,
-            "source": "github",
             "tier": "backer"
         },
         {
@@ -1162,6 +1154,14 @@
             "name": "Nicolas Charpentier",
             "image": "https://avatars.githubusercontent.com/u/7189823?u=f7558a0f6828f45f1082970880aefbeab9596d0b&v=4",
             "url": "https://charpeni.com",
+            "monthlyDonation": 500,
+            "source": "github",
+            "tier": "backer"
+        },
+        {
+            "name": "Paul Foryt",
+            "image": "https://avatars.githubusercontent.com/u/7229568?u=479eec3115957259c1a11cc5093d2b3244d94e6c&v=4",
+            "url": "https://foryt.com",
             "monthlyDonation": 500,
             "source": "github",
             "tier": "backer"
