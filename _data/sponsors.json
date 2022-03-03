@@ -1,8 +1,8 @@
 {
     "totals": {
-        "annualDonations": 135981.12,
-        "monthlyDonations": 11331.76,
-        "sponsorCount": 178
+        "annualDonations": 136041.12,
+        "monthlyDonations": 11336.76,
+        "sponsorCount": 179
     },
     "platinum": [
         {
@@ -483,6 +483,15 @@
             "image": "https://images.opencollective.com/juliojordan/avatar.png",
             "monthlyDonation": 500,
             "totalDonations": 1500,
+            "source": "opencollective",
+            "tier": "backer"
+        },
+        {
+            "name": "Min Chen",
+            "url": null,
+            "image": "https://images.opencollective.com/min-chen/61f2fcb/avatar.png",
+            "monthlyDonation": 500,
+            "totalDonations": 1000,
             "source": "opencollective",
             "tier": "backer"
         },
