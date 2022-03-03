@@ -1,8 +1,8 @@
 {
     "totals": {
-        "annualDonations": 135921.12,
-        "monthlyDonations": 11326.76,
-        "sponsorCount": 177
+        "annualDonations": 135981.12,
+        "monthlyDonations": 11331.76,
+        "sponsorCount": 178
     },
     "platinum": [
         {
@@ -654,6 +654,15 @@
             "image": "https://images.opencollective.com/blacksheepcode/976d69a/avatar.png",
             "monthlyDonation": 500,
             "totalDonations": 13500,
+            "source": "opencollective",
+            "tier": "backer"
+        },
+        {
+            "name": "Touchless",
+            "url": null,
+            "image": "https://images.opencollective.com/touchless/8efea29/logo.png",
+            "monthlyDonation": 500,
+            "totalDonations": 89000,
             "source": "opencollective",
             "tier": "backer"
         },
