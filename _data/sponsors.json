@@ -1,8 +1,8 @@
 {
     "totals": {
-        "annualDonations": 135801.12,
-        "monthlyDonations": 11316.76,
-        "sponsorCount": 179
+        "annualDonations": 135741.12,
+        "monthlyDonations": 11311.76,
+        "sponsorCount": 178
     },
     "platinum": [
         {
@@ -466,15 +466,6 @@
             "image": "https://images.opencollective.com/statetax/0a380bd/logo.png",
             "monthlyDonation": 500,
             "totalDonations": 1000,
-            "source": "opencollective",
-            "tier": "backer"
-        },
-        {
-            "name": "Julio Jordán",
-            "url": null,
-            "image": "https://images.opencollective.com/juliojordan/avatar.png",
-            "monthlyDonation": 500,
-            "totalDonations": 1500,
             "source": "opencollective",
             "tier": "backer"
         },
