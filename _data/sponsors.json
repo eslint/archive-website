@@ -1,8 +1,8 @@
 {
     "totals": {
-        "annualDonations": 135741.12,
-        "monthlyDonations": 11311.76,
-        "sponsorCount": 178
+        "annualDonations": 135801.12,
+        "monthlyDonations": 11316.76,
+        "sponsorCount": 179
     },
     "platinum": [
         {
@@ -1057,6 +1057,14 @@
             "name": "Maarten Van Hoof",
             "image": "https://avatars.githubusercontent.com/u/2543633?u=59f1fc94537c9dfcf0be851e599215baa876559d&v=4",
             "url": "mrtnvh.com",
+            "monthlyDonation": 500,
+            "source": "github",
+            "tier": "backer"
+        },
+        {
+            "name": "Roberto Arosemena Elizondo",
+            "image": "https://avatars.githubusercontent.com/u/3158040?u=dff0b6074392afaef0d7041f79b218cae8053da8&v=4",
+            "url": "https://github.com/arosemena",
             "monthlyDonation": 500,
             "source": "github",
             "tier": "backer"
