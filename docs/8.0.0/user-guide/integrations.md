@@ -22,7 +22,9 @@ edit_link: https://github.com/eslint/eslint/edit/master/docs/user-guide/integrat
 * TextMate 2:
     * [eslint.tmbundle](https://github.com/ryanfitzer/eslint.tmbundle)
     * [javascript-eslint.tmbundle](https://github.com/natesilva/javascript-eslint.tmbundle)
-* Atom: [linter-eslint](https://atom.io/packages/linter-eslint)
+* Atom:
+    * [linter-eslint](https://atom.io/packages/linter-eslint)
+    * [fast-eslint-8](https://atom.io/packages/fast-eslint-8)
 * IntelliJ IDEA, RubyMine, WebStorm, PhpStorm, PyCharm, AppCode, Android Studio, 0xDBE: [ESLint Plugin](https://plugins.jetbrains.com/plugin/7494-eslint)
 * Visual Studio Code: [ESLint Extension](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint)
 * Brackets: Included and [Brackets ESLint](https://github.com/brackets-userland/brackets-eslint)
