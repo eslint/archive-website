@@ -417,7 +417,7 @@ types:
         recommended: true
       - description: enforce comparing `typeof` expressions against valid strings
         fixable: false
-        hasSuggestions: false
+        hasSuggestions: true
         name: valid-typeof
         recommended: true
   - description: 'These rules suggest alternate ways of doing things:'
