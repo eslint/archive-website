@@ -1,8 +1,8 @@
 {
     "totals": {
-        "annualDonations": 135801.12,
-        "monthlyDonations": 11316.76,
-        "sponsorCount": 179
+        "annualDonations": 135861.12,
+        "monthlyDonations": 11321.76,
+        "sponsorCount": 180
     },
     "platinum": [
         {
@@ -1329,6 +1329,14 @@
             "name": "The GraphQL Guide",
             "image": "https://avatars.githubusercontent.com/u/23441982?v=4",
             "url": "https://graphql.guide",
+            "monthlyDonation": 500,
+            "source": "github",
+            "tier": "backer"
+        },
+        {
+            "name": "Krešimir Čondić",
+            "image": "https://avatars.githubusercontent.com/u/26605058?u=ce9a827bfef6ec4740a32a2e2c5cb769c812a217&v=4",
+            "url": "https://www.linkedin.com/company/codemagehr/",
             "monthlyDonation": 500,
             "source": "github",
             "tier": "backer"
