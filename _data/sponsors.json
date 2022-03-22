@@ -1,8 +1,8 @@
 {
     "totals": {
-        "annualDonations": 135861.12,
-        "monthlyDonations": 11321.76,
-        "sponsorCount": 180
+        "annualDonations": 136101.12,
+        "monthlyDonations": 11341.76,
+        "sponsorCount": 181
     },
     "platinum": [
         {
@@ -231,6 +231,15 @@
             "monthlyDonation": 2500,
             "source": "github",
             "tier": "backer"
+        },
+        {
+            "name": "Agendrix",
+            "url": "https://www.agendrix.com/",
+            "image": "https://images.opencollective.com/agendrix/32bd295/logo.png",
+            "monthlyDonation": 2000,
+            "totalDonations": 3500,
+            "source": "opencollective",
+            "tier": null
         },
         {
             "name": "Anu Alabi",
