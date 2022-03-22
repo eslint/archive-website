@@ -1,8 +1,8 @@
 {
     "totals": {
-        "annualDonations": 136101.12,
-        "monthlyDonations": 11341.76,
-        "sponsorCount": 181
+        "annualDonations": 136221.12,
+        "monthlyDonations": 11351.76,
+        "sponsorCount": 182
     },
     "platinum": [
         {
@@ -240,6 +240,15 @@
             "totalDonations": 3500,
             "source": "opencollective",
             "tier": null
+        },
+        {
+            "name": "Chayan Chawra",
+            "url": null,
+            "image": "https://images.opencollective.com/chayan-chawra/avatar.png",
+            "monthlyDonation": 1000,
+            "totalDonations": 1000,
+            "source": "opencollective",
+            "tier": "backer"
         },
         {
             "name": "Anu Alabi",
