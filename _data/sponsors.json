@@ -1,8 +1,8 @@
 {
     "totals": {
-        "annualDonations": 136221.12,
-        "monthlyDonations": 11351.76,
-        "sponsorCount": 182
+        "annualDonations": 136461.12,
+        "monthlyDonations": 11371.76,
+        "sponsorCount": 183
     },
     "platinum": [
         {
@@ -231,6 +231,15 @@
             "monthlyDonation": 2500,
             "source": "github",
             "tier": "backer"
+        },
+        {
+            "name": "Infinum",
+            "url": "https://infinum.com",
+            "image": "https://images.opencollective.com/infinum/9a719cb/avatar.png",
+            "monthlyDonation": 2000,
+            "totalDonations": 2000,
+            "source": "opencollective",
+            "tier": null
         },
         {
             "name": "Agendrix",
