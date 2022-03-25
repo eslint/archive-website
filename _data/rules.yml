@@ -725,7 +725,9 @@ types:
         hasSuggestions: false
         name: no-inline-comments
         recommended: false
-      - description: disallow `this` keywords outside of classes or class-like objects
+      - description: >-
+          disallow use of `this` in contexts where the value of `this` is
+          `undefined`
         fixable: false
         hasSuggestions: false
         name: no-invalid-this
