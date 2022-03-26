@@ -1,8 +1,8 @@
 {
     "totals": {
-        "annualDonations": 136521.12,
-        "monthlyDonations": 11376.76,
-        "sponsorCount": 184
+        "annualDonations": 136581.12,
+        "monthlyDonations": 11381.76,
+        "sponsorCount": 185
     },
     "platinum": [
         {
@@ -485,6 +485,15 @@
             "url": "https://sentry.io",
             "monthlyDonation": 800,
             "source": "github",
+            "tier": "backer"
+        },
+        {
+            "name": "Sufi Meditation",
+            "url": "https://www.zikir.com",
+            "image": "https://images.opencollective.com/sufi-meditation/74935dc/logo.png",
+            "monthlyDonation": 500,
+            "totalDonations": 500,
+            "source": "opencollective",
             "tier": "backer"
         },
         {
