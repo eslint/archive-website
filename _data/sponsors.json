@@ -1,8 +1,8 @@
 {
     "totals": {
-        "annualDonations": 136581.12,
-        "monthlyDonations": 11381.76,
-        "sponsorCount": 185
+        "annualDonations": 136521.12,
+        "monthlyDonations": 11376.76,
+        "sponsorCount": 184
     },
     "platinum": [
         {
@@ -619,15 +619,6 @@
             "image": "https://images.opencollective.com/batch/3ccdb8f/logo.png",
             "monthlyDonation": 500,
             "totalDonations": 7000,
-            "source": "opencollective",
-            "tier": "backer"
-        },
-        {
-            "name": "Ayush Sachdeva",
-            "url": null,
-            "image": "https://images.opencollective.com/ayush000/avatar.png",
-            "monthlyDonation": 500,
-            "totalDonations": 7500,
             "source": "opencollective",
             "tier": "backer"
         },
