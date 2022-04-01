@@ -1,8 +1,8 @@
 {
     "totals": {
-        "annualDonations": 134241.12,
-        "monthlyDonations": 11186.76,
-        "sponsorCount": 185
+        "annualDonations": 134181.12,
+        "monthlyDonations": 11181.76,
+        "sponsorCount": 184
     },
     "platinum": [
         {
@@ -122,7 +122,7 @@
             "url": "https://themeisle.com",
             "image": "https://images.opencollective.com/themeisle/d5592fe/logo.png",
             "monthlyDonation": 20000,
-            "totalDonations": 720000,
+            "totalDonations": 740000,
             "source": "opencollective",
             "tier": "bronze-sponsor"
         },
@@ -282,7 +282,7 @@
             "url": "https://raider.io",
             "image": "https://images.opencollective.com/raiderio_wow/7a380a3/logo.png",
             "monthlyDonation": 1000,
-            "totalDonations": 14000,
+            "totalDonations": 15000,
             "source": "opencollective",
             "tier": "backer"
         },
@@ -497,15 +497,6 @@
             "tier": "backer"
         },
         {
-            "name": "StateTax.io",
-            "url": "https://statetax.io/",
-            "image": "https://images.opencollective.com/statetax/0a380bd/logo.png",
-            "monthlyDonation": 500,
-            "totalDonations": 1000,
-            "source": "opencollective",
-            "tier": "backer"
-        },
-        {
             "name": "Min Chen",
             "url": null,
             "image": "https://images.opencollective.com/min-chen/61f2fcb/avatar.png",
@@ -609,7 +600,7 @@
             "url": "https://batch.com",
             "image": "https://images.opencollective.com/batch/3ccdb8f/logo.png",
             "monthlyDonation": 500,
-            "totalDonations": 7000,
+            "totalDonations": 7500,
             "source": "opencollective",
             "tier": "backer"
         },
