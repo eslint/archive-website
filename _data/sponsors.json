@@ -86,7 +86,7 @@
             "url": "https://launchdarkly.com",
             "image": "https://images.opencollective.com/launchdarkly/574bb9e/logo.png",
             "monthlyDonation": 20000,
-            "totalDonations": 100000,
+            "totalDonations": 120000,
             "source": "opencollective",
             "tier": "bronze-sponsor"
         },
@@ -825,7 +825,7 @@
             "url": "https://alexeyraspopov.com",
             "image": "https://images.opencollective.com/alexeyraspopov/d8c7a67/avatar.png",
             "monthlyDonation": 500,
-            "totalDonations": 19000,
+            "totalDonations": 19500,
             "source": "opencollective",
             "tier": "backer"
         },
@@ -1495,7 +1495,7 @@
             "url": "https://ca.linkedin.com/in/sudharakap",
             "image": "https://images.opencollective.com/sudharaka-palamakumbura/03b6087/avatar.png",
             "monthlyDonation": 200,
-            "totalDonations": 2000,
+            "totalDonations": 2200,
             "source": "opencollective",
             "tier": null
         },
