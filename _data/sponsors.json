@@ -1,7 +1,7 @@
 {
     "totals": {
-        "annualDonations": 134181.12,
-        "monthlyDonations": 11181.76,
+        "annualDonations": 134185.08000000002,
+        "monthlyDonations": 11182.09,
         "sponsorCount": 184
     },
     "platinum": [
@@ -1464,6 +1464,15 @@
             "tier": "backer"
         },
         {
+            "name": "Matt Welke",
+            "url": "https://mattwelke.com",
+            "image": "https://images.opencollective.com/mattwelke/avatar.png",
+            "monthlyDonation": 300,
+            "totalDonations": 801,
+            "source": "opencollective",
+            "tier": null
+        },
+        {
             "name": "Will McAuliff",
             "url": null,
             "image": "https://images.opencollective.com/womcauliff/2be6f36/avatar.png",
@@ -1471,15 +1480,6 @@
             "totalDonations": 12400,
             "source": "opencollective",
             "tier": "backer"
-        },
-        {
-            "name": "Matt Welke",
-            "url": "https://mattwelke.com",
-            "image": "https://images.opencollective.com/mattwelke/avatar.png",
-            "monthlyDonation": 267,
-            "totalDonations": 801,
-            "source": "opencollective",
-            "tier": null
         },
         {
             "name": "Shunfan Du",
