@@ -1,8 +1,8 @@
 {
     "totals": {
-        "annualDonations": 134365.08000000002,
-        "monthlyDonations": 11197.09,
-        "sponsorCount": 186
+        "annualDonations": 136765.08000000002,
+        "monthlyDonations": 11397.09,
+        "sponsorCount": 187
     },
     "platinum": [
         {
@@ -103,6 +103,15 @@
             "name": "VPS",
             "url": "https://www.vpsserver.com",
             "image": "https://images.opencollective.com/vpsservercom/logo.png",
+            "monthlyDonation": 20000,
+            "totalDonations": 660000,
+            "source": "opencollective",
+            "tier": "bronze-sponsor"
+        },
+        {
+            "name": "Icons8: free icons, photos, illustrations, and music",
+            "url": "https://icons8.com",
+            "image": "https://images.opencollective.com/icons8/7fa1641/logo.png",
             "monthlyDonation": 20000,
             "totalDonations": 660000,
             "source": "opencollective",
