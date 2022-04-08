@@ -1,7 +1,7 @@
 ---
 title: no-multiple-empty-lines - Rules
 layout: doc
-edit_link: https://github.com/eslint/eslint/edit/main/docs/rules/no-multiple-empty-lines.md
+edit_link: https://github.com/eslint/eslint/edit/main/docs/src/rules/no-multiple-empty-lines.md
 rule_type: layout
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
@@ -141,4 +141,4 @@ This rule was introduced in ESLint 0.9.0.
 
 * [Rule source](https://github.com/eslint/eslint/tree/HEAD/lib/rules/no-multiple-empty-lines.js)
 * [Test source](https://github.com/eslint/eslint/tree/HEAD/tests/lib/rules/no-multiple-empty-lines.js)
-* [Documentation source](https://github.com/eslint/eslint/tree/HEAD/docs/rules/no-multiple-empty-lines.md)
+* [Documentation source](https://github.com/eslint/eslint/tree/HEAD/docs/src/rules/no-multiple-empty-lines.md)

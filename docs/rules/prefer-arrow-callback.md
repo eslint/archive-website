@@ -1,7 +1,7 @@
 ---
 title: prefer-arrow-callback - Rules
 layout: doc
-edit_link: https://github.com/eslint/eslint/edit/main/docs/rules/prefer-arrow-callback.md
+edit_link: https://github.com/eslint/eslint/edit/main/docs/src/rules/prefer-arrow-callback.md
 rule_type: suggestion
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
@@ -119,4 +119,4 @@ This rule was introduced in ESLint 1.2.0.
 
 * [Rule source](https://github.com/eslint/eslint/tree/HEAD/lib/rules/prefer-arrow-callback.js)
 * [Test source](https://github.com/eslint/eslint/tree/HEAD/tests/lib/rules/prefer-arrow-callback.js)
-* [Documentation source](https://github.com/eslint/eslint/tree/HEAD/docs/rules/prefer-arrow-callback.md)
+* [Documentation source](https://github.com/eslint/eslint/tree/HEAD/docs/src/rules/prefer-arrow-callback.md)

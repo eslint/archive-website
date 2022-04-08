@@ -1,7 +1,7 @@
 ---
 title: no-invalid-this - Rules
 layout: doc
-edit_link: https://github.com/eslint/eslint/edit/main/docs/rules/no-invalid-this.md
+edit_link: https://github.com/eslint/eslint/edit/main/docs/src/rules/no-invalid-this.md
 rule_type: suggestion
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
@@ -286,4 +286,4 @@ This rule was introduced in ESLint 1.0.0-rc-2.
 
 * [Rule source](https://github.com/eslint/eslint/tree/HEAD/lib/rules/no-invalid-this.js)
 * [Test source](https://github.com/eslint/eslint/tree/HEAD/tests/lib/rules/no-invalid-this.js)
-* [Documentation source](https://github.com/eslint/eslint/tree/HEAD/docs/rules/no-invalid-this.md)
+* [Documentation source](https://github.com/eslint/eslint/tree/HEAD/docs/src/rules/no-invalid-this.md)

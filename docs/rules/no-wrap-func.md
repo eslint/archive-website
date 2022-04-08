@@ -1,7 +1,7 @@
 ---
 title: no-wrap-func - Rules
 layout: doc
-edit_link: https://github.com/eslint/eslint/edit/main/docs/rules/no-wrap-func.md
+edit_link: https://github.com/eslint/eslint/edit/main/docs/src/rules/no-wrap-func.md
 
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
@@ -48,4 +48,4 @@ This rule was introduced in ESLint 0.0.9 and removed in 1.0.0-rc-1.
 
 ## Resources
 
-* [Documentation source](https://github.com/eslint/eslint/tree/HEAD/docs/rules/no-wrap-func.md)
+* [Documentation source](https://github.com/eslint/eslint/tree/HEAD/docs/src/rules/no-wrap-func.md)

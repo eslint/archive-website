@@ -1,7 +1,7 @@
 ---
 title: object-property-newline - Rules
 layout: doc
-edit_link: https://github.com/eslint/eslint/edit/main/docs/rules/object-property-newline.md
+edit_link: https://github.com/eslint/eslint/edit/main/docs/src/rules/object-property-newline.md
 rule_type: layout
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
@@ -289,4 +289,4 @@ This rule was introduced in ESLint 2.10.0.
 
 * [Rule source](https://github.com/eslint/eslint/tree/HEAD/lib/rules/object-property-newline.js)
 * [Test source](https://github.com/eslint/eslint/tree/HEAD/tests/lib/rules/object-property-newline.js)
-* [Documentation source](https://github.com/eslint/eslint/tree/HEAD/docs/rules/object-property-newline.md)
+* [Documentation source](https://github.com/eslint/eslint/tree/HEAD/docs/src/rules/object-property-newline.md)

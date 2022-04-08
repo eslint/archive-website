@@ -1,7 +1,7 @@
 ---
 title: lines-between-class-members - Rules
 layout: doc
-edit_link: https://github.com/eslint/eslint/edit/main/docs/rules/lines-between-class-members.md
+edit_link: https://github.com/eslint/eslint/edit/main/docs/src/rules/lines-between-class-members.md
 rule_type: layout
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
@@ -150,4 +150,4 @@ This rule was introduced in ESLint 4.9.0.
 
 * [Rule source](https://github.com/eslint/eslint/tree/HEAD/lib/rules/lines-between-class-members.js)
 * [Test source](https://github.com/eslint/eslint/tree/HEAD/tests/lib/rules/lines-between-class-members.js)
-* [Documentation source](https://github.com/eslint/eslint/tree/HEAD/docs/rules/lines-between-class-members.md)
+* [Documentation source](https://github.com/eslint/eslint/tree/HEAD/docs/src/rules/lines-between-class-members.md)

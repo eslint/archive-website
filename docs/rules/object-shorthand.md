@@ -1,7 +1,7 @@
 ---
 title: object-shorthand - Rules
 layout: doc
-edit_link: https://github.com/eslint/eslint/edit/main/docs/rules/object-shorthand.md
+edit_link: https://github.com/eslint/eslint/edit/main/docs/src/rules/object-shorthand.md
 rule_type: suggestion
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
@@ -270,4 +270,4 @@ This rule was introduced in ESLint 0.20.0.
 
 * [Rule source](https://github.com/eslint/eslint/tree/HEAD/lib/rules/object-shorthand.js)
 * [Test source](https://github.com/eslint/eslint/tree/HEAD/tests/lib/rules/object-shorthand.js)
-* [Documentation source](https://github.com/eslint/eslint/tree/HEAD/docs/rules/object-shorthand.md)
+* [Documentation source](https://github.com/eslint/eslint/tree/HEAD/docs/src/rules/object-shorthand.md)

@@ -1,7 +1,7 @@
 ---
 title: no-unused-labels - Rules
 layout: doc
-edit_link: https://github.com/eslint/eslint/edit/main/docs/rules/no-unused-labels.md
+edit_link: https://github.com/eslint/eslint/edit/main/docs/src/rules/no-unused-labels.md
 rule_type: suggestion
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
@@ -89,4 +89,4 @@ This rule was introduced in ESLint 2.0.0-rc.0.
 
 * [Rule source](https://github.com/eslint/eslint/tree/HEAD/lib/rules/no-unused-labels.js)
 * [Test source](https://github.com/eslint/eslint/tree/HEAD/tests/lib/rules/no-unused-labels.js)
-* [Documentation source](https://github.com/eslint/eslint/tree/HEAD/docs/rules/no-unused-labels.md)
+* [Documentation source](https://github.com/eslint/eslint/tree/HEAD/docs/src/rules/no-unused-labels.md)

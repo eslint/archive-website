@@ -1,7 +1,7 @@
 ---
 title: no-compare-neg-zero - Rules
 layout: doc
-edit_link: https://github.com/eslint/eslint/edit/main/docs/rules/no-compare-neg-zero.md
+edit_link: https://github.com/eslint/eslint/edit/main/docs/src/rules/no-compare-neg-zero.md
 rule_type: problem
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
@@ -52,4 +52,4 @@ This rule was introduced in ESLint 3.17.0.
 
 * [Rule source](https://github.com/eslint/eslint/tree/HEAD/lib/rules/no-compare-neg-zero.js)
 * [Test source](https://github.com/eslint/eslint/tree/HEAD/tests/lib/rules/no-compare-neg-zero.js)
-* [Documentation source](https://github.com/eslint/eslint/tree/HEAD/docs/rules/no-compare-neg-zero.md)
+* [Documentation source](https://github.com/eslint/eslint/tree/HEAD/docs/src/rules/no-compare-neg-zero.md)

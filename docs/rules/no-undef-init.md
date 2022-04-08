@@ -1,7 +1,7 @@
 ---
 title: no-undef-init - Rules
 layout: doc
-edit_link: https://github.com/eslint/eslint/edit/main/docs/rules/no-undef-init.md
+edit_link: https://github.com/eslint/eslint/edit/main/docs/src/rules/no-undef-init.md
 rule_type: suggestion
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
@@ -146,4 +146,4 @@ This rule was introduced in ESLint 0.0.6.
 
 * [Rule source](https://github.com/eslint/eslint/tree/HEAD/lib/rules/no-undef-init.js)
 * [Test source](https://github.com/eslint/eslint/tree/HEAD/tests/lib/rules/no-undef-init.js)
-* [Documentation source](https://github.com/eslint/eslint/tree/HEAD/docs/rules/no-undef-init.md)
+* [Documentation source](https://github.com/eslint/eslint/tree/HEAD/docs/src/rules/no-undef-init.md)

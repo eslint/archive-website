@@ -1,7 +1,7 @@
 ---
 title: no-promise-executor-return - Rules
 layout: doc
-edit_link: https://github.com/eslint/eslint/edit/main/docs/rules/no-promise-executor-return.md
+edit_link: https://github.com/eslint/eslint/edit/main/docs/src/rules/no-promise-executor-return.md
 rule_type: problem
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
@@ -113,4 +113,4 @@ This rule was introduced in ESLint 7.3.0.
 
 * [Rule source](https://github.com/eslint/eslint/tree/HEAD/lib/rules/no-promise-executor-return.js)
 * [Test source](https://github.com/eslint/eslint/tree/HEAD/tests/lib/rules/no-promise-executor-return.js)
-* [Documentation source](https://github.com/eslint/eslint/tree/HEAD/docs/rules/no-promise-executor-return.md)
+* [Documentation source](https://github.com/eslint/eslint/tree/HEAD/docs/src/rules/no-promise-executor-return.md)

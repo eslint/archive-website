@@ -1,7 +1,7 @@
 ---
 title: no-with - Rules
 layout: doc
-edit_link: https://github.com/eslint/eslint/edit/main/docs/rules/no-with.md
+edit_link: https://github.com/eslint/eslint/edit/main/docs/src/rules/no-with.md
 rule_type: suggestion
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
@@ -55,4 +55,4 @@ This rule was introduced in ESLint 0.0.2.
 
 * [Rule source](https://github.com/eslint/eslint/tree/HEAD/lib/rules/no-with.js)
 * [Test source](https://github.com/eslint/eslint/tree/HEAD/tests/lib/rules/no-with.js)
-* [Documentation source](https://github.com/eslint/eslint/tree/HEAD/docs/rules/no-with.md)
+* [Documentation source](https://github.com/eslint/eslint/tree/HEAD/docs/src/rules/no-with.md)

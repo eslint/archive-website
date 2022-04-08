@@ -1,7 +1,7 @@
 ---
 title: space-infix-ops - Rules
 layout: doc
-edit_link: https://github.com/eslint/eslint/edit/main/docs/rules/space-infix-ops.md
+edit_link: https://github.com/eslint/eslint/edit/main/docs/src/rules/space-infix-ops.md
 rule_type: layout
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
@@ -18,7 +18,7 @@ While formatting preferences are very personal, a number of style guides require
 var sum = 1 + 2;
 ```
 
-The proponents of these extra spaces believe it make the code easier to read and can more easily highlight potential errors, such as:
+Proponents of this rule believe that it makes code easier to read and can more easily highlight potential errors, such as:
 
 ```js
 var sum = i+++2;
@@ -98,4 +98,4 @@ This rule was introduced in ESLint 0.2.0.
 
 * [Rule source](https://github.com/eslint/eslint/tree/HEAD/lib/rules/space-infix-ops.js)
 * [Test source](https://github.com/eslint/eslint/tree/HEAD/tests/lib/rules/space-infix-ops.js)
-* [Documentation source](https://github.com/eslint/eslint/tree/HEAD/docs/rules/space-infix-ops.md)
+* [Documentation source](https://github.com/eslint/eslint/tree/HEAD/docs/src/rules/space-infix-ops.md)

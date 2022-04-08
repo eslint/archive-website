@@ -1,7 +1,7 @@
 ---
 title: Documentation
 layout: doc
-edit_link: https://github.com/eslint/eslint/edit/main/docs/README.md
+edit_link: https://github.com/eslint/eslint/edit/main/docs/src/index.md
 
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->

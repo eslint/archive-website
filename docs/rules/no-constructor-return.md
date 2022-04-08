@@ -1,7 +1,7 @@
 ---
 title: no-constructor-return - Rules
 layout: doc
-edit_link: https://github.com/eslint/eslint/edit/main/docs/rules/no-constructor-return.md
+edit_link: https://github.com/eslint/eslint/edit/main/docs/src/rules/no-constructor-return.md
 rule_type: problem
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
@@ -67,4 +67,4 @@ This rule was introduced in ESLint 6.7.0.
 
 * [Rule source](https://github.com/eslint/eslint/tree/HEAD/lib/rules/no-constructor-return.js)
 * [Test source](https://github.com/eslint/eslint/tree/HEAD/tests/lib/rules/no-constructor-return.js)
-* [Documentation source](https://github.com/eslint/eslint/tree/HEAD/docs/rules/no-constructor-return.md)
+* [Documentation source](https://github.com/eslint/eslint/tree/HEAD/docs/src/rules/no-constructor-return.md)

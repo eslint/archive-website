@@ -1,7 +1,7 @@
 ---
 title: use-isnan - Rules
 layout: doc
-edit_link: https://github.com/eslint/eslint/edit/main/docs/rules/use-isnan.md
+edit_link: https://github.com/eslint/eslint/edit/main/docs/src/rules/use-isnan.md
 rule_type: problem
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
@@ -268,4 +268,4 @@ This rule was introduced in ESLint 0.0.6.
 
 * [Rule source](https://github.com/eslint/eslint/tree/HEAD/lib/rules/use-isnan.js)
 * [Test source](https://github.com/eslint/eslint/tree/HEAD/tests/lib/rules/use-isnan.js)
-* [Documentation source](https://github.com/eslint/eslint/tree/HEAD/docs/rules/use-isnan.md)
+* [Documentation source](https://github.com/eslint/eslint/tree/HEAD/docs/src/rules/use-isnan.md)

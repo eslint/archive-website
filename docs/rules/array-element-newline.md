@@ -1,7 +1,7 @@
 ---
 title: array-element-newline - Rules
 layout: doc
-edit_link: https://github.com/eslint/eslint/edit/main/docs/rules/array-element-newline.md
+edit_link: https://github.com/eslint/eslint/edit/main/docs/src/rules/array-element-newline.md
 rule_type: layout
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
@@ -409,4 +409,4 @@ This rule was introduced in ESLint 4.0.0-rc.0.
 
 * [Rule source](https://github.com/eslint/eslint/tree/HEAD/lib/rules/array-element-newline.js)
 * [Test source](https://github.com/eslint/eslint/tree/HEAD/tests/lib/rules/array-element-newline.js)
-* [Documentation source](https://github.com/eslint/eslint/tree/HEAD/docs/rules/array-element-newline.md)
+* [Documentation source](https://github.com/eslint/eslint/tree/HEAD/docs/src/rules/array-element-newline.md)

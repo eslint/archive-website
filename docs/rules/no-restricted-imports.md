@@ -1,7 +1,7 @@
 ---
 title: no-restricted-imports - Rules
 layout: doc
-edit_link: https://github.com/eslint/eslint/edit/main/docs/rules/no-restricted-imports.md
+edit_link: https://github.com/eslint/eslint/edit/main/docs/src/rules/no-restricted-imports.md
 rule_type: suggestion
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
@@ -269,4 +269,4 @@ This rule was introduced in ESLint 2.0.0-alpha-1.
 
 * [Rule source](https://github.com/eslint/eslint/tree/HEAD/lib/rules/no-restricted-imports.js)
 * [Test source](https://github.com/eslint/eslint/tree/HEAD/tests/lib/rules/no-restricted-imports.js)
-* [Documentation source](https://github.com/eslint/eslint/tree/HEAD/docs/rules/no-restricted-imports.md)
+* [Documentation source](https://github.com/eslint/eslint/tree/HEAD/docs/src/rules/no-restricted-imports.md)

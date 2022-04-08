@@ -1,7 +1,7 @@
 ---
 title: comma-style - Rules
 layout: doc
-edit_link: https://github.com/eslint/eslint/edit/main/docs/rules/comma-style.md
+edit_link: https://github.com/eslint/eslint/edit/main/docs/src/rules/comma-style.md
 rule_type: layout
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
@@ -188,4 +188,4 @@ This rule was introduced in ESLint 0.9.0.
 
 * [Rule source](https://github.com/eslint/eslint/tree/HEAD/lib/rules/comma-style.js)
 * [Test source](https://github.com/eslint/eslint/tree/HEAD/tests/lib/rules/comma-style.js)
-* [Documentation source](https://github.com/eslint/eslint/tree/HEAD/docs/rules/comma-style.md)
+* [Documentation source](https://github.com/eslint/eslint/tree/HEAD/docs/src/rules/comma-style.md)

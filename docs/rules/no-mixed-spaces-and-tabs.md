@@ -1,7 +1,7 @@
 ---
 title: no-mixed-spaces-and-tabs - Rules
 layout: doc
-edit_link: https://github.com/eslint/eslint/edit/main/docs/rules/no-mixed-spaces-and-tabs.md
+edit_link: https://github.com/eslint/eslint/edit/main/docs/src/rules/no-mixed-spaces-and-tabs.md
 rule_type: layout
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
@@ -83,4 +83,4 @@ This rule was introduced in ESLint 0.7.1.
 
 * [Rule source](https://github.com/eslint/eslint/tree/HEAD/lib/rules/no-mixed-spaces-and-tabs.js)
 * [Test source](https://github.com/eslint/eslint/tree/HEAD/tests/lib/rules/no-mixed-spaces-and-tabs.js)
-* [Documentation source](https://github.com/eslint/eslint/tree/HEAD/docs/rules/no-mixed-spaces-and-tabs.md)
+* [Documentation source](https://github.com/eslint/eslint/tree/HEAD/docs/src/rules/no-mixed-spaces-and-tabs.md)

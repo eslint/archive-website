@@ -1,7 +1,7 @@
 ---
 title: space-unary-ops - Rules
 layout: doc
-edit_link: https://github.com/eslint/eslint/edit/main/docs/rules/space-unary-ops.md
+edit_link: https://github.com/eslint/eslint/edit/main/docs/src/rules/space-unary-ops.md
 rule_type: layout
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
@@ -167,4 +167,4 @@ This rule was introduced in ESLint 0.10.0.
 
 * [Rule source](https://github.com/eslint/eslint/tree/HEAD/lib/rules/space-unary-ops.js)
 * [Test source](https://github.com/eslint/eslint/tree/HEAD/tests/lib/rules/space-unary-ops.js)
-* [Documentation source](https://github.com/eslint/eslint/tree/HEAD/docs/rules/space-unary-ops.md)
+* [Documentation source](https://github.com/eslint/eslint/tree/HEAD/docs/src/rules/space-unary-ops.md)

@@ -1,7 +1,7 @@
 ---
 title: arrow-parens - Rules
 layout: doc
-edit_link: https://github.com/eslint/eslint/edit/main/docs/rules/arrow-parens.md
+edit_link: https://github.com/eslint/eslint/edit/main/docs/src/rules/arrow-parens.md
 rule_type: layout
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
@@ -247,4 +247,4 @@ This rule was introduced in ESLint 1.0.0-rc-1.
 
 * [Rule source](https://github.com/eslint/eslint/tree/HEAD/lib/rules/arrow-parens.js)
 * [Test source](https://github.com/eslint/eslint/tree/HEAD/tests/lib/rules/arrow-parens.js)
-* [Documentation source](https://github.com/eslint/eslint/tree/HEAD/docs/rules/arrow-parens.md)
+* [Documentation source](https://github.com/eslint/eslint/tree/HEAD/docs/src/rules/arrow-parens.md)

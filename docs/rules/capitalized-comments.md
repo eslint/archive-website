@@ -1,7 +1,7 @@
 ---
 title: capitalized-comments - Rules
 layout: doc
-edit_link: https://github.com/eslint/eslint/edit/main/docs/rules/capitalized-comments.md
+edit_link: https://github.com/eslint/eslint/edit/main/docs/src/rules/capitalized-comments.md
 rule_type: suggestion
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
@@ -268,4 +268,4 @@ This rule was introduced in ESLint 3.11.0.
 
 * [Rule source](https://github.com/eslint/eslint/tree/HEAD/lib/rules/capitalized-comments.js)
 * [Test source](https://github.com/eslint/eslint/tree/HEAD/tests/lib/rules/capitalized-comments.js)
-* [Documentation source](https://github.com/eslint/eslint/tree/HEAD/docs/rules/capitalized-comments.md)
+* [Documentation source](https://github.com/eslint/eslint/tree/HEAD/docs/src/rules/capitalized-comments.md)

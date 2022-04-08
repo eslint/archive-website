@@ -1,7 +1,7 @@
 ---
 title: no-extra-parens - Rules
 layout: doc
-edit_link: https://github.com/eslint/eslint/edit/main/docs/rules/no-extra-parens.md
+edit_link: https://github.com/eslint/eslint/edit/main/docs/src/rules/no-extra-parens.md
 rule_type: layout
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
@@ -319,4 +319,4 @@ This rule was introduced in ESLint 0.1.4.
 
 * [Rule source](https://github.com/eslint/eslint/tree/HEAD/lib/rules/no-extra-parens.js)
 * [Test source](https://github.com/eslint/eslint/tree/HEAD/tests/lib/rules/no-extra-parens.js)
-* [Documentation source](https://github.com/eslint/eslint/tree/HEAD/docs/rules/no-extra-parens.md)
+* [Documentation source](https://github.com/eslint/eslint/tree/HEAD/docs/src/rules/no-extra-parens.md)

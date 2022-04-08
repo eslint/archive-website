@@ -1,7 +1,7 @@
 ---
 title: default-case-last - Rules
 layout: doc
-edit_link: https://github.com/eslint/eslint/edit/main/docs/rules/default-case-last.md
+edit_link: https://github.com/eslint/eslint/edit/main/docs/src/rules/default-case-last.md
 rule_type: suggestion
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
@@ -142,4 +142,4 @@ This rule was introduced in ESLint 7.0.0-alpha.0.
 
 * [Rule source](https://github.com/eslint/eslint/tree/HEAD/lib/rules/default-case-last.js)
 * [Test source](https://github.com/eslint/eslint/tree/HEAD/tests/lib/rules/default-case-last.js)
-* [Documentation source](https://github.com/eslint/eslint/tree/HEAD/docs/rules/default-case-last.md)
+* [Documentation source](https://github.com/eslint/eslint/tree/HEAD/docs/src/rules/default-case-last.md)

@@ -1,7 +1,7 @@
 ---
 title: require-atomic-updates - Rules
 layout: doc
-edit_link: https://github.com/eslint/eslint/edit/main/docs/rules/require-atomic-updates.md
+edit_link: https://github.com/eslint/eslint/edit/main/docs/src/rules/require-atomic-updates.md
 rule_type: problem
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
@@ -199,4 +199,4 @@ This rule was introduced in ESLint 5.3.0.
 
 * [Rule source](https://github.com/eslint/eslint/tree/HEAD/lib/rules/require-atomic-updates.js)
 * [Test source](https://github.com/eslint/eslint/tree/HEAD/tests/lib/rules/require-atomic-updates.js)
-* [Documentation source](https://github.com/eslint/eslint/tree/HEAD/docs/rules/require-atomic-updates.md)
+* [Documentation source](https://github.com/eslint/eslint/tree/HEAD/docs/src/rules/require-atomic-updates.md)

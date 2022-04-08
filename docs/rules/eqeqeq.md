@@ -1,7 +1,7 @@
 ---
 title: eqeqeq - Rules
 layout: doc
-edit_link: https://github.com/eslint/eslint/edit/main/docs/rules/eqeqeq.md
+edit_link: https://github.com/eslint/eslint/edit/main/docs/src/rules/eqeqeq.md
 rule_type: suggestion
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
@@ -144,4 +144,4 @@ This rule was introduced in ESLint 0.0.2.
 
 * [Rule source](https://github.com/eslint/eslint/tree/HEAD/lib/rules/eqeqeq.js)
 * [Test source](https://github.com/eslint/eslint/tree/HEAD/tests/lib/rules/eqeqeq.js)
-* [Documentation source](https://github.com/eslint/eslint/tree/HEAD/docs/rules/eqeqeq.md)
+* [Documentation source](https://github.com/eslint/eslint/tree/HEAD/docs/src/rules/eqeqeq.md)

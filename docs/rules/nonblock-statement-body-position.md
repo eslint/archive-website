@@ -1,7 +1,7 @@
 ---
 title: nonblock-statement-body-position - Rules
 layout: doc
-edit_link: https://github.com/eslint/eslint/edit/main/docs/rules/nonblock-statement-body-position.md
+edit_link: https://github.com/eslint/eslint/edit/main/docs/src/rules/nonblock-statement-body-position.md
 rule_type: layout
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
@@ -177,4 +177,4 @@ This rule was introduced in ESLint 3.17.0.
 
 * [Rule source](https://github.com/eslint/eslint/tree/HEAD/lib/rules/nonblock-statement-body-position.js)
 * [Test source](https://github.com/eslint/eslint/tree/HEAD/tests/lib/rules/nonblock-statement-body-position.js)
-* [Documentation source](https://github.com/eslint/eslint/tree/HEAD/docs/rules/nonblock-statement-body-position.md)
+* [Documentation source](https://github.com/eslint/eslint/tree/HEAD/docs/src/rules/nonblock-statement-body-position.md)

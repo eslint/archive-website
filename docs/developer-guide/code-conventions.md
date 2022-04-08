@@ -1,7 +1,7 @@
 ---
 title: Code Conventions
 layout: doc
-edit_link: https://github.com/eslint/eslint/edit/main/docs/developer-guide/code-conventions.md
+edit_link: https://github.com/eslint/eslint/edit/main/docs/src/developer-guide/code-conventions.md
 
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->

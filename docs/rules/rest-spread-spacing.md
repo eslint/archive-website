@@ -1,7 +1,7 @@
 ---
 title: rest-spread-spacing - Rules
 layout: doc
-edit_link: https://github.com/eslint/eslint/edit/main/docs/rules/rest-spread-spacing.md
+edit_link: https://github.com/eslint/eslint/edit/main/docs/src/rules/rest-spread-spacing.md
 rule_type: layout
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
@@ -159,4 +159,4 @@ This rule was introduced in ESLint 2.12.0.
 
 * [Rule source](https://github.com/eslint/eslint/tree/HEAD/lib/rules/rest-spread-spacing.js)
 * [Test source](https://github.com/eslint/eslint/tree/HEAD/tests/lib/rules/rest-spread-spacing.js)
-* [Documentation source](https://github.com/eslint/eslint/tree/HEAD/docs/rules/rest-spread-spacing.md)
+* [Documentation source](https://github.com/eslint/eslint/tree/HEAD/docs/src/rules/rest-spread-spacing.md)
