@@ -1,12 +1,9 @@
 ---
-title: no-multi-str - Rules
+title: no-multi-str
 layout: doc
 edit_link: https://github.com/eslint/eslint/edit/main/docs/src/rules/no-multi-str.md
 rule_type: suggestion
 ---
-<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
-
-# no-multi-str
 
 Disallows multiline strings.
 

@@ -1,14 +1,11 @@
 ---
-title: object-shorthand - Rules
+title: object-shorthand
 layout: doc
 edit_link: https://github.com/eslint/eslint/edit/main/docs/src/rules/object-shorthand.md
 rule_type: suggestion
 ---
-<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
-# object-shorthand
-
-(fixable) The `--fix` option on the [command line](../user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
+<!--FIXABLE-->
 
 Requires or disallows method and property shorthand syntax for object literals.
 

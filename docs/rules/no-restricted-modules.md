@@ -1,12 +1,9 @@
 ---
-title: no-restricted-modules - Rules
+title: no-restricted-modules
 layout: doc
 edit_link: https://github.com/eslint/eslint/edit/main/docs/src/rules/no-restricted-modules.md
 rule_type: suggestion
 ---
-<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
-
-# no-restricted-modules
 
 Disallows Node.js modules.
 

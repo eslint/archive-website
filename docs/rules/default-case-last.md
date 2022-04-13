@@ -1,12 +1,9 @@
 ---
-title: default-case-last - Rules
+title: default-case-last
 layout: doc
 edit_link: https://github.com/eslint/eslint/edit/main/docs/src/rules/default-case-last.md
 rule_type: suggestion
 ---
-<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
-
-# default-case-last
 
 Enforces default clauses in switch statements to be last.
 

@@ -1,12 +1,9 @@
 ---
-title: global-require - Rules
+title: global-require
 layout: doc
 edit_link: https://github.com/eslint/eslint/edit/main/docs/src/rules/global-require.md
 rule_type: suggestion
 ---
-<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
-
-# global-require
 
 Enforces `require()` on the top-level module scope.
 

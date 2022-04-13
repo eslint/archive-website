@@ -1,12 +1,9 @@
 ---
-title: no-empty-class - Rules
+title: no-empty-class
 layout: doc
 edit_link: https://github.com/eslint/eslint/edit/main/docs/src/rules/no-empty-class.md
 
 ---
-<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
-
-# no-empty-class
 
 Disallows empty character classes in regular expressions.
 
@@ -41,6 +38,10 @@ var foo = /^abc[a-z]/;
 
 var bar = new RegExp("^abc[]");
 ```
+
+## Resources
+
+* [Documentation source](https://github.com/eslint/eslint/tree/HEAD/docs/src/rules/no-empty-class.md)
 
 ## Version
 

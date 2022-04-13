@@ -1,14 +1,11 @@
 ---
-title: prefer-exponentiation-operator - Rules
+title: prefer-exponentiation-operator
 layout: doc
 edit_link: https://github.com/eslint/eslint/edit/main/docs/src/rules/prefer-exponentiation-operator.md
 rule_type: suggestion
 ---
-<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
-# prefer-exponentiation-operator
-
-(fixable) The `--fix` option on the [command line](../user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
+<!--FIXABLE-->
 
 Disallows the use of `Math.pow` in favor of the `**` operator.
 

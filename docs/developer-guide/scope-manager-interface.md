@@ -4,9 +4,6 @@ layout: doc
 edit_link: https://github.com/eslint/eslint/edit/main/docs/src/developer-guide/scope-manager-interface.md
 
 ---
-<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
-
-# ScopeManager
 
 This document was written based on the implementation of [eslint-scope](https://github.com/eslint/eslint-scope), a fork of [escope](https://github.com/estools/escope), and deprecates some members ESLint is not using.
 

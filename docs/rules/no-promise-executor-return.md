@@ -1,12 +1,9 @@
 ---
-title: no-promise-executor-return - Rules
+title: no-promise-executor-return
 layout: doc
 edit_link: https://github.com/eslint/eslint/edit/main/docs/src/rules/no-promise-executor-return.md
 rule_type: problem
 ---
-<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
-
-# no-promise-executor-return
 
 Disallows returning values from Promise executor functions.
 

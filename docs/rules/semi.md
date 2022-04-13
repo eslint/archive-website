@@ -1,14 +1,11 @@
 ---
-title: semi - Rules
+title: semi
 layout: doc
 edit_link: https://github.com/eslint/eslint/edit/main/docs/src/rules/semi.md
 rule_type: layout
 ---
-<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
-# semi
-
-(fixable) The `--fix` option on the [command line](../user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
+<!--FIXABLE-->
 
 Requires or disallows semicolons instead of ASI.
 

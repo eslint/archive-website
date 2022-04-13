@@ -1,12 +1,9 @@
 ---
-title: no-restricted-exports - Rules
+title: no-restricted-exports
 layout: doc
 edit_link: https://github.com/eslint/eslint/edit/main/docs/src/rules/no-restricted-exports.md
 rule_type: suggestion
 ---
-<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
-
-# no-restricted-exports
 
 Disallows specified names in exports.
 

@@ -1,12 +1,9 @@
 ---
-title: no-unused-private-class-members - Rules
+title: no-unused-private-class-members
 layout: doc
 edit_link: https://github.com/eslint/eslint/edit/main/docs/src/rules/no-unused-private-class-members.md
 rule_type: problem
 ---
-<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
-
-# no-unused-private-class-members
 
 Disallows unused private class members.
 

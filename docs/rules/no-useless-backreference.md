@@ -1,14 +1,11 @@
 ---
-title: no-useless-backreference - Rules
+title: no-useless-backreference
 layout: doc
 edit_link: https://github.com/eslint/eslint/edit/main/docs/src/rules/no-useless-backreference.md
 rule_type: problem
 ---
-<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
-# no-useless-backreference
-
-(recommended) The `"extends": "eslint:recommended"` property in a configuration file enables this rule.
+<!--RECOMMENDED-->
 
 Disallows useless backreferences in regular expressions.
 

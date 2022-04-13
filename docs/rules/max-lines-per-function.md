@@ -1,12 +1,9 @@
 ---
-title: max-lines-per-function - Rules
+title: max-lines-per-function
 layout: doc
 edit_link: https://github.com/eslint/eslint/edit/main/docs/src/rules/max-lines-per-function.md
 rule_type: suggestion
 ---
-<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
-
-# max-lines-per-function
 
 Enforces a maximum function length.
 

@@ -1,12 +1,9 @@
 ---
-title: global-strict - Rules
+title: global-strict
 layout: doc
 edit_link: https://github.com/eslint/eslint/edit/main/docs/src/rules/global-strict.md
 
 ---
-<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
-
-# global-strict
 
 Requires or disallows strict mode directives in the global scope.
 
@@ -69,6 +66,10 @@ Warns whenever `"use strict"` is used in the global scope such that it could con
 ## When Not To Use It
 
 When a project may use non-strict-mode code side by side with strict-mode code and the files are not concatenated, the decision to use global strict mode can be made on an individual basis, rendering this rule unnecessary.
+
+## Resources
+
+* [Documentation source](https://github.com/eslint/eslint/tree/HEAD/docs/src/rules/global-strict.md)
 
 ## Version
 

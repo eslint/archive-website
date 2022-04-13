@@ -1,12 +1,9 @@
 ---
-title: accessor-pairs - Rules
+title: accessor-pairs
 layout: doc
 edit_link: https://github.com/eslint/eslint/edit/main/docs/src/rules/accessor-pairs.md
 rule_type: suggestion
 ---
-<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
-
-# accessor-pairs
 
 Enforces getter/setter pairs in objects and classes.
 

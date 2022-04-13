@@ -1,12 +1,9 @@
 ---
-title: no-void - Rules
+title: no-void
 layout: doc
 edit_link: https://github.com/eslint/eslint/edit/main/docs/src/rules/no-void.md
 rule_type: suggestion
 ---
-<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
-
-# no-void
 
 Disallows use of the void operator.
 

@@ -1,12 +1,9 @@
 ---
-title: no-array-constructor - Rules
+title: no-array-constructor
 layout: doc
 edit_link: https://github.com/eslint/eslint/edit/main/docs/src/rules/no-array-constructor.md
 rule_type: suggestion
 ---
-<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
-
-# no-array-constructor
 
 Disallows `Array` constructors.
 

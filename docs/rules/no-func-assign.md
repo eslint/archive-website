@@ -1,14 +1,11 @@
 ---
-title: no-func-assign - Rules
+title: no-func-assign
 layout: doc
 edit_link: https://github.com/eslint/eslint/edit/main/docs/src/rules/no-func-assign.md
 rule_type: problem
 ---
-<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
-# no-func-assign
-
-(recommended) The `"extends": "eslint:recommended"` property in a configuration file enables this rule.
+<!--RECOMMENDED-->
 
 Disallows reassigning `function` declarations.
 

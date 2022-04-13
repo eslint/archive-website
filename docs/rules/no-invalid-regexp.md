@@ -1,14 +1,11 @@
 ---
-title: no-invalid-regexp - Rules
+title: no-invalid-regexp
 layout: doc
 edit_link: https://github.com/eslint/eslint/edit/main/docs/src/rules/no-invalid-regexp.md
 rule_type: problem
 ---
-<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
-# no-invalid-regexp
-
-(recommended) The `"extends": "eslint:recommended"` property in a configuration file enables this rule.
+<!--RECOMMENDED-->
 
 Disallows invalid regular expression strings in `RegExp` constructors.
 

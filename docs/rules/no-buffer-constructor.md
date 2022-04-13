@@ -1,12 +1,9 @@
 ---
-title: no-buffer-constructor - Rules
+title: no-buffer-constructor
 layout: doc
 edit_link: https://github.com/eslint/eslint/edit/main/docs/src/rules/no-buffer-constructor.md
 rule_type: problem
 ---
-<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
-
-# no-buffer-constructor
 
 Disallows use of the `Buffer()` constructor.
 

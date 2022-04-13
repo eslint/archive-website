@@ -1,14 +1,11 @@
 ---
-title: space-before-blocks - Rules
+title: space-before-blocks
 layout: doc
 edit_link: https://github.com/eslint/eslint/edit/main/docs/src/rules/space-before-blocks.md
 rule_type: layout
 ---
-<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
-# space-before-blocks
-
-(fixable) The `--fix` option on the [command line](../user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
+<!--FIXABLE-->
 
 Requires Or disallows space before blocks.
 

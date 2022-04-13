@@ -4,9 +4,6 @@ layout: doc
 edit_link: https://github.com/eslint/eslint/edit/main/docs/src/maintainer-guide/releases.md
 
 ---
-<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
-
-# Managing Releases
 
 Releases are when a project formally publishes a new version so the community can use it. There are two types of releases:
 

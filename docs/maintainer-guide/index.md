@@ -4,9 +4,6 @@ layout: doc
 edit_link: https://github.com/eslint/eslint/edit/main/docs/src/maintainer-guide/README.md
 
 ---
-<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
-
-# Maintainer Guide
 
 This guide is intended for those who work as part of the ESLint project team.
 

@@ -1,12 +1,9 @@
 ---
-title: no-continue - Rules
+title: no-continue
 layout: doc
 edit_link: https://github.com/eslint/eslint/edit/main/docs/src/rules/no-continue.md
 rule_type: suggestion
 ---
-<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
-
-# no-continue
 
 Disallows `continue` statements.
 

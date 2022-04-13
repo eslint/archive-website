@@ -4,9 +4,6 @@ layout: doc
 edit_link: https://github.com/eslint/eslint/edit/main/docs/src/developer-guide/contributing/rule-changes.md
 
 ---
-<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
-
-# Rule Changes
 
 Occasionally, a core ESLint rule needs to be changed. This is not necessarily a bug, but rather, an enhancement that makes a rule more configurable. In those situations, we will consider making changes to rules.
 

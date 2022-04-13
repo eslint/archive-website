@@ -1,12 +1,9 @@
 ---
-title: no-eval - Rules
+title: no-eval
 layout: doc
 edit_link: https://github.com/eslint/eslint/edit/main/docs/src/rules/no-eval.md
 rule_type: suggestion
 ---
-<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
-
-# no-eval
 
 Disallows eval().
 

@@ -1,14 +1,11 @@
 ---
-title: no-multiple-empty-lines - Rules
+title: no-multiple-empty-lines
 layout: doc
 edit_link: https://github.com/eslint/eslint/edit/main/docs/src/rules/no-multiple-empty-lines.md
 rule_type: layout
 ---
-<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
-# no-multiple-empty-lines
-
-(fixable) The `--fix` option on the [command line](../user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
+<!--FIXABLE-->
 
 Disallows multiple empty lines.
 
@@ -36,7 +33,6 @@ Examples of **incorrect** code for this rule with the default `{ "max": 2 }` opt
 var foo = 5;
 
 
-
 var bar = 3;
 ```
 
@@ -46,7 +42,6 @@ Examples of **correct** code for this rule with the default `{ "max": 2 }` optio
 /*eslint no-multiple-empty-lines: "error"*/
 
 var foo = 5;
-
 
 var bar = 3;
 ```
@@ -60,9 +55,7 @@ Examples of **incorrect** code for this rule with the `{ max: 2, maxEOF: 0 }` op
 
 var foo = 5;
 
-
 var bar = 3;
-
 
 ```
 
@@ -72,7 +65,6 @@ Examples of **correct** code for this rule with the `{ max: 2, maxEOF: 0 }` opti
 /*eslint no-multiple-empty-lines: ["error", { "max": 2, "maxEOF": 0 }]*/
 
 var foo = 5;
-
 
 var bar = 3;
 ```
@@ -111,9 +103,7 @@ Examples of **incorrect** code for this rule with the `{ max: 2, maxBOF: 1 }` op
 ```js
 /*eslint no-multiple-empty-lines: ["error", { "max": 2, "maxBOF": 1 }]*/
 
-
 var foo = 5;
-
 
 var bar = 3;
 ```
@@ -124,7 +114,6 @@ Examples of **correct** code for this rule with the `{ max: 2, maxBOF: 1 }` opti
 /*eslint no-multiple-empty-lines: ["error", { "max": 2, "maxBOF": 1}]*/
 
 var foo = 5;
-
 
 var bar = 3;
 ```

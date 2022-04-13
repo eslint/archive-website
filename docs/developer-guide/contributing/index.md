@@ -4,9 +4,6 @@ layout: doc
 edit_link: https://github.com/eslint/eslint/edit/main/docs/src/developer-guide/contributing/README.md
 
 ---
-<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
-
-# Contributing
 
 One of the great things about open source projects is that anyone can contribute in any number of meaningful ways. ESLint couldn't exist without the help of the many contributors it's had since the project began, and we want you to feel like you can contribute and make a difference as well.
 

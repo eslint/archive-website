@@ -4,9 +4,6 @@ layout: doc
 edit_link: https://github.com/eslint/eslint/edit/main/docs/src/user-guide/configuring/configuration-files.md
 
 ---
-<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
-
-# Configuration Files
 
 * [Configuration File Formats](#configuration-file-formats)
 * [Using Configuration Files](#using-configuration-files)

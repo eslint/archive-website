@@ -1,14 +1,11 @@
 ---
-title: no-self-assign - Rules
+title: no-self-assign
 layout: doc
 edit_link: https://github.com/eslint/eslint/edit/main/docs/src/rules/no-self-assign.md
 rule_type: problem
 ---
-<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
-# no-self-assign
-
-(recommended) The `"extends": "eslint:recommended"` property in a configuration file enables this rule.
+<!--RECOMMENDED-->
 
 Disallows assignments where both sides are exactly the same.
 

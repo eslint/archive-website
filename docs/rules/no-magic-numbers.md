@@ -1,12 +1,9 @@
 ---
-title: no-magic-numbers - Rules
+title: no-magic-numbers
 layout: doc
 edit_link: https://github.com/eslint/eslint/edit/main/docs/src/rules/no-magic-numbers.md
 rule_type: suggestion
 ---
-<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
-
-# no-magic-numbers
 
 Disallows magic numbers.
 

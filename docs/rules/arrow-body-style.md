@@ -1,14 +1,11 @@
 ---
-title: arrow-body-style - Rules
+title: arrow-body-style
 layout: doc
 edit_link: https://github.com/eslint/eslint/edit/main/docs/src/rules/arrow-body-style.md
 rule_type: suggestion
 ---
-<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
-# arrow-body-style
-
-(fixable) The `--fix` option on the [command line](../user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
+<!--FIXABLE-->
 
 Requires braces in arrow function bodies.
 

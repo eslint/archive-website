@@ -1,14 +1,11 @@
 ---
-title: no-setter-return - Rules
+title: no-setter-return
 layout: doc
 edit_link: https://github.com/eslint/eslint/edit/main/docs/src/rules/no-setter-return.md
 rule_type: problem
 ---
-<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
-# no-setter-return
-
-(recommended) The `"extends": "eslint:recommended"` property in a configuration file enables this rule.
+<!--RECOMMENDED-->
 
 Disallows returning values from setters.
 

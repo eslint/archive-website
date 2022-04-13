@@ -1,14 +1,11 @@
 ---
-title: no-unneeded-ternary - Rules
+title: no-unneeded-ternary
 layout: doc
 edit_link: https://github.com/eslint/eslint/edit/main/docs/src/rules/no-unneeded-ternary.md
 rule_type: suggestion
 ---
-<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
-# no-unneeded-ternary
-
-(fixable) The `--fix` option on the [command line](../user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
+<!--FIXABLE-->
 
 Disallows ternary operators when simpler alternatives exist.
 
@@ -21,7 +18,6 @@ var isYes = answer === 1 ? true : false;
 
 // Good
 var isYes = answer === 1;
-
 
 // Bad
 var isNo = answer === 1 ? false : true;

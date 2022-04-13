@@ -1,12 +1,9 @@
 ---
-title: no-self-compare - Rules
+title: no-self-compare
 layout: doc
 edit_link: https://github.com/eslint/eslint/edit/main/docs/src/rules/no-self-compare.md
 rule_type: problem
 ---
-<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
-
-# no-self-compare
 
 Disallows comparisons where both sides are exactly the same.
 

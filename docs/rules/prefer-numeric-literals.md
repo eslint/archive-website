@@ -1,14 +1,11 @@
 ---
-title: prefer-numeric-literals - Rules
+title: prefer-numeric-literals
 layout: doc
 edit_link: https://github.com/eslint/eslint/edit/main/docs/src/rules/prefer-numeric-literals.md
 rule_type: suggestion
 ---
-<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
-# prefer-numeric-literals
-
-(fixable) The `--fix` option on the [command line](../user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
+<!--FIXABLE-->
 
 Disallows `parseInt()` and `Number.parseInt()` in favor of binary, octal, and hexadecimal literals.
 

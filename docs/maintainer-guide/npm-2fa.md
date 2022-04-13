@@ -4,9 +4,6 @@ layout: doc
 edit_link: https://github.com/eslint/eslint/edit/master/docs/maintainer-guide/npm-2fa.md
 
 ---
-<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
-
-# npm two-factor authentication
 
 The `eslint` npm account has two-factor authentication (2FA) enabled. The 2FA secret is distributed using a team on [Keybase](https://keybase.io). Anyone doing a release of a package from the Jenkins server needs to have access to the 2FA secret.
 

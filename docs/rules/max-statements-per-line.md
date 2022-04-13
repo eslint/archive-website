@@ -1,12 +1,9 @@
 ---
-title: max-statements-per-line - Rules
+title: max-statements-per-line
 layout: doc
 edit_link: https://github.com/eslint/eslint/edit/main/docs/src/rules/max-statements-per-line.md
 rule_type: layout
 ---
-<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
-
-# max-statements-per-line
 
 Enforces a maximum number of statements allowed per line.
 

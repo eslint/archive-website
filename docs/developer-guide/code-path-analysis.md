@@ -4,9 +4,6 @@ layout: doc
 edit_link: https://github.com/eslint/eslint/edit/main/docs/src/developer-guide/code-path-analysis.md
 
 ---
-<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
-
-# Code Path Analysis Details
 
 ESLint's rules can use code paths.
 The code path is execution routes of programs.

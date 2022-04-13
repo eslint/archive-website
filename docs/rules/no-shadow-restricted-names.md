@@ -1,14 +1,11 @@
 ---
-title: no-shadow-restricted-names - Rules
+title: no-shadow-restricted-names
 layout: doc
 edit_link: https://github.com/eslint/eslint/edit/main/docs/src/rules/no-shadow-restricted-names.md
 rule_type: suggestion
 ---
-<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
-# no-shadow-restricted-names
-
-(recommended) The `"extends": "eslint:recommended"` property in a configuration file enables this rule.
+<!--RECOMMENDED-->
 
 Disallows identifiers from shadowing restricted names.
 

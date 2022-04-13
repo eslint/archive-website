@@ -1,14 +1,11 @@
 ---
-title: prefer-object-has-own - Rules
+title: prefer-object-has-own
 layout: doc
 edit_link: https://github.com/eslint/eslint/edit/main/docs/src/rules/prefer-object-has-own.md
 rule_type: suggestion
 ---
-<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
-# prefer-object-has-own
-
-(fixable) The `--fix` option on the [command line](../user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
+<!--FIXABLE-->
 
 Prefer `Object.hasOwn()` over `Object.prototype.hasOwnProperty.call()`.
 

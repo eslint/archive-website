@@ -1,12 +1,9 @@
 ---
-title: space-unary-word-ops - Rules
+title: space-unary-word-ops
 layout: doc
 edit_link: https://github.com/eslint/eslint/edit/main/docs/src/rules/space-unary-word-ops.md
 
 ---
-<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
-
-# space-unary-word-ops
 
 Requires spaces after unary word operators.
 
@@ -47,6 +44,10 @@ new C
 ```js
 void 0
 ```
+
+## Resources
+
+* [Documentation source](https://github.com/eslint/eslint/tree/HEAD/docs/src/rules/space-unary-word-ops.md)
 
 ## Version
 

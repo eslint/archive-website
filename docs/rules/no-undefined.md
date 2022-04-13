@@ -1,12 +1,9 @@
 ---
-title: no-undefined - Rules
+title: no-undefined
 layout: doc
 edit_link: https://github.com/eslint/eslint/edit/main/docs/src/rules/no-undefined.md
 rule_type: suggestion
 ---
-<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
-
-# no-undefined
 
 Disallows the use of `undefined` as an identifier.
 

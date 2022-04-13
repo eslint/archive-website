@@ -1,12 +1,9 @@
 ---
-title: no-reserved-keys - Rules
+title: no-reserved-keys
 layout: doc
 edit_link: https://github.com/eslint/eslint/edit/main/docs/src/rules/no-reserved-keys.md
 
 ---
-<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
-
-# no-reserved-keys
 
 Disallows unquoted reserved words as property names in object literals.
 
@@ -61,6 +58,10 @@ If your code is only going to be executed in an ECMAScript 5 or higher environme
 ## Further Reading
 
 * [Reserved words as property names](https://kangax.github.io/compat-table/es5/#Reserved_words_as_property_names)
+
+## Resources
+
+* [Documentation source](https://github.com/eslint/eslint/tree/HEAD/docs/src/rules/no-reserved-keys.md)
 
 ## Version
 

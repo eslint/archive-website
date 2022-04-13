@@ -1,12 +1,9 @@
 ---
-title: no-constructor-return - Rules
+title: no-constructor-return
 layout: doc
 edit_link: https://github.com/eslint/eslint/edit/main/docs/src/rules/no-constructor-return.md
 rule_type: problem
 ---
-<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
-
-# no-constructor-return
 
 Disallows returning values in constructor.
 

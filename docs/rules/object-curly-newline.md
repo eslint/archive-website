@@ -1,14 +1,11 @@
 ---
-title: object-curly-newline - Rules
+title: object-curly-newline
 layout: doc
 edit_link: https://github.com/eslint/eslint/edit/main/docs/src/rules/object-curly-newline.md
 rule_type: layout
 ---
-<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
-# object-curly-newline
-
-(fixable) The `--fix` option on the [command line](../user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
+<!--FIXABLE-->
 
 Enforces consistent line breaks after opening and before closing braces.
 
@@ -380,7 +377,6 @@ Examples of **correct** code for this rule with the default `{ "consistent": tru
 ```js
 /*eslint object-curly-newline: ["error", { "consistent": true }]*/
 /*eslint-env es6*/
-
 
 let empty1 = {};
 let empty2 = {

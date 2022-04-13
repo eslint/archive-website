@@ -4,9 +4,6 @@ layout: doc
 edit_link: https://github.com/eslint/eslint/edit/main/docs/src/developer-guide/working-with-custom-parsers.md
 
 ---
-<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
-
-# Working with Custom Parsers
 
 If you want to use your own parser and provide additional capabilities for your rules, you can specify your own custom parser. If a `parseForESLint` method is exposed on the parser, this method will be used to parse the code. Otherwise, the `parse` method will be used. Both methods should take in the source code as the first argument, and an optional configuration object as the second argument (provided as `parserOptions` in a config file). The `parse` method should simply return the AST. The `parseForESLint` method should return an object that contains the required property `ast` and optional properties `services`, `scopeManager`, and `visitorKeys`.
 

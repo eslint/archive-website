@@ -1,14 +1,11 @@
 ---
-title: object-property-newline - Rules
+title: object-property-newline
 layout: doc
 edit_link: https://github.com/eslint/eslint/edit/main/docs/src/rules/object-property-newline.md
 rule_type: layout
 ---
-<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
-# object-property-newline
-
-(fixable) The `--fix` option on the [command line](../user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
+<!--FIXABLE-->
 
 Enforces placing object properties on separate lines.
 

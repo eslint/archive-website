@@ -1,12 +1,9 @@
 ---
-title: no-useless-concat - Rules
+title: no-useless-concat
 layout: doc
 edit_link: https://github.com/eslint/eslint/edit/main/docs/src/rules/no-useless-concat.md
 rule_type: suggestion
 ---
-<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
-
-# no-useless-concat
 
 Disallows unnecessary concatenation of strings.
 

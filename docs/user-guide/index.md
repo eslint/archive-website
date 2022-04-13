@@ -4,9 +4,6 @@ layout: doc
 edit_link: https://github.com/eslint/eslint/edit/main/docs/src/user-guide/README.md
 
 ---
-<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
-
-# User Guide
 
 This guide is intended for those who wish to use ESLint as an end-user. If you're looking for how to extend ESLint or work with the ESLint source code, please see the [Developer Guide](../developer-guide).
 

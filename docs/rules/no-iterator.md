@@ -1,12 +1,9 @@
 ---
-title: no-iterator - Rules
+title: no-iterator
 layout: doc
 edit_link: https://github.com/eslint/eslint/edit/main/docs/src/rules/no-iterator.md
 rule_type: suggestion
 ---
-<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
-
-# no-iterator
 
 Disallows the use of the `__iterator__` property.
 

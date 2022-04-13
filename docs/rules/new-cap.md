@@ -1,12 +1,9 @@
 ---
-title: new-cap - Rules
+title: new-cap
 layout: doc
 edit_link: https://github.com/eslint/eslint/edit/main/docs/src/rules/new-cap.md
 rule_type: suggestion
 ---
-<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
-
-# new-cap
 
 Requires constructor names to begin with a capital letter.
 

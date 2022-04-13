@@ -1,14 +1,11 @@
 ---
-title: block-spacing - Rules
+title: block-spacing
 layout: doc
 edit_link: https://github.com/eslint/eslint/edit/main/docs/src/rules/block-spacing.md
 rule_type: layout
 ---
-<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
-# block-spacing
-
-(fixable) The `--fix` option on the [command line](../user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
+<!--FIXABLE-->
 
 Disallows or enforces spaces inside of blocks after opening blocks and before closing blocks.
 

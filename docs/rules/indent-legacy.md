@@ -1,14 +1,11 @@
 ---
-title: indent-legacy - Rules
+title: indent-legacy
 layout: doc
 edit_link: https://github.com/eslint/eslint/edit/main/docs/src/rules/indent-legacy.md
 rule_type: layout
 ---
-<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
-# indent-legacy
-
-(fixable) The `--fix` option on the [command line](../user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
+<!--FIXABLE-->
 
 Enforces consistent indentation.
 
@@ -259,7 +256,6 @@ Examples of **incorrect** code for this rule with the options `2, { "outerIIFEBo
 
 })();
 
-
 if(y) {
 console.log('foo');
 }
@@ -277,7 +273,6 @@ function foo(x) {
 }
 
 })();
-
 
 if(y) {
    console.log('foo');

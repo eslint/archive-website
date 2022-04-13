@@ -1,12 +1,9 @@
 ---
-title: no-return-await - Rules
+title: no-return-await
 layout: doc
 edit_link: https://github.com/eslint/eslint/edit/main/docs/src/rules/no-return-await.md
 rule_type: suggestion
 ---
-<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
-
-# no-return-await
 
 Disallows unnecessary `return await`.
 

@@ -1,14 +1,11 @@
 ---
-title: no-with - Rules
+title: no-with
 layout: doc
 edit_link: https://github.com/eslint/eslint/edit/main/docs/src/rules/no-with.md
 rule_type: suggestion
 ---
-<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
-# no-with
-
-(recommended) The `"extends": "eslint:recommended"` property in a configuration file enables this rule.
+<!--RECOMMENDED-->
 
 Disallows `with` statements.
 

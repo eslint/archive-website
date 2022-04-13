@@ -1,12 +1,9 @@
 ---
-title: consistent-this - Rules
+title: consistent-this
 layout: doc
 edit_link: https://github.com/eslint/eslint/edit/main/docs/src/rules/consistent-this.md
 rule_type: suggestion
 ---
-<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
-
-# consistent-this
 
 Enforces consistent naming when capturing the current execution context.
 

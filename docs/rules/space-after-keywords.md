@@ -1,12 +1,9 @@
 ---
-title: space-after-keywords - Rules
+title: space-after-keywords
 layout: doc
 edit_link: https://github.com/eslint/eslint/edit/main/docs/src/rules/space-after-keywords.md
 
 ---
-<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
-
-# space-after-keywords
 
 Enforces consistent spacing after keywords.
 
@@ -70,6 +67,10 @@ if (a) {} else {}
 
 if(a) {}
 ```
+
+## Resources
+
+* [Documentation source](https://github.com/eslint/eslint/tree/HEAD/docs/src/rules/space-after-keywords.md)
 
 ## Version
 

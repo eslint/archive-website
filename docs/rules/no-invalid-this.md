@@ -1,12 +1,9 @@
 ---
-title: no-invalid-this - Rules
+title: no-invalid-this
 layout: doc
 edit_link: https://github.com/eslint/eslint/edit/main/docs/src/rules/no-invalid-this.md
 rule_type: suggestion
 ---
-<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
-
-# no-invalid-this
 
 Disallows use of `this` in contexts where the value of `this` is `undefined`.
 

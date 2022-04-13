@@ -1,12 +1,9 @@
 ---
-title: space-after-function-name - Rules
+title: space-after-function-name
 layout: doc
 edit_link: https://github.com/eslint/eslint/edit/main/docs/src/rules/space-after-function-name.md
 
 ---
-<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
-
-# space-after-function-name
 
 Enforces consistent spacing after name in function definitions.
 
@@ -59,6 +56,10 @@ function bar (x) {
     // ...
 }
 ```
+
+## Resources
+
+* [Documentation source](https://github.com/eslint/eslint/tree/HEAD/docs/src/rules/space-after-function-name.md)
 
 ## Version
 

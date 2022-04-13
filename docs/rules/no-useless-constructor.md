@@ -1,12 +1,9 @@
 ---
-title: no-useless-constructor - Rules
+title: no-useless-constructor
 layout: doc
 edit_link: https://github.com/eslint/eslint/edit/main/docs/src/rules/no-useless-constructor.md
 rule_type: suggestion
 ---
-<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
-
-# no-useless-constructor
 
 Disallows unnecessary constructors.
 
