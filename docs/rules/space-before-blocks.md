@@ -5,7 +5,9 @@ edit_link: https://github.com/eslint/eslint/edit/main/docs/src/rules/space-befor
 rule_type: layout
 ---
 
-<!--FIXABLE-->
+
+
+(fixable) The `--fix` option on the [command line](../user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
 
 Requires Or disallows space before blocks.
 

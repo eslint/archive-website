@@ -5,9 +5,13 @@ edit_link: https://github.com/eslint/eslint/edit/main/docs/src/rules/valid-typeo
 rule_type: problem
 ---
 
-<!--RECOMMENDED-->
 
-<!--SUGGESTIONS-->
+
+(recommended) The `"extends": "eslint:recommended"` property in a configuration file enables this rule.
+
+
+
+(hasSuggestions) Some problems reported by this rule are manually fixable by editor [suggestions](../developer-guide/working-with-rules#providing-suggestions).
 
 Enforces comparing `typeof` expressions against valid strings.
 

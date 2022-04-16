@@ -5,7 +5,9 @@ edit_link: https://github.com/eslint/eslint/edit/main/docs/src/rules/no-misleadi
 rule_type: problem
 ---
 
-<!--RECOMMENDED-->
+
+
+(recommended) The `"extends": "eslint:recommended"` property in a configuration file enables this rule.
 
 Disallows characters which are made with multiple code points in character class syntax.
 

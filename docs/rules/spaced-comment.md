@@ -5,7 +5,9 @@ edit_link: https://github.com/eslint/eslint/edit/main/docs/src/rules/spaced-comm
 rule_type: suggestion
 ---
 
-<!--FIXABLE-->
+
+
+(fixable) The `--fix` option on the [command line](../user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
 
 Enforces consistent spacing after the `//` or `/*` in a comment.
 

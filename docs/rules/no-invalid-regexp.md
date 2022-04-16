@@ -5,7 +5,9 @@ edit_link: https://github.com/eslint/eslint/edit/main/docs/src/rules/no-invalid-
 rule_type: problem
 ---
 
-<!--RECOMMENDED-->
+
+
+(recommended) The `"extends": "eslint:recommended"` property in a configuration file enables this rule.
 
 Disallows invalid regular expression strings in `RegExp` constructors.
 

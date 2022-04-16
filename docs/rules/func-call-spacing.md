@@ -5,7 +5,9 @@ edit_link: https://github.com/eslint/eslint/edit/main/docs/src/rules/func-call-s
 rule_type: layout
 ---
 
-<!--FIXABLE-->
+
+
+(fixable) The `--fix` option on the [command line](../user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
 
 Requires or disallows spacing between function identifiers and their invocations.
 

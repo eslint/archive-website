@@ -5,7 +5,9 @@ edit_link: https://github.com/eslint/eslint/edit/main/docs/src/rules/radix.md
 rule_type: suggestion
 ---
 
-<!--SUGGESTIONS-->
+
+
+(hasSuggestions) Some problems reported by this rule are manually fixable by editor [suggestions](../developer-guide/working-with-rules#providing-suggestions).
 
 Enforces the consistent use of the radix argument when using `parseInt()`.
 

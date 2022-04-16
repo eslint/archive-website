@@ -5,7 +5,9 @@ edit_link: https://github.com/eslint/eslint/edit/main/docs/src/rules/no-with.md
 rule_type: suggestion
 ---
 
-<!--RECOMMENDED-->
+
+
+(recommended) The `"extends": "eslint:recommended"` property in a configuration file enables this rule.
 
 Disallows `with` statements.
 

@@ -5,7 +5,9 @@ edit_link: https://github.com/eslint/eslint/edit/main/docs/src/rules/no-unneeded
 rule_type: suggestion
 ---
 
-<!--FIXABLE-->
+
+
+(fixable) The `--fix` option on the [command line](../user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
 
 Disallows ternary operators when simpler alternatives exist.
 

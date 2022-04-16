@@ -5,7 +5,9 @@ edit_link: https://github.com/eslint/eslint/edit/main/docs/src/rules/object-prop
 rule_type: layout
 ---
 
-<!--FIXABLE-->
+
+
+(fixable) The `--fix` option on the [command line](../user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
 
 Enforces placing object properties on separate lines.
 

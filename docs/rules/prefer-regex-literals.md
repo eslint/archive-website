@@ -5,7 +5,9 @@ edit_link: https://github.com/eslint/eslint/edit/main/docs/src/rules/prefer-rege
 rule_type: suggestion
 ---
 
-<!--SUGGESTIONS-->
+
+
+(hasSuggestions) Some problems reported by this rule are manually fixable by editor [suggestions](../developer-guide/working-with-rules#providing-suggestions).
 
 Disallows use of the `RegExp` constructor in favor of regular expression literals.
 

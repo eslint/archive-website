@@ -5,7 +5,9 @@ edit_link: https://github.com/eslint/eslint/edit/main/docs/src/rules/no-unsafe-o
 rule_type: problem
 ---
 
-<!--RECOMMENDED-->
+
+
+(recommended) The `"extends": "eslint:recommended"` property in a configuration file enables this rule.
 
 Disallows use of optional chaining in contexts where the `undefined` value is not allowed.
 

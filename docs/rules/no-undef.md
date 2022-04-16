@@ -5,7 +5,9 @@ edit_link: https://github.com/eslint/eslint/edit/main/docs/src/rules/no-undef.md
 rule_type: problem
 ---
 
-<!--RECOMMENDED-->
+
+
+(recommended) The `"extends": "eslint:recommended"` property in a configuration file enables this rule.
 
 Disallows the use of undeclared variables unless mentioned in `/*global */` comments.
 
