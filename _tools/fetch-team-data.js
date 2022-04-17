@@ -145,8 +145,10 @@ async function fetchBlogAuthors() {
         const contents = await fs.readFile(filename, "utf8");
         const { data: frontmatter } = matter(contents);
 
-        for (const username of frontmatter.authors) {
-            authors[username] = await fetchUserProfile(username);
+        if (Array.isArray(frontmatter.authors)) {
+            for (const username of frontmatter.authors) {
+                authors[username] = await fetchUserProfile(username);
+            }
         }
     }
 
