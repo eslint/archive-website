@@ -57,10 +57,6 @@ function bar (x) {
 }
 ```
 
-## Resources
-
-* [Documentation source](https://github.com/eslint/eslint/tree/HEAD/docs/src/rules/space-after-function-name.md)
-
 ## Version
 
 This rule was introduced in ESLint 0.11.0 and removed in 1.0.0-rc-1.

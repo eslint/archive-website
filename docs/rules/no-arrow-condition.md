@@ -54,10 +54,6 @@ var x = (a) => 1 ? 2 : 3
 * [no-confusing-arrow](no-confusing-arrow)
 * [no-constant-condition](no-constant-condition)
 
-## Resources
-
-* [Documentation source](https://github.com/eslint/eslint/tree/HEAD/docs/src/rules/no-arrow-condition.md)
-
 ## Version
 
 This rule was introduced in ESLint 1.8.0 and removed in 2.0.0-beta.3.

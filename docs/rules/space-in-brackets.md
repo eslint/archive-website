@@ -313,10 +313,6 @@ You can turn this rule off if you are not concerned with the consistency of spac
 * [space-in-parens](space-in-parens)
 * [computed-property-spacing](computed-property-spacing)
 
-## Resources
-
-* [Documentation source](https://github.com/eslint/eslint/tree/HEAD/docs/src/rules/space-in-brackets.md)
-
 ## Version
 
 This rule was introduced in ESLint 0.4.1 and removed in 1.0.0-rc-1.

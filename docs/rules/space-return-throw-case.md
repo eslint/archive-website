@@ -39,10 +39,6 @@ function f(){ return -a; }
 switch(a){ case 'a': break; }
 ```
 
-## Resources
-
-* [Documentation source](https://github.com/eslint/eslint/tree/HEAD/docs/src/rules/space-return-throw-case.md)
-
 ## Version
 
 This rule was introduced in ESLint 0.1.4 and removed in 2.0.0-beta.3.

@@ -56,10 +56,6 @@ Examples of **correct** code for this rule:
 
 * [The ECMAScript 5 Annotated Specification - Strict Mode](https://es5.github.io/#C)
 
-## Resources
-
-* [Documentation source](https://github.com/eslint/eslint/tree/HEAD/docs/src/rules/no-extra-strict.md)
-
 ## Version
 
 This rule was introduced in ESLint 0.3.0 and removed in 1.0.0-rc-1.

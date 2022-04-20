@@ -266,10 +266,6 @@ You can turn this rule off if you are not concerned with the consistency of spac
 * [space-after-keywords](space-after-keywords)
 * [space-return-throw-case](space-return-throw-case)
 
-## Resources
-
-* [Documentation source](https://github.com/eslint/eslint/tree/HEAD/docs/src/rules/space-before-function-parentheses.md)
-
 ## Version
 
 This rule was introduced in ESLint 0.15.0 and removed in 1.0.0-rc-1.

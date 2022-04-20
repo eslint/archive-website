@@ -68,10 +68,6 @@ if (a) {} else {}
 if(a) {}
 ```
 
-## Resources
-
-* [Documentation source](https://github.com/eslint/eslint/tree/HEAD/docs/src/rules/space-after-keywords.md)
-
 ## Version
 
 This rule was introduced in ESLint 0.6.0 and removed in 2.0.0-beta.3.

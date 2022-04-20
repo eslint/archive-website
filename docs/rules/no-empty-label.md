@@ -45,10 +45,6 @@ If you don't want to be notified about usage of labels, then it's safe to disabl
 * [no-label-var](./no-label-var)
 * [no-unused-labels](./no-unused-labels)
 
-## Resources
-
-* [Documentation source](https://github.com/eslint/eslint/tree/HEAD/docs/src/rules/no-empty-label.md)
-
 ## Version
 
 This rule was introduced in ESLint 0.0.9 and removed in 2.0.0-rc.0.

@@ -45,10 +45,6 @@ new C
 void 0
 ```
 
-## Resources
-
-* [Documentation source](https://github.com/eslint/eslint/tree/HEAD/docs/src/rules/space-unary-word-ops.md)
-
 ## Version
 
 This rule was introduced in ESLint 0.1.4 and removed in 0.10.0.

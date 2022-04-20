@@ -120,10 +120,6 @@ If you do not wish to enforce consistency on keyword spacing.
 * [space-unary-ops](space-unary-ops)
 * [space-infix-ops](space-infix-ops)
 
-## Resources
-
-* [Documentation source](https://github.com/eslint/eslint/tree/HEAD/docs/src/rules/space-before-keywords.md)
-
 ## Version
 
 This rule was introduced in ESLint 1.4.0 and removed in 2.0.0-beta.3.
