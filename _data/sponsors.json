@@ -1,8 +1,8 @@
 {
     "totals": {
-        "annualDonations": 136765.08000000002,
-        "monthlyDonations": 11397.09,
-        "sponsorCount": 187
+        "annualDonations": 136705.08000000002,
+        "monthlyDonations": 11392.09,
+        "sponsorCount": 186
     },
     "platinum": [
         {
@@ -752,15 +752,6 @@
             "name": "Eric Casthart",
             "url": "https://pushred.co",
             "image": "https://images.opencollective.com/pushred/506ad8d/avatar.png",
-            "monthlyDonation": 500,
-            "totalDonations": 19000,
-            "source": "opencollective",
-            "tier": "backer"
-        },
-        {
-            "name": "AJ Klein",
-            "url": "https://twitter.com/jumbleofideas",
-            "image": "https://images.opencollective.com/aj-klein/b63b472/avatar.png",
             "monthlyDonation": 500,
             "totalDonations": 19000,
             "source": "opencollective",
