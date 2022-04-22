@@ -1,8 +1,8 @@
 {
     "totals": {
-        "annualDonations": 136645.08000000002,
-        "monthlyDonations": 11387.09,
-        "sponsorCount": 185
+        "annualDonations": 136705.08000000002,
+        "monthlyDonations": 11392.09,
+        "sponsorCount": 186
     },
     "platinum": [
         {
@@ -1428,6 +1428,14 @@
             "name": "Brock Davis",
             "image": "https://avatars.githubusercontent.com/u/42578556?u=845e14d22f8ca63d4745baf4df2f54f548796ec6&v=4",
             "url": "https://github.com/brockneedscoffee",
+            "monthlyDonation": 500,
+            "source": "github",
+            "tier": "backer"
+        },
+        {
+            "name": "Andrea Mazzucchelli",
+            "image": "https://avatars.githubusercontent.com/u/60042277?u=ae98af9bebf42b3137986d38d38b5d1dfd609be8&v=4",
+            "url": "https://www.linkedin.com/in/andrea-m-0b40051bb",
             "monthlyDonation": 500,
             "source": "github",
             "tier": "backer"
