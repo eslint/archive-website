@@ -190,6 +190,17 @@
             "location": null
         },
         {
+            "username": "mysticatea",
+            "name": "Toru Nagashima",
+            "title": "ESLint Committer",
+            "website": "",
+            "avatar_url": "https://avatars.githubusercontent.com/u/1937871?v=4",
+            "bio": "A member of ESLint, Babel, and Vue.js.",
+            "twitter_username": null,
+            "github_username": "mysticatea",
+            "location": "Shizuoka, Japan"
+        },
+        {
             "username": "soda0289",
             "name": "Reyad Attiyat",
             "title": "ESLint Alumnus",
@@ -269,17 +280,6 @@
     ],
     "reviewers": [
         {
-            "username": "mysticatea",
-            "name": "Toru Nagashima",
-            "title": "ESLint Reviewer",
-            "website": "",
-            "avatar_url": "https://avatars.githubusercontent.com/u/1937871?v=4",
-            "bio": "A member of ESLint, Babel, and Vue.js.",
-            "twitter_username": null,
-            "github_username": "mysticatea",
-            "location": "Shizuoka, Japan"
-        },
-        {
             "username": "aladdin-add",
             "name": "唯然",
             "title": "ESLint Reviewer",
@@ -289,6 +289,17 @@
             "twitter_username": null,
             "github_username": "aladdin-add",
             "location": "China"
+        },
+        {
+            "username": "snitin315",
+            "name": "Nitin Kumar",
+            "title": "ESLint Reviewer",
+            "website": "https://snitin315.dev/",
+            "avatar_url": "https://avatars.githubusercontent.com/u/46647141?v=4",
+            "bio": "Helping maintain @webpack and @eslint",
+            "twitter_username": "snitin315",
+            "github_username": "snitin315",
+            "location": "INDIA"
         }
     ],
     "committers": [
@@ -315,12 +326,34 @@
             "location": "New York City"
         },
         {
+            "username": "mysticatea",
+            "name": "Toru Nagashima",
+            "title": "ESLint Committer",
+            "website": "",
+            "avatar_url": "https://avatars.githubusercontent.com/u/1937871?v=4",
+            "bio": "A member of ESLint, Babel, and Vue.js.",
+            "twitter_username": null,
+            "github_username": "mysticatea",
+            "location": "Shizuoka, Japan"
+        },
+        {
+            "username": "SaraSoueidan",
+            "name": "Sara Soueidan",
+            "title": "ESLint Committer",
+            "website": "http://sarasoueidan.com",
+            "avatar_url": "https://avatars.githubusercontent.com/u/2527933?v=4",
+            "bio": "Independent UI/design engineer.",
+            "twitter_username": "SaraSoueidan",
+            "github_username": "SaraSoueidan",
+            "location": "Lebanon"
+        },
+        {
             "username": "g-plane",
             "name": "Pig Fang",
             "title": "ESLint Committer",
             "website": "https://gplane.win",
             "avatar_url": "https://avatars.githubusercontent.com/u/17216317?v=4",
-            "bio": "https://www.buymeacoffee.com/gplane",
+            "bio": null,
             "twitter_username": "g3plane",
             "github_username": "g-plane",
             "location": "Jiangmen, Guangdong, China"
@@ -346,17 +379,6 @@
             "twitter_username": null,
             "github_username": "yeonjuan",
             "location": "South Korea"
-        },
-        {
-            "username": "snitin315",
-            "name": "Nitin Kumar",
-            "title": "ESLint Committer",
-            "website": "https://snitin315.dev/",
-            "avatar_url": "https://avatars.githubusercontent.com/u/46647141?v=4",
-            "bio": "Helping maintain @webpack and @eslint",
-            "twitter_username": "snitin315",
-            "github_username": "snitin315",
-            "location": "INDIA"
         }
     ]
 }
