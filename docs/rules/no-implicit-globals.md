@@ -1,12 +1,9 @@
 ---
-title: no-implicit-globals - Rules
+title: no-implicit-globals
 layout: doc
 edit_link: https://github.com/eslint/eslint/edit/main/docs/src/rules/no-implicit-globals.md
 rule_type: suggestion
 ---
-<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
-
-# no-implicit-globals
 
 Disallows declarations in the global scope.
 

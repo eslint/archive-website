@@ -1,12 +1,11 @@
 ---
-title: no-empty-pattern - Rules
+title: no-empty-pattern
 layout: doc
 edit_link: https://github.com/eslint/eslint/edit/main/docs/src/rules/no-empty-pattern.md
 rule_type: problem
 ---
-<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
-# no-empty-pattern
+
 
 (recommended) The `"extends": "eslint:recommended"` property in a configuration file enables this rule.
 

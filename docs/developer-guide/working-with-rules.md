@@ -4,9 +4,6 @@ layout: doc
 edit_link: https://github.com/eslint/eslint/edit/main/docs/src/developer-guide/working-with-rules.md
 
 ---
-<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
-
-# Working with Rules
 
 **Note:** This page covers the most recent rule format for ESLint >= 3.0.0. There is also a [deprecated rule format](./working-with-rules-deprecated).
 

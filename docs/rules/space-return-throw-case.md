@@ -1,12 +1,9 @@
 ---
-title: space-return-throw-case - Rules
+title: space-return-throw-case
 layout: doc
 edit_link: https://github.com/eslint/eslint/edit/main/docs/src/rules/space-return-throw-case.md
 
 ---
-<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
-
-# space-return-throw-case
 
 Requires spaces after `return`, `throw`, and `case` keywords.
 

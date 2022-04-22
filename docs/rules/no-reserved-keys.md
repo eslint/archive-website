@@ -1,12 +1,9 @@
 ---
-title: no-reserved-keys - Rules
+title: no-reserved-keys
 layout: doc
 edit_link: https://github.com/eslint/eslint/edit/main/docs/src/rules/no-reserved-keys.md
 
 ---
-<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
-
-# no-reserved-keys
 
 Disallows unquoted reserved words as property names in object literals.
 

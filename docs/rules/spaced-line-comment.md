@@ -1,12 +1,9 @@
 ---
-title: spaced-line-comment - Rules
+title: spaced-line-comment
 layout: doc
 edit_link: https://github.com/eslint/eslint/edit/main/docs/src/rules/spaced-line-comment.md
 
 ---
-<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
-
-# spaced-line-comment
 
 Enforces consistent spacing after `//` in line comments.
 

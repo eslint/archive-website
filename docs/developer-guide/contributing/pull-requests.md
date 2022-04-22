@@ -4,9 +4,6 @@ layout: doc
 edit_link: https://github.com/eslint/eslint/edit/main/docs/src/developer-guide/contributing/pull-requests.md
 
 ---
-<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
-
-# Pull Requests
 
 If you want to contribute to an ESLint repo, please use a GitHub pull request. This is the fastest way for us to evaluate your code and to merge it into the code base. Please don't file an issue with snippets of code. Doing so means that we need to manually merge the changes in and update any appropriate tests. That decreases the likelihood that your code is going to get included in a timely manner. Please use pull requests.
 

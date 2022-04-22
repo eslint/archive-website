@@ -1,12 +1,9 @@
 ---
-title: prefer-spread - Rules
+title: prefer-spread
 layout: doc
 edit_link: https://github.com/eslint/eslint/edit/main/docs/src/rules/prefer-spread.md
 rule_type: suggestion
 ---
-<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
-
-# prefer-spread
 
 Suggests using spread syntax instead of `.apply()`.
 

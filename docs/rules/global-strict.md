@@ -1,12 +1,9 @@
 ---
-title: global-strict - Rules
+title: global-strict
 layout: doc
 edit_link: https://github.com/eslint/eslint/edit/main/docs/src/rules/global-strict.md
 
 ---
-<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
-
-# global-strict
 
 Requires or disallows strict mode directives in the global scope.
 

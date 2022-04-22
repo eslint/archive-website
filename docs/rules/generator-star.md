@@ -1,12 +1,8 @@
 ---
-title: generator-star - Rules
+title: generator-star
 layout: doc
 edit_link: https://github.com/eslint/eslint/edit/main/docs/src/rules/generator-star.md
-
 ---
-<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
-
-# generator-star
 
 Enforces consistent spacing around the asterisk in generator functions.
 

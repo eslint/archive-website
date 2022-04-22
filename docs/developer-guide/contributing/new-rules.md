@@ -4,9 +4,6 @@ layout: doc
 edit_link: https://github.com/eslint/eslint/edit/main/docs/src/developer-guide/contributing/new-rules.md
 
 ---
-<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
-
-# New Rules
 
 ESLint is all about rules. For most of the project's lifetime, we've had over 200 rules, and that list continues to grow. However, we can't just accept any proposed rule because all rules need to work cohesively together. As such, we have some guidelines around which rules can be part of the ESLint core and which are better off as custom rules and plugins.
 

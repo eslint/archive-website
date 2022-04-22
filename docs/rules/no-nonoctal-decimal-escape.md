@@ -1,14 +1,15 @@
 ---
-title: no-nonoctal-decimal-escape - Rules
+title: no-nonoctal-decimal-escape
 layout: doc
 edit_link: https://github.com/eslint/eslint/edit/main/docs/src/rules/no-nonoctal-decimal-escape.md
 rule_type: suggestion
 ---
-<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
-# no-nonoctal-decimal-escape
+
 
 (recommended) The `"extends": "eslint:recommended"` property in a configuration file enables this rule.
+
+
 
 (hasSuggestions) Some problems reported by this rule are manually fixable by editor [suggestions](../developer-guide/working-with-rules#providing-suggestions).
 

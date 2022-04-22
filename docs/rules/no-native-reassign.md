@@ -1,12 +1,9 @@
 ---
-title: no-native-reassign - Rules
+title: no-native-reassign
 layout: doc
 edit_link: https://github.com/eslint/eslint/edit/main/docs/src/rules/no-native-reassign.md
 rule_type: suggestion
 ---
-<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
-
-# no-native-reassign
 
 Disallows reassignment of native objects.
 

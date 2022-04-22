@@ -1,12 +1,9 @@
 ---
-title: prefer-named-capture-group - Rules
+title: prefer-named-capture-group
 layout: doc
 edit_link: https://github.com/eslint/eslint/edit/main/docs/src/rules/prefer-named-capture-group.md
 rule_type: suggestion
 ---
-<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
-
-# prefer-named-capture-group
 
 Suggest using named capture group in regular expression.
 

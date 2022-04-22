@@ -1,12 +1,9 @@
 ---
-title: prefer-rest-params - Rules
+title: prefer-rest-params
 layout: doc
 edit_link: https://github.com/eslint/eslint/edit/main/docs/src/rules/prefer-rest-params.md
 rule_type: suggestion
 ---
-<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
-
-# prefer-rest-params
 
 Suggests using rest parameters instead of `arguments`.
 

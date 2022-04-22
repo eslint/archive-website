@@ -1,12 +1,9 @@
 ---
-title: no-template-curly-in-string - Rules
+title: no-template-curly-in-string
 layout: doc
 edit_link: https://github.com/eslint/eslint/edit/main/docs/src/rules/no-template-curly-in-string.md
 rule_type: problem
 ---
-<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
-
-# no-template-curly-in-string
 
 Disallows template literal placeholder syntax in regular strings.
 

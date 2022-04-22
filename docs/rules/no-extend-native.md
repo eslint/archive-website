@@ -1,12 +1,9 @@
 ---
-title: no-extend-native - Rules
+title: no-extend-native
 layout: doc
 edit_link: https://github.com/eslint/eslint/edit/main/docs/src/rules/no-extend-native.md
 rule_type: suggestion
 ---
-<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
-
-# no-extend-native
 
 Disallows extending of native objects.
 

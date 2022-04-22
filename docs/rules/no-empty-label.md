@@ -1,12 +1,9 @@
 ---
-title: no-empty-label - Rules
+title: no-empty-label
 layout: doc
 edit_link: https://github.com/eslint/eslint/edit/main/docs/src/rules/no-empty-label.md
 
 ---
-<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
-
-# no-empty-label
 
 Disallows labels for anything other than loops and switches.
 

@@ -1,12 +1,9 @@
 ---
-title: no-mixed-requires - Rules
+title: no-mixed-requires
 layout: doc
 edit_link: https://github.com/eslint/eslint/edit/main/docs/src/rules/no-mixed-requires.md
 rule_type: suggestion
 ---
-<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
-
-# no-mixed-requires
 
 Disallows `require` calls to be mixed with regular variable declarations.
 

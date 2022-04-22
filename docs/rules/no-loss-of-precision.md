@@ -1,12 +1,11 @@
 ---
-title: no-loss-of-precision - Rules
+title: no-loss-of-precision
 layout: doc
 edit_link: https://github.com/eslint/eslint/edit/main/docs/src/rules/no-loss-of-precision.md
 rule_type: problem
 ---
-<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
-# no-loss-of-precision
+
 
 (recommended) The `"extends": "eslint:recommended"` property in a configuration file enables this rule.
 

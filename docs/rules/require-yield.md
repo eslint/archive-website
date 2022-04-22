@@ -1,12 +1,11 @@
 ---
-title: require-yield - Rules
+title: require-yield
 layout: doc
 edit_link: https://github.com/eslint/eslint/edit/main/docs/src/rules/require-yield.md
 rule_type: suggestion
 ---
-<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
-# require-yield
+
 
 (recommended) The `"extends": "eslint:recommended"` property in a configuration file enables this rule.
 

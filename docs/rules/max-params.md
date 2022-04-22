@@ -1,12 +1,9 @@
 ---
-title: max-params - Rules
+title: max-params
 layout: doc
 edit_link: https://github.com/eslint/eslint/edit/main/docs/src/rules/max-params.md
 rule_type: suggestion
 ---
-<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
-
-# max-params
 
 Enforces a maximum number of parameters in function definitions.
 

@@ -1,12 +1,11 @@
 ---
-title: no-dupe-args - Rules
+title: no-dupe-args
 layout: doc
 edit_link: https://github.com/eslint/eslint/edit/main/docs/src/rules/no-dupe-args.md
 rule_type: problem
 ---
-<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
-# no-dupe-args
+
 
 (recommended) The `"extends": "eslint:recommended"` property in a configuration file enables this rule.
 

@@ -1,12 +1,9 @@
 ---
-title: no-octal-escape - Rules
+title: no-octal-escape
 layout: doc
 edit_link: https://github.com/eslint/eslint/edit/main/docs/src/rules/no-octal-escape.md
 rule_type: suggestion
 ---
-<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
-
-# no-octal-escape
 
 Disallows octal escape sequences in string literals.
 

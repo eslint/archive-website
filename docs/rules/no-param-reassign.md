@@ -1,12 +1,9 @@
 ---
-title: no-param-reassign - Rules
+title: no-param-reassign
 layout: doc
 edit_link: https://github.com/eslint/eslint/edit/main/docs/src/rules/no-param-reassign.md
 rule_type: suggestion
 ---
-<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
-
-# no-param-reassign
 
 Disallows reassignment of function parameters.
 

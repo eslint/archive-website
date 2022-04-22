@@ -1,12 +1,9 @@
 ---
-title: no-eq-null - Rules
+title: no-eq-null
 layout: doc
 edit_link: https://github.com/eslint/eslint/edit/main/docs/src/rules/no-eq-null.md
 rule_type: suggestion
 ---
-<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
-
-# no-eq-null
 
 Disallows `null` comparisons without type-checking operators,
 

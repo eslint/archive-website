@@ -1,12 +1,9 @@
 ---
-title: no-await-in-loop - Rules
+title: no-await-in-loop
 layout: doc
 edit_link: https://github.com/eslint/eslint/edit/main/docs/src/rules/no-await-in-loop.md
 rule_type: problem
 ---
-<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
-
-# no-await-in-loop
 
 Disallows `await` inside of loops.
 

@@ -1,12 +1,9 @@
 ---
-title: no-unreachable-loop - Rules
+title: no-unreachable-loop
 layout: doc
 edit_link: https://github.com/eslint/eslint/edit/main/docs/src/rules/no-unreachable-loop.md
 rule_type: problem
 ---
-<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
-
-# no-unreachable-loop
 
 Disallows loops with a body that allows only one iteration.
 

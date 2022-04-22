@@ -1,12 +1,9 @@
 ---
-title: no-restricted-properties - Rules
+title: no-restricted-properties
 layout: doc
 edit_link: https://github.com/eslint/eslint/edit/main/docs/src/rules/no-restricted-properties.md
 rule_type: suggestion
 ---
-<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
-
-# no-restricted-properties
 
 Disallows certain object properties.
 

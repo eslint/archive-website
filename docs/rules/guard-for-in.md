@@ -1,12 +1,9 @@
 ---
-title: guard-for-in - Rules
+title: guard-for-in
 layout: doc
 edit_link: https://github.com/eslint/eslint/edit/main/docs/src/rules/guard-for-in.md
 rule_type: suggestion
 ---
-<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
-
-# guard-for-in
 
 Requires `for in` loops to include an `if` statement.
 

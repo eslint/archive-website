@@ -1,12 +1,11 @@
 ---
-title: new-parens - Rules
+title: new-parens
 layout: doc
 edit_link: https://github.com/eslint/eslint/edit/main/docs/src/rules/new-parens.md
 rule_type: layout
 ---
-<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
-# new-parens
+
 
 (fixable) The `--fix` option on the [command line](../user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
 

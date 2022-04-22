@@ -1,12 +1,9 @@
 ---
-title: array-callback-return - Rules
+title: array-callback-return
 layout: doc
 edit_link: https://github.com/eslint/eslint/edit/main/docs/src/rules/array-callback-return.md
 rule_type: problem
 ---
-<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
-
-# array-callback-return
 
 Enforces return statements in callbacks of array's methods.
 

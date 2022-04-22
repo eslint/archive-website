@@ -1,14 +1,15 @@
 ---
-title: no-unsafe-negation - Rules
+title: no-unsafe-negation
 layout: doc
 edit_link: https://github.com/eslint/eslint/edit/main/docs/src/rules/no-unsafe-negation.md
 rule_type: problem
 ---
-<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
-# no-unsafe-negation
+
 
 (recommended) The `"extends": "eslint:recommended"` property in a configuration file enables this rule.
+
+
 
 (hasSuggestions) Some problems reported by this rule are manually fixable by editor [suggestions](../developer-guide/working-with-rules#providing-suggestions).
 

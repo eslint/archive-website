@@ -1,12 +1,9 @@
 ---
-title: no-negated-condition - Rules
+title: no-negated-condition
 layout: doc
 edit_link: https://github.com/eslint/eslint/edit/main/docs/src/rules/no-negated-condition.md
 rule_type: suggestion
 ---
-<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
-
-# no-negated-condition
 
 Disallows negated conditions.
 

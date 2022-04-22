@@ -1,12 +1,9 @@
 ---
-title: max-depth - Rules
+title: max-depth
 layout: doc
 edit_link: https://github.com/eslint/eslint/edit/main/docs/src/rules/max-depth.md
 rule_type: suggestion
 ---
-<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
-
-# max-depth
 
 Enforces a maximum depth that blocks can be nested.
 

@@ -1,12 +1,9 @@
 ---
-title: no-warning-comments - Rules
+title: no-warning-comments
 layout: doc
 edit_link: https://github.com/eslint/eslint/edit/main/docs/src/rules/no-warning-comments.md
 rule_type: suggestion
 ---
-<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
-
-# no-warning-comments
 
 Disallows specified warning terms in comments.
 

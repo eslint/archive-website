@@ -1,12 +1,11 @@
 ---
-title: implicit-arrow-linebreak - Rules
+title: implicit-arrow-linebreak
 layout: doc
 edit_link: https://github.com/eslint/eslint/edit/main/docs/src/rules/implicit-arrow-linebreak.md
 rule_type: layout
 ---
-<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
-# implicit-arrow-linebreak
+
 
 (fixable) The `--fix` option on the [command line](../user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
 
@@ -89,7 +88,6 @@ Examples of **correct** code for this rule with the `"below"` option:
 
 ```js
 /* eslint implicit-arrow-linebreak: ["error", "below"] */
-
 
 (foo) =>
   bar;

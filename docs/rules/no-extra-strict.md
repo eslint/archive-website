@@ -1,12 +1,9 @@
 ---
-title: no-extra-strict - Rules
+title: no-extra-strict
 layout: doc
 edit_link: https://github.com/eslint/eslint/edit/main/docs/src/rules/no-extra-strict.md
 
 ---
-<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
-
-# no-extra-strict
 
 Disallows strict mode directives when already in strict mode.
 

@@ -1,12 +1,11 @@
 ---
-title: lines-around-comment - Rules
+title: lines-around-comment
 layout: doc
 edit_link: https://github.com/eslint/eslint/edit/main/docs/src/rules/lines-around-comment.md
 rule_type: layout
 ---
-<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
-# lines-around-comment
+
 
 (fixable) The `--fix` option on the [command line](../user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
 
@@ -538,7 +537,6 @@ Examples of **correct** code for the `ignorePattern` option:
 foo();
 /* eslint mentioned in this comment */,
 bar();
-
 
 /*eslint lines-around-comment: ["error", { "ignorePattern": "pragma" }] */
 

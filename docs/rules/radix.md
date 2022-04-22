@@ -1,12 +1,11 @@
 ---
-title: radix - Rules
+title: radix
 layout: doc
 edit_link: https://github.com/eslint/eslint/edit/main/docs/src/rules/radix.md
 rule_type: suggestion
 ---
-<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
-# radix
+
 
 (hasSuggestions) Some problems reported by this rule are manually fixable by editor [suggestions](../developer-guide/working-with-rules#providing-suggestions).
 

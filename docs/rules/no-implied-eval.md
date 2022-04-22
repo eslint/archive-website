@@ -1,12 +1,9 @@
 ---
-title: no-implied-eval - Rules
+title: no-implied-eval
 layout: doc
 edit_link: https://github.com/eslint/eslint/edit/main/docs/src/rules/no-implied-eval.md
 rule_type: suggestion
 ---
-<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
-
-# no-implied-eval
 
 Disallows the use of `eval()`-like methods.
 

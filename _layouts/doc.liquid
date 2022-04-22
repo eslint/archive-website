@@ -16,6 +16,13 @@
           {% include ad %}
         </div>
       {% endif %}
+      
+      {% comment %}Versioned pages didn't have title in front matter{% endcomment %}
+      {% assign versioned =  page.url | regexMatch: "\/docs/\d" %}
+      {% unless versioned %}
+      <h1>{{ title }}</h1>
+      {% endunless %}
+
       {{ content
         | replace: '<p>Examples of <strong>incorrect</strong> code', '<p class="incorrect icon">Examples of <strong>incorrect</strong> code'
         | replace: '<p>Example of <strong>incorrect</strong> code', '<p class="incorrect icon">Example of <strong>incorrect</strong> code'

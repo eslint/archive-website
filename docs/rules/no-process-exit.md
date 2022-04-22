@@ -1,12 +1,9 @@
 ---
-title: no-process-exit - Rules
+title: no-process-exit
 layout: doc
 edit_link: https://github.com/eslint/eslint/edit/main/docs/src/rules/no-process-exit.md
 rule_type: suggestion
 ---
-<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
-
-# no-process-exit
 
 Disallows the use of `process.exit()`.
 

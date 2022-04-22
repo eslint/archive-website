@@ -4,9 +4,6 @@ layout: doc
 edit_link: https://github.com/eslint/eslint/edit/main/docs/src/maintainer-guide/governance.md
 
 ---
-<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
-
-# Governance
 
 ESLint is an open source project that depends on contributions from the community. Anyone may contribute to the project at any time by submitting code, participating in discussions, making suggestions, or any other contribution they see fit. This document describes how various types of contributors work within the ESLint project.
 

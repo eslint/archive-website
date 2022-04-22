@@ -1,12 +1,9 @@
 ---
-title: max-classes-per-file - Rules
+title: max-classes-per-file
 layout: doc
 edit_link: https://github.com/eslint/eslint/edit/main/docs/src/rules/max-classes-per-file.md
 rule_type: suggestion
 ---
-<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
-
-# max-classes-per-file
 
 Enforces a maximum number of classes per file.
 

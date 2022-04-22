@@ -1,12 +1,9 @@
 ---
-title: no-catch-shadow - Rules
+title: no-catch-shadow
 layout: doc
 edit_link: https://github.com/eslint/eslint/edit/main/docs/src/rules/no-catch-shadow.md
 rule_type: suggestion
 ---
-<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
-
-# no-catch-shadow
 
 Disallows shadowing of variables inside of catch.
 

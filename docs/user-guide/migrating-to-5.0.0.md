@@ -4,9 +4,6 @@ layout: doc
 edit_link: https://github.com/eslint/eslint/edit/main/docs/src/user-guide/migrating-to-5.0.0.md
 
 ---
-<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
-
-# Migrating to v5.0.0
 
 ESLint v5.0.0 is the fifth major version release. We have made a few breaking changes in this release, but we expect that most users will be able to upgrade without any modifications to their build. This guide is intended to walk you through the breaking changes.
 

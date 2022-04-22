@@ -1,12 +1,11 @@
 ---
-title: no-new-symbol - Rules
+title: no-new-symbol
 layout: doc
 edit_link: https://github.com/eslint/eslint/edit/main/docs/src/rules/no-new-symbol.md
 rule_type: problem
 ---
-<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
-# no-new-symbol
+
 
 (recommended) The `"extends": "eslint:recommended"` property in a configuration file enables this rule.
 
@@ -42,7 +41,6 @@ Examples of **correct** code for this rule:
 /*eslint-env es6*/
 
 var foo = Symbol('foo');
-
 
 // Ignores shadowed Symbol.
 function bar(Symbol) {

@@ -1,12 +1,9 @@
 ---
-title: no-unused-expressions - Rules
+title: no-unused-expressions
 layout: doc
 edit_link: https://github.com/eslint/eslint/edit/main/docs/src/rules/no-unused-expressions.md
 rule_type: suggestion
 ---
-<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
-
-# no-unused-expressions
 
 Disallows unused expressions.
 

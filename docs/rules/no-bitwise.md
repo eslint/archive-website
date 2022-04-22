@@ -1,12 +1,9 @@
 ---
-title: no-bitwise - Rules
+title: no-bitwise
 layout: doc
 edit_link: https://github.com/eslint/eslint/edit/main/docs/src/rules/no-bitwise.md
 rule_type: suggestion
 ---
-<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
-
-# no-bitwise
 
 Disallows bitwise operators.
 

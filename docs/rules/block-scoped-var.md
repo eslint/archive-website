@@ -1,12 +1,9 @@
 ---
-title: block-scoped-var - Rules
+title: block-scoped-var
 layout: doc
 edit_link: https://github.com/eslint/eslint/edit/main/docs/src/rules/block-scoped-var.md
 rule_type: suggestion
 ---
-<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
-
-# block-scoped-var
 
 Enforces treating `var` as block scoped.
 

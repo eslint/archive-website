@@ -1,12 +1,11 @@
 ---
-title: no-spaced-func - Rules
+title: no-spaced-func
 layout: doc
 edit_link: https://github.com/eslint/eslint/edit/main/docs/src/rules/no-spaced-func.md
 rule_type: layout
 ---
-<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
-# no-spaced-func
+
 
 (fixable) The `--fix` option on the [command line](../user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
 

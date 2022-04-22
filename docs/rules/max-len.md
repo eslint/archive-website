@@ -1,12 +1,9 @@
 ---
-title: max-len - Rules
+title: max-len
 layout: doc
 edit_link: https://github.com/eslint/eslint/edit/main/docs/src/rules/max-len.md
 rule_type: layout
 ---
-<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
-
-# max-len
 
 Enforces a maximum line length.
 

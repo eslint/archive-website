@@ -1,12 +1,9 @@
 ---
-title: no-restricted-imports - Rules
+title: no-restricted-imports
 layout: doc
 edit_link: https://github.com/eslint/eslint/edit/main/docs/src/rules/no-restricted-imports.md
 rule_type: suggestion
 ---
-<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
-
-# no-restricted-imports
 
 Disallows specific imports.
 

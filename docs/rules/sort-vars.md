@@ -1,12 +1,11 @@
 ---
-title: sort-vars - Rules
+title: sort-vars
 layout: doc
 edit_link: https://github.com/eslint/eslint/edit/main/docs/src/rules/sort-vars.md
 rule_type: suggestion
 ---
-<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
-# sort-vars
+
 
 (fixable) The `--fix` option on the [command line](../user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
 

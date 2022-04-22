@@ -1,12 +1,9 @@
 ---
-title: require-await - Rules
+title: require-await
 layout: doc
 edit_link: https://github.com/eslint/eslint/edit/main/docs/src/rules/require-await.md
 rule_type: suggestion
 ---
-<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
-
-# require-await
 
 Disallows async functions which have no `await` expression.
 

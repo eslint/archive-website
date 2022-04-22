@@ -1,12 +1,11 @@
 ---
-title: key-spacing - Rules
+title: key-spacing
 layout: doc
 edit_link: https://github.com/eslint/eslint/edit/main/docs/src/rules/key-spacing.md
 rule_type: layout
 ---
-<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
-# key-spacing
+
 
 (fixable) The `--fix` option on the [command line](../user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
 

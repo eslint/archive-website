@@ -1,12 +1,9 @@
 ---
-title: no-wrap-func - Rules
+title: no-wrap-func
 layout: doc
 edit_link: https://github.com/eslint/eslint/edit/main/docs/src/rules/no-wrap-func.md
 
 ---
-<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
-
-# no-wrap-func
 
 Disallows unnecessary parentheses around function expressions.
 

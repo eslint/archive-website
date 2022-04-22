@@ -1,12 +1,11 @@
 ---
-title: no-floating-decimal - Rules
+title: no-floating-decimal
 layout: doc
 edit_link: https://github.com/eslint/eslint/edit/main/docs/src/rules/no-floating-decimal.md
 rule_type: suggestion
 ---
-<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
-# no-floating-decimal
+
 
 (fixable) The `--fix` option on the [command line](../user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
 

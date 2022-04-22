@@ -1,12 +1,9 @@
 ---
-title: space-before-keywords - Rules
+title: space-before-keywords
 layout: doc
 edit_link: https://github.com/eslint/eslint/edit/main/docs/src/rules/space-before-keywords.md
 
 ---
-<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
-
-# space-before-keywords
 
 Enforces consistent spacing before keywords.
 

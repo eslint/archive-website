@@ -1,12 +1,9 @@
 ---
-title: no-underscore-dangle - Rules
+title: no-underscore-dangle
 layout: doc
 edit_link: https://github.com/eslint/eslint/edit/main/docs/src/rules/no-underscore-dangle.md
 rule_type: suggestion
 ---
-<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
-
-# no-underscore-dangle
 
 Disallows dangling underscores in identifiers.
 

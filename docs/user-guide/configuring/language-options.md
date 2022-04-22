@@ -4,9 +4,6 @@ layout: doc
 edit_link: https://github.com/eslint/eslint/edit/main/docs/src/user-guide/configuring/language-options.md
 
 ---
-<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
-
-# Language Options
 
 * [Specifying Environments](#specifying-environments)
 * [Specifying Globals](#specifying-globals)

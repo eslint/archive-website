@@ -1,12 +1,11 @@
 ---
-title: no-irregular-whitespace - Rules
+title: no-irregular-whitespace
 layout: doc
 edit_link: https://github.com/eslint/eslint/edit/main/docs/src/rules/no-irregular-whitespace.md
 rule_type: problem
 ---
-<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
-# no-irregular-whitespace
+
 
 (recommended) The `"extends": "eslint:recommended"` property in a configuration file enables this rule.
 

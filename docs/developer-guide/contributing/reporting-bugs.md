@@ -4,9 +4,6 @@ layout: doc
 edit_link: https://github.com/eslint/eslint/edit/main/docs/src/developer-guide/contributing/reporting-bugs.md
 
 ---
-<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
-
-# Reporting Bugs
 
 If you think you've found a bug in ESLint, please [create a new issue](https://github.com/eslint/eslint/issues/new/choose) or a [pull request](/docs/developer-guide/contributing/pull-requests) on GitHub.
 
