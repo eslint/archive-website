@@ -1,8 +1,8 @@
 {
     "totals": {
-        "annualDonations": 136705.08000000002,
-        "monthlyDonations": 11392.09,
-        "sponsorCount": 186
+        "annualDonations": 136645.08000000002,
+        "monthlyDonations": 11387.09,
+        "sponsorCount": 185
     },
     "platinum": [
         {
@@ -494,15 +494,6 @@
             "url": "https://sentry.io",
             "monthlyDonation": 800,
             "source": "github",
-            "tier": "backer"
-        },
-        {
-            "name": "Tomasz Kleszczewski",
-            "url": null,
-            "image": "https://images.opencollective.com/tomasz-kleszczewski/avatar.png",
-            "monthlyDonation": 500,
-            "totalDonations": 500,
-            "source": "opencollective",
             "tier": "backer"
         },
         {
