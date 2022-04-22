@@ -135,6 +135,10 @@ do {
 } while (true)
 ```
 
+## Related Rules
+
+* [no-constant-binary-expression](no-constant-binary-expression)
+
 ## Version
 
 This rule was introduced in ESLint 0.4.1.
