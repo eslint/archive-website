@@ -1,8 +1,8 @@
 {
     "totals": {
-        "annualDonations": 136645.08000000002,
-        "monthlyDonations": 11387.09,
-        "sponsorCount": 185
+        "annualDonations": 136545.12,
+        "monthlyDonations": 11378.76,
+        "sponsorCount": 184
     },
     "platinum": [
         {
@@ -478,15 +478,6 @@
             "monthlyDonation": 1000,
             "source": "github",
             "tier": "backer"
-        },
-        {
-            "name": "Drake Costa",
-            "url": null,
-            "image": "https://images.opencollective.com/drake-costa/avatar.png",
-            "monthlyDonation": 833,
-            "totalDonations": 10000,
-            "source": "opencollective",
-            "tier": null
         },
         {
             "name": "Sentry",
