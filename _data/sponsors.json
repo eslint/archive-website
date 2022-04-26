@@ -1,8 +1,8 @@
 {
     "totals": {
-        "annualDonations": 136365.12,
-        "monthlyDonations": 11363.76,
-        "sponsorCount": 182
+        "annualDonations": 136425.12,
+        "monthlyDonations": 11368.76,
+        "sponsorCount": 183
     },
     "platinum": [
         {
@@ -1235,6 +1235,14 @@
             "name": "mizdra",
             "image": "https://avatars.githubusercontent.com/u/9639995?u=dd5dac271b000f6c7883880c1796ce2a95a971b2&v=4",
             "url": "https://mizdra.net",
+            "monthlyDonation": 500,
+            "source": "github",
+            "tier": "backer"
+        },
+        {
+            "name": null,
+            "image": "https://avatars.githubusercontent.com/u/9804406?u=73e86ea54cd440dfc5bb3b56f2e390d94e210299&v=4",
+            "url": "maharramoff.github.io",
             "monthlyDonation": 500,
             "source": "github",
             "tier": "backer"
