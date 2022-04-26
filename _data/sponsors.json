@@ -1,8 +1,8 @@
 {
     "totals": {
-        "annualDonations": 136485.12,
-        "monthlyDonations": 11373.76,
-        "sponsorCount": 183
+        "annualDonations": 136365.12,
+        "monthlyDonations": 11363.76,
+        "sponsorCount": 182
     },
     "platinum": [
         {
@@ -443,14 +443,6 @@
             "name": "Kamal",
             "image": "https://avatars.githubusercontent.com/u/12810203?v=4",
             "url": "https://github.com/Kamalnrf",
-            "monthlyDonation": 1000,
-            "source": "github",
-            "tier": "backer"
-        },
-        {
-            "name": "cvermand",
-            "image": "https://avatars.githubusercontent.com/u/33010418?u=92fcf1932c437d7d7909c0df3552c5efad5467d9&v=4",
-            "url": "https://github.com/bidoubiwa",
             "monthlyDonation": 1000,
             "source": "github",
             "tier": "backer"
