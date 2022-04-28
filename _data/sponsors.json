@@ -1,8 +1,8 @@
 {
     "totals": {
-        "annualDonations": 136425.12,
-        "monthlyDonations": 11368.76,
-        "sponsorCount": 183
+        "annualDonations": 136545.12,
+        "monthlyDonations": 11378.76,
+        "sponsorCount": 184
     },
     "platinum": [
         {
@@ -249,6 +249,15 @@
             "totalDonations": 3500,
             "source": "opencollective",
             "tier": null
+        },
+        {
+            "name": "WWOOF's Open Source Fund",
+            "url": null,
+            "image": "https://images.opencollective.com/wwoof-open-source-fund/cb8119c/logo.png",
+            "monthlyDonation": 1000,
+            "totalDonations": 1000,
+            "source": "opencollective",
+            "tier": "backer"
         },
         {
             "name": "MFB Technologies",
