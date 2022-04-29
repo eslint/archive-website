@@ -1,8 +1,8 @@
 {
     "totals": {
-        "annualDonations": 136545.12,
-        "monthlyDonations": 11378.76,
-        "sponsorCount": 184
+        "annualDonations": 136425.12,
+        "monthlyDonations": 11368.76,
+        "sponsorCount": 182
     },
     "platinum": [
         {
@@ -1161,14 +1161,6 @@
             "tier": "backer"
         },
         {
-            "name": "Jake Gibson",
-            "image": "https://avatars.githubusercontent.com/u/5455655?u=497f31a13d071466cc6dc00ffc5cd29fc407fed3&v=4",
-            "url": "http://j3.io",
-            "monthlyDonation": 500,
-            "source": "github",
-            "tier": "backer"
-        },
-        {
             "name": "PENG Rui",
             "image": "https://avatars.githubusercontent.com/u/6322673?u=bfd7ed8bc1a1549a0ccd166883a7c55dc2993814&v=4",
             "url": "https://github.com/IndexXuan",
@@ -1276,14 +1268,6 @@
             "name": "Michael Rotarius",
             "image": "https://avatars.githubusercontent.com/u/13236924?u=c07053c05ab6ed3abd3a11a303186219b60c8adf&v=4",
             "url": "https://github.com/Mirobit",
-            "monthlyDonation": 500,
-            "source": "github",
-            "tier": "backer"
-        },
-        {
-            "name": "Dallas X",
-            "image": "https://avatars.githubusercontent.com/u/13825473?u=a9b26c71274e523a309e2e38fb9fb7b74a1bc13c&v=4",
-            "url": "blog.sheldyn.io",
             "monthlyDonation": 500,
             "source": "github",
             "tier": "backer"
