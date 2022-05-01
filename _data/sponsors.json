@@ -1,8 +1,8 @@
 {
     "totals": {
-        "annualDonations": 133905.12,
-        "monthlyDonations": 11158.76,
-        "sponsorCount": 180
+        "annualDonations": 133845.12,
+        "monthlyDonations": 11153.76,
+        "sponsorCount": 179
     },
     "platinum": [
         {
@@ -228,7 +228,7 @@
             "url": "https://infinum.com",
             "image": "https://images.opencollective.com/infinum/9a719cb/avatar.png",
             "monthlyDonation": 2000,
-            "totalDonations": 2000,
+            "totalDonations": 4000,
             "source": "opencollective",
             "tier": null
         },
@@ -282,7 +282,7 @@
             "url": "https://xh.io",
             "image": "https://images.opencollective.com/xh/cec0963/logo.png",
             "monthlyDonation": 1000,
-            "totalDonations": 14000,
+            "totalDonations": 15000,
             "source": "opencollective",
             "tier": "backer"
         },
@@ -474,15 +474,6 @@
             "name": "Sufi Meditation",
             "url": "https://www.zikir.com",
             "image": "https://images.opencollective.com/sufi-meditation/74935dc/logo.png",
-            "monthlyDonation": 500,
-            "totalDonations": 500,
-            "source": "opencollective",
-            "tier": "backer"
-        },
-        {
-            "name": "Gian Carlos Figueroa",
-            "url": null,
-            "image": "https://images.opencollective.com/gian-carlos-figueroa/avatar.png",
             "monthlyDonation": 500,
             "totalDonations": 500,
             "source": "opencollective",
@@ -1435,7 +1426,7 @@
             "url": "https://mattwelke.com",
             "image": "https://images.opencollective.com/mattwelke/avatar.png",
             "monthlyDonation": 300,
-            "totalDonations": 801,
+            "totalDonations": 1101,
             "source": "opencollective",
             "tier": null
         },
