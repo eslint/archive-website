@@ -1,8 +1,8 @@
 {
     "totals": {
-        "annualDonations": 133785.12,
-        "monthlyDonations": 11148.76,
-        "sponsorCount": 178
+        "annualDonations": 136185.12,
+        "monthlyDonations": 11348.76,
+        "sponsorCount": 179
     },
     "platinum": [
         {
@@ -96,6 +96,15 @@
             "image": "https://images.opencollective.com/anagram-solver/2666271/logo.png",
             "monthlyDonation": 20000,
             "totalDonations": 520000,
+            "source": "opencollective",
+            "tier": "bronze-sponsor"
+        },
+        {
+            "name": "VPS",
+            "url": "https://www.vpsserver.com",
+            "image": "https://images.opencollective.com/vpsservercom/logo.png",
+            "monthlyDonation": 20000,
+            "totalDonations": 660000,
             "source": "opencollective",
             "tier": "bronze-sponsor"
         },
@@ -538,7 +547,7 @@
             "url": "https://linnertmedia.de",
             "image": "https://images.opencollective.com/alinnert/9126453/avatar.png",
             "monthlyDonation": 500,
-            "totalDonations": 5500,
+            "totalDonations": 6000,
             "source": "opencollective",
             "tier": "backer"
         },
@@ -547,7 +556,7 @@
             "url": null,
             "image": "https://images.opencollective.com/clement-ollivier/fb7bb09/avatar.png",
             "monthlyDonation": 500,
-            "totalDonations": 6000,
+            "totalDonations": 6500,
             "source": "opencollective",
             "tier": "backer"
         },
@@ -808,7 +817,7 @@
             "url": "https://twitter.com/LJHarb",
             "image": "https://images.opencollective.com/ljharb/b75a3f8/avatar.png",
             "monthlyDonation": 500,
-            "totalDonations": 19500,
+            "totalDonations": 20000,
             "source": "opencollective",
             "tier": "backer"
         },
