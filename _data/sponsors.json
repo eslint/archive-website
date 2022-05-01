@@ -1,8 +1,8 @@
 {
     "totals": {
-        "annualDonations": 133845.12,
-        "monthlyDonations": 11153.76,
-        "sponsorCount": 179
+        "annualDonations": 133785.12,
+        "monthlyDonations": 11148.76,
+        "sponsorCount": 178
     },
     "platinum": [
         {
@@ -150,7 +150,7 @@
             "url": "https://yannick.cr",
             "image": "https://images.opencollective.com/yannickcr/765f06f/avatar.png",
             "monthlyDonation": 10000,
-            "totalDonations": 340000,
+            "totalDonations": 350000,
             "source": "opencollective",
             "tier": "backer"
         },
@@ -318,7 +318,7 @@
             "url": "https://http:/www.powercoder.tech",
             "image": "https://images.opencollective.com/john-dorlus/f6d79b4/avatar.png",
             "monthlyDonation": 1000,
-            "totalDonations": 27000,
+            "totalDonations": 28000,
             "source": "opencollective",
             "tier": "backer"
         },
@@ -574,7 +574,7 @@
             "url": "https://tripwire.com",
             "image": "https://images.opencollective.com/tripwire/7599e30/logo.png",
             "monthlyDonation": 500,
-            "totalDonations": 7000,
+            "totalDonations": 7500,
             "source": "opencollective",
             "tier": "backer"
         },
@@ -726,15 +726,6 @@
             "name": "Dan Foley",
             "url": "https://cantremember.com",
             "image": "https://images.opencollective.com/cantremember/avatar.png",
-            "monthlyDonation": 500,
-            "totalDonations": 20000,
-            "source": "opencollective",
-            "tier": "backer"
-        },
-        {
-            "name": "Simon Korzun",
-            "url": "https://korzun.com",
-            "image": "https://images.opencollective.com/simon-korzun/cbdefdd/avatar.png",
             "monthlyDonation": 500,
             "totalDonations": 20000,
             "source": "opencollective",
