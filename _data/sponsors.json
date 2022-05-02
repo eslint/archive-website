@@ -1,8 +1,8 @@
 {
     "totals": {
-        "annualDonations": 136185.12,
-        "monthlyDonations": 11348.76,
-        "sponsorCount": 179
+        "annualDonations": 136161.12,
+        "monthlyDonations": 11346.76,
+        "sponsorCount": 178
     },
     "platinum": [
         {
@@ -628,7 +628,7 @@
             "url": "https://www.quora.com/profile/Alexandre-Morgaut",
             "image": "https://images.opencollective.com/alexandre-morgaut/6e3c8d4/avatar.png",
             "monthlyDonation": 500,
-            "totalDonations": 17500,
+            "totalDonations": 18000,
             "source": "opencollective",
             "tier": "backer"
         },
@@ -637,7 +637,7 @@
             "url": "https://www.sayyup.nl",
             "image": "https://images.opencollective.com/sayyup/4c61ffd/avatar.png",
             "monthlyDonation": 500,
-            "totalDonations": 10000,
+            "totalDonations": 10500,
             "source": "opencollective",
             "tier": "backer"
         },
@@ -1454,15 +1454,6 @@
             "image": "https://images.opencollective.com/sudharaka-palamakumbura/03b6087/avatar.png",
             "monthlyDonation": 200,
             "totalDonations": 2400,
-            "source": "opencollective",
-            "tier": null
-        },
-        {
-            "name": "Kostas Bariotis",
-            "url": "https://kostasbariotis.com",
-            "image": "https://images.opencollective.com/konmpar/6f12288/avatar.png",
-            "monthlyDonation": 200,
-            "totalDonations": 4000,
             "source": "opencollective",
             "tier": null
         },
