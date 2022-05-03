@@ -2,6 +2,11 @@
 title: Managing Releases
 layout: doc
 edit_link: https://github.com/eslint/eslint/edit/main/docs/src/maintainer-guide/releases.md
+eleventyNavigation:
+    key: managing releases
+    parent: maintainer guide 
+    title: Managing Releases
+    order: 3
 
 ---
 
@@ -21,7 +26,7 @@ A two-person release team is assigned to each scheduled release. This two-person
 
 The two-person team should seek input from the whole team on the Monday following a release to double-check if a patch release is necessary.
 
-At least one member of the release team needs to have access to [eslint's two-factor authentication for npm](./npm-2fa) in order to do a release.
+At least one member of the release team needs to have access to eslint's two-factor authentication for npm in order to do a release.
 
 ## Release Communication
 

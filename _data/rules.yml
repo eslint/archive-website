@@ -180,6 +180,11 @@ types:
         hasSuggestions: false
         name: no-const-assign
         recommended: true
+      - description: disallow expressions where the operation doesn't affect the value
+        fixable: false
+        hasSuggestions: false
+        name: no-constant-binary-expression
+        recommended: false
       - description: disallow constant expressions in conditions
         fixable: false
         hasSuggestions: false
