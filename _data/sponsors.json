@@ -1,7 +1,7 @@
 {
     "totals": {
-        "annualDonations": 136185.12,
-        "monthlyDonations": 11348.76,
+        "annualDonations": 126585.12,
+        "monthlyDonations": 10548.76,
         "sponsorCount": 179
     },
     "platinum": [
@@ -22,15 +22,6 @@
             "image": "https://images.opencollective.com/contra1/c70f93f/logo.png",
             "monthlyDonation": 100000,
             "totalDonations": 700000,
-            "source": "opencollective",
-            "tier": "gold-sponsor"
-        },
-        {
-            "name": "Nx (by Nrwl)",
-            "url": "https://nx.dev",
-            "image": "https://images.opencollective.com/nx/0efbe42/logo.png",
-            "monthlyDonation": 100000,
-            "totalDonations": 1600000,
             "source": "opencollective",
             "tier": "gold-sponsor"
         },
@@ -87,6 +78,15 @@
             "image": "https://images.opencollective.com/launchdarkly/574bb9e/logo.png",
             "monthlyDonation": 20000,
             "totalDonations": 140000,
+            "source": "opencollective",
+            "tier": "bronze-sponsor"
+        },
+        {
+            "name": "Nx (by Nrwl)",
+            "url": "https://nx.dev",
+            "image": "https://images.opencollective.com/nx/0efbe42/logo.png",
+            "monthlyDonation": 20000,
+            "totalDonations": 1600000,
             "source": "opencollective",
             "tier": "bronze-sponsor"
         },
