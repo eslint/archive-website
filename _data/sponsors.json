@@ -1,8 +1,8 @@
 {
     "totals": {
-        "annualDonations": 126585.12,
-        "monthlyDonations": 10548.76,
-        "sponsorCount": 179
+        "annualDonations": 126645.12,
+        "monthlyDonations": 10553.76,
+        "sponsorCount": 180
     },
     "platinum": [
         {
@@ -945,6 +945,14 @@
             "name": "Ryan Macy",
             "image": "https://avatars.githubusercontent.com/u/829581?u=7126d6768d3e200ee5dfd3485cd50465cb8e85f4&v=4",
             "url": "https://macy.dev",
+            "monthlyDonation": 500,
+            "source": "github",
+            "tier": "backer"
+        },
+        {
+            "name": "Jimmy Bradshaw",
+            "image": "https://avatars.githubusercontent.com/u/916017?u=f9be66668f243eecd298b6eea9bb4410f9718b32&v=4",
+            "url": "https://github.com/bradshjg",
             "monthlyDonation": 500,
             "source": "github",
             "tier": "backer"
