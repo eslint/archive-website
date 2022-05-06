@@ -1,7 +1,12 @@
 ---
 title: Contributing
 layout: doc
-edit_link: https://github.com/eslint/eslint/edit/main/docs/src/developer-guide/contributing/README.md
+edit_link: https://github.com/eslint/eslint/edit/main/docs/src/developer-guide/contributing/index.md
+eleventyNavigation:
+    key: contributing
+    parent: developer guide
+    title: Contributing
+    order: 10
 
 ---
 

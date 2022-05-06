@@ -2,6 +2,11 @@
 title: Working with Rules
 layout: doc
 edit_link: https://github.com/eslint/eslint/edit/main/docs/src/developer-guide/working-with-rules.md
+eleventyNavigation:
+    key: working with rules
+    parent: developer guide
+    title: Working with Rules
+    order: 4
 
 ---
 
@@ -11,7 +16,7 @@ Each rule in ESLint has three files named with its identifier (for example, `no-
 
 * in the `lib/rules` directory: a source file (for example, `no-extra-semi.js`)
 * in the `tests/lib/rules` directory: a test file (for example, `no-extra-semi.js`)
-* in the `docs/rules` directory: a Markdown documentation file (for example, `no-extra-semi`)
+* in the `docs/src/rules` directory: a Markdown documentation file (for example, `no-extra-semi`)
 
 **Important:** If you submit a **core** rule to the ESLint repository, you **must** follow some conventions explained below.
 
@@ -541,7 +546,6 @@ Once you have an instance of `SourceCode`, you can use the following methods on 
 * `getCommentsBefore(nodeOrToken)` - returns an array of comment tokens that occur directly before the given node or token.
 * `getCommentsAfter(nodeOrToken)` - returns an array of comment tokens that occur directly after the given node or token.
 * `getCommentsInside(node)` - returns an array of all comment tokens inside a given node.
-* `getJSDocComment(node)` - returns the JSDoc comment for a given node or `null` if there is none.
 * `isSpaceBetween(nodeOrToken, nodeOrToken)` - returns true if there is a whitespace character between the two tokens or, if given a node, the last token of the first node and the first token of the second node.
 * `getFirstToken(node, skipOptions)` - returns the first token representing the given node.
 * `getFirstTokens(node, countOptions)` - returns the first `count` tokens representing the given node.
@@ -598,6 +602,7 @@ Please note that the following methods have been deprecated and will be removed 
 * `getTokenOrCommentBefore()` - replaced by `getTokenBefore()` with the `{ includeComments: true }` option
 * `getTokenOrCommentAfter()` - replaced by `getTokenAfter()` with the `{ includeComments: true }` option
 * `isSpaceBetweenTokens()` - replaced by `isSpaceBetween()`
+* `getJSDocComment()`
 
 ### Options Schemas
 
