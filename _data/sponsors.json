@@ -1,8 +1,8 @@
 {
     "totals": {
-        "annualDonations": 126645.12,
-        "monthlyDonations": 10553.76,
-        "sponsorCount": 180
+        "annualDonations": 114645.12,
+        "monthlyDonations": 9553.76,
+        "sponsorCount": 179
     },
     "platinum": [
         {
@@ -16,15 +16,6 @@
         }
     ],
     "gold": [
-        {
-            "name": "Contra",
-            "url": "https://contra.com",
-            "image": "https://images.opencollective.com/contra1/c70f93f/logo.png",
-            "monthlyDonation": 100000,
-            "totalDonations": 700000,
-            "source": "opencollective",
-            "tier": "gold-sponsor"
-        },
         {
             "name": "Salesforce",
             "url": "https://www.salesforce.com",
