@@ -23,7 +23,7 @@
       <h1>{{ title }}</h1>
       {% endunless %}
 
-      {{ content
+      {% assign all_content = content
         | replace: '<p>Examples of <strong>incorrect</strong> code', '<p class="incorrect icon">Examples of <strong>incorrect</strong> code'
         | replace: '<p>Example of <strong>incorrect</strong> code', '<p class="incorrect icon">Example of <strong>incorrect</strong> code'
         | replace: '<p>Examples of additional <strong>incorrect</strong> code', '<p class="incorrect icon">Examples of additional <strong>incorrect</strong> code'
@@ -39,7 +39,37 @@
         | replace: '(recommended)', '<span title="recommended" aria-label="recommended">✓</span>'
         | replace: '(fixable)', '<span title="fixable" aria-label="fixable">🔧</span>'
         | replace: '(hasSuggestions)', '<span title="hasSuggestions" aria-label="hasSuggestions">💡</span>'
-      }}
+      %}
+
+      {% if related_rules %}
+        {% capture related_rules_content %}
+        <h2 id="related-rules">Related Rules</h2>
+        <ul>
+          {% for rule_id in related_rules %}
+          <li><a href="{{ rule_id }}">{{ rule_id }}</a></li>
+          {% endfor %}
+        </ul>
+        <h2 id="version">Version</h2>
+        {% endcapture %}
+        {% assign all_content = all_content | replace: '<h2 id="version">Version</h2>', related_rules_content %}
+      {% endif %}
+
+      {% if further_reading %}
+        {% capture further_reading_content %}
+        <h2 id="further-reading">Further Reading</h2>
+        <ul>
+          {% for url in further_reading %}
+          <li><a href="{{ url }}">{{ url }}</a></li>
+          {% endfor %}
+        </ul>
+        <h2 id="version">Version</h2>
+
+        {% endcapture %}
+        {% assign all_content = all_content | replace: '<h2 id="version">Version</h2>', further_reading_content %}
+      {% endif %}
+
+      {{ all_content }}
+
     </article>
   </main>
   {% include footer %}
