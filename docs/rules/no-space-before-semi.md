@@ -3,6 +3,9 @@ title: no-space-before-semi
 layout: doc
 edit_link: https://github.com/eslint/eslint/edit/main/docs/src/rules/no-space-before-semi.md
 
+related_rules:
+- semi
+- no-extra-semi
 ---
 
 Disallows spaces before semicolons.
@@ -43,11 +46,6 @@ Examples of **correct** code for this rule:
 
 var foo = "bar";
 ```
-
-## Related Rules
-
-* [semi](semi)
-* [no-extra-semi](no-extra-semi)
 
 ## Version
 

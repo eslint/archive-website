@@ -3,6 +3,8 @@ title: no-mixed-operators
 layout: doc
 edit_link: https://github.com/eslint/eslint/edit/main/docs/src/rules/no-mixed-operators.md
 rule_type: suggestion
+related_rules:
+- no-extra-parens
 ---
 
 Disallows mixes of different operators.
@@ -12,8 +14,6 @@ This rule warns when different operators are used consecutively without parenthe
 
 ```js
 var foo = a && b || c || d;    /*BAD: Unexpected mix of '&&' and '||'.*/
-var foo = a && b ? c : d;      /*BAD: Unexpected mix of '&&' and '?:'.*/
-var foo = (a && b) ? c : d;    /*GOOD*/
 var foo = (a && b) || c || d;  /*GOOD*/
 var foo = a && (b || c || d);  /*GOOD*/
 ```
@@ -30,17 +30,6 @@ will generate
 ```shell
 1:13  Unexpected mix of '&&' and '||'. (no-mixed-operators)
 1:18  Unexpected mix of '&&' and '||'. (no-mixed-operators)
-```
-
-```js
-var foo = a && b ? c : d;
-```
-
-will generate
-
-```shell
-1:13  Unexpected mix of '&&' and '?:'. (no-mixed-operators)
-1:18  Unexpected mix of '&&' and '?:'. (no-mixed-operators)
 ```
 
 ## Rule Details
@@ -194,10 +183,6 @@ var foo = (a + b) - c;
 ## When Not To Use It
 
 If you don't want to be notified about mixed operators, then it's safe to disable this rule.
-
-## Related Rules
-
-* [no-extra-parens](no-extra-parens)
 
 ## Version
 

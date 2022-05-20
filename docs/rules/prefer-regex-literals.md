@@ -3,6 +3,9 @@ title: prefer-regex-literals
 layout: doc
 edit_link: https://github.com/eslint/eslint/edit/main/docs/src/rules/prefer-regex-literals.md
 rule_type: suggestion
+further_reading:
+- https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
+- https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp
 ---
 
 
@@ -130,11 +133,6 @@ Examples of `correct` code for `{ "disallowRedundantWrapping": true }`
 
 new RegExp(/abc/, flags);
 ```
-
-## Further Reading
-
-* [MDN: Regular Expressions](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions)
-* [MDN: RegExp Constructor](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp)
 
 ## Version
 

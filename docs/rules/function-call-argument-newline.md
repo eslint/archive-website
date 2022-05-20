@@ -3,6 +3,11 @@ title: function-call-argument-newline
 layout: doc
 edit_link: https://github.com/eslint/eslint/edit/main/docs/src/rules/function-call-argument-newline.md
 rule_type: layout
+related_rules:
+- function-paren-newline
+- func-call-spacing
+- object-property-newline
+- array-element-newline
 ---
 
 
@@ -201,13 +206,6 @@ baz(
 ## When Not To Use It
 
 If you don't want to enforce line breaks between arguments, don't enable this rule.
-
-## Related Rules
-
-* [function-paren-newline](function-paren-newline)
-* [func-call-spacing](func-call-spacing)
-* [object-property-newline](object-property-newline)
-* [array-element-newline](array-element-newline)
 
 ## Version
 

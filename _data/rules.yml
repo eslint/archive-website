@@ -289,7 +289,7 @@ types:
           disallow characters which are made with multiple code points in
           character class syntax
         fixable: false
-        hasSuggestions: false
+        hasSuggestions: true
         name: no-misleading-character-class
         recommended: true
       - description: disallow `new` operators with the `Symbol` object

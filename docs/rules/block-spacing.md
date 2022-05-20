@@ -3,6 +3,9 @@ title: block-spacing
 layout: doc
 edit_link: https://github.com/eslint/eslint/edit/main/docs/src/rules/block-spacing.md
 rule_type: layout
+related_rules:
+- space-before-blocks
+- brace-style
 ---
 
 
@@ -84,11 +87,6 @@ class C {
 ## When Not To Use It
 
 If you don't want to be notified about spacing style inside of blocks, you can safely disable this rule.
-
-## Related Rules
-
-* [space-before-blocks](space-before-blocks)
-* [brace-style](brace-style)
 
 ## Version
 

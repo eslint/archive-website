@@ -3,6 +3,9 @@ title: no-unneeded-ternary
 layout: doc
 edit_link: https://github.com/eslint/eslint/edit/main/docs/src/rules/no-unneeded-ternary.md
 rule_type: suggestion
+related_rules:
+- no-ternary
+- no-nested-ternary
 ---
 
 
@@ -95,11 +98,6 @@ Note that `defaultAssignment: false` still allows expressions of the form `x ? e
 ## When Not To Use It
 
 You can turn this rule off if you are not concerned with unnecessary complexity in conditional expressions.
-
-## Related Rules
-
-* [no-ternary](no-ternary)
-* [no-nested-ternary](no-nested-ternary)
 
 ## Version
 

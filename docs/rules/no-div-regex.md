@@ -3,6 +3,9 @@ title: no-div-regex
 layout: doc
 edit_link: https://github.com/eslint/eslint/edit/main/docs/src/rules/no-div-regex.md
 rule_type: suggestion
+related_rules:
+- no-control-regex
+- no-regex-spaces
 ---
 
 
@@ -36,11 +39,6 @@ Examples of **correct** code for this rule:
 
 function bar() { return /[=]foo/; }
 ```
-
-## Related Rules
-
-* [no-control-regex](no-control-regex)
-* [no-regex-spaces](no-regex-spaces)
 
 ## Version
 

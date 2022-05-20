@@ -9,6 +9,10 @@ rule_type: problem
 
 (recommended) The `"extends": "eslint:recommended"` property in a configuration file enables this rule.
 
+
+
+(hasSuggestions) Some problems reported by this rule are manually fixable by editor [suggestions](../developer-guide/working-with-rules#providing-suggestions).
+
 Disallows characters which are made with multiple code points in character class syntax.
 
 Unicode includes the characters which are made with multiple code points.

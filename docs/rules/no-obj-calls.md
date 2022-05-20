@@ -3,6 +3,8 @@ title: no-obj-calls
 layout: doc
 edit_link: https://github.com/eslint/eslint/edit/main/docs/src/rules/no-obj-calls.md
 rule_type: problem
+further_reading:
+- https://es5.github.io/#x15.8
 ---
 
 
@@ -70,10 +72,6 @@ var value = Reflect.get({ x: 1, y: 2 }, "x");
 
 var first = Atomics.load(foo, 0);
 ```
-
-## Further Reading
-
-* [The Math Object](https://es5.github.io/#x15.8)
 
 ## Version
 

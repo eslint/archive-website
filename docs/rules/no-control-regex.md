@@ -3,6 +3,9 @@ title: no-control-regex
 layout: doc
 edit_link: https://github.com/eslint/eslint/edit/main/docs/src/rules/no-control-regex.md
 rule_type: problem
+related_rules:
+- no-div-regex
+- no-regex-spaces
 ---
 
 
@@ -21,6 +24,7 @@ The following elements of regular expression patterns are considered possible er
 
 * Hexadecimal character escapes from `\x00` to `\x1F`.
 * Unicode character escapes from `\u0000` to `\u001F`.
+* Unicode code point escapes from `\u{0}` to `\u{1F}`.
 * Unescaped raw characters from U+0000 to U+001F.
 
 Control escapes such as `\t` and `\n` are allowed by this rule.
@@ -34,8 +38,9 @@ var pattern1 = /\x00/;
 var pattern2 = /\x0C/;
 var pattern3 = /\x1F/;
 var pattern4 = /\u000C/;
-var pattern5 = new RegExp("\x0C"); // raw U+000C character in the pattern
-var pattern6 = new RegExp("\\x0C"); // \x0C pattern
+var pattern5 = /\u{C}/u;
+var pattern6 = new RegExp("\x0C"); // raw U+000C character in the pattern
+var pattern7 = new RegExp("\\x0C"); // \x0C pattern
 ```
 
 Examples of **correct** code for this rule:
@@ -45,11 +50,12 @@ Examples of **correct** code for this rule:
 
 var pattern1 = /\x20/;
 var pattern2 = /\u0020/;
-var pattern3 = /\t/;
-var pattern4 = /\n/;
-var pattern5 = new RegExp("\x20");
-var pattern6 = new RegExp("\\t");
-var pattern7 = new RegExp("\\n");
+var pattern3 = /\u{20}/u;
+var pattern4 = /\t/;
+var pattern5 = /\n/;
+var pattern6 = new RegExp("\x20");
+var pattern7 = new RegExp("\\t");
+var pattern8 = new RegExp("\\n");
 ```
 
 ## Known Limitations
@@ -69,11 +75,6 @@ There is no difference in behavior between `new RegExp("\t")` and `new RegExp("\
 ## When Not To Use It
 
 If you need to use control character pattern matching, then you should turn this rule off.
-
-## Related Rules
-
-* [no-div-regex](no-div-regex)
-* [no-regex-spaces](no-regex-spaces)
 
 ## Version
 

@@ -3,6 +3,8 @@ title: no-cond-assign
 layout: doc
 edit_link: https://github.com/eslint/eslint/edit/main/docs/src/rules/no-cond-assign.md
 rule_type: problem
+related_rules:
+- no-extra-parens
 ---
 
 
@@ -132,10 +134,6 @@ if (x === 0) {
     var b = 1;
 }
 ```
-
-## Related Rules
-
-* [no-extra-parens](no-extra-parens)
 
 ## Version
 

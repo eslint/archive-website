@@ -3,6 +3,8 @@ title: require-yield
 layout: doc
 edit_link: https://github.com/eslint/eslint/edit/main/docs/src/rules/require-yield.md
 rule_type: suggestion
+related_rules:
+- require-await
 ---
 
 
@@ -50,10 +52,6 @@ function* foo() { }
 ## When Not To Use It
 
 If you don't want to notify generator functions that have no `yield` expression, then it's safe to disable this rule.
-
-## Related Rules
-
-* [require-await](require-await)
 
 ## Version
 

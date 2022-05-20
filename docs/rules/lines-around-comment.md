@@ -3,6 +3,9 @@ title: lines-around-comment
 layout: doc
 edit_link: https://github.com/eslint/eslint/edit/main/docs/src/rules/lines-around-comment.md
 rule_type: layout
+related_rules:
+- space-before-blocks
+- spaced-comment
 ---
 
 
@@ -579,11 +582,6 @@ foo();
 ## When Not To Use It
 
 Many people enjoy a terser code style and don't mind comments bumping up against code. If you fall into that category this rule is not for you.
-
-## Related Rules
-
-* [space-before-blocks](space-before-blocks)
-* [spaced-comment](spaced-comment)
 
 ## Version
 

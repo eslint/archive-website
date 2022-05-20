@@ -3,6 +3,10 @@ title: no-arrow-condition
 layout: doc
 edit_link: https://github.com/eslint/eslint/edit/main/docs/src/rules/no-arrow-condition.md
 
+related_rules:
+- arrow-parens
+- no-confusing-arrow
+- no-constant-condition
 ---
 
 Disallows arrow functions where test conditions are expected.
@@ -47,12 +51,6 @@ a => 1 ? 2 : 3
 var x = a => 1 ? 2 : 3
 var x = (a) => 1 ? 2 : 3
 ```
-
-## Related Rules
-
-* [arrow-parens](arrow-parens)
-* [no-confusing-arrow](no-confusing-arrow)
-* [no-constant-condition](no-constant-condition)
 
 ## Version
 
