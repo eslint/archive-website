@@ -1,8 +1,8 @@
 {
     "totals": {
-        "annualDonations": 116985.12,
-        "monthlyDonations": 9748.76,
-        "sponsorCount": 178
+        "annualDonations": 116990.16,
+        "monthlyDonations": 9749.18,
+        "sponsorCount": 179
     },
     "platinum": [
         {
@@ -518,7 +518,7 @@
             "url": null,
             "image": "https://images.opencollective.com/nicoloribaudo/924f189/avatar.png",
             "monthlyDonation": 500,
-            "totalDonations": 3000,
+            "totalDonations": 3500,
             "source": "opencollective",
             "tier": "backer"
         },
@@ -581,7 +581,7 @@
             "url": null,
             "image": "https://images.opencollective.com/morgane-dubus/avatar.png",
             "monthlyDonation": 500,
-            "totalDonations": 7000,
+            "totalDonations": 7500,
             "source": "opencollective",
             "tier": "backer"
         },
@@ -1499,6 +1499,15 @@
             "image": "https://images.opencollective.com/kristof-michiels/b32a3f6/avatar.png",
             "monthlyDonation": 100,
             "totalDonations": 5600,
+            "source": "opencollective",
+            "tier": null
+        },
+        {
+            "name": "jpoehnelt",
+            "url": "https://justin.poehnelt.com",
+            "image": "https://images.opencollective.com/jpoehnelt/53d26c7/avatar.png",
+            "monthlyDonation": 42,
+            "totalDonations": 500,
             "source": "opencollective",
             "tier": null
         },
