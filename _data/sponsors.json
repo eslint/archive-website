@@ -1,8 +1,8 @@
 {
     "totals": {
-        "annualDonations": 114585.12,
-        "monthlyDonations": 9548.76,
-        "sponsorCount": 177
+        "annualDonations": 116985.12,
+        "monthlyDonations": 9748.76,
+        "sponsorCount": 178
     },
     "platinum": [
         {
@@ -130,6 +130,14 @@
             "name": "Ignition",
             "image": "https://avatars.githubusercontent.com/u/5753491?v=4",
             "url": "https://www.ignitionapp.com",
+            "monthlyDonation": 20000,
+            "source": "github",
+            "tier": "bronze-sponsor"
+        },
+        {
+            "name": "HeroCoders",
+            "image": "https://avatars.githubusercontent.com/u/37549774?v=4",
+            "url": "https://herocoders.com",
             "monthlyDonation": 20000,
             "source": "github",
             "tier": "bronze-sponsor"
@@ -282,7 +290,7 @@
             "url": "https://xh.io",
             "image": "https://images.opencollective.com/xh/cec0963/logo.png",
             "monthlyDonation": 1000,
-            "totalDonations": 15000,
+            "totalDonations": 16000,
             "source": "opencollective",
             "tier": "backer"
         },
@@ -564,7 +572,7 @@
             "url": null,
             "image": "https://images.opencollective.com/arnaud-drain/d7165f2/avatar.png",
             "monthlyDonation": 500,
-            "totalDonations": 7000,
+            "totalDonations": 7500,
             "source": "opencollective",
             "tier": "backer"
         },
@@ -735,7 +743,7 @@
             "url": "https://cantremember.com",
             "image": "https://images.opencollective.com/cantremember/avatar.png",
             "monthlyDonation": 500,
-            "totalDonations": 20000,
+            "totalDonations": 20500,
             "source": "opencollective",
             "tier": "backer"
         },
@@ -789,7 +797,7 @@
             "url": "https://nubz.com",
             "image": "https://images.opencollective.com/nubz/logo.png",
             "monthlyDonation": 500,
-            "totalDonations": 20000,
+            "totalDonations": 20500,
             "source": "opencollective",
             "tier": "backer"
         },
