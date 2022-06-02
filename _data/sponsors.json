@@ -1,8 +1,8 @@
 {
     "totals": {
-        "annualDonations": 116870.16,
-        "monthlyDonations": 9739.18,
-        "sponsorCount": 177
+        "annualDonations": 116834.16,
+        "monthlyDonations": 9736.18,
+        "sponsorCount": 176
     },
     "platinum": [
         {
@@ -1403,15 +1403,6 @@
             "totalDonations": 1401,
             "source": "opencollective",
             "tier": null
-        },
-        {
-            "name": "Will McAuliff",
-            "url": null,
-            "image": "https://images.opencollective.com/womcauliff/2be6f36/avatar.png",
-            "monthlyDonation": 300,
-            "totalDonations": 13000,
-            "source": "opencollective",
-            "tier": "backer"
         },
         {
             "name": "Shunfan Du",
