@@ -1,8 +1,8 @@
 {
     "totals": {
-        "annualDonations": 116930.16,
-        "monthlyDonations": 9744.18,
-        "sponsorCount": 178
+        "annualDonations": 116870.16,
+        "monthlyDonations": 9739.18,
+        "sponsorCount": 177
     },
     "platinum": [
         {
@@ -645,15 +645,6 @@
             "image": "https://images.opencollective.com/sayyup/4c61ffd/avatar.png",
             "monthlyDonation": 500,
             "totalDonations": 11000,
-            "source": "opencollective",
-            "tier": "backer"
-        },
-        {
-            "name": "Justin Noel",
-            "url": "https://justinnoel.dev",
-            "image": "https://images.opencollective.com/justinnoel/7c4d721/avatar.png",
-            "monthlyDonation": 500,
-            "totalDonations": 11500,
             "source": "opencollective",
             "tier": "backer"
         },
