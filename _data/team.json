@@ -192,7 +192,7 @@
         {
             "username": "mysticatea",
             "name": "Toru Nagashima",
-            "title": "ESLint Committer",
+            "title": "ESLint Alumnus",
             "website": "",
             "avatar_url": "https://avatars.githubusercontent.com/u/1937871?v=4",
             "bio": "A member of ESLint, Babel, and Vue.js.",
@@ -324,17 +324,6 @@
             "twitter_username": null,
             "github_username": "bmish",
             "location": "New York City"
-        },
-        {
-            "username": "mysticatea",
-            "name": "Toru Nagashima",
-            "title": "ESLint Committer",
-            "website": "",
-            "avatar_url": "https://avatars.githubusercontent.com/u/1937871?v=4",
-            "bio": "A member of ESLint, Babel, and Vue.js.",
-            "twitter_username": null,
-            "github_username": "mysticatea",
-            "location": "Shizuoka, Japan"
         },
         {
             "username": "SaraSoueidan",
