@@ -1,8 +1,8 @@
 {
     "totals": {
-        "annualDonations": 116834.16,
-        "monthlyDonations": 9736.18,
-        "sponsorCount": 176
+        "annualDonations": 116894.16,
+        "monthlyDonations": 9741.18,
+        "sponsorCount": 177
     },
     "platinum": [
         {
@@ -484,6 +484,15 @@
             "url": "https://sentry.io",
             "monthlyDonation": 800,
             "source": "github",
+            "tier": "backer"
+        },
+        {
+            "name": "Leonardo Rodrigues Ferreira",
+            "url": null,
+            "image": "https://images.opencollective.com/leonardo-rodrigues-ferreira/avatar.png",
+            "monthlyDonation": 500,
+            "totalDonations": 500,
+            "source": "opencollective",
             "tier": "backer"
         },
         {
