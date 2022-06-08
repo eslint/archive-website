@@ -1,8 +1,8 @@
 {
     "totals": {
-        "annualDonations": 116834.16,
-        "monthlyDonations": 9736.18,
-        "sponsorCount": 176
+        "annualDonations": 116954.16,
+        "monthlyDonations": 9746.18,
+        "sponsorCount": 177
     },
     "platinum": [
         {
@@ -386,6 +386,14 @@
             "name": "Bryan Mishkin",
             "image": "https://avatars.githubusercontent.com/u/698306?v=4",
             "url": "http://www.linkedin.com/in/bmish",
+            "monthlyDonation": 1000,
+            "source": "github",
+            "tier": "backer"
+        },
+        {
+            "name": "Gavin Lloyd",
+            "image": "https://avatars.githubusercontent.com/u/744538?u=0a08af9abb9fbf841382190be47f67a679bee4fa&v=4",
+            "url": "gavinhungry.com",
             "monthlyDonation": 1000,
             "source": "github",
             "tier": "backer"
