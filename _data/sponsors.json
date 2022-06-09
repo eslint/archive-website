@@ -1,8 +1,8 @@
 {
     "totals": {
-        "annualDonations": 116954.16,
-        "monthlyDonations": 9746.18,
-        "sponsorCount": 177
+        "annualDonations": 117014.16,
+        "monthlyDonations": 9751.18,
+        "sponsorCount": 178
     },
     "platinum": [
         {
@@ -1184,6 +1184,14 @@
             "name": "James Hay",
             "image": "https://avatars.githubusercontent.com/u/7937480?u=54287fafb0a0c782bc8f68b6635d80e4a0944f74&v=4",
             "url": "https://github.com/flagpoonage",
+            "monthlyDonation": 500,
+            "source": "github",
+            "tier": "backer"
+        },
+        {
+            "name": "Marek",
+            "image": "https://avatars.githubusercontent.com/u/8512964?u=1f5b1c9e744a3e6da955439f44ca23ef0160f2cb&v=4",
+            "url": "https://github.com/mrewers",
             "monthlyDonation": 500,
             "source": "github",
             "tier": "backer"
