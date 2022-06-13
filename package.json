@@ -70,6 +70,7 @@
     "luxon": "^1.24.1",
     "markdown-it": "^12.3.2",
     "markdown-it-anchor": "^6.0.0",
+    "markdown-it-container": "^3.0.0",
     "morgan": "^1.10.0",
     "node-fetch": "^2.6.7",
     "node-polyfill-webpack-plugin": "^1.0.3",
