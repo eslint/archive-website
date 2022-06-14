@@ -1,8 +1,8 @@
 {
     "totals": {
-        "annualDonations": 117014.16,
-        "monthlyDonations": 9751.18,
-        "sponsorCount": 178
+        "annualDonations": 117134.16,
+        "monthlyDonations": 9761.18,
+        "sponsorCount": 179
     },
     "platinum": [
         {
@@ -402,6 +402,14 @@
             "name": "C. Lewis",
             "image": "https://avatars.githubusercontent.com/u/1657236?u=218e0182803a5f82505affabf416135f1587b457&v=4",
             "url": "https://github.com/ctjlewis",
+            "monthlyDonation": 1000,
+            "source": "github",
+            "tier": "backer"
+        },
+        {
+            "name": "Ryan Waskiewicz",
+            "image": "https://avatars.githubusercontent.com/u/1930213?u=aac8c767b7a38900fafe0b7f92abb20b1be77d28&v=4",
+            "url": "ducktyped.dev",
             "monthlyDonation": 1000,
             "source": "github",
             "tier": "backer"
