@@ -1,6 +1,7 @@
 "use strict";
 
 const markdownIt = require("markdown-it");
+const markdownItContainer = require("markdown-it-container");
 const highlightJS = require("highlight.js");
 const { slug } = require("github-slugger");
 
@@ -37,6 +38,11 @@ module.exports = function syntaxHighlighting(eleventyConfig) {
         },
         uniqueSlugStartIndex: 1
     });
+
+    // add markdown containers
+    md = md
+        .use(markdownItContainer, "correct", {})
+        .use(markdownItContainer, "incorrect", {});
 
     eleventyConfig.setLibrary("md", md);
 };

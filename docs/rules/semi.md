@@ -100,6 +100,8 @@ Object option (when `"never"`):
 
 Examples of **incorrect** code for this rule with the default `"always"` option:
 
+::: incorrect
+
 ```js
 /*eslint semi: ["error", "always"]*/
 
@@ -114,7 +116,11 @@ class Foo {
 }
 ```
 
+:::
+
 Examples of **correct** code for this rule with the default `"always"` option:
+
+::: correct
 
 ```js
 /*eslint semi: "error"*/
@@ -130,9 +136,13 @@ class Foo {
 }
 ```
 
+:::
+
 ### never
 
 Examples of **incorrect** code for this rule with the `"never"` option:
+
+::: incorrect
 
 ```js
 /*eslint semi: ["error", "never"]*/
@@ -148,7 +158,11 @@ class Foo {
 }
 ```
 
+:::
+
 Examples of **correct** code for this rule with the `"never"` option:
+
+::: correct
 
 ```js
 /*eslint semi: ["error", "never"]*/
@@ -180,9 +194,13 @@ class Foo {
 }
 ```
 
+:::
+
 #### omitLastInOneLineBlock
 
 Examples of additional **correct** code for this rule with the `"always", { "omitLastInOneLineBlock": true }` options:
+
+::: correct
 
 ```js
 /*eslint semi: ["error", "always", { "omitLastInOneLineBlock": true}] */
@@ -200,9 +218,13 @@ class C {
 }
 ```
 
+:::
+
 #### beforeStatementContinuationChars
 
 Examples of additional **incorrect** code for this rule with the `"never", { "beforeStatementContinuationChars": "always" }` options:
+
+::: incorrect
 
 ```js
 /*eslint semi: ["error", "never", { "beforeStatementContinuationChars": "always"}] */
@@ -213,7 +235,11 @@ import a from "a"
 })()
 ```
 
+:::
+
 Examples of additional **incorrect** code for this rule with the `"never", { "beforeStatementContinuationChars": "never" }` options:
+
+::: incorrect
 
 ```js
 /*eslint semi: ["error", "never", { "beforeStatementContinuationChars": "never"}] */
@@ -223,6 +249,8 @@ import a from "a"
     // ...
 })()
 ```
+
+:::
 
 ## When Not To Use It
 
