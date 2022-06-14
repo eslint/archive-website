@@ -12,6 +12,8 @@ further_reading:
 - https://web.archive.org/web/20200420230322/http://inimino.org/~inimino/blog/javascript_semicolons
 ---
 
+
+
 (fixable) The `--fix` option on the [command line](../user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
 
 Requires or disallows semicolons instead of ASI.
@@ -253,3 +255,13 @@ import a from "a"
 ## When Not To Use It
 
 If you do not want to enforce semicolon usage (or omission) in any particular way, then you can turn this rule off.
+
+## Version
+
+This rule was introduced in ESLint 0.0.6.
+
+## Resources
+
+* [Rule source](https://github.com/eslint/eslint/tree/HEAD/lib/rules/semi.js)
+* [Test source](https://github.com/eslint/eslint/tree/HEAD/tests/lib/rules/semi.js)
+* [Documentation source](https://github.com/eslint/eslint/tree/HEAD/docs/src/rules/semi.md)
