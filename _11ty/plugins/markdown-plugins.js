@@ -41,8 +41,8 @@ module.exports = function syntaxHighlighting(eleventyConfig) {
 
     // add markdown containers
     md = md
-        .use(require("markdown-it-container"), "correct", {})
-        .use(require("markdown-it-container"), "incorrect", {});
+        .use(markdownItContainer, "correct", {})
+        .use(markdownItContainer, "incorrect", {});
 
     eleventyConfig.setLibrary("md", md);
 };
