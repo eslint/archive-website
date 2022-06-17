@@ -10,7 +10,7 @@ eleventyNavigation:
 
 ---
 
-ESLint requires Node.js for installation. Follow the instructions in the [Getting Started Guide](https://eslint.org/docs/user-guide/getting-started) to install ESLint.
+ESLint requires Node.js for installation. Follow the instructions in the [Getting Started Guide](getting-started) to install ESLint.
 
 Most users use [`npx`](https://docs.npmjs.com/cli/v8/commands/npx) to run ESLint on the command line like this:
 
@@ -122,7 +122,7 @@ Example:
 
 #### `-c`, `--config`
 
-This option allows you to specify an additional configuration file for ESLint (see [Configuring ESLint](configuring) for more).
+This option allows you to specify an additional configuration file for ESLint (see [Configuring ESLint](configuring/) for more).
 
 Example:
 
