@@ -1,8 +1,8 @@
 {
     "totals": {
-        "annualDonations": 105074.16,
-        "monthlyDonations": 8756.18,
-        "sponsorCount": 177
+        "annualDonations": 105134.16,
+        "monthlyDonations": 8761.18,
+        "sponsorCount": 178
     },
     "platinum": [
         {
@@ -1229,6 +1229,14 @@
             "tier": "backer"
         },
         {
+            "name": "Ross MacPhee",
+            "image": "https://avatars.githubusercontent.com/u/10212476?u=3d6275b89af50c320198f479997b81862c037fcf&v=4",
+            "url": "https://github.com/rossyman",
+            "monthlyDonation": 500,
+            "source": "github",
+            "tier": "backer"
+        },
+        {
             "name": "James Ives",
             "image": "https://avatars.githubusercontent.com/u/10888441?u=61f6af1b0be0b5e9a15908ef45168b9242798486&v=4",
             "url": "https://jamesiv.es",
@@ -1303,7 +1311,7 @@
         {
             "name": "Montana Mendy",
             "image": "https://avatars.githubusercontent.com/u/20936398?u=779c1b16d6ba4a1f49a695233d5b2ecefad591c1&v=4",
-            "url": "https://www.chachi.blog",
+            "url": "https://github.com/Montana",
             "monthlyDonation": 500,
             "source": "github",
             "tier": "backer"
