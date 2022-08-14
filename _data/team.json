@@ -91,17 +91,6 @@
             "location": "Seattle, WA"
         },
         {
-            "username": "platinumazure",
-            "name": "Kevin Partington",
-            "title": "ESLint Alumnus",
-            "website": "",
-            "avatar_url": "https://avatars.githubusercontent.com/u/284282?v=4",
-            "bio": "@eslint team alumnus. Currently stepping back a bit to try to get my life in order.",
-            "twitter_username": null,
-            "github_username": "platinumazure",
-            "location": null
-        },
-        {
             "username": "mikesherov",
             "name": "Mike Sherov",
             "title": "ESLint Alumnus",
@@ -285,7 +274,7 @@
             "title": "ESLint Reviewer",
             "website": "",
             "avatar_url": "https://avatars.githubusercontent.com/u/13050025?v=4",
-            "bio": null,
+            "bio": "(he/him)",
             "twitter_username": null,
             "github_username": "aladdin-add",
             "location": "China"
